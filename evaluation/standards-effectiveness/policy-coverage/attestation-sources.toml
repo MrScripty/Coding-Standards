@@ -1,2 +1,19 @@
-schema_version = 2
-sources = []
+schema_version = 3
+sources = [
+]
+
+engine_sources = [
+  "evaluation/standards-effectiveness/policy-coverage/engine/00796add95735ceeafe3cc6249817cdfaa78423faca0acf619e25c494276c95a.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/0d90975e45afbeba1e7b72f900464a2e96d5a1f4f0a2756b66b62bf018626549.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/539954fdfc290e925bea8dd2b7f3b51d782efa81f31b30d218079b760bdb24fd.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/5ac5cdc286020db3201c743c5a7fd559c85896fdc149d2868e8da827968c7373.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/7da0c4eaf3af8afad06f9148acc2f05b3c06e280c03f771e9d1faae755418e12.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/9d27f76a14967d29bea6ce57a9b87596952ffa18eab252c4f51792aa2ad27090.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/9d30216f18c6d542f308cefe330aa6fac76ce329ecc0e60a0b5298c8ede43774.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/a4085661e2dec88f44cc3ab6b19583af1fd96a4cd566c7b3801ebfe8e5352efc.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/ac68fca9c4aeb7d46b44cdf22cebe1c8ee45eba68187f230aef0bccff253a391.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/b655b05e8cfcbf2dc9bda142f700ccf7aa8fcd9562e76678be5fa67480422a37.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/b8aa1dcdb1017daba08d67ce28a060b35db727b3e7ba19e08065141b2a7c13f4.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/ef80d35081607416d1be94daf22c7dd0768392c801ee83ba1ee04d7d663b3d64.json",
+  "evaluation/standards-effectiveness/policy-coverage/engine/f08086e70ee91b317e3a3a69c8f492378f12d6fdfb6398b02970c217acb054ce.json",
+]

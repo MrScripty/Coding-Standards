@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "workflow.standards-authoring.graph-maintenance"
+module = "workflow.standards-authoring"
+heading_path = ["Graph Maintenance"]
+semantic_revision = 1

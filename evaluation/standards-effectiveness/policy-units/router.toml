@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "router.selection-procedure"
+module = "router"
+heading_path = ["Routing Procedure"]
+semantic_revision = 1

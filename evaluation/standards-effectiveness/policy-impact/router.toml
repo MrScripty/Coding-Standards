@@ -1,0 +1,82 @@
+schema_version = 2
+owner = "router"
+
+[[relationships]]
+source = "router.selection-procedure"
+consumer = "consumer.analysis.routing-tests"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Routing fixtures exercise predicates, explicit details, exclusions and prerequisite closure."
+
+[[relationships]]
+source = "router.selection-procedure"
+consumer = "consumer.engine.navigation-tests"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Navigation tests exercise task selection, unresolved facts and prerequisite closure."
+
+[[relationships]]
+source = "router.selection-procedure"
+consumer = "prompts/full-codebase-standards-refactor.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This prompt directs the caller to derive the applicable standards route and profiles from the actual task."
+
+[[relationships]]
+source = "router.selection-procedure"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This prompt directs the caller to derive the applicable standards route and profiles from the actual task."
+
+[[relationships]]
+source = "router.selection-procedure"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This prompt directs the caller to derive the applicable standards route and profiles from the actual task."
+
+[[relationships]]
+source = "router.selection-procedure"
+consumer = "reference.routing.bounded-rust-repair"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The optional reference demonstrates the routing procedure on explicit bounded task facts."
+
+[[relationships]]
+source = "router.selection-procedure"
+consumer = "s1-routing"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The s1-routing suite checks fact-driven route selection and prerequisite closure; it does not certify all semantic consumers."
+
+[[relationships]]
+source = "router.selection-procedure"
+consumer = "tools/standards_engine/standards_engine/engine.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Engine routing evaluates explicit facts, unresolved requirements and prerequisite closure."
+
+[[relationships]]
+source = "router.selection-procedure"
+consumer = "topic.cross-platform"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This owner directs actual profile selection through Router instead of assuming language or platform profiles."
+
+[[relationships]]
+source = "router.selection-procedure"
+consumer = "workflow.release"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This owner directs actual profile selection through Router instead of assuming language or platform profiles."

@@ -12,159 +12,148 @@
 - Verification: Routed scenario review and the acceptance evidence selected for the change.
 - Canonical owner: `CORE-STANDARDS.md`
 
-These are the universal invariants. Load additional guidance through
-[STANDARDS-ROUTER.md](STANDARDS-ROUTER.md), not by reading the entire library.
+These universal invariants apply throughout an adopted project. Use
+[Standards Router](STANDARDS-ROUTER.md) to select additional guidance from the
+actual task.
 
 ## Reading And Applying These Standards
 
-Read Core, then use the Router to select the workflows, topics, and profiles
-that match the task. Requires means an unconditional prerequisite; Specializes
-identifies a refinement of a broader concept. A related link is a route to
-additional guidance when its stated condition applies, not a request to read
-all descendants.
+Read Core, then the Router and the applicable workflows, topics, and profiles.
+Requires identifies an unconditional prerequisite; Specializes identifies a
+refinement. Follow a related link when its stated condition applies. References
+supply optional examples and explanation.
 
-MUST states an obligation within its applicability. SHOULD is the recommended
-starting point; depart when a concrete project constraint justifies it.
-Profiles refine shared obligations for a technology or boundary. References
-provide examples and explanation rather than additional requirements.
+MUST states an obligation within its applicability. SHOULD states the
+recommended starting point; a concrete project constraint may justify departure.
+Apply governing external requirements, explicit project public and persisted
+contracts, and accepted architectural decisions first; then Core, applicable
+profile mechanisms, and selected workflows and topics. Profiles preserve the
+generic obligations they specialize. Resolve an actual conflict through an
+explicit, owned, justified exception and identify the obligation being overridden.
 
-Apply governing external requirements and explicit project public contracts,
-persisted contracts, and accepted architectural decisions first, then Core,
-applicable profile mechanisms, and selected workflows and topics. A profile
-cannot silently weaken the generic obligation it specializes. Identify an
-actual conflict and obtain an explicit, owned, justified exception; do not
-claim that an overridden obligation was satisfied.
+Start decisions from existing code, accepted design, tool configuration, and
+consumer requirements. Reuse a suitable established convention for routine
+reversible choices; explain material departures and record reasoning in
+proportion to the consequence. Handle ordinary local choices within existing
+authority; they require no separate approval or design document.
 
-When a standard asks for a contract or decision, start from the existing code,
-accepted design, tool configuration, and consumer requirements. For routine
-reversible choices, use a suitable established convention and explain a
-material departure. Record reasoning in proportion to the consequence; an
-ordinary local choice does not require a separate approval or design document.
-
-A developer who lacks material facts should state the missing fact and its
-consequence in ordinary prose and continue independent work. References to
-invalid, unsupported, or unavailable do not require production error variants
-for development uncertainty. Machine interfaces use their declared diagnostic
+State missing development facts and their consequences in ordinary prose and
+continue independent work. Machine interfaces use their declared diagnostic
 contract; production behavior uses the owning domain's failure contract.
 
 ## Objective And Scope
 
 - Preserve the requested externally meaningful outcome through implementation
   and verification.
-- State the exact behavior, contract, or decision a change owns.
+- State the exact behavior, contract, or decision the change owns.
 - Keep changes inside an explicit write set. Record and separately disposition
   relevant findings outside it.
-- Do not replace the requested objective with an easier proxy.
+- Demonstrate the requested outcome using evidence that observes it directly.
 
 ## Simplicity And Ownership
 
 Keep one coherent concern together. Separate concerns that change for different
-reasons, and give each state, contract, policy, and lifecycle one owner. A useful
-abstraction lets callers ignore a decision it owns without hiding material
-failure, ordering, or resource obligations. Compare the knowledge required of
-callers before and after; fewer files or types do not by themselves mean a
-simpler design.
+reasons, and give each state, contract, policy, and lifecycle one owner. An
+abstraction should reduce what callers must know while exposing material
+failure, ordering, and resource obligations. Evaluate that knowledge at the
+callers and composition points.
 
-Consolidate implementations of the same contract when copies risk divergence;
-keep superficially similar code separate when its invariants or owners differ.
-Use domain terms, remove unsupported dead paths, and add reuse machinery for a
-current need. When choosing structure or terminology, follow
-[Code Design And Ownership](topics/code-design.md).
+Consolidate implementations of the same contract when copies risk divergence.
+Keep code with different invariants or owners separate. Use domain terms,
+remove unsupported dead paths, and add reuse machinery for a current need.
+Follow [Code Design And Ownership](topics/code-design.md) when choosing structure
+or terminology.
 
 ## Authority And Boundaries
 
-- Validate untrusted input at every trust boundary before constructing a
+- Validate untrusted input at each trust boundary before constructing a
   validated domain or transport type.
-- Preserve units, ranges, optionality, identifiers, error meaning, and
-  ownership across boundaries.
-- Keep generated artifacts derived from their declared source. Do not edit
-  generated output as an independent implementation.
-- Use explicit typed outcomes when required facts are unavailable or invalid.
-  Do not guess a valid-looking decision.
+- Preserve units, ranges, optionality, identifiers, error meaning, and ownership
+  across boundaries.
+- Generate derived artifacts from their declared source.
+- Return the declared typed outcome when unavailable or invalid facts prevent
+  a valid machine decision.
 
 ## Failure And Degraded Behavior
 
-- Propagate failures with enough bounded, non-sensitive context to identify the
-  failed operation and owner.
-- A fallback or degraded mode is valid only when its data is authoritative for
-  that purpose and its semantics satisfy the requested contract.
-- Do not convert arbitrary failures into unsupported, empty, default, cached,
-  or partial success.
-- Do not delete, rebuild, or replace authoritative state unless its lifecycle
-  contract explicitly makes it disposable or a verified migration owns the
+- Propagate failures with bounded, non-sensitive context identifying the failed
+  operation and owner.
+- Use a fallback or degraded mode only when its data is authoritative for that
+  purpose and its semantics satisfy the requested contract.
+- Preserve failure meaning; report success only when the promised result exists.
+- Preserve authoritative state. Delete, rebuild, or replace it only under an
+  explicit disposable-state lifecycle or a verified migration that owns the
   replacement.
 
 ## Contracts And Compatibility
 
-- Derive compatibility policy from actual consumers, persistence, deployment,
-  and authority boundaries.
-- Do not add compatibility shims for hypothetical consumers.
-- Do not break public, persisted, or independently deployed contracts without
-  an explicit versioning or migration path.
-- Coordinated internal contracts may be replaced atomically when all producers,
-  consumers, generated artifacts, and fixtures change together.
+- Derive compatibility from actual consumers, persistence, deployment, and
+  authority boundaries.
+- Add or retain compatibility mechanisms only for actual supported consumers.
+- Replace public, persisted, or independently deployed contracts through an
+  explicit versioning or migration path with consumer and retained-state
+  dispositions.
+- Replace coordinated internal contracts atomically with their producers,
+  consumers, generated artifacts, and fixtures.
+- Select a supported contract that meets current product and deployment needs;
+  replace a superseded design when the evidence supports the improvement and
+  the required cutover is owned.
 
 ## Lifecycle And Concurrency
 
-- Every long-lived task, process, resource, subscription, and runtime has an
-  owner responsible for startup, cancellation, shutdown, and terminal state.
-- Do not detach work whose completion or failure affects correctness.
-- Do not hold blocking or synchronous guards across suspension points.
+- Assign an owner for startup, cancellation, shutdown, and terminal state of
+  every long-lived task, process, resource, subscription, and runtime.
+- Retain ownership of asynchronous work through required completion, cleanup,
+  failure handling, and result publication.
+- Release blocking or synchronous guards before suspension.
 - Make retries, cancellation, ordering, and restart behavior explicit when they
   affect observable results.
 
 ## Implementation Quality
 
 - Prefer types and APIs that make invalid states difficult to represent.
-- Reject stubs, placeholders, silent no-ops, and fake success in production
-  paths.
-- Reuse an established library for domain logic with difficult parsing,
-  protocol, physics, security, or scheduling semantics unless a recorded
-  decision justifies owning it.
-- Add dependencies only with an owner, purpose, compatible license, and
-  verification strategy.
-- Keep comments focused on non-obvious invariants, safety reasoning, and
-  ownership decisions.
+- Expose production capability only when its implementation fulfills the
+  advertised contract; represent unavailable capability at its owning boundary.
+- Reuse an established library for difficult parsing, protocol, physics,
+  security, or scheduling semantics unless a recorded decision justifies owning
+  the implementation.
+- Give each dependency an owner, purpose, compatible license, and verification
+  strategy.
+- Focus comments on non-obvious invariants, safety reasoning, and ownership.
 
 ### Semantic Constants And Configuration
 
 Name a value when its domain meaning, unit, policy, protocol identity, tuning
-authority, reuse, or coordinated change must be explicit. Keep a self-evident
-local literal at its point of use when naming or exporting it would add
-indirection without clarifying ownership.
+authority, reuse, or coordinated change must be explicit. Keep self-evident
+local literals at their point of use when that preserves clarity.
 
-Place a constant or configuration value with the narrowest concern that owns
-its meaning and lifecycle. Share it only when multiple consumers intentionally
-use the same semantic contract. Central version coordination or convenient
-imports do not transfer ownership and do not justify a global constants
-container.
+Place each constant or configuration value with the narrowest concern owning
+its meaning and lifecycle. Share it when consumers intentionally use the same
+semantic contract. Coordinate versions and imports consistently with that owner.
 
-Configuration is runtime or deployment-selected only when the owning contract
-allows variation. Do not turn invariants into settings, duplicate defaults
-across boundaries, infer units from a name, or select a value because it is
-already centralized. Missing or contradictory meaning, unit, owner, source, or
-override authority requires a typed diagnostic rather than a magic value,
-ambient setting, or incumbent default.
+Allow runtime or deployment selection only where the owning contract permits
+variation. Keep invariants fixed and units explicit. Derive defaults across
+boundaries from their single semantic owner.
+Resolve missing or contradictory meaning, unit, owner, source, or override
+authority through the declared diagnostic contract before selecting a value.
 
 ## Verification
 
-- For a behavior change or defect, add a focused regression test before or
-  with the implementation when existing evidence does not already prove the
-  property. A construction proof or existing test can suffice when it covers
-  the actual risk; explain material limits.
-- Run focused checks for the changed behavior and affected static/toolchain
-  contracts.
-- Use integration, contract, system, user-workflow, environment-gated, and
+- For a behavior change or defect, add a focused regression test before or with
+  implementation when existing evidence does not already prove the property.
+  An adequate construction proof or existing test can suffice; explain material
+  limits.
+- Run focused checks for changed behavior and affected static/toolchain contracts.
+- Use integration, contract, system, user-workflow, environment-qualified, and
   release evidence when the objective crosses those boundaries.
-- Lower-fidelity evidence cannot satisfy a higher-fidelity acceptance
-  criterion.
-- Mark work accepted only after its named acceptance evidence passes. Use a
-  visible blocked or verifying state when required evidence is unavailable.
+- Match acceptance evidence to the required fidelity and actual observable result.
+- Accept work after its named evidence passes. Keep required unavailable evidence
+  visible in a blocked or verifying state.
 
 ## Change Integrity
 
-- Inspect repository state before editing and do not overwrite unrelated work.
+- Inspect repository state before editing and preserve unrelated work.
 - Review the exact staged diff before committing.
 - Keep each commit limited to one coherent, verified outcome.
-- Never rewrite shared history. Rewriting local history or deleting workspaces
-  requires explicit authority.
+- Preserve shared history. Obtain explicit authority to rewrite local history
+  or delete workspaces.

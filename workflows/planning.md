@@ -47,7 +47,7 @@ docs/plans/<plan-slug>/
 - `reports/` owns investigations and detailed evidence.
 - ADRs own durable architecture decisions that outlive the plan.
 
-Do not duplicate the same decision in multiple active owners. Link instead.
+Give each current decision one active owner and link to it from consumers.
 
 ## Required Active-Plan Fields
 
@@ -98,10 +98,15 @@ implemented, but the active plan still names one next integration slice.
 
 ## Explicit Plan Admission
 
-An implementation invocation that uses a written plan supplies one canonical
-repository-relative `plan.md` path and one explicit operation. Do not discover
-an active plan by scanning, recency, conventional location, conversation state,
-or a repository-global pointer.
+Bind planned implementation to one canonical repository-relative `plan.md`
+path and one operation. A human follow-up may reuse an unambiguous selection
+already established in the conversation after checking current repository state,
+plan lifecycle, and authority. Obtain clarification when either selection is
+missing or ambiguous. Repository location, recency, and a next-slice field alone
+do not establish the selection or authorize execution.
+
+Machine interfaces retain their declared explicit path and operation arguments.
+Conversational reuse supplies task context; it does not relax an API contract.
 
 Planning owns these admission decisions:
 
@@ -115,8 +120,8 @@ authority. `Accepted`, `Superseded`, and operation/state contradictions are
 `invalid`. Missing plan identity, operation, lifecycle facts, or required linked
 artifacts are `unavailable`. Security owns containment and traversal or symlink
 escape rejection; unsupported filesystem representation routes conditionally
-through Cross-Platform. Never infer the operation or treat a next slice as
-execution authority.
+through Cross-Platform. Establish the operation and its authority through the
+binding rules above before implementation.
 
 ## Concurrent Integration Routing
 
@@ -158,31 +163,38 @@ repository isolation.
 
 ## Policy Projection Completeness
 
-A normative change updates every affected distribution and enforcement surface.
-Before changing an audited policy owner, query the neutral repository graph's
-`policy-impact` edge group from the owner's logical ID or repository-path alias
-and review every returned consumer. Audit and add explicit edges for a
-previously uncovered owner before its next normative change. One registered
-source declares each edge; the neutral graph engine derives bidirectional
-indexes and exposes the same declaration from either endpoint without owning
-policy semantics. Group membership does not copy an edge, domain validation
-remains group-specific, and traversal requires explicit permission. The graph
-manifest owns current semantic relations; a change report owns change-specific
-dispositions. Do not infer missing semantic consumers from hyperlinks, lexical
-similarity, routing prerequisites, suite ownership, or another graph; correct
-the authoritative declaration explicitly.
+A normative change updates every materially affected distribution and enforcement
+surface. Identify its canonical owner, declared semantic consumers, and review
+coverage. Review the returned consumers and explicitly declare missing actual
+relationships. An incomplete inventory remains an evidence need.
 
-When a rule prescribes a machine protocol, concrete representation, or
-automated gate, its applicable prompts, templates, fixtures, and executable
-support agree before the rule becomes mandatory. Do not require a template,
-prompt, fixture, or executable mechanism for a semantic policy that does not
-use that surface.
+Keep one canonical requirement owner. Prompts, templates, examples, and automation
+project that owner's contract. When a rule prescribes a machine protocol,
+representation, or automated gate, bring its applicable consumers into agreement
+before the rule becomes mandatory. Select those surfaces from actual use.
 
-Diagnostic outcomes must remain semantically distinguishable. A manual process
-may record classifications in prose or a table; a tool may use typed values.
-Planning does not require one serialized diagnostic representation.
+Keep current relationships with their canonical authority and change-specific
+dispositions in the change record. Preserve the distinction between normative
+dependencies, descriptive support, optional references, and semantic impact.
+Use owned, distinguishable diagnostic outcomes; manual processes can record
+them in prose or tables, and tools use their declared contracts.
+
+Standards-maintenance-specific declaration and publication procedures belong to
+the normative authoring owner `workflow.standards-authoring`, retrieved through
+the authoring interface when maintaining the library.
 
 ## Acceptance Claims
+
+Resolve an external-interface or environment assumption that could invalidate
+the design through the smallest adequate real observation before expanding
+implementation around it. Name the decision the observation can change and
+its stopping condition. Continue bounded independently useful work when the
+unavailable observation cannot change that work's decisions.
+
+Distinguish this design observation from final acceptance evidence. For a
+remaining environment-qualified claim, name its owner and executable procedure;
+require hardware, credentials, or a vendor service only when the claim depends
+on them. Identify real producers, consumers, and the complete observable result.
 
 Follow [the verification workflow](verification.md). Record each required claim
 with:
@@ -245,7 +257,7 @@ review round's findings before revising material plan semantics. Record
 lifecycle changes with the coherent implementation, re-plan, accepted boundary,
 or final evidence that caused them; Commit owns the resulting commit boundary.
 
-## Current State, Not History
+## Current Plan State
 
 Keep `plan.md` concise and current:
 
@@ -263,15 +275,21 @@ and evidence records own those claims; the ledger and reports retain history.
 Perform this ownership review at completed-wave boundaries without using an
 arbitrary line-count trigger.
 
-Do not append a new interpretation beside an old active interpretation.
+Keep one current interpretation and preserve superseded reasoning in history.
 
 ## Re-Planning
+
+Repair failed checks within the current slice while its objective, authority,
+ownership, contract, risk, and acceptance meaning remain valid. Add an affected
+file to the write set when it remains inside that boundary. Replan when evidence
+changes those decisions or shows that the admitted slice cannot deliver its
+outcome.
 
 Stop and re-plan when:
 
 - objective, authority, ownership, or constraints change;
 - required facts invalidate a decision;
-- a milestone misses its acceptance gate;
+- gate evidence shows that the admitted slice cannot deliver its outcome;
 - compatibility, migration, security, data, or lifecycle risk changes;
 - a directly affected file outside the stated write set changes objective,
   ownership, contract, risk, or acceptance scope;
@@ -294,8 +312,8 @@ Do not inherit a prior design's composed-design review after a material
 replacement. The replacement owns a current applicability decision and, when
 applicable, current answers.
 
-Do not preserve rejected behavior as a fallback unless a real contract requires
-it and the routed contract guidance permits it.
+Retain fallback behavior only for a real contract permitted by the routed
+contract guidance.
 
 ## Systemic-Finding Re-Planning
 

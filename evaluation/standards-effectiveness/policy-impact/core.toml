@@ -1,4 +1,42 @@
 schema_version = 2
 owner = "core"
 
-relationships = []
+[[relationships]]
+source = "core.application-guidance"
+consumer = "consumer.engine.navigation-tests"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Navigation tests exercise Core-before-Router reading order."
+
+[[relationships]]
+source = "core.application-guidance"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The planning prompt explicitly directs Core-first reading followed by task-fact routing."
+
+[[relationships]]
+source = "core.application-guidance"
+consumer = "router"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Router projects Core's fact-selected reading and prerequisite semantics."
+
+[[relationships]]
+source = "core.application-guidance"
+consumer = "tools/standards_engine/standards_engine/engine.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Engine routing orders Core before Router and the selected prerequisite closure."
+
+[[relationships]]
+source = "core.application-guidance"
+consumer = "workflow.standards-authoring"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Standards Authoring preserves MUST/SHOULD force and distinguishes prerequisites, optional reference and semantic-consumer relationship meanings."

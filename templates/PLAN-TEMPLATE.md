@@ -43,13 +43,29 @@ requires independent proof kinds.
 
 ### Assumptions
 
-- [Assumption and validation owner]
+- [Assumption, decision it could change, proportionate validation method, owner, and stopping condition]
 
 ## Binding Decisions
 
 | Decision | Owner | Evidence | Supersedes |
 | --- | --- | --- | --- |
 | [Current decision] | [Owner] | [Reason/source] | [Prior decision or none] |
+
+## Design Observations And Remaining Evidence
+
+Follow Planning and Verification. Before expanding work around an external-interface
+or environment assumption that could invalidate the design, record the smallest
+adequate real observation. Validate other assumptions using evidence proportionate
+to their decision and consequence.
+Continue independently useful work whose decisions cannot change.
+
+| Assumption or claim | Decision affected | Owner | Executable procedure | Required environment | Status/evidence |
+| --- | --- | --- | --- | --- | --- |
+| [Material uncertainty] | [Decision] | [Owner] | [Procedure] | [Actual dependency] | [Result or pending] |
+
+Under an existing failing baseline, identify whether evidence reaches and
+distinguishes changed behavior. Repair an obstruction, supply a focused
+discriminator, or retain the affected claim as unverified.
 
 ## Evidence And Oracle Plan
 
@@ -137,9 +153,13 @@ caused it. The Commit workflow owns commit boundaries.
 
 ## Re-Plan Triggers
 
-- [Fact or failure that invalidates a decision, scope, sequence, or gate]
+- [Evidence that changes objective, ownership, contract, risk, sequence, or acceptance meaning, or shows the slice cannot deliver its outcome]
 - [Material replacement, cumulative machinery, or observed propagation that
   requires a new composed-design decision]
+
+Repair failed checks inside the current slice while those decisions remain
+valid. An additional file inside the bounded owner is included by updating the
+write set; it triggers replanning when it changes a material decision.
 
 ## Concurrent Work
 

@@ -12,118 +12,80 @@
 - Verification: Development-decision fixtures and metadata-route closure.
 - Canonical owner: `workflows/development-proportionality.md`
 
-Development effort must remain proportionate to the decision-relevant
-uncertainty and the consequence it can prevent. Once the current design
-satisfies the admitted product contract and applicable standards, prefer the
-smallest reversible production implementation over further design
-investigation unless a named unresolved issue threatens an irreversible or
-high-consequence outcome.
+Development effort must be proportionate to decision-relevant uncertainty and
+the consequence it can prevent. Reuse an established mechanism that satisfies
+the affected requirements. Reconsider it for an evidenced mismatch in behavior,
+ownership, safety, compatibility, or cost.
 
-Do not spend more effort reducing uncertainty than the plausible rework or
-consequence that effort can prevent. This is a qualitative decision unless a
-closer measurement could plausibly change the outcome and is cheaper than
-taking the reversible action. Do not create measurement or review machinery
-merely to justify continuing investigation.
+Once the design satisfies the admitted product contract and applicable standards,
+prefer the smallest reversible production implementation unless a named unresolved
+issue threatens an irreversible or high-consequence outcome. Keep investigation
+cost within the plausible rework or consequence it can prevent. Quantify more
+closely when the measurement could change the decision and costs less than the
+reversible action.
 
-This workflow owns whether the next development action is `implement`,
-`investigate`, `defer-and-implement`, or `blocked`. It does not replace:
-
-- Architecture's admission and machinery tests;
-- Verification's claim, evidence-value, and evidence-budget decisions;
-- Planning's sequencing and plan-maintenance rules; or
-- the user's explicit design choices and admitted product contract.
+This workflow owns the next development action. Architecture owns design admission;
+Verification owns claims and evidence value; Planning owns sequencing and plan
+maintenance. Preserve the user's explicit design choices and admitted contract.
 
 ## Development Decision
 
-Identify only the facts needed for the current decision:
-
-1. the admitted product contract for the current slice;
-2. whether the current design satisfies that contract and the applicable
-   standards;
-3. the exact unresolved uncertainty;
-4. the current implementation decision that its answer could change;
-5. the plausible consequence of making that decision incorrectly now;
-6. whether the production implementation is reversible; and
-7. the least costly adequate way to resolve the uncertainty.
-
-Choose exactly one outcome:
+Identify the current contract, design conformance, exact uncertainty, decision it
+could change, consequence of error, reversibility, and least costly adequate method.
+Choose one outcome:
 
 ### Implement
 
-Choose `implement` when the design satisfies the current product contract and
-applicable standards, and implementation is reversible without a plausible
-high-consequence outcome. Implementation is itself admissible evidence when
-it is the cheapest reliable way to expose the remaining uncertainty.
+Choose `implement` when the design satisfies the contract and standards and
+implementation is reversible without a plausible high-consequence outcome.
+Implementation can itself be the cheapest reliable observation.
 
 ### Investigate
 
-Choose `investigate` when the current design does not yet satisfy the admitted
-contract but a bounded investigation can resolve the missing design fact.
+Choose `investigate` when a bounded investigation can resolve a missing fact
+preventing a conforming design.
 
-When the design already satisfies the contract, choose `investigate` only when
-all of the following are true:
-
-- the uncertainty could change the current implementation decision;
-- getting the decision wrong could cause an irreversible or high-consequence
-  outcome, or implementation-first is plausibly more costly than a bounded
-  investigation; and
-- the investigation has a named decision, the least costly adequate method,
-  and an observable stopping condition.
+For an already conforming design, investigate only when the uncertainty could
+change the current decision, error could cause irreversible/high-consequence
+harm or implementation would plausibly cost more, and the investigation has
+a named decision, adequate method, and observable stopping condition.
 
 ### Defer And Implement
 
-Choose `defer-and-implement` when a concern is valid but cannot change the
-current admitted decision. Preserve it only when the applicable Planning or
-issue-management workflow requires a durable follow-up.
+Choose `defer-and-implement` when a valid concern cannot change the current
+admitted decision. Preserve a durable follow-up when Planning or issue management
+requires it.
 
 ### Blocked
 
-Choose `blocked` only when implementation cannot satisfy the current product
-contract or an applicable standard without missing authority, information, or
-an external-state change. Report the missing requirement precisely.
-
-Unknown or contradictory facts that can change the outcome are `unavailable`
-or `invalid`; do not replace them with a convenient default.
+Choose `blocked` when missing authority, information, or external state prevents
+implementation from satisfying the contract or standards. State the missing
+requirement precisely. Keep decision-changing unknown facts `unavailable` and
+contradictory facts `invalid` under the applicable diagnostic contract.
 
 ## Investigation Admission
 
-Every prototype, design review, evidence cycle, or re-plan that would delay
-implementation must name:
+Before an investigation delays implementation, name its uncertainty, affected
+decision, plausible consequence prevented, cost comparison with implementation,
+least costly adequate method, and stopping condition.
 
-- the uncertainty being reduced;
-- the decision its result could change;
-- the plausible consequence prevented;
-- why implementation-first is not the cheaper adequate test;
-- the least costly adequate method; and
-- an observable stopping condition.
-
-If an item is absent, the investigation must not block a reversible
-implementation whose design already satisfies the admitted contract and
-applicable standards. An admitted investigation ends when its stopping
-condition is met; discovering adjacent uncertainty does not automatically
-renew it.
+Absent that basis, continue reversible implementation of an already conforming
+design. End the investigation at its stopping condition and return to the
+Development Decision. Evaluate adjacent uncertainty on its own decision relevance.
 
 ## Boundary And Stopping Rules
 
-An adjacent finding may expand or block the current slice only when it:
+Expand or block the slice for findings that invalidate its product contract,
+demonstrate a standards violation in its design, or materially change the
+reversibility or consequence assessment.
 
-- invalidates the admitted product contract;
-- demonstrates a standards violation in the current design; or
-- materially changes the reversibility or consequence assessment.
-
-Keep review findings within the admitted decision boundary. After the required
-contract and standards checks pass, do not create new evidence obligations
-merely because another investigation could produce more confidence.
-
-A completed investigation returns to the Development Decision. It does not
-authorize another investigation by itself.
+Keep review within the admitted decision boundary. After required contract and
+standards checks pass, require further evidence only for a newly established
+decision-relevant claim or risk.
 
 ## Handoff
 
-- `implement` hands the admitted slice to Implementation and its selected
-  Verification.
-- `investigate` hands one bounded question to the cheapest adequate method,
-  then returns to the Development Decision.
-- `defer-and-implement` leaves the admitted slice unchanged.
-- `blocked` reports the missing authority, information, or external-state
-  change.
+- `implement`: proceed through Implementation and selected Verification.
+- `investigate`: answer one bounded question and reconsider the development decision.
+- `defer-and-implement`: proceed with the admitted slice and its required follow-up.
+- `blocked`: identify the missing authority, information, or external-state change.

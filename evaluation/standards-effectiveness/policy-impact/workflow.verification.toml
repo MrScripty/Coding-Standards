@@ -3,11 +3,99 @@ owner = "workflow.verification"
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
+consumer = "profile.boundary.generated-contract"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Generated Contract may need review when freshness, semantic conformance, or byte identity is proposed as evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "workflow.verification.acceptance-claims"
+consumer = "profile.boundary.persistence"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Persistence may need review when durable corruption or recovery consequences justify evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "workflow.verification.acceptance-paths"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The execution aid applies early observation and complete result requirements."
+
+[[relationships]]
+source = "workflow.verification.failing-baseline"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The execution aid requires evidence that can observe changed results."
+
+[[relationships]]
+source = "workflow.verification.acceptance-claims"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The planning aid projects named claims and their evidence, environment and acceptance status."
+
+[[relationships]]
+source = "workflow.verification.acceptance-paths"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The planning aid asks for early decision-changing real observations."
+
+[[relationships]]
+source = "workflow.verification.acceptance-claims"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The planning aid projects named claims and their evidence, environment and acceptance status."
+
+[[relationships]]
+source = "workflow.verification.acceptance-paths"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The template records real observations and remaining environment evidence."
+
+[[relationships]]
+source = "workflow.verification.failing-baseline"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The template records remaining observable and unverified claims."
+
+[[relationships]]
+source = "workflow.verification.acceptance-claims"
+consumer = "topic.accessibility"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This owner explicitly consumes Verification-owned claim sufficiency, applicable independent evidence dimensions, or the rule that evidence proves only its selected property."
+
+[[relationships]]
+source = "workflow.verification.acceptance-claims"
 consumer = "topic.contracts"
 relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "Contracts may need review when evidence admission changes validation, proof, or invariant machinery. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "workflow.verification.acceptance-claims"
+consumer = "topic.contracts.protocols"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This owner explicitly consumes Verification-owned claim sufficiency, applicable independent evidence dimensions, or the rule that evidence proves only its selected property."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
@@ -43,11 +131,11 @@ rationale = "Security may need review when adversarial reachability justifies va
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
-consumer = "workflow.planning"
+consumer = "workflow.documentation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
-rationale = "Planning may need review when the facts required to admit or retire acceptance evidence change. Review binds this consumer and relationship; it requires substantive evidence before certification."
+rationale = "Documentation may need review when evidence context becomes a durable responsibility. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
@@ -58,12 +146,28 @@ evidence_owner = "review:consumer"
 rationale = "Implementation may need review when permanent checks are admitted, replaced, or rejected. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
-source = "workflow.verification.acceptance-claims"
-consumer = "workflow.documentation"
+source = "workflow.verification.acceptance-paths"
+consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
-rationale = "Documentation may need review when evidence context becomes a durable responsibility. Review binds this consumer and relationship; it requires substantive evidence before certification."
+rationale = "Implementation projects verification at the changed real boundaries and the selected objective acceptance fidelity."
+
+[[relationships]]
+source = "workflow.verification.acceptance-claims"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Planning may need review when the facts required to admit or retire acceptance evidence change. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "workflow.verification.acceptance-paths"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Planning schedules decisive observations and final path acceptance."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
@@ -75,16 +179,40 @@ rationale = "Release may need review when exact-byte identity or retained artifa
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
-consumer = "profile.boundary.generated-contract"
+consumer = "workflow.standards-authoring"
 relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
-rationale = "Generated Contract may need review when freshness, semantic conformance, or byte identity is proposed as evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
+rationale = "Standards Authoring consumes claim-matched review, validation and readback evidence, and preserves the limit that structural/prose evidence proves only its own property."
+
+[[relationships]]
+source = "workflow.verification.failing-baseline"
+consumer = "workflow.tooling"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Tool debt decisions consume Verification's changed-behavior observability rule."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"
-consumer = "profile.boundary.persistence"
+consumer = "workflow.verification.gui"
 relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
-rationale = "Persistence may need review when durable corruption or recovery consequences justify evidence. Review binds this consumer and relationship; it requires substantive evidence before certification."
+rationale = "This owner explicitly consumes Verification-owned claim sufficiency, applicable independent evidence dimensions, or the rule that evidence proves only its selected property."
+
+[[relationships]]
+source = "workflow.verification.acceptance-claims"
+consumer = "workflow.verification.oracles"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This owner explicitly consumes Verification-owned claim sufficiency, applicable independent evidence dimensions, or the rule that evidence proves only its selected property."
+
+[[relationships]]
+source = "workflow.verification.acceptance-claims"
+consumer = "workflow.verification.platforms"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This owner explicitly consumes Verification-owned claim sufficiency, applicable independent evidence dimensions, or the rule that evidence proves only its selected property."

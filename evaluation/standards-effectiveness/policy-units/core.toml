@@ -1,6 +1,12 @@
 schema_version = 1
 
 [[policy_unit]]
+id = "core.application-guidance"
+module = "core"
+heading_path = ["Reading And Applying These Standards"]
+semantic_revision = 1
+
+[[policy_unit]]
 id = "core.simplicity-and-complection"
 module = "topic.code-design"
 heading_path = ["Simplicity And Ownership", "Simple, Easy, And Complection"]

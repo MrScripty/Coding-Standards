@@ -26,6 +26,14 @@ evidence_owner = "suite:policy-semantic-impact"
 rationale = "This suite checks the current structural projection associated with the policy. Its declared checks do not establish semantic completeness or consumer behavior."
 
 [[relationships]]
+source = "workflow.planning.plan-admission"
+consumer = "profile.workflow.concurrent-plan-integration"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Concurrent proposals consume explicit plan identity and operation and require fresh admission during recovery; their machine arguments remain explicit."
+
+[[relationships]]
 source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/full-codebase-standards-refactor.md"
 relation = "prompt-projection"
@@ -34,12 +42,36 @@ evidence_owner = "review:consumer"
 rationale = "The full-codebase review entrypoint delegates analysis-only plan construction to Planning. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
+source = "workflow.planning.plan-admission"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The plan execution aid conveys Planning's human/API distinction."
+
+[[relationships]]
+source = "workflow.planning.replanning"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The execution prompt uses the owning replanning trigger."
+
+[[relationships]]
 source = "workflow.planning.active-plan-fields"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "The planning entrypoint creates and preserves the required composed-design applicability record. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "workflow.planning.replanning"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The planning prompt selects material replanning triggers."
 
 [[relationships]]
 source = "workflow.planning.written-plan-applicability"
@@ -74,6 +106,14 @@ evidence_owner = "review:consumer"
 rationale = "The plan template makes composed-design applicability mandatory and the complete artifact probe conditional. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
+source = "workflow.planning.replanning"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The plan template records the owned triggers and repair boundary."
+
+[[relationships]]
 source = "workflow.planning.projection-completeness"
 consumer = "tools/standards_engine/standards_engine/evidence_maintenance.py"
 relation = "implementation-projection"
@@ -88,3 +128,35 @@ relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "Exercises evidence retirement, graph preservation, preview, and refusal to overwrite independent edits through the public Engine interface. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "workflow.planning.plan-admission"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Implementation consumes Planning's written-plan binding and lifecycle admission."
+
+[[relationships]]
+source = "workflow.planning.replanning"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Implementation consumes Planning's repair versus replanning boundary."
+
+[[relationships]]
+source = "workflow.planning.written-plan-applicability"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Implementation's admission procedure directly projects Planning's bounded-local exclusion and material-complexity triggers."
+
+[[relationships]]
+source = "workflow.planning.projection-completeness"
+consumer = "workflow.standards-authoring"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Standards Authoring projects complete affected-consumer inventory, explicit missing-edge declaration and coherent publication."

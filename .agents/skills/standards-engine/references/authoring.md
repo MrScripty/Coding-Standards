@@ -42,10 +42,13 @@ context when available, so the created proposal is not mistaken for absent work.
 
 ## Edit Selection
 
-The closed edit variants are:
+Use the installed `propose` schema as the authority for edit variants and fields.
+The main authoring operations are:
 
 - `create-standard`
 - `revise-standard`
+- `register-policy-unit`
+- `register-consumer`
 - `revise-policy-unit`
 - `move-policy-unit`
 - `retire-policy-unit`
@@ -73,8 +76,9 @@ particular:
 - relationship changes state their meaning, applicability, evidence owner,
   and rationale explicitly;
 - retirement supplies complete successor and relationship dispositions; and
-- non-standard relationship consumers use an `authoring-target-handle`
-  returned by Snapshot-bound relationship discovery.
+- previously registered non-standard consumers use the returned
+  `authoring-target-handle`; a consumer registered in the same proposal may use
+  its explicit canonical consumer ID.
 
 Before editing routes, use focused `read` or `query_proposal` with a Router read
 request: `{"target":"router","include_routing":true}` for `read` (add the native
@@ -99,6 +103,39 @@ Do not infer semantic relatedness, impact, lifecycle meaning, evidence
 sufficiency, or successors from prose. If the user has not decided required
 meaning, stop at the typed rejection or ask for that decision instead of
 manufacturing closure.
+
+## Register Policies And Consumers
+
+Use `register-policy-unit` for a newly identified scope in an existing standard.
+Select a stable policy ID, uniquely resolved heading chain, semantic revision one,
+intent and lineage. Registration preserves existing identities and source text.
+State changed or preserved semantics explicitly when also revising the owner.
+
+Use `register-consumer` for an actual unregistered consumer already tracked in the
+proposal's original repository revision. Supply its canonical ID, repository-relative
+path, artifact kind and evidence or projection authority. Hidden directories use
+the same containment requirements. The Engine captures original bytes for replay
+and publication; it owns catalog and source bindings.
+
+Declare each actual semantic relationship separately. Registration and relationships
+can share the change set with newly created policy scopes. Read the candidate to
+confirm identity and content, then disposition its consumer and coverage obligations.
+Registration itself does not certify coverage. Fixtures and implementations remain
+read-only through the content editor; registered Markdown documentation, prompts
+and templates support `revise-operational-artifact`.
+
+## Inspect The Candidate Application View
+
+After material review, call authoring `preview_application` with the exact revision
+and an application read, route or related request. Inspect the complete returned
+content, required closure, relationship filtering and qualification results. Repair
+missing qualifications or retain authoring-only material outside application exposure.
+Candidate previews remain bound to the revision and do not publish a snapshot.
+
+Refresh the client catalog after an engine update and inspect initialization's
+interface and purpose. Reopen preserved work with `workflow_status`; use `resume`
+only to explicitly select its current revision. Preserve the proposal's captured
+base and follow any stale-base disposition returned by the Engine.
 
 ## Navigation Index Correction
 

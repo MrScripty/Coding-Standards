@@ -1,0 +1,151 @@
+{
+  "analysis_id": "analysis:sha256:03da996c7fc2f340bbea759f9b07af22d03a3ac05ae7ed0f277ca4112de35d7d",
+  "authority": {
+    "authorization_contract": "authorization-grant.v1",
+    "authorization_evidence_contracts": [
+      {
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    ],
+    "issuer_id": "issuer.standards-engine.local",
+    "issuer_semantic_revision": 2,
+    "principal_id": "principal.standards-engine.local",
+    "revocation_authority_id": "revocation.standards-engine.local",
+    "revocation_authority_semantic_revision": 2,
+    "revocation_contract": "authorization-revocation.v1",
+    "revocation_evidence_contracts": [
+      {
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    ]
+  },
+  "authorization": {
+    "action": "coverage-attestation",
+    "authorization_evidence": [
+      {
+        "digest": "sha256:8a26f95a22013bf7a238bf6bda9b34421f4bdb2585bc7aecca9b51820644c307",
+        "id": "standards-engine.local-authorization",
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    ],
+    "issuer_semantic_revision": 2,
+    "principal": "principal.standards-engine.local",
+    "reference": {
+      "authority_digest": "sha256:304746bbbfebb06fff95f12921c458dafa6ba186392c77d3e304cc8158de7f36",
+      "capability": "standards.review.audit",
+      "id": "authorization:sha256:ee060c83986b9097bd2bb2b10e385c8e5158c9cdcc0f560339ff73ac9fdf697a",
+      "issuer": "issuer.standards-engine.local"
+    },
+    "revocation_authority": "revocation.standards-engine.local",
+    "revocation_authority_semantic_revision": 2,
+    "revocation_evidence": [
+      {
+        "digest": "sha256:a3582233f7212b21e3c03f07a4bd4b48c49b38d0ffb6f8513b72dde511a49866",
+        "id": "standards-engine.local-revocation",
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    ],
+    "subject_id": "sha256:6aca0b0432eda60cb5879f881beda2dc7432267832b4e944a52cc98e06531d8f",
+    "subject_kind": "coverage-requirement"
+  },
+  "authorization_evidence": [
+    {
+      "content_hex": "7374616e64617264732d656e67696e652e6c6f63616c2d617574686f72697a6174696f6e",
+      "reference": {
+        "digest": "sha256:8a26f95a22013bf7a238bf6bda9b34421f4bdb2585bc7aecca9b51820644c307",
+        "id": "standards-engine.local-authorization",
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    }
+  ],
+  "claim": {
+    "auditor_provenance": "Root scoped inventory/consumer audit plus independent material and bounded consumer review by /root/independent_review, final candidate 33538b46a6e82b98dd93015fae97fa7418810ef7a9479e0827b58dc1b7688a57. Actual publication auditor and authorization are supplied by the Engine.",
+    "authorization_id": "authorization:sha256:ee060c83986b9097bd2bb2b10e385c8e5158c9cdcc0f560339ff73ac9fdf697a",
+    "conclusion": "complete",
+    "evidence": [
+      {
+        "digest": "sha256:813dfc2487ddc83e91e572fcd0e4a54ebaf79efe7fca7ec58defc765f888b294",
+        "id": "profiles/workflows/concurrent-plan-integration.md",
+        "provider_contract": "repository-content",
+        "provider_contract_version": "1"
+      }
+    ],
+    "explicit_exclusions": [],
+    "rationale": "Bounded audit of checked human conversational selection while retaining explicit machine arguments and lifecycle admission. Root and independent review inspected actual operational, normative, prompt/template, reference and runtime/fixture projections as applicable, corrected discovered missing relationships and dispositioned every affected consumer. Exact candidate related-query matches this reviewed inventory: workflow.implementation, prompts/implement-plan.md, profile.workflow.concurrent-plan-integration. Referenced source artifacts supply the inspected consumer contracts/fixtures or recorded restructuring mandate; the current candidate comparison and review decisions are retained by the Engine. This conclusion covers the registered subject scope and its named semantic consumers, with no exclusions inside that horizon. It does not certify unregistered owner text, unrelated prerequisite/link associations or downstream effectiveness.",
+    "requirement_id": "sha256:6aca0b0432eda60cb5879f881beda2dc7432267832b4e944a52cc98e06531d8f",
+    "schema_version": 4
+  },
+  "publication": {
+    "authorization": {
+      "action": "publish-coverage",
+      "authorization_evidence": [
+        {
+          "digest": "sha256:8a26f95a22013bf7a238bf6bda9b34421f4bdb2585bc7aecca9b51820644c307",
+          "id": "standards-engine.local-authorization",
+          "provider_contract": "local-statement",
+          "provider_contract_version": "1"
+        }
+      ],
+      "issuer_semantic_revision": 2,
+      "principal": "principal.standards-engine.local",
+      "reference": {
+        "authority_digest": "sha256:304746bbbfebb06fff95f12921c458dafa6ba186392c77d3e304cc8158de7f36",
+        "capability": "standards.review.audit",
+        "id": "authorization:sha256:6058c2a4138d7665516bf624cea4cc363e94a1f1c4828104afbe81da4e9beda6",
+        "issuer": "issuer.standards-engine.local"
+      },
+      "revocation_authority": "revocation.standards-engine.local",
+      "revocation_authority_semantic_revision": 2,
+      "revocation_evidence": [
+        {
+          "digest": "sha256:a3582233f7212b21e3c03f07a4bd4b48c49b38d0ffb6f8513b72dde511a49866",
+          "id": "standards-engine.local-revocation",
+          "provider_contract": "local-statement",
+          "provider_contract_version": "1"
+        }
+      ],
+      "subject_id": "coverage-publication:sha256:3a99bc0b05fb3156516b7dd444a38c27f5283c1a59a5cf38827734da0eda93f8",
+      "subject_kind": "coverage-publication"
+    },
+    "authorization_evidence": [
+      {
+        "content_hex": "7374616e64617264732d656e67696e652e6c6f63616c2d617574686f72697a6174696f6e",
+        "reference": {
+          "digest": "sha256:8a26f95a22013bf7a238bf6bda9b34421f4bdb2585bc7aecca9b51820644c307",
+          "id": "standards-engine.local-authorization",
+          "provider_contract": "local-statement",
+          "provider_contract_version": "1"
+        }
+      }
+    ],
+    "revocation_evidence": [
+      {
+        "content_hex": "7374616e64617264732d656e67696e652e6c6f63616c2d7265766f636174696f6e",
+        "reference": {
+          "digest": "sha256:a3582233f7212b21e3c03f07a4bd4b48c49b38d0ffb6f8513b72dde511a49866",
+          "id": "standards-engine.local-revocation",
+          "provider_contract": "local-statement",
+          "provider_contract_version": "1"
+        }
+      }
+    ]
+  },
+  "revocation_evidence": [
+    {
+      "content_hex": "7374616e64617264732d656e67696e652e6c6f63616c2d7265766f636174696f6e",
+      "reference": {
+        "digest": "sha256:a3582233f7212b21e3c03f07a4bd4b48c49b38d0ffb6f8513b72dde511a49866",
+        "id": "standards-engine.local-revocation",
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "subject": "workflow.planning.plan-admission"
+}

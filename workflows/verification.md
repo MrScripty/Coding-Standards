@@ -81,24 +81,18 @@ supporting gates unless the objective is specifically the property they prove.
 ## Quality Gates And Execution Location
 
 Derive each blocking or advisory gate from a named acceptance claim, affected
-risk, owned contract, and required environment. Record what the gate proves,
-its blocking authority, and the conditions for changing or removing it. A gate
-must pass when its selected claim is required; no catalog of lint, type,
-formatting, test, documentation, or traceability checks is universally
-mandatory.
+risk, owned contract, and required environment. State what it proves, its blocking
+authority, and conditions for changing or removing it. Required gates must pass.
 
-Execution location does not create an evidence hierarchy. Run the claim where
-its required inputs, environment, authority, and observable result are
-available, whether local, in a hook, in CI, on a dedicated runner, during
-release verification, or through a recorded manual procedure. Incremental or
-staged checks prove only their selected scope and cannot substitute for a
-broader required claim.
+Run a claim where its inputs, environment, authority, and result are available.
+Local, hook, CI, dedicated-runner, release, and manual execution are locations;
+evidence meaning comes from the observed property. Incremental or staged checks
+prove their selected scope.
 
-Contradictory gate and claim authority is `invalid`. Missing claim, environment,
-scope, or blocking authority is `unavailable`. A required claim outside
-supported execution capability is `unsupported`; do not replace it with a
-conventional gate list, CI execution, local success, a weaker check, or default
-acceptance.
+Classify contradictory gate/claim authority as `invalid`, missing claim,
+environment, scope, or blocking authority as `unavailable`, and a required claim
+beyond supported execution as `unsupported`. Retain the affected acceptance
+claim as unsatisfied until adequate evidence is available.
 
 ## Environment Qualification
 
@@ -131,8 +125,8 @@ owner.
 
 ## Selecting Claims
 
-Select the smallest complete claim set that directly proves the objective, plus
-supporting checks for affected risks and contracts.
+Select the smallest complete claim set that directly proves the objective,
+plus supporting checks for affected risks and contracts.
 
 | Change shape | Typical required claims |
 | --- | --- |
@@ -142,10 +136,10 @@ supporting checks for affected risks and contracts.
 | Cross-process or deployed backend capability | `system` |
 | User-visible workflow | `user-workflow`, plus affected contracts |
 | Hardware-dependent user capability | `user-workflow` in `required-real` environment |
-| Shipped application or library | `release-artifact`, plus behavior claims changed by the release |
+| Shipped application or library | `release-artifact`, plus behavior claims changed by release |
 
-Do not require an unrelated high-cost claim. Do not omit a direct claim because
-a cheaper supporting gate passed.
+Select every direct claim the objective needs and keep unrelated claims outside
+the acceptance set.
 
 ## Simplicity Evidence Boundary
 
@@ -162,53 +156,50 @@ evidence distinct from reliability evidence.
 For each non-local claim, name the observable start, externally meaningful
 result, real in-scope boundaries, authoritative producers and consumers, and
 material environment facts. Select `integration`, `contract`, `system`, or
-`user-workflow` evidence from that path. Repository suite labels such as unit,
-integration, end-to-end, or vertical slice are organization mechanisms; they
-do not establish evidence kind, environment fidelity, or acceptance.
+`user-workflow` evidence from that path.
 
-A cross-boundary objective usually needs one path claim plus separate contract
-claims for boundaries whose representation or invariants can regress
-independently. The path claim proves only the boundaries it actually traverses.
-Do not require assertions for every internal hop unless that hop owns a
-separate claim, and do not infer complete-path behavior from isolated producer,
-consumer, adapter, type, build, or startup results.
+A cross-boundary objective usually needs a path claim plus separate claims for
+contracts whose representation or invariants can regress independently. Verify
+internal hops separately when they own such a claim. The path evidence proves
+only the boundaries actually traversed.
 
-Start with the smallest path that produces a useful objective-level result,
-then add focused evidence for risky branches and independently owned contracts.
-This sequencing is a planning mechanism, not a universal requirement to write
-one test first or to use one suite shape. Broaden the path when the objective,
-consumers, environment, scaling behavior, or failure boundaries require it.
+Resolve an external-interface or environment assumption that could invalidate
+the design through the smallest adequate real observation before expanding
+implementation around it. Continue independently useful work when the unavailable
+observation cannot change its decisions. Keep design-selection evidence distinct
+from final acceptance.
 
-Contradictory path, authority, or boundary facts are `invalid`. A declared path
-outside supported product or platform capability is `unsupported`. A missing
-required boundary, consumer, environment, or observable result is
-`unavailable`. Do not substitute a realistic simulation for required-real
-evidence, a lower-fidelity suite for the selected claim, a successful build or
-smoke, partial traversal, checklist completion, or default success.
+For consumer-visible behavior, exercise the real producer and consumer through
+their relevant interface and observe the complete promised result. A preview
+establishes its preview behavior; full consumption requires observation of full
+consumption.
+
+Start with the smallest path producing a useful objective-level result and add
+focused evidence for risky branches and independent contracts. Broaden when the
+objective, consumers, environment, scale, or failure boundaries require it.
+Select test sequencing and suite organization from those needs.
+
+Classify contradictory path, authority, or boundary facts as `invalid`; a
+declared path outside supported capability as `unsupported`; and missing
+required boundaries, consumers, environment, or results as `unavailable`.
+Retain the claim as unsatisfied until its actual boundaries and fidelity are
+observed.
 
 ## Disabled Behavior Claims
 
-Derive acceptance claims from the lifecycle state selected by
-[Implementation](implementation.md#disabled-and-incomplete-behavior).
+Derive claims from [Implementation's selected lifecycle](implementation.md#disabled-and-incomplete-behavior).
 
-For deliberate removal, prove that every affected advertised, registered,
-configured, persisted, and user-visible surface no longer promises the
-capability and that requests receive the declared typed outcome. For temporary
-disablement, prove surface-state consistency, the owning boundary's typed
-outcome, and the accepted tracking, review, and re-enable or removal criteria.
-For incomplete behavior, prove it is unreachable from production consumers and
-that any test-only placeholder remains isolated by the test boundary.
+For deliberate removal, prove that affected advertised, registered, configured,
+persisted, and user-visible surfaces cease promising the capability and return
+the declared typed outcome. For temporary disablement, prove surface-state
+consistency, boundary outcomes, and accepted tracking, review, and re-enable or
+removal criteria. For incomplete behavior, prove isolation from production
+consumers, including isolation of test placeholders.
 
-Select evidence kinds and environments from the affected surfaces. A focused
-configuration check may prove one local state but cannot prove a public,
-deployed, or user-visible surface. Documentation, a tracking issue, a feature
-flag, or a workaround proves only its explicit claim and never substitutes for
-observable disabled behavior.
-
-Acceptance remains blocked when a required surface, lifecycle fact, typed
-outcome, or direct behavior claim is missing or contradicted. Do not mark a
-disabled capability accepted from checklist completion, issue existence,
-documented intent, startup success, a production stub, or substitute behavior.
+Select evidence kinds and environments from the affected surfaces. Documentation,
+configuration, tracking, and behavior observations each prove their own property.
+Keep acceptance blocked while a required surface, lifecycle fact, outcome, or
+direct behavior claim is missing or contradicted.
 
 ## Smoke Checks
 
@@ -242,156 +233,105 @@ When a change creates a validator, negative fixture, property test, differential
 ## Test Design
 
 Design each focused check around one coherent observable claim or invariant.
-One check may need several assertions to prove that outcome; several claims may
-need separate checks when their setup, failure diagnosis, ownership, or
-lifecycles differ. Do not split or combine checks to satisfy a slogan about one
-assertion or one behavior.
+Use the assertions needed to prove it. Separate claims when their setup,
+diagnosis, ownership, or lifecycle differs.
 
-Structure setup, action, observation, and cleanup so the causal path and failed
-criterion are reviewable. Arrange-Act-Assert, Given-When-Then, tables, state
-machines, generators, or another structure are mechanisms selected from the
-claim. Comments and explicit phases are required only when the test is not
-otherwise clear.
+Make setup, action, observation, and cleanup reviewable. Choose a structure
+suited to the claim and add explicit phases or comments when needed for clarity.
 
-Select real implementations, fakes, simulators, fixtures, mocks, or controlled
-substitutes from the boundary being proved. A substitute is valid only when its
-modeled contract is the intended proof target or the claim explicitly excludes
-the real boundary. Do not use a mock to claim behavior of the mocked boundary,
-and do not impose a universal real/fake/mock preference hierarchy.
+Select real implementations or controlled substitutes from the boundary being
+proved. A substitute is adequate when its modeled contract is the intended proof
+target or the claim explicitly excludes the substituted real boundary.
 
-Derive examples and edge conditions from the input domain, invariants, prior
-defects, failure modes, state transitions, numeric or resource boundaries, and
-consumer contracts. Empty, null, minimum, maximum, malformed, duplicate, and
-failure inputs are not universal requirements when they are outside that
-domain. Missing applicable boundary evidence is `unavailable`; contradictory
-test and contract facts are `invalid`.
+Derive examples and edge conditions from the actual domain, invariants, prior
+defects, failure modes, transitions, resource/numeric limits, and consumer contracts.
+Missing applicable boundary evidence is `unavailable`; contradictory test and
+contract facts are `invalid`.
 
-Use property-based or generative evidence when a property over a meaningful
-input domain is the claim and generation, shrinking, reproducibility, and
-oracles can preserve it. Example-based evidence remains valid for named
-scenarios. Do not require property testing from an algorithm label, roundtrip,
-inverse operation, or “all valid inputs” slogan without an owned property and
-usable oracle.
-
-Never weaken an assertion, narrow an input domain, replace the real objective
-with substitute behavior, or accept successful execution as default success.
+Use property or generative evidence when the claim owns a meaningful input-domain
+property and generation, shrinking, reproducibility, and oracles can preserve it.
+Use examples for named scenarios. Preserve the asserted objective, applicable
+input domain, and required observation while repairing tests.
 
 ## Test Data Authority And Lifecycle
 
-Identify the contract that owns each material test-data field, identity,
-relationship, state transition, and validity rule. Construct only the data
-needed by the claim while keeping material values and defaults reviewable.
-Factories, builders, direct construction, generators, snapshots, seeded stores,
-and external fixtures are mechanisms selected from the data contract, setup
-cost, reuse, diagnosis, and repository tooling; none is a default hierarchy.
+Identify the contract owning each material test-data field, identity, relation,
+transition, and validity rule. Construct the data required by the claim and make
+material values/defaults reviewable. Choose construction mechanisms from the data
+contract, setup cost, reuse, diagnosis, and repository tooling.
 
-Define fixture identity and lifetime independently from the workflow or check
-that first created it. Select immutable sharing, per-check construction, scoped
-mutable sharing, transactions, namespaces, reset, cleanup, or another isolation
-mechanism from mutation, concurrency, ordering, resource cost, and the proved
-boundary. Shared mutable data is valid only when its owner, scope, synchronization,
-initial state, transitions, reset or disposal, and failure recovery are explicit
-and the selected evidence exercises that lifecycle.
+Own fixture identity and lifetime independently of the workflow that created it.
+Choose sharing, construction, synchronization, transactions, namespaces, reset,
+and cleanup from mutation, concurrency, ordering, resource cost, and the proved
+boundary. Shared mutable data requires an explicit owner, scope, initial state,
+transitions, synchronization, reset/disposal, and failure recovery, with evidence
+that exercises that lifecycle.
 
-Do not let a factory default, prior check, ambient database, clock, random seed,
-process-global cache, external account, or persisted artifact silently supply a
-material precondition. A reused fixture carries no originating check input or
-claim context into another check. Preserve stable identity only when the claim
-requires it, and allocate or derive distinct identity when parallel or repeated
-execution could collide.
+Establish material preconditions explicitly through their owners. A reused
+fixture carries its defined data contract; establish the receiving check's inputs
+and claim context independently. Preserve stable identity when required and
+allocate distinct identity when parallel or repeated execution could collide.
 
-Contradictory data authority, identity, ownership, isolation, or lifecycle facts
-are `invalid`. A required construction or isolation mechanism outside supported
-repository or platform capability is `unsupported`. Missing material authority,
-identity, reset, cleanup, synchronization, or environment facts are
-`unavailable`. Do not substitute factory use, fresh allocation, transaction
-rollback, cleanup success, test ordering, serial execution, or passing retries
-for the required claim.
+Classify contradictory data authority, identity, isolation, or lifecycle as
+`invalid`, unsupported required construction/isolation as `unsupported`,
+and missing material ownership, reset, cleanup, synchronization, or environment
+facts as `unavailable`. Observe the selected lifecycle property before acceptance.
 
 ## Async Completion And Failure Evidence
 
 Observe asynchronous work through the terminal state and externally meaningful
-result selected by its owner and contract. Awaiting, joining, subscribing,
-polling, callbacks, clocks, harness drains, and process observation are
-mechanisms; use the one that proves completion, failure, cancellation, timeout,
-or continued operation at the required boundary. Syntax that starts or awaits
-work does not prove that child work, cleanup, publication, or failure handling
-has completed.
+result selected by its owner and contract. Choose the observation mechanism
+that proves the applicable completion, failure, cancellation, timeout, or
+continued-operation claim, including required child work, cleanup, publication,
+and failure handling.
 
-Derive outcome cases from the owned state machine, error contract, retry and
-backoff policy, cancellation and timeout semantics, partial-result rules,
-idempotency or compensation behavior, and diagnostic channel. A success case
-and a failure case are not a universal pair. Verify only applicable outcomes,
-but do not omit a material terminal state or boundary because a lower-cost
-focused check, build, startup, or generic exception assertion passed.
+Derive cases from the owned state machine, error contract, retry/backoff policy,
+cancellation/timeout semantics, partial-result rules, idempotency/compensation,
+and diagnostics. Verify every material applicable outcome at the selected boundary.
 
-At a service or process boundary, assert the externally owned representation
-and effects: status or typed error, response or event, committed or compensated
-state, retry termination, cancellation propagation, bounded completion, and
-safe diagnostic context as applicable. Internal exception types, mock call
-counts, sleeps, or implementation callbacks prove only their explicit local
-claims and cannot substitute for the selected boundary.
+At service or process boundaries, assert the externally owned representation and
+effects: status or typed error, response/event, committed or compensated state,
+retry termination, cancellation propagation, bounded completion, and safe
+diagnostic context as applicable.
 
-Contradictory completion, terminal-state, boundary, timing, or error-contract
-facts are `invalid`. A required observation mechanism or outcome outside the
-supported runtime, platform, or harness capability is `unsupported`. Missing
-material completion ownership, terminal states, timing authority, boundary
-representation, or diagnostic facts are `unavailable`. Do not fall back to
-await syntax, happy-path completion, one generic failure, arbitrary sleeps,
-test-runner exit, retry success, or weaker-boundary evidence.
+Classify contradictory completion, timing, boundary or error facts as `invalid`,
+required observations beyond supported runtime/platform/harness capability as
+`unsupported`, and missing ownership, terminal state, timing authority, boundary
+representation or diagnostics as `unavailable`. Keep local observations scoped
+to their local claims.
 
 ## Test Placement And Naming
 
-Place evidence where its owner, affected implementation, fixtures, environment
-setup, and repository discovery tools make it findable and executable. The
-selected boundary may be a source module, package, test root, contract fixture
-area, system harness, or another repository-defined location. One repository
-may use several placements when their ownership and execution contracts differ.
+Place evidence where its owner, affected implementation, fixtures, environment,
+and discovery tools make it findable and executable. Follow language, framework,
+runner, and build conventions. Keep related evidence and fixtures discoverable
+without duplicating policy or creating hidden test-only APIs. Record placement
+decisions when repository structure and tooling cannot explain them.
 
-Follow required language, framework, runner, and build discovery conventions.
-Within those constraints, keep related evidence and fixtures close enough that
-maintainers can discover the claim and its owner without duplicating policy or
-creating hidden test-only APIs. Document a placement decision only when it is
-not recoverable from repository structure and tooling.
+Use stable scenario, observable-result/invariant, and differentiating-condition
+vocabulary in check names, with syntax appropriate to the tool and language.
 
-Name a check with the narrowest stable vocabulary that identifies its scenario,
-observable result or invariant, and differentiating conditions. Names support
-discovery and diagnosis; they do not need to encode every function, phase,
-input, or expected value. Select syntax from the applicable tool and language.
-
-Contradictory ownership or discovery requirements are `invalid`. Unsupported
-runner or platform placement is `unsupported`. Missing ownership, discovery,
-tooling, or execution facts are `unavailable`. Do not choose colocated,
-mirrored-tree, hybrid, suite-level directories, README documentation, or a
-`function_scenario_result` template as fallback.
+Classify contradictory ownership/discovery as `invalid`, unsupported required
+placement as `unsupported`, and missing discovery/tooling/execution facts as
+`unavailable`. Resolve these requirements before relying on evidence discovery.
 
 ## Coverage And Durable Evidence Records
 
-Coverage reports where instrumented execution did or did not traverse code. It
-is a diagnostic for finding unexamined paths and does not prove observable
-behavior, boundary agreement, environment fidelity, assertion quality, or
-objective acceptance by itself.
+Use coverage to identify unexamined paths in instrumented execution. Evaluate
+line, branch, function, condition, mutation, path, or other coverage for a named
+risk or claim. Select scope, instrumentation, threshold, baseline, and exclusions
+from history, generated/unreachable-code authority, risk, tooling accuracy, and
+decision cost. State how each threshold or exclusion affects acceptance.
 
-Use line, branch, function, condition, mutation, path, or other coverage only
-when it helps evaluate a named risk or claim. Select scope, instrumentation,
-threshold, baseline, and exclusions from repository history, generated and
-unreachable-code authority, risk, tooling accuracy, and decision cost. Record
-why a threshold or exclusion affects acceptance; do not infer quality from a
-percentage or copy a conventional exclusion list.
+Record enough durable context to understand, reproduce, and review evidence
+when the check, code, fixture, command, result, and canonical contract cannot
+supply it. Keep defect origin, invariant reasoning, fixture authority, environment,
+and result interpretation with their owning evidence or linked artifact.
 
-Record the smallest durable context needed to understand, reproduce, and
-review evidence when that context cannot be recovered from the check name,
-code, fixture, command, result, or canonical contract. Useful context may
-include the originating defect, non-obvious invariant, fixture shape authority,
-material environment facts, or interpretation of a measured result. Put it at
-the owning evidence or linked artifact rather than requiring an inline comment,
-diagram, table, README section, or copied template.
-
-Contradictory metric, scope, authority, threshold, exclusion, or evidence facts
-are `invalid`. Unsupported instrumentation is `unsupported`. Missing material
-baseline, tooling, authority, or reproduction context is `unavailable`. Do not
-substitute high coverage, target attainment, documented intent, a fixture
-diagram, or successful instrumentation for the required claim.
+Classify contradictory metric/scope/authority/threshold/exclusion/evidence as
+`invalid`, unsupported instrumentation as `unsupported`, and missing material
+baseline, tooling, authority or reproduction context as `unavailable`. Accept
+behavior and boundary claims through their required observations.
 
 ## Scheduling And Duration
 
@@ -404,33 +344,40 @@ Scheduling never changes what the evidence proves.
 
 ## Supporting Gates And Claim-Directed Diagnosis
 
-Classify every formatter, linter, static analysis, compilation, build, package,
-startup, dev-server, runtime, source lookup, or documentation check by the exact
-property it observes. Treat it as acceptance only when that property is itself
-the named claim; otherwise it is a supporting gate and cannot replace focused,
-contract, system, user-workflow, or release-artifact evidence.
+Classify supporting checks by the exact property they observe. Treat a check
+as acceptance when that property is the named claim; otherwise retain its role
+as a supporting gate.
 
-When evidence fails or a claim remains unresolved, preserve the exact command,
-environment, output, timing, and boundary context needed to reproduce it. Form
-the smallest hypothesis consistent with those facts and select the next
-observation by authority, information gain, cost, reversibility, and proximity
-to the failed claim. Re-run affected evidence after correction and broaden only
-to claims or contracts the correction could have changed.
+When evidence fails, preserve the command, environment, output, timing, and
+boundary context required to reproduce the failure. Form a bounded hypothesis
+and select the next observation by authority, information gain, cost,
+reversibility, and proximity to the claim. After correction, rerun affected
+evidence and broaden to claims or contracts the correction could have changed.
 
-Use compiler diagnostics, traces, logs, state inspection, focused probes,
-dependency source, generated artifacts, installed declarations, official
-version-matched documentation, repository history, or external references when
-their authority and expected information justify them. No source order is
-universal. Do not add production diagnostics, weaken validation, change the
-objective, or repeatedly edit and retry merely to obtain a passing result.
+Select diagnostics, traces, state inspection, focused probes, dependency source,
+generated artifacts, installed declarations, version-matched official
+documentation, history, or external references when their authority and expected
+information justify them. Preserve the objective and validation contract.
+Add production diagnostics when their owned operational claim warrants them.
 
-Contradictory claim, evidence, environment, or authority facts are `invalid`.
-An observation unavailable in the supported toolchain or environment is
-`unsupported`. Missing reproduction facts, authoritative contract information,
-required access, or a usable observation path is `unavailable`. Report the
-typed diagnostic instead of falling back to a fixed layer order, compile/build/
-launch loop, dev-server success, generic web search, checklist completion, or
-default acceptance.
+Classify contradictory claim/evidence/environment/authority as `invalid`,
+observations beyond supported tools or environment as `unsupported`, and
+missing reproduction facts, authoritative information, access, or observation
+paths as `unavailable`. State the unresolved decision and continue independent
+work under the current slice.
+
+## Evidence Under An Existing Failing Baseline
+
+Use evidence that still reaches and distinguishes the changed behavior. When
+an existing failure prevents that observation, repair the obstruction, provide
+a focused discriminator, or retain the affected claim as unverified.
+
+Identify where execution stops and which claims remain observable. Compare the
+actual findings using their owned identities and scope. Unchanged failure counts,
+names, or source locations alone do not prove that the affected result was tested.
+
+Keep explicit debt dispositions separate from acceptance. Name an owner and
+executable procedure for any remaining environment-qualified observation.
 
 ## Platform Evidence Coverage
 
@@ -438,15 +385,12 @@ When a claim spans supported targets or requires platform-specific evidence, fol
 
 ## Unavailable Evidence
 
-If a required environment, credential, platform, or operator is unavailable:
-
-- run independent supporting checks;
-- record the unsatisfied claim and owner;
-- set acceptance to `blocked` or `partial`;
-- keep plan status `Blocked` or `Verifying` as applicable; and
-- do not mark the objective accepted.
-
-Do not invent fallback evidence or infer environment facts.
+When a required environment, credential, platform, or operator is unavailable,
+run independent supporting checks, record the unsatisfied claim and owner, set
+acceptance to `blocked` or `partial`, and keep the plan `Blocked` or
+`Verifying` as applicable. Name the executable procedure and conditions needed
+to obtain the remaining evidence. Accept the objective when all required claims
+are satisfied.
 
 ## Reporting
 

@@ -13,7 +13,7 @@
 - Canonical owner: `STANDARDS-ROUTER.md`
 
 Use this file after [CORE-STANDARDS.md](CORE-STANDARDS.md). Select guidance from
-observable task conditions. Do not read every document by default.
+observable task conditions and retrieve the applicable required closure.
 
 ## Concept Map
 
@@ -32,8 +32,8 @@ Application, boundary, language, and framework profiles refine these concepts.
 `Requires` loads an unconditional prerequisite. `Specializes` names the broader
 concept refined by a page; it does not mean that the parent loads every child.
 The tables below and each page's conditional links support further discovery.
-A reading plan is a prerequisite order, not a requirement to explore every
-possible refinement.
+A reading plan orders required prerequisites. Retrieve refinements when their
+stated conditions match the task.
 
 ## Routing Procedure
 
@@ -165,7 +165,7 @@ The executable fact `routing.details` accepts the canonical IDs below. Known
 absence is an empty set; unknown conditions remain unresolved. Generated
 contracts, IPC, persistence, cross-language bindings, and platform verification
 also select their corresponding details from the existing boundary and task
-facts. An ordinary Rust parser fix selects none of these detail pages.
+facts. Select a detail page when its corresponding specialized decision is affected.
 
 | Condition | Select |
 | --- | --- |
@@ -180,30 +180,22 @@ facts. An ordinary Rust parser fix selects none of these detail pages.
 | A change selects maintenance channels, publication presentation, or release recovery procedures | [workflow.release.operations](workflows/release/operations.md) |
 | A graphical user workflow requires smoke evidence | [workflow.verification.gui](workflows/verification/gui.md) |
 
+
+## Additional Routing Rules
+
+| Condition | Select |
+| --- | --- |
+| Maintain this standards library through its authoring interface | [Standards Authoring Workflow](workflows/standards-authoring.md) |
+
 ## S1 Rust Library Bug-Fix Route
 
-For a one-module Rust parser bug in a library with no public-contract,
-persistence, UI, dependency, or release change, select exactly:
-
-- Core;
-- Router;
-- Implementation workflow;
-- Verification workflow;
-- Library application profile; and
-- Rust language profile.
-
-Explicitly exclude architecture patterns, release, frontend, launcher,
-accessibility, cross-platform, interop, bindings, and persistence guidance.
-The Concurrent Plan Integration profile is also excluded when no outstanding
-proposal can become stale before integration.
-
-Acceptance is a focused regression test plus affected Rust static/toolchain
-checks. No ADR, release procedure, directory README, or large plan is required
-unless the investigation discovers a corresponding condition.
+For a bounded Rust parser repair in a reusable library, retrieve the optional
+reference `reference.routing.bounded-rust-repair`. Its stated task facts
+illustrate conditional selection; derive each project's route from its actual facts.
 
 ## Invalid Or Legacy Routing
 
 Use canonical owners for policy; legacy entrypoints are navigation only.
 Report unresolved material facts, conflicting ownership, dependency cycles,
-or a missing canonical route. Continue independently routable work. Do not
-substitute a legacy rule or assume an unknown condition is absent.
+or a missing canonical route. Continue independently routable work and resolve
+the missing qualification before treating the affected route as complete.

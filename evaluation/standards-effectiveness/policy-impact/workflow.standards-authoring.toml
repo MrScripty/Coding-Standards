@@ -1,0 +1,34 @@
+schema_version = 2
+owner = "workflow.standards-authoring"
+
+[[relationships]]
+source = "workflow.standards-authoring.graph-maintenance"
+consumer = "consumer.engine.authoring-guide"
+relation = "documentation-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The authoring guide projects explicit semantic relationships, consumer discovery and Engine-managed publication."
+
+[[relationships]]
+source = "workflow.standards-authoring.graph-maintenance"
+consumer = "policy-semantic-impact"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This registered consumer implements or checks the graph-maintenance procedure relocated from Planning; generic projection-completeness obligations continue to apply independently."
+
+[[relationships]]
+source = "workflow.standards-authoring.graph-maintenance"
+consumer = "tools/standards_engine/standards_engine/evidence_maintenance.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This registered consumer implements or checks the graph-maintenance procedure relocated from Planning; generic projection-completeness obligations continue to apply independently."
+
+[[relationships]]
+source = "workflow.standards-authoring.graph-maintenance"
+consumer = "tools/standards_engine/tests/test_evidence_maintenance.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This registered consumer implements or checks the graph-maintenance procedure relocated from Planning; generic projection-completeness obligations continue to apply independently."

@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "workflow.tooling.tool-debt"
+module = "workflow.tooling"
+heading_path = ["Tool-Debt Governance"]
+semantic_revision = 1

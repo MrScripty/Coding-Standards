@@ -1,0 +1,163 @@
+{
+  "analysis_id": "analysis:sha256:03da996c7fc2f340bbea759f9b07af22d03a3ac05ae7ed0f277ca4112de35d7d",
+  "authority": {
+    "authorization_contract": "authorization-grant.v1",
+    "authorization_evidence_contracts": [
+      {
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    ],
+    "issuer_id": "issuer.standards-engine.local",
+    "issuer_semantic_revision": 2,
+    "principal_id": "principal.standards-engine.local",
+    "revocation_authority_id": "revocation.standards-engine.local",
+    "revocation_authority_semantic_revision": 2,
+    "revocation_contract": "authorization-revocation.v1",
+    "revocation_evidence_contracts": [
+      {
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    ]
+  },
+  "authorization": {
+    "action": "coverage-attestation",
+    "authorization_evidence": [
+      {
+        "digest": "sha256:8a26f95a22013bf7a238bf6bda9b34421f4bdb2585bc7aecca9b51820644c307",
+        "id": "standards-engine.local-authorization",
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    ],
+    "issuer_semantic_revision": 2,
+    "principal": "principal.standards-engine.local",
+    "reference": {
+      "authority_digest": "sha256:304746bbbfebb06fff95f12921c458dafa6ba186392c77d3e304cc8158de7f36",
+      "capability": "standards.review.audit",
+      "id": "authorization:sha256:baf840da1324d4e32e21bc3b79ddba05c6486b350aea9f166c61aa1901592bf2",
+      "issuer": "issuer.standards-engine.local"
+    },
+    "revocation_authority": "revocation.standards-engine.local",
+    "revocation_authority_semantic_revision": 2,
+    "revocation_evidence": [
+      {
+        "digest": "sha256:a3582233f7212b21e3c03f07a4bd4b48c49b38d0ffb6f8513b72dde511a49866",
+        "id": "standards-engine.local-revocation",
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    ],
+    "subject_id": "sha256:dc9e95042a36fd3998b17efa9f6a07182cd1ef5c98bc99407c62fd74728ee262",
+    "subject_kind": "coverage-requirement"
+  },
+  "authorization_evidence": [
+    {
+      "content_hex": "7374616e64617264732d656e67696e652e6c6f63616c2d617574686f72697a6174696f6e",
+      "reference": {
+        "digest": "sha256:8a26f95a22013bf7a238bf6bda9b34421f4bdb2585bc7aecca9b51820644c307",
+        "id": "standards-engine.local-authorization",
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    }
+  ],
+  "claim": {
+    "auditor_provenance": "Root scoped inventory/consumer audit plus independent material and bounded consumer review by /root/independent_review, final candidate 33538b46a6e82b98dd93015fae97fa7418810ef7a9479e0827b58dc1b7688a57. Actual publication auditor and authorization are supplied by the Engine.",
+    "authorization_id": "authorization:sha256:baf840da1324d4e32e21bc3b79ddba05c6486b350aea9f166c61aa1901592bf2",
+    "conclusion": "complete",
+    "evidence": [
+      {
+        "digest": "sha256:2b28ef71141b860f0497f8379701027e4e1aaa9aabb40720e875725933d33652",
+        "id": "profiles/languages/rust/tooling.md",
+        "provider_contract": "repository-content",
+        "provider_contract_version": "1"
+      },
+      {
+        "digest": "sha256:b40eef63e3fe3fd066827cf3d1ac86a5402e8bdf27c54dea7ff1912a4cfd496e",
+        "id": "profiles/languages/typescript.md",
+        "provider_contract": "repository-content",
+        "provider_contract_version": "1"
+      },
+      {
+        "digest": "sha256:2e5e78f40c0c4863a6a9f473044b952d516df463027cd6a7c0cf0e944dd6ece1",
+        "id": "reference/recipes/tooling.md",
+        "provider_contract": "repository-content",
+        "provider_contract_version": "1"
+      }
+    ],
+    "explicit_exclusions": [],
+    "rationale": "Bounded audit of explicit owned debt disposition, retaining new/changed/unclassified findings outside accepted debt. Root and independent review inspected actual operational, normative, prompt/template, reference and runtime/fixture projections as applicable, corrected discovered missing relationships and dispositioned every affected consumer. Exact candidate related-query matches this reviewed inventory: profile.language.rust.tooling, profile.language.typescript, reference.recipes.tooling. Referenced source artifacts supply the inspected consumer contracts/fixtures or recorded restructuring mandate; the current candidate comparison and review decisions are retained by the Engine. This conclusion covers the registered subject scope and its named semantic consumers, with no exclusions inside that horizon. It does not certify unregistered owner text, unrelated prerequisite/link associations or downstream effectiveness.",
+    "requirement_id": "sha256:dc9e95042a36fd3998b17efa9f6a07182cd1ef5c98bc99407c62fd74728ee262",
+    "schema_version": 4
+  },
+  "publication": {
+    "authorization": {
+      "action": "publish-coverage",
+      "authorization_evidence": [
+        {
+          "digest": "sha256:8a26f95a22013bf7a238bf6bda9b34421f4bdb2585bc7aecca9b51820644c307",
+          "id": "standards-engine.local-authorization",
+          "provider_contract": "local-statement",
+          "provider_contract_version": "1"
+        }
+      ],
+      "issuer_semantic_revision": 2,
+      "principal": "principal.standards-engine.local",
+      "reference": {
+        "authority_digest": "sha256:304746bbbfebb06fff95f12921c458dafa6ba186392c77d3e304cc8158de7f36",
+        "capability": "standards.review.audit",
+        "id": "authorization:sha256:1d93bab02d3524c8ba7521b7f10e4d14cdd2710bf2bd55f70aca73eb197d8060",
+        "issuer": "issuer.standards-engine.local"
+      },
+      "revocation_authority": "revocation.standards-engine.local",
+      "revocation_authority_semantic_revision": 2,
+      "revocation_evidence": [
+        {
+          "digest": "sha256:a3582233f7212b21e3c03f07a4bd4b48c49b38d0ffb6f8513b72dde511a49866",
+          "id": "standards-engine.local-revocation",
+          "provider_contract": "local-statement",
+          "provider_contract_version": "1"
+        }
+      ],
+      "subject_id": "coverage-publication:sha256:58fa7ea2f5eb9d50ad8ca6d8f5e735e3e151bf064ff4811b89d89a24672c2d02",
+      "subject_kind": "coverage-publication"
+    },
+    "authorization_evidence": [
+      {
+        "content_hex": "7374616e64617264732d656e67696e652e6c6f63616c2d617574686f72697a6174696f6e",
+        "reference": {
+          "digest": "sha256:8a26f95a22013bf7a238bf6bda9b34421f4bdb2585bc7aecca9b51820644c307",
+          "id": "standards-engine.local-authorization",
+          "provider_contract": "local-statement",
+          "provider_contract_version": "1"
+        }
+      }
+    ],
+    "revocation_evidence": [
+      {
+        "content_hex": "7374616e64617264732d656e67696e652e6c6f63616c2d7265766f636174696f6e",
+        "reference": {
+          "digest": "sha256:a3582233f7212b21e3c03f07a4bd4b48c49b38d0ffb6f8513b72dde511a49866",
+          "id": "standards-engine.local-revocation",
+          "provider_contract": "local-statement",
+          "provider_contract_version": "1"
+        }
+      }
+    ]
+  },
+  "revocation_evidence": [
+    {
+      "content_hex": "7374616e64617264732d656e67696e652e6c6f63616c2d7265766f636174696f6e",
+      "reference": {
+        "digest": "sha256:a3582233f7212b21e3c03f07a4bd4b48c49b38d0ffb6f8513b72dde511a49866",
+        "id": "standards-engine.local-revocation",
+        "provider_contract": "local-statement",
+        "provider_contract_version": "1"
+      }
+    }
+  ],
+  "schema_version": 1,
+  "subject": "workflow.tooling.tool-debt"
+}

@@ -1,0 +1,26 @@
+schema_version = 2
+owner = "workflow.tooling"
+
+[[relationships]]
+source = "workflow.tooling.tool-debt"
+consumer = "profile.language.rust.tooling"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This language profile consumes selected lint/compiler debt boundaries and disposition rules while owning only its mechanisms."
+
+[[relationships]]
+source = "workflow.tooling.tool-debt"
+consumer = "profile.language.typescript"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "This language profile consumes selected lint/compiler debt boundaries and disposition rules while owning only its mechanisms."
+
+[[relationships]]
+source = "workflow.tooling.tool-debt"
+consumer = "reference.recipes.tooling"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Optional tooling recipes illustrate critical, no-new and full-audit checks under Tooling-owned debt policy."

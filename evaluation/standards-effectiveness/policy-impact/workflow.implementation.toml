@@ -1,0 +1,12 @@
+schema_version = 2
+owner = "workflow.implementation"
+
+[[relationships]]
+source = "workflow.implementation.admission"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+source_scope = { heading_path = ["Before Editing"], kind = "structured" }
+consumer_scope = { kind = "whole-artifact" }
+evidence_owner = "review:consumer"
+rationale = "The Plan Implementation Prompt projects Implementation's admission procedure for work governed by a written plan."

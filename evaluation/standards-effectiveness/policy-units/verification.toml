@@ -7,7 +7,19 @@ heading_path = ["Acceptance Is A Set Of Claims"]
 semantic_revision = 3
 
 [[policy_unit]]
+id = "workflow.verification.acceptance-paths"
+module = "workflow.verification"
+heading_path = ["Acceptance Paths And Boundaries"]
+semantic_revision = 1
+
+[[policy_unit]]
 id = "workflow.verification.evidence-oracle-boundary"
 module = "workflow.verification.oracles"
 heading_path = ["Evidence Oracle Boundaries"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.verification.failing-baseline"
+module = "workflow.verification"
+heading_path = ["Evidence Under An Existing Failing Baseline"]
 semantic_revision = 1

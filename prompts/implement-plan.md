@@ -1,53 +1,36 @@
 # Plan Implementation Prompt
 
-Implement one explicitly admitted plan operation. Supply the canonical
-repository-relative `plan.md` path and explicit `start`, `continue`, or `verify`
-operation.
+Implement the plan operation bound under [Planning](../workflows/planning.md#explicit-plan-admission).
+Identify the canonical plan path and selected operation. For an unambiguous human
+follow-up, check current repository state, plan lifecycle, and authority before
+reusing the established selection. Machine calls supply their declared arguments.
 
-Route the Concurrent Plan Integration profile only when multiple outstanding
-proposals can become stale before integration. Otherwise do not request a
-revision token, transition identity, compatibility envelope, or reconciliation
-record.
+Route actual task facts through [Router](../STANDARDS-ROUTER.md), then follow
+[Implementation](../workflows/implementation.md) and its selected
+[Verification](../workflows/verification.md). Preserve the objective and return
+the owning diagnostic when admission cannot authorize work.
 
-Consume branch or worktree facts only when the admitted plan selected material
-isolation. Follow Commit's least history-transforming integration decision; do
-not cherry-pick by default merely because implementation used another worktree.
-At terminal acceptance, check each worktree path created by this task: confirm
-its registry entry is absent after reachability-safe removal or record the
-explicit retained-resource contract. Record the exact head OID, reachability,
-commit disposition, and removed, archived, retained, or discard-authorized
-outcome. Do not substitute a repository-wide prune or object-integrity check
-for this bounded protected-OID postcondition.
+Use the Concurrent Plan Integration profile when outstanding proposals can
+become stale before integration. Use [Commit](../workflows/commit.md) for
+material branch/worktree isolation, integration, and authorized terminal cleanup.
+For each task-created worktree, retain Commit's exact-path, head-reachability,
+commit-disposition, and protected-OID evidence, or the explicit retained-resource
+contract.
 
-Route the adopting repository through
-[`STANDARDS-ROUTER.md`](../STANDARDS-ROUTER.md), then follow the canonical
-[`Implementation Workflow`](../workflows/implementation.md), which consumes the
-[`Planning Workflow`](../workflows/planning.md) admission decision. Preserve the
-requested objective and return the owning typed diagnostic when admission or
-canonical planning cannot authorize work.
+Preserve the admitted composed design and independently owned authority/version
+scopes. Use each claim's deciding oracle at its actual boundary and fidelity.
 
-Use only the admitted acceptance oracle for each claim. Do not substitute
-generated freshness for semantic correctness, local agreement for external
-conformance, in-process reconstruction for cold-process reconstruction, or a
-generic fixture failure for the intended negative diagnostic.
+Repair checks within the current slice while objective, ownership, contract,
+risk, and acceptance meaning remain valid. Replan when evidence changes those
+decisions or shows that the slice cannot deliver its outcome.
 
-Preserve every admitted authority and version scope. A declaration or
-generated artifact may reference independently owned semantics but does not
-acquire them; a co-located schema, generator, build, or release does not justify
-an umbrella version or unrelated identity invalidation.
+For a shared invariant finding, follow Planning's bounded owner-and-consumer
+inspection. Disposition the affected population and compare the repaired design
+with the admitted composition. Expand for a new semantic owner, reachable
+consumer, material risk, or public/persistence promise. Finish the inspection
+when its decision-relevant population has evidence-backed dispositions.
 
-Preserve the plan's admitted composed design. Follow Implementation's re-plan
-rule when observed composition contradicts that admission; do not layer another
-mechanism merely to preserve the prior acceptance result.
-
-Stop and re-plan when implementation exposes a repeated invariant failure,
-another affected producer or consumer, an unreviewed generated-contract
-semantic, or an unreviewed implementation-versus-dependency decision. Do not
-repair only the first occurrence. Bound the canonical owner and reachable
-consumer population, inspect sibling operations only when they share the
-authority, reachable failure, or consumer promise, and consider deletion,
-consolidation, a smaller Interface, stronger construction or type proof, and
-replacement of overlapping evidence. Expand that population only for a new
-semantic owner, reachable consumer, material risk, or public or persistence
-promise; another file inside an already bounded owner is not a new design
-scope.
+Resolve a design-invalidating external-interface or environment assumption
+through the smallest adequate real observation before expanding dependent work.
+Continue independent work whose decisions cannot change. Under an existing
+failing baseline, use evidence that reaches and distinguishes the changed result.

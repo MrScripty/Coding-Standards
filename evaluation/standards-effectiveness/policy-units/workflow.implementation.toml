@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "workflow.implementation.admission"
+module = "workflow.implementation"
+heading_path = ["Before Editing"]
+semantic_revision = 1
