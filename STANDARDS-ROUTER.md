@@ -186,6 +186,7 @@ facts. Select a detail page when its corresponding specialized decision is affec
 | Condition | Select |
 | --- | --- |
 | Maintain this standards library through its authoring interface | [Standards Authoring Workflow](workflows/standards-authoring.md) |
+| Executed behavior has less permitted authority than its host, a protected intermediary acts for a less-trusted caller, or an execution isolation promise changes | [Untrusted Execution And Delegated Authority](topics/security/untrusted-execution.md) |
 
 ## S1 Rust Library Bug-Fix Route
 

@@ -27,6 +27,14 @@ applicable policy permits it; do not rely on a hidden UI control or an earlier
 unrelated authorization check. Test forbidden actions, cross-owner and
 cross-tenant access where relevant, and revoked or expired authority.
 
+## Untrusted Execution And Delegated Authority
+
+When executed behavior has less permitted authority than its host, a component
+exercises protected authority for a less-trusted caller, or an execution
+isolation guarantee changes, follow [Untrusted Execution And Delegated
+Authority](security/untrusted-execution.md). Ordinary trusted subprocess use
+alone does not select that detail.
+
 ## Sensitive Data And Credentials
 
 Identify sensitive fields and the owners allowed to receive them. Minimize

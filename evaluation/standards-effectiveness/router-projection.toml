@@ -51,10 +51,10 @@ aliases = []
 id = "routing.details"
 meaning = "Specialized decisions affected by the task; choose from the conditional detail table after the broad concerns."
 nullable = false
-prompt = "Does the task involve schemas, protocol adapters, compatibility, replay, advanced test oracles, GUI smoke, target evidence, binding lifecycle, or release operations? Does the task maintain this standards library through its authoring interface?"
-semantic_revision = 2
+prompt = "Does the task involve schemas, protocol adapters, compatibility, replay, advanced test oracles, GUI smoke, target evidence, binding lifecycle, or release operations? Does the task maintain this standards library through its authoring interface? Does executed behavior have less permitted authority than its host, or does a protected intermediary act for a less-trusted caller, or does an execution isolation promise change?"
+semantic_revision = 3
 type = "enum-set"
-values = ["profile.language.rust.binding-lifecycle", "topic.architecture.replay", "topic.code-design", "topic.contracts.evolution", "topic.contracts.protocols", "topic.contracts.schemas", "workflow.release.operations", "workflow.standards-authoring", "workflow.verification.gui", "workflow.verification.oracles", "workflow.verification.platforms"]
+values = ["profile.language.rust.binding-lifecycle", "topic.architecture.replay", "topic.code-design", "topic.contracts.evolution", "topic.contracts.protocols", "topic.contracts.schemas", "workflow.release.operations", "workflow.standards-authoring", "workflow.verification.gui", "workflow.verification.oracles", "workflow.verification.platforms", "topic.security.untrusted-execution"]
 context_kind = "task-route"
 answer_contract = "fact-value.v1"
 evidence_contract = "evidence-reference.v1"
@@ -185,6 +185,11 @@ when = { expressions = [{ fact = "routing.details", operator = "contains", value
 id = "route.detail.topic.contracts.schemas"
 target = "topic.contracts.schemas"
 when = { expressions = [{ fact = "routing.details", operator = "contains", value = "topic.contracts.schemas" }, { fact = "routing.boundaries", operator = "contains", value = "generated-contract" }], operator = "any" }
+
+[[rules]]
+id = "route.detail.topic.security.untrusted-execution"
+target = "topic.security.untrusted-execution"
+when = { fact = "routing.details", operator = "contains", value = "topic.security.untrusted-execution" }
 
 [[rules]]
 id = "route.detail.workflow.release.operations"

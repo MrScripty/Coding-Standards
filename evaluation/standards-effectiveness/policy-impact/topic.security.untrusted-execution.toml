@@ -1,0 +1,10 @@
+schema_version = 2
+owner = "topic.security.untrusted-execution"
+
+[[relationships]]
+source = "topic.security.untrusted-execution.authority"
+consumer = "topic.security"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Publishes the conditional execution-authority selection and must preserve its bounded applicability."

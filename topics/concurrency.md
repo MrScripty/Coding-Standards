@@ -80,6 +80,26 @@ Cancellation must propagate through all owned work that remains part of the
 operation. A boundary may translate cancellation into another concrete
 mechanism, but it must preserve the cancellation decision and typed outcome.
 
+### Cessation Of Effects Before Resource Transition
+
+When release, reuse, publication, or reassignment depends on prior activity
+having ended, establish that every activity capable of violating the
+transition's invariant has ended or lost that capability. Include relevant
+child work, callbacks, queued effects, and effects already in flight.
+
+A cancellation acknowledgment, connection closure, or supervisor exit is
+sufficient only when its contract establishes that condition. Select proof
+from the owned invariant: joining work, draining delivery, revoking authority,
+or enforcing a fencing generation may satisfy different contracts. Establish
+that any revocation or fence covers the relevant pending effects and remains
+effective through the transition.
+
+Preserve the operation's explicit incomplete or unknown outcome until the
+condition is established. Retain ownership of unresolved work and resources;
+a safe resource transition does not by itself discharge other shutdown or
+cleanup obligations. This rule does not require process termination when
+another mechanism proves the required cessation of effects.
+
 ## Isolate Verification Resources
 
 Verification that can overlap must give each case exclusive ownership of its

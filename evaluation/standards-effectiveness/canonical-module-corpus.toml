@@ -58,6 +58,7 @@ members = [
   "topics/performance.md",
   "topics/resilience.md",
   "topics/security.md",
+  "topics/security/untrusted-execution.md",
   "workflows/build.md",
   "workflows/commit.md",
   "workflows/development-proportionality.md",

@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "topic.concurrency.cessation-of-effects"
+module = "topic.concurrency"
+heading_path = ["Own Work, Failure, And Cancellation", "Cessation Of Effects Before Resource Transition"]
+semantic_revision = 1

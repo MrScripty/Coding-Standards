@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "topic.security.untrusted-execution.authority"
+module = "topic.security.untrusted-execution"
+heading_path = ["Effective Authority Across Execution"]
+semantic_revision = 1

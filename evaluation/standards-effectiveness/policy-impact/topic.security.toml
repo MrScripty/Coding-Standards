@@ -2,24 +2,16 @@ schema_version = 2
 owner = "topic.security"
 
 [[relationships]]
+source = "topic.security.untrusted-execution-selection"
+consumer = "router"
+relation = "router-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Publishes the conditional execution-authority selection and must preserve its bounded applicability."
+
+[[relationships]]
 source = "topic.security.filesystem-containment"
 consumer = "tools/repository_git/repository_git/repository.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "topic.security.filesystem-containment"
-consumer = "tools/standards_snapshots/standards_snapshots/store.py"
-relation = "implementation-projection"
-applicability = { operator = "always" }
-evidence_owner = "review:consumer"
-rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer. Review binds this consumer and relationship; it requires substantive evidence before certification."
-
-[[relationships]]
-source = "topic.security.filesystem-containment"
-consumer = "tools/standards_snapshots/standards_snapshots/module.py"
 relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
@@ -35,8 +27,16 @@ rationale = "The immutable Authority boundary must preserve the selected filesys
 
 [[relationships]]
 source = "topic.security.filesystem-containment"
-consumer = "tools/standards_snapshots/tests/test_store.py"
-relation = "fixture-projection"
+consumer = "tools/standards_snapshots/standards_snapshots/module.py"
+relation = "implementation-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "topic.security.filesystem-containment"
+consumer = "tools/standards_snapshots/standards_snapshots/store.py"
+relation = "implementation-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer. Review binds this consumer and relationship; it requires substantive evidence before certification."
@@ -44,6 +44,14 @@ rationale = "The immutable Authority boundary must preserve the selected filesys
 [[relationships]]
 source = "topic.security.filesystem-containment"
 consumer = "tools/standards_snapshots/tests/test_module.py"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The immutable Authority boundary must preserve the selected filesystem path or containment contract for this consumer. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "topic.security.filesystem-containment"
+consumer = "tools/standards_snapshots/tests/test_store.py"
 relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"

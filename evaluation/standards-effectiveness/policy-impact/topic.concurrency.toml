@@ -1,0 +1,58 @@
+schema_version = 2
+owner = "topic.concurrency"
+
+[[relationships]]
+source = "topic.concurrency.cessation-of-effects"
+consumer = "profile.boundary.interop"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Consumes owned-work lifetime and cancellation guarantees. Review cessation of relevant effects while preserving supervised incomplete work and independent cleanup/shutdown duties."
+
+[[relationships]]
+source = "topic.concurrency.cessation-of-effects"
+consumer = "profile.framework.godot"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Consumes owned-work lifetime and cancellation guarantees. Review cessation of relevant effects while preserving supervised incomplete work and independent cleanup/shutdown duties."
+
+[[relationships]]
+source = "topic.concurrency.cessation-of-effects"
+consumer = "profile.language.csharp.async"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Consumes owned-work lifetime and cancellation guarantees. Review cessation of relevant effects while preserving supervised incomplete work and independent cleanup/shutdown duties."
+
+[[relationships]]
+source = "topic.concurrency.cessation-of-effects"
+consumer = "profile.language.rust.async"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Consumes owned-work lifetime and cancellation guarantees. Review cessation of relevant effects while preserving supervised incomplete work and independent cleanup/shutdown duties."
+
+[[relationships]]
+source = "topic.concurrency.cessation-of-effects"
+consumer = "profile.language.typescript.async"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Consumes owned-work lifetime and cancellation guarantees. Review cessation of relevant effects while preserving supervised incomplete work and independent cleanup/shutdown duties."
+
+[[relationships]]
+source = "topic.concurrency.cessation-of-effects"
+consumer = "topic.security"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Consumes owned-work lifetime and cancellation guarantees. Review cessation of relevant effects while preserving supervised incomplete work and independent cleanup/shutdown duties."
+
+[[relationships]]
+source = "topic.concurrency.cessation-of-effects"
+consumer = "topic.security.untrusted-execution"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Consumes owned-work lifetime and cancellation guarantees. Review cessation of relevant effects while preserving supervised incomplete work and independent cleanup/shutdown duties."

@@ -611,7 +611,7 @@
       ]
     },
     {
-      "digest": "sha256:da74e345b3e6ae270dbef2f6c8d9d3d75ec0cbb2b200f0bf9beaf12e17493255",
+      "digest": "sha256:9102a95de0f0682740a11e576463ed65196e38c57830d36e6a63084c57816127",
       "path": "STANDARDS-ROUTER.md",
       "state": "present",
       "uses": [
@@ -899,7 +899,7 @@
       ]
     },
     {
-      "digest": "sha256:0c84f21333f387d2f99ffd0ad6745f12e603cbe89b718bd3729f7385a8fd2d21",
+      "digest": "sha256:3994f06d9d5eab101f213f644be07a30b021295f859158719b799b1447a52444",
       "path": "evaluation/standards-effectiveness/canonical-module-corpus.toml",
       "state": "present",
       "uses": [
@@ -1761,7 +1761,7 @@
       ]
     },
     {
-      "digest": "sha256:e8e291308187f1dbb764e7853a12e2d4e37404d9204223eb6cc06cf0f0d6a5f8",
+      "digest": "sha256:9a24d7b169b258e586f9f2c1e0126174c1c751991e025f9836c893f32cad5248",
       "path": "evaluation/standards-effectiveness/policy-impact-registry.toml",
       "state": "present",
       "uses": [
@@ -1845,6 +1845,18 @@
       ]
     },
     {
+      "digest": "sha256:9843fd9f910c93351ac154999b95cf836349026e4a31c6403d4ee19b5bb58357",
+      "path": "evaluation/standards-effectiveness/policy-impact/topic.concurrency.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
       "digest": "sha256:aa0bf335515960965a525ba8185bedb17ee2f878d5f382ce3bd0ace953245f44",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.contracts.schemas.toml",
       "state": "present",
@@ -1893,8 +1905,20 @@
       ]
     },
     {
-      "digest": "sha256:d66e72f730c1e518cbebd0c99b7e3e68430b264a60fe1fa0b303109287bed9a7",
+      "digest": "sha256:18302a9be0ef6dfe1ab4c85fe605a74b5b6c968bf9b257dd4b75020d31f43360",
       "path": "evaluation/standards-effectiveness/policy-impact/topic.security.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:9ca42225f69323eb37b970908be328ee29fddb537189e0532d61dd38bf40bcc1",
+      "path": "evaluation/standards-effectiveness/policy-impact/topic.security.untrusted-execution.toml",
       "state": "present",
       "uses": [
         {
@@ -2125,7 +2149,7 @@
       ]
     },
     {
-      "digest": "sha256:4c5c333069d59c89112dc1ec789f78e78810137747e979e052378afe1193fb64",
+      "digest": "sha256:b3eb06102a655b0cc5b1d49d564ad9acdc589d37b872d29f4193451e55fb4e77",
       "path": "evaluation/standards-effectiveness/policy-units/registry.toml",
       "state": "present",
       "uses": [
@@ -2159,8 +2183,42 @@
       ]
     },
     {
-      "digest": "sha256:e97c1d0c058e328ded3a76293e7a41e75cfe1e5f05647d425308c66bdb0965ca",
+      "digest": "sha256:a4f390ebe9350abfc8e16d8f0f1d39ceb0d7e07c8e951b0a0875c1d40b402cc2",
       "path": "evaluation/standards-effectiveness/policy-units/security.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:ec6ed46c5f3970809192953a3ab304558d4f47ee90dca5701b2e4b36e4c33f3d",
+      "path": "evaluation/standards-effectiveness/policy-units/topic.concurrency.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:ea6de9c1ddd07eb1e6b12ddb8fdf06cb0f9d57eed21d3902e6aa65b683e1db1e",
+      "path": "evaluation/standards-effectiveness/policy-units/topic.security.untrusted-execution.toml",
       "state": "present",
       "uses": [
         {
@@ -2244,7 +2302,7 @@
       ]
     },
     {
-      "digest": "sha256:71e58a1e97ea577897824d27fe94bb8681203db2bf21b808a5504796831d8dac",
+      "digest": "sha256:0df9e1d359d5b502e9a47acd8259775edf86637bc471a255d960161ecc40a9e2",
       "path": "evaluation/standards-effectiveness/router-projection.toml",
       "state": "present",
       "uses": [
@@ -9401,7 +9459,7 @@
       ]
     },
     {
-      "digest": "sha256:5b82d0d8ff127750d3c1501ba5fe1e6afb5cb3a3eb55fcfc25040b811d4cf313",
+      "digest": "sha256:e0cd8f80f95c0acc8d6c246e871f1d674861d8019a906137127aa51ad4065e0c",
       "path": "topics/concurrency.md",
       "state": "present",
       "uses": [
@@ -11173,7 +11231,7 @@
       ]
     },
     {
-      "digest": "sha256:6623902d266d7b831ebca661721daea4e238a5bf5b3ab5a49ec9746e3a957f05",
+      "digest": "sha256:1ae23154bf405dd3722819189ae4bd1859b7777aecbf0b5951b532c6aece16e7",
       "path": "topics/security.md",
       "state": "present",
       "uses": [
@@ -11396,6 +11454,58 @@
           "check": "launcher-route-destinations",
           "role": "target",
           "suite": "verification-ownership"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:c743d6232b20a22e19f1a34cb834a6fd48c3de483289893f42cec5580feb0c4b",
+      "path": "topics/security/untrusted-execution.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "routing-closure",
+          "role": "canonical-module",
+          "suite": "development-proportionality"
+        },
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "root-router-routes",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        },
+        {
+          "check": "router-links",
+          "role": "link-target",
+          "suite": "router-legacy-route-closure"
+        },
+        {
+          "check": "local-links",
+          "role": "link-target",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "canonical-module",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "canonical-module",
+          "suite": "standards-recovery-routing"
         }
       ]
     },
@@ -13838,7 +13948,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:4933811bd067fbd7c0519e683273d2cb54fec4f21c316198c5aacd8baf83bc93",
+    "digest": "sha256:e5b6c59d68560c738ccdb778b3a76441c0f28db4c1705ec83c0cef03e19cf534",
     "uses": [
       {
         "check": "python-package-contract",

@@ -5,3 +5,9 @@ id = "topic.security.filesystem-containment"
 module = "topic.security"
 heading_path = ["Filesystem Containment"]
 semantic_revision = 1
+
+[[policy_unit]]
+id = "topic.security.untrusted-execution-selection"
+module = "topic.security"
+heading_path = ["Untrusted Execution And Delegated Authority"]
+semantic_revision = 1

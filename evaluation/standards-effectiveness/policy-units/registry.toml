@@ -10,6 +10,8 @@ sources = [
   "evaluation/standards-effectiveness/policy-units/planning.toml",
   "evaluation/standards-effectiveness/policy-units/router.toml",
   "evaluation/standards-effectiveness/policy-units/security.toml",
+  "evaluation/standards-effectiveness/policy-units/topic.concurrency.toml",
+  "evaluation/standards-effectiveness/policy-units/topic.security.untrusted-execution.toml",
   "evaluation/standards-effectiveness/policy-units/verification.toml",
   "evaluation/standards-effectiveness/policy-units/workflow.implementation.toml",
   "evaluation/standards-effectiveness/policy-units/workflow.standards-authoring.toml",
