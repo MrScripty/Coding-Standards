@@ -5,18 +5,18 @@ source = "STANDARDS-ROUTER.md"
 base_modules = ["router"]
 
 [[facts]]
-id = "routing.activities"
-semantic_revision = 2
-type = "enum-set"
-nullable = false
-values = ["implementation", "verification", "uncertainty-reduction", "planning", "commit", "documentation", "build", "tooling", "release"]
 aliases = []
-meaning = "The development activities performed by the requested work."
+id = "routing.activities"
+meaning = "The development activities performed by the requested work. The uncertainty-reduction activity includes additional investigation, evidence cycles, review, or re-planning that could delay a sufficient implementation or acceptance decision."
+nullable = false
+prompt = "Which development activities are part of the requested work? Include uncertainty-reduction when additional investigation, evidence, review, or re-planning could delay a sufficient implementation or acceptance decision."
+semantic_revision = 3
+type = "enum-set"
+values = ["build", "commit", "documentation", "implementation", "planning", "release", "tooling", "uncertainty-reduction", "verification"]
 context_kind = "task-route"
 answer_contract = "fact-value.v1"
 evidence_contract = "evidence-reference.v1"
 authorization_capability = "standards.analyze"
-prompt = "Which development activities are part of the requested work?"
 
 [[facts]]
 id = "routing.applications"

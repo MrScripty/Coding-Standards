@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "workflow.development-proportionality.stopping-rules"
+module = "workflow.development-proportionality"
+heading_path = ["Boundary And Stopping Rules"]
+semantic_revision = 1

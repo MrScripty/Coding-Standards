@@ -5,8 +5,8 @@
 - ID: `workflow.development-proportionality`
 - Role: `workflow`
 - Level: `MUST`
-- Applies when: Development work is being planned, or an additional prototype, design investigation, evidence cycle, review, or re-plan could delay implementation.
-- Does not apply when: Work is read-only and makes neither an implementation decision nor a development-sequencing decision.
+- Applies when: Development work is being planned, or an additional investigation, evidence cycle, review, or re-plan could delay a sufficient implementation or acceptance decision.
+- Does not apply when: Work is read-only and makes neither an implementation, acceptance, nor development-sequencing decision.
 - Requires: `core`, `workflow.implementation`, `workflow.verification`
 - Specializes: `none`
 - Verification: Development-decision fixtures and metadata-route closure.
@@ -24,9 +24,15 @@ cost within the plausible rework or consequence it can prevent. Quantify more
 closely when the measurement could change the decision and costs less than the
 reversible action.
 
-This workflow owns the next development action. Architecture owns design admission;
-Verification owns claims and evidence value; Planning owns sequencing and plan
-maintenance. Preserve the user's explicit design choices and admitted contract.
+This workflow owns whether the next development or evidence-gathering action is
+proportionate. Architecture owns design admission; Verification owns claims and
+evidence value; Planning owns sequencing and plan maintenance. Preserve the
+user's explicit design choices and admitted contract.
+
+For implementation work, use Development Decision and Handoff below. For
+acceptance or review work, use Investigation Admission and Boundary And Stopping
+Rules to decide whether additional work is warranted, then return to the
+applicable Verification or project-owned acceptance procedure.
 
 ## Development Decision
 
@@ -65,13 +71,17 @@ contradictory facts `invalid` under the applicable diagnostic contract.
 
 ## Investigation Admission
 
-Before an investigation delays implementation, name its uncertainty, affected
-decision, plausible consequence prevented, cost comparison with implementation,
-least costly adequate method, and stopping condition.
+Before an investigation delays implementation or acceptance, name its
+uncertainty, affected decision, plausible consequence prevented, cost comparison
+with proceeding on sufficient implementation or evidence, least costly adequate
+method, and stopping condition.
 
 Absent that basis, continue reversible implementation of an already conforming
-design. End the investigation at its stopping condition and return to the
-Development Decision. Evaluate adjacent uncertainty on its own decision relevance.
+design, or proceed through the applicable acceptance procedure using sufficient
+existing evidence. End the investigation at its stopping condition and return
+to Development Decision for implementation work or the applicable acceptance
+procedure for acceptance work. Evaluate adjacent uncertainty on its own
+decision relevance.
 
 ## Boundary And Stopping Rules
 
@@ -81,7 +91,9 @@ reversibility or consequence assessment.
 
 Keep review within the admitted decision boundary. After required contract and
 standards checks pass, require further evidence only for a newly established
-decision-relevant claim or risk.
+decision-relevant claim or risk. Apply these stopping rules to acceptance and
+review work as well as implementation; preserve every required claim and owned
+gate.
 
 ## Handoff
 

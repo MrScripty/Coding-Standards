@@ -21,7 +21,10 @@ Before every commit:
 3. review the staged diff, generated-file effects, and sensitive-file risk;
 4. confirm credentials, secrets, personal configuration, and unintended binary
    artifacts are absent;
-5. run the focused and affected verification selected for the slice;
+5. confirm that the selected focused and affected verification remains valid
+   for the staged slice; run or rerun checks when relevant subject, inputs,
+   environment, or gate requirements changed, or when an owned gate requires
+   fresh execution;
 6. update active plan, issue, or ledger state only when current authority,
    lifecycle, blockers, acceptance, next-slice state, an accepted-slice
    boundary, a material deviation, or a material verification result changes;
@@ -30,7 +33,6 @@ Before every commit:
 
 Per-commit review concerns the index and the current slice. Do not require a
 full unpushed-history audit before every atomic commit.
-
 ## Branch And Worktree Applicability
 
 Do not require a branch or worktree for every change. Use one when it provides

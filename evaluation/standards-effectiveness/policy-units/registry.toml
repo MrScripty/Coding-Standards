@@ -14,6 +14,8 @@ sources = [
   "evaluation/standards-effectiveness/policy-units/topic.concurrency.toml",
   "evaluation/standards-effectiveness/policy-units/topic.security.untrusted-execution.toml",
   "evaluation/standards-effectiveness/policy-units/verification.toml",
+  "evaluation/standards-effectiveness/policy-units/workflow.development-proportionality.toml",
+  "evaluation/standards-effectiveness/policy-units/workflow.documentation.toml",
   "evaluation/standards-effectiveness/policy-units/workflow.implementation.toml",
   "evaluation/standards-effectiveness/policy-units/workflow.planning.discovery.toml",
   "evaluation/standards-effectiveness/policy-units/workflow.standards-authoring.toml",

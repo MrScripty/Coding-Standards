@@ -10,12 +10,30 @@ evidence_owner = "review:consumer"
 rationale = "Routing fixtures exercise predicates, explicit details, exclusions and prerequisite closure."
 
 [[relationships]]
+source = "router.workflow-selection"
+consumer = "consumer.analysis.routing-tests"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+consumer_scope = { kind = "whole-artifact" }
+evidence_owner = "review:consumer"
+rationale = "Routing fixtures directly exercise the uncertainty-reduction activity rule and workflow selection."
+
+[[relationships]]
 source = "router.selection-procedure"
 consumer = "consumer.engine.navigation-tests"
 relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "Navigation tests exercise task selection, unresolved facts and prerequisite closure."
+
+[[relationships]]
+source = "router.workflow-selection"
+consumer = "consumer.engine.navigation-tests"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+consumer_scope = { kind = "whole-artifact" }
+evidence_owner = "review:consumer"
+rationale = "Navigation fixtures directly exercise Development Proportionality selection and required ordering."
 
 [[relationships]]
 source = "router.selection-procedure"

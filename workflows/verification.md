@@ -236,8 +236,10 @@ Design each focused check around one coherent observable claim or invariant.
 Use the assertions needed to prove it. Separate claims when their setup,
 diagnosis, ownership, or lifecycle differs.
 
-Make setup, action, observation, and cleanup reviewable. Choose a structure
-suited to the claim and add explicit phases or comments when needed for clarity.
+Make setup, action, observation, and cleanup reviewable, including the
+verification client's applicable lifecycle, dependency, and environment
+preconditions. Choose a structure suited to the claim and add explicit phases
+or comments when needed for clarity.
 
 Select real implementations or controlled substitutes from the boundary being
 proved. A substitute is adequate when its modeled contract is the intended proof
@@ -327,6 +329,9 @@ Record enough durable context to understand, reproduce, and review evidence
 when the check, code, fixture, command, result, and canonical contract cannot
 supply it. Keep defect origin, invariant reasoning, fixture authority, environment,
 and result interpretation with their owning evidence or linked artifact.
+Bind each result or review finding to the material subject actually observed.
+Obtain its identity from the same stable observation, or detect intervening
+change before attributing the result.
 
 Classify contradictory metric/scope/authority/threshold/exclusion/evidence as
 `invalid`, unsupported instrumentation as `unsupported`, and missing material

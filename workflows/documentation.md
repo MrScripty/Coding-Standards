@@ -26,8 +26,8 @@ that source code and tests do not own clearly enough:
 
 Directory count, file count, and the presence of a `src/` path are not
 documentation requirements. A local implementation change that preserves all
-documented decisions and contracts requires tests and code review, not an
-unrelated README or ADR edit.
+documented decisions and contracts follows applicable verification and
+change-review requirements; it does not require an unrelated README or ADR edit.
 
 ## Documentation Profiles
 

@@ -55,7 +55,7 @@ stated conditions match the task.
 | --- | --- |
 | Change code or standards | [Implementation](workflows/implementation.md) |
 | Prove a behavior, contract, or artifact | [Verification](workflows/verification.md) |
-| Investigation or evidence work may delay a sufficient implementation | [Development Proportionality](workflows/development-proportionality.md) |
+| An additional investigation, evidence cycle, review, or re-plan could delay a sufficient implementation or acceptance decision | [Development Proportionality Workflow](workflows/development-proportionality.md) |
 | Resolve material uncertainty about intended behavior or design, or coordinate material sequencing, migration, rollout, risk, or acceptance complexity | [Planning Workflow](workflows/planning.md) |
 | Create commits or manage history, branches, or worktrees | [Commit](workflows/commit.md) |
 | Change durable responsibility, design, contract, or operational knowledge | [Documentation](workflows/documentation.md) |

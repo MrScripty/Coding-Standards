@@ -13,6 +13,12 @@ heading_path = ["Acceptance Paths And Boundaries"]
 semantic_revision = 1
 
 [[policy_unit]]
+id = "workflow.verification.evidence-context"
+module = "workflow.verification"
+heading_path = ["Coverage And Durable Evidence Records"]
+semantic_revision = 1
+
+[[policy_unit]]
 id = "workflow.verification.evidence-oracle-boundary"
 module = "workflow.verification.oracles"
 heading_path = ["Evidence Oracle Boundaries"]
@@ -22,4 +28,10 @@ semantic_revision = 1
 id = "workflow.verification.failing-baseline"
 module = "workflow.verification"
 heading_path = ["Evidence Under An Existing Failing Baseline"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.verification.test-design"
+module = "workflow.verification"
+heading_path = ["Test Design"]
 semantic_revision = 1

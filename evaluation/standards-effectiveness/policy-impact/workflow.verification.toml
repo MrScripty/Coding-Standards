@@ -130,6 +130,15 @@ evidence_owner = "review:consumer"
 rationale = "Security may need review when adversarial reachability justifies validation or defense in depth. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
+source = "workflow.verification.evidence-context"
+consumer = "workflow.commit"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Per-Commit Boundary"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Staged-slice evidence validity relies on attributing evidence to the material subject actually inspected."
+
+[[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "workflow.documentation"
 relation = "normative-consumer"
@@ -194,12 +203,30 @@ evidence_owner = "review:consumer"
 rationale = "Tool debt decisions consume Verification's changed-behavior observability rule."
 
 [[relationships]]
+source = "workflow.verification.test-design"
+consumer = "workflow.tooling"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { kind = "whole-artifact" }
+evidence_owner = "review:consumer"
+rationale = "Verification automation, CI scheduling and retained tool evidence must respect the verification client's actual lifecycle, dependency and environment contracts."
+
+[[relationships]]
 source = "workflow.verification.acceptance-claims"
 consumer = "workflow.verification.gui"
 relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "This owner explicitly consumes Verification-owned claim sufficiency, applicable independent evidence dimensions, or the rule that evidence proves only its selected property."
+
+[[relationships]]
+source = "workflow.verification.test-design"
+consumer = "workflow.verification.gui"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["GUI Smoke Evidence"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "GUI smoke procedures are verification clients with explicit startup, environment and bounded process-lifecycle requirements."
 
 [[relationships]]
 source = "workflow.verification.acceptance-claims"

@@ -1,19 +1,19 @@
 schema_version = 1
 
 [[policy_unit]]
+id = "workflow.commit.commit-message"
+module = "workflow.commit"
+heading_path = ["Commit Message"]
+semantic_revision = 1
+
+[[policy_unit]]
 id = "workflow.commit.per-commit-boundary"
 module = "workflow.commit"
 heading_path = ["Per-Commit Boundary"]
-semantic_revision = 1
+semantic_revision = 2
 
 [[policy_unit]]
 id = "workflow.commit.worktree-lifecycle"
 module = "workflow.commit"
 heading_path = ["Worktree Lifecycle And Cleanup Authority"]
-semantic_revision = 1
-
-[[policy_unit]]
-id = "workflow.commit.commit-message"
-module = "workflow.commit"
-heading_path = ["Commit Message"]
 semantic_revision = 1
