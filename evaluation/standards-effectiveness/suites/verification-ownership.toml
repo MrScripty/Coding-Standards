@@ -19,7 +19,7 @@ required = ["STANDARDS-ROUTER.md", "profiles/applications/frontend.md", "profile
 id = "tooling-route-and-legacy-removal-destinations"
 type = "markdown_targets"
 path = "TOOLING-STANDARDS.md"
-required = ["FRONTEND-STANDARDS.md", "profiles/languages/typescript.md", "reference/recipes/documentation.md", "reference/recipes/implementation.md", "reference/recipes/tooling.md", "topics/dependencies.md", "workflows/commit.md", "workflows/documentation.md", "workflows/implementation.md", "workflows/tooling.md", "workflows/verification.md"]
+required = ["profiles/applications/frontend.md", "profiles/languages/typescript.md", "reference/recipes/documentation.md", "reference/recipes/implementation.md", "reference/recipes/tooling.md", "topics/dependencies.md", "workflows/commit.md", "workflows/documentation.md", "workflows/implementation.md", "workflows/tooling.md", "workflows/verification.md"]
 
 [[checks]]
 id = "launcher-route-destinations"

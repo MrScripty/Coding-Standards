@@ -2,7 +2,7 @@
   "contract": "standards-metadata:suite-input-manifest:v1",
   "files": [
     {
-      "digest": "sha256:0f77786d0757e34f0ef6a1e27de5079632c4c35ebbe378bf61c6348b99203cda",
+      "digest": "sha256:ccbee12ecf276efc4e8d54b6ca839daadb1b4f94a034efa0b745d5733e999e13",
       "path": "ARCHITECTURE-PATTERNS.md",
       "state": "present",
       "uses": [
@@ -479,26 +479,11 @@
           "check": "source-links",
           "role": "markdown",
           "suite": "source-index-closures"
-        },
-        {
-          "check": "former-source-destinations",
-          "role": "target",
-          "suite": "tooling-ci-workflow-reference"
-        },
-        {
-          "check": "former-source-destinations",
-          "role": "target",
-          "suite": "tooling-reference-recipes"
-        },
-        {
-          "check": "tooling-route-and-legacy-removal-destinations",
-          "role": "target",
-          "suite": "verification-ownership"
         }
       ]
     },
     {
-      "digest": "sha256:5bc440a85dd767ca27c15de31f4bd501b120be2f10811dd3dadbbfe5193b44ad",
+      "digest": "sha256:60d891b09fce3991b50e58957ef7c0b324888584eca29e3fb00b15250df4b48b",
       "path": "INTEROP-STANDARDS.md",
       "state": "present",
       "uses": [
@@ -522,7 +507,7 @@
       ]
     },
     {
-      "digest": "sha256:a92b83759e6a79fe88ad87a6d5a63f0514068ca8d14cca68cd4f62673955d9e6",
+      "digest": "sha256:df83b005827136a252144ec27e3eaed71b59e67b98fb03606910549209fef629",
       "path": "LAUNCHER-STANDARDS.md",
       "state": "present",
       "uses": [
@@ -801,11 +786,6 @@
       "state": "present",
       "uses": [
         {
-          "check": "rust-binding-contract-authority-destinations",
-          "role": "target",
-          "suite": "contract-ownership"
-        },
-        {
           "check": "testing-route-and-legacy-removal-destinations",
           "role": "markdown",
           "suite": "verification-ownership"
@@ -813,7 +793,7 @@
       ]
     },
     {
-      "digest": "sha256:6fb9b4e2d1d7d6eb840b1acb1a6ce1d0ce1c5d03a89b7072479b8455b29c8fb1",
+      "digest": "sha256:29a4ba37a6edbb133cb9bf4673fa2998554db6383806bf435d38495cef118ee9",
       "path": "TOOLING-STANDARDS.md",
       "state": "present",
       "uses": [
@@ -2220,7 +2200,7 @@
       ]
     },
     {
-      "digest": "sha256:437dee63cab2f83b675b99a33cfc51283198801d78982f3cda1ff9fbf984020f",
+      "digest": "sha256:8152e0dd7fc5b3997f9c1f7be58a29ec19cac0e92337d55757b62768f3319f3e",
       "path": "evaluation/standards-effectiveness/suites/contract-ownership.toml",
       "state": "present",
       "uses": [
@@ -2988,7 +2968,7 @@
       ]
     },
     {
-      "digest": "sha256:228e50769d6d17a9ccb82e848ea2289ebddfefc2a0201d8e98c42e3be6a42ef7",
+      "digest": "sha256:aa91b543cbc1403ce7778c5f73f50456f05ed894b9c26044780f2480bbdcc2c6",
       "path": "evaluation/standards-effectiveness/suites/tooling-ci-workflow-reference.toml",
       "state": "present",
       "uses": [
@@ -3000,7 +2980,7 @@
       ]
     },
     {
-      "digest": "sha256:636858501210ff9dead65a08a4dd573b2002f1313a345923f024ed4dc7348113",
+      "digest": "sha256:e797a4f7c882d2a8cbdcf29d3353221d4511e0cc2909cace73000575a3fe1b9f",
       "path": "evaluation/standards-effectiveness/suites/tooling-reference-recipes.toml",
       "state": "present",
       "uses": [
@@ -3024,7 +3004,7 @@
       ]
     },
     {
-      "digest": "sha256:ce14c04bd0f8edfb47241cbd8c911ada15b66ce4671a8fce4cbd1b9bd0029779",
+      "digest": "sha256:85d4f162dccaef2a01ae20208743db015c968fcf1dc03f8b1b8d54f6e0ccc619",
       "path": "evaluation/standards-effectiveness/suites/verification-ownership.toml",
       "state": "present",
       "uses": [
@@ -3077,11 +3057,6 @@
       "state": "present",
       "uses": [
         {
-          "check": "rust-binding-contract-authority-destinations",
-          "role": "target",
-          "suite": "contract-ownership"
-        },
-        {
           "check": "exact-migration-index-destinations",
           "role": "markdown",
           "suite": "rust-target-configuration"
@@ -3101,19 +3076,7 @@
       ]
     },
     {
-      "digest": "sha256:033ea355aee6c1d4207a603fe9f1705df538c9d2f3cedc26e0145ab4d9fbe6db",
-      "path": "languages/rust/RUST-INTEROP-STANDARDS.md",
-      "state": "present",
-      "uses": [
-        {
-          "check": "rust-binding-contract-authority-destinations",
-          "role": "target",
-          "suite": "contract-ownership"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:2329941a414642d75dde551635f919647ef374c8b6301759cf0791b999ee5827",
+      "digest": "sha256:352ce949773d86cb756632b84a41a8047a5c7cf240cd576e1631e337951c2c93",
       "path": "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md",
       "state": "present",
       "uses": [
@@ -3232,7 +3195,22 @@
           "suite": "standards-recovery-routing"
         },
         {
+          "check": "former-source-destinations",
+          "role": "target",
+          "suite": "tooling-ci-workflow-reference"
+        },
+        {
+          "check": "former-source-destinations",
+          "role": "target",
+          "suite": "tooling-reference-recipes"
+        },
+        {
           "check": "testing-route-and-legacy-removal-destinations",
+          "role": "target",
+          "suite": "verification-ownership"
+        },
+        {
+          "check": "tooling-route-and-legacy-removal-destinations",
           "role": "target",
           "suite": "verification-ownership"
         }
@@ -4499,6 +4477,11 @@
       "path": "profiles/languages/rust/cross-platform.md",
       "state": "present",
       "uses": [
+        {
+          "check": "rust-binding-contract-authority-destinations",
+          "role": "target",
+          "suite": "contract-ownership"
+        },
         {
           "check": "local-links",
           "role": "link-target",
@@ -11853,6 +11836,11 @@
           "suite": "contract-ownership"
         },
         {
+          "check": "rust-binding-contract-authority-destinations",
+          "role": "target",
+          "suite": "contract-ownership"
+        },
+        {
           "check": "metadata-closure",
           "role": "metadata",
           "suite": "cross-language-contract"
@@ -13208,7 +13196,7 @@
   "schema_version": 1,
   "suites": [
     {
-      "digest": "sha256:228e50769d6d17a9ccb82e848ea2289ebddfefc2a0201d8e98c42e3be6a42ef7",
+      "digest": "sha256:aa91b543cbc1403ce7778c5f73f50456f05ed894b9c26044780f2480bbdcc2c6",
       "id": "tooling-ci-workflow-reference",
       "path": "evaluation/standards-effectiveness/suites/tooling-ci-workflow-reference.toml",
       "requires": []
@@ -13220,7 +13208,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:636858501210ff9dead65a08a4dd573b2002f1313a345923f024ed4dc7348113",
+      "digest": "sha256:e797a4f7c882d2a8cbdcf29d3353221d4511e0cc2909cace73000575a3fe1b9f",
       "id": "tooling-reference-recipes",
       "path": "evaluation/standards-effectiveness/suites/tooling-reference-recipes.toml",
       "requires": []
@@ -13244,7 +13232,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:ce14c04bd0f8edfb47241cbd8c911ada15b66ce4671a8fce4cbd1b9bd0029779",
+      "digest": "sha256:85d4f162dccaef2a01ae20208743db015c968fcf1dc03f8b1b8d54f6e0ccc619",
       "id": "verification-ownership",
       "path": "evaluation/standards-effectiveness/suites/verification-ownership.toml",
       "requires": []
@@ -13646,7 +13634,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:437dee63cab2f83b675b99a33cfc51283198801d78982f3cda1ff9fbf984020f",
+      "digest": "sha256:8152e0dd7fc5b3997f9c1f7be58a29ec19cac0e92337d55757b62768f3319f3e",
       "id": "contract-ownership",
       "path": "evaluation/standards-effectiveness/suites/contract-ownership.toml",
       "requires": []

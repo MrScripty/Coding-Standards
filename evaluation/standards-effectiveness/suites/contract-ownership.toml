@@ -37,7 +37,7 @@ required = ["STANDARDS-ROUTER.md", "profiles/applications/frontend.md", "profile
 id = "rust-binding-contract-authority-destinations"
 type = "markdown_targets"
 path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-required = ["TESTING-STANDARDS.md", "languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md", "languages/rust/RUST-INTEROP-STANDARDS.md", "profiles/boundaries/language-bindings.md", "profiles/languages/rust/async.md", "profiles/languages/rust/interop.md", "profiles/languages/rust/language-bindings.md", "topics/contracts.md", "workflows/release.md"]
+required = ["workflows/verification.md", "profiles/languages/rust/cross-platform.md", "profiles/languages/rust/interop.md", "profiles/boundaries/language-bindings.md", "profiles/languages/rust/async.md", "profiles/languages/rust/language-bindings.md", "topics/contracts.md", "workflows/release.md"]
 
 [[checks]]
 id = "release-entrypoint-destinations"

@@ -43,7 +43,7 @@ destinations = []
 [[indexes]]
 id = "navigation.interop"
 path = "INTEROP-STANDARDS.md"
-destinations = []
+destinations = ["profile.boundary.interop", "profile.boundary.ipc", "profile.boundary.language-bindings", "topic.contracts", "topic.security"]
 
 [[indexes]]
 id = "navigation.language-bindings"
@@ -53,17 +53,17 @@ destinations = []
 [[indexes]]
 id = "navigation.accessibility"
 path = "ACCESSIBILITY-STANDARDS.md"
-destinations = []
+destinations = ["reference.recipes.accessibility", "topic.accessibility"]
 
 [[indexes]]
 id = "navigation.architecture-patterns"
 path = "ARCHITECTURE-PATTERNS.md"
-destinations = []
+destinations = ["profile.application.frontend", "profile.boundary.ipc", "profile.boundary.persistence", "reference.patterns.architecture", "reference.recipes.diagnostics", "reference.recipes.frontend", "reference.recipes.http", "reference.recipes.persistence", "router", "topic.architecture", "topic.concurrency", "topic.contracts", "topic.cross-platform", "topic.diagnostics", "topic.resilience", "topic.security", "workflow.documentation", "workflow.verification"]
 
 [[indexes]]
 id = "navigation.tooling"
 path = "TOOLING-STANDARDS.md"
-destinations = []
+destinations = ["profile.application.frontend", "profile.language.typescript", "reference.recipes.documentation", "reference.recipes.implementation", "reference.recipes.tooling", "topic.dependencies", "workflow.commit", "workflow.documentation", "workflow.implementation", "workflow.tooling", "workflow.verification"]
 
 [[indexes]]
 id = "navigation.testing"
@@ -83,7 +83,7 @@ destinations = []
 [[indexes]]
 id = "navigation.launcher"
 path = "LAUNCHER-STANDARDS.md"
-destinations = []
+destinations = ["profile.application.launcher", "topic.dependencies", "topic.security", "workflow.release", "workflow.verification"]
 
 [[indexes]]
 id = "navigation.rust-api"
@@ -93,7 +93,7 @@ destinations = []
 [[indexes]]
 id = "navigation.rust-async"
 path = "languages/rust/RUST-ASYNC-STANDARDS.md"
-destinations = []
+destinations = ["profile.language.rust.async", "topic.concurrency"]
 
 [[indexes]]
 id = "navigation.rust-cross-platform"
@@ -108,12 +108,12 @@ destinations = []
 [[indexes]]
 id = "navigation.rust-interop"
 path = "languages/rust/RUST-INTEROP-STANDARDS.md"
-destinations = []
+destinations = ["profile.boundary.interop", "profile.language.rust.interop", "profile.language.rust.language-bindings", "profile.language.rust.unsafe", "topic.contracts"]
 
 [[indexes]]
 id = "navigation.rust-language-bindings"
 path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-destinations = []
+destinations = ["profile.boundary.interop", "profile.boundary.language-bindings", "profile.language.rust.async", "profile.language.rust.binding-lifecycle", "profile.language.rust.cross-platform", "profile.language.rust.interop", "profile.language.rust.language-bindings", "profile.language.rust.unsafe", "topic.contracts", "workflow.release", "workflow.verification"]
 
 [[indexes]]
 id = "navigation.rust-release"
@@ -123,7 +123,7 @@ destinations = []
 [[indexes]]
 id = "navigation.rust-security"
 path = "languages/rust/RUST-SECURITY-STANDARDS.md"
-destinations = []
+destinations = ["profile.language.rust.api", "profile.language.rust.async", "profile.language.rust.security", "topic.contracts", "topic.security"]
 
 [[indexes]]
 id = "navigation.rust-tooling"

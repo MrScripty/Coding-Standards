@@ -13,4 +13,4 @@ required = ["profiles/languages/typescript.md", "topics/dependencies.md", "workf
 id = "former-source-destinations"
 type = "markdown_targets"
 path = "TOOLING-STANDARDS.md"
-required = ["FRONTEND-STANDARDS.md", "profiles/languages/typescript.md", "reference/recipes/documentation.md", "reference/recipes/implementation.md", "reference/recipes/tooling.md", "topics/dependencies.md", "workflows/commit.md", "workflows/documentation.md", "workflows/implementation.md", "workflows/tooling.md", "workflows/verification.md"]
+required = ["profiles/applications/frontend.md", "profiles/languages/typescript.md", "reference/recipes/documentation.md", "reference/recipes/implementation.md", "reference/recipes/tooling.md", "topics/dependencies.md", "workflows/commit.md", "workflows/documentation.md", "workflows/implementation.md", "workflows/tooling.md", "workflows/verification.md"]
