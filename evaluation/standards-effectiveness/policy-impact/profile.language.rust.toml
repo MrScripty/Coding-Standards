@@ -1,0 +1,11 @@
+schema_version = 2
+owner = "profile.language.rust"
+
+[[relationships]]
+source = "profile.language.rust.baseline"
+consumer = "profile.language.rust.tooling"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { kind = "whole-artifact" }
+evidence_owner = "review:consumer"
+rationale = "Rust Tooling projects the Rust baseline's claim-scoped verification and execution obligations into Cargo adapters through Practical Starting Point and Cargo Baseline Command Mechanisms; it must preserve sufficient-evidence reuse/construction and selected scope rather than create a mandatory new-test or universal command requirement."

@@ -8,6 +8,7 @@ sources = [
   "evaluation/standards-effectiveness/policy-units/dependencies.toml",
   "evaluation/standards-effectiveness/policy-units/generated-contract.toml",
   "evaluation/standards-effectiveness/policy-units/planning.toml",
+  "evaluation/standards-effectiveness/policy-units/profile.language.rust.toml",
   "evaluation/standards-effectiveness/policy-units/router.toml",
   "evaluation/standards-effectiveness/policy-units/security.toml",
   "evaluation/standards-effectiveness/policy-units/topic.concurrency.toml",

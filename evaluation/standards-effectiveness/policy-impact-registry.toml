@@ -7,6 +7,7 @@ suite_registry = "evaluation/standards-effectiveness/suite-registry.toml"
 declaration_sources = [
   "evaluation/standards-effectiveness/policy-impact/core.toml",
   "evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml",
+  "evaluation/standards-effectiveness/policy-impact/profile.language.rust.toml",
   "evaluation/standards-effectiveness/policy-impact/router.toml",
   "evaluation/standards-effectiveness/policy-impact/topic.architecture.replay.toml",
   "evaluation/standards-effectiveness/policy-impact/topic.architecture.toml",

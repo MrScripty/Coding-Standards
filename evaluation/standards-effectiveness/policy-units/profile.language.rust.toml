@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "profile.language.rust.baseline"
+module = "profile.language.rust"
+heading_path = ["Baseline Rust Change"]
+semantic_revision = 1

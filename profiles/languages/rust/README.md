@@ -20,7 +20,8 @@ workflows, application profiles, boundary profiles, and topics.
 For a local library bug fix:
 
 1. Use the existing crate and workspace ownership boundaries.
-2. Add a focused Rust regression test.
+2. Establish the changed claim with adequate existing evidence or a construction
+   guarantee, or add a focused Rust regression test when needed.
 3. Run formatting for affected Rust files or the workspace.
 4. Run Clippy for the affected package/targets with repository-configured
    warnings.

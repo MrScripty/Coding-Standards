@@ -1761,7 +1761,7 @@
       ]
     },
     {
-      "digest": "sha256:070bc395ec4794241ac21462a77ce451a063deb98089a63f58d5d06720de6cd5",
+      "digest": "sha256:bbcb71f424e041d75c72ee39ca91d7f16f97aa11d578e8a17e207fb2b01eb35e",
       "path": "evaluation/standards-effectiveness/policy-impact-registry.toml",
       "state": "present",
       "uses": [
@@ -1787,6 +1787,18 @@
     {
       "digest": "sha256:e9f3bfdd6e521fe53345841661e121f63e64f6344e4d53ae7e11b94331587ea3",
       "path": "evaluation/standards-effectiveness/policy-impact/profile.boundary.generated-contract.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:f19b1610a5dae72d7ea89b60edc854528a0aa53beabb69f2f743b7214b9a7d48",
+      "path": "evaluation/standards-effectiveness/policy-impact/profile.language.rust.toml",
       "state": "present",
       "uses": [
         {
@@ -2161,7 +2173,24 @@
       ]
     },
     {
-      "digest": "sha256:89ec756fc40445049d3f6be88e0ae97e05cd4655737fbaf36c747899365d6b43",
+      "digest": "sha256:fcfd18430f3162b0314e66a89b46f76ab26713eb3fa197a868c0630ae4dd2882",
+      "path": "evaluation/standards-effectiveness/policy-units/profile.language.rust.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "current-structure",
+          "role": "registered-policy-impact",
+          "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "negative-fixtures",
+          "role": "canonical-policy-impact",
+          "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:916af99cd0fb81fe6007bce028e9dde3e9fad7350d3df70cbdd999a590cef716",
       "path": "evaluation/standards-effectiveness/policy-units/registry.toml",
       "state": "present",
       "uses": [
@@ -4190,7 +4219,7 @@
       ]
     },
     {
-      "digest": "sha256:a7fc50a6d4f1c07b2b4b3e5ceb8ad94f3e6a5deb21a4852e1fb9e09570ae77ea",
+      "digest": "sha256:a65e24c6969a7bad1276420c3759bb32ed5acdc73b03de7c1edb06c672077237",
       "path": "profiles/languages/rust/README.md",
       "state": "present",
       "uses": [
@@ -14029,7 +14058,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:2978a63cf9fe7bdcc06ef2e0c71254733781ad23e5b76a64e1c32dc13d336e29",
+    "digest": "sha256:8607daad3aec322a6072b9964512416edd6688958032b1a6cb7e2217b9ab34dd",
     "uses": [
       {
         "check": "python-package-contract",
