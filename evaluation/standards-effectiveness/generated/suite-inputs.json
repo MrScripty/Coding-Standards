@@ -14,7 +14,7 @@
       ]
     },
     {
-      "digest": "sha256:8285d284794f1171cdc02430d757370d68d6719d05aeda6269fd569cd3e1b0c1",
+      "digest": "sha256:8ff796d8f104279bd6aafbedae58dc6af2eaab637d8c84e5aada80f45930d122",
       "path": "CODING-STANDARDS.md",
       "state": "present",
       "uses": [
@@ -8780,6 +8780,16 @@
           "check": "verifier-change-route-closure",
           "role": "canonical-module",
           "suite": "s1-routing"
+        },
+        {
+          "check": "coding-routes",
+          "role": "link-target",
+          "suite": "source-index-closures"
+        },
+        {
+          "check": "source-links",
+          "role": "link-target",
+          "suite": "source-index-closures"
         },
         {
           "check": "metadata-closure",

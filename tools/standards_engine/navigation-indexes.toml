@@ -3,7 +3,7 @@ schema_version = 1
 [[indexes]]
 id = "navigation.coding"
 path = "CODING-STANDARDS.md"
-destinations = []
+destinations = ["core", "profile.application.frontend", "profile.language.typescript", "profile.language.typescript.async", "router", "topic.architecture", "topic.code-design", "topic.contracts", "topic.dependencies", "topic.licensing", "topic.performance", "topic.resilience", "workflow.build", "workflow.implementation", "workflow.verification"]
 
 [[indexes]]
 id = "navigation.commit"
