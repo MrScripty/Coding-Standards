@@ -65,6 +65,7 @@ members = [
   "workflows/documentation.md",
   "workflows/implementation.md",
   "workflows/planning.md",
+  "workflows/planning/discovery.md",
   "workflows/release.md",
   "workflows/release/operations.md",
   "workflows/standards-authoring.md",

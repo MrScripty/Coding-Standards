@@ -4,4 +4,4 @@ schema_version = 1
 id = "workflow.implementation.admission"
 module = "workflow.implementation"
 heading_path = ["Before Editing"]
-semantic_revision = 1
+semantic_revision = 2

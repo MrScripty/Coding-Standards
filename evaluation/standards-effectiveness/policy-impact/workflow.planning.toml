@@ -18,12 +18,29 @@ evidence_owner = "suite:planning-consolidation"
 rationale = "This suite checks the current structural projection associated with the policy. Its declared checks do not establish semantic completeness or consumer behavior."
 
 [[relationships]]
+source = "workflow.planning.lifecycle-authority"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "The suite's plan_contract checks enforce valid plan status vocabulary, Accepted evidence and unfinished-state constraints; discovery does not add a lifecycle state."
+
+[[relationships]]
 source = "workflow.planning.projection-completeness"
 consumer = "policy-semantic-impact"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
 evidence_owner = "suite:policy-semantic-impact"
 rationale = "This suite checks the current structural projection associated with the policy. Its declared checks do not establish semantic completeness or consumer behavior."
+
+[[relationships]]
+source = "workflow.planning.lifecycle-authority"
+consumer = "profile.workflow.concurrent-plan-integration"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Proposal Contract"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "The proposal's intended resulting plan state consumes Planning lifecycle while the profile retains stale-state and integration responsibilities."
 
 [[relationships]]
 source = "workflow.planning.plan-admission"
@@ -34,12 +51,29 @@ evidence_owner = "review:consumer"
 rationale = "Concurrent proposals consume explicit plan identity and operation and require fresh admission during recovery; their machine arguments remain explicit."
 
 [[relationships]]
+source = "workflow.planning.repository-isolation"
+consumer = "profile.workflow.concurrent-plan-integration"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Proposal Contract"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "The proposal contract records applicable branch/worktree context without requiring isolation; Commit keeps mechanism and cleanup authority."
+
+[[relationships]]
 source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/full-codebase-standards-refactor.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "The full-codebase review entrypoint delegates analysis-only plan construction to Planning. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "workflow.planning.lifecycle-authority"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The implementation prompt checks current plan lifecycle and authority before admitting the selected operation."
 
 [[relationships]]
 source = "workflow.planning.plan-admission"
@@ -58,12 +92,36 @@ evidence_owner = "review:consumer"
 rationale = "The execution prompt uses the owning replanning trigger."
 
 [[relationships]]
+source = "workflow.planning.repository-isolation"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The prompt projects governed plan isolation and hands mechanics and authorized cleanup to Commit; this relationship conveys no new cleanup authority."
+
+[[relationships]]
 source = "workflow.planning.active-plan-fields"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "The planning entrypoint creates and preserves the required composed-design applicability record. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "workflow.planning.discovery-entry"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt now begins with discovery when material intent or design questions remain."
+
+[[relationships]]
+source = "workflow.planning.lifecycle-authority"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt distinguishes provisional discovery from approved plan lifecycle and conditions plan lifecycle records on a written plan."
 
 [[relationships]]
 source = "workflow.planning.replanning"
@@ -74,12 +132,28 @@ evidence_owner = "review:consumer"
 rationale = "The planning prompt selects material replanning triggers."
 
 [[relationships]]
+source = "workflow.planning.repository-isolation"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt discusses meaningful development and integration boundaries and delegates branch and merge mechanics to Commit."
+
+[[relationships]]
 source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "workflow.planning.discovery-entry"
+consumer = "router"
+relation = "router-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Router's Planning condition and registered discovery detail implement Planning's material-uncertainty entry requirement."
 
 [[relationships]]
 source = "workflow.planning.written-plan-applicability"
@@ -106,12 +180,29 @@ evidence_owner = "review:consumer"
 rationale = "The plan template makes composed-design applicability mandatory and the complete artifact probe conditional. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
+source = "workflow.planning.lifecycle-authority"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The plan template's plan, milestone and final status fields project Planning's lifecycle vocabulary and acceptance meaning."
+
+[[relationships]]
 source = "workflow.planning.replanning"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "The plan template records the owned triggers and repair boundary."
+
+[[relationships]]
+source = "workflow.planning.repository-isolation"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Repository Isolation"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "The template records only applicable governed isolation context and omits branch/worktree fields for direct serial work."
 
 [[relationships]]
 source = "workflow.planning.projection-completeness"
@@ -128,6 +219,24 @@ relation = "fixture-projection"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "Exercises evidence retirement, graph preservation, preview, and refusal to overwrite independent edits through the public Engine interface. Review binds this consumer and relationship; it requires substantive evidence before certification."
+
+[[relationships]]
+source = "workflow.planning.discovery-entry"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Before Editing"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Implementation's Before Editing procedure now conditionally enters the Planning-owned discovery phase."
+
+[[relationships]]
+source = "workflow.planning.lifecycle-authority"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["State And Findings"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Implementation maintains current lifecycle and transitions through Implemented, Verifying and Accepted according to Planning's named evidence."
 
 [[relationships]]
 source = "workflow.planning.plan-admission"
@@ -152,6 +261,50 @@ relation = "normative-consumer"
 applicability = { operator = "always" }
 evidence_owner = "review:consumer"
 rationale = "Implementation's admission procedure directly projects Planning's bounded-local exclusion and material-complexity triggers."
+
+[[relationships]]
+source = "workflow.planning.active-plan-fields"
+consumer = "workflow.planning.discovery"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Explain Back And Enter Planning"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Discovery's handoff explicitly consumes Planning's active-plan-fields requirements while preserving Planning's canonical implementation authority."
+
+[[relationships]]
+source = "workflow.planning.discovery-entry"
+consumer = "workflow.planning.discovery"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "Discovery's applicability and handoff implement the Planning-owned material-uncertainty opening phase without authorizing implementation."
+
+[[relationships]]
+source = "workflow.planning.lifecycle-authority"
+consumer = "workflow.planning.discovery"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Preserve One Source Of Decision Authority"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "The provisional visual cannot gain plan authority or impose a competing artifact lifecycle."
+
+[[relationships]]
+source = "workflow.planning.plan-admission"
+consumer = "workflow.planning.discovery"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Explain Back And Enter Planning"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Discovery's handoff explicitly consumes Planning's plan-admission requirements while preserving Planning's canonical implementation authority."
+
+[[relationships]]
+source = "workflow.planning.written-plan-applicability"
+consumer = "workflow.planning.discovery"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Explain Back And Enter Planning"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Discovery's handoff explicitly consumes Planning's written-plan-applicability requirements while preserving Planning's canonical implementation authority."
 
 [[relationships]]
 source = "workflow.planning.projection-completeness"

@@ -7,6 +7,18 @@ heading_path = ["Required Active-Plan Fields"]
 semantic_revision = 2
 
 [[policy_unit]]
+id = "workflow.planning.discovery-entry"
+module = "workflow.planning"
+heading_path = ["Discovery Before Implementation Planning"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.lifecycle-authority"
+module = "workflow.planning"
+heading_path = ["Lifecycle"]
+semantic_revision = 1
+
+[[policy_unit]]
 id = "workflow.planning.plan-admission"
 module = "workflow.planning"
 heading_path = ["Explicit Plan Admission"]
@@ -25,7 +37,13 @@ heading_path = ["Re-Planning"]
 semantic_revision = 1
 
 [[policy_unit]]
+id = "workflow.planning.repository-isolation"
+module = "workflow.planning"
+heading_path = ["Repository Isolation In Written Plans"]
+semantic_revision = 1
+
+[[policy_unit]]
 id = "workflow.planning.written-plan-applicability"
 module = "workflow.planning"
 heading_path = ["When A Written Plan Is Required"]
-semantic_revision = 1
+semantic_revision = 2

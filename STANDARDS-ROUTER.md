@@ -38,7 +38,10 @@ stated conditions match the task.
 ## Routing Procedure
 
 1. State the requested outcome and affected artifact.
-2. Select workflow modules for the activities being performed.
+2. Select workflow modules for the activities being performed. Include Planning
+   and its discovery detail when material intent or design uncertainty remains,
+   even when the proposed implementation is bounded. Keep ordinary uncertainty
+   reduction separate when the intended behavior and design are already clear.
 3. Select application, boundary, and language profiles from actual repository
    facts.
 4. Select topics only when the concern is affected.
@@ -46,7 +49,6 @@ stated conditions match the task.
 6. Confirm common exclusions.
 7. If a required fact is unknown, report unresolved routing instead of
    selecting a convenient default.
-
 ## Workflow Selection
 
 | Condition | Select |
@@ -54,7 +56,7 @@ stated conditions match the task.
 | Change code or standards | [Implementation](workflows/implementation.md) |
 | Prove a behavior, contract, or artifact | [Verification](workflows/verification.md) |
 | Investigation or evidence work may delay a sufficient implementation | [Development Proportionality](workflows/development-proportionality.md) |
-| Coordinate material sequencing, migration, rollout, risk, or acceptance complexity | [Planning](workflows/planning.md) |
+| Resolve material uncertainty about intended behavior or design, or coordinate material sequencing, migration, rollout, risk, or acceptance complexity | [Planning Workflow](workflows/planning.md) |
 | Create commits or manage history, branches, or worktrees | [Commit](workflows/commit.md) |
 | Change durable responsibility, design, contract, or operational knowledge | [Documentation](workflows/documentation.md) |
 | Change build inputs, outputs, invalidation, native integration, or environment use | [Build](workflows/build.md) |
@@ -179,7 +181,7 @@ facts. Select a detail page when its corresponding specialized decision is affec
 | Rust bindings adapt events, callback tasks, runtime handles, or executors | [profile.language.rust.binding-lifecycle](profiles/languages/rust/binding-lifecycle.md) |
 | A change selects maintenance channels, publication presentation, or release recovery procedures | [workflow.release.operations](workflows/release/operations.md) |
 | A graphical user workflow requires smoke evidence | [workflow.verification.gui](workflows/verification/gui.md) |
-
+| Material user-intent, behavior, constraint, feasibility, or design uncertainty must be resolved before implementation planning or material replanning | [Discovery And Design](workflows/planning/discovery.md) |
 
 ## Additional Routing Rules
 

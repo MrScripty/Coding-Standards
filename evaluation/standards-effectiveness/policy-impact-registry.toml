@@ -20,6 +20,7 @@ declaration_sources = [
   "evaluation/standards-effectiveness/policy-impact/topic.security.untrusted-execution.toml",
   "evaluation/standards-effectiveness/policy-impact/workflow.commit.toml",
   "evaluation/standards-effectiveness/policy-impact/workflow.implementation.toml",
+  "evaluation/standards-effectiveness/policy-impact/workflow.planning.discovery.toml",
   "evaluation/standards-effectiveness/policy-impact/workflow.planning.toml",
   "evaluation/standards-effectiveness/policy-impact/workflow.standards-authoring.toml",
   "evaluation/standards-effectiveness/policy-impact/workflow.tooling.toml",

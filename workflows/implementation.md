@@ -20,6 +20,13 @@
 4. Resolve overlapping dirty work or ambiguous verification before editing.
 5. Read routed standards and directly affected source context.
 
+Before choosing implementation work, resolve material uncertainty about intended
+behavior, constraints, feasibility, or design through Planning's
+[Discovery And Design](planning/discovery.md). A small proposed patch does not
+establish a clear outcome. Discovery may conclude with a bounded change and an
+inline write set; it does not itself require a written plan or authorize
+implementation.
+
 When a written plan governs the change, consume
 [Planning's admission decision](planning.md#explicit-plan-admission). Bind the
 task to one canonical repository-relative `plan.md` path and operation.
@@ -34,7 +41,6 @@ conditions hold. Follow Planning's written-plan applicability: material sequenci
 independently owned contracts, migration, coordination, rollout, risk, or
 acceptance complexity requires a plan when it cannot be held unambiguously in
 the task. A bounded coherent change can state its exact write set inline.
-
 ## Slice Contract
 
 Each slice must deliver one usable behavior, contract, or information-architecture

@@ -5,16 +5,29 @@
 - ID: `workflow.planning`
 - Role: `workflow`
 - Level: `MUST`
-- Applies when: Work requires sequencing, shared decisions, migration, delegation, or acceptance across multiple boundaries.
-- Does not apply when: A bounded local change has an obvious write set, regression check, and acceptance path.
+- Applies when: Material uncertainty about intended behavior or design must be resolved, or work requires sequencing, shared decisions, migration, delegation, or acceptance across multiple boundaries.
+- Does not apply when: A bounded local change has a clear agreed outcome, an obvious write set, a regression check, and an acceptance path, with no material uncertainty that could change those decisions.
 - Requires: `core`, `workflow.implementation`, `workflow.verification`, `workflow.development-proportionality`
 - Specializes: `none`
 - Verification: Active-plan structure fixtures and objective-level acceptance review.
 - Canonical owner: `workflows/planning.md`
 
+## Discovery Before Implementation Planning
+
+Begin with the intended outcome and the facts needed to choose a suitable design. When material intent, behavior, constraints, or design choices remain unresolved, use [Discovery And Design](planning/discovery.md) before writing the implementation plan. Discovery is the opening phase of this workflow; it is not an approved implementation direction.
+
+Use an adaptive conversation supported by bounded investigation. Establish what the person is trying to achieve, distinguish firm requirements from suggestions and hypotheses, inspect current behavior and technical feasibility, and make consequential alternatives and implied behavior visible. Explain the emerging design back to the person before converting it into implementation work.
+
+Do not treat a suggested mechanism, the current code, or the first plausible architecture as the objective. Apply the routed standards to the actual design decisions; a plan that merely lists standards does not establish that its design meets them.
+
+Keep the effort proportionate. A small, clear task may need only a brief exchange and a concise explanation. Do not manufacture uncertainty, a questionnaire, a written plan, or an approval ceremony when the outcome and acceptance path are already clear. Conversely, the bounded-local exclusion does not apply merely because a proposed patch is small when its intended behavior remains materially unclear.
+
+For substantial discovery, keep the main agent available for conversation while research agents investigate independent questions and a separate visual-document agent maintains the local shared picture. Follow the detailed procedure for ownership, unavailable capabilities, and the transition to canonical planning artifacts.
+
 ## When A Written Plan Is Required
 
-Apply the bounded-local exclusion before the written-plan triggers. A change
+After resolving material intent and design uncertainty through discovery, apply
+the bounded-local exclusion before the written-plan triggers. A change
 with a clear objective, exact write set, regression check, and acceptance path
 may proceed directly even when it touches a public, generated, persistence,
 process, language, or user-interface boundary. State its write set inline; an
@@ -78,6 +91,8 @@ applicable, record the concrete reason. Historical terminal plans are not
 rewritten solely to add this field.
 
 ## Lifecycle
+
+Discovery notes, candidate designs, and visual documents are provisional and do not acquire Planned status by being written. Planned continues to mean approved direction. Do not authorize implementation from a discovery artifact or add a discovery state to the implementation-plan lifecycle solely to store a discussion.
 
 | State | Meaning |
 | --- | --- |
@@ -160,6 +175,13 @@ terminal cleanup. This workflow records only plan-level facts needed to keep
 scope, ownership, sequencing, or acceptance stable. File count, commit count,
 plan existence, delegation, and participant count do not independently require
 repository isolation.
+
+
+Discuss material development and integration boundaries before implementation. Explain what coherent outcome each boundary makes visible or reviewable, what evidence supports it, and which findings would reopen the design. Where branches or merges serve that purpose, identify their intended role and integration points using Commit's [Branch And Worktree Applicability](commit.md#branch-and-worktree-applicability),
+[Governed Branch Context](commit.md#governed-branch-context), and
+[Integration Mechanism Selection](commit.md#integration-mechanism-selection) rules.
+
+These boundaries provide visibility into development and useful opportunities to reconsider direction. They do not require a branch per milestone, a merge per slice, a fixed commit count, or a particular history topology. If one serial change provides sufficient visibility and acceptance, say so. Commit retains authority over the actual branch, worktree, merge, history, and cleanup mechanics.
 
 ## Policy Projection Completeness
 

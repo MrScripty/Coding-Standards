@@ -1,0 +1,138 @@
+schema_version = 2
+owner = "workflow.planning.discovery"
+
+[[relationships]]
+source = "workflow.planning.discovery.alternatives"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt directs agents to the discovery procedure and projects its Compare Meaningful Alternatives requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.concurrent-research"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt directs agents to the discovery procedure and projects its Keep The Main Agent In The Conversation requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.decision-authority"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt directs agents to the discovery procedure and projects its Preserve One Source Of Decision Authority requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.investigation"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt directs agents to the discovery procedure and projects its Investigate What Can Change The Design requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.outcome"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt directs agents to the discovery procedure and projects its Discover The Intended Outcome requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.planning-handoff"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt directs agents to the discovery procedure and projects its Explain Back And Enter Planning requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.substantial"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt directs agents to the discovery procedure and projects its When Discovery Is Substantial requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.visual-document"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "review:consumer"
+rationale = "The Planning Prompt directs agents to the discovery procedure and projects its Maintain A Local Visual Document requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.alternatives"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Discovery Before Implementation Planning"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Planning enters the detailed discovery procedure and consumes its Compare Meaningful Alternatives requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.concurrent-research"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Discovery Before Implementation Planning"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Planning enters the detailed discovery procedure and consumes its Keep The Main Agent In The Conversation requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.decision-authority"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Lifecycle"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Planning enters the detailed discovery procedure and consumes its Preserve One Source Of Decision Authority requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.investigation"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Discovery Before Implementation Planning"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Planning enters the detailed discovery procedure and consumes its Investigate What Can Change The Design requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.outcome"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Discovery Before Implementation Planning"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Planning enters the detailed discovery procedure and consumes its Discover The Intended Outcome requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.planning-handoff"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["When A Written Plan Is Required"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Planning enters the detailed discovery procedure and consumes its Explain Back And Enter Planning requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.substantial"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Discovery Before Implementation Planning"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Planning enters the detailed discovery procedure and consumes its When Discovery Is Substantial requirements."
+
+[[relationships]]
+source = "workflow.planning.discovery.visual-document"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+consumer_scope = { heading_path = ["Discovery Before Implementation Planning"], kind = "structured" }
+evidence_owner = "review:consumer"
+rationale = "Planning enters the detailed discovery procedure and consumes its Maintain A Local Visual Document requirements."

@@ -1,5 +1,5 @@
 {
-  "analysis_id": "analysis:sha256:03da996c7fc2f340bbea759f9b07af22d03a3ac05ae7ed0f277ca4112de35d7d",
+  "analysis_id": "analysis:sha256:3cee6832cea3d8f2ce7bdcfc489d5d92eb7e764d5fe7f49266f0366f3e7184da",
   "authority": {
     "authorization_contract": "authorization-grant.v1",
     "authorization_evidence_contracts": [
@@ -36,7 +36,7 @@
     "reference": {
       "authority_digest": "sha256:304746bbbfebb06fff95f12921c458dafa6ba186392c77d3e304cc8158de7f36",
       "capability": "standards.review.audit",
-      "id": "authorization:sha256:db334e526b798617c7c73a2ddcb6cf2f8e7ac2ca9f94037971481c58e2e8306f",
+      "id": "authorization:sha256:3ac622a1bb54c84b75f9ab87a517dd5becbef401c690870126f71228d6168e99",
       "issuer": "issuer.standards-engine.local"
     },
     "revocation_authority": "revocation.standards-engine.local",
@@ -49,7 +49,7 @@
         "provider_contract_version": "1"
       }
     ],
-    "subject_id": "sha256:5e3e3edbeb6a3a44c0c28ec6b09c8e6c16e017a9a81cde1f66145add1265fb98",
+    "subject_id": "sha256:1137d707ed6bc0b6dff4b7c0df6c39c220f6e1c94b2c50cfabc1f5910d8e5812",
     "subject_kind": "coverage-requirement"
   },
   "authorization_evidence": [
@@ -64,26 +64,33 @@
     }
   ],
   "claim": {
-    "auditor_provenance": "Root scoped inventory/consumer audit plus independent material and bounded consumer review by /root/independent_review, final candidate 33538b46a6e82b98dd93015fae97fa7418810ef7a9479e0827b58dc1b7688a57. Actual publication auditor and authorization are supplied by the Engine.",
-    "authorization_id": "authorization:sha256:db334e526b798617c7c73a2ddcb6cf2f8e7ac2ca9f94037971481c58e2e8306f",
+    "auditor_provenance": "Root coding-standards maintainer audit with independent Standards reviewer (/root/standards_review) and Spec reviewer (/root/spec_review); exact Engine candidate reads/graph inventory and scoped consumer inspection on1 October2026. Caller provenance describes the review; Engine retains actual configured audit authority separately.",
+    "authorization_id": "authorization:sha256:3ac622a1bb54c84b75f9ab87a517dd5becbef401c690870126f71228d6168e99",
     "conclusion": "complete",
     "evidence": [
+      {
+        "digest": "sha256:c12c0365bb558c8ef973647fc74af9678cd1c35f54d17b104afdd3ed373f4f50",
+        "id": "templates/PLAN-TEMPLATE.md",
+        "provider_contract": "repository-content",
+        "provider_contract_version": "1"
+      },
       {
         "digest": "sha256:8c81ed8a896454155b6aab3836eca711a643eaad14972a7a21423b01bb2cc0a5",
         "id": "evaluation/standards-effectiveness/suites/planning-consolidation.toml",
         "provider_contract": "repository-content",
         "provider_contract_version": "1"
-      },
+      }
+    ],
+    "explicit_exclusions": [
       {
-        "digest": "sha256:24953b460034459034a089ac45dcdef7f89c2de3ae05703dbf32071bfbb8ba92",
-        "id": "docs/plans/standards-library-effectiveness/plan.md",
+        "digest": "sha256:e14ac61063820e13a3b2f90cf680b5349a0e3c1064e5fdaa3177b1c3e42d5567",
+        "id": "workflows/standards-authoring.md",
         "provider_contract": "repository-content",
         "provider_contract_version": "1"
       }
     ],
-    "explicit_exclusions": [],
-    "rationale": "Bounded audit of required lifecycle, acceptance, next-slice and composed-design fields, unchanged verbatim. Root and independent review inspected actual operational, normative, prompt/template, reference and runtime/fixture projections as applicable, corrected discovered missing relationships and dispositioned every affected consumer. Exact candidate related-query matches this reviewed inventory: templates/PLAN-TEMPLATE.md, prompts/planning.md, planning-consolidation. Referenced source artifacts supply the inspected consumer contracts/fixtures or recorded restructuring mandate; the current candidate comparison and review decisions are retained by the Engine. This conclusion covers the registered subject scope and its named semantic consumers, with no exclusions inside that horizon. It does not certify unregistered owner text, unrelated prerequisite/link associations or downstream effectiveness.",
-    "requirement_id": "sha256:5e3e3edbeb6a3a44c0c28ec6b09c8e6c16e017a9a81cde1f66145add1265fb98",
+    "rationale": "Audited registered policy workflow.planning.active-plan-fields in exact proposal revision13906993f25ac027f2a6be4e9a9aac531b30bad56d3acbb64afa163ab093737a against accepted base daa70d98328a88b125dd9df3f896a0502e8233b7. Current actual semantic consumers within audit-horizon.policy-impact-consumers are: planning-consolidation (enforcement-suite-projection); workflow.planning.discovery (normative-consumer); prompts/planning.md (prompt-projection); templates/PLAN-TEMPLATE.md (template-projection). Inspected the owner and declared consumer scopes, incoming/outgoing graph, relevant canonical references, registered prompts/templates, affected fixtures/suite contracts and generic implementations. Independent Standards/Spec review confirmed exact unchanged normative text after the13 required consumer declarations were added; handoff, lifecycle/isolation and opening-phase omissions are resolved. The paired30 consumer reviews and exact candidate application read/route observations establish that every identified material consumer within these18 registered-unit scopes has a disposition and no known actual relationship remains undeclared. Pinned unchanged tracked evidence supports consumer ownership/representation and enforcement limits and is verified byte-identical to the captured accepted base. This completeness conclusion covers the identified semantic consumer inventory, not conversational inference, agent effectiveness, execution of all consumer code or library-wide completeness. Planning's unregistered Acceptance Claims, Concurrent Work, Artifact Model and Concurrent Integration Routing remain outside this registered-unit audit and retain their normative force. Conditional links to Architecture/CodeDesign/Contracts do not themselves declare projected tests; the preexisting unreviewed concurrent-integration profile exposure is unchanged. Standards Authoring's referenced review/publication and downstream-evidence rules support these explicit limits.",
+    "requirement_id": "sha256:1137d707ed6bc0b6dff4b7c0df6c39c220f6e1c94b2c50cfabc1f5910d8e5812",
     "schema_version": 4
   },
   "publication": {
@@ -102,7 +109,7 @@
       "reference": {
         "authority_digest": "sha256:304746bbbfebb06fff95f12921c458dafa6ba186392c77d3e304cc8158de7f36",
         "capability": "standards.review.audit",
-        "id": "authorization:sha256:73a499b1f219756704373e92dafbbda9f4fa4453a1c48e187ec459ea46df6ef3",
+        "id": "authorization:sha256:dec1c183bdc6d258228d65144ca36008da11379f02fc2c49e313a1c4c7851964",
         "issuer": "issuer.standards-engine.local"
       },
       "revocation_authority": "revocation.standards-engine.local",
@@ -115,7 +122,7 @@
           "provider_contract_version": "1"
         }
       ],
-      "subject_id": "coverage-publication:sha256:49d564408e77debdcff668213cc087e2082ffa50ae743d1cf35267caacf2e771",
+      "subject_id": "coverage-publication:sha256:a6674f082adc238de1ad38cf3b9f53a4577bf70403caaa3ce02933a7ecc58ec6",
       "subject_kind": "coverage-publication"
     },
     "authorization_evidence": [

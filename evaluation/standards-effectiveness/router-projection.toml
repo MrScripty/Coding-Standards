@@ -51,10 +51,10 @@ aliases = []
 id = "routing.details"
 meaning = "Specialized decisions affected by the task; choose from the conditional detail table after the broad concerns."
 nullable = false
-prompt = "Does the task involve schemas, protocol adapters, compatibility, replay, advanced test oracles, GUI smoke, target evidence, binding lifecycle, or release operations? Does the task maintain this standards library through its authoring interface? Does executed behavior have less permitted authority than its host, or does a protected intermediary act for a less-trusted caller, or does an execution isolation promise change?"
-semantic_revision = 3
+prompt = "Does the task involve schemas, protocol adapters, compatibility, replay, advanced test oracles, GUI smoke, target evidence, binding lifecycle, or release operations? Does the task maintain this standards library through its authoring interface? Does executed behavior have less permitted authority than its host, or does a protected intermediary act for a less-trusted caller, or does an execution isolation promise change? Must material user-intent, behavior, constraint, feasibility, or design uncertainty be resolved before implementation planning or material replanning?"
+semantic_revision = 4
 type = "enum-set"
-values = ["profile.language.rust.binding-lifecycle", "topic.architecture.replay", "topic.code-design", "topic.contracts.evolution", "topic.contracts.protocols", "topic.contracts.schemas", "workflow.release.operations", "workflow.standards-authoring", "workflow.verification.gui", "workflow.verification.oracles", "workflow.verification.platforms", "topic.security.untrusted-execution"]
+values = ["profile.language.rust.binding-lifecycle", "topic.architecture.replay", "topic.code-design", "topic.contracts.evolution", "topic.contracts.protocols", "topic.contracts.schemas", "topic.security.untrusted-execution", "workflow.planning.discovery", "workflow.release.operations", "workflow.standards-authoring", "workflow.verification.gui", "workflow.verification.oracles", "workflow.verification.platforms"]
 context_kind = "task-route"
 answer_contract = "fact-value.v1"
 evidence_contract = "evidence-reference.v1"
@@ -190,6 +190,11 @@ when = { expressions = [{ fact = "routing.details", operator = "contains", value
 id = "route.detail.topic.security.untrusted-execution"
 target = "topic.security.untrusted-execution"
 when = { fact = "routing.details", operator = "contains", value = "topic.security.untrusted-execution" }
+
+[[rules]]
+id = "route.detail.workflow.planning.discovery"
+target = "workflow.planning.discovery"
+when = { fact = "routing.details", operator = "contains", value = "workflow.planning.discovery" }
 
 [[rules]]
 id = "route.detail.workflow.release.operations"
@@ -379,7 +384,7 @@ when = { fact = "routing.activities", operator = "contains", value = "implementa
 [[rules]]
 id = "route.workflow.planning"
 target = "workflow.planning"
-when = { fact = "routing.activities", operator = "contains", value = "planning" }
+when = { expressions = [{ fact = "routing.activities", operator = "contains", value = "planning" }, { fact = "routing.details", operator = "contains", value = "workflow.planning.discovery" }], operator = "any" }
 
 [[rules]]
 id = "route.workflow.release"

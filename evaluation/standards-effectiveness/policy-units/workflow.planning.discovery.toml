@@ -1,0 +1,49 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "workflow.planning.discovery.alternatives"
+module = "workflow.planning.discovery"
+heading_path = ["Compare Meaningful Alternatives"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.discovery.concurrent-research"
+module = "workflow.planning.discovery"
+heading_path = ["Keep The Main Agent In The Conversation"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.discovery.decision-authority"
+module = "workflow.planning.discovery"
+heading_path = ["Preserve One Source Of Decision Authority"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.discovery.investigation"
+module = "workflow.planning.discovery"
+heading_path = ["Investigate What Can Change The Design"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.discovery.outcome"
+module = "workflow.planning.discovery"
+heading_path = ["Discover The Intended Outcome"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.discovery.planning-handoff"
+module = "workflow.planning.discovery"
+heading_path = ["Explain Back And Enter Planning"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.discovery.substantial"
+module = "workflow.planning.discovery"
+heading_path = ["When Discovery Is Substantial"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.discovery.visual-document"
+module = "workflow.planning.discovery"
+heading_path = ["Maintain A Local Visual Document"]
+semantic_revision = 1

@@ -1,5 +1,5 @@
 {
-  "analysis_id": "analysis:sha256:03da996c7fc2f340bbea759f9b07af22d03a3ac05ae7ed0f277ca4112de35d7d",
+  "analysis_id": "analysis:sha256:3cee6832cea3d8f2ce7bdcfc489d5d92eb7e764d5fe7f49266f0366f3e7184da",
   "authority": {
     "authorization_contract": "authorization-grant.v1",
     "authorization_evidence_contracts": [
@@ -36,7 +36,7 @@
     "reference": {
       "authority_digest": "sha256:304746bbbfebb06fff95f12921c458dafa6ba186392c77d3e304cc8158de7f36",
       "capability": "standards.review.audit",
-      "id": "authorization:sha256:6fcff1cff4869ba6d00697a2f366454973453f7e26b0a565349a2d7188e6ad4c",
+      "id": "authorization:sha256:8f7769300b620d4770188b841b30f355f55c0e33233984a13d112790c2171401",
       "issuer": "issuer.standards-engine.local"
     },
     "revocation_authority": "revocation.standards-engine.local",
@@ -49,7 +49,7 @@
         "provider_contract_version": "1"
       }
     ],
-    "subject_id": "sha256:397c01e7d7c04de69b95e2ec34a7485a09d9b93a09bb5245872bb1440803daff",
+    "subject_id": "sha256:8eb772fcc87a050e28c940c58017dcdffdb24770ff4a13038dcf9a3e47772481",
     "subject_kind": "coverage-requirement"
   },
   "authorization_evidence": [
@@ -64,13 +64,19 @@
     }
   ],
   "claim": {
-    "auditor_provenance": "Root scoped inventory/consumer audit plus independent material and bounded consumer review by /root/independent_review, final candidate 33538b46a6e82b98dd93015fae97fa7418810ef7a9479e0827b58dc1b7688a57. Actual publication auditor and authorization are supplied by the Engine.",
-    "authorization_id": "authorization:sha256:6fcff1cff4869ba6d00697a2f366454973453f7e26b0a565349a2d7188e6ad4c",
+    "auditor_provenance": "Root coding-standards maintainer audit with independent Standards reviewer (/root/standards_review) and Spec reviewer (/root/spec_review); exact Engine candidate reads/graph inventory and scoped consumer inspection on1 October2026. Caller provenance describes the review; Engine retains actual configured audit authority separately.",
+    "authorization_id": "authorization:sha256:8f7769300b620d4770188b841b30f355f55c0e33233984a13d112790c2171401",
     "conclusion": "complete",
     "evidence": [
       {
         "digest": "sha256:628568c02b5f6271277320815434e0f2ff397d61444244f1022be2fd00a6471d",
         "id": "tools/standards_analysis/tests/test_routing.py",
+        "provider_contract": "repository-content",
+        "provider_contract_version": "1"
+      },
+      {
+        "digest": "sha256:b14540a5826d5f2d490a7e5c4f5791b383ad11b9dd48e4fee460dc507ccb5474",
+        "id": "tools/standards_engine/tests/test_navigation.py",
         "provider_contract": "repository-content",
         "provider_contract_version": "1"
       },
@@ -81,9 +87,16 @@
         "provider_contract_version": "1"
       }
     ],
-    "explicit_exclusions": [],
-    "rationale": "Bounded audit of explicit task facts, unknown-fact handling, conditional selection and prerequisite closure. Root and independent review inspected actual operational, normative, prompt/template, reference and runtime/fixture projections as applicable, corrected discovered missing relationships and dispositioned every affected consumer. Exact candidate related-query matches this reviewed inventory: reference.routing.bounded-rust-repair, tools/standards_engine/standards_engine/engine.py, s1-routing, prompts/planning.md, prompts/implement-plan.md, prompts/full-codebase-standards-refactor.md, workflow.release, topic.cross-platform, consumer.engine.navigation-tests, consumer.analysis.routing-tests. Referenced source artifacts supply the inspected consumer contracts/fixtures or recorded restructuring mandate; the current candidate comparison and review decisions are retained by the Engine. This conclusion covers the registered subject scope and its named semantic consumers, with no exclusions inside that horizon. It does not certify unregistered owner text, unrelated prerequisite/link associations or downstream effectiveness.",
-    "requirement_id": "sha256:397c01e7d7c04de69b95e2ec34a7485a09d9b93a09bb5245872bb1440803daff",
+    "explicit_exclusions": [
+      {
+        "digest": "sha256:e14ac61063820e13a3b2f90cf680b5349a0e3c1064e5fdaa3177b1c3e42d5567",
+        "id": "workflows/standards-authoring.md",
+        "provider_contract": "repository-content",
+        "provider_contract_version": "1"
+      }
+    ],
+    "rationale": "Audited registered policy router.selection-procedure in exact proposal revision13906993f25ac027f2a6be4e9a9aac531b30bad56d3acbb64afa163ab093737a against accepted base daa70d98328a88b125dd9df3f896a0502e8233b7. Current actual semantic consumers within audit-horizon.policy-impact-consumers are: s1-routing (enforcement-suite-projection); consumer.analysis.routing-tests (fixture-projection); consumer.engine.navigation-tests (fixture-projection); tools/standards_engine/standards_engine/engine.py (implementation-projection); topic.cross-platform (normative-consumer); workflow.release (normative-consumer); prompts/full-codebase-standards-refactor.md (prompt-projection); prompts/implement-plan.md (prompt-projection); prompts/planning.md (prompt-projection); reference.routing.bounded-rust-repair (reference-projection). Inspected the owner and declared consumer scopes, incoming/outgoing graph, relevant canonical references, registered prompts/templates, affected fixtures/suite contracts and generic implementations. Independent Standards/Spec review confirmed exact unchanged normative text after the13 required consumer declarations were added; handoff, lifecycle/isolation and opening-phase omissions are resolved. The paired30 consumer reviews and exact candidate application read/route observations establish that every identified material consumer within these18 registered-unit scopes has a disposition and no known actual relationship remains undeclared. Pinned unchanged tracked evidence supports consumer ownership/representation and enforcement limits and is verified byte-identical to the captured accepted base. This completeness conclusion covers the identified semantic consumer inventory, not conversational inference, agent effectiveness, execution of all consumer code or library-wide completeness. Planning's unregistered Acceptance Claims, Concurrent Work, Artifact Model and Concurrent Integration Routing remain outside this registered-unit audit and retain their normative force. Conditional links to Architecture/CodeDesign/Contracts do not themselves declare projected tests; the preexisting unreviewed concurrent-integration profile exposure is unchanged. Standards Authoring's referenced review/publication and downstream-evidence rules support these explicit limits.",
+    "requirement_id": "sha256:8eb772fcc87a050e28c940c58017dcdffdb24770ff4a13038dcf9a3e47772481",
     "schema_version": 4
   },
   "publication": {
@@ -102,7 +115,7 @@
       "reference": {
         "authority_digest": "sha256:304746bbbfebb06fff95f12921c458dafa6ba186392c77d3e304cc8158de7f36",
         "capability": "standards.review.audit",
-        "id": "authorization:sha256:87328ae8fc7b8c8ce27442c6243f7be1858a46289b30b4e1d0e0771465436186",
+        "id": "authorization:sha256:5fa39e0d728732d9785fb6517db13d0e9befb22510a4a81cd9a545675cbbca22",
         "issuer": "issuer.standards-engine.local"
       },
       "revocation_authority": "revocation.standards-engine.local",
@@ -115,7 +128,7 @@
           "provider_contract_version": "1"
         }
       ],
-      "subject_id": "coverage-publication:sha256:7152c61a937af90e293d0b2ffd7354328d48f236a0b3a8df7009d9c1455ed252",
+      "subject_id": "coverage-publication:sha256:2612aac552fdd3f8d843e7f22bcdfd3afeb9016ba2b68e85c26b3347f7644a6c",
       "subject_kind": "coverage-publication"
     },
     "authorization_evidence": [
