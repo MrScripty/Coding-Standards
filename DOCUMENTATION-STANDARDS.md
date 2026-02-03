@@ -1,0 +1,377 @@
+# Documentation Standards
+
+Requirements for maintaining readable, navigable codebases.
+
+## Directory Documentation
+
+### Requirement
+
+**Every directory must contain a README.md file.**
+
+This applies to all directories under `src/` or equivalent source folders.
+
+### Why
+
+- **Discoverability:** New developers understand structure without reading code
+- **Onboarding:** Reduces time to first contribution
+- **Maintenance:** Prevents architectural drift
+
+### README Template
+
+See [templates/README-TEMPLATE.md](templates/README-TEMPLATE.md) for a copy-paste template.
+
+Required sections:
+
+```markdown
+# [Directory Name]
+
+## Purpose
+One paragraph explaining what this directory contains and why it exists.
+
+## Contents
+| File/Folder | Description |
+|-------------|-------------|
+| `file.ts` | Brief description |
+| `subfolder/` | Brief description |
+
+## Design Decisions
+- Key architectural choices made here
+- Why this approach was chosen over alternatives
+
+## Dependencies
+**Internal:** What other parts of the codebase this depends on
+**External:** Third-party libraries used
+
+## Usage Examples
+Code snippets showing how to use components in this directory.
+```
+
+### Keeping READMEs Current
+
+- Update README when adding/removing files
+- Update when architecture changes
+- Review in code review (PRs touching a directory should update its README if needed)
+
+---
+
+## Code Comments
+
+### When to Comment
+
+**Comment the "why", not the "what".**
+
+```typescript
+// BAD: Describes what code does (obvious from reading it)
+// Loop through users and filter active ones
+const active = users.filter(u => u.isActive);
+
+// GOOD: Explains why this approach
+// Filter before mapping to avoid expensive transformations on inactive users
+const active = users.filter(u => u.isActive);
+```
+
+### When NOT to Comment
+
+- Self-explanatory code
+- Code that could be made self-explanatory by renaming
+- Temporary notes (use TODO with ticket number)
+
+```typescript
+// BAD: Comment that could be code
+// Check if user is admin
+if (user.role === 'admin') { ... }
+
+// GOOD: Self-documenting
+if (user.isAdmin()) { ... }
+```
+
+### TODO Format
+
+```typescript
+// TODO(#123): Refactor when new API is available
+// TODO(@username): Discuss approach in next sync
+```
+
+Always include:
+- Ticket number, OR
+- Owner/author, OR
+- Date when it should be addressed
+
+**Never:** Orphaned TODOs without context
+
+### Comment Style
+
+Use your language's standard doc comment format:
+
+```typescript
+// TypeScript/JavaScript - JSDoc
+/**
+ * Calculates the total price including tax.
+ * @param items - Cart items to total
+ * @param taxRate - Tax rate as decimal (0.08 for 8%)
+ * @returns Total price with tax applied
+ */
+function calculateTotal(items: Item[], taxRate: number): number
+```
+
+```python
+# Python - Docstring
+def calculate_total(items: list[Item], tax_rate: float) -> float:
+    """
+    Calculate the total price including tax.
+
+    Args:
+        items: Cart items to total
+        tax_rate: Tax rate as decimal (0.08 for 8%)
+
+    Returns:
+        Total price with tax applied
+    """
+```
+
+---
+
+## API Documentation
+
+### Public Interfaces
+
+All public functions, classes, and types should be documented:
+
+```typescript
+/**
+ * User authentication service.
+ *
+ * Handles login, logout, and session management.
+ *
+ * @example
+ * const auth = new AuthService(config);
+ * const session = await auth.login(credentials);
+ */
+export class AuthService {
+    /**
+     * Authenticate user with credentials.
+     *
+     * @param credentials - Username and password
+     * @returns Session token if successful
+     * @throws AuthError if credentials invalid
+     */
+    async login(credentials: Credentials): Promise<Session>
+}
+```
+
+### What to Document
+
+| Element | Document? | Include |
+|---------|-----------|---------|
+| Public function | Yes | Purpose, params, return, throws, example |
+| Public class | Yes | Purpose, usage example |
+| Public type/interface | Yes | Purpose, when to use |
+| Private/internal | Optional | Only if complex |
+| Obvious getters/setters | No | |
+
+---
+
+## Architecture Decision Records (ADRs)
+
+### When to Write an ADR
+
+Document significant architectural decisions:
+- Technology choices
+- Pattern selections
+- Trade-offs made
+
+### ADR Format
+
+```markdown
+# ADR-001: [Title]
+
+## Status
+[Proposed | Accepted | Deprecated | Superseded by ADR-XXX]
+
+## Context
+What situation are we facing? What problem needs solving?
+
+## Decision
+What did we decide to do?
+
+## Consequences
+What are the results of this decision?
+
+### Positive
+- Benefit 1
+- Benefit 2
+
+### Negative
+- Drawback 1
+- Drawback 2
+
+### Neutral
+- Side effect 1
+```
+
+### ADR Example
+
+```markdown
+# ADR-003: Use Event Sourcing for Order History
+
+## Status
+Accepted
+
+## Context
+We need to maintain a complete audit trail of all order changes.
+Traditional CRUD updates lose historical state.
+
+## Decision
+Implement event sourcing for the Order aggregate.
+All changes stored as immutable events.
+Current state derived by replaying events.
+
+## Consequences
+
+### Positive
+- Complete audit trail automatically maintained
+- Can reconstruct state at any point in time
+- Events enable easy integration with other systems
+
+### Negative
+- More complex than simple CRUD
+- Requires event store infrastructure
+- Querying current state requires projection
+
+### Neutral
+- Team needs to learn event sourcing patterns
+```
+
+### Where to Store ADRs
+
+```
+docs/
+└── adr/
+    ├── README.md          # Index of all ADRs
+    ├── ADR-001-title.md
+    ├── ADR-002-title.md
+    └── ADR-003-title.md
+```
+
+---
+
+## Changelog
+
+### When to Maintain
+
+For libraries, APIs, or any versioned software used by others.
+
+### Format (Keep a Changelog)
+
+```markdown
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [Unreleased]
+
+### Added
+- New feature X
+
+### Changed
+- Updated behavior of Y
+
+### Deprecated
+- Feature Z will be removed in v3.0
+
+### Removed
+- Deleted deprecated function
+
+### Fixed
+- Bug in component A
+
+### Security
+- Fixed vulnerability in auth
+
+## [1.2.0] - 2024-01-15
+
+### Added
+- Feature description
+
+## [1.1.0] - 2024-01-01
+
+### Fixed
+- Bug description
+```
+
+### Categories
+
+| Category | Use For |
+|----------|---------|
+| Added | New features |
+| Changed | Changes in existing functionality |
+| Deprecated | Soon-to-be removed features |
+| Removed | Removed features |
+| Fixed | Bug fixes |
+| Security | Vulnerability fixes |
+
+---
+
+## README.md (Project Root)
+
+### Required Sections
+
+```markdown
+# Project Name
+
+Brief description of what the project does.
+
+## Quick Start
+
+Minimal steps to get running:
+1. Clone
+2. Install
+3. Run
+
+## Installation
+
+Detailed installation instructions.
+
+## Usage
+
+How to use the project with examples.
+
+## Development
+
+How to set up for development:
+- Prerequisites
+- Build commands
+- Test commands
+
+## Project Structure
+
+Overview of directory layout.
+
+## Contributing
+
+How to contribute (or link to CONTRIBUTING.md).
+
+## License
+
+License information.
+```
+
+### Keep It Current
+
+The root README is often the first thing people see. Keep it:
+- Accurate
+- Up to date
+- Focused on getting started
+
+---
+
+## Documentation Review Checklist
+
+When reviewing PRs, check:
+
+- [ ] New directories have README.md
+- [ ] Public APIs are documented
+- [ ] Complex logic has explanatory comments
+- [ ] README updated if structure changed
+- [ ] No orphaned TODOs
+- [ ] Examples work and are accurate
