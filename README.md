@@ -13,11 +13,16 @@ Reusable coding, commit, architecture, tooling, and documentation standards that
 
 | Document | Purpose | When to Use |
 |----------|---------|-------------|
-| [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, file limits, layering | Setting up any new codebase |
-| [COMMIT-STANDARDS.md](COMMIT-STANDARDS.md) | Git workflow, conventional commits | Any project using version control |
-| [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md) | System design patterns | Multi-layer or client-server apps |
+| [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, file limits, layering, language-specific guidelines | Setting up any new codebase |
+| [TESTING-STANDARDS.md](TESTING-STANDARDS.md) | Test organization, naming, coverage, verification layers | Writing maintainable tests |
+| [COMMIT-STANDARDS.md](COMMIT-STANDARDS.md) | Git workflow, conventional commits, agent footers | Any project using version control |
+| [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md) | System design patterns, phased mutation, view models | Multi-layer or client-server apps |
 | [TOOLING-STANDARDS.md](TOOLING-STANDARDS.md) | Linting, hooks, automation | Enforcing code quality |
-| [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) | README requirements, comments | Maintaining readable codebases |
+| [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) | README requirements, comments, algorithm docs | Maintaining readable codebases |
+| [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) | Boundary validation, path safety, input sanitization | Apps handling user input or file paths |
+| [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) | Async/threading patterns for C#, Rust, TypeScript, Godot | Multi-threaded or async applications |
+| [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) | Platform abstraction, file system conventions, CI matrix | Apps targeting multiple OS platforms |
+| [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md) | FFI safety, cross-language boundaries, contract maintenance | Multi-language or native interop projects |
 
 ## Templates
 

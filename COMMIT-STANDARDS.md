@@ -36,6 +36,7 @@ All commits must follow this format:
 | `style` | Formatting, whitespace (no logic change) | `style(lint): fix indentation` |
 | `test` | Adding or updating tests | `test(auth): add login edge cases` |
 | `perf` | Performance improvements | `perf(db): add index for user queries` |
+| `ci` | CI/CD pipeline changes | `ci(workflow): update to actions/checkout@v4` |
 
 ### Choosing a Type
 
@@ -48,6 +49,7 @@ Did you only update documentation?               → docs
 Did you only change formatting?                  → style
 Did you only add/update tests?                   → test
 Did you only improve performance?                → perf
+Did you only change CI/CD pipelines?             → ci
 ```
 
 ## Scopes
@@ -160,6 +162,20 @@ feat(dashboard): add real-time updates
 
 Co-authored-by: Name <email@example.com>
 ```
+
+### Agent Footer (Multi-Agent Orchestration)
+
+When commits are produced by automated agents:
+
+```
+feat(backend): add user authentication
+
+Agent: auth-service-agent
+```
+
+This footer enables tracking which agent produced which changes in
+multi-agent workflows. Useful for auditing and debugging automated
+contributions.
 
 ## Pre-Commit Checklist
 

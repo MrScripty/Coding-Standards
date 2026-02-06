@@ -6,7 +6,7 @@ Requirements for maintaining readable, navigable codebases.
 
 ### Requirement
 
-**Every directory must contain a README.md file.**
+**Directories with 3+ files or non-obvious purpose should contain a README.md file.**
 
 This applies to all directories under `src/` or equivalent source folders.
 
@@ -168,6 +168,91 @@ export class AuthService {
 | Public type/interface | Yes | Purpose, when to use |
 | Private/internal | Optional | Only if complex |
 | Obvious getters/setters | No | |
+
+---
+
+## Algorithm Documentation
+
+For non-trivial algorithms, provide comprehensive documentation:
+
+### Required Elements
+
+```rust
+/// # Topological Sort Algorithm
+///
+/// Produces a linear ordering of nodes such that for every directed
+/// edge (u, v), u comes before v in the ordering.
+///
+/// ## Reference
+/// Based on Kahn's algorithm (1962)
+/// See: Kahn, A.B., "Topological sorting of large networks"
+///
+/// ## Algorithm
+/// ```text
+///     Input graph:          Output order:
+///       A → B → D           [A, C, B, E, D, F]
+///       A → C → E
+///       B → E → F
+/// ```
+///
+/// ## Preconditions
+/// - Graph is a DAG (no cycles)
+/// - All node IDs are valid
+///
+/// ## Postconditions
+/// - Output contains every node exactly once
+/// - For every edge (u, v): index(u) < index(v)
+///
+/// ## Complexity
+/// - Time: O(V + E) where V = vertices, E = edges
+/// - Space: O(V) for in-degree tracking
+///
+/// ## Error Cases
+/// Returns `Err(CycleDetected)` if:
+/// - Graph contains a cycle
+/// - Graph has self-referencing edges
+pub fn topological_sort(graph: &Graph) -> Result<Vec<NodeId>, CycleError>
+```
+
+### When to Document Algorithms
+
+Document comprehensively when:
+
+- **Complexity is non-obvious** - O(n²) or worse, or subtle constant factors
+- **Based on academic papers** - Include citation and any modifications
+- **Adapted from reference implementations** - Include attribution
+- **Maintains critical invariants** - Document what must remain true
+- **Has non-trivial preconditions** - Caller needs to know requirements
+
+### Minimal Documentation
+
+For simpler algorithms, at minimum include:
+
+```rust
+/// Sort records by priority score, highest first.
+///
+/// ## Complexity
+/// O(n log n) where n = record count
+pub fn sort_by_priority(records: &mut [Record])
+```
+
+### ASCII Diagrams
+
+Use ASCII art to illustrate transformations:
+
+```rust
+/// Rebalance a binary search tree after insertion.
+///
+/// ```text
+///     Before (unbalanced):     After (balanced):
+///         A                        B
+///          \                      / \
+///           B                    A   C
+///            \
+///             C
+/// ```
+pub fn rebalance(tree: &mut BinaryTree) -> &mut Node
+```
 
 ---
 

@@ -137,24 +137,25 @@ indent_style = tab
 | Security | Vulnerabilities | Semgrep, Bandit, npm audit |
 | Type | Type correctness | TypeScript, mypy, Flow |
 
-### TypeScript/JavaScript: ESLint + Prettier
+### TypeScript/JavaScript: ESLint 9+ (Flat Config) + Prettier
 
-```json
-// .eslintrc.json
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "rules": {
-    "@typescript-eslint/explicit-function-return-type": "error",
-    "@typescript-eslint/no-unused-vars": "error",
-    "no-console": "warn"
-  }
-}
+```javascript
+// eslint.config.js
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import prettier from 'eslint-config-prettier';
+
+export default tseslint.config(
+    eslint.configs.recommended,
+    ...tseslint.configs.recommended,
+    prettier,
+    {
+        rules: {
+            '@typescript-eslint/no-unused-vars': 'error',
+            'no-console': ['warn', { allow: ['warn', 'error'] }],
+        },
+    }
+);
 ```
 
 ```json

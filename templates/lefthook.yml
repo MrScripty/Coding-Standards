@@ -1,0 +1,150 @@
+# Lefthook configuration for pre-commit hooks
+# https://github.com/evilmartians/lefthook
+#
+# Installation:
+#   npm install lefthook --save-dev
+#   npx lefthook install
+#
+# Customize the commands below for your tech stack.
+
+pre-commit:
+  parallel: true
+  commands:
+    # ─────────────────────────────────────────────────────────────
+    # JavaScript/TypeScript
+    # ─────────────────────────────────────────────────────────────
+
+    eslint:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: npx eslint {staged_files} --fix
+      stage_fixed: true
+
+    prettier:
+      glob: "*.{js,ts,jsx,tsx,json,css,scss,md}"
+      run: npx prettier --write {staged_files}
+      stage_fixed: true
+
+    typecheck:
+      glob: "*.{ts,tsx}"
+      run: npx tsc --noEmit
+
+    # ─────────────────────────────────────────────────────────────
+    # Python (uncomment if using Python)
+    # ─────────────────────────────────────────────────────────────
+
+    # black:
+    #   glob: "*.py"
+    #   run: black {staged_files}
+    #   stage_fixed: true
+
+    # ruff:
+    #   glob: "*.py"
+    #   run: ruff check {staged_files} --fix
+    #   stage_fixed: true
+
+    # mypy:
+    #   glob: "*.py"
+    #   run: mypy {staged_files}
+
+    # ─────────────────────────────────────────────────────────────
+    # Go (uncomment if using Go)
+    # ─────────────────────────────────────────────────────────────
+
+    # gofmt:
+    #   glob: "*.go"
+    #   run: gofmt -w {staged_files}
+    #   stage_fixed: true
+
+    # golint:
+    #   glob: "*.go"
+    #   run: golangci-lint run {staged_files}
+
+    # ─────────────────────────────────────────────────────────────
+    # Rust (uncomment if using Rust)
+    # ─────────────────────────────────────────────────────────────
+
+    # rustfmt:
+    #   glob: "*.rs"
+    #   run: rustfmt {staged_files}
+    #   stage_fixed: true
+
+    # clippy:
+    #   glob: "*.rs"
+    #   run: cargo clippy -- -D warnings
+
+    # ─────────────────────────────────────────────────────────────
+    # C# / .NET (uncomment if using .NET)
+    # ─────────────────────────────────────────────────────────────
+
+    # dotnet-format:
+    #   glob: "*.cs"
+    #   run: dotnet format --include {staged_files} --verify-no-changes
+
+    # dotnet-build:
+    #   glob: "*.cs"
+    #   run: dotnet build --no-restore -warnaserror
+
+    # ─────────────────────────────────────────────────────────────
+    # General checks
+    # ─────────────────────────────────────────────────────────────
+
+    # Ensure no large files are committed
+    check-file-size:
+      run: |
+        max_size=1048576  # 1MB
+        echo "{staged_files}" | tr ' ' '\n' | while IFS= read -r file; do
+          if [ -f "$file" ]; then
+            size=$(wc -c < "$file")
+            if [ "$size" -gt "$max_size" ]; then
+              echo "File too large: $file ($size bytes)"
+              exit 1
+            fi
+          fi
+        done
+
+    # Check for debug statements (customize patterns as needed)
+    no-debug:
+      glob: "*.{js,ts,py}"
+      run: |
+        if grep -l "debugger\|breakpoint()" {staged_files} 2>/dev/null; then
+          echo "Debug statements found in staged files"
+          exit 1
+        fi
+
+# ─────────────────────────────────────────────────────────────────
+# Pre-push hooks (run before pushing)
+# ─────────────────────────────────────────────────────────────────
+
+pre-push:
+  commands:
+    # Run full test suite before pushing
+    test:
+      run: npm test
+
+    # Or for other languages:
+    # test-python:
+    #   run: pytest
+    # test-go:
+    #   run: go test ./...
+    # test-rust:
+    #   run: cargo test
+    # test-dotnet:
+    #   run: dotnet test
+
+# ─────────────────────────────────────────────────────────────────
+# Commit message validation
+# ─────────────────────────────────────────────────────────────────
+
+commit-msg:
+  commands:
+    # Validate conventional commit format
+    conventional:
+      run: |
+        commit_msg=$(cat {1})
+        pattern="^(feat|fix|refactor|chore|docs|style|test|perf|ci)(\(.+\))?: .{1,}"
+        if ! echo "$commit_msg" | grep -qE "$pattern"; then
+          echo "Invalid commit message format."
+          echo "Expected: <type>(<scope>): <description>"
+          echo "Types: feat, fix, refactor, chore, docs, style, test, perf, ci"
+          exit 1
+        fi
