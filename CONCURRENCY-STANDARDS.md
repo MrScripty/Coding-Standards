@@ -193,6 +193,123 @@ if msgs.len() >= MAX_QUEUE {
 msgs.push(new_message);
 ```
 
+### Async Mutex Selection
+
+Choose the right mutex based on whether the lock is held across `.await` points:
+
+| Mutex | When to Use | Key Characteristic |
+|-------|------------|-------------------|
+| `parking_lot::Mutex` | Lock held briefly, no `.await` while locked | Blocks OS thread; ideal for fast CPU-bound work |
+| `tokio::sync::Mutex` | Lock held across `.await` points | Yields the async task, does not block the runtime thread |
+| `tokio::sync::RwLock` | Many concurrent readers, infrequent writers | Read-parallelism when writes are rare; still async-aware |
+
+**The rule:** Use `parking_lot::Mutex` (or `std::sync::Mutex`) for synchronous critical sections. Use `tokio::sync::Mutex` only when the lock must be held across an `.await`.
+
+```rust
+// BAD: std/parking_lot mutex held across .await — blocks the runtime thread
+let guard = self.state.lock();
+let result = self.client.send(guard.pending_request()).await; // Deadlock risk!
+guard.mark_sent(result);
+
+// GOOD: tokio mutex when holding across .await
+let mut guard = self.state.lock().await;
+let result = self.client.send(guard.pending_request()).await;
+guard.mark_sent(result);
+```
+
+```rust
+// BAD: tokio mutex for synchronous CPU-bound work — unnecessary overhead
+let guard = self.cache.lock().await;
+let parsed = expensive_parse(&guard.raw_data); // No .await needed
+drop(guard);
+
+// GOOD: parking_lot mutex for synchronous work
+let guard = self.cache.lock();
+let parsed = expensive_parse(&guard.raw_data);
+drop(guard);
+```
+
+### Async Task Lifecycle
+
+#### Spawn Cleanup
+
+Every `tokio::spawn` must have a corresponding `JoinHandle` that is awaited or
+aborted during shutdown. Spawning without tracking the handle creates orphaned
+tasks that leak resources or prevent clean exit.
+
+```rust
+struct Server {
+    tasks: Vec<tokio::task::JoinHandle<()>>,
+}
+
+impl Server {
+    fn spawn_worker(&mut self, work: impl Future<Output = ()> + Send + 'static) {
+        self.tasks.push(tokio::spawn(work));
+    }
+
+    async fn shutdown(self) {
+        for handle in self.tasks {
+            if let Err(e) = handle.await {
+                tracing::error!("Task panicked during shutdown: {e}");
+            }
+        }
+    }
+}
+```
+
+#### Graceful Shutdown of Spawned Services
+
+Use a cancellation signal (e.g., `tokio_util::sync::CancellationToken` or
+`tokio::sync::watch`) to coordinate shutdown across spawned tasks. Each task
+selects on both its work and the shutdown signal.
+
+```rust
+async fn run_listener(
+    listener: TcpListener,
+    cancel: CancellationToken,
+) {
+    loop {
+        tokio::select! {
+            result = listener.accept() => {
+                let (stream, _addr) = match result {
+                    Ok(conn) => conn,
+                    Err(e) => {
+                        tracing::warn!("Accept error: {e}");
+                        continue;
+                    }
+                };
+                let cancel = cancel.clone();
+                tokio::spawn(async move {
+                    handle_connection(stream, cancel).await;
+                });
+            }
+            _ = cancel.cancelled() => {
+                tracing::info!("Listener shutting down");
+                break;
+            }
+        }
+    }
+}
+```
+
+#### Task Panic Propagation
+
+A `JoinError` from awaiting a `JoinHandle` means the task panicked. Always
+inspect the result — silently ignoring panicked tasks hides bugs.
+
+```rust
+match handle.await {
+    Ok(()) => { /* task completed normally */ }
+    Err(e) if e.is_panic() => {
+        tracing::error!("Task panicked: {e}");
+        // Decide: propagate, restart, or degrade
+    }
+    Err(e) => {
+        tracing::warn!("Task cancelled: {e}");
+    }
+}
+```
+
 ---
 
 ## TypeScript Concurrency Rules
