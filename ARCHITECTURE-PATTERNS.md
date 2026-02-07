@@ -431,6 +431,207 @@ function withActivity<T>(
 
 ---
 
+## Process Instance Coordination
+
+### The Pattern
+
+Ensure only one instance of a process or service is running by using PID files
+with liveness checks. This prevents duplicate instances while handling crashes
+and stale state gracefully.
+
+```
+Process starts
+    │
+    ├── PID file exists?
+    │       │
+    │       ├── Yes → Is PID alive AND start time matches?
+    │       │           │
+    │       │           ├── Yes → Another instance is running (exit or connect)
+    │       │           │
+    │       │           └── No → Stale PID file (delete and reclaim)
+    │       │
+    │       └── No → Continue
+    │
+    ├── Create PID file (write atomically)
+    ├── Run
+    └── Clean up PID file on exit
+```
+
+### PID File Rules
+
+| Rule | Rationale |
+|------|-----------|
+| Write PID file atomically (write-to-temp, then rename) | Prevents partial reads by concurrent starters |
+| Include process start time alongside PID | Detects PID reuse by the OS (see below) |
+| Lock the PID file while running | OS-level mutual exclusion prevents TOCTOU races |
+| Clean up PID file on graceful exit | Prevents stale files from blocking future starts |
+| Always verify PID is alive before trusting | PID files survive crashes; the process may not |
+
+### PID File Contents
+
+Store enough information to distinguish a live instance from a stale file:
+
+```json
+{
+    "pid": 48210,
+    "start_time": 1706140800,
+    "version": "1.2.0"
+}
+```
+
+### Handling PID Reuse
+
+Operating systems recycle PIDs. After a process dies, the OS may assign its PID
+to an unrelated process. Checking `kill(pid, 0)` alone will return "alive" for
+the wrong process.
+
+**The fix:** Store the process start time in the PID file and compare it against
+the actual start time of the running process.
+
+```rust
+use std::fs;
+use std::path::Path;
+
+fn is_original_process_alive(pid_file: &Path) -> bool {
+    let contents = match fs::read_to_string(pid_file) {
+        Ok(c) => c,
+        Err(_) => return false,
+    };
+    let recorded: PidRecord = match serde_json::from_str(&contents) {
+        Ok(r) => r,
+        Err(_) => return false, // Corrupt file — treat as stale
+    };
+
+    // Check if process exists
+    #[cfg(unix)]
+    let alive = unsafe { libc::kill(recorded.pid, 0) } == 0;
+    #[cfg(not(unix))]
+    let alive = false; // Platform-specific check needed
+
+    if !alive {
+        return false;
+    }
+
+    // Compare start time to detect PID reuse
+    match get_process_start_time(recorded.pid) {
+        Some(actual_start) => actual_start == recorded.start_time,
+        None => false, // Can't verify — treat as stale
+    }
+}
+```
+
+On Linux, process start time can be read from `/proc/[pid]/stat`. On Windows,
+use the process creation time via the Windows API. See
+[CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) for platform
+abstraction strategies.
+
+### Stale PID File Cleanup
+
+When a PID file references a dead process (or a reused PID with a different
+start time), the file is stale. Delete it and proceed with normal startup.
+Always log when reclaiming a stale PID file — it indicates a previous crash.
+
+---
+
+## Discover-or-Create Pattern
+
+### The Pattern
+
+When a process needs access to a shared service (local server, registry,
+coordinator), it first attempts to discover an existing instance. If none
+exists, it creates one itself. All processes converge to using the same
+instance.
+
+This pattern builds on [Process Instance Coordination](#process-instance-coordination)
+for detecting existing instances and uses network transport safety practices
+from [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) `## Network Transport Safety`
+for the listener.
+
+### Instance Convergence Flow
+
+```
+Process starts
+    │
+    ├─► Try to connect to existing service (known address/port)
+    │       │
+    │       ├── Success → Use existing instance
+    │       │
+    │       └── Failure → No instance found
+    │               │
+    │               ├─► Acquire creation lock (file lock, PID file)
+    │               │       │
+    │               │       ├── Lock acquired → Create service, release lock
+    │               │       │
+    │               │       └── Lock failed → Another process is creating
+    │               │               │
+    │               │               └─► Retry connection with backoff
+    │               │
+    │               └─► Connect to newly created service
+```
+
+### Rules
+
+| Rule | Rationale |
+|------|-----------|
+| Attempt connection before creation | Avoids duplicate instances |
+| Use a creation lock | Prevents race between concurrent starters |
+| Retry with backoff after lock failure | Gives the creator time to finish startup |
+| Verify service health after connecting | Existing instance may be shutting down |
+| Define an ownership model | Determines when the service exits |
+
+### Ownership Models
+
+| Model | How It Works | When to Use |
+|-------|-------------|-------------|
+| Creator-owned | Service exits when the process that created it exits | Simple tools, short-lived sessions |
+| Last-client-standing | Service exits when all clients disconnect | Shared background services |
+| Independent daemon | Service runs until explicitly stopped | Long-lived infrastructure |
+
+### Example
+
+```rust
+async fn get_or_create_service(addr: SocketAddr) -> Result<TcpStream> {
+    // Step 1: Try to connect to existing instance
+    if let Ok(stream) = TcpStream::connect(addr).await {
+        return Ok(stream);
+    }
+
+    // Step 2: No instance found — acquire creation lock
+    let lock = FileLock::acquire("service.lock")?;
+
+    // Step 3: Double-check after acquiring lock (another process may have created it)
+    if let Ok(stream) = TcpStream::connect(addr).await {
+        drop(lock);
+        return Ok(stream);
+    }
+
+    // Step 4: Create the service
+    start_service(addr).await?;
+    drop(lock);
+
+    // Step 5: Connect to the newly created service
+    let mut retries = 5;
+    loop {
+        match TcpStream::connect(addr).await {
+            Ok(stream) => return Ok(stream),
+            Err(_) if retries > 0 => {
+                retries -= 1;
+                tokio::time::sleep(Duration::from_millis(100)).await;
+            }
+            Err(e) => return Err(e.into()),
+        }
+    }
+}
+```
+
+### Benefits
+
+- No duplicate services consuming resources
+- Automatic recovery from crashed instances
+- Race-condition-safe startup sequence via double-check after lock acquisition
+
+---
+
 ## Phased Mutation Pattern
 
 ### The Pattern
@@ -530,6 +731,185 @@ struct CreatedElements {
 
 ---
 
+## Schema Versioning and Migration
+
+### The Pattern
+
+Every schema change is captured as a numbered, idempotent migration. Migrations
+are applied in order at startup, and a version table tracks which migrations
+have been applied. This ensures reproducible schema state across environments
+and safe upgrades when different application versions share the same database.
+
+### Migration Rules
+
+| Rule | Rationale |
+|------|-----------|
+| Migrations are append-only | Never modify a released migration — create a new one |
+| Each migration is idempotent | Safe to run twice (use `IF NOT EXISTS`, `IF EXISTS`) |
+| Include both up and down logic | Enables rollback during failed deployments |
+| A version table tracks applied migrations | Know exactly what state the schema is in |
+| Test migrations against realistic data | Empty-table migrations can mask column-type or constraint issues |
+
+### Migration File Structure
+
+```
+migrations/
+├── 001_initial_schema.sql
+├── 002_add_user_preferences.sql
+├── 003_add_index_on_created_at.sql
+└── 004_add_status_column.sql
+```
+
+Use sequential numbering (`NNN_description.sql`) for ordering clarity. Timestamp
+prefixes (`20240125_120000_description.sql`) work for teams where concurrent
+branch development would create numbering conflicts.
+
+### Schema Version Tracking
+
+Maintain a metadata table that records which migrations have been applied:
+
+```sql
+CREATE TABLE IF NOT EXISTS schema_migrations (
+    version     INTEGER PRIMARY KEY,
+    applied_at  TEXT NOT NULL DEFAULT (datetime('now')),
+    description TEXT NOT NULL
+);
+```
+
+At startup, check the current version and apply any pending migrations:
+
+```rust
+fn apply_pending_migrations(db: &Connection, migrations: &[Migration]) -> Result<()> {
+    let current_version = db
+        .query_row("SELECT COALESCE(MAX(version), 0) FROM schema_migrations", [], |r| r.get(0))
+        .unwrap_or(0);
+
+    for migration in migrations.iter().filter(|m| m.version > current_version) {
+        db.execute_batch(&migration.up_sql)?;
+        db.execute(
+            "INSERT INTO schema_migrations (version, description) VALUES (?1, ?2)",
+            params![migration.version, migration.description],
+        )?;
+        tracing::info!("Applied migration {}: {}", migration.version, migration.description);
+    }
+
+    Ok(())
+}
+```
+
+### Forward/Backward Compatibility
+
+When different application versions may access the same database:
+
+| Change Type | Strategy | Example |
+|------------|----------|---------|
+| Add column | Add with a default value | `ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'member'` |
+| Add table | Create unconditionally | New table is ignored by older versions |
+| Remove column | Two-phase removal | Deprecate in v*N*, stop reading in v*N+1*, drop in v*N+2* |
+| Rename column | Add new + copy + two-phase remove old | Older versions still read the old column |
+
+**The rule:** Additive changes are safe. Destructive changes (drop, rename,
+change type) require a two-phase rollout so that the old and new versions of the
+application can coexist during deployment.
+
+---
+
+## Infrastructure Failure Recovery
+
+### The Pattern
+
+Infrastructure (databases, caches, file system, external services) can fail
+independently of application logic. The application must categorize each piece
+of infrastructure as **required** or **optional** and respond appropriately to
+failures — never silently corrupt state, never crash on a non-essential failure.
+
+**The principle:** Optional infrastructure is best-effort. Its failure must
+never block core initialization or request handling.
+
+### Failure Categories
+
+| Category | Examples | Recovery Strategy |
+|----------|----------|-------------------|
+| Corrupt data store | Corrupted SQLite DB, invalid JSON config | Delete and rebuild from scratch, or seed defaults |
+| Unavailable resource | Disk full, permissions changed | Log error, degrade gracefully, retry on next operation |
+| Stale or missing cache | Cache file deleted, format changed | Treat as cold start, rebuild lazily |
+| External service down | API timeout, DNS failure | Use cached fallback or return partial results |
+
+### Decision Flow
+
+```
+Infrastructure operation fails
+    │
+    ├── Is this infrastructure required for the current operation?
+    │       │
+    │       ├── Yes → Propagate the error to the caller
+    │       │
+    │       └── No → Log a warning, continue with defaults or degraded mode
+    │
+    └── Is this a startup-time failure?
+            │
+            ├── Required infrastructure → Fail with a clear error message
+            │
+            └── Optional infrastructure → Start in degraded mode, log warning
+```
+
+### Startup Resilience
+
+Categorize infrastructure at initialization:
+
+| Infrastructure | Category | Failure at Startup |
+|----------------|----------|--------------------|
+| Core database / primary data store | Required | Fail with clear error message |
+| Cache, index, or search | Optional | Start degraded, rebuild in background |
+| Analytics, telemetry, logging sinks | Optional | Start without, retry later |
+| Configuration file | Required | Fail with clear error message |
+
+**The rule:** The application must start and serve requests even if optional
+infrastructure is unavailable. See [CODING-STANDARDS.md](CODING-STANDARDS.md)
+`## Error Handling` for code-level error handling patterns; this section covers
+the architectural decision of *which failures to tolerate*.
+
+### Best-Effort Service Pattern
+
+Wrap optional infrastructure in a layer that catches failures, logs them,
+and returns safe defaults:
+
+```rust
+pub struct BestEffortRegistry {
+    db: Option<Connection>,
+}
+
+impl BestEffortRegistry {
+    pub fn lookup(&self, key: &str) -> Option<String> {
+        let db = self.db.as_ref()?;
+        match db.query_row(
+            "SELECT value FROM registry WHERE key = ?1",
+            params![key],
+            |row| row.get(0),
+        ) {
+            Ok(value) => Some(value),
+            Err(e) => {
+                tracing::warn!("Registry lookup failed for '{key}': {e}");
+                None
+            }
+        }
+    }
+
+    pub fn is_healthy(&self) -> bool {
+        self.db.is_some()
+    }
+}
+```
+
+### Benefits
+
+- System remains available during partial infrastructure failures
+- Clear separation of essential vs optional dependencies
+- Predictable behavior under degraded conditions
+- Failures are logged for diagnosis without crashing the application
+
+---
+
 ## Choosing Patterns
 
 | Situation | Recommended Pattern |
@@ -540,4 +920,8 @@ struct CreatedElements {
 | Multi-process communication | IPC/Message Contract |
 | Complex UI with data | View Model |
 | Distributed debugging | Activity Tracing |
+| Single-instance process requirement | Process Instance Coordination |
+| Service that any process may need to start | Discover-or-Create |
 | Complex data structure mutations | Phased Mutation |
+| Evolving database schemas across versions | Schema Versioning and Migration |
+| Handling infrastructure failures without crashing | Infrastructure Failure Recovery |
