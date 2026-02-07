@@ -228,6 +228,90 @@ if (validPath == null)
 
 ---
 
+## Network Transport Safety
+
+When building TCP/IPC listeners (local servers, service endpoints, inter-process
+communication), transport-level configuration is a security concern separate from
+message validation. See [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md)
+`## IPC/Message Contract Pattern` for message-level contracts; this section
+covers the transport itself.
+
+### Bind Address Rules
+
+| Scenario | Bind Address | Rationale |
+|----------|-------------|-----------|
+| Local-only IPC / dev server | `127.0.0.1` or `::1` | Only accepts connections from the same machine |
+| Service exposed to LAN/internet | `0.0.0.0` or `::` | Accepts connections from any interface |
+
+**The rule:** Local-only services **must** bind to `127.0.0.1` (or the
+platform's loopback address), never `0.0.0.0`. Binding to all interfaces
+exposes the service to the network — even if "just for development."
+
+```rust
+// BAD: Exposes local IPC server to the entire network
+let listener = TcpListener::bind("0.0.0.0:9500").await?;
+
+// GOOD: Local-only service bound to loopback
+let listener = TcpListener::bind("127.0.0.1:9500").await?;
+```
+
+### Connection Limits
+
+Every listener must define a maximum concurrent connection count. Unbounded
+accept loops allow a single misbehaving client (or deliberate flood) to exhaust
+file descriptors or memory.
+
+```rust
+use tokio::sync::Semaphore;
+
+const MAX_CONNECTIONS: usize = 64;
+let semaphore = Arc::new(Semaphore::new(MAX_CONNECTIONS));
+
+loop {
+    let permit = semaphore.clone().acquire_owned().await?;
+    let (stream, _addr) = listener.accept().await?;
+    tokio::spawn(async move {
+        handle_connection(stream).await;
+        drop(permit); // Release on completion
+    });
+}
+```
+
+### Graceful Listener Shutdown
+
+Listeners must support graceful shutdown: stop accepting new connections, allow
+in-flight connections to drain within a timeout, then force-close remaining
+connections. See [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md)
+`### Graceful Shutdown of Spawned Services` for the async task mechanics.
+
+```
+Shutdown signal received
+    │
+    ├── Stop accepting new connections
+    ├── Wait for in-flight connections (with timeout)
+    │       ├── Connections complete normally
+    │       └── Timeout expires → force-close remaining
+    └── Release bound address
+```
+
+### Half-Open Connection Handling
+
+A half-open connection occurs when one side has closed (or crashed) but the
+other side's TCP stack has not yet detected it. These connections leak resources
+indefinitely without intervention.
+
+| Approach | How It Works | When to Use |
+|----------|-------------|-------------|
+| TCP keepalive | OS sends periodic probes on idle connections | Long-lived connections with idle periods |
+| Application heartbeat | Protocol-level ping/pong messages | When you need faster detection than TCP keepalive |
+| Read timeout | Close connections that send no data within a deadline | Request-response protocols |
+
+**The rule:** Every listener must use at least one of these mechanisms. For
+local IPC, a read timeout (e.g., 30–60 seconds of inactivity) is usually
+sufficient.
+
+---
+
 ## What NOT to Validate
 
 Internal code that receives already-validated data should not re-validate.
