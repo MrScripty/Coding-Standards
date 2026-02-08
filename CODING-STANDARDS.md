@@ -215,27 +215,8 @@ function processValidatedInput(input: ValidatedInput): Result {
 
 ## Dependency Management
 
-### Minimize External Dependencies
-
-Before adding a dependency, ask:
-1. Can this be implemented in <50 lines?
-2. Does this add significant transitive dependencies?
-3. Is this actively maintained?
-4. Is there already a similar dependency in the project?
-
-### Approved vs. Avoided
-
-Create an explicit list of approved dependencies for your project:
-
-```markdown
-## Approved Dependencies
-- [List your approved packages]
-
-## Avoid
-- Utility libraries for simple operations (implement locally)
-- Multiple packages solving the same problem
-- Packages with excessive transitive dependencies
-```
+See [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) for comprehensive guidelines on
+evaluating, versioning, auditing, and minimizing third-party dependencies.
 
 ## Code Style
 

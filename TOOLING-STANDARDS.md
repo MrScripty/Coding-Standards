@@ -328,25 +328,8 @@ pre-commit:
 
 ## Dependency Auditing
 
-### Regular Security Audits
-
-```yaml
-# In CI workflow
-- name: Audit dependencies
-  run: npm audit --audit-level=high
-```
-
-### Lock File Integrity
-
-Always commit lock files:
-- `package-lock.json` (npm)
-- `yarn.lock` (yarn)
-- `pnpm-lock.yaml` (pnpm)
-
-Verify in CI:
-```bash
-npm ci  # Fails if lock file doesn't match package.json
-```
+See [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) for security auditing, lock file
+integrity, unused dependency detection, and CI integration for dependency checks.
 
 ---
 
