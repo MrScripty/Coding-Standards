@@ -910,6 +910,87 @@ impl BestEffortRegistry {
 
 ---
 
+## HTTP API Error Convention
+
+### The Pattern
+
+HTTP APIs must use status codes to communicate success or failure. Error
+details are returned in a consistent JSON envelope so clients can handle
+errors uniformly.
+
+### Error Response Format
+
+```json
+{
+    "error": "Human-readable description of what went wrong"
+}
+```
+
+### Status Code Usage
+
+| Status Code | Meaning | When to Use |
+|-------------|---------|-------------|
+| 200 | OK | Successful retrieval or action |
+| 201 | Created | Resource successfully created |
+| 400 | Bad Request | Invalid input, missing fields |
+| 404 | Not Found | Resource does not exist |
+| 409 | Conflict | Concurrent modification conflict |
+| 500 | Internal Server Error | Unhandled server-side failure |
+
+### Server Implementation
+
+Use a shared error type that converts to the correct status code:
+
+```rust
+pub struct ApiError(pub StatusCode, pub String);
+
+impl ApiError {
+    pub fn not_found(msg: impl Into<String>) -> Self {
+        Self(StatusCode::NOT_FOUND, msg.into())
+    }
+    pub fn bad_request(msg: impl Into<String>) -> Self {
+        Self(StatusCode::BAD_REQUEST, msg.into())
+    }
+}
+
+impl IntoResponse for ApiError {
+    fn into_response(self) -> Response {
+        (self.0, Json(json!({ "error": self.1 }))).into_response()
+    }
+}
+```
+
+### Client Implementation
+
+Clients must check the status code before parsing the response body.
+See [CODING-STANDARDS.md](CODING-STANDARDS.md) `### Validate Outbound Responses`
+for the client-side pattern.
+
+### Anti-Pattern: Status 200 with Error Body
+
+```
+// BAD: Returns 200 with an error message in the body
+HTTP/1.1 200 OK
+{ "error": "Project not found" }
+
+// GOOD: Returns proper status code
+HTTP/1.1 404 Not Found
+{ "error": "Project not found" }
+```
+
+**Why:** Returning 200 for errors breaks HTTP semantics. Clients, proxies,
+and monitoring tools all rely on status codes to distinguish success from
+failure. An error hidden inside a 200 response is invisible to everything
+except custom parsing logic.
+
+### Benefits
+
+- **Uniform error handling:** Clients use one pattern for all error responses
+- **Observable:** Monitoring and logging tools can alert on 4xx/5xx rates
+- **Self-documenting:** Status codes convey intent without reading the body
+
+---
+
 ## Choosing Patterns
 
 | Situation | Recommended Pattern |
@@ -925,3 +1006,4 @@ impl BestEffortRegistry {
 | Complex data structure mutations | Phased Mutation |
 | Evolving database schemas across versions | Schema Versioning and Migration |
 | Handling infrastructure failures without crashing | Infrastructure Failure Recovery |
+| Consistent error responses from HTTP APIs | HTTP API Error Convention |

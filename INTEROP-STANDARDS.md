@@ -180,6 +180,92 @@ if (!parsed || typeof parsed.type !== 'string' || typeof parsed.action !== 'stri
 
 ---
 
+## Serialization Format Alignment
+
+When data types are defined in multiple languages and serialized across a
+boundary (JSON over HTTP, WebSocket, IPC), the serialization format must
+match exactly on both sides.
+
+### Tagged Enum Alignment
+
+Rust's serde tagged enums produce specific JSON shapes. The receiving language
+must use the same tag values and casing.
+
+```rust
+// Rust (server side)
+#[derive(Serialize, Deserialize)]
+#[serde(tag = "type", rename_all = "snake_case")]
+pub enum ServerEvent {
+    TimelineChanged,
+    BeatUpdated { clip_id: String },
+    GenerationProgress { clip_id: String, token: String },
+}
+// Serializes to: { "type": "timeline_changed" }
+```
+
+```typescript
+// TypeScript (client side) — must match the serde output exactly
+type ServerMessage =
+    | { type: 'timeline_changed' }
+    | { type: 'beat_updated'; clip_id: string }
+    | { type: 'generation_progress'; clip_id: string; token: string };
+```
+
+### Enum Variant Alignment
+
+When enum values are sent as strings, both sides must agree on casing and
+format. Check serde's `rename_all` attribute to determine the wire format.
+
+```rust
+// Rust: PascalCase variants, no rename_all → wire format is PascalCase
+#[derive(Serialize, Deserialize)]
+pub enum ArcType { APlot, BPlot, CPlot, Runner }
+// Serializes to: "APlot"
+```
+
+```typescript
+// BAD: Wrong casing — will fail to deserialize
+type ArcType = 'a_plot' | 'b_plot' | 'c_plot' | 'runner';
+
+// GOOD: Matches Rust's PascalCase output
+type ArcType = 'APlot' | 'BPlot' | 'CPlot' | 'Runner';
+```
+
+### Struct Field Alignment
+
+Check serde's `rename_all` on structs to determine field name casing:
+
+```rust
+// Rust: rename_all = "snake_case" on the struct
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub struct TimeRange {
+    pub start_ms: u64,
+    pub end_ms: u64,
+}
+// Serializes to: { "start_ms": 123, "end_ms": 456 }
+```
+
+```typescript
+// TypeScript — must use snake_case to match
+interface TimeRange {
+    start_ms: number;
+    end_ms: number;
+}
+```
+
+### Rules
+
+1. **Check serde attributes before writing client types** — `rename_all`,
+   `tag`, `content`, and `rename` all affect the wire format
+2. **Test serialization round-trips** — serialize in one language, deserialize
+   in the other, and verify the result matches
+3. **Use a shared schema when possible** — OpenAPI, JSON Schema, or protobuf
+   definitions generate types for both sides from a single source of truth
+4. **Update both sides in the same commit** — prevents drift between languages
+
+---
+
 ## When These Rules Apply
 
 | Boundary Type | Examples | Key Concerns |

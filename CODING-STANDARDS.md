@@ -213,6 +213,40 @@ function processValidatedInput(input: ValidatedInput): Result {
 }
 ```
 
+### Validate Outbound Responses
+
+HTTP handlers must check the response status before treating the body as valid.
+This applies to both client code consuming APIs and server code calling upstream
+services.
+
+```typescript
+// BAD: Assumes response is always valid JSON
+const data = await fetch('/api/items').then(r => r.json());
+
+// GOOD: Check status before parsing
+const res = await fetch('/api/items');
+if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.error || `HTTP ${res.status}`);
+}
+const data = await res.json();
+```
+
+```rust
+// BAD: Assumes upstream always returns 200
+let body: ApiResponse = client.get(url).send().await?.json().await?;
+
+// GOOD: Check status
+let res = client.get(url).send().await?;
+if !res.status().is_success() {
+    return Err(ApiError::upstream(res.status(), res.text().await?));
+}
+let body: ApiResponse = res.json().await?;
+```
+
+**Why:** Without status checks, error responses (404, 500) are silently
+deserialized as empty or malformed data, causing confusing downstream failures.
+
 ## Dependency Management
 
 See [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) for comprehensive guidelines on
@@ -242,6 +276,37 @@ function greet(name: string): string {
     return `Hello, ${name}!`;
 }
 ```
+
+### Don't Repeat Yourself (DRY)
+
+When the same logic appears in multiple places, extract it into a shared
+function or module. Duplicated code creates divergence risk — when one copy
+is updated, the others are often missed.
+
+```rust
+// BAD: Same logic in two modules
+// ai/prompt.rs
+fn gather_surrounding(track: &ArcTrack, clip_id: ClipId) -> Context { ... }
+
+// ai/consistency.rs
+fn gather_surrounding(track: &ArcTrack, clip_id: ClipId) -> Context { ... }
+
+// GOOD: Shared helper
+// ai/helpers.rs
+pub fn gather_surrounding_scripts(track: &ArcTrack, clip_id: ClipId) -> Context { ... }
+```
+
+**When to extract:**
+
+- Two or more call sites with identical or near-identical logic
+- The duplicated code serves the same purpose (not coincidental similarity)
+- The extracted function has a clear name and single responsibility
+
+**When duplication is acceptable:**
+
+- Test setup code (clarity > reuse in tests)
+- Two implementations that happen to look similar but serve different purposes
+- Extraction would require complex parameterization that obscures intent
 
 ### Delete Unused Code
 
@@ -396,6 +461,26 @@ impl Default for ImportConfig {
     }
 }
 ```
+
+### Unimplemented Stubs
+
+Do not commit stub functions that accept requests and return empty or dummy
+data. Stubs silently violate the caller's expectations and are difficult to
+distinguish from working code.
+
+```rust
+// BAD: Looks like a working endpoint but does nothing
+pub async fn summarize(...) -> Json<SummaryResponse> {
+    Json(SummaryResponse { summary: String::new() })
+}
+
+// GOOD: Don't register the route until implemented
+// (no route, no handler — callers get a clear 404)
+```
+
+**If a placeholder is truly needed** (e.g., for integration testing), use the
+[Disabled Features](#disabled-features) pattern: document the reason, create a
+tracking issue, and specify re-enabling conditions.
 
 ### Review Checklist
 
@@ -554,6 +639,46 @@ trait Storage {
     fn items(&self) -> &[Self::Item];
 }
 ```
+
+## TypeScript-Specific Guidelines
+
+### Explicit Return Types on Public Functions
+
+Functions that form part of an API surface (exported, called across modules)
+must declare their return type. This catches accidental changes at the
+definition site rather than propagating `any` to callers.
+
+```typescript
+// BAD: Inferred return type — callers don't know what to expect
+export async function getTimeline() {
+    return request('/api/timeline');
+}
+
+// GOOD: Explicit return type — contract is clear
+export async function getTimeline(): Promise<Timeline> {
+    return request('/api/timeline');
+}
+```
+
+Private helpers and inline callbacks may rely on inference when the type is
+obvious from context.
+
+### Contract Types for API Boundaries
+
+When calling external APIs, define types that match the expected response
+shape and use them to type API functions. Don't pass raw `string` or `any`
+where a domain type exists.
+
+```typescript
+// BAD: Untyped parameters accept anything
+export function createArc(name: string, type: string) { ... }
+
+// GOOD: Domain types enforce valid values
+export function createArc(name: string, type: ArcType) { ... }
+```
+
+This ensures the compiler catches mismatches (like `'a_plot'` vs `'APlot'`)
+at build time rather than at runtime.
 
 ## Performance-Critical Code
 
