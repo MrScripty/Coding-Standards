@@ -362,6 +362,96 @@ test('fetchUser throws for invalid ID', async () => {
 
 ---
 
+## React Component Testing
+
+### Selector Strategy
+
+Choose selectors that match what you're actually testing. Fragile selectors are the #1 cause
+of tests breaking when components are improved (especially accessibility improvements).
+
+**Selector priority (most to least resilient):**
+
+| Priority | Selector | When to Use | Resilience |
+|----------|----------|-------------|------------|
+| 1 | `getByRole('button', { name: 'Save' })` | Interactive elements with visible text | High |
+| 2 | `getByTitle('ComfyUI')` / `getByLabelText(...)` | Elements with accessible names | High |
+| 3 | `getByTestId('submit-btn')` | No accessible name available | Medium |
+| 4 | `container.querySelector('button')` | Targeting a specific HTML element type | Medium |
+| 5 | `getAllByRole('button')` + count assertion | Verifying total count | Low |
+
+```typescript
+// BAD: Breaks when accessibility improvements add more role="button" elements
+const buttons = screen.getAllByRole('button');
+expect(buttons.length).toBe(3);
+
+// BAD: Breaks when another button is added anywhere in the tree
+screen.getByRole('button'); // throws if multiple found
+
+// GOOD: Targets the specific element by accessible name
+screen.getByRole('button', { name: 'Launch' });
+
+// GOOD: Targets by title when name isn't practical
+screen.getByTitle('ComfyUI');
+
+// GOOD: Targets the HTML element type directly when needed
+container.querySelector('button');
+```
+
+### Accessibility and Tests
+
+Adding ARIA roles (`role="button"`, `tabIndex`, `onKeyDown`) is expected to change the number
+of elements found by `getByRole`. **This is a feature, not a bug** — tests should break when
+you remove accessibility, not when you add it.
+
+When adding accessibility attributes to components:
+1. Update existing tests that use generic `getByRole` queries
+2. Switch to queries with accessible names: `getByRole('button', { name: '...' })`
+3. Add a dedicated test verifying the new keyboard interaction works
+
+### `userEvent` vs `fireEvent`
+
+`userEvent` simulates realistic browser behavior — it fires the full pointer event chain
+(`pointerMove` → `pointerDown` → `pointerUp` → `click`). This can trigger side effects in
+components that track mouse position or pointer state.
+
+```typescript
+// userEvent simulates the FULL interaction chain
+// This moves the pointer, which may trigger onPointerMove handlers
+await user.click(element);
+
+// fireEvent fires a SINGLE event with no side effects
+// Use when you need to test one event in isolation
+fireEvent.click(element);
+```
+
+**When to use each:**
+
+| Scenario | Use | Why |
+|----------|-----|-----|
+| Testing user flows (click, type, tab) | `userEvent` | Realistic simulation |
+| Component tracks mouse/pointer position | `fireEvent` | Avoids pointer move side effects |
+| Testing keyboard interactions | `userEvent` | Simulates focus + keypress correctly |
+| Window-level events (`mousemove`, `resize`) | `act()` + `dispatchEvent` | Not user interactions |
+
+```typescript
+// Dispatching window events requires act() to flush state updates
+act(() => {
+    window.dispatchEvent(new MouseEvent('mousemove', {
+        clientX: 100, clientY: 200,
+    }));
+});
+```
+
+### DOM Geometry in Tests
+
+`jsdom` returns `{0, 0, 0, 0}` for all `getBoundingClientRect()` calls. If your component
+logic depends on element positions:
+- Mock `getBoundingClientRect` on specific elements when testing position-dependent logic
+- Accept that index calculations based on position may return edge-case values (usually 0)
+- Consider extracting position logic into a pure function that can be unit tested separately
+
+---
+
 ## Performance Testing
 
 ### Benchmark Critical Paths

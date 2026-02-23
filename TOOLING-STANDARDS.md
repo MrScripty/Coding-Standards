@@ -139,6 +139,10 @@ indent_style = tab
 
 ### TypeScript/JavaScript: ESLint 9+ (Flat Config) + Prettier
 
+**IMPORTANT:** In ESLint 9 flat config, type-aware rules (like `strictTypeChecked`) must be
+scoped inside a `files` block. Applying them globally will attempt to type-check non-TS files
+(config files, JS scripts, etc.) and fail. Always scope type-checked rules to source files.
+
 ```javascript
 // eslint.config.js
 import eslint from '@eslint/js';
@@ -146,17 +150,58 @@ import tseslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
 
 export default tseslint.config(
-    eslint.configs.recommended,
-    ...tseslint.configs.recommended,
-    prettier,
+    // Global ignores — always a separate block with no other keys
     {
+        ignores: ['dist/**', 'node_modules/**', 'scripts/**', '*.config.*'],
+    },
+    // Type-aware rules scoped to source files only
+    {
+        files: ['src/**/*.{ts,tsx}'],
+        extends: [
+            eslint.configs.recommended,
+            ...tseslint.configs.strictTypeChecked,
+            prettier,
+        ],
+        languageOptions: {
+            parserOptions: {
+                project: './tsconfig.json',
+            },
+        },
         rules: {
-            '@typescript-eslint/no-unused-vars': 'error',
-            'no-console': ['warn', { allow: ['warn', 'error'] }],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+            ],
+            'no-console': 'error',
         },
     }
 );
 ```
+
+#### Common Flat Config Pitfalls
+
+| Mistake | Symptom | Fix |
+|---------|---------|-----|
+| `strictTypeChecked` at top level | Type errors on `.js` config files | Move into `files: ['src/**/*.{ts,tsx}']` block |
+| Missing `ignores` block | Linting `dist/`, `node_modules/` | Add separate `{ ignores: [...] }` block |
+| `--ext ts,tsx` flag | Silently ignored in flat config | Use `files` patterns instead |
+
+### React 19+ Configuration
+
+React 19 uses the automatic JSX runtime — components no longer need `import React from 'react'`.
+Update ESLint rules to match:
+
+```javascript
+// Inside the files block for React projects
+rules: {
+    // React 19 auto-imports JSX runtime — no manual import needed
+    'react/react-in-jsx-scope': 'off',
+    // TypeScript handles prop validation — PropTypes not needed
+    'react/prop-types': 'off',
+}
+```
+
+Failing to turn off `react/react-in-jsx-scope` will produce an error on every file with JSX.
 
 ```json
 // .prettierrc
@@ -250,6 +295,21 @@ npm install eslint-config-prettier --save-dev
 ---
 
 ## CI Integration
+
+### Quality Gates Are Mandatory
+
+**All four quality gates must pass before code merges.** If any gate is removed or disabled
+(even temporarily), errors accumulate silently and become expensive to fix in bulk.
+
+| Gate | What it catches | Non-negotiable? |
+|------|----------------|-----------------|
+| Lint | Code quality, patterns, a11y | Yes — blocks PR |
+| Type check | Type errors, interface mismatches | Yes — blocks PR |
+| Format check | Inconsistent formatting | Yes — blocks PR |
+| Tests | Regressions, broken behavior | Yes — blocks PR |
+
+**Never remove a quality gate from CI without immediately replacing it.** A lint step removed
+"temporarily" can result in hundreds of errors accumulating before anyone notices.
 
 ### Recommended CI Workflow
 
@@ -348,8 +408,8 @@ integrity, unused dependency detection, and CI integration for dependency checks
 // package.json
 {
   "scripts": {
-    "lint": "eslint src --ext .ts,.js",
-    "lint:fix": "eslint src --ext .ts,.js --fix",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
     "format": "prettier --write \"src/**/*.{ts,js,json,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,js,json,css}\"",
     "typecheck": "tsc --noEmit",
@@ -358,6 +418,9 @@ integrity, unused dependency detection, and CI integration for dependency checks
   }
 }
 ```
+
+> **Note:** ESLint 9+ flat config ignores `--ext` flags. File filtering is handled by `files`
+> patterns in `eslint.config.js`. Use `eslint src/` without `--ext`.
 
 ---
 
