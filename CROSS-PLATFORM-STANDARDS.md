@@ -161,6 +161,33 @@ pub use platform_linux::load_native_lib;
 pub use platform_windows::load_native_lib;
 ```
 
+#### Acceptable Inline Exception
+
+A `cfg()` block may remain inline when **all** of the following are true:
+
+1. The platform-specific code is 5 lines or fewer
+2. Extracting it would require passing 3+ parameters or restructuring the
+   surrounding function (e.g., setting a flag on a builder mid-construction)
+3. Both platform behaviors are documented with comments
+4. The file contains no more than 2 inline `cfg()` blocks total
+
+```rust
+// ACCEPTABLE: Single-expression cfg on a builder, documented
+fn spawn_detached(cmd: &mut Command) {
+    // Windows: CREATE_NO_WINDOW prevents console flash
+    #[cfg(windows)]
+    cmd.creation_flags(0x08000000);
+    // Unix: setsid detaches from parent terminal
+    #[cfg(unix)]
+    cmd.process_group(0);
+
+    cmd.spawn().expect("failed to spawn");
+}
+```
+
+If the file accumulates more than 2 inline `cfg()` blocks, refactor the
+platform-specific logic into the platform module.
+
 ---
 
 ## File System Conventions
