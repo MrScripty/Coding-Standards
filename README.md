@@ -25,6 +25,7 @@ Reusable coding, commit, architecture, tooling, and documentation standards that
 | [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md) | FFI safety, cross-language boundaries, contract maintenance | Multi-language or native interop projects |
 | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) | Dependency evaluation, versioning, auditing, and minimization | Adding or reviewing third-party packages |
 | [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Binding architecture, FFI wrapper design, code generation, type mapping | Exposing a core library to multiple target languages |
+| [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Versioning, changelogs, release artifacts, CI/CD release pipelines | Shipping software to users or downstream consumers |
 
 ## Templates
 
