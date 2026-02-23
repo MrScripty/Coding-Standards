@@ -131,6 +131,44 @@ def calculate_total(items: list[Item], tax_rate: float) -> float:
 
 ---
 
+## Markdown Formatting
+
+### Fenced Code Blocks
+
+Always specify a language identifier on fenced code blocks so renderers apply
+syntax highlighting:
+
+````markdown
+```rust
+fn main() {}
+```
+````
+
+Use `text` as the language for plain-text blocks that have no specific syntax.
+
+### Tables
+
+Use standard markdown table syntax so tables render correctly in all viewers.
+The separator row must use dashes with single-space padding that match the
+header cell widths:
+
+```markdown
+| Name | Description |
+| ---- | ----------- |
+| foo  | Does X      |
+| bar  | Does Y      |
+```
+
+Rules:
+
+- Separator dashes must match the header column width (one space of padding on
+  each side of the dashes)
+- All rows in a table must use the same column widths — pad shorter cells with
+  trailing spaces
+- Do not omit leading or trailing pipes
+
+---
+
 ## API Documentation
 
 ### Public Interfaces
@@ -341,6 +379,9 @@ docs/
 ---
 
 ## Changelog
+
+For comprehensive release workflow guidance including changelog automation and
+CI/CD integration, see [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md).
 
 ### When to Maintain
 
