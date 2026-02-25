@@ -680,6 +680,11 @@ export function createArc(name: string, type: ArcType) { ... }
 This ensures the compiler catches mismatches (like `'a_plot'` vs `'APlot'`)
 at build time rather than at runtime.
 
+### Accessibility
+
+See [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) for semantic HTML, keyboard
+interaction, ARIA, and a11y linting requirements.
+
 ## Performance-Critical Code
 
 ### Documentation
