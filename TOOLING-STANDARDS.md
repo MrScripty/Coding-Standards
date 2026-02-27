@@ -126,7 +126,7 @@ indent_style = tab
 1. **Fail on warnings** - No "acceptable" warnings in CI
 2. **Autofix when possible** - Reduce manual work
 3. **Check only changed files** - For speed in pre-commit
-4. **Full check in CI** - Complete analysis on every PR
+4. **Use tiered linting in CI** - Block critical issues and regressions; run full-lint audit on every PR
 
 ### Common Linter Categories
 
@@ -186,22 +186,8 @@ export default tseslint.config(
 | Missing `ignores` block | Linting `dist/`, `node_modules/` | Add separate `{ ignores: [...] }` block |
 | `--ext ts,tsx` flag | Silently ignored in flat config | Use `files` patterns instead |
 
-### React 19+ Configuration
-
-React 19 uses the automatic JSX runtime — components no longer need `import React from 'react'`.
-Update ESLint rules to match:
-
-```javascript
-// Inside the files block for React projects
-rules: {
-    // React 19 auto-imports JSX runtime — no manual import needed
-    'react/react-in-jsx-scope': 'off',
-    // TypeScript handles prop validation — PropTypes not needed
-    'react/prop-types': 'off',
-}
-```
-
-Failing to turn off `react/react-in-jsx-scope` will produce an error on every file with JSX.
+Frontend-specific lint details (including React runtime-specific rule guidance)
+are defined in [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md).
 
 ```json
 // .prettierrc
@@ -298,18 +284,31 @@ npm install eslint-config-prettier --save-dev
 
 ### Quality Gates Are Mandatory
 
-**All four quality gates must pass before code merges.** If any gate is removed or disabled
+**All blocking gates must pass before code merges.** If any gate is removed or disabled
 (even temporarily), errors accumulate silently and become expensive to fix in bulk.
+
+Full lint remains mandatory in CI as an audit step, even when temporarily
+non-blocking during debt burn-down.
 
 | Gate | What it catches | Non-negotiable? |
 |------|----------------|-----------------|
-| Lint | Code quality, patterns, a11y | Yes — blocks PR |
+| Lint (critical anti-patterns) | Security/correctness/concurrency high-risk patterns | Yes — blocks PR |
+| Lint (no-new-violations) | New lint debt relative to baseline | Yes — blocks PR |
+| Lint (full audit) | Complete lint debt inventory | Required to run; blocking once debt reaches zero |
 | Type check | Type errors, interface mismatches | Yes — blocks PR |
 | Format check | Inconsistent formatting | Yes — blocks PR |
 | Tests | Regressions, broken behavior | Yes — blocks PR |
 
 **Never remove a quality gate from CI without immediately replacing it.** A lint step removed
 "temporarily" can result in hundreds of errors accumulating before anyone notices.
+
+### Lint Debt Ratchet (When Full Lint Is Temporarily Non-Blocking)
+
+1. Keep a committed baseline snapshot of current full-lint violations.
+2. `lint:no-new` must fail if a PR increases total violations or introduces new violations in changed code.
+3. Baseline updates are allowed only when counts stay the same or decrease.
+4. When a rule/category reaches zero debt, promote it into a blocking tier.
+5. Full lint returns to fully blocking once baseline debt is zero.
 
 ### Recommended CI Workflow
 
@@ -334,8 +333,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      - name: Lint (critical anti-patterns)
+        run: npm run lint:critical
+
+      - name: Lint (no new violations)
+        run: npm run lint:no-new
+
+      - name: Lint (full audit)
+        if: always()
+        continue-on-error: true
+        run: npm run lint:full
 
       - name: Type check
         run: npm run typecheck
@@ -351,7 +358,7 @@ jobs:
 
 | Check | Local (pre-commit) | CI |
 |-------|-------------------|-----|
-| Linting | Staged files only | All files |
+| Linting | Staged files / fast checks | Critical + no-new (blocking) + full audit |
 | Formatting | Staged files only | All files |
 | Type check | Incremental | Full |
 | Tests | Affected only | Full suite |
@@ -408,7 +415,10 @@ integrity, unused dependency detection, and CI integration for dependency checks
 // package.json
 {
   "scripts": {
-    "lint": "eslint src/",
+    "lint": "npm run lint:critical && npm run lint:no-new",
+    "lint:critical": "node scripts/lint-critical.mjs",
+    "lint:no-new": "node scripts/lint-no-new.mjs",
+    "lint:full": "eslint src/",
     "lint:fix": "eslint src/ --fix",
     "format": "prettier --write \"src/**/*.{ts,js,json,css}\"",
     "format:check": "prettier --check \"src/**/*.{ts,js,json,css}\"",

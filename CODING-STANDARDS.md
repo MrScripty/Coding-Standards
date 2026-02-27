@@ -565,6 +565,26 @@ pub fn remove_node(&mut self, id: NodeId) -> Option<RemovalResult>
 debug_assert!(self.is_consistent(), "Data structure corrupted before operation");
 ```
 
+#### `unwrap` and `expect` in Production Paths
+
+Do not use `unwrap()` or `expect()` in production request/runtime paths
+(API/IPC handlers, process lifecycle code, background services, startup/shutdown).
+Convert fallible operations into typed errors and propagate context.
+
+Allowed exceptions:
+- Test code and short-lived local prototypes
+- Debug-only assertions (`debug_assert!`) for invariant checking
+- Cases where an invariant is explicitly documented and guarded immediately
+  before the call
+
+```rust
+// BAD: Panic can terminate a production service path
+let stream = maybe_stream.unwrap();
+
+// GOOD: Return typed error with context
+let stream = maybe_stream.ok_or(ServiceError::MissingLogStream)?;
+```
+
 #### Error Types
 
 Prefer specific error types over strings:
@@ -682,10 +702,11 @@ export function createArc(name: string, type: ArcType) { ... }
 This ensures the compiler catches mismatches (like `'a_plot'` vs `'APlot'`)
 at build time rather than at runtime.
 
-### Accessibility
+### Frontend-Specific Standards
 
-See [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) for semantic HTML, keyboard
-interaction, ARIA, and a11y linting requirements.
+For frontend rendering, state synchronization, hook timer management, UI
+testing practices, and React-specific tooling notes, see
+[FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md).
 
 ## Performance-Critical Code
 
