@@ -230,6 +230,11 @@ logic, the FFI layer bridges the two sides.
 
 Two models for delivering events from core to host languages:
 
+**Selection rule:** Prefer push-based delivery when the host runtime supports it
+reliably (native channels/message loops/callback scheduling with clear thread
+ownership). Use pull-based delivery as a fallback when push integration is
+unsafe or excessively complex for that binding.
+
 **Pull-based (buffered):** Core writes events to an internal buffer. The host
 polls via a `drain_events()` method. Best for languages without native
 message-passing (Python, C#, Swift).
@@ -281,6 +286,11 @@ impl EventSink for BeamEventSink {
 |-------|------------|-----------|
 | Pull (buffered) | Python, C#, Swift, Kotlin, Ruby | Simple; host controls polling rate; events may lag |
 | Push (message) | Elixir/Erlang, Go | Real-time delivery; requires host concurrency support |
+
+When using pull-based delivery:
+- Keep polling at the host/core boundary (not as internal UI-state synchronization loops).
+- Bound event-buffer retention and document overflow/drop policy.
+- Document expected poll cadence and shutdown cleanup behavior.
 
 ### Callback-Based Task Execution
 

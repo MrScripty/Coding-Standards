@@ -84,6 +84,43 @@ lock (_pendingLock)
 }
 ```
 
+### 4. Keep Async Paths Non-Blocking
+
+Async request paths and lifecycle paths (startup/shutdown/health loops) must not
+run blocking calls directly. Blocking operations stall the runtime thread and can
+delay unrelated work.
+
+Avoid direct blocking calls such as:
+- `std::thread::sleep`
+- blocking process/file/network calls in async handlers
+- `Thread.Sleep`, `Task.Wait`, or sync process waits in async C# code
+
+Use async equivalents, or isolate unavoidable blocking work:
+
+```rust
+// BAD: Blocks async runtime worker thread
+std::thread::sleep(Duration::from_millis(200));
+
+// GOOD: Non-blocking async timer
+tokio::time::sleep(Duration::from_millis(200)).await;
+
+// GOOD: Isolate unavoidable blocking work
+let output = tokio::task::spawn_blocking(move || std::fs::read(path)).await??;
+```
+
+```csharp
+// BAD: Blocks thread inside async flow
+Thread.Sleep(200);
+process.WaitForExit();
+
+// GOOD: Async-friendly alternatives
+await Task.Delay(200, ct);
+await process.WaitForExitAsync(ct);
+```
+
+Never hold an async lock across blocking operations. If blocking work is
+unavoidable, copy required data, release the lock, and then run the work.
+
 ---
 
 ## C# Async/Await Rules

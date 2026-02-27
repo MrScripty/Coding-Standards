@@ -183,6 +183,30 @@ exec "./target/release/${APP_BIN}" "${RUN_ARGS[@]}"
 6. Use `command -v` for binary presence checks
 7. Keep dependency checks side-effect free
 8. Do not silently auto-escalate privileges (`sudo`) without explicit operator intent
+9. Escape untrusted values before writing generated scripts or desktop entries
+
+## Desktop Entry and Script Generation Safety
+
+If a launcher or installer generates `.desktop` files or helper shell scripts,
+command construction must treat paths/URLs/labels as untrusted input.
+
+Rules:
+1. Do not concatenate raw user-provided values into command strings.
+2. For `.desktop` files, build `Exec=` from a validated argument list and apply
+   desktop-entry-safe escaping per argument.
+3. For generated shell scripts, quote every interpolated value and avoid `eval`.
+4. Validate URL schemes before embedding URL arguments into generated commands.
+5. Add tests that cover spaces, quotes, and special characters in paths/tags/URLs.
+
+```bash
+# BAD: Raw interpolation into command string
+printf 'Exec=%s --open "%s"\n' "$APP_BIN" "$USER_URL" > "$DESKTOP_FILE"
+
+# GOOD: Validate first, then escape for destination format using shared helpers
+validated_url="$(validate_external_url "$USER_URL")" || exit 1
+exec_line="$(build_desktop_exec_line "$APP_BIN" "--open" "$validated_url")"
+printf 'Exec=%s\n' "$exec_line" > "$DESKTOP_FILE"
+```
 
 ---
 
@@ -424,3 +448,4 @@ main "$@"
 - `--run` and `--run-release` forward app args via `--`
 - `--help` documents usage, examples, and exit codes
 - Script uses strict Bash mode and quoted expansions
+- Generated scripts/desktop entries escape interpolated values safely

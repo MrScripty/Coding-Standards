@@ -226,6 +226,44 @@ if (validPath == null)
     return ErrorResponse("Invalid file path");
 ```
 
+### Electron IPC Boundaries (`ipcMain.handle`)
+
+For Electron apps, preload and renderer typing are not a security boundary.
+Treat every payload received by `ipcMain.handle` as untrusted input.
+
+Rules:
+- Validate payload shape in the main process before use.
+- Re-validate URLs and paths in main, even if renderer already validated.
+- For `shell.openExternal`, enforce a strict scheme allowlist (for example
+  `https:` only, or `https:` + explicitly approved schemes).
+- Reject `file:`, `javascript:`, and unexpected custom schemes unless a
+  documented policy explicitly allows them.
+
+```typescript
+import { ipcMain, shell } from 'electron';
+
+const ALLOWED_SCHEMES = new Set(['https:']);
+
+ipcMain.handle('shell:openExternal', async (_event, rawUrl: unknown) => {
+    if (typeof rawUrl !== 'string') {
+        throw new Error('Invalid URL payload');
+    }
+
+    let parsed: URL;
+    try {
+        parsed = new URL(rawUrl);
+    } catch {
+        throw new Error('Malformed URL');
+    }
+
+    if (!ALLOWED_SCHEMES.has(parsed.protocol)) {
+        throw new Error(`Disallowed URL scheme: ${parsed.protocol}`);
+    }
+
+    await shell.openExternal(parsed.toString());
+});
+```
+
 ---
 
 ## Network Transport Safety
