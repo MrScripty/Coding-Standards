@@ -6,9 +6,11 @@ Requirements for maintaining readable, navigable codebases.
 
 ### Requirement
 
-**Directories with 3+ files or non-obvious purpose should contain a README.md file.**
+**Every directory under `src/` (or equivalent source folders) must contain a `README.md` file.**
 
-This applies to all directories under `src/` or equivalent source folders.
+Outside source folders, directories with 3+ files or non-obvious purpose should contain a `README.md` file.
+
+If rules overlap, enforce the stricter requirement. For `src/`, the universal requirement takes precedence.
 
 ### Why
 
@@ -495,7 +497,8 @@ The root README is often the first thing people see. Keep it:
 
 When reviewing PRs, check:
 
-- [ ] New directories have README.md
+- [ ] New `src/` directories have README.md
+- [ ] New non-`src/` directories with 3+ files or non-obvious purpose have README.md
 - [ ] Public APIs are documented
 - [ ] Complex logic has explanatory comments
 - [ ] README updated if structure changed

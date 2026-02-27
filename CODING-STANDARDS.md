@@ -17,7 +17,9 @@ When a file exceeds 500 lines:
 
 ### Directory Structure
 
-Directories with 3+ files or non-obvious purpose should contain a `README.md` explaining:
+Directories under `src/` (or equivalent source roots) must contain a `README.md`.
+
+Outside source roots, directories with 3+ files or non-obvious purpose should contain a `README.md` explaining:
 - Purpose of the directory
 - What files it contains
 - How it relates to other directories

@@ -374,6 +374,8 @@ Every directory under `src/` must contain a README.md with:
 - Dependencies
 - Usage examples
 
+This is a strict rule for `src/` and overrides general conditional README guidance elsewhere.
+
 ---
 
 ## Activity Tracing Pattern
