@@ -371,10 +371,18 @@ project-root/
 Every directory under `src/` must contain a README.md with:
 - Purpose
 - Contents
+- Problem
+- Constraints
+- Decision
+- Alternatives Rejected
+- Invariants
+- Revisit Triggers
 - Dependencies
+- Related ADRs
 - Usage examples
 
 This is a strict rule for `src/` and overrides general conditional README guidance elsewhere.
+See [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) for required section semantics and update rules.
 
 ---
 

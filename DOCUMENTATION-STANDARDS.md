@@ -36,13 +36,32 @@ One paragraph explaining what this directory contains and why it exists.
 | `file.ts` | Brief description |
 | `subfolder/` | Brief description |
 
-## Design Decisions
-- Key architectural choices made here
-- Why this approach was chosen over alternatives
+## Problem
+What problem this directory solves at the system level.
+
+## Constraints
+Technical and product constraints that shaped the design.
+
+## Decision
+Chosen approach and why it was selected.
+
+## Alternatives Rejected
+- Option A: Why rejected
+- Option B: Why rejected
+
+## Invariants
+- Invariant 1 that must remain true
+- Invariant 2 that must remain true
+
+## Revisit Triggers
+- Concrete conditions that should trigger reconsideration
 
 ## Dependencies
 **Internal:** What other parts of the codebase this depends on
 **External:** Third-party libraries used
+
+## Related ADRs
+- `ADR-00X` brief description (or "None")
 
 ## Usage Examples
 Code snippets showing how to use components in this directory.
@@ -52,7 +71,11 @@ Code snippets showing how to use components in this directory.
 
 - Update README when adding/removing files
 - Update when architecture changes
-- Review in code review (PRs touching a directory should update its README if needed)
+- Every PR that changes `src/<module>/` code must do one of:
+  - update that module's `README.md`, or
+  - add/update an ADR under `docs/adr/`
+- README updates must capture design reasoning (`Problem`, `Constraints`,
+  `Decision`, `Alternatives Rejected`) not only file listings
 
 ---
 

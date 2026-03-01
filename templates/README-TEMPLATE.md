@@ -16,12 +16,42 @@ One paragraph explaining:
 | `example.ts` | Brief description of what this file does |
 | `subfolder/` | Brief description of what this folder contains |
 
-## Design Decisions
+## Problem
 
-Key architectural choices made in this directory:
+What system-level problem this directory solves.
 
-- **[Decision 1]:** Why this approach was chosen
-- **[Decision 2]:** Trade-offs considered
+## Constraints
+
+List the constraints that shaped the implementation:
+
+- Performance, latency, memory, or throughput limits
+- Compatibility or migration constraints
+- Product or UX constraints
+
+## Decision
+
+State the chosen approach and the rationale.
+
+## Alternatives Rejected
+
+Capture the main alternatives and why they were rejected:
+
+- **[Alternative 1]:** Why rejected
+- **[Alternative 2]:** Why rejected
+
+## Invariants
+
+List conditions that must remain true for this module to be correct:
+
+- Invariant 1
+- Invariant 2
+
+## Revisit Triggers
+
+List concrete events that should trigger re-evaluation:
+
+- Trigger 1
+- Trigger 2
 
 ## Dependencies
 
@@ -36,6 +66,11 @@ What other parts of the codebase this directory depends on:
 Third-party libraries used:
 
 - `library-name` - What it's used for
+
+## Related ADRs
+
+- `ADR-00X` - Brief description
+- Or: `None`
 
 ## Usage Examples
 
