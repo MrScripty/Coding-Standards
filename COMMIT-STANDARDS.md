@@ -188,15 +188,54 @@ git status
 # 2. Review the actual changes
 git diff --cached
 
-# 3. Run linters/formatters
+# 3. Review unpushed history for regression + fix pairs
+# If no upstream is configured, compare against your intended base branch
+# (for example: origin/main..HEAD)
+git log --oneline --decorate @{upstream}..HEAD
+
+# 4. Run linters/formatters
 [your-lint-command]
 
-# 4. Run tests (at minimum, affected tests)
+# 5. Run tests (at minimum, affected tests)
 [your-test-command]
 
-# 5. Commit with conventional format
+# 6. Commit with conventional format
 git commit -m "type(scope): description"
 ```
+
+## Mandatory History Cleanup Before Commit
+
+This process is mandatory for all branches.
+Treat it as a default part of every commit routine, not optional cleanup.
+
+Before creating a new commit, inspect unpushed local commits for a clear
+regression plus a later fix for that same regression. Use judgment.
+
+When a clear regression/fix pair exists, you must rewrite unpushed history to:
+- Drop the regression commit
+- Fold the fix into the appropriate earlier commit (`fixup` preferred)
+
+Use `fixup!` commits during development so cleanup remains fast and reliable with
+autosquash.
+
+### Workflow
+
+```bash
+# Inspect unpushed commits
+# If no upstream is configured, compare against your intended base branch
+# (for example: origin/main..HEAD)
+git log --oneline --decorate @{upstream}..HEAD
+
+# Mark intended cleanup as fixup during normal development
+git commit --fixup <target-commit>
+
+# Rewrite unpushed history and autosquash fixups
+# If no upstream is configured, use your intended base branch
+# (for example: origin/main)
+git rebase -i --autosquash @{upstream}
+```
+
+After rewriting history, re-run affected tests before creating the next commit.
 
 ## Commit Frequency
 
@@ -325,6 +364,9 @@ Don't rewrite public history. Instead:
 git commit -m "fix(scope): correct mistake from previous commit"
 ```
 
+The mandatory cleanup rule applies only to unpushed local commits.
+Never rewrite shared, already-pushed history.
+
 ## Merge Commits vs. Squash
 
 ### When to Squash
@@ -338,3 +380,23 @@ git commit -m "fix(scope): correct mistake from previous commit"
 - Each commit represents a logical step
 - Commits are already clean and atomic
 - You want to preserve the development narrative
+
+### Rewriting Unpushed Merge Commits
+
+Rewriting unpushed merge commits is allowed when cleaning local history.
+
+Use extra caution: merge rewrites can change branch topology and integration
+context. Prefer merge-aware rebase mode and verify the final graph before
+pushing.
+
+```bash
+# Merge-aware history rewrite (when merge commits are involved)
+# If no upstream is configured, use your intended base branch
+# (for example: origin/main)
+git rebase -i --rebase-merges @{upstream}
+
+# Verify topology before push
+# If no upstream is configured, compare against your intended base branch
+# (for example: origin/main..HEAD)
+git log --graph --oneline --decorate @{upstream}..HEAD
+```

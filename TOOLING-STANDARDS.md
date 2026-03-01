@@ -64,6 +64,19 @@ pre-push:
 | pre-push | Before pushing | Slower checks: full test suite |
 | commit-msg | After writing message | Validate commit message format |
 
+### History Cleanup Enforcement (Advisory Only)
+
+History cleanup for regression/fix pairs is mandatory in process, but hook
+enforcement should remain advisory only.
+
+Do not hard-fail hooks for this rule. Detecting "clear regression + later fix"
+requires human judgment and is not reliably automatable.
+
+Recommended approach:
+- Add a non-blocking pre-push reminder command
+- Keep rewrite decisions manual
+- Require cleanup only on unpushed history
+
 ### Performance Tips
 
 1. **Run in parallel** - Independent checks should run concurrently
