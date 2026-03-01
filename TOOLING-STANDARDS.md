@@ -311,6 +311,7 @@ non-blocking during debt burn-down.
 | Type check | Type errors, interface mismatches | Yes — blocks PR |
 | Format check | Inconsistent formatting | Yes — blocks PR |
 | Tests | Regressions, broken behavior | Yes — blocks PR |
+| Decision traceability | Missing module reasoning updates when code changes | Yes — blocks PR |
 
 **Never remove a quality gate from CI without immediately replacing it.** A lint step removed
 "temporarily" can result in hundreds of errors accumulating before anyone notices.
@@ -382,26 +383,44 @@ jobs:
 
 ### README Enforcement
 
-Ensure every directory has documentation:
+Enforce decision traceability with a script that checks all of the following:
+- Every changed module under `src/` has a `README.md`
+- Required decision headings exist in each module README
+- PRs touching `src/<module>/` update that module README or add/update an ADR
 
 ```bash
-#!/bin/bash
-# scripts/check-readmes.sh
-
-find src -type d | while read dir; do
-    if [ ! -f "$dir/README.md" ]; then
-        echo "Missing README.md: $dir"
-        exit 1
-    fi
-done
+mkdir -p scripts
+cp templates/check-decision-traceability.sh scripts/check-decision-traceability.sh
+chmod +x scripts/check-decision-traceability.sh
 ```
 
-Add to pre-commit:
+Copy [templates/check-decision-traceability.sh](templates/check-decision-traceability.sh)
+into your repo as `scripts/check-decision-traceability.sh`.
+
+Add to pre-commit and CI:
 ```yaml
 pre-commit:
   commands:
-    readme-check:
-      run: ./scripts/check-readmes.sh
+    decision-traceability:
+      run: ./scripts/check-decision-traceability.sh
+```
+
+```yaml
+jobs:
+  quality:
+    steps:
+      - name: Decision traceability
+        run: ./scripts/check-decision-traceability.sh
+```
+
+### PR Template Enforcement
+
+Use a PR template so every change records problem, constraints, rationale, and
+alternatives:
+
+```bash
+mkdir -p .github
+cp templates/PULL_REQUEST_TEMPLATE.md .github/PULL_REQUEST_TEMPLATE.md
 ```
 
 ---

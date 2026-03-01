@@ -111,6 +111,10 @@ pre-commit:
           exit 1
         fi
 
+    # Decision traceability check (copy template script to scripts/ first)
+    decision-traceability:
+      run: ./scripts/check-decision-traceability.sh
+
 # ─────────────────────────────────────────────────────────────────
 # Pre-push hooks (run before pushing)
 # ─────────────────────────────────────────────────────────────────
