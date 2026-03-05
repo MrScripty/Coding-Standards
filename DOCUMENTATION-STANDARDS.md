@@ -65,6 +65,12 @@ Chosen approach and why it was selected.
 
 ## Usage Examples
 Code snippets showing how to use components in this directory.
+
+## API Consumer Contract (Host-Facing Modules)
+- Supported inputs and outputs
+- Lifecycle and ordering expectations
+- Error behavior and retry guidance
+- Compatibility/versioning notes for clients
 ```
 
 ### Required Section Completion Rule
@@ -102,6 +108,18 @@ Examples that are not acceptable:
 
 If a sentence could be reused unchanged in unrelated directories, rewrite it
 with module-specific rationale.
+
+### Host-Facing Module Contract Requirement
+
+When a directory exposes functionality consumed by external callers (API
+clients, plugins, bindings, SDK consumers, or other process boundaries), its
+README must include `## API Consumer Contract` with:
+
+- Expected request/input shape and validation expectations
+- Response/output shape, including stable fields
+- Lifecycle and ordering constraints (init, shutdown, retry, idempotency)
+- Error semantics, retry/backoff expectations, and timeout behavior
+- Compatibility policy (versioning, deprecations, and migration notes)
 
 ### Keeping READMEs Current
 
