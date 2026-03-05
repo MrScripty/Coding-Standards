@@ -50,6 +50,9 @@ pre-commit:
     typecheck:
       run: npm run typecheck
 
+    decision-traceability:
+      run: ./scripts/check-decision-traceability.sh
+
 pre-push:
   commands:
     test:
@@ -60,7 +63,7 @@ pre-push:
 
 | Hook | When | What to Run |
 |------|------|-------------|
-| pre-commit | Before each commit | Fast checks: lint, format, typecheck |
+| pre-commit | Before each commit | Fast checks: lint, format, typecheck, decision traceability |
 | pre-push | Before pushing | Slower checks: full test suite |
 | commit-msg | After writing message | Validate commit message format |
 
@@ -386,6 +389,8 @@ jobs:
 Enforce decision traceability with a script that checks all of the following:
 - Every changed module under `src/` has a `README.md`
 - Required decision headings exist in each module README
+- `None` sections include both `Reason:` and `Revisit trigger:`
+- Banned placeholder language is rejected
 - PRs touching `src/<module>/` update that module README or add/update an ADR
 
 ```bash
