@@ -1,24 +1,28 @@
 # [Directory Name]
 
-Brief one-line description of what this directory contains.
+Brief one-line description of the responsibility this directory owns.
 
 ## Purpose
 
 One paragraph explaining:
 - What this directory is responsible for
-- Why it exists as a separate directory
-- What problems it solves
+- Why this boundary exists (not another location)
+- Which system behavior depends on this module
 
 ## Contents
 
 | File/Folder | Description |
 |-------------|-------------|
-| `example.ts` | Brief description of what this file does |
-| `subfolder/` | Brief description of what this folder contains |
+| `main-entry.ts` | Why this artifact exists and what callers rely on |
+| `policies/` | Why this folder is separate and what invariant it protects |
+
+List key artifacts only (typically 3-7). Do not list every file unless the
+directory is very small and each file is externally relevant.
 
 ## Problem
 
-What system-level problem this directory solves.
+What system-level problem this directory solves, including who/what is impacted
+if this module fails.
 
 ## Constraints
 
@@ -30,7 +34,7 @@ List the constraints that shaped the implementation:
 
 ## Decision
 
-State the chosen approach and the rationale.
+State the chosen approach and why it best satisfied the constraints.
 
 ## Alternatives Rejected
 
@@ -57,13 +61,13 @@ List concrete events that should trigger re-evaluation:
 
 ### Internal
 
-What other parts of the codebase this directory depends on:
+What other parts of the codebase this directory depends on and why:
 
 - `../other-module` - Why this dependency exists
 
 ### External
 
-Third-party libraries used:
+Third-party libraries used and why:
 
 - `library-name` - What it's used for
 
@@ -75,10 +79,11 @@ Third-party libraries used:
 ## Usage Examples
 
 ```typescript
-// Example of how to use the main exports from this directory
-import { Something } from './index';
+// Real usage example that matches current public entry points.
+import { createWorkflowRuntime } from './index';
 
-const result = Something.doThing();
+const runtime = createWorkflowRuntime(config);
+await runtime.start();
 ```
 
 ## Testing
