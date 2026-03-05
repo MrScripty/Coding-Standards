@@ -121,6 +121,22 @@ README must include `## API Consumer Contract` with:
 - Error semantics, retry/backoff expectations, and timeout behavior
 - Compatibility policy (versioning, deprecations, and migration notes)
 
+### Minimum Meaningful Content by Section
+
+| Section | Minimum Content |
+| ------- | --------------- |
+| `Purpose` | Responsibility and why the directory boundary exists. |
+| `Contents` | Key artifacts only (typically 3-7). Explain why each matters; do not list every file by default. |
+| `Problem` | System-level problem being solved and affected actors. |
+| `Constraints` | Real constraints (technical, product, compatibility, operational). |
+| `Decision` | Chosen approach and rationale tied to constraints. |
+| `Alternatives Rejected` | At least one rejected option with reason, or explicit `None` with reason and revisit trigger. |
+| `Invariants` | Conditions that must remain true for correctness (testable where possible). |
+| `Revisit Triggers` | Concrete events/thresholds that should force re-evaluation. |
+| `Dependencies` | Significant internal/external dependencies and why they are needed. |
+| `Usage Examples` | One realistic usage example that reflects actual entry points. |
+| `API Consumer Contract` | Required for host-facing modules; include lifecycle, failures, and compatibility behavior. |
+
 ### Keeping READMEs Current
 
 - Update README when adding/removing files
