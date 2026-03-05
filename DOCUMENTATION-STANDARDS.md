@@ -88,6 +88,21 @@ Example:
 - Revisit trigger: A second viable adapter strategy appears.
 ```
 
+### Banned Placeholder Language
+
+Do not use generic filler that can be inferred from file names or directory
+structure.
+
+Examples that are not acceptable:
+
+- `Source file used by modules in this directory.`
+- `Subdirectory containing related implementation details.`
+- `Keep files in this directory scoped to a single responsibility boundary.`
+- `import { value } from './module';`
+
+If a sentence could be reused unchanged in unrelated directories, rewrite it
+with module-specific rationale.
+
 ### Keeping READMEs Current
 
 - Update README when adding/removing files
