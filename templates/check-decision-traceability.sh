@@ -26,6 +26,17 @@ banned_placeholders=(
   "import { value } from './module';"
 )
 
+extract_section_body() {
+  local header="$1"
+  local file="$2"
+
+  awk -v header="$header" '
+    $0 == header { in_section = 1; next }
+    in_section && /^## / { exit }
+    in_section { print }
+  ' "$file"
+}
+
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "Not inside a git repository."
   exit 1
@@ -107,6 +118,24 @@ for module in "${!modules[@]}"; do
     fi
   done
   if [ "$missing_header" = true ]; then
+    failures=$((failures + 1))
+  fi
+
+  none_format_invalid=false
+  for header in "${required_headers[@]}"; do
+    section_body="$(extract_section_body "$header" "$readme_path")"
+    if printf '%s\n' "$section_body" | rg -i -q '\bnone\b'; then
+      if ! printf '%s\n' "$section_body" | rg -i -q 'reason:'; then
+        echo "Section with None is missing Reason in $readme_path: $header"
+        none_format_invalid=true
+      fi
+      if ! printf '%s\n' "$section_body" | rg -i -q 'revisit trigger:'; then
+        echo "Section with None is missing Revisit trigger in $readme_path: $header"
+        none_format_invalid=true
+      fi
+    fi
+  done
+  if [ "$none_format_invalid" = true ]; then
     failures=$((failures + 1))
   fi
 
