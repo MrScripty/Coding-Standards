@@ -98,6 +98,17 @@ const runtime = createWorkflowRuntime(config);
 await runtime.start();
 ```
 
+## API Consumer Contract (If Host-Facing)
+
+Use this section when external callers depend on this module (API clients,
+plugins, bindings, SDK consumers, or cross-process callers).
+
+- Inputs: expected shape, validation rules, and defaults
+- Outputs: stable response fields and compatibility guarantees
+- Lifecycle: init/start/stop ordering, idempotency, and retry semantics
+- Errors: error classes/codes, retryability, timeout behavior
+- Versioning: breaking-change policy and migration guidance
+
 ## Testing
 
 How to run tests for this directory:
