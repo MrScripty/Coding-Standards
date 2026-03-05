@@ -7,7 +7,9 @@ Reusable coding, commit, architecture, tooling, and documentation standards that
 1. Copy this entire `/standards/` directory to your project root
 2. Read each document and adapt the examples to your tech stack
 3. Copy templates from `/standards/templates/` to your project root
-4. Reference these standards in your project's main README
+4. Copy `templates/check-decision-traceability.sh` to `scripts/` and enable
+   the `decision-traceability` command in your hook config
+5. Reference these standards in your project's main README
 
 ## Documents
 
