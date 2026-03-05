@@ -111,7 +111,8 @@ pre-commit:
           exit 1
         fi
 
-    # Decision traceability check (copy template script to scripts/ first)
+    # Decision traceability check (required when adopting documentation standards)
+    # Copy templates/check-decision-traceability.sh into scripts/ and keep enabled.
     decision-traceability:
       run: ./scripts/check-decision-traceability.sh
 
