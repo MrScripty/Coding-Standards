@@ -69,6 +69,11 @@ if [ "${#changed_files[@]}" -eq 0 ]; then
   exit 0
 fi
 
+declare -A changed_lookup=()
+for file in "${changed_files[@]}"; do
+  changed_lookup["$file"]=1
+done
+
 adr_changed=false
 for file in "${changed_files[@]}"; do
   if [[ "$file" == "$ADR_DIR/"*.md ]]; then
@@ -151,7 +156,7 @@ for module in "${!modules[@]}"; do
   fi
 
   readme_changed=false
-  if printf '%s\n' "${changed_files[@]}" | rg -F -x -q "$readme_path"; then
+  if [ "${changed_lookup["$readme_path"]+set}" = "set" ]; then
     readme_changed=true
   fi
 
