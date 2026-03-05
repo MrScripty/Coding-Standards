@@ -19,6 +19,13 @@ required_headers=(
   "## Usage Examples"
 )
 
+banned_placeholders=(
+  "Source file used by modules in this directory."
+  "Subdirectory containing related implementation details."
+  "Keep files in this directory scoped to a single responsibility boundary."
+  "import { value } from './module';"
+)
+
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
   echo "Not inside a git repository."
   exit 1
@@ -100,6 +107,17 @@ for module in "${!modules[@]}"; do
     fi
   done
   if [ "$missing_header" = true ]; then
+    failures=$((failures + 1))
+  fi
+
+  placeholder_found=false
+  for phrase in "${banned_placeholders[@]}"; do
+    if rg -F -q "$phrase" "$readme_path"; then
+      echo "Banned placeholder phrase in $readme_path: $phrase"
+      placeholder_found=true
+    fi
+  done
+  if [ "$placeholder_found" = true ]; then
     failures=$((failures + 1))
   fi
 
