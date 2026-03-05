@@ -67,6 +67,27 @@ Chosen approach and why it was selected.
 Code snippets showing how to use components in this directory.
 ```
 
+### Required Section Completion Rule
+
+Every required section must contain one of:
+
+- Concrete project-specific content, or
+- An explicit `None` statement with:
+  - `Reason:` why content is currently absent
+  - `Revisit trigger:` what event should prompt re-evaluation
+
+This rule prevents fabricated rationale while still preserving future
+traceability.
+
+Example:
+
+```markdown
+## Alternatives Rejected
+- None identified as of 2026-03-05.
+- Reason: This module is a thin adapter over a fixed upstream contract.
+- Revisit trigger: A second viable adapter strategy appears.
+```
+
 ### Keeping READMEs Current
 
 - Update README when adding/removing files
