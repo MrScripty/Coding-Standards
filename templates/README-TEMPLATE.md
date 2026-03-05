@@ -43,6 +43,12 @@ Capture the main alternatives and why they were rejected:
 - **[Alternative 1]:** Why rejected
 - **[Alternative 2]:** Why rejected
 
+If no alternatives were identified, use:
+
+- `None identified as of YYYY-MM-DD.`
+- `Reason: <why none currently apply>`
+- `Revisit trigger: <event that should force re-evaluation>`
+
 ## Invariants
 
 List conditions that must remain true for this module to be correct:
@@ -56,6 +62,12 @@ List concrete events that should trigger re-evaluation:
 
 - Trigger 1
 - Trigger 2
+
+If there are currently no triggers, use:
+
+- `None identified as of YYYY-MM-DD.`
+- `Reason: <why no trigger is currently meaningful>`
+- `Revisit trigger: <what would make this section non-empty>`
 
 ## Dependencies
 
