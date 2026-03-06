@@ -174,6 +174,50 @@ type MessageType =
 
 ---
 
+## Structured Producer-Consumer Contracts
+
+### The Pattern
+
+When one component publishes structured data consumed by another, the contract
+includes semantics as well as field names.
+
+Examples:
+- schema/metadata producers feeding UI builders
+- services producing manifests, templates, or saved workflow data
+- generators publishing config consumed by other runtime layers
+
+### Contract Semantics to Preserve
+
+Treat the following as part of the contract unless documented otherwise:
+- Field shape and optionality
+- Default behavior when fields are omitted
+- Enum semantics, not just enum spellings
+- Label/value semantics for user-facing options
+- Ordering guarantees where ordering affects meaning
+- Compatibility expectations for persisted consumers and stored artifacts
+
+### Consumer Responsibilities
+
+Consumers must preserve these semantics when deriving runtime objects, forms,
+menus, controls, or other interfaces from upstream structured data.
+
+Do not silently drop:
+- defaults
+- constraints
+- descriptions that affect operator decisions
+- stable labels or values relied on by saved state
+
+If any of these are intentionally dropped, transformed, or reinterpreted, make
+that decision explicit and document the compatibility impact.
+
+### Benefits
+
+- **Contract safety:** Prevents silent semantic drift across layers
+- **Persistence safety:** Saved artifacts remain compatible with producers
+- **UI consistency:** Generated controls preserve intended meaning
+
+---
+
 ## IPC/Message Contract Pattern
 
 ### The Pattern

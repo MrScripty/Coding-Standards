@@ -71,6 +71,13 @@ Code snippets showing how to use components in this directory.
 - Lifecycle and ordering expectations
 - Error behavior and retry guidance
 - Compatibility/versioning notes for clients
+
+## Structured Producer Contract (Machine-Consumed Modules)
+- Stable fields and shape expectations
+- Default semantics when fields are omitted
+- Enum semantics and label/value meanings
+- Compatibility expectations for persisted consumers or saved artifacts
+- Regeneration or migration rules when the contract changes
 ```
 
 ### Required Section Completion Rule
@@ -121,6 +128,19 @@ README must include `## API Consumer Contract` with:
 - Error semantics, retry/backoff expectations, and timeout behavior
 - Compatibility policy (versioning, deprecations, and migration notes)
 
+### Structured Producer Contract Requirement
+
+When a directory publishes machine-consumed metadata, configuration, schemas,
+templates, manifests, or other structured artifacts, its README must include
+`## Structured Producer Contract` with:
+
+- Stable fields and which fields are intentionally volatile
+- Default semantics when fields are absent
+- Enum meanings and label/value mappings where relevant
+- Ordering guarantees where consumers rely on order
+- Compatibility expectations for persisted consumers and saved artifacts
+- Regeneration or migration rules when the contract changes
+
 ### Minimum Meaningful Content by Section
 
 | Section | Minimum Content |
@@ -136,6 +156,7 @@ README must include `## API Consumer Contract` with:
 | `Dependencies` | Significant internal/external dependencies and why they are needed. |
 | `Usage Examples` | One realistic usage example that reflects actual entry points. |
 | `API Consumer Contract` | Required for host-facing modules; include lifecycle, failures, and compatibility behavior. |
+| `Structured Producer Contract` | Required for machine-consumed metadata/config/schema producers; include semantics, persistence compatibility, and regeneration rules. |
 
 ### Keeping READMEs Current
 

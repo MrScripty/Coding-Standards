@@ -87,6 +87,21 @@ Recommended approach:
 3. **Skip heavy checks in pre-commit** - Move full test suite to pre-push
 4. **Use file globs** - Only run checks on relevant file types
 
+### Persisted Artifact Validation Hooks
+
+If the repo commits JSON, YAML, manifests, templates, saved workflows, or other
+schema-backed artifacts, add fast staged-file validation where feasible.
+
+Recommended approach:
+- Run lightweight schema or shape validation in `pre-commit` for changed files
+- Restrict checks to staged artifact paths for speed
+- Regenerate derived artifacts in tooling when regeneration is deterministic
+- Run broader validation or acceptance checks in `pre-push` when full-context
+  verification is too slow for `pre-commit`
+
+The goal is to stop checked-in examples and fixtures from drifting away from the
+current producer contract.
+
 ---
 
 ## EditorConfig

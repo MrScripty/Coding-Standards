@@ -75,6 +75,21 @@ describe('UserService', () => {
 - Run against real (or realistic) environments
 - Slower but catch integration issues
 
+### Cross-Layer Acceptance Checks
+
+For changes that span multiple layers or components, require at least one
+acceptance check that exercises the full path from producer input to consumer
+output.
+
+This check should verify that, in practice:
+- schema or metadata production is correct
+- consumer binding preserves the produced contract
+- execution behavior matches the bound values
+- output handling agrees with the original producer semantics
+
+Do not treat typecheck, isolated unit tests, or partial integration tests as a
+substitute for one end-to-end acceptance path when the feature crosses layers.
+
 ---
 
 ## Unit Test Guidelines
@@ -327,6 +342,21 @@ beforeEach(() => {
 });
 ```
 
+### Validate Persisted Dynamic Artifacts
+
+Persisted examples and fixtures that depend on dynamic schemas or generated
+contracts must be validated or regenerated before commit.
+
+Examples include:
+- templates
+- manifests
+- saved graphs or workflows
+- schema-backed JSON/YAML fixtures
+- example requests/responses derived from current producers
+
+The goal is to catch silent drift between the checked-in artifact and the
+current producer contract.
+
 ---
 
 ## Async Testing
@@ -542,6 +572,8 @@ Before submitting code:
 - [ ] Edge cases are covered
 - [ ] Error paths are tested
 - [ ] Lifecycle cleanup/restart/cancellation regressions are covered when applicable
+- [ ] Cross-layer changes include at least one full-path acceptance check
+- [ ] Persisted schema-backed artifacts were validated or regenerated when applicable
 - [ ] No flaky tests introduced
 - [ ] Test names clearly describe the scenario
 - [ ] Complex test logic is documented

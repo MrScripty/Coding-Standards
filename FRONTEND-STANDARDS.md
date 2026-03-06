@@ -212,6 +212,19 @@ it('stops polling after completion', async () => {
 });
 ```
 
+### Embedded Interactive Control Checks
+
+For sliders, selects, scrubbers, playback controls, or similar widgets embedded
+inside draggable, pannable, zoomable, or canvas-style containers, verification
+must include:
+- pointer capture and release behavior
+- focus and blur behavior
+- keyboard accessibility and escape paths
+- parent gesture conflict behavior during interaction
+
+Require a small interaction smoke check for these controls so gesture-heavy
+containers do not steal or corrupt the child control interaction.
+
 ---
 
 ## Accessibility

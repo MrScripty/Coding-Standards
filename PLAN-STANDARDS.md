@@ -43,6 +43,8 @@ Before planning, capture:
 - Assumptions
 - Dependencies
 - Risks
+- Affected structured contracts
+- Affected persisted artifacts
 - Concurrency/race-risk review when work touches async state, polling, restart
   logic, or overlapping/cancellable operations
 - Definition of done
