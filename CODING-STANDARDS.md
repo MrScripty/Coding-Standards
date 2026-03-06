@@ -15,6 +15,17 @@ When a file exceeds 500 lines:
 
 **Why:** Large files are harder to navigate, review, and test. Smaller files encourage single-responsibility design.
 
+### Decomposition Review Trigger
+
+Treat these as soft thresholds that require an explicit decomposition review:
+- Files over 500 lines
+- UI components over 250 lines
+- Modules/services over roughly 7 public functions or 3 distinct responsibilities
+
+Crossing a threshold does not force an immediate rewrite, but the review should
+decide whether to extract helpers, split responsibilities, or document why the
+current shape remains safe.
+
 ### Directory Structure
 
 Directories under `src/` (or equivalent source roots) must contain a `README.md`.
@@ -111,6 +122,24 @@ class UserService {
 
 **Why:** Framework-agnostic services can be unit tested without mocking the entire framework.
 
+### Single Owner for Stateful Flows
+
+Do not split ownership of a state machine across parent/component boundaries or
+caller/hook boundaries. One module should own state transitions, lifecycle, and
+side effects; collaborators should receive derived state and invoke explicit
+commands.
+
+```typescript
+// BAD: Parent and hook both mutate the same lifecycle state
+const { status, start, stop, setStatus } = usePollingController();
+
+// GOOD: Hook owns the polling state machine
+const { status, start, stop } = usePollingController();
+```
+
+**Why:** Split ownership creates hidden transition paths, race conditions, and
+restart bugs that are difficult to test.
+
 ## Constants and Configuration
 
 ### No Magic Numbers or Strings
@@ -197,6 +226,10 @@ try {
     throw new OperationError('Operation X failed', { cause: error });
 }
 ```
+
+Broad exception handlers should either preserve traceback context (`throw`,
+`raise ... from ...`, `cause`, chained errors) or be narrowed to the expected
+failure types they are intentionally handling.
 
 ### Validate at Boundaries
 
@@ -303,6 +336,8 @@ pub fn gather_surrounding_scripts(track: &ArcTrack, clip_id: ClipId) -> Context 
 - Two or more call sites with identical or near-identical logic
 - The duplicated code serves the same purpose (not coincidental similarity)
 - The extracted function has a clear name and single responsibility
+- Prefer extraction once the second or third hook/service variant appears
+  rather than allowing near-copies to diverge
 
 **When duplication is acceptable:**
 

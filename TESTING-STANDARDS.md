@@ -360,6 +360,27 @@ test('fetchUser throws for invalid ID', async () => {
 });
 ```
 
+### Lifecycle Regression Checks
+
+When changing polling, timers, retries, restart logic, or cancellation paths,
+add targeted regression checks for:
+- Timer/subscription cleanup after unmount, shutdown, or dependency changes
+- Restart loops terminating correctly instead of spawning duplicate work
+- Overlapping requests or retries not racing stale results over newer state
+- Cancellation aborting in-flight work without leaving partial state behind
+
+Do not rely on a passing build or happy-path smoke test to cover these cases.
+
+### Service-Layer Error Paths
+
+For service-layer changes, verify expected failure behavior directly, not just
+successful builds/tests. Add targeted checks for relevant paths such as:
+- Upstream non-success responses
+- Retry exhaustion and backoff termination
+- Partial failures during orchestration
+- Cancellation or timeout propagation
+- Logged or surfaced error context
+
 ---
 
 ## Frontend Component Testing
@@ -520,6 +541,7 @@ Before submitting code:
 - [ ] Tests pass locally
 - [ ] Edge cases are covered
 - [ ] Error paths are tested
+- [ ] Lifecycle cleanup/restart/cancellation regressions are covered when applicable
 - [ ] No flaky tests introduced
 - [ ] Test names clearly describe the scenario
 - [ ] Complex test logic is documented

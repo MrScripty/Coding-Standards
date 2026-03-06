@@ -43,6 +43,8 @@ Before planning, capture:
 - Assumptions
 - Dependencies
 - Risks
+- Concurrency/race-risk review when work touches async state, polling, restart
+  logic, or overlapping/cancellable operations
 - Definition of done
 
 ## Clarifying Questions
@@ -66,6 +68,14 @@ Every plan must include:
 - Risks and mitigations
 - Re-plan triggers
 - Completion criteria
+
+When applicable, plans must also include:
+- Ownership and lifecycle note for polling, timers, retries, background tasks,
+  or process management. State who starts work, who stops it, how cleanup or
+  cancellation happens, and how overlap/restart races are prevented.
+- Public facade preservation note for large refactors. Explicitly choose
+  facade-first preservation or an API-breaking rewrite, and record the
+  compatibility impact.
 
 Use `templates/PLAN-TEMPLATE.md`.
 
