@@ -180,7 +180,7 @@ restarts, reconnects, and partial failures.
       projections, replay/bootstrap, and reconciliation after failed dispatch.
 - [x] Add guidance for separating transport concerns from orchestration/domain
       workflow concerns.
-- [ ] Add verification guidance or cross-references in `TESTING-STANDARDS.md`
+- [x] Add verification guidance or cross-references in `TESTING-STANDARDS.md`
       for replay, dedupe, recovery, and cross-layer acceptance checks.
 
 **Verification:**
@@ -189,20 +189,20 @@ restarts, reconnects, and partial failures.
 - Manual cross-check with `CONCURRENCY-STANDARDS.md` and current
   cross-layer acceptance guidance.
 
-**Status:** In progress
+**Status:** Complete
 
 ### Milestone 5: Relax and Clarify Test Placement Strategy
 
 **Goal:** Allow healthy colocated test structures without losing consistency.
 
 **Tasks:**
-- [ ] Update `TESTING-STANDARDS.md` so "mirror source structure" becomes one
+- [x] Update `TESTING-STANDARDS.md` so "mirror source structure" becomes one
       valid strategy rather than the implied default for every repo.
-- [ ] Add explicit acceptable strategies: colocated tests, separate `tests/`
+- [x] Add explicit acceptable strategies: colocated tests, separate `tests/`
       trees, or hybrid patterns with package-level consistency.
-- [ ] Define selection criteria for each strategy based on language, tooling,
+- [x] Define selection criteria for each strategy based on language, tooling,
       package count, and module discoverability.
-- [ ] Preserve existing cross-layer acceptance expectations while clarifying that
+- [x] Preserve existing cross-layer acceptance expectations while clarifying that
       placement is separate from verification depth.
 
 **Verification:**
@@ -210,7 +210,7 @@ restarts, reconnects, and partial failures.
   conventions rather than arbitrary placement.
 - Confirm examples do not contradict existing unit/integration/e2e guidance.
 
-**Status:** Not started
+**Status:** Complete
 
 ### Milestone 6: Cross-Reference and Editorial Pass
 
@@ -247,6 +247,8 @@ Update during implementation:
 - 2026-03-07: Milestone 4 realtime workflow architecture guidance added to
   `ARCHITECTURE-PATTERNS.md`; testing-specific follow-through deferred to the
   testing milestone.
+- 2026-03-07: Milestones 4 and 5 completed in `TESTING-STANDARDS.md` with test
+  placement strategy guidance plus replay/recovery verification expectations.
 
 ## Commit Cadence Notes
 

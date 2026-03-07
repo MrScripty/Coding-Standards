@@ -4,9 +4,34 @@ Guidelines for writing maintainable, effective tests.
 
 ## Test Organization
 
-### Mirror Source Structure
+### Choose a Consistent Test Placement Strategy
 
+Use one clear test placement strategy per repo or per package. Test placement
+should improve discoverability without mixing unrelated conventions randomly.
+
+Acceptable strategies:
+
+| Strategy | Structure | Works Well When |
+|----------|-----------|-----------------|
+| Colocated | `src/auth/login.ts` + `src/auth/login.test.ts` | Modules are small, packages are numerous, and local discoverability matters |
+| Mirrored test tree | `src/auth/login.ts` + `tests/unit/auth/login.test.ts` | The language/tooling ecosystem strongly prefers separate test roots |
+| Hybrid by level | unit tests colocated, integration/e2e under `tests/` | Fast local tests benefit from adjacency but system-level tests need shared harnesses |
+
+Examples:
+
+```text
+# Colocated
+src/
+├── auth/
+│   ├── login.ts
+│   └── login.test.ts
+└── billing/
+    ├── invoice.ts
+    └── invoice.test.ts
 ```
+
+```text
+# Mirrored test tree
 src/
 ├── auth/
 │   └── login.ts
@@ -17,6 +42,22 @@ tests/
 ├── integration/
 └── e2e/
 ```
+
+Rules:
+- Choose the strategy intentionally and keep it consistent within the chosen
+  repo/package boundary.
+- Name tests predictably so source files and related tests are easy to find.
+- Keep integration/e2e/shared-harness tests in a dedicated location when they
+  depend on multi-module fixtures or system setup.
+- Document any hybrid approach briefly in the repo README or testing guide.
+
+Selection criteria:
+- Prefer colocated tests when package count is high and module-local reasoning
+  matters more than a single central test tree.
+- Prefer mirrored test trees when tooling, language conventions, or build
+  systems make separate test roots simpler.
+- Prefer hybrid placement when unit tests are local but integration/e2e tests
+  need shared infrastructure and fixtures.
 
 ### Test Naming Convention
 
@@ -89,6 +130,20 @@ This check should verify that, in practice:
 
 Do not treat typecheck, isolated unit tests, or partial integration tests as a
 substitute for one end-to-end acceptance path when the feature crosses layers.
+
+### Replay, Recovery, and Idempotency Checks
+
+For systems that use durable commands/events, projections, background workers,
+or reconnect/retry behavior, add verification for:
+
+- replay/bootstrap from persisted state
+- duplicate command/request handling
+- projection/read-model consistency after recovery
+- partial failure recovery before new work resumes
+
+These checks may be integration or end-to-end tests depending on system shape,
+but they must exercise the real workflow boundaries rather than only pure helper
+functions.
 
 ---
 
