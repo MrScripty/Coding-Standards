@@ -86,7 +86,10 @@ Third-party libraries used and why:
 ## Related ADRs
 
 - `ADR-00X` - Brief description
-- Or: `None`
+- Or, if there are no related ADRs:
+- `None identified as of YYYY-MM-DD.`
+- `Reason: <why no ADR currently applies>`
+- `Revisit trigger: <event that should force ADR creation or linkage>`
 
 ## Usage Examples
 
@@ -98,7 +101,7 @@ const runtime = createWorkflowRuntime(config);
 await runtime.start();
 ```
 
-## API Consumer Contract (If Host-Facing)
+## API Consumer Contract
 
 Use this section when external callers depend on this module (API clients,
 plugins, bindings, SDK consumers, or cross-process callers).
@@ -108,6 +111,24 @@ plugins, bindings, SDK consumers, or cross-process callers).
 - Lifecycle: init/start/stop ordering, idempotency, and retry semantics
 - Errors: error classes/codes, retryability, timeout behavior
 - Versioning: breaking-change policy and migration guidance
+
+If this directory is not host-facing, delete this section.
+
+## Structured Producer Contract
+
+Use this section when this directory publishes machine-consumed metadata,
+configuration, schemas, templates, manifests, saved workflows, or other
+structured artifacts.
+
+- Stable fields: which fields/shapes are guaranteed vs intentionally volatile
+- Defaults: semantics when fields are omitted
+- Enums and labels: meanings relied on by generated UIs or persisted consumers
+- Ordering: any order-sensitive behavior consumers depend on
+- Compatibility: expectations for saved artifacts and downstream consumers
+- Regeneration/migration: what must happen when the contract changes
+
+If this directory does not publish machine-consumed artifacts, delete this
+section.
 
 ## Testing
 

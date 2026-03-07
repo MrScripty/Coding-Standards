@@ -27,6 +27,7 @@ Reusable coding, commit, architecture, tooling, and documentation standards that
 | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) | Platform abstraction, file system conventions, CI matrix | Apps targeting multiple OS platforms |
 | [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md) | FFI safety, cross-language boundaries, contract maintenance | Multi-language or native interop projects |
 | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) | Dependency evaluation, versioning, auditing, and minimization | Adding or reviewing third-party packages |
+| [PLAN-STANDARDS.md](PLAN-STANDARDS.md) | Planning workflow, milestones, re-plan triggers, and completion summaries | Multi-file, cross-layer, or staged implementation work |
 | [LAUNCHER-STANDARDS.md](LAUNCHER-STANDARDS.md) | `launcher.sh` contract, lifecycle flags, dependency checks, and app startup | Standardizing app entry points and setup workflows |
 | [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Binding architecture, FFI wrapper design, code generation, type mapping | Exposing a core library to multiple target languages |
 | [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Versioning, changelogs, release artifacts, CI/CD release pipelines | Shipping software to users or downstream consumers |
@@ -39,6 +40,7 @@ Ready-to-use configuration files in `/templates/`:
 | Template | Purpose |
 |----------|---------|
 | [README-TEMPLATE.md](templates/README-TEMPLATE.md) | Directory documentation template |
+| [PLAN-TEMPLATE.md](templates/PLAN-TEMPLATE.md) | Implementation plan template |
 | [PULL_REQUEST_TEMPLATE.md](templates/PULL_REQUEST_TEMPLATE.md) | PR checklist for decision traceability |
 | [check-decision-traceability.sh](templates/check-decision-traceability.sh) | CI/hook script to enforce README/ADR decision updates |
 | [lefthook.yml](templates/lefthook.yml) | Pre-commit hook configuration |

@@ -61,18 +61,22 @@ Chosen approach and why it was selected.
 **External:** Third-party libraries used
 
 ## Related ADRs
-- `ADR-00X` brief description (or "None")
+- `ADR-00X` brief description
+- Or, if there are no related ADRs:
+- `None identified as of YYYY-MM-DD.`
+- `Reason: <why no ADR currently applies>`
+- `Revisit trigger: <event that should force ADR creation or linkage>`
 
 ## Usage Examples
 Code snippets showing how to use components in this directory.
 
-## API Consumer Contract (Host-Facing Modules)
+## API Consumer Contract
 - Supported inputs and outputs
 - Lifecycle and ordering expectations
 - Error behavior and retry guidance
 - Compatibility/versioning notes for clients
 
-## Structured Producer Contract (Machine-Consumed Modules)
+## Structured Producer Contract
 - Stable fields and shape expectations
 - Default semantics when fields are omitted
 - Enum semantics and label/value meanings
