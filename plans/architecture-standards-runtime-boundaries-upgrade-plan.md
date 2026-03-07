@@ -110,7 +110,7 @@ organization.
       each role.
 - [x] Add a short example showing why cross-app imports of implementation
       details are worse than depending on a shared contracts package.
-- [ ] Cross-reference the section from `README.md`.
+- [x] Cross-reference the section from `README.md`.
 
 **Verification:**
 - Manual review to confirm the guidance is stack-agnostic and does not require a
@@ -118,7 +118,7 @@ organization.
 - Manual consistency check against existing layering rules in
   `ARCHITECTURE-PATTERNS.md` and `CODING-STANDARDS.md`.
 
-**Status:** In progress
+**Status:** Complete
 
 ### Milestone 2: Add Executable Contracts Guidance
 
@@ -217,11 +217,11 @@ restarts, reconnects, and partial failures.
 **Goal:** Keep the standards library coherent after the additions.
 
 **Tasks:**
-- [ ] Update `README.md` document descriptions if any standard now covers
+- [x] Update `README.md` document descriptions if any standard now covers
       meaningfully broader ground.
-- [ ] Add or tighten cross-links between architecture, coding, testing,
+- [x] Add or tighten cross-links between architecture, coding, testing,
       concurrency, and security standards where the new sections overlap.
-- [ ] Run a final editorial pass to remove duplicated wording and keep the new
+- [x] Run a final editorial pass to remove duplicated wording and keep the new
       material concise.
 
 **Verification:**
@@ -229,7 +229,7 @@ restarts, reconnects, and partial failures.
 - Markdown preview or direct read-through to confirm headings and references are
   navigable.
 
-**Status:** Not started
+**Status:** Complete
 
 ## Execution Notes
 
@@ -249,6 +249,8 @@ Update during implementation:
   testing milestone.
 - 2026-03-07: Milestones 4 and 5 completed in `TESTING-STANDARDS.md` with test
   placement strategy guidance plus replay/recovery verification expectations.
+- 2026-03-07: Milestones 1 and 6 closed with README discoverability updates and
+  a final cross-reference/editorial pass.
 
 ## Commit Cadence Notes
 
@@ -283,7 +285,12 @@ Update during implementation:
 
 ### Completed
 
-- Plan drafted.
+- Milestone 1: Added monorepo package role guidance and README discoverability.
+- Milestone 2: Added executable boundary contract guidance.
+- Milestone 3: Added composition root and service contract guidance.
+- Milestone 4: Added durable realtime workflow guidance and related verification expectations.
+- Milestone 5: Updated testing standards to allow colocated, mirrored, and hybrid placement strategies.
+- Milestone 6: Completed cross-reference and editorial pass across touched documents.
 
 ### Deviations
 
@@ -291,20 +298,22 @@ Update during implementation:
 
 ### Follow-Ups
 
-- Execute the plan in milestone order once approved.
+- None.
 
 ### Verification Summary
 
 - Manual review against `PLAN-STANDARDS.md`.
 - Manual comparison against current standards documents and the referenced
   `t3code` design patterns.
+- Manual read-through of `README.md`, `ARCHITECTURE-PATTERNS.md`,
+  `CODING-STANDARDS.md`, and `TESTING-STANDARDS.md` for consistency.
 
 ### Traceability Links
 
 - Module README updated: N/A
 - ADR added/updated: N/A
 - PR notes completed per `templates/PULL_REQUEST_TEMPLATE.md`: Pending future
-  implementation PR
+  PR creation
 
 ## Brevity Note
 

@@ -15,10 +15,10 @@ Reusable coding, commit, architecture, tooling, and documentation standards that
 
 | Document | Purpose | When to Use |
 |----------|---------|-------------|
-| [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, file limits, layering, language-specific guidelines | Setting up any new codebase |
-| [TESTING-STANDARDS.md](TESTING-STANDARDS.md) | Test organization, naming, coverage, verification layers | Writing maintainable tests |
+| [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, file limits, layering, service independence, runtime wiring guidance | Setting up any new codebase |
+| [TESTING-STANDARDS.md](TESTING-STANDARDS.md) | Test placement strategy, naming, coverage, and cross-layer verification guidance | Writing maintainable tests |
 | [COMMIT-STANDARDS.md](COMMIT-STANDARDS.md) | Git workflow, conventional commits, agent footers | Any project using version control |
-| [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md) | System design patterns, process coordination, schema migration, infrastructure resilience | Multi-layer, client-server, or service-oriented apps |
+| [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md) | System design patterns, monorepo package roles, executable contracts, composition roots, and resilient workflow coordination | Multi-layer, client-server, monorepo, or service-oriented apps |
 | [TOOLING-STANDARDS.md](TOOLING-STANDARDS.md) | Linting, hooks, automation | Enforcing code quality |
 | [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md) | Declarative rendering, UI synchronization, frontend testing/tooling conventions | Web, desktop UI, and component-heavy frontend codebases |
 | [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) | README requirements, comments, algorithm docs | Maintaining readable codebases |
