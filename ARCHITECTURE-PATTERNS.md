@@ -49,6 +49,68 @@ Presentation → Application → Domain ← Infrastructure
 
 ---
 
+## Monorepo Package Roles
+
+### The Pattern
+
+In multi-package repositories, assign each package a stable architectural role.
+Package boundaries should enforce responsibility and dependency direction, not
+just group files by convenience.
+
+Package names and folder names may vary. The rule is about what a package is
+allowed to contain and which other roles it may depend on.
+
+### Common Roles
+
+| Role | Contains | Must Not Contain |
+|------|----------|------------------|
+| App | Deployable/runtime entrypoints, composition, startup, transport wiring | Reusable shared logic that should live outside the app |
+| Contracts | Shared schemas, DTOs, message formats, boundary enums/IDs | I/O, side effects, business workflows, framework runtime glue |
+| Domain/Core | Business rules, entities, pure orchestration rules | UI, transport handlers, persistence drivers |
+| Shared Utilities | Small reusable helpers and low-level utilities | Feature ownership, workflow orchestration, app entrypoints |
+| Tooling/Config | Build config, lint config, shared scripts, codegen config | Product runtime logic |
+
+Only create the roles your repo actually needs. Small repos may collapse some
+roles into directories instead of separate packages.
+
+### Dependency Direction
+
+```
+apps ─────────────▶ contracts
+apps ─────────────▶ domain/core
+apps ─────────────▶ shared utilities
+domain/core ──────▶ contracts
+shared utilities ─▶ contracts (only when truly generic)
+tooling/config ───▶ none of the runtime app layers by default
+```
+
+Rules:
+- App packages may compose other roles, but should not import another app's
+  internal implementation modules.
+- Contracts packages should be safe for both producers and consumers to depend
+  on.
+- Domain/core packages should depend on contracts or narrow infrastructure
+  interfaces, not UI or transport implementations.
+- Shared utilities should stay narrow; if a package starts owning workflow
+  decisions, promote it to a clearer domain/app role.
+- Tooling/config packages should support development workflows without becoming
+  a back door for runtime dependencies.
+
+### Why This Helps
+
+- **Boundary enforcement:** Imports reflect architecture, not accidental file location
+- **Refactor safety:** Shared contracts and shared logic can move without cross-app tangling
+- **Review clarity:** Misplaced code is easier to spot during review
+- **Reuse control:** Shared packages stay intentional instead of becoming dump folders
+
+### Example Decision
+
+If a web app and a server both need the same request/response schema, place it
+in a contracts package. Do not import server implementation modules into the
+web app just to reuse type definitions.
+
+---
+
 ## Backend-Owned Data
 
 ### The Pattern
@@ -171,6 +233,84 @@ type MessageType =
 - **Parallel development:** Teams can work independently
 - **Integration confidence:** Interfaces guaranteed to match
 - **Clear boundaries:** Explicit API between components
+
+---
+
+## Executable Boundary Contracts
+
+### The Pattern
+
+When data crosses a trust boundary or process boundary, prefer contracts that
+are executable artifacts, not only compile-time type declarations.
+
+Examples:
+- HTTP request/response payloads
+- WebSocket or IPC envelopes
+- queue/job payloads
+- persisted JSON/YAML/config artifacts
+- plugin manifests or generated metadata
+
+An executable contract can be decoded, validated, or normalized at runtime by
+the producer, consumer, or both.
+
+### Plain Types vs Executable Contracts
+
+Use plain shared interfaces/types when:
+- the data stays in-process
+- both producer and consumer are compiled and versioned together
+- runtime drift risk is low
+
+Prefer executable contracts when:
+- producer and consumer can drift independently
+- inputs arrive from users, networks, plugins, files, or other processes
+- persisted artifacts may outlive the current code version
+- defaults, enum semantics, trimming, bounds, or branded IDs matter for safety
+
+### Contract Requirements
+
+Executable contracts should preserve:
+- field shape and optionality
+- defaults applied when fields are omitted
+- enum meaning, not just enum spelling
+- identifier constraints and branding where mix-ups are dangerous
+- normalization rules such as trimming, bounds, or canonical casing
+- compatibility expectations for stored artifacts and replayed messages
+
+Validate once at the boundary, then pass validated values inward.
+
+```typescript
+// BAD: Only a compile-time interface; runtime input is trusted blindly
+interface CreateJobRequest {
+    jobId: string;
+    priority: number;
+}
+
+function handleCreateJob(input: unknown) {
+    const request = input as CreateJobRequest;
+    return runJob(request);
+}
+
+// GOOD: Boundary decodes unknown input into a validated contract
+function handleCreateJob(input: unknown) {
+    const request = decodeCreateJobRequest(input); // throws/returns error if invalid
+    return runJob(request);
+}
+```
+
+### Packaging Guidance
+
+For multi-package repos, keep executable boundary contracts in a dedicated
+contracts/schema module or package when multiple producers/consumers depend on
+them.
+
+Do not hide boundary schemas inside one app's implementation package if another
+app or process needs to trust the same contract.
+
+### Benefits
+
+- **Runtime safety:** Invalid inputs fail early and predictably
+- **Compatibility control:** Persisted artifacts and messages drift less silently
+- **Shared truth:** Producers and consumers agree on semantics, not only field names
 
 ---
 
