@@ -4,6 +4,8 @@ set -euo pipefail
 SOURCE_ROOT="${SOURCE_ROOT:-src}"
 ADR_DIR="${ADR_DIR:-docs/adr}"
 BASE_REF="${TRACEABILITY_BASE_REF:-origin/main}"
+HOST_FACING_DIRS="${TRACEABILITY_HOST_FACING_DIRS:-}"
+STRUCTURED_PRODUCER_DIRS="${TRACEABILITY_STRUCTURED_PRODUCER_DIRS:-}"
 
 required_headers=(
   "## Purpose"
@@ -17,6 +19,14 @@ required_headers=(
   "## Dependencies"
   "## Related ADRs"
   "## Usage Examples"
+)
+
+host_facing_headers=(
+  "## API Consumer Contract"
+)
+
+structured_producer_headers=(
+  "## Structured Producer Contract"
 )
 
 banned_placeholders=(
@@ -35,6 +45,49 @@ extract_section_body() {
     in_section && /^## / { exit }
     in_section { print }
   ' "$file"
+}
+
+normalize_dir_key() {
+  local dir_path="$1"
+
+  if [ "$dir_path" = "$SOURCE_ROOT" ]; then
+    printf '.\n'
+  else
+    printf '%s\n' "${dir_path#"$SOURCE_ROOT/"}"
+  fi
+}
+
+normalize_config_dir() {
+  local dir_path="$1"
+
+  dir_path="${dir_path#./}"
+  dir_path="${dir_path%/}"
+
+  if [ -z "$dir_path" ] || [ "$dir_path" = "." ] || [ "$dir_path" = "$SOURCE_ROOT" ]; then
+    printf '.\n'
+  elif [[ "$dir_path" == "$SOURCE_ROOT/"* ]]; then
+    printf '%s\n' "${dir_path#"$SOURCE_ROOT/"}"
+  else
+    printf '%s\n' "$dir_path"
+  fi
+}
+
+dir_list_contains() {
+  local dir_key="$1"
+  local list="$2"
+  local item normalized
+
+  [ -n "$list" ] || return 1
+
+  IFS=',' read -ra items <<< "$list"
+  for item in "${items[@]}"; do
+    normalized="$(normalize_config_dir "$item")"
+    if [ "$normalized" = "$dir_key" ]; then
+      return 0
+    fi
+  done
+
+  return 1
 }
 
 if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
@@ -82,41 +135,39 @@ for file in "${changed_files[@]}"; do
   fi
 done
 
-declare -A modules=()
+declare -A changed_dirs=()
 for file in "${changed_files[@]}"; do
   [[ "$file" == "$SOURCE_ROOT/"* ]] || continue
-
-  relative="${file#"$SOURCE_ROOT/"}"
-  module="${relative%%/*}"
-  if [[ "$module" == "$relative" ]]; then
-    module="."
-  fi
-  modules["$module"]=1
+  dir_path="$(dirname "$file")"
+  changed_dirs["$dir_path"]=1
 done
 
-if [ "${#modules[@]}" -eq 0 ]; then
-  echo "No '$SOURCE_ROOT/' module changes detected."
+if [ "${#changed_dirs[@]}" -eq 0 ]; then
+  echo "No '$SOURCE_ROOT/' directory changes detected."
   exit 0
 fi
 
 failures=0
-for module in "${!modules[@]}"; do
-  if [ "$module" = "." ]; then
-    module_dir="$SOURCE_ROOT"
-    readme_path="$SOURCE_ROOT/README.md"
-  else
-    module_dir="$SOURCE_ROOT/$module"
-    readme_path="$module_dir/README.md"
+for module_dir in "${!changed_dirs[@]}"; do
+  dir_key="$(normalize_dir_key "$module_dir")"
+  readme_path="$module_dir/README.md"
+
+  required_headers_for_dir=("${required_headers[@]}")
+  if dir_list_contains "$dir_key" "$HOST_FACING_DIRS"; then
+    required_headers_for_dir+=("${host_facing_headers[@]}")
+  fi
+  if dir_list_contains "$dir_key" "$STRUCTURED_PRODUCER_DIRS"; then
+    required_headers_for_dir+=("${structured_producer_headers[@]}")
   fi
 
   if [ ! -f "$readme_path" ]; then
-    echo "Missing README.md for changed module: $module_dir"
+    echo "Missing README.md for changed directory: $module_dir"
     failures=$((failures + 1))
     continue
   fi
 
   missing_header=false
-  for header in "${required_headers[@]}"; do
+  for header in "${required_headers_for_dir[@]}"; do
     if ! rg -F -x -q "$header" "$readme_path"; then
       echo "Missing required heading in $readme_path: $header"
       missing_header=true
@@ -127,7 +178,7 @@ for module in "${!modules[@]}"; do
   fi
 
   none_format_invalid=false
-  for header in "${required_headers[@]}"; do
+  for header in "${required_headers_for_dir[@]}"; do
     section_body="$(extract_section_body "$header" "$readme_path")"
     if printf '%s\n' "$section_body" | rg -i -q '\bnone\b'; then
       if ! printf '%s\n' "$section_body" | rg -i -q 'reason:'; then
@@ -161,7 +212,7 @@ for module in "${!modules[@]}"; do
   fi
 
   if [ "$readme_changed" = false ] && [ "$adr_changed" = false ]; then
-    echo "Changed module without decision traceability update: $module_dir"
+    echo "Changed directory without decision traceability update: $module_dir"
     echo "Update $readme_path or add/update an ADR under $ADR_DIR/."
     failures=$((failures + 1))
   fi

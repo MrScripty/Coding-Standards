@@ -402,11 +402,23 @@ jobs:
 ### README Enforcement
 
 Enforce decision traceability with a script that checks all of the following:
-- Every changed module under `src/` has a `README.md`
-- Required decision headings exist in each module README
+- Every changed directory under `src/` has a `README.md`
+- Required decision headings exist in each changed directory README
 - `None` sections include both `Reason:` and `Revisit trigger:`
 - Banned placeholder language is rejected
-- PRs touching `src/<module>/` update that module README or add/update an ADR
+- PRs touching `src/` update the affected directory README(s) or add/update an ADR
+
+For directories that must expose additional contract sections, configure the
+script with comma-separated paths relative to `src/`:
+
+```bash
+export TRACEABILITY_HOST_FACING_DIRS="api,bindings/python"
+export TRACEABILITY_STRUCTURED_PRODUCER_DIRS="schema,templates/workflows"
+```
+
+Configured host-facing directories must include `## API Consumer Contract`.
+Configured structured-producer directories must include
+`## Structured Producer Contract`.
 
 ```bash
 mkdir -p scripts
