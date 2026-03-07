@@ -149,15 +149,15 @@ be runtime-checked artifacts, not only compile-time interfaces.
 implementations.
 
 **Tasks:**
-- [ ] Add a section to `ARCHITECTURE-PATTERNS.md` describing a composition root
+- [x] Add a section to `ARCHITECTURE-PATTERNS.md` describing a composition root
       that assembles infrastructure and service implementations at the app
       boundary.
-- [ ] Define a service contract module pattern: public interface/facade in one
+- [x] Define a service contract module pattern: public interface/facade in one
       module, concrete implementation in another, with consumers depending on
       the contract.
-- [ ] Add rules for where lifecycle ownership belongs for processes, sockets,
+- [x] Add rules for where lifecycle ownership belongs for processes, sockets,
       timers, or background workers.
-- [ ] Add a small coding cross-reference if folder/module placement needs to be
+- [x] Add a small coding cross-reference if folder/module placement needs to be
       reinforced in `CODING-STANDARDS.md`.
 
 **Verification:**
@@ -166,7 +166,7 @@ implementations.
 - Confirm the lifecycle guidance does not conflict with existing single-owner
   stateful flow rules.
 
-**Status:** Not started
+**Status:** Complete
 
 ### Milestone 4: Add Realtime Workflow Systems Pattern
 
@@ -174,11 +174,11 @@ implementations.
 restarts, reconnects, and partial failures.
 
 **Tasks:**
-- [ ] Add an optional "Realtime Workflow Systems" section to
+- [x] Add an optional "Realtime Workflow Systems" section to
       `ARCHITECTURE-PATTERNS.md`.
-- [ ] Cover command idempotency, append-only event storage, read-model
+- [x] Cover command idempotency, append-only event storage, read-model
       projections, replay/bootstrap, and reconciliation after failed dispatch.
-- [ ] Add guidance for separating transport concerns from orchestration/domain
+- [x] Add guidance for separating transport concerns from orchestration/domain
       workflow concerns.
 - [ ] Add verification guidance or cross-references in `TESTING-STANDARDS.md`
       for replay, dedupe, recovery, and cross-layer acceptance checks.
@@ -189,7 +189,7 @@ restarts, reconnects, and partial failures.
 - Manual cross-check with `CONCURRENCY-STANDARDS.md` and current
   cross-layer acceptance guidance.
 
-**Status:** Not started
+**Status:** In progress
 
 ### Milestone 5: Relax and Clarify Test Placement Strategy
 
@@ -241,6 +241,12 @@ Update during implementation:
   editorial pass.
 - 2026-03-07: Milestone 2 executable contract guidance added to
   `ARCHITECTURE-PATTERNS.md`; no extra coding/security cross-reference needed.
+- 2026-03-07: Milestone 3 composition root guidance added to
+  `ARCHITECTURE-PATTERNS.md` with a supporting cross-reference in
+  `CODING-STANDARDS.md`.
+- 2026-03-07: Milestone 4 realtime workflow architecture guidance added to
+  `ARCHITECTURE-PATTERNS.md`; testing-specific follow-through deferred to the
+  testing milestone.
 
 ## Commit Cadence Notes
 

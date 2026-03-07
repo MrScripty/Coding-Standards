@@ -436,6 +436,132 @@ function handleMessage(msg: IPCMessage): void {
 
 ---
 
+## Composition Root Pattern
+
+### The Pattern
+
+Assemble concrete implementations at one application boundary instead of
+letting wiring logic spread through feature modules.
+
+```
+composition root
+    ├── create infrastructure implementations
+    ├── create service implementations
+    ├── connect them together
+    └── expose only the app/runtime entrypoint
+```
+
+Use this pattern for apps with multiple services, infrastructure clients,
+background workers, or process lifecycle concerns.
+
+### Roles
+
+| Module Type | Responsibility |
+|-------------|----------------|
+| Contract/facade module | Defines the public interface used by consumers |
+| Implementation module | Contains the concrete behavior and dependency usage |
+| Composition root | Chooses implementations, wires dependencies, owns startup/shutdown |
+
+### Rules
+
+- Consumers depend on service contracts/facades, not concrete implementations.
+- Concrete implementations are selected at the application boundary.
+- Startup and shutdown ownership for sockets, workers, timers, and background
+  loops belongs in the composition root or another single lifecycle owner.
+- Feature modules may request dependencies, but should not create global
+  infrastructure instances ad hoc.
+- If a module needs different implementations in test vs production, swap them
+  in the composition root rather than branching inside business logic.
+
+```typescript
+// GOOD: App boundary wires the implementation
+const userRepository = new SqlUserRepository(db);
+const userService = new UserService(userRepository);
+const server = new ApiServer(userService);
+```
+
+```typescript
+// BAD: Feature module reaches outward and self-wires infrastructure
+export function handleRequest(input: Request) {
+    const db = createDatabaseConnection();
+    const repo = new SqlUserRepository(db);
+    const service = new UserService(repo);
+    return service.handle(input);
+}
+```
+
+### Benefits
+
+- **Replaceability:** Tests, local dev, and production can use different implementations cleanly
+- **Lifecycle clarity:** One place owns long-lived resources and cleanup
+- **Boundary discipline:** Business logic depends on contracts, not environment wiring
+
+---
+
+## Realtime Workflow Systems
+
+### The Pattern
+
+For systems that handle durable commands, long-lived sessions, reconnects, or
+partial failures, separate transport handling from canonical workflow state and
+event progression.
+
+This is an optional pattern. Use it when the system must stay predictable across
+restarts, retries, reconnects, or partial processing, not for every CRUD app.
+
+### Workflow Shape
+
+```
+command/request
+    ├── validate + dedupe/idempotency check
+    ├── append canonical event(s)
+    ├── project read model(s)
+    ├── publish updates to consumers
+    └── replay/bootstrap on restart
+```
+
+### Rules
+
+- Transport layers decode requests and forward commands, but should not own the
+  workflow state machine.
+- Use stable command identifiers when retries or duplicate delivery are possible.
+- Persist canonical events or equivalent durable state transitions before
+  treating work as accepted.
+- Build read models/projections for query and UI needs instead of coupling
+  consumers directly to transient workflow internals.
+- On startup, bootstrap workflow state from durable state instead of trusting
+  in-memory leftovers.
+- After partial failure, reconcile from the persisted source of truth before
+  resuming new work.
+- Keep event ordering, replay semantics, and projection compatibility explicit.
+
+### Typical Components
+
+| Component | Responsibility |
+|-----------|----------------|
+| Transport adapter | Decode requests, encode responses, manage connection details |
+| Command handler/orchestrator | Validate commands and decide next state transition(s) |
+| Durable store | Persist events or equivalent durable transitions |
+| Projection/read model | Build query-friendly state for consumers |
+| Update publisher | Push new state/events to subscribers |
+
+### Benefits
+
+- **Recovery:** Restarts and reconnects do not silently corrupt workflow state
+- **Idempotency:** Retries are less likely to duplicate work
+- **Separation:** UI/query consumers read stable projections instead of mutable internals
+- **Auditability:** Durable transitions create a clearer history of what happened
+
+### Verification Note
+
+When using this pattern, require tests for replay/bootstrap, duplicate command
+handling, projection consistency, and recovery after partial failure. See
+[TESTING-STANDARDS.md](TESTING-STANDARDS.md) for cross-layer acceptance
+expectations and [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) for
+lifecycle/overlap safety.
+
+---
+
 ## View Model Pattern
 
 ### The Pattern

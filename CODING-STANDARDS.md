@@ -122,6 +122,18 @@ class UserService {
 
 **Why:** Framework-agnostic services can be unit tested without mocking the entire framework.
 
+### Composition Root for Runtime Wiring
+
+When an application has multiple infrastructure implementations, background
+workers, or long-lived runtime resources, assemble them in a single composition
+root near the app entrypoint.
+
+Feature modules should depend on service contracts or constructor parameters,
+not create global infrastructure instances ad hoc.
+
+See [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md) for the
+Composition Root pattern and service contract guidance.
+
 ### Single Owner for Stateful Flows
 
 Do not split ownership of a state machine across parent/component boundaries or
