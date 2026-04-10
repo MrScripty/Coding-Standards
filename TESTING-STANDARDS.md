@@ -509,7 +509,7 @@ test('search completes within 100ms for 10k items', async () => {
 
 ## Verification Layers
 
-Testing is not limited to unit test suites. Use these verification layers in order. Each catches a different class of problem. Stop at the first failure and fix it before proceeding.
+Testing is not limited to unit test suites. Use these verification layers in order. Each catches a different class of problem. For local/manual verification, stop at the first failure and fix it before proceeding. In CI, still run independent gates and platform jobs to completion so one failure does not hide later issues.
 
 ```
 ┌──────────────────────────────────────────┐

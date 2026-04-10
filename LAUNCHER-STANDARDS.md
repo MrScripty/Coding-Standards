@@ -12,8 +12,12 @@ entry point for local development, CI, and operator workflows.
 - Be executable (`chmod +x launcher.sh`)
 - Use Bash (`#!/usr/bin/env bash`)
 - Support only long-form `--` options
-- Implement `--run`, `--run-release`, `--build`, `--build-release`, `--install`,
-  and `--help`
+- Implement the base lifecycle flags `--run`, `--run-release`, `--build`,
+  `--build-release`, `--install`, and `--help`
+
+Projects with first-class verification workflows should extend `launcher.sh`
+instead of scattering canonical commands across README snippets, ad hoc scripts,
+and tribal knowledge.
 
 ---
 
@@ -34,9 +38,12 @@ entry point for local development, CI, and operator workflows.
 
 1. Exactly one action flag must be selected.
 2. Valid actions are `--run`, `--run-release`, `--build`, `--build-release`,
-   `--install`, `--help`.
+   `--install`, `--help` as the base contract. Additional long-form workflow
+   actions are allowed when documented in `--help`.
 3. Unknown flags must fail with exit code `2` and print usage.
-4. `--` marks the start of app args and is valid only with `--run` or `--run-release`.
+4. `--` marks the start of forwarded args and is valid only for actions that
+   explicitly document passthrough support (for example `--run`,
+   `--run-release`, or `--perf`).
 5. No positional args are allowed.
 
 ### Canonical Usage
@@ -50,7 +57,38 @@ entry point for local development, CI, and operator workflows.
 ./launcher.sh --run -- --port 8080 --log-level debug
 ./launcher.sh --run-release
 ./launcher.sh --run-release -- --port 8080
+
+# Recommended workflow extensions when applicable
+./launcher.sh --test
+./launcher.sh --perf
+./launcher.sh --release-smoke
 ```
+
+---
+
+## Workflow Extensions (Required When Applicable)
+
+If the project has a canonical test suite, benchmark/performance gate, or
+release sanity check, expose those through `launcher.sh` instead of requiring
+developers to discover separate commands manually.
+
+| Flag | Use When | Required Behavior |
+|---|---|---|
+| `--test` | The project has a canonical local test command | Runs the repo's standard test suite and exits non-zero on failure |
+| `--perf` | The project has a benchmark, perf gate, or profiler contract | Runs the canonical perf command and preserves its pass/fail semantics |
+| `--release-smoke` | The project ships a release artifact that should be sanity checked before shipping | Builds or verifies the release artifact, launches it briefly, and fails if startup is not healthy |
+
+Rules:
+
+1. Prefer a single launcher action over telling developers to remember multiple
+   scripts and raw toolchain commands.
+2. `--test` should invoke the same command that CI or local verification expects.
+3. `--perf` may forward additional profiler args after `--` when the perf tool
+   supports them.
+4. `--release-smoke` should use a bounded smoke window and return non-zero if
+   the artifact exits prematurely or cannot start cleanly.
+5. If a workflow does not apply to the project, omit the flag rather than
+   adding a stub with ambiguous behavior.
 
 ---
 
@@ -146,6 +184,44 @@ exec "./target/release/${APP_BIN}" "${RUN_ARGS[@]}"
 
 ---
 
+## Managed State Standards
+
+If the application persists local state, local verification actions should avoid
+mutating the operator's normal state directories by default.
+
+Recommended launcher behavior:
+
+1. Use a launcher-managed state root for dev/test/perf/release-smoke flows.
+2. Prefer a repo-local path (for example `.launcher-state/`) or another explicit
+   overrideable workspace path.
+3. Set app-specific env vars or platform state-home env vars explicitly instead
+   of relying on the user's normal home-directory state.
+4. Provide an opt-out environment variable so operators can intentionally use
+   host state when needed.
+5. Log which state mode is active so the operator knows whether the launcher is
+   using isolated or host state.
+
+Example pattern:
+
+```bash
+LAUNCHER_STATE_ROOT="${MYAPP_LAUNCHER_STATE_ROOT:-${PROJECT_ROOT}/.launcher-state}"
+ISOLATE_STATE="${MYAPP_LAUNCHER_ISOLATE_STATE:-1}"
+
+setup_managed_state_env() {
+  local state_dir="$1"
+  mkdir -p "$state_dir"
+  export XDG_STATE_HOME="${state_dir}/xdg-state"
+  export XDG_DATA_HOME="${state_dir}/xdg-data"
+  export MYAPP_STATE_PATH="${state_dir}/app-state.json"
+}
+```
+
+For long-lived `exec`-style actions such as `--run`, a persistent isolated
+state dir is acceptable. For bounded verification actions such as `--test`,
+`--perf`, or `--release-smoke`, temporary isolated state dirs are preferred.
+
+---
+
 ## Help Standards (`--help`)
 
 `--help` must include:
@@ -157,6 +233,9 @@ exec "./target/release/${APP_BIN}" "${RUN_ARGS[@]}"
 - Arg forwarding syntax (`--run -- <args>`, `--run-release -- <args>`)
 - At least one install, build, and run example
 - Exit code meaning
+
+If workflow extensions or managed-state env vars are implemented, `--help`
+should also document them.
 
 ---
 
@@ -184,6 +263,8 @@ exec "./target/release/${APP_BIN}" "${RUN_ARGS[@]}"
 7. Keep dependency checks side-effect free
 8. Do not silently auto-escalate privileges (`sudo`) without explicit operator intent
 9. Escape untrusted values before writing generated scripts or desktop entries
+10. When isolating state, prefer explicit environment exports over mutating
+    shared files in the operator's normal state directories
 
 ## Desktop Entry and Script Generation Safety
 
@@ -449,3 +530,7 @@ main "$@"
 - `--help` documents usage, examples, and exit codes
 - Script uses strict Bash mode and quoted expansions
 - Generated scripts/desktop entries escape interpolated values safely
+- If the project has a canonical local test flow, `launcher.sh --test` exists
+- If the project has a canonical perf gate, `launcher.sh --perf` exists
+- If the project ships release artifacts, `launcher.sh --release-smoke` is defined
+- If the app persists local state, launcher-managed isolation is documented and implemented

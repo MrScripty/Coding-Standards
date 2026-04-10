@@ -334,6 +334,26 @@ non-blocking during debt burn-down.
 **Never remove a quality gate from CI without immediately replacing it.** A lint step removed
 "temporarily" can result in hundreds of errors accumulating before anyone notices.
 
+### Prefer Failure Aggregation Over Fail-Fast
+
+Long-running CI should maximize defect visibility per run. Do not structure GitHub
+Actions so one blocking failure cancels unrelated checks that could have reported
+additional problems.
+
+Rules:
+- Run independent blocking gates as separate jobs when possible so lint, typecheck,
+  formatting, tests, and platform builds all report in the same workflow run.
+- For job matrices, set `strategy.fail-fast: false` unless cancelling the remaining
+  matrix work is an intentional cost-saving tradeoff.
+- Use an optional final summary job with `if: always()` to collect job outcomes and
+  present one list of failures at the end of the run.
+- Do not use `continue-on-error: true` on blocking gates just to keep the workflow
+  moving. Prefer separate jobs. Reserve `continue-on-error` for explicitly
+  non-blocking audit/reporting steps such as full-lint debt inventory.
+- If a single command can surface multiple findings in one invocation (for example,
+  a linter or test runner that reports all failures before exiting), prefer that
+  mode over wrappers that stop on the first issue.
+
 ### Lint Debt Ratchet (When Full Lint Is Temporarily Non-Blocking)
 
 1. Keep a committed baseline snapshot of current full-lint violations.
@@ -351,7 +371,7 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  quality:
+  lint_critical:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -368,22 +388,90 @@ jobs:
       - name: Lint (critical anti-patterns)
         run: npm run lint:critical
 
-      - name: Lint (no new violations)
-        run: npm run lint:no-new
+  lint_no_new:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint:no-new
 
-      - name: Lint (full audit)
-        if: always()
-        continue-on-error: true
-        run: npm run lint:full
+  lint_full_audit:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run lint:full
 
-      - name: Type check
-        run: npm run typecheck
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run typecheck
 
-      - name: Format check
-        run: npm run format:check
+  format_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run format:check
 
-      - name: Test
-        run: npm test
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test
+
+  ci_summary:
+    if: always()
+    needs: [lint_critical, lint_no_new, lint_full_audit, typecheck, format_check, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Summarize blocking results
+        env:
+          LINT_CRITICAL: ${{ needs.lint_critical.result }}
+          LINT_NO_NEW: ${{ needs.lint_no_new.result }}
+          TYPECHECK: ${{ needs.typecheck.result }}
+          FORMAT_CHECK: ${{ needs.format_check.result }}
+          TEST: ${{ needs.test.result }}
+        run: |
+          failures=0
+
+          for gate in LINT_CRITICAL LINT_NO_NEW TYPECHECK FORMAT_CHECK TEST; do
+            result="${!gate}"
+            echo "- ${gate}: ${result}" >> "$GITHUB_STEP_SUMMARY"
+            if [ "$result" != "success" ]; then
+              failures=1
+            fi
+          done
+
+          exit "$failures"
 ```
 
 ### CI vs. Local Checks

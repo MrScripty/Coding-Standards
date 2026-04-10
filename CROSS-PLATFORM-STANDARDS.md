@@ -265,6 +265,7 @@ CI must build on all required platforms:
 
 ```yaml
 strategy:
+  fail-fast: false
   matrix:
     include:
       - os: ubuntu-latest
@@ -276,6 +277,8 @@ strategy:
 Rules:
 - CI must build on at least Linux and Windows (or your required platforms)
 - Platform-specific tests run on their respective OS
+- Matrix builds should set `fail-fast: false` so one platform failure does not
+  hide others
 - Best-effort platform CI is optional but code must compile
 - CI should invoke the same build commands as local development
 
