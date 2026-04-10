@@ -81,6 +81,62 @@ project-root/
 
 ---
 
+## Product-Native Artifact Model
+
+When shipping a library to foreign-language consumers, distinguish three
+separate identities:
+
+1. **Product-native shared library** — the platform-specific `.so/.dll/.dylib`
+   that contains the product's native implementation for foreign-language
+   consumers.
+2. **Internal FFI wrapper crate/tooling** — the Rust wrapper crate and binding
+   generator configuration used to expose the product over FFI.
+3. **Generated host-language binding package** — the language-specific source
+   or package consumed by host applications.
+
+The internal FFI mechanism is not the product identity.
+
+### Rules
+
+1. **Ship one product-native shared library per platform target.**
+2. **Package generated host-language bindings separately by default.**
+3. **Do not name shipped artifacts after the binding framework** (`uniffi`,
+   `rustler`, etc.) unless the product itself is the framework.
+4. **Binding packages must document which native product library they require.**
+5. **Binding packages and native libraries must be version-matched from the
+   same build or release.**
+6. **If convenience bundles include both the native library and generated
+   bindings, treat them as optional secondary artifacts, not the primary
+   architecture.**
+
+### Example Release Layout
+
+```text
+release/
+├── pantograph-headless-native-linux-x64.zip
+├── pantograph-headless-native-win-x64.zip
+├── pantograph-csharp-bindings.zip
+├── pantograph-python-bindings.zip
+└── checksums-sha256.txt
+```
+
+### Rationale
+
+This keeps the product identity tied to the product, avoids duplicating the
+same native library across language packages, and makes it explicit that
+generated host bindings are optional layers over a shared native implementation.
+
+### Compatibility Notes
+
+- Product-facing naming may differ from the internal wrapper crate name.
+- If a native library name or generated package name changes, follow the
+  deprecation and migration expectations in `RELEASE-STANDARDS.md`.
+- Binding packages should state whether they are source-only/generated-only or
+  whether they intentionally bundle the native product library as a convenience
+  artifact.
+
+---
+
 ## FFI Wrapper Design
 
 ### Wrapper Type Conventions
