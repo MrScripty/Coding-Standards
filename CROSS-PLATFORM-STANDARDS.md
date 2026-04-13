@@ -227,6 +227,31 @@ if (resolved.StartsWith(root, StringComparison.OrdinalIgnoreCase))
     // Valid path
 ```
 
+### Canonical Filesystem Identity
+
+Normalization is not the same as filesystem identity. When code under test
+canonicalizes, resolves symlinks, or compares real filesystem roots, tests and
+cross-platform code must compare canonical paths, not only separator-normalized
+strings.
+
+Rules:
+
+1. If production code uses canonicalization or realpath resolution, tests must
+   compare against canonicalized expectations.
+2. Path comparisons involving temp directories, system roots, symlinked
+   workspaces, mounted volumes, or platform-managed directories must account
+   for alias paths such as macOS `/var` versus `/private/var`.
+3. Do not assume the display form of a path returned by tempdir APIs is the
+   same as the canonical filesystem identity.
+4. Use display-path normalization only for user-facing output. Use canonical
+   identity for containment checks, path equality, and persisted root tracking.
+
+Verification guidance:
+- Add at least one test on each supported filesystem family where path
+  identity matters.
+- Prefer comparing `canonicalize()` / `realpath()` results over raw string
+  equality when the code under test resolves paths.
+
 ### Spaces in Paths
 
 All path handling must support spaces in directory and file names:

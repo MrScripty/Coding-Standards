@@ -634,6 +634,26 @@ Not all dependency risks are detectable by automated tools. Periodically review:
 
 ## CI Integration
 
+### CI Tool Bootstrap Ownership
+
+Every CI job must bootstrap the exact toolchain and package manager it invokes
+before running workspace or package commands.
+
+Rules:
+1. A CI job must install or enable the package manager named by the repo
+   contract before any package-manager command runs.
+2. A CI job must not assume runner images provide `pnpm`, `cargo`, `dotnet`,
+   or other tools unless the workflow explicitly provisions them.
+3. The bootstrap step must happen in every job that uses the tool, not only in
+   one earlier job.
+4. CI examples in repo docs and workflow templates must match the actual
+   package-manager bootstrap sequence used by the workflows.
+
+Verification guidance:
+- Treat "command not found" failures in CI as a workflow contract defect.
+- Prefer explicit setup actions or explicit bootstrap commands over depending
+  on runner defaults.
+
 ### Recommended CI Checks
 
 | Check | Rust | Node | C# | Frequency |
