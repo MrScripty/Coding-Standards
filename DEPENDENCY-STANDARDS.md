@@ -206,6 +206,162 @@ catalog:
 }
 ```
 
+### Dependency Ownership Must Match Execution Boundaries
+
+In multi-package, multi-project, or workspace-based repositories, each
+dependency must be declared at the narrowest boundary that actually owns and
+executes it.
+
+Rules:
+1. A dependency used by only one package, app, crate, project, or service must
+   be declared by that owner, not by a broader root or workspace manifest.
+2. Root- or workspace-level dependency declarations are allowed only when the
+   dependency is genuinely shared across two or more owned units, or when the
+   root itself owns the command that executes it.
+3. Build, test, lint, and codegen commands must succeed from the ownership
+   boundary they claim to belong to. A package-local command must not depend on
+   unrelated root-level dependencies to execute correctly.
+4. Package-manager layout behavior such as hoisting, deduplication, global tool
+   lookup, or transitive incidental resolution may improve install efficiency,
+   but correctness must not depend on it.
+5. If a command can only succeed because a broader workspace manifest happens
+   to provide a package-local dependency, the dependency ownership is incorrect
+   and must be refactored.
+6. Centralized version management is for consistency, not for hiding
+   ownership. Shared versions may be declared centrally, but package ownership
+   must remain explicit.
+
+Why this rule exists:
+- It keeps dependency intent readable.
+- It prevents hidden coupling between packages.
+- It makes upgrades and audits localizable.
+- It improves reproducibility in CI and local development.
+- It avoids package-manager-specific resolution accidents becoming part of the
+  architecture.
+
+```text
+GOOD
+repo-root/
+├── package-a/
+│   └── manifest declares its own test runner
+├── package-b/
+│   └── manifest declares its own build-only tooling
+└── root manifest
+    └── declares only truly shared tooling
+
+BAD
+repo-root/
+├── package-a/
+│   └── test command works only because root manifest provides its environment
+├── package-b/
+│   └── unrelated to that tool
+└── root manifest
+    └── carries package-a-only test dependencies
+```
+
+Verification guidance:
+- Run each package-local build/test/lint command from the owning package path
+  or package-scoped workspace command.
+- Inspect the resolved dependency tree to confirm the owner declares what it
+  executes.
+- In CI, include at least one check that proves package-local commands do not
+  rely on unrelated root-only dependency declarations.
+
+### TypeScript/Node Workspaces: Tooling Ownership and Resolution
+
+This section applies the general "Dependency Ownership Must Match Execution
+Boundaries" rule to Node workspace tooling and package-manager resolution.
+
+In npm, pnpm, or Yarn workspaces, dependency ownership must remain correct even
+when the package manager hoists or deduplicates installations.
+
+Rules:
+1. A workspace-local build, test, lint, or codegen dependency must be declared
+   in that workspace's `package.json` unless the root package itself owns and
+   executes the command.
+2. The root `package.json` must not carry a workspace-local dependency merely
+   because hoisting or command resolution makes it convenient.
+3. Root `devDependencies` are reserved for:
+   - repository-wide hooks and formatting
+   - repo-owned scripts under the root
+   - tooling intentionally shared by two or more workspaces
+   - workspace-version coordination tools and overrides
+4. A command such as `npm run -w frontend test`, `pnpm --filter frontend test`,
+   or `yarn workspace frontend test` must resolve all required runtime and
+   test-environment packages from the owning workspace contract, not from
+   accidental root availability.
+5. If a workspace command fails when a root-only dev dependency is removed, the
+   workspace dependency boundary is wrong and must be fixed.
+6. Use root `overrides` to enforce versions consistently across the workspace
+   tree, not to replace missing ownership declarations.
+
+```jsonc
+// GOOD: frontend owns the test runner and test environment
+// frontend/package.json
+{
+  "devDependencies": {
+    "vitest": "4.1.4",
+    "jsdom": "27.4.0"
+  },
+  "scripts": {
+    "test:run": "vitest run"
+  }
+}
+```
+
+```jsonc
+// GOOD: root owns only shared repo tooling
+// package.json
+{
+  "devDependencies": {
+    "lefthook": "^1.7.0",
+    "typescript": "~5.8.2"
+  },
+  "overrides": {
+    "minimatch": "3.1.5"
+  }
+}
+```
+
+```jsonc
+// BAD: frontend test environment depends on root-only package presence
+// package.json
+{
+  "devDependencies": {
+    "jsdom": "27.4.0"
+  }
+}
+
+// frontend/package.json
+{
+  "scripts": {
+    "test:run": "vitest run"
+  }
+}
+```
+
+Acceptable root-owned Node tooling:
+- hook runners such as Lefthook
+- repo-wide linters or formatters run from the root
+- shared TypeScript compiler configuration when multiple workspaces genuinely
+  use it
+- root-owned release, audit, or orchestration scripts
+
+Not acceptable at root unless truly shared:
+- one-workspace-only test environments
+- one-workspace-only bundler plugins
+- one-workspace-only component test libraries
+- one-workspace-only code generators
+
+Verification guidance:
+- Run `npm run -w <workspace> <script>` for each workspace-owned script in CI.
+- Remove or ignore unrelated root-only tooling when validating workspace-local
+  commands.
+- Use `npm ls`, `pnpm why`, or `yarn why` to verify which manifest actually
+  owns the dependency.
+- Prefer explicit workspace-local scripts and manifests over relying on hoisted
+  binaries or hoisted transitive resolution.
+
 **C# — Directory.Packages.props (Central Package Management):**
 
 ```xml
