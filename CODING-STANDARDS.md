@@ -279,18 +279,6 @@ if (!res.ok) {
 const data = await res.json();
 ```
 
-```rust
-// BAD: Assumes upstream always returns 200
-let body: ApiResponse = client.get(url).send().await?.json().await?;
-
-// GOOD: Check status
-let res = client.get(url).send().await?;
-if !res.status().is_success() {
-    return Err(ApiError::upstream(res.status(), res.text().await?));
-}
-let body: ApiResponse = res.json().await?;
-```
-
 **Why:** Without status checks, error responses (404, 500) are silently
 deserialized as empty or malformed data, causing confusing downstream failures.
 
@@ -330,17 +318,13 @@ When the same logic appears in multiple places, extract it into a shared
 function or module. Duplicated code creates divergence risk — when one copy
 is updated, the others are often missed.
 
-```rust
-// BAD: Same logic in two modules
-// ai/prompt.rs
-fn gather_surrounding(track: &ArcTrack, clip_id: ClipId) -> Context { ... }
+```text
+BAD: Same logic in two modules
+     prompt/gather_surrounding(...)
+     consistency/gather_surrounding(...)
 
-// ai/consistency.rs
-fn gather_surrounding(track: &ArcTrack, clip_id: ClipId) -> Context { ... }
-
-// GOOD: Shared helper
-// ai/helpers.rs
-pub fn gather_surrounding_scripts(track: &ArcTrack, clip_id: ClipId) -> Context { ... }
+GOOD: Shared helper
+      shared/gather_surrounding_context(...)
 ```
 
 **When to extract:**
@@ -410,25 +394,24 @@ getProductById()
 
 For functions that must maintain data structure invariants, document them explicitly:
 
-```rust
-/// Remove a node from the dependency graph and rewire edges.
-///
-/// # Invariants Maintained
-/// - Graph remains acyclic (no circular dependencies)
-/// - All nodes have at least one path to a root
-/// - Edge weights remain non-negative
-/// - In-degree counts stay consistent with actual edges
-///
-/// # Preconditions
-/// - Node has no dependents (in-degree == 0) or all dependents have been reassigned
-/// - Node exists in the graph
-/// - Removal would not disconnect any subgraph from roots
-///
-/// # Postconditions
-/// - Node count reduced by exactly 1
-/// - Edge count reduced by node's in-degree + out-degree
-/// - All remaining paths remain valid
-pub fn remove_node(graph: &mut DepGraph, node: NodeId) -> Option<RemovalResult>
+```markdown
+Remove a node from the dependency graph and rewire edges.
+
+# Invariants Maintained
+- Graph remains acyclic.
+- All nodes have at least one path to a root.
+- Edge weights remain non-negative.
+- In-degree counts stay consistent with actual edges.
+
+# Preconditions
+- Node has no dependents or all dependents have been reassigned.
+- Node exists in the graph.
+- Removal would not disconnect any subgraph from roots.
+
+# Postconditions
+- Node count reduced by exactly one.
+- Edge count reduced by the removed node's connected edges.
+- All remaining paths remain valid.
 ```
 
 ### Validation Strategy
@@ -438,35 +421,17 @@ pub fn remove_node(graph: &mut DepGraph, node: NodeId) -> Option<RemovalResult>
 | Debug | Full validation, panic on violation |
 | Release | Critical checks only, log and recover |
 
-```rust
-// Pattern: Debug-only full validation
-#[cfg(debug_assertions)]
-{
-    if let Err(e) = graph.validate_acyclic() {
-        panic!("Graph invariant violated: {:?}", e);
-    }
-}
-
-// Pattern: Release-mode graceful degradation
-#[cfg(not(debug_assertions))]
-{
-    if let Err(e) = graph.validate_acyclic() {
-        tracing::error!("Graph corruption detected: {:?}", e);
-        return None;  // Abort operation gracefully
-    }
-}
-```
+Use full validation in debug builds when it catches developer mistakes quickly.
+In release builds, keep critical validation that protects data integrity and
+prefer explicit errors, logging, or graceful aborts over silent corruption.
 
 ### Invariant Testing
 
 Every invariant should have corresponding tests:
 
-```rust
-#[test]
-fn test_remove_node_maintains_acyclic_invariant() { ... }
-
-#[test]
-fn test_add_edge_rejects_cycle() { ... }
+```text
+test_remove_node_maintains_acyclic_invariant
+test_add_edge_rejects_cycle
 ```
 
 ## Disabled Features
@@ -475,41 +440,29 @@ When disabling functionality due to bugs or incomplete implementation:
 
 ### Documentation Requirements
 
-```rust
-/// Whether incremental index rebuilding is enabled during bulk imports.
-///
-/// # Status: DISABLED
-///
-/// ## Reason
-/// Incremental rebuild produces corrupted indices when concurrent
-/// writes overlap with the rebuild window.
-///
-/// ## Tracking
-/// Issue: #42 - Fix concurrent index rebuild corruption
-///
-/// ## Conditions for Re-enabling
-/// 1. Implement write-ahead locking during rebuild
-/// 2. Add integrity check after each incremental pass
-/// 3. Pass stress test: 1000 concurrent writes during rebuild
-///
-/// ## Workaround
-/// Full rebuild runs nightly via scheduled task
-pub incremental_rebuild_enabled: bool,
+```markdown
+Status: DISABLED
+
+Reason:
+Incremental rebuild produces corrupted indices when concurrent writes overlap
+with the rebuild window.
+
+Tracking:
+Issue #42 - Fix concurrent index rebuild corruption.
+
+Conditions for Re-enabling:
+1. Implement write-ahead locking during rebuild.
+2. Add integrity check after each incremental pass.
+3. Pass stress test with concurrent writes during rebuild.
+
+Workaround:
+Full rebuild runs nightly via scheduled task.
 ```
 
 ### Config Pattern
 
-```rust
-impl Default for ImportConfig {
-    fn default() -> Self {
-        Self {
-            // DISABLED: See incremental_rebuild_enabled doc for details
-            incremental_rebuild_enabled: false,
-            // ... other fields
-        }
-    }
-}
-```
+Keep the disabled default close to the documented feature flag and reference the
+reason from the configuration site.
 
 ### Unimplemented Stubs
 
@@ -517,14 +470,9 @@ Do not commit stub functions that accept requests and return empty or dummy
 data. Stubs silently violate the caller's expectations and are difficult to
 distinguish from working code.
 
-```rust
-// BAD: Looks like a working endpoint but does nothing
-pub async fn summarize(...) -> Json<SummaryResponse> {
-    Json(SummaryResponse { summary: String::new() })
-}
-
-// GOOD: Don't register the route until implemented
-// (no route, no handler — callers get a clear 404)
+```text
+BAD: Registering a handler that returns empty or dummy data.
+GOOD: Do not register the route until it is implemented.
 ```
 
 **If a placeholder is truly needed** (e.g., for integration testing), use the
@@ -546,19 +494,17 @@ When adapting algorithms or code from other projects:
 
 ### Attribution Format
 
-```rust
-// =============================================================================
-// Priority Queue with Decrease-Key
-// Adapted from: petgraph (https://github.com/petgraph/petgraph)
-// License: MIT/Apache-2.0
-// Copyright: bluss and petgraph contributors
-// Source file: src/scored.rs
-//
-// Modifications:
-// - Simplified API for single-use-case
-// - Added generic key type parameter
-// - Integrated with project's graph representation
-// =============================================================================
+```text
+Priority Queue with Decrease-Key
+Adapted from: <project name> (<source URL>)
+License: MIT/Apache-2.0
+Copyright: <copyright holder>
+Source file: <source path>
+
+Modifications:
+- Simplified API for single use case.
+- Added project-specific key type.
+- Integrated with project's graph representation.
 ```
 
 ### License Compatibility
@@ -577,137 +523,27 @@ Before adapting code, verify license compatibility:
 
 For files with significant adapted code:
 
-```rust
-//! # Graph Processing Engine
-//!
-//! ## Attribution
-//! Core algorithms adapted from:
-//! - petgraph (MIT/Apache-2.0) - Graph traversal algorithms
-//! - pathfinding (MIT) - Shortest path implementations
-//!
-//! See individual functions for specific attributions.
+```text
+Graph Processing Engine
+
+Attribution:
+- <project> (<license>) - <adapted component>
+- <project> (<license>) - <adapted component>
+
+See individual functions for specific attributions.
 ```
 
-## Rust-Specific Guidelines
+## Language-Specific Guidelines
 
-### Error Handling
+Rust-specific coding rules live in
+[languages/rust/RUST-API-STANDARDS.md](languages/rust/RUST-API-STANDARDS.md),
+[languages/rust/RUST-UNSAFE-STANDARDS.md](languages/rust/RUST-UNSAFE-STANDARDS.md),
+and the broader [Rust standards index](languages/rust/RUST-STANDARDS.md).
 
-#### Result vs Panic
-
-| Situation | Use |
-|-----------|-----|
-| Invalid input from external source | `Result<T, E>` |
-| Programming error (bug) | `panic!` or `debug_assert!` |
-| Impossible state | `unreachable!()` |
-| Optional value | `Option<T>` |
-
-```rust
-// External input: use Result
-pub fn parse_config_file(path: &Path) -> Result<Config, ParseError>
-
-// Internal invariant: use Option (caller's responsibility)
-pub fn remove_node(&mut self, id: NodeId) -> Option<RemovalResult>
-
-// Bug detection: use debug_assert
-debug_assert!(self.is_consistent(), "Data structure corrupted before operation");
-```
-
-#### `unwrap` and `expect` in Production Paths
-
-Do not use `unwrap()` or `expect()` in production request/runtime paths
-(API/IPC handlers, process lifecycle code, background services, startup/shutdown).
-Convert fallible operations into typed errors and propagate context.
-
-Allowed exceptions:
-- Test code and short-lived local prototypes
-- Debug-only assertions (`debug_assert!`) for invariant checking
-- Cases where an invariant is explicitly documented and guarded immediately
-  before the call
-
-```rust
-// BAD: Panic can terminate a production service path
-let stream = maybe_stream.unwrap();
-
-// GOOD: Return typed error with context
-let stream = maybe_stream.ok_or(ServiceError::MissingLogStream)?;
-```
-
-#### Error Types
-
-Prefer specific error types over strings:
-
-```rust
-// BAD
-fn process() -> Result<(), String>
-
-// GOOD
-#[derive(Debug, thiserror::Error)]
-pub enum ImportError {
-    #[error("Record {0:?} does not exist")]
-    NotFound(RecordId),
-    #[error("Validation failed: {field} is {reason}")]
-    Validation { field: String, reason: String },
-    #[error("Conflict: record was modified concurrently")]
-    Conflict,
-}
-```
-
-### Ownership Patterns
-
-#### Borrow vs Clone
-
-```rust
-// BAD: Unnecessary clone
-fn process_records(records: Vec<Record>) {
-    for r in records.clone() { ... }
-}
-
-// GOOD: Borrow when possible
-fn process_records(records: &[Record]) {
-    for r in records { ... }
-}
-```
-
-#### Interior Mutability
-
-Use sparingly and document why:
-
-```rust
-/// Cache of computed display values.
-///
-/// Uses RefCell because display values are lazily computed during
-/// immutable iteration over records.
-display_cache: RefCell<HashMap<RecordId, DisplayValue>>,
-```
-
-### Module Organization
-
-```
-crate_name/
-├── lib.rs           # Public API, re-exports
-├── types.rs         # Core types used throughout
-├── error.rs         # Error types
-└── feature/
-    ├── mod.rs       # Feature public API
-    ├── impl.rs      # Implementation details (pub(crate))
-    └── tests.rs     # Unit tests (#[cfg(test)])
-```
-
-### Trait Design
-
-```rust
-// Prefer generics for static dispatch (performance)
-fn process<S: Storage>(store: &S) { ... }
-
-// Use trait objects for dynamic dispatch (flexibility)
-fn process(store: &dyn Storage) { ... }
-
-// Prefer associated types over generic parameters
-trait Storage {
-    type Item;  // Associated type
-    fn items(&self) -> &[Self::Item];
-}
-```
+New or substantially expanded language-specific guidance should follow the same
+pattern: keep the root standard focused on cross-language principles, then link
+to `languages/<language>/` for toolchain-specific details. Existing inline
+ecosystem sections can be migrated incrementally.
 
 ## TypeScript-Specific Guidelines
 
@@ -761,22 +597,19 @@ testing practices, and React-specific tooling notes, see
 
 Mark hot paths explicitly:
 
-```rust
-/// Process all pending events in the current frame.
-///
-/// # Performance
-/// **Hot path** - Called once per frame in the main loop.
-///
-/// ## Optimizations Applied
-/// - Pre-allocated scratch buffers (no per-call allocation)
-/// - SIMD for batch transformations
-/// - Early-out for empty event queues
-///
-/// ## Benchmarks
-/// See `benches/event_processing.rs::process_batch`
-/// Target: < 1ms for 10K events
-#[inline]
-pub fn process_events(&mut self, batch: &EventBatch) { ... }
+```markdown
+Process all pending events in the current frame.
+
+# Performance
+Hot path: called once per frame in the main loop.
+
+## Optimizations Applied
+- Pre-allocated scratch buffers.
+- Batch transformations.
+- Early-out for empty event queues.
+
+## Benchmarks
+Target: less than 1 ms for 10K events.
 ```
 
 ### Guidelines
@@ -786,17 +619,9 @@ pub fn process_events(&mut self, batch: &EventBatch) { ... }
 3. **Benchmark critical paths** - Automated regression detection
 4. **Avoid allocations in hot paths** - Use pre-allocated buffers
 
-```rust
-// BAD: Allocates every call
-fn collect_results(&self) -> Vec<Output> {
-    self.items.iter().map(|item| item.transform()).collect()
-}
-
-// GOOD: Reuse buffer
-fn collect_results(&self, output: &mut Vec<Output>) {
-    output.clear();
-    output.extend(self.items.iter().map(|item| item.transform()));
-}
+```text
+BAD: Allocate a new result buffer on every hot-path call.
+GOOD: Reuse caller-owned or pooled buffers where measurement proves it matters.
 ```
 
 ### When to Optimize

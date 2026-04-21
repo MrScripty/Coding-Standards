@@ -167,16 +167,11 @@ Do not combine all dependencies into one monolithic check.
 1. `--build` compiles development artifacts.
 2. `--build-release` compiles optimized release artifacts.
 3. Build commands must select the target binary explicitly when the toolchain
-   can be ambiguous (for example Cargo workspaces with multiple binaries).
+   can be ambiguous.
 4. If the app has no compile step, `--build` and `--build-release` must still
    be accepted and return success with a clear no-op message.
 
-Cargo example:
-
-```bash
-cargo build --bin "$APP_BIN"
-cargo build --release --bin "$APP_BIN"
-```
+Use explicit development and release build commands for the project toolchain.
 
 ---
 
@@ -188,15 +183,11 @@ cargo build --release --bin "$APP_BIN"
 
 1. Validate required runtime dependencies before launch.
 2. Use the development run path.
-3. Explicitly select the app target when using toolchains like Cargo.
+3. Explicitly select the app target when the toolchain can run multiple apps.
 4. Forward args after `--` unchanged.
 5. Use `exec` so signals reach the app directly.
 
-Cargo example:
-
-```bash
-exec cargo run --bin "$APP_BIN" -- "${RUN_ARGS[@]}"
-```
+Use `exec` with the project toolchain's development run command.
 
 ### `--run-release` (Release Runtime)
 
@@ -326,6 +317,9 @@ printf 'Exec=%s\n' "$exec_line" > "$DESKTOP_FILE"
 
 ## Reference Template
 
+The template uses `app-build-tool` as a stand-in for the repository's actual
+build tool. Replace it with the project-owned toolchain command before adoption.
+
 ```bash
 #!/usr/bin/env bash
 set -euo pipefail
@@ -333,9 +327,9 @@ IFS=$'\n\t'
 
 SCRIPT_NAME="$(basename "$0")"
 APP_BIN="my-app"
-RELEASE_BIN_PATH="./target/release/${APP_BIN}"
+RELEASE_BIN_PATH="./dist/${APP_BIN}"
 NEEDS_BUILD="true"  # Set to "false" for interpreted apps with no compile step.
-DEPENDENCIES=("cargo")
+DEPENDENCIES=("app_build_tool")
 
 usage() {
   cat <<EOF
@@ -380,8 +374,8 @@ die_usage() {
   exit 2
 }
 
-check_cargo() { command -v cargo >/dev/null 2>&1; }
-install_cargo() { die "implement cargo installer for your platform"; }
+check_app_build_tool() { command -v app-build-tool >/dev/null 2>&1; }
+install_app_build_tool() { die "implement app-build-tool installer for your platform"; }
 
 check_dep() { "check_$1"; }
 install_dep() { "install_$1"; }
@@ -427,11 +421,11 @@ build_app() {
   case "$mode" in
     dev)
       log "[build] compiling dev binary: $APP_BIN"
-      cargo build --bin "$APP_BIN"
+      app-build-tool build --target "$APP_BIN"
       ;;
     release)
       log "[build] compiling release binary: $APP_BIN"
-      cargo build --release --bin "$APP_BIN"
+      app-build-tool build --release --target "$APP_BIN"
       ;;
     *)
       die_usage "invalid build mode: $mode"
@@ -444,7 +438,7 @@ run_dev_app() {
   ensure_runtime_dependencies
 
   if [[ "$NEEDS_BUILD" == "true" ]]; then
-    exec cargo run --bin "$APP_BIN" -- "${run_args[@]}"
+    exec app-build-tool run --target "$APP_BIN" -- "${run_args[@]}"
   fi
 
   exec ./bin/my-app "${run_args[@]}"

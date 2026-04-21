@@ -125,68 +125,12 @@ var loader = LibraryLoaderFactory.Create();
 loader.Load();
 ```
 
-### 6. Rust: `cfg()` Only in Thin Platform Modules
+### 6. Language-Specific Platform Mechanisms
 
-Rust's `cfg()` is compile-time, which is acceptable because Rust targets
-a single platform per build. But keep `cfg()` isolated to dedicated modules:
-
-```rust
-// BAD: cfg scattered through business logic
-fn process_data(path: &str) {
-    #[cfg(target_os = "linux")]
-    let lib = load_linux_lib();
-    #[cfg(target_os = "windows")]
-    let lib = load_windows_lib();
-    // ...
-}
-
-// GOOD: Platform module with cfg at module level
-// platform_linux.rs
-#[cfg(target_os = "linux")]
-pub fn load_native_lib() -> Library { /* ... */ }
-
-// platform_windows.rs
-#[cfg(target_os = "windows")]
-pub fn load_native_lib() -> Library { /* ... */ }
-
-// mod.rs — re-exports the correct module
-#[cfg(target_os = "linux")]
-mod platform_linux;
-#[cfg(target_os = "windows")]
-mod platform_windows;
-
-#[cfg(target_os = "linux")]
-pub use platform_linux::load_native_lib;
-#[cfg(target_os = "windows")]
-pub use platform_windows::load_native_lib;
-```
-
-#### Acceptable Inline Exception
-
-A `cfg()` block may remain inline when **all** of the following are true:
-
-1. The platform-specific code is 5 lines or fewer
-2. Extracting it would require passing 3+ parameters or restructuring the
-   surrounding function (e.g., setting a flag on a builder mid-construction)
-3. Both platform behaviors are documented with comments
-4. The file contains no more than 2 inline `cfg()` blocks total
-
-```rust
-// ACCEPTABLE: Single-expression cfg on a builder, documented
-fn spawn_detached(cmd: &mut Command) {
-    // Windows: CREATE_NO_WINDOW prevents console flash
-    #[cfg(windows)]
-    cmd.creation_flags(0x08000000);
-    // Unix: setsid detaches from parent terminal
-    #[cfg(unix)]
-    cmd.process_group(0);
-
-    cmd.spawn().expect("failed to spawn");
-}
-```
-
-If the file accumulates more than 2 inline `cfg()` blocks, refactor the
-platform-specific logic into the platform module.
+Compile-time or toolchain-specific platform mechanisms should be isolated behind
+the same platform abstraction rules as runtime checks. Rust `cfg()` placement,
+target triples, and cross-target verification are covered in
+[languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md](languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md).
 
 ---
 

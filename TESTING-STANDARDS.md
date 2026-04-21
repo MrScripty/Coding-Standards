@@ -69,15 +69,10 @@ test_<function>_<scenario>_<expected_result>
 
 **Examples:**
 
-```rust
-#[test]
-fn test_remove_node_with_dependents_returns_rejected()
-
-#[test]
-fn test_add_edge_between_valid_nodes_succeeds()
-
-#[test]
-fn test_graph_after_100_operations_remains_acyclic()
+```text
+test_remove_node_with_dependents_returns_rejected
+test_add_edge_between_valid_nodes_succeeds
+test_graph_after_100_operations_remains_acyclic
 ```
 
 ```typescript
@@ -164,6 +159,53 @@ This check should verify that, in practice:
 Do not treat typecheck, isolated unit tests, or partial integration tests as a
 substitute for one end-to-end acceptance path when the feature crosses layers.
 
+### Binding Verification Requirements
+
+For supported cross-language bindings, verification must cover both the native
+implementation side and the host-language consumer side. Wrapper-only tests are
+not enough, and host-language smoke tests without native-side contract coverage
+are not enough.
+
+Rules:
+
+1. Each supported binding must have **native-language tests** covering the
+   shared contract shaping, wrapper conversion logic, and error mapping owned
+   by the implementation language.
+2. Each supported binding must have **host-language tests** that exercise the
+   generated or packaged binding from the consumer language/runtime using the
+   real native library or artifact shape that callers will load.
+3. At least one **cross-layer acceptance path** must run through the actual
+   host-language binding into the native implementation and assert contract
+   preservation end to end.
+4. If generated bindings are shipped separately from the native library, the
+   verification plan must also prove that the packaged/generated binding and
+   the native artifact from the same build work together.
+5. Experimental bindings may reduce host-language breadth, but they still need
+   native-language coverage plus at least one real host-language smoke path
+   before they are treated as shippable.
+6. Internal helper crates or non-public wrapper paths do not automatically
+   require separate host-language suites unless they are part of a public
+   binding contract.
+
+Recommended coverage split:
+
+- Native-language tests: pure helper tests, wrapper conversion tests, export or
+  metadata presence checks, lifecycle/error mapping checks
+- Host-language tests: import/compile/load checks, runtime creation/shutdown,
+  representative API calls, packaged quickstart or smoke harnesses
+- Cross-layer acceptance: at least one real consumer path that proves the host
+  language sees the same contract semantics the native implementation produced
+
+Verification guidance:
+
+- Run native-language tests on every binding-contract change.
+- Run host-language tests often enough that supported bindings cannot drift for
+  long; for most repos this means pre-push for lightweight smoke paths and CI
+  for broader suites.
+- Isolate host-runtime global state, environment variables, temp roots, native
+  library search paths, and compiled artifacts the same way other integration
+  suites isolate durable state.
+
 ### Replay, Recovery, and Idempotency Checks
 
 For systems that use durable commands/events, projections, background workers,
@@ -186,41 +228,23 @@ functions.
 
 Each test should verify a single behavior:
 
-```rust
-// BAD: Tests multiple behaviors
-#[test]
-fn test_user_service() {
-    // tests creation, validation, AND persistence
-}
+```text
+BAD: test_user_service
+     Tests creation, validation, and persistence together.
 
-// GOOD: Focused tests
-#[test]
-fn test_create_user_with_valid_email_succeeds() { ... }
-
-#[test]
-fn test_create_user_with_invalid_email_returns_error() { ... }
-
-#[test]
-fn test_create_user_persists_to_database() { ... }
+GOOD: test_create_user_with_valid_email_succeeds
+GOOD: test_create_user_with_invalid_email_returns_error
+GOOD: test_create_user_persists_to_database
 ```
 
 ### Arrange-Act-Assert Pattern
 
 Structure tests with clear phases:
 
-```rust
-#[test]
-fn test_remove_node_with_active_dependents_rejected() {
-    // Arrange - Set up test data
-    let graph = create_graph_with_dependencies();
-    let node_with_deps = find_node_with_dependents(&graph);
-
-    // Act - Execute the code under test
-    let result = can_remove_node(&graph, node_with_deps);
-
-    // Assert - Verify the result
-    assert_eq!(result, RemovalCheck::Rejected(HasDependents));
-}
+```text
+Arrange: create graph with active dependents
+Act: attempt to remove the depended-on node
+Assert: removal is rejected with the expected reason
 ```
 
 ```typescript
@@ -274,16 +298,8 @@ Always test:
 - Boundary conditions
 - Error cases
 
-```rust
-#[test]
-fn test_remove_node_empty_graph_returns_none() { ... }
-
-#[test]
-fn test_remove_node_invalid_id_returns_none() { ... }
-
-#[test]
-fn test_remove_node_leaf_succeeds() { ... }
-```
+Use test names that state the condition and expected behavior. Language-specific
+test syntax belongs in the matching language standard.
 
 ---
 
@@ -291,31 +307,8 @@ fn test_remove_node_leaf_succeeds() { ... }
 
 For algorithms with mathematical invariants, use property-based testing:
 
-```rust
-use proptest::prelude::*;
-
-proptest! {
-    #[test]
-    fn graph_remains_acyclic_after_any_add(
-        graph in arbitrary_dag(),
-        edge in arbitrary_edge()
-    ) {
-        let mut g = graph.clone();
-        if let Ok(_) = g.try_add_edge(edge) {
-            prop_assert!(g.is_acyclic());
-        }
-    }
-
-    #[test]
-    fn serialize_then_deserialize_is_identity(
-        record in arbitrary_record()
-    ) {
-        let bytes = record.serialize();
-        let restored = Record::deserialize(&bytes).unwrap();
-        prop_assert_eq!(record, restored);
-    }
-}
-```
+Rust property-test guidance lives in
+[languages/rust/RUST-TOOLING-STANDARDS.md](languages/rust/RUST-TOOLING-STANDARDS.md#property-based-tests).
 
 ### When to Use Property-Based Testing
 
@@ -358,31 +351,13 @@ High coverage does not mean good tests. Focus on:
 
 ### Document Non-Obvious Tests
 
-```rust
-/// Regression test for #127: Node merge was creating duplicate edges
-/// when both nodes had 4+ shared neighbors.
-///
-/// The fix deduplicates edges after reconnection.
-#[test]
-fn test_merge_nodes_shared_neighbors_deduplicates_edges() {
-    // Test implementation
-}
-```
+Document the defect, scenario, and invariant directly above the test when the
+reason for the test is not obvious from its name.
 
 ### Document Test Fixtures
 
-```rust
-/// Create a diamond graph: four nodes with two paths from top to bottom.
-///
-/// ```text
-///       A
-///      / \
-///     B   C
-///      \ /
-///       D
-/// ```
-fn create_diamond_graph() -> Graph { ... }
-```
+Document fixtures with the smallest diagram or data table that explains why the
+shape matters.
 
 ---
 
@@ -406,13 +381,8 @@ const user = createUser({ role: 'admin' });
 // Only specify what matters for this test
 ```
 
-```rust
-// Rust builder pattern
-let graph = GraphBuilder::new()
-    .with_nodes(4)
-    .with_edge("a", "b")
-    .build();
-```
+Use builders or factories in languages where they make fixtures clearer than
+inline object construction.
 
 ### Avoid Shared Mutable State
 
@@ -513,16 +483,9 @@ cleanup tests) is defined in [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md).
 
 ### Benchmark Critical Paths
 
-```rust
-#[bench]
-fn bench_process_10k_records(b: &mut Bencher) {
-    let records = create_test_records(10_000);
-
-    b.iter(|| {
-        process_batch(&records)
-    });
-}
-```
+Use the ecosystem's benchmark harness for repeatable measurements. Rust
+benchmark requirements live in
+[languages/rust/RUST-TOOLING-STANDARDS.md](languages/rust/RUST-TOOLING-STANDARDS.md#required-criterion-benchmarks).
 
 ### Set Performance Budgets
 

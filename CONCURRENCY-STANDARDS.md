@@ -1,6 +1,6 @@
 # Concurrency Standards
 
-Guidelines for safe concurrent and asynchronous programming across C#, Rust, and TypeScript.
+Guidelines for safe concurrent and asynchronous programming across supported languages.
 
 ## Core Principles
 
@@ -42,33 +42,13 @@ lock (_stateLock)
 private bool _isProcessing;  // Read/written from multiple threads
 ```
 
-**Rust — Use `parking_lot::Mutex` (preferred) or `std::sync::Mutex`:**
-
-```rust
-// GOOD: parking_lot (no poisoning, faster)
-use parking_lot::Mutex;
-let data = mutex.lock();  // Returns guard directly, no unwrap needed
-
-// AVOID: std::sync::Mutex with unwrap (poison cascade)
-let data = mutex.lock().unwrap();  // Panics if any thread panicked while holding lock
-```
+Rust mutex selection rules live in
+[languages/rust/RUST-ASYNC-STANDARDS.md](languages/rust/RUST-ASYNC-STANDARDS.md#mutex-selection).
 
 ### 3. Keep Related State Under One Lock
 
 If two fields are logically related and must be consistent, protect them with
 a single lock. Never update them under separate locks.
-
-```rust
-// BAD: Two locks for related data — race condition between updates
-*shared.buffer.lock() = Some(data);
-*shared.buffer_size.lock() = (width, height);  // Consumer reads between these two lines
-
-// GOOD: Single lock for related data
-let mut frame = shared.frame_data.lock();
-frame.buffer = Some(data);
-frame.width = width;
-frame.height = height;
-```
 
 ```csharp
 // BAD: Separate updates
@@ -97,16 +77,8 @@ Avoid direct blocking calls such as:
 
 Use async equivalents, or isolate unavoidable blocking work:
 
-```rust
-// BAD: Blocks async runtime worker thread
-std::thread::sleep(Duration::from_millis(200));
-
-// GOOD: Non-blocking async timer
-tokio::time::sleep(Duration::from_millis(200)).await;
-
-// GOOD: Isolate unavoidable blocking work
-let output = tokio::task::spawn_blocking(move || std::fs::read(path)).await??;
-```
+Rust async runtime rules live in
+[languages/rust/RUST-ASYNC-STANDARDS.md](languages/rust/RUST-ASYNC-STANDARDS.md#blocking-work).
 
 ```csharp
 // BAD: Blocks thread inside async flow
@@ -197,155 +169,12 @@ var data = await File.ReadAllBytesAsync(path, ct).ConfigureAwait(false);
 
 ---
 
-## Rust Concurrency Rules
+## Rust Concurrency Cross-Reference
 
-### Use `parking_lot` Over `std::sync`
-
-`parking_lot::Mutex` does not poison on panic, avoids cascading failures,
-and is measurably faster. Use it as the default.
-
-### Overflow-Check Arithmetic at Boundaries
-
-Values received from external sources (FFI callbacks, network data) may be
-malformed. Use checked arithmetic before allocating:
-
-```rust
-let buffer_size = (width as usize)
-    .checked_mul(height as usize)
-    .and_then(|s| s.checked_mul(4))
-    .expect("buffer size overflow");
-```
-
-### Bound Queue Sizes
-
-Any queue that accepts external input must have a maximum capacity:
-
-```rust
-const MAX_QUEUE: usize = 10_000;
-let mut msgs = queue.lock();
-if msgs.len() >= MAX_QUEUE {
-    msgs.drain(..msgs.len() / 2);
-    tracing::warn!("Queue overflow — dropped oldest messages");
-}
-msgs.push(new_message);
-```
-
-### Async Mutex Selection
-
-Choose the right mutex based on whether the lock is held across `.await` points:
-
-| Mutex | When to Use | Key Characteristic |
-|-------|------------|-------------------|
-| `parking_lot::Mutex` | Lock held briefly, no `.await` while locked | Blocks OS thread; ideal for fast CPU-bound work |
-| `tokio::sync::Mutex` | Lock held across `.await` points | Yields the async task, does not block the runtime thread |
-| `tokio::sync::RwLock` | Many concurrent readers, infrequent writers | Read-parallelism when writes are rare; still async-aware |
-
-**The rule:** Use `parking_lot::Mutex` (or `std::sync::Mutex`) for synchronous critical sections. Use `tokio::sync::Mutex` only when the lock must be held across an `.await`.
-
-```rust
-// BAD: std/parking_lot mutex held across .await — blocks the runtime thread
-let guard = self.state.lock();
-let result = self.client.send(guard.pending_request()).await; // Deadlock risk!
-guard.mark_sent(result);
-
-// GOOD: tokio mutex when holding across .await
-let mut guard = self.state.lock().await;
-let result = self.client.send(guard.pending_request()).await;
-guard.mark_sent(result);
-```
-
-```rust
-// BAD: tokio mutex for synchronous CPU-bound work — unnecessary overhead
-let guard = self.cache.lock().await;
-let parsed = expensive_parse(&guard.raw_data); // No .await needed
-drop(guard);
-
-// GOOD: parking_lot mutex for synchronous work
-let guard = self.cache.lock();
-let parsed = expensive_parse(&guard.raw_data);
-drop(guard);
-```
-
-### Async Task Lifecycle
-
-#### Spawn Cleanup
-
-Every `tokio::spawn` must have a corresponding `JoinHandle` that is awaited or
-aborted during shutdown. Spawning without tracking the handle creates orphaned
-tasks that leak resources or prevent clean exit.
-
-```rust
-struct Server {
-    tasks: Vec<tokio::task::JoinHandle<()>>,
-}
-
-impl Server {
-    fn spawn_worker(&mut self, work: impl Future<Output = ()> + Send + 'static) {
-        self.tasks.push(tokio::spawn(work));
-    }
-
-    async fn shutdown(self) {
-        for handle in self.tasks {
-            if let Err(e) = handle.await {
-                tracing::error!("Task panicked during shutdown: {e}");
-            }
-        }
-    }
-}
-```
-
-#### Graceful Shutdown of Spawned Services
-
-Use a cancellation signal (e.g., `tokio_util::sync::CancellationToken` or
-`tokio::sync::watch`) to coordinate shutdown across spawned tasks. Each task
-selects on both its work and the shutdown signal.
-
-```rust
-async fn run_listener(
-    listener: TcpListener,
-    cancel: CancellationToken,
-) {
-    loop {
-        tokio::select! {
-            result = listener.accept() => {
-                let (stream, _addr) = match result {
-                    Ok(conn) => conn,
-                    Err(e) => {
-                        tracing::warn!("Accept error: {e}");
-                        continue;
-                    }
-                };
-                let cancel = cancel.clone();
-                tokio::spawn(async move {
-                    handle_connection(stream, cancel).await;
-                });
-            }
-            _ = cancel.cancelled() => {
-                tracing::info!("Listener shutting down");
-                break;
-            }
-        }
-    }
-}
-```
-
-#### Task Panic Propagation
-
-A `JoinError` from awaiting a `JoinHandle` means the task panicked. Always
-inspect the result — silently ignoring panicked tasks hides bugs.
-
-```rust
-match handle.await {
-    Ok(()) => { /* task completed normally */ }
-    Err(e) if e.is_panic() => {
-        tracing::error!("Task panicked: {e}");
-        // Decide: propagate, restart, or degrade
-    }
-    Err(e) => {
-        tracing::warn!("Task cancelled: {e}");
-    }
-}
-```
+Rust-specific concurrency rules live in
+[languages/rust/RUST-ASYNC-STANDARDS.md](languages/rust/RUST-ASYNC-STANDARDS.md)
+and security-sensitive resource limit rules live in
+[languages/rust/RUST-SECURITY-STANDARDS.md](languages/rust/RUST-SECURITY-STANDARDS.md).
 
 ---
 

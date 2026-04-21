@@ -477,69 +477,11 @@ above). Group related assets in the release description if there are many:
 
 ---
 
-## Rust-Specific Guidance
+## Language-Specific Guidance
 
-### Cargo.toml Metadata
-
-Publishable crates should have complete metadata:
-
-```toml
-[package]
-name = "my-library"
-version = "0.1.0"
-edition = "2021"
-description = "Brief description of what the crate does"
-license = "MIT"
-repository = "https://github.com/org/repo"
-readme = "README.md"
-keywords = ["keyword1", "keyword2"]
-categories = ["category"]
-```
-
-### Publish Control
-
-Crates that should never be published to crates.io (binary-only crates, cdylib
-crates for specific runtimes, internal tooling) must set:
-
-```toml
-[package]
-publish = false
-```
-
-### Workspace Version Management
-
-Use `[workspace.package]` to define the version once:
-
-```toml
-# Workspace root Cargo.toml
-[workspace.package]
-version = "0.2.0"
-
-# Member crate Cargo.toml
-[package]
-version.workspace = true
-```
-
-### cargo-release
-
-For automating version bumps, tag creation, and optional crates.io publishing,
-[cargo-release](https://github.com/crate-ci/cargo-release) is recommended:
-
-```toml
-# release.toml (workspace root)
-[workspace]
-shared-version = true
-consolidate-commits = true
-tag-prefix = "v"
-
-[[pre-release-replacements]]
-file = "CHANGELOG.md"
-search = "## \\[Unreleased\\]"
-replace = "## [Unreleased]\n\n## [{{version}}] - {{date}}"
-```
-
-This is optional for first releases but recommended once the release cadence
-stabilizes.
+Rust release rules for Cargo metadata, `publish = false`, workspace versioning,
+toolchain pinning, and `cargo-release` live in
+[languages/rust/RUST-RELEASE-STANDARDS.md](languages/rust/RUST-RELEASE-STANDARDS.md).
 
 ---
 

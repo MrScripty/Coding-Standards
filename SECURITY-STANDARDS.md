@@ -75,21 +75,8 @@ export function isPathWithinRoot(inputPath: string, allowedRoot: string): boolea
 }
 ```
 
-**Rust — Path validation:**
-
-```rust
-use std::path::{Path, PathBuf};
-
-pub fn validate_within_root(input: &Path, allowed_root: &Path) -> Option<PathBuf> {
-    let resolved = input.canonicalize().ok()?;
-    let root = allowed_root.canonicalize().ok()?;
-    if resolved.starts_with(&root) {
-        Some(resolved)
-    } else {
-        None
-    }
-}
-```
+Rust path validation rules live in
+[languages/rust/RUST-SECURITY-STANDARDS.md](languages/rust/RUST-SECURITY-STANDARDS.md#path-validation).
 
 ### Usage in Handlers
 
@@ -285,13 +272,9 @@ covers the transport itself.
 platform's loopback address), never `0.0.0.0`. Binding to all interfaces
 exposes the service to the network — even if "just for development."
 
-```rust
-// BAD: Exposes local IPC server to the entire network
-let listener = TcpListener::bind("0.0.0.0:9500").await?;
-
-// GOOD: Local-only service bound to loopback
-let listener = TcpListener::bind("127.0.0.1:9500").await?;
-```
+Language-specific listener examples belong in the matching language standard.
+For Rust, see
+[languages/rust/RUST-SECURITY-STANDARDS.md](languages/rust/RUST-SECURITY-STANDARDS.md#network-listener-limits).
 
 ### Connection Limits
 
@@ -299,21 +282,9 @@ Every listener must define a maximum concurrent connection count. Unbounded
 accept loops allow a single misbehaving client (or deliberate flood) to exhaust
 file descriptors or memory.
 
-```rust
-use tokio::sync::Semaphore;
-
-const MAX_CONNECTIONS: usize = 64;
-let semaphore = Arc::new(Semaphore::new(MAX_CONNECTIONS));
-
-loop {
-    let permit = semaphore.clone().acquire_owned().await?;
-    let (stream, _addr) = listener.accept().await?;
-    tokio::spawn(async move {
-        handle_connection(stream).await;
-        drop(permit); // Release on completion
-    });
-}
-```
+Use the runtime's semaphore, bounded worker pool, or accept-loop backpressure
+mechanism to enforce the limit. Rust-specific Tokio guidance lives in
+[languages/rust/RUST-SECURITY-STANDARDS.md](languages/rust/RUST-SECURITY-STANDARDS.md#network-listener-limits).
 
 ### Graceful Listener Shutdown
 

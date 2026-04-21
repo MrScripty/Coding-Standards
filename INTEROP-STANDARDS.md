@@ -24,22 +24,9 @@ Each arrow is a boundary where data must be validated and resources tracked.
 
 Data received from another language or process is untrusted. Validate before use.
 
-```rust
-// Rust receiving from FFI callback:
-fn on_data_received(&self, buffer: *const u8, width: c_int, height: c_int) {
-    // Step 1: Null check
-    if buffer.is_null() { return; }
-    // Step 2: Range check
-    if width <= 0 || height <= 0 { return; }
-    // Step 3: Overflow check
-    let size = (width as usize).checked_mul(height as usize)
-        .and_then(|s| s.checked_mul(4))
-        .unwrap_or(0);
-    if size == 0 { return; }
-    // Step 4: Now safe to create slice
-    let data = unsafe { std::slice::from_raw_parts(buffer, size) };
-}
-```
+FFI-specific validation rules depend on the host language and runtime. Rust FFI
+validation rules live in
+[languages/rust/RUST-INTEROP-STANDARDS.md](languages/rust/RUST-INTEROP-STANDARDS.md#validate-before-unsafe-access).
 
 ```csharp
 // C# receiving deserialized JSON from another process:
@@ -55,38 +42,13 @@ if (string.IsNullOrWhiteSpace(request.Path))
 Foreign code may free or reuse buffers after the callback returns.
 Always copy data into language-owned memory before the callback exits.
 
-```rust
-// GOOD: Copy immediately, then work with the copy
-let buffer_copy = raw_data.to_vec();  // Owned by Rust now
-*shared.buffer.lock() = Some(Arc::new(buffer_copy));
-
-// BAD: Store a pointer/slice to foreign memory
-let buffer_ref = raw_data;  // Dangling after callback returns!
-```
+Rust foreign-buffer ownership rules live in
+[languages/rust/RUST-INTEROP-STANDARDS.md](languages/rust/RUST-INTEROP-STANDARDS.md#copy-foreign-buffers-immediately).
 
 ### 3. Symmetric Init/Shutdown
 
 Every initialization must have a corresponding shutdown. Track initialization
 state to prevent double-init or missing shutdown.
-
-```rust
-use std::sync::OnceLock;
-
-static INITIALIZED: OnceLock<bool> = OnceLock::new();
-
-fn init_subsystem() {
-    INITIALIZED.get_or_init(|| {
-        native_lib::initialize(settings);
-        true
-    });
-}
-
-fn shutdown_subsystem() {
-    if INITIALIZED.get().is_some() {
-        native_lib::shutdown();
-    }
-}
-```
 
 ```csharp
 // IDisposable for C# resources
@@ -104,11 +66,8 @@ public sealed class MessageDispatcher : IDisposable
 Every function that crosses a boundary must document which thread it expects
 to be called on, and which thread it calls back on.
 
-```rust
-/// Called on the **native library's thread** (not the main thread).
-/// Buffer is only valid for the duration of this callback.
-fn on_data_received(&self, buffer: *const u8, width: c_int, height: c_int) { }
-```
+Rust callback thread contract examples live in
+[languages/rust/RUST-INTEROP-STANDARDS.md](languages/rust/RUST-INTEROP-STANDARDS.md#callback-thread-contracts).
 
 ```csharp
 /// Must be called on the **main thread**.
@@ -118,16 +77,10 @@ public Task<Response> HandleAsync(Message message) { }
 
 ### 5. Isolate Unsafe Code to Thin Wrappers
 
-Unsafe operations (raw pointers, FFI calls) should live in small, focused
-modules. Business logic should never contain `unsafe` blocks.
-
-```
-my_native_binding/
-├── ffi_wrapper.rs       ← Contains unsafe (raw pointer access). Thin wrapper.
-├── types.rs             ← Pure Rust, no unsafe. Data structures.
-├── bridge.rs            ← Safe Rust API over the FFI wrapper.
-└── lib.rs               ← Public API, re-exports safe interfaces.
-```
+Unsafe operations such as raw pointers and FFI calls should live in small,
+focused wrapper modules. Business logic should never contain unsafe boundary
+mechanics. Rust-specific unsafe isolation rules live in
+[languages/rust/RUST-INTEROP-STANDARDS.md](languages/rust/RUST-INTEROP-STANDARDS.md#unsafe-isolation).
 
 ### 6. Event Subscription Lifecycle
 
@@ -188,76 +141,26 @@ match exactly on both sides.
 
 ### Tagged Enum Alignment
 
-Rust's serde tagged enums produce specific JSON shapes. The receiving language
-must use the same tag values and casing.
-
-```rust
-// Rust (server side)
-#[derive(Serialize, Deserialize)]
-#[serde(tag = "type", rename_all = "snake_case")]
-pub enum ServerEvent {
-    TimelineChanged,
-    BeatUpdated { clip_id: String },
-    GenerationProgress { clip_id: String, token: String },
-}
-// Serializes to: { "type": "timeline_changed" }
-```
-
-```typescript
-// TypeScript (client side) — must match the serde output exactly
-type ServerMessage =
-    | { type: 'timeline_changed' }
-    | { type: 'beat_updated'; clip_id: string }
-    | { type: 'generation_progress'; clip_id: string; token: string };
-```
+Tagged enum serializers produce specific wire shapes. The receiving language
+must use the same tag values, payload structure, and casing. Rust serde guidance
+lives in
+[languages/rust/RUST-INTEROP-STANDARDS.md](languages/rust/RUST-INTEROP-STANDARDS.md#serde-wire-format-alignment).
 
 ### Enum Variant Alignment
 
 When enum values are sent as strings, both sides must agree on casing and
-format. Check serde's `rename_all` attribute to determine the wire format.
-
-```rust
-// Rust: PascalCase variants, no rename_all → wire format is PascalCase
-#[derive(Serialize, Deserialize)]
-pub enum ArcType { APlot, BPlot, CPlot, Runner }
-// Serializes to: "APlot"
-```
-
-```typescript
-// BAD: Wrong casing — will fail to deserialize
-type ArcType = 'a_plot' | 'b_plot' | 'c_plot' | 'runner';
-
-// GOOD: Matches Rust's PascalCase output
-type ArcType = 'APlot' | 'BPlot' | 'CPlot' | 'Runner';
-```
+format. Check the serializer configuration in the source language before writing
+the receiver type.
 
 ### Struct Field Alignment
 
-Check serde's `rename_all` on structs to determine field name casing:
-
-```rust
-// Rust: rename_all = "snake_case" on the struct
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "snake_case")]
-pub struct TimeRange {
-    pub start_ms: u64,
-    pub end_ms: u64,
-}
-// Serializes to: { "start_ms": 123, "end_ms": 456 }
-```
-
-```typescript
-// TypeScript — must use snake_case to match
-interface TimeRange {
-    start_ms: number;
-    end_ms: number;
-}
-```
+Check serializer configuration on structs or records to determine field name
+casing.
 
 ### Rules
 
-1. **Check serde attributes before writing client types** — `rename_all`,
-   `tag`, `content`, and `rename` all affect the wire format
+1. **Check serializer attributes before writing client types** — casing, tags,
+   content fields, and explicit renames affect the wire format
 2. **Test serialization round-trips** — serialize in one language, deserialize
    in the other, and verify the result matches
 3. **Use a shared schema when possible** — OpenAPI, JSON Schema, or protobuf

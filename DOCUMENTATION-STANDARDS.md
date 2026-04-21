@@ -259,8 +259,8 @@ Always specify a language identifier on fenced code blocks so renderers apply
 syntax highlighting:
 
 ````markdown
-```rust
-fn main() {}
+```text
+example code or command output
 ```
 ````
 
@@ -335,41 +335,29 @@ For non-trivial algorithms, provide comprehensive documentation:
 
 ### Required Elements
 
-```rust
-/// # Topological Sort Algorithm
-///
-/// Produces a linear ordering of nodes such that for every directed
-/// edge (u, v), u comes before v in the ordering.
-///
-/// ## Reference
-/// Based on Kahn's algorithm (1962)
-/// See: Kahn, A.B., "Topological sorting of large networks"
-///
-/// ## Algorithm
-/// ```text
-///     Input graph:          Output order:
-///       A → B → D           [A, C, B, E, D, F]
-///       A → C → E
-///       B → E → F
-/// ```
-///
-/// ## Preconditions
-/// - Graph is a DAG (no cycles)
-/// - All node IDs are valid
-///
-/// ## Postconditions
-/// - Output contains every node exactly once
-/// - For every edge (u, v): index(u) < index(v)
-///
-/// ## Complexity
-/// - Time: O(V + E) where V = vertices, E = edges
-/// - Space: O(V) for in-degree tracking
-///
-/// ## Error Cases
-/// Returns `Err(CycleDetected)` if:
-/// - Graph contains a cycle
-/// - Graph has self-referencing edges
-pub fn topological_sort(graph: &Graph) -> Result<Vec<NodeId>, CycleError>
+```markdown
+# Topological Sort Algorithm
+
+Produces a linear ordering of nodes such that for every directed edge `(u, v)`,
+`u` comes before `v` in the ordering.
+
+## Reference
+Based on Kahn's algorithm (1962).
+
+## Preconditions
+- Graph is a DAG with no cycles.
+- All node IDs are valid.
+
+## Postconditions
+- Output contains every node exactly once.
+- For every edge `(u, v)`, `index(u) < index(v)`.
+
+## Complexity
+- Time: `O(V + E)` where `V` = vertices and `E` = edges.
+- Space: `O(V)` for in-degree tracking.
+
+## Error Cases
+Returns a cycle error when the graph contains a cycle or self-referencing edge.
 ```
 
 ### When to Document Algorithms
@@ -386,30 +374,26 @@ Document comprehensively when:
 
 For simpler algorithms, at minimum include:
 
-```rust
-/// Sort records by priority score, highest first.
-///
-/// ## Complexity
-/// O(n log n) where n = record count
-pub fn sort_by_priority(records: &mut [Record])
+```markdown
+Sort records by priority score, highest first.
+
+## Complexity
+`O(n log n)` where `n` = record count.
 ```
 
 ### ASCII Diagrams
 
 Use ASCII art to illustrate transformations:
 
-```rust
-/// Rebalance a binary search tree after insertion.
-///
-/// ```text
-///     Before (unbalanced):     After (balanced):
-///         A                        B
-///          \                      / \
-///           B                    A   C
-///            \
-///             C
-/// ```
-pub fn rebalance(tree: &mut BinaryTree) -> &mut Node
+```text
+Rebalance a binary search tree after insertion.
+
+Before (unbalanced):     After (balanced):
+    A                        B
+     \                      / \
+      B                    A   C
+       \
+        C
 ```
 
 ---

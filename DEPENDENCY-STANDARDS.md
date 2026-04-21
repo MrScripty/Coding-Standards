@@ -78,15 +78,8 @@ When evaluating how heavy a dependency is, use these thresholds:
 | 20–100 | Note in PR why this dependency is needed |
 | 100+ | Must be feature-gated or justified in writing |
 
-**Rust — Check transitive count before adding:**
-
-```bash
-# How many transitive deps does this crate bring?
-cargo tree -p <crate> --depth=0 -e normal
-
-# Is it already in the tree as a transitive dep?
-cargo tree -i <crate>
-```
+Rust transitive dependency checks live in
+[languages/rust/RUST-DEPENDENCY-STANDARDS.md](languages/rust/RUST-DEPENDENCY-STANDARDS.md#before-adding-a-crate).
 
 **TypeScript/Node — Check package size:**
 
@@ -172,23 +165,8 @@ the CI-specific install command that enforces lockfile consistency.
 When a project has multiple packages or crates, centralize shared dependency
 versions to ensure consistency and simplify auditing.
 
-**Rust — Workspace dependency inheritance:**
-
-```toml
-# Cargo.toml (workspace root)
-[workspace.dependencies]
-serde = { version = "1.0", features = ["derive"] }
-tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
-
-# member/Cargo.toml — inherits version and features from workspace
-[dependencies]
-serde = { workspace = true }
-tokio = { workspace = true }
-```
-
-All dependencies used by two or more workspace members should be declared in the
-root `Cargo.toml` under `[workspace.dependencies]` and referenced with
-`{ workspace = true }` in member crates.
+Rust workspace dependency inheritance rules live in
+[languages/rust/RUST-DEPENDENCY-STANDARDS.md](languages/rust/RUST-DEPENDENCY-STANDARDS.md#workspace-dependency-inheritance).
 
 **TypeScript/Node — pnpm workspace catalog or npm overrides:**
 
@@ -402,19 +380,8 @@ Before upgrading a dependency to a new version:
 Most package managers support feature flags or modular imports. Disable defaults
 you do not use. Import only the functions you need.
 
-**Rust — Select specific features:**
-
-```toml
-# BAD: Pulling in everything
-[dependencies]
-tokio = { version = "1", features = ["full"] }
-hyper = { version = "1", features = ["full"] }
-
-# GOOD: Only what you actually use
-[dependencies]
-tokio = { version = "1", features = ["rt-multi-thread", "net", "macros"] }
-hyper = { version = "1", features = ["client", "http1"] }
-```
+Rust Cargo feature selection rules live in
+[languages/rust/RUST-DEPENDENCY-STANDARDS.md](languages/rust/RUST-DEPENDENCY-STANDARDS.md#feature-selection).
 
 **TypeScript/Node — Import specific modules:**
 
@@ -446,29 +413,8 @@ const { a, b } = obj;
 When your own library has optional heavyweight dependencies, put them behind
 feature flags so consumers do not pay the cost unless they opt in.
 
-**Rust:**
-
-```toml
-[features]
-default = []
-rag = ["dep:lancedb", "dep:arrow-array", "dep:arrow-schema"]
-visualization = ["dep:plotters"]
-export-pdf = ["dep:printpdf"]
-
-[dependencies]
-lancedb = { version = "0.22", optional = true }
-arrow-array = { version = "53", optional = true }
-arrow-schema = { version = "53", optional = true }
-plotters = { version = "0.3", optional = true }
-printpdf = { version = "0.7", optional = true }
-```
-
-```rust
-#[cfg(feature = "visualization")]
-pub mod visualization {
-    // Only compiled when the consumer opts in
-}
-```
+Rust optional dependency and feature-gating rules live in
+[languages/rust/RUST-DEPENDENCY-STANDARDS.md](languages/rust/RUST-DEPENDENCY-STANDARDS.md#feature-selection).
 
 **TypeScript/Node — Use optional peer dependencies:**
 
@@ -503,18 +449,8 @@ Understand what your direct dependencies pull in before they become a problem.
 | Node | `npm ls --all` | `npm ls --depth=0` |
 | C# | `dotnet list package --include-transitive` | `dotnet list package` |
 
-**Rust — Additional tree queries:**
-
-```bash
-# Who depends on a specific crate?
-cargo tree -i lancedb
-
-# Total unique deps for one workspace member
-cargo tree -p my-crate --prefix none --no-dedupe | sort -u | wc -l
-
-# Find duplicate versions of the same crate
-cargo tree --duplicates
-```
+Rust `cargo tree` inspection guidance lives in
+[languages/rust/RUST-DEPENDENCY-STANDARDS.md](languages/rust/RUST-DEPENDENCY-STANDARDS.md#tree-inspection).
 
 ---
 
@@ -542,44 +478,29 @@ compile time, increase bundle size, and expand the attack surface.
 | Node | depcheck | `npx depcheck` |
 | C# | (manual or IDE analysis) | Remove the reference, build, check for errors |
 
-```toml
-# BAD: Declared but never imported in any source file
-[dependencies]
-regex = "1"       # grep shows zero imports of regex::
-chrono = "0.4"    # was used in a test that was deleted
-
-# GOOD: Every dependency has corresponding usage in source code
-[dependencies]
-serde = { version = "1.0", features = ["derive"] }  # use serde::{Serialize, Deserialize}
-tokio = { version = "1", features = ["rt-multi-thread"] }  # use tokio::runtime
-```
+Every declared dependency should have corresponding source usage or a documented
+reason it must remain declared. Ecosystem-specific unused dependency tools are
+listed above.
 
 ### Manual Usage Verification
 
 For any dependency in the manifest, confirm actual usage in source code:
 
-```bash
-# Replace <crate> and <path> with the dependency and source directory
-grep -r "use <crate>" <path>/src/
-grep -r "<crate>::" <path>/src/
-```
+Search imports, fully-qualified references, generated code configuration, and
+runtime loading paths for the dependency name.
 
 If both return nothing, the dependency is likely unused.
 
-**Watch for masking:** A local `mod foo` can shadow an external crate `foo`. If
-you see `use foo::` but there is a `mod foo;` in the same scope, the external
-crate may not actually be in use.
+Rust-specific masking checks live in
+[languages/rust/RUST-DEPENDENCY-STANDARDS.md](languages/rust/RUST-DEPENDENCY-STANDARDS.md#auditing).
 
 ### Detecting Duplicate Versions
 
 When the dependency tree contains multiple versions of the same package, binary
 size increases and subtle bugs can occur at type boundaries.
 
-**Rust:**
-
-```bash
-cargo tree --duplicates
-```
+Rust duplicate-version checks live in
+[languages/rust/RUST-DEPENDENCY-STANDARDS.md](languages/rust/RUST-DEPENDENCY-STANDARDS.md#tree-inspection).
 
 **Node:**
 
@@ -595,15 +516,8 @@ workspace resolution / overrides to force consistency.
 Periodically check which dependencies contribute the most to compile time or
 bundle size.
 
-**Rust:**
-
-```bash
-# Build timing per crate
-cargo build --timings
-
-# Count transitive deps per workspace member
-cargo tree -p <crate> --prefix none --no-dedupe | sort -u | wc -l
-```
+Rust build-time and dependency weight checks live in
+[languages/rust/RUST-DEPENDENCY-STANDARDS.md](languages/rust/RUST-DEPENDENCY-STANDARDS.md#build-time-cost).
 
 **TypeScript/Node:**
 
@@ -678,20 +592,16 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Security audit
-        run: cargo audit
+        run: <ecosystem audit command>
 
       - name: Check for unused dependencies
-        run: |
-          cargo install cargo-machete
-          cargo machete --with-metadata
+        run: <ecosystem unused-dependency command>
 
       - name: Check for duplicate versions
-        run: cargo tree --duplicates
+        run: <ecosystem duplicate-version command>
 
       - name: License compliance
-        run: |
-          cargo install cargo-deny
-          cargo deny check licenses
+        run: <ecosystem license command>
 ```
 
 Adapt the workflow to your ecosystem. The structure is the same: security audit,
@@ -711,10 +621,10 @@ unused dependency detection, duplicate check, and license verification.
 
 ## Common Mistakes
 
-**Declaring deps in library packages that only the application uses.** If the
-binary target needs `lancedb` but the library crate does not use it, do not put
-it in the library's manifest just because it feels related. This bleeds the
-dependency into every consumer of that library.
+**Declaring deps in library packages that only the application uses.** If an app
+target needs a database or visualization dependency but the shared library does
+not use it, do not put it in the library manifest just because it feels related.
+This bleeds the dependency into every consumer of that library.
 
 **Forgetting to remove deps after refactoring.** When moving code between packages
 or deleting features, manifest entries often get left behind. The compiler will

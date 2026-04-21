@@ -32,6 +32,7 @@ Reusable coding, commit, architecture, tooling, and documentation standards that
 | [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Binding architecture, FFI wrapper design, code generation, type mapping | Exposing a core library to multiple target languages |
 | [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Versioning, changelogs, release artifacts, CI/CD release pipelines | Shipping software to users or downstream consumers |
 | [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) | Semantic HTML, keyboard interaction, ARIA, a11y linting | UI components in web or desktop apps |
+| [languages/README.md](languages/README.md) | Language-specific extensions to the generic standards | Rust and future language-specific rules |
 
 ## Templates
 

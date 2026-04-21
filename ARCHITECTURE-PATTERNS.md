@@ -808,36 +808,17 @@ the wrong process.
 **The fix:** Store the process start time in the PID file and compare it against
 the actual start time of the running process.
 
-```rust
-use std::fs;
-use std::path::Path;
+```text
+function is_original_process_alive(pid_file):
+    recorded = read_and_parse_pid_file(pid_file)
+    if recorded is invalid:
+        return false
 
-fn is_original_process_alive(pid_file: &Path) -> bool {
-    let contents = match fs::read_to_string(pid_file) {
-        Ok(c) => c,
-        Err(_) => return false,
-    };
-    let recorded: PidRecord = match serde_json::from_str(&contents) {
-        Ok(r) => r,
-        Err(_) => return false, // Corrupt file — treat as stale
-    };
+    if process_does_not_exist(recorded.pid):
+        return false
 
-    // Check if process exists
-    #[cfg(unix)]
-    let alive = unsafe { libc::kill(recorded.pid, 0) } == 0;
-    #[cfg(not(unix))]
-    let alive = false; // Platform-specific check needed
-
-    if !alive {
-        return false;
-    }
-
-    // Compare start time to detect PID reuse
-    match get_process_start_time(recorded.pid) {
-        Some(actual_start) => actual_start == recorded.start_time,
-        None => false, // Can't verify — treat as stale
-    }
-}
+    actual_start = get_process_start_time(recorded.pid)
+    return actual_start == recorded.start_time
 ```
 
 On Linux, process start time can be read from `/proc/[pid]/stat`. On Windows,
@@ -909,39 +890,21 @@ Process starts
 
 ### Example
 
-```rust
-async fn get_or_create_service(addr: SocketAddr) -> Result<TcpStream> {
-    // Step 1: Try to connect to existing instance
-    if let Ok(stream) = TcpStream::connect(addr).await {
-        return Ok(stream);
-    }
+```text
+function get_or_create_service(address):
+    if connect(address) succeeds:
+        return existing connection
 
-    // Step 2: No instance found — acquire creation lock
-    let lock = FileLock::acquire("service.lock")?;
+    lock = acquire_creation_lock()
 
-    // Step 3: Double-check after acquiring lock (another process may have created it)
-    if let Ok(stream) = TcpStream::connect(addr).await {
-        drop(lock);
-        return Ok(stream);
-    }
+    if connect(address) succeeds:
+        release lock
+        return existing connection
 
-    // Step 4: Create the service
-    start_service(addr).await?;
-    drop(lock);
+    start service
+    release lock
 
-    // Step 5: Connect to the newly created service
-    let mut retries = 5;
-    loop {
-        match TcpStream::connect(addr).await {
-            Ok(stream) => return Ok(stream),
-            Err(_) if retries > 0 => {
-                retries -= 1;
-                tokio::time::sleep(Duration::from_millis(100)).await;
-            }
-            Err(e) => return Err(e.into()),
-        }
-    }
-}
+    retry connect(address) until ready or timeout
 ```
 
 ### Benefits
@@ -958,29 +921,15 @@ async fn get_or_create_service(addr: SocketAddr) -> Result<TcpStream> {
 
 For complex mutations that modify interconnected data structures, use explicit phases to ensure atomicity and debuggability:
 
-```rust
-pub fn merge_nodes(&mut self, source: NodeId, target: NodeId) -> Option<MergeResult> {
-    // ===== PHASE 1: GATHER (read-only, fail early) =====
-    let data = self.gather_merge_data(source, target)?;
-
-    // ===== PHASE 2: VALIDATE (check all preconditions) =====
-    self.validate_merge_preconditions(&data)?;
-
-    // ===== PHASE 3: CREATE (new elements with placeholders) =====
-    let new_elements = self.create_merged_edges(&data);
-
-    // ===== PHASE 4: CONNECT (wire up relationships) =====
-    self.reconnect_edges(&data, &new_elements);
-
-    // ===== PHASE 5: UPDATE (auxiliary structures) =====
-    self.update_index(&data, &new_elements);
-
-    // ===== PHASE 6: VALIDATE (debug-only postconditions) =====
-    #[cfg(debug_assertions)]
-    self.validate_consistency().expect("Merge corrupted graph");
-
-    Some(new_elements.result())
-}
+```text
+function merge_nodes(source, target):
+    data = gather_merge_data(source, target)
+    validate_merge_preconditions(data)
+    new_elements = create_merged_edges(data)
+    reconnect_edges(data, new_elements)
+    update_indexes(data, new_elements)
+    validate_postconditions_in_debug_builds()
+    return merge result
 ```
 
 ### Phase Responsibilities
@@ -1014,17 +963,14 @@ Use this pattern when:
 
 ### Anti-Pattern: Interleaved Mutation
 
-```rust
-// BAD: Validation and mutation interleaved
-pub fn bad_merge_nodes(&mut self, source: NodeId, target: NodeId) -> Option<...> {
-    let src = self.get_node(source)?;
-    let new_edge = self.add_edge(...);  // Mutation!
+```text
+BAD:
+1. Read source node.
+2. Add new edge.
+3. Read target node.
+4. Add reference.
 
-    let tgt = self.get_node(target)?;  // May fail AFTER mutation
-    let new_ref = self.add_reference(...);  // More mutation
-
-    // If anything fails here, state is corrupted
-}
+If step 3 fails after step 2 mutates state, the operation leaves partial state.
 ```
 
 ### Implementation Tips
@@ -1032,22 +978,11 @@ pub fn bad_merge_nodes(&mut self, source: NodeId, target: NodeId) -> Option<...>
 1. **Gather returns a struct** - Bundle all gathered data into a typed struct
 2. **Create returns IDs** - Return identifiers of created elements for later phases
 3. **Use placeholder values** - Create elements with temporary/invalid values, fix in Connect phase
-4. **Validate is optional in release** - Use `#[cfg(debug_assertions)]` for expensive checks
+4. **Validate is optional in release** - Keep expensive checks in debug or
+   diagnostic builds when runtime cost is too high for production paths.
 
-```rust
-struct MergeData {
-    source: NodeId,
-    target: NodeId,
-    source_edges: Vec<EdgeId>,
-    target_edges: Vec<EdgeId>,
-    shared_neighbors: Vec<NodeId>,
-}
-
-struct CreatedElements {
-    new_edges: Vec<EdgeId>,
-    removed_nodes: Vec<NodeId>,
-}
-```
+Bundle gathered data and created element IDs into named structures so later
+phases do not recompute or accidentally read partially mutated state.
 
 ---
 
@@ -1098,23 +1033,14 @@ CREATE TABLE IF NOT EXISTS schema_migrations (
 
 At startup, check the current version and apply any pending migrations:
 
-```rust
-fn apply_pending_migrations(db: &Connection, migrations: &[Migration]) -> Result<()> {
-    let current_version = db
-        .query_row("SELECT COALESCE(MAX(version), 0) FROM schema_migrations", [], |r| r.get(0))
-        .unwrap_or(0);
+```text
+function apply_pending_migrations(database, migrations):
+    current_version = read_current_schema_version(database)
 
-    for migration in migrations.iter().filter(|m| m.version > current_version) {
-        db.execute_batch(&migration.up_sql)?;
-        db.execute(
-            "INSERT INTO schema_migrations (version, description) VALUES (?1, ?2)",
-            params![migration.version, migration.description],
-        )?;
-        tracing::info!("Applied migration {}: {}", migration.version, migration.description);
-    }
-
-    Ok(())
-}
+    for migration in migrations where migration.version > current_version:
+        apply migration SQL inside a transaction
+        record migration version and description
+        log applied migration
 ```
 
 ### Forward/Backward Compatibility
@@ -1194,31 +1120,20 @@ the architectural decision of *which failures to tolerate*.
 Wrap optional infrastructure in a layer that catches failures, logs them,
 and returns safe defaults:
 
-```rust
-pub struct BestEffortRegistry {
-    db: Option<Connection>,
-}
+```text
+class BestEffortRegistry:
+    function lookup(key):
+        if optional database is unavailable:
+            return no value
 
-impl BestEffortRegistry {
-    pub fn lookup(&self, key: &str) -> Option<String> {
-        let db = self.db.as_ref()?;
-        match db.query_row(
-            "SELECT value FROM registry WHERE key = ?1",
-            params![key],
-            |row| row.get(0),
-        ) {
-            Ok(value) => Some(value),
-            Err(e) => {
-                tracing::warn!("Registry lookup failed for '{key}': {e}");
-                None
-            }
-        }
-    }
+        try:
+            return lookup value
+        catch lookup error:
+            log warning
+            return no value
 
-    pub fn is_healthy(&self) -> bool {
-        self.db.is_some()
-    }
-}
+    function is_healthy():
+        return optional database is available
 ```
 
 ### Benefits
@@ -1261,23 +1176,17 @@ errors uniformly.
 
 Use a shared error type that converts to the correct status code:
 
-```rust
-pub struct ApiError(pub StatusCode, pub String);
+```text
+ApiError:
+    status_code
+    message
 
-impl ApiError {
-    pub fn not_found(msg: impl Into<String>) -> Self {
-        Self(StatusCode::NOT_FOUND, msg.into())
-    }
-    pub fn bad_request(msg: impl Into<String>) -> Self {
-        Self(StatusCode::BAD_REQUEST, msg.into())
-    }
-}
+not_found(message) -> ApiError(404, message)
+bad_request(message) -> ApiError(400, message)
 
-impl IntoResponse for ApiError {
-    fn into_response(self) -> Response {
-        (self.0, Json(json!({ "error": self.1 }))).into_response()
-    }
-}
+HTTP adapter converts ApiError into:
+    status: error.status_code
+    body: { "error": error.message }
 ```
 
 ### Client Implementation
