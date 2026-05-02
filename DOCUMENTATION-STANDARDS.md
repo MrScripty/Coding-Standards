@@ -18,6 +18,42 @@ If rules overlap, enforce the stricter requirement. For `src/`, the universal re
 - **Onboarding:** Reduces time to first contribution
 - **Maintenance:** Prevents architectural drift
 
+## Documentation Artifact Layout
+
+Project-level Markdown artifacts must live under a root-level `docs/`
+directory unless the project has a documented legacy convention that is being
+migrated.
+
+Use these standard subdirectories:
+
+```text
+docs/
+  adr/                    Architecture decision records
+  plans/                  Implementation plans and staged work plans
+  refactors/              Large refactor planning and execution records
+  reports/                Audits, investigations, and analysis reports
+```
+
+When a plan, refactor, or report produces multiple Markdown files, create a
+slugged subdirectory under the relevant category:
+
+```text
+docs/refactors/<refactor-slug>/
+  pass-instructions/      Prompts or instruction files for analysis passes
+  findings/               Findings produced by each analysis pass
+  implementation-waves/   Planned parallel implementation waves and slice specs
+  reports/                Future implementation sub-agent reports
+  coordination-ledger.md  Host-owned status, dependencies, and handoffs
+  final-plan.md           Final consolidated plan
+```
+
+Use lowercase, hyphen-separated slugs for artifact directories and file names.
+Include dates in names only when they clarify ordering or distinguish repeated
+work, for example `2026-04-22-runtime-boundary-refactor`.
+
+Do not scatter planning artifacts across the repository root. Keep generated
+planning, findings, and report Markdown grouped by the work item they support.
+
 ### README Template
 
 See [templates/README-TEMPLATE.md](templates/README-TEMPLATE.md) for a copy-paste template.
