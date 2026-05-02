@@ -122,6 +122,10 @@ Use the body for:
 - Describing the **approach** taken
 - Noting any **trade-offs** or alternatives considered
 
+Do not include verification commands, test output, or tool logs in commit
+messages. Record verification details in the plan, PR notes, or completion
+summary instead.
+
 ```
 fix(auth): prevent session fixation attack
 
