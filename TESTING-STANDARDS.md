@@ -501,7 +501,8 @@ successful builds/tests. Add targeted checks for relevant paths such as:
 - Retry exhaustion and backoff termination
 - Partial failures during orchestration
 - Cancellation or timeout propagation
-- Logged or surfaced error context
+- Surfaced or recorded diagnostic context, including safe correlation fields
+  when the project has an owned diagnostic channel
 
 ---
 
@@ -656,6 +657,7 @@ Before submitting code:
 - [ ] Tests pass locally
 - [ ] Edge cases are covered
 - [ ] Error paths are tested
+- [ ] Production error paths surface or record bounded diagnostic context
 - [ ] Lifecycle cleanup/restart/cancellation regressions are covered when applicable
 - [ ] Cross-layer changes include at least one full-path acceptance check
 - [ ] New cross-layer features include a thin vertical slice before broad
