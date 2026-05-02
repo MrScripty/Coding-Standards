@@ -178,13 +178,18 @@ Rules:
 1. The first cross-layer feature slice should include at least one full-path
    acceptance test before the implementation expands into broad horizontal
    layer work.
-2. Assert externally meaningful inputs and outputs. Do not assert every internal
+2. Write the vertical slice acceptance test before implementing the slice. It
+   should fail for the expected reason until the implementation satisfies the
+   externally meaningful input/output contract.
+3. Do not weaken the acceptance assertion to make the test pass. Change the
+   implementation until the observed output matches the expected outcome.
+4. Assert externally meaningful inputs and outputs. Do not assert every internal
    hop unless that hop owns a separate contract that needs direct coverage.
-3. Add focused unit or integration tests only where the slice exposes a risky
+5. Add focused unit or integration tests only where the slice exposes a risky
    branch, algorithm, error path, or reusable contract.
-4. As adjacent vertical slices are added, verify that shared layers handle more
+6. As adjacent vertical slices are added, verify that shared layers handle more
    than one feature path without special-case coupling.
-5. When shared layers become performance-sensitive or concurrency-sensitive,
+7. When shared layers become performance-sensitive or concurrency-sensitive,
    add horizontal scaling checks for throughput, contention, resource cleanup,
    or batching behavior.
 
