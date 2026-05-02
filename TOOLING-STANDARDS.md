@@ -354,6 +354,37 @@ Rules:
   a linter or test runner that reports all failures before exiting), prefer that
   mode over wrappers that stop on the first issue.
 
+### Tiered CI Execution
+
+CI should fail quickly when later work would be pointless, while still reporting
+independent failures that help developers fix the branch in one pass.
+
+Use three tiers:
+
+| Tier | Purpose | Examples | Execution Rule |
+|---|---|---|---|
+| Preflight | Cheap checks that prove later jobs can run meaningfully | dependency install, lockfile integrity, tool bootstrap, generated-file drift, basic config validation | Run first; fail fast |
+| Core quality | Independent blocking gates with high diagnostic value | critical lint, no-new lint, typecheck, format check, unit tests | Run in parallel after preflight |
+| Expensive validation | Slow or resource-heavy checks that are wasteful if core quality fails | integration tests, browser tests, cross-platform builds, package builds, release smoke, coverage upload | Run only after required core gates pass |
+
+Rules:
+- Keep preflight small. It should catch invalid setup, missing tools, stale
+  generated artifacts, and dependency/lockfile failures; it should not become a
+  second copy of the full test suite.
+- Do not gate one independent core quality job behind another just because both
+  are blocking. For example, lint, typecheck, and unit tests should usually run
+  side by side after preflight.
+- Gate expensive jobs with `needs` on the relevant core jobs and the default
+  `success()` behavior. If an expensive job is still useful after partial core
+  failure, document why and make the condition explicit.
+- Use `strategy.fail-fast: false` inside diagnostic matrices by default so one
+  platform or shard failure does not hide the rest.
+- The final CI summary job should use `if: always()` and report skipped jobs as
+  intentionally skipped when an upstream tier failed.
+- Preflight commands should be runnable locally through the launcher or package
+  scripts, for example `./launcher.sh --ci-preflight` or
+  `npm run ci:preflight`.
+
 ### Lint Debt Ratchet (When Full Lint Is Temporarily Non-Blocking)
 
 1. Keep a committed baseline snapshot of current full-lint violations.
@@ -361,6 +392,122 @@ Rules:
 3. Baseline updates are allowed only when counts stay the same or decrease.
 4. When a rule/category reaches zero debt, promote it into a blocking tier.
 5. Full lint returns to fully blocking once baseline debt is zero.
+
+### CI Performance Standards
+
+CI performance work must preserve the same quality signal. Do not speed up CI by
+removing required gates, narrowing required platform coverage, hiding blocking
+failures, or skipping tests without an explicit affected-test strategy.
+
+Rules:
+- Cache dependency downloads in every job that installs dependencies. Prefer
+  package-manager-aware setup actions such as `actions/setup-node` with
+  `cache: npm`, `actions/setup-python` with `cache: pip`, or ecosystem-specific
+  cache actions that key from lockfiles.
+- Cache package-manager stores and build-tool caches, not generated source
+  trees or runtime state that can hide missing build steps. Avoid caching
+  `node_modules`; use `npm ci` with an npm cache instead.
+- Cache keys must include the runner OS, package manager, relevant lockfile
+  hash, and toolchain version when the cache contains compiled artifacts. Use
+  broad restore keys only for dependency download caches, not compiled outputs.
+- Every job that invokes a package manager must still run the lockfile-enforcing
+  install command (`npm ci`, `pnpm install --frozen-lockfile`,
+  `cargo build`/`cargo test` with `Cargo.lock`, `dotnet restore --locked-mode`,
+  etc.) after restoring cache.
+- Add `timeout-minutes` to jobs or slow steps so hung tests and stalled
+  dependency downloads fail clearly.
+- Use top-level `concurrency` to cancel superseded runs for the same PR or
+  branch. Do not use concurrency cancellation to replace `fail-fast: false`
+  inside a live matrix run.
+- Use path filters only to skip whole workflows whose owned files are untouched.
+  Required checks must remain present for protected branches, either through
+  matching always-run placeholder jobs or branch protection that matches the
+  filtered workflow design.
+- Do not make path filters the only guard around release work. Release workflows
+  should be constrained by tag triggers; path filters are for skipping
+  irrelevant validation work, not for deciding whether a commit is a release.
+- Split independent gates into separate jobs even when this repeats dependency
+  installation. Use caching or a small reusable setup action/composite action to
+  reduce repeated setup cost rather than combining unrelated gates into one
+  low-visibility job.
+- Upload artifacts only when a downstream job, release process, or failure
+  diagnosis needs them. Set retention periods intentionally for large artifacts.
+- On CI failure, prefer GitHub job summaries, annotations, and uploaded
+  artifacts for logs/results. Do not commit failure logs such as
+  `docs/ci/ci.log` back to the default branch as part of normal CI.
+- If durable CI logs are required, write them to a separate diagnostics branch,
+  issue/PR comment, or external artifact store. The workflow must avoid
+  recursive CI triggers and must not publish secrets, tokens, environment dumps,
+  or unredacted third-party service output.
+- Measure before adding heavyweight optimization. Track job duration, cache hit
+  rate, and slowest steps when CI time becomes a recurring cost.
+
+Recommended GitHub Actions defaults:
+
+```yaml
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+```
+
+Recommended Node dependency setup:
+
+```yaml
+- uses: actions/setup-node@v4
+  with:
+    node-version: '20'
+    cache: npm
+    cache-dependency-path: package-lock.json
+
+- run: npm ci
+```
+
+Recommended Rust dependency setup:
+
+```yaml
+- uses: actions/cache@v4
+  with:
+    path: |
+      ~/.cargo/registry
+      ~/.cargo/git
+    key: cargo-${{ runner.os }}-${{ hashFiles('rust-toolchain.toml', '**/Cargo.lock') }}
+    restore-keys: |
+      cargo-${{ runner.os }}-
+
+- run: cargo test --workspace
+```
+
+If caching Rust `target/` or other compiled outputs, use exact keys that include
+the OS, Rust toolchain, target triple, feature mode, and lockfile hash. Do not
+use broad restore keys for compiled output caches.
+
+Recommended failure diagnostics:
+
+```yaml
+- name: Write failure summary
+  if: failure()
+  run: |
+    {
+      echo "## CI Failure"
+      echo "- Workflow: $GITHUB_WORKFLOW"
+      echo "- Job: $GITHUB_JOB"
+      echo "- Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+    } >> "$GITHUB_STEP_SUMMARY"
+
+- name: Upload failure logs
+  if: failure()
+  uses: actions/upload-artifact@v4
+  with:
+    name: ci-logs-${{ github.run_id }}-${{ github.job }}
+    path: |
+      logs/**/*.log
+      test-results/**/*.xml
+    if-no-files-found: ignore
+    retention-days: 14
+```
 
 ### Recommended CI Workflow
 
@@ -370,9 +517,17 @@ name: CI
 
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  lint_critical:
+  preflight:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
 
@@ -381,6 +536,27 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Preflight
+        run: npm run ci:preflight
+
+  lint_critical:
+    needs: preflight
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -389,18 +565,23 @@ jobs:
         run: npm run lint:critical
 
   lint_no_new:
+    needs: preflight
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: package-lock.json
       - run: npm ci
       - run: npm run lint:no-new
 
   lint_full_audit:
+    needs: preflight
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
@@ -408,32 +589,41 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: package-lock.json
       - run: npm ci
       - run: npm run lint:full
 
   typecheck:
+    needs: preflight
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: package-lock.json
       - run: npm ci
       - run: npm run typecheck
 
   format_check:
+    needs: preflight
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: package-lock.json
       - run: npm ci
       - run: npm run format:check
 
   test:
+    needs: preflight
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -445,27 +635,48 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
+          cache-dependency-path: package-lock.json
       - run: npm ci
       - run: npm test
 
+  integration:
+    needs: [lint_critical, lint_no_new, typecheck, format_check, test]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npm run test:integration
+
   ci_summary:
     if: always()
-    needs: [lint_critical, lint_no_new, lint_full_audit, typecheck, format_check, test]
+    needs: [preflight, lint_critical, lint_no_new, lint_full_audit, typecheck, format_check, test, integration]
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Summarize blocking results
         env:
+          PREFLIGHT: ${{ needs.preflight.result }}
           LINT_CRITICAL: ${{ needs.lint_critical.result }}
           LINT_NO_NEW: ${{ needs.lint_no_new.result }}
           TYPECHECK: ${{ needs.typecheck.result }}
           FORMAT_CHECK: ${{ needs.format_check.result }}
           TEST: ${{ needs.test.result }}
+          INTEGRATION: ${{ needs.integration.result }}
         run: |
           failures=0
 
-          for gate in LINT_CRITICAL LINT_NO_NEW TYPECHECK FORMAT_CHECK TEST; do
+          for gate in PREFLIGHT LINT_CRITICAL LINT_NO_NEW TYPECHECK FORMAT_CHECK TEST INTEGRATION; do
             result="${!gate}"
             echo "- ${gate}: ${result}" >> "$GITHUB_STEP_SUMMARY"
+            if [ "$result" = "skipped" ]; then
+              echo "  - Skipped because an upstream tier did not pass." >> "$GITHUB_STEP_SUMMARY"
+            fi
             if [ "$result" != "success" ]; then
               failures=1
             fi

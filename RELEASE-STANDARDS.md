@@ -279,14 +279,38 @@ Examples of lockfiles by ecosystem: `Cargo.lock` (Rust), `package-lock.json` /
 Pushing a `v*` tag (e.g., `v0.2.0`) triggers the release pipeline. Regular
 pushes and PRs run build + test only.
 
+Release automation must be constrained by tag triggers so ordinary branch pushes
+cannot run packaging, signing, publishing, or draft-release creation by accident.
+Keep release workflows separate from regular CI when possible:
+
 ```yaml
+# .github/workflows/release.yml
+on:
+  push:
+    tags: ['v*']
+```
+
+Regular CI should stay on branch pushes and pull requests:
+
+```yaml
+# .github/workflows/ci.yml
 on:
   push:
     branches: [main]
-    tags: ['v*']
   pull_request:
     branches: [main]
 ```
+
+If a single workflow handles both CI and release jobs, every release job must
+still use an explicit tag condition such as:
+
+```yaml
+if: startsWith(github.ref, 'refs/tags/v')
+```
+
+Path filters may reduce irrelevant validation work, but they must not be the
+primary release guard. Protected-branch required checks must still appear
+consistently when path filters skip a workflow.
 
 ### Build Matrix
 
