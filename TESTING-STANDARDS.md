@@ -159,6 +159,35 @@ This check should verify that, in practice:
 Do not treat typecheck, isolated unit tests, or partial integration tests as a
 substitute for one end-to-end acceptance path when the feature crosses layers.
 
+### Vertical Slice Verification
+
+For new cross-layer features, prefer validating the thinnest useful vertical
+slice before broadening individual layers horizontally. A vertical slice starts
+from the lowest practical feature input, runs through the real layer boundaries,
+and asserts the user-visible or top-level output without coupling the test to
+intermediate implementation details.
+
+Use vertical slice tests to prove:
+- the minimum end-to-end system works as a whole
+- layer contracts are shaped well enough for real data flow
+- the current design exposes useful failure signals
+- adjacent features can reuse the same path without hidden coupling
+
+Rules:
+
+1. The first cross-layer feature slice should include at least one full-path
+   acceptance test before the implementation expands into broad horizontal
+   layer work.
+2. Assert externally meaningful inputs and outputs. Do not assert every internal
+   hop unless that hop owns a separate contract that needs direct coverage.
+3. Add focused unit or integration tests only where the slice exposes a risky
+   branch, algorithm, error path, or reusable contract.
+4. As adjacent vertical slices are added, verify that shared layers handle more
+   than one feature path without special-case coupling.
+5. When shared layers become performance-sensitive or concurrency-sensitive,
+   add horizontal scaling checks for throughput, contention, resource cleanup,
+   or batching behavior.
+
 ### Binding Verification Requirements
 
 For supported cross-language bindings, verification must cover both the native
@@ -624,6 +653,8 @@ Before submitting code:
 - [ ] Error paths are tested
 - [ ] Lifecycle cleanup/restart/cancellation regressions are covered when applicable
 - [ ] Cross-layer changes include at least one full-path acceptance check
+- [ ] New cross-layer features include a thin vertical slice before broad
+      horizontal layer expansion
 - [ ] Persisted schema-backed artifacts were validated or regenerated when applicable
 - [ ] No flaky tests introduced
 - [ ] Test names clearly describe the scenario

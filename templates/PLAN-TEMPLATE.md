@@ -58,6 +58,9 @@ risk, or acceptance criteria.
 
 ## Milestones
 
+For cross-layer features, make the first milestone the thinnest useful vertical
+slice unless dependencies make that impossible.
+
 ### Milestone 1: [Name]
 
 **Goal:** One-sentence goal.
@@ -95,6 +98,8 @@ Update during implementation:
 ## Commit Cadence Notes
 
 - Commit when a logical slice is complete and verified.
+- For cross-layer feature work, prefer committing the first verified vertical
+  slice before expanding shared layers horizontally.
 - Follow commit format/history cleanup rules from `COMMIT-STANDARDS.md`.
 
 ## Optional Subagent Assignment
