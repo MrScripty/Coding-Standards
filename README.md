@@ -16,18 +16,18 @@ Reusable coding, commit, architecture, tooling, and documentation standards that
 | Document | Purpose | When to Use |
 |----------|---------|-------------|
 | [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, file limits, layering, service independence, runtime wiring guidance | Setting up any new codebase |
-| [TESTING-STANDARDS.md](TESTING-STANDARDS.md) | Test placement strategy, naming, coverage, and cross-layer verification guidance | Writing maintainable tests |
+| [TESTING-STANDARDS.md](TESTING-STANDARDS.md) | Test placement strategy, naming, coverage, vertical slices, and cross-layer verification guidance | Writing maintainable tests |
 | [COMMIT-STANDARDS.md](COMMIT-STANDARDS.md) | Git workflow, conventional commits, agent footers | Any project using version control |
 | [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md) | System design patterns, monorepo package roles, executable contracts, composition roots, and resilient workflow coordination | Multi-layer, client-server, monorepo, or service-oriented apps |
 | [TOOLING-STANDARDS.md](TOOLING-STANDARDS.md) | Linting, hooks, automation | Enforcing code quality |
 | [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md) | Declarative rendering, UI synchronization, frontend testing/tooling conventions | Web, desktop UI, and component-heavy frontend codebases |
-| [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) | README requirements, comments, algorithm docs | Maintaining readable codebases |
+| [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) | README requirements, documentation artifact layout, comments, algorithm docs | Maintaining readable codebases |
 | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) | Boundary validation, path safety, input sanitization, network transport safety | Apps handling user input, file paths, or local IPC |
 | [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) | Async/threading patterns, async task lifecycle, mutex selection | Multi-threaded or async applications |
 | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) | Platform abstraction, file system conventions, CI matrix | Apps targeting multiple OS platforms |
 | [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md) | FFI safety, cross-language boundaries, contract maintenance | Multi-language or native interop projects |
 | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) | Dependency evaluation, versioning, auditing, and minimization | Adding or reviewing third-party packages |
-| [PLAN-STANDARDS.md](PLAN-STANDARDS.md) | Planning workflow, milestones, re-plan triggers, and completion summaries | Multi-file, cross-layer, or staged implementation work |
+| [PLAN-STANDARDS.md](PLAN-STANDARDS.md) | Planning workflow, vertical-slice milestones, re-plan triggers, and completion summaries | Multi-file, cross-layer, or staged implementation work |
 | [LAUNCHER-STANDARDS.md](LAUNCHER-STANDARDS.md) | `launcher.sh` contract, lifecycle flags, dependency checks, and app startup | Standardizing app entry points and setup workflows |
 | [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Binding architecture, FFI wrapper design, code generation, type mapping | Exposing a core library to multiple target languages |
 | [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Versioning, changelogs, release artifacts, CI/CD release pipelines | Shipping software to users or downstream consumers |
