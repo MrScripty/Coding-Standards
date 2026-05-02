@@ -289,6 +289,30 @@ evaluating, versioning, auditing, and minimizing third-party dependencies.
 
 ## Code Style
 
+### Code Volume Discipline
+
+Use the smallest amount of code that clearly satisfies the required behavior.
+Correct input-to-output behavior is the baseline; extra structure must earn its
+place by improving correctness, clarity, maintainability, diagnostics,
+performance, or an explicitly required extension point.
+
+Prefer direct implementations when:
+- the behavior has one or two call sites
+- the requirements are stable and narrow
+- a simple function or data transform expresses the rule clearly
+- abstraction would mostly move code around instead of reducing real complexity
+
+Verbose code is acceptable when it makes an objective improvement:
+- preserving important domain language
+- making error handling or validation explicit
+- separating genuinely different responsibilities
+- documenting non-obvious invariants through names and structure
+- supporting multiple existing variants without complex parameterization
+
+Do not add code volume for speculative future needs. Add structure when the
+current requirements, current variants, or demonstrated maintenance risk justify
+it.
+
 ### Avoid Over-Engineering
 
 Only make changes that are directly requested or clearly necessary:
