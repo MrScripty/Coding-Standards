@@ -47,6 +47,17 @@ Presentation → Application → Domain ← Infrastructure
 - **Flexibility:** Replace infrastructure without changing business rules
 - **Maintainability:** Changes isolated to appropriate layer
 
+### Layering Is Not Simplicity By Itself
+
+Layering only helps when layers separate independent decisions. Moving complex,
+entangled behavior into separate files, packages, services, or layers does not
+make the design simple by itself.
+
+A boundary is justified when it prevents unrelated concerns from needing to be
+understood, changed, tested, or deployed together. If two layers must always be
+changed together for ordinary feature work, review whether the boundary is
+missing an explicit contract or whether the split is only organizational.
+
 ---
 
 ## Monorepo Package Roles
@@ -305,6 +316,25 @@ them.
 
 Do not hide boundary schemas inside one app's implementation package if another
 app or process needs to trust the same contract.
+
+### Contract Cost Test
+
+A new contract, DTO, projection, wrapper, schema, or generated artifact must
+either:
+- Let producer and consumer evolve independently
+- Preserve a boundary invariant
+- Make invalid states unrepresentable
+- Support persistence, replay, migration, or compatibility
+- Remove duplicated interpretation logic
+
+Do not add a contract that simply mirrors another shape unless the mirror has a
+clear ownership, validation, compatibility, or transport purpose.
+
+Evaluate constructs by the artifacts they produce, not by how convenient they
+are to write. A construct is costly when it produces hidden coupling, unclear
+ownership, implicit lifecycle behavior, broad dependency reach, difficult
+debugging, or future changes that require unrelated concepts to be considered
+together.
 
 ### Benefits
 

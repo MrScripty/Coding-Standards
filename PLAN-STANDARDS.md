@@ -49,6 +49,10 @@ Before planning, capture:
 - Affected persisted artifacts
 - Concurrency/race-risk review when work touches async state, polling, restart
   logic, or overlapping/cancellable operations
+- Complection review: identify concerns that are intentionally or accidentally
+  tied together, especially state/time, identity/value, policy/mechanism,
+  transport/domain, lifecycle/business logic, validation/use, and
+  construction/runtime behavior
 - Definition of done
 
 ## Clarifying Questions
@@ -74,6 +78,11 @@ Every plan must include:
 - Completion criteria
 
 When applicable, plans must also include:
+- Simplicity/complection review for cross-layer, stateful, contract-heavy, or
+  refactor work. State the independent concepts in the change, which concepts
+  are intentionally coupled, which are at risk of accidental coupling, which
+  boundary owns each decision, and which future changes should not require
+  touching this area.
 - Ownership and lifecycle note for polling, timers, retries, background tasks,
   or process management. State who starts work, who stops it, how cleanup or
   cancellation happens, and how overlap/restart races are prevented.

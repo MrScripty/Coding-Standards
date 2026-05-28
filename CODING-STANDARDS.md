@@ -2,6 +2,19 @@
 
 Generic coding conventions applicable to any tech stack.
 
+## Simplicity Principle
+
+Simplicity means reducing entanglement between concepts, not merely reducing
+file count, type count, dependency count, or lines of code.
+
+A design is simpler when a maintainer can reason about one concern without also
+understanding unrelated concerns such as transport, lifecycle, persistence,
+runtime policy, UI state, execution timing, or diagnostics plumbing.
+
+Prefer designs where independent decisions can change independently. Simplicity
+can require more named things, not fewer, when those names separate independent
+concepts and make ownership explicit.
+
 ## File Organization
 
 ### Maximum File Size
@@ -25,6 +38,18 @@ Treat these as soft thresholds that require an explicit decomposition review:
 Crossing a threshold does not force an immediate rewrite, but the review should
 decide whether to extract helpers, split responsibilities, or document why the
 current shape remains safe.
+
+Prioritize entanglement over line count during decomposition review. Split code
+when one module mixes multiple reasoning axes, such as:
+- DTO/schema shape and business policy
+- State transition rules and persistence mechanics
+- Validation mechanics and runtime side effects
+- Transport mapping and domain decisions
+- Lifecycle ownership and request handling
+- Diagnostics formatting and recovery policy
+
+Do not split code only to satisfy a line count if the result scatters one
+coherent concept across harder-to-follow files.
 
 ### Directory Structure
 
@@ -387,6 +412,21 @@ function greet(name: string): string {
     return `Hello, ${name}!`;
 }
 ```
+
+### Abstractions Must Reduce Reasoning Load
+
+An abstraction is justified when it removes a real reasoning burden from callers
+without hiding lifecycle, ordering, state ownership, failure behavior, or side
+effects.
+
+Avoid abstractions that merely hide complexity behind a smaller API while
+forcing maintainers to understand the hidden behavior to make safe changes.
+
+Before adding an abstraction, answer:
+- What concern does this let callers ignore safely?
+- What invariant does the abstraction preserve?
+- What behavior remains intentionally visible?
+- What future change becomes easier because this boundary exists?
 
 ### Don't Repeat Yourself (DRY)
 

@@ -43,6 +43,16 @@ What problem is being solved?
 | ---- | ------ | ---------- |
 | Risk 1 | High/Med/Low | Mitigation 1 |
 
+### Simplicity / Complection Review
+
+Use this section for cross-layer, stateful, contract-heavy, or refactor work.
+
+- Independent concepts in this change:
+- Concepts intentionally coupled:
+- Concepts accidentally coupled or at risk:
+- Boundary that owns each policy/state/lifecycle decision:
+- Future change that should not require touching this area:
+
 ## Clarifying Questions (Only If Needed)
 
 Use this section only when missing details materially affect scope, sequencing,

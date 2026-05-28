@@ -159,6 +159,24 @@ This check should verify that, in practice:
 Do not treat typecheck, isolated unit tests, or partial integration tests as a
 substitute for one end-to-end acceptance path when the feature crosses layers.
 
+### Boundary Invariant Tests
+
+For architectural boundaries, prefer tests that protect invariants over tests
+that merely exercise methods or increase coverage percentages.
+
+Good invariant tests prove that:
+- Forbidden data cannot cross a boundary
+- Policy is owned by exactly one component
+- State transitions are legal, replayable, and fail closed
+- Fallback behavior does not silently invent authority
+- Adapters cannot reinterpret canonical backend facts
+- Runtime, persistence, lifecycle, and transport concerns stay separated where
+  the design depends on that separation
+
+When a boundary invariant spans several DTOs, adapters, or modules, add at
+least one test or documented verification check that makes the cross-contract
+rule visible in one place.
+
 ### Vertical Slice Verification
 
 For new cross-layer features, prefer validating the thinnest useful vertical
