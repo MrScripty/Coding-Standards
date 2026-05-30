@@ -15,7 +15,7 @@ Reusable coding, commit, architecture, tooling, and documentation standards that
 
 | Document | Purpose | When to Use |
 |----------|---------|-------------|
-| [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, file limits, layering, service independence, runtime wiring guidance | Setting up any new codebase |
+| [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, simplicity/complection guidance, layering, service independence, runtime wiring guidance | Setting up any new codebase |
 | [TESTING-STANDARDS.md](TESTING-STANDARDS.md) | Test placement strategy, naming, coverage, vertical slices, and cross-layer verification guidance | Writing maintainable tests |
 | [COMMIT-STANDARDS.md](COMMIT-STANDARDS.md) | Git workflow, conventional commits, agent footers | Any project using version control |
 | [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md) | System design patterns, monorepo package roles, executable contracts, composition roots, and resilient workflow coordination | Multi-layer, client-server, monorepo, or service-oriented apps |

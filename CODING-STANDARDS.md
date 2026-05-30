@@ -17,30 +17,17 @@ concepts and make ownership explicit.
 
 ## File Organization
 
-### Maximum File Size
+### Simple vs. Complected Organization
 
-**Target: 500 lines per file**
+Divide code when a file or module becomes complected: when independent concerns
+are twisted together so a maintainer must understand several decisions at once
+to make a safe change.
 
-When a file exceeds 500 lines:
-1. Identify logical groupings within the file
-2. Extract related functionality into separate files
-3. Use clear naming that reflects the extracted responsibility
+Do not divide code merely because it is long. A large file that contains one
+coherent concern may be simpler than several small files that force readers to
+chase one idea across artificial boundaries.
 
-**Why:** Large files are harder to navigate, review, and test. Smaller files encourage single-responsibility design.
-
-### Decomposition Review Trigger
-
-Treat these as soft thresholds that require an explicit decomposition review:
-- Files over 500 lines
-- UI components over 250 lines
-- Modules/services over roughly 7 public functions or 3 distinct responsibilities
-
-Crossing a threshold does not force an immediate rewrite, but the review should
-decide whether to extract helpers, split responsibilities, or document why the
-current shape remains safe.
-
-Prioritize entanglement over line count during decomposition review. Split code
-when one module mixes multiple reasoning axes, such as:
+Use new files, modules, or helpers when they separate reasoning axes such as:
 - DTO/schema shape and business policy
 - State transition rules and persistence mechanics
 - Validation mechanics and runtime side effects
@@ -48,8 +35,15 @@ when one module mixes multiple reasoning axes, such as:
 - Lifecycle ownership and request handling
 - Diagnostics formatting and recovery policy
 
-Do not split code only to satisfy a line count if the result scatters one
-coherent concept across harder-to-follow files.
+Keep code together when the pieces form one simple idea: a single responsibility
+whose invariants, lifecycle, inputs, outputs, and failure behavior are best
+understood in one place.
+
+Before extracting code, ask:
+- What independent concern will this boundary let readers ignore safely?
+- What invariant or ownership rule becomes clearer after extraction?
+- What change can happen on one side of the boundary without changing the other?
+- Does the extraction reduce reasoning load, or does it only move code around?
 
 ### Directory Structure
 
