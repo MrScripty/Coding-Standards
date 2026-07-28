@@ -45,7 +45,7 @@ reference material.
 | [PLAN-STANDARDS.md](PLAN-STANDARDS.md) | Migration index for planning guidance | Existing links only |
 | [LAUNCHER-STANDARDS.md](LAUNCHER-STANDARDS.md) | `launcher.sh` contract, lifecycle flags, dependency checks, and app startup | Standardizing app entry points and setup workflows |
 | [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Binding architecture, FFI wrapper design, code generation, type mapping | Exposing a core library to multiple target languages |
-| [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Migration index with pipeline, channel, rollback, and tool guidance pending consolidation | Unmigrated release concerns only |
+| [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Migration index with maintenance, publication, rollback, and tool guidance pending consolidation | Unmigrated release concerns only |
 | [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) | Semantic HTML, keyboard interaction, ARIA, a11y linting | UI components in web or desktop apps |
 | [languages/README.md](languages/README.md) | Language-specific extensions to the generic standards | Rust and future language-specific rules |
 

@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; release pipeline/publication decomposition approved.
+**Current phase:** Milestone 7 active; release pipeline mechanics accepted.
 
-**Next slice:** Milestone 7.3b1, migrate release pipeline mechanics (`STD-0552`-`STD-0560`).
+**Next slice:** Milestone 7.3b2, migrate maintenance and channel policy (`STD-0561`-`STD-0565`).
 
 **Acceptance status:** `partial`
 
@@ -446,7 +446,8 @@ all structural/routing fixtures pass.
      and close the legacy documentation index.
 3. Owner-bounded topic/profile consolidation with correctness fixes, including:
    - `7.3a` (`Accepted`): release artifact and packaging policy;
-   - `7.3b1`: pipeline mechanics (`STD-0552`-`STD-0560`);
+   - `7.3b1` (`Accepted`): pipeline mechanics
+     (`STD-0552`-`STD-0560`);
    - `7.3b2`: maintenance and channel policy (`STD-0561`-`STD-0565`);
    - `7.3b3`: hosted publication and asset presentation
      (`STD-0566`-`STD-0574`);

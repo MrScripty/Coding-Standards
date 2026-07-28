@@ -909,3 +909,71 @@ fixtures, and removal of its legacy policy. Rollback/recovery and
 non-normative tool recipes remain separate later slices.
 
 **Next slice:** `7.3b1`.
+
+## 2026-07-28: Milestone 7.3b1 Release Pipeline Mechanics
+
+**Outcome:** Accepted.
+
+Pipeline mechanics for frozen identifiers `STD-0552` through `STD-0560` now
+belong to `workflows/release.md`. The canonical workflow requires one
+authenticated release decision, an immutable source and release unit, an
+artifact-plan-derived matrix, fail-closed artifact collection, metadata from
+final bytes, complete acceptance claims, an explicit publication destination,
+and least-privilege credentials.
+
+Provider-specific trigger syntax, `v*` tag assumptions, hosted runner labels,
+workflow YAML, and permissive missing-artifact behavior were removed from
+generic policy. Protected references, signed references, manual candidates,
+registry events, staging, and drafts remain project-owned mechanisms selected
+under the canonical contract rather than universal defaults.
+
+Retained maintenance and publication guidance was corrected where necessary
+to dispatch the canonical pipeline from an accepted immutable source reference
+and to protect the adopted authorization mechanism. These dependent
+corrections do not migrate the remaining frozen identifiers.
+
+**Dispositions:**
+
+- `STD-0552`, `STD-0553`, `STD-0556`, `STD-0558`, `STD-0559`, and
+  `STD-0560` moved to the canonical release workflow.
+- `STD-0554`, `STD-0555`, and `STD-0557` were removed as provider-specific
+  recipes or stale examples.
+
+**No-fallback/legacy result:**
+
+- The legacy CI/CD pipeline section was removed in the same slice.
+- Missing, duplicate, stale, or unexpected required artifacts fail the
+  release handoff.
+- Ambiguous or unauthenticated dispatch returns a typed release-dispatch
+  diagnostic.
+- Pipeline success cannot substitute for missing behavior or user-workflow
+  evidence.
+
+**Discovered issues and deviations:**
+
+- Finding `F038` recorded the generic policy's provider-specific assumptions
+  and permissive upload behavior; it was resolved in this slice.
+- Initial focused checks assumed a section boundary and exact prose wrapping.
+  The fixtures were corrected to assert semantic ownership and prohibited
+  behavior without weakening the policy.
+- No scope, ownership, or objective deviation was required.
+
+**Write set:**
+
+- `workflows/release.md`
+- `RELEASE-STANDARDS.md`
+- `README.md`
+- release pipeline fixture and ownership checks
+- dependent release checks
+- dispositions, findings, plan, and this ledger
+
+**Verification:**
+
+- Release pipeline, artifact, and workflow foundation fixtures.
+- Documentation, contract, verification, acceptance, disposition, commit,
+  and traceability regressions.
+- Metadata, plan lifecycle, shell syntax, and whitespace checks.
+- `S1 route passed: 6 modules, 595/11066 baseline lines`.
+- All listed checks passed.
+
+**Next slice:** `7.3b2`.

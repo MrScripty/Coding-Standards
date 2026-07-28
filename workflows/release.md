@@ -156,6 +156,51 @@ Do not silently regenerate missing pinned inputs during release. If the
 required resolution or toolchain cannot be reproduced, block the corresponding
 artifact claim with a typed diagnostic.
 
+## Pipeline Mechanics
+
+A release pipeline turns one authenticated release decision into the artifact
+plan and evidence required for publication. It does not infer a release from an
+ordinary branch push, path match, version-like string, or provider default.
+
+Define an unambiguous dispatch contract:
+
+- the accepted release unit and version or immutable source revision;
+- who or what may authorize dispatch;
+- how the pipeline distinguishes normal validation from release work;
+- required claims and artifact-plan inputs; and
+- the publication environment and permissions that may be reached.
+
+The dispatch may use a protected tag, signed reference, manually approved
+candidate, or registry-native mechanism. The mechanism is project-owned, but an
+unauthenticated or ambiguous reference must produce a typed release-dispatch
+diagnostic and must not enter packaging, signing, or publication stages.
+
+Build and package every target required by the accepted artifact plan. The
+matrix follows supported target and environment claims rather than a universal
+platform list. Unsupported or best-effort targets remain explicit and cannot
+silently satisfy required matrix entries.
+
+Collect artifacts by planned identity. Missing, duplicate, stale, or
+unexpected required artifacts fail collection with diagnostics; automation
+must not ignore a missing required output. Generate selected integrity,
+provenance, signature, and dependency metadata from the final collected set,
+then verify it against those bytes.
+
+The publication handoff runs only after:
+
+1. every required build, behavior, and release-artifact claim is satisfied;
+2. the collected set matches the artifact plan;
+3. version, changelog, migration, and disclosure decisions are accepted; and
+4. the destination and authorization are explicit.
+
+Use least-privilege credentials scoped to the publication stage and target.
+Untrusted change validation must not receive release credentials. Prefer a
+staging or draft state when the channel supports review, but do not treat a
+provider-specific draft feature as universal policy.
+
+Pipeline completion proves only the claims it records. A successful automation
+job cannot replace missing behavior or user-workflow evidence.
+
 ## Acceptance Boundary
 
 Before publishing, identify every claim required by the release:
@@ -177,7 +222,7 @@ them.
 ## Pending Migration Boundary
 
 [Legacy Release Standards](../RELEASE-STANDARDS.md) temporarily retain only
-unmigrated pipeline/publication, channel/download, checklist, rollback, and
+unmigrated maintenance/channel, hosted-publication, checklist, rollback, and
 tool-recipe guidance. Those sections cannot override applicability, versioning,
-changelog, contract, deprecation, migration, artifact, reproducibility, or
-acceptance decisions owned here.
+changelog, contract, deprecation, migration, artifact, reproducibility,
+pipeline, or acceptance decisions owned here.

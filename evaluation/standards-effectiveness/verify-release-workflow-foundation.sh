@@ -106,7 +106,7 @@ if rg -q "$removed_headings" "$LEGACY"; then
   exit 1
 fi
 
-for retained in "## CI/CD Release Pipeline" "## Rollback Procedure" \
+for retained in "## Hotfix and LTS Workflow" "## Rollback Procedure" \
   "## Release Tool Recipes"; do
   rg -F -q "$retained" "$LEGACY"
 done

@@ -101,7 +101,7 @@ if rg -q '^## (Release Artifacts|Reproducible Builds)$' "$LEGACY"; then
   exit 1
 fi
 
-for retained in '## CI/CD Release Pipeline' '## Rollback Procedure' \
+for retained in '## Hotfix and LTS Workflow' '## Rollback Procedure' \
   '## Release Tool Recipes'; do
   rg -F -q "$retained" "$LEGACY"
 done
@@ -122,7 +122,7 @@ for rule in "${removed_rules[@]}"; do
   fi
 done
 
-rg -F -q 'workflows/release.md#artifact-plan' "$LEGACY"
+rg -F -q 'workflows/release.md' "$LEGACY"
 rg -F -q 'Major version zero alone is not that decision.' "$LEGACY"
 
 printf 'Release artifact policy passed\n'

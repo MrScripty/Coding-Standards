@@ -169,6 +169,11 @@ lockfile decisions, exact disposition of `STD-0543` through `STD-0551`,
 canonical artifact and reproducibility ownership, and dependent legacy sections
 for conflicting defaults.
 
+`verify-release-pipeline-policy.sh` checks authenticated publication handoff
+decisions, exact disposition of `STD-0552` through `STD-0560`, canonical
+pipeline ownership, required-artifact failure behavior, and removal of
+provider-specific trigger and matrix recipes.
+
 ## Scoring
 
 Each rubric dimension is scored:

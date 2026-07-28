@@ -4,9 +4,9 @@ Release applicability, versioning, changelog, contract-evolution, deprecation,
 migration, and acceptance policy moved to the canonical
 [Release Workflow](workflows/release.md).
 
-This file temporarily retains only unmigrated pipeline/publication,
-channel/download, checklist, rollback, and tool-recipe guidance. These sections
-cannot override the canonical workflow.
+This file temporarily retains only unmigrated maintenance/channel,
+hosted-publication, checklist, rollback, and tool-recipe guidance. These
+sections cannot override the canonical workflow.
 
 ## Release Tool Recipes (Pending Reference Migration)
 
@@ -53,138 +53,12 @@ commit_parsers = [
 
 ---
 
-## CI/CD Release Pipeline
-
-### Trigger
-
-Pushing a `v*` tag (e.g., `v0.2.0`) triggers the release pipeline. Regular
-pushes and PRs run build + test only.
-
-Release automation must be constrained by tag triggers so ordinary branch pushes
-cannot run packaging, signing, publishing, or draft-release creation by accident.
-Keep release workflows separate from regular CI when possible:
-
-```yaml
-# .github/workflows/release.yml
-on:
-  push:
-    tags: ['v*']
-```
-
-Regular CI should stay on branch pushes and pull requests:
-
-```yaml
-# .github/workflows/ci.yml
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-```
-
-If a single workflow handles both CI and release jobs, every release job must
-still use an explicit tag condition such as:
-
-```yaml
-if: startsWith(github.ref, 'refs/tags/v')
-```
-
-Path filters may reduce irrelevant validation work, but they must not be the
-primary release guard. Protected-branch required checks must still appear
-consistently when path filters skip a workflow.
-
-### Build Matrix
-
-The build matrix must include all **required** platforms from
-[CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md#platform-targets).
-Best-effort platforms are optional.
-
-```yaml
-# Target values come from the canonical artifact plan.
-strategy:
-  fail-fast: false
-  matrix:
-    include:
-      - os: ubuntu-latest
-        target: x86_64-unknown-linux-gnu
-      - os: windows-latest
-        target: x86_64-pc-windows-msvc
-      - os: macos-latest
-        target: aarch64-apple-darwin
-```
-
-**Note:** `macos-latest` on GitHub Actions uses ARM (M-series) runners. For
-Intel macOS targets, use `macos-13` (the last Intel runner generation).
-
-### Artifact Upload
-
-Upload the distributable artifacts selected by the canonical
-[Release Workflow](workflows/release.md#artifact-plan). Use its artifact
-identity in upload names to avoid collisions between matrix entries:
-
-```yaml
-- name: Upload artifacts
-  uses: actions/upload-artifact@v4
-  with:
-    name: build-${{ matrix.target }}
-    path: |
-      path/to/binary
-      path/to/shared-library
-    if-no-files-found: ignore
-```
-
-### Release Job
-
-A separate release job runs only on tag pushes, after all build jobs pass:
-
-```yaml
-release:
-  if: startsWith(github.ref, 'refs/tags/v')
-  needs: [build]
-  runs-on: ubuntu-latest
-  permissions:
-    contents: write
-```
-
-The release job should consume the accepted artifact plan:
-
-1. Download all build artifacts
-2. Apply the planned artifact identities
-3. Generate the selected integrity, provenance, and dependency metadata
-4. Create a draft release with the complete planned artifact set attached
-
-```yaml
-- name: Extract version
-  id: version
-  run: echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
-
-- name: Create release
-  uses: softprops/action-gh-release@v2
-  with:
-    files: release-artifacts/*
-    draft: true
-    generate_release_notes: true
-    prerelease: ${{ startsWith(github.ref_name, 'v0.') }}
-```
-
-### Code Signing
-
-When the canonical artifact plan requires signatures, notarization, or
-provenance, the release pipeline must produce and verify that metadata for the
-final artifacts. Version maturity does not waive consumer, channel,
-organizational, or regulatory requirements.
-
-For supply chain maturity goals, see [SLSA](https://slsa.dev/) — Level 2+
-requires signed build provenance.
-
----
-
 ## Hotfix and LTS Workflow
 
 ### Standard Releases
 
-Standard (non-LTS) releases are tagged on `main`. No release branch is created.
-The tag triggers the CI/CD pipeline, which builds and publishes artifacts.
+Standard releases use the project's adopted maintenance policy and dispatch the
+canonical release pipeline from an accepted immutable source reference.
 
 ### Hotfix Workflow
 
@@ -196,7 +70,7 @@ version, create a hotfix branch from the release tag:
 2. Apply the fix on the hotfix branch
 3. Update the changelog and bump the patch version
 4. Tag the fix: `git tag vX.Y.1`
-5. Push the branch and tag — CI builds from the tag as usual
+5. Push the branch and release reference; dispatch the canonical pipeline
 6. Cherry-pick or merge the fix back into `main` to ensure it is not lost
 
 ### LTS Releases
@@ -206,7 +80,7 @@ long-lived release branch. Non-LTS releases are tagged only.
 
 - Create a release branch at the LTS tag: `release/X.Y`
 - LTS branches receive backported bug fixes and security patches
-- LTS branches follow the same CI pipeline, triggered by `v*` tags
+- LTS branches follow the same canonical pipeline dispatch contract
 - Document the LTS support window in the project README (e.g., "12 months of
   security patches from the LTS release date")
 
@@ -236,9 +110,9 @@ typically do not need feature flags or release channels.
 CI creates draft releases. A human reviews artifacts and release notes before
 publishing. This prevents broken releases from being visible to users.
 
-Restrict `v*` tag push permissions to designated maintainers via tag protection
-rules — convention alone is insufficient. When team size allows, the reviewer
-who publishes the draft should not be the same person who created the tag.
+Protect whichever references or approvals authorize release dispatch;
+convention alone is insufficient. When team size allows, the reviewer who
+publishes the draft should not be the same actor who authorized the candidate.
 
 ### Pre-Release Flag
 
