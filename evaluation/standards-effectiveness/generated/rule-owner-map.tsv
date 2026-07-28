@@ -1,0 +1,917 @@
+id	current_path	line	future_owner	disposition	heading
+STD-0001	README.md	1	STANDARDS-ROUTER.md	replace-with-router	Standards Library
+STD-0002	README.md	5	STANDARDS-ROUTER.md	replace-with-router	Quick Start
+STD-0003	README.md	14	STANDARDS-ROUTER.md	replace-with-router	Documents
+STD-0004	README.md	37	STANDARDS-ROUTER.md	replace-with-router	Templates
+STD-0005	README.md	50	STANDARDS-ROUTER.md	replace-with-router	Customization
+STD-0006	README.md	59	STANDARDS-ROUTER.md	replace-with-router	License
+STD-0007	ACCESSIBILITY-STANDARDS.md	1	topics/accessibility.md	move-and-index	Accessibility Standards
+STD-0008	ACCESSIBILITY-STANDARDS.md	5	topics/accessibility.md	move-and-index	Core Principle: Use Semantic Elements
+STD-0009	ACCESSIBILITY-STANDARDS.md	18	topics/accessibility.md	move-and-index	Interactive Elements
+STD-0010	ACCESSIBILITY-STANDARDS.md	20	topics/accessibility.md	move-and-index	Use `<button>` for Actions
+STD-0011	ACCESSIBILITY-STANDARDS.md	50	topics/accessibility.md	move-and-index	Use `<a>` Only for Navigation
+STD-0012	ACCESSIBILITY-STANDARDS.md	68	topics/accessibility.md	move-and-index	When a Generic Element Must Be Interactive
+STD-0013	ACCESSIBILITY-STANDARDS.md	93	topics/accessibility.md	move-and-index	Keyboard Navigation
+STD-0014	ACCESSIBILITY-STANDARDS.md	95	topics/accessibility.md	move-and-index	All Interactive Elements Must Be Keyboard-Accessible
+STD-0015	ACCESSIBILITY-STANDARDS.md	100	topics/accessibility.md	move-and-index	Focus Indicators
+STD-0016	ACCESSIBILITY-STANDARDS.md	115	topics/accessibility.md	move-and-index	Dialog Focus Management
+STD-0017	ACCESSIBILITY-STANDARDS.md	124	topics/accessibility.md	move-and-index	Labels and Names
+STD-0018	ACCESSIBILITY-STANDARDS.md	126	topics/accessibility.md	move-and-index	Every Interactive Element Needs an Accessible Name
+STD-0019	ACCESSIBILITY-STANDARDS.md	149	topics/accessibility.md	move-and-index	Form Inputs Need Labels
+STD-0020	ACCESSIBILITY-STANDARDS.md	162	topics/accessibility.md	move-and-index	Images and Media
+STD-0021	ACCESSIBILITY-STANDARDS.md	164	topics/accessibility.md	move-and-index	Decorative vs Informative Images
+STD-0022	ACCESSIBILITY-STANDARDS.md	174	topics/accessibility.md	move-and-index	Icon Components
+STD-0023	ACCESSIBILITY-STANDARDS.md	191	topics/accessibility.md	move-and-index	Linting Enforcement
+STD-0024	ACCESSIBILITY-STANDARDS.md	193	topics/accessibility.md	move-and-index	Required ESLint Plugin
+STD-0025	ACCESSIBILITY-STANDARDS.md	201	topics/accessibility.md	move-and-index	Recommended Rules
+STD-0026	ACCESSIBILITY-STANDARDS.md	214	topics/accessibility.md	move-and-index	CI Gate
+STD-0027	ARCHITECTURE-PATTERNS.md	1	reference/patterns/architecture.md	split-and-index	Architecture Patterns
+STD-0028	ARCHITECTURE-PATTERNS.md	5	reference/patterns/architecture.md	split-and-index	Layered Separation of Concerns
+STD-0029	ARCHITECTURE-PATTERNS.md	7	reference/patterns/architecture.md	split-and-index	The Pattern
+STD-0030	ARCHITECTURE-PATTERNS.md	23	reference/patterns/architecture.md	split-and-index	Layer Responsibilities
+STD-0031	ARCHITECTURE-PATTERNS.md	32	reference/patterns/architecture.md	split-and-index	Dependency Rule
+STD-0032	ARCHITECTURE-PATTERNS.md	44	reference/patterns/architecture.md	split-and-index	Benefits
+STD-0033	ARCHITECTURE-PATTERNS.md	50	reference/patterns/architecture.md	split-and-index	Layering Is Not Simplicity By Itself
+STD-0034	ARCHITECTURE-PATTERNS.md	63	reference/patterns/architecture.md	split-and-index	Monorepo Package Roles
+STD-0035	ARCHITECTURE-PATTERNS.md	65	reference/patterns/architecture.md	split-and-index	The Pattern
+STD-0036	ARCHITECTURE-PATTERNS.md	74	reference/patterns/architecture.md	split-and-index	Common Roles
+STD-0037	ARCHITECTURE-PATTERNS.md	87	reference/patterns/architecture.md	split-and-index	Dependency Direction
+STD-0038	ARCHITECTURE-PATTERNS.md	110	reference/patterns/architecture.md	split-and-index	Why This Helps
+STD-0039	ARCHITECTURE-PATTERNS.md	117	reference/patterns/architecture.md	split-and-index	Example Decision
+STD-0040	ARCHITECTURE-PATTERNS.md	125	reference/patterns/architecture.md	split-and-index	Backend-Owned Data
+STD-0041	ARCHITECTURE-PATTERNS.md	127	reference/patterns/architecture.md	split-and-index	The Pattern
+STD-0042	ARCHITECTURE-PATTERNS.md	139	reference/patterns/architecture.md	split-and-index	Rules
+STD-0043	ARCHITECTURE-PATTERNS.md	154	reference/patterns/architecture.md	split-and-index	Data Flow
+STD-0044	ARCHITECTURE-PATTERNS.md	163	reference/patterns/architecture.md	split-and-index	No Optimistic Updates for Backend-Owned Data
+STD-0045	ARCHITECTURE-PATTERNS.md	194	reference/patterns/architecture.md	split-and-index	Benefits
+STD-0046	ARCHITECTURE-PATTERNS.md	202	topics/contracts.md	move-from-pattern-catalog	Immutable Contracts
+STD-0047	ARCHITECTURE-PATTERNS.md	204	topics/contracts.md	move-from-pattern-catalog	The Pattern
+STD-0048	ARCHITECTURE-PATTERNS.md	216	topics/contracts.md	move-from-pattern-catalog	Contract Rules
+STD-0049	ARCHITECTURE-PATTERNS.md	223	topics/contracts.md	move-from-pattern-catalog	Example Contract
+STD-0050	ARCHITECTURE-PATTERNS.md	242	topics/contracts.md	move-from-pattern-catalog	Benefits
+STD-0051	ARCHITECTURE-PATTERNS.md	250	topics/contracts.md	move-from-pattern-catalog	Executable Boundary Contracts
+STD-0052	ARCHITECTURE-PATTERNS.md	252	topics/contracts.md	move-from-pattern-catalog	The Pattern
+STD-0053	ARCHITECTURE-PATTERNS.md	267	topics/contracts.md	move-from-pattern-catalog	Plain Types vs Executable Contracts
+STD-0054	ARCHITECTURE-PATTERNS.md	280	topics/contracts.md	move-from-pattern-catalog	Contract Requirements
+STD-0055	ARCHITECTURE-PATTERNS.md	311	topics/contracts.md	move-from-pattern-catalog	Packaging Guidance
+STD-0056	ARCHITECTURE-PATTERNS.md	320	topics/contracts.md	move-from-pattern-catalog	Contract Cost Test
+STD-0057	ARCHITECTURE-PATTERNS.md	339	topics/contracts.md	move-from-pattern-catalog	Benefits
+STD-0058	ARCHITECTURE-PATTERNS.md	347	topics/contracts.md	move-from-pattern-catalog	Structured Producer-Consumer Contracts
+STD-0059	ARCHITECTURE-PATTERNS.md	349	topics/contracts.md	move-from-pattern-catalog	The Pattern
+STD-0060	ARCHITECTURE-PATTERNS.md	359	topics/contracts.md	move-from-pattern-catalog	Contract Semantics to Preserve
+STD-0061	ARCHITECTURE-PATTERNS.md	369	topics/contracts.md	move-from-pattern-catalog	Consumer Responsibilities
+STD-0062	ARCHITECTURE-PATTERNS.md	383	topics/contracts.md	move-from-pattern-catalog	Benefits
+STD-0063	ARCHITECTURE-PATTERNS.md	391	profiles/boundaries/ipc.md	move-from-pattern-catalog	IPC/Message Contract Pattern
+STD-0064	ARCHITECTURE-PATTERNS.md	393	profiles/boundaries/ipc.md	move-from-pattern-catalog	The Pattern
+STD-0065	ARCHITECTURE-PATTERNS.md	404	profiles/boundaries/ipc.md	move-from-pattern-catalog	Message Structure
+STD-0066	ARCHITECTURE-PATTERNS.md	425	profiles/boundaries/ipc.md	move-from-pattern-catalog	Message Categories
+STD-0067	ARCHITECTURE-PATTERNS.md	434	profiles/boundaries/ipc.md	move-from-pattern-catalog	Example Implementation
+STD-0068	ARCHITECTURE-PATTERNS.md	461	profiles/boundaries/ipc.md	move-from-pattern-catalog	Benefits
+STD-0069	ARCHITECTURE-PATTERNS.md	469	reference/patterns/architecture.md	split-and-index	Composition Root Pattern
+STD-0070	ARCHITECTURE-PATTERNS.md	471	reference/patterns/architecture.md	split-and-index	The Pattern
+STD-0071	ARCHITECTURE-PATTERNS.md	487	reference/patterns/architecture.md	split-and-index	Roles
+STD-0072	ARCHITECTURE-PATTERNS.md	495	reference/patterns/architecture.md	split-and-index	Rules
+STD-0073	ARCHITECTURE-PATTERNS.md	523	reference/patterns/architecture.md	split-and-index	Benefits
+STD-0074	ARCHITECTURE-PATTERNS.md	531	reference/patterns/architecture.md	split-and-index	Realtime Workflow Systems
+STD-0075	ARCHITECTURE-PATTERNS.md	533	reference/patterns/architecture.md	split-and-index	The Pattern
+STD-0076	ARCHITECTURE-PATTERNS.md	542	reference/patterns/architecture.md	split-and-index	Workflow Shape
+STD-0077	ARCHITECTURE-PATTERNS.md	553	reference/patterns/architecture.md	split-and-index	Rules
+STD-0078	ARCHITECTURE-PATTERNS.md	568	reference/patterns/architecture.md	split-and-index	Typical Components
+STD-0079	ARCHITECTURE-PATTERNS.md	578	reference/patterns/architecture.md	split-and-index	Benefits
+STD-0080	ARCHITECTURE-PATTERNS.md	585	reference/patterns/architecture.md	split-and-index	Verification Note
+STD-0081	ARCHITECTURE-PATTERNS.md	595	reference/patterns/architecture.md	split-and-index	View Model Pattern
+STD-0082	ARCHITECTURE-PATTERNS.md	597	reference/patterns/architecture.md	split-and-index	The Pattern
+STD-0083	ARCHITECTURE-PATTERNS.md	608	reference/patterns/architecture.md	split-and-index	Responsibilities
+STD-0084	ARCHITECTURE-PATTERNS.md	616	reference/patterns/architecture.md	split-and-index	View Model Rules
+STD-0085	ARCHITECTURE-PATTERNS.md	626	reference/patterns/architecture.md	split-and-index	Example
+STD-0086	ARCHITECTURE-PATTERNS.md	659	reference/patterns/architecture.md	split-and-index	Benefits
+STD-0087	ARCHITECTURE-PATTERNS.md	667	reference/patterns/architecture.md	split-and-index	Directory Structure Template
+STD-0088	ARCHITECTURE-PATTERNS.md	709	workflows/documentation.md	merge-duplicate	Directory README Requirement
+STD-0089	ARCHITECTURE-PATTERNS.md	729	topics/diagnostics.md	move-from-pattern-catalog	Activity Tracing Pattern
+STD-0090	ARCHITECTURE-PATTERNS.md	731	topics/diagnostics.md	move-from-pattern-catalog	The Pattern
+STD-0091	ARCHITECTURE-PATTERNS.md	743	topics/diagnostics.md	move-from-pattern-catalog	Implementation
+STD-0092	ARCHITECTURE-PATTERNS.md	776	topics/diagnostics.md	move-from-pattern-catalog	Benefits
+STD-0093	ARCHITECTURE-PATTERNS.md	784	reference/patterns/architecture.md	split-and-index	Process Instance Coordination
+STD-0094	ARCHITECTURE-PATTERNS.md	786	reference/patterns/architecture.md	split-and-index	The Pattern
+STD-0095	ARCHITECTURE-PATTERNS.md	810	reference/patterns/architecture.md	split-and-index	PID File Rules
+STD-0096	ARCHITECTURE-PATTERNS.md	820	reference/patterns/architecture.md	split-and-index	PID File Contents
+STD-0097	ARCHITECTURE-PATTERNS.md	832	reference/patterns/architecture.md	split-and-index	Handling PID Reuse
+STD-0098	ARCHITECTURE-PATTERNS.md	859	reference/patterns/architecture.md	split-and-index	Stale PID File Cleanup
+STD-0099	ARCHITECTURE-PATTERNS.md	867	reference/patterns/architecture.md	split-and-index	Discover-or-Create Pattern
+STD-0100	ARCHITECTURE-PATTERNS.md	869	reference/patterns/architecture.md	split-and-index	The Pattern
+STD-0101	ARCHITECTURE-PATTERNS.md	881	reference/patterns/architecture.md	split-and-index	Instance Convergence Flow
+STD-0102	ARCHITECTURE-PATTERNS.md	903	reference/patterns/architecture.md	split-and-index	Rules
+STD-0103	ARCHITECTURE-PATTERNS.md	913	reference/patterns/architecture.md	split-and-index	Ownership Models
+STD-0104	ARCHITECTURE-PATTERNS.md	921	reference/patterns/architecture.md	split-and-index	Example
+STD-0105	ARCHITECTURE-PATTERNS.md	940	reference/patterns/architecture.md	split-and-index	Benefits
+STD-0106	ARCHITECTURE-PATTERNS.md	948	profiles/boundaries/persistence.md	move-from-pattern-catalog	Phased Mutation Pattern
+STD-0107	ARCHITECTURE-PATTERNS.md	950	profiles/boundaries/persistence.md	move-from-pattern-catalog	The Pattern
+STD-0108	ARCHITECTURE-PATTERNS.md	965	profiles/boundaries/persistence.md	move-from-pattern-catalog	Phase Responsibilities
+STD-0109	ARCHITECTURE-PATTERNS.md	976	profiles/boundaries/persistence.md	move-from-pattern-catalog	Benefits
+STD-0110	ARCHITECTURE-PATTERNS.md	984	profiles/boundaries/persistence.md	move-from-pattern-catalog	When to Use
+STD-0111	ARCHITECTURE-PATTERNS.md	994	profiles/boundaries/persistence.md	move-from-pattern-catalog	Anti-Pattern: Interleaved Mutation
+STD-0112	ARCHITECTURE-PATTERNS.md	1006	profiles/boundaries/persistence.md	move-from-pattern-catalog	Implementation Tips
+STD-0113	ARCHITECTURE-PATTERNS.md	1019	profiles/boundaries/persistence.md	move-from-pattern-catalog	Schema Versioning and Migration
+STD-0114	ARCHITECTURE-PATTERNS.md	1021	profiles/boundaries/persistence.md	move-from-pattern-catalog	The Pattern
+STD-0115	ARCHITECTURE-PATTERNS.md	1028	profiles/boundaries/persistence.md	move-from-pattern-catalog	Migration Rules
+STD-0116	ARCHITECTURE-PATTERNS.md	1038	profiles/boundaries/persistence.md	move-from-pattern-catalog	Migration File Structure
+STD-0117	ARCHITECTURE-PATTERNS.md	1052	profiles/boundaries/persistence.md	move-from-pattern-catalog	Schema Version Tracking
+STD-0118	ARCHITECTURE-PATTERNS.md	1076	profiles/boundaries/persistence.md	move-from-pattern-catalog	Forward/Backward Compatibility
+STD-0119	ARCHITECTURE-PATTERNS.md	1093	topics/resilience.md	move-from-pattern-catalog	Infrastructure Failure Recovery
+STD-0120	ARCHITECTURE-PATTERNS.md	1095	topics/resilience.md	move-from-pattern-catalog	The Pattern
+STD-0121	ARCHITECTURE-PATTERNS.md	1105	topics/resilience.md	move-from-pattern-catalog	Failure Categories
+STD-0122	ARCHITECTURE-PATTERNS.md	1114	topics/resilience.md	move-from-pattern-catalog	Decision Flow
+STD-0123	ARCHITECTURE-PATTERNS.md	1132	topics/resilience.md	move-from-pattern-catalog	Startup Resilience
+STD-0124	ARCHITECTURE-PATTERNS.md	1148	topics/resilience.md	move-from-pattern-catalog	Best-Effort Service Pattern
+STD-0125	ARCHITECTURE-PATTERNS.md	1169	topics/resilience.md	move-from-pattern-catalog	Benefits
+STD-0126	ARCHITECTURE-PATTERNS.md	1178	topics/contracts.md	move-from-pattern-catalog	HTTP API Error Convention
+STD-0127	ARCHITECTURE-PATTERNS.md	1180	topics/contracts.md	move-from-pattern-catalog	The Pattern
+STD-0128	ARCHITECTURE-PATTERNS.md	1186	topics/contracts.md	move-from-pattern-catalog	Error Response Format
+STD-0129	ARCHITECTURE-PATTERNS.md	1194	topics/contracts.md	move-from-pattern-catalog	Status Code Usage
+STD-0130	ARCHITECTURE-PATTERNS.md	1205	topics/contracts.md	move-from-pattern-catalog	Server Implementation
+STD-0131	ARCHITECTURE-PATTERNS.md	1222	topics/contracts.md	move-from-pattern-catalog	Client Implementation
+STD-0132	ARCHITECTURE-PATTERNS.md	1228	topics/contracts.md	move-from-pattern-catalog	Anti-Pattern: Status 200 with Error Body
+STD-0133	ARCHITECTURE-PATTERNS.md	1245	topics/contracts.md	move-from-pattern-catalog	Benefits
+STD-0134	ARCHITECTURE-PATTERNS.md	1253	reference/patterns/architecture.md	split-and-index	Choosing Patterns
+STD-0135	CODING-STANDARDS.md	1	CORE-STANDARDS.md	split-and-index	Coding Standards
+STD-0136	CODING-STANDARDS.md	5	CORE-STANDARDS.md	split-and-index	Simplicity Principle
+STD-0137	CODING-STANDARDS.md	18	CORE-STANDARDS.md	split-and-index	File Organization
+STD-0138	CODING-STANDARDS.md	20	CORE-STANDARDS.md	split-and-index	Simple vs. Complected Organization
+STD-0139	CODING-STANDARDS.md	48	CORE-STANDARDS.md	split-and-index	Directory Structure
+STD-0140	CODING-STANDARDS.md	59	CORE-STANDARDS.md	split-and-index	Layered Architecture
+STD-0141	CODING-STANDARDS.md	77	CORE-STANDARDS.md	split-and-index	Layer Rules
+STD-0142	CODING-STANDARDS.md	87	CORE-STANDARDS.md	split-and-index	Why Layering Matters
+STD-0143	CODING-STANDARDS.md	93	CORE-STANDARDS.md	split-and-index	Separation of Concerns
+STD-0144	CODING-STANDARDS.md	95	CORE-STANDARDS.md	split-and-index	Backend-Owned Data Principle
+STD-0145	CODING-STANDARDS.md	122	CORE-STANDARDS.md	split-and-index	Service Independence
+STD-0146	CODING-STANDARDS.md	144	CORE-STANDARDS.md	split-and-index	Composition Root for Runtime Wiring
+STD-0147	CODING-STANDARDS.md	156	CORE-STANDARDS.md	split-and-index	Single Owner for Stateful Flows
+STD-0148	CODING-STANDARDS.md	174	CORE-STANDARDS.md	split-and-index	Constants and Configuration
+STD-0149	CODING-STANDARDS.md	176	CORE-STANDARDS.md	split-and-index	No Magic Numbers or Strings
+STD-0150	CODING-STANDARDS.md	193	CORE-STANDARDS.md	split-and-index	Centralize Constants
+STD-0151	CODING-STANDARDS.md	214	CORE-STANDARDS.md	split-and-index	Error Handling
+STD-0152	CODING-STANDARDS.md	216	CORE-STANDARDS.md	split-and-index	Exceptions for Exceptional Cases
+STD-0153	CODING-STANDARDS.md	235	CORE-STANDARDS.md	split-and-index	Catch at Boundaries
+STD-0154	CODING-STANDARDS.md	265	CORE-STANDARDS.md	split-and-index	Production Error Diagnostics
+STD-0155	CODING-STANDARDS.md	317	CORE-STANDARDS.md	split-and-index	Validate at Boundaries
+STD-0156	CODING-STANDARDS.md	334	CORE-STANDARDS.md	split-and-index	Validate Outbound Responses
+STD-0157	CODING-STANDARDS.md	356	CORE-STANDARDS.md	split-and-index	Dependency Management
+STD-0158	CODING-STANDARDS.md	361	CORE-STANDARDS.md	split-and-index	Code Style
+STD-0159	CODING-STANDARDS.md	363	CORE-STANDARDS.md	split-and-index	Code Volume Discipline
+STD-0160	CODING-STANDARDS.md	387	CORE-STANDARDS.md	split-and-index	Avoid Over-Engineering
+STD-0161	CODING-STANDARDS.md	410	CORE-STANDARDS.md	split-and-index	Abstractions Must Reduce Reasoning Load
+STD-0162	CODING-STANDARDS.md	425	CORE-STANDARDS.md	split-and-index	Don't Repeat Yourself (DRY)
+STD-0163	CODING-STANDARDS.md	454	CORE-STANDARDS.md	split-and-index	Delete Unused Code
+STD-0164	CODING-STANDARDS.md	467	CORE-STANDARDS.md	split-and-index	Naming Conventions
+STD-0165	CODING-STANDARDS.md	469	CORE-STANDARDS.md	split-and-index	Be Descriptive
+STD-0166	CODING-STANDARDS.md	485	CORE-STANDARDS.md	split-and-index	Consistent Terminology
+STD-0167	CODING-STANDARDS.md	501	CORE-STANDARDS.md	split-and-index	Invariants and Safety
+STD-0168	CODING-STANDARDS.md	503	CORE-STANDARDS.md	split-and-index	Documenting Invariants
+STD-0169	CODING-STANDARDS.md	510	CORE-STANDARDS.md	split-and-index	Invariants Maintained
+STD-0170	CODING-STANDARDS.md	516	CORE-STANDARDS.md	split-and-index	Preconditions
+STD-0171	CODING-STANDARDS.md	521	CORE-STANDARDS.md	split-and-index	Postconditions
+STD-0172	CODING-STANDARDS.md	527	CORE-STANDARDS.md	split-and-index	Validation Strategy
+STD-0173	CODING-STANDARDS.md	538	CORE-STANDARDS.md	split-and-index	Invariant Testing
+STD-0174	CODING-STANDARDS.md	547	CORE-STANDARDS.md	split-and-index	Disabled Features
+STD-0175	CODING-STANDARDS.md	551	CORE-STANDARDS.md	split-and-index	Documentation Requirements
+STD-0176	CODING-STANDARDS.md	572	CORE-STANDARDS.md	split-and-index	Config Pattern
+STD-0177	CODING-STANDARDS.md	577	CORE-STANDARDS.md	split-and-index	Unimplemented Stubs
+STD-0178	CODING-STANDARDS.md	592	CORE-STANDARDS.md	split-and-index	Review Checklist
+STD-0179	CODING-STANDARDS.md	601	CORE-STANDARDS.md	split-and-index	License Attribution
+STD-0180	CODING-STANDARDS.md	605	CORE-STANDARDS.md	split-and-index	Attribution Format
+STD-0181	CODING-STANDARDS.md	620	CORE-STANDARDS.md	split-and-index	License Compatibility
+STD-0182	CODING-STANDARDS.md	632	CORE-STANDARDS.md	split-and-index	File-Level Attribution
+STD-0183	CODING-STANDARDS.md	646	CORE-STANDARDS.md	split-and-index	Language-Specific Guidelines
+STD-0184	CODING-STANDARDS.md	658	CORE-STANDARDS.md	split-and-index	TypeScript-Specific Guidelines
+STD-0185	CODING-STANDARDS.md	660	CORE-STANDARDS.md	split-and-index	Explicit Return Types on Public Functions
+STD-0186	CODING-STANDARDS.md	681	CORE-STANDARDS.md	split-and-index	Contract Types for API Boundaries
+STD-0187	CODING-STANDARDS.md	698	CORE-STANDARDS.md	split-and-index	Frontend-Specific Standards
+STD-0188	CODING-STANDARDS.md	704	CORE-STANDARDS.md	split-and-index	Performance-Critical Code
+STD-0189	CODING-STANDARDS.md	706	CORE-STANDARDS.md	split-and-index	Documentation
+STD-0190	CODING-STANDARDS.md	713	CORE-STANDARDS.md	split-and-index	Performance
+STD-0191	CODING-STANDARDS.md	716	CORE-STANDARDS.md	split-and-index	Optimizations Applied
+STD-0192	CODING-STANDARDS.md	721	CORE-STANDARDS.md	split-and-index	Benchmarks
+STD-0193	CODING-STANDARDS.md	725	CORE-STANDARDS.md	split-and-index	Guidelines
+STD-0194	CODING-STANDARDS.md	737	CORE-STANDARDS.md	split-and-index	When to Optimize
+STD-0195	COMMIT-STANDARDS.md	1	workflows/commit.md	move-and-index	Commit Standards
+STD-0196	COMMIT-STANDARDS.md	5	workflows/commit.md	move-and-index	Conventional Commits Format
+STD-0197	COMMIT-STANDARDS.md	17	workflows/commit.md	move-and-index	Components
+STD-0198	COMMIT-STANDARDS.md	27	workflows/commit.md	move-and-index	Commit Types
+STD-0199	COMMIT-STANDARDS.md	41	workflows/commit.md	move-and-index	Choosing a Type
+STD-0200	COMMIT-STANDARDS.md	55	workflows/commit.md	move-and-index	Scopes
+STD-0201	COMMIT-STANDARDS.md	60	workflows/commit.md	move-and-index	Example Scopes
+STD-0202	COMMIT-STANDARDS.md	73	workflows/commit.md	move-and-index	Scope Guidelines
+STD-0203	COMMIT-STANDARDS.md	80	workflows/commit.md	move-and-index	Writing Good Descriptions
+STD-0204	COMMIT-STANDARDS.md	82	workflows/commit.md	move-and-index	Use Imperative Mood
+STD-0205	COMMIT-STANDARDS.md	98	workflows/commit.md	move-and-index	Be Specific
+STD-0206	COMMIT-STANDARDS.md	112	workflows/commit.md	move-and-index	Keep It Short
+STD-0207	COMMIT-STANDARDS.md	118	workflows/commit.md	move-and-index	Commit Body
+STD-0208	COMMIT-STANDARDS.md	140	workflows/commit.md	move-and-index	Commit Footer
+STD-0209	COMMIT-STANDARDS.md	142	workflows/commit.md	move-and-index	Breaking Changes
+STD-0210	COMMIT-STANDARDS.md	152	workflows/commit.md	move-and-index	Issue References
+STD-0211	COMMIT-STANDARDS.md	162	workflows/commit.md	move-and-index	Co-Authors
+STD-0212	COMMIT-STANDARDS.md	170	workflows/commit.md	move-and-index	Agent Footer (Multi-Agent Orchestration)
+STD-0213	COMMIT-STANDARDS.md	184	workflows/commit.md	move-and-index	Pre-Commit Checklist
+STD-0214	COMMIT-STANDARDS.md	189	workflows/commit.md	move-and-index	1. Check what's staged
+STD-0215	COMMIT-STANDARDS.md	192	workflows/commit.md	move-and-index	2. Review the actual changes
+STD-0216	COMMIT-STANDARDS.md	195	workflows/commit.md	move-and-index	3. Review unpushed history for regression + fix pairs
+STD-0217	COMMIT-STANDARDS.md	196	workflows/commit.md	move-and-index	If no upstream is configured, compare against your intended base branch
+STD-0218	COMMIT-STANDARDS.md	197	workflows/commit.md	move-and-index	(for example: origin/main..HEAD)
+STD-0219	COMMIT-STANDARDS.md	200	workflows/commit.md	move-and-index	4. Run linters/formatters
+STD-0220	COMMIT-STANDARDS.md	203	workflows/commit.md	move-and-index	5. Run tests (at minimum, affected tests)
+STD-0221	COMMIT-STANDARDS.md	206	workflows/commit.md	move-and-index	6. Commit with conventional format
+STD-0222	COMMIT-STANDARDS.md	210	workflows/commit.md	move-and-index	Mandatory History Cleanup Before Commit
+STD-0223	COMMIT-STANDARDS.md	225	workflows/commit.md	move-and-index	Workflow
+STD-0224	COMMIT-STANDARDS.md	228	workflows/commit.md	move-and-index	Inspect unpushed commits
+STD-0225	COMMIT-STANDARDS.md	229	workflows/commit.md	move-and-index	If no upstream is configured, compare against your intended base branch
+STD-0226	COMMIT-STANDARDS.md	230	workflows/commit.md	move-and-index	(for example: origin/main..HEAD)
+STD-0227	COMMIT-STANDARDS.md	233	workflows/commit.md	move-and-index	Mark intended cleanup as fixup during normal development
+STD-0228	COMMIT-STANDARDS.md	236	workflows/commit.md	move-and-index	Rewrite unpushed history and autosquash fixups
+STD-0229	COMMIT-STANDARDS.md	237	workflows/commit.md	move-and-index	If no upstream is configured, use your intended base branch
+STD-0230	COMMIT-STANDARDS.md	238	workflows/commit.md	move-and-index	(for example: origin/main)
+STD-0231	COMMIT-STANDARDS.md	244	workflows/commit.md	move-and-index	Commit Frequency
+STD-0232	COMMIT-STANDARDS.md	246	workflows/commit.md	move-and-index	Commit Often
+STD-0233	COMMIT-STANDARDS.md	262	workflows/commit.md	move-and-index	One Logical Change Per Commit
+STD-0234	COMMIT-STANDARDS.md	269	workflows/commit.md	move-and-index	Staging Best Practices
+STD-0235	COMMIT-STANDARDS.md	271	workflows/commit.md	move-and-index	Stage Specific Files
+STD-0236	COMMIT-STANDARDS.md	274	workflows/commit.md	move-and-index	BAD: Stages everything (may include unwanted files)
+STD-0237	COMMIT-STANDARDS.md	278	workflows/commit.md	move-and-index	GOOD: Stage specific files
+STD-0238	COMMIT-STANDARDS.md	283	workflows/commit.md	move-and-index	Review Before Committing
+STD-0239	COMMIT-STANDARDS.md	286	workflows/commit.md	move-and-index	Always check what you're about to commit
+STD-0240	COMMIT-STANDARDS.md	289	workflows/commit.md	move-and-index	Or use interactive staging
+STD-0241	COMMIT-STANDARDS.md	293	workflows/commit.md	move-and-index	Exclude Sensitive Files
+STD-0242	COMMIT-STANDARDS.md	301	workflows/commit.md	move-and-index	Commit Message Examples
+STD-0243	COMMIT-STANDARDS.md	303	workflows/commit.md	move-and-index	Feature
+STD-0244	COMMIT-STANDARDS.md	316	workflows/commit.md	move-and-index	Bug Fix
+STD-0245	COMMIT-STANDARDS.md	327	workflows/commit.md	move-and-index	Refactor
+STD-0246	COMMIT-STANDARDS.md	338	workflows/commit.md	move-and-index	Chore
+STD-0247	COMMIT-STANDARDS.md	349	workflows/commit.md	move-and-index	Handling Mistakes
+STD-0248	COMMIT-STANDARDS.md	351	workflows/commit.md	move-and-index	Amend Last Commit (Before Push)
+STD-0249	COMMIT-STANDARDS.md	354	workflows/commit.md	move-and-index	Fix the last commit message
+STD-0250	COMMIT-STANDARDS.md	357	workflows/commit.md	move-and-index	Add forgotten files to last commit
+STD-0251	COMMIT-STANDARDS.md	362	workflows/commit.md	move-and-index	After Pushing
+STD-0252	COMMIT-STANDARDS.md	367	workflows/commit.md	move-and-index	Create a new commit that fixes the issue
+STD-0253	COMMIT-STANDARDS.md	374	workflows/commit.md	move-and-index	Merge Commits vs. Squash
+STD-0254	COMMIT-STANDARDS.md	376	workflows/commit.md	move-and-index	When to Squash
+STD-0255	COMMIT-STANDARDS.md	382	workflows/commit.md	move-and-index	When to Keep History
+STD-0256	COMMIT-STANDARDS.md	388	workflows/commit.md	move-and-index	Rewriting Unpushed Merge Commits
+STD-0257	COMMIT-STANDARDS.md	397	workflows/commit.md	move-and-index	Merge-aware history rewrite (when merge commits are involved)
+STD-0258	COMMIT-STANDARDS.md	398	workflows/commit.md	move-and-index	If no upstream is configured, use your intended base branch
+STD-0259	COMMIT-STANDARDS.md	399	workflows/commit.md	move-and-index	(for example: origin/main)
+STD-0260	COMMIT-STANDARDS.md	402	workflows/commit.md	move-and-index	Verify topology before push
+STD-0261	COMMIT-STANDARDS.md	403	workflows/commit.md	move-and-index	If no upstream is configured, compare against your intended base branch
+STD-0262	COMMIT-STANDARDS.md	404	workflows/commit.md	move-and-index	(for example: origin/main..HEAD)
+STD-0263	CONCURRENCY-STANDARDS.md	1	topics/concurrency.md	move-and-index	Concurrency Standards
+STD-0264	CONCURRENCY-STANDARDS.md	5	topics/concurrency.md	move-and-index	Core Principles
+STD-0265	CONCURRENCY-STANDARDS.md	7	topics/concurrency.md	move-and-index	1. Prefer Message Passing Over Shared Mutable State
+STD-0266	CONCURRENCY-STANDARDS.md	23	topics/concurrency.md	move-and-index	2. Protect Shared Mutable State
+STD-0267	CONCURRENCY-STANDARDS.md	48	topics/concurrency.md	move-and-index	3. Keep Related State Under One Lock
+STD-0268	CONCURRENCY-STANDARDS.md	67	topics/concurrency.md	move-and-index	4. Keep Async Paths Non-Blocking
+STD-0269	CONCURRENCY-STANDARDS.md	98	topics/concurrency.md	move-and-index	C# Async/Await Rules
+STD-0270	CONCURRENCY-STANDARDS.md	100	topics/concurrency.md	move-and-index	Always Observe Task Errors
+STD-0271	CONCURRENCY-STANDARDS.md	121	topics/concurrency.md	move-and-index	Never Block on Async
+STD-0272	CONCURRENCY-STANDARDS.md	137	topics/concurrency.md	move-and-index	Pass CancellationToken Through Async Chains
+STD-0273	CONCURRENCY-STANDARDS.md	157	topics/concurrency.md	move-and-index	Use ConfigureAwait(false) in Library/Service Code
+STD-0274	CONCURRENCY-STANDARDS.md	172	topics/concurrency.md	move-and-index	Rust Concurrency Cross-Reference
+STD-0275	CONCURRENCY-STANDARDS.md	181	topics/concurrency.md	move-and-index	TypeScript Concurrency Rules
+STD-0276	CONCURRENCY-STANDARDS.md	183	topics/concurrency.md	move-and-index	Guard Against Stale Async Responses
+STD-0277	CONCURRENCY-STANDARDS.md	202	topics/concurrency.md	move-and-index	Godot Thread Safety
+STD-0278	CONCURRENCY-STANDARDS.md	204	topics/concurrency.md	move-and-index	Main Thread Rule
+STD-0279	CONCURRENCY-STANDARDS.md	210	topics/concurrency.md	move-and-index	`IsInstanceValid` Before Use
+STD-0280	CROSS-PLATFORM-STANDARDS.md	1	topics/cross-platform.md	move-and-index	Cross-Platform Standards
+STD-0281	CROSS-PLATFORM-STANDARDS.md	5	topics/cross-platform.md	move-and-index	Platform Targets
+STD-0282	CROSS-PLATFORM-STANDARDS.md	20	topics/cross-platform.md	move-and-index	Core Rules
+STD-0283	CROSS-PLATFORM-STANDARDS.md	22	topics/cross-platform.md	move-and-index	1. No Inline Platform Checks in Business Logic
+STD-0284	CROSS-PLATFORM-STANDARDS.md	42	topics/cross-platform.md	move-and-index	2. Strategy + Factory Pattern
+STD-0285	CROSS-PLATFORM-STANDARDS.md	73	topics/cross-platform.md	move-and-index	3. One Platform Per File
+STD-0286	CROSS-PLATFORM-STANDARDS.md	90	topics/cross-platform.md	move-and-index	4. Graceful Degradation for Best-Effort Platforms
+STD-0287	CROSS-PLATFORM-STANDARDS.md	110	topics/cross-platform.md	move-and-index	5. No `#if` Preprocessor Directives for Platform
+STD-0288	CROSS-PLATFORM-STANDARDS.md	128	topics/cross-platform.md	move-and-index	6. Language-Specific Platform Mechanisms
+STD-0289	CROSS-PLATFORM-STANDARDS.md	137	topics/cross-platform.md	move-and-index	File System Conventions
+STD-0290	CROSS-PLATFORM-STANDARDS.md	139	topics/cross-platform.md	move-and-index	Path Construction
+STD-0291	CROSS-PLATFORM-STANDARDS.md	161	topics/cross-platform.md	move-and-index	Path Comparison
+STD-0292	CROSS-PLATFORM-STANDARDS.md	174	topics/cross-platform.md	move-and-index	Canonical Filesystem Identity
+STD-0293	CROSS-PLATFORM-STANDARDS.md	199	topics/cross-platform.md	move-and-index	Spaces in Paths
+STD-0294	CROSS-PLATFORM-STANDARDS.md	209	topics/cross-platform.md	move-and-index	Native Library Rules
+STD-0295	CROSS-PLATFORM-STANDARDS.md	211	topics/cross-platform.md	move-and-index	Loading Strategy
+STD-0296	CROSS-PLATFORM-STANDARDS.md	216	topics/cross-platform.md	move-and-index	Library Naming
+STD-0297	CROSS-PLATFORM-STANDARDS.md	224	topics/cross-platform.md	move-and-index	Installation Documentation
+STD-0298	CROSS-PLATFORM-STANDARDS.md	231	topics/cross-platform.md	move-and-index	CI Matrix
+STD-0299	CROSS-PLATFORM-STANDARDS.md	254	topics/cross-platform.md	move-and-index	When to Build
+STD-0300	DEPENDENCY-STANDARDS.md	1	topics/dependencies.md	split-and-index	Dependency Standards
+STD-0301	DEPENDENCY-STANDARDS.md	5	topics/dependencies.md	split-and-index	Core Principles
+STD-0302	DEPENDENCY-STANDARDS.md	7	topics/dependencies.md	split-and-index	1. Every Dependency Must Justify Its Cost
+STD-0303	DEPENDENCY-STANDARDS.md	14	topics/dependencies.md	split-and-index	2. Dependencies Flow Downward
+STD-0304	DEPENDENCY-STANDARDS.md	29	topics/dependencies.md	split-and-index	3. Prefer the Standard Library
+STD-0305	DEPENDENCY-STANDARDS.md	36	topics/dependencies.md	split-and-index	4. One Purpose per Dependency
+STD-0306	DEPENDENCY-STANDARDS.md	44	topics/dependencies.md	split-and-index	Before Adding a Dependency
+STD-0307	DEPENDENCY-STANDARDS.md	46	topics/dependencies.md	split-and-index	Evaluation Questions
+STD-0308	DEPENDENCY-STANDARDS.md	61	topics/dependencies.md	split-and-index	Build-or-Depend Decision Matrix
+STD-0309	DEPENDENCY-STANDARDS.md	71	topics/dependencies.md	split-and-index	Transitive Dependency Thresholds
+STD-0310	DEPENDENCY-STANDARDS.md	87	topics/dependencies.md	split-and-index	View dependency tree of a package before installing
+STD-0311	DEPENDENCY-STANDARDS.md	90	topics/dependencies.md	split-and-index	Check bundle size impact
+STD-0312	DEPENDENCY-STANDARDS.md	97	topics/dependencies.md	split-and-index	List all transitive dependencies
+STD-0313	DEPENDENCY-STANDARDS.md	103	topics/dependencies.md	split-and-index	Searching and Comparing Dependencies
+STD-0314	DEPENDENCY-STANDARDS.md	105	topics/dependencies.md	split-and-index	Where to Search
+STD-0315	DEPENDENCY-STANDARDS.md	113	topics/dependencies.md	split-and-index	Comparison Criteria
+STD-0316	DEPENDENCY-STANDARDS.md	125	topics/dependencies.md	split-and-index	Red Flags
+STD-0317	DEPENDENCY-STANDARDS.md	140	topics/dependencies.md	split-and-index	Version Management
+STD-0318	DEPENDENCY-STANDARDS.md	142	topics/dependencies.md	split-and-index	Always Use Lockfiles
+STD-0319	DEPENDENCY-STANDARDS.md	154	topics/dependencies.md	split-and-index	Version Pinning Strategy
+STD-0320	DEPENDENCY-STANDARDS.md	163	topics/dependencies.md	split-and-index	Centralized Version Management
+STD-0321	DEPENDENCY-STANDARDS.md	187	topics/dependencies.md	split-and-index	Dependency Ownership Must Match Execution Boundaries
+STD-0322	DEPENDENCY-STANDARDS.md	248	topics/dependencies.md	split-and-index	TypeScript/Node Workspaces: Tooling Ownership and Resolution
+STD-0323	DEPENDENCY-STANDARDS.md	361	topics/dependencies.md	split-and-index	Checking Compatibility Before Upgrading
+STD-0324	DEPENDENCY-STANDARDS.md	376	topics/dependencies.md	split-and-index	Minimizing Dependency Footprint
+STD-0325	DEPENDENCY-STANDARDS.md	378	topics/dependencies.md	split-and-index	Enable Only Required Features
+STD-0326	DEPENDENCY-STANDARDS.md	411	topics/dependencies.md	split-and-index	Feature-Gate Heavy Optional Functionality
+STD-0327	DEPENDENCY-STANDARDS.md	432	topics/dependencies.md	split-and-index	Keep Library Packages Lean
+STD-0328	DEPENDENCY-STANDARDS.md	442	topics/dependencies.md	split-and-index	Transitive Dependency Inspection
+STD-0329	DEPENDENCY-STANDARDS.md	457	topics/dependencies.md	split-and-index	Auditing Dependencies
+STD-0330	DEPENDENCY-STANDARDS.md	459	topics/dependencies.md	split-and-index	Security Auditing
+STD-0331	DEPENDENCY-STANDARDS.md	469	topics/dependencies.md	split-and-index	Detecting Unused Dependencies
+STD-0332	DEPENDENCY-STANDARDS.md	485	topics/dependencies.md	split-and-index	Manual Usage Verification
+STD-0333	DEPENDENCY-STANDARDS.md	497	topics/dependencies.md	split-and-index	Detecting Duplicate Versions
+STD-0334	DEPENDENCY-STANDARDS.md	514	topics/dependencies.md	split-and-index	Identifying Heavy Dependencies
+STD-0335	DEPENDENCY-STANDARDS.md	525	topics/dependencies.md	split-and-index	Bundle size analysis
+STD-0336	DEPENDENCY-STANDARDS.md	528	topics/dependencies.md	split-and-index	Individual package size
+STD-0337	DEPENDENCY-STANDARDS.md	536	topics/dependencies.md	split-and-index	Periodic Manual Review
+STD-0338	DEPENDENCY-STANDARDS.md	549	topics/dependencies.md	split-and-index	CI Integration
+STD-0339	DEPENDENCY-STANDARDS.md	551	topics/dependencies.md	split-and-index	CI Tool Bootstrap Ownership
+STD-0340	DEPENDENCY-STANDARDS.md	571	topics/dependencies.md	split-and-index	Recommended CI Checks
+STD-0341	DEPENDENCY-STANDARDS.md	581	topics/dependencies.md	split-and-index	Example CI Workflow
+STD-0342	DEPENDENCY-STANDARDS.md	584	topics/dependencies.md	split-and-index	.github/workflows/dependency-checks.yml
+STD-0343	DEPENDENCY-STANDARDS.md	610	topics/dependencies.md	split-and-index	Blocking vs. Warning
+STD-0344	DEPENDENCY-STANDARDS.md	622	topics/dependencies.md	split-and-index	Common Mistakes
+STD-0345	DEPENDENCY-STANDARDS.md	648	topics/dependencies.md	split-and-index	Dependency Review Checklist
+STD-0346	DEPENDENCY-STANDARDS.md	650	topics/dependencies.md	split-and-index	Adding a Dependency
+STD-0347	DEPENDENCY-STANDARDS.md	663	topics/dependencies.md	split-and-index	Removing a Dependency
+STD-0348	DEPENDENCY-STANDARDS.md	671	topics/dependencies.md	split-and-index	Periodic Review
+STD-0349	DOCUMENTATION-STANDARDS.md	1	workflows/documentation.md	split-and-index	Documentation Standards
+STD-0350	DOCUMENTATION-STANDARDS.md	5	workflows/documentation.md	split-and-index	Directory Documentation
+STD-0351	DOCUMENTATION-STANDARDS.md	7	workflows/documentation.md	split-and-index	Requirement
+STD-0352	DOCUMENTATION-STANDARDS.md	15	workflows/documentation.md	split-and-index	Why
+STD-0353	DOCUMENTATION-STANDARDS.md	21	workflows/documentation.md	split-and-index	Documentation Artifact Layout
+STD-0354	DOCUMENTATION-STANDARDS.md	57	workflows/documentation.md	split-and-index	README Template
+STD-0355	DOCUMENTATION-STANDARDS.md	64	workflows/documentation.md	split-and-index	[Directory Name]
+STD-0356	DOCUMENTATION-STANDARDS.md	66	workflows/documentation.md	split-and-index	Purpose
+STD-0357	DOCUMENTATION-STANDARDS.md	69	workflows/documentation.md	split-and-index	Contents
+STD-0358	DOCUMENTATION-STANDARDS.md	75	workflows/documentation.md	split-and-index	Problem
+STD-0359	DOCUMENTATION-STANDARDS.md	78	workflows/documentation.md	split-and-index	Constraints
+STD-0360	DOCUMENTATION-STANDARDS.md	81	workflows/documentation.md	split-and-index	Decision
+STD-0361	DOCUMENTATION-STANDARDS.md	84	workflows/documentation.md	split-and-index	Alternatives Rejected
+STD-0362	DOCUMENTATION-STANDARDS.md	88	workflows/documentation.md	split-and-index	Invariants
+STD-0363	DOCUMENTATION-STANDARDS.md	92	workflows/documentation.md	split-and-index	Revisit Triggers
+STD-0364	DOCUMENTATION-STANDARDS.md	95	workflows/documentation.md	split-and-index	Dependencies
+STD-0365	DOCUMENTATION-STANDARDS.md	99	workflows/documentation.md	split-and-index	Related ADRs
+STD-0366	DOCUMENTATION-STANDARDS.md	106	workflows/documentation.md	split-and-index	Usage Examples
+STD-0367	DOCUMENTATION-STANDARDS.md	109	workflows/documentation.md	split-and-index	API Consumer Contract
+STD-0368	DOCUMENTATION-STANDARDS.md	115	workflows/documentation.md	split-and-index	Structured Producer Contract
+STD-0369	DOCUMENTATION-STANDARDS.md	123	workflows/documentation.md	split-and-index	Required Section Completion Rule
+STD-0370	DOCUMENTATION-STANDARDS.md	138	workflows/documentation.md	split-and-index	Alternatives Rejected
+STD-0371	DOCUMENTATION-STANDARDS.md	144	workflows/documentation.md	split-and-index	Banned Placeholder Language
+STD-0372	DOCUMENTATION-STANDARDS.md	159	workflows/documentation.md	split-and-index	Host-Facing Module Contract Requirement
+STD-0373	DOCUMENTATION-STANDARDS.md	171	workflows/documentation.md	split-and-index	Structured Producer Contract Requirement
+STD-0374	DOCUMENTATION-STANDARDS.md	184	workflows/documentation.md	split-and-index	Minimum Meaningful Content by Section
+STD-0375	DOCUMENTATION-STANDARDS.md	201	workflows/documentation.md	split-and-index	Keeping READMEs Current
+STD-0376	DOCUMENTATION-STANDARDS.md	213	workflows/documentation.md	split-and-index	Code Comments
+STD-0377	DOCUMENTATION-STANDARDS.md	215	workflows/documentation.md	split-and-index	When to Comment
+STD-0378	DOCUMENTATION-STANDARDS.md	229	workflows/documentation.md	split-and-index	When NOT to Comment
+STD-0379	DOCUMENTATION-STANDARDS.md	244	workflows/documentation.md	split-and-index	TODO Format
+STD-0380	DOCUMENTATION-STANDARDS.md	258	workflows/documentation.md	split-and-index	Comment Style
+STD-0381	DOCUMENTATION-STANDARDS.md	274	workflows/documentation.md	split-and-index	Python - Docstring
+STD-0382	DOCUMENTATION-STANDARDS.md	290	workflows/documentation.md	split-and-index	Markdown Formatting
+STD-0383	DOCUMENTATION-STANDARDS.md	292	workflows/documentation.md	split-and-index	Fenced Code Blocks
+STD-0384	DOCUMENTATION-STANDARDS.md	305	workflows/documentation.md	split-and-index	Tables
+STD-0385	DOCUMENTATION-STANDARDS.md	328	workflows/documentation.md	split-and-index	API Documentation
+STD-0386	DOCUMENTATION-STANDARDS.md	330	workflows/documentation.md	split-and-index	Public Interfaces
+STD-0387	DOCUMENTATION-STANDARDS.md	356	workflows/documentation.md	split-and-index	What to Document
+STD-0388	DOCUMENTATION-STANDARDS.md	368	workflows/documentation.md	split-and-index	Algorithm Documentation
+STD-0389	DOCUMENTATION-STANDARDS.md	372	workflows/documentation.md	split-and-index	Required Elements
+STD-0390	DOCUMENTATION-STANDARDS.md	375	workflows/documentation.md	split-and-index	Topological Sort Algorithm
+STD-0391	DOCUMENTATION-STANDARDS.md	380	workflows/documentation.md	split-and-index	Reference
+STD-0392	DOCUMENTATION-STANDARDS.md	383	workflows/documentation.md	split-and-index	Preconditions
+STD-0393	DOCUMENTATION-STANDARDS.md	387	workflows/documentation.md	split-and-index	Postconditions
+STD-0394	DOCUMENTATION-STANDARDS.md	391	workflows/documentation.md	split-and-index	Complexity
+STD-0395	DOCUMENTATION-STANDARDS.md	395	workflows/documentation.md	split-and-index	Error Cases
+STD-0396	DOCUMENTATION-STANDARDS.md	399	workflows/documentation.md	split-and-index	When to Document Algorithms
+STD-0397	DOCUMENTATION-STANDARDS.md	409	workflows/documentation.md	split-and-index	Minimal Documentation
+STD-0398	DOCUMENTATION-STANDARDS.md	416	workflows/documentation.md	split-and-index	Complexity
+STD-0399	DOCUMENTATION-STANDARDS.md	420	workflows/documentation.md	split-and-index	ASCII Diagrams
+STD-0400	DOCUMENTATION-STANDARDS.md	437	workflows/documentation.md	split-and-index	Architecture Decision Records (ADRs)
+STD-0401	DOCUMENTATION-STANDARDS.md	439	workflows/documentation.md	split-and-index	When to Write an ADR
+STD-0402	DOCUMENTATION-STANDARDS.md	446	workflows/documentation.md	split-and-index	ADR Format
+STD-0403	DOCUMENTATION-STANDARDS.md	449	workflows/documentation.md	split-and-index	ADR-001: [Title]
+STD-0404	DOCUMENTATION-STANDARDS.md	451	workflows/documentation.md	split-and-index	Status
+STD-0405	DOCUMENTATION-STANDARDS.md	454	workflows/documentation.md	split-and-index	Context
+STD-0406	DOCUMENTATION-STANDARDS.md	457	workflows/documentation.md	split-and-index	Decision
+STD-0407	DOCUMENTATION-STANDARDS.md	460	workflows/documentation.md	split-and-index	Consequences
+STD-0408	DOCUMENTATION-STANDARDS.md	463	workflows/documentation.md	split-and-index	Positive
+STD-0409	DOCUMENTATION-STANDARDS.md	467	workflows/documentation.md	split-and-index	Negative
+STD-0410	DOCUMENTATION-STANDARDS.md	471	workflows/documentation.md	split-and-index	Neutral
+STD-0411	DOCUMENTATION-STANDARDS.md	475	workflows/documentation.md	split-and-index	ADR Example
+STD-0412	DOCUMENTATION-STANDARDS.md	478	workflows/documentation.md	split-and-index	ADR-003: Use Event Sourcing for Order History
+STD-0413	DOCUMENTATION-STANDARDS.md	480	workflows/documentation.md	split-and-index	Status
+STD-0414	DOCUMENTATION-STANDARDS.md	483	workflows/documentation.md	split-and-index	Context
+STD-0415	DOCUMENTATION-STANDARDS.md	487	workflows/documentation.md	split-and-index	Decision
+STD-0416	DOCUMENTATION-STANDARDS.md	492	workflows/documentation.md	split-and-index	Consequences
+STD-0417	DOCUMENTATION-STANDARDS.md	494	workflows/documentation.md	split-and-index	Positive
+STD-0418	DOCUMENTATION-STANDARDS.md	499	workflows/documentation.md	split-and-index	Negative
+STD-0419	DOCUMENTATION-STANDARDS.md	504	workflows/documentation.md	split-and-index	Neutral
+STD-0420	DOCUMENTATION-STANDARDS.md	508	workflows/documentation.md	split-and-index	Where to Store ADRs
+STD-0421	DOCUMENTATION-STANDARDS.md	521	workflows/documentation.md	split-and-index	Changelog
+STD-0422	DOCUMENTATION-STANDARDS.md	526	workflows/documentation.md	split-and-index	When to Maintain
+STD-0423	DOCUMENTATION-STANDARDS.md	530	workflows/documentation.md	split-and-index	Format (Keep a Changelog)
+STD-0424	DOCUMENTATION-STANDARDS.md	533	workflows/documentation.md	split-and-index	Changelog
+STD-0425	DOCUMENTATION-STANDARDS.md	537	workflows/documentation.md	split-and-index	[Unreleased]
+STD-0426	DOCUMENTATION-STANDARDS.md	539	workflows/documentation.md	split-and-index	Added
+STD-0427	DOCUMENTATION-STANDARDS.md	542	workflows/documentation.md	split-and-index	Changed
+STD-0428	DOCUMENTATION-STANDARDS.md	545	workflows/documentation.md	split-and-index	Deprecated
+STD-0429	DOCUMENTATION-STANDARDS.md	548	workflows/documentation.md	split-and-index	Removed
+STD-0430	DOCUMENTATION-STANDARDS.md	551	workflows/documentation.md	split-and-index	Fixed
+STD-0431	DOCUMENTATION-STANDARDS.md	554	workflows/documentation.md	split-and-index	Security
+STD-0432	DOCUMENTATION-STANDARDS.md	557	workflows/documentation.md	split-and-index	[1.2.0] - 2024-01-15
+STD-0433	DOCUMENTATION-STANDARDS.md	559	workflows/documentation.md	split-and-index	Added
+STD-0434	DOCUMENTATION-STANDARDS.md	562	workflows/documentation.md	split-and-index	[1.1.0] - 2024-01-01
+STD-0435	DOCUMENTATION-STANDARDS.md	564	workflows/documentation.md	split-and-index	Fixed
+STD-0436	DOCUMENTATION-STANDARDS.md	568	workflows/documentation.md	split-and-index	Categories
+STD-0437	DOCUMENTATION-STANDARDS.md	581	workflows/documentation.md	split-and-index	README.md (Project Root)
+STD-0438	DOCUMENTATION-STANDARDS.md	583	workflows/documentation.md	split-and-index	Required Sections
+STD-0439	DOCUMENTATION-STANDARDS.md	586	workflows/documentation.md	split-and-index	Project Name
+STD-0440	DOCUMENTATION-STANDARDS.md	590	workflows/documentation.md	split-and-index	Quick Start
+STD-0441	DOCUMENTATION-STANDARDS.md	597	workflows/documentation.md	split-and-index	Installation
+STD-0442	DOCUMENTATION-STANDARDS.md	601	workflows/documentation.md	split-and-index	Usage
+STD-0443	DOCUMENTATION-STANDARDS.md	605	workflows/documentation.md	split-and-index	Development
+STD-0444	DOCUMENTATION-STANDARDS.md	612	workflows/documentation.md	split-and-index	Project Structure
+STD-0445	DOCUMENTATION-STANDARDS.md	616	workflows/documentation.md	split-and-index	Contributing
+STD-0446	DOCUMENTATION-STANDARDS.md	620	workflows/documentation.md	split-and-index	License
+STD-0447	DOCUMENTATION-STANDARDS.md	625	workflows/documentation.md	split-and-index	Keep It Current
+STD-0448	DOCUMENTATION-STANDARDS.md	634	workflows/documentation.md	split-and-index	Documentation Review Checklist
+STD-0449	FRONTEND-STANDARDS.md	1	profiles/applications/frontend.md	move-and-index	Frontend Standards
+STD-0450	FRONTEND-STANDARDS.md	5	profiles/applications/frontend.md	move-and-index	Scope
+STD-0451	FRONTEND-STANDARDS.md	16	profiles/applications/frontend.md	move-and-index	Rendering and DOM Updates
+STD-0452	FRONTEND-STANDARDS.md	18	profiles/applications/frontend.md	move-and-index	Prefer Declarative Rendering
+STD-0453	FRONTEND-STANDARDS.md	43	profiles/applications/frontend.md	move-and-index	UI State Synchronization
+STD-0454	FRONTEND-STANDARDS.md	69	profiles/applications/frontend.md	move-and-index	Hook/Composable Timer Management
+STD-0455	FRONTEND-STANDARDS.md	97	profiles/applications/frontend.md	move-and-index	Frontend Tooling Notes
+STD-0456	FRONTEND-STANDARDS.md	99	profiles/applications/frontend.md	move-and-index	React 19+ ESLint Configuration
+STD-0457	FRONTEND-STANDARDS.md	114	profiles/applications/frontend.md	move-and-index	Frontend Testing
+STD-0458	FRONTEND-STANDARDS.md	116	profiles/applications/frontend.md	move-and-index	Selector Strategy
+STD-0459	FRONTEND-STANDARDS.md	147	profiles/applications/frontend.md	move-and-index	Accessibility and Tests
+STD-0460	FRONTEND-STANDARDS.md	157	profiles/applications/frontend.md	move-and-index	`userEvent` vs `fireEvent`
+STD-0461	FRONTEND-STANDARDS.md	190	profiles/applications/frontend.md	move-and-index	DOM Geometry in Tests
+STD-0462	FRONTEND-STANDARDS.md	198	profiles/applications/frontend.md	move-and-index	Polling Cleanup Tests
+STD-0463	FRONTEND-STANDARDS.md	215	profiles/applications/frontend.md	move-and-index	Embedded Interactive Control Checks
+STD-0464	FRONTEND-STANDARDS.md	230	profiles/applications/frontend.md	move-and-index	Accessibility
+STD-0465	INTEROP-STANDARDS.md	1	profiles/boundaries/interop.md	move-and-index	Interop Standards
+STD-0466	INTEROP-STANDARDS.md	5	profiles/boundaries/interop.md	move-and-index	Boundaries
+STD-0467	INTEROP-STANDARDS.md	21	profiles/boundaries/interop.md	move-and-index	Core Principles
+STD-0468	INTEROP-STANDARDS.md	23	profiles/boundaries/interop.md	move-and-index	1. Validate at Every Boundary Crossing
+STD-0469	INTEROP-STANDARDS.md	40	profiles/boundaries/interop.md	move-and-index	2. Copy Data Out of Foreign Buffers Immediately
+STD-0470	INTEROP-STANDARDS.md	48	profiles/boundaries/interop.md	move-and-index	3. Symmetric Init/Shutdown
+STD-0471	INTEROP-STANDARDS.md	64	profiles/boundaries/interop.md	move-and-index	4. Document Thread Requirements
+STD-0472	INTEROP-STANDARDS.md	78	profiles/boundaries/interop.md	move-and-index	5. Isolate Unsafe Code to Thin Wrappers
+STD-0473	INTEROP-STANDARDS.md	85	profiles/boundaries/interop.md	move-and-index	6. Event Subscription Lifecycle
+STD-0474	INTEROP-STANDARDS.md	109	profiles/boundaries/interop.md	move-and-index	Cross-Language Contract Maintenance
+STD-0475	INTEROP-STANDARDS.md	114	profiles/boundaries/interop.md	move-and-index	Rules
+STD-0476	INTEROP-STANDARDS.md	121	profiles/boundaries/interop.md	move-and-index	Validate Received Messages
+STD-0477	INTEROP-STANDARDS.md	136	profiles/boundaries/interop.md	move-and-index	Serialization Format Alignment
+STD-0478	INTEROP-STANDARDS.md	142	profiles/boundaries/interop.md	move-and-index	Tagged Enum Alignment
+STD-0479	INTEROP-STANDARDS.md	149	profiles/boundaries/interop.md	move-and-index	Enum Variant Alignment
+STD-0480	INTEROP-STANDARDS.md	155	profiles/boundaries/interop.md	move-and-index	Struct Field Alignment
+STD-0481	INTEROP-STANDARDS.md	160	profiles/boundaries/interop.md	move-and-index	Rules
+STD-0482	INTEROP-STANDARDS.md	172	profiles/boundaries/interop.md	move-and-index	When These Rules Apply
+STD-0483	LANGUAGE-BINDINGS-STANDARDS.md	1	profiles/boundaries/language-bindings.md	move-and-index	Language Bindings Standards
+STD-0484	LANGUAGE-BINDINGS-STANDARDS.md	16	profiles/boundaries/language-bindings.md	move-and-index	Core Principles
+STD-0485	LANGUAGE-BINDINGS-STANDARDS.md	28	profiles/boundaries/language-bindings.md	move-and-index	Layer Model
+STD-0486	LANGUAGE-BINDINGS-STANDARDS.md	54	profiles/boundaries/language-bindings.md	move-and-index	Language-Specific Extensions
+STD-0487	LAUNCHER-STANDARDS.md	1	profiles/applications/launcher.md	split-and-index	Launcher Standards
+STD-0488	LAUNCHER-STANDARDS.md	5	profiles/applications/launcher.md	split-and-index	Scope
+STD-0489	LAUNCHER-STANDARDS.md	24	profiles/applications/launcher.md	split-and-index	Core CLI Contract
+STD-0490	LAUNCHER-STANDARDS.md	26	profiles/applications/launcher.md	split-and-index	Required Flags
+STD-0491	LAUNCHER-STANDARDS.md	37	profiles/applications/launcher.md	split-and-index	Parsing Rules
+STD-0492	LAUNCHER-STANDARDS.md	49	profiles/applications/launcher.md	split-and-index	Canonical Usage
+STD-0493	LAUNCHER-STANDARDS.md	61	profiles/applications/launcher.md	split-and-index	Recommended workflow extensions when applicable
+STD-0494	LAUNCHER-STANDARDS.md	69	profiles/applications/launcher.md	split-and-index	Workflow Extensions (Required When Applicable)
+STD-0495	LAUNCHER-STANDARDS.md	93	profiles/applications/launcher.md	split-and-index	GUI CI Smoke Requirements
+STD-0496	LAUNCHER-STANDARDS.md	128	profiles/applications/launcher.md	split-and-index	Dependency Installation Standards (`--install`)
+STD-0497	LAUNCHER-STANDARDS.md	130	profiles/applications/launcher.md	split-and-index	Per-Dependency Idempotent Behavior
+STD-0498	LAUNCHER-STANDARDS.md	143	profiles/applications/launcher.md	split-and-index	Dependency Model
+STD-0499	LAUNCHER-STANDARDS.md	152	profiles/applications/launcher.md	split-and-index	Output Requirements
+STD-0500	LAUNCHER-STANDARDS.md	163	profiles/applications/launcher.md	split-and-index	Build Standards (`--build`)
+STD-0501	LAUNCHER-STANDARDS.md	178	profiles/applications/launcher.md	split-and-index	Runtime Standards (`--run`, `--run-release`)
+STD-0502	LAUNCHER-STANDARDS.md	180	profiles/applications/launcher.md	split-and-index	`--run` (Development Runtime)
+STD-0503	LAUNCHER-STANDARDS.md	192	profiles/applications/launcher.md	split-and-index	`--run-release` (Release Runtime)
+STD-0504	LAUNCHER-STANDARDS.md	211	profiles/applications/launcher.md	split-and-index	Managed State Standards
+STD-0505	LAUNCHER-STANDARDS.md	249	profiles/applications/launcher.md	split-and-index	Help Standards (`--help`)
+STD-0506	LAUNCHER-STANDARDS.md	266	profiles/applications/launcher.md	split-and-index	Exit Codes
+STD-0507	LAUNCHER-STANDARDS.md	279	profiles/applications/launcher.md	split-and-index	Bash Implementation Rules
+STD-0508	LAUNCHER-STANDARDS.md	293	profiles/applications/launcher.md	split-and-index	Desktop Entry and Script Generation Safety
+STD-0509	LAUNCHER-STANDARDS.md	307	profiles/applications/launcher.md	split-and-index	BAD: Raw interpolation into command string
+STD-0510	LAUNCHER-STANDARDS.md	310	profiles/applications/launcher.md	split-and-index	GOOD: Validate first, then escape for destination format using shared helpers
+STD-0511	LAUNCHER-STANDARDS.md	318	profiles/applications/launcher.md	split-and-index	Reference Template
+STD-0512	LAUNCHER-STANDARDS.md	548	profiles/applications/launcher.md	split-and-index	Compliance Checklist
+STD-0513	PLAN-STANDARDS.md	1	workflows/planning.md	replace-and-index	Plan Standards
+STD-0514	PLAN-STANDARDS.md	6	workflows/planning.md	replace-and-index	Purpose
+STD-0515	PLAN-STANDARDS.md	11	workflows/planning.md	replace-and-index	Scope
+STD-0516	PLAN-STANDARDS.md	31	workflows/planning.md	replace-and-index	When a Plan Is Required
+STD-0517	PLAN-STANDARDS.md	40	workflows/planning.md	replace-and-index	Plan Inputs
+STD-0518	PLAN-STANDARDS.md	58	workflows/planning.md	replace-and-index	Clarifying Questions
+STD-0519	PLAN-STANDARDS.md	68	workflows/planning.md	replace-and-index	Required Plan Structure
+STD-0520	PLAN-STANDARDS.md	105	workflows/planning.md	replace-and-index	Large Refactor Plans
+STD-0521	PLAN-STANDARDS.md	139	workflows/planning.md	replace-and-index	Recommendations
+STD-0522	PLAN-STANDARDS.md	148	workflows/planning.md	replace-and-index	Execution Order
+STD-0523	PLAN-STANDARDS.md	161	workflows/planning.md	replace-and-index	Worktree Hygiene
+STD-0524	PLAN-STANDARDS.md	181	workflows/planning.md	replace-and-index	Commit Timing During Plan Execution
+STD-0525	PLAN-STANDARDS.md	197	workflows/planning.md	replace-and-index	Concurrent Worker Execution
+STD-0526	PLAN-STANDARDS.md	256	workflows/planning.md	replace-and-index	Re-Plan Triggers
+STD-0527	PLAN-STANDARDS.md	271	workflows/planning.md	replace-and-index	Unexpected Issues During Execution
+STD-0528	PLAN-STANDARDS.md	293	workflows/planning.md	replace-and-index	Plan Updates During Execution
+STD-0529	PLAN-STANDARDS.md	309	workflows/planning.md	replace-and-index	Completion Summary
+STD-0530	PLAN-STANDARDS.md	318	workflows/planning.md	replace-and-index	Brevity Default
+STD-0531	RELEASE-STANDARDS.md	1	workflows/release.md	split-and-index	Release Standards
+STD-0532	RELEASE-STANDARDS.md	5	workflows/release.md	split-and-index	Semantic Versioning
+STD-0533	RELEASE-STANDARDS.md	9	workflows/release.md	split-and-index	Version Bump Decision Table
+STD-0534	RELEASE-STANDARDS.md	18	workflows/release.md	split-and-index	Pre-1.0 Rules
+STD-0535	RELEASE-STANDARDS.md	32	workflows/release.md	split-and-index	Deprecation Policy
+STD-0536	RELEASE-STANDARDS.md	51	workflows/release.md	split-and-index	Migration Guides
+STD-0537	RELEASE-STANDARDS.md	68	workflows/release.md	split-and-index	Workspace Version Alignment
+STD-0538	RELEASE-STANDARDS.md	78	workflows/release.md	split-and-index	Changelog Management
+STD-0539	RELEASE-STANDARDS.md	84	workflows/release.md	split-and-index	Maintenance Workflow
+STD-0540	RELEASE-STANDARDS.md	90	workflows/release.md	split-and-index	Conventional Commits to Changelog Categories
+STD-0541	RELEASE-STANDARDS.md	110	workflows/release.md	split-and-index	Automation
+STD-0542	RELEASE-STANDARDS.md	116	workflows/release.md	split-and-index	cliff.toml (minimal)
+STD-0543	RELEASE-STANDARDS.md	153	workflows/release.md	split-and-index	Release Artifacts
+STD-0544	RELEASE-STANDARDS.md	155	workflows/release.md	split-and-index	What to Ship
+STD-0545	RELEASE-STANDARDS.md	166	workflows/release.md	split-and-index	Naming Convention
+STD-0546	RELEASE-STANDARDS.md	199	workflows/release.md	split-and-index	Checksum File Format
+STD-0547	RELEASE-STANDARDS.md	216	workflows/release.md	split-and-index	Software Bill of Materials
+STD-0548	RELEASE-STANDARDS.md	235	workflows/release.md	split-and-index	Reproducible Builds
+STD-0549	RELEASE-STANDARDS.md	240	workflows/release.md	split-and-index	Toolchain Pinning
+STD-0550	RELEASE-STANDARDS.md	252	workflows/release.md	split-and-index	Lockfile Policy
+STD-0551	RELEASE-STANDARDS.md	265	workflows/release.md	split-and-index	Build Hygiene
+STD-0552	RELEASE-STANDARDS.md	275	workflows/release.md	split-and-index	CI/CD Release Pipeline
+STD-0553	RELEASE-STANDARDS.md	277	workflows/release.md	split-and-index	Trigger
+STD-0554	RELEASE-STANDARDS.md	287	workflows/release.md	split-and-index	.github/workflows/release.yml
+STD-0555	RELEASE-STANDARDS.md	296	workflows/release.md	split-and-index	.github/workflows/ci.yml
+STD-0556	RELEASE-STANDARDS.md	315	workflows/release.md	split-and-index	Build Matrix
+STD-0557	RELEASE-STANDARDS.md	322	workflows/release.md	split-and-index	Target values are ecosystem-specific (see Naming Convention above)
+STD-0558	RELEASE-STANDARDS.md	338	workflows/release.md	split-and-index	Artifact Upload
+STD-0559	RELEASE-STANDARDS.md	355	workflows/release.md	split-and-index	Release Job
+STD-0560	RELEASE-STANDARDS.md	394	workflows/release.md	split-and-index	Code Signing
+STD-0561	RELEASE-STANDARDS.md	405	workflows/release.md	split-and-index	Hotfix and LTS Workflow
+STD-0562	RELEASE-STANDARDS.md	407	workflows/release.md	split-and-index	Standard Releases
+STD-0563	RELEASE-STANDARDS.md	412	workflows/release.md	split-and-index	Hotfix Workflow
+STD-0564	RELEASE-STANDARDS.md	425	workflows/release.md	split-and-index	LTS Releases
+STD-0565	RELEASE-STANDARDS.md	438	workflows/release.md	split-and-index	Feature Flags and Release Channels
+STD-0566	RELEASE-STANDARDS.md	455	workflows/release.md	split-and-index	GitHub Releases
+STD-0567	RELEASE-STANDARDS.md	457	workflows/release.md	split-and-index	Draft-Then-Publish
+STD-0568	RELEASE-STANDARDS.md	466	workflows/release.md	split-and-index	Pre-Release Flag
+STD-0569	RELEASE-STANDARDS.md	472	workflows/release.md	split-and-index	Release Notes
+STD-0570	RELEASE-STANDARDS.md	481	workflows/release.md	split-and-index	Asset Organization
+STD-0571	RELEASE-STANDARDS.md	487	workflows/release.md	split-and-index	Downloads
+STD-0572	RELEASE-STANDARDS.md	489	workflows/release.md	split-and-index	Binaries
+STD-0573	RELEASE-STANDARDS.md	494	workflows/release.md	split-and-index	Shared Libraries
+STD-0574	RELEASE-STANDARDS.md	498	workflows/release.md	split-and-index	Checksums
+STD-0575	RELEASE-STANDARDS.md	504	workflows/release.md	split-and-index	Language-Specific Guidance
+STD-0576	RELEASE-STANDARDS.md	512	workflows/release.md	split-and-index	Release Checklist
+STD-0577	RELEASE-STANDARDS.md	539	workflows/release.md	split-and-index	Rollback Procedure
+STD-0578	RELEASE-STANDARDS.md	541	workflows/release.md	split-and-index	When to Rollback
+STD-0579	RELEASE-STANDARDS.md	547	workflows/release.md	split-and-index	Procedure
+STD-0580	RELEASE-STANDARDS.md	558	workflows/release.md	split-and-index	Authority
+STD-0581	RELEASE-STANDARDS.md	563	workflows/release.md	split-and-index	Post-Incident
+STD-0582	SECURITY-STANDARDS.md	1	topics/security.md	move-and-index	Security Standards
+STD-0583	SECURITY-STANDARDS.md	5	topics/security.md	move-and-index	Core Principle: Validate Once, at the Boundary
+STD-0584	SECURITY-STANDARDS.md	17	topics/security.md	move-and-index	Path Validation
+STD-0585	SECURITY-STANDARDS.md	19	topics/security.md	move-and-index	The Problem
+STD-0586	SECURITY-STANDARDS.md	24	topics/security.md	move-and-index	Centralized Path Validator
+STD-0587	SECURITY-STANDARDS.md	81	topics/security.md	move-and-index	Usage in Handlers
+STD-0588	SECURITY-STANDARDS.md	100	topics/security.md	move-and-index	Input Validation
+STD-0589	SECURITY-STANDARDS.md	102	topics/security.md	move-and-index	Centralized Input Validator
+STD-0590	SECURITY-STANDARDS.md	143	topics/security.md	move-and-index	Validation Rules
+STD-0591	SECURITY-STANDARDS.md	153	topics/security.md	move-and-index	No Duplicate Validation Logic
+STD-0592	SECURITY-STANDARDS.md	171	topics/security.md	move-and-index	Message/API Payload Validation
+STD-0593	SECURITY-STANDARDS.md	173	topics/security.md	move-and-index	TypeScript — Validate Before Dispatch
+STD-0594	SECURITY-STANDARDS.md	198	topics/security.md	move-and-index	C# — Validate Deserialized Payloads
+STD-0595	SECURITY-STANDARDS.md	216	topics/security.md	move-and-index	Electron IPC Boundaries (`ipcMain.handle`)
+STD-0596	SECURITY-STANDARDS.md	256	topics/security.md	move-and-index	Network Transport Safety
+STD-0597	SECURITY-STANDARDS.md	264	topics/security.md	move-and-index	Bind Address Rules
+STD-0598	SECURITY-STANDARDS.md	279	topics/security.md	move-and-index	Connection Limits
+STD-0599	SECURITY-STANDARDS.md	289	topics/security.md	move-and-index	Graceful Listener Shutdown
+STD-0600	SECURITY-STANDARDS.md	306	topics/security.md	move-and-index	Half-Open Connection Handling
+STD-0601	SECURITY-STANDARDS.md	324	topics/security.md	move-and-index	What NOT to Validate
+STD-0602	TESTING-STANDARDS.md	1	workflows/verification.md	split-and-index	Testing Standards
+STD-0603	TESTING-STANDARDS.md	5	workflows/verification.md	split-and-index	Test Organization
+STD-0604	TESTING-STANDARDS.md	7	workflows/verification.md	split-and-index	Choose a Consistent Test Placement Strategy
+STD-0605	TESTING-STANDARDS.md	23	workflows/verification.md	split-and-index	Colocated
+STD-0606	TESTING-STANDARDS.md	34	workflows/verification.md	split-and-index	Mirrored test tree
+STD-0607	TESTING-STANDARDS.md	62	workflows/verification.md	split-and-index	Test Naming Convention
+STD-0608	TESTING-STANDARDS.md	88	workflows/verification.md	split-and-index	Test Categories
+STD-0609	TESTING-STANDARDS.md	96	workflows/verification.md	split-and-index	Unit Tests
+STD-0610	TESTING-STANDARDS.md	102	workflows/verification.md	split-and-index	Integration Tests
+STD-0611	TESTING-STANDARDS.md	108	workflows/verification.md	split-and-index	Global State and Durable Resource Isolation
+STD-0612	TESTING-STANDARDS.md	141	workflows/verification.md	split-and-index	End-to-End Tests
+STD-0613	TESTING-STANDARDS.md	147	workflows/verification.md	split-and-index	Cross-Layer Acceptance Checks
+STD-0614	TESTING-STANDARDS.md	162	workflows/verification.md	split-and-index	Boundary Invariant Tests
+STD-0615	TESTING-STANDARDS.md	180	workflows/verification.md	split-and-index	Vertical Slice Verification
+STD-0616	TESTING-STANDARDS.md	214	workflows/verification.md	split-and-index	Binding Verification Requirements
+STD-0617	TESTING-STANDARDS.md	261	workflows/verification.md	split-and-index	Replay, Recovery, and Idempotency Checks
+STD-0618	TESTING-STANDARDS.md	277	workflows/verification.md	split-and-index	Unit Test Guidelines
+STD-0619	TESTING-STANDARDS.md	279	workflows/verification.md	split-and-index	Test One Thing
+STD-0620	TESTING-STANDARDS.md	292	workflows/verification.md	split-and-index	Arrange-Act-Assert Pattern
+STD-0621	TESTING-STANDARDS.md	317	workflows/verification.md	split-and-index	Avoid Mocks When Possible
+STD-0622	TESTING-STANDARDS.md	344	workflows/verification.md	split-and-index	Test Edge Cases
+STD-0623	TESTING-STANDARDS.md	358	workflows/verification.md	split-and-index	Property-Based Testing
+STD-0624	TESTING-STANDARDS.md	365	workflows/verification.md	split-and-index	When to Use Property-Based Testing
+STD-0625	TESTING-STANDARDS.md	374	workflows/verification.md	split-and-index	Coverage Guidelines
+STD-0626	TESTING-STANDARDS.md	376	workflows/verification.md	split-and-index	Targets
+STD-0627	TESTING-STANDARDS.md	384	workflows/verification.md	split-and-index	What to Exclude from Coverage
+STD-0628	TESTING-STANDARDS.md	392	workflows/verification.md	split-and-index	Coverage is Not Quality
+STD-0629	TESTING-STANDARDS.md	402	workflows/verification.md	split-and-index	Test Documentation
+STD-0630	TESTING-STANDARDS.md	404	workflows/verification.md	split-and-index	Document Non-Obvious Tests
+STD-0631	TESTING-STANDARDS.md	409	workflows/verification.md	split-and-index	Document Test Fixtures
+STD-0632	TESTING-STANDARDS.md	416	workflows/verification.md	split-and-index	Test Data Management
+STD-0633	TESTING-STANDARDS.md	418	workflows/verification.md	split-and-index	Use Factories or Builders
+STD-0634	TESTING-STANDARDS.md	439	workflows/verification.md	split-and-index	Avoid Shared Mutable State
+STD-0635	TESTING-STANDARDS.md	455	workflows/verification.md	split-and-index	Validate Persisted Dynamic Artifacts
+STD-0636	TESTING-STANDARDS.md	472	workflows/verification.md	split-and-index	Async Testing
+STD-0637	TESTING-STANDARDS.md	474	workflows/verification.md	split-and-index	Always Await Async Operations
+STD-0638	TESTING-STANDARDS.md	490	workflows/verification.md	split-and-index	Test Both Success and Failure
+STD-0639	TESTING-STANDARDS.md	503	workflows/verification.md	split-and-index	Lifecycle Regression Checks
+STD-0640	TESTING-STANDARDS.md	514	workflows/verification.md	split-and-index	Service-Layer Error Paths
+STD-0641	TESTING-STANDARDS.md	527	workflows/verification.md	split-and-index	Frontend Component Testing
+STD-0642	TESTING-STANDARDS.md	535	workflows/verification.md	split-and-index	Performance Testing
+STD-0643	TESTING-STANDARDS.md	537	workflows/verification.md	split-and-index	Benchmark Critical Paths
+STD-0644	TESTING-STANDARDS.md	543	workflows/verification.md	split-and-index	Set Performance Budgets
+STD-0645	TESTING-STANDARDS.md	559	workflows/verification.md	split-and-index	Verification Layers
+STD-0646	TESTING-STANDARDS.md	577	workflows/verification.md	split-and-index	Layer 1: Static Analysis
+STD-0647	TESTING-STANDARDS.md	588	workflows/verification.md	split-and-index	Layer 2: Build Verification
+STD-0648	TESTING-STANDARDS.md	592	workflows/verification.md	split-and-index	Layer 3: Dev Server Validation
+STD-0649	TESTING-STANDARDS.md	599	workflows/verification.md	split-and-index	Layer 4: Runtime Verification
+STD-0650	TESTING-STANDARDS.md	606	workflows/verification.md	split-and-index	Layer 5: Reference Lookup
+STD-0651	TESTING-STANDARDS.md	618	workflows/verification.md	split-and-index	Diagnosis Workflow
+STD-0652	TESTING-STANDARDS.md	658	workflows/verification.md	split-and-index	Self-Correction Principles
+STD-0653	TESTING-STANDARDS.md	670	workflows/verification.md	split-and-index	Test Checklist
+STD-0654	TOOLING-STANDARDS.md	1	workflows/tooling.md	split-and-index	Tooling Standards
+STD-0655	TOOLING-STANDARDS.md	5	workflows/tooling.md	split-and-index	Pre-Commit Hooks
+STD-0656	TOOLING-STANDARDS.md	7	workflows/tooling.md	split-and-index	Why Pre-Commit Hooks
+STD-0657	TOOLING-STANDARDS.md	15	workflows/tooling.md	split-and-index	Recommended Tool: Lefthook
+STD-0658	TOOLING-STANDARDS.md	21	workflows/tooling.md	split-and-index	npm
+STD-0659	TOOLING-STANDARDS.md	24	workflows/tooling.md	split-and-index	Or standalone
+STD-0660	TOOLING-STANDARDS.md	33	workflows/tooling.md	split-and-index	Basic Configuration
+STD-0661	TOOLING-STANDARDS.md	38	workflows/tooling.md	split-and-index	lefthook.yml
+STD-0662	TOOLING-STANDARDS.md	62	workflows/tooling.md	split-and-index	Hook Categories
+STD-0663	TOOLING-STANDARDS.md	70	workflows/tooling.md	split-and-index	History Cleanup Enforcement (Advisory Only)
+STD-0664	TOOLING-STANDARDS.md	83	workflows/tooling.md	split-and-index	Performance Tips
+STD-0665	TOOLING-STANDARDS.md	90	workflows/tooling.md	split-and-index	Persisted Artifact Validation Hooks
+STD-0666	TOOLING-STANDARDS.md	107	workflows/tooling.md	split-and-index	EditorConfig
+STD-0667	TOOLING-STANDARDS.md	109	workflows/tooling.md	split-and-index	Purpose
+STD-0668	TOOLING-STANDARDS.md	113	workflows/tooling.md	split-and-index	Standard Configuration
+STD-0669	TOOLING-STANDARDS.md	118	workflows/tooling.md	split-and-index	.editorconfig
+STD-0670	TOOLING-STANDARDS.md	129	workflows/tooling.md	split-and-index	Web files typically use 2-space indent
+STD-0671	TOOLING-STANDARDS.md	133	workflows/tooling.md	split-and-index	Markdown needs trailing whitespace for line breaks
+STD-0672	TOOLING-STANDARDS.md	137	workflows/tooling.md	split-and-index	Makefiles require tabs
+STD-0673	TOOLING-STANDARDS.md	142	workflows/tooling.md	split-and-index	Key Settings
+STD-0674	TOOLING-STANDARDS.md	153	workflows/tooling.md	split-and-index	Linting Strategy
+STD-0675	TOOLING-STANDARDS.md	155	workflows/tooling.md	split-and-index	Language-Agnostic Principles
+STD-0676	TOOLING-STANDARDS.md	162	workflows/tooling.md	split-and-index	Common Linter Categories
+STD-0677	TOOLING-STANDARDS.md	171	workflows/tooling.md	split-and-index	TypeScript/JavaScript: ESLint 9+ (Flat Config) + Prettier
+STD-0678	TOOLING-STANDARDS.md	212	workflows/tooling.md	split-and-index	Common Flat Config Pitfalls
+STD-0679	TOOLING-STANDARDS.md	234	workflows/tooling.md	split-and-index	TypeScript Strict Mode
+STD-0680	TOOLING-STANDARDS.md	254	workflows/tooling.md	split-and-index	Custom Rules for Architecture
+STD-0681	TOOLING-STANDARDS.md	275	workflows/tooling.md	split-and-index	Formatting
+STD-0682	TOOLING-STANDARDS.md	277	workflows/tooling.md	split-and-index	Principle: Format on Save
+STD-0683	TOOLING-STANDARDS.md	289	workflows/tooling.md	split-and-index	Principle: Check in CI
+STD-0684	TOOLING-STANDARDS.md	294	workflows/tooling.md	split-and-index	Prettier check mode
+STD-0685	TOOLING-STANDARDS.md	297	workflows/tooling.md	split-and-index	Exit code 1 if files would change
+STD-0686	TOOLING-STANDARDS.md	300	workflows/tooling.md	split-and-index	Format vs. Lint
+STD-0687	TOOLING-STANDARDS.md	314	workflows/tooling.md	split-and-index	CI Integration
+STD-0688	TOOLING-STANDARDS.md	316	workflows/tooling.md	split-and-index	Quality Gates Are Mandatory
+STD-0689	TOOLING-STANDARDS.md	337	workflows/tooling.md	split-and-index	Prefer Failure Aggregation Over Fail-Fast
+STD-0690	TOOLING-STANDARDS.md	357	workflows/tooling.md	split-and-index	Tiered CI Execution
+STD-0691	TOOLING-STANDARDS.md	388	workflows/tooling.md	split-and-index	Lint Debt Ratchet (When Full Lint Is Temporarily Non-Blocking)
+STD-0692	TOOLING-STANDARDS.md	396	workflows/tooling.md	split-and-index	CI Performance Standards
+STD-0693	TOOLING-STANDARDS.md	512	workflows/tooling.md	split-and-index	Recommended CI Workflow
+STD-0694	TOOLING-STANDARDS.md	515	workflows/tooling.md	split-and-index	.github/workflows/ci.yml
+STD-0695	TOOLING-STANDARDS.md	688	workflows/tooling.md	split-and-index	CI vs. Local Checks
+STD-0696	TOOLING-STANDARDS.md	699	workflows/tooling.md	split-and-index	Directory Validation
+STD-0697	TOOLING-STANDARDS.md	701	workflows/tooling.md	split-and-index	README Enforcement
+STD-0698	TOOLING-STANDARDS.md	747	workflows/tooling.md	split-and-index	PR Template Enforcement
+STD-0699	TOOLING-STANDARDS.md	759	workflows/tooling.md	split-and-index	Dependency Auditing
+STD-0700	TOOLING-STANDARDS.md	766	workflows/tooling.md	split-and-index	Tool Installation Checklist
+STD-0701	TOOLING-STANDARDS.md	768	workflows/tooling.md	split-and-index	Minimum Setup
+STD-0702	TOOLING-STANDARDS.md	775	workflows/tooling.md	split-and-index	Commands to Add
+STD-0703	TOOLING-STANDARDS.md	800	workflows/tooling.md	split-and-index	Bypassing Hooks (Emergency Only)
+STD-0704	languages/README.md	1	STANDARDS-ROUTER.md	replace-with-router	Language-Specific Standards
+STD-0705	languages/README.md	7	STANDARDS-ROUTER.md	replace-with-router	Languages
+STD-0706	languages/rust/RUST-API-STANDARDS.md	1	profiles/languages/rust/api.md	move-and-index	Rust API Standards
+STD-0707	languages/rust/RUST-API-STANDARDS.md	6	profiles/languages/rust/api.md	move-and-index	Correct-By-Construction Policy
+STD-0708	languages/rust/RUST-API-STANDARDS.md	29	profiles/languages/rust/api.md	move-and-index	Parse, Do Not Re-Validate
+STD-0709	languages/rust/RUST-API-STANDARDS.md	71	profiles/languages/rust/api.md	move-and-index	Crate Roles
+STD-0710	languages/rust/RUST-API-STANDARDS.md	95	profiles/languages/rust/api.md	move-and-index	Module Layout
+STD-0711	languages/rust/RUST-API-STANDARDS.md	129	profiles/languages/rust/api.md	move-and-index	Result, Option, Panic
+STD-0712	languages/rust/RUST-API-STANDARDS.md	148	profiles/languages/rust/api.md	move-and-index	`unwrap` And `expect`
+STD-0713	languages/rust/RUST-API-STANDARDS.md	164	profiles/languages/rust/api.md	move-and-index	Public Contract Traits
+STD-0714	languages/rust/RUST-API-STANDARDS.md	181	profiles/languages/rust/api.md	move-and-index	Parameter Ergonomics
+STD-0715	languages/rust/RUST-API-STANDARDS.md	193	profiles/languages/rust/api.md	move-and-index	Feature Contracts
+STD-0716	languages/rust/RUST-API-STANDARDS.md	222	profiles/languages/rust/api.md	move-and-index	Documentation
+STD-0717	languages/rust/RUST-ASYNC-STANDARDS.md	1	profiles/languages/rust/async.md	move-and-index	Rust Async Standards
+STD-0718	languages/rust/RUST-ASYNC-STANDARDS.md	6	profiles/languages/rust/async.md	move-and-index	Sync Core, Async Shell
+STD-0719	languages/rust/RUST-ASYNC-STANDARDS.md	39	profiles/languages/rust/async.md	move-and-index	Runtime Boundaries
+STD-0720	languages/rust/RUST-ASYNC-STANDARDS.md	52	profiles/languages/rust/async.md	move-and-index	Task Lifecycle
+STD-0721	languages/rust/RUST-ASYNC-STANDARDS.md	94	profiles/languages/rust/async.md	move-and-index	Graceful Shutdown
+STD-0722	languages/rust/RUST-ASYNC-STANDARDS.md	113	profiles/languages/rust/async.md	move-and-index	Blocking Work
+STD-0723	languages/rust/RUST-ASYNC-STANDARDS.md	123	profiles/languages/rust/async.md	move-and-index	Mutex Selection
+STD-0724	languages/rust/RUST-ASYNC-STANDARDS.md	140	profiles/languages/rust/async.md	move-and-index	Cancellation Safety
+STD-0725	languages/rust/RUST-ASYNC-STANDARDS.md	155	profiles/languages/rust/async.md	move-and-index	Observability
+STD-0726	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	1	profiles/languages/rust/cross-platform.md	move-and-index	Rust Cross-Platform Standards
+STD-0727	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	6	profiles/languages/rust/cross-platform.md	move-and-index	Target Policy
+STD-0728	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	20	profiles/languages/rust/cross-platform.md	move-and-index	Keep `cfg()` In Thin Platform Modules
+STD-0729	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	72	profiles/languages/rust/cross-platform.md	move-and-index	Acceptable Inline `cfg()` Exception
+STD-0730	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	99	profiles/languages/rust/cross-platform.md	move-and-index	Verification
+STD-0731	languages/rust/RUST-DEPENDENCY-STANDARDS.md	1	profiles/languages/rust/dependencies.md	move-and-index	Rust Dependency Standards
+STD-0732	languages/rust/RUST-DEPENDENCY-STANDARDS.md	6	profiles/languages/rust/dependencies.md	move-and-index	Before Adding A Crate
+STD-0733	languages/rust/RUST-DEPENDENCY-STANDARDS.md	11	profiles/languages/rust/dependencies.md	move-and-index	How many transitive deps does this crate bring?
+STD-0734	languages/rust/RUST-DEPENDENCY-STANDARDS.md	14	profiles/languages/rust/dependencies.md	move-and-index	Is it already in the tree as a transitive dep?
+STD-0735	languages/rust/RUST-DEPENDENCY-STANDARDS.md	27	profiles/languages/rust/dependencies.md	move-and-index	Workspace Dependency Inheritance
+STD-0736	languages/rust/RUST-DEPENDENCY-STANDARDS.md	34	profiles/languages/rust/dependencies.md	move-and-index	Cargo.toml (workspace root)
+STD-0737	languages/rust/RUST-DEPENDENCY-STANDARDS.md	39	profiles/languages/rust/dependencies.md	move-and-index	member/Cargo.toml
+STD-0738	languages/rust/RUST-DEPENDENCY-STANDARDS.md	48	profiles/languages/rust/dependencies.md	move-and-index	Feature Selection
+STD-0739	languages/rust/RUST-DEPENDENCY-STANDARDS.md	53	profiles/languages/rust/dependencies.md	move-and-index	BAD: Pulling in everything
+STD-0740	languages/rust/RUST-DEPENDENCY-STANDARDS.md	58	profiles/languages/rust/dependencies.md	move-and-index	GOOD: Only what is used
+STD-0741	languages/rust/RUST-DEPENDENCY-STANDARDS.md	92	profiles/languages/rust/dependencies.md	move-and-index	Tree Inspection
+STD-0742	languages/rust/RUST-DEPENDENCY-STANDARDS.md	98	profiles/languages/rust/dependencies.md	move-and-index	Full tree
+STD-0743	languages/rust/RUST-DEPENDENCY-STANDARDS.md	101	profiles/languages/rust/dependencies.md	move-and-index	Direct deps only
+STD-0744	languages/rust/RUST-DEPENDENCY-STANDARDS.md	104	profiles/languages/rust/dependencies.md	move-and-index	Who depends on a specific crate?
+STD-0745	languages/rust/RUST-DEPENDENCY-STANDARDS.md	107	profiles/languages/rust/dependencies.md	move-and-index	Total unique deps for one workspace member
+STD-0746	languages/rust/RUST-DEPENDENCY-STANDARDS.md	110	profiles/languages/rust/dependencies.md	move-and-index	Find duplicate versions of the same crate
+STD-0747	languages/rust/RUST-DEPENDENCY-STANDARDS.md	114	profiles/languages/rust/dependencies.md	move-and-index	Auditing
+STD-0748	languages/rust/RUST-DEPENDENCY-STANDARDS.md	133	profiles/languages/rust/dependencies.md	move-and-index	Replace <crate> and <path> with the dependency and source directory.
+STD-0749	languages/rust/RUST-DEPENDENCY-STANDARDS.md	141	profiles/languages/rust/dependencies.md	move-and-index	Build-Time Cost
+STD-0750	languages/rust/RUST-DEPENDENCY-STANDARDS.md	146	profiles/languages/rust/dependencies.md	move-and-index	Build timing per crate
+STD-0751	languages/rust/RUST-DEPENDENCY-STANDARDS.md	149	profiles/languages/rust/dependencies.md	move-and-index	Count transitive deps per workspace member
+STD-0752	languages/rust/RUST-INTEROP-STANDARDS.md	1	profiles/languages/rust/interop.md	move-and-index	Rust Interop Standards
+STD-0753	languages/rust/RUST-INTEROP-STANDARDS.md	6	profiles/languages/rust/interop.md	move-and-index	Validate Before Unsafe Access
+STD-0754	languages/rust/RUST-INTEROP-STANDARDS.md	37	profiles/languages/rust/interop.md	move-and-index	Copy Foreign Buffers Immediately
+STD-0755	languages/rust/RUST-INTEROP-STANDARDS.md	51	profiles/languages/rust/interop.md	move-and-index	Unsafe Isolation
+STD-0756	languages/rust/RUST-INTEROP-STANDARDS.md	73	profiles/languages/rust/interop.md	move-and-index	Callback Thread Contracts
+STD-0757	languages/rust/RUST-INTEROP-STANDARDS.md	86	profiles/languages/rust/interop.md	move-and-index	Serde Wire-Format Alignment
+STD-0758	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	1	profiles/languages/rust/language-bindings.md	split-and-index	Rust Language Bindings Standards
+STD-0759	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	9	profiles/languages/rust/language-bindings.md	split-and-index	Three-Layer Architecture
+STD-0760	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	35	profiles/languages/rust/language-bindings.md	split-and-index	Rules
+STD-0761	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	44	profiles/languages/rust/language-bindings.md	split-and-index	Workspace Layout
+STD-0762	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	53	profiles/languages/rust/language-bindings.md	split-and-index	Exclude crates that need foreign runtimes from default test
+STD-0763	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	84	profiles/languages/rust/language-bindings.md	split-and-index	Product-Native Artifact Model
+STD-0764	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	99	profiles/languages/rust/language-bindings.md	split-and-index	Rules
+STD-0765	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	112	profiles/languages/rust/language-bindings.md	split-and-index	Example Release Layout
+STD-0766	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	123	profiles/languages/rust/language-bindings.md	split-and-index	Rationale
+STD-0767	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	129	profiles/languages/rust/language-bindings.md	split-and-index	Compatibility Notes
+STD-0768	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	141	profiles/languages/rust/language-bindings.md	split-and-index	Binding Surface Policy
+STD-0769	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	147	profiles/languages/rust/language-bindings.md	split-and-index	Rules
+STD-0770	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	172	profiles/languages/rust/language-bindings.md	split-and-index	Support Tier Guidance
+STD-0771	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	180	profiles/languages/rust/language-bindings.md	split-and-index	Surface Review Questions
+STD-0772	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	192	profiles/languages/rust/language-bindings.md	split-and-index	FFI Wrapper Design
+STD-0773	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	194	profiles/languages/rust/language-bindings.md	split-and-index	Wrapper Type Conventions
+STD-0774	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	233	profiles/languages/rust/language-bindings.md	split-and-index	When to Annotate Core Types Directly
+STD-0775	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	256	profiles/languages/rust/language-bindings.md	split-and-index	From/Into Implementation Pattern
+STD-0776	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	278	profiles/languages/rust/language-bindings.md	split-and-index	Error Handling Across FFI
+STD-0777	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	297	profiles/languages/rust/language-bindings.md	split-and-index	Rules
+STD-0778	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	332	profiles/languages/rust/language-bindings.md	split-and-index	Host-Language Callbacks and Event Delivery
+STD-0779	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	337	profiles/languages/rust/language-bindings.md	split-and-index	Event Sink Bridges
+STD-0780	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	403	profiles/languages/rust/language-bindings.md	split-and-index	Callback-Based Task Execution
+STD-0781	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	425	profiles/languages/rust/language-bindings.md	split-and-index	Composite Executors
+STD-0782	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	454	profiles/languages/rust/language-bindings.md	split-and-index	Code Generation Strategy
+STD-0783	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	456	profiles/languages/rust/language-bindings.md	split-and-index	Single Source of Truth
+STD-0784	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	477	profiles/languages/rust/language-bindings.md	split-and-index	Annotation Approach
+STD-0785	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	491	profiles/languages/rust/language-bindings.md	split-and-index	Generation Commands
+STD-0786	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	497	profiles/languages/rust/language-bindings.md	split-and-index	Build the shared library
+STD-0787	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	500	profiles/languages/rust/language-bindings.md	split-and-index	Generate Python bindings
+STD-0788	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	505	profiles/languages/rust/language-bindings.md	split-and-index	Generate C# bindings (community bindgen)
+STD-0789	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	521	profiles/languages/rust/language-bindings.md	split-and-index	Build System Organization
+STD-0790	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	523	profiles/languages/rust/language-bindings.md	split-and-index	Feature Flags for Optional Binding Support
+STD-0791	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	530	profiles/languages/rust/language-bindings.md	split-and-index	mylib-core/Cargo.toml
+STD-0792	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	539	profiles/languages/rust/language-bindings.md	split-and-index	cdylib Configuration
+STD-0793	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	544	profiles/languages/rust/language-bindings.md	split-and-index	mylib-uniffi/Cargo.toml
+STD-0794	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	560	profiles/languages/rust/language-bindings.md	split-and-index	Type Mapping Rules
+STD-0795	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	562	profiles/languages/rust/language-bindings.md	split-and-index	FFI-Safe Type Inventory
+STD-0796	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	580	profiles/languages/rust/language-bindings.md	split-and-index	Conversion Strategy Decision Matrix
+STD-0797	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	590	profiles/languages/rust/language-bindings.md	split-and-index	Enum Representation
+STD-0798	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	600	profiles/languages/rust/language-bindings.md	split-and-index	Memory Ownership Model
+STD-0799	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	626	profiles/languages/rust/language-bindings.md	split-and-index	Rules
+STD-0800	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	650	profiles/languages/rust/language-bindings.md	split-and-index	Async Bridging
+STD-0801	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	691	profiles/languages/rust/language-bindings.md	split-and-index	Testing Strategy
+STD-0802	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	714	profiles/languages/rust/language-bindings.md	split-and-index	Rules
+STD-0803	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	722	profiles/languages/rust/language-bindings.md	split-and-index	Conversion Test Example
+STD-0804	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	745	profiles/languages/rust/language-bindings.md	split-and-index	NIF Pure-Logic Separation
+STD-0805	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	783	profiles/languages/rust/language-bindings.md	split-and-index	Choosing a Binding Approach
+STD-0806	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	794	profiles/languages/rust/language-bindings.md	split-and-index	Rules
+STD-0807	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	806	profiles/languages/rust/language-bindings.md	split-and-index	Versioning and Compatibility
+STD-0808	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	808	profiles/languages/rust/language-bindings.md	split-and-index	Rules
+STD-0809	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	818	profiles/languages/rust/language-bindings.md	split-and-index	Version Export
+STD-0810	languages/rust/RUST-RELEASE-STANDARDS.md	1	profiles/languages/rust/release.md	move-and-index	Rust Release Standards
+STD-0811	languages/rust/RUST-RELEASE-STANDARDS.md	6	profiles/languages/rust/release.md	move-and-index	Toolchain Pinning
+STD-0812	languages/rust/RUST-RELEASE-STANDARDS.md	11	profiles/languages/rust/release.md	move-and-index	rust-toolchain.toml
+STD-0813	languages/rust/RUST-RELEASE-STANDARDS.md	21	profiles/languages/rust/release.md	move-and-index	Cargo.toml Metadata
+STD-0814	languages/rust/RUST-RELEASE-STANDARDS.md	47	profiles/languages/rust/release.md	move-and-index	Publish Control
+STD-0815	languages/rust/RUST-RELEASE-STANDARDS.md	64	profiles/languages/rust/release.md	move-and-index	Workspace Version Management
+STD-0816	languages/rust/RUST-RELEASE-STANDARDS.md	69	profiles/languages/rust/release.md	move-and-index	Workspace root Cargo.toml
+STD-0817	languages/rust/RUST-RELEASE-STANDARDS.md	77	profiles/languages/rust/release.md	move-and-index	Member crate Cargo.toml
+STD-0818	languages/rust/RUST-RELEASE-STANDARDS.md	90	profiles/languages/rust/release.md	move-and-index	cargo-release
+STD-0819	languages/rust/RUST-RELEASE-STANDARDS.md	96	profiles/languages/rust/release.md	move-and-index	release.toml (workspace root)
+STD-0820	languages/rust/RUST-RELEASE-STANDARDS.md	111	profiles/languages/rust/release.md	move-and-index	Rust Release Checklist
+STD-0821	languages/rust/RUST-SECURITY-STANDARDS.md	1	profiles/languages/rust/security.md	split-and-index	Rust Security Standards
+STD-0822	languages/rust/RUST-SECURITY-STANDARDS.md	7	profiles/languages/rust/security.md	split-and-index	Path Validation
+STD-0823	languages/rust/RUST-SECURITY-STANDARDS.md	33	profiles/languages/rust/security.md	split-and-index	Checked Arithmetic At Boundaries
+STD-0824	languages/rust/RUST-SECURITY-STANDARDS.md	48	profiles/languages/rust/security.md	split-and-index	Bounded Queues
+STD-0825	languages/rust/RUST-SECURITY-STANDARDS.md	71	profiles/languages/rust/security.md	split-and-index	Network Listener Limits
+STD-0826	languages/rust/RUST-SECURITY-STANDARDS.md	106	profiles/languages/rust/security.md	split-and-index	Panic Policy
+STD-0827	languages/rust/RUST-STANDARDS.md	1	profiles/languages/rust/README.md	replace-with-profile-router	Rust Standards
+STD-0828	languages/rust/RUST-STANDARDS.md	9	profiles/languages/rust/README.md	replace-with-profile-router	Documents
+STD-0829	languages/rust/RUST-STANDARDS.md	24	profiles/languages/rust/README.md	replace-with-profile-router	Relationship To Generic Standards
+STD-0830	languages/rust/RUST-STANDARDS.md	42	profiles/languages/rust/README.md	replace-with-profile-router	Default Rust Position
+STD-0831	languages/rust/RUST-TOOLING-STANDARDS.md	1	profiles/languages/rust/tooling.md	split-and-index	Rust Tooling Standards
+STD-0832	languages/rust/RUST-TOOLING-STANDARDS.md	6	profiles/languages/rust/tooling.md	split-and-index	Required Baseline Verification
+STD-0833	languages/rust/RUST-TOOLING-STANDARDS.md	24	profiles/languages/rust/tooling.md	split-and-index	Workspace Lints
+STD-0834	languages/rust/RUST-TOOLING-STANDARDS.md	50	profiles/languages/rust/tooling.md	split-and-index	Required Criterion Benchmarks
+STD-0835	languages/rust/RUST-TOOLING-STANDARDS.md	96	profiles/languages/rust/tooling.md	split-and-index	Optional `cargo nextest`
+STD-0836	languages/rust/RUST-TOOLING-STANDARDS.md	125	profiles/languages/rust/tooling.md	split-and-index	Optional Feature Matrix Checks
+STD-0837	languages/rust/RUST-TOOLING-STANDARDS.md	160	profiles/languages/rust/tooling.md	split-and-index	Compile-Fail Tests
+STD-0838	languages/rust/RUST-TOOLING-STANDARDS.md	174	profiles/languages/rust/tooling.md	split-and-index	Property-Based Tests
+STD-0839	languages/rust/RUST-TOOLING-STANDARDS.md	206	profiles/languages/rust/tooling.md	split-and-index	Rust Test Style
+STD-0840	languages/rust/RUST-TOOLING-STANDARDS.md	221	profiles/languages/rust/tooling.md	split-and-index	Recommended Rust Tools
+STD-0841	languages/rust/RUST-TOOLING-STANDARDS.md	240	profiles/languages/rust/tooling.md	split-and-index	Build Scripts
+STD-0842	languages/rust/RUST-TOOLING-STANDARDS.md	259	profiles/languages/rust/tooling.md	split-and-index	`no_std` And Embedded-Compatible Crates
+STD-0843	languages/rust/RUST-UNSAFE-STANDARDS.md	1	profiles/languages/rust/unsafe.md	move-and-index	Rust Unsafe Standards
+STD-0844	languages/rust/RUST-UNSAFE-STANDARDS.md	6	profiles/languages/rust/unsafe.md	move-and-index	Default Policy
+STD-0845	languages/rust/RUST-UNSAFE-STANDARDS.md	37	profiles/languages/rust/unsafe.md	move-and-index	Isolation Rules
+STD-0846	languages/rust/RUST-UNSAFE-STANDARDS.md	52	profiles/languages/rust/unsafe.md	move-and-index	Unsafe Exception Checklist
+STD-0847	languages/rust/RUST-UNSAFE-STANDARDS.md	65	profiles/languages/rust/unsafe.md	move-and-index	Unsafe Verification Matrix
+STD-0848	languages/rust/RUST-UNSAFE-STANDARDS.md	84	profiles/languages/rust/unsafe.md	move-and-index	Feature-Gated Unsafe Paths
+STD-0849	prompts/full-codebase-standards-refactor.md	1	workflows/implementation.md	replace-with-derived-entrypoint	Intent
+STD-0850	prompts/full-codebase-standards-refactor.md	7	workflows/implementation.md	replace-with-derived-entrypoint	Artifact Rules
+STD-0851	prompts/full-codebase-standards-refactor.md	16	workflows/implementation.md	replace-with-derived-entrypoint	Process
+STD-0852	prompts/implement-plan.md	1	workflows/implementation.md	replace-with-derived-entrypoint	Intent
+STD-0853	prompts/implement-plan.md	8	workflows/implementation.md	replace-with-derived-entrypoint	Standards
+STD-0854	prompts/implement-plan.md	18	workflows/implementation.md	replace-with-derived-entrypoint	Preflight
+STD-0855	prompts/implement-plan.md	35	workflows/implementation.md	replace-with-derived-entrypoint	Process
+STD-0856	prompts/implement-plan.md	50	workflows/implementation.md	replace-with-derived-entrypoint	Concurrent Workers
+STD-0857	prompts/implement-plan.md	67	workflows/implementation.md	replace-with-derived-entrypoint	Unexpected Issues
+STD-0858	prompts/implement-plan.md	78	workflows/implementation.md	replace-with-derived-entrypoint	Completion
+STD-0859	templates/PLAN-TEMPLATE.md	1	workflows/planning.md	align-derived-template	Plan: [Short Title]
+STD-0860	templates/PLAN-TEMPLATE.md	3	workflows/planning.md	align-derived-template	Objective
+STD-0861	templates/PLAN-TEMPLATE.md	7	workflows/planning.md	align-derived-template	Scope
+STD-0862	templates/PLAN-TEMPLATE.md	9	workflows/planning.md	align-derived-template	In Scope
+STD-0863	templates/PLAN-TEMPLATE.md	14	workflows/planning.md	align-derived-template	Out of Scope
+STD-0864	templates/PLAN-TEMPLATE.md	19	workflows/planning.md	align-derived-template	Inputs
+STD-0865	templates/PLAN-TEMPLATE.md	21	workflows/planning.md	align-derived-template	Problem
+STD-0866	templates/PLAN-TEMPLATE.md	25	workflows/planning.md	align-derived-template	Constraints
+STD-0867	templates/PLAN-TEMPLATE.md	30	workflows/planning.md	align-derived-template	Assumptions
+STD-0868	templates/PLAN-TEMPLATE.md	35	workflows/planning.md	align-derived-template	Dependencies
+STD-0869	templates/PLAN-TEMPLATE.md	40	workflows/planning.md	align-derived-template	Risks
+STD-0870	templates/PLAN-TEMPLATE.md	46	workflows/planning.md	align-derived-template	Simplicity / Complection Review
+STD-0871	templates/PLAN-TEMPLATE.md	56	workflows/planning.md	align-derived-template	Clarifying Questions (Only If Needed)
+STD-0872	templates/PLAN-TEMPLATE.md	64	workflows/planning.md	align-derived-template	Definition of Done
+STD-0873	templates/PLAN-TEMPLATE.md	69	workflows/planning.md	align-derived-template	Milestones
+STD-0874	templates/PLAN-TEMPLATE.md	74	workflows/planning.md	align-derived-template	Milestone 1: [Name]
+STD-0875	templates/PLAN-TEMPLATE.md	88	workflows/planning.md	align-derived-template	Milestone 2: [Name]
+STD-0876	templates/PLAN-TEMPLATE.md	102	workflows/planning.md	align-derived-template	Execution Notes
+STD-0877	templates/PLAN-TEMPLATE.md	108	workflows/planning.md	align-derived-template	Commit Cadence Notes
+STD-0878	templates/PLAN-TEMPLATE.md	115	workflows/planning.md	align-derived-template	Optional Subagent Assignment
+STD-0879	templates/PLAN-TEMPLATE.md	123	workflows/planning.md	align-derived-template	Re-Plan Triggers
+STD-0880	templates/PLAN-TEMPLATE.md	128	workflows/planning.md	align-derived-template	Recommendations (Only If Better Option Exists)
+STD-0881	templates/PLAN-TEMPLATE.md	133	workflows/planning.md	align-derived-template	Completion Summary
+STD-0882	templates/PLAN-TEMPLATE.md	135	workflows/planning.md	align-derived-template	Completed
+STD-0883	templates/PLAN-TEMPLATE.md	140	workflows/planning.md	align-derived-template	Deviations
+STD-0884	templates/PLAN-TEMPLATE.md	144	workflows/planning.md	align-derived-template	Follow-Ups
+STD-0885	templates/PLAN-TEMPLATE.md	148	workflows/planning.md	align-derived-template	Verification Summary
+STD-0886	templates/PLAN-TEMPLATE.md	153	workflows/planning.md	align-derived-template	Traceability Links
+STD-0887	templates/PLAN-TEMPLATE.md	159	workflows/planning.md	align-derived-template	Brevity Note
+STD-0888	templates/PULL_REQUEST_TEMPLATE.md	1	workflows/implementation.md	align-derived-template	Summary
+STD-0889	templates/PULL_REQUEST_TEMPLATE.md	5	workflows/implementation.md	align-derived-template	Decision Traceability (Required)
+STD-0890	templates/PULL_REQUEST_TEMPLATE.md	7	workflows/implementation.md	align-derived-template	Problem
+STD-0891	templates/PULL_REQUEST_TEMPLATE.md	10	workflows/implementation.md	align-derived-template	Constraints
+STD-0892	templates/PULL_REQUEST_TEMPLATE.md	13	workflows/implementation.md	align-derived-template	Decision
+STD-0893	templates/PULL_REQUEST_TEMPLATE.md	16	workflows/implementation.md	align-derived-template	Alternatives Rejected
+STD-0894	templates/PULL_REQUEST_TEMPLATE.md	20	workflows/implementation.md	align-derived-template	Invariants Impacted
+STD-0895	templates/PULL_REQUEST_TEMPLATE.md	23	workflows/implementation.md	align-derived-template	Simplicity Review
+STD-0896	templates/PULL_REQUEST_TEMPLATE.md	29	workflows/implementation.md	align-derived-template	Revisit Triggers
+STD-0897	templates/PULL_REQUEST_TEMPLATE.md	33	workflows/implementation.md	align-derived-template	Traceability Links
+STD-0898	templates/PULL_REQUEST_TEMPLATE.md	37	workflows/implementation.md	align-derived-template	Checklist
+STD-0899	templates/README-TEMPLATE.md	1	workflows/documentation.md	align-derived-template	[Directory Name]
+STD-0900	templates/README-TEMPLATE.md	5	workflows/documentation.md	align-derived-template	Purpose
+STD-0901	templates/README-TEMPLATE.md	12	workflows/documentation.md	align-derived-template	Contents
+STD-0902	templates/README-TEMPLATE.md	22	workflows/documentation.md	align-derived-template	Problem
+STD-0903	templates/README-TEMPLATE.md	27	workflows/documentation.md	align-derived-template	Constraints
+STD-0904	templates/README-TEMPLATE.md	35	workflows/documentation.md	align-derived-template	Decision
+STD-0905	templates/README-TEMPLATE.md	39	workflows/documentation.md	align-derived-template	Alternatives Rejected
+STD-0906	templates/README-TEMPLATE.md	52	workflows/documentation.md	align-derived-template	Invariants
+STD-0907	templates/README-TEMPLATE.md	59	workflows/documentation.md	align-derived-template	Revisit Triggers
+STD-0908	templates/README-TEMPLATE.md	72	workflows/documentation.md	align-derived-template	Dependencies
+STD-0909	templates/README-TEMPLATE.md	74	workflows/documentation.md	align-derived-template	Internal
+STD-0910	templates/README-TEMPLATE.md	80	workflows/documentation.md	align-derived-template	External
+STD-0911	templates/README-TEMPLATE.md	86	workflows/documentation.md	align-derived-template	Related ADRs
+STD-0912	templates/README-TEMPLATE.md	94	workflows/documentation.md	align-derived-template	Usage Examples
+STD-0913	templates/README-TEMPLATE.md	104	workflows/documentation.md	align-derived-template	API Consumer Contract
+STD-0914	templates/README-TEMPLATE.md	117	workflows/documentation.md	align-derived-template	Structured Producer Contract
+STD-0915	templates/README-TEMPLATE.md	133	workflows/documentation.md	align-derived-template	Testing
+STD-0916	templates/README-TEMPLATE.md	141	workflows/documentation.md	align-derived-template	Notes

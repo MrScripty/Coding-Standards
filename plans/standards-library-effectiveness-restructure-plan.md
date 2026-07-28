@@ -4,9 +4,9 @@
 
 **Direction:** Approved and active.
 
-**Current phase:** Milestone 0 accepted; normative standards are unchanged.
+**Current phase:** Milestones 0-1 accepted; normative standards are unchanged.
 
-**Next slice:** Milestone 1, information architecture and rule metadata.
+**Next slice:** Milestone 2, Core and Router vertical slice.
 
 **Evidence:** [Milestone 0 evaluation](../evaluation/standards-effectiveness/README.md)
 
@@ -255,17 +255,17 @@ reproduce counts, routing, and scores.
 
 **Goal:** Freeze ownership and routing before moving rules.
 
-- [ ] Confirm canonical paths, metadata fields, and precedence.
-- [ ] Map each rule identifier to one future owner and disposition.
-- [ ] Resolve conflicts and define old-entrypoint migration policy.
-- [ ] Add valid/invalid routing metadata fixtures.
+- [x] Confirm canonical paths, metadata fields, and precedence.
+- [x] Map each rule identifier to one future owner and disposition.
+- [x] Resolve conflicts and define old-entrypoint migration policy.
+- [x] Add valid/invalid routing metadata fixtures.
 
 **Write set:** decision/report artifacts, metadata fixtures, and this plan.
 
 **Gate:** Every retained rule has one proposed owner; scenarios route without
 cycles or ambiguity.
 
-**Status:** Planned.
+**Status:** Accepted.
 
 ### Milestone 2: Core And Router Vertical Slice
 

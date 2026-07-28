@@ -45,6 +45,17 @@ artifacts. `baseline-scores.md` applies the fixed rubric to current guidance.
 The same fixtures and rubric must be used after restructuring. A changed
 fixture requires a recorded reason and before/after rescoring.
 
+## Architecture Contract
+
+- `information-architecture.md` owns roles, paths, routing, precedence, and
+  migration decisions.
+- `metadata-schema.md` defines canonical module metadata.
+- `owner-map.tsv` and `owner-overrides.tsv` map the baseline corpus to proposed
+  canonical owners.
+- `generate-owner-map.sh` writes the complete 916-section owner proposal.
+- `check-metadata.sh` and `verify-metadata-fixtures.sh` validate the metadata
+  contract and its negative cases.
+
 ## Scoring
 
 Each rubric dimension is scored:

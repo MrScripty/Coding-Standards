@@ -1,0 +1,13 @@
+# Invalid Duplicate B Fixture
+
+**Standards metadata**
+
+- ID: `fixture.invalid-duplicate`
+- Role: `workflow`
+- Level: `MUST`
+- Applies when: The metadata fixture validator runs.
+- Does not apply when: The file is not selected as a standards module.
+- Requires: `none`
+- Specializes: `none`
+- Verification: The negative metadata fixture fails.
+- Canonical owner: `evaluation/standards-effectiveness/fixtures/metadata/invalid-duplicate-b.md`

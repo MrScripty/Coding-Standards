@@ -40,3 +40,42 @@
 - Markdown and staged-diff whitespace checks passed.
 
 **Commit:** `docs(evaluation): freeze standards effectiveness baseline`
+
+## 2026-07-28: Milestone 1 Architecture And Metadata
+
+**Outcome:** Accepted.
+
+**Write set:**
+
+- `evaluation/standards-effectiveness/`
+- `plans/standards-library-effectiveness-restructure-plan.md`
+
+**Delivered:**
+
+- six-role information architecture and canonical target paths;
+- deterministic routing and precedence rules;
+- one-major-version old-entrypoint migration policy;
+- decision to version thin prompts and remove machine-specific local prompts;
+- fixed module metadata schema;
+- positive and negative metadata fixtures;
+- metadata checks for fields, enums, path ownership, duplicate IDs,
+  dependencies, self-dependencies, and cycles; and
+- generated proposed canonical owners for all 916 section identifiers.
+
+**Deviations:**
+
+- File-level mapping was insufficient for the mixed architecture catalog.
+  Section overrides assign contracts, IPC, documentation, diagnostics,
+  persistence, resilience, and HTTP contracts to distinct proposed owners.
+- A zero-heading local prompt has no section ID; it remains covered by the
+  corpus-level owner map and prompt versioning decision.
+
+**Verification:**
+
+- Owner-map generation produced 916 unique, non-empty assignments.
+- Metadata positive fixtures passed.
+- Invalid level, missing owner, wrong owner, self-dependency, missing
+  dependency, duplicate ID, and dependency-cycle fixtures failed as expected.
+- Shell syntax and whitespace checks passed.
+
+**Commit:** `docs(architecture): freeze standards routing contract`
