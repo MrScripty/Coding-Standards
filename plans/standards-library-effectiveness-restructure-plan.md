@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; release routing and procedure accepted.
+**Current phase:** Milestone 7 active; release recovery policy accepted.
 
-**Next slice:** Milestone 7.3c, migrate release rollback and recovery policy (`STD-0577`-`STD-0581`).
+**Next slice:** Milestone 7.3d, extract non-normative release tool recipes (`STD-0541`-`STD-0542`).
 
 **Acceptance status:** `partial`
 
@@ -454,9 +454,10 @@ all structural/routing fixtures pass.
      (`STD-0566`-`STD-0574`);
    - `7.3b4` (`Accepted`): language-profile routing and release checklist
      (`STD-0575`-`STD-0576`);
-   - `7.3c`: release rollback and recovery policy
+   - `7.3c` (`Accepted`): release rollback and recovery policy
      (`STD-0577`-`STD-0581`); and
-   - non-normative release tools, examples, and recipes.
+   - `7.3d`: non-normative release tools, examples, and recipes
+     (`STD-0541`-`STD-0542`).
 4. Final legacy-index review, disposition closure, and duplication gate.
 
 **Status:** `Active`

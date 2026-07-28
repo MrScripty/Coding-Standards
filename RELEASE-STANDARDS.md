@@ -4,8 +4,8 @@ Release applicability, versioning, changelog, contract-evolution, deprecation,
 migration, and acceptance policy moved to the canonical
 [Release Workflow](workflows/release.md).
 
-This file temporarily retains only unmigrated rollback and tool-recipe
-guidance. These sections cannot override the canonical workflow.
+This file temporarily retains only unmigrated tool-recipe guidance. These
+sections cannot override the canonical workflow.
 
 ## Release Tool Recipes (Pending Reference Migration)
 
@@ -49,34 +49,3 @@ commit_parsers = [
     { message = "^ci", skip = true },
 ]
 ```
-
----
-
-## Rollback Procedure
-
-### When to Rollback
-
-- Critical regression discovered after publishing
-- Broken or corrupt artifacts
-- Security vulnerability introduced by the release
-
-### Procedure
-
-1. **Unpublish** — Revert the GitHub Release to draft. On package registries
-   (crates.io, npm, PyPI), yank the affected version
-2. **Notify** — If the release was public for any duration, inform users through
-   the project's standard channels (issue tracker, release notes, etc.)
-3. **Fix** — Address the issue on `main` or via a hotfix branch (see
-   [Hotfix Workflow](#hotfix-workflow))
-4. **Re-release** — Publish a new patch version with the fix. Never reuse a
-   yanked version number
-
-### Authority
-
-The release owner or any maintainer with release permissions may initiate a
-rollback. Speed matters — do not wait for consensus when artifacts are broken.
-
-### Post-Incident
-
-Add a brief post-mortem note to the changelog or release notes explaining what
-went wrong and what was done to prevent recurrence.

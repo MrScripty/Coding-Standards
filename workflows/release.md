@@ -321,6 +321,53 @@ They are required only when selected by the accepted procedure. If a required
 step has no resolved owner or mechanism, return a typed release-procedure
 diagnostic rather than substituting a conventional command.
 
+## Recovery And Withdrawal
+
+Plan recovery for each publication destination and channel before relying on a
+generic rollback claim. Published artifacts may be immutable, cached,
+installed, mirrored, or consumed offline, so reversal can require one or more
+distinct actions:
+
+- stop further distribution or promotion;
+- mark, yank, withdraw, or deprecate an affected artifact when supported;
+- notify affected consumers and operators;
+- contain active harm through an authorized operational control;
+- publish a corrected or superseding release; and
+- restore or migrate affected state under its persistence contract.
+
+Start recovery when accepted evidence or observed impact invalidates a required
+release claim, creates unacceptable security or safety exposure, corrupts
+artifacts or state, or violates the release's support and channel contracts.
+Classify affected release units, versions, channels, consumers, artifacts, and
+persisted state before selecting actions.
+
+Use only transitions supported by the destination and contract. Do not describe
+withdrawal as erasure when consumers may retain bytes, mutate a published
+artifact in place, reuse an immutable version or artifact identity for
+different bytes, or assume every registry supports unpublishing. When reversal
+is unavailable, contain distribution where possible, communicate the status,
+and publish a newly identified correction or superseding decision.
+
+The recovery contract names normal and emergency authorities, required
+approvals, credential scope, notification owners, and any actions permitted
+before broader review. Urgency does not grant implicit authority. If immediate
+action is necessary, record the acting authority, evidence, scope, and
+follow-up obligations.
+
+Verify each recovery action against its intended effect. A replacement release
+must satisfy its own version, contract, artifact, behavior, and publication
+claims; recovery status cannot waive normal acceptance. Reconcile corrections
+across every affected supported release line.
+
+Record the incident, consumer impact, actions, residual exposure, and prevention
+decision in the durable artifact selected by documentation policy. A changelog
+or release note is appropriate only when it communicates a consumer-relevant
+change; it is not a universal post-incident record.
+
+If affected scope, channel capability, authority, safe action, or replacement
+evidence is unresolved, return a typed release-recovery diagnostic and preserve
+the known incident state rather than claiming rollback success.
+
 ## Acceptance Boundary
 
 Before publishing, identify every claim required by the release:
@@ -342,7 +389,7 @@ them.
 ## Pending Migration Boundary
 
 [Legacy Release Standards](../RELEASE-STANDARDS.md) temporarily retain only
-unmigrated rollback and tool-recipe guidance. Those sections cannot override
-applicability, versioning, changelog, contract, deprecation, migration,
-artifact, reproducibility, pipeline, maintenance, channel, publication,
-procedure, or acceptance decisions owned here.
+unmigrated tool-recipe guidance. Those sections cannot override applicability,
+versioning, changelog, contract, deprecation, migration, artifact,
+reproducibility, pipeline, maintenance, channel, publication, procedure,
+recovery, or acceptance decisions owned here.

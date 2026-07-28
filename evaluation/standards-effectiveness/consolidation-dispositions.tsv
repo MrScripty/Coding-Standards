@@ -210,3 +210,8 @@ STD-0573	RELEASE-STANDARDS.md	none	remove	incomplete shared-library download exa
 STD-0574	RELEASE-STANDARDS.md	workflows/release.md	merge	selected integrity metadata presentation
 STD-0575	RELEASE-STANDARDS.md	workflows/release.md	move	router-driven profile selection
 STD-0576	RELEASE-STANDARDS.md	workflows/release.md	move	decision-derived release procedure
+STD-0577	RELEASE-STANDARDS.md	workflows/release.md	move	canonical recovery and withdrawal policy
+STD-0578	RELEASE-STANDARDS.md	workflows/release.md	move	evidence-and-impact recovery trigger
+STD-0579	RELEASE-STANDARDS.md	workflows/release.md	move	channel-capability recovery actions
+STD-0580	RELEASE-STANDARDS.md	workflows/release.md	move	explicit normal and emergency authority
+STD-0581	RELEASE-STANDARDS.md	workflows/release.md	move	impact-driven incident record

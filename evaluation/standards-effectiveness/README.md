@@ -189,6 +189,12 @@ exact disposition of `STD-0575` through `STD-0576`, decision-derived release
 steps, typed unresolved outcomes, and removal of universal language, commit,
 tag, audit-tool, and publication-command defaults.
 
+`verify-release-recovery-policy.sh` checks impact- and capability-driven
+recovery decisions, exact disposition of `STD-0577` through `STD-0581`,
+explicit emergency authority, immutable publication behavior, typed unresolved
+outcomes, and removal of provider, registry, branch, patch-version, and
+universal incident-record defaults.
+
 ## Scoring
 
 Each rubric dimension is scored:

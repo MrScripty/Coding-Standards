@@ -1104,3 +1104,31 @@ syntax, and whitespace checks all passed. `S1 route passed: 6 modules,
 595/11066 baseline lines`.
 
 **Next slice:** `7.3c`.
+
+## 2026-07-28: Milestone 7.3c Release Recovery And Withdrawal
+
+**Outcome:** Accepted.
+
+Recovery policy for `STD-0577` through `STD-0581` now belongs to
+`workflows/release.md`. It classifies affected scope and selects withdrawal,
+containment, notification, correction, supersession, and state recovery from
+actual destination capabilities and contracts.
+
+Published bytes and immutable identities cannot be silently replaced.
+Destination limitations cannot be described as successful erasure, urgency
+does not create authority, and replacement releases must satisfy fresh
+acceptance claims. Incident records follow documentation policy and consumer
+impact rather than always modifying a changelog.
+
+The provider-, registry-, branch-, and patch-specific legacy rollback section
+was removed. Unresolved scope, capability, authority, action, or replacement
+evidence returns a typed release-recovery diagnostic. Finding `F042` records
+and resolves the prior provider-specific rollback assumptions.
+
+**Verification:** recovery, procedure, publication, maintenance, pipeline,
+artifact, and foundation fixtures; documentation, contract, verification,
+acceptance, disposition, commit, traceability, metadata, plan lifecycle, shell
+syntax, and whitespace checks all passed. `S1 route passed: 6 modules,
+595/11066 baseline lines`.
+
+**Next slice:** `7.3d`.
