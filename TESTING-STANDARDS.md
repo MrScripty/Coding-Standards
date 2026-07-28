@@ -1,9 +1,10 @@
 # Testing Standards
 
 > **Migration authority:** [workflows/verification.md](workflows/verification.md)
-> is canonical for selecting evidence and determining acceptance fidelity.
-> This file remains canonical for detailed test organization and techniques not
-> yet moved. Conflicts for moved rules resolve to the workflow.
+> is canonical for acceptance claims, evidence kinds, environment
+> qualifications, execution modes, and completion. This file owns test
+> organization and test-design techniques. Test suite labels do not override
+> the workflow's claim model.
 
 Guidelines for writing maintainable, effective tests.
 
@@ -90,13 +91,15 @@ describe('UserService', () => {
 
 ---
 
-## Test Categories
+## Test Suite Shapes
 
-| Category | Scope | Speed | When to Run |
-|----------|-------|-------|-------------|
-| Unit | Single function/module | < 10ms | Every commit |
-| Integration | Multiple modules | < 1s | Pre-push |
-| E2E | Full system | < 30s | CI only |
+Repositories may label suites `unit`, `integration`, `e2e`, or with
+ecosystem-specific names for organization. These labels do not define what
+evidence proves or where it must run. Map each required acceptance claim through
+[the verification workflow](workflows/verification.md), then schedule the
+implementing suite according to project cost and environment.
+
+Do not impose universal duration thresholds or CI-only categories.
 
 ### Unit Tests
 
@@ -376,15 +379,12 @@ Rust property-test guidance lives in
 
 ---
 
-## Coverage Guidelines
+## Coverage Guidance
 
-### Targets
-
-| Type | Minimum | Ideal |
-|------|---------|-------|
-| Line | 70% | 85% |
-| Branch | 60% | 75% |
-| Function | 80% | 90% |
+Coverage is a diagnostic for unexercised code, not acceptance evidence by
+itself. A project may set line, branch, or function targets when historical
+data and risk justify them. Do not apply universal percentages across unrelated
+repositories.
 
 ### What to Exclude from Coverage
 
@@ -561,62 +561,17 @@ test('search completes within 100ms for 10k items', async () => {
 
 ---
 
-## Verification Layers
+## Supporting Development Checks
 
-Testing is not limited to unit test suites. Use these verification layers in order. Each catches a different class of problem. For local/manual verification, stop at the first failure and fix it before proceeding. In CI, still run independent gates and platform jobs to completion so one failure does not hide later issues.
+Static analysis, formatting, linting, compilation, builds, dev-server startup,
+and runtime launch are useful supporting checks. They prove only their explicit
+properties and do not replace missing contract, system, user-workflow, or
+release-artifact claims.
 
-```
-┌──────────────────────────────────────────┐
-│  1. Static Analysis (fastest)            │  Compiler errors, type checks, lint
-├──────────────────────────────────────────┤
-│  2. Build Verification                   │  Full project build succeeds
-├──────────────────────────────────────────┤
-│  3. Dev Server Validation                │  Dev server starts without errors
-├──────────────────────────────────────────┤
-│  4. Runtime Verification                 │  App launches and runs correctly
-├──────────────────────────────────────────┤
-│  5. Reference Lookup (when stuck)        │  Library source, docs, examples
-└──────────────────────────────────────────┘
-```
-
-### Layer 1: Static Analysis
-
-Run your language's type checker and linter first — it's the fastest feedback loop.
-
-| Language | Command | What It Catches |
-|----------|---------|-----------------|
-| TypeScript | `tsc --noEmit` / `svelte-check` | Type errors, unused variables |
-| Rust | `cargo check` | Borrow errors, type mismatches |
-| C# | `dotnet build` | Compiler errors, nullability |
-| Python | `mypy` / `pyright` | Type errors |
-
-### Layer 2: Build Verification
-
-Run the full project build after cross-cutting changes. For single-layer changes, use targeted builds for speed.
-
-### Layer 3: Dev Server Validation
-
-If your project has a dev server (Vite, webpack, etc.), start it and watch for:
-- Import resolution errors
-- Module compilation failures
-- Runtime reference errors in the terminal
-
-### Layer 4: Runtime Verification
-
-Launch the full application. Verify:
-- No runtime exceptions in console/logs
-- Core user flows work end to end
-- Cross-layer communication succeeds
-
-### Layer 5: Reference Lookup
-
-When an error is unclear or an API is unfamiliar:
-1. Check local library source code (exact version in use)
-2. Read official documentation
-3. Search library issues/discussions
-4. Search the web as a last resort
-
-**Prefer local source over web lookups.** Local source is always accurate for the exact version in use.
+Use language profiles for concrete commands and
+[TOOLING-STANDARDS.md](TOOLING-STANDARDS.md) for scheduling mechanisms. When an
+error is unclear, consult the exact local dependency source and official
+documentation before relying on examples for another version.
 
 ---
 

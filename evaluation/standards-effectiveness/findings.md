@@ -11,8 +11,9 @@ changes and focused fixture evidence.
 | F001 | Resolved in Milestone 3 | Prompts are versioned, thin, path-neutral workflow entrypoints. |
 | F004 | Resolved in Milestone 3 | Canonical planning lifecycle and structural fixtures. |
 | F005 | Resolved in Milestone 3 | Planning and implementation prompts have separate intent and canonical workflow links. |
-| F006 | Partially resolved in Milestone 4.1 | Verification owns typed acceptance claims and planning consumes them; legacy verification-level duplication remains for Slice 4.2. |
+| F006 | Resolved in Milestone 4 | Verification owns typed acceptance claims; Testing, Tooling, Launcher, and Release link to that authority without redefining evidence. |
 | F008 | Partially resolved | Planning no longer grants cleanup authority; commit-history policy remains Milestone 6. |
+| F012 | Resolved in Milestone 4 | Universal test durations, percentages, and CI-only categories were replaced by project/risk-based selection. |
 | F031 | Resolved in Milestone 4.1 | Acceptance claim fixtures independently model proof kind, environment qualification, and execution mode. |
 
 ## Systemic Findings

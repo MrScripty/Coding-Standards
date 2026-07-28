@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 4.1 accepted; canonical acceptance claims are active.
+**Current phase:** Milestones 0-4 accepted; verification ownership is canonical.
 
-**Next slice:** Milestone 4.2, legacy verification and release guidance alignment.
+**Next slice:** Milestone 5, contracts, compatibility, and fallbacks.
 
 **Acceptance status:** `partial`
 
@@ -341,11 +341,11 @@ current status is understandable without reading history.
 - [x] Bind plan acceptance to complete claim sets and explicit satisfaction
   state.
 - [x] Add scenario fixtures for kind, environment, mode, and smoke limits.
-- [ ] Consolidate focused, integration, contract, system, user-workflow,
+- [x] Consolidate focused, integration, contract, system, user-workflow,
   and release-artifact evidence definitions.
-- [ ] Remove universal duration and CI-only assumptions.
-- [ ] State that launch smoke does not prove a user feature.
-- [ ] Align testing, tooling, launcher, release, and plan guidance.
+- [x] Remove universal duration and CI-only assumptions.
+- [x] State that launch smoke does not prove a user feature.
+- [x] Align testing, tooling, launcher, release, and plan guidance.
 
 **Write set:** verification workflow and affected standards/templates/fixtures.
 
@@ -357,7 +357,7 @@ evidence cannot satisfy a criterion.
 1. Canonical acceptance claims, plan integration, and scenario fixtures.
 2. Testing, tooling, launcher, and release migration to the canonical owner.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 5: Contracts, Compatibility, And Fallbacks
 

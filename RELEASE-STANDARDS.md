@@ -2,6 +2,11 @@
 
 Versioning, changelog management, artifact packaging, and CI/CD release pipelines.
 
+> **Acceptance authority:** [workflows/verification.md](workflows/verification.md)
+> defines acceptance claims and evidence meaning. This file owns release
+> procedure, artifact production, and publication. Shipping gates consume the
+> required claims without redefining them.
+
 ## Semantic Versioning
 
 All versioned software must follow [Semantic Versioning 2.0.0](https://semver.org/).
@@ -509,16 +514,31 @@ toolchain pinning, and `cargo-release` live in
 
 ---
 
+## Release Acceptance Boundary
+
+Before publishing, identify every acceptance claim required by the release:
+
+- `release-artifact` claims for packaging, installation, loading, startup,
+  checksums, signatures, or publication properties;
+- behavior claims for changed contracts, systems, or user workflows; and
+- environment qualifications for supported target platforms or required real
+  infrastructure.
+
+An artifact smoke satisfies only its named assertions. Downloading and starting
+one artifact does not prove changed feature behavior, other target artifacts,
+or user workflows. Required behavior claims must already be satisfied by
+matching evidence or remain a visible release blocker.
+
+---
+
 ## Release Checklist
 
 Before every release:
 
-1. All CI checks pass on the commit to be released
-2. Full test suite passes locally (e.g., `cargo test --workspace`, `npm test`,
-   `pytest`)
-3. Linter reports no warnings (e.g., `cargo clippy --workspace`, `eslint .`,
-   `ruff check`)
-4. Dependency audit shows no high/critical vulnerabilities (e.g., `cargo audit`,
+1. Every required acceptance claim is satisfied on the commit to be released
+2. Required CI, dedicated-runner, release, and manual gates have recorded results
+3. Required static, build, and test checks pass in their owned environments
+4. Dependency audit shows no unaccepted high/critical vulnerabilities (e.g., `cargo audit`,
    `npm audit`, `pip-audit`)
 5. CHANGELOG.md `[Unreleased]` section is populated with all notable changes
 6. Version bumped in all manifest files
@@ -528,7 +548,8 @@ Before every release:
 10. Tag: `git tag vX.Y.Z`
 11. Push commit and tag: `git push && git push --tags`
 12. CI creates draft GitHub Release — verify all expected artifacts are present
-13. Download at least one published artifact and smoke-test it to verify it runs
+13. Download the representative published artifacts required by the acceptance
+    plan and run each named `release-artifact` smoke criterion
 14. Review release notes, then publish the release
 
 For dependency security auditing in CI, see

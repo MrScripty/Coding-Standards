@@ -94,6 +94,11 @@ regressions against the canonical claim model:
 - startup smoke cannot substitute for a user workflow; and
 - manual execution is not a higher evidence kind.
 
+`verify-verification-ownership.sh` checks that Verification remains the single
+acceptance owner while Testing, Tooling, Launcher, and Release retain only their
+test-design, scheduling, command, and shipping responsibilities. It rejects the
+legacy universal timing/CI taxonomy and smoke-as-feature substitution.
+
 ## Scoring
 
 Each rubric dimension is scored:

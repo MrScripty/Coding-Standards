@@ -114,8 +114,9 @@ Label the smoke by evidence kind and asserted behavior. Startup alone is usually
   that convention prevents the selected evidence.
 
 Detailed test organization remains in
-[TESTING-STANDARDS.md](../TESTING-STANDARDS.md) until Slice 4.2 completes its
-migration. This workflow is canonical for claim selection and acceptance.
+[TESTING-STANDARDS.md](../TESTING-STANDARDS.md). This workflow is canonical for
+claim selection and acceptance; the testing document owns test-design
+techniques.
 
 ## Scheduling And Duration
 

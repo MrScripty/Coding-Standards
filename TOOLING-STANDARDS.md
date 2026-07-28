@@ -2,6 +2,12 @@
 
 Code quality automation through linting, formatting, and pre-commit hooks.
 
+> **Acceptance authority:** [workflows/verification.md](workflows/verification.md)
+> defines acceptance claims and what evidence proves. This file owns automation,
+> scheduling, and reporting mechanisms. Moving a check between local hooks, CI,
+> dedicated runners, release jobs, or manual procedures does not change its
+> claim.
+
 ## Pre-Commit Hooks
 
 ### Why Pre-Commit Hooks
@@ -61,11 +67,15 @@ pre-push:
 
 ### Hook Categories
 
-| Hook | When | What to Run |
+| Hook | When | Typical Checks |
 |------|------|-------------|
-| pre-commit | Before each commit | Fast checks: lint, format, typecheck, decision traceability |
-| pre-push | Before pushing | Slower checks: full test suite |
+| pre-commit | Before each commit | Affected fast checks with useful local feedback |
+| pre-push | Before pushing | Broader or more expensive checks selected by the project |
 | commit-msg | After writing message | Validate commit message format |
+
+These are scheduling defaults, not acceptance categories. A required claim may
+run at either hook, in CI, on a dedicated environment, or through a recorded
+manual procedure.
 
 ### History Cleanup Enforcement (Advisory Only)
 
@@ -84,7 +94,8 @@ Recommended approach:
 
 1. **Run in parallel** - Independent checks should run concurrently
 2. **Check only staged files** - Use `{staged_files}` placeholder
-3. **Skip heavy checks in pre-commit** - Move full test suite to pre-push
+3. **Schedule by measured cost** - Keep interactive hooks useful and place
+   expensive claims at an owned later gate
 4. **Use file globs** - Only run checks on relevant file types
 
 ### Persisted Artifact Validation Hooks
@@ -687,12 +698,11 @@ jobs:
 
 ### CI vs. Local Checks
 
-| Check | Local (pre-commit) | CI |
-|-------|-------------------|-----|
-| Linting | Staged files / fast checks | Critical + no-new (blocking) + full audit |
-| Formatting | Staged files only | All files |
-| Type check | Incremental | Full |
-| Tests | Affected only | Full suite |
+Projects may use staged or incremental checks locally and broader checks in CI,
+but this is a cost optimization rather than a proof hierarchy. Required claims
+must run wherever their environment is available, including locally,
+pre-commit, pre-push, CI, a dedicated runner, release verification, or a manual
+gate. Do not classify an evidence kind as CI-only.
 
 ---
 

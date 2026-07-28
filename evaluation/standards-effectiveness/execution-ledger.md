@@ -229,3 +229,43 @@
 - Shell syntax, whitespace, and staged-scope checks passed.
 
 **Commit:** `docs(verification): model acceptance as typed claims`
+
+## 2026-07-28: Milestone 4.2 Verification Ownership Alignment
+
+**Outcome:** Accepted.
+
+**Write set:**
+
+- testing, tooling, launcher, and release standards;
+- canonical verification workflow;
+- verification ownership checker;
+- evaluation README, ledger, findings, and active plan.
+
+**Delivered:**
+
+- Testing owns organization and design techniques without universal duration,
+  coverage, CI-only, or competing verification-layer rules;
+- Tooling owns scheduling and automation without changing evidence meaning;
+- Launcher owns command behavior and labels startup smoke as narrow
+  release-artifact evidence;
+- Release owns shipping procedure and requires all behavior and artifact claims
+  rather than treating one download/start check as feature proof; and
+- an executable ownership check prevents the removed taxonomy from returning.
+
+**No-fallback/legacy result:**
+
+- Verification is the only acceptance-claim owner.
+- Legacy documents link to the canonical workflow and do not preserve their old
+  timing or hierarchy as alternatives.
+- Release smoke remains available only as an explicitly narrow artifact check,
+  not a compatibility substitute for missing behavior evidence.
+
+**Verification:**
+
+- Verification ownership checks passed.
+- Acceptance claim and plan lifecycle fixtures passed.
+- Canonical template and active plan passed structure checks.
+- Metadata, negative metadata, S1 routing, shell syntax, whitespace, links, and
+  staged-scope checks passed.
+
+**Commit:** `docs(verification): align test and release evidence ownership`

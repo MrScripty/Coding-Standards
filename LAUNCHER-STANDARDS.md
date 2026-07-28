@@ -2,6 +2,11 @@
 
 Requirements for `launcher.sh`, the default entry point for all apps.
 
+> **Acceptance authority:** [workflows/verification.md](workflows/verification.md)
+> defines what a check proves. This file owns launcher command behavior. A
+> launcher action transports a verification procedure; it does not upgrade that
+> procedure's evidence kind.
+
 ## Scope
 
 Every application must expose a root-level `launcher.sh` script as the primary
@@ -76,7 +81,7 @@ developers to discover separate commands manually.
 |---|---|---|
 | `--test` | The project has a canonical local test command | Runs the repo's standard test suite and exits non-zero on failure |
 | `--perf` | The project has a benchmark, perf gate, or profiler contract | Runs the canonical perf command and preserves its pass/fail semantics |
-| `--release-smoke` | The project ships a release artifact that should be sanity checked before shipping | Builds or verifies the release artifact, launches it briefly, and fails if startup is not healthy |
+| `--release-smoke` | The project ships a release artifact with a named smoke criterion | Builds or verifies the artifact, performs the documented narrow smoke procedure, and preserves its pass/fail result |
 
 Rules:
 
@@ -89,6 +94,12 @@ Rules:
    the artifact exits prematurely or cannot start cleanly.
 5. If a workflow does not apply to the project, omit the flag rather than
    adding a stub with ambiguous behavior.
+6. Document the smoke's acceptance claim, environment, and assertions. Startup
+   health is `release-artifact` evidence only; it does not prove a system
+   capability or user workflow.
+7. If release acceptance requires a real feature workflow, expose or invoke a
+   procedure that performs and asserts that workflow instead of relabeling
+   startup as end-to-end evidence.
 
 ### GUI CI Smoke Requirements
 
@@ -560,4 +571,5 @@ main "$@"
 - If the project has a canonical local test flow, `launcher.sh --test` exists
 - If the project has a canonical perf gate, `launcher.sh --perf` exists
 - If the project ships release artifacts, `launcher.sh --release-smoke` is defined
+- Release smoke documents its narrow claim and is not treated as feature acceptance
 - If the app persists local state, launcher-managed isolation is documented and implemented
