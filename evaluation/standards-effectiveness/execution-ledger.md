@@ -1367,3 +1367,40 @@ Plan structure, plan fixtures, shell syntax, whitespace, and all
 standards-effectiveness regressions pass.
 
 **Next slice:** `7.4b2b`.
+
+## 2026-07-28: Milestone 7.4b3a F022/F023 Decomposition
+
+**Outcome:** Accepted.
+
+The planning slice maps 34 frozen identifiers into six serial implementation
+slices: generic Interop, generic Language Bindings, Rust Interop, Rust Security
+checked arithmetic, Rust Unsafe, and Rust Language Bindings. Generic owners
+precede every language specialization, and each implementation slice has one
+observable contract, exact write set, focused fixture, typed failure behavior,
+legacy-removal rule, and acceptance gate.
+
+The review expanded `F023` evidence to include `STD-0823`, which repeats
+unchecked signed-to-`usize` conversion before checked arithmetic. It also
+records that framework lifting or serialization does not make Rust container
+representations C-ABI-safe. The consistent Rust API `# Safety` reminder remains
+for later API migration and must eventually become a link to the canonical
+Unsafe specialization.
+
+**No-fallback/legacy result:** the sequence prohibits guessed lengths,
+zero-on-overflow substitution, truncation, saturation, wrapping, copy-after-
+invalid-access, universal FFI-safe labels, incomplete unsafe proof, lossy
+conversion defaults, and alternate binding mechanisms. Missing proof produces
+a typed diagnostic.
+
+**Verification:** the F022/F023 checker validates all 34 identifiers, six exact
+owner/disposition groups, serial lifecycle, zero initial dispositions, named
+fixtures, and the active-plan handoff. Plan fixtures, shell syntax, whitespace,
+and all standards-effectiveness regressions pass.
+The rolling decomposition gate remains at 675 identifiers across 33 sources
+and 32 owners, with 22 ownership gaps. The S1 context route remains 6 modules
+and 597 of 11066 baseline lines.
+
+No normative standards, accepted dispositions, generated inventory, template,
+lockfile, or downstream repository changed.
+
+**Next slice:** `7.4b3b`.

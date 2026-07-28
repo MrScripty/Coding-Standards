@@ -117,6 +117,13 @@ Critical payload-validation finding `F018` is decomposed in
 generic runtime-decoding contract must be accepted before its IPC
 specialization, and both slices precede the next trust-boundary finding.
 
+Critical foreign-memory and binding-conversion findings `F022` and `F023` are
+decomposed in
+[milestone-7-f022-f023-decomposition.md](milestone-7-f022-f023-decomposition.md).
+Generic Interop and Language Binding profiles precede Rust Interop, Security,
+Unsafe, and Language Binding specializations. Those six slices remain serial
+until both findings are resolved.
+
 Before starting each later wave:
 
 1. inspect repository status and accepted dependencies;

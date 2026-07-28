@@ -1,0 +1,35 @@
+slice	order	id	source	target	disposition	rationale
+7.4b3b	1	STD-0465	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	move	establish the generic foreign-boundary owner
+7.4b3b	2	STD-0466	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	move	define concrete foreign-boundary applicability
+7.4b3b	3	STD-0467	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	merge	consolidate generic foreign-boundary principles
+7.4b3b	4	STD-0468	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	link complete validation proof without duplicating Contracts
+7.4b3b	5	STD-0469	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	require valid foreign-memory authority before copying
+7.4b3b	6	STD-0470	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	define initialization and shutdown ownership
+7.4b3b	7	STD-0471	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	define call and callback thread contracts
+7.4b3b	8	STD-0472	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	isolate unsafe mechanics behind validated adapters
+7.4b3c	9	STD-0483	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	move	establish the generic language-binding owner
+7.4b3c	10	STD-0484	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	separate binding transport from ABI representation
+7.4b3c	11	STD-0485	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	move	preserve the thin adapter layer contract
+7.4b3c	12	STD-0486	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	merge	route concrete mechanisms to language specializations
+7.4b3d	13	STD-0752	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	move	establish the Rust foreign-boundary specialization
+7.4b3d	14	STD-0753	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	require complete raw slice construction proof
+7.4b3d	15	STD-0754	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	copy only after foreign-memory preconditions hold
+7.4b3d	16	STD-0755	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	isolate unsafe operations behind safe validated APIs
+7.4b3d	17	STD-0756	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	bind callback thread and borrowed lifetime contracts
+7.4b3e	18	STD-0823	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	replace unchecked casts with checked typed size conversion
+7.4b3f	19	STD-0843	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	move	establish the Rust unsafe contract owner
+7.4b3f	20	STD-0844	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	preserve deny-by-default with explicit unsafe ownership
+7.4b3f	21	STD-0845	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	separate block rationale from caller safety contracts
+7.4b3f	22	STD-0846	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	require complete ownership lifetime and thread obligations
+7.4b3f	23	STD-0847	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	select verification from the actual unsafe mechanism
+7.4b3f	24	STD-0848	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	prohibit safe fallback claims from weakening unsafe proof
+7.4b3g	25	STD-0772	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	move	establish Rust binding conversion ownership
+7.4b3g	26	STD-0773	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	replace unchecked wrapper conversions
+7.4b3g	27	STD-0774	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	classify framework-liftable and ABI-safe types separately
+7.4b3g	28	STD-0775	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	use fallible conversion when representation can reject
+7.4b3g	29	STD-0794	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	move	preserve explicit type mapping ownership
+7.4b3g	30	STD-0795	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	remove false universal FFI-safe classifications
+7.4b3g	31	STD-0796	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	select conversion by the concrete boundary mechanism
+7.4b3g	32	STD-0801	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	merge	join conversion verification to the canonical specialization
+7.4b3g	33	STD-0802	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require success rejection and boundary round-trip coverage
+7.4b3g	34	STD-0803	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	replace infallible-only conversion examples

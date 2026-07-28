@@ -178,6 +178,14 @@ decoding and Security linkage. `verify-milestone-7-f018-decomposition.sh`
 checks the exact fourteen identifiers, owners, dispositions, ordering, named
 fixtures, and active-plan handoff without moving normative guidance.
 
+`milestone-7-f022-f023-decomposition.md` and
+`milestone-7-f022-f023-slices.tsv` split critical foreign-memory, unsafe-
+contract, ABI-classification, and conversion findings `F022` and `F023` into
+six serial generic and Rust-specialized slices.
+`verify-milestone-7-f022-f023-decomposition.sh` checks the exact 34
+identifiers, owners, dispositions, ordering, named fixtures, and active-plan
+handoff without moving normative guidance.
+
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
 legacy path is only a bounded migration index.

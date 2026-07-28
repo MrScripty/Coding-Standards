@@ -6,12 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave active; F018 action-specific
-IPC decoding accepted.
+**Current phase:** Milestone 7 trust-boundary wave active; F022/F023
+foreign-boundary decomposition accepted.
 
-**Next slice:** Milestone 7.4b3a, planning only to decompose critical foreign-
-boundary findings `F022` and `F023` into generic owner and Rust-specialization
-slices before moving normative guidance.
+**Next slice:** Milestone 7.4b3b, establish the canonical generic
+foreign-boundary contract before any Rust specialization.
 
 **Acceptance status:** `partial`
 
@@ -24,6 +23,8 @@ slices before moving normative guidance.
 **Milestone 7 decomposition:** [Rolling owner-and-correctness waves](../evaluation/standards-effectiveness/milestone-7-decomposition.md)
 
 **F018 decomposition:** [Runtime proof and action-specific IPC decoding](../evaluation/standards-effectiveness/milestone-7-f018-decomposition.md)
+
+**F022/F023 decomposition:** [Foreign memory, unsafe contracts, ABI classification, and checked conversion](../evaluation/standards-effectiveness/milestone-7-f022-f023-decomposition.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -482,9 +483,22 @@ all structural/routing fixtures pass.
      trust-boundary linkage (`STD-0063`-`STD-0068`,
      `STD-0592`-`STD-0595`), including removal of duplicate lifecycle ownership
      from the prerequisite runtime-decoding checker; and
-   - `7.4b3a` (`Planned`): decompose critical checked-conversion, C-ABI,
+   - `7.4b3a` (`Accepted`): decompose critical checked-conversion, C-ABI,
      allocation, initialization, provenance, lifetime, size, and unsafe-
-     contract findings `F022` and `F023`.
+     contract findings `F022` and `F023` across 34 frozen identifiers and six
+     serial owner-bounded slices;
+   - `7.4b3b` (`Planned`): canonical generic foreign-boundary contract
+     (`STD-0465`-`STD-0472`);
+   - `7.4b3c` (`Planned`): canonical generic language-binding contract
+     (`STD-0483`-`STD-0486`);
+   - `7.4b3d` (`Planned`): Rust foreign-memory proof
+     (`STD-0752`-`STD-0756`);
+   - `7.4b3e` (`Planned`): Rust checked boundary arithmetic (`STD-0823`);
+   - `7.4b3f` (`Planned`): Rust unsafe proof and caller contracts
+     (`STD-0843`-`STD-0848`); and
+   - `7.4b3g` (`Planned`): Rust binding representation and checked conversion
+     (`STD-0772`-`STD-0775`, `STD-0794`-`STD-0796`,
+     `STD-0801`-`STD-0803`).
 6. Final legacy-index review, disposition closure, and duplication gate.
 
 **Status:** `Active`
