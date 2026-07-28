@@ -154,6 +154,11 @@ directory/README, ADR, and project-entry identifiers, validates the workflow
 and derived boundary template, and rejects restoration of universal directory,
 fixed-section, placeholder, and per-change README obligations.
 
+`verify-release-workflow-foundation.sh` checks release and changelog
+applicability decisions, exact disposition of `STD-0531` through `STD-0540`,
+canonical workflow metadata and routing, and the explicit boundary around
+unmigrated release concerns.
+
 ## Scoring
 
 Each rubric dimension is scored:

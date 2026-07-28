@@ -37,7 +37,7 @@ observable task conditions. Do not read every document by default.
 | Commit creation or history maintenance | [Commit](workflows/commit.md) |
 | Durable responsibility, decision, contract, or operational procedure changes | [Documentation](workflows/documentation.md) |
 | Dependency or CI/tool configuration changes | [Current tooling guidance](TOOLING-STANDARDS.md) until migration |
-| Shipping or publishing an artifact | [Current release guidance](RELEASE-STANDARDS.md) until Milestone 4/7 migration |
+| Shipping an artifact, changing a published version promise, or preparing consumer-visible release information | [Release](workflows/release.md) |
 
 Small, local, low-risk changes do not require a large implementation plan when
 the objective, write set, regression check, and acceptance are obvious.

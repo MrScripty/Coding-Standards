@@ -698,3 +698,59 @@ their assigned slice; they cannot act as fallback for canonical workflow
 decisions.
 
 **Next slice:** `7.2c1`.
+
+## 2026-07-28: Milestone 7.2c1 Release Workflow Foundation
+
+**Outcome:** Accepted.
+
+Created `workflows/release.md` as the canonical owner of:
+
+- observable release applicability;
+- contract-class-driven version decisions and release-unit ownership;
+- major-zero versus prerelease semantics;
+- published-promise deprecation and migration;
+- consumer-visible changelog selection and assembly; and
+- release acceptance claims and blocking behavior.
+
+Frozen identifiers `STD-0531` through `STD-0539` moved to the workflow.
+`STD-0540` was removed because commit types do not prove consumer-visible
+release impact. Changelog automation identifiers `STD-0541` and `STD-0542`
+remain explicitly bounded for later reference migration.
+
+The router now selects the canonical workflow from shipping, published-promise,
+or consumer-visible release conditions. The legacy release file removed the
+moved versioning, changelog, contract, deprecation, migration, and acceptance
+rules. Its retained checklist consumes the canonical decisions and pushes only
+the intended release tag.
+
+The first ownership regression run exposed `F035`: contract and verification
+fixtures still required duplicate direct links from the legacy release file.
+They now require the legacy file to route to `workflows/release.md` and validate
+that canonical workflow's direct dependencies instead.
+
+**No-fallback/legacy result:**
+
+- The legacy file cannot override any decision owned by the release workflow.
+- Internal coordinated changes do not gain speculative compatibility,
+  versioning, deprecation, or changelog obligations.
+- Unknown release facts produce a diagnostic rather than a public-release
+  default.
+
+**Write set:**
+
+- `workflows/release.md`
+- `RELEASE-STANDARDS.md`
+- router and library indexes
+- release decision fixture and ownership checks
+- dispositions, findings, plan, and this ledger
+
+**Verification:**
+
+- Release workflow foundation and metadata fixtures.
+- Contract, verification, routing, acceptance, and consolidation regressions.
+- Plan structure and lifecycle fixtures.
+- Shell syntax, whitespace, and link review.
+- `S1 route passed: 6 modules, 595/11066 baseline lines`.
+- All listed checks passed.
+
+**Next slice:** `7.2c2`.

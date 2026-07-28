@@ -7,6 +7,7 @@ readonly TESTING="$ROOT/TESTING-STANDARDS.md"
 readonly TOOLING="$ROOT/TOOLING-STANDARDS.md"
 readonly LAUNCHER="$ROOT/LAUNCHER-STANDARDS.md"
 readonly RELEASE="$ROOT/RELEASE-STANDARDS.md"
+readonly RELEASE_WORKFLOW="$ROOT/workflows/release.md"
 
 for heading in \
   "## Acceptance Is A Set Of Claims" \
@@ -18,13 +19,16 @@ for heading in \
   grep -qFx "$heading" "$WORKFLOW"
 done
 
-for file in "$TESTING" "$TOOLING" "$LAUNCHER" "$RELEASE"; do
+for file in "$TESTING" "$TOOLING" "$LAUNCHER"; do
   if [[ "$(grep -c 'workflows/verification.md' "$file")" -lt 1 ]]; then
     printf '%s: missing canonical verification link\n' \
       "${file#"$ROOT"/}" >&2
     exit 1
   fi
 done
+
+grep -q 'workflows/release.md' "$RELEASE"
+grep -q '(verification.md)' "$RELEASE_WORKFLOW"
 
 if rg -q '< 10ms|< 1s|< 30s|CI only|^## Verification Layers$|^### Targets$' \
   "$TESTING"; then
@@ -39,6 +43,6 @@ fi
 
 grep -q 'health is `release-artifact` evidence only' "$LAUNCHER"
 grep -q 'capability or user workflow' "$LAUNCHER"
-grep -q 'does not prove changed feature behavior' "$RELEASE"
+grep -q 'does not prove changed feature behavior' "$RELEASE_WORKFLOW"
 
 printf 'Verification ownership checks passed\n'

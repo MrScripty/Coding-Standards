@@ -10,7 +10,7 @@ for file in \
   "$ROOT/CODING-STANDARDS.md" \
   "$ROOT/INTEROP-STANDARDS.md" \
   "$ROOT/LANGUAGE-BINDINGS-STANDARDS.md" \
-  "$ROOT/RELEASE-STANDARDS.md" \
+  "$ROOT/workflows/release.md" \
   "$ARCHITECTURE" \
   "$RUST_BINDINGS"; do
   if [[ "$(grep -c 'topics/contracts.md' "$file")" -lt 1 ]]; then
@@ -18,6 +18,8 @@ for file in \
     exit 1
   fi
 done
+
+grep -q 'workflows/release.md' "$ROOT/RELEASE-STANDARDS.md"
 
 if rg -q \
   'Append-only changes|Additive changes are safe|Delete and rebuild from scratch|continue with defaults or degraded mode|Use cached fallback or return partial results|returns safe defaults' \

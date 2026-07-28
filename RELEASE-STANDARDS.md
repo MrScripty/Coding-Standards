@@ -1,125 +1,17 @@
 # Release Standards
 
-Versioning, changelog management, artifact packaging, and CI/CD release pipelines.
+Release applicability, versioning, changelog, contract-evolution, deprecation,
+migration, and acceptance policy moved to the canonical
+[Release Workflow](workflows/release.md).
 
-> **Acceptance authority:** [workflows/verification.md](workflows/verification.md)
-> defines acceptance claims and evidence meaning. This file owns release
-> procedure, artifact production, and publication. Shipping gates consume the
-> required claims without redefining them.
+This file temporarily retains only unmigrated artifact/packaging,
+reproducible-build, pipeline/publication, channel/download, checklist,
+rollback, and tool-recipe guidance. These sections cannot override the
+canonical workflow.
 
-> **Evolution authority:** [topics/contracts.md](topics/contracts.md) selects
-> compatibility, migration, and coordinated replacement from actual consumers
-> and deployment facts. Release versioning implements public or independently
-> consumed promises; it does not create them for internal coordinated code.
+## Release Tool Recipes (Pending Reference Migration)
 
-## Semantic Versioning
-
-All versioned software must follow [Semantic Versioning 2.0.0](https://semver.org/).
-
-### Version Bump Decision Table
-
-| Change Type | Bump | Examples |
-| ----------- | ---- | -------- |
-| Breaking API change | Major | Remove public function, change return type, rename exported struct |
-| New backward-compatible functionality | Minor | Add public function, new optional parameter, new feature |
-| Backward-compatible bug fix | Patch | Fix incorrect behavior, fix crash, correct error message |
-| Internal refactoring (no public API change) | Patch or none | Rename private module, restructure internals |
-
-### Pre-1.0 Rules
-
-While at `0.x.y`, minor version bumps may include breaking changes. This is
-standard SemVer behavior — `0.x` signals instability.
-
-```text
-0.1.0 → 0.2.0   May include breaking changes
-0.2.0 → 0.2.1   Bug fixes only
-1.0.0 → 1.1.0   New features, no breaking changes
-1.1.0 → 2.0.0   Breaking changes
-```
-
-Document all breaking changes in the changelog regardless of version.
-
-### Deprecation Policy
-
-Deprecated `public-versioned` features follow a structured timeline before
-removal. Internal coordinated contracts may be replaced atomically when all
-consumers and retained states move together.
-
-1. **Announce** — Record the deprecation in the changelog under the `Deprecated`
-   category. Include what is deprecated, why, and what replaces it
-2. **Warn** — Emit warnings at the point of use (compiler warnings, runtime
-   warnings, or linter rules) so consumers discover the deprecation without
-   reading the changelog
-3. **Grace period** — Maintain the deprecated API for at least one full minor
-   version cycle after the announcement (or longer if the project documents a
-   specific policy)
-4. **Remove** — Remove the deprecated API in a major version bump. Record the
-   removal in the changelog under the `Removed` category with a reference to the
-   version that originally deprecated it
-
-For pre-1.0 software, deprecation may be shortened or skipped since `0.x`
-already signals instability, but a changelog entry is still required.
-
-### Migration Guides
-
-Every major version bump that introduces breaking changes must include a
-migration guide. The guide should cover:
-
-- What changed and why
-- Before/after code examples
-- Step-by-step upgrade path
-- Any automated migration tooling available (codemods, scripts, etc.)
-
-Link the migration guide from both the changelog entry and the GitHub Release
-notes. Migration guides may be a section within the release notes or a separate
-document (e.g., `MIGRATION-v2.md`) depending on scope.
-
-For pre-1.0 breaking changes, include migration notes inline in the changelog
-entry rather than a separate guide.
-
-### Workspace Version Alignment
-
-When using workspace-level versioning (e.g., a monorepo with a shared version
-field), all member packages share a version and are released together.
-
-If a project has multiple manifest files, keep versions synchronized across all
-of them.
-
----
-
-## Changelog Management
-
-For full changelog formatting rules, see
-[DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md#changelog). This section
-covers the workflow for maintaining and automating changelogs.
-
-### Maintenance Workflow
-
-1. Every PR that adds user-visible changes updates the `[Unreleased]` section
-2. At release time, rename `[Unreleased]` to `[X.Y.Z] - YYYY-MM-DD`
-3. Add a fresh empty `[Unreleased]` section above it
-
-### Conventional Commits to Changelog Categories
-
-When using [conventional commits](COMMIT-STANDARDS.md), map commit types to
-changelog categories:
-
-| Commit Type | Changelog Category |
-| ----------- | ------------------ |
-| `feat` | Added |
-| `fix` | Fixed |
-| `perf` | Changed |
-| `refactor` (user-visible) | Changed |
-| `deprecated` | Deprecated |
-| `BREAKING CHANGE` footer (removal) | Removed |
-| `BREAKING CHANGE` footer (other) | Changed (with migration note) |
-| Security fix (noted in commit body/footer) | Security |
-| `docs`, `chore`, `ci`, `style`, `test` | Omit (internal-only) |
-
-These six categories (Added, Changed, Deprecated, Removed, Fixed, Security)
-match the [Keep a Changelog](https://keepachangelog.com/) specification.
-
-### Automation
+### Changelog Automation
 
 [git-cliff](https://git-cliff.org/) is recommended for generating changelogs
 from conventional commits. It is config-driven and supports custom templates.
@@ -521,43 +413,22 @@ toolchain pinning, and `cargo-release` live in
 
 ---
 
-## Release Acceptance Boundary
-
-Before publishing, identify every acceptance claim required by the release:
-
-- `release-artifact` claims for packaging, installation, loading, startup,
-  checksums, signatures, or publication properties;
-- behavior claims for changed contracts, systems, or user workflows; and
-- environment qualifications for supported target platforms or required real
-  infrastructure.
-
-An artifact smoke satisfies only its named assertions. Downloading and starting
-one artifact does not prove changed feature behavior, other target artifacts,
-or user workflows. Required behavior claims must already be satisfied by
-matching evidence or remain a visible release blocker.
-
----
-
 ## Release Checklist
 
 Before every release:
 
-1. Every required acceptance claim is satisfied on the commit to be released
-2. Required CI, dedicated-runner, release, and manual gates have recorded results
-3. Required static, build, and test checks pass in their owned environments
-4. Dependency audit shows no unaccepted high/critical vulnerabilities (e.g., `cargo audit`,
+1. Complete the canonical
+   [Release Workflow](workflows/release.md) version, changelog, contract, and
+   acceptance decisions.
+2. Dependency audit shows no unaccepted high/critical vulnerabilities (e.g., `cargo audit`,
    `npm audit`, `pip-audit`)
-5. CHANGELOG.md `[Unreleased]` section is populated with all notable changes
-6. Version bumped in all manifest files
-7. CHANGELOG.md `[Unreleased]` renamed to `[X.Y.Z] - YYYY-MM-DD`
-8. Migration guide written and linked (major versions only)
-9. Commit: `chore(release): prepare vX.Y.Z`
-10. Tag: `git tag vX.Y.Z`
-11. Push commit and tag: `git push && git push --tags`
-12. CI creates draft GitHub Release — verify all expected artifacts are present
-13. Download the representative published artifacts required by the acceptance
+3. Commit: `chore(release): prepare vX.Y.Z`
+4. Tag: `git tag vX.Y.Z`
+5. Push commit and intended release tag.
+6. CI creates draft GitHub Release; verify all expected artifacts are present.
+7. Download the representative published artifacts required by the acceptance
     plan and run each named `release-artifact` smoke criterion
-14. Review release notes, then publish the release
+8. Review release notes, then publish the release
 
 For dependency security auditing in CI, see
 [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md#ci-integration).

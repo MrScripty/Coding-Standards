@@ -23,11 +23,14 @@ changes and focused fixture evidence.
 | F020 | Partially resolved in Milestone 5.2 | Authoritative-store deletion fallback was removed; phased-mutation atomicity remains Milestone 7. |
 | F024 | Resolved in Milestone 5.2 | Rust binding compatibility is classified independently for generated, package, ABI, wire, and persisted boundaries. |
 | F026 | Partially resolved in Milestone 5.2 | Catch-all executor fallback was replaced by typed unsupported delegation; spawn and TOCTOU findings remain Milestone 7. |
+| F027 | Resolved in Milestone 7.2c1 | Major version zero and prerelease identifiers are distinct; published consumer and migration promises remain explicit. |
+| F029 | Partially resolved in Milestone 7.2c1 | Release units may version independently or in lockstep and publication pushes the intended tag; lockfile ownership remains. |
 | F031 | Resolved in Milestone 4.1 | Acceptance claim fixtures independently model proof kind, environment qualification, and execution mode. |
 | D005 | Resolved in Milestone 7.1 | Commit and slice process is owned by implementation/commit workflows; prompts route only, and commit examples are non-normative reference. |
 | F032 | Partially resolved in Milestone 7.2b | Documentation examples and proportional workflow policy have canonical owners; release-owned changelog migration and legacy-index closure remain. |
 | F033 | Resolved in Milestone 7.2a | The commit disposition checker now filters its shared ledger by source; documentation rows have a separate owner-specific fixture. |
-| F034 | Direction approved for Milestone 7.2c1 | Establish the canonical release workflow boundary first, then migrate documentation changelog ownership and decompose remaining release concerns. |
+| F034 | Partially resolved in Milestone 7.2c1 | The canonical release workflow now owns applicability, versioning, changelog, contracts, and acceptance; documentation closure and remaining release decomposition continue. |
+| F035 | Resolved in Milestone 7.2c1 | Contract and verification ownership checks now follow the canonical release workflow instead of requiring duplicate direct links from the legacy release index. |
 
 ## Systemic Findings
 
@@ -52,6 +55,7 @@ changes and focused fixture evidence.
 | F032 | Consolidation ownership | `DOCUMENTATION-STANDARDS.md`; frozen IDs `STD-0349`-`STD-0448` | Move examples, documentation policy, and changelog guidance in separate reference, workflow, and release-owner slices. | 7 |
 | F033 | Fixture ownership | `verify-consolidation-dispositions.sh`; shared disposition ledger | Filter each owner-specific fixture by source and verify new source groups independently. | 7 |
 | F034 | Missing canonical owner | `owner-map.tsv`; `RELEASE-STANDARDS.md`; absent `workflows/release.md` | Establish release workflow ownership in an owner-bounded slice before moving changelog policy or closing the documentation index. | 7 |
+| F035 | Fixture ownership | Release checks in `verify-contract-ownership.sh` and `verify-verification-ownership.sh` | Validate the canonical release dependency chain and only require the legacy file to route to that owner. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

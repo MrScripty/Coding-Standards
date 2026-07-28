@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; canonical release ownership sequence approved.
+**Current phase:** Milestone 7 active; canonical release workflow foundation established.
 
-**Next slice:** Milestone 7.2c1, establish release applicability, versioning, changelog, contract, and acceptance ownership.
+**Next slice:** Milestone 7.2c2, migrate documentation changelog identifiers and close the legacy documentation index.
 
 **Acceptance status:** `partial`
 
@@ -439,8 +439,9 @@ all structural/routing fixtures pass.
      material;
    - `7.2b` (`Accepted`): artifact layout, ADR, and project-README workflow
      policy; and
-   - `7.2c1`: establish `workflows/release.md` with release applicability,
-     versioning, changelog, contract-evolution, and acceptance boundaries;
+   - `7.2c1` (`Accepted`): establish `workflows/release.md` with release
+     applicability, versioning, changelog, contract-evolution, and acceptance
+     boundaries;
    - `7.2c2`: migrate documentation-owned changelog identifiers and close the
      legacy documentation index.
 3. Owner-bounded topic/profile consolidation with correctness fixes, including:

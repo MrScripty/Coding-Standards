@@ -150,3 +150,13 @@ STD-0445	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	contribution
 STD-0446	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	license link when applicable
 STD-0447	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	update only when owned entry facts change
 STD-0448	DOCUMENTATION-STANDARDS.md	none	remove	legacy blanket review checklist
+STD-0531	RELEASE-STANDARDS.md	workflows/release.md	move	release workflow authority
+STD-0532	RELEASE-STANDARDS.md	workflows/release.md	move	contract-driven version policy
+STD-0533	RELEASE-STANDARDS.md	workflows/release.md	move	observable version decision
+STD-0534	RELEASE-STANDARDS.md	workflows/release.md	move	major-zero and prerelease distinction
+STD-0535	RELEASE-STANDARDS.md	workflows/release.md	move	published-promise deprecation policy
+STD-0536	RELEASE-STANDARDS.md	workflows/release.md	move	consumer-driven migration guidance
+STD-0537	RELEASE-STANDARDS.md	workflows/release.md	move	project-owned release unit
+STD-0538	RELEASE-STANDARDS.md	workflows/release.md	move	consumer-visible changelog policy
+STD-0539	RELEASE-STANDARDS.md	workflows/release.md	move	release-time changelog assembly
+STD-0540	RELEASE-STANDARDS.md	none	remove	implicit commit-type changelog mapping
