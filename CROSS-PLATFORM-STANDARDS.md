@@ -136,73 +136,11 @@ target triples, and cross-target verification are covered in
 
 ## File System Conventions
 
-### Path Construction
-
-Always use platform-agnostic path APIs. Never hardcode separators.
-
-```csharp
-// BAD: Hardcoded separator
-var path = baseDir + "/" + fileName;
-var path = baseDir + "\\" + fileName;
-
-// GOOD: Platform-agnostic
-var path = Path.Combine(baseDir, fileName);
-```
-
-```typescript
-// BAD: Hardcoded separator
-const fullPath = `${dir}/${file}`;
-
-// GOOD: Use path.join (Node) or let the backend handle paths
-import path from 'node:path';
-const fullPath = path.join(dir, file);
-```
-
-### Path Comparison
-
-Normalize before comparing. Windows paths are case-insensitive;
-Linux paths are case-sensitive.
-
-```csharp
-// GOOD: Normalize and use platform-appropriate comparison
-var resolved = Path.GetFullPath(inputPath);
-var root = Path.GetFullPath(allowedRoot);
-if (resolved.StartsWith(root, StringComparison.OrdinalIgnoreCase))
-    // Valid path
-```
-
-### Canonical Filesystem Identity
-
-Normalization is not the same as filesystem identity. When code under test
-canonicalizes, resolves symlinks, or compares real filesystem roots, tests and
-cross-platform code must compare canonical paths, not only separator-normalized
-strings.
-
-Rules:
-
-1. If production code uses canonicalization or realpath resolution, tests must
-   compare against canonicalized expectations.
-2. Path comparisons involving temp directories, system roots, symlinked
-   workspaces, mounted volumes, or platform-managed directories must account
-   for alias paths such as macOS `/var` versus `/private/var`.
-3. Do not assume the display form of a path returned by tempdir APIs is the
-   same as the canonical filesystem identity.
-4. Use display-path normalization only for user-facing output. Use canonical
-   identity for containment checks, path equality, and persisted root tracking.
-
-Verification guidance:
-- Add at least one test on each supported filesystem family where path
-  identity matters.
-- Prefer comparing `canonicalize()` / `realpath()` results over raw string
-  equality when the code under test resolves paths.
-
-### Spaces in Paths
-
-All path handling must support spaces in directory and file names:
-
-- Always quote paths in shell scripts: `"$PATH_VAR"`
-- Always use proper path APIs, never string splitting on `/`
-- Test with spaces in paths before merging
+Canonical path construction, display/lexical/canonical identity, comparison,
+alias, space, and filesystem-family verification policy moved to
+[Cross-Platform](topics/cross-platform.md#filesystem-paths). Untrusted
+filesystem authorization additionally follows
+[Security containment](topics/security.md#filesystem-containment).
 
 ---
 

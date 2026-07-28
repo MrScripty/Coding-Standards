@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; rolling owner-and-correctness waves
-accepted.
+**Current phase:** Milestone 7 trust-boundary wave active; filesystem
+containment accepted.
 
-**Next slice:** Milestone 7.4b1, replace unsafe filesystem containment and
-platform path-identity guidance for `STD-0289`-`STD-0293` and
-`STD-0584`-`STD-0587`.
+**Next slice:** Milestone 7.4b2a, decompose action-specific untrusted payload
+validation finding `F018` into exact owner-bounded identifiers and fixtures
+before moving normative guidance.
 
 **Acceptance status:** `partial`
 
@@ -467,9 +467,11 @@ all structural/routing fixtures pass.
    33 source files into reviewable owner-bounded and correctness-ordered
    implementation slices without moving normative rules.
 5. Execute the rolling waves defined by `7.4a`, beginning with:
-   - `7.4b1` (`Planned`): canonical filesystem containment and platform
+   - `7.4b1` (`Accepted`): canonical filesystem containment and platform
      path-identity contracts (`STD-0289`-`STD-0293`,
-     `STD-0584`-`STD-0587`).
+     `STD-0584`-`STD-0587`);
+   - `7.4b2a` (`Planned`): decompose action-specific untrusted payload
+     validation finding `F018`.
 6. Final legacy-index review, disposition closure, and duplication gate.
 
 **Status:** `Active`

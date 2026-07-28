@@ -84,9 +84,11 @@ condition is present:
 | Accessibility or user interaction semantics | [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) |
 | Contract evolution, persistence compatibility, version overlap, or degraded outcomes | [Contract evolution](topics/contracts.md) |
 | Shared mutable state, async work, cancellation, or shutdown | [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) |
-| Multiple declared operating-system targets | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) |
+| Filesystem path construction, identity, comparison, or supported-filesystem behavior | [Cross-platform](topics/cross-platform.md) |
+| Other multiple declared operating-system target concerns | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) until migration |
 | Third-party package selection or update | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) |
-| Untrusted input, paths, IPC, network, or secrets | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) |
+| Untrusted path authorizes a filesystem operation | [Security](topics/security.md) |
+| Other untrusted input, IPC, network, or secret concerns | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) until migration |
 
 The presence of a topic document in the repository is not an applicability
 condition.

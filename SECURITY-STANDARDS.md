@@ -16,84 +16,10 @@ External Input ──► [Validation Module] ──► Trusted Internal Code
 
 ## Path Validation
 
-### The Problem
-
-User-supplied file paths can escape intended directories using `..` sequences
-or symlinks. A path like `../../etc/passwd` could access arbitrary files.
-
-### Centralized Path Validator
-
-All path validation goes through a single, shared utility. No handler
-validates paths inline.
-
-**C# — `PathValidator` utility:**
-
-```csharp
-/// <summary>
-/// Centralized path validation. All file path inputs must pass through this.
-/// </summary>
-public static class PathValidator
-{
-    /// <summary>
-    /// Validates that a path resolves to a location within the allowed root.
-    /// Returns the resolved absolute path, or null if validation fails.
-    /// </summary>
-    public static string? ValidateAndResolve(string inputPath, string allowedRoot)
-    {
-        if (string.IsNullOrWhiteSpace(inputPath)) return null;
-
-        // Resolve to absolute path (handles ../ sequences)
-        var resolved = Path.GetFullPath(inputPath);
-        var normalizedRoot = Path.GetFullPath(allowedRoot);
-
-        // Ensure the resolved path is within the allowed root
-        if (!resolved.StartsWith(normalizedRoot, StringComparison.OrdinalIgnoreCase))
-            return null;
-
-        return resolved;
-    }
-
-    /// <summary>
-    /// Validates a path is within the project directory.
-    /// </summary>
-    public static string? ValidateWithinProject(string inputPath, string projectRoot)
-    {
-        return ValidateAndResolve(inputPath, projectRoot);
-    }
-}
-```
-
-**TypeScript — Path validation:**
-
-```typescript
-import path from 'node:path';
-
-export function isPathWithinRoot(inputPath: string, allowedRoot: string): boolean {
-    const resolved = path.resolve(inputPath);
-    const root = path.resolve(allowedRoot);
-    return resolved.startsWith(root);
-}
-```
-
-Rust path validation rules live in
-[languages/rust/RUST-SECURITY-STANDARDS.md](languages/rust/RUST-SECURITY-STANDARDS.md#path-validation).
-
-### Usage in Handlers
-
-Every handler that receives a file path from external input must validate it:
-
-```csharp
-public async Task<Response> HandleOpenProject(Request request)
-{
-    // Validate path BEFORE any file operations
-    var validPath = PathValidator.ValidateWithinProject(request.ProjectPath ?? "", _projectRoot);
-    if (validPath == null)
-        return ErrorResponse("Invalid or disallowed path");
-
-    // Safe to use validPath
-    var files = Directory.GetFiles(validPath);
-}
-```
+Canonical path-containment policy moved to
+[Security](topics/security.md#filesystem-containment). That topic owns
+component boundaries, canonical identity, symlinks, non-existing targets,
+validation/use races, and typed unresolved outcomes.
 
 ---
 

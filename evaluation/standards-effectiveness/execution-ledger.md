@@ -1197,3 +1197,32 @@ pass.
 Finding `F043` is resolved.
 
 **Next slice:** `7.4b1`.
+
+## 2026-07-28: Milestone 7.4b1 Filesystem Containment
+
+**Outcome:** Accepted.
+
+Security now owns untrusted filesystem containment, including component-aware
+ancestry, canonical identity, symlink escape, anchored creation, validation/use
+races, and typed unresolved outcomes. Cross-Platform owns path construction,
+display/lexical/canonical distinctions, filesystem comparison facts, aliases,
+and platform-qualified verification.
+
+Frozen identifiers `STD-0289` through `STD-0293` and `STD-0584` through
+`STD-0587` have exact final dispositions. The legacy sections route to their
+canonical topics, and unsafe C# and TypeScript string-prefix examples were
+removed rather than retained as reference.
+
+**No-fallback/legacy result:** failed canonicalization, unknown filesystem
+semantics, unavailable anchored operations, or unresolved race safety return
+typed diagnostics. Lexical prefix, universal case folding, and normalization-
+only checks are not alternate containment paths.
+
+**Verification:** containment decision fixtures, exact dispositions,
+metadata/dependency checks, router and legacy links, unsafe-pattern rejection,
+plan structure, shell syntax, whitespace, and all standards-effectiveness
+regressions pass. `S1 route passed: 6 modules, 597/11066 baseline lines`.
+
+Finding `F017` is resolved.
+
+**Next slice:** `7.4b2a`, planning only for `F018`.

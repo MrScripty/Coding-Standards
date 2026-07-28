@@ -114,6 +114,14 @@ restore universal append-only evolution, mandatory coexistence, destructive
 recovery, untyped cache/default fallback, blanket additive compatibility, or
 catch-all executor delegation.
 
+## Filesystem Containment Fixtures
+
+`fixtures/security/path-containment-decisions.tsv` and
+`verify-filesystem-containment-policy.sh` check component-aware containment,
+canonical filesystem identity, symlink escape, anchored creation, race control,
+typed unresolved outcomes, exact frozen-ID dispositions, metadata, routing,
+legacy links, and removal of lexical string-prefix containment examples.
+
 ## Documentation Decision Fixtures
 
 `verify-documentation-decisions.sh` checks that durable documentation is

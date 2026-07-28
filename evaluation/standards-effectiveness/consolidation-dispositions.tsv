@@ -217,3 +217,12 @@ STD-0578	RELEASE-STANDARDS.md	workflows/release.md	move	evidence-and-impact reco
 STD-0579	RELEASE-STANDARDS.md	workflows/release.md	move	channel-capability recovery actions
 STD-0580	RELEASE-STANDARDS.md	workflows/release.md	move	explicit normal and emergency authority
 STD-0581	RELEASE-STANDARDS.md	workflows/release.md	move	impact-driven incident record
+STD-0289	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	move	filesystem convention boundary
+STD-0290	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	move	platform path construction
+STD-0291	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	remove string-prefix containment and link security owner
+STD-0292	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	separate display normalization from canonical identity
+STD-0293	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	move	space-safe path mechanisms
+STD-0584	SECURITY-STANDARDS.md	topics/security.md	move	untrusted path validation concern
+STD-0585	SECURITY-STANDARDS.md	topics/security.md	merge	path escape threat model
+STD-0586	SECURITY-STANDARDS.md	topics/security.md	refine	replace unsafe language recipes with containment contract
+STD-0587	SECURITY-STANDARDS.md	topics/security.md	merge	validate before filesystem authority

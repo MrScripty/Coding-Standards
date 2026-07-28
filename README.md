@@ -29,6 +29,8 @@ reference material.
 | [reference/recipes/documentation.md](reference/recipes/documentation.md) | Non-normative comment, Markdown, public-interface, and algorithm examples | Applying a selected documentation requirement |
 | [reference/recipes/releases.md](reference/recipes/releases.md) | Non-normative changelog automation example | Configuring a selected release tool |
 | [topics/contracts.md](topics/contracts.md) | Contract classes, migration, compatibility, degraded outcomes, and typed unavailability | Contract or persisted-state evolution and fallback decisions |
+| [topics/security.md](topics/security.md) | Canonical untrusted filesystem-containment policy | Paths authorizing filesystem operations |
+| [topics/cross-platform.md](topics/cross-platform.md) | Canonical path construction and filesystem-identity policy | Path behavior across supported platforms or filesystems |
 | [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
 | [profiles/languages/rust/README.md](profiles/languages/rust/README.md) | Rust mechanisms and focused verification | Rust-owned changes |
 | [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, simplicity/complection guidance, layering, service independence, runtime wiring guidance | Setting up any new codebase |
@@ -38,9 +40,9 @@ reference material.
 | [TOOLING-STANDARDS.md](TOOLING-STANDARDS.md) | Linting, hooks, automation | Enforcing code quality |
 | [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md) | Declarative rendering, UI synchronization, frontend testing/tooling conventions | Web, desktop UI, and component-heavy frontend codebases |
 | [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) | Migration index for canonical documentation, release, and recipe owners | Existing links only |
-| [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) | Boundary validation, path safety, input sanitization, network transport safety | Apps handling user input, file paths, or local IPC |
+| [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) | Remaining boundary validation, input sanitization, and network transport guidance | Security concerns not yet migrated to topics |
 | [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) | Async/threading patterns, async task lifecycle, mutex selection | Multi-threaded or async applications |
-| [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) | Platform abstraction, file system conventions, CI matrix | Apps targeting multiple OS platforms |
+| [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) | Remaining platform abstraction, native library, and CI guidance | Cross-platform concerns not yet migrated to topics |
 | [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md) | FFI safety, cross-language boundaries, contract maintenance | Multi-language or native interop projects |
 | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) | Dependency evaluation, versioning, auditing, and minimization | Adding or reviewing third-party packages |
 | [PLAN-STANDARDS.md](PLAN-STANDARDS.md) | Migration index for planning guidance | Existing links only |
