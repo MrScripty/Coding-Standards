@@ -432,3 +432,43 @@
 - Shell syntax, whitespace, links, and staged-scope checks passed.
 
 **Commit:** `docs(tooling): make traceability inputs explicit`
+
+## 2026-07-28: Milestone 6.3 Commit And History Authority
+
+**Outcome:** Accepted.
+
+**Write set:**
+
+- canonical commit workflow and Router;
+- commit, tooling, and implementation migration guidance;
+- pre-push hook template;
+- commit authority fixtures/checker;
+- repository index, evaluation records, and active plan.
+
+**Delivered:**
+
+- retained status, staged-diff, scope, and affected-verification review before
+  each commit;
+- moved full branch-history review to milestone, pre-push, pull-request,
+  release, and explicit history-maintenance boundaries;
+- required explicit maintainer authority, a known range/base, unshared commit
+  IDs, dependency checks, recoverability, and post-rewrite verification;
+- distinguished linear cleanup from merge-topology rewriting; and
+- made the pre-push history reminder advisory and non-mutating.
+
+**No-fallback/legacy result:**
+
+- Removed mandatory per-commit autosquash and regression/fix rewriting.
+- A history finding does not grant rewrite authority.
+- Unknown sharing, dependency, recovery, range, or topology facts preserve the
+  existing commits and return a process diagnostic.
+
+**Verification:**
+
+- Commit authority fixtures passed.
+- Documentation, traceability, metadata, contract, verification, acceptance,
+  lifecycle, and S1 routing regressions passed.
+- Lefthook template review, shell syntax, whitespace, links, and staged-scope
+  checks passed.
+
+**Commit:** `docs(commit): require explicit rewrite authority`

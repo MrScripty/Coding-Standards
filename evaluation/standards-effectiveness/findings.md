@@ -13,7 +13,7 @@ changes and focused fixture evidence.
 | F005 | Resolved in Milestone 3 | Planning and implementation prompts have separate intent and canonical workflow links. |
 | F006 | Resolved in Milestone 4 | Verification owns typed acceptance claims; Testing, Tooling, Launcher, and Release link to that authority without redefining evidence. |
 | F007 | Resolved in Milestone 6.1 | Documentation profiles are selected by durable decision, contract, responsibility, or operational impact; source-directory changes alone require no artifact. |
-| F008 | Partially resolved | Planning no longer grants cleanup authority; commit-history policy remains Milestone 6. |
+| F008 | Resolved in Milestone 6.3 | Staged review remains per commit; full-history review occurs at branch boundaries, and rewriting requires explicit authority, unshared commits, recoverability, and topology-aware verification. |
 | F009 | Resolved in Milestone 6.2 | Checker invocations explicitly select index-only staged mode or an exact base/head commit range; unresolved inputs fail instead of selecting another diff. |
 | F010 | Resolved in Milestone 6.2 | Project maps bind decision-bearing paths to one boundary/profile/artifact, and mapped ADRs must identify the exact boundary ID. |
 | F012 | Resolved in Milestone 4 | Universal test durations, percentages, and CI-only categories were replaced by project/risk-based selection. |

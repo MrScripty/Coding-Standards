@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6 active; documentation and traceability tooling are accepted.
+**Current phase:** Milestones 0-6 accepted; documentation and process obligations are proportional.
 
-**Next slice:** Milestone 6.3, constrain history rewriting and accept the milestone.
+**Next slice:** Milestone 7.1, consolidate commit guidance into canonical workflow and reference owners.
 
 **Acceptance status:** `partial`
 
@@ -397,7 +397,7 @@ persistence migration, and invalid fallback.
 - [x] Use concise README profiles instead of one universal template.
 - [x] Tie README/ADR work to decision impact.
 - [x] Link accepted rationale instead of restating it in every artifact.
-- [ ] Move full-history checks to milestone, pre-push, and PR boundaries while
+- [x] Move full-history checks to milestone, pre-push, and PR boundaries while
   retaining staged-diff review per commit.
 - [x] Update traceability tooling and fixtures.
 
@@ -414,7 +414,7 @@ retain durable traceability and atomic review.
 2. Explicit staged/PR diff modes and boundary-linked ADR enforcement.
 3. History-rewrite authority, hook scheduling, and milestone acceptance.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 7: Role-Based Consolidation
 

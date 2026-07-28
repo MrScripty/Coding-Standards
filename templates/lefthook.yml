@@ -122,22 +122,21 @@ pre-commit:
 
 pre-push:
   commands:
-    # Advisory only: remind developers to clean unpushed history.
-    # This command never blocks push because regression/fix detection
-    # requires human judgment.
-    history-cleanup-reminder:
+    # Advisory only: review the full branch at a pre-push boundary.
+    # History findings do not authorize a rewrite.
+    branch-history-review:
       run: |
-        if git rev-parse --abbrev-ref --symbolic-full-name @{u} >/dev/null 2>&1; then
-          ahead=$(git rev-list --count @{u}..HEAD)
+        if [ -n "${HISTORY_BASE_REF:-}" ] &&
+           git rev-parse --verify "${HISTORY_BASE_REF}^{commit}" >/dev/null 2>&1; then
+          ahead=$(git rev-list --count "${HISTORY_BASE_REF}"..HEAD)
           if [ "$ahead" -gt 0 ]; then
-            echo "[advisory] Review unpushed commits for regression + fix pairs."
-            echo "[advisory] Drop regression commits and fixup fixes into earlier commits."
-            echo "[advisory] Unpushed merge rewrites are allowed; verify with:"
-            echo "           git log --graph --oneline --decorate @{u}..HEAD"
+            echo "[advisory] Review the explicit branch range and cumulative diff."
+            git log --graph --oneline --decorate "${HISTORY_BASE_REF}"..HEAD
+            git diff --stat "${HISTORY_BASE_REF}"...HEAD
+            echo "[advisory] Obtain explicit authority before any history rewrite."
           fi
         else
-          echo "[advisory] No upstream branch configured."
-          echo "[advisory] Review local commit history before push."
+          echo "[advisory] Configure a valid project-owned HISTORY_BASE_REF."
         fi
 
     # Run full test suite before pushing

@@ -129,6 +129,13 @@ artifact, unstaged work is excluded from staged mode, and an unrelated ADR
 cannot satisfy another boundary. Prior/current map union cases ensure removing
 a row cannot hide a deleted or relocated trigger.
 
+## Commit Authority Fixtures
+
+`verify-commit-authority.sh` separates per-commit staged review from full
+branch-history review and history-maintenance authority. It permits rewriting
+only for an explicitly authorized, unshared, recoverable range, distinguishes
+linear and merge topology, and rejects the removed mandatory cleanup policy.
+
 ## Scoring
 
 Each rubric dimension is scored:

@@ -79,18 +79,17 @@ These are scheduling defaults, not acceptance categories. A required claim may
 run at either hook, in CI, on a dedicated environment, or through a recorded
 manual procedure.
 
-### History Cleanup Enforcement (Advisory Only)
+### Branch-History Review Reminder
 
-History cleanup for regression/fix pairs is mandatory in process, but hook
-enforcement should remain advisory only.
+Follow the [Commit Workflow](workflows/commit.md). A pre-push hook may remind
+the maintainer to inspect the explicit branch range, cumulative diff, and commit
+graph.
 
-Do not hard-fail hooks for this rule. Detecting "clear regression + later fix"
-requires human judgment and is not reliably automatable.
-
-Recommended approach:
-- Add a non-blocking pre-push reminder command
-- Keep rewrite decisions manual
-- Require cleanup only on unpushed history
+Keep the reminder advisory because commit-boundary quality and rewrite safety
+require human ownership facts. The hook must not run rebase, amend, reset,
+squash, or commit-dropping commands. A history finding does not grant rewrite
+authority. Configure the project-owned intended base as `HISTORY_BASE_REF`; do
+not infer it from an arbitrary local or remote branch name.
 
 ### Performance Tips
 
