@@ -269,3 +269,43 @@
   staged-scope checks passed.
 
 **Commit:** `docs(verification): align test and release evidence ownership`
+
+## 2026-07-28: Milestone 5.1 Contract Decision Model
+
+**Outcome:** Accepted.
+
+**Write set:**
+
+- canonical contract topic and Router;
+- contract decision fixtures/checker;
+- evaluation README, ledger, findings, and active plan.
+
+**Delivered:**
+
+- contract classes for internal coordinated, persisted, public versioned,
+  independently distributed, and generated boundaries;
+- fact-driven compatibility decisions based on authority, consumers,
+  deployment, persistence, and external promises;
+- coordinated breaking replacement without compatibility shims;
+- bounded persistence migration and rejection rules;
+- degraded-mode authority and semantic-fidelity requirements; and
+- typed unavailable, invalid, unsupported, and deferred outcomes.
+
+**No-fallback/legacy result:**
+
+- Unknown contract facts produce a diagnostic rather than a compatibility
+  default.
+- Invalid substitutes preserve typed outcomes rather than silently selecting
+  defaults, stale caches, partial values, or alternate backends.
+- Legacy conflicting rules are not treated as fallback authority and are
+  reserved for removal in Slice 5.2.
+
+**Verification:**
+
+- Contract decision fixtures passed.
+- Contract and verification metadata/dependency checks passed.
+- Existing acceptance, ownership, lifecycle, metadata, and S1 routing
+  regressions passed.
+- Shell syntax, whitespace, links, and staged-scope checks passed.
+
+**Commit:** `docs(contracts): add fact-driven evolution policy`

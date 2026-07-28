@@ -99,6 +99,15 @@ acceptance owner while Testing, Tooling, Launcher, and Release retain only their
 test-design, scheduling, command, and shipping responsibilities. It rejects the
 legacy universal timing/CI taxonomy and smoke-as-feature substitution.
 
+## Contract Decision Fixtures
+
+`verify-contract-decisions.sh` checks coordinated replacement, persisted
+migration, public versioning, independently deployed negotiation, generated
+artifacts, derived-state rebuild, valid degradation, and typed unavailable,
+invalid, or unsupported outcomes. It rejects replacement across independent or
+authoritative-state boundaries and degradation without an authoritative,
+semantically equivalent source.
+
 ## Scoring
 
 Each rubric dimension is scored:

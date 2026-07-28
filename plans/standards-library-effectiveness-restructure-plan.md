@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestones 0-4 accepted; verification ownership is canonical.
+**Current phase:** Milestone 5.1 accepted; contract decisions are fact-driven.
 
-**Next slice:** Milestone 5, contracts, compatibility, and fallbacks.
+**Next slice:** Milestone 5.2, remove conflicting legacy contract and fallback rules.
 
 **Acceptance status:** `partial`
 
@@ -363,11 +363,14 @@ evidence cannot satisfy a criterion.
 
 **Goal:** Base evolution behavior on real authority and consumer constraints.
 
-- [ ] Define policies for internal, persisted, public, and independently
+- [x] Define the contract classification and decision record.
+- [x] Add coordinated, persisted, public, distributed, generated, and degraded
+  outcome fixtures.
+- [x] Define policies for internal, persisted, public, and independently
   versioned contracts.
-- [ ] Define coordinated breaking replacement and migration expectations.
-- [ ] Require authority and semantic fidelity for degraded behavior.
-- [ ] Require typed unavailable/invalid/deferred outcomes when no valid
+- [x] Define coordinated breaking replacement and migration expectations.
+- [x] Require authority and semantic fidelity for degraded behavior.
+- [x] Require typed unavailable/invalid/deferred outcomes when no valid
   decision can be made.
 - [ ] Reconcile affected coding, architecture, interop, persistence, release,
   and profile guidance.
@@ -378,7 +381,13 @@ and plan.
 **Gate:** Fixtures distinguish coordinated replacement, public versioning,
 persistence migration, and invalid fallback.
 
-**Status:** `Planned`
+**Slices:**
+
+1. Canonical contract topic, routing, decision fixtures, and typed outcomes.
+2. Remove or replace conflicting architecture, coding, persistence, interop,
+   release, and binding rules.
+
+**Status:** `Active`
 
 ### Milestone 6: Proportional Documentation And Commit Process
 

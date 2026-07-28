@@ -14,6 +14,8 @@ changes and focused fixture evidence.
 | F006 | Resolved in Milestone 4 | Verification owns typed acceptance claims; Testing, Tooling, Launcher, and Release link to that authority without redefining evidence. |
 | F008 | Partially resolved | Planning no longer grants cleanup authority; commit-history policy remains Milestone 6. |
 | F012 | Resolved in Milestone 4 | Universal test durations, percentages, and CI-only categories were replaced by project/risk-based selection. |
+| F013 | Partially resolved in Milestone 5.1 | Canonical contract classes replace universal evolution policy; conflicting legacy rules remain for Slice 5.2. |
+| F014 | Partially resolved in Milestone 5.1 | Canonical degraded outcomes require authority and semantic fidelity; conflicting legacy fallback examples remain for Slice 5.2. |
 | F031 | Resolved in Milestone 4.1 | Acceptance claim fixtures independently model proof kind, environment qualification, and execution mode. |
 
 ## Systemic Findings

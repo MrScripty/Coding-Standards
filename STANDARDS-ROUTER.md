@@ -82,6 +82,7 @@ condition is present:
 | Concern | Current owner |
 | --- | --- |
 | Accessibility or user interaction semantics | [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) |
+| Contract evolution, persistence compatibility, version overlap, or degraded outcomes | [Contract evolution](topics/contracts.md) |
 | Shared mutable state, async work, cancellation, or shutdown | [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) |
 | Multiple declared operating-system targets | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) |
 | Third-party package selection or update | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) |
