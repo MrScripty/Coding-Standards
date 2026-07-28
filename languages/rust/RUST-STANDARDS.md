@@ -1,5 +1,11 @@
 # Rust Standards
 
+> **Migration authority:** The routed
+> [Rust language profile](../../profiles/languages/rust/README.md) is canonical
+> for applicability, baseline Rust verification, and feature-matrix rules.
+> This index and its linked documents retain authority only for specialized
+> Rust rules not yet moved.
+
 Opinionated Rust standards for modular, maintainable, framework-like Rust
 codebases.
 

@@ -4,9 +4,9 @@
 
 **Direction:** Approved and active.
 
-**Current phase:** Milestones 0-1 accepted; normative standards are unchanged.
+**Current phase:** Milestones 0-2 accepted; the first routed normative path is active.
 
-**Next slice:** Milestone 2, Core and Router vertical slice.
+**Next slice:** Milestone 3, planning and implementation lifecycle.
 
 **Evidence:** [Milestone 0 evaluation](../evaluation/standards-effectiveness/README.md)
 
@@ -271,18 +271,18 @@ cycles or ambiguity.
 
 **Goal:** Prove progressive disclosure on one complete scenario.
 
-- [ ] Implement core, router, one workflow, applicable profiles, and minimum
+- [x] Implement core, router, one workflow, applicable profiles, and minimum
   topics for the selected scenario.
-- [ ] Convert affected old entrypoints to non-duplicating indexes.
-- [ ] Add link, applicability, ownership, and precedence checks.
-- [ ] Re-run the scenario using only its routed set.
+- [x] Convert affected old entrypoints to non-duplicating indexes.
+- [x] Add link, applicability, ownership, and precedence checks.
+- [x] Re-run the scenario using only its routed set.
 
 **Write set:** selected vertical path, old indexes, focused checks, and plan.
 
 **Gate:** The scenario is correctly planned without unrelated standards, and
 all retained semantics trace to inventory identifiers.
 
-**Status:** Planned.
+**Status:** Accepted.
 
 ### Milestone 3: Planning And Implementation Lifecycle
 

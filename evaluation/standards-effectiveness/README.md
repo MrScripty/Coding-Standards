@@ -56,6 +56,18 @@ fixture requires a recorded reason and before/after rescoring.
 - `check-metadata.sh` and `verify-metadata-fixtures.sh` validate the metadata
   contract and its negative cases.
 
+## Routed Vertical Slice
+
+`verify-s1-routing.sh` checks the first complete routed path:
+
+- S1 small local bug fix;
+- Rust language profile;
+- library application profile;
+- Core, Router, implementation, and verification workflows; and
+- explicit exclusion of unrelated standards.
+
+The selected context is compared with the frozen baseline line count.
+
 ## Scoring
 
 Each rubric dimension is scored:

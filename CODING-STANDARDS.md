@@ -1,5 +1,10 @@
 # Coding Standards
 
+> **Migration authority:** [CORE-STANDARDS.md](CORE-STANDARDS.md) is canonical
+> for universal simplicity, ownership, boundary, failure, lifecycle, and change
+> integrity rules. This file remains canonical only for detailed coding topics
+> not yet moved. Conflicts for moved rules resolve to Core.
+
 Generic coding conventions applicable to any tech stack.
 
 ## Simplicity Principle

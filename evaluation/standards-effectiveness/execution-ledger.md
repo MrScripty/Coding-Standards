@@ -79,3 +79,54 @@
 - Shell syntax and whitespace checks passed.
 
 **Commit:** `docs(architecture): freeze standards routing contract`
+
+## 2026-07-28: Milestone 2 Core And Router Vertical Slice
+
+**Outcome:** Accepted.
+
+**Scenario:** S1 small local bug fix in a Rust library.
+
+**Write set:**
+
+- `CORE-STANDARDS.md`
+- `STANDARDS-ROUTER.md`
+- `workflows/implementation.md`
+- `workflows/verification.md`
+- `profiles/applications/library.md`
+- `profiles/languages/rust/README.md`
+- affected root, coding, testing, language, and Rust entrypoints
+- S1 routing fixture and verifier
+- evaluation ledger/README and active plan
+
+**Delivered:**
+
+- concise universal Core;
+- deterministic Router with inclusion and exclusion conditions;
+- bounded implementation and objective-aligned verification workflows;
+- library and Rust profiles;
+- explicit migration authority for overlapping old entrypoints; and
+- executable S1 routed-set and context-size verification.
+
+**No-fallback/legacy result:**
+
+- No compatibility shim or alternate behavior path was added.
+- New modules are canonical for moved rules.
+- Existing documents retain ownership only for rules not yet moved and state
+  that boundary explicitly.
+- Unknown applicability requires a routing diagnostic rather than a default.
+
+**Deviation:**
+
+- The first S1 verifier over-escaped a basic `sed` capture and produced an
+  empty ID set. The parser was corrected before repository integration; the
+  metadata contract itself had passed.
+
+**Verification:**
+
+- All six selected modules passed metadata validation.
+- Expected and actual module IDs matched.
+- Routed context measured 520/11,066 baseline lines (4.7%).
+- Root README no longer requires reading every document.
+- Shell syntax, whitespace, link, and staged-scope checks passed.
+
+**Commit:** `docs(core): add first routed standards path`

@@ -1,5 +1,10 @@
 # Testing Standards
 
+> **Migration authority:** [workflows/verification.md](workflows/verification.md)
+> is canonical for selecting evidence and determining acceptance fidelity.
+> This file remains canonical for detailed test organization and techniques not
+> yet moved. Conflicts for moved rules resolve to the workflow.
+
 Guidelines for writing maintainable, effective tests.
 
 ## Test Organization

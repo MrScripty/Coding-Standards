@@ -1,20 +1,28 @@
 # Standards Library
 
-Reusable coding, commit, architecture, tooling, and documentation standards that can be copied to any project.
+Reusable engineering standards with routed workflows, profiles, topics, and
+reference material.
 
 ## Quick Start
 
-1. Copy this entire `/standards/` directory to your project root
-2. Read each document and adapt the examples to your tech stack
-3. Copy templates from `/standards/templates/` to your project root
-4. Copy `templates/check-decision-traceability.sh` to `scripts/` and enable
-   the `decision-traceability` command in your hook config
-5. Reference these standards in your project's main README
+1. Read [Core Standards](CORE-STANDARDS.md).
+2. Use the [Standards Router](STANDARDS-ROUTER.md) to select only applicable
+   workflows, profiles, and topics.
+3. Record project-specific contracts and exceptions in the adopting
+   repository.
+4. Copy a template or tool only when routed guidance requires it.
+5. Reference the adopted standards version in the project's main README.
 
 ## Documents
 
 | Document | Purpose | When to Use |
 |----------|---------|-------------|
+| [CORE-STANDARDS.md](CORE-STANDARDS.md) | Universal ownership, boundary, failure, lifecycle, quality, and verification invariants | Every adopted project |
+| [STANDARDS-ROUTER.md](STANDARDS-ROUTER.md) | Applicability, exclusions, dependency routing, and migration authority | Start of every task |
+| [workflows/implementation.md](workflows/implementation.md) | Bounded implementation slices and commit boundary | Any repository change |
+| [workflows/verification.md](workflows/verification.md) | Objective-aligned evidence selection | Any acceptance claim |
+| [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
+| [profiles/languages/rust/README.md](profiles/languages/rust/README.md) | Rust mechanisms and focused verification | Rust-owned changes |
 | [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, simplicity/complection guidance, layering, service independence, runtime wiring guidance | Setting up any new codebase |
 | [TESTING-STANDARDS.md](TESTING-STANDARDS.md) | Test placement strategy, naming, coverage, vertical slices, and cross-layer verification guidance | Writing maintainable tests |
 | [COMMIT-STANDARDS.md](COMMIT-STANDARDS.md) | Git workflow, conventional commits, agent footers | Any project using version control |
