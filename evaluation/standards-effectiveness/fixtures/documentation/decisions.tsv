@@ -1,0 +1,8 @@
+case	boundary_changed	contract_changed	cross_boundary_decision	operation_changed	expected_profiles
+local-implementation	no	no	no	no	none
+new-responsibility-boundary	yes	no	no	no	boundary-readme
+consumer-contract-change	yes	yes	no	no	contract-readme
+cross-boundary-architecture	yes	no	yes	no	boundary-readme,adr
+contract-architecture	yes	yes	yes	no	contract-readme,adr
+operator-recovery-procedure	no	no	no	yes	runbook
+boundary-with-runbook	yes	no	no	yes	boundary-readme,runbook

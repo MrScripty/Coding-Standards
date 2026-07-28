@@ -2,21 +2,16 @@
 
 Requirements for maintaining readable, navigable codebases.
 
-## Directory Documentation
+## Documentation Selection
 
-### Requirement
+The [Documentation Workflow](workflows/documentation.md) is the canonical owner
+for deciding when durable documentation is required and which profile applies.
+This file retains artifact-layout, comment, API, and algorithm-documentation
+guidance until role consolidation.
 
-**Every directory under `src/` (or equivalent source folders) must contain a `README.md` file.**
-
-Outside source folders, directories with 3+ files or non-obvious purpose should contain a `README.md` file.
-
-If rules overlap, enforce the stricter requirement. For `src/`, the universal requirement takes precedence.
-
-### Why
-
-- **Discoverability:** New developers understand structure without reading code
-- **Onboarding:** Reduces time to first contribution
-- **Maintenance:** Prevents architectural drift
+Do not infer a README requirement from directory count, file count, or a `src/`
+path. Require documentation only for an affected durable responsibility,
+decision, contract, or operational procedure.
 
 ## Documentation Artifact Layout
 
@@ -56,157 +51,24 @@ planning, findings, and report Markdown grouped by the work item they support.
 
 ### README Template
 
-See [templates/README-TEMPLATE.md](templates/README-TEMPLATE.md) for a copy-paste template.
+Use [templates/README-TEMPLATE.md](templates/README-TEMPLATE.md) after the
+Documentation Workflow selects `boundary-readme` or `contract-readme`.
 
-Required sections:
+The template contains a concise boundary profile and optional contract
+extensions. Omit sections that do not apply. Do not create placeholder
+sections, restate an ADR, or list every implementation file.
 
-```markdown
-# [Directory Name]
+### Keeping Durable Documentation Current
 
-## Purpose
-One paragraph explaining what this directory contains and why it exists.
+Update the artifact that owns the changed knowledge:
 
-## Contents
-| File/Folder | Description |
-|-------------|-------------|
-| `file.ts` | Brief description |
-| `subfolder/` | Brief description |
+- boundary README for responsibility or invariant changes;
+- contract documentation for consumer-visible semantics;
+- ADR for durable cross-boundary rationale; or
+- runbook for operational procedure changes.
 
-## Problem
-What problem this directory solves at the system level.
-
-## Constraints
-Technical and product constraints that shaped the design.
-
-## Decision
-Chosen approach and why it was selected.
-
-## Alternatives Rejected
-- Option A: Why rejected
-- Option B: Why rejected
-
-## Invariants
-- Invariant 1 that must remain true
-- Invariant 2 that must remain true
-
-## Revisit Triggers
-- Concrete conditions that should trigger reconsideration
-
-## Dependencies
-**Internal:** What other parts of the codebase this depends on
-**External:** Third-party libraries used
-
-## Related ADRs
-- `ADR-00X` brief description
-- Or, if there are no related ADRs:
-- `None identified as of YYYY-MM-DD.`
-- `Reason: <why no ADR currently applies>`
-- `Revisit trigger: <event that should force ADR creation or linkage>`
-
-## Usage Examples
-Code snippets showing how to use components in this directory.
-
-## API Consumer Contract
-- Supported inputs and outputs
-- Lifecycle and ordering expectations
-- Error behavior and retry guidance
-- Compatibility/versioning notes for clients
-
-## Structured Producer Contract
-- Stable fields and shape expectations
-- Default semantics when fields are omitted
-- Enum semantics and label/value meanings
-- Compatibility expectations for persisted consumers or saved artifacts
-- Regeneration or migration rules when the contract changes
-```
-
-### Required Section Completion Rule
-
-Every required section must contain one of:
-
-- Concrete project-specific content, or
-- An explicit `None` statement with:
-  - `Reason:` why content is currently absent
-  - `Revisit trigger:` what event should prompt re-evaluation
-
-This rule prevents fabricated rationale while still preserving future
-traceability.
-
-Example:
-
-```markdown
-## Alternatives Rejected
-- None identified as of 2026-03-05.
-- Reason: This module is a thin adapter over a fixed upstream contract.
-- Revisit trigger: A second viable adapter strategy appears.
-```
-
-### Banned Placeholder Language
-
-Do not use generic filler that can be inferred from file names or directory
-structure.
-
-Examples that are not acceptable:
-
-- `Source file used by modules in this directory.`
-- `Subdirectory containing related implementation details.`
-- `Keep files in this directory scoped to a single responsibility boundary.`
-- `import { value } from './module';`
-
-If a sentence could be reused unchanged in unrelated directories, rewrite it
-with module-specific rationale.
-
-### Host-Facing Module Contract Requirement
-
-When a directory exposes functionality consumed by external callers (API
-clients, plugins, bindings, SDK consumers, or other process boundaries), its
-README must include `## API Consumer Contract` with:
-
-- Expected request/input shape and validation expectations
-- Response/output shape, including stable fields
-- Lifecycle and ordering constraints (init, shutdown, retry, idempotency)
-- Error semantics, retry/backoff expectations, and timeout behavior
-- Compatibility policy (versioning, deprecations, and migration notes)
-
-### Structured Producer Contract Requirement
-
-When a directory publishes machine-consumed metadata, configuration, schemas,
-templates, manifests, or other structured artifacts, its README must include
-`## Structured Producer Contract` with:
-
-- Stable fields and which fields are intentionally volatile
-- Default semantics when fields are absent
-- Enum meanings and label/value mappings where relevant
-- Ordering guarantees where consumers rely on order
-- Compatibility expectations for persisted consumers and saved artifacts
-- Regeneration or migration rules when the contract changes
-
-### Minimum Meaningful Content by Section
-
-| Section | Minimum Content |
-| ------- | --------------- |
-| `Purpose` | Responsibility and why the directory boundary exists. |
-| `Contents` | Key artifacts only (typically 3-7). Explain why each matters; do not list every file by default. |
-| `Problem` | System-level problem being solved and affected actors. |
-| `Constraints` | Real constraints (technical, product, compatibility, operational). |
-| `Decision` | Chosen approach and rationale tied to constraints. |
-| `Alternatives Rejected` | At least one rejected option with reason, or explicit `None` with reason and revisit trigger. |
-| `Invariants` | Conditions that must remain true for correctness (testable where possible). |
-| `Revisit Triggers` | Concrete events/thresholds that should force re-evaluation. |
-| `Dependencies` | Significant internal/external dependencies and why they are needed. |
-| `Usage Examples` | One realistic usage example that reflects actual entry points. |
-| `API Consumer Contract` | Required for host-facing modules; include lifecycle, failures, and compatibility behavior. |
-| `Structured Producer Contract` | Required for machine-consumed metadata/config/schema producers; include semantics, persistence compatibility, and regeneration rules. |
-
-### Keeping READMEs Current
-
-- Update README when adding/removing files
-- Update when architecture changes
-- Every PR that changes `src/<module>/` code must do one of:
-  - update that module's `README.md`, or
-  - add/update an ADR under `docs/adr/`
-- README updates must capture design reasoning (`Problem`, `Constraints`,
-  `Decision`, `Alternatives Rejected`) not only file listings
+Routine source changes that preserve those facts do not require documentation
+churn. Link canonical rationale instead of duplicating it.
 
 ---
 

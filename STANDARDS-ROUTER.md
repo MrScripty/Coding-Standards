@@ -35,7 +35,7 @@ observable task conditions. Do not read every document by default.
 | Behavior or contract must be proven | [Verification](workflows/verification.md) |
 | Multi-step work, architectural decisions, or re-planning | [Planning](workflows/planning.md) |
 | Commit creation or history maintenance | [Current commit guidance](COMMIT-STANDARDS.md) until Milestone 6 migration |
-| Documentation contract changes | [Current documentation guidance](DOCUMENTATION-STANDARDS.md) until Milestone 6 migration |
+| Durable responsibility, decision, contract, or operational procedure changes | [Documentation](workflows/documentation.md) |
 | Dependency or CI/tool configuration changes | [Current tooling guidance](TOOLING-STANDARDS.md) until migration |
 | Shipping or publishing an artifact | [Current release guidance](RELEASE-STANDARDS.md) until Milestone 4/7 migration |
 

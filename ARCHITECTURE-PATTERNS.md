@@ -673,21 +673,13 @@ project-root/
 
 ### Directory README Requirement
 
-Every directory under `src/` must contain a README.md with:
-- Purpose
-- Contents
-- Problem
-- Constraints
-- Decision
-- Alternatives Rejected
-- Invariants
-- Revisit Triggers
-- Dependencies
-- Related ADRs
-- Usage examples
+Document meaningful architecture boundaries according to the
+[Documentation Workflow](workflows/documentation.md). Directory depth and the
+presence of a `src/` path do not create a documentation obligation.
 
-This is a strict rule for `src/` and overrides general conditional README guidance elsewhere.
-See [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) for required section semantics and update rules.
+Use a boundary README when this structure owns a responsibility or invariant
+that is not clear from its public entry points. Use an ADR for durable
+cross-boundary decisions and link to it instead of repeating its rationale.
 
 ---
 

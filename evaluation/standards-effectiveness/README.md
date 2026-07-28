@@ -114,6 +114,14 @@ restore universal append-only evolution, mandatory coexistence, destructive
 recovery, untyped cache/default fallback, blanket additive compatibility, or
 catch-all executor delegation.
 
+## Documentation Decision Fixtures
+
+`verify-documentation-decisions.sh` checks that durable documentation is
+selected from changed responsibilities, invariants, contracts, decisions, and
+operational procedures rather than directory or file changes. It distinguishes
+no-documentation, boundary README, contract README, ADR, and runbook profiles
+and rejects the removed universal per-directory rule.
+
 ## Scoring
 
 Each rubric dimension is scored:

@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestones 0-5 accepted; contract policy has one owner.
+**Current phase:** Milestone 6 active; proportional documentation profiles are accepted.
 
-**Next slice:** Milestone 6, proportional documentation and commit process.
+**Next slice:** Milestone 6.2, correct traceability diff modes and ADR ownership.
 
 **Acceptance status:** `partial`
 
@@ -393,10 +393,10 @@ persistence migration, and invalid fallback.
 
 **Goal:** Preserve traceability without routine low-value work.
 
-- [ ] Require module READMEs only at meaningful boundaries.
-- [ ] Use concise README profiles instead of one universal template.
-- [ ] Tie README/ADR work to decision impact.
-- [ ] Link accepted rationale instead of restating it in every artifact.
+- [x] Require module READMEs only at meaningful boundaries.
+- [x] Use concise README profiles instead of one universal template.
+- [x] Tie README/ADR work to decision impact.
+- [x] Link accepted rationale instead of restating it in every artifact.
 - [ ] Move full-history checks to milestone, pre-push, and PR boundaries while
   retaining staged-diff review per commit.
 - [ ] Update traceability tooling and fixtures.
@@ -407,7 +407,14 @@ fixtures, and plan.
 **Gate:** Small changes avoid unrelated artifacts; architectural/public changes
 retain durable traceability and atomic review.
 
-**Status:** `Planned`
+**Slices:**
+
+1. Canonical documentation workflow, profiles, templates, and decision
+   fixtures.
+2. Explicit staged/PR diff modes and boundary-linked ADR enforcement.
+3. History-rewrite authority, hook scheduling, and milestone acceptance.
+
+**Status:** `Active`
 
 ### Milestone 7: Role-Based Consolidation
 

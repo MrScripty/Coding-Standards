@@ -350,3 +350,46 @@
 - Shell syntax, whitespace, links, and staged-scope checks passed.
 
 **Commit:** `docs(contracts): remove legacy fallback policy`
+
+## 2026-07-28: Milestone 6.1 Proportional Documentation Profiles
+
+**Outcome:** Accepted.
+
+**Write set:**
+
+- canonical documentation workflow and Router;
+- legacy documentation and architecture guidance;
+- README and pull-request templates;
+- documentation decision fixtures/checker;
+- repository index, evaluation records, and active plan.
+
+**Delivered:**
+
+- selected durable documentation from responsibility, invariant, contract,
+  decision, and operational impact rather than directory shape;
+- defined `none`, `boundary-readme`, `contract-readme`, `adr`, and `runbook`
+  profiles;
+- replaced the universal README template with a concise boundary template and
+  optional contract extensions;
+- required ADRs to identify affected boundaries or stable contract IDs; and
+- made plans, pull requests, and READMEs link canonical rationale instead of
+  duplicating it.
+
+**No-fallback/legacy result:**
+
+- The universal `src/` README mandate was removed from both active policy
+  locations.
+- Unknown documentation impact produces an unresolved diagnostic rather than a
+  speculative README or ADR.
+- Non-applicable sections are omitted instead of filled with invented or
+  generic content.
+
+**Verification:**
+
+- Documentation decision fixtures passed.
+- Documentation workflow metadata and routing checks passed.
+- Existing contract, verification, acceptance, lifecycle, metadata, and S1
+  routing regressions passed.
+- Shell syntax, whitespace, links, and staged-scope checks passed.
+
+**Commit:** `docs(documentation): make traceability proportional`

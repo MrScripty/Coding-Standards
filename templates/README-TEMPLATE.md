@@ -1,146 +1,66 @@
-# [Directory Name]
+# [Boundary Name]
 
-Brief one-line description of the responsibility this directory owns.
+Use this template only after
+[the Documentation Workflow](../workflows/documentation.md) selects a
+`boundary-readme` or `contract-readme`. Delete instructions and optional
+sections that do not apply.
 
 ## Purpose
 
-One paragraph explaining:
-- What this directory is responsible for
-- Why this boundary exists (not another location)
-- Which system behavior depends on this module
+State why this boundary exists and what system behavior depends on it.
 
-## Contents
+## Responsibility
 
-| File/Folder | Description |
-|-------------|-------------|
-| `main-entry.ts` | Why this artifact exists and what callers rely on |
-| `policies/` | Why this folder is separate and what invariant it protects |
-
-List key artifacts only (typically 3-7). Do not list every file unless the
-directory is very small and each file is externally relevant.
-
-## Problem
-
-What system-level problem this directory solves, including who/what is impacted
-if this module fails.
-
-## Constraints
-
-List the constraints that shaped the implementation:
-
-- Performance, latency, memory, or throughput limits
-- Compatibility or migration constraints
-- Product or UX constraints
-
-## Decision
-
-State the chosen approach and why it best satisfied the constraints.
-
-## Alternatives Rejected
-
-Capture the main alternatives and why they were rejected:
-
-- **[Alternative 1]:** Why rejected
-- **[Alternative 2]:** Why rejected
-
-If no alternatives were identified, use:
-
-- `None identified as of YYYY-MM-DD.`
-- `Reason: <why none currently apply>`
-- `Revisit trigger: <event that should force re-evaluation>`
+State the behavior and state owned here. Name important exclusions when they
+prevent ownership ambiguity.
 
 ## Invariants
 
-List conditions that must remain true for this module to be correct:
+- A concrete condition that must remain true.
+- A second condition only when it adds information.
 
-- Invariant 1
-- Invariant 2
+## Entry Points
 
-## Revisit Triggers
+- `path/or/symbol` - Why callers or maintainers start here.
 
-List concrete events that should trigger re-evaluation:
+## Decision Links
 
-- Trigger 1
-- Trigger 2
+Delete this section when no canonical decision or contract applies.
 
-If there are currently no triggers, use:
+- `docs/adr/ADR-XXX-title.md` - Accepted rationale affecting this boundary.
+- `path/to/contract.md` - Canonical consumer or producer contract.
 
-- `None identified as of YYYY-MM-DD.`
-- `Reason: <why no trigger is currently meaningful>`
-- `Revisit trigger: <what would make this section non-empty>`
+Link the owner of accepted rationale. Do not repeat its alternatives and full
+decision history here.
 
-## Dependencies
+## Consumer Contract
 
-### Internal
+Include only for a public, process, language, persistence, or generated
+boundary consumed outside this owner.
 
-What other parts of the codebase this directory depends on and why:
+- Inputs and validation:
+- Outputs and stable semantics:
+- Lifecycle, ordering, cancellation, and idempotency:
+- Typed failures and retry behavior:
+- Compatibility, versioning, migration, or coordinated replacement:
+- Producer and consumer owners:
+- Contract verification:
 
-- `../other-module` - Why this dependency exists
+## Produced Contract
 
-### External
+Include only when this boundary publishes machine-consumed data, configuration,
+schemas, manifests, generated APIs, or persisted artifacts.
 
-Third-party libraries used and why:
+- Stable and intentionally volatile fields:
+- Absence and default semantics:
+- Enum, label, and ordering semantics:
+- Persistence and compatibility:
+- Regeneration or migration:
+- Producer and consumer owners:
+- Contract verification:
 
-- `library-name` - What it's used for
+## Operations
 
-## Related ADRs
-
-- `ADR-00X` - Brief description
-- Or, if there are no related ADRs:
-- `None identified as of YYYY-MM-DD.`
-- `Reason: <why no ADR currently applies>`
-- `Revisit trigger: <event that should force ADR creation or linkage>`
-
-## Usage Examples
-
-```typescript
-// Real usage example that matches current public entry points.
-import { createWorkflowRuntime } from './index';
-
-const runtime = createWorkflowRuntime(config);
-await runtime.start();
-```
-
-## API Consumer Contract
-
-Use this section when external callers depend on this module (API clients,
-plugins, bindings, SDK consumers, or cross-process callers).
-
-- Inputs: expected shape, validation rules, and defaults
-- Outputs: stable response fields and compatibility guarantees
-- Lifecycle: init/start/stop ordering, idempotency, and retry semantics
-- Errors: error classes/codes, retryability, timeout behavior
-- Versioning: breaking-change policy and migration guidance
-
-If this directory is not host-facing, delete this section.
-
-## Structured Producer Contract
-
-Use this section when this directory publishes machine-consumed metadata,
-configuration, schemas, templates, manifests, saved workflows, or other
-structured artifacts.
-
-- Stable fields: which fields/shapes are guaranteed vs intentionally volatile
-- Defaults: semantics when fields are omitted
-- Enums and labels: meanings relied on by generated UIs or persisted consumers
-- Ordering: any order-sensitive behavior consumers depend on
-- Compatibility: expectations for saved artifacts and downstream consumers
-- Regeneration/migration: what must happen when the contract changes
-
-If this directory does not publish machine-consumed artifacts, delete this
-section.
-
-## Testing
-
-How to run tests for this directory:
-
-```bash
-npm test -- --grep "directory-name"
-```
-
-## Notes
-
-Any additional context, gotchas, or important information:
-
-- Note 1
-- Note 2
+Include only when this boundary owns non-obvious operator actions. Link a
+runbook when the procedure needs preconditions, recovery, rollback, or detailed
+validation.
