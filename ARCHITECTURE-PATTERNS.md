@@ -300,79 +300,9 @@ that decision explicit and document the compatibility impact.
 
 ## IPC/Message Contract Pattern
 
-### The Pattern
-
-For multi-process or client-server communication, use typed message contracts.
-
-```
-┌─────────────┐                    ┌─────────────┐
-│  Process A  │ ── Message ──────▶ │  Process B  │
-│             │ ◀─── Response ──── │             │
-└─────────────┘                    └─────────────┘
-```
-
-### Message Structure
-
-```typescript
-interface IPCMessage {
-    // Message category
-    type: 'command' | 'query' | 'event' | 'response';
-
-    // Specific action within category
-    action: string;
-
-    // Typed payload (varies by action)
-    payload: unknown;
-
-    // For request/response correlation
-    correlationId?: string;
-
-    // ISO timestamp
-    timestamp: string;
-}
-```
-
-### Message Categories
-
-| Type | Direction | Purpose | Expects Response |
-|------|-----------|---------|------------------|
-| command | A → B | Request state change | Yes |
-| query | A → B | Request data | Yes |
-| event | A → B | Notify of occurrence | No |
-| response | B → A | Reply to command/query | N/A |
-
-### Example Implementation
-
-```typescript
-// Define specific messages
-interface SelectItemCommand extends IPCMessage {
-    type: 'command';
-    action: 'selectItem';
-    payload: { itemId: string };
-}
-
-interface ItemSelectedEvent extends IPCMessage {
-    type: 'event';
-    action: 'itemSelected';
-    payload: { item: Item; previousId: string | null };
-}
-
-// Type-safe handler
-function handleMessage(msg: IPCMessage): void {
-    switch (msg.action) {
-        case 'selectItem':
-            handleSelectItem(msg.payload as SelectItemCommand['payload']);
-            break;
-        // ...
-    }
-}
-```
-
-### Benefits
-
-- **Type safety:** Compile-time checking of message structure
-- **Debugging:** Clear message format for logging
-- **Versioning:** Easy to add new message types
+Canonical message decoding, category/action selection, payload proof, typed
+diagnostics, and validated-variant dispatch moved to the
+[IPC Boundary Profile](profiles/boundaries/ipc.md).
 
 ---
 

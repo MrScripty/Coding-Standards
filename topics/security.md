@@ -5,12 +5,29 @@
 - ID: `topic.security`
 - Role: `topic`
 - Level: `MUST`
-- Applies when: An untrusted path or path-derived value can authorize a filesystem read, write, creation, deletion, traversal, or execution.
-- Does not apply when: No untrusted value influences filesystem authority.
+- Applies when: Untrusted input can authorize an operation, resource access, side effect, or security-relevant decision.
+- Does not apply when: No untrusted value influences authority or security-relevant behavior.
 - Requires: `core`, `workflow.verification`
 - Specializes: `none`
-- Verification: Filesystem-containment decision fixtures and affected trust-boundary tests.
+- Verification: Untrusted-input and filesystem-containment decision fixtures plus affected trust-boundary tests.
 - Canonical owner: `topics/security.md`
+
+## Untrusted Structured Input
+
+Decode untrusted structured input through the complete contract required by the
+operation before it can authorize work, resource access, or side effects.
+Parsing, deserialization, static typing, type assertions, generic shape checks,
+and envelope-only validation are not proof of operation-specific fields.
+
+The [Contracts topic](contracts.md#runtime-decoding-at-boundaries) owns generic
+runtime proof. Select the [IPC boundary profile](../profiles/boundaries/ipc.md)
+when structured messages cross a process or independently evolving component
+boundary. Security does not duplicate their schemas or dispatch logic.
+
+Malformed or incomplete input returns typed `invalid`; a well-formed but
+unsupported contract or operation returns typed `unsupported`; unavailable
+required decoding capability returns typed `unavailable`. Do not continue with
+the original input, a cast, a default operation, or a weaker decoder.
 
 ## Filesystem Containment
 

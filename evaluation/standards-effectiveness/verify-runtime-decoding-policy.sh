@@ -140,6 +140,5 @@ for pattern in "${removed_patterns[@]}"; do
 done
 
 rg -F -q '`7.4b2b` (`Accepted`)' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b2c' "$PLAN"
 
 printf 'Runtime decoding policy passed\n'

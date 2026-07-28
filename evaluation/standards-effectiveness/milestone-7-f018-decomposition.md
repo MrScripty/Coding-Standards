@@ -126,6 +126,8 @@ competing rules, and focused plus affected global regressions pass.
 - `README.md`;
 - `evaluation/standards-effectiveness/fixtures/ipc/action-payload-decisions.tsv`;
 - `evaluation/standards-effectiveness/verify-ipc-payload-validation.sh`;
+- `evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh` for
+  removal of duplicate next-slice lifecycle ownership only;
 - `evaluation/standards-effectiveness/verify-milestone-7-f018-decomposition.sh`
   for lifecycle/disposition handoff only;
 - consolidation dispositions, evaluation README, findings, active plan, and
@@ -134,6 +136,10 @@ competing rules, and focused plus affected global regressions pass.
 No language profile, transport implementation, schema-library recipe,
 generated inventory, template, lockfile, or downstream repository belongs to
 this slice.
+
+The prerequisite runtime-decoding checker owns the accepted `7.4b2b`
+semantic contract. The F018 decomposition checker exclusively owns
+cross-slice lifecycle and next-slice progression.
 
 **Required semantics:**
 

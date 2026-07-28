@@ -1291,6 +1291,54 @@ Finding `F018` remains open until `7.4b2c` is accepted.
 
 **Next slice:** `7.4b2c`.
 
+## 2026-07-28: Milestone 7.4b2c Action-Specific IPC Decoding
+
+**Outcome:** Accepted.
+
+The IPC boundary profile now owns envelope, category/action, payload, metadata,
+extra-field, and validated-variant dispatch contracts. Consumers decode the
+complete supported category/action pair before dispatch; producer typing,
+transport parsing, deserialization, generic object checks, and envelope-only
+validation are not runtime proof.
+
+Unknown or mismatched category/action pairs return typed `unsupported`,
+malformed or incompletely validated messages return typed `invalid`, and
+missing required schema capability returns typed `unavailable`. Dispatch
+accepts only closed validated variants and cannot use raw payload casts,
+default actions, fall-through handlers, or permissive alternate decoders.
+
+Security now owns the consequence of allowing untrusted structured input to
+authorize work while linking Contracts for generic proof and IPC for message
+specialization. It does not duplicate schemas or dispatch policy.
+
+Frozen identifiers `STD-0063` through `STD-0068` and `STD-0592` through
+`STD-0595` have exact final dispositions. Legacy Architecture and Security
+sections are link-only for the moved concerns, and the unsafe TypeScript,
+generic validated-message, and deserialization examples were removed.
+
+**No-fallback/legacy result:** no default operation, unchecked cast, original
+received object, weaker schema, or alternate decoder can replace missing
+action-specific proof.
+
+**Approved deviation:** the mandatory verification suite exposed duplicate
+next-slice ownership in the accepted runtime-decoding prerequisite checker.
+Before commit, the slice write set was expanded to remove only that stale
+assertion. The runtime checker still owns the `7.4b2b` semantic acceptance
+gate, while the F018 decomposition checker exclusively owns lifecycle
+progression. No normative rule, identifier disposition, or fixture changed.
+
+**Verification:** action-payload decision fixtures, exact dispositions,
+metadata/dependency routing, legacy-link and unsafe-pattern rejection, F018
+lifecycle closure, prerequisite runtime-decoding semantics, plan structure,
+shell syntax, whitespace, and all standards-effectiveness regressions pass.
+The rolling decomposition gate reports 675 identifiers remaining across 33
+sources and 32 owners, with 22 ownership gaps. The S1 context route remains 6
+modules and 597 of 11066 baseline lines.
+
+Finding `F018` is resolved.
+
+**Next slice:** `7.4b3a`, planning only for `F022` and `F023`.
+
 ## 2026-07-28: Milestone 7.4b2a1 Lifecycle-Handoff Correction
 
 **Outcome:** Accepted.

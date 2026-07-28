@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave active; canonical
-runtime-decoding proof accepted.
+**Current phase:** Milestone 7 trust-boundary wave active; F018 action-specific
+IPC decoding accepted.
 
-**Next slice:** Milestone 7.4b2c, establish canonical action-specific IPC
-decoding and Security trust-boundary linkage, then remove the remaining
-unchecked message and payload assertions.
+**Next slice:** Milestone 7.4b3a, planning only to decompose critical foreign-
+boundary findings `F022` and `F023` into generic owner and Rust-specialization
+slices before moving normative guidance.
 
 **Acceptance status:** `partial`
 
@@ -478,9 +478,13 @@ all structural/routing fixtures pass.
      disposition-backed lifecycle handoffs across both implementation slices;
    - `7.4b2b` (`Accepted`): canonical generic runtime-decoding proof
      (`STD-0051`-`STD-0054`); and
-   - `7.4b2c` (`Planned`): canonical action-specific IPC decoding and Security
+   - `7.4b2c` (`Accepted`): canonical action-specific IPC decoding and Security
      trust-boundary linkage (`STD-0063`-`STD-0068`,
-     `STD-0592`-`STD-0595`).
+     `STD-0592`-`STD-0595`), including removal of duplicate lifecycle ownership
+     from the prerequisite runtime-decoding checker; and
+   - `7.4b3a` (`Planned`): decompose critical checked-conversion, C-ABI,
+     allocation, initialization, provenance, lifetime, size, and unsafe-
+     contract findings `F022` and `F023`.
 6. Final legacy-index review, disposition closure, and duplication gate.
 
 **Status:** `Active`

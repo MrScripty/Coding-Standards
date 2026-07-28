@@ -58,7 +58,7 @@ Do not select frontend or launcher guidance for a library-only code change.
 | --- | --- |
 | Foreign memory, FFI, or cross-language calls | [Current interop guidance](INTEROP-STANDARDS.md) |
 | Generated host-language APIs | [Current bindings guidance](LANGUAGE-BINDINGS-STANDARDS.md) |
-| Process, IPC, or trust boundary | [Current architecture](ARCHITECTURE-PATTERNS.md) and [security](SECURITY-STANDARDS.md) guidance |
+| Structured request, response, command, query, or event crosses a process, message, worker, plugin-host, or independently deployed component boundary | [IPC boundary profile](profiles/boundaries/ipc.md) |
 | Persisted data or migration | [Current architecture persistence guidance](ARCHITECTURE-PATTERNS.md) |
 
 Select a boundary from a real crossing, not because the repository happens to
@@ -82,13 +82,13 @@ condition is present:
 | Concern | Current owner |
 | --- | --- |
 | Accessibility or user interaction semantics | [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) |
-| Contract evolution, persistence compatibility, version overlap, or degraded outcomes | [Contract evolution](topics/contracts.md) |
+| Runtime decoding, contract evolution, persistence compatibility, version overlap, or degraded outcomes | [Contracts](topics/contracts.md) |
 | Shared mutable state, async work, cancellation, or shutdown | [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) |
 | Filesystem path construction, identity, comparison, or supported-filesystem behavior | [Cross-platform](topics/cross-platform.md) |
 | Other multiple declared operating-system target concerns | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) until migration |
 | Third-party package selection or update | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) |
-| Untrusted path authorizes a filesystem operation | [Security](topics/security.md) |
-| Other untrusted input, IPC, network, or secret concerns | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) until migration |
+| Untrusted input authorizes an operation, resource access, side effect, or security-relevant decision | [Security](topics/security.md) |
+| Other network transport or secret concerns | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) until migration |
 
 The presence of a topic document in the repository is not an applicability
 condition.

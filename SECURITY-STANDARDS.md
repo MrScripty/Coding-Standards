@@ -96,86 +96,11 @@ if (!isValid)
 
 ## Message/API Payload Validation
 
-### TypeScript — Validate Before Dispatch
-
-```typescript
-function receiveMessage(json: string): void {
-    let parsed: unknown;
-    try {
-        parsed = JSON.parse(json);
-    } catch {
-        console.error('Invalid JSON received');
-        return;
-    }
-
-    // Runtime type check — don't trust as-casts
-    if (!parsed || typeof parsed !== 'object') return;
-    const msg = parsed as Record<string, unknown>;
-    if (typeof msg.type !== 'string' || typeof msg.action !== 'string') {
-        console.error('Missing required fields');
-        return;
-    }
-
-    // Now safe to dispatch
-    handleMessage(msg as ValidatedMessage);
-}
-```
-
-### C# — Validate Deserialized Payloads
-
-```csharp
-// Deserialize and null-check
-var request = JsonSerializer.Deserialize<OpenProjectRequest>(payload);
-if (request == null)
-    return ErrorResponse("Invalid payload");
-
-// Then validate domain-specific fields
-var (nameValid, nameError) = InputValidator.ValidateName(request.ProjectName);
-if (!nameValid)
-    return ErrorResponse(nameError!);
-
-var validPath = PathValidator.ValidateWithinProject(request.Path, _projectRoot);
-if (validPath == null)
-    return ErrorResponse("Invalid file path");
-```
-
-### Electron IPC Boundaries (`ipcMain.handle`)
-
-For Electron apps, preload and renderer typing are not a security boundary.
-Treat every payload received by `ipcMain.handle` as untrusted input.
-
-Rules:
-- Validate payload shape in the main process before use.
-- Re-validate URLs and paths in main, even if renderer already validated.
-- For `shell.openExternal`, enforce a strict scheme allowlist (for example
-  `https:` only, or `https:` + explicitly approved schemes).
-- Reject `file:`, `javascript:`, and unexpected custom schemes unless a
-  documented policy explicitly allows them.
-
-```typescript
-import { ipcMain, shell } from 'electron';
-
-const ALLOWED_SCHEMES = new Set(['https:']);
-
-ipcMain.handle('shell:openExternal', async (_event, rawUrl: unknown) => {
-    if (typeof rawUrl !== 'string') {
-        throw new Error('Invalid URL payload');
-    }
-
-    let parsed: URL;
-    try {
-        parsed = new URL(rawUrl);
-    } catch {
-        throw new Error('Malformed URL');
-    }
-
-    if (!ALLOWED_SCHEMES.has(parsed.protocol)) {
-        throw new Error(`Disallowed URL scheme: ${parsed.protocol}`);
-    }
-
-    await shell.openExternal(parsed.toString());
-});
-```
+Canonical untrusted-input consequences moved to
+[Security](topics/security.md#untrusted-structured-input). Runtime proof belongs
+to [Contracts](topics/contracts.md#runtime-decoding-at-boundaries), and
+action-specific message decoding belongs to the
+[IPC Boundary Profile](profiles/boundaries/ipc.md).
 
 ---
 
@@ -183,9 +108,9 @@ ipcMain.handle('shell:openExternal', async (_event, rawUrl: unknown) => {
 
 When building TCP/IPC listeners (local servers, service endpoints, inter-process
 communication), transport-level configuration is a security concern separate from
-message validation. See [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md)
-`## IPC/Message Contract Pattern` for message-level contracts; this section
-covers the transport itself.
+message validation. See the
+[IPC Boundary Profile](profiles/boundaries/ipc.md) for message-level contracts;
+this section covers the transport itself.
 
 ### Bind Address Rules
 

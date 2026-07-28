@@ -120,6 +120,15 @@ constitutes complete proof, validated-value construction, typed invalid,
 unsupported, and unavailable outcomes, exact frozen-ID dispositions, legacy
 linkage, and removal of assertion/original-input fallback.
 
+## IPC Payload Decision Fixtures
+
+`fixtures/ipc/action-payload-decisions.tsv` and
+`verify-ipc-payload-validation.sh` check complete envelope and category/action
+selection, action-specific payload and metadata proof, extra-field policy,
+validated-variant dispatch, typed invalid/unsupported/unavailable outcomes,
+exact frozen-ID dispositions, metadata and routing, legacy links, and removal
+of unchecked message and payload assertions.
+
 ## Filesystem Containment Fixtures
 
 `fixtures/security/path-containment-decisions.tsv` and

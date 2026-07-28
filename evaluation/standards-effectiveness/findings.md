@@ -21,6 +21,7 @@ changes and focused fixture evidence.
 | F014 | Resolved in Milestone 5 | Degraded outcomes require authority and semantic fidelity; default/cache/partial fallback examples were removed. |
 | F015 | Partially resolved in Milestone 7.1 | Commit process now has one workflow owner, examples have a reference owner, and the legacy file is an index; other mixed-role documents remain. |
 | F017 | Resolved in Milestone 7.4b1 | Security owns component-aware, symlink-aware containment and typed failure; Cross-Platform owns filesystem identity without lexical prefix or universal case-folding defaults. |
+| F018 | Resolved in Milestone 7.4b2c | Contracts owns runtime proof, IPC owns category/action-specific decoding and validated dispatch, and Security owns untrusted-input consequences without assertion or permissive fallback. |
 | F020 | Partially resolved in Milestone 5.2 | Authoritative-store deletion fallback was removed; phased-mutation atomicity remains Milestone 7. |
 | F024 | Resolved in Milestone 5.2 | Rust binding compatibility is classified independently for generated, package, ABI, wire, and persisted boundaries. |
 | F026 | Partially resolved in Milestone 5.2 | Catch-all executor fallback was replaced by typed unsupported delegation; spawn and TOCTOU findings remain Milestone 7. |
