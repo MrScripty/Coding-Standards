@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; documentation examples have a non-normative reference owner.
+**Current phase:** Milestone 7 active; documentation examples and workflow policy are consolidated.
 
-**Next slice:** Milestone 7.2b, consolidate artifact layout, ADR, and project-README policy.
+**Next slice:** Milestone 7.2c, move changelog guidance to release owners and close the legacy documentation index.
 
 **Acceptance status:** `partial`
 
@@ -437,7 +437,8 @@ all structural/routing fixtures pass.
 2. Documentation consolidation, decomposed into:
    - `7.2a` (`Accepted`): comment, Markdown, API, and algorithm reference
      material;
-   - `7.2b`: artifact layout, ADR, and project-README workflow policy; and
+   - `7.2b` (`Accepted`): artifact layout, ADR, and project-README workflow
+     policy; and
    - `7.2c`: changelog guidance to release owners, then legacy-index closure.
 3. Owner-bounded topic/profile consolidation with correctness fixes.
 4. Final legacy-index review, disposition closure, and duplication gate.

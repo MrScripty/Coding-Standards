@@ -9,7 +9,7 @@
 - Does not apply when: A change preserves documented responsibilities, decisions, contracts, and operational procedures.
 - Requires: `core`
 - Specializes: `none`
-- Verification: Documentation decision fixtures and traceability checks.
+- Verification: Documentation decision, policy consolidation, and traceability checks.
 - Canonical owner: `workflows/documentation.md`
 
 ## Select Documentation From Impact
@@ -48,6 +48,22 @@ responsibility. Do not copy the full decision into every artifact.
 If the impact cannot be classified, record an unresolved documentation
 diagnostic. Do not create a speculative README or ADR as a fallback.
 
+## Artifact Placement
+
+Follow the adopting repository's documented placement and naming convention.
+When no convention exists:
+
+- keep boundary-owned documentation with the boundary;
+- place project-level decisions, plans, and reports under a root `docs/`
+  directory with concern-specific subdirectories; and
+- group multi-file work under one descriptive, lowercase, hyphenated slug.
+
+The artifact's owner and links must remain unambiguous. Do not scatter one work
+item across unrelated roots, reorganize unaffected documentation to satisfy
+this default, or retain an obsolete layout as a compatibility fallback. A
+layout replacement updates affected links and automation in the same accepted
+change.
+
 ## Boundary README
 
 A boundary README is concise and specific. It contains:
@@ -62,6 +78,22 @@ Add `Decision Links` only when accepted rationale or a canonical contract
 exists. Add operational instructions only when the boundary owns them. Omit
 non-applicable sections instead of filling them with `None`, generic prose, or
 invented alternatives.
+
+## Repository Entry Point
+
+When a repository is independently adopted, operated, or contributed to, its
+root README is the discovery boundary. It states:
+
+- the repository's purpose and intended audience;
+- stable commands or interfaces needed to start;
+- the minimum verified setup and use path for that audience; and
+- links to owned contribution, operation, contract, decision, and license
+  documents when those concerns apply.
+
+Select sections from actual audience needs. Do not require a fixed heading
+list, duplicate detailed owner documents, or maintain a file-by-file project
+tree. Update the entry point when these facts change; unrelated implementation
+changes require no root README churn.
 
 ## Contract Documentation
 

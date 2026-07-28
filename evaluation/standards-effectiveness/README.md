@@ -149,6 +149,11 @@ documentation identifiers `STD-0376` through `STD-0399`, validates the
 non-normative reference owner, and rejects restoration of the removed blanket
 API, TODO, table-alignment, and algorithm-template rules.
 
+`verify-documentation-policy-consolidation.sh` proves exact disposition of
+directory/README, ADR, and project-entry identifiers, validates the workflow
+and derived boundary template, and rejects restoration of universal directory,
+fixed-section, placeholder, and per-change README obligations.
+
 ## Scoring
 
 Each rubric dimension is scored:

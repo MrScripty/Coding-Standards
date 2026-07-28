@@ -582,3 +582,47 @@ documentation fixture independently proves its source range.
 - Shell syntax, whitespace, and link review passed.
 
 **Next slice:** `7.2b`.
+
+## 2026-07-28: Milestone 7.2b Documentation Policy Consolidation
+
+**Outcome:** Accepted.
+
+Dispositioned 59 frozen identifiers covering directory/README policy
+(`STD-0350` through `STD-0375`), ADR material (`STD-0400` through `STD-0420`),
+and project-entry material (`STD-0437` through `STD-0448`).
+
+The documentation workflow now owns:
+
+- project-owned artifact placement with a bounded default when no convention
+  exists;
+- boundary, contract, ADR, and runbook profile selection;
+- audience-driven repository entry points; and
+- updates tied to changed owned knowledge.
+
+The derived boundary template retains only profile-selected fields. Universal
+per-directory READMEs, fixed section lists, forced `None` placeholders,
+file-by-file inventories, product-local ADR examples, and per-change README
+churn were removed. They were not retained as legacy or reference fallbacks.
+
+The legacy documentation file now contains only routing plus the changelog
+material reserved for release-owned slice `7.2c`.
+
+**Write set:**
+
+- `workflows/documentation.md`
+- `DOCUMENTATION-STANDARDS.md`
+- `README.md`
+- focused evaluation fixture, migration dispositions, findings, plan, and this
+  ledger
+
+**Verification:**
+
+- Documentation policy, reference, decision, and traceability fixtures.
+- Metadata, plan structure, and plan lifecycle fixtures.
+- Commit/contract/acceptance ownership and disposition regressions.
+- S1 routing with 6 modules and 595 of 11066 baseline lines.
+- Shell syntax, whitespace, and link review.
+
+All listed checks passed.
+
+**Next slice:** `7.2c`.

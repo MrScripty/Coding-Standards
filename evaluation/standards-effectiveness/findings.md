@@ -25,7 +25,7 @@ changes and focused fixture evidence.
 | F026 | Partially resolved in Milestone 5.2 | Catch-all executor fallback was replaced by typed unsupported delegation; spawn and TOCTOU findings remain Milestone 7. |
 | F031 | Resolved in Milestone 4.1 | Acceptance claim fixtures independently model proof kind, environment qualification, and execution mode. |
 | D005 | Resolved in Milestone 7.1 | Commit and slice process is owned by implementation/commit workflows; prompts route only, and commit examples are non-normative reference. |
-| F032 | Partially resolved in Milestone 7.2a | Comment, Markdown, public-interface, and algorithm examples have a non-normative reference owner; workflow and release-owned consolidation remains. |
+| F032 | Partially resolved in Milestone 7.2b | Documentation examples and proportional workflow policy have canonical owners; release-owned changelog migration and legacy-index closure remain. |
 | F033 | Resolved in Milestone 7.2a | The commit disposition checker now filters its shared ledger by source; documentation rows have a separate owner-specific fixture. |
 
 ## Systemic Findings

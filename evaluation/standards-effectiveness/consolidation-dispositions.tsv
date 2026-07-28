@@ -67,6 +67,32 @@ STD-0259	COMMIT-STANDARDS.md	none	remove	implicit merge base example
 STD-0260	COMMIT-STANDARDS.md	workflows/commit.md	move	post-rewrite graph verification
 STD-0261	COMMIT-STANDARDS.md	none	remove	implicit verification range
 STD-0262	COMMIT-STANDARDS.md	none	remove	implicit verification example
+STD-0350	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	boundary-based documentation selection
+STD-0351	DOCUMENTATION-STANDARDS.md	none	remove	universal per-directory README requirement
+STD-0352	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	durable knowledge rationale
+STD-0353	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	project-owned artifact placement
+STD-0354	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	workflow-selected README template
+STD-0355	DOCUMENTATION-STANDARDS.md	templates/README-TEMPLATE.md	move	boundary title template
+STD-0356	DOCUMENTATION-STANDARDS.md	templates/README-TEMPLATE.md	move	purpose template field
+STD-0357	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	stable entry points replace file inventory
+STD-0358	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	purpose and responsibility replace problem boilerplate
+STD-0359	DOCUMENTATION-STANDARDS.md	none	remove	mandatory constraints section
+STD-0360	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	decision rationale routed to ADR profile
+STD-0361	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	alternatives routed to ADR profile
+STD-0362	DOCUMENTATION-STANDARDS.md	templates/README-TEMPLATE.md	move	invariants template field
+STD-0363	DOCUMENTATION-STANDARDS.md	none	remove	mandatory revisit-trigger section
+STD-0364	DOCUMENTATION-STANDARDS.md	none	remove	mandatory dependency inventory
+STD-0365	DOCUMENTATION-STANDARDS.md	templates/README-TEMPLATE.md	move	decision links template field
+STD-0366	DOCUMENTATION-STANDARDS.md	none	remove	universal usage-example requirement
+STD-0367	DOCUMENTATION-STANDARDS.md	templates/README-TEMPLATE.md	move	consumer contract template
+STD-0368	DOCUMENTATION-STANDARDS.md	templates/README-TEMPLATE.md	move	produced contract template
+STD-0369	DOCUMENTATION-STANDARDS.md	none	remove	forced None placeholder fallback
+STD-0370	DOCUMENTATION-STANDARDS.md	none	remove	placeholder alternatives example
+STD-0371	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	project-specific quality rule
+STD-0372	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	consumer contract documentation
+STD-0373	DOCUMENTATION-STANDARDS.md	templates/README-TEMPLATE.md	move	produced contract detail template
+STD-0374	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	profile-specific required content
+STD-0375	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	owned knowledge traceability
 STD-0376	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	comment examples
 STD-0377	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	rationale comment example
 STD-0378	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	self-documenting code example
@@ -91,3 +117,36 @@ STD-0396	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference
 STD-0397	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	concise algorithm example
 STD-0398	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	complexity notation example
 STD-0399	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	text-diagram option
+STD-0400	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	ADR documentation profile
+STD-0401	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	impact-based ADR selection
+STD-0402	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	ADR required content
+STD-0403	DOCUMENTATION-STANDARDS.md	none	remove	fixed ADR title template
+STD-0404	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	ADR status requirement
+STD-0405	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	ADR context requirement
+STD-0406	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	ADR decision requirement
+STD-0407	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	ADR consequence requirement
+STD-0408	DOCUMENTATION-STANDARDS.md	none	remove	mandatory positive consequence bucket
+STD-0409	DOCUMENTATION-STANDARDS.md	none	remove	mandatory negative consequence bucket
+STD-0410	DOCUMENTATION-STANDARDS.md	none	remove	mandatory neutral consequence bucket
+STD-0411	DOCUMENTATION-STANDARDS.md	none	remove	product-local ADR example
+STD-0412	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example title
+STD-0413	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example status
+STD-0414	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example context
+STD-0415	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example decision
+STD-0416	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example consequences
+STD-0417	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example benefits
+STD-0418	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example drawbacks
+STD-0419	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example side effects
+STD-0420	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	project-owned ADR placement
+STD-0437	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	independently adopted repository entry point
+STD-0438	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	audience-driven entry content
+STD-0439	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	repository purpose and audience
+STD-0440	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	minimum verified start path
+STD-0441	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	setup path when audience requires it
+STD-0442	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	use path when audience requires it
+STD-0443	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	contribution and operation links
+STD-0444	DOCUMENTATION-STANDARDS.md	none	remove	file-by-file project tree requirement
+STD-0445	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	contribution link when applicable
+STD-0446	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	license link when applicable
+STD-0447	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	update only when owned entry facts change
+STD-0448	DOCUMENTATION-STANDARDS.md	none	remove	legacy blanket review checklist
