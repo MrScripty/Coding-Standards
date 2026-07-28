@@ -1259,6 +1259,38 @@ Finding `F018` remains open until both implementation slices are accepted.
 
 **Next slice:** `7.4b2b`.
 
+## 2026-07-28: Milestone 7.4b2b Runtime-Decoding Proof
+
+**Outcome:** Accepted.
+
+Contracts now owns the proof required to construct a validated value from
+unknown boundary input. Parsing, deserialization, type assertions, generic
+shape checks, producer types, and partial validation do not establish runtime
+validity. Complete decoders cover applicable shape, variants, field and cross-
+field constraints, versions, normalization, and defaults.
+
+The contract distinguishes typed `invalid`, `unsupported`, and `unavailable`
+outcomes; excludes redundant decoding for values constructed and retained
+inside one trusted process boundary; and prevents unchecked mutable aliases or
+reuse of the original unknown representation. No schema library is selected.
+
+Frozen identifiers `STD-0051` through `STD-0054` have exact final
+dispositions. The legacy executable-boundary section links to the canonical
+topic, and its direct request assertion was removed without changing the later
+packaging, cost, or benefits sections.
+
+**No-fallback/legacy result:** missing proof cannot use a cast, original input,
+alternate unchecked shape, permissive default, or weaker decoder.
+
+**Verification:** runtime-decoding decision fixtures, exact dispositions,
+metadata, legacy-link and unsafe-pattern rejection, F018 lifecycle handoff,
+plan structure, shell syntax, whitespace, and all standards-effectiveness
+regressions pass. `S1 route passed: 6 modules, 597/11066 baseline lines`.
+
+Finding `F018` remains open until `7.4b2c` is accepted.
+
+**Next slice:** `7.4b2c`.
+
 ## 2026-07-28: Milestone 7.4b2a1 Lifecycle-Handoff Correction
 
 **Outcome:** Accepted.

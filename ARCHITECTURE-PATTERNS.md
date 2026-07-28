@@ -214,64 +214,9 @@ turn that implementation-phase freeze into an indefinite compatibility promise.
 
 ## Executable Boundary Contracts
 
-### The Pattern
-
-When data crosses a trust boundary or process boundary, prefer contracts that
-are executable artifacts, not only compile-time type declarations.
-
-Examples:
-- HTTP request/response payloads
-- WebSocket or IPC envelopes
-- queue/job payloads
-- persisted JSON/YAML/config artifacts
-- plugin manifests or generated metadata
-
-An executable contract can be decoded, validated, or normalized at runtime by
-the producer, consumer, or both.
-
-### Plain Types vs Executable Contracts
-
-Use plain shared interfaces/types when:
-- the data stays in-process
-- both producer and consumer are compiled and versioned together
-- runtime drift risk is low
-
-Prefer executable contracts when:
-- producer and consumer can drift independently
-- inputs arrive from users, networks, plugins, files, or other processes
-- persisted artifacts may outlive the current code version
-- defaults, enum semantics, trimming, bounds, or branded IDs matter for safety
-
-### Contract Requirements
-
-Executable contracts should preserve:
-- field shape and optionality
-- defaults applied when fields are omitted
-- enum meaning, not just enum spelling
-- identifier constraints and branding where mix-ups are dangerous
-- normalization rules such as trimming, bounds, or canonical casing
-- compatibility expectations for stored artifacts and replayed messages
-
-Validate once at the boundary, then pass validated values inward.
-
-```typescript
-// BAD: Only a compile-time interface; runtime input is trusted blindly
-interface CreateJobRequest {
-    jobId: string;
-    priority: number;
-}
-
-function handleCreateJob(input: unknown) {
-    const request = input as CreateJobRequest;
-    return runJob(request);
-}
-
-// GOOD: Boundary decodes unknown input into a validated contract
-function handleCreateJob(input: unknown) {
-    const request = decodeCreateJobRequest(input); // throws/returns error if invalid
-    return runJob(request);
-}
-```
+Canonical applicability, runtime-proof, validated-construction, and typed
+diagnostic policy moved to
+[Runtime Decoding At Boundaries](topics/contracts.md#runtime-decoding-at-boundaries).
 
 ### Packaging Guidance
 

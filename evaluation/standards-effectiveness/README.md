@@ -114,6 +114,12 @@ restore universal append-only evolution, mandatory coexistence, destructive
 recovery, untyped cache/default fallback, blanket additive compatibility, or
 catch-all executor delegation.
 
+`fixtures/contracts/runtime-decoding-decisions.tsv` and
+`verify-runtime-decoding-policy.sh` check when runtime decoding applies, what
+constitutes complete proof, validated-value construction, typed invalid,
+unsupported, and unavailable outcomes, exact frozen-ID dispositions, legacy
+linkage, and removal of assertion/original-input fallback.
+
 ## Filesystem Containment Fixtures
 
 `fixtures/security/path-containment-decisions.tsv` and

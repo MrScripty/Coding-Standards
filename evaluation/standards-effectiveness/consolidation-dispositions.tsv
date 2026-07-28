@@ -226,3 +226,7 @@ STD-0584	SECURITY-STANDARDS.md	topics/security.md	move	untrusted path validation
 STD-0585	SECURITY-STANDARDS.md	topics/security.md	merge	path escape threat model
 STD-0586	SECURITY-STANDARDS.md	topics/security.md	refine	replace unsafe language recipes with containment contract
 STD-0587	SECURITY-STANDARDS.md	topics/security.md	merge	validate before filesystem authority
+STD-0051	ARCHITECTURE-PATTERNS.md	topics/contracts.md	merge	executable boundary contract concern
+STD-0052	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	define runtime decoding as proof
+STD-0053	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	remove assertion as validation and preserve applicability
+STD-0054	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	require complete invariant checks and typed diagnostics

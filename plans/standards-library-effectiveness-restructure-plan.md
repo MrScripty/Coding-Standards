@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave active; F018 lifecycle
-handoff correction accepted and runtime-decoding implementation ready.
+**Current phase:** Milestone 7 trust-boundary wave active; canonical
+runtime-decoding proof accepted.
 
-**Next slice:** Milestone 7.4b2b, establish generic runtime-decoding proof in
-the canonical Contracts topic and remove assertion-as-validation from the
-legacy executable-boundary-contract section.
+**Next slice:** Milestone 7.4b2c, establish canonical action-specific IPC
+decoding and Security trust-boundary linkage, then remove the remaining
+unchecked message and payload assertions.
 
 **Acceptance status:** `partial`
 
@@ -476,7 +476,7 @@ all structural/routing fixtures pass.
      validation finding `F018` into two serial owner-bounded slices;
    - `7.4b2a1` (`Accepted`): make the decomposition checker enforce valid
      disposition-backed lifecycle handoffs across both implementation slices;
-   - `7.4b2b` (`Planned`): canonical generic runtime-decoding proof
+   - `7.4b2b` (`Accepted`): canonical generic runtime-decoding proof
      (`STD-0051`-`STD-0054`); and
    - `7.4b2c` (`Planned`): canonical action-specific IPC decoding and Security
      trust-boundary linkage (`STD-0063`-`STD-0068`,

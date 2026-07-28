@@ -9,7 +9,7 @@
 - Does not apply when: A private implementation detail has no independent consumer, stored representation, or externally observable promise.
 - Requires: `core`, `workflow.verification`
 - Specializes: `none`
-- Verification: Contract decision fixtures and affected producer/consumer claims.
+- Verification: Contract and runtime-decoding decision fixtures plus affected producer/consumer claims.
 - Canonical owner: `topics/contracts.md`
 
 ## Record Contract Facts First
@@ -26,6 +26,49 @@ Before selecting compatibility or migration behavior, record:
 
 Unknown facts produce an unresolved-contract diagnostic. Do not select the most
 compatible-looking default.
+
+## Runtime Decoding At Boundaries
+
+When a value enters through a trust, process, persistence, plugin, queue, or
+independently deployed boundary, treat its representation as unknown until an
+executable decoder or smart constructor proves the applicable contract.
+
+A validated value is a construction result, not a type annotation. Successful
+parsing or deserialization proves only that a representation was readable. A
+type assertion, generic object check, producer-side static type, or partial
+field check cannot establish runtime validity.
+
+Before constructing a validated value, check every invariant required by that
+value, including those that apply:
+
+- aggregate shape, required fields, optionality, and extra-field policy;
+- discriminants and the complete selected variant;
+- field domains, bounds, identifiers, and cross-field relationships;
+- supported contract or schema versions; and
+- explicit normalization and defaulting rules.
+
+The decoder must return either the validated representation or a typed
+diagnostic:
+
+- `invalid` for malformed data, failed constraints, or incomplete proof;
+- `unsupported` for a well-formed version or variant outside the supported
+  contract; or
+- `unavailable` when required decoding capability or contract material cannot
+  be obtained.
+
+The validated representation must not expose an unchecked mutable alias that
+can invalidate the proof after construction. Passing the validated value
+inward does not authorize reuse of the original unknown representation.
+
+Values created and kept inside one trusted in-process boundary do not require a
+redundant runtime decode when their constructor already enforces the same
+invariants. Crossing a new applicable boundary, changing contract version, or
+losing the validated representation requires decoding again.
+
+Do not fall back to a cast, the original input, an alternate unchecked shape, a
+permissive default, or a weaker decoder when proof is missing. No particular
+schema or validation library is mandatory; the observable proof and typed
+outcomes are.
 
 ## Contract Classes
 
