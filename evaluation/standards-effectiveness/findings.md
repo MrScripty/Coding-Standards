@@ -27,7 +27,7 @@ changes and focused fixture evidence.
 | D005 | Resolved in Milestone 7.1 | Commit and slice process is owned by implementation/commit workflows; prompts route only, and commit examples are non-normative reference. |
 | F032 | Partially resolved in Milestone 7.2b | Documentation examples and proportional workflow policy have canonical owners; release-owned changelog migration and legacy-index closure remain. |
 | F033 | Resolved in Milestone 7.2a | The commit disposition checker now filters its shared ledger by source; documentation rows have a separate owner-specific fixture. |
-| F034 | Open in Milestone 7.2c | The declared `workflows/release.md` owner is absent while legacy release guidance still mixes 51 sections; changelog migration requires release-owner decomposition. |
+| F034 | Direction approved for Milestone 7.2c1 | Establish the canonical release workflow boundary first, then migrate documentation changelog ownership and decompose remaining release concerns. |
 
 ## Systemic Findings
 

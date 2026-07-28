@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 re-planning required; documentation consolidation reached an absent canonical release owner.
+**Current phase:** Milestone 7 active; canonical release ownership sequence approved.
 
-**Next slice:** Resolve Milestone 7.2c release ownership and decompose the release migration.
+**Next slice:** Milestone 7.2c1, establish release applicability, versioning, changelog, contract, and acceptance ownership.
 
 **Acceptance status:** `partial`
 
@@ -439,9 +439,15 @@ all structural/routing fixtures pass.
      material;
    - `7.2b` (`Accepted`): artifact layout, ADR, and project-README workflow
      policy; and
-   - `7.2c` (`Re-plan required`): establish the canonical release owner,
-     migrate changelog policy, then close the legacy documentation index.
-3. Owner-bounded topic/profile consolidation with correctness fixes.
+   - `7.2c1`: establish `workflows/release.md` with release applicability,
+     versioning, changelog, contract-evolution, and acceptance boundaries;
+   - `7.2c2`: migrate documentation-owned changelog identifiers and close the
+     legacy documentation index.
+3. Owner-bounded topic/profile consolidation with correctness fixes, including:
+   - release artifact and packaging policy;
+   - release pipeline and publication policy;
+   - release rollback and recovery policy; and
+   - non-normative release tools, examples, and recipes.
 4. Final legacy-index review, disposition closure, and duplication gate.
 
 **Status:** `Active`
@@ -467,10 +473,7 @@ not need the full library or introduce downstream-specific root policy.
 
 ## Blockers
 
-- `workflows/release.md` is the declared future owner but does not exist.
-  `RELEASE-STANDARDS.md` still mixes 51 frozen workflow, reference, tooling,
-  artifact, and pipeline sections. Milestone 7.2c cannot choose a canonical
-  changelog destination without decomposing that release migration.
+- None.
 
 ## Slice Procedure
 

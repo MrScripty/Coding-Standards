@@ -673,3 +673,28 @@ thin-slice and one-owner review constraints.
 
 **Next action:** Select and record the release-owner sequence before
 implementing Milestone `7.2c`.
+
+## 2026-07-28: Milestone 7 Release Ownership Direction
+
+**Outcome:** Option 3 approved.
+
+The release migration is decomposed as follows:
+
+1. `7.2c1` creates `workflows/release.md` as the canonical owner of release
+   applicability, versioning, changelog, contract-evolution, and acceptance
+   boundaries. The same slice removes those moved rules from
+   `RELEASE-STANDARDS.md`.
+2. `7.2c2` migrates frozen documentation changelog identifiers to that
+   canonical workflow and reduces `DOCUMENTATION-STANDARDS.md` to a bounded
+   migration index.
+3. Later Milestone 7 slices separately migrate release artifact/packaging
+   policy, pipeline/publication policy, rollback/recovery policy, and
+   non-normative tools/examples/recipes.
+
+Each slice must disposition its frozen identifiers, update routing, provide
+owner-specific fixtures, and remove moved legacy text in the same commit.
+Unmigrated release concerns retain only explicitly named legacy authority until
+their assigned slice; they cannot act as fallback for canonical workflow
+decisions.
+
+**Next slice:** `7.2c1`.
