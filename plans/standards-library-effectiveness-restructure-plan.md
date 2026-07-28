@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6 active; proportional documentation profiles are accepted.
+**Current phase:** Milestone 6 active; documentation and traceability tooling are accepted.
 
-**Next slice:** Milestone 6.2, correct traceability diff modes and ADR ownership.
+**Next slice:** Milestone 6.3, constrain history rewriting and accept the milestone.
 
 **Acceptance status:** `partial`
 
@@ -399,7 +399,7 @@ persistence migration, and invalid fallback.
 - [x] Link accepted rationale instead of restating it in every artifact.
 - [ ] Move full-history checks to milestone, pre-push, and PR boundaries while
   retaining staged-diff review per commit.
-- [ ] Update traceability tooling and fixtures.
+- [x] Update traceability tooling and fixtures.
 
 **Write set:** documentation/commit/tooling standards, templates, checks,
 fixtures, and plan.

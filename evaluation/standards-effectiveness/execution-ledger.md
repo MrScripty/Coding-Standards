@@ -393,3 +393,42 @@
 - Shell syntax, whitespace, links, and staged-scope checks passed.
 
 **Commit:** `docs(documentation): make traceability proportional`
+
+## 2026-07-28: Milestone 6.2 Traceability Modes And Ownership
+
+**Outcome:** Accepted.
+
+**Write set:**
+
+- decision traceability checker and project map template;
+- tooling guidance and hook template;
+- isolated Git fixtures and traceability verifier;
+- repository index, evaluation records, and active plan.
+
+**Delivered:**
+
+- explicit `staged` mode that reads only the Git index;
+- explicit `range` mode that requires base and head commits;
+- project-owned maps from decision-bearing paths to stable boundary IDs,
+  documentation profiles, and canonical artifacts;
+- prior/current map union so row removal cannot hide a deleted trigger;
+- profile-specific artifact heading validation; and
+- exact ADR-to-boundary association through `## Affected Boundaries`.
+
+**No-fallback/legacy result:**
+
+- The checker no longer guesses base branches, substitutes another range, or
+  silently skips an unresolved diff.
+- Unrelated ADRs cannot satisfy mapped boundary changes.
+- Routine source paths that do not own durable knowledge remain outside the map
+  and do not trigger documentation churn.
+
+**Verification:**
+
+- Isolated staged, range, mapped-artifact, unstaged-exclusion, and unrelated-ADR
+  fixtures passed.
+- Documentation decision, metadata, contract, verification, acceptance,
+  lifecycle, and S1 routing regressions passed.
+- Shell syntax, whitespace, links, and staged-scope checks passed.
+
+**Commit:** `docs(tooling): make traceability inputs explicit`

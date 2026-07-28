@@ -55,6 +55,7 @@ Ready-to-use configuration files in `/templates/`:
 | [PLAN-TEMPLATE.md](templates/PLAN-TEMPLATE.md) | Implementation plan template |
 | [PULL_REQUEST_TEMPLATE.md](templates/PULL_REQUEST_TEMPLATE.md) | PR checklist for decision traceability |
 | [check-decision-traceability.sh](templates/check-decision-traceability.sh) | CI/hook script to enforce README/ADR decision updates |
+| [decision-traceability-map.tsv](templates/decision-traceability-map.tsv) | Project-owned decision-bearing path and artifact map |
 | [lefthook.yml](templates/lefthook.yml) | Pre-commit hook configuration |
 | [.editorconfig](templates/.editorconfig) | Editor formatting settings |
 

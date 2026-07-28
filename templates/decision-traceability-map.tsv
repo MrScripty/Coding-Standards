@@ -1,0 +1,4 @@
+trigger_path	boundary_id	profile	artifact_path
+src/api/public-contract.ts	api	contract-readme	src/api/README.md
+src/engine/policy/	engine-policy	adr	docs/adr/ADR-001-engine-policy.md
+ops/recovery/	recovery	runbook	docs/runbooks/recovery.md

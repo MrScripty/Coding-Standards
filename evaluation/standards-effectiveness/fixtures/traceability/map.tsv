@@ -1,0 +1,3 @@
+trigger_path	boundary_id	profile	artifact_path
+src/api/public.ts	api	contract-readme	src/api/README.md
+src/engine/policy.ts	engine	adr	docs/adr/ADR-001-engine.md
