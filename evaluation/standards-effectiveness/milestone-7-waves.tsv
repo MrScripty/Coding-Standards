@@ -1,0 +1,34 @@
+wave	order	future_owner	remaining_ids	rationale
+trust-boundaries	1	topics/security.md	20	trust-boundary and containment owner
+trust-boundaries	2	topics/cross-platform.md	20	platform filesystem identity and portability owner
+trust-boundaries	3	profiles/boundaries/interop.md	18	generic foreign-boundary contract
+trust-boundaries	4	profiles/boundaries/language-bindings.md	4	generic generated binding contract
+trust-boundaries	5	profiles/languages/rust/cross-platform.md	5	Rust platform specialization
+trust-boundaries	6	profiles/languages/rust/interop.md	6	Rust foreign-boundary specialization
+trust-boundaries	7	profiles/languages/rust/security.md	6	Rust security mechanisms
+trust-boundaries	8	profiles/languages/rust/unsafe.md	6	Rust unsafe contract
+trust-boundaries	9	profiles/languages/rust/language-bindings.md	52	Rust binding and conversion specialization
+lifecycle-runtime	1	topics/concurrency.md	17	shared concurrency and lock-safety contract
+lifecycle-runtime	2	topics/resilience.md	7	recovery and degradation concern
+lifecycle-runtime	3	profiles/languages/rust/async.md	9	Rust task and runtime ownership
+lifecycle-runtime	4	profiles/applications/launcher.md	26	application lifecycle and launcher specialization
+process-dependencies	1	CORE-STANDARDS.md	60	universal invariants before broad specialization
+process-dependencies	2	workflows/implementation.md	21	implementation procedure ownership
+process-dependencies	3	workflows/planning.md	47	planning procedure and template semantics
+process-dependencies	4	workflows/verification.md	52	verification and acceptance ownership
+process-dependencies	5	workflows/tooling.md	50	tool selection and automation workflow
+process-dependencies	6	topics/dependencies.md	49	generic dependency ownership
+process-dependencies	7	profiles/languages/rust/api.md	11	Rust API specialization
+process-dependencies	8	profiles/languages/rust/dependencies.md	21	Cargo dependency specialization
+process-dependencies	9	profiles/languages/rust/tooling.md	12	Rust tooling specialization
+process-dependencies	10	profiles/languages/rust/release.md	11	Rust release specialization
+application-boundaries	1	topics/accessibility.md	20	accessibility concern
+application-boundaries	2	topics/contracts.md	25	remaining contract semantics
+application-boundaries	3	topics/diagnostics.md	4	diagnostic concern
+application-boundaries	4	profiles/boundaries/ipc.md	6	process-boundary specialization
+application-boundaries	5	profiles/boundaries/persistence.md	13	persistence-boundary specialization
+application-boundaries	6	profiles/applications/frontend.md	16	frontend projection specialization
+reference-index-closure	1	reference/patterns/architecture.md	52	non-normative architecture catalog
+reference-index-closure	2	workflows/documentation.md	20	remaining documentation owners and derived templates
+reference-index-closure	3	profiles/languages/rust/README.md	4	Rust profile routing index
+reference-index-closure	4	STANDARDS-ROUTER.md	8	final entrypoint and routing closure

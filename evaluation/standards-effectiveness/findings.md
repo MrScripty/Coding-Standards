@@ -39,7 +39,7 @@ changes and focused fixture evidence.
 | F040 | Resolved in Milestone 7.3b3 | Missing dispositions for removed download-example identifiers `STD-0571` through `STD-0574` were reconciled with explicit merge/remove outcomes. |
 | F041 | Resolved in Milestone 7.3b4 | Generic release guidance now selects language profiles through the router and derives procedure steps from accepted decisions instead of universal Rust, commit, tag, audit-tool, or publication commands. |
 | F042 | Resolved in Milestone 7.3c | Recovery now follows impact, destination capability, explicit authority, immutable identity, and fresh acceptance rather than assuming hosted drafts, yank support, branches, patch versions, or unilateral action. |
-| F043 | Open; re-plan required after Milestone 7.3d | Milestone 7 still has 698 frozen identifiers across 33 source files, but the active plan does not yet define owner-bounded, correctness-ordered slices for them. |
+| F043 | Resolved in Milestone 7.4a | The remaining 698 identifiers now have complete owner-wave coverage, correctness-first ordering, and an exact first implementation slice without speculative full-sequence expansion. |
 
 ## Systemic Findings
 

@@ -1164,3 +1164,36 @@ without an approved owner-bounded implementation sequence. Finding `F043`
 records this plan-legibility and execution-scope gap.
 
 **Next slice:** `7.4a`, decomposition only; no normative movement.
+
+## 2026-07-28: Milestone 7.4a Rolling Decomposition
+
+**Outcome:** Accepted.
+
+The remaining 698 frozen identifiers across 33 source files and 33 proposed
+owners are assigned to five dependency-ordered waves. Twenty-five proposed
+owners do not yet exist; the sequence prohibits empty stubs and requires each
+owner to arrive with useful semantics and focused evidence.
+
+The plan uses rolling-wave detail rather than enumerating hundreds of
+speculative commits. Trust-boundary correctness precedes lifecycle/runtime,
+process/dependency, application/boundary, and reference/index closure waves.
+Generic owners precede language specializations.
+
+The first implementation slice is fixed at nine identifiers:
+`STD-0289`-`STD-0293` and `STD-0584`-`STD-0587`. It atomically replaces unsafe
+string-prefix containment guidance with canonical Security containment and
+Cross-Platform filesystem-identity contracts.
+
+**No-fallback/legacy result:** planning does not pre-approve mechanical owner
+maps, empty canonical files, compatibility copies, or acceptance of a path
+when safe containment cannot be established.
+
+**Verification:** the decomposition checker validates 698 remaining
+identifiers, 33 sources, 33 owners, 25 missing owners, complete wave coverage,
+owner counts, and the exact first-slice proposal. Plan structure, plan fixtures,
+shell syntax, whitespace, and all existing standards-effectiveness regressions
+pass.
+
+Finding `F043` is resolved.
+
+**Next slice:** `7.4b1`.

@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; release consolidation accepted and
-remaining owner-bounded decomposition required.
+**Current phase:** Milestone 7 active; rolling owner-and-correctness waves
+accepted.
 
-**Next slice:** Milestone 7.4a, decompose the remaining 698 frozen identifiers
-across 33 source files by canonical owner and correctness dependency; move no
-normative rules in that planning slice.
+**Next slice:** Milestone 7.4b1, replace unsafe filesystem containment and
+platform path-identity guidance for `STD-0289`-`STD-0293` and
+`STD-0584`-`STD-0587`.
 
 **Acceptance status:** `partial`
 
@@ -20,6 +20,8 @@ normative rules in that planning slice.
 **Issues:** [Standards effectiveness findings](../evaluation/standards-effectiveness/findings.md)
 
 **Evidence:** [Milestone 0 evaluation](../evaluation/standards-effectiveness/README.md)
+
+**Milestone 7 decomposition:** [Rolling owner-and-correctness waves](../evaluation/standards-effectiveness/milestone-7-decomposition.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -461,10 +463,13 @@ all structural/routing fixtures pass.
      (`STD-0577`-`STD-0581`); and
    - `7.3d` (`Accepted`): non-normative release tools, examples, and recipes
      (`STD-0541`-`STD-0542`).
-4. `7.4a` (`Planned`): decompose the remaining 698 frozen identifiers across
+4. `7.4a` (`Accepted`): decompose the remaining 698 frozen identifiers across
    33 source files into reviewable owner-bounded and correctness-ordered
    implementation slices without moving normative rules.
-5. Execute the owner-bounded slices approved by `7.4a`.
+5. Execute the rolling waves defined by `7.4a`, beginning with:
+   - `7.4b1` (`Planned`): canonical filesystem containment and platform
+     path-identity contracts (`STD-0289`-`STD-0293`,
+     `STD-0584`-`STD-0587`).
 6. Final legacy-index review, disposition closure, and duplication gate.
 
 **Status:** `Active`

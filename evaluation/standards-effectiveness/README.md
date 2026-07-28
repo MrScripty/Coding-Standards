@@ -140,6 +140,14 @@ linear and merge topology, and rejects the removed mandatory cleanup policy.
 
 `consolidation-dispositions.tsv` records the final owner and disposition of
 every frozen section identifier as roles are migrated.
+
+`milestone-7-decomposition.md`, `milestone-7-waves.tsv`, and
+`milestone-7-first-slice.tsv` define the rolling owner-and-correctness sequence
+for the remaining consolidation. `verify-milestone-7-decomposition.sh` checks
+the remaining inventory totals, complete wave ownership, missing-owner count,
+and exact first-slice proposal without treating later proposed dispositions as
+accepted.
+
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
 legacy path is only a bounded migration index.
