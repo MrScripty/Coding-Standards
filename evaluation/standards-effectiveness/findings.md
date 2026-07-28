@@ -27,6 +27,7 @@ changes and focused fixture evidence.
 | D005 | Resolved in Milestone 7.1 | Commit and slice process is owned by implementation/commit workflows; prompts route only, and commit examples are non-normative reference. |
 | F032 | Partially resolved in Milestone 7.2b | Documentation examples and proportional workflow policy have canonical owners; release-owned changelog migration and legacy-index closure remain. |
 | F033 | Resolved in Milestone 7.2a | The commit disposition checker now filters its shared ledger by source; documentation rows have a separate owner-specific fixture. |
+| F034 | Open in Milestone 7.2c | The declared `workflows/release.md` owner is absent while legacy release guidance still mixes 51 sections; changelog migration requires release-owner decomposition. |
 
 ## Systemic Findings
 
@@ -50,6 +51,7 @@ changes and focused fixture evidence.
 | F016 | Broken reference | `SECURITY-STANDARDS.md:289`; no matching concurrency heading | Repair or remove the nonexistent graceful-shutdown anchor. | 7 |
 | F032 | Consolidation ownership | `DOCUMENTATION-STANDARDS.md`; frozen IDs `STD-0349`-`STD-0448` | Move examples, documentation policy, and changelog guidance in separate reference, workflow, and release-owner slices. | 7 |
 | F033 | Fixture ownership | `verify-consolidation-dispositions.sh`; shared disposition ledger | Filter each owner-specific fixture by source and verify new source groups independently. | 7 |
+| F034 | Missing canonical owner | `owner-map.tsv`; `RELEASE-STANDARDS.md`; absent `workflows/release.md` | Establish release workflow ownership in an owner-bounded slice before moving changelog policy or closing the documentation index. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

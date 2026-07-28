@@ -626,3 +626,50 @@ material reserved for release-owned slice `7.2c`.
 All listed checks passed.
 
 **Next slice:** `7.2c`.
+
+## 2026-07-28: Milestone 7.2c Release Ownership Re-plan Trigger
+
+**Outcome:** Re-plan required; implementation not started.
+
+The declared owner map routes `RELEASE-STANDARDS.md` to
+`workflows/release.md`, but that canonical workflow does not exist. The legacy
+release file still contains 51 frozen sections spanning applicability,
+versioning, changelog policy, tool recipes, artifacts, CI pipelines, release
+channels, acceptance, and rollback. It also retains unresolved release
+correctness findings.
+
+Moving documentation changelog rules into the legacy release file would create
+a temporary owner and a second migration. Creating a changelog-only release
+workflow without a declared boundary would make release ownership ambiguous.
+Migrating all 51 sections with the documentation closure would violate the
+thin-slice and one-owner review constraints.
+
+**Standards-aligned options:**
+
+1. Move changelog guidance into `RELEASE-STANDARDS.md`, then migrate it again
+   later. This is the smallest diff but is rejected because it creates
+   avoidable legacy authority and duplicate migration work.
+2. Create a changelog-only `workflows/release.md` while the legacy file retains
+   all other release policy. This can work only with an explicit temporary
+   ownership boundary and routing fixture, but leaves normal release tasks
+   loading two workflow owners.
+3. Establish `workflows/release.md` with release applicability, versioning,
+   changelog, contract-evolution, and acceptance boundaries; remove those
+   sections from the legacy file; then close `DOCUMENTATION-STANDARDS.md`.
+   Follow with owner-bounded artifact, pipeline, rollback, and recipe slices.
+   This is the recommended sequence because it creates a useful canonical
+   workflow immediately without attempting the full 51-section migration.
+4. Consolidate all release policy, profiles, and recipes in one slice. This
+   reaches the final shape fastest but is rejected as too broad to review and
+   verify as a thin vertical slice.
+
+**No-fallback/legacy constraint:**
+
+- The chosen slice must remove each moved rule from its legacy source in the
+  same commit.
+- Unmigrated release rules may retain explicitly bounded legacy authority, but
+  no canonical rule may be copied back or delegated through an implicit
+  fallback.
+
+**Next action:** Select and record the release-owner sequence before
+implementing Milestone `7.2c`.
