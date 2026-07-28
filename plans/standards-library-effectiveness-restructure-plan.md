@@ -2,11 +2,13 @@
 
 ## Status
 
-**Direction:** Approved for planning.
+**Direction:** Approved and active.
 
-**Current phase:** Plan created; normative standards are unchanged.
+**Current phase:** Milestone 0 accepted; normative standards are unchanged.
 
-**Next slice:** Milestone 0, baseline inventory and evaluation fixtures.
+**Next slice:** Milestone 1, information architecture and rule metadata.
+
+**Evidence:** [Milestone 0 evaluation](../evaluation/standards-effectiveness/README.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -76,10 +78,9 @@ successful.
 
 The 2026-07-28 review found:
 
-- about 11,600 Markdown lines in the repository;
-- more than 10,000 lines after excluding plans, prompts, templates, indexes,
-  and adoption notes;
-- about 860 headings and more than 300 strong imperative phrases;
+- 12,088 Markdown lines in the reproducible baseline corpus;
+- 11,066 normative or operationally derived lines;
+- 1,015 headings and 352 strong imperative occurrences;
 - a root quick start that directs adopters to copy and read the full library;
 - additive generic and Rust guidance that can require a large combined context;
 - normative rules mixed with examples, setup recipes, and tool versions;
@@ -237,18 +238,18 @@ Run the same fixtures and rubric before and after restructuring.
 
 **Goal:** Establish reproducible evidence before changing normative guidance.
 
-- [ ] Inventory files, normative sections, rules, links, and applicability.
-- [ ] Assign rule identifiers and preliminary role/disposition.
-- [ ] Record duplicates, conflicts, broad rules, and ownership gaps.
-- [ ] Capture corpus, duplication, routing, and process baselines.
-- [ ] Create and score the seven fixed scenarios.
+- [x] Inventory files, normative sections, rules, links, and applicability.
+- [x] Assign rule identifiers and preliminary role/disposition.
+- [x] Record duplicates, conflicts, broad rules, and ownership gaps.
+- [x] Capture corpus, duplication, routing, and process baselines.
+- [x] Create and score the seven fixed scenarios.
 
 **Write set:** this plan and a dedicated evaluation/report directory only.
 
 **Gate:** Every normative section has an identifier; another reviewer can
 reproduce counts, routing, and scores.
 
-**Status:** Planned.
+**Status:** Accepted.
 
 ### Milestone 1: Architecture And Metadata
 

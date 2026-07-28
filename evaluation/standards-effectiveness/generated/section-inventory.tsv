@@ -1,0 +1,917 @@
+id	path	line	level	target_role	disposition	heading
+STD-0001	README.md	1	1	router	replace	Standards Library
+STD-0002	README.md	5	2	router	replace	Quick Start
+STD-0003	README.md	14	2	router	replace	Documents
+STD-0004	README.md	37	2	router	replace	Templates
+STD-0005	README.md	50	2	router	replace	Customization
+STD-0006	README.md	59	2	router	replace	License
+STD-0007	ACCESSIBILITY-STANDARDS.md	1	1	topic	refine	Accessibility Standards
+STD-0008	ACCESSIBILITY-STANDARDS.md	5	2	topic	refine	Core Principle: Use Semantic Elements
+STD-0009	ACCESSIBILITY-STANDARDS.md	18	2	topic	refine	Interactive Elements
+STD-0010	ACCESSIBILITY-STANDARDS.md	20	3	topic	refine	Use `<button>` for Actions
+STD-0011	ACCESSIBILITY-STANDARDS.md	50	3	topic	refine	Use `<a>` Only for Navigation
+STD-0012	ACCESSIBILITY-STANDARDS.md	68	3	topic	refine	When a Generic Element Must Be Interactive
+STD-0013	ACCESSIBILITY-STANDARDS.md	93	2	topic	refine	Keyboard Navigation
+STD-0014	ACCESSIBILITY-STANDARDS.md	95	3	topic	refine	All Interactive Elements Must Be Keyboard-Accessible
+STD-0015	ACCESSIBILITY-STANDARDS.md	100	3	topic	refine	Focus Indicators
+STD-0016	ACCESSIBILITY-STANDARDS.md	115	3	topic	refine	Dialog Focus Management
+STD-0017	ACCESSIBILITY-STANDARDS.md	124	2	topic	refine	Labels and Names
+STD-0018	ACCESSIBILITY-STANDARDS.md	126	3	topic	refine	Every Interactive Element Needs an Accessible Name
+STD-0019	ACCESSIBILITY-STANDARDS.md	149	3	topic	refine	Form Inputs Need Labels
+STD-0020	ACCESSIBILITY-STANDARDS.md	162	2	topic	refine	Images and Media
+STD-0021	ACCESSIBILITY-STANDARDS.md	164	3	topic	refine	Decorative vs Informative Images
+STD-0022	ACCESSIBILITY-STANDARDS.md	174	3	topic	refine	Icon Components
+STD-0023	ACCESSIBILITY-STANDARDS.md	191	2	topic	refine	Linting Enforcement
+STD-0024	ACCESSIBILITY-STANDARDS.md	193	3	topic	refine	Required ESLint Plugin
+STD-0025	ACCESSIBILITY-STANDARDS.md	201	3	topic	refine	Recommended Rules
+STD-0026	ACCESSIBILITY-STANDARDS.md	214	3	topic	refine	CI Gate
+STD-0027	ARCHITECTURE-PATTERNS.md	1	1	mixed	split	Architecture Patterns
+STD-0028	ARCHITECTURE-PATTERNS.md	5	2	mixed	split	Layered Separation of Concerns
+STD-0029	ARCHITECTURE-PATTERNS.md	7	3	mixed	split	The Pattern
+STD-0030	ARCHITECTURE-PATTERNS.md	23	3	mixed	split	Layer Responsibilities
+STD-0031	ARCHITECTURE-PATTERNS.md	32	3	mixed	split	Dependency Rule
+STD-0032	ARCHITECTURE-PATTERNS.md	44	3	mixed	split	Benefits
+STD-0033	ARCHITECTURE-PATTERNS.md	50	3	mixed	split	Layering Is Not Simplicity By Itself
+STD-0034	ARCHITECTURE-PATTERNS.md	63	2	mixed	split	Monorepo Package Roles
+STD-0035	ARCHITECTURE-PATTERNS.md	65	3	mixed	split	The Pattern
+STD-0036	ARCHITECTURE-PATTERNS.md	74	3	mixed	split	Common Roles
+STD-0037	ARCHITECTURE-PATTERNS.md	87	3	mixed	split	Dependency Direction
+STD-0038	ARCHITECTURE-PATTERNS.md	110	3	mixed	split	Why This Helps
+STD-0039	ARCHITECTURE-PATTERNS.md	117	3	mixed	split	Example Decision
+STD-0040	ARCHITECTURE-PATTERNS.md	125	2	mixed	split	Backend-Owned Data
+STD-0041	ARCHITECTURE-PATTERNS.md	127	3	mixed	split	The Pattern
+STD-0042	ARCHITECTURE-PATTERNS.md	139	3	mixed	split	Rules
+STD-0043	ARCHITECTURE-PATTERNS.md	154	3	mixed	split	Data Flow
+STD-0044	ARCHITECTURE-PATTERNS.md	163	3	mixed	split	No Optimistic Updates for Backend-Owned Data
+STD-0045	ARCHITECTURE-PATTERNS.md	194	3	mixed	split	Benefits
+STD-0046	ARCHITECTURE-PATTERNS.md	202	2	mixed	split	Immutable Contracts
+STD-0047	ARCHITECTURE-PATTERNS.md	204	3	mixed	split	The Pattern
+STD-0048	ARCHITECTURE-PATTERNS.md	216	3	mixed	split	Contract Rules
+STD-0049	ARCHITECTURE-PATTERNS.md	223	3	mixed	split	Example Contract
+STD-0050	ARCHITECTURE-PATTERNS.md	242	3	mixed	split	Benefits
+STD-0051	ARCHITECTURE-PATTERNS.md	250	2	mixed	split	Executable Boundary Contracts
+STD-0052	ARCHITECTURE-PATTERNS.md	252	3	mixed	split	The Pattern
+STD-0053	ARCHITECTURE-PATTERNS.md	267	3	mixed	split	Plain Types vs Executable Contracts
+STD-0054	ARCHITECTURE-PATTERNS.md	280	3	mixed	split	Contract Requirements
+STD-0055	ARCHITECTURE-PATTERNS.md	311	3	mixed	split	Packaging Guidance
+STD-0056	ARCHITECTURE-PATTERNS.md	320	3	mixed	split	Contract Cost Test
+STD-0057	ARCHITECTURE-PATTERNS.md	339	3	mixed	split	Benefits
+STD-0058	ARCHITECTURE-PATTERNS.md	347	2	mixed	split	Structured Producer-Consumer Contracts
+STD-0059	ARCHITECTURE-PATTERNS.md	349	3	mixed	split	The Pattern
+STD-0060	ARCHITECTURE-PATTERNS.md	359	3	mixed	split	Contract Semantics to Preserve
+STD-0061	ARCHITECTURE-PATTERNS.md	369	3	mixed	split	Consumer Responsibilities
+STD-0062	ARCHITECTURE-PATTERNS.md	383	3	mixed	split	Benefits
+STD-0063	ARCHITECTURE-PATTERNS.md	391	2	mixed	split	IPC/Message Contract Pattern
+STD-0064	ARCHITECTURE-PATTERNS.md	393	3	mixed	split	The Pattern
+STD-0065	ARCHITECTURE-PATTERNS.md	404	3	mixed	split	Message Structure
+STD-0066	ARCHITECTURE-PATTERNS.md	425	3	mixed	split	Message Categories
+STD-0067	ARCHITECTURE-PATTERNS.md	434	3	mixed	split	Example Implementation
+STD-0068	ARCHITECTURE-PATTERNS.md	461	3	mixed	split	Benefits
+STD-0069	ARCHITECTURE-PATTERNS.md	469	2	mixed	split	Composition Root Pattern
+STD-0070	ARCHITECTURE-PATTERNS.md	471	3	mixed	split	The Pattern
+STD-0071	ARCHITECTURE-PATTERNS.md	487	3	mixed	split	Roles
+STD-0072	ARCHITECTURE-PATTERNS.md	495	3	mixed	split	Rules
+STD-0073	ARCHITECTURE-PATTERNS.md	523	3	mixed	split	Benefits
+STD-0074	ARCHITECTURE-PATTERNS.md	531	2	mixed	split	Realtime Workflow Systems
+STD-0075	ARCHITECTURE-PATTERNS.md	533	3	mixed	split	The Pattern
+STD-0076	ARCHITECTURE-PATTERNS.md	542	3	mixed	split	Workflow Shape
+STD-0077	ARCHITECTURE-PATTERNS.md	553	3	mixed	split	Rules
+STD-0078	ARCHITECTURE-PATTERNS.md	568	3	mixed	split	Typical Components
+STD-0079	ARCHITECTURE-PATTERNS.md	578	3	mixed	split	Benefits
+STD-0080	ARCHITECTURE-PATTERNS.md	585	3	mixed	split	Verification Note
+STD-0081	ARCHITECTURE-PATTERNS.md	595	2	mixed	split	View Model Pattern
+STD-0082	ARCHITECTURE-PATTERNS.md	597	3	mixed	split	The Pattern
+STD-0083	ARCHITECTURE-PATTERNS.md	608	3	mixed	split	Responsibilities
+STD-0084	ARCHITECTURE-PATTERNS.md	616	3	mixed	split	View Model Rules
+STD-0085	ARCHITECTURE-PATTERNS.md	626	3	mixed	split	Example
+STD-0086	ARCHITECTURE-PATTERNS.md	659	3	mixed	split	Benefits
+STD-0087	ARCHITECTURE-PATTERNS.md	667	2	mixed	split	Directory Structure Template
+STD-0088	ARCHITECTURE-PATTERNS.md	709	3	mixed	split	Directory README Requirement
+STD-0089	ARCHITECTURE-PATTERNS.md	729	2	mixed	split	Activity Tracing Pattern
+STD-0090	ARCHITECTURE-PATTERNS.md	731	3	mixed	split	The Pattern
+STD-0091	ARCHITECTURE-PATTERNS.md	743	3	mixed	split	Implementation
+STD-0092	ARCHITECTURE-PATTERNS.md	776	3	mixed	split	Benefits
+STD-0093	ARCHITECTURE-PATTERNS.md	784	2	mixed	split	Process Instance Coordination
+STD-0094	ARCHITECTURE-PATTERNS.md	786	3	mixed	split	The Pattern
+STD-0095	ARCHITECTURE-PATTERNS.md	810	3	mixed	split	PID File Rules
+STD-0096	ARCHITECTURE-PATTERNS.md	820	3	mixed	split	PID File Contents
+STD-0097	ARCHITECTURE-PATTERNS.md	832	3	mixed	split	Handling PID Reuse
+STD-0098	ARCHITECTURE-PATTERNS.md	859	3	mixed	split	Stale PID File Cleanup
+STD-0099	ARCHITECTURE-PATTERNS.md	867	2	mixed	split	Discover-or-Create Pattern
+STD-0100	ARCHITECTURE-PATTERNS.md	869	3	mixed	split	The Pattern
+STD-0101	ARCHITECTURE-PATTERNS.md	881	3	mixed	split	Instance Convergence Flow
+STD-0102	ARCHITECTURE-PATTERNS.md	903	3	mixed	split	Rules
+STD-0103	ARCHITECTURE-PATTERNS.md	913	3	mixed	split	Ownership Models
+STD-0104	ARCHITECTURE-PATTERNS.md	921	3	mixed	split	Example
+STD-0105	ARCHITECTURE-PATTERNS.md	940	3	mixed	split	Benefits
+STD-0106	ARCHITECTURE-PATTERNS.md	948	2	mixed	split	Phased Mutation Pattern
+STD-0107	ARCHITECTURE-PATTERNS.md	950	3	mixed	split	The Pattern
+STD-0108	ARCHITECTURE-PATTERNS.md	965	3	mixed	split	Phase Responsibilities
+STD-0109	ARCHITECTURE-PATTERNS.md	976	3	mixed	split	Benefits
+STD-0110	ARCHITECTURE-PATTERNS.md	984	3	mixed	split	When to Use
+STD-0111	ARCHITECTURE-PATTERNS.md	994	3	mixed	split	Anti-Pattern: Interleaved Mutation
+STD-0112	ARCHITECTURE-PATTERNS.md	1006	3	mixed	split	Implementation Tips
+STD-0113	ARCHITECTURE-PATTERNS.md	1019	2	mixed	split	Schema Versioning and Migration
+STD-0114	ARCHITECTURE-PATTERNS.md	1021	3	mixed	split	The Pattern
+STD-0115	ARCHITECTURE-PATTERNS.md	1028	3	mixed	split	Migration Rules
+STD-0116	ARCHITECTURE-PATTERNS.md	1038	3	mixed	split	Migration File Structure
+STD-0117	ARCHITECTURE-PATTERNS.md	1052	3	mixed	split	Schema Version Tracking
+STD-0118	ARCHITECTURE-PATTERNS.md	1076	3	mixed	split	Forward/Backward Compatibility
+STD-0119	ARCHITECTURE-PATTERNS.md	1093	2	mixed	split	Infrastructure Failure Recovery
+STD-0120	ARCHITECTURE-PATTERNS.md	1095	3	mixed	split	The Pattern
+STD-0121	ARCHITECTURE-PATTERNS.md	1105	3	mixed	split	Failure Categories
+STD-0122	ARCHITECTURE-PATTERNS.md	1114	3	mixed	split	Decision Flow
+STD-0123	ARCHITECTURE-PATTERNS.md	1132	3	mixed	split	Startup Resilience
+STD-0124	ARCHITECTURE-PATTERNS.md	1148	3	mixed	split	Best-Effort Service Pattern
+STD-0125	ARCHITECTURE-PATTERNS.md	1169	3	mixed	split	Benefits
+STD-0126	ARCHITECTURE-PATTERNS.md	1178	2	mixed	split	HTTP API Error Convention
+STD-0127	ARCHITECTURE-PATTERNS.md	1180	3	mixed	split	The Pattern
+STD-0128	ARCHITECTURE-PATTERNS.md	1186	3	mixed	split	Error Response Format
+STD-0129	ARCHITECTURE-PATTERNS.md	1194	3	mixed	split	Status Code Usage
+STD-0130	ARCHITECTURE-PATTERNS.md	1205	3	mixed	split	Server Implementation
+STD-0131	ARCHITECTURE-PATTERNS.md	1222	3	mixed	split	Client Implementation
+STD-0132	ARCHITECTURE-PATTERNS.md	1228	3	mixed	split	Anti-Pattern: Status 200 with Error Body
+STD-0133	ARCHITECTURE-PATTERNS.md	1245	3	mixed	split	Benefits
+STD-0134	ARCHITECTURE-PATTERNS.md	1253	2	mixed	split	Choosing Patterns
+STD-0135	CODING-STANDARDS.md	1	1	core	split	Coding Standards
+STD-0136	CODING-STANDARDS.md	5	2	core	split	Simplicity Principle
+STD-0137	CODING-STANDARDS.md	18	2	core	split	File Organization
+STD-0138	CODING-STANDARDS.md	20	3	core	split	Simple vs. Complected Organization
+STD-0139	CODING-STANDARDS.md	48	3	core	split	Directory Structure
+STD-0140	CODING-STANDARDS.md	59	2	core	split	Layered Architecture
+STD-0141	CODING-STANDARDS.md	77	3	core	split	Layer Rules
+STD-0142	CODING-STANDARDS.md	87	3	core	split	Why Layering Matters
+STD-0143	CODING-STANDARDS.md	93	2	core	split	Separation of Concerns
+STD-0144	CODING-STANDARDS.md	95	3	core	split	Backend-Owned Data Principle
+STD-0145	CODING-STANDARDS.md	122	3	core	split	Service Independence
+STD-0146	CODING-STANDARDS.md	144	3	core	split	Composition Root for Runtime Wiring
+STD-0147	CODING-STANDARDS.md	156	3	core	split	Single Owner for Stateful Flows
+STD-0148	CODING-STANDARDS.md	174	2	core	split	Constants and Configuration
+STD-0149	CODING-STANDARDS.md	176	3	core	split	No Magic Numbers or Strings
+STD-0150	CODING-STANDARDS.md	193	3	core	split	Centralize Constants
+STD-0151	CODING-STANDARDS.md	214	2	core	split	Error Handling
+STD-0152	CODING-STANDARDS.md	216	3	core	split	Exceptions for Exceptional Cases
+STD-0153	CODING-STANDARDS.md	235	3	core	split	Catch at Boundaries
+STD-0154	CODING-STANDARDS.md	265	3	core	split	Production Error Diagnostics
+STD-0155	CODING-STANDARDS.md	317	3	core	split	Validate at Boundaries
+STD-0156	CODING-STANDARDS.md	334	3	core	split	Validate Outbound Responses
+STD-0157	CODING-STANDARDS.md	356	2	core	split	Dependency Management
+STD-0158	CODING-STANDARDS.md	361	2	core	split	Code Style
+STD-0159	CODING-STANDARDS.md	363	3	core	split	Code Volume Discipline
+STD-0160	CODING-STANDARDS.md	387	3	core	split	Avoid Over-Engineering
+STD-0161	CODING-STANDARDS.md	410	3	core	split	Abstractions Must Reduce Reasoning Load
+STD-0162	CODING-STANDARDS.md	425	3	core	split	Don't Repeat Yourself (DRY)
+STD-0163	CODING-STANDARDS.md	454	3	core	split	Delete Unused Code
+STD-0164	CODING-STANDARDS.md	467	2	core	split	Naming Conventions
+STD-0165	CODING-STANDARDS.md	469	3	core	split	Be Descriptive
+STD-0166	CODING-STANDARDS.md	485	3	core	split	Consistent Terminology
+STD-0167	CODING-STANDARDS.md	501	2	core	split	Invariants and Safety
+STD-0168	CODING-STANDARDS.md	503	3	core	split	Documenting Invariants
+STD-0169	CODING-STANDARDS.md	510	1	core	split	Invariants Maintained
+STD-0170	CODING-STANDARDS.md	516	1	core	split	Preconditions
+STD-0171	CODING-STANDARDS.md	521	1	core	split	Postconditions
+STD-0172	CODING-STANDARDS.md	527	3	core	split	Validation Strategy
+STD-0173	CODING-STANDARDS.md	538	3	core	split	Invariant Testing
+STD-0174	CODING-STANDARDS.md	547	2	core	split	Disabled Features
+STD-0175	CODING-STANDARDS.md	551	3	core	split	Documentation Requirements
+STD-0176	CODING-STANDARDS.md	572	3	core	split	Config Pattern
+STD-0177	CODING-STANDARDS.md	577	3	core	split	Unimplemented Stubs
+STD-0178	CODING-STANDARDS.md	592	3	core	split	Review Checklist
+STD-0179	CODING-STANDARDS.md	601	2	core	split	License Attribution
+STD-0180	CODING-STANDARDS.md	605	3	core	split	Attribution Format
+STD-0181	CODING-STANDARDS.md	620	3	core	split	License Compatibility
+STD-0182	CODING-STANDARDS.md	632	3	core	split	File-Level Attribution
+STD-0183	CODING-STANDARDS.md	646	2	core	split	Language-Specific Guidelines
+STD-0184	CODING-STANDARDS.md	658	2	core	split	TypeScript-Specific Guidelines
+STD-0185	CODING-STANDARDS.md	660	3	core	split	Explicit Return Types on Public Functions
+STD-0186	CODING-STANDARDS.md	681	3	core	split	Contract Types for API Boundaries
+STD-0187	CODING-STANDARDS.md	698	3	core	split	Frontend-Specific Standards
+STD-0188	CODING-STANDARDS.md	704	2	core	split	Performance-Critical Code
+STD-0189	CODING-STANDARDS.md	706	3	core	split	Documentation
+STD-0190	CODING-STANDARDS.md	713	1	core	split	Performance
+STD-0191	CODING-STANDARDS.md	716	2	core	split	Optimizations Applied
+STD-0192	CODING-STANDARDS.md	721	2	core	split	Benchmarks
+STD-0193	CODING-STANDARDS.md	725	3	core	split	Guidelines
+STD-0194	CODING-STANDARDS.md	737	3	core	split	When to Optimize
+STD-0195	COMMIT-STANDARDS.md	1	1	workflow	refine	Commit Standards
+STD-0196	COMMIT-STANDARDS.md	5	2	workflow	refine	Conventional Commits Format
+STD-0197	COMMIT-STANDARDS.md	17	3	workflow	refine	Components
+STD-0198	COMMIT-STANDARDS.md	27	3	workflow	refine	Commit Types
+STD-0199	COMMIT-STANDARDS.md	41	3	workflow	refine	Choosing a Type
+STD-0200	COMMIT-STANDARDS.md	55	2	workflow	refine	Scopes
+STD-0201	COMMIT-STANDARDS.md	60	2	workflow	refine	Example Scopes
+STD-0202	COMMIT-STANDARDS.md	73	3	workflow	refine	Scope Guidelines
+STD-0203	COMMIT-STANDARDS.md	80	2	workflow	refine	Writing Good Descriptions
+STD-0204	COMMIT-STANDARDS.md	82	3	workflow	refine	Use Imperative Mood
+STD-0205	COMMIT-STANDARDS.md	98	3	workflow	refine	Be Specific
+STD-0206	COMMIT-STANDARDS.md	112	3	workflow	refine	Keep It Short
+STD-0207	COMMIT-STANDARDS.md	118	2	workflow	refine	Commit Body
+STD-0208	COMMIT-STANDARDS.md	140	2	workflow	refine	Commit Footer
+STD-0209	COMMIT-STANDARDS.md	142	3	workflow	refine	Breaking Changes
+STD-0210	COMMIT-STANDARDS.md	152	3	workflow	refine	Issue References
+STD-0211	COMMIT-STANDARDS.md	162	3	workflow	refine	Co-Authors
+STD-0212	COMMIT-STANDARDS.md	170	3	workflow	refine	Agent Footer (Multi-Agent Orchestration)
+STD-0213	COMMIT-STANDARDS.md	184	2	workflow	refine	Pre-Commit Checklist
+STD-0214	COMMIT-STANDARDS.md	189	1	workflow	refine	1. Check what's staged
+STD-0215	COMMIT-STANDARDS.md	192	1	workflow	refine	2. Review the actual changes
+STD-0216	COMMIT-STANDARDS.md	195	1	workflow	refine	3. Review unpushed history for regression + fix pairs
+STD-0217	COMMIT-STANDARDS.md	196	1	workflow	refine	If no upstream is configured, compare against your intended base branch
+STD-0218	COMMIT-STANDARDS.md	197	1	workflow	refine	(for example: origin/main..HEAD)
+STD-0219	COMMIT-STANDARDS.md	200	1	workflow	refine	4. Run linters/formatters
+STD-0220	COMMIT-STANDARDS.md	203	1	workflow	refine	5. Run tests (at minimum, affected tests)
+STD-0221	COMMIT-STANDARDS.md	206	1	workflow	refine	6. Commit with conventional format
+STD-0222	COMMIT-STANDARDS.md	210	2	workflow	refine	Mandatory History Cleanup Before Commit
+STD-0223	COMMIT-STANDARDS.md	225	3	workflow	refine	Workflow
+STD-0224	COMMIT-STANDARDS.md	228	1	workflow	refine	Inspect unpushed commits
+STD-0225	COMMIT-STANDARDS.md	229	1	workflow	refine	If no upstream is configured, compare against your intended base branch
+STD-0226	COMMIT-STANDARDS.md	230	1	workflow	refine	(for example: origin/main..HEAD)
+STD-0227	COMMIT-STANDARDS.md	233	1	workflow	refine	Mark intended cleanup as fixup during normal development
+STD-0228	COMMIT-STANDARDS.md	236	1	workflow	refine	Rewrite unpushed history and autosquash fixups
+STD-0229	COMMIT-STANDARDS.md	237	1	workflow	refine	If no upstream is configured, use your intended base branch
+STD-0230	COMMIT-STANDARDS.md	238	1	workflow	refine	(for example: origin/main)
+STD-0231	COMMIT-STANDARDS.md	244	2	workflow	refine	Commit Frequency
+STD-0232	COMMIT-STANDARDS.md	246	3	workflow	refine	Commit Often
+STD-0233	COMMIT-STANDARDS.md	262	3	workflow	refine	One Logical Change Per Commit
+STD-0234	COMMIT-STANDARDS.md	269	2	workflow	refine	Staging Best Practices
+STD-0235	COMMIT-STANDARDS.md	271	3	workflow	refine	Stage Specific Files
+STD-0236	COMMIT-STANDARDS.md	274	1	workflow	refine	BAD: Stages everything (may include unwanted files)
+STD-0237	COMMIT-STANDARDS.md	278	1	workflow	refine	GOOD: Stage specific files
+STD-0238	COMMIT-STANDARDS.md	283	3	workflow	refine	Review Before Committing
+STD-0239	COMMIT-STANDARDS.md	286	1	workflow	refine	Always check what you're about to commit
+STD-0240	COMMIT-STANDARDS.md	289	1	workflow	refine	Or use interactive staging
+STD-0241	COMMIT-STANDARDS.md	293	3	workflow	refine	Exclude Sensitive Files
+STD-0242	COMMIT-STANDARDS.md	301	2	workflow	refine	Commit Message Examples
+STD-0243	COMMIT-STANDARDS.md	303	3	workflow	refine	Feature
+STD-0244	COMMIT-STANDARDS.md	316	3	workflow	refine	Bug Fix
+STD-0245	COMMIT-STANDARDS.md	327	3	workflow	refine	Refactor
+STD-0246	COMMIT-STANDARDS.md	338	3	workflow	refine	Chore
+STD-0247	COMMIT-STANDARDS.md	349	2	workflow	refine	Handling Mistakes
+STD-0248	COMMIT-STANDARDS.md	351	3	workflow	refine	Amend Last Commit (Before Push)
+STD-0249	COMMIT-STANDARDS.md	354	1	workflow	refine	Fix the last commit message
+STD-0250	COMMIT-STANDARDS.md	357	1	workflow	refine	Add forgotten files to last commit
+STD-0251	COMMIT-STANDARDS.md	362	3	workflow	refine	After Pushing
+STD-0252	COMMIT-STANDARDS.md	367	1	workflow	refine	Create a new commit that fixes the issue
+STD-0253	COMMIT-STANDARDS.md	374	2	workflow	refine	Merge Commits vs. Squash
+STD-0254	COMMIT-STANDARDS.md	376	3	workflow	refine	When to Squash
+STD-0255	COMMIT-STANDARDS.md	382	3	workflow	refine	When to Keep History
+STD-0256	COMMIT-STANDARDS.md	388	3	workflow	refine	Rewriting Unpushed Merge Commits
+STD-0257	COMMIT-STANDARDS.md	397	1	workflow	refine	Merge-aware history rewrite (when merge commits are involved)
+STD-0258	COMMIT-STANDARDS.md	398	1	workflow	refine	If no upstream is configured, use your intended base branch
+STD-0259	COMMIT-STANDARDS.md	399	1	workflow	refine	(for example: origin/main)
+STD-0260	COMMIT-STANDARDS.md	402	1	workflow	refine	Verify topology before push
+STD-0261	COMMIT-STANDARDS.md	403	1	workflow	refine	If no upstream is configured, compare against your intended base branch
+STD-0262	COMMIT-STANDARDS.md	404	1	workflow	refine	(for example: origin/main..HEAD)
+STD-0263	CONCURRENCY-STANDARDS.md	1	1	topic	refine	Concurrency Standards
+STD-0264	CONCURRENCY-STANDARDS.md	5	2	topic	refine	Core Principles
+STD-0265	CONCURRENCY-STANDARDS.md	7	3	topic	refine	1. Prefer Message Passing Over Shared Mutable State
+STD-0266	CONCURRENCY-STANDARDS.md	23	3	topic	refine	2. Protect Shared Mutable State
+STD-0267	CONCURRENCY-STANDARDS.md	48	3	topic	refine	3. Keep Related State Under One Lock
+STD-0268	CONCURRENCY-STANDARDS.md	67	3	topic	refine	4. Keep Async Paths Non-Blocking
+STD-0269	CONCURRENCY-STANDARDS.md	98	2	topic	refine	C# Async/Await Rules
+STD-0270	CONCURRENCY-STANDARDS.md	100	3	topic	refine	Always Observe Task Errors
+STD-0271	CONCURRENCY-STANDARDS.md	121	3	topic	refine	Never Block on Async
+STD-0272	CONCURRENCY-STANDARDS.md	137	3	topic	refine	Pass CancellationToken Through Async Chains
+STD-0273	CONCURRENCY-STANDARDS.md	157	3	topic	refine	Use ConfigureAwait(false) in Library/Service Code
+STD-0274	CONCURRENCY-STANDARDS.md	172	2	topic	refine	Rust Concurrency Cross-Reference
+STD-0275	CONCURRENCY-STANDARDS.md	181	2	topic	refine	TypeScript Concurrency Rules
+STD-0276	CONCURRENCY-STANDARDS.md	183	3	topic	refine	Guard Against Stale Async Responses
+STD-0277	CONCURRENCY-STANDARDS.md	202	2	topic	refine	Godot Thread Safety
+STD-0278	CONCURRENCY-STANDARDS.md	204	3	topic	refine	Main Thread Rule
+STD-0279	CONCURRENCY-STANDARDS.md	210	3	topic	refine	`IsInstanceValid` Before Use
+STD-0280	CROSS-PLATFORM-STANDARDS.md	1	1	topic	refine	Cross-Platform Standards
+STD-0281	CROSS-PLATFORM-STANDARDS.md	5	2	topic	refine	Platform Targets
+STD-0282	CROSS-PLATFORM-STANDARDS.md	20	2	topic	refine	Core Rules
+STD-0283	CROSS-PLATFORM-STANDARDS.md	22	3	topic	refine	1. No Inline Platform Checks in Business Logic
+STD-0284	CROSS-PLATFORM-STANDARDS.md	42	3	topic	refine	2. Strategy + Factory Pattern
+STD-0285	CROSS-PLATFORM-STANDARDS.md	73	3	topic	refine	3. One Platform Per File
+STD-0286	CROSS-PLATFORM-STANDARDS.md	90	3	topic	refine	4. Graceful Degradation for Best-Effort Platforms
+STD-0287	CROSS-PLATFORM-STANDARDS.md	110	3	topic	refine	5. No `#if` Preprocessor Directives for Platform
+STD-0288	CROSS-PLATFORM-STANDARDS.md	128	3	topic	refine	6. Language-Specific Platform Mechanisms
+STD-0289	CROSS-PLATFORM-STANDARDS.md	137	2	topic	refine	File System Conventions
+STD-0290	CROSS-PLATFORM-STANDARDS.md	139	3	topic	refine	Path Construction
+STD-0291	CROSS-PLATFORM-STANDARDS.md	161	3	topic	refine	Path Comparison
+STD-0292	CROSS-PLATFORM-STANDARDS.md	174	3	topic	refine	Canonical Filesystem Identity
+STD-0293	CROSS-PLATFORM-STANDARDS.md	199	3	topic	refine	Spaces in Paths
+STD-0294	CROSS-PLATFORM-STANDARDS.md	209	2	topic	refine	Native Library Rules
+STD-0295	CROSS-PLATFORM-STANDARDS.md	211	3	topic	refine	Loading Strategy
+STD-0296	CROSS-PLATFORM-STANDARDS.md	216	3	topic	refine	Library Naming
+STD-0297	CROSS-PLATFORM-STANDARDS.md	224	3	topic	refine	Installation Documentation
+STD-0298	CROSS-PLATFORM-STANDARDS.md	231	2	topic	refine	CI Matrix
+STD-0299	CROSS-PLATFORM-STANDARDS.md	254	3	topic	refine	When to Build
+STD-0300	DEPENDENCY-STANDARDS.md	1	1	topic	split	Dependency Standards
+STD-0301	DEPENDENCY-STANDARDS.md	5	2	topic	split	Core Principles
+STD-0302	DEPENDENCY-STANDARDS.md	7	3	topic	split	1. Every Dependency Must Justify Its Cost
+STD-0303	DEPENDENCY-STANDARDS.md	14	3	topic	split	2. Dependencies Flow Downward
+STD-0304	DEPENDENCY-STANDARDS.md	29	3	topic	split	3. Prefer the Standard Library
+STD-0305	DEPENDENCY-STANDARDS.md	36	3	topic	split	4. One Purpose per Dependency
+STD-0306	DEPENDENCY-STANDARDS.md	44	2	topic	split	Before Adding a Dependency
+STD-0307	DEPENDENCY-STANDARDS.md	46	3	topic	split	Evaluation Questions
+STD-0308	DEPENDENCY-STANDARDS.md	61	3	topic	split	Build-or-Depend Decision Matrix
+STD-0309	DEPENDENCY-STANDARDS.md	71	3	topic	split	Transitive Dependency Thresholds
+STD-0310	DEPENDENCY-STANDARDS.md	87	1	topic	split	View dependency tree of a package before installing
+STD-0311	DEPENDENCY-STANDARDS.md	90	1	topic	split	Check bundle size impact
+STD-0312	DEPENDENCY-STANDARDS.md	97	1	topic	split	List all transitive dependencies
+STD-0313	DEPENDENCY-STANDARDS.md	103	2	topic	split	Searching and Comparing Dependencies
+STD-0314	DEPENDENCY-STANDARDS.md	105	3	topic	split	Where to Search
+STD-0315	DEPENDENCY-STANDARDS.md	113	3	topic	split	Comparison Criteria
+STD-0316	DEPENDENCY-STANDARDS.md	125	3	topic	split	Red Flags
+STD-0317	DEPENDENCY-STANDARDS.md	140	2	topic	split	Version Management
+STD-0318	DEPENDENCY-STANDARDS.md	142	3	topic	split	Always Use Lockfiles
+STD-0319	DEPENDENCY-STANDARDS.md	154	3	topic	split	Version Pinning Strategy
+STD-0320	DEPENDENCY-STANDARDS.md	163	3	topic	split	Centralized Version Management
+STD-0321	DEPENDENCY-STANDARDS.md	187	3	topic	split	Dependency Ownership Must Match Execution Boundaries
+STD-0322	DEPENDENCY-STANDARDS.md	248	3	topic	split	TypeScript/Node Workspaces: Tooling Ownership and Resolution
+STD-0323	DEPENDENCY-STANDARDS.md	361	3	topic	split	Checking Compatibility Before Upgrading
+STD-0324	DEPENDENCY-STANDARDS.md	376	2	topic	split	Minimizing Dependency Footprint
+STD-0325	DEPENDENCY-STANDARDS.md	378	3	topic	split	Enable Only Required Features
+STD-0326	DEPENDENCY-STANDARDS.md	411	3	topic	split	Feature-Gate Heavy Optional Functionality
+STD-0327	DEPENDENCY-STANDARDS.md	432	3	topic	split	Keep Library Packages Lean
+STD-0328	DEPENDENCY-STANDARDS.md	442	3	topic	split	Transitive Dependency Inspection
+STD-0329	DEPENDENCY-STANDARDS.md	457	2	topic	split	Auditing Dependencies
+STD-0330	DEPENDENCY-STANDARDS.md	459	3	topic	split	Security Auditing
+STD-0331	DEPENDENCY-STANDARDS.md	469	3	topic	split	Detecting Unused Dependencies
+STD-0332	DEPENDENCY-STANDARDS.md	485	3	topic	split	Manual Usage Verification
+STD-0333	DEPENDENCY-STANDARDS.md	497	3	topic	split	Detecting Duplicate Versions
+STD-0334	DEPENDENCY-STANDARDS.md	514	3	topic	split	Identifying Heavy Dependencies
+STD-0335	DEPENDENCY-STANDARDS.md	525	1	topic	split	Bundle size analysis
+STD-0336	DEPENDENCY-STANDARDS.md	528	1	topic	split	Individual package size
+STD-0337	DEPENDENCY-STANDARDS.md	536	3	topic	split	Periodic Manual Review
+STD-0338	DEPENDENCY-STANDARDS.md	549	2	topic	split	CI Integration
+STD-0339	DEPENDENCY-STANDARDS.md	551	3	topic	split	CI Tool Bootstrap Ownership
+STD-0340	DEPENDENCY-STANDARDS.md	571	3	topic	split	Recommended CI Checks
+STD-0341	DEPENDENCY-STANDARDS.md	581	3	topic	split	Example CI Workflow
+STD-0342	DEPENDENCY-STANDARDS.md	584	1	topic	split	.github/workflows/dependency-checks.yml
+STD-0343	DEPENDENCY-STANDARDS.md	610	3	topic	split	Blocking vs. Warning
+STD-0344	DEPENDENCY-STANDARDS.md	622	2	topic	split	Common Mistakes
+STD-0345	DEPENDENCY-STANDARDS.md	648	2	topic	split	Dependency Review Checklist
+STD-0346	DEPENDENCY-STANDARDS.md	650	3	topic	split	Adding a Dependency
+STD-0347	DEPENDENCY-STANDARDS.md	663	3	topic	split	Removing a Dependency
+STD-0348	DEPENDENCY-STANDARDS.md	671	3	topic	split	Periodic Review
+STD-0349	DOCUMENTATION-STANDARDS.md	1	1	workflow	split	Documentation Standards
+STD-0350	DOCUMENTATION-STANDARDS.md	5	2	workflow	split	Directory Documentation
+STD-0351	DOCUMENTATION-STANDARDS.md	7	3	workflow	split	Requirement
+STD-0352	DOCUMENTATION-STANDARDS.md	15	3	workflow	split	Why
+STD-0353	DOCUMENTATION-STANDARDS.md	21	2	workflow	split	Documentation Artifact Layout
+STD-0354	DOCUMENTATION-STANDARDS.md	57	3	workflow	split	README Template
+STD-0355	DOCUMENTATION-STANDARDS.md	64	1	workflow	split	[Directory Name]
+STD-0356	DOCUMENTATION-STANDARDS.md	66	2	workflow	split	Purpose
+STD-0357	DOCUMENTATION-STANDARDS.md	69	2	workflow	split	Contents
+STD-0358	DOCUMENTATION-STANDARDS.md	75	2	workflow	split	Problem
+STD-0359	DOCUMENTATION-STANDARDS.md	78	2	workflow	split	Constraints
+STD-0360	DOCUMENTATION-STANDARDS.md	81	2	workflow	split	Decision
+STD-0361	DOCUMENTATION-STANDARDS.md	84	2	workflow	split	Alternatives Rejected
+STD-0362	DOCUMENTATION-STANDARDS.md	88	2	workflow	split	Invariants
+STD-0363	DOCUMENTATION-STANDARDS.md	92	2	workflow	split	Revisit Triggers
+STD-0364	DOCUMENTATION-STANDARDS.md	95	2	workflow	split	Dependencies
+STD-0365	DOCUMENTATION-STANDARDS.md	99	2	workflow	split	Related ADRs
+STD-0366	DOCUMENTATION-STANDARDS.md	106	2	workflow	split	Usage Examples
+STD-0367	DOCUMENTATION-STANDARDS.md	109	2	workflow	split	API Consumer Contract
+STD-0368	DOCUMENTATION-STANDARDS.md	115	2	workflow	split	Structured Producer Contract
+STD-0369	DOCUMENTATION-STANDARDS.md	123	3	workflow	split	Required Section Completion Rule
+STD-0370	DOCUMENTATION-STANDARDS.md	138	2	workflow	split	Alternatives Rejected
+STD-0371	DOCUMENTATION-STANDARDS.md	144	3	workflow	split	Banned Placeholder Language
+STD-0372	DOCUMENTATION-STANDARDS.md	159	3	workflow	split	Host-Facing Module Contract Requirement
+STD-0373	DOCUMENTATION-STANDARDS.md	171	3	workflow	split	Structured Producer Contract Requirement
+STD-0374	DOCUMENTATION-STANDARDS.md	184	3	workflow	split	Minimum Meaningful Content by Section
+STD-0375	DOCUMENTATION-STANDARDS.md	201	3	workflow	split	Keeping READMEs Current
+STD-0376	DOCUMENTATION-STANDARDS.md	213	2	workflow	split	Code Comments
+STD-0377	DOCUMENTATION-STANDARDS.md	215	3	workflow	split	When to Comment
+STD-0378	DOCUMENTATION-STANDARDS.md	229	3	workflow	split	When NOT to Comment
+STD-0379	DOCUMENTATION-STANDARDS.md	244	3	workflow	split	TODO Format
+STD-0380	DOCUMENTATION-STANDARDS.md	258	3	workflow	split	Comment Style
+STD-0381	DOCUMENTATION-STANDARDS.md	274	1	workflow	split	Python - Docstring
+STD-0382	DOCUMENTATION-STANDARDS.md	290	2	workflow	split	Markdown Formatting
+STD-0383	DOCUMENTATION-STANDARDS.md	292	3	workflow	split	Fenced Code Blocks
+STD-0384	DOCUMENTATION-STANDARDS.md	305	3	workflow	split	Tables
+STD-0385	DOCUMENTATION-STANDARDS.md	328	2	workflow	split	API Documentation
+STD-0386	DOCUMENTATION-STANDARDS.md	330	3	workflow	split	Public Interfaces
+STD-0387	DOCUMENTATION-STANDARDS.md	356	3	workflow	split	What to Document
+STD-0388	DOCUMENTATION-STANDARDS.md	368	2	workflow	split	Algorithm Documentation
+STD-0389	DOCUMENTATION-STANDARDS.md	372	3	workflow	split	Required Elements
+STD-0390	DOCUMENTATION-STANDARDS.md	375	1	workflow	split	Topological Sort Algorithm
+STD-0391	DOCUMENTATION-STANDARDS.md	380	2	workflow	split	Reference
+STD-0392	DOCUMENTATION-STANDARDS.md	383	2	workflow	split	Preconditions
+STD-0393	DOCUMENTATION-STANDARDS.md	387	2	workflow	split	Postconditions
+STD-0394	DOCUMENTATION-STANDARDS.md	391	2	workflow	split	Complexity
+STD-0395	DOCUMENTATION-STANDARDS.md	395	2	workflow	split	Error Cases
+STD-0396	DOCUMENTATION-STANDARDS.md	399	3	workflow	split	When to Document Algorithms
+STD-0397	DOCUMENTATION-STANDARDS.md	409	3	workflow	split	Minimal Documentation
+STD-0398	DOCUMENTATION-STANDARDS.md	416	2	workflow	split	Complexity
+STD-0399	DOCUMENTATION-STANDARDS.md	420	3	workflow	split	ASCII Diagrams
+STD-0400	DOCUMENTATION-STANDARDS.md	437	2	workflow	split	Architecture Decision Records (ADRs)
+STD-0401	DOCUMENTATION-STANDARDS.md	439	3	workflow	split	When to Write an ADR
+STD-0402	DOCUMENTATION-STANDARDS.md	446	3	workflow	split	ADR Format
+STD-0403	DOCUMENTATION-STANDARDS.md	449	1	workflow	split	ADR-001: [Title]
+STD-0404	DOCUMENTATION-STANDARDS.md	451	2	workflow	split	Status
+STD-0405	DOCUMENTATION-STANDARDS.md	454	2	workflow	split	Context
+STD-0406	DOCUMENTATION-STANDARDS.md	457	2	workflow	split	Decision
+STD-0407	DOCUMENTATION-STANDARDS.md	460	2	workflow	split	Consequences
+STD-0408	DOCUMENTATION-STANDARDS.md	463	3	workflow	split	Positive
+STD-0409	DOCUMENTATION-STANDARDS.md	467	3	workflow	split	Negative
+STD-0410	DOCUMENTATION-STANDARDS.md	471	3	workflow	split	Neutral
+STD-0411	DOCUMENTATION-STANDARDS.md	475	3	workflow	split	ADR Example
+STD-0412	DOCUMENTATION-STANDARDS.md	478	1	workflow	split	ADR-003: Use Event Sourcing for Order History
+STD-0413	DOCUMENTATION-STANDARDS.md	480	2	workflow	split	Status
+STD-0414	DOCUMENTATION-STANDARDS.md	483	2	workflow	split	Context
+STD-0415	DOCUMENTATION-STANDARDS.md	487	2	workflow	split	Decision
+STD-0416	DOCUMENTATION-STANDARDS.md	492	2	workflow	split	Consequences
+STD-0417	DOCUMENTATION-STANDARDS.md	494	3	workflow	split	Positive
+STD-0418	DOCUMENTATION-STANDARDS.md	499	3	workflow	split	Negative
+STD-0419	DOCUMENTATION-STANDARDS.md	504	3	workflow	split	Neutral
+STD-0420	DOCUMENTATION-STANDARDS.md	508	3	workflow	split	Where to Store ADRs
+STD-0421	DOCUMENTATION-STANDARDS.md	521	2	workflow	split	Changelog
+STD-0422	DOCUMENTATION-STANDARDS.md	526	3	workflow	split	When to Maintain
+STD-0423	DOCUMENTATION-STANDARDS.md	530	3	workflow	split	Format (Keep a Changelog)
+STD-0424	DOCUMENTATION-STANDARDS.md	533	1	workflow	split	Changelog
+STD-0425	DOCUMENTATION-STANDARDS.md	537	2	workflow	split	[Unreleased]
+STD-0426	DOCUMENTATION-STANDARDS.md	539	3	workflow	split	Added
+STD-0427	DOCUMENTATION-STANDARDS.md	542	3	workflow	split	Changed
+STD-0428	DOCUMENTATION-STANDARDS.md	545	3	workflow	split	Deprecated
+STD-0429	DOCUMENTATION-STANDARDS.md	548	3	workflow	split	Removed
+STD-0430	DOCUMENTATION-STANDARDS.md	551	3	workflow	split	Fixed
+STD-0431	DOCUMENTATION-STANDARDS.md	554	3	workflow	split	Security
+STD-0432	DOCUMENTATION-STANDARDS.md	557	2	workflow	split	[1.2.0] - 2024-01-15
+STD-0433	DOCUMENTATION-STANDARDS.md	559	3	workflow	split	Added
+STD-0434	DOCUMENTATION-STANDARDS.md	562	2	workflow	split	[1.1.0] - 2024-01-01
+STD-0435	DOCUMENTATION-STANDARDS.md	564	3	workflow	split	Fixed
+STD-0436	DOCUMENTATION-STANDARDS.md	568	3	workflow	split	Categories
+STD-0437	DOCUMENTATION-STANDARDS.md	581	2	workflow	split	README.md (Project Root)
+STD-0438	DOCUMENTATION-STANDARDS.md	583	3	workflow	split	Required Sections
+STD-0439	DOCUMENTATION-STANDARDS.md	586	1	workflow	split	Project Name
+STD-0440	DOCUMENTATION-STANDARDS.md	590	2	workflow	split	Quick Start
+STD-0441	DOCUMENTATION-STANDARDS.md	597	2	workflow	split	Installation
+STD-0442	DOCUMENTATION-STANDARDS.md	601	2	workflow	split	Usage
+STD-0443	DOCUMENTATION-STANDARDS.md	605	2	workflow	split	Development
+STD-0444	DOCUMENTATION-STANDARDS.md	612	2	workflow	split	Project Structure
+STD-0445	DOCUMENTATION-STANDARDS.md	616	2	workflow	split	Contributing
+STD-0446	DOCUMENTATION-STANDARDS.md	620	2	workflow	split	License
+STD-0447	DOCUMENTATION-STANDARDS.md	625	3	workflow	split	Keep It Current
+STD-0448	DOCUMENTATION-STANDARDS.md	634	2	workflow	split	Documentation Review Checklist
+STD-0449	FRONTEND-STANDARDS.md	1	1	profile	refine	Frontend Standards
+STD-0450	FRONTEND-STANDARDS.md	5	2	profile	refine	Scope
+STD-0451	FRONTEND-STANDARDS.md	16	2	profile	refine	Rendering and DOM Updates
+STD-0452	FRONTEND-STANDARDS.md	18	3	profile	refine	Prefer Declarative Rendering
+STD-0453	FRONTEND-STANDARDS.md	43	2	profile	refine	UI State Synchronization
+STD-0454	FRONTEND-STANDARDS.md	69	3	profile	refine	Hook/Composable Timer Management
+STD-0455	FRONTEND-STANDARDS.md	97	2	profile	refine	Frontend Tooling Notes
+STD-0456	FRONTEND-STANDARDS.md	99	3	profile	refine	React 19+ ESLint Configuration
+STD-0457	FRONTEND-STANDARDS.md	114	2	profile	refine	Frontend Testing
+STD-0458	FRONTEND-STANDARDS.md	116	3	profile	refine	Selector Strategy
+STD-0459	FRONTEND-STANDARDS.md	147	3	profile	refine	Accessibility and Tests
+STD-0460	FRONTEND-STANDARDS.md	157	3	profile	refine	`userEvent` vs `fireEvent`
+STD-0461	FRONTEND-STANDARDS.md	190	3	profile	refine	DOM Geometry in Tests
+STD-0462	FRONTEND-STANDARDS.md	198	3	profile	refine	Polling Cleanup Tests
+STD-0463	FRONTEND-STANDARDS.md	215	3	profile	refine	Embedded Interactive Control Checks
+STD-0464	FRONTEND-STANDARDS.md	230	2	profile	refine	Accessibility
+STD-0465	INTEROP-STANDARDS.md	1	1	topic	refine	Interop Standards
+STD-0466	INTEROP-STANDARDS.md	5	2	topic	refine	Boundaries
+STD-0467	INTEROP-STANDARDS.md	21	2	topic	refine	Core Principles
+STD-0468	INTEROP-STANDARDS.md	23	3	topic	refine	1. Validate at Every Boundary Crossing
+STD-0469	INTEROP-STANDARDS.md	40	3	topic	refine	2. Copy Data Out of Foreign Buffers Immediately
+STD-0470	INTEROP-STANDARDS.md	48	3	topic	refine	3. Symmetric Init/Shutdown
+STD-0471	INTEROP-STANDARDS.md	64	3	topic	refine	4. Document Thread Requirements
+STD-0472	INTEROP-STANDARDS.md	78	3	topic	refine	5. Isolate Unsafe Code to Thin Wrappers
+STD-0473	INTEROP-STANDARDS.md	85	3	topic	refine	6. Event Subscription Lifecycle
+STD-0474	INTEROP-STANDARDS.md	109	2	topic	refine	Cross-Language Contract Maintenance
+STD-0475	INTEROP-STANDARDS.md	114	3	topic	refine	Rules
+STD-0476	INTEROP-STANDARDS.md	121	3	topic	refine	Validate Received Messages
+STD-0477	INTEROP-STANDARDS.md	136	2	topic	refine	Serialization Format Alignment
+STD-0478	INTEROP-STANDARDS.md	142	3	topic	refine	Tagged Enum Alignment
+STD-0479	INTEROP-STANDARDS.md	149	3	topic	refine	Enum Variant Alignment
+STD-0480	INTEROP-STANDARDS.md	155	3	topic	refine	Struct Field Alignment
+STD-0481	INTEROP-STANDARDS.md	160	3	topic	refine	Rules
+STD-0482	INTEROP-STANDARDS.md	172	2	topic	refine	When These Rules Apply
+STD-0483	LANGUAGE-BINDINGS-STANDARDS.md	1	1	boundary-profile	refine	Language Bindings Standards
+STD-0484	LANGUAGE-BINDINGS-STANDARDS.md	16	2	boundary-profile	refine	Core Principles
+STD-0485	LANGUAGE-BINDINGS-STANDARDS.md	28	2	boundary-profile	refine	Layer Model
+STD-0486	LANGUAGE-BINDINGS-STANDARDS.md	54	2	boundary-profile	refine	Language-Specific Extensions
+STD-0487	LAUNCHER-STANDARDS.md	1	1	application-profile	split	Launcher Standards
+STD-0488	LAUNCHER-STANDARDS.md	5	2	application-profile	split	Scope
+STD-0489	LAUNCHER-STANDARDS.md	24	2	application-profile	split	Core CLI Contract
+STD-0490	LAUNCHER-STANDARDS.md	26	3	application-profile	split	Required Flags
+STD-0491	LAUNCHER-STANDARDS.md	37	3	application-profile	split	Parsing Rules
+STD-0492	LAUNCHER-STANDARDS.md	49	3	application-profile	split	Canonical Usage
+STD-0493	LAUNCHER-STANDARDS.md	61	1	application-profile	split	Recommended workflow extensions when applicable
+STD-0494	LAUNCHER-STANDARDS.md	69	2	application-profile	split	Workflow Extensions (Required When Applicable)
+STD-0495	LAUNCHER-STANDARDS.md	93	3	application-profile	split	GUI CI Smoke Requirements
+STD-0496	LAUNCHER-STANDARDS.md	128	2	application-profile	split	Dependency Installation Standards (`--install`)
+STD-0497	LAUNCHER-STANDARDS.md	130	3	application-profile	split	Per-Dependency Idempotent Behavior
+STD-0498	LAUNCHER-STANDARDS.md	143	3	application-profile	split	Dependency Model
+STD-0499	LAUNCHER-STANDARDS.md	152	3	application-profile	split	Output Requirements
+STD-0500	LAUNCHER-STANDARDS.md	163	2	application-profile	split	Build Standards (`--build`)
+STD-0501	LAUNCHER-STANDARDS.md	178	2	application-profile	split	Runtime Standards (`--run`, `--run-release`)
+STD-0502	LAUNCHER-STANDARDS.md	180	3	application-profile	split	`--run` (Development Runtime)
+STD-0503	LAUNCHER-STANDARDS.md	192	3	application-profile	split	`--run-release` (Release Runtime)
+STD-0504	LAUNCHER-STANDARDS.md	211	2	application-profile	split	Managed State Standards
+STD-0505	LAUNCHER-STANDARDS.md	249	2	application-profile	split	Help Standards (`--help`)
+STD-0506	LAUNCHER-STANDARDS.md	266	2	application-profile	split	Exit Codes
+STD-0507	LAUNCHER-STANDARDS.md	279	2	application-profile	split	Bash Implementation Rules
+STD-0508	LAUNCHER-STANDARDS.md	293	2	application-profile	split	Desktop Entry and Script Generation Safety
+STD-0509	LAUNCHER-STANDARDS.md	307	1	application-profile	split	BAD: Raw interpolation into command string
+STD-0510	LAUNCHER-STANDARDS.md	310	1	application-profile	split	GOOD: Validate first, then escape for destination format using shared helpers
+STD-0511	LAUNCHER-STANDARDS.md	318	2	application-profile	split	Reference Template
+STD-0512	LAUNCHER-STANDARDS.md	548	2	application-profile	split	Compliance Checklist
+STD-0513	PLAN-STANDARDS.md	1	1	workflow	replace	Plan Standards
+STD-0514	PLAN-STANDARDS.md	6	2	workflow	replace	Purpose
+STD-0515	PLAN-STANDARDS.md	11	2	workflow	replace	Scope
+STD-0516	PLAN-STANDARDS.md	31	2	workflow	replace	When a Plan Is Required
+STD-0517	PLAN-STANDARDS.md	40	2	workflow	replace	Plan Inputs
+STD-0518	PLAN-STANDARDS.md	58	2	workflow	replace	Clarifying Questions
+STD-0519	PLAN-STANDARDS.md	68	2	workflow	replace	Required Plan Structure
+STD-0520	PLAN-STANDARDS.md	105	2	workflow	replace	Large Refactor Plans
+STD-0521	PLAN-STANDARDS.md	139	2	workflow	replace	Recommendations
+STD-0522	PLAN-STANDARDS.md	148	2	workflow	replace	Execution Order
+STD-0523	PLAN-STANDARDS.md	161	2	workflow	replace	Worktree Hygiene
+STD-0524	PLAN-STANDARDS.md	181	2	workflow	replace	Commit Timing During Plan Execution
+STD-0525	PLAN-STANDARDS.md	197	2	workflow	replace	Concurrent Worker Execution
+STD-0526	PLAN-STANDARDS.md	256	2	workflow	replace	Re-Plan Triggers
+STD-0527	PLAN-STANDARDS.md	271	2	workflow	replace	Unexpected Issues During Execution
+STD-0528	PLAN-STANDARDS.md	293	2	workflow	replace	Plan Updates During Execution
+STD-0529	PLAN-STANDARDS.md	309	2	workflow	replace	Completion Summary
+STD-0530	PLAN-STANDARDS.md	318	2	workflow	replace	Brevity Default
+STD-0531	RELEASE-STANDARDS.md	1	1	workflow	split	Release Standards
+STD-0532	RELEASE-STANDARDS.md	5	2	workflow	split	Semantic Versioning
+STD-0533	RELEASE-STANDARDS.md	9	3	workflow	split	Version Bump Decision Table
+STD-0534	RELEASE-STANDARDS.md	18	3	workflow	split	Pre-1.0 Rules
+STD-0535	RELEASE-STANDARDS.md	32	3	workflow	split	Deprecation Policy
+STD-0536	RELEASE-STANDARDS.md	51	3	workflow	split	Migration Guides
+STD-0537	RELEASE-STANDARDS.md	68	3	workflow	split	Workspace Version Alignment
+STD-0538	RELEASE-STANDARDS.md	78	2	workflow	split	Changelog Management
+STD-0539	RELEASE-STANDARDS.md	84	3	workflow	split	Maintenance Workflow
+STD-0540	RELEASE-STANDARDS.md	90	3	workflow	split	Conventional Commits to Changelog Categories
+STD-0541	RELEASE-STANDARDS.md	110	3	workflow	split	Automation
+STD-0542	RELEASE-STANDARDS.md	116	1	workflow	split	cliff.toml (minimal)
+STD-0543	RELEASE-STANDARDS.md	153	2	workflow	split	Release Artifacts
+STD-0544	RELEASE-STANDARDS.md	155	3	workflow	split	What to Ship
+STD-0545	RELEASE-STANDARDS.md	166	3	workflow	split	Naming Convention
+STD-0546	RELEASE-STANDARDS.md	199	3	workflow	split	Checksum File Format
+STD-0547	RELEASE-STANDARDS.md	216	3	workflow	split	Software Bill of Materials
+STD-0548	RELEASE-STANDARDS.md	235	2	workflow	split	Reproducible Builds
+STD-0549	RELEASE-STANDARDS.md	240	3	workflow	split	Toolchain Pinning
+STD-0550	RELEASE-STANDARDS.md	252	3	workflow	split	Lockfile Policy
+STD-0551	RELEASE-STANDARDS.md	265	3	workflow	split	Build Hygiene
+STD-0552	RELEASE-STANDARDS.md	275	2	workflow	split	CI/CD Release Pipeline
+STD-0553	RELEASE-STANDARDS.md	277	3	workflow	split	Trigger
+STD-0554	RELEASE-STANDARDS.md	287	1	workflow	split	.github/workflows/release.yml
+STD-0555	RELEASE-STANDARDS.md	296	1	workflow	split	.github/workflows/ci.yml
+STD-0556	RELEASE-STANDARDS.md	315	3	workflow	split	Build Matrix
+STD-0557	RELEASE-STANDARDS.md	322	1	workflow	split	Target values are ecosystem-specific (see Naming Convention above)
+STD-0558	RELEASE-STANDARDS.md	338	3	workflow	split	Artifact Upload
+STD-0559	RELEASE-STANDARDS.md	355	3	workflow	split	Release Job
+STD-0560	RELEASE-STANDARDS.md	394	3	workflow	split	Code Signing
+STD-0561	RELEASE-STANDARDS.md	405	2	workflow	split	Hotfix and LTS Workflow
+STD-0562	RELEASE-STANDARDS.md	407	3	workflow	split	Standard Releases
+STD-0563	RELEASE-STANDARDS.md	412	3	workflow	split	Hotfix Workflow
+STD-0564	RELEASE-STANDARDS.md	425	3	workflow	split	LTS Releases
+STD-0565	RELEASE-STANDARDS.md	438	2	workflow	split	Feature Flags and Release Channels
+STD-0566	RELEASE-STANDARDS.md	455	2	workflow	split	GitHub Releases
+STD-0567	RELEASE-STANDARDS.md	457	3	workflow	split	Draft-Then-Publish
+STD-0568	RELEASE-STANDARDS.md	466	3	workflow	split	Pre-Release Flag
+STD-0569	RELEASE-STANDARDS.md	472	3	workflow	split	Release Notes
+STD-0570	RELEASE-STANDARDS.md	481	3	workflow	split	Asset Organization
+STD-0571	RELEASE-STANDARDS.md	487	2	workflow	split	Downloads
+STD-0572	RELEASE-STANDARDS.md	489	3	workflow	split	Binaries
+STD-0573	RELEASE-STANDARDS.md	494	3	workflow	split	Shared Libraries
+STD-0574	RELEASE-STANDARDS.md	498	3	workflow	split	Checksums
+STD-0575	RELEASE-STANDARDS.md	504	2	workflow	split	Language-Specific Guidance
+STD-0576	RELEASE-STANDARDS.md	512	2	workflow	split	Release Checklist
+STD-0577	RELEASE-STANDARDS.md	539	2	workflow	split	Rollback Procedure
+STD-0578	RELEASE-STANDARDS.md	541	3	workflow	split	When to Rollback
+STD-0579	RELEASE-STANDARDS.md	547	3	workflow	split	Procedure
+STD-0580	RELEASE-STANDARDS.md	558	3	workflow	split	Authority
+STD-0581	RELEASE-STANDARDS.md	563	3	workflow	split	Post-Incident
+STD-0582	SECURITY-STANDARDS.md	1	1	topic	refine	Security Standards
+STD-0583	SECURITY-STANDARDS.md	5	2	topic	refine	Core Principle: Validate Once, at the Boundary
+STD-0584	SECURITY-STANDARDS.md	17	2	topic	refine	Path Validation
+STD-0585	SECURITY-STANDARDS.md	19	3	topic	refine	The Problem
+STD-0586	SECURITY-STANDARDS.md	24	3	topic	refine	Centralized Path Validator
+STD-0587	SECURITY-STANDARDS.md	81	3	topic	refine	Usage in Handlers
+STD-0588	SECURITY-STANDARDS.md	100	2	topic	refine	Input Validation
+STD-0589	SECURITY-STANDARDS.md	102	3	topic	refine	Centralized Input Validator
+STD-0590	SECURITY-STANDARDS.md	143	3	topic	refine	Validation Rules
+STD-0591	SECURITY-STANDARDS.md	153	3	topic	refine	No Duplicate Validation Logic
+STD-0592	SECURITY-STANDARDS.md	171	2	topic	refine	Message/API Payload Validation
+STD-0593	SECURITY-STANDARDS.md	173	3	topic	refine	TypeScript — Validate Before Dispatch
+STD-0594	SECURITY-STANDARDS.md	198	3	topic	refine	C# — Validate Deserialized Payloads
+STD-0595	SECURITY-STANDARDS.md	216	3	topic	refine	Electron IPC Boundaries (`ipcMain.handle`)
+STD-0596	SECURITY-STANDARDS.md	256	2	topic	refine	Network Transport Safety
+STD-0597	SECURITY-STANDARDS.md	264	3	topic	refine	Bind Address Rules
+STD-0598	SECURITY-STANDARDS.md	279	3	topic	refine	Connection Limits
+STD-0599	SECURITY-STANDARDS.md	289	3	topic	refine	Graceful Listener Shutdown
+STD-0600	SECURITY-STANDARDS.md	306	3	topic	refine	Half-Open Connection Handling
+STD-0601	SECURITY-STANDARDS.md	324	2	topic	refine	What NOT to Validate
+STD-0602	TESTING-STANDARDS.md	1	1	workflow	split	Testing Standards
+STD-0603	TESTING-STANDARDS.md	5	2	workflow	split	Test Organization
+STD-0604	TESTING-STANDARDS.md	7	3	workflow	split	Choose a Consistent Test Placement Strategy
+STD-0605	TESTING-STANDARDS.md	23	1	workflow	split	Colocated
+STD-0606	TESTING-STANDARDS.md	34	1	workflow	split	Mirrored test tree
+STD-0607	TESTING-STANDARDS.md	62	3	workflow	split	Test Naming Convention
+STD-0608	TESTING-STANDARDS.md	88	2	workflow	split	Test Categories
+STD-0609	TESTING-STANDARDS.md	96	3	workflow	split	Unit Tests
+STD-0610	TESTING-STANDARDS.md	102	3	workflow	split	Integration Tests
+STD-0611	TESTING-STANDARDS.md	108	3	workflow	split	Global State and Durable Resource Isolation
+STD-0612	TESTING-STANDARDS.md	141	3	workflow	split	End-to-End Tests
+STD-0613	TESTING-STANDARDS.md	147	3	workflow	split	Cross-Layer Acceptance Checks
+STD-0614	TESTING-STANDARDS.md	162	3	workflow	split	Boundary Invariant Tests
+STD-0615	TESTING-STANDARDS.md	180	3	workflow	split	Vertical Slice Verification
+STD-0616	TESTING-STANDARDS.md	214	3	workflow	split	Binding Verification Requirements
+STD-0617	TESTING-STANDARDS.md	261	3	workflow	split	Replay, Recovery, and Idempotency Checks
+STD-0618	TESTING-STANDARDS.md	277	2	workflow	split	Unit Test Guidelines
+STD-0619	TESTING-STANDARDS.md	279	3	workflow	split	Test One Thing
+STD-0620	TESTING-STANDARDS.md	292	3	workflow	split	Arrange-Act-Assert Pattern
+STD-0621	TESTING-STANDARDS.md	317	3	workflow	split	Avoid Mocks When Possible
+STD-0622	TESTING-STANDARDS.md	344	3	workflow	split	Test Edge Cases
+STD-0623	TESTING-STANDARDS.md	358	2	workflow	split	Property-Based Testing
+STD-0624	TESTING-STANDARDS.md	365	3	workflow	split	When to Use Property-Based Testing
+STD-0625	TESTING-STANDARDS.md	374	2	workflow	split	Coverage Guidelines
+STD-0626	TESTING-STANDARDS.md	376	3	workflow	split	Targets
+STD-0627	TESTING-STANDARDS.md	384	3	workflow	split	What to Exclude from Coverage
+STD-0628	TESTING-STANDARDS.md	392	3	workflow	split	Coverage is Not Quality
+STD-0629	TESTING-STANDARDS.md	402	2	workflow	split	Test Documentation
+STD-0630	TESTING-STANDARDS.md	404	3	workflow	split	Document Non-Obvious Tests
+STD-0631	TESTING-STANDARDS.md	409	3	workflow	split	Document Test Fixtures
+STD-0632	TESTING-STANDARDS.md	416	2	workflow	split	Test Data Management
+STD-0633	TESTING-STANDARDS.md	418	3	workflow	split	Use Factories or Builders
+STD-0634	TESTING-STANDARDS.md	439	3	workflow	split	Avoid Shared Mutable State
+STD-0635	TESTING-STANDARDS.md	455	3	workflow	split	Validate Persisted Dynamic Artifacts
+STD-0636	TESTING-STANDARDS.md	472	2	workflow	split	Async Testing
+STD-0637	TESTING-STANDARDS.md	474	3	workflow	split	Always Await Async Operations
+STD-0638	TESTING-STANDARDS.md	490	3	workflow	split	Test Both Success and Failure
+STD-0639	TESTING-STANDARDS.md	503	3	workflow	split	Lifecycle Regression Checks
+STD-0640	TESTING-STANDARDS.md	514	3	workflow	split	Service-Layer Error Paths
+STD-0641	TESTING-STANDARDS.md	527	2	workflow	split	Frontend Component Testing
+STD-0642	TESTING-STANDARDS.md	535	2	workflow	split	Performance Testing
+STD-0643	TESTING-STANDARDS.md	537	3	workflow	split	Benchmark Critical Paths
+STD-0644	TESTING-STANDARDS.md	543	3	workflow	split	Set Performance Budgets
+STD-0645	TESTING-STANDARDS.md	559	2	workflow	split	Verification Layers
+STD-0646	TESTING-STANDARDS.md	577	3	workflow	split	Layer 1: Static Analysis
+STD-0647	TESTING-STANDARDS.md	588	3	workflow	split	Layer 2: Build Verification
+STD-0648	TESTING-STANDARDS.md	592	3	workflow	split	Layer 3: Dev Server Validation
+STD-0649	TESTING-STANDARDS.md	599	3	workflow	split	Layer 4: Runtime Verification
+STD-0650	TESTING-STANDARDS.md	606	3	workflow	split	Layer 5: Reference Lookup
+STD-0651	TESTING-STANDARDS.md	618	2	workflow	split	Diagnosis Workflow
+STD-0652	TESTING-STANDARDS.md	658	2	workflow	split	Self-Correction Principles
+STD-0653	TESTING-STANDARDS.md	670	2	workflow	split	Test Checklist
+STD-0654	TOOLING-STANDARDS.md	1	1	workflow	split	Tooling Standards
+STD-0655	TOOLING-STANDARDS.md	5	2	workflow	split	Pre-Commit Hooks
+STD-0656	TOOLING-STANDARDS.md	7	3	workflow	split	Why Pre-Commit Hooks
+STD-0657	TOOLING-STANDARDS.md	15	3	workflow	split	Recommended Tool: Lefthook
+STD-0658	TOOLING-STANDARDS.md	21	1	workflow	split	npm
+STD-0659	TOOLING-STANDARDS.md	24	1	workflow	split	Or standalone
+STD-0660	TOOLING-STANDARDS.md	33	3	workflow	split	Basic Configuration
+STD-0661	TOOLING-STANDARDS.md	38	1	workflow	split	lefthook.yml
+STD-0662	TOOLING-STANDARDS.md	62	3	workflow	split	Hook Categories
+STD-0663	TOOLING-STANDARDS.md	70	3	workflow	split	History Cleanup Enforcement (Advisory Only)
+STD-0664	TOOLING-STANDARDS.md	83	3	workflow	split	Performance Tips
+STD-0665	TOOLING-STANDARDS.md	90	3	workflow	split	Persisted Artifact Validation Hooks
+STD-0666	TOOLING-STANDARDS.md	107	2	workflow	split	EditorConfig
+STD-0667	TOOLING-STANDARDS.md	109	3	workflow	split	Purpose
+STD-0668	TOOLING-STANDARDS.md	113	3	workflow	split	Standard Configuration
+STD-0669	TOOLING-STANDARDS.md	118	1	workflow	split	.editorconfig
+STD-0670	TOOLING-STANDARDS.md	129	1	workflow	split	Web files typically use 2-space indent
+STD-0671	TOOLING-STANDARDS.md	133	1	workflow	split	Markdown needs trailing whitespace for line breaks
+STD-0672	TOOLING-STANDARDS.md	137	1	workflow	split	Makefiles require tabs
+STD-0673	TOOLING-STANDARDS.md	142	3	workflow	split	Key Settings
+STD-0674	TOOLING-STANDARDS.md	153	2	workflow	split	Linting Strategy
+STD-0675	TOOLING-STANDARDS.md	155	3	workflow	split	Language-Agnostic Principles
+STD-0676	TOOLING-STANDARDS.md	162	3	workflow	split	Common Linter Categories
+STD-0677	TOOLING-STANDARDS.md	171	3	workflow	split	TypeScript/JavaScript: ESLint 9+ (Flat Config) + Prettier
+STD-0678	TOOLING-STANDARDS.md	212	4	workflow	split	Common Flat Config Pitfalls
+STD-0679	TOOLING-STANDARDS.md	234	3	workflow	split	TypeScript Strict Mode
+STD-0680	TOOLING-STANDARDS.md	254	3	workflow	split	Custom Rules for Architecture
+STD-0681	TOOLING-STANDARDS.md	275	2	workflow	split	Formatting
+STD-0682	TOOLING-STANDARDS.md	277	3	workflow	split	Principle: Format on Save
+STD-0683	TOOLING-STANDARDS.md	289	3	workflow	split	Principle: Check in CI
+STD-0684	TOOLING-STANDARDS.md	294	1	workflow	split	Prettier check mode
+STD-0685	TOOLING-STANDARDS.md	297	1	workflow	split	Exit code 1 if files would change
+STD-0686	TOOLING-STANDARDS.md	300	3	workflow	split	Format vs. Lint
+STD-0687	TOOLING-STANDARDS.md	314	2	workflow	split	CI Integration
+STD-0688	TOOLING-STANDARDS.md	316	3	workflow	split	Quality Gates Are Mandatory
+STD-0689	TOOLING-STANDARDS.md	337	3	workflow	split	Prefer Failure Aggregation Over Fail-Fast
+STD-0690	TOOLING-STANDARDS.md	357	3	workflow	split	Tiered CI Execution
+STD-0691	TOOLING-STANDARDS.md	388	3	workflow	split	Lint Debt Ratchet (When Full Lint Is Temporarily Non-Blocking)
+STD-0692	TOOLING-STANDARDS.md	396	3	workflow	split	CI Performance Standards
+STD-0693	TOOLING-STANDARDS.md	512	3	workflow	split	Recommended CI Workflow
+STD-0694	TOOLING-STANDARDS.md	515	1	workflow	split	.github/workflows/ci.yml
+STD-0695	TOOLING-STANDARDS.md	688	3	workflow	split	CI vs. Local Checks
+STD-0696	TOOLING-STANDARDS.md	699	2	workflow	split	Directory Validation
+STD-0697	TOOLING-STANDARDS.md	701	3	workflow	split	README Enforcement
+STD-0698	TOOLING-STANDARDS.md	747	3	workflow	split	PR Template Enforcement
+STD-0699	TOOLING-STANDARDS.md	759	2	workflow	split	Dependency Auditing
+STD-0700	TOOLING-STANDARDS.md	766	2	workflow	split	Tool Installation Checklist
+STD-0701	TOOLING-STANDARDS.md	768	3	workflow	split	Minimum Setup
+STD-0702	TOOLING-STANDARDS.md	775	3	workflow	split	Commands to Add
+STD-0703	TOOLING-STANDARDS.md	800	2	workflow	split	Bypassing Hooks (Emergency Only)
+STD-0704	languages/README.md	1	1	router	replace	Language-Specific Standards
+STD-0705	languages/README.md	7	2	router	replace	Languages
+STD-0706	languages/rust/RUST-API-STANDARDS.md	1	1	language-profile	refine	Rust API Standards
+STD-0707	languages/rust/RUST-API-STANDARDS.md	6	2	language-profile	refine	Correct-By-Construction Policy
+STD-0708	languages/rust/RUST-API-STANDARDS.md	29	2	language-profile	refine	Parse, Do Not Re-Validate
+STD-0709	languages/rust/RUST-API-STANDARDS.md	71	2	language-profile	refine	Crate Roles
+STD-0710	languages/rust/RUST-API-STANDARDS.md	95	2	language-profile	refine	Module Layout
+STD-0711	languages/rust/RUST-API-STANDARDS.md	129	2	language-profile	refine	Result, Option, Panic
+STD-0712	languages/rust/RUST-API-STANDARDS.md	148	2	language-profile	refine	`unwrap` And `expect`
+STD-0713	languages/rust/RUST-API-STANDARDS.md	164	2	language-profile	refine	Public Contract Traits
+STD-0714	languages/rust/RUST-API-STANDARDS.md	181	2	language-profile	refine	Parameter Ergonomics
+STD-0715	languages/rust/RUST-API-STANDARDS.md	193	2	language-profile	refine	Feature Contracts
+STD-0716	languages/rust/RUST-API-STANDARDS.md	222	2	language-profile	refine	Documentation
+STD-0717	languages/rust/RUST-ASYNC-STANDARDS.md	1	1	language-profile	refine	Rust Async Standards
+STD-0718	languages/rust/RUST-ASYNC-STANDARDS.md	6	2	language-profile	refine	Sync Core, Async Shell
+STD-0719	languages/rust/RUST-ASYNC-STANDARDS.md	39	2	language-profile	refine	Runtime Boundaries
+STD-0720	languages/rust/RUST-ASYNC-STANDARDS.md	52	2	language-profile	refine	Task Lifecycle
+STD-0721	languages/rust/RUST-ASYNC-STANDARDS.md	94	2	language-profile	refine	Graceful Shutdown
+STD-0722	languages/rust/RUST-ASYNC-STANDARDS.md	113	2	language-profile	refine	Blocking Work
+STD-0723	languages/rust/RUST-ASYNC-STANDARDS.md	123	2	language-profile	refine	Mutex Selection
+STD-0724	languages/rust/RUST-ASYNC-STANDARDS.md	140	2	language-profile	refine	Cancellation Safety
+STD-0725	languages/rust/RUST-ASYNC-STANDARDS.md	155	2	language-profile	refine	Observability
+STD-0726	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	1	1	language-profile	refine	Rust Cross-Platform Standards
+STD-0727	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	6	2	language-profile	refine	Target Policy
+STD-0728	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	20	2	language-profile	refine	Keep `cfg()` In Thin Platform Modules
+STD-0729	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	72	2	language-profile	refine	Acceptable Inline `cfg()` Exception
+STD-0730	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	99	2	language-profile	refine	Verification
+STD-0731	languages/rust/RUST-DEPENDENCY-STANDARDS.md	1	1	language-profile	refine	Rust Dependency Standards
+STD-0732	languages/rust/RUST-DEPENDENCY-STANDARDS.md	6	2	language-profile	refine	Before Adding A Crate
+STD-0733	languages/rust/RUST-DEPENDENCY-STANDARDS.md	11	1	language-profile	refine	How many transitive deps does this crate bring?
+STD-0734	languages/rust/RUST-DEPENDENCY-STANDARDS.md	14	1	language-profile	refine	Is it already in the tree as a transitive dep?
+STD-0735	languages/rust/RUST-DEPENDENCY-STANDARDS.md	27	2	language-profile	refine	Workspace Dependency Inheritance
+STD-0736	languages/rust/RUST-DEPENDENCY-STANDARDS.md	34	1	language-profile	refine	Cargo.toml (workspace root)
+STD-0737	languages/rust/RUST-DEPENDENCY-STANDARDS.md	39	1	language-profile	refine	member/Cargo.toml
+STD-0738	languages/rust/RUST-DEPENDENCY-STANDARDS.md	48	2	language-profile	refine	Feature Selection
+STD-0739	languages/rust/RUST-DEPENDENCY-STANDARDS.md	53	1	language-profile	refine	BAD: Pulling in everything
+STD-0740	languages/rust/RUST-DEPENDENCY-STANDARDS.md	58	1	language-profile	refine	GOOD: Only what is used
+STD-0741	languages/rust/RUST-DEPENDENCY-STANDARDS.md	92	2	language-profile	refine	Tree Inspection
+STD-0742	languages/rust/RUST-DEPENDENCY-STANDARDS.md	98	1	language-profile	refine	Full tree
+STD-0743	languages/rust/RUST-DEPENDENCY-STANDARDS.md	101	1	language-profile	refine	Direct deps only
+STD-0744	languages/rust/RUST-DEPENDENCY-STANDARDS.md	104	1	language-profile	refine	Who depends on a specific crate?
+STD-0745	languages/rust/RUST-DEPENDENCY-STANDARDS.md	107	1	language-profile	refine	Total unique deps for one workspace member
+STD-0746	languages/rust/RUST-DEPENDENCY-STANDARDS.md	110	1	language-profile	refine	Find duplicate versions of the same crate
+STD-0747	languages/rust/RUST-DEPENDENCY-STANDARDS.md	114	2	language-profile	refine	Auditing
+STD-0748	languages/rust/RUST-DEPENDENCY-STANDARDS.md	133	1	language-profile	refine	Replace <crate> and <path> with the dependency and source directory.
+STD-0749	languages/rust/RUST-DEPENDENCY-STANDARDS.md	141	2	language-profile	refine	Build-Time Cost
+STD-0750	languages/rust/RUST-DEPENDENCY-STANDARDS.md	146	1	language-profile	refine	Build timing per crate
+STD-0751	languages/rust/RUST-DEPENDENCY-STANDARDS.md	149	1	language-profile	refine	Count transitive deps per workspace member
+STD-0752	languages/rust/RUST-INTEROP-STANDARDS.md	1	1	language-profile	refine	Rust Interop Standards
+STD-0753	languages/rust/RUST-INTEROP-STANDARDS.md	6	2	language-profile	refine	Validate Before Unsafe Access
+STD-0754	languages/rust/RUST-INTEROP-STANDARDS.md	37	2	language-profile	refine	Copy Foreign Buffers Immediately
+STD-0755	languages/rust/RUST-INTEROP-STANDARDS.md	51	2	language-profile	refine	Unsafe Isolation
+STD-0756	languages/rust/RUST-INTEROP-STANDARDS.md	73	2	language-profile	refine	Callback Thread Contracts
+STD-0757	languages/rust/RUST-INTEROP-STANDARDS.md	86	2	language-profile	refine	Serde Wire-Format Alignment
+STD-0758	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	1	1	language-profile	split	Rust Language Bindings Standards
+STD-0759	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	9	2	language-profile	split	Three-Layer Architecture
+STD-0760	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	35	3	language-profile	split	Rules
+STD-0761	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	44	3	language-profile	split	Workspace Layout
+STD-0762	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	53	1	language-profile	split	Exclude crates that need foreign runtimes from default test
+STD-0763	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	84	2	language-profile	split	Product-Native Artifact Model
+STD-0764	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	99	3	language-profile	split	Rules
+STD-0765	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	112	3	language-profile	split	Example Release Layout
+STD-0766	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	123	3	language-profile	split	Rationale
+STD-0767	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	129	3	language-profile	split	Compatibility Notes
+STD-0768	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	141	2	language-profile	split	Binding Surface Policy
+STD-0769	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	147	3	language-profile	split	Rules
+STD-0770	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	172	3	language-profile	split	Support Tier Guidance
+STD-0771	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	180	3	language-profile	split	Surface Review Questions
+STD-0772	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	192	2	language-profile	split	FFI Wrapper Design
+STD-0773	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	194	3	language-profile	split	Wrapper Type Conventions
+STD-0774	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	233	3	language-profile	split	When to Annotate Core Types Directly
+STD-0775	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	256	3	language-profile	split	From/Into Implementation Pattern
+STD-0776	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	278	2	language-profile	split	Error Handling Across FFI
+STD-0777	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	297	3	language-profile	split	Rules
+STD-0778	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	332	2	language-profile	split	Host-Language Callbacks and Event Delivery
+STD-0779	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	337	3	language-profile	split	Event Sink Bridges
+STD-0780	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	403	3	language-profile	split	Callback-Based Task Execution
+STD-0781	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	425	3	language-profile	split	Composite Executors
+STD-0782	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	454	2	language-profile	split	Code Generation Strategy
+STD-0783	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	456	3	language-profile	split	Single Source of Truth
+STD-0784	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	477	3	language-profile	split	Annotation Approach
+STD-0785	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	491	3	language-profile	split	Generation Commands
+STD-0786	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	497	1	language-profile	split	Build the shared library
+STD-0787	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	500	1	language-profile	split	Generate Python bindings
+STD-0788	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	505	1	language-profile	split	Generate C# bindings (community bindgen)
+STD-0789	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	521	2	language-profile	split	Build System Organization
+STD-0790	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	523	3	language-profile	split	Feature Flags for Optional Binding Support
+STD-0791	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	530	1	language-profile	split	mylib-core/Cargo.toml
+STD-0792	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	539	3	language-profile	split	cdylib Configuration
+STD-0793	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	544	1	language-profile	split	mylib-uniffi/Cargo.toml
+STD-0794	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	560	2	language-profile	split	Type Mapping Rules
+STD-0795	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	562	3	language-profile	split	FFI-Safe Type Inventory
+STD-0796	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	580	3	language-profile	split	Conversion Strategy Decision Matrix
+STD-0797	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	590	3	language-profile	split	Enum Representation
+STD-0798	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	600	2	language-profile	split	Memory Ownership Model
+STD-0799	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	626	3	language-profile	split	Rules
+STD-0800	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	650	2	language-profile	split	Async Bridging
+STD-0801	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	691	2	language-profile	split	Testing Strategy
+STD-0802	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	714	3	language-profile	split	Rules
+STD-0803	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	722	3	language-profile	split	Conversion Test Example
+STD-0804	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	745	3	language-profile	split	NIF Pure-Logic Separation
+STD-0805	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	783	2	language-profile	split	Choosing a Binding Approach
+STD-0806	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	794	3	language-profile	split	Rules
+STD-0807	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	806	2	language-profile	split	Versioning and Compatibility
+STD-0808	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	808	3	language-profile	split	Rules
+STD-0809	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	818	3	language-profile	split	Version Export
+STD-0810	languages/rust/RUST-RELEASE-STANDARDS.md	1	1	language-profile	refine	Rust Release Standards
+STD-0811	languages/rust/RUST-RELEASE-STANDARDS.md	6	2	language-profile	refine	Toolchain Pinning
+STD-0812	languages/rust/RUST-RELEASE-STANDARDS.md	11	1	language-profile	refine	rust-toolchain.toml
+STD-0813	languages/rust/RUST-RELEASE-STANDARDS.md	21	2	language-profile	refine	Cargo.toml Metadata
+STD-0814	languages/rust/RUST-RELEASE-STANDARDS.md	47	2	language-profile	refine	Publish Control
+STD-0815	languages/rust/RUST-RELEASE-STANDARDS.md	64	2	language-profile	refine	Workspace Version Management
+STD-0816	languages/rust/RUST-RELEASE-STANDARDS.md	69	1	language-profile	refine	Workspace root Cargo.toml
+STD-0817	languages/rust/RUST-RELEASE-STANDARDS.md	77	1	language-profile	refine	Member crate Cargo.toml
+STD-0818	languages/rust/RUST-RELEASE-STANDARDS.md	90	2	language-profile	refine	cargo-release
+STD-0819	languages/rust/RUST-RELEASE-STANDARDS.md	96	1	language-profile	refine	release.toml (workspace root)
+STD-0820	languages/rust/RUST-RELEASE-STANDARDS.md	111	2	language-profile	refine	Rust Release Checklist
+STD-0821	languages/rust/RUST-SECURITY-STANDARDS.md	1	1	language-profile	refine	Rust Security Standards
+STD-0822	languages/rust/RUST-SECURITY-STANDARDS.md	7	2	language-profile	refine	Path Validation
+STD-0823	languages/rust/RUST-SECURITY-STANDARDS.md	33	2	language-profile	refine	Checked Arithmetic At Boundaries
+STD-0824	languages/rust/RUST-SECURITY-STANDARDS.md	48	2	language-profile	refine	Bounded Queues
+STD-0825	languages/rust/RUST-SECURITY-STANDARDS.md	71	2	language-profile	refine	Network Listener Limits
+STD-0826	languages/rust/RUST-SECURITY-STANDARDS.md	106	2	language-profile	refine	Panic Policy
+STD-0827	languages/rust/RUST-STANDARDS.md	1	1	language-router	replace	Rust Standards
+STD-0828	languages/rust/RUST-STANDARDS.md	9	2	language-router	replace	Documents
+STD-0829	languages/rust/RUST-STANDARDS.md	24	2	language-router	replace	Relationship To Generic Standards
+STD-0830	languages/rust/RUST-STANDARDS.md	42	2	language-router	replace	Default Rust Position
+STD-0831	languages/rust/RUST-TOOLING-STANDARDS.md	1	1	language-profile	split	Rust Tooling Standards
+STD-0832	languages/rust/RUST-TOOLING-STANDARDS.md	6	2	language-profile	split	Required Baseline Verification
+STD-0833	languages/rust/RUST-TOOLING-STANDARDS.md	24	2	language-profile	split	Workspace Lints
+STD-0834	languages/rust/RUST-TOOLING-STANDARDS.md	50	2	language-profile	split	Required Criterion Benchmarks
+STD-0835	languages/rust/RUST-TOOLING-STANDARDS.md	96	2	language-profile	split	Optional `cargo nextest`
+STD-0836	languages/rust/RUST-TOOLING-STANDARDS.md	125	2	language-profile	split	Optional Feature Matrix Checks
+STD-0837	languages/rust/RUST-TOOLING-STANDARDS.md	160	2	language-profile	split	Compile-Fail Tests
+STD-0838	languages/rust/RUST-TOOLING-STANDARDS.md	174	2	language-profile	split	Property-Based Tests
+STD-0839	languages/rust/RUST-TOOLING-STANDARDS.md	206	2	language-profile	split	Rust Test Style
+STD-0840	languages/rust/RUST-TOOLING-STANDARDS.md	221	2	language-profile	split	Recommended Rust Tools
+STD-0841	languages/rust/RUST-TOOLING-STANDARDS.md	240	2	language-profile	split	Build Scripts
+STD-0842	languages/rust/RUST-TOOLING-STANDARDS.md	259	2	language-profile	split	`no_std` And Embedded-Compatible Crates
+STD-0843	languages/rust/RUST-UNSAFE-STANDARDS.md	1	1	language-profile	refine	Rust Unsafe Standards
+STD-0844	languages/rust/RUST-UNSAFE-STANDARDS.md	6	2	language-profile	refine	Default Policy
+STD-0845	languages/rust/RUST-UNSAFE-STANDARDS.md	37	2	language-profile	refine	Isolation Rules
+STD-0846	languages/rust/RUST-UNSAFE-STANDARDS.md	52	2	language-profile	refine	Unsafe Exception Checklist
+STD-0847	languages/rust/RUST-UNSAFE-STANDARDS.md	65	2	language-profile	refine	Unsafe Verification Matrix
+STD-0848	languages/rust/RUST-UNSAFE-STANDARDS.md	84	2	language-profile	refine	Feature-Gated Unsafe Paths
+STD-0849	prompts/full-codebase-standards-refactor.md	1	2	workflow	decide-versioning	Intent
+STD-0850	prompts/full-codebase-standards-refactor.md	7	2	workflow	decide-versioning	Artifact Rules
+STD-0851	prompts/full-codebase-standards-refactor.md	16	2	workflow	decide-versioning	Process
+STD-0852	prompts/implement-plan.md	1	2	workflow	decide-versioning	Intent
+STD-0853	prompts/implement-plan.md	8	2	workflow	decide-versioning	Standards
+STD-0854	prompts/implement-plan.md	18	2	workflow	decide-versioning	Preflight
+STD-0855	prompts/implement-plan.md	35	2	workflow	decide-versioning	Process
+STD-0856	prompts/implement-plan.md	50	2	workflow	decide-versioning	Concurrent Workers
+STD-0857	prompts/implement-plan.md	67	2	workflow	decide-versioning	Unexpected Issues
+STD-0858	prompts/implement-plan.md	78	2	workflow	decide-versioning	Completion
+STD-0859	templates/PLAN-TEMPLATE.md	1	1	workflow	align	Plan: [Short Title]
+STD-0860	templates/PLAN-TEMPLATE.md	3	2	workflow	align	Objective
+STD-0861	templates/PLAN-TEMPLATE.md	7	2	workflow	align	Scope
+STD-0862	templates/PLAN-TEMPLATE.md	9	3	workflow	align	In Scope
+STD-0863	templates/PLAN-TEMPLATE.md	14	3	workflow	align	Out of Scope
+STD-0864	templates/PLAN-TEMPLATE.md	19	2	workflow	align	Inputs
+STD-0865	templates/PLAN-TEMPLATE.md	21	3	workflow	align	Problem
+STD-0866	templates/PLAN-TEMPLATE.md	25	3	workflow	align	Constraints
+STD-0867	templates/PLAN-TEMPLATE.md	30	3	workflow	align	Assumptions
+STD-0868	templates/PLAN-TEMPLATE.md	35	3	workflow	align	Dependencies
+STD-0869	templates/PLAN-TEMPLATE.md	40	3	workflow	align	Risks
+STD-0870	templates/PLAN-TEMPLATE.md	46	3	workflow	align	Simplicity / Complection Review
+STD-0871	templates/PLAN-TEMPLATE.md	56	2	workflow	align	Clarifying Questions (Only If Needed)
+STD-0872	templates/PLAN-TEMPLATE.md	64	2	workflow	align	Definition of Done
+STD-0873	templates/PLAN-TEMPLATE.md	69	2	workflow	align	Milestones
+STD-0874	templates/PLAN-TEMPLATE.md	74	3	workflow	align	Milestone 1: [Name]
+STD-0875	templates/PLAN-TEMPLATE.md	88	3	workflow	align	Milestone 2: [Name]
+STD-0876	templates/PLAN-TEMPLATE.md	102	2	workflow	align	Execution Notes
+STD-0877	templates/PLAN-TEMPLATE.md	108	2	workflow	align	Commit Cadence Notes
+STD-0878	templates/PLAN-TEMPLATE.md	115	2	workflow	align	Optional Subagent Assignment
+STD-0879	templates/PLAN-TEMPLATE.md	123	2	workflow	align	Re-Plan Triggers
+STD-0880	templates/PLAN-TEMPLATE.md	128	2	workflow	align	Recommendations (Only If Better Option Exists)
+STD-0881	templates/PLAN-TEMPLATE.md	133	2	workflow	align	Completion Summary
+STD-0882	templates/PLAN-TEMPLATE.md	135	3	workflow	align	Completed
+STD-0883	templates/PLAN-TEMPLATE.md	140	3	workflow	align	Deviations
+STD-0884	templates/PLAN-TEMPLATE.md	144	3	workflow	align	Follow-Ups
+STD-0885	templates/PLAN-TEMPLATE.md	148	3	workflow	align	Verification Summary
+STD-0886	templates/PLAN-TEMPLATE.md	153	3	workflow	align	Traceability Links
+STD-0887	templates/PLAN-TEMPLATE.md	159	2	workflow	align	Brevity Note
+STD-0888	templates/PULL_REQUEST_TEMPLATE.md	1	2	reference	align	Summary
+STD-0889	templates/PULL_REQUEST_TEMPLATE.md	5	2	reference	align	Decision Traceability (Required)
+STD-0890	templates/PULL_REQUEST_TEMPLATE.md	7	3	reference	align	Problem
+STD-0891	templates/PULL_REQUEST_TEMPLATE.md	10	3	reference	align	Constraints
+STD-0892	templates/PULL_REQUEST_TEMPLATE.md	13	3	reference	align	Decision
+STD-0893	templates/PULL_REQUEST_TEMPLATE.md	16	3	reference	align	Alternatives Rejected
+STD-0894	templates/PULL_REQUEST_TEMPLATE.md	20	3	reference	align	Invariants Impacted
+STD-0895	templates/PULL_REQUEST_TEMPLATE.md	23	3	reference	align	Simplicity Review
+STD-0896	templates/PULL_REQUEST_TEMPLATE.md	29	3	reference	align	Revisit Triggers
+STD-0897	templates/PULL_REQUEST_TEMPLATE.md	33	3	reference	align	Traceability Links
+STD-0898	templates/PULL_REQUEST_TEMPLATE.md	37	2	reference	align	Checklist
+STD-0899	templates/README-TEMPLATE.md	1	1	reference	split	[Directory Name]
+STD-0900	templates/README-TEMPLATE.md	5	2	reference	split	Purpose
+STD-0901	templates/README-TEMPLATE.md	12	2	reference	split	Contents
+STD-0902	templates/README-TEMPLATE.md	22	2	reference	split	Problem
+STD-0903	templates/README-TEMPLATE.md	27	2	reference	split	Constraints
+STD-0904	templates/README-TEMPLATE.md	35	2	reference	split	Decision
+STD-0905	templates/README-TEMPLATE.md	39	2	reference	split	Alternatives Rejected
+STD-0906	templates/README-TEMPLATE.md	52	2	reference	split	Invariants
+STD-0907	templates/README-TEMPLATE.md	59	2	reference	split	Revisit Triggers
+STD-0908	templates/README-TEMPLATE.md	72	2	reference	split	Dependencies
+STD-0909	templates/README-TEMPLATE.md	74	3	reference	split	Internal
+STD-0910	templates/README-TEMPLATE.md	80	3	reference	split	External
+STD-0911	templates/README-TEMPLATE.md	86	2	reference	split	Related ADRs
+STD-0912	templates/README-TEMPLATE.md	94	2	reference	split	Usage Examples
+STD-0913	templates/README-TEMPLATE.md	104	2	reference	split	API Consumer Contract
+STD-0914	templates/README-TEMPLATE.md	117	2	reference	split	Structured Producer Contract
+STD-0915	templates/README-TEMPLATE.md	133	2	reference	split	Testing
+STD-0916	templates/README-TEMPLATE.md	141	2	reference	split	Notes
