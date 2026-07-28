@@ -1,0 +1,15 @@
+slice	order	id	source	target	disposition	rationale
+7.4b2b	1	STD-0051	ARCHITECTURE-PATTERNS.md	topics/contracts.md	merge	executable boundary contracts belong to canonical Contracts
+7.4b2b	2	STD-0052	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	define executable decoding as runtime proof
+7.4b2b	3	STD-0053	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	remove assertion as validation and preserve observable applicability
+7.4b2b	4	STD-0054	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	require complete invariant checks before validated construction
+7.4b2c	1	STD-0063	ARCHITECTURE-PATTERNS.md	profiles/boundaries/ipc.md	move	IPC contract policy belongs to the boundary profile
+7.4b2c	2	STD-0064	ARCHITECTURE-PATTERNS.md	profiles/boundaries/ipc.md	refine	replace typed-message assertion model with decoded variants
+7.4b2c	3	STD-0065	ARCHITECTURE-PATTERNS.md	profiles/boundaries/ipc.md	refine	bind category action payload and metadata in one decodable contract
+7.4b2c	4	STD-0066	ARCHITECTURE-PATTERNS.md	profiles/boundaries/ipc.md	move	preserve message category semantics without product defaults
+7.4b2c	5	STD-0067	ARCHITECTURE-PATTERNS.md	profiles/boundaries/ipc.md	refine	remove payload assertion and require validated-variant dispatch
+7.4b2c	6	STD-0068	ARCHITECTURE-PATTERNS.md	profiles/boundaries/ipc.md	merge	preserve benefits only as consequences of the canonical contract
+7.4b2c	7	STD-0592	SECURITY-STANDARDS.md	topics/security.md	merge	link untrusted payload authority to complete contract decoding
+7.4b2c	8	STD-0593	SECURITY-STANDARDS.md	profiles/boundaries/ipc.md	refine	remove envelope-only ValidatedMessage assertion
+7.4b2c	9	STD-0594	SECURITY-STANDARDS.md	topics/security.md	refine	deserialization and null checks do not prove domain invariants
+7.4b2c	10	STD-0595	SECURITY-STANDARDS.md	profiles/boundaries/ipc.md	refine	specialize process-boundary validation without Electron-owned policy

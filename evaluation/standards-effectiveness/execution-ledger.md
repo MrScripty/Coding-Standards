@@ -1226,3 +1226,35 @@ regressions pass. `S1 route passed: 6 modules, 597/11066 baseline lines`.
 Finding `F017` is resolved.
 
 **Next slice:** `7.4b2a`, planning only for `F018`.
+
+## 2026-07-28: Milestone 7.4b2a Payload-Validation Decomposition
+
+**Outcome:** Accepted.
+
+Critical finding `F018` is decomposed into two serial implementation slices
+covering fourteen frozen identifiers. Slice `7.4b2b` establishes the generic
+runtime-decoding proof contract in `topics/contracts.md`. Slice `7.4b2c` then
+creates the IPC boundary profile, specializes category/action/payload decoding,
+and links Security trust-boundary consequences without duplicating contract or
+dispatch policy.
+
+The decomposition assigns direct assertion defects `STD-0053`, `STD-0067`, and
+`STD-0593` with only the parent sections required for complete canonical
+ownership and legacy removal. It names separate runtime-decoding and
+action-payload decision fixtures, exact write sets, typed outcomes, and
+acceptance gates.
+
+**No-fallback/legacy result:** the planned implementation cannot treat a type
+assertion, parser/deserializer success, generic object check, envelope-only
+check, producer typing, default action, fall-through handler, original
+untrusted object, or permissive alternate decoder as runtime proof.
+
+**Verification:** the focused decomposition checker validates fourteen exact
+identifiers across two ordered slices, their source/target/disposition
+contracts, named fixtures, report requirements, and active-plan handoff.
+Plan structure, plan fixtures, shell syntax, whitespace, and all
+standards-effectiveness regressions pass.
+
+Finding `F018` remains open until both implementation slices are accepted.
+
+**Next slice:** `7.4b2b`.

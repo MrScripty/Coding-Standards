@@ -112,6 +112,11 @@ final disposition; all focused and affected regressions pass.
 
 ## Later-Wave Expansion Rule
 
+Critical payload-validation finding `F018` is decomposed in
+[milestone-7-f018-decomposition.md](milestone-7-f018-decomposition.md). Its
+generic runtime-decoding contract must be accepted before its IPC
+specialization, and both slices precede the next trust-boundary finding.
+
 Before starting each later wave:
 
 1. inspect repository status and accepted dependencies;

@@ -156,6 +156,13 @@ the remaining inventory totals, complete wave ownership, missing-owner count,
 and exact first-slice proposal without treating later proposed dispositions as
 accepted.
 
+`milestone-7-f018-decomposition.md` and
+`milestone-7-f018-slices.tsv` split critical untrusted-payload finding `F018`
+into a generic runtime-decoding contract followed by action-specific IPC
+decoding and Security linkage. `verify-milestone-7-f018-decomposition.sh`
+checks the exact fourteen identifiers, owners, dispositions, ordering, named
+fixtures, and active-plan handoff without moving normative guidance.
+
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
 legacy path is only a bounded migration index.

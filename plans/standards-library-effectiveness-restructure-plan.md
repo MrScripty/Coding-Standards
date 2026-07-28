@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave active; filesystem
-containment accepted.
+**Current phase:** Milestone 7 trust-boundary wave active; action-specific
+payload-validation decomposition accepted.
 
-**Next slice:** Milestone 7.4b2a, decompose action-specific untrusted payload
-validation finding `F018` into exact owner-bounded identifiers and fixtures
-before moving normative guidance.
+**Next slice:** Milestone 7.4b2b, establish generic runtime-decoding proof in
+the canonical Contracts topic and remove assertion-as-validation from the
+legacy executable-boundary-contract section.
 
 **Acceptance status:** `partial`
 
@@ -22,6 +22,8 @@ before moving normative guidance.
 **Evidence:** [Milestone 0 evaluation](../evaluation/standards-effectiveness/README.md)
 
 **Milestone 7 decomposition:** [Rolling owner-and-correctness waves](../evaluation/standards-effectiveness/milestone-7-decomposition.md)
+
+**F018 decomposition:** [Runtime proof and action-specific IPC decoding](../evaluation/standards-effectiveness/milestone-7-f018-decomposition.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -470,8 +472,13 @@ all structural/routing fixtures pass.
    - `7.4b1` (`Accepted`): canonical filesystem containment and platform
      path-identity contracts (`STD-0289`-`STD-0293`,
      `STD-0584`-`STD-0587`);
-   - `7.4b2a` (`Planned`): decompose action-specific untrusted payload
-     validation finding `F018`.
+   - `7.4b2a` (`Accepted`): decompose action-specific untrusted payload
+     validation finding `F018` into two serial owner-bounded slices;
+   - `7.4b2b` (`Planned`): canonical generic runtime-decoding proof
+     (`STD-0051`-`STD-0054`); and
+   - `7.4b2c` (`Planned`): canonical action-specific IPC decoding and Security
+     trust-boundary linkage (`STD-0063`-`STD-0068`,
+     `STD-0592`-`STD-0595`).
 6. Final legacy-index review, disposition closure, and duplication gate.
 
 **Status:** `Active`
