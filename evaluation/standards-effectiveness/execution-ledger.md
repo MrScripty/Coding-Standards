@@ -1044,3 +1044,35 @@ guidance.
 - All listed checks passed under fail-fast execution.
 
 **Next slice:** `7.3b3`.
+
+## 2026-07-28: Milestone 7.3b3 Publication Presentation
+
+**Outcome:** Accepted.
+
+Provider-neutral publication policy for `STD-0566` through `STD-0574` now
+belongs to `workflows/release.md`. Publication projects accepted destination,
+channel, authority, visibility, notes, disclosures, artifact identities, and
+verification metadata; it does not own those underlying decisions.
+
+Draft/review states are destination-owned options, prerelease labels consume
+version and channel contracts, generated notes cannot replace required curated
+content, and provider layouts cannot create a second artifact identity scheme.
+Unresolved publication facts return a typed release-publication diagnostic.
+
+The GitHub-specific section was removed. A dependent checklist line was
+corrected so it cannot restore a mandatory GitHub draft. Historical review
+found that `STD-0571` through `STD-0574` had been removed during Milestone
+`7.3a` without exact dispositions; `F040` records and resolves that drift with
+explicit merge/remove outcomes in this slice.
+
+**No-fallback/legacy result:** no provider, destination, visibility state,
+channel projection, notes source, or artifact layout is selected by default.
+Product-specific binary and incomplete shared-library examples were removed.
+
+**Verification:** publication, maintenance, pipeline, artifact, and release
+foundation fixtures; documentation, contract, verification, acceptance,
+disposition, commit, traceability, metadata, plan lifecycle, shell syntax, and
+whitespace checks all passed. `S1 route passed: 6 modules, 595/11066 baseline
+lines`.
+
+**Next slice:** `7.3b4`.

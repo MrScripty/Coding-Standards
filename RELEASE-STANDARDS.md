@@ -4,7 +4,7 @@ Release applicability, versioning, changelog, contract-evolution, deprecation,
 migration, and acceptance policy moved to the canonical
 [Release Workflow](workflows/release.md).
 
-This file temporarily retains only unmigrated hosted-publication, checklist,
+This file temporarily retains only unmigrated language routing, checklist,
 rollback, and tool-recipe guidance. These sections cannot override the
 canonical workflow.
 
@@ -53,41 +53,6 @@ commit_parsers = [
 
 ---
 
-## GitHub Releases
-
-### Draft-Then-Publish
-
-CI creates draft releases. A human reviews artifacts and release notes before
-publishing. This prevents broken releases from being visible to users.
-
-Protect whichever references or approvals authorize release dispatch;
-convention alone is insufficient. When team size allows, the reviewer who
-publishes the draft should not be the same actor who authorized the candidate.
-
-### Pre-Release Flag
-
-Set the hosting service's prerelease flag only when the accepted version has a
-prerelease identifier or the release channel contract explicitly classifies
-the artifact as prerelease. Major version zero alone is not that decision.
-
-### Release Notes
-
-Use the changelog entry for the released version as the release body. GitHub's
-auto-generated release notes (from PR titles) are acceptable as a supplement
-but should not replace a curated changelog.
-
-For major version bumps, include or link the migration guide in the release
-notes.
-
-### Asset Organization
-
-Present assets using the identities and relationships selected by the
-canonical artifact plan. Group related assets in the release description when
-that helps consumers select the correct download; do not invent a second naming
-scheme in publication automation.
-
----
-
 ## Language-Specific Guidance
 
 Rust release rules for Cargo metadata, `publish = false`, workspace versioning,
@@ -108,7 +73,8 @@ Before every release:
 3. Commit: `chore(release): prepare vX.Y.Z`
 4. Tag: `git tag vX.Y.Z`
 5. Push commit and intended release tag.
-6. CI creates draft GitHub Release; verify all expected artifacts are present.
+6. Move the publication to its planned review or visibility state and verify
+   that all expected artifacts and disclosures are present.
 7. Download the representative published artifacts required by the acceptance
     plan and run each named `release-artifact` smoke criterion
 8. Review release notes, then publish the release

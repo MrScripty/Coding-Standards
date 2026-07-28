@@ -101,7 +101,7 @@ if rg -q '^## (Release Artifacts|Reproducible Builds)$' "$LEGACY"; then
   exit 1
 fi
 
-for retained in '## GitHub Releases' '## Rollback Procedure' \
+for retained in '## Language-Specific Guidance' '## Rollback Procedure' \
   '## Release Tool Recipes'; do
   rg -F -q "$retained" "$LEGACY"
 done
@@ -123,6 +123,6 @@ for rule in "${removed_rules[@]}"; do
 done
 
 rg -F -q 'workflows/release.md' "$LEGACY"
-rg -F -q 'Major version zero alone is not that decision.' "$LEGACY"
+rg -F -q 'Major version zero does not by itself' "$WORKFLOW"
 
 printf 'Release artifact policy passed\n'

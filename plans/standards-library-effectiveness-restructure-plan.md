@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; release maintenance and channel policy accepted.
+**Current phase:** Milestone 7 active; hosted publication and asset presentation accepted.
 
-**Next slice:** Milestone 7.3b3, migrate hosted publication and asset presentation (`STD-0566`-`STD-0574`).
+**Next slice:** Milestone 7.3b4, migrate language-profile routing and the release checklist (`STD-0575`-`STD-0576`).
 
 **Acceptance status:** `partial`
 
@@ -450,7 +450,7 @@ all structural/routing fixtures pass.
      (`STD-0552`-`STD-0560`);
    - `7.3b2` (`Accepted`): maintenance and channel policy
      (`STD-0561`-`STD-0565`);
-   - `7.3b3`: hosted publication and asset presentation
+   - `7.3b3` (`Accepted`): hosted publication and asset presentation
      (`STD-0566`-`STD-0574`);
    - `7.3b4`: language-profile routing and release checklist
      (`STD-0575`-`STD-0576`);

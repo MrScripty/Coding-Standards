@@ -106,7 +106,7 @@ if rg -q "$removed_headings" "$LEGACY"; then
   exit 1
 fi
 
-for retained in "## GitHub Releases" "## Rollback Procedure" \
+for retained in "## Language-Specific Guidance" "## Rollback Procedure" \
   "## Release Tool Recipes"; do
   rg -F -q "$retained" "$LEGACY"
 done

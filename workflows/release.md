@@ -250,6 +250,46 @@ When a product can deploy code separately from activating behavior, govern
 that mechanism through an explicit project-owned configuration and lifecycle
 policy rather than inferring it from the release process.
 
+## Publication Presentation
+
+A publication surface presents an accepted release to consumers. It does not
+own versioning, channels, artifact identity, compatibility, or acceptance
+decisions. Before publication, define:
+
+- the destination and release channel;
+- the responsible publication authority;
+- any private, staged, review, public, or withdrawn visibility states;
+- the accepted release notes and required disclosures;
+- how planned artifacts and their relationships are presented; and
+- how consumers discover, select, verify, and report problems with the release.
+
+Enter a draft or review state only when the destination supports it and the
+accepted publication procedure requires it. A provider feature or manual
+review is not a universal release gate. Publication may proceed only from the
+canonical pipeline handoff with the authority required for the selected
+destination and visibility transition.
+
+Derive prerelease presentation from the accepted version and channel
+contracts. Major version zero does not by itself make a publication a
+prerelease. Provider labels are projections of the canonical decision and
+cannot redefine it.
+
+Release notes derive from the accepted changelog, migration obligations,
+support policy, and required security or operational disclosures. Generated
+summaries may supplement that material when they are accurate, but cannot
+replace required curated content or invent unaccepted claims.
+
+Present the exact artifact identities and relationships from the artifact
+plan. Give consumers enough target, format, and compatibility context to select
+the correct artifact, and place each selected integrity, signature,
+provenance, or dependency document where its relationship to the final bytes
+is unambiguous. Provider layout and grouping may improve discovery but must not
+create a second artifact identity scheme.
+
+If destination, authority, visibility, notes, channel projection, or artifact
+presentation is unresolved, return a typed release-publication diagnostic and
+do not publish using a provider default.
+
 ## Acceptance Boundary
 
 Before publishing, identify every claim required by the release:
@@ -271,7 +311,7 @@ them.
 ## Pending Migration Boundary
 
 [Legacy Release Standards](../RELEASE-STANDARDS.md) temporarily retain only
-unmigrated hosted-publication, checklist, rollback, and tool-recipe guidance.
+unmigrated language routing, checklist, rollback, and tool-recipe guidance.
 Those sections cannot override applicability, versioning, changelog, contract,
 deprecation, migration, artifact, reproducibility, pipeline, maintenance,
-channel, or acceptance decisions owned here.
+channel, publication, or acceptance decisions owned here.

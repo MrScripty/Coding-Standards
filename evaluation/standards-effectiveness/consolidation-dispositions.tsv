@@ -199,3 +199,12 @@ STD-0562	RELEASE-STANDARDS.md	workflows/release.md	move	explicit standard-releas
 STD-0563	RELEASE-STANDARDS.md	workflows/release.md	move	supported-line remediation and reconciliation
 STD-0564	RELEASE-STANDARDS.md	workflows/release.md	move	explicit long-term support contract
 STD-0565	RELEASE-STANDARDS.md	workflows/release.md	move	consumer release-channel contract without feature-flag defaults
+STD-0566	RELEASE-STANDARDS.md	workflows/release.md	move	provider-neutral publication presentation
+STD-0567	RELEASE-STANDARDS.md	workflows/release.md	merge	destination-owned review and visibility states
+STD-0568	RELEASE-STANDARDS.md	workflows/release.md	merge	canonical prerelease and channel projection
+STD-0569	RELEASE-STANDARDS.md	workflows/release.md	move	accepted release-note composition
+STD-0570	RELEASE-STANDARDS.md	workflows/release.md	move	artifact-plan presentation
+STD-0571	RELEASE-STANDARDS.md	workflows/release.md	merge	consumer artifact discovery
+STD-0572	RELEASE-STANDARDS.md	none	remove	product-specific binary download examples
+STD-0573	RELEASE-STANDARDS.md	none	remove	incomplete shared-library download example
+STD-0574	RELEASE-STANDARDS.md	workflows/release.md	merge	selected integrity metadata presentation

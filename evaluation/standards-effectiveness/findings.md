@@ -30,12 +30,13 @@ changes and focused fixture evidence.
 | D005 | Resolved in Milestone 7.1 | Commit and slice process is owned by implementation/commit workflows; prompts route only, and commit examples are non-normative reference. |
 | F032 | Resolved in Milestone 7.2c2 | Documentation examples, proportional workflow policy, and release-owned changelog semantics have canonical owners; the legacy documentation file is now a bounded migration index. |
 | F033 | Resolved in Milestone 7.2a | The commit disposition checker now filters its shared ledger by source; documentation rows have a separate owner-specific fixture. |
-| F034 | Partially resolved in Milestone 7.3b2 | The canonical release workflow owns foundation, changelog, artifact, reproducibility, pipeline, maintenance, and channel policy; remaining publication, routing, checklist, rollback, and reference concerns continue in owner-bounded slices. |
+| F034 | Partially resolved in Milestone 7.3b3 | The canonical release workflow owns foundation through publication policy; remaining routing, checklist, rollback, and reference concerns continue in owner-bounded slices. |
 | F035 | Resolved in Milestone 7.2c1 | Contract and verification ownership checks now follow the canonical release workflow instead of requiring duplicate direct links from the legacy release index. |
 | F036 | Resolved in Milestone 7.3a | Retained pipeline and publication sections consume canonical artifact and prerelease decisions instead of restoring conflicting defaults. |
-| F037 | Partially resolved in Milestone 7.3b2 | Pipeline and maintenance/channel slices are accepted; publication and routing/checklist concerns remain in the approved owner-bounded sequence. |
+| F037 | Partially resolved in Milestone 7.3b3 | Pipeline, maintenance/channel, and publication slices are accepted; routing/checklist remains in the approved sequence. |
 | F038 | Resolved in Milestone 7.3b1 | Provider-specific tags, workflow syntax, runner labels, and permissive artifact uploads no longer define generic release pipeline policy. |
 | F039 | Resolved in Milestone 7.3b2 | Maintenance, LTS, channel, and activation policy now follows explicit contracts rather than branch names, fixed durations, named channel sets, or universal feature-flag lifetimes. |
+| F040 | Resolved in Milestone 7.3b3 | Missing dispositions for removed download-example identifiers `STD-0571` through `STD-0574` were reconciled with explicit merge/remove outcomes. |
 
 ## Systemic Findings
 
@@ -65,6 +66,7 @@ changes and focused fixture evidence.
 | F037 | Slice ownership | `RELEASE-STANDARDS.md`; frozen IDs `STD-0552`-`STD-0576` | Decompose pipeline mechanics, maintenance/channels, publication presentation, and language/checklist routing before implementation. | 7 |
 | F038 | Provider-specific pipeline policy | `RELEASE-STANDARDS.md`; frozen IDs `STD-0552`-`STD-0560` | Replace provider-specific trigger, runner, workflow-syntax, and permissive-upload defaults with authenticated dispatch, project-owned mechanisms, and fail-closed artifact collection. | 7 |
 | F039 | Maintenance/channel conflation | `RELEASE-STANDARDS.md`; frozen IDs `STD-0561`-`STD-0565` | Separate support, source-lineage, delivery-channel, and runtime-activation decisions; remove fixed branch, duration, channel-name, and feature-flag defaults. | 7 |
+| F040 | Disposition drift | `RELEASE-STANDARDS.md`; frozen IDs `STD-0571`-`STD-0574`; Milestone 7.3a history | Reconcile previously removed download examples to canonical artifact presentation or explicit removal without restoring legacy text. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

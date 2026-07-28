@@ -179,6 +179,11 @@ contracts, exact disposition of `STD-0561` through `STD-0565`, supported-line
 reconciliation, typed unresolved outcomes, and removal of branch, duration,
 channel-name, and feature-flag defaults.
 
+`verify-release-publication-policy.sh` checks provider-neutral publication
+decisions, exact disposition of `STD-0566` through `STD-0574`, release-note and
+artifact presentation, typed unresolved outcomes, and removal of hosted-service
+and product-specific download defaults.
+
 ## Scoring
 
 Each rubric dimension is scored:
