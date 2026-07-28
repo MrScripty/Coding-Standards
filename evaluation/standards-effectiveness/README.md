@@ -159,6 +159,11 @@ applicability decisions, exact disposition of `STD-0531` through `STD-0540`,
 canonical workflow metadata and routing, and the explicit boundary around
 unmigrated release concerns.
 
+`verify-documentation-changelog-closure.sh` checks exact disposition of
+`STD-0421` through `STD-0436`, canonical release ownership of retained
+changelog semantics, removal of fixed-format boilerplate, and the bounded
+legacy documentation migration index.
+
 ## Scoring
 
 Each rubric dimension is scored:

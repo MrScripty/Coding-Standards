@@ -27,9 +27,9 @@ changes and focused fixture evidence.
 | F029 | Partially resolved in Milestone 7.2c1 | Release units may version independently or in lockstep and publication pushes the intended tag; lockfile ownership remains. |
 | F031 | Resolved in Milestone 4.1 | Acceptance claim fixtures independently model proof kind, environment qualification, and execution mode. |
 | D005 | Resolved in Milestone 7.1 | Commit and slice process is owned by implementation/commit workflows; prompts route only, and commit examples are non-normative reference. |
-| F032 | Partially resolved in Milestone 7.2b | Documentation examples and proportional workflow policy have canonical owners; release-owned changelog migration and legacy-index closure remain. |
+| F032 | Resolved in Milestone 7.2c2 | Documentation examples, proportional workflow policy, and release-owned changelog semantics have canonical owners; the legacy documentation file is now a bounded migration index. |
 | F033 | Resolved in Milestone 7.2a | The commit disposition checker now filters its shared ledger by source; documentation rows have a separate owner-specific fixture. |
-| F034 | Partially resolved in Milestone 7.2c1 | The canonical release workflow now owns applicability, versioning, changelog, contracts, and acceptance; documentation closure and remaining release decomposition continue. |
+| F034 | Partially resolved in Milestone 7.2c2 | The canonical release workflow owns foundation and documentation-sourced changelog semantics; remaining artifact, pipeline, rollback, and reference concerns continue in owner-bounded slices. |
 | F035 | Resolved in Milestone 7.2c1 | Contract and verification ownership checks now follow the canonical release workflow instead of requiring duplicate direct links from the legacy release index. |
 
 ## Systemic Findings

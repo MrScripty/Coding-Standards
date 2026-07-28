@@ -138,6 +138,22 @@ STD-0417	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example benefits
 STD-0418	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example drawbacks
 STD-0419	DOCUMENTATION-STANDARDS.md	none	remove	event-sourcing example side effects
 STD-0420	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	project-owned ADR placement
+STD-0421	DOCUMENTATION-STANDARDS.md	workflows/release.md	move	canonical changelog ownership
+STD-0422	DOCUMENTATION-STANDARDS.md	workflows/release.md	move	release-fact changelog applicability
+STD-0423	DOCUMENTATION-STANDARDS.md	none	remove	fixed changelog format mandate
+STD-0424	DOCUMENTATION-STANDARDS.md	none	remove	boilerplate changelog example title
+STD-0425	DOCUMENTATION-STANDARDS.md	workflows/release.md	move	unreleased collection option
+STD-0426	DOCUMENTATION-STANDARDS.md	workflows/release.md	move	added category example
+STD-0427	DOCUMENTATION-STANDARDS.md	workflows/release.md	move	changed category example
+STD-0428	DOCUMENTATION-STANDARDS.md	workflows/release.md	move	deprecated category example
+STD-0429	DOCUMENTATION-STANDARDS.md	workflows/release.md	move	removed category example
+STD-0430	DOCUMENTATION-STANDARDS.md	workflows/release.md	move	fixed category example
+STD-0431	DOCUMENTATION-STANDARDS.md	workflows/release.md	move	security category example
+STD-0432	DOCUMENTATION-STANDARDS.md	none	remove	stale dated release example
+STD-0433	DOCUMENTATION-STANDARDS.md	none	remove	duplicate added example
+STD-0434	DOCUMENTATION-STANDARDS.md	none	remove	second stale dated release example
+STD-0435	DOCUMENTATION-STANDARDS.md	none	remove	duplicate fixed example
+STD-0436	DOCUMENTATION-STANDARDS.md	workflows/release.md	move	project-owned changelog categories
 STD-0437	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	independently adopted repository entry point
 STD-0438	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	audience-driven entry content
 STD-0439	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	repository purpose and audience

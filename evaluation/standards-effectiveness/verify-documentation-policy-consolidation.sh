@@ -93,13 +93,13 @@ for section in "${required_workflow_sections[@]}"; do
   fi
 done
 
-legacy_headings='^## (Documentation Artifact Layout|Architecture Decision Records \(ADRs\)|README.md \(Project Root\)|Documentation Review Checklist)$'
+legacy_headings='^## (Documentation Artifact Layout|Architecture Decision Records \(ADRs\)|Changelog|README.md \(Project Root\)|Documentation Review Checklist)$'
 if rg -q "$legacy_headings" "$LEGACY"; then
   printf 'Legacy documentation policy section remains authoritative\n' >&2
   exit 1
 fi
-if ! rg -q '^## Changelog' "$LEGACY"; then
-  printf 'Release-owned changelog section was removed before Milestone 7.2c\n' >&2
+if ! rg -F -q 'workflows/release.md' "$LEGACY"; then
+  printf 'Legacy documentation index does not route changelog policy\n' >&2
   exit 1
 fi
 

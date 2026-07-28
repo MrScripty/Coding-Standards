@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; canonical release workflow foundation established.
+**Current phase:** Milestone 7 active; documentation consolidation complete.
 
-**Next slice:** Milestone 7.2c2, migrate documentation changelog identifiers and close the legacy documentation index.
+**Next slice:** Milestone 7.3a, migrate release artifact and packaging policy.
 
 **Acceptance status:** `partial`
 
@@ -442,8 +442,8 @@ all structural/routing fixtures pass.
    - `7.2c1` (`Accepted`): establish `workflows/release.md` with release
      applicability, versioning, changelog, contract-evolution, and acceptance
      boundaries;
-   - `7.2c2`: migrate documentation-owned changelog identifiers and close the
-     legacy documentation index.
+   - `7.2c2` (`Accepted`): migrate documentation-owned changelog identifiers
+     and close the legacy documentation index.
 3. Owner-bounded topic/profile consolidation with correctness fixes, including:
    - release artifact and packaging policy;
    - release pipeline and publication policy;

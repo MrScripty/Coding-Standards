@@ -754,3 +754,47 @@ that canonical workflow's direct dependencies instead.
 - All listed checks passed.
 
 **Next slice:** `7.2c2`.
+
+## 2026-07-28: Milestone 7.2c2 Documentation Changelog Closure
+
+**Outcome:** Accepted.
+
+Disposed frozen documentation identifiers `STD-0421` through `STD-0436`.
+Changelog applicability, unreleased collection, category examples, and
+release-time assembly now route to `workflows/release.md`. The fixed
+Keep-a-Changelog mandate, boilerplate title, duplicate category entries, and
+stale dated examples were removed rather than retained as workflow policy.
+
+`DOCUMENTATION-STANDARDS.md` is now a bounded migration index linking the
+canonical documentation workflow, documentation recipe, and release workflow.
+It has no independent normative authority and retains no policy section.
+
+The first focused run exposed a brittle candidate-fixture assertion that
+searched for one phrase across a Markdown line break. The fixture now checks
+stable semantic fragments without weakening the required release policy.
+
+**No-fallback/legacy result:**
+
+- Changelog policy has one canonical owner.
+- The legacy documentation index cannot override documentation, release, or
+  reference owners.
+- Removed fixed-format examples were not copied into a compatibility document.
+
+**Write set:**
+
+- `DOCUMENTATION-STANDARDS.md`
+- `README.md`
+- documentation changelog and policy consolidation checks
+- dispositions, findings, plan, and this ledger
+
+**Verification:**
+
+- Documentation changelog, policy, reference, and decision fixtures.
+- Release, contract, verification, acceptance, disposition, commit, and
+  traceability regressions.
+- Metadata, plan structure, and plan lifecycle fixtures.
+- Shell syntax, whitespace, and link review.
+- `S1 route passed: 6 modules, 595/11066 baseline lines`.
+- All listed checks passed.
+
+**Next slice:** `7.3a`.
