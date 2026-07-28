@@ -33,7 +33,7 @@ changes and focused fixture evidence.
 | F034 | Partially resolved in Milestone 7.3a | The canonical release workflow owns foundation, changelog, artifact, and reproducibility policy; remaining pipeline, rollback, and reference concerns continue in owner-bounded slices. |
 | F035 | Resolved in Milestone 7.2c1 | Contract and verification ownership checks now follow the canonical release workflow instead of requiring duplicate direct links from the legacy release index. |
 | F036 | Resolved in Milestone 7.3a | Retained pipeline and publication sections consume canonical artifact and prerelease decisions instead of restoring conflicting defaults. |
-| F037 | Direction required for Milestone 7.3b | Frozen release identifiers `STD-0552` through `STD-0576` span four review and ownership boundaries and cannot remain one thin slice. |
+| F037 | Direction approved for Milestone 7.3b | Frozen release identifiers `STD-0552` through `STD-0576` will migrate in four owner-bounded slices for pipeline, maintenance/channels, publication, and routing/checklist concerns. |
 
 ## Systemic Findings
 

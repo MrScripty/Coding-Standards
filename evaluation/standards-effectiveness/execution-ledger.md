@@ -889,3 +889,23 @@ canonical owner. No pending section may restore artifact, prerelease, contract,
 or acceptance defaults.
 
 **Next action:** Approve the Milestone `7.3b` decomposition.
+
+## 2026-07-28: Milestone 7.3b Ownership Direction
+
+**Outcome:** Recommended option 2 approved.
+
+The remaining pipeline/publication range will migrate in four owner-bounded
+slices:
+
+1. `7.3b1`: pipeline mechanics (`STD-0552`-`STD-0560`);
+2. `7.3b2`: maintenance and channel policy (`STD-0561`-`STD-0565`);
+3. `7.3b3`: hosted publication and asset presentation
+   (`STD-0566`-`STD-0574`); and
+4. `7.3b4`: language-profile routing and the release checklist
+   (`STD-0575`-`STD-0576`).
+
+Each slice owns one decision surface, exact frozen identifiers, focused
+fixtures, and removal of its legacy policy. Rollback/recovery and
+non-normative tool recipes remain separate later slices.
+
+**Next slice:** `7.3b1`.
