@@ -176,3 +176,12 @@ STD-0537	RELEASE-STANDARDS.md	workflows/release.md	move	project-owned release un
 STD-0538	RELEASE-STANDARDS.md	workflows/release.md	move	consumer-visible changelog policy
 STD-0539	RELEASE-STANDARDS.md	workflows/release.md	move	release-time changelog assembly
 STD-0540	RELEASE-STANDARDS.md	none	remove	implicit commit-type changelog mapping
+STD-0543	RELEASE-STANDARDS.md	workflows/release.md	move	fact-driven artifact plan
+STD-0544	RELEASE-STANDARDS.md	workflows/release.md	move	consumer-contract artifact selection
+STD-0545	RELEASE-STANDARDS.md	workflows/release.md	move	channel-unique artifact identity
+STD-0546	RELEASE-STANDARDS.md	workflows/release.md	move	conditional integrity metadata
+STD-0547	RELEASE-STANDARDS.md	workflows/release.md	move	risk-driven SBOM selection
+STD-0548	RELEASE-STANDARDS.md	workflows/release.md	move	evidence-bounded reproducibility claim
+STD-0549	RELEASE-STANDARDS.md	workflows/release.md	move	claim-driven build input pinning
+STD-0550	RELEASE-STANDARDS.md	workflows/release.md	move	resolution-contract lockfile ownership
+STD-0551	RELEASE-STANDARDS.md	workflows/release.md	move	nondeterministic build input control

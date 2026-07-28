@@ -23,14 +23,16 @@ changes and focused fixture evidence.
 | F020 | Partially resolved in Milestone 5.2 | Authoritative-store deletion fallback was removed; phased-mutation atomicity remains Milestone 7. |
 | F024 | Resolved in Milestone 5.2 | Rust binding compatibility is classified independently for generated, package, ABI, wire, and persisted boundaries. |
 | F026 | Partially resolved in Milestone 5.2 | Catch-all executor fallback was replaced by typed unsupported delegation; spawn and TOCTOU findings remain Milestone 7. |
-| F027 | Resolved in Milestone 7.2c1 | Major version zero and prerelease identifiers are distinct; published consumer and migration promises remain explicit. |
-| F029 | Partially resolved in Milestone 7.2c1 | Release units may version independently or in lockstep and publication pushes the intended tag; lockfile ownership remains. |
+| F027 | Resolved in Milestone 7.3a | Major version zero and prerelease identifiers are distinct, and retained publication guidance now consumes that decision. |
+| F028 | Resolved in Milestone 7.3a | SBOM, checksum, signature, and provenance applicability follow artifact content, consumer, risk, channel, and regulatory facts. |
+| F029 | Resolved in Milestone 7.3a | Release units may version independently or in lockstep, lockfiles follow dependency-resolution ownership, and publication pushes only the intended tag. |
 | F031 | Resolved in Milestone 4.1 | Acceptance claim fixtures independently model proof kind, environment qualification, and execution mode. |
 | D005 | Resolved in Milestone 7.1 | Commit and slice process is owned by implementation/commit workflows; prompts route only, and commit examples are non-normative reference. |
 | F032 | Resolved in Milestone 7.2c2 | Documentation examples, proportional workflow policy, and release-owned changelog semantics have canonical owners; the legacy documentation file is now a bounded migration index. |
 | F033 | Resolved in Milestone 7.2a | The commit disposition checker now filters its shared ledger by source; documentation rows have a separate owner-specific fixture. |
-| F034 | Partially resolved in Milestone 7.2c2 | The canonical release workflow owns foundation and documentation-sourced changelog semantics; remaining artifact, pipeline, rollback, and reference concerns continue in owner-bounded slices. |
+| F034 | Partially resolved in Milestone 7.3a | The canonical release workflow owns foundation, changelog, artifact, and reproducibility policy; remaining pipeline, rollback, and reference concerns continue in owner-bounded slices. |
 | F035 | Resolved in Milestone 7.2c1 | Contract and verification ownership checks now follow the canonical release workflow instead of requiring duplicate direct links from the legacy release index. |
+| F036 | Resolved in Milestone 7.3a | Retained pipeline and publication sections consume canonical artifact and prerelease decisions instead of restoring conflicting defaults. |
 
 ## Systemic Findings
 
@@ -56,6 +58,7 @@ changes and focused fixture evidence.
 | F033 | Fixture ownership | `verify-consolidation-dispositions.sh`; shared disposition ledger | Filter each owner-specific fixture by source and verify new source groups independently. | 7 |
 | F034 | Missing canonical owner | `owner-map.tsv`; `RELEASE-STANDARDS.md`; absent `workflows/release.md` | Establish release workflow ownership in an owner-bounded slice before moving changelog policy or closing the documentation index. | 7 |
 | F035 | Fixture ownership | Release checks in `verify-contract-ownership.sh` and `verify-verification-ownership.sh` | Validate the canonical release dependency chain and only require the legacy file to route to that owner. | 7 |
+| F036 | Dependent legacy override | Retained release pipeline and publication sections after partial migration | Make dependent legacy sections consume canonical decisions and verify that they cannot restore removed defaults. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

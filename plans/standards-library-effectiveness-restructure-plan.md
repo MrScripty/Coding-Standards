@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; documentation consolidation complete.
+**Current phase:** Milestone 7 active; release artifact policy consolidated.
 
-**Next slice:** Milestone 7.3a, migrate release artifact and packaging policy.
+**Next slice:** Milestone 7.3b, migrate release pipeline and publication policy.
 
 **Acceptance status:** `partial`
 
@@ -445,7 +445,7 @@ all structural/routing fixtures pass.
    - `7.2c2` (`Accepted`): migrate documentation-owned changelog identifiers
      and close the legacy documentation index.
 3. Owner-bounded topic/profile consolidation with correctness fixes, including:
-   - release artifact and packaging policy;
+   - `7.3a` (`Accepted`): release artifact and packaging policy;
    - release pipeline and publication policy;
    - release rollback and recovery policy; and
    - non-normative release tools, examples, and recipes.

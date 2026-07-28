@@ -4,10 +4,9 @@ Release applicability, versioning, changelog, contract-evolution, deprecation,
 migration, and acceptance policy moved to the canonical
 [Release Workflow](workflows/release.md).
 
-This file temporarily retains only unmigrated artifact/packaging,
-reproducible-build, pipeline/publication, channel/download, checklist,
-rollback, and tool-recipe guidance. These sections cannot override the
-canonical workflow.
+This file temporarily retains only unmigrated pipeline/publication,
+channel/download, checklist, rollback, and tool-recipe guidance. These sections
+cannot override the canonical workflow.
 
 ## Release Tool Recipes (Pending Reference Migration)
 
@@ -51,128 +50,6 @@ commit_parsers = [
     { message = "^ci", skip = true },
 ]
 ```
-
----
-
-## Release Artifacts
-
-### What to Ship
-
-| Artifact Type | When | Example |
-| ------------- | ---- | ------- |
-| Binary executables | Project produces CLI tools or servers | `my-server`, `my-server.exe` |
-| Shared libraries | Project produces native libraries | `libfoo.so`, `foo.dll`, `libfoo.dylib` |
-| Desktop applications | Project produces GUI apps | `.AppImage`, `.deb`, `.exe`, `.dmg` |
-| SHA256 checksums | Always | `checksums-sha256.txt` |
-| SBOM | Recommended for all releases | `my-tool-1.0.0-sbom.cdx.json` |
-| Source archives | Not needed — GitHub generates these automatically for tagged releases | |
-
-### Naming Convention
-
-Include version and platform target in every artifact filename. This is required
-because GitHub Release assets are flat (no subdirectories), and users need to
-identify the correct download.
-
-**Pattern:** `{name}-{version}-{target}[.ext]`
-
-Target naming varies by ecosystem. Use your toolchain's native convention:
-
-| Ecosystem | Example Target |
-| --------- | -------------- |
-| Rust | `x86_64-unknown-linux-gnu` |
-| Go | `linux-amd64` |
-| Node | `linux-x64` |
-| Python | `manylinux_x86_64` |
-
-| Artifact Type | Naming Pattern | Example |
-| ------------- | -------------- | ------- |
-| Binary (Linux) | `{name}-{version}-{target}` | `my-tool-0.2.0-x86_64-unknown-linux-gnu` |
-| Binary (Windows) | `{name}-{version}-{target}.exe` | `my-tool-0.2.0-x86_64-pc-windows-msvc.exe` |
-| Binary (macOS) | `{name}-{version}-{target}` | `my-tool-0.2.0-aarch64-apple-darwin` |
-| Shared lib (Linux) | `lib{name}-{version}-{target}.so` | `libmy_lib-0.2.0-x86_64-unknown-linux-gnu.so` |
-| Shared lib (Windows) | `{name}-{version}-{target}.dll` | `my_lib-0.2.0-x86_64-pc-windows-msvc.dll` |
-| Shared lib (macOS) | `lib{name}-{version}-{target}.dylib` | `libmy_lib-0.2.0-aarch64-apple-darwin.dylib` |
-| Desktop app (Linux) | `{AppName}-{version}.AppImage` | `MyApp-0.2.0.AppImage` |
-| Desktop app (Windows) | `{AppName}-Setup-{version}.exe` | `MyApp-Setup-0.2.0.exe` |
-| Desktop app (macOS) | `{AppName}-{version}.dmg` | `MyApp-0.2.0.dmg` |
-| Checksums | `checksums-sha256.txt` | `checksums-sha256.txt` |
-
-For platform naming conventions for shared libraries (prefix, extension), see
-[CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md#library-naming).
-
-### Checksum File Format
-
-Generate a single `checksums-sha256.txt` containing SHA256 hashes of all release
-artifacts. Use the standard two-space-separated format:
-
-```text
-b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c  my-tool-0.2.0-x86_64-unknown-linux-gnu
-7d865e959b2466918c9863afca942d0fb89d7c9ac0c99bafc3749504ded97730  my-tool-0.2.0-x86_64-pc-windows-msvc.exe
-```
-
-Generate with:
-
-```bash
-sha256sum * > checksums-sha256.txt          # Linux
-shasum -a 256 * > checksums-sha256.txt      # macOS
-```
-
-### Software Bill of Materials
-
-Generate a Software Bill of Materials (SBOM) in
-[CycloneDX](https://cyclonedx.org/) or [SPDX](https://spdx.dev/) format
-alongside release artifacts. An SBOM lists all dependencies bundled into the
-release, enabling downstream consumers to audit supply chain risk.
-
-**Naming convention:** `{name}-{version}-sbom.cdx.json` (CycloneDX) or
-`{name}-{version}-sbom.spdx.json` (SPDX).
-
-Ecosystem-agnostic generation tools:
-
-- [syft](https://github.com/anchore/syft) — Multi-ecosystem, generates CycloneDX and SPDX
-- [trivy](https://github.com/aquasecurity/trivy) — Also performs vulnerability scanning
-
-Include SBOM generation in the CI release pipeline alongside checksum generation.
-
----
-
-## Reproducible Builds
-
-The goal of reproducible builds is: same source + same toolchain + same
-dependencies = identical artifacts, regardless of when or where the build runs.
-
-### Toolchain Pinning
-
-Pin the toolchain version in a project-level config file so all developers and
-CI runners use the same compiler/interpreter version:
-
-| Ecosystem | Config File | Example |
-| --------- | ----------- | ------- |
-| Rust | `rust-toolchain.toml` | `channel = "1.78.0"` |
-| Node | `.node-version` or `.nvmrc` | `20.11.0` |
-| Python | `.python-version` | `3.12.1` |
-| Multi-tool | `.tool-versions` (asdf/mise) | `rust 1.78.0` |
-
-### Lockfile Policy
-
-Commit lockfiles for applications; omit them for libraries.
-
-| Project Type | Commit lockfile? | Reason |
-| ------------ | ---------------- | ------ |
-| Application / binary | Yes | Reproducible builds |
-| Library only | No | Let consumers resolve dependencies |
-| Workspace with any binary | Yes | Binary reproducibility takes priority |
-
-Examples of lockfiles by ecosystem: `Cargo.lock` (Rust), `package-lock.json` /
-`yarn.lock` (Node), `poetry.lock` / `uv.lock` (Python), `go.sum` (Go).
-
-### Build Hygiene
-
-- Do not embed timestamps, build-host paths, or other non-deterministic metadata
-  in artifacts
-- Use a consistent build environment (CI runners with pinned OS images, or
-  containerized builds)
-- Document the minimum toolchain version required to build the project
 
 ---
 
@@ -223,7 +100,7 @@ The build matrix must include all **required** platforms from
 Best-effort platforms are optional.
 
 ```yaml
-# Target values are ecosystem-specific (see Naming Convention above)
+# Target values come from the canonical artifact plan.
 strategy:
   fail-fast: false
   matrix:
@@ -241,9 +118,9 @@ Intel macOS targets, use `macos-13` (the last Intel runner generation).
 
 ### Artifact Upload
 
-Upload all distributable artifacts from the build step. Use the target
-identifier in the artifact name to avoid collisions when multiple platforms build
-on the same OS label:
+Upload the distributable artifacts selected by the canonical
+[Release Workflow](workflows/release.md#artifact-plan). Use its artifact
+identity in upload names to avoid collisions between matrix entries:
 
 ```yaml
 - name: Upload artifacts
@@ -269,22 +146,17 @@ release:
     contents: write
 ```
 
-The release job should:
+The release job should consume the accepted artifact plan:
 
 1. Download all build artifacts
-2. Rename artifacts with version and target (extract version from tag)
-3. Generate `checksums-sha256.txt`
-4. Generate SBOM
-5. Create a draft GitHub Release with all artifacts attached
+2. Apply the planned artifact identities
+3. Generate the selected integrity, provenance, and dependency metadata
+4. Create a draft release with the complete planned artifact set attached
 
 ```yaml
 - name: Extract version
   id: version
   run: echo "version=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
-
-- name: Generate checksums
-  working-directory: release-artifacts
-  run: sha256sum * > checksums-sha256.txt
 
 - name: Create release
   uses: softprops/action-gh-release@v2
@@ -297,9 +169,10 @@ The release job should:
 
 ### Code Signing
 
-Code signing (GPG for Linux, Authenticode for Windows, notarization for macOS)
-is recommended for production releases but not required for initial or pre-1.0
-releases. Add signing as a follow-up once the basic pipeline is stable.
+When the canonical artifact plan requires signatures, notarization, or
+provenance, the release pipeline must produce and verify that metadata for the
+final artifacts. Version maturity does not waive consumer, channel,
+organizational, or regulatory requirements.
 
 For supply chain maturity goals, see [SLSA](https://slsa.dev/) — Level 2+
 requires signed build provenance.
@@ -369,9 +242,9 @@ who publishes the draft should not be the same person who created the tag.
 
 ### Pre-Release Flag
 
-Use GitHub's pre-release flag for `0.x.y` releases to signal API instability.
-Users browsing releases will see the pre-release label and understand that the
-API may change.
+Set the hosting service's prerelease flag only when the accepted version has a
+prerelease identifier or the release channel contract explicitly classifies
+the artifact as prerelease. Major version zero alone is not that decision.
 
 ### Release Notes
 
@@ -384,24 +257,10 @@ notes.
 
 ### Asset Organization
 
-Assets should be self-describing via their filenames (see naming conventions
-above). Group related assets in the release description if there are many:
-
-```markdown
-## Downloads
-
-### Binaries
-- `my-tool-1.0.0-x86_64-unknown-linux-gnu` — Linux x86_64
-- `my-tool-1.0.0-x86_64-pc-windows-msvc.exe` — Windows x86_64
-- `my-tool-1.0.0-aarch64-apple-darwin` — macOS ARM
-
-### Shared Libraries
-- `libmy_lib-1.0.0-x86_64-unknown-linux-gnu.so` — Linux x86_64
-- ...
-
-### Checksums
-- `checksums-sha256.txt`
-```
+Present assets using the identities and relationships selected by the
+canonical artifact plan. Group related assets in the release description when
+that helps consumers select the correct download; do not invent a second naming
+scheme in publication automation.
 
 ---
 

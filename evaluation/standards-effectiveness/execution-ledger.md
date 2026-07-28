@@ -798,3 +798,51 @@ stable semantic fragments without weakening the required release policy.
 - All listed checks passed.
 
 **Next slice:** `7.3a`.
+
+## 2026-07-28: Milestone 7.3a Release Artifact Policy
+
+**Outcome:** Accepted.
+
+Moved frozen identifiers `STD-0543` through `STD-0551` into the canonical
+release workflow. Artifact selection now follows the release unit,
+distribution channel, supported targets, and consumer contract. Integrity,
+authenticity, provenance, and SBOM metadata are selected from actual consumer,
+artifact, risk, channel, organizational, and regulatory facts.
+
+Reproducibility claims now name controlled inputs and evidence. Toolchain and
+dependency pinning support those claims without standing in for them. Lockfile
+ownership follows the resolved dependency closure used by released artifacts,
+including mixed workspaces, rather than an application-versus-library label.
+
+During dependency review, retained pipeline and publication text was found to
+restore universal checksum/SBOM/signing defaults and to classify every `0.x`
+version as prerelease. This was recorded as `F036`. Those pending sections now
+consume the canonical artifact and prerelease decisions without otherwise
+moving their frozen identifiers.
+
+**No-fallback/legacy result:**
+
+- Legacy artifact and reproducibility sections were removed.
+- Pending pipeline and publication sections cannot restore artifact metadata
+  defaults or reinterpret major version zero.
+- Unknown required artifact facts produce a typed diagnostic.
+
+**Write set:**
+
+- `workflows/release.md`
+- `RELEASE-STANDARDS.md`
+- `README.md`
+- release artifact decision fixture and ownership checks
+- dispositions, findings, plan, and this ledger
+
+**Verification:**
+
+- Release artifact and workflow foundation fixtures.
+- Documentation, contract, verification, acceptance, disposition, and
+  traceability regressions.
+- Metadata, plan structure, and plan lifecycle fixtures.
+- Shell syntax, whitespace, and link review.
+- `S1 route passed: 6 modules, 595/11066 baseline lines`.
+- All listed checks passed.
+
+**Next slice:** `7.3b`.

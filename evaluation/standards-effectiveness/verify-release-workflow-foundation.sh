@@ -106,10 +106,15 @@ if rg -q "$removed_headings" "$LEGACY"; then
   exit 1
 fi
 
-for retained in "## Release Artifacts" "## CI/CD Release Pipeline" \
-  "## Rollback Procedure" "## Release Tool Recipes"; do
+for retained in "## CI/CD Release Pipeline" "## Rollback Procedure" \
+  "## Release Tool Recipes"; do
   rg -F -q "$retained" "$LEGACY"
 done
+
+if rg -q '^## (Release Artifacts|Reproducible Builds)$' "$LEGACY"; then
+  printf 'Migrated artifact foundation remains in the legacy file\n' >&2
+  exit 1
+fi
 
 removed_rules=(
   'All versioned software must follow'
