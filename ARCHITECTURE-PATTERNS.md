@@ -199,51 +199,16 @@ own it. If the backend stores or acts on this data, the backend owns it.
 
 ---
 
-## Immutable Contracts
+## Contract Planning Boundary
 
-### The Pattern
+Use [Contract Evolution And Degraded Outcomes](topics/contracts.md) before
+freezing or changing a shared contract. Contract stability, append-only
+evolution, coordinated replacement, migration, and version overlap depend on
+actual consumers, deployment, persistence, generated sources, and external
+promises.
 
-Define shared interfaces/types FIRST, freeze them, then build implementations.
-
-```
-Phase 1: Define contracts (types, interfaces)
-    ↓
-Phase 2: Freeze contracts
-    ↓
-Phase 3: Implement against frozen contracts
-```
-
-### Contract Rules
-
-1. **Define before implementing** - Contracts come first
-2. **Freeze before parallel work** - No changes during implementation
-3. **Append-only changes** - Add new types, don't modify existing
-4. **Breaking changes require sync** - All parties must agree
-
-### Example Contract
-
-```typescript
-// contracts/message.ts - FROZEN
-
-interface Message {
-    type: MessageType;
-    action: string;
-    payload: unknown;
-    id?: string;
-}
-
-type MessageType =
-    | 'request'
-    | 'response'
-    | 'notification';
-    // New types can be added, existing cannot change
-```
-
-### Benefits
-
-- **Parallel development:** Teams can work independently
-- **Integration confidence:** Interfaces guaranteed to match
-- **Clear boundaries:** Explicit API between components
+Freeze the selected contract shape while parallel work depends on it. Do not
+turn that implementation-phase freeze into an indefinite compatibility promise.
 
 ---
 
@@ -1020,18 +985,19 @@ phases do not recompute or accidentally read partially mutated state.
 
 ### The Pattern
 
-Every schema change is captured as a numbered, idempotent migration. Migrations
-are applied in order at startup, and a version table tracks which migrations
-have been applied. This ensures reproducible schema state across environments
-and safe upgrades when different application versions share the same database.
+Use migrations when [the contract decision](topics/contracts.md) requires
+retained persisted states to move between schema versions. A project may use
+numbered migrations applied in order with a version table; other stores may use
+transactional replacement, export/import, or explicit rejection when their
+recorded contract permits it.
 
 ### Migration Rules
 
 | Rule | Rationale |
 |------|-----------|
-| Migrations are append-only | Never modify a released migration — create a new one |
-| Each migration is idempotent | Safe to run twice (use `IF NOT EXISTS`, `IF EXISTS`) |
-| Include both up and down logic | Enables rollback during failed deployments |
+| Published migrations are immutable while supported states depend on them | Preserve reproducibility for retained data |
+| Re-entry behavior is explicit | Use idempotency or enforce one-shot transactional preconditions |
+| Rollback behavior is explicit | Provide down migration, restore, forward repair, or documented no-rollback handling |
 | A version table tracks applied migrations | Know exactly what state the schema is in |
 | Test migrations against realistic data | Empty-table migrations can mask column-type or constraint issues |
 
@@ -1073,9 +1039,10 @@ function apply_pending_migrations(database, migrations):
         log applied migration
 ```
 
-### Forward/Backward Compatibility
+### Version Overlap
 
-When different application versions may access the same database:
+Only require coexistence when recorded deployment facts allow different
+application versions to access the same database:
 
 | Change Type | Strategy | Example |
 |------------|----------|---------|
@@ -1084,94 +1051,24 @@ When different application versions may access the same database:
 | Remove column | Two-phase removal | Deprecate in v*N*, stop reading in v*N+1*, drop in v*N+2* |
 | Rename column | Add new + copy + two-phase remove old | Older versions still read the old column |
 
-**The rule:** Additive changes are safe. Destructive changes (drop, rename,
-change type) require a two-phase rollout so that the old and new versions of the
-application can coexist during deployment.
+Additive changes can still break defaults, constraints, readers, or exhaustive
+consumers. Validate each change against the selected contract class. When all
+consumers deploy atomically and retained states are migrated, coordinated
+destructive replacement does not require a speculative two-phase shim.
 
 ---
 
-## Infrastructure Failure Recovery
+## Infrastructure Failure Outcomes
 
-### The Pattern
+Use [Degraded Outcomes](topics/contracts.md#degraded-outcomes) to decide whether
+an unavailable database, cache, file, or service permits continued operation.
+The label `optional` does not authorize defaults, deletion, stale cache reads,
+partial results, alternate backends, or startup success.
 
-Infrastructure (databases, caches, file system, external services) can fail
-independently of application logic. The application must categorize each piece
-of infrastructure as **required** or **optional** and respond appropriately to
-failures — never silently corrupt state, never crash on a non-essential failure.
-
-**The principle:** Optional infrastructure is best-effort. Its failure must
-never block core initialization or request handling.
-
-### Failure Categories
-
-| Category | Examples | Recovery Strategy |
-|----------|----------|-------------------|
-| Corrupt data store | Corrupted SQLite DB, invalid JSON config | Delete and rebuild from scratch, or seed defaults |
-| Unavailable resource | Disk full, permissions changed | Log error, degrade gracefully, retry on next operation |
-| Stale or missing cache | Cache file deleted, format changed | Treat as cold start, rebuild lazily |
-| External service down | API timeout, DNS failure | Use cached fallback or return partial results |
-
-### Decision Flow
-
-```
-Infrastructure operation fails
-    │
-    ├── Is this infrastructure required for the current operation?
-    │       │
-    │       ├── Yes → Propagate the error to the caller
-    │       │
-    │       └── No → Log a warning, continue with defaults or degraded mode
-    │
-    └── Is this a startup-time failure?
-            │
-            ├── Required infrastructure → Fail with a clear error message
-            │
-            └── Optional infrastructure → Start in degraded mode, log warning
-```
-
-### Startup Resilience
-
-Categorize infrastructure at initialization:
-
-| Infrastructure | Category | Failure at Startup |
-|----------------|----------|--------------------|
-| Core database / primary data store | Required | Fail with clear error message |
-| Cache, index, or search | Optional | Start degraded, rebuild in background |
-| Analytics, telemetry, logging sinks | Optional | Start without, retry later |
-| Configuration file | Required | Fail with clear error message |
-
-**The rule:** The application must start and serve requests even if optional
-infrastructure is unavailable. See [CODING-STANDARDS.md](CODING-STANDARDS.md)
-`## Error Handling` for code-level error handling patterns; this section covers
-the architectural decision of *which failures to tolerate*.
-
-### Best-Effort Service Pattern
-
-Wrap optional infrastructure in a layer that catches failures, logs them,
-and returns safe defaults:
-
-```text
-class BestEffortRegistry:
-    function lookup(key):
-        if optional database is unavailable:
-            return no value
-
-        try:
-            return lookup value
-        catch lookup error:
-            log warning
-            return no value
-
-    function is_healthy():
-        return optional database is available
-```
-
-### Benefits
-
-- System remains available during partial infrastructure failures
-- Clear separation of essential vs optional dependencies
-- Predictable behavior under degraded conditions
-- Failures are logged for diagnosis without crashing the application
+Delete and rebuild only explicitly disposable derived state with a known
+authoritative reconstruction source. Otherwise preserve authoritative data and
+return the selected typed unavailable, invalid, unsupported, or deferred
+outcome.
 
 ---
 

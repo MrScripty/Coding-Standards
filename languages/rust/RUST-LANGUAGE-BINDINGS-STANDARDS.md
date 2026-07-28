@@ -5,6 +5,9 @@ single core library. For low-level FFI safety rules (boundary validation, buffer
 copying, unsafe isolation), see [RUST-INTEROP-STANDARDS.md](RUST-INTEROP-STANDARDS.md).
 For platform-specific build concerns (library naming, CI matrix), see
 [RUST-CROSS-PLATFORM-STANDARDS.md](RUST-CROSS-PLATFORM-STANDARDS.md).
+For generated, public, ABI, persisted, and independently deployed compatibility
+decisions, see
+[Contract Evolution And Degraded Outcomes](../../topics/contracts.md).
 
 ## Three-Layer Architecture
 
@@ -129,9 +132,9 @@ generated host bindings are optional layers over a shared native implementation.
 ### Compatibility Notes
 
 - Product-facing naming may differ from the internal wrapper crate name.
-- If a native library name or generated package name changes, follow the
-  deprecation and migration expectations in
-  [RUST-RELEASE-STANDARDS.md](RUST-RELEASE-STANDARDS.md).
+- If a native library name or generated package name changes, apply its
+  recorded contract class. Coordinated internal artifacts may be replaced
+  atomically; independently consumed artifacts follow their published window.
 - Binding packages should state whether they are source-only/generated-only or
   whether they intentionally bundle the native product library as a convenience
   artifact.
@@ -443,11 +446,18 @@ impl TaskExecutor for CoreFirstExecutor {
     ) -> Result<serde_json::Value, EngineError> {
         match self.core.execute_task(node_type, inputs.clone()).await {
             Ok(result) => Ok(result),
-            Err(_) => self.host.execute_task(node_type, inputs).await,
+            Err(EngineError::UnsupportedNodeType { .. }) => {
+                self.host.execute_task(node_type, inputs).await
+            }
+            Err(error) => Err(error),
         }
     }
 }
 ```
+
+Delegate only the explicit unsupported outcome that the composite contract
+assigns to the next executor. Validation, execution, cancellation, and resource
+errors must remain their original typed failures.
 
 ---
 
@@ -807,13 +817,19 @@ organization and naming conventions.
 
 ### Rules
 
-1. **Additive changes are backward-compatible:** new methods, new record fields
-   with defaults, new enum variants.
-2. **Removals and renames are breaking:** removing or renaming methods, fields,
-   or enum variants requires a major version bump.
-3. **Re-generate bindings after every API change** and test all target
+1. **Classify each boundary independently:** generated source, host package,
+   native package, ABI, wire data, and persisted data may have different
+   consumers and compatibility windows.
+2. **Do not assume additive means compatible:** new enum variants, required
+   behavior, defaults, fields, methods, or generated shapes can break exhaustive
+   or older host consumers.
+3. **Use coordinated replacement only for atomically deployed consumers.**
+   Public or independently deployed bindings follow their published versioning
+   and negotiation contract.
+4. **Re-generate bindings after every API change** and test all supported target
    languages before release.
-4. **The FFI wrapper crate version should track the core library version.**
+5. **Version artifacts from one release input without assuming one version
+   number gives them one compatibility promise.**
 
 ### Version Export
 

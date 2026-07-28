@@ -12,6 +12,8 @@ in
 For low-level boundary safety, see [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md).
 For platform-specific build concerns, see
 [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md).
+For generated, public, ABI, and independently deployed compatibility decisions,
+see [Contract Evolution And Degraded Outcomes](topics/contracts.md).
 
 ## Core Principles
 
@@ -48,8 +50,9 @@ Rules:
    contain business logic.
 4. Multiple binding frameworks may coexist only if they wrap the same core
    contract through separate adapters.
-5. Release artifacts must make native library, generated binding package, and
-   version compatibility explicit.
+5. Release artifacts must identify native library and generated binding package
+   versions and apply the selected contract policy to each independently
+   consumed artifact.
 
 ## Language-Specific Extensions
 

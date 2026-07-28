@@ -458,14 +458,16 @@ GOOD: Shared helper
 
 ### Delete Unused Code
 
-Don't leave backwards-compatibility hacks:
+Remove speculative or expired compatibility code. Preserve a compatibility path
+only when [the contract decision](topics/contracts.md) identifies a real
+consumer and active support window.
 
 ```
-// BAD: Keeping dead code
+// BAD: Keeping dead code for an unverified consumer
 const _oldVariable = null;  // Unused, kept for "compatibility"
 // removed: oldFunction()
 
-// GOOD: Just delete it
+// GOOD: Delete it after coordinated replacement or support-window expiry
 // (nothing here - it's gone)
 ```
 

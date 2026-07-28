@@ -309,3 +309,44 @@
 - Shell syntax, whitespace, links, and staged-scope checks passed.
 
 **Commit:** `docs(contracts): add fact-driven evolution policy`
+
+## 2026-07-28: Milestone 5.2 Legacy Contract Policy Removal
+
+**Outcome:** Accepted.
+
+**Write set:**
+
+- architecture and coding guidance;
+- interop, root binding, Rust binding, and release guidance;
+- root index;
+- contract ownership checker;
+- evaluation README, ledger, findings, and active plan.
+
+**Delivered:**
+
+- removed universal append-only contracts and mandatory two-phase coexistence;
+- made persistence migration, re-entry, and rollback mechanisms conditional on
+  recorded retained-state and deployment contracts;
+- removed delete/default/cache/partial-result degraded-mode advice;
+- classified cross-language and Rust binding compatibility per actual boundary;
+- limited release deprecation to public-versioned promises; and
+- replaced catch-all host executor fallback with typed unsupported delegation.
+
+**No-fallback/legacy result:**
+
+- Legacy documents link to `topics/contracts.md` and no longer own competing
+  evolution or degraded-mode policy.
+- Coordinated internal replacement removes old paths rather than preserving
+  speculative shims.
+- Validation, execution, cancellation, and resource failures cannot be
+  reinterpreted as unsupported delegation.
+
+**Verification:**
+
+- Contract ownership and decision fixtures passed.
+- Existing verification ownership, acceptance, lifecycle, metadata, and S1
+  routing regressions passed.
+- Canonical template and active plan passed structure checks.
+- Shell syntax, whitespace, links, and staged-scope checks passed.
+
+**Commit:** `docs(contracts): remove legacy fallback policy`

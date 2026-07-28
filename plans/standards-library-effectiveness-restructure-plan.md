@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5.1 accepted; contract decisions are fact-driven.
+**Current phase:** Milestones 0-5 accepted; contract policy has one owner.
 
-**Next slice:** Milestone 5.2, remove conflicting legacy contract and fallback rules.
+**Next slice:** Milestone 6, proportional documentation and commit process.
 
 **Acceptance status:** `partial`
 
@@ -372,7 +372,7 @@ evidence cannot satisfy a criterion.
 - [x] Require authority and semantic fidelity for degraded behavior.
 - [x] Require typed unavailable/invalid/deferred outcomes when no valid
   decision can be made.
-- [ ] Reconcile affected coding, architecture, interop, persistence, release,
+- [x] Reconcile affected coding, architecture, interop, persistence, release,
   and profile guidance.
 
 **Write set:** canonical evolution topic, affected indexes/profiles, fixtures,
@@ -387,7 +387,7 @@ persistence migration, and invalid fallback.
 2. Remove or replace conflicting architecture, coding, persistence, interop,
    release, and binding rules.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 6: Proportional Documentation And Commit Process
 

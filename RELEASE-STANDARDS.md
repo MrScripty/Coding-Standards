@@ -7,6 +7,11 @@ Versioning, changelog management, artifact packaging, and CI/CD release pipeline
 > procedure, artifact production, and publication. Shipping gates consume the
 > required claims without redefining them.
 
+> **Evolution authority:** [topics/contracts.md](topics/contracts.md) selects
+> compatibility, migration, and coordinated replacement from actual consumers
+> and deployment facts. Release versioning implements public or independently
+> consumed promises; it does not create them for internal coordinated code.
+
 ## Semantic Versioning
 
 All versioned software must follow [Semantic Versioning 2.0.0](https://semver.org/).
@@ -36,7 +41,9 @@ Document all breaking changes in the changelog regardless of version.
 
 ### Deprecation Policy
 
-Deprecated features must follow a structured timeline before removal:
+Deprecated `public-versioned` features follow a structured timeline before
+removal. Internal coordinated contracts may be replaced atomically when all
+consumers and retained states move together.
 
 1. **Announce** — Record the deprecation in the changelog under the `Deprecated`
    category. Include what is deprecated, why, and what replaces it

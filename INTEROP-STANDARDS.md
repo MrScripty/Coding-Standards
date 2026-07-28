@@ -111,12 +111,20 @@ eventBus.off('data:updated', handleUpdate);
 When message types or API contracts are defined in multiple languages,
 they must stay in sync.
 
+Classify generated sources, public APIs, ABIs, persisted values, and
+independently deployed consumers with
+[Contract Evolution And Degraded Outcomes](topics/contracts.md). Cross-language
+does not by itself require indefinite backward compatibility.
+
 ### Rules
 
-1. **Define contracts in both languages in the same commit** — prevents drift
+1. **Update coordinated repository-owned definitions in the same commit** —
+   prevents drift
 2. **Add the handler/listener on both sides together** — prevents dead messages
 3. **Use shared schema files when possible** — protobuf, JSON Schema, or OpenAPI
    generate types for both sides from a single source of truth
+4. **Version or negotiate independently deployed boundaries** — reject
+   unsupported versions explicitly instead of guessing a compatible shape
 
 ### Validate Received Messages
 
@@ -165,7 +173,8 @@ casing.
    in the other, and verify the result matches
 3. **Use a shared schema when possible** — OpenAPI, JSON Schema, or protobuf
    definitions generate types for both sides from a single source of truth
-4. **Update both sides in the same commit** — prevents drift between languages
+4. **Update coordinated sides in the same commit** — independently deployed
+   sides follow their version window and negotiation contract
 
 ---
 

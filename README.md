@@ -22,6 +22,7 @@ reference material.
 | [workflows/implementation.md](workflows/implementation.md) | Bounded implementation slices and commit boundary | Any repository change |
 | [workflows/planning.md](workflows/planning.md) | Active plans, lifecycle, re-planning, and delegated ownership | Multi-step or high-risk work |
 | [workflows/verification.md](workflows/verification.md) | Objective-aligned evidence selection | Any acceptance claim |
+| [topics/contracts.md](topics/contracts.md) | Contract classes, migration, compatibility, degraded outcomes, and typed unavailability | Contract or persisted-state evolution and fallback decisions |
 | [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
 | [profiles/languages/rust/README.md](profiles/languages/rust/README.md) | Rust mechanisms and focused verification | Rust-owned changes |
 | [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, simplicity/complection guidance, layering, service independence, runtime wiring guidance | Setting up any new codebase |

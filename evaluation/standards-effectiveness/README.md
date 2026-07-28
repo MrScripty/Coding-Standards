@@ -108,6 +108,12 @@ invalid, or unsupported outcomes. It rejects replacement across independent or
 authoritative-state boundaries and degradation without an authoritative,
 semantically equivalent source.
 
+`verify-contract-ownership.sh` checks that legacy architecture, coding,
+interop, release, and binding guidance links to the canonical topic and does not
+restore universal append-only evolution, mandatory coexistence, destructive
+recovery, untyped cache/default fallback, blanket additive compatibility, or
+catch-all executor delegation.
+
 ## Scoring
 
 Each rubric dimension is scored:
