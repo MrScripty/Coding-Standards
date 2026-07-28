@@ -24,6 +24,7 @@ reference material.
 | [workflows/planning.md](workflows/planning.md) | Active plans, lifecycle, re-planning, and delegated ownership | Multi-step or high-risk work |
 | [workflows/verification.md](workflows/verification.md) | Objective-aligned evidence selection | Any acceptance claim |
 | [workflows/documentation.md](workflows/documentation.md) | Proportional durable documentation and traceability profiles | Responsibility, decision, contract, or operational-boundary changes |
+| [reference/recipes/commits.md](reference/recipes/commits.md) | Non-normative staging and conventional commit examples | Formatting a commit after the workflow has selected process rules |
 | [topics/contracts.md](topics/contracts.md) | Contract classes, migration, compatibility, degraded outcomes, and typed unavailability | Contract or persisted-state evolution and fallback decisions |
 | [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
 | [profiles/languages/rust/README.md](profiles/languages/rust/README.md) | Rust mechanisms and focused verification | Rust-owned changes |

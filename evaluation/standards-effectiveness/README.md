@@ -136,6 +136,14 @@ branch-history review and history-maintenance authority. It permits rewriting
 only for an explicitly authorized, unshared, recoverable range, distinguishes
 linear and merge topology, and rejects the removed mandatory cleanup policy.
 
+## Consolidation Dispositions
+
+`consolidation-dispositions.tsv` records the final owner and disposition of
+every frozen section identifier as roles are migrated.
+`verify-consolidation-dispositions.sh` currently proves complete, unique
+coverage for all 68 `COMMIT-STANDARDS.md` identifiers, validates target owners,
+and ensures the legacy path is only a bounded migration index.
+
 ## Scoring
 
 Each rubric dimension is scored:

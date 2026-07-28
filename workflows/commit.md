@@ -18,10 +18,12 @@ Before every commit:
 
 1. inspect repository status;
 2. confirm only the declared slice write set is staged;
-3. review the staged diff and generated-file effects;
-4. run the focused and affected verification selected for the slice;
-5. update active plan, issue, and ledger state when those artifacts exist; and
-6. create one atomic conventional commit that describes the coherent outcome.
+3. review the staged diff, generated-file effects, and sensitive-file risk;
+4. confirm credentials, secrets, personal configuration, and unintended binary
+   artifacts are absent;
+5. run the focused and affected verification selected for the slice;
+6. update active plan, issue, and ledger state when those artifacts exist; and
+7. create one atomic conventional commit that describes the coherent outcome.
 
 Per-commit review concerns the index and the current slice. Do not require a
 full unpushed-history audit before every atomic commit.
@@ -80,11 +82,14 @@ Do not flatten merges as a default cleanup strategy.
 ## Commit Message
 
 Use the repository's conventional commit format. The subject states the
-observable change in imperative mood. The body explains material rationale,
-scope, and contract effects when the subject is insufficient.
+observable change concisely in imperative mood. The body explains material
+rationale, scope, and contract effects when the subject is insufficient.
 
 Keep command logs and verification output in the plan ledger, pull request, or
 completion record rather than the commit message.
+
+See the non-normative [Commit Recipe](../reference/recipes/commits.md) for
+syntax, staging commands, footer forms, and examples.
 
 ## Invalid Outcomes
 

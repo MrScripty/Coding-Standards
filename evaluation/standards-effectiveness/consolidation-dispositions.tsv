@@ -1,0 +1,69 @@
+id	source	target	disposition	rationale
+STD-0195	COMMIT-STANDARDS.md	COMMIT-STANDARDS.md	index	legacy path retained as migration index
+STD-0196	COMMIT-STANDARDS.md	workflows/commit.md	move	conventional message contract
+STD-0197	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	format component explanation
+STD-0198	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	type examples
+STD-0199	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	type selection examples
+STD-0200	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	scope examples
+STD-0201	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	scope table example
+STD-0202	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	scope writing advice
+STD-0203	COMMIT-STANDARDS.md	workflows/commit.md	move	subject contract
+STD-0204	COMMIT-STANDARDS.md	workflows/commit.md	move	imperative subject rule
+STD-0205	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	specific subject examples
+STD-0206	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	project-specific length advice
+STD-0207	COMMIT-STANDARDS.md	workflows/commit.md	move	body ownership rule
+STD-0208	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	footer forms
+STD-0209	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	breaking footer example
+STD-0210	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	issue footer example
+STD-0211	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	co-author footer example
+STD-0212	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	agent footer example
+STD-0213	COMMIT-STANDARDS.md	workflows/commit.md	move	per-commit boundary
+STD-0214	COMMIT-STANDARDS.md	workflows/commit.md	move	status inspection
+STD-0215	COMMIT-STANDARDS.md	workflows/commit.md	move	staged diff review
+STD-0216	COMMIT-STANDARDS.md	workflows/commit.md	move	branch review rescheduled
+STD-0217	COMMIT-STANDARDS.md	workflows/commit.md	move	explicit base requirement
+STD-0218	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	range syntax example
+STD-0219	COMMIT-STANDARDS.md	workflows/commit.md	move	affected static checks
+STD-0220	COMMIT-STANDARDS.md	workflows/commit.md	move	affected verification
+STD-0221	COMMIT-STANDARDS.md	workflows/commit.md	move	atomic conventional commit
+STD-0222	COMMIT-STANDARDS.md	none	remove	unsafe mandatory rewrite policy
+STD-0223	COMMIT-STANDARDS.md	none	remove	legacy cleanup workflow
+STD-0224	COMMIT-STANDARDS.md	none	remove	per-commit full-history command
+STD-0225	COMMIT-STANDARDS.md	none	remove	implicit upstream fallback
+STD-0226	COMMIT-STANDARDS.md	none	remove	implicit range example
+STD-0227	COMMIT-STANDARDS.md	none	remove	unauthorized fixup instruction
+STD-0228	COMMIT-STANDARDS.md	none	remove	unauthorized autosquash instruction
+STD-0229	COMMIT-STANDARDS.md	none	remove	implicit base fallback
+STD-0230	COMMIT-STANDARDS.md	none	remove	implicit base example
+STD-0231	COMMIT-STANDARDS.md	workflows/commit.md	move	atomic slice frequency
+STD-0232	COMMIT-STANDARDS.md	workflows/commit.md	move	small coherent commits
+STD-0233	COMMIT-STANDARDS.md	workflows/commit.md	move	atomic reviewable boundary
+STD-0234	COMMIT-STANDARDS.md	workflows/commit.md	move	staged scope ownership
+STD-0235	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	specific staging recipe
+STD-0236	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	broad staging caution
+STD-0237	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	specific staging example
+STD-0238	COMMIT-STANDARDS.md	workflows/commit.md	move	staged review rule
+STD-0239	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	staged diff command
+STD-0240	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	interactive staging command
+STD-0241	COMMIT-STANDARDS.md	workflows/commit.md	move	sensitive artifact exclusion
+STD-0242	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	message examples
+STD-0243	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	feature example
+STD-0244	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	fix example
+STD-0245	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	refactor example
+STD-0246	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	chore example
+STD-0247	COMMIT-STANDARDS.md	workflows/commit.md	move	history error handling
+STD-0248	COMMIT-STANDARDS.md	none	remove	unrestricted amend policy
+STD-0249	COMMIT-STANDARDS.md	none	remove	unrestricted message amend
+STD-0250	COMMIT-STANDARDS.md	none	remove	unrestricted content amend
+STD-0251	COMMIT-STANDARDS.md	workflows/commit.md	move	shared-history correction
+STD-0252	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	follow-up fix example
+STD-0253	COMMIT-STANDARDS.md	workflows/commit.md	move	topology ownership
+STD-0254	COMMIT-STANDARDS.md	none	remove	blanket squash criteria
+STD-0255	COMMIT-STANDARDS.md	workflows/commit.md	move	meaningful boundary retention
+STD-0256	COMMIT-STANDARDS.md	none	remove	blanket merge rewrite permission
+STD-0257	COMMIT-STANDARDS.md	workflows/commit.md	move	merge-aware topology handling
+STD-0258	COMMIT-STANDARDS.md	none	remove	implicit merge base fallback
+STD-0259	COMMIT-STANDARDS.md	none	remove	implicit merge base example
+STD-0260	COMMIT-STANDARDS.md	workflows/commit.md	move	post-rewrite graph verification
+STD-0261	COMMIT-STANDARDS.md	none	remove	implicit verification range
+STD-0262	COMMIT-STANDARDS.md	none	remove	implicit verification example

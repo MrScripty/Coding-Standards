@@ -472,3 +472,41 @@
   checks passed.
 
 **Commit:** `docs(commit): require explicit rewrite authority`
+
+## 2026-07-28: Milestone 7.1 Commit Role Consolidation
+
+**Outcome:** Accepted.
+
+**Write set:**
+
+- canonical commit workflow;
+- commit recipe reference;
+- legacy commit migration index and root index;
+- consolidation disposition map/checker;
+- evaluation records and active plan.
+
+**Delivered:**
+
+- dispositioned all 68 frozen `COMMIT-STANDARDS.md` section identifiers;
+- retained process, safety, atomicity, and history authority only in
+  `workflows/commit.md`;
+- moved syntax, staging commands, footers, and examples to a `REFERENCE` module;
+- reduced the legacy standard to a link-only migration index; and
+- preserved sensitive-file exclusion in the canonical per-commit boundary.
+
+**No-fallback/legacy result:**
+
+- The legacy file owns no competing policy.
+- Removed blanket rewrite instructions have `remove` dispositions rather than
+  compatibility copies.
+- Reference examples cannot weaken or authorize workflow behavior.
+
+**Verification:**
+
+- Commit consolidation dispositions and authority fixtures passed.
+- Canonical reference/workflow metadata passed.
+- Documentation, traceability, contract, verification, acceptance, lifecycle,
+  and S1 routing regressions passed.
+- Shell syntax, whitespace, links, and staged-scope checks passed.
+
+**Commit:** `docs(consolidation): split commit workflow and reference`

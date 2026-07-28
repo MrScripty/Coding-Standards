@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestones 0-6 accepted; documentation and process obligations are proportional.
+**Current phase:** Milestone 7 active; commit workflow and reference ownership are consolidated.
 
-**Next slice:** Milestone 7.1, consolidate commit guidance into canonical workflow and reference owners.
+**Next slice:** Milestone 7.2, consolidate documentation guidance into workflow and reference owners.
 
 **Acceptance status:** `partial`
 
@@ -431,7 +431,14 @@ retain durable traceability and atomic review.
 **Gate:** Every rule identifier has a final disposition; duplication target and
 all structural/routing fixtures pass.
 
-**Status:** `Planned`
+**Slices:**
+
+1. Commit workflow, recipe reference, legacy index, and frozen-ID dispositions.
+2. Documentation workflow, reference material, legacy index, and dispositions.
+3. Owner-bounded topic/profile consolidation with correctness fixes.
+4. Final legacy-index review, disposition closure, and duplication gate.
+
+**Status:** `Active`
 
 ### Milestone 8: Pilot And Adoption
 
