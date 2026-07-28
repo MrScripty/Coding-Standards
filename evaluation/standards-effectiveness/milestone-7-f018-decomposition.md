@@ -50,6 +50,26 @@ order.
 The slices are serial. No other trust-boundary or consolidation slice may run
 between them while unsafe IPC guidance remains active.
 
+## Planning Correction 7.4b2a1: Lifecycle Handoff
+
+The decomposition checker is an allowed adjacent file for both implementation
+slices. It may change only to preserve the approved identifier, owner,
+disposition, lifecycle, and next-slice contracts as dispositions are accepted.
+It cannot weaken semantic gates, remove fixture requirements, or admit partial
+disposition states.
+
+The valid checked states are:
+
+1. both slices `Planned`, no F018 dispositions, next slice `7.4b2b`;
+2. `7.4b2b` `Accepted`, its four dispositions complete, `7.4b2c` `Planned`,
+   next slice `7.4b2c`; or
+3. both slices `Accepted`, all fourteen dispositions complete, and neither
+   completed slice remains next.
+
+The correction slice may touch only this report, the F018 decomposition
+checker, the active plan, and execution ledger. It changes no normative owner,
+frozen-ID proposal, fixture contract, objective, or implementation order.
+
 ## Slice 7.4b2b: Runtime-Decoding Proof
 
 **Allowed write set:**
@@ -58,6 +78,8 @@ between them while unsafe IPC guidance remains active.
 - `ARCHITECTURE-PATTERNS.md`;
 - `evaluation/standards-effectiveness/fixtures/contracts/runtime-decoding-decisions.tsv`;
 - `evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh`;
+- `evaluation/standards-effectiveness/verify-milestone-7-f018-decomposition.sh`
+  for lifecycle/disposition handoff only;
 - consolidation dispositions, evaluation README, findings, active plan, and
   execution ledger.
 
@@ -104,6 +126,8 @@ competing rules, and focused plus affected global regressions pass.
 - `README.md`;
 - `evaluation/standards-effectiveness/fixtures/ipc/action-payload-decisions.tsv`;
 - `evaluation/standards-effectiveness/verify-ipc-payload-validation.sh`;
+- `evaluation/standards-effectiveness/verify-milestone-7-f018-decomposition.sh`
+  for lifecycle/disposition handoff only;
 - consolidation dispositions, evaluation README, findings, active plan, and
   execution ledger.
 

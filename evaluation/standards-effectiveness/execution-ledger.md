@@ -1258,3 +1258,32 @@ standards-effectiveness regressions pass.
 Finding `F018` remains open until both implementation slices are accepted.
 
 **Next slice:** `7.4b2b`.
+
+## 2026-07-28: Milestone 7.4b2a1 Lifecycle-Handoff Correction
+
+**Outcome:** Accepted.
+
+Pre-slice review found that the F018 decomposition checker required `7.4b2b`
+to remain `Planned`, while accepting that implementation slice requires the
+active plan to mark it `Accepted`. The checker was outside the implementation
+write set, so implementation stopped before normative edits.
+
+The decomposition now permits its checker as an adjacent file for lifecycle
+and disposition handoff only. The checker derives three valid states from exact
+disposition counts: both slices planned with `7.4b2b` next; only `7.4b2b`
+accepted with `7.4b2c` next; or both accepted with neither remaining next. It
+rejects partial dispositions, out-of-order acceptance, duplicate lifecycle
+states, and completed slices retained as next.
+
+**No-fallback/legacy result:** the correction changes no normative guidance,
+identifier proposal, owner, fixture contract, typed outcome, or sequence. It
+does not permit implementation acceptance without matching final
+dispositions.
+
+**Verification:** the corrected F018 checker passes in the initial zero-
+disposition state. Isolated lifecycle cases pass with `4/4` plus `0/10`
+dispositions and with `4/4` plus `10/10`; a partial `3/4` state is rejected.
+Plan structure, plan fixtures, shell syntax, whitespace, and all
+standards-effectiveness regressions pass.
+
+**Next slice:** `7.4b2b`.

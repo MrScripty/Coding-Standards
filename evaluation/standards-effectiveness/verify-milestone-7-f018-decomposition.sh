@@ -19,6 +19,8 @@ mapfile -t actual_ids < <(tail -n +2 "$MAP" | cut -f3)
 [[ "$(printf '%s\n' "${actual_ids[@]}" | sort | uniq -d | wc -l)" -eq 0 ]]
 
 row_count=0
+disposed_b=0
+disposed_c=0
 while IFS=$'\t' read -r slice order id source target disposition rationale extra; do
   if [[ "$slice" == 'slice' ]]; then
     [[ "$order" == 'order' && "$id" == 'id' && "$source" == 'source' ]]
@@ -55,6 +57,11 @@ while IFS=$'\t' read -r slice order id source target disposition rationale extra
   if [[ -n "$current_disposition" ]]; then
     [[ "$current_disposition" == \
       "$source"$'\t'"$target"$'\t'"$disposition" ]]
+    if [[ "$slice" == '7.4b2b' ]]; then
+      ((disposed_b += 1))
+    else
+      ((disposed_c += 1))
+    fi
   fi
 
   case "$id" in
@@ -108,9 +115,30 @@ for text in "${required_report_text[@]}"; do
 done
 
 rg -F -q 'milestone-7-f018-decomposition.md' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b2b' "$PLAN"
 rg -F -q '`7.4b2a` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b2b` (`Planned`)' "$PLAN"
-rg -F -q '`7.4b2c` (`Planned`)' "$PLAN"
 
-printf 'Milestone 7 F018 decomposition passed: 14 IDs across 2 serial slices\n'
+b_planned="$(grep -cF '`7.4b2b` (`Planned`)' "$PLAN" || true)"
+b_accepted="$(grep -cF '`7.4b2b` (`Accepted`)' "$PLAN" || true)"
+c_planned="$(grep -cF '`7.4b2c` (`Planned`)' "$PLAN" || true)"
+c_accepted="$(grep -cF '`7.4b2c` (`Accepted`)' "$PLAN" || true)"
+[[ "$((b_planned + b_accepted))" -eq 1 ]]
+[[ "$((c_planned + c_accepted))" -eq 1 ]]
+
+if [[ "$b_planned" -eq 1 ]]; then
+  [[ "$disposed_b" -eq 0 && "$disposed_c" -eq 0 ]]
+  [[ "$c_planned" -eq 1 ]]
+  rg -F -q '**Next slice:** Milestone 7.4b2b' "$PLAN"
+elif [[ "$c_planned" -eq 1 ]]; then
+  [[ "$disposed_b" -eq 4 && "$disposed_c" -eq 0 ]]
+  rg -F -q '**Next slice:** Milestone 7.4b2c' "$PLAN"
+else
+  [[ "$b_accepted" -eq 1 && "$c_accepted" -eq 1 ]]
+  [[ "$disposed_b" -eq 4 && "$disposed_c" -eq 10 ]]
+  if rg -q '^\*\*Next slice:\*\* .*7\.4b2(b|c)' "$PLAN"; then
+    printf 'Accepted F018 slices cannot remain the next slice\n' >&2
+    exit 1
+  fi
+fi
+
+printf 'Milestone 7 F018 decomposition passed: 14 IDs across 2 serial slices; dispositions %s/4 and %s/10\n' \
+  "$disposed_b" "$disposed_c"
