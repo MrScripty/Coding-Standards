@@ -510,3 +510,29 @@
 - Shell syntax, whitespace, links, and staged-scope checks passed.
 
 **Commit:** `docs(consolidation): split commit workflow and reference`
+
+## 2026-07-28: Milestone 7.2 Documentation Ownership Decomposition
+
+**Outcome:** Re-planned without changing the objective.
+
+The frozen documentation inventory contains 100 identifiers across three
+canonical owners:
+
+- comment, Markdown, API, and algorithm examples are reference material;
+- artifact layout, ADR, and project-README policy belongs to the documentation
+  workflow; and
+- changelog applicability and format belongs to release owners.
+
+A single documentation rewrite would violate Milestone 7's one-role-at-a-time
+write-set constraint and make disposition review ambiguous. Milestone 7.2 is
+therefore split into `7.2a` reference extraction, `7.2b` documentation workflow
+consolidation, and `7.2c` release-owned changelog migration plus legacy-index
+closure.
+
+**No-fallback/legacy result:**
+
+- Existing sections remain authoritative until their owner-bounded slice
+  accepts a replacement.
+- No duplicate canonical owner or temporary compatibility copy was introduced.
+
+**Next slice:** `7.2a`.

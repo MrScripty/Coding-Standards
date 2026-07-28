@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; commit workflow and reference ownership are consolidated.
+**Current phase:** Milestone 7 active; documentation consolidation is decomposed by canonical owner.
 
-**Next slice:** Milestone 7.2, consolidate documentation guidance into workflow and reference owners.
+**Next slice:** Milestone 7.2a, move comment, Markdown, API, and algorithm examples to documentation reference.
 
 **Acceptance status:** `partial`
 
@@ -434,7 +434,10 @@ all structural/routing fixtures pass.
 **Slices:**
 
 1. Commit workflow, recipe reference, legacy index, and frozen-ID dispositions.
-2. Documentation workflow, reference material, legacy index, and dispositions.
+2. Documentation consolidation, decomposed into:
+   - `7.2a`: comment, Markdown, API, and algorithm reference material;
+   - `7.2b`: artifact layout, ADR, and project-README workflow policy; and
+   - `7.2c`: changelog guidance to release owners, then legacy-index closure.
 3. Owner-bounded topic/profile consolidation with correctness fixes.
 4. Final legacy-index review, disposition closure, and duplication gate.
 
