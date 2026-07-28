@@ -201,6 +201,55 @@ provider-specific draft feature as universal policy.
 Pipeline completion proves only the claims it records. A successful automation
 job cannot replace missing behavior or user-workflow evidence.
 
+## Maintenance And Channels
+
+For each release unit that promises post-publication support, define a
+maintenance contract before making that promise:
+
+- the supported release lines and their immutable source lineage;
+- the fixes, compatibility obligations, and response classes in scope;
+- who may start, extend, or end support;
+- the support window or explicit end condition;
+- how a fix reaches every affected supported line and relevant successor line;
+  and
+- the release channel through which consumers receive the result.
+
+A standard release has no intrinsic branch, tag, maintenance duration, or
+support class. Trunk-only maintenance, release branches, signed references,
+registry revisions, and other source-selection mechanisms are project-owned
+implementations of the maintenance contract.
+
+When correcting a supported release, identify every affected release line,
+select an accepted immutable source for each line, apply and verify the change
+under that line's contract, and publish a new artifact identity. Reconcile the
+fix into relevant successor lines or record an explicit reason why it does not
+apply. Do not mutate published bytes or silently omit an affected supported
+line.
+
+Long-term support is an explicit support class, not a property inferred from a
+branch name or release age. Its contract names scope, duration or end
+condition, compatibility and security commitments, source lineage, delivery
+channels, and responsible authority. If those facts are absent, return a typed
+release-maintenance diagnostic rather than claiming maintenance or long-term
+support.
+
+A release channel is a consumer contract, not a branch, tag, version-like
+string, or deployment environment. Define its audience, stability and
+compatibility expectations, admission and promotion criteria, update and
+discovery behavior, retention and support policy, withdrawal or rollback
+behavior, and artifact identity rules.
+
+Prerelease identifiers and channels are independent decisions. Promotion may
+reuse accepted bytes only when the destination channel accepts the same
+artifact identity and evidence; otherwise produce and verify a new planned
+artifact. If the channel or promotion decision is unresolved, return a typed
+release-channel diagnostic and do not silently publish to a default channel.
+
+Feature flags and runtime activation controls do not define release channels.
+When a product can deploy code separately from activating behavior, govern
+that mechanism through an explicit project-owned configuration and lifecycle
+policy rather than inferring it from the release process.
+
 ## Acceptance Boundary
 
 Before publishing, identify every claim required by the release:
@@ -222,7 +271,7 @@ them.
 ## Pending Migration Boundary
 
 [Legacy Release Standards](../RELEASE-STANDARDS.md) temporarily retain only
-unmigrated maintenance/channel, hosted-publication, checklist, rollback, and
-tool-recipe guidance. Those sections cannot override applicability, versioning,
-changelog, contract, deprecation, migration, artifact, reproducibility,
-pipeline, or acceptance decisions owned here.
+unmigrated hosted-publication, checklist, rollback, and tool-recipe guidance.
+Those sections cannot override applicability, versioning, changelog, contract,
+deprecation, migration, artifact, reproducibility, pipeline, maintenance,
+channel, or acceptance decisions owned here.

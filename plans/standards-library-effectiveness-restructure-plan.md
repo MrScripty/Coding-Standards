@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; release pipeline mechanics accepted.
+**Current phase:** Milestone 7 active; release maintenance and channel policy accepted.
 
-**Next slice:** Milestone 7.3b2, migrate maintenance and channel policy (`STD-0561`-`STD-0565`).
+**Next slice:** Milestone 7.3b3, migrate hosted publication and asset presentation (`STD-0566`-`STD-0574`).
 
 **Acceptance status:** `partial`
 
@@ -448,7 +448,8 @@ all structural/routing fixtures pass.
    - `7.3a` (`Accepted`): release artifact and packaging policy;
    - `7.3b1` (`Accepted`): pipeline mechanics
      (`STD-0552`-`STD-0560`);
-   - `7.3b2`: maintenance and channel policy (`STD-0561`-`STD-0565`);
+   - `7.3b2` (`Accepted`): maintenance and channel policy
+     (`STD-0561`-`STD-0565`);
    - `7.3b3`: hosted publication and asset presentation
      (`STD-0566`-`STD-0574`);
    - `7.3b4`: language-profile routing and release checklist

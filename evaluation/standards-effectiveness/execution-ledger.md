@@ -977,3 +977,70 @@ corrections do not migrate the remaining frozen identifiers.
 - All listed checks passed.
 
 **Next slice:** `7.3b2`.
+
+## 2026-07-28: Milestone 7.3b2 Release Maintenance And Channels
+
+**Outcome:** Accepted.
+
+Maintenance and channel policy for frozen identifiers `STD-0561` through
+`STD-0565` now belongs to `workflows/release.md`. The canonical workflow
+requires explicit supported release lines, immutable source lineage, support
+scope and authority, end conditions, remediation reconciliation, and delivery
+channels before post-publication support is claimed.
+
+Long-term support is an explicit support class rather than a branch name or
+release age. Release channels are consumer contracts rather than tags,
+branches, version-like strings, or deployment environments. Feature flags and
+runtime activation remain separate project-owned configuration and lifecycle
+concerns.
+
+The legacy hotfix/LTS and feature-flag/channel sections were removed. Their
+fixed `main`, tag, branch, patch-version, duration, named-channel, application
+type, and flag-lifetime assumptions were not retained as compatibility
+guidance.
+
+**Dispositions:**
+
+- `STD-0561` through `STD-0565` moved to the canonical release workflow with
+  fact-driven maintenance, remediation, LTS, and channel contracts.
+- The feature-flag defaults embedded in `STD-0565` were removed while the
+  release-channel contract moved to its canonical owner.
+
+**No-fallback/legacy result:**
+
+- Unknown maintenance or LTS facts return a typed release-maintenance
+  diagnostic.
+- Unknown channel or promotion facts return a typed release-channel
+  diagnostic rather than selecting a default channel.
+- Published bytes cannot be mutated, and affected supported lines cannot be
+  silently omitted.
+- The removed legacy sections no longer compete with the canonical workflow.
+
+**Discovered issues and deviations:**
+
+- Finding `F039` recorded the conflation of maintenance, source-control,
+  channel, and runtime-activation policy; it was resolved in this slice.
+- The first focused wrapper omitted fail-fast mode and could continue after a
+  line-wrapping assertion failed. The assertion was made semantic and all
+  focused and broad checks were rerun under `set -euo pipefail`.
+- No scope, ownership, or objective deviation was required.
+
+**Write set:**
+
+- `workflows/release.md`
+- `RELEASE-STANDARDS.md`
+- `README.md`
+- release maintenance/channel fixture and ownership check
+- dependent release checks
+- dispositions, findings, plan, and this ledger
+
+**Verification:**
+
+- Release maintenance, pipeline, artifact, and workflow foundation fixtures.
+- Documentation, contract, verification, acceptance, disposition, commit,
+  and traceability regressions.
+- Metadata, plan lifecycle, shell syntax, and whitespace checks.
+- `S1 route passed: 6 modules, 595/11066 baseline lines`.
+- All listed checks passed under fail-fast execution.
+
+**Next slice:** `7.3b3`.

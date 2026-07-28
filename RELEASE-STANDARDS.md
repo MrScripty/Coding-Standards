@@ -4,9 +4,9 @@ Release applicability, versioning, changelog, contract-evolution, deprecation,
 migration, and acceptance policy moved to the canonical
 [Release Workflow](workflows/release.md).
 
-This file temporarily retains only unmigrated maintenance/channel,
-hosted-publication, checklist, rollback, and tool-recipe guidance. These
-sections cannot override the canonical workflow.
+This file temporarily retains only unmigrated hosted-publication, checklist,
+rollback, and tool-recipe guidance. These sections cannot override the
+canonical workflow.
 
 ## Release Tool Recipes (Pending Reference Migration)
 
@@ -50,56 +50,6 @@ commit_parsers = [
     { message = "^ci", skip = true },
 ]
 ```
-
----
-
-## Hotfix and LTS Workflow
-
-### Standard Releases
-
-Standard releases use the project's adopted maintenance policy and dispatch the
-canonical release pipeline from an accepted immutable source reference.
-
-### Hotfix Workflow
-
-When a critical bug or security vulnerability is found in an already-released
-version, create a hotfix branch from the release tag:
-
-1. Branch from the tag: `git checkout -b hotfix/vX.Y.Z vX.Y.0` (where `vX.Y.0`
-   is the affected release tag)
-2. Apply the fix on the hotfix branch
-3. Update the changelog and bump the patch version
-4. Tag the fix: `git tag vX.Y.1`
-5. Push the branch and release reference; dispatch the canonical pipeline
-6. Cherry-pick or merge the fix back into `main` to ensure it is not lost
-
-### LTS Releases
-
-Only releases explicitly labeled as **LTS** (Long-Term Support) receive a
-long-lived release branch. Non-LTS releases are tagged only.
-
-- Create a release branch at the LTS tag: `release/X.Y`
-- LTS branches receive backported bug fixes and security patches
-- LTS branches follow the same canonical pipeline dispatch contract
-- Document the LTS support window in the project README (e.g., "12 months of
-  security patches from the LTS release date")
-
----
-
-## Feature Flags and Release Channels
-
-For applications (desktop apps, servers, CLI tools), consider staged rollouts to
-reduce release risk:
-
-- **Release channels** (`stable`, `beta`, `nightly`) allow early adopters to
-  test upcoming changes before they reach the general user base
-- **Feature flags** decouple deployment from release — ship code behind a flag,
-  enable it separately from the binary release
-- Flags should be short-lived; treat unremoved flags as technical debt with a
-  cleanup deadline
-
-These mechanisms are primarily applicable to applications. Library releases
-typically do not need feature flags or release channels.
 
 ---
 

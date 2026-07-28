@@ -101,7 +101,7 @@ if rg -q '^## (Release Artifacts|Reproducible Builds)$' "$LEGACY"; then
   exit 1
 fi
 
-for retained in '## Hotfix and LTS Workflow' '## Rollback Procedure' \
+for retained in '## GitHub Releases' '## Rollback Procedure' \
   '## Release Tool Recipes'; do
   rg -F -q "$retained" "$LEGACY"
 done

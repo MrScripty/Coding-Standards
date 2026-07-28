@@ -194,3 +194,8 @@ STD-0557	RELEASE-STANDARDS.md	none	remove	stale provider target example
 STD-0558	RELEASE-STANDARDS.md	workflows/release.md	move	required artifact collection
 STD-0559	RELEASE-STANDARDS.md	workflows/release.md	move	gated least-privilege publication handoff
 STD-0560	RELEASE-STANDARDS.md	workflows/release.md	move	conditional signature and provenance execution
+STD-0561	RELEASE-STANDARDS.md	workflows/release.md	move	canonical maintenance policy
+STD-0562	RELEASE-STANDARDS.md	workflows/release.md	move	explicit standard-release maintenance contract
+STD-0563	RELEASE-STANDARDS.md	workflows/release.md	move	supported-line remediation and reconciliation
+STD-0564	RELEASE-STANDARDS.md	workflows/release.md	move	explicit long-term support contract
+STD-0565	RELEASE-STANDARDS.md	workflows/release.md	move	consumer release-channel contract without feature-flag defaults

@@ -99,8 +99,8 @@ if rg -q '^## CI/CD Release Pipeline$' "$LEGACY"; then
   exit 1
 fi
 
-for retained in '## Hotfix and LTS Workflow' '## GitHub Releases' \
-  '## Rollback Procedure' '## Release Tool Recipes'; do
+for retained in '## GitHub Releases' '## Rollback Procedure' \
+  '## Release Tool Recipes'; do
   rg -F -q "$retained" "$LEGACY"
 done
 

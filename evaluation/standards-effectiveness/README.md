@@ -174,6 +174,11 @@ decisions, exact disposition of `STD-0552` through `STD-0560`, canonical
 pipeline ownership, required-artifact failure behavior, and removal of
 provider-specific trigger and matrix recipes.
 
+`verify-release-maintenance-policy.sh` checks maintenance and channel decision
+contracts, exact disposition of `STD-0561` through `STD-0565`, supported-line
+reconciliation, typed unresolved outcomes, and removal of branch, duration,
+channel-name, and feature-flag defaults.
+
 ## Scoring
 
 Each rubric dimension is scored:
