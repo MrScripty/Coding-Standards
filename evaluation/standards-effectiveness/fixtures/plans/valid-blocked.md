@@ -6,9 +6,7 @@
 
 **Next slice:** Run the user workflow on the required device.
 
-**Objective acceptance level:** `environment`
-
-**Current evidence level:** `system`
+**Acceptance status:** `blocked`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 

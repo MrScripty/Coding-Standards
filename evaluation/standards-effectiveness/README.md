@@ -74,14 +74,25 @@ The selected context is compared with the frozen baseline line count.
 active-plan structure:
 
 - current lifecycle state, phase, and exactly one next slice;
-- objective and current evidence levels;
+- plan-level acceptance status;
 - separate ledger and issue artifacts;
 - valid milestone states;
 - no embedded execution diary; and
-- no `Accepted` state with weaker evidence than the objective.
+- no `Accepted` state while acceptance remains pending, partial, or blocked.
 
 Human review still owns whether the named evidence semantically proves the
 objective.
+
+## Acceptance Claim Fixtures
+
+`verify-acceptance-claims.sh` checks the seven fixed scenarios and focused
+regressions against the canonical claim model:
+
+- evidence kind, environment qualification, and execution mode are separate;
+- every required claim must have matching observed evidence;
+- simulated hardware evidence cannot satisfy required-real acceptance;
+- startup smoke cannot substitute for a user workflow; and
+- manual execution is not a higher evidence kind.
 
 ## Scoring
 

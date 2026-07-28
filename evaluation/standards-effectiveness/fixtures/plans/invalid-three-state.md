@@ -6,9 +6,7 @@
 
 **Next slice:** `none`
 
-**Objective acceptance level:** `focused`
-
-**Current evidence level:** `focused`
+**Acceptance status:** `pending`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 

@@ -6,13 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestones 0-3 accepted; active-plan lifecycle is canonical.
+**Current phase:** Milestone 4.1 accepted; canonical acceptance claims are active.
 
-**Next slice:** Milestone 4, verification and release acceptance.
+**Next slice:** Milestone 4.2, legacy verification and release guidance alignment.
 
-**Objective acceptance level:** `manual`
-
-**Current evidence level:** `contract`
+**Acceptance status:** `partial`
 
 **Execution ledger:** [Milestone execution ledger](../evaluation/standards-effectiveness/execution-ledger.md)
 
@@ -193,6 +191,7 @@ Readers must not infer precedence from scattered prose.
 | Reference material | Examples, recipes, and tool versions are non-normative reference unless explicitly promoted. |
 | Prompts | Repository prompts are versioned thin entrypoints into canonical standards. |
 | Downstream evidence | Pantograph is one regression case, not a source of universal policy. |
+| Acceptance model | Required evidence is a set of typed claims; proof kind, environment, and execution mode are independent dimensions, not a scalar hierarchy. |
 
 ## Plan Artifact Contract
 
@@ -338,18 +337,27 @@ current status is understandable without reading history.
 
 **Goal:** Give every verification level a distinct purpose.
 
+- [x] Replace the scalar evidence hierarchy with typed acceptance claims.
+- [x] Bind plan acceptance to complete claim sets and explicit satisfaction
+  state.
+- [x] Add scenario fixtures for kind, environment, mode, and smoke limits.
 - [ ] Consolidate focused, integration, contract, system, user-workflow,
-  environment-gated, release-artifact, and manual acceptance definitions.
+  and release-artifact evidence definitions.
 - [ ] Remove universal duration and CI-only assumptions.
 - [ ] State that launch smoke does not prove a user feature.
 - [ ] Align testing, tooling, launcher, release, and plan guidance.
 
 **Write set:** verification workflow and affected standards/templates/fixtures.
 
-**Gate:** Every scenario selects the expected levels; weaker evidence cannot
-satisfy a stronger criterion.
+**Gate:** Every scenario selects the expected claims; incomplete or unrelated
+evidence cannot satisfy a criterion.
 
-**Status:** `Planned`
+**Slices:**
+
+1. Canonical acceptance claims, plan integration, and scenario fixtures.
+2. Testing, tooling, launcher, and release migration to the canonical owner.
+
+**Status:** `Active`
 
 ### Milestone 5: Contracts, Compatibility, And Fallbacks
 

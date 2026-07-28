@@ -6,9 +6,7 @@
 
 **Next slice:** `none`
 
-**Objective acceptance level:** `user-workflow`
-
-**Current evidence level:** `user-workflow`
+**Acceptance status:** `satisfied`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 

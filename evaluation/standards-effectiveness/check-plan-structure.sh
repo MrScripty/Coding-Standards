@@ -1,18 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly -A EVIDENCE_RANK=(
-  [none]=0
-  [focused]=1
-  [integration]=2
-  [contract]=3
-  [system]=4
-  [user-workflow]=5
-  [environment]=6
-  [release]=7
-  [manual]=8
-)
-
 value_for() {
   local file="$1"
   local field="$2"
@@ -38,8 +26,7 @@ for file in "$@"; do
     "Plan status" \
     "Current phase" \
     "Next slice" \
-    "Objective acceptance level" \
-    "Current evidence level" \
+    "Acceptance status" \
     "Execution ledger" \
     "Issues"; do
     if [[ "$(grep -c "^\\*\\*${field}:\\*\\* " "$file" || true)" -ne 1 ]]; then
@@ -49,19 +36,15 @@ for file in "$@"; do
   done
 
   status="$(value_for "$file" "Plan status")"
-  objective_level="$(value_for "$file" "Objective acceptance level")"
-  evidence_level="$(value_for "$file" "Current evidence level")"
+  acceptance_status="$(value_for "$file" "Acceptance status")"
 
   if [[ ! "$status" =~ ^(Planned|Active|Blocked|Implemented|Verifying|Accepted|Deferred|Superseded)$ ]]; then
     printf '%s: invalid plan status %s\n' "$file" "$status" >&2
     exit 1
   fi
-  if [[ -z "${EVIDENCE_RANK[$objective_level]:-}" && "$objective_level" != "none" ]]; then
-    printf '%s: invalid objective level %s\n' "$file" "$objective_level" >&2
-    exit 1
-  fi
-  if [[ -z "${EVIDENCE_RANK[$evidence_level]:-}" && "$evidence_level" != "none" ]]; then
-    printf '%s: invalid evidence level %s\n' "$file" "$evidence_level" >&2
+  if [[ ! "$acceptance_status" =~ ^(pending|partial|blocked|satisfied)$ ]]; then
+    printf '%s: invalid acceptance status %s\n' \
+      "$file" "$acceptance_status" >&2
     exit 1
   fi
   if rg -q '^## (Execution Notes|History|Daily Log)$' "$file"; then
@@ -78,14 +61,19 @@ for file in "$@"; do
   done < <(sed -n 's/^\*\*Status:\*\* `\([^`]*\)`.*/\1/p' "$file")
 
   if [[ "$status" == "Accepted" ]]; then
-    if (( EVIDENCE_RANK[$evidence_level] < EVIDENCE_RANK[$objective_level] )); then
-      printf '%s: accepted evidence %s is weaker than objective %s\n' \
-        "$file" "$evidence_level" "$objective_level" >&2
+    if [[ "$acceptance_status" != "satisfied" ]]; then
+      printf '%s: accepted plan has %s acceptance\n' \
+        "$file" "$acceptance_status" >&2
       exit 1
     fi
     if rg -q '^\*\*Status:\*\* `(Planned|Active|Blocked|Implemented|Verifying)`' "$file"; then
       printf '%s: accepted plan has unfinished milestone\n' "$file" >&2
       exit 1
     fi
+  fi
+  if [[ "$status" != "Accepted" && "$acceptance_status" == "satisfied" ]]; then
+    printf '%s: satisfied acceptance requires Accepted plan status\n' \
+      "$file" >&2
+    exit 1
   fi
 done

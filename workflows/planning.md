@@ -56,8 +56,8 @@ An active plan states:
 
 - plan status;
 - objective and scope;
-- objective acceptance criterion and acceptance level;
-- current evidence level;
+- objective acceptance claims;
+- current acceptance status;
 - constraints and assumptions that affect decisions;
 - binding decisions and owners;
 - current phase;
@@ -82,21 +82,36 @@ Use [the plan template](../templates/PLAN-TEMPLATE.md).
 | `Deferred` | Work is intentionally excluded with owner and revisit trigger. |
 | `Superseded` | A newer binding decision or plan replaces this item. |
 
-`Implemented` is not complete. `Accepted` requires evidence at least as strong
-as the objective's acceptance level.
+`Implemented` is not complete. `Accepted` requires every objective acceptance
+claim to be satisfied.
 
 Exactly one current phase is identified. Multiple independent milestones may be
 implemented, but the active plan still names one next integration slice.
 
-## Acceptance Levels
+## Acceptance Claims
 
-Until the verification taxonomy migration completes, plans use:
+Follow [the verification workflow](verification.md). Record each required claim
+with:
 
-`focused`, `integration`, `contract`, `system`, `user-workflow`,
-`environment`, `release`, or `manual`.
+- stable identifier and observable criterion;
+- evidence kind;
+- required environment;
+- execution mode;
+- `pending`, `blocked`, or `satisfied` status; and
+- evidence link when satisfied.
 
-Name the level required by the objective, not the easiest available check.
-Lower-level checks may reduce risk but cannot close a higher-level criterion.
+The plan-level acceptance status is:
+
+| Status | Meaning |
+| --- | --- |
+| `pending` | No required claim is satisfied yet. |
+| `partial` | Some claims are satisfied and at least one remains pending. |
+| `blocked` | At least one required claim cannot currently be run. |
+| `satisfied` | Every required claim is satisfied. |
+
+Evidence kinds, environment requirements, and execution modes are independent.
+Do not treat manual, environment-qualified, or artifact evidence as higher
+positions in one hierarchy.
 
 ## Milestones And Slices
 
@@ -189,7 +204,8 @@ without explicit authority.
 A plan is accepted only when:
 
 - all non-deferred milestones are `Accepted` or `Superseded`;
-- objective evidence meets the named level;
+- plan acceptance status is `satisfied`;
+- every objective acceptance claim has matching evidence;
 - unresolved follow-ups have owners and triggers;
 - implementation files are resolved;
 - the ledger contains final verification and commit summaries; and

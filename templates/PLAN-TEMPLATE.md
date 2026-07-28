@@ -6,9 +6,7 @@
 
 **Next slice:** [Exactly one slice or `none` for terminal status]
 
-**Objective acceptance level:** `focused`
-
-**Current evidence level:** `none`
+**Acceptance status:** `pending`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -20,8 +18,12 @@ State the externally meaningful outcome and who or what observes it.
 
 ## Objective Acceptance
 
-State the exact evidence that closes the objective. Do not name a lower-level
-proxy.
+State the exact claims that close the objective. Add rows when the objective
+requires independent proof kinds.
+
+| ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| A1 | [Externally meaningful result] | `focused` | `not-applicable` | `automated` | `pending` | [Link or pending] |
 
 ## Scope
 
@@ -115,6 +117,6 @@ Use only when work is independent.
 
 ## Final Acceptance
 
-- Objective evidence: `pending`
+- Acceptance status: `pending`
 - Deferred follow-ups: `none`
 - Final status: `Planned`

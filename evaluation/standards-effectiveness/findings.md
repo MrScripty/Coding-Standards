@@ -11,8 +11,9 @@ changes and focused fixture evidence.
 | F001 | Resolved in Milestone 3 | Prompts are versioned, thin, path-neutral workflow entrypoints. |
 | F004 | Resolved in Milestone 3 | Canonical planning lifecycle and structural fixtures. |
 | F005 | Resolved in Milestone 3 | Planning and implementation prompts have separate intent and canonical workflow links. |
-| F006 | Partially resolved | Plan acceptance is evidence-level bound; shared verification taxonomy remains Milestone 4. |
+| F006 | Partially resolved in Milestone 4.1 | Verification owns typed acceptance claims and planning consumes them; legacy verification-level duplication remains for Slice 4.2. |
 | F008 | Partially resolved | Planning no longer grants cleanup authority; commit-history policy remains Milestone 6. |
+| F031 | Resolved in Milestone 4.1 | Acceptance claim fixtures independently model proof kind, environment qualification, and execution mode. |
 
 ## Systemic Findings
 
@@ -34,6 +35,7 @@ changes and focused fixture evidence.
 | F014 | Degraded-mode overgeneralization | `ARCHITECTURE-PATTERNS.md:1093-1151` | Permit degradation only with authoritative, semantically valid data; otherwise return typed diagnostics. | 5 |
 | F015 | Mixed roles | `ARCHITECTURE-PATTERNS.md`; `TOOLING-STANDARDS.md`; `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md` | Separate policy, profiles, pattern catalog, recipes, and product-local examples. | 7 |
 | F016 | Broken reference | `SECURITY-STANDARDS.md:289`; no matching concurrency heading | Repair or remove the nonexistent graceful-shutdown anchor. | 7 |
+| F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings
 

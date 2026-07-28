@@ -181,3 +181,51 @@
 - Shell syntax, links, whitespace, and staged-scope checks passed.
 
 **Commit:** `docs(planning): replace append-only plan lifecycle`
+
+## 2026-07-28: Milestone 4.1 Acceptance Claims And Plan Integration
+
+**Outcome:** Accepted.
+
+**Re-plan trigger:**
+
+- Milestone 3 provisionally ranked `manual`, `environment`, and `release`
+  evidence above behavior-oriented levels.
+- Those values represent execution mode, environment qualification, and proof
+  target rather than one comparable strength hierarchy.
+- The active plan was revised before implementation to use typed claim sets.
+
+**Write set:**
+
+- verification and planning workflows;
+- plan template and lifecycle checker/fixtures;
+- acceptance claim fixtures/checker;
+- evaluation README, ledger, findings, and active plan.
+
+**Delivered:**
+
+- canonical evidence kinds for focused, integration, contract, system,
+  user-workflow, and release-artifact claims;
+- independent environment and execution-mode qualifiers;
+- plan acceptance states `pending`, `partial`, `blocked`, and `satisfied`;
+- explicit smoke-check limits and unavailable-evidence behavior; and
+- fixed scenario cases proving that every required claim must match.
+
+**No-fallback/legacy result:**
+
+- The scalar evidence rank was removed rather than retained as an alternate
+  acceptance path.
+- Supporting checks cannot substitute for missing objective claims.
+- Simulated or startup-smoke evidence cannot silently stand in for required
+  hardware or user-workflow evidence.
+
+**Verification:**
+
+- Plan lifecycle positive and negative fixtures passed.
+- Canonical template and active restructure plan passed structure checks.
+- All seven scenario claim cases passed.
+- Startup-smoke, simulated-hardware, and manual-as-higher regressions were
+  rejected as expected.
+- Verification and planning metadata/dependency checks passed.
+- Shell syntax, whitespace, and staged-scope checks passed.
+
+**Commit:** `docs(verification): model acceptance as typed claims`

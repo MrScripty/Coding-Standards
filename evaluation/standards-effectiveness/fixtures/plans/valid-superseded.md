@@ -6,9 +6,7 @@
 
 **Next slice:** `none`
 
-**Objective acceptance level:** `contract`
-
-**Current evidence level:** `none`
+**Acceptance status:** `partial`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 

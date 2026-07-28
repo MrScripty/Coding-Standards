@@ -6,9 +6,7 @@
 
 **Next slice:** Implement the focused parser correction.
 
-**Objective acceptance level:** `focused`
-
-**Current evidence level:** `none`
+**Acceptance status:** `pending`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 

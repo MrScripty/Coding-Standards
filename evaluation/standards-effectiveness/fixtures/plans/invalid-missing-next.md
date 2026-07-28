@@ -4,9 +4,7 @@
 
 **Current phase:** Milestone 0
 
-**Objective acceptance level:** `focused`
-
-**Current evidence level:** `none`
+**Acceptance status:** `pending`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
