@@ -68,6 +68,21 @@ fixture requires a recorded reason and before/after rescoring.
 
 The selected context is compared with the frozen baseline line count.
 
+## Plan Lifecycle Fixtures
+
+`check-plan-structure.sh` and `verify-plan-fixtures.sh` enforce deterministic
+active-plan structure:
+
+- current lifecycle state, phase, and exactly one next slice;
+- objective and current evidence levels;
+- separate ledger and issue artifacts;
+- valid milestone states;
+- no embedded execution diary; and
+- no `Accepted` state with weaker evidence than the objective.
+
+Human review still owns whether the named evidence semantically proves the
+objective.
+
 ## Scoring
 
 Each rubric dimension is scored:

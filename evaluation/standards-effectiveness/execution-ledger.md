@@ -130,3 +130,54 @@
 - Shell syntax, whitespace, link, and staged-scope checks passed.
 
 **Commit:** `docs(core): add first routed standards path`
+
+## 2026-07-28: Milestone 3 Planning And Implementation Lifecycle
+
+**Outcome:** Accepted.
+
+**Write set:**
+
+- planning and implementation workflows;
+- Router and legacy planning entrypoint;
+- plan template;
+- versioned prompts and `.gitignore`;
+- plan lifecycle fixtures/checks;
+- evaluation README, ledger, findings, and active plan.
+
+**Delivered:**
+
+- separate active plan, execution ledger, issues, reports, and ADR ownership;
+- `Planned`, `Active`, `Blocked`, `Implemented`, `Verifying`, `Accepted`,
+  `Deferred`, and `Superseded` lifecycle;
+- exactly one current phase and next slice;
+- objective/evidence level comparison for acceptance;
+- decision replacement, supersession, and plan compaction;
+- bounded findings and delegated write-set contracts;
+- concise canonical plan template;
+- versioned planning, implementation, and full-review prompts; and
+- positive/negative lifecycle fixtures.
+
+**No-fallback/legacy result:**
+
+- `PLAN-STANDARDS.md` is now a nonnormative migration index.
+- The old three-state template and plan-as-history model were replaced, not
+  retained as alternate behavior.
+- Re-planning replaces binding decisions; it does not carry old behavior
+  forward implicitly.
+
+**Deviations:**
+
+- The first fixture checker counted `## Objective Acceptance` as a second
+  `## Objective`; exact whole-line heading matching fixed the checker before
+  integration.
+
+**Verification:**
+
+- Planning and implementation modules passed metadata/dependency checks.
+- Active, blocked, accepted, and superseded fixtures passed.
+- Three-state, missing-next-slice, embedded-history, and headless-acceptance
+  fixtures failed as expected.
+- The canonical plan template passed the structure check.
+- Shell syntax, links, whitespace, and staged-scope checks passed.
+
+**Commit:** `docs(planning): replace append-only plan lifecycle`

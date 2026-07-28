@@ -1,162 +1,120 @@
-# Plan: [Short Title]
+# Plan: [Short Outcome]
+
+**Plan status:** `Planned`
+
+**Current phase:** [Milestone or phase]
+
+**Next slice:** [Exactly one slice or `none` for terminal status]
+
+**Objective acceptance level:** `focused`
+
+**Current evidence level:** `none`
+
+**Execution ledger:** [execution-ledger.md](execution-ledger.md)
+
+**Issues:** [issues.md](issues.md)
 
 ## Objective
 
-State the outcome this plan must achieve.
+State the externally meaningful outcome and who or what observes it.
+
+## Objective Acceptance
+
+State the exact evidence that closes the objective. Do not name a lower-level
+proxy.
 
 ## Scope
 
 ### In Scope
 
-- Item 1
-- Item 2
+- [Owned result]
 
-### Out of Scope
+### Out Of Scope
 
-- Item 1
-- Item 2
+- [Explicit exclusion]
 
-## Inputs
-
-### Problem
-
-What problem is being solved?
+## Constraints And Assumptions
 
 ### Constraints
 
-- Constraint 1
-- Constraint 2
+- [Constraint that affects decisions]
 
 ### Assumptions
 
-- Assumption 1
-- Assumption 2
+- [Assumption and validation owner]
 
-### Dependencies
+## Binding Decisions
 
-- Dependency 1
-- Dependency 2
+| Decision | Owner | Evidence | Supersedes |
+| --- | --- | --- | --- |
+| [Current decision] | [Owner] | [Reason/source] | [Prior decision or none] |
 
-### Risks
+## Simplicity And Ownership Review
 
-| Risk | Impact | Mitigation |
-| ---- | ------ | ---------- |
-| Risk 1 | High/Med/Low | Mitigation 1 |
+Use for cross-layer, stateful, contract-heavy, concurrent, or refactor work.
 
-### Simplicity / Complection Review
-
-Use this section for cross-layer, stateful, contract-heavy, or refactor work.
-
-- Independent concepts in this change:
-- Concepts intentionally coupled:
-- Concepts accidentally coupled or at risk:
-- Boundary that owns each policy/state/lifecycle decision:
-- Future change that should not require touching this area:
-
-## Clarifying Questions (Only If Needed)
-
-Use this section only when missing details materially affect scope, sequencing,
-risk, or acceptance criteria.
-
-- Q1: [question]
-- Q2: [question]
-
-## Definition of Done
-
-- Done criterion 1
-- Done criterion 2
+- Independent concepts:
+- Intentional coupling:
+- Accidental coupling risk:
+- Policy/state/lifecycle owners:
+- Future changes that should remain independent:
 
 ## Milestones
 
-For cross-layer features, make the first milestone the thinnest useful vertical
-slice unless dependencies make that impossible.
+### Milestone 0: [Name]
+
+**Goal:** [One useful result]
+
+**Allowed write set:**
+
+- `[path]`
+
+**Tasks:**
+
+- [ ] [Task]
+
+**Acceptance gate:**
+
+- [Evidence and level]
+
+**Status:** `Planned`
 
 ### Milestone 1: [Name]
 
-**Goal:** One-sentence goal.
+**Goal:** [One useful result]
+
+**Allowed write set:**
+
+- `[path]`
 
 **Tasks:**
-- [ ] Task 1
-- [ ] Task 2
 
-**Verification:**
-- Check 1 (refer to project testing/tooling standards)
-- Check 2
+- [ ] [Task]
 
-**Status:** Not started / In progress / Complete
+**Acceptance gate:**
 
-### Milestone 2: [Name]
+- [Evidence and level]
 
-**Goal:** One-sentence goal.
+**Status:** `Planned`
 
-**Tasks:**
-- [ ] Task 1
-- [ ] Task 2
+## Blockers
 
-**Verification:**
-- Check 1
-- Check 2
-
-**Status:** Not started / In progress / Complete
-
-## Execution Notes
-
-Update during implementation:
-- Date: update
-- Date: update
-
-## Commit Cadence Notes
-
-- Commit when a logical slice is complete and verified.
-- For cross-layer feature work, prefer committing the first verified vertical
-  slice before expanding shared layers horizontally.
-- Follow commit format/history cleanup rules from `COMMIT-STANDARDS.md`.
-
-## Optional Subagent Assignment
-
-Use only if needed.
-
-| Owner/Agent | Scope | Output Contract | Handoff Checkpoint |
-| ----------- | ----- | --------------- | ------------------ |
-| name | bounded scope | expected deliverable | checkpoint |
+- `none`
 
 ## Re-Plan Triggers
 
-- Trigger 1
-- Trigger 2
+- [Fact or failure that invalidates a decision, scope, sequence, or gate]
 
-## Recommendations (Only If Better Option Exists)
+## Concurrent Work
 
-- Recommendation 1: what to change, why, and scope/timeline impact
-- Recommendation 2: what to change, why, and scope/timeline impact
+Use only when work is independent.
 
-## Completion Summary
+| Owner | Primary write set | Adjacent write set | Forbidden/shared | Output/report | Integration order |
+| --- | --- | --- | --- | --- | --- |
+| [Owner] | [Paths] | [Paths or none] | [Paths] | [Contract and report] | [Order] |
 
-### Completed
+## Final Acceptance
 
-- Milestone/result 1
-- Milestone/result 2
-
-### Deviations
-
-- Deviation 1 and reason
-
-### Follow-Ups
-
-- Follow-up 1
-
-### Verification Summary
-
-- Verification run 1
-- Verification run 2
-
-### Traceability Links
-
-- Module README updated: `src/<module>/README.md` or N/A
-- ADR added/updated: `docs/adr/ADR-XXX-<title>.md` or N/A
-- PR notes completed per `templates/PULL_REQUEST_TEMPLATE.md`
-
-## Brevity Note
-
-Keep the plan concise. Expand detail only where execution decisions or risk
-require it.
+- Objective evidence: `pending`
+- Deferred follow-ups: `none`
+- Final status: `Planned`

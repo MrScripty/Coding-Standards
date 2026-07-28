@@ -62,10 +62,16 @@ for the selected acceptance level.
 
 When an active plan exists:
 
-- keep objective, current decisions, status, blockers, and next slice current;
-- put dated command output and completed-slice detail in its execution ledger;
+- follow [Planning Workflow](planning.md);
+- keep objective, current decisions, lifecycle state, blockers, and exactly one
+  next slice current;
+- put dated command output and completed-slice detail in `execution-ledger.md`;
+- put findings and dispositions in `issues.md`;
+- transition `Implemented` to `Verifying` and then `Accepted` only when the
+  named evidence passes;
 - replace superseded decisions rather than appending competing authority; and
-- stop for re-planning when evidence changes scope, ownership, or objective.
+- stop for re-planning when evidence changes scope, ownership, objective, or
+  acceptance fidelity.
 
 Without an active plan, record out-of-scope issues in the repository's normal
 issue or review artifact rather than expanding the change silently.

@@ -4,6 +4,16 @@ All findings are open at baseline. Milestone 0 records them but does not change
 normative standards. A later milestone may close a finding only with source
 changes and focused fixture evidence.
 
+## Resolution Status
+
+| Finding | Status | Evidence |
+| --- | --- | --- |
+| F001 | Resolved in Milestone 3 | Prompts are versioned, thin, path-neutral workflow entrypoints. |
+| F004 | Resolved in Milestone 3 | Canonical planning lifecycle and structural fixtures. |
+| F005 | Resolved in Milestone 3 | Planning and implementation prompts have separate intent and canonical workflow links. |
+| F006 | Partially resolved | Plan acceptance is evidence-level bound; shared verification taxonomy remains Milestone 4. |
+| F008 | Partially resolved | Planning no longer grants cleanup authority; commit-history policy remains Milestone 6. |
+
 ## Systemic Findings
 
 | ID | Class | Evidence | Required disposition | Milestone |

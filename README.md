@@ -20,6 +20,7 @@ reference material.
 | [CORE-STANDARDS.md](CORE-STANDARDS.md) | Universal ownership, boundary, failure, lifecycle, quality, and verification invariants | Every adopted project |
 | [STANDARDS-ROUTER.md](STANDARDS-ROUTER.md) | Applicability, exclusions, dependency routing, and migration authority | Start of every task |
 | [workflows/implementation.md](workflows/implementation.md) | Bounded implementation slices and commit boundary | Any repository change |
+| [workflows/planning.md](workflows/planning.md) | Active plans, lifecycle, re-planning, and delegated ownership | Multi-step or high-risk work |
 | [workflows/verification.md](workflows/verification.md) | Objective-aligned evidence selection | Any acceptance claim |
 | [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
 | [profiles/languages/rust/README.md](profiles/languages/rust/README.md) | Rust mechanisms and focused verification | Rust-owned changes |
@@ -35,7 +36,7 @@ reference material.
 | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) | Platform abstraction, file system conventions, CI matrix | Apps targeting multiple OS platforms |
 | [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md) | FFI safety, cross-language boundaries, contract maintenance | Multi-language or native interop projects |
 | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) | Dependency evaluation, versioning, auditing, and minimization | Adding or reviewing third-party packages |
-| [PLAN-STANDARDS.md](PLAN-STANDARDS.md) | Planning workflow, vertical-slice milestones, re-plan triggers, and completion summaries | Multi-file, cross-layer, or staged implementation work |
+| [PLAN-STANDARDS.md](PLAN-STANDARDS.md) | Migration index for planning guidance | Existing links only |
 | [LAUNCHER-STANDARDS.md](LAUNCHER-STANDARDS.md) | `launcher.sh` contract, lifecycle flags, dependency checks, and app startup | Standardizing app entry points and setup workflows |
 | [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Binding architecture, FFI wrapper design, code generation, type mapping | Exposing a core library to multiple target languages |
 | [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Versioning, changelogs, release artifacts, CI/CD release pipelines | Shipping software to users or downstream consumers |

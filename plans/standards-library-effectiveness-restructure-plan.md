@@ -4,9 +4,19 @@
 
 **Direction:** Approved and active.
 
-**Current phase:** Milestones 0-2 accepted; the first routed normative path is active.
+**Plan status:** `Active`
 
-**Next slice:** Milestone 3, planning and implementation lifecycle.
+**Current phase:** Milestones 0-3 accepted; active-plan lifecycle is canonical.
+
+**Next slice:** Milestone 4, verification and release acceptance.
+
+**Objective acceptance level:** `manual`
+
+**Current evidence level:** `contract`
+
+**Execution ledger:** [Milestone execution ledger](../evaluation/standards-effectiveness/execution-ledger.md)
+
+**Issues:** [Standards effectiveness findings](../evaluation/standards-effectiveness/findings.md)
 
 **Evidence:** [Milestone 0 evaluation](../evaluation/standards-effectiveness/README.md)
 
@@ -35,6 +45,15 @@ internally inconsistent plans whose completed milestones do not prove the
 requested user outcome. It is a regression case, not the design target.
 Pantograph-specific architecture, runtime policy, or no-fallback decisions must
 not become universal standards.
+
+## Objective Acceptance
+
+- The fixed scenarios improve or preserve every critical rubric dimension.
+- Quantitative routing, ownership, duplication, and link targets pass.
+- Two independent downstream pilots complete without loading the full library.
+- Migration and standards-version guidance is published.
+- A final manual review confirms that the library is stack-agnostic, routed,
+  concise, and free of competing normative owners.
 
 ## Success Measures
 
@@ -163,6 +182,18 @@ CORE
 
 Readers must not infer precedence from scattered prose.
 
+## Binding Decisions
+
+| Decision | Binding direction |
+| --- | --- |
+| Progressive disclosure | Route from Core through one workflow and only applicable profiles/topics. |
+| Normative ownership | Every retained rule has one canonical owner; indexes link without restating rules. |
+| Planning artifacts | Active state remains in the plan; history, findings, reports, and durable decisions have separate owners. |
+| Specialization | Root guidance stays stack-agnostic; language and application details belong in profiles. |
+| Reference material | Examples, recipes, and tool versions are non-normative reference unless explicitly promoted. |
+| Prompts | Repository prompts are versioned thin entrypoints into canonical standards. |
+| Downstream evidence | Pantograph is one regression case, not a source of universal policy. |
+
 ## Plan Artifact Contract
 
 Planning guidance will separate state from evidence:
@@ -249,7 +280,7 @@ Run the same fixtures and rubric before and after restructuring.
 **Gate:** Every normative section has an identifier; another reviewer can
 reproduce counts, routing, and scores.
 
-**Status:** Accepted.
+**Status:** `Accepted`
 
 ### Milestone 1: Architecture And Metadata
 
@@ -265,7 +296,7 @@ reproduce counts, routing, and scores.
 **Gate:** Every retained rule has one proposed owner; scenarios route without
 cycles or ambiguity.
 
-**Status:** Accepted.
+**Status:** `Accepted`
 
 ### Milestone 2: Core And Router Vertical Slice
 
@@ -282,18 +313,18 @@ cycles or ambiguity.
 **Gate:** The scenario is correctly planned without unrelated standards, and
 all retained semantics trace to inventory identifiers.
 
-**Status:** Accepted.
+**Status:** `Accepted`
 
 ### Milestone 3: Planning And Implementation Lifecycle
 
 **Goal:** Keep active plans current, bounded, and acceptance-oriented.
 
-- [ ] Implement the plan artifact contract and richer lifecycle.
-- [ ] Require one current phase, one next slice, and explicit supersession.
-- [ ] Define compaction/rollover triggers.
-- [ ] Bind `Accepted` to objective-level evidence.
-- [ ] Update planning/implementation standards, prompts, and templates.
-- [ ] Add active, blocked, accepted, and superseded fixtures.
+- [x] Implement the plan artifact contract and richer lifecycle.
+- [x] Require one current phase, one next slice, and explicit supersession.
+- [x] Define compaction/rollover triggers.
+- [x] Bind `Accepted` to objective-level evidence.
+- [x] Update planning/implementation standards, prompts, and templates.
+- [x] Add active, blocked, accepted, and superseded fixtures.
 
 **Write set:** planning/implementation guidance, prompts, template, fixtures,
 and plan.
@@ -301,7 +332,7 @@ and plan.
 **Gate:** Partial or headless evidence cannot close a user-visible objective;
 current status is understandable without reading history.
 
-**Status:** Planned.
+**Status:** `Accepted`
 
 ### Milestone 4: Verification And Release Acceptance
 
@@ -318,7 +349,7 @@ current status is understandable without reading history.
 **Gate:** Every scenario selects the expected levels; weaker evidence cannot
 satisfy a stronger criterion.
 
-**Status:** Planned.
+**Status:** `Planned`
 
 ### Milestone 5: Contracts, Compatibility, And Fallbacks
 
@@ -339,7 +370,7 @@ and plan.
 **Gate:** Fixtures distinguish coordinated replacement, public versioning,
 persistence migration, and invalid fallback.
 
-**Status:** Planned.
+**Status:** `Planned`
 
 ### Milestone 6: Proportional Documentation And Commit Process
 
@@ -359,7 +390,7 @@ fixtures, and plan.
 **Gate:** Small changes avoid unrelated artifacts; architectural/public changes
 retain durable traceability and atomic review.
 
-**Status:** Planned.
+**Status:** `Planned`
 
 ### Milestone 7: Role-Based Consolidation
 
@@ -376,7 +407,7 @@ retain durable traceability and atomic review.
 **Gate:** Every rule identifier has a final disposition; duplication target and
 all structural/routing fixtures pass.
 
-**Status:** Planned.
+**Status:** `Planned`
 
 ### Milestone 8: Pilot And Adoption
 
@@ -395,7 +426,11 @@ and separately bounded fixes.
 **Gate:** Critical rubric dimensions and quantitative targets pass; pilots do
 not need the full library or introduce downstream-specific root policy.
 
-**Status:** Planned.
+**Status:** `Planned`
+
+## Blockers
+
+- None.
 
 ## Slice Procedure
 
@@ -426,7 +461,7 @@ Delegated work reports files reviewed, rule identifiers/dispositions,
 conflicts, proposed owners, fixture effects, and out-of-scope findings. It may
 not create competing core, precedence, or taxonomy rules.
 
-## Risks And Re-Plan Triggers
+## Re-Plan Triggers
 
 | Risk or trigger | Required response |
 | --- | --- |
@@ -454,3 +489,10 @@ unrelated to this restructure.
 Complete this plan only when all milestone gates and the definition of done are
 accepted. The final summary must list accepted outcomes, deviations, remaining
 follow-ups, verification evidence, and the migration/version result.
+
+## Final Acceptance
+
+- **Objective evidence:** Pending Milestone 8 scenario comparison, downstream
+  pilots, migration publication, and manual review.
+- **Deferred follow-ups:** None beyond milestones explicitly marked `Planned`.
+- **Final status:** `Active`
