@@ -36,10 +36,9 @@ if [[ -n "$duplicates" ]]; then
 fi
 
 while IFS=$'\t' read -r id source target disposition rationale extra; do
-  if [[ "$id" == "id" ]]; then
+  if [[ "$id" == "id" || "$source" != "COMMIT-STANDARDS.md" ]]; then
     continue
   fi
-  [[ "$source" == "COMMIT-STANDARDS.md" ]]
   [[ "$disposition" =~ ^(move|reference|remove|index)$ ]]
   [[ -n "$rationale" && -z "${extra:-}" ]]
 

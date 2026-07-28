@@ -6,8 +6,8 @@ Requirements for maintaining readable, navigable codebases.
 
 The [Documentation Workflow](workflows/documentation.md) is the canonical owner
 for deciding when durable documentation is required and which profile applies.
-This file retains artifact-layout, comment, API, and algorithm-documentation
-guidance until role consolidation.
+This file retains artifact-layout, ADR, changelog, and project-README guidance
+until their owner-bounded consolidation slices complete.
 
 Do not infer a README requirement from directory count, file count, or a `src/`
 path. Require documentation only for an affected durable responsibility,
@@ -72,227 +72,17 @@ churn. Link canonical rationale instead of duplicating it.
 
 ---
 
-## Code Comments
+## Code And Markdown Examples
 
-### When to Comment
+Comment, Markdown, public-interface, and algorithm examples moved to the
+non-normative
+[Documentation Recipe](reference/recipes/documentation.md).
 
-**Comment the "why", not the "what".**
-
-```typescript
-// BAD: Describes what code does (obvious from reading it)
-// Loop through users and filter active ones
-const active = users.filter(u => u.isActive);
-
-// GOOD: Explains why this approach
-// Filter before mapping to avoid expensive transformations on inactive users
-const active = users.filter(u => u.isActive);
-```
-
-### When NOT to Comment
-
-- Self-explanatory code
-- Code that could be made self-explanatory by renaming
-- Temporary notes (use TODO with ticket number)
-
-```typescript
-// BAD: Comment that could be code
-// Check if user is admin
-if (user.role === 'admin') { ... }
-
-// GOOD: Self-documenting
-if (user.isAdmin()) { ... }
-```
-
-### TODO Format
-
-```typescript
-// TODO(#123): Refactor when new API is available
-// TODO(@username): Discuss approach in next sync
-```
-
-Always include:
-- Ticket number, OR
-- Owner/author, OR
-- Date when it should be addressed
-
-**Never:** Orphaned TODOs without context
-
-### Comment Style
-
-Use your language's standard doc comment format:
-
-```typescript
-// TypeScript/JavaScript - JSDoc
-/**
- * Calculates the total price including tax.
- * @param items - Cart items to total
- * @param taxRate - Tax rate as decimal (0.08 for 8%)
- * @returns Total price with tax applied
- */
-function calculateTotal(items: Item[], taxRate: number): number
-```
-
-```python
-# Python - Docstring
-def calculate_total(items: list[Item], tax_rate: float) -> float:
-    """
-    Calculate the total price including tax.
-
-    Args:
-        items: Cart items to total
-        tax_rate: Tax rate as decimal (0.08 for 8%)
-
-    Returns:
-        Total price with tax applied
-    """
-```
-
----
-
-## Markdown Formatting
-
-### Fenced Code Blocks
-
-Always specify a language identifier on fenced code blocks so renderers apply
-syntax highlighting:
-
-````markdown
-```text
-example code or command output
-```
-````
-
-Use `text` as the language for plain-text blocks that have no specific syntax.
-
-### Tables
-
-Use standard markdown table syntax so tables render correctly in all viewers.
-The separator row must use dashes with single-space padding that match the
-header cell widths:
-
-```markdown
-| Name | Description |
-| ---- | ----------- |
-| foo  | Does X      |
-| bar  | Does Y      |
-```
-
-Rules:
-
-- Separator dashes must match the header column width (one space of padding on
-  each side of the dashes)
-- All rows in a table must use the same column widths — pad shorter cells with
-  trailing spaces
-- Do not omit leading or trailing pipes
-
----
-
-## API Documentation
-
-### Public Interfaces
-
-All public functions, classes, and types should be documented:
-
-```typescript
-/**
- * User authentication service.
- *
- * Handles login, logout, and session management.
- *
- * @example
- * const auth = new AuthService(config);
- * const session = await auth.login(credentials);
- */
-export class AuthService {
-    /**
-     * Authenticate user with credentials.
-     *
-     * @param credentials - Username and password
-     * @returns Session token if successful
-     * @throws AuthError if credentials invalid
-     */
-    async login(credentials: Credentials): Promise<Session>
-}
-```
-
-### What to Document
-
-| Element | Document? | Include |
-|---------|-----------|---------|
-| Public function | Yes | Purpose, params, return, throws, example |
-| Public class | Yes | Purpose, usage example |
-| Public type/interface | Yes | Purpose, when to use |
-| Private/internal | Optional | Only if complex |
-| Obvious getters/setters | No | |
-
----
-
-## Algorithm Documentation
-
-For non-trivial algorithms, provide comprehensive documentation:
-
-### Required Elements
-
-```markdown
-# Topological Sort Algorithm
-
-Produces a linear ordering of nodes such that for every directed edge `(u, v)`,
-`u` comes before `v` in the ordering.
-
-## Reference
-Based on Kahn's algorithm (1962).
-
-## Preconditions
-- Graph is a DAG with no cycles.
-- All node IDs are valid.
-
-## Postconditions
-- Output contains every node exactly once.
-- For every edge `(u, v)`, `index(u) < index(v)`.
-
-## Complexity
-- Time: `O(V + E)` where `V` = vertices and `E` = edges.
-- Space: `O(V)` for in-degree tracking.
-
-## Error Cases
-Returns a cycle error when the graph contains a cycle or self-referencing edge.
-```
-
-### When to Document Algorithms
-
-Document comprehensively when:
-
-- **Complexity is non-obvious** - O(n²) or worse, or subtle constant factors
-- **Based on academic papers** - Include citation and any modifications
-- **Adapted from reference implementations** - Include attribution
-- **Maintains critical invariants** - Document what must remain true
-- **Has non-trivial preconditions** - Caller needs to know requirements
-
-### Minimal Documentation
-
-For simpler algorithms, at minimum include:
-
-```markdown
-Sort records by priority score, highest first.
-
-## Complexity
-`O(n log n)` where `n` = record count.
-```
-
-### ASCII Diagrams
-
-Use ASCII art to illustrate transformations:
-
-```text
-Rebalance a binary search tree after insertion.
-
-Before (unbalanced):     After (balanced):
-    A                        B
-     \                      / \
-      B                    A   C
-       \
-        C
-```
+The [Documentation Workflow](workflows/documentation.md) remains the canonical
+owner for deciding when durable documentation is required. Language profiles,
+project formatters, and consumer contracts own their specific syntax and
+behavior; this migration index does not impose a universal TODO format, table
+alignment, public-symbol documentation rule, or algorithm template.
 
 ---
 

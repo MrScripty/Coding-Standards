@@ -25,7 +25,8 @@ changes and focused fixture evidence.
 | F026 | Partially resolved in Milestone 5.2 | Catch-all executor fallback was replaced by typed unsupported delegation; spawn and TOCTOU findings remain Milestone 7. |
 | F031 | Resolved in Milestone 4.1 | Acceptance claim fixtures independently model proof kind, environment qualification, and execution mode. |
 | D005 | Resolved in Milestone 7.1 | Commit and slice process is owned by implementation/commit workflows; prompts route only, and commit examples are non-normative reference. |
-| F032 | Open in Milestone 7.2 | Documentation consolidation spans reference, documentation-workflow, and release owners; it is decomposed into owner-bounded slices. |
+| F032 | Partially resolved in Milestone 7.2a | Comment, Markdown, public-interface, and algorithm examples have a non-normative reference owner; workflow and release-owned consolidation remains. |
+| F033 | Resolved in Milestone 7.2a | The commit disposition checker now filters its shared ledger by source; documentation rows have a separate owner-specific fixture. |
 
 ## Systemic Findings
 
@@ -48,6 +49,7 @@ changes and focused fixture evidence.
 | F015 | Mixed roles | `ARCHITECTURE-PATTERNS.md`; `TOOLING-STANDARDS.md`; `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md` | Separate policy, profiles, pattern catalog, recipes, and product-local examples. | 7 |
 | F016 | Broken reference | `SECURITY-STANDARDS.md:289`; no matching concurrency heading | Repair or remove the nonexistent graceful-shutdown anchor. | 7 |
 | F032 | Consolidation ownership | `DOCUMENTATION-STANDARDS.md`; frozen IDs `STD-0349`-`STD-0448` | Move examples, documentation policy, and changelog guidance in separate reference, workflow, and release-owner slices. | 7 |
+| F033 | Fixture ownership | `verify-consolidation-dispositions.sh`; shared disposition ledger | Filter each owner-specific fixture by source and verify new source groups independently. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

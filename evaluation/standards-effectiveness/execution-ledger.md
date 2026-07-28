@@ -536,3 +536,49 @@ closure.
 - No duplicate canonical owner or temporary compatibility copy was introduced.
 
 **Next slice:** `7.2a`.
+
+## 2026-07-28: Milestone 7.2a Documentation Reference Consolidation
+
+**Outcome:** Accepted.
+
+Moved frozen identifiers `STD-0376` through `STD-0399` from mixed normative and
+example content into one non-normative documentation recipe:
+
+- comments illustrate rationale, self-documenting names, tracked TODOs, and
+  language-native consumer documentation;
+- Markdown examples use portable fences and tables while leaving formatting to
+  repository tooling;
+- public-interface examples focus on consumer-significant semantics instead of
+  requiring prose for every public symbol; and
+- algorithm examples present optional maintenance details without imposing a
+  universal template.
+
+The legacy sections were removed and replaced with routing links. Universal
+TODO format, table-width alignment, public-symbol documentation, and
+comprehensive algorithm-template obligations were not preserved as fallback
+policy. Durable documentation applicability remains owned only by
+`workflows/documentation.md`.
+
+The first verification run exposed `F033`: the commit-specific disposition
+fixture read every row from the shared ledger and failed when documentation
+rows appeared. The fixture now filters by its owned source, while the
+documentation fixture independently proves its source range.
+
+**Write set:**
+
+- `reference/recipes/documentation.md`
+- `DOCUMENTATION-STANDARDS.md`
+- `README.md`
+- focused evaluation fixture, migration dispositions, findings, plan, and this
+  ledger
+
+**Verification:**
+
+- Documentation reference consolidation, documentation decisions, and
+  traceability fixtures passed.
+- Metadata, plan structure, and plan lifecycle fixtures passed.
+- Commit/contract/acceptance ownership and disposition regressions passed.
+- S1 routing passed with 6 modules and 595 of 11066 baseline lines.
+- Shell syntax, whitespace, and link review passed.
+
+**Next slice:** `7.2b`.

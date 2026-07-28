@@ -67,3 +67,27 @@ STD-0259	COMMIT-STANDARDS.md	none	remove	implicit merge base example
 STD-0260	COMMIT-STANDARDS.md	workflows/commit.md	move	post-rewrite graph verification
 STD-0261	COMMIT-STANDARDS.md	none	remove	implicit verification range
 STD-0262	COMMIT-STANDARDS.md	none	remove	implicit verification example
+STD-0376	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	comment examples
+STD-0377	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	rationale comment example
+STD-0378	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	self-documenting code example
+STD-0379	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	project-owned tracked TODO example
+STD-0380	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	language-native comment example
+STD-0381	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	docstring example represented without language mandate
+STD-0382	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	Markdown examples
+STD-0383	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	fenced-block example
+STD-0384	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	portable table example without alignment mandate
+STD-0385	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	public-interface examples
+STD-0386	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	consumer-semantic example without blanket symbol rule
+STD-0387	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	consumer-significant documentation examples
+STD-0388	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	algorithm explanation examples
+STD-0389	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	optional algorithm detail examples
+STD-0390	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	topological-ordering example
+STD-0391	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	attribution example
+STD-0392	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	precondition example
+STD-0393	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	postcondition example
+STD-0394	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	complexity example
+STD-0395	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	typed failure example
+STD-0396	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	non-normative selection considerations
+STD-0397	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	concise algorithm example
+STD-0398	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	complexity notation example
+STD-0399	DOCUMENTATION-STANDARDS.md	reference/recipes/documentation.md	reference	text-diagram option
