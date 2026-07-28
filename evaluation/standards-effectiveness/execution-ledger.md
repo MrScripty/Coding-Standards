@@ -846,3 +846,46 @@ moving their frozen identifiers.
 - All listed checks passed.
 
 **Next slice:** `7.3b`.
+
+## 2026-07-28: Milestone 7.3b Pipeline And Publication Re-plan Trigger
+
+**Outcome:** Re-plan required; implementation not started.
+
+The next declared slice covers frozen identifiers `STD-0552` through
+`STD-0576`, but the retained source spans four independently reviewable
+concerns:
+
+1. pipeline triggers, matrices, uploads, release jobs, and signing
+   (`STD-0552`-`STD-0560`);
+2. standard, hotfix, LTS, and channel policy (`STD-0561`-`STD-0565`);
+3. hosted release publication, release notes, and asset presentation
+   (`STD-0566`-`STD-0574`); and
+4. language-profile routing and the final release procedure checklist
+   (`STD-0575`-`STD-0576`).
+
+Treating all 25 identifiers as one pipeline/publication slice would combine
+execution mechanics, lifecycle policy, consumer presentation, and routing. It
+would be harder to verify and would violate the plan's thin-slice and
+one-owner review constraints.
+
+**Standards-aligned options:**
+
+1. Split only pipeline mechanics (`STD-0552`-`STD-0560`) from one combined
+   publication remainder (`STD-0561`-`STD-0576`). This reduces the immediate
+   write set but leaves lifecycle, channel, publication, and routing policy
+   coupled.
+2. Use four owner-bounded slices matching the groups above. This is
+   recommended because each slice has one decision surface, exact frozen-ID
+   range, focused fixture, and removable legacy section.
+3. Keep `STD-0552`-`STD-0576` together. This reaches the legacy-index state
+   sooner but is rejected because review and acceptance cannot remain focused.
+
+Rollback/recovery (`STD-0577`-`STD-0581`) and non-normative tool recipes
+(`STD-0541`-`STD-0542`) remain separate planned slices under every option.
+
+**No-fallback/legacy constraint:** each selected slice must remove its moved
+policy in the same commit and update retained dependent sections to consume the
+canonical owner. No pending section may restore artifact, prerelease, contract,
+or acceptance defaults.
+
+**Next action:** Approve the Milestone `7.3b` decomposition.

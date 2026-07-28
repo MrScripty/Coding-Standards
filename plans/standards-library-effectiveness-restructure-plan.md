@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; release artifact policy consolidated.
+**Current phase:** Milestone 7 active; release pipeline/publication decomposition requires approval.
 
-**Next slice:** Milestone 7.3b, migrate release pipeline and publication policy.
+**Next slice:** Select the owner-bounded decomposition for `STD-0552` through `STD-0576`.
 
 **Acceptance status:** `partial`
 
@@ -446,7 +446,9 @@ all structural/routing fixtures pass.
      and close the legacy documentation index.
 3. Owner-bounded topic/profile consolidation with correctness fixes, including:
    - `7.3a` (`Accepted`): release artifact and packaging policy;
-   - release pipeline and publication policy;
+   - `7.3b` (`Re-plan required`): release pipeline and publication policy spans
+     pipeline mechanics, maintenance/channel policy, publication presentation,
+     and language/checklist routing;
    - release rollback and recovery policy; and
    - non-normative release tools, examples, and recipes.
 4. Final legacy-index review, disposition closure, and duplication gate.

@@ -33,6 +33,7 @@ changes and focused fixture evidence.
 | F034 | Partially resolved in Milestone 7.3a | The canonical release workflow owns foundation, changelog, artifact, and reproducibility policy; remaining pipeline, rollback, and reference concerns continue in owner-bounded slices. |
 | F035 | Resolved in Milestone 7.2c1 | Contract and verification ownership checks now follow the canonical release workflow instead of requiring duplicate direct links from the legacy release index. |
 | F036 | Resolved in Milestone 7.3a | Retained pipeline and publication sections consume canonical artifact and prerelease decisions instead of restoring conflicting defaults. |
+| F037 | Direction required for Milestone 7.3b | Frozen release identifiers `STD-0552` through `STD-0576` span four review and ownership boundaries and cannot remain one thin slice. |
 
 ## Systemic Findings
 
@@ -59,6 +60,7 @@ changes and focused fixture evidence.
 | F034 | Missing canonical owner | `owner-map.tsv`; `RELEASE-STANDARDS.md`; absent `workflows/release.md` | Establish release workflow ownership in an owner-bounded slice before moving changelog policy or closing the documentation index. | 7 |
 | F035 | Fixture ownership | Release checks in `verify-contract-ownership.sh` and `verify-verification-ownership.sh` | Validate the canonical release dependency chain and only require the legacy file to route to that owner. | 7 |
 | F036 | Dependent legacy override | Retained release pipeline and publication sections after partial migration | Make dependent legacy sections consume canonical decisions and verify that they cannot restore removed defaults. | 7 |
+| F037 | Slice ownership | `RELEASE-STANDARDS.md`; frozen IDs `STD-0552`-`STD-0576` | Decompose pipeline mechanics, maintenance/channels, publication presentation, and language/checklist routing before implementation. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings
