@@ -27,6 +27,7 @@ reference material.
 | [workflows/release.md](workflows/release.md) | Release applicability, versioning, changelog, contract, and acceptance boundaries | Shipping artifacts or changing published promises |
 | [reference/recipes/commits.md](reference/recipes/commits.md) | Non-normative staging and conventional commit examples | Formatting a commit after the workflow has selected process rules |
 | [reference/recipes/documentation.md](reference/recipes/documentation.md) | Non-normative comment, Markdown, public-interface, and algorithm examples | Applying a selected documentation requirement |
+| [reference/recipes/releases.md](reference/recipes/releases.md) | Non-normative changelog automation example | Configuring a selected release tool |
 | [topics/contracts.md](topics/contracts.md) | Contract classes, migration, compatibility, degraded outcomes, and typed unavailability | Contract or persisted-state evolution and fallback decisions |
 | [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
 | [profiles/languages/rust/README.md](profiles/languages/rust/README.md) | Rust mechanisms and focused verification | Rust-owned changes |
@@ -45,7 +46,7 @@ reference material.
 | [PLAN-STANDARDS.md](PLAN-STANDARDS.md) | Migration index for planning guidance | Existing links only |
 | [LAUNCHER-STANDARDS.md](LAUNCHER-STANDARDS.md) | `launcher.sh` contract, lifecycle flags, dependency checks, and app startup | Standardizing app entry points and setup workflows |
 | [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Binding architecture, FFI wrapper design, code generation, type mapping | Exposing a core library to multiple target languages |
-| [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Migration index with tool guidance pending reference extraction | Unmigrated release recipes only |
+| [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Migration index for canonical release workflow and recipe reference | Existing links only |
 | [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) | Semantic HTML, keyboard interaction, ARIA, a11y linting | UI components in web or desktop apps |
 | [languages/README.md](languages/README.md) | Language-specific extensions to the generic standards | Rust and future language-specific rules |
 

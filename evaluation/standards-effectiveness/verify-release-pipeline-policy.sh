@@ -99,9 +99,7 @@ if rg -q '^## CI/CD Release Pipeline$' "$LEGACY"; then
   exit 1
 fi
 
-for retained in '## Release Tool Recipes'; do
-  rg -F -q "$retained" "$LEGACY"
-done
+rg -F -q 'workflows/release.md' "$LEGACY"
 
 removed_rules=(
   'Pushing a `v*` tag'

@@ -6,9 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; release recovery policy accepted.
+**Current phase:** Milestone 7 active; release consolidation accepted and
+remaining owner-bounded decomposition required.
 
-**Next slice:** Milestone 7.3d, extract non-normative release tool recipes (`STD-0541`-`STD-0542`).
+**Next slice:** Milestone 7.4a, decompose the remaining 698 frozen identifiers
+across 33 source files by canonical owner and correctness dependency; move no
+normative rules in that planning slice.
 
 **Acceptance status:** `partial`
 
@@ -456,9 +459,13 @@ all structural/routing fixtures pass.
      (`STD-0575`-`STD-0576`);
    - `7.3c` (`Accepted`): release rollback and recovery policy
      (`STD-0577`-`STD-0581`); and
-   - `7.3d`: non-normative release tools, examples, and recipes
+   - `7.3d` (`Accepted`): non-normative release tools, examples, and recipes
      (`STD-0541`-`STD-0542`).
-4. Final legacy-index review, disposition closure, and duplication gate.
+4. `7.4a` (`Planned`): decompose the remaining 698 frozen identifiers across
+   33 source files into reviewable owner-bounded and correctness-ordered
+   implementation slices without moving normative rules.
+5. Execute the owner-bounded slices approved by `7.4a`.
+6. Final legacy-index review, disposition closure, and duplication gate.
 
 **Status:** `Active`
 

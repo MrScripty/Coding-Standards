@@ -94,7 +94,7 @@ required_sections=(
   "## Deprecation And Migration"
   "## Changelog"
   "## Acceptance Boundary"
-  "## Pending Migration Boundary"
+  "## Optional Reference"
 )
 for section in "${required_sections[@]}"; do
   rg -F -q "$section" "$WORKFLOW"
@@ -105,10 +105,6 @@ if rg -q "$removed_headings" "$LEGACY"; then
   printf 'Legacy release foundation section remains authoritative\n' >&2
   exit 1
 fi
-
-for retained in "## Release Tool Recipes"; do
-  rg -F -q "$retained" "$LEGACY"
-done
 
 if rg -q '^## (Release Artifacts|Reproducible Builds)$' "$LEGACY"; then
   printf 'Migrated artifact foundation remains in the legacy file\n' >&2

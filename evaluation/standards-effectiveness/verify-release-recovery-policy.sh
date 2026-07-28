@@ -92,7 +92,7 @@ if rg -q '^## Rollback Procedure$' "$LEGACY"; then
   printf 'Legacy rollback policy remains authoritative\n' >&2
   exit 1
 fi
-rg -F -q '## Release Tool Recipes' "$LEGACY"
+rg -F -q 'workflows/release.md' "$LEGACY"
 
 removed_rules=(
   'Revert the GitHub Release to draft'

@@ -386,10 +386,8 @@ Unsatisfied required claims remain visible release blockers. Release procedure
 and publication gates consume accepted claims but cannot downgrade or replace
 them.
 
-## Pending Migration Boundary
+## Optional Reference
 
-[Legacy Release Standards](../RELEASE-STANDARDS.md) temporarily retain only
-unmigrated tool-recipe guidance. Those sections cannot override applicability,
-versioning, changelog, contract, deprecation, migration, artifact,
-reproducibility, pipeline, maintenance, channel, publication, procedure,
-recovery, or acceptance decisions owned here.
+The non-normative [Release Recipe](../reference/recipes/releases.md) illustrates
+one changelog automation configuration. It does not select tools, commit
+categories, release mechanisms, or policy.

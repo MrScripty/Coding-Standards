@@ -30,7 +30,7 @@ changes and focused fixture evidence.
 | D005 | Resolved in Milestone 7.1 | Commit and slice process is owned by implementation/commit workflows; prompts route only, and commit examples are non-normative reference. |
 | F032 | Resolved in Milestone 7.2c2 | Documentation examples, proportional workflow policy, and release-owned changelog semantics have canonical owners; the legacy documentation file is now a bounded migration index. |
 | F033 | Resolved in Milestone 7.2a | The commit disposition checker now filters its shared ledger by source; documentation rows have a separate owner-specific fixture. |
-| F034 | Partially resolved in Milestone 7.3c | The canonical release workflow owns foundation through recovery policy; only non-normative release recipe extraction remains. |
+| F034 | Resolved in Milestone 7.3d | Release policy has one canonical workflow owner, optional changelog automation has a non-normative reference owner, and the legacy release file is link-only. |
 | F035 | Resolved in Milestone 7.2c1 | Contract and verification ownership checks now follow the canonical release workflow instead of requiring duplicate direct links from the legacy release index. |
 | F036 | Resolved in Milestone 7.3a | Retained pipeline and publication sections consume canonical artifact and prerelease decisions instead of restoring conflicting defaults. |
 | F037 | Resolved in Milestone 7.3b4 | Pipeline, maintenance/channel, publication, and routing/checklist concerns completed as four independently verified slices. |
@@ -39,6 +39,7 @@ changes and focused fixture evidence.
 | F040 | Resolved in Milestone 7.3b3 | Missing dispositions for removed download-example identifiers `STD-0571` through `STD-0574` were reconciled with explicit merge/remove outcomes. |
 | F041 | Resolved in Milestone 7.3b4 | Generic release guidance now selects language profiles through the router and derives procedure steps from accepted decisions instead of universal Rust, commit, tag, audit-tool, or publication commands. |
 | F042 | Resolved in Milestone 7.3c | Recovery now follows impact, destination capability, explicit authority, immutable identity, and fresh acceptance rather than assuming hosted drafts, yank support, branches, patch versions, or unilateral action. |
+| F043 | Open; re-plan required after Milestone 7.3d | Milestone 7 still has 698 frozen identifiers across 33 source files, but the active plan does not yet define owner-bounded, correctness-ordered slices for them. |
 
 ## Systemic Findings
 
@@ -71,6 +72,7 @@ changes and focused fixture evidence.
 | F040 | Disposition drift | `RELEASE-STANDARDS.md`; frozen IDs `STD-0571`-`STD-0574`; Milestone 7.3a history | Reconcile previously removed download examples to canonical artifact presentation or explicit removal without restoring legacy text. | 7 |
 | F041 | Routing/procedure conflation | `RELEASE-STANDARDS.md`; frozen IDs `STD-0575`-`STD-0576` | Route specialized mechanisms through selected profiles and replace the universal command checklist with a decision-derived release procedure. | 7 |
 | F042 | Provider-specific rollback | `RELEASE-STANDARDS.md`; frozen IDs `STD-0577`-`STD-0581` | Replace universal unpublish/yank/branch/patch instructions with capability-driven recovery, explicit emergency authority, and impact-driven incident records. | 7 |
+| F043 | Undecomposed consolidation scope | Remaining frozen inventory and Milestone 7 sequence | Decompose remaining identifiers by canonical owner and correctness dependency before another normative move. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

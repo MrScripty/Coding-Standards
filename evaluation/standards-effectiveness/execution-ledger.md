@@ -1132,3 +1132,35 @@ syntax, and whitespace checks all passed. `S1 route passed: 6 modules,
 595/11066 baseline lines`.
 
 **Next slice:** `7.3d`.
+
+## 2026-07-28: Milestone 7.3d Release Reference Closure
+
+**Outcome:** Accepted.
+
+Non-normative changelog automation identifiers `STD-0541` and `STD-0542` now
+belong to `reference/recipes/releases.md`. The reference is explicitly
+`REFERENCE`, depends on the canonical release workflow, and states that its
+git-cliff configuration does not select a tool, commit convention, changelog
+category, template, or release policy.
+
+`RELEASE-STANDARDS.md` is now a link-only migration index. It contains no
+normative sections or executable recipe, while existing inbound links continue
+to reach the canonical workflow and optional reference. Finding `F034` is
+resolved.
+
+**No-fallback/legacy result:** no legacy release rule remains active, and the
+example cannot become an implicit git-cliff or Conventional Commits default.
+Projects without a valid release decision still receive the typed diagnostics
+owned by `workflows/release.md`.
+
+**Verification:** all standards-effectiveness verifier scripts passed,
+including release-reference closure, all release-policy regressions,
+documentation, contract, verification, acceptance, dispositions, commit,
+traceability, metadata, plan lifecycle, and routing. `S1 route passed: 6
+modules, 595/11066 baseline lines`. Shell syntax and whitespace checks passed.
+
+**Re-plan trigger:** 698 frozen identifiers across 33 source files remain
+without an approved owner-bounded implementation sequence. Finding `F043`
+records this plan-legibility and execution-scope gap.
+
+**Next slice:** `7.4a`, decomposition only; no normative movement.
