@@ -95,8 +95,7 @@ if rg -q '^## (Hotfix and LTS Workflow|Feature Flags and Release Channels)$' \
   exit 1
 fi
 
-for retained in '## Language-Specific Guidance' '## Release Checklist' \
-  '## Rollback Procedure' '## Release Tool Recipes'; do
+for retained in '## Rollback Procedure' '## Release Tool Recipes'; do
   rg -F -q "$retained" "$LEGACY"
 done
 

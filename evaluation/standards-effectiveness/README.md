@@ -184,6 +184,11 @@ decisions, exact disposition of `STD-0566` through `STD-0574`, release-note and
 artifact presentation, typed unresolved outcomes, and removal of hosted-service
 and product-specific download defaults.
 
+`verify-release-procedure-policy.sh` checks router-driven profile selection,
+exact disposition of `STD-0575` through `STD-0576`, decision-derived release
+steps, typed unresolved outcomes, and removal of universal language, commit,
+tag, audit-tool, and publication-command defaults.
+
 ## Scoring
 
 Each rubric dimension is scored:

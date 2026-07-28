@@ -4,9 +4,8 @@ Release applicability, versioning, changelog, contract-evolution, deprecation,
 migration, and acceptance policy moved to the canonical
 [Release Workflow](workflows/release.md).
 
-This file temporarily retains only unmigrated language routing, checklist,
-rollback, and tool-recipe guidance. These sections cannot override the
-canonical workflow.
+This file temporarily retains only unmigrated rollback and tool-recipe
+guidance. These sections cannot override the canonical workflow.
 
 ## Release Tool Recipes (Pending Reference Migration)
 
@@ -50,37 +49,6 @@ commit_parsers = [
     { message = "^ci", skip = true },
 ]
 ```
-
----
-
-## Language-Specific Guidance
-
-Rust release rules for Cargo metadata, `publish = false`, workspace versioning,
-toolchain pinning, and `cargo-release` live in
-[languages/rust/RUST-RELEASE-STANDARDS.md](languages/rust/RUST-RELEASE-STANDARDS.md).
-
----
-
-## Release Checklist
-
-Before every release:
-
-1. Complete the canonical
-   [Release Workflow](workflows/release.md) version, changelog, contract, and
-   acceptance decisions.
-2. Dependency audit shows no unaccepted high/critical vulnerabilities (e.g., `cargo audit`,
-   `npm audit`, `pip-audit`)
-3. Commit: `chore(release): prepare vX.Y.Z`
-4. Tag: `git tag vX.Y.Z`
-5. Push commit and intended release tag.
-6. Move the publication to its planned review or visibility state and verify
-   that all expected artifacts and disclosures are present.
-7. Download the representative published artifacts required by the acceptance
-    plan and run each named `release-artifact` smoke criterion
-8. Review release notes, then publish the release
-
-For dependency security auditing in CI, see
-[DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md#ci-integration).
 
 ---
 

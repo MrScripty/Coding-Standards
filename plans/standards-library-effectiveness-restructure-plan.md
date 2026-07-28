@@ -6,9 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 active; hosted publication and asset presentation accepted.
+**Current phase:** Milestone 7 active; release routing and procedure accepted.
 
-**Next slice:** Milestone 7.3b4, migrate language-profile routing and the release checklist (`STD-0575`-`STD-0576`).
+**Next slice:** Milestone 7.3c, migrate release rollback and recovery policy (`STD-0577`-`STD-0581`).
 
 **Acceptance status:** `partial`
 
@@ -452,9 +452,10 @@ all structural/routing fixtures pass.
      (`STD-0561`-`STD-0565`);
    - `7.3b3` (`Accepted`): hosted publication and asset presentation
      (`STD-0566`-`STD-0574`);
-   - `7.3b4`: language-profile routing and release checklist
+   - `7.3b4` (`Accepted`): language-profile routing and release checklist
      (`STD-0575`-`STD-0576`);
-   - release rollback and recovery policy; and
+   - `7.3c`: release rollback and recovery policy
+     (`STD-0577`-`STD-0581`); and
    - non-normative release tools, examples, and recipes.
 4. Final legacy-index review, disposition closure, and duplication gate.
 

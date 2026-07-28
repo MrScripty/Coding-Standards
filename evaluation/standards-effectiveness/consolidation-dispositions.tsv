@@ -208,3 +208,5 @@ STD-0571	RELEASE-STANDARDS.md	workflows/release.md	merge	consumer artifact disco
 STD-0572	RELEASE-STANDARDS.md	none	remove	product-specific binary download examples
 STD-0573	RELEASE-STANDARDS.md	none	remove	incomplete shared-library download example
 STD-0574	RELEASE-STANDARDS.md	workflows/release.md	merge	selected integrity metadata presentation
+STD-0575	RELEASE-STANDARDS.md	workflows/release.md	move	router-driven profile selection
+STD-0576	RELEASE-STANDARDS.md	workflows/release.md	move	decision-derived release procedure

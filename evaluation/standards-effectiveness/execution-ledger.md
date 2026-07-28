@@ -1076,3 +1076,31 @@ whitespace checks all passed. `S1 route passed: 6 modules, 595/11066 baseline
 lines`.
 
 **Next slice:** `7.3b4`.
+
+## 2026-07-28: Milestone 7.3b4 Release Routing And Procedure
+
+**Outcome:** Accepted.
+
+Language routing and release procedure for `STD-0575` and `STD-0576` now
+belong to `workflows/release.md`. The workflow selects applicable language,
+application, boundary, and topic profiles through `STANDARDS-ROUTER.md`.
+Profiles add mechanisms and verification without overriding generic release
+contracts.
+
+The canonical procedure is derived from accepted release boundaries,
+contracts, profiles, decisions, claims, immutable dispatch, artifacts, and
+publication state. The legacy direct Rust link and universal dependency-audit,
+commit, tag, push, draft, and publication commands were removed. An unresolved
+required mechanism returns a typed release-procedure diagnostic.
+
+Finding `F041` records and resolves the prior routing/procedure conflation.
+Finding `F037` closes because all four approved `7.3b` owner-bounded slices are
+accepted.
+
+**Verification:** release procedure, publication, maintenance, pipeline,
+artifact, and foundation fixtures; documentation, contract, verification,
+acceptance, disposition, commit, traceability, metadata, plan lifecycle, shell
+syntax, and whitespace checks all passed. `S1 route passed: 6 modules,
+595/11066 baseline lines`.
+
+**Next slice:** `7.3c`.

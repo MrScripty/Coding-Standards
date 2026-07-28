@@ -290,6 +290,37 @@ If destination, authority, visibility, notes, channel projection, or artifact
 presentation is unresolved, return a typed release-publication diagnostic and
 do not publish using a provider default.
 
+## Profile Routing And Release Procedure
+
+Use [Standards Router](../STANDARDS-ROUTER.md) to select every applicable
+language, application, boundary, and topic profile in addition to this
+workflow. Profiles add ecosystem mechanisms and verification but cannot
+override the cross-language release contracts owned here. For example, a
+Rust-owned release change selects the Rust profile, which routes current
+specialized Cargo release guidance during migration; the generic workflow does
+not link directly to one language's tools.
+
+Derive the release procedure from the accepted release decisions:
+
+1. Confirm the release unit, affected contracts, consumers, and responsible
+   authorities.
+2. Select applicable profiles and topics through the router.
+3. Accept version, changelog, migration, maintenance, channel, artifact, and
+   publication decisions.
+4. Satisfy every required behavior, environment, and release-artifact claim.
+5. Authorize pipeline dispatch from the accepted immutable source.
+6. Collect and verify the exact artifact set and selected metadata.
+7. Project accepted notes, disclosures, artifacts, and channel state to the
+   publication destination.
+8. Verify representative published artifacts when required by the acceptance
+   plan, then record the publication result and any remaining obligations.
+
+Commit messages, branch names, tags, registry commands, audit tools, review
+states, and publication commands are project- and profile-owned mechanisms.
+They are required only when selected by the accepted procedure. If a required
+step has no resolved owner or mechanism, return a typed release-procedure
+diagnostic rather than substituting a conventional command.
+
 ## Acceptance Boundary
 
 Before publishing, identify every claim required by the release:
@@ -311,7 +342,7 @@ them.
 ## Pending Migration Boundary
 
 [Legacy Release Standards](../RELEASE-STANDARDS.md) temporarily retain only
-unmigrated language routing, checklist, rollback, and tool-recipe guidance.
-Those sections cannot override applicability, versioning, changelog, contract,
-deprecation, migration, artifact, reproducibility, pipeline, maintenance,
-channel, publication, or acceptance decisions owned here.
+unmigrated rollback and tool-recipe guidance. Those sections cannot override
+applicability, versioning, changelog, contract, deprecation, migration,
+artifact, reproducibility, pipeline, maintenance, channel, publication,
+procedure, or acceptance decisions owned here.

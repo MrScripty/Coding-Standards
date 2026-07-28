@@ -101,8 +101,7 @@ if rg -q '^## (Release Artifacts|Reproducible Builds)$' "$LEGACY"; then
   exit 1
 fi
 
-for retained in '## Language-Specific Guidance' '## Rollback Procedure' \
-  '## Release Tool Recipes'; do
+for retained in '## Rollback Procedure' '## Release Tool Recipes'; do
   rg -F -q "$retained" "$LEGACY"
 done
 
