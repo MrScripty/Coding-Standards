@@ -44,7 +44,18 @@ mapfile -t actual_ids < <(
 )
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
 
-for id in "${expected_ids[@]}"; do
+awk -F '\t' '
+  NR > 1 && $1 == "STD-0804" {
+    count += 1
+    if ($2 != "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md" ||
+        $3 != "profiles/languages/rust/language-bindings.md" ||
+        $4 != "refine" || $5 == "" || NF != 5) {
+      exit 1
+    }
+  }
+  END { exit count != 1 }
+' "$DISPOSITIONS"
+for id in "${expected_ids[@]:1}"; do
   [[ "$(awk -F '\t' -v id="$id" 'NR > 1 && $1 == id { count += 1 } END { print count + 0 }' "$DISPOSITIONS")" -eq 0 ]]
 done
 
@@ -73,12 +84,14 @@ done
 
 rg -F -q '| F072 | Resolved in Milestone 7.4b8n |' "$FINDINGS"
 rg -F -q '`7.4b8n` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8o` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8o` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8p` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8o'* ]]
-[[ "$next_slice_line" == *'STD-0804'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8p'* ]]
+[[ "$next_slice_line" == *'STD-0805'* ]]
+[[ "$next_slice_line" == *'STD-0806'* ]]
 
 "$SCRIPT_DIR/verify-milestone-7-accelerated-execution-replan.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-5 decomposition passed: 6 IDs across 4 ordered children\n'
+printf 'Milestone 7 row-5 decomposition passed: child 5.1 accepted; 5 IDs remain across 3 ordered children\n'

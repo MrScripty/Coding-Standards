@@ -3248,3 +3248,38 @@ decision fixture, configuration, lockfile, or downstream repository changed.
 
 **Next slice:** `7.4b8o`, replace `STD-0804` with one Rust core/adapter
 testability contract and reusable decision-table evidence.
+
+## 2026-07-29: Milestone 7.4b8o Rust Core/Adapter Testability
+
+**Outcome:** Accepted.
+
+`STD-0804` now requires separate framework-free core evidence and real
+native/host adapter evidence when an adapter is part of the selected binding
+surface. Foreign-runtime adapter checks may use a separately provisioned
+environment, but cannot replace core evidence or be replaced by native-only
+tests.
+
+**Verification:** reusable decision-table schema, 16 semantic cases and exact
+observations; canonical profile assertions; one exact disposition; removal of
+the Rustler/NIF implementation example and unknown-sentinel behavior; Rust
+binding architecture and conversion checks; row-5 decomposition; immutable
+execution train; plan lifecycle; shell syntax; metadata; links; whitespace;
+exact scope; and the complete checker suite with fail-fast shell behavior.
+
+**No-fallback result:** NIF-only architecture, native-only adapter evidence,
+skipped core verification, alternate binding frameworks, missing-evidence
+success, and default success are rejected. Contradictory implementation or
+failed evidence is typed invalid; missing contracts, evidence, or capability
+is typed unavailable.
+
+**Deviation:** `STD-0802` already established framework-free core testing as
+dependency evidence. This slice adds the independently required adapter/host
+evidence and removes the residual framework-specific example rather than
+creating a duplicate core-testing rule.
+
+No boundary-mechanism selection, compatibility, discovery, routing, metadata,
+lockfile, generated inventory, owner map, configuration, or downstream
+repository changed.
+
+**Next slice:** `7.4b8p`, replace `STD-0805` and `STD-0806` with generic
+Language Binding boundary-mechanism selection.

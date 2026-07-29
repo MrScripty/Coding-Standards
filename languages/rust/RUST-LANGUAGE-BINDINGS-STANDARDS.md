@@ -471,36 +471,11 @@ generated wrappers, or ABI behavior.
 
 ### NIF Pure-Logic Separation
 
-For Rustler crates, separate pure logic from NIF wrappers so tests run without
-the Erlang runtime:
-
-```rust
-// Pure logic — testable without NIF runtime
-fn parse_model_type_impl(type_str: &str) -> ElixirModelType {
-    match type_str.to_lowercase().as_str() {
-        "llm" => ElixirModelType::Llm,
-        "diffusion" => ElixirModelType::Diffusion,
-        _ => ElixirModelType::Unknown,
-    }
-}
-
-// NIF wrapper — delegates to pure logic
-#[rustler::nif]
-fn parse_model_type(type_str: String) -> ElixirModelType {
-    parse_model_type_impl(&type_str)
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_parse_model_type() {
-        assert!(matches!(parse_model_type_impl("llm"), ElixirModelType::Llm));
-        assert!(matches!(parse_model_type_impl("???"), ElixirModelType::Unknown));
-    }
-}
-```
+Framework-independent core behavior and separately provisioned adapter/host
+evidence are governed by
+[Rust core and adapter verification](../../profiles/languages/rust/language-bindings.md#verification).
+Rustler/NIF is one possible selected adapter, not the architecture or a
+substitute for the required core and real native/host evidence.
 
 See [../../TESTING-STANDARDS.md](../../TESTING-STANDARDS.md) for general test
 organization and naming conventions.

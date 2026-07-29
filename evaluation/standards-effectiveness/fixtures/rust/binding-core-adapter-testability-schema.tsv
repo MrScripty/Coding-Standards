@@ -1,0 +1,9 @@
+column	allowed
+case	*
+boundary	selected,missing,contradictory
+core_evidence	framework-free,missing,failed
+adapter_required	yes,no
+adapter_evidence	native-host,not-required,missing,failed,native-only
+capability	available,not-required,unavailable
+fallback	none,nif-only,native-only,skip-core,alternate-framework,default-success
+expected	allow,typed-invalid,typed-unavailable

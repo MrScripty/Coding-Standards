@@ -313,6 +313,21 @@ Verify the core/adapter boundary through:
   edge points into the core; and
 - adapter and generated-boundary checks for every supported binding mechanism.
 
+Core and adapter evidence are independent obligations. Core evidence exercises
+domain behavior and validated native types through the framework-free core
+contract. Adapter evidence exercises conversion, error mapping, lifecycle, and
+entrypoint behavior through the selected real native/host boundary. A
+native-only adapter test does not prove host behavior, and a host integration
+test does not prove that the core remains framework-independent.
+
+When the selected adapter requires a foreign runtime, its integration evidence
+may run in a separately provisioned verification environment. That separation
+does not permit excluding the adapter evidence, treating a framework-specific
+wrapper as the core contract, or replacing unavailable host capability with
+native-only tests. Record typed `invalid` when the implementation contradicts
+the selected core/adapter boundary and typed `unavailable` when required core
+or adapter evidence or its execution capability cannot be obtained.
+
 Verify runtime and handle adaptation through:
 
 - reuse of one composition-owned runtime with fresh state for every call;

@@ -115,8 +115,13 @@ This decomposition does not retain:
 
 Missing contract facts or capability return the applicable typed diagnostic.
 
-## Next Slice
+## Progress
 
-Milestone `7.4b8o` implements child `5.1`, `STD-0804`, as one Rust Language
+Milestone `7.4b8o` accepted child `5.1`, `STD-0804`, as one Rust Language
 Binding core/adapter testability contract with focused decision-table evidence
 and one exact disposition.
+
+## Next Slice
+
+Milestone `7.4b8p` implements child `5.2`, `STD-0805` and `STD-0806`, as
+generic Language Binding boundary-mechanism selection.

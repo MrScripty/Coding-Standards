@@ -1,0 +1,17 @@
+case	actual
+framework_free_core_only	allow
+core_and_real_adapter	allow
+missing_boundary	typed-unavailable
+contradictory_boundary	typed-invalid
+missing_core_evidence	typed-unavailable
+failed_core_evidence	typed-invalid
+missing_adapter_evidence	typed-unavailable
+failed_adapter_evidence	typed-invalid
+native_only_adapter	typed-invalid
+unavailable_host_capability	typed-unavailable
+unexpected_adapter_evidence	typed-invalid
+nif_only_substitute	typed-invalid
+native_only_substitute	typed-invalid
+skip_core_substitute	typed-invalid
+alternate_framework_substitute	typed-invalid
+default_success	typed-invalid

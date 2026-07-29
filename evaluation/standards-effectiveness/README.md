@@ -80,8 +80,15 @@ extra case, and unavailable-input failures.
 `milestone-7-row-5-decomposition.md` splits immutable row 5 into Rust
 core/adapter testability, generic boundary-mechanism selection, Contracts-owned
 evolution, and Rust contract-discovery adaptation. Its checker proves exact
-ordered overlay coverage, zero premature dispositions, package handoff, and
+ordered overlay coverage, ordered child dispositions, package handoff, and
 active cursor integrity.
+
+`fixtures/rust/binding-core-adapter-testability-*.tsv` and
+`verify-rust-binding-core-adapter-testability.sh` require distinct
+framework-free core and real native/host adapter evidence. They reject
+framework-coupled core behavior, missing or failed evidence, native-only
+adapter claims, NIF-only architecture, skipped core checks, alternate
+frameworks, and default success with typed outcomes.
 
 ## Routed Vertical Slice
 

@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** The six-ID Rust binding row is decomposed into four ordered
-owner-coherent children; Rust core/adapter testability is next.
+**Current phase:** Rust core/adapter testability is canonical; generic binding
+boundary-mechanism selection is next.
 
-**Next slice:** Milestone 7.4b8o Rust core-and-adapter testability for active child `STD-0804`.
+**Next slice:** Milestone 7.4b8p boundary-mechanism selection for active child `STD-0805`, `STD-0806`.
 
 **Acceptance status:** `partial`
 
@@ -1089,8 +1089,19 @@ all structural/routing fixtures pass.
        compatibility, lockstep-version, and mandatory version-export defaults
        rather than preserving them as alternate paths; and
      - change no normative standard or disposition in this re-plan.
-   - `7.4b8o` (`Planned`): replace `STD-0804` with one Rust Language Binding
-     core/adapter testability contract using reusable decision-table evidence.
+   - `7.4b8o` (`Accepted`): replace `STD-0804` with one Rust Language Binding
+     core/adapter testability contract using reusable decision-table evidence;
+     - require independent framework-free core and real native/host adapter
+       evidence when the selected binding surface includes an adapter;
+     - permit separately provisioned foreign-runtime verification without
+       weakening either evidence obligation;
+     - return typed invalid or unavailable diagnostics for contradictory
+       boundaries, failed evidence, missing evidence, or unavailable
+       capability; and
+     - remove the Rustler/NIF example and unknown-sentinel behavior instead of
+       retaining framework-specific architecture.
+   - `7.4b8p` (`Planned`): replace `STD-0805` and `STD-0806` with generic
+     Language Binding boundary-mechanism selection.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
