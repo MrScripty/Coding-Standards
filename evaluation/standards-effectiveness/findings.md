@@ -54,6 +54,7 @@ changes and focused fixture evidence.
 | F048 | Partially corrected through Milestone 7.4b7g | `STD-0473` has an exact Interop disposition; the other 60 residual Security, Cross-Platform, Interop, Rust Interop, Rust Security, and Rust Language Binding identifiers remain blocked on owner correction or decomposition. |
 | F049 | Resolved in Milestone 7.4b7g | Interop owns provider-selected registration, delivery, unregistration, release, and shutdown semantics with phase-aware outcomes, conditional Concurrency routing, and no destruction-linked cleanup. |
 | F050 | Resolved in Milestone 7.4b7f2 | The executor-delegation checker now requires the stable resolved `F026` state established by accepted Milestone 7.4b5f; all behavioral, disposition, metadata, legacy, and decomposition checks remain active. |
+| F051 | Planned for Milestone 7.4b7i | `STD-0757` is corrected from Rust Interop to Rust Language Binding ownership; the implementation must replace implicit Serde shape defaults with a selected schema, complete attribute-derived representation, consumer agreement, and native/host evidence. |
 
 ## Systemic Findings
 
@@ -91,6 +92,7 @@ changes and focused fixture evidence.
 | F048 | Residual owner-map drift | Frozen IDs `STD-0294`-`STD-0299`, `STD-0474`-`STD-0482`, `STD-0582`, `STD-0583`, `STD-0588`-`STD-0591`, `STD-0601`, `STD-0757`, `STD-0758`, `STD-0761`-`STD-0771`, `STD-0776`-`STD-0780`, `STD-0782`-`STD-0789`, `STD-0792`, `STD-0793`, `STD-0797`, `STD-0804`-`STD-0809`, `STD-0821`, `STD-0824`, `STD-0826` | Correct the remaining 60 cross-role destinations and decompose mixed groups in planning-only re-plans before activating each affected implementation slice. | 7 |
 | F049 | Incomplete event-registration lifecycle | `INTEROP-STANDARDS.md`; frozen ID `STD-0473` | Replace universal destruction-linked unsubscription with explicit registration authority, provider-selected delivery/unregistration/release/shutdown behavior, phase-aware outcomes, and conditional Concurrency routing only for callback-created work that can outlive invocation. | 7 |
 | F050 | Stale verification ownership | `verify-rust-binding-executor-delegation.sh`; resolved `F026` status | Replace the temporary partial-status assertion with the accepted resolved state while retaining all executor-delegation behavior, disposition, metadata, legacy, and decomposition evidence. | 7 |
+| F051 | Serde wire-representation ownership | `languages/rust/RUST-INTEROP-STANDARDS.md`; frozen ID `STD-0757` | Move Serde wire-shape mechanisms to the Rust Language Binding specialization; derive the effective representation from a selected schema and attributes, require consumer agreement and native/host evidence, and reject implicit casing, tagging, serializer, or schema-free fallback. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

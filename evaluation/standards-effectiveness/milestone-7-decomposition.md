@@ -143,13 +143,15 @@ those owners.
 
 The
 [independent trust-boundary re-plan](milestone-7-independent-trust-replan.md)
-now measures 61 remaining identifiers across six owners after accepting the
-Rust Cross-Platform specialization. It corrects the mixed generic Interop
-group and selects only `STD-0473` for the next implementation slice because
-event registration is a provider-governed foreign resource lifecycle already
-owned by the Interop boundary profile, while asynchronous callback work remains
-owned by Concurrency. The other nine generic Interop sections and all remaining
-cross-role owner-map groups stay blocked on correction or decomposition.
+now measures 60 remaining identifiers across six proposed-owner groups after
+accepting Rust Cross-Platform and event registration. Its 61-ID frozen
+baseline includes accepted `STD-0473`; the group fixture names that distinction
+explicitly instead of presenting every baseline ID as remaining. The next
+owner correction selects only `STD-0757` because Serde wire shape is a Rust
+Language Binding representation, not Rust foreign-memory authority. Generic
+Security, Cross-Platform, and Interop groups plus the Rust Security and
+Language Binding remainders stay blocked on decomposition or missing
+ownership.
 
 Before starting each later wave:
 

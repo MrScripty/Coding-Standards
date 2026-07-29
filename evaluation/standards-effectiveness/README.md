@@ -322,13 +322,14 @@ boundary without moving normative guidance.
 `milestone-7-independent-trust-groups.tsv`, and
 `milestone-7-independent-trust-next-slice.tsv` resume the independent
 trust-boundary wave after the lifecycle bridge. The focused checker proves the
-61-ID/six-owner baseline after Rust Cross-Platform acceptance, owner existence,
-accepted Contracts/Interop dependencies, conditional Concurrency selection,
-residual owner-correction status, and the exact event-registration disposition.
-The accepted corrective pre-slice keeps Concurrency routing conditional on
-callback-created work that can outlive invocation, requires provider-selected
-lifecycle behavior and phase-aware evidence, and forbids broadening metadata
-checker closures to encode an unnecessary unconditional dependency.
+61-ID/six-proposed-owner frozen baseline, 60-ID current remainder after event
+registration, owner existence, accepted Contracts/Interop/Rust Language
+Binding dependencies, residual decomposition status, and the exact corrected
+`STD-0757` next-slice proposal. The accepted `7.4b7h` re-plan rejects a
+six-ID Security draft that still mixed Core, Contracts, Security,
+implementation structure, and field-rule ownership. It selects only the
+dependency-ready Serde wire-representation identifier and changes no
+normative, legacy, disposition, generated, configuration, or downstream file.
 
 `verify-interop-event-registration.sh` checks provider-governed registration
 phases, delivery and local-work independence, current callback input,

@@ -2565,3 +2565,59 @@ owners.
 
 **Next slice:** `7.4b7h`, planning only, to re-measure the remainder, correct
 the next owner boundary, and activate exactly one dependency-ready slice.
+
+## 2026-07-28: Milestone 7.4b7h Independent Trust Remainder Re-plan
+
+**Outcome:** Accepted.
+
+The remeasurement retains 593 global residual identifiers across 29 sources
+and 28 proposed owners, with 13 proposed owners missing. The independent trust
+remainder contains 60 identifiers across six proposed-owner groups. The group
+fixture's 61 identifiers are now explicitly a frozen baseline that includes
+accepted `STD-0473`, not a claim that all 61 remain.
+
+**Independent review:** the first isolated draft selected six generic Security
+validation identifiers for Contracts. Review rejected it before live transfer
+because the group mixes Core trust boundaries, Contracts validated-value
+reuse, Security consequences, implementation structure, and the decomposable
+field taxonomy in `STD-0590`. No normative, legacy, disposition, or live file
+was changed by that rejected draft.
+
+The corrected selection freezes only `STD-0757`. Serde wire shape is a Rust
+Language Binding representation, not Rust foreign-memory authority. The
+selected owner and its generic Language Binding, Contracts, Rust, and
+Verification dependencies already exist. Generic Security, Cross-Platform,
+Interop, Rust Security, and the larger Rust Language Binding remainder stay
+blocked on decomposition or missing ownership.
+`STD-0826` specifically remains blocked on a missing Rust API owner, while
+tooling-oriented Cross-Platform and Rust Language Binding rows remain blocked
+on a missing Tooling workflow owner. Their exact later subsets and
+dispositions are deferred under `F048`; this slice does not invent those
+owners.
+
+**Final review findings (`Resolved`):** the planning checker no longer accepts
+a premature `STD-0757` disposition; the report replaces stale 61-remaining
+language with one 61-baseline/60-current audit; the group fixture structurally
+records and verifies missing Rust API and Tooling owners; and the active-plan
+report label identifies the current Rust wire-representation handoff.
+
+**Write set:** independent trust report, group and next-slice fixtures and
+checker; parent decomposition report; evaluation README and findings; active
+plan; and this ledger.
+
+**No-fallback result:** planning does not infer readiness from row order,
+combine a mixed generic group, treat attributes or Rust-native layout as a
+wire-schema substitute, assume casing or tagging defaults, reuse the accepted
+event-registration disposition, invent a missing owner, or move normative
+guidance before pre-slice acceptance.
+
+**Verification:** the focused re-plan checker proves the 61-ID frozen baseline,
+60-ID current remainder, six proposed-owner groups, exact corrected one-ID
+proposal, zero premature dispositions, dependencies, and active-plan handoff.
+Plan lifecycle, shell syntax, whitespace, exact scope, and every
+`evaluation/standards-effectiveness/verify-*.sh` checker pass under fail-fast
+execution.
+
+**Next slice:** `7.4b7i`, one identifier, to establish selected Serde schema,
+complete attribute-derived representation, consumer agreement, typed outcomes,
+and native/host evidence in the Rust Language Binding specialization.

@@ -1,2 +1,2 @@
 slice	order	id	source	target	disposition	rationale
-7.4b7g	1	STD-0473	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	bind foreign registration delivery unregistration release and shutdown to the provider contract and route only outliving callback work to concurrency
+7.4b7i	1	STD-0757	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	bind the effective Serde wire shape to the selected schema attributes consumer contract and native-host evidence

@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 event-registration lifecycle accepted; residual
-trust-boundary owner correction is next.
+**Current phase:** Milestone 7 independent trust remainder re-plan accepted;
+Rust serialized binding representation is next.
 
-**Next slice:** Milestone 7.4b7h independent trust remainder re-plan.
+**Next slice:** Milestone 7.4b7i Rust serialized binding representation.
 
 **Acceptance status:** `partial`
 
@@ -31,7 +31,7 @@ trust-boundary owner correction is next.
 
 **F025/F026 decomposition:** [Dependent Rust binding and security lifecycle slices](../evaluation/standards-effectiveness/milestone-7-f025-f026-decomposition.md)
 
-**Independent trust-boundary re-plan:** [Six owner groups and event registration lifecycle next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
+**Independent trust-boundary re-plan:** [Six proposed-owner groups and corrected Rust wire-representation next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -825,10 +825,30 @@ all structural/routing fixtures pass.
        arbitrary-thread retry, alternate events, assumed idempotence,
        universal ordering, and false cleanup success;
      - `STD-0473` has one exact disposition and `F049` is resolved.
-   - `7.4b7h` (`Planned`): re-measure the 593-ID global and 60-ID independent
+   - `7.4b7h` (`Accepted`): re-measure the 593-ID global and 60-ID independent
      trust remainder, correct the next residual owner boundary, and activate
      exactly one dependency-ready implementation slice without normative
-     movement.
+     movement;
+     - the 61-ID group fixture is a frozen baseline that includes accepted
+       `STD-0473`; its count is no longer mislabeled as entirely remaining;
+     - independent review rejects a six-ID Security proposal because it still
+       mixes Core, Contracts, Security, implementation structure, and
+       decomposable validation rules;
+     - `STD-0757` is corrected from Rust Interop to Rust Language Binding
+       ownership because it defines a serialized Rust/host representation;
+     - the selected owner and its Contracts, generic Language Binding, Rust,
+       and Verification prerequisites already exist;
+     - implicit Serde shape, casing, tagging, generation, and producer-only
+       evidence assumptions are recorded as `F051`; and
+     - review findings (`Resolved`): planning requires zero premature
+       dispositions, current audit counts are unambiguous, missing Rust API
+       and Tooling owners are fixture-verified, and the report link names the
+       current handoff;
+     - the planning slice changes no normative or legacy standard, final
+       disposition, generated artifact, configuration, or downstream file.
+   - `7.4b7i` (`Planned`): establish the Rust Language Binding contract for a
+     selected Serde schema, complete attribute-derived wire shape, consumer
+     agreement, typed outcomes, and native/host evidence for `STD-0757`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

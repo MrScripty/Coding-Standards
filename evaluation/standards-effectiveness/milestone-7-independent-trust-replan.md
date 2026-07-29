@@ -13,53 +13,38 @@ downstream policy.
 
 ## Current Audit
 
-The rolling disposition gate reports 594 frozen identifiers across 29 legacy
+The rolling disposition gate reports 593 residual identifiers across 29 legacy
 sources and 28 proposed canonical owners, with 13 owners still missing.
 
 [milestone-7-independent-trust-groups.tsv](milestone-7-independent-trust-groups.tsv)
-freezes the active trust-boundary subset:
+records 61 frozen baseline identifiers and 60 current identifiers:
 
-| Order | Owner | Remaining IDs | State | Dependency |
-| ---: | --- | ---: | --- | --- |
-| 1 | `topics/security.md` | 7 | Exists | None |
-| 2 | `topics/cross-platform.md` | 6 | Exists | None |
-| 3 | `profiles/boundaries/interop.md` | 10 | Exists | Accepted Contracts; conditional Concurrency selection |
-| 4 | `profiles/languages/rust/interop.md` | 1 | Exists | Interop |
-| 5 | `profiles/languages/rust/security.md` | 3 | Exists | Security and Rust Async |
-| 6 | `profiles/languages/rust/language-bindings.md` | 34 | Exists | Language Bindings and Rust Async |
+| Order | Proposed owner | Frozen | Current | State | Dependency or blocker |
+| ---: | --- | ---: | ---: | --- | --- |
+| 1 | `topics/security.md` | 7 | 7 | Decompose | Contracts |
+| 2 | `topics/cross-platform.md` | 6 | 6 | Decompose | Missing Tooling owner for affected rows |
+| 3 | `profiles/boundaries/interop.md` | 10 | 9 | Decompose | Contracts; `STD-0473` accepted |
+| 4 | `profiles/languages/rust/interop.md` | 1 | 1 | Corrected and ready | Rust Language Bindings and Contracts |
+| 5 | `profiles/languages/rust/security.md` | 3 | 3 | Decompose | Security, Rust Async, and missing Rust API owner |
+| 6 | `profiles/languages/rust/language-bindings.md` | 34 | 34 | Decompose | Language Bindings, Rust Async, and missing Tooling owner for affected rows |
 
-These six groups total 61 undisposed identifiers. Their owner-map
-destinations remain proposals until an accepted pre-slice review proves the
-section role and correctness.
+The baseline includes accepted `STD-0473`. Owner-map destinations remain audit
+proposals until an accepted pre-slice review proves each section's role and
+correctness.
 
 ## Selection Decision
 
-The generic Interop group is not one implementation unit. `STD-0474` through
-`STD-0482` mix contract evolution, runtime decoding, wire representation, and
-routing roles that require separate owner corrections. `STD-0473` alone
-describes a foreign event-registration resource and fits the accepted Interop
-boundary owner's initialization, callback, release, and shutdown contract.
+Select only `STD-0757`. It defines a Serde-derived Rust/host wire
+representation, so its corrected owner is the existing Rust Language Binding
+profile rather than Rust Interop. Contracts and the generic Language Binding
+profile already own schema and cross-language representation policy.
 
-The legacy rule universally ties unsubscription to subscriber destruction and
-uses framework-specific C# and TypeScript examples. Destruction, finalization,
-or garbage collection does not prove that callback delivery has stopped, that
-in-flight delivery is resolved, or that release occurs on an allowed thread.
-This incomplete lifecycle and unsafe cleanup default is recorded as `F049`.
-
-Select only `STD-0473` as the next implementation slice. The Interop profile
-must identify the foreign registration owner, callback lifetime and thread,
-re-entrancy, provider delivery guarantees, in-flight provider behavior,
-unregistration semantics, release authority, and provider shutdown ordering.
-When callback-created work can outlive its invocation, it must consume the
-generic Concurrency owner for work ownership, failure observation,
-cancellation propagation, and work shutdown. Provider delivery scheduling
-alone does not select Concurrency. The lifecycle must return typed `invalid`,
-`unsupported`, `unavailable`, or incomplete-cleanup diagnostics when the
-selected provider/subscriber contract cannot be completed.
-
-The slice refines one existing boundary owner and does not move event-domain
-behavior, contract evolution, IPC decoding, wire schemas, language-specific
-framework recipes, or routing policy into Interop.
+The implementation must derive the effective representation from the selected
+schema, serializer contract, Rust type, and all applicable Serde attributes.
+Receiving consumers must agree with that representation, and native/host
+round-trip plus rejection evidence must prove the boundary. Missing or
+contradictory schema facts return typed diagnostics; they cannot select default
+casing, tagging, field names, variants, generation, serializer, or evidence.
 
 ## Remainder Ownership Audit
 
@@ -73,18 +58,18 @@ an owner-correction or decomposition re-plan before activation:
   lifecycle, Release artifact identity, Documentation, and Verification
   scheduling;
 - generic Interop contract and wire sections mix Contracts, IPC, Language
-  Bindings, event-resource lifecycle, and routing;
-- `STD-0757` is serialized wire representation, not Rust foreign-memory
-  authority;
+  Bindings, and routing;
+- `STD-0757` is the one corrected, dependency-ready serialized representation;
 - the Rust Security remainder mixes index closure, bounded admission, and
-  panic/API policy; and
+  panic/API policy, with `STD-0826` blocked on the missing Rust API owner; and
 - the 34-ID Rust Language Binding remainder requires separate packaging,
   support-surface, error, callback, generation, build, selection, and
-  compatibility slices.
+  compatibility slices, including affected rows blocked on the missing Tooling
+  owner.
 
-The exact role and exclusions for `STD-0473` are now corrected. The remaining
-60 identifiers stay under `F048`; no other group or generic Interop section is
-activated by this decision.
+All 60 identifiers remain under `F048` in this planning slice. Only
+`STD-0757` is activated for the next implementation; no other group or generic
+section is pre-approved.
 
 ## Accepted Slice 7.4b6: Planning-Only Re-plan
 
@@ -649,27 +634,148 @@ rolling remainder is 593 identifiers across 29 sources and 28 owners, with 13
 owners still missing. The independent trust subset is 60 identifiers across
 six owners.
 
-## Planned Slice 7.4b7h: Independent Trust Remainder Re-plan
+## Accepted Slice 7.4b7h: Independent Trust Remainder Re-plan
 
 **Outcome:** re-measure the 593-ID global remainder and 60-ID independent trust
 subset, correct the next residual owner boundary, and activate exactly one
 dependency-ready implementation slice without normative movement.
 
+**Allowed write set:**
+
+- this report;
+- `milestone-7-independent-trust-groups.tsv`;
+- `milestone-7-independent-trust-next-slice.tsv`;
+- `verify-milestone-7-independent-trust-replan.sh`;
+- the parent Milestone 7 decomposition report;
+- evaluation README, findings, active plan, and execution ledger.
+
+No normative or legacy standard, final disposition, generated inventory,
+owner map, router, metadata contract, template, source, test, configuration,
+dependency, lockfile, build output, runtime, workflow fixture, or downstream
+repository belongs to this planning slice.
+
+**Remeasurement:** the rolling remainder remains 593 identifiers across 29
+legacy sources and 28 proposed owners, with 13 proposed owners still missing.
+The independent trust subset remains 60 identifiers across six proposed-owner
+groups. Accepted `STD-0473` is excluded from both current counts while its
+frozen Interop group remains visible as historical decomposition evidence.
+
+**Independent review:** the first isolated draft selected six generic Security
+validation identifiers for Contracts. Review rejected that selection before
+transfer because the group still mixes Core trust-boundary rules, Contracts
+validated-value reuse, Security authority consequences, implementation
+structure, and the decomposable validation table in `STD-0590`. The rejected
+draft created no live change, disposition, or fallback plan.
+
+The six proposed-owner groups are baseline decomposition groups, not current
+owner authority. Their 61 frozen identifiers include accepted `STD-0473`; the
+current remainder is 60. The group fixture now names its count `frozen_ids`
+rather than inaccurately calling all 61 identifiers remaining.
+
+**Owner correction:** `STD-0757` is a serialized Rust/host representation, not
+foreign-memory authority. Its canonical owner is
+`profiles/languages/rust/language-bindings.md`, consuming Contracts and the
+generic Language Binding boundary. That owner and every declared prerequisite
+already exist. The other groups remain blocked on decomposition or a missing
+owner; row order does not make either no-prerequisite generic group ready.
+In particular, `STD-0826` cannot move until a Rust API profile owns panic/API
+policy, and tooling-oriented Cross-Platform and Rust Language Binding rows
+cannot move until their Tooling workflow owner exists. Those later exact
+subsets remain unresolved under `F048`; this slice does not invent either
+owner or pre-approve their dispositions.
+
+The legacy Serde section treats attributes as a complete wire contract and
+prescribes explicit casing plus shared generation without first selecting the
+schema, serializer, consumer contract, and available generation capability.
+The canonical Rust specialization must derive the effective serialized shape
+from the selected schema and all applicable Serde attributes, require consumer
+agreement and native/host evidence, and preserve typed outcomes when a schema,
+variant, or capability is invalid, unsupported, or unavailable. This conflict
+is recorded as `F051`.
+
+**Selection decision:** freeze the one corrected identifier in
+[milestone-7-independent-trust-next-slice.tsv](milestone-7-independent-trust-next-slice.tsv)
+for `7.4b7i`. The Rust Language Binding profile already applies to serialized
+wire contracts, distinguishes serialized values from native, ABI, framework,
+handle, and generated representations, and consumes the accepted generic
+owners. The slice may refine only that Rust profile, replace only the legacy
+Serde section, update the Rust profile index, add focused evidence, and record
+one exact disposition.
+
+**Pre-slice review:** accepted. One Rust Language Binding specialization can
+own Serde-specific schema and attribute mechanisms without changing generic
+Contracts, Interop, Language Binding, Security, Rust Interop, or Rust Async
+authority. The legacy section is one bounded source group, and real
+native/host round-trip evidence can distinguish schema agreement from
+producer-only serialization.
+
+**Acceptance gate:** the checker proves the exact 593-ID global and 60-ID
+independent-trust remainders, the exact 61-ID frozen baseline across six
+proposed-owner groups, exact one-ID corrected Rust Language Binding proposal,
+zero premature dispositions, accepted
+dependencies, active-plan handoff, parent linkage, plan lifecycle, shell
+syntax, whitespace, and all standards-effectiveness regressions.
+
+**Final review findings (`Resolved`):** the corrected checker now requires
+exactly zero `STD-0757` dispositions during the planning slice; the report has
+one current 61-baseline/60-current audit instead of stale 61-remaining
+language; the group fixture records and verifies missing Rust API and Tooling
+owners; and the active-plan report label names the current Rust wire-
+representation handoff.
+
 **No fallback:** do not infer the next owner from the historical group order,
-combine mixed-role identifiers, reuse the completed `STD-0473` disposition,
-invent a missing owner, or start another implementation before exact
-measurement and pre-slice review pass.
+combine a mixed generic group, treat Serde attributes or Rust-native layout as
+a schema substitute, assume default casing, tagging, enum, or field behavior,
+reuse the completed `STD-0473` disposition, invent a missing owner, or start
+another implementation before exact measurement and pre-slice review pass.
+
+## Planned Slice 7.4b7i: Rust Serialized Binding Representation
+
+**Outcome:** make the Rust Language Binding profile canonical for deriving and
+proving a selected Serde wire representation across a real Rust/host boundary.
+
+**Allowed write set:**
+
+- `profiles/languages/rust/language-bindings.md`;
+- only the legacy “Serde Wire-Format Alignment” section in
+  `languages/rust/RUST-INTEROP-STANDARDS.md`;
+- `profiles/languages/rust/README.md`;
+- `fixtures/rust/wire-representation-decisions.tsv`;
+- `verify-rust-wire-representation.sh`;
+- `consolidation-dispositions.tsv`;
+- this report and checker;
+- evaluation README, findings, active plan, and execution ledger.
+
+No generic Contracts, Interop, Language Binding, Security, Rust Interop
+profile, Rust Async, Router, metadata, template, generated, dependency,
+configuration, lockfile, workflow fixture, runtime, or downstream file belongs
+to the implementation slice.
+
+**Required semantics:**
+
+- select the wire schema and serializer contract before deriving shape;
+- derive effective tags, content fields, casing, names, optionality, variants,
+  and field representation from the selected schema and applicable Serde
+  attributes;
+- require receiving consumers to agree with that effective representation;
+- preserve typed `invalid`, `unsupported`, and `unavailable` outcomes; and
+- verify supported representations through native/host round trips and
+  rejection cases, not producer-only serialization.
+
+**No fallback:** reject schema-free JSON, Rust-native layout, default casing or
+tagging, unknown-value sentinels, omitted unsupported variants, another
+serializer or binding mechanism, generated-schema claims without selected
+capability, producer-only tests, and weaker evidence.
 
 ## Re-Plan Triggers
 
-- Event registration cannot be represented as provider-governed foreign
-  resource lifecycle without moving event-domain behavior into Interop.
-- Correct cleanup requires a generic Concurrency or Contracts change outside
-  the activated owner boundary.
-- A provider contract cannot distinguish cancellation, in-flight delivery,
-  unregistration, release, and shutdown completion.
-- Focused evidence cannot distinguish complete cleanup from typed incomplete
-  cleanup.
+- `STD-0757` requires a generic schema-policy change outside the Rust
+  specialization.
+- One exact disposition cannot replace the complete legacy Serde section
+  without splitting generic Contracts and Rust mechanism ownership.
+- Focused evidence cannot distinguish schema invalidity, unsupported
+  representations, unavailable schema/generation capability, and native/host
+  disagreement.
 - Implementation needs an undisposed identifier, owner, source, generated
   artifact, configuration, lockfile, workflow fixture, or downstream file
   outside the activated write set.
