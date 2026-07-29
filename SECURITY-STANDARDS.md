@@ -21,72 +21,12 @@ validation/use races, and typed unresolved outcomes.
 
 ## Input Validation
 
-### Centralized Input Validator
-
-String inputs from external sources should be validated through shared utilities:
-
-```csharp
-/// <summary>
-/// Centralized input validation for external input payloads.
-/// </summary>
-public static class InputValidator
-{
-    private static readonly Regex SafeNamePattern = new(@"^[a-zA-Z0-9_-]+$", RegexOptions.Compiled);
-
-    /// <summary>
-    /// Validates a user-provided name (project name, file name, etc.).
-    /// </summary>
-    public static (bool isValid, string? error) ValidateName(
-        string? name, int minLength = 1, int maxLength = 64)
-    {
-        if (string.IsNullOrWhiteSpace(name))
-            return (false, "Name is required");
-        if (name.Length < minLength)
-            return (false, $"Name must be at least {minLength} characters");
-        if (name.Length > maxLength)
-            return (false, $"Name must be at most {maxLength} characters");
-        if (!SafeNamePattern.IsMatch(name))
-            return (false, "Name can only contain letters, numbers, underscores, and hyphens");
-        return (true, null);
-    }
-
-    /// <summary>
-    /// Validates a required non-empty string field.
-    /// </summary>
-    public static (bool isValid, string? error) ValidateRequired(string? value, string fieldName)
-    {
-        if (string.IsNullOrWhiteSpace(value))
-            return (false, $"{fieldName} is required");
-        return (true, null);
-    }
-}
-```
-
-### Validation Rules
-
-| Input Type | Validation | Where |
-|------------|-----------|-------|
-| File paths | Resolve and check against allowed root | PathValidator |
-| User-provided names | Regex allowlist, length bounds | InputValidator |
-| Required string fields | Non-empty check | InputValidator |
-| JSON payloads | Runtime type check before cast | API boundary |
-| Numeric ranges | Bounds check before use | Handler |
-
-### No Duplicate Validation Logic
-
-The validation modules above are the **single implementation**. Handlers must
-not write their own regex patterns or path checks inline.
-
-```csharp
-// BAD: Inline regex duplicating InputValidator logic
-if (!Regex.IsMatch(name, @"^[a-zA-Z0-9_-]+$"))
-    return error;
-
-// GOOD: Use the shared validator
-var (isValid, error) = InputValidator.ValidateName(name);
-if (!isValid)
-    return ErrorResponse(error!);
-```
+Canonical untrusted-input validation authority moved to
+[Input Validation Authority](topics/security.md#input-validation-authority).
+That topic selects authority per operation contract, routes specialized
+filesystem and IPC mechanisms, consumes Contracts proof semantics, and rejects
+global-validator, fixed-rule, cast, duplicate-inline, and weaker-mechanism
+fallbacks.
 
 ---
 

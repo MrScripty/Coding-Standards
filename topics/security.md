@@ -29,6 +29,43 @@ unsupported contract or operation returns typed `unsupported`; unavailable
 required decoding capability returns typed `unavailable`. Do not continue with
 the original input, a cast, a default operation, or a weaker decoder.
 
+## Input Validation Authority
+
+When untrusted input can authorize an operation, resource access, side effect,
+or security-relevant decision, select one canonical validation authority for
+the complete operation contract at each applicable boundary. The authority may
+be a decoder, smart constructor, generated validator, schema implementation,
+or another mechanism that proves the complete contract. It does not mandate
+one global validator class or utility.
+
+The operation contract defines all applicable shape, field, domain, bound,
+identifier, normalization, defaulting, version, and cross-field invariants.
+Do not invent a regular expression, length, non-empty rule, numeric range,
+cast, or default independently of that contract. File paths additionally use
+[Filesystem Containment](#filesystem-containment); structured messages use the
+selected [IPC boundary profile](../profiles/boundaries/ipc.md).
+
+Every entry point enforcing the same operation contract must consume the same
+canonical contract authority. Executable validators may be generated from
+that authority or implemented separately when language or deployment
+boundaries require it, but each implementation needs conformance evidence
+against the complete contract. Independently copied or inline rules without
+that authority and evidence can diverge and are invalid. Different operation
+contracts or new applicable boundaries may select different authorities and
+may require new proof.
+
+The [Contracts topic](contracts.md#runtime-decoding-at-boundaries) owns the
+proof-bearing representation and complete decoding semantics. Security owns
+the requirement for proof before untrusted input can authorize work and the
+consequences of missing or failed proof. Return typed `invalid` for failed or
+incomplete proof, `unsupported` for a well-formed unsupported contract or
+variant, and `unavailable` when the selected contract material or required
+validation capability cannot be obtained.
+
+Do not fall back to a global catch-all validator, fixed rules, a cast, an
+independent inline validator, the original input, a permissive default, or a
+weaker validation mechanism.
+
 ## Network Transport Boundary
 
 A listener's exposure comes from the declared service and deployment contract.

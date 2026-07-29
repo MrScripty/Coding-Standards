@@ -326,3 +326,7 @@ STD-0757	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/langua
 STD-0824	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	derive external-input queue resource limits overload behavior telemetry ownership and typed outcomes from the selected operation contract
 STD-0583	SECURITY-STANDARDS.md	topics/contracts.md	refine	define validation authority through a retained proof-bearing representation and complete applicable contract
 STD-0601	SECURITY-STANDARDS.md	topics/contracts.md	refine	require new proof after invalidation or a new applicable boundary without redundant decoding of an intact validated representation
+STD-0588	SECURITY-STANDARDS.md	topics/security.md	refine	require operation-specific validation authority before untrusted input authorizes security-relevant work
+STD-0589	SECURITY-STANDARDS.md	topics/security.md	refine	replace one global validator utility with a contract-selected canonical validation authority
+STD-0590	SECURITY-STANDARDS.md	topics/security.md	refine	derive validation invariants and specialized mechanisms from the complete operation contract
+STD-0591	SECURITY-STANDARDS.md	topics/security.md	refine	require canonical authority and conformance evidence while permitting distinct contracts and new-boundary proof

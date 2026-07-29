@@ -1079,3 +1079,36 @@ routing, metadata, or generated-artifact changes.
 **No fallback:** do not mutate or truncate the baseline manifest, accept
 partially disposed clusters, skip earlier rows implicitly, loosen exact
 coverage, or preserve manually synchronized moving totals.
+
+## Accepted Slice 7.4b8a: Security Input Validation Authority
+
+**Outcome:** `STD-0588` through `STD-0591` form one Security-owned requirement:
+untrusted input cannot authorize security-relevant work until the complete
+operation contract selects a canonical validation authority at the applicable
+boundary. Contracts retains proof-bearing representation semantics;
+filesystem containment and IPC retain their specialized mechanisms.
+
+The canonical rule permits decoders, smart constructors, generated validators,
+schema implementations, and other complete mechanisms. It does not mandate a
+global validator utility. Entry points enforcing the same operation contract
+consume one canonical contract authority. Generated and separately implemented
+language or deployment validators require conformance evidence; distinct
+contracts and new applicable boundaries may select distinct authorities and
+require new proof.
+
+Seventeen focused decisions and four exact dispositions reject the named C#
+validator, fixed regex and length rules, validation-by-cast, independently
+duplicated inline rules, original-input reuse, permissive defaults, and weaker
+validators. The immutable train derives 4 completed and 585 remaining IDs and
+advances to row 2 without checker edits.
+
+**No fallback:** missing contract material or validation capability returns
+typed `unavailable`, unsupported contracts return `unsupported`, and failed or
+incomplete proof returns `invalid`.
+
+## Planned Slice 7.4b8b: Interop Boundary Cluster
+
+**Outcome:** review `STD-0474` through `STD-0482` for one owner-coherent Interop
+boundary contract. Normative movement begins only if the bounded pre-slice
+review confirms the owner, dependencies, legacy section, focused evidence, and
+exact disposition semantics.

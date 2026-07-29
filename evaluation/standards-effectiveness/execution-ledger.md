@@ -2833,3 +2833,31 @@ retain manually synchronized counter state.
 
 **Next slice:** `7.4b8a`, review and implement `STD-0588`-`STD-0591` under the
 Security validation authority when its bounded pre-slice review passes.
+
+## 2026-07-29: Milestone 7.4b8a Security Input Validation Authority
+
+**Outcome:** Accepted.
+
+Security now requires the complete operation contract to select one canonical
+validation authority at each applicable untrusted boundary before input can
+authorize security-relevant work. Contracts retains proof construction and
+lifetime; filesystem containment and IPC retain specialized mechanisms. The
+rule permits generated or separately implemented language/deployment
+validators with conformance evidence, distinct operation contracts, and
+new-boundary proof without mandating one global validator utility.
+
+**Verification:** 17 focused decisions; four exact dispositions; metadata and
+bounded legacy-section checks; runtime-decoding, filesystem-containment,
+independent-trust, immutable-train, plan-lifecycle, shell-syntax, whitespace,
+and exact-scope checks. This is a focused train row, not a wave checkpoint.
+
+**No-fallback result:** the named C# validator, fixed regex and length rules,
+validation-by-cast, duplicate inline validators, original-input reuse,
+permissive defaults, and weaker validation mechanisms are removed rather than
+retained as compatibility guidance.
+
+The immutable train derives 4 completed IDs and 585 remaining IDs across one
+completed and 46 pending clusters.
+
+**Next slice:** `7.4b8b`, bounded pre-slice review of the
+`STD-0474`-`STD-0482` Interop boundary cluster.

@@ -366,6 +366,15 @@ completed prefix and the first wholly remaining row, while partial cluster
 completion is rejected. Manifest rows authorize pre-slice review; they do not
 pre-approve final owners or dispositions.
 
+`fixtures/security/input-validation-authority-decisions.tsv` and
+`verify-input-validation-authority.sh` check operation-specific validation
+authority, complete-contract coverage, generated or conformance-proven
+implementation equivalence,
+typed invalid/unsupported/unavailable outcomes, exact dispositions, bounded
+legacy replacement, and rejection of global-validator, fixed-rule, cast,
+duplicate-inline, original-input, permissive-default, and weaker-validator
+fallbacks.
+
 `fixtures/rust/external-input-queue-decisions.tsv` and
 `verify-rust-external-input-queue.sh` check selected capacity, overload,
 retention/eviction, telemetry, ownership, typed outcomes, exact disposition,

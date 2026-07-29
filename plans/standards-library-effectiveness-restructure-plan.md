@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Immutable Milestone 7 execution train accepted; the first
-dependency-ready trust-boundary cluster is next.
+**Current phase:** Security validation authority accepted; the next
+trust-boundary cluster requires bounded Interop owner review.
 
-**Next slice:** Milestone 7.4b8a Security validation cluster (`STD-0588`-`STD-0591`).
+**Next slice:** Milestone 7.4b8b Interop boundary cluster (`STD-0474`-`STD-0482`).
 
 **Acceptance status:** `partial`
 
@@ -914,10 +914,24 @@ all structural/routing fixtures pass.
      - train and independent-trust totals are derived, so routine cluster
        completion does not rewrite shared checkers or trigger a complete suite
        solely to advance counters.
-   - `7.4b8a` (`Planned`): review and, when the owner boundary is accepted,
-     implement the `STD-0588`-`STD-0591` Security validation cluster in one
-     atomic slice; a failed owner review triggers manifest correction instead
-     of preserving the proposed move.
+   - `7.4b8a` (`Accepted`): replace the global C# validator and fixed rule
+     table with Security-owned, operation-specific validation authority;
+     - one complete operation contract selects one canonical authority at each
+       applicable untrusted boundary without mandating one global utility;
+     - Contracts retains proof construction and lifetime, while filesystem and
+       IPC profiles retain their specialized mechanisms;
+     - same-contract entry points consume one canonical contract authority;
+       generated or separate language/deployment implementations require
+       conformance evidence without prohibiting distinct contracts or new
+       boundary proof;
+     - typed invalid, unsupported, and unavailable outcomes replace fixed
+       regex, length, cast, default, duplicate-inline, original-input, and
+       weaker-validator fallback; and
+     - 17 focused decisions and four exact dispositions advance the immutable
+       train to row 2.
+   - `7.4b8b` (`Planned`): review `STD-0474`-`STD-0482` as the proposed Interop
+     boundary cluster and implement it only if one owner-coherent contract and
+     bounded write set pass pre-slice review.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
