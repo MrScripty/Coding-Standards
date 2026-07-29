@@ -1,2 +1,2 @@
 slice	order	id	source	target	disposition	rationale
-7.4b7i	1	STD-0757	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	bind the effective Serde wire shape to the selected schema attributes consumer contract and native-host evidence
+7.4b7k	1	STD-0824	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	derive external-input queue resource limits overload behavior and telemetry from the selected owner contract without fixed capacity or overflow fallback

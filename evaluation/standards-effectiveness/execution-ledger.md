@@ -2662,3 +2662,44 @@ owners.
 
 **Next slice:** `7.4b7j`, planning only, to re-measure the remainder, correct
 exactly one next owner boundary, and activate one dependency-ready slice.
+
+## 2026-07-28: Milestone 7.4b7j Independent Trust Remainder Re-plan
+
+**Outcome:** Accepted.
+
+The rolling remainder is 592 IDs across 28 sources and 27 owners, with 13
+owners still missing. The independent trust remainder is 59 IDs across six
+proposed-owner groups. The frozen 61-ID group fixture now records accepted
+`STD-0473` and `STD-0757` structurally, rather than making checker logic
+subtract owners by name.
+
+**Selection:** `STD-0824` is a bounded external-input queue rule. Rust
+Security already owns selected resource limits and typed operation outcomes;
+the rule neither requires the missing Rust API owner nor claims generic queue,
+Rust Async, Tooling, or runtime authority. The selected `7.4b7k` contract will
+derive capacity, overload, retention/rejection, and telemetry from the queue
+owner's operation and resource contract.
+
+**Discovered issue (`Planned`):** `F052` records the legacy fixed capacity and
+drop-oldest example, which has no selected resource limit, overload/retention
+outcome, telemetry authority, unavailable/unsupported path, or operation
+evidence.
+
+**Write set:** independent trust report, group and next-slice fixtures and
+checker, parent decomposition report, evaluation README and findings, active
+plan, and this ledger. No normative or legacy standard, final disposition,
+generated inventory, owner map, router, metadata, template, configuration,
+dependency, lockfile, workflow fixture, runtime, or downstream file changed.
+
+**No-fallback result:** planning does not turn the fixed numeric capacity,
+drop-oldest policy, silent discard, unbounded queue, alternate mechanism, or
+weaker evidence into a selected contract. It records the typed decision work
+for the next owner-bounded implementation slice.
+
+**Verification:** the focused checker proves current counts, 61-ID baseline,
+explicit accepted IDs, one exact `STD-0824` proposal, zero premature
+dispositions, prerequisite ownership, active-plan handoff, and all
+standards-effectiveness regressions under fail-fast execution.
+
+**Next slice:** `7.4b7k`, one identifier, to establish the Rust Security
+external-input queue contract and focused evidence.

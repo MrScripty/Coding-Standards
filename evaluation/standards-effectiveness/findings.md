@@ -55,6 +55,7 @@ changes and focused fixture evidence.
 | F049 | Resolved in Milestone 7.4b7g | Interop owns provider-selected registration, delivery, unregistration, release, and shutdown semantics with phase-aware outcomes, conditional Concurrency routing, and no destruction-linked cleanup. |
 | F050 | Resolved in Milestone 7.4b7f2 | The executor-delegation checker now requires the stable resolved `F026` state established by accepted Milestone 7.4b5f; all behavioral, disposition, metadata, legacy, and decomposition checks remain active. |
 | F051 | Resolved in Milestone 7.4b7i | `STD-0757` now has Rust Language Binding ownership: selected schema and serializer facts, complete attribute-derived representation, consumer agreement, typed outcomes, and native/host evidence replace implicit Serde defaults. |
+| F052 | Planned for Milestone 7.4b7k | `STD-0824` fixes queue capacity and drop-oldest behavior without an operation resource contract, selected overload/retention outcome, telemetry authority, or typed unavailable/unsupported path. |
 
 ## Systemic Findings
 

@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust serialized binding representation accepted; the next
-independent-trust slice requires a planning-only remainder re-plan.
+**Current phase:** Independent trust remainder re-plan accepted; Rust
+external-input queue contract is next.
 
-**Next slice:** Milestone 7.4b7j independent trust remainder re-plan.
+**Next slice:** Milestone 7.4b7k Rust external-input queue contract.
 
 **Acceptance status:** `partial`
 
@@ -856,10 +856,22 @@ all structural/routing fixtures pass.
        outcomes replace implicit defaults and producer-only evidence;
      - the legacy Serde section is a bounded canonical link, and `F051` is
        resolved with one exact Rust Language Binding disposition.
-   - `7.4b7j` (`Planned`): re-measure the 592-ID global remainder across 28
+   - `7.4b7j` (`Accepted`): re-measure the 592-ID global remainder across 28
      sources and 27 owners, plus the 59-ID independent-trust remainder;
      correct exactly one next owner boundary; and activate only one
-     dependency-ready implementation slice without normative movement.
+     dependency-ready implementation slice without normative movement;
+     - accepted baseline IDs are fixture-owned rather than encoded as
+       owner-specific checker subtraction;
+     - `STD-0824` is selected for Rust Security because external-input queue
+       resource limits, overload outcomes, retention/rejection semantics, and
+       telemetry are one cohesive operation contract;
+     - `STD-0821` remains index closure and `STD-0826` remains blocked on the
+       missing Rust API owner; and
+     - `F052` records the legacy queue's fixed-capacity and drop-oldest
+       assumptions without selected operation facts or typed outcomes.
+   - `7.4b7k` (`Planned`): establish the Rust Security contract for selected
+     external-input queue resource limits, overload behavior, telemetry, typed
+     outcomes, and operation evidence for `STD-0824`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

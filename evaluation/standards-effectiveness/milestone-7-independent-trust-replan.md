@@ -13,38 +13,38 @@ downstream policy.
 
 ## Current Audit
 
-The rolling disposition gate reports 593 residual identifiers across 29 legacy
-sources and 28 proposed canonical owners, with 13 owners still missing.
+The rolling disposition gate reports 592 residual identifiers across 28 legacy
+sources and 27 proposed canonical owners, with 13 owners still missing.
 
 [milestone-7-independent-trust-groups.tsv](milestone-7-independent-trust-groups.tsv)
-records 61 frozen baseline identifiers and 60 current identifiers:
+records 61 frozen baseline identifiers and 59 current identifiers:
 
 | Order | Proposed owner | Frozen | Current | State | Dependency or blocker |
 | ---: | --- | ---: | ---: | --- | --- |
 | 1 | `topics/security.md` | 7 | 7 | Decompose | Contracts |
 | 2 | `topics/cross-platform.md` | 6 | 6 | Decompose | Missing Tooling owner for affected rows |
 | 3 | `profiles/boundaries/interop.md` | 10 | 9 | Decompose | Contracts; `STD-0473` accepted |
-| 4 | `profiles/languages/rust/interop.md` | 1 | 1 | Corrected and ready | Rust Language Bindings and Contracts |
-| 5 | `profiles/languages/rust/security.md` | 3 | 3 | Decompose | Security, Rust Async, and missing Rust API owner |
+| 4 | `profiles/languages/rust/interop.md` | 1 | 0 | Accepted | `STD-0757` accepted |
+| 5 | `profiles/languages/rust/security.md` | 3 | 3 | One candidate ready | Security; `STD-0826` remains blocked on missing Rust API |
 | 6 | `profiles/languages/rust/language-bindings.md` | 34 | 34 | Decompose | Language Bindings, Rust Async, and missing Tooling owner for affected rows |
 
-The baseline includes accepted `STD-0473`. Owner-map destinations remain audit
-proposals until an accepted pre-slice review proves each section's role and
-correctness.
+The baseline includes accepted `STD-0473` and `STD-0757`. Owner-map
+destinations remain audit proposals until an accepted pre-slice review proves
+each section's role and correctness.
 
 ## Selection Decision
 
-Select only `STD-0757`. It defines a Serde-derived Rust/host wire
-representation, so its corrected owner is the existing Rust Language Binding
-profile rather than Rust Interop. Contracts and the generic Language Binding
-profile already own schema and cross-language representation policy.
+Select only `STD-0824`. It defines a bounded queue that accepts external
+input, so its coherent owner is the existing Rust Security profile's resource-
+limit contract. It does not require the missing Rust API owner because it does
+not define panic/API behavior, and it does not require a Tooling owner because
+it does not define packaging, generation, build, or workflow policy.
 
-The implementation must derive the effective representation from the selected
-schema, serializer contract, Rust type, and all applicable Serde attributes.
-Receiving consumers must agree with that representation, and native/host
-round-trip plus rejection evidence must prove the boundary. Missing or
-contradictory schema facts return typed diagnostics; they cannot select default
-casing, tagging, field names, variants, generation, serializer, or evidence.
+The implementation must derive queue capacity, overload behavior, retention or
+rejection semantics, and telemetry obligations from the selected operation and
+resource contract. It must preserve typed invalid, unsupported, unavailable,
+or declared overload outcomes rather than choosing a fixed capacity, dropping
+oldest input, silently discarding work, or selecting another queue mechanism.
 
 ## Remainder Ownership Audit
 
@@ -59,16 +59,17 @@ an owner-correction or decomposition re-plan before activation:
   scheduling;
 - generic Interop contract and wire sections mix Contracts, IPC, Language
   Bindings, and routing;
-- `STD-0757` is the one corrected, dependency-ready serialized representation;
-- the Rust Security remainder mixes index closure, bounded admission, and
-  panic/API policy, with `STD-0826` blocked on the missing Rust API owner; and
+- `STD-0757` is accepted as a Rust Language Binding representation;
+- the Rust Security remainder contains one bounded external-input queue
+  contract plus index closure and panic/API policy, with `STD-0826` blocked on
+  the missing Rust API owner; and
 - the 34-ID Rust Language Binding remainder requires separate packaging,
   support-surface, error, callback, generation, build, selection, and
   compatibility slices, including affected rows blocked on the missing Tooling
   owner.
 
-All 60 identifiers remain under `F048` in this planning slice. Only
-`STD-0757` is activated for the next implementation; no other group or generic
+All 59 identifiers remain under `F048` in this planning slice. Only
+`STD-0824` is activated for the next implementation; no other group or generic
 section is pre-approved.
 
 ## Accepted Slice 7.4b6: Planning-Only Re-plan
@@ -829,3 +830,60 @@ owner correctness, all prerequisites, and pre-slice review. The slice cannot
 reuse a historical group order, treat the frozen baseline as a live remainder,
 invent a missing owner, combine mixed roles, preserve legacy policy, or approve
 an implementation disposition before the planning gate passes.
+
+## Accepted Slice 7.4b7j: Independent Trust Remainder Re-plan
+
+**Outcome:** accepted. The rolling remainder is 592 identifiers across 28
+legacy sources and 27 proposed owners, with 13 proposed owners still missing.
+The independent trust remainder is 59 identifiers across six proposed-owner
+groups. The revised group fixture makes accepted baseline identifiers explicit
+instead of encoding owner-specific subtraction in the checker.
+
+**Selection decision:** `STD-0824` is a bounded external-input queue rule,
+not a generic queue implementation recipe or Rust Async ownership rule. The
+existing Rust Security profile owns operation resource limits and typed
+resource outcomes. Its selected contract can state capacity, overload,
+retention, rejection, and telemetry behavior without a fixed numeric limit or
+default discard policy. This legacy defect is recorded as `F052`. `STD-0821`
+remains index closure, and `STD-0826` remains blocked on the missing Rust API
+owner.
+
+**Pre-slice review:** accepted. One Rust Security specialization can own the
+selected queue resource contract without changing generic Security,
+Concurrency, Rust Async, Rust API, or Tooling authority. The legacy Bounded
+Queues section is one cohesive source section. The implementation needs only
+that profile, the bounded legacy section, focused decisions/checker, exact
+disposition, and serial planning records.
+
+**No fallback:** the queue contract cannot choose a fixed capacity, drop-oldest
+or default reject behavior, silent discard, leaf-only telemetry, an unbounded
+queue, another queue mechanism, or weaker evidence when the selected resource
+or overload contract is missing.
+
+## Planned Slice 7.4b7k: Rust External-Input Queue Contract
+
+**Outcome:** make the Rust Security profile canonical for selecting and proving
+external-input queue resource limits, overload behavior, retention or rejection
+semantics, telemetry, typed outcomes, and Rust operation evidence for
+`STD-0824`.
+
+**Allowed write set:** `profiles/languages/rust/security.md`; only the legacy
+Bounded Queues section in `languages/rust/RUST-SECURITY-STANDARDS.md`; one
+focused Rust queue decision fixture and checker; the exact disposition; this
+report and checker; evaluation README and findings; active plan; and execution
+ledger. No generic Security, Concurrency, Rust Async, Rust API, Tooling,
+router, metadata, template, generated artifact, configuration, dependency,
+lockfile, workflow fixture, runtime, source, build output, or downstream file
+belongs to this implementation slice.
+
+**Required semantics:** select capacity and overload behavior from the queue
+owner's resource and operation contract before accepting external input; define
+whether supported overload rejects, retains, or evicts work and its typed
+outcome; emit selected owner telemetry for rejection or eviction; preserve
+input/lifecycle ownership; and verify supported paths plus invalid,
+unsupported, unavailable, overload, and rejected-fallback cases.
+
+**No fallback:** reject a fixed capacity, implicit drop-oldest or reject-new
+default, unbounded accumulation, silent discard, substitute queue/runtime,
+leaf-only telemetry, prior input carry-forward, or producer-only/weaker
+evidence. Return the typed selected outcome.

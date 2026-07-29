@@ -340,8 +340,9 @@ status, and the historical corrected `STD-0757` proposal. The accepted
 `7.4b7h` re-plan rejects a six-ID Security draft that still mixed Core,
 Contracts, Security, implementation structure, and field-rule ownership.
 Accepted `7.4b7i` establishes the bounded Rust wire-representation contract
-and disposition; `7.4b7j` next re-measures the trust boundary before any
-further normative move.
+and disposition. Accepted `7.4b7j` re-measures the remainder, records accepted
+baseline IDs structurally, and selects only the Rust external-input queue
+contract for `STD-0824`; `7.4b7k` is the next normative slice.
 
 `verify-interop-event-registration.sh` checks provider-governed registration
 phases, delivery and local-work independence, current callback input,

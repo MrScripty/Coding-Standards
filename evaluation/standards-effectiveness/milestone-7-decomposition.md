@@ -143,14 +143,15 @@ those owners.
 
 The
 [independent trust-boundary re-plan](milestone-7-independent-trust-replan.md)
-now measures 60 remaining identifiers across six proposed-owner groups after
-accepting Rust Cross-Platform and event registration. Its 61-ID frozen
-baseline includes accepted `STD-0473`; the group fixture names that distinction
-explicitly instead of presenting every baseline ID as remaining. The next
-owner correction selects only `STD-0757` because Serde wire shape is a Rust
-Language Binding representation, not Rust foreign-memory authority. Generic
-Security, Cross-Platform, and Interop groups plus the Rust Security and
-Language Binding remainders stay blocked on decomposition or missing
+now measures 59 remaining identifiers across six proposed-owner groups after
+accepting Rust Cross-Platform, event registration, and Rust serialized wire
+representation. Its 61-ID frozen baseline includes accepted `STD-0473` and
+`STD-0757`; the group fixture records accepted IDs explicitly rather than
+encoding owner-specific count adjustments. The next owner correction selects
+only `STD-0824`: external-input queue resource limits belong to Rust Security,
+not generic queue implementation, Rust Async, Rust API, or Tooling policy.
+Generic Security, Cross-Platform, and Interop groups plus the remaining Rust
+Security and Language Binding rows stay blocked on decomposition or missing
 ownership.
 
 Before starting each later wave:
