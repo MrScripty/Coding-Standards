@@ -167,9 +167,12 @@ pre-slice review finds a mixed-role baseline row,
 adds ordered owner-coherent children without changing or truncating the
 baseline manifest. Children must cover their baseline row exactly, and partial
 or out-of-order child disposition is invalid. Every logical cluster runs
-focused evidence. Complete fail-fast verification runs at each wave checkpoint
-and whenever shared contracts, checker infrastructure, routing, metadata, or
-generated artifacts change.
+focused evidence. Row 3 demonstrates that decomposition may preserve one
+canonical owner while separating error mapping, event delivery, and callback
+task execution when they require independent contracts and evidence. Complete
+fail-fast verification runs at each wave checkpoint and whenever shared
+contracts, checker infrastructure, routing, metadata, or generated artifacts
+change.
 
 Before starting each later wave:
 

@@ -385,7 +385,10 @@ pre-approve final owners or dispositions.
 slices when pre-slice review rejects a mixed-role baseline row. The baseline
 manifest remains immutable; the train checker requires exact child coverage,
 whole-child dispositions, contiguous logical progress, honest owner state, and
-an active plan cursor naming every noncontiguous child identifier.
+an active plan cursor naming every noncontiguous child identifier. Children
+may retain one canonical owner while separating independently testable
+contracts, as in Rust binding error mapping, event delivery, and callback task
+adaptation.
 
 `fixtures/security/input-validation-authority-decisions.tsv` and
 `verify-input-validation-authority.sh` check operation-specific validation

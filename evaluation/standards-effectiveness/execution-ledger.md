@@ -3001,3 +3001,31 @@ to row 3 without mutating the baseline manifest.
 
 **Next slice:** `7.4b8g`, bounded owner review of `STD-0776`, `STD-0777`,
 `STD-0778`, `STD-0779`, and `STD-0780`.
+
+## 2026-07-29: Milestone 7.4b8g Rust Binding Row Decomposition
+
+**Outcome:** Accepted planning-only re-plan.
+
+Pre-slice review retained Rust Language Bindings as the canonical owner but
+rejected the five-ID row as one implementation slice. Error representation,
+host event delivery, and callback-created task execution have distinct
+contracts, dependencies, unsafe legacy defaults, and acceptance evidence.
+
+Immutable baseline row 3 now has three ordered children: `STD-0776` plus
+`STD-0777` for host error mapping; `STD-0778` plus `STD-0779` for event
+delivery consuming Interop and Concurrency; and `STD-0780` for callback-task
+adaptation consuming Rust Async and Concurrency.
+
+**Verification:** exact overlay coverage, child order, owner-state honesty,
+whole-child progress, active-cursor, independent-trust, rolling-decomposition,
+plan-lifecycle, shell-syntax, whitespace, exact-scope, and complete checker
+suite checks. No normative standard, disposition, generated artifact, owner
+map, router, metadata, dependency, fixture, or downstream file changed.
+
+**No-fallback result:** the re-plan does not batch three outcomes, transfer
+generic lifecycle ownership into the binding profile, move host adaptation
+into dependency owners, or preserve string flattening, push/pull substitution,
+unbounded buffering, no-op execution, polling substitution, or detached work.
+
+**Next slice:** `7.4b8h`, bounded pre-slice review of Rust host error mapping in
+`STD-0776` and `STD-0777`.

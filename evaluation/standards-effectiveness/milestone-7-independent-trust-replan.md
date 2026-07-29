@@ -1210,8 +1210,35 @@ fallback guidance, and stale concern summaries.
 cannot substitute concern labels or examples for selection of every applicable
 canonical owner.
 
-## Planned Slice 7.4b8g: Rust Binding Error And Callback Cluster
+## Accepted Slice 7.4b8g: Rust Binding Row Decomposition
 
-**Outcome:** review `STD-0776` through `STD-0780` for owner coherence across
-Rust binding error mapping, host callback/event delivery, sink bridges, and
-callback-created task execution before any normative movement.
+**Outcome:** the proposed Rust Language Binding owner is retained, but the
+five-ID row is rejected as one implementation slice because it combines three
+independently verifiable contracts. Immutable baseline row 3 now has three
+ordered children:
+
+1. `STD-0776` and `STD-0777`: host error representation and typed diagnostic
+   mapping.
+2. `STD-0778` and `STD-0779`: host event-delivery adaptation consuming Interop
+   callback authority and Concurrency capacity/lifecycle rules.
+3. `STD-0780`: host callback task adaptation consuming Rust Async and
+   Concurrency work ownership.
+
+All three children remain owned by
+`profiles/languages/rust/language-bindings.md`. The dependency owners retain
+generic callback authority, coordination, runtime, cancellation, and shutdown
+policy; the Rust binding profile owns only host-boundary adaptation.
+
+**No fallback:** do not implement all five IDs as one broad evidence matrix,
+move generic lifecycle ownership into Rust Language Bindings, move binding
+adaptation into Interop or Rust Async, or preserve string flattening,
+push/pull substitution, unbounded buffering, no-op execution, polling
+substitution, or detached work as compatibility guidance.
+
+## Planned Slice 7.4b8h: Rust Host Error Mapping
+
+**Outcome:** review and, if coherent, replace `STD-0776` and `STD-0777` with
+one Rust Language Binding-owned error representation contract selected from
+the host boundary, preserving stable category and typed cancellation/failure
+semantics without universal string flattening, infallible conversion, named
+framework defaults, or sensitive diagnostic leakage.

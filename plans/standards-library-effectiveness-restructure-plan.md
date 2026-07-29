@@ -6,11 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Mixed-role Interop row 2 is fully disposed through its four
-owner-coherent children; the next Rust Language Binding cluster requires
-bounded owner review.
+**Current phase:** Rust Language Binding row 3 is decomposed into ordered error
+mapping, event-delivery, and callback-task children; error mapping is next.
 
-**Next slice:** Milestone 7.4b8g Rust binding error and callback cluster (`STD-0776`, `STD-0777`, `STD-0778`, `STD-0779`, `STD-0780`).
+**Next slice:** Milestone 7.4b8h Rust host error mapping (`STD-0776`, `STD-0777`).
 
 **Acceptance status:** `partial`
 
@@ -979,9 +978,24 @@ all structural/routing fixtures pass.
      - prove one exact `index` disposition; and
      - reject active rules, code, examples-as-policy, prescriptive defaults,
        fallback guidance, and stale concern summaries.
-   - `7.4b8g` (`Planned`): review `STD-0776` through `STD-0780` for coherent
-     ownership across Rust binding errors, host callbacks/event delivery, sink
-     bridges, and callback-created task execution before normative movement.
+   - `7.4b8g` (`Accepted`): retain the Rust Language Binding owner but
+     decompose baseline row 3 into three ordered outcome-coherent children;
+     - `STD-0776` and `STD-0777` cover host error representation and typed
+       diagnostic mapping;
+     - `STD-0778` and `STD-0779` cover host event-delivery adaptation while
+       consuming Interop callback authority and Concurrency
+       capacity/lifecycle rules;
+     - `STD-0780` covers host callback task adaptation while consuming Rust
+       Async and Concurrency work ownership;
+     - every child must be wholly disposed in order and all three remain owned
+       by the Rust Language Binding profile; and
+     - no normative standard or disposition changes in this re-plan.
+   - `7.4b8h` (`Planned`): replace `STD-0776` and `STD-0777` with one
+     Rust-host error representation contract after bounded pre-slice review.
+   - `7.4b8i` (`Planned`): replace `STD-0778` and `STD-0779` with one
+     Rust-host event-delivery adaptation contract after `7.4b8h`.
+   - `7.4b8j` (`Planned`): replace `STD-0780` with one Rust-host callback-task
+     adaptation contract after `7.4b8i`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
