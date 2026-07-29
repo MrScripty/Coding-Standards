@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Security validation authority accepted; the next
-trust-boundary cluster requires bounded Interop owner review.
+**Current phase:** Mixed-role Interop row decomposed without changing the
+immutable train baseline; its Contracts child is next.
 
-**Next slice:** Milestone 7.4b8b Interop boundary cluster (`STD-0474`-`STD-0482`).
+**Next slice:** Milestone 7.4b8c cross-language contract child (`STD-0474`, `STD-0475`, `STD-0477`, `STD-0481`).
 
 **Acceptance status:** `partial`
 
@@ -929,9 +929,21 @@ all structural/routing fixtures pass.
        weaker-validator fallback; and
      - 17 focused decisions and four exact dispositions advance the immutable
        train to row 2.
-   - `7.4b8b` (`Planned`): review `STD-0474`-`STD-0482` as the proposed Interop
-     boundary cluster and implement it only if one owner-coherent contract and
-     bounded write set pass pre-slice review.
+   - `7.4b8b` (`Accepted`): reject the stale one-owner Interop proposal and
+     decompose baseline row 2 through an immutable-train overlay;
+     - `STD-0474`, `STD-0475`, `STD-0477`, and `STD-0481` form a Contracts
+       child for evolution, wire-schema authority, and consumer evidence;
+     - `STD-0476` forms an IPC consumer-decoding child;
+     - `STD-0478`-`STD-0480` form a Language Binding serialized-
+       representation child;
+     - `STD-0482` forms a non-normative legacy applicability index child;
+     - every child must be wholly disposed in order, and all children exactly
+       cover baseline row 2 before row 3 can activate; and
+     - no normative standard or disposition changes in this re-plan.
+   - `7.4b8c` (`Planned`): replace the cross-language evolution and wire-
+     alignment legacy rules in `STD-0474`, `STD-0475`, `STD-0477`, and
+     `STD-0481` with one Contracts-owned contract-selection and consumer-
+     evidence outcome after bounded pre-slice review.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

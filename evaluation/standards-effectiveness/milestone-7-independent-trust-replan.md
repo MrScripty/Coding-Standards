@@ -1112,3 +1112,37 @@ incomplete proof returns `invalid`.
 boundary contract. Normative movement begins only if the bounded pre-slice
 review confirms the owner, dependencies, legacy section, focused evidence, and
 exact disposition semantics.
+
+## Accepted Slice 7.4b8b: Mixed-Role Interop Row Decomposition
+
+**Outcome:** the proposed Interop owner is rejected before normative movement.
+The Interop profile explicitly excludes boundaries where only serialized
+messages cross IPC, while the nine legacy sections mix Contracts evolution,
+IPC consumer decoding, Language Binding serialized representation, and a
+non-normative applicability index.
+
+Baseline row 2 remains immutable. Its decomposition overlay creates four
+ordered children:
+
+1. Contracts owns `STD-0474`, `STD-0475`, `STD-0477`, and `STD-0481`.
+2. IPC owns `STD-0476`.
+3. Language Bindings owns `STD-0478` through `STD-0480`.
+4. The legacy Interop document retains `STD-0482` only as a canonical routing
+   index.
+
+The execution checker proves exact child coverage, owner-state honesty,
+whole-child disposition, contiguous progress across baseline and child rows,
+and an active cursor that names every identifier in a noncontiguous child.
+
+**No fallback:** do not expand Interop applicability to absorb serialized IPC,
+move all nine rules as one multi-owner implementation batch, mutate the
+baseline manifest, partially dispose a child, or preserve the stale proposed
+owner as compatibility guidance.
+
+## Planned Slice 7.4b8c: Cross-Language Contract Child
+
+**Outcome:** review and, if coherent, replace `STD-0474`, `STD-0475`,
+`STD-0477`, and `STD-0481` with one Contracts-owned rule for selected contract
+class, canonical wire/schema authority, coordinated or independently deployed
+consumer updates, typed unsupported/unavailable outcomes, and contract-matched
+producer/consumer evidence.

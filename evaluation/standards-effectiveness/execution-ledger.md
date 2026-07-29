@@ -2861,3 +2861,31 @@ completed and 46 pending clusters.
 
 **Next slice:** `7.4b8b`, bounded pre-slice review of the
 `STD-0474`-`STD-0482` Interop boundary cluster.
+
+## 2026-07-29: Milestone 7.4b8b Mixed-Role Interop Row Decomposition
+
+**Outcome:** Accepted.
+
+Pre-slice review rejected the proposed single Interop owner. The nine legacy
+sections mix Contracts evolution and wire authority, IPC consumer decoding,
+Language Binding serialized representation, and a non-normative applicability
+index. Interop explicitly excludes serialized-only IPC, so moving the complete
+row there would duplicate accepted owners.
+
+The immutable baseline row now has four ordered owner-coherent overlay
+children. The checker proves exact child coverage, whole-child disposition,
+contiguous logical progress, owner-state honesty, and explicit noncontiguous
+plan cursors.
+
+**Verification:** decomposition and cursor checks; independent-trust and
+rolling-decomposition gates; plan lifecycle; shell syntax; whitespace; exact
+scope; and the complete fail-fast checker suite because shared checker
+infrastructure changed.
+
+**No-fallback result:** no normative standard, disposition, generated
+inventory, owner map, router, metadata, dependency, workflow fixture, or
+downstream file changed. The baseline manifest is not mutated, and Interop is
+not expanded to absorb serialized IPC.
+
+**Next slice:** `7.4b8c`, the Contracts child containing `STD-0474`,
+`STD-0475`, `STD-0477`, and `STD-0481`.

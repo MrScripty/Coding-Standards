@@ -366,6 +366,12 @@ completed prefix and the first wholly remaining row, while partial cluster
 completion is rejected. Manifest rows authorize pre-slice review; they do not
 pre-approve final owners or dispositions.
 
+`milestone-7-execution-decomposition.tsv` overlays ordered owner-coherent child
+slices when pre-slice review rejects a mixed-role baseline row. The baseline
+manifest remains immutable; the train checker requires exact child coverage,
+whole-child dispositions, contiguous logical progress, honest owner state, and
+an active plan cursor naming every noncontiguous child identifier.
+
 `fixtures/security/input-validation-authority-decisions.tsv` and
 `verify-input-validation-authority.sh` check operation-specific validation
 authority, complete-contract coverage, generated or conformance-proven

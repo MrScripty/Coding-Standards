@@ -161,11 +161,15 @@ The
 [execution train](milestone-7-execution-train.tsv) covers all 589 remaining
 identifiers at train establishment exactly once across five dependency waves.
 The manifest is immutable: exact dispositions derive a contiguous completed
-prefix and the first wholly remaining cluster is the active cursor. Partial
-cluster disposition is invalid. Every cluster runs focused evidence. Complete
-fail-fast verification runs at each wave checkpoint and whenever shared
-contracts, checker infrastructure, routing, metadata, or generated artifacts
-change.
+prefix and the first wholly remaining cluster is the active cursor. When
+pre-slice review finds a mixed-role baseline row,
+[milestone-7-execution-decomposition.tsv](milestone-7-execution-decomposition.tsv)
+adds ordered owner-coherent children without changing or truncating the
+baseline manifest. Children must cover their baseline row exactly, and partial
+or out-of-order child disposition is invalid. Every logical cluster runs
+focused evidence. Complete fail-fast verification runs at each wave checkpoint
+and whenever shared contracts, checker infrastructure, routing, metadata, or
+generated artifacts change.
 
 Before starting each later wave:
 

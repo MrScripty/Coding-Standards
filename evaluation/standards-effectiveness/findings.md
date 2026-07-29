@@ -60,6 +60,7 @@ changes and focused fixture evidence.
 | F054 | Resolved in Milestone 7.4b7n | The remaining 589 identifiers now use one verified 47-cluster execution train; planning-only commits occur on actual re-plan triggers rather than between every accepted implementation slice. |
 | F055 | Resolved in Milestone 7.4b7o | Execution progress is derived from exact dispositions against an immutable 589-ID manifest; routine cluster completion no longer requires shared-checker counter and cursor rewrites. |
 | F056 | Resolved in Milestone 7.4b8a | Security now selects operation-specific validation authority and typed consequences without a global C# utility, fixed regex/length rules, validation-by-cast, or copied validators lacking canonical authority and conformance evidence. |
+| F057 | Resolved in Milestone 7.4b8b | Mixed-role execution rows now decompose through an exact ordered overlay without mutating the immutable baseline manifest or forcing one stale proposed owner. |
 
 ## Systemic Findings
 
@@ -102,6 +103,7 @@ changes and focused fixture evidence.
 | F054 | Procedural amplification | Milestone 7.4b7 planning/implementation alternation; 589-ID remainder | Freeze dependency-ordered owner clusters once, retain focused per-commit evidence and explicit re-plan triggers, and reserve complete-suite repetition for shared-boundary changes and wave checkpoints. | 7 |
 | F055 | Mutable execution counters | Initial Milestone 7 execution-train checker | Derive whole-cluster completion, current residual coverage, and the active cursor from exact dispositions against an immutable baseline manifest. | 7 |
 | F056 | Global validator and fixed-rule defaults | `SECURITY-STANDARDS.md`; frozen IDs `STD-0588`-`STD-0591` | Select one canonical validation authority from the complete operation contract at each applicable untrusted boundary; require generated or independent implementations to prove conformance, route specialized mechanisms to their owners, and return typed outcomes when authority is missing. | 7 |
+| F057 | Mixed-role immutable-train row | Baseline execution row 2; `STD-0474`-`STD-0482` | Preserve baseline coverage while overlaying ordered Contracts, IPC, Language Binding, and legacy-index children with exact coverage and whole-child progress. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

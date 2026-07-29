@@ -1,0 +1,5 @@
+baseline_order	child_order	ids	source	owner	owner_state	activation	checkpoint	rationale
+2	1	STD-0474,STD-0475,STD-0477,STD-0481	INTEROP-STANDARDS.md	topics/contracts.md	exists	pre-slice-review	focused	cross-language evolution wire-schema authority and coordinated or independent consumer evidence
+2	2	STD-0476	INTEROP-STANDARDS.md	profiles/boundaries/ipc.md	exists	pre-slice-review	focused	received structured messages require complete consumer-side IPC decoding before dispatch
+2	3	STD-0478,STD-0479,STD-0480	INTEROP-STANDARDS.md	profiles/boundaries/language-bindings.md	exists	pre-slice-review	focused	tagged enum variant and field representation belong to the selected serialized binding mechanism
+2	4	STD-0482	INTEROP-STANDARDS.md	INTEROP-STANDARDS.md	exists	pre-slice-review	focused	legacy applicability becomes a non-normative canonical boundary-routing index
