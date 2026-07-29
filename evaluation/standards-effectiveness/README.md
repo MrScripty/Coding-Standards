@@ -137,6 +137,15 @@ authority, initialized extent, access, lifetime, thread, release, copy ordering,
 typed invalid/unsupported/unavailable outcomes, exact dispositions, metadata,
 routing, legacy links, and removal of copy-before-proof guidance.
 
+## Language Binding Representation Fixtures
+
+`fixtures/language-bindings/representation-decisions.tsv` and
+`verify-language-binding-boundary.sh` distinguish framework lifting,
+serialization, stable ABI values, opaque handles, and generated wrappers. They
+check typed invalid/unsupported/unavailable outcomes, exact dispositions,
+metadata, routing, link-only legacy replacement, and no representation
+fallback.
+
 ## Filesystem Containment Fixtures
 
 `fixtures/security/path-containment-decisions.tsv` and

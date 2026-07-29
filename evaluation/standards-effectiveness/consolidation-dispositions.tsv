@@ -248,3 +248,7 @@ STD-0469	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	require vali
 STD-0470	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	define initialization and shutdown ownership
 STD-0471	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	define call and callback thread contracts
 STD-0472	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	isolate unsafe mechanics behind validated adapters
+STD-0483	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	move	establish the generic language-binding owner
+STD-0484	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	separate binding transport from ABI representation
+STD-0485	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	move	preserve the thin adapter layer contract
+STD-0486	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	merge	route concrete mechanisms to language specializations

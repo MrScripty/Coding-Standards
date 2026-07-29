@@ -1433,3 +1433,29 @@ sources and 32 owners, with 21 ownership gaps. The S1 context route remains 6
 modules and 597 of 11066 baseline lines.
 
 **Next slice:** `7.4b3c`.
+
+## 2026-07-28: Milestone 7.4b3c Generic Language-Binding Contract
+
+**Outcome:** Accepted.
+
+The Language Binding boundary profile now owns concrete mechanism declarations,
+representation categories, thin adapter ownership, generated-wrapper
+constraints, and typed conversion outcomes. Framework lifting, serialization,
+stable ABI values, opaque handles, and generated wrappers are distinct facts.
+
+Frozen identifiers `STD-0483` through `STD-0486` have exact final
+dispositions. The legacy document is a link-only migration index.
+
+**No-fallback/legacy result:** failed or unsupported representation cannot use
+native-memory reinterpretation, lossy/schema-free serialization, defaults,
+truncation, a different framework, undeclared handle lifetime, or hand-edited
+generated code.
+
+**Verification:** representation decisions, exact dispositions, metadata,
+routing, link-only legacy replacement, decomposition lifecycle, plan fixtures,
+shell syntax, whitespace, and all standards-effectiveness regressions pass.
+The rolling decomposition gate reports 663 identifiers remaining across 32
+sources and 31 owners, with 20 ownership gaps. The S1 context route remains 6
+modules and 597 of 11066 baseline lines.
+
+**Next slice:** `7.4b3d`.

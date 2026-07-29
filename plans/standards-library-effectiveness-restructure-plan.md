@@ -7,10 +7,10 @@
 **Plan status:** `Active`
 
 **Current phase:** Milestone 7 trust-boundary wave active; generic
-foreign-boundary contract accepted.
+language-binding contract accepted.
 
-**Next slice:** Milestone 7.4b3c, establish the canonical generic
-language-binding contract before Rust specializations.
+**Next slice:** Milestone 7.4b3d, establish Rust foreign-memory proof on top of
+the accepted generic Interop contract.
 
 **Acceptance status:** `partial`
 
@@ -489,7 +489,7 @@ all structural/routing fixtures pass.
      serial owner-bounded slices;
    - `7.4b3b` (`Accepted`): canonical generic foreign-boundary contract
      (`STD-0465`-`STD-0472`);
-   - `7.4b3c` (`Planned`): canonical generic language-binding contract
+   - `7.4b3c` (`Accepted`): canonical generic language-binding contract
      (`STD-0483`-`STD-0486`);
    - `7.4b3d` (`Planned`): Rust foreign-memory proof
      (`STD-0752`-`STD-0756`);
