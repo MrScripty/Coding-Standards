@@ -47,7 +47,7 @@ changes and focused fixture evidence.
 | F042 | Resolved in Milestone 7.3c | Recovery now follows impact, destination capability, explicit authority, immutable identity, and fresh acceptance rather than assuming hosted drafts, yank support, branches, patch versions, or unilateral action. |
 | F043 | Resolved in Milestone 7.4a | The remaining 698 identifiers now have complete owner-wave coverage, correctness-first ordering, and an exact first implementation slice without speculative full-sequence expansion. |
 | F044 | Resolved in Milestone 7.4b4a | The premature final-closure handoff is superseded by a measured 90-ID trust remainder, a 26-ID lifecycle bridge for F025/F026, and one exact generic Concurrency next slice. |
-| F045 | Partially resolved in Milestone 7.4b4e | Rust Async applicability and owned runtime/task/shutdown lifecycle are contract-selected; blocking/mutex, cancellation-safety, and observability refinements remain. |
+| F045 | Partially resolved in Milestone 7.4b4f | Rust Async applicability, owned lifecycle, blocking isolation, and synchronization are contract-selected; cancellation-safety and observability refinements remain. |
 
 ## Systemic Findings
 

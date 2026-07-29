@@ -211,14 +211,69 @@ The canonical Rust Async decomposition checker remains the sole owner of the
 first planned Rust Async slice. No generic policy or broader checker refactor
 is authorized.
 
-### 7.4b4f: Blocking And Mutex Mechanisms
+## Accepted Slice 7.4b4f: Blocking And Mutex Mechanisms
 
-Refine `STD-0722` and `STD-0723`. Select async equivalents, blocking
-isolation, and synchronization from actual runtime capabilities, cancellation
-semantics, critical-section behavior, contention, and invariants. Evidence must
-reject blocking on runtime threads, guards across suspension when unsupported,
-callbacks under locks, universal mutex choices, and alternate-executor
-fallback.
+**Outcome:** refine `STD-0722` and `STD-0723` in the existing Rust Async
+profile. Blocking work uses a contract-compatible async equivalent or an
+owned, capacity-governed isolation capability. Synchronization follows
+critical-section suspension, contention, invariant, and capability facts.
+
+**Allowed write set:**
+
+- `profiles/languages/rust/async.md`;
+- `languages/rust/RUST-ASYNC-STANDARDS.md`;
+- `evaluation/standards-effectiveness/fixtures/rust/async-blocking-mutex-decisions.tsv`;
+- `evaluation/standards-effectiveness/verify-rust-async-blocking-mutex.sh`;
+- this decomposition record for slice activation and handoff only;
+- consolidation dispositions, evaluation README, findings, active plan, and
+  execution ledger.
+
+No generic topic, base Rust profile, other Rust specialization, runtime-
+specific package or API, generated artifact, template, lockfile, Cargo file,
+runtime integration, or downstream repository belongs to this slice.
+
+**Required semantics:**
+
+- nonblocking operations remain directly executable without isolation;
+- blocking I/O uses a semantically equivalent async capability when one is
+  selected and supported;
+- unavoidable blocking or CPU-heavy work uses an owned isolation capability
+  with declared admission/capacity behavior;
+- blocking work does not execute inline on an async execution or lifecycle
+  path and does not run while a synchronization guard is held;
+- synchronization follows whether the critical section suspends, the protected
+  invariant, contention, fairness/poisoning obligations, and available
+  mechanism capabilities;
+- a guard crosses suspension only when the selected mechanism supports it and
+  the invariant requires the protected scope;
+- related invariants are not split around suspension merely to avoid selecting
+  an appropriate mechanism; and
+- unavailable execution, isolation, capacity, or synchronization capability
+  returns the operation's typed outcome.
+
+**No fallback:** missing mechanism proof cannot block inline, create a new
+thread or alternate executor, run unbounded blocking work, hold an unsupported
+guard across suspension, split a related invariant, or select one named mutex
+as a universal default.
+
+**Focused evidence:** decisions cover direct nonblocking work, equivalent async
+I/O, bounded blocking isolation, CPU-heavy isolation, unavailable isolation or
+capacity, inline blocking, guard-held blocking, alternate executor/thread
+fallback, synchronous and suspending critical sections, supported and
+unsupported suspended guards, preserved and split invariants, unavailable
+synchronization, and universal-mutex fallback.
+
+**Acceptance gate:** both identifiers have exact dispositions; the Rust Async
+profile selects mechanisms without naming one runtime, executor, blocking
+pool, thread API, or mutex implementation; migrated legacy sections are
+bounded links; cancellation-safety and observability sections remain
+untouched; `F045` accurately records partial resolution; and focused plus all
+affected regressions pass.
+
+**Integration finding (`Resolved`):** initial focused assertions crossed
+Markdown line boundaries, and extending the profile split the foundation
+checker's stable ownership-transition phrase. Line-local evidence markers now
+preserve both contracts without duplicating policy.
 
 ### 7.4b4g: Cancellation Safety And Observability
 

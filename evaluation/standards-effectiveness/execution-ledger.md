@@ -1807,3 +1807,43 @@ The rolling Milestone 7 remainder is 627 IDs across 31 sources and 30 owners,
 with 14 canonical owners still missing.
 
 **Next slice:** `7.4b4f`.
+
+## 2026-07-28: Milestone 7.4b4f Rust Async Blocking And Synchronization
+
+**Outcome:** Accepted.
+
+The Rust Async profile now selects semantically equivalent async execution or
+owned, capacity-governed blocking isolation from the operation contract.
+Blocking and CPU-heavy work do not execute inline on async request or lifecycle
+paths, run while a guard is held, or create an alternate executor or thread.
+
+Synchronization follows suspension behavior, the complete protected invariant,
+contention, fairness/poisoning/recovery obligations, and supported mechanism
+capabilities. Guards cross suspension only when the mechanism supports it and
+the invariant requires that scope.
+
+`STD-0722` and `STD-0723` have exact final dispositions. `F045` is partially
+resolved.
+
+**Deviations:** None.
+
+**Discovered issue (`Resolved`):** initial focused assertions crossed Markdown
+line boundaries, and extending the profile split the foundation checker's
+stable ownership-transition phrase. Line-local evidence markers now preserve
+both contracts without duplicating policy.
+
+**No-fallback/legacy result:** missing execution, isolation, capacity, or
+synchronization proof cannot block inline, run unbounded isolated work, create
+an alternate executor/thread, hold an unsupported guard across suspension,
+split a related invariant, or select a universal mutex. The migrated legacy
+sections are bounded links without named mechanism defaults.
+
+**Verification:** 18 blocking/synchronization decisions, metadata, exact
+dispositions, migrated legacy replacement, later-section preservation,
+decomposition and parent lifecycle handoff, shell syntax, whitespace, and all
+standards-effectiveness regressions pass.
+
+The rolling Milestone 7 remainder is 625 IDs across 31 sources and 30 owners,
+with 14 canonical owners still missing.
+
+**Next slice:** `7.4b4g`.

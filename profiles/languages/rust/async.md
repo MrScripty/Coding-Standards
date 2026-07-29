@@ -9,7 +9,7 @@
 - Does not apply when: The affected Rust behavior is synchronous and does not select or change an asynchronous contract or mechanism.
 - Requires: `core`, `workflow.verification`, `topic.concurrency`, `profile.language.rust`
 - Specializes: `topic.concurrency`, `profile.language.rust`
-- Verification: Rust async-boundary and lifecycle decisions plus affected API, cancellation, integration, and shutdown tests.
+- Verification: Rust async-boundary, lifecycle, blocking-isolation, and synchronization decisions plus affected API, cancellation, integration, and shutdown tests.
 - Canonical owner: `profiles/languages/rust/async.md`
 
 ## Select The Execution Contract
@@ -90,12 +90,52 @@ that interruption cannot violate required consistency, durability, or release
 obligations. Otherwise an incomplete drain remains a typed incomplete or
 unavailable outcome for the owning operation.
 
+## Isolate Blocking Work
+
+Classify whether an operation can block its executing thread or consume
+sustained CPU before placing it on an async execution path. Use a supported
+async capability only when it preserves the operation's I/O, cancellation,
+resource-lifetime, ordering, and failure contract.
+
+The runtime composition and lifecycle boundary owns the isolation capability
+for unavoidable blocking or CPU-heavy work. That capability defines admission,
+capacity, completion observation, cancellation/shutdown behavior, and resource
+accounting. Isolation without a bounded or otherwise governed capacity contract
+is not sufficient.
+
+Do not execute blocking work inline on an async request or lifecycle path. Do
+not invoke or await blocking work while holding a synchronization guard.
+Preserve related invariants through an appropriate ownership, coordination, or
+transaction design rather than splitting the protected operation for
+convenience.
+
+## Select Synchronization From Contract
+
+Select synchronization from:
+
+- whether the protected critical section can suspend;
+- the complete invariant and ownership boundary;
+- contention and read/write behavior;
+- fairness, poisoning, recovery, and cancellation obligations; and
+- capabilities supported by the selected runtime and deployment.
+
+A non-suspending critical section uses a mechanism that does not require
+suspension support. A guard crosses suspension only when the selected mechanism
+supports that behavior and the invariant requires the protected scope. If no
+supported mechanism can preserve the invariant, redesign ownership or
+coordination, or return the operation's typed unavailable outcome.
+
+Do not call external, plugin, callback, or user-controlled behavior while a
+guard is held. Do not select one synchronization implementation as a universal
+default for all Rust state.
+
 ## Typed Outcomes
 
 Return the operation's typed `unsupported` or `unavailable` outcome when its
 required execution contract cannot be provided. Preserve operation-specific
 failures when they are more precise. Runtime, task, and shutdown failures retain
-their operation-specific terminal outcome.
+their operation-specific terminal outcome. Missing blocking-isolation,
+capacity, or synchronization capability remains explicit.
 
 ## No Fallback
 
@@ -109,10 +149,16 @@ detach work, treat leaf logging as ownership, discard failure or panic, keep
 admission open while draining, or force-abort work without authority and
 interruption safety.
 
-Blocking isolation, mutex selection, cancellation-safety mechanisms, and
-observability are separate Rust Async concerns not defined by these sections.
-Runtime construction, task ownership, shutdown sequencing are now defined
-above without selecting a project-specific mechanism.
+Missing execution or synchronization proof cannot block inline, create an
+alternate executor or thread, run unbounded isolated work, hold an unsupported
+guard across suspension, split a related invariant, or select a universal
+mutex.
+
+Cancellation-safety mechanisms and observability are separate Rust Async
+concerns not defined by these sections.
+Runtime construction, task ownership, shutdown sequencing, blocking isolation,
+and synchronization selection are defined above without selecting a project-
+specific mechanism.
 
 ## Verification
 
@@ -127,4 +173,9 @@ Evidence covers the affected contract:
 - spawned work reaches one observed terminal outcome;
 - shutdown closes admission, signals cancellation, and drains tracked work;
 - abort paths prove authority and interruption safety; and
+- blocking work uses an equivalent async capability or governed isolation;
+- isolated work participates in admission, completion, and shutdown ownership;
+- synchronization preserves the complete invariant across any suspension;
+- unsupported isolation, capacity, or synchronization returns a typed outcome;
+  and
 - no convenience fallback changes execution mode or ownership.

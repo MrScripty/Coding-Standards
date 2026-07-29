@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 lifecycle bridge active; Rust Async owned
-runtime lifecycle accepted.
+**Current phase:** Milestone 7 lifecycle bridge active; Rust Async blocking
+isolation and synchronization accepted.
 
-**Next slice:** Milestone 7.4b4f, specialize Rust blocking-work isolation and
-mutex selection.
+**Next slice:** Milestone 7.4b4g, specialize Rust cancellation safety and
+lifecycle observability.
 
 **Acceptance status:** `partial`
 
@@ -577,8 +577,11 @@ all structural/routing fixtures pass.
        while the new lifecycle checker would repeat that defect for `7.4b4f`;
        both mutable assertions are removed while the canonical decomposition
        checker retains sequencing ownership;
-   - `7.4b4f` (`Planned`): specialize blocking-work isolation and mutex
+   - `7.4b4f` (`Accepted`): specialize blocking-work isolation and mutex
      selection (`STD-0722`-`STD-0723`);
+     - integration finding (`Resolved`): focused evidence and the foundation
+       transition marker initially crossed Markdown line boundaries; stable
+       line-local wording now preserves both checker contracts;
    - `7.4b4g` (`Planned`): specialize cancellation safety and lifecycle
      observability (`STD-0724`-`STD-0725`).
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,

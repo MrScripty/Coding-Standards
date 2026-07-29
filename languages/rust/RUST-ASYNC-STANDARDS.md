@@ -29,30 +29,13 @@ Owned shutdown sequencing is canonical in the
 
 ## Blocking Work
 
-Rules:
-
-- Do not call blocking filesystem, process, network, sleep, compression, or CPU
-  heavy operations directly in async request/lifecycle paths.
-- Use async equivalents when available.
-- Use `tokio::task::spawn_blocking` for unavoidable blocking work.
-- Never hold an async lock while running blocking work.
+Blocking isolation is canonical in the
+[Rust Async profile](../../profiles/languages/rust/async.md#isolate-blocking-work).
 
 ## Mutex Selection
 
-Use:
-
-- `parking_lot::Mutex` for short synchronous critical sections with no `.await`
-- `tokio::sync::Mutex` only when the lock must be held across `.await`
-- `tokio::sync::RwLock` for many-readers/few-writers async state
-
-Rules:
-
-- Do not use `tokio::sync::Mutex` as the default for CPU-bound synchronous state.
-- Do not hold a `std::sync::Mutex` or `parking_lot::Mutex` guard across `.await`.
-- Do not split a critical section around `.await` unless the two halves are
-  truly independent.
-- If the second half depends on state from the first, use an async-aware mutex,
-  a transaction, or redesign the data flow.
+Synchronization selection is canonical in the
+[Rust Async profile](../../profiles/languages/rust/async.md#select-synchronization-from-contract).
 
 ## Cancellation Safety
 

@@ -272,6 +272,13 @@ through `STD-0721` and rejects global/alternate runtimes, detached tasks,
 leaf-only logging, open admission, silent incomplete drains, and unauthorized
 or interruption-unsafe force-abort fallback.
 
+`verify-rust-async-blocking-mutex.sh` checks equivalent async execution,
+governed blocking isolation, capacity availability, guard behavior, invariant
+preservation, and synchronization capability. It proves exact disposition of
+`STD-0722` and `STD-0723` and rejects inline or guard-held blocking, unbounded
+isolation, alternate executor/thread fallback, unsupported suspended guards,
+split invariants, and universal mutex defaults.
+
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
 legacy path is only a bounded migration index.
