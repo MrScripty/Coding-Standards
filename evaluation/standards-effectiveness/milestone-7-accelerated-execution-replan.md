@@ -109,9 +109,10 @@ coverage, and observed outcomes. Package-specific derivation remains outside
 the engine; it does not evaluate shell code, embed domain policy, accept legacy
 schemas, or infer missing values.
 
-The next slice, `7.4b8n`, performs semantic owner review and either accepts one
-coherent row-5 implementation contract or records an exact ordered
-decomposition before normative movement.
+Accepted slice `7.4b8n` records the exact four-child row-5 decomposition in
+[its focused report](milestone-7-row-5-decomposition.md). The next slice,
+`7.4b8o`, implements child `5.1`, `STD-0804`, as Rust core/adapter testability
+without framework-specific architecture or fallback.
 
 ## Verification Matrix
 

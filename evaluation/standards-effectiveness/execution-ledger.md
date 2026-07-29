@@ -3219,3 +3219,32 @@ downstream repository changed.
 
 **Next slice:** `7.4b8n`, bounded owner review and decomposition decision for
 active package `STD-0804` through `STD-0809`.
+
+## 2026-07-29: Milestone 7.4b8n Rust Binding Row Decomposition
+
+**Outcome:** Accepted.
+
+Immutable row 5 is split into four ordered children: `STD-0804` for Rust
+core/adapter testability; `STD-0805` and `STD-0806` for generic Language
+Binding mechanism selection; `STD-0807` and `STD-0808` for Contracts-owned
+evolution; and `STD-0809` for Rust adaptation of a contract-selected discovery
+mechanism.
+
+**Verification:** exact six-ID overlay coverage and child order; owner
+existence; zero premature dispositions; acceleration-package handoff; row-5
+report semantics; active-plan and finding handoff; reusable decision-table
+fixtures; immutable execution train; plan lifecycle; shell syntax; whitespace;
+exact scope; and the complete checker suite with fail-fast shell behavior.
+
+**No-fallback result:** fixed UniFFI/Rustler/PyO3/Tauri/RPC selection,
+target-count or host-label defaults, alternate mechanism substitution, blanket
+additive compatibility, lockstep core/wrapper versions, unconditional
+regeneration, mandatory `version()` export, alternate discovery, guessed
+compatibility, and default success are rejected rather than carried forward.
+
+No normative or legacy standard, disposition, generated artifact, owner map,
+immutable baseline train row, router, metadata, dependency declaration,
+decision fixture, configuration, lockfile, or downstream repository changed.
+
+**Next slice:** `7.4b8o`, replace `STD-0804` with one Rust core/adapter
+testability contract and reusable decision-table evidence.

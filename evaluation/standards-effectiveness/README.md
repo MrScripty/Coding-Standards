@@ -77,6 +77,12 @@ finite domains, unique cases, exact observed coverage, and outcome equality.
 invalid wildcard, invalid domain, duplicate case, mismatch, missing case,
 extra case, and unavailable-input failures.
 
+`milestone-7-row-5-decomposition.md` splits immutable row 5 into Rust
+core/adapter testability, generic boundary-mechanism selection, Contracts-owned
+evolution, and Rust contract-discovery adaptation. Its checker proves exact
+ordered overlay coverage, zero premature dispositions, package handoff, and
+active cursor integrity.
+
 ## Routed Vertical Slice
 
 `verify-s1-routing.sh` checks the first complete routed path:

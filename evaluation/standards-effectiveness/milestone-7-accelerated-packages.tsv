@@ -1,5 +1,5 @@
 train_order	package_id	risk_class	owner	owner_action	verification_family	draft_mode	integration_gate	semantic_outcome	prerequisites
-5	P01	refinement	profiles/languages/rust/language-bindings.md	existing-review	decision-table	isolated-draft	focused	rust-binding-nif-build-contract	core,workflow.verification,profile.language.rust,profile.boundary.language-bindings
+5	P01	refinement	profiles/languages/rust/language-bindings.md	existing-review	decision-table	isolated-draft	focused	rust-binding-row-decomposition	core,workflow.verification,profile.language.rust,profile.boundary.language-bindings,topic.contracts
 6	P02	safety-critical	topics/cross-platform.md	existing-review	decision-table	isolated-draft	focused	native-library-loading-and-build-contract	core,workflow.verification
 7	P03	consolidation	profiles/languages/rust/language-bindings.md	existing-review	decision-table	isolated-draft	focused	rust-binding-workspace-and-surface-contract	core,workflow.verification,profile.language.rust,profile.boundary.language-bindings
 8	P04	refinement	profiles/languages/rust/language-bindings.md	existing-review	decision-table	isolated-draft	focused	rust-binding-generation-and-build-ownership	core,workflow.verification,profile.language.rust,profile.boundary.language-bindings

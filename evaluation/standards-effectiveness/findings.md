@@ -63,6 +63,7 @@ changes and focused fixture evidence.
 | F057 | Resolved in Milestone 7.4b8b | Mixed-role execution rows now decompose through an exact ordered overlay without mutating the immutable baseline manifest or forcing one stale proposed owner. |
 | F070 | Resolved in Milestone 7.4b8l | The 43 pending train rows now use 39 risk- and train-classified semantic packages, pre-approved owner contracts, incremental reusable verification, risk-based gates, isolated drafts, and serial shared integration without weakening exact dispositions or no-fallback policy. |
 | F071 | Resolved in Milestone 7.4b8m | Repeated decision-fixture parsing now has one strict table engine for schema domains, unique cases, exact observation coverage, and outcome comparison; package checkers retain domain derivation without `eval`, embedded generic policy, or legacy schema fallback. |
+| F072 | Resolved in Milestone 7.4b8n | Immutable row 5 now has ordered Rust testability, generic mechanism-selection, Contracts evolution, and Rust discovery-adaptation children; fixed framework, compatibility, lockstep-version, and version-export defaults cannot become one binding rule. |
 
 ## Systemic Findings
 
@@ -86,6 +87,7 @@ changes and focused fixture evidence.
 | F016 | Broken reference | `SECURITY-STANDARDS.md:289`; no matching concurrency heading | Repair or remove the nonexistent graceful-shutdown anchor. | 7 |
 | F070 | Per-row migration ceremony | 43 pending immutable-train rows; repeated bespoke checker and owner-review patterns | Batch only rows sharing owner, semantic outcome, prerequisites, and evidence; classify risk, pre-approve owner contracts, add reusable validators incrementally, and retain serial shared integration and exact dispositions. | 7 |
 | F071 | Repeated fixture plumbing | Decision-oriented owner checkers repeatedly parse TSV headers, domains, unique cases, and expected/actual comparisons | Establish one strict reusable table engine while leaving package-specific semantic derivation with each owner checker; reject malformed or incomplete tables rather than guessing. | 7 |
+| F072 | Mixed-role Rust binding row | Frozen IDs `STD-0804`-`STD-0809`; immutable execution row 5 | Decompose framework-independent testability, generic boundary selection, contract evolution, and Rust discovery adaptation before normative movement. | 7 |
 | F032 | Consolidation ownership | `DOCUMENTATION-STANDARDS.md`; frozen IDs `STD-0349`-`STD-0448` | Move examples, documentation policy, and changelog guidance in separate reference, workflow, and release-owner slices. | 7 |
 | F033 | Fixture ownership | `verify-consolidation-dispositions.sh`; shared disposition ledger | Filter each owner-specific fixture by source and verify new source groups independently. | 7 |
 | F034 | Missing canonical owner | `owner-map.tsv`; `RELEASE-STANDARDS.md`; absent `workflows/release.md` | Establish release workflow ownership in an owner-bounded slice before moving changelog policy or closing the documentation index. | 7 |

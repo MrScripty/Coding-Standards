@@ -122,13 +122,14 @@ done
 
 rg -F -q '| F070 | Resolved in Milestone 7.4b8l |' "$FINDINGS"
 rg -F -q '| F071 | Resolved in Milestone 7.4b8m |' "$FINDINGS"
+rg -F -q '| F072 | Resolved in Milestone 7.4b8n |' "$FINDINGS"
 rg -F -q '`7.4b8l` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8m` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8n` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8n` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8o` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8n'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8o'* ]]
 [[ "$next_slice_line" == *'STD-0804'* ]]
-[[ "$next_slice_line" == *'STD-0809'* ]]
 
 [[ -x "$DECISION_ENGINE" && -x "$DECISION_ENGINE_FIXTURES" ]]
 "$DECISION_ENGINE_FIXTURES"

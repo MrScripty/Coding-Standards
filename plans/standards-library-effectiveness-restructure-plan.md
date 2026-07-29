@@ -6,11 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Reusable decision-table verification is accepted; the
-six-ID Rust binding representation group is the next semantic owner-review
-slice.
+**Current phase:** The six-ID Rust binding row is decomposed into four ordered
+owner-coherent children; Rust core/adapter testability is next.
 
-**Next slice:** Milestone 7.4b8n owner review and decomposition decision for active package `STD-0804` through `STD-0809`.
+**Next slice:** Milestone 7.4b8o Rust core-and-adapter testability for active child `STD-0804`.
 
 **Acceptance status:** `partial`
 
@@ -1077,9 +1076,21 @@ all structural/routing fixtures pass.
        schemas, and permissive parsing; and
      - retain accepted bespoke checkers until an affected package explicitly
        migrates its invariant.
-   - `7.4b8n` (`Planned`): review `STD-0804` through `STD-0809` for one
-     owner- and outcome-coherent implementation slice or an exact ordered
-     decomposition before normative movement.
+   - `7.4b8n` (`Accepted`): reject the stale one-owner implementation proposal
+     and decompose baseline row 5 into four ordered children;
+     - `STD-0804` remains Rust Language Binding-owned core/adapter testability;
+     - `STD-0805` and `STD-0806` move to generic Language Binding boundary-
+       mechanism selection;
+     - `STD-0807` and `STD-0808` move to Contracts-owned compatibility and
+       evolution; and
+     - `STD-0809` returns to Rust Language Binding only for adaptation of a
+       contract-selected discovery or negotiation mechanism.
+     - remove fixed framework, target-count, host-label, additive-
+       compatibility, lockstep-version, and mandatory version-export defaults
+       rather than preserving them as alternate paths; and
+     - change no normative standard or disposition in this re-plan.
+   - `7.4b8o` (`Planned`): replace `STD-0804` with one Rust Language Binding
+     core/adapter testability contract using reusable decision-table evidence.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
