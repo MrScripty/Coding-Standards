@@ -1,97 +1,17 @@
 # Concurrency Standards
 
-Guidelines for safe concurrent and asynchronous programming across supported languages.
+Canonical generic concurrency and asynchronous-lifecycle policy has moved to
+[Concurrency And Async Lifecycle](topics/concurrency.md).
+
+The language-specific sections retained below remain migration material only.
+They may specialize mechanisms when routed, but they cannot weaken or override
+the canonical topic.
 
 ## Core Principles
 
-### 1. Prefer Message Passing Over Shared Mutable State
-
-When two components need to communicate, send a message rather than sharing a
-mutable variable. Apply this at both macro level (IPC between processes) and
-micro level (between modules).
-
-```
-// GOOD: Send a message
-dispatcher.Send("selection", "changed", newState);
-
-// AVOID: Share a mutable reference
-sharedState.Selection = newState;  // Who else reads this? When?
-```
-
-When shared state is unavoidable, protect it (see below).
-
-### 2. Protect Shared Mutable State
-
-Any data accessed by more than one thread must be protected.
-
-**C# — Use `lock`, `Interlocked`, or immutable snapshots:**
-
-```csharp
-// GOOD: Atomic operations for simple values
-private int _count;
-Interlocked.Increment(ref _count);
-
-// GOOD: Lock for compound operations
-lock (_stateLock)
-{
-    _state = _state with { SelectedId = newId };
-    SelectionChanged?.Invoke(_state);
-}
-
-// BAD: Unprotected field access
-private bool _isProcessing;  // Read/written from multiple threads
-```
-
-Rust mutex selection rules live in
-[languages/rust/RUST-ASYNC-STANDARDS.md](languages/rust/RUST-ASYNC-STANDARDS.md#mutex-selection).
-
-### 3. Keep Related State Under One Lock
-
-If two fields are logically related and must be consistent, protect them with
-a single lock. Never update them under separate locks.
-
-```csharp
-// BAD: Separate updates
-_pendingRequestId = message.Id;     // Thread A writes
-_pendingAction = "open";            // Thread A writes
-// Thread B reads _pendingRequestId before _pendingAction is set
-
-// GOOD: Atomic update
-lock (_pendingLock)
-{
-    _pendingRequestId = message.Id;
-    _pendingAction = "open";
-}
-```
-
-### 4. Keep Async Paths Non-Blocking
-
-Async request paths and lifecycle paths (startup/shutdown/health loops) must not
-run blocking calls directly. Blocking operations stall the runtime thread and can
-delay unrelated work.
-
-Avoid direct blocking calls such as:
-- `std::thread::sleep`
-- blocking process/file/network calls in async handlers
-- `Thread.Sleep`, `Task.Wait`, or sync process waits in async C# code
-
-Use async equivalents, or isolate unavoidable blocking work:
-
-Rust async runtime rules live in
-[languages/rust/RUST-ASYNC-STANDARDS.md](languages/rust/RUST-ASYNC-STANDARDS.md#blocking-work).
-
-```csharp
-// BAD: Blocks thread inside async flow
-Thread.Sleep(200);
-process.WaitForExit();
-
-// GOOD: Async-friendly alternatives
-await Task.Delay(200, ct);
-await process.WaitForExitAsync(ct);
-```
-
-Never hold an async lock across blocking operations. If blocking work is
-unavoidable, copy required data, release the lock, and then run the work.
+Shared-state coordination, related invariants, lock boundaries, and
+nonblocking lifecycle paths are owned by
+[the canonical Concurrency topic](topics/concurrency.md).
 
 ---
 
@@ -99,60 +19,18 @@ unavoidable, copy required data, release the lock, and then run the work.
 
 ### Always Observe Task Errors
 
-Never discard a Task without handling potential exceptions.
-
-```csharp
-// BAD: Fire and forget — exception silently lost
-_ = DoWorkAsync();
-
-// GOOD: Observe errors
-DoWorkAsync().ContinueWith(
-    t => _logger.Error(t.Exception!.InnerException, "Unhandled error"),
-    TaskContinuationOptions.OnlyOnFaulted);
-
-// GOOD: If you truly don't care about the result, at minimum log
-_ = Task.Run(async () =>
-{
-    try { await DoWorkAsync(); }
-    catch (Exception ex) { _logger.Error(ex, "Background task failed"); }
-});
-```
+Asynchronous failure observation and work ownership are canonical in
+[Concurrency And Async Lifecycle](topics/concurrency.md#own-work-failure-and-cancellation).
 
 ### Never Block on Async
 
-Calling `.Result` or `.Wait()` on a Task can deadlock in UI synchronization
-contexts.
-
-```csharp
-// BAD: Blocks thread, deadlock risk
-var result = client.GetAsync(url).Result;
-
-// GOOD: Await properly
-var result = await client.GetAsync(url);
-
-// ACCEPTABLE: When truly synchronous context is required and you control the scheduler
-var result = client.GetAsync(url).ConfigureAwait(false).GetAwaiter().GetResult();
-```
+The nonblocking async-path contract is canonical in
+[Concurrency And Async Lifecycle](topics/concurrency.md#keep-async-and-lifecycle-paths-nonblocking).
 
 ### Pass CancellationToken Through Async Chains
 
-Every async method that could be long-running should accept and forward a
-`CancellationToken`.
-
-```csharp
-// GOOD: Token flows through the chain
-public async Task ExtractAsync(string path, CancellationToken ct)
-{
-    await _manager.OpenAsync(path, ct);
-    await File.WriteAllBytesAsync(outputPath, data, ct);
-}
-
-// BAD: Token ignored or not accepted
-public async Task ExtractAsync(string path)
-{
-    await _manager.OpenAsync(path);  // Can't cancel
-}
-```
+Cancellation ownership and propagation are canonical in
+[Concurrency And Async Lifecycle](topics/concurrency.md#own-work-failure-and-cancellation).
 
 ### Use ConfigureAwait(false) in Library/Service Code
 

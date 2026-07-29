@@ -274,3 +274,12 @@ STD-0796	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/r
 STD-0801	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	merge	join conversion verification to the canonical specialization
 STD-0802	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require success rejection and boundary round-trip coverage
 STD-0803	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	replace infallible-only conversion examples
+STD-0263	CONCURRENCY-STANDARDS.md	topics/concurrency.md	move	establish the generic concurrency owner
+STD-0264	CONCURRENCY-STANDARDS.md	topics/concurrency.md	move	establish generic concurrency principles
+STD-0265	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	treat message passing as a selection decision rather than a universal architecture
+STD-0266	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	distinguish immutable and synchronized data and prohibit callbacks under locks
+STD-0267	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	protect related invariants without requiring one locking mechanism
+STD-0268	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	require nonblocking async and lifecycle paths
+STD-0270	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	require owned observation of asynchronous failures
+STD-0271	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	remove synchronous blocking as an async fallback
+STD-0272	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	require cancellation propagation through owned async work

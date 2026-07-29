@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave active; remaining trust and
-lifecycle dependencies re-planned.
+**Current phase:** Milestone 7 lifecycle bridge active; generic Concurrency
+ownership accepted.
 
-**Next slice:** Milestone 7.4b4b, establish the generic Concurrency contract
-before Rust async and dependent trust-boundary specializations.
+**Next slice:** Milestone 7.4b4c, plan the Rust Async specialization against
+the accepted generic Concurrency owner before implementation.
 
 **Acceptance status:** `partial`
 
@@ -537,8 +537,18 @@ all structural/routing fixtures pass.
        the pre-implementation group counts; it now accepts only zero or all
        nine next-slice dispositions and derives the corresponding owner and
        active-plan handoff;
-   - `7.4b4b` (`Planned`): establish generic Concurrency ownership
+   - `7.4b4b` (`Accepted`): establish generic Concurrency ownership
      (`STD-0263`-`STD-0268`, `STD-0270`-`STD-0272`) and resolve `F019`;
+     - generic policy now distinguishes immutable access from shared mutable
+       invariants, prohibits externally controlled behavior under locks, and
+       selects coordination from the invariant without mandating one lock or
+       message architecture;
+     - async and lifecycle work now requires nonblocking execution, explicit
+       completion/failure ownership, and cancellation propagation;
+     - missing coordination or lifecycle capability returns the operation's
+       typed outcome without unprotected mutation, detached work, discarded
+       errors, ignored cancellation, synchronous waiting, or a
+       language-specific universal mechanism;
    - `7.4b4c` (`Planned`): planning-only decomposition of the Rust Async
      specialization after generic Concurrency is accepted.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,

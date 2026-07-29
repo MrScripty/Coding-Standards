@@ -29,6 +29,7 @@ reference material.
 | [reference/recipes/documentation.md](reference/recipes/documentation.md) | Non-normative comment, Markdown, public-interface, and algorithm examples | Applying a selected documentation requirement |
 | [reference/recipes/releases.md](reference/recipes/releases.md) | Non-normative changelog automation example | Configuring a selected release tool |
 | [topics/contracts.md](topics/contracts.md) | Runtime decoding proof, contract classes, migration, compatibility, degraded outcomes, and typed diagnostics | Boundary decoding, contract evolution, persisted state, or fallback decisions |
+| [topics/concurrency.md](topics/concurrency.md) | Shared-state coordination, lock boundaries, nonblocking async lifecycle, failure observation, and cancellation ownership | Concurrent state or asynchronous work with lifecycle obligations |
 | [topics/security.md](topics/security.md) | Canonical untrusted-input authority and filesystem-containment policy | Untrusted values authorizing operations or resource access |
 | [topics/cross-platform.md](topics/cross-platform.md) | Canonical path construction and filesystem-identity policy | Path behavior across supported platforms or filesystems |
 | [profiles/boundaries/interop.md](profiles/boundaries/interop.md) | Foreign memory, resource authority, lifecycle, thread, and validated-adapter contracts | Foreign pointers, handles, callbacks, runtimes, or resources |
@@ -46,7 +47,7 @@ reference material.
 | [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md) | Declarative rendering, UI synchronization, frontend testing/tooling conventions | Web, desktop UI, and component-heavy frontend codebases |
 | [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) | Migration index for canonical documentation, release, and recipe owners | Existing links only |
 | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) | Remaining string sanitization and network transport guidance | Security concerns not yet migrated to canonical topics and profiles |
-| [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) | Async/threading patterns, async task lifecycle, mutex selection | Multi-threaded or async applications |
+| [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) | Migration index plus remaining language-specific concurrency material | Existing links and unmoved language-specific concerns |
 | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) | Remaining platform abstraction, native library, and CI guidance | Cross-platform concerns not yet migrated to topics |
 | [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md) | Migration index plus remaining event, cross-language contract, and serialization guidance | Existing links and unmoved interop concerns |
 | [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Migration index for canonical Language Binding boundary guidance | Existing links only |

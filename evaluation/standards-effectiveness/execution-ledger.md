@@ -1629,3 +1629,45 @@ owners, with 16 canonical owners still missing. The compact S1 route remains 6
 modules and measures 601 of 11066 baseline lines.
 
 **Next slice:** `7.4b4b`.
+
+## 2026-07-28: Milestone 7.4b4b Generic Concurrency Contract
+
+**Outcome:** Accepted.
+
+The new generic Concurrency topic owns shared-state coordination, related
+invariants, lock boundaries, nonblocking asynchronous and lifecycle paths,
+failure observation, and cancellation propagation. Immutable or otherwise
+thread-safe data does not acquire a lock solely because it is shared.
+Coordination is selected from the invariant rather than from a universal
+message-passing or one-lock rule.
+
+The legacy Concurrency file now links migrated generic and C# child sections to
+the canonical topic while retaining unmoved C#, Rust, TypeScript, and Godot
+material as bounded migration content. The router and root index select the
+canonical topic for the migrated concern.
+
+Frozen identifiers `STD-0263` through `STD-0268` and `STD-0270` through
+`STD-0272` have exact final dispositions. `F019` is resolved.
+
+**Deviations and discovered issues:** None. The accepted write set, frozen
+identifier set, ownership boundary, and required sequence remained unchanged.
+
+**No-fallback/legacy result:** missing coordination or lifecycle proof cannot
+use unprotected mutation, callbacks under locks, fire-and-forget work,
+synchronous blocking in an async path, discarded failures, ignored
+cancellation, or a language-specific mechanism presented as universal policy.
+The operation returns its typed failure when a required owner or mechanism
+cannot be established.
+
+**Verification:** the focused decision fixture covers immutable sharing,
+explicit shared-mutation strategies, related invariants, callback lock scope,
+blocking async work, observed and discarded failures, work ownership,
+cancellation, unavailable ownership, and forbidden mechanism fallback.
+Metadata, routing, legacy replacement, exact dispositions, lifecycle handoff,
+plan lifecycle, shell syntax, whitespace, and all standards-effectiveness
+regressions pass.
+
+The rolling Milestone 7 remainder is 632 IDs across 31 sources and 30 owners,
+with 15 canonical owners still missing.
+
+**Next slice:** `7.4b4c`.

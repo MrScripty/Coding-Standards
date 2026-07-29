@@ -243,6 +243,15 @@ proves the 90-ID trust remainder, the 26-ID lifecycle bridge, owner
 availability, dependency order, and the exact generic Concurrency next slice
 without changing normative guidance or final dispositions.
 
+`verify-concurrency-policy.sh` checks generic shared-state, lock-boundary,
+nonblocking async, failure-observation, and cancellation-ownership decisions.
+It proves exact disposition of `STD-0263` through `STD-0268` and `STD-0270`
+through `STD-0272`, validates canonical metadata and routing, preserves only
+unmoved language-specific migration material, and rejects unprotected
+mutation, callbacks under locks, fire-and-forget work, synchronous async
+fallback, discarded failure, ignored cancellation, and universal
+language-specific mechanisms.
+
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
 legacy path is only a bounded migration index.
