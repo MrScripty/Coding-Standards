@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 independent trust remainder re-plan accepted;
-Rust serialized binding representation is next.
+**Current phase:** Rust serialized binding representation accepted; the next
+independent-trust slice requires a planning-only remainder re-plan.
 
-**Next slice:** Milestone 7.4b7i Rust serialized binding representation.
+**Next slice:** Milestone 7.4b7j independent trust remainder re-plan.
 
 **Acceptance status:** `partial`
 
@@ -846,9 +846,20 @@ all structural/routing fixtures pass.
        current handoff;
      - the planning slice changes no normative or legacy standard, final
        disposition, generated artifact, configuration, or downstream file.
-   - `7.4b7i` (`Planned`): establish the Rust Language Binding contract for a
+   - `7.4b7i` (`Accepted`): establish the Rust Language Binding contract for a
      selected Serde schema, complete attribute-derived wire shape, consumer
-     agreement, typed outcomes, and native/host evidence for `STD-0757`.
+     agreement, typed outcomes, and native/host evidence for `STD-0757`;
+     - the canonical contract derives effective tags, content, names, casing,
+       optionality, variants, and fields from the selected schema, serializer,
+       and applicable Serde attributes;
+     - native/host agreement and typed invalid, unsupported, and unavailable
+       outcomes replace implicit defaults and producer-only evidence;
+     - the legacy Serde section is a bounded canonical link, and `F051` is
+       resolved with one exact Rust Language Binding disposition.
+   - `7.4b7j` (`Planned`): re-measure the 592-ID global remainder across 28
+     sources and 27 owners, plus the 59-ID independent-trust remainder;
+     correct exactly one next owner boundary; and activate only one
+     dependency-ready implementation slice without normative movement.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

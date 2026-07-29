@@ -26,30 +26,6 @@ Thread, re-entry, and borrowed-input lifetime guidance moved to the
 
 ## Serde Wire-Format Alignment
 
-Serde attributes define the wire contract. Receiving languages must match the
-serialized shape exactly.
-
-```rust
-#[derive(Serialize, Deserialize)]
-#[serde(tag = "type", rename_all = "snake_case")]
-pub enum ServerEvent {
-    TimelineChanged,
-    BeatUpdated { clip_id: String },
-    GenerationProgress { clip_id: String, token: String },
-}
-```
-
-```typescript
-type ServerMessage =
-    | { type: 'timeline_changed' }
-    | { type: 'beat_updated'; clip_id: string }
-    | { type: 'generation_progress'; clip_id: string; token: string };
-```
-
-Rules:
-
-- Check `rename_all`, `tag`, `content`, and `rename` before writing client types.
-- Use explicit `rename_all` on public wire DTOs instead of relying on Rust enum
-  or field casing.
-- Test serialization round trips across the boundary.
-- Prefer shared schema generation for long-lived public contracts.
+Canonical selected-schema, Serde-attribute, consumer-agreement, typed-outcome,
+and native/host evidence guidance moved to
+[Serialized Wire Representation](../../profiles/languages/rust/language-bindings.md#serialized-wire-representation).

@@ -219,6 +219,17 @@ scoped or lifecycle-tracked work, exact disposition, bounded legacy
 replacement, and rejection of catch-all, retry, carry-forward, default-input,
 alternate-executor, and detached-work fallback.
 
+## Rust Wire-Representation Decision Fixtures
+
+`fixtures/rust/wire-representation-decisions.tsv` and
+`verify-rust-wire-representation.sh` require a selected schema and serializer,
+complete attribute-derived wire shape, consumer agreement, typed outcomes, and
+native/host evidence for Rust serialized bindings. They prove the exact
+`STD-0757` disposition, preserve unrelated legacy Rust Interop sections, and
+reject schema-free JSON, native layout, assumed shape defaults, unknown
+sentinels, omitted variants, alternate serializers or bindings, unsupported
+generation claims, and producer-only or weaker evidence.
+
 ## Rust Filesystem-Authority Decision Fixtures
 
 `fixtures/rust/filesystem-authority-decisions.tsv` and
@@ -322,14 +333,15 @@ boundary without moving normative guidance.
 `milestone-7-independent-trust-groups.tsv`, and
 `milestone-7-independent-trust-next-slice.tsv` resume the independent
 trust-boundary wave after the lifecycle bridge. The focused checker proves the
-61-ID/six-proposed-owner frozen baseline, 60-ID current remainder after event
-registration, owner existence, accepted Contracts/Interop/Rust Language
-Binding dependencies, residual decomposition status, and the exact corrected
-`STD-0757` next-slice proposal. The accepted `7.4b7h` re-plan rejects a
-six-ID Security draft that still mixed Core, Contracts, Security,
-implementation structure, and field-rule ownership. It selects only the
-dependency-ready Serde wire-representation identifier and changes no
-normative, legacy, disposition, generated, configuration, or downstream file.
+61-ID/six-proposed-owner frozen baseline, 59-ID current remainder after event
+registration and wire-representation acceptance, owner existence, accepted
+Contracts/Interop/Rust Language Binding dependencies, residual decomposition
+status, and the historical corrected `STD-0757` proposal. The accepted
+`7.4b7h` re-plan rejects a six-ID Security draft that still mixed Core,
+Contracts, Security, implementation structure, and field-rule ownership.
+Accepted `7.4b7i` establishes the bounded Rust wire-representation contract
+and disposition; `7.4b7j` next re-measures the trust boundary before any
+further normative move.
 
 `verify-interop-event-registration.sh` checks provider-governed registration
 phases, delivery and local-work independence, current callback input,

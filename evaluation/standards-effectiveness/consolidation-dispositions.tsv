@@ -322,3 +322,4 @@ STD-0727	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust
 STD-0728	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	select cfg build composition and module boundaries from Rust and artifact facts
 STD-0729	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	place inline cfg by cohesion and reviewability without numeric layout thresholds
 STD-0730	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	verify each declared Rust target claim with contract-matched evidence
+STD-0757	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	derive the effective Serde wire representation from selected schema serializer attributes consumer agreement and native-host evidence

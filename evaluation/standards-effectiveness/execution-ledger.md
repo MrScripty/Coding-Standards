@@ -2621,3 +2621,44 @@ execution.
 **Next slice:** `7.4b7i`, one identifier, to establish selected Serde schema,
 complete attribute-derived representation, consumer agreement, typed outcomes,
 and native/host evidence in the Rust Language Binding specialization.
+
+## 2026-07-28: Milestone 7.4b7i Rust Serialized Binding Representation
+
+**Outcome:** Accepted.
+
+`STD-0757` now has one exact `refine` disposition from the legacy Rust Interop
+source to `profiles/languages/rust/language-bindings.md`. The canonical Rust
+contract selects schema, serializer, and version before deriving effective
+tags, content, names, casing, optionality, variants, and fields from applicable
+Serde attributes. It requires consumer agreement, typed invalid/unsupported/
+unavailable results, and native/host round-trip plus rejection evidence.
+
+**Write set:** Rust Language Binding profile; only the legacy Serde
+Wire-Format Alignment section; Rust profile index; one focused decision fixture
+and checker; exact disposition; independent trust report and checker;
+evaluation README and findings; active plan; and this ledger.
+
+**Discovered issues (`Resolved`):** `F051` recorded that implicit Serde shape,
+casing, tagging, generated-schema, and producer-only evidence assumptions had
+no canonical Rust/host representation contract. The implementation replaces
+them with selected contract facts and explicit typed diagnostics. `F048` now
+has 59 remaining identifiers after the exact `STD-0757` disposition.
+
+**No-fallback/legacy result:** the legacy examples and defaults are one
+canonical link. The contract rejects schema-free JSON, Rust-native layout,
+assumed casing or tagging, unknown sentinels, omitted unsupported variants,
+alternate serializers or bindings, unsupported generated-schema claims,
+producer-only tests, and weaker evidence.
+
+**Verification:** 27 focused decisions; one exact disposition; metadata,
+index, and legacy-prefix closure; existing Language Binding, conversion, and
+independent-trust checks; plan lifecycle; shell syntax; whitespace; exact
+staged scope; and every `evaluation/standards-effectiveness/verify-*.sh`
+checker under fail-fast execution.
+
+The rolling remainder is 592 IDs across 28 sources and 27 owners, with 13
+owners still missing. The independent trust subset contains 59 IDs across six
+owners.
+
+**Next slice:** `7.4b7j`, planning only, to re-measure the remainder, correct
+exactly one next owner boundary, and activate one dependency-ready slice.

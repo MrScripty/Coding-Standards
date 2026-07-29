@@ -60,7 +60,6 @@ here:
 - [API](../../../languages/rust/RUST-API-STANDARDS.md)
 - [Remaining Async mechanisms](../../../languages/rust/RUST-ASYNC-STANDARDS.md#runtime-boundaries)
 - [Dependencies](../../../languages/rust/RUST-DEPENDENCY-STANDARDS.md)
-- [Interop wire-format guidance](../../../languages/rust/RUST-INTEROP-STANDARDS.md#serde-wire-format-alignment)
 - [Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)
 - [Remaining security guidance](../../../languages/rust/RUST-SECURITY-STANDARDS.md)
 - [Tooling](../../../languages/rust/RUST-TOOLING-STANDARDS.md)

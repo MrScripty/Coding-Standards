@@ -779,3 +779,53 @@ capability, producer-only tests, and weaker evidence.
 - Implementation needs an undisposed identifier, owner, source, generated
   artifact, configuration, lockfile, workflow fixture, or downstream file
   outside the activated write set.
+
+## Accepted Slice 7.4b7i: Rust Serialized Binding Representation
+
+**Outcome:** accepted. `STD-0757` now has one exact `refine` disposition from
+the legacy Rust Interop source to the Rust Language Binding specialization.
+The canonical representation contract requires selected schema and serializer
+facts, complete applicable Serde attributes, consumer agreement, typed
+`invalid`, `unsupported`, and `unavailable` outcomes, and native/host
+round-trip plus rejection evidence. It rejects schema-free JSON, Rust-native
+layout, assumed casing or tagging, unknown sentinels, omitted unsupported
+variants, alternate serializers or bindings, unsupported generated-schema
+claims, producer-only tests, and weaker evidence.
+
+Only the legacy Serde Wire-Format Alignment section changed: its defaults and
+examples are replaced with a bounded canonical link. The Rust profile index no
+longer directs wire representation to the legacy Interop section. Unrelated
+legacy Rust Interop sections remain byte-for-byte preserved.
+
+The rolling remainder is 592 identifiers across 28 legacy sources and 27
+proposed owners, with 13 proposed owners still missing. The independent trust
+remainder is 59 identifiers across six proposed-owner groups. The frozen
+61-ID group baseline remains historical evidence and includes accepted
+`STD-0473` and `STD-0757`.
+
+**Verification:** 27 focused wire-representation decisions, one exact
+disposition, metadata and index closure, legacy-section preservation, affected
+Language Binding and conversion regressions, independent-trust progress, plan
+lifecycle, shell syntax, whitespace, exact staged scope, and every
+`evaluation/standards-effectiveness/verify-*.sh` checker pass under fail-fast
+execution.
+
+## Planned Slice 7.4b7j: Independent Trust Remainder Re-plan
+
+**Outcome:** re-measure the 592-ID global remainder across 28 sources and 27
+owners, plus the 59-ID independent-trust remainder; correct exactly one next
+owner boundary; and activate one dependency-ready implementation slice without
+normative movement.
+
+**Allowed write set:** the independent-trust report, its group and next-slice
+fixtures and checker, the parent Milestone 7 decomposition report, evaluation
+README and findings, active plan, and execution ledger. No normative or legacy
+standard, final disposition, generated inventory, owner map, router, metadata,
+template, configuration, dependency, lockfile, workflow fixture, runtime, or
+downstream file belongs to this planning slice.
+
+**No fallback:** readiness must follow exact current measurement, canonical
+owner correctness, all prerequisites, and pre-slice review. The slice cannot
+reuse a historical group order, treat the frozen baseline as a live remainder,
+invent a missing owner, combine mixed roles, preserve legacy policy, or approve
+an implementation disposition before the planning gate passes.

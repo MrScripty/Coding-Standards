@@ -9,7 +9,7 @@
 - Does not apply when: Values remain ordinary Rust values and no host-language representation or operation changes.
 - Requires: `core`, `workflow.verification`, `profile.language.rust`, `profile.boundary.language-bindings`
 - Specializes: `profile.language.rust`, `profile.boundary.language-bindings`
-- Verification: Rust binding architecture, runtime adaptation, executor-delegation, and conversion decisions plus framework-free core checks and affected native/host boundary tests.
+- Verification: Rust binding architecture, runtime adaptation, executor-delegation, conversion, and wire-representation decisions plus framework-free core checks and affected native/host boundary tests.
 - Canonical owner: `profiles/languages/rust/language-bindings.md`
 
 ## Representation Categories
@@ -27,6 +27,37 @@ concrete boundary:
 Framework lifting is not C-ABI safety. `String`, `Vec<T>`, `Option<T>`, Rust
 enums, and framework object types may be supported by a named framework, but
 their native Rust layouts are not universally stable C-ABI values.
+
+## Serialized Wire Representation
+
+Select the wire schema, serializer contract, and supported schema or protocol
+version before exposing a Rust value as serialized data.
+The effective wire representation is derived from:
+
+- the selected Rust adapter type and supported variants;
+- the serializer format and version;
+- container, variant, and field attributes that affect tagging, content,
+  names, casing, defaults, omission, flattening, aliases, and custom
+  conversion; and
+- the consumer contract for optionality, unknown fields, and unsupported
+  variants.
+
+Account for every applicable attribute. An absent attribute may select behavior
+defined by the chosen serializer contract, but that behavior is not a
+cross-language default and must be represented in the consumer contract.
+Rust-native layout, source names, enum shape, and derived static types do not
+independently establish serialized shape.
+
+Receiving consumers must agree with the complete effective representation.
+Apply [Contracts](../../../topics/contracts.md) to wire-version and
+independent-consumer evolution. Schema generation is valid only when the
+selected contract names the canonical generation input, generator capability,
+and derived artifacts. Generated types do not replace runtime decoding.
+
+Return typed `invalid` when data or consumer shape contradicts the selected
+representation, `unsupported` when a well-formed version or variant is outside
+the supported contract, and `unavailable` when required schema, serializer,
+generation, consumer, or decoding capability cannot be obtained.
 
 ## Core And Adapter Boundary
 
@@ -163,6 +194,13 @@ Test every conversion through:
 Native-only conversion tests do not prove host lifting, generated wrappers,
 wire compatibility, or ABI behavior.
 
+For serialized representations, verify Rust-to-host and host-to-Rust behavior
+for each supported shape. Cover tags, content, renamed variants and fields,
+optionality, defaults, omitted fields, unknown-field policy, supported and
+unsupported variants, malformed input, and unavailable schema or decoding
+capability. Producer-only snapshots or Rust-only round trips do not prove
+consumer agreement.
+
 ## No Fallback
 
 Missing adapter, framework, generation, or packaging capability cannot add a
@@ -189,5 +227,11 @@ Failed Rust binding conversion cannot fall back to:
 - JSON treated as a schema-free universal ABI;
 - another binding framework or representation; or
 - native-only tests presented as host-boundary evidence.
+
+Serialized representations also cannot fall back to schema-free JSON,
+Rust-native layout, assumed casing or tagging, unknown-value sentinels,
+omitted unsupported variants, another serializer or binding mechanism,
+generated-schema claims without the selected capability, producer-only tests,
+or weaker evidence.
 
 Return the typed diagnostic for the selected representation.

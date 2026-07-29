@@ -36,7 +36,7 @@ next_dispositions=0
 for id in "${expected_ids[@]}"; do
   [[ -n "${disposed[$id]:-}" ]] && ((next_dispositions += 1))
 done
-[[ "$next_dispositions" -eq 0 ]]
+[[ "$next_dispositions" -eq 1 ]]
 
 global_remaining=0
 while IFS=$'\t' read -r id source _line owner _disposition _heading; do
@@ -56,9 +56,9 @@ profiles/languages/rust/language-bindings.md)
       ;;
   esac
 done < "$OWNER_MAP"
-[[ "$global_remaining" -eq 593 ]]
-[[ "${#remaining_sources[@]}" -eq 29 ]]
-[[ "${#remaining_owners[@]}" -eq 28 ]]
+[[ "$global_remaining" -eq 592 ]]
+[[ "${#remaining_sources[@]}" -eq 28 ]]
+[[ "${#remaining_owners[@]}" -eq 27 ]]
 
 missing_owners=0
 for owner in "${!remaining_owners[@]}"; do
@@ -134,7 +134,7 @@ while IFS=$'\t' read -r order owner count owner_state prerequisite status \
   ((owner_groups += 1))
 done < "$GROUP_FILE"
 [[ "$baseline_trust_total" -eq 61 ]]
-[[ "$current_trust_total" -eq 60 ]]
+[[ "$current_trust_total" -eq 59 ]]
 [[ "$owner_groups" -eq 6 ]]
 
 mapfile -t actual_ids < <(tail -n +2 "$NEXT_SLICE" | cut -f3)
@@ -182,6 +182,8 @@ required_report=(
   '## Accepted Slice 7.4b7g: Event Registration Lifecycle Contract'
   '## Accepted Slice 7.4b7h: Independent Trust Remainder Re-plan'
   '## Planned Slice 7.4b7i: Rust Serialized Binding Representation'
+  '## Accepted Slice 7.4b7i: Rust Serialized Binding Representation'
+  '## Planned Slice 7.4b7j: Independent Trust Remainder Re-plan'
   'rolling remainder is 593 identifiers'
   'independent trust subset is 60 identifiers'
   'Their 61 frozen identifiers include accepted `STD-0473`'
@@ -190,28 +192,32 @@ required_report=(
   'schema-free JSON'
   '`F051`'
   'pre-existing checker defect'
+  'rolling remainder is 592 identifiers across 28 legacy sources and 27'
+  '27 focused wire-representation decisions'
   '**No fallback:**'
   '**Pre-slice review:** accepted.'
 )
 for text in "${required_report[@]}"; do
   rg -F -q "$text" "$REPORT"
 done
+rg -U -q 'independent trust\nremainder is 59 identifiers' "$REPORT"
 
 rg -F -q '(milestone-7-independent-trust-replan.md)' "$PARENT"
 rg -F -q '60 remaining identifiers across six proposed-owner groups' "$PARENT"
-rg -F -q '| F048 | Partially corrected through Milestone 7.4b7g |' "$FINDINGS"
-rg -F -q 'Correct the remaining 60 cross-role destinations' "$FINDINGS"
+rg -F -q '| F048 | Partially corrected through Milestone 7.4b7i |' "$FINDINGS"
+rg -F -q 'Correct the remaining 59 cross-role destinations' "$FINDINGS"
 rg -F -q '| F049 | Resolved in Milestone 7.4b7g |' "$FINDINGS"
 rg -F -q '| F050 | Resolved in Milestone 7.4b7f2 |' "$FINDINGS"
-rg -F -q '| F051 | Planned for Milestone 7.4b7i |' "$FINDINGS"
+rg -F -q '| F051 | Resolved in Milestone 7.4b7i |' "$FINDINGS"
 rg -F -q '## Accepted Slice 7.4b7g: Event Registration Lifecycle Contract' \
   "$REPORT"
 rg -F -q '`7.4b7f` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7f2` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7g` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7h` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7i` (`Planned`)' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b7i' "$PLAN"
+rg -F -q '`7.4b7i` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b7j` (`Planned`)' "$PLAN"
+rg -F -q '**Next slice:** Milestone 7.4b7j' "$PLAN"
 
 "$SCRIPT_DIR/verify-contract-ownership.sh"
 "$SCRIPT_DIR/verify-concurrency-policy.sh"
@@ -220,6 +226,6 @@ rg -F -q '**Next slice:** Milestone 7.4b7i' "$PLAN"
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
-printf 'Milestone 7 independent trust re-plan passed: %s baseline IDs, %s current across %s owners; next-slice dispositions %s/1\n' \
+printf 'Milestone 7 independent trust re-plan passed: %s baseline IDs, %s current across %s owners; accepted dispositions %s/1\n' \
   "$baseline_trust_total" "$current_trust_total" "$owner_groups" \
   "$next_dispositions"
