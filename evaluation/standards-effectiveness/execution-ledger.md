@@ -2490,3 +2490,27 @@ assertion; this result is recorded rather than claimed as passing.
 **Next slice:** `7.4b7f2`, verification only, to replace the stale temporary
 `F026` assertion and restore a green fail-fast complete suite. Corrected
 `7.4b7g` remains the next normative slice.
+
+## 2026-07-28: Milestone 7.4b7f2 Executor Delegation Verification Repair
+
+**Outcome:** Accepted.
+
+**Write set:** the executor-delegation checker, independent trust report and
+checker, evaluation README and findings, active plan, and this ledger.
+
+The checker now requires the stable resolved `F026` status established by
+accepted Milestone `7.4b5f` instead of the superseded partial status from
+`7.4b4e`. Its 25 executor-delegation decisions, exact `STD-0781` disposition,
+metadata closure, canonical profile assertions, bounded legacy proof, and
+dependent decomposition verification remain unchanged.
+
+**No-fallback/legacy result:** the repair does not skip or weaken verification,
+accept multiple finding states, alter normative or legacy guidance, change a
+fixture or disposition, or continue with a red complete suite.
+
+**Verification:** the executor-delegation checker, independent trust checker,
+plan lifecycle, shell syntax, whitespace, exact staged scope, and every
+`evaluation/standards-effectiveness/verify-*.sh` checker pass under fail-fast
+execution.
+
+**Next slice:** `7.4b7g` event registration lifecycle contract implementation.

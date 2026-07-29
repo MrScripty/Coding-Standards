@@ -129,7 +129,7 @@ for heading in '## Code Generation Strategy' '## Memory Ownership Model' \
   rg -F -q "$heading" "$LEGACY"
 done
 
-rg -F -q '| F026 | Partially resolved in Milestone 7.4b4e |' "$FINDINGS"
+rg -F -q '| F026 | Resolved in Milestone 7.4b5f |' "$FINDINGS"
 rg -F -q '`7.4b5d` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-f025-f026-decomposition.sh"
 

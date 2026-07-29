@@ -512,7 +512,7 @@ proof of outliving local work, impose a universal shutdown order, assume
 repeated unregistration is idempotent, or accept a suite command that masks an
 intermediate failure.
 
-## Planned Slice 7.4b7f2: Executor Delegation Verification Repair
+## Accepted Slice 7.4b7f2: Executor Delegation Verification Repair
 
 **Outcome:** restore truthful complete-suite verification before normative
 Interop work by replacing the stale temporary `F026` assertion with the
@@ -539,6 +539,12 @@ independent-trust checker still passes; the staged diff contains only the
 authorized verification and planning artifacts; shell syntax and whitespace
 pass; and every `evaluation/standards-effectiveness/verify-*.sh` checker passes
 under fail-fast execution.
+
+**Acceptance result:** accepted. The executor-delegation checker now requires
+the stable resolved `F026` state established by `7.4b5f`. Its decision fixture,
+exact `STD-0781` disposition, metadata closure, profile requirements, bounded
+legacy proof, and dependent decomposition checks remain unchanged. Focused,
+affected, and fail-fast complete-suite verification pass.
 
 **No fallback:** do not weaken or skip the checker, accept multiple `F026`
 states, rewrite historical evidence, change normative behavior, or continue to
@@ -616,8 +622,8 @@ fail-fast complete-suite invocation.
 provider-governed callback and release authority already owned by the Interop
 boundary profile. The one-ID slice completes that lifecycle without absorbing
 event-domain behavior, Contracts, IPC, Language Bindings, language recipes, or
-the other nine mixed-role Interop sections. Activation is blocked only on
-accepted completion of `7.4b7f2`.
+the other nine mixed-role Interop sections. The verification-only `7.4b7f2`
+prerequisite is accepted, so this normative slice is now active.
 
 ## Re-Plan Triggers
 

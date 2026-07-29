@@ -53,7 +53,7 @@ changes and focused fixture evidence.
 | F047 | Resolved in Milestone 7.4b7e | Rust target triples, support claims, `cfg`/module placement, and evidence follow selected target and artifact contracts without fixed targets, best-effort status, numeric layout thresholds, named substitute tools, or weaker evidence. |
 | F048 | Partially corrected in Milestone 7.4b7f | `STD-0473` has an accepted Interop lifecycle role; the other 60 residual Security, Cross-Platform, Interop, Rust Interop, Rust Security, and Rust Language Binding identifiers remain blocked on owner correction or decomposition. |
 | F049 | Planned for corrected Milestone 7.4b7g | Event registration needs provider-selected delivery, unregistration, release, and shutdown semantics with phase-aware outcomes, conditional Concurrency routing, and no destruction-linked cleanup. |
-| F050 | Planned for Milestone 7.4b7f2 | The executor-delegation checker still requires the historical partial `F026` state even though accepted Milestone 7.4b5f resolved that finding, causing the live fail-fast suite to fail without a diagnostic. |
+| F050 | Resolved in Milestone 7.4b7f2 | The executor-delegation checker now requires the stable resolved `F026` state established by accepted Milestone 7.4b5f; all behavioral, disposition, metadata, legacy, and decomposition checks remain active. |
 
 ## Systemic Findings
 

@@ -383,11 +383,12 @@ unprotected durable work, destruction-only or detached async cleanup,
 leaf/missing ownership, silent terminal outcomes, and tool-only evidence.
 
 The Milestone `7.4b7f1` fail-fast audit found that
-`verify-rust-binding-executor-delegation.sh` still requires the temporary
-partial `F026` status superseded by accepted Milestone `7.4b5f`. `F050` and
-planned verification-only slice `7.4b7f2` own that repair. Event-registration
-implementation remains blocked until the complete suite passes; the repair
-must not weaken executor-delegation behavior or disposition evidence.
+`verify-rust-binding-executor-delegation.sh` still required the temporary
+partial `F026` status superseded by accepted Milestone `7.4b5f`. Accepted
+verification-only slice `7.4b7f2` resolves `F050` by requiring the stable
+resolved state without weakening executor-delegation behavior or disposition
+evidence. Event-registration implementation may proceed after the restored
+fail-fast complete suite.
 
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the

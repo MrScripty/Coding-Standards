@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 verification repair required before
-event-registration implementation; normative implementation has not started.
+**Current phase:** Milestone 7 event-registration pre-slice and verification
+repair accepted; normative implementation is next.
 
-**Next slice:** Milestone 7.4b7f2 executor-delegation verification repair.
+**Next slice:** Milestone 7.4b7g event registration lifecycle contract.
 
 **Acceptance status:** `partial`
 
@@ -797,19 +797,19 @@ all structural/routing fixtures pass.
      - change no normative, legacy, disposition, generated, implementation-
        checker, parent-decomposition, source, configuration, or downstream
        file;
-     - full-suite finding (`Open`): fail-fast verification exposed that the
+     - full-suite finding (`Resolved`): fail-fast verification exposed that the
        executor-delegation checker still requires the superseded partial
        `F026` state; the live `f497517` baseline fails identically, and `F050`
        assigns a verification-only repair before normative work.
-   - `7.4b7f2` (`Planned`): replace only the stale temporary `F026` status
+   - `7.4b7f2` (`Accepted`): replace only the stale temporary `F026` status
      assertion in the executor-delegation checker with the accepted resolved
      state, preserve all behavioral and disposition evidence, and restore a
      green fail-fast complete suite without normative movement.
-   - `7.4b7g` (`Blocked`): replace the event-subscription default with an
+   - `7.4b7g` (`Planned`): replace the event-subscription default with an
      explicit Interop registration lifecycle contract (`STD-0473`) that owns
      provider registration/delivery/unregistration/release/shutdown behavior
      and conditionally routes only outliving callback-created work to
-     Concurrency; activate only after `7.4b7f2` passes.
+     Concurrency.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
