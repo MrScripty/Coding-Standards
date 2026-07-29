@@ -118,11 +118,12 @@ required_report=(
   'Only accepted implementation slices are fully specified.'
   'The accepted `STD-0802` disposition'
   'Bindings adapt a host call to an injected runtime/lifecycle capability'
-  'A canonicalized `PathBuf` is'
+  'a canonicalized `PathBuf` alone is not durable authority'
   "keep each call's input, cancellation, result, and failure state scoped"
   '## Accepted Slice 7.4b5b: Binding Core And Adapter Boundary'
   '## Accepted Slice 7.4b5c: Binding Runtime And Handle Adaptation'
   '## Accepted Slice 7.4b5d: Explicit Executor Delegation'
+  '## Accepted Slice 7.4b5e: Rust Filesystem Authority Through Use'
   '**No fallback:**'
   'Independent trust-boundary groups remain'
 )

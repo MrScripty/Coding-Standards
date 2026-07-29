@@ -310,14 +310,76 @@ all other typed outcomes, typed unavailable delegate capability, and no
 catch-all, retry, carry-forward, default-input, alternate-executor, or detached
 fallback. `STD-0781` has one exact disposition.
 
-### Slice 7.4b5e: Rust Filesystem Authority Through Use
+## Accepted Slice 7.4b5e: Rust Filesystem Authority Through Use
 
-Refine `STD-0822` as a Rust specialization of generic Security. Prefer held
-directory/file capabilities, handle-relative operations, or an equivalent
-mechanism when concurrent mutation is in scope. A canonicalized `PathBuf` is
-not proof that a later path operation uses the validated object. If the
-required authority-preserving operation is unavailable, return typed
-`unsupported` or `unavailable`; do not use a weaker path.
+**Outcome:** refine `STD-0822` as a Rust specialization of generic Security.
+Rust path validation produces authority that the filesystem operation must
+preserve through use; a canonicalized `PathBuf` alone is not durable authority
+when path components can change concurrently.
+
+**Allowed write set:**
+
+- `profiles/languages/rust/security.md`;
+- `languages/rust/RUST-SECURITY-STANDARDS.md`;
+- `evaluation/standards-effectiveness/fixtures/rust/filesystem-authority-decisions.tsv`;
+- `evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh`;
+- this decomposition report and checker for accepted disposition and handoff
+  state;
+- consolidation dispositions, evaluation README, findings, active plan, and
+  execution ledger.
+
+No generic Security or Cross-Platform topic, Rust API/Interop/Unsafe profile,
+runtime or filesystem implementation, dependency/configuration/lockfile,
+generated artifact, platform recipe, template, host-language package, scheduler
+implementation, or downstream repository belongs to this slice.
+
+**Required semantics:**
+
+- treat canonical identity and component containment as validation facts, not
+  permanent authority to reopen a pathname;
+- record whether concurrent component mutation is excluded, possible, or
+  unknown for the complete validation/use interval;
+- when mutation is possible, use a held file/directory capability,
+  handle-relative operation, or equivalent platform mechanism through the
+  operation;
+- when mutation is excluded, immediate revalidation may satisfy the recorded
+  threat model, but a stale or merely lexical path cannot;
+- anchor creation to validated directory authority when concurrent mutation is
+  possible; and
+- return typed `invalid`, `unsupported`, or `unavailable` when containment,
+  authority-preserving use, or required facts cannot be established.
+
+**No fallback:** failed or incomplete authority cannot continue through a
+plain/stale `PathBuf`, lexical prefix, ignored canonicalization failure,
+revalidation under concurrent mutation, unanchored creation, alternate root,
+or another filesystem mechanism selected only because the required one is
+unavailable.
+
+**Focused evidence:** decisions cover existing reads, anchored creation,
+excluded and concurrent mutation, held and handle-relative authority,
+immediate revalidation, stale/plain paths, escaped/unproven/unknown
+containment, unknown mutation facts, unavailable authority mechanisms, and
+plain-path, revalidation, lexical, alternate-root, and unanchored-creation
+fallbacks.
+
+**Acceptance gate:** `STD-0822` has one exact disposition; profile metadata and
+routing remain valid; the legacy path section is a bounded link without
+canonicalize-then-use code or pathname-authority defaults; generic filesystem
+containment evidence remains unchanged and passes; later listener sections
+remain untouched; `F026` remains partial only for listener lifecycle; and
+focused plus affected regressions pass.
+
+**Pre-slice review:** accepted. The section refines one canonical Rust Security
+owner and consumes generic Security without changing it. The review found no
+split disposition, new owner, objective change, platform-mechanism mandate, or
+fallback requirement.
+
+**Accepted result:** 19 focused decisions prove authority-preserving existing
+use and creation, threat-model-qualified revalidation, typed invalid,
+unsupported, and unavailable outcomes, and no plain/stale path, lexical,
+concurrent-revalidation, alternate-root, or unanchored-creation fallback.
+`STD-0822` has one exact disposition and `F026` remains partial only for
+listener lifecycle.
 
 ### Slice 7.4b5f: Lifecycle-Owned Listener Work
 

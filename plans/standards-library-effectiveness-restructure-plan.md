@@ -7,9 +7,9 @@
 **Plan status:** `Active`
 
 **Current phase:** Milestone 7 dependent Rust lifecycle consolidation active;
-explicit typed executor delegation accepted.
+Rust filesystem authority through use accepted.
 
-**Next slice:** Milestone 7.4b5e Rust filesystem authority through use
+**Next slice:** Milestone 7.4b5f lifecycle-owned listener work
 pre-slice review.
 
 **Acceptance status:** `partial`
@@ -655,8 +655,17 @@ all structural/routing fixtures pass.
      - 25 focused decisions reject catch-all recovery, delegation after other
        failures, retained/default input, retry, alternate-executor, and
        detached-work fallback;
-   - `7.4b5e` (`Planned`): preserve validated filesystem authority through the
-     Rust operation (`STD-0822`); and
+   - `7.4b5e` (`Accepted`): preserve validated filesystem authority through the
+     Rust operation (`STD-0822`);
+     - canonical identity and containment are validation facts, while held or
+       handle-relative authority preserves the validated object through use
+       when concurrent mutation is possible;
+     - immediate revalidation is valid only when the threat model excludes
+       concurrent mutation for the complete validation/use interval;
+     - 19 focused decisions reject stale/plain paths, lexical checks,
+       concurrent revalidation, unanchored creation, alternate roots, and
+       weaker-mechanism fallback while preserving typed outcomes;
+     - `F026` remains partial only for lifecycle-owned listener work; and
    - `7.4b5f` (`Planned`): bind listener admission, spawned work, outcomes, and
      shutdown to explicit owners (`STD-0825`).
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,

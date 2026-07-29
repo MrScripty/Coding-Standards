@@ -2072,3 +2072,45 @@ with 14 canonical owners still missing.
 
 **Next slice:** `7.4b5e` Rust filesystem authority through use pre-slice
 review.
+
+## 2026-07-28: Milestone 7.4b5e Rust Filesystem Authority Through Use
+
+**Outcome:** Accepted.
+
+The Rust Security profile now distinguishes canonical path validation from
+authority preserved through the filesystem operation. When concurrent
+component mutation is possible, existing-object use and creation retain held,
+handle-relative, or equivalent validated authority instead of reopening a
+pathname.
+
+Immediate revalidation is sufficient only when the recorded threat model
+excludes concurrent mutation through the complete operation. Invalid
+containment, unsupported authority mechanisms, and unknown filesystem or
+mutation facts retain typed `invalid`, `unsupported`, and `unavailable`
+outcomes.
+
+`STD-0822` has one exact final disposition. Its legacy path-validation section
+is a bounded canonical link without canonicalize-then-use code or pathname-
+authority defaults. `F026` remains partial only for lifecycle-owned listener
+work.
+
+**Deviations:** None.
+
+**Discovered issues:** None.
+
+**No-fallback/legacy result:** failed or incomplete authority cannot continue
+through a plain or stale `PathBuf`, lexical prefix, ignored canonicalization
+failure, revalidation under concurrent mutation, unanchored creation,
+alternate root, or another mechanism selected only because the required one is
+unavailable.
+
+**Verification:** 19 focused Rust filesystem-authority decisions, one exact
+disposition, profile metadata and routing, bounded legacy replacement,
+preserved later sections, generic filesystem-containment evidence,
+disposition-derived parent progress, plan lifecycle, shell syntax, whitespace,
+and every `evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+The rolling Milestone 7 remainder is 614 IDs across 30 sources and 29 owners,
+with 14 canonical owners still missing.
+
+**Next slice:** `7.4b5f` lifecycle-owned listener work pre-slice review.

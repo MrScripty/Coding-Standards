@@ -6,29 +6,11 @@ and panic-safe production paths. These specialize the generic
 
 ## Path Validation
 
-Resolve and validate external paths before any filesystem operation:
+Canonical Rust filesystem authority and validation/use behavior moved to the
+[Rust Security Profile](../../profiles/languages/rust/security.md#filesystem-authority-through-use).
 
-```rust
-use std::path::{Path, PathBuf};
-
-pub fn validate_within_root(input: &Path, allowed_root: &Path) -> Option<PathBuf> {
-    let resolved = input.canonicalize().ok()?;
-    let root = allowed_root.canonicalize().ok()?;
-
-    if resolved.starts_with(&root) {
-        Some(resolved)
-    } else {
-        None
-    }
-}
-```
-
-Rules:
-
-- Accept `&Path` or `impl AsRef<Path>` at boundaries, not unchecked strings.
-- Canonicalize both the user path and allowed root before comparing.
-- Do not trust renderer, frontend, CLI, IPC, or network path validation.
-- Parse once into a validated type when downstream code must trust the path.
+Generic containment, creation, concurrent-mutation, and typed-failure policy
+remains governed by [Security](../../topics/security.md#filesystem-containment).
 
 ## Checked Arithmetic At Boundaries
 
