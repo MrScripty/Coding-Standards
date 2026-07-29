@@ -3149,3 +3149,39 @@ confirm whether that group remains one coherent slice.
 
 **Next slice:** `7.4b8l`, bounded owner review of `STD-0804` through
 `STD-0809`.
+
+## 2026-07-29: Milestone 7.4b8l Accelerated Execution Re-plan
+
+**Outcome:** Accepted.
+
+The 43 pending immutable-train rows are classified into 39 semantic packages
+by canonical owner, observable outcome, prerequisites, risk, and verification
+contract. Only the two C# concurrency rows, two thin implementation-prompt
+rows, and two contiguous pairs of architecture-reference rows batch across
+train boundaries. Thirteen missing owners have one dependency-ordered creation
+package each.
+
+**Verification:** acceleration-manifest structure and train alignment; exact
+row and package counts; owner existence and missing-owner state; package
+cohesion; wave gates; active-plan and finding handoff; immutable execution
+train; plan lifecycle; shell syntax; links; whitespace; exact scope; and the
+complete checker suite with fail-fast shell behavior.
+
+**No-fallback result:** risk classification cannot waive exact dispositions,
+canonical ownership, dependency order, typed diagnostics, negative fallback
+coverage, legacy replacement, wave checkpoints, downstream pilots, or manual
+semantic review. Existing focused checkers remain authoritative until an
+affected package moves their invariant to a reusable engine; there is no
+wholesale checker rewrite or alternate verification path.
+
+**Deviation:** the prior `7.4b8l` direct row-5 review is superseded. A bounded
+checker-infrastructure slice now establishes and self-tests the reusable
+decision-table engine against that active package before normative movement.
+
+No normative or legacy standard, disposition, immutable-train row,
+decomposition overlay, generated artifact, owner map, router, metadata,
+dependency declaration, decision fixture, configuration, lockfile, or
+downstream repository changed.
+
+**Next slice:** `7.4b8m`, reusable decision-table verification foundation for
+active package `STD-0804` through `STD-0809`.

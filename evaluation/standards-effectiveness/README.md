@@ -56,6 +56,19 @@ fixture requires a recorded reason and before/after rescoring.
 - `check-metadata.sh` and `verify-metadata-fixtures.sh` validate the metadata
   contract and its negative cases.
 
+## Accelerated Milestone 7 Execution
+
+`milestone-7-accelerated-execution-replan.md` preserves the immutable
+execution train while classifying its 43 pending rows into 39 owner-, outcome-,
+and train-coherent packages. `milestone-7-accelerated-packages.tsv` freezes
+risk, owner action, verification family, parallel-draft eligibility,
+integration gate, semantic outcome, and prerequisites.
+
+`verify-milestone-7-accelerated-execution-replan.sh` proves exact pending-row
+coverage, package cohesion, missing-owner state, immutable-train alignment,
+active-plan handoff, and plan lifecycle. Shared integration remains serial,
+and complete-suite checkpoints remain fail-fast.
+
 ## Routed Vertical Slice
 
 `verify-s1-routing.sh` checks the first complete routed path:

@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+readonly REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
+readonly PACKAGES="$SCRIPT_DIR/milestone-7-accelerated-packages.tsv"
+readonly TRAIN="$SCRIPT_DIR/milestone-7-execution-train.tsv"
+readonly REPORT="$SCRIPT_DIR/milestone-7-accelerated-execution-replan.md"
+readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
+readonly FINDINGS="$SCRIPT_DIR/findings.md"
+
+declare -A train_owner train_wave train_gate seen_orders
+while IFS=$'\t' read -r order wave _start _end _source owner _owner_state \
+  _activation checkpoint extra; do
+  [[ "$order" == order ]] && continue
+  [[ -z "${extra:-}" ]]
+  train_owner["$order"]="$owner"
+  train_wave["$order"]="$wave"
+  train_gate["$order"]="$checkpoint"
+done < "$TRAIN"
+
+declare -A package_owner package_risk package_verification package_outcome
+declare -A missing_owners package_seen
+row_count=0
+while IFS=$'\t' read -r order package risk owner owner_action verification \
+  draft_mode integration_gate outcome prerequisites extra; do
+  if [[ "$order" == train_order ]]; then
+    [[ "$package" == package_id && "$risk" == risk_class ]]
+    continue
+  fi
+
+  [[ "$order" =~ ^([5-9]|[1-3][0-9]|4[0-7])$ ]]
+  [[ -z "${seen_orders[$order]:-}" ]]
+  seen_orders["$order"]=1
+  [[ "${train_owner[$order]}" == "$owner" ]]
+  [[ "$risk" =~ ^(mechanical|consolidation|refinement|safety-critical|new-owner-design)$ ]]
+  [[ "$owner_action" =~ ^(existing-review|create-before-populate|populate-after-create|closure-only)$ ]]
+  [[ "$verification" =~ ^(decision-table|owner-contract|migration-structure|custom-semantic)$ ]]
+  [[ "$draft_mode" =~ ^(isolated-draft|serial-only)$ ]]
+  [[ "$integration_gate" =~ ^(focused|full-suite)$ ]]
+  [[ -n "$outcome" && -n "$prerequisites" && -z "${extra:-}" ]]
+
+  if [[ "$owner_action" == create-before-populate ]]; then
+    [[ ! -e "$REPO_ROOT/$owner" ]]
+    [[ "$risk" == new-owner-design ]]
+    [[ "$verification" == owner-contract ]]
+    [[ "$integration_gate" == full-suite ]]
+    missing_owners["$owner"]=1
+  elif [[ "$owner_action" == populate-after-create ]]; then
+    [[ ! -e "$REPO_ROOT/$owner" ]]
+    [[ -n "${missing_owners[$owner]:-}" ]]
+    [[ "$risk" == consolidation ]]
+    [[ "$verification" == migration-structure ]]
+  else
+    [[ -e "$REPO_ROOT/$owner" ]]
+  fi
+
+  if [[ -n "${package_seen[$package]:-}" ]]; then
+    [[ "${package_owner[$package]}" == "$owner" ]]
+    [[ "${package_risk[$package]}" == "$risk" ]]
+    [[ "${package_verification[$package]}" == "$verification" ]]
+    [[ "${package_outcome[$package]}" == "$outcome" ]]
+  else
+    package_seen["$package"]=1
+    package_owner["$package"]="$owner"
+    package_risk["$package"]="$risk"
+    package_verification["$package"]="$verification"
+    package_outcome["$package"]="$outcome"
+  fi
+
+  if [[ "${train_gate[$order]}" == full-suite ]]; then
+    [[ "$integration_gate" == full-suite ]]
+  fi
+  ((row_count += 1))
+done < "$PACKAGES"
+
+[[ "$row_count" -eq 43 ]]
+[[ "${#seen_orders[@]}" -eq 43 ]]
+[[ "${#package_seen[@]}" -eq 39 ]]
+[[ "${#missing_owners[@]}" -eq 13 ]]
+
+for order in $(seq 5 47); do
+  [[ -n "${seen_orders[$order]:-}" ]]
+done
+
+expected_multi_packages=(
+  'P08:2'
+  'P19:2'
+  'P30:2'
+  'P32:2'
+)
+for expected in "${expected_multi_packages[@]}"; do
+  package="${expected%%:*}"
+  count="${expected##*:}"
+  [[ "$(awk -F '\t' -v package="$package" 'NR > 1 && $2 == package { n += 1 } END { print n + 0 }' "$PACKAGES")" -eq "$count" ]]
+done
+[[ "$(awk -F '\t' 'NR > 1 { n[$2] += 1 } END { for (p in n) if (n[p] > 1 && p != "P08" && p != "P19" && p != "P30" && p != "P32") print p }' "$PACKAGES")" == "" ]]
+
+required_report=(
+  '570 frozen identifiers remain in 43 pending logical clusters'
+  'maps every pending immutable-train row to one of 39 packages'
+  'Every legacy identifier receives exactly one final disposition'
+  'No risk class permits compatibility copies'
+  '`decision-table`'
+  '`owner-contract`'
+  '`migration-structure`'
+  '`custom-semantic`'
+  'There is no wholesale checker rewrite'
+  'Thirteen canonical owners are still missing'
+  '`isolated-draft`'
+  '`serial-only`'
+  'Both reviews are required'
+  'final `7.4c` milestone'
+  'set -euo pipefail'
+  'changes no normative or legacy standard'
+)
+for text in "${required_report[@]}"; do
+  rg -F -q "$text" "$REPORT"
+done
+
+rg -F -q '| F070 | Resolved in Milestone 7.4b8l |' "$FINDINGS"
+rg -F -q '`7.4b8l` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8m` (`Planned`)' "$PLAN"
+next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
+[[ "$next_slice_line" == *'Milestone 7.4b8m'* ]]
+[[ "$next_slice_line" == *'STD-0804'* ]]
+[[ "$next_slice_line" == *'STD-0809'* ]]
+
+"$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
+"$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
+"$SCRIPT_DIR/verify-plan-fixtures.sh"
+
+printf 'Milestone 7 accelerated execution re-plan passed: %s rows, %s packages, %s missing owners\n' \
+  "$row_count" "${#package_seen[@]}" "${#missing_owners[@]}"

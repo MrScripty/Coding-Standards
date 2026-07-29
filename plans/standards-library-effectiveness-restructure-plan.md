@@ -6,10 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust enum representation is accepted; the six-ID Rust
-binding representation group is the next immutable execution row.
+**Current phase:** The accelerated package contract is accepted; reusable
+decision-table verification for the six-ID Rust binding representation group
+is the next infrastructure slice.
 
-**Next slice:** Milestone 7.4b8l owner review of `STD-0804` through `STD-0809`.
+**Next slice:** Milestone 7.4b8m reusable decision-table verification foundation for active package `STD-0804` through `STD-0809`.
 
 **Acceptance status:** `partial`
 
@@ -32,6 +33,8 @@ binding representation group is the next immutable execution row.
 **F025/F026 decomposition:** [Dependent Rust binding and security lifecycle slices](../evaluation/standards-effectiveness/milestone-7-f025-f026-decomposition.md)
 
 **Independent trust-boundary re-plan:** [Six proposed-owner groups and corrected Rust wire-representation next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
+
+**Accelerated execution re-plan:** [Risk-classified owner packages and verification gates](../evaluation/standards-effectiveness/milestone-7-accelerated-execution-replan.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -207,6 +210,7 @@ Readers must not infer precedence from scattered prose.
 | Prompts | Repository prompts are versioned thin entrypoints into canonical standards. |
 | Downstream evidence | Pantograph is one regression case, not a source of universal policy. |
 | Acceptance model | Required evidence is a set of typed claims; proof kind, environment, and execution mode are independent dimensions, not a scalar hierarchy. |
+| Accelerated migration | Immutable train coverage remains authoritative; compatible rows batch only by owner, semantic outcome, dependencies, and evidence, with risk-based verification and serial shared integration. |
 
 ## Plan Artifact Contract
 
@@ -1040,8 +1044,28 @@ all structural/routing fixtures pass.
        `HEAD`-comparison assertions; and
      - restore cumulative proof with a fail-fast `set -euo pipefail` complete
        checker invocation.
-   - `7.4b8l` (`Planned`): review `STD-0804` through `STD-0809` under the Rust
-     Language Binding owner before implementation or decomposition.
+   - `7.4b8l` (`Accepted`): replace per-row planning ceremony with a
+     risk-classified acceleration contract for the 43 pending immutable-train
+     rows;
+     - preserve exact dispositions, canonical ownership, acyclic dependencies,
+       generic-before-specialization order, no competing legacy authority,
+       negative fallback coverage, wave checkpoints, pilots, and manual review;
+     - map the 43 rows to 39 semantic packages, batching only the two C#
+       concurrency rows, two thin implementation-prompt rows, and two
+       contiguous pairs of architecture-reference rows;
+     - freeze owner action, risk class, verification family, parallel-draft
+       eligibility, integration gate, semantic outcome, and prerequisites for
+       every remaining row;
+     - establish 13 missing owners as useful dependency-ordered contracts
+       before population, never as empty stubs;
+     - introduce reusable decision, owner-contract, and migration-structure
+       verification incrementally rather than rewriting accepted checkers; and
+     - retain one serial integration owner for shared contracts, routing,
+       metadata, generated artifacts, dispositions, plans, findings, and
+       ledgers.
+   - `7.4b8m` (`Planned`): establish and self-test the reusable decision-table
+     verifier for active package `STD-0804` through `STD-0809` without moving
+     normative rules or recording dispositions.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

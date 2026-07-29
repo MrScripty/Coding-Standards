@@ -61,6 +61,7 @@ changes and focused fixture evidence.
 | F055 | Resolved in Milestone 7.4b7o | Execution progress is derived from exact dispositions against an immutable 589-ID manifest; routine cluster completion no longer requires shared-checker counter and cursor rewrites. |
 | F056 | Resolved in Milestone 7.4b8a | Security now selects operation-specific validation authority and typed consequences without a global C# utility, fixed regex/length rules, validation-by-cast, or copied validators lacking canonical authority and conformance evidence. |
 | F057 | Resolved in Milestone 7.4b8b | Mixed-role execution rows now decompose through an exact ordered overlay without mutating the immutable baseline manifest or forcing one stale proposed owner. |
+| F070 | Resolved in Milestone 7.4b8l | The 43 pending train rows now use 39 risk- and train-classified semantic packages, pre-approved owner contracts, incremental reusable verification, risk-based gates, isolated drafts, and serial shared integration without weakening exact dispositions or no-fallback policy. |
 
 ## Systemic Findings
 
@@ -82,6 +83,7 @@ changes and focused fixture evidence.
 | F014 | Degraded-mode overgeneralization | `ARCHITECTURE-PATTERNS.md:1093-1151` | Permit degradation only with authoritative, semantically valid data; otherwise return typed diagnostics. | 5 |
 | F015 | Mixed roles | `ARCHITECTURE-PATTERNS.md`; `TOOLING-STANDARDS.md`; `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md` | Separate policy, profiles, pattern catalog, recipes, and product-local examples. | 7 |
 | F016 | Broken reference | `SECURITY-STANDARDS.md:289`; no matching concurrency heading | Repair or remove the nonexistent graceful-shutdown anchor. | 7 |
+| F070 | Per-row migration ceremony | 43 pending immutable-train rows; repeated bespoke checker and owner-review patterns | Batch only rows sharing owner, semantic outcome, prerequisites, and evidence; classify risk, pre-approve owner contracts, add reusable validators incrementally, and retain serial shared integration and exact dispositions. | 7 |
 | F032 | Consolidation ownership | `DOCUMENTATION-STANDARDS.md`; frozen IDs `STD-0349`-`STD-0448` | Move examples, documentation policy, and changelog guidance in separate reference, workflow, and release-owner slices. | 7 |
 | F033 | Fixture ownership | `verify-consolidation-dispositions.sh`; shared disposition ledger | Filter each owner-specific fixture by source and verify new source groups independently. | 7 |
 | F034 | Missing canonical owner | `owner-map.tsv`; `RELEASE-STANDARDS.md`; absent `workflows/release.md` | Establish release workflow ownership in an owner-bounded slice before moving changelog policy or closing the documentation index. | 7 |
