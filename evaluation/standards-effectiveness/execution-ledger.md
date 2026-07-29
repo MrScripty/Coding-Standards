@@ -3029,3 +3029,30 @@ unbounded buffering, no-op execution, polling substitution, or detached work.
 
 **Next slice:** `7.4b8h`, bounded pre-slice review of Rust host error mapping in
 `STD-0776` and `STD-0777`.
+
+## 2026-07-29: Milestone 7.4b8h Rust Host Error Mapping
+
+**Outcome:** Accepted.
+
+`STD-0776` and `STD-0777` are replaced by a Rust Language Binding host-error
+contract selected from the host boundary. The contract owns stable
+categories/codes, fields, cancellation representation, applicable recovery
+semantics, and safe context. Rust mapping is exhaustive and checked rather than
+universally lossy or infallible.
+
+**Verification:** 18 focused decisions; two exact dispositions; metadata,
+bounded legacy replacement, Rust binding conversion, immutable-train,
+independent-trust, plan-lifecycle, shell-syntax, whitespace, and exact-scope
+checks. The complete checker suite is required because a shared language
+profile and new focused checker changed.
+
+**No-fallback result:** universal string flattening, infallible `From`, generic
+catch-all errors, named-framework defaults, lost cancellation, unbounded or
+sensitive context, native-only evidence, dropped semantics, and default
+success are rejected.
+
+The immutable cursor advances to child `3.2`; event delivery and callback-task
+adaptation remain pending and their legacy sections are unchanged.
+
+**Next slice:** `7.4b8i`, bounded pre-slice review of `STD-0778` and
+`STD-0779`.

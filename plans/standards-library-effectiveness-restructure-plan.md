@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust Language Binding row 3 is decomposed into ordered error
-mapping, event-delivery, and callback-task children; error mapping is next.
+**Current phase:** Rust host error mapping is accepted; event-delivery
+adaptation is the next child of decomposed row 3.
 
-**Next slice:** Milestone 7.4b8h Rust host error mapping (`STD-0776`, `STD-0777`).
+**Next slice:** Milestone 7.4b8i Rust host event delivery (`STD-0778`, `STD-0779`).
 
 **Acceptance status:** `partial`
 
@@ -990,8 +990,16 @@ all structural/routing fixtures pass.
      - every child must be wholly disposed in order and all three remain owned
        by the Rust Language Binding profile; and
      - no normative standard or disposition changes in this re-plan.
-   - `7.4b8h` (`Planned`): replace `STD-0776` and `STD-0777` with one
-     Rust-host error representation contract after bounded pre-slice review.
+   - `7.4b8h` (`Accepted`): replace `STD-0776` and `STD-0777` with one
+     Rust-host error representation contract;
+     - select stable categories/codes, fields, cancellation, recovery
+       semantics, and safe context from the host boundary;
+     - require exhaustive checked mapping and real native/host evidence;
+     - preserve invalid, unsupported, unavailable, cancellation, and
+       operation-specific failure distinctions; and
+     - reject string flattening, infallible conversion, generic catch-all
+       errors, framework defaults, sensitive context, dropped semantics, and
+       default success.
    - `7.4b8i` (`Planned`): replace `STD-0778` and `STD-0779` with one
      Rust-host event-delivery adaptation contract after `7.4b8h`.
    - `7.4b8j` (`Planned`): replace `STD-0780` with one Rust-host callback-task

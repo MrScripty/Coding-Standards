@@ -1235,10 +1235,29 @@ adaptation into Interop or Rust Async, or preserve string flattening,
 push/pull substitution, unbounded buffering, no-op execution, polling
 substitution, or detached work as compatibility guidance.
 
-## Planned Slice 7.4b8h: Rust Host Error Mapping
+## Accepted Slice 7.4b8h: Rust Host Error Mapping
 
-**Outcome:** review and, if coherent, replace `STD-0776` and `STD-0777` with
-one Rust Language Binding-owned error representation contract selected from
-the host boundary, preserving stable category and typed cancellation/failure
-semantics without universal string flattening, infallible conversion, named
-framework defaults, or sensitive diagnostic leakage.
+**Outcome:** `STD-0776` and `STD-0777` are replaced by one Rust Language
+Binding-owned host error representation contract. The selected host boundary
+defines stable categories/codes, fields, cancellation, applicable recovery
+semantics, and safe context. Rust mappings are exhaustive and checked, and
+category collapse is valid only when the host contract intentionally gives the
+sources identical semantics.
+
+Eighteen focused decisions and two exact dispositions preserve typed invalid,
+unsupported, unavailable, cancellation, and operation failures with bounded
+non-sensitive context and real native/host evidence.
+
+**No fallback:** universal string flattening, infallible `From`, generic
+catch-all errors, framework-specific default terms, lost cancellation,
+unbounded or sensitive context, native-only evidence, dropped semantics, and
+default success are rejected.
+
+## Planned Slice 7.4b8i: Rust Host Event Delivery
+
+**Outcome:** review and, if coherent, replace `STD-0778` and `STD-0779` with
+one Rust Language Binding-owned host event-delivery adaptation contract that
+consumes provider callback authority plus capacity, overflow, failure,
+cancellation, and shutdown ownership without fixed push/pull preference,
+fallback substitution, unbounded buffering, lock-held callbacks, or silent
+drop.

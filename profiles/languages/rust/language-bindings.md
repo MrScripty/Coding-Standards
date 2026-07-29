@@ -86,6 +86,37 @@ JSON is not a universal ABI or universal wrapper representation. Generated
 host code remains derived from adapter-owned input and contains no domain
 behavior.
 
+## Host Error Representation
+
+Select the host error contract and binding mechanism before mapping Rust
+failures. The contract defines the stable categories or codes, required
+fields, cancellation representation, retry or recovery semantics when
+applicable, and which bounded context is safe to expose.
+
+The adapter maps each supported Rust failure exhaustively into that selected
+representation. Preserve distinctions that affect host behavior, including
+`invalid`, `unsupported`, `unavailable`, cancellation, and operation-specific
+failure categories. Multiple Rust sources may map to one host category only
+when the host contract intentionally gives them identical observable
+semantics.
+
+Human-readable messages are context, not the error contract. Keep them
+bounded and non-sensitive. Do not expose native error objects, source chains,
+debug output, filesystem paths, credentials, payloads, or third-party error
+types unless the selected public contract explicitly defines a safe field and
+redaction policy.
+
+Use checked conversion when the host representation can reject a category,
+field, code, or value. Return `unsupported` when a well-formed Rust outcome has
+no representation in the selected host contract, `unavailable` when required
+mapping or binding capability cannot be obtained, and `invalid` when mapping
+contradicts the selected contract or would expose prohibited context.
+
+Do not flatten every failure to a string, convert every mapping through
+infallible `From`, replace cancellation with generic failure, catch all
+unmapped variants as one internal error, substitute a framework-specific error
+term, or report default success. Preserve the selected typed outcome.
+
 ## Handle And Runtime Adaptation
 
 Distinguish a host-visible handle from runtime and task lifecycle. A foreign

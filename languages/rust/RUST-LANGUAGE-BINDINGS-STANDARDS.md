@@ -234,55 +234,13 @@ host representation can be rejected.
 
 ## Error Handling Across FFI
 
-Errors must be converted at the FFI boundary because core error types embed
-non-FFI-safe types (`std::io::Error`, `rusqlite::Error`, `reqwest::Error`).
-The conversion is intentionally lossy: source chains are dropped and complex
-variants collapse into string messages.
-
-```text
-Core Error (rich, nested)           FFI Error (flat, string messages)
-┌──────────────────────┐            ┌──────────────────────┐
-│ MyLibError           │            │ FfiError             │
-│  ├─ Network{msg,src} │ ──From──► │  ├─ Network{message} │
-│  ├─ Io{msg,path,src} │            │  ├─ Io{message}     │
-│  ├─ Database{msg,src}│            │  ├─ Database{message}│
-│  └─ Timeout(Duration)│            │  └─ Timeout{message} │
-└──────────────────────┘            └──────────────────────┘
-       Typed sources                    String messages only
-```
+Rust-to-host error representation and diagnostic preservation moved to
+[Host Error Representation](../../profiles/languages/rust/language-bindings.md#host-error-representation).
 
 ### Rules
 
-1. Define a dedicated FFI error enum in the wrapper crate, not in core.
-2. Every variant carries a `message: String` (or is a unit variant like
-   `Cancelled`).
-3. Implement `From<CoreError> for FfiError` with exhaustive match arms.
-4. Collapse multiple core variants into fewer FFI variants when they represent
-   the same category to the foreign caller.
-5. Never expose `std::io::Error`, `rusqlite::Error`, or any third-party error
-   type across FFI.
-6. For NIF bindings, use `rustler::Error::Term` with a formatted string.
-
-```rust
-// BAD: Passing core error types through FFI
-#[uniffi::Error]
-pub enum FfiError {
-    Io(std::io::Error),  // Not FFI-safe
-}
-
-// GOOD: Flatten to string messages
-#[derive(Debug, Clone, uniffi::Error, thiserror::Error)]
-pub enum FfiError {
-    #[error("IO error: {message}")]
-    Io { message: String },
-
-    #[error("Network error: {message}")]
-    Network { message: String },
-
-    #[error("Cancelled")]
-    Cancelled,
-}
-```
+The selected host contract, not one universal enum or framework recipe,
+defines categories, fields, cancellation, context, and conversion outcomes.
 
 ---
 

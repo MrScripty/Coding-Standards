@@ -339,3 +339,5 @@ STD-0478	INTEROP-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	de
 STD-0479	INTEROP-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	require exact variant spelling value rename and unsupported behavior
 STD-0480	INTEROP-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	require exact field naming casing rename omission default and extra-field behavior
 STD-0482	INTEROP-STANDARDS.md	INTEROP-STANDARDS.md	index	retain only a non-normative canonical boundary-routing index
+STD-0776	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	select host error representation and preserve typed diagnostic semantics
+STD-0777	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require checked exhaustive mapping with bounded non-sensitive context

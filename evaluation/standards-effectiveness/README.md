@@ -165,6 +165,14 @@ boundary fact to Interop, IPC, Language Bindings, Contracts, and Security. It
 rejects active rules, code, examples-as-policy, prescriptive defaults, fallback
 guidance, and stale concern summaries in the non-normative index.
 
+`fixtures/rust/binding-error-mapping-decisions.tsv` and
+`verify-rust-binding-error-mapping.sh` check selected host error contracts,
+stable typed categories, cancellation preservation, bounded non-sensitive
+context, checked mapping, real native/host evidence, two exact dispositions,
+and bounded legacy replacement. They reject universal string flattening,
+infallible conversion claims, generic catch-all errors, named-framework
+defaults, dropped semantics, sensitive context, and default success.
+
 ## Interop Authority Decision Fixtures
 
 `fixtures/interop/foreign-memory-decisions.tsv` and
