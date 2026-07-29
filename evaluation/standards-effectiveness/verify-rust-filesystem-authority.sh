@@ -11,7 +11,6 @@ readonly RUST_INDEX="$REPO_ROOT/profiles/languages/rust/README.md"
 readonly SECURITY="$REPO_ROOT/topics/security.md"
 readonly CROSS_PLATFORM="$REPO_ROOT/topics/cross-platform.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-SECURITY-STANDARDS.md"
-readonly FINDINGS="$SCRIPT_DIR/findings.md"
 readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id target containment mutation use_authority \
@@ -101,11 +100,10 @@ for text in 'validate_within_root' '.canonicalize()' \
 done
 
 for heading in '## Checked Arithmetic At Boundaries' '## Bounded Queues' \
-  '## Network Listener Limits' '## Panic Policy'; do
+  '## Panic Policy'; do
   rg -F -q "$heading" "$LEGACY"
 done
 
-rg -F -q '| F026 | Partially resolved in Milestone 7.4b5e |' "$FINDINGS"
 rg -F -q '`7.4b5e` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-filesystem-containment-policy.sh"
 "$SCRIPT_DIR/verify-milestone-7-f025-f026-decomposition.sh"

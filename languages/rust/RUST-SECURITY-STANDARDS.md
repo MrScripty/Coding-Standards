@@ -43,38 +43,12 @@ Rules:
 
 ## Network Listener Limits
 
-Local-only services must bind to loopback, not all interfaces:
-
-```rust
-// BAD: Exposes local IPC server to the network.
-let listener = TcpListener::bind("0.0.0.0:9500").await?;
-
-// GOOD: Local-only service bound to loopback.
-let listener = TcpListener::bind("127.0.0.1:9500").await?;
-```
-
-Every listener must define a maximum concurrent connection count:
-
-```rust
-use std::sync::Arc;
-use tokio::sync::Semaphore;
-
-const MAX_CONNECTIONS: usize = 64;
-let semaphore = Arc::new(Semaphore::new(MAX_CONNECTIONS));
-
-loop {
-    let permit = semaphore.clone().acquire_owned().await?;
-    let (stream, _addr) = listener.accept().await?;
-
-    tokio::spawn(async move {
-        handle_connection(stream).await;
-        drop(permit);
-    });
-}
-```
-
-Also follow task ownership and shutdown rules in
-[RUST-ASYNC-STANDARDS.md](RUST-ASYNC-STANDARDS.md).
+The canonical listener exposure and admission contract is
+[Listener Admission And Lifecycle](../../profiles/languages/rust/security.md#listener-admission-and-lifecycle).
+Connection work consumes the Rust Async contracts for
+[owning spawned work](../../profiles/languages/rust/async.md#own-spawned-work)
+and
+[coordinated shutdown](../../profiles/languages/rust/async.md#coordinate-shutdown).
 
 ## Panic Policy
 

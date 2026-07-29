@@ -2114,3 +2114,54 @@ The rolling Milestone 7 remainder is 614 IDs across 30 sources and 29 owners,
 with 14 canonical owners still missing.
 
 **Next slice:** `7.4b5f` lifecycle-owned listener work pre-slice review.
+
+## 2026-07-28: Milestone 7.4b5f Lifecycle-Owned Listener Work
+
+**Outcome:** Accepted.
+
+The Rust Security profile now derives listener exposure from the service
+contract and gives the listener owner explicit admission capacity and overload
+behavior before acceptance. Accepted connection work registers with the
+canonical Rust Async lifecycle owner before it can outlive the accept scope.
+That owner observes success, failure, panic, and cancellation and coordinates
+admission closure, cancellation, drain, and typed shutdown completion.
+
+`STD-0825` has one exact final disposition. Its legacy listener section is a
+bounded link without fixed addresses, fixed capacity, named runtime
+mechanisms, or detached task examples. `F026` is resolved, and all five
+dependent Rust slices are accepted.
+
+**Deviations:** None.
+
+**Discovered issue (`Resolved`):** making Rust Async an unconditional Rust
+Security metadata dependency would over-route async guidance into
+filesystem-only and numeric-boundary work. Rust Security keeps its minimal
+universal dependencies and selects Rust Async explicitly in the listener
+section; focused evidence proves the conditional relationship.
+
+**Re-plan trigger (`Resolved`):** affected verification found that the
+accepted filesystem-authority checker still asserted the temporary partial
+status of `F026`. The approved narrow expansion removes that mutable assertion
+and its unused findings path. The listener lifecycle checker now solely owns
+final `F026` resolution while the filesystem checker retains all of its
+behavioral, disposition, legacy, and dependency evidence.
+
+**No-fallback/legacy result:** missing exposure, capacity, registration,
+cancellation, drain, or lifecycle capability cannot bind a broader interface,
+select fixed default capacity, accept before capacity, detach or discard
+connection work, treat leaf logging as ownership, keep admission open during
+shutdown, force-abort without authority and interruption safety, or create an
+alternate runtime, thread, or listener mechanism.
+
+**Verification:** 26 focused listener-lifecycle decisions, one exact
+disposition, profile metadata and routing, bounded legacy replacement,
+preserved panic policy, accepted Rust Async lifecycle evidence,
+disposition-derived parent progress, plan lifecycle, shell syntax, whitespace,
+and every `evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+The rolling Milestone 7 remainder is 613 IDs across 30 sources and 29 owners,
+with 14 canonical owners still missing.
+
+**Next slice:** `7.4b6`, planning only, to re-audit the independent
+trust-boundary remainder and activate exactly one owner-bounded correctness
+slice before `7.4c`.

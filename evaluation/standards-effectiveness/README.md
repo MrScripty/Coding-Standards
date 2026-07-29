@@ -317,6 +317,14 @@ through `STD-0721` and rejects global/alternate runtimes, detached tasks,
 leaf-only logging, open admission, silent incomplete drains, and unauthorized
 or interruption-unsafe force-abort fallback.
 
+`verify-rust-listener-lifecycle.sh` checks service-contract exposure,
+listener-owned admission capacity before acceptance, Rust Async lifecycle
+registration, terminal outcome observation, and ordered shutdown. It proves
+the exact disposition of `STD-0825`, preserves the canonical Rust Async owner,
+and rejects broad binding, fixed default capacity, accept-first ordering,
+detached or discarded work, leaf-only logging, open admission during shutdown,
+unsafe force-abort, and alternate-runtime fallback.
+
 `verify-rust-async-blocking-mutex.sh` checks equivalent async execution,
 governed blocking isolation, capacity availability, guard behavior, invariant
 preservation, and synchronization capability. It proves exact disposition of

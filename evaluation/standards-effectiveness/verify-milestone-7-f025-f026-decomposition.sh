@@ -124,8 +124,11 @@ required_report=(
   '## Accepted Slice 7.4b5c: Binding Runtime And Handle Adaptation'
   '## Accepted Slice 7.4b5d: Explicit Executor Delegation'
   '## Accepted Slice 7.4b5e: Rust Filesystem Authority Through Use'
+  '## Accepted Slice 7.4b5f: Lifecycle-Owned Listener Work'
+  '**Accepted result:**'
+  '**Handoff:** this dependent sequence is complete.'
   '**No fallback:**'
-  'Independent trust-boundary groups remain'
+  'independent trust-boundary remainder'
 )
 for text in "${required_report[@]}"; do
   rg -F -q "$text" "$REPORT"

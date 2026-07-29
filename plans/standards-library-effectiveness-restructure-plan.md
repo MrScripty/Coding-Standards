@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 dependent Rust lifecycle consolidation active;
-Rust filesystem authority through use accepted.
+**Current phase:** Milestone 7 dependent Rust lifecycle consolidation accepted;
+the independent trust-boundary remainder requires a fresh owner-and-correctness
+re-plan.
 
-**Next slice:** Milestone 7.4b5f lifecycle-owned listener work
-pre-slice review.
+**Next slice:** Milestone 7.4b6 independent trust-boundary remainder re-plan.
 
 **Acceptance status:** `partial`
 
@@ -666,8 +666,26 @@ all structural/routing fixtures pass.
        concurrent revalidation, unanchored creation, alternate roots, and
        weaker-mechanism fallback while preserving typed outcomes;
      - `F026` remains partial only for lifecycle-owned listener work; and
-   - `7.4b5f` (`Planned`): bind listener admission, spawned work, outcomes, and
-     shutdown to explicit owners (`STD-0825`).
+   - `7.4b5f` (`Accepted`): bind listener admission, spawned work, outcomes,
+     and shutdown to explicit owners (`STD-0825`);
+     - listener exposure follows the service contract without a universal
+       address;
+     - admission capacity is owned and acquired before acceptance;
+     - accepted connection work is registered with the Rust Async lifecycle
+       owner, which observes success, failure, panic, and cancellation;
+     - shutdown closes admission, signals cancellation, drains tracked work,
+       and returns typed overload, unsupported, unavailable, or incomplete
+       outcomes as applicable;
+     - 26 focused decisions reject broad-bind, default-capacity, accept-first,
+       detached, discarded-outcome, leaf-logging, open-admission,
+       unsafe-force-abort, and alternate-runtime fallback; and
+     - `F026` is resolved;
+     - re-plan trigger (`Resolved`): the accepted filesystem-authority checker
+       owned the temporary partial `F026` status; that mutable assertion is
+       removed so the listener lifecycle checker solely owns final resolution.
+   - `7.4b6` (`Planned`): re-audit the independent trust-boundary remainder,
+     confirm current owners and correctness dependencies, and activate exactly
+     one owner-bounded slice without normative movement.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

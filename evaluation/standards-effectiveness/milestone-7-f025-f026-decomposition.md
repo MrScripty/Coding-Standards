@@ -83,8 +83,9 @@ the ten identifiers and proposed final dispositions:
 | `7.4b5f` | `STD-0825` | Bind listener connection work to capacity and lifecycle owners. | Accepted Rust Async lifecycle and `7.4b5e`. |
 
 The slices are serial so the same canonical profiles and legacy sources never
-have overlapping write ownership. Independent trust-boundary groups remain
-queued until `7.4b5f` is accepted.
+have overlapping write ownership. After `7.4b5f` acceptance, independent
+trust-boundary groups require a fresh owner-and-correctness re-plan before
+another normative slice starts.
 
 ## Accepted Slice 7.4b5b: Binding Core And Adapter Boundary
 
@@ -381,14 +382,99 @@ concurrent-revalidation, alternate-root, or unanchored-creation fallback.
 `STD-0822` has one exact disposition and `F026` remains partial only for
 listener lifecycle.
 
-### Slice 7.4b5f: Lifecycle-Owned Listener Work
+## Accepted Slice 7.4b5f: Lifecycle-Owned Listener Work
 
-Refine `STD-0825` so admission capacity and task lifecycle are distinct,
-explicit owners. Acquire capacity at the correct acceptance boundary, register
-connection work with the accepted lifecycle owner, observe terminal outcomes,
-and include it in shutdown. Missing registration, capacity, cancellation, or
-drain capability returns a typed outcome; it cannot detach a task, discard a
-handle, or silently continue accepting work.
+**Outcome:** refine `STD-0825` so Rust listener exposure, admission capacity,
+and connection-task lifecycle have explicit contracts. Rust Security owns the
+listener boundary and consumes the accepted Rust Async lifecycle owner for work
+that may outlive the accept scope.
+
+**Allowed write set:**
+
+- `profiles/languages/rust/security.md`;
+- `languages/rust/RUST-SECURITY-STANDARDS.md`;
+- `evaluation/standards-effectiveness/fixtures/rust/listener-lifecycle-decisions.tsv`;
+- `evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh`;
+- the accepted Rust filesystem-authority checker only to remove its temporary
+  listener-section preservation and mutable `F026` status assertions;
+- this decomposition report and checker for accepted disposition and handoff
+  state;
+- consolidation dispositions, evaluation README, findings, active plan, and
+  execution ledger.
+
+No generic Security or Concurrency topic, Rust Async/API profile, runtime or
+listener implementation, dependency/configuration/lockfile, generated
+artifact, network-address recipe, fixed capacity, runtime-specific task type,
+template, host-language package, scheduler implementation, or downstream
+repository belongs to this slice.
+
+**Required semantics:**
+
+- derive listener exposure from the service contract rather than a universal
+  address;
+- define admission capacity and overload behavior at the listener owner;
+- acquire capacity before accepting work that would exceed the owned limit;
+- register connection work with the selected lifecycle owner before it can
+  outlive the accept scope;
+- retain and observe success, failure, panic, and cancellation outcomes;
+- close admission, signal cancellation, drain tracked work, and report the
+  typed shutdown result in the accepted order; and
+- return typed `invalid`, `unsupported`, `unavailable`, overload, or incomplete
+  outcomes when required exposure, capacity, registration, cancellation, or
+  drain facts/capabilities cannot be established.
+
+**No fallback:** missing listener or lifecycle capability cannot bind a broader
+interface, use a fixed default capacity, accept before capacity, detach
+connection work, discard its handle/outcome, rely on leaf logging, leave
+admission open during shutdown, force-abort without authority and interruption
+safety, or create/select another runtime, thread, or listener mechanism.
+
+**Focused evidence:** decisions cover local and declared remote exposure,
+admission before accept, overload, tracked work, success/failure/panic/
+cancellation observation, ordered shutdown, complete and incomplete drain,
+missing capacity/registration/cancellation/drain capability, and broad-bind,
+default-capacity, accept-first, detached, discarded-outcome, leaf-logging,
+open-admission, force-abort, and alternate-runtime fallback.
+
+**Acceptance gate:** `STD-0825` has one exact disposition; profile metadata and
+routing remain valid; the legacy listener section is a bounded link without
+fixed address/capacity/runtime mechanisms; the accepted Rust Async lifecycle
+gate remains unchanged and passes; panic and other later sections remain
+untouched; `F026` is resolved; all five dependent slices are accepted; and
+focused plus affected regressions pass.
+
+**Pre-slice review:** accepted. The section refines one canonical Rust Security
+owner and consumes Rust Async lifecycle semantics without changing that owner.
+The review found no split disposition, new owner, objective change,
+runtime-specific universal mechanism, or fallback requirement.
+
+**Accepted result:** the Rust Security profile now derives exposure from the
+service contract, owns admission capacity before acceptance, and consumes the
+Rust Async lifecycle owner for registered connection work and ordered
+shutdown. The legacy listener section is a bounded link without fixed
+addresses, capacity, or runtime mechanisms. Twenty-six focused decisions
+distinguish typed overload, unsupported capability, unavailable facts,
+incomplete shutdown, and invalid fallback. `STD-0825` has one exact
+disposition, `F026` is resolved, and all five dependent Rust slices are
+accepted.
+
+**Discovered issue (`Resolved`):** declaring Rust Async as an unconditional
+profile metadata dependency would route async guidance into filesystem-only
+and numeric-boundary Rust Security work. The profile retains its minimal
+universal metadata dependencies and selects Rust Async explicitly inside the
+listener section; the focused checker proves that conditional dependency.
+
+**Resolved re-plan trigger:** affected verification found that the accepted
+filesystem-authority checker still owned the temporary "partially resolved"
+status of `F026`. Keeping or changing that assertion would make a completed
+filesystem slice own later listener progress. The approved narrow write-set
+expansion removes the mutable assertion and its unused path; the listener
+lifecycle checker is the sole focused owner of final `F026` resolution.
+
+**Handoff:** this dependent sequence is complete. The next slice is a
+planning-only re-audit of the independent trust-boundary remainder; it must
+select exactly one owner-bounded correctness slice before any further
+normative movement or final `7.4c` closure.
 
 ## Re-Plan Triggers
 

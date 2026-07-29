@@ -28,7 +28,7 @@ changes and focused fixture evidence.
 | F023 | Resolved in Milestone 7.4b3f | Rust Interop proves foreign-memory authority, Rust Security proves checked sizes, and Rust Unsafe separates adjacent operation proof, caller contracts, module invariants, and mechanism-selected evidence without safe-path fallback. |
 | F024 | Resolved in Milestone 5.2 | Rust binding compatibility is classified independently for generated, package, ABI, wire, and persisted boundaries. |
 | F025 | Resolved in Milestone 7.4b5c | Rust core/binding dependencies are one-way and framework-independent; runtime ownership remains with composition/lifecycle, binding handles consume shared capability, and retained runtimes never carry prior request state. |
-| F026 | Partially resolved in Milestone 7.4b5e | Executor delegation and Rust filesystem authority-through-use are canonical; lifecycle-owned listener admission, outcomes, and shutdown remain. |
+| F026 | Resolved in Milestone 7.4b5f | Executor delegation, filesystem authority-through-use, and listener exposure/admission now consume explicit lifecycle owners with typed outcomes and no detached-work fallback. |
 | F027 | Resolved in Milestone 7.3a | Major version zero and prerelease identifiers are distinct, and retained publication guidance now consumes that decision. |
 | F028 | Resolved in Milestone 7.3a | SBOM, checksum, signature, and provenance applicability follow artifact content, consumer, risk, channel, and regulatory facts. |
 | F029 | Resolved in Milestone 7.3a | Release units may version independently or in lockstep, lockfiles follow dependency-resolution ownership, and publication pushes only the intended tag. |
