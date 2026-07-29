@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Mixed-role Interop row decomposed without changing the
-immutable train baseline; its Contracts child is next.
+**Current phase:** The Contracts child of mixed-role Interop row 2 is accepted;
+its IPC consumer-decoding child is next.
 
-**Next slice:** Milestone 7.4b8c cross-language contract child (`STD-0474`, `STD-0475`, `STD-0477`, `STD-0481`).
+**Next slice:** Milestone 7.4b8d IPC consumer-decoding child (`STD-0476`).
 
 **Acceptance status:** `partial`
 
@@ -940,10 +940,21 @@ all structural/routing fixtures pass.
      - every child must be wholly disposed in order, and all children exactly
        cover baseline row 2 before row 3 can activate; and
      - no normative standard or disposition changes in this re-plan.
-   - `7.4b8c` (`Planned`): replace the cross-language evolution and wire-
+   - `7.4b8c` (`Accepted`): replace the cross-language evolution and wire-
      alignment legacy rules in `STD-0474`, `STD-0475`, `STD-0477`, and
      `STD-0481` with one Contracts-owned contract-selection and consumer-
-     evidence outcome after bounded pre-slice review.
+     evidence outcome;
+     - applicable contract classes and deployment facts select coordinated,
+       generated, persisted, public, or independently deployed evolution;
+     - one canonical schema, protocol, generator input, or owned producer
+       contract controls the effective wire representation;
+     - contract-matched producer and consumer evidence proves supported and
+       rejected representations; and
+     - typed invalid, unsupported, and unavailable outcomes replace guessed
+       schemas, old/dual-shape shims, permissive defaults, and incomplete
+       consumer updates.
+   - `7.4b8d` (`Planned`): replace `STD-0476` with one IPC-owned complete
+     consumer-decoding rule after bounded pre-slice review.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

@@ -49,23 +49,14 @@ and shutdown requirements moved to the
 
 ## Cross-Language Contract Maintenance
 
-When message types or API contracts are defined in multiple languages,
-they must stay in sync.
-
-Classify generated sources, public APIs, ABIs, persisted values, and
-independently deployed consumers with
-[Contract Evolution And Degraded Outcomes](topics/contracts.md). Cross-language
-does not by itself require indefinite backward compatibility.
+Cross-language contract classification, canonical wire/schema authority,
+consumer update policy, and evidence moved to
+[Cross-Language Contract Selection](topics/contracts.md#cross-language-contract-selection).
 
 ### Rules
 
-1. **Update coordinated repository-owned definitions in the same commit** —
-   prevents drift
-2. **Add the handler/listener on both sides together** — prevents dead messages
-3. **Use shared schema files when possible** — protobuf, JSON Schema, or OpenAPI
-   generate types for both sides from a single source of truth
-4. **Version or negotiate independently deployed boundaries** — reject
-   unsupported versions explicitly instead of guessing a compatible shape
+Select evolution and compatibility behavior from the canonical Contracts
+owner. Do not infer it from the number of implementation languages.
 
 ### Validate Received Messages
 
@@ -84,9 +75,9 @@ if (!parsed || typeof parsed.type !== 'string' || typeof parsed.action !== 'stri
 
 ## Serialization Format Alignment
 
-When data types are defined in multiple languages and serialized across a
-boundary (JSON over HTTP, WebSocket, IPC), the serialization format must
-match exactly on both sides.
+Canonical wire/schema authority and contract-matched producer/consumer
+evidence moved to
+[Cross-Language Contract Selection](topics/contracts.md#cross-language-contract-selection).
 
 ### Tagged Enum Alignment
 
@@ -108,14 +99,9 @@ casing.
 
 ### Rules
 
-1. **Check serializer attributes before writing client types** — casing, tags,
-   content fields, and explicit renames affect the wire format
-2. **Test serialization round-trips** — serialize in one language, deserialize
-   in the other, and verify the result matches
-3. **Use a shared schema when possible** — OpenAPI, JSON Schema, or protobuf
-   definitions generate types for both sides from a single source of truth
-4. **Update coordinated sides in the same commit** — independently deployed
-   sides follow their version window and negotiation contract
+Language-specific representation mechanisms remain in the selected Language
+Binding profile. Contract selection, version policy, and acceptance evidence
+remain in the canonical Contracts owner.
 
 ---
 

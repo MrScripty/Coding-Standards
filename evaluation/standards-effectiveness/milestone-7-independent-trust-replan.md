@@ -1139,10 +1139,29 @@ move all nine rules as one multi-owner implementation batch, mutate the
 baseline manifest, partially dispose a child, or preserve the stale proposed
 owner as compatibility guidance.
 
-## Planned Slice 7.4b8c: Cross-Language Contract Child
+## Accepted Slice 7.4b8c: Cross-Language Contract Child
 
-**Outcome:** review and, if coherent, replace `STD-0474`, `STD-0475`,
-`STD-0477`, and `STD-0481` with one Contracts-owned rule for selected contract
-class, canonical wire/schema authority, coordinated or independently deployed
-consumer updates, typed unsupported/unavailable outcomes, and contract-matched
-producer/consumer evidence.
+**Outcome:** `STD-0474`, `STD-0475`, `STD-0477`, and `STD-0481` are replaced
+by one Contracts-owned rule. Applicable contract classes and deployment facts
+select evolution behavior; one explicit schema, protocol, generator input, or
+owned producer contract is the wire authority. Coordinated contracts update
+the authority, producer, and every consumer atomically. Persisted, public, and
+independently deployed contracts follow their declared migration, version, or
+negotiation policy.
+
+Sixteen focused decisions and four exact dispositions require
+contract-matched producer/consumer evidence and typed `invalid`,
+`unsupported`, or `unavailable` outcomes. The bounded legacy replacement
+preserves the still-pending IPC validation, Language Binding representation,
+and applicability-index children unchanged.
+
+**No fallback:** cross-language use does not authorize guessed serializer
+defaults, old-shape or dual-shape compatibility shims, permissive defaults,
+incomplete consumer updates, or success without evidence.
+
+## Planned Slice 7.4b8d: IPC Consumer-Decoding Child
+
+**Outcome:** review and, if coherent, replace `STD-0476` with an IPC-owned
+complete consumer-side decoding rule that validates the selected message
+variant before dispatch and returns typed diagnostics without cast, log-and-
+return, partial-field, original-input, or permissive-default fallback.

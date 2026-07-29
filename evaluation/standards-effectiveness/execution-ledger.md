@@ -2889,3 +2889,33 @@ not expanded to absorb serialized IPC.
 
 **Next slice:** `7.4b8c`, the Contracts child containing `STD-0474`,
 `STD-0475`, `STD-0477`, and `STD-0481`.
+
+## 2026-07-29: Milestone 7.4b8c Cross-Language Contract Selection
+
+**Outcome:** Accepted.
+
+Contracts now selects cross-language evolution from every applicable contract
+class and the actual deployment facts. One explicit schema, protocol,
+generator input, or owned producer contract is authoritative for the effective
+wire representation. Coordinated contracts update the authority, producer,
+and all consumers atomically; persisted, public, and independently deployed
+contracts follow their declared migration, compatibility-window, or
+negotiation policy.
+
+**Verification:** 16 focused decisions; four exact dispositions; metadata and
+bounded legacy-section checks; contract ownership, runtime decoding,
+immutable-train, plan-lifecycle, shell-syntax, whitespace, and exact-scope
+checks. The complete checker suite is required because the shared Contracts
+topic changed.
+
+**No-fallback result:** schema guessing, serializer-default authority,
+old-shape and dual-shape compatibility shims, permissive defaults, incomplete
+consumer updates, and success without contract-matched evidence are rejected.
+Typed invalid, unsupported, and unavailable outcomes remain authoritative.
+
+The legacy IPC validation, Language Binding representation, and applicability
+index children remain unchanged. The immutable baseline row is not complete;
+its logical cursor advances only to child `2.2`.
+
+**Next slice:** `7.4b8d`, bounded pre-slice review of IPC consumer decoding in
+`STD-0476`.

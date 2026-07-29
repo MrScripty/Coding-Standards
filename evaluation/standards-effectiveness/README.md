@@ -381,6 +381,14 @@ legacy replacement, and rejection of global-validator, fixed-rule, cast,
 duplicate-inline, original-input, permissive-default, and weaker-validator
 fallbacks.
 
+`fixtures/contracts/cross-language-contract-decisions.tsv` and
+`verify-cross-language-contract.sh` check contract-class selection, canonical
+wire/schema authority, coordinated and independently deployed consumer
+updates, contract-matched evidence, typed invalid/unsupported/unavailable
+outcomes, four exact dispositions, and bounded legacy replacement. They reject
+schema guessing, old-shape and dual-shape compatibility shims, permissive
+defaults, ambiguous authority, incomplete updates, and missing evidence.
+
 `fixtures/rust/external-input-queue-decisions.tsv` and
 `verify-rust-external-input-queue.sh` check selected capacity, overload,
 retention/eviction, telemetry, ownership, typed outcomes, exact disposition,

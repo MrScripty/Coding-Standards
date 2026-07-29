@@ -330,3 +330,7 @@ STD-0588	SECURITY-STANDARDS.md	topics/security.md	refine	require operation-speci
 STD-0589	SECURITY-STANDARDS.md	topics/security.md	refine	replace one global validator utility with a contract-selected canonical validation authority
 STD-0590	SECURITY-STANDARDS.md	topics/security.md	refine	derive validation invariants and specialized mechanisms from the complete operation contract
 STD-0591	SECURITY-STANDARDS.md	topics/security.md	refine	require canonical authority and conformance evidence while permitting distinct contracts and new-boundary proof
+STD-0474	INTEROP-STANDARDS.md	topics/contracts.md	refine	select cross-language evolution from the applicable contract classes and deployment facts
+STD-0475	INTEROP-STANDARDS.md	topics/contracts.md	refine	require coordinated or independently deployed consumer updates without compatibility guessing
+STD-0477	INTEROP-STANDARDS.md	topics/contracts.md	refine	assign one canonical wire or schema authority instead of inferring representation
+STD-0481	INTEROP-STANDARDS.md	topics/contracts.md	refine	require contract-matched producer and consumer evidence with typed outcomes

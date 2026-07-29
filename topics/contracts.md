@@ -113,6 +113,40 @@ mandate redundant validation.
 A boundary may have more than one class. For example, a generated public binding
 requires both generated-source consistency and the public versioning promise.
 
+## Cross-Language Contract Selection
+
+Using more than one implementation language does not select a compatibility
+policy or make either implementation authoritative. Apply every applicable
+contract class, then record one canonical authority for the effective wire or
+schema contract. The authority may be a schema, protocol specification,
+generator input, or explicitly owned producer contract; serializer defaults
+and a consumer's inferred shape are not authorities.
+
+For an `internal-coordinated` contract, update the authority, producer, and
+every consumer atomically and remove the rejected representation in the same
+change. For a `generated` contract, update the canonical source and generator
+before regenerating every affected producer and consumer. For a `persisted`,
+`public-versioned`, or `distributed-independent` contract, follow its declared
+migration, compatibility-window, or negotiation policy and reject unsupported
+versions explicitly. Cross-language use does not justify dual reads, dual
+writes, guessed schemas, or an indefinite old-shape path.
+
+Evidence must match the selected contract and deployment facts. Prove the
+canonical authority, the producer's emitted representation, and each affected
+consumer's accepted and rejected representations. Coordinated contracts
+require complete producer/consumer evidence from the atomic change.
+Independently deployed contracts require supported-version and
+unsupported-version evidence across the promised overlap. Generated contracts
+also require deterministic regeneration and source-to-output consistency.
+
+Return `unavailable` when the canonical authority or required contract
+capability cannot be obtained, `unsupported` when a well-formed version lies
+outside the declared support policy, and `invalid` when the representation or
+required producer/consumer proof does not satisfy the selected contract. Do
+not guess from serializer defaults, preserve an old representation as a
+compatibility shim, try a second shape, or report success with incomplete
+consumer evidence.
+
 ## Coordinated Breaking Replacement
 
 Breaking replacement is preferred when all consumers and persisted states are
