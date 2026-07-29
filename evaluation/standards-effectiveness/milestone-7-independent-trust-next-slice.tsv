@@ -1,6 +1,2 @@
 slice	order	id	source	target	disposition	rationale
-7.4b7e	1	STD-0726	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	move	establish the declared Rust cross-platform specialization
-7.4b7e	2	STD-0727	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	derive Rust targets support claims and evidence from the selected target contract
-7.4b7e	3	STD-0728	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	select cfg build composition and module boundaries from Rust and artifact facts
-7.4b7e	4	STD-0729	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	place inline cfg by cohesion and reviewability without numeric layout thresholds
-7.4b7e	5	STD-0730	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	verify each declared Rust target claim with contract-matched evidence
+7.4b7g	1	STD-0473	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	bind foreign registration delivery unregistration release and shutdown to the provider contract while consuming concurrency-owned work lifecycle

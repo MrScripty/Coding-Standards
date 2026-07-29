@@ -143,14 +143,13 @@ those owners.
 
 The
 [independent trust-boundary re-plan](milestone-7-independent-trust-replan.md)
-now measures 66 remaining identifiers across seven owners after accepting the
-generic Cross-Platform target/isolation group. It selects only the five-section
-Rust Cross-Platform specialization as the next implementation slice because
-that group consumes the accepted generic contract, replaces fixed Rust targets
-and configuration/evidence defaults, and closes one declared missing owner.
-The same audit records cross-role owner-map corrections and binding
-decomposition that must complete before affected residual groups are
-activated.
+now measures 61 remaining identifiers across six owners after accepting the
+Rust Cross-Platform specialization. It corrects the mixed generic Interop
+group and selects only `STD-0473` for the next implementation slice because
+event registration is a provider-governed foreign resource lifecycle already
+owned by the Interop boundary profile, while asynchronous callback work remains
+owned by Concurrency. The other nine generic Interop sections and all remaining
+cross-role owner-map groups stay blocked on correction or decomposition.
 
 Before starting each later wave:
 

@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 Rust target and configuration contract accepted;
-independent trust-boundary owner-correction re-plan is next.
+**Current phase:** Milestone 7 independent trust-boundary owner correction
+accepted; event registration lifecycle implementation is next.
 
-**Next slice:** Milestone 7.4b7f independent trust-boundary remainder re-plan.
+**Next slice:** Milestone 7.4b7g event registration lifecycle contract.
 
 **Acceptance status:** `partial`
 
@@ -31,7 +31,7 @@ independent trust-boundary owner-correction re-plan is next.
 
 **F025/F026 decomposition:** [Dependent Rust binding and security lifecycle slices](../evaluation/standards-effectiveness/milestone-7-f025-f026-decomposition.md)
 
-**Independent trust-boundary re-plan:** [Seven owner groups and Rust target/configuration next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
+**Independent trust-boundary re-plan:** [Six owner groups and event registration lifecycle next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -772,9 +772,21 @@ all structural/routing fixtures pass.
        universal layouts, numeric thresholds, substitute tools, alternate
        targets, and weaker evidence; and
      - `F047` is resolved.
-   - `7.4b7f` (`Planned`): re-measure the 594-ID global remainder and 61-ID
+   - `7.4b7f` (`Accepted`): re-measure the 594-ID global remainder and 61-ID
      independent trust subset, then correct and activate exactly one
-     owner-bounded subset of `F048` without normative movement.
+     owner-bounded subset of `F048` without normative movement;
+     - six active owner groups remain after Rust Cross-Platform acceptance;
+     - `STD-0473` is one coherent provider-governed event-registration
+       lifecycle that consumes Concurrency-owned asynchronous work rules, while
+       the other nine generic Interop IDs remain mixed-role;
+     - destruction-linked cleanup and incomplete callback/release semantics
+       are recorded as `F049`; and
+     - the planning slice changes no normative or legacy standard, final
+       disposition, generated artifact, configuration, or downstream file.
+   - `7.4b7g` (`Planned`): replace the event-subscription default with an
+     explicit Interop registration lifecycle contract (`STD-0473`) that owns
+     foreign registration/release and consumes Concurrency for asynchronous
+     work ownership and cancellation.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

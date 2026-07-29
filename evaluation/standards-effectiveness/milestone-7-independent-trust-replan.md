@@ -13,8 +13,8 @@ downstream policy.
 
 ## Current Audit
 
-The rolling disposition gate reports 599 frozen identifiers across 30 legacy
-sources and 29 proposed canonical owners, with 14 owners still missing.
+The rolling disposition gate reports 594 frozen identifiers across 29 legacy
+sources and 28 proposed canonical owners, with 13 owners still missing.
 
 [milestone-7-independent-trust-groups.tsv](milestone-7-independent-trust-groups.tsv)
 freezes the active trust-boundary subset:
@@ -23,40 +23,42 @@ freezes the active trust-boundary subset:
 | ---: | --- | ---: | --- | --- |
 | 1 | `topics/security.md` | 7 | Exists | None |
 | 2 | `topics/cross-platform.md` | 6 | Exists | None |
-| 3 | `profiles/boundaries/interop.md` | 10 | Exists | Accepted Contracts |
-| 4 | `profiles/languages/rust/cross-platform.md` | 5 | Missing | Cross-Platform |
-| 5 | `profiles/languages/rust/interop.md` | 1 | Exists | Interop |
-| 6 | `profiles/languages/rust/security.md` | 3 | Exists | Security and Rust Async |
-| 7 | `profiles/languages/rust/language-bindings.md` | 34 | Exists | Language Bindings and Rust Async |
+| 3 | `profiles/boundaries/interop.md` | 10 | Exists | Accepted Contracts and Concurrency |
+| 4 | `profiles/languages/rust/interop.md` | 1 | Exists | Interop |
+| 5 | `profiles/languages/rust/security.md` | 3 | Exists | Security and Rust Async |
+| 6 | `profiles/languages/rust/language-bindings.md` | 34 | Exists | Language Bindings and Rust Async |
 
-These seven groups total 66 undisposed identifiers. Their owner-map
+These six groups total 61 undisposed identifiers. Their owner-map
 destinations remain proposals until an accepted pre-slice review proves the
 section role and correctness.
 
 ## Selection Decision
 
-The highest-priority dependency-ready group is the missing Rust
-Cross-Platform specialization. Its generic Cross-Platform prerequisite is
-accepted, all five remaining source sections belong to one Rust mechanism
-profile, and accepting the group removes one missing canonical owner.
+The generic Interop group is not one implementation unit. `STD-0474` through
+`STD-0482` mix contract evolution, runtime decoding, wire representation, and
+routing roles that require separate owner corrections. `STD-0473` alone
+describes a foreign event-registration resource and fits the accepted Interop
+boundary owner's initialization, callback, release, and shutdown contract.
 
-The legacy group hard-codes four target triples, treats unsupported evidence as
-best-effort support, requires platform modules or a shared trait, sets numeric
-inline-`cfg` extraction thresholds, and names fixed target commands and
-substitute tools. Those mechanisms conflict with the accepted generic target
-contract and can weaken declared support claims. This is recorded as `F047`.
+The legacy rule universally ties unsubscription to subscriber destruction and
+uses framework-specific C# and TypeScript examples. Destruction, finalization,
+or garbage collection does not prove that callback delivery has stopped, that
+in-flight delivery is resolved, or that release occurs on an allowed thread.
+This incomplete lifecycle and unsafe cleanup default is recorded as `F049`.
 
-Select `STD-0726` through `STD-0730` as one atomic Rust Cross-Platform slice.
-The profile must derive Rust target triples, support claims, build selection,
-`cfg` placement, module boundaries, and evidence from the declared target,
-artifact, language, and toolchain contracts. Missing or contradictory facts
-must return typed `invalid`, `unsupported`, or `unavailable` diagnostics.
+Select only `STD-0473` as the next implementation slice. The Interop profile
+must identify the foreign registration owner, callback lifetime and thread,
+re-entrancy, provider delivery guarantees, in-flight provider behavior,
+unregistration semantics, release authority, and provider shutdown ordering.
+It must consume the generic Concurrency owner for asynchronous work ownership,
+failure observation, cancellation propagation, and work shutdown. It must
+return typed `invalid`, `unsupported`, `unavailable`, or incomplete-cleanup
+diagnostics when the selected provider/subscriber contract cannot be
+completed.
 
-The group is smaller than the unresolved multi-owner generic groups, closes
-its complete legacy source, and consumes rather than duplicates the generic
-Cross-Platform contract. Native-library loading, CI scheduling, generic
-Security and Interop closure, Rust wire representation, bounded queues, panic
-policy, and binding packaging/generation remain outside this slice.
+The slice refines one existing boundary owner and does not move event-domain
+behavior, contract evolution, IPC decoding, wire schemas, language-specific
+framework recipes, or routing policy into Interop.
 
 ## Remainder Ownership Audit
 
@@ -79,9 +81,9 @@ an owner-correction or decomposition re-plan before activation:
   support-surface, error, callback, generation, build, selection, and
   compatibility slices.
 
-`STD-0473` is a coherent event-registration lifecycle candidate, but selecting
-it now would not close a dependency or missing owner. It remains eligible only
-after the Interop owner correction records its exact role and exclusions.
+The exact role and exclusions for `STD-0473` are now corrected. The remaining
+60 identifiers stay under `F048`; no other group or generic Interop section is
+activated by this decision.
 
 ## Accepted Slice 7.4b6: Planning-Only Re-plan
 
@@ -424,36 +426,111 @@ trust-boundary subset contains 61 identifiers across six remaining owner
 groups; the 61 IDs under `F048` remain blocked on owner correction or
 decomposition.
 
-## Planned Slice 7.4b7f: Independent Trust-Boundary Remainder Re-plan
+## Accepted Slice 7.4b7f: Planning-Only Remainder Re-plan
 
-Re-measure the 594-ID global remainder and 61-ID independent trust subset after
-the accepted Rust Cross-Platform slice. Correct one owner-bounded subset of
-`F048`, confirm dependencies and exact source/owner/disposition facts, and
-activate no implementation until that planning review is accepted.
+**Allowed write set:**
 
-This is planning only. It may update the independent trust report and fixtures,
-their checker, parent decomposition linkage, evaluation README, findings,
-active plan, and execution ledger. It must not change normative or legacy
-standards, final dispositions, generated inventory or owner maps, routing,
-templates, source, tests, configuration, dependencies, lockfiles, workflow
-fixtures, build output, or downstream repositories.
+- this report;
+- `milestone-7-independent-trust-groups.tsv`;
+- `milestone-7-independent-trust-next-slice.tsv`;
+- `verify-milestone-7-independent-trust-replan.sh`;
+- the parent Milestone 7 decomposition report;
+- evaluation README, findings, active plan, and execution ledger.
 
-**No fallback:** do not preserve a stale owner-map destination, combine
-canonical roles, activate the full mixed group, or infer the next slice from
-prior ordering. Record exact corrected ownership and decomposition before
-implementation.
+No normative or legacy standard, final disposition, generated inventory,
+owner map, router, metadata contract, template, source, test, configuration,
+dependency, lockfile, build output, runtime, workflow fixture, or downstream
+repository belongs to this planning slice.
+
+**Acceptance result:** accepted. The audit proves the 594-ID global remainder,
+61-ID/six-owner trust subset, current owner state, and accepted dependencies.
+It corrects the generic Interop group into one exact event-registration
+lifecycle unit and nine still-blocked mixed-role sections, freezes one
+zero-disposition identifier for the next slice, and records `F049`.
+
+**No fallback:** the selection does not preserve destruction-linked cleanup,
+infer registration release from finalization or garbage collection, combine
+the remaining Interop roles, select an alternate event mechanism, or activate
+implementation before exact measurement and pre-slice review pass.
+
+## Planned Slice 7.4b7g: Event Registration Lifecycle Contract
+
+[milestone-7-independent-trust-next-slice.tsv](milestone-7-independent-trust-next-slice.tsv)
+freezes `STD-0473`.
+
+**Outcome:** extend `profiles/boundaries/interop.md` so foreign event
+registration, callback delivery guarantees, unregistration, release, and
+provider shutdown follow one explicit provider/subscriber lifecycle contract,
+while asynchronous work ownership and cancellation remain with Concurrency.
+
+**Allowed write set:**
+
+- `profiles/boundaries/interop.md`;
+- only the event-subscription section in `INTEROP-STANDARDS.md`;
+- `evaluation/standards-effectiveness/fixtures/interop/event-registration-decisions.tsv`;
+- new `evaluation/standards-effectiveness/verify-interop-event-registration.sh`;
+- `evaluation/standards-effectiveness/verify-interop-boundary-policy.sh`, only
+  to include the accepted Concurrency dependency in its metadata closure;
+- this report and checker for accepted disposition and handoff state;
+- `evaluation/standards-effectiveness/consolidation-dispositions.tsv`;
+- evaluation README, findings, active plan, and execution ledger.
+
+No contract-evolution, runtime-decoding, serialization, enum/struct alignment,
+routing, IPC, Language Binding, generic Concurrency normative change,
+language-specific, generated, template, package/configuration/dependency/
+lockfile, workflow fixture, source, runtime, build-output, or downstream file
+belongs to this slice.
+
+**Required semantics:**
+
+- add `topic.concurrency` as an explicit dependency without restating its
+  asynchronous work, failure, cancellation, or shutdown rules;
+- name registration, callback, unregistration, and foreign release authority;
+- define callback thread, re-entrancy, input lifetime, and in-flight delivery
+  behavior;
+- define repeated unregistration and concurrent provider delivery behavior;
+- order provider admission stop, delivery quiescence or provider cancellation,
+  unregistration, foreign release, and provider shutdown from the selected
+  contract;
+- distinguish complete cleanup from typed incomplete cleanup; and
+- return `invalid`, `unsupported`, or `unavailable` when required lifecycle
+  facts or capabilities cannot be established.
+
+**No fallback:** do not retain destruction-, finalizer-, or garbage-collection
+cleanup; bypass Concurrency ownership with detached callback work; retain a
+stale registration; silently drop callbacks; retry on an arbitrary thread;
+select an alternate event mechanism; or claim successful cleanup after
+incomplete foreign release.
+
+**Focused evidence:** decisions cover synchronous and asynchronous provider
+delivery, in-flight callbacks, repeated and concurrent unregistration,
+subscriber and provider shutdown order, unavailable provider quiescence or
+release capability, explicit Concurrency delegation for callback work, and
+rejection of framework lifecycle assumptions and detached callback cleanup.
+
+**Acceptance gate:** `F049` is resolved; `STD-0473` has one exact `refine`
+disposition; the Interop profile owns the complete registration lifecycle; the
+legacy section is a bounded canonical link without C#/TypeScript examples or
+destruction-linked cleanup; Contracts, Concurrency, and existing Interop
+ownership checks pass; unrelated Interop sections remain unchanged; and focused
+plus affected regressions pass.
+
+**Pre-slice review:** accepted. Event registration is a foreign resource with
+provider-governed callback and release authority already owned by the Interop
+boundary profile. The one-ID slice completes that lifecycle without absorbing
+event-domain behavior, Contracts, IPC, Language Bindings, language recipes, or
+the other nine mixed-role Interop sections.
 
 ## Re-Plan Triggers
 
-- The five sections cannot be represented by one Rust Cross-Platform profile
-  without moving generic platform, native-library, CI, or release policy.
-- The profile requires changing the accepted generic Cross-Platform contract
-  rather than specializing it.
-- A valid outcome requires fixed targets, best-effort claims, universal
-  module/trait layout, numeric `cfg` thresholds, named substitute tools, or
-  weaker evidence.
-- Focused evidence cannot distinguish target compilation, linking, packaging,
-  integration, and runtime claims.
+- Event registration cannot be represented as provider-governed foreign
+  resource lifecycle without moving event-domain behavior into Interop.
+- Correct cleanup requires a generic Concurrency or Contracts change outside
+  the activated owner boundary.
+- A provider contract cannot distinguish cancellation, in-flight delivery,
+  unregistration, release, and shutdown completion.
+- Focused evidence cannot distinguish complete cleanup from typed incomplete
+  cleanup.
 - Implementation needs an undisposed identifier, owner, source, generated
   artifact, configuration, lockfile, workflow fixture, or downstream file
   outside the activated write set.

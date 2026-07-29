@@ -322,10 +322,10 @@ boundary without moving normative guidance.
 `milestone-7-independent-trust-groups.tsv`, and
 `milestone-7-independent-trust-next-slice.tsv` resume the independent
 trust-boundary wave after the lifecycle bridge. The focused checker proves the
-66-ID/seven-owner remainder after generic Cross-Platform acceptance, owner
-existence and dependencies, residual owner-correction status, and the exact
-five-ID Rust target/configuration next slice without moving normative guidance
-or recording premature dispositions.
+61-ID/six-owner remainder after Rust Cross-Platform acceptance, owner existence
+and accepted Contracts/Concurrency/Interop dependencies, residual
+owner-correction status, and the exact one-ID event registration lifecycle next
+slice without moving normative guidance or recording premature dispositions.
 
 `verify-rust-target-configuration.sh` checks declared Rust targets,
 contract-selected `cfg`/build/feature/composition/dispatch mechanisms with

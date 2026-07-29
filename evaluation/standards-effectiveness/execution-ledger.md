@@ -2406,3 +2406,41 @@ with 13 canonical owners still missing. The independent trust subset contains
 
 **Next slice:** `7.4b7f`, planning only, to correct and activate exactly one
 owner-bounded subset of the residual trust inventory.
+
+## 2026-07-28: Milestone 7.4b7f Independent Trust-Boundary Remainder Re-plan
+
+**Outcome:** Accepted.
+
+The post-Rust-target audit proves 594 undisposed identifiers across 29 legacy
+sources and 28 proposed owners, with 13 owners still missing. The active trust
+subset contains 61 identifiers across six owners.
+
+The generic Interop remainder was decomposed by canonical role. Only
+`STD-0473` is activated: event registration is a provider-governed foreign
+resource lifecycle already owned by `profiles/boundaries/interop.md`.
+`STD-0474` through `STD-0482` remain blocked across Contracts, IPC, Language
+Bindings, and routing roles. The selected slice consumes Concurrency for
+asynchronous callback work, failure, cancellation, and work shutdown rather
+than duplicating those rules in Interop.
+
+**Deviations:** None.
+
+**Discovered issues:** `F049` records the legacy rule's universal
+subscriber-destruction cleanup and its missing registration, callback,
+in-flight provider delivery, unregistration, foreign release, and provider
+shutdown-completion semantics. `F048` is partially corrected and remains open
+for the other 60 identifiers.
+
+**No-fallback/legacy result:** the re-plan does not authorize destruction,
+finalization, or garbage collection as release proof; detached callback work;
+silent callback dropping; stale registrations; arbitrary-thread retry;
+alternate event mechanisms; or successful cleanup after incomplete release.
+
+**Verification:** exact 594-ID global remainder, exact 61-ID/six-owner trust
+audit, exact one-ID event-registration proposal with zero premature
+dispositions, accepted Contracts/Concurrency/Interop dependencies, current
+owner state, parent and active-plan linkage, plan lifecycle, shell syntax,
+whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+**Next slice:** `7.4b7g` event registration lifecycle contract implementation.
