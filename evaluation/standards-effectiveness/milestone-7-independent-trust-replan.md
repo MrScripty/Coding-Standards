@@ -1002,3 +1002,56 @@ dependency-ready implementation slice without normative movement.
 **No fallback:** do not infer readiness from frozen row order, retain the
 consumed validation proposal, invent a missing owner, combine mixed roles, or
 create a disposition before exact measurement and pre-slice review pass.
+
+## Accepted Slice 7.4b7n: Accelerated Execution Train
+
+**Outcome:** accepted. The 589-ID global remainder is frozen as 47 contiguous
+source/owner clusters in
+[milestone-7-execution-train.tsv](milestone-7-execution-train.tsv). The train
+contains five dependency waves and five complete-suite checkpoints. It covers
+every remaining identifier exactly once without creating a disposition.
+
+**Procedure correction:** a manifest row authorizes its bounded pre-slice
+review, not its final owner or disposition. An accepted review proceeds
+directly to focused implementation and one atomic commit. A separate
+planning-only commit is required only when owner, dependency, scope,
+compatibility, or acceptance evidence invalidates the row. This removes the
+routine planning/implementation alternation without bypassing re-planning.
+
+**Verification cadence:** every cluster runs its focused checker, staged-scope
+review, shell/format/whitespace checks as applicable, and affected dependency
+checks. The complete fail-fast checker suite runs at each wave checkpoint and
+whenever a shared contract, checker infrastructure, routing, metadata, or
+generated artifact changes. Identical isolated/live full-suite runs are not
+required when a clean serial live checkout is used; isolated worktrees remain
+required for parallel lanes or overlapping/high-risk work.
+
+**Parallel ownership:** owner-specific normative and legacy sections may be
+drafted concurrently only with non-overlapping write sets and report paths.
+Shared contracts, shared fixtures, dispositions, generated artifacts, active
+plans, and ledgers remain serial integration-owner work. Integration follows
+manifest order unless a dependency-safe row is explicitly advanced.
+
+**No fallback:** the train does not pre-approve owner-map proposals, final
+dispositions, mixed-role movement, missing-owner invention, weaker evidence,
+legacy preservation, or unchecked batch commits. A failed review returns a
+typed planning diagnostic and updates the affected manifest rows.
+
+## Planned Slice 7.4b8a: Security Validation Cluster
+
+**Outcome:** review `STD-0588` through `STD-0591` as one proposed Security
+validation cluster and, if owner-coherent, replace its fixed centralized
+validator and duplicate-logic rules with canonical contract-selected
+validation authority and focused evidence in one atomic slice.
+
+**Allowed write set:** the proposed canonical owner confirmed by pre-slice
+review; only the bounded Input Validation legacy section in
+`SECURITY-STANDARDS.md`; one focused fixture and checker; exact dispositions;
+train cursor and serial planning records. Any need for another canonical owner,
+another legacy section, generated/configuration/dependency state, or a
+different objective triggers re-planning before normative edits.
+
+**No fallback:** do not preserve the named C# validator, fixed regex or length
+defaults, validation-by-cast, duplicate inline validators, an invented owner,
+or a weaker validation mechanism when the selected operation contract is
+missing.

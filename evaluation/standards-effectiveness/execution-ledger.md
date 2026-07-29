@@ -2784,3 +2784,31 @@ six frozen proposed-owner groups.
 
 **Next slice:** `7.4b7n`, planning only, to re-measure the remainder and
 activate exactly one dependency-ready owner-bounded implementation slice.
+
+## 2026-07-29: Milestone 7.4b7n Accelerated Execution Train
+
+**Outcome:** Accepted.
+
+The 589-ID remainder is frozen into 47 contiguous source/owner clusters across
+five dependency waves. The execution-train checker proves exact one-time
+coverage, owner-state honesty, final-closure isolation, five complete-suite
+checkpoints, and the active plan cursor without adding dispositions.
+
+**Procedure correction:** accepted manifest rows proceed from bounded
+pre-slice review directly to focused implementation and one atomic commit.
+Planning-only commits now occur only for actual owner, dependency, scope,
+compatibility, or acceptance re-plan triggers. Focused checks remain mandatory
+per commit; complete fail-fast verification runs at wave checkpoints and for
+shared contract/checker/routing/metadata/generated changes.
+
+**Parallel policy:** non-overlapping owner-specific drafts may run in isolated
+worktrees with report paths. Shared contracts, fixtures, dispositions,
+generated artifacts, plans, and ledgers remain serial integration-owner work.
+
+**No-fallback result:** the train does not pre-approve owner-map proposals,
+final dispositions, mixed-role movement, missing owners, weaker evidence,
+legacy retention, or unchecked batch commits.
+
+**Next slice:** `7.4b8a`, review and implement the dependency-ready
+`STD-0588`-`STD-0591` Security validation cluster when its owner boundary
+passes.

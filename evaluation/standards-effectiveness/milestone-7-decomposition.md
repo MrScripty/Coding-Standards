@@ -151,7 +151,18 @@ baseline records accepted `STD-0473`, `STD-0757`, `STD-0824`, `STD-0583`, and
 while Security owns the consequences of untrusted input. The other Security,
 Cross-Platform, Interop, Rust Security, and Rust Language Binding rows stay
 blocked on decomposition, final index closure, or missing ownership; the next
-planning-only slice must select the next owner boundary.
+planning-only slice established a 47-cluster execution train. Bounded
+pre-slice review now occurs at each train cursor and proceeds directly to one
+atomic implementation commit when accepted. A separate planning commit is
+required only when owner, dependency, scope, or acceptance evidence invalidates
+the manifest row.
+
+The
+[execution train](milestone-7-execution-train.tsv) covers all 589 remaining
+identifiers exactly once across five dependency waves. Every cluster runs
+focused evidence. Complete fail-fast verification runs at each wave checkpoint
+and whenever shared contracts, checker infrastructure, routing, metadata, or
+generated artifacts change.
 
 Before starting each later wave:
 

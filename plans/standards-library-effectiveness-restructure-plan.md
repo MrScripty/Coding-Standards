@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Validation proof-lifetime contract accepted; the next
-independent-trust slice requires a planning-only remainder re-plan.
+**Current phase:** Accelerated Milestone 7 execution train accepted; the first
+dependency-ready trust-boundary cluster is next.
 
-**Next slice:** Milestone 7.4b7n independent trust remainder re-plan.
+**Next slice:** Milestone 7.4b8a Security validation cluster.
 
 **Acceptance status:** `partial`
 
@@ -890,8 +890,24 @@ all structural/routing fixtures pass.
      - changed contracts, unchecked mutation, representation loss, and new
        applicable boundaries require current proof; and
      - 16 focused decisions resolve `F053`.
-   - `7.4b7n` (`Planned`): re-measure the independent trust remainder and
-     correct exactly one next owner boundary before another normative move.
+   - `7.4b7n` (`Accepted`): replace alternating planning/implementation
+     commits with the verified 589-ID execution train;
+     - 47 contiguous source/owner clusters cover every remaining identifier
+       exactly once across five dependency waves;
+     - each cluster requires a bounded pre-slice review, one atomic commit,
+       focused evidence, and serial updates to shared planning records;
+     - separate planning-only commits occur only when a declared re-plan
+       trigger fires;
+     - the complete checker suite runs at five wave checkpoints and whenever a
+       shared contract, checker infrastructure, routing, metadata, or generated
+       artifact changes; and
+     - non-overlapping owner-specific drafts may proceed in parallel, while
+       shared contracts, fixtures, dispositions, plans, and ledgers remain
+       serial integration-owner work.
+   - `7.4b8a` (`Planned`): review and, when the owner boundary is accepted,
+     implement the `STD-0588`-`STD-0591` Security validation cluster in one
+     atomic slice; a failed owner review triggers manifest correction instead
+     of preserving the proposed move.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

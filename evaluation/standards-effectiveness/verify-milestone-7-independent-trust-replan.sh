@@ -188,6 +188,8 @@ required_report=(
   '## Planned Slice 7.4b7m: Validation Proof-Lifetime Contract'
   '## Accepted Slice 7.4b7m: Validation Proof-Lifetime Contract'
   '## Planned Slice 7.4b7n: Independent Trust Remainder Re-plan'
+  '## Accepted Slice 7.4b7n: Accelerated Execution Train'
+  '## Planned Slice 7.4b8a: Security Validation Cluster'
   'rolling remainder is 593 identifiers'
   'independent trust subset is 60 identifiers'
   'Their 61 frozen identifiers include accepted `STD-0473`'
@@ -233,13 +235,15 @@ rg -F -q '`7.4b7j` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7k` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7l` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7m` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7n` (`Planned`)' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b7n' "$PLAN"
+rg -F -q '`7.4b7n` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8a` (`Planned`)' "$PLAN"
+rg -F -q '**Next slice:** Milestone 7.4b8a' "$PLAN"
 
 "$SCRIPT_DIR/verify-contract-ownership.sh"
 "$SCRIPT_DIR/verify-concurrency-policy.sh"
 "$SCRIPT_DIR/verify-interop-boundary-policy.sh"
 "$SCRIPT_DIR/verify-milestone-7-decomposition.sh"
+"$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
