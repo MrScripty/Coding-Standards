@@ -264,3 +264,13 @@ STD-0845	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.
 STD-0846	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	require complete ownership lifetime and thread obligations
 STD-0847	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	select verification from the actual unsafe mechanism
 STD-0848	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	prohibit safe fallback claims from weakening unsafe proof
+STD-0772	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	move	establish Rust binding conversion ownership
+STD-0773	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	replace unchecked wrapper conversions
+STD-0774	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	classify framework-liftable and ABI-safe types separately
+STD-0775	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	use fallible conversion when representation can reject
+STD-0794	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	move	preserve explicit type mapping ownership
+STD-0795	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	remove false universal FFI-safe classifications
+STD-0796	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	select conversion by the concrete boundary mechanism
+STD-0801	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	merge	join conversion verification to the canonical specialization
+STD-0802	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require success rejection and boundary round-trip coverage
+STD-0803	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	replace infallible-only conversion examples

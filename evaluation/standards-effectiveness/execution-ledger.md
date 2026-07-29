@@ -1544,3 +1544,38 @@ with 17 canonical owners still missing. The compact S1 route remains 6 modules
 and now measures 600 of 11066 baseline lines.
 
 **Next slice:** `7.4b3g`.
+
+## 2026-07-28: Milestone 7.4b3g Rust Binding Conversion
+
+**Outcome:** Accepted.
+
+The Rust Language Binding profile now separates native values,
+framework-lifted values, serialized wire values, opaque handles, generated
+wrappers, and stable C-ABI representations. Conversions that can reject use
+fallible operations and preserve typed outcomes through the host boundary.
+
+Frozen identifiers `STD-0772` through `STD-0775`, `STD-0794` through
+`STD-0796`, and `STD-0801` through `STD-0803` have exact final dispositions.
+Legacy unchecked casts, lossy paths, universal FFI-safe labels, blanket `From`
+guidance, and native-only conversion examples have been removed. `F022` is
+resolved.
+
+**No-fallback/legacy result:** failure cannot use truncation, lossy path text,
+defaults, unknown enum sentinels, JSON as a universal ABI, another framework,
+or native-only evidence. A concrete fallback violation takes precedence over
+an otherwise unsupported representation.
+
+**Verification:** Rust binding-conversion decisions, exact dispositions,
+metadata, routing, legacy unsafe-pattern rejection, F022 closure, decomposition
+lifecycle, plan fixtures, shell syntax, whitespace, and all
+standards-effectiveness regressions pass.
+
+The focused verifier's first legacy-pattern expression over-escaped Markdown
+table separators and produced a false positive. Exact forbidden strings now
+make each legacy rejection deterministic and identify the offending pattern.
+
+The rolling Milestone 7 remainder is 641 IDs across 31 sources and 30 owners,
+with 16 canonical owners still missing. The compact S1 route remains 6 modules
+and measures 601 of 11066 baseline lines.
+
+**Next slice:** `7.4c`.

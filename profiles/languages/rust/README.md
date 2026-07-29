@@ -44,6 +44,8 @@ according to the crate's feature contract.
   the [Rust Interop profile](interop.md).
 - Route untrusted dimensions, counts, offsets, strides, and lengths through
   the [Rust Security profile](security.md) before arithmetic or resource use.
+- Route Rust host representations and cross-language conversions through the
+  [Rust Language Binding profile](language-bindings.md).
 - Keep generated bindings derived and test both native and host sides when that
   boundary changes.
 
@@ -57,7 +59,6 @@ here:
 - [Cross-platform](../../../languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md)
 - [Dependencies](../../../languages/rust/RUST-DEPENDENCY-STANDARDS.md)
 - [Interop wire-format guidance](../../../languages/rust/RUST-INTEROP-STANDARDS.md#serde-wire-format-alignment)
-- [Language bindings](../../../languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md)
 - [Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)
 - [Remaining security guidance](../../../languages/rust/RUST-SECURITY-STANDARDS.md)
 - [Tooling](../../../languages/rust/RUST-TOOLING-STANDARDS.md)

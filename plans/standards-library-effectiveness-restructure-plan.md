@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave active; Rust unsafe proof
-and caller contracts accepted.
+**Current phase:** Milestone 7 trust-boundary wave accepted; Rust binding
+representation and checked conversion accepted.
 
-**Next slice:** Milestone 7.4b3g, establish Rust binding representations and
-checked conversions.
+**Next slice:** Milestone 7.4c, perform final legacy-index review, disposition
+closure, and duplication verification.
 
 **Acceptance status:** `partial`
 
@@ -506,9 +506,20 @@ all structural/routing fixtures pass.
        paths now have explicit rejection decisions;
    - `7.4b3f` (`Accepted`): Rust unsafe proof and caller contracts
      (`STD-0843`-`STD-0848`); and
-   - `7.4b3g` (`Planned`): Rust binding representation and checked conversion
+   - `7.4b3g` (`Accepted`): Rust binding representation and checked conversion
      (`STD-0772`-`STD-0775`, `STD-0794`-`STD-0796`,
-     `STD-0801`-`STD-0803`).
+      `STD-0801`-`STD-0803`).
+     - coverage review finding (`Resolved`): the first focused fixture omitted
+       generated wrappers and opaque-handle ownership failure; both categories
+       now have explicit decisions;
+     - integration review finding (`Resolved`): the first decision derivation
+       required host execution for a representation already classified
+       incompatible; unsupported now remains distinct unless a concrete
+       fallback violation requires typed `invalid`;
+     - verification review finding (`Resolved`): the first legacy-pattern
+       regular expression over-escaped table separators and produced a false
+       positive; exact forbidden strings now make each rejection deterministic
+       and independently diagnosable;
 6. Final legacy-index review, disposition closure, and duplication gate.
 
 **Status:** `Active`

@@ -194,10 +194,13 @@ Before exposing a new binding API, answer:
 
 ## FFI Wrapper Design
 
+Canonical Rust representation and conversion rules moved to the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md).
+
 ### Wrapper Type Conventions
 
-When core types contain fields that are not FFI-safe, the wrapper crate defines
-parallel types with an `Ffi` prefix and implements `From<CoreType>` for them.
+When a selected binding mechanism cannot represent a core type directly, its
+adapter defines an explicit boundary representation and a checked conversion.
 
 ```rust
 // BAD: Exposing non-FFI-safe types directly
@@ -223,20 +226,15 @@ pub struct FfiHashEntry {
 }
 ```
 
-| Core Type | FFI-Safe Replacement | Conversion |
-|-----------|---------------------|------------|
-| `HashMap<K, V>` | `Vec<FfiKeyValuePair>` | Iterate into key-value records |
-| `serde_json::Value` | `String` | Serialize to JSON string |
-| `usize` / `isize` | `u64` / `i64` | Cast with `as` |
-| `PathBuf` | `String` | `.to_string_lossy().into_owned()` |
-| `Duration` | `u64` (milliseconds) | `.as_millis() as u64` |
-| `(f64, f64)` | Separate `x: f64, y: f64` fields | Destructure tuple |
-| Deeply nested structs | `String` (JSON) | `serde_json::to_string()` |
+The selected framework or ABI defines which adapter representations are
+supported. Narrowing integers, paths, durations, enums, and serialization use
+fallible conversion whenever the target can reject.
 
 ### When to Annotate Core Types Directly
 
-Types that are already FFI-safe can be annotated in the core library using
-conditional compilation. This avoids creating redundant wrappers.
+Types may be annotated for a named binding framework only when that framework's
+contract supports the complete representation. Framework support does not
+establish stable C-ABI layout.
 
 ```rust
 // Core library — annotation only active with "uniffi" feature
@@ -248,33 +246,14 @@ pub struct DownloadOption {
 }
 ```
 
-| Core Type Characteristics | Strategy |
-|--------------------------|----------|
-| All fields are primitives, String, Vec, Option | Annotate in core with `cfg_attr` |
-| Contains HashMap, serde_json::Value, usize, or PathBuf | Create Ffi* wrapper in FFI crate |
-| Stateful object with methods | Wrap as `#[uniffi::Object]` with Arc |
-| Deeply nested or recursive | Serialize entire value to JSON String |
-| Contains embedded error types | Always create dedicated FFI error enum |
+Keep framework annotations out of core when they would couple domain behavior
+to a binding mechanism. Otherwise, use a dedicated adapter representation.
 
 ### From/Into Implementation Pattern
 
-Every FFI wrapper type implements `From<CoreType>`. Keep conversions explicit
-and one-directional where possible.
-
-```rust
-impl From<ModelRecord> for FfiModelRecord {
-    fn from(r: ModelRecord) -> Self {
-        Self {
-            hashes: r.hashes
-                .into_iter()
-                .map(|(k, v)| FfiHashEntry { key: k, value: v })
-                .collect(),
-            metadata_json: r.metadata.to_string(),
-            total_count: r.total_count as u64,
-        }
-    }
-}
-```
+Use `From` only for genuinely infallible conversions. Use `TryFrom`, `TryInto`,
+or an explicit fallible constructor when any value, schema, range, path, or
+host representation can be rejected.
 
 ---
 
@@ -569,41 +548,26 @@ platform-specific library naming (`.so`, `.dll`, `.dylib`).
 
 ## Type Mapping Rules
 
+Canonical Rust type classification moved to the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md#representation-categories).
+
 ### FFI-Safe Type Inventory
 
-| Type | FFI-Safe? | Notes |
-|------|-----------|-------|
-| `String` | Yes | UTF-8, heap-allocated |
-| `bool` | Yes | |
-| `i8` / `i16` / `i32` / `i64` | Yes | Fixed-size integers |
-| `u8` / `u16` / `u32` / `u64` | Yes | Fixed-size unsigned |
-| `f32` / `f64` | Yes | IEEE 754 |
-| `Vec<T>` (T is FFI-safe) | Yes | Serialized as sequence |
-| `Option<T>` (T is FFI-safe) | Yes | Nullable in foreign languages |
-| `HashMap<K, V>` | **No** | Convert to `Vec<KeyValuePair>` |
-| `serde_json::Value` | **No** | Serialize to JSON `String` |
-| `usize` / `isize` | **No** | Platform-dependent; use `u64` / `i64` |
-| `PathBuf` | **No** | Use `String` |
-| `(T, U)` tuples | **No** | Destructure into named fields |
-| Enums with complex fields | Conditional | Simple fields OK; embedded errors need wrapping |
+Do not maintain a universal FFI-safe inventory for native Rust types.
+`String`, `Vec<T>`, `Option<T>`, Rust enums, and framework objects may be
+liftable by a named framework while remaining invalid as native C-ABI values.
+Fixed-width scalars are C-ABI candidates only with an explicit ABI contract.
 
 ### Conversion Strategy Decision Matrix
 
-| Situation | Strategy |
-|-----------|----------|
-| All fields are FFI-safe | Annotate core type with `cfg_attr` |
-| Contains one or two non-FFI-safe fields | Create Ffi* wrapper in FFI crate |
-| Deeply nested or recursive structure | Serialize entire value to JSON String |
-| Stateful object with methods | Wrap in `Arc<>`, expose as `#[uniffi::Object]` |
-| Object shared across NIF calls | Wrap in `ResourceArc<>` with embedded runtime |
+Select framework lifting, schema-governed serialization, a stable ABI value, or
+an opaque handle from the concrete boundary contract. Do not switch mechanisms
+after conversion failure.
 
 ### Enum Representation
 
-| Enum Shape | FFI Strategy | UniFFI | Rustler |
-|-----------|-------------|--------|---------|
-| Unit variants only | Direct mapping | `uniffi::Enum` | `NifUnitEnum` |
-| Variants with simple fields | Direct mapping | `uniffi::Enum` | `NifTaggedEnum` |
-| Variants with complex fields | FFI-specific enum in wrapper crate | Hand-written | JSON string |
+Enum conversion rejects variants not represented by the selected host contract.
+Serialization is permitted only under an explicit schema.
 
 ---
 
@@ -700,6 +664,9 @@ patterns and tokio conventions.
 
 ## Testing Strategy
 
+Canonical conversion-test requirements moved to the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md#verification).
+
 Test at three levels, matching the three-layer architecture:
 
 ```text
@@ -718,12 +685,12 @@ Test at three levels, matching the three-layer architecture:
 | Level | What to Test | Runs Without | How to Run |
 |-------|-------------|--------------|------------|
 | Core unit tests | Business logic, data operations | Any FFI crate | `cargo test -p mylib-core` |
-| Conversion tests | From impls, error mapping, type round-trips | Foreign language runtimes | `cargo test -p mylib-uniffi` |
+| Conversion tests | Fallible conversion, error mapping, type round-trips | Foreign language runtimes | Project-selected Rust test command |
 | Language integration | Full API from Python/C#/etc. | Nothing (needs everything) | pytest, NUnit, XCTest, etc. |
 
 ### Rules
 
-1. Every `From` impl must have a corresponding test.
+1. Every conversion must cover success and each rejection class.
 2. Error conversion tests must cover every variant of the core error enum.
 3. Core crate tests must pass without any binding features enabled.
 4. Crates that need foreign runtimes (Rustler) should be excluded from
@@ -731,26 +698,9 @@ Test at three levels, matching the three-layer architecture:
 
 ### Conversion Test Example
 
-```rust
-#[test]
-fn test_model_record_conversion() {
-    let mut hashes = HashMap::new();
-    hashes.insert("sha256".to_string(), "abc123".to_string());
-
-    let record = ModelRecord {
-        id: "test".to_string(),
-        hashes,
-        metadata: serde_json::json!({"key": "value"}),
-        total_count: 42,
-    };
-
-    let ffi = FfiModelRecord::from(record);
-    assert_eq!(ffi.hashes.len(), 1);
-    assert_eq!(ffi.hashes[0].key, "sha256");
-    assert!(ffi.metadata_json.contains("key"));
-    assert_eq!(ffi.total_count, 42);
-}
-```
+Test the concrete fallible converter and the real native/host boundary. A
+native-only success test does not prove framework lifting, wire compatibility,
+generated wrappers, or ABI behavior.
 
 ### NIF Pure-Logic Separation
 

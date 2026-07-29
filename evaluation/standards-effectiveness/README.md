@@ -170,6 +170,14 @@ contracts, module invariants, wrapper claims, mechanism-selected evidence, and
 feature-path execution. They also check exact dispositions, metadata, routing,
 legacy replacement, no-fallback behavior, and F023 closure.
 
+## Rust Binding-Conversion Decision Fixtures
+
+`fixtures/rust/binding-conversion-decisions.tsv` and
+`verify-rust-binding-conversions.sh` distinguish framework lifting,
+serialization, opaque handles, and stable C-ABI values. They check fallible
+conversion, real native/host evidence, exact dispositions, routing, legacy
+unsafe-pattern removal, no-fallback precedence, and F022 closure.
+
 ## Filesystem Containment Fixtures
 
 `fixtures/security/path-containment-decisions.tsv` and

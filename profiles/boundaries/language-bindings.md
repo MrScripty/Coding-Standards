@@ -60,6 +60,9 @@ Use the [Interop profile](interop.md) for foreign resource and memory authority
 and [Contracts](../../topics/contracts.md) for public, generated, ABI, wire, and
 independently deployed compatibility decisions.
 
+Use the [Rust specialization](../languages/rust/language-bindings.md) for Rust
+representation categories, fallible conversions, and native/host evidence.
+
 ## Conversion Outcomes
 
 Validate and convert at the owning adapter. Return:
