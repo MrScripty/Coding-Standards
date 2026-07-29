@@ -131,6 +131,16 @@ resolve `F016`, and reject universal address, capacity, timeout, liveness,
 accept-first, detached-work, unsafe-termination, and alternate-mechanism
 fallback.
 
+## Platform Target Decision Fixtures
+
+`fixtures/cross-platform/platform-target-decisions.tsv` and
+`verify-platform-target-policy.sh` check declared target support, cohesive
+platform isolation, contract-selected mechanism and layout, semantic fidelity,
+typed invalid/unsupported/unavailable outcomes, exact disposition of
+`STD-0280` through `STD-0288`, bounded legacy replacement, and rejection of
+fixed-target, universal-pattern, stub, alternate-mechanism, and weaker-evidence
+fallback.
+
 ## IPC Payload Decision Fixtures
 
 `fixtures/ipc/action-payload-decisions.tsv` and

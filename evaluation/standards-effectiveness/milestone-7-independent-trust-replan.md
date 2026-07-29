@@ -202,7 +202,7 @@ order, preserve conflicting legacy guidance, combine owners to avoid a missing
 contract, invent owner files, or activate implementation before exact
 measurement and pre-slice review pass.
 
-## Planned Slice 7.4b7c: Generic Platform Target And Isolation Contract
+## Accepted Slice 7.4b7c: Generic Platform Target And Isolation Contract
 
 [milestone-7-independent-trust-next-slice.tsv](milestone-7-independent-trust-next-slice.tsv)
 freezes `STD-0280` through `STD-0288`.
@@ -267,6 +267,38 @@ the target and isolation group without absorbing language-specific mechanisms,
 native loading, CI scheduling, or Rust specialization. The section is a
 dependency for the missing Rust profile, but that profile remains a later
 owner-bounded slice.
+
+**Acceptance result:** accepted. The Cross-Platform topic now owns declared
+target support, cohesive platform isolation, contract-selected compile-time,
+runtime, composition, and dispatch mechanisms, semantic fidelity, and typed
+unresolved outcomes. The legacy opening group is one bounded canonical link.
+Twenty-five focused decisions reject fixed targets and tiers, universal
+architecture/layout mechanisms, runtime-only or compile-only selection, stubs,
+false results, silent omission, alternate implementations, and weaker
+evidence.
+
+All nine identifiers have exact final dispositions and `F046` is resolved. The
+rolling Milestone 7 remainder is 599 identifiers across 30 sources and 29
+owners, with 14 owners still missing. The active independent trust-boundary
+subset contains 66 identifiers across the same seven baseline owner groups.
+
+## Planned Slice 7.4b7d: Independent Trust-Boundary Remainder Re-plan
+
+Re-measure the 599-ID global remainder and 66-ID independent trust subset after
+the accepted Cross-Platform slice. Confirm current owner existence,
+dependencies, correctness priority, and exact source/owner/disposition facts
+before activating one next owner-bounded implementation slice.
+
+This is planning only. It may update the independent trust report and fixtures,
+their checker, parent decomposition linkage, evaluation README, findings,
+active plan, and execution ledger. It must not change normative or legacy
+standards, final dispositions, generated inventory or owner maps, routing,
+templates, source, tests, configuration, dependencies, lockfiles, workflow
+fixtures, build output, or downstream repositories.
+
+**No fallback:** do not infer the next slice from stale order, preserve
+conflicting legacy guidance, combine owners, invent owner files, or activate
+implementation before exact measurement and accepted pre-slice review.
 
 ## Re-Plan Triggers
 

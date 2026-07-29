@@ -49,7 +49,7 @@ changes and focused fixture evidence.
 | F043 | Resolved in Milestone 7.4a | The remaining 698 identifiers now have complete owner-wave coverage, correctness-first ordering, and an exact first implementation slice without speculative full-sequence expansion. |
 | F044 | Resolved in Milestone 7.4b4a | The premature final-closure handoff is superseded by a measured 90-ID trust remainder, a 26-ID lifecycle bridge for F025/F026, and one exact generic Concurrency next slice. |
 | F045 | Resolved in Milestone 7.4b4g | Rust Async applicability, lifecycle, blocking isolation, synchronization, cancellation safety, cleanup, and observability are contract-selected without named-mechanism fallback. |
-| F046 | Planned for Milestone 7.4b7c | Generic Cross-Platform target and isolation policy must replace fixed target lists, mandatory architecture/layout mechanisms, runtime-only selection, and best-effort stub degradation. |
+| F046 | Resolved in Milestone 7.4b7c | Cross-Platform target support, isolation, mechanism selection, semantic fidelity, and evidence now follow explicit contracts without fixed targets, universal architecture/layout, or stub fallback. |
 
 ## Systemic Findings
 

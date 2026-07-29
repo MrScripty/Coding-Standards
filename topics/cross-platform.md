@@ -5,12 +5,57 @@
 - ID: `topic.cross-platform`
 - Role: `topic`
 - Level: `MUST`
-- Applies when: Supported platforms or filesystems differ in path construction, canonical identity, comparison, aliases, or test behavior.
-- Does not apply when: The affected behavior has one declared platform and filesystem contract with no portable path boundary.
+- Applies when: Supported targets differ in capability, build or deployment selection, platform behavior, filesystem identity, or required evidence.
+- Does not apply when: The affected behavior has one declared target contract and no platform-dependent behavior or portable boundary.
 - Requires: `core`, `workflow.verification`
 - Specializes: `none`
-- Verification: Filesystem-identity decision fixtures and checks on each supported filesystem family.
+- Verification: Platform-target and filesystem-identity decision fixtures plus evidence on each target required by the selected claim.
 - Canonical owner: `topics/cross-platform.md`
+
+## Platform Support Contract
+
+Declare supported targets in the project, product, or release contract. For
+each target, define the support claim, required behavior, unavailable or
+unsupported capabilities, artifact/build requirements, and evidence needed to
+accept the claim. Product target names and support tiers are project facts, not
+generic defaults.
+
+A required behavior must retain its declared semantics on every target covered
+by the claim. An intentionally optional capability is distinct from an
+unimplemented required capability. Return typed `invalid` for contradictory
+target facts, `unsupported` when the declared target or capability is outside
+the supported contract, and `unavailable` when required target, build,
+deployment, capability, or evidence facts cannot be established.
+
+## Platform Behavior Isolation
+
+Keep platform selection and platform-specific mechanics outside domain
+behavior. Choose the smallest cohesive boundary that preserves the domain
+contract and follows the language and architecture: a function, module,
+adapter, injected capability, build-selected implementation, or another
+explicit boundary may be correct.
+
+Select compile-time, runtime, composition, and dispatch mechanisms from the
+language, toolchain, artifact, and deployment contract. File and module
+boundaries follow cohesion and language conventions. No Strategy/Factory,
+runtime detection, compile-time condition, or one-file-per-platform layout is
+universally required.
+
+Platform-specific code may return a typed unsupported or unavailable outcome
+when the selected contract permits it. A stub, log message, false result,
+silent omission, or alternate implementation is not graceful degradation
+unless an explicit product contract defines that result as semantically valid.
+
+Language-specific target syntax, build mechanisms, and target verification
+belong to the selected language profile. Use the
+[Standards Router](../STANDARDS-ROUTER.md) to select it.
+
+### No Fallback
+
+Missing target, support, capability, build, deployment, or evidence facts
+cannot choose a default platform list, support tier, Strategy/Factory, runtime
+detection, compile-time condition, file layout, stub, silent omission,
+alternate mechanism, or weaker evidence.
 
 ## Filesystem Paths
 
@@ -48,6 +93,10 @@ untrusted path authorizes an operation, apply
 these identity rules.
 
 ## Verification
+
+Platform-target checks cover single and multiple declared targets, mechanism
+selection, cohesive isolation, semantic optionality, typed outcomes, and the
+evidence environment required by each support claim.
 
 Record the supported platform and filesystem families for the affected claim.
 Exercise path construction and identity on each required family where behavior

@@ -2294,3 +2294,39 @@ lifecycle, shell syntax, whitespace, and every
 
 **Next slice:** `7.4b7c` generic platform target and isolation contract
 pre-slice review.
+
+## 2026-07-28: Milestone 7.4b7c Generic Platform Target And Isolation
+
+**Outcome:** Accepted.
+
+The Cross-Platform topic now derives target support and evidence from explicit
+project, product, or release contracts; isolates platform mechanics at the
+smallest cohesive boundary; selects compile-time, runtime, composition, and
+dispatch mechanisms from language/build/deployment facts; and preserves
+semantics through typed outcomes.
+
+`STD-0280` through `STD-0288` have exact final dispositions. The legacy opening
+group is a bounded canonical link without fixed targets, tiers, architecture
+patterns, file layouts, runtime-only selection, or stubs. `F046` is resolved.
+
+**Deviations:** None.
+
+**Discovered issues:** None.
+
+**No-fallback/legacy result:** missing target, support, capability, build,
+deployment, or evidence facts cannot select defaults, Strategy/Factory,
+one-file-per-platform, runtime-only or compile-only mechanisms, stubs, false
+results, silent omission, alternate implementations, or weaker evidence.
+
+**Verification:** 25 focused platform-target decisions, nine exact
+dispositions, metadata, bounded legacy replacement, preserved filesystem,
+native-library, and CI sections, independent trust progress, plan lifecycle,
+shell syntax, whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+The rolling Milestone 7 remainder is 599 IDs across 30 sources and 29 owners,
+with 14 canonical owners still missing. The independent trust subset contains
+66 IDs across its seven baseline owner groups.
+
+**Next slice:** `7.4b7d`, planning only, to re-measure the remainder and
+activate exactly one owner-bounded implementation slice.

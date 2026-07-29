@@ -307,3 +307,12 @@ STD-0597	SECURITY-STANDARDS.md	topics/security.md	refine	derive listener exposur
 STD-0598	SECURITY-STANDARDS.md	topics/security.md	refine	require owned admission capacity before accepting work
 STD-0599	SECURITY-STANDARDS.md	topics/security.md	refine	consume lifecycle-owned ordered shutdown with typed incomplete outcomes
 STD-0600	SECURITY-STANDARDS.md	topics/security.md	refine	select transport liveness from protocol semantics and resource risk
+STD-0280	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	move	establish the generic cross-platform owner
+STD-0281	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	derive supported targets and support claims from the project contract
+STD-0282	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	establish contract-selected platform behavior and failure policy
+STD-0283	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	isolate platform decisions from domain behavior without requiring one abstraction shape
+STD-0284	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select composition and dispatch mechanisms from language and deployment facts
+STD-0285	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select file and module boundaries from cohesion and language conventions
+STD-0286	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	preserve declared semantics and return typed unsupported or unavailable outcomes
+STD-0287	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select compile-time or runtime platform mechanisms from the build and deployment contract
+STD-0288	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	route language-specific platform mechanisms to selected profiles

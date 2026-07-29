@@ -13,15 +13,21 @@ readonly FINDINGS="$SCRIPT_DIR/findings.md"
 readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 declare -A disposed
+declare -A disposed_source
+declare -A disposed_target
+declare -A disposed_disposition
 declare -A remaining_by_owner
 declare -A remaining_sources
 declare -A remaining_owners
 declare -A source_by_id
 declare -A owner_by_id
 
-while IFS=$'\t' read -r id _source _target _disposition _rationale; do
+while IFS=$'\t' read -r id source target disposition _rationale; do
   [[ "$id" == 'id' ]] && continue
   disposed["$id"]=1
+  disposed_source["$id"]="$source"
+  disposed_target["$id"]="$target"
+  disposed_disposition["$id"]="$disposition"
 done < "$DISPOSITIONS"
 
 expected_ids=(
@@ -32,7 +38,7 @@ next_dispositions=0
 for id in "${expected_ids[@]}"; do
   [[ -n "${disposed[$id]:-}" ]] && ((next_dispositions += 1))
 done
-[[ "$next_dispositions" -eq 0 ]]
+[[ "$next_dispositions" -eq 0 || "$next_dispositions" -eq 9 ]]
 
 global_remaining=0
 while IFS=$'\t' read -r id source _line owner _disposition _heading; do
@@ -45,7 +51,7 @@ while IFS=$'\t' read -r id source _line owner _disposition _heading; do
   remaining_owners["$owner"]=1
   remaining_by_owner["$owner"]=$(( ${remaining_by_owner[$owner]:-0} + 1 ))
 done < "$OWNER_MAP"
-[[ "$global_remaining" -eq 608 ]]
+[[ "$global_remaining" -eq $((608 - next_dispositions)) ]]
 [[ "${#remaining_sources[@]}" -eq 30 ]]
 [[ "${#remaining_owners[@]}" -eq 29 ]]
 
@@ -78,11 +84,16 @@ expected_groups=(
 mapfile -t actual_groups < <(tail -n +2 "$GROUP_FILE")
 [[ "${actual_groups[*]}" == "${expected_groups[*]}" ]]
 
-trust_total=0
+baseline_trust_total=0
+current_trust_total=0
 while IFS=$'\t' read -r order owner count owner_state prerequisite status extra; do
   [[ "$order" == 'order' ]] && continue
   [[ "$order" =~ ^[1-7]$ && "$count" =~ ^[0-9]+$ ]]
-  [[ "${remaining_by_owner[$owner]:-0}" -eq "$count" ]]
+  expected_count="$count"
+  if [[ "$owner" == 'topics/cross-platform.md' ]]; then
+    expected_count=$((count - next_dispositions))
+  fi
+  [[ "${remaining_by_owner[$owner]:-0}" -eq "$expected_count" ]]
   if [[ -e "$REPO_ROOT/$owner" ]]; then
     actual_state='exists'
   else
@@ -90,9 +101,11 @@ while IFS=$'\t' read -r order owner count owner_state prerequisite status extra;
   fi
   [[ "$actual_state" == "$owner_state" ]]
   [[ -n "$prerequisite" && -n "$status" && -z "${extra:-}" ]]
-  ((trust_total += count))
+  ((baseline_trust_total += count))
+  ((current_trust_total += expected_count))
 done < "$GROUP_FILE"
-[[ "$trust_total" -eq 75 ]]
+[[ "$baseline_trust_total" -eq 75 ]]
+[[ "$current_trust_total" -eq $((75 - next_dispositions)) ]]
 
 mapfile -t actual_ids < <(tail -n +2 "$NEXT_SLICE" | cut -f3)
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
@@ -112,7 +125,11 @@ while IFS=$'\t' read -r slice order id source target disposition rationale extra
     [[ "$disposition" == 'refine' ]]
   fi
   [[ -n "$rationale" && -z "${extra:-}" ]]
-  [[ -z "${disposed[$id]:-}" ]]
+  if [[ -n "${disposed[$id]:-}" ]]; then
+    [[ "${disposed_source[$id]}" == "$source" ]]
+    [[ "${disposed_target[$id]}" == "$target" ]]
+    [[ "${disposed_disposition[$id]}" == "$disposition" ]]
+  fi
   ((row_count += 1))
   ((expected_order += 1))
 done < "$NEXT_SLICE"
@@ -128,7 +145,6 @@ required_report=(
   'derive supported targets and support claims from an'
   'select compile-time, runtime, composition, and dispatch mechanisms'
   'unblocks the missing Rust'
-  '## Planned Slice 7.4b7c: Generic Platform Target And Isolation Contract'
   '**No fallback:**'
   '**Pre-slice review:** accepted.'
 )
@@ -137,15 +153,28 @@ for text in "${required_report[@]}"; do
 done
 
 rg -F -q '(milestone-7-independent-trust-replan.md)' "$PARENT"
-rg -F -q '| F046 | Planned for Milestone 7.4b7c |' "$FINDINGS"
 rg -F -q '`7.4b7a` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7b` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7c` (`Planned`)' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b7c' "$PLAN"
+if [[ "$next_dispositions" -eq 0 ]]; then
+  rg -F -q '| F046 | Planned for Milestone 7.4b7c |' "$FINDINGS"
+  rg -F -q '## Planned Slice 7.4b7c: Generic Platform Target And Isolation Contract' \
+    "$REPORT"
+  rg -F -q '`7.4b7c` (`Planned`)' "$PLAN"
+  rg -F -q '**Next slice:** Milestone 7.4b7c' "$PLAN"
+else
+  rg -F -q '| F046 | Resolved in Milestone 7.4b7c |' "$FINDINGS"
+  rg -F -q '## Accepted Slice 7.4b7c: Generic Platform Target And Isolation Contract' \
+    "$REPORT"
+  rg -F -q '## Planned Slice 7.4b7d: Independent Trust-Boundary Remainder Re-plan' \
+    "$REPORT"
+  rg -F -q '`7.4b7c` (`Accepted`)' "$PLAN"
+  rg -F -q '`7.4b7d` (`Planned`)' "$PLAN"
+  rg -F -q '**Next slice:** Milestone 7.4b7d' "$PLAN"
+fi
 
 "$SCRIPT_DIR/verify-milestone-7-decomposition.sh"
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
-printf 'Milestone 7 independent trust re-plan passed: %s IDs across 7 owners; next slice 9 IDs with %s dispositions\n' \
-  "$trust_total" "$next_dispositions"
+printf 'Milestone 7 independent trust re-plan passed: %s baseline IDs, %s current across 7 owners; next-slice dispositions %s/9\n' \
+  "$baseline_trust_total" "$current_trust_total" "$next_dispositions"
