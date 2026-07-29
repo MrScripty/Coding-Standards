@@ -1487,3 +1487,32 @@ with 19 canonical owners still missing. The compact S1 route remains 6 modules
 and now measures 599 of 11066 baseline lines.
 
 **Next slice:** `7.4b3e`.
+
+## 2026-07-28: Milestone 7.4b3e Rust Checked Boundary Arithmetic
+
+**Outcome:** Accepted.
+
+The Rust Security profile now owns checked sizing for untrusted dimensions,
+counts, offsets, strides, and lengths. Conversion occurs before arithmetic;
+every arithmetic operation is checked; and operation resource limits are
+validated separately.
+
+Frozen identifier `STD-0823` has its exact final disposition. Its legacy
+section is link-only, and the unchecked `as usize` example has been removed.
+Rust Interop remains the additional owner when a valid numeric size authorizes
+raw foreign-memory access.
+
+**No-fallback/legacy result:** failed conversion, arithmetic, zero policy, or
+resource-limit proof cannot use a cast, sentinel, clamp, saturation, wrapping,
+truncation, smaller default, or partially checked expression.
+
+**Verification:** Rust boundary-arithmetic decisions, exact disposition,
+metadata, routing, legacy unchecked-example rejection, decomposition
+lifecycle, plan fixtures, shell syntax, whitespace, and all
+standards-effectiveness regressions pass.
+
+The rolling Milestone 7 remainder is 657 IDs across 32 sources and 31 owners,
+with 18 canonical owners still missing. The compact S1 route remains 6 modules
+and now measures 601 of 11066 baseline lines.
+
+**Next slice:** `7.4b3f`.

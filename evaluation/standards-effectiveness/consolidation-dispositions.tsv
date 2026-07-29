@@ -257,3 +257,4 @@ STD-0753	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/intero
 STD-0754	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	copy only after foreign-memory preconditions hold
 STD-0755	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	isolate unsafe operations behind safe validated APIs
 STD-0756	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	bind callback thread and borrowed lifetime contracts
+STD-0823	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	replace unchecked casts with checked typed size conversion

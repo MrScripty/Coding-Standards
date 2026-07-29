@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave active; Rust foreign-memory
-proof accepted.
+**Current phase:** Milestone 7 trust-boundary wave active; Rust checked
+boundary arithmetic accepted.
 
-**Next slice:** Milestone 7.4b3e, replace unchecked Rust boundary arithmetic
-with checked conversion and typed rejection.
+**Next slice:** Milestone 7.4b3f, establish Rust unsafe proof and caller
+contracts.
 
 **Acceptance status:** `partial`
 
@@ -497,7 +497,13 @@ all structural/routing fixtures pass.
        missing evidence precedence over concrete malformed input; concrete
        invalidity now wins, while independently missing proof returns typed
        `unavailable`;
-   - `7.4b3e` (`Planned`): Rust checked boundary arithmetic (`STD-0823`);
+   - `7.4b3e` (`Accepted`): Rust checked boundary arithmetic (`STD-0823`);
+     - integration review finding (`Resolved`): the first focused checker
+       matched a sentence across a Markdown line boundary; the assertion now
+       selects a stable semantic phrase instead of formatting;
+     - coverage review finding (`Resolved`): the initial fixture named
+       multiplication overflow but omitted addition overflow; both arithmetic
+       paths now have explicit rejection decisions;
    - `7.4b3f` (`Planned`): Rust unsafe proof and caller contracts
      (`STD-0843`-`STD-0848`); and
    - `7.4b3g` (`Planned`): Rust binding representation and checked conversion

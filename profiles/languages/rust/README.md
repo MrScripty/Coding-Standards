@@ -42,6 +42,8 @@ according to the crate's feature contract.
   [unsafe guidance](../../../languages/rust/RUST-UNSAFE-STANDARDS.md).
 - Route raw foreign memory, checked dimensions, and callback borrows through
   the [Rust Interop profile](interop.md).
+- Route untrusted dimensions, counts, offsets, strides, and lengths through
+  the [Rust Security profile](security.md) before arithmetic or resource use.
 - Keep generated bindings derived and test both native and host sides when that
   boundary changes.
 
@@ -57,7 +59,7 @@ here:
 - [Interop wire-format guidance](../../../languages/rust/RUST-INTEROP-STANDARDS.md#serde-wire-format-alignment)
 - [Language bindings](../../../languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md)
 - [Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)
-- [Security](../../../languages/rust/RUST-SECURITY-STANDARDS.md)
+- [Remaining security guidance](../../../languages/rust/RUST-SECURITY-STANDARDS.md)
 - [Tooling](../../../languages/rust/RUST-TOOLING-STANDARDS.md)
 - [Unsafe](../../../languages/rust/RUST-UNSAFE-STANDARDS.md)
 

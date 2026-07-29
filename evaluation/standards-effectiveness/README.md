@@ -154,6 +154,14 @@ pointer/alignment/allocation/provenance proof, initialized extent, zero-length
 rules, callback lifetime, copy ordering, typed failures, exact dispositions,
 metadata, routing, and legacy unsafe-pattern removal.
 
+## Rust Boundary-Arithmetic Decision Fixtures
+
+`fixtures/rust/checked-boundary-arithmetic-decisions.tsv` and
+`verify-rust-boundary-arithmetic.sh` check conversion before arithmetic,
+operation-wide checked arithmetic, separate resource limits, zero contracts,
+typed rejection, no-fallback behavior, exact disposition, metadata, routing,
+and legacy unchecked-example removal.
+
 ## Filesystem Containment Fixtures
 
 `fixtures/security/path-containment-decisions.tsv` and

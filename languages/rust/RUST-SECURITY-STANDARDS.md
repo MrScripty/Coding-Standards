@@ -32,18 +32,9 @@ Rules:
 
 ## Checked Arithmetic At Boundaries
 
-Values received from FFI callbacks, network payloads, files, or IPC may be
-malformed. Use checked arithmetic before allocation or slice construction:
-
-```rust
-let buffer_size = (width as usize)
-    .checked_mul(height as usize)
-    .and_then(|size| size.checked_mul(4))
-    .ok_or(InputError::BufferSizeOverflow)?;
-```
-
-Do not use `expect` or `unwrap` for externally supplied dimensions in production
-paths. Convert overflow into a typed error.
+Checked conversion, arithmetic, resource limits, and typed rejection moved to
+the
+[Rust Security Profile](../../profiles/languages/rust/security.md#checked-boundary-sizing).
 
 ## Bounded Queues
 
