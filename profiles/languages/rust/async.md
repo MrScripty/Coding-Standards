@@ -129,13 +129,52 @@ Do not call external, plugin, callback, or user-controlled behavior while a
 guard is held. Do not select one synchronization implementation as a universal
 default for all Rust state.
 
+## Prove Cancellation State
+
+Stopping or dropping future polling proves only that the future will not be
+polled by that owner. It does not prove that external I/O, a remote request, a
+blocking operation, or another independently owned side effect stopped or
+rolled back.
+
+Derive external cancellation and terminal-state claims from the affected
+capability's contract and evidence. If external work may continue, preserve its
+identity and ownership so completion, cancellation, reconciliation, or retry
+can be handled explicitly.
+
+## Preserve Durable Work
+
+Before a durable multi-step operation crosses a cancellation point, select a
+transactional, idempotent, resumable, or compensating design that preserves its
+required invariant. A cancellation boundary cannot leave authoritative state
+in an unclassified partial outcome.
+
+## Own Asynchronous Cleanup
+
+Cleanup that can suspend has an explicit lifecycle-owned completion path.
+Synchronous destruction may release synchronous resources or enforce a local
+safety invariant, but it does not stand in for required asynchronous cleanup.
+Do not detach cleanup merely to let destruction or shutdown return.
+
+## Own Lifecycle Evidence
+
+The lifecycle owner observes health, success, failure, panic, cancellation, and
+shutdown outcomes for its owned work. Leaf operations may emit diagnostic
+context, but leaf logging does not establish terminal-state ownership or prove
+that a failed task remains supervised.
+
+Select health, telemetry, and inspection mechanisms from the operational
+contract and supported environment. Tool availability is not evidence unless
+the lifecycle owner consumes the relevant signal and connects it to an owned
+operation and terminal outcome.
+
 ## Typed Outcomes
 
 Return the operation's typed `unsupported` or `unavailable` outcome when its
 required execution contract cannot be provided. Preserve operation-specific
 failures when they are more precise. Runtime, task, and shutdown failures retain
 their operation-specific terminal outcome. Missing blocking-isolation,
-capacity, or synchronization capability remains explicit.
+capacity, synchronization, cancellation, cleanup, or observation capability
+remains explicit.
 
 ## No Fallback
 
@@ -154,11 +193,15 @@ alternate executor or thread, run unbounded isolated work, hold an unsupported
 guard across suspension, split a related invariant, or select a universal
 mutex.
 
-Cancellation-safety mechanisms and observability are separate Rust Async
-concerns not defined by these sections.
 Runtime construction, task ownership, shutdown sequencing, blocking isolation,
-and synchronization selection are defined above without selecting a project-
-specific mechanism.
+synchronization selection, cancellation safety, cleanup, and lifecycle
+evidence are defined above without selecting a project-specific mechanism.
+
+Missing cancellation or observation proof cannot assume external cancellation
+from a dropped future, leave durable work unprotected, delegate async cleanup
+only to synchronous destruction, detach cleanup, treat leaf logging as
+ownership, permit silent task death, or present tool availability as lifecycle
+evidence.
 
 ## Verification
 
@@ -177,5 +220,10 @@ Evidence covers the affected contract:
 - isolated work participates in admission, completion, and shutdown ownership;
 - synchronization preserves the complete invariant across any suspension;
 - unsupported isolation, capacity, or synchronization returns a typed outcome;
+- dropped future polling is distinguished from external operation state;
+- durable work remains transactional, idempotent, resumable, or compensating;
+- asynchronous cleanup reaches an owned observed completion;
+- lifecycle health and terminal outcomes are observed by their owner;
+- unavailable cancellation, cleanup, or observation returns a typed outcome;
   and
 - no convenience fallback changes execution mode or ownership.

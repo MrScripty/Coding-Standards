@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 lifecycle bridge active; Rust Async blocking
-isolation and synchronization accepted.
+**Current phase:** Milestone 7 lifecycle bridge active; Rust Async
+specialization complete.
 
-**Next slice:** Milestone 7.4b4g, specialize Rust cancellation safety and
-lifecycle observability.
+**Next slice:** Re-plan the dependent Rust Security and Rust Language Bindings
+lifecycle remainder before Milestone 7.4c.
 
 **Acceptance status:** `partial`
 
@@ -582,8 +582,15 @@ all structural/routing fixtures pass.
      - integration finding (`Resolved`): focused evidence and the foundation
        transition marker initially crossed Markdown line boundaries; stable
        line-local wording now preserves both checker contracts;
-   - `7.4b4g` (`Planned`): specialize cancellation safety and lifecycle
-     observability (`STD-0724`-`STD-0725`).
+   - `7.4b4g` (`Accepted`): specialize cancellation safety and lifecycle
+     observability (`STD-0724`-`STD-0725`);
+     - re-plan trigger (`Resolved`): the prior blocking/mutex checker owned the
+       temporary `F045` partial-resolution row and failed when the final Rust
+       Async slice resolves the finding; only that mutable assertion is removed
+       and the final checker owns the resolved state;
+     - handoff trigger (`Open`): the dependent Rust Security and Rust Language
+       Bindings remainder for `F025`/`F026` requires exact owner-bounded
+       decomposition before `7.4c`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

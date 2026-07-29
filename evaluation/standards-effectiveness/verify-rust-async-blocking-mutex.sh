@@ -103,7 +103,6 @@ for heading in '## Blocking Work' '## Mutex Selection' '## Cancellation Safety' 
   rg -F -q "$heading" "$LEGACY"
 done
 
-rg -F -q '| F045 | Partially resolved in Milestone 7.4b4f |' "$FINDINGS"
 rg -F -q '`7.4b4f` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-rust-async-decomposition.sh"
 "$SCRIPT_DIR/verify-milestone-7-trust-lifecycle-replan.sh"

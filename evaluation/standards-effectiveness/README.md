@@ -279,6 +279,13 @@ preservation, and synchronization capability. It proves exact disposition of
 isolation, alternate executor/thread fallback, unsupported suspended guards,
 split invariants, and universal mutex defaults.
 
+`verify-rust-async-cancellation-observability.sh` checks future-polling versus
+external-operation state, durable cancellation design, owned async cleanup,
+terminal evidence ownership, and inspection proof. It proves exact disposition
+of `STD-0724` and `STD-0725` and rejects assumed external cancellation,
+unprotected durable work, destruction-only or detached async cleanup,
+leaf/missing ownership, silent terminal outcomes, and tool-only evidence.
+
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
 legacy path is only a bounded migration index.

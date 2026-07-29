@@ -275,16 +275,81 @@ Markdown line boundaries, and extending the profile split the foundation
 checker's stable ownership-transition phrase. Line-local evidence markers now
 preserve both contracts without duplicating policy.
 
-### 7.4b4g: Cancellation Safety And Observability
+## Accepted Slice 7.4b4g: Cancellation Safety And Observability
 
-Refine `STD-0724` and `STD-0725`. Distinguish future polling cancellation from
-external-operation cancellation; protect durable multi-step invariants with
-transactional, idempotent, resumable, or compensating designs; and assign
-health, panic, cancellation, and shutdown evidence to the lifecycle owner.
-Named inspection tools remain optional reference mechanisms. Evidence must
-reject assumed external cancellation, async cleanup delegated only to `Drop`,
-leaf-only logging, silent worker death, and tool availability presented as
-proof.
+**Outcome:** refine `STD-0724` and `STD-0725` in the existing Rust Async
+profile. Cancellation claims distinguish stopped future polling from external
+operation state, durable work remains recoverable at cancellation boundaries,
+async cleanup is explicit, and lifecycle owners observe terminal health.
+
+**Allowed write set:**
+
+- `profiles/languages/rust/async.md`;
+- `languages/rust/RUST-ASYNC-STANDARDS.md`;
+- `evaluation/standards-effectiveness/fixtures/rust/async-cancellation-observability-decisions.tsv`;
+- `evaluation/standards-effectiveness/verify-rust-async-cancellation-observability.sh`;
+- `evaluation/standards-effectiveness/verify-rust-async-blocking-mutex.sh`
+  (temporary finding-status assertion only);
+- this decomposition record for slice activation and handoff only;
+- consolidation dispositions, evaluation README, findings, active plan, and
+  execution ledger.
+
+No generic topic, base Rust profile, other Rust specialization, runtime-
+specific package or API, telemetry product, generated artifact, template,
+lockfile, Cargo file, runtime integration, or downstream repository belongs to
+this slice.
+
+**Required semantics:**
+
+- stopping or dropping future polling does not by itself prove that external
+  work stopped, rolled back, or released resources;
+- external cancellation and terminal state require capability-specific
+  evidence from the operation contract;
+- durable multi-step work crossing cancellation points is transactional,
+  idempotent, resumable, or compensating;
+- asynchronous cleanup has an explicit owned completion path, while synchronous
+  destruction remains only a synchronous safety boundary;
+- the lifecycle owner observes task health, failure, panic, cancellation, and
+  shutdown outcomes;
+- leaf instrumentation may add context but does not own terminal evidence;
+- inspection and telemetry mechanisms follow operational requirements and are
+  not proof merely because a tool is available; and
+- unavailable cancellation, cleanup, or observation capability returns the
+  operation's typed outcome.
+
+**No fallback:** missing proof cannot assume external cancellation from a
+dropped future, leave durable work unprotected, delegate async cleanup only to
+synchronous destruction, detach cleanup, treat leaf logging as ownership,
+permit silent task death, or present tool availability as lifecycle evidence.
+
+**Focused evidence:** decisions cover completed and dropped futures, proven
+cancelled and continuing external work, safe durable designs, unprotected
+durable mutation, explicit and destruction-only cleanup, detached cleanup,
+lifecycle and leaf evidence ownership, observed and silent terminal outcomes,
+evidence-driven and tool-only inspection, unavailable capabilities, and each
+prohibited fallback.
+
+**Acceptance gate:** both identifiers have exact dispositions; the Rust Async
+profile distinguishes cancellation and observation without naming one runtime,
+cancellation primitive, tracing library, health system, or inspection product;
+migrated legacy sections are bounded links; `F045` is resolved; and focused
+plus all affected regressions pass.
+
+**Resolved re-plan trigger:** the prior
+`verify-rust-async-blocking-mutex.sh` checker hard-coded `F045`'s temporary
+partial-resolution row. Advancing the finding to its verified final state
+therefore broke a historical policy checker outside the original activated
+write set.
+
+**Approved re-plan decision:** remove only the prior checker's temporary
+finding-status assertion. It retains behavior, disposition, metadata,
+legacy-replacement, accepted-slice, decomposition, and parent-handoff checks.
+The final cancellation/observability checker owns `F045`'s resolved state.
+
+**Post-acceptance handoff:** all nine Rust Async identifiers are dispositioned.
+The remaining `F025`/`F026` lifecycle work belongs to dependent Rust Security
+and Rust Language Bindings sources. Their exact owner-bounded sequence must be
+planned before `7.4c`; this slice does not infer or implement that sequence.
 
 ## Re-plan Triggers
 

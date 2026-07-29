@@ -39,26 +39,11 @@ Synchronization selection is canonical in the
 
 ## Cancellation Safety
 
-Dropping a future cancels it. Treat every `.await` as a possible cancellation
-point unless the caller owns the full lifecycle.
-
-Rules:
-
-- Do not split multi-step durable operations across cancellation points unless
-  the operation is transactional, idempotent, or compensating.
-- Use transactions, durable state machines, or explicit compensation for
-  operations that must complete atomically.
-- Provide explicit `async fn close(self)` or `shutdown(self)` methods when
-  cleanup must await.
-- `Drop` is only a synchronous safety net, not the primary async cleanup path.
+Cancellation-state proof, durable-work safety, and asynchronous cleanup are
+canonical in the
+[Rust Async profile](../../profiles/languages/rust/async.md#prove-cancellation-state).
 
 ## Observability
 
-Rules:
-
-- Instrument long-running async workflows with `tracing` spans.
-- Log task panics and cancellation reasons at the lifecycle owner.
-- Add health checks for worker pools, listeners, and background services whose
-  failure would otherwise be silent.
-- Use `tokio-console` or equivalent runtime inspection in staging when debugging
-  hung tasks, lock contention, or starvation.
+Lifecycle-owned terminal evidence is canonical in the
+[Rust Async profile](../../profiles/languages/rust/async.md#own-lifecycle-evidence).

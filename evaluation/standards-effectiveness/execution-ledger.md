@@ -1847,3 +1847,48 @@ The rolling Milestone 7 remainder is 625 IDs across 31 sources and 30 owners,
 with 14 canonical owners still missing.
 
 **Next slice:** `7.4b4g`.
+
+## 2026-07-28: Milestone 7.4b4g Rust Async Cancellation And Observability
+
+**Outcome:** Accepted.
+
+The Rust Async profile now distinguishes stopped future polling from external
+operation cancellation and terminal state. Durable work crossing cancellation
+boundaries is transactional, idempotent, resumable, or compensating, while
+asynchronous cleanup has an explicit lifecycle-owned completion path.
+
+Lifecycle owners observe health, success, failure, panic, cancellation, and
+shutdown outcomes. Leaf diagnostics and available inspection tools may provide
+context but do not become terminal-state evidence owners.
+
+`STD-0724` and `STD-0725` have exact final dispositions. `F045` is resolved.
+
+**Deviations:** None.
+
+**Discovered issue (`Resolved`):** the prior
+`verify-rust-async-blocking-mutex.sh` checker
+hard-coded `F045`'s temporary partial-resolution row. Advancing the finding to
+its verified final state broke that historical checker, which was outside the
+original activated write set.
+
+**Re-plan decision (`Accepted`):** remove only the temporary finding-status
+assertion. The prior checker retains its behavioral and accepted-slice
+evidence, while the final checker owns `F045`'s resolved state.
+
+**No-fallback/legacy result:** missing cancellation, cleanup, or observation
+proof cannot assume external cancellation from dropped polling, leave durable
+work unprotected, delegate async cleanup only to synchronous destruction,
+detach cleanup, use leaf logging as ownership, permit silent task death, or
+present tool availability as lifecycle evidence. The migrated legacy sections
+are bounded links without named mechanism defaults.
+
+**Verification:** 20 cancellation/observation decisions, metadata, exact
+dispositions, migrated legacy replacement, decomposition and parent lifecycle
+handoff, shell syntax, whitespace, and all standards-effectiveness regressions
+pass.
+
+The rolling Milestone 7 remainder is 623 IDs across 30 sources and 29 owners,
+with 14 canonical owners still missing.
+
+**Next slice:** re-plan the dependent Rust Security and Rust Language Bindings
+lifecycle remainder before `7.4c`.
