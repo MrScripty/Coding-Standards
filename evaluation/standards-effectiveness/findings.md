@@ -27,7 +27,8 @@ changes and focused fixture evidence.
 | F022 | Resolved in Milestone 7.4b3g | Generic Language Bindings separates representation categories; the Rust specialization requires fallible conversion and real native/host evidence without universal C-ABI labels or alternate mechanisms. |
 | F023 | Resolved in Milestone 7.4b3f | Rust Interop proves foreign-memory authority, Rust Security proves checked sizes, and Rust Unsafe separates adjacent operation proof, caller contracts, module invariants, and mechanism-selected evidence without safe-path fallback. |
 | F024 | Resolved in Milestone 5.2 | Rust binding compatibility is classified independently for generated, package, ABI, wire, and persisted boundaries. |
-| F026 | Partially resolved in Milestone 5.2 | Catch-all executor fallback was replaced by typed unsupported delegation; spawn and TOCTOU findings remain Milestone 7. |
+| F025 | Partially resolved in Milestone 7.4b4e | Rust runtime construction belongs to composition and spawned work has lifecycle ownership; dependent binding sections still require consolidation. |
+| F026 | Partially resolved in Milestone 7.4b4e | Catch-all executor fallback is typed and spawned work is tracked; Rust path TOCTOU guidance remains. |
 | F027 | Resolved in Milestone 7.3a | Major version zero and prerelease identifiers are distinct, and retained publication guidance now consumes that decision. |
 | F028 | Resolved in Milestone 7.3a | SBOM, checksum, signature, and provenance applicability follow artifact content, consumer, risk, channel, and regulatory facts. |
 | F029 | Resolved in Milestone 7.3a | Release units may version independently or in lockstep, lockfiles follow dependency-resolution ownership, and publication pushes only the intended tag. |
@@ -46,7 +47,7 @@ changes and focused fixture evidence.
 | F042 | Resolved in Milestone 7.3c | Recovery now follows impact, destination capability, explicit authority, immutable identity, and fresh acceptance rather than assuming hosted drafts, yank support, branches, patch versions, or unilateral action. |
 | F043 | Resolved in Milestone 7.4a | The remaining 698 identifiers now have complete owner-wave coverage, correctness-first ordering, and an exact first implementation slice without speculative full-sequence expansion. |
 | F044 | Resolved in Milestone 7.4b4a | The premature final-closure handoff is superseded by a measured 90-ID trust remainder, a 26-ID lifecycle bridge for F025/F026, and one exact generic Concurrency next slice. |
-| F045 | Partially resolved in Milestone 7.4b4d | Rust Async applicability and sync/async boundary defaults are replaced by contract selection; lifecycle, blocking/mutex, cancellation, and observability refinements remain. |
+| F045 | Partially resolved in Milestone 7.4b4e | Rust Async applicability and owned runtime/task/shutdown lifecycle are contract-selected; blocking/mutex, cancellation-safety, and observability refinements remain. |
 
 ## Systemic Findings
 

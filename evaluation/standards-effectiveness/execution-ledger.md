@@ -1745,3 +1745,65 @@ The rolling Milestone 7 remainder is 630 IDs across 31 sources and 30 owners,
 with 14 canonical owners still missing.
 
 **Next slice:** `7.4b4e`.
+
+## 2026-07-28: Milestone 7.4b4e Owned Rust Async Lifecycle
+
+**Outcome:** Accepted.
+
+The Rust Async profile now assigns runtime construction, configuration,
+sharing, and shutdown to the adopting application's composition root.
+Libraries consume an injected runtime capability or expose an async contract;
+requests, bindings, and tasks do not become runtime owners.
+
+Spawned work is registered with one lifecycle owner that observes completion,
+failure, panic, and cancellation. Shutdown is idempotent, closes admission,
+signals cancellation, drains tracked work, and reports a typed terminal
+outcome. Time limits do not authorize abort without explicit authority and
+interruption safety.
+
+`STD-0719` through `STD-0721` have exact final dispositions. `F025`, `F026`,
+and `F045` are partially resolved.
+
+**Deviations:** None.
+
+**Discovered issues:** the first lifecycle checker assertion
+crossed a Markdown line boundary. The affected foundation checker also
+required its explicit transition marker after runtime/task/shutdown concerns
+became active. Stable line-local text and one ownership-transition sentence now
+satisfy those assertions without duplicating policy.
+
+The affected foundation checker separately hard-coded `7.4b4e` as the next
+slice after the foundation was accepted. Updating that lifecycle assertion was
+outside the original activated write set and triggered re-planning.
+
+**Re-plan decision (`Accepted`):** expand the write set only for the redundant
+hard-coded next-slice assertion in `verify-rust-async-boundary.sh`. The checker
+retains foundation acceptance and delegates current sequencing to the
+canonical Rust Async decomposition checker. No policy or broader verification
+change is authorized.
+
+**Second re-plan trigger (`Resolved`):** the full regression suite reached the
+generic concurrency checker, which hard-coded historical slice `7.4b4c` as
+the current next slice. The new lifecycle checker also hard-coded `7.4b4f`, so
+the same defect would have recurred at the next transition.
+
+**Second re-plan decision (`Accepted`):** remove only those two mutable
+current-sequence assertions. Both policy checkers retain accepted-state and
+behavioral evidence, while the canonical Rust Async decomposition checker
+remains the sole sequencing owner. No broader checker or policy refactor is
+authorized.
+
+**No-fallback/legacy result:** missing lifecycle proof cannot create a global
+or alternate runtime, detach work, discard failure/panic, treat leaf logging as
+ownership, keep admission open while draining, or force-abort without authority
+and interruption safety.
+
+**Verification:** 16 lifecycle decisions, metadata, exact dispositions,
+migrated legacy replacement, later-section preservation, decomposition,
+parent lifecycle handoff, shell syntax, whitespace, and all
+standards-effectiveness regressions pass.
+
+The rolling Milestone 7 remainder is 627 IDs across 31 sources and 30 owners,
+with 14 canonical owners still missing.
+
+**Next slice:** `7.4b4f`.

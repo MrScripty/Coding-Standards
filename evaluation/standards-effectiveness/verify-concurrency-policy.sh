@@ -145,7 +145,6 @@ done
 
 rg -F -q '| F019 | Resolved in Milestone 7.4b4b |' "$FINDINGS"
 rg -F -q '`7.4b4b` (`Accepted`)' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b4c' "$PLAN"
 
 "$SCRIPT_DIR/verify-milestone-7-trust-lifecycle-replan.sh"
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"

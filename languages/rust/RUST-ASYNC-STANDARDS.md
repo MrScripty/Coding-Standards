@@ -14,77 +14,18 @@ Contract-driven sync/async selection is canonical in the
 
 ## Runtime Boundaries
 
-Rules:
-
-- Runtime creation belongs in the composition root, not library/core crates.
-- Libraries should not create global Tokio runtimes.
-- Background tasks must be owned by a lifecycle manager.
-- Every `tokio::spawn` must have a tracked `JoinHandle`, `JoinSet`, or
-  `TaskTracker`.
-- Shutdown must propagate cancellation and await or abort spawned tasks.
-- Task panics must be inspected and logged, propagated, restarted, or degraded
-  deliberately.
+Runtime composition is canonical in the
+[Rust Async profile](../../profiles/languages/rust/async.md#runtime-composition).
 
 ## Task Lifecycle
 
-Every spawned task must have an owner responsible for shutdown.
-
-Rules:
-
-- Do not call `tokio::spawn` and discard the handle.
-- Store `JoinHandle`s, use `JoinSet`, or use `tokio_util::task::TaskTracker`.
-- Await, abort, or drain spawned tasks during shutdown.
-- Treat `JoinError::is_panic()` as a production defect unless the task is
-  explicitly isolated and restartable.
-- Log cancellation and panic paths at the lifecycle owner, not inside every leaf
-  task.
-
-Example:
-
-```rust
-struct Server {
-    tasks: Vec<tokio::task::JoinHandle<()>>,
-}
-
-impl Server {
-    fn spawn_worker(&mut self, work: impl Future<Output = ()> + Send + 'static) {
-        self.tasks.push(tokio::spawn(work));
-    }
-
-    async fn shutdown(self) {
-        for handle in self.tasks {
-            match handle.await {
-                Ok(()) => {}
-                Err(error) if error.is_panic() => {
-                    tracing::error!("task panicked during shutdown: {error}");
-                }
-                Err(error) => {
-                    tracing::warn!("task cancelled during shutdown: {error}");
-                }
-            }
-        }
-    }
-}
-```
+Spawned-work ownership is canonical in the
+[Rust Async profile](../../profiles/languages/rust/async.md#own-spawned-work).
 
 ## Graceful Shutdown
 
-Spawned services must receive a cancellation signal and stop accepting new work
-before draining in-flight work.
-
-Recommended mechanisms:
-
-- `tokio_util::sync::CancellationToken` for tree-shaped cancellation.
-- `tokio::sync::watch` when tasks need the latest shutdown state.
-- `tokio::sync::broadcast` when many independent listeners need the same signal.
-- `JoinSet` or `TaskTracker` to await task completion.
-
-Rules:
-
-- Select on both work and shutdown signals in long-running loops.
-- Stop accepting new connections or queue items before draining existing work.
-- Apply a timeout before force-aborting tasks that do not shut down.
-- Make shutdown idempotent; repeated shutdown requests should not panic.
+Owned shutdown sequencing is canonical in the
+[Rust Async profile](../../profiles/languages/rust/async.md#coordinate-shutdown).
 
 ## Blocking Work
 

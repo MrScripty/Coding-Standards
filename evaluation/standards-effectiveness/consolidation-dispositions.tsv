@@ -285,3 +285,6 @@ STD-0271	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	remove synchronou
 STD-0272	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	require cancellation propagation through owned async work
 STD-0717	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	move	establish the Rust Async specialization
 STD-0718	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	select synchronous and asynchronous boundaries from the operation contract
+STD-0719	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	assign runtime construction to composition ownership without a library-global default
+STD-0720	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	require tracked task completion failure and shutdown ownership
+STD-0721	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	coordinate admission cancellation draining and abort authority

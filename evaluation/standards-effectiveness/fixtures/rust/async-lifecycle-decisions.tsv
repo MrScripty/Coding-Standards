@@ -1,0 +1,17 @@
+case	runtime_owner	task_tracking	failure	admission	drain	abort	capability	fallback	expected
+composition-runtime-no-task	composition	none	not-required	not-required	not-required	none	available	none	allow
+composition-tracked-task	composition	tracked	observed	not-required	not-required	none	available	none	allow
+complete-owned-shutdown	composition	tracked	observed	closed	complete	none	available	none	allow
+idempotent-repeated-shutdown	composition	tracked	observed	closed	complete	none	available	none	allow
+safe-authorized-abort	composition	tracked	observed	closed	incomplete	authorized-safe	available	none	allow
+library-global-runtime	library-global	none	not-required	not-required	not-required	none	available	none	typed-invalid
+alternate-runtime-fallback	composition	none	not-required	not-required	not-required	none	unavailable	alternate-runtime	typed-invalid
+missing-runtime-owner	missing	none	not-required	not-required	not-required	none	available	none	typed-unavailable
+detached-task	composition	detached	discarded	not-required	not-required	none	available	none	typed-invalid
+discarded-task-failure	composition	tracked	discarded	not-required	not-required	none	available	none	typed-invalid
+leaf-logging-as-owner	composition	detached	leaf-logged	not-required	not-required	none	available	leaf-logging	typed-invalid
+shutdown-admission-open	composition	tracked	observed	open	incomplete	none	available	none	typed-invalid
+incomplete-drain	composition	tracked	observed	closed	incomplete	none	available	none	typed-unavailable
+unauthorized-force-abort	composition	tracked	observed	closed	incomplete	unauthorized	available	force-abort	typed-invalid
+unsafe-force-abort	composition	tracked	observed	closed	incomplete	authorized-unsafe	available	force-abort	typed-invalid
+missing-lifecycle-capability	composition	tracked	observed	closed	incomplete	none	unavailable	none	typed-unavailable

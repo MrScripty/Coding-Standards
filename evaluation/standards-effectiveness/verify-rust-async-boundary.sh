@@ -96,7 +96,6 @@ for heading in '## Runtime Boundaries' '## Task Lifecycle' '## Graceful Shutdown
 done
 
 rg -F -q '`7.4b4d` (`Accepted`)' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b4e' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-rust-async-decomposition.sh"
 
 printf 'Rust async boundary policy passed: %s decisions, 2 exact dispositions\n' \

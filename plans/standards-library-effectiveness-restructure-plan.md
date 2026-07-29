@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 lifecycle bridge active; Rust Async foundation
-accepted.
+**Current phase:** Milestone 7 lifecycle bridge active; Rust Async owned
+runtime lifecycle accepted.
 
-**Next slice:** Milestone 7.4b4e, specialize owned runtime, task, and graceful-
-shutdown lifecycle.
+**Next slice:** Milestone 7.4b4f, specialize Rust blocking-work isolation and
+mutex selection.
 
 **Acceptance status:** `partial`
 
@@ -561,8 +561,22 @@ all structural/routing fixtures pass.
        required the repository-relative profile path inside the Rust profile
        index, whose correct local link is `async.md`; routing assertions now
        distinguish root, legacy, and local-index link forms;
-   - `7.4b4e` (`Planned`): specialize runtime, tracked-task, and graceful-
+   - `7.4b4e` (`Accepted`): specialize runtime, tracked-task, and graceful-
      shutdown ownership (`STD-0719`-`STD-0721`);
+     - verification review finding (`Resolved`): the first lifecycle assertion
+       crossed a Markdown line boundary, and the affected foundation checker
+       required its transition marker after the concerns became active; stable
+       line-local text and an explicit ownership transition now satisfy both
+       contracts without duplicating policy;
+     - re-plan trigger (`Resolved`): the affected foundation checker also hard-
+       codes `7.4b4e` as the next slice; changing that lifecycle assertion is
+       now narrowly authorized, and sequencing remains owned by the canonical
+       Rust Async decomposition checker;
+     - full-regression re-plan trigger (`Resolved`): the generic concurrency
+       checker hard-codes historical slice `7.4b4c` as the current next slice,
+       while the new lifecycle checker would repeat that defect for `7.4b4f`;
+       both mutable assertions are removed while the canonical decomposition
+       checker retains sequencing ownership;
    - `7.4b4f` (`Planned`): specialize blocking-work isolation and mutex
      selection (`STD-0722`-`STD-0723`);
    - `7.4b4g` (`Planned`): specialize cancellation safety and lifecycle

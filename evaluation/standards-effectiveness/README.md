@@ -265,6 +265,13 @@ routing, bounded legacy replacement, later-section preservation, and rejection
 of caller-convenience, blanket-sync, runtime-creation, blocking, and detached-
 work fallback.
 
+`verify-rust-async-lifecycle.sh` checks composition-owned runtime capability,
+tracked task/failure ownership, admission closure, drain completion, abort
+authority, and idempotent shutdown. It proves exact disposition of `STD-0719`
+through `STD-0721` and rejects global/alternate runtimes, detached tasks,
+leaf-only logging, open admission, silent incomplete drains, and unauthorized
+or interruption-unsafe force-abort fallback.
+
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
 legacy path is only a bounded migration index.

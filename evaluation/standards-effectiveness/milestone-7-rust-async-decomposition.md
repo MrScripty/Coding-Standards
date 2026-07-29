@@ -125,14 +125,91 @@ sections remain untouched; and focused plus affected regressions pass.
 
 ## Later Slice Constraints
 
-### 7.4b4e: Owned Runtime, Tasks, And Shutdown
+## Accepted Slice 7.4b4e: Owned Runtime, Tasks, And Shutdown
 
-Refine `STD-0719` through `STD-0721`. Composition owns runtime construction;
-each spawned task has a tracked lifecycle/failure owner; shutdown closes
-admission before draining; cancellation and abort behavior follow operation
-consistency; and inability to complete the lifecycle returns typed outcomes.
-Evidence must reject global-library runtimes, discarded handles, unobserved
-panics, silent detach, and unauthorized force-abort fallback.
+**Outcome:** refine `STD-0719` through `STD-0721` in the existing Rust Async
+profile. Composition owns runtime construction, spawned work has one tracked
+lifecycle/failure owner, and shutdown follows an explicit admission,
+cancellation, drain, and completion contract.
+
+**Allowed write set:**
+
+- `profiles/languages/rust/async.md`;
+- `languages/rust/RUST-ASYNC-STANDARDS.md`;
+- `evaluation/standards-effectiveness/fixtures/rust/async-lifecycle-decisions.tsv`;
+- `evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh`;
+- `evaluation/standards-effectiveness/verify-rust-async-boundary.sh`
+  (lifecycle-handoff assertion only);
+- `evaluation/standards-effectiveness/verify-concurrency-policy.sh`
+  (historical next-slice assertion only);
+- this decomposition checker for lifecycle/disposition handoff only;
+- consolidation dispositions, evaluation README, findings, active plan, and
+  execution ledger.
+
+No generic topic, base Rust profile, other Rust specialization, binding
+profile, launcher, generated artifact, template, lockfile, Cargo file, runtime
+integration, or downstream repository belongs to this slice.
+
+**Required semantics:**
+
+- the adopting application's composition root owns runtime construction,
+  configuration, sharing, and shutdown;
+- libraries consume an injected runtime capability or expose an async contract
+  without creating a process-global or alternate runtime;
+- every spawned task is registered with one lifecycle owner that observes
+  completion, failure, panic, and cancellation;
+- shutdown stops admission before signalling cancellation and draining tracked
+  work;
+- time limits and abort are selected from the operation consistency contract,
+  and abort is permitted only when authority and interruption safety are
+  established;
+- repeated shutdown is idempotent or returns the same typed terminal outcome;
+  and
+- unavailable ownership, runtime capability, or safe shutdown completion
+  returns the operation's typed outcome.
+
+**No fallback:** missing lifecycle proof cannot create a library-global or
+alternate runtime, discard a task handle, detach work, treat leaf logging as
+ownership, silently lose panic/failure, keep admission open while draining, or
+force-abort work without authority and interruption safety.
+
+**Focused evidence:** decisions cover composition-owned and missing runtimes,
+library-global and alternate runtime rejection, tracked and detached tasks,
+observed and discarded failures/panics, admission closure, complete and
+incomplete drains, authorized safe abort, unauthorized/unsafe force abort,
+idempotent repeated shutdown, and unavailable lifecycle capability.
+
+**Acceptance gate:** all three identifiers have exact dispositions; the Rust
+Async profile specializes generic ownership without selecting one runtime,
+task container, cancellation primitive, or timeout; migrated legacy sections
+are bounded links; later blocking, mutex, cancellation-safety, and
+observability sections remain untouched; `F025`, `F026`, and `F045` accurately
+record partial resolution; and focused plus affected regressions pass.
+
+**Resolved re-plan trigger:** implementation proved the new lifecycle policy
+and parent handoff, but the affected `verify-rust-async-boundary.sh` checker
+hard-codes `7.4b4e` as the next slice after the foundation is already
+accepted. That checker was outside the original activated write set.
+
+**Approved re-plan decision:** the write set is narrowly expanded to include
+only the prior boundary checker's redundant hard-coded next-slice assertion.
+That assertion is removed; the checker continues to require `7.4b4d`
+acceptance and delegates current sequencing to the canonical Rust Async
+decomposition checker. No policy, fixture, disposition, or other verification
+scope is added.
+
+**Resolved second re-plan trigger:** the full regression suite reached
+`verify-concurrency-policy.sh`, whose historical acceptance checker hard-codes
+`7.4b4c` as the repository's current next slice. The new lifecycle checker
+also hard-codes `7.4b4f`, which would repeat the same ownership defect after
+the next accepted slice.
+
+**Second approved re-plan decision:** remove only those two mutable
+current-sequence assertions. Both policy checkers retain their accepted-slice,
+finding, fixture, disposition, metadata, routing, and regression assertions.
+The canonical Rust Async decomposition checker remains the sole owner of the
+first planned Rust Async slice. No generic policy or broader checker refactor
+is authorized.
 
 ### 7.4b4f: Blocking And Mutex Mechanisms
 
