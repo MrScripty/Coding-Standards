@@ -20,26 +20,9 @@ the
 
 ## Bounded Queues
 
-Any queue that accepts external input must have a maximum capacity:
-
-```rust
-const MAX_QUEUE: usize = 10_000;
-
-let mut msgs = queue.lock();
-if msgs.len() >= MAX_QUEUE {
-    let drop_count = msgs.len() / 2;
-    msgs.drain(..drop_count);
-    tracing::warn!(drop_count, "queue overflow; dropped oldest messages");
-}
-msgs.push(new_message);
-```
-
-Rules:
-
-- Define queue capacity near the queue owner.
-- Decide whether overflow rejects new input, drops oldest input, or applies
-  backpressure.
-- Emit telemetry when dropping or rejecting work.
+Canonical external-input queue resource, overload, telemetry, ownership, and
+evidence guidance moved to
+[External-Input Queues](../../profiles/languages/rust/security.md#external-input-queues).
 
 ## Network Listener Limits
 

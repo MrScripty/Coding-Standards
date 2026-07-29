@@ -2703,3 +2703,29 @@ standards-effectiveness regressions under fail-fast execution.
 
 **Next slice:** `7.4b7k`, one identifier, to establish the Rust Security
 external-input queue contract and focused evidence.
+
+## 2026-07-28: Milestone 7.4b7k Rust External-Input Queue Contract
+
+**Outcome:** Accepted.
+
+Rust Security now owns selected queue capacity, overload, retention/eviction,
+telemetry, current-input ownership, typed outcomes, and Rust operation evidence
+for `STD-0824`. The legacy fixed-capacity/drop-oldest example is one bounded
+canonical link. `F052` is resolved.
+
+**Resolved re-plan trigger:** acceptance changes the live group count and
+consumes the activated next-slice row. The approved serial write set includes
+both fixtures so accepted IDs remain explicit and no owner-specific count
+subtraction or stale handoff survives.
+
+**Verification:** 18 focused decisions; one exact disposition; metadata and
+legacy-section closure; Rust arithmetic/resource and independent-trust checks;
+plan lifecycle; shell syntax; whitespace; exact scope; and every standards-
+effectiveness checker under fail-fast execution.
+
+The rolling remainder is 591 IDs across 28 sources and 27 owners, with 13
+owners still missing. The independent trust remainder contains 58 IDs across
+six frozen proposed-owner groups.
+
+**Next slice:** `7.4b7l`, planning only, to re-measure the remainder and
+activate exactly one dependency-ready owner-bounded implementation slice.

@@ -5,11 +5,11 @@
 - ID: `profile.language.rust.security`
 - Role: `profile`
 - Level: `PROFILE`
-- Applies when: Rust consumes an untrusted filesystem path, converts untrusted dimensions, counts, offsets, strides, or lengths before bounded use, or owns a listener boundary whose exposure, admission, connection work, or shutdown affects resource or security guarantees.
-- Does not apply when: Filesystem authority and concurrent-mutation safety are already proven for the complete operation, values are represented by a validated type whose invariant proves the complete arithmetic and resource contract, and no Rust listener boundary is affected.
+- Applies when: Rust consumes an untrusted filesystem path, converts untrusted dimensions, counts, offsets, strides, or lengths before bounded use, owns an external-input queue, or owns a listener boundary whose exposure, admission, connection work, or shutdown affects resource or security guarantees.
+- Does not apply when: Filesystem authority and concurrent-mutation safety are already proven for the complete operation, values are represented by a validated type whose invariant proves the complete arithmetic and resource contract, no external-input queue is affected, and no Rust listener boundary is affected.
 - Requires: `core`, `workflow.verification`, `topic.security`, `profile.language.rust`
 - Specializes: `topic.security`, `profile.language.rust`
-- Verification: Rust filesystem-authority, checked-boundary-arithmetic, and listener-lifecycle decisions plus affected filesystem, parser, allocation, indexing, admission, connection, and shutdown tests.
+- Verification: Rust filesystem-authority, checked-boundary-arithmetic, external-input-queue, and listener-lifecycle decisions plus affected filesystem, parser, allocation, indexing, queue, admission, connection, and shutdown tests.
 - Canonical owner: `profiles/languages/rust/security.md`
 
 ## Filesystem Authority Through Use
@@ -83,6 +83,25 @@ Return typed `invalid` when the computed value exceeds the declared operation
 limit. A zero value is accepted only when the operation contract explicitly
 permits it; otherwise return typed `invalid`.
 
+## External-Input Queues
+
+Before accepting external input into a queue, select the queue owner's
+operation and resource contract. It defines capacity, what the queue owns,
+supported overload behavior, retention or eviction semantics, telemetry, and
+the typed outcome for each result. Capacity is not a universal numeric constant
+and no overload behavior is a default.
+
+When the selected contract supports rejection, retention, or eviction, return
+its declared typed outcome and emit the selected owner telemetry. A queue must
+not silently discard work or retain work beyond its declared ownership. Each
+accepted item has current input and its declared lifecycle only; queue reuse
+does not carry prior input, cancellation, result, or failure state forward.
+
+Return typed `invalid` for contradictory queue or resource facts,
+`unsupported` for a well-formed queue behavior outside the selected contract,
+and `unavailable` when required capacity, overload, telemetry, or ownership
+capability cannot be established.
+
 ## Interop Relationship
 
 This profile owns checked Rust sizing for untrusted inputs. When the computed
@@ -112,6 +131,11 @@ Failed conversion, arithmetic, or limit proof cannot fall back to:
 - clamping, saturation, wrapping, or truncation;
 - a smaller default allocation or operation; or
 - continuing with a partially checked expression.
+
+External-input queues cannot fall back to a fixed capacity, default reject-new
+or drop-oldest behavior, unbounded accumulation, silent discard, leaf-only
+telemetry, another queue, runtime, or thread mechanism, prior-input carry-
+forward, or weaker evidence. Return the selected typed outcome.
 
 Return the typed diagnostic before allocation, indexing, slice construction, or
 resource use.
@@ -144,3 +168,9 @@ Affected tests cover:
 - valid bounded values; and
 - rejection of cast, zero, clamp, saturation, wrap, truncation, and
   smaller-default recovery.
+- contract-selected capacity, overload, retention, rejection, eviction, and
+  telemetry behavior for external-input queues;
+- invalid, unsupported, unavailable, and declared overload queue outcomes; and
+- rejection of fixed capacity, default overflow, unbounded, silent-discard,
+  leaf-telemetry, alternate-mechanism, prior-input, and weaker-evidence
+  fallback.

@@ -1,2 +1,1 @@
 slice	order	id	source	target	disposition	rationale
-7.4b7k	1	STD-0824	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	derive external-input queue resource limits overload behavior and telemetry from the selected owner contract without fixed capacity or overflow fallback

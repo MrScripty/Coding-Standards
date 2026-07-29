@@ -31,7 +31,7 @@ while IFS=$'\t' read -r id source target disposition _rationale; do
   disposed_disposition["$id"]="$disposition"
 done < "$DISPOSITIONS"
 
-expected_ids=(STD-0824)
+expected_ids=()
 next_dispositions=0
 for id in "${expected_ids[@]}"; do
   [[ -n "${disposed[$id]:-}" ]] && ((next_dispositions += 1))
@@ -56,7 +56,7 @@ profiles/languages/rust/language-bindings.md)
       ;;
   esac
 done < "$OWNER_MAP"
-[[ "$global_remaining" -eq 592 ]]
+[[ "$global_remaining" -eq 591 ]]
 [[ "${#remaining_sources[@]}" -eq 28 ]]
 [[ "${#remaining_owners[@]}" -eq 27 ]]
 
@@ -97,7 +97,7 @@ expected_groups=(
   $'2\ttopics/cross-platform.md\t6\texists\tnone\tdecomposition-and-missing-owner\tworkflows/tooling.md\tnone'
   $'3\tprofiles/boundaries/interop.md\t10\texists\ttopics/contracts.md\tone-accepted-nine-decomposition-required\tnone\tSTD-0473'
   $'4\tprofiles/languages/rust/interop.md\t1\texists\tprofiles/languages/rust/language-bindings.md,topics/contracts.md\tone-accepted-no-current-remainder\tnone\tSTD-0757'
-  $'5\tprofiles/languages/rust/security.md\t3\texists\ttopics/security.md\tone-candidate-ready-two-blocked\tnone\tnone'
+  $'5\tprofiles/languages/rust/security.md\t3\texists\ttopics/security.md\tone-accepted-two-blocked\tnone\tSTD-0824'
   $'6\tprofiles/languages/rust/language-bindings.md\t34\texists\tprofiles/boundaries/language-bindings.md,profiles/languages/rust/async.md\tdecomposition-and-missing-owner\tworkflows/tooling.md\tnone'
 )
 mapfile -t actual_groups < <(tail -n +2 "$GROUP_FILE")
@@ -136,15 +136,13 @@ while IFS=$'\t' read -r order owner count owner_state prerequisite status \
   ((owner_groups += 1))
 done < "$GROUP_FILE"
 [[ "$baseline_trust_total" -eq 61 ]]
-[[ "$current_trust_total" -eq 59 ]]
+[[ "$current_trust_total" -eq 58 ]]
 [[ "$owner_groups" -eq 6 ]]
 
 mapfile -t actual_ids < <(tail -n +2 "$NEXT_SLICE" | cut -f3)
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
 
-expected_rows=(
-  $'7.4b7k\t1\tSTD-0824\tlanguages/rust/RUST-SECURITY-STANDARDS.md\tprofiles/languages/rust/security.md\trefine\tderive external-input queue resource limits overload behavior and telemetry from the selected owner contract without fixed capacity or overflow fallback'
-)
+expected_rows=()
 mapfile -t actual_rows < <(tail -n +2 "$NEXT_SLICE")
 [[ "${actual_rows[*]}" == "${expected_rows[*]}" ]]
 
@@ -161,11 +159,11 @@ while IFS=$'\t' read -r slice order id source target disposition rationale extra
   [[ -z "${disposed[$id]:-}" ]]
   ((row_count += 1))
 done < "$NEXT_SLICE"
-[[ "$row_count" -eq 1 ]]
+[[ "$row_count" -eq 0 ]]
 
 required_report=(
-  '592 residual identifiers across 28 legacy'
-  '61 frozen baseline identifiers and 59 current identifiers'
+  '591 residual identifiers across 28 legacy'
+  '61 frozen baseline identifiers and 58 current identifiers'
   '`F048`'
   '`F049`'
   '## Accepted Slice 7.4b7f: Planning-Only Remainder Re-plan'
@@ -184,6 +182,8 @@ required_report=(
   '## Planned Slice 7.4b7j: Independent Trust Remainder Re-plan'
   '## Accepted Slice 7.4b7j: Independent Trust Remainder Re-plan'
   '## Planned Slice 7.4b7k: Rust External-Input Queue Contract'
+  '## Accepted Slice 7.4b7k: Rust External-Input Queue Contract'
+  '## Planned Slice 7.4b7l: Independent Trust Remainder Re-plan'
   'rolling remainder is 593 identifiers'
   'independent trust subset is 60 identifiers'
   'Their 61 frozen identifiers include accepted `STD-0473`'
@@ -196,6 +196,8 @@ required_report=(
   '27 focused wire-representation decisions'
   '`STD-0824` is a bounded external-input queue rule'
   '`F052`'
+  'rolling remainder is 591 identifiers'
+  'independent trust remainder'
   '**No fallback:**'
   '**Pre-slice review:** accepted.'
 )
@@ -206,12 +208,12 @@ rg -U -q 'independent trust\nremainder is 59 identifiers' "$REPORT"
 
 rg -F -q '(milestone-7-independent-trust-replan.md)' "$PARENT"
 rg -F -q '59 remaining identifiers across six proposed-owner groups' "$PARENT"
-rg -F -q '| F048 | Partially corrected through Milestone 7.4b7i |' "$FINDINGS"
-rg -F -q 'Correct the remaining 59 cross-role destinations' "$FINDINGS"
+rg -F -q '| F048 | Partially corrected through Milestone 7.4b7k |' "$FINDINGS"
+rg -F -q 'Correct the remaining 58 cross-role destinations' "$FINDINGS"
 rg -F -q '| F049 | Resolved in Milestone 7.4b7g |' "$FINDINGS"
 rg -F -q '| F050 | Resolved in Milestone 7.4b7f2 |' "$FINDINGS"
 rg -F -q '| F051 | Resolved in Milestone 7.4b7i |' "$FINDINGS"
-rg -F -q '| F052 | Planned for Milestone 7.4b7k |' "$FINDINGS"
+rg -F -q '| F052 | Resolved in Milestone 7.4b7k |' "$FINDINGS"
 rg -F -q '## Accepted Slice 7.4b7g: Event Registration Lifecycle Contract' \
   "$REPORT"
 rg -F -q '`7.4b7f` (`Accepted`)' "$PLAN"
@@ -220,8 +222,9 @@ rg -F -q '`7.4b7g` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7h` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7i` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7j` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7k` (`Planned`)' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b7k' "$PLAN"
+rg -F -q '`7.4b7k` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b7l` (`Planned`)' "$PLAN"
+rg -F -q '**Next slice:** Milestone 7.4b7l' "$PLAN"
 
 "$SCRIPT_DIR/verify-contract-ownership.sh"
 "$SCRIPT_DIR/verify-concurrency-policy.sh"
@@ -230,6 +233,6 @@ rg -F -q '**Next slice:** Milestone 7.4b7k' "$PLAN"
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
-printf 'Milestone 7 independent trust re-plan passed: %s baseline IDs, %s current across %s owners; next-slice dispositions %s/1\n' \
+printf 'Milestone 7 independent trust re-plan passed: %s baseline IDs, %s current across %s owners; next-slice dispositions %s/0\n' \
   "$baseline_trust_total" "$current_trust_total" "$owner_groups" \
   "$next_dispositions"

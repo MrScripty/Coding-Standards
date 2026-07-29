@@ -342,7 +342,15 @@ Contracts, Security, implementation structure, and field-rule ownership.
 Accepted `7.4b7i` establishes the bounded Rust wire-representation contract
 and disposition. Accepted `7.4b7j` re-measures the remainder, records accepted
 baseline IDs structurally, and selects only the Rust external-input queue
-contract for `STD-0824`; `7.4b7k` is the next normative slice.
+contract for `STD-0824`. Accepted `7.4b7k` establishes that contract with 18
+focused decisions; `7.4b7l` next replans the 58-ID trust remainder.
+
+`fixtures/rust/external-input-queue-decisions.tsv` and
+`verify-rust-external-input-queue.sh` check selected capacity, overload,
+retention/eviction, telemetry, ownership, typed outcomes, exact disposition,
+bounded legacy replacement, and Rust operation evidence. They reject fixed or
+unbounded capacity, default overflow, silent discard, alternate runtime,
+prior-input carry-forward, and weaker evidence.
 
 `verify-interop-event-registration.sh` checks provider-governed registration
 phases, delivery and local-work independence, current callback input,

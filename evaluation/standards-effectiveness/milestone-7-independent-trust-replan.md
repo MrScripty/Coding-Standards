@@ -13,11 +13,11 @@ downstream policy.
 
 ## Current Audit
 
-The rolling disposition gate reports 592 residual identifiers across 28 legacy
+The rolling disposition gate reports 591 residual identifiers across 28 legacy
 sources and 27 proposed canonical owners, with 13 owners still missing.
 
 [milestone-7-independent-trust-groups.tsv](milestone-7-independent-trust-groups.tsv)
-records 61 frozen baseline identifiers and 59 current identifiers:
+records 61 frozen baseline identifiers and 58 current identifiers:
 
 | Order | Proposed owner | Frozen | Current | State | Dependency or blocker |
 | ---: | --- | ---: | ---: | --- | --- |
@@ -25,10 +25,10 @@ records 61 frozen baseline identifiers and 59 current identifiers:
 | 2 | `topics/cross-platform.md` | 6 | 6 | Decompose | Missing Tooling owner for affected rows |
 | 3 | `profiles/boundaries/interop.md` | 10 | 9 | Decompose | Contracts; `STD-0473` accepted |
 | 4 | `profiles/languages/rust/interop.md` | 1 | 0 | Accepted | `STD-0757` accepted |
-| 5 | `profiles/languages/rust/security.md` | 3 | 3 | One candidate ready | Security; `STD-0826` remains blocked on missing Rust API |
+| 5 | `profiles/languages/rust/security.md` | 3 | 2 | One accepted | `STD-0824` accepted; `STD-0826` remains blocked on missing Rust API |
 | 6 | `profiles/languages/rust/language-bindings.md` | 34 | 34 | Decompose | Language Bindings, Rust Async, and missing Tooling owner for affected rows |
 
-The baseline includes accepted `STD-0473` and `STD-0757`. Owner-map
+The baseline includes accepted `STD-0473`, `STD-0757`, and `STD-0824`. Owner-map
 destinations remain audit proposals until an accepted pre-slice review proves
 each section's role and correctness.
 
@@ -68,9 +68,8 @@ an owner-correction or decomposition re-plan before activation:
   compatibility slices, including affected rows blocked on the missing Tooling
   owner.
 
-All 59 identifiers remain under `F048` in this planning slice. Only
-`STD-0824` is activated for the next implementation; no other group or generic
-section is pre-approved.
+The 58 current identifiers remain under `F048`. No implementation candidate is
+activated until the next planning-only replan completes.
 
 ## Accepted Slice 7.4b6: Planning-Only Re-plan
 
@@ -870,8 +869,9 @@ semantics, telemetry, typed outcomes, and Rust operation evidence for
 **Allowed write set:** `profiles/languages/rust/security.md`; only the legacy
 Bounded Queues section in `languages/rust/RUST-SECURITY-STANDARDS.md`; one
 focused Rust queue decision fixture and checker; the exact disposition; this
-report and checker; evaluation README and findings; active plan; and execution
-ledger. No generic Security, Concurrency, Rust Async, Rust API, Tooling,
+report, group and next-slice fixtures, and checker; evaluation README and
+findings; active plan; and execution ledger. No generic Security, Concurrency,
+Rust Async, Rust API, Tooling,
 router, metadata, template, generated artifact, configuration, dependency,
 lockfile, workflow fixture, runtime, source, build output, or downstream file
 belongs to this implementation slice.
@@ -887,3 +887,34 @@ unsupported, unavailable, overload, and rejected-fallback cases.
 default, unbounded accumulation, silent discard, substitute queue/runtime,
 leaf-only telemetry, prior input carry-forward, or producer-only/weaker
 evidence. Return the typed selected outcome.
+
+**Resolved re-plan trigger:** accepting `STD-0824` changes the current group
+count and consumes the activated next-slice row. The approved serial write set
+therefore includes the group and next-slice fixtures. This preserves explicit
+accepted-ID evidence and prevents owner-specific checker subtraction or a
+stale implementation handoff.
+
+## Accepted Slice 7.4b7k: Rust External-Input Queue Contract
+
+**Outcome:** accepted. Rust Security now owns selected queue capacity,
+overload, retention or eviction semantics, telemetry, current-input ownership,
+typed outcomes, and Rust operation evidence for `STD-0824`. The legacy fixed-
+capacity and drop-oldest example is one bounded canonical link. Eighteen
+focused decisions reject fixed/default/unbounded capacity, silent discard,
+alternate runtime, prior-input carry-forward, and weaker evidence.
+
+The rolling remainder is 591 identifiers across 28 legacy sources and 27
+proposed owners, with 13 owners still missing. The independent trust remainder
+is 58 identifiers across six frozen proposed-owner groups. The group fixture
+records `STD-0824` as accepted, and no implementation candidate is activated
+before the next planning-only slice.
+
+## Planned Slice 7.4b7l: Independent Trust Remainder Re-plan
+
+**Outcome:** re-measure the 591-ID global and 58-ID independent-trust
+remainders, correct exactly one next owner boundary, and activate one
+dependency-ready implementation slice without normative movement.
+
+**No fallback:** do not infer readiness from frozen row order, retain the
+consumed queue proposal, invent a missing owner, combine mixed roles, or create
+a disposition before exact measurement and pre-slice review pass.

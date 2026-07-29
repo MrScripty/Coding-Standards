@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Independent trust remainder re-plan accepted; Rust
-external-input queue contract is next.
+**Current phase:** Rust external-input queue contract accepted; the next
+independent-trust slice requires a planning-only remainder re-plan.
 
-**Next slice:** Milestone 7.4b7k Rust external-input queue contract.
+**Next slice:** Milestone 7.4b7l independent trust remainder re-plan.
 
 **Acceptance status:** `partial`
 
@@ -869,9 +869,13 @@ all structural/routing fixtures pass.
        missing Rust API owner; and
      - `F052` records the legacy queue's fixed-capacity and drop-oldest
        assumptions without selected operation facts or typed outcomes.
-   - `7.4b7k` (`Planned`): establish the Rust Security contract for selected
+   - `7.4b7k` (`Accepted`): establish the Rust Security contract for selected
      external-input queue resource limits, overload behavior, telemetry, typed
-     outcomes, and operation evidence for `STD-0824`.
+     outcomes, and operation evidence for `STD-0824`; fixed capacity,
+     drop-oldest, silent discard, alternate mechanism, prior-input, and weaker
+     evidence fallbacks are rejected, and `F052` is resolved.
+   - `7.4b7l` (`Planned`): re-measure the independent trust remainder and
+     correct exactly one next owner boundary before another normative move.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
