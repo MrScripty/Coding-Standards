@@ -122,6 +122,7 @@ required_report=(
   "keep each call's input, cancellation, result, and failure state scoped"
   '## Accepted Slice 7.4b5b: Binding Core And Adapter Boundary'
   '## Accepted Slice 7.4b5c: Binding Runtime And Handle Adaptation'
+  '## Accepted Slice 7.4b5d: Explicit Executor Delegation'
   '**No fallback:**'
   'Independent trust-boundary groups remain'
 )

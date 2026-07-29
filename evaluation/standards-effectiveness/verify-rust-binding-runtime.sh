@@ -138,8 +138,7 @@ rg -F -q 'language-bindings.md#handle-and-runtime-adaptation' \
   <<< "$legacy_async"
 rg -F -q 'profiles/languages/rust/async.md' <<< "$legacy_async"
 
-for heading in '### Composite Executors' '## Testing Strategy' \
-  '### NIF Pure-Logic Separation'; do
+for heading in '## Testing Strategy' '### NIF Pure-Logic Separation'; do
   rg -F -q "$heading" "$LEGACY"
 done
 

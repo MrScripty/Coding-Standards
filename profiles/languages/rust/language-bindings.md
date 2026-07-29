@@ -9,7 +9,7 @@
 - Does not apply when: Values remain ordinary Rust values and no host-language representation or operation changes.
 - Requires: `core`, `workflow.verification`, `profile.language.rust`, `profile.boundary.language-bindings`
 - Specializes: `profile.language.rust`, `profile.boundary.language-bindings`
-- Verification: Rust binding architecture, runtime adaptation, and conversion decisions plus framework-free core checks and affected native/host boundary tests.
+- Verification: Rust binding architecture, runtime adaptation, executor-delegation, and conversion decisions plus framework-free core checks and affected native/host boundary tests.
 - Canonical owner: `profiles/languages/rust/language-bindings.md`
 
 ## Representation Categories
@@ -83,6 +83,22 @@ Return typed `unsupported` or `unavailable` when the selected runtime,
 host-async, task-registration, or result-delivery capability cannot be
 provided.
 
+## Explicit Executor Delegation
+
+A composite executor defines the exact typed `unsupported` outcome that makes
+an operation eligible for one selected next executor. Pass only the current
+call's already validated input. Successful local completion is terminal.
+
+Validation, execution, cancellation, resource, lifecycle, and unavailable
+capability outcomes remain their original terminal outcomes. Do not
+reinterpret them as unsupported. If the selected next executor or its required
+capability cannot be obtained, return typed `unavailable`.
+
+Delegated work remains scoped to the current call or is registered with the
+selected lifecycle owner before it can outlive that call. Runtime persistence
+does not authorize another delegation attempt or retention of the call's
+input.
+
 ## Fallible Conversion
 
 Use checked or fallible conversion whenever the target can reject:
@@ -126,6 +142,16 @@ Verify runtime and handle adaptation through:
   and
 - typed failure when any required adaptation capability is unavailable.
 
+Verify composite executor delegation through:
+
+- successful local completion without invoking another executor;
+- delegation only for the contract's exact unsupported variant;
+- the current call's validated input reaching the selected next executor once;
+- original typed outcomes for invalid input, execution failure, cancellation,
+  resource failure, lifecycle failure, and unavailable capability;
+- scoped or lifecycle-owned completion of delegated work; and
+- typed unavailable when the selected delegate cannot be obtained.
+
 Test every conversion through:
 
 - successful native conversion;
@@ -149,6 +175,11 @@ Missing runtime or host-async capability cannot embed, create, replace, or
 synchronously drive a runtime; block a host scheduler thread; detach work;
 discard terminal outcomes; retain prior request state; or select another
 binding mechanism.
+
+Composite execution cannot catch every error, reinterpret a failure as
+unsupported, retry with rebuilt, default, or prior input, continue after
+cancellation, select an alternate executor, runtime, or binding mechanism,
+detach delegated work, or discard the original typed outcome.
 
 Failed Rust binding conversion cannot fall back to:
 

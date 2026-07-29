@@ -142,7 +142,7 @@ rg -F -q 'language-bindings.md#core-and-adapter-boundary' \
   <<< "$legacy_features"
 
 for heading in '### Workspace Layout' '## Memory Ownership Model' \
-  '## Async Bridging' '### Composite Executors'; do
+  '## Async Bridging'; do
   rg -F -q "$heading" "$LEGACY"
 done
 

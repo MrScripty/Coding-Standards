@@ -188,6 +188,16 @@ scoped or lifecycle-tracked work, typed unavailable outcomes, exact
 dispositions, bounded legacy replacement, no alternate-runtime or synchronous-
 drive fallback, and F025 closure.
 
+## Rust Binding Executor-Delegation Decision Fixtures
+
+`fixtures/rust/binding-executor-delegation-decisions.tsv` and
+`verify-rust-binding-executor-delegation.sh` distinguish successful local
+completion, exact typed unsupported delegation, preserved terminal failures,
+and unavailable delegate capability. They check current-call input ownership,
+scoped or lifecycle-tracked work, exact disposition, bounded legacy
+replacement, and rejection of catch-all, retry, carry-forward, default-input,
+alternate-executor, and detached-work fallback.
+
 ## Filesystem Containment Fixtures
 
 `fixtures/security/path-containment-decisions.tsv` and

@@ -240,13 +240,75 @@ lifecycle-tracked work, typed capability failure, and no alternate-runtime,
 synchronous-drive, blocking, detached-work, or alternate-binding fallback.
 All three identifiers have exact dispositions and `F025` is resolved.
 
-### Slice 7.4b5d: Explicit Executor Delegation
+## Accepted Slice 7.4b5d: Explicit Executor Delegation
 
-Refine `STD-0781` into the Rust binding specialization. Delegation occurs only
-for the exact typed unsupported outcome assigned by the composite contract.
-Validation, execution, cancellation, resource, and lifecycle failures retain
-their typed outcomes; inputs belong to the current call and are not carried
-forward through a retained executor or runtime.
+**Outcome:** refine `STD-0781` into the Rust binding specialization so a
+composite executor delegates only the exact typed `unsupported` outcome
+assigned by its contract. Delegation is a current-call routing decision, not a
+general recovery strategy.
+
+**Allowed write set:**
+
+- `profiles/languages/rust/language-bindings.md`;
+- `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`;
+- `evaluation/standards-effectiveness/fixtures/rust/binding-executor-delegation-decisions.tsv`;
+- `evaluation/standards-effectiveness/verify-rust-binding-executor-delegation.sh`;
+- accepted Rust binding architecture/runtime checkers only to remove their
+  temporary `Composite Executors` preservation assertions;
+- this decomposition report and checker for accepted disposition and handoff
+  state;
+- consolidation dispositions, evaluation README, active plan, and execution
+  ledger.
+
+No generic Contracts or Concurrency topic, Rust Async profile, runtime or
+executor implementation, binding framework configuration, workspace/Cargo
+file, generated artifact, template, lockfile, host-language package, scheduler
+implementation, finding status, or downstream repository belongs to this
+slice.
+
+**Required semantics:**
+
+- define the exact typed `unsupported` variant that makes an operation eligible
+  for the next executor;
+- delegate only that variant and preserve validation, execution, cancellation,
+  resource, lifecycle, and unavailable-capability outcomes as terminal;
+- pass only the current call's already validated input to the selected next
+  executor;
+- keep delegated work within the scoped or lifecycle-tracked execution
+  contract established by the accepted runtime/handle slice;
+- return the selected typed outcome when the next executor or its required
+  capability is unavailable; and
+- keep successful local completion terminal without invoking another executor.
+
+**No fallback:** a composite cannot catch every error, reinterpret a failure as
+unsupported, retry with rebuilt/default/prior input, continue after
+cancellation, select an alternate executor/runtime/binding mechanism, detach
+delegated work, or discard the original typed outcome.
+
+**Focused evidence:** decisions cover local completion, exact unsupported
+delegation, unsupported without a delegate, unavailable delegate capability,
+preserved invalid/execution/cancellation/resource/lifecycle/unavailable
+outcomes, delegation attempts for each forbidden outcome, retained prior
+input, invalid current input, catch-all recovery, retry, carry-forward, and
+alternate-executor fallback.
+
+**Acceptance gate:** `STD-0781` has one exact disposition; profile metadata and
+routing remain valid; the legacy composite-executor section is a bounded link
+without catch-all code or framework-specific mechanisms; prior runtime and
+architecture gates no longer own temporary section-preservation state; later
+path and listener sections remain untouched; `F026` remains accurately
+partial; and focused plus affected regressions pass.
+
+**Pre-slice review:** accepted. The section refines one canonical Rust binding
+owner and consumes accepted Contracts, Concurrency, and runtime/handle
+semantics without changing those owners. The review found no split
+disposition, new owner, objective change, or fallback requirement.
+
+**Accepted result:** 25 focused decisions prove successful local completion,
+one exact unsupported delegation with current validated input, preservation of
+all other typed outcomes, typed unavailable delegate capability, and no
+catch-all, retry, carry-forward, default-input, alternate-executor, or detached
+fallback. `STD-0781` has one exact disposition.
 
 ### Slice 7.4b5e: Rust Filesystem Authority Through Use
 

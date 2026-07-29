@@ -7,9 +7,9 @@
 **Plan status:** `Active`
 
 **Current phase:** Milestone 7 dependent Rust lifecycle consolidation active;
-binding runtime and handle adaptation accepted.
+explicit typed executor delegation accepted.
 
-**Next slice:** Milestone 7.4b5d explicit typed executor delegation
+**Next slice:** Milestone 7.4b5e Rust filesystem authority through use
 pre-slice review.
 
 **Acceptance status:** `partial`
@@ -643,8 +643,18 @@ all structural/routing fixtures pass.
      - `F025` is resolved by exact dispositions for `STD-0798` through
        `STD-0800`, bounded legacy replacement, and focused plus affected
        regression evidence;
-   - `7.4b5d` (`Planned`): canonicalize explicit typed executor delegation
+   - `7.4b5d` (`Accepted`): canonicalize explicit typed executor delegation
      without catch-all fallback (`STD-0781`);
+     - successful local completion is terminal, and only the composite
+       contract's exact typed unsupported variant is eligible for one selected
+       next executor;
+     - delegation passes only the current call's validated input and remains
+       scoped or registered with the selected lifecycle owner;
+     - validation, execution, cancellation, resource, lifecycle, and
+       unavailable-capability outcomes retain their original typed result;
+     - 25 focused decisions reject catch-all recovery, delegation after other
+       failures, retained/default input, retry, alternate-executor, and
+       detached-work fallback;
    - `7.4b5e` (`Planned`): preserve validated filesystem authority through the
      Rust operation (`STD-0822`); and
    - `7.4b5f` (`Planned`): bind listener admission, spawned work, outcomes, and

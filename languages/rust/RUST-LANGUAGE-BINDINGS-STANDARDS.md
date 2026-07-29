@@ -381,37 +381,12 @@ pub trait TaskExecutor: Send + Sync {
 
 ### Composite Executors
 
-When both core Rust and the host language handle different subsets of work,
-chain executors so core handlers run first and fall through to the host for
-unknown types:
+Canonical composite-executor routing and typed outcome preservation moved to
+the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md#explicit-executor-delegation).
 
-```rust
-struct CoreFirstExecutor {
-    core: Arc<CoreTaskExecutor>,
-    host: Arc<dyn TaskExecutor>,
-}
-
-#[async_trait::async_trait]
-impl TaskExecutor for CoreFirstExecutor {
-    async fn execute_task(
-        &self,
-        node_type: &str,
-        inputs: serde_json::Value,
-    ) -> Result<serde_json::Value, EngineError> {
-        match self.core.execute_task(node_type, inputs.clone()).await {
-            Ok(result) => Ok(result),
-            Err(EngineError::UnsupportedNodeType { .. }) => {
-                self.host.execute_task(node_type, inputs).await
-            }
-            Err(error) => Err(error),
-        }
-    }
-}
-```
-
-Delegate only the explicit unsupported outcome that the composite contract
-assigns to the next executor. Validation, execution, cancellation, and resource
-errors must remain their original typed failures.
+Delegation is valid only for the exact typed unsupported outcome assigned by
+the contract. It is not a catch-all recovery path.
 
 ---
 

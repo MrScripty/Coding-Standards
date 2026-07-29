@@ -2029,3 +2029,46 @@ The rolling Milestone 7 remainder is 616 IDs across 30 sources and 29 owners,
 with 14 canonical owners still missing.
 
 **Next slice:** `7.4b5d` explicit typed executor delegation pre-slice review.
+
+## 2026-07-28: Milestone 7.4b5d Explicit Executor Delegation
+
+**Outcome:** Accepted.
+
+The Rust Language Binding profile now permits composite executor delegation
+only for the exact typed unsupported outcome assigned by the contract.
+Successful local completion is terminal. Validation, execution, cancellation,
+resource, lifecycle, and unavailable-capability outcomes retain their original
+typed result instead of becoming delegation signals.
+
+Delegation passes only the current call's already validated input and remains
+scoped to that call or registered with the selected lifecycle owner. A
+persistent runtime does not authorize retry, prior-input reuse, or another
+executor selection.
+
+`STD-0781` has one exact final disposition. Its legacy composite-executor
+section is a bounded canonical link without catch-all code or framework-
+specific mechanism ownership. `F026` remains partial for its planned
+filesystem-authority and listener-lifecycle work.
+
+**Deviations:** None.
+
+**Discovered issues:** None.
+
+**No-fallback/legacy result:** composite execution cannot catch every error,
+reinterpret failure as unsupported, retry with rebuilt, default, or prior
+input, continue after cancellation, select an alternate executor, runtime, or
+binding mechanism, detach delegated work, or discard the original typed
+outcome.
+
+**Verification:** 25 focused delegation decisions, one exact disposition,
+profile metadata and routing, bounded legacy replacement, preserved later
+sections, affected binding architecture/runtime and generic
+Contracts/Concurrency checks, disposition-derived parent progress, plan
+lifecycle, shell syntax, whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+The rolling Milestone 7 remainder is 615 IDs across 30 sources and 29 owners,
+with 14 canonical owners still missing.
+
+**Next slice:** `7.4b5e` Rust filesystem authority through use pre-slice
+review.
