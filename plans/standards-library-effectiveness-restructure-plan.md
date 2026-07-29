@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Generic binding boundary-mechanism selection is canonical;
-binding contract evolution is next.
+**Current phase:** Binding contract evolution is canonical; Rust adaptation of
+contract-selected discovery is next.
 
-**Next slice:** Milestone 7.4b8q binding contract evolution for active child `STD-0807`, `STD-0808`.
+**Next slice:** Milestone 7.4b8r Rust contract-discovery adaptation for active child `STD-0809`.
 
 **Acceptance status:** `partial`
 
@@ -1112,8 +1112,19 @@ all structural/routing fixtures pass.
      - remove fixed UniFFI, Rustler, PyO3, Tauri, RPC, target-count, and
        host-label defaults with typed invalid, unsupported, or unavailable
        outcomes.
-   - `7.4b8q` (`Planned`): replace `STD-0807` and `STD-0808` with
-     Contracts-owned binding evolution.
+   - `7.4b8q` (`Accepted`): replace `STD-0807` and `STD-0808` with
+     Contracts-owned binding evolution;
+     - classify native API, generator input, generated source, host and native
+       packages, ABI, wire, and persisted representations independently;
+     - regenerate only outputs affected by canonical input or generator
+       changes and verify every supported producer/consumer path;
+     - select shared or independent artifact versions from publication,
+       deployment, package-resolution, and consumer contracts; and
+     - reject blanket additive compatibility, unconditional regeneration,
+       lockstep or forced-independent versions, compatibility shims, and
+       default success with typed outcomes.
+   - `7.4b8r` (`Planned`): replace `STD-0809` with Rust adaptation of a
+     Contracts-selected discovery or negotiation mechanism.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

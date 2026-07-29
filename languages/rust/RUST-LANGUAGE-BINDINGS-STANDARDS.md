@@ -495,21 +495,12 @@ transport is selected from target count or host-language label.
 
 ## Versioning and Compatibility
 
-### Rules
-
-1. **Classify each boundary independently:** generated source, host package,
-   native package, ABI, wire data, and persisted data may have different
-   consumers and compatibility windows.
-2. **Do not assume additive means compatible:** new enum variants, required
-   behavior, defaults, fields, methods, or generated shapes can break exhaustive
-   or older host consumers.
-3. **Use coordinated replacement only for atomically deployed consumers.**
-   Public or independently deployed bindings follow their published versioning
-   and negotiation contract.
-4. **Re-generate bindings after every API change** and test all supported target
-   languages before release.
-5. **Version artifacts from one release input without assuming one version
-   number gives them one compatibility promise.**
+Binding artifact classification, regeneration, compatibility, and version
+relationships moved to
+[Cross-Language Contract Selection](../../topics/contracts.md#cross-language-contract-selection).
+Rust binding changes consume those decisions and do not restore blanket
+additive compatibility, unconditional regeneration, or lockstep
+native-library and host-package versions.
 
 ### Version Export
 

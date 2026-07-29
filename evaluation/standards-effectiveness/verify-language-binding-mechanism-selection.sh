@@ -107,7 +107,6 @@ for removed in \
 done
 
 rg -F -q '`7.4b8p` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8q` (`Planned`)' "$PLAN"
 "$SCRIPT_DIR/verify-language-binding-boundary.sh"
 "$SCRIPT_DIR/verify-milestone-7-row-5-decomposition.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"

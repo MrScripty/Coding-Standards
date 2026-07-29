@@ -1,0 +1,10 @@
+column	allowed
+case	*
+class	internal-coordinated,persisted,public-versioned,distributed-independent,generated
+deployment	atomic,independent
+change	compatible,breaking,unsupported,none
+generator_input	changed,unchanged,not-applicable
+version_relation	contract-selected,forced-lockstep,forced-independent,missing
+evidence	complete,missing
+fallback	none,assume-additive,regenerate-all,skip-regeneration,compatibility-shim,default-success
+expected	replace,migrate,version,negotiate,regenerate,no-regeneration,typed-invalid,typed-unsupported,typed-unavailable

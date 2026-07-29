@@ -125,7 +125,11 @@ Milestone `7.4b8p` accepted child `5.2`, `STD-0805` and `STD-0806`, as generic
 Language Binding boundary-mechanism selection with focused decision-table
 evidence and two exact dispositions.
 
+Milestone `7.4b8q` accepted child `5.3`, `STD-0807` and `STD-0808`, as
+Contracts-owned binding evolution with focused decision-table evidence and two
+exact dispositions.
+
 ## Next Slice
 
-Milestone `7.4b8q` implements child `5.3`, `STD-0807` and `STD-0808`, as
-Contracts-owned binding evolution.
+Milestone `7.4b8r` implements child `5.4`, `STD-0809`, as Rust adaptation of a
+Contracts-selected discovery or negotiation mechanism.

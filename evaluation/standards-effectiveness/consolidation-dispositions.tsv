@@ -348,3 +348,5 @@ STD-0797	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/r
 STD-0804	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require independent framework-free core and real adapter-host evidence
 STD-0805	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	select the boundary mechanism from complete contract facts
 STD-0806	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	reject framework and transport defaults based on target count or host label
+STD-0807	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	topics/contracts.md	refine	classify binding artifacts and compatibility by actual consumer contracts
+STD-0808	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	topics/contracts.md	refine	regenerate affected outputs and select version relationships from deployment facts

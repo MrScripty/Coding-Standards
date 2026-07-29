@@ -4,6 +4,7 @@ set -euo pipefail
 readonly ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 readonly ARCHITECTURE="$ROOT/ARCHITECTURE-PATTERNS.md"
 readonly RUST_BINDINGS="$ROOT/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+readonly CONTRACTS="$ROOT/topics/contracts.md"
 
 for file in \
   "$ROOT/README.md" \
@@ -37,6 +38,7 @@ fi
 grep -q 'destructive replacement does not require a speculative' "$ARCHITECTURE"
 grep -q 'return the selected typed unavailable, invalid, unsupported, or deferred' \
   "$ARCHITECTURE"
-grep -q 'Do not assume additive means compatible' "$RUST_BINDINGS"
+grep -q 'syntactically additive change is compatible only' "$CONTRACTS"
+grep -q 'topics/contracts.md#cross-language-contract-selection' "$RUST_BINDINGS"
 
 printf 'Contract ownership checks passed\n'

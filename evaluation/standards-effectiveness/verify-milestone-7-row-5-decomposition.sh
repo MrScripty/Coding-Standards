@@ -45,20 +45,23 @@ mapfile -t actual_ids < <(
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
 
 awk -F '\t' '
-  NR > 1 && $1 >= "STD-0804" && $1 <= "STD-0806" {
+  NR > 1 && $1 >= "STD-0804" && $1 <= "STD-0808" {
     count += 1
     if ($2 != "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md" ||
         ($1 == "STD-0804" &&
          $3 != "profiles/languages/rust/language-bindings.md") ||
         ($1 != "STD-0804" &&
+         $1 <= "STD-0806" &&
          $3 != "profiles/boundaries/language-bindings.md") ||
+        ($1 >= "STD-0807" &&
+         $3 != "topics/contracts.md") ||
         $4 != "refine" || $5 == "" || NF != 5) {
       exit 1
     }
   }
-  END { exit count != 3 }
+  END { exit count != 5 }
 ' "$DISPOSITIONS"
-for id in "${expected_ids[@]:3}"; do
+for id in "${expected_ids[@]:5}"; do
   [[ "$(awk -F '\t' -v id="$id" 'NR > 1 && $1 == id { count += 1 } END { print count + 0 }' "$DISPOSITIONS")" -eq 0 ]]
 done
 
@@ -89,13 +92,13 @@ rg -F -q '| F072 | Resolved in Milestone 7.4b8n |' "$FINDINGS"
 rg -F -q '`7.4b8n` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8o` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8p` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8q` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8q` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8r` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8q'* ]]
-[[ "$next_slice_line" == *'STD-0807'* ]]
-[[ "$next_slice_line" == *'STD-0808'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8r'* ]]
+[[ "$next_slice_line" == *'STD-0809'* ]]
 
 "$SCRIPT_DIR/verify-milestone-7-accelerated-execution-replan.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-5 decomposition passed: children 5.1-5.2 accepted; 3 IDs remain across 2 ordered children\n'
+printf 'Milestone 7 row-5 decomposition passed: children 5.1-5.3 accepted; 1 ID remains in child 5.4\n'

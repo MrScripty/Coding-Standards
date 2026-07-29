@@ -98,6 +98,14 @@ contradictions, unavailable evidence, target-count and host-label defaults,
 UI-technology defaults, alternate mechanisms, process substitution, and
 default success.
 
+`fixtures/contracts/binding-evolution-*.tsv` and
+`verify-binding-contract-evolution.sh` classify binding artifacts by applicable
+contract class, regenerate only affected generated outputs, and derive version
+relationships from deployment and consumer facts. They reject assumed
+additive compatibility, regenerate-all and skip-regeneration paths, forced
+lockstep or independent versions, compatibility shims, incomplete evidence,
+and default success.
+
 ## Routed Vertical Slice
 
 `verify-s1-routing.sh` checks the first complete routed path:

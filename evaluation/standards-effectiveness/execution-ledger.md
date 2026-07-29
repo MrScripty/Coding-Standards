@@ -3318,3 +3318,39 @@ repository changed.
 
 **Next slice:** `7.4b8q`, replace `STD-0807` and `STD-0808` with
 Contracts-owned binding evolution.
+
+## 2026-07-29: Milestone 7.4b8q Binding Contract Evolution
+
+**Outcome:** Accepted.
+
+`STD-0807` and `STD-0808` now classify each binding artifact independently,
+regenerate only outputs affected by canonical input or generator changes, and
+select artifact version relationships from publication, deployment,
+package-resolution, and consumer compatibility contracts.
+
+**Verification:** reusable decision-table schema, 18 semantic cases and exact
+observations; canonical Contracts assertions; two exact dispositions; removal
+of five residual legacy rules; Contracts decision and ownership checks; row-5
+decomposition; immutable execution train; plan lifecycle; shell syntax;
+metadata; links; whitespace; exact scope; and the complete checker suite with
+fail-fast shell behavior.
+
+**No-fallback result:** assumed additive compatibility, regenerate-all,
+skipped required regeneration, forced lockstep or independent versions,
+compatibility shims, incomplete evidence, and default success are rejected.
+Unsupported versions remain typed unsupported and unavailable contract
+material remains typed unavailable.
+
+**Deviation:** the existing Contracts class model already owned coordinated,
+persisted, public, independent, and generated evolution. This slice adds only
+binding-artifact classification, affected-output regeneration, and version
+relationship selection rather than duplicating the class model. The permanent
+contract-ownership checker still required the removed legacy additive-change
+sentence; it now verifies the canonical Contracts rule and legacy owner link.
+
+No contract discovery, Rust adaptation, release mechanics, dependency
+versioning, routing, metadata, lockfile, generated inventory, owner map,
+configuration, or downstream repository changed.
+
+**Next slice:** `7.4b8r`, replace `STD-0809` with Rust adaptation of a
+Contracts-selected discovery or negotiation mechanism.

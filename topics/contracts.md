@@ -131,6 +131,27 @@ migration, compatibility-window, or negotiation policy and reject unsupported
 versions explicitly. Cross-language use does not justify dual reads, dual
 writes, guessed schemas, or an indefinite old-shape path.
 
+For language bindings, classify each affected artifact independently: native
+adapter API, canonical generator input, generated source, host package, native
+package, stable ABI, wire representation, and persisted representation. One
+release may coordinate several artifacts, but a shared release input or
+version identifier does not give them one compatibility promise.
+
+Regenerate only affected outputs when their canonical generation input or
+generator changes. An unrelated private implementation change does not require
+regeneration. When regeneration applies, update the canonical input and
+generator first, derive every affected output deterministically, and verify
+each supported producer/consumer path. Do not hand-edit generated output or
+regenerate from inferred consumer shape.
+
+Select shared or independent artifact versions from actual publication,
+deployment, package-resolution, and consumer compatibility contracts. Do not
+force native libraries and host packages into lockstep or independent versions
+without those facts. A syntactically additive change is compatible only when
+every applicable consumer contract permits it; exhaustive variants, required
+behavior, defaults, fields, generated APIs, persisted state, and ABI or wire
+representations may make it breaking.
+
 Evidence must match the selected contract and deployment facts. Prove the
 canonical authority, the producer's emitted representation, and each affected
 consumer's accepted and rejected representations. Coordinated contracts
