@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust host event delivery is accepted; callback-task
-adaptation is the final child of decomposed row 3.
+**Current phase:** all three children of Rust binding row 3 are accepted; Rust
+enum representation is the next immutable execution row.
 
-**Next slice:** Milestone 7.4b8j Rust host callback-task adaptation (`STD-0780`).
+**Next slice:** Milestone 7.4b8k Rust enum representation (`STD-0797`).
 
 **Acceptance status:** `partial`
 
@@ -1014,8 +1014,20 @@ all structural/routing fixtures pass.
      - remove slice-relative verifier comparisons against unrelated legacy
        sections; permanent checks own their bounded concern while staged review
        proves exact slice preservation.
-   - `7.4b8j` (`Planned`): replace `STD-0780` with one Rust-host callback-task
-     adaptation contract after `7.4b8i`.
+   - `7.4b8j` (`Accepted`): replace `STD-0780` with one Rust-host callback-task
+     adaptation contract;
+     - select task/result representation, callback authority, correlation,
+       completion, admission, cancellation, failure, and shutdown from the
+       host boundary;
+     - require fresh invocation state, checked conversion, lock-free host
+       invocation, and one observed terminal outcome;
+     - register outliving work with Rust Async and Concurrency ownership before
+       submission and require real native-to-host evidence; and
+     - reject no-op executors, polling or result-injection substitutes,
+       alternate runtimes, detached work, default output, input carry-forward,
+       weaker evidence, and default success.
+   - `7.4b8k` (`Planned`): review `STD-0797` under the Rust Language Binding
+     owner before replacing legacy enum-representation guidance.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

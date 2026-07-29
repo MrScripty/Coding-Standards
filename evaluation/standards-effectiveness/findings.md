@@ -112,6 +112,7 @@ changes and focused fixture evidence.
 | F063 | Resolved in Milestone 7.4b8h | `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`; frozen IDs `STD-0776`, `STD-0777` now select a host error contract and preserve typed categories, cancellation, bounded non-sensitive context, and checked native/host mapping. | 7 |
 | F064 | Resolved in Milestone 7.4b8i | `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`; frozen IDs `STD-0778`, `STD-0779` now select host event delivery with governed capacity, provider authority, current-event isolation, and typed delivery outcomes without push/pull substitution. | 7 |
 | F065 | Resolved in Milestone 7.4b8i | `verify-rust-binding-error-mapping.sh` compared an unrelated later legacy section to `HEAD`, preventing its authorized owner slice; Rust binding verifiers now assert only their bounded legacy concern while staged review proves slice-local preservation. | 7 |
+| F066 | Resolved in Milestone 7.4b8j | `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`; frozen ID `STD-0780` now requires checked, correlated, lifecycle-owned host callback-task adaptation with fresh invocation state instead of no-op, polling, or framework-specific substitutes. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

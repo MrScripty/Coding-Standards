@@ -1276,9 +1276,25 @@ preservation without preventing the next authorized owner slice.
 wrong-thread retry, prior-event carry-forward, alternate runtimes, detached
 work, weaker evidence, and default success are rejected.
 
-## Planned Slice 7.4b8j: Rust Host Callback Task Adaptation
+## Accepted Slice 7.4b8j: Rust Host Callback Task Adaptation
 
-**Outcome:** review and, if coherent, replace `STD-0780` with one Rust Language
-Binding-owned callback-task adaptation contract that consumes Rust Async and
-Concurrency work ownership without no-op execution, polling substitution,
-alternate runtimes, detached work, or input carry-forward.
+**Outcome:** `STD-0780` is replaced by one Rust Language Binding-owned
+callback-task adaptation contract. The selected host boundary defines task and
+result representation, callback authority, correlation, completion,
+admission, cancellation, failure, and shutdown. Each invocation has fresh
+state, checked conversion, and exactly one observed terminal outcome.
+
+Twenty-two focused decisions and one exact disposition require real
+native-to-host execution, lock-free host invocation, provider failure and
+cancellation preservation, and Rust Async/Concurrency ownership before work
+can outlive invocation.
+
+**No fallback:** no-op executors, snapshot polling or result injection,
+alternate runtimes, detached work, generic/default output, unsupported-error
+reinterpretation, input carry-forward, weaker evidence, and default success
+are rejected.
+
+## Planned Slice 7.4b8k: Rust Enum Representation
+
+**Outcome:** perform bounded pre-slice review of `STD-0797` under the Rust
+Language Binding owner before replacing legacy enum-representation guidance.

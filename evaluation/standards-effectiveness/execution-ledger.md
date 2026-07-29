@@ -3089,3 +3089,29 @@ The immutable cursor advances to child `3.3`; callback-task adaptation remains
 pending and its legacy section is unchanged.
 
 **Next slice:** `7.4b8j`, bounded pre-slice review of `STD-0780`.
+
+## 2026-07-29: Milestone 7.4b8j Rust Host Callback Task Adaptation
+
+**Outcome:** Accepted.
+
+`STD-0780` is replaced by a Rust Language Binding callback-task contract
+selected from the host boundary. It owns checked task/result representation,
+callback authority, correlation, completion, admission, cancellation, failure,
+and shutdown adaptation while generic runtime and work lifecycle remain with
+Rust Async and Concurrency.
+
+**Verification:** 22 focused decisions; one exact disposition; metadata,
+bounded legacy replacement, Rust Async lifecycle, Concurrency, executor
+delegation, immutable-train, independent-trust, plan-lifecycle, shell-syntax,
+whitespace, and exact-scope checks. The complete checker suite is required
+because a shared language profile and new focused checker changed.
+
+**No-fallback result:** no-op executors, snapshot polling or result injection,
+alternate runtimes, detached work, default output, unsupported-error
+reinterpretation, input carry-forward, weaker evidence, and default success
+are rejected.
+
+All three ordered children exactly dispose immutable row 3. The cursor advances
+to row 4, `STD-0797`; no later Rust binding row is activated early.
+
+**Next slice:** `7.4b8k`, bounded pre-slice review of `STD-0797`.

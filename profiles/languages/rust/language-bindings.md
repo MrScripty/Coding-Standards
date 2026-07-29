@@ -160,6 +160,51 @@ Do not substitute push for pull or pull for push, create an alternate runtime,
 detach callback-created work, retry on an arbitrary thread, carry prior event
 state forward, drop events silently, or report default success.
 
+## Host Callback Task Adaptation
+
+Select the host callback-task contract before a Rust adapter asks host code to
+perform work. The contract defines:
+
+- supported task identities and checked input and output representations;
+- callback authority, thread, re-entrancy, and input lifetime;
+- synchronous or asynchronous completion and correlation identity;
+- admission, capacity, cancellation, deadline, and shutdown obligations; and
+- host failure, incomplete completion, duplicate response, and late response
+  outcomes.
+
+The core may define a binding-neutral port when host execution is a domain
+capability, but the adapter owns host representation and invocation mechanics.
+Neither generated host code nor the adapter owns domain behavior. Capture the
+current validated task snapshot, release synchronization guards, and then
+invoke host-controlled behavior.
+
+Each invocation has fresh task identity, input, cancellation, result, and
+failure state. A retained callback, host process, runtime, model, or adapter
+does not authorize carrying state from an earlier invocation. Match each
+response to the selected correlation contract and resolve terminal completion
+once. Preserve the contract-selected outcome for late or duplicate completion
+after cancellation or another terminal result.
+
+Inline completion remains scoped to the invocation. Asynchronous work that may
+outlive it consumes the composition-owned runtime capability and is registered
+with the selected Rust Async and Concurrency lifecycle owner before submission.
+That owner observes success, failure, panic, cancellation, and shutdown. The
+adapter does not synchronously drive async work, create an alternate runtime,
+or detach work to satisfy the callback.
+
+Convert task input, output, and host failures through checked binding
+representations. Preserve host task failure and cancellation. Return `invalid`
+for malformed input, output, correlation, or contradictory callback facts,
+`unsupported` when a well-formed task is outside the selected host contract,
+`unavailable` when required callback, runtime, admission, conversion, or result
+delivery capability cannot be obtained, and the selected typed incomplete
+outcome when accepted work cannot reach an observed terminal state.
+
+Do not install a no-op executor, replace callbacks with snapshot polling or
+result injection, use generic/default task output, reinterpret failure as
+unsupported delegation, carry prior invocation state forward, or report
+default success.
+
 ## Handle And Runtime Adaptation
 
 Distinguish a host-visible handle from runtime and task lifecycle. A foreign
@@ -255,6 +300,17 @@ Verify host event delivery through:
 - delivery failure, cancellation, and shutdown observation;
 - callback invocation outside synchronization guards;
 - lifecycle ownership for work that outlives delivery; and
+- typed invalid, unsupported, unavailable, and incomplete outcomes.
+
+Verify host callback-task adaptation through:
+
+- every supported task through the real native-to-host callback path;
+- checked task-input, result, and failure conversion;
+- callback thread, re-entrancy, input lifetime, and invocation outside guards;
+- exact response correlation and single terminal completion;
+- fresh state across repeated and concurrent invocations;
+- observed success, host failure, cancellation, panic, and shutdown;
+- lifecycle registration before work can outlive invocation; and
 - typed invalid, unsupported, unavailable, and incomplete outcomes.
 
 Verify composite executor delegation through:

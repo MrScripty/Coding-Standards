@@ -258,25 +258,13 @@ delivery mechanisms.
 
 ### Callback-Based Task Execution
 
-When the host language must execute logic the core cannot (custom node types,
-plugins), define a trait in the core and implement it differently per binding:
+Rust-to-host callback-task adaptation moved to
+[Host Callback Task Adaptation](../../profiles/languages/rust/language-bindings.md#host-callback-task-adaptation).
 
-```rust
-// Core library — framework-agnostic trait
-#[async_trait::async_trait]
-pub trait TaskExecutor: Send + Sync {
-    async fn execute_task(
-        &self,
-        node_type: &str,
-        inputs: serde_json::Value,
-    ) -> Result<serde_json::Value, EngineError>;
-}
-```
-
-- **UniFFI:** Implement a `NoopTaskExecutor` that returns an error. The host
-  drives execution by polling snapshots and feeding results back.
-- **Rustler:** Implement a callback executor that sends a message to the BEAM
-  process and awaits a response via a oneshot channel.
+The selected task contract owns representation, callback authority,
+correlation, completion, cancellation, and lifecycle outcomes. Missing
+capability returns its typed diagnostic rather than installing a no-op or
+polling substitute.
 
 ### Composite Executors
 
