@@ -9,7 +9,6 @@ readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly PROFILE="$REPO_ROOT/profiles/languages/rust/async.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-ASYNC-STANDARDS.md"
 readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
-readonly FINDINGS="$SCRIPT_DIR/findings.md"
 
 while IFS=$'\t' read -r case_id runtime_owner task_tracking failure admission \
   drain abort capability fallback expected extra; do
@@ -96,8 +95,6 @@ for heading in '## Runtime Boundaries' '## Task Lifecycle' '## Graceful Shutdown
   rg -F -q "$heading" "$LEGACY"
 done
 
-rg -F -q '| F025 | Partially resolved in Milestone 7.4b4e |' "$FINDINGS"
-rg -F -q '| F026 | Partially resolved in Milestone 7.4b4e |' "$FINDINGS"
 rg -F -q '`7.4b4e` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-rust-async-decomposition.sh"
 "$SCRIPT_DIR/verify-milestone-7-trust-lifecycle-replan.sh"

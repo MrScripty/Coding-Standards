@@ -292,3 +292,7 @@ STD-0722	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md
 STD-0723	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	select synchronization from suspension invariant contention and capability facts
 STD-0724	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	distinguish future polling from external cancellation and preserve durable work and cleanup
 STD-0725	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	assign terminal health and inspection evidence to the lifecycle owner
+STD-0759	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	separate domain core behavior from binding frameworks and host runtimes
+STD-0760	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require one-way adapter dependency and framework-free core verification
+STD-0790	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	place optional binding support at the adapter and package boundary
+STD-0791	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	remove core package examples that add binding framework dependencies

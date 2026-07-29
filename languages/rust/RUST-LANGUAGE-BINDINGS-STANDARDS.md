@@ -11,38 +11,13 @@ decisions, see
 
 ## Three-Layer Architecture
 
-Separate core logic from binding concerns using three layers:
+Canonical core/adapter dependency direction, annotation placement, generated-
+code ownership, and framework-free core verification moved to the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md#core-and-adapter-boundary).
 
-```text
-┌───────────────────────────────────────────────────────────┐
-│  Layer 3: Generated / Host Bindings                       │
-│  Python, C#, Kotlin, Swift, Ruby, Go, Elixir, TypeScript  │
-│  Auto-generated from compiled artifact. Never hand-edit.  │
-├───────────────────────────────────────────────────────────┤
-│  Layer 2: FFI Wrapper Crate(s)                            │
-│  FFI-safe types, error conversion, Arc wrapping,          │
-│  event sinks, callback bridges                            │
-├───────────────────────────────────────────────────────────┤
-│  Layer 1: Core Library                                    │
-│  Pure domain logic, idiomatic types, no FFI concerns      │
-│  HashMap, serde_json::Value, usize, trait objects          │
-└───────────────────────────────────────────────────────────┘
-```
-
-| Layer | Contains | Depends On | FFI Awareness |
-|-------|----------|------------|---------------|
-| Core Library | Domain logic, types, services | Standard library, domain deps | None (optional `cfg_attr` annotations) |
-| FFI Wrapper | Ffi* types, From impls, error mapping, event bridges | Core library, binding framework | Full |
-| Generated Bindings | Language-specific classes/modules | FFI wrapper (compiled artifact) | N/A (auto-generated) |
-
-### Rules
-
-1. **Core compiles without binding features.** `cargo test -p mylib-core` must
-   pass with no binding crate present.
-2. **FFI wrapper depends on core; core never depends on FFI wrapper.**
-3. **Generated code is never hand-edited.** Re-generate after every API change.
-4. **Multiple binding crates can coexist.** A UniFFI crate and a Rustler crate
-   can live in the same workspace, each wrapping the same core.
+The workspace material below remains migration reference for undisposed
+packaging and repository-layout sections. It cannot override the canonical
+core/adapter boundary.
 
 ### Workspace Layout
 
@@ -511,19 +486,11 @@ fn main() {
 
 ### Feature Flags for Optional Binding Support
 
-Core types that can be annotated directly should use feature-gated annotations.
-This keeps binding framework dependencies out of the core crate unless
-explicitly requested.
+Canonical binding dependency and optional-feature placement moved to the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md#core-and-adapter-boundary).
 
-```toml
-# mylib-core/Cargo.toml
-[features]
-default = []
-uniffi = ["dep:uniffi"]
-
-[dependencies]
-uniffi = { version = "0.28", optional = true }
-```
+Binding-framework dependencies remain adapter/package scoped. A disabled
+default does not make a framework dependency in the core independent.
 
 ### cdylib Configuration
 

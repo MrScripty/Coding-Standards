@@ -9,7 +9,7 @@
 - Does not apply when: Values remain ordinary Rust values and no host-language representation or operation changes.
 - Requires: `core`, `workflow.verification`, `profile.language.rust`, `profile.boundary.language-bindings`
 - Specializes: `profile.language.rust`, `profile.boundary.language-bindings`
-- Verification: Rust binding-conversion decisions plus affected native conversion and real host-boundary tests.
+- Verification: Rust binding-architecture and conversion decisions plus framework-free core checks and affected native/host boundary tests.
 - Canonical owner: `profiles/languages/rust/language-bindings.md`
 
 ## Representation Categories
@@ -28,16 +28,32 @@ Framework lifting is not C-ABI safety. `String`, `Vec<T>`, `Option<T>`, Rust
 enums, and framework object types may be supported by a named framework, but
 their native Rust layouts are not universally stable C-ABI values.
 
-## Adapter Ownership
+## Core And Adapter Boundary
 
-Keep domain types independent of binding frameworks. Rust binding adapters own
-host representation conversion, error mapping, handle lifecycle, runtime
+Keep domain behavior and validated domain types usable without a binding
+framework, generated host code, or foreign runtime. The core owns domain
+invariants, operations, and native types. Rust binding adapters own host
+representation conversion, error mapping, handle lifecycle, host entrypoint
 adaptation, and generated-contract input.
 
-Annotate a domain type only when the selected framework contract permits it
-without coupling domain behavior to the framework. Otherwise define an adapter
-type. Serialization is selected only when a wire schema is part of the
-contract; JSON is not a universal ABI or universal wrapper representation.
+Adapters depend on core contracts; the core does not depend on adapter modules,
+binding packages, generated wrappers, or framework behavior. Preserve that
+direction even when core and adapter modules share a package.
+
+A source annotation may remain on a core type only when it adds no binding-
+framework dependency, host-specific behavior, or change to the domain
+contract. A framework-owned annotation, derive, conversion, callback, or
+registration belongs on an adapter type.
+
+Binding-specific dependencies, procedural macros, build scripts, and optional
+features belong to an adapter or binding package. A disabled-by-default
+framework dependency in the core still couples the core when enabled and does
+not satisfy this boundary.
+
+Serialization is selected only when a wire schema is part of the contract;
+JSON is not a universal ABI or universal wrapper representation. Generated
+host code remains derived from adapter-owned input and contains no domain
+behavior.
 
 ## Fallible Conversion
 
@@ -65,6 +81,14 @@ Rust Interop and Unsafe profiles; they are not passed by native layout.
 
 ## Verification
 
+Verify the core/adapter boundary through:
+
+- core build and tests without binding features, framework packages, generated
+  host code, or a foreign runtime;
+- dependency and feature inspection proving no adapter or binding-framework
+  edge points into the core; and
+- adapter and generated-boundary checks for every supported binding mechanism.
+
 Test every conversion through:
 
 - successful native conversion;
@@ -77,6 +101,12 @@ Native-only conversion tests do not prove host lifting, generated wrappers,
 wire compatibility, or ABI behavior.
 
 ## No Fallback
+
+Missing adapter, framework, generation, or packaging capability cannot add a
+binding dependency to the core, move domain behavior into an adapter, merge
+the layers, skip framework-free core verification, hand-edit generated output,
+or select another binding framework. Return the typed planning, build, or
+operation diagnostic for the selected boundary.
 
 Failed Rust binding conversion cannot fall back to:
 

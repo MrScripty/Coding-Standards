@@ -7,9 +7,10 @@
 **Plan status:** `Active`
 
 **Current phase:** Milestone 7 dependent Rust lifecycle consolidation active;
-F025/F026 remainder decomposed.
+binding core/adapter boundary accepted.
 
-**Next slice:** Milestone 7.4b5b Rust binding core and adapter boundary.
+**Next slice:** Milestone 7.4b5c Rust binding runtime and handle adaptation
+pre-slice review.
 
 **Acceptance status:** `partial`
 
@@ -606,8 +607,24 @@ all structural/routing fixtures pass.
        ready; that mutable assertion is removed, stable accepted-state and
        decomposition linkage remain, and current sequencing belongs only to
        the new decomposition checker;
-   - `7.4b5b` (`Planned`): make the Rust binding core/adapter boundary
+   - `7.4b5b` (`Accepted`): make the Rust binding core/adapter boundary
      framework-independent (`STD-0759`, `STD-0760`, `STD-0790`, `STD-0791`);
+     - domain behavior and types remain usable without a binding framework,
+       generated host code, or foreign runtime;
+     - adapters depend on core contracts, while binding dependencies, optional
+       features, procedural macros, and generated input remain adapter/package
+       scoped;
+     - fifteen focused decisions reject coupled annotations, reverse
+       dependencies, missing framework-free core verification, hand-edited
+       generated output, layer merging, and alternate-framework fallback;
+     - re-plan trigger (`Resolved`): the parent trust/lifecycle checker treated
+       its accepted 90-ID/42-binding snapshot as current after dispositions;
+       it now preserves that fixture as baseline evidence and derives current
+       counts only from exact serial `F025`/`F026` dispositions;
+     - full-suite re-plan trigger (`Resolved`): the accepted Rust Async
+       lifecycle checker owned temporary `7.4b4e` statuses for `F025` and
+       `F026`; those two mutable assertions are removed while all lifecycle
+       behavior, disposition, legacy, and decomposition evidence remains;
    - `7.4b5c` (`Planned`): make binding handle and async adaptation consume the
      selected runtime/lifecycle capability without retaining request inputs or
      owning an alternate runtime (`STD-0798`-`STD-0800`);

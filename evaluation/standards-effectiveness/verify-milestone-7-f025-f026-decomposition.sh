@@ -120,7 +120,7 @@ required_report=(
   'Bindings adapt a host call to an injected runtime/lifecycle capability'
   'A canonicalized `PathBuf` is'
   'Per-call inputs, cancellation, and results remain'
-  '## Next Slice 7.4b5b: Binding Core And Adapter Boundary'
+  '## Accepted Slice 7.4b5b: Binding Core And Adapter Boundary'
   '**No fallback:**'
   'Independent trust-boundary groups remain'
 )

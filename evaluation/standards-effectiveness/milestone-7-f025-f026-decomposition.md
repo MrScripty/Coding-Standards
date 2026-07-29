@@ -86,7 +86,7 @@ The slices are serial so the same canonical profiles and legacy sources never
 have overlapping write ownership. Independent trust-boundary groups remain
 queued until `7.4b5f` is accepted.
 
-## Next Slice 7.4b5b: Binding Core And Adapter Boundary
+## Accepted Slice 7.4b5b: Binding Core And Adapter Boundary
 
 **Outcome:** refine the Rust Language Binding profile and four legacy sections
 so domain/core behavior has no binding-framework or host-runtime dependency,
@@ -99,6 +99,9 @@ while adapters own only the selected host representation and adaptation.
 - `evaluation/standards-effectiveness/fixtures/rust/binding-architecture-decisions.tsv`;
 - `evaluation/standards-effectiveness/verify-rust-binding-architecture.sh`;
 - this decomposition checker for disposition and handoff state only;
+- the parent trust/lifecycle checker for disposition-derived progress only;
+- the accepted Rust Async lifecycle checker for removal of temporary finding-
+  status assertions only;
 - consolidation dispositions, evaluation README, findings, active plan, and
   execution ledger.
 
@@ -137,6 +140,35 @@ without competing architecture or feature defaults; later runtime, executor,
 path, and listener sections remain untouched; `F025` remains accurately
 partial; and focused plus affected regressions pass.
 
+**Accepted result:** the Rust binding profile now owns a framework-independent
+core/adapter boundary, one-way adapter dependency, adapter-scoped framework
+features, generated-code ownership, and framework-free core verification.
+Fifteen focused decisions and four exact dispositions prove the boundary
+without moving runtime adaptation assigned to `7.4b5c`.
+
+**Resolved re-plan trigger:** the parent trust/lifecycle checker treated its
+accepted 90-ID trust and 42-ID Rust binding snapshot as immutable current
+counts. Dispositioning this slice correctly changes the current counts to 86
+and 38, so affected regression verification failed outside the original write
+set.
+
+**Approved correction:** retain the group fixture as historical baseline
+evidence and derive current Rust binding, Rust Security, and total trust counts
+from exact accepted identifiers in this decomposition map. The parent checker
+accepts only the serial disposition states `0`, `4`, `7`, `8`, `9`, and `10`;
+it does not own current slice sequencing or duplicate normative policy.
+
+**Resolved second re-plan trigger:** the accepted Rust Async lifecycle checker
+also asserted the temporary `7.4b4e` partial-resolution rows for both `F025`
+and `F026`. Advancing `F025` in this slice made that historical checker own
+mutable finding state outside its accepted behavioral contract.
+
+**Second approved correction:** remove only those two temporary status
+assertions and their now-unused file variable. The checker retains exact Rust
+Async dispositions, profile behavior, migrated legacy evidence, accepted-plan
+state, and decomposition linkage. Active dependent-Rust checkers own current
+finding state.
+
 ## Later Slice Constraints
 
 ### Slice 7.4b5c: Binding Runtime And Handle Adaptation
@@ -148,6 +180,9 @@ resource cannot construct, embed as its owned lifecycle, synchronously drive,
 or replace that runtime. Per-call inputs, cancellation, and results remain
 request scoped and are never retained merely because the runtime remains
 alive. Missing capability returns the operation's typed outcome.
+
+This slice requires a fresh pre-slice review before its implementation contract
+becomes active.
 
 ### Slice 7.4b5d: Explicit Executor Delegation
 

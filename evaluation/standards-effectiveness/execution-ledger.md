@@ -1936,3 +1936,53 @@ The rolling Milestone 7 remainder remains 623 IDs across 30 sources and 29
 owners, with 14 canonical owners still missing.
 
 **Next slice:** `7.4b5b` Rust binding core and adapter boundary.
+
+## 2026-07-28: Milestone 7.4b5b Rust Binding Core And Adapter Boundary
+
+**Outcome:** Accepted.
+
+The Rust Language Binding profile now keeps domain behavior and validated
+domain types usable without a binding framework, generated host code, or
+foreign runtime. Adapters depend on core contracts; framework dependencies,
+procedural macros, build scripts, optional features, host behavior, and
+generated-contract input remain adapter/package concerns.
+
+`STD-0759`, `STD-0760`, `STD-0790`, and `STD-0791` have exact final
+dispositions. Their legacy architecture and core-feature sections are bounded
+links without competing framework-coupled defaults. Runtime/handle adaptation,
+typed executor delegation, path authority, and listener lifecycle remain
+undisposed for their planned slices.
+
+**Deviations:** None.
+
+**Discovered issue (`Resolved`):** the parent trust/lifecycle checker treated
+its accepted 90-ID trust and 42-ID Rust binding snapshot as immutable current
+counts. The approved write-set expansion preserves that fixture as baseline
+evidence and derives the current 86/38 counts from exact accepted identifiers
+in the dependent Rust decomposition map. Only valid serial disposition totals
+are accepted.
+
+**Discovered issue (`Resolved`):** the accepted Rust Async lifecycle checker
+owned temporary `7.4b4e` finding-status rows for `F025` and `F026`. The two
+mutable assertions and their unused variable are removed. Runtime, task,
+shutdown, disposition, profile, legacy, plan, and decomposition verification
+remain unchanged; active dependent-Rust checkers own current finding state.
+
+**No-fallback/legacy result:** missing adapter, framework, generation,
+packaging, or verification capability cannot add a binding dependency to the
+core, move domain behavior into an adapter, reverse dependencies, merge
+layers, skip framework-free core verification, hand-edit generated output, or
+select another framework. The operation returns its typed planning, build, or
+operation diagnostic.
+
+**Verification:** 15 focused architecture decisions, four exact dispositions,
+profile metadata and routing, bounded legacy replacement, preserved later
+sections, existing Rust binding conversion coverage, disposition-derived
+parent progress, plan lifecycle, shell syntax, whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+The rolling Milestone 7 remainder is 619 IDs across 30 sources and 29 owners,
+with 14 canonical owners still missing.
+
+**Next slice:** `7.4b5c` Rust binding runtime and handle adaptation pre-slice
+review.

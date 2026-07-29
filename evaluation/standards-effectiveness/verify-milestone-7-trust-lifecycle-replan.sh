@@ -7,6 +7,7 @@ readonly OWNER_MAP="$SCRIPT_DIR/generated/rule-owner-map.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly GROUP_FILE="$SCRIPT_DIR/milestone-7-trust-lifecycle-groups.tsv"
 readonly NEXT_SLICE="$SCRIPT_DIR/milestone-7-trust-lifecycle-next-slice.tsv"
+readonly DEPENDENT_MAP="$SCRIPT_DIR/milestone-7-f025-f026-slices.tsv"
 readonly REPORT="$SCRIPT_DIR/milestone-7-trust-lifecycle-replan.md"
 readonly PARENT="$SCRIPT_DIR/milestone-7-decomposition.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
@@ -35,6 +36,31 @@ while IFS=$'\t' read -r id source _line owner _disposition _heading; do
   [[ -n "${disposed[$id]:-}" ]] && continue
   remaining_by_owner["$owner"]=$(( ${remaining_by_owner[$owner]:-0} + 1 ))
 done < "$OWNER_MAP"
+
+dependent_dispositions=0
+dependent_binding_dispositions=0
+dependent_security_dispositions=0
+while IFS=$'\t' read -r _slice _order id source target disposition \
+  _rationale _extra; do
+  [[ "$id" == 'id' ]] && continue
+  [[ -n "${disposed[$id]:-}" ]] || continue
+  [[ "${disposed_source[$id]}" == "$source" ]]
+  [[ "${disposed_target[$id]}" == "$target" ]]
+  [[ "${disposed_disposition[$id]}" == "$disposition" ]]
+  ((dependent_dispositions += 1))
+  case "$target" in
+    profiles/languages/rust/language-bindings.md)
+      ((dependent_binding_dispositions += 1))
+      ;;
+    profiles/languages/rust/security.md)
+      ((dependent_security_dispositions += 1))
+      ;;
+    *)
+      exit 1
+      ;;
+  esac
+done < "$DEPENDENT_MAP"
+[[ "$dependent_dispositions" =~ ^(0|4|7|8|9|10)$ ]]
 
 expected_ids=(
   STD-0263 STD-0264 STD-0265 STD-0266 STD-0267
@@ -90,6 +116,12 @@ while IFS=$'\t' read -r wave order owner count owner_state prerequisite status e
       expected_state='exists'
     fi
   fi
+  if [[ "$owner" == 'profiles/languages/rust/language-bindings.md' ]]; then
+    expected_count=$((count - dependent_binding_dispositions))
+  fi
+  if [[ "$owner" == 'profiles/languages/rust/security.md' ]]; then
+    expected_count=$((count - dependent_security_dispositions))
+  fi
   [[ "${remaining_by_owner[$owner]:-0}" -eq "$expected_count" ]]
   if [[ -e "$REPO_ROOT/$owner" ]]; then
     actual_state='exists'
@@ -106,6 +138,7 @@ while IFS=$'\t' read -r wave order owner count owner_state prerequisite status e
   fi
 done < "$GROUP_FILE"
 [[ "$trust_total" -eq 90 && "$bridge_total" -eq 26 ]]
+current_trust_total=$((trust_total - dependent_dispositions))
 
 mapfile -t actual_ids < <(tail -n +2 "$NEXT_SLICE" | cut -f3)
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
@@ -163,5 +196,6 @@ fi
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
-printf 'Milestone 7 trust/lifecycle re-plan passed: %s trust IDs, %s bridge IDs, generic dispositions %s/9, Rust Async dispositions %s/9\n' \
-  "$trust_total" "$bridge_total" "$next_dispositions" "$rust_async_dispositions"
+printf 'Milestone 7 trust/lifecycle re-plan passed: %s baseline trust IDs, %s current, %s bridge IDs, generic dispositions %s/9, Rust Async dispositions %s/9\n' \
+  "$trust_total" "$current_trust_total" "$bridge_total" \
+  "$next_dispositions" "$rust_async_dispositions"
