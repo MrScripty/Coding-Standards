@@ -92,7 +92,6 @@ for removed in \
 done
 
 rg -F -q '`7.4b8o` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8p` (`Planned`)' "$PLAN"
 "$SCRIPT_DIR/verify-rust-binding-architecture.sh"
 "$SCRIPT_DIR/verify-rust-binding-conversions.sh"
 "$SCRIPT_DIR/verify-milestone-7-row-5-decomposition.sh"

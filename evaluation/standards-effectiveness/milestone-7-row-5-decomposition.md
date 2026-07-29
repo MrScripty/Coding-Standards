@@ -121,7 +121,11 @@ Milestone `7.4b8o` accepted child `5.1`, `STD-0804`, as one Rust Language
 Binding core/adapter testability contract with focused decision-table evidence
 and one exact disposition.
 
+Milestone `7.4b8p` accepted child `5.2`, `STD-0805` and `STD-0806`, as generic
+Language Binding boundary-mechanism selection with focused decision-table
+evidence and two exact dispositions.
+
 ## Next Slice
 
-Milestone `7.4b8p` implements child `5.2`, `STD-0805` and `STD-0806`, as
-generic Language Binding boundary-mechanism selection.
+Milestone `7.4b8q` implements child `5.3`, `STD-0807` and `STD-0808`, as
+Contracts-owned binding evolution.

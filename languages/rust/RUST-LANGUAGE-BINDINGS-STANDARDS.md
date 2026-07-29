@@ -484,24 +484,12 @@ organization and naming conventions.
 
 ## Choosing a Binding Approach
 
-| Approach | When to Use | Pros | Cons |
-|----------|------------|------|------|
-| UniFFI | Targeting 3+ languages from Rust | One wrapper serves many targets | Limited to UniFFI-supported types |
-| Rustler/NIF | Deep BEAM VM integration (Elixir, Erlang) | Native BEAM types and scheduling | Only targets Erlang ecosystem; NIF crash takes down VM |
-| PyO3 | Python-only with tight integration | Full Python ecosystem access | Python-specific |
-| Tauri IPC | Desktop app with web frontend | Full async; Serde-native IPC | Desktop-only; requires Tauri runtime |
-| Hand-written C FFI | Single target with special ABI needs | Maximum ABI control | High maintenance; manual memory management |
-| RPC/IPC (HTTP, gRPC) | In-process linking impractical | Process isolation; language-agnostic | Latency overhead; serialization cost |
-
-### Rules
-
-1. Default to UniFFI when targeting multiple languages from Rust.
-2. Use Rustler only for Elixir/Erlang targets.
-3. Use Tauri IPC when wrapping for a desktop frontend with TypeScript/JS.
-4. Use RPC when the foreign language cannot load native libraries.
-5. Never hand-write FFI bindings for more than one target language — use
-   code generation.
-6. Multiple frameworks can coexist in one workspace as separate crates.
+Boundary-mechanism selection moved to the
+[Language Binding Boundary Profile](../../profiles/boundaries/language-bindings.md#select-the-boundary-mechanism).
+Rust adapters apply the selected mechanism through the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md).
+No framework, ABI, serializer, generated wrapper, Tauri bridge, or process
+transport is selected from target count or host-language label.
 
 ---
 

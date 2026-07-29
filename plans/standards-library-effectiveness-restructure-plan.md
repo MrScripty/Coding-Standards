@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust core/adapter testability is canonical; generic binding
-boundary-mechanism selection is next.
+**Current phase:** Generic binding boundary-mechanism selection is canonical;
+binding contract evolution is next.
 
-**Next slice:** Milestone 7.4b8p boundary-mechanism selection for active child `STD-0805`, `STD-0806`.
+**Next slice:** Milestone 7.4b8q binding contract evolution for active child `STD-0807`, `STD-0808`.
 
 **Acceptance status:** `partial`
 
@@ -1100,8 +1100,20 @@ all structural/routing fixtures pass.
        capability; and
      - remove the Rustler/NIF example and unknown-sentinel behavior instead of
        retaining framework-specific architecture.
-   - `7.4b8p` (`Planned`): replace `STD-0805` and `STD-0806` with generic
-     Language Binding boundary-mechanism selection.
+   - `7.4b8p` (`Accepted`): replace `STD-0805` and `STD-0806` with generic
+     Language Binding boundary-mechanism selection;
+     - select from complete host, process, deployment, isolation,
+       representation, lifecycle, performance, target, packaging, support,
+       capability, and verification facts;
+     - route selected process boundaries to IPC without treating process
+       transport as fallback for a failed in-process binding;
+     - permit multiple mechanisms only as separately declared and verified
+       adapters; and
+     - remove fixed UniFFI, Rustler, PyO3, Tauri, RPC, target-count, and
+       host-label defaults with typed invalid, unsupported, or unavailable
+       outcomes.
+   - `7.4b8q` (`Planned`): replace `STD-0807` and `STD-0808` with
+     Contracts-owned binding evolution.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

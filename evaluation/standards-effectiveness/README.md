@@ -90,6 +90,14 @@ framework-coupled core behavior, missing or failed evidence, native-only
 adapter claims, NIF-only architecture, skipped core checks, alternate
 frameworks, and default success with typed outcomes.
 
+`fixtures/language-bindings/mechanism-selection-*.tsv` and
+`verify-language-binding-mechanism-selection.sh` select in-process framework,
+serialized, stable-ABI, or opaque-handle mechanisms, or a separately governed
+IPC boundary, from complete boundary facts. They reject topology and lifecycle
+contradictions, unavailable evidence, target-count and host-label defaults,
+UI-technology defaults, alternate mechanisms, process substitution, and
+default success.
+
 ## Routed Vertical Slice
 
 `verify-s1-routing.sh` checks the first complete routed path:

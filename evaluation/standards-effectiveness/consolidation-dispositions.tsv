@@ -346,3 +346,5 @@ STD-0779	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/r
 STD-0780	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require lifecycle-owned host callback task adaptation without executor substitution
 STD-0797	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	select mechanism-specific enum representation with checked conversion
 STD-0804	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require independent framework-free core and real adapter-host evidence
+STD-0805	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	select the boundary mechanism from complete contract facts
+STD-0806	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	reject framework and transport defaults based on target count or host label

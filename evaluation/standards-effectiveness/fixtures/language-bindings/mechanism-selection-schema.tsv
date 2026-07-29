@@ -1,0 +1,11 @@
+column	allowed
+case	*
+topology	in-process,process
+representation	framework,serialized,c-abi,opaque
+selection	framework,serialized,c-abi,opaque,ipc
+lifecycle	fit,mismatch
+requirement	supported,unsupported
+capability	available,unavailable
+evidence	complete,missing
+fallback	none,target-count,host-label,ui-technology,alternate-framework,alternate-abi,alternate-serializer,process-substitute,default-success
+expected	allow,typed-invalid,typed-unsupported,typed-unavailable

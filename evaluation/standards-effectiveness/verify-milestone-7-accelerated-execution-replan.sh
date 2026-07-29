@@ -127,11 +127,12 @@ rg -F -q '`7.4b8l` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8m` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8n` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8o` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8p` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8p` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8q` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8p'* ]]
-[[ "$next_slice_line" == *'STD-0805'* ]]
-[[ "$next_slice_line" == *'STD-0806'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8q'* ]]
+[[ "$next_slice_line" == *'STD-0807'* ]]
+[[ "$next_slice_line" == *'STD-0808'* ]]
 
 [[ -x "$DECISION_ENGINE" && -x "$DECISION_ENGINE_FIXTURES" ]]
 "$DECISION_ENGINE_FIXTURES"

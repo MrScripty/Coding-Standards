@@ -3283,3 +3283,38 @@ repository changed.
 
 **Next slice:** `7.4b8p`, replace `STD-0805` and `STD-0806` with generic
 Language Binding boundary-mechanism selection.
+
+## 2026-07-29: Milestone 7.4b8p Binding Mechanism Selection
+
+**Outcome:** Accepted.
+
+`STD-0805` and `STD-0806` now select a binding boundary mechanism from the
+complete topology, deployment, isolation, representation, lifecycle,
+performance, target, packaging, support, capability, and verification
+contract. A selected process boundary routes to IPC; generated wrappers derive
+from a selected mechanism.
+
+**Verification:** reusable decision-table schema, 20 semantic cases and exact
+observations; canonical profile assertions; two exact dispositions; removal of
+the legacy framework table and six fixed rules; generic Language Binding
+boundary checks; row-5 decomposition; immutable execution train; plan
+lifecycle; shell syntax; metadata; links; whitespace; exact scope; and the
+complete checker suite with fail-fast shell behavior.
+
+**No-fallback result:** target count, host label, UI technology, framework
+popularity, alternate framework, alternate ABI, alternate serializer, process
+substitution, and default success cannot select or replace a mechanism.
+Contradictory facts are typed invalid; unavailable capability or evidence is
+typed unavailable.
+
+**Deviation:** process transport is governed by the existing IPC profile
+rather than becoming another Language Binding representation. Multiple
+mechanisms remain permitted only as independently declared and verified
+adapters, not as retry order.
+
+No binding compatibility, discovery, Rust specialization, routing, metadata,
+lockfile, generated inventory, owner map, configuration, or downstream
+repository changed.
+
+**Next slice:** `7.4b8q`, replace `STD-0807` and `STD-0808` with
+Contracts-owned binding evolution.

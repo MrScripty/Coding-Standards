@@ -12,6 +12,44 @@
 - Verification: Binding-representation decisions and affected native/host boundary tests.
 - Canonical owner: `profiles/boundaries/language-bindings.md`
 
+## Select The Boundary Mechanism
+
+Select the mechanism from the complete boundary contract before defining
+adapter types or generated host APIs. The contract identifies:
+
+- host consumers, supported runtimes, and process topology;
+- deployment, isolation, failure-containment, and trust boundaries;
+- value, call, callback, threading, ownership, and lifecycle requirements;
+- required latency, throughput, transfer, and startup characteristics;
+- supported targets, packaging, toolchain, and generation constraints; and
+- available framework, ABI, serialization, runtime, and verification
+  capabilities.
+
+Use binding-framework lifting only when one named framework supports the
+selected hosts and every required value, operation, callback, thread, and
+lifecycle behavior. Select a stable ABI only when layout, calling convention,
+ownership, validity, and supported consumers are explicit. Select opaque
+handles when identity and exported operations are the contract while native
+representation remains hidden. Select serialization when a named wire schema
+and serializer govern the representation.
+
+When the selected contract crosses a process boundary, select and route to the
+[IPC boundary profile](ipc.md); process transport is not a substitute for a
+failed in-process binding. Generated wrappers derive from one selected
+mechanism and are not an independent transport.
+
+Target-language count, host-language label, UI technology, framework
+popularity, and example repository layout do not select a mechanism. Multiple
+mechanisms may expose the same domain contract only as separately declared
+adapters with their own representation, lifecycle, capability, packaging, and
+native/host evidence.
+
+Return `invalid` when the selected mechanism contradicts known boundary facts,
+`unsupported` when a well-formed requirement is outside its declared contract,
+and `unavailable` when a required mechanism, runtime, generator, target, or
+verification capability cannot be obtained. Do not retry through another
+framework, ABI, serialization format, or process transport.
+
 ## Declare The Boundary Mechanism
 
 Every binding declares the concrete mechanism used for each exposed value or
@@ -127,12 +165,17 @@ An unsupported or failed representation cannot fall back to:
 - an opaque handle with undeclared lifetime; or
 - hand-edited generated code.
 
+An unsupported or unavailable mechanism also cannot fall back to a choice
+derived from target count, host label, UI technology, framework popularity, or
+the next available mechanism.
+
 Return the typed diagnostic for the selected mechanism.
 
 ## Verification
 
 Affected tests cover:
 
+- selection from complete boundary facts and rejection of contradictory facts;
 - every declared representation and successful conversion;
 - invalid, unsupported, and unavailable outcomes;
 - framework-lifted values versus stable ABI values;
