@@ -1986,3 +1986,46 @@ with 14 canonical owners still missing.
 
 **Next slice:** `7.4b5c` Rust binding runtime and handle adaptation pre-slice
 review.
+
+## 2026-07-28: Milestone 7.4b5c Rust Binding Runtime And Handle Adaptation
+
+**Outcome:** Accepted.
+
+The Rust Language Binding profile now separates host-handle lifetime from
+runtime and task lifecycle. Binding adapters consume a composition-owned
+runtime capability that may remain loaded and shared across calls or workflow
+runs without making a request, workflow, binding object, or task its owner.
+
+Every call creates fresh input, cancellation, result, and failure state.
+Persistence or keep-alive requests are scheduling inputs only; they neither
+transfer runtime ownership nor retain state from the workflow that requested
+them. Work is either scoped to the call or registered with the selected
+lifecycle owner before it can outlive the call.
+
+`STD-0798`, `STD-0799`, and `STD-0800` have exact final dispositions. Their
+legacy memory-ownership and async-bridging sections are bounded links without
+embedded-runtime, named-runtime, synchronous-drive, or blocking defaults.
+`F025` is resolved.
+
+**Deviations:** None.
+
+**Discovered issues:** None.
+
+**No-fallback/legacy result:** missing runtime, host-async, handle,
+task-registration, or result-delivery capability cannot create an embedded or
+alternate runtime, synchronously drive async work, block a host scheduler
+thread, detach work, discard terminal outcomes, carry prior request state
+forward, or select another binding mechanism. It returns the operation's typed
+`unsupported`, `unavailable`, or invalid diagnostic.
+
+**Verification:** 22 focused runtime/handle decisions, three exact
+dispositions, profile metadata and routing, bounded legacy replacement,
+preserved later sections, affected binding architecture/conversion and Rust
+Async lifecycle checks, disposition-derived parent progress, plan lifecycle,
+shell syntax, whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+The rolling Milestone 7 remainder is 616 IDs across 30 sources and 29 owners,
+with 14 canonical owners still missing.
+
+**Next slice:** `7.4b5d` explicit typed executor delegation pre-slice review.

@@ -7,9 +7,9 @@
 **Plan status:** `Active`
 
 **Current phase:** Milestone 7 dependent Rust lifecycle consolidation active;
-binding core/adapter boundary accepted.
+binding runtime and handle adaptation accepted.
 
-**Next slice:** Milestone 7.4b5c Rust binding runtime and handle adaptation
+**Next slice:** Milestone 7.4b5d explicit typed executor delegation
 pre-slice review.
 
 **Acceptance status:** `partial`
@@ -625,9 +625,24 @@ all structural/routing fixtures pass.
        lifecycle checker owned temporary `7.4b4e` statuses for `F025` and
        `F026`; those two mutable assertions are removed while all lifecycle
        behavior, disposition, legacy, and decomposition evidence remains;
-   - `7.4b5c` (`Planned`): make binding handle and async adaptation consume the
+   - `7.4b5c` (`Accepted`): make binding handle and async adaptation consume the
      selected runtime/lifecycle capability without retaining request inputs or
      owning an alternate runtime (`STD-0798`-`STD-0800`);
+     - host handles own only their declared adapter or domain-object reference;
+       runtime construction, sharing, task tracking, cancellation, and
+       shutdown remain composition/lifecycle responsibilities;
+     - composition-owned runtime capability may remain loaded and shared
+       across calls or workflow runs without ownership transfer;
+     - every call receives fresh input, cancellation, result, and failure
+       state, including when a persistence or keep-alive hint retains runtime
+       capability;
+     - 22 focused decisions reject binding/request-owned runtimes, retained
+       prior request state, synchronous driving, runtime creation, blocking,
+       detached work, missing task ownership, and alternate-runtime or
+       alternate-binding fallback;
+     - `F025` is resolved by exact dispositions for `STD-0798` through
+       `STD-0800`, bounded legacy replacement, and focused plus affected
+       regression evidence;
    - `7.4b5d` (`Planned`): canonicalize explicit typed executor delegation
      without catch-all fallback (`STD-0781`);
    - `7.4b5e` (`Planned`): preserve validated filesystem authority through the

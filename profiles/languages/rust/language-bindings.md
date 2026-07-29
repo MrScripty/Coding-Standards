@@ -9,7 +9,7 @@
 - Does not apply when: Values remain ordinary Rust values and no host-language representation or operation changes.
 - Requires: `core`, `workflow.verification`, `profile.language.rust`, `profile.boundary.language-bindings`
 - Specializes: `profile.language.rust`, `profile.boundary.language-bindings`
-- Verification: Rust binding-architecture and conversion decisions plus framework-free core checks and affected native/host boundary tests.
+- Verification: Rust binding architecture, runtime adaptation, and conversion decisions plus framework-free core checks and affected native/host boundary tests.
 - Canonical owner: `profiles/languages/rust/language-bindings.md`
 
 ## Representation Categories
@@ -55,6 +55,34 @@ JSON is not a universal ABI or universal wrapper representation. Generated
 host code remains derived from adapter-owned input and contains no domain
 behavior.
 
+## Handle And Runtime Adaptation
+
+Distinguish a host-visible handle from runtime and task lifecycle. A foreign
+handle owns only its declared adapter or domain-object reference. Releasing the
+last host handle releases that reference; it does not grant runtime shutdown
+authority unless the composition owner separately assigns that authority.
+
+When host adaptation needs asynchronous execution, also select the
+[Rust Async profile](async.md). Consume the runtime capability supplied by the
+application's composition owner. The capability may remain loaded and shared
+across calls or workflow runs without making a binding object, request, task,
+or requesting workflow its owner.
+
+Each call creates fresh input, cancellation, result, and failure state. Runtime
+reuse never carries any of that request-scoped state into later calls. A
+persistence or keep-alive request is lifecycle/scheduling input, not ownership
+transfer and not authority to retain the requesting workflow's state.
+
+Expose a host-compatible asynchronous result when work remains scoped to the
+call. Work that may outlive the call is registered with the selected lifecycle
+owner before submission, and its terminal outcome remains observable through
+that owner. The adapter does not synchronously drive an asynchronous runtime,
+create an embedded or alternate runtime, or detach work to satisfy a host call.
+
+Return typed `unsupported` or `unavailable` when the selected runtime,
+host-async, task-registration, or result-delivery capability cannot be
+provided.
+
 ## Fallible Conversion
 
 Use checked or fallible conversion whenever the target can reject:
@@ -89,6 +117,15 @@ Verify the core/adapter boundary through:
   edge points into the core; and
 - adapter and generated-boundary checks for every supported binding mechanism.
 
+Verify runtime and handle adaptation through:
+
+- reuse of one composition-owned runtime with fresh state for every call;
+- host-handle release without implicit runtime shutdown;
+- scoped asynchronous completion or lifecycle-owned tracked submission;
+- observed cancellation, failure, and result delivery for the current call;
+  and
+- typed failure when any required adaptation capability is unavailable.
+
 Test every conversion through:
 
 - successful native conversion;
@@ -107,6 +144,11 @@ binding dependency to the core, move domain behavior into an adapter, merge
 the layers, skip framework-free core verification, hand-edit generated output,
 or select another binding framework. Return the typed planning, build, or
 operation diagnostic for the selected boundary.
+
+Missing runtime or host-async capability cannot embed, create, replace, or
+synchronously drive a runtime; block a host scheduler thread; detach work;
+discard terminal outcomes; retain prior request state; or select another
+binding mechanism.
 
 Failed Rust binding conversion cannot fall back to:
 

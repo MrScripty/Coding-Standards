@@ -540,92 +540,27 @@ Serialization is permitted only under an explicit schema.
 
 ## Memory Ownership Model
 
-The core language owns all allocated memory. Foreign languages hold smart
-pointers managed by the binding framework, never raw pointers.
+Canonical host-handle lifetime, runtime adaptation, and request-state ownership
+moved to the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md#handle-and-runtime-adaptation).
 
-```rust
-// BAD: Exposing raw pointer
-#[uniffi::export]
-fn get_api() -> *const MyApi { /* ... */ }
-
-// GOOD: Arc-wrapped object
-#[derive(uniffi::Object)]
-pub struct FfiApi {
-    inner: Arc<MyApi>,
-}
-
-#[uniffi::export]
-impl FfiApi {
-    #[uniffi::constructor]
-    pub async fn new(path: String) -> Result<Arc<Self>, FfiError> {
-        let api = MyApi::new(&path).await.map_err(FfiError::from)?;
-        Ok(Arc::new(Self { inner: Arc::new(api) }))
-    }
-}
-```
-
-### Rules
-
-1. Objects shared across FFI are wrapped in `Arc<>` (UniFFI) or
-   `ResourceArc<>` (Rustler).
-2. Foreign code holds a reference-counted handle. When all references drop,
-   Rust's `Drop` runs automatically.
-3. Records (structs without methods) are value types — data is copied at the
-   boundary, not shared.
-4. Never expose `Box<T>` or raw pointers across FFI.
-5. For NIF resources that need async, embed the tokio runtime inside the
-   resource so it outlives individual NIF calls:
-
-```rust
-pub struct EngineResource {
-    executor: Arc<tokio::sync::RwLock<Engine>>,
-    runtime: Arc<tokio::runtime::Runtime>,
-}
-```
-
-See [RUST-INTEROP-STANDARDS.md](RUST-INTEROP-STANDARDS.md) for the general principle
-of copying data out of foreign buffers.
+Raw foreign-memory authority remains governed by the
+[Rust Interop Profile](../../profiles/languages/rust/interop.md). A host handle
+or binding resource does not own the selected runtime merely because it uses
+that runtime.
 
 ---
 
 ## Async Bridging
 
-When the core library uses async (tokio), the FFI layer must bridge async
-functions so foreign languages can call them naturally.
+Canonical host-async and runtime-capability adaptation moved to the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md#handle-and-runtime-adaptation).
 
-**UniFFI:** Annotate the impl block with the async runtime. The framework
-generates language-appropriate async APIs (Python `async def`, Kotlin
-`suspend fun`, Swift `async`).
-
-```rust
-#[uniffi::export(async_runtime = "tokio")]
-impl FfiApi {
-    pub async fn search(&self, query: String) -> Result<Vec<FfiResult>, FfiError> {
-        let result = self.inner.search(&query).await.map_err(FfiError::from)?;
-        Ok(result.into_iter().map(FfiResult::from).collect())
-    }
-}
-```
-
-**Rustler:** The BEAM VM must never block on a scheduler thread. Use
-`spawn_blocking` or the resource's embedded tokio runtime to run async work
-off the BEAM scheduler:
-
-```rust
-#[rustler::nif(schedule = "DirtyCpu")]
-fn execute(resource: ResourceArc<EngineResource>, node_id: String) -> NifResult<String> {
-    resource.runtime.block_on(async {
-        let engine = resource.executor.read().await;
-        let result = engine.execute(&node_id).await
-            .map_err(|e| rustler::Error::Term(Box::new(e.to_string())))?;
-        serde_json::to_string(&result)
-            .map_err(|e| rustler::Error::Term(Box::new(e.to_string())))
-    })
-}
-```
-
-See [RUST-ASYNC-STANDARDS.md](RUST-ASYNC-STANDARDS.md) for Rust async
-patterns and tokio conventions.
+Runtime construction, tracked work, cancellation, shutdown, and blocking
+isolation remain governed by the
+[Rust Async Profile](../../profiles/languages/rust/async.md). A binding adapter
+consumes those capabilities without creating or synchronously driving another
+runtime.
 
 ---
 

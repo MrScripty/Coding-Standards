@@ -7,9 +7,9 @@ remainder that depends on the accepted generic Concurrency and Rust Async
 owners. It is planning evidence, not a normative binding, runtime, task,
 filesystem, listener, or security owner.
 
-Only the first implementation slice is fully specified. Later slices have
-frozen identifiers, owners, outcomes, and dependencies, but require a fresh
-pre-slice review before their implementation contracts become active.
+Only accepted implementation slices are fully specified. Planned later slices
+have frozen identifiers, owners, outcomes, and dependencies, but require a
+fresh pre-slice review before their implementation contracts become active.
 
 ## Slice 7.4b5a: Planning-Only Decomposition
 
@@ -171,18 +171,74 @@ finding state.
 
 ## Later Slice Constraints
 
-### Slice 7.4b5c: Binding Runtime And Handle Adaptation
+## Accepted Slice 7.4b5c: Binding Runtime And Handle Adaptation
 
-Refine `STD-0798` through `STD-0800` so binding handles own only host-visible
-handle lifetime and adaptation. A composition-owned runtime capability may be
-shared across calls and workflow runs; a binding object, request, or foreign
-resource cannot construct, embed as its owned lifecycle, synchronously drive,
-or replace that runtime. Per-call inputs, cancellation, and results remain
-request scoped and are never retained merely because the runtime remains
-alive. Missing capability returns the operation's typed outcome.
+**Outcome:** refine `STD-0798` through `STD-0800` so binding handles own only
+host-visible handle lifetime and adaptation. Runtime construction, sharing,
+task tracking, cancellation, and shutdown remain with the selected composition
+and lifecycle owners.
 
-This slice requires a fresh pre-slice review before its implementation contract
-becomes active.
+**Allowed write set:**
+
+- `profiles/languages/rust/language-bindings.md`;
+- `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`;
+- `evaluation/standards-effectiveness/fixtures/rust/binding-runtime-decisions.tsv`;
+- `evaluation/standards-effectiveness/verify-rust-binding-runtime.sh`;
+- the accepted binding architecture checker for removal of its temporary
+  `F025` status assertion only;
+- this decomposition checker for disposition and handoff state only;
+- consolidation dispositions, evaluation README, findings, active plan, and
+  execution ledger.
+
+No generic topic, Rust Async or Security profile, runtime implementation,
+binding framework configuration, workspace/Cargo file, generated artifact,
+template, lockfile, host-language package, scheduler implementation, or
+downstream repository belongs to this slice.
+
+**Required semantics:**
+
+- distinguish host-visible handle lifetime from runtime and task lifecycle;
+- consume a composition-owned runtime capability without constructing,
+  embedding as binding-owned state, replacing, or synchronously driving it;
+- permit that runtime capability to remain loaded and shared across calls or
+  workflow runs without making any requesting call or workflow its owner;
+- keep each call's input, cancellation, result, and failure state scoped to
+  that call and never carry them into later work because the runtime persists;
+- expose a host-compatible asynchronous result or submit work through the
+  accepted tracked lifecycle owner;
+- release host handles according to their declared ownership without treating
+  last-handle release as runtime shutdown authority; and
+- return typed `unsupported` or `unavailable` when the selected host/runtime
+  adaptation capability cannot be provided.
+
+**No fallback:** missing runtime, host-async, handle, task-registration, or
+result-delivery capability cannot create an embedded/global/alternate runtime,
+call a synchronous runtime driver, block a host scheduler thread, detach work,
+discard terminal outcomes, retain prior request state, or select another
+binding mechanism.
+
+**Focused evidence:** decisions cover shared runtime reuse across calls and
+workflow runs, workflow persistence hints without ownership transfer,
+request-scoped state, host-handle release, scoped await, tracked submission,
+missing capabilities, binding/request-owned runtimes, retained prior input,
+cancellation, and results, synchronous driving, alternate runtime creation,
+detached tasks, and missing lifecycle registration.
+
+**Acceptance gate:** all three identifiers have exact dispositions; profile
+metadata and routing remain valid; migrated legacy sections are bounded links
+without named runtime or blocking defaults; `F025` is resolved; later executor,
+path, and listener sections remain untouched; and focused plus affected
+regressions pass.
+
+**Pre-slice review:** accepted. All three sections refine one canonical Rust
+binding owner and consume the existing Rust Async owner without changing it.
+The review found no split disposition, new owner, or objective change.
+
+**Accepted result:** 22 focused decisions prove runtime reuse without
+request-state carry-forward, handle/runtime ownership separation, scoped or
+lifecycle-tracked work, typed capability failure, and no alternate-runtime,
+synchronous-drive, blocking, detached-work, or alternate-binding fallback.
+All three identifiers have exact dispositions and `F025` is resolved.
 
 ### Slice 7.4b5d: Explicit Executor Delegation
 

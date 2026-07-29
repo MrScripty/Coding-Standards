@@ -115,12 +115,13 @@ done < "$MAP"
 
 required_report=(
   '[milestone-7-f025-f026-slices.tsv](milestone-7-f025-f026-slices.tsv)'
-  'Only the first implementation slice is fully specified.'
+  'Only accepted implementation slices are fully specified.'
   'The accepted `STD-0802` disposition'
   'Bindings adapt a host call to an injected runtime/lifecycle capability'
   'A canonicalized `PathBuf` is'
-  'Per-call inputs, cancellation, and results remain'
+  "keep each call's input, cancellation, result, and failure state scoped"
   '## Accepted Slice 7.4b5b: Binding Core And Adapter Boundary'
+  '## Accepted Slice 7.4b5c: Binding Runtime And Handle Adaptation'
   '**No fallback:**'
   'Independent trust-boundary groups remain'
 )
