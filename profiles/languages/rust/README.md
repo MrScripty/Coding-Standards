@@ -40,6 +40,8 @@ according to the crate's feature contract.
 - Do not hold synchronous guards across `.await`.
 - Deny unsafe by default and route legitimate unsafe work to the current
   [unsafe guidance](../../../languages/rust/RUST-UNSAFE-STANDARDS.md).
+- Route raw foreign memory, checked dimensions, and callback borrows through
+  the [Rust Interop profile](interop.md).
 - Keep generated bindings derived and test both native and host sides when that
   boundary changes.
 
@@ -52,7 +54,7 @@ here:
 - [Async](../../../languages/rust/RUST-ASYNC-STANDARDS.md)
 - [Cross-platform](../../../languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md)
 - [Dependencies](../../../languages/rust/RUST-DEPENDENCY-STANDARDS.md)
-- [Interop](../../../languages/rust/RUST-INTEROP-STANDARDS.md)
+- [Interop wire-format guidance](../../../languages/rust/RUST-INTEROP-STANDARDS.md#serde-wire-format-alignment)
 - [Language bindings](../../../languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md)
 - [Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)
 - [Security](../../../languages/rust/RUST-SECURITY-STANDARDS.md)

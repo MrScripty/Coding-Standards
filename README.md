@@ -36,6 +36,7 @@ reference material.
 | [profiles/boundaries/language-bindings.md](profiles/boundaries/language-bindings.md) | Binding mechanisms, representation categories, thin adapters, conversion outcomes, and generated wrappers | Host-language APIs, generated bindings, stable ABIs, serialized values, or opaque handles |
 | [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
 | [profiles/languages/rust/README.md](profiles/languages/rust/README.md) | Rust mechanisms and focused verification | Rust-owned changes |
+| [profiles/languages/rust/interop.md](profiles/languages/rust/interop.md) | Checked dimensions, raw-slice preconditions, callback lifetimes, and copy-after-proof | Rust access to foreign memory or borrowed callback data |
 | [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, simplicity/complection guidance, layering, service independence, runtime wiring guidance | Setting up any new codebase |
 | [TESTING-STANDARDS.md](TESTING-STANDARDS.md) | Test placement strategy, naming, coverage, vertical slices, and cross-layer verification guidance | Writing maintainable tests |
 | [COMMIT-STANDARDS.md](COMMIT-STANDARDS.md) | Migration index, conventional commit syntax, and message examples | Existing links and commit-message reference |

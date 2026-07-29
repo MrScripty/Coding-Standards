@@ -146,6 +146,14 @@ check typed invalid/unsupported/unavailable outcomes, exact dispositions,
 metadata, routing, link-only legacy replacement, and no representation
 fallback.
 
+## Rust Foreign-Memory Decision Fixtures
+
+`fixtures/rust/foreign-memory-decisions.tsv` and
+`verify-rust-interop-memory.sh` check checked conversion before arithmetic,
+pointer/alignment/allocation/provenance proof, initialized extent, zero-length
+rules, callback lifetime, copy ordering, typed failures, exact dispositions,
+metadata, routing, and legacy unsafe-pattern removal.
+
 ## Filesystem Containment Fixtures
 
 `fixtures/security/path-containment-decisions.tsv` and

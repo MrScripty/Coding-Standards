@@ -1459,3 +1459,31 @@ sources and 31 owners, with 20 ownership gaps. The S1 context route remains 6
 modules and 597 of 11066 baseline lines.
 
 **Next slice:** `7.4b3d`.
+
+## 2026-07-28: Milestone 7.4b3d Rust Foreign-Memory Proof
+
+**Outcome:** Accepted.
+
+The Rust Interop profile now owns checked dimension conversion, raw-slice
+preconditions, explicit zero-length rules, copy-after-proof, callback lifetime,
+and validated adapter isolation. Allocation, provenance, initialization,
+alignment, extent, aliasing, and provider lifetime are proven before access.
+
+Frozen identifiers `STD-0752` through `STD-0756` have exact final
+dispositions. Their legacy sections are link-only; the unrelated Serde
+wire-format section remains unchanged.
+
+**No-fallback/legacy result:** failed proof cannot use unchecked casts,
+`unwrap_or(0)`, empty-slice substitution, wrapping/saturation/truncation,
+assumed provenance, copy-after-invalid-construction, or escaped borrows.
+
+**Verification:** Rust foreign-memory decisions, exact dispositions, metadata,
+routing, legacy unsafe-pattern rejection, decomposition lifecycle, plan
+fixtures, shell syntax, whitespace, and all standards-effectiveness
+regressions pass.
+
+The rolling Milestone 7 remainder is 658 IDs across 32 sources and 31 owners,
+with 19 canonical owners still missing. The compact S1 route remains 6 modules
+and now measures 599 of 11066 baseline lines.
+
+**Next slice:** `7.4b3e`.

@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave active; generic
-language-binding contract accepted.
+**Current phase:** Milestone 7 trust-boundary wave active; Rust foreign-memory
+proof accepted.
 
-**Next slice:** Milestone 7.4b3d, establish Rust foreign-memory proof on top of
-the accepted generic Interop contract.
+**Next slice:** Milestone 7.4b3e, replace unchecked Rust boundary arithmetic
+with checked conversion and typed rejection.
 
 **Acceptance status:** `partial`
 
@@ -491,8 +491,12 @@ all structural/routing fixtures pass.
      (`STD-0465`-`STD-0472`);
    - `7.4b3c` (`Accepted`): canonical generic language-binding contract
      (`STD-0483`-`STD-0486`);
-   - `7.4b3d` (`Planned`): Rust foreign-memory proof
+   - `7.4b3d` (`Accepted`): Rust foreign-memory proof
      (`STD-0752`-`STD-0756`);
+     - integration review finding (`Resolved`): the first decision fixture gave
+       missing evidence precedence over concrete malformed input; concrete
+       invalidity now wins, while independently missing proof returns typed
+       `unavailable`;
    - `7.4b3e` (`Planned`): Rust checked boundary arithmetic (`STD-0823`);
    - `7.4b3f` (`Planned`): Rust unsafe proof and caller contracts
      (`STD-0843`-`STD-0848`); and

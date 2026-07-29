@@ -252,3 +252,8 @@ STD-0483	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md
 STD-0484	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	separate binding transport from ABI representation
 STD-0485	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	move	preserve the thin adapter layer contract
 STD-0486	LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	merge	route concrete mechanisms to language specializations
+STD-0752	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	move	establish the Rust foreign-boundary specialization
+STD-0753	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	require complete raw slice construction proof
+STD-0754	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	copy only after foreign-memory preconditions hold
+STD-0755	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	isolate unsafe operations behind safe validated APIs
+STD-0756	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	bind callback thread and borrowed lifetime contracts
