@@ -2165,3 +2165,48 @@ with 14 canonical owners still missing.
 **Next slice:** `7.4b6`, planning only, to re-audit the independent
 trust-boundary remainder and activate exactly one owner-bounded correctness
 slice before `7.4c`.
+
+## 2026-07-28: Milestone 7.4b6 Independent Trust-Boundary Re-plan
+
+**Outcome:** Accepted.
+
+The rolling remainder contains 613 frozen identifiers across 30 legacy sources
+and 29 proposed canonical owners, with 14 owners still missing. The active
+trust-boundary subset contains 80 identifiers across seven owners: generic
+Security, Cross-Platform, and Interop plus their remaining Rust
+specializations.
+
+The audit selects only `STD-0596` through `STD-0600` for the next implementation
+slice. Those five generic Security sections atomically contain unresolved
+broken-reference finding `F016`, listener exposure, admission limits, shutdown,
+and transport liveness. Splitting the group would leave competing or unsafe
+transport policy active.
+
+**Deviations:** None.
+
+**Discovered issue (`Resolved`):** the initial focused checker used Bash's
+special `GROUPS` variable name for the group-fixture path, which resolved to
+the process group identifier. The checker now uses an ordinary, explicit
+`GROUP_FILE` path.
+
+**Discovered issue (`Deferred to 7.4b7a`):** the legacy network group combines
+a nonexistent Concurrency shutdown anchor with universal bind addresses,
+forced termination after an unqualified timeout, and a mandatory half-open
+detection mechanism. These issues are frozen into `7.4b7a`; this planning slice
+does not change normative guidance.
+
+**No-fallback/legacy result:** the re-plan does not authorize universal
+addresses, capacities, timeouts, keepalive/heartbeat policy, force-close
+behavior, alternate runtimes/listeners, compatibility copies, or weaker
+verification. Missing facts in the future implementation must produce typed
+outcomes.
+
+**Verification:** exact 80-ID/seven-owner trust audit, exact five-ID next-slice
+proposal with zero premature dispositions, owner/dependency state, parent and
+active-plan linkage, plan lifecycle, shell syntax, whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+The rolling Milestone 7 remainder remains 613 IDs across 30 sources and 29
+owners, with 14 canonical owners still missing.
+
+**Next slice:** `7.4b7a` generic network transport contract pre-slice review.

@@ -297,6 +297,14 @@ checker validates exact ownership, dispositions, serial progress,
 accepted-owner dependencies, active-plan handoff, and the planning-only
 boundary without moving normative guidance.
 
+`milestone-7-independent-trust-replan.md`,
+`milestone-7-independent-trust-groups.tsv`, and
+`milestone-7-independent-trust-next-slice.tsv` resume the independent
+trust-boundary wave after the lifecycle bridge. The focused checker proves the
+80-ID/seven-owner remainder, owner existence and dependencies, and the exact
+five-ID generic Security network-transport next slice without moving normative
+guidance or recording premature dispositions.
+
 `verify-rust-binding-architecture.sh` checks framework-independent Rust core
 types and behavior, one-way adapter dependencies, adapter-scoped binding
 features, generated-output ownership, framework-free core verification, and

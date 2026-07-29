@@ -1,0 +1,6 @@
+slice	order	id	source	target	disposition	rationale
+7.4b7a	1	STD-0596	SECURITY-STANDARDS.md	topics/security.md	refine	establish the generic network transport security boundary
+7.4b7a	2	STD-0597	SECURITY-STANDARDS.md	topics/security.md	refine	derive listener exposure from the declared service contract
+7.4b7a	3	STD-0598	SECURITY-STANDARDS.md	topics/security.md	refine	own admission capacity and typed overload before acceptance
+7.4b7a	4	STD-0599	SECURITY-STANDARDS.md	topics/security.md	refine	consume canonical lifecycle shutdown without broken or force-close defaults
+7.4b7a	5	STD-0600	SECURITY-STANDARDS.md	topics/security.md	refine	select liveness policy from protocol and resource risk without fixed timeout fallback

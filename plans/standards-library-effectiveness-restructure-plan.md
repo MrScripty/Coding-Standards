@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 dependent Rust lifecycle consolidation accepted;
-the independent trust-boundary remainder requires a fresh owner-and-correctness
-re-plan.
+**Current phase:** Milestone 7 independent trust-boundary re-plan accepted;
+generic network transport pre-slice review is next.
 
-**Next slice:** Milestone 7.4b6 independent trust-boundary remainder re-plan.
+**Next slice:** Milestone 7.4b7a generic network transport contract pre-slice
+review.
 
 **Acceptance status:** `partial`
 
@@ -31,6 +31,8 @@ re-plan.
 **Rust Async decomposition:** [Four owner-bounded specialization slices](../evaluation/standards-effectiveness/milestone-7-rust-async-decomposition.md)
 
 **F025/F026 decomposition:** [Dependent Rust binding and security lifecycle slices](../evaluation/standards-effectiveness/milestone-7-f025-f026-decomposition.md)
+
+**Independent trust-boundary re-plan:** [Seven owner groups and generic network next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -683,9 +685,21 @@ all structural/routing fixtures pass.
      - re-plan trigger (`Resolved`): the accepted filesystem-authority checker
        owned the temporary partial `F026` status; that mutable assertion is
        removed so the listener lifecycle checker solely owns final resolution.
-   - `7.4b6` (`Planned`): re-audit the independent trust-boundary remainder,
+   - `7.4b6` (`Accepted`): re-audit the independent trust-boundary remainder,
      confirm current owners and correctness dependencies, and activate exactly
-     one owner-bounded slice without normative movement.
+     one owner-bounded slice without normative movement;
+     - 80 undisposed trust-boundary identifiers remain across seven owner
+       groups;
+     - all generic owners exist; only the Rust Cross-Platform specialization
+       owner remains missing in this subset;
+     - unresolved `F016` and its adjacent network transport sections are the
+       highest-priority active-wave correctness group;
+     - the planning slice changes no normative standard, legacy section, final
+       disposition, generated artifact, configuration, or downstream file;
+       and
+   - `7.4b7a` (`Planned`): replace generic listener exposure, admission,
+     shutdown, and liveness defaults with a contract-selected network
+     transport owner (`STD-0596`-`STD-0600`).
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
