@@ -162,6 +162,14 @@ operation-wide checked arithmetic, separate resource limits, zero contracts,
 typed rejection, no-fallback behavior, exact disposition, metadata, routing,
 and legacy unchecked-example removal.
 
+## Rust Unsafe-Contract Decision Fixtures
+
+`fixtures/rust/unsafe-contract-decisions.tsv` and
+`verify-rust-unsafe-contracts.sh` distinguish adjacent operation proof, caller
+contracts, module invariants, wrapper claims, mechanism-selected evidence, and
+feature-path execution. They also check exact dispositions, metadata, routing,
+legacy replacement, no-fallback behavior, and F023 closure.
+
 ## Filesystem Containment Fixtures
 
 `fixtures/security/path-containment-decisions.tsv` and

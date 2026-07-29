@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave active; Rust checked
-boundary arithmetic accepted.
+**Current phase:** Milestone 7 trust-boundary wave active; Rust unsafe proof
+and caller contracts accepted.
 
-**Next slice:** Milestone 7.4b3f, establish Rust unsafe proof and caller
-contracts.
+**Next slice:** Milestone 7.4b3g, establish Rust binding representations and
+checked conversions.
 
 **Acceptance status:** `partial`
 
@@ -504,7 +504,7 @@ all structural/routing fixtures pass.
      - coverage review finding (`Resolved`): the initial fixture named
        multiplication overflow but omitted addition overflow; both arithmetic
        paths now have explicit rejection decisions;
-   - `7.4b3f` (`Planned`): Rust unsafe proof and caller contracts
+   - `7.4b3f` (`Accepted`): Rust unsafe proof and caller contracts
      (`STD-0843`-`STD-0848`); and
    - `7.4b3g` (`Planned`): Rust binding representation and checked conversion
      (`STD-0772`-`STD-0775`, `STD-0794`-`STD-0796`,

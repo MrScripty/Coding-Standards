@@ -258,3 +258,9 @@ STD-0754	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/intero
 STD-0755	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	isolate unsafe operations behind safe validated APIs
 STD-0756	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/interop.md	refine	bind callback thread and borrowed lifetime contracts
 STD-0823	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	replace unchecked casts with checked typed size conversion
+STD-0843	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	move	establish the Rust unsafe contract owner
+STD-0844	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	preserve deny-by-default with explicit unsafe ownership
+STD-0845	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	separate block rationale from caller safety contracts
+STD-0846	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	require complete ownership lifetime and thread obligations
+STD-0847	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	select verification from the actual unsafe mechanism
+STD-0848	languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	refine	prohibit safe fallback claims from weakening unsafe proof

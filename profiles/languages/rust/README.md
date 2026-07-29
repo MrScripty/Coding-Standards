@@ -38,8 +38,8 @@ according to the crate's feature contract.
 - Keep domain logic synchronous unless async is part of its contract.
 - Give async runtimes and spawned tasks explicit lifecycle owners.
 - Do not hold synchronous guards across `.await`.
-- Deny unsafe by default and route legitimate unsafe work to the current
-  [unsafe guidance](../../../languages/rust/RUST-UNSAFE-STANDARDS.md).
+- Deny unsafe by default and route legitimate unsafe work through the
+  [Rust Unsafe profile](unsafe.md).
 - Route raw foreign memory, checked dimensions, and callback borrows through
   the [Rust Interop profile](interop.md).
 - Route untrusted dimensions, counts, offsets, strides, and lengths through
@@ -61,7 +61,6 @@ here:
 - [Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)
 - [Remaining security guidance](../../../languages/rust/RUST-SECURITY-STANDARDS.md)
 - [Tooling](../../../languages/rust/RUST-TOOLING-STANDARDS.md)
-- [Unsafe](../../../languages/rust/RUST-UNSAFE-STANDARDS.md)
 
 If a legacy Rust rule conflicts with this profile for a moved rule, this
 profile is canonical. Conflicts in unmoved specialized rules must be reported

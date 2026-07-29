@@ -1516,3 +1516,31 @@ with 18 canonical owners still missing. The compact S1 route remains 6 modules
 and now measures 601 of 11066 baseline lines.
 
 **Next slice:** `7.4b3f`.
+
+## 2026-07-28: Milestone 7.4b3f Rust Unsafe Contracts
+
+**Outcome:** Accepted.
+
+The Rust Unsafe profile now separates adjacent operation proof, public caller
+contracts, module invariants, safe-wrapper validation, feature-path execution,
+and mechanism-selected verification. Unsupported required evidence keeps
+acceptance partial or blocked.
+
+Frozen identifiers `STD-0843` through `STD-0848` have exact final
+dispositions. The legacy Rust Unsafe document is link-only, and `F023` is
+resolved after its Interop, checked-size, and unsafe-contract slices.
+
+**No-fallback/legacy result:** a wrapper, type signature, caller comment,
+adjacent comment, safe alternative, disabled feature, mock, different target,
+or unsupported verifier cannot stand in for proof of the selected unsafe path.
+
+**Verification:** Rust unsafe-contract decisions, exact dispositions, metadata,
+routing, legacy replacement, F023 closure, decomposition lifecycle, plan
+fixtures, shell syntax, whitespace, and all standards-effectiveness
+regressions pass.
+
+The rolling Milestone 7 remainder is 651 IDs across 31 sources and 30 owners,
+with 17 canonical owners still missing. The compact S1 route remains 6 modules
+and now measures 600 of 11066 baseline lines.
+
+**Next slice:** `7.4b3g`.

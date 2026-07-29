@@ -23,6 +23,7 @@ changes and focused fixture evidence.
 | F017 | Resolved in Milestone 7.4b1 | Security owns component-aware, symlink-aware containment and typed failure; Cross-Platform owns filesystem identity without lexical prefix or universal case-folding defaults. |
 | F018 | Resolved in Milestone 7.4b2c | Contracts owns runtime proof, IPC owns category/action-specific decoding and validated dispatch, and Security owns untrusted-input consequences without assertion or permissive fallback. |
 | F020 | Partially resolved in Milestone 5.2 | Authoritative-store deletion fallback was removed; phased-mutation atomicity remains Milestone 7. |
+| F023 | Resolved in Milestone 7.4b3f | Rust Interop proves foreign-memory authority, Rust Security proves checked sizes, and Rust Unsafe separates adjacent operation proof, caller contracts, module invariants, and mechanism-selected evidence without safe-path fallback. |
 | F024 | Resolved in Milestone 5.2 | Rust binding compatibility is classified independently for generated, package, ABI, wire, and persisted boundaries. |
 | F026 | Partially resolved in Milestone 5.2 | Catch-all executor fallback was replaced by typed unsupported delegation; spawn and TOCTOU findings remain Milestone 7. |
 | F027 | Resolved in Milestone 7.3a | Major version zero and prerelease identifiers are distinct, and retained publication guidance now consumes that decision. |
