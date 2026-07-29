@@ -1,2 +1,2 @@
 slice	order	id	source	target	disposition	rationale
-7.4b7g	1	STD-0473	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	bind foreign registration delivery unregistration release and shutdown to the provider contract while consuming concurrency-owned work lifecycle
+7.4b7g	1	STD-0473	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	bind foreign registration delivery unregistration release and shutdown to the provider contract and route only outliving callback work to concurrency

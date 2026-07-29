@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 independent trust-boundary owner correction
-accepted; event registration lifecycle implementation is next.
+**Current phase:** Milestone 7 verification repair required before
+event-registration implementation; normative implementation has not started.
 
-**Next slice:** Milestone 7.4b7g event registration lifecycle contract.
+**Next slice:** Milestone 7.4b7f2 executor-delegation verification repair.
 
 **Acceptance status:** `partial`
 
@@ -777,16 +777,39 @@ all structural/routing fixtures pass.
      owner-bounded subset of `F048` without normative movement;
      - six active owner groups remain after Rust Cross-Platform acceptance;
      - `STD-0473` is one coherent provider-governed event-registration
-       lifecycle that consumes Concurrency-owned asynchronous work rules, while
-       the other nine generic Interop IDs remain mixed-role;
+       lifecycle that conditionally consumes Concurrency-owned work rules only
+       when callback-created work can outlive invocation, while the other nine
+       generic Interop IDs remain mixed-role;
      - destruction-linked cleanup and incomplete callback/release semantics
        are recorded as `F049`; and
      - the planning slice changes no normative or legacy standard, final
        disposition, generated artifact, configuration, or downstream file.
-   - `7.4b7g` (`Planned`): replace the event-subscription default with an
+   - `7.4b7f1` (`Accepted`): correct the event-registration implementation
+     contract after rejected pre-transfer verification;
+     - keep Concurrency selection conditional on callback-created work that
+       can outlive invocation rather than adding an unconditional metadata
+       dependency;
+     - derive ordering and repeated/concurrent behavior from provider facts;
+     - require lifecycle-phase-aware outcomes and independent delivery/work
+       dimensions;
+     - prove unrelated legacy content through staged diff and run the complete
+       suite with fail-fast shell behavior; and
+     - change no normative, legacy, disposition, generated, implementation-
+       checker, parent-decomposition, source, configuration, or downstream
+       file;
+     - full-suite finding (`Open`): fail-fast verification exposed that the
+       executor-delegation checker still requires the superseded partial
+       `F026` state; the live `f497517` baseline fails identically, and `F050`
+       assigns a verification-only repair before normative work.
+   - `7.4b7f2` (`Planned`): replace only the stale temporary `F026` status
+     assertion in the executor-delegation checker with the accepted resolved
+     state, preserve all behavioral and disposition evidence, and restore a
+     green fail-fast complete suite without normative movement.
+   - `7.4b7g` (`Blocked`): replace the event-subscription default with an
      explicit Interop registration lifecycle contract (`STD-0473`) that owns
-     foreign registration/release and consumes Concurrency for asynchronous
-     work ownership and cancellation.
+     provider registration/delivery/unregistration/release/shutdown behavior
+     and conditionally routes only outliving callback-created work to
+     Concurrency; activate only after `7.4b7f2` passes.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

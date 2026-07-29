@@ -2444,3 +2444,49 @@ whitespace, and every
 `evaluation/standards-effectiveness/verify-*.sh` regression pass.
 
 **Next slice:** `7.4b7g` event registration lifecycle contract implementation.
+
+## 2026-07-28: Milestone 7.4b7f1 Event Registration Pre-slice Correction
+
+**Outcome:** Corrective decision accepted; normative implementation blocked on
+pre-existing verification repair.
+
+The first implementation attempt was rejected before transfer. An
+unconditional `topic.concurrency` metadata requirement exceeded the accepted
+write set by invalidating four dependent metadata-closure checkers. Independent
+review also found a universal shutdown sequence, delivery/work conflation,
+missing lifecycle-phase evidence, assumed idempotent unregistration, weak
+concurrent/shutdown coverage, an out-of-scope parent report edit, and weak
+proof that unrelated legacy content remained unchanged.
+
+**Decision:** Interop owns provider registration, delivery guarantees,
+in-flight behavior, unregistration, foreign release, and provider shutdown
+facts. Concurrency is selected only when callback-created work can outlive its
+invocation. Provider facts select valid ordering and repeated/concurrent
+behavior; lifecycle phase selects unavailable versus incomplete-cleanup
+outcomes.
+
+**Deviations:** The unconditional Concurrency dependency in the original
+`7.4b7g` plan is removed because it over-routes synchronous registration work
+and requires out-of-scope checker changes.
+
+**Discovered issues:** A complete-suite shell loop can return success when an
+intermediate checker fails if fail-fast behavior is not enabled. The corrected
+fail-fast run exposed `F050`: `verify-rust-binding-executor-delegation.sh`
+still requires the partial `F026` status from Milestone `7.4b4e`, while
+accepted Milestone `7.4b5f` resolved `F026`. The live `f497517` baseline fails
+the same assertion, so this is not caused by the corrective planning diff.
+
+**No-fallback/legacy result:** the correction does not broaden the write set,
+mask metadata failures, conflate provider scheduling with local work lifetime,
+impose one shutdown order, assume idempotent unregistration, or accept
+destruction-linked cleanup.
+
+**Verification:** exact 594-ID global and 61-ID/six-owner trust audit, exact
+one-ID proposal with zero dispositions, corrected conditional ownership,
+file-exact implementation scope, plan lifecycle, shell syntax, and whitespace
+pass. The complete fail-fast suite stops at the pre-existing stale `F026`
+assertion; this result is recorded rather than claimed as passing.
+
+**Next slice:** `7.4b7f2`, verification only, to replace the stale temporary
+`F026` assertion and restore a green fail-fast complete suite. Corrected
+`7.4b7g` remains the next normative slice.

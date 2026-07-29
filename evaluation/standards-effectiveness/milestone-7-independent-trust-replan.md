@@ -23,7 +23,7 @@ freezes the active trust-boundary subset:
 | ---: | --- | ---: | --- | --- |
 | 1 | `topics/security.md` | 7 | Exists | None |
 | 2 | `topics/cross-platform.md` | 6 | Exists | None |
-| 3 | `profiles/boundaries/interop.md` | 10 | Exists | Accepted Contracts and Concurrency |
+| 3 | `profiles/boundaries/interop.md` | 10 | Exists | Accepted Contracts; conditional Concurrency selection |
 | 4 | `profiles/languages/rust/interop.md` | 1 | Exists | Interop |
 | 5 | `profiles/languages/rust/security.md` | 3 | Exists | Security and Rust Async |
 | 6 | `profiles/languages/rust/language-bindings.md` | 34 | Exists | Language Bindings and Rust Async |
@@ -50,11 +50,12 @@ Select only `STD-0473` as the next implementation slice. The Interop profile
 must identify the foreign registration owner, callback lifetime and thread,
 re-entrancy, provider delivery guarantees, in-flight provider behavior,
 unregistration semantics, release authority, and provider shutdown ordering.
-It must consume the generic Concurrency owner for asynchronous work ownership,
-failure observation, cancellation propagation, and work shutdown. It must
-return typed `invalid`, `unsupported`, `unavailable`, or incomplete-cleanup
-diagnostics when the selected provider/subscriber contract cannot be
-completed.
+When callback-created work can outlive its invocation, it must consume the
+generic Concurrency owner for work ownership, failure observation,
+cancellation propagation, and work shutdown. Provider delivery scheduling
+alone does not select Concurrency. The lifecycle must return typed `invalid`,
+`unsupported`, `unavailable`, or incomplete-cleanup diagnostics when the
+selected provider/subscriber contract cannot be completed.
 
 The slice refines one existing boundary owner and does not move event-domain
 behavior, contract evolution, IPC decoding, wire schemas, language-specific
@@ -453,6 +454,96 @@ infer registration release from finalization or garbage collection, combine
 the remaining Interop roles, select an alternate event mechanism, or activate
 implementation before exact measurement and pre-slice review pass.
 
+## Accepted Slice 7.4b7f1: Event Registration Pre-slice Correction
+
+The first `7.4b7g` implementation attempt was rejected before transfer. Adding
+an unconditional `topic.concurrency` metadata requirement exceeded the
+accepted write set because four dependent binding/Interop checkers each own an
+explicit metadata closure. Independent review also found that the draft
+conflated asynchronous provider delivery with locally outliving callback work,
+mandated one shutdown sequence, lacked lifecycle-phase evidence, treated
+repeated unregistration as universally successful, and did not prove the
+bounded legacy edit strongly enough.
+
+**Decision:** use conditional Concurrency selection. Interop owns provider-
+granted registration, delivery guarantees, in-flight provider behavior,
+unregistration, foreign release, and provider shutdown facts. Select
+Concurrency only when callback-created work can outlive the callback
+invocation. Do not add `topic.concurrency` to the profile's unconditional
+metadata requirements and do not edit dependent metadata-closure checkers.
+
+**Allowed write set:**
+
+- this report;
+- `milestone-7-independent-trust-groups.tsv`;
+- `milestone-7-independent-trust-next-slice.tsv`;
+- `verify-milestone-7-independent-trust-replan.sh`;
+- evaluation README, findings, active plan, and execution ledger.
+
+No normative or legacy standard, final disposition, generated inventory,
+owner map, parent decomposition report, implementation checker, metadata
+contract, router, template, source, test, configuration, dependency, lockfile,
+build output, runtime, workflow fixture, or downstream repository belongs to
+this corrective planning slice.
+
+**Acceptance result:** the corrective decision is accepted. The corrected
+implementation contract preserves the existing Interop metadata closure, makes
+Concurrency conditional, requires provider-selected ordering and
+repeated/concurrent behavior, requires phase-aware typed outcomes, and requires
+staged-diff proof that unrelated legacy Interop sections remain byte-for-byte
+unchanged. Normative implementation remains blocked until `7.4b7f2` repairs
+the pre-existing complete-suite verification defect.
+
+**Verification procedure:** invoke the complete checker suite with fail-fast
+shell behavior. A loop whose final command succeeds does not prove earlier
+checkers passed.
+
+**Verification result:** the focused independent-trust checker, plan lifecycle,
+shell syntax, and whitespace checks pass. The fail-fast complete suite stops at
+`verify-rust-binding-executor-delegation.sh` because that checker still
+requires the historical partial `F026` status from `7.4b4e`; the accepted
+`7.4b5f` slice resolved `F026`. The live `f497517` baseline fails the same
+assertion, proving this is a pre-existing checker defect rather than a result of
+the corrective planning diff. This defect is recorded as `F050`.
+
+**No fallback:** do not broaden the implementation write set to repair an
+unnecessary unconditional dependency, treat asynchronous provider delivery as
+proof of outliving local work, impose a universal shutdown order, assume
+repeated unregistration is idempotent, or accept a suite command that masks an
+intermediate failure.
+
+## Planned Slice 7.4b7f2: Executor Delegation Verification Repair
+
+**Outcome:** restore truthful complete-suite verification before normative
+Interop work by replacing the stale temporary `F026` assertion with the
+accepted resolved state.
+
+**Allowed write set:**
+
+- `verify-rust-binding-executor-delegation.sh`;
+- this report and checker for prerequisite and accepted-state handoff;
+- evaluation README, findings, active plan, and execution ledger.
+
+No normative or legacy standard, disposition, fixture, generated artifact,
+owner map, router, metadata contract, parent decomposition report, source,
+configuration, dependency, lockfile, build output, workflow fixture, runtime,
+or downstream repository belongs to this verification-only slice.
+
+**Required correction:** replace only the stale temporary `F026` status
+assertion. Preserve the executor-delegation decisions, exact `STD-0781`
+disposition, metadata closure, canonical profile requirements, bounded legacy
+proof, and dependent decomposition checks.
+
+**Acceptance gate:** the repaired checker passes directly; the focused
+independent-trust checker still passes; the staged diff contains only the
+authorized verification and planning artifacts; shell syntax and whitespace
+pass; and every `evaluation/standards-effectiveness/verify-*.sh` checker passes
+under fail-fast execution.
+
+**No fallback:** do not weaken or skip the checker, accept multiple `F026`
+states, rewrite historical evidence, change normative behavior, or continue to
+`7.4b7g` while the complete suite is red.
+
 ## Planned Slice 7.4b7g: Event Registration Lifecycle Contract
 
 [milestone-7-independent-trust-next-slice.tsv](milestone-7-independent-trust-next-slice.tsv)
@@ -461,7 +552,8 @@ freezes `STD-0473`.
 **Outcome:** extend `profiles/boundaries/interop.md` so foreign event
 registration, callback delivery guarantees, unregistration, release, and
 provider shutdown follow one explicit provider/subscriber lifecycle contract,
-while asynchronous work ownership and cancellation remain with Concurrency.
+while callback-created work that can outlive its invocation is conditionally
+routed to Concurrency.
 
 **Allowed write set:**
 
@@ -469,29 +561,31 @@ while asynchronous work ownership and cancellation remain with Concurrency.
 - only the event-subscription section in `INTEROP-STANDARDS.md`;
 - `evaluation/standards-effectiveness/fixtures/interop/event-registration-decisions.tsv`;
 - new `evaluation/standards-effectiveness/verify-interop-event-registration.sh`;
-- `evaluation/standards-effectiveness/verify-interop-boundary-policy.sh`, only
-  to include the accepted Concurrency dependency in its metadata closure;
 - this report and checker for accepted disposition and handoff state;
 - `evaluation/standards-effectiveness/consolidation-dispositions.tsv`;
 - evaluation README, findings, active plan, and execution ledger.
 
 No contract-evolution, runtime-decoding, serialization, enum/struct alignment,
 routing, IPC, Language Binding, generic Concurrency normative change,
-language-specific, generated, template, package/configuration/dependency/
-lockfile, workflow fixture, source, runtime, build-output, or downstream file
-belongs to this slice.
+language-specific, dependent metadata-closure checker, parent decomposition
+report, generated, template, package/configuration/dependency/lockfile,
+workflow fixture, source, runtime, build-output, or downstream file belongs to
+this slice.
 
 **Required semantics:**
 
-- add `topic.concurrency` as an explicit dependency without restating its
-  asynchronous work, failure, cancellation, or shutdown rules;
 - name registration, callback, unregistration, and foreign release authority;
 - define callback thread, re-entrancy, input lifetime, and in-flight delivery
   behavior;
-- define repeated unregistration and concurrent provider delivery behavior;
-- order provider admission stop, delivery quiescence or provider cancellation,
-  unregistration, foreign release, and provider shutdown from the selected
-  contract;
+- keep provider delivery scheduling separate from callback-created work
+  lifetime, selecting Concurrency only when local work can outlive invocation;
+- make the provider contract select repeated and concurrent unregistration
+  outcomes instead of assuming idempotent success;
+- make the provider contract select and prove valid delivery stop,
+  quiescence/cancellation, unregistration, release, and shutdown ordering
+  instead of imposing one sequence;
+- distinguish pre-registration, active, unregistering, and released lifecycle
+  phases;
 - distinguish complete cleanup from typed incomplete cleanup; and
 - return `invalid`, `unsupported`, or `unavailable` when required lifecycle
   facts or capabilities cannot be established.
@@ -502,24 +596,28 @@ stale registration; silently drop callbacks; retry on an arbitrary thread;
 select an alternate event mechanism; or claim successful cleanup after
 incomplete foreign release.
 
-**Focused evidence:** decisions cover synchronous and asynchronous provider
-delivery, in-flight callbacks, repeated and concurrent unregistration,
-subscriber and provider shutdown order, unavailable provider quiescence or
-release capability, explicit Concurrency delegation for callback work, and
-rejection of framework lifecycle assumptions and detached callback cleanup.
+**Focused evidence:** decisions independently cover lifecycle phase, provider
+delivery scheduling, local callback-work lifetime, in-flight delivery,
+provider-selected repeated/concurrent unregistration outcomes, provider-
+selected subscriber/provider shutdown and release ordering, unavailable
+quiescence/release capability before and after activation, conditional
+Concurrency routing, and rejection of framework lifecycle assumptions and
+detached callback cleanup.
 
 **Acceptance gate:** `F049` is resolved; `STD-0473` has one exact `refine`
 disposition; the Interop profile owns the complete registration lifecycle; the
 legacy section is a bounded canonical link without C#/TypeScript examples or
 destruction-linked cleanup; Contracts, Concurrency, and existing Interop
-ownership checks pass; unrelated Interop sections remain unchanged; and focused
-plus affected regressions pass.
+ownership checks pass; staged diff proves unrelated Interop sections remain
+byte-for-byte unchanged; and focused plus affected regressions pass under a
+fail-fast complete-suite invocation.
 
 **Pre-slice review:** accepted. Event registration is a foreign resource with
 provider-governed callback and release authority already owned by the Interop
 boundary profile. The one-ID slice completes that lifecycle without absorbing
 event-domain behavior, Contracts, IPC, Language Bindings, language recipes, or
-the other nine mixed-role Interop sections.
+the other nine mixed-role Interop sections. Activation is blocked only on
+accepted completion of `7.4b7f2`.
 
 ## Re-Plan Triggers
 

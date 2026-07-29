@@ -94,7 +94,7 @@ done
 expected_groups=(
   $'1\ttopics/security.md\t7\texists\tnone\towner-correction-required'
   $'2\ttopics/cross-platform.md\t6\texists\tnone\towner-correction-required'
-  $'3\tprofiles/boundaries/interop.md\t10\texists\ttopics/contracts.md,topics/concurrency.md\tone-activated-nine-blocked'
+  $'3\tprofiles/boundaries/interop.md\t10\texists\ttopics/contracts.md\tone-activated-nine-blocked'
   $'4\tprofiles/languages/rust/interop.md\t1\texists\tprofiles/boundaries/interop.md\towner-correction-required'
   $'5\tprofiles/languages/rust/security.md\t3\texists\ttopics/security.md,profiles/languages/rust/async.md\towner-correction-required'
   $'6\tprofiles/languages/rust/language-bindings.md\t34\texists\tprofiles/boundaries/language-bindings.md,profiles/languages/rust/async.md\tdecomposition-required'
@@ -158,7 +158,11 @@ required_report=(
   'garbage collection does not prove'
   'fixtures/interop/event-registration-decisions.tsv'
   'verify-interop-event-registration.sh'
-  'verify-interop-boundary-policy.sh'
+  'conditional Concurrency selection'
+  'provider contract select'
+  'lifecycle phase'
+  '## Planned Slice 7.4b7f2: Executor Delegation Verification Repair'
+  'pre-existing checker defect'
   '**No fallback:**'
   '**Pre-slice review:** accepted.'
 )
@@ -170,12 +174,14 @@ rg -F -q '(milestone-7-independent-trust-replan.md)' "$PARENT"
 rg -F -q '61 remaining identifiers across six owners' "$PARENT"
 rg -F -q '| F048 | Partially corrected in Milestone 7.4b7f |' "$FINDINGS"
 rg -F -q 'Correct the remaining 60 cross-role destinations' "$FINDINGS"
-rg -F -q '| F049 | Planned for Milestone 7.4b7g |' "$FINDINGS"
+rg -F -q '| F049 | Planned for corrected Milestone 7.4b7g |' "$FINDINGS"
+rg -F -q '| F050 | Planned for Milestone 7.4b7f2 |' "$FINDINGS"
 rg -F -q '## Planned Slice 7.4b7g: Event Registration Lifecycle Contract' \
   "$REPORT"
 rg -F -q '`7.4b7f` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7g` (`Planned`)' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b7g' "$PLAN"
+rg -F -q '`7.4b7f2` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b7g` (`Blocked`)' "$PLAN"
+rg -F -q '**Next slice:** Milestone 7.4b7f2' "$PLAN"
 
 "$SCRIPT_DIR/verify-contract-ownership.sh"
 "$SCRIPT_DIR/verify-concurrency-policy.sh"

@@ -326,6 +326,10 @@ trust-boundary wave after the lifecycle bridge. The focused checker proves the
 and accepted Contracts/Concurrency/Interop dependencies, residual
 owner-correction status, and the exact one-ID event registration lifecycle next
 slice without moving normative guidance or recording premature dispositions.
+The accepted corrective pre-slice keeps Concurrency routing conditional on
+callback-created work that can outlive invocation, requires provider-selected
+lifecycle behavior and phase-aware evidence, and forbids broadening metadata
+checker closures to encode an unnecessary unconditional dependency.
 
 `verify-rust-target-configuration.sh` checks declared Rust targets,
 contract-selected `cfg`/build/feature/composition/dispatch mechanisms with
@@ -377,6 +381,13 @@ terminal evidence ownership, and inspection proof. It proves exact disposition
 of `STD-0724` and `STD-0725` and rejects assumed external cancellation,
 unprotected durable work, destruction-only or detached async cleanup,
 leaf/missing ownership, silent terminal outcomes, and tool-only evidence.
+
+The Milestone `7.4b7f1` fail-fast audit found that
+`verify-rust-binding-executor-delegation.sh` still requires the temporary
+partial `F026` status superseded by accepted Milestone `7.4b5f`. `F050` and
+planned verification-only slice `7.4b7f2` own that repair. Event-registration
+implementation remains blocked until the complete suite passes; the repair
+must not weaken executor-delegation behavior or disposition evidence.
 
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
