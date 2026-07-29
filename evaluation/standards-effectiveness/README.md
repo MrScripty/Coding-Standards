@@ -343,7 +343,9 @@ Accepted `7.4b7i` establishes the bounded Rust wire-representation contract
 and disposition. Accepted `7.4b7j` re-measures the remainder, records accepted
 baseline IDs structurally, and selects only the Rust external-input queue
 contract for `STD-0824`. Accepted `7.4b7k` establishes that contract with 18
-focused decisions; `7.4b7l` next replans the 58-ID trust remainder.
+focused decisions. Accepted `7.4b7l` re-measures the 58-ID trust remainder and
+selects only `STD-0583` plus `STD-0601` for a Contracts-owned validation
+proof-lifetime slice; `7.4b7m` is the next normative slice.
 
 `fixtures/rust/external-input-queue-decisions.tsv` and
 `verify-rust-external-input-queue.sh` check selected capacity, overload,

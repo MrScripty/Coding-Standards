@@ -2729,3 +2729,36 @@ six frozen proposed-owner groups.
 
 **Next slice:** `7.4b7l`, planning only, to re-measure the remainder and
 activate exactly one dependency-ready owner-bounded implementation slice.
+
+## 2026-07-28: Milestone 7.4b7l Independent Trust Remainder Re-plan
+
+**Outcome:** Accepted.
+
+The rolling remainder remains 591 IDs across 28 sources and 27 owners, with 13
+owners still missing. The independent trust remainder remains 58 IDs across
+six frozen proposed-owner groups.
+
+**Selection:** `STD-0583` and `STD-0601` jointly define validation proof
+lifetime. Their corrected owner is Contracts, which already owns validated
+representations and repeated decoding when proof is lost or a new applicable
+boundary is crossed. Security retains untrusted-input consequences.
+
+**Discovered issue (`Planned`):** `F053` records the legacy absolute
+validate-once/trust-internally rule. It can authorize original input, stale
+proof, or mutation without re-establishing the complete contract, while also
+encouraging callers to discard an intact proof and reason from validation
+history.
+
+**Write set:** independent trust report, group and next-slice fixtures and
+checker, parent decomposition report, evaluation README and findings, active
+plan, and this ledger. No normative or legacy standard, final disposition,
+generated inventory, owner map, router, metadata, template, configuration,
+dependency, lockfile, workflow fixture, runtime, or downstream file changed.
+
+**No-fallback result:** planning does not preserve the raw input, validation
+flags, stale or mutable proof, implicit cross-boundary trust, permissive
+defaults, weaker decoding, or redundant decoding mandates. It records that
+decision work for the next owner-bounded implementation slice.
+
+**Next slice:** `7.4b7m`, two identifiers, to establish the Contracts-owned
+validation proof-lifetime contract and focused evidence.

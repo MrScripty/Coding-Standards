@@ -56,6 +56,7 @@ changes and focused fixture evidence.
 | F050 | Resolved in Milestone 7.4b7f2 | The executor-delegation checker now requires the stable resolved `F026` state established by accepted Milestone 7.4b5f; all behavioral, disposition, metadata, legacy, and decomposition checks remain active. |
 | F051 | Resolved in Milestone 7.4b7i | `STD-0757` now has Rust Language Binding ownership: selected schema and serializer facts, complete attribute-derived representation, consumer agreement, typed outcomes, and native/host evidence replace implicit Serde defaults. |
 | F052 | Resolved in Milestone 7.4b7k | `STD-0824` now requires a selected queue operation/resource contract, capacity, overload/retention outcome, telemetry, current-input ownership, typed diagnostics, and Rust operation evidence instead of fixed capacity or drop-oldest defaults. |
+| F053 | Planned for Milestone 7.4b7m | `STD-0583` and `STD-0601` treat validation as a one-time boundary event and trust internal values absolutely instead of preserving a proof-bearing representation only while its complete contract remains established. |
 
 ## Systemic Findings
 
@@ -94,6 +95,7 @@ changes and focused fixture evidence.
 | F049 | Incomplete event-registration lifecycle | `INTEROP-STANDARDS.md`; frozen ID `STD-0473` | Replace universal destruction-linked unsubscription with explicit registration authority, provider-selected delivery/unregistration/release/shutdown behavior, phase-aware outcomes, and conditional Concurrency routing only for callback-created work that can outlive invocation. | 7 |
 | F050 | Stale verification ownership | `verify-rust-binding-executor-delegation.sh`; resolved `F026` status | Replace the temporary partial-status assertion with the accepted resolved state while retaining all executor-delegation behavior, disposition, metadata, legacy, and decomposition evidence. | 7 |
 | F051 | Serde wire-representation ownership | `languages/rust/RUST-INTEROP-STANDARDS.md`; frozen ID `STD-0757` | Move Serde wire-shape mechanisms to the Rust Language Binding specialization; derive the effective representation from a selected schema and attributes, require consumer agreement and native/host evidence, and reject implicit casing, tagging, serializer, or schema-free fallback. | 7 |
+| F053 | Validation proof-lifetime overgeneralization | `SECURITY-STANDARDS.md`; frozen IDs `STD-0583`, `STD-0601` | Move validated-representation lifetime to Contracts; require new proof after representation loss, unchecked mutation, contract change, or a new applicable boundary without redundantly decoding an unchanged validated value. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

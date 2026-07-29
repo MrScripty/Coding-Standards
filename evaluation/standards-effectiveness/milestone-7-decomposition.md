@@ -143,16 +143,15 @@ those owners.
 
 The
 [independent trust-boundary re-plan](milestone-7-independent-trust-replan.md)
-now measures 59 remaining identifiers across six proposed-owner groups after
-accepting Rust Cross-Platform, event registration, and Rust serialized wire
-representation. Its 61-ID frozen baseline includes accepted `STD-0473` and
-`STD-0757`; the group fixture records accepted IDs explicitly rather than
-encoding owner-specific count adjustments. The next owner correction selects
-only `STD-0824`: external-input queue resource limits belong to Rust Security,
-not generic queue implementation, Rust Async, Rust API, or Tooling policy.
-Generic Security, Cross-Platform, and Interop groups plus the remaining Rust
-Security and Language Binding rows stay blocked on decomposition or missing
-ownership.
+now measures 58 remaining identifiers across six proposed-owner groups after
+accepting Rust Cross-Platform, event registration, Rust serialized wire
+representation, and the Rust external-input queue contract. Its 61-ID frozen
+baseline records accepted `STD-0473`, `STD-0757`, and `STD-0824` explicitly.
+The next owner correction pairs `STD-0583` and `STD-0601`: validation proof
+lifetime belongs to Contracts, while Security owns the consequences of
+untrusted input. The other Security, Cross-Platform, Interop, Rust Security,
+and Rust Language Binding rows stay blocked on decomposition, final index
+closure, or missing ownership.
 
 Before starting each later wave:
 

@@ -1,1 +1,3 @@
 slice	order	id	source	target	disposition	rationale
+7.4b7m	1	STD-0583	SECURITY-STANDARDS.md	topics/contracts.md	refine	define validation as a proof-bearing representation whose authority persists only while its complete contract remains established
+7.4b7m	2	STD-0601	SECURITY-STANDARDS.md	topics/contracts.md	refine	require new proof after representation loss mutation or a new applicable boundary without redundant decoding inside one preserved contract

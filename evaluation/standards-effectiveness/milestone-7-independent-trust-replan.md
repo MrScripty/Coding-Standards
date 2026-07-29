@@ -34,17 +34,18 @@ each section's role and correctness.
 
 ## Selection Decision
 
-Select only `STD-0824`. It defines a bounded queue that accepts external
-input, so its coherent owner is the existing Rust Security profile's resource-
-limit contract. It does not require the missing Rust API owner because it does
-not define panic/API behavior, and it does not require a Tooling owner because
-it does not define packaging, generation, build, or workflow policy.
+Select only `STD-0583` and `STD-0601`. Together they define when validation
+proof remains authoritative and when a new applicable boundary or lost proof
+requires decoding again. That is a Contracts concern, not generic Security
+implementation structure. Security retains authority over which untrusted
+values require proof and the consequences of invalid input.
 
-The implementation must derive queue capacity, overload behavior, retention or
-rejection semantics, and telemetry obligations from the selected operation and
-resource contract. It must preserve typed invalid, unsupported, unavailable,
-or declared overload outcomes rather than choosing a fixed capacity, dropping
-oldest input, silently discarding work, or selecting another queue mechanism.
+The implementation must represent validation as a construction result whose
+complete contract remains established. It must require new proof after loss of
+the validated representation, unchecked mutation, contract change, or a new
+applicable boundary, while avoiding redundant decoding inside one preserved
+contract. It must not trust the original unknown input, a stale proof, a mutable
+alias, or an unproved value merely because validation happened earlier.
 
 ## Remainder Ownership Audit
 
@@ -54,6 +55,7 @@ an owner-correction or decomposition re-plan before activation:
 
 - generic Security validation sections mix authority, runtime proof,
   filesystem use, domain constraints, and implementation structure;
+  `STD-0583` and `STD-0601` form one corrected Contracts proof-lifetime slice;
 - generic Cross-Platform native-library and CI sections mix Interop resource
   lifecycle, Release artifact identity, Documentation, and Verification
   scheduling;
@@ -68,8 +70,9 @@ an owner-correction or decomposition re-plan before activation:
   compatibility slices, including affected rows blocked on the missing Tooling
   owner.
 
-The 58 current identifiers remain under `F048`. No implementation candidate is
-activated until the next planning-only replan completes.
+All 58 current identifiers remain under `F048` in this planning slice. Only
+`STD-0583` and `STD-0601` are activated for the next implementation; no other
+group or generic section is pre-approved.
 
 ## Accepted Slice 7.4b6: Planning-Only Re-plan
 
@@ -918,3 +921,57 @@ dependency-ready implementation slice without normative movement.
 **No fallback:** do not infer readiness from frozen row order, retain the
 consumed queue proposal, invent a missing owner, combine mixed roles, or create
 a disposition before exact measurement and pre-slice review pass.
+
+## Accepted Slice 7.4b7l: Independent Trust Remainder Re-plan
+
+**Outcome:** accepted. The rolling remainder is 591 identifiers across 28
+legacy sources and 27 proposed owners, with 13 proposed owners still missing.
+The independent trust remainder is 58 identifiers across six proposed-owner
+groups. No normative standard or final disposition changed.
+
+**Selection decision:** `STD-0583` and `STD-0601` are one validation
+proof-lifetime contract. Contracts already owns validated representations,
+proof invalidation, and repeated decoding at new applicable boundaries.
+Security owns untrusted-input consequences, but does not own a universal
+central validator or absolute trust for every internal value. The paired move
+prevents either legacy absolute from surviving alone. This defect is recorded
+as `F053`.
+
+**Pre-slice review:** accepted. The two source sections are semantically
+coupled, their corrected Contracts owner exists, and no missing Tooling or Rust
+API owner is required. `STD-0821` remains final index closure. `STD-0826`
+remains blocked on the missing Rust API owner. The other generic Security rows
+still require separate decomposition.
+
+**No fallback:** validation history cannot authorize the original unknown
+input, a stale proof, unchecked mutable alias, changed contract, or value that
+crossed a new applicable boundary. Conversely, the implementation cannot
+mandate redundant decoding while the same validated representation and
+complete contract remain intact.
+
+## Planned Slice 7.4b7m: Validation Proof-Lifetime Contract
+
+**Outcome:** make Contracts canonical for the lifetime and invalidation of a
+validated representation for `STD-0583` and `STD-0601`.
+
+**Allowed write set:** `topics/contracts.md`; only the legacy Core Principle
+and What NOT to Validate sections in `SECURITY-STANDARDS.md`; one focused
+validation proof-lifetime decision fixture and checker; two exact
+dispositions; this report and checker; group and next-slice fixtures;
+evaluation README and findings; active plan; and execution ledger. No generic
+Security normative section, Cross-Platform, Interop, Rust profile, Tooling,
+Rust API, router, metadata, template, generated artifact, configuration,
+dependency, lockfile, workflow fixture, runtime, source, build output, or
+downstream file belongs to this implementation slice.
+
+**Required semantics:** define a validated representation as the proof-bearing
+construction result; preserve its authority only while the complete contract
+and invariants remain established; require new proof after representation
+loss, unchecked mutation, contract change, or a new applicable boundary; and
+avoid redundant decoding for unchanged values retained inside one trusted
+contract.
+
+**No fallback:** reject original-input reuse, validation-history flags, stale
+proof, unchecked mutable aliases, implicit trust after a new boundary,
+permissive defaults, weaker decoders, and redundant validation mandates that
+discard an intact proof-bearing representation.
