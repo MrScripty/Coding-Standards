@@ -3056,3 +3056,36 @@ adaptation remain pending and their legacy sections are unchanged.
 
 **Next slice:** `7.4b8i`, bounded pre-slice review of `STD-0778` and
 `STD-0779`.
+
+## 2026-07-29: Milestone 7.4b8i Rust Host Event Delivery
+
+**Outcome:** Accepted.
+
+`STD-0778` and `STD-0779` are replaced by a Rust Language Binding event-
+delivery contract selected from the host boundary. It owns representation,
+provider authority, delivery mode, ordering, capacity, overflow, callback
+thread and lifetime, failure, cancellation, and shutdown adaptation while
+generic registration and work lifecycle remain with Interop and Concurrency.
+
+**Verification:** 21 focused decisions; two exact dispositions; metadata,
+bounded legacy replacement, Interop registration, Concurrency, immutable-
+train, independent-trust, plan-lifecycle, shell-syntax, whitespace, and exact-
+scope checks. The complete checker suite is required because a shared language
+profile and a new focused checker changed.
+
+**Deviation and discovered issue:** the accepted error-mapping verifier
+compared an unrelated later legacy section against `HEAD`, which would prevent
+this authorized event-delivery slice and the same pattern would prevent the
+next callback-task slice. `F065` records the defect. Both Rust binding
+verifiers now assert their bounded concern only; staged-diff review retains
+slice-local preservation evidence.
+
+**No-fallback result:** push/pull substitution, unbounded buffering, silent
+discard, lock-held or wrong-thread callbacks, prior-event carry-forward,
+alternate runtimes, detached work, weaker evidence, and default success are
+rejected.
+
+The immutable cursor advances to child `3.3`; callback-task adaptation remains
+pending and its legacy section is unchanged.
+
+**Next slice:** `7.4b8j`, bounded pre-slice review of `STD-0780`.

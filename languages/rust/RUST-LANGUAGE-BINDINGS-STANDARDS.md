@@ -246,74 +246,15 @@ defines categories, fields, cancellation, context, and conversion outcomes.
 
 ## Host-Language Callbacks and Event Delivery
 
-When the core engine produces events or needs the host language to execute
-logic, the FFI layer bridges the two sides.
+Rust-to-host event-delivery adaptation moved to
+[Host Event Delivery](../../profiles/languages/rust/language-bindings.md#host-event-delivery).
 
 ### Event Sink Bridges
 
-Two models for delivering events from core to host languages:
-
-**Selection rule:** Prefer push-based delivery when the host runtime supports it
-reliably (native channels/message loops/callback scheduling with clear thread
-ownership). Use pull-based delivery as a fallback when push integration is
-unsafe or excessively complex for that binding.
-
-**Pull-based (buffered):** Core writes events to an internal buffer. The host
-polls via a `drain_events()` method. Best for languages without native
-message-passing (Python, C#, Swift).
-
-```rust
-struct BufferedEventSink {
-    buffer: Arc<RwLock<Vec<FfiWorkflowEvent>>>,
-}
-
-impl EventSink for BufferedEventSink {
-    fn send(&self, event: WorkflowEvent) -> Result<(), EventError> {
-        self.buffer.write().unwrap().push(FfiWorkflowEvent::from(event));
-        Ok(())
-    }
-}
-
-// Host calls this to collect events
-#[uniffi::export]
-impl FfiEngine {
-    pub fn drain_events(&self) -> Vec<FfiWorkflowEvent> {
-        self.event_buffer.write().unwrap().drain(..).collect()
-    }
-}
-```
-
-**Push-based (message):** Core sends messages directly to a host-language
-process or channel. Best for runtimes with native message-passing (Erlang/BEAM,
-Go channels).
-
-```rust
-struct BeamEventSink {
-    pid: rustler::LocalPid,
-    owned_env: Arc<Mutex<OwnedEnv>>,
-}
-
-impl EventSink for BeamEventSink {
-    fn send(&self, event: WorkflowEvent) -> Result<(), EventError> {
-        let json = serde_json::to_string(&event)?;
-        let env = self.owned_env.lock().unwrap();
-        env.send_and_clear(&self.pid, |new_env| {
-            (atoms::workflow_event(), json.encode(new_env)).encode(new_env)
-        });
-        Ok(())
-    }
-}
-```
-
-| Model | When to Use | Trade-off |
-|-------|------------|-----------|
-| Pull (buffered) | Python, C#, Swift, Kotlin, Ruby | Simple; host controls polling rate; events may lag |
-| Push (message) | Elixir/Erlang, Go | Real-time delivery; requires host concurrency support |
-
-When using pull-based delivery:
-- Keep polling at the host/core boundary (not as internal UI-state synchronization loops).
-- Bound event-buffer retention and document overflow/drop policy.
-- Document expected poll cadence and shutdown cleanup behavior.
+The selected host contract owns delivery mode, representation, ordering,
+capacity, overflow, callback authority, failure, cancellation, and shutdown.
+An unavailable selected mode returns its typed diagnostic rather than changing
+delivery mechanisms.
 
 ### Callback-Based Task Execution
 

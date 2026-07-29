@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust host error mapping is accepted; event-delivery
-adaptation is the next child of decomposed row 3.
+**Current phase:** Rust host event delivery is accepted; callback-task
+adaptation is the final child of decomposed row 3.
 
-**Next slice:** Milestone 7.4b8i Rust host event delivery (`STD-0778`, `STD-0779`).
+**Next slice:** Milestone 7.4b8j Rust host callback-task adaptation (`STD-0780`).
 
 **Acceptance status:** `partial`
 
@@ -1000,8 +1000,20 @@ all structural/routing fixtures pass.
      - reject string flattening, infallible conversion, generic catch-all
        errors, framework defaults, sensitive context, dropped semantics, and
        default success.
-   - `7.4b8i` (`Planned`): replace `STD-0778` and `STD-0779` with one
-     Rust-host event-delivery adaptation contract after `7.4b8h`.
+   - `7.4b8i` (`Accepted`): replace `STD-0778` and `STD-0779` with one
+     Rust-host event-delivery adaptation contract;
+     - select representation, provider authority, delivery mode, ordering,
+       capacity, overflow, callback thread/lifetime, failure, cancellation,
+       and shutdown from the host boundary;
+     - treat push, pull, and stream as peer contract choices;
+     - require governed buffering, observable overflow, current-event
+       isolation, typed outcomes, and real native/host evidence; and
+     - reject push/pull substitution, unbounded buffering, silent discard,
+       lock-held or wrong-thread callbacks, prior-event carry-forward,
+       alternate runtimes, detached work, and default success.
+     - remove slice-relative verifier comparisons against unrelated legacy
+       sections; permanent checks own their bounded concern while staged review
+       proves exact slice preservation.
    - `7.4b8j` (`Planned`): replace `STD-0780` with one Rust-host callback-task
      adaptation contract after `7.4b8i`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,

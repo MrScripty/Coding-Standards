@@ -117,6 +117,49 @@ infallible `From`, replace cancellation with generic failure, catch all
 unmapped variants as one internal error, substitute a framework-specific error
 term, or report default success. Preserve the selected typed outcome.
 
+## Host Event Delivery
+
+Select the host event-delivery contract before implementing the Rust adapter.
+The contract defines:
+
+- the event representation and supported variants;
+- provider or registration authority under the Interop callback contract;
+- push, pull, stream, or another declared delivery mode;
+- ordering, capacity, backpressure, and overflow or retention behavior;
+- delivery-failure, cancellation, and shutdown outcomes; and
+- callback thread, re-entrancy, and input-lifetime requirements.
+
+The adapter bridges that selected contract without moving host behavior into
+the core. Push and pull are peer contract choices; neither is a preference or
+fallback for the other. A retained provider, registration, buffer, runtime, or
+host handle does not authorize carrying an earlier event, cancellation,
+result, or failure state into a later delivery.
+
+When buffering is selected, capacity and overflow or retention behavior are
+governed by the operation contract. Overflow is observable through the
+selected typed outcome or declared event semantics. Do not retain events
+without a bound or discard them silently. When direct callback or message
+delivery is selected, invoke host-controlled behavior only on an authorized
+thread and outside synchronization guards.
+
+Inline delivery remains scoped to the current invocation. Work that may
+outlive delivery uses
+[Concurrency work ownership](../../../topics/concurrency.md#own-work-failure-and-cancellation)
+for failure observation, cancellation, and shutdown. Foreign registration,
+in-flight callback, unregistration, and release obligations remain governed by
+the [Interop event-registration contract](../../boundaries/interop.md#event-registration-lifecycle).
+
+Preserve provider and host delivery failures. Return `invalid` when adapter
+facts contradict the selected contract, `unsupported` when a well-formed event
+or delivery mode is outside it, `unavailable` when required registration,
+thread, delivery, buffering, or host capability cannot be established before
+delivery, and the selected typed incomplete outcome when an active delivery or
+shutdown obligation cannot be resolved.
+
+Do not substitute push for pull or pull for push, create an alternate runtime,
+detach callback-created work, retry on an arbitrary thread, carry prior event
+state forward, drop events silently, or report default success.
+
 ## Handle And Runtime Adaptation
 
 Distinguish a host-visible handle from runtime and task lifecycle. A foreign
@@ -203,6 +246,16 @@ Verify runtime and handle adaptation through:
 - observed cancellation, failure, and result delivery for the current call;
   and
 - typed failure when any required adaptation capability is unavailable.
+
+Verify host event delivery through:
+
+- real native-to-host delivery for every selected event variant and mode;
+- declared ordering, capacity, backpressure, and overflow behavior;
+- callback thread, re-entrancy, and current-input lifetime;
+- delivery failure, cancellation, and shutdown observation;
+- callback invocation outside synchronization guards;
+- lifecycle ownership for work that outlives delivery; and
+- typed invalid, unsupported, unavailable, and incomplete outcomes.
 
 Verify composite executor delegation through:
 

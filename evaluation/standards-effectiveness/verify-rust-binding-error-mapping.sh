@@ -109,15 +109,7 @@ for pattern in \
   ! rg -F -q "$pattern" <<< "$legacy_error"
 done
 
-prefix_head="$(git -C "$REPO_ROOT" show HEAD:languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md |
-  sed '/^## Error Handling Across FFI/,$d')"
-prefix_current="$(sed '/^## Error Handling Across FFI/,$d' "$LEGACY")"
-callback_head="$(git -C "$REPO_ROOT" show HEAD:languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md |
-  sed -n '/^## Host-Language Callbacks and Event Delivery/,$p')"
-callback_current="$(sed -n '/^## Host-Language Callbacks and Event Delivery/,$p' \
-  "$LEGACY")"
-[[ "$prefix_current" == "$prefix_head" ]]
-[[ "$callback_current" == "$callback_head" ]]
+rg -F -q '## Host-Language Callbacks and Event Delivery' "$LEGACY"
 
 rg -F -q '`7.4b8h` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-rust-binding-conversions.sh"

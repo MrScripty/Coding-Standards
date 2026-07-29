@@ -341,3 +341,5 @@ STD-0480	INTEROP-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	re
 STD-0482	INTEROP-STANDARDS.md	INTEROP-STANDARDS.md	index	retain only a non-normative canonical boundary-routing index
 STD-0776	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	select host error representation and preserve typed diagnostic semantics
 STD-0777	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require checked exhaustive mapping with bounded non-sensitive context
+STD-0778	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	select host event delivery without push or pull preference
+STD-0779	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require governed capacity callback authority and typed delivery outcomes

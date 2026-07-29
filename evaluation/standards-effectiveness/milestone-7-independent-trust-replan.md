@@ -1253,11 +1253,32 @@ catch-all errors, framework-specific default terms, lost cancellation,
 unbounded or sensitive context, native-only evidence, dropped semantics, and
 default success are rejected.
 
-## Planned Slice 7.4b8i: Rust Host Event Delivery
+## Accepted Slice 7.4b8i: Rust Host Event Delivery
 
-**Outcome:** review and, if coherent, replace `STD-0778` and `STD-0779` with
-one Rust Language Binding-owned host event-delivery adaptation contract that
-consumes provider callback authority plus capacity, overflow, failure,
-cancellation, and shutdown ownership without fixed push/pull preference,
-fallback substitution, unbounded buffering, lock-held callbacks, or silent
-drop.
+**Outcome:** `STD-0778` and `STD-0779` are replaced by one Rust Language
+Binding-owned host event-delivery adaptation contract. The selected host
+boundary defines representation, provider authority, delivery mode, ordering,
+capacity, overflow, callback thread and lifetime, failure, cancellation, and
+shutdown. Push, pull, and stream are peer choices rather than preferences or
+fallbacks.
+
+Twenty-one focused decisions and two exact dispositions require governed
+buffering, observable overflow, current-event isolation, host invocation
+outside synchronization guards, provider failure preservation, typed outcomes,
+and real native/host evidence.
+
+The accepted error-mapping verifier's slice-relative comparison against the
+later callback/event section is removed. Rust binding verifiers now own only
+their bounded legacy concern; staged review proves unrelated-section
+preservation without preventing the next authorized owner slice.
+
+**No fallback:** push/pull substitution, unbounded buffering, silent discard,
+wrong-thread retry, prior-event carry-forward, alternate runtimes, detached
+work, weaker evidence, and default success are rejected.
+
+## Planned Slice 7.4b8j: Rust Host Callback Task Adaptation
+
+**Outcome:** review and, if coherent, replace `STD-0780` with one Rust Language
+Binding-owned callback-task adaptation contract that consumes Rust Async and
+Concurrency work ownership without no-op execution, polling substitution,
+alternate runtimes, detached work, or input carry-forward.
