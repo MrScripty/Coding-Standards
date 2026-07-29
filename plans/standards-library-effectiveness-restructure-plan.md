@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** The Contracts child of mixed-role Interop row 2 is accepted;
-its IPC consumer-decoding child is next.
+**Current phase:** The Contracts and IPC children of mixed-role Interop row 2
+are accepted; its Language Binding representation child is next.
 
-**Next slice:** Milestone 7.4b8d IPC consumer-decoding child (`STD-0476`).
+**Next slice:** Milestone 7.4b8e Language Binding representation child (`STD-0478`, `STD-0479`, `STD-0480`).
 
 **Acceptance status:** `partial`
 
@@ -953,8 +953,17 @@ all structural/routing fixtures pass.
      - typed invalid, unsupported, and unavailable outcomes replace guessed
        schemas, old/dual-shape shims, permissive defaults, and incomplete
        consumer updates.
-   - `7.4b8d` (`Planned`): replace `STD-0476` with one IPC-owned complete
-     consumer-decoding rule after bounded pre-slice review.
+   - `7.4b8d` (`Accepted`): consolidate `STD-0476` into the existing IPC-owned
+     complete consumer-decoding rule;
+     - decode the complete envelope, selected category/action pair, payload,
+       metadata, and extra-field policy before dispatch;
+     - dispatch only a closed validated variant;
+     - preserve typed invalid, unsupported, and unavailable outcomes; and
+     - remove the legacy partial-field, log-and-return example without a cast,
+       raw-input, generic/default dispatch, or weaker-decoder fallback.
+   - `7.4b8e` (`Planned`): replace `STD-0478` through `STD-0480` with one
+     Language Binding-owned serialized-representation rule after bounded
+     pre-slice review.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

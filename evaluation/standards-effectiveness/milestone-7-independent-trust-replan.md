@@ -1159,9 +1159,26 @@ and applicability-index children unchanged.
 defaults, old-shape or dual-shape compatibility shims, permissive defaults,
 incomplete consumer updates, or success without evidence.
 
-## Planned Slice 7.4b8d: IPC Consumer-Decoding Child
+## Accepted Slice 7.4b8d: IPC Consumer-Decoding Child
 
-**Outcome:** review and, if coherent, replace `STD-0476` with an IPC-owned
-complete consumer-side decoding rule that validates the selected message
-variant before dispatch and returns typed diagnostics without cast, log-and-
-return, partial-field, original-input, or permissive-default fallback.
+**Outcome:** `STD-0476` is consolidated into the existing IPC-owned complete
+consumer-side decoding rule. The consumer proves the envelope, exact
+category/action pair, selected payload and metadata contract, and extra-field
+policy before constructing and dispatching a closed validated variant.
+
+The existing 17 focused decisions now support 11 exact IPC dispositions,
+including this Interop child. The bounded legacy replacement removes the raw
+JSON example that checked only object presence and two string fields before
+logging and returning.
+
+**No fallback:** producer typing, successful deserialization, partial-field
+checks, casts, raw input, generic/default dispatch, alternate permissive
+decoders, log-and-return handling, and missing-schema substitution do not
+establish the consumer contract.
+
+## Planned Slice 7.4b8e: Language Binding Representation Child
+
+**Outcome:** review and, if coherent, replace `STD-0478` through `STD-0480`
+with one Language Binding-owned representation rule selected from the
+canonical contract and concrete serializer mechanism, with exact tagged-enum,
+variant, and field evidence and no inferred casing or alternate-shape fallback.

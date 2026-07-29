@@ -9,6 +9,7 @@ readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly IPC="$REPO_ROOT/profiles/boundaries/ipc.md"
 readonly SECURITY="$REPO_ROOT/topics/security.md"
 readonly LEGACY_ARCH="$REPO_ROOT/ARCHITECTURE-PATTERNS.md"
+readonly LEGACY_INTEROP="$REPO_ROOT/INTEROP-STANDARDS.md"
 readonly LEGACY_SECURITY="$REPO_ROOT/SECURITY-STANDARDS.md"
 readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
@@ -52,12 +53,14 @@ done < "$FIXTURE"
 
 expected_ids=(
   STD-0063 STD-0064 STD-0065 STD-0066 STD-0067 STD-0068
+  STD-0476
   STD-0592 STD-0593 STD-0594 STD-0595
 )
 mapfile -t inventory_ids < <(
   awk -F '\t' '
     ($2 == "ARCHITECTURE-PATTERNS.md" &&
      $1 >= "STD-0063" && $1 <= "STD-0068") ||
+    ($2 == "INTEROP-STANDARDS.md" && $1 == "STD-0476") ||
     ($2 == "SECURITY-STANDARDS.md" &&
      $1 >= "STD-0592" && $1 <= "STD-0595") {
       print $1
@@ -69,11 +72,12 @@ mapfile -t disposition_ids < <(
     NR > 1 &&
     (($2 == "ARCHITECTURE-PATTERNS.md" &&
       $1 >= "STD-0063" && $1 <= "STD-0068") ||
+     ($2 == "INTEROP-STANDARDS.md" && $1 == "STD-0476") ||
      ($2 == "SECURITY-STANDARDS.md" &&
       $1 >= "STD-0592" && $1 <= "STD-0595")) {
       print $1
     }
-  ' "$DISPOSITIONS"
+  ' "$DISPOSITIONS" | sort
 )
 [[ "${inventory_ids[*]}" == "${expected_ids[*]}" ]]
 [[ "${disposition_ids[*]}" == "${expected_ids[*]}" ]]
@@ -91,6 +95,10 @@ while IFS=$'\t' read -r id source target disposition rationale extra; do
     STD-0068)
       [[ "$source:$target:$disposition" == \
         'ARCHITECTURE-PATTERNS.md:profiles/boundaries/ipc.md:merge' ]]
+      ;;
+    STD-0476)
+      [[ "$source:$target:$disposition" == \
+        'INTEROP-STANDARDS.md:profiles/boundaries/ipc.md:refine' ]]
       ;;
     STD-0592)
       [[ "$source:$target:$disposition" == \
@@ -149,6 +157,7 @@ for file in "$REPO_ROOT/README.md" "$REPO_ROOT/STANDARDS-ROUTER.md"; do
   rg -F -q 'profiles/boundaries/ipc.md' "$file"
 done
 rg -F -q 'profiles/boundaries/ipc.md' "$LEGACY_ARCH"
+rg -F -q 'profiles/boundaries/ipc.md#decode-before-dispatch' "$LEGACY_INTEROP"
 rg -F -q 'profiles/boundaries/ipc.md' "$LEGACY_SECURITY"
 rg -F -q 'topics/security.md#untrusted-structured-input' "$LEGACY_SECURITY"
 
@@ -182,6 +191,25 @@ for section in "$legacy_arch_section" "$legacy_security_section"; do
   fi
 done
 
+legacy_interop_section="$(
+  awk '
+    {
+      line = $0
+      sub(/\r$/, "", line)
+    }
+    line == "### Validate Received Messages" { capture = 1 }
+    line == "---" { capture = 0 }
+    capture { print }
+  ' "$LEGACY_INTEROP"
+)"
+if rg -q '```|JSON\.parse|typeof parsed|console\.error|return;' \
+  <<< "$legacy_interop_section"; then
+  printf 'legacy Interop partial-message validation remains active\n' >&2
+  exit 1
+fi
+rg -F -q 'profiles/boundaries/ipc.md#decode-before-dispatch' \
+  <<< "$legacy_interop_section"
+
 removed_patterns=(
   "msg.payload as SelectItemCommand['payload']"
   'msg as ValidatedMessage'
@@ -196,10 +224,12 @@ for pattern in "${removed_patterns[@]}"; do
 done
 
 rg -F -q '| F018 | Resolved in Milestone 7.4b2c |' "$FINDINGS"
+rg -F -q '| F059 | Resolved in Milestone 7.4b8d |' "$FINDINGS"
 rg -F -q '`7.4b2c` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8d` (`Accepted`)' "$PLAN"
 if rg -q '^\*\*Next slice:\*\* .*7\.4b2(b|c)' "$PLAN"; then
   printf 'accepted F018 slice remains next\n' >&2
   exit 1
 fi
 
-printf 'IPC action-specific payload validation passed\n'
+printf 'IPC action-specific payload validation passed: 11 exact dispositions\n'

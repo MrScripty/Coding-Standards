@@ -147,7 +147,7 @@ fallback.
 `verify-ipc-payload-validation.sh` check complete envelope and category/action
 selection, action-specific payload and metadata proof, extra-field policy,
 validated-variant dispatch, typed invalid/unsupported/unavailable outcomes,
-exact frozen-ID dispositions, metadata and routing, legacy links, and removal
+11 exact frozen-ID dispositions, metadata and routing, legacy links, and removal
 of unchecked message and payload assertions.
 
 ## Interop Authority Decision Fixtures

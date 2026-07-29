@@ -2919,3 +2919,31 @@ its logical cursor advances only to child `2.2`.
 
 **Next slice:** `7.4b8d`, bounded pre-slice review of IPC consumer decoding in
 `STD-0476`.
+
+## 2026-07-29: Milestone 7.4b8d IPC Consumer Decoding
+
+**Outcome:** Accepted.
+
+`STD-0476` is consolidated into the existing IPC-owned decode-before-dispatch
+contract. Consumers prove the complete envelope, exact category/action pair,
+selected payload and metadata schema, and extra-field policy before
+constructing and dispatching a closed validated variant.
+
+**Verification:** the existing 17 focused IPC decisions now support 11 exact
+dispositions; metadata, routing, bounded legacy replacement, runtime decoding,
+immutable-train, independent-trust, plan-lifecycle, shell-syntax, whitespace,
+exact-scope checks, and the complete standards checker suite pass. The complete
+suite was run conservatively because this slice strengthens the existing IPC
+checker, even though it does not change a shared normative contract or common
+checker infrastructure.
+
+**No-fallback result:** the partial raw JSON example is removed. Producer
+typing, successful deserialization, partial-field checks, casts, raw input,
+generic/default dispatch, alternate permissive decoders, log-and-return
+handling, and missing-schema substitution remain invalid.
+
+The immutable row advances to child `2.3`; the Language Binding representation
+and legacy applicability-index children remain pending.
+
+**Next slice:** `7.4b8e`, bounded pre-slice review of `STD-0478` through
+`STD-0480`.

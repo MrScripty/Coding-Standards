@@ -60,16 +60,9 @@ owner. Do not infer it from the number of implementation languages.
 
 ### Validate Received Messages
 
-Don't trust deserialized messages from other processes. Check required fields:
-
-```typescript
-// Receiving from another process:
-const parsed = JSON.parse(json);
-if (!parsed || typeof parsed.type !== 'string' || typeof parsed.action !== 'string') {
-    console.error('Malformed message received');
-    return;
-}
-```
+Complete consumer-side envelope, variant, payload, and metadata decoding before
+dispatch moved to
+[Decode Before Dispatch](profiles/boundaries/ipc.md#decode-before-dispatch).
 
 ---
 
