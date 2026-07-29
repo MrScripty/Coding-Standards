@@ -38,8 +38,6 @@ while IFS=$'\t' read -r id source _line owner _disposition _heading; do
 done < "$OWNER_MAP"
 
 dependent_dispositions=0
-dependent_binding_dispositions=0
-dependent_security_dispositions=0
 while IFS=$'\t' read -r _slice _order id source target disposition \
   _rationale _extra; do
   [[ "$id" == 'id' ]] && continue
@@ -48,17 +46,6 @@ while IFS=$'\t' read -r _slice _order id source target disposition \
   [[ "${disposed_target[$id]}" == "$target" ]]
   [[ "${disposed_disposition[$id]}" == "$disposition" ]]
   ((dependent_dispositions += 1))
-  case "$target" in
-    profiles/languages/rust/language-bindings.md)
-      ((dependent_binding_dispositions += 1))
-      ;;
-    profiles/languages/rust/security.md)
-      ((dependent_security_dispositions += 1))
-      ;;
-    *)
-      exit 1
-      ;;
-  esac
 done < "$DEPENDENT_MAP"
 [[ "$dependent_dispositions" =~ ^(0|4|7|8|9|10)$ ]]
 
@@ -101,44 +88,38 @@ bridge_total=0
 while IFS=$'\t' read -r wave order owner count owner_state prerequisite status extra; do
   [[ "$wave" == 'wave' ]] && continue
   [[ "$order" =~ ^[0-9]+$ && "$count" =~ ^[0-9]+$ ]]
-  expected_count="$count"
-  expected_state="$owner_state"
-  if [[ "$owner" == 'topics/concurrency.md' &&
-        "$next_dispositions" -eq 9 ]]; then
-    expected_count=8
-    expected_state='exists'
-  fi
-  if [[ "$owner" == 'profiles/languages/rust/async.md' ]]; then
-    expected_count=$((9 - rust_async_dispositions))
-    if [[ "$rust_async_dispositions" -eq 0 ]]; then
-      expected_state='missing'
-    else
-      expected_state='exists'
-    fi
-  fi
-  if [[ "$owner" == 'profiles/languages/rust/language-bindings.md' ]]; then
-    expected_count=$((count - dependent_binding_dispositions))
-  fi
-  if [[ "$owner" == 'profiles/languages/rust/security.md' ]]; then
-    expected_count=$((count - dependent_security_dispositions))
-  fi
-  [[ "${remaining_by_owner[$owner]:-0}" -eq "$expected_count" ]]
-  if [[ -e "$REPO_ROOT/$owner" ]]; then
-    actual_state='exists'
-  else
-    actual_state='missing'
-  fi
-  [[ "$actual_state" == "$expected_state" ]]
-  [[ -n "$prerequisite" && -n "$status" && -z "${extra:-}" ]]
   if [[ "$wave" == 'trust-boundaries' ]]; then
     ((trust_total += count))
   else
     [[ "$wave" == 'lifecycle-bridge' ]]
+    expected_count="$count"
+    expected_state="$owner_state"
+    if [[ "$owner" == 'topics/concurrency.md' &&
+          "$next_dispositions" -eq 9 ]]; then
+      expected_count=8
+      expected_state='exists'
+    fi
+    if [[ "$owner" == 'profiles/languages/rust/async.md' ]]; then
+      expected_count=$((9 - rust_async_dispositions))
+      if [[ "$rust_async_dispositions" -eq 0 ]]; then
+        expected_state='missing'
+      else
+        expected_state='exists'
+      fi
+    fi
+    [[ "${remaining_by_owner[$owner]:-0}" -eq "$expected_count" ]]
+    if [[ -e "$REPO_ROOT/$owner" ]]; then
+      actual_state='exists'
+    else
+      actual_state='missing'
+    fi
+    [[ "$actual_state" == "$expected_state" ]]
     ((bridge_total += count))
   fi
+  [[ -n "$owner_state" && -n "$prerequisite" && -n "$status" &&
+      -z "${extra:-}" ]]
 done < "$GROUP_FILE"
 [[ "$trust_total" -eq 90 && "$bridge_total" -eq 26 ]]
-current_trust_total=$((trust_total - dependent_dispositions))
 
 mapfile -t actual_ids < <(tail -n +2 "$NEXT_SLICE" | cut -f3)
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
@@ -196,6 +177,6 @@ fi
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
-printf 'Milestone 7 trust/lifecycle re-plan passed: %s baseline trust IDs, %s current, %s bridge IDs, generic dispositions %s/9, Rust Async dispositions %s/9\n' \
-  "$trust_total" "$current_trust_total" "$bridge_total" \
-  "$next_dispositions" "$rust_async_dispositions"
+printf 'Milestone 7 trust/lifecycle re-plan passed: %s baseline trust IDs, %s bridge IDs, generic dispositions %s/9, Rust Async dispositions %s/9, dependent dispositions %s/10\n' \
+  "$trust_total" "$bridge_total" "$next_dispositions" \
+  "$rust_async_dispositions" "$dependent_dispositions"

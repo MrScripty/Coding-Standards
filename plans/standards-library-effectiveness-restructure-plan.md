@@ -6,11 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 independent trust-boundary re-plan accepted;
-generic network transport pre-slice review is next.
+**Current phase:** Milestone 7 generic network transport accepted; independent
+trust-boundary remainder re-plan is next.
 
-**Next slice:** Milestone 7.4b7a generic network transport contract pre-slice
-review.
+**Next slice:** Milestone 7.4b7b independent trust-boundary remainder re-plan.
 
 **Acceptance status:** `partial`
 
@@ -697,9 +696,29 @@ all structural/routing fixtures pass.
      - the planning slice changes no normative standard, legacy section, final
        disposition, generated artifact, configuration, or downstream file;
        and
-   - `7.4b7a` (`Planned`): replace generic listener exposure, admission,
+   - `7.4b7a` (`Accepted`): replace generic listener exposure, admission,
      shutdown, and liveness defaults with a contract-selected network
-     transport owner (`STD-0596`-`STD-0600`).
+     transport owner (`STD-0596`-`STD-0600`);
+     - exposure follows the declared service and deployment contract;
+     - admission capacity is owned and acquired before accepting work;
+     - accepted work registers with the selected lifecycle owner, which
+       observes success, failure, and cancellation;
+     - shutdown closes admission before cancellation and drain, with typed
+       incomplete outcomes and force only under explicit interruption-safe
+       authority;
+     - liveness follows protocol semantics and resource risk rather than a
+       fixed mechanism or timeout;
+     - 32 focused decisions reject broad/default binding, default capacity,
+       accept-first, detached/discarded/leaf-owned work, open admission,
+       unsafe termination, fixed timeout/liveness, and alternate-mechanism
+       fallback;
+     - `F016` is resolved; and
+     - re-plan trigger (`Resolved`): the historical trust/lifecycle checker
+       retains frozen baseline evidence while the independent checker solely
+       owns mutable independent-trust counts and owner state.
+   - `7.4b7b` (`Planned`): re-measure the 608-ID global remainder and 75-ID
+     independent trust subset, then activate exactly one owner-bounded slice
+     after accepted pre-slice review without normative movement.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

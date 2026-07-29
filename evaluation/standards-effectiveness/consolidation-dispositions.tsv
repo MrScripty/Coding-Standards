@@ -302,3 +302,8 @@ STD-0800	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/r
 STD-0781	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	delegate only the explicit typed unsupported outcome
 STD-0822	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	preserve validated filesystem authority through the Rust operation
 STD-0825	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	bind listener exposure admission connection work outcomes and shutdown to explicit owners
+STD-0596	SECURITY-STANDARDS.md	topics/security.md	refine	establish the generic network transport boundary
+STD-0597	SECURITY-STANDARDS.md	topics/security.md	refine	derive listener exposure from service and deployment contracts
+STD-0598	SECURITY-STANDARDS.md	topics/security.md	refine	require owned admission capacity before accepting work
+STD-0599	SECURITY-STANDARDS.md	topics/security.md	refine	consume lifecycle-owned ordered shutdown with typed incomplete outcomes
+STD-0600	SECURITY-STANDARDS.md	topics/security.md	refine	select transport liveness from protocol semantics and resource risk

@@ -106,69 +106,13 @@ action-specific message decoding belongs to the
 
 ## Network Transport Safety
 
-When building TCP/IPC listeners (local servers, service endpoints, inter-process
-communication), transport-level configuration is a security concern separate from
-message validation. See the
-[IPC Boundary Profile](profiles/boundaries/ipc.md) for message-level contracts;
-this section covers the transport itself.
-
-### Bind Address Rules
-
-| Scenario | Bind Address | Rationale |
-|----------|-------------|-----------|
-| Local-only IPC / dev server | `127.0.0.1` or `::1` | Only accepts connections from the same machine |
-| Service exposed to LAN/internet | `0.0.0.0` or `::` | Accepts connections from any interface |
-
-**The rule:** Local-only services **must** bind to `127.0.0.1` (or the
-platform's loopback address), never `0.0.0.0`. Binding to all interfaces
-exposes the service to the network — even if "just for development."
-
-Language-specific listener examples belong in the matching language standard.
-For Rust, see
-[languages/rust/RUST-SECURITY-STANDARDS.md](languages/rust/RUST-SECURITY-STANDARDS.md#network-listener-limits).
-
-### Connection Limits
-
-Every listener must define a maximum concurrent connection count. Unbounded
-accept loops allow a single misbehaving client (or deliberate flood) to exhaust
-file descriptors or memory.
-
-Use the runtime's semaphore, bounded worker pool, or accept-loop backpressure
-mechanism to enforce the limit. Rust-specific Tokio guidance lives in
-[languages/rust/RUST-SECURITY-STANDARDS.md](languages/rust/RUST-SECURITY-STANDARDS.md#network-listener-limits).
-
-### Graceful Listener Shutdown
-
-Listeners must support graceful shutdown: stop accepting new connections, allow
-in-flight connections to drain within a timeout, then force-close remaining
-connections. See [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md)
-`### Graceful Shutdown of Spawned Services` for the async task mechanics.
-
-```
-Shutdown signal received
-    │
-    ├── Stop accepting new connections
-    ├── Wait for in-flight connections (with timeout)
-    │       ├── Connections complete normally
-    │       └── Timeout expires → force-close remaining
-    └── Release bound address
-```
-
-### Half-Open Connection Handling
-
-A half-open connection occurs when one side has closed (or crashed) but the
-other side's TCP stack has not yet detected it. These connections leak resources
-indefinitely without intervention.
-
-| Approach | How It Works | When to Use |
-|----------|-------------|-------------|
-| TCP keepalive | OS sends periodic probes on idle connections | Long-lived connections with idle periods |
-| Application heartbeat | Protocol-level ping/pong messages | When you need faster detection than TCP keepalive |
-| Read timeout | Close connections that send no data within a deadline | Request-response protocols |
-
-**The rule:** Every listener must use at least one of these mechanisms. For
-local IPC, a read timeout (e.g., 30–60 seconds of inactivity) is usually
-sufficient.
+Canonical listener exposure, admission, shutdown, and liveness policy moved to
+the [Security topic](topics/security.md#network-transport-boundary).
+Connection-work ownership and shutdown mechanics belong to
+[Concurrency](topics/concurrency.md#own-work-failure-and-cancellation).
+Message proof and dispatch remain with
+[Contracts](topics/contracts.md#runtime-decoding-at-boundaries) and the
+[IPC Boundary Profile](profiles/boundaries/ipc.md).
 
 ---
 

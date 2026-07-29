@@ -2210,3 +2210,48 @@ The rolling Milestone 7 remainder remains 613 IDs across 30 sources and 29
 owners, with 14 canonical owners still missing.
 
 **Next slice:** `7.4b7a` generic network transport contract pre-slice review.
+
+## 2026-07-28: Milestone 7.4b7a Generic Network Transport Contract
+
+**Outcome:** Accepted.
+
+The Security topic now derives listener exposure from the declared service and
+deployment contract, requires owned admission capacity before acceptance,
+registers accepted connection work with the selected lifecycle owner, orders
+shutdown as admission closure, cancellation, and drain, and selects liveness
+from protocol semantics and resource risk.
+
+`STD-0596` through `STD-0600` have exact `refine` dispositions. The legacy
+network group is a bounded canonical link without fixed addresses, capacities,
+timeouts, liveness mechanisms, force-close behavior, or a broken Concurrency
+anchor. `F016` is resolved.
+
+**Deviations:** None.
+
+**Discovered issue (`Resolved`):** the historical trust/lifecycle checker
+compared its frozen independent-trust rows with mutable live owner counts. That
+duplicated the newer independent checker and rejected valid later
+dispositions. The historical checker now preserves its 90-ID baseline and
+lifecycle-bridge progression; the independent checker solely owns current
+independent-trust counts and owner state.
+
+**No-fallback/legacy result:** missing exposure, capacity, lifecycle, shutdown,
+or liveness facts/capability cannot broaden exposure, select default address,
+capacity, timeout, liveness, or force-close behavior, accept before capacity,
+detach or discard work, substitute leaf logging for ownership, keep admission
+open during shutdown, terminate without authority and interruption safety, or
+select another runtime, thread, listener, or transport.
+
+**Verification:** 32 focused network-transport decisions, five exact
+dispositions, Security metadata, bounded legacy replacement, accepted generic
+Concurrency evidence, independent and historical trust-checker ownership,
+plan lifecycle, shell syntax, whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+The rolling Milestone 7 remainder is 608 IDs across 30 sources and 29 owners,
+with 14 canonical owners still missing. The independent trust-boundary subset
+contains 75 IDs across its seven baseline owner groups.
+
+**Next slice:** `7.4b7b`, planning only, to re-measure the remainder and
+activate exactly one owner-bounded implementation slice after accepted
+pre-slice review.

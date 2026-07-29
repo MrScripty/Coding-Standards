@@ -80,7 +80,7 @@ regressions.
 special `GROUPS` variable for the group-fixture path. It now uses the explicit
 `GROUP_FILE` name so the path cannot resolve to a process group identifier.
 
-## Planned Slice 7.4b7a: Generic Network Transport Contract
+## Accepted Slice 7.4b7a: Generic Network Transport Contract
 
 [milestone-7-independent-trust-next-slice.tsv](milestone-7-independent-trust-next-slice.tsv)
 freezes `STD-0596` through `STD-0600`.
@@ -97,6 +97,9 @@ behavior.
 - `evaluation/standards-effectiveness/fixtures/security/network-transport-decisions.tsv`;
 - `evaluation/standards-effectiveness/verify-network-transport-policy.sh`;
 - this report and checker for accepted disposition and handoff state;
+- the historical trust/lifecycle checker only to remove mutable live
+  independent-trust count and owner-state ownership while preserving its
+  frozen baseline and lifecycle-bridge evidence;
 - consolidation dispositions, evaluation README, findings, active plan, and
   execution ledger.
 
@@ -149,6 +152,47 @@ remain untouched; and focused plus affected regressions pass.
 five-section group without a split disposition. The slice consumes accepted
 Concurrency lifecycle policy and does not require a new role, taxonomy,
 runtime-specific universal mechanism, or compatibility fallback.
+
+**Resolved re-plan trigger:** the historical trust/lifecycle checker compared
+its frozen independent-trust rows to live owner counts. That duplicated the
+new independent checker and would reject every valid later disposition. The
+approved narrow expansion keeps the historical 90-ID baseline, exact group
+rows, and lifecycle-bridge progression while making this report's checker the
+sole owner of current independent-trust counts and owner state.
+
+**Acceptance result:** accepted. The Security topic now owns contract-selected
+listener exposure, admission before acceptance, lifecycle registration,
+ordered shutdown, typed incomplete drain, interruption-safe termination, and
+protocol-selected liveness. The legacy five-section network group is one
+bounded canonical link. Thirty-two focused decisions reject universal
+addresses, capacities, timeouts, liveness mechanisms, unsafe termination,
+accept-first ordering, detached work, discarded outcomes, leaf-only logging,
+open admission, and alternate-mechanism fallback.
+
+All five identifiers have exact `refine` dispositions to
+`topics/security.md`, and `F016` is resolved. The rolling Milestone 7 remainder
+is 608 identifiers across 30 sources and 29 owners, with 14 owners still
+missing. The active independent trust-boundary subset contains 75 identifiers
+across the same seven baseline owner groups.
+
+## Planned Slice 7.4b7b: Independent Trust-Boundary Remainder Re-plan
+
+Re-measure the 608-ID global remainder and 75-ID independent trust subset after
+the accepted network slice. Confirm current owner existence, dependencies,
+correctness priority, and exact source/owner/disposition facts before
+activating one next owner-bounded implementation slice.
+
+This is planning only. It may update the independent trust report and fixtures,
+their checker, parent decomposition linkage, evaluation README, findings,
+active plan, and execution ledger. It must not change normative or legacy
+standards, final dispositions, generated inventory or owner maps, routing,
+templates, source, tests, configuration, dependencies, lockfiles, workflow
+fixtures, build output, or downstream repositories.
+
+**No fallback:** do not infer the next slice from stale baseline ordering,
+preserve conflicting legacy guidance, combine owners to avoid a missing
+contract, invent owner files, or activate implementation before exact
+measurement and pre-slice review pass.
 
 ## Re-Plan Triggers
 

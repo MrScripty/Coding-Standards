@@ -5,11 +5,11 @@
 - ID: `topic.security`
 - Role: `topic`
 - Level: `MUST`
-- Applies when: Untrusted input can authorize an operation, resource access, side effect, or security-relevant decision.
-- Does not apply when: No untrusted value influences authority or security-relevant behavior.
+- Applies when: Untrusted input can authorize an operation, resource access, side effect, or security-relevant decision, or a network listener exposes and retains resources.
+- Does not apply when: No untrusted value influences authority or security-relevant behavior and no network listener accepts externally initiated work.
 - Requires: `core`, `workflow.verification`
 - Specializes: `none`
-- Verification: Untrusted-input and filesystem-containment decision fixtures plus affected trust-boundary tests.
+- Verification: Untrusted-input, filesystem-containment, and network-transport decision fixtures plus affected trust-boundary tests.
 - Canonical owner: `topics/security.md`
 
 ## Untrusted Structured Input
@@ -28,6 +28,52 @@ Malformed or incomplete input returns typed `invalid`; a well-formed but
 unsupported contract or operation returns typed `unsupported`; unavailable
 required decoding capability returns typed `unavailable`. Do not continue with
 the original input, a cast, a default operation, or a weaker decoder.
+
+## Network Transport Boundary
+
+A listener's exposure comes from the declared service and deployment contract.
+Local, remote, and multi-interface exposure are deployment facts, not defaults
+inferred from development mode, transport type, or address family. If the
+required exposure cannot be established, return typed `unavailable`; reject
+contradictory or unauthorized exposure as `invalid`.
+
+The listener owner defines a finite admission capacity and the corresponding
+overload outcome. Acquire admission before accepting work that would exceed the
+owned limit. Capacity exhaustion returns the declared typed overload result;
+it does not accept first, queue without an owned bound, or choose a default
+capacity.
+
+After acceptance, register the connection work with the selected lifecycle
+owner. That owner observes success, failure, and cancellation. Use
+[Concurrency](concurrency.md#own-work-failure-and-cancellation) for work
+ownership, failure observation, cancellation, drain, and shutdown behavior.
+Logging at a connection leaf does not transfer lifecycle ownership.
+
+Close admission before signalling cancellation, then drain registered work.
+Report incomplete drain as a typed incomplete-shutdown outcome. Forced
+termination is permitted only when there is explicit authority and the work is
+proven interruption-safe; otherwise preserve the incomplete result.
+
+Select connection-liveness behavior from protocol semantics and resource risk.
+Protocol closure, transport keepalive, application heartbeat, idle deadline,
+or another supported mechanism is valid only when the selected contract
+defines its behavior and capability. Missing facts or capability return typed
+`invalid`, `unsupported`, `unavailable`, overload, or incomplete-shutdown
+outcomes as applicable.
+
+Message validation remains with
+[Contracts](contracts.md#runtime-decoding-at-boundaries) and the selected
+[IPC boundary profile](../profiles/boundaries/ipc.md). Transport acceptance
+does not prove a message schema, action payload, or dispatch variant.
+
+### No Fallback
+
+Do not broaden exposure, select a default address, capacity, timeout, or
+liveness mechanism, accept before capacity, detach work, discard outcomes,
+substitute leaf logging for ownership, leave admission open during shutdown,
+force termination without authority and interruption safety, or select another
+runtime, thread, listener, or transport when the required contract or
+capability is missing.
 
 ## Filesystem Containment
 
@@ -87,6 +133,10 @@ atomic or anchored operation is unavailable, return a typed `unsupported` or
 
 Affected checks cover:
 
+- declared local, remote, and multi-interface listener exposure;
+- admission before acceptance, overload, and tracked connection outcomes;
+- ordered listener shutdown, incomplete drain, and termination authority;
+- protocol-selected liveness and unavailable capability;
 - `..` traversal and absolute-path replacement;
 - sibling-prefix confusion;
 - symlinks that remain inside or escape the trusted root;
