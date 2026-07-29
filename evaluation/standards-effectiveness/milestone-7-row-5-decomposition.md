@@ -129,7 +129,9 @@ Milestone `7.4b8q` accepted child `5.3`, `STD-0807` and `STD-0808`, as
 Contracts-owned binding evolution with focused decision-table evidence and two
 exact dispositions.
 
-## Next Slice
+Milestone `7.4b8r` accepted child `5.4`, `STD-0809`, as Rust adaptation of a
+Contracts-selected discovery mechanism with focused decision-table evidence
+and one exact disposition.
 
-Milestone `7.4b8r` implements child `5.4`, `STD-0809`, as Rust adaptation of a
-Contracts-selected discovery or negotiation mechanism.
+Row 5 is complete. Milestone `7.4b8s` begins bounded owner review of immutable
+row 6, `STD-0294` through `STD-0299`.

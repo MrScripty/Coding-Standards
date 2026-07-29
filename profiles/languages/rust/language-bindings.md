@@ -303,6 +303,26 @@ layout, and an ownership contract. Dynamic Rust containers cross a C ABI only
 through an explicit pointer/length or opaque-handle contract governed by the
 Rust Interop and Unsafe profiles; they are not passed by native layout.
 
+## Contract Discovery Adaptation
+
+Implement discovery or negotiation only when the selected Contracts-owned
+boundary requires it. That contract defines the discoverable identity,
+version or capability representation, supported values, consumer behavior,
+and whether discovery is an exported operation, handshake field, package
+metadata, schema identifier, or another selected mechanism.
+
+The Rust adapter converts the canonical contract value through the selected
+binding representation and verifies the real native/host consumer path. A
+package version, build identifier, or exported function is not a universal
+compatibility contract and cannot be substituted for the selected mechanism.
+
+Return `invalid` when the adapter value contradicts the selected contract,
+`unsupported` when a well-formed discovered value is outside the supported
+set, and `unavailable` when required identity, version, capability, conversion,
+or consumer evidence cannot be obtained. Do not add a universal `version()`
+export, guess compatibility, try alternate discovery, reuse stale discovery
+state, or report default success.
+
 ## Verification
 
 Verify the core/adapter boundary through:
@@ -312,6 +332,9 @@ Verify the core/adapter boundary through:
 - dependency and feature inspection proving no adapter or binding-framework
   edge points into the core; and
 - adapter and generated-boundary checks for every supported binding mechanism.
+
+Verify contract discovery through the selected real native/host mechanism,
+including supported, unsupported, contradictory, and unavailable values.
 
 Core and adapter evidence are independent obligations. Core evidence exercises
 domain behavior and validated native types through the framework-free core

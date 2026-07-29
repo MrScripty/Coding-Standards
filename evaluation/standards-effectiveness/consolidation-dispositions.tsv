@@ -350,3 +350,4 @@ STD-0805	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/
 STD-0806	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	reject framework and transport defaults based on target count or host label
 STD-0807	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	topics/contracts.md	refine	classify binding artifacts and compatibility by actual consumer contracts
 STD-0808	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	topics/contracts.md	refine	regenerate affected outputs and select version relationships from deployment facts
+STD-0809	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	adapt only a contract-selected discovery or negotiation mechanism

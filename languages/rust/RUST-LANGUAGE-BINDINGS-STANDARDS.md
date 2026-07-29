@@ -504,15 +504,8 @@ native-library and host-package versions.
 
 ### Version Export
 
-Include a `version()` export so foreign code can verify the loaded library
-version at runtime:
-
-```rust
-#[uniffi::export]
-pub fn version() -> String {
-    env!("CARGO_PKG_VERSION").to_string()
-}
-```
-
-See [RUST-DEPENDENCY-STANDARDS.md](RUST-DEPENDENCY-STANDARDS.md) for Rust
-dependency versioning and semver conventions.
+Rust adaptation of a contract-selected discovery or negotiation mechanism
+moved to
+[Contract Discovery Adaptation](../../profiles/languages/rust/language-bindings.md#contract-discovery-adaptation).
+A package-version string or universal `version()` export does not establish
+runtime compatibility.

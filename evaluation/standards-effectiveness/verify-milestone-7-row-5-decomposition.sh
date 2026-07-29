@@ -61,9 +61,15 @@ awk -F '\t' '
   }
   END { exit count != 5 }
 ' "$DISPOSITIONS"
-for id in "${expected_ids[@]:5}"; do
-  [[ "$(awk -F '\t' -v id="$id" 'NR > 1 && $1 == id { count += 1 } END { print count + 0 }' "$DISPOSITIONS")" -eq 0 ]]
-done
+awk -F '\t' '
+  NR > 1 && $1 == "STD-0809" {
+    count++
+    if ($2 != "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md" ||
+        $3 != "profiles/languages/rust/language-bindings.md" ||
+        $4 != "refine" || $5 == "" || NF != 5) exit 1
+  }
+  END { exit count != 1 }
+' "$DISPOSITIONS"
 
 package_row="$(
   awk -F '\t' '$1 == 5 { print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $9 }' \
@@ -93,12 +99,14 @@ rg -F -q '`7.4b8n` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8o` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8p` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8q` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8r` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8r` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8s` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8r'* ]]
-[[ "$next_slice_line" == *'STD-0809'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8s'* ]]
+[[ "$next_slice_line" == *'STD-0294'* ]]
+[[ "$next_slice_line" == *'STD-0299'* ]]
 
 "$SCRIPT_DIR/verify-milestone-7-accelerated-execution-replan.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-5 decomposition passed: children 5.1-5.3 accepted; 1 ID remains in child 5.4\n'
+printf 'Milestone 7 row-5 decomposition passed: all 6 IDs accepted across 4 ordered children\n'

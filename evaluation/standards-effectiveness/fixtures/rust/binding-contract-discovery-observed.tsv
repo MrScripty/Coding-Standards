@@ -1,0 +1,14 @@
+case	actual
+selected_supported	allow
+not_required	no-discovery
+unsupported_value	typed-unsupported
+invalid_value	typed-invalid
+missing_contract	typed-unavailable
+contradictory_contract	typed-invalid
+missing_mechanism	typed-unavailable
+missing_evidence	typed-unavailable
+alternate_discovery	typed-invalid
+universal_version	typed-invalid
+package_version	typed-invalid
+stale_discovery	typed-invalid
+default_success	typed-invalid

@@ -98,7 +98,6 @@ for removed in \
 done
 
 rg -F -q '`7.4b8q` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8r` (`Planned`)' "$PLAN"
 "$SCRIPT_DIR/verify-contract-decisions.sh"
 "$SCRIPT_DIR/verify-contract-ownership.sh"
 "$SCRIPT_DIR/verify-milestone-7-row-5-decomposition.sh"

@@ -106,6 +106,12 @@ additive compatibility, regenerate-all and skip-regeneration paths, forced
 lockstep or independent versions, compatibility shims, incomplete evidence,
 and default success.
 
+`fixtures/rust/binding-contract-discovery-*.tsv` and
+`verify-rust-binding-contract-discovery.sh` adapt only a Contracts-selected
+identity, version, or capability mechanism. They reject universal version
+exports, package-version substitution, alternate or stale discovery, guessed
+compatibility, missing evidence, and default success.
+
 ## Routed Vertical Slice
 
 `verify-s1-routing.sh` checks the first complete routed path:

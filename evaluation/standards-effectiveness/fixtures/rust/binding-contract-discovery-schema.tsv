@@ -1,0 +1,8 @@
+column	allowed
+case	*
+contract	required,not-required,missing,contradictory
+mechanism	selected,none,alternate
+value	supported,unsupported,invalid,unavailable,not-applicable
+evidence	native-host,missing,not-required
+fallback	none,universal-version,package-version,guess,stale,default-success
+expected	allow,no-discovery,typed-invalid,typed-unsupported,typed-unavailable

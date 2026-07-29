@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Binding contract evolution is canonical; Rust adaptation of
-contract-selected discovery is next.
+**Current phase:** Rust binding row 5 is complete; cross-platform row 6 owner
+review is next.
 
-**Next slice:** Milestone 7.4b8r Rust contract-discovery adaptation for active child `STD-0809`.
+**Next slice:** Milestone 7.4b8s cross-platform owner review for active row `STD-0294` through `STD-0299`.
 
 **Acceptance status:** `partial`
 
@@ -1123,8 +1123,15 @@ all structural/routing fixtures pass.
      - reject blanket additive compatibility, unconditional regeneration,
        lockstep or forced-independent versions, compatibility shims, and
        default success with typed outcomes.
-   - `7.4b8r` (`Planned`): replace `STD-0809` with Rust adaptation of a
-     Contracts-selected discovery or negotiation mechanism.
+   - `7.4b8r` (`Accepted`): replace `STD-0809` with Rust adaptation of a
+     Contracts-selected discovery or negotiation mechanism;
+     - adapt only the selected identity, version, or capability representation
+       and verify the real native/host consumer path; and
+     - remove universal version export, package-version substitution,
+       alternate discovery, stale state, guessed compatibility, and default
+       success with typed outcomes.
+   - `7.4b8s` (`Planned`): perform bounded owner review of cross-platform row
+     `STD-0294` through `STD-0299`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

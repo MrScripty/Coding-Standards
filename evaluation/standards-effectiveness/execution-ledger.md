@@ -3354,3 +3354,27 @@ configuration, or downstream repository changed.
 
 **Next slice:** `7.4b8r`, replace `STD-0809` with Rust adaptation of a
 Contracts-selected discovery or negotiation mechanism.
+
+## 2026-07-29: Milestone 7.4b8r Rust Contract Discovery
+
+**Outcome:** Accepted.
+
+`STD-0809` now adapts discovery only when required by the selected Contracts
+boundary, using its declared identity, version, capability, representation,
+consumer behavior, and evidence.
+
+**Verification:** 13 reusable decision cases; one exact disposition; canonical
+profile and legacy-index assertions; binding evolution and row-5 checks;
+immutable execution train; plan lifecycle; shell syntax; whitespace; exact
+scope; and the complete fail-fast checker suite.
+
+**No-fallback result:** universal `version()` exports, package-version
+substitution, alternate or stale discovery, guessed compatibility, and default
+success are rejected with typed invalid, unsupported, or unavailable outcomes.
+
+The six-ID row 5 is complete. No release, dependency-versioning, routing,
+metadata, lockfile, generated inventory, owner map, configuration, or
+downstream repository changed.
+
+**Next slice:** `7.4b8s`, bounded owner review of `STD-0294` through
+`STD-0299`.
