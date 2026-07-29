@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 lifecycle bridge active; generic Concurrency
-ownership accepted.
+**Current phase:** Milestone 7 lifecycle bridge active; Rust Async
+specialization decomposed.
 
-**Next slice:** Milestone 7.4b4c, plan the Rust Async specialization against
-the accepted generic Concurrency owner before implementation.
+**Next slice:** Milestone 7.4b4d, establish Rust Async applicability and
+sync/async boundary selection.
 
 **Acceptance status:** `partial`
 
@@ -27,6 +27,8 @@ the accepted generic Concurrency owner before implementation.
 **F022/F023 decomposition:** [Foreign memory, unsafe contracts, ABI classification, and checked conversion](../evaluation/standards-effectiveness/milestone-7-f022-f023-decomposition.md)
 
 **Remaining trust/lifecycle re-plan:** [Generic concurrency and Rust async dependency bridge](../evaluation/standards-effectiveness/milestone-7-trust-lifecycle-replan.md)
+
+**Rust Async decomposition:** [Four owner-bounded specialization slices](../evaluation/standards-effectiveness/milestone-7-rust-async-decomposition.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -549,8 +551,18 @@ all structural/routing fixtures pass.
        typed outcome without unprotected mutation, detached work, discarded
        errors, ignored cancellation, synchronous waiting, or a
        language-specific universal mechanism;
-   - `7.4b4c` (`Planned`): planning-only decomposition of the Rust Async
-     specialization after generic Concurrency is accepted.
+   - `7.4b4c` (`Accepted`): decompose the nine Rust Async identifiers into
+     applicability, owned runtime lifecycle, blocking/mutex, and
+     cancellation/observability slices; record `F045`; and fully specify only
+     the first implementation slice;
+   - `7.4b4d` (`Planned`): establish the Rust Async profile and contract-driven
+     sync/async boundary (`STD-0717`-`STD-0718`);
+   - `7.4b4e` (`Planned`): specialize runtime, tracked-task, and graceful-
+     shutdown ownership (`STD-0719`-`STD-0721`);
+   - `7.4b4f` (`Planned`): specialize blocking-work isolation and mutex
+     selection (`STD-0722`-`STD-0723`);
+   - `7.4b4g` (`Planned`): specialize cancellation safety and lifecycle
+     observability (`STD-0724`-`STD-0725`).
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

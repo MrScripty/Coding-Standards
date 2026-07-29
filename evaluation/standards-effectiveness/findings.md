@@ -46,6 +46,7 @@ changes and focused fixture evidence.
 | F042 | Resolved in Milestone 7.3c | Recovery now follows impact, destination capability, explicit authority, immutable identity, and fresh acceptance rather than assuming hosted drafts, yank support, branches, patch versions, or unilateral action. |
 | F043 | Resolved in Milestone 7.4a | The remaining 698 identifiers now have complete owner-wave coverage, correctness-first ordering, and an exact first implementation slice without speculative full-sequence expansion. |
 | F044 | Resolved in Milestone 7.4b4a | The premature final-closure handoff is superseded by a measured 90-ID trust remainder, a 26-ID lifecycle bridge for F025/F026, and one exact generic Concurrency next slice. |
+| F045 | Decomposed in Milestone 7.4b4c | Rust Async applicability, lifecycle ownership, blocking/mutex mechanisms, cancellation semantics, and observability are split into four serial refinement slices; implementation remains pending. |
 
 ## Systemic Findings
 
@@ -100,6 +101,7 @@ changes and focused fixture evidence.
 | F028 | High | `RELEASE-STANDARDS.md:162-163,216-231,368-374` | Make SBOM applicability consistent and artifact/risk-based. | 7 |
 | F029 | High | `RELEASE-STANDARDS.md:68-74,252-263,527-530` | Separate package-version/lockfile models and push only the intended release tag. | 7 |
 | F030 | High | `TOOLING-STANDARDS.md:155-160,321-328,388-395` | Reconcile fail-on-warning policy with explicitly owned temporary debt. | 6, 7 |
+| F045 | High | `languages/rust/RUST-ASYNC-STANDARDS.md:6-163` | Replace blanket sync-core, runtime, abort, blocking-pool, mutex, cancellation, and inspection-tool defaults with contract-selected Rust mechanisms and typed unavailable outcomes. | 7 |
 
 ## Duplicate Ownership Clusters
 

@@ -1,0 +1,10 @@
+slice	order	id	source	target	disposition	rationale
+7.4b4d	1	STD-0717	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	move	establish the Rust Async specialization
+7.4b4d	2	STD-0718	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	select synchronous and asynchronous boundaries from the operation contract
+7.4b4e	3	STD-0719	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	assign runtime construction to composition ownership without a library-global default
+7.4b4e	4	STD-0720	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	require tracked task completion failure and shutdown ownership
+7.4b4e	5	STD-0721	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	coordinate admission cancellation draining and abort authority
+7.4b4f	6	STD-0722	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	select blocking isolation from runtime capability and cancellation semantics
+7.4b4f	7	STD-0723	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	select mutex and coordination mechanisms from invariants and suspension behavior
+7.4b4g	8	STD-0724	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	distinguish future polling cancellation from external side-effect cancellation
+7.4b4g	9	STD-0725	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	assign lifecycle observability without mandating one inspection tool

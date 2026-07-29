@@ -252,6 +252,13 @@ mutation, callbacks under locks, fire-and-forget work, synchronous async
 fallback, discarded failure, ignored cancellation, and universal
 language-specific mechanisms.
 
+`milestone-7-rust-async-decomposition.md` and
+`milestone-7-rust-async-slices.tsv` split the nine Rust Async identifiers into
+four serial specialization slices after generic Concurrency. The focused
+decomposition checker validates exact ownership, proposed dispositions,
+dependency order, lifecycle progress, active-plan handoff, and the
+planning-only boundary without moving normative guidance.
+
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
 legacy path is only a bounded migration index.

@@ -46,6 +46,16 @@ for id in "${expected_ids[@]}"; do
 done
 [[ "$next_dispositions" -eq 0 || "$next_dispositions" -eq 9 ]]
 
+rust_async_ids=(
+  STD-0717 STD-0718 STD-0719 STD-0720 STD-0721
+  STD-0722 STD-0723 STD-0724 STD-0725
+)
+rust_async_dispositions=0
+for id in "${rust_async_ids[@]}"; do
+  [[ -n "${disposed[$id]:-}" ]] && ((rust_async_dispositions += 1))
+done
+[[ "$rust_async_dispositions" =~ ^(0|2|5|7|9)$ ]]
+
 expected_groups=(
   $'lifecycle-bridge\t1\ttopics/concurrency.md\t17\tmissing\tnone\tnext'
   $'lifecycle-bridge\t2\tprofiles/languages/rust/async.md\t9\tmissing\ttopics/concurrency.md\tbridge-prerequisite'
@@ -71,6 +81,14 @@ while IFS=$'\t' read -r wave order owner count owner_state prerequisite status e
         "$next_dispositions" -eq 9 ]]; then
     expected_count=8
     expected_state='exists'
+  fi
+  if [[ "$owner" == 'profiles/languages/rust/async.md' ]]; then
+    expected_count=$((9 - rust_async_dispositions))
+    if [[ "$rust_async_dispositions" -eq 0 ]]; then
+      expected_state='missing'
+    else
+      expected_state='exists'
+    fi
   fi
   [[ "${remaining_by_owner[$owner]:-0}" -eq "$expected_count" ]]
   if [[ -e "$REPO_ROOT/$owner" ]]; then
@@ -115,9 +133,11 @@ required_report=(
   'F026'
   'Establish generic concurrency ownership before the Rust async'
   'shutdown canonical in the Rust language-binding profile'
-  'Only `7.4b4b` is implementation-ready'
+  'Only'
+  '`7.4b4d` is now implementation-ready'
   'No normative standard, final disposition'
-  '## Next Slice 7.4b4b: Generic Concurrency Contract'
+  '## Accepted Slice 7.4b4b: Generic Concurrency Contract'
+  '## Accepted Slice 7.4b4c: Rust Async Decomposition'
   'callbacks and other externally controlled code do not execute while the'
   '**No fallback:**'
 )
@@ -128,19 +148,20 @@ done
 rg -F -q '(milestone-7-trust-lifecycle-replan.md)' "$PARENT"
 rg -F -q '| F044 | Resolved in Milestone 7.4b4a |' "$FINDINGS"
 rg -F -q '`7.4b4a` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b4c` (`Planned`)' "$PLAN"
 rg -F -q '`7.4c` (`Planned`)' "$PLAN"
 if [[ "$next_dispositions" -eq 0 ]]; then
   rg -F -q '**Next slice:** Milestone 7.4b4b' "$PLAN"
   rg -F -q '`7.4b4b` (`Planned`)' "$PLAN"
 else
-  rg -F -q '**Next slice:** Milestone 7.4b4c' "$PLAN"
   rg -F -q '`7.4b4b` (`Accepted`)' "$PLAN"
+  rg -F -q '`7.4b4c` (`Accepted`)' "$PLAN"
+  rg -F -q 'milestone-7-rust-async-decomposition.md' "$PLAN"
 fi
 
 "$SCRIPT_DIR/verify-milestone-7-decomposition.sh"
+"$SCRIPT_DIR/verify-milestone-7-rust-async-decomposition.sh"
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
-printf 'Milestone 7 trust/lifecycle re-plan passed: %s trust IDs, %s bridge IDs, %s next-slice IDs, dispositions %s/9\n' \
-  "$trust_total" "$bridge_total" "${#expected_ids[@]}" "$next_dispositions"
+printf 'Milestone 7 trust/lifecycle re-plan passed: %s trust IDs, %s bridge IDs, generic dispositions %s/9, Rust Async dispositions %s/9\n' \
+  "$trust_total" "$bridge_total" "$next_dispositions" "$rust_async_dispositions"

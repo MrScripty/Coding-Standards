@@ -132,6 +132,12 @@ supersedes the premature final-closure handoff. Generic Concurrency and then
 Rust Async precede dependent Rust Security and Language Binding consolidation;
 this bounded bridge does not authorize general later-wave expansion.
 
+After generic Concurrency was accepted, the
+[Rust Async decomposition](milestone-7-rust-async-decomposition.md) split the
+nine specialization identifiers into applicability, owned lifecycle,
+blocking/mutex, and cancellation/observability slices. Only the first planned
+slice is implementation-ready.
+
 Before starting each later wave:
 
 1. inspect repository status and accepted dependencies;

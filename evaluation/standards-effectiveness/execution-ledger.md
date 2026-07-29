@@ -1671,3 +1671,43 @@ The rolling Milestone 7 remainder is 632 IDs across 31 sources and 30 owners,
 with 15 canonical owners still missing.
 
 **Next slice:** `7.4b4c`.
+
+## 2026-07-28: Milestone 7.4b4c Rust Async Decomposition
+
+**Outcome:** Accepted.
+
+The nine Rust Async identifiers are split into four serial owner-bounded
+implementation slices: profile/applicability foundation; owned runtime, task,
+and shutdown lifecycle; blocking and mutex mechanisms; and cancellation safety
+with observability.
+
+The audit recorded `F045`: current guidance overgeneralizes synchronous cores,
+runtime/task containers, shutdown aborts, blocking-pool delegation, mutex
+selection, future cancellation, and inspection tools. The decomposition
+requires contract-selected Rust mechanisms and typed outcomes rather than
+copying those defaults.
+
+Only `7.4b4d` is implementation-ready. It may create the Rust Async profile and
+move `STD-0717` and `STD-0718`; runtime, task, shutdown, blocking, mutex,
+cancellation, and observability sections remain outside that write set.
+
+**Deviations:** the earlier trust/lifecycle report named one Rust Async
+specialization step. Inspection proved four independently verifiable concerns,
+so this accepted planning slice refines that step without changing its owner,
+objective, or dependency position.
+
+**No-fallback/legacy result:** no normative standard, legacy replacement,
+disposition, runtime mechanism, compatibility copy, alternate executor,
+blocking path, detached task, abort policy, mutex default, or observability
+tool was introduced.
+
+**Verification:** the focused checker proves exact coverage of all nine
+identifiers, four serial groups, canonical owner targets, proposed
+dispositions, zero current dispositions, active-plan lifecycle, and parent
+trust/lifecycle linkage. Plan fixtures, shell syntax, whitespace, and all
+standards-effectiveness regressions pass.
+
+The rolling Milestone 7 remainder remains 632 IDs across 31 sources and 30
+owners, with 15 canonical owners still missing.
+
+**Next slice:** `7.4b4d`.

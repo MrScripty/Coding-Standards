@@ -3,9 +3,10 @@
 ## Purpose
 
 This planning report replaces the premature Milestone `7.4c` final-closure
-handoff. It audits the remaining trust-boundary work, records the lifecycle
-dependency exposed by `F025` and `F026`, and fully specifies only the next
-implementation slice.
+handoff. It audits the remaining trust-boundary work and records the lifecycle
+dependency exposed by `F025` and `F026`. The accepted generic Concurrency slice
+and the subsequent Rust Async decomposition refine its original next-slice
+handoff.
 
 This report is planning evidence. It does not own normative concurrency,
 security, interop, cross-platform, async, or binding policy.
@@ -75,18 +76,22 @@ consolidation ahead of the remaining trust-boundary work.
   contract maintenance, binding packaging, generation commands, and version
   publication require owner review before implementation.
 
-The serial dependency sequence is:
+The accepted serial dependency sequence is:
 
 1. `7.4b4a`: accept this planning-only re-plan;
 2. `7.4b4b`: establish the generic concurrency contract and resolve `F019`;
-3. `7.4b4c`: plan the Rust Async specialization after `7.4b4b`;
-4. decompose dependent Rust binding and Rust security sections against those
+3. `7.4b4c`: decompose the Rust Async specialization after `7.4b4b`;
+4. `7.4b4d` through `7.4b4g`: establish the Rust Async specialization in the
+   dependency order frozen by the
+   [Rust Async decomposition](milestone-7-rust-async-decomposition.md);
+5. decompose dependent Rust binding and Rust security sections against those
    accepted owners; and
-5. return to independent trust-boundary groups one owner-bounded slice at a
+6. return to independent trust-boundary groups one owner-bounded slice at a
    time.
 
-Only `7.4b4b` is implementation-ready. Later items remain sequencing
-constraints, not speculative commit contracts.
+Generic Concurrency and the Rust Async decomposition are accepted. Only
+`7.4b4d` is now implementation-ready; later Rust Async items remain frozen
+sequence constraints until their pre-slice review.
 
 ## Slice 7.4b4a: Planning-Only Re-plan
 
@@ -110,7 +115,7 @@ parent-decomposition linkage.
 Plan lifecycle, shell syntax, whitespace, and all standards-effectiveness
 regressions pass.
 
-## Next Slice 7.4b4b: Generic Concurrency Contract
+## Accepted Slice 7.4b4b: Generic Concurrency Contract
 
 [milestone-7-trust-lifecycle-next-slice.tsv](milestone-7-trust-lifecycle-next-slice.tsv)
 freezes these identifiers:
@@ -168,6 +173,18 @@ examples.
 **Acceptance gate:** `F019` is resolved; all nine identifiers have exact final
 dispositions; the generic owner is routed; retained language-specific sections
 cannot override it; and focused plus affected regressions pass.
+
+## Accepted Slice 7.4b4c: Rust Async Decomposition
+
+[milestone-7-rust-async-decomposition.md](milestone-7-rust-async-decomposition.md)
+separates profile applicability, owned runtime lifecycle, blocking/mutex
+mechanisms, and cancellation/observability into four serial implementation
+slices. It records `F045`, freezes all nine Rust Async identifiers, and fully
+specifies only `7.4b4d`.
+
+No normative profile, legacy replacement, final disposition, generated
+artifact, runtime integration, package file, or downstream repository changes
+in the planning slice.
 
 ## Re-plan Triggers
 
