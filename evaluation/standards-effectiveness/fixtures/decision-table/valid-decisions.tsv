@@ -1,0 +1,5 @@
+case	contract	fallback	expected
+selected	selected	none	allow
+missing	missing	none	typed-unavailable
+unsupported	unsupported	none	typed-unsupported
+fallback	selected	default	typed-invalid

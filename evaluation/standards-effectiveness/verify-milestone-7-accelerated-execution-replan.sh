@@ -8,6 +8,8 @@ readonly TRAIN="$SCRIPT_DIR/milestone-7-execution-train.tsv"
 readonly REPORT="$SCRIPT_DIR/milestone-7-accelerated-execution-replan.md"
 readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
+readonly DECISION_ENGINE="$SCRIPT_DIR/check-decision-table.sh"
+readonly DECISION_ENGINE_FIXTURES="$SCRIPT_DIR/verify-decision-table-engine.sh"
 
 declare -A train_owner train_wave train_gate seen_orders
 while IFS=$'\t' read -r order wave _start _end _source owner _owner_state \
@@ -119,13 +121,17 @@ for text in "${required_report[@]}"; do
 done
 
 rg -F -q '| F070 | Resolved in Milestone 7.4b8l |' "$FINDINGS"
+rg -F -q '| F071 | Resolved in Milestone 7.4b8m |' "$FINDINGS"
 rg -F -q '`7.4b8l` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8m` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8m` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8n` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8m'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8n'* ]]
 [[ "$next_slice_line" == *'STD-0804'* ]]
 [[ "$next_slice_line" == *'STD-0809'* ]]
 
+[[ -x "$DECISION_ENGINE" && -x "$DECISION_ENGINE_FIXTURES" ]]
+"$DECISION_ENGINE_FIXTURES"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"

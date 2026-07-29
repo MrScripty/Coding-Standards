@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** The accelerated package contract is accepted; reusable
-decision-table verification for the six-ID Rust binding representation group
-is the next infrastructure slice.
+**Current phase:** Reusable decision-table verification is accepted; the
+six-ID Rust binding representation group is the next semantic owner-review
+slice.
 
-**Next slice:** Milestone 7.4b8m reusable decision-table verification foundation for active package `STD-0804` through `STD-0809`.
+**Next slice:** Milestone 7.4b8n owner review and decomposition decision for active package `STD-0804` through `STD-0809`.
 
 **Acceptance status:** `partial`
 
@@ -1063,9 +1063,23 @@ all structural/routing fixtures pass.
      - retain one serial integration owner for shared contracts, routing,
        metadata, generated artifacts, dispositions, plans, findings, and
        ledgers.
-   - `7.4b8m` (`Planned`): establish and self-test the reusable decision-table
-     verifier for active package `STD-0804` through `STD-0809` without moving
-     normative rules or recording dispositions.
+   - `7.4b8m` (`Accepted`): establish and self-test reusable decision-table
+     verification for active package `STD-0804` through `STD-0809` without
+     moving normative rules or recording dispositions;
+     - require an ordered schema with one finite domain per column, a decision
+       table beginning with unique `case` values and ending with `expected`,
+       and an observed `case`/`actual` table;
+     - reject malformed schemas, duplicate columns or cases, out-of-domain
+       values, missing or extra observations, outcome mismatches, and
+       unavailable inputs with explicit diagnostics;
+     - keep package-specific derivation logic outside the generic engine and
+       prohibit shell evaluation, embedded domain policy, compatibility
+       schemas, and permissive parsing; and
+     - retain accepted bespoke checkers until an affected package explicitly
+       migrates its invariant.
+   - `7.4b8n` (`Planned`): review `STD-0804` through `STD-0809` for one
+     owner- and outcome-coherent implementation slice or an exact ordered
+     decomposition before normative movement.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

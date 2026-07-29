@@ -102,10 +102,16 @@ their invariant to a reusable engine. There is no wholesale checker rewrite.
 Conversion occurs only when a checker blocks authorized work, duplicates the
 new engine materially, or the active package needs the same invariant.
 
-The next slice, `7.4b8m`, establishes and self-tests the reusable
-`decision-table` engine against the active `STD-0804` through `STD-0809`
-package. It changes checker infrastructure only. Normative row-5 implementation
-follows after that gate passes.
+Accepted slice `7.4b8m` establishes and self-tests the reusable
+`decision-table` engine for the active `STD-0804` through `STD-0809` package.
+The engine validates schema domains, table shape, unique and exact case
+coverage, and observed outcomes. Package-specific derivation remains outside
+the engine; it does not evaluate shell code, embed domain policy, accept legacy
+schemas, or infer missing values.
+
+The next slice, `7.4b8n`, performs semantic owner review and either accepts one
+coherent row-5 implementation contract or records an exact ordered
+decomposition before normative movement.
 
 ## Verification Matrix
 

@@ -3185,3 +3185,37 @@ downstream repository changed.
 
 **Next slice:** `7.4b8m`, reusable decision-table verification foundation for
 active package `STD-0804` through `STD-0809`.
+
+## 2026-07-29: Milestone 7.4b8m Decision-Table Verification Foundation
+
+**Outcome:** Accepted.
+
+A reusable decision-table engine now validates an ordered schema, finite value
+domains, exact table headers, unique non-empty cases, exact observed coverage,
+and expected/actual equality. Package checkers supply observed outcomes from
+their own semantic derivation; the engine neither owns nor evaluates domain
+logic.
+
+**Verification:** one valid schema/decision/observation set and eight negative
+paths covering duplicate schema columns, non-case wildcards, out-of-domain
+decisions, duplicate cases, mismatched outcomes, missing observations, extra
+observations, and unavailable files; acceleration-plan handoff; immutable
+execution train; plan lifecycle; shell syntax; whitespace; exact scope; and
+the complete checker suite with fail-fast shell behavior.
+
+**No-fallback result:** the engine has one schema contract and exact parsing.
+It does not execute fixture content, infer missing values, accept unknown
+columns or cases, coerce outcomes, retain legacy schemas, embed package policy,
+or reinterpret unavailable evidence as success.
+
+**Deviation:** the first self-test exposed `awk` portability: `index` is a
+built-in function and cannot be used portably as a loop variable. The engine
+uses explicit `field_index` and `allowed_index` names; no contract changed.
+
+No normative or legacy standard, disposition, immutable-train row,
+decomposition overlay, generated artifact, owner map, router, metadata,
+dependency declaration, package decision fixture, configuration, lockfile, or
+downstream repository changed.
+
+**Next slice:** `7.4b8n`, bounded owner review and decomposition decision for
+active package `STD-0804` through `STD-0809`.

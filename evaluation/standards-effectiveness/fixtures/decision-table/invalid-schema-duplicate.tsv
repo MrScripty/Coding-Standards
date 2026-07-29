@@ -1,0 +1,5 @@
+column	allowed
+case	*
+contract	selected,missing
+contract	selected,unsupported
+expected	allow,typed-unavailable

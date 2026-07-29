@@ -1,0 +1,4 @@
+column	allowed
+case	*
+contract	*
+expected	allow,typed-invalid

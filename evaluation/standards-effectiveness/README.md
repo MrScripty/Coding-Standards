@@ -69,6 +69,14 @@ coverage, package cohesion, missing-owner state, immutable-train alignment,
 active-plan handoff, and plan lifecycle. Shared integration remains serial,
 and complete-suite checkpoints remain fail-fast.
 
+`check-decision-table.sh` is the reusable semantic-fixture engine. A package
+supplies an ordered schema, decisions with expected outcomes, and observed
+outcomes derived by its own domain logic. The engine validates exact headers,
+finite domains, unique cases, exact observed coverage, and outcome equality.
+`verify-decision-table-engine.sh` covers valid input plus duplicate schema,
+invalid wildcard, invalid domain, duplicate case, mismatch, missing case,
+extra case, and unavailable-input failures.
+
 ## Routed Vertical Slice
 
 `verify-s1-routing.sh` checks the first complete routed path:
