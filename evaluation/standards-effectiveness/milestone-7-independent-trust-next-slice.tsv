@@ -1,10 +1,6 @@
 slice	order	id	source	target	disposition	rationale
-7.4b7c	1	STD-0280	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	move	establish the generic cross-platform owner
-7.4b7c	2	STD-0281	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	derive supported targets and support claims from the project contract
-7.4b7c	3	STD-0282	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	establish contract-selected platform behavior and failure policy
-7.4b7c	4	STD-0283	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	isolate platform decisions from domain behavior without requiring one abstraction shape
-7.4b7c	5	STD-0284	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select composition and dispatch mechanisms from language and deployment facts
-7.4b7c	6	STD-0285	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select file and module boundaries from cohesion and language conventions
-7.4b7c	7	STD-0286	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	preserve declared semantics and return typed unsupported or unavailable outcomes
-7.4b7c	8	STD-0287	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select compile-time or runtime platform mechanisms from the build and deployment contract
-7.4b7c	9	STD-0288	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	route language-specific platform mechanisms to selected profiles
+7.4b7e	1	STD-0726	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	move	establish the declared Rust cross-platform specialization
+7.4b7e	2	STD-0727	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	derive Rust targets support claims and evidence from the selected target contract
+7.4b7e	3	STD-0728	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	select cfg build composition and module boundaries from Rust and artifact facts
+7.4b7e	4	STD-0729	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	place inline cfg by cohesion and reviewability without numeric layout thresholds
+7.4b7e	5	STD-0730	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	verify each declared Rust target claim with contract-matched evidence

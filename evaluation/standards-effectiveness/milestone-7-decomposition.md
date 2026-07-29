@@ -143,11 +143,14 @@ those owners.
 
 The
 [independent trust-boundary re-plan](milestone-7-independent-trust-replan.md)
-now measures 75 remaining identifiers across seven owners after accepting the
-generic Security network-transport group. It selects only the nine-section
-generic Cross-Platform target/isolation group as the next implementation slice
-because that group replaces universal target and mechanism defaults and
-unblocks the missing Rust Cross-Platform specialization.
+now measures 66 remaining identifiers across seven owners after accepting the
+generic Cross-Platform target/isolation group. It selects only the five-section
+Rust Cross-Platform specialization as the next implementation slice because
+that group consumes the accepted generic contract, replaces fixed Rust targets
+and configuration/evidence defaults, and closes one declared missing owner.
+The same audit records cross-role owner-map corrections and binding
+decomposition that must complete before affected residual groups are
+activated.
 
 Before starting each later wave:
 

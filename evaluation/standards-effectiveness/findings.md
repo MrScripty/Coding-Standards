@@ -50,6 +50,8 @@ changes and focused fixture evidence.
 | F044 | Resolved in Milestone 7.4b4a | The premature final-closure handoff is superseded by a measured 90-ID trust remainder, a 26-ID lifecycle bridge for F025/F026, and one exact generic Concurrency next slice. |
 | F045 | Resolved in Milestone 7.4b4g | Rust Async applicability, lifecycle, blocking isolation, synchronization, cancellation safety, cleanup, and observability are contract-selected without named-mechanism fallback. |
 | F046 | Resolved in Milestone 7.4b7c | Cross-Platform target support, isolation, mechanism selection, semantic fidelity, and evidence now follow explicit contracts without fixed targets, universal architecture/layout, or stub fallback. |
+| F047 | Planned for Milestone 7.4b7e | Rust target triples, support claims, `cfg`/module placement, and evidence must follow the selected target and artifact contracts rather than fixed targets, best-effort status, numeric layout thresholds, or named substitute tools. |
+| F048 | Open for rolling Milestone 7 owner correction | Residual Security, Cross-Platform, Interop, Rust Interop, Rust Security, and Rust Language Binding owner-map groups cross canonical roles or require decomposition; each must be corrected before activation. |
 
 ## Systemic Findings
 
@@ -84,6 +86,7 @@ changes and focused fixture evidence.
 | F042 | Provider-specific rollback | `RELEASE-STANDARDS.md`; frozen IDs `STD-0577`-`STD-0581` | Replace universal unpublish/yank/branch/patch instructions with capability-driven recovery, explicit emergency authority, and impact-driven incident records. | 7 |
 | F043 | Undecomposed consolidation scope | Remaining frozen inventory and Milestone 7 sequence | Decompose remaining identifiers by canonical owner and correctness dependency before another normative move. | 7 |
 | F044 | Premature closure handoff | Active-plan `7.4c` handoff after Milestone 7.4b3g; rolling remainder of 641 IDs and 16 missing owners | Keep final closure reserved until the remainder reaches zero; insert the generic Concurrency and Rust Async dependency bridge before dependent trust-boundary specializations. | 7 |
+| F048 | Residual owner-map drift | Frozen IDs `STD-0294`-`STD-0299`, `STD-0473`-`STD-0482`, `STD-0582`, `STD-0583`, `STD-0588`-`STD-0591`, `STD-0601`, `STD-0757`, `STD-0758`, `STD-0761`-`STD-0771`, `STD-0776`-`STD-0780`, `STD-0782`-`STD-0789`, `STD-0792`, `STD-0793`, `STD-0797`, `STD-0804`-`STD-0809`, `STD-0821`, `STD-0824`, `STD-0826` | Correct all 61 cross-role destinations and decompose mixed groups in a planning-only re-plan before activating any affected implementation slice. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings
@@ -106,6 +109,7 @@ changes and focused fixture evidence.
 | F030 | High | `TOOLING-STANDARDS.md:155-160,321-328,388-395` | Reconcile fail-on-warning policy with explicitly owned temporary debt. | 6, 7 |
 | F045 | High | `languages/rust/RUST-ASYNC-STANDARDS.md:6-163` | Replace blanket sync-core, runtime, abort, blocking-pool, mutex, cancellation, and inspection-tool defaults with contract-selected Rust mechanisms and typed unavailable outcomes. | 7 |
 | F046 | High | `CROSS-PLATFORM-STANDARDS.md:5-135`; frozen IDs `STD-0280`-`STD-0288` | Derive target support and platform-mechanism selection from explicit project, language, build, and deployment contracts; preserve semantics with typed outcomes instead of universal Strategy/Factory, file-layout, runtime-only, or stub defaults. | 7 |
+| F047 | High | `languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md`; frozen IDs `STD-0726`-`STD-0730` | Derive Rust target triples, configuration boundaries, and evidence from declared target/artifact contracts; remove fixed targets, best-effort claims, universal module/trait layout, numeric `cfg` thresholds, and named substitute tools. | 7 |
 
 ## Duplicate Ownership Clusters
 

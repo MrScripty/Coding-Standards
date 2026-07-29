@@ -21,6 +21,7 @@ declare -A remaining_sources
 declare -A remaining_owners
 declare -A source_by_id
 declare -A owner_by_id
+declare -a f048_actual_ids
 
 while IFS=$'\t' read -r id source target disposition _rationale; do
   [[ "$id" == 'id' ]] && continue
@@ -31,14 +32,18 @@ while IFS=$'\t' read -r id source target disposition _rationale; do
 done < "$DISPOSITIONS"
 
 expected_ids=(
-  STD-0280 STD-0281 STD-0282 STD-0283 STD-0284
-  STD-0285 STD-0286 STD-0287 STD-0288
+  STD-0726 STD-0727 STD-0728 STD-0729 STD-0730
 )
 next_dispositions=0
 for id in "${expected_ids[@]}"; do
   [[ -n "${disposed[$id]:-}" ]] && ((next_dispositions += 1))
 done
-[[ "$next_dispositions" -eq 0 || "$next_dispositions" -eq 9 ]]
+[[ "$next_dispositions" -eq 0 || "$next_dispositions" -eq 5 ]]
+
+accepted_next=0
+if [[ "$next_dispositions" -eq 5 ]]; then
+  accepted_next=1
+fi
 
 global_remaining=0
 while IFS=$'\t' read -r id source _line owner _disposition _heading; do
@@ -50,16 +55,34 @@ while IFS=$'\t' read -r id source _line owner _disposition _heading; do
   remaining_sources["$source"]=1
   remaining_owners["$owner"]=1
   remaining_by_owner["$owner"]=$(( ${remaining_by_owner[$owner]:-0} + 1 ))
+  case "$owner" in
+    topics/security.md|topics/cross-platform.md|profiles/boundaries/interop.md|\
+profiles/languages/rust/interop.md|profiles/languages/rust/security.md|\
+profiles/languages/rust/language-bindings.md)
+      f048_actual_ids+=("$id")
+      ;;
+  esac
 done < "$OWNER_MAP"
-[[ "$global_remaining" -eq $((608 - next_dispositions)) ]]
-[[ "${#remaining_sources[@]}" -eq 30 ]]
-[[ "${#remaining_owners[@]}" -eq 29 ]]
+[[ "$global_remaining" -eq $((599 - next_dispositions)) ]]
+[[ "${#remaining_sources[@]}" -eq $((30 - accepted_next)) ]]
+[[ "${#remaining_owners[@]}" -eq $((29 - accepted_next)) ]]
 
 missing_owners=0
 for owner in "${!remaining_owners[@]}"; do
   [[ -e "$REPO_ROOT/$owner" ]] || ((missing_owners += 1))
 done
-[[ "$missing_owners" -eq 14 ]]
+[[ "$missing_owners" -eq $((14 - accepted_next)) ]]
+
+expected_f048_ids=(
+  STD-{0294..0299}
+  STD-{0473..0482}
+  STD-0582 STD-0583 STD-{0588..0591} STD-0601
+  STD-0757 STD-0758 STD-{0761..0771} STD-{0776..0780}
+  STD-{0782..0789} STD-0792 STD-0793 STD-0797 STD-{0804..0809}
+  STD-0821 STD-0824 STD-0826
+)
+[[ "${#expected_f048_ids[@]}" -eq 61 ]]
+[[ "${f048_actual_ids[*]}" == "${expected_f048_ids[*]}" ]]
 
 for dependency in \
   topics/security.md \
@@ -73,13 +96,13 @@ for dependency in \
 done
 
 expected_groups=(
-  $'1\ttopics/security.md\t7\texists\tnone\tindependent-audit'
-  $'2\ttopics/cross-platform.md\t15\texists\tnone\tnext-owner-audit'
-  $'3\tprofiles/boundaries/interop.md\t10\texists\ttopics/contracts.md\tindependent-audit'
-  $'4\tprofiles/languages/rust/cross-platform.md\t5\tmissing\ttopics/cross-platform.md\tdependent-audit'
-  $'5\tprofiles/languages/rust/interop.md\t1\texists\tprofiles/boundaries/interop.md\tdependent-audit'
-  $'6\tprofiles/languages/rust/security.md\t3\texists\ttopics/security.md,profiles/languages/rust/async.md\tdependent-audit'
-  $'7\tprofiles/languages/rust/language-bindings.md\t34\texists\tprofiles/boundaries/language-bindings.md,profiles/languages/rust/async.md\tdependent-audit'
+  $'1\ttopics/security.md\t7\texists\tnone\towner-correction-required'
+  $'2\ttopics/cross-platform.md\t6\texists\tnone\towner-correction-required'
+  $'3\tprofiles/boundaries/interop.md\t10\texists\ttopics/contracts.md\towner-correction-required'
+  $'4\tprofiles/languages/rust/cross-platform.md\t5\tmissing\ttopics/cross-platform.md\tnext-owner-audit'
+  $'5\tprofiles/languages/rust/interop.md\t1\texists\tprofiles/boundaries/interop.md\towner-correction-required'
+  $'6\tprofiles/languages/rust/security.md\t3\texists\ttopics/security.md,profiles/languages/rust/async.md\towner-correction-required'
+  $'7\tprofiles/languages/rust/language-bindings.md\t34\texists\tprofiles/boundaries/language-bindings.md,profiles/languages/rust/async.md\tdecomposition-required'
 )
 mapfile -t actual_groups < <(tail -n +2 "$GROUP_FILE")
 [[ "${actual_groups[*]}" == "${expected_groups[*]}" ]]
@@ -90,7 +113,7 @@ while IFS=$'\t' read -r order owner count owner_state prerequisite status extra;
   [[ "$order" == 'order' ]] && continue
   [[ "$order" =~ ^[1-7]$ && "$count" =~ ^[0-9]+$ ]]
   expected_count="$count"
-  if [[ "$owner" == 'topics/cross-platform.md' ]]; then
+  if [[ "$owner" == 'profiles/languages/rust/cross-platform.md' ]]; then
     expected_count=$((count - next_dispositions))
   fi
   [[ "${remaining_by_owner[$owner]:-0}" -eq "$expected_count" ]]
@@ -99,13 +122,18 @@ while IFS=$'\t' read -r order owner count owner_state prerequisite status extra;
   else
     actual_state='missing'
   fi
-  [[ "$actual_state" == "$owner_state" ]]
+  if [[ "$owner" == 'profiles/languages/rust/cross-platform.md' &&
+        "$next_dispositions" -eq 5 ]]; then
+    [[ "$owner_state" == 'missing' && "$actual_state" == 'exists' ]]
+  else
+    [[ "$actual_state" == "$owner_state" ]]
+  fi
   [[ -n "$prerequisite" && -n "$status" && -z "${extra:-}" ]]
   ((baseline_trust_total += count))
   ((current_trust_total += expected_count))
 done < "$GROUP_FILE"
-[[ "$baseline_trust_total" -eq 75 ]]
-[[ "$current_trust_total" -eq $((75 - next_dispositions)) ]]
+[[ "$baseline_trust_total" -eq 66 ]]
+[[ "$current_trust_total" -eq $((66 - next_dispositions)) ]]
 
 mapfile -t actual_ids < <(tail -n +2 "$NEXT_SLICE" | cut -f3)
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
@@ -114,11 +142,11 @@ row_count=0
 expected_order=1
 while IFS=$'\t' read -r slice order id source target disposition rationale extra; do
   [[ "$slice" == 'slice' ]] && continue
-  [[ "$slice" == '7.4b7c' && "$order" -eq "$expected_order" ]]
+  [[ "$slice" == '7.4b7e' && "$order" -eq "$expected_order" ]]
   [[ "${source_by_id[$id]}" == "$source" ]]
   [[ "${owner_by_id[$id]}" == "$target" ]]
-  [[ "$source" == 'CROSS-PLATFORM-STANDARDS.md' ]]
-  [[ "$target" == 'topics/cross-platform.md' ]]
+  [[ "$source" == 'languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md' ]]
+  [[ "$target" == 'profiles/languages/rust/cross-platform.md' ]]
   if [[ "$order" -eq 1 ]]; then
     [[ "$disposition" == 'move' ]]
   else
@@ -133,18 +161,19 @@ while IFS=$'\t' read -r slice order id source target disposition rationale extra
   ((row_count += 1))
   ((expected_order += 1))
 done < "$NEXT_SLICE"
-[[ "$row_count" -eq 9 ]]
+[[ "$row_count" -eq 5 ]]
 
 required_report=(
-  '608 frozen identifiers across 30 legacy'
-  'seven groups total 75 undisposed identifiers'
-  '`F046`'
-  'Select `STD-0280` through `STD-0288`'
-  '## Accepted Slice 7.4b7b: Planning-Only Remainder Re-plan'
+  '599 frozen identifiers across 30 legacy'
+  'seven groups total 66 undisposed identifiers'
+  '`F047`'
+  '`F048`'
+  'Select `STD-0726` through `STD-0730`'
+  '## Accepted Slice 7.4b7d: Planning-Only Remainder Re-plan'
   'No normative or legacy standard, final disposition'
-  'derive supported targets and support claims from an'
-  'select compile-time, runtime, composition, and dispatch mechanisms'
-  'unblocks the missing Rust'
+  'derive Rust target triples, support claims, build selection'
+  'sets numeric'
+  'Remainder Ownership Audit'
   '**No fallback:**'
   '**Pre-slice review:** accepted.'
 )
@@ -155,26 +184,29 @@ done
 rg -F -q '(milestone-7-independent-trust-replan.md)' "$PARENT"
 rg -F -q '`7.4b7a` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7b` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b7c` (`Accepted`)' "$PLAN"
 if [[ "$next_dispositions" -eq 0 ]]; then
-  rg -F -q '| F046 | Planned for Milestone 7.4b7c |' "$FINDINGS"
-  rg -F -q '## Planned Slice 7.4b7c: Generic Platform Target And Isolation Contract' \
+  rg -F -q '| F047 | Planned for Milestone 7.4b7e |' "$FINDINGS"
+  rg -F -q '| F048 | Open for rolling Milestone 7 owner correction |' "$FINDINGS"
+  rg -F -q '## Planned Slice 7.4b7e: Rust Target And Configuration Contract' \
     "$REPORT"
-  rg -F -q '`7.4b7c` (`Planned`)' "$PLAN"
-  rg -F -q '**Next slice:** Milestone 7.4b7c' "$PLAN"
+  rg -F -q '`7.4b7d` (`Accepted`)' "$PLAN"
+  rg -F -q '`7.4b7e` (`Planned`)' "$PLAN"
+  rg -F -q '**Next slice:** Milestone 7.4b7e' "$PLAN"
 else
-  rg -F -q '| F046 | Resolved in Milestone 7.4b7c |' "$FINDINGS"
-  rg -F -q '## Accepted Slice 7.4b7c: Generic Platform Target And Isolation Contract' \
+  rg -F -q '| F047 | Resolved in Milestone 7.4b7e |' "$FINDINGS"
+  rg -F -q '## Accepted Slice 7.4b7e: Rust Target And Configuration Contract' \
     "$REPORT"
-  rg -F -q '## Planned Slice 7.4b7d: Independent Trust-Boundary Remainder Re-plan' \
+  rg -F -q '## Planned Slice 7.4b7f: Independent Trust-Boundary Remainder Re-plan' \
     "$REPORT"
-  rg -F -q '`7.4b7c` (`Accepted`)' "$PLAN"
-  rg -F -q '`7.4b7d` (`Planned`)' "$PLAN"
-  rg -F -q '**Next slice:** Milestone 7.4b7d' "$PLAN"
+  rg -F -q '`7.4b7e` (`Accepted`)' "$PLAN"
+  rg -F -q '`7.4b7f` (`Planned`)' "$PLAN"
+  rg -F -q '**Next slice:** Milestone 7.4b7f' "$PLAN"
 fi
 
 "$SCRIPT_DIR/verify-milestone-7-decomposition.sh"
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
-printf 'Milestone 7 independent trust re-plan passed: %s baseline IDs, %s current across 7 owners; next-slice dispositions %s/9\n' \
+printf 'Milestone 7 independent trust re-plan passed: %s baseline IDs, %s current across 7 owners; next-slice dispositions %s/5\n' \
   "$baseline_trust_total" "$current_trust_total" "$next_dispositions"

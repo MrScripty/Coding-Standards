@@ -6,10 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 generic platform target and isolation accepted;
-independent trust-boundary remainder re-plan is next.
+**Current phase:** Milestone 7 independent trust-boundary remainder re-plan
+accepted; Rust target and configuration implementation is next.
 
-**Next slice:** Milestone 7.4b7d independent trust-boundary remainder re-plan.
+**Next slice:** Milestone 7.4b7e Rust target and configuration contract
+implementation.
 
 **Acceptance status:** `partial`
 
@@ -31,7 +32,7 @@ independent trust-boundary remainder re-plan is next.
 
 **F025/F026 decomposition:** [Dependent Rust binding and security lifecycle slices](../evaluation/standards-effectiveness/milestone-7-f025-f026-decomposition.md)
 
-**Independent trust-boundary re-plan:** [Seven owner groups and generic platform next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
+**Independent trust-boundary re-plan:** [Seven owner groups and Rust target/configuration next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -744,9 +745,24 @@ all structural/routing fixtures pass.
        one-file-per-platform, runtime/compile-only selection, stubs, omission,
        alternate mechanisms, and weaker evidence; and
      - `F046` is resolved.
-   - `7.4b7d` (`Planned`): re-measure the 599-ID global remainder and 66-ID
+   - `7.4b7d` (`Accepted`): re-measure the 599-ID global remainder and 66-ID
      independent trust subset, then activate exactly one owner-bounded slice
-     without normative movement.
+     without normative movement;
+     - the current groups contain 7 Security, 6 Cross-Platform, 10 Interop, 5
+       Rust Cross-Platform, 1 Rust Interop, 3 Rust Security, and 34 Rust
+       Language Binding identifiers;
+     - the five-section Rust Cross-Platform group is the smallest
+       dependency-ready slice that closes a declared missing owner;
+     - fixed target triples, best-effort support, universal module/trait
+       layout, numeric inline-`cfg` thresholds, and named substitute tools are
+       recorded as `F047`;
+     - residual cross-role owner-map conflicts and the 34-ID binding
+       decomposition requirement are recorded as `F048`; and
+     - the planning slice changes no normative or legacy standard, final
+       disposition, generated artifact, configuration, or downstream file.
+   - `7.4b7e` (`Planned`): establish the Rust Cross-Platform specialization
+     with contract-selected targets, configuration boundaries, and evidence
+     (`STD-0726`-`STD-0730`).
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

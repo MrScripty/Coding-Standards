@@ -1,8 +1,8 @@
 order	owner	remaining_ids	owner_state	prerequisite	status
-1	topics/security.md	7	exists	none	independent-audit
-2	topics/cross-platform.md	15	exists	none	next-owner-audit
-3	profiles/boundaries/interop.md	10	exists	topics/contracts.md	independent-audit
-4	profiles/languages/rust/cross-platform.md	5	missing	topics/cross-platform.md	dependent-audit
-5	profiles/languages/rust/interop.md	1	exists	profiles/boundaries/interop.md	dependent-audit
-6	profiles/languages/rust/security.md	3	exists	topics/security.md,profiles/languages/rust/async.md	dependent-audit
-7	profiles/languages/rust/language-bindings.md	34	exists	profiles/boundaries/language-bindings.md,profiles/languages/rust/async.md	dependent-audit
+1	topics/security.md	7	exists	none	owner-correction-required
+2	topics/cross-platform.md	6	exists	none	owner-correction-required
+3	profiles/boundaries/interop.md	10	exists	topics/contracts.md	owner-correction-required
+4	profiles/languages/rust/cross-platform.md	5	missing	topics/cross-platform.md	next-owner-audit
+5	profiles/languages/rust/interop.md	1	exists	profiles/boundaries/interop.md	owner-correction-required
+6	profiles/languages/rust/security.md	3	exists	topics/security.md,profiles/languages/rust/async.md	owner-correction-required
+7	profiles/languages/rust/language-bindings.md	34	exists	profiles/boundaries/language-bindings.md,profiles/languages/rust/async.md	decomposition-required

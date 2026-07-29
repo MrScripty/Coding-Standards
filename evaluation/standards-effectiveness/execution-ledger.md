@@ -2330,3 +2330,41 @@ with 14 canonical owners still missing. The independent trust subset contains
 
 **Next slice:** `7.4b7d`, planning only, to re-measure the remainder and
 activate exactly one owner-bounded implementation slice.
+
+## 2026-07-28: Milestone 7.4b7d Independent Trust Remainder Re-plan
+
+**Outcome:** Accepted.
+
+The rolling remainder contains 599 frozen identifiers across 30 legacy sources
+and 29 proposed canonical owners, with 14 owners still missing. The active
+trust subset contains 66 identifiers across seven owners: 7 Security, 6
+Cross-Platform, 10 Interop, 5 Rust Cross-Platform, 1 Rust Interop, 3 Rust
+Security, and 34 Rust Language Bindings.
+
+The audit selects only `STD-0726` through `STD-0730` for the next
+implementation slice. The Rust Cross-Platform group consumes the accepted
+generic target contract and closes one declared missing owner.
+
+**Deviations:** None.
+
+**Discovered issues:** `F047` records fixed Rust target triples, best-effort
+support, universal module/trait layout, numeric inline-`cfg` thresholds, and
+named substitute verification tools. `F048` records residual cross-role
+owner-map conflicts in generic Security, Cross-Platform, Interop, Rust Interop,
+and Rust Security plus the required decomposition of the 34-ID Rust Language
+Binding remainder.
+
+**No-fallback/legacy result:** the re-plan does not authorize default target
+triples, support tiers, best-effort status, module/trait layouts, numeric
+placement thresholds, substitute tools, alternate targets, compatibility
+copies, or weaker evidence. The affected residual owner groups cannot be
+implemented until an accepted planning-only correction or decomposition.
+
+**Verification:** exact 599-ID global remainder, exact 66-ID/seven-owner trust
+audit, exact five-ID Rust Cross-Platform next-slice proposal with zero
+premature dispositions, current owner/dependency/correction state, parent and
+active-plan linkage, plan lifecycle, shell syntax, whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+**Next slice:** `7.4b7e` Rust target and configuration contract
+implementation.
