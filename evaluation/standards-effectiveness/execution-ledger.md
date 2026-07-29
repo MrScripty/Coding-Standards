@@ -1892,3 +1892,47 @@ with 14 canonical owners still missing.
 
 **Next slice:** re-plan the dependent Rust Security and Rust Language Bindings
 lifecycle remainder before `7.4c`.
+
+## 2026-07-28: Milestone 7.4b5a F025/F026 Dependent Rust Decomposition
+
+**Outcome:** Accepted.
+
+The remaining dependent Rust lifecycle work is now frozen as ten identifiers
+across five serial owner-bounded slices. The sequence separates framework-free
+core/binding architecture, injected runtime and handle adaptation, explicit
+typed executor delegation, Rust filesystem authority through use, and
+lifecycle-owned listener work.
+
+The planning review keeps accepted `STD-0802` as framework-free core-test
+evidence without disposing it twice. Unrelated callback/event delivery,
+packaging, generation, workspace, bounded-queue, and panic sections remain in
+their later owner waves.
+
+**Deviations:** None.
+
+**Discovered issue (`Resolved`):** the parent trust/lifecycle checker still
+required historical slice `7.4b4d` to be "now" implementation-ready. That
+mutable sequencing assertion would reject every valid later handoff. It is
+removed; the checker retains frozen counts, owner/dependency evidence,
+accepted-slice proof, and stable linkage to this decomposition. The new focused
+checker is the sole current-sequence owner.
+
+**No-fallback/legacy result:** the plan cannot preserve framework-coupled core
+logic, binding-owned or alternate runtimes, synchronous async driving,
+request-input carry-forward, catch-all executor delegation, raceable checked
+pathnames, detached listener work, or weaker behavior when required authority
+is unavailable. This planning slice changes no normative standard, legacy
+section, disposition, generated inventory, package file, runtime, or
+downstream repository.
+
+**Verification:** the focused ten-ID/five-slice checker, parent rolling and
+trust/lifecycle gates, Rust Async decomposition, plan lifecycle fixtures,
+shell syntax, whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass. The proposed
+disposition state is `0/4`, `0/3`, `0/1`, `0/1`, and `0/1`, so only the first
+implementation slice is active.
+
+The rolling Milestone 7 remainder remains 623 IDs across 30 sources and 29
+owners, with 14 canonical owners still missing.
+
+**Next slice:** `7.4b5b` Rust binding core and adapter boundary.

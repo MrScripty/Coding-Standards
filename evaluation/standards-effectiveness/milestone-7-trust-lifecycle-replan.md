@@ -85,13 +85,15 @@ The accepted serial dependency sequence is:
    dependency order frozen by the
    [Rust Async decomposition](milestone-7-rust-async-decomposition.md);
 5. decompose dependent Rust binding and Rust security sections against those
-   accepted owners; and
+   accepted owners through the
+   [F025/F026 dependent Rust decomposition](milestone-7-f025-f026-decomposition.md);
+   and
 6. return to independent trust-boundary groups one owner-bounded slice at a
    time.
 
-Generic Concurrency and the Rust Async decomposition are accepted. Only
-`7.4b4d` is now implementation-ready; later Rust Async items remain frozen
-sequence constraints until their pre-slice review.
+Generic Concurrency, Rust Async, and the dependent Rust planning decomposition
+are accepted. Only `7.4b5b` is now implementation-ready; later dependent Rust
+items remain frozen sequence constraints until their pre-slice review.
 
 ## Slice 7.4b4a: Planning-Only Re-plan
 
@@ -185,6 +187,18 @@ specifies only `7.4b4d`.
 No normative profile, legacy replacement, final disposition, generated
 artifact, runtime integration, package file, or downstream repository changes
 in the planning slice.
+
+## Accepted Slice 7.4b5a: Dependent Rust Decomposition
+
+[milestone-7-f025-f026-decomposition.md](milestone-7-f025-f026-decomposition.md)
+separates the remaining `F025`/`F026` binding architecture, runtime adaptation,
+typed delegation, path-authority, and listener-lifecycle concerns into five
+serial implementation slices. It freezes ten undisposed identifiers and fully
+specifies only `7.4b5b`.
+
+No normative profile, legacy replacement, final disposition, generated
+artifact, package file, lockfile, runtime integration, or downstream
+repository changes in the planning slice.
 
 ## Re-plan Triggers
 

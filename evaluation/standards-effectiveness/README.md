@@ -259,6 +259,14 @@ decomposition checker validates exact ownership, proposed dispositions,
 dependency order, lifecycle progress, active-plan handoff, and the
 planning-only boundary without moving normative guidance.
 
+`milestone-7-f025-f026-decomposition.md` and
+`milestone-7-f025-f026-slices.tsv` split ten dependent Rust Language Binding
+and Rust Security identifiers into core/adapter, runtime adaptation, typed
+delegation, filesystem-authority, and listener-lifecycle slices. The focused
+checker validates exact ownership, dispositions, serial progress,
+accepted-owner dependencies, active-plan handoff, and the planning-only
+boundary without moving normative guidance.
+
 `verify-rust-async-boundary.sh` checks contract-driven Rust sync/async
 selection, exact disposition of `STD-0717` and `STD-0718`, profile metadata and
 routing, bounded legacy replacement, later-section preservation, and rejection

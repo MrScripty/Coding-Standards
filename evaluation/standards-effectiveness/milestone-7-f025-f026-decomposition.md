@@ -1,0 +1,192 @@
+# Milestone 7 F025/F026 Dependent Rust Decomposition
+
+## Purpose
+
+This planning report decomposes the Rust Language Binding and Rust Security
+remainder that depends on the accepted generic Concurrency and Rust Async
+owners. It is planning evidence, not a normative binding, runtime, task,
+filesystem, listener, or security owner.
+
+Only the first implementation slice is fully specified. Later slices have
+frozen identifiers, owners, outcomes, and dependencies, but require a fresh
+pre-slice review before their implementation contracts become active.
+
+## Slice 7.4b5a: Planning-Only Decomposition
+
+**Allowed write set:**
+
+- this report and its slice map;
+- `verify-milestone-7-f025-f026-decomposition.sh`;
+- the parent trust/lifecycle checker for removal of its obsolete current-slice
+  assertion only;
+- parent decomposition and handoff reports;
+- evaluation README, active plan, and execution ledger.
+
+No normative standard/profile, final disposition, owner map, generated
+inventory, fixture, template, package file, lockfile, runtime integration, or
+downstream repository belongs to this slice.
+
+**Acceptance gate:** the checker proves the exact ten currently undisposed
+identifiers, canonical owners, proposed dispositions, serial dependency order,
+stable parent acceptance, one implementation-ready slice, planning-only write
+boundary, plan lifecycle, shell syntax, whitespace, and all affected
+standards-effectiveness regressions.
+
+## Trigger And Scope
+
+`F025` and `F026` remain partial after Rust Async completion because ten
+undisposed legacy sections still present dependent or competing guidance:
+
+- the binding architecture permits framework dependencies in the core;
+- binding resources embed and therefore appear to own a runtime;
+- async binding examples select named runtime and blocking mechanisms instead
+  of consuming the selected lifecycle capability;
+- composite executor delegation still needs a disposition-backed canonical
+  owner even though the source now delegates only explicit unsupported work;
+- Rust path validation returns a pathname whose authority can race before use;
+  and
+- the listener example spawns work without showing registration with the
+  accepted lifecycle owner.
+
+The accepted `STD-0802` disposition already proves that core tests run without
+binding features. It is a dependency, not an identifier to dispose again.
+Callback/event delivery, packaging, generation, workspace layout, bounded
+queues, panic policy, and other undisposed sections are outside this bounded
+remainder unless a later pre-slice review records a new finding and re-plan.
+
+## Canonical Ownership
+
+| Owner | Authority |
+| --- | --- |
+| `profiles/languages/rust/language-bindings.md` | Rust host-adapter structure, runtime-capability adaptation, handle lifecycle, and explicit typed executor delegation. |
+| `profiles/languages/rust/async.md` | Runtime construction, tracked spawned work, shutdown, cancellation, blocking isolation, and terminal-state observation. |
+| composition root and application lifecycle owner | Concrete runtime construction, capability injection, task registration, and shutdown wiring. |
+| `topics/security.md` | Generic filesystem authority, containment, validation/use race, and typed no-weaker-path outcome. |
+| `profiles/languages/rust/security.md` | Rust mechanisms that preserve filesystem authority through use and secure listener constraints that consume the accepted lifecycle owner. |
+
+Bindings adapt a host call to an injected runtime/lifecycle capability; they do
+not construct or own a competing runtime. Security specializes the generic
+filesystem and lifecycle contracts; it does not duplicate them or treat a
+checked pathname as authority to a later operation.
+
+## Slice Map
+
+[milestone-7-f025-f026-slices.tsv](milestone-7-f025-f026-slices.tsv) freezes
+the ten identifiers and proposed final dispositions:
+
+| Slice | Frozen IDs | Outcome | Dependency |
+| --- | --- | --- | --- |
+| `7.4b5b` | `STD-0759`, `STD-0760`, `STD-0790`, `STD-0791` | Make the core/binding adapter boundary framework-independent. | Accepted generic and Rust binding profiles plus `STD-0802`. |
+| `7.4b5c` | `STD-0798`-`STD-0800` | Make binding handle and async adaptation consume the selected runtime/lifecycle capability. | `7.4b5b` and accepted Rust Async lifecycle. |
+| `7.4b5d` | `STD-0781` | Canonicalize explicit typed executor delegation without catch-all fallback. | `7.4b5b` and accepted generic Concurrency. |
+| `7.4b5e` | `STD-0822` | Preserve validated filesystem authority through the Rust operation. | Accepted generic Security filesystem contract. |
+| `7.4b5f` | `STD-0825` | Bind listener connection work to capacity and lifecycle owners. | Accepted Rust Async lifecycle and `7.4b5e`. |
+
+The slices are serial so the same canonical profiles and legacy sources never
+have overlapping write ownership. Independent trust-boundary groups remain
+queued until `7.4b5f` is accepted.
+
+## Next Slice 7.4b5b: Binding Core And Adapter Boundary
+
+**Outcome:** refine the Rust Language Binding profile and four legacy sections
+so domain/core behavior has no binding-framework or host-runtime dependency,
+while adapters own only the selected host representation and adaptation.
+
+**Allowed write set:**
+
+- `profiles/languages/rust/language-bindings.md`;
+- `languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md`;
+- `evaluation/standards-effectiveness/fixtures/rust/binding-architecture-decisions.tsv`;
+- `evaluation/standards-effectiveness/verify-rust-binding-architecture.sh`;
+- this decomposition checker for disposition and handoff state only;
+- consolidation dispositions, evaluation README, findings, active plan, and
+  execution ledger.
+
+No generic topic, Rust Async or Security profile, runtime implementation,
+binding framework configuration, workspace/Cargo file, generated artifact,
+template, lockfile, host-language package, or downstream repository belongs to
+this slice.
+
+**Required semantics:**
+
+- core domain behavior and types remain usable without a binding framework,
+  generated host code, or foreign runtime;
+- binding annotations on domain types are permitted only when they do not add
+  a framework dependency or host-specific behavior to the core contract;
+- wrapper/adapter modules depend on the core, never the reverse;
+- optional binding support belongs to the adapter/package boundary rather than
+  a core feature that changes domain behavior or dependencies;
+- framework-free core verification remains required and is linked to the
+  accepted `STD-0802` evidence without disposing that identifier again; and
+- inability to maintain the boundary returns a typed planning or build
+  diagnostic rather than merging layers for convenience.
+
+**No fallback:** missing adapter, packaging, annotation, or framework support
+cannot add a binding dependency to the core, move domain behavior into a
+wrapper, skip framework-free core verification, hand-edit generated code, or
+select another binding framework implicitly.
+
+**Focused evidence:** decisions cover framework-free domain types, annotations
+that do and do not couple the core, wrapper-to-core dependency direction,
+adapter-scoped optional dependencies, missing adapter capability, and
+framework-free core verification.
+
+**Acceptance gate:** all four identifiers have exact dispositions; profile
+metadata and routing remain valid; migrated legacy sections are bounded links
+without competing architecture or feature defaults; later runtime, executor,
+path, and listener sections remain untouched; `F025` remains accurately
+partial; and focused plus affected regressions pass.
+
+## Later Slice Constraints
+
+### Slice 7.4b5c: Binding Runtime And Handle Adaptation
+
+Refine `STD-0798` through `STD-0800` so binding handles own only host-visible
+handle lifetime and adaptation. A composition-owned runtime capability may be
+shared across calls and workflow runs; a binding object, request, or foreign
+resource cannot construct, embed as its owned lifecycle, synchronously drive,
+or replace that runtime. Per-call inputs, cancellation, and results remain
+request scoped and are never retained merely because the runtime remains
+alive. Missing capability returns the operation's typed outcome.
+
+### Slice 7.4b5d: Explicit Executor Delegation
+
+Refine `STD-0781` into the Rust binding specialization. Delegation occurs only
+for the exact typed unsupported outcome assigned by the composite contract.
+Validation, execution, cancellation, resource, and lifecycle failures retain
+their typed outcomes; inputs belong to the current call and are not carried
+forward through a retained executor or runtime.
+
+### Slice 7.4b5e: Rust Filesystem Authority Through Use
+
+Refine `STD-0822` as a Rust specialization of generic Security. Prefer held
+directory/file capabilities, handle-relative operations, or an equivalent
+mechanism when concurrent mutation is in scope. A canonicalized `PathBuf` is
+not proof that a later path operation uses the validated object. If the
+required authority-preserving operation is unavailable, return typed
+`unsupported` or `unavailable`; do not use a weaker path.
+
+### Slice 7.4b5f: Lifecycle-Owned Listener Work
+
+Refine `STD-0825` so admission capacity and task lifecycle are distinct,
+explicit owners. Acquire capacity at the correct acceptance boundary, register
+connection work with the accepted lifecycle owner, observe terminal outcomes,
+and include it in shutdown. Missing registration, capacity, cancellation, or
+drain capability returns a typed outcome; it cannot detach a task, discard a
+handle, or silently continue accepting work.
+
+## Re-Plan Triggers
+
+- An implicated section cannot be represented by one final disposition without
+  splitting it across canonical owners.
+- Binding adaptation requires changing generic Concurrency or Rust Async
+  policy rather than consuming the accepted owner.
+- Rust filesystem safety requires a generic Security change not already owned
+  by the canonical topic.
+- A focused checker cannot distinguish retained runtime capability from
+  retained request/workflow input or state.
+- Listener lifecycle proof requires a runtime-specific mechanism to become
+  universal policy.
+- Implementation would need an undisposed identifier, source, generated file,
+  package file, lockfile, or downstream repository outside the activated write
+  set.

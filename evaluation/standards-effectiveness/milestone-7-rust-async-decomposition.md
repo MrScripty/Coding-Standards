@@ -66,8 +66,9 @@ all nine identifiers and their proposed final dispositions:
 | `7.4b4g` | `STD-0724`-`STD-0725` | Specialize cancellation safety and lifecycle observability. | `7.4b4e` and `7.4b4f`. |
 
 The slices are serial. After `7.4b4g`, dependent Rust Security and Rust
-Language Binding sections must be decomposed against the accepted owner before
-they move.
+Language Binding sections are governed by the
+[F025/F026 dependent Rust decomposition](milestone-7-f025-f026-decomposition.md)
+that consumes the accepted owner.
 
 ## Next Slice 7.4b4d: Rust Async Foundation
 

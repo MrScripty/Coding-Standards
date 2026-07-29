@@ -6,11 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 lifecycle bridge active; Rust Async
-specialization complete.
+**Current phase:** Milestone 7 dependent Rust lifecycle consolidation active;
+F025/F026 remainder decomposed.
 
-**Next slice:** Re-plan the dependent Rust Security and Rust Language Bindings
-lifecycle remainder before Milestone 7.4c.
+**Next slice:** Milestone 7.4b5b Rust binding core and adapter boundary.
 
 **Acceptance status:** `partial`
 
@@ -29,6 +28,8 @@ lifecycle remainder before Milestone 7.4c.
 **Remaining trust/lifecycle re-plan:** [Generic concurrency and Rust async dependency bridge](../evaluation/standards-effectiveness/milestone-7-trust-lifecycle-replan.md)
 
 **Rust Async decomposition:** [Four owner-bounded specialization slices](../evaluation/standards-effectiveness/milestone-7-rust-async-decomposition.md)
+
+**F025/F026 decomposition:** [Dependent Rust binding and security lifecycle slices](../evaluation/standards-effectiveness/milestone-7-f025-f026-decomposition.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -588,9 +589,34 @@ all structural/routing fixtures pass.
        temporary `F045` partial-resolution row and failed when the final Rust
        Async slice resolves the finding; only that mutable assertion is removed
        and the final checker owns the resolved state;
-     - handoff trigger (`Open`): the dependent Rust Security and Rust Language
-       Bindings remainder for `F025`/`F026` requires exact owner-bounded
-       decomposition before `7.4c`.
+     - handoff trigger (`Resolved`): the dependent Rust Security and Rust
+       Language Bindings remainder for `F025`/`F026` is decomposed by
+       `7.4b5a` before implementation;
+   - `7.4b5a` (`Accepted`): decompose ten dependent Rust binding and security
+     identifiers into five serial owner-bounded slices;
+     - scope review keeps accepted `STD-0802` as dependency evidence without
+       disposing it twice and excludes unrelated callback, packaging,
+       generation, queue, and panic sections;
+     - ownership review assigns host adaptation to the Rust binding profile,
+       runtime/task lifecycle to the accepted Rust Async owner, generic
+       filesystem authority to Security, and Rust mechanisms to the Rust
+       Security profile;
+     - checker review finding (`Resolved`): the parent trust/lifecycle checker
+       still required historical slice `7.4b4d` to be "now" implementation-
+       ready; that mutable assertion is removed, stable accepted-state and
+       decomposition linkage remain, and current sequencing belongs only to
+       the new decomposition checker;
+   - `7.4b5b` (`Planned`): make the Rust binding core/adapter boundary
+     framework-independent (`STD-0759`, `STD-0760`, `STD-0790`, `STD-0791`);
+   - `7.4b5c` (`Planned`): make binding handle and async adaptation consume the
+     selected runtime/lifecycle capability without retaining request inputs or
+     owning an alternate runtime (`STD-0798`-`STD-0800`);
+   - `7.4b5d` (`Planned`): canonicalize explicit typed executor delegation
+     without catch-all fallback (`STD-0781`);
+   - `7.4b5e` (`Planned`): preserve validated filesystem authority through the
+     Rust operation (`STD-0822`); and
+   - `7.4b5f` (`Planned`): bind listener admission, spawned work, outcomes, and
+     shutdown to explicit owners (`STD-0825`).
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

@@ -1,0 +1,11 @@
+slice	order	id	source	target	disposition	rationale
+7.4b5b	1	STD-0759	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	separate domain core behavior from binding frameworks and host runtimes
+7.4b5b	2	STD-0760	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	require one-way adapter dependency and framework-free core verification
+7.4b5b	3	STD-0790	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	place optional binding support at the adapter and package boundary
+7.4b5b	4	STD-0791	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	remove core package examples that add binding framework dependencies
+7.4b5c	5	STD-0798	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	separate host handle lifetime from runtime lifecycle ownership
+7.4b5c	6	STD-0799	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	consume injected lifecycle capability instead of embedding an owned runtime
+7.4b5c	7	STD-0800	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	adapt host async calls without alternate runtime or synchronous-drive fallback
+7.4b5d	8	STD-0781	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	delegate only the explicit typed unsupported outcome
+7.4b5e	9	STD-0822	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	preserve validated filesystem authority through the Rust operation
+7.4b5f	10	STD-0825	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	bind listener admission capacity tasks outcomes and shutdown to explicit owners

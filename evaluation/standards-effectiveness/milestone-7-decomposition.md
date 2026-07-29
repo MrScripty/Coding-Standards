@@ -135,8 +135,11 @@ this bounded bridge does not authorize general later-wave expansion.
 After generic Concurrency was accepted, the
 [Rust Async decomposition](milestone-7-rust-async-decomposition.md) split the
 nine specialization identifiers into applicability, owned lifecycle,
-blocking/mutex, and cancellation/observability slices. Only the first planned
-slice is implementation-ready.
+blocking/mutex, and cancellation/observability slices. After those slices were
+accepted, the
+[F025/F026 dependent Rust decomposition](milestone-7-f025-f026-decomposition.md)
+froze the ten binding and security identifiers that consume those owners. Only
+the first planned dependent Rust slice is implementation-ready.
 
 Before starting each later wave:
 

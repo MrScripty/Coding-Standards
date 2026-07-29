@@ -133,11 +133,11 @@ required_report=(
   'F026'
   'Establish generic concurrency ownership before the Rust async'
   'shutdown canonical in the Rust language-binding profile'
-  'Only'
-  '`7.4b4d` is now implementation-ready'
   'No normative standard, final disposition'
   '## Accepted Slice 7.4b4b: Generic Concurrency Contract'
   '## Accepted Slice 7.4b4c: Rust Async Decomposition'
+  '## Accepted Slice 7.4b5a: Dependent Rust Decomposition'
+  'milestone-7-f025-f026-decomposition.md'
   'callbacks and other externally controlled code do not execute while the'
   '**No fallback:**'
 )
