@@ -6,10 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** The Contracts and IPC children of mixed-role Interop row 2
-are accepted; its Language Binding representation child is next.
+**Current phase:** The normative Contracts, IPC, and Language Binding children
+of mixed-role Interop row 2 are accepted; its legacy applicability index is
+next.
 
-**Next slice:** Milestone 7.4b8e Language Binding representation child (`STD-0478`, `STD-0479`, `STD-0480`).
+**Next slice:** Milestone 7.4b8f legacy Interop applicability index (`STD-0482`).
 
 **Acceptance status:** `partial`
 
@@ -961,9 +962,18 @@ all structural/routing fixtures pass.
      - preserve typed invalid, unsupported, and unavailable outcomes; and
      - remove the legacy partial-field, log-and-return example without a cast,
        raw-input, generic/default dispatch, or weaker-decoder fallback.
-   - `7.4b8e` (`Planned`): replace `STD-0478` through `STD-0480` with one
-     Language Binding-owned serialized-representation rule after bounded
-     pre-slice review.
+   - `7.4b8e` (`Accepted`): replace `STD-0478` through `STD-0480` with one
+     Language Binding-owned serialized-representation rule;
+     - derive tag form, keys, payload structure, variant spelling/value/rename,
+       and field naming/casing/rename/flattening/omission/default behavior from
+       the canonical contract plus selected serializer;
+     - require consumer agreement and direction-matched evidence;
+     - preserve typed invalid, unsupported, and unavailable outcomes; and
+     - reject inferred defaults, generated assumptions, producer-only
+       snapshots, schema-free/default shapes, omitted variants, and alternate
+       serializers.
+   - `7.4b8f` (`Planned`): review `STD-0482` as a non-normative legacy
+     applicability index after bounded pre-slice review.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

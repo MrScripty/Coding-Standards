@@ -1176,9 +1176,27 @@ checks, casts, raw input, generic/default dispatch, alternate permissive
 decoders, log-and-return handling, and missing-schema substitution do not
 establish the consumer contract.
 
-## Planned Slice 7.4b8e: Language Binding Representation Child
+## Accepted Slice 7.4b8e: Language Binding Representation Child
 
-**Outcome:** review and, if coherent, replace `STD-0478` through `STD-0480`
-with one Language Binding-owned representation rule selected from the
-canonical contract and concrete serializer mechanism, with exact tagged-enum,
-variant, and field evidence and no inferred casing or alternate-shape fallback.
+**Outcome:** `STD-0478` through `STD-0480` are replaced by one Language
+Binding-owned serialized-representation rule. The canonical wire contract plus
+the selected serializer mechanism derives every applicable tag form, key,
+payload structure, variant spelling/value/rename, and field
+name/casing/rename/flattening/omission/default rule.
+
+Eighteen focused decisions and three exact dispositions require consumer
+agreement and direction-matched evidence. Typed `invalid`, `unsupported`, and
+`unavailable` outcomes preserve malformed, unsupported, and missing-capability
+distinctions.
+
+**No fallback:** native type names, serializer defaults, generated static
+types, producer-only snapshots, inferred casing/tagging, schema-free/default
+shapes, omitted unsupported variants, and alternate serializers do not
+establish the selected representation.
+
+## Planned Slice 7.4b8f: Legacy Interop Applicability Index
+
+**Outcome:** review `STD-0482` as a non-normative legacy routing index that
+maps boundary classes to the canonical Interop, IPC, Language Binding,
+Contracts, and Security owners without retaining rules, examples, defaults, or
+fallback behavior.

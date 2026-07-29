@@ -74,21 +74,19 @@ evidence moved to
 
 ### Tagged Enum Alignment
 
-Tagged enum serializers produce specific wire shapes. The receiving language
-must use the same tag values, payload structure, and casing. Rust serde guidance
-lives in
-[languages/rust/RUST-INTEROP-STANDARDS.md](languages/rust/RUST-INTEROP-STANDARDS.md#serde-wire-format-alignment).
+Tagged-enum form, keys, payload structure, and consumer evidence moved to
+[Serialized Wire Representation](profiles/boundaries/language-bindings.md#serialized-wire-representation).
 
 ### Enum Variant Alignment
 
-When enum values are sent as strings, both sides must agree on casing and
-format. Check the serializer configuration in the source language before writing
-the receiver type.
+Variant spelling, values, casing, renames, and unsupported behavior moved to
+[Serialized Wire Representation](profiles/boundaries/language-bindings.md#serialized-wire-representation).
 
 ### Struct Field Alignment
 
-Check serializer configuration on structs or records to determine field name
-casing.
+Field naming, casing, renames, flattening, omission, defaults, and extra-field
+policy moved to
+[Serialized Wire Representation](profiles/boundaries/language-bindings.md#serialized-wire-representation).
 
 ### Rules
 

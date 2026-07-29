@@ -2947,3 +2947,30 @@ and legacy applicability-index children remain pending.
 
 **Next slice:** `7.4b8e`, bounded pre-slice review of `STD-0478` through
 `STD-0480`.
+
+## 2026-07-29: Milestone 7.4b8e Language Binding Wire Representation
+
+**Outcome:** Accepted.
+
+`STD-0478` through `STD-0480` are replaced by a generic Language Binding rule
+that derives the complete serialized shape from the canonical wire contract
+and selected serializer mechanism. The rule covers tagged-enum form and keys,
+payload structure, variant spelling/value/rename, and field
+name/casing/rename/flattening/omission/default behavior.
+
+**Verification:** 18 focused decisions; three exact dispositions; metadata,
+bounded legacy replacement, generic Language Binding, cross-language
+Contracts, immutable-train, independent-trust, plan-lifecycle, shell-syntax,
+whitespace, and exact-scope checks. The complete checker suite is required
+because a shared boundary profile and new focused checker changed.
+
+**No-fallback result:** native type names, serializer defaults, generated
+static types, producer-only snapshots, inferred casing/tagging,
+schema-free/default shapes, omitted unsupported variants, and alternate
+serializers are rejected. Typed invalid, unsupported, and unavailable outcomes
+remain distinct.
+
+The immutable row advances to child `2.4`; only the non-normative legacy
+applicability index remains before baseline row 2 can complete.
+
+**Next slice:** `7.4b8f`, bounded pre-slice review of `STD-0482`.

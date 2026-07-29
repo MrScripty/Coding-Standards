@@ -94,19 +94,17 @@ done
 validate_head="$(git -C "$REPO_ROOT" show HEAD:INTEROP-STANDARDS.md |
   sed -n '/^### Validate Received Messages/,/^---/p')"
 validate_current="$(sed -n '/^### Validate Received Messages/,/^---/p' "$LEGACY")"
-binding_head="$(git -C "$REPO_ROOT" show HEAD:INTEROP-STANDARDS.md |
-  sed -n '/^### Tagged Enum Alignment/,/^### Rules/p' | sed '$d')"
-binding_current="$(sed -n '/^### Tagged Enum Alignment/,/^### Rules/p' \
-  "$LEGACY" | sed '$d')"
 applicability_head="$(git -C "$REPO_ROOT" show HEAD:INTEROP-STANDARDS.md |
   sed -n '/^## When These Rules Apply/,$p')"
 applicability_current="$(sed -n '/^## When These Rules Apply/,$p' "$LEGACY")"
 [[ "$validate_current" == "$validate_head" ]]
-[[ "$binding_current" == "$binding_head" ]]
 [[ "$applicability_current" == "$applicability_head" ]]
 
 [[ "$(rg -c 'topics/contracts.md#cross-language-contract-selection' \
   "$LEGACY")" -eq 2 ]]
+[[ "$(rg -c \
+  'profiles/boundaries/language-bindings.md#serialized-wire-representation' \
+  "$LEGACY")" -eq 3 ]]
 for pattern in \
   'Use shared schema files when possible' \
   'Update coordinated sides in the same commit' \

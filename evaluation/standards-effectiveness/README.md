@@ -150,6 +150,15 @@ validated-variant dispatch, typed invalid/unsupported/unavailable outcomes,
 11 exact frozen-ID dispositions, metadata and routing, legacy links, and removal
 of unchecked message and payload assertions.
 
+`fixtures/language-bindings/serialized-wire-decisions.tsv` and
+`verify-language-binding-wire-representation.sh` check canonical schema and
+serializer selection, complete tagged-enum/variant/field shape derivation,
+consumer agreement, directional evidence, typed
+invalid/unsupported/unavailable outcomes, three exact dispositions, and
+bounded legacy replacement. They reject inferred casing/tagging, schema-free
+or default shapes, omitted unsupported variants, alternate serializers, and
+producer-only evidence.
+
 ## Interop Authority Decision Fixtures
 
 `fixtures/interop/foreign-memory-decisions.tsv` and

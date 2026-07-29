@@ -44,6 +44,37 @@ A value may have more than one representation, but each conversion is explicit
 and tested. Framework support does not imply stable memory layout, and
 serialization does not create a C ABI.
 
+## Serialized Wire Representation
+
+Select the canonical wire contract and the concrete serializer mechanism
+before defining producer or consumer types. Derive the effective serialized
+shape from both authorities, including every applicable:
+
+- tagged-enum form, tag key, content key, and payload structure;
+- variant spelling, numeric value, casing, and explicit rename;
+- field name, casing, explicit rename, flattening, omission, and default rule;
+  and
+- version marker, unknown-field policy, and unsupported-variant behavior.
+
+Native type names, default serializer conventions, generated static types, and
+successful producer-side serialization do not independently establish the
+wire representation. Consumers must agree with the complete selected shape and
+must runtime-decode it under the applicable Contracts and IPC rules.
+
+Evidence covers producer-to-consumer and consumer-to-producer behavior whenever
+the contract is bidirectional, plus malformed, unsupported, missing-field,
+renamed, omitted, extra-field, and unavailable-capability cases applicable to
+the selected shape. One-way contracts require evidence only in the declared
+direction, but producer-only snapshots are not consumer evidence.
+
+Return `invalid` for a representation that contradicts the selected schema or
+serializer rules, `unsupported` for a well-formed variant or version outside
+the declared contract, and `unavailable` when required schema, serializer,
+generated support, consumer capability, or evidence cannot be obtained. Do not
+infer casing or tagging, use schema-free serialization, omit an unsupported
+variant, substitute a sentinel/default shape, or retry with another serializer
+or binding mechanism.
+
 ## Layer Ownership
 
 Domain logic and validated domain types remain independent of binding
