@@ -63,7 +63,7 @@ rg -F -q 'language-bindings.md#contract-discovery-adaptation' \
 ! rg -F -q 'CARGO_PKG_VERSION' <<< "$legacy_section"
 
 rg -F -q '`7.4b8r` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8s` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8s` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-binding-contract-evolution.sh"
 "$SCRIPT_DIR/verify-milestone-7-row-5-decomposition.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"

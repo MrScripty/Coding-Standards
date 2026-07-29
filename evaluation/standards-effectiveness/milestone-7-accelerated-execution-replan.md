@@ -114,6 +114,13 @@ Accepted slice `7.4b8n` records the exact four-child row-5 decomposition in
 `7.4b8o`, implements child `5.1`, `STD-0804`, as Rust core/adapter testability
 without framework-specific architecture or fallback.
 
+Accepted slice `7.4b8s` records the exact three-child row-6 decomposition in
+[its focused report](milestone-7-row-6-decomposition.md). Package `P02` retains
+its safety-critical classification while ordered Cross-Platform, Release, and
+Verification owners replace its stale one-owner outcome. The next slice,
+`7.4b8t`, implements child `6.1`, `STD-0294` and `STD-0295`, without mandatory
+Strategy, alternate-loader, or guessed-artifact fallback.
+
 ## Verification Matrix
 
 | Change | Required verification |

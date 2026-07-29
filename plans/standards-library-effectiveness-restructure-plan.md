@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust binding row 5 is complete; cross-platform row 6 owner
-review is next.
+**Current phase:** Cross-platform row 6 is decomposed; native artifact loading
+is next.
 
-**Next slice:** Milestone 7.4b8s cross-platform owner review for active row `STD-0294` through `STD-0299`.
+**Next slice:** Milestone 7.4b8t native artifact loading for active child `STD-0294` and `STD-0295`.
 
 **Acceptance status:** `partial`
 
@@ -1130,8 +1130,24 @@ all structural/routing fixtures pass.
      - remove universal version export, package-version substitution,
        alternate discovery, stale state, guessed compatibility, and default
        success with typed outcomes.
-   - `7.4b8s` (`Planned`): perform bounded owner review of cross-platform row
-     `STD-0294` through `STD-0299`.
+   - `7.4b8s` (`Accepted`): reject the stale one-owner implementation proposal
+     and decompose baseline row 6 into three ordered children;
+     - `STD-0294` and `STD-0295` remain Cross-Platform-owned native artifact
+       loading selected from target, artifact, deployment, capability, and
+       consumer facts;
+     - `STD-0296` and `STD-0297` move to Release-owned artifact identity and
+       consumer installation/loading information;
+     - `STD-0298` and `STD-0299` move to Verification-owned platform evidence
+       environments, execution modes, and scheduling; and
+     - remove mandatory Strategy, filename-table, provider-matrix,
+       Linux/Windows, fail-fast, and fixed trigger defaults rather than
+       preserving them as alternate paths.
+   - `7.4b8t` (`Planned`): replace `STD-0294` and `STD-0295` with the
+     Cross-Platform native artifact loading contract.
+   - `7.4b8u` (`Planned`): replace `STD-0296` and `STD-0297` with
+     Release-owned native artifact identity and installation information.
+   - `7.4b8v` (`Planned`): replace `STD-0298` and `STD-0299` with
+     Verification-owned platform evidence scheduling.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

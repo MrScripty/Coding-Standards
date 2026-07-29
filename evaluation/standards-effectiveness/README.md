@@ -83,6 +83,12 @@ evolution, and Rust contract-discovery adaptation. Its checker proves exact
 ordered overlay coverage, ordered child dispositions, package handoff, and
 active cursor integrity.
 
+`milestone-7-row-6-decomposition.md` splits immutable row 6 into
+Cross-Platform native artifact loading, Release-owned artifact identity and
+installation information, and Verification-owned platform evidence
+scheduling. Its checker proves exact ordered overlay coverage, zero premature
+dispositions, existing owners, package handoff, and active cursor integrity.
+
 `fixtures/rust/binding-core-adapter-testability-*.tsv` and
 `verify-rust-binding-core-adapter-testability.sh` require distinct
 framework-free core and real native/host adapter evidence. They reject

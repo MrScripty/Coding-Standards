@@ -3378,3 +3378,30 @@ downstream repository changed.
 
 **Next slice:** `7.4b8s`, bounded owner review of `STD-0294` through
 `STD-0299`.
+
+## 2026-07-29: Milestone 7.4b8s Cross-Platform Row Decomposition
+
+**Outcome:** Accepted.
+
+The bounded owner review found three independently changeable outcomes in
+`STD-0294` through `STD-0299`: native artifact loading, release artifact
+identity/installability, and platform evidence scheduling. Immutable row 6 now
+has three ordered children owned by Cross-Platform, Release, and Verification.
+
+**Verification:** exact six-ID overlay coverage; three existing canonical
+owners; zero premature dispositions; package and active-cursor handoff;
+accelerated execution, immutable train, plan lifecycle, shell syntax,
+whitespace, and complete fail-fast checker-suite verification.
+
+**No-fallback result:** mandatory Strategy, embedded-versus-dynamic loading,
+guessed filename conventions, fixed Linux/Windows targets, provider matrix
+syntax, universal fail-fast settings, fixed trigger schedules, alternate
+artifacts, and weaker evidence are excluded from the planned canonical
+contracts. Missing or contradictory facts require typed diagnostics.
+
+No normative or legacy standard, disposition, generated artifact, owner map,
+immutable train row, router, metadata, dependency declaration, decision
+fixture, configuration, lockfile, or downstream repository changed.
+
+**Next slice:** `7.4b8t`, replace `STD-0294` and `STD-0295` with the
+Cross-Platform native artifact loading contract.
