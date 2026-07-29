@@ -1,6 +1,10 @@
 slice	order	id	source	target	disposition	rationale
-7.4b7a	1	STD-0596	SECURITY-STANDARDS.md	topics/security.md	refine	establish the generic network transport security boundary
-7.4b7a	2	STD-0597	SECURITY-STANDARDS.md	topics/security.md	refine	derive listener exposure from the declared service contract
-7.4b7a	3	STD-0598	SECURITY-STANDARDS.md	topics/security.md	refine	own admission capacity and typed overload before acceptance
-7.4b7a	4	STD-0599	SECURITY-STANDARDS.md	topics/security.md	refine	consume canonical lifecycle shutdown without broken or force-close defaults
-7.4b7a	5	STD-0600	SECURITY-STANDARDS.md	topics/security.md	refine	select liveness policy from protocol and resource risk without fixed timeout fallback
+7.4b7c	1	STD-0280	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	move	establish the generic cross-platform owner
+7.4b7c	2	STD-0281	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	derive supported targets and support claims from the project contract
+7.4b7c	3	STD-0282	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	establish contract-selected platform behavior and failure policy
+7.4b7c	4	STD-0283	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	isolate platform decisions from domain behavior without requiring one abstraction shape
+7.4b7c	5	STD-0284	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select composition and dispatch mechanisms from language and deployment facts
+7.4b7c	6	STD-0285	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select file and module boundaries from cohesion and language conventions
+7.4b7c	7	STD-0286	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	preserve declared semantics and return typed unsupported or unavailable outcomes
+7.4b7c	8	STD-0287	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select compile-time or runtime platform mechanisms from the build and deployment contract
+7.4b7c	9	STD-0288	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	route language-specific platform mechanisms to selected profiles

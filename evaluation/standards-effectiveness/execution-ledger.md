@@ -2255,3 +2255,42 @@ contains 75 IDs across its seven baseline owner groups.
 **Next slice:** `7.4b7b`, planning only, to re-measure the remainder and
 activate exactly one owner-bounded implementation slice after accepted
 pre-slice review.
+
+## 2026-07-28: Milestone 7.4b7b Independent Trust Remainder Re-plan
+
+**Outcome:** Accepted.
+
+The rolling remainder contains 608 frozen identifiers across 30 legacy sources
+and 29 proposed canonical owners, with 14 owners still missing. The active
+trust subset contains 75 identifiers across seven owners: 7 Security, 15
+Cross-Platform, 10 Interop, 5 Rust Cross-Platform, 1 Rust Interop, 3 Rust
+Security, and 34 Rust Language Bindings.
+
+The audit selects only `STD-0280` through `STD-0288` for the next
+implementation slice. This contiguous generic Cross-Platform group owns
+declared target support, platform-dependent behavior isolation, mechanism
+selection, semantic fidelity, and typed unresolved outcomes. It also precedes
+the missing Rust Cross-Platform specialization.
+
+**Deviations:** None.
+
+**Discovered issue (`Planned as F046`):** the legacy opening group hard-codes
+product target names, Strategy plus Factory, one-platform-per-file layout,
+runtime-only selection, and best-effort stubs as universal policy. Slice
+`7.4b7c` must replace those defaults without absorbing native loading, CI, or
+language-specific policy.
+
+**No-fallback/legacy result:** the re-plan does not authorize a default target
+list, support tier, architecture pattern, file layout, compile-time or runtime
+mechanism, stub, omitted behavior, alternate implementation, compatibility
+copy, or weaker verification. Missing facts in the implementation must retain
+typed diagnostics.
+
+**Verification:** exact 608-ID global remainder, exact 75-ID/seven-owner trust
+audit, exact nine-ID Cross-Platform next-slice proposal with zero premature
+dispositions, owner/dependency state, parent and active-plan linkage, plan
+lifecycle, shell syntax, whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+**Next slice:** `7.4b7c` generic platform target and isolation contract
+pre-slice review.

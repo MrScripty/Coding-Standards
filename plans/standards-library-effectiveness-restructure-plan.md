@@ -6,10 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 generic network transport accepted; independent
-trust-boundary remainder re-plan is next.
+**Current phase:** Milestone 7 independent trust-boundary remainder re-plan
+accepted; generic platform target and isolation pre-slice review is next.
 
-**Next slice:** Milestone 7.4b7b independent trust-boundary remainder re-plan.
+**Next slice:** Milestone 7.4b7c generic platform target and isolation
+contract pre-slice review.
 
 **Acceptance status:** `partial`
 
@@ -31,7 +32,7 @@ trust-boundary remainder re-plan is next.
 
 **F025/F026 decomposition:** [Dependent Rust binding and security lifecycle slices](../evaluation/standards-effectiveness/milestone-7-f025-f026-decomposition.md)
 
-**Independent trust-boundary re-plan:** [Seven owner groups and generic network next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
+**Independent trust-boundary re-plan:** [Seven owner groups and generic platform next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -716,9 +717,24 @@ all structural/routing fixtures pass.
      - re-plan trigger (`Resolved`): the historical trust/lifecycle checker
        retains frozen baseline evidence while the independent checker solely
        owns mutable independent-trust counts and owner state.
-   - `7.4b7b` (`Planned`): re-measure the 608-ID global remainder and 75-ID
+   - `7.4b7b` (`Accepted`): re-measure the 608-ID global remainder and 75-ID
      independent trust subset, then activate exactly one owner-bounded slice
-     after accepted pre-slice review without normative movement.
+     after accepted pre-slice review without normative movement;
+     - the seven current owner groups contain 7 Security, 15 Cross-Platform,
+       10 Interop, 5 Rust Cross-Platform, 1 Rust Interop, 3 Rust Security, and
+       34 Rust Language Binding identifiers;
+     - the nine-section generic Cross-Platform target/isolation group is the
+       highest-priority dependency-first slice;
+     - fixed product targets, Strategy/Factory, one-platform-per-file,
+       runtime-only selection, and best-effort stubs are recorded as `F046`;
+     - native loading, CI, Security closure, Interop, Rust specializations,
+       binding packaging/generation, bounded queues, and panic remain outside
+       the activated write set; and
+     - the planning slice changes no normative or legacy standard, final
+       disposition, generated artifact, configuration, or downstream file.
+   - `7.4b7c` (`Planned`): replace generic target, isolation, mechanism, and
+     degradation defaults with a contract-selected Cross-Platform owner
+     (`STD-0280`-`STD-0288`).
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

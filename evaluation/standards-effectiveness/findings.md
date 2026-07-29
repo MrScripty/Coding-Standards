@@ -49,6 +49,7 @@ changes and focused fixture evidence.
 | F043 | Resolved in Milestone 7.4a | The remaining 698 identifiers now have complete owner-wave coverage, correctness-first ordering, and an exact first implementation slice without speculative full-sequence expansion. |
 | F044 | Resolved in Milestone 7.4b4a | The premature final-closure handoff is superseded by a measured 90-ID trust remainder, a 26-ID lifecycle bridge for F025/F026, and one exact generic Concurrency next slice. |
 | F045 | Resolved in Milestone 7.4b4g | Rust Async applicability, lifecycle, blocking isolation, synchronization, cancellation safety, cleanup, and observability are contract-selected without named-mechanism fallback. |
+| F046 | Planned for Milestone 7.4b7c | Generic Cross-Platform target and isolation policy must replace fixed target lists, mandatory architecture/layout mechanisms, runtime-only selection, and best-effort stub degradation. |
 
 ## Systemic Findings
 
@@ -104,6 +105,7 @@ changes and focused fixture evidence.
 | F029 | High | `RELEASE-STANDARDS.md:68-74,252-263,527-530` | Separate package-version/lockfile models and push only the intended release tag. | 7 |
 | F030 | High | `TOOLING-STANDARDS.md:155-160,321-328,388-395` | Reconcile fail-on-warning policy with explicitly owned temporary debt. | 6, 7 |
 | F045 | High | `languages/rust/RUST-ASYNC-STANDARDS.md:6-163` | Replace blanket sync-core, runtime, abort, blocking-pool, mutex, cancellation, and inspection-tool defaults with contract-selected Rust mechanisms and typed unavailable outcomes. | 7 |
+| F046 | High | `CROSS-PLATFORM-STANDARDS.md:5-135`; frozen IDs `STD-0280`-`STD-0288` | Derive target support and platform-mechanism selection from explicit project, language, build, and deployment contracts; preserve semantics with typed outcomes instead of universal Strategy/Factory, file-layout, runtime-only, or stub defaults. | 7 |
 
 ## Duplicate Ownership Clusters
 

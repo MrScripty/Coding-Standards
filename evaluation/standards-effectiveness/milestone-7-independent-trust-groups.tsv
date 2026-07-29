@@ -1,6 +1,6 @@
 order	owner	remaining_ids	owner_state	prerequisite	status
-1	topics/security.md	12	exists	none	next-owner-audit
-2	topics/cross-platform.md	15	exists	none	independent-audit
+1	topics/security.md	7	exists	none	independent-audit
+2	topics/cross-platform.md	15	exists	none	next-owner-audit
 3	profiles/boundaries/interop.md	10	exists	topics/contracts.md	independent-audit
 4	profiles/languages/rust/cross-platform.md	5	missing	topics/cross-platform.md	dependent-audit
 5	profiles/languages/rust/interop.md	1	exists	profiles/boundaries/interop.md	dependent-audit

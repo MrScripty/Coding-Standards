@@ -143,11 +143,11 @@ those owners.
 
 The
 [independent trust-boundary re-plan](milestone-7-independent-trust-replan.md)
-then measured 80 remaining identifiers across seven owners. It selects only the
-five-section generic Security network-transport group as the next
-implementation slice because that group owns unresolved broken-reference
-finding `F016` and must consume the accepted generic Concurrency lifecycle
-contract.
+now measures 75 remaining identifiers across seven owners after accepting the
+generic Security network-transport group. It selects only the nine-section
+generic Cross-Platform target/isolation group as the next implementation slice
+because that group replaces universal target and mechanism defaults and
+unblocks the missing Rust Cross-Platform specialization.
 
 Before starting each later wave:
 
