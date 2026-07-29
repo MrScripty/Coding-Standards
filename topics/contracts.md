@@ -70,6 +70,36 @@ permissive default, or a weaker decoder when proof is missing. No particular
 schema or validation library is mandatory; the observable proof and typed
 outcomes are.
 
+## Validation Proof Lifetime
+
+Validation authority belongs to the proof-bearing representation produced by
+the applicable decoder or smart constructor, not to the fact that validation
+happened earlier. Record the complete contract and version whose invariants the
+representation establishes.
+
+The proof remains authoritative only while the validated representation is
+retained, its invariants cannot be changed through an unchecked alias, the
+applicable contract is unchanged, and the value remains inside the boundary
+for which that proof applies. Code inside that boundary consumes the validated
+representation directly; it does not decode the same unchanged value again.
+
+Establish new proof after the validated representation is lost, after unchecked
+mutation, when the applicable contract or required invariants change, or when
+the value crosses a new trust, process, persistence, plugin, queue, or
+independently deployed boundary. The new boundary applies its complete current
+contract to the current input; validation of a prior value or representation
+does not carry forward.
+
+A boolean validation flag, validation-history record, type annotation, or
+equality with a previously validated value is not a validated representation.
+Missing capability returns typed `unavailable`; a well-formed unsupported
+contract returns `unsupported`; failed proof returns `invalid`.
+
+Do not fall back to the original unknown input, stale proof, unchecked mutable
+alias, implicit trust across a new boundary, permissive defaults, or a weaker
+decoder. Do not discard an intact proof-bearing representation merely to
+mandate redundant validation.
+
 ## Contract Classes
 
 | Class | Required evolution policy |

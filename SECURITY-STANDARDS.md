@@ -4,15 +4,11 @@ Input validation, path safety, and sanitization requirements.
 
 ## Core Principle: Validate Once, at the Boundary
 
-All external input is validated at the point it enters the system. Internal
-code trusts validated input. This prevents both missed validation and
-redundant validation scattered through the codebase.
-
-```
-External Input ──► [Validation Module] ──► Trusted Internal Code
-                        │
-                   Reject if invalid
-```
+Canonical validated-representation authority and invalidation behavior moved
+to
+[Validation Proof Lifetime](topics/contracts.md#validation-proof-lifetime).
+Security continues to own when untrusted input requires proof and the
+consequences of invalid input.
 
 ## Path Validation
 
@@ -118,16 +114,7 @@ Message proof and dispatch remain with
 
 ## What NOT to Validate
 
-Internal code that receives already-validated data should not re-validate.
-Trust the boundary.
-
-```csharp
-// Called by handler AFTER validation
-internal async Task ProcessFile(string validatedPath, string validatedName)
-{
-    // No need to re-validate — the handler already did it
-    Directory.CreateDirectory(validatedPath);
-}
-```
-
-**The rule:** Validate at the boundary. Trust internally. Never duplicate.
+Consume an intact proof-bearing representation without redundant decoding.
+Re-establish proof when the representation, invariant, contract, or applicable
+boundary changes. See
+[Validation Proof Lifetime](topics/contracts.md#validation-proof-lifetime).

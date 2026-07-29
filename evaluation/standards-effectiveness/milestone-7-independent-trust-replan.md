@@ -13,24 +13,24 @@ downstream policy.
 
 ## Current Audit
 
-The rolling disposition gate reports 591 residual identifiers across 28 legacy
+The rolling disposition gate reports 589 residual identifiers across 28 legacy
 sources and 27 proposed canonical owners, with 13 owners still missing.
 
 [milestone-7-independent-trust-groups.tsv](milestone-7-independent-trust-groups.tsv)
-records 61 frozen baseline identifiers and 58 current identifiers:
+records 61 frozen baseline identifiers and 56 current identifiers:
 
 | Order | Proposed owner | Frozen | Current | State | Dependency or blocker |
 | ---: | --- | ---: | ---: | --- | --- |
-| 1 | `topics/security.md` | 7 | 7 | Decompose | Contracts |
+| 1 | `topics/security.md` | 7 | 5 | Decompose | Contracts; `STD-0583` and `STD-0601` accepted |
 | 2 | `topics/cross-platform.md` | 6 | 6 | Decompose | Missing Tooling owner for affected rows |
 | 3 | `profiles/boundaries/interop.md` | 10 | 9 | Decompose | Contracts; `STD-0473` accepted |
 | 4 | `profiles/languages/rust/interop.md` | 1 | 0 | Accepted | `STD-0757` accepted |
 | 5 | `profiles/languages/rust/security.md` | 3 | 2 | One accepted | `STD-0824` accepted; `STD-0826` remains blocked on missing Rust API |
 | 6 | `profiles/languages/rust/language-bindings.md` | 34 | 34 | Decompose | Language Bindings, Rust Async, and missing Tooling owner for affected rows |
 
-The baseline includes accepted `STD-0473`, `STD-0757`, and `STD-0824`. Owner-map
-destinations remain audit proposals until an accepted pre-slice review proves
-each section's role and correctness.
+The baseline includes accepted `STD-0473`, `STD-0757`, `STD-0824`,
+`STD-0583`, and `STD-0601`. Owner-map destinations remain audit proposals
+until an accepted pre-slice review proves each section's role and correctness.
 
 ## Selection Decision
 
@@ -70,9 +70,8 @@ an owner-correction or decomposition re-plan before activation:
   compatibility slices, including affected rows blocked on the missing Tooling
   owner.
 
-All 58 current identifiers remain under `F048` in this planning slice. Only
-`STD-0583` and `STD-0601` are activated for the next implementation; no other
-group or generic section is pre-approved.
+The 56 current identifiers remain under `F048`. No implementation candidate is
+activated until the next planning-only replan completes.
 
 ## Accepted Slice 7.4b6: Planning-Only Re-plan
 
@@ -975,3 +974,31 @@ contract.
 proof, unchecked mutable aliases, implicit trust after a new boundary,
 permissive defaults, weaker decoders, and redundant validation mandates that
 discard an intact proof-bearing representation.
+
+## Accepted Slice 7.4b7m: Validation Proof-Lifetime Contract
+
+**Outcome:** accepted. Contracts now owns validation proof lifetime for
+`STD-0583` and `STD-0601`. Authority follows the intact proof-bearing
+representation and complete applicable contract. Representation loss,
+unchecked mutation, contract change, or a new applicable boundary requires
+current proof without redundantly decoding an unchanged validated value.
+
+Sixteen focused decisions reject original input, history flags, stale proof,
+mutable aliases, implicit cross-boundary trust, permissive defaults, weaker
+decoders, and redundant-decoding mandates. The two legacy Security sections
+are bounded canonical links, and `F053` is resolved.
+
+The rolling remainder is 589 identifiers across 28 legacy sources and 27
+proposed owners, with 13 owners still missing. The independent trust remainder
+is 56 identifiers across six frozen proposed-owner groups. No implementation
+candidate is active before the next planning-only slice.
+
+## Planned Slice 7.4b7n: Independent Trust Remainder Re-plan
+
+**Outcome:** re-measure the 589-ID global and 56-ID independent-trust
+remainders, correct exactly one next owner boundary, and activate one
+dependency-ready implementation slice without normative movement.
+
+**No fallback:** do not infer readiness from frozen row order, retain the
+consumed validation proposal, invent a missing owner, combine mixed roles, or
+create a disposition before exact measurement and pre-slice review pass.

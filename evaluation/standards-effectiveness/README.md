@@ -345,7 +345,16 @@ baseline IDs structurally, and selects only the Rust external-input queue
 contract for `STD-0824`. Accepted `7.4b7k` establishes that contract with 18
 focused decisions. Accepted `7.4b7l` re-measures the 58-ID trust remainder and
 selects only `STD-0583` plus `STD-0601` for a Contracts-owned validation
-proof-lifetime slice; `7.4b7m` is the next normative slice.
+proof-lifetime slice. Accepted `7.4b7m` establishes that contract with 16
+focused decisions; `7.4b7n` next replans the 56-ID trust remainder.
+
+`fixtures/contracts/validation-proof-lifetime-decisions.tsv` and
+`verify-validation-proof-lifetime.sh` check retained validated
+representations, smart constructors, proof invalidation, new applicable
+boundaries, typed outcomes, exact dispositions, and bounded legacy
+replacement. They reject original-input reuse, history flags, stale proof,
+mutable aliases, implicit cross-boundary trust, permissive defaults, weaker
+decoders, and redundant-decoding mandates.
 
 `fixtures/rust/external-input-queue-decisions.tsv` and
 `verify-rust-external-input-queue.sh` check selected capacity, overload,

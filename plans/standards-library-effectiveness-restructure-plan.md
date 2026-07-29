@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Independent trust remainder re-plan accepted; the
-Contracts-owned validation proof-lifetime correction is next.
+**Current phase:** Validation proof-lifetime contract accepted; the next
+independent-trust slice requires a planning-only remainder re-plan.
 
-**Next slice:** Milestone 7.4b7m validation proof-lifetime contract.
+**Next slice:** Milestone 7.4b7n independent trust remainder re-plan.
 
 **Acceptance status:** `partial`
 
@@ -882,9 +882,16 @@ all structural/routing fixtures pass.
      - `STD-0821` remains final index closure and `STD-0826` remains blocked on
        the missing Rust API owner; and
      - `F053` records the unsafe absolute validate-once/trust-internally rule.
-   - `7.4b7m` (`Planned`): establish the Contracts-owned validation
+   - `7.4b7m` (`Accepted`): establish the Contracts-owned validation
      proof-lifetime contract for `STD-0583` and `STD-0601`, including explicit
-     proof invalidation and no stale/raw-input fallback.
+     proof invalidation and no stale/raw-input fallback;
+     - authority follows the intact validated representation rather than
+       validation history;
+     - changed contracts, unchecked mutation, representation loss, and new
+       applicable boundaries require current proof; and
+     - 16 focused decisions resolve `F053`.
+   - `7.4b7n` (`Planned`): re-measure the independent trust remainder and
+     correct exactly one next owner boundary before another normative move.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

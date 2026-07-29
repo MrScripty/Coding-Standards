@@ -324,3 +324,5 @@ STD-0729	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust
 STD-0730	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	verify each declared Rust target claim with contract-matched evidence
 STD-0757	languages/rust/RUST-INTEROP-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	derive the effective Serde wire representation from selected schema serializer attributes consumer agreement and native-host evidence
 STD-0824	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	derive external-input queue resource limits overload behavior telemetry ownership and typed outcomes from the selected operation contract
+STD-0583	SECURITY-STANDARDS.md	topics/contracts.md	refine	define validation authority through a retained proof-bearing representation and complete applicable contract
+STD-0601	SECURITY-STANDARDS.md	topics/contracts.md	refine	require new proof after invalidation or a new applicable boundary without redundant decoding of an intact validated representation

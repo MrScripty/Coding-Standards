@@ -1,5 +1,5 @@
 order	proposed_owner	frozen_ids	owner_state	prerequisite	status	known_missing_owner	accepted_ids
-1	topics/security.md	7	exists	topics/contracts.md	two-candidate-ready-five-decomposition-required	none	none
+1	topics/security.md	7	exists	topics/contracts.md	two-accepted-five-decomposition-required	none	STD-0583,STD-0601
 2	topics/cross-platform.md	6	exists	none	decomposition-and-missing-owner	workflows/tooling.md	none
 3	profiles/boundaries/interop.md	10	exists	topics/contracts.md	one-accepted-nine-decomposition-required	none	STD-0473
 4	profiles/languages/rust/interop.md	1	exists	profiles/languages/rust/language-bindings.md,topics/contracts.md	one-accepted-no-current-remainder	none	STD-0757

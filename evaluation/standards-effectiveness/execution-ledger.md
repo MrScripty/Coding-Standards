@@ -2762,3 +2762,25 @@ decision work for the next owner-bounded implementation slice.
 
 **Next slice:** `7.4b7m`, two identifiers, to establish the Contracts-owned
 validation proof-lifetime contract and focused evidence.
+
+## 2026-07-28: Milestone 7.4b7m Validation Proof-Lifetime Contract
+
+**Outcome:** Accepted.
+
+Contracts now owns validation proof lifetime for `STD-0583` and `STD-0601`.
+Authority follows the intact proof-bearing representation and complete
+applicable contract. Representation loss, unchecked mutation, contract change,
+or a new applicable boundary requires current proof without redundant decoding
+inside one preserved contract. `F053` is resolved.
+
+**Verification:** 16 focused decisions; two exact dispositions; metadata and
+bounded legacy-section closure; runtime-decoding and independent-trust checks;
+plan lifecycle; shell syntax; whitespace; exact scope; and every standards-
+effectiveness checker under fail-fast execution.
+
+The rolling remainder is 589 IDs across 28 sources and 27 owners, with 13
+owners still missing. The independent trust remainder contains 56 IDs across
+six frozen proposed-owner groups.
+
+**Next slice:** `7.4b7n`, planning only, to re-measure the remainder and
+activate exactly one dependency-ready owner-bounded implementation slice.
