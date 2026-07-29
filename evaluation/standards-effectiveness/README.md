@@ -361,8 +361,10 @@ decoders, and redundant-decoding mandates.
 alternation for the 589-ID remainder. They prove exact one-time coverage across
 47 source/owner clusters, owner-state honesty, final-closure isolation, five
 dependency waves, five complete-suite checkpoints, and the active integration
-cursor. Manifest rows authorize pre-slice review; they do not pre-approve final
-owners or dispositions.
+cursor. The manifest is immutable: exact dispositions derive a contiguous
+completed prefix and the first wholly remaining row, while partial cluster
+completion is rejected. Manifest rows authorize pre-slice review; they do not
+pre-approve final owners or dispositions.
 
 `fixtures/rust/external-input-queue-decisions.tsv` and
 `verify-rust-external-input-queue.sh` check selected capacity, overload,

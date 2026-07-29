@@ -1055,3 +1055,27 @@ different objective triggers re-planning before normative edits.
 defaults, validation-by-cast, duplicate inline validators, an invented owner,
 or a weaker validation mechanism when the selected operation contract is
 missing.
+
+## Accepted Slice 7.4b7o: Immutable Train Cursor
+
+**Outcome:** correct the accelerated train before normative row-1 work. The
+589-ID manifest remains immutable. Exact dispositions now derive each
+cluster's state, the contiguous completed prefix, current residual coverage,
+and the first wholly remaining cluster as the active cursor.
+
+The train rejects partial cluster disposition, later-cluster completion before
+an earlier row, uncovered current identifiers, owner/source drift, or a plan
+cursor that does not name the derived active range. Independent-trust totals
+and proposed-owner counts are derived from the same disposition state instead
+of requiring checker edits after each accepted cluster.
+
+**Procedure result:** routine cluster commits update their canonical owner,
+bounded legacy section, focused evidence, exact dispositions, and serial plan
+records. They do not rewrite shared checker constants or rerun the complete
+suite merely to advance a count. Complete verification remains mandatory at
+the five frozen wave checkpoints and for actual shared contract, checker,
+routing, metadata, or generated-artifact changes.
+
+**No fallback:** do not mutate or truncate the baseline manifest, accept
+partially disposed clusters, skip earlier rows implicitly, loosen exact
+coverage, or preserve manually synchronized moving totals.

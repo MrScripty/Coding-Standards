@@ -1,7 +1,7 @@
-order	proposed_owner	frozen_ids	owner_state	prerequisite	status	known_missing_owner	accepted_ids
-1	topics/security.md	7	exists	topics/contracts.md	two-accepted-five-decomposition-required	none	STD-0583,STD-0601
+order	proposed_owner	frozen_ids	owner_state	prerequisite	status	known_missing_owner	pretrain_accepted_ids
+1	topics/security.md	7	exists	topics/contracts.md	train-decomposed	none	STD-0583,STD-0601
 2	topics/cross-platform.md	6	exists	none	decomposition-and-missing-owner	workflows/tooling.md	none
-3	profiles/boundaries/interop.md	10	exists	topics/contracts.md	one-accepted-nine-decomposition-required	none	STD-0473
-4	profiles/languages/rust/interop.md	1	exists	profiles/languages/rust/language-bindings.md,topics/contracts.md	one-accepted-no-current-remainder	none	STD-0757
-5	profiles/languages/rust/security.md	3	exists	topics/security.md	one-accepted-two-blocked	none	STD-0824
+3	profiles/boundaries/interop.md	10	exists	topics/contracts.md	train-decomposed	none	STD-0473
+4	profiles/languages/rust/interop.md	1	exists	profiles/languages/rust/language-bindings.md,topics/contracts.md	pretrain-complete	none	STD-0757
+5	profiles/languages/rust/security.md	3	exists	topics/security.md	train-decomposed	none	STD-0824
 6	profiles/languages/rust/language-bindings.md	34	exists	profiles/boundaries/language-bindings.md,profiles/languages/rust/async.md	decomposition-and-missing-owner	workflows/tooling.md	none

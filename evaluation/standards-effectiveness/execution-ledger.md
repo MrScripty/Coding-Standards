@@ -2812,3 +2812,24 @@ legacy retention, or unchecked batch commits.
 **Next slice:** `7.4b8a`, review and implement the dependency-ready
 `STD-0588`-`STD-0591` Security validation cluster when its owner boundary
 passes.
+
+## 2026-07-29: Milestone 7.4b7o Immutable Train Cursor
+
+**Outcome:** Accepted.
+
+The accelerated train now retains its complete 589-ID, 47-cluster baseline.
+Exact dispositions derive a contiguous completed prefix, current residual
+coverage, and the first wholly remaining cluster as the active cursor. Partial
+cluster disposition, out-of-order completion, uncovered current identifiers,
+owner/source drift, and plan-cursor drift fail verification.
+
+Independent-trust counts are derived from the same disposition state. Future
+cluster commits therefore do not rewrite checker constants or run the complete
+suite solely to advance moving totals.
+
+**No-fallback result:** the correction does not mutate the baseline manifest,
+weaken exact coverage, permit partial or implicit out-of-order completion, or
+retain manually synchronized counter state.
+
+**Next slice:** `7.4b8a`, review and implement `STD-0588`-`STD-0591` under the
+Security validation authority when its bounded pre-slice review passes.

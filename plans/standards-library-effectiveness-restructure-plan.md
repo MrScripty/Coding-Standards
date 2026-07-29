@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Accelerated Milestone 7 execution train accepted; the first
+**Current phase:** Immutable Milestone 7 execution train accepted; the first
 dependency-ready trust-boundary cluster is next.
 
-**Next slice:** Milestone 7.4b8a Security validation cluster.
+**Next slice:** Milestone 7.4b8a Security validation cluster (`STD-0588`-`STD-0591`).
 
 **Acceptance status:** `partial`
 
@@ -904,6 +904,16 @@ all structural/routing fixtures pass.
      - non-overlapping owner-specific drafts may proceed in parallel, while
        shared contracts, fixtures, dispositions, plans, and ledgers remain
        serial integration-owner work.
+   - `7.4b7o` (`Accepted`): make the execution train immutable and derive its
+     completed prefix and active cursor from exact dispositions;
+     - all 589 baseline identifiers remain represented in 47 fixed clusters;
+     - a cluster must be wholly disposed or wholly remaining, and completed
+       clusters must form a contiguous prefix;
+     - every current residual identifier must remain covered exactly once;
+     - the active plan must name the first wholly remaining cluster; and
+     - train and independent-trust totals are derived, so routine cluster
+       completion does not rewrite shared checkers or trigger a complete suite
+       solely to advance counters.
    - `7.4b8a` (`Planned`): review and, when the owner boundary is accepted,
      implement the `STD-0588`-`STD-0591` Security validation cluster in one
      atomic slice; a failed owner review triggers manifest correction instead

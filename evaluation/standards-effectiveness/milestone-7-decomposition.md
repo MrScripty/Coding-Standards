@@ -143,7 +143,7 @@ those owners.
 
 The
 [independent trust-boundary re-plan](milestone-7-independent-trust-replan.md)
-now measures 56 remaining identifiers across six proposed-owner groups after
+records the 56-identifier pretrain remainder across six proposed-owner groups after
 accepting Rust Cross-Platform, event registration, Rust serialized wire
 representation, and the Rust external-input queue contract. Its 61-ID frozen
 baseline records accepted `STD-0473`, `STD-0757`, `STD-0824`, `STD-0583`, and
@@ -159,10 +159,13 @@ the manifest row.
 
 The
 [execution train](milestone-7-execution-train.tsv) covers all 589 remaining
-identifiers exactly once across five dependency waves. Every cluster runs
-focused evidence. Complete fail-fast verification runs at each wave checkpoint
-and whenever shared contracts, checker infrastructure, routing, metadata, or
-generated artifacts change.
+identifiers at train establishment exactly once across five dependency waves.
+The manifest is immutable: exact dispositions derive a contiguous completed
+prefix and the first wholly remaining cluster is the active cursor. Partial
+cluster disposition is invalid. Every cluster runs focused evidence. Complete
+fail-fast verification runs at each wave checkpoint and whenever shared
+contracts, checker infrastructure, routing, metadata, or generated artifacts
+change.
 
 Before starting each later wave:
 
