@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 event-registration pre-slice and verification
-repair accepted; normative implementation is next.
+**Current phase:** Milestone 7 event-registration lifecycle accepted; residual
+trust-boundary owner correction is next.
 
-**Next slice:** Milestone 7.4b7g event registration lifecycle contract.
+**Next slice:** Milestone 7.4b7h independent trust remainder re-plan.
 
 **Acceptance status:** `partial`
 
@@ -805,11 +805,30 @@ all structural/routing fixtures pass.
      assertion in the executor-delegation checker with the accepted resolved
      state, preserve all behavioral and disposition evidence, and restore a
      green fail-fast complete suite without normative movement.
-   - `7.4b7g` (`Planned`): replace the event-subscription default with an
+   - `7.4b7g` (`Accepted`): replace the event-subscription default with an
      explicit Interop registration lifecycle contract (`STD-0473`) that owns
      provider registration/delivery/unregistration/release/shutdown behavior
      and conditionally routes only outliving callback-created work to
-     Concurrency.
+     Concurrency;
+     - provider delivery mode and local callback-work lifetime remain
+       independent;
+     - provider contracts select repeated/concurrent unregistration outcomes
+       and valid delivery, quiescence, release, and shutdown order;
+     - lifecycle phase distinguishes pre-registration `unavailable` from
+       active-resource incomplete cleanup;
+     - review findings (`Resolved`): fallback attempts preserve the root phase
+       diagnostic; evidence records complete selected and observed lifecycle
+       sequences with quiescence before release and ties repeated/concurrent
+       outcomes to selected provider contracts;
+     - 43 focused decisions reject destruction/finalizer/garbage-collection
+       cleanup, carry-forward input, detached work, stale registration,
+       arbitrary-thread retry, alternate events, assumed idempotence,
+       universal ordering, and false cleanup success;
+     - `STD-0473` has one exact disposition and `F049` is resolved.
+   - `7.4b7h` (`Planned`): re-measure the 593-ID global and 60-ID independent
+     trust remainder, correct the next residual owner boundary, and activate
+     exactly one dependency-ready implementation slice without normative
+     movement.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

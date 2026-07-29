@@ -41,25 +41,9 @@ Adapter isolation moved to the
 
 ### 6. Event Subscription Lifecycle
 
-When subscribing to events/signals across boundaries, always unsubscribe
-when the subscriber is destroyed.
-
-```csharp
-// Subscribe
-_sourceNode.Connect("data_received", Callable.From<string>(OnDataReceived));
-
-// Unsubscribe (in Dispose or cleanup)
-if (GodotObject.IsInstanceValid(_sourceNode))
-    _sourceNode.Disconnect("data_received", Callable.From<string>(OnDataReceived));
-```
-
-```typescript
-// Subscribe
-eventBus.on('data:updated', handleUpdate);
-
-// Unsubscribe (in cleanup/unmount)
-eventBus.off('data:updated', handleUpdate);
-```
+Provider-governed registration, callback delivery, unregistration, release,
+and shutdown requirements moved to the
+[Interop Boundary Profile](profiles/boundaries/interop.md#event-registration-lifecycle).
 
 ---
 

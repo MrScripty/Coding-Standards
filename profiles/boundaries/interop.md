@@ -73,6 +73,56 @@ callbacks, whether callbacks may re-enter, and how long callback inputs remain
 valid. Marshal explicitly when required. Wrong-thread access or an expired
 callback lifetime is `invalid`, not a reason to retry on an arbitrary thread.
 
+## Event Registration Lifecycle
+
+Treat a foreign event registration as a provider-granted resource, not as a
+side effect owned by the subscriber that happened to request it. Before
+registration, establish the authority for:
+
+- creating and identifying the registration;
+- invoking the callback, including thread, re-entrancy, and input lifetime;
+- stopping or cancelling provider delivery and resolving in-flight delivery;
+- unregistering and releasing the foreign registration; and
+- coordinating subscriber release with provider shutdown.
+
+Use explicit `pre-registration`, `active`, `unregistering`, and `released`
+phases. A missing required capability before registration is `unavailable`; an
+unresolved delivery, unregistration, or release obligation after activation is
+a typed incomplete-cleanup outcome. Do not report successful cleanup while an
+active foreign obligation remains.
+
+### Delivery And Local Work
+
+The provider contract selects synchronous or asynchronous delivery. That fact
+does not determine whether work created by the callback outlives the callback
+invocation. Inline callback work remains callback-scoped. Work that can outlive
+the invocation must use
+[Concurrency work ownership](../../topics/concurrency.md#own-work-failure-and-cancellation)
+for failure observation, cancellation, and shutdown.
+
+Each invocation receives only its current callback input and its declared
+lifetime. A retained registration or provider runtime does not authorize
+retaining prior callback input, cancellation, result, or failure state.
+
+### Unregistration, Release, And Shutdown
+
+The provider contract selects the valid result of repeated or concurrent
+unregistration. It may define idempotent success, a shared terminal result, or
+a typed rejection; no one outcome is universal.
+
+The same contract selects the valid order for stopping delivery, resolving
+in-flight callbacks, unregistering, releasing the registration, and shutting
+down the provider. Prove that callbacks cannot access released subscriber
+state. Subscriber destruction, finalization, garbage collection, silent
+callback dropping, or a provider shutdown request alone is not completion
+evidence.
+
+Preserve a provider-selected typed rejection. Return `invalid` for
+contradictory lifecycle facts, `unsupported` for a well-formed lifecycle the
+boundary does not support, `unavailable` when required capability cannot be
+established before registration, and a typed incomplete-cleanup outcome when
+an active registration cannot be fully quiesced, unregistered, or released.
+
 ## Adapter Isolation
 
 Keep foreign-boundary mechanics in thin adapters that expose validated,
@@ -92,11 +142,17 @@ Missing foreign authority cannot fall back to:
 - copying before validation;
 - a default thread or lifetime;
 - alternate ownership or release assumptions;
-- unchecked access through a weaker adapter; or
-- creating a replacement resource and pretending it is the selected one.
+- unchecked access through a weaker adapter;
+- creating a replacement resource and pretending it is the selected one;
+- destruction, finalization, or garbage collection as registration cleanup;
+- silently dropping callbacks or retaining a stale registration;
+- assuming idempotent unregistration or one universal shutdown order;
+- retrying cleanup on an arbitrary thread or alternate event mechanism; or
+- detaching outliving callback work from Concurrency ownership.
 
 Return the typed diagnostic that explains which contract could not be
-established.
+established. Rejecting an attempted fallback does not replace the diagnostic
+selected by the lifecycle phase and unresolved obligation.
 
 ## Verification
 
@@ -106,6 +162,11 @@ Affected tests cover valid access and:
 - partial initialization and initialized extents;
 - expired borrows and callback lifetimes;
 - wrong-thread and re-entrant behavior;
+- every event-registration phase and phase-appropriate typed outcome;
+- synchronous and asynchronous provider delivery independently from inline and
+  outliving callback work;
+- in-flight delivery, repeated and concurrent unregistration, provider-
+  selected release/shutdown order, and incomplete cleanup;
 - copy-before-proof rejection and copy-after-proof success;
 - repeated initialization, shutdown, and release; and
 - proof that business logic receives no raw foreign authority.

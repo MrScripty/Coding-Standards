@@ -51,8 +51,8 @@ changes and focused fixture evidence.
 | F045 | Resolved in Milestone 7.4b4g | Rust Async applicability, lifecycle, blocking isolation, synchronization, cancellation safety, cleanup, and observability are contract-selected without named-mechanism fallback. |
 | F046 | Resolved in Milestone 7.4b7c | Cross-Platform target support, isolation, mechanism selection, semantic fidelity, and evidence now follow explicit contracts without fixed targets, universal architecture/layout, or stub fallback. |
 | F047 | Resolved in Milestone 7.4b7e | Rust target triples, support claims, `cfg`/module placement, and evidence follow selected target and artifact contracts without fixed targets, best-effort status, numeric layout thresholds, named substitute tools, or weaker evidence. |
-| F048 | Partially corrected in Milestone 7.4b7f | `STD-0473` has an accepted Interop lifecycle role; the other 60 residual Security, Cross-Platform, Interop, Rust Interop, Rust Security, and Rust Language Binding identifiers remain blocked on owner correction or decomposition. |
-| F049 | Planned for corrected Milestone 7.4b7g | Event registration needs provider-selected delivery, unregistration, release, and shutdown semantics with phase-aware outcomes, conditional Concurrency routing, and no destruction-linked cleanup. |
+| F048 | Partially corrected through Milestone 7.4b7g | `STD-0473` has an exact Interop disposition; the other 60 residual Security, Cross-Platform, Interop, Rust Interop, Rust Security, and Rust Language Binding identifiers remain blocked on owner correction or decomposition. |
+| F049 | Resolved in Milestone 7.4b7g | Interop owns provider-selected registration, delivery, unregistration, release, and shutdown semantics with phase-aware outcomes, conditional Concurrency routing, and no destruction-linked cleanup. |
 | F050 | Resolved in Milestone 7.4b7f2 | The executor-delegation checker now requires the stable resolved `F026` state established by accepted Milestone 7.4b5f; all behavioral, disposition, metadata, legacy, and decomposition checks remain active. |
 
 ## Systemic Findings

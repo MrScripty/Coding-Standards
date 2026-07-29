@@ -550,7 +550,7 @@ affected, and fail-fast complete-suite verification pass.
 states, rewrite historical evidence, change normative behavior, or continue to
 `7.4b7g` while the complete suite is red.
 
-## Planned Slice 7.4b7g: Event Registration Lifecycle Contract
+## Accepted Slice 7.4b7g: Event Registration Lifecycle Contract
 
 [milestone-7-independent-trust-next-slice.tsv](milestone-7-independent-trust-next-slice.tsv)
 freezes `STD-0473`.
@@ -624,6 +624,41 @@ boundary profile. The one-ID slice completes that lifecycle without absorbing
 event-domain behavior, Contracts, IPC, Language Bindings, language recipes, or
 the other nine mixed-role Interop sections. The verification-only `7.4b7f2`
 prerequisite is accepted, so this normative slice is now active.
+
+**Acceptance result:** accepted. The Interop profile now owns the explicit
+provider-governed registration lifecycle and phase-aware typed outcomes.
+Provider delivery mode remains independent from local callback-work lifetime;
+only outliving work selects Concurrency. Provider contracts select
+repeated/concurrent unregistration outcomes and valid delivery, quiescence,
+release, and shutdown order. The legacy event section is one bounded canonical
+link, `STD-0473` has one exact `refine` disposition, and `F049` is resolved.
+
+**Independent review findings (`Resolved`):** the initial evidence let fallback
+attempts erase the phase-selected diagnostic, represented only pairwise order,
+and did not tie repeated/concurrent outcomes tightly enough to selected
+provider contracts. The corrected fixture preserves root diagnostics, records
+complete selected and observed lifecycle sequences with quiescence before
+release, rejects mismatched sequences, and proves selected repeated and
+concurrent outcomes.
+
+Forty-three focused decisions cover all lifecycle phases, both delivery modes
+with inline and outliving work, four valid provider-selected orders, repeated
+and concurrent outcomes, capability loss before and after activation, current
+input isolation, incomplete cleanup, and all prohibited fallback paths. The
+rolling remainder is 593 identifiers across 29 sources and 28 owners, with 13
+owners still missing. The independent trust subset is 60 identifiers across
+six owners.
+
+## Planned Slice 7.4b7h: Independent Trust Remainder Re-plan
+
+**Outcome:** re-measure the 593-ID global remainder and 60-ID independent trust
+subset, correct the next residual owner boundary, and activate exactly one
+dependency-ready implementation slice without normative movement.
+
+**No fallback:** do not infer the next owner from the historical group order,
+combine mixed-role identifiers, reuse the completed `STD-0473` disposition,
+invent a missing owner, or start another implementation before exact
+measurement and pre-slice review pass.
 
 ## Re-Plan Triggers
 

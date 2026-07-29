@@ -162,6 +162,10 @@ required_report=(
   'provider contract select'
   'lifecycle phase'
   '## Accepted Slice 7.4b7f2: Executor Delegation Verification Repair'
+  '## Accepted Slice 7.4b7g: Event Registration Lifecycle Contract'
+  '## Planned Slice 7.4b7h: Independent Trust Remainder Re-plan'
+  'rolling remainder is 593 identifiers'
+  'independent trust subset is 60 identifiers'
   'pre-existing checker defect'
   '**No fallback:**'
   '**Pre-slice review:** accepted.'
@@ -172,16 +176,17 @@ done
 
 rg -F -q '(milestone-7-independent-trust-replan.md)' "$PARENT"
 rg -F -q '61 remaining identifiers across six owners' "$PARENT"
-rg -F -q '| F048 | Partially corrected in Milestone 7.4b7f |' "$FINDINGS"
+rg -F -q '| F048 | Partially corrected through Milestone 7.4b7g |' "$FINDINGS"
 rg -F -q 'Correct the remaining 60 cross-role destinations' "$FINDINGS"
-rg -F -q '| F049 | Planned for corrected Milestone 7.4b7g |' "$FINDINGS"
+rg -F -q '| F049 | Resolved in Milestone 7.4b7g |' "$FINDINGS"
 rg -F -q '| F050 | Resolved in Milestone 7.4b7f2 |' "$FINDINGS"
-rg -F -q '## Planned Slice 7.4b7g: Event Registration Lifecycle Contract' \
+rg -F -q '## Accepted Slice 7.4b7g: Event Registration Lifecycle Contract' \
   "$REPORT"
 rg -F -q '`7.4b7f` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7f2` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7g` (`Planned`)' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b7g' "$PLAN"
+rg -F -q '`7.4b7g` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b7h` (`Planned`)' "$PLAN"
+rg -F -q '**Next slice:** Milestone 7.4b7h' "$PLAN"
 
 "$SCRIPT_DIR/verify-contract-ownership.sh"
 "$SCRIPT_DIR/verify-concurrency-policy.sh"

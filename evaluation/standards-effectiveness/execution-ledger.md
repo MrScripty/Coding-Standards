@@ -2514,3 +2514,54 @@ plan lifecycle, shell syntax, whitespace, exact staged scope, and every
 execution.
 
 **Next slice:** `7.4b7g` event registration lifecycle contract implementation.
+
+## 2026-07-28: Milestone 7.4b7g Event Registration Lifecycle Contract
+
+**Outcome:** Accepted.
+
+The Interop profile now treats event registration as a provider-granted
+foreign resource with explicit pre-registration, active, unregistering, and
+released phases. Provider delivery mode is independent from local callback-work
+lifetime; only work that can outlive an invocation consumes Concurrency
+ownership. Every callback receives current input only.
+
+Provider contracts select repeated and concurrent unregistration outcomes and
+the valid order for delivery stop, in-flight quiescence or cancellation,
+unregistration, foreign release, and provider shutdown. Missing capability
+before registration is typed unavailable; unresolved obligations after
+activation are typed incomplete cleanup.
+
+**Discovered issues (`Resolved`):** independent review found that the initial
+fixture let fallback attempts erase root phase diagnostics, represented only
+pairwise order, and did not require selected contracts for every repeated or
+concurrent outcome. The corrected fixture preserves root diagnostics, records
+complete selected and observed sequences with quiescence before release,
+rejects mismatches, and ties repeated/concurrent outcomes to provider
+selection.
+
+**Write set:** Interop profile; only the legacy event-subscription section; one
+new event-registration fixture and checker; exact `STD-0473` disposition;
+independent trust report and checker; evaluation README and findings; active
+plan; and this ledger.
+
+**No-fallback/legacy result:** the legacy framework examples and
+destruction-linked cleanup are replaced by one canonical link. The contract
+rejects finalizer/garbage-collection cleanup, stale registrations, silent
+callback dropping, arbitrary-thread retry, alternate event mechanisms,
+detached work, prior-input carry-forward, assumed idempotence, universal
+ordering, and successful cleanup claims with active obligations.
+
+**Verification:** 43 focused decisions, one exact disposition, metadata
+closure without an unconditional Concurrency dependency, bounded legacy
+replacement, byte-for-byte preservation of unrelated legacy sections,
+existing Contracts/Concurrency/Interop ownership checks, independent trust
+progress, plan lifecycle, shell syntax, whitespace, exact staged scope, and
+every `evaluation/standards-effectiveness/verify-*.sh` checker pass under
+fail-fast execution.
+
+The rolling remainder is 593 IDs across 29 sources and 28 owners, with 13
+owners still missing. The independent trust subset contains 60 IDs across six
+owners.
+
+**Next slice:** `7.4b7h`, planning only, to re-measure the remainder, correct
+the next owner boundary, and activate exactly one dependency-ready slice.

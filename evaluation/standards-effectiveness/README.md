@@ -322,14 +322,23 @@ boundary without moving normative guidance.
 `milestone-7-independent-trust-groups.tsv`, and
 `milestone-7-independent-trust-next-slice.tsv` resume the independent
 trust-boundary wave after the lifecycle bridge. The focused checker proves the
-61-ID/six-owner remainder after Rust Cross-Platform acceptance, owner existence
-and accepted Contracts/Concurrency/Interop dependencies, residual
-owner-correction status, and the exact one-ID event registration lifecycle next
-slice without moving normative guidance or recording premature dispositions.
+61-ID/six-owner baseline after Rust Cross-Platform acceptance, owner existence,
+accepted Contracts/Interop dependencies, conditional Concurrency selection,
+residual owner-correction status, and the exact event-registration disposition.
 The accepted corrective pre-slice keeps Concurrency routing conditional on
 callback-created work that can outlive invocation, requires provider-selected
 lifecycle behavior and phase-aware evidence, and forbids broadening metadata
 checker closures to encode an unnecessary unconditional dependency.
+
+`verify-interop-event-registration.sh` checks provider-governed registration
+phases, delivery and local-work independence, current callback input,
+conditional Concurrency ownership, in-flight delivery, provider-selected
+repeated/concurrent unregistration outcomes, valid release/shutdown orders, and
+phase-aware typed diagnostics. It proves exact disposition of `STD-0473` and
+rejects destruction/finalizer/garbage-collection cleanup, stale registration,
+silent callback dropping, wrong-thread retry, alternate events, detached work,
+input carry-forward, assumed idempotence, universal ordering, and false cleanup
+success.
 
 `verify-rust-target-configuration.sh` checks declared Rust targets,
 contract-selected `cfg`/build/feature/composition/dispatch mechanisms with
