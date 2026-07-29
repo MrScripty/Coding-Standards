@@ -1,86 +1,43 @@
 # Interop Standards
 
-Guidelines for safe communication across language and process boundaries.
+Canonical foreign-memory, resource-authority, initialization, callback,
+lifetime, and release contracts moved to the
+[Interop Boundary Profile](profiles/boundaries/interop.md).
 
 ## Boundaries
 
-Any place where data crosses between languages, runtimes, or processes is
-an interop boundary that requires care:
-
-```
-┌─────────────┐     ┌──────────────┐     ┌──────────────┐
-│  Frontend   │ ◄──►│  Native Code │ ◄──►│   Backend    │
-│  (JS/TS)    │     │  (Rust/C++)  │     │  (C#/Go)     │
-└─────────────┘     └──────────────┘     └──────────────┘
-   Managed           Unsafe FFI           Managed
-   runtime           boundary             runtime
-```
-
-Each arrow is a boundary where data must be validated and resources tracked.
+Foreign-boundary applicability moved to the
+[Interop Boundary Profile](profiles/boundaries/interop.md).
 
 ## Core Principles
 
+Generic foreign-authority principles moved to the
+[Interop Boundary Profile](profiles/boundaries/interop.md).
+
 ### 1. Validate at Every Boundary Crossing
 
-Data received from another language or process is untrusted. Validate before use.
-
-FFI-specific validation rules depend on the host language and runtime. Rust FFI
-validation rules live in
-[languages/rust/RUST-INTEROP-STANDARDS.md](languages/rust/RUST-INTEROP-STANDARDS.md#validate-before-unsafe-access).
-
-```csharp
-// C# receiving deserialized JSON from another process:
-var request = JsonSerializer.Deserialize<ProjectRequest>(payload);
-if (request == null) return ErrorResponse("Invalid payload");
-if (string.IsNullOrWhiteSpace(request.Path))
-    return ErrorResponse("Path is required");
-// Now safe to use request.Path
-```
+Complete authority proof moved to the
+[Interop Boundary Profile](profiles/boundaries/interop.md#validate-before-access).
 
 ### 2. Copy Data Out of Foreign Buffers Immediately
 
-Foreign code may free or reuse buffers after the callback returns.
-Always copy data into language-owned memory before the callback exits.
-
-Rust foreign-buffer ownership rules live in
-[languages/rust/RUST-INTEROP-STANDARDS.md](languages/rust/RUST-INTEROP-STANDARDS.md#copy-foreign-buffers-immediately).
+Copy-after-proof requirements moved to the
+[Interop Boundary Profile](profiles/boundaries/interop.md#copying-is-not-proof).
 
 ### 3. Symmetric Init/Shutdown
 
-Every initialization must have a corresponding shutdown. Track initialization
-state to prevent double-init or missing shutdown.
-
-```csharp
-// IDisposable for C# resources
-public sealed class MessageDispatcher : IDisposable
-{
-    public void Dispose()
-    {
-        // Disconnect signals, clear handlers, release references
-    }
-}
-```
+Initialization, shutdown, and release ownership moved to the
+[Interop Boundary Profile](profiles/boundaries/interop.md#initialization-and-release).
 
 ### 4. Document Thread Requirements
 
-Every function that crosses a boundary must document which thread it expects
-to be called on, and which thread it calls back on.
-
-Rust callback thread contract examples live in
-[languages/rust/RUST-INTEROP-STANDARDS.md](languages/rust/RUST-INTEROP-STANDARDS.md#callback-thread-contracts).
-
-```csharp
-/// Must be called on the **main thread**.
-/// Uses CallDeferred internally to marshal UI operations.
-public Task<Response> HandleAsync(Message message) { }
-```
+Thread and callback authority moved to the
+[Interop Boundary Profile](profiles/boundaries/interop.md#thread-and-callback-contract).
 
 ### 5. Isolate Unsafe Code to Thin Wrappers
 
-Unsafe operations such as raw pointers and FFI calls should live in small,
-focused wrapper modules. Business logic should never contain unsafe boundary
-mechanics. Rust-specific unsafe isolation rules live in
-[languages/rust/RUST-INTEROP-STANDARDS.md](languages/rust/RUST-INTEROP-STANDARDS.md#unsafe-isolation).
+Adapter isolation moved to the
+[Interop Boundary Profile](profiles/boundaries/interop.md#adapter-isolation).
 
 ### 6. Event Subscription Lifecycle
 

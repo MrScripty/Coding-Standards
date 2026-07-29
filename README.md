@@ -31,6 +31,7 @@ reference material.
 | [topics/contracts.md](topics/contracts.md) | Runtime decoding proof, contract classes, migration, compatibility, degraded outcomes, and typed diagnostics | Boundary decoding, contract evolution, persisted state, or fallback decisions |
 | [topics/security.md](topics/security.md) | Canonical untrusted-input authority and filesystem-containment policy | Untrusted values authorizing operations or resource access |
 | [topics/cross-platform.md](topics/cross-platform.md) | Canonical path construction and filesystem-identity policy | Path behavior across supported platforms or filesystems |
+| [profiles/boundaries/interop.md](profiles/boundaries/interop.md) | Foreign memory, resource authority, lifecycle, thread, and validated-adapter contracts | Foreign pointers, handles, callbacks, runtimes, or resources |
 | [profiles/boundaries/ipc.md](profiles/boundaries/ipc.md) | Action-specific message decoding and validated-variant dispatch | Structured data crossing process, message, worker, plugin-host, or independently deployed component boundaries |
 | [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
 | [profiles/languages/rust/README.md](profiles/languages/rust/README.md) | Rust mechanisms and focused verification | Rust-owned changes |
@@ -44,7 +45,7 @@ reference material.
 | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) | Remaining string sanitization and network transport guidance | Security concerns not yet migrated to canonical topics and profiles |
 | [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) | Async/threading patterns, async task lifecycle, mutex selection | Multi-threaded or async applications |
 | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) | Remaining platform abstraction, native library, and CI guidance | Cross-platform concerns not yet migrated to topics |
-| [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md) | FFI safety, cross-language boundaries, contract maintenance | Multi-language or native interop projects |
+| [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md) | Migration index plus remaining event, cross-language contract, and serialization guidance | Existing links and unmoved interop concerns |
 | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) | Dependency evaluation, versioning, auditing, and minimization | Adding or reviewing third-party packages |
 | [PLAN-STANDARDS.md](PLAN-STANDARDS.md) | Migration index for planning guidance | Existing links only |
 | [LAUNCHER-STANDARDS.md](LAUNCHER-STANDARDS.md) | `launcher.sh` contract, lifecycle flags, dependency checks, and app startup | Standardizing app entry points and setup workflows |

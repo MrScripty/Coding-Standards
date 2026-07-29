@@ -1404,3 +1404,32 @@ No normative standards, accepted dispositions, generated inventory, template,
 lockfile, or downstream repository changed.
 
 **Next slice:** `7.4b3b`.
+
+## 2026-07-28: Milestone 7.4b3b Generic Foreign-Boundary Contract
+
+**Outcome:** Accepted.
+
+The Interop boundary profile now owns foreign memory and resource authority,
+initialized extent, access, lifetime, thread, callback, initialization,
+shutdown, release, adapter isolation, and copy-after-proof contracts. It
+returns typed `invalid`, `unsupported`, or `unavailable` diagnostics when the
+required authority cannot be established.
+
+Frozen identifiers `STD-0465` through `STD-0472` have exact final
+dispositions. Their legacy sections are link-only; unrelated event
+subscription, cross-language maintenance, and serialization guidance remains
+unchanged.
+
+**No-fallback/legacy result:** missing authority cannot use guessed or sentinel
+lengths, copying before validation, default thread/lifetime assumptions,
+alternate ownership, weaker adapters, or replacement resources.
+
+**Verification:** foreign-memory decisions, exact dispositions, metadata,
+routing, legacy-link and unsafe-pattern rejection, decomposition lifecycle,
+plan fixtures, shell syntax, whitespace, and all standards-effectiveness
+regressions pass.
+The rolling decomposition gate reports 667 identifiers remaining across 33
+sources and 32 owners, with 21 ownership gaps. The S1 context route remains 6
+modules and 597 of 11066 baseline lines.
+
+**Next slice:** `7.4b3c`.

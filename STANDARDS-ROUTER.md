@@ -56,7 +56,7 @@ Do not select frontend or launcher guidance for a library-only code change.
 
 | Condition | Select |
 | --- | --- |
-| Foreign memory, FFI, or cross-language calls | [Current interop guidance](INTEROP-STANDARDS.md) |
+| Foreign memory, handles, callbacks, FFI, or cross-language resource access | [Interop boundary profile](profiles/boundaries/interop.md) |
 | Generated host-language APIs | [Current bindings guidance](LANGUAGE-BINDINGS-STANDARDS.md) |
 | Structured request, response, command, query, or event crosses a process, message, worker, plugin-host, or independently deployed component boundary | [IPC boundary profile](profiles/boundaries/ipc.md) |
 | Persisted data or migration | [Current architecture persistence guidance](ARCHITECTURE-PATTERNS.md) |

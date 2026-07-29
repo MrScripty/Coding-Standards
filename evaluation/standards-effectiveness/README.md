@@ -129,6 +129,14 @@ validated-variant dispatch, typed invalid/unsupported/unavailable outcomes,
 exact frozen-ID dispositions, metadata and routing, legacy links, and removal
 of unchecked message and payload assertions.
 
+## Interop Authority Decision Fixtures
+
+`fixtures/interop/foreign-memory-decisions.tsv` and
+`verify-interop-boundary-policy.sh` check foreign representation and allocation
+authority, initialized extent, access, lifetime, thread, release, copy ordering,
+typed invalid/unsupported/unavailable outcomes, exact dispositions, metadata,
+routing, legacy links, and removal of copy-before-proof guidance.
+
 ## Filesystem Containment Fixtures
 
 `fixtures/security/path-containment-decisions.tsv` and

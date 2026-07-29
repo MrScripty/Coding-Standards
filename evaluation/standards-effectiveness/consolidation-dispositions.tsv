@@ -240,3 +240,11 @@ STD-0592	SECURITY-STANDARDS.md	topics/security.md	merge	link untrusted payload a
 STD-0593	SECURITY-STANDARDS.md	profiles/boundaries/ipc.md	refine	remove envelope-only validated message assertion
 STD-0594	SECURITY-STANDARDS.md	topics/security.md	refine	deserialization does not prove domain invariants
 STD-0595	SECURITY-STANDARDS.md	profiles/boundaries/ipc.md	refine	specialize process-boundary validation without Electron policy
+STD-0465	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	move	establish the generic foreign-boundary owner
+STD-0466	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	move	define concrete foreign-boundary applicability
+STD-0467	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	merge	consolidate generic foreign-boundary principles
+STD-0468	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	link complete validation proof without duplicating Contracts
+STD-0469	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	require valid foreign-memory authority before copying
+STD-0470	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	define initialization and shutdown ownership
+STD-0471	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	define call and callback thread contracts
+STD-0472	INTEROP-STANDARDS.md	profiles/boundaries/interop.md	refine	isolate unsafe mechanics behind validated adapters

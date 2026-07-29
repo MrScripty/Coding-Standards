@@ -1,0 +1,17 @@
+case	representation	allocation	initialized	access	lifetime	thread	release	copy	proof	expected
+valid_borrowed_buffer	valid	valid	valid	allowed	valid	valid	not-required	none	complete	allow
+valid_owned_handle	valid	valid	not-required	allowed	valid	not-required	valid	none	complete	allow
+valid_copy_after_proof	valid	valid	valid	allowed	valid	valid	not-required	after-proof	complete	allow
+valid_explicit_zero_extent	valid	valid	not-required	allowed	valid	valid	not-required	none	complete	allow
+unsupported_representation	unsupported	valid	not-required	denied	valid	not-required	not-required	none	none	typed-unsupported
+authority_evidence_unavailable	valid	unavailable	not-required	denied	valid	not-required	not-required	none	none	typed-unavailable
+invalid_allocation	valid	invalid	valid	denied	valid	valid	not-required	none	complete	typed-invalid
+partially_initialized	valid	valid	partial	allowed	valid	valid	not-required	none	complete	typed-invalid
+access_denied	valid	valid	valid	denied	valid	valid	not-required	none	complete	typed-invalid
+expired_lifetime	valid	valid	valid	allowed	expired	valid	not-required	none	complete	typed-invalid
+wrong_thread	valid	valid	valid	allowed	valid	wrong	not-required	none	complete	typed-invalid
+double_release	valid	valid	not-required	allowed	valid	not-required	double	none	complete	typed-invalid
+copy_before_proof	valid	valid	valid	allowed	valid	valid	not-required	before-proof	guessed	typed-invalid
+guessed_length	valid	valid	valid	allowed	valid	valid	not-required	none	guessed	typed-invalid
+sentinel_length	valid	valid	valid	allowed	valid	valid	not-required	none	sentinel	typed-invalid
+alternate_ownership	valid	valid	not-required	allowed	valid	not-required	valid	none	alternate	typed-invalid

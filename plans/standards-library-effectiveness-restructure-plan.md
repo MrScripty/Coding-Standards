@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave active; F022/F023
-foreign-boundary decomposition accepted.
+**Current phase:** Milestone 7 trust-boundary wave active; generic
+foreign-boundary contract accepted.
 
-**Next slice:** Milestone 7.4b3b, establish the canonical generic
-foreign-boundary contract before any Rust specialization.
+**Next slice:** Milestone 7.4b3c, establish the canonical generic
+language-binding contract before Rust specializations.
 
 **Acceptance status:** `partial`
 
@@ -487,7 +487,7 @@ all structural/routing fixtures pass.
      allocation, initialization, provenance, lifetime, size, and unsafe-
      contract findings `F022` and `F023` across 34 frozen identifiers and six
      serial owner-bounded slices;
-   - `7.4b3b` (`Planned`): canonical generic foreign-boundary contract
+   - `7.4b3b` (`Accepted`): canonical generic foreign-boundary contract
      (`STD-0465`-`STD-0472`);
    - `7.4b3c` (`Planned`): canonical generic language-binding contract
      (`STD-0483`-`STD-0486`);
