@@ -124,6 +124,14 @@ Generic Interop and Language Binding profiles precede Rust Interop, Security,
 Unsafe, and Language Binding specializations. Those six slices remain serial
 until both findings are resolved.
 
+After those critical slices were accepted, the rolling gate still reported 90
+trust-boundary identifiers and exposed a lifecycle dependency across `F025` and
+`F026`. The
+[remaining trust and lifecycle re-plan](milestone-7-trust-lifecycle-replan.md)
+supersedes the premature final-closure handoff. Generic Concurrency and then
+Rust Async precede dependent Rust Security and Language Binding consolidation;
+this bounded bridge does not authorize general later-wave expansion.
+
 Before starting each later wave:
 
 1. inspect repository status and accepted dependencies;

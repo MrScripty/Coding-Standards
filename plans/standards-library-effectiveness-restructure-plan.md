@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 trust-boundary wave accepted; Rust binding
-representation and checked conversion accepted.
+**Current phase:** Milestone 7 trust-boundary wave active; remaining trust and
+lifecycle dependencies re-planned.
 
-**Next slice:** Milestone 7.4c, perform final legacy-index review, disposition
-closure, and duplication verification.
+**Next slice:** Milestone 7.4b4b, establish the generic Concurrency contract
+before Rust async and dependent trust-boundary specializations.
 
 **Acceptance status:** `partial`
 
@@ -25,6 +25,8 @@ closure, and duplication verification.
 **F018 decomposition:** [Runtime proof and action-specific IPC decoding](../evaluation/standards-effectiveness/milestone-7-f018-decomposition.md)
 
 **F022/F023 decomposition:** [Foreign memory, unsafe contracts, ABI classification, and checked conversion](../evaluation/standards-effectiveness/milestone-7-f022-f023-decomposition.md)
+
+**Remaining trust/lifecycle re-plan:** [Generic concurrency and Rust async dependency bridge](../evaluation/standards-effectiveness/milestone-7-trust-lifecycle-replan.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -520,7 +522,28 @@ all structural/routing fixtures pass.
        regular expression over-escaped table separators and produced a false
        positive; exact forbidden strings now make each rejection deterministic
        and independently diagnosable;
-6. Final legacy-index review, disposition closure, and duplication gate.
+   - `7.4b4a` (`Accepted`): supersede the premature final-closure handoff,
+     audit 90 remaining trust-boundary identifiers, and insert the 26-identifier
+     generic Concurrency/Rust Async lifecycle bridge required by `F025` and
+     `F026`;
+     - verification review finding (`Resolved`): initial report assertions
+       selected prose across Markdown line boundaries and assumed filename link
+       labels; the focused checker now selects stable line-local semantic
+       fragments and link targets;
+     - checker review finding (`Resolved`): the first group-fixture variable
+       collided with Bash's special `GROUPS` array and resolved to the process
+       group ID; the checker now uses an ordinary file-path variable;
+     - lifecycle review finding (`Resolved`): the first checker modeled only
+       the pre-implementation group counts; it now accepts only zero or all
+       nine next-slice dispositions and derives the corresponding owner and
+       active-plan handoff;
+   - `7.4b4b` (`Planned`): establish generic Concurrency ownership
+     (`STD-0263`-`STD-0268`, `STD-0270`-`STD-0272`) and resolve `F019`;
+   - `7.4b4c` (`Planned`): planning-only decomposition of the Rust Async
+     specialization after generic Concurrency is accepted.
+6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
+   and duplication verification only after the rolling remainder reaches zero
+   and every required canonical owner exists.
 
 **Status:** `Active`
 

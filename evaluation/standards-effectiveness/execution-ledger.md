@@ -1579,3 +1579,53 @@ with 16 canonical owners still missing. The compact S1 route remains 6 modules
 and measures 601 of 11066 baseline lines.
 
 **Next slice:** `7.4c`.
+
+## 2026-07-28: Milestone 7.4b4a Remaining Trust/Lifecycle Re-plan
+
+**Outcome:** Accepted.
+
+The post-`7.4b3g` status review found that the active plan advanced to final
+legacy-index and duplication closure while 641 frozen identifiers, 31 legacy
+sources, 30 proposed owners, and 16 missing canonical owners remained. The
+trust-boundary wave alone retained 90 identifiers across seven owner groups.
+The `7.4c` next-slice decision was therefore invalid and is superseded.
+
+The audit also found that `F025` and `F026` cross the trust/lifecycle wave
+boundary. Async runtime creation, spawned-task ownership, cancellation, and
+shutdown must become canonical in generic Concurrency and the Rust Async
+specialization before dependent Rust Security and Language Binding sections
+are migrated. Binding adapters retain host adaptation, not lifecycle ownership.
+
+The bounded bridge contains 17 generic Concurrency identifiers and 9 Rust Async
+identifiers. Only the first nine generic Concurrency identifiers are fully
+specified as the next implementation slice. Independent trust-boundary groups
+remain queued, and preliminary owner-map destinations must be reviewed before
+final disposition.
+
+**No-fallback/legacy result:** the re-plan introduces no compatibility copy,
+alternate runtime, untracked task, ignored cancellation, catch-all error
+translation, weaker verification path, normative standard, or final
+disposition. Final closure remains reserved until the rolling remainder is
+zero.
+
+**Verification:** the focused re-plan checker validates exact current owner
+counts, 90 trust IDs, 26 lifecycle-bridge IDs, owner availability, the exact
+nine-ID next slice, active-plan handoff, and parent-decomposition linkage.
+Initial prose assertions that crossed Markdown line boundaries or assumed
+filename link labels were replaced with stable line-local semantic fragments
+and link-target checks before integration.
+The first group-fixture variable also collided with Bash's special `GROUPS`
+array and resolved to the process group ID; an ordinary file-path variable now
+owns that input.
+Lifecycle review found that the first checker modeled only the pre-
+implementation counts. It now accepts only zero or all nine proposed
+dispositions, validates exact final rows, and derives the corresponding owner
+state and active-plan handoff.
+Plan lifecycle, shell syntax, whitespace, and all standards-effectiveness
+regressions pass.
+
+The rolling Milestone 7 remainder remains 641 IDs across 31 sources and 30
+owners, with 16 canonical owners still missing. The compact S1 route remains 6
+modules and measures 601 of 11066 baseline lines.
+
+**Next slice:** `7.4b4b`.

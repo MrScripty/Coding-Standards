@@ -44,6 +44,7 @@ changes and focused fixture evidence.
 | F041 | Resolved in Milestone 7.3b4 | Generic release guidance now selects language profiles through the router and derives procedure steps from accepted decisions instead of universal Rust, commit, tag, audit-tool, or publication commands. |
 | F042 | Resolved in Milestone 7.3c | Recovery now follows impact, destination capability, explicit authority, immutable identity, and fresh acceptance rather than assuming hosted drafts, yank support, branches, patch versions, or unilateral action. |
 | F043 | Resolved in Milestone 7.4a | The remaining 698 identifiers now have complete owner-wave coverage, correctness-first ordering, and an exact first implementation slice without speculative full-sequence expansion. |
+| F044 | Resolved in Milestone 7.4b4a | The premature final-closure handoff is superseded by a measured 90-ID trust remainder, a 26-ID lifecycle bridge for F025/F026, and one exact generic Concurrency next slice. |
 
 ## Systemic Findings
 
@@ -77,6 +78,7 @@ changes and focused fixture evidence.
 | F041 | Routing/procedure conflation | `RELEASE-STANDARDS.md`; frozen IDs `STD-0575`-`STD-0576` | Route specialized mechanisms through selected profiles and replace the universal command checklist with a decision-derived release procedure. | 7 |
 | F042 | Provider-specific rollback | `RELEASE-STANDARDS.md`; frozen IDs `STD-0577`-`STD-0581` | Replace universal unpublish/yank/branch/patch instructions with capability-driven recovery, explicit emergency authority, and impact-driven incident records. | 7 |
 | F043 | Undecomposed consolidation scope | Remaining frozen inventory and Milestone 7 sequence | Decompose remaining identifiers by canonical owner and correctness dependency before another normative move. | 7 |
+| F044 | Premature closure handoff | Active-plan `7.4c` handoff after Milestone 7.4b3g; rolling remainder of 641 IDs and 16 missing owners | Keep final closure reserved until the remainder reaches zero; insert the generic Concurrency and Rust Async dependency bridge before dependent trust-boundary specializations. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

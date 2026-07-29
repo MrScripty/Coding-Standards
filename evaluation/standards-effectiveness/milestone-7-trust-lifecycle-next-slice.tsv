@@ -1,0 +1,10 @@
+slice	order	id	source	target	disposition	rationale
+7.4b4b	1	STD-0263	CONCURRENCY-STANDARDS.md	topics/concurrency.md	move	establish the generic concurrency owner
+7.4b4b	2	STD-0264	CONCURRENCY-STANDARDS.md	topics/concurrency.md	move	establish generic concurrency principles
+7.4b4b	3	STD-0265	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	treat message passing as a selection decision rather than a universal architecture
+7.4b4b	4	STD-0266	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	distinguish immutable and synchronized data and prohibit callbacks under locks
+7.4b4b	5	STD-0267	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	protect related invariants without requiring one locking mechanism
+7.4b4b	6	STD-0268	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	require nonblocking async and lifecycle paths
+7.4b4b	7	STD-0270	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	require owned observation of asynchronous failures
+7.4b4b	8	STD-0271	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	remove synchronous blocking as an async fallback
+7.4b4b	9	STD-0272	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	require cancellation propagation through owned async work

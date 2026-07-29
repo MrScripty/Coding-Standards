@@ -1,0 +1,10 @@
+wave	order	owner	remaining_ids	owner_state	prerequisite	status
+lifecycle-bridge	1	topics/concurrency.md	17	missing	none	next
+lifecycle-bridge	2	profiles/languages/rust/async.md	9	missing	topics/concurrency.md	bridge-prerequisite
+trust-boundaries	1	topics/security.md	12	exists	none	independent-audit
+trust-boundaries	2	topics/cross-platform.md	15	exists	none	independent-audit
+trust-boundaries	3	profiles/boundaries/interop.md	10	exists	topics/contracts.md	independent-audit
+trust-boundaries	4	profiles/languages/rust/cross-platform.md	5	missing	topics/cross-platform.md	dependent-audit
+trust-boundaries	5	profiles/languages/rust/interop.md	1	exists	profiles/boundaries/interop.md	dependent-audit
+trust-boundaries	6	profiles/languages/rust/security.md	5	exists	topics/security.md,profiles/languages/rust/async.md	dependent-audit
+trust-boundaries	7	profiles/languages/rust/language-bindings.md	42	exists	profiles/languages/rust/async.md	dependent-audit
