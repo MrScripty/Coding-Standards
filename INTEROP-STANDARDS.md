@@ -98,9 +98,16 @@ remain in the canonical Contracts owner.
 
 ## When These Rules Apply
 
-| Boundary Type | Examples | Key Concerns |
-|--------------|---------|--------------|
-| FFI (same process) | Rust ↔ C, C# P/Invoke | Memory safety, thread affinity |
-| IPC (separate process) | WebSocket, stdin/stdout, pipes | Serialization, message validation |
-| Plugin/Extension | Dynamically loaded libraries | Init/shutdown lifecycle, versioning |
-| Web API | HTTP REST, gRPC | Schema validation, auth |
+This legacy section is a non-normative routing index. Select every row whose
+boundary fact applies; one boundary can require multiple canonical owners.
+
+| Boundary fact | Canonical owner |
+| --- | --- |
+| Foreign memory, handles, callbacks, initialization, or release | [Interop Boundary Profile](profiles/boundaries/interop.md) |
+| Structured messages crossing a process, worker, plugin-host, or deployment boundary | [IPC Boundary Profile](profiles/boundaries/ipc.md) |
+| Cross-language lifting, serialization, ABI values, opaque handles, or generated wrappers | [Language Binding Boundary Profile](profiles/boundaries/language-bindings.md) |
+| Contract class, schema authority, versioning, migration, or degraded outcome | [Contracts](topics/contracts.md) |
+| Untrusted input authorizing work, resource access, or side effects | [Security](topics/security.md) |
+
+The canonical owners define applicability, behavior, diagnostics, and
+verification. This index defines none of them.

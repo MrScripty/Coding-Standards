@@ -1194,9 +1194,24 @@ types, producer-only snapshots, inferred casing/tagging, schema-free/default
 shapes, omitted unsupported variants, and alternate serializers do not
 establish the selected representation.
 
-## Planned Slice 7.4b8f: Legacy Interop Applicability Index
+## Accepted Slice 7.4b8f: Legacy Interop Applicability Index
 
-**Outcome:** review `STD-0482` as a non-normative legacy routing index that
-maps boundary classes to the canonical Interop, IPC, Language Binding,
-Contracts, and Security owners without retaining rules, examples, defaults, or
-fallback behavior.
+**Outcome:** `STD-0482` remains only as a non-normative boundary-fact routing
+index. It links foreign authority to Interop, structured process/deployment
+messages to IPC, cross-language representation to Language Bindings, contract
+class/schema/version decisions to Contracts, and untrusted authorization to
+Security. Multiple rows may apply to one boundary.
+
+One exact `index` disposition and focused structural evidence reject active
+rules, code, command recipes, examples-as-policy, prescriptive defaults,
+fallback guidance, and stale concern summaries.
+
+**No fallback:** the legacy path does not own applicability or behavior and
+cannot substitute concern labels or examples for selection of every applicable
+canonical owner.
+
+## Planned Slice 7.4b8g: Rust Binding Error And Callback Cluster
+
+**Outcome:** review `STD-0776` through `STD-0780` for owner coherence across
+Rust binding error mapping, host callback/event delivery, sink bridges, and
+callback-created task execution before any normative movement.

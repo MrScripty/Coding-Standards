@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** The normative Contracts, IPC, and Language Binding children
-of mixed-role Interop row 2 are accepted; its legacy applicability index is
-next.
+**Current phase:** Mixed-role Interop row 2 is fully disposed through its four
+owner-coherent children; the next Rust Language Binding cluster requires
+bounded owner review.
 
-**Next slice:** Milestone 7.4b8f legacy Interop applicability index (`STD-0482`).
+**Next slice:** Milestone 7.4b8g Rust binding error and callback cluster (`STD-0776`, `STD-0777`, `STD-0778`, `STD-0779`, `STD-0780`).
 
 **Acceptance status:** `partial`
 
@@ -972,8 +972,16 @@ all structural/routing fixtures pass.
      - reject inferred defaults, generated assumptions, producer-only
        snapshots, schema-free/default shapes, omitted variants, and alternate
        serializers.
-   - `7.4b8f` (`Planned`): review `STD-0482` as a non-normative legacy
-     applicability index after bounded pre-slice review.
+   - `7.4b8f` (`Accepted`): retain `STD-0482` only as a non-normative
+     boundary-fact routing index;
+     - route independently to Interop, IPC, Language Bindings, Contracts, and
+       Security, allowing multiple applicable owners;
+     - prove one exact `index` disposition; and
+     - reject active rules, code, examples-as-policy, prescriptive defaults,
+       fallback guidance, and stale concern summaries.
+   - `7.4b8g` (`Planned`): review `STD-0776` through `STD-0780` for coherent
+     ownership across Rust binding errors, host callbacks/event delivery, sink
+     bridges, and callback-created task execution before normative movement.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

@@ -338,3 +338,4 @@ STD-0476	INTEROP-STANDARDS.md	profiles/boundaries/ipc.md	refine	require complete
 STD-0478	INTEROP-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	derive tagged-enum representation from canonical contract and serializer rules
 STD-0479	INTEROP-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	require exact variant spelling value rename and unsupported behavior
 STD-0480	INTEROP-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	require exact field naming casing rename omission default and extra-field behavior
+STD-0482	INTEROP-STANDARDS.md	INTEROP-STANDARDS.md	index	retain only a non-normative canonical boundary-routing index

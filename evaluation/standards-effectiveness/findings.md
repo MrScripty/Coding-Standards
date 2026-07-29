@@ -107,6 +107,7 @@ changes and focused fixture evidence.
 | F058 | Cross-language compatibility inference | `INTEROP-STANDARDS.md`; frozen IDs `STD-0474`, `STD-0475`, `STD-0477`, `STD-0481` | Select evolution from the applicable contract classes and one canonical wire/schema authority; require deployment-matched producer/consumer evidence and typed outcomes instead of schema guessing or old/dual-shape shims. | 7 |
 | F059 | Resolved in Milestone 7.4b8d | `INTEROP-STANDARDS.md`; frozen ID `STD-0476` now routes to complete IPC consumer decoding and validated-variant dispatch without partial-field, raw-input, log-and-return, or permissive fallback. | 7 |
 | F060 | Resolved in Milestone 7.4b8e | `INTEROP-STANDARDS.md`; frozen IDs `STD-0478`-`STD-0480` now derive tagged-enum, variant, and field representation from the canonical contract plus selected serializer with consumer evidence and typed outcomes. | 7 |
+| F061 | Resolved in Milestone 7.4b8f | `INTEROP-STANDARDS.md`; frozen ID `STD-0482` is a non-normative boundary-fact routing index with no active rules, defaults, examples-as-policy, or fallback guidance. | 7 |
 | F031 | Acceptance dimensions | `workflows/planning.md:91-98`; `evaluation/standards-effectiveness/check-plan-structure.sh:4-14` | Model evidence kind, required environment, and execution mode independently; require all named claims rather than comparing one scalar rank. | 4 |
 
 ## Correctness And Safety Findings

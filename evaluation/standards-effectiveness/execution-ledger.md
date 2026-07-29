@@ -2974,3 +2974,30 @@ The immutable row advances to child `2.4`; only the non-normative legacy
 applicability index remains before baseline row 2 can complete.
 
 **Next slice:** `7.4b8f`, bounded pre-slice review of `STD-0482`.
+
+## 2026-07-29: Milestone 7.4b8f Legacy Interop Applicability Index
+
+**Outcome:** Accepted.
+
+`STD-0482` now remains only as a non-normative boundary-fact routing index.
+Foreign authority routes to Interop, structured process/deployment messages to
+IPC, cross-language representation to Language Bindings, contract and schema
+decisions to Contracts, and untrusted authorization to Security. Multiple
+canonical owners may apply to one boundary.
+
+**Verification:** one exact `index` disposition; canonical-route and
+reference-only structure checks; Interop, IPC, Language Binding, Contracts,
+immutable-train, independent-trust, plan-lifecycle, shell-syntax, whitespace,
+and exact-scope checks. The complete checker suite is required because checker
+relationships and the active train row change.
+
+**No-fallback result:** the index contains no active rules, code, command
+recipes, examples-as-policy, prescriptive defaults, fallback guidance, or stale
+concern summaries. It cannot substitute legacy concern labels for canonical
+owner selection.
+
+All four children exactly dispose immutable baseline row 2. The cursor advances
+to row 3 without mutating the baseline manifest.
+
+**Next slice:** `7.4b8g`, bounded owner review of `STD-0776`, `STD-0777`,
+`STD-0778`, `STD-0779`, and `STD-0780`.

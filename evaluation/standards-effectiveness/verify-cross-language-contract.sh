@@ -94,17 +94,21 @@ done
 validate_head="$(git -C "$REPO_ROOT" show HEAD:INTEROP-STANDARDS.md |
   sed -n '/^### Validate Received Messages/,/^---/p')"
 validate_current="$(sed -n '/^### Validate Received Messages/,/^---/p' "$LEGACY")"
-applicability_head="$(git -C "$REPO_ROOT" show HEAD:INTEROP-STANDARDS.md |
-  sed -n '/^## When These Rules Apply/,$p')"
-applicability_current="$(sed -n '/^## When These Rules Apply/,$p' "$LEGACY")"
 [[ "$validate_current" == "$validate_head" ]]
-[[ "$applicability_current" == "$applicability_head" ]]
 
 [[ "$(rg -c 'topics/contracts.md#cross-language-contract-selection' \
   "$LEGACY")" -eq 2 ]]
 [[ "$(rg -c \
   'profiles/boundaries/language-bindings.md#serialized-wire-representation' \
   "$LEGACY")" -eq 3 ]]
+for target in \
+  profiles/boundaries/interop.md \
+  profiles/boundaries/ipc.md \
+  profiles/boundaries/language-bindings.md \
+  topics/contracts.md \
+  topics/security.md; do
+  rg -F -q "$target" "$LEGACY"
+done
 for pattern in \
   'Use shared schema files when possible' \
   'Update coordinated sides in the same commit' \
