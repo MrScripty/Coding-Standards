@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** all three children of Rust binding row 3 are accepted; Rust
-enum representation is the next immutable execution row.
+**Current phase:** Rust enum representation is accepted; the six-ID Rust
+binding representation group is the next immutable execution row.
 
-**Next slice:** Milestone 7.4b8k Rust enum representation (`STD-0797`).
+**Next slice:** Milestone 7.4b8l owner review of `STD-0804` through `STD-0809`.
 
 **Acceptance status:** `partial`
 
@@ -1026,8 +1026,22 @@ all structural/routing fixtures pass.
      - reject no-op executors, polling or result-injection substitutes,
        alternate runtimes, detached work, default output, input carry-forward,
        weaker evidence, and default success.
-   - `7.4b8k` (`Planned`): review `STD-0797` under the Rust Language Binding
-     owner before replacing legacy enum-representation guidance.
+   - `7.4b8k` (`Accepted`): replace `STD-0797` with one mechanism-specific Rust
+     enum-representation contract;
+     - keep framework, serialized wire, stable C ABI, opaque-handle, and
+       generated-wrapper representations distinct;
+     - route serialized enums through the existing wire contract;
+     - require complete variant, discriminant, payload, unknown-value,
+       checked-conversion, and real native/host evidence; and
+     - reject native layout, inferred names or numbers, unknown sentinels,
+       omitted variants, alternate mechanisms, unchecked conversion, weaker
+       evidence, and default success.
+     - remove the wire verifier's superseded handoff and unrelated
+       `HEAD`-comparison assertions; and
+     - restore cumulative proof with a fail-fast `set -euo pipefail` complete
+       checker invocation.
+   - `7.4b8l` (`Planned`): review `STD-0804` through `STD-0809` under the Rust
+     Language Binding owner before implementation or decomposition.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

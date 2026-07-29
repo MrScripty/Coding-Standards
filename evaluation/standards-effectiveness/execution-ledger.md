@@ -3115,3 +3115,37 @@ All three ordered children exactly dispose immutable row 3. The cursor advances
 to row 4, `STD-0797`; no later Rust binding row is activated early.
 
 **Next slice:** `7.4b8k`, bounded pre-slice review of `STD-0797`.
+
+## 2026-07-29: Milestone 7.4b8k Rust Enum Representation
+
+**Outcome:** Accepted.
+
+`STD-0797` is replaced by a Rust Language Binding enum contract selected from
+the concrete framework, serialized wire, stable C ABI, opaque-handle, or
+generated-wrapper mechanism. Serialized enum shape remains with the existing
+wire contract; the Rust specialization adds framework and ABI validity without
+duplicating that owner.
+
+**Verification:** 25 focused decisions; one exact disposition; metadata,
+bounded legacy replacement, Rust wire representation, checked conversion,
+immutable-train, independent-trust, plan-lifecycle, shell-syntax, whitespace,
+and exact-scope checks. The complete checker suite is required because a
+shared language profile and new focused checker changed.
+
+**Deviation and discovered issues:** the accepted wire verifier still required
+a superseded next-slice string and compared an unrelated legacy prefix against
+`HEAD`, violating bounded checker ownership (`F068`). The aggregate suite
+invocation used `pipefail` without `errexit`, so an intermediate checker
+failure could be masked by the loop's final success (`F069`). The verifier now
+owns only its accepted wire concern, and cumulative verification is rerun with
+`set -euo pipefail`. Historical records are not rewritten.
+
+**No-fallback result:** native Rust layout, implicit names or numbers, unknown
+sentinels, omitted variants, alternate mechanisms, unchecked conversion,
+weaker evidence, and default success are rejected.
+
+The cursor advances to row 5, `STD-0804` through `STD-0809`; owner review must
+confirm whether that group remains one coherent slice.
+
+**Next slice:** `7.4b8l`, bounded owner review of `STD-0804` through
+`STD-0809`.

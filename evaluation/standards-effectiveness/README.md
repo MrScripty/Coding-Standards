@@ -191,6 +191,15 @@ legacy replacement. They reject no-op executors, polling substitution,
 alternate runtimes, detached work, input carry-forward, default output, and
 default success.
 
+`fixtures/rust/binding-enum-representation-decisions.tsv` and
+`verify-rust-binding-enum-representation.sh` check mechanism-specific enum
+contracts for framework lifting, serialized wire data, stable C ABI, opaque
+handles, and generated wrappers; complete variants, discriminants, payloads,
+unknown values, checked conversion, real native/host evidence, one exact
+disposition, and bounded legacy replacement. They reject native-layout,
+implicit-name/number, unknown-sentinel, omitted-variant, alternate-mechanism,
+unchecked-conversion, and default-success fallbacks.
+
 ## Interop Authority Decision Fixtures
 
 `fixtures/interop/foreign-memory-decisions.tsv` and

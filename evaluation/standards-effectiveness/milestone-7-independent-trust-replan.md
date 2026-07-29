@@ -1294,7 +1294,29 @@ alternate runtimes, detached work, generic/default output, unsupported-error
 reinterpretation, input carry-forward, weaker evidence, and default success
 are rejected.
 
-## Planned Slice 7.4b8k: Rust Enum Representation
+## Accepted Slice 7.4b8k: Rust Enum Representation
 
-**Outcome:** perform bounded pre-slice review of `STD-0797` under the Rust
-Language Binding owner before replacing legacy enum-representation guidance.
+**Outcome:** `STD-0797` is replaced by one Rust Language Binding-owned enum
+representation contract. Framework lifting, serialized wire data, stable C
+ABI, opaque handles, and generated wrappers retain distinct representation
+facts. Serialized enums consume the existing wire contract rather than
+duplicating it.
+
+Twenty-five focused decisions and one exact disposition require complete
+variant, discriminant, payload, unknown-value, checked-conversion, and real
+native/host evidence. Stable C ABI enums define discriminant and payload
+validity explicitly; framework support does not establish ABI layout.
+
+The accepted wire verifier no longer requires a superseded handoff string or
+compare an unrelated legacy prefix to `HEAD`. The cumulative checker suite is
+rerun with `set -euo pipefail` after the prior aggregate invocation was found
+capable of masking an intermediate failure.
+
+**No fallback:** native Rust layout, implicit names or numbers, unknown
+sentinels, omitted variants, alternate mechanisms, unchecked conversion,
+weaker evidence, and default success are rejected.
+
+## Planned Slice 7.4b8l: Remaining Rust Binding Representation Group
+
+**Outcome:** perform bounded owner review of `STD-0804` through `STD-0809`
+under the Rust Language Binding owner before implementation or decomposition.

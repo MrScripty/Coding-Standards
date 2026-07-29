@@ -395,8 +395,11 @@ after conversion failure.
 
 ### Enum Representation
 
-Enum conversion rejects variants not represented by the selected host contract.
-Serialization is permitted only under an explicit schema.
+Canonical enum representation moved to
+[Enum Representation](../../profiles/languages/rust/language-bindings.md#enum-representation).
+
+The selected framework, wire, ABI, opaque-handle, or generated-wrapper contract
+defines variant, discriminant, payload, and unknown-value behavior.
 
 ---
 

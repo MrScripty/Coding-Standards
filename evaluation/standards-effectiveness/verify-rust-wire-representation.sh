@@ -106,14 +106,6 @@ rg -U -q 'supported schema or protocol\nversion' "$PROFILE"
 legacy_wire="$(
   sed -n '/^## Serde Wire-Format Alignment$/,$p' "$LEGACY"
 )"
-legacy_prefix_at_head="$(
-  git -C "$REPO_ROOT" show HEAD:languages/rust/RUST-INTEROP-STANDARDS.md |
-    sed '/^## Serde Wire-Format Alignment$/,$d'
-)"
-legacy_prefix_current="$(
-  sed '/^## Serde Wire-Format Alignment$/,$d' "$LEGACY"
-)"
-[[ "$legacy_prefix_current" == "$legacy_prefix_at_head" ]]
 rg -F -q \
   'profiles/languages/rust/language-bindings.md#serialized-wire-representation' \
   <<< "$legacy_wire"
@@ -134,7 +126,6 @@ fi
 
 rg -F -q '| F051 | Resolved in Milestone 7.4b7i |' "$FINDINGS"
 rg -F -q '`7.4b7i` (`Accepted`)' "$PLAN"
-rg -F -q '**Next slice:** Milestone 7.4b7j' "$PLAN"
 "$SCRIPT_DIR/verify-language-binding-boundary.sh"
 "$SCRIPT_DIR/verify-rust-binding-conversions.sh"
 "$SCRIPT_DIR/verify-milestone-7-independent-trust-replan.sh"

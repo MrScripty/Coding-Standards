@@ -28,6 +28,36 @@ Framework lifting is not C-ABI safety. `String`, `Vec<T>`, `Option<T>`, Rust
 enums, and framework object types may be supported by a named framework, but
 their native Rust layouts are not universally stable C-ABI values.
 
+## Enum Representation
+
+After selecting the boundary mechanism, define the complete enum
+representation for that mechanism:
+
+- a named binding framework contract defines supported variants, host names or
+  values, payload support, and unknown-variant behavior;
+- a serialized enum follows
+  [Serialized Wire Representation](#serialized-wire-representation);
+- a stable C ABI defines discriminant width, signedness, values, payload
+  layout, validity, and ownership explicitly;
+- an opaque handle exposes only its declared operations and does not reveal
+  native enum layout; and
+- a generated wrapper remains derived from one of those selected contracts.
+
+Rust source order, implicit discriminants, variant names, `repr` attributes,
+framework defaults, and generated static types do not independently establish
+the host representation. A fieldless Rust enum is not automatically an ABI
+integer, and a data-carrying enum is not automatically a stable tagged union.
+
+Use checked conversion in both directions. Return `invalid` for a host value,
+discriminant, tag, or payload that contradicts the selected representation,
+`unsupported` for a well-formed variant outside the supported contract, and
+`unavailable` when required framework, schema, ABI, generation, or conversion
+capability cannot be obtained.
+
+Do not substitute an unknown sentinel, omit a variant, infer names or numeric
+values, reinterpret native layout, retry through another representation, or
+report default success.
+
 ## Serialized Wire Representation
 
 Select the wire schema, serializer contract, and supported schema or protocol
@@ -333,6 +363,13 @@ Test every conversion through:
 
 Native-only conversion tests do not prove host lifting, generated wrappers,
 wire compatibility, or ABI behavior.
+
+For enum representations, verify every supported variant through the real
+native/host boundary and cover applicable payloads, names, numeric values,
+unknown values, malformed discriminants or tags, unsupported variants, checked
+round trips, and unavailable representation capability. For a selected stable
+C ABI, verify the declared discriminant and payload layout rather than Rust
+native layout.
 
 For serialized representations, verify Rust-to-host and host-to-Rust behavior
 for each supported shape. Cover tags, content, renamed variants and fields,
