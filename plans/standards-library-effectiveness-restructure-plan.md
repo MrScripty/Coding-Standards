@@ -6,11 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 independent trust-boundary remainder re-plan
-accepted; Rust target and configuration implementation is next.
+**Current phase:** Milestone 7 Rust target and configuration contract accepted;
+independent trust-boundary owner-correction re-plan is next.
 
-**Next slice:** Milestone 7.4b7e Rust target and configuration contract
-implementation.
+**Next slice:** Milestone 7.4b7f independent trust-boundary remainder re-plan.
 
 **Acceptance status:** `partial`
 
@@ -760,9 +759,22 @@ all structural/routing fixtures pass.
        decomposition requirement are recorded as `F048`; and
      - the planning slice changes no normative or legacy standard, final
        disposition, generated artifact, configuration, or downstream file.
-   - `7.4b7e` (`Planned`): establish the Rust Cross-Platform specialization
+   - `7.4b7e` (`Accepted`): establish the Rust Cross-Platform specialization
      with contract-selected targets, configuration boundaries, and evidence
-     (`STD-0726`-`STD-0730`).
+     (`STD-0726`-`STD-0730`);
+     - target triples, support claims, artifacts, and evidence derive from the
+       selected target contract;
+     - `cfg`, build scripts, features, composition, dispatch, and code
+       placement follow Rust/toolchain/artifact/deployment facts;
+     - compile, link, package, integration, and runtime evidence remain
+       distinct;
+     - 30 focused decisions reject fixed triples, best-effort support,
+       universal layouts, numeric thresholds, substitute tools, alternate
+       targets, and weaker evidence; and
+     - `F047` is resolved.
+   - `7.4b7f` (`Planned`): re-measure the 594-ID global remainder and 61-ID
+     independent trust subset, then correct and activate exactly one
+     owner-bounded subset of `F048` without normative movement.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

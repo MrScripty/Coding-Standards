@@ -109,6 +109,8 @@ mapfile -t actual_groups < <(tail -n +2 "$GROUP_FILE")
 
 baseline_trust_total=0
 current_trust_total=0
+baseline_owner_groups=0
+current_owner_groups=0
 while IFS=$'\t' read -r order owner count owner_state prerequisite status extra; do
   [[ "$order" == 'order' ]] && continue
   [[ "$order" =~ ^[1-7]$ && "$count" =~ ^[0-9]+$ ]]
@@ -131,9 +133,15 @@ while IFS=$'\t' read -r order owner count owner_state prerequisite status extra;
   [[ -n "$prerequisite" && -n "$status" && -z "${extra:-}" ]]
   ((baseline_trust_total += count))
   ((current_trust_total += expected_count))
+  ((baseline_owner_groups += 1))
+  if [[ "$expected_count" -gt 0 ]]; then
+    ((current_owner_groups += 1))
+  fi
 done < "$GROUP_FILE"
 [[ "$baseline_trust_total" -eq 66 ]]
 [[ "$current_trust_total" -eq $((66 - next_dispositions)) ]]
+[[ "$baseline_owner_groups" -eq 7 ]]
+[[ "$current_owner_groups" -eq $((7 - accepted_next)) ]]
 
 mapfile -t actual_ids < <(tail -n +2 "$NEXT_SLICE" | cut -f3)
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
@@ -208,5 +216,6 @@ fi
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
-printf 'Milestone 7 independent trust re-plan passed: %s baseline IDs, %s current across 7 owners; next-slice dispositions %s/5\n' \
-  "$baseline_trust_total" "$current_trust_total" "$next_dispositions"
+printf 'Milestone 7 independent trust re-plan passed: %s baseline IDs, %s current across %s owners; next-slice dispositions %s/5\n' \
+  "$baseline_trust_total" "$current_trust_total" "$current_owner_groups" \
+  "$next_dispositions"

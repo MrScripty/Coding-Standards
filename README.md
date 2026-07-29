@@ -38,6 +38,7 @@ reference material.
 | [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
 | [profiles/languages/rust/README.md](profiles/languages/rust/README.md) | Rust mechanisms and focused verification | Rust-owned changes |
 | [profiles/languages/rust/async.md](profiles/languages/rust/async.md) | Rust async applicability and contract-driven sync/async boundary selection | Rust async APIs, suspension boundaries, concurrent I/O, streams, backpressure, cancellation, or async resource lifetimes |
+| [profiles/languages/rust/cross-platform.md](profiles/languages/rust/cross-platform.md) | Rust target contracts, configuration placement, and claim-matched evidence | Rust target contracts, triples, support claims, target-dependent mechanisms/artifacts, or target evidence |
 | [profiles/languages/rust/interop.md](profiles/languages/rust/interop.md) | Checked dimensions, raw-slice preconditions, callback lifetimes, and copy-after-proof | Rust access to foreign memory or borrowed callback data |
 | [profiles/languages/rust/language-bindings.md](profiles/languages/rust/language-bindings.md) | Rust binding representations, fallible conversion, and native/host evidence | Rust APIs exposed through another language |
 | [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, simplicity/complection guidance, layering, service independence, runtime wiring guidance | Setting up any new codebase |

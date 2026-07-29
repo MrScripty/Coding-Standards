@@ -316,3 +316,8 @@ STD-0285	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select file
 STD-0286	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	preserve declared semantics and return typed unsupported or unavailable outcomes
 STD-0287	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select compile-time or runtime platform mechanisms from the build and deployment contract
 STD-0288	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	route language-specific platform mechanisms to selected profiles
+STD-0726	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	move	establish the declared Rust cross-platform specialization
+STD-0727	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	derive Rust targets support claims and evidence from the selected target contract
+STD-0728	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	select cfg build composition and module boundaries from Rust and artifact facts
+STD-0729	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	place inline cfg by cohesion and reviewability without numeric layout thresholds
+STD-0730	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	profiles/languages/rust/cross-platform.md	refine	verify each declared Rust target claim with contract-matched evidence

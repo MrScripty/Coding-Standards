@@ -50,7 +50,7 @@ changes and focused fixture evidence.
 | F044 | Resolved in Milestone 7.4b4a | The premature final-closure handoff is superseded by a measured 90-ID trust remainder, a 26-ID lifecycle bridge for F025/F026, and one exact generic Concurrency next slice. |
 | F045 | Resolved in Milestone 7.4b4g | Rust Async applicability, lifecycle, blocking isolation, synchronization, cancellation safety, cleanup, and observability are contract-selected without named-mechanism fallback. |
 | F046 | Resolved in Milestone 7.4b7c | Cross-Platform target support, isolation, mechanism selection, semantic fidelity, and evidence now follow explicit contracts without fixed targets, universal architecture/layout, or stub fallback. |
-| F047 | Planned for Milestone 7.4b7e | Rust target triples, support claims, `cfg`/module placement, and evidence must follow the selected target and artifact contracts rather than fixed targets, best-effort status, numeric layout thresholds, or named substitute tools. |
+| F047 | Resolved in Milestone 7.4b7e | Rust target triples, support claims, `cfg`/module placement, and evidence follow selected target and artifact contracts without fixed targets, best-effort status, numeric layout thresholds, named substitute tools, or weaker evidence. |
 | F048 | Open for rolling Milestone 7 owner correction | Residual Security, Cross-Platform, Interop, Rust Interop, Rust Security, and Rust Language Binding owner-map groups cross canonical roles or require decomposition; each must be corrected before activation. |
 
 ## Systemic Findings

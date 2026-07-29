@@ -37,6 +37,8 @@ according to the crate's feature contract.
 - Prefer validated types and checked conversions at boundaries.
 - Route async API and suspension-boundary selection through the
   [Rust Async profile](async.md).
+- Route Rust target selection, configuration placement, and target evidence
+  through the [Rust Cross-Platform profile](cross-platform.md).
 - Give async runtimes and spawned tasks explicit lifecycle owners.
 - Do not hold synchronous guards across `.await`.
 - Deny unsafe by default and route legitimate unsafe work through the
@@ -57,7 +59,6 @@ here:
 
 - [API](../../../languages/rust/RUST-API-STANDARDS.md)
 - [Remaining Async mechanisms](../../../languages/rust/RUST-ASYNC-STANDARDS.md#runtime-boundaries)
-- [Cross-platform](../../../languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md)
 - [Dependencies](../../../languages/rust/RUST-DEPENDENCY-STANDARDS.md)
 - [Interop wire-format guidance](../../../languages/rust/RUST-INTEROP-STANDARDS.md#serde-wire-format-alignment)
 - [Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)

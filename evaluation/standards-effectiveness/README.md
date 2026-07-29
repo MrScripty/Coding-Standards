@@ -327,6 +327,15 @@ existence and dependencies, residual owner-correction status, and the exact
 five-ID Rust target/configuration next slice without moving normative guidance
 or recording premature dispositions.
 
+`verify-rust-target-configuration.sh` checks declared Rust targets,
+contract-selected `cfg`/build/feature/composition/dispatch mechanisms with
+explicit basis/ownership/precedence, cohesive placement, claim-matched
+evidence, profile metadata and routing, exact legacy replacement, and exact
+disposition of `STD-0726` through `STD-0730`. It rejects fixed triples,
+best-effort support, feature-as-target substitution, unjustified build
+scripts, ambiguous combinations, universal layouts, numeric `cfg` thresholds,
+named substitute tools, alternate targets, and weaker evidence.
+
 `verify-rust-binding-architecture.sh` checks framework-independent Rust core
 types and behavior, one-way adapter dependencies, adapter-scoped binding
 features, generated-output ownership, framework-free core verification, and

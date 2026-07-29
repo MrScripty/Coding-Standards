@@ -337,7 +337,7 @@ preserve conflicting legacy guidance, combine owners to avoid a missing
 contract, invent an undeclared owner, or activate implementation before exact
 measurement and pre-slice review pass.
 
-## Planned Slice 7.4b7e: Rust Target And Configuration Contract
+## Accepted Slice 7.4b7e: Rust Target And Configuration Contract
 
 [milestone-7-independent-trust-next-slice.tsv](milestone-7-independent-trust-next-slice.tsv)
 freezes `STD-0726` through `STD-0730`.
@@ -391,11 +391,12 @@ hosted runners, simulated evidence, another target, or weaker checks.
 
 **Focused evidence:** decisions cover declared single and multiple Rust
 targets, compile-time and runtime selection, build-script and composition
-selection, cohesive module and inline placement, target-matched compile/link/
-runtime evidence, typed unresolved outcomes, and rejection of fixed triples,
-best-effort support, universal trait/module layout, numeric extraction rules,
-fixed commands/tools, substitute environments, alternate targets, and weaker
-evidence.
+selection with explicit basis/ownership/precedence, cohesive module and inline
+placement, target-matched compile/link/runtime evidence, typed unresolved
+outcomes, and rejection of fixed triples, best-effort support, feature-as-
+target substitution, unjustified build scripts, ambiguous combined mechanisms,
+universal trait/module layout, numeric extraction rules, fixed commands/tools,
+substitute environments, alternate targets, and weaker evidence.
 
 **Acceptance gate:** `F047` is resolved; all five identifiers have one exact
 final disposition; the new profile metadata and routing are valid; the legacy
@@ -408,6 +409,39 @@ untouched; and focused plus affected regressions pass.
 owner map and information architecture, its generic dependency is accepted,
 and all five sections form one Rust specialization without absorbing generic
 platform, CI scheduling, native loading, or release policy.
+
+**Acceptance result:** accepted. The Rust Cross-Platform profile now owns
+declared target triples, contract-selected `cfg`/build/feature/composition/
+dispatch mechanisms, cohesive placement, and evidence matched to compile,
+link, package, integration, and runtime claims. The Rust index, router, and
+top-level README route to the profile. The legacy Rust document is a bounded
+canonical link.
+
+All five identifiers have exact final dispositions and `F047` is resolved.
+The rolling Milestone 7 remainder is 594 identifiers across 29 sources and 28
+owners, with 13 canonical owners still missing. The active independent
+trust-boundary subset contains 61 identifiers across six remaining owner
+groups; the 61 IDs under `F048` remain blocked on owner correction or
+decomposition.
+
+## Planned Slice 7.4b7f: Independent Trust-Boundary Remainder Re-plan
+
+Re-measure the 594-ID global remainder and 61-ID independent trust subset after
+the accepted Rust Cross-Platform slice. Correct one owner-bounded subset of
+`F048`, confirm dependencies and exact source/owner/disposition facts, and
+activate no implementation until that planning review is accepted.
+
+This is planning only. It may update the independent trust report and fixtures,
+their checker, parent decomposition linkage, evaluation README, findings,
+active plan, and execution ledger. It must not change normative or legacy
+standards, final dispositions, generated inventory or owner maps, routing,
+templates, source, tests, configuration, dependencies, lockfiles, workflow
+fixtures, build output, or downstream repositories.
+
+**No fallback:** do not preserve a stale owner-map destination, combine
+canonical roles, activate the full mixed group, or infer the next slice from
+prior ordering. Record exact corrected ownership and decomposition before
+implementation.
 
 ## Re-Plan Triggers
 

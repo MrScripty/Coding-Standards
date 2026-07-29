@@ -2368,3 +2368,41 @@ active-plan linkage, plan lifecycle, shell syntax, whitespace, and every
 
 **Next slice:** `7.4b7e` Rust target and configuration contract
 implementation.
+
+## 2026-07-28: Milestone 7.4b7e Rust Target And Configuration Contract
+
+**Outcome:** Accepted.
+
+The new Rust Cross-Platform profile derives target triples, support claims,
+artifact requirements, and evidence from explicit project/product/release
+target contracts. It selects `cfg`, build scripts, features, composition,
+dispatch, and code placement from Rust, toolchain, artifact, and deployment
+facts.
+
+`STD-0726` through `STD-0730` have exact final dispositions. The legacy Rust
+document is a bounded canonical link without fixed targets, best-effort status,
+universal module/trait layout, numeric placement thresholds, fixed commands,
+or substitute tools. `F047` is resolved.
+
+**Deviations:** None.
+
+**Discovered issues:** None beyond the previously recorded `F048` owner
+corrections and decomposition requirement.
+
+**No-fallback/legacy result:** missing target, toolchain, linker, artifact,
+capability, deployment, or evidence facts cannot select default triples,
+best-effort status, universal layouts, numeric thresholds, named tools,
+another target/mechanism, or weaker evidence.
+
+**Verification:** 30 focused Rust target/configuration decisions, five exact
+dispositions, metadata and routing, bounded legacy replacement, accepted
+generic Cross-Platform evidence, independent trust progress, plan lifecycle,
+shell syntax, whitespace, and every
+`evaluation/standards-effectiveness/verify-*.sh` regression pass.
+
+The rolling Milestone 7 remainder is 594 IDs across 29 sources and 28 owners,
+with 13 canonical owners still missing. The independent trust subset contains
+61 IDs, all recorded under `F048`.
+
+**Next slice:** `7.4b7f`, planning only, to correct and activate exactly one
+owner-bounded subset of the residual trust inventory.
