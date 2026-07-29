@@ -283,3 +283,5 @@ STD-0268	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	require nonblocki
 STD-0270	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	require owned observation of asynchronous failures
 STD-0271	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	remove synchronous blocking as an async fallback
 STD-0272	CONCURRENCY-STANDARDS.md	topics/concurrency.md	refine	require cancellation propagation through owned async work
+STD-0717	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	move	establish the Rust Async specialization
+STD-0718	languages/rust/RUST-ASYNC-STANDARDS.md	profiles/languages/rust/async.md	refine	select synchronous and asynchronous boundaries from the operation contract

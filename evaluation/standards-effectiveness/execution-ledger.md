@@ -1711,3 +1711,37 @@ The rolling Milestone 7 remainder remains 632 IDs across 31 sources and 30
 owners, with 15 canonical owners still missing.
 
 **Next slice:** `7.4b4d`.
+
+## 2026-07-28: Milestone 7.4b4d Rust Async Foundation
+
+**Outcome:** Accepted.
+
+The Rust Async profile now selects synchronous or asynchronous behavior from
+the operation, consumer, suspension, I/O, cancellation, lifecycle, and
+capability contract. Pure non-suspending logic remains synchronous when no
+async contract exists, while genuine async library and core contracts remain
+valid.
+
+`STD-0717` and `STD-0718` have exact final dispositions. The legacy foundation
+is link-only; all seven later mechanism sections remain migration material.
+`F045` is partially resolved.
+
+**Deviations:** None.
+
+**Discovered issue (`Resolved`):** the initial focused checker required the
+repository-relative profile path inside the Rust profile index, whose correct
+local link is `async.md`. Routing assertions now distinguish root, legacy, and
+local-index link forms.
+
+**No-fallback/legacy result:** unresolved requirements cannot select sync,
+async, threads, runtimes, blocking, or detached work by convenience. Runtime
+and task mechanisms remain outside this slice.
+
+**Verification:** 13 boundary decisions, metadata, routing, exact dispositions,
+legacy replacement, later-section preservation, lifecycle handoff, shell
+syntax, whitespace, and all standards-effectiveness regressions pass.
+
+The rolling Milestone 7 remainder is 630 IDs across 31 sources and 30 owners,
+with 14 canonical owners still missing.
+
+**Next slice:** `7.4b4e`.

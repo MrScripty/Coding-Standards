@@ -1,40 +1,16 @@
 # Rust Async Standards
 
-Async architecture, Tokio runtime boundaries, task lifecycle, mutex selection,
-and cancellation safety for Rust codebases.
+Canonical Rust async applicability and sync/async boundary selection have moved
+to the [Rust Async profile](../../profiles/languages/rust/async.md).
+
+The mechanism sections retained below remain migration material only. They
+cannot weaken or override the generic
+[Concurrency topic](../../topics/concurrency.md) or the Rust Async profile.
 
 ## Sync Core, Async Shell
 
-Async is an I/O and scheduling tool, not an architecture by itself.
-
-Default to synchronous domain/core APIs. Add async at the outermost I/O boundary
-and pull it inward only when concurrent I/O is central to the operation.
-
-Rules:
-
-- Keep parsing, validation, transformation, planning, policy, and pure
-  orchestration synchronous when possible.
-- Use async shells for HTTP, IPC, database, filesystem, stream, queue, and
-  runtime integration.
-- Do not make a function async only because its caller is async.
-- If a function performs no `.await`, it should usually not be async.
-- Libraries should default to sync APIs unless async behavior is part of the
-  contract.
-- If the core must be async, document which concurrent I/O operations justify
-  the complexity.
-
-```rust
-// GOOD: async shell, sync core.
-async fn handle_request(raw: RawRequest) -> Result<Response, AppError> {
-    let user = fetch_user(raw.user_id).await?;
-    let input = RequestInput::try_from(raw)?;
-    Ok(build_response(input, user)?)
-}
-
-fn build_response(input: RequestInput, user: User) -> Result<Response, DomainError> {
-    // pure domain logic
-}
-```
+Contract-driven sync/async selection is canonical in the
+[Rust Async profile](../../profiles/languages/rust/async.md#select-the-execution-contract).
 
 ## Runtime Boundaries
 

@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 lifecycle bridge active; Rust Async
-specialization decomposed.
+**Current phase:** Milestone 7 lifecycle bridge active; Rust Async foundation
+accepted.
 
-**Next slice:** Milestone 7.4b4d, establish Rust Async applicability and
-sync/async boundary selection.
+**Next slice:** Milestone 7.4b4e, specialize owned runtime, task, and graceful-
+shutdown lifecycle.
 
 **Acceptance status:** `partial`
 
@@ -555,8 +555,12 @@ all structural/routing fixtures pass.
      applicability, owned runtime lifecycle, blocking/mutex, and
      cancellation/observability slices; record `F045`; and fully specify only
      the first implementation slice;
-   - `7.4b4d` (`Planned`): establish the Rust Async profile and contract-driven
+   - `7.4b4d` (`Accepted`): establish the Rust Async profile and contract-driven
      sync/async boundary (`STD-0717`-`STD-0718`);
+     - integration review finding (`Resolved`): the initial focused checker
+       required the repository-relative profile path inside the Rust profile
+       index, whose correct local link is `async.md`; routing assertions now
+       distinguish root, legacy, and local-index link forms;
    - `7.4b4e` (`Planned`): specialize runtime, tracked-task, and graceful-
      shutdown ownership (`STD-0719`-`STD-0721`);
    - `7.4b4f` (`Planned`): specialize blocking-work isolation and mutex

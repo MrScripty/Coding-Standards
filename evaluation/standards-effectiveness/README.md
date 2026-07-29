@@ -259,6 +259,12 @@ decomposition checker validates exact ownership, proposed dispositions,
 dependency order, lifecycle progress, active-plan handoff, and the
 planning-only boundary without moving normative guidance.
 
+`verify-rust-async-boundary.sh` checks contract-driven Rust sync/async
+selection, exact disposition of `STD-0717` and `STD-0718`, profile metadata and
+routing, bounded legacy replacement, later-section preservation, and rejection
+of caller-convenience, blanket-sync, runtime-creation, blocking, and detached-
+work fallback.
+
 `verify-consolidation-dispositions.sh` proves complete, unique coverage for all
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
 legacy path is only a bounded migration index.

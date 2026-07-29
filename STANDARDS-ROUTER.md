@@ -69,6 +69,7 @@ contain infrastructure code.
 | Condition | Select |
 | --- | --- |
 | Rust source, Cargo metadata, or Rust-generated artifacts change | [Rust profile](profiles/languages/rust/README.md) |
+| Rust async API, suspension boundary, concurrent I/O, stream, backpressure, cancellation-aware operation, or async resource lifetime changes | [Rust Async profile](profiles/languages/rust/async.md) plus the Rust profile |
 | No language-specific mechanism changes | No language profile |
 
 Language profiles specialize mechanisms only. Cross-language policy remains in
