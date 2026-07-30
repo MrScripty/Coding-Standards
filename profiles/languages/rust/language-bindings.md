@@ -106,6 +106,16 @@ framework dependency, host-specific behavior, or change to the domain
 contract. A framework-owned annotation, derive, conversion, callback, or
 registration belongs on an adapter type.
 
+Select annotation placement from the declared binding mechanism and the core
+and adapter ownership boundary. A core annotation is valid only when it is
+independent of framework behavior and leaves the domain contract unchanged.
+An adapter-owned annotation is valid only when its selected mechanism requires
+it. A separate schema or interface definition is valid only when Contracts
+selects it as canonical generation authority. Do not prefer co-located proc
+macros, a separate definition file, any framework, or any target language by
+default. Missing selection or placement facts return typed `unavailable`;
+contradictory ownership or coupling returns typed `invalid`.
+
 Binding-specific dependencies, procedural macros, build scripts, and optional
 features belong to an adapter or binding package. A disabled-by-default
 framework dependency in the core still couples the core when enabled and does

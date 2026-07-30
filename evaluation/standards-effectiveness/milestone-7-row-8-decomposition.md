@@ -54,3 +54,9 @@ dispositions.
 
 Milestone `7.4b8ad` performs bounded pre-slice review and implementation of
 child `8.2`, `STD-0784`, in the Rust Language Binding profile.
+
+Milestone `7.4b8ad` accepted child `8.2`, `STD-0784`, as Rust binding
+annotation placement with nine decision cases and one exact disposition.
+
+Milestone `7.4b8ae` performs bounded pre-slice review and implementation of
+child `8.3`, `STD-0785` through `STD-0788`, in Release.

@@ -9,7 +9,7 @@
 **Current phase:** Rust binding row 8 Contracts generation-authority child is
 complete; its Rust annotation-placement child is next.
 
-**Next slice:** Milestone 7.4b8ad Rust binding annotation placement for `STD-0784`.
+**Next slice:** Milestone 7.4b8ae Release binding generation procedures for `STD-0785`, `STD-0786`, `STD-0787`, and `STD-0788`.
 
 **Acceptance status:** `partial`
 
@@ -1238,8 +1238,12 @@ all structural/routing fixtures pass.
      - reject compiled artifacts, source annotations, generated consumer
        output, alternate generators, hand-maintained bindings, and default
        success with typed outcomes.
-   - `7.4b8ad` (`Planned`): replace `STD-0784` with Rust binding
-     annotation-placement policy.
+   - `7.4b8ad` (`Accepted`): replace `STD-0784` with Rust binding
+     annotation-placement policy selected by the binding mechanism and
+     core-adapter ownership boundary; reject proc-macro and definition-file
+     defaults with typed outcomes.
+   - `7.4b8ae` (`Planned`): replace `STD-0785` through `STD-0788` with
+     Release-owned binding generation procedures.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

@@ -3660,5 +3660,10 @@ No Rust annotation placement, Release procedure, legacy-index closure, router,
 metadata, lockfile, generated inventory, owner map, configuration, or
 downstream repository changed.
 
-**Next slice:** `7.4b8ad`, replace `STD-0784` with Rust binding annotation
-placement policy.
+**Slice `7.4b8ad` accepted:** `STD-0784` now selects Rust binding annotation
+placement from declared mechanism and core-adapter ownership. The nine-case
+fixture rejects proc-macro and definition-file defaults and preserves typed
+invalid or unavailable outcomes.
+
+**Next slice:** `7.4b8ae`, replace `STD-0785` through `STD-0788` with
+Release-owned binding generation procedures.

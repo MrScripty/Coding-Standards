@@ -147,6 +147,11 @@ plus producer/consumer consistency evidence. They reject compiled artifacts,
 source annotations, generated consumer outputs, alternate generators,
 hand-maintained bindings, and default success as authority or recovery paths.
 
+`fixtures/rust/binding-annotation-placement-decisions.tsv` and
+`verify-rust-binding-annotation-placement.sh` select Rust annotation placement
+from the declared mechanism and core-adapter ownership. They reject coupled
+core annotations plus proc-macro or separate-definition defaults.
+
 `fixtures/rust/binding-contract-discovery-*.tsv` and
 `verify-rust-binding-contract-discovery.sh` adapt only a Contracts-selected
 identity, version, or capability mechanism. They reject universal version

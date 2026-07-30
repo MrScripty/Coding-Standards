@@ -178,17 +178,11 @@ output do not become canonical authority by default.
 
 ### Annotation Approach
 
-Prefer proc-macro annotations co-located with the implementation over separate
-IDL/UDL definition files. This keeps the contract next to the code and
-reduces drift.
-
-| Framework | Target Languages | Annotation Style | Async Support |
-|-----------|-----------------|-------------------|---------------|
-| UniFFI | Python, Kotlin, Swift, Ruby, C#, Go | `#[derive(uniffi::Record)]`, `#[uniffi::export]` | Yes (tokio) |
-| Rustler | Elixir/Erlang | `#[rustler::nif]`, `NifStruct`, `NifUnitEnum` | Via dirty schedulers |
-| PyO3 | Python only | `#[pyclass]`, `#[pymethods]` | Via pyo3-asyncio |
-| cbindgen | C/C++ | None (reads Rust signatures) | No |
-| Tauri Commands | TypeScript/JS (desktop) | `#[tauri::command]` | Yes (tokio) |
+Canonical Rust annotation placement moved to the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md#core-and-adapter-boundary).
+Place a binding annotation on an adapter only when the selected binding
+mechanism and adapter ownership require it. Do not prefer proc macros, a
+separate authority file, a framework, or a target language by default.
 
 ### Generation Commands
 
