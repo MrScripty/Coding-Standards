@@ -123,8 +123,9 @@ default success.
 contract class, regenerate only affected generated outputs, and derive version
 relationships from deployment and consumer facts. They reject assumed
 additive compatibility, regenerate-all and skip-regeneration paths, forced
-lockstep or independent versions, compatibility shims, incomplete evidence,
-and default success.
+lockstep or independent versions (including lockstep inferred from shared
+build provenance), compatibility shims, incomplete evidence, and default
+success.
 
 `fixtures/rust/binding-contract-discovery-*.tsv` and
 `verify-rust-binding-contract-discovery.sh` adapt only a Contracts-selected

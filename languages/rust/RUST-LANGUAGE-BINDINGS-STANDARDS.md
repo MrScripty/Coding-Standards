@@ -39,13 +39,11 @@ and archive names are not universal release defaults.
 
 ### Compatibility Notes
 
-- Product-facing naming may differ from the internal wrapper crate name.
-- If a native library name or generated package name changes, apply its
-  recorded contract class. Coordinated internal artifacts may be replaced
-  atomically; independently consumed artifacts follow their published window.
-- Binding packages should state whether they are source-only/generated-only or
-  whether they intentionally bundle the native product library as a convenience
-  artifact.
+Canonical per-artifact compatibility classes, replacement windows, generated
+consistency, version relationships, and typed outcomes moved to
+[Cross-Language Contract Selection](../../topics/contracts.md#cross-language-contract-selection).
+Common build or release provenance does not impose one compatibility promise
+or lockstep versioning across binding artifacts.
 
 ---
 

@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust binding row 7 Release artifact-composition child is
-complete; its Contracts compatibility child is next.
+**Current phase:** Rust binding row 7 Contracts compatibility child is
+complete; its generic binding-surface child is next.
 
-**Next slice:** Milestone 7.4b8z Contracts-owned binding artifact compatibility for `STD-0767`.
+**Next slice:** Milestone 7.4b8aa generic binding-surface contract for `STD-0768`, `STD-0769`, `STD-0770`, and `STD-0771`.
 
 **Acceptance status:** `partial`
 
@@ -1204,8 +1204,17 @@ all structural/routing fixtures pass.
      - reject one-library-per-target, separate-package, bundle,
        framework-name, example-archive, internal-input publication, and
        default-success assumptions with typed outcomes.
-   - `7.4b8z` (`Planned`): replace `STD-0767` with Contracts-owned binding
-     artifact compatibility.
+   - `7.4b8z` (`Accepted`): replace `STD-0767` with Contracts-owned binding
+     artifact compatibility;
+     - classify native adapters, generator inputs, generated source, host and
+       native packages, ABI, wire, and persisted representations
+       independently;
+     - use common build or release provenance only as consistency evidence,
+       not as a compatibility class, window, or lockstep-version decision;
+     - preserve coordinated replacement and independently consumed windows
+       according to each artifact's declared contract; and
+     - reject forced lockstep or independent versions, compatibility shims,
+       incomplete evidence, and default success with typed outcomes.
    - `7.4b8aa` (`Planned`): replace `STD-0768` through `STD-0771` with the
      generic binding-surface contract.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,

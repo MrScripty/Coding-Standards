@@ -3556,3 +3556,28 @@ downstream repository changed.
 
 **Next slice:** `7.4b8z`, replace `STD-0767` with Contracts-owned binding
 artifact compatibility.
+
+## 2026-07-29: Milestone 7.4b8z Binding Artifact Compatibility
+
+**Outcome:** Accepted.
+
+`STD-0767` now classifies native adapters, canonical generator inputs,
+generated source, host and native packages, ABI, wire, and persisted
+representations under each artifact's applicable Contracts-owned compatibility
+class.
+
+**Verification:** 19 reusable decisions; one additional exact disposition;
+canonical Contracts and bounded legacy assertions; contract ownership, row-5,
+row-7 decomposition, immutable train, plan lifecycle, shell syntax,
+whitespace, and complete fail-fast checker-suite verification.
+
+**No-fallback result:** shared build or release provenance cannot select a
+compatibility class, window, or lockstep version relationship. Forced
+lockstep/independent versions, compatibility shims, incomplete evidence, and
+default success remain rejected with typed invalid or unavailable outcomes.
+
+No generic binding surface, routing, metadata, lockfile, generated inventory,
+owner map, configuration, or downstream repository changed.
+
+**Next slice:** `7.4b8aa`, replace `STD-0768` through `STD-0771` with the
+generic binding-surface contract.

@@ -47,20 +47,25 @@ while IFS=$'\t' read -r case_id class deployment change generator_input \
   }
 done < "$DECISIONS"
 
-expected_ids=(STD-0807 STD-0808)
+expected_ids=(STD-0767 STD-0807 STD-0808)
 mapfile -t inventory_ids < <(
-  awk -F '\t' '$1 == "STD-0807" || $1 == "STD-0808" { print $1 }' "$INVENTORY"
+  awk -F '\t' '
+    $1 == "STD-0767" || $1 == "STD-0807" || $1 == "STD-0808" { print $1 }
+  ' "$INVENTORY" | sort
 )
 mapfile -t disposition_ids < <(
-  awk -F '\t' 'NR > 1 && ($1 == "STD-0807" || $1 == "STD-0808") { print $1 }' \
-    "$DISPOSITIONS"
+  awk -F '\t' '
+    NR > 1 && ($1 == "STD-0767" || $1 == "STD-0807" || $1 == "STD-0808") {
+      print $1
+    }
+  ' "$DISPOSITIONS" | sort
 )
 [[ "${inventory_ids[*]}" == "${expected_ids[*]}" ]]
 [[ "${disposition_ids[*]}" == "${expected_ids[*]}" ]]
 
 while IFS=$'\t' read -r id source target disposition rationale extra; do
   case "$id" in
-    STD-0807|STD-0808)
+    STD-0767|STD-0807|STD-0808)
       [[ "$source:$target:$disposition" == \
         'languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md:topics/contracts.md:refine' ]]
       [[ -n "$rationale" && -z "${extra:-}" ]]
@@ -72,6 +77,8 @@ required_contracts=(
   'classify each affected artifact independently'
   'canonical generator input'
   'shared release input'
+  'Common build or release provenance'
+  'does not select a compatibility class'
   'Regenerate only affected outputs'
   'private implementation change does not require'
   'derive every affected output deterministically'
@@ -82,6 +89,20 @@ required_contracts=(
 )
 for text in "${required_contracts[@]}"; do
   rg -F -q "$text" "$CONTRACTS"
+done
+
+compatibility_section="$(
+  sed -n '/^### Compatibility Notes$/,/^---$/p' "$LEGACY"
+)"
+rg -F -q 'topics/contracts.md#cross-language-contract-selection' \
+  <<< "$compatibility_section"
+rg -F -q 'does not impose one compatibility promise' \
+  <<< "$compatibility_section"
+for removed in \
+  'Product-facing naming may differ' \
+  'If a native library name or generated package name changes' \
+  'Binding packages should state whether'; do
+  ! rg -F -q "$removed" <<< "$compatibility_section"
 done
 
 legacy_section="$(
@@ -103,5 +124,5 @@ rg -F -q '`7.4b8q` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-row-5-decomposition.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 
-printf 'Binding contract evolution passed: %s decisions, 2 exact dispositions\n' \
+printf 'Binding contract evolution passed: %s decisions, 3 exact dispositions\n' \
   "$(( $(wc -l < "$DECISIONS") - 1 ))"

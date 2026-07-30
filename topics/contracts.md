@@ -136,6 +136,9 @@ adapter API, canonical generator input, generated source, host package, native
 package, stable ABI, wire representation, and persisted representation. One
 release may coordinate several artifacts, but a shared release input or
 version identifier does not give them one compatibility promise.
+Common build or release provenance may establish source-to-artifact
+consistency evidence; it does not select a compatibility class, compatibility
+window, or lockstep version relationship.
 
 Regenerate only affected outputs when their canonical generation input or
 generator changes. An unrelated private implementation change does not require

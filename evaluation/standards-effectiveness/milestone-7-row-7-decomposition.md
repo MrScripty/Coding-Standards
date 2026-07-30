@@ -136,5 +136,10 @@ Milestone `7.4b8y` accepted child `7.2`, `STD-0763` through `STD-0766`, as
 Release-owned binding artifact roles and composition with 23 decision cases
 and four exact dispositions.
 
-Milestone `7.4b8z` performs bounded pre-slice review and implementation of
-child `7.3`, `STD-0767`, in Contracts.
+Milestone `7.4b8z` accepted child `7.3`, `STD-0767`, as Contracts-owned
+per-artifact compatibility with 19 decision cases and one additional exact
+disposition.
+
+Milestone `7.4b8aa` performs bounded pre-slice review and implementation of
+child `7.4`, `STD-0768` through `STD-0771`, in the generic Language Binding
+profile.

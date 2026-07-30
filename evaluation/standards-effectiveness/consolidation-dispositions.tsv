@@ -363,3 +363,4 @@ STD-0763	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md
 STD-0764	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md	refine	derive shipped artifact set composition identity relationships and evidence from release and consumer facts
 STD-0765	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md	remove	remove product-specific example archive names rather than treating them as release policy
 STD-0766	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md	refine	preserve product identity and explicit artifact relationships without fixed package architecture
+STD-0767	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	topics/contracts.md	refine	classify every binding artifact independently and reject compatibility or lockstep versions inferred from shared provenance

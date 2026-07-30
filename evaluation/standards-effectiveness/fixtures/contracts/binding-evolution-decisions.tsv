@@ -9,6 +9,7 @@ unsupported_public	public-versioned	independent	unsupported	not-applicable	contr
 wrong_coordinated_deployment	internal-coordinated	independent	breaking	not-applicable	contract-selected	complete	none	typed-invalid
 generated_missing_input	generated	atomic	compatible	not-applicable	contract-selected	complete	none	typed-invalid
 forced_lockstep	public-versioned	independent	compatible	not-applicable	forced-lockstep	complete	none	typed-invalid
+shared_build_forced_lockstep	generated	atomic	compatible	unchanged	forced-lockstep	complete	none	typed-invalid
 forced_independent	internal-coordinated	atomic	compatible	not-applicable	forced-independent	complete	none	typed-invalid
 missing_version_contract	public-versioned	independent	compatible	not-applicable	missing	complete	none	typed-unavailable
 missing_evidence	generated	atomic	compatible	changed	contract-selected	missing	none	typed-unavailable

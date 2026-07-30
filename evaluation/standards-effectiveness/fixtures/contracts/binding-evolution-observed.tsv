@@ -9,6 +9,7 @@ unsupported_public	typed-unsupported
 wrong_coordinated_deployment	typed-invalid
 generated_missing_input	typed-invalid
 forced_lockstep	typed-invalid
+shared_build_forced_lockstep	typed-invalid
 forced_independent	typed-invalid
 missing_version_contract	typed-unavailable
 missing_evidence	typed-unavailable
