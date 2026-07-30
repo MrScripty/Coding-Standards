@@ -79,7 +79,7 @@ done < "$PACKAGES"
 [[ "$row_count" -eq 43 ]]
 [[ "${#seen_orders[@]}" -eq 43 ]]
 [[ "${#package_seen[@]}" -eq 39 ]]
-[[ "${#missing_owners[@]}" -eq 13 ]]
+[[ "${#missing_owners[@]}" -eq 12 ]]
 
 for order in $(seq 5 47); do
   [[ -n "${seen_orders[$order]:-}" ]]
@@ -108,7 +108,7 @@ required_report=(
   '`migration-structure`'
   '`custom-semantic`'
   'There is no wholesale checker rewrite'
-  'Thirteen canonical owners are still missing'
+  'Twelve canonical owners are still missing'
   '`isolated-draft`'
   '`serial-only`'
   'Both reviews are required'
@@ -139,7 +139,7 @@ rg -F -q '`7.4b8x` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8y` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8z` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ai'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8aj'* ]]
 
 [[ -x "$DECISION_ENGINE" && -x "$DECISION_ENGINE_FIXTURES" ]]
 "$DECISION_ENGINE_FIXTURES"

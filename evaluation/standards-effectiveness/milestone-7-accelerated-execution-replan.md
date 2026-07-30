@@ -145,7 +145,7 @@ cannot mask an earlier failure.
 
 ## Missing-Owner Sequence
 
-Thirteen canonical owners are still missing. They are established in
+Twelve canonical owners are still missing. They are established in
 dependency order as useful minimum modules, never empty stubs:
 
 1. `topics/resilience.md`
@@ -244,7 +244,7 @@ This re-plan is accepted when:
 
 - all 43 pending train rows appear exactly once in the manifest;
 - the rows map to 39 owner-, outcome-, and train-coherent packages;
-- all 13 missing owners have one dependency-ordered creation package;
+- all 12 remaining missing owners have one dependency-ordered creation package;
 - package enums, owners, train waves, and wave gates match their authorities;
 - no completed train row or normative artifact changes;
 - the active plan names only the reusable-verifier foundation for the active

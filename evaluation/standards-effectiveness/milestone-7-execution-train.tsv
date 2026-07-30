@@ -9,7 +9,7 @@ order	wave	start_id	end_id	source	owner	owner_state	activation	checkpoint
 8	trust-boundaries	STD-0782	STD-0789	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	exists	owner-review	focused
 9	trust-boundaries	STD-0792	STD-0793	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	exists	owner-review	focused
 10	trust-boundaries	STD-0826	STD-0826	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	exists	owner-review	full-suite
-11	lifecycle-runtime	STD-0119	STD-0125	ARCHITECTURE-PATTERNS.md	topics/resilience.md	missing	owner-review	focused
+11	lifecycle-runtime	STD-0119	STD-0125	ARCHITECTURE-PATTERNS.md	topics/resilience.md	exists	owner-review	focused
 12	lifecycle-runtime	STD-0269	STD-0269	CONCURRENCY-STANDARDS.md	topics/concurrency.md	exists	pre-slice-review	focused
 13	lifecycle-runtime	STD-0273	STD-0279	CONCURRENCY-STANDARDS.md	topics/concurrency.md	exists	pre-slice-review	focused
 14	lifecycle-runtime	STD-0487	STD-0512	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	missing	owner-review	full-suite

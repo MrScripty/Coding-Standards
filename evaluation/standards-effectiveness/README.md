@@ -167,6 +167,13 @@ owned child references remain explicit.
 panic handling for Rust security-sensitive production boundaries. They reject
 recoverable panics, missing invariant proof, and fallback recovery.
 
+`fixtures/resilience/owner-contract-decisions.tsv` and
+`verify-resilience-owner-contract.sh` establish the Resilience owner contract
+for dependency criticality, degradation, retry, startup recovery, and typed
+diagnostics. They reject unbounded retry, ignored required failures, default
+success, and fallback recovery while the remaining resilience identifiers are
+populated.
+
 `fixtures/rust/binding-contract-discovery-*.tsv` and
 `verify-rust-binding-contract-discovery.sh` adapt only a Contracts-selected
 identity, version, or capability mechanism. They reject universal version

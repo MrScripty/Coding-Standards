@@ -86,6 +86,7 @@ condition is present:
 | Accessibility or user interaction semantics | [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) |
 | Runtime decoding, contract evolution, persistence compatibility, version overlap, or degraded outcomes | [Contracts](topics/contracts.md) |
 | Shared mutable state, overlapping work, async failure ownership, cancellation, or shutdown | [Concurrency](topics/concurrency.md) |
+| Dependency or service failure, retry, degradation, startup resilience, or recovery semantics | [Resilience](topics/resilience.md) |
 | Filesystem path construction, identity, comparison, or supported-filesystem behavior | [Cross-platform](topics/cross-platform.md) |
 | Other multiple declared operating-system target concerns | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) until migration |
 | Third-party package selection or update | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) |
