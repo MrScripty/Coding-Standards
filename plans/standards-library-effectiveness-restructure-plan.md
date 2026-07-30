@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust binding row 7 is complete; bounded owner review of
-Rust binding row 8 is next.
+**Current phase:** Rust binding row 8 is decomposed into Contracts, Rust,
+Release, and legacy-index children; its Contracts child is next.
 
-**Next slice:** Milestone 7.4b8ab bounded owner review of `STD-0782`, `STD-0783`, `STD-0784`, `STD-0785`, `STD-0786`, `STD-0787`, `STD-0788`, and `STD-0789`.
+**Next slice:** Milestone 7.4b8ac Contracts-owned generation authority for `STD-0782` and `STD-0783`.
 
 **Acceptance status:** `partial`
 
@@ -1225,8 +1225,12 @@ all structural/routing fixtures pass.
      - permit declared host subsets without forcing parity or divergence; and
      - reject automatic exports, fixed support tiers, wrapper-owned semantics,
        native-only evidence, and default success with typed outcomes.
-   - `7.4b8ab` (`Planned`): perform bounded owner review of `STD-0782` through
-     `STD-0789` before normative movement.
+   - `7.4b8ab` (`Accepted`): decompose `STD-0782` through `STD-0789` into
+     Contracts generation authority, Rust annotation placement, Release build
+     and generation procedure, and legacy-index children.
+   - `7.4b8ac` (`Planned`): replace `STD-0782` and `STD-0783` with
+     Contracts-owned canonical generation authority and derived-output
+     consistency.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

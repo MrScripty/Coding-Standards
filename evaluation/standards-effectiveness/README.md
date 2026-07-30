@@ -96,6 +96,12 @@ surface governance. Its checker proves exact ordered overlay coverage, zero
 premature dispositions, existing owners, package prerequisite correction, and
 active cursor integrity.
 
+`milestone-7-row-8-decomposition.md` splits immutable row 8 into Contracts
+generation authority, Rust annotation placement, Release build/generation
+procedures, and a legacy-index closure. Its checker proves exact ordered
+coverage, zero premature dispositions, package prerequisites, and active
+cursor integrity.
+
 `fixtures/rust/binding-core-adapter-testability-*.tsv` and
 `verify-rust-binding-core-adapter-testability.sh` require distinct
 framework-free core and real native/host adapter evidence. They reject

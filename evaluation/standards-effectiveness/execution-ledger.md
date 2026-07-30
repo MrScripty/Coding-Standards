@@ -3607,3 +3607,31 @@ changed.
 
 **Next slice:** `7.4b8ab`, bounded owner review of `STD-0782` through
 `STD-0789`.
+
+## 2026-07-29: Milestone 7.4b8ab Rust Binding Generation Row Decomposition
+
+**Outcome:** Accepted.
+
+The bounded owner review split `STD-0782` through `STD-0789` into Contracts
+generation authority, Rust annotation placement, Release build/generation
+procedures, and a final legacy-index closure. The frozen text cannot remain a
+single Rust rule because it mixes canonical contract authority with adapter
+specialization, release procedures, and structural navigation.
+
+**Verification:** exact eight-ID overlay coverage; four ordered existing-owner
+children; zero premature dispositions; corrected package outcome and
+prerequisites; active-cursor handoff; accelerated execution, immutable train,
+plan lifecycle, shell syntax, whitespace, and complete fail-fast checker-suite
+verification.
+
+**No-fallback result:** compiled-library, annotated-Rust, proc-macro,
+framework, command, package, output-path, and target-language examples do not
+become default generation policy. Missing or contradictory facts require typed
+diagnostics rather than guessed commands, another generator, hand-maintained
+bindings, or default success.
+
+No normative or legacy standard, disposition, router, metadata, generated
+inventory, configuration, lockfile, or downstream repository changed.
+
+**Next slice:** `7.4b8ac`, replace `STD-0782` and `STD-0783` with
+Contracts-owned generation authority.
