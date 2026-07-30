@@ -165,6 +165,22 @@ separate host packages, a convenience bundle, framework-derived names, example
 archive names, or default success. Do not publish an internal build input
 merely because it participates in binding generation.
 
+### Binding Generation Procedures
+
+When the accepted release artifact plan includes generated bindings, derive a
+procedure from that plan rather than from a language profile example. The
+procedure must identify the Contracts-selected generation authority, generator capability and version, build and dependency inputs, target and consumer
+claims, output artifacts, reproducibility controls, and evidence connecting
+each output to its accepted input. Commands are selected only after those
+facts and their owner are accepted.
+
+Do not infer a procedure from a compiled native library, source annotation,
+framework default, target-language list, package name, output directory, or
+globally installed tool. Do not switch generators, hand-edit generated output,
+silently regenerate missing inputs, or claim success when a required toolchain,
+authority, target, output, or evidence fact is unavailable. Return a typed `release-procedure` diagnostic for missing capability and a typed `invalid`
+outcome for contradictory ownership or derivation.
+
 Select integrity and supply-chain metadata from actual requirements:
 
 - provide cryptographic checksums when consumers or the distribution channel

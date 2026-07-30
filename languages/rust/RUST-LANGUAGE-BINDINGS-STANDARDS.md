@@ -186,31 +186,13 @@ separate authority file, a framework, or a target language by default.
 
 ### Generation Commands
 
-Build the cdylib, then generate per-language bindings from the compiled
-artifact:
-
-```bash
-# Build the shared library
-cargo build -p mylib-uniffi --release
-
-# Generate Python bindings
-cargo run -p mylib-uniffi --features cli --bin mylib-uniffi-bindgen -- \
-    generate --library --language python \
-    --out-dir ./bindings/python target/release/libmylib_uniffi.so
-
-# Generate C# bindings (community bindgen)
-uniffi-bindgen-cs --library --config crates/mylib-uniffi/uniffi.toml \
-    --out-dir ./bindings/csharp target/release/libmylib_uniffi.so
-```
-
-Using a custom bindgen binary (`src/bin/uniffi_bindgen.rs`) instead of a
-globally installed tool ensures version consistency across the team:
-
-```rust
-fn main() {
-    uniffi::uniffi_bindgen_main()
-}
-```
+Binding build and generation procedures moved to
+[Binding Generation Procedures](../../workflows/release.md#binding-generation-procedures).
+The release artifact plan selects the applicable authority, generator,
+toolchain, targets, outputs, reproducibility controls, and evidence. Rust does
+not prescribe a package, binary, output path, framework, language, or command.
+Missing or contradictory procedure facts return a typed release-procedure
+diagnostic rather than a guessed command or alternate generator.
 
 ---
 

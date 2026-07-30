@@ -60,3 +60,10 @@ annotation placement with nine decision cases and one exact disposition.
 
 Milestone `7.4b8ae` performs bounded pre-slice review and implementation of
 child `8.3`, `STD-0785` through `STD-0788`, in Release.
+
+Milestone `7.4b8ae` accepted child `8.3`, `STD-0785` through `STD-0788`, as
+Release-owned binding generation procedure with 11 decision cases and four
+exact dispositions.
+
+Milestone `7.4b8af` performs bounded pre-slice review and implementation of
+child `8.4`, `STD-0789`, as legacy-index closure.

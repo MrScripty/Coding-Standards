@@ -152,6 +152,12 @@ hand-maintained bindings, and default success as authority or recovery paths.
 from the declared mechanism and core-adapter ownership. They reject coupled
 core annotations plus proc-macro or separate-definition defaults.
 
+`fixtures/release/binding-generation-procedure-decisions.tsv` and
+`verify-release-binding-generation-procedure.sh` derive binding generation
+procedures from accepted release artifact plans. They reject fixed commands,
+compiled-artifact defaults, alternate generators, and missing toolchain or
+evidence facts.
+
 `fixtures/rust/binding-contract-discovery-*.tsv` and
 `verify-rust-binding-contract-discovery.sh` adapt only a Contracts-selected
 identity, version, or capability mechanism. They reject universal version

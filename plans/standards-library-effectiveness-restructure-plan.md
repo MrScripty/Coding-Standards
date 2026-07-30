@@ -9,7 +9,7 @@
 **Current phase:** Rust binding row 8 Contracts generation-authority child is
 complete; its Rust annotation-placement child is next.
 
-**Next slice:** Milestone 7.4b8ae Release binding generation procedures for `STD-0785`, `STD-0786`, `STD-0787`, and `STD-0788`.
+**Next slice:** Milestone 7.4b8af legacy-index closure for `STD-0789`.
 
 **Acceptance status:** `partial`
 
@@ -1244,6 +1244,8 @@ all structural/routing fixtures pass.
      defaults with typed outcomes.
    - `7.4b8ae` (`Planned`): replace `STD-0785` through `STD-0788` with
      Release-owned binding generation procedures.
+   - `7.4b8af` (`Planned`): close the remaining Rust build-organization
+     heading as a non-normative legacy index after its child moves.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

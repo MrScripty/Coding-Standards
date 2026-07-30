@@ -3667,3 +3667,10 @@ invalid or unavailable outcomes.
 
 **Next slice:** `7.4b8ae`, replace `STD-0785` through `STD-0788` with
 Release-owned binding generation procedures.
+
+**Slice `7.4b8ae` accepted:** `STD-0785` through `STD-0788` now derive
+binding build and generation procedures from the accepted release artifact
+plan. The 11-case fixture rejects fixed commands, compiled-artifact defaults,
+alternate generators, and missing procedure evidence.
+
+**Next slice:** `7.4b8af`, close `STD-0789` as the Rust legacy-index heading.

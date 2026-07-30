@@ -23,7 +23,7 @@ mapfile -t actual_ids < <(awk -F '\t' '$1 == 8 { n = split($3, ids, ","); for (i
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
 
 mapfile -t dispositions < <(awk -F '\t' 'NR > 1 && $1 >= "STD-0782" && $1 <= "STD-0789" { print $1 }' "$DISPOSITIONS")
-[[ "${dispositions[*]}" == 'STD-0782 STD-0783 STD-0784' ]]
+[[ "${dispositions[*]}" == 'STD-0782 STD-0783 STD-0784 STD-0785 STD-0786 STD-0787 STD-0788' ]]
 
 package_row="$(awk -F '\t' '$1 == 8 { print $1 "\t" $2 "\t" $3 "\t" $4 "\t" $9 "\t" $10 }' "$PACKAGES")"
 [[ "$package_row" == $'8\tP04\trefinement\tprofiles/languages/rust/language-bindings.md\trust-binding-generation-and-build-decomposition\tcore,workflow.verification,workflow.release,profile.language.rust,profile.boundary.language-bindings,topic.contracts' ]]
@@ -45,10 +45,10 @@ rg -F -q '`7.4b8ac` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ad` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ae` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ae'* ]]
-[[ "$next_slice_line" == *'STD-0785'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8af'* ]]
+[[ "$next_slice_line" == *'STD-0789'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-8 decomposition passed: child 8.2 accepted; 5 IDs remain across 2 ordered children\n'
+printf 'Milestone 7 row-8 decomposition passed: child 8.3 accepted; 1 ID remains across 1 ordered child\n'
