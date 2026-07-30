@@ -89,6 +89,13 @@ installation information, and Verification-owned platform evidence
 scheduling. Its checker proves exact ordered overlay coverage, zero premature
 dispositions, existing owners, package handoff, and active cursor integrity.
 
+`milestone-7-row-7-decomposition.md` splits immutable row 7 into Rust binding
+workspace/evidence, Release-owned binding artifact composition,
+Contracts-owned artifact compatibility, and generic Language Binding-owned
+surface governance. Its checker proves exact ordered overlay coverage, zero
+premature dispositions, existing owners, package prerequisite correction, and
+active cursor integrity.
+
 `fixtures/rust/binding-core-adapter-testability-*.tsv` and
 `verify-rust-binding-core-adapter-testability.sh` require distinct
 framework-free core and real native/host adapter evidence. They reject

@@ -65,6 +65,7 @@ changes and focused fixture evidence.
 | F071 | Resolved in Milestone 7.4b8m | Repeated decision-fixture parsing now has one strict table engine for schema domains, unique cases, exact observation coverage, and outcome comparison; package checkers retain domain derivation without `eval`, embedded generic policy, or legacy schema fallback. |
 | F072 | Resolved in Milestone 7.4b8n | Immutable row 5 now has ordered Rust testability, generic mechanism-selection, Contracts evolution, and Rust discovery-adaptation children; fixed framework, compatibility, lockstep-version, and version-export defaults cannot become one binding rule. |
 | F073 | Resolved in Milestone 7.4b8s | Immutable row 6 now has ordered Cross-Platform loading, Release artifact identity/installability, and Verification evidence-scheduling children; fixed Strategy, filename, platform, provider-matrix, fail-fast, and trigger defaults cannot become one cross-platform rule. |
+| F074 | Resolved in Milestone 7.4b8w | Immutable row 7 now has ordered Rust workspace/evidence, Release artifact composition, Contracts compatibility, and generic binding-surface children; example layouts, test exclusion, packaging/version defaults, and automatic surface exposure cannot become one Rust rule. |
 
 ## Systemic Findings
 
@@ -90,6 +91,7 @@ changes and focused fixture evidence.
 | F071 | Repeated fixture plumbing | Decision-oriented owner checkers repeatedly parse TSV headers, domains, unique cases, and expected/actual comparisons | Establish one strict reusable table engine while leaving package-specific semantic derivation with each owner checker; reject malformed or incomplete tables rather than guessing. | 7 |
 | F072 | Mixed-role Rust binding row | Frozen IDs `STD-0804`-`STD-0809`; immutable execution row 5 | Decompose framework-independent testability, generic boundary selection, contract evolution, and Rust discovery adaptation before normative movement. | 7 |
 | F073 | Mixed-role cross-platform row | Frozen IDs `STD-0294`-`STD-0299`; immutable execution row 6 | Decompose native artifact loading, release artifact identity/installability, and target evidence scheduling before normative movement. | 7 |
+| F074 | Mixed-role Rust binding workspace and surface row | Frozen IDs `STD-0761`-`STD-0771`; immutable execution row 7 | Decompose Rust package/evidence boundaries, Release artifact composition, Contracts compatibility, and generic binding-surface governance before normative movement. | 7 |
 | F032 | Consolidation ownership | `DOCUMENTATION-STANDARDS.md`; frozen IDs `STD-0349`-`STD-0448` | Move examples, documentation policy, and changelog guidance in separate reference, workflow, and release-owner slices. | 7 |
 | F033 | Fixture ownership | `verify-consolidation-dispositions.sh`; shared disposition ledger | Filter each owner-specific fixture by source and verify new source groups independently. | 7 |
 | F034 | Missing canonical owner | `owner-map.tsv`; `RELEASE-STANDARDS.md`; absent `workflows/release.md` | Establish release workflow ownership in an owner-bounded slice before moving changelog policy or closing the documentation index. | 7 |

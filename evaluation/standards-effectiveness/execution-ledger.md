@@ -3473,3 +3473,33 @@ map, configuration, or downstream repository changed.
 
 **Next slice:** `7.4b8w`, bounded owner review of `STD-0761` through
 `STD-0771`.
+
+## 2026-07-29: Milestone 7.4b8w Rust Binding Row Decomposition
+
+**Outcome:** Accepted.
+
+The bounded owner review found four independently changeable outcomes in
+`STD-0761` through `STD-0771`: Rust binding workspace/evidence boundaries,
+Release artifact roles/composition, Contracts compatibility, and generic
+binding-surface governance. Immutable row 7 now has four ordered children
+owned by Rust Language Binding, Release, Contracts, and generic Language
+Binding.
+
+**Verification:** exact eleven-ID overlay coverage; four existing canonical
+owners; zero premature dispositions; corrected package outcome/prerequisites;
+active-cursor handoff; accelerated execution, immutable train, plan lifecycle,
+shell syntax, whitespace, and complete fail-fast checker-suite verification.
+
+**No-fallback result:** prescribed workspace paths, `default-members` evidence
+exclusion, one-library/separate-package/bundle defaults, framework product
+identity, example ZIP names, forced version matching, automatic exports, fixed
+support-tier labels, and native-only evidence substitution are excluded from
+the planned canonical contracts. Missing or contradictory facts require typed
+diagnostics.
+
+No normative or legacy standard, disposition, generated artifact, owner map,
+immutable train row, router, metadata, dependency declaration, decision
+fixture, configuration, lockfile, or downstream repository changed.
+
+**Next slice:** `7.4b8x`, replace `STD-0761` and `STD-0762` with the Rust
+binding workspace and evidence boundary.

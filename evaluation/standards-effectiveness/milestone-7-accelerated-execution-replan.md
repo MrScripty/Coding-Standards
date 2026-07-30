@@ -121,6 +121,14 @@ Verification owners replace its stale one-owner outcome. The next slice,
 `7.4b8t`, implements child `6.1`, `STD-0294` and `STD-0295`, without mandatory
 Strategy, alternate-loader, or guessed-artifact fallback.
 
+Accepted slice `7.4b8w` records the exact four-child row-7 decomposition in
+[its focused report](milestone-7-row-7-decomposition.md). Package `P03`
+retains its consolidation classification while ordered Rust Language Binding,
+Release, Contracts, and generic Language Binding owners replace its stale
+one-owner outcome. The next slice, `7.4b8x`, implements child `7.1`,
+`STD-0761` and `STD-0762`, without fixed workspace layout, excluded required
+host evidence, or alternate native-only evidence.
+
 ## Verification Matrix
 
 | Change | Required verification |

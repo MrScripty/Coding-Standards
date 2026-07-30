@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Cross-platform row 6 is complete; Rust binding row 7 owner
-review is next.
+**Current phase:** Rust binding row 7 is decomposed; its workspace and evidence
+child is next.
 
-**Next slice:** Milestone 7.4b8w Rust binding owner review for active row `STD-0761` through `STD-0771`.
+**Next slice:** Milestone 7.4b8x Rust binding workspace and evidence contract for `STD-0761` and `STD-0762`.
 
 **Acceptance status:** `partial`
 
@@ -1172,8 +1172,24 @@ all structural/routing fixtures pass.
        fan-out from project risk and environment facts; and
      - reject fixed targets, current-platform substitution, weakened support,
        provider matrices, fixed triggers, and default success.
-   - `7.4b8w` (`Planned`): perform bounded owner review of Rust binding row
-     `STD-0761` through `STD-0771`.
+   - `7.4b8w` (`Accepted`): reject the stale one-owner implementation proposal
+     and decompose baseline row 7 into four ordered children;
+     - `STD-0761` and `STD-0762` remain Rust Language Binding-owned package
+       separation and native/host evidence obligations without prescribed
+       workspace paths or test exclusion;
+     - `STD-0763` through `STD-0766` move to Release-owned artifact roles,
+       relationships, composition, and consumer information;
+     - `STD-0767` moves to Contracts-owned per-artifact compatibility; and
+     - `STD-0768` through `STD-0771` move to generic Language Binding-owned
+       exported surface and support contracts.
+   - `7.4b8x` (`Planned`): replace `STD-0761` and `STD-0762` with the Rust
+     binding workspace and evidence boundary.
+   - `7.4b8y` (`Planned`): replace `STD-0763` through `STD-0766` with
+     Release-owned binding artifact roles and composition.
+   - `7.4b8z` (`Planned`): replace `STD-0767` with Contracts-owned binding
+     artifact compatibility.
+   - `7.4b8aa` (`Planned`): replace `STD-0768` through `STD-0771` with the
+     generic binding-surface contract.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
