@@ -1,0 +1,10 @@
+column	allowed
+case	*
+release_contract	declared,missing,contradictory
+channel	registry,archive,installer,system,internal,unknown
+identity	exact,missing,ambiguous
+target	exact,unknown,unsupported
+consumer_info	complete,missing,not-required
+evidence	matched,missing
+fallback	none,os-filename,platform-class-doc,ambient-package,alternate-artifact,default-success
+expected	allow,typed-invalid,typed-unsupported,typed-unavailable

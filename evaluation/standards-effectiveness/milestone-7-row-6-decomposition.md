@@ -113,5 +113,9 @@ Milestone `7.4b8t` accepted child `6.1`, `STD-0294` and `STD-0295`, as the
 Cross-Platform native artifact loading contract with focused decision-table
 evidence and two exact dispositions.
 
-Milestone `7.4b8u` implements child `6.2`, `STD-0296` and `STD-0297`, as
-Release-owned native artifact identity and installation information.
+Milestone `7.4b8u` accepted child `6.2`, `STD-0296` and `STD-0297`, as
+Release-owned native artifact identity and installation information with 19
+decision cases and two exact dispositions.
+
+Milestone `7.4b8v` implements child `6.3`, `STD-0298` and `STD-0299`, as
+Verification-owned platform evidence scheduling.

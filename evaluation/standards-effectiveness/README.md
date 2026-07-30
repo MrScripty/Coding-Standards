@@ -210,6 +210,12 @@ artifact and deployment contracts. They prove two exact dispositions and
 reject mandatory Strategy, guessed names, ambient discovery, alternate
 loaders/artifacts, embedded copies, and default success with typed outcomes.
 
+`fixtures/release/native-artifact-*.tsv` and
+`verify-native-artifact-release.sh` derive native identity and consumer
+information from release and channel facts. They prove two exact dispositions
+and reject OS filename tables, class-local installation prose, ambient package
+identity, alternate artifacts, and incomplete publication.
+
 ## IPC Payload Decision Fixtures
 
 `fixtures/ipc/action-payload-decisions.tsv` and

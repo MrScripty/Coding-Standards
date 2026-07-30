@@ -115,6 +115,24 @@ the facts consumers need to select the correct download. Prefer the ecosystem's
 native target and package conventions. Do not impose one cross-ecosystem
 filename template when a registry or installer owns identity and selection.
 
+For a native artifact, derive its package coordinate or filename, prefix,
+extension, target and architecture labels, and relationship to companion
+artifacts from the release unit, ecosystem, and distribution-channel contract.
+An operating-system name alone does not select these facts.
+
+Give affected consumers the authoritative acquisition location and the
+information required to verify, install or provision, and load the artifact,
+including required native dependencies and its relationship to the canonical
+[loading contract](../topics/cross-platform.md#native-artifact-loading).
+Place this information on the publication or package surface selected by the
+consumer contract; do not attach installation prose to every
+platform-specific implementation.
+
+Return an unresolved artifact-plan diagnostic for missing or contradictory
+identity, target, acquisition, installation, loading, or evidence facts. Do not
+guess a conventional filename, use an ambient package as identity, substitute
+another artifact, or publish with incomplete consumer information.
+
 Select integrity and supply-chain metadata from actual requirements:
 
 - provide cryptographic checksums when consumers or the distribution channel

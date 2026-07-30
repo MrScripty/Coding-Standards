@@ -45,7 +45,7 @@ mapfile -t actual_ids < <(
 )
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
 
-expected_disposition_ids=(STD-0294 STD-0295)
+expected_disposition_ids=(STD-0294 STD-0295 STD-0296 STD-0297)
 mapfile -t actual_disposition_ids < <(
   awk -F '\t' 'NR > 1 && $1 >= "STD-0294" && $1 <= "STD-0299" { print $1 }' \
     "$DISPOSITIONS"
@@ -78,14 +78,14 @@ done
 rg -F -q '| F073 | Resolved in Milestone 7.4b8s |' "$FINDINGS"
 rg -F -q '`7.4b8s` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8t` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8u` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8u` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8v` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8u'* ]]
-[[ "$next_slice_line" == *'STD-0296'* ]]
-[[ "$next_slice_line" == *'STD-0297'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8v'* ]]
+[[ "$next_slice_line" == *'STD-0298'* ]]
+[[ "$next_slice_line" == *'STD-0299'* ]]
 
 "$SCRIPT_DIR/verify-milestone-7-accelerated-execution-replan.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-6 decomposition passed: child 6.1 accepted; 2/6 IDs disposed\n'
+printf 'Milestone 7 row-6 decomposition passed: children 6.1-6.2 accepted; 4/6 IDs disposed\n'

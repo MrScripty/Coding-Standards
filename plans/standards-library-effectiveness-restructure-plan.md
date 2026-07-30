@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Cross-platform row 6 child 6.1 is complete; Release-owned
-native artifact identity and installation information are next.
+**Current phase:** Cross-platform row 6 children 6.1 and 6.2 are complete;
+Verification-owned platform evidence scheduling is next.
 
-**Next slice:** Milestone 7.4b8u native artifact identity and installation for active child `STD-0296` and `STD-0297`.
+**Next slice:** Milestone 7.4b8v platform evidence scheduling for active child `STD-0298` and `STD-0299`.
 
 **Acceptance status:** `partial`
 
@@ -1154,8 +1154,14 @@ all structural/routing fixtures pass.
      - reject mandatory Strategy, guessed names, ambient discovery,
        alternate loaders/artifacts, embedded copies, and default success with
        typed invalid, unsupported, or unavailable outcomes.
-   - `7.4b8u` (`Planned`): replace `STD-0296` and `STD-0297` with
-     Release-owned native artifact identity and installation information.
+   - `7.4b8u` (`Accepted`): replace `STD-0296` and `STD-0297` with
+     Release-owned native artifact identity and installation information;
+     - derive package coordinates or filenames, target labels, and companion
+       relationships from release, ecosystem, and channel contracts;
+     - provide authoritative acquisition, verification, installation or
+       provisioning, dependency, and loading information; and
+     - reject OS-name filename defaults, class-local documentation, ambient
+       packages, alternate artifacts, and incomplete publication.
    - `7.4b8v` (`Planned`): replace `STD-0298` and `STD-0299` with
      Verification-owned platform evidence scheduling.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,

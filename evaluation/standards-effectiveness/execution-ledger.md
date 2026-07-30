@@ -3429,3 +3429,25 @@ owner map, configuration, or downstream repository changed.
 
 **Next slice:** `7.4b8u`, replace `STD-0296` and `STD-0297` with
 Release-owned native artifact identity and installation information.
+
+## 2026-07-29: Milestone 7.4b8u Native Artifact Release Contract
+
+**Outcome:** Accepted.
+
+`STD-0296` and `STD-0297` now derive native artifact identity and consumer
+acquisition, verification, installation/provisioning, dependency, and loading
+information from release, ecosystem, channel, target, and consumer facts.
+
+**Verification:** 19 reusable decisions; two exact dispositions; Release,
+legacy, row-6, immutable-train, lifecycle, shell, whitespace, and complete
+fail-fast suite checks.
+
+**No-fallback result:** OS filename defaults, platform-class documentation,
+ambient package identity, alternate artifacts, and incomplete publication are
+rejected with typed outcomes.
+
+No Verification scheduling, CI policy, routing, metadata, lockfile, generated
+inventory, owner map, configuration, or downstream repository changed.
+
+**Next slice:** `7.4b8v`, replace `STD-0298` and `STD-0299` with
+Verification-owned platform evidence scheduling.

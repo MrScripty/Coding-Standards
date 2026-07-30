@@ -30,16 +30,13 @@ See the
 
 ### Library Naming
 
-| Platform | Prefix | Extension | Example |
-|----------|--------|-----------|---------|
-| Linux | `lib` | `.so` | `libmylib.so` |
-| Windows | (none) | `.dll` | `mylib.dll` |
-| macOS | `lib` | `.dylib` | `libmylib.dylib` |
+Native artifact identity is governed by the canonical
+[Release artifact plan](workflows/release.md#artifact-plan).
 
 ### Installation Documentation
 
-Each platform-specific class should include installation instructions for its
-native dependencies. Users should not have to guess where to get libraries.
+Native artifact acquisition, installation, and loading information is governed
+by the canonical [Release artifact plan](workflows/release.md#artifact-plan).
 
 ---
 
