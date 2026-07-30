@@ -1,0 +1,8 @@
+column	allowed
+case	*
+authority	schema,generator-input,producer-contract,compiled-artifact,source-annotation,consumer-output,missing
+generator	available,missing
+derivation	deterministic,missing
+evidence	complete,missing
+fallback	none,alternate-generator,hand-maintained,default-success
+expected	allow,typed-invalid,typed-unavailable

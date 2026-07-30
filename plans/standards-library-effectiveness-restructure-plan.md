@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust binding row 8 is decomposed into Contracts, Rust,
-Release, and legacy-index children; its Contracts child is next.
+**Current phase:** Rust binding row 8 Contracts generation-authority child is
+complete; its Rust annotation-placement child is next.
 
-**Next slice:** Milestone 7.4b8ac Contracts-owned generation authority for `STD-0782` and `STD-0783`.
+**Next slice:** Milestone 7.4b8ad Rust binding annotation placement for `STD-0784`.
 
 **Acceptance status:** `partial`
 
@@ -1228,9 +1228,18 @@ all structural/routing fixtures pass.
    - `7.4b8ab` (`Accepted`): decompose `STD-0782` through `STD-0789` into
      Contracts generation authority, Rust annotation placement, Release build
      and generation procedure, and legacy-index children.
-   - `7.4b8ac` (`Planned`): replace `STD-0782` and `STD-0783` with
+   - `7.4b8ac` (`Accepted`): replace `STD-0782` and `STD-0783` with
      Contracts-owned canonical generation authority and derived-output
-     consistency.
+     consistency;
+     - select an owned schema/protocol, declared generator input, or explicit
+       producer contract as canonical authority;
+     - require generator capability, deterministic derivation, and
+       producer/consumer consistency evidence for affected outputs; and
+     - reject compiled artifacts, source annotations, generated consumer
+       output, alternate generators, hand-maintained bindings, and default
+       success with typed outcomes.
+   - `7.4b8ad` (`Planned`): replace `STD-0784` with Rust binding
+     annotation-placement policy.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

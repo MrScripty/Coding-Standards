@@ -170,26 +170,11 @@ the contract. It is not a catch-all recovery path.
 
 ## Code Generation Strategy
 
-### Single Source of Truth
-
-Bindings are generated from the compiled core library, never hand-maintained
-per language. The annotated Rust code is the single source of truth.
-
-```text
-┌──────────────────┐
-│  Annotated Rust  │
-│  (proc-macros)   │
-└────────┬─────────┘
-         │ cargo build
-┌────────▼─────────┐
-│  Compiled cdylib  │
-│  (.so/.dll/.dylib)│
-└────────┬─────────┘
-         │ uniffi-bindgen generate
-   ┌─────┼─────┬─────────┐
-   ▼     ▼     ▼         ▼
-Python  C#   Kotlin    Swift  ...
-```
+Canonical generation authority, generator capability, deterministic derivation,
+and producer/consumer consistency moved to
+[Cross-Language Contract Selection](../../topics/contracts.md#cross-language-contract-selection).
+Compiled artifacts, Rust annotations, framework inputs, and generated consumer
+output do not become canonical authority by default.
 
 ### Annotation Approach
 

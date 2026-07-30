@@ -3635,3 +3635,30 @@ inventory, configuration, lockfile, or downstream repository changed.
 
 **Next slice:** `7.4b8ac`, replace `STD-0782` and `STD-0783` with
 Contracts-owned generation authority.
+
+## 2026-07-29: Milestone 7.4b8ac Binding Generation Authority
+
+**Outcome:** Accepted.
+
+`STD-0782` and `STD-0783` now select canonical generation authority from an
+owned schema/protocol, declared generator input, or explicitly owned producer
+contract, then require generator capability, deterministic derivation, and
+producer/consumer consistency evidence for affected outputs.
+
+**Verification:** 13 reusable decisions; two exact dispositions; canonical
+Contracts and bounded legacy assertions; binding-contract evolution, row-8
+decomposition, immutable train, plan lifecycle, shell syntax, whitespace, and
+complete fail-fast checker-suite verification.
+
+**No-fallback result:** compiled artifacts, source annotations, generated
+consumer outputs, framework-accepted inputs, alternate generators,
+hand-maintained bindings, and default success cannot select or replace the
+canonical generation path. Missing authority, capability, derivation, or
+evidence returns typed invalid or unavailable outcomes.
+
+No Rust annotation placement, Release procedure, legacy-index closure, router,
+metadata, lockfile, generated inventory, owner map, configuration, or
+downstream repository changed.
+
+**Next slice:** `7.4b8ad`, replace `STD-0784` with Rust binding annotation
+placement policy.

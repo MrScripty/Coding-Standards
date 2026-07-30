@@ -364,6 +364,8 @@ STD-0764	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md
 STD-0765	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md	remove	remove product-specific example archive names rather than treating them as release policy
 STD-0766	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md	refine	preserve product identity and explicit artifact relationships without fixed package architecture
 STD-0767	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	topics/contracts.md	refine	classify every binding artifact independently and reject compatibility or lockstep versions inferred from shared provenance
+STD-0782	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	topics/contracts.md	refine	select canonical binding-generation authority from the applicable contract rather than a compiled artifact or framework default
+STD-0783	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	topics/contracts.md	refine	require declared generator deterministic derivation and producer-consumer consistency evidence for affected outputs
 STD-0768	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	select exported operations and representations from declared consumer and product contracts
 STD-0769	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	keep domain semantics in canonical owners and expose only explicitly selected binding surfaces
 STD-0770	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	derive support publication host subsets and evidence from project facts without fixed tiers or parity

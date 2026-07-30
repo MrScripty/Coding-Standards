@@ -48,5 +48,9 @@ lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8ac` performs bounded pre-slice review and implementation of
-child `8.1`, `STD-0782` and `STD-0783`, in Contracts.
+Milestone `7.4b8ac` accepted child `8.1`, `STD-0782` and `STD-0783`, as
+Contracts-owned generation authority with 13 decision cases and two exact
+dispositions.
+
+Milestone `7.4b8ad` performs bounded pre-slice review and implementation of
+child `8.2`, `STD-0784`, in the Rust Language Binding profile.

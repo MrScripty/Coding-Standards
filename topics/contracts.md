@@ -140,6 +140,14 @@ Common build or release provenance may establish source-to-artifact
 consistency evidence; it does not select a compatibility class, compatibility
 window, or lockstep version relationship.
 
+Select canonical generation authority from the applicable contract: an owned
+schema or protocol, declared generator input, or explicitly owned producer
+contract. A compiled implementation artifact, source annotation, generated
+consumer output, or whichever input a framework accepts is not canonical by
+default. When generation applies, record the authority, generator capability,
+affected outputs, deterministic derivation, and producer/consumer consistency
+evidence before producing or publishing an output.
+
 Regenerate only affected outputs when their canonical generation input or
 generator changes. An unrelated private implementation change does not require
 regeneration. When regeneration applies, update the canonical input and
