@@ -1,0 +1,12 @@
+case	context	failure	proof	panic_form	documentation	fallback	expected
+request_recoverable_error	request	recoverable	missing	result	not-required	none	allow
+lifecycle_recoverable_error	lifecycle	recoverable	missing	result	not-required	none	allow
+background_recoverable_error	background	recoverable	missing	result	not-required	none	allow
+network_recoverable_error	network	recoverable	missing	result	not-required	none	allow
+proven_invariant_panic	library-invariant	invariant	proven	panic	required	none	allow
+compile_time_impossibility	compile-time	impossible	proven	unreachable	required	none	allow
+test_panic_assertion	test	assertion	not-required	panic	not-required	none	allow
+missing_invariant_proof	library-invariant	invariant	missing	panic	required	none	typed-unavailable
+recoverable_panic	request	recoverable	missing	panic	not-required	none	typed-invalid
+unwrap_fallback	background	recoverable	missing	unwrap	not-required	default-success	typed-invalid
+alternate_recovery	network	recoverable	missing	result	not-required	alternate-operation	typed-invalid

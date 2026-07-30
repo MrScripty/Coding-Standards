@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust binding row 9 is complete; the next owner cluster is
-Rust Security `STD-0826`.
+**Current phase:** Rust binding row 10 is complete; the next owner cluster is
+Resilience `STD-0119` through `STD-0125`.
 
-**Next slice:** Milestone 7.4b8ah review of `STD-0826` under the Rust Security profile.
+**Next slice:** Milestone 7.4b8ai review of `STD-0119` through `STD-0125` under the Resilience topic.
 
 **Acceptance status:** `partial`
 
@@ -1249,7 +1249,10 @@ all structural/routing fixtures pass.
    - `7.4b8ag` (`Accepted`): replace `STD-0792` and `STD-0793` with Rust
      binding artifact selection from boundary, consumer, deployment, and
      release contracts.
-   - `7.4b8ah` (`Planned`): review and implement Rust Security `STD-0826`.
+   - `7.4b8ah` (`Accepted`): replace `STD-0826` with Rust Security panic and
+     recoverable-error boundary policy.
+   - `7.4b8ai` (`Planned`): review and implement the next Resilience owner
+     cluster, `STD-0119` through `STD-0125`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

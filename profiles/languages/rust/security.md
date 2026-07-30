@@ -12,6 +12,23 @@
 - Verification: Rust filesystem-authority, checked-boundary-arithmetic, external-input-queue, and listener-lifecycle decisions plus affected filesystem, parser, allocation, indexing, queue, admission, connection, and shutdown tests.
 - Canonical owner: `profiles/languages/rust/security.md`
 
+## Panic And Recoverable Error Boundary
+
+Apply the [Rust API error policy](../../../languages/rust/RUST-API-STANDARDS.md#result-option-panic)
+to public and internal fallible Rust operations. This profile specializes that
+policy for production request paths, lifecycle code, background services, and
+network handlers: recoverable errors must remain typed results and must not be
+converted to `unwrap()` or `expect()` panics. A panic, `debug_assert!`, or
+`unreachable!` is valid only for a proven internal invariant or compile-time
+impossibility outside a recoverable input or shutdown outcome, with the
+required panic documentation and evidence.
+
+Tests and explicitly non-production examples may use panic assertions when
+their scope is declared. Missing proof that a condition is an internal
+invariant returns typed `unavailable`; a recoverable error represented by a
+panic returns typed `invalid`. Do not replace a failed result with a default,
+sentinel, ignored error, alternate operation, or broad catch-all recovery.
+
 ## Filesystem Authority Through Use
 
 Apply the generic [Security filesystem contract](../../topics/security.md#filesystem-containment)

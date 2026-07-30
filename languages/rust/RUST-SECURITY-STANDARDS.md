@@ -35,6 +35,9 @@ and
 
 ## Panic Policy
 
-Production request paths, lifecycle code, background services, and network
-handlers must not use `unwrap()` or `expect()` for recoverable errors. Follow
-[RUST-API-STANDARDS.md](RUST-API-STANDARDS.md#unwrap-and-expect).
+Canonical panic and recoverable-error scope moved to the
+[Rust Security Profile](../../profiles/languages/rust/security.md#panic-and-recoverable-error-boundary).
+General result, option, panic, and `unwrap()`/`expect()` semantics remain owned
+by [Rust API Standards](RUST-API-STANDARDS.md#result-option-panic). Security
+adds the production request, lifecycle, background-service, and network-handler
+boundary; it does not create a fallback for a failed result.

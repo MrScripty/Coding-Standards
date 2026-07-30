@@ -3682,6 +3682,14 @@ no longer universal policy.
 
 **Next slice:** `7.4b8ah`, review and implement Rust Security `STD-0826`.
 
+**Slice `7.4b8ah` accepted:** `STD-0826` now specializes Rust API panic and
+recoverable-error semantics for production request, lifecycle, background,
+and network-handler paths. The focused cases reject recoverable panics and
+fallback recovery while preserving invariant-only panic assertions.
+
+**Next slice:** `7.4b8ai`, review and implement `STD-0119` through `STD-0125`
+under the Resilience topic.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

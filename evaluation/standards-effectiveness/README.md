@@ -162,6 +162,11 @@ evidence facts.
 system heading is only a non-normative routing index and that its separately
 owned child references remain explicit.
 
+`fixtures/rust/security-panic-boundary-decisions.tsv` and
+`verify-rust-security-panic-boundary.sh` specialize recoverable-error and
+panic handling for Rust security-sensitive production boundaries. They reject
+recoverable panics, missing invariant proof, and fallback recovery.
+
 `fixtures/rust/binding-contract-discovery-*.tsv` and
 `verify-rust-binding-contract-discovery.sh` adapt only a Contracts-selected
 identity, version, or capability mechanism. They reject universal version
