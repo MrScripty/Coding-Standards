@@ -158,6 +158,10 @@ procedures from accepted release artifact plans. They reject fixed commands,
 compiled-artifact defaults, alternate generators, and missing toolchain or
 evidence facts.
 
+`verify-rust-binding-index-closure.sh` verifies that the former Rust build
+system heading is only a non-normative routing index and that its separately
+owned child references remain explicit.
+
 `fixtures/rust/binding-contract-discovery-*.tsv` and
 `verify-rust-binding-contract-discovery.sh` adapt only a Contracts-selected
 identity, version, or capability mechanism. They reject universal version

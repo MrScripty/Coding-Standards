@@ -196,7 +196,15 @@ diagnostic rather than a guessed command or alternate generator.
 
 ---
 
-## Build System Organization
+## Build System Organization Index
+
+This section is a non-normative migration index. Canonical binding dependency
+and optional-feature placement is governed by the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md#core-and-adapter-boundary),
+and binding build or generation procedures are governed by
+[Binding Generation Procedures](../../workflows/release.md#binding-generation-procedures).
+The child headings below remain separately owned migration references; this
+index does not add a package, feature, crate, workspace, or build default.
 
 ### Feature Flags for Optional Binding Support
 

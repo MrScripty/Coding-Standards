@@ -371,6 +371,7 @@ STD-0785	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md
 STD-0786	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md	refine	require selected authority generator toolchain inputs targets outputs reproducibility controls and evidence before commands are chosen
 STD-0787	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md	remove	remove product-specific compiled-library build and Python generation commands as universal release policy
 STD-0788	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md	remove	remove community bindgen and custom binary examples as universal release policy and reject alternate-generator recovery
+STD-0789	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	index	convert the Build System Organization heading into a non-normative routing index while preserving separately owned child references
 STD-0768	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	select exported operations and representations from declared consumer and product contracts
 STD-0769	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	keep domain semantics in canonical owners and expose only explicitly selected binding surfaces
 STD-0770	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	derive support publication host subsets and evidence from project facts without fixed tiers or parity

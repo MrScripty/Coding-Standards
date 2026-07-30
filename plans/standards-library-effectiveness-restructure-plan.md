@@ -6,10 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust binding row 8 Contracts generation-authority child is
-complete; its Rust annotation-placement child is next.
+**Current phase:** Rust binding row 8 is complete; final rolling disposition
+closure and duplication verification are next.
 
-**Next slice:** Milestone 7.4b8af legacy-index closure for `STD-0789`.
+**Next slice:** Milestone 7.4b8ag review of `STD-0792` and `STD-0793` under
+the Rust Language Binding profile.
 
 **Acceptance status:** `partial`
 
@@ -1242,10 +1243,12 @@ all structural/routing fixtures pass.
      annotation-placement policy selected by the binding mechanism and
      core-adapter ownership boundary; reject proc-macro and definition-file
      defaults with typed outcomes.
-   - `7.4b8ae` (`Planned`): replace `STD-0785` through `STD-0788` with
+   - `7.4b8ae` (`Accepted`): replace `STD-0785` through `STD-0788` with
      Release-owned binding generation procedures.
-   - `7.4b8af` (`Planned`): close the remaining Rust build-organization
-     heading as a non-normative legacy index after its child moves.
+   - `7.4b8af` (`Accepted`): close the Rust build-organization heading as a
+     non-normative legacy index after its child moves.
+   - `7.4b8ag` (`Planned`): review and implement the next Rust Language
+     Binding owner cluster, `STD-0792` and `STD-0793`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

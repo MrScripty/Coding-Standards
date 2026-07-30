@@ -3674,3 +3674,10 @@ plan. The 11-case fixture rejects fixed commands, compiled-artifact defaults,
 alternate generators, and missing procedure evidence.
 
 **Next slice:** `7.4b8af`, close `STD-0789` as the Rust legacy-index heading.
+
+**Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
+heading as a non-normative routing index. The separately owned child sections
+remain available without allowing the heading to introduce build policy.
+
+**Next slice:** `7.4b8ag`, review and implement `STD-0792` and `STD-0793`
+under the Rust Language Binding profile.
