@@ -230,6 +230,14 @@ information from release and channel facts. They prove two exact dispositions
 and reject OS filename tables, class-local installation prose, ambient package
 identity, alternate artifacts, and incomplete publication.
 
+`fixtures/release/binding-artifact-composition-*.tsv` and
+`verify-binding-artifact-composition.sh` classify native implementation,
+internal adapter/generator, generated host, and bundled roles before deriving
+the shipped binding artifact set. They reject missing roles, identities,
+relationships, consumer information, or evidence plus fixed artifact counts,
+package/bundle defaults, framework names, example names, internal-input
+publication, and default success.
+
 `fixtures/verification/platform-evidence-*.tsv` and
 `verify-platform-evidence-coverage.sh` require complete evidence for declared
 target claims and project-selected scheduling. They prove two exact

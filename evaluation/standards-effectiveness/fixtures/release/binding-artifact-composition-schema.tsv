@@ -1,0 +1,11 @@
+column	allowed
+case	*
+release_contract	declared,missing,contradictory
+roles	complete,missing,contradictory
+composition	separate,bundled,mixed,native-only,host-only,none,unknown
+identity	product,ecosystem,framework-default,ambiguous,missing
+relationships	complete,not-required,missing
+consumer_info	complete,not-required,missing
+evidence	complete,missing
+fallback	none,one-native-per-target,separate-default,bundle-default,example-names,publish-input,default-success
+expected	allow,typed-invalid,typed-unavailable

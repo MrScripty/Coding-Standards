@@ -3530,3 +3530,29 @@ configuration, or downstream repository changed.
 
 **Next slice:** `7.4b8y`, replace `STD-0763` through `STD-0766` with
 Release-owned binding artifact roles and composition.
+
+## 2026-07-29: Milestone 7.4b8y Binding Artifact Composition
+
+**Outcome:** Accepted.
+
+`STD-0763` through `STD-0766` now classify native implementation artifacts,
+internal adapter/generator inputs, generated host artifacts, and selected
+bundles before Release derives the shipped set, composition, identities,
+relationships, consumer information, and evidence.
+
+**Verification:** 23 reusable decisions; four exact dispositions; canonical
+Release and bounded legacy assertions; native-artifact release, row-7
+decomposition, immutable train, plan lifecycle, shell syntax, whitespace, and
+complete fail-fast checker-suite verification.
+
+**No-fallback result:** one native library per target, separate host packages,
+convenience bundles, framework-derived product identity, example archive
+names, internal-input publication, and default success are rejected with typed
+invalid or unavailable outcomes.
+
+No Contracts compatibility semantics, generic binding surface, routing,
+metadata, lockfile, generated inventory, owner map, configuration, or
+downstream repository changed.
+
+**Next slice:** `7.4b8z`, replace `STD-0767` with Contracts-owned binding
+artifact compatibility.

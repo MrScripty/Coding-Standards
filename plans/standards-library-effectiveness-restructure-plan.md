@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust binding row 7 workspace/evidence child is complete;
-its Release artifact-composition child is next.
+**Current phase:** Rust binding row 7 Release artifact-composition child is
+complete; its Contracts compatibility child is next.
 
-**Next slice:** Milestone 7.4b8y Release-owned binding artifact roles and composition for `STD-0763`, `STD-0764`, `STD-0765`, and `STD-0766`.
+**Next slice:** Milestone 7.4b8z Contracts-owned binding artifact compatibility for `STD-0767`.
 
 **Acceptance status:** `partial`
 
@@ -1194,8 +1194,16 @@ all structural/routing fixtures pass.
      - reject fixed crate trees, default-member evidence exclusion,
        native-only substitution, alternate frameworks, and default success
        with typed outcomes.
-   - `7.4b8y` (`Planned`): replace `STD-0763` through `STD-0766` with
-     Release-owned binding artifact roles and composition.
+   - `7.4b8y` (`Accepted`): replace `STD-0763` through `STD-0766` with
+     Release-owned binding artifact roles and composition;
+     - classify native implementation artifacts, internal adapter/generator
+       inputs, generated host artifacts, and selected bundles;
+     - derive the shipped set, composition, identities, relationships,
+       consumer information, and evidence from release and consumer facts;
+     - retain compatibility and version relationships under Contracts; and
+     - reject one-library-per-target, separate-package, bundle,
+       framework-name, example-archive, internal-input publication, and
+       default-success assumptions with typed outcomes.
    - `7.4b8z` (`Planned`): replace `STD-0767` with Contracts-owned binding
      artifact compatibility.
    - `7.4b8aa` (`Planned`): replace `STD-0768` through `STD-0771` with the

@@ -132,5 +132,9 @@ Milestone `7.4b8x` accepted child `7.1`, `STD-0761` and `STD-0762`, as the
 Rust binding package/workspace and evidence boundary with 14 decision cases
 and two exact dispositions.
 
-Milestone `7.4b8y` performs bounded pre-slice review and implementation of
-child `7.2`, `STD-0763` through `STD-0766`, in Release.
+Milestone `7.4b8y` accepted child `7.2`, `STD-0763` through `STD-0766`, as
+Release-owned binding artifact roles and composition with 23 decision cases
+and four exact dispositions.
+
+Milestone `7.4b8z` performs bounded pre-slice review and implementation of
+child `7.3`, `STD-0767`, in Contracts.

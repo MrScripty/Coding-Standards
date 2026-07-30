@@ -133,6 +133,38 @@ identity, target, acquisition, installation, loading, or evidence facts. Do not
 guess a conventional filename, use an ambient package as identity, substitute
 another artifact, or publish with incomplete consumer information.
 
+### Binding Artifact Roles And Composition
+
+When a release exposes language bindings, classify each applicable item before
+building the artifact plan:
+
+- the product's native implementation artifact, when it is shipped separately;
+- internal adapter, wrapper, generator, schema, or build input that produces a
+  boundary but is not automatically a published product;
+- generated host source or a host-language package consumed by applications;
+  and
+- a selected bundle that intentionally contains more than one of these items.
+
+Record which items are release artifacts and which remain internal inputs. For
+each shipped item, apply the complete artifact plan and its own applicable
+[contract classes](../topics/contracts.md#contract-classes). Derive artifact
+count, target coverage, separate or bundled composition, identity, naming,
+relationships, acquisition, installation/loading information, and evidence
+from the release unit, channels, supported targets, package ecosystems, and
+consumer contracts.
+
+An adapter or generator framework is not the product identity unless the
+product contract says the framework itself is the product. Shared build
+provenance may establish consistency between related artifacts, but
+compatibility and version relationships remain Contracts-owned decisions.
+
+Return an unresolved artifact-plan diagnostic when required roles,
+composition, identities, relationships, consumer information, or evidence are
+missing or contradictory. Do not assume one native library per target,
+separate host packages, a convenience bundle, framework-derived names, example
+archive names, or default success. Do not publish an internal build input
+merely because it participates in binding generation.
+
 Select integrity and supply-chain metadata from actual requirements:
 
 - provide cryptographic checksums when consumers or the distribution channel
