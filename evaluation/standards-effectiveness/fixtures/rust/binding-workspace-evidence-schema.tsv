@@ -1,0 +1,10 @@
+column	allowed
+case	*
+package_facts	declared,missing,contradictory
+dependency_direction	preserved,reversed
+adapter_required	yes,no
+core_evidence	pass,missing
+adapter_evidence	pass,separate,missing,native-only,not-required
+capability	available,unavailable,not-required
+fallback	none,exclude,alternate-framework,default-success
+expected	allow,typed-invalid,typed-unavailable

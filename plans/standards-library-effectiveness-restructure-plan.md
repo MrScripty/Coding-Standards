@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust binding row 7 is decomposed; its workspace and evidence
-child is next.
+**Current phase:** Rust binding row 7 workspace/evidence child is complete;
+its Release artifact-composition child is next.
 
-**Next slice:** Milestone 7.4b8x Rust binding workspace and evidence contract for `STD-0761` and `STD-0762`.
+**Next slice:** Milestone 7.4b8y Release-owned binding artifact roles and composition for `STD-0763`, `STD-0764`, `STD-0765`, and `STD-0766`.
 
 **Acceptance status:** `partial`
 
@@ -1182,8 +1182,18 @@ all structural/routing fixtures pass.
      - `STD-0767` moves to Contracts-owned per-artifact compatibility; and
      - `STD-0768` through `STD-0771` move to generic Language Binding-owned
        exported surface and support contracts.
-   - `7.4b8x` (`Planned`): replace `STD-0761` and `STD-0762` with the Rust
-     binding workspace and evidence boundary.
+   - `7.4b8x` (`Accepted`): replace `STD-0761` and `STD-0762` with the Rust
+     binding workspace and evidence boundary;
+     - select package, crate, workspace, feature, generated-output, and script
+       placement from ownership, dependency, toolchain, mechanism, and
+       evidence facts;
+     - preserve core-to-adapter dependency direction in shared or separate
+       packages;
+     - retain required adapter and real host evidence when a foreign runtime
+       uses a separately provisioned environment; and
+     - reject fixed crate trees, default-member evidence exclusion,
+       native-only substitution, alternate frameworks, and default success
+       with typed outcomes.
    - `7.4b8y` (`Planned`): replace `STD-0763` through `STD-0766` with
      Release-owned binding artifact roles and composition.
    - `7.4b8z` (`Planned`): replace `STD-0767` with Contracts-owned binding

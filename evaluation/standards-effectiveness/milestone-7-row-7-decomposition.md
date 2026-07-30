@@ -128,5 +128,9 @@ Missing or contradictory contract facts produce typed diagnostics.
 
 ## Next Slice
 
-Milestone `7.4b8x` performs bounded pre-slice review and implementation of
-child `7.1`, `STD-0761` and `STD-0762`, in the Rust Language Binding profile.
+Milestone `7.4b8x` accepted child `7.1`, `STD-0761` and `STD-0762`, as the
+Rust binding package/workspace and evidence boundary with 14 decision cases
+and two exact dispositions.
+
+Milestone `7.4b8y` performs bounded pre-slice review and implementation of
+child `7.2`, `STD-0763` through `STD-0766`, in Release.

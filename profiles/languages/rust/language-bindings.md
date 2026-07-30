@@ -116,6 +116,26 @@ JSON is not a universal ABI or universal wrapper representation. Generated
 host code remains derived from adapter-owned input and contains no domain
 behavior.
 
+### Package And Workspace Placement
+
+Select crate, package, workspace-member, feature, generated-output, and script
+placement from the repository's ownership boundaries, dependency direction,
+toolchain, selected binding mechanisms, and required evidence. Core and adapter
+code may use separate packages or remain in one package only when the declared
+module and dependency boundaries preserve the same core-to-adapter direction.
+
+Cargo workspace membership and default-member selection are build and
+developer-workflow mechanisms, not evidence waivers. A foreign runtime may use
+a separately provisioned verification environment, but required adapter and
+real host evidence remains part of acceptance. Missing package facts or
+required environment capability returns typed `unavailable`; contradictory
+ownership or dependency direction returns typed `invalid`.
+
+Do not prescribe a crate tree, generated-output directory, script name, or
+default-member list from the binding framework. Do not exclude required
+adapter evidence, substitute native-only tests, select another framework, or
+report default success when the selected host capability is unavailable.
+
 ## Host Error Representation
 
 Select the host error contract and binding mechanism before mapping Rust

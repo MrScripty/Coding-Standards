@@ -1,0 +1,15 @@
+case	actual
+separate_packages	allow
+shared_package	allow
+separate_host_environment	allow
+framework_free_core	allow
+missing_package_facts	typed-unavailable
+contradictory_package_facts	typed-invalid
+reversed_dependency	typed-invalid
+missing_core_evidence	typed-unavailable
+missing_adapter_evidence	typed-unavailable
+unavailable_host	typed-unavailable
+native_only_substitute	typed-invalid
+exclude_required_evidence	typed-invalid
+alternate_framework	typed-invalid
+default_success	typed-invalid

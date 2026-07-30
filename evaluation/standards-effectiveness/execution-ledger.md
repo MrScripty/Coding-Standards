@@ -3503,3 +3503,30 @@ fixture, configuration, lockfile, or downstream repository changed.
 
 **Next slice:** `7.4b8x`, replace `STD-0761` and `STD-0762` with the Rust
 binding workspace and evidence boundary.
+
+## 2026-07-29: Milestone 7.4b8x Rust Binding Workspace And Evidence
+
+**Outcome:** Accepted.
+
+`STD-0761` and `STD-0762` now select package and workspace placement from
+repository ownership, dependency direction, toolchain, binding mechanism, and
+evidence facts. Shared and separate packages are both valid when they preserve
+the core-to-adapter boundary, and separately provisioned foreign-runtime
+environments do not remove required adapter or real host evidence.
+
+**Verification:** 14 reusable decisions; two exact dispositions; canonical
+Rust Language Binding and bounded legacy assertions; core/adapter testability,
+row-7 decomposition, immutable train, plan lifecycle, shell syntax,
+whitespace, and complete fail-fast checker-suite verification.
+
+**No-fallback result:** prescribed crate trees, generated-output paths, script
+names, workspace/default-member lists, required-evidence exclusion,
+native-only tests, alternate frameworks, and default success are rejected with
+typed invalid or unavailable outcomes.
+
+No Release artifact composition, Contracts compatibility, generic binding
+surface, routing, metadata, lockfile, generated inventory, owner map,
+configuration, or downstream repository changed.
+
+**Next slice:** `7.4b8y`, replace `STD-0763` through `STD-0766` with
+Release-owned binding artifact roles and composition.

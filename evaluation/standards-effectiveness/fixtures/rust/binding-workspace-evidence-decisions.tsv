@@ -1,0 +1,15 @@
+case	package_facts	dependency_direction	adapter_required	core_evidence	adapter_evidence	capability	fallback	expected
+separate_packages	declared	preserved	yes	pass	pass	available	none	allow
+shared_package	declared	preserved	yes	pass	pass	available	none	allow
+separate_host_environment	declared	preserved	yes	pass	separate	available	none	allow
+framework_free_core	declared	preserved	no	pass	not-required	not-required	none	allow
+missing_package_facts	missing	preserved	yes	pass	pass	available	none	typed-unavailable
+contradictory_package_facts	contradictory	preserved	yes	pass	pass	available	none	typed-invalid
+reversed_dependency	declared	reversed	yes	pass	pass	available	none	typed-invalid
+missing_core_evidence	declared	preserved	yes	missing	pass	available	none	typed-unavailable
+missing_adapter_evidence	declared	preserved	yes	pass	missing	available	none	typed-unavailable
+unavailable_host	declared	preserved	yes	pass	missing	unavailable	none	typed-unavailable
+native_only_substitute	declared	preserved	yes	pass	native-only	available	none	typed-invalid
+exclude_required_evidence	declared	preserved	yes	pass	missing	unavailable	exclude	typed-invalid
+alternate_framework	declared	preserved	yes	pass	missing	unavailable	alternate-framework	typed-invalid
+default_success	declared	preserved	yes	pass	missing	unavailable	default-success	typed-invalid

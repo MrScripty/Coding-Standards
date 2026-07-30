@@ -21,41 +21,11 @@ core/adapter boundary.
 
 ### Workspace Layout
 
-```toml
-[workspace]
-members = [
-    "crates/mylib-core",        # Layer 1: Pure domain logic
-    "crates/mylib-uniffi",      # Layer 2: UniFFI wrapper
-    "crates/mylib-rustler",     # Layer 2: Rustler NIF wrapper
-]
-# Exclude crates that need foreign runtimes from default test
-default-members = ["crates/mylib-core", "crates/mylib-uniffi"]
-```
-
-```text
-project-root/
-├── crates/
-│   ├── mylib-core/               # Layer 1
-│   │   ├── Cargo.toml
-│   │   ├── src/
-│   │   └── tests/
-│   ├── mylib-uniffi/             # Layer 2 (UniFFI)
-│   │   ├── Cargo.toml
-│   │   ├── uniffi.toml
-│   │   └── src/
-│   │       ├── lib.rs
-│   │       └── bin/
-│   │           └── uniffi_bindgen.rs
-│   └── mylib-rustler/            # Layer 2 (Rustler)
-│       ├── Cargo.toml
-│       └── src/lib.rs
-├── bindings/                     # Layer 3 (generated output)
-│   ├── python/
-│   ├── csharp/
-│   └── kotlin/
-└── scripts/
-    └── generate-bindings.sh
-```
+Canonical package/workspace placement and required native/host evidence moved
+to [Package And Workspace Placement](../../profiles/languages/rust/language-bindings.md#package-and-workspace-placement).
+No crate tree, generated-output directory, script name, workspace membership,
+or default-member list is universal. Separately provisioned foreign-runtime
+evidence remains required when selected by the binding contract.
 
 ---
 
