@@ -1,0 +1,12 @@
+column	allowed
+case	*
+consumer	declared,missing
+selection	selected,not-selected,missing
+semantics	core,adapter,unknown
+support	declared,not-public,missing
+host_subset	declared,missing
+documentation	complete,missing
+compatibility	declared,missing
+evidence	complete,missing
+fallback	none,export-all,fixed-tiers,force-parity,wrapper-semantics,native-only,default-success
+expected	expose,omit,typed-invalid,typed-unavailable

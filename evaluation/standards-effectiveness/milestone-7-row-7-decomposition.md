@@ -140,6 +140,6 @@ Milestone `7.4b8z` accepted child `7.3`, `STD-0767`, as Contracts-owned
 per-artifact compatibility with 19 decision cases and one additional exact
 disposition.
 
-Milestone `7.4b8aa` performs bounded pre-slice review and implementation of
-child `7.4`, `STD-0768` through `STD-0771`, in the generic Language Binding
-profile.
+Milestone `7.4b8aa` accepted child `7.4`, `STD-0768` through `STD-0771`, as
+the generic exported binding-surface contract with 19 decision cases and four
+exact dispositions. Row 7 is complete.

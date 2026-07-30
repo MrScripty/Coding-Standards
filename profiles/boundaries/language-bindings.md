@@ -132,6 +132,33 @@ independently deployed compatibility decisions.
 Use the [Rust specialization](../languages/rust/language-bindings.md) for Rust
 representation categories, fallible conversions, and native/host evidence.
 
+## Exported Surface Contract
+
+Select each exported operation and representation from declared consumer and
+product contracts. Record the actual consumers, selected host-language
+subsets, owning semantic layer, lifecycle and diagnostic behavior,
+compatibility promise, support and publication status, documentation, and
+required native and real host evidence.
+
+Expose only selected client operations. Internal helpers, framework-local
+controls, debug and recovery paths, and technically exportable types remain
+unexposed unless an explicit consumer contract selects them. Domain behavior
+and canonical semantics remain in their core or backend owner; adapters own
+only boundary representation and host-runtime adaptation.
+
+Different host languages may expose different declared subsets. Neither exact
+parity nor divergence is a default. Support categories and publication status
+are project contract facts; no fixed support-tier vocabulary is universal.
+Every selected surface states which consumers receive it, how it is packaged
+and versioned, and which native and host evidence supports the claim.
+
+Return `unavailable` when required consumer, support, host-subset,
+documentation, compatibility, or evidence facts cannot be obtained, and
+`invalid` when selected facts contradict ownership or another applicable
+contract. Do not export all technically available operations, invent fixed
+support tiers, force language parity, move domain semantics into adapters,
+substitute native-only evidence, or report default success.
+
 ## Conversion Outcomes
 
 Validate and convert at the owning adapter. Return:
@@ -176,6 +203,8 @@ Return the typed diagnostic for the selected mechanism.
 Affected tests cover:
 
 - selection from complete boundary facts and rejection of contradictory facts;
+- selected and deliberately unexposed client surfaces across declared hosts;
+- support, documentation, compatibility, and native/host evidence claims;
 - every declared representation and successful conversion;
 - invalid, unsupported, and unavailable outcomes;
 - framework-lifted values versus stable ABI values;

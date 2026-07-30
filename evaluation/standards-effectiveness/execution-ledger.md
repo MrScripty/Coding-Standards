@@ -3581,3 +3581,29 @@ owner map, configuration, or downstream repository changed.
 
 **Next slice:** `7.4b8aa`, replace `STD-0768` through `STD-0771` with the
 generic binding-surface contract.
+
+## 2026-07-29: Milestone 7.4b8aa Binding Surface Contract
+
+**Outcome:** Accepted.
+
+`STD-0768` through `STD-0771` now select exported operations,
+representations, host-language subsets, semantic ownership, support,
+documentation, compatibility, and native/host evidence from declared consumer
+and product contracts.
+
+**Verification:** 19 reusable decisions; four exact dispositions; canonical
+generic Language Binding and bounded legacy assertions; generic boundary,
+row-7 decomposition, immutable train, plan lifecycle, shell syntax,
+whitespace, and complete fail-fast checker-suite verification.
+
+**No-fallback result:** technically available operations are not exported
+automatically. Fixed support tiers, forced parity or divergence, wrapper-owned
+domain semantics, native-only evidence, and default success are rejected with
+typed invalid or unavailable outcomes.
+
+No Contracts, Release, Rust specialization, routing, metadata, lockfile,
+generated inventory, owner map, configuration, or downstream repository
+changed.
+
+**Next slice:** `7.4b8ab`, bounded owner review of `STD-0782` through
+`STD-0789`.

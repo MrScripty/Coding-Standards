@@ -50,7 +50,7 @@ mapfile -t child_dispositions < <(
   awk -F '\t' 'NR > 1 && $1 >= "STD-0761" && $1 <= "STD-0771" { print $1 }' \
     "$DISPOSITIONS"
 )
-expected_dispositions=(STD-{0761..0767})
+expected_dispositions=(STD-{0761..0771})
 [[ "${child_dispositions[*]}" == "${expected_dispositions[*]}" ]]
 
 package_row="$(
@@ -82,12 +82,13 @@ rg -F -q '`7.4b8w` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8x` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8y` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8z` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8aa` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8aa` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8ab` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8aa'* ]]
-[[ "$next_slice_line" == *'STD-0768'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ab'* ]]
+[[ "$next_slice_line" == *'STD-0782'* ]]
 
 "$SCRIPT_DIR/verify-milestone-7-accelerated-execution-replan.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-7 decomposition passed: children 7.1-7.3 accepted; 4 IDs remain in 1 ordered child\n'
+printf 'Milestone 7 row-7 decomposition passed: all 11 IDs accepted across 4 ordered children\n'

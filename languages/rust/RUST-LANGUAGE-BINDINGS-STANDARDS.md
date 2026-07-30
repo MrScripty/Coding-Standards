@@ -49,52 +49,12 @@ or lockstep versioning across binding artifacts.
 
 ## Binding Surface Policy
 
-Not every internal capability should be exposed through every binding. Treat
-the binding surface as a curated client contract, not as an automatic dump of
-every technically exportable function or type.
-
-### Rules
-
-1. **Export only client-facing capabilities by default.** A binding surface
-   should expose the workflows, sessions, resources, and data types external
-   consumers actually need, not every internal helper, debug path, or transport
-   shim.
-2. **Every exported entry point must map to a documented consumer use case.**
-   If no real host-language caller needs a capability, do not export it only
-   because the wrapper framework can.
-3. **Classify binding APIs by support tier.** At minimum, distinguish
-   `supported`, `experimental`, and `internal-only` surfaces. Document which
-   tiers are packaged, versioned, and covered by host-language tests.
-4. **Do not require identical language parity by default.** Different host
-   languages may expose different supported subsets when the product contract
-   and documentation make that choice explicit.
-5. **Keep canonical semantics out of wrapper-only APIs.** If multiple bindings
-   need the same contract shaping, lifecycle rule, or error category, move that
-   logic into a backend-owned or binding-neutral layer and keep wrappers thin.
-6. **Do not export unstable internal control paths casually.** Admin-only,
-   recovery-only, debug-only, or framework-local operations must be explicitly
-   justified before they become part of a client binding surface.
-7. **New exported surface requires contract documentation.** Document lifecycle
-   expectations, error semantics, compatibility promises, and the owning layer
-   in the same change that introduces the export.
-
-### Support Tier Guidance
-
-| Tier | Intended Consumer | Packaging Expectation | Verification Expectation |
-|------|-------------------|-----------------------|--------------------------|
-| `supported` | External production callers | Publish/package deliberately | Native-language tests and host-language tests are both required |
-| `experimental` | External evaluators or early adopters | May be packaged with explicit instability note | Native-language tests plus at least one real host-language smoke path |
-| `internal-only` | Repo-owned tools or internal harnesses | Not part of the public product contract | Test according to the owning repo/tool needs; do not market as a public binding |
-
-### Surface Review Questions
-
-Before exposing a new binding API, answer:
-
-- Which external caller needs this?
-- Is this a product contract or an internal implementation detail?
-- Which layer owns the semantics?
-- Which host languages actually need this capability?
-- What native-language and host-language verification will keep it honest?
+Canonical consumer selection, host-language subsets, semantic ownership,
+support and publication status, documentation, compatibility, and evidence
+moved to the generic
+[Exported Surface Contract](../../profiles/boundaries/language-bindings.md#exported-surface-contract).
+Rust does not define a universal support-tier vocabulary, language-parity
+policy, or automatic export set.
 
 ---
 

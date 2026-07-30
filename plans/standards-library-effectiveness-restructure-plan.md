@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rust binding row 7 Contracts compatibility child is
-complete; its generic binding-surface child is next.
+**Current phase:** Rust binding row 7 is complete; bounded owner review of
+Rust binding row 8 is next.
 
-**Next slice:** Milestone 7.4b8aa generic binding-surface contract for `STD-0768`, `STD-0769`, `STD-0770`, and `STD-0771`.
+**Next slice:** Milestone 7.4b8ab bounded owner review of `STD-0782`, `STD-0783`, `STD-0784`, `STD-0785`, `STD-0786`, `STD-0787`, `STD-0788`, and `STD-0789`.
 
 **Acceptance status:** `partial`
 
@@ -1215,8 +1215,18 @@ all structural/routing fixtures pass.
        according to each artifact's declared contract; and
      - reject forced lockstep or independent versions, compatibility shims,
        incomplete evidence, and default success with typed outcomes.
-   - `7.4b8aa` (`Planned`): replace `STD-0768` through `STD-0771` with the
-     generic binding-surface contract.
+   - `7.4b8aa` (`Accepted`): replace `STD-0768` through `STD-0771` with the
+     generic binding-surface contract;
+     - select operations, representations, host subsets, support,
+       documentation, compatibility, and evidence from declared consumer and
+       product contracts;
+     - preserve domain semantics in canonical core or backend owners while
+       adapters own boundary representation and host adaptation;
+     - permit declared host subsets without forcing parity or divergence; and
+     - reject automatic exports, fixed support tiers, wrapper-owned semantics,
+       native-only evidence, and default success with typed outcomes.
+   - `7.4b8ab` (`Planned`): perform bounded owner review of `STD-0782` through
+     `STD-0789` before normative movement.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
