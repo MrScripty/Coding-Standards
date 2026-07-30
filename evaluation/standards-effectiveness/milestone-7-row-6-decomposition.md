@@ -117,5 +117,9 @@ Milestone `7.4b8u` accepted child `6.2`, `STD-0296` and `STD-0297`, as
 Release-owned native artifact identity and installation information with 19
 decision cases and two exact dispositions.
 
-Milestone `7.4b8v` implements child `6.3`, `STD-0298` and `STD-0299`, as
-Verification-owned platform evidence scheduling.
+Milestone `7.4b8v` accepted child `6.3`, `STD-0298` and `STD-0299`, as
+Verification-owned platform evidence coverage and scheduling with 21 decision
+cases and two exact dispositions.
+
+Row 6 is complete. Milestone `7.4b8w` begins bounded owner review of immutable
+row 7, `STD-0761` through `STD-0771`.

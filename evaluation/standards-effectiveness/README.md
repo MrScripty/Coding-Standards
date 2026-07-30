@@ -216,6 +216,13 @@ information from release and channel facts. They prove two exact dispositions
 and reject OS filename tables, class-local installation prose, ambient package
 identity, alternate artifacts, and incomplete publication.
 
+`fixtures/verification/platform-evidence-*.tsv` and
+`verify-platform-evidence-coverage.sh` require complete evidence for declared
+target claims and project-selected scheduling. They prove two exact
+dispositions and reject fixed targets, current-platform substitution, weakened
+support, provider matrices, fixed triggers/fail-fast behavior, and default
+success.
+
 ## IPC Payload Decision Fixtures
 
 `fixtures/ipc/action-payload-decisions.tsv` and

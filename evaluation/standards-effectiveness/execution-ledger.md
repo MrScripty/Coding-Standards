@@ -3451,3 +3451,25 @@ inventory, owner map, configuration, or downstream repository changed.
 
 **Next slice:** `7.4b8v`, replace `STD-0298` and `STD-0299` with
 Verification-owned platform evidence scheduling.
+
+## 2026-07-29: Milestone 7.4b8v Platform Evidence Coverage
+
+**Outcome:** Accepted.
+
+`STD-0298` and `STD-0299` now require complete target evidence for declared
+support claims and select scheduling, runners, matrices, manual procedures,
+and failure fan-out from project risk and environment facts.
+
+**Verification:** 21 reusable decisions; two exact dispositions; Verification
+ownership, legacy, row-6, immutable-train, lifecycle, shell, whitespace, and
+complete fail-fast suite checks.
+
+**No-fallback result:** fixed targets, current-platform substitution, weakened
+required support, provider matrices, fixed fail-fast/trigger schedules, and
+default success are rejected with typed or blocked outcomes.
+
+Row 6 is complete. No routing, metadata, lockfile, generated inventory, owner
+map, configuration, or downstream repository changed.
+
+**Next slice:** `7.4b8w`, bounded owner review of `STD-0761` through
+`STD-0771`.

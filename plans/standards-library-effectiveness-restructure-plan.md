@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Cross-platform row 6 children 6.1 and 6.2 are complete;
-Verification-owned platform evidence scheduling is next.
+**Current phase:** Cross-platform row 6 is complete; Rust binding row 7 owner
+review is next.
 
-**Next slice:** Milestone 7.4b8v platform evidence scheduling for active child `STD-0298` and `STD-0299`.
+**Next slice:** Milestone 7.4b8w Rust binding owner review for active row `STD-0761` through `STD-0771`.
 
 **Acceptance status:** `partial`
 
@@ -1162,8 +1162,18 @@ all structural/routing fixtures pass.
        provisioning, dependency, and loading information; and
      - reject OS-name filename defaults, class-local documentation, ambient
        packages, alternate artifacts, and incomplete publication.
-   - `7.4b8v` (`Planned`): replace `STD-0298` and `STD-0299` with
-     Verification-owned platform evidence scheduling.
+   - `7.4b8v` (`Accepted`): replace `STD-0298` and `STD-0299` with
+     Verification-owned platform evidence coverage and scheduling;
+     - map every required target to its claim, qualified environment,
+       execution mode, and observed result;
+     - keep best-effort and unsupported targets explicit without allowing
+       them to satisfy required target entries;
+     - select runners, hooks, matrices, gates, manual procedures, and failure
+       fan-out from project risk and environment facts; and
+     - reject fixed targets, current-platform substitution, weakened support,
+       provider matrices, fixed triggers, and default success.
+   - `7.4b8w` (`Planned`): perform bounded owner review of Rust binding row
+     `STD-0761` through `STD-0771`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

@@ -355,3 +355,5 @@ STD-0294	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	define nati
 STD-0295	CROSS-PLATFORM-STANDARDS.md	topics/cross-platform.md	refine	select the declared loading mechanism without Strategy or alternate-loader fallback
 STD-0296	CROSS-PLATFORM-STANDARDS.md	workflows/release.md	refine	derive native artifact identity from release ecosystem channel and target contracts
 STD-0297	CROSS-PLATFORM-STANDARDS.md	workflows/release.md	refine	provide consumer acquisition installation loading and verification information
+STD-0298	CROSS-PLATFORM-STANDARDS.md	workflows/verification.md	refine	map every declared platform-support claim to complete target evidence
+STD-0299	CROSS-PLATFORM-STANDARDS.md	workflows/verification.md	refine	select evidence scheduling and orchestration from project risk and environment facts

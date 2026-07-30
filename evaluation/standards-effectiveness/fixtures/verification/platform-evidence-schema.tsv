@@ -1,0 +1,11 @@
+column	allowed
+case	*
+support_contract	declared,missing,contradictory
+support	required,best-effort,unsupported
+target_coverage	complete,partial,unknown
+environment	matched,simulated-substitute,missing
+result	passed,failed,not-run
+schedule	risk-selected,fixed,unknown
+orchestration	project-selected,fixed-fail-fast,unknown
+fallback	none,default-targets,current-platform,weaken-required,provider-matrix,fixed-triggers,default-success
+expected	allow,acceptance-blocked,typed-invalid,typed-unsupported,typed-unavailable

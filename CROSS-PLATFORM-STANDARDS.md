@@ -42,31 +42,10 @@ by the canonical [Release artifact plan](workflows/release.md#artifact-plan).
 
 ## CI Matrix
 
-CI must build on all required platforms:
-
-```yaml
-strategy:
-  fail-fast: false
-  matrix:
-    include:
-      - os: ubuntu-latest
-        rid: linux-x64
-      - os: windows-latest
-        rid: win-x64
-```
-
-Rules:
-- CI must build on at least Linux and Windows (or your required platforms)
-- Platform-specific tests run on their respective OS
-- Matrix builds should set `fail-fast: false` so one platform failure does not
-  hide others
-- Best-effort platform CI is optional but code must compile
-- CI should invoke the same build commands as local development
+Platform evidence coverage is governed by the canonical
+[Verification workflow](workflows/verification.md#platform-evidence-coverage).
 
 ### When to Build
 
-| Trigger | What Runs | Platform |
-|---------|-----------|----------|
-| Pre-commit | Type check / lint | Current platform only |
-| Pre-push | Full test suite | Current platform only |
-| CI (push/PR) | Full build + test | All required platforms |
+Evidence scheduling is governed by the canonical
+[Verification workflow](workflows/verification.md#platform-evidence-coverage).
