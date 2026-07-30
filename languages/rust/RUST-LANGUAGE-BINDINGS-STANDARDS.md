@@ -216,22 +216,12 @@ default does not make a framework dependency in the core independent.
 
 ### cdylib Configuration
 
-The FFI wrapper crate must produce a C-compatible dynamic library:
-
-```toml
-# mylib-uniffi/Cargo.toml
-[lib]
-crate-type = ["cdylib", "lib"]
-```
-
-- `cdylib` produces the shared library for foreign languages.
-- `lib` allows the crate to be used as a Rust dependency in tests and the
-  bindgen binary.
-- Crates that need foreign runtimes to test (Rustler) should be excluded from
-  `default-members` so `cargo test` works without those runtimes installed.
-
-See [RUST-CROSS-PLATFORM-STANDARDS.md](RUST-CROSS-PLATFORM-STANDARDS.md) for
-platform-specific library naming (`.so`, `.dll`, `.dylib`).
+Canonical native artifact kind and crate output selection moved to the
+[Rust Language Binding Profile](../../profiles/languages/rust/language-bindings.md#package-and-workspace-placement).
+The selected boundary, consumers, deployment, and release artifact plan
+decide whether a `cdylib`, `staticlib`, `rlib`, binary, or combined output is
+required. No product crate name, fixed `crate-type`, workspace default, or
+platform extension is universal.
 
 ---
 

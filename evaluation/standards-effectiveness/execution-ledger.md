@@ -3675,6 +3675,13 @@ alternate generators, and missing procedure evidence.
 
 **Next slice:** `7.4b8af`, close `STD-0789` as the Rust legacy-index heading.
 
+**Slice `7.4b8ag` accepted:** `STD-0792` and `STD-0793` now select native
+artifact kind and crate output types from boundary, consumer, deployment,
+and release contracts. Fixed `cdylib` and product-specific Cargo examples are
+no longer universal policy.
+
+**Next slice:** `7.4b8ah`, review and implement Rust Security `STD-0826`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

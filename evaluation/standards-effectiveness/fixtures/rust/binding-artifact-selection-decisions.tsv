@@ -1,0 +1,11 @@
+case	boundary	consumer	deployment	release_plan	artifact	crate_type	fallback	expected
+dynamic_host_boundary	selected	host	shared	accepted	selected	cdylib	none	allow
+static_native_boundary	selected	native	static	accepted	selected	staticlib	none	allow
+rust_only_boundary	selected	native	internal	accepted	selected	rlib	none	allow
+combined_contract	selected	host-and-native	mixed	accepted	selected	combined	none	allow
+missing_boundary	missing	host	shared	accepted	selected	cdylib	none	typed-unavailable
+missing_consumer	selected	missing	shared	accepted	selected	cdylib	none	typed-unavailable
+missing_release_plan	selected	host	shared	missing	selected	cdylib	none	typed-unavailable
+unselected_artifact	selected	host	shared	accepted	missing	cdylib	none	typed-unavailable
+forced_cdylib_default	selected	native	internal	accepted	selected	cdylib	default-artifact	typed-invalid
+contradictory_crate_type	selected	host	shared	accepted	selected	cdylib	alternate-crate-type	typed-invalid

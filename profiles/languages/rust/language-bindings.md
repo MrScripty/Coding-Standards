@@ -134,6 +134,13 @@ toolchain, selected binding mechanisms, and required evidence. Core and adapter
 code may use separate packages or remain in one package only when the declared
 module and dependency boundaries preserve the same core-to-adapter direction.
 
+Select native artifact kind and crate output types from the accepted boundary,
+consumer, deployment, and release contracts. A `cdylib`, `staticlib`, `rlib`,
+binary, or combined output is valid only when the selected consumers and
+release artifact plan require it. Do not prescribe one crate name, workspace
+shape, `crate-type`, output extension, or native-library form for every Rust
+binding project.
+
 Cargo workspace membership and default-member selection are build and
 developer-workflow mechanisms, not evidence waivers. A foreign runtime may use
 a separately provisioned verification environment, but required adapter and
