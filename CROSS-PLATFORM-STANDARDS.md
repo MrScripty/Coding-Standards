@@ -20,10 +20,13 @@ filesystem authorization additionally follows
 
 ## Native Library Rules
 
+Native artifact loading is governed by the canonical
+[Cross-Platform loading contract](topics/cross-platform.md#native-artifact-loading).
+
 ### Loading Strategy
 
-Platform-specific native libraries (`.so`, `.dll`, `.dylib`) should be loaded
-through the Strategy pattern, not embedded in managed assemblies.
+See the
+[Cross-Platform loading contract](topics/cross-platform.md#native-artifact-loading).
 
 ### Library Naming
 

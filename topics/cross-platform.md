@@ -9,7 +9,7 @@
 - Does not apply when: The affected behavior has one declared target contract and no platform-dependent behavior or portable boundary.
 - Requires: `core`, `workflow.verification`
 - Specializes: `none`
-- Verification: Platform-target and filesystem-identity decision fixtures plus evidence on each target required by the selected claim.
+- Verification: Platform-target, native-artifact-loading, and filesystem-identity decision fixtures plus evidence on each target required by the selected claim.
 - Canonical owner: `topics/cross-platform.md`
 
 ## Platform Support Contract
@@ -56,6 +56,44 @@ Missing target, support, capability, build, deployment, or evidence facts
 cannot choose a default platform list, support tier, Strategy/Factory, runtime
 detection, compile-time condition, file layout, stub, silent omission,
 alternate mechanism, or weaker evidence.
+
+## Native Artifact Loading
+
+Before selecting how a native artifact is linked, located, loaded, or supplied,
+declare:
+
+- the artifact identity or immutable revision and its canonical authority;
+- target, architecture, ABI, and compatibility requirements;
+- delivery authority and location contract;
+- integrity or authenticity requirements when applicable;
+- the mechanism and lifecycle authority that make it available to the
+  consumer; and
+- the consumer and target evidence required by the support claim.
+
+Select static linking, dynamic loading, package-managed resolution, an
+operating-system loader, a process-provided handle, an embedded resource, or
+another mechanism only when the declared artifact and deployment contracts
+support it. A package resolver or operating-system search path is valid only
+when that authority is part of the deployment contract and resolves the
+declared artifact; ambient discovery is not artifact identity.
+
+The selected consumer must verify the resolved artifact and preserve its
+declared lifecycle and failure semantics. Shipped artifact identity,
+installation information, and publication presentation belong to
+[Release](../workflows/release.md). Language-specific linking and loader
+mechanics belong to the selected language profile.
+
+Return `invalid` for contradictory or ambiguous artifact facts, `unsupported`
+for a well-formed target, ABI, or artifact outside the declared support
+contract, and `unavailable` when required artifact, delivery, loader,
+capability, or evidence facts cannot be established.
+
+### No Fallback
+
+Do not mandate Strategy/Factory, guess a filename or extension, use an ambient
+search result as identity, try another loader or artifact, embed a copy, or
+report success when the selected artifact contract is unsupported or
+unavailable.
 
 ## Filesystem Paths
 

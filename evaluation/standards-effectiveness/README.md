@@ -203,6 +203,13 @@ typed invalid/unsupported/unavailable outcomes, exact disposition of
 fixed-target, universal-pattern, stub, alternate-mechanism, and weaker-evidence
 fallback.
 
+`fixtures/cross-platform/native-artifact-loading-*.tsv` and
+`verify-native-artifact-loading.sh` select linking, loading, package/OS
+resolution, supplied-handle, or embedded-resource mechanisms from declared
+artifact and deployment contracts. They prove two exact dispositions and
+reject mandatory Strategy, guessed names, ambient discovery, alternate
+loaders/artifacts, embedded copies, and default success with typed outcomes.
+
 ## IPC Payload Decision Fixtures
 
 `fixtures/ipc/action-payload-decisions.tsv` and

@@ -3405,3 +3405,27 @@ fixture, configuration, lockfile, or downstream repository changed.
 
 **Next slice:** `7.4b8t`, replace `STD-0294` and `STD-0295` with the
 Cross-Platform native artifact loading contract.
+
+## 2026-07-29: Milestone 7.4b8t Native Artifact Loading
+
+**Outcome:** Accepted.
+
+`STD-0294` and `STD-0295` now select native artifact loading from declared
+artifact identity, target/ABI compatibility, delivery authority, integrity,
+mechanism/lifecycle, capability, and consumer-evidence facts.
+
+**Verification:** 23 reusable decision cases; two exact dispositions;
+canonical Cross-Platform and bounded legacy assertions; platform-target,
+row-6 decomposition, immutable train, plan lifecycle, shell syntax,
+whitespace, and complete fail-fast checker-suite verification.
+
+**No-fallback result:** mandatory Strategy, guessed filename/extension,
+ambient discovery, alternate loader/artifact, embedded copy, and default
+success are rejected with typed invalid, unsupported, or unavailable outcomes.
+
+No Release or Verification normative policy, artifact naming, installation
+guidance, CI scheduling, routing, metadata, lockfile, generated inventory,
+owner map, configuration, or downstream repository changed.
+
+**Next slice:** `7.4b8u`, replace `STD-0296` and `STD-0297` with
+Release-owned native artifact identity and installation information.

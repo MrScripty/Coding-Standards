@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Cross-platform row 6 is decomposed; native artifact loading
-is next.
+**Current phase:** Cross-platform row 6 child 6.1 is complete; Release-owned
+native artifact identity and installation information are next.
 
-**Next slice:** Milestone 7.4b8t native artifact loading for active child `STD-0294` and `STD-0295`.
+**Next slice:** Milestone 7.4b8u native artifact identity and installation for active child `STD-0296` and `STD-0297`.
 
 **Acceptance status:** `partial`
 
@@ -1142,8 +1142,18 @@ all structural/routing fixtures pass.
      - remove mandatory Strategy, filename-table, provider-matrix,
        Linux/Windows, fail-fast, and fixed trigger defaults rather than
        preserving them as alternate paths.
-   - `7.4b8t` (`Planned`): replace `STD-0294` and `STD-0295` with the
-     Cross-Platform native artifact loading contract.
+   - `7.4b8t` (`Accepted`): replace `STD-0294` and `STD-0295` with the
+     Cross-Platform native artifact loading contract;
+     - declare artifact identity, target/ABI compatibility, delivery
+       authority, integrity requirements, mechanism/lifecycle authority, and
+       consumer evidence before loading;
+     - select static linking, dynamic loading, package or OS resolution,
+       supplied handles, or embedding only from declared deployment facts;
+     - route shipped identity and installation information to Release and
+       language-specific mechanics to the selected language profile; and
+     - reject mandatory Strategy, guessed names, ambient discovery,
+       alternate loaders/artifacts, embedded copies, and default success with
+       typed invalid, unsupported, or unavailable outcomes.
    - `7.4b8u` (`Planned`): replace `STD-0296` and `STD-0297` with
      Release-owned native artifact identity and installation information.
    - `7.4b8v` (`Planned`): replace `STD-0298` and `STD-0299` with

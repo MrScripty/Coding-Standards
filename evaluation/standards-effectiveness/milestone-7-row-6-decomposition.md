@@ -109,5 +109,9 @@ Missing or contradictory contract facts produce typed diagnostics.
 
 ## Next Slice
 
-Milestone `7.4b8t` implements child `6.1`, `STD-0294` and `STD-0295`, as the
-Cross-Platform native artifact loading contract.
+Milestone `7.4b8t` accepted child `6.1`, `STD-0294` and `STD-0295`, as the
+Cross-Platform native artifact loading contract with focused decision-table
+evidence and two exact dispositions.
+
+Milestone `7.4b8u` implements child `6.2`, `STD-0296` and `STD-0297`, as
+Release-owned native artifact identity and installation information.
