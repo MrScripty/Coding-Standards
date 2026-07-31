@@ -3962,6 +3962,23 @@ focused decisions and one exact disposition prove the boundary.
 **Next slice:** `7.4b8ax`, establish the non-empty Dependencies owner contract
 before populating `STD-0496` through `STD-0498`.
 
+**Slice `7.4b8ax` accepted:** established and routed the non-empty Dependencies
+topic. It owns requirement and execution-boundary ownership, candidate
+selection, reproducible resolution, satisfaction evidence, explicit
+provisioning authority, update/removal lifecycle, and typed outcomes. Release,
+Security, Resilience, language/framework profiles, and Launcher retain their
+respective publication, trust, failure, mechanism, and projection authority.
+
+**No-fallback/legacy result:** candidate or resolution selection cannot use
+popularity, recency, standard-library status, in-house preference, transitive
+or global availability, cache, alternate registry/version, implicit install,
+privilege escalation, successful no-op, or default success. Nineteen focused
+decisions prove typed invalid, unsupported, and unavailable outcomes.
+`STD-0496`, `STD-0497`, and `STD-0498` remain undisposed.
+
+**Next slice:** `7.4b8ay`, refine `STD-0496`, `STD-0497`, and `STD-0498`
+installation policy into Dependencies.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

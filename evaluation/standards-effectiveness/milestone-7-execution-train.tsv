@@ -14,7 +14,7 @@ order	wave	start_id	end_id	source	owner	owner_state	activation	checkpoint
 13	lifecycle-runtime	STD-0273	STD-0279	CONCURRENCY-STANDARDS.md	topics/concurrency.md	exists	pre-slice-review	focused
 14	lifecycle-runtime	STD-0487	STD-0512	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	exists	owner-review	full-suite
 15	process-dependencies	STD-0135	STD-0194	CODING-STANDARDS.md	CORE-STANDARDS.md	exists	pre-slice-review	focused
-16	process-dependencies	STD-0300	STD-0348	DEPENDENCY-STANDARDS.md	topics/dependencies.md	missing	owner-review	focused
+16	process-dependencies	STD-0300	STD-0348	DEPENDENCY-STANDARDS.md	topics/dependencies.md	exists	pre-slice-review	focused
 17	process-dependencies	STD-0513	STD-0530	PLAN-STANDARDS.md	workflows/planning.md	exists	pre-slice-review	focused
 18	process-dependencies	STD-0602	STD-0653	TESTING-STANDARDS.md	workflows/verification.md	exists	pre-slice-review	focused
 19	process-dependencies	STD-0654	STD-0703	TOOLING-STANDARDS.md	workflows/tooling.md	missing	owner-review	focused

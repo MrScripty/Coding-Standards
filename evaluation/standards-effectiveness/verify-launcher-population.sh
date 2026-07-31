@@ -98,9 +98,10 @@ active_child="$(awk -F '\t' '$1 == 14 && $2 == 3 { print $1 "." $2 "\t" $3 }' "$
 
 rg -F -q '`7.4b8av` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8aw` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ax` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8ax` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8ay` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ax'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ay'* ]]
 
 "$S/verify-launcher-owner-contract.sh"
 "$S/verify-milestone-7-row-14-decomposition.sh"

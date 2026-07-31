@@ -36,7 +36,7 @@ observable task conditions. Do not read every document by default.
 | Multi-step work, architectural decisions, or re-planning | [Planning](workflows/planning.md) |
 | Commit creation or history maintenance | [Commit](workflows/commit.md) |
 | Durable responsibility, decision, contract, or operational procedure changes | [Documentation](workflows/documentation.md) |
-| Dependency or CI/tool configuration changes | [Current tooling guidance](TOOLING-STANDARDS.md) until migration |
+| CI or tool configuration changes | [Current tooling guidance](TOOLING-STANDARDS.md) until migration |
 | Shipping an artifact, changing a published version promise, or preparing consumer-visible release information | [Release](workflows/release.md) |
 
 Small, local, low-risk changes do not require a large implementation plan when
@@ -101,7 +101,7 @@ condition is present:
 | Dependency or service failure, retry, degradation, startup resilience, or recovery semantics | [Resilience](topics/resilience.md) |
 | Filesystem path construction, identity, comparison, or supported-filesystem behavior | [Cross-platform](topics/cross-platform.md) |
 | Other multiple declared operating-system target concerns | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) until migration |
-| Third-party package selection or update | [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) |
+| Dependency requirement, ownership, selection, resolution, provisioning, update, or removal policy is required | [Dependencies](topics/dependencies.md) |
 | Untrusted input authorizes an operation, resource access, side effect, or security-relevant decision | [Security](topics/security.md) |
 | Other network transport or secret concerns | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) until migration |
 

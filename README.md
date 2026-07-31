@@ -30,6 +30,7 @@ reference material.
 | [reference/recipes/releases.md](reference/recipes/releases.md) | Non-normative changelog automation example | Configuring a selected release tool |
 | [topics/contracts.md](topics/contracts.md) | Runtime decoding proof, contract classes, migration, compatibility, degraded outcomes, and typed diagnostics | Boundary decoding, contract evolution, persisted state, or fallback decisions |
 | [topics/concurrency.md](topics/concurrency.md) | Shared-state coordination, lock boundaries, nonblocking async lifecycle, failure observation, and cancellation ownership | Concurrent state or asynchronous work with lifecycle obligations |
+| [topics/dependencies.md](topics/dependencies.md) | Dependency requirements, ownership, selection, resolution, provisioning, and lifecycle policy | Adding, changing, resolving, installing, updating, or removing a dependency |
 | [topics/security.md](topics/security.md) | Canonical untrusted-input authority and filesystem-containment policy | Untrusted values authorizing operations or resource access |
 | [topics/cross-platform.md](topics/cross-platform.md) | Canonical path construction and filesystem-identity policy | Path behavior across supported platforms or filesystems |
 | [profiles/boundaries/interop.md](profiles/boundaries/interop.md) | Foreign memory, resource authority, lifecycle, thread, and validated-adapter contracts | Foreign pointers, handles, callbacks, runtimes, or resources |

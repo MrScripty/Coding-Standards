@@ -72,6 +72,5 @@ lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8ax` establishes the non-empty Dependencies owner contract
-before `STD-0496` through `STD-0498` population. It does not dispose those
-identifiers or the Release or Security groups.
+Milestone `7.4b8ay` refines `STD-0496`, `STD-0497`, and `STD-0498` into
+Dependencies. It does not dispose the Release or Security groups.
