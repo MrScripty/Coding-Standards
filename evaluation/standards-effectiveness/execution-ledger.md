@@ -3815,6 +3815,23 @@ profile implicitly.
 **Next slice:** `7.4b8ap`, establish the TypeScript Async owner contract before
 moving `STD-0275` and `STD-0276`.
 
+**Slice `7.4b8ap` accepted:** established the non-empty TypeScript Async
+profile and router entry for current-invocation authority, cancellation,
+completion classification, and result application. The 14-case owner fixture
+permits scoped generation, cancellation, and serialized ownership mechanisms
+while rejecting process-global counters, stale mutation, discarded
+completion, ignored cancellation, alternate mechanisms, missing
+capability/evidence, and default success.
+
+**No-fallback/legacy result:** a reused service or runtime does not carry
+request inputs, cancellation, result ownership, or stale state between
+invocations. Missing or contradictory authority cannot select a counter,
+silent discard, alternate mechanism, or default success. `STD-0275` and
+`STD-0276` remain undisposed until population.
+
+**Next slice:** `7.4b8aq`, refine `STD-0276` in TypeScript Async and close
+`STD-0275` as its legacy index.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

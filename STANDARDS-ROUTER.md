@@ -72,6 +72,7 @@ contain infrastructure code.
 | Rust source, Cargo metadata, or Rust-generated artifacts change | [Rust profile](profiles/languages/rust/README.md) |
 | Rust async API, suspension boundary, concurrent I/O, stream, backpressure, cancellation-aware operation, or async resource lifetime changes | [Rust Async profile](profiles/languages/rust/async.md) plus the Rust profile |
 | Rust target contracts, triples, support claims, target-dependent source/configuration, target artifacts, or target evidence obligations change | [Rust Cross-Platform profile](profiles/languages/rust/cross-platform.md) plus the Rust profile and Cross-Platform topic |
+| TypeScript `Promise`, overlapping invocation, stale-result, cancellation, or async state-application mechanism changes | [TypeScript Async profile](profiles/languages/typescript/async.md) plus the Concurrency topic |
 | No language-specific mechanism changes | No language profile |
 
 Language profiles specialize mechanisms only. Cross-language policy remains in

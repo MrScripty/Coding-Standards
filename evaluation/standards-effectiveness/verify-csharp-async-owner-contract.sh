@@ -72,9 +72,10 @@ overlay_row="$(
 rg -F -q '`7.4b8am` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8an` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ao` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ap` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8ap` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8aq` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ap'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8aq'* ]]
 [[ "$next_slice_line" == *'STD-0275'* && "$next_slice_line" == *'STD-0276'* ]]
 
 "$S/verify-milestone-7-row-13-decomposition.sh"

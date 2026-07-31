@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** row 13 children 13.1 and 13.2 are complete; the TypeScript
-Async owner contract is required before `STD-0275` and `STD-0276` can move.
+**Current phase:** the TypeScript Async owner contract exists; `STD-0275` and
+`STD-0276` are ready for their bounded population slice.
 
-**Next slice:** Milestone 7.4b8ap establish the TypeScript Async owner contract before implementing `STD-0275` and `STD-0276`.
+**Next slice:** Milestone 7.4b8aq refine `STD-0276` in TypeScript Async and close `STD-0275` as its legacy index.
 
 **Acceptance status:** `partial`
 
@@ -1295,8 +1295,13 @@ all structural/routing fixtures pass.
      index routing directly to the canonical Rust Async and Rust Security
      profiles; remove the legacy Rust standards-file links without creating
      another Rust concurrency authority.
-   - `7.4b8ap` (`Planned`): establish the TypeScript Async owner contract
-     without disposing `STD-0275` or `STD-0276`.
+   - `7.4b8ap` (`Accepted`): establish the non-empty TypeScript Async owner
+     contract and route it for overlapping invocation, stale-result,
+     cancellation, and async state-application mechanisms. Require scoped
+     current-invocation authority and explicit terminal classification;
+     reject process-global counters, stale mutation, discarded completion,
+     ignored cancellation, alternate mechanisms, prior-invocation state, and
+     default success. Do not dispose `STD-0275` or `STD-0276`.
    - `7.4b8aq` (`Planned`): refine `STD-0276` in TypeScript Async and close
      `STD-0275` as its legacy index.
    - `7.4b8ar` (`Planned`): establish the Godot framework owner contract

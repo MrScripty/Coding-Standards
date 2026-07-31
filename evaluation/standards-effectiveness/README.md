@@ -114,6 +114,13 @@ population. They select continuation scheduling from explicit affinity and
 capability facts while rejecting blanket context suppression, blocking,
 alternate dispatch, missing evidence, and default success.
 
+`fixtures/typescript/async-owner-contract-decisions.tsv` and
+`verify-typescript-async-owner-contract.sh` establish the TypeScript Async
+profile before population. They require scoped current-invocation authority
+and explicit terminal classification while rejecting process-global counters,
+stale mutation, discarded completion, ignored cancellation, alternate
+mechanisms, missing evidence, and default success.
+
 `fixtures/rust/binding-core-adapter-testability-*.tsv` and
 `verify-rust-binding-core-adapter-testability.sh` require distinct
 framework-free core and real native/host adapter evidence. They reject
