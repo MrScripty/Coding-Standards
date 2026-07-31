@@ -45,15 +45,15 @@ for text in 'Those concerns do not share one canonical' \
 done
 
 rg -F -q '`7.4b8bu` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8bv` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8bv` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8bw` (`Planned`)' "$PLAN"
 next_slice_block="$(awk '
   /^\*\*Next slice:\*\*/ { capture = 1 }
   capture && /^$/ { exit }
   capture { print }
 ' "$PLAN")"
-[[ "$next_slice_block" == *'Milestone 7.4b8bv'* ]]
-[[ "$next_slice_block" == *'STD-0611'* ]]
-[[ "$next_slice_block" == *'STD-0639'* ]]
+[[ "$next_slice_block" == *'Milestone 7.4b8bw'* ]]
+[[ "$next_slice_block" == *'STD-0616'* ]]
 
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-18 decomposition passed: all 52 IDs assigned across 7 ordered children\n'

@@ -4372,6 +4372,30 @@ baseline IDs across 54 completed and 36 pending logical clusters.
 **Next slice:** `7.4b8bv`, refine `STD-0611` and `STD-0639` into the existing
 Concurrency owner package.
 
+## Milestone 7.4b8bv: Testing Concurrency Consolidation
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Concurrency now owns verification-resource identity,
+exclusive ownership or explicit coordination, borrowed-global restoration,
+owned-work termination, and lifecycle evidence for cleanup, restart/retry,
+stale results, cancellation, and partial state. The two legacy sections are
+bounded non-normative routes while undisposed Testing sections remain intact.
+
+**No-fallback/legacy result:** implicit serialization, ambient resource reuse,
+weakened parallelism, fixed repetition, stale state, build/startup/happy-path
+substitution, and weakened assertions are rejected with typed diagnostics.
+
+**Verification:** focused decisions cover 15 valid, invalid, and unavailable
+resource/lifecycle outcomes; exact replacement and two dispositions are
+checked together with row-18 decomposition and the execution train. All 121
+`verify-*.sh` checkers pass; the train reports 223 completed and 366 remaining
+IDs across 55 completed and 35 pending logical clusters, with child `18.2`
+active.
+
+**Next slice:** `7.4b8bw`, refine `STD-0616` into the existing Language
+Bindings owner package.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

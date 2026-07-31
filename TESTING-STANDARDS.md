@@ -115,36 +115,9 @@ Do not impose universal duration thresholds or CI-only categories.
 
 ### Global State and Durable Resource Isolation
 
-Integration tests must isolate process-global and durable resources so they are
-safe under concurrent execution and CI parallelism.
-
-Examples of resources that require isolation:
-- environment variables
-- temp directories
-- sqlite/database files
-- registry files
-- shared cache roots
-- singleton service ports
-- global config paths
-- process-wide lazy statics
-
-Rules:
-
-1. Each integration test must own its own durable state path unless the suite
-   explicitly serializes access.
-2. If a test mutates process-global state such as environment variables, it
-   must restore that state before exit and prevent concurrent mutation.
-3. If isolation is impossible, serialize the affected tests with an explicit
-   guard and document why serialization is required.
-4. Shared mutable durable state between tests is a correctness bug, not a test
-   optimization.
-5. CI reliability takes priority over local convenience. Flaky parallel tests
-   must be refactored to isolate state or deliberately serialized.
-
-Verification guidance:
-- Run affected suites with normal parallelism enabled.
-- Re-run the same suite more than once to detect hidden state leakage.
-- Prefer per-test temp roots and unique database paths over shared fixtures.
+Canonical verification-resource ownership and coordination requirements are in
+[Concurrency](topics/concurrency.md#isolate-verification-resources). This
+legacy heading is a non-normative migration route.
 
 ### End-to-End Tests
 
@@ -507,14 +480,9 @@ test('fetchUser throws for invalid ID', async () => {
 
 ### Lifecycle Regression Checks
 
-When changing polling, timers, retries, restart logic, or cancellation paths,
-add targeted regression checks for:
-- Timer/subscription cleanup after unmount, shutdown, or dependency changes
-- Restart loops terminating correctly instead of spawning duplicate work
-- Overlapping requests or retries not racing stale results over newer state
-- Cancellation aborting in-flight work without leaving partial state behind
-
-Do not rely on a passing build or happy-path smoke test to cover these cases.
+Canonical lifecycle ownership and evidence requirements are in
+[Concurrency](topics/concurrency.md#verification). This legacy heading is a
+non-normative migration route.
 
 ### Service-Layer Error Paths
 

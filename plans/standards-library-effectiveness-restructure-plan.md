@@ -9,8 +9,8 @@
 **Current phase:** Legacy Planning closure is complete; the existing-owner
 Verification package is next.
 
-**Next slice:** Milestone 7.4b8bv refine `STD-0611` and `STD-0639` into the
-existing Concurrency owner package.
+**Next slice:** Milestone 7.4b8bw refine `STD-0616` into the existing Language
+Bindings owner package.
 
 **Acceptance status:** `partial`
 
@@ -1468,8 +1468,15 @@ all structural/routing fixtures pass.
      fixed schedules, substitute environments, producer-only proof, fixed
      coverage or performance targets, weakened assertions, checklist
      completion, and default success. Make no normative or disposition change.
-   - `7.4b8bv` (`Planned`): refine `STD-0611` and `STD-0639` into the existing
-     Concurrency owner package.
+   - `7.4b8bv` (`Accepted`): refine `STD-0611` and `STD-0639` into the existing
+     Concurrency owner. Require exclusive verification-resource ownership or
+     an explicit invariant-matched coordination contract plus lifecycle
+     cleanup, retry/restart termination, stale-result exclusion, cancellation,
+     and partial-state evidence. Reject implicit serialization, ambient
+     identities, weakened parallelism, fixed repetition, build/smoke/happy-
+     path substitution, and weakened assertions with typed diagnostics.
+   - `7.4b8bw` (`Planned`): refine `STD-0616` into the existing Language
+     Bindings owner package.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

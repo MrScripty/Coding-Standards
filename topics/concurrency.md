@@ -80,6 +80,27 @@ Cancellation must propagate through all owned work that remains part of the
 operation. A boundary may translate cancellation into another concrete
 mechanism, but it must preserve the cancellation decision and typed outcome.
 
+## Isolate Verification Resources
+
+Verification that can overlap must give each case exclusive ownership of its
+mutable process-global and durable resources, or apply an explicit coordination
+contract that proves the affected invariant. Environment variables, temporary
+roots, databases, registry or configuration files, caches, ports, singleton
+services, and process-wide state are shared resources when concurrent cases can
+observe or mutate the same identity.
+
+Restore borrowed global state and terminate owned work before the case exits.
+Exercise the selected parallelism and lifecycle conditions needed to expose
+state leakage, but derive repetition count, schedule, and environment from the
+claim rather than a fixed test recipe.
+
+Serialization is a valid selected mechanism only when the owner records the
+shared invariant, exclusion scope, and reason independent ownership cannot be
+established. Do not serialize as a fallback for unidentified interference,
+retain stale durable state, reuse an ambient resource identity, or weaken
+parallel verification to make a race disappear. Return a typed diagnostic when
+the required ownership or coordination facts are missing or unavailable.
+
 ## Typed Outcomes
 
 Return the operation's typed `invalid`, `unsupported`, or `unavailable`
@@ -102,4 +123,12 @@ including applicable:
 - nonblocking request and lifecycle behavior;
 - success, failure, and cancellation observation;
 - owner shutdown with active work; and
+- timer, subscription, polling, and retry cleanup;
+- restart termination without duplicate work;
+- current-invocation results winning over stale overlapping work;
+- cancellation without residual partial state;
+- verification-resource isolation under selected parallel execution; and
 - rejection when the required mechanism or owner is unavailable.
+
+A passing build, startup smoke, happy path, serialized rerun, or assertion that
+omits the lifecycle outcome does not prove these claims.
