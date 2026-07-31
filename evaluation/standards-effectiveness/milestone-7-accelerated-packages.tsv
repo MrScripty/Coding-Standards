@@ -8,7 +8,7 @@ train_order	package_id	risk_class	owner	owner_action	verification_family	draft_m
 11	P07	consolidation	topics/resilience.md	existing-review	decision-table	isolated-draft	focused	resilience-recovery-contract	core,workflow.verification,topic.contracts
 12	P08	refinement	topics/concurrency.md	existing-review	decision-table	isolated-draft	focused	async-specialization-row-decomposition	core,workflow.verification
 13	P08	refinement	topics/concurrency.md	existing-review	decision-table	isolated-draft	focused	async-specialization-row-decomposition	core,workflow.verification
-14	P09	new-owner-design	profiles/applications/launcher.md	create-before-populate	owner-contract	isolated-draft	full-suite	launcher-lifecycle-and-acceptance-contract	core,workflow.verification,topic.resilience
+14	P09	consolidation	profiles/applications/launcher.md	existing-review	decision-table	isolated-draft	full-suite	launcher-lifecycle-and-acceptance-contract	core,workflow.verification,topic.resilience
 15	P10	consolidation	CORE-STANDARDS.md	existing-review	migration-structure	serial-only	full-suite	core-rule-consolidation	none
 16	P11	new-owner-design	topics/dependencies.md	create-before-populate	owner-contract	isolated-draft	full-suite	dependency-selection-and-maintenance-contract	core,workflow.verification,workflow.release
 17	P12	consolidation	workflows/planning.md	existing-review	decision-table	serial-only	full-suite	planning-rule-consolidation	core,workflow.implementation,workflow.verification

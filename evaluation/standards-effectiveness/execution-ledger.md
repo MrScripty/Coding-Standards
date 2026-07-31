@@ -3885,6 +3885,26 @@ observable lifecycle, and object authority at use.
 **Next slice:** `7.4b8at`, establish the Launcher application owner contract
 before implementing immutable row 14, `STD-0487` through `STD-0512`.
 
+**Slice `7.4b8at` accepted:** established the non-empty Launcher application
+profile and router entry for action selection, argument decoding, canonical
+procedure delegation, process/state lifecycle, and terminal-outcome
+preservation. The 16-case owner fixture rejects unknown or multiple actions,
+malformed arguments, guessed targets, alternate commands, successful no-ops,
+missing procedure/lifecycle/evidence, and default success.
+
+**Ownership boundary:** the launcher is an adapter. It does not own
+application business logic, dependency selection, build or release semantics,
+verification acceptance, frontend projection, or transport policy. Delegated
+procedure evidence cannot be upgraded by passing through a launcher action.
+
+**No-fallback/legacy result:** missing or contradictory action, target,
+procedure, lifecycle, or evidence facts cannot select a raw command, implicit
+install, no-op success, alternate action, weakened mode, stale state, or
+default success. `STD-0487` through `STD-0512` remain undisposed.
+
+**Next slice:** `7.4b8au`, decompose Launcher row 14 by canonical owner and
+verification contract before population.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

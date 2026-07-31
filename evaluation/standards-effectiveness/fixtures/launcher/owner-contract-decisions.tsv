@@ -1,0 +1,17 @@
+case	selection	action	procedure	arguments	target	lifecycle	evidence	fallback	expected
+declared_run	one	declared	selected	valid	available	complete	complete	none	allow
+declared_build	one	declared	selected	valid	available	complete	complete	none	allow
+declared_verification	one	declared	selected	valid	available	bounded	complete	none	allow
+declared_install	one	declared	selected	valid	available	complete	complete	none	allow
+unknown_action	one	unknown	selected	valid	available	complete	complete	none	typed-invalid
+multiple_actions	multiple	declared	selected	valid	available	complete	complete	none	typed-invalid
+malformed_arguments	one	declared	selected	invalid	available	complete	complete	none	typed-invalid
+unsupported_action	one	unsupported	selected	valid	available	complete	complete	none	typed-unsupported
+missing_procedure	one	declared	missing	valid	available	complete	complete	none	typed-unavailable
+missing_target	one	declared	selected	valid	missing	complete	complete	none	typed-unavailable
+missing_lifecycle	one	declared	selected	valid	available	missing	complete	none	typed-unavailable
+missing_evidence	one	declared	selected	valid	available	complete	missing	none	typed-unavailable
+guessed_target	one	declared	selected	valid	missing	complete	complete	guess-target	typed-invalid
+alternate_command	one	declared	missing	valid	available	complete	complete	alternate-command	typed-invalid
+successful_noop	one	unsupported	missing	valid	available	complete	complete	successful-noop	typed-invalid
+default_success	none	unknown	missing	invalid	missing	missing	missing	default-success	typed-invalid

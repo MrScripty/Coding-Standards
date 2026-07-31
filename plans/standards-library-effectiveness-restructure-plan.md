@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** row 13 is complete; immutable row 14 requires the Launcher
-application owner contract before `STD-0487` through `STD-0512` can move.
+**Current phase:** the Launcher application owner contract exists; immutable
+row 14 requires bounded semantic decomposition before population.
 
-**Next slice:** Milestone 7.4b8at establish the Launcher application owner contract before implementing `STD-0487` through `STD-0512`.
+**Next slice:** Milestone 7.4b8au decompose Launcher row 14, `STD-0487` through `STD-0512`, by canonical owner and verification contract.
 
 **Acceptance status:** `partial`
 
@@ -1319,8 +1319,17 @@ all structural/routing fixtures pass.
      universal main-thread dispatch and validity-check-only guidance with
      selected engine affinity, observable dispatch ownership, point-of-use
      lifetime proof, and typed diagnostics.
-   - `7.4b8at` (`Planned`): establish the Launcher application owner contract
-     before implementing immutable row 14, `STD-0487` through `STD-0512`.
+   - `7.4b8at` (`Accepted`): establish the non-empty Launcher application
+     owner contract and route launcher command projection, action decoding,
+     procedure delegation, process/state lifecycle, and outcome preservation
+     to it. Keep application business logic, dependency selection, build,
+     release, verification acceptance, frontend projection, and transport
+     policy with their canonical owners. Reject guessed actions or targets,
+     alternate commands, implicit install, successful no-ops, evidence
+     upgrades, stale state, and default success. Do not dispose
+     `STD-0487` through `STD-0512`.
+   - `7.4b8au` (`Planned`): perform bounded semantic decomposition of Launcher
+     row 14 before any population slice.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

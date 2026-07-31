@@ -48,7 +48,7 @@ the objective, write set, regression check, and acceptance are obvious.
 | --- | --- |
 | Reusable package, crate, SDK, or library module | [Library](profiles/applications/library.md) |
 | Web or web-technology user interface | [Current frontend guidance](FRONTEND-STANDARDS.md) until migration |
-| Common application launcher contract is required | [Current launcher guidance](LAUNCHER-STANDARDS.md) until migration |
+| Common application launcher command projection, lifecycle, delegation, or outcome-preservation contract is required | [Launcher application profile](profiles/applications/launcher.md) |
 
 Do not select frontend or launcher guidance for a library-only code change.
 

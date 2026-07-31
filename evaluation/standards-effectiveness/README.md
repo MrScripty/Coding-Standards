@@ -128,6 +128,13 @@ point-of-use object-lifetime proof while rejecting off-thread access,
 detached deferred work, check-then-use gaps, stale references, alternate
 dispatch, missing evidence, and default success.
 
+`fixtures/launcher/owner-contract-decisions.tsv` and
+`verify-launcher-owner-contract.sh` establish the Launcher application profile
+before row-14 population. They require declared action capability, exact
+procedure delegation, process lifecycle, and outcome preservation while
+rejecting guessed actions or targets, alternate commands, successful no-ops,
+missing evidence, and default success.
+
 `fixtures/rust/binding-core-adapter-testability-*.tsv` and
 `verify-rust-binding-core-adapter-testability.sh` require distinct
 framework-free core and real native/host adapter evidence. They reject

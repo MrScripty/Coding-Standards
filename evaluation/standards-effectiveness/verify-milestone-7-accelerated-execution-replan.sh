@@ -79,7 +79,7 @@ done < "$PACKAGES"
 [[ "$row_count" -eq 43 ]]
 [[ "${#seen_orders[@]}" -eq 43 ]]
 [[ "${#package_seen[@]}" -eq 39 ]]
-[[ "${#missing_owners[@]}" -eq 12 ]]
+[[ "${#missing_owners[@]}" -eq 11 ]]
 
 for order in $(seq 5 47); do
   [[ -n "${seen_orders[$order]:-}" ]]
@@ -139,7 +139,7 @@ rg -F -q '`7.4b8x` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8y` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8z` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8at'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8au'* ]]
 
 [[ -x "$DECISION_ENGINE" && -x "$DECISION_ENGINE_FIXTURES" ]]
 "$DECISION_ENGINE_FIXTURES"
