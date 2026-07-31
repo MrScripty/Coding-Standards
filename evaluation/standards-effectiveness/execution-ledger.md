@@ -3753,6 +3753,29 @@ planning slice.
 **Next slice:** `7.4b8am`, establish the C# Async owner contract before moving
 `STD-0273`.
 
+**Slice `7.4b8am` accepted:** established the non-empty C# Async profile and
+router entry for continuation scheduling, synchronization context, thread
+affinity, invocation isolation, and typed outcomes. The 12-case owner fixture
+selects supported context suppression only for proven context-free
+continuations, permits required capture or dispatch, and rejects contradictory
+affinity, blocking, alternate dispatch, missing capability/evidence, and
+default success.
+
+**Discovered issue (`Resolved`):** the initial focused checker repeated the
+word `typed` before each outcome even though the owner expresses one typed
+outcome list. The assertion now verifies the complete line-local
+`invalid`/`unsupported`/`unavailable` contract without requiring duplicate
+normative wording.
+
+**No-fallback/legacy result:** library or service placement cannot select
+`ConfigureAwait(false)`; missing or contradictory affinity, capability, or
+evidence cannot select implicit capture, context suppression, another
+dispatcher, blocking, detached work, prior-invocation state, or default
+success. `STD-0273` remains undisposed until population.
+
+**Next slice:** `7.4b8an`, refine and move `STD-0273` into the accepted C#
+Async profile.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

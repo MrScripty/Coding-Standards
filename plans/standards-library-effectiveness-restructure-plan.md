@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** row 13 is decomposed; the next required owner contract is
-C# Async before `STD-0273` can move.
+**Current phase:** the C# Async owner contract exists; `STD-0273` is ready for
+its bounded population slice.
 
-**Next slice:** Milestone 7.4b8am establish the C# Async owner contract before implementing `STD-0273`.
+**Next slice:** Milestone 7.4b8an refine and move `STD-0273` into the C# Async profile.
 
 **Acceptance status:** `partial`
 
@@ -1279,8 +1279,13 @@ all structural/routing fixtures pass.
      owner contracts before population, preserve generic lifecycle authority
      in Concurrency, and reject context suppression, request counters, silent
      stale-result discard, deferred calls, and validity checks as defaults.
-   - `7.4b8am` (`Planned`): establish the C# Async owner contract without
-     disposing or moving `STD-0273`.
+   - `7.4b8am` (`Accepted`): establish the non-empty C# Async owner contract,
+     route it for C# continuation and affinity changes, require the generic
+     Concurrency lifecycle contract, select continuation scheduling from
+     explicit affinity and capability facts, preserve invocation isolation,
+     and return typed diagnostics rather than blanket context suppression,
+     implicit capture, blocking, detached work, alternate dispatch, prior
+     invocation state, or default success. Do not dispose or move `STD-0273`.
    - `7.4b8an` (`Planned`): refine and move `STD-0273` into the accepted C#
      Async profile.
    - `7.4b8ao` (`Planned`): close `STD-0274` as non-normative routing to the

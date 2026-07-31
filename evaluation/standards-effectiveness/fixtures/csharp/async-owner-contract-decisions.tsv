@@ -1,0 +1,13 @@
+case	affinity	mechanism	capability	evidence	fallback	expected
+context_free_suppression	context-free	suppress	supported	complete	none	allow
+affine_capture	affine	capture	supported	complete	none	allow
+affine_dispatch	affine	dispatch	supported	complete	none	allow
+affine_suppression	affine	suppress	supported	complete	none	typed-invalid
+context_free_forced_capture	context-free	capture	supported	contradictory	none	typed-invalid
+unknown_affinity	unknown	suppress	supported	complete	none	typed-unavailable
+missing_capability	context-free	suppress	missing	complete	none	typed-unavailable
+unsupported_suppression	context-free	suppress	unsupported	complete	none	typed-unsupported
+missing_evidence	affine	dispatch	supported	missing	none	typed-unavailable
+blocking_wait	context-free	block	supported	complete	none	typed-invalid
+alternate_dispatch	affine	dispatch	supported	complete	alternate-dispatch	typed-invalid
+default_success	unknown	capture	missing	missing	default-success	typed-invalid

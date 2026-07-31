@@ -108,6 +108,12 @@ proves exact ordered coverage, zero premature dispositions, three missing
 owner contracts, package handoff, no-fallback evidence, and active cursor
 integrity.
 
+`fixtures/csharp/async-owner-contract-decisions.tsv` and
+`verify-csharp-async-owner-contract.sh` establish the C# Async profile before
+population. They select continuation scheduling from explicit affinity and
+capability facts while rejecting blanket context suppression, blocking,
+alternate dispatch, missing evidence, and default success.
+
 `fixtures/rust/binding-core-adapter-testability-*.tsv` and
 `verify-rust-binding-core-adapter-testability.sh` require distinct
 framework-free core and real native/host adapter evidence. They reject

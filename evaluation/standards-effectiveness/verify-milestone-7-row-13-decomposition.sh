@@ -10,7 +10,7 @@ readonly REPORT="$S/milestone-7-row-13-decomposition.md"
 readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 expected_rows=(
-  $'13\t1\tSTD-0273\tCONCURRENCY-STANDARDS.md\tprofiles/languages/csharp/async.md\tmissing\towner-review\tfocused'
+  $'13\t1\tSTD-0273\tCONCURRENCY-STANDARDS.md\tprofiles/languages/csharp/async.md\texists\tpre-slice-review\tfocused'
   $'13\t2\tSTD-0274\tCONCURRENCY-STANDARDS.md\tCONCURRENCY-STANDARDS.md\texists\tpre-slice-review\tfocused'
   $'13\t3\tSTD-0275,STD-0276\tCONCURRENCY-STANDARDS.md\tprofiles/languages/typescript/async.md\tmissing\towner-review\tfocused'
   $'13\t4\tSTD-0277,STD-0278,STD-0279\tCONCURRENCY-STANDARDS.md\tprofiles/frameworks/godot.md\tmissing\towner-review\tfocused'
@@ -46,8 +46,8 @@ package_row="$(
 )"
 [[ "$package_row" == $'13\tP08\trefinement\ttopics/concurrency.md\texisting-review\tdecision-table\tfocused\tasync-specialization-row-decomposition\tcore,workflow.verification' ]]
 
+[[ -e "$R/profiles/languages/csharp/async.md" ]]
 for owner in \
-  profiles/languages/csharp/async.md \
   profiles/languages/typescript/async.md \
   profiles/frameworks/godot.md; do
   [[ ! -e "$R/$owner" ]]
@@ -69,12 +69,13 @@ for text in "${required_report[@]}"; do
 done
 
 rg -F -q '`7.4b8al` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8am` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8am` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8an` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8am'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8an'* ]]
 [[ "$next_slice_line" == *'STD-0273'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-13 decomposition passed: 7 IDs across 4 ordered children; 3 owner contracts required\n'
+printf 'Milestone 7 row-13 decomposition passed: 7 IDs across 4 ordered children; C# owner exists and 2 owner contracts remain\n'
