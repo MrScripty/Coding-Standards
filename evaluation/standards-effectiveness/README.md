@@ -129,6 +129,10 @@ incumbent-structure fallback.
 legacy architecture identifiers and removal of fixed organization, layer,
 backend, framework, composition, and state-owner recipes.
 
+`fixtures/core/constants-decisions.tsv` and `verify-core-constants.sh` prove
+semantic constant/configuration ownership without universal literal,
+centralization, ambient, duplicated-default, or incumbent-value fallbacks.
+
 `fixtures/csharp/async-owner-contract-decisions.tsv` and
 `verify-csharp-async-owner-contract.sh` establish the C# Async profile before
 population. They select continuation scheduling from explicit affinity and

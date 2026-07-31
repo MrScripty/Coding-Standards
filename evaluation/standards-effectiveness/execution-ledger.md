@@ -4068,6 +4068,18 @@ Eleven exact dispositions prove complete replacement.
 **Next slice:** `7.4b8bf`, refine `STD-0148`, `STD-0149`, and `STD-0150`
 into Core.
 
+**Slice `7.4b8bf` accepted:** refined constants and configuration into Core.
+Values now follow semantic meaning, units, ownership, lifecycle, reuse, and
+authorized variation.
+
+**No-fallback/legacy result:** removed universal literal naming and centralized
+container recipes. Twelve decisions reject ambient configuration, duplicated
+defaults, global containers, and incumbent values; three exact dispositions
+prove replacement.
+
+**Next slice:** `7.4b8bg`, refine `STD-0151`, `STD-0152`, `STD-0153`, and
+`STD-0154` into Resilience.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

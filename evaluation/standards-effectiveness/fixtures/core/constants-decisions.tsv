@@ -1,0 +1,13 @@
+case	meaning	unit	owner	reuse	variation	fallback	expected
+local_literal	obvious	clear	local	one	invariant	none	keep-local
+domain_constant	declared	clear	local	one	invariant	none	name
+shared_contract	declared	clear	shared	multiple	invariant	none	share
+runtime_config	declared	clear	local	multiple	authorized	none	configure
+missing_meaning	missing	clear	local	one	invariant	none	typed-unavailable
+missing_unit	declared	missing	local	one	invariant	none	typed-unavailable
+missing_owner	declared	clear	missing	one	invariant	none	typed-unavailable
+every_literal	obvious	clear	local	one	invariant	name-all	typed-invalid
+global_container	declared	clear	local	one	invariant	global	typed-invalid
+ambient_config	declared	clear	local	one	unauthorized	ambient	typed-invalid
+incumbent_default	declared	clear	local	one	authorized	incumbent	typed-invalid
+duplicated_default	declared	clear	shared	multiple	authorized	duplicate	typed-invalid

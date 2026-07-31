@@ -433,3 +433,6 @@ STD-0144	CODING-STANDARDS.md	topics/architecture.md	refine	assign authoritative 
 STD-0145	CODING-STANDARDS.md	topics/architecture.md	refine	keep business policy independent of framework and delivery mechanisms without copied service examples
 STD-0146	CODING-STANDARDS.md	topics/architecture.md	refine	construct infrastructure at the narrowest lifecycle-owning composition boundary rather than universally near one entrypoint
 STD-0147	CODING-STANDARDS.md	topics/architecture.md	refine	assign every state transition one owner and reject split or ambient mutation paths
+STD-0148	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	define semantic constant and configuration ownership from meaning units policy lifecycle and override authority
+STD-0149	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	name literals only when semantic ownership or coordinated change requires it rather than banning every literal
+STD-0150	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	place values with the narrowest owning concern rather than a universal centralized constants container

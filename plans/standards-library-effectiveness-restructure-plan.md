@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Architecture population is canonical; Core constants and
-configuration are next.
+**Current phase:** Core constants/configuration are canonical; Resilience
+failure handling and diagnostics are next.
 
-**Next slice:** Milestone 7.4b8bf refine `STD-0148`, `STD-0149`, and `STD-0150` into Core.
+**Next slice:** Milestone 7.4b8bg refine `STD-0151`, `STD-0152`, `STD-0153`, and `STD-0154` into Resilience.
 
 **Acceptance status:** `partial`
 
@@ -1397,8 +1397,13 @@ all structural/routing fixtures pass.
      dependency tables, backend-by-location ownership, blanket optimistic-
      update prohibition, framework examples, entrypoint-only composition, and
      split state mutation authority.
-   - `7.4b8bf` (`Planned`): refine `STD-0148`, `STD-0149`, and `STD-0150`
-     into Core.
+   - `7.4b8bf` (`Accepted`): refine `STD-0148`, `STD-0149`, and `STD-0150`
+     into Core. Name and place values from semantic meaning, units, ownership,
+     lifecycle, reuse, and authorized variation. Reject universal literal
+     naming, global containers, ambient configuration, duplicated defaults,
+     and incumbent values.
+   - `7.4b8bg` (`Planned`): refine `STD-0151`, `STD-0152`, `STD-0153`, and
+     `STD-0154` into Resilience.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

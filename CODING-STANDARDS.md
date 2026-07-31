@@ -14,45 +14,8 @@ Architecture authority is canonical in
 layer, service, data/state ownership, dependency-direction, or composition
 policy.
 
-## Constants and Configuration
-
-### No Magic Numbers or Strings
-
-Every literal value should be a named constant:
-
-```
-// BAD
-if (retryCount > 3) { ... }
-element.style.width = '200px';
-
-// GOOD
-const MAX_RETRIES = 3;
-const PANEL_MIN_WIDTH = 200;
-
-if (retryCount > MAX_RETRIES) { ... }
-element.style.width = `${PANEL_MIN_WIDTH}px`;
-```
-
-### Centralize Constants
-
-Group related constants together:
-
-```
-// constants/ui.ts
-export const UI = {
-    PANEL_MIN_WIDTH: 200,
-    PANEL_MAX_WIDTH: 600,
-    ANIMATION_DURATION_MS: 300,
-    DEBOUNCE_DELAY_MS: 150,
-} as const;
-
-// constants/limits.ts
-export const LIMITS = {
-    MAX_FILE_SIZE_MB: 50,
-    MAX_RETRIES: 3,
-    REQUEST_TIMEOUT_MS: 30000,
-} as const;
-```
+Constants and configuration authority is canonical in
+[Core](CORE-STANDARDS.md#semantic-constants-and-configuration).
 
 ## Error Handling
 

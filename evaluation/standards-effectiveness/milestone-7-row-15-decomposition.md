@@ -58,4 +58,5 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bf` refines `STD-0148`, `STD-0149`, and `STD-0150` into Core.
+Milestone `7.4b8bg` refines `STD-0151`, `STD-0152`, `STD-0153`, and
+`STD-0154` into Resilience.

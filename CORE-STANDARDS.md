@@ -108,6 +108,26 @@ before implementation rather than choosing the fewest visible constructs.
 - Keep comments focused on non-obvious invariants, safety reasoning, and
   ownership decisions.
 
+### Semantic Constants And Configuration
+
+Name a value when its domain meaning, unit, policy, protocol identity, tuning
+authority, reuse, or coordinated change must be explicit. Keep a self-evident
+local literal at its point of use when naming or exporting it would add
+indirection without clarifying ownership.
+
+Place a constant or configuration value with the narrowest concern that owns
+its meaning and lifecycle. Share it only when multiple consumers intentionally
+use the same semantic contract. Central version coordination or convenient
+imports do not transfer ownership and do not justify a global constants
+container.
+
+Configuration is runtime or deployment-selected only when the owning contract
+allows variation. Do not turn invariants into settings, duplicate defaults
+across boundaries, infer units from a name, or select a value because it is
+already centralized. Missing or contradictory meaning, unit, owner, source, or
+override authority requires a typed diagnostic rather than a magic value,
+ambient setting, or incumbent default.
+
 ## Verification
 
 - Add the smallest test that fails for the defect or missing behavior before or
