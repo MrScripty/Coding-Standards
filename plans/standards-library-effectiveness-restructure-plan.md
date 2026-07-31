@@ -6,10 +6,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Launcher row 14 is complete; immutable row 15 requires
-bounded owner-and-correctness decomposition before population.
+**Current phase:** row 15 is decomposed; Core simplicity and index are next.
 
-**Next slice:** Milestone 7.4b8bb decompose row 15 `STD-0135` through `STD-0194` by canonical owner and verification contract.
+**Next slice:** Milestone 7.4b8bc refine `STD-0135` and `STD-0136` into Core.
 
 **Acceptance status:** `partial`
 
@@ -1379,8 +1378,11 @@ all structural/routing fixtures pass.
      semantic/encoding evidence. Remove raw interpolation and copied helper
      examples; reject cross-grammar quoting, evaluation, partial output,
      alternate destinations, raw values, and default commands.
-   - `7.4b8bb` (`Planned`): decompose row 15 `STD-0135` through `STD-0194`
-     by canonical owner and verification contract before population.
+   - `7.4b8bb` (`Accepted`): decompose row 15 `STD-0135` through `STD-0194`
+     into 15 owner-coherent children. Record Architecture, Licensing, general
+     TypeScript, Frontend, and Performance as missing owner contracts; make no
+     normative or disposition change.
+   - `7.4b8bc` (`Planned`): refine `STD-0135` and `STD-0136` into Core.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

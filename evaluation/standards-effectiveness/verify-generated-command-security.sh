@@ -22,7 +22,7 @@ rg -F -q '[Security](topics/security.md#generated-command-and-configuration-text
 mapfile -t rows < <(awk -F '\t' '$1>="STD-0508"&&$1<="STD-0510"{print $1}' "$S/consolidation-dispositions.tsv")
 [[ "${rows[*]}" == 'STD-0508 STD-0509 STD-0510' ]]
 rg -F -q '`7.4b8ba` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8bb` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b8bb` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-14-decomposition.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Generated command security passed: 14 decisions, 3 exact dispositions, active row 15\n'

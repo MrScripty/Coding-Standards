@@ -113,6 +113,9 @@ Verification, Dependencies, Release, and Security children. Its checker proves
 exact coverage of all 26 identifiers, owner states, package classification,
 zero premature dispositions, no-fallback findings, and the next bounded child.
 
+`milestone-7-row-15-decomposition.md` splits immutable row 15 into 15
+owner-coherent coding-policy children and records five missing owner contracts.
+
 `fixtures/csharp/async-owner-contract-decisions.tsv` and
 `verify-csharp-async-owner-contract.sh` establish the C# Async profile before
 population. They select continuation scheduling from explicit affinity and

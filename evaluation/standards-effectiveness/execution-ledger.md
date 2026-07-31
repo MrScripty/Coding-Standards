@@ -4021,6 +4021,17 @@ complete immutable Launcher row 14.
 **Next slice:** `7.4b8bb`, decompose row 15 `STD-0135` through `STD-0194` by
 canonical owner and verification contract before population.
 
+**Slice `7.4b8bb` accepted:** decomposed all 60 row-15 identifiers into 15
+owner-coherent children. Architecture, Licensing, general TypeScript,
+Frontend, and Performance require non-empty canonical owner contracts before
+population.
+
+**No-fallback/legacy result:** no normative text or disposition changed. The
+decomposition rejects fixed architecture, exception, validation, abstraction,
+attribution, typing, and performance recipes as universal fallback authority.
+
+**Next slice:** `7.4b8bc`, refine `STD-0135` and `STD-0136` into Core.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.
