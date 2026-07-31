@@ -135,6 +135,42 @@ alias, implicit trust across a new boundary, permissive defaults, or a weaker
 decoder. Do not discard an intact proof-bearing representation merely to
 mandate redundant validation.
 
+## Invariant Contracts
+
+State each material invariant as an observable contract owned by the value,
+operation, state transition, or boundary that must preserve it. Record the
+applicable domain, required state, and the transitions that may establish,
+preserve, or invalidate it.
+
+Preconditions describe facts a caller or upstream owner must establish before
+an operation. Postconditions describe facts the operation guarantees on each
+declared outcome. Internal assumptions are not preconditions unless a real
+caller can establish and verify them. Do not transfer an implementation
+obligation to a caller merely to simplify the implementation.
+
+Select enforcement points from the invariant's authority, corruption impact,
+trust boundary, mutation paths, and proof lifetime. Construction, transition,
+boundary, persistence, and read-time checks are different decisions. Build
+mode alone does not decide which invariants remain enforced, and successful
+earlier validation does not authorize stale proof.
+
+Document an invariant when its owner, meaning, enforcement point, invalidation,
+or failure outcome is not evident from the type and implementation. Keep the
+contract with its canonical owner; do not require a copied comment template or
+repeat the same authority at every call site.
+
+Verification selects evidence that can prove the invariant and its relevant
+failure mode. Evidence may be a focused example, property check, model,
+contract fixture, integration path, static proof, or other objective-aligned
+method. Do not require one test per sentence or infer adequate evidence from a
+test name.
+
+An invariant violation is `invalid`. Missing authority, enforcement
+capability, or required evidence is `unavailable`; a well-formed contract
+variant outside the supported set is `unsupported`. Do not fall back to
+debug-only enforcement, release logging, panic, recovery, graceful abort,
+silent corruption, an unchecked state, or a weaker invariant.
+
 ## Contract Classes
 
 | Class | Required evolution policy |

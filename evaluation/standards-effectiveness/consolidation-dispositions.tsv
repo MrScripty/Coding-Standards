@@ -452,3 +452,10 @@ STD-0163	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	delete unowned unsupported
 STD-0164	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the naming parent with the canonical Core terminology route
 STD-0165	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	derive names from domain role unit ownership lifecycle and observable effect
 STD-0166	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	use one term per concept and distinguish different concepts without incumbent or copied naming recipes
+STD-0167	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the invariants parent with routes to canonical Contracts and Verification authority
+STD-0168	CODING-STANDARDS.md	topics/contracts.md	refine	document material invariants at their canonical owner when meaning enforcement invalidation or outcomes are not evident
+STD-0169	CODING-STANDARDS.md	topics/contracts.md	refine	define owned observable invariant contracts without copied graph examples
+STD-0170	CODING-STANDARDS.md	topics/contracts.md	refine	define caller-establishable preconditions without transferring implementation obligations
+STD-0171	CODING-STANDARDS.md	topics/contracts.md	refine	define outcome-specific postconditions guaranteed by the operation
+STD-0172	CODING-STANDARDS.md	topics/contracts.md	refine	select enforcement from authority impact boundaries mutation and proof lifetime without build-mode or failure-mechanism defaults
+STD-0173	CODING-STANDARDS.md	workflows/verification.md	refine	select objective-aligned invariant evidence without mandatory test-per-invariant or test-name proof

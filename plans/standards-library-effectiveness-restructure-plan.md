@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Core code and terminology discipline is canonical; Contracts
-invariant authority is next.
+**Current phase:** Contracts invariant authority is canonical; Implementation
+disabled-feature and stub lifecycle is next.
 
-**Next slice:** Milestone 7.4b8bk refine `STD-0167`, `STD-0168`, `STD-0169`,
-`STD-0170`, `STD-0171`, `STD-0172`, and `STD-0173` into Contracts invariant
-authority with Verification-selected evidence.
+**Next slice:** Milestone 7.4b8bl refine `STD-0174`, `STD-0175`, `STD-0176`,
+and `STD-0177` into Implementation disabled-feature and stub lifecycle
+authority.
 
 **Acceptance status:** `partial`
 
@@ -1419,8 +1419,12 @@ all structural/routing fixtures pass.
      code and terminology discipline. Select code volume, abstraction,
      consolidation, deletion, and naming from ownership and reasoning facts
      without call-count, blanket-DRY, incumbent, or copied-example defaults.
-   - `7.4b8bk` (`Planned`): refine `STD-0167` through `STD-0173` into
+   - `7.4b8bk` (`Accepted`): refine `STD-0167` through `STD-0173` into
      Contracts invariant authority with Verification-selected evidence.
+     Remove build-mode, panic, logging, recovery, copied-template, and
+     mandatory test-per-invariant defaults.
+   - `7.4b8bl` (`Planned`): refine `STD-0174` through `STD-0177` into
+     Implementation disabled-feature and stub lifecycle authority.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

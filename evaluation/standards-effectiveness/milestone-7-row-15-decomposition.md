@@ -58,5 +58,5 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bk` refines `STD-0167` through `STD-0173` into Contracts
-invariant authority with Verification-selected evidence.
+Milestone `7.4b8bl` refines `STD-0174` through `STD-0177` into Implementation
+disabled-feature and stub lifecycle authority.

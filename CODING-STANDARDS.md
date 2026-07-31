@@ -40,51 +40,12 @@ Code volume, abstraction, duplication, deletion, naming, and terminology
 authority is canonical in
 [Core](CORE-STANDARDS.md#code-and-terminology-discipline).
 
-## Invariants and Safety
+## Invariants And Safety Legacy Route
 
-### Documenting Invariants
-
-For functions that must maintain data structure invariants, document them explicitly:
-
-```markdown
-Remove a node from the dependency graph and rewire edges.
-
-# Invariants Maintained
-- Graph remains acyclic.
-- All nodes have at least one path to a root.
-- Edge weights remain non-negative.
-- In-degree counts stay consistent with actual edges.
-
-# Preconditions
-- Node has no dependents or all dependents have been reassigned.
-- Node exists in the graph.
-- Removal would not disconnect any subgraph from roots.
-
-# Postconditions
-- Node count reduced by exactly one.
-- Edge count reduced by the removed node's connected edges.
-- All remaining paths remain valid.
-```
-
-### Validation Strategy
-
-| Build | Validation Level |
-|-------|-----------------|
-| Debug | Full validation, panic on violation |
-| Release | Critical checks only, log and recover |
-
-Use full validation in debug builds when it catches developer mistakes quickly.
-In release builds, keep critical validation that protects data integrity and
-prefer explicit errors, logging, or graceful aborts over silent corruption.
-
-### Invariant Testing
-
-Every invariant should have corresponding tests:
-
-```text
-test_remove_node_maintains_acyclic_invariant
-test_add_edge_rejects_cycle
-```
+Invariant, precondition, postcondition, and enforcement authority is canonical
+in [Contracts](topics/contracts.md#invariant-contracts). Verification evidence
+is selected by the
+[Verification workflow](workflows/verification.md#selecting-claims).
 
 ## Disabled Features
 

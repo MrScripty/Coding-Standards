@@ -4152,6 +4152,21 @@ and disposition coverage were unchanged.
 **Next slice:** `7.4b8bk`, refine `STD-0167` through `STD-0173` into Contracts
 invariant authority with Verification-selected evidence.
 
+**Slice `7.4b8bk` accepted:** refined invariant, precondition, postcondition,
+enforcement, documentation, and evidence ownership into Contracts and
+Verification.
+
+**No-fallback/legacy result:** removed debug/release validation tables, panic,
+logging, recovery, graceful-abort, copied graph, and mandatory
+test-per-invariant defaults. Fifteen decisions and seven exact dispositions
+prove typed invalid, unsupported, and unavailable outcomes.
+
+**Verification (2026-07-31):** `verify-contract-invariants.sh` and the complete
+`verify-*.sh` suite passed in the isolated slice worktree.
+
+**Next slice:** `7.4b8bl`, refine `STD-0174` through `STD-0177` into
+Implementation disabled-feature and stub lifecycle authority.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

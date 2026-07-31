@@ -1,0 +1,16 @@
+case	owner	contract	caller_fact	outcomes	enforcement	evidence	capability	fallback	expected
+owned_invariant	clear	complete	not-required	complete	selected	selected	available	none	allow
+valid_precondition	clear	complete	establishable	complete	selected	selected	available	none	allow
+outcome_postconditions	clear	complete	not-required	complete	selected	selected	available	none	allow
+typed_documentation	clear	complete	not-required	complete	selected	selected	available	none	allow
+invalid_state	clear	violated	not-required	complete	selected	selected	available	none	typed-invalid
+unknown_owner	unknown	complete	not-required	complete	selected	selected	available	none	typed-unavailable
+missing_enforcement	clear	complete	not-required	complete	missing	selected	unavailable	none	typed-unavailable
+missing_evidence	clear	complete	not-required	complete	selected	missing	unavailable	none	typed-unavailable
+unsupported_variant	clear	unsupported	not-required	complete	selected	selected	available	none	typed-unsupported
+caller_cannot_establish	clear	complete	hidden	complete	selected	selected	available	none	typed-invalid
+incomplete_outcomes	clear	complete	not-required	partial	selected	selected	available	none	typed-invalid
+debug_only	clear	complete	not-required	complete	selected	selected	available	debug-only	typed-invalid
+release_logging	clear	complete	not-required	complete	selected	selected	available	logging	typed-invalid
+panic_default	clear	complete	not-required	complete	selected	selected	available	panic	typed-invalid
+test_name_proof	clear	complete	not-required	complete	selected	selected	available	test-name	typed-invalid
