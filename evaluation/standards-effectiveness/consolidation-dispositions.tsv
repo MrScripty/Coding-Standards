@@ -379,3 +379,10 @@ STD-0768	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/
 STD-0769	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	keep domain semantics in canonical owners and expose only explicitly selected binding surfaces
 STD-0770	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	derive support publication host subsets and evidence from project facts without fixed tiers or parity
 STD-0771	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/boundaries/language-bindings.md	refine	require complete lifecycle diagnostic compatibility documentation and evidence facts with typed outcomes
+STD-0119	ARCHITECTURE-PATTERNS.md	topics/resilience.md	move	establish canonical dependency failure and recovery authority
+STD-0120	ARCHITECTURE-PATTERNS.md	topics/resilience.md	refine	select required best-effort terminal degraded retry and reconstruction outcomes from authoritative facts
+STD-0121	ARCHITECTURE-PATTERNS.md	topics/resilience.md	remove	remove universal failure-category recovery actions and unsafe default cache partial-result and destructive-rebuild fallbacks
+STD-0122	ARCHITECTURE-PATTERNS.md	topics/resilience.md	refine	require ordered criticality state-authority capability and evidence decisions with typed diagnostics
+STD-0123	ARCHITECTURE-PATTERNS.md	topics/resilience.md	refine	select startup readiness and degradation from the lifecycle contract rather than fixed infrastructure categories
+STD-0124	ARCHITECTURE-PATTERNS.md	topics/resilience.md	refine	replace catch-all safe defaults with an explicit typed degraded-result boundary
+STD-0125	ARCHITECTURE-PATTERNS.md	topics/resilience.md	merge	merge availability separation predictability observability and recovery benefits into acceptance evidence

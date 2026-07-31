@@ -28,11 +28,7 @@ for text in 'ID: `topic.resilience`' 'Failure And Recovery Authority' 'Criticali
 done
 rg -F -q 'Dependency or service failure, retry, degradation, startup resilience, or recovery semantics' "$ROUTER"
 rg -F -q '`7.4b8ai` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8aj` (`Planned`)' "$PLAN"
-next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8aj'* ]]
-[[ "$next_slice_line" == *'STD-0119'* && "$next_slice_line" == *'STD-0125'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"
-printf 'Resilience owner contract passed: 12 decisions, owner established, source cluster pending\n'
+printf 'Resilience owner contract passed: 12 decisions, owner established\n'

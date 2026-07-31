@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** The Resilience owner contract is established; its source
-cluster `STD-0119` through `STD-0125` remains to be populated.
+**Current phase:** Resilience row 11 is complete; the next existing-owner
+cluster is Concurrency `STD-0269`.
 
-**Next slice:** Milestone 7.4b8aj populate `STD-0119` through `STD-0125` under the Resilience topic.
+**Next slice:** Milestone 7.4b8ak review and implement `STD-0269` under the Concurrency topic.
 
 **Acceptance status:** `partial`
 
@@ -1256,8 +1256,16 @@ all structural/routing fixtures pass.
      reclassify P07 as existing-owner consolidation for its population slice;
      repair the non-executable Rust Security checker and the stale Rust binding
      index cursor discovered by fail-fast complete-suite verification.
-   - `7.4b8aj` (`Planned`): populate the Resilience owner from `STD-0119`
-     through `STD-0125` and close the legacy source sections.
+   - `7.4b8aj` (`Accepted`): populate the Resilience owner from `STD-0119`
+     through `STD-0125`; replace universal failure categories, defaults, and
+     fallback recovery with required or best-effort criticality, startup
+     readiness, bounded retry, explicit degradation, derived-state
+     reconstruction authority, typed diagnostics, and a non-normative legacy
+     index; recover the frozen semantics and exact dispositions after an
+     earlier Contracts cleanup removed the source policy before its Resilience
+     migration was recorded, and update the Contracts ownership checker to
+     verify the resulting Contracts-to-Resilience routing boundary.
+   - `7.4b8ak` (`Planned`): review and implement Concurrency `STD-0269`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

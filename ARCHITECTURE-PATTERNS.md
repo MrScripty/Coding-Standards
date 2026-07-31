@@ -925,17 +925,17 @@ destructive replacement does not require a speculative two-phase shim.
 
 ---
 
-## Infrastructure Failure Outcomes
+## Infrastructure Failure Recovery Index
 
-Use [Degraded Outcomes](topics/contracts.md#degraded-outcomes) to decide whether
-an unavailable database, cache, file, or service permits continued operation.
-The label `optional` does not authorize defaults, deletion, stale cache reads,
-partial results, alternate backends, or startup success.
+Canonical dependency criticality, startup resilience, retry, recovery,
+best-effort behavior, and evidence requirements moved to
+[Resilience](topics/resilience.md). Contract authority for degraded outcomes
+and reconstruction of disposable derived state remains in
+[Contracts](topics/contracts.md#degraded-outcomes).
 
-Delete and rebuild only explicitly disposable derived state with a known
-authoritative reconstruction source. Otherwise preserve authoritative data and
-return the selected typed unavailable, invalid, unsupported, or deferred
-outcome.
+This is a non-normative migration index. It does not authorize defaults,
+deletion, stale or cached reads, partial results, alternate backends, silent
+continuation, or startup success.
 
 ---
 
@@ -1028,5 +1028,5 @@ except custom parsing logic.
 | Service that any process may need to start | Discover-or-Create |
 | Complex data structure mutations | Phased Mutation |
 | Evolving database schemas across versions | Schema Versioning and Migration |
-| Handling infrastructure failures without crashing | Infrastructure Failure Recovery |
+| Handling infrastructure failures | [Resilience](topics/resilience.md) |
 | Consistent error responses from HTTP APIs | HTTP API Error Convention |

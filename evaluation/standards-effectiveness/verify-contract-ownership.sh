@@ -36,8 +36,8 @@ if rg -q 'Additive changes are backward-compatible|Err\\(_\\) => self\\.host' \
 fi
 
 grep -q 'destructive replacement does not require a speculative' "$ARCHITECTURE"
-grep -q 'return the selected typed unavailable, invalid, unsupported, or deferred' \
-  "$ARCHITECTURE"
+grep -q 'Contract authority for degraded outcomes' "$ARCHITECTURE"
+grep -q 'topics/contracts.md#degraded-outcomes' "$ARCHITECTURE"
 grep -q 'syntactically additive change is compatible only' "$CONTRACTS"
 grep -q 'topics/contracts.md#cross-language-contract-selection' "$RUST_BINDINGS"
 

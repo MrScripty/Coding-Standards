@@ -45,9 +45,8 @@ rg -F -q '`7.4b8ac` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ad` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ae` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8aj'* ]]
-[[ "$next_slice_line" == *'STD-0119'* ]]
-[[ "$next_slice_line" == *'STD-0125'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ak'* ]]
+[[ "$next_slice_line" == *'STD-0269'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"

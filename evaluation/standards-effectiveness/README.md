@@ -174,6 +174,13 @@ diagnostics. They reject unbounded retry, ignored required failures, default
 success, and fallback recovery while the remaining resilience identifiers are
 populated.
 
+`fixtures/resilience/recovery-policy-decisions.tsv` and
+`verify-resilience-recovery-policy.sh` populate that owner with required and
+best-effort behavior, startup readiness, bounded retry, explicit degradation,
+derived-state reconstruction, and typed outcomes. They prove seven exact
+dispositions and reject destructive rebuild, defaults, stale or cached reads,
+partial results, alternate backends, and silent continuation.
+
 `fixtures/rust/binding-contract-discovery-*.tsv` and
 `verify-rust-binding-contract-discovery.sh` adapt only a Contracts-selected
 identity, version, or capability mechanism. They reject universal version

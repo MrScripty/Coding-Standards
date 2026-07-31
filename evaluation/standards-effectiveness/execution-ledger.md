@@ -3701,6 +3701,19 @@ Rust binding index checker's stale plan cursor.
 **Next slice:** `7.4b8aj`, populate `STD-0119` through `STD-0125` under the
 Resilience topic.
 
+**Slice `7.4b8aj` accepted:** `STD-0119` through `STD-0125` now govern
+required and best-effort dependency failures, startup readiness, bounded safe
+retry, explicit degraded outcomes, and reconstruction only for disposable
+derived state with an authoritative source. The legacy pattern is a
+non-normative index; destructive rebuild, defaults, stale or cached reads,
+partial results, alternate backends, and silent continuation are rejected.
+This also closes the migration gap left when the earlier Contracts cleanup
+removed the frozen source policy without recording these seven dispositions.
+The Contracts ownership checker now verifies the routed owner boundary instead
+of requiring the removed duplicate typed-outcome sentence.
+
+**Next slice:** `7.4b8ak`, review and implement Concurrency `STD-0269`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.
