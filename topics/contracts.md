@@ -70,6 +70,41 @@ permissive default, or a weaker decoder when proof is missing. No particular
 schema or validation library is mandatory; the observable proof and typed
 outcomes are.
 
+## Inbound And Outbound Boundary Proof
+
+Apply the complete applicable contract in both directions. Inbound validation
+proves that unknown input may enter the owning boundary. Outbound validation
+proves that a produced value may cross its destination boundary. Validation in
+one direction does not prove the other direction, and successful transport,
+serialization, parsing, or operation completion does not prove the value's
+contract.
+
+For inbound values, establish the runtime-decoding proof above before business
+logic consumes the value. For outbound values, first classify the operation or
+protocol outcome, then prove the complete destination representation before
+emitting it or treating it as a successful result. Error, rejection, and
+degraded representations have contracts too; do not parse or reinterpret one
+as a successful payload merely because its representation is readable.
+
+Code inside one trusted boundary consumes an intact proof-bearing
+representation without redundant validation. A new destination, contract
+version, representation, or trust boundary requires the proof applicable to
+that crossing.
+
+Return a typed boundary outcome that preserves the failed obligation:
+
+- `invalid` when the representation or required invariants fail;
+- `unsupported` when a well-formed outcome, version, or variant is outside the
+  selected contract; or
+- `unavailable` when required contract, decoding, encoding, or outcome
+  classification capability is absent.
+
+The owning protocol or adapter may specialize these outcomes into its declared
+mechanisms. Contracts does not mandate HTTP status checks, exception throwing,
+response wrappers, middleware, or a particular decoder. Do not treat a default
+body, empty object, alternate parser, guessed status, successful transport, or
+the original unchecked value as a valid fallback.
+
 ## Validation Proof Lifetime
 
 Validation authority belongs to the proof-bearing representation produced by

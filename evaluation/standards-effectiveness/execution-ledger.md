@@ -4090,6 +4090,28 @@ invalid and unavailable outcomes.
 
 **Next slice:** `7.4b8bh`, refine `STD-0155` and `STD-0156` into Contracts.
 
+**Slice `7.4b8bh` accepted:** refined inbound and outbound boundary proof into
+Contracts. Each crossing now applies its complete directional contract, while
+operation or protocol outcome classification remains distinct from
+representation validity.
+
+**No-fallback/legacy result:** removed HTTP, exception, default-body, alternate-
+parser, successful-transport, and original-input recipes from canonical
+authority. Fifteen decisions and two exact dispositions prove typed invalid,
+unsupported, and unavailable outcomes. The stale Architecture Patterns link
+now resolves directly to Contracts.
+
+**Verification (2026-07-30):** `verify-contract-boundary-proof.sh` and the
+complete `verify-*.sh` suite passed in the isolated slice worktree.
+
+**Verification deviation:** the first focused run exposed an evaluator defect
+that treated missing proof as unavailable even when capability was present.
+The checker now distinguishes absent capability (`unavailable`) from failed
+proof with available capability (`invalid`); the corrected focused run passed.
+
+**Next slice:** `7.4b8bi`, replace `STD-0157` with a canonical Dependencies
+route.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

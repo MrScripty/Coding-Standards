@@ -986,8 +986,8 @@ HTTP adapter converts ApiError into:
 ### Client Implementation
 
 Clients must check the status code before parsing the response body.
-See [CODING-STANDARDS.md](CODING-STANDARDS.md) `### Validate Outbound Responses`
-for the client-side pattern.
+See [Contracts](topics/contracts.md#inbound-and-outbound-boundary-proof) for
+canonical boundary-proof policy.
 
 ### Anti-Pattern: Status 200 with Error Body
 

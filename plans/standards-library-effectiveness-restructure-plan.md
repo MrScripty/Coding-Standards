@@ -6,10 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Resilience failure boundaries are canonical; Contracts
-boundary validation is next.
+**Current phase:** Contracts boundary validation is canonical; dependency
+routing is next.
 
-**Next slice:** Milestone 7.4b8bh refine `STD-0155` and `STD-0156` into Contracts.
+**Next slice:** Milestone 7.4b8bi replace `STD-0157` with a canonical
+Dependencies route.
 
 **Acceptance status:** `partial`
 
@@ -1405,7 +1406,13 @@ all structural/routing fixtures pass.
    - `7.4b8bg` (`Accepted`): refine `STD-0151` through `STD-0154` into
      Resilience failure boundaries and diagnostics without exception, catch,
      logging, tracing, or default-value fallback.
-   - `7.4b8bh` (`Planned`): refine `STD-0155` and `STD-0156` into Contracts.
+   - `7.4b8bh` (`Accepted`): refine `STD-0155` and `STD-0156` into
+     Contracts. Require complete proof for inbound and outbound crossings,
+     classify operation outcomes separately from representation proof, and
+     reject HTTP, exception, default-body, alternate-parser, and successful-
+     transport fallbacks.
+   - `7.4b8bi` (`Planned`): replace `STD-0157` with a canonical Dependencies
+     route.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

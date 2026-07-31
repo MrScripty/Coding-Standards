@@ -23,44 +23,10 @@ Failure handling and diagnostic authority is canonical in
 [Resilience](topics/resilience.md#failure-boundaries-and-diagnostics).
 
 
-### Validate at Boundaries
+## Boundary Validation Legacy Route
 
-Validate input at system boundaries, not throughout the code:
-
-```
-// API boundary - validate here
-function handleRequest(input: unknown): Response {
-    const validated = validateInput(input);  // Throws if invalid
-    return processValidatedInput(validated);
-}
-
-// Internal function - trust the input
-function processValidatedInput(input: ValidatedInput): Result {
-    // No need to re-validate
-}
-```
-
-### Validate Outbound Responses
-
-HTTP handlers must check the response status before treating the body as valid.
-This applies to both client code consuming APIs and server code calling upstream
-services.
-
-```typescript
-// BAD: Assumes response is always valid JSON
-const data = await fetch('/api/items').then(r => r.json());
-
-// GOOD: Check status before parsing
-const res = await fetch('/api/items');
-if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw new Error(body.error || `HTTP ${res.status}`);
-}
-const data = await res.json();
-```
-
-**Why:** Without status checks, error responses (404, 500) are silently
-deserialized as empty or malformed data, causing confusing downstream failures.
+Inbound and outbound validation authority is canonical in
+[Contracts](topics/contracts.md#inbound-and-outbound-boundary-proof).
 
 ## Dependency Management
 

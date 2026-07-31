@@ -58,4 +58,5 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bh` refines `STD-0155` and `STD-0156` into Contracts.
+Milestone `7.4b8bi` replaces the `STD-0157` dependency parent with a route to
+canonical Dependencies.

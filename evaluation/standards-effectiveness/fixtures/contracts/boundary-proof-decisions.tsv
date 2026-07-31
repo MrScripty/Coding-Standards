@@ -1,0 +1,16 @@
+case	direction	boundary	input	proof	outcome	capability	fallback	expected
+valid_inbound	inbound	new	unknown	complete	success	available	none	allow
+valid_outbound	outbound	new	produced	complete	success	available	none	allow
+valid_error_outbound	outbound	new	produced	complete	error	available	none	allow
+trusted_internal	internal	same	validated	retained	not-required	available	none	allow
+invalid_inbound	inbound	new	unknown	failed	success	available	none	typed-invalid
+invalid_outbound	outbound	new	produced	failed	success	available	none	typed-invalid
+unsupported_outcome	outbound	new	produced	complete	unsupported	available	none	typed-unsupported
+missing_decoder	inbound	new	unknown	missing	success	unavailable	none	typed-unavailable
+missing_encoder	outbound	new	produced	missing	success	unavailable	none	typed-unavailable
+success_transport_only	outbound	new	produced	missing	success	available	transport-success	typed-invalid
+error_as_success	outbound	new	produced	complete	error	available	reinterpret-success	typed-invalid
+default_body	outbound	new	produced	failed	error	available	default-body	typed-invalid
+alternate_parser	inbound	new	unknown	failed	success	available	alternate-parser	typed-invalid
+original_input	inbound	new	unknown	failed	success	available	original-input	typed-invalid
+redundant_internal	internal	same	validated	retained	not-required	available	revalidate	typed-invalid

@@ -440,3 +440,5 @@ STD-0151	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace error handling wi
 STD-0152	CODING-STANDARDS.md	topics/resilience.md	refine	select failure representation from language and operation contracts
 STD-0153	CODING-STANDARDS.md	topics/resilience.md	refine	handle failures at the narrowest boundary owning recovery outcome or diagnostics while preserving causes
 STD-0154	CODING-STANDARDS.md	topics/resilience.md	refine	derive bounded diagnostic context and channels from operator and application contracts
+STD-0155	CODING-STANDARDS.md	topics/contracts.md	refine	apply complete inbound proof at the owning boundary without redundant internal validation or exception mechanism defaults
+STD-0156	CODING-STANDARDS.md	topics/contracts.md	refine	classify outbound outcomes and prove destination representations without HTTP status default-body or alternate-parser fallback
