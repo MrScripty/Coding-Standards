@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** the TypeScript Async owner contract exists; `STD-0275` and
-`STD-0276` are ready for their bounded population slice.
+**Current phase:** row 13 child 13.3 is complete; the Godot framework owner
+contract is required before `STD-0277` through `STD-0279` can move.
 
-**Next slice:** Milestone 7.4b8aq refine `STD-0276` in TypeScript Async and close `STD-0275` as its legacy index.
+**Next slice:** Milestone 7.4b8ar establish the Godot framework owner contract before implementing `STD-0277`, `STD-0278`, and `STD-0279`.
 
 **Acceptance status:** `partial`
 
@@ -1302,8 +1302,11 @@ all structural/routing fixtures pass.
      reject process-global counters, stale mutation, discarded completion,
      ignored cancellation, alternate mechanisms, prior-invocation state, and
      default success. Do not dispose `STD-0275` or `STD-0276`.
-   - `7.4b8aq` (`Planned`): refine `STD-0276` in TypeScript Async and close
-     `STD-0275` as its legacy index.
+   - `7.4b8aq` (`Accepted`): refine `STD-0276` into TypeScript Async and close
+     `STD-0275` as its non-normative legacy index. Remove the process-global
+     request-counter and silent stale-result discard recipe; retain scoped
+     invocation authority, cancellation, explicit terminal classification,
+     controlled result application, and typed diagnostics as canonical.
    - `7.4b8ar` (`Planned`): establish the Godot framework owner contract
      without disposing `STD-0277` through `STD-0279`.
    - `7.4b8as` (`Planned`): refine `STD-0278` and `STD-0279` in the Godot

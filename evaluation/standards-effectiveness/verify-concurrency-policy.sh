@@ -122,7 +122,7 @@ retained_legacy=(
   'This is a non-normative migration index'
   '### C# Continuation Scheduling'
   '## Rust Concurrency Routing Index'
-  '## TypeScript Concurrency Rules'
+  '## TypeScript Async Index'
   '## Godot Thread Safety'
 )
 for text in "${retained_legacy[@]}"; do
@@ -161,8 +161,8 @@ rg -F -q '[Rust Security profile](profiles/languages/rust/security.md)' "$LEGACY
 ! rg -F -q '## C# Async/Await Rules' "$LEGACY"
 rg -F -q '`7.4b8ak` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8aq'* ]]
-[[ "$next_slice_line" == *'STD-0275'* && "$next_slice_line" == *'STD-0276'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ar'* ]]
+[[ "$next_slice_line" == *'STD-0277'* && "$next_slice_line" == *'STD-0279'* ]]
 
 rg -F -q '| F019 | Resolved in Milestone 7.4b4b |' "$FINDINGS"
 rg -F -q '`7.4b4b` (`Accepted`)' "$PLAN"

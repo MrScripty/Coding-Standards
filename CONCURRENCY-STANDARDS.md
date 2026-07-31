@@ -55,24 +55,12 @@ security-sensitive Rust concurrency mechanisms are canonical in the
 
 ---
 
-## TypeScript Concurrency Rules
+## TypeScript Async Index
 
-### Guard Against Stale Async Responses
-
-When a user action triggers an async request, a second action may arrive
-before the first response. Use a request ID to discard stale responses:
-
-```typescript
-let currentRequestId = 0;
-
-async function loadData(path: string) {
-    const requestId = ++currentRequestId;
-    isLoading = true;
-    const result = await api.request({ action: 'load', payload: { path } });
-    if (requestId !== currentRequestId) return;  // Stale — discard
-    applyResult(result);
-}
-```
+This is a non-normative migration index. TypeScript current-invocation
+authority, cancellation, terminal classification, and result application are
+canonical in the
+[TypeScript Async Profile](profiles/languages/typescript/async.md).
 
 ---
 

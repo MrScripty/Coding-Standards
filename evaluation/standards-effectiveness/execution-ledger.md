@@ -3832,6 +3832,26 @@ silent discard, alternate mechanism, or default success. `STD-0275` and
 **Next slice:** `7.4b8aq`, refine `STD-0276` in TypeScript Async and close
 `STD-0275` as its legacy index.
 
+**Slice `7.4b8aq` accepted:** `STD-0275` has one exact `index` disposition and
+`STD-0276` has one exact `refine` disposition to TypeScript Async. The legacy
+section now routes to the canonical profile; the process-global counter,
+implicit request identity, silent stale-result discard, and product-shaped
+example are removed.
+
+**No-fallback/legacy result:** missing or contradictory invocation authority,
+cancellation, completion ownership, capability, or evidence cannot select a
+global counter, silent discard, stale mutation, alternate mechanism, or
+default success. Every started operation retains an explicit terminal
+classification.
+
+**Discovered issue (`Resolved`):** the first next-slice cursor compressed the
+Godot child as `STD-0277` through `STD-0279`, but execution-train verification
+requires every active child identifier literally. The cursor now enumerates
+`STD-0277`, `STD-0278`, and `STD-0279`; scope and ordering are unchanged.
+
+**Next slice:** `7.4b8ar`, establish the Godot framework owner contract before
+moving `STD-0277` through `STD-0279`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

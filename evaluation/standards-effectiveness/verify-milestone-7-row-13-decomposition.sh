@@ -36,7 +36,7 @@ mapfile -t dispositions < <(
     print $1
   }' "$DISPOSITIONS"
 )
-[[ "${dispositions[*]}" == 'STD-0273 STD-0274' ]]
+[[ "${dispositions[*]}" == 'STD-0273 STD-0274 STD-0275 STD-0276' ]]
 
 package_row="$(
   awk -F '\t' '$1 == 13 {
@@ -73,12 +73,13 @@ rg -F -q '`7.4b8am` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8an` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ao` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ap` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8aq` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8aq` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8ar` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8aq'* ]]
-[[ "$next_slice_line" == *'STD-0275'* && "$next_slice_line" == *'STD-0276'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ar'* ]]
+[[ "$next_slice_line" == *'STD-0277'* && "$next_slice_line" == *'STD-0279'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-13 decomposition passed: TypeScript owner exists; 5 IDs across 2 ordered children remain\n'
+printf 'Milestone 7 row-13 decomposition passed: children 13.1 through 13.3 accepted; Godot child remains\n'
