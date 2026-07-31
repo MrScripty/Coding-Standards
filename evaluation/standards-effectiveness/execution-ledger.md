@@ -3852,6 +3852,24 @@ requires every active child identifier literally. The cursor now enumerates
 **Next slice:** `7.4b8ar`, establish the Godot framework owner contract before
 moving `STD-0277` through `STD-0279`.
 
+**Slice `7.4b8ar` accepted:** established the non-empty Godot framework
+profile and router entry for engine affinity, dispatch ownership, and
+point-of-use object lifetime. The 14-case owner fixture permits direct
+execution in the required context and observed selected dispatch while
+rejecting off-thread direct access, detached deferred work, stale prechecks,
+invalid or stale references, alternate dispatch, missing capability/evidence,
+and default success.
+
+**No-fallback/legacy result:** `CallDeferred`, a callable, dispatcher, and
+`GodotObject.IsInstanceValid` are available mechanisms, not universal proof.
+Missing or contradictory affinity, dispatch, lifetime, or evidence cannot
+select another mechanism, stale validity, detached work, prior-invocation
+state, or default success. `STD-0277`, `STD-0278`, and `STD-0279` remain
+undisposed until population.
+
+**Next slice:** `7.4b8as`, refine `STD-0278` and `STD-0279` in the Godot
+profile and close `STD-0277` as its legacy index.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

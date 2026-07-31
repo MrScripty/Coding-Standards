@@ -74,9 +74,10 @@ rg -F -q '`7.4b8an` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ao` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ap` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8aq` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ar` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8ar` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8as` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ar'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8as'* ]]
 [[ "$next_slice_line" == *'STD-0277'* && "$next_slice_line" == *'STD-0279'* ]]
 
 "$S/verify-milestone-7-row-13-decomposition.sh"

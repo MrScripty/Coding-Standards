@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** row 13 child 13.3 is complete; the Godot framework owner
-contract is required before `STD-0277` through `STD-0279` can move.
+**Current phase:** the Godot framework owner contract exists; `STD-0277`,
+`STD-0278`, and `STD-0279` are ready for their bounded population slice.
 
-**Next slice:** Milestone 7.4b8ar establish the Godot framework owner contract before implementing `STD-0277`, `STD-0278`, and `STD-0279`.
+**Next slice:** Milestone 7.4b8as refine `STD-0278` and `STD-0279` in the Godot profile and close `STD-0277` as its legacy index.
 
 **Acceptance status:** `partial`
 
@@ -1307,8 +1307,13 @@ all structural/routing fixtures pass.
      request-counter and silent stale-result discard recipe; retain scoped
      invocation authority, cancellation, explicit terminal classification,
      controlled result application, and typed diagnostics as canonical.
-   - `7.4b8ar` (`Planned`): establish the Godot framework owner contract
-     without disposing `STD-0277` through `STD-0279`.
+   - `7.4b8ar` (`Accepted`): establish the non-empty Godot framework owner
+     contract and route it for engine affinity, deferred dispatch, and object
+     lifetime changes. Require selected dispatch with observable lifecycle
+     evidence and point-of-use lifetime proof; reject off-thread access,
+     detached deferred work, check-then-use gaps, stale references, alternate
+     dispatch, prior-invocation state, and default success. Do not dispose
+     `STD-0277`, `STD-0278`, or `STD-0279`.
    - `7.4b8as` (`Planned`): refine `STD-0278` and `STD-0279` in the Godot
      profile and close `STD-0277` as its legacy index.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,

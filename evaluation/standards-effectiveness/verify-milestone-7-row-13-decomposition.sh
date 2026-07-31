@@ -13,7 +13,7 @@ expected_rows=(
   $'13\t1\tSTD-0273\tCONCURRENCY-STANDARDS.md\tprofiles/languages/csharp/async.md\texists\tpre-slice-review\tfocused'
   $'13\t2\tSTD-0274\tCONCURRENCY-STANDARDS.md\tCONCURRENCY-STANDARDS.md\texists\tpre-slice-review\tfocused'
   $'13\t3\tSTD-0275,STD-0276\tCONCURRENCY-STANDARDS.md\tprofiles/languages/typescript/async.md\texists\tpre-slice-review\tfocused'
-  $'13\t4\tSTD-0277,STD-0278,STD-0279\tCONCURRENCY-STANDARDS.md\tprofiles/frameworks/godot.md\tmissing\towner-review\tfocused'
+  $'13\t4\tSTD-0277,STD-0278,STD-0279\tCONCURRENCY-STANDARDS.md\tprofiles/frameworks/godot.md\texists\tpre-slice-review\tfocused'
 )
 mapfile -t actual_rows < <(
   awk -F '\t' '$1 == 13 {
@@ -48,10 +48,7 @@ package_row="$(
 
 [[ -e "$R/profiles/languages/csharp/async.md" ]]
 [[ -e "$R/profiles/languages/typescript/async.md" ]]
-for owner in \
-  profiles/frameworks/godot.md; do
-  [[ ! -e "$R/$owner" ]]
-done
+[[ -e "$R/profiles/frameworks/godot.md" ]]
 
 required_report=(
   'do not share a specialization owner'
@@ -74,12 +71,13 @@ rg -F -q '`7.4b8an` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ao` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ap` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8aq` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ar` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8ar` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8as` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ar'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8as'* ]]
 [[ "$next_slice_line" == *'STD-0277'* && "$next_slice_line" == *'STD-0279'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-13 decomposition passed: children 13.1 through 13.3 accepted; Godot child remains\n'
+printf 'Milestone 7 row-13 decomposition passed: all child owners exist; Godot population remains\n'

@@ -78,6 +78,16 @@ contain infrastructure code.
 Language profiles specialize mechanisms only. Cross-language policy remains in
 Core, workflows, and topics.
 
+## Framework Profiles
+
+| Condition | Select |
+| --- | --- |
+| Godot object, node, scene-tree, signal, resource, thread-affinity, deferred-dispatch, or object-lifetime mechanism changes | [Godot framework profile](profiles/frameworks/godot.md) plus the Concurrency topic |
+| No framework-specific mechanism changes | No framework profile |
+
+Framework profiles specialize selected framework mechanisms only. Generic
+policy remains in Core, workflows, and topics.
+
 ## Topic Selection
 
 Until topic migration completes, use the current canonical file only when its

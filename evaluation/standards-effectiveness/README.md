@@ -121,6 +121,13 @@ and explicit terminal classification while rejecting process-global counters,
 stale mutation, discarded completion, ignored cancellation, alternate
 mechanisms, missing evidence, and default success.
 
+`fixtures/godot/owner-contract-decisions.tsv` and
+`verify-godot-owner-contract.sh` establish the Godot framework profile before
+population. They require explicit engine affinity, observed dispatch, and
+point-of-use object-lifetime proof while rejecting off-thread access,
+detached deferred work, check-then-use gaps, stale references, alternate
+dispatch, missing evidence, and default success.
+
 `fixtures/rust/binding-core-adapter-testability-*.tsv` and
 `verify-rust-binding-core-adapter-testability.sh` require distinct
 framework-free core and real native/host adapter evidence. They reject
