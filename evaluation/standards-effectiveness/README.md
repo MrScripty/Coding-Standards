@@ -119,6 +119,14 @@ population. They select continuation scheduling from explicit affinity and
 capability facts while rejecting blanket context suppression, blocking,
 alternate dispatch, missing evidence, and default success.
 
+`fixtures/dependencies/population-decisions.tsv` and
+`verify-dependencies-population.sh` prove the Launcher dependency-installation
+migration. They cover independently identified requirements, satisfaction
+evidence, explicit mutation authority, selected procedures, post-mutation
+verification, owner-selected grouped transactions, and rejection of fixed
+function, numeric-success, monolithic-result, implicit-install, and
+successful-no-op fallbacks.
+
 `fixtures/typescript/async-owner-contract-decisions.tsv` and
 `verify-typescript-async-owner-contract.sh` establish the TypeScript Async
 profile before population. They require scoped current-invocation authority

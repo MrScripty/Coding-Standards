@@ -1,0 +1,15 @@
+case	requirement	satisfaction	authority	procedure	postcheck	identity	fallback	expected
+already_satisfied	declared	complete	not-needed	not-run	complete	preserved	none	allow
+missing_authorized	declared	unsatisfied	explicit	selected	complete	preserved	none	allow
+grouped_owned_transaction	declared	unsatisfied	explicit	grouped-owned	complete	preserved	none	allow
+contradictory_requirement	contradictory	complete	explicit	selected	complete	preserved	none	typed-invalid
+missing_requirement	missing	complete	explicit	selected	complete	preserved	none	typed-unavailable
+missing_satisfaction	declared	unknown	explicit	selected	complete	preserved	none	typed-unavailable
+missing_authority	declared	unsatisfied	missing	selected	complete	preserved	none	typed-invalid
+missing_procedure	declared	unsatisfied	explicit	missing	complete	preserved	none	typed-unavailable
+failed_postcheck	declared	unsatisfied	explicit	selected	failed	preserved	none	typed-unavailable
+opaque_grouping	declared	unsatisfied	explicit	grouped-opaque	complete	lost	monolithic-result	typed-invalid
+fixed_function_names	declared	unsatisfied	explicit	selected	complete	preserved	fixed-functions	typed-invalid
+numeric_success_default	declared	unsatisfied	explicit	selected	complete	preserved	exit-zero	typed-invalid
+implicit_install	declared	unsatisfied	implicit	selected	complete	preserved	implicit-install	typed-invalid
+successful_noop	declared	unsatisfied	explicit	not-run	missing	preserved	successful-noop	typed-invalid

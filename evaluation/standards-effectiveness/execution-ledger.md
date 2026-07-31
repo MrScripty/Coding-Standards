@@ -3979,6 +3979,21 @@ decisions prove typed invalid, unsupported, and unavailable outcomes.
 **Next slice:** `7.4b8ay`, refine `STD-0496`, `STD-0497`, and `STD-0498`
 installation policy into Dependencies.
 
+**Slice `7.4b8ay` accepted:** refined all three dependency-installation
+identifiers into canonical Dependencies. Each requirement now has independent
+identity and satisfaction evidence; mutation requires explicit authority and a
+selected procedure; post-mutation verification reuses the same contract; and
+grouped transactions must preserve per-requirement evidence, diagnostics, and
+terminal outcomes. Launcher retains only a route to the accepted procedure.
+
+**No-fallback/legacy result:** removed fixed check/install function names,
+numeric success conventions, opaque monolithic dependency results, implicit
+installation, and successful-no-op behavior from legacy authority. Fourteen
+focused decisions and three exact dispositions prove typed invalid and
+unavailable outcomes without alternate procedures or default success.
+
+**Next slice:** `7.4b8az`, refine `STD-0500` build procedure into Release.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

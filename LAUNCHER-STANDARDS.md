@@ -14,29 +14,9 @@ Acceptance authority remains canonical in
 [Verification](workflows/verification.md). A launcher action transports its
 selected procedure and does not upgrade the procedure's evidence kind.
 
-## Dependency Installation Standards (`--install`)
-
-### Per-Dependency Idempotent Behavior
-
-For each declared dependency, `launcher.sh --install` must:
-
-1. Run a dependency-specific check.
-2. Skip install if already satisfied.
-3. Install only the missing dependency.
-4. Re-check after installation to verify success.
-5. Fail fast if install or verification fails.
-
-This guarantees incremental installs and avoids reinstalling dependencies that
-already exist.
-
-### Dependency Model
-
-Define dependencies as named units with:
-
-- `check_<name>` function: returns `0` when satisfied
-- `install_<name>` function: performs installation
-
-Do not combine all dependencies into one monolithic check.
+Dependency requirement, satisfaction, provisioning, and lifecycle authority is
+canonical in [Dependencies](topics/dependencies.md). Launcher only exposes the
+selected procedure and preserves its diagnostics and terminal outcome.
 
 ### Output Requirements
 

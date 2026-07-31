@@ -413,3 +413,6 @@ STD-0507	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	select t
 STD-0511	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	remove	remove the copied Bash template and placeholder commands as normative or fallback launcher implementation
 STD-0512	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	merge	merge applicable launcher verification outcomes into the canonical profile without retaining a fixed checklist
 STD-0495	LAUNCHER-STANDARDS.md	workflows/verification.md	refine	select GUI smoke claims environments execution modes capabilities assertions and bounded lifecycle without fixed CI mechanisms or weakened-runtime fallback
+STD-0496	LAUNCHER-STANDARDS.md	LAUNCHER-STANDARDS.md	index	replace the dependency-installation parent with a non-normative route to canonical Dependencies procedure authority
+STD-0497	LAUNCHER-STANDARDS.md	topics/dependencies.md	refine	evaluate and provision each declared requirement independently while preserving selected transaction identity evidence diagnostics and terminal outcomes
+STD-0498	LAUNCHER-STANDARDS.md	topics/dependencies.md	refine	replace fixed check and install function conventions with requirement-owned satisfaction contracts and selected provisioning procedures

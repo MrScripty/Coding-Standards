@@ -60,7 +60,7 @@ mapfile -t dispositions < <(
     print $1
   }' "$DISPOSITIONS"
 )
-[[ "${#dispositions[@]}" -eq 0 ]]
+[[ "${dispositions[*]}" == 'STD-0496 STD-0497 STD-0498' ]]
 
 overlay_row="$(
   awk -F '\t' '$1 == 14 && $2 == 3 {
@@ -84,12 +84,11 @@ package_row="$(
 [[ "$package_row" == $'consolidation\ttopics/dependencies.md\texisting-review\tdecision-table\tfull-suite' ]]
 
 rg -F -q '`7.4b8ax` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ay` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8az` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ay'* ]]
-for id in STD-0496 STD-0497 STD-0498; do
-  [[ "$next_slice_line" == *"$id"* ]]
-done
+[[ "$next_slice_line" == *'Milestone 7.4b8az'* ]]
+[[ "$next_slice_line" == *'STD-0500'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"

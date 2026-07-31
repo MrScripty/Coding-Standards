@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** the Dependencies owner contract exists; row 14.3
-installation policy is next.
+**Current phase:** row 14.3 dependency installation is canonical; row 14.4
+Release-owned build procedure is next.
 
-**Next slice:** Milestone 7.4b8ay refine dependency installation `STD-0496`, `STD-0497`, and `STD-0498` into Dependencies.
+**Next slice:** Milestone 7.4b8az refine build procedure `STD-0500` into Release.
 
 **Acceptance status:** `partial`
 
@@ -1360,8 +1360,15 @@ all structural/routing fixtures pass.
      in-house, transitive, global, cached, alternate-registry, implicit-install,
      privilege-escalation, successful-no-op, and default-success fallbacks. Do
      not dispose `STD-0496` through `STD-0498`.
-   - `7.4b8ay` (`Planned`): refine `STD-0496`, `STD-0497`, and `STD-0498`
-     installation policy into Dependencies.
+   - `7.4b8ay` (`Accepted`): refine `STD-0496`, `STD-0497`, and `STD-0498`
+     into Dependencies. Require independently identifiable requirements,
+     declared satisfaction contracts, explicit mutation authority, selected
+     procedures, post-mutation verification, and preserved per-requirement
+     identity, diagnostics, and outcomes. Allow owner-selected grouped
+     transactions only when they retain that evidence. Remove fixed check and
+     install function names, numeric success conventions, opaque monolithic
+     results, implicit installation, and successful-no-op fallback.
+   - `7.4b8az` (`Planned`): refine `STD-0500` build procedure into Release.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

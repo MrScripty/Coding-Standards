@@ -88,6 +88,34 @@ Do not install implicitly during build or run, auto-escalate privileges,
 replace a selected dependency, change registries, broaden versions, mutate
 unrelated dependencies, or treat attempted installation as proof of success.
 
+### Provisioning Procedure
+
+Represent each requirement as an independently identifiable unit with its own
+satisfaction contract and, when provisioning is authorized, its own selected
+mutation procedure. Evaluate every declared requirement independently so an
+already satisfied requirement is not mutated merely because another
+requirement is missing. Grouped resolution or installation is permitted only
+when the selected tool owns that transaction and preserves per-requirement
+identity, evidence, diagnostics, and terminal outcomes.
+
+The procedure order is:
+
+1. evaluate the declared satisfaction contract;
+2. report the accepted already-satisfied outcome without mutation, or identify
+   the missing or invalid evidence;
+3. obtain explicit mutation authority and execute the selected procedure only
+   for requirements that need it;
+4. re-evaluate the same satisfaction contract after mutation; and
+5. preserve any resolver, provisioning, or verification failure as the
+   requirement's terminal outcome.
+
+Function names, process exit codes, command names, status labels, and output
+format are projections selected by the owning language, tool, application, or
+operator contract. They are not universal dependency policy. A Launcher action
+may expose the accepted procedure, but it cannot create missing authority,
+replace the satisfaction contract, combine unrelated requirements into one
+opaque result, or reinterpret failure as success.
+
 ## Typed Outcomes
 
 Return typed `invalid` for contradictory requirements, ownership, constraints,
