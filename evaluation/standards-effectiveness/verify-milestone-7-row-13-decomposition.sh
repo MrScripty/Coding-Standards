@@ -36,7 +36,7 @@ mapfile -t dispositions < <(
     print $1
   }' "$DISPOSITIONS"
 )
-[[ "${dispositions[*]}" == 'STD-0273' ]]
+[[ "${dispositions[*]}" == 'STD-0273 STD-0274' ]]
 
 package_row="$(
   awk -F '\t' '$1 == 13 {
@@ -71,12 +71,13 @@ done
 rg -F -q '`7.4b8al` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8am` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8an` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ao` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8ao` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8ap` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ao'* ]]
-[[ "$next_slice_line" == *'STD-0274'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ap'* ]]
+[[ "$next_slice_line" == *'STD-0275'* && "$next_slice_line" == *'STD-0276'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-13 decomposition passed: child 13.1 accepted; 6 IDs across 3 ordered children remain\n'
+printf 'Milestone 7 row-13 decomposition passed: children 13.1 and 13.2 accepted; 5 IDs across 2 ordered children remain\n'

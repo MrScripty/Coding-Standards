@@ -121,7 +121,7 @@ retained_legacy=(
   '## C# Async/Await Index'
   'This is a non-normative migration index'
   '### C# Continuation Scheduling'
-  '## Rust Concurrency Cross-Reference'
+  '## Rust Concurrency Routing Index'
   '## TypeScript Concurrency Rules'
   '## Godot Thread Safety'
 )
@@ -149,11 +149,20 @@ awk -F '\t' 'NR > 1 && $1 == "STD-0269" {
 }' "$DISPOSITIONS" |
   grep -Fx 'CONCURRENCY-STANDARDS.md:CONCURRENCY-STANDARDS.md:index:convert the C sharp async parent heading into a non-normative routing index while preserving separately owned child specializations'
 
+awk -F '\t' 'NR > 1 && $1 == "STD-0274" {
+  print $2 ":" $3 ":" $4 ":" $5
+}' "$DISPOSITIONS" |
+  grep -Fx 'CONCURRENCY-STANDARDS.md:CONCURRENCY-STANDARDS.md:index:replace legacy Rust concurrency cross references with a non-normative route to canonical Rust Async and Rust Security profiles'
+
+rg -F -q '[Rust Async profile](profiles/languages/rust/async.md)' "$LEGACY"
+rg -F -q '[Rust Security profile](profiles/languages/rust/security.md)' "$LEGACY"
+! rg -F -q 'languages/rust/RUST-ASYNC-STANDARDS.md' "$LEGACY"
+! rg -F -q 'languages/rust/RUST-SECURITY-STANDARDS.md' "$LEGACY"
 ! rg -F -q '## C# Async/Await Rules' "$LEGACY"
 rg -F -q '`7.4b8ak` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ao'* ]]
-[[ "$next_slice_line" == *'STD-0274'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ap'* ]]
+[[ "$next_slice_line" == *'STD-0275'* && "$next_slice_line" == *'STD-0276'* ]]
 
 rg -F -q '| F019 | Resolved in Milestone 7.4b4b |' "$FINDINGS"
 rg -F -q '`7.4b4b` (`Accepted`)' "$PLAN"

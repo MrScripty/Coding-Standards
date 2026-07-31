@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** row 13 child 13.1 is complete; the Rust cross-reference
-`STD-0274` is ready for non-normative index closure.
+**Current phase:** row 13 children 13.1 and 13.2 are complete; the TypeScript
+Async owner contract is required before `STD-0275` and `STD-0276` can move.
 
-**Next slice:** Milestone 7.4b8ao close `STD-0274` as routing to the Rust Async and Rust Security profiles.
+**Next slice:** Milestone 7.4b8ap establish the TypeScript Async owner contract before implementing `STD-0275` and `STD-0276`.
 
 **Acceptance status:** `partial`
 
@@ -1291,8 +1291,10 @@ all structural/routing fixtures pass.
      `ConfigureAwait(false)` rule and product-specific example with canonical
      affinity-, capability-, and evidence-driven continuation scheduling and a
      bounded legacy route.
-   - `7.4b8ao` (`Planned`): close `STD-0274` as non-normative routing to the
-     Rust Async and Rust Security profiles.
+   - `7.4b8ao` (`Accepted`): close `STD-0274` as a non-normative migration
+     index routing directly to the canonical Rust Async and Rust Security
+     profiles; remove the legacy Rust standards-file links without creating
+     another Rust concurrency authority.
    - `7.4b8ap` (`Planned`): establish the TypeScript Async owner contract
      without disposing `STD-0275` or `STD-0276`.
    - `7.4b8aq` (`Planned`): refine `STD-0276` in TypeScript Async and close

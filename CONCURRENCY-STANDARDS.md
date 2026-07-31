@@ -46,12 +46,12 @@ placement does not select context suppression.
 
 ---
 
-## Rust Concurrency Cross-Reference
+## Rust Concurrency Routing Index
 
-Rust-specific concurrency rules live in
-[languages/rust/RUST-ASYNC-STANDARDS.md](languages/rust/RUST-ASYNC-STANDARDS.md)
-and security-sensitive resource limit rules live in
-[languages/rust/RUST-SECURITY-STANDARDS.md](languages/rust/RUST-SECURITY-STANDARDS.md).
+This is a non-normative migration index. Rust async mechanisms are canonical
+in the [Rust Async profile](profiles/languages/rust/async.md), and
+security-sensitive Rust concurrency mechanisms are canonical in the
+[Rust Security profile](profiles/languages/rust/security.md).
 
 ---
 

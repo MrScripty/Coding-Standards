@@ -3802,6 +3802,19 @@ C# mechanism remains.
 **Next slice:** `7.4b8ao`, close `STD-0274` as non-normative routing to the
 Rust Async and Rust Security profiles.
 
+**Slice `7.4b8ao` accepted:** `STD-0274` now has one exact `index`
+disposition. Its source section routes directly to the canonical Rust Async
+and Rust Security profiles and no longer links to the legacy Rust standards
+files.
+
+**No-fallback/legacy result:** the routing index introduces no Rust mechanism,
+default, retry order, or alternate authority. Missing applicability is handled
+by the standards router and typed routing diagnostics, not by selecting either
+profile implicitly.
+
+**Next slice:** `7.4b8ap`, establish the TypeScript Async owner contract before
+moving `STD-0275` and `STD-0276`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.
