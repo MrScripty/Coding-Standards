@@ -41,8 +41,8 @@ if rg -q '^\| Tests \| Affected only \| Full suite \|$' "$TOOLING"; then
   exit 1
 fi
 
-grep -q 'health is `release-artifact` evidence only' "$LAUNCHER"
-grep -q 'capability or user workflow' "$LAUNCHER"
+grep -q 'Startup alone is usually' "$WORKFLOW"
+grep -q 'evidence and never substitutes' "$WORKFLOW"
 grep -q 'does not prove changed feature behavior' "$RELEASE_WORKFLOW"
 
 printf 'Verification ownership checks passed\n'

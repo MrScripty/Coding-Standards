@@ -1,0 +1,14 @@
+case	action	procedure	lifecycle	state	mechanism	outcome_map	fallback	expected
+declared_launcher	selected	selected	selected	selected	selected	selected	none	allow
+malformed_action	invalid	selected	selected	selected	selected	selected	none	typed-invalid
+fixed_flag_set	selected	selected	selected	selected	selected	selected	fixed-flags	typed-invalid
+implicit_build	selected	missing	selected	selected	selected	selected	implicit-build	typed-invalid
+alternate_runtime	selected	missing	selected	selected	selected	selected	dev-substitution	typed-invalid
+ambient_host_state	selected	selected	selected	missing	selected	selected	host-state	typed-invalid
+mandatory_bash	selected	selected	selected	selected	missing	selected	force-bash	typed-invalid
+raw_command_string	selected	selected	selected	selected	missing	selected	raw-eval	typed-invalid
+missing_lifecycle	selected	selected	missing	selected	selected	selected	none	typed-unavailable
+missing_state_contract	selected	selected	selected	missing	selected	selected	none	typed-unavailable
+missing_mechanism	selected	selected	selected	selected	missing	selected	none	typed-unavailable
+missing_outcome_map	selected	selected	selected	selected	selected	missing	none	typed-unavailable
+fixed_exit_codes	selected	selected	selected	selected	selected	missing	fixed-codes	typed-invalid

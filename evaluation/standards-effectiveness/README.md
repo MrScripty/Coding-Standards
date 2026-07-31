@@ -140,6 +140,11 @@ procedure delegation, process lifecycle, and outcome preservation while
 rejecting guessed actions or targets, alternate commands, successful no-ops,
 missing evidence, and default success.
 
+`fixtures/launcher/population-decisions.tsv` and
+`verify-launcher-population.sh` validate canonical Launcher population,
+13 action, lifecycle, state, mechanism, and outcome decisions, 18 exact
+dispositions, bounded legacy replacement, and handoff to GUI smoke acceptance.
+
 `fixtures/rust/binding-core-adapter-testability-*.tsv` and
 `verify-rust-binding-core-adapter-testability.sh` require distinct
 framework-free core and real native/host adapter evidence. They reject

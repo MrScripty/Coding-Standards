@@ -45,6 +45,14 @@ An inapplicable action is omitted or returns its declared typed
 `unsupported` outcome. Do not add a successful no-op, guessed target, raw
 toolchain command, or alternate action as fallback.
 
+Publish action discovery in the interface selected by the application
+contract. Help output, machine-readable discovery, shell completion, external
+documentation, or another declared surface may satisfy different consumers.
+The discovery surface must identify applicable actions, argument and
+passthrough contracts, relevant environment controls, and terminal outcome
+meanings. Do not require one help layout, example set, launcher filename,
+filesystem location, shell, or long-form flag syntax for every application.
+
 ## Delegate Without Upgrading Evidence
 
 Build, install, test, performance, smoke, release, and run actions delegate to
@@ -55,6 +63,13 @@ A launcher invocation does not turn startup into a user workflow, a smoke
 check into end-to-end evidence, or a successful command into proof beyond the
 delegated procedure's acceptance claim. Missing required procedure or evidence
 is a typed `unavailable` outcome.
+
+The application contract selects development, release, or other runtime
+targets and the procedure that starts each one. A launcher may replace its
+process, supervise a child, or invoke a bounded procedure only when the
+selected lifecycle contract supports that mechanism. It must not infer a
+release artifact from a conventional path, substitute a development command,
+build a missing artifact implicitly, or weaken runtime constraints.
 
 ## Own Process And State Boundaries
 
@@ -68,12 +83,37 @@ declared by the action contract. A launcher must not carry temporary paths,
 credentials, request inputs, cancellation, or result ownership from one
 invocation into another.
 
+For isolated state, derive a fresh or explicitly persistent scope from the
+selected action and state contract. Host-state access requires explicit
+authority. Report the selected mode through the declared diagnostic surface,
+clean up bounded temporary state according to lifecycle ownership, and reject
+unavailable isolation rather than silently using ambient user state.
+
+## Implementation Mechanism
+
+Select the launcher implementation language and command mechanism from
+supported deployment, operator, toolchain, and security facts. Shell scripts,
+compiled launchers, task runners, desktop bridges, and package-manager commands
+are mechanisms, not defaults.
+
+Construct delegated invocations as structured executable and argument data
+when the mechanism supports it. Apply the canonical Security contract when
+untrusted values can authorize execution or generated command content. Do not
+use string evaluation, raw interpolation, ambient privilege escalation, or an
+alternate executable when required command construction cannot be established.
+
 ## Typed Outcomes
 
 Return typed `invalid`, `unsupported`, or `unavailable` diagnostics for
 malformed action input, unsupported capability, missing procedure or target,
 and unavailable lifecycle or evidence requirements. Preserve more specific
 delegated failures.
+
+Map typed outcomes to process exit status or another transport representation
+at the launcher boundary. The application contract owns that mapping; fixed
+numeric codes are not universal. Preserve interruption, cancellation, child
+failure, and missing-artifact distinctions when the selected transport can
+represent them, and otherwise return an explicit lossy-mapping diagnostic.
 
 Do not continue through a guessed action, alternate command, implicit install,
 successful no-op, weakened runtime mode, discarded child failure, stale state,

@@ -3927,6 +3927,24 @@ All 26 identifiers remain undisposed.
 **Next slice:** `7.4b8av`, refine the Launcher-owned row-14 identifiers and
 close their structural material.
 
+**Slice `7.4b8av` accepted:** refined 18 exact Launcher-owned identifiers into
+the canonical application profile. Action names, discovery, arguments,
+delegated procedures, runtime targets, lifecycle/state handling,
+implementation mechanism, and outcome mapping now derive from declared
+application and owner contracts. The legacy file is a bounded migration index
+that retains only the undisposed Verification, Dependencies, Release, and
+Security sections.
+
+**No-fallback/legacy result:** removed fixed flag, command-example, numeric
+exit-code, mandatory Bash, copied-template, successful no-op, implicit-build,
+ambient-host-state, development-substitution, raw-evaluation, and alternate
+executable authority. Missing required procedure, target, lifecycle, state,
+mechanism, or outcome mapping returns typed diagnostics. Thirteen focused
+decisions and 18 exact dispositions prove the boundary.
+
+**Next slice:** `7.4b8aw`, refine `STD-0495` GUI smoke acceptance into
+Verification.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

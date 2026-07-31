@@ -72,6 +72,5 @@ lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8av` refines the Launcher-owned identifiers and closes their
-structural material. It does not dispose the Verification, Dependencies,
-Release, or Security groups.
+Milestone `7.4b8aw` refines `STD-0495` GUI smoke acceptance into Verification.
+It does not dispose the Dependencies, Release, or Security groups.

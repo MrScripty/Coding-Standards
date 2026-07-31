@@ -394,3 +394,21 @@ STD-0276	CONCURRENCY-STANDARDS.md	profiles/languages/typescript/async.md	refine	
 STD-0277	CONCURRENCY-STANDARDS.md	CONCURRENCY-STANDARDS.md	index	convert the Godot thread-safety parent heading into a non-normative route to the canonical Godot framework profile
 STD-0278	CONCURRENCY-STANDARDS.md	profiles/frameworks/godot.md	refine	select Godot engine affinity and observable dispatch from the operation contract rather than requiring one main-thread mechanism
 STD-0279	CONCURRENCY-STANDARDS.md	profiles/frameworks/godot.md	refine	replace validity-check-only guidance with point-of-use object lifetime and identity proof across async and deferred boundaries
+STD-0487	LAUNCHER-STANDARDS.md	LAUNCHER-STANDARDS.md	index	convert the legacy Launcher title into a non-normative route to the canonical Launcher profile and remaining owner-specific migration sections
+STD-0488	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	select launcher applicability and interface shape from the application contract rather than requiring one root Bash script
+STD-0489	LAUNCHER-STANDARDS.md	LAUNCHER-STANDARDS.md	index	close the legacy core CLI parent as non-normative routing to canonical Launcher action selection and decoding
+STD-0490	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	derive actions names and required capabilities from the application contract rather than a universal fixed flag set
+STD-0491	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	decode exactly the selected action and its declared arguments with typed outcomes instead of fixed parsing assumptions
+STD-0492	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	remove	remove copied command examples as launcher authority because discovery and invocation syntax are application-contract projections
+STD-0493	LAUNCHER-STANDARDS.md	LAUNCHER-STANDARDS.md	index	remove the embedded workflow-extension example heading and route applicable actions through canonical procedure owners
+STD-0494	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	expose only selected repository procedures and preserve their evidence and outcomes without stub or alternate-action fallback
+STD-0499	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	project delegated diagnostics through the declared launcher surface without fixed dependency messages or status labels
+STD-0501	LAUNCHER-STANDARDS.md	LAUNCHER-STANDARDS.md	index	close the legacy runtime parent as a route to canonical Launcher procedure delegation and lifecycle selection
+STD-0502	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	select development runtime target procedure argument projection and lifecycle mechanism from declared application facts
+STD-0503	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	select release runtime artifact and procedure without guessed paths implicit builds development substitution or weakened modes
+STD-0504	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	require declared per-invocation state isolation host-state authority cleanup and no state carry-forward
+STD-0505	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	publish action discovery through the selected consumer surface rather than one universal help layout or example set
+STD-0506	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	map typed outcomes at the launcher boundary from the application contract rather than fixed universal numeric exit codes
+STD-0507	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	select the launcher implementation mechanism from deployment operator toolchain and security facts rather than mandatory Bash rules
+STD-0511	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	remove	remove the copied Bash template and placeholder commands as normative or fallback launcher implementation
+STD-0512	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	merge	merge applicable launcher verification outcomes into the canonical profile without retaining a fixed checklist

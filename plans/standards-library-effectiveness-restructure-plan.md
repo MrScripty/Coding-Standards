@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** immutable row 14 has bounded semantic decomposition and its
-Launcher-owned child is next.
+**Current phase:** Launcher-owned row-14 policy is canonical; GUI smoke
+acceptance is the active child.
 
-**Next slice:** Milestone 7.4b8av refine Launcher-owned `STD-0487`, `STD-0488`, `STD-0489`, `STD-0490`, `STD-0491`, `STD-0492`, `STD-0493`, `STD-0494`, `STD-0499`, `STD-0501`, `STD-0502`, `STD-0503`, `STD-0504`, `STD-0505`, `STD-0506`, `STD-0507`, `STD-0511`, and `STD-0512`, then close their structural material.
+**Next slice:** Milestone 7.4b8aw refine GUI smoke acceptance `STD-0495` into Verification.
 
 **Acceptance status:** `partial`
 
@@ -1337,8 +1337,16 @@ all structural/routing fixtures pass.
      successful build no-ops, guessed targets, weakened GUI runtime modes, raw
      interpolation, copied helper authority, and template fallback. Make no
      disposition or normative change.
-   - `7.4b8av` (`Planned`): refine the Launcher-owned identifiers and close
-     their headings, copied template, and checklist as non-normative material.
+   - `7.4b8av` (`Accepted`): refine 18 Launcher-owned identifiers into the
+     canonical profile and replace their legacy text with a bounded index that
+     retains only undisposed owner groups. Derive actions, discovery,
+     delegation, runtime targets, lifecycle/state handling, implementation
+     mechanism, and outcome mapping from declared contracts. Remove fixed
+     flags, command examples, exit codes, mandatory Bash, copied templates,
+     implicit builds, ambient host state, alternate runtime, and successful
+     no-op fallback.
+   - `7.4b8aw` (`Planned`): refine `STD-0495` GUI smoke evidence,
+     environment, execution mode, and acceptance into Verification.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
