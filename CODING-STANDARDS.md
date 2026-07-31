@@ -47,50 +47,10 @@ in [Contracts](topics/contracts.md#invariant-contracts). Verification evidence
 is selected by the
 [Verification workflow](workflows/verification.md#selecting-claims).
 
-## Disabled Features
+## Disabled Features Legacy Route
 
-When disabling functionality due to bugs or incomplete implementation:
-
-### Documentation Requirements
-
-```markdown
-Status: DISABLED
-
-Reason:
-Incremental rebuild produces corrupted indices when concurrent writes overlap
-with the rebuild window.
-
-Tracking:
-Issue #42 - Fix concurrent index rebuild corruption.
-
-Conditions for Re-enabling:
-1. Implement write-ahead locking during rebuild.
-2. Add integrity check after each incremental pass.
-3. Pass stress test with concurrent writes during rebuild.
-
-Workaround:
-Full rebuild runs nightly via scheduled task.
-```
-
-### Config Pattern
-
-Keep the disabled default close to the documented feature flag and reference the
-reason from the configuration site.
-
-### Unimplemented Stubs
-
-Do not commit stub functions that accept requests and return empty or dummy
-data. Stubs silently violate the caller's expectations and are difficult to
-distinguish from working code.
-
-```text
-BAD: Registering a handler that returns empty or dummy data.
-GOOD: Do not register the route until it is implemented.
-```
-
-**If a placeholder is truly needed** (e.g., for integration testing), use the
-[Disabled Features](#disabled-features) pattern: document the reason, create a
-tracking issue, and specify re-enabling conditions.
+Disabled, removed, and incomplete behavior lifecycle authority is canonical in
+the [Implementation workflow](workflows/implementation.md#disabled-and-incomplete-behavior).
 
 ### Review Checklist
 

@@ -58,5 +58,5 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bl` refines `STD-0174` through `STD-0177` into Implementation
-disabled-feature and stub lifecycle authority.
+Milestone `7.4b8bm` refines `STD-0178` into Verification claim-derived
+acceptance for disabled behavior.

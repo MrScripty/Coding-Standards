@@ -50,6 +50,33 @@ relevant findings with severity, evidence, owner, and disposition.
 - Use comments only for non-obvious invariants, safety, or ownership.
 - Request explicit authority before destructive or permission-sensitive work.
 
+## Disabled And Incomplete Behavior
+
+Classify unavailable behavior before editing:
+
+- remove deliberately unsupported capability from every advertised and
+  registered surface;
+- represent temporary disablement explicitly at the owning boundary; or
+- keep incomplete implementation unreachable from production consumers.
+
+Temporary disablement must identify the owning capability, affected surfaces,
+reason, tracking authority, conditions for re-enabling or permanent removal,
+and a review or expiration trigger when indefinite disablement is not part of
+the product contract. Record this authority where maintainers and affected
+consumers can discover it; do not require a copied comment template, one
+configuration location, or a workaround when none is valid.
+
+A flag, configuration value, route registration, command, control, or published
+capability must agree with the selected lifecycle state. Do not advertise or
+register unavailable behavior and then return empty data, dummy values, false
+success, a silent no-op, or an unrelated substitute. Test-only placeholders
+must be isolated by the test boundary and must not become production behavior.
+
+Return the owning boundary's typed `unavailable`, `unsupported`, or `invalid`
+outcome when a requested capability cannot be provided. Missing lifecycle
+ownership, tracking authority, or re-enable/removal criteria is `unavailable`;
+do not infer them or preserve an incumbent stub as fallback.
+
 ## Verification
 
 Use [Verification Workflow](verification.md).

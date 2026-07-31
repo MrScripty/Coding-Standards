@@ -6,12 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Contracts invariant authority is canonical; Implementation
-disabled-feature and stub lifecycle is next.
+**Current phase:** Implementation disabled-feature and stub lifecycle is
+canonical; Verification acceptance for disabled behavior is next.
 
-**Next slice:** Milestone 7.4b8bl refine `STD-0174`, `STD-0175`, `STD-0176`,
-and `STD-0177` into Implementation disabled-feature and stub lifecycle
-authority.
+**Next slice:** Milestone 7.4b8bm refine `STD-0178` into Verification
+claim-derived acceptance for disabled behavior.
 
 **Acceptance status:** `partial`
 
@@ -1423,8 +1422,12 @@ all structural/routing fixtures pass.
      Contracts invariant authority with Verification-selected evidence.
      Remove build-mode, panic, logging, recovery, copied-template, and
      mandatory test-per-invariant defaults.
-   - `7.4b8bl` (`Planned`): refine `STD-0174` through `STD-0177` into
+   - `7.4b8bl` (`Accepted`): refine `STD-0174` through `STD-0177` into
      Implementation disabled-feature and stub lifecycle authority.
+     Remove copied documentation, configuration-location, workaround, and
+     registered-stub defaults with typed lifecycle outcomes.
+   - `7.4b8bm` (`Planned`): refine `STD-0178` into Verification
+     claim-derived acceptance for disabled behavior.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

@@ -4167,6 +4167,26 @@ prove typed invalid, unsupported, and unavailable outcomes.
 **Next slice:** `7.4b8bl`, refine `STD-0174` through `STD-0177` into
 Implementation disabled-feature and stub lifecycle authority.
 
+**Slice `7.4b8bl` accepted:** refined disabled, removed, and incomplete
+behavior into Implementation-owned lifecycle authority.
+
+**No-fallback/legacy result:** removed copied documentation,
+configuration-location, workaround, and registered-stub recipes. Fifteen
+decisions and four exact dispositions reject dummy data, false success, silent
+no-ops, substitute behavior, and missing lifecycle authority with typed
+invalid, unsupported, or unavailable outcomes.
+
+**Verification (2026-07-31):** `verify-implementation-disabled-lifecycle.sh`
+and the complete `verify-*.sh` suite passed in the isolated slice worktree.
+
+**Verification deviation:** the first focused run found a prose assertion
+coupled to physical Markdown wrapping. The assertion now checks a stable
+adjacent semantic phrase; the explicit false-success decision and all
+disposition coverage remain unchanged.
+
+**Next slice:** `7.4b8bm`, refine `STD-0178` into Verification claim-derived
+acceptance for disabled behavior.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

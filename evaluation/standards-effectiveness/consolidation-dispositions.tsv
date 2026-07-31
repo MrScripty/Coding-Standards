@@ -459,3 +459,7 @@ STD-0170	CODING-STANDARDS.md	topics/contracts.md	refine	define caller-establisha
 STD-0171	CODING-STANDARDS.md	topics/contracts.md	refine	define outcome-specific postconditions guaranteed by the operation
 STD-0172	CODING-STANDARDS.md	topics/contracts.md	refine	select enforcement from authority impact boundaries mutation and proof lifetime without build-mode or failure-mechanism defaults
 STD-0173	CODING-STANDARDS.md	workflows/verification.md	refine	select objective-aligned invariant evidence without mandatory test-per-invariant or test-name proof
+STD-0174	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the disabled-features parent with a non-normative route to canonical Implementation lifecycle authority
+STD-0175	CODING-STANDARDS.md	workflows/implementation.md	refine	record owner surfaces reason tracking re-enable or removal conditions and review trigger without a copied documentation template
+STD-0176	CODING-STANDARDS.md	workflows/implementation.md	refine	keep advertised registered and configured surfaces consistent with selected lifecycle state without one configuration-location prescription
+STD-0177	CODING-STANDARDS.md	workflows/implementation.md	refine	keep incomplete behavior unreachable from production and return typed outcomes without registered stubs dummy data silent no-ops or substitute fallback
