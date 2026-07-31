@@ -29,6 +29,6 @@ mapfile -t ids < <(awk -F '\t' '$1>="STD-0167"&&$1<="STD-0173"{print $1}' \
   "$S/consolidation-dispositions.tsv" | sort)
 [[ "${ids[*]}" == 'STD-0167 STD-0168 STD-0169 STD-0170 STD-0171 STD-0172 STD-0173' ]]
 rg -F -q '`7.4b8bk` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8bu` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b8bv` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
 printf 'Contract invariants passed: 15 decisions, 7 dispositions\n'

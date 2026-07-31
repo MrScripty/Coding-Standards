@@ -4338,8 +4338,39 @@ defaults with typed diagnostics.
 dispositions, accelerated-plan, plan-structure, and the complete `verify-*.sh`
 suite passed in the isolated slice worktree.
 
-**Next slice:** `7.4b8bu`, consolidate `STD-0602` through `STD-0653` into the
-existing Verification owner package.
+## Milestone 7.4b8bu: Row 18 Owner Decomposition
+
+**Outcome:** Accepted planning-only re-plan.
+
+**Trigger:** bounded pre-slice review found that immutable row 18 combines
+generic verification policy with Concurrency, Language Binding, Resilience,
+Contracts, Frontend, and Performance authority. Consolidating all 52 IDs into
+Verification would violate single-owner and specialization boundaries.
+
+**Decision:** preserve immutable baseline row 18 and add seven ordered overlay
+children. Specialized owner packages execute first; final Verification
+consolidation removes remaining unsafe defaults and replaces
+`TESTING-STANDARDS.md` with a pure index only after every identifier has an
+exact disposition.
+
+**No-fallback/legacy result:** the re-plan authorizes no suite-label evidence,
+fixed cadence, realistic-environment substitution, wrapper-only or producer-
+only proof, stale artifact acceptance, fixed coverage or runtime target,
+weakened assertion, checklist completion, alternate evidence, or default
+success.
+
+**Scope:** planning and evaluation artifacts only. No normative or legacy
+standard, disposition, generated artifact, router, metadata, configuration,
+lockfile, or downstream file changes.
+
+**Verification:** the row-18 checker proves exact 52-ID coverage across seven
+ordered owner-coherent children, owner existence, active child `18.1`, and
+plan handoff. Shell syntax, plan structure, whitespace, execution-train, and
+the complete `verify-*.sh` suite pass with 221 completed and 368 remaining
+baseline IDs across 54 completed and 36 pending logical clusters.
+
+**Next slice:** `7.4b8bv`, refine `STD-0611` and `STD-0639` into the existing
+Concurrency owner package.
 
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the

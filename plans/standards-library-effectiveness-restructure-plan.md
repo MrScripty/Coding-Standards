@@ -9,8 +9,8 @@
 **Current phase:** Legacy Planning closure is complete; the existing-owner
 Verification package is next.
 
-**Next slice:** Milestone 7.4b8bu consolidate `STD-0602` through `STD-0653`
-into the existing Verification owner package.
+**Next slice:** Milestone 7.4b8bv refine `STD-0611` and `STD-0639` into the
+existing Concurrency owner package.
 
 **Acceptance status:** `partial`
 
@@ -1461,8 +1461,15 @@ all structural/routing fixtures pass.
      Close the already-indexed legacy source with exact dispositions and
      negative evidence against fixed plan size, question, commit, worker,
      headless, append-only, and template-completion defaults.
-   - `7.4b8bu` (`Planned`): consolidate `STD-0602` through `STD-0653` into the
-     existing Verification owner package.
+   - `7.4b8bu` (`Accepted`): decompose row 18 `STD-0602` through `STD-0653`
+     into seven owner-coherent children for Concurrency, Language Bindings,
+     Resilience, Contracts, Frontend, Performance, and final Verification
+     consolidation and legacy-index closure. Reject suite-label evidence,
+     fixed schedules, substitute environments, producer-only proof, fixed
+     coverage or performance targets, weakened assertions, checklist
+     completion, and default success. Make no normative or disposition change.
+   - `7.4b8bv` (`Planned`): refine `STD-0611` and `STD-0639` into the existing
+     Concurrency owner package.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
