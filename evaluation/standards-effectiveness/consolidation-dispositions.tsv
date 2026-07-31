@@ -442,3 +442,4 @@ STD-0153	CODING-STANDARDS.md	topics/resilience.md	refine	handle failures at the 
 STD-0154	CODING-STANDARDS.md	topics/resilience.md	refine	derive bounded diagnostic context and channels from operator and application contracts
 STD-0155	CODING-STANDARDS.md	topics/contracts.md	refine	apply complete inbound proof at the owning boundary without redundant internal validation or exception mechanism defaults
 STD-0156	CODING-STANDARDS.md	topics/contracts.md	refine	classify outbound outcomes and prove destination representations without HTTP status default-body or alternate-parser fallback
+STD-0157	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the dependency parent with a direct non-normative route to canonical Dependencies

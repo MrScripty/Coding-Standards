@@ -28,10 +28,11 @@ Failure handling and diagnostic authority is canonical in
 Inbound and outbound validation authority is canonical in
 [Contracts](topics/contracts.md#inbound-and-outbound-boundary-proof).
 
-## Dependency Management
+## Dependency Management Legacy Route
 
-See [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) for comprehensive guidelines on
-evaluating, versioning, auditing, and minimizing third-party dependencies.
+Dependency requirement, ownership, selection, resolution, provisioning,
+update, and removal authority is canonical in
+[Dependencies](topics/dependencies.md).
 
 ## Code Style
 

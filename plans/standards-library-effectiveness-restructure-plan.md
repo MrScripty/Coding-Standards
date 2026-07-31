@@ -6,11 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Contracts boundary validation is canonical; dependency
-routing is next.
+**Current phase:** Dependency routing is canonical; Core code and naming
+discipline is next.
 
-**Next slice:** Milestone 7.4b8bi replace `STD-0157` with a canonical
-Dependencies route.
+**Next slice:** Milestone 7.4b8bj refine `STD-0158`, `STD-0159`, `STD-0160`,
+`STD-0161`, `STD-0162`, `STD-0163`, `STD-0164`, `STD-0165`, and `STD-0166`
+into Core code and naming discipline.
 
 **Acceptance status:** `partial`
 
@@ -1411,8 +1412,11 @@ all structural/routing fixtures pass.
      classify operation outcomes separately from representation proof, and
      reject HTTP, exception, default-body, alternate-parser, and successful-
      transport fallbacks.
-   - `7.4b8bi` (`Planned`): replace `STD-0157` with a canonical Dependencies
-     route.
+   - `7.4b8bi` (`Accepted`): replace `STD-0157` with a direct non-normative
+     route to canonical Dependencies and remove the intermediate legacy owner
+     link.
+   - `7.4b8bj` (`Planned`): refine `STD-0158` through `STD-0166` into Core
+     code and naming discipline.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

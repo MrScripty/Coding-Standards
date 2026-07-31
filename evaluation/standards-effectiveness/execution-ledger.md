@@ -4112,6 +4112,27 @@ proof with available capability (`invalid`); the corrected focused run passed.
 **Next slice:** `7.4b8bi`, replace `STD-0157` with a canonical Dependencies
 route.
 
+**Slice `7.4b8bi` accepted:** converted the dependency-management parent into
+a direct non-normative route to canonical Dependencies.
+
+**No-fallback/legacy result:** removed the intermediate
+`DEPENDENCY-STANDARDS.md` route from this parent. One exact index disposition
+and focused negative routing evidence prove that the legacy file is not a
+fallback authority for `STD-0157`.
+
+**Verification (2026-07-30):** `verify-coding-dependency-route.sh` and the
+complete `verify-*.sh` suite passed in the isolated slice worktree.
+
+**Verification deviation:** the first focused run found that the shared
+execution-train checker required every active ID but inspected only the first
+physical `Next slice` line. It now reads the complete paragraph, preserving
+exact-ID enforcement and readable wrapping. Older owner checkers continue to
+assert the range start; the execution train, plan milestone, and focused route
+checker prove complete `STD-0158` through `STD-0166` scope.
+
+**Next slice:** `7.4b8bj`, refine `STD-0158` through `STD-0166` into Core code
+and naming discipline.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

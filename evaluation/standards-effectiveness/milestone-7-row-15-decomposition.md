@@ -58,5 +58,5 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bi` replaces the `STD-0157` dependency parent with a route to
-canonical Dependencies.
+Milestone `7.4b8bj` refines `STD-0158` through `STD-0166` into Core code and
+naming discipline.

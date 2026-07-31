@@ -189,10 +189,17 @@ done
 rg -F -q '`7.4b7n` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b7o` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
+next_slice_block="$(
+  awk '
+    /^\*\*Next slice:\*\*/ { capture = 1 }
+    capture && /^$/ { exit }
+    capture { print }
+  ' "$PLAN"
+)"
 if [[ -n "$active_label" ]]; then
   IFS=',' read -r -a required_ids <<< "$active_required_ids"
   for required_id in "${required_ids[@]}"; do
-    [[ "$next_slice_line" == *"$required_id"* ]]
+    [[ "$next_slice_block" == *"$required_id"* ]]
   done
   next_milestone="$(
     sed -E 's/.*Milestone ([^ ]+).*/\1/' <<< "$next_slice_line"
