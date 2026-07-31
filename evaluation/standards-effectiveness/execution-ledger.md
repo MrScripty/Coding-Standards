@@ -4206,6 +4206,27 @@ coverage are unchanged.
 **Next slice:** `7.4b8bn`, establish the Licensing owner contract and refine
 `STD-0179` through `STD-0182`.
 
+**Slice `7.4b8bn` accepted:** established the routed Licensing owner for
+third-party provenance, authoritative terms, compatibility, obligations,
+attribution, and distribution evidence.
+
+**No-fallback/legacy result:** removed fixed attribution templates, license
+matrices, viral labels, and linking slogans. Sixteen decisions and four exact
+dispositions require authoritative terms and return typed invalid,
+unsupported, or unavailable outcomes instead of guessed compatibility or
+omitted obligations.
+
+**Verification (2026-07-31):** `verify-licensing-owner-contract.sh` and the
+complete `verify-*.sh` suite passed in the isolated slice worktree.
+
+**Verification deviations:** the first fixture run exposed a missing
+material-class column in the third-party cases; the fixture now declares
+applicability explicitly. The execution train then exposed row `15.11` still
+marked `missing`; the owner state now transitions to `exists` in the same
+owner-creation slice. Policy outcomes and disposition scope were unchanged.
+
+**Next slice:** `7.4b8bo`, refine `STD-0183` into language-profile routing.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

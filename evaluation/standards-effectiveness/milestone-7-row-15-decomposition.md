@@ -32,8 +32,7 @@ contract.
 
 ## Missing Owners
 
-Create useful non-empty contracts for `topics/licensing.md`,
-`profiles/languages/typescript.md`,
+Create useful non-empty contracts for `profiles/languages/typescript.md`,
 `profiles/applications/frontend.md`, and `topics/performance.md` before
 disposing their identifiers. Existing TypeScript Async is a specialization,
 not a general language owner.
@@ -58,5 +57,4 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bn` establishes the Licensing owner contract and refines
-`STD-0179` through `STD-0182`.
+Milestone `7.4b8bo` refines `STD-0183` into language-profile routing.

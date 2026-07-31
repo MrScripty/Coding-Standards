@@ -54,50 +54,10 @@ the [Implementation workflow](workflows/implementation.md#disabled-and-incomplet
 Acceptance evidence is selected by the
 [Verification workflow](workflows/verification.md#disabled-behavior-claims).
 
-## License Attribution
+## License Attribution Legacy Route
 
-When adapting algorithms or code from other projects:
-
-### Attribution Format
-
-```text
-Priority Queue with Decrease-Key
-Adapted from: <project name> (<source URL>)
-License: MIT/Apache-2.0
-Copyright: <copyright holder>
-Source file: <source path>
-
-Modifications:
-- Simplified API for single use case.
-- Added project-specific key type.
-- Integrated with project's graph representation.
-```
-
-### License Compatibility
-
-Before adapting code, verify license compatibility:
-
-| Source License | Can Use In | Notes |
-|---------------|------------|-------|
-| MIT | Any project | Attribution required |
-| BSD | Any project | Attribution required |
-| Apache 2.0 | Any project | Patent grant included |
-| GPL | GPL projects only | Viral license |
-| LGPL | Any (with care) | Dynamic linking usually OK |
-
-### File-Level Attribution
-
-For files with significant adapted code:
-
-```text
-Graph Processing Engine
-
-Attribution:
-- <project> (<license>) - <adapted component>
-- <project> (<license>) - <adapted component>
-
-See individual functions for specific attributions.
-```
+Third-party provenance, license compatibility, obligation, attribution, and
+distribution authority is canonical in [Licensing](topics/licensing.md).
 
 ## Language-Specific Guidelines
 

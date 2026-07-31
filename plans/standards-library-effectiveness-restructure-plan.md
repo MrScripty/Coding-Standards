@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Disabled behavior lifecycle and acceptance are canonical;
-the Licensing owner contract is next.
+**Current phase:** Licensing authority is canonical; language-profile routing
+is next.
 
-**Next slice:** Milestone 7.4b8bn refine `STD-0179`, `STD-0180`, `STD-0181`,
-and `STD-0182` by establishing the Licensing owner contract.
+**Next slice:** Milestone 7.4b8bo refine `STD-0183` into language-profile
+routing.
 
 **Acceptance status:** `partial`
 
@@ -1430,8 +1430,11 @@ all structural/routing fixtures pass.
      claim-derived acceptance for disabled behavior.
      Replace fixed checklist completion with direct lifecycle, surface, typed
      outcome, and behavior claims.
-   - `7.4b8bn` (`Planned`): establish the Licensing owner contract and refine
+   - `7.4b8bn` (`Accepted`): establish the Licensing owner contract and refine
      `STD-0179` through `STD-0182`.
+     Replace fixed attribution templates and license matrices with
+     authoritative provenance, terms, obligations, and typed outcomes.
+   - `7.4b8bo` (`Planned`): refine `STD-0183` into language-profile routing.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

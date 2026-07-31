@@ -1,0 +1,17 @@
+case	material	source	terms	activity	obligations	artifact_evidence	fallback	expected
+owned_material	project-owned	not-required	not-required	declared	not-required	proved	none	not-applicable
+third_party_valid	third-party	identified	authoritative	declared	complete	proved	none	allow
+adapted_valid	third-party	identified	authoritative	declared	complete	proved	none	allow
+generated_valid	third-party	identified	authoritative	declared	complete	proved	none	allow
+unknown_source	third-party	missing	authoritative	declared	complete	proved	none	typed-unavailable
+conflicting_source	third-party	conflicting	authoritative	declared	complete	proved	none	typed-invalid
+missing_terms	third-party	identified	missing	declared	complete	proved	none	typed-unavailable
+missing_activity	third-party	identified	authoritative	missing	complete	proved	none	typed-unavailable
+incompatible_use	third-party	identified	authoritative	unsupported	complete	proved	none	typed-unsupported
+missing_obligations	third-party	identified	authoritative	declared	missing	proved	none	typed-unavailable
+missing_artifact_evidence	third-party	identified	authoritative	declared	complete	missing	none	typed-unavailable
+license_matrix	third-party	identified	authoritative	declared	complete	proved	matrix	typed-invalid
+license_label	third-party	identified	authoritative	declared	complete	proved	label	typed-invalid
+linking_slogan	third-party	identified	authoritative	declared	complete	proved	linking-slogan	typed-invalid
+copied_template	third-party	identified	authoritative	declared	complete	proved	template	typed-invalid
+omitted_notice	third-party	identified	authoritative	declared	complete	missing	omit-notice	typed-invalid

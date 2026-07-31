@@ -40,7 +40,7 @@ baseline_order	child_order	ids	source	owner	owner_state	activation	checkpoint	ra
 15	8	STD-0167,STD-0168,STD-0169,STD-0170,STD-0171,STD-0172,STD-0173	CODING-STANDARDS.md	topics/contracts.md	exists	pre-slice-review	focused	invariant precondition postcondition and validation contracts belong to Contracts while Verification owns selected evidence
 15	9	STD-0174,STD-0175,STD-0176,STD-0177	CODING-STANDARDS.md	workflows/implementation.md	exists	pre-slice-review	focused	disabled and unimplemented behavior requires explicit lifecycle and no registered stub fallback
 15	10	STD-0178	CODING-STANDARDS.md	workflows/verification.md	exists	pre-slice-review	focused	disabled-feature acceptance checklist becomes claim-derived verification evidence
-15	11	STD-0179,STD-0180,STD-0181,STD-0182	CODING-STANDARDS.md	topics/licensing.md	missing	owner-review	focused	license compatibility provenance and attribution require a canonical owner without fixed license tables or templates
+15	11	STD-0179,STD-0180,STD-0181,STD-0182	CODING-STANDARDS.md	topics/licensing.md	exists	owner-review	focused	license compatibility provenance and attribution require a canonical owner without fixed license tables or templates
 15	12	STD-0183	CODING-STANDARDS.md	CODING-STANDARDS.md	exists	pre-slice-review	focused	language-specific parent becomes a non-normative route to selected language profiles
 15	13	STD-0184,STD-0185,STD-0186	CODING-STANDARDS.md	profiles/languages/typescript.md	missing	owner-review	focused	general TypeScript API and boundary typing require a language profile distinct from async specialization
 15	14	STD-0187	CODING-STANDARDS.md	profiles/applications/frontend.md	missing	owner-review	focused	frontend parent routes to a canonical application profile rather than a legacy file
