@@ -181,6 +181,36 @@ input. Regenerate them when that input changes, and verify both native adapter
 and real host-language paths. Do not hand-maintain business logic in generated
 files or treat generated static types as runtime proof.
 
+## Binding Evidence Cohorts
+
+For each supported binding claim, select evidence that independently covers the
+native adapter contract and the real host consumer contract. Native evidence
+includes applicable contract shaping, representation conversion, diagnostic
+mapping, ownership, and lifecycle behavior. Host evidence loads the selected
+generated or packaged binding through the declared host runtime and exercises
+the native artifact shape that consumers receive.
+
+When host bindings and native artifacts are published, installed, or versioned
+as separate units, identify the release cohort or compatibility contract that
+authorizes their combination. Evidence must prove that selected units work
+together; sharing a build directory, version string, or generation run is not
+proof by itself. Release and packaging owners define artifact identity and
+provenance while this profile owns boundary compatibility behavior.
+
+Evidence breadth follows declared consumers, support status, representations,
+operations, lifecycle, and packaging claims. An experimental label, internal
+helper path, wrapper test, native-only test, host-only smoke, generated type,
+or producer snapshot does not reduce or satisfy a selected public claim.
+Verification scheduling follows the selected claim and available environment;
+do not infer per-change, pre-push, CI, or release cadence from the binding type
+or support label.
+
+Return `invalid` for contradictory cohort, representation, or ownership facts,
+`unsupported` for a well-formed host or operation outside the declared binding
+contract, and `unavailable` when required native, host, package, runtime, or
+provenance evidence cannot be obtained. Do not substitute another artifact,
+host, wrapper, smoke path, schedule, or weaker evidence.
+
 ## No Fallback
 
 An unsupported or failed representation cannot fall back to:
@@ -211,4 +241,6 @@ Affected tests cover:
 - serialized schema round trips;
 - opaque-handle ownership and release;
 - generated-wrapper regeneration and a real host smoke path; and
+- native-adapter and real-host evidence for every selected binding claim;
+- package-cohort compatibility when binding and native units vary separately;
 - proof that generated code and adapters contain no domain behavior.

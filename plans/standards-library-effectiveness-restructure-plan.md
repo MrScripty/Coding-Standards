@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Legacy Planning closure is complete; the existing-owner
-Verification package is next.
+**Current phase:** Testing-source owner decomposition is active; Concurrency is
+complete and the Language Bindings child is accepted.
 
-**Next slice:** Milestone 7.4b8bw refine `STD-0616` into the existing Language
-Bindings owner package.
+**Next slice:** Milestone 7.4b8bx refine `STD-0617` into the existing Resilience
+owner package.
 
 **Acceptance status:** `partial`
 
@@ -1475,8 +1475,15 @@ all structural/routing fixtures pass.
      and partial-state evidence. Reject implicit serialization, ambient
      identities, weakened parallelism, fixed repetition, build/smoke/happy-
      path substitution, and weakened assertions with typed diagnostics.
-   - `7.4b8bw` (`Planned`): refine `STD-0616` into the existing Language
-     Bindings owner package.
+   - `7.4b8bw` (`Accepted`): refine `STD-0616` into the existing Language
+     Bindings owner. Require claim-selected native adapter, real host consumer,
+     and separately versioned package-cohort compatibility evidence. Keep
+     artifact identity and provenance with Release. Reject wrapper-only,
+     native-only, host-only smoke, generated-type, producer-snapshot,
+     experimental-label, fixed-schedule, alternate-artifact, and weaker-
+     evidence substitutions with typed diagnostics.
+   - `7.4b8bx` (`Planned`): refine `STD-0617` into the existing Resilience
+     owner package.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

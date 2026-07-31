@@ -52,7 +52,9 @@ awk -F '\t' '$1=="STD-0611"||$1=="STD-0639" {
 
 rg -F -q '`7.4b8bv` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8bw` (`Planned`)' \
+rg -F -q '`7.4b8bw` (`Accepted`)' \
+  "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b8bx` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing concurrency consolidation passed: 15 decisions, 2 dispositions\n'

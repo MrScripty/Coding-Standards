@@ -194,50 +194,9 @@ Rules:
 
 ### Binding Verification Requirements
 
-For supported cross-language bindings, verification must cover both the native
-implementation side and the host-language consumer side. Wrapper-only tests are
-not enough, and host-language smoke tests without native-side contract coverage
-are not enough.
-
-Rules:
-
-1. Each supported binding must have **native-language tests** covering the
-   shared contract shaping, wrapper conversion logic, and error mapping owned
-   by the implementation language.
-2. Each supported binding must have **host-language tests** that exercise the
-   generated or packaged binding from the consumer language/runtime using the
-   real native library or artifact shape that callers will load.
-3. At least one **cross-layer acceptance path** must run through the actual
-   host-language binding into the native implementation and assert contract
-   preservation end to end.
-4. If generated bindings are shipped separately from the native library, the
-   verification plan must also prove that the packaged/generated binding and
-   the native artifact from the same build work together.
-5. Experimental bindings may reduce host-language breadth, but they still need
-   native-language coverage plus at least one real host-language smoke path
-   before they are treated as shippable.
-6. Internal helper crates or non-public wrapper paths do not automatically
-   require separate host-language suites unless they are part of a public
-   binding contract.
-
-Recommended coverage split:
-
-- Native-language tests: pure helper tests, wrapper conversion tests, export or
-  metadata presence checks, lifecycle/error mapping checks
-- Host-language tests: import/compile/load checks, runtime creation/shutdown,
-  representative API calls, packaged quickstart or smoke harnesses
-- Cross-layer acceptance: at least one real consumer path that proves the host
-  language sees the same contract semantics the native implementation produced
-
-Verification guidance:
-
-- Run native-language tests on every binding-contract change.
-- Run host-language tests often enough that supported bindings cannot drift for
-  long; for most repos this means pre-push for lightweight smoke paths and CI
-  for broader suites.
-- Isolate host-runtime global state, environment variables, temp roots, native
-  library search paths, and compiled artifacts the same way other integration
-  suites isolate durable state.
+Canonical native, host, package-cohort, and boundary evidence requirements are
+in [Language Binding Evidence Cohorts](profiles/boundaries/language-bindings.md#binding-evidence-cohorts).
+This legacy heading is a non-normative migration route.
 
 ### Replay, Recovery, and Idempotency Checks
 

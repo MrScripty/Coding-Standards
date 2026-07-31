@@ -4396,6 +4396,29 @@ active.
 **Next slice:** `7.4b8bw`, refine `STD-0616` into the existing Language
 Bindings owner package.
 
+## Milestone 7.4b8bw: Testing Language-Binding Evidence
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Language Bindings now requires claim-selected native
+adapter evidence, real host-consumer evidence, and compatibility evidence for
+binding/native units that vary separately. Release remains authoritative for
+artifact identity and provenance. The legacy section is a bounded route while
+undisposed Testing sections remain intact.
+
+**No-fallback/legacy result:** wrapper-only, native-only, host-only smoke,
+generated-type, producer-snapshot, experimental-label, fixed-schedule,
+alternate-artifact, and weaker-evidence substitutions return typed outcomes.
+
+**Verification:** 16 focused decisions cover allowed, omitted, invalid,
+unsupported, and unavailable evidence cohorts plus exact replacement and one
+disposition. All 122 `verify-*.sh` checkers pass; the train reports 224
+completed and 365 remaining IDs across 56 completed and 34 pending logical
+clusters, with child `18.3` active.
+
+**Next slice:** `7.4b8bx`, refine `STD-0617` into the existing Resilience owner
+package.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;
