@@ -3905,6 +3905,28 @@ default success. `STD-0487` through `STD-0512` remain undisposed.
 **Next slice:** `7.4b8au`, decompose Launcher row 14 by canonical owner and
 verification contract before population.
 
+**Slice `7.4b8au` accepted:** decomposed all 26 Launcher-source identifiers
+into five owner-coherent children. Launcher owns command projection, decoding,
+delegation, process/state lifecycle, help, outcome preservation, and structural
+closure. Verification owns GUI-smoke evidence and acceptance; the planned
+Dependencies topic owns dependency selection, installation authorization, and
+verification; Release owns build procedure; Security owns generated-command
+validation and encoding.
+
+**Discovered dependency:** `STD-0496` through `STD-0498` cannot be populated
+until the planned `topics/dependencies.md` owner has a non-empty accepted
+contract. The decomposition records that blocked owner state rather than
+placing dependency business rules in Launcher.
+
+**No-fallback/legacy result:** the split preserves no mandatory Bash, fixed
+flag or exit-code defaults, copied commands, implicit install, monolithic
+dependency checks, successful build no-ops, guessed build targets, weakened
+GUI modes, raw interpolation, copied helper authority, or template fallback.
+All 26 identifiers remain undisposed.
+
+**Next slice:** `7.4b8av`, refine the Launcher-owned row-14 identifiers and
+close their structural material.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

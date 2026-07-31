@@ -108,6 +108,11 @@ proves exact ordered coverage, zero premature dispositions, three missing
 owner contracts, package handoff, no-fallback evidence, and active cursor
 integrity.
 
+`milestone-7-row-14-decomposition.md` splits immutable row 14 into Launcher,
+Verification, Dependencies, Release, and Security children. Its checker proves
+exact coverage of all 26 identifiers, owner states, package classification,
+zero premature dispositions, no-fallback findings, and the next bounded child.
+
 `fixtures/csharp/async-owner-contract-decisions.tsv` and
 `verify-csharp-async-owner-contract.sh` establish the C# Async profile before
 population. They select continuation scheduling from explicit affinity and

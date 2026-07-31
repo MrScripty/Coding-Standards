@@ -81,12 +81,10 @@ overlay_row="$(
 rg -F -q '`7.4b8ar` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8as` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8at` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8au` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8au` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8av` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8au'* ]]
-for id in STD-0487 STD-0512; do
-  [[ "$next_slice_line" == *"$id"* ]]
-done
+[[ "$next_slice_line" == *'Milestone 7.4b8av'* ]]
 
 "$S/verify-milestone-7-row-13-decomposition.sh"
 "$S/check-plan-structure.sh" "$PLAN"

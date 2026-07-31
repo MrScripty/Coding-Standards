@@ -68,13 +68,13 @@ package_row="$(
     print $3 "\t" $4 "\t" $5 "\t" $6 "\t" $8
   }' "$PACKAGES"
 )"
-[[ "$package_row" == $'consolidation\tprofiles/applications/launcher.md\texisting-review\tdecision-table\tfull-suite' ]]
+[[ "$package_row" == $'refinement\tprofiles/applications/launcher.md\texisting-review\tdecision-table\tfull-suite' ]]
 
 rg -F -q '`7.4b8at` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8au` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8au` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8av` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8au'* ]]
-[[ "$next_slice_line" == *'STD-0487'* && "$next_slice_line" == *'STD-0512'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8av'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"

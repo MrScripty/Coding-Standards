@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** the Launcher application owner contract exists; immutable
-row 14 requires bounded semantic decomposition before population.
+**Current phase:** immutable row 14 has bounded semantic decomposition and its
+Launcher-owned child is next.
 
-**Next slice:** Milestone 7.4b8au decompose Launcher row 14, `STD-0487` through `STD-0512`, by canonical owner and verification contract.
+**Next slice:** Milestone 7.4b8av refine Launcher-owned `STD-0487`, `STD-0488`, `STD-0489`, `STD-0490`, `STD-0491`, `STD-0492`, `STD-0493`, `STD-0494`, `STD-0499`, `STD-0501`, `STD-0502`, `STD-0503`, `STD-0504`, `STD-0505`, `STD-0506`, `STD-0507`, `STD-0511`, and `STD-0512`, then close their structural material.
 
 **Acceptance status:** `partial`
 
@@ -1328,8 +1328,17 @@ all structural/routing fixtures pass.
      alternate commands, implicit install, successful no-ops, evidence
      upgrades, stale state, and default success. Do not dispose
      `STD-0487` through `STD-0512`.
-   - `7.4b8au` (`Planned`): perform bounded semantic decomposition of Launcher
-     row 14 before any population slice.
+   - `7.4b8au` (`Accepted`): decompose all 26 Launcher-source identifiers into
+     five owner-coherent children: Launcher projection/lifecycle and structural
+     closure, Verification GUI-smoke acceptance, Dependencies installation
+     policy, Release build procedure, and Security generated-command handling.
+     Record that Dependencies remains blocked on its planned non-empty owner.
+     Reject mandatory Bash, fixed command/code defaults, implicit install,
+     successful build no-ops, guessed targets, weakened GUI runtime modes, raw
+     interpolation, copied helper authority, and template fallback. Make no
+     disposition or normative change.
+   - `7.4b8av` (`Planned`): refine the Launcher-owned identifiers and close
+     their headings, copied template, and checklist as non-normative material.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
