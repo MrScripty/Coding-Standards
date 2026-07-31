@@ -469,3 +469,6 @@ STD-0180	CODING-STANDARDS.md	topics/licensing.md	refine	derive attribution conte
 STD-0181	CODING-STANDARDS.md	topics/licensing.md	refine	evaluate compatibility and obligations from authoritative terms and actual activity without fixed license matrices labels or linking slogans
 STD-0182	CODING-STANDARDS.md	topics/licensing.md	refine	place file artifact or distribution attribution only where selected obligations require it without file-level template defaults
 STD-0183	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the language-specific parent with a non-normative route to condition-selected language profiles without legacy location or incremental-migration authority
+STD-0184	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the TypeScript-specific parent with routes to the canonical general and async TypeScript profiles
+STD-0185	CODING-STANDARDS.md	profiles/languages/typescript.md	refine	select explicit annotations or inference from consumer declaration and evidence facts without exported-function or private-function defaults
+STD-0186	CODING-STANDARDS.md	profiles/languages/typescript.md	refine	project contract types from canonical authority and require runtime decoding without copied response raw-primitive any or assertion fallback

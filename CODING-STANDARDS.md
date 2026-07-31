@@ -65,45 +65,12 @@ Select language mechanism guidance from the
 [Language Profiles](STANDARDS-ROUTER.md#language-profiles) table. Generic
 policy remains in Core, workflows, and topics.
 
-## TypeScript-Specific Guidelines
+## TypeScript-Specific Guidelines Legacy Route
 
-### Explicit Return Types on Public Functions
-
-Functions that form part of an API surface (exported, called across modules)
-must declare their return type. This catches accidental changes at the
-definition site rather than propagating `any` to callers.
-
-```typescript
-// BAD: Inferred return type — callers don't know what to expect
-export async function getTimeline() {
-    return request('/api/timeline');
-}
-
-// GOOD: Explicit return type — contract is clear
-export async function getTimeline(): Promise<Timeline> {
-    return request('/api/timeline');
-}
-```
-
-Private helpers and inline callbacks may rely on inference when the type is
-obvious from context.
-
-### Contract Types for API Boundaries
-
-When calling external APIs, define types that match the expected response
-shape and use them to type API functions. Don't pass raw `string` or `any`
-where a domain type exists.
-
-```typescript
-// BAD: Untyped parameters accept anything
-export function createArc(name: string, type: string) { ... }
-
-// GOOD: Domain types enforce valid values
-export function createArc(name: string, type: ArcType) { ... }
-```
-
-This ensures the compiler catches mismatches (like `'a_plot'` vs `'APlot'`)
-at build time rather than at runtime.
+TypeScript mechanism guidance is canonical in the
+[TypeScript profile](profiles/languages/typescript.md). Async concurrency
+mechanisms additionally use the
+[TypeScript Async profile](profiles/languages/typescript/async.md).
 
 ### Frontend-Specific Standards
 

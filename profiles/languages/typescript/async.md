@@ -7,7 +7,7 @@
 - Level: `PROFILE`
 - Applies when: TypeScript asynchronous operations can overlap, be superseded, mutate shared or visible state, or require cancellation and terminal-result ownership.
 - Does not apply when: No TypeScript async mechanism changes or execution is proven sequential with no operation outliving its immediate caller.
-- Requires: `core`, `workflow.verification`, `topic.concurrency`
+- Requires: `core`, `workflow.verification`, `topic.concurrency`, `profile.language.typescript`
 - Specializes: `topic.concurrency`
 - Verification: TypeScript invocation-authority, cancellation, completion, and state-application decisions plus focused tests for the selected mechanism.
 - Canonical owner: `profiles/languages/typescript/async.md`

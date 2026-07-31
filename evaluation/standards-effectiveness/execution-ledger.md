@@ -4246,6 +4246,28 @@ coverage are unchanged.
 **Next slice:** `7.4b8bp`, establish the TypeScript owner contract and refine
 `STD-0184` through `STD-0186`.
 
+**Slice `7.4b8bp` accepted:** established the general TypeScript profile for
+public type surfaces, inference and annotation selection, runtime decoding,
+contract projection, and generated types. TypeScript Async now depends on the
+general profile.
+
+**No-fallback/legacy result:** removed blanket exported-function annotation,
+private-function inference, raw-string, copied-response, and static-type
+runtime-proof defaults. Seventeen decisions and three exact dispositions
+reject `any`, assertions, copied shapes, blanket wrappers, and alternate
+generators with typed diagnostics.
+
+**Verification (2026-07-31):** `verify-typescript-owner-contract.sh` and the
+complete `verify-*.sh` suite passed in the isolated slice worktree.
+
+**Verification deviation:** the first focused run found a prose assertion
+coupled to physical Markdown wrapping. The assertion now checks a stable
+continuation of the same primitive-versus-domain-type decision; fixture
+outcomes and disposition coverage are unchanged.
+
+**Next slice:** `7.4b8bq`, establish the Frontend owner contract and refine
+`STD-0187`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.
