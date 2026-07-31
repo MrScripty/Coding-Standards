@@ -3730,6 +3730,29 @@ index correctly reduces that remainder to seven. The checker now derives the
 remainder from its frozen 17-identifier group and exact accepted dispositions;
 it does not introduce an alternate migration state or infer a disposition.
 
+**Slice `7.4b8al` accepted:** immutable row 13 is decomposed into four ordered
+semantic packages: C# Async `STD-0273`, Rust routing `STD-0274`, TypeScript
+Async `STD-0275` and `STD-0276`, and Godot `STD-0277` through `STD-0279`.
+The three specialization owners must be established as non-empty contracts
+before population; the Rust child closes as routing to existing profiles.
+
+**Re-plan trigger (`Resolved`):** the provisional owner map grouped all seven
+identifiers under the generic Concurrency topic. Inspection proved distinct
+language/framework owners, dependencies, decisions, and evidence contracts.
+Moving the row as one batch would violate specialization precedence and the
+semantic batching rule. The execution overlay now owns the corrected
+decomposition without rewriting the immutable baseline or generated owner map.
+
+**No-fallback/legacy result:** context suppression, request counters, silent
+stale-result discard, deferred calls, main-thread assumptions, and validity
+checks cannot become universal defaults. Missing or contradictory mechanism,
+invocation, dispatch, lifetime, cancellation, or evidence facts require typed
+diagnostics. No normative or legacy text or disposition changes in this
+planning slice.
+
+**Next slice:** `7.4b8am`, establish the C# Async owner contract before moving
+`STD-0273`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

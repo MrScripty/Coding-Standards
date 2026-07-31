@@ -6,8 +6,8 @@ train_order	package_id	risk_class	owner	owner_action	verification_family	draft_m
 9	P05	consolidation	profiles/languages/rust/language-bindings.md	existing-review	decision-table	isolated-draft	focused	rust-binding-cdylib-artifact-contract	core,workflow.verification,profile.language.rust,profile.boundary.language-bindings
 10	P06	safety-critical	profiles/languages/rust/security.md	existing-review	decision-table	isolated-draft	full-suite	rust-panic-boundary-contract	core,workflow.verification,topic.security,profile.language.rust
 11	P07	consolidation	topics/resilience.md	existing-review	decision-table	isolated-draft	focused	resilience-recovery-contract	core,workflow.verification,topic.contracts
-12	P08	refinement	topics/concurrency.md	existing-review	decision-table	isolated-draft	focused	csharp-async-and-shared-state-contract	core,workflow.verification
-13	P08	refinement	topics/concurrency.md	existing-review	decision-table	isolated-draft	focused	csharp-async-and-shared-state-contract	core,workflow.verification
+12	P08	refinement	topics/concurrency.md	existing-review	decision-table	isolated-draft	focused	async-specialization-row-decomposition	core,workflow.verification
+13	P08	refinement	topics/concurrency.md	existing-review	decision-table	isolated-draft	focused	async-specialization-row-decomposition	core,workflow.verification
 14	P09	new-owner-design	profiles/applications/launcher.md	create-before-populate	owner-contract	isolated-draft	full-suite	launcher-lifecycle-and-acceptance-contract	core,workflow.verification,topic.resilience
 15	P10	consolidation	CORE-STANDARDS.md	existing-review	migration-structure	serial-only	full-suite	core-rule-consolidation	none
 16	P11	new-owner-design	topics/dependencies.md	create-before-populate	owner-contract	isolated-draft	full-suite	dependency-selection-and-maintenance-contract	core,workflow.verification,workflow.release

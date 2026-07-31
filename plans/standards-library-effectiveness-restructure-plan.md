@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Concurrency row 12 is complete; the next existing-owner
-cluster is C# async specialization `STD-0273` through `STD-0279`.
+**Current phase:** row 13 is decomposed; the next required owner contract is
+C# Async before `STD-0273` can move.
 
-**Next slice:** Milestone 7.4b8al review and implement `STD-0273` through `STD-0279` under the Concurrency topic.
+**Next slice:** Milestone 7.4b8am establish the C# Async owner contract before implementing `STD-0273`.
 
 **Acceptance status:** `partial`
 
@@ -1273,8 +1273,26 @@ all structural/routing fixtures pass.
      remainder with a count derived from its frozen group total and exact
      accepted dispositions so this independently tracked index closure cannot
      invalidate otherwise correct lifecycle evidence.
-   - `7.4b8al` (`Planned`): review and implement C# async specialization
-     `STD-0273` through `STD-0279`.
+   - `7.4b8al` (`Accepted`): decompose `STD-0273` through `STD-0279` into
+     C# Async specialization, Rust profile routing, TypeScript Async
+     specialization, and Godot framework specialization. Require non-empty
+     owner contracts before population, preserve generic lifecycle authority
+     in Concurrency, and reject context suppression, request counters, silent
+     stale-result discard, deferred calls, and validity checks as defaults.
+   - `7.4b8am` (`Planned`): establish the C# Async owner contract without
+     disposing or moving `STD-0273`.
+   - `7.4b8an` (`Planned`): refine and move `STD-0273` into the accepted C#
+     Async profile.
+   - `7.4b8ao` (`Planned`): close `STD-0274` as non-normative routing to the
+     Rust Async and Rust Security profiles.
+   - `7.4b8ap` (`Planned`): establish the TypeScript Async owner contract
+     without disposing `STD-0275` or `STD-0276`.
+   - `7.4b8aq` (`Planned`): refine `STD-0276` in TypeScript Async and close
+     `STD-0275` as its legacy index.
+   - `7.4b8ar` (`Planned`): establish the Godot framework owner contract
+     without disposing `STD-0277` through `STD-0279`.
+   - `7.4b8as` (`Planned`): refine `STD-0278` and `STD-0279` in the Godot
+     profile and close `STD-0277` as its legacy index.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
