@@ -51,15 +51,8 @@ is selected by the
 
 Disabled, removed, and incomplete behavior lifecycle authority is canonical in
 the [Implementation workflow](workflows/implementation.md#disabled-and-incomplete-behavior).
-
-### Review Checklist
-
-Before merging code that disables features:
-
-- [ ] Reason documented in code
-- [ ] Issue created for tracking
-- [ ] Re-enabling conditions specified
-- [ ] Workaround documented if applicable
+Acceptance evidence is selected by the
+[Verification workflow](workflows/verification.md#disabled-behavior-claims).
 
 ## License Attribution
 

@@ -1,0 +1,16 @@
+case	state	surfaces	typed_outcome	lifecycle_facts	direct_behavior	test_isolation	fallback	expected
+removed_complete	removed	complete	proved	not-required	proved	not-required	none	allow
+disabled_complete	disabled	complete	proved	proved	proved	not-required	none	allow
+incomplete_isolated	incomplete	complete	proved	proved	proved	proved	none	allow
+missing_surface	disabled	missing	proved	proved	proved	not-required	none	blocked
+contradicted_surface	disabled	contradicted	proved	proved	proved	not-required	none	blocked
+missing_outcome	disabled	complete	missing	proved	proved	not-required	none	blocked
+missing_lifecycle	disabled	complete	proved	missing	proved	not-required	none	blocked
+missing_behavior	disabled	complete	proved	proved	missing	not-required	none	blocked
+missing_isolation	incomplete	complete	proved	proved	proved	missing	none	blocked
+documentation_only	disabled	complete	proved	proved	missing	not-required	documentation	blocked
+issue_only	disabled	complete	proved	proved	missing	not-required	issue	blocked
+flag_only	disabled	complete	proved	proved	missing	not-required	flag	blocked
+workaround_substitute	disabled	complete	proved	proved	missing	not-required	workaround	blocked
+startup_only	disabled	complete	proved	proved	missing	not-required	startup	blocked
+production_stub	incomplete	complete	proved	proved	missing	missing	stub	blocked

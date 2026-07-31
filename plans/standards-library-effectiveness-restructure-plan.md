@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Implementation disabled-feature and stub lifecycle is
-canonical; Verification acceptance for disabled behavior is next.
+**Current phase:** Disabled behavior lifecycle and acceptance are canonical;
+the Licensing owner contract is next.
 
-**Next slice:** Milestone 7.4b8bm refine `STD-0178` into Verification
-claim-derived acceptance for disabled behavior.
+**Next slice:** Milestone 7.4b8bn refine `STD-0179`, `STD-0180`, `STD-0181`,
+and `STD-0182` by establishing the Licensing owner contract.
 
 **Acceptance status:** `partial`
 
@@ -1426,8 +1426,12 @@ all structural/routing fixtures pass.
      Implementation disabled-feature and stub lifecycle authority.
      Remove copied documentation, configuration-location, workaround, and
      registered-stub defaults with typed lifecycle outcomes.
-   - `7.4b8bm` (`Planned`): refine `STD-0178` into Verification
+   - `7.4b8bm` (`Accepted`): refine `STD-0178` into Verification
      claim-derived acceptance for disabled behavior.
+     Replace fixed checklist completion with direct lifecycle, surface, typed
+     outcome, and behavior claims.
+   - `7.4b8bn` (`Planned`): establish the Licensing owner contract and refine
+     `STD-0179` through `STD-0182`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

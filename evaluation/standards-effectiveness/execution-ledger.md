@@ -4187,6 +4187,25 @@ disposition coverage remain unchanged.
 **Next slice:** `7.4b8bm`, refine `STD-0178` into Verification claim-derived
 acceptance for disabled behavior.
 
+**Slice `7.4b8bm` accepted:** refined disabled-behavior acceptance into
+Verification-owned claims derived from the selected Implementation lifecycle.
+
+**No-fallback/legacy result:** removed the fixed reason, issue, re-enable, and
+workaround checklist. Fifteen decisions and one exact disposition require
+direct surface, typed-outcome, lifecycle, behavior, and test-isolation evidence
+and block documentation, issue, flag, workaround, startup, or stub substitutes.
+
+**Verification (2026-07-31):** `verify-disabled-behavior-claims.sh` and the
+complete `verify-*.sh` suite passed in the isolated slice worktree.
+
+**Verification deviation:** the first focused run found a prose assertion
+coupled to physical Markdown wrapping. The assertion now checks the stable
+continuation of the same semantic sentence; decision outcomes and disposition
+coverage are unchanged.
+
+**Next slice:** `7.4b8bn`, establish the Licensing owner contract and refine
+`STD-0179` through `STD-0182`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

@@ -463,3 +463,4 @@ STD-0174	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the disabled-feat
 STD-0175	CODING-STANDARDS.md	workflows/implementation.md	refine	record owner surfaces reason tracking re-enable or removal conditions and review trigger without a copied documentation template
 STD-0176	CODING-STANDARDS.md	workflows/implementation.md	refine	keep advertised registered and configured surfaces consistent with selected lifecycle state without one configuration-location prescription
 STD-0177	CODING-STANDARDS.md	workflows/implementation.md	refine	keep incomplete behavior unreachable from production and return typed outcomes without registered stubs dummy data silent no-ops or substitute fallback
+STD-0178	CODING-STANDARDS.md	workflows/verification.md	refine	derive disabled-behavior acceptance from lifecycle surfaces typed outcomes and direct claims without fixed checklist issue documentation workaround or startup fallback

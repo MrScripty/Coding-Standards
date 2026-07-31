@@ -58,5 +58,5 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bm` refines `STD-0178` into Verification claim-derived
-acceptance for disabled behavior.
+Milestone `7.4b8bn` establishes the Licensing owner contract and refines
+`STD-0179` through `STD-0182`.

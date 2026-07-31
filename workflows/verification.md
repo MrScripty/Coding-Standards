@@ -90,6 +90,30 @@ supporting checks for affected risks and contracts.
 Do not require an unrelated high-cost claim. Do not omit a direct claim because
 a cheaper supporting gate passed.
 
+## Disabled Behavior Claims
+
+Derive acceptance claims from the lifecycle state selected by
+[Implementation](implementation.md#disabled-and-incomplete-behavior).
+
+For deliberate removal, prove that every affected advertised, registered,
+configured, persisted, and user-visible surface no longer promises the
+capability and that requests receive the declared typed outcome. For temporary
+disablement, prove surface-state consistency, the owning boundary's typed
+outcome, and the accepted tracking, review, and re-enable or removal criteria.
+For incomplete behavior, prove it is unreachable from production consumers and
+that any test-only placeholder remains isolated by the test boundary.
+
+Select evidence kinds and environments from the affected surfaces. A focused
+configuration check may prove one local state but cannot prove a public,
+deployed, or user-visible surface. Documentation, a tracking issue, a feature
+flag, or a workaround proves only its explicit claim and never substitutes for
+observable disabled behavior.
+
+Acceptance remains blocked when a required surface, lifecycle fact, typed
+outcome, or direct behavior claim is missing or contradicted. Do not mark a
+disabled capability accepted from checklist completion, issue existence,
+documented intent, startup success, a production stub, or substitute behavior.
+
 ## Smoke Checks
 
 A smoke check proves only its explicit narrow assertions, such as:
