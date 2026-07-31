@@ -116,6 +116,10 @@ zero premature dispositions, no-fallback findings, and the next bounded child.
 `milestone-7-row-15-decomposition.md` splits immutable row 15 into 15
 owner-coherent coding-policy children and records five missing owner contracts.
 
+`fixtures/core/simplicity-decisions.tsv` and `verify-core-simplicity.sh` prove
+entanglement- and ownership-based simplicity without visible-count or
+smallest-diff defaults.
+
 `fixtures/csharp/async-owner-contract-decisions.tsv` and
 `verify-csharp-async-owner-contract.sh` establish the C# Async profile before
 population. They select continuation scheduling from explicit affinity and

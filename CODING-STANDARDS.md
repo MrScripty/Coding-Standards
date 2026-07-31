@@ -1,24 +1,13 @@
-# Coding Standards
+# Coding Standards Legacy Index
 
 > **Migration authority:** [CORE-STANDARDS.md](CORE-STANDARDS.md) is canonical
 > for universal simplicity, ownership, boundary, failure, lifecycle, and change
 > integrity rules. This file remains canonical only for detailed coding topics
 > not yet moved. Conflicts for moved rules resolve to Core.
 
-Generic coding conventions applicable to any tech stack.
-
-## Simplicity Principle
-
-Simplicity means reducing entanglement between concepts, not merely reducing
-file count, type count, dependency count, or lines of code.
-
-A design is simpler when a maintainer can reason about one concern without also
-understanding unrelated concerns such as transport, lifecycle, persistence,
-runtime policy, UI state, execution timing, or diagnostics plumbing.
-
-Prefer designs where independent decisions can change independently. Simplicity
-can require more named things, not fewer, when those names separate independent
-concepts and make ownership explicit.
+This file is a migration index for detailed coding topics not yet moved.
+Universal simplicity and ownership are canonical in
+[Core](CORE-STANDARDS.md#simplicity-and-ownership).
 
 ## File Organization
 

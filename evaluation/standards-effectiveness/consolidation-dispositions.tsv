@@ -420,3 +420,5 @@ STD-0500	LAUNCHER-STANDARDS.md	workflows/release.md	refine	derive build procedur
 STD-0508	LAUNCHER-STANDARDS.md	topics/security.md	refine	require operation-contract validation and exact destination-grammar encoding before untrusted values enter generated executable text
 STD-0509	LAUNCHER-STANDARDS.md	topics/security.md	remove	remove raw interpolation examples because copied vulnerable commands are not normative security guidance
 STD-0510	LAUNCHER-STANDARDS.md	topics/security.md	refine	require negative semantic and destination-encoding evidence without copied helper names alternate destinations raw values or default commands
+STD-0135	CODING-STANDARDS.md	CODING-STANDARDS.md	index	convert the Coding Standards title and introduction into a bounded migration index
+STD-0136	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	define simplicity by entanglement ownership invariants and reasoning load rather than visible construct counts or smallest-diff fallback

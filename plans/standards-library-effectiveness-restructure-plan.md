@@ -6,9 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** row 15 is decomposed; Core simplicity and index are next.
+**Current phase:** Core simplicity is canonical; the Architecture owner
+contract is next.
 
-**Next slice:** Milestone 7.4b8bc refine `STD-0135` and `STD-0136` into Core.
+**Next slice:** Milestone 7.4b8bd establish the non-empty Architecture owner before populating `STD-0137`, `STD-0138`, `STD-0139`, `STD-0140`, `STD-0141`, `STD-0142`, `STD-0143`, `STD-0144`, `STD-0145`, `STD-0146`, and `STD-0147`.
 
 **Acceptance status:** `partial`
 
@@ -1382,7 +1383,12 @@ all structural/routing fixtures pass.
      into 15 owner-coherent children. Record Architecture, Licensing, general
      TypeScript, Frontend, and Performance as missing owner contracts; make no
      normative or disposition change.
-   - `7.4b8bc` (`Planned`): refine `STD-0135` and `STD-0136` into Core.
+   - `7.4b8bc` (`Accepted`): refine `STD-0135` and `STD-0136` into Core.
+     Define simplicity by entanglement, ownership, independently changing
+     decisions, invariants, and reasoning load. Reject file, type, dependency,
+     call-site, construct-count, incumbent, and smallest-diff defaults.
+   - `7.4b8bd` (`Planned`): establish the non-empty Architecture owner before
+     populating `STD-0137` through `STD-0147`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

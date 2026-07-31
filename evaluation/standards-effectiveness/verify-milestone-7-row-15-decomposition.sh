@@ -7,7 +7,11 @@ mapfile -t ids < <(awk -F '\t' '$1==15{n=split($3,a,",");for(i=1;i<=n;i++)print 
 expected=(STD-{0135..0194})
 [[ "${ids[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' '$1==15{n++}END{print n+0}' "$O")" -eq 15 ]]
-[[ "$(awk -F '\t' '$1>="STD-0135"&&$1<="STD-0194"{n++}END{print n+0}' "$S/consolidation-dispositions.tsv")" -eq 0 ]]
+mapfile -t dispositions < <(
+  awk -F '\t' '$1>="STD-0135"&&$1<="STD-0194"{print $1}' \
+    "$S/consolidation-dispositions.tsv" | sort
+)
+[[ "${dispositions[*]}" == 'STD-0135 STD-0136' ]]
 for owner in topics/architecture.md topics/licensing.md profiles/languages/typescript.md profiles/applications/frontend.md topics/performance.md; do
   [[ ! -e "$R/$owner" ]]
 done
@@ -16,6 +20,6 @@ for text in 'not one Core consolidation' '## Missing Owners' 'fixed layer diagra
 done
 P="$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8bb` (`Accepted`)' "$P"
-rg -F -q '`7.4b8bc` (`Planned`)' "$P"
+rg -F -q '`7.4b8bc` (`Accepted`)' "$P"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-15 decomposition passed: 60 IDs across 15 children, 5 missing owners\n'

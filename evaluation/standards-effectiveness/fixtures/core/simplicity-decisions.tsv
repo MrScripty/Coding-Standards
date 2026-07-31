@@ -1,0 +1,13 @@
+case	coherence	ownership	change_axes	invariants	lifecycle	failure	metric	fallback	expected
+coherent_unit	one	clear	one	known	known	known	none	none	keep-together
+independent_concerns	multiple	clear	multiple	known	known	known	none	none	separate
+ownership_boundary	multiple	split	multiple	known	known	known	none	none	separate
+invariant_boundary	multiple	clear	multiple	enforceable	known	known	none	none	separate
+unknown_ownership	multiple	unknown	multiple	known	known	known	none	none	typed-unavailable
+unknown_invariant	multiple	clear	multiple	unknown	known	known	none	none	typed-unavailable
+file_length_default	multiple	clear	multiple	known	known	known	lines	threshold	typed-invalid
+type_count_default	one	clear	one	known	known	known	types	threshold	typed-invalid
+dependency_count_default	multiple	clear	multiple	known	known	known	dependencies	threshold	typed-invalid
+callsite_default	multiple	clear	multiple	known	known	known	callsites	threshold	typed-invalid
+smallest_diff	multiple	clear	multiple	known	known	known	diff	incumbent	typed-invalid
+fewest_constructs	multiple	clear	multiple	known	known	known	count	minimize	typed-invalid

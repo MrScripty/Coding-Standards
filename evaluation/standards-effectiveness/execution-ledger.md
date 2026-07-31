@@ -4032,6 +4032,19 @@ attribution, typing, and performance recipes as universal fallback authority.
 
 **Next slice:** `7.4b8bc`, refine `STD-0135` and `STD-0136` into Core.
 
+**Slice `7.4b8bc` accepted:** refined the Coding index and simplicity principle
+into Core. Simplicity now follows entanglement, ownership, independently
+changing decisions, invariants, lifecycle, failure behavior, and reasoning
+load.
+
+**No-fallback/legacy result:** removed duplicate legacy simplicity authority.
+Twelve focused decisions reject file, type, dependency, call-site, construct
+count, incumbent, and smallest-diff defaults; two exact dispositions prove the
+replacement.
+
+**Next slice:** `7.4b8bd`, establish the non-empty Architecture owner before
+populating `STD-0137` through `STD-0147`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

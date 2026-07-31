@@ -35,6 +35,24 @@ These are the universal invariants. Load additional guidance through
 - Make dependencies point toward stable contracts and owned abstractions.
 - Do not create a second source of truth to avoid changing the real owner.
 
+Simplicity is the reduction of entanglement and reasoning load, not the
+minimization of files, types, dependencies, abstractions, or lines. A boundary
+is useful when it lets a maintainer understand or change one concern without
+also understanding unrelated transport, lifecycle, persistence, runtime, UI,
+timing, or diagnostics policy.
+
+Keep one coherent concern together when its invariants, lifecycle, inputs,
+outputs, and failure behavior form one decision. Introduce a named boundary
+when it separates independently changing decisions, establishes one owner, or
+makes an invariant enforceable. More named components can be simpler when each
+removes unrelated context from the others.
+
+Do not select a design from a file-length threshold, type count, dependency
+count, call-site count, repository layout, incumbent abstraction, or smallest
+diff. If material ownership, invariants, lifecycle, failure, or change facts
+are unresolved, return the applicable typed diagnostic or record the decision
+before implementation rather than choosing the fewest visible constructs.
+
 ## Authority And Boundaries
 
 - Validate untrusted input at every trust boundary before constructing a

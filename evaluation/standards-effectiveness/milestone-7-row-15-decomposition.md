@@ -58,4 +58,5 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bc` refines `STD-0135` and `STD-0136` into Core.
+Milestone `7.4b8bd` establishes the non-empty Architecture owner before
+populating `STD-0137` through `STD-0147`.
