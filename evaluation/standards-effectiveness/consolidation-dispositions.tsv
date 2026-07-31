@@ -422,3 +422,14 @@ STD-0509	LAUNCHER-STANDARDS.md	topics/security.md	remove	remove raw interpolatio
 STD-0510	LAUNCHER-STANDARDS.md	topics/security.md	refine	require negative semantic and destination-encoding evidence without copied helper names alternate destinations raw values or default commands
 STD-0135	CODING-STANDARDS.md	CODING-STANDARDS.md	index	convert the Coding Standards title and introduction into a bounded migration index
 STD-0136	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	define simplicity by entanglement ownership invariants and reasoning load rather than visible construct counts or smallest-diff fallback
+STD-0137	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the file-organization parent with a non-normative route to Architecture
+STD-0138	CODING-STANDARDS.md	topics/architecture.md	refine	select module boundaries from concern ownership invariants lifecycle and change axes without file-length fallback
+STD-0139	CODING-STANDARDS.md	topics/architecture.md	remove	remove universal source-root README and file-count directory thresholds as architecture authority
+STD-0140	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the layered-architecture parent with canonical Architecture routing
+STD-0141	CODING-STANDARDS.md	topics/architecture.md	refine	derive dependency direction from stable contract ownership rather than fixed five-layer names and tables
+STD-0142	CODING-STANDARDS.md	topics/architecture.md	merge	merge testability flexibility and clarity claims into architecture verification evidence
+STD-0143	CODING-STANDARDS.md	topics/architecture.md	refine	separate concerns by independent ownership lifecycle invariants and change facts
+STD-0144	CODING-STANDARDS.md	topics/architecture.md	refine	assign authoritative data and state by domain contract rather than backend or frontend location and blanket optimistic-update rules
+STD-0145	CODING-STANDARDS.md	topics/architecture.md	refine	keep business policy independent of framework and delivery mechanisms without copied service examples
+STD-0146	CODING-STANDARDS.md	topics/architecture.md	refine	construct infrastructure at the narrowest lifecycle-owning composition boundary rather than universally near one entrypoint
+STD-0147	CODING-STANDARDS.md	topics/architecture.md	refine	assign every state transition one owner and reject split or ambient mutation paths

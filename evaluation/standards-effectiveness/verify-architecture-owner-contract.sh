@@ -20,8 +20,13 @@ for text in 'ID: `topic.architecture`' '## Concern Boundaries' \
   'Do not fall back to the incumbent structure'; do
   rg -F -q "$text" "$R/topics/architecture.md"
 done
-[[ "$(awk -F '\t' '$1>="STD-0137"&&$1<="STD-0147"{n++}END{print n+0}' "$S/consolidation-dispositions.tsv")" -eq 0 ]]
+mapfile -t populated < <(
+  awk -F '\t' '$1>="STD-0137"&&$1<="STD-0147"{print $1}' \
+    "$S/consolidation-dispositions.tsv" | sort
+)
+expected_populated=(STD-{0137..0147})
+[[ "${populated[*]}" == "${expected_populated[*]}" ]]
 rg -F -q '`7.4b8bd` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8be` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b8be` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
-printf 'Architecture owner contract passed: 14 decisions, 0 dispositions\n'
+printf 'Architecture owner contract passed: 14 decisions, 11 dispositions\n'

@@ -11,7 +11,8 @@ mapfile -t dispositions < <(
   awk -F '\t' '$1>="STD-0135"&&$1<="STD-0194"{print $1}' \
     "$S/consolidation-dispositions.tsv" | sort
 )
-[[ "${dispositions[*]}" == 'STD-0135 STD-0136' ]]
+expected_dispositions=(STD-{0135..0147})
+[[ "${dispositions[*]}" == "${expected_dispositions[*]}" ]]
 [[ -e "$R/topics/architecture.md" ]]
 for owner in topics/licensing.md profiles/languages/typescript.md profiles/applications/frontend.md topics/performance.md; do
   [[ ! -e "$R/$owner" ]]

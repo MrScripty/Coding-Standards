@@ -4057,6 +4057,17 @@ and unavailable outcomes. `STD-0137` through `STD-0147` remain undisposed.
 **Next slice:** `7.4b8be`, refine `STD-0137` through `STD-0147` into
 Architecture.
 
+**Slice `7.4b8be` accepted:** refined all eleven architecture identifiers into
+canonical Architecture and replaced the legacy block with one route.
+
+**No-fallback/legacy result:** removed directory thresholds, fixed layers,
+backend-by-location authority, blanket optimistic-update prohibition, copied
+framework examples, entrypoint-only composition, and split state mutation.
+Eleven exact dispositions prove complete replacement.
+
+**Next slice:** `7.4b8bf`, refine `STD-0148`, `STD-0149`, and `STD-0150`
+into Core.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

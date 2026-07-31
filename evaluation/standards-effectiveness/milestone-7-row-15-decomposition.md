@@ -58,4 +58,4 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8be` refines `STD-0137` through `STD-0147` into Architecture.
+Milestone `7.4b8bf` refines `STD-0148`, `STD-0149`, and `STD-0150` into Core.

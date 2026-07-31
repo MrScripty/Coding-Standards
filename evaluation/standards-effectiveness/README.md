@@ -125,6 +125,10 @@ smallest-diff defaults.
 without fixed layers, location-derived authority, ambient globals, or
 incumbent-structure fallback.
 
+`verify-architecture-population.sh` proves exact replacement of the eleven
+legacy architecture identifiers and removal of fixed organization, layer,
+backend, framework, composition, and state-owner recipes.
+
 `fixtures/csharp/async-owner-contract-decisions.tsv` and
 `verify-csharp-async-owner-contract.sh` establish the C# Async profile before
 population. They select continuation scheduling from explicit affinity and

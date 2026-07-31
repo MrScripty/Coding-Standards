@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** the Architecture owner contract exists; architecture
-population is next.
+**Current phase:** Architecture population is canonical; Core constants and
+configuration are next.
 
-**Next slice:** Milestone 7.4b8be refine `STD-0137`, `STD-0138`, `STD-0139`, `STD-0140`, `STD-0141`, `STD-0142`, `STD-0143`, `STD-0144`, `STD-0145`, `STD-0146`, and `STD-0147` into Architecture.
+**Next slice:** Milestone 7.4b8bf refine `STD-0148`, `STD-0149`, and `STD-0150` into Core.
 
 **Acceptance status:** `partial`
 
@@ -1392,8 +1392,13 @@ all structural/routing fixtures pass.
      and runtime composition. Reject fixed layer/directory models, location-
      derived ownership, ambient globals, incumbent structure, and smallest-diff
      fallback. Keep `STD-0137` through `STD-0147` undisposed.
-   - `7.4b8be` (`Planned`): refine `STD-0137` through `STD-0147` into
-     Architecture.
+   - `7.4b8be` (`Accepted`): refine `STD-0137` through `STD-0147` into
+     Architecture. Remove fixed directory thresholds, five-layer names and
+     dependency tables, backend-by-location ownership, blanket optimistic-
+     update prohibition, framework examples, entrypoint-only composition, and
+     split state mutation authority.
+   - `7.4b8bf` (`Planned`): refine `STD-0148`, `STD-0149`, and `STD-0150`
+     into Core.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
