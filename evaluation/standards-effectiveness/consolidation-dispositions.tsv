@@ -436,3 +436,7 @@ STD-0147	CODING-STANDARDS.md	topics/architecture.md	refine	assign every state tr
 STD-0148	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	define semantic constant and configuration ownership from meaning units policy lifecycle and override authority
 STD-0149	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	name literals only when semantic ownership or coordinated change requires it rather than banning every literal
 STD-0150	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	place values with the narrowest owning concern rather than a universal centralized constants container
+STD-0151	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace error handling with canonical Resilience routing
+STD-0152	CODING-STANDARDS.md	topics/resilience.md	refine	select failure representation from language and operation contracts
+STD-0153	CODING-STANDARDS.md	topics/resilience.md	refine	handle failures at the narrowest boundary owning recovery outcome or diagnostics while preserving causes
+STD-0154	CODING-STANDARDS.md	topics/resilience.md	refine	derive bounded diagnostic context and channels from operator and application contracts

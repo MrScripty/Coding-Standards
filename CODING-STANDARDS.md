@@ -17,108 +17,11 @@ policy.
 Constants and configuration authority is canonical in
 [Core](CORE-STANDARDS.md#semantic-constants-and-configuration).
 
-## Error Handling
+## Error Handling Legacy Route
 
-### Exceptions for Exceptional Cases
+Failure handling and diagnostic authority is canonical in
+[Resilience](topics/resilience.md#failure-boundaries-and-diagnostics).
 
-Use exceptions only for truly unexpected situations:
-
-```
-// BAD: Using exceptions for control flow
-try {
-    user = findUser(id);
-} catch (NotFoundError) {
-    user = createDefaultUser();
-}
-
-// GOOD: Explicit handling
-user = findUser(id);
-if (!user) {
-    user = createDefaultUser();
-}
-```
-
-### Catch at Boundaries
-
-Handle exceptions at system boundaries:
-- API/IPC handlers
-- Event handlers
-- Entry points
-
-Don't catch and re-throw without adding value:
-
-```
-// BAD: Pointless catch
-try {
-    doSomething();
-} catch (error) {
-    throw error;  // Adds nothing
-}
-
-// GOOD: Add context or handle
-try {
-    doSomething();
-} catch (error) {
-    logger.error('Failed during operation X', { error, context });
-    throw new OperationError('Operation X failed', { cause: error });
-}
-```
-
-Broad exception handlers should either preserve traceback context (`throw`,
-`raise ... from ...`, `cause`, chained errors) or be narrowed to the expected
-failure types they are intentionally handling.
-
-### Production Error Diagnostics
-
-Error handling must support production diagnosis. When a failure reaches an
-owning boundary, the application must surface or record enough bounded,
-non-sensitive context to identify what failed, where it failed, and which
-operation, request, command, job, or entity was affected.
-
-The diagnostic channel depends on the application. It may be structured logs,
-terminal output, returned API/CLI error envelopes, a durable diagnostics store,
-a tracing system, crash reports, or another project-approved mechanism. Do not
-add a second diagnostic system when the project already has an owned mechanism
-that can carry the required context.
-
-Use the platform's standard context propagation mechanism where it is already
-available or justified by production diagnostic needs, such as spans, logging
-scopes, task-local context, request context, or equivalent. Apply it at owning
-boundaries and meaningful operations, not every helper function. Do not add
-tracing infrastructure solely for low-risk code paths where existing diagnostics
-are sufficient.
-
-Rules:
-- Preserve the original cause, traceback, stack, or source error when the
-  language supports it.
-- Add context at system boundaries and meaningful layer transitions, not every
-  small helper.
-- Include stable correlation identifiers for the request, command, job, or
-  operation when available.
-- Include safe domain identifiers needed to find the affected entity.
-- Prefer structured diagnostic fields where the channel supports them.
-- Surface or record a failure at the owning boundary; avoid noisy duplicate
-  reporting at every layer.
-- Keep user-facing messages safe and actionable. Keep internal technical detail
-  in the appropriate diagnostic channel.
-
-Diagnostic context must be bounded:
-- Do not expose secrets, credentials, tokens, or unnecessary personal data.
-- Do not emit unbounded request/response bodies, process output, or binary data.
-- Truncate large details deterministically.
-- Avoid expensive stack capture, object cloning, or formatting in hot paths.
-- Do not trace every function by default.
-- Prefer boundary and major-operation context over fine-grained spans.
-- Use high-detail traces only for failures, sampled runs, debug builds, or
-  explicitly enabled diagnostic sessions.
-- Disable, sample, or lower verbosity for high-volume paths.
-
-A diagnostic path is sufficient when an operator can answer:
-- What operation failed?
-- Which request, command, job, or entity was affected?
-- Which component or boundary reported the failure?
-- What was the immediate cause?
-- Where can related diagnostic detail be found?
 
 ### Validate at Boundaries
 

@@ -121,3 +121,21 @@ claims must match the service surface that remains valid during degradation.
 Missing facts or capability cannot select a default retry policy, timeout,
 dependency, empty result, stale result, ignored error, alternate mechanism,
 or silent degradation. Unknown recovery behavior remains a typed diagnostic.
+
+## Failure Boundaries And Diagnostics
+
+Select exception, result, status, event, or terminal mechanisms from the
+language and operation contract. Handle or translate failure at the narrowest
+boundary owning recovery, a public outcome, or diagnostics. Preserve original
+causes and typed classification; do not catch, log, wrap, or rethrow at every
+layer.
+
+Diagnostics carry bounded, non-sensitive context required by the selected
+operator or consumer claim. Channel, correlation, detail, sampling, and
+retention belong to the application's diagnostic owner. Do not mandate logging,
+tracing, exceptions, correlation IDs, or one boundary list.
+
+Contradictory classification or authority is typed `invalid`; missing required
+cause, owner, context, or diagnostic capability is typed `unavailable`. Do not
+replace failure with a default, guessed class, duplicate log, context-free
+wrapper, swallowed outcome, or successful fallback.

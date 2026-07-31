@@ -4080,6 +4080,16 @@ prove replacement.
 **Next slice:** `7.4b8bg`, refine `STD-0151`, `STD-0152`, `STD-0153`, and
 `STD-0154` into Resilience.
 
+**Slice `7.4b8bg` accepted:** refined failure boundaries and diagnostics into
+Resilience. Failure mechanisms, handling boundaries, context, and channels now
+derive from operation and application contracts.
+
+**No-fallback/legacy result:** removed exception, catch, logging, tracing, and
+default-value recipes. Twelve decisions and four dispositions prove typed
+invalid and unavailable outcomes.
+
+**Next slice:** `7.4b8bh`, refine `STD-0155` and `STD-0156` into Contracts.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

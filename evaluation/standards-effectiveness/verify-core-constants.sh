@@ -21,6 +21,6 @@ for text in '### Semantic Constants And Configuration' 'coordinated change must 
 mapfile -t ids < <(awk -F '\t' '$1>="STD-0148"&&$1<="STD-0150"{print $1}' "$S/consolidation-dispositions.tsv" | sort)
 [[ "${ids[*]}" == 'STD-0148 STD-0149 STD-0150' ]]
 rg -F -q '`7.4b8bf` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8bg` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b8bg` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
 printf 'Core constants passed: 12 decisions, 3 exact dispositions, active child 15.4\n'

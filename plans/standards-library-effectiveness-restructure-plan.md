@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Core constants/configuration are canonical; Resilience
-failure handling and diagnostics are next.
+**Current phase:** Resilience failure boundaries are canonical; Contracts
+boundary validation is next.
 
-**Next slice:** Milestone 7.4b8bg refine `STD-0151`, `STD-0152`, `STD-0153`, and `STD-0154` into Resilience.
+**Next slice:** Milestone 7.4b8bh refine `STD-0155` and `STD-0156` into Contracts.
 
 **Acceptance status:** `partial`
 
@@ -1402,8 +1402,10 @@ all structural/routing fixtures pass.
      lifecycle, reuse, and authorized variation. Reject universal literal
      naming, global containers, ambient configuration, duplicated defaults,
      and incumbent values.
-   - `7.4b8bg` (`Planned`): refine `STD-0151`, `STD-0152`, `STD-0153`, and
-     `STD-0154` into Resilience.
+   - `7.4b8bg` (`Accepted`): refine `STD-0151` through `STD-0154` into
+     Resilience failure boundaries and diagnostics without exception, catch,
+     logging, tracing, or default-value fallback.
+   - `7.4b8bh` (`Planned`): refine `STD-0155` and `STD-0156` into Contracts.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

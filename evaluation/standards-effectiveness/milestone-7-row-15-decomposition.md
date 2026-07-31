@@ -58,5 +58,4 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bg` refines `STD-0151`, `STD-0152`, `STD-0153`, and
-`STD-0154` into Resilience.
+Milestone `7.4b8bh` refines `STD-0155` and `STD-0156` into Contracts.

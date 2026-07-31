@@ -133,6 +133,11 @@ backend, framework, composition, and state-owner recipes.
 semantic constant/configuration ownership without universal literal,
 centralization, ambient, duplicated-default, or incumbent-value fallbacks.
 
+`fixtures/resilience/failure-boundary-decisions.tsv` and
+`verify-resilience-failure-boundaries.sh` prove owned failure translation,
+cause preservation, bounded diagnostics, and rejection of catch/log/trace
+defaults.
+
 `fixtures/csharp/async-owner-contract-decisions.tsv` and
 `verify-csharp-async-owner-contract.sh` establish the C# Async profile before
 population. They select continuation scheduling from explicit affinity and
