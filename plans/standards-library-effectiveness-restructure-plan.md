@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** row 14.3 dependency installation is canonical; row 14.4
-Release-owned build procedure is next.
+**Current phase:** row 14.4 build procedure is canonical; row 14.5
+Security-owned generated-command handling is next.
 
-**Next slice:** Milestone 7.4b8az refine build procedure `STD-0500` into Release.
+**Next slice:** Milestone 7.4b8ba refine generated-command security `STD-0508`, `STD-0509`, and `STD-0510` into Security.
 
 **Acceptance status:** `partial`
 
@@ -1368,7 +1368,13 @@ all structural/routing fixtures pass.
      transactions only when they retain that evidence. Remove fixed check and
      install function names, numeric success conventions, opaque monolithic
      results, implicit installation, and successful-no-op fallback.
-   - `7.4b8az` (`Planned`): refine `STD-0500` build procedure into Release.
+   - `7.4b8az` (`Accepted`): refine `STD-0500` into Release. Derive build
+     procedures, targets, modes, inputs, outputs, toolchain capabilities, and
+     evidence from the accepted artifact plan. Reject fixed action pairs,
+     guessed targets, implicit compilation, development substitution, and
+     successful no-op builds with typed diagnostics.
+   - `7.4b8ba` (`Planned`): refine `STD-0508`, `STD-0509`, and `STD-0510`
+     generated-command handling into Security.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

@@ -241,6 +241,29 @@ candidate, or registry-native mechanism. The mechanism is project-owned, but an
 unauthenticated or ambiguous reference must produce a typed release-dispatch
 diagnostic and must not enter packaging, signing, or publication stages.
 
+### Build Procedure Selection
+
+Derive each build procedure from the accepted artifact plan, including the
+artifact identity, purpose, target, mode or optimization claim, source and
+dependency inputs, toolchain capability, output location, and required
+evidence. Execute only procedures selected for required artifacts. A project
+with no build artifact has no build procedure; it does not gain a successful
+no-op build action.
+
+Development, optimized, debug, release, native, generated, and packaged
+outputs are distinct only when the artifact and consumer contracts require
+those distinctions. Do not invent universal build action names, paired modes,
+commands, target binaries, or optimization meanings. When a toolchain can
+produce multiple outputs, select the exact planned artifact rather than
+guessing its default target.
+
+Return typed `invalid` for contradictory artifact or mode facts and typed
+`release-procedure` or `unavailable` when a required artifact, toolchain
+capability, target, input, procedure, or evidence cannot be resolved. Do not
+compile implicitly through another action, substitute a development artifact,
+choose an alternate target or mode, or report success for an inapplicable or
+unresolved build.
+
 Build and package every target required by the accepted artifact plan. The
 matrix follows supported target and environment claims rather than a universal
 platform list. Unsupported or best-effort targets remain explicit and cannot

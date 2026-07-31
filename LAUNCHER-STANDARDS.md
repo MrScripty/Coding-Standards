@@ -27,18 +27,9 @@ selected procedure and preserves its diagnostics and terminal outcome.
 - `[done] <dep> installed`
 - `[error] <dep> install failed`
 
-## Build Standards (`--build`)
-
-`--build` is required for apps that need compilation.
-
-1. `--build` compiles development artifacts.
-2. `--build-release` compiles optimized release artifacts.
-3. Build commands must select the target binary explicitly when the toolchain
-   can be ambiguous.
-4. If the app has no compile step, `--build` and `--build-release` must still
-   be accepted and return success with a clear no-op message.
-
-Use explicit development and release build commands for the project toolchain.
+Build-procedure authority is canonical in
+[Release](workflows/release.md#build-procedure-selection). Launcher only
+exposes a selected procedure and preserves its diagnostics and outcome.
 
 ## Desktop Entry and Script Generation Safety
 

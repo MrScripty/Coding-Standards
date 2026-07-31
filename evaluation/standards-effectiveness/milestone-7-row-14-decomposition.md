@@ -72,5 +72,5 @@ lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8az` refines `STD-0500` into Release. It does not dispose the
-Security group.
+Milestone `7.4b8ba` refines `STD-0508`, `STD-0509`, and `STD-0510` into
+Security.

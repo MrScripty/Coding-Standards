@@ -62,21 +62,23 @@ mapfile -t actual < <(
 [[ "${actual[*]}" == "${expected[*]}" ]]
 
 active_child="$(
-  awk -F '\t' '$1 == 14 && $2 == 4 {
+  awk -F '\t' '$1 == 14 && $2 == 5 {
     print $1 "." $2 "\t" $3 "\t" $5
   }' "$OVERLAY"
 )"
-[[ "$active_child" == $'14.4\tSTD-0500\tworkflows/release.md' ]]
+[[ "$active_child" == $'14.5\tSTD-0508,STD-0509,STD-0510\ttopics/security.md' ]]
 
 rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8az` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8az'* ]]
-[[ "$next_slice_line" == *'STD-0500'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ba'* ]]
+for id in STD-0508 STD-0509 STD-0510; do
+  [[ "$next_slice_line" == *"$id"* ]]
+done
 
 "$S/verify-dependencies-owner-contract.sh"
 "$S/verify-launcher-population.sh"
 "$S/verify-milestone-7-row-14-decomposition.sh"
 "$S/verify-milestone-7-execution-train.sh"
 
-printf 'Dependencies population passed: 14 decisions, 3 exact dispositions, active child 14.4\n'
+printf 'Dependencies population passed: 14 decisions, 3 exact dispositions, active child 14.5\n'

@@ -85,10 +85,12 @@ package_row="$(
 
 rg -F -q '`7.4b8ax` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8az` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8az'* ]]
-[[ "$next_slice_line" == *'STD-0500'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ba'* ]]
+for id in STD-0508 STD-0509 STD-0510; do
+  [[ "$next_slice_line" == *"$id"* ]]
+done
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"

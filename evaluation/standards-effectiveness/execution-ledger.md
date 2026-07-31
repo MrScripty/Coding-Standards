@@ -3994,6 +3994,19 @@ unavailable outcomes without alternate procedures or default success.
 
 **Next slice:** `7.4b8az`, refine `STD-0500` build procedure into Release.
 
+**Slice `7.4b8az` accepted:** refined `STD-0500` into canonical Release.
+Build procedures now derive artifact identity, target, mode, inputs, toolchain,
+output, and evidence from the accepted artifact plan. Launcher retains only a
+route to the selected procedure.
+
+**No-fallback/legacy result:** removed universal build action pairs, guessed
+targets, implicit compilation, development substitution, and successful no-op
+builds. Fourteen focused decisions and one exact disposition prove typed
+invalid and unavailable outcomes.
+
+**Next slice:** `7.4b8ba`, refine `STD-0508`, `STD-0509`, and `STD-0510`
+generated-command handling into Security.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

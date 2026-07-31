@@ -416,3 +416,4 @@ STD-0495	LAUNCHER-STANDARDS.md	workflows/verification.md	refine	select GUI smoke
 STD-0496	LAUNCHER-STANDARDS.md	LAUNCHER-STANDARDS.md	index	replace the dependency-installation parent with a non-normative route to canonical Dependencies procedure authority
 STD-0497	LAUNCHER-STANDARDS.md	topics/dependencies.md	refine	evaluate and provision each declared requirement independently while preserving selected transaction identity evidence diagnostics and terminal outcomes
 STD-0498	LAUNCHER-STANDARDS.md	topics/dependencies.md	refine	replace fixed check and install function conventions with requirement-owned satisfaction contracts and selected provisioning procedures
+STD-0500	LAUNCHER-STANDARDS.md	workflows/release.md	refine	derive build procedures targets modes inputs outputs and evidence from the accepted artifact plan without fixed actions guessed targets implicit compilation or successful no-op fallback

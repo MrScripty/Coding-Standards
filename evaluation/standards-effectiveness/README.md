@@ -127,6 +127,11 @@ verification, owner-selected grouped transactions, and rejection of fixed
 function, numeric-success, monolithic-result, implicit-install, and
 successful-no-op fallbacks.
 
+`fixtures/release/build-procedure-decisions.tsv` and
+`verify-release-build-procedure.sh` prove artifact-plan-derived build
+procedure selection and reject fixed modes, guessed targets, implicit builds,
+development substitution, and successful no-op fallback.
+
 `fixtures/typescript/async-owner-contract-decisions.tsv` and
 `verify-typescript-async-owner-contract.sh` establish the TypeScript Async
 profile before population. They require scoped current-invocation authority
