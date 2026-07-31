@@ -38,18 +38,11 @@ The nonblocking async-path contract is canonical in
 Cancellation ownership and propagation are canonical in
 [Concurrency And Async Lifecycle](topics/concurrency.md#own-work-failure-and-cancellation).
 
-### Use ConfigureAwait(false) in Library/Service Code
+### C# Continuation Scheduling
 
-Code that doesn't touch UI or engine nodes should use `ConfigureAwait(false)` to
-avoid capturing the synchronization context.
-
-```csharp
-// In handlers and services (no UI access):
-var data = await File.ReadAllBytesAsync(path, ct).ConfigureAwait(false);
-
-// In code that calls UI/engine APIs: do NOT use ConfigureAwait(false)
-// Must remain on the main/UI thread
-```
+C# continuation scheduling and affinity mechanisms are canonical in the
+[C# Async Profile](profiles/languages/csharp/async.md). Library or service
+placement does not select context suppression.
 
 ---
 

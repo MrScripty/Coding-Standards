@@ -47,10 +47,20 @@ done
 rg -F -q 'C# `await`, `Task`, continuation scheduling, synchronization context, or thread-affinity mechanism changes' "$ROUTER"
 rg -F -q '[profiles/languages/csharp/async.md](profiles/languages/csharp/async.md)' "$README"
 
-mapfile -t dispositions < <(
-  awk -F '\t' 'NR > 1 && $1 == "STD-0273" { print $1 }' "$DISPOSITIONS"
-)
-[[ "${#dispositions[@]}" -eq 0 ]]
+disposition="$(
+  awk -F '\t' 'NR > 1 && $1 == "STD-0273" {
+    print $2 ":" $3 ":" $4 ":" $5
+  }' "$DISPOSITIONS"
+)"
+[[ "$disposition" == 'CONCURRENCY-STANDARDS.md:profiles/languages/csharp/async.md:refine:select C sharp continuation scheduling from explicit affinity capability and evidence rather than library or service placement' ]]
+
+rg -F -q '### C# Continuation Scheduling' "$R/CONCURRENCY-STANDARDS.md"
+rg -F -q '[C# Async Profile](profiles/languages/csharp/async.md)' \
+  "$R/CONCURRENCY-STANDARDS.md"
+! rg -F -q '### Use ConfigureAwait(false) in Library/Service Code' \
+  "$R/CONCURRENCY-STANDARDS.md"
+! rg -F -q 'should use `ConfigureAwait(false)`' \
+  "$R/CONCURRENCY-STANDARDS.md"
 
 overlay_row="$(
   awk -F '\t' '$1 == 13 && $2 == 1 {
@@ -60,13 +70,14 @@ overlay_row="$(
 [[ "$overlay_row" == $'STD-0273\tprofiles/languages/csharp/async.md\texists\tpre-slice-review' ]]
 
 rg -F -q '`7.4b8am` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8an` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8an` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8ao` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8an'* ]]
-[[ "$next_slice_line" == *'STD-0273'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ao'* ]]
+[[ "$next_slice_line" == *'STD-0274'* ]]
 
 "$S/verify-milestone-7-row-13-decomposition.sh"
 "$S/check-plan-structure.sh" "$PLAN"
 "$S/verify-plan-fixtures.sh"
 
-printf 'C# Async owner contract passed: 12 decisions, owner established\n'
+printf 'C# Async policy passed: 12 decisions, owner established, STD-0273 disposed\n'

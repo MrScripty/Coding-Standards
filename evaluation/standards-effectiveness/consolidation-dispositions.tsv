@@ -387,3 +387,4 @@ STD-0123	ARCHITECTURE-PATTERNS.md	topics/resilience.md	refine	select startup rea
 STD-0124	ARCHITECTURE-PATTERNS.md	topics/resilience.md	refine	replace catch-all safe defaults with an explicit typed degraded-result boundary
 STD-0125	ARCHITECTURE-PATTERNS.md	topics/resilience.md	merge	merge availability separation predictability observability and recovery benefits into acceptance evidence
 STD-0269	CONCURRENCY-STANDARDS.md	CONCURRENCY-STANDARDS.md	index	convert the C sharp async parent heading into a non-normative routing index while preserving separately owned child specializations
+STD-0273	CONCURRENCY-STANDARDS.md	profiles/languages/csharp/async.md	refine	select C sharp continuation scheduling from explicit affinity capability and evidence rather than library or service placement

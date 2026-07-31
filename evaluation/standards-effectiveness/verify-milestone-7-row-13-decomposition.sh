@@ -36,7 +36,7 @@ mapfile -t dispositions < <(
     print $1
   }' "$DISPOSITIONS"
 )
-[[ "${#dispositions[@]}" -eq 0 ]]
+[[ "${dispositions[*]}" == 'STD-0273' ]]
 
 package_row="$(
   awk -F '\t' '$1 == 13 {
@@ -70,12 +70,13 @@ done
 
 rg -F -q '`7.4b8al` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8am` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8an` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8an` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8ao` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8an'* ]]
-[[ "$next_slice_line" == *'STD-0273'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ao'* ]]
+[[ "$next_slice_line" == *'STD-0274'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"
 
-printf 'Milestone 7 row-13 decomposition passed: 7 IDs across 4 ordered children; C# owner exists and 2 owner contracts remain\n'
+printf 'Milestone 7 row-13 decomposition passed: child 13.1 accepted; 6 IDs across 3 ordered children remain\n'

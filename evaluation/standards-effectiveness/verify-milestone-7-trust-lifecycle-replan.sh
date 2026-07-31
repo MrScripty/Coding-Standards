@@ -59,10 +59,11 @@ for id in "${expected_ids[@]}"; do
 done
 [[ "$next_dispositions" -eq 0 || "$next_dispositions" -eq 9 ]]
 
-csharp_async_index_dispositions=0
-if [[ -n "${disposed[STD-0269]:-}" ]]; then
-  csharp_async_index_dispositions=1
-fi
+concurrency_bridge_dispositions=0
+for id in STD-{0263..0279}; do
+  [[ -n "${disposed[$id]:-}" ]] &&
+    ((concurrency_bridge_dispositions += 1))
+done
 
 rust_async_ids=(
   STD-0717 STD-0718 STD-0719 STD-0720 STD-0721
@@ -100,10 +101,8 @@ while IFS=$'\t' read -r wave order owner count owner_state prerequisite status e
     expected_count="$count"
     expected_state="$owner_state"
     if [[ "$owner" == 'topics/concurrency.md' ]]; then
-      expected_count=$((count - next_dispositions -
-        csharp_async_index_dispositions))
-      if [[ "$next_dispositions" -gt 0 ||
-            "$csharp_async_index_dispositions" -gt 0 ]]; then
+      expected_count=$((count - concurrency_bridge_dispositions))
+      if [[ "$concurrency_bridge_dispositions" -gt 0 ]]; then
         expected_state='exists'
       fi
     fi

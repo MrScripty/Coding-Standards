@@ -120,7 +120,7 @@ done
 retained_legacy=(
   '## C# Async/Await Index'
   'This is a non-normative migration index'
-  '### Use ConfigureAwait(false) in Library/Service Code'
+  '### C# Continuation Scheduling'
   '## Rust Concurrency Cross-Reference'
   '## TypeScript Concurrency Rules'
   '## Godot Thread Safety'
@@ -152,8 +152,8 @@ awk -F '\t' 'NR > 1 && $1 == "STD-0269" {
 ! rg -F -q '## C# Async/Await Rules' "$LEGACY"
 rg -F -q '`7.4b8ak` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8an'* ]]
-[[ "$next_slice_line" == *'STD-0273'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ao'* ]]
+[[ "$next_slice_line" == *'STD-0274'* ]]
 
 rg -F -q '| F019 | Resolved in Milestone 7.4b4b |' "$FINDINGS"
 rg -F -q '`7.4b4b` (`Accepted`)' "$PLAN"

@@ -3776,6 +3776,32 @@ success. `STD-0273` remains undisposed until population.
 **Next slice:** `7.4b8an`, refine and move `STD-0273` into the accepted C#
 Async profile.
 
+**Slice `7.4b8an` accepted:** `STD-0273` now has one exact `refine`
+disposition to the C# Async profile. The legacy section is a bounded route;
+library/service placement, blanket `ConfigureAwait(false)`, and the
+product-specific code example no longer compete with affinity-, capability-,
+and evidence-driven continuation scheduling.
+
+**Discovered issue (`Resolved`):** the historical lifecycle checker derived
+the current Concurrency remainder from only the first nine generic
+dispositions and the C# parent index. It now counts exact dispositions across
+the frozen `STD-0263` through `STD-0279` bridge, so each serial specialization
+move advances the same immutable group without adding transition-specific
+branches.
+
+The aggregate Concurrency checker also treated the legacy
+`ConfigureAwait(false)` heading as permanently retained. It now verifies the
+bounded C# profile route while the focused C# checker owns exact disposition
+and removed-default evidence.
+
+**No-fallback/legacy result:** missing or contradictory affinity, capability,
+or evidence cannot select context suppression, implicit capture, blocking, an
+alternate dispatcher, or default success. No compatibility copy or blanket
+C# mechanism remains.
+
+**Next slice:** `7.4b8ao`, close `STD-0274` as non-normative routing to the
+Rust Async and Rust Security profiles.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

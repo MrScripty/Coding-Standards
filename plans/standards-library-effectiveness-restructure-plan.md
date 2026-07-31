@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** the C# Async owner contract exists; `STD-0273` is ready for
-its bounded population slice.
+**Current phase:** row 13 child 13.1 is complete; the Rust cross-reference
+`STD-0274` is ready for non-normative index closure.
 
-**Next slice:** Milestone 7.4b8an refine and move `STD-0273` into the C# Async profile.
+**Next slice:** Milestone 7.4b8ao close `STD-0274` as routing to the Rust Async and Rust Security profiles.
 
 **Acceptance status:** `partial`
 
@@ -1286,8 +1286,11 @@ all structural/routing fixtures pass.
      and return typed diagnostics rather than blanket context suppression,
      implicit capture, blocking, detached work, alternate dispatch, prior
      invocation state, or default success. Do not dispose or move `STD-0273`.
-   - `7.4b8an` (`Planned`): refine and move `STD-0273` into the accepted C#
-     Async profile.
+   - `7.4b8an` (`Accepted`): refine and move `STD-0273` into the accepted C#
+     Async profile; replace the blanket library/service
+     `ConfigureAwait(false)` rule and product-specific example with canonical
+     affinity-, capability-, and evidence-driven continuation scheduling and a
+     bounded legacy route.
    - `7.4b8ao` (`Planned`): close `STD-0274` as non-normative routing to the
      Rust Async and Rust Security profiles.
    - `7.4b8ap` (`Planned`): establish the TypeScript Async owner contract
