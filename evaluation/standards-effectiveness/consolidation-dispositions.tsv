@@ -443,3 +443,12 @@ STD-0154	CODING-STANDARDS.md	topics/resilience.md	refine	derive bounded diagnost
 STD-0155	CODING-STANDARDS.md	topics/contracts.md	refine	apply complete inbound proof at the owning boundary without redundant internal validation or exception mechanism defaults
 STD-0156	CODING-STANDARDS.md	topics/contracts.md	refine	classify outbound outcomes and prove destination representations without HTTP status default-body or alternate-parser fallback
 STD-0157	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the dependency parent with a direct non-normative route to canonical Dependencies
+STD-0158	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the code-style parent with a route to canonical Core code discipline
+STD-0159	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	select code volume from owned behavior invariants lifecycle and reasoning load without universal brevity
+STD-0160	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	bound change scope by objective ownership and demonstrated need without smallest-diff or incumbent fallback
+STD-0161	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	create abstractions only when they own a concern callers can safely ignore without call-count defaults
+STD-0162	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	consolidate only the same owned contract when copies create divergence risk without blanket DRY
+STD-0163	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	delete unowned unsupported code while preserving only declared consumer state deployment or lifecycle obligations
+STD-0164	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the naming parent with the canonical Core terminology route
+STD-0165	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	derive names from domain role unit ownership lifecycle and observable effect
+STD-0166	CODING-STANDARDS.md	CORE-STANDARDS.md	refine	use one term per concept and distinguish different concepts without incumbent or copied naming recipes

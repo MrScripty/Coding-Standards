@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Dependency routing is canonical; Core code and naming
-discipline is next.
+**Current phase:** Core code and terminology discipline is canonical; Contracts
+invariant authority is next.
 
-**Next slice:** Milestone 7.4b8bj refine `STD-0158`, `STD-0159`, `STD-0160`,
-`STD-0161`, `STD-0162`, `STD-0163`, `STD-0164`, `STD-0165`, and `STD-0166`
-into Core code and naming discipline.
+**Next slice:** Milestone 7.4b8bk refine `STD-0167`, `STD-0168`, `STD-0169`,
+`STD-0170`, `STD-0171`, `STD-0172`, and `STD-0173` into Contracts invariant
+authority with Verification-selected evidence.
 
 **Acceptance status:** `partial`
 
@@ -1415,8 +1415,12 @@ all structural/routing fixtures pass.
    - `7.4b8bi` (`Accepted`): replace `STD-0157` with a direct non-normative
      route to canonical Dependencies and remove the intermediate legacy owner
      link.
-   - `7.4b8bj` (`Planned`): refine `STD-0158` through `STD-0166` into Core
-     code and naming discipline.
+   - `7.4b8bj` (`Accepted`): refine `STD-0158` through `STD-0166` into Core
+     code and terminology discipline. Select code volume, abstraction,
+     consolidation, deletion, and naming from ownership and reasoning facts
+     without call-count, blanket-DRY, incumbent, or copied-example defaults.
+   - `7.4b8bk` (`Planned`): refine `STD-0167` through `STD-0173` into
+     Contracts invariant authority with Verification-selected evidence.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

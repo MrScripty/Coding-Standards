@@ -4133,6 +4133,25 @@ checker prove complete `STD-0158` through `STD-0166` scope.
 **Next slice:** `7.4b8bj`, refine `STD-0158` through `STD-0166` into Core code
 and naming discipline.
 
+**Slice `7.4b8bj` accepted:** refined code volume, abstraction, consolidation,
+deletion, naming, and terminology decisions into Core.
+
+**No-fallback/legacy result:** removed call-count extraction thresholds,
+blanket DRY, universal brevity, speculative extension, incumbent terminology,
+and copied naming examples. Fifteen decisions and nine exact dispositions
+prove typed invalid and unavailable outcomes.
+
+**Verification (2026-07-31):** `verify-core-code-discipline.sh` and the complete
+`verify-*.sh` suite passed in the isolated slice worktree.
+
+**Verification deviation:** the first focused run found a prose assertion
+coupled to one physical Markdown line. The assertion now checks the same
+semantic phrase without constraining document wrapping; the decision outcomes
+and disposition coverage were unchanged.
+
+**Next slice:** `7.4b8bk`, refine `STD-0167` through `STD-0173` into Contracts
+invariant authority with Verification-selected evidence.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

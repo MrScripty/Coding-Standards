@@ -53,6 +53,44 @@ diff. If material ownership, invariants, lifecycle, failure, or change facts
 are unresolved, return the applicable typed diagnostic or record the decision
 before implementation rather than choosing the fewest visible constructs.
 
+### Code And Terminology Discipline
+
+Use the least code and structure that make the owned behavior, invariants,
+lifecycle, failures, and side effects clear. Additional structure is justified
+when it separates independently changing decisions, enforces an invariant,
+removes repeated reasoning, or supports demonstrated variants. It is not
+justified by speculative reuse, a preferred construct count, an incumbent
+pattern, or the smallest visible diff.
+
+Create an abstraction only when callers can safely ignore a concern that the
+abstraction owns. Keep its material lifecycle, ordering, state authority,
+failure behavior, and side effects visible in the contract. One call site may
+justify a boundary and many call sites may not; call count does not decide.
+
+Consolidate repeated implementations when they express the same owned
+contract and independent copies create divergence risk. Keep superficially
+similar implementations separate when their owners, invariants, lifecycle, or
+change axes differ. Do not apply blanket extraction, reuse, or duplication
+rules.
+
+Delete code, aliases, adapters, flags, comments, and branches that have no
+current owner or supported contract. Preserve a path only for a real active
+consumer, retained state, deployment overlap, or other declared lifecycle
+obligation. Unverified future use and incumbent presence are not retention
+authority.
+
+Choose names from domain meaning, role, unit, ownership, lifecycle, and
+observable effect at the narrowest useful scope. Use one term for one concept
+within a contract and distinguish different concepts even when their
+implementations look alike. Rename when current terminology misstates the
+owned concept; do not keep or copy a name solely for consistency with an
+incumbent, framework convention, or generic naming recipe.
+
+Missing or contradictory ownership, invariant, consumer, lifecycle, or domain
+meaning requires a typed diagnostic or a recorded decision before structural
+change. Do not fall back to fixed call counts, blanket DRY, universal brevity,
+speculative extension points, existing terminology, or copied examples.
+
 ## Authority And Boundaries
 
 - Validate untrusted input at every trust boundary before constructing a

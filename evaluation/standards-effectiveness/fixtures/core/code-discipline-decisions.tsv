@@ -1,0 +1,16 @@
+case	concerns	ownership	invariants	lifecycle	contract	divergence	meaning	fallback	expected
+direct_coherent	one	clear	known	known	one	none	clear	none	direct
+owned_boundary	multiple	clear	known	known	multiple	none	clear	none	keep-separate
+same_contract_duplicates	one	clear	known	known	one	risk	clear	none	consolidate
+similar_different_contracts	multiple	clear	different	different	multiple	none	clear	none	keep-separate
+unowned_unused	one	none	none	none	none	none	clear	none	delete
+active_consumer	one	clear	known	active	supported	none	clear	none	preserve
+descriptive_name	one	clear	known	known	one	none	clear	none	keep-name
+incorrect_name	one	clear	known	known	one	none	incorrect	none	rename
+unknown_owner	one	unknown	known	known	one	none	clear	none	typed-unavailable
+unknown_invariant	one	clear	unknown	known	one	none	clear	none	typed-unavailable
+call_count_default	one	clear	known	known	one	none	clear	call-count	typed-invalid
+blanket_dry	one	clear	known	known	one	risk	clear	blanket-dry	typed-invalid
+smallest_diff	multiple	clear	known	known	multiple	none	clear	smallest-diff	typed-invalid
+speculative_extension	one	clear	known	known	one	none	clear	speculative	typed-invalid
+incumbent_name	one	clear	known	known	one	none	incorrect	incumbent	typed-invalid
