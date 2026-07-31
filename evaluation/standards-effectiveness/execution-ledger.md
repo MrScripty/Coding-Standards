@@ -4290,6 +4290,23 @@ the plan cursor now lists all seven IDs explicitly.
 **Next slice:** `7.4b8br`, establish the Performance owner contract and refine
 `STD-0188` through `STD-0194`.
 
+**Slice `7.4b8br` accepted:** established the Performance topic for owned
+claims, measurement contracts, optimization decisions, benchmark validity,
+regression evidence, and durable decision context.
+
+**No-fallback/legacy result:** removed fixed hot-path documentation, profile-
+first, benchmark-all-critical-paths, allocation-ban, hot-loop, startup, and
+readability recipes. Eighteen decisions and seven exact dispositions reject
+guessed budgets, stale baselines, alternate workloads, weaker environments,
+conventional thresholds, and documentation-only proof with typed diagnostics.
+
+**Verification (2026-07-31):** `verify-performance-owner-contract.sh`,
+metadata, routing, disposition, accelerated-plan, plan-structure, and the
+complete `verify-*.sh` suite passed in the isolated slice worktree.
+
+**Next slice:** `7.4b8bs`, consolidate `STD-0300` through `STD-0348` into the
+existing Dependencies owner package.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

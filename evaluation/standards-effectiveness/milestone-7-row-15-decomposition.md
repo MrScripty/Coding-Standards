@@ -30,10 +30,9 @@ contract.
 14. Frontend owner contract and routing: `STD-0187`.
 15. Performance owner contract and population: `STD-0188`-`STD-0194`.
 
-## Missing Owners
+## Owner Closure
 
-Create a useful non-empty contract for `topics/performance.md` before disposing
-its identifiers. The Frontend owner now exists, and TypeScript Async remains a
+Every row-15 child now has a useful canonical owner. TypeScript Async remains a
 specialization of the general TypeScript owner.
 
 ## No Fallback
@@ -56,5 +55,5 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8br` establishes the Performance owner contract and refines
-`STD-0188` through `STD-0194`.
+Row 15 is complete. Continue from the next incomplete immutable-train row named
+by the active plan cursor.

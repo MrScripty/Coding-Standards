@@ -473,3 +473,10 @@ STD-0184	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the TypeScript-sp
 STD-0185	CODING-STANDARDS.md	profiles/languages/typescript.md	refine	select explicit annotations or inference from consumer declaration and evidence facts without exported-function or private-function defaults
 STD-0186	CODING-STANDARDS.md	profiles/languages/typescript.md	refine	project contract types from canonical authority and require runtime decoding without copied response raw-primitive any or assertion fallback
 STD-0187	CODING-STANDARDS.md	profiles/applications/frontend.md	index	replace the frontend parent with a non-normative route to the canonical application profile without retaining the legacy frontend file as authority
+STD-0188	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the performance parent with a non-normative route to canonical Performance authority
+STD-0189	CODING-STANDARDS.md	topics/performance.md	refine	record durable claim tradeoff and reproduction facts without a copied performance documentation template
+STD-0190	CODING-STANDARDS.md	topics/performance.md	refine	define performance from an owned metric workload budget environment and consumer claim without a hot-path label default
+STD-0191	CODING-STANDARDS.md	topics/performance.md	refine	select optimization mechanisms from measured contributors and tradeoffs without preallocation batching or early-out defaults
+STD-0192	CODING-STANDARDS.md	topics/performance.md	refine	select benchmark scope threshold environment and schedule from the claim without fixed targets or automated-regression defaults
+STD-0193	CODING-STANDARDS.md	topics/performance.md	refine	require claim-matched measurement and evidence without universal profile documentation benchmark or allocation rules
+STD-0194	CODING-STANDARDS.md	topics/performance.md	refine	optimize from owned unsatisfied claims and measured contributors without hot-loop startup critical-path or readability slogans

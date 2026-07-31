@@ -11,18 +11,18 @@ mapfile -t dispositions < <(
   awk -F '\t' '$1>="STD-0135"&&$1<="STD-0194"{print $1}' \
     "$S/consolidation-dispositions.tsv" | sort
 )
-expected_dispositions=(STD-{0135..0187})
+expected_dispositions=(STD-{0135..0194})
 [[ "${dispositions[*]}" == "${expected_dispositions[*]}" ]]
 [[ -e "$R/topics/architecture.md" ]]
 [[ -e "$R/topics/licensing.md" ]]
 [[ -e "$R/profiles/languages/typescript.md" ]]
 [[ -e "$R/profiles/applications/frontend.md" ]]
-[[ ! -e "$R/topics/performance.md" ]]
-for text in 'not one Core consolidation' '## Missing Owners' 'fixed layer diagrams' 'no normative or legacy standard'; do
+[[ -e "$R/topics/performance.md" ]]
+for text in 'not one Core consolidation' '## Owner Closure' 'fixed layer diagrams' 'no normative or legacy standard'; do
   rg -F -q "$text" "$S/milestone-7-row-15-decomposition.md"
 done
 P="$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8bb` (`Accepted`)' "$P"
 rg -F -q '`7.4b8bc` (`Accepted`)' "$P"
 "$S/verify-milestone-7-execution-train.sh"
-printf 'Milestone 7 row-15 decomposition passed: 60 IDs across 15 children, 1 missing owner\n'
+printf 'Milestone 7 row-15 decomposition passed: 60 IDs across 15 children, no missing owners\n'

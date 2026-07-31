@@ -32,6 +32,7 @@ reference material.
 | [topics/concurrency.md](topics/concurrency.md) | Shared-state coordination, lock boundaries, nonblocking async lifecycle, failure observation, and cancellation ownership | Concurrent state or asynchronous work with lifecycle obligations |
 | [topics/dependencies.md](topics/dependencies.md) | Dependency requirements, ownership, selection, resolution, provisioning, and lifecycle policy | Adding, changing, resolving, installing, updating, or removing a dependency |
 | [topics/licensing.md](topics/licensing.md) | Third-party provenance, license authority, compatibility, obligations, attribution, and distribution evidence | Incorporating, adapting, generating from, or distributing third-party material |
+| [topics/performance.md](topics/performance.md) | Performance claims, measurement contracts, optimization decisions, benchmarks, and regression evidence | Changing performance budgets, measurements, optimizations, or resource-use claims |
 | [topics/architecture.md](topics/architecture.md) | Concern boundaries, dependency direction, data/state authority, services, and runtime composition | Changing architectural ownership or boundaries |
 | [topics/security.md](topics/security.md) | Canonical untrusted-input authority and filesystem-containment policy | Untrusted values authorizing operations or resource access |
 | [topics/cross-platform.md](topics/cross-platform.md) | Canonical path construction and filesystem-identity policy | Path behavior across supported platforms or filesystems |

@@ -78,49 +78,7 @@ Frontend projection, rendering, synchronization, interaction, and
 frontend-specific evidence are canonical in the
 [Frontend application profile](profiles/applications/frontend.md).
 
-## Performance-Critical Code
+## Performance Legacy Route
 
-### Documentation
-
-Mark hot paths explicitly:
-
-```markdown
-Process all pending events in the current frame.
-
-# Performance
-Hot path: called once per frame in the main loop.
-
-## Optimizations Applied
-- Pre-allocated scratch buffers.
-- Batch transformations.
-- Early-out for empty event queues.
-
-## Benchmarks
-Target: less than 1 ms for 10K events.
-```
-
-### Guidelines
-
-1. **Profile before optimizing** - Measure, don't guess
-2. **Document optimizations** - Future maintainers need context
-3. **Benchmark critical paths** - Automated regression detection
-4. **Avoid allocations in hot paths** - Use pre-allocated buffers
-
-```text
-BAD: Allocate a new result buffer on every hot-path call.
-GOOD: Reuse caller-owned or pooled buffers where measurement proves it matters.
-```
-
-### When to Optimize
-
-Optimize when:
-
-- Profiling shows this is a bottleneck
-- Code is called in hot loops (per-frame, per-item)
-- Memory allocation is measurably impacting performance
-
-Don't optimize when:
-
-- Code runs once at startup
-- Code is not on the critical path
-- Readability would suffer significantly
+Performance claims, measurement contracts, optimization decisions, benchmarks,
+and regression evidence are canonical in [Performance](topics/performance.md).

@@ -6,12 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** The Frontend owner contract is canonical; the Performance
-owner contract is next.
+**Current phase:** Row 15 is complete; the existing-owner Dependencies package
+is next.
 
-**Next slice:** Milestone 7.4b8br refine `STD-0188`, `STD-0189`, `STD-0190`,
-`STD-0191`, `STD-0192`, `STD-0193`, and `STD-0194` by establishing the
-Performance owner contract.
+**Next slice:** Milestone 7.4b8bs consolidate `STD-0300` through `STD-0348`
+into the existing Dependencies owner package.
 
 **Acceptance status:** `partial`
 
@@ -1446,8 +1445,13 @@ all structural/routing fixtures pass.
      Replace the legacy frontend route and implicit presentation ownership
      with explicit projection, synchronization, interaction, accessibility,
      evidence, and typed-outcome boundaries.
-   - `7.4b8br` (`Planned`): establish the Performance owner contract and refine
+   - `7.4b8br` (`Accepted`): establish the Performance owner contract and refine
      `STD-0188` through `STD-0194`.
+     Replace fixed hot-path, profiling, allocation, benchmark, startup, and
+     readability recipes with owned claims, representative measurements,
+     explicit tradeoffs, claim-matched evidence, and typed diagnostics.
+   - `7.4b8bs` (`Planned`): consolidate `STD-0300` through `STD-0348` into the
+     existing Dependencies owner package.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
