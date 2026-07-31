@@ -4326,6 +4326,21 @@ in the isolated slice worktree.
 **Next slice:** `7.4b8bt`, consolidate `STD-0513` through `STD-0530` into the
 existing Planning owner package.
 
+**Slice `7.4b8bt` accepted:** closed the already-indexed legacy Planning source
+against the canonical Planning workflow with 18 exact dispositions.
+
+**No-fallback/legacy result:** seventeen decisions reject fixed plan size,
+question count, commit cadence, worker count, headless substitution,
+append-only history, implementation-as-acceptance, and template-completion
+defaults with typed diagnostics.
+
+**Verification (2026-07-31):** `verify-planning-consolidation.sh`, metadata,
+dispositions, accelerated-plan, plan-structure, and the complete `verify-*.sh`
+suite passed in the isolated slice worktree.
+
+**Next slice:** `7.4b8bu`, consolidate `STD-0602` through `STD-0653` into the
+existing Verification owner package.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

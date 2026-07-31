@@ -461,6 +461,24 @@ STD-0506	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	map type
 STD-0507	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	select the launcher implementation mechanism from deployment operator toolchain and security facts rather than mandatory Bash rules
 STD-0511	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	remove	remove the copied Bash template and placeholder commands as normative or fallback launcher implementation
 STD-0512	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	merge	merge applicable launcher verification outcomes into the canonical profile without retaining a fixed checklist
+STD-0513	PLAN-STANDARDS.md	PLAN-STANDARDS.md	index	convert the legacy planning root to a non-normative route to canonical Planning
+STD-0514	PLAN-STANDARDS.md	workflows/planning.md	merge	consolidate planning purpose under objective sequencing ownership and acceptance authority
+STD-0515	PLAN-STANDARDS.md	workflows/planning.md	refine	select planning applicability from change boundaries risk and coordination without repository-shape defaults
+STD-0516	PLAN-STANDARDS.md	workflows/planning.md	refine	require a written plan from sequencing ownership migration delegation acceptance and risk facts without size thresholds
+STD-0517	PLAN-STANDARDS.md	workflows/planning.md	refine	require objective scope constraints decisions acceptance and repository evidence without a fixed input checklist
+STD-0518	PLAN-STANDARDS.md	workflows/planning.md	refine	request clarification only when required facts cannot be established without a fixed question count or ceremony
+STD-0519	PLAN-STANDARDS.md	workflows/planning.md	refine	define current active-plan fields and artifact ownership without preserving a copied document layout
+STD-0520	PLAN-STANDARDS.md	workflows/planning.md	refine	scale milestones evidence and reports to dependency and risk without a separate large-refactor plan type
+STD-0521	PLAN-STANDARDS.md	workflows/planning.md	refine	record selected decisions and tradeoffs without recommendation-count or option-list defaults
+STD-0522	PLAN-STANDARDS.md	workflows/planning.md	refine	order milestones and slices by dependency and useful vertical outcomes without horizontal-phase defaults
+STD-0523	PLAN-STANDARDS.md	workflows/planning.md	refine	preserve user and unrelated work through explicit write sets and status checks without destructive cleanup authority
+STD-0524	PLAN-STANDARDS.md	workflows/planning.md	refine	select atomic commit boundaries from coherent outcomes without commit-per-step cadence
+STD-0525	PLAN-STANDARDS.md	workflows/planning.md	refine	delegate only independent bounded work without fixed worker counts or shared-file concurrency
+STD-0526	PLAN-STANDARDS.md	workflows/planning.md	refine	replan when objective facts authority ownership scope risk or evidence invalidates a decision
+STD-0527	PLAN-STANDARDS.md	workflows/planning.md	refine	record and disposition discovered issues by objective relationship owner scope and verification
+STD-0528	PLAN-STANDARDS.md	workflows/planning.md	refine	keep the active plan current and move history to owned artifacts without append-only interpretation
+STD-0529	PLAN-STANDARDS.md	workflows/planning.md	refine	accept completion only from objective evidence and resolved follow-ups without a fixed summary template
+STD-0530	PLAN-STANDARDS.md	workflows/planning.md	refine	keep planning proportional and concise without page line section or word-count defaults
 STD-0495	LAUNCHER-STANDARDS.md	workflows/verification.md	refine	select GUI smoke claims environments execution modes capabilities assertions and bounded lifecycle without fixed CI mechanisms or weakened-runtime fallback
 STD-0496	LAUNCHER-STANDARDS.md	LAUNCHER-STANDARDS.md	index	replace the dependency-installation parent with a non-normative route to canonical Dependencies procedure authority
 STD-0497	LAUNCHER-STANDARDS.md	topics/dependencies.md	refine	evaluate and provision each declared requirement independently while preserving selected transaction identity evidence diagnostics and terminal outcomes

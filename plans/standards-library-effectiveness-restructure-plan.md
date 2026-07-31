@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** The legacy Dependency standards are consolidated; the
-existing-owner Planning package is next.
+**Current phase:** Legacy Planning closure is complete; the existing-owner
+Verification package is next.
 
-**Next slice:** Milestone 7.4b8bt consolidate `STD-0513` through `STD-0530`
-into the existing Planning owner package.
+**Next slice:** Milestone 7.4b8bu consolidate `STD-0602` through `STD-0653`
+into the existing Verification owner package.
 
 **Acceptance status:** `partial`
 
@@ -1456,8 +1456,13 @@ all structural/routing fixtures pass.
      ecosystem commands, audit schedules, CI templates, and checklists with
      requirement, lifecycle, compatibility, footprint, audit, automation, and
      typed-outcome contracts.
-   - `7.4b8bt` (`Planned`): consolidate `STD-0513` through `STD-0530` into the
+   - `7.4b8bt` (`Accepted`): consolidate `STD-0513` through `STD-0530` into the
      existing Planning owner package.
+     Close the already-indexed legacy source with exact dispositions and
+     negative evidence against fixed plan size, question, commit, worker,
+     headless, append-only, and template-completion defaults.
+   - `7.4b8bu` (`Planned`): consolidate `STD-0602` through `STD-0653` into the
+     existing Verification owner package.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
