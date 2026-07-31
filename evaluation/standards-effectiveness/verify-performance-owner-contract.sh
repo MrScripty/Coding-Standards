@@ -35,7 +35,7 @@ mapfile -t ids < <(awk -F '\t' '$1>="STD-0188"&&$1<="STD-0194"{print $1}' \
 [[ "${ids[*]}" == 'STD-0188 STD-0189 STD-0190 STD-0191 STD-0192 STD-0193 STD-0194' ]]
 rg -F -q '`7.4b8br` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8bs` (`Planned`)' \
+rg -F -q '`7.4b8bt` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
 printf 'Performance owner contract passed: 18 decisions, 7 dispositions\n'

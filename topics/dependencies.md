@@ -70,6 +70,74 @@ override, update cadence, registry, or resolver command universally. Do not
 silently use an unlocked, cached, ambient, transitive, global, or alternate
 resolution when required material is missing.
 
+## Compatibility And Lifecycle
+
+Define update, replacement, and removal obligations from every owned consumer,
+published contract, persisted or wire representation, generated artifact,
+supported target, and deployment unit affected by the dependency. Candidate
+version labels and changelogs are inputs; they do not prove compatibility.
+
+Before mutation, identify the current consumed identity, proposed identity,
+contract changes, migration requirements, rollback or recovery authority, and
+claim-matched evidence. Resolve the candidate in an isolated or reviewable
+state when the selected tool supports it. Do not update an unrelated
+dependency, broaden constraints, accept a resolver-selected version, or retain
+an incumbent solely because compatibility evidence is unavailable.
+
+Removal proves that declarations, lock or snapshot material, feature
+selection, generated output, code paths, tooling, release artifacts, and owned
+consumer references no longer require the dependency. Search results and
+unused-dependency tools are supporting evidence, not complete removal proof.
+
+## Features And Footprint
+
+Select features, optional capabilities, default-feature behavior, target
+variants, and dependency placement from actual consumer requirements. Measure
+transitive graph, build, binary, bundle, startup, memory, operational, and
+support effects only when material to the contract.
+
+Feature gating, dependency splitting, standard-library use, in-house
+implementation, and framework avoidance are mechanisms, not defaults. A
+library's reusable consumer surface may impose different footprint and target
+constraints from an application, but repository layer or artifact label alone
+does not select a threshold.
+
+Do not use fixed line counts, transitive counts, package sizes, download
+trends, release ages, maintainer counts, or "one purpose" labels as automatic
+selection or rejection rules.
+
+## Audit And Review
+
+Derive audit scope and cadence from provenance, security, licensing,
+maintenance, compatibility, support, release, and operational risk. Record
+which identities and consumers were examined, the authoritative evidence,
+findings, disposition owner, deadline or acceptance condition, and required
+follow-up.
+
+Automated vulnerability, license, provenance, unused, duplicate, outdated, and
+footprint tools prove only their declared detection contracts. Manual review
+may cover context unavailable to tools. Neither tool output nor absence of a
+finding proves that every dependency obligation is satisfied.
+
+Classify findings through their canonical owner. Security owns vulnerability
+and trust response, Licensing owns legal obligations, Release owns publication
+effects, and Dependencies owns selection and lifecycle consequences. Do not
+silently ignore findings, upgrade everything, remove a dependency, or accept a
+warning because a conventional severity or schedule says so.
+
+## Automation And Bootstrap
+
+Automation implements selected dependency checks and procedures; it does not
+create policy. Each check declares its owner, inputs, required capability,
+environment, evidence, and blocking or advisory outcome. Select local, commit,
+pull-request, scheduled, release, or manual execution from the claim and cost.
+
+Tools required to execute dependency checks are dependencies themselves. Give
+them explicit ownership, resolution, provisioning authority, and satisfaction
+evidence. Do not install audit tools implicitly in a check, depend on ambient
+global tools, copy a universal CI workflow, or treat tool startup as proof of
+the dependency claim.
+
 ## Satisfaction And Provisioning
 
 Define satisfaction evidence for each requirement before provisioning. A
@@ -140,5 +208,9 @@ Evidence covers applicable:
 - already-satisfied, missing, unsupported, invalid, and unavailable outcomes;
 - explicit mutation authority and post-mutation satisfaction;
 - update and removal effects on every owned consumer; and
+- compatibility and migration effects across independently changing contracts;
+- selected feature and footprint behavior where material;
+- audit findings, ownership, disposition, and follow-up;
+- automation environment, bootstrap dependencies, and blocking semantics; and
 - rejection of ambient, transitive, global, alternate, privilege, and
   default-success fallbacks.

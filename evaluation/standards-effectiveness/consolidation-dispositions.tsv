@@ -357,6 +357,55 @@ STD-0296	CROSS-PLATFORM-STANDARDS.md	workflows/release.md	refine	derive native a
 STD-0297	CROSS-PLATFORM-STANDARDS.md	workflows/release.md	refine	provide consumer acquisition installation loading and verification information
 STD-0298	CROSS-PLATFORM-STANDARDS.md	workflows/verification.md	refine	map every declared platform-support claim to complete target evidence
 STD-0299	CROSS-PLATFORM-STANDARDS.md	workflows/verification.md	refine	select evidence scheduling and orchestration from project risk and environment facts
+STD-0300	DEPENDENCY-STANDARDS.md	DEPENDENCY-STANDARDS.md	index	convert the legacy dependency root to a non-normative route to canonical concern owners
+STD-0301	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	consolidate dependency principles under requirement ownership selection resolution and lifecycle authority
+STD-0302	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	justify dependency cost from the complete consumer contract without an in-house implementation default
+STD-0303	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	select dependency placement from execution ownership and consumer facts without fixed layer-weight rules
+STD-0304	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	compare standard-library and third-party candidates against the same requirement without preference fallback
+STD-0305	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	select dependency scope from capability and cost facts without one-purpose or framework-size slogans
+STD-0306	DEPENDENCY-STANDARDS.md	topics/dependencies.md	index	replace the before-adding parent with canonical requirement and candidate-selection authority
+STD-0307	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	compare only material capability support provenance license security maintenance and cost facts
+STD-0308	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	remove line-count build-or-depend matrices in favor of complete requirement comparison
+STD-0309	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	measure material transitive cost without fixed count thresholds or automatic actions
+STD-0310	DEPENDENCY-STANDARDS.md	topics/dependencies.md	remove	remove Node dependency-tree command examples without preserving a universal mechanism
+STD-0311	DEPENDENCY-STANDARDS.md	topics/dependencies.md	remove	remove Node package-size command examples without preserving a universal mechanism
+STD-0312	DEPENDENCY-STANDARDS.md	topics/dependencies.md	remove	remove C sharp transitive-list command examples without preserving a universal mechanism
+STD-0313	DEPENDENCY-STANDARDS.md	topics/dependencies.md	index	replace search-and-compare parent with canonical candidate-selection authority
+STD-0314	DEPENDENCY-STANDARDS.md	topics/dependencies.md	remove	remove ecosystem registry and search-tool lists without preserving preferred sources
+STD-0315	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	select comparison criteria from the requirement without popularity recency count or ranking defaults
+STD-0316	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	treat maintenance quality license security and cost signals as evidence rather than automatic rejection rules
+STD-0317	DEPENDENCY-STANDARDS.md	topics/dependencies.md	index	replace version-management parent with canonical resolution and lifecycle authority
+STD-0318	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	select lock or snapshot material from artifact consumer release and deployment contracts without universal lockfiles
+STD-0319	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	select version constraints from consumer and release contracts without category-based pinning defaults
+STD-0320	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	coordinate versions only where required without erasing narrow consumer ownership
+STD-0321	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	declare dependencies at the narrowest execution owner and reject incidental broader resolution
+STD-0322	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	apply narrow execution ownership to workspace resolution without fixed package-manager layout or root-tool lists
+STD-0323	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	prove updates against all affected consumers contracts migrations and evidence without changelog-only compatibility
+STD-0324	DEPENDENCY-STANDARDS.md	topics/dependencies.md	index	replace footprint parent with canonical feature and material-cost decisions
+STD-0325	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	select features from actual consumers and targets without disable-default-features prescriptions
+STD-0326	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	select optional capability boundaries from consumer and deployment contracts without heavy-feature heuristics
+STD-0327	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	apply dependency footprint to real reusable-library consumer constraints without blanket lean-package policy
+STD-0328	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	inspect the resolved graph when material without ecosystem-command or transitive-count defaults
+STD-0329	DEPENDENCY-STANDARDS.md	topics/dependencies.md	index	replace auditing parent with risk-derived audit and review authority
+STD-0330	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	preserve vulnerability finding ownership while applying canonical dependency lifecycle consequences
+STD-0331	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	use unused-dependency tools as bounded evidence rather than removal authority
+STD-0332	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	require complete owned-consumer removal evidence beyond text search
+STD-0333	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	evaluate duplicate versions against resolution support and cost facts without deduplication default
+STD-0334	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	measure material dependency footprint without largest-package rejection heuristics
+STD-0335	DEPENDENCY-STANDARDS.md	topics/dependencies.md	remove	remove bundle-analysis command examples without preserving a universal mechanism
+STD-0336	DEPENDENCY-STANDARDS.md	topics/dependencies.md	remove	remove package-size command examples without preserving a universal mechanism
+STD-0337	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	derive manual review scope and cadence from risk rather than a fixed periodic schedule
+STD-0338	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	require claim-selected dependency-check execution without fixed environment or schedule
+STD-0339	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	give CI check tools explicit dependency ownership resolution provisioning and satisfaction contracts
+STD-0340	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	derive automation checks from accepted dependency claims without a universal recommended set
+STD-0341	DEPENDENCY-STANDARDS.md	topics/dependencies.md	remove	remove CI workflow examples without preserving a universal mechanism
+STD-0342	DEPENDENCY-STANDARDS.md	topics/dependencies.md	remove	remove the concrete dependency-check workflow template without preserving it as authority
+STD-0343	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	select blocking advisory and follow-up outcomes from finding ownership and risk without fixed severity policy
+STD-0344	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	replace common-mistake slogans with explicit no-fallback dependency outcomes
+STD-0345	DEPENDENCY-STANDARDS.md	topics/dependencies.md	index	replace the review-checklist parent with canonical decision and evidence contracts
+STD-0346	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	derive addition acceptance from requirement selection resolution ownership licensing security and evidence
+STD-0347	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	derive removal acceptance from all declarations artifacts code tooling and consumers
+STD-0348	DEPENDENCY-STANDARDS.md	topics/dependencies.md	refine	derive review cadence scope findings and follow-up from risk without a copied checklist
 STD-0761	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	select binding package and workspace placement from ownership dependency toolchain mechanism and evidence facts
 STD-0762	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	keep required adapter and real host evidence despite separate foreign-runtime provisioning
 STD-0763	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	workflows/release.md	refine	classify native internal generator generated host and bundled binding artifact roles

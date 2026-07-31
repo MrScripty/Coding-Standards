@@ -4307,6 +4307,30 @@ complete `verify-*.sh` suite passed in the isolated slice worktree.
 **Next slice:** `7.4b8bs`, consolidate `STD-0300` through `STD-0348` into the
 existing Dependencies owner package.
 
+**Slice `7.4b8bs` accepted:** consolidated the legacy Dependency standards into
+the canonical Dependencies owner and converted the source to a non-normative
+migration index.
+
+**No-fallback/legacy result:** removed selection matrices, line and transitive
+count thresholds, standard-library and lockfile defaults, ecosystem command
+recipes, audit schedules, CI workflow templates, warning policies, and
+checklists. Twenty decisions and 49 exact dispositions reject ambient tools,
+resolver-selected updates, conventional thresholds, fixed schedules, and
+tool-only proof with typed diagnostics.
+
+**Verification (2026-07-31):**
+`verify-dependency-standards-consolidation.sh`, metadata, dispositions,
+accelerated-plan, plan-structure, and the complete `verify-*.sh` suite passed
+in the isolated slice worktree.
+
+**Next slice:** `7.4b8bt`, consolidate `STD-0513` through `STD-0530` into the
+existing Planning owner package.
+
+**Verification deviation:** the first focused run exposed a mechanical cursor
+replacement that also changed the frozen row-16 start assertion in the
+Dependencies owner checker. The frozen assertion was restored to `STD-0300`;
+only the active next-slice assertion advances to `STD-0513`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

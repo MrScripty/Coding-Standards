@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Row 15 is complete; the existing-owner Dependencies package
-is next.
+**Current phase:** The legacy Dependency standards are consolidated; the
+existing-owner Planning package is next.
 
-**Next slice:** Milestone 7.4b8bs consolidate `STD-0300` through `STD-0348`
-into the existing Dependencies owner package.
+**Next slice:** Milestone 7.4b8bt consolidate `STD-0513` through `STD-0530`
+into the existing Planning owner package.
 
 **Acceptance status:** `partial`
 
@@ -1450,8 +1450,14 @@ all structural/routing fixtures pass.
      Replace fixed hot-path, profiling, allocation, benchmark, startup, and
      readability recipes with owned claims, representative measurements,
      explicit tradeoffs, claim-matched evidence, and typed diagnostics.
-   - `7.4b8bs` (`Planned`): consolidate `STD-0300` through `STD-0348` into the
+   - `7.4b8bs` (`Accepted`): consolidate `STD-0300` through `STD-0348` into the
      existing Dependencies owner package.
+     Replace fixed selection matrices, thresholds, lockfile and pinning rules,
+     ecosystem commands, audit schedules, CI templates, and checklists with
+     requirement, lifecycle, compatibility, footprint, audit, automation, and
+     typed-outcome contracts.
+   - `7.4b8bt` (`Planned`): consolidate `STD-0513` through `STD-0530` into the
+     existing Planning owner package.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
