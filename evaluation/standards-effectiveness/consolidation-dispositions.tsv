@@ -412,3 +412,4 @@ STD-0506	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	map type
 STD-0507	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	refine	select the launcher implementation mechanism from deployment operator toolchain and security facts rather than mandatory Bash rules
 STD-0511	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	remove	remove the copied Bash template and placeholder commands as normative or fallback launcher implementation
 STD-0512	LAUNCHER-STANDARDS.md	profiles/applications/launcher.md	merge	merge applicable launcher verification outcomes into the canonical profile without retaining a fixed checklist
+STD-0495	LAUNCHER-STANDARDS.md	workflows/verification.md	refine	select GUI smoke claims environments execution modes capabilities assertions and bounded lifecycle without fixed CI mechanisms or weakened-runtime fallback

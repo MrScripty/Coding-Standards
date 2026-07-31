@@ -145,6 +145,11 @@ missing evidence, and default success.
 13 action, lifecycle, state, mechanism, and outcome decisions, 18 exact
 dispositions, bounded legacy replacement, and handoff to GUI smoke acceptance.
 
+`fixtures/verification/gui-smoke-decisions.tsv` and
+`verify-gui-smoke-evidence.sh` validate GUI smoke claim, environment, mode,
+capability, lifecycle, and assertion decisions, exact `STD-0495` refinement,
+legacy removal, and handoff to the Dependencies owner contract.
+
 `fixtures/rust/binding-core-adapter-testability-*.tsv` and
 `verify-rust-binding-core-adapter-testability.sh` require distinct
 framework-free core and real native/host adapter evidence. They reject

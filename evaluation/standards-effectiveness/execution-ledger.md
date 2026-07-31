@@ -3945,6 +3945,23 @@ decisions and 18 exact dispositions prove the boundary.
 **Next slice:** `7.4b8aw`, refine `STD-0495` GUI smoke acceptance into
 Verification.
 
+**Slice `7.4b8aw` accepted:** refined `STD-0495` into canonical Verification.
+GUI smoke now records its claim, environment qualification, execution mode,
+display/session, sandbox, graphics, shared-resource and state capabilities,
+bounded lifecycle, assertions, and any verification-only divergence from
+normal interactive startup. Launcher only exposes and preserves the selected
+procedure.
+
+**No-fallback/legacy result:** removed fixed virtual-display and CI mechanism
+authority from the legacy Launcher file. Missing or contradictory environment
+facts, capability, lifecycle, or assertions block acceptance with typed
+outcomes; they cannot select ambient desktop state, weakened user runtime,
+startup-only evidence, another environment, or default success. Fourteen
+focused decisions and one exact disposition prove the boundary.
+
+**Next slice:** `7.4b8ax`, establish the non-empty Dependencies owner contract
+before populating `STD-0496` through `STD-0498`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

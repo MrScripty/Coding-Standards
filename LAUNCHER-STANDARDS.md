@@ -14,39 +14,6 @@ Acceptance authority remains canonical in
 [Verification](workflows/verification.md). A launcher action transports its
 selected procedure and does not upgrade the procedure's evidence kind.
 
-## GUI CI Smoke Requirements
-
-If `--release-smoke` launches a GUI runtime such as Electron, Tauri, Qt, GTK,
-or another desktop shell, the launcher contract must define how that smoke
-check runs in CI.
-
-Rules:
-
-1. The smoke path must work on a clean CI runner without relying on the
-   operator's desktop session, host-specific state, or manually configured GUI
-   helpers.
-2. CI-specific launch requirements must be explicit and owned by the launcher
-   or workflow contract, including:
-   - display server strategy (`xvfb`, Wayland, native desktop session, etc.)
-   - sandbox constraints
-   - GPU usage
-   - shared-memory constraints
-   - bounded runtime exit behavior
-3. CI-only launch flags are acceptable only for bounded verification actions
-   such as `--release-smoke`. They must not silently weaken normal interactive
-   runtime behavior for users.
-4. The CI smoke entrypoint must be isolated from the normal runtime entrypoint
-   when the CI environment requires different launch flags or display handling.
-5. The repo must document which launcher path CI runs and why it differs, if it
-   differs.
-
-Verification guidance:
-- Run the same launcher action locally with CI-like environment variables when
-  feasible.
-- Prefer a dedicated CI smoke script over embedding CI-only runtime weakening
-  into the main application startup path.
-- Treat GUI smoke as failed if startup depends on undeclared runner behavior.
-
 ## Dependency Installation Standards (`--install`)
 
 ### Per-Dependency Idempotent Behavior

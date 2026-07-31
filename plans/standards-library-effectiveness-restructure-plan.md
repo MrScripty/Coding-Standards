@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Launcher-owned row-14 policy is canonical; GUI smoke
-acceptance is the active child.
+**Current phase:** GUI smoke acceptance is canonical in Verification; the
+Dependencies owner required by row 14.3 is next.
 
-**Next slice:** Milestone 7.4b8aw refine GUI smoke acceptance `STD-0495` into Verification.
+**Next slice:** Milestone 7.4b8ax establish the non-empty Dependencies owner contract before populating `STD-0496`, `STD-0497`, and `STD-0498`.
 
 **Acceptance status:** `partial`
 
@@ -1345,8 +1345,15 @@ all structural/routing fixtures pass.
      flags, command examples, exit codes, mandatory Bash, copied templates,
      implicit builds, ambient host state, alternate runtime, and successful
      no-op fallback.
-   - `7.4b8aw` (`Planned`): refine `STD-0495` GUI smoke evidence,
-     environment, execution mode, and acceptance into Verification.
+   - `7.4b8aw` (`Accepted`): refine `STD-0495` into Verification. Require an
+     explicit smoke claim, environment qualification, execution mode, GUI
+     capabilities, bounded lifecycle, assertions, and scoped CI divergence.
+     Reject fixed display, sandbox, graphics, shared-memory, or timeout
+     mechanisms; ambient desktop assumptions; weakened interactive runtime;
+     evidence upgrades; alternate environments; and default success.
+   - `7.4b8ax` (`Planned`): establish the non-empty
+     `topics/dependencies.md` owner contract before populating `STD-0496`
+     through `STD-0498`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

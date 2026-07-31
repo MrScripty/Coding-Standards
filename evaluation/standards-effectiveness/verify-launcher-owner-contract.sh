@@ -54,7 +54,7 @@ mapfile -t dispositions < <(
     print $1
   }' "$DISPOSITIONS"
 )
-[[ "${#dispositions[@]}" -eq 18 ]]
+[[ "${#dispositions[@]}" -eq 19 ]]
 
 train_row="$(
   awk -F '\t' '$1 == 14 {
@@ -73,9 +73,10 @@ package_row="$(
 rg -F -q '`7.4b8at` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8au` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8av` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8aw` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8aw` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8ax` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8aw'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ax'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"

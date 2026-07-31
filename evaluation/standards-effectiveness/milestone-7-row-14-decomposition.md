@@ -72,5 +72,6 @@ lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8aw` refines `STD-0495` GUI smoke acceptance into Verification.
-It does not dispose the Dependencies, Release, or Security groups.
+Milestone `7.4b8ax` establishes the non-empty Dependencies owner contract
+before `STD-0496` through `STD-0498` population. It does not dispose those
+identifiers or the Release or Security groups.

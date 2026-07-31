@@ -47,7 +47,6 @@ done
 
 required_legacy=(
   '# Launcher Standards Legacy Index'
-  '## GUI CI Smoke Requirements'
   '## Dependency Installation Standards (`--install`)'
   '## Build Standards (`--build`)'
   '## Desktop Entry and Script Generation Safety'
@@ -89,21 +88,22 @@ mapfile -t actual_ids < <(
 )
 [[ "${actual_ids[*]}" == "${expected_ids[*]}" ]]
 
-for id in STD-0495 STD-0496 STD-0497 STD-0498 STD-0500 STD-0508 STD-0509 STD-0510; do
+for id in STD-0496 STD-0497 STD-0498 STD-0500 STD-0508 STD-0509 STD-0510; do
   ! awk -F '\t' -v id="$id" 'NR > 1 && $1 == id { found = 1 }
     END { exit found ? 0 : 1 }' "$DISPOSITIONS"
 done
 
-active_child="$(awk -F '\t' '$1 == 14 && $2 == 2 { print $1 "." $2 "\t" $3 }' "$OVERLAY")"
-[[ "$active_child" == $'14.2\tSTD-0495' ]]
+active_child="$(awk -F '\t' '$1 == 14 && $2 == 3 { print $1 "." $2 "\t" $3 }' "$OVERLAY")"
+[[ "$active_child" == $'14.3\tSTD-0496,STD-0497,STD-0498' ]]
 
 rg -F -q '`7.4b8av` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8aw` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8aw` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8ax` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8aw'* && "$next_slice_line" == *'STD-0495'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b8ax'* ]]
 
 "$S/verify-launcher-owner-contract.sh"
 "$S/verify-milestone-7-row-14-decomposition.sh"
 "$S/verify-milestone-7-execution-train.sh"
 
-printf 'Launcher population passed: 13 decisions, 18 exact dispositions, active child 14.2\n'
+printf 'Launcher population passed: 13 decisions, 18 exact dispositions, active child 14.3\n'
