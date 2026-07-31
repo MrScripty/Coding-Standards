@@ -21,7 +21,7 @@ rg -F -q '# Coding Standards Legacy Index' "$R/CODING-STANDARDS.md"
 mapfile -t rows < <(awk -F '\t' '$1=="STD-0135"||$1=="STD-0136"{print $1}' "$S/consolidation-dispositions.tsv" | sort)
 [[ "${rows[*]}" == 'STD-0135 STD-0136' ]]
 rg -F -q '`7.4b8bc` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8bd` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b8bd` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Core simplicity passed: 12 decisions, 2 exact dispositions, active child 15.2\n'

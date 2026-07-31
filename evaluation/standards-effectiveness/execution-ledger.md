@@ -4045,6 +4045,18 @@ replacement.
 **Next slice:** `7.4b8bd`, establish the non-empty Architecture owner before
 populating `STD-0137` through `STD-0147`.
 
+**Slice `7.4b8bd` accepted:** established and routed canonical Architecture
+authority for concern boundaries, dependency direction, services, data/state
+authority, and runtime composition.
+
+**No-fallback/legacy result:** fixed layers, directory layouts, backend or
+framework ownership, ambient globals, incumbent structure, and smallest-diff
+selection are invalid. Fourteen decisions prove typed invalid, unsupported,
+and unavailable outcomes. `STD-0137` through `STD-0147` remain undisposed.
+
+**Next slice:** `7.4b8be`, refine `STD-0137` through `STD-0147` into
+Architecture.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

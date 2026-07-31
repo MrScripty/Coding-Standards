@@ -120,6 +120,11 @@ owner-coherent coding-policy children and records five missing owner contracts.
 entanglement- and ownership-based simplicity without visible-count or
 smallest-diff defaults.
 
+`fixtures/architecture/owner-contract-decisions.tsv` and
+`verify-architecture-owner-contract.sh` establish Architecture ownership
+without fixed layers, location-derived authority, ambient globals, or
+incumbent-structure fallback.
+
 `fixtures/csharp/async-owner-contract-decisions.tsv` and
 `verify-csharp-async-owner-contract.sh` establish the C# Async profile before
 population. They select continuation scheduling from explicit affinity and

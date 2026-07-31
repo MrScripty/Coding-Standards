@@ -102,6 +102,7 @@ condition is present:
 | Filesystem path construction, identity, comparison, or supported-filesystem behavior | [Cross-platform](topics/cross-platform.md) |
 | Other multiple declared operating-system target concerns | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) until migration |
 | Dependency requirement, ownership, selection, resolution, provisioning, update, or removal policy is required | [Dependencies](topics/dependencies.md) |
+| Module, layer, service, data/state authority, dependency direction, or runtime composition changes | [Architecture](topics/architecture.md) |
 | Untrusted input authorizes an operation, resource access, side effect, or security-relevant decision | [Security](topics/security.md) |
 | Other network transport or secret concerns | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) until migration |
 

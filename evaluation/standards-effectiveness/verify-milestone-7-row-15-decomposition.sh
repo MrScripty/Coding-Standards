@@ -12,7 +12,8 @@ mapfile -t dispositions < <(
     "$S/consolidation-dispositions.tsv" | sort
 )
 [[ "${dispositions[*]}" == 'STD-0135 STD-0136' ]]
-for owner in topics/architecture.md topics/licensing.md profiles/languages/typescript.md profiles/applications/frontend.md topics/performance.md; do
+[[ -e "$R/topics/architecture.md" ]]
+for owner in topics/licensing.md profiles/languages/typescript.md profiles/applications/frontend.md topics/performance.md; do
   [[ ! -e "$R/$owner" ]]
 done
 for text in 'not one Core consolidation' '## Missing Owners' 'fixed layer diagrams' 'no normative or legacy standard'; do
@@ -22,4 +23,4 @@ P="$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8bb` (`Accepted`)' "$P"
 rg -F -q '`7.4b8bc` (`Accepted`)' "$P"
 "$S/verify-milestone-7-execution-train.sh"
-printf 'Milestone 7 row-15 decomposition passed: 60 IDs across 15 children, 5 missing owners\n'
+printf 'Milestone 7 row-15 decomposition passed: 60 IDs across 15 children, 4 missing owners\n'

@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Core simplicity is canonical; the Architecture owner
-contract is next.
+**Current phase:** the Architecture owner contract exists; architecture
+population is next.
 
-**Next slice:** Milestone 7.4b8bd establish the non-empty Architecture owner before populating `STD-0137`, `STD-0138`, `STD-0139`, `STD-0140`, `STD-0141`, `STD-0142`, `STD-0143`, `STD-0144`, `STD-0145`, `STD-0146`, and `STD-0147`.
+**Next slice:** Milestone 7.4b8be refine `STD-0137`, `STD-0138`, `STD-0139`, `STD-0140`, `STD-0141`, `STD-0142`, `STD-0143`, `STD-0144`, `STD-0145`, `STD-0146`, and `STD-0147` into Architecture.
 
 **Acceptance status:** `partial`
 
@@ -1387,8 +1387,13 @@ all structural/routing fixtures pass.
      Define simplicity by entanglement, ownership, independently changing
      decisions, invariants, and reasoning load. Reject file, type, dependency,
      call-site, construct-count, incumbent, and smallest-diff defaults.
-   - `7.4b8bd` (`Planned`): establish the non-empty Architecture owner before
-     populating `STD-0137` through `STD-0147`.
+   - `7.4b8bd` (`Accepted`): establish the non-empty Architecture owner for
+     concern boundaries, dependency direction, services, data/state authority,
+     and runtime composition. Reject fixed layer/directory models, location-
+     derived ownership, ambient globals, incumbent structure, and smallest-diff
+     fallback. Keep `STD-0137` through `STD-0147` undisposed.
+   - `7.4b8be` (`Planned`): refine `STD-0137` through `STD-0147` into
+     Architecture.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

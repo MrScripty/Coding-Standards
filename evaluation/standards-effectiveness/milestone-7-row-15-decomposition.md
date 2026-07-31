@@ -32,8 +32,8 @@ contract.
 
 ## Missing Owners
 
-Create useful non-empty contracts for `topics/architecture.md`,
-`topics/licensing.md`, `profiles/languages/typescript.md`,
+Create useful non-empty contracts for `topics/licensing.md`,
+`profiles/languages/typescript.md`,
 `profiles/applications/frontend.md`, and `topics/performance.md` before
 disposing their identifiers. Existing TypeScript Async is a specialization,
 not a general language owner.
@@ -58,5 +58,4 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bd` establishes the non-empty Architecture owner before
-populating `STD-0137` through `STD-0147`.
+Milestone `7.4b8be` refines `STD-0137` through `STD-0147` into Architecture.
