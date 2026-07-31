@@ -11,7 +11,7 @@ mapfile -t dispositions < <(
   awk -F '\t' '$1>="STD-0135"&&$1<="STD-0194"{print $1}' \
     "$S/consolidation-dispositions.tsv" | sort
 )
-expected_dispositions=(STD-{0135..0182})
+expected_dispositions=(STD-{0135..0183})
 [[ "${dispositions[*]}" == "${expected_dispositions[*]}" ]]
 [[ -e "$R/topics/architecture.md" ]]
 [[ -e "$R/topics/licensing.md" ]]

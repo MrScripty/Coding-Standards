@@ -468,3 +468,4 @@ STD-0179	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the license-attri
 STD-0180	CODING-STANDARDS.md	topics/licensing.md	refine	derive attribution contents and placement from authoritative terms provenance and distribution facts without copied templates
 STD-0181	CODING-STANDARDS.md	topics/licensing.md	refine	evaluate compatibility and obligations from authoritative terms and actual activity without fixed license matrices labels or linking slogans
 STD-0182	CODING-STANDARDS.md	topics/licensing.md	refine	place file artifact or distribution attribution only where selected obligations require it without file-level template defaults
+STD-0183	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the language-specific parent with a non-normative route to condition-selected language profiles without legacy location or incremental-migration authority

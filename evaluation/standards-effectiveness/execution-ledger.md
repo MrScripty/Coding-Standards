@@ -4227,6 +4227,25 @@ owner-creation slice. Policy outcomes and disposition scope were unchanged.
 
 **Next slice:** `7.4b8bo`, refine `STD-0183` into language-profile routing.
 
+**Slice `7.4b8bo` accepted:** replaced the language-specific parent with a
+non-normative route to condition-selected language profiles.
+
+**No-fallback/legacy result:** removed root Rust-location and
+incremental-inline-migration authority. Thirteen decisions and one exact
+disposition reject legacy-root, Rust-layout, nearby-language, and inline
+guidance fallbacks with typed routing diagnostics.
+
+**Verification (2026-07-31):** `verify-language-profile-routing.sh` and the
+complete `verify-*.sh` suite passed in the isolated slice worktree.
+
+**Verification deviation:** the first focused run found a prose assertion
+coupled to physical Markdown wrapping. The assertion now checks the stable
+continuation of the same routing statement; decisions and disposition
+coverage are unchanged.
+
+**Next slice:** `7.4b8bp`, establish the TypeScript owner contract and refine
+`STD-0184` through `STD-0186`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

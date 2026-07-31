@@ -57,4 +57,5 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bo` refines `STD-0183` into language-profile routing.
+Milestone `7.4b8bp` establishes the TypeScript owner contract and refines
+`STD-0184` through `STD-0186`.

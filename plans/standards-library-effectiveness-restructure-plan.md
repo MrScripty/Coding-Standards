@@ -6,11 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Licensing authority is canonical; language-profile routing
-is next.
+**Current phase:** Language-profile routing is canonical; the TypeScript owner
+contract is next.
 
-**Next slice:** Milestone 7.4b8bo refine `STD-0183` into language-profile
-routing.
+**Next slice:** Milestone 7.4b8bp refine `STD-0184`, `STD-0185`, and
+`STD-0186` by establishing the TypeScript owner contract.
 
 **Acceptance status:** `partial`
 
@@ -1434,7 +1434,10 @@ all structural/routing fixtures pass.
      `STD-0179` through `STD-0182`.
      Replace fixed attribution templates and license matrices with
      authoritative provenance, terms, obligations, and typed outcomes.
-   - `7.4b8bo` (`Planned`): refine `STD-0183` into language-profile routing.
+   - `7.4b8bo` (`Accepted`): refine `STD-0183` into language-profile routing.
+     Remove root language-layout and incremental-inline-migration authority.
+   - `7.4b8bp` (`Planned`): establish the TypeScript owner contract and refine
+     `STD-0184` through `STD-0186`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

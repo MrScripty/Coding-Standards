@@ -59,17 +59,11 @@ Acceptance evidence is selected by the
 Third-party provenance, license compatibility, obligation, attribution, and
 distribution authority is canonical in [Licensing](topics/licensing.md).
 
-## Language-Specific Guidelines
+## Language-Specific Guidelines Legacy Route
 
-Rust-specific coding rules live in
-[languages/rust/RUST-API-STANDARDS.md](languages/rust/RUST-API-STANDARDS.md),
-[languages/rust/RUST-UNSAFE-STANDARDS.md](languages/rust/RUST-UNSAFE-STANDARDS.md),
-and the broader [Rust standards index](languages/rust/RUST-STANDARDS.md).
-
-New or substantially expanded language-specific guidance should follow the same
-pattern: keep the root standard focused on cross-language principles, then link
-to `languages/<language>/` for toolchain-specific details. Existing inline
-ecosystem sections can be migrated incrementally.
+Select language mechanism guidance from the
+[Language Profiles](STANDARDS-ROUTER.md#language-profiles) table. Generic
+policy remains in Core, workflows, and topics.
 
 ## TypeScript-Specific Guidelines
 
