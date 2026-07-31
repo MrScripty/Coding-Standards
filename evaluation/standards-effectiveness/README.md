@@ -521,7 +521,9 @@ through `STD-0272`, validates canonical metadata and routing, preserves only
 unmoved language-specific migration material, and rejects unprotected
 mutation, callbacks under locks, fire-and-forget work, synchronous async
 fallback, discarded failure, ignored cancellation, and universal
-language-specific mechanisms.
+language-specific mechanisms. It also verifies the exact `STD-0269` C# async
+parent-index disposition while preserving separately owned language
+specialization.
 
 `milestone-7-rust-async-decomposition.md` and
 `milestone-7-rust-async-slices.tsv` split the nine Rust Async identifiers into

@@ -81,9 +81,6 @@ done
 rg -F -q '| Handling infrastructure failures | [Resilience](topics/resilience.md) |' "$LEGACY"
 
 rg -F -q '`7.4b8aj` (`Accepted`)' "$PLAN"
-next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ak'* ]]
-[[ "$next_slice_line" == *'STD-0269'* ]]
 
 "$S/verify-resilience-owner-contract.sh"
 "$S/verify-milestone-7-execution-train.sh"

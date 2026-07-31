@@ -3714,6 +3714,22 @@ of requiring the removed duplicate typed-outcome sentence.
 
 **Next slice:** `7.4b8ak`, review and implement Concurrency `STD-0269`.
 
+**Slice `7.4b8ak` accepted:** `STD-0269` now marks the C# async parent heading
+as a non-normative migration index. Generic work ownership, failure
+observation, nonblocking execution, and cancellation remain canonical in
+Concurrency while the separately owned C# specialization subsections remain
+available for their next slice.
+
+**Next slice:** `7.4b8al`, review and implement `STD-0273` through `STD-0279`
+under the Concurrency topic.
+
+**Discovered issue (`Resolved`):** the historical trust/lifecycle checker
+hard-coded eight remaining Concurrency identifiers after the nine generic
+dispositions. Exact disposition of the independently tracked `STD-0269` parent
+index correctly reduces that remainder to seven. The checker now derives the
+remainder from its frozen 17-identifier group and exact accepted dispositions;
+it does not introduce an alternate migration state or infer a disposition.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

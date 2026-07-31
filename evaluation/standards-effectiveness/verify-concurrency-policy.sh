@@ -118,7 +118,8 @@ for text in "${required_topic[@]}"; do
 done
 
 retained_legacy=(
-  '## C# Async/Await Rules'
+  '## C# Async/Await Index'
+  'This is a non-normative migration index'
   '### Use ConfigureAwait(false) in Library/Service Code'
   '## Rust Concurrency Cross-Reference'
   '## TypeScript Concurrency Rules'
@@ -142,6 +143,17 @@ for pattern in "${removed_patterns[@]}"; do
     exit 1
   fi
 done
+
+awk -F '\t' 'NR > 1 && $1 == "STD-0269" {
+  print $2 ":" $3 ":" $4 ":" $5
+}' "$DISPOSITIONS" |
+  grep -Fx 'CONCURRENCY-STANDARDS.md:CONCURRENCY-STANDARDS.md:index:convert the C sharp async parent heading into a non-normative routing index while preserving separately owned child specializations'
+
+! rg -F -q '## C# Async/Await Rules' "$LEGACY"
+rg -F -q '`7.4b8ak` (`Accepted`)' "$PLAN"
+next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
+[[ "$next_slice_line" == *'Milestone 7.4b8al'* ]]
+[[ "$next_slice_line" == *'STD-0273'* && "$next_slice_line" == *'STD-0279'* ]]
 
 rg -F -q '| F019 | Resolved in Milestone 7.4b4b |' "$FINDINGS"
 rg -F -q '`7.4b4b` (`Accepted`)' "$PLAN"

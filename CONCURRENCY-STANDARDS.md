@@ -15,7 +15,13 @@ nonblocking lifecycle paths are owned by
 
 ---
 
-## C# Async/Await Rules
+## C# Async/Await Index
+
+This is a non-normative migration index. Generic asynchronous work ownership,
+failure observation, nonblocking execution, and cancellation are canonical in
+[Concurrency And Async Lifecycle](topics/concurrency.md). The retained C#
+subsections may specialize a selected runtime mechanism; they do not own or
+weaken the generic contract.
 
 ### Always Observe Task Errors
 

@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Resilience row 11 is complete; the next existing-owner
-cluster is Concurrency `STD-0269`.
+**Current phase:** Concurrency row 12 is complete; the next existing-owner
+cluster is C# async specialization `STD-0273` through `STD-0279`.
 
-**Next slice:** Milestone 7.4b8ak review and implement `STD-0269` under the Concurrency topic.
+**Next slice:** Milestone 7.4b8al review and implement `STD-0273` through `STD-0279` under the Concurrency topic.
 
 **Acceptance status:** `partial`
 
@@ -1265,7 +1265,16 @@ all structural/routing fixtures pass.
      earlier Contracts cleanup removed the source policy before its Resilience
      migration was recorded, and update the Contracts ownership checker to
      verify the resulting Contracts-to-Resilience routing boundary.
-   - `7.4b8ak` (`Planned`): review and implement Concurrency `STD-0269`.
+   - `7.4b8ak` (`Accepted`): close `STD-0269` as the non-normative C# async
+     migration index after generic work ownership, failure observation,
+     nonblocking execution, and cancellation moved to Concurrency; preserve
+     the separately owned C# child specializations without restoring a parent
+     policy. Replace the historical lifecycle checker's fixed post-migration
+     remainder with a count derived from its frozen group total and exact
+     accepted dispositions so this independently tracked index closure cannot
+     invalidate otherwise correct lifecycle evidence.
+   - `7.4b8al` (`Planned`): review and implement C# async specialization
+     `STD-0273` through `STD-0279`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
