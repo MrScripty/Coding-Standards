@@ -28,7 +28,7 @@ train_order	package_id	risk_class	owner	owner_action	verification_family	draft_m
 31	P25	new-owner-design	topics/diagnostics.md	create-before-populate	owner-contract	isolated-draft	full-suite	diagnostic-and-tracing-contract	core,workflow.verification,topic.contracts
 32	P26	new-owner-design	profiles/boundaries/persistence.md	create-before-populate	owner-contract	isolated-draft	full-suite	persistence-mutation-and-evolution-contract	core,workflow.verification,topic.contracts,topic.resilience
 33	P27	refinement	topics/contracts.md	existing-review	decision-table	isolated-draft	focused	http-error-contract	core,workflow.verification
-34	P28	new-owner-design	profiles/applications/frontend.md	create-before-populate	owner-contract	isolated-draft	full-suite	frontend-authority-and-projection-contract	core,workflow.verification,topic.contracts,topic.accessibility
+34	P28	consolidation	profiles/applications/frontend.md	existing-review	decision-table	isolated-draft	full-suite	frontend-authority-and-projection-contract	core,workflow.verification,topic.contracts,topic.accessibility
 35	P29	mechanical	STANDARDS-ROUTER.md	closure-only	migration-structure	serial-only	full-suite	root-index-closure	core
 36	P30	new-owner-design	reference/patterns/architecture.md	create-before-populate	owner-contract	isolated-draft	full-suite	architecture-pattern-reference-extraction	core,workflow.documentation
 37	P30	new-owner-design	reference/patterns/architecture.md	create-before-populate	owner-contract	isolated-draft	full-suite	architecture-pattern-reference-extraction	core,workflow.documentation

@@ -472,3 +472,4 @@ STD-0183	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the language-spec
 STD-0184	CODING-STANDARDS.md	CODING-STANDARDS.md	index	replace the TypeScript-specific parent with routes to the canonical general and async TypeScript profiles
 STD-0185	CODING-STANDARDS.md	profiles/languages/typescript.md	refine	select explicit annotations or inference from consumer declaration and evidence facts without exported-function or private-function defaults
 STD-0186	CODING-STANDARDS.md	profiles/languages/typescript.md	refine	project contract types from canonical authority and require runtime decoding without copied response raw-primitive any or assertion fallback
+STD-0187	CODING-STANDARDS.md	profiles/applications/frontend.md	index	replace the frontend parent with a non-normative route to the canonical application profile without retaining the legacy frontend file as authority

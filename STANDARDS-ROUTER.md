@@ -47,10 +47,12 @@ the objective, write set, regression check, and acceptance are obvious.
 | Condition | Select |
 | --- | --- |
 | Reusable package, crate, SDK, or library module | [Library](profiles/applications/library.md) |
-| Web or web-technology user interface | [Current frontend guidance](FRONTEND-STANDARDS.md) until migration |
+| Web or web-technology user interface, component, rendering path, interaction, frontend state projection, or frontend test changes | [Frontend application profile](profiles/applications/frontend.md) |
 | Common application launcher command projection, lifecycle, delegation, or outcome-preservation contract is required | [Launcher application profile](profiles/applications/launcher.md) |
 
 Do not select frontend or launcher guidance for a library-only code change.
+Frontend framework mechanisms do not transfer domain, persistence, transport,
+contract, or accessibility authority into the presentation layer.
 
 ## Boundary Profiles
 

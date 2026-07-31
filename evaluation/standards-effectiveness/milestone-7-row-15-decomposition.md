@@ -32,9 +32,9 @@ contract.
 
 ## Missing Owners
 
-Create useful non-empty contracts for `profiles/applications/frontend.md` and
-`topics/performance.md` before disposing their identifiers. TypeScript Async
-remains a specialization of the general TypeScript owner.
+Create a useful non-empty contract for `topics/performance.md` before disposing
+its identifiers. The Frontend owner now exists, and TypeScript Async remains a
+specialization of the general TypeScript owner.
 
 ## No Fallback
 
@@ -56,5 +56,5 @@ inventory, owner map, configuration, lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8bq` establishes the Frontend owner contract and refines
-`STD-0187`.
+Milestone `7.4b8br` establishes the Performance owner contract and refines
+`STD-0188` through `STD-0194`.

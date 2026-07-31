@@ -32,7 +32,7 @@ order	wave	start_id	end_id	source	owner	owner_state	activation	checkpoint
 31	application-boundaries	STD-0089	STD-0092	ARCHITECTURE-PATTERNS.md	topics/diagnostics.md	missing	owner-review	focused
 32	application-boundaries	STD-0106	STD-0118	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	missing	owner-review	focused
 33	application-boundaries	STD-0126	STD-0133	ARCHITECTURE-PATTERNS.md	topics/contracts.md	exists	pre-slice-review	focused
-34	application-boundaries	STD-0449	STD-0464	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	missing	owner-review	full-suite
+34	application-boundaries	STD-0449	STD-0464	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	exists	owner-review	full-suite
 35	reference-index-closure	STD-0001	STD-0006	README.md	STANDARDS-ROUTER.md	exists	final-closure	focused
 36	reference-index-closure	STD-0027	STD-0045	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	missing	owner-review	focused
 37	reference-index-closure	STD-0069	STD-0087	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	missing	owner-review	focused

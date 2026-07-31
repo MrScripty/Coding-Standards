@@ -4268,6 +4268,28 @@ outcomes and disposition coverage are unchanged.
 **Next slice:** `7.4b8bq`, establish the Frontend owner contract and refine
 `STD-0187`.
 
+**Slice `7.4b8bq` accepted:** established the Frontend application profile for
+UI projection, rendering, synchronization, interaction, accessibility
+specialization, and frontend-specific evidence.
+
+**No-fallback/legacy result:** removed the legacy frontend file as the parent
+route. Seventeen decisions and one exact disposition reject DOM authority,
+copied domain rules, global polling, pointer-only interaction, snapshot-only
+proof, and stale-content success with typed diagnostics.
+
+**Verification (2026-07-31):** `verify-frontend-owner-contract.sh`, metadata,
+routing, accelerated-plan, disposition, plan-structure, and the complete
+`verify-*.sh` suite passed in the isolated slice worktree.
+
+**Verification deviations:** the first focused runs found three prose
+assertions coupled to physical Markdown wrapping; they now check stable
+semantic fragments without changing decision outcomes. The execution train
+also required the next multi-identifier slice to name every Performance ID;
+the plan cursor now lists all seven IDs explicitly.
+
+**Next slice:** `7.4b8br`, establish the Performance owner contract and refine
+`STD-0188` through `STD-0194`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

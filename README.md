@@ -40,6 +40,7 @@ reference material.
 | [profiles/boundaries/language-bindings.md](profiles/boundaries/language-bindings.md) | Binding mechanisms, representation categories, thin adapters, conversion outcomes, and generated wrappers | Host-language APIs, generated bindings, stable ABIs, serialized values, or opaque handles |
 | [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
 | [profiles/applications/launcher.md](profiles/applications/launcher.md) | Launcher command projection, procedure delegation, process lifecycle, and outcome preservation | Repository launcher or launcher-visible action changes |
+| [profiles/applications/frontend.md](profiles/applications/frontend.md) | Frontend projection, rendering, synchronization, interaction, and evidence boundaries | Web or web-technology user-interface changes |
 | [profiles/frameworks/godot.md](profiles/frameworks/godot.md) | Godot engine affinity, dispatch ownership, and point-of-use object lifetime | Godot thread, deferred-dispatch, or object-lifetime mechanisms |
 | [profiles/languages/csharp/async.md](profiles/languages/csharp/async.md) | C# continuation scheduling, affinity, invocation isolation, and typed outcomes | C# async continuation or affinity mechanisms |
 | [profiles/languages/typescript.md](profiles/languages/typescript.md) | TypeScript public surfaces, inference, runtime decoding, and contract-type projection | TypeScript source, declarations, compiler configuration, generated types, or consumer surfaces |
@@ -54,7 +55,7 @@ reference material.
 | [COMMIT-STANDARDS.md](COMMIT-STANDARDS.md) | Migration index, conventional commit syntax, and message examples | Existing links and commit-message reference |
 | [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md) | System design patterns, monorepo package roles, executable contracts, composition roots, and resilient workflow coordination | Multi-layer, client-server, monorepo, or service-oriented apps |
 | [TOOLING-STANDARDS.md](TOOLING-STANDARDS.md) | Linting, hooks, automation | Enforcing code quality |
-| [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md) | Declarative rendering, UI synchronization, frontend testing/tooling conventions | Web, desktop UI, and component-heavy frontend codebases |
+| [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md) | Remaining frontend mechanism and testing guidance pending canonical population | Existing links and unmoved frontend concerns |
 | [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) | Migration index for canonical documentation, release, and recipe owners | Existing links only |
 | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) | Remaining string sanitization and network transport guidance | Security concerns not yet migrated to canonical topics and profiles |
 | [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) | Migration index plus remaining language-specific concurrency material | Existing links and unmoved language-specific concerns |

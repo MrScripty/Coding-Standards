@@ -72,11 +72,11 @@ TypeScript mechanism guidance is canonical in the
 mechanisms additionally use the
 [TypeScript Async profile](profiles/languages/typescript/async.md).
 
-### Frontend-Specific Standards
+## Frontend Standards Legacy Route
 
-For frontend rendering, state synchronization, hook timer management, UI
-testing practices, and React-specific tooling notes, see
-[FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md).
+Frontend projection, rendering, synchronization, interaction, and
+frontend-specific evidence are canonical in the
+[Frontend application profile](profiles/applications/frontend.md).
 
 ## Performance-Critical Code
 
