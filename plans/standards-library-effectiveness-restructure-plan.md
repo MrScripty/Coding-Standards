@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** the Godot framework owner contract exists; `STD-0277`,
-`STD-0278`, and `STD-0279` are ready for their bounded population slice.
+**Current phase:** row 13 is complete; immutable row 14 requires the Launcher
+application owner contract before `STD-0487` through `STD-0512` can move.
 
-**Next slice:** Milestone 7.4b8as refine `STD-0278` and `STD-0279` in the Godot profile and close `STD-0277` as its legacy index.
+**Next slice:** Milestone 7.4b8at establish the Launcher application owner contract before implementing `STD-0487` through `STD-0512`.
 
 **Acceptance status:** `partial`
 
@@ -1314,8 +1314,13 @@ all structural/routing fixtures pass.
      detached deferred work, check-then-use gaps, stale references, alternate
      dispatch, prior-invocation state, and default success. Do not dispose
      `STD-0277`, `STD-0278`, or `STD-0279`.
-   - `7.4b8as` (`Planned`): refine `STD-0278` and `STD-0279` in the Godot
-     profile and close `STD-0277` as its legacy index.
+   - `7.4b8as` (`Accepted`): refine `STD-0278` and `STD-0279` in the Godot
+     profile and close `STD-0277` as its non-normative legacy index. Replace
+     universal main-thread dispatch and validity-check-only guidance with
+     selected engine affinity, observable dispatch ownership, point-of-use
+     lifetime proof, and typed diagnostics.
+   - `7.4b8at` (`Planned`): establish the Launcher application owner contract
+     before implementing immutable row 14, `STD-0487` through `STD-0512`.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

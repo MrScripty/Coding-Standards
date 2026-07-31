@@ -64,15 +64,8 @@ canonical in the
 
 ---
 
-## Godot Thread Safety
+## Godot Framework Index
 
-### Main Thread Rule
-
-Godot node operations (`AddChild`, `Call`, `QueueFree`, signal emission)
-must run on the main thread. Use `CallDeferred` or `Callable.From(...).CallDeferred()`
-to marshal work to the main thread from async contexts.
-
-### `IsInstanceValid` Before Use
-
-Always check `GodotObject.IsInstanceValid(node)` before calling methods on
-a Godot node reference that may have been freed.
+This is a non-normative migration index. Godot engine affinity, dispatch
+ownership, and point-of-use object lifetime are canonical in the
+[Godot Framework Profile](profiles/frameworks/godot.md).

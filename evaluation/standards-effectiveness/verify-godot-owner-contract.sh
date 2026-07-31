@@ -52,10 +52,24 @@ rg -F -q '[profiles/frameworks/godot.md](profiles/frameworks/godot.md)' "$README
 
 mapfile -t dispositions < <(
   awk -F '\t' 'NR > 1 && $1 >= "STD-0277" && $1 <= "STD-0279" {
-    print $1
+    print $1 ":" $2 ":" $3 ":" $4 ":" $5
   }' "$DISPOSITIONS"
 )
-[[ "${#dispositions[@]}" -eq 0 ]]
+expected_dispositions=(
+  'STD-0277:CONCURRENCY-STANDARDS.md:CONCURRENCY-STANDARDS.md:index:convert the Godot thread-safety parent heading into a non-normative route to the canonical Godot framework profile'
+  'STD-0278:CONCURRENCY-STANDARDS.md:profiles/frameworks/godot.md:refine:select Godot engine affinity and observable dispatch from the operation contract rather than requiring one main-thread mechanism'
+  'STD-0279:CONCURRENCY-STANDARDS.md:profiles/frameworks/godot.md:refine:replace validity-check-only guidance with point-of-use object lifetime and identity proof across async and deferred boundaries'
+)
+[[ "${dispositions[*]}" == "${expected_dispositions[*]}" ]]
+
+readonly LEGACY="$R/CONCURRENCY-STANDARDS.md"
+rg -F -q '## Godot Framework Index' "$LEGACY"
+rg -F -q '[Godot Framework Profile](profiles/frameworks/godot.md)' "$LEGACY"
+! rg -F -q '## Godot Thread Safety' "$LEGACY"
+! rg -F -q '### Main Thread Rule' "$LEGACY"
+! rg -F -q '### `IsInstanceValid` Before Use' "$LEGACY"
+! rg -F -q 'Use `CallDeferred`' "$LEGACY"
+! rg -F -q 'Always check `GodotObject.IsInstanceValid(node)`' "$LEGACY"
 
 overlay_row="$(
   awk -F '\t' '$1 == 13 && $2 == 4 {
@@ -65,10 +79,11 @@ overlay_row="$(
 [[ "$overlay_row" == $'STD-0277,STD-0278,STD-0279\tprofiles/frameworks/godot.md\texists\tpre-slice-review' ]]
 
 rg -F -q '`7.4b8ar` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8as` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8as` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b8at` (`Planned`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8as'* ]]
-for id in STD-0277 STD-0278 STD-0279; do
+[[ "$next_slice_line" == *'Milestone 7.4b8at'* ]]
+for id in STD-0487 STD-0512; do
   [[ "$next_slice_line" == *"$id"* ]]
 done
 
@@ -76,4 +91,4 @@ done
 "$S/check-plan-structure.sh" "$PLAN"
 "$S/verify-plan-fixtures.sh"
 
-printf 'Godot owner contract passed: 14 decisions, owner established\n'
+printf 'Godot policy passed: 14 decisions, owner established, row-13 dispositions complete\n'

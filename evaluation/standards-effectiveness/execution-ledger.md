@@ -3870,6 +3870,21 @@ undisposed until population.
 **Next slice:** `7.4b8as`, refine `STD-0278` and `STD-0279` in the Godot
 profile and close `STD-0277` as its legacy index.
 
+**Slice `7.4b8as` accepted:** `STD-0277` has one exact `index` disposition and
+`STD-0278` and `STD-0279` have exact `refine` dispositions to the Godot
+profile. The legacy section now routes to the canonical framework profile;
+universal main-thread dispatch, `CallDeferred` prescription, and
+validity-check-only guidance are removed.
+
+**No-fallback/legacy result:** missing or contradictory affinity, dispatch,
+completion, lifetime, capability, or evidence cannot select a deferred call,
+stale validity result, alternate dispatcher, detached work, stale object
+reference, or default success. The selected operation must prove affinity,
+observable lifecycle, and object authority at use.
+
+**Next slice:** `7.4b8at`, establish the Launcher application owner contract
+before implementing immutable row 14, `STD-0487` through `STD-0512`.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.
