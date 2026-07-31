@@ -72,5 +72,5 @@ lockfile, or downstream repository.
 
 ## Next Slice
 
-Milestone `7.4b8ba` refines `STD-0508`, `STD-0509`, and `STD-0510` into
-Security.
+Milestone `7.4b8bb` decomposes immutable row 15 `STD-0135` through `STD-0194`
+by canonical owner and verification contract before population.

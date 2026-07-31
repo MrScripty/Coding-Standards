@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** row 14.4 build procedure is canonical; row 14.5
-Security-owned generated-command handling is next.
+**Current phase:** Launcher row 14 is complete; immutable row 15 requires
+bounded owner-and-correctness decomposition before population.
 
-**Next slice:** Milestone 7.4b8ba refine generated-command security `STD-0508`, `STD-0509`, and `STD-0510` into Security.
+**Next slice:** Milestone 7.4b8bb decompose row 15 `STD-0135` through `STD-0194` by canonical owner and verification contract.
 
 **Acceptance status:** `partial`
 
@@ -1373,8 +1373,14 @@ all structural/routing fixtures pass.
      evidence from the accepted artifact plan. Reject fixed action pairs,
      guessed targets, implicit compilation, development substitution, and
      successful no-op builds with typed diagnostics.
-   - `7.4b8ba` (`Planned`): refine `STD-0508`, `STD-0509`, and `STD-0510`
-     generated-command handling into Security.
+   - `7.4b8ba` (`Accepted`): refine `STD-0508`, `STD-0509`, and `STD-0510`
+     into Security. Require operation-contract validation, exact destination
+     grammar and encoding, preserved argument boundaries, and negative
+     semantic/encoding evidence. Remove raw interpolation and copied helper
+     examples; reject cross-grammar quoting, evaluation, partial output,
+     alternate destinations, raw values, and default commands.
+   - `7.4b8bb` (`Planned`): decompose row 15 `STD-0135` through `STD-0194`
+     by canonical owner and verification contract before population.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

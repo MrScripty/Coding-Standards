@@ -66,6 +66,31 @@ Do not fall back to a global catch-all validator, fixed rules, a cast, an
 independent inline validator, the original input, a permissive default, or a
 weaker validation mechanism.
 
+## Generated Command And Configuration Text
+
+When validated values are projected into command, launcher, desktop-entry,
+script, configuration, or other executable text, select the destination
+grammar and operation contract before serialization. Validate semantic values
+before encoding them, preserve argument boundaries, and encode each value for
+its exact destination field. Validation and destination encoding are separate
+proof obligations; quoting for one grammar does not authorize reuse in
+another.
+
+Construct output from structured arguments or fields whenever the destination
+supports them. If text generation is required, use an implementation whose
+conformance to the selected grammar is tested. Do not concatenate raw values,
+evaluate generated strings, reuse shell quoting for desktop entries, infer a
+URL scheme, or treat a helper name as proof of validation or encoding.
+
+Negative evidence covers spaces, separators, quotes, control characters,
+newlines, substitution syntax, option-like values, invalid schemes, and
+destination-specific metacharacters applicable to the selected grammar.
+Reject failed semantic validation or encoding as typed `invalid`; return typed
+`unsupported` for a well-formed value the destination cannot represent and
+typed `unavailable` when the required grammar, encoder, or validation authority
+cannot be established. Do not emit a partial command, alternate destination,
+raw value, or default command.
+
 ## Network Transport Boundary
 
 A listener's exposure comes from the declared service and deployment contract.

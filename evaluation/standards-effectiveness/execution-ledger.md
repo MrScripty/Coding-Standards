@@ -4007,6 +4007,20 @@ invalid and unavailable outcomes.
 **Next slice:** `7.4b8ba`, refine `STD-0508`, `STD-0509`, and `STD-0510`
 generated-command handling into Security.
 
+**Slice `7.4b8ba` accepted:** refined all three generated-command identifiers
+into canonical Security. Semantic validation, destination-grammar selection,
+encoding, argument boundaries, and negative evidence are now separate explicit
+proof obligations. Launcher retains only a route to accepted output.
+
+**No-fallback/legacy result:** removed raw interpolation and copied helper
+examples. Cross-grammar quoting, evaluation, helper-name proof, partial output,
+alternate destinations, raw values, and default commands are rejected with
+typed diagnostics. Fourteen focused decisions and three exact dispositions
+complete immutable Launcher row 14.
+
+**Next slice:** `7.4b8bb`, decompose row 15 `STD-0135` through `STD-0194` by
+canonical owner and verification contract before population.
+
 **Slice `7.4b8af` accepted:** `STD-0789` now marks the Rust build-system
 heading as a non-normative routing index. The separately owned child sections
 remain available without allowing the heading to introduce build policy.

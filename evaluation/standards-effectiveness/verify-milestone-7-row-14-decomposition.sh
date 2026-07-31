@@ -36,7 +36,7 @@ expected_dispositions=(
   STD-0487 STD-0488 STD-0489 STD-0490 STD-0491 STD-0492 STD-0493
   STD-0494 STD-0495 STD-0496 STD-0497 STD-0498 STD-0499 STD-0500
   STD-0501 STD-0502 STD-0503 STD-0504 STD-0505
-  STD-0506 STD-0507 STD-0511 STD-0512
+  STD-0506 STD-0507 STD-0508 STD-0509 STD-0510 STD-0511 STD-0512
 )
 mapfile -t dispositions < <(
   awk -F '\t' 'NR > 1 && $1 >= "STD-0487" && $1 <= "STD-0512" {
@@ -81,10 +81,9 @@ rg -F -q '`7.4b8ax` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b8ba'* ]]
-for id in STD-0508 STD-0509 STD-0510; do
-  [[ "$next_slice_line" == *"$id"* ]]
-done
+[[ "$next_slice_line" == *'Milestone 7.4b8bb'* ]]
+[[ "$next_slice_line" == *'STD-0135'* ]]
+[[ "$next_slice_line" == *'STD-0194'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"
