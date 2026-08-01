@@ -12,4 +12,6 @@ for t in '## Static Analysis And Compiler Configuration' 'actual TypeScript proj
 for id in STD-0677 STD-0678 STD-0679 STD-0680;do awk -F '\t' -v id="$id" '$1==id&&$3=="profiles/languages/typescript.md"&&$4=="split"{f=1}END{exit !f}' "$S/consolidation-dispositions.tsv";done
 rg -F -q '## TypeScript Tooling Examples' "$R/reference/recipes/tooling.md"
 ! rg -F -q 'Enable all strict checks for type safety' "$R/TOOLING-STANDARDS.md"
+! rg -F -q '// .prettierrc' "$R/TOOLING-STANDARDS.md"
+rg -F -q '"singleQuote": true' "$R/reference/recipes/tooling.md"
 printf 'TypeScript static analysis passed: 10 decisions, 4 split dispositions\n'

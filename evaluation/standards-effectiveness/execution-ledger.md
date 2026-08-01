@@ -4984,6 +4984,15 @@ recipes. Child `19.10` remains unchanged for standalone formatter commands.
 
 **Next slice:** `7.4b9j`, implement the reviewed formatting split package.
 
+## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
+
+Lookahead before child `19.9` found that the `.prettierrc` block embedded in
+`STD-0677` remained in the legacy source after the accepted TypeScript split.
+The accepted disposition already assigns product syntax to non-normative
+Tooling reference, so no replan was required. The block is now extracted to the
+reference recipe and focused negative coverage prevents recurrence. The
+execution cursor remains at child `19.9`.
+
 ## Row 19 TypeScript Policy And Recipe Split Replan
 
 **Outcome:** Accepted planning correction.

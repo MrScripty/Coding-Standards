@@ -128,6 +128,18 @@ Product-specific failure modes can include applying type-aware presets to
 non-TypeScript files, mixing ignore declarations into incompatible blocks, or
 using command flags unsupported by the selected configuration format.
 
+A formatter configuration used by the same legacy example was:
+
+```json
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 100
+}
+```
+
 A compiler example might enable `strict`, `noImplicitReturns`,
 `exactOptionalPropertyTypes`, or `noUncheckedIndexedAccess`. An architecture
 example might implement an owned prohibition through ESLint's

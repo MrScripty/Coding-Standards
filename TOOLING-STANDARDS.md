@@ -138,17 +138,6 @@ The former product-specific pitfalls are retained only in the non-normative
 Frontend-specific lint details (including React runtime-specific rule guidance)
 are defined in [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md).
 
-```json
-// .prettierrc
-{
-  "semi": true,
-  "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "printWidth": 100
-}
-```
-
 ### TypeScript Strict Mode
 
 Select compiler checks through the canonical TypeScript profile. The former
