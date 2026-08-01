@@ -1,0 +1,17 @@
+case	claim	metric	scope	authority	baseline	context	substitute	expected
+risk_diagnostic	named	branch	bounded	owned	applicable	recoverable	none	allow
+owned_threshold	named	line	bounded	owned	applicable	recorded	none	allow
+durable_fixture_context	named	none	fixture	owned	none	recorded	none	allow
+contradictory_metric	named	contradictory	bounded	owned	applicable	recorded	none	typed-invalid
+contradictory_authority	named	branch	bounded	contradictory	applicable	recorded	none	typed-invalid
+unsupported_instrumentation	named	unsupported	bounded	owned	applicable	recorded	none	typed-unsupported
+missing_authority	named	branch	bounded	missing	applicable	recorded	none	typed-unavailable
+missing_baseline	named	branch	bounded	owned	missing	recorded	none	typed-unavailable
+missing_context	named	none	fixture	owned	none	missing	none	typed-unavailable
+percentage_quality	named	line	bounded	owned	applicable	recorded	high-coverage	typed-invalid
+fixed_target	named	line	bounded	owned	applicable	recorded	fixed-percent	typed-invalid
+exclusion_list	named	line	bounded	owned	applicable	recorded	conventional-exclusions	typed-invalid
+inline_comment	named	none	fixture	owned	none	recorded	inline-required	typed-invalid
+diagram_template	named	none	fixture	owned	none	recorded	diagram-required	typed-invalid
+documented_intent	named	branch	bounded	owned	applicable	recorded	documentation-proof	typed-invalid
+instrumentation_success	named	branch	bounded	owned	applicable	recorded	tool-success	typed-invalid

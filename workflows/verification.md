@@ -244,6 +244,34 @@ tooling, or execution facts are `unavailable`. Do not choose colocated,
 mirrored-tree, hybrid, suite-level directories, README documentation, or a
 `function_scenario_result` template as fallback.
 
+## Coverage And Durable Evidence Records
+
+Coverage reports where instrumented execution did or did not traverse code. It
+is a diagnostic for finding unexamined paths and does not prove observable
+behavior, boundary agreement, environment fidelity, assertion quality, or
+objective acceptance by itself.
+
+Use line, branch, function, condition, mutation, path, or other coverage only
+when it helps evaluate a named risk or claim. Select scope, instrumentation,
+threshold, baseline, and exclusions from repository history, generated and
+unreachable-code authority, risk, tooling accuracy, and decision cost. Record
+why a threshold or exclusion affects acceptance; do not infer quality from a
+percentage or copy a conventional exclusion list.
+
+Record the smallest durable context needed to understand, reproduce, and
+review evidence when that context cannot be recovered from the check name,
+code, fixture, command, result, or canonical contract. Useful context may
+include the originating defect, non-obvious invariant, fixture shape authority,
+material environment facts, or interpretation of a measured result. Put it at
+the owning evidence or linked artifact rather than requiring an inline comment,
+diagram, table, README section, or copied template.
+
+Contradictory metric, scope, authority, threshold, exclusion, or evidence facts
+are `invalid`. Unsupported instrumentation is `unsupported`. Missing material
+baseline, tooling, authority, or reproduction context is `unavailable`. Do not
+substitute high coverage, target attainment, documented intent, a fixture
+diagram, or successful instrumentation for the required claim.
+
 ## Scheduling And Duration
 
 Risk, cost, and available environments determine where and when evidence runs.

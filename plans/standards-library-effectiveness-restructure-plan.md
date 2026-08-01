@@ -10,9 +10,9 @@
 Language Bindings, Resilience, Contracts, Frontend, and Performance children
 are accepted.
 
-**Next slice:** Milestone 7.4b8cf refine `STD-0625`, `STD-0626`, `STD-0627`,
-`STD-0628`, `STD-0629`, `STD-0630`, and `STD-0631` into Verification-owned
-coverage interpretation and durable evidence documentation.
+**Next slice:** Milestone 7.4b8cg refine `STD-0632`, `STD-0633`, and `STD-0634`
+into Verification-owned test-data authority, identity, isolation, construction,
+and lifecycle.
 
 **Acceptance status:** `partial`
 
@@ -1528,8 +1528,11 @@ all structural/routing fixtures pass.
      ownership, discovery, tooling, execution, and diagnosis facts. Reject
      colocated, mirrored, hybrid, suite-directory, README, and naming-template
      defaults with typed diagnostics.
-   - `7.4b8cf` (`Planned`): refine `STD-0625` through `STD-0631` into coverage
-     interpretation and durable evidence documentation.
+   - `7.4b8cf` (`Accepted`): refine `STD-0625` through `STD-0631` into coverage
+     interpretation and durable evidence documentation. Select metrics,
+     thresholds, exclusions, and records from named risks and non-recoverable
+     evidence facts. Reject fixed percentages, conventional exclusions,
+     coverage-as-quality, inline-comment, diagram, and documentation defaults.
    - `7.4b8cg` (`Planned`): refine `STD-0632` through `STD-0634` into test-data
      authority, identity, isolation, construction, and lifecycle.
    - `7.4b8ch` (`Planned`): refine `STD-0636` through `STD-0638` and `STD-0640`

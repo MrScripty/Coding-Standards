@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b8cf` refines `STD-0625` through `STD-0631` into Verification
-coverage interpretation and durable evidence documentation.
+Milestone `7.4b8cg` refines `STD-0632` through `STD-0634` into Verification
+test-data authority, identity, isolation, construction, and lifecycle.

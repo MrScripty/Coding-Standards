@@ -4617,6 +4617,29 @@ remaining IDs across 63 completed and 34 pending logical clusters, with child
 **Next slice:** `7.4b8cf`, refine `STD-0625` through `STD-0631` into
 Verification coverage interpretation and durable evidence documentation.
 
+## Milestone 7.4b8cf: Testing Coverage And Documentation
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Verification now treats coverage as a diagnostic selected
+from a named risk and records only the durable evidence context that cannot be
+recovered from names, code, fixtures, commands, results, or canonical
+contracts. Thresholds, exclusions, and record locations require authority.
+
+**No-fallback/legacy result:** fixed percentages, conventional exclusion lists,
+coverage-as-quality, inline-comment, diagram, table, documentation, and
+instrumentation-success defaults cannot establish acceptance. Missing material
+authority, baseline, tooling, or context returns typed diagnostics.
+
+**Verification:** focused decisions cover 16 allowed, invalid, unsupported,
+and unavailable outcomes plus exact replacement and seven dispositions. All
+130 repository checkers pass; the execution train reports 256 completed and
+333 remaining IDs across 64 completed and 33 pending logical clusters, with
+child `18.11` active.
+
+**Next slice:** `7.4b8cg`, refine `STD-0632` through `STD-0634` into
+Verification test-data authority and lifecycle.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

@@ -575,3 +575,10 @@ STD-0604	TESTING-STANDARDS.md	workflows/verification.md	refine	select placement 
 STD-0605	TESTING-STANDARDS.md	workflows/verification.md	refine	allow colocated evidence when selected by repository facts without treating adjacency or package count as authority
 STD-0606	TESTING-STANDARDS.md	workflows/verification.md	refine	allow separate test roots when selected by repository facts without mirrored-tree language or build-system defaults
 STD-0607	TESTING-STANDARDS.md	workflows/verification.md	refine	name checks for stable scenario result invariant and differentiating conditions without function-scenario-result or language-example templates
+STD-0625	TESTING-STANDARDS.md	workflows/verification.md	index	replace coverage guidance parent with a non-normative route to canonical coverage interpretation
+STD-0626	TESTING-STANDARDS.md	workflows/verification.md	refine	select coverage metric scope threshold and baseline from named risk history tooling and decision cost without universal percentages
+STD-0627	TESTING-STANDARDS.md	workflows/verification.md	refine	select coverage exclusions from generated unreachable and instrumentation authority without conventional exclusion lists
+STD-0628	TESTING-STANDARDS.md	workflows/verification.md	refine	treat coverage as a path diagnostic without inferring behavior assertion quality evidence fidelity or acceptance from target attainment
+STD-0629	TESTING-STANDARDS.md	workflows/verification.md	index	replace test documentation parent with a non-normative route to canonical durable evidence records
+STD-0630	TESTING-STANDARDS.md	workflows/verification.md	refine	record non-recoverable defect invariant environment and interpretation context at the owning evidence without mandatory inline comments
+STD-0631	TESTING-STANDARDS.md	workflows/verification.md	refine	record non-recoverable fixture shape authority at the owning artifact without mandatory diagrams tables or templates

@@ -61,40 +61,16 @@ selected, belongs in the applicable language profile.
 
 ## Coverage Guidance
 
-Coverage is a diagnostic for unexercised code, not acceptance evidence by
-itself. A project may set line, branch, or function targets when historical
-data and risk justify them. Do not apply universal percentages across unrelated
-repositories.
-
-### What to Exclude from Coverage
-
-- Generated code
-- Simple getters/setters with no logic
-- Framework boilerplate
-- Debug-only code (`#[cfg(debug_assertions)]`)
-- Panic handlers and unreachable code
-
-### Coverage is Not Quality
-
-High coverage does not mean good tests. Focus on:
-
-- Testing behavior, not implementation
-- Edge cases and error paths
-- Meaningful assertions
+Coverage interpretation, threshold authority, exclusions, and typed outcomes
+are owned by [Verification](workflows/verification.md#coverage-and-durable-evidence-records).
 
 ---
 
 ## Test Documentation
 
-### Document Non-Obvious Tests
-
-Document the defect, scenario, and invariant directly above the test when the
-reason for the test is not obvious from its name.
-
-### Document Test Fixtures
-
-Document fixtures with the smallest diagram or data table that explains why the
-shape matters.
+Durable evidence and fixture-context records are owned by
+[Verification](workflows/verification.md#coverage-and-durable-evidence-records).
+Documentation mechanisms follow the owning repository and evidence artifact.
 
 ---
 
