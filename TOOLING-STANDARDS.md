@@ -1,6 +1,7 @@
 # Tooling Standards
 
-Code quality automation through linting, formatting, and pre-commit hooks.
+Legacy tooling guidance pending exact migration. Canonical generic automation
+authority is [Tooling](workflows/tooling.md).
 
 > **Acceptance authority:** [workflows/verification.md](workflows/verification.md)
 > defines acceptance claims and what evidence proves. This file owns automation,
@@ -9,6 +10,10 @@ Code quality automation through linting, formatting, and pre-commit hooks.
 > claim.
 
 ## Pre-Commit Hooks
+
+Canonical hook selection and orchestration are defined by
+[Tooling](workflows/tooling.md). The remaining subsections are migration input,
+not competing generic authority.
 
 ### Why Pre-Commit Hooks
 
@@ -37,6 +42,9 @@ lefthook install
 ```
 
 ### Basic Configuration
+
+Canonical configuration selection is defined by [Tooling](workflows/tooling.md).
+The example below remains migration input pending its reference disposition.
 
 See [templates/lefthook.yml](templates/lefthook.yml) for a ready-to-use template.
 
@@ -69,6 +77,9 @@ pre-push:
 
 ### Hook Categories
 
+Canonical scheduling is defined by [Tooling](workflows/tooling.md). The table
+below remains migration input and does not define default stages.
+
 | Hook | When | Typical Checks |
 |------|------|-------------|
 | pre-commit | Before each commit | Affected fast checks with useful local feedback |
@@ -93,6 +104,9 @@ not infer it from an arbitrary local or remote branch name.
 
 ### Performance Tips
 
+Canonical scheduling and cost decisions are defined by
+[Tooling](workflows/tooling.md). The list below remains migration input.
+
 1. **Run in parallel** - Independent checks should run concurrently
 2. **Check only staged files** - Use `{staged_files}` placeholder
 3. **Schedule by measured cost** - Keep interactive hooks useful and place
@@ -100,6 +114,10 @@ not infer it from an arbitrary local or remote branch name.
 4. **Use file globs** - Only run checks on relevant file types
 
 ### Persisted Artifact Validation Hooks
+
+Canonical persisted-artifact check orchestration is defined by
+[Tooling](workflows/tooling.md). The recommendations below remain migration
+input and are not defaults.
 
 If the repo commits JSON, YAML, manifests, templates, saved workflows, or other
 schema-backed artifacts, add fast staged-file validation where feasible.

@@ -23,6 +23,7 @@ for text in '## Proposed Owner Contract' 'does not own what evidence proves' \
   rg -F -q "$text" "$RPT"
 done
 rg -F -q '`7.4b9a` (`Accepted`)' "$P"
-rg -F -q '`7.4b9b` (`Planned`)' "$P"
-[[ ! -e "$R/workflows/tooling.md" ]]
+rg -F -q '`7.4b9b` (`Accepted`)' "$P"
+rg -F -q '`7.4b9c` (`Planned`)' "$P"
+[[ -e "$R/workflows/tooling.md" ]]
 printf 'Milestone 7 row-19 decomposition passed: 50 IDs across 19 children\n'

@@ -65,6 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9b` defines the validated Tooling owner contract and complete
-semantic decomposition for all 50 row-19 identifiers before normative
-population.
+Milestone `7.4b9c` routes the next Tooling child to canonical Commit authority
+for history review and explicit hook bypass without rewrite or bypass defaults.

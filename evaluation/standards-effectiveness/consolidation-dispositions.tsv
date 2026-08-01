@@ -599,3 +599,9 @@ STD-0651	TESTING-STANDARDS.md	workflows/verification.md	index	replace diagnosis 
 STD-0652	TESTING-STANDARDS.md	workflows/verification.md	refine	select correction and re-verification from affected claims and contracts without compile layer launch lookup escalation or retry checklist defaults
 STD-0602	TESTING-STANDARDS.md	workflows/verification.md	index	replace the legacy Testing source parent with a non-normative routing index after exact disposition closure
 STD-0653	TESTING-STANDARDS.md	workflows/verification.md	retire	remove checklist completion as acceptance and route completion to accepted claims observed results and canonical owners
+STD-0654	TOOLING-STANDARDS.md	workflows/tooling.md	refine	separate generic tooling orchestration from acceptance authority and legacy tool defaults
+STD-0655	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select hook use from execution inputs failure bypass feedback and owned procedure facts without a hook default
+STD-0660	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select hook configuration from repository consumer platform dependency and support facts without a format or command default
+STD-0662	TOOLING-STANDARDS.md	workflows/tooling.md	refine	schedule selected checks from claim environment input cost safety and reporting facts without hook-stage categories as defaults
+STD-0664	TOOLING-STANDARDS.md	workflows/tooling.md	refine	optimize tool scheduling from measured cost and owned evidence without parallel staged-file glob or later-gate defaults
+STD-0665	TOOLING-STANDARDS.md	workflows/tooling.md	refine	orchestrate persisted-artifact checks from producer consumer schema regeneration and evidence contracts without staged validation defaults

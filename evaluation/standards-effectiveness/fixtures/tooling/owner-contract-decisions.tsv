@@ -1,0 +1,13 @@
+case	facts	authority	capability	scope	schedule	fallback	expected
+supported_hook	complete	explicit	supported	complete	complete	none	allow
+persisted_artifact	complete	explicit	supported	complete	complete	none	allow
+contradictory_facts	contradictory	explicit	supported	complete	complete	none	typed-invalid
+missing_authority	complete	missing	supported	complete	complete	none	typed-invalid
+missing_scope	complete	explicit	supported	missing	complete	none	typed-unavailable
+missing_schedule	complete	explicit	supported	complete	missing	none	typed-unavailable
+unsupported_toolchain	complete	explicit	unsupported	complete	complete	none	typed-unsupported
+default_tool	complete	explicit	supported	complete	complete	conventional-tool	typed-invalid
+default_stage	complete	explicit	supported	complete	complete	pre-commit	typed-invalid
+staged_default	complete	explicit	supported	complete	complete	staged-files	typed-invalid
+weaker_check	complete	explicit	supported	complete	complete	weaker-check	typed-invalid
+successful_noop	complete	explicit	supported	complete	complete	successful-noop	typed-invalid

@@ -6,12 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Testing-source closure and row 19 Tooling decomposition are
-accepted; bounded Tooling owner implementation is active.
+**Current phase:** The bounded Tooling owner and row 19 child 19.1 are accepted;
+commit-authority routing for child 19.2 is active.
 
-**Next slice:** Milestone 7.4b9b for `STD-0654`, `STD-0655`, `STD-0660`,
-`STD-0662`, `STD-0664`, and `STD-0665`; establish the bounded Tooling owner and
-hook orchestration contract.
+**Next slice:** Milestone 7.4b9c for `STD-0663` and `STD-0703`; route history
+review and hook bypass to Commit authority without rewrite or bypass defaults.
 
 **Acceptance status:** `partial`
 
@@ -1558,10 +1557,13 @@ all structural/routing fixtures pass.
      `7.4b8cj`; define the validated Tooling owner contract and decompose all 50
      row-19 identifiers together as a planning package before any normative
      Tooling population.
-   - `7.4b9b` (`Planned`): create the bounded `workflows/tooling.md` owner and
+   - `7.4b9b` (`Accepted`): create the bounded `workflows/tooling.md` owner and
      refine `STD-0654`, `STD-0655`, `STD-0660`, `STD-0662`, `STD-0664`, and
      `STD-0665` into hook selection, configuration, scheduling, cost, and
      persisted-artifact check orchestration without tool or stage defaults.
+   - `7.4b9c` (`Planned`): refine `STD-0663` and `STD-0703` into Commit
+     authority for history review and explicit hook bypass without automated
+     rewrite, inferred authority, or bypass defaults.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

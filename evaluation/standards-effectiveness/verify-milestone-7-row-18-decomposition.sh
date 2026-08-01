@@ -49,7 +49,7 @@ for text in 'Those concerns do not share one canonical' \
   '## Ordered Implementation' 'suite labels as evidence' 'typed diagnostics' \
   'no normative or legacy standard' '## Refined Verification Boundary' \
   'eight Verification children' 'final legacy-closure child' \
-  'Milestone `7.4b9b`'; do
+  'Milestone `7.4b9c`'; do
   rg -F -q "$text" "$REPORT"
 done
 
@@ -67,14 +67,14 @@ rg -F -q '`7.4b8cg` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ch` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ci` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8cj` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b9b` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b9c` (`Planned`)' "$PLAN"
 next_slice_block="$(awk '
   /^\*\*Next slice:\*\*/ { capture = 1 }
   capture && /^$/ { exit }
   capture { print }
 ' "$PLAN")"
-[[ "$next_slice_block" == *'Milestone 7.4b9b'* ]]
-for id in STD-0654 STD-0655 STD-0660 STD-0662 STD-0664 STD-0665; do
+[[ "$next_slice_block" == *'Milestone 7.4b9c'* ]]
+for id in STD-0663 STD-0703; do
   [[ "$next_slice_block" == *"$id"* ]]
 done
 

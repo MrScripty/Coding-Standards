@@ -4794,6 +4794,27 @@ remaining IDs across 68 completed and 47 pending logical clusters, with child
 `19.1` for `STD-0654`, `STD-0655`, `STD-0660`, `STD-0662`, `STD-0664`, and
 `STD-0665`.
 
+## Milestone 7.4b9b: Tooling Owner And Hook Orchestration
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** `workflows/tooling.md` now owns generic development-tool
+selection, configuration, automation, scheduling, cost, and reporting. The six
+child-19.1 identifiers have exact dispositions and the router no longer sends
+tool configuration changes to the legacy source.
+
+**No-fallback result:** hook products, stages, staged-file scope, parallelism,
+globs, commands, successful no-ops, weaker checks, and alternate execution
+paths are not defaults. Missing or contradictory planning facts return typed
+`invalid`, `unavailable`, or `unsupported` outcomes.
+
+**Verification:** focused owner decisions, metadata, routes, exact
+dispositions, execution train, plan lifecycle, and all 137 repository checkers
+pass. The execution train reports 279 completed and 310 remaining IDs across 69
+completed and 46 pending logical clusters, with child `19.2` active.
+
+**Next slice:** `7.4b9c`, route `STD-0663` and `STD-0703` to Commit authority.
+
 **Verification deviation:** the mechanical cursor advance initially changed
 the frozen first identifier of row `18.14` from `STD-0602` to `STD-0654`. The
 immutable row was restored before focused verification, and the active planning

@@ -36,7 +36,7 @@ observable task conditions. Do not read every document by default.
 | Multi-step work, architectural decisions, or re-planning | [Planning](workflows/planning.md) |
 | Commit creation or history maintenance | [Commit](workflows/commit.md) |
 | Durable responsibility, decision, contract, or operational procedure changes | [Documentation](workflows/documentation.md) |
-| CI or tool configuration changes | [Current tooling guidance](TOOLING-STANDARDS.md) until migration |
+| CI or development-tool selection, configuration, scheduling, or orchestration changes | [Tooling](workflows/tooling.md) |
 | Shipping an artifact, changing a published version promise, or preparing consumer-visible release information | [Release](workflows/release.md) |
 
 Small, local, low-risk changes do not require a large implementation plan when

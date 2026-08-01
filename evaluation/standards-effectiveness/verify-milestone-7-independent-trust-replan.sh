@@ -94,11 +94,11 @@ done
 
 expected_groups=(
   $'1\ttopics/security.md\t7\texists\ttopics/contracts.md\ttrain-decomposed\tnone\tSTD-0583,STD-0601'
-  $'2\ttopics/cross-platform.md\t6\texists\tnone\tdecomposition-and-missing-owner\tworkflows/tooling.md\tnone'
+  $'2\ttopics/cross-platform.md\t6\texists\tnone\tdecomposition\tnone\tnone'
   $'3\tprofiles/boundaries/interop.md\t10\texists\ttopics/contracts.md\ttrain-decomposed\tnone\tSTD-0473'
   $'4\tprofiles/languages/rust/interop.md\t1\texists\tprofiles/languages/rust/language-bindings.md,topics/contracts.md\tpretrain-complete\tnone\tSTD-0757'
   $'5\tprofiles/languages/rust/security.md\t3\texists\ttopics/security.md\ttrain-decomposed\tnone\tSTD-0824'
-  $'6\tprofiles/languages/rust/language-bindings.md\t34\texists\tprofiles/boundaries/language-bindings.md,profiles/languages/rust/async.md\tdecomposition-and-missing-owner\tworkflows/tooling.md\tnone'
+  $'6\tprofiles/languages/rust/language-bindings.md\t34\texists\tprofiles/boundaries/language-bindings.md,profiles/languages/rust/async.md\tdecomposition\tnone\tnone'
 )
 mapfile -t actual_groups < <(tail -n +2 "$GROUP_FILE")
 [[ "${actual_groups[*]}" == "${expected_groups[*]}" ]]

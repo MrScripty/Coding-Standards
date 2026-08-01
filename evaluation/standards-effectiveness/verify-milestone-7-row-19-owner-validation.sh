@@ -25,7 +25,9 @@ rg -F -q 'Row 19 owner-validation gate (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b9a` (`Accepted`): perform the row 19 complete decomposition' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9b` (`Planned`)' \
+rg -F -q '`7.4b9b` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-[[ ! -e "$R/workflows/tooling.md" ]]
+rg -F -q '`7.4b9c` (`Planned`)' \
+  "$R/plans/standards-library-effectiveness-restructure-plan.md"
+[[ -e "$R/workflows/tooling.md" ]]
 printf 'Milestone 7 row-19 owner validation passed: 50 exact proposals\n'
