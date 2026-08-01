@@ -28,6 +28,6 @@ for milestone in 7.4b8bu 7.4b8bv 7.4b8bw 7.4b8bx 7.4b8by 7.4b8cb \
   7.4b8cc 7.4b8cd 7.4b8ce 7.4b8cf 7.4b8cg 7.4b8ch 7.4b8ci 7.4b8cj; do
   rg -F -q "\`$milestone\` (\`Accepted\`)" "$P"
 done
-rg -F -q '`7.4b9i` (`Planned`)' "$P"
+rg -F -q '`7.4b9j` (`Planned`)' "$P"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing source closure passed: 52 dispositions, 8 routes\n'

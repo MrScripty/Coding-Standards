@@ -18,6 +18,7 @@ while IFS=$'\t' read -r case surface authority runtime_input projection evidence
 done < "$S/fixtures/typescript/owner-contract-decisions.tsv"
 for text in 'ID: `profile.language.typescript`' '## Public Type Surfaces' \
   '## Runtime Boundaries' '## Contract Type Projection' \
+  '## Static Analysis And Compiler Configuration' \
   'Do not require explicit return types for every exported function' \
   'TypeScript types do not validate runtime values' \
   'wrapping every string or'; do
@@ -36,7 +37,11 @@ rg -F -q '[TypeScript profile](profiles/languages/typescript.md)' \
 mapfile -t ids < <(awk -F '\t' '$1>="STD-0184"&&$1<="STD-0186"{print $1}' \
   "$S/consolidation-dispositions.tsv" | sort)
 [[ "${ids[*]}" == 'STD-0184 STD-0185 STD-0186' ]]
+for id in STD-0677 STD-0678 STD-0679 STD-0680; do
+  awk -F '\t' -v id="$id" '$1==id&&$3=="profiles/languages/typescript.md"&&$4=="split"{f=1}END{exit !f}' \
+    "$S/consolidation-dispositions.tsv"
+done
 rg -F -q '`7.4b8bp` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9i` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b9j` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
-printf 'TypeScript owner contract passed: 17 decisions, 3 dispositions\n'
+printf 'TypeScript owner contract passed: 17 decisions, 3 direct and 4 split dispositions\n'

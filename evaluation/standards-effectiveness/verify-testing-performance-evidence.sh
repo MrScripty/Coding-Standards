@@ -43,7 +43,7 @@ rg -F -q '`7.4b8ca` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8cb` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9i` (`Planned`)' \
+rg -F -q '`7.4b9j` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing performance evidence passed: 15 decisions, 3 dispositions\n'

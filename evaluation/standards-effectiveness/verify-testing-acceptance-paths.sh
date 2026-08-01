@@ -50,7 +50,7 @@ mapfile -t ids < <(awk -F '\t' \
 [[ "${ids[*]}" == 'STD-0608 STD-0609 STD-0610 STD-0612 STD-0613 STD-0614 STD-0615' ]]
 rg -F -q '`7.4b8cc` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9i` (`Planned`)' \
+rg -F -q '`7.4b9j` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing acceptance paths passed: 16 decisions, 7 dispositions\n'

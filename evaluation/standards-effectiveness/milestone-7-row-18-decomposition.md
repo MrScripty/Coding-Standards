@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9i` splits durable TypeScript lint, compiler, and architecture
-policy from non-normative ESLint, Prettier, `tsconfig`, and custom-rule recipes.
+Milestone `7.4b9j` selects formatting ownership, editor automation, scheduling,
+and lint separation without format-on-save, CI, or tool-pair defaults.

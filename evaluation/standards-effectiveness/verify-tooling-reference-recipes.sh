@@ -21,6 +21,10 @@ for text in '## Linter Category Examples' 'taxonomy and products are illustrativ
   '../../workflows/tooling.md#lint-policy-and-orchestration'; do
   rg -F -q "$text" "$F"
 done
+for text in '## TypeScript Tooling Examples' 'Product-specific failure modes' \
+  'examples only, not defaults'; do
+  rg -F -q "$text" "$F"
+done
 
 for row in \
   $'STD-0656\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tretire' \
@@ -52,4 +56,6 @@ rg -F -q '[reference/recipes/tooling.md](reference/recipes/tooling.md)' "$R/READ
 ! rg -F -q 'See [templates/.editorconfig]' "$L"
 ! rg -F -q '# Web files typically use 2-space indent' "$L"
 ! rg -F -q '| Category | Purpose | Examples |' "$L"
+! rg -F -q 'Enable all strict checks for type safety' "$L"
+! rg -F -q '| Mistake | Symptom | Fix |' "$L"
 printf 'Tooling reference recipes passed: non-normative examples with 12 exact dispositions\n'

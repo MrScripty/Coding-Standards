@@ -1,0 +1,11 @@
+case	facts	authority	capability	boundary	fallback	expected
+supported	complete	explicit	supported	complete	none	allow
+contradictory	contradictory	explicit	supported	complete	none	typed-invalid
+missing_authority	complete	missing	supported	complete	none	typed-unavailable
+missing_boundary	complete	explicit	supported	missing	none	typed-unavailable
+unsupported	complete	explicit	unsupported	complete	none	typed-unsupported
+eslint_default	complete	explicit	supported	complete	eslint-9	typed-invalid
+preset_default	complete	explicit	supported	complete	strict-preset	typed-invalid
+flags_default	complete	explicit	supported	complete	strict-flags	typed-invalid
+rule_default	complete	explicit	supported	complete	custom-rule	typed-invalid
+weaker_scope	complete	explicit	supported	complete	broaden-scope	typed-invalid

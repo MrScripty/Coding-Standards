@@ -62,6 +62,26 @@ Do not continue with `any`, assertions, stale declarations, copied shapes,
 alternate generators, raw primitives that erase required distinctions, or
 default success.
 
+## Static Analysis And Compiler Configuration
+
+Select type-aware lint scope from the actual TypeScript project boundaries,
+included source and configuration consumers, parser/compiler compatibility,
+generated-source authority, and required lint claims. Select compiler checks
+individually from owned invariants, emitted declaration contracts, runtime
+assumptions, migration constraints, and supported toolchain capability.
+
+Architecture analysis must derive prohibited and required relationships from
+the canonical architecture contract. A linter selector or custom rule is an
+implementation mechanism, not architecture authority. Do not default to an
+ESLint version, parser, preset, formatter integration, file glob, ignore list,
+strict-mode bundle, compiler-flag list, severity, or custom-rule implementation.
+
+Contradictory project, compiler, consumer, or architecture facts are `invalid`.
+Missing project boundaries, rule authority, or required configuration evidence
+is `unavailable`. Required analysis unsupported by the selected compiler or
+toolchain is `unsupported`; do not broaden scope, disable the check, copy a
+nearby preset, or accept a compiler pass as runtime or architecture proof.
+
 ## Verification
 
 Evidence covers applicable compiler configuration, emitted declarations,

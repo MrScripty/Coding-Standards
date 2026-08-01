@@ -125,52 +125,15 @@ non-normative [Tooling recipe](reference/recipes/tooling.md#linter-category-exam
 
 ### TypeScript/JavaScript: ESLint 9+ (Flat Config) + Prettier
 
-**IMPORTANT:** In ESLint 9 flat config, type-aware rules (like `strictTypeChecked`) must be
-scoped inside a `files` block. Applying them globally will attempt to type-check non-TS files
-(config files, JS scripts, etc.) and fail. Always scope type-checked rules to source files.
-
-```javascript
-// eslint.config.js
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import prettier from 'eslint-config-prettier';
-
-export default tseslint.config(
-    // Global ignores — always a separate block with no other keys
-    {
-        ignores: ['dist/**', 'node_modules/**', 'scripts/**', '*.config.*'],
-    },
-    // Type-aware rules scoped to source files only
-    {
-        files: ['src/**/*.{ts,tsx}'],
-        extends: [
-            eslint.configs.recommended,
-            ...tseslint.configs.strictTypeChecked,
-            prettier,
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: './tsconfig.json',
-            },
-        },
-        rules: {
-            '@typescript-eslint/no-unused-vars': [
-                'error',
-                { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
-            ],
-            'no-console': 'error',
-        },
-    }
-);
-```
+Canonical TypeScript static-analysis policy is defined by the
+[TypeScript profile](profiles/languages/typescript.md#static-analysis-and-compiler-configuration).
+Product syntax is retained only in the non-normative
+[Tooling recipe](reference/recipes/tooling.md#typescript-tooling-examples).
 
 #### Common Flat Config Pitfalls
 
-| Mistake | Symptom | Fix |
-|---------|---------|-----|
-| `strictTypeChecked` at top level | Type errors on `.js` config files | Move into `files: ['src/**/*.{ts,tsx}']` block |
-| Missing `ignores` block | Linting `dist/`, `node_modules/` | Add separate `{ ignores: [...] }` block |
-| `--ext ts,tsx` flag | Silently ignored in flat config | Use `files` patterns instead |
+The former product-specific pitfalls are retained only in the non-normative
+[Tooling recipe](reference/recipes/tooling.md#typescript-tooling-examples).
 
 Frontend-specific lint details (including React runtime-specific rule guidance)
 are defined in [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md).
@@ -188,42 +151,13 @@ are defined in [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md).
 
 ### TypeScript Strict Mode
 
-Enable all strict checks for type safety:
-
-```json
-// tsconfig.json
-{
-  "compilerOptions": {
-    "strict": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "exactOptionalPropertyTypes": true,
-    "noUncheckedIndexedAccess": true
-  }
-}
-```
+Select compiler checks through the canonical TypeScript profile. The former
+flag list is retained only in the non-normative Tooling recipe.
 
 ### Custom Rules for Architecture
 
-Enforce architectural patterns with custom lint rules:
-
-```javascript
-// .eslintrc.js - Prevent direct state mutation
-{
-  rules: {
-    'no-restricted-syntax': [
-      'error',
-      {
-        selector: 'AssignmentExpression[left.object.name="state"]',
-        message: 'Do not mutate state directly. Use setState or dispatch.',
-      },
-    ],
-  },
-}
-```
+Derive architecture checks from canonical architecture authority. The former
+custom-rule implementation is retained only in the non-normative Tooling recipe.
 
 ---
 

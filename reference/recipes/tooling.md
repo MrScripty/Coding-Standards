@@ -109,3 +109,27 @@ The taxonomy and products are illustrative only. The canonical
 [lint policy](../../workflows/tooling.md#lint-policy-and-orchestration) selects
 purpose, rules, scope, severity, and tooling from owned facts; it does not infer
 them from a category label or this product list.
+
+## TypeScript Tooling Examples
+
+After the canonical [TypeScript profile](../../profiles/languages/typescript.md#static-analysis-and-compiler-configuration)
+selects project boundaries and checks, an ESLint flat configuration might scope
+type-aware analysis through a `files` block and an owned project configuration:
+
+```javascript
+export default tseslint.config({
+  files: ['src/**/*.{ts,tsx}'],
+  languageOptions: { parserOptions: { project: './tsconfig.json' } },
+  extends: [...tseslint.configs.strictTypeChecked],
+});
+```
+
+Product-specific failure modes can include applying type-aware presets to
+non-TypeScript files, mixing ignore declarations into incompatible blocks, or
+using command flags unsupported by the selected configuration format.
+
+A compiler example might enable `strict`, `noImplicitReturns`,
+`exactOptionalPropertyTypes`, or `noUncheckedIndexedAccess`. An architecture
+example might implement an owned prohibition through ESLint's
+`no-restricted-syntax`. These products, versions, presets, globs, project paths,
+flags, severities, and selectors are examples only, not defaults.

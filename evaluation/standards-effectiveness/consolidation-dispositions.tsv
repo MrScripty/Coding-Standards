@@ -623,3 +623,7 @@ STD-0672	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative Ma
 STD-0674	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select lint purpose scope and orchestration from owned risks inputs tool capability cost and verification claims without execution defaults
 STD-0675	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select lint rules severity automation schedule and debt boundary from owned policy without warning autofix changed-file tier or CI defaults
 STD-0676	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative linter category taxonomy and product examples
+STD-0677	TOOLING-STANDARDS.md	profiles/languages/typescript.md	split	govern TypeScript analysis scope while extracting ESLint Prettier version preset glob and configuration syntax to non-normative Tooling reference
+STD-0678	TOOLING-STANDARDS.md	profiles/languages/typescript.md	split	govern project-boundary and compatibility diagnostics while extracting product-specific flat-config pitfalls to non-normative Tooling reference
+STD-0679	TOOLING-STANDARDS.md	profiles/languages/typescript.md	split	select compiler checks from owned contracts while extracting tsconfig flag examples to non-normative Tooling reference
+STD-0680	TOOLING-STANDARDS.md	profiles/languages/typescript.md	split	derive analysis from architecture authority while extracting custom ESLint rule syntax to non-normative Tooling reference

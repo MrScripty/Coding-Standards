@@ -4947,6 +4947,27 @@ clusters, with child `19.8` active.
 **Next slice:** `7.4b9i`, implement the reviewed TypeScript policy/product
 recipe split for `STD-0677` through `STD-0680`.
 
+## Milestone 7.4b9i: TypeScript Policy And Product Recipes
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** TypeScript now owns project-bound type-aware analysis,
+compiler-check selection, and architecture-rule derivation. Product syntax is
+retained only in non-normative Tooling recipes, with one split disposition for
+each of the four source identifiers.
+
+**No-fallback result:** ESLint and Prettier versions, parsers, presets, globs,
+ignores, project paths, strict bundles, compiler flags, severities, and custom
+rules are not defaults. Missing, contradictory, or unsupported facts return
+typed diagnostics without weaker scope or copied presets.
+
+**Verification:** 10 TypeScript decisions, reference authority checks, legacy
+negative coverage, and four split dispositions pass. All 141 repository
+checkers pass. The execution train reports 301 completed and 288 remaining IDs
+across 76 completed and 39 pending logical clusters, with child `19.9` active.
+
+**Next slice:** `7.4b9j`, govern formatting policy and orchestration.
+
 ## Row 19 TypeScript Policy And Recipe Split Replan
 
 **Outcome:** Accepted planning correction.
