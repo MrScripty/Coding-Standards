@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9h` moves lint category and product examples to non-normative
-reference without taxonomy or product defaults.
+Milestone `7.4b9i` splits durable TypeScript lint, compiler, and architecture
+policy from non-normative ESLint, Prettier, `tsconfig`, and custom-rule recipes.

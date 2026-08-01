@@ -17,6 +17,10 @@ for text in '## EditorConfig Example' 'only one possible transport' \
   'not recommended defaults'; do
   rg -F -q "$text" "$F"
 done
+for text in '## Linter Category Examples' 'taxonomy and products are illustrative only' \
+  '../../workflows/tooling.md#lint-policy-and-orchestration'; do
+  rg -F -q "$text" "$F"
+done
 
 for row in \
   $'STD-0656\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tretire' \
@@ -26,6 +30,7 @@ for row in \
   $'STD-0661\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove'; do
   rg -F -q "$row" "$D"
 done
+rg -F -q $'STD-0676\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove' "$D"
 
 for row in \
   $'STD-0667\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tretire' \
@@ -46,4 +51,5 @@ rg -F -q '[reference/recipes/tooling.md](reference/recipes/tooling.md)' "$R/READ
 ! rg -F -q 'See [templates/lefthook.yml]' "$L"
 ! rg -F -q 'See [templates/.editorconfig]' "$L"
 ! rg -F -q '# Web files typically use 2-space indent' "$L"
-printf 'Tooling reference recipes passed: non-normative examples with 11 exact dispositions\n'
+! rg -F -q '| Category | Purpose | Examples |' "$L"
+printf 'Tooling reference recipes passed: non-normative examples with 12 exact dispositions\n'

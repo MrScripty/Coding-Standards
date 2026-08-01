@@ -6,11 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.6 are accepted; lint
-category and product examples for child 19.7 are active.
+**Current phase:** Tooling children 19.1 through 19.7 are accepted; the reviewed
+TypeScript policy and non-normative product-recipe split for child 19.8 is active.
 
-**Next slice:** Milestone 7.4b9h for `STD-0676`; move lint category and product
-examples to non-normative reference without taxonomy or product defaults.
+**Next slice:** Milestone 7.4b9i for `STD-0677`, `STD-0678`, `STD-0679`, and `STD-0680`;
+split durable TypeScript lint, compiler, and architecture policy from
+non-normative ESLint, Prettier, `tsconfig`, and custom-rule recipes.
 
 **Acceptance status:** `partial`
 
@@ -1577,8 +1578,11 @@ all structural/routing fixtures pass.
    - `7.4b9g` (`Accepted`): refine `STD-0674` and `STD-0675` into lint purpose,
      scope, severity, automation, and scheduling selection from owned risks and
      debt without warning, autofix, changed-file, or tier defaults.
-   - `7.4b9h` (`Planned`): move `STD-0676` into non-normative lint category
+   - `7.4b9h` (`Accepted`): move `STD-0676` into non-normative lint category
      and product examples without taxonomy or product defaults.
+   - `7.4b9i` (`Planned`): implement the reviewed `STD-0677` through
+     `STD-0680` split with TypeScript as sole canonical owner and product syntax
+     retained only as non-normative Tooling recipes.
    - Row 19 TypeScript split replan (`Accepted`): keep `STD-0677` through
      `STD-0680` exactly once in child `19.8`, with TypeScript as the sole
      canonical owner; extract ESLint, Prettier, `tsconfig`, glob, preset, and

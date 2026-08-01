@@ -4928,6 +4928,25 @@ completed and 41 pending logical clusters, with child `19.7` active.
 
 **Next slice:** `7.4b9h`, move `STD-0676` into non-normative lint examples.
 
+## Milestone 7.4b9h: Non-Normative Linter Taxonomy
+
+**Outcome:** Accepted implementation slice.
+
+**Reference result:** linter categories and product examples now reside only in
+the non-normative Tooling recipe. Canonical lint purpose, policy, and tool
+selection remain in Tooling and cannot be inferred from category labels.
+
+**No-fallback result:** style, quality, security, and type categories and their
+example products are neither exhaustive nor default tool selections.
+
+**Verification:** reference authority, legacy negative coverage, and one exact
+disposition pass. All 140 repository checkers pass. The execution train reports
+297 completed and 292 remaining IDs across 75 completed and 40 pending logical
+clusters, with child `19.8` active.
+
+**Next slice:** `7.4b9i`, implement the reviewed TypeScript policy/product
+recipe split for `STD-0677` through `STD-0680`.
+
 ## Row 19 TypeScript Policy And Recipe Split Replan
 
 **Outcome:** Accepted planning correction.

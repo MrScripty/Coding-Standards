@@ -120,12 +120,8 @@ placement are not defaults.
 
 ### Common Linter Categories
 
-| Category | Purpose | Examples |
-|----------|---------|----------|
-| Style | Formatting, conventions | Prettier, ESLint, Black |
-| Quality | Bugs, complexity, patterns | ESLint, Pylint, Clippy |
-| Security | Vulnerabilities | Semgrep, Bandit, npm audit |
-| Type | Type correctness | TypeScript, mypy, Flow |
+The former category taxonomy and product list are retained only in the
+non-normative [Tooling recipe](reference/recipes/tooling.md#linter-category-examples).
 
 ### TypeScript/JavaScript: ESLint 9+ (Flat Config) + Prettier
 

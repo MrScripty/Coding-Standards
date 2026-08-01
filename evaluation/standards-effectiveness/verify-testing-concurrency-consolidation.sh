@@ -58,7 +58,7 @@ rg -F -q '`7.4b8bx` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8by` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9h` (`Planned`)' \
+rg -F -q '`7.4b9i` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing concurrency consolidation passed: 15 decisions, 2 dispositions\n'

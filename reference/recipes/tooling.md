@@ -97,3 +97,15 @@ The mechanism, root scope, patterns, indentation, line ending, encoding,
 whitespace, final-newline, and file-family values are examples only. They are
 not recommended defaults and may conflict with repository or consumer
 contracts.
+
+## Linter Category Examples
+
+Teams sometimes group lint checks as style, quality, security, or type checks.
+Example products include Prettier or ESLint for style, Pylint or Clippy for
+quality, Semgrep or Bandit for security, and TypeScript or mypy for type
+analysis. These categories overlap and the products can serve several purposes.
+
+The taxonomy and products are illustrative only. The canonical
+[lint policy](../../workflows/tooling.md#lint-policy-and-orchestration) selects
+purpose, rules, scope, severity, and tooling from owned facts; it does not infer
+them from a category label or this product list.
