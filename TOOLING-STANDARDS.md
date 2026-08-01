@@ -85,6 +85,10 @@ current producer contract.
 
 ## EditorConfig
 
+Canonical editor-neutral configuration selection is defined by
+[Tooling](workflows/tooling.md#editor-and-file-configuration). The remaining
+rationale and examples are migration input, not EditorConfig authority.
+
 ### Purpose
 
 Consistent formatting across editors and IDEs without tool-specific configuration.
@@ -120,12 +124,9 @@ indent_style = tab
 
 ### Key Settings
 
-| Setting | Recommended | Why |
-|---------|-------------|-----|
-| indent_style | space | Consistent display across environments |
-| end_of_line | lf | Avoid Windows/Unix issues |
-| charset | utf-8 | Universal encoding |
-| insert_final_newline | true | POSIX compliance, cleaner diffs |
+Select settings through the canonical
+[Tooling workflow](workflows/tooling.md#editor-and-file-configuration). The
+former universal settings table is retired and defines no defaults.
 
 ---
 

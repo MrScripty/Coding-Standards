@@ -31,7 +31,9 @@ rg -F -q '`7.4b9c` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b9d` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9e` (`Planned`)' \
+rg -F -q '`7.4b9e` (`Accepted`)' \
+  "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b9f` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 [[ -e "$R/workflows/tooling.md" ]]
 [[ -e "$R/reference/recipes/tooling.md" ]]

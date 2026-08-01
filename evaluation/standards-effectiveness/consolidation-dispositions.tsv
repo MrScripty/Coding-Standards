@@ -612,3 +612,5 @@ STD-0657	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative Le
 STD-0658	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative npm installation example
 STD-0659	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative standalone installation example
 STD-0661	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative hook configuration example
+STD-0666	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select editor-neutral configuration mechanism scope and precedence from repository consumer file-format and support facts without an EditorConfig default
+STD-0673	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select each file setting from authoritative formatting encoding consumer and format contracts without universal setting defaults

@@ -49,6 +49,26 @@ Do not infer a schedule from labels such as fast, local, pre-commit, pre-push,
 CI, or release. If no schedule satisfies both the required claim and available
 resources, return the applicable typed outcome.
 
+## Editor And File Configuration
+
+Select an editor-neutral configuration mechanism and each setting from the
+repository's canonical formatting and encoding contracts, affected consumer
+requirements, file-format semantics, generated-file authority, supported
+platforms, and selected tool capabilities. Define the configuration's scope and
+precedence where multiple mechanisms or nested files can apply.
+
+EditorConfig is one possible transport for selected settings; its availability
+does not make it the default. Do not default to spaces, indentation width, line
+ending, character encoding, final-newline, trailing-whitespace, file-pattern,
+or language-family settings. Do not copy a universal settings table when owned
+files or consumers require different behavior.
+
+Contradictory repository, consumer, or file-format requirements produce typed
+`invalid`. Missing required scope, precedence, or authoritative setting facts
+produce typed `unavailable`. A required setting that no supported mechanism can
+represent produces typed `unsupported`; do not silently omit it or substitute a
+conventional value.
+
 ## Persisted Artifact Checks
 
 For a persisted or generated artifact, select validation from its canonical

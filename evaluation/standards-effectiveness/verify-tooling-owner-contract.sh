@@ -22,17 +22,17 @@ while IFS=$'\t' read -r case_id facts authority capability scope schedule fallba
 done < "$F"
 
 for text in 'ID: `workflow.tooling`' 'Tooling Authority' 'Hook Selection And Configuration' \
-  'Scheduling And Cost' 'Persisted Artifact Checks' 'typed `invalid`' \
+  'Scheduling And Cost' 'Editor And File Configuration' 'Persisted Artifact Checks' 'typed `invalid`' \
   'typed `unavailable`' 'typed `unsupported`' 'successful no-op' \
   'Do not default to a hook product'; do
   rg -F -q "$text" "$O"
 done
 
-for id in STD-0654 STD-0655 STD-0660 STD-0662 STD-0664 STD-0665; do
+for id in STD-0654 STD-0655 STD-0660 STD-0662 STD-0664 STD-0665 STD-0666 STD-0673; do
   awk -F '\t' -v id="$id" '$1 == id && $3 == "workflows/tooling.md" && $4 == "refine" { found = 1 } END { exit !found }' \
     "$S/consolidation-dispositions.tsv"
 done
 
 rg -F -q '[workflows/tooling.md](workflows/tooling.md)' "$R/README.md"
 rg -F -q '[Tooling](workflows/tooling.md)' "$R/STANDARDS-ROUTER.md"
-printf 'Tooling owner contract passed: 12 decisions, 6 exact dispositions\n'
+printf 'Tooling owner contract passed: 12 decisions, 8 exact dispositions\n'

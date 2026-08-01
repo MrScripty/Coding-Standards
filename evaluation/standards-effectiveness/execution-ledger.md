@@ -4864,6 +4864,30 @@ and 44 pending logical clusters, with child `19.4` active.
 **Next slice:** `7.4b9e`, refine `STD-0666` and `STD-0673` into editor-neutral
 configuration and settings selection.
 
+## Milestone 7.4b9e: Editor-Neutral Configuration Selection
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Tooling now selects editor/file configuration mechanisms,
+scope, precedence, and individual settings from repository, consumer,
+file-format, generated-file, platform, and tool-capability facts. `STD-0666`
+and `STD-0673` have exact canonical dispositions.
+
+**No-fallback result:** EditorConfig, spaces, indentation width, line endings,
+encoding, final newlines, trailing whitespace, patterns, and language-family
+settings are not defaults. Contradictory or missing facts and unrepresentable
+required settings return typed diagnostics instead of conventional values or
+silent omission.
+
+**Verification:** 12 focused editor-configuration decisions, owner-contract
+coverage, legacy negative checks, and two exact dispositions pass. All 139
+repository checkers pass. The execution train reports 288 completed and 301
+remaining IDs across 72 completed and 43 pending logical clusters, with child
+`19.5` active.
+
+**Next slice:** `7.4b9f`, move `STD-0667` through `STD-0672` into
+non-normative EditorConfig recipes.
+
 **Verification deviation:** the mechanical cursor advance initially changed
 the frozen first identifier of row `18.14` from `STD-0602` to `STD-0654`. The
 immutable row was restored before focused verification, and the active planning

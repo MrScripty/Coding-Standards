@@ -65,6 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9e` selects editor-neutral configuration and settings from
-repository, consumer, and file-format facts without EditorConfig or universal
-setting defaults.
+Milestone `7.4b9f` moves EditorConfig rationale, templates, and language
+examples to non-normative reference without product or configuration defaults.

@@ -1,0 +1,13 @@
+case	facts	mechanism	scope	precedence	representable	fallback	expected
+supported_configuration	complete	selected	complete	complete	yes	none	allow
+supported_nested_scope	complete	selected	complete	complete	yes	none	allow
+contradictory_requirements	contradictory	selected	complete	complete	yes	none	typed-invalid
+missing_mechanism	complete	missing	complete	complete	yes	none	typed-unavailable
+missing_scope	complete	selected	missing	complete	yes	none	typed-unavailable
+missing_precedence	complete	selected	complete	missing	yes	none	typed-unavailable
+unsupported_setting	complete	selected	complete	complete	no	none	typed-unsupported
+editorconfig_default	complete	selected	complete	complete	yes	editorconfig	typed-invalid
+spaces_default	complete	selected	complete	complete	yes	spaces	typed-invalid
+lf_default	complete	selected	complete	complete	yes	lf	typed-invalid
+utf8_default	complete	selected	complete	complete	yes	utf8	typed-invalid
+omit_unrepresentable	complete	selected	complete	complete	no	silent-omit	typed-invalid
