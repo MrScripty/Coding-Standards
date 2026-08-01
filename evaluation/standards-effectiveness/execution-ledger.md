@@ -4668,6 +4668,35 @@ changed frozen row `18.11` from `STD-0632` to `STD-0636`. The immutable row was
 restored before focused verification, and the next-slice assertion was bounded
 to all four row `18.12` identifiers.
 
+## Milestone 7.4b8ch: Testing Async Completion And Failure Evidence
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Verification now observes async work through its owned
+terminal state and externally meaningful result, and derives success, failure,
+cancellation, timeout, retry, partial-result, and diagnostic cases from the
+applicable contract and boundary.
+
+**No-fallback/legacy result:** await syntax, happy-path completion, generic
+errors, arbitrary sleeps, runner exit, retry success, mock observations, and
+weaker-boundary checks cannot substitute for completion or boundary evidence.
+Missing material completion, state, timing, boundary, or diagnostic facts return
+typed diagnostics.
+
+**Verification:** focused decisions cover 16 allowed, invalid, unsupported, and
+unavailable outcomes plus exact replacement and four dispositions. All 132
+repository checkers pass; the execution train reports 263 completed and 326
+remaining IDs across 66 completed and 31 pending logical clusters, with child
+`18.13` active.
+
+**Next slice:** `7.4b8ci`, refine `STD-0645` through `STD-0652` into
+Verification supporting-gate classification and claim-directed diagnosis.
+
+**Verification deviation:** the mechanical cursor advance initially changed
+the frozen first identifier of row `18.12` from `STD-0636` to `STD-0645`. The
+immutable row was restored before focused verification, and the active assertion
+was bounded to all eight row `18.13` identifiers.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

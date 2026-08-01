@@ -92,34 +92,10 @@ This legacy heading is a non-normative migration route.
 
 ## Async Testing
 
-### Always Await Async Operations
-
-```typescript
-// BAD: Missing await
-test('fetches user', () => {
-    const user = fetchUser('123'); // Returns Promise!
-    expect(user.name).toBe('Test'); // Fails or passes randomly
-});
-
-// GOOD: Properly awaited
-test('fetches user', async () => {
-    const user = await fetchUser('123');
-    expect(user.name).toBe('Test');
-});
-```
-
-### Test Both Success and Failure
-
-```typescript
-test('fetchUser returns user for valid ID', async () => {
-    const user = await fetchUser('valid-id');
-    expect(user).toBeDefined();
-});
-
-test('fetchUser throws for invalid ID', async () => {
-    await expect(fetchUser('invalid')).rejects.toThrow(NotFoundError);
-});
-```
+Async completion and contract-selected outcome evidence are owned by
+[Verification](workflows/verification.md#async-completion-and-failure-evidence).
+Await syntax, callback completion, polling, events, and harness controls are
+mechanisms selected from that contract, not evidence by themselves.
 
 ### Lifecycle Regression Checks
 
@@ -129,14 +105,9 @@ non-normative migration route.
 
 ### Service-Layer Error Paths
 
-For service-layer changes, verify expected failure behavior directly, not just
-successful builds/tests. Add targeted checks for relevant paths such as:
-- Upstream non-success responses
-- Retry exhaustion and backoff termination
-- Partial failures during orchestration
-- Cancellation or timeout propagation
-- Surfaced or recorded diagnostic context, including safe correlation fields
-  when the project has an owned diagnostic channel
+Service-boundary success, failure, retry, cancellation, timeout, partial-result,
+and diagnostic evidence are owned by
+[Verification](workflows/verification.md#async-completion-and-failure-evidence).
 
 ---
 

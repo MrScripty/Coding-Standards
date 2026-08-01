@@ -35,6 +35,6 @@ mapfile -t ids < <(awk -F '\t' '$1=="STD-0178"{print $1}' \
   "$S/consolidation-dispositions.tsv")
 [[ "${ids[*]}" == 'STD-0178' ]]
 rg -F -q '`7.4b8bm` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8ch` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b8ci` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
 printf 'Disabled behavior claims passed: 15 decisions, 1 disposition\n'

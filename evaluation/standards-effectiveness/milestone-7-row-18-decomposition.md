@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b8ch` refines `STD-0636` through `STD-0638` and `STD-0640` into
-Verification async completion and failure-boundary evidence.
+Milestone `7.4b8ci` refines `STD-0645` through `STD-0652` into Verification
+supporting-gate classification and claim-directed diagnosis.

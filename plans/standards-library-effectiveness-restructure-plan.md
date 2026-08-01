@@ -10,9 +10,9 @@
 Language Bindings, Resilience, Contracts, Frontend, and Performance children
 are accepted.
 
-**Next slice:** Milestone 7.4b8ch refine `STD-0636`, `STD-0637`, `STD-0638`,
-and `STD-0640` into Verification-owned async completion and failure-boundary
-evidence.
+**Next slice:** Milestone 7.4b8ci refine `STD-0645`, `STD-0646`, `STD-0647`,
+`STD-0648`, `STD-0649`, `STD-0650`, `STD-0651`, and `STD-0652` into
+Verification-owned supporting-gate classification and claim-directed diagnosis.
 
 **Acceptance status:** `partial`
 
@@ -1538,8 +1538,10 @@ all structural/routing fixtures pass.
      factories, builders, direct construction, sharing, reset, and cleanup from
      the owned data contract without factory, fresh-state, ordering, or serial
      execution defaults.
-   - `7.4b8ch` (`Planned`): refine `STD-0636` through `STD-0638` and `STD-0640`
-     into async completion and failure-boundary evidence.
+   - `7.4b8ch` (`Accepted`): refine `STD-0636` through `STD-0638` and `STD-0640`
+     into async completion and failure-boundary evidence. Observe owned terminal
+     states and externally meaningful outcomes without await-syntax,
+     success/failure-pair, generic-error, sleep, or weaker-boundary defaults.
    - `7.4b8ci` (`Planned`): refine `STD-0645` through `STD-0652` into
      supporting-gate classification and claim-directed diagnosis.
    - `7.4b8cj` (`Planned`): close `STD-0602` and `STD-0653` only after every

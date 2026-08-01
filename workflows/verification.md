@@ -251,6 +251,38 @@ identity, reset, cleanup, synchronization, or environment facts are
 rollback, cleanup success, test ordering, serial execution, or passing retries
 for the required claim.
 
+## Async Completion And Failure Evidence
+
+Observe asynchronous work through the terminal state and externally meaningful
+result selected by its owner and contract. Awaiting, joining, subscribing,
+polling, callbacks, clocks, harness drains, and process observation are
+mechanisms; use the one that proves completion, failure, cancellation, timeout,
+or continued operation at the required boundary. Syntax that starts or awaits
+work does not prove that child work, cleanup, publication, or failure handling
+has completed.
+
+Derive outcome cases from the owned state machine, error contract, retry and
+backoff policy, cancellation and timeout semantics, partial-result rules,
+idempotency or compensation behavior, and diagnostic channel. A success case
+and a failure case are not a universal pair. Verify only applicable outcomes,
+but do not omit a material terminal state or boundary because a lower-cost
+focused check, build, startup, or generic exception assertion passed.
+
+At a service or process boundary, assert the externally owned representation
+and effects: status or typed error, response or event, committed or compensated
+state, retry termination, cancellation propagation, bounded completion, and
+safe diagnostic context as applicable. Internal exception types, mock call
+counts, sleeps, or implementation callbacks prove only their explicit local
+claims and cannot substitute for the selected boundary.
+
+Contradictory completion, terminal-state, boundary, timing, or error-contract
+facts are `invalid`. A required observation mechanism or outcome outside the
+supported runtime, platform, or harness capability is `unsupported`. Missing
+material completion ownership, terminal states, timing authority, boundary
+representation, or diagnostic facts are `unavailable`. Do not fall back to
+await syntax, happy-path completion, one generic failure, arbitrary sleeps,
+test-runner exit, retry success, or weaker-boundary evidence.
+
 ## Test Placement And Naming
 
 Place evidence where its owner, affected implementation, fixtures, environment
