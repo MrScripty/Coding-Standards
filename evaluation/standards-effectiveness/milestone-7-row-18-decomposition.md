@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9j` selects formatting ownership, editor automation, scheduling,
-and lint separation without format-on-save, CI, or tool-pair defaults.
+Milestone `7.4b9k` moves formatter command and output examples to
+non-normative reference without command, glob, or exit-code defaults.

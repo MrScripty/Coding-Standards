@@ -42,6 +42,6 @@ for id in STD-0677 STD-0678 STD-0679 STD-0680; do
     "$S/consolidation-dispositions.tsv"
 done
 rg -F -q '`7.4b8bp` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9j` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b9k` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
 printf 'TypeScript owner contract passed: 17 decisions, 3 direct and 4 split dispositions\n'

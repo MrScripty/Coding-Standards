@@ -145,3 +145,15 @@ A compiler example might enable `strict`, `noImplicitReturns`,
 example might implement an owned prohibition through ESLint's
 `no-restricted-syntax`. These products, versions, presets, globs, project paths,
 flags, severities, and selectors are examples only, not defaults.
+
+## Formatting Automation Examples
+
+After canonical [formatting policy](../../workflows/tooling.md#formatting-policy-and-orchestration)
+selects authority and behavior, a VS Code configuration might enable
+`editor.formatOnSave` and select a formatter extension. A project using
+Prettier and ESLint might install `eslint-config-prettier` to disable overlapping
+style rules.
+
+Those editor settings, products, extension identifiers, package commands, and
+format-on-save behavior are examples only. They do not select formatting
+authority, grant mutation authority, or establish when evidence must run.

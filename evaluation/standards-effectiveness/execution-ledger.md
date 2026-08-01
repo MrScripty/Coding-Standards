@@ -4984,6 +4984,26 @@ recipes. Child `19.10` remains unchanged for standalone formatter commands.
 
 **Next slice:** `7.4b9j`, implement the reviewed formatting split package.
 
+## Milestone 7.4b9j: Formatting Policy And Orchestration
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Tooling owns formatting authority, scope, settings,
+mutation behavior, automation, schedule, and formatter/linter responsibility.
+VS Code and Prettier/ESLint syntax is retained only as non-normative reference.
+
+**No-fallback result:** format-on-save, editor mutation, CI, execution stages,
+products, tool pairs, and installation commands are not defaults. Missing,
+contradictory, or unsupported facts return typed diagnostics.
+
+**Verification:** 10 formatting decisions, reference and legacy negative checks,
+two direct and two split dispositions pass. All 142 repository checkers pass.
+The execution train reports 305 completed and 284 remaining IDs across 77
+completed and 38 pending logical clusters, with child `19.10` active.
+
+**Next slice:** `7.4b9k`, move standalone formatter command examples to
+non-normative reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

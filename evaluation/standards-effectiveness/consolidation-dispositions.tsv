@@ -627,3 +627,7 @@ STD-0677	TOOLING-STANDARDS.md	profiles/languages/typescript.md	split	govern Type
 STD-0678	TOOLING-STANDARDS.md	profiles/languages/typescript.md	split	govern project-boundary and compatibility diagnostics while extracting product-specific flat-config pitfalls to non-normative Tooling reference
 STD-0679	TOOLING-STANDARDS.md	profiles/languages/typescript.md	split	select compiler checks from owned contracts while extracting tsconfig flag examples to non-normative Tooling reference
 STD-0680	TOOLING-STANDARDS.md	profiles/languages/typescript.md	split	derive analysis from architecture authority while extracting custom ESLint rule syntax to non-normative Tooling reference
+STD-0681	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select formatting authority scope settings mutation and evidence orchestration from owned contracts without product or execution defaults
+STD-0682	TOOLING-STANDARDS.md	workflows/tooling.md	split	select editor automation and mutation authority while extracting VS Code format-on-save syntax to non-normative Tooling reference
+STD-0683	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select formatting check schedule and mutation behavior from procedure cost and verification facts without CI or check-only defaults
+STD-0686	TOOLING-STANDARDS.md	workflows/tooling.md	split	select formatter and linter responsibilities while extracting Prettier ESLint pairing and installation syntax to non-normative Tooling reference

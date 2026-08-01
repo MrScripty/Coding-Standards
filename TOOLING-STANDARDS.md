@@ -152,21 +152,19 @@ custom-rule implementation is retained only in the non-normative Tooling recipe.
 
 ## Formatting
 
+Canonical formatting authority and orchestration are defined by
+[Tooling](workflows/tooling.md#formatting-policy-and-orchestration).
+
 ### Principle: Format on Save
 
-Configure editors to format automatically:
-
-```json
-// VS Code settings.json
-{
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
-}
-```
+Select editor automation and mutation authority through canonical Tooling.
+The former VS Code example is retained only in the non-normative
+[Tooling recipe](reference/recipes/tooling.md#formatting-automation-examples).
 
 ### Principle: Check in CI
 
-CI should verify formatting without changing files:
+Select formatting checks and their schedule through canonical Tooling. The
+command below remains migration input for the next reference slice.
 
 ```bash
 # Prettier check mode
@@ -177,15 +175,9 @@ prettier --check "src/**/*.ts"
 
 ### Format vs. Lint
 
-| Tool | Purpose | When |
-|------|---------|------|
-| Formatter (Prettier) | Code style, whitespace | Every save |
-| Linter (ESLint) | Code quality, patterns | Pre-commit, CI |
-
-Configure them to not conflict:
-```bash
-npm install eslint-config-prettier --save-dev
-```
+Select formatter and linter responsibilities through canonical Tooling. The
+former Prettier/ESLint pairing and installation example is retained only in the
+non-normative [Tooling recipe](reference/recipes/tooling.md#formatting-automation-examples).
 
 ---
 

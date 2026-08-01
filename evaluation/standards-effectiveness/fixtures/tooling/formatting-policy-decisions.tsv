@@ -1,0 +1,11 @@
+case	facts	authority	capability	scope	fallback	expected
+supported	complete	explicit	supported	complete	none	allow
+contradictory	contradictory	explicit	supported	complete	none	typed-invalid
+missing_authority	complete	missing	supported	complete	none	typed-unavailable
+missing_scope	complete	explicit	supported	missing	none	typed-unavailable
+unsupported	complete	explicit	unsupported	complete	none	typed-unsupported
+save_default	complete	explicit	supported	complete	format-on-save	typed-invalid
+ci_default	complete	explicit	supported	complete	ci	typed-invalid
+pair_default	complete	explicit	supported	complete	prettier-eslint	typed-invalid
+mutation_default	complete	explicit	supported	complete	mutate	typed-invalid
+noop_default	complete	explicit	supported	complete	unchanged-success	typed-invalid

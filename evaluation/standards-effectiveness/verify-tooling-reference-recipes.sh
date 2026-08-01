@@ -25,6 +25,10 @@ for text in '## TypeScript Tooling Examples' 'Product-specific failure modes' \
   'examples only, not defaults'; do
   rg -F -q "$text" "$F"
 done
+for text in '## Formatting Automation Examples' 'editor.formatOnSave' \
+  'examples only' 'grant mutation authority'; do
+  rg -F -q "$text" "$F"
+done
 
 for row in \
   $'STD-0656\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tretire' \

@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.8 are accepted; formatting
-ownership, automation, scheduling, and lint separation for child 19.9 are active.
+**Current phase:** Tooling children 19.1 through 19.9 are accepted; standalone
+formatter command and output examples for child 19.10 are active.
 
-**Next slice:** Milestone 7.4b9j for `STD-0681`, `STD-0682`, `STD-0683`, and `STD-0686`;
-select formatting ownership, editor automation, scheduling, and lint separation
-without format-on-save, CI, or formatter/linter-pair defaults.
+**Next slice:** Milestone 7.4b9k for `STD-0684` and `STD-0685`; move formatter
+command and output examples to non-normative reference without command, glob,
+or exit-code defaults.
 
 **Acceptance status:** `partial`
 
@@ -1583,9 +1583,12 @@ all structural/routing fixtures pass.
    - `7.4b9i` (`Accepted`): implement the reviewed `STD-0677` through
      `STD-0680` split with TypeScript as sole canonical owner and product syntax
      retained only as non-normative Tooling recipes.
-   - `7.4b9j` (`Planned`): refine `STD-0681`, `STD-0682`, `STD-0683`, and
+   - `7.4b9j` (`Accepted`): refine `STD-0681`, `STD-0682`, `STD-0683`, and
      `STD-0686` into formatting ownership, automation, scheduling, and lint
      separation without format-on-save, CI, or tool-pair defaults.
+   - `7.4b9k` (`Planned`): move `STD-0684` and `STD-0685` into non-normative
+     formatter command and output examples without command, glob, or exit-code
+     defaults.
    - Row 19 formatting split replan (`Accepted`): retain Tooling as the sole
      canonical owner for child `19.9`; refine `STD-0681` and `STD-0683`
      directly, use split dispositions for `STD-0682` and `STD-0686`, and

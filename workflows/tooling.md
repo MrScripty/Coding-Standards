@@ -94,3 +94,24 @@ tiered execution, CI execution, or a full audit. A lint result is a supporting
 gate unless Verification selected the exact linted property as a claim.
 Contradictory risk or debt policy is `invalid`; missing scope or severity
 authority is `unavailable`; unsupported required analysis is `unsupported`.
+
+## Formatting Policy And Orchestration
+
+Select formatting authority, owned file scope, settings source, automation
+points, mutation behavior, and check schedule from repository and consumer
+contracts, generated-file authority, supported editors and tools, change
+procedure, cost, and required Verification claims. Define formatter and linter
+responsibilities by the properties each selected mechanism owns; resolve
+overlap explicitly rather than relying on product pairing.
+
+Do not default to format-on-save, editor mutation, CI checking, every-save or
+pre-commit execution, Prettier, ESLint, a formatter/linter pair, or an
+installation command. Automation that mutates files requires authority in the
+active procedure and must expose resulting changes for review. A formatting
+check proves only its selected formatting claim.
+
+Contradictory formatting authorities or overlapping responsibilities are
+`invalid`. Missing scope, settings authority, mutation authority, or schedule
+facts are `unavailable`. Required formatting unsupported by selected tools is
+`unsupported`; do not silently skip files, substitute conventional settings,
+or treat unchanged command execution as proof.
