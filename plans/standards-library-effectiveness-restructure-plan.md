@@ -1579,6 +1579,12 @@ all structural/routing fixtures pass.
      debt without warning, autofix, changed-file, or tier defaults.
    - `7.4b9h` (`Planned`): move `STD-0676` into non-normative lint category
      and product examples without taxonomy or product defaults.
+   - Row 19 TypeScript split replan (`Accepted`): keep `STD-0677` through
+     `STD-0680` exactly once in child `19.8`, with TypeScript as the sole
+     canonical owner; extract ESLint, Prettier, `tsconfig`, glob, preset, and
+     custom-rule syntax to non-normative Tooling recipes in the same bounded
+     package. Require `split` dispositions and reject product, version,
+     compiler-flag, and rule defaults.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

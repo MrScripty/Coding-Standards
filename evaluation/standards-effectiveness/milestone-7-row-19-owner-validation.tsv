@@ -22,10 +22,10 @@ STD-0673	workflows/tooling.md	retain	configuration-selection
 STD-0674	workflows/tooling.md	retain	lint-orchestration
 STD-0675	workflows/tooling.md	retain	lint-policy
 STD-0676	reference	move	linter-taxonomy
-STD-0677	profiles/languages/typescript.md	route	typescript-lint
-STD-0678	profiles/languages/typescript.md	route	typescript-lint
-STD-0679	profiles/languages/typescript.md	route	typescript-compiler
-STD-0680	profiles/languages/typescript.md	route	typescript-lint
+STD-0677	profiles/languages/typescript.md	split	typescript-lint-and-reference-recipe
+STD-0678	profiles/languages/typescript.md	split	typescript-lint-and-reference-recipe
+STD-0679	profiles/languages/typescript.md	split	typescript-compiler-and-reference-recipe
+STD-0680	profiles/languages/typescript.md	split	typescript-architecture-and-reference-recipe
 STD-0681	workflows/tooling.md	retain	format-orchestration
 STD-0682	workflows/tooling.md	retain	editor-automation
 STD-0683	workflows/tooling.md	retain	format-scheduling

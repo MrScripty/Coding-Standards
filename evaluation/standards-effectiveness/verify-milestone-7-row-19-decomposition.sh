@@ -19,6 +19,8 @@ for owner in workflows/tooling.md workflows/verification.md workflows/commit.md 
 done
 for text in '## Proposed Owner Contract' 'does not own what evidence proves' \
   'must not fall back' '## Ordered Children' '19 overlay rows' \
+  'canonical-owner-homogeneous' 'Child `19.8` is a reviewed split package' \
+  'exactly one `split` disposition' \
   '## Implementation Sequence' '## Re-plan Triggers'; do
   rg -F -q "$text" "$RPT"
 done
@@ -30,6 +32,8 @@ rg -F -q '`7.4b9e` (`Accepted`)' "$P"
 rg -F -q '`7.4b9f` (`Accepted`)' "$P"
 rg -F -q '`7.4b9g` (`Accepted`)' "$P"
 rg -F -q '`7.4b9h` (`Planned`)' "$P"
+rg -F -q 'Row 19 TypeScript split replan (`Accepted`)' "$P"
+awk -F '\t' '$1==19&&$2==8&&$5=="profiles/languages/typescript.md"&&$7=="pre-slice-review"&&$9~/non-normative Tooling reference/{f=1}END{exit !f}' "$O"
 [[ -e "$R/workflows/tooling.md" ]]
 [[ -e "$R/reference/recipes/tooling.md" ]]
 printf 'Milestone 7 row-19 decomposition passed: 50 IDs across 19 children\n'

@@ -10,6 +10,7 @@ expected=(STD-{0654..0703})
 [[ "${ids[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' 'NR>1{print $1}' "$F" | sort | uniq -d | wc -l)" -eq 0 ]]
 [[ "$(awk -F '\t' 'NR>1&&NF!=4{count++}END{print count+0}' "$F")" -eq 0 ]]
+[[ "$(awk -F '\t' '$1>="STD-0677"&&$1<="STD-0680"&&$2=="profiles/languages/typescript.md"&&$3=="split"{n++}END{print n+0}' "$F")" -eq 4 ]]
 
 for owner in workflows/tooling.md workflows/verification.md \
   workflows/implementation.md workflows/commit.md workflows/documentation.md \
@@ -38,6 +39,8 @@ rg -F -q '`7.4b9f` (`Accepted`)' \
 rg -F -q '`7.4b9g` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b9h` (`Planned`)' \
+  "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q 'Row 19 TypeScript split replan (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 [[ -e "$R/workflows/tooling.md" ]]
 [[ -e "$R/reference/recipes/tooling.md" ]]

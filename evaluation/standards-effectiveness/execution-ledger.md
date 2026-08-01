@@ -4928,6 +4928,25 @@ completed and 41 pending logical clusters, with child `19.7` active.
 
 **Next slice:** `7.4b9h`, move `STD-0676` into non-normative lint examples.
 
+## Row 19 TypeScript Policy And Recipe Split Replan
+
+**Outcome:** Accepted planning correction.
+
+Lookahead found that `STD-0677` through `STD-0680` combine durable TypeScript
+lint, compiler, and architecture semantics with volatile ESLint, Prettier,
+`tsconfig`, preset, glob, flag, and custom-rule examples. Routing each complete
+section to TypeScript would make product recipes appear normative; moving each
+complete section to reference would discard useful language policy.
+
+Child `19.8` therefore remains one exact-ID package with TypeScript as its sole
+canonical owner and one `split` disposition per identifier. The same bounded
+slice extracts only product syntax into non-normative Tooling recipes. This
+preserves exact ownership and disposition accounting without creating a second
+authority or duplicating identifiers in the execution train.
+
+**Next slice:** `7.4b9h`, complete child `19.7` before implementing the revised
+TypeScript split package.
+
 **Verification deviation:** the mechanical cursor advance initially changed
 the frozen first identifier of row `18.14` from `STD-0602` to `STD-0654`. The
 immutable row was restored before focused verification, and the active planning
