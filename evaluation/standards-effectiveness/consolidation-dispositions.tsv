@@ -597,3 +597,5 @@ STD-0649	TESTING-STANDARDS.md	workflows/verification.md	refine	select runtime ob
 STD-0650	TESTING-STANDARDS.md	workflows/verification.md	refine	select source declarations documentation history or external references by authority and information gain without fixed lookup order
 STD-0651	TESTING-STANDARDS.md	workflows/verification.md	index	replace diagnosis decision tree with a non-normative route to claim-directed diagnosis and typed blocked outcomes
 STD-0652	TESTING-STANDARDS.md	workflows/verification.md	refine	select correction and re-verification from affected claims and contracts without compile layer launch lookup escalation or retry checklist defaults
+STD-0602	TESTING-STANDARDS.md	workflows/verification.md	index	replace the legacy Testing source parent with a non-normative routing index after exact disposition closure
+STD-0653	TESTING-STANDARDS.md	workflows/verification.md	retire	remove checklist completion as acceptance and route completion to accepted claims observed results and canonical owners

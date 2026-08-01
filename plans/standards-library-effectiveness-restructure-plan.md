@@ -6,13 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Testing-source owner decomposition is active; Concurrency,
-Language Bindings, Resilience, Contracts, Frontend, and Performance children
-are accepted.
+**Current phase:** Testing-source closure is accepted; row 19 Tooling owner
+contract and complete decomposition planning is active.
 
-**Next slice:** Milestone 7.4b8cj close `STD-0602` and `STD-0653`, replace the
-legacy Testing source with a non-normative index, and reject checklist
-completion.
+**Next slice:** Milestone 7.4b9a for `STD-0654` through `STD-0703`; define the
+validated Tooling owner contract and complete semantic decomposition before any
+normative Tooling population.
 
 **Acceptance status:** `partial`
 
@@ -1546,7 +1545,7 @@ all structural/routing fixtures pass.
      supporting-gate classification and claim-directed diagnosis. Select the
      next observation by claim, authority, information gain, cost, and current
      evidence without layer-order, build, launch, lookup, or retry defaults.
-   - `7.4b8cj` (`Planned`): close `STD-0602` and `STD-0653` only after every
+   - `7.4b8cj` (`Accepted`): close `STD-0602` and `STD-0653` only after every
      row-18 identifier has an exact disposition; replace the legacy Testing
      source with a non-normative index and reject checklist completion.
    - Row 19 owner-validation gate (`Accepted`): audit `STD-0654` through
@@ -1555,9 +1554,10 @@ all structural/routing fixtures pass.
      scheduling, cost, and reporting while routing acceptance, implementation,
      commit, documentation, dependency, language-specific, and reference
      concerns to their proper owners.
-   - Row 19 complete decomposition (`Planned`): after `7.4b8cj`, define the
-     validated Tooling owner contract and decompose all 50 row-19 identifiers
-     together as a planning package before any normative Tooling population.
+   - `7.4b9a` (`Planned`): perform the row 19 complete decomposition after
+     `7.4b8cj`; define the validated Tooling owner contract and decompose all 50
+     row-19 identifiers together as a planning package before any normative
+     Tooling population.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

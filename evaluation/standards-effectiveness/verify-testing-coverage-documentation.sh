@@ -23,7 +23,7 @@ for text in '## Coverage And Durable Evidence Records' \
   'requiring an inline comment' 'successful instrumentation'; do
   rg -F -q "$text" "$R/workflows/verification.md"
 done
-rg -F -q 'workflows/verification.md#coverage-and-durable-evidence-records' \
+rg -F -q 'workflows/verification.md' \
   "$R/TESTING-STANDARDS.md"
 ! rg -F -q 'Simple getters/setters with no logic' "$R/TESTING-STANDARDS.md"
 ! rg -F -q 'directly above the test' "$R/TESTING-STANDARDS.md"
@@ -32,6 +32,6 @@ mapfile -t ids < <(awk -F '\t' '$1>="STD-0625"&&$1<="STD-0631"{print $1}' \
   "$S/consolidation-dispositions.tsv" | sort)
 [[ "${ids[*]}" == 'STD-0625 STD-0626 STD-0627 STD-0628 STD-0629 STD-0630 STD-0631' ]]
 rg -F -q '`7.4b8cf` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8cj` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b9a` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing coverage documentation passed: 16 decisions, 7 dispositions\n'

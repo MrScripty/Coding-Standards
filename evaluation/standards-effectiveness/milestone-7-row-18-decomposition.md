@@ -65,5 +65,6 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b8cj` closes `STD-0602` and `STD-0653`, replaces the legacy
-Testing source with a non-normative index, and rejects checklist completion.
+Milestone `7.4b9a` defines the validated Tooling owner contract and complete
+semantic decomposition for all 50 row-19 identifiers before normative
+population.

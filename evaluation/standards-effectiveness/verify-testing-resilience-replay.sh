@@ -32,7 +32,7 @@ for text in '## Replay And Resumption Evidence' \
   'Do not restart from an inferred position'; do
   rg -F -q "$text" "$R/topics/resilience.md"
 done
-rg -F -q 'topics/resilience.md#replay-and-resumption-evidence' \
+rg -F -q 'topics/resilience.md' \
   "$R/TESTING-STANDARDS.md"
 ! rg -F -q 'These checks may be integration or end-to-end tests' \
   "$R/TESTING-STANDARDS.md"
@@ -44,7 +44,7 @@ rg -F -q '`7.4b8bx` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8by` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8cj` (`Planned`)' \
+rg -F -q '`7.4b9a` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing resilience replay passed: 14 decisions, 1 disposition\n'

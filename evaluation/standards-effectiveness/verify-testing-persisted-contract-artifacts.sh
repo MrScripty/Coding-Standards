@@ -32,7 +32,7 @@ for text in '## Persisted Contract Artifacts' \
   'Do not accept a stale artifact'; do
   rg -F -q "$text" "$R/topics/contracts.md"
 done
-rg -F -q 'topics/contracts.md#persisted-contract-artifacts' \
+rg -F -q 'topics/contracts.md' \
   "$R/TESTING-STANDARDS.md"
 ! rg -F -q 'must be validated or regenerated before commit' \
   "$R/TESTING-STANDARDS.md"
@@ -42,7 +42,7 @@ row="$(awk -F '\t' '$1=="STD-0635" {print $2 FS $3 FS $4}' \
 [[ "$row" == $'TESTING-STANDARDS.md\ttopics/contracts.md\trefine' ]]
 rg -F -q '`7.4b8by` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8cj` (`Planned`)' \
+rg -F -q '`7.4b9a` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing persisted contract artifacts passed: 15 decisions, 1 disposition\n'

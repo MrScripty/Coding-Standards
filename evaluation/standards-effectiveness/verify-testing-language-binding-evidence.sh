@@ -41,7 +41,7 @@ for text in '## Binding Evidence Cohorts' \
 done
 
 legacy="$R/TESTING-STANDARDS.md"
-rg -F -q 'language-bindings.md#binding-evidence-cohorts' "$legacy"
+rg -F -q 'language-bindings.md' "$legacy"
 ! rg -F -q 'for most repos this means pre-push' "$legacy"
 ! rg -F -q 'Recommended coverage split' "$legacy"
 
@@ -55,7 +55,7 @@ rg -F -q '`7.4b8bx` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8by` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8cj` (`Planned`)' \
+rg -F -q '`7.4b9a` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing language-binding evidence passed: 16 decisions, 1 disposition\n'

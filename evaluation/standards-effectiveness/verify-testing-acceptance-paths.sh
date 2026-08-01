@@ -32,14 +32,14 @@ for text in '## Acceptance Paths And Boundaries' \
   'partial traversal, checklist completion'; do
   rg -F -q "$text" "$R/workflows/verification.md"
 done
-rg -F -q 'workflows/verification.md#acceptance-paths-and-boundaries' \
+rg -F -q 'workflows/verification.md' \
   "$R/TESTING-STANDARDS.md"
 ! rg -F -q 'Test complete user workflows' "$R/TESTING-STANDARDS.md"
 ! rg -F -q 'Write the vertical slice acceptance test before' \
   "$R/TESTING-STANDARDS.md"
-for route in 'topics/concurrency.md#isolate-verification-resources' \
-  'profiles/boundaries/language-bindings.md#binding-evidence-cohorts' \
-  'topics/resilience.md#replay-and-resumption-evidence'; do
+for route in 'topics/concurrency.md' \
+  'profiles/boundaries/language-bindings.md' \
+  'topics/resilience.md'; do
   rg -F -q "$route" "$R/TESTING-STANDARDS.md"
 done
 
@@ -50,7 +50,7 @@ mapfile -t ids < <(awk -F '\t' \
 [[ "${ids[*]}" == 'STD-0608 STD-0609 STD-0610 STD-0612 STD-0613 STD-0614 STD-0615' ]]
 rg -F -q '`7.4b8cc` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8cj` (`Planned`)' \
+rg -F -q '`7.4b9a` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing acceptance paths passed: 16 decisions, 7 dispositions\n'

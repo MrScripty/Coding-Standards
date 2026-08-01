@@ -33,9 +33,9 @@ for text in '## Isolate Verification Resources' \
   rg -F -q "$text" "$R/topics/concurrency.md"
 done
 
-rg -F -q '[Concurrency](topics/concurrency.md#isolate-verification-resources)' \
+rg -F -q '[Concurrency](topics/concurrency.md)' \
   "$R/TESTING-STANDARDS.md"
-rg -F -q '[Concurrency](topics/concurrency.md#verification)' \
+rg -F -q '[Concurrency](topics/concurrency.md)' \
   "$R/TESTING-STANDARDS.md"
 ! rg -F -q 'If isolation is impossible, serialize' "$R/TESTING-STANDARDS.md"
 ! rg -F -q 'Run affected suites with normal parallelism enabled' \
@@ -58,7 +58,7 @@ rg -F -q '`7.4b8bx` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8by` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8cj` (`Planned`)' \
+rg -F -q '`7.4b9a` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing concurrency consolidation passed: 15 decisions, 2 dispositions\n'

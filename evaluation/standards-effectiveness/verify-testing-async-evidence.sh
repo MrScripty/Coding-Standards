@@ -26,9 +26,9 @@ for text in '## Async Completion And Failure Evidence' \
   'cannot substitute for the selected boundary' 'weaker-boundary evidence'; do
   rg -F -q "$text" "$R/workflows/verification.md"
 done
-rg -F -q 'workflows/verification.md#async-completion-and-failure-evidence' \
+rg -F -q 'workflows/verification.md' \
   "$R/TESTING-STANDARDS.md"
-rg -F -q '[Concurrency](topics/concurrency.md#verification)' \
+rg -F -q '[Concurrency](topics/concurrency.md)' \
   "$R/TESTING-STANDARDS.md"
 ! rg -F -q '// GOOD: Properly awaited' "$R/TESTING-STANDARDS.md"
 ! rg -F -q 'Upstream non-success responses' "$R/TESTING-STANDARDS.md"
@@ -37,6 +37,6 @@ mapfile -t ids < <(awk -F '\t' '$1=="STD-0636"||$1=="STD-0637"||$1=="STD-0638"||
   "$S/consolidation-dispositions.tsv" | sort)
 [[ "${ids[*]}" == 'STD-0636 STD-0637 STD-0638 STD-0640' ]]
 rg -F -q '`7.4b8ch` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8cj` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b9a` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing async evidence passed: 16 decisions, 4 dispositions\n'

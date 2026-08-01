@@ -30,7 +30,7 @@ for text in 'Select interaction evidence from the user-observable contract' \
   'A successful update does not prove cleanup'; do
   rg -F -q "$text" "$R/profiles/applications/frontend.md"
 done
-rg -F -q 'profiles/applications/frontend.md#evidence' \
+rg -F -q 'profiles/applications/frontend.md' \
   "$R/TESTING-STANDARDS.md" "$R/FRONTEND-STANDARDS.md"
 ! rg -F -q 'Use `userEvent` for user flows' "$R/FRONTEND-STANDARDS.md"
 ! rg -F -q 'Mock geometry on specific elements' "$R/FRONTEND-STANDARDS.md"
@@ -40,7 +40,7 @@ row="$(awk -F '\t' '$1=="STD-0641" {print $2 FS $3 FS $4}' \
 [[ "$row" == $'TESTING-STANDARDS.md\tprofiles/applications/frontend.md\trefine' ]]
 rg -F -q '`7.4b8bz` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8cj` (`Planned`)' \
+rg -F -q '`7.4b9a` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing frontend evidence passed: 15 decisions, 1 disposition\n'

@@ -4745,6 +4745,41 @@ checked by `verify-milestone-7-row-19-owner-validation.sh`. All 134 repository
 checkers pass; the execution train remains at 271 completed and 318 remaining
 IDs with row `18.14` active.
 
+## Milestone 7.4b8cj: Testing Source Closure
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** `TESTING-STANDARDS.md` is now a non-normative index to
+Verification, Concurrency, Language Bindings, Resilience, Contracts, Frontend,
+Performance, and language profiles. All 52 frozen Testing identifiers have one
+exact disposition.
+
+**No-fallback/legacy result:** the checklist and its universal tests, edge-case,
+error-path, full-path, flake, naming, and documentation defaults are removed.
+Completion follows accepted claims and observed results, never index or
+checklist completion.
+
+**Verification:** focused closure checks exact dispositions, eight routes,
+accepted prior children, index purity, and checklist absence. All 135 repository
+checkers pass; the execution train reports 273 completed and 316 remaining IDs
+across 68 completed and 29 pending logical clusters, with row 19 active.
+
+**Next slice:** `7.4b9a`, define the validated Tooling owner contract and
+complete semantic decomposition for all 50 row-19 identifiers before normative
+population.
+
+**Verification deviation:** the mechanical cursor advance initially changed
+the frozen first identifier of row `18.14` from `STD-0602` to `STD-0654`. The
+immutable row was restored before focused verification, and the active planning
+assertion was bounded to row 19 endpoints `STD-0654` and `STD-0703`.
+
+**Closure integration deviations:** the first full-suite run exposed a wrapped
+`Next slice` header that hid `STD-0654` from line-oriented legacy checkers. The
+range was moved onto the first line. The second run exposed prior Testing
+checkers coupled to subsection anchors removed by index closure; their legacy
+route assertions were normalized to top-level canonical destinations while
+preserving canonical-content and negative-regression checks.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

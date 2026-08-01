@@ -31,7 +31,7 @@ for text in '## Performance Test Evidence' \
   'successful harness execution as the required result'; do
   rg -F -q "$text" "$R/topics/performance.md"
 done
-rg -F -q 'topics/performance.md#performance-test-evidence' \
+rg -F -q 'topics/performance.md' \
   "$R/TESTING-STANDARDS.md"
 ! rg -F -q 'expect(duration).toBeLessThan(100)' "$R/TESTING-STANDARDS.md"
 ! rg -F -q "Use the ecosystem's benchmark harness" "$R/TESTING-STANDARDS.md"
@@ -43,7 +43,7 @@ rg -F -q '`7.4b8ca` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8cb` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8cj` (`Planned`)' \
+rg -F -q '`7.4b9a` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing performance evidence passed: 15 decisions, 3 dispositions\n'
