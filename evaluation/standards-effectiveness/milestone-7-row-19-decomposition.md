@@ -49,6 +49,15 @@ receives exactly one `split` disposition to its canonical TypeScript owner; the
 reference extraction is supporting material, not a second authority or a
 duplicate disposition.
 
+Child `19.9` applies the same boundary to formatting. Tooling remains the sole
+canonical owner for formatting responsibility, editor automation selection,
+scheduling, and formatter/linter separation. `STD-0682` and `STD-0686` use one
+`split` disposition each while VS Code settings, format-on-save configuration,
+Prettier/ESLint pairing, and installation syntax move only to non-normative
+Tooling recipes. `STD-0681` and `STD-0683` remain direct Tooling refinements.
+Child `19.10` remains independently responsible for standalone formatter
+command and output examples.
+
 ## Implementation Sequence
 
 1. Create the bounded Tooling owner with hook orchestration (`19.1`).
@@ -56,7 +65,8 @@ duplicate disposition.
 3. Govern editor configuration and move examples (`19.4`-`19.5`).
 4. Govern generic linting, move taxonomy, and split TypeScript policy from
    product recipes (`19.6`-`19.8`).
-5. Govern formatting and move command examples (`19.9`-`19.10`).
+5. Split formatting policy from product recipes, then move standalone command
+   examples (`19.9`-`19.10`).
 6. Separate Verification gate meaning from CI orchestration (`19.11`-`19.12`).
 7. Govern debt/cost and move CI recipes (`19.13`-`19.14`).
 8. Route repository, documentation, PR, dependency, and setup concerns

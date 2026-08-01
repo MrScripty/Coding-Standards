@@ -1586,6 +1586,11 @@ all structural/routing fixtures pass.
    - `7.4b9j` (`Planned`): refine `STD-0681`, `STD-0682`, `STD-0683`, and
      `STD-0686` into formatting ownership, automation, scheduling, and lint
      separation without format-on-save, CI, or tool-pair defaults.
+   - Row 19 formatting split replan (`Accepted`): retain Tooling as the sole
+     canonical owner for child `19.9`; refine `STD-0681` and `STD-0683`
+     directly, use split dispositions for `STD-0682` and `STD-0686`, and
+     extract VS Code, format-on-save, Prettier/ESLint pairing, and installation
+     syntax only to non-normative Tooling recipes. Keep child `19.10` unchanged.
    - Row 19 TypeScript split replan (`Accepted`): keep `STD-0677` through
      `STD-0680` exactly once in child `19.8`, with TypeScript as the sole
      canonical owner; extract ESLint, Prettier, `tsconfig`, glob, preset, and

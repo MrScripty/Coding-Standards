@@ -20,7 +20,7 @@ done
 for text in '## Proposed Owner Contract' 'does not own what evidence proves' \
   'must not fall back' '## Ordered Children' '19 overlay rows' \
   'canonical-owner-homogeneous' 'Child `19.8` is a reviewed split package' \
-  'exactly one `split` disposition' \
+  'exactly one `split` disposition' 'Child `19.9` applies the same boundary' \
   '## Implementation Sequence' '## Re-plan Triggers'; do
   rg -F -q "$text" "$RPT"
 done
@@ -35,7 +35,9 @@ rg -F -q '`7.4b9h` (`Accepted`)' "$P"
 rg -F -q '`7.4b9i` (`Accepted`)' "$P"
 rg -F -q '`7.4b9j` (`Planned`)' "$P"
 rg -F -q 'Row 19 TypeScript split replan (`Accepted`)' "$P"
+rg -F -q 'Row 19 formatting split replan (`Accepted`)' "$P"
 awk -F '\t' '$1==19&&$2==8&&$5=="profiles/languages/typescript.md"&&$7=="pre-slice-review"&&$9~/non-normative Tooling reference/{f=1}END{exit !f}' "$O"
+awk -F '\t' '$1==19&&$2==9&&$5=="workflows/tooling.md"&&$9~/VS Code format-on-save Prettier ESLint pairing/{f=1}END{exit !f}' "$O"
 [[ -e "$R/workflows/tooling.md" ]]
 [[ -e "$R/reference/recipes/tooling.md" ]]
 printf 'Milestone 7 row-19 decomposition passed: 50 IDs across 19 children\n'

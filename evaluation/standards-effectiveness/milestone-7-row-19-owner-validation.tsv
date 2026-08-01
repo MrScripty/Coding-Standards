@@ -27,11 +27,11 @@ STD-0678	profiles/languages/typescript.md	split	typescript-lint-and-reference-re
 STD-0679	profiles/languages/typescript.md	split	typescript-compiler-and-reference-recipe
 STD-0680	profiles/languages/typescript.md	split	typescript-architecture-and-reference-recipe
 STD-0681	workflows/tooling.md	retain	format-orchestration
-STD-0682	workflows/tooling.md	retain	editor-automation
+STD-0682	workflows/tooling.md	split	editor-automation-and-reference-recipe
 STD-0683	workflows/tooling.md	retain	format-scheduling
 STD-0684	reference	move	formatter-recipe
 STD-0685	reference	retire	formatter-output
-STD-0686	workflows/tooling.md	retain	tool-responsibility
+STD-0686	workflows/tooling.md	split	tool-responsibility-and-reference-recipe
 STD-0687	workflows/tooling.md	retain	ci-orchestration
 STD-0688	workflows/verification.md	route	acceptance-gates
 STD-0689	workflows/tooling.md	retain	failure-reporting

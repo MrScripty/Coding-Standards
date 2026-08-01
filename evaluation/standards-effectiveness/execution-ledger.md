@@ -4968,6 +4968,22 @@ across 76 completed and 39 pending logical clusters, with child `19.9` active.
 
 **Next slice:** `7.4b9j`, govern formatting policy and orchestration.
 
+## Row 19 Formatting Policy And Recipe Split Replan
+
+**Outcome:** Accepted planning correction.
+
+Lookahead found that `STD-0682` mixes editor-automation policy with VS Code and
+Prettier settings, while `STD-0686` mixes formatter/linter responsibility with
+a product pairing and installation command. Routing those complete sections to
+Tooling would make volatile product syntax appear normative.
+
+Child `19.9` therefore keeps Tooling as its sole canonical owner, directly
+refines `STD-0681` and `STD-0683`, and gives `STD-0682` and `STD-0686` one split
+disposition each. Product syntax is extracted only to non-normative Tooling
+recipes. Child `19.10` remains unchanged for standalone formatter commands.
+
+**Next slice:** `7.4b9j`, implement the reviewed formatting split package.
+
 ## Row 19 TypeScript Policy And Recipe Split Replan
 
 **Outcome:** Accepted planning correction.
