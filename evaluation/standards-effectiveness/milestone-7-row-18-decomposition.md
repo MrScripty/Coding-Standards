@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9l` routes quality-gate acceptance and local-versus-CI evidence
-meaning to Verification without gate-list or environment-hierarchy defaults.
+Milestone `7.4b9m` selects CI orchestration, failure aggregation, and scheduling
+without provider, fail-fast, tier, or parallel defaults.

@@ -1,0 +1,12 @@
+case	claim	authority	environment	scope	fallback	expected
+supported	complete	explicit	available	complete	none	allow
+contradictory	contradictory	explicit	available	complete	none	typed-invalid
+missing_claim	missing	explicit	available	complete	none	typed-unavailable
+missing_authority	complete	missing	available	complete	none	typed-unavailable
+missing_environment	complete	explicit	missing	complete	none	typed-unavailable
+missing_scope	complete	explicit	available	missing	none	typed-unavailable
+unsupported	complete	explicit	unsupported	complete	none	typed-unsupported
+catalog_default	complete	explicit	available	complete	gate-list	typed-invalid
+ci_default	complete	explicit	available	complete	ci	typed-invalid
+local_default	complete	explicit	available	complete	local-success	typed-invalid
+weaker_default	complete	explicit	available	complete	weaker-check	typed-invalid

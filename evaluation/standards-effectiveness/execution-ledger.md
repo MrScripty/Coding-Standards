@@ -5019,6 +5019,25 @@ logical clusters, with child `19.11` active.
 
 **Next slice:** `7.4b9l`, route quality-gate evidence meaning to Verification.
 
+## Milestone 7.4b9l: Quality-Gate Evidence Meaning
+
+**Outcome:** Accepted implementation slice.
+
+Verification now derives blocking and advisory gates from named claims, risks,
+contracts, environments, scope, and authority. Local, hook, CI, runner, release,
+and manual locations create no evidence hierarchy.
+
+**No-fallback result:** mandatory gate catalogs, CI-only evidence, local success,
+incremental substitution, and weaker checks are not defaults; missing,
+contradictory, or unsupported facts return typed diagnostics.
+
+**Verification:** 11 quality-gate decisions, legacy negative coverage, and two
+exact dispositions pass. All 143 repository checkers pass. The execution train
+reports 309 completed and 280 remaining IDs across 79 completed and 36 pending
+logical clusters, with child `19.12` active.
+
+**Next slice:** `7.4b9m`, govern CI orchestration and scheduling.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

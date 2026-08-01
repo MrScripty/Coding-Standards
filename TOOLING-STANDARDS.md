@@ -179,24 +179,9 @@ non-normative [Tooling recipe](reference/recipes/tooling.md#formatting-automatio
 
 ### Quality Gates Are Mandatory
 
-**All blocking gates must pass before code merges.** If any gate is removed or disabled
-(even temporarily), errors accumulate silently and become expensive to fix in bulk.
-
-Full lint remains mandatory in CI as an audit step, even when temporarily
-non-blocking during debt burn-down.
-
-| Gate | What it catches | Non-negotiable? |
-|------|----------------|-----------------|
-| Lint (critical anti-patterns) | Security/correctness/concurrency high-risk patterns | Yes — blocks PR |
-| Lint (no-new-violations) | New lint debt relative to baseline | Yes — blocks PR |
-| Lint (full audit) | Complete lint debt inventory | Required to run; blocking once debt reaches zero |
-| Type check | Type errors, interface mismatches | Yes — blocks PR |
-| Format check | Inconsistent formatting | Yes — blocks PR |
-| Tests | Regressions, broken behavior | Yes — blocks PR |
-| Decision traceability | Missing module reasoning updates when code changes | Yes — blocks PR |
-
-**Never remove a quality gate from CI without immediately replacing it.** A lint step removed
-"temporarily" can result in hundreds of errors accumulating before anyone notices.
+Canonical gate acceptance and blocking authority are defined by
+[Verification](workflows/verification.md#quality-gates-and-execution-location).
+The former universal gate catalog is retired and defines no mandatory checks.
 
 ### Prefer Failure Aggregation Over Fail-Fast
 
@@ -551,11 +536,9 @@ jobs:
 
 ### CI vs. Local Checks
 
-Projects may use staged or incremental checks locally and broader checks in CI,
-but this is a cost optimization rather than a proof hierarchy. Required claims
-must run wherever their environment is available, including locally,
-pre-commit, pre-push, CI, a dedicated runner, release verification, or a manual
-gate. Do not classify an evidence kind as CI-only.
+Canonical execution-location evidence meaning is defined by
+[Verification](workflows/verification.md#quality-gates-and-execution-location).
+Local and CI labels create no proof hierarchy.
 
 ---
 

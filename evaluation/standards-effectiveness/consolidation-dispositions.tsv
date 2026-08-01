@@ -633,3 +633,5 @@ STD-0683	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select formatting chec
 STD-0686	TOOLING-STANDARDS.md	workflows/tooling.md	split	select formatter and linter responsibilities while extracting Prettier ESLint pairing and installation syntax to non-normative Tooling reference
 STD-0684	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative formatter check command and glob example
 STD-0685	TOOLING-STANDARDS.md	reference/recipes/tooling.md	retire	non-normative formatter exit-code interpretation example
+STD-0688	TOOLING-STANDARDS.md	workflows/verification.md	refine	derive blocking and advisory quality gates from named claims risks contracts environments and authority without a mandatory gate catalog
+STD-0695	TOOLING-STANDARDS.md	workflows/verification.md	refine	derive execution location from claim inputs environment and authority without local versus CI evidence hierarchy

@@ -14,6 +14,7 @@ for heading in \
   "## Evidence Kinds" \
   "## Environment Qualification" \
   "## Execution Mode" \
+  "## Quality Gates And Execution Location" \
   "## Smoke Checks" \
   "## Scheduling And Duration"; do
   grep -qFx "$heading" "$WORKFLOW"
@@ -40,6 +41,7 @@ if rg -q '^\| Tests \| Affected only \| Full suite \|$' "$TOOLING"; then
   printf 'TOOLING-STANDARDS.md retains a universal local/CI test schedule\n' >&2
   exit 1
 fi
+! rg -F -q '| Gate | What it catches | Non-negotiable? |' "$TOOLING"
 
 grep -q 'Startup alone is usually' "$WORKFLOW"
 grep -q 'evidence and never substitutes' "$WORKFLOW"

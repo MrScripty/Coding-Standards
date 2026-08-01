@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.10 are accepted; quality-gate
-acceptance and local-versus-CI evidence meaning for child 19.11 are active.
+**Current phase:** Tooling children 19.1 through 19.11 are accepted; CI
+orchestration, failure aggregation, and scheduling for child 19.12 are active.
 
-**Next slice:** Milestone 7.4b9l for `STD-0688` and `STD-0695`; route quality-gate
-acceptance and local-versus-CI evidence meaning to Verification without gate-list
-or environment-hierarchy defaults.
+**Next slice:** Milestone 7.4b9m for `STD-0687`, `STD-0689`, and `STD-0690`;
+select CI orchestration, dependency graph, failure aggregation, and schedule from
+cost and diagnostic facts without provider, fail-fast, tier, or parallel defaults.
 
 **Acceptance status:** `partial`
 
@@ -1589,9 +1589,12 @@ all structural/routing fixtures pass.
    - `7.4b9k` (`Accepted`): move `STD-0684` and `STD-0685` into non-normative
      formatter command and output examples without command, glob, or exit-code
      defaults.
-   - `7.4b9l` (`Planned`): refine `STD-0688` and `STD-0695` under Verification
+   - `7.4b9l` (`Accepted`): refine `STD-0688` and `STD-0695` under Verification
      authority for quality-gate acceptance and local-versus-CI evidence meaning
      without mandatory gate lists or environment hierarchy.
+   - `7.4b9m` (`Planned`): refine `STD-0687`, `STD-0689`, and `STD-0690` into
+     CI orchestration and scheduling without provider, fail-fast, tier, or
+     parallel defaults.
    - Row 19 formatting split replan (`Accepted`): retain Tooling as the sole
      canonical owner for child `19.9`; refine `STD-0681` and `STD-0683`
      directly, use split dispositions for `STD-0682` and `STD-0686`, and

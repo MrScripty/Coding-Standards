@@ -43,6 +43,28 @@ asserts that feature workflow.
 Static analysis, formatting, linting, compilation, and build checks are
 supporting gates unless the objective is specifically the property they prove.
 
+## Quality Gates And Execution Location
+
+Derive each blocking or advisory gate from a named acceptance claim, affected
+risk, owned contract, and required environment. Record what the gate proves,
+its blocking authority, and the conditions for changing or removing it. A gate
+must pass when its selected claim is required; no catalog of lint, type,
+formatting, test, documentation, or traceability checks is universally
+mandatory.
+
+Execution location does not create an evidence hierarchy. Run the claim where
+its required inputs, environment, authority, and observable result are
+available, whether local, in a hook, in CI, on a dedicated runner, during
+release verification, or through a recorded manual procedure. Incremental or
+staged checks prove only their selected scope and cannot substitute for a
+broader required claim.
+
+Contradictory gate and claim authority is `invalid`. Missing claim, environment,
+scope, or blocking authority is `unavailable`. A required claim outside
+supported execution capability is `unsupported`; do not replace it with a
+conventional gate list, CI execution, local success, a weaker check, or default
+acceptance.
+
 ## Environment Qualification
 
 Each claim names one environment requirement:
