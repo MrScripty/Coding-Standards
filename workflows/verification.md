@@ -184,18 +184,40 @@ environment, or default success.
 
 ## Test Design
 
-- Assert observable behavior, not implementation trivia.
-- Include the failure mode or boundary invariant that could regress.
-- Keep fixtures deterministic and isolate shared mutable or durable resources.
-- Do not weaken an assertion to match an incorrect implementation.
-- Avoid mocks when the objective is the behavior of the mocked boundary.
-- Use the repository's established test placement and naming convention unless
-  that convention prevents the selected evidence.
+Design each focused check around one coherent observable claim or invariant.
+One check may need several assertions to prove that outcome; several claims may
+need separate checks when their setup, failure diagnosis, ownership, or
+lifecycles differ. Do not split or combine checks to satisfy a slogan about one
+assertion or one behavior.
 
-Detailed test organization remains in
-[TESTING-STANDARDS.md](../TESTING-STANDARDS.md). This workflow is canonical for
-claim selection and acceptance; the testing document owns test-design
-techniques.
+Structure setup, action, observation, and cleanup so the causal path and failed
+criterion are reviewable. Arrange-Act-Assert, Given-When-Then, tables, state
+machines, generators, or another structure are mechanisms selected from the
+claim. Comments and explicit phases are required only when the test is not
+otherwise clear.
+
+Select real implementations, fakes, simulators, fixtures, mocks, or controlled
+substitutes from the boundary being proved. A substitute is valid only when its
+modeled contract is the intended proof target or the claim explicitly excludes
+the real boundary. Do not use a mock to claim behavior of the mocked boundary,
+and do not impose a universal real/fake/mock preference hierarchy.
+
+Derive examples and edge conditions from the input domain, invariants, prior
+defects, failure modes, state transitions, numeric or resource boundaries, and
+consumer contracts. Empty, null, minimum, maximum, malformed, duplicate, and
+failure inputs are not universal requirements when they are outside that
+domain. Missing applicable boundary evidence is `unavailable`; contradictory
+test and contract facts are `invalid`.
+
+Use property-based or generative evidence when a property over a meaningful
+input domain is the claim and generation, shrinking, reproducibility, and
+oracles can preserve it. Example-based evidence remains valid for named
+scenarios. Do not require property testing from an algorithm label, roundtrip,
+inverse operation, or “all valid inputs” slogan without an owned property and
+usable oracle.
+
+Never weaken an assertion, narrow an input domain, replace the real objective
+with substitute behavior, or accept successful execution as default success.
 
 ## Scheduling And Duration
 

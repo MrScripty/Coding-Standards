@@ -120,98 +120,17 @@ This legacy heading is a non-normative migration route.
 
 ## Unit Test Guidelines
 
-### Test One Thing
-
-Each test should verify a single behavior:
-
-```text
-BAD: test_user_service
-     Tests creation, validation, and persistence together.
-
-GOOD: test_create_user_with_valid_email_succeeds
-GOOD: test_create_user_with_invalid_email_returns_error
-GOOD: test_create_user_persists_to_database
-```
-
-### Arrange-Act-Assert Pattern
-
-Structure tests with clear phases:
-
-```text
-Arrange: create graph with active dependents
-Act: attempt to remove the depended-on node
-Assert: removal is rejected with the expected reason
-```
-
-```typescript
-// TypeScript
-test('calculateTotal applies discount correctly', () => {
-    // Arrange
-    const items = [{ price: 100 }, { price: 50 }];
-    const discount = 0.1;
-
-    // Act
-    const total = calculateTotal(items, discount);
-
-    // Assert
-    expect(total).toBe(135);
-});
-```
-
-### Avoid Mocks When Possible
-
-**Prefer (in order):**
-
-1. Real implementations (if fast enough)
-2. In-memory fakes
-3. Test fixtures
-4. Mocks (last resort)
-
-**Use mocks only for:**
-
-- External services (APIs, databases in unit tests)
-- Non-deterministic behavior (time, randomness)
-- Slow operations that can't be made fast
-
-```typescript
-// BAD: Mocking everything
-const mockRepo = jest.fn();
-const mockValidator = jest.fn();
-const mockLogger = jest.fn();
-
-// GOOD: Use real implementations where possible
-const repo = new InMemoryUserRepository();
-const validator = new UserValidator(); // Real, it's fast
-const logger = new NullLogger(); // Simple fake
-```
-
-### Test Edge Cases
-
-Always test:
-
-- Empty inputs
-- Null/undefined values
-- Boundary conditions
-- Error cases
-
-Use test names that state the condition and expected behavior. Language-specific
-test syntax belongs in the matching language standard.
+Focused test structure, substitutes, edge-condition selection, and typed
+outcomes are owned by [Verification](workflows/verification.md#test-design).
+Language-specific syntax belongs in the applicable language profile.
 
 ---
 
 ## Property-Based Testing
 
-For algorithms with mathematical invariants, use property-based testing:
-
-Rust property-test guidance lives in
-[languages/rust/RUST-TOOLING-STANDARDS.md](languages/rust/RUST-TOOLING-STANDARDS.md#property-based-tests).
-
-### When to Use Property-Based Testing
-
-- Mathematical invariants (graph properties, sorting)
-- Serialization/deserialization roundtrips
-- Inverse operations (encode/decode, compress/decompress)
-- Algorithms that should work for any valid input
+Property-based and generative evidence selection is owned by
+[Verification](workflows/verification.md#test-design). Concrete tooling, when
+selected, belongs in the applicable language profile.
 
 ---
 

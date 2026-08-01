@@ -4571,6 +4571,29 @@ remaining IDs across 61 completed and 36 pending logical clusters, with child
 **Next slice:** `7.4b8cd`, refine `STD-0618` through `STD-0624` into
 Verification focused test-design evidence.
 
+## Milestone 7.4b8cd: Testing Focused Design
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Verification now groups checks by coherent observable
+claims and selects test structure, boundary substitutes, domain edges, and
+property-based techniques from the actual proof target. Multiple assertions,
+examples, and generative evidence remain mechanisms rather than quality ranks.
+
+**No-fallback/legacy result:** one-assertion, Arrange-Act-Assert, mock-order,
+universal edge-case, algorithm-label, roundtrip, inverse-operation, and all-
+input slogans cannot select evidence. Missing domains, boundaries, or oracles
+return typed diagnostics; assertions cannot be weakened to obtain success.
+
+**Verification:** focused decisions cover 16 allowed, invalid, unsupported,
+and unavailable outcomes plus exact replacement and seven dispositions. All
+128 `verify-*.sh` checkers pass; the train reports 244 completed and 345
+remaining IDs across 62 completed and 35 pending logical clusters, with child
+`18.9` active.
+
+**Next slice:** `7.4b8ce`, refine `STD-0603` through `STD-0607` into
+Verification repository-sensitive test organization.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

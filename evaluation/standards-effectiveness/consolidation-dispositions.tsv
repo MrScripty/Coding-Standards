@@ -563,3 +563,10 @@ STD-0612	TESTING-STANDARDS.md	workflows/verification.md	refine	select user-workf
 STD-0613	TESTING-STANDARDS.md	workflows/verification.md	refine	require claim-selected producer-to-consumer path and separately owned contract evidence without typecheck unit partial-integration or lower-fidelity substitution
 STD-0614	TESTING-STANDARDS.md	workflows/verification.md	refine	prove named boundary invariants through applicable contract and path claims without universal invariant lists coverage substitution or one-place documentation defaults
 STD-0615	TESTING-STANDARDS.md	workflows/verification.md	refine	start with the smallest useful objective path and broaden from risk and consumers without test-first one-full-path horizontal-scaling or vertical-slice-template defaults
+STD-0618	TESTING-STANDARDS.md	workflows/verification.md	index	replace unit-test guidelines with a non-normative route to canonical focused test design
+STD-0619	TESTING-STANDARDS.md	workflows/verification.md	refine	group assertions by coherent observable claim setup ownership and lifecycle without one-behavior or one-assertion defaults
+STD-0620	TESTING-STANDARDS.md	workflows/verification.md	refine	select reviewable test structure from the claim without mandatory arrange-act-assert phases comments or templates
+STD-0621	TESTING-STANDARDS.md	workflows/verification.md	refine	select real fakes simulators fixtures mocks or substitutes from the proved boundary without universal mechanism hierarchy or mock-last fallback
+STD-0622	TESTING-STANDARDS.md	workflows/verification.md	refine	derive edge conditions from owned domains invariants defects transitions and consumers without universal empty null boundary or error checklists
+STD-0623	TESTING-STANDARDS.md	workflows/verification.md	index	replace property-testing parent with a non-normative route to canonical generative evidence selection
+STD-0624	TESTING-STANDARDS.md	workflows/verification.md	refine	select property evidence from an owned property meaningful domain reproducible generator shrinker and oracle without algorithm roundtrip inverse or all-input defaults

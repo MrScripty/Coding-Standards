@@ -10,9 +10,9 @@
 Language Bindings, Resilience, Contracts, Frontend, and Performance children
 are accepted.
 
-**Next slice:** Milestone 7.4b8cd refine `STD-0618`, `STD-0619`, `STD-0620`,
-`STD-0621`, `STD-0622`, `STD-0623`, and `STD-0624` into Verification-owned
-focused test-design evidence.
+**Next slice:** Milestone 7.4b8ce refine `STD-0603`, `STD-0604`, `STD-0605`,
+`STD-0606`, and `STD-0607` into Verification-owned repository-sensitive test
+organization.
 
 **Acceptance status:** `partial`
 
@@ -1518,8 +1518,11 @@ all structural/routing fixtures pass.
      consumers, and material environments. Reject suite labels, fidelity
      hierarchies, lower-fidelity checks, partial traversal, builds, smoke,
      realistic simulation, checklist completion, and default success.
-   - `7.4b8cd` (`Planned`): refine `STD-0618` through `STD-0624` into focused
-     test-design evidence.
+   - `7.4b8cd` (`Accepted`): refine `STD-0618` through `STD-0624` into focused
+     test-design evidence. Select assertion grouping, structure, substitutes,
+     edge conditions, and generative methods from observable claims and owned
+     domains. Reject one-assertion, Arrange-Act-Assert, mock hierarchy,
+     universal edge-case, algorithm-label, and weakened-assertion defaults.
    - `7.4b8ce` (`Planned`): refine `STD-0603` through `STD-0607` into
      repository-sensitive test organization.
    - `7.4b8cf` (`Planned`): refine `STD-0625` through `STD-0631` into coverage
