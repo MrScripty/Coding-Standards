@@ -4487,6 +4487,35 @@ active.
 **Next slice:** `7.4b8ca`, refine `STD-0642` through `STD-0644` into the
 existing Performance owner package.
 
+## Milestone 7.4b8ca: Testing Performance Evidence
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Performance now selects benchmark and test mechanisms
+from an owned workload, metric, budget or comparison, representative
+environment, variability policy, baseline, and measurement capability. A
+harness improves repeatability but does not authorize the claim or threshold.
+
+**No-fallback/legacy result:** fixed durations, percentages, sample counts,
+machines, schedules, or tools, successful harness execution, single samples,
+alternate devices, microbenchmarks, and weaker environments cannot substitute
+for the required claim. Missing authority or evidence remains typed
+`unavailable`.
+
+**Verification:** focused decisions cover 15 allowed, invalid, unsupported,
+and unavailable outcomes plus exact replacement and three dispositions. All
+126 `verify-*.sh` checkers pass; the train reports 230 completed and 359
+remaining IDs across 60 completed and 30 pending logical clusters, with child
+`18.7` active.
+
+**Verification deviation:** the first complete-suite run found three older
+dependency checkers whose first-line cursor assertions still named the prior
+Performance identifier. Their active assertions now name `STD-0602`; frozen
+dependency ownership and disposition assertions were unchanged.
+
+**Next slice:** `7.4b8cb`, planning only, to decompose the 43-identifier
+Verification child by semantic contract and legacy-closure order.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

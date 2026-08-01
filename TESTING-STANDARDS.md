@@ -451,25 +451,10 @@ by the [Frontend application profile](profiles/applications/frontend.md#evidence
 
 ## Performance Testing
 
-### Benchmark Critical Paths
-
-Use the ecosystem's benchmark harness for repeatable measurements. Rust
-benchmark requirements live in
-[languages/rust/RUST-TOOLING-STANDARDS.md](languages/rust/RUST-TOOLING-STANDARDS.md#required-criterion-benchmarks).
-
-### Set Performance Budgets
-
-```typescript
-test('search completes within 100ms for 10k items', async () => {
-    const items = generateItems(10_000);
-
-    const start = performance.now();
-    await search(items, 'query');
-    const duration = performance.now() - start;
-
-    expect(duration).toBeLessThan(100);
-});
-```
+Performance benchmark, budget, workload, environment, variability, and
+regression evidence is owned by
+[Performance](topics/performance.md#performance-test-evidence). Language
+profiles may select concrete tools but do not override the claim contract.
 
 ---
 

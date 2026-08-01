@@ -73,6 +73,27 @@ Documentation records durable claim, tradeoff, and reproduction facts that
 cannot be recovered from the code and evidence. Do not require a copied
 performance comment template or treat documentation as measurement.
 
+## Performance Test Evidence
+
+Select the benchmark or test harness from the owned claim, workload, required
+environment, and measurement capability. An ecosystem harness may improve
+repeatability, but its use does not establish that the workload, metric,
+baseline, budget, or environment is authoritative. A unit-test clock around one
+invocation does not prove an end-to-end latency, throughput, capacity, memory,
+energy, startup, or frame-time claim unless its measurement contract covers
+that claim.
+
+A performance budget names its authority, consumer impact, workload, metric,
+environment, and variability policy. Derive a threshold from that contract; do
+not copy a duration, percentage, sample count, machine, CI cadence, or benchmark
+tool from an example. Compare the candidate with the applicable baseline or
+budget and preserve correctness and resource-tradeoff evidence.
+
+When a representative environment, reliable measurement capability,
+authoritative budget, or applicable baseline is unavailable, return
+`unavailable`. Do not pass a weaker microbenchmark, nearby device, debug build,
+single timing sample, or successful harness execution as the required result.
+
 ## Typed Outcomes
 
 Contradictory metric, budget, workload, environment, or authority facts are

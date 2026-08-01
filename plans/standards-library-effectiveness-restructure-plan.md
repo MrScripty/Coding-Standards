@@ -7,10 +7,19 @@
 **Plan status:** `Active`
 
 **Current phase:** Testing-source owner decomposition is active; Concurrency,
-Language Bindings, Resilience, Contracts, and Frontend children are accepted.
+Language Bindings, Resilience, Contracts, Frontend, and Performance children
+are accepted.
 
-**Next slice:** Milestone 7.4b8ca refine `STD-0642`, `STD-0643`, and `STD-0644`
-into the existing Performance owner package.
+**Next slice:** Milestone 7.4b8cb decompose row-18 child `18.7` from `STD-0602`
+into bounded Verification-owned implementation and legacy-closure slices
+covering `STD-0603`, `STD-0604`, `STD-0605`, `STD-0606`, `STD-0607`,
+`STD-0608`, `STD-0609`, `STD-0610`, `STD-0612`, `STD-0613`, `STD-0614`,
+`STD-0615`, `STD-0618`, `STD-0619`, `STD-0620`, `STD-0621`, `STD-0622`,
+`STD-0623`, `STD-0624`, `STD-0625`, `STD-0626`, `STD-0627`, `STD-0628`,
+`STD-0629`, `STD-0630`, `STD-0631`, `STD-0632`, `STD-0633`, `STD-0634`,
+`STD-0636`, `STD-0637`, `STD-0638`, `STD-0640`, `STD-0645`, `STD-0646`,
+`STD-0647`, `STD-0648`, `STD-0649`, `STD-0650`, `STD-0651`, `STD-0652`, and
+`STD-0653`.
 
 **Acceptance status:** `partial`
 
@@ -1499,8 +1508,14 @@ all structural/routing fixtures pass.
      from the observable claim. Reject selector, synthetic-event, DOM-shim,
      mocked-geometry, snapshot, happy-path, and weaker-environment substitutes
      with typed diagnostics.
-   - `7.4b8ca` (`Planned`): refine `STD-0642` through `STD-0644` into the
-     existing Performance owner package.
+   - `7.4b8ca` (`Accepted`): refine `STD-0642` through `STD-0644` into
+     Performance. Require claim-selected benchmark, workload, metric, budget,
+     environment, variability, baseline, measurement, and tradeoff evidence.
+     Reject fixed thresholds, harness success, single samples, alternate
+     devices, microbenchmark substitution, and weaker evidence with typed
+     diagnostics.
+   - `7.4b8cb` (`Planned`): planning only; decompose the 43-identifier
+     Verification child `18.7` by semantic contract and legacy-closure order.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
