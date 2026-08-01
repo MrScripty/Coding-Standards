@@ -53,7 +53,9 @@ rg -F -q '`7.4b8bw` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8bx` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8by` (`Planned`)' \
+rg -F -q '`7.4b8by` (`Accepted`)' \
+  "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b8bz` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing language-binding evidence passed: 16 decisions, 1 disposition\n'

@@ -7,9 +7,9 @@
 **Plan status:** `Active`
 
 **Current phase:** Testing-source owner decomposition is active; Concurrency,
-Language Bindings, and Resilience children are accepted.
+Language Bindings, Resilience, and Contracts children are accepted.
 
-**Next slice:** Milestone 7.4b8by refine `STD-0635` into the existing Contracts
+**Next slice:** Milestone 7.4b8bz refine `STD-0641` into the existing Frontend
 owner package.
 
 **Acceptance status:** `partial`
@@ -1488,7 +1488,13 @@ all structural/routing fixtures pass.
      failure repair before new work. Reject helper-only, restart smoke, empty-
      state bootstrap, log, final-snapshot, inferred-position, state-reset, and
      weaker recovery substitutions with typed diagnostics.
-   - `7.4b8by` (`Planned`): refine `STD-0635` into the existing Contracts owner
+   - `7.4b8by` (`Accepted`): refine `STD-0635` into Contracts. Require canonical
+     authority, version, artifact role, derivation, provenance, and producer-
+     consumer evidence. Separate validation from regeneration and reject stale
+     shape, inferred authority, consumer-guessed regeneration, authoritative-
+     input overwrite, producer snapshot, parse success, and generation success
+     as acceptance substitutes with typed diagnostics.
+   - `7.4b8bz` (`Planned`): refine `STD-0641` into the existing Frontend owner
      package.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero

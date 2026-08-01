@@ -38,7 +38,7 @@ rg -F -q '`7.4b8bt` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8bu` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8by` (`Planned`)' \
+rg -F -q '`7.4b8bz` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Planning consolidation passed: 17 decisions, 18 dispositions\n'

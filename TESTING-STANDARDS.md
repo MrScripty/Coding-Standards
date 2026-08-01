@@ -384,18 +384,10 @@ beforeEach(() => {
 
 ### Validate Persisted Dynamic Artifacts
 
-Persisted examples and fixtures that depend on dynamic schemas or generated
-contracts must be validated or regenerated before commit.
-
-Examples include:
-- templates
-- manifests
-- saved graphs or workflows
-- schema-backed JSON/YAML fixtures
-- example requests/responses derived from current producers
-
-The goal is to catch silent drift between the checked-in artifact and the
-current producer contract.
+Canonical authority, validation, regeneration, consumer-evidence, and typed-
+outcome requirements are in
+[Persisted Contract Artifacts](topics/contracts.md#persisted-contract-artifacts).
+This legacy heading is a non-normative migration route.
 
 ---
 

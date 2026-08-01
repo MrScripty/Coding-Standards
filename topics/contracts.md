@@ -280,6 +280,30 @@ Never delete or overwrite authoritative data as a recovery fallback. Rebuild is
 valid only for explicitly disposable derived state whose authoritative source
 and reconstruction procedure are known.
 
+## Persisted Contract Artifacts
+
+For a checked-in example, fixture, template, manifest, saved workflow, request,
+response, or other persisted artifact derived from a schema, generator, or
+producer contract, record the canonical authority, applicable contract version,
+derivation method, intended consumers, and whether the artifact is authored
+input, authoritative state, or disposable derived output.
+
+Validation proves that the current artifact satisfies its applicable producer
+and consumer contracts. Regeneration proves deterministic derivation from the
+selected authority; it does not by itself prove that consumers accept the
+result or that overwriting the prior artifact is authorized. When regeneration
+is selected, preserve authored or authoritative inputs and verify every
+affected consumer path before accepting the new output.
+
+Return `invalid` when the artifact contradicts its selected authority or
+consumer contract, `unsupported` when its well-formed version or variant is
+outside the declared support set, and `unavailable` when the authority,
+generator, decoder, consumer, provenance, or required evidence cannot be
+obtained. Do not accept a stale artifact, infer authority from the checked-in
+shape, regenerate from a consumer guess, overwrite authoritative input, copy a
+producer snapshot as consumer proof, or report success because generation or
+parsing completed.
+
 ## Public And Independently Deployed Evolution
 
 For public or independently deployed consumers:

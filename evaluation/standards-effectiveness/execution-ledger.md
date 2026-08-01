@@ -4441,6 +4441,28 @@ clusters, with child `18.4` active.
 **Next slice:** `7.4b8by`, refine `STD-0635` into the existing Contracts owner
 package.
 
+## Milestone 7.4b8by: Persisted Contract Artifacts
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Contracts now owns canonical authority, version,
+artifact role, deterministic derivation, provenance, and producer-consumer
+evidence for persisted examples and fixtures. Validation and regeneration are
+distinct claims; regeneration cannot authorize overwrite or prove consumers.
+
+**No-fallback/legacy result:** stale shape, inferred authority, consumer guess,
+authoritative-input overwrite, producer snapshot, parse success, generation
+success, and weaker evidence cannot satisfy artifact compatibility.
+
+**Verification:** 15 focused decisions cover allowed, invalid, unsupported,
+and unavailable persisted-artifact outcomes plus exact replacement and one
+disposition. All 124 `verify-*.sh` checkers pass; the train reports 226
+completed and 363 remaining IDs across 58 completed and 32 pending logical
+clusters, with child `18.5` active.
+
+**Next slice:** `7.4b8bz`, refine `STD-0641` into the existing Frontend owner
+package.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

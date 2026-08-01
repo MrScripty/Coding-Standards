@@ -1,0 +1,16 @@
+case	artifact_role	authority	version	derivation	consumer_evidence	provenance	action	substitute	expected
+valid_authored_fixture	authored	declared	supported	not-required	complete	complete	validate	none	allow
+valid_derived_fixture	derived	declared	supported	deterministic	complete	complete	regenerate	none	allow
+unsupported_version	authored	declared	unsupported	not-required	complete	complete	validate	none	typed-unsupported
+missing_authority	derived	missing	supported	deterministic	complete	complete	regenerate	none	typed-unavailable
+missing_generator	derived	declared	supported	missing	complete	complete	regenerate	none	typed-unavailable
+missing_consumer_evidence	derived	declared	supported	deterministic	missing	complete	regenerate	none	typed-unavailable
+missing_provenance	derived	declared	supported	deterministic	complete	missing	regenerate	none	typed-unavailable
+contradictory_artifact	authored	declared	invalid	not-required	complete	complete	validate	none	typed-invalid
+stale_shape	derived	declared	supported	deterministic	complete	complete	accept	stale	typed-invalid
+inferred_authority	derived	inferred	supported	deterministic	complete	complete	regenerate	inferred-authority	typed-invalid
+consumer_guess	derived	declared	supported	guessed	complete	complete	regenerate	consumer-guess	typed-invalid
+overwrite_authored	authored	declared	supported	deterministic	complete	complete	regenerate	overwrite	typed-invalid
+producer_snapshot	derived	declared	supported	deterministic	missing	complete	validate	producer-snapshot	typed-invalid
+generation_success	derived	declared	supported	deterministic	missing	complete	regenerate	generation-success	typed-invalid
+parse_success	authored	declared	supported	not-required	missing	complete	validate	parse-success	typed-invalid
