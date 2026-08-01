@@ -1,0 +1,11 @@
+case	authority	scope	reason	unmet_checks	compensation	follow_up	fallback	expected
+authorized_bypass	explicit	complete	recorded	recorded	complete	required	none	allow-bypass
+missing_authority	missing	complete	recorded	recorded	complete	required	none	typed-invalid
+missing_scope	explicit	missing	recorded	recorded	complete	required	none	typed-unavailable
+missing_reason	explicit	complete	missing	recorded	complete	required	none	typed-unavailable
+unknown_checks	explicit	complete	recorded	missing	complete	required	none	typed-unavailable
+missing_compensation	explicit	complete	recorded	recorded	missing	required	none	typed-unavailable
+missing_follow_up	explicit	complete	recorded	recorded	complete	missing	none	typed-unavailable
+emergency_default	explicit	complete	recorded	recorded	complete	required	emergency	typed-invalid
+no_verify_default	explicit	complete	recorded	recorded	complete	required	no-verify	typed-invalid
+later_repair	explicit	complete	recorded	recorded	complete	required	later-repair	typed-invalid

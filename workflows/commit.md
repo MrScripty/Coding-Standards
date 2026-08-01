@@ -44,6 +44,30 @@ misleading boundaries, fixup commits, and unintended merge topology.
 
 History review produces findings. It does not itself authorize rewriting.
 
+Automation may remind an operator to perform a selected history review and may
+report the explicit range, graph, or cumulative diff. It must not infer the
+intended base, decide that cleanup is required, or run amend, rebase, reset,
+squash, commit-dropping, or topology-changing commands. Missing range or base
+facts produce a typed process diagnostic.
+
+## Hook Bypass Authority
+
+Bypassing a repository hook skips an automation mechanism; it does not waive
+the underlying implementation, verification, security, or commit obligation.
+Permit bypass only when an explicitly authorized procedure identifies the
+affected hook, change scope, reason, unmet checks, risk owner, compensating
+evidence or containment, and required follow-up.
+
+Record the bypass in the durable location selected by that procedure. A commit
+message, emergency label, production incident, tool failure, or operator
+urgency does not grant authority by itself. Do not default to a bypass command,
+`no-verify` flag, emergency exception, successful no-op, or later repair.
+
+When bypass authority, scope, or required evidence is missing or contradictory,
+return a typed process diagnostic and leave the hook enabled. When the selected
+procedure cannot be executed in the repository or toolchain, report the
+unsupported mechanism rather than silently committing through another path.
+
 ## Rewrite Authority
 
 Rebase, amend, reset, squash, commit dropping, and merge-topology rewriting

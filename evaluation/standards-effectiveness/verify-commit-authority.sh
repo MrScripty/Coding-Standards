@@ -4,6 +4,7 @@ set -euo pipefail
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 readonly FIXTURE="$SCRIPT_DIR/fixtures/commit/authority.tsv"
+readonly BYPASS_FIXTURE="$SCRIPT_DIR/fixtures/commit/hook-bypass.tsv"
 
 while IFS=$'\t' read -r case_id event history authority recoverable topology \
   expected; do
@@ -42,6 +43,22 @@ while IFS=$'\t' read -r case_id event history authority recoverable topology \
   fi
 done < "$FIXTURE"
 
+while IFS=$'\t' read -r case_id authority scope reason unmet_checks \
+  compensation follow_up fallback expected extra; do
+  [[ "$case_id" == case ]] && continue
+  [[ -z "${extra:-}" ]]
+  if [[ "$fallback" != none || "$authority" == missing ]]; then
+    actual=typed-invalid
+  elif [[ "$scope" == missing || "$reason" == missing ||
+          "$unmet_checks" == missing || "$compensation" == missing ||
+          "$follow_up" == missing ]]; then
+    actual=typed-unavailable
+  else
+    actual=allow-bypass
+  fi
+  [[ "$actual" == "$expected" ]]
+done < "$BYPASS_FIXTURE"
+
 required_links=(
   "STANDARDS-ROUTER.md"
   "README.md"
@@ -65,6 +82,8 @@ legacy_patterns=(
   "Rewriting unpushed merge commits is allowed"
   "Drop regression commits and fixup fixes"
   "@{u}"
+  'git commit --no-verify'
+  'When absolutely necessary'
 )
 
 for pattern in "${legacy_patterns[@]}"; do
@@ -78,4 +97,15 @@ for pattern in "${legacy_patterns[@]}"; do
   fi
 done
 
-printf 'Commit authority fixtures passed\n'
+for text in '## Hook Bypass Authority' 'does not waive' \
+  'does not grant authority by itself' 'Do not default to a bypass command' \
+  'leave the hook enabled'; do
+  rg -F -q "$text" "$REPO_ROOT/workflows/commit.md"
+done
+
+for id in STD-0663 STD-0703; do
+  awk -F '\t' -v id="$id" '$1 == id && $3 == "workflows/commit.md" && $4 == "refine" { found = 1 } END { exit !found }' \
+    "$SCRIPT_DIR/consolidation-dispositions.tsv"
+done
+
+printf 'Commit authority fixtures passed: 10 hook-bypass decisions, 2 exact dispositions\n'

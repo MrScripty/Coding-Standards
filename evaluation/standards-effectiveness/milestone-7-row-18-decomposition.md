@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9c` routes the next Tooling child to canonical Commit authority
-for history review and explicit hook bypass without rewrite or bypass defaults.
+Milestone `7.4b9d` extracts hook rationale, tool selection, installation, and
+configuration examples into non-normative reference without tool defaults.

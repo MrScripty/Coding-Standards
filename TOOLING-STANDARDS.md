@@ -92,15 +92,8 @@ manual procedure.
 
 ### Branch-History Review Reminder
 
-Follow the [Commit Workflow](workflows/commit.md). A pre-push hook may remind
-the maintainer to inspect the explicit branch range, cumulative diff, and commit
-graph.
-
-Keep the reminder advisory because commit-boundary quality and rewrite safety
-require human ownership facts. The hook must not run rebase, amend, reset,
-squash, or commit-dropping commands. A history finding does not grant rewrite
-authority. Configure the project-owned intended base as `HISTORY_BASE_REF`; do
-not infer it from an arbitrary local or remote branch name.
+Canonical history-review reminders and rewrite authority are defined by the
+[Commit Workflow](workflows/commit.md#branch-history-review).
 
 ### Performance Tips
 
@@ -869,14 +862,6 @@ integrity, unused dependency detection, and CI integration for dependency checks
 
 ## Bypassing Hooks (Emergency Only)
 
-When absolutely necessary:
-
-```bash
-git commit --no-verify -m "emergency: fix production outage"
-```
-
-**Document why** in the commit message.
-
-**Follow up** with proper fix that passes all checks.
-
-This should be rare and auditable.
+Canonical hook-bypass authority is defined by the
+[Commit Workflow](workflows/commit.md#hook-bypass-authority). This legacy
+section defines no emergency, command, documentation, or follow-up default.

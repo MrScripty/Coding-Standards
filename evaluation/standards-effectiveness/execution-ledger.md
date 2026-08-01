@@ -4815,6 +4815,32 @@ completed and 46 pending logical clusters, with child `19.2` active.
 
 **Next slice:** `7.4b9c`, route `STD-0663` and `STD-0703` to Commit authority.
 
+## Milestone 7.4b9c: Commit History And Hook-Bypass Authority
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Commit now owns advisory history-review automation and
+hook-bypass authorization. The reviewed row-19 decomposition and both exact
+dispositions supersede the preliminary owner proposal for these identifiers.
+
+**No-fallback result:** reminders cannot infer a base or mutate history. Hook
+bypass requires explicit authority, scope, reason, unmet checks, risk handling,
+compensating action, and follow-up; emergency labels, `no-verify`, successful
+no-ops, and later repair grant no authority.
+
+**Verification:** Commit authority and bypass decisions, exact dispositions,
+reviewed decomposition routes, lifecycle checks, and all 137 repository
+checkers pass. The execution train reports 281 completed and 308 remaining IDs
+across 70 completed and 45 pending logical clusters, with child `19.3` active.
+
+**Next slice:** `7.4b9d`, extract `STD-0656`, `STD-0657`, `STD-0658`,
+`STD-0659`, and `STD-0661` into non-normative Tooling recipes.
+
+**Verification deviation:** an initial edit attempted to update the generated
+owner proposal to the reviewed Commit destination. Focused execution-train
+verification correctly rejected mutation of that frozen baseline evidence; the
+override and generated-map edits were removed before acceptance.
+
 **Verification deviation:** the mechanical cursor advance initially changed
 the frozen first identifier of row `18.14` from `STD-0602` to `STD-0654`. The
 immutable row was restored before focused verification, and the active planning

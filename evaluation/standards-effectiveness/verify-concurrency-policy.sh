@@ -161,7 +161,7 @@ rg -F -q '[Rust Security profile](profiles/languages/rust/security.md)' "$LEGACY
 ! rg -F -q '## C# Async/Await Rules' "$LEGACY"
 rg -F -q '`7.4b8ak` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b9c'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b9d'* ]]
 
 rg -F -q '| F019 | Resolved in Milestone 7.4b4b |' "$FINDINGS"
 rg -F -q '`7.4b4b` (`Accepted`)' "$PLAN"

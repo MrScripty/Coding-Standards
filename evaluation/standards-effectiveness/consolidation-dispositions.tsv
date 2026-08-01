@@ -605,3 +605,5 @@ STD-0660	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select hook configurat
 STD-0662	TOOLING-STANDARDS.md	workflows/tooling.md	refine	schedule selected checks from claim environment input cost safety and reporting facts without hook-stage categories as defaults
 STD-0664	TOOLING-STANDARDS.md	workflows/tooling.md	refine	optimize tool scheduling from measured cost and owned evidence without parallel staged-file glob or later-gate defaults
 STD-0665	TOOLING-STANDARDS.md	workflows/tooling.md	refine	orchestrate persisted-artifact checks from producer consumer schema regeneration and evidence contracts without staged validation defaults
+STD-0663	TOOLING-STANDARDS.md	workflows/commit.md	refine	route advisory history review and explicit base diagnostics to Commit without automated rewrite or inferred cleanup authority
+STD-0703	TOOLING-STANDARDS.md	workflows/commit.md	refine	require explicit hook-bypass authority scope unmet-check risk compensation and follow-up facts without emergency no-verify or later-repair defaults

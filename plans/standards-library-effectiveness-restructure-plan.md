@@ -6,11 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** The bounded Tooling owner and row 19 child 19.1 are accepted;
-commit-authority routing for child 19.2 is active.
+**Current phase:** Tooling children 19.1 and 19.2 are accepted; non-normative
+hook recipe extraction for child 19.3 is active.
 
-**Next slice:** Milestone 7.4b9c for `STD-0663` and `STD-0703`; route history
-review and hook bypass to Commit authority without rewrite or bypass defaults.
+**Next slice:** Milestone 7.4b9d for `STD-0656`, `STD-0657`, `STD-0658`, `STD-0659`, and `STD-0661`;
+move hook rationale, Lefthook selection,
+installation, and configuration examples to non-normative reference.
 
 **Acceptance status:** `partial`
 
@@ -1561,9 +1562,13 @@ all structural/routing fixtures pass.
      refine `STD-0654`, `STD-0655`, `STD-0660`, `STD-0662`, `STD-0664`, and
      `STD-0665` into hook selection, configuration, scheduling, cost, and
      persisted-artifact check orchestration without tool or stage defaults.
-   - `7.4b9c` (`Planned`): refine `STD-0663` and `STD-0703` into Commit
+   - `7.4b9c` (`Accepted`): refine `STD-0663` and `STD-0703` into Commit
      authority for history review and explicit hook bypass without automated
      rewrite, inferred authority, or bypass defaults.
+   - `7.4b9d` (`Planned`): move `STD-0656`, `STD-0657`, `STD-0658`,
+     `STD-0659`, and `STD-0661` into non-normative Tooling recipes without
+     selecting Lefthook, installation commands, templates, or configuration as
+     canonical defaults.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
