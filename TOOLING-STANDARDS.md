@@ -91,36 +91,13 @@ rationale and examples are migration input, not EditorConfig authority.
 
 ### Purpose
 
-Consistent formatting across editors and IDEs without tool-specific configuration.
+The former EditorConfig rationale is retained only in the non-normative
+[Tooling recipe](reference/recipes/tooling.md#editorconfig-example).
 
 ### Standard Configuration
 
-See [templates/.editorconfig](templates/.editorconfig) for a ready-to-use template.
-
-```ini
-# .editorconfig
-root = true
-
-[*]
-indent_style = space
-indent_size = 4
-end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
-insert_final_newline = true
-
-# Web files typically use 2-space indent
-[*.{js,ts,jsx,tsx,json,css,scss,html,svelte,vue}]
-indent_size = 2
-
-# Markdown needs trailing whitespace for line breaks
-[*.md]
-trim_trailing_whitespace = false
-
-# Makefiles require tabs
-[Makefile]
-indent_style = tab
-```
+The former template and file-family settings are retained only in the
+non-normative [Tooling recipe](reference/recipes/tooling.md#editorconfig-example).
 
 ### Key Settings
 

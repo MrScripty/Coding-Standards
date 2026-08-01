@@ -4888,6 +4888,27 @@ remaining IDs across 72 completed and 43 pending logical clusters, with child
 **Next slice:** `7.4b9f`, move `STD-0667` through `STD-0672` into
 non-normative EditorConfig recipes.
 
+## Milestone 7.4b9f: Non-Normative EditorConfig Recipe
+
+**Outcome:** Accepted implementation slice.
+
+**Reference result:** the EditorConfig rationale, base sample, web-file,
+Markdown, and Makefile examples now reside in the existing non-normative
+Tooling recipe. The legacy source routes configuration and setting decisions to
+canonical Tooling and no longer advertises a ready-to-use template.
+
+**No-fallback result:** EditorConfig, root scope, patterns, indentation, line
+ending, encoding, whitespace, final-newline, and file-family values remain
+examples only and are explicitly rejected as recommended defaults.
+
+**Verification:** reference authority and negative legacy checks plus six exact
+dispositions pass. All 139 repository checkers pass. The execution train
+reports 294 completed and 295 remaining IDs across 73 completed and 42 pending
+logical clusters, with child `19.6` active.
+
+**Next slice:** `7.4b9g`, refine `STD-0674` and `STD-0675` into canonical lint
+purpose and policy selection.
+
 **Verification deviation:** the mechanical cursor advance initially changed
 the frozen first identifier of row `18.14` from `STD-0602` to `STD-0654`. The
 immutable row was restored before focused verification, and the active planning

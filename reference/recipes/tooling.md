@@ -5,8 +5,8 @@
 - ID: `reference.recipes.tooling`
 - Role: `reference`
 - Level: `REFERENCE`
-- Applies when: A project has selected a development-tool workflow and needs illustrative hook configuration.
-- Does not apply when: Tool selection, dependency installation, acceptance evidence, hook scheduling, or bypass authority is being decided.
+- Applies when: A project has selected a development-tool workflow and needs illustrative hook or editor configuration.
+- Does not apply when: Tool, dependency, editor-configuration, file-setting, acceptance, scheduling, or bypass decisions are being made.
 - Requires: `workflow.tooling`, `topic.dependencies`
 - Specializes: `none`
 - Verification: Tooling-reference dispositions, metadata, link, and authority checks.
@@ -63,3 +63,37 @@ pre-push:
 
 The product, stages, parallel mode, globs, commands, and check allocation are
 examples only. They do not define a fallback configuration.
+
+## EditorConfig Example
+
+EditorConfig can express selected formatting settings across supporting editors
+and IDEs. It is only one possible transport. The canonical
+[Tooling workflow](../../workflows/tooling.md#editor-and-file-configuration)
+must select the mechanism, settings, scope, and precedence before this sample is
+adapted.
+
+```ini
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{js,ts,jsx,tsx,json,css,scss,html,svelte,vue}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
+```
+
+The mechanism, root scope, patterns, indentation, line ending, encoding,
+whitespace, final-newline, and file-family values are examples only. They are
+not recommended defaults and may conflict with repository or consumer
+contracts.

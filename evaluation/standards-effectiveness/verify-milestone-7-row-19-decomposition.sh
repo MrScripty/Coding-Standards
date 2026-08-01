@@ -27,7 +27,8 @@ rg -F -q '`7.4b9b` (`Accepted`)' "$P"
 rg -F -q '`7.4b9c` (`Accepted`)' "$P"
 rg -F -q '`7.4b9d` (`Accepted`)' "$P"
 rg -F -q '`7.4b9e` (`Accepted`)' "$P"
-rg -F -q '`7.4b9f` (`Planned`)' "$P"
+rg -F -q '`7.4b9f` (`Accepted`)' "$P"
+rg -F -q '`7.4b9g` (`Planned`)' "$P"
 [[ -e "$R/workflows/tooling.md" ]]
 [[ -e "$R/reference/recipes/tooling.md" ]]
 printf 'Milestone 7 row-19 decomposition passed: 50 IDs across 19 children\n'

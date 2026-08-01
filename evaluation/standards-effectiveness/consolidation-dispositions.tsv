@@ -614,3 +614,9 @@ STD-0659	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative st
 STD-0661	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative hook configuration example
 STD-0666	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select editor-neutral configuration mechanism scope and precedence from repository consumer file-format and support facts without an EditorConfig default
 STD-0673	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select each file setting from authoritative formatting encoding consumer and format contracts without universal setting defaults
+STD-0667	TOOLING-STANDARDS.md	reference/recipes/tooling.md	retire	non-normative EditorConfig rationale
+STD-0668	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative EditorConfig configuration example
+STD-0669	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative base EditorConfig settings example
+STD-0670	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative web-file indentation example
+STD-0671	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative Markdown whitespace example
+STD-0672	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative Makefile indentation example

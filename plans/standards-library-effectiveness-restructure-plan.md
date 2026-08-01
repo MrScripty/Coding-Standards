@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.4 are accepted;
-non-normative EditorConfig recipe extraction for child 19.5 is active.
+**Current phase:** Tooling children 19.1 through 19.5 are accepted; lint purpose
+and policy selection for child 19.6 is active.
 
-**Next slice:** Milestone 7.4b9f for `STD-0667`, `STD-0668`, `STD-0669`, `STD-0670`, `STD-0671`, and `STD-0672`;
-move EditorConfig rationale, templates, and language examples to non-normative
-reference without product or configuration defaults.
+**Next slice:** Milestone 7.4b9g for `STD-0674` and `STD-0675`; select lint
+purpose, scope, severity, automation, and scheduling from owned risks and debt
+without warning, autofix, changed-file, or tier defaults.
 
 **Acceptance status:** `partial`
 
@@ -1572,9 +1572,12 @@ all structural/routing fixtures pass.
    - `7.4b9e` (`Accepted`): refine `STD-0666` and `STD-0673` into editor-neutral
      configuration and settings selection from repository, consumer, and
      file-format facts without EditorConfig or universal-setting defaults.
-   - `7.4b9f` (`Planned`): move `STD-0667` through `STD-0672` into
+   - `7.4b9f` (`Accepted`): move `STD-0667` through `STD-0672` into
      non-normative EditorConfig rationale, templates, and language examples
      without product or configuration defaults.
+   - `7.4b9g` (`Planned`): refine `STD-0674` and `STD-0675` into lint purpose,
+     scope, severity, automation, and scheduling selection from owned risks and
+     debt without warning, autofix, changed-file, or tier defaults.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

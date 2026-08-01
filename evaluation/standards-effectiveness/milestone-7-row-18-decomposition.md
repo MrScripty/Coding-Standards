@@ -65,5 +65,6 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9f` moves EditorConfig rationale, templates, and language
-examples to non-normative reference without product or configuration defaults.
+Milestone `7.4b9g` selects lint purpose, scope, severity, automation, and
+scheduling from owned risks and debt without warning, autofix, changed-file, or
+tier defaults.
