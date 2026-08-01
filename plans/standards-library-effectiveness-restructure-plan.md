@@ -1549,6 +1549,15 @@ all structural/routing fixtures pass.
    - `7.4b8cj` (`Planned`): close `STD-0602` and `STD-0653` only after every
      row-18 identifier has an exact disposition; replace the legacy Testing
      source with a non-normative index and reject checklist completion.
+   - Row 19 owner-validation gate (`Accepted`): audit `STD-0654` through
+     `STD-0703` without presuming one owner. The audit validates a bounded
+     `workflows/tooling.md` owner for generic selection, orchestration,
+     scheduling, cost, and reporting while routing acceptance, implementation,
+     commit, documentation, dependency, language-specific, and reference
+     concerns to their proper owners.
+   - Row 19 complete decomposition (`Planned`): after `7.4b8cj`, define the
+     validated Tooling owner contract and decompose all 50 row-19 identifiers
+     together as a planning package before any normative Tooling population.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.
