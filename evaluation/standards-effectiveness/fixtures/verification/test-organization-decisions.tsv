@@ -1,0 +1,17 @@
+case	owner	discovery	tooling	execution	placement	fallback	expected
+module_local	known	known	known	known	colocated	none	allow
+system_harness	known	known	known	known	test-root	none	allow
+mixed_contracts	known	known	known	known	multiple-owned	none	allow
+contradictory_owner	contradictory	known	known	known	colocated	none	typed-invalid
+contradictory_discovery	known	contradictory	known	known	test-root	none	typed-invalid
+unsupported_runner	known	known	unsupported	known	test-root	none	typed-unsupported
+missing_owner	missing	known	known	known	unknown	none	typed-unavailable
+missing_discovery	known	missing	known	known	unknown	none	typed-unavailable
+missing_tooling	known	known	missing	known	unknown	none	typed-unavailable
+missing_execution	known	known	known	missing	unknown	none	typed-unavailable
+colocated_default	known	known	known	known	colocated	colocated-default	typed-invalid
+mirrored_default	known	known	known	known	test-root	mirrored-default	typed-invalid
+hybrid_default	known	known	known	known	multiple-owned	hybrid-default	typed-invalid
+suite_directory	known	known	known	known	test-root	suite-label	typed-invalid
+naming_template	known	known	known	known	colocated	name-template	typed-invalid
+readme_default	known	known	known	known	colocated	readme-required	typed-invalid

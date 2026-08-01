@@ -4594,6 +4594,29 @@ remaining IDs across 62 completed and 35 pending logical clusters, with child
 **Next slice:** `7.4b8ce`, refine `STD-0603` through `STD-0607` into
 Verification repository-sensitive test organization.
 
+## Milestone 7.4b8ce: Testing Organization
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Verification now selects test placement and naming from
+ownership, affected implementation, fixtures, environment setup, repository
+discovery, tooling, execution, and diagnosis needs. Multiple placements are
+valid when they represent different owned evidence contracts.
+
+**No-fallback/legacy result:** colocated, mirrored-tree, hybrid, suite-level
+directory, README documentation, and function-scenario-result naming templates
+are mechanisms rather than defaults. Missing or contradictory ownership,
+discovery, tooling, and execution facts return typed diagnostics.
+
+**Verification:** focused decisions cover 16 allowed, invalid, unsupported,
+and unavailable outcomes plus exact replacement and five dispositions. All
+129 `verify-*.sh` checkers pass; the train reports 249 completed and 340
+remaining IDs across 63 completed and 34 pending logical clusters, with child
+`18.10` active.
+
+**Next slice:** `7.4b8cf`, refine `STD-0625` through `STD-0631` into
+Verification coverage interpretation and durable evidence documentation.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

@@ -219,6 +219,31 @@ usable oracle.
 Never weaken an assertion, narrow an input domain, replace the real objective
 with substitute behavior, or accept successful execution as default success.
 
+## Test Placement And Naming
+
+Place evidence where its owner, affected implementation, fixtures, environment
+setup, and repository discovery tools make it findable and executable. The
+selected boundary may be a source module, package, test root, contract fixture
+area, system harness, or another repository-defined location. One repository
+may use several placements when their ownership and execution contracts differ.
+
+Follow required language, framework, runner, and build discovery conventions.
+Within those constraints, keep related evidence and fixtures close enough that
+maintainers can discover the claim and its owner without duplicating policy or
+creating hidden test-only APIs. Document a placement decision only when it is
+not recoverable from repository structure and tooling.
+
+Name a check with the narrowest stable vocabulary that identifies its scenario,
+observable result or invariant, and differentiating conditions. Names support
+discovery and diagnosis; they do not need to encode every function, phase,
+input, or expected value. Select syntax from the applicable tool and language.
+
+Contradictory ownership or discovery requirements are `invalid`. Unsupported
+runner or platform placement is `unsupported`. Missing ownership, discovery,
+tooling, or execution facts are `unavailable`. Do not choose colocated,
+mirrored-tree, hybrid, suite-level directories, README documentation, or a
+`function_scenario_result` template as fallback.
+
 ## Scheduling And Duration
 
 Risk, cost, and available environments determine where and when evidence runs.

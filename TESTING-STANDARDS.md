@@ -2,92 +2,17 @@
 
 > **Migration authority:** [workflows/verification.md](workflows/verification.md)
 > is canonical for acceptance claims, evidence kinds, environment
-> qualifications, execution modes, and completion. This file owns test
-> organization and test-design techniques. Test suite labels do not override
-> the workflow's claim model.
+> qualifications, execution modes, test design, organization, and completion.
+> Remaining sections are bounded migration routes and do not override the
+> workflow's claim model.
 
 Guidelines for writing maintainable, effective tests.
 
 ## Test Organization
 
-### Choose a Consistent Test Placement Strategy
-
-Use one clear test placement strategy per repo or per package. Test placement
-should improve discoverability without mixing unrelated conventions randomly.
-
-Acceptable strategies:
-
-| Strategy | Structure | Works Well When |
-|----------|-----------|-----------------|
-| Colocated | `src/auth/login.ts` + `src/auth/login.test.ts` | Modules are small, packages are numerous, and local discoverability matters |
-| Mirrored test tree | `src/auth/login.ts` + `tests/unit/auth/login.test.ts` | The language/tooling ecosystem strongly prefers separate test roots |
-| Hybrid by level | unit tests colocated, integration/e2e under `tests/` | Fast local tests benefit from adjacency but system-level tests need shared harnesses |
-
-Examples:
-
-```text
-# Colocated
-src/
-├── auth/
-│   ├── login.ts
-│   └── login.test.ts
-└── billing/
-    ├── invoice.ts
-    └── invoice.test.ts
-```
-
-```text
-# Mirrored test tree
-src/
-├── auth/
-│   └── login.ts
-tests/
-├── unit/
-│   └── auth/
-│       └── login.test.ts
-├── integration/
-└── e2e/
-```
-
-Rules:
-- Choose the strategy intentionally and keep it consistent within the chosen
-  repo/package boundary.
-- Name tests predictably so source files and related tests are easy to find.
-- Keep integration/e2e/shared-harness tests in a dedicated location when they
-  depend on multi-module fixtures or system setup.
-- Document any hybrid approach briefly in the repo README or testing guide.
-
-Selection criteria:
-- Prefer colocated tests when package count is high and module-local reasoning
-  matters more than a single central test tree.
-- Prefer mirrored test trees when tooling, language conventions, or build
-  systems make separate test roots simpler.
-- Prefer hybrid placement when unit tests are local but integration/e2e tests
-  need shared infrastructure and fixtures.
-
-### Test Naming Convention
-
-Use descriptive names that explain the scenario:
-
-```
-test_<function>_<scenario>_<expected_result>
-```
-
-**Examples:**
-
-```text
-test_remove_node_with_dependents_returns_rejected
-test_add_edge_between_valid_nodes_succeeds
-test_graph_after_100_operations_remains_acyclic
-```
-
-```typescript
-// TypeScript/JavaScript
-describe('UserService', () => {
-    it('creates user with valid email successfully', () => { ... });
-    it('rejects user with invalid email format', () => { ... });
-});
-```
+Placement, discovery, naming, and typed outcomes are owned by
+[Verification](workflows/verification.md#test-placement-and-naming). Concrete
+syntax and runner discovery rules belong in the applicable language profile.
 
 ---
 

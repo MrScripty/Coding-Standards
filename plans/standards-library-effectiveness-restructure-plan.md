@@ -10,9 +10,9 @@
 Language Bindings, Resilience, Contracts, Frontend, and Performance children
 are accepted.
 
-**Next slice:** Milestone 7.4b8ce refine `STD-0603`, `STD-0604`, `STD-0605`,
-`STD-0606`, and `STD-0607` into Verification-owned repository-sensitive test
-organization.
+**Next slice:** Milestone 7.4b8cf refine `STD-0625`, `STD-0626`, `STD-0627`,
+`STD-0628`, `STD-0629`, `STD-0630`, and `STD-0631` into Verification-owned
+coverage interpretation and durable evidence documentation.
 
 **Acceptance status:** `partial`
 
@@ -1523,8 +1523,11 @@ all structural/routing fixtures pass.
      edge conditions, and generative methods from observable claims and owned
      domains. Reject one-assertion, Arrange-Act-Assert, mock hierarchy,
      universal edge-case, algorithm-label, and weakened-assertion defaults.
-   - `7.4b8ce` (`Planned`): refine `STD-0603` through `STD-0607` into
-     repository-sensitive test organization.
+   - `7.4b8ce` (`Accepted`): refine `STD-0603` through `STD-0607` into
+     repository-sensitive test organization. Select placement and naming from
+     ownership, discovery, tooling, execution, and diagnosis facts. Reject
+     colocated, mirrored, hybrid, suite-directory, README, and naming-template
+     defaults with typed diagnostics.
    - `7.4b8cf` (`Planned`): refine `STD-0625` through `STD-0631` into coverage
      interpretation and durable evidence documentation.
    - `7.4b8cg` (`Planned`): refine `STD-0632` through `STD-0634` into test-data

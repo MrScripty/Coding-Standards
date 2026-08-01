@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b8ce` refines `STD-0603` through `STD-0607` into Verification
-repository-sensitive test organization.
+Milestone `7.4b8cf` refines `STD-0625` through `STD-0631` into Verification
+coverage interpretation and durable evidence documentation.
