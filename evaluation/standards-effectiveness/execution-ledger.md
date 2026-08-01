@@ -4909,6 +4909,25 @@ logical clusters, with child `19.6` active.
 **Next slice:** `7.4b9g`, refine `STD-0674` and `STD-0675` into canonical lint
 purpose and policy selection.
 
+## Milestone 7.4b9g: Lint Policy And Orchestration
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Tooling selects lint purpose, rules, scope, severity,
+automation, schedule, and debt boundaries from owned risks and claims while
+Verification retains acceptance authority.
+
+**No-fallback result:** warning failure, autofix, changed-file scope, tiers, CI,
+and full-audit execution are not defaults; missing or contradictory planning
+facts and unsupported analysis return typed diagnostics.
+
+**Verification:** 10 lint decisions, owner-boundary checks, legacy negative
+coverage, and two exact dispositions pass. All 140 repository checkers pass.
+The execution train reports 296 completed and 293 remaining IDs across 74
+completed and 41 pending logical clusters, with child `19.7` active.
+
+**Next slice:** `7.4b9h`, move `STD-0676` into non-normative lint examples.
+
 **Verification deviation:** the mechanical cursor advance initially changed
 the frozen first identifier of row `18.14` from `STD-0602` to `STD-0654`. The
 immutable row was restored before focused verification, and the active planning

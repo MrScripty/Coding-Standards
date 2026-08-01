@@ -80,3 +80,17 @@ Do not default to staged paths, lightweight validation, deterministic
 regeneration, or a later broader gate. Passing automation proves only the
 declared check; it does not prove artifact acceptance or producer-consumer
 compatibility unless Verification selected that exact claim.
+
+## Lint Policy And Orchestration
+
+Select lint purpose, rules, scope, severity mapping, automation, and schedule
+from owned defect risks, security and type contracts, existing debt, affected
+inputs, tool capability, execution cost, and required Verification claims.
+Record how existing debt is distinguished from newly introduced violations and
+who has authority to change that boundary.
+
+Do not default to failing every warning, autofixing, changed-file scope,
+tiered execution, CI execution, or a full audit. A lint result is a supporting
+gate unless Verification selected the exact linted property as a claim.
+Contradictory risk or debt policy is `invalid`; missing scope or severity
+authority is `unavailable`; unsupported required analysis is `unsupported`.

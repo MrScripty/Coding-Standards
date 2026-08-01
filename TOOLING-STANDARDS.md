@@ -109,12 +109,14 @@ former universal settings table is retired and defines no defaults.
 
 ## Linting Strategy
 
+Canonical lint policy and orchestration are defined by
+[Tooling](workflows/tooling.md#lint-policy-and-orchestration).
+
 ### Language-Agnostic Principles
 
-1. **Fail on warnings** - No "acceptable" warnings in CI
-2. **Autofix when possible** - Reduce manual work
-3. **Check only changed files** - For speed in pre-commit
-4. **Use tiered linting in CI** - Block critical issues and regressions; run full-lint audit on every PR
+Select purpose, scope, severity, automation, and schedule through the canonical
+Tooling workflow. Warning failure, autofix, changed-file scope, tiers, and CI
+placement are not defaults.
 
 ### Common Linter Categories
 

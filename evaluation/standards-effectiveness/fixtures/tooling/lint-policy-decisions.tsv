@@ -1,0 +1,11 @@
+case	facts	authority	capability	scope	fallback	expected
+supported	complete	explicit	supported	complete	none	allow
+contradictory	contradictory	explicit	supported	complete	none	typed-invalid
+missing_authority	complete	missing	supported	complete	none	typed-unavailable
+missing_scope	complete	explicit	supported	missing	none	typed-unavailable
+unsupported	complete	explicit	unsupported	complete	none	typed-unsupported
+warning_default	complete	explicit	supported	complete	fail-warnings	typed-invalid
+autofix_default	complete	explicit	supported	complete	autofix	typed-invalid
+changed_default	complete	explicit	supported	complete	changed-files	typed-invalid
+tier_default	complete	explicit	supported	complete	tiers	typed-invalid
+ci_default	complete	explicit	supported	complete	ci	typed-invalid

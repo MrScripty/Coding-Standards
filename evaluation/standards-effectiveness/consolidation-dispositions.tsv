@@ -620,3 +620,5 @@ STD-0669	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative ba
 STD-0670	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative web-file indentation example
 STD-0671	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative Markdown whitespace example
 STD-0672	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative Makefile indentation example
+STD-0674	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select lint purpose scope and orchestration from owned risks inputs tool capability cost and verification claims without execution defaults
+STD-0675	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select lint rules severity automation schedule and debt boundary from owned policy without warning autofix changed-file tier or CI defaults
