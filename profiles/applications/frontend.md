@@ -73,6 +73,25 @@ Selectors and simulation tools are mechanisms. Choose them from the behavior
 under test and do not treat a preferred query API, synthetic event, DOM shim,
 snapshot, or component mount as universal evidence.
 
+Select interaction evidence from the user-observable contract. Semantic
+controls require accessible role, name, state, focus, keyboard, and activation
+evidence for every applicable interaction path. Embedded controls inside
+draggable, pannable, zoomable, or canvas-style containers also require pointer
+capture and release, focus and escape, and parent-gesture conflict evidence.
+A selector or event-dispatch API is not evidence unless its semantics match the
+claim.
+
+Browser geometry, layout, pointer capture, focus transfer, rendering-engine,
+and browser-API claims require a representative browser environment. Pure
+geometry functions may be proved deterministically, but mocked rectangles or a
+DOM shim do not prove browser integration. If the required environment is not
+available, report `unavailable` instead of substituting component success.
+
+Polling, timers, subscriptions, observers, and other lifecycle-owned work
+require evidence that completion, dependency change, retry, cancellation, and
+unmount release the resource, prevent duplicate work, and exclude stale
+results. A successful update does not prove cleanup.
+
 ## Typed Outcomes
 
 Preserve typed `invalid`, `unsupported`, and `unavailable` outcomes through the

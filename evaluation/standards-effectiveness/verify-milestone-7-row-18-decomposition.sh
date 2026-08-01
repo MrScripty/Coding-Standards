@@ -49,14 +49,14 @@ rg -F -q '`7.4b8bv` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8bw` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8bx` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8by` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8bz` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b8ca` (`Planned`)' "$PLAN"
 next_slice_block="$(awk '
   /^\*\*Next slice:\*\*/ { capture = 1 }
   capture && /^$/ { exit }
   capture { print }
 ' "$PLAN")"
-[[ "$next_slice_block" == *'Milestone 7.4b8bz'* ]]
-[[ "$next_slice_block" == *'STD-0641'* ]]
+[[ "$next_slice_block" == *'Milestone 7.4b8ca'* ]]
+[[ "$next_slice_block" == *'STD-0642'* ]]
 
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-18 decomposition passed: all 52 IDs assigned across 7 ordered children\n'

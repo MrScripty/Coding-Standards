@@ -4463,6 +4463,30 @@ clusters, with child `18.5` active.
 **Next slice:** `7.4b8bz`, refine `STD-0641` into the existing Frontend owner
 package.
 
+## Milestone 7.4b8bz: Testing Frontend Evidence
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Frontend now selects interaction, accessibility, browser
+geometry, embedded-control, and lifecycle evidence from the user-observable
+claim. Browser integration requires a representative browser; lifecycle-owned
+work requires cleanup, duplicate-work prevention, and stale-result evidence.
+
+**No-fallback/legacy result:** selector APIs, synthetic events, DOM shims,
+mocked geometry, snapshots, successful updates, and weaker environments cannot
+substitute for the claimed behavior. Missing browser or lifecycle evidence is
+typed `unavailable`; invalid and unsupported interactions retain their typed
+outcomes.
+
+**Verification:** focused decisions cover 15 allowed, invalid, unsupported,
+and unavailable outcomes plus exact replacement and one disposition. All 125
+`verify-*.sh` checkers pass; the train reports 227 completed and 362 remaining
+IDs across 59 completed and 31 pending logical clusters, with child `18.6`
+active.
+
+**Next slice:** `7.4b8ca`, refine `STD-0642` through `STD-0644` into the
+existing Performance owner package.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

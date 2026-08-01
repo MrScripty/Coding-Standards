@@ -7,10 +7,10 @@
 **Plan status:** `Active`
 
 **Current phase:** Testing-source owner decomposition is active; Concurrency,
-Language Bindings, Resilience, and Contracts children are accepted.
+Language Bindings, Resilience, Contracts, and Frontend children are accepted.
 
-**Next slice:** Milestone 7.4b8bz refine `STD-0641` into the existing Frontend
-owner package.
+**Next slice:** Milestone 7.4b8ca refine `STD-0642`, `STD-0643`, and `STD-0644`
+into the existing Performance owner package.
 
 **Acceptance status:** `partial`
 
@@ -1494,8 +1494,13 @@ all structural/routing fixtures pass.
      shape, inferred authority, consumer-guessed regeneration, authoritative-
      input overwrite, producer snapshot, parse success, and generation success
      as acceptance substitutes with typed diagnostics.
-   - `7.4b8bz` (`Planned`): refine `STD-0641` into the existing Frontend owner
-     package.
+   - `7.4b8bz` (`Accepted`): refine `STD-0641` into Frontend. Select interaction,
+     accessibility, browser geometry, embedded-control, and lifecycle evidence
+     from the observable claim. Reject selector, synthetic-event, DOM-shim,
+     mocked-geometry, snapshot, happy-path, and weaker-environment substitutes
+     with typed diagnostics.
+   - `7.4b8ca` (`Planned`): refine `STD-0642` through `STD-0644` into the
+     existing Performance owner package.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

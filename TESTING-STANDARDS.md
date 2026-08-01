@@ -444,8 +444,8 @@ successful builds/tests. Add targeted checks for relevant paths such as:
 ## Frontend Component Testing
 
 Frontend-specific testing guidance (selector strategy, accessibility interaction
-tests, `userEvent` vs `fireEvent`, DOM geometry constraints, and polling timer
-cleanup tests) is defined in [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md).
+evidence, browser geometry, embedded controls, and lifecycle cleanup) is owned
+by the [Frontend application profile](profiles/applications/frontend.md#evidence).
 
 ---
 
