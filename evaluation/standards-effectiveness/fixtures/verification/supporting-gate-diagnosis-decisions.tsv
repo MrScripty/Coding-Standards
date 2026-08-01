@@ -1,0 +1,17 @@
+case	claim	gate	evidence	authority	observation	substitute	expected
+format_claim	format	formatter	direct	owned	available	none	allow
+behavior_compile	behavior	compile	supporting	owned	available	none	allow
+package_build	package	build	supporting	owned	available	none	allow
+startup_probe	startup	launch	direct	owned	available	none	allow
+source_lookup	contract	source	supporting	owned	available	none	allow
+official_docs	contract	documentation	supporting	owned	available	none	allow
+focused_probe	behavior	probe	direct	owned	available	none	allow
+contradictory_claim	contradictory	compile	supporting	owned	available	none	typed-invalid
+contradictory_evidence	behavior	compile	contradictory	owned	available	none	typed-invalid
+contradictory_authority	contract	source	supporting	contradictory	available	none	typed-invalid
+unsupported_observation	behavior	probe	direct	owned	unsupported	none	typed-unsupported
+missing_claim	missing	compile	supporting	owned	available	none	typed-unavailable
+missing_authority	contract	source	supporting	missing	available	none	typed-unavailable
+missing_observation	behavior	probe	direct	owned	missing	none	typed-unavailable
+build_substitute	behavior	build	supporting	owned	available	build-success	typed-invalid
+fixed_order	behavior	compile	supporting	owned	available	layer-order	typed-invalid

@@ -589,3 +589,11 @@ STD-0636	TESTING-STANDARDS.md	workflows/verification.md	index	replace async-test
 STD-0637	TESTING-STANDARDS.md	workflows/verification.md	refine	select await join event callback polling clock harness or process observation from the owned terminal state without await-syntax or runner-exit defaults
 STD-0638	TESTING-STANDARDS.md	workflows/verification.md	refine	derive success failure cancellation timeout retry and partial-result cases from the owned contract without universal success-and-failure pairs
 STD-0640	TESTING-STANDARDS.md	workflows/verification.md	refine	prove service-boundary outcomes effects termination and diagnostics at the selected boundary without generic error checklists mocks or weaker-boundary substitution
+STD-0645	TESTING-STANDARDS.md	workflows/verification.md	index	replace verification-layers parent with a non-normative route to supporting-gate classification
+STD-0646	TESTING-STANDARDS.md	workflows/verification.md	refine	classify static analysis by its exact observed property without treating it as behavior acceptance or a first-layer default
+STD-0647	TESTING-STANDARDS.md	workflows/verification.md	refine	classify compilation packaging and builds by their exact claims without build-success substitution
+STD-0648	TESTING-STANDARDS.md	workflows/verification.md	refine	select dev-server observation from the named claim without fast-iteration or startup-success defaults
+STD-0649	TESTING-STANDARDS.md	workflows/verification.md	refine	select runtime observation at the required boundary without fixed layer order or launch-loop defaults
+STD-0650	TESTING-STANDARDS.md	workflows/verification.md	refine	select source declarations documentation history or external references by authority and information gain without fixed lookup order
+STD-0651	TESTING-STANDARDS.md	workflows/verification.md	index	replace diagnosis decision tree with a non-normative route to claim-directed diagnosis and typed blocked outcomes
+STD-0652	TESTING-STANDARDS.md	workflows/verification.md	refine	select correction and re-verification from affected claims and contracts without compile layer launch lookup escalation or retry checklist defaults

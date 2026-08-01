@@ -130,67 +130,26 @@ profiles may select concrete tools but do not override the claim contract.
 
 ## Supporting Development Checks
 
-Static analysis, formatting, linting, compilation, builds, dev-server startup,
-and runtime launch are useful supporting checks. They prove only their explicit
-properties and do not replace missing contract, system, user-workflow, or
-release-artifact claims.
-
-Use language profiles for concrete commands and
-[TOOLING-STANDARDS.md](TOOLING-STANDARDS.md) for scheduling mechanisms. When an
-error is unclear, consult the exact local dependency source and official
-documentation before relying on examples for another version.
+Supporting-gate classification and claim-directed diagnosis are owned by
+[Verification](workflows/verification.md#supporting-gates-and-claim-directed-diagnosis).
+Language profiles own concrete commands and
+[Tooling](TOOLING-STANDARDS.md) owns execution mechanisms.
 
 ---
 
 ## Diagnosis Workflow
 
-When something breaks, follow this decision tree:
-
-```
-Error encountered
-    │
-    ├─ Is it a compiler/type error?
-    │   ├─ Yes → Read the full error message
-    │   │        Look up the type/method in library source
-    │   │        Fix and re-run static analysis
-    │   └─ No ↓
-    │
-    ├─ Is it a build error?
-    │   ├─ Yes → Check dependencies are installed
-    │   │        Check for version mismatches
-    │   │        Fix and re-run the build
-    │   └─ No ↓
-    │
-    ├─ Is it a runtime error?
-    │   ├─ Yes → Read the full stack trace
-    │   │        Identify which layer threw the error
-    │   │        Check data flow across boundaries
-    │   │        Fix and re-launch
-    │   └─ No ↓
-    │
-    ├─ Is it a logic/behavior error?
-    │   ├─ Yes → Trace the data flow through the system
-    │   │        Add debug logging if needed
-    │   │        Compare with known working examples
-    │   │        Fix and verify
-    │   └─ No ↓
-    │
-    └─ Unknown → Search library source for related code
-                 Search web for the error message
-                 Ask for help only as a last resort
-```
+Diagnosis selection, evidence preservation, and typed blocked outcomes are owned
+by [Verification](workflows/verification.md#supporting-gates-and-claim-directed-diagnosis).
 
 ---
 
 ## Self-Correction Principles
 
-1. **Always compile after edits.** Never assume a change is correct — verify with the appropriate build command.
-2. **Read the full error.** Compiler and runtime errors contain file paths, line numbers, and descriptions. Use all of them.
-3. **Check one layer at a time.** If you changed multiple layers, build them separately to isolate which one broke.
-4. **Don't guess APIs — look them up.** Read the actual method signatures in library source or documentation.
-5. **Use the dev server for fast iteration.** Hot reload gives sub-second feedback. Use it instead of full builds when iterating on frontend code.
-6. **Run integration verification after cross-layer fixes.** After fixing a multi-component issue, verify the full pipeline works.
-7. **Exhaust local resources before asking for help.** Check library source → check docs → search web → then ask.
+Correction and re-verification follow the unresolved acceptance claim and
+affected contracts in
+[Verification](workflows/verification.md#supporting-gates-and-claim-directed-diagnosis),
+not a fixed compile, layer, launch, lookup, or escalation sequence.
 
 ---
 

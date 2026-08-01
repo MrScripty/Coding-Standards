@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b8ci` refines `STD-0645` through `STD-0652` into Verification
-supporting-gate classification and claim-directed diagnosis.
+Milestone `7.4b8cj` closes `STD-0602` and `STD-0653`, replaces the legacy
+Testing source with a non-normative index, and rejects checklist completion.

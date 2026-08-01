@@ -4697,6 +4697,33 @@ the frozen first identifier of row `18.12` from `STD-0636` to `STD-0645`. The
 immutable row was restored before focused verification, and the active assertion
 was bounded to all eight row `18.13` identifiers.
 
+## Milestone 7.4b8ci: Testing Supporting Gates And Diagnosis
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Verification now classifies supporting gates by their
+exact claims and selects diagnosis observations from the unresolved claim,
+authority, information gain, cost, reversibility, and available evidence.
+
+**No-fallback/legacy result:** fixed layer order, compile/build/launch loops,
+dev-server success, lookup order, generic web search, repeated edits, and
+checklist completion cannot establish acceptance. Missing material reproduction,
+authority, access, or observation facts return typed diagnostics.
+
+**Verification:** focused decisions cover 16 allowed, invalid, unsupported, and
+unavailable outcomes plus exact replacement and eight dispositions. All 133
+repository checkers pass; the execution train reports 271 completed and 318
+remaining IDs across 67 completed and 30 pending logical clusters, with child
+`18.14` active.
+
+**Next slice:** `7.4b8cj`, close `STD-0602` and `STD-0653`, replace the legacy
+Testing source with a non-normative index, and reject checklist completion.
+
+**Verification deviation:** the mechanical cursor advance initially changed
+the frozen first identifier of row `18.13` from `STD-0645` to `STD-0602`. The
+immutable row was restored before focused verification, and the active assertion
+was bounded to the two row `18.14` closure identifiers.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

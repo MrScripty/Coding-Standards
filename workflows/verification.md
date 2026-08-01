@@ -345,6 +345,36 @@ Projects may schedule fast supporting checks per edit or commit and expensive
 claims at pre-push, pull request, dedicated-runner, release, or manual gates.
 Scheduling never changes what the evidence proves.
 
+## Supporting Gates And Claim-Directed Diagnosis
+
+Classify every formatter, linter, static analysis, compilation, build, package,
+startup, dev-server, runtime, source lookup, or documentation check by the exact
+property it observes. Treat it as acceptance only when that property is itself
+the named claim; otherwise it is a supporting gate and cannot replace focused,
+contract, system, user-workflow, or release-artifact evidence.
+
+When evidence fails or a claim remains unresolved, preserve the exact command,
+environment, output, timing, and boundary context needed to reproduce it. Form
+the smallest hypothesis consistent with those facts and select the next
+observation by authority, information gain, cost, reversibility, and proximity
+to the failed claim. Re-run affected evidence after correction and broaden only
+to claims or contracts the correction could have changed.
+
+Use compiler diagnostics, traces, logs, state inspection, focused probes,
+dependency source, generated artifacts, installed declarations, official
+version-matched documentation, repository history, or external references when
+their authority and expected information justify them. No source order is
+universal. Do not add production diagnostics, weaken validation, change the
+objective, or repeatedly edit and retry merely to obtain a passing result.
+
+Contradictory claim, evidence, environment, or authority facts are `invalid`.
+An observation unavailable in the supported toolchain or environment is
+`unsupported`. Missing reproduction facts, authoritative contract information,
+required access, or a usable observation path is `unavailable`. Report the
+typed diagnostic instead of falling back to a fixed layer order, compile/build/
+launch loop, dev-server success, generic web search, checklist completion, or
+default acceptance.
+
 ## Platform Evidence Coverage
 
 For each declared platform-support claim, record every required target or

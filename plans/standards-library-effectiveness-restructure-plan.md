@@ -10,9 +10,9 @@
 Language Bindings, Resilience, Contracts, Frontend, and Performance children
 are accepted.
 
-**Next slice:** Milestone 7.4b8ci refine `STD-0645`, `STD-0646`, `STD-0647`,
-`STD-0648`, `STD-0649`, `STD-0650`, `STD-0651`, and `STD-0652` into
-Verification-owned supporting-gate classification and claim-directed diagnosis.
+**Next slice:** Milestone 7.4b8cj close `STD-0602` and `STD-0653`, replace the
+legacy Testing source with a non-normative index, and reject checklist
+completion.
 
 **Acceptance status:** `partial`
 
@@ -1542,8 +1542,10 @@ all structural/routing fixtures pass.
      into async completion and failure-boundary evidence. Observe owned terminal
      states and externally meaningful outcomes without await-syntax,
      success/failure-pair, generic-error, sleep, or weaker-boundary defaults.
-   - `7.4b8ci` (`Planned`): refine `STD-0645` through `STD-0652` into
-     supporting-gate classification and claim-directed diagnosis.
+   - `7.4b8ci` (`Accepted`): refine `STD-0645` through `STD-0652` into
+     supporting-gate classification and claim-directed diagnosis. Select the
+     next observation by claim, authority, information gain, cost, and current
+     evidence without layer-order, build, launch, lookup, or retry defaults.
    - `7.4b8cj` (`Planned`): close `STD-0602` and `STD-0653` only after every
      row-18 identifier has an exact disposition; replace the legacy Testing
      source with a non-normative index and reject checklist completion.
