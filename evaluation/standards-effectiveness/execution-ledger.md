@@ -4516,6 +4516,37 @@ dependency ownership and disposition assertions were unchanged.
 **Next slice:** `7.4b8cb`, planning only, to decompose the 43-identifier
 Verification child by semantic contract and legacy-closure order.
 
+## Milestone 7.4b8cb: Verification Remainder Decomposition
+
+**Outcome:** Accepted planning-only slice.
+
+**Canonical result:** the 43-identifier Verification remainder is decomposed
+into eight ordered packages: acceptance-path evidence, focused test design,
+test organization, coverage/documentation, test data, async/failure evidence,
+supporting diagnosis, and final legacy closure. Every identifier is allocated
+exactly once to the existing Verification owner.
+
+**No-fallback/legacy result:** no package preserves suite labels, fidelity
+hierarchies, fixed test layouts or naming templates, one-assertion or mock
+defaults, universal edge-case lists, fixed coverage targets, factory defaults,
+happy-path async evidence, fixed diagnosis layers, or checklist completion.
+The legacy source cannot close before all substantive children are accepted.
+
+**Verification:** this slice changes planning and decomposition evidence only;
+it makes no normative, legacy-standard, disposition, router, metadata, or
+generated-artifact change. All 126 `verify-*.sh` checkers pass; the train keeps
+230 completed and 359 remaining IDs while refining the logical count to 60
+completed and 37 pending clusters, with child `18.7` active.
+
+**Planning deviation:** the execution-train data model reserves its
+`final-closure` activation value for baseline rows classified as reference-index
+closure. Row 18 remains a process-dependencies row, so child `18.14` uses
+`pre-slice-review`; its rationale, report, plan gate, and focused checker still
+require exact dispositions and accepted prior children before legacy closure.
+
+**Next slice:** `7.4b8cc`, refine `STD-0608`, `STD-0609`, `STD-0610`, and
+`STD-0612` through `STD-0615` into Verification acceptance-path evidence.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

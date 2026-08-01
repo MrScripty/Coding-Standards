@@ -20,13 +20,22 @@ owner, dependency set, semantic decision, or verification contract.
 | `18.4` | `STD-0635` | Contracts owns persisted dynamic artifact agreement with the current producer and consumer. |
 | `18.5` | `STD-0641` | Frontend owns component-specific interaction, accessibility, geometry, and lifecycle rules. |
 | `18.6` | `STD-0642`-`STD-0644` | Performance owns workloads, metrics, budgets, environments, and benchmark evidence requirements. |
-| `18.7` | All other row-18 IDs | Verification owns generic test design, acceptance claims, supporting checks, reporting, and final legacy-index closure while linking to specialized owners. |
+| `18.7` | `STD-0608`-`STD-0610`, `STD-0612`-`STD-0615` | Verification replaces suite labels and cross-layer hierarchies with claim-selected acceptance evidence. |
+| `18.8` | `STD-0618`-`STD-0624` | Verification owns focused test design and selects structure, mocks, edge cases, and property-based techniques from the observable claim. |
+| `18.9` | `STD-0603`-`STD-0607` | Verification owns repository-sensitive test placement, discovery, and naming decisions. |
+| `18.10` | `STD-0625`-`STD-0631` | Verification owns coverage interpretation and durable evidence documentation without fixed targets or templates. |
+| `18.11` | `STD-0632`-`STD-0634` | Verification owns test-data authority, identity, isolation, construction, and lifecycle. |
+| `18.12` | `STD-0636`-`STD-0638`, `STD-0640` | Verification owns async completion and success, failure, and service-boundary evidence selection. |
+| `18.13` | `STD-0645`-`STD-0652` | Verification owns supporting-gate classification and claim-directed diagnosis procedures. |
+| `18.14` | `STD-0602`, `STD-0653` | Verification closes the legacy source as a non-normative index and rejects checklist completion as acceptance. |
 
 ## Ordered Implementation
 
-Implement specialized owner contracts first so the final Verification package
-can link to accepted authority instead of copying it. Child `18.7` then removes
-the remaining legacy defaults and replaces `TESTING-STANDARDS.md` with a pure
+Implement specialized owner contracts first so Verification can link to
+accepted authority instead of copying it. Within Verification, establish
+acceptance-path evidence and focused test design before organization,
+coverage/documentation, test data, async/failure evidence, and supporting
+diagnosis. Child `18.14` then replaces `TESTING-STANDARDS.md` with a pure
 non-normative index after every row-18 identifier has an exact disposition.
 
 ## No Fallback
@@ -46,7 +55,15 @@ and checker, active plan, execution ledger, and superseded cursor assertions.
 It changes no normative or legacy standard, disposition, generated artifact,
 router, metadata, configuration, lockfile, or downstream repository.
 
+## Refined Verification Boundary
+
+The eight Verification children share a canonical owner but not one semantic
+decision or fixture family. Each child has one observable outcome and a bounded
+legacy section. No child may delete undisposed text owned by a later child.
+The final legacy-closure child requires exact disposition coverage for all 52
+row-18 identifiers and accepted status for children `18.1` through `18.13`.
+
 ## Next Slice
 
-Milestone `7.4b8bv` refines `STD-0611` and `STD-0639` into the existing
-Concurrency owner.
+Milestone `7.4b8cc` refines `STD-0608`, `STD-0609`, `STD-0610`, and
+`STD-0612` through `STD-0615` into Verification acceptance-path evidence.

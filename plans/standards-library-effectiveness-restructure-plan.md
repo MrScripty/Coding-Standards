@@ -10,16 +10,9 @@
 Language Bindings, Resilience, Contracts, Frontend, and Performance children
 are accepted.
 
-**Next slice:** Milestone 7.4b8cb decompose row-18 child `18.7` from `STD-0602`
-into bounded Verification-owned implementation and legacy-closure slices
-covering `STD-0603`, `STD-0604`, `STD-0605`, `STD-0606`, `STD-0607`,
-`STD-0608`, `STD-0609`, `STD-0610`, `STD-0612`, `STD-0613`, `STD-0614`,
-`STD-0615`, `STD-0618`, `STD-0619`, `STD-0620`, `STD-0621`, `STD-0622`,
-`STD-0623`, `STD-0624`, `STD-0625`, `STD-0626`, `STD-0627`, `STD-0628`,
-`STD-0629`, `STD-0630`, `STD-0631`, `STD-0632`, `STD-0633`, `STD-0634`,
-`STD-0636`, `STD-0637`, `STD-0638`, `STD-0640`, `STD-0645`, `STD-0646`,
-`STD-0647`, `STD-0648`, `STD-0649`, `STD-0650`, `STD-0651`, `STD-0652`, and
-`STD-0653`.
+**Next slice:** Milestone 7.4b8cc refine `STD-0608`, `STD-0609`, `STD-0610`,
+`STD-0612`, `STD-0613`, `STD-0614`, and `STD-0615` into Verification-owned
+acceptance-path evidence.
 
 **Acceptance status:** `partial`
 
@@ -1514,8 +1507,28 @@ all structural/routing fixtures pass.
      Reject fixed thresholds, harness success, single samples, alternate
      devices, microbenchmark substitution, and weaker evidence with typed
      diagnostics.
-   - `7.4b8cb` (`Planned`): planning only; decompose the 43-identifier
-     Verification child `18.7` by semantic contract and legacy-closure order.
+   - `7.4b8cb` (`Accepted`): planning only; decompose the 43-identifier
+     Verification remainder into eight owner-coherent packages for acceptance-
+     path evidence, focused test design, organization, coverage/documentation,
+     test data, async/failure evidence, supporting diagnosis, and final legacy
+     closure. Allocate every identifier exactly once and keep closure last.
+   - `7.4b8cc` (`Planned`): refine `STD-0608`, `STD-0609`, `STD-0610`, and
+     `STD-0612` through `STD-0615` into Verification acceptance-path evidence.
+   - `7.4b8cd` (`Planned`): refine `STD-0618` through `STD-0624` into focused
+     test-design evidence.
+   - `7.4b8ce` (`Planned`): refine `STD-0603` through `STD-0607` into
+     repository-sensitive test organization.
+   - `7.4b8cf` (`Planned`): refine `STD-0625` through `STD-0631` into coverage
+     interpretation and durable evidence documentation.
+   - `7.4b8cg` (`Planned`): refine `STD-0632` through `STD-0634` into test-data
+     authority, identity, isolation, construction, and lifecycle.
+   - `7.4b8ch` (`Planned`): refine `STD-0636` through `STD-0638` and `STD-0640`
+     into async completion and failure-boundary evidence.
+   - `7.4b8ci` (`Planned`): refine `STD-0645` through `STD-0652` into
+     supporting-gate classification and claim-directed diagnosis.
+   - `7.4b8cj` (`Planned`): close `STD-0602` and `STD-0653` only after every
+     row-18 identifier has an exact disposition; replace the legacy Testing
+     source with a non-normative index and reject checklist completion.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

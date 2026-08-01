@@ -40,7 +40,7 @@ row="$(awk -F '\t' '$1=="STD-0641" {print $2 FS $3 FS $4}' \
 [[ "$row" == $'TESTING-STANDARDS.md\tprofiles/applications/frontend.md\trefine' ]]
 rg -F -q '`7.4b8bz` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8cb` (`Planned`)' \
+rg -F -q '`7.4b8cc` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing frontend evidence passed: 15 decisions, 1 disposition\n'
