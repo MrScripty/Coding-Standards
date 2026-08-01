@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b8cc` refines `STD-0608`, `STD-0609`, `STD-0610`, and
-`STD-0612` through `STD-0615` into Verification acceptance-path evidence.
+Milestone `7.4b8cd` refines `STD-0618` through `STD-0624` into Verification
+focused test-design evidence.

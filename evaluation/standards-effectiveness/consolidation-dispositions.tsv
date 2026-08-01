@@ -556,3 +556,10 @@ STD-0641	TESTING-STANDARDS.md	profiles/applications/frontend.md	refine	require c
 STD-0642	TESTING-STANDARDS.md	topics/performance.md	index	replace the performance testing parent with a non-normative route to canonical Performance test evidence
 STD-0643	TESTING-STANDARDS.md	topics/performance.md	refine	select benchmark harness workload environment and measurement capability from the owned claim without ecosystem-harness critical-path or successful-execution defaults
 STD-0644	TESTING-STANDARDS.md	topics/performance.md	refine	require authoritative budget workload metric environment variability baseline and tradeoff evidence without fixed duration percentage sample machine cadence tool or weaker-measurement substitution
+STD-0608	TESTING-STANDARDS.md	workflows/verification.md	index	replace test categories with a non-normative route to claim-selected evidence kinds paths environments and modes
+STD-0609	TESTING-STANDARDS.md	workflows/verification.md	refine	select focused evidence for local observable claims without isolation dependency or per-save duration defaults
+STD-0610	TESTING-STANDARDS.md	workflows/verification.md	refine	select integration evidence from real in-scope collaborating interfaces without mock-service or suite-label defaults
+STD-0612	TESTING-STANDARDS.md	workflows/verification.md	refine	select user-workflow system and environment evidence from the observable path without realistic-environment slower-suite or complete-workflow slogans
+STD-0613	TESTING-STANDARDS.md	workflows/verification.md	refine	require claim-selected producer-to-consumer path and separately owned contract evidence without typecheck unit partial-integration or lower-fidelity substitution
+STD-0614	TESTING-STANDARDS.md	workflows/verification.md	refine	prove named boundary invariants through applicable contract and path claims without universal invariant lists coverage substitution or one-place documentation defaults
+STD-0615	TESTING-STANDARDS.md	workflows/verification.md	refine	start with the smallest useful objective path and broaden from risk and consumers without test-first one-full-path horizontal-scaling or vertical-slice-template defaults

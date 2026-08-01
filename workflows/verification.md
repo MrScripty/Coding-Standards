@@ -90,6 +90,35 @@ supporting checks for affected risks and contracts.
 Do not require an unrelated high-cost claim. Do not omit a direct claim because
 a cheaper supporting gate passed.
 
+## Acceptance Paths And Boundaries
+
+For each non-local claim, name the observable start, externally meaningful
+result, real in-scope boundaries, authoritative producers and consumers, and
+material environment facts. Select `integration`, `contract`, `system`, or
+`user-workflow` evidence from that path. Repository suite labels such as unit,
+integration, end-to-end, or vertical slice are organization mechanisms; they
+do not establish evidence kind, environment fidelity, or acceptance.
+
+A cross-boundary objective usually needs one path claim plus separate contract
+claims for boundaries whose representation or invariants can regress
+independently. The path claim proves only the boundaries it actually traverses.
+Do not require assertions for every internal hop unless that hop owns a
+separate claim, and do not infer complete-path behavior from isolated producer,
+consumer, adapter, type, build, or startup results.
+
+Start with the smallest path that produces a useful objective-level result,
+then add focused evidence for risky branches and independently owned contracts.
+This sequencing is a planning mechanism, not a universal requirement to write
+one test first or to use one suite shape. Broaden the path when the objective,
+consumers, environment, scaling behavior, or failure boundaries require it.
+
+Contradictory path, authority, or boundary facts are `invalid`. A declared path
+outside supported product or platform capability is `unsupported`. A missing
+required boundary, consumer, environment, or observable result is
+`unavailable`. Do not substitute a realistic simulation for required-real
+evidence, a lower-fidelity suite for the selected claim, a successful build or
+smoke, partial traversal, checklist completion, or default success.
+
 ## Disabled Behavior Claims
 
 Derive acceptance claims from the lifecycle state selected by

@@ -4547,6 +4547,30 @@ require exact dispositions and accepted prior children before legacy closure.
 **Next slice:** `7.4b8cc`, refine `STD-0608`, `STD-0609`, `STD-0610`, and
 `STD-0612` through `STD-0615` into Verification acceptance-path evidence.
 
+## Milestone 7.4b8cc: Testing Acceptance Paths
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Verification now derives non-local evidence from an
+observable start and result, real in-scope boundaries, authoritative producers
+and consumers, and material environment facts. Path claims and separately
+owned contract claims remain distinct; smallest-useful-path sequencing does
+not prescribe one suite shape or test-first mechanism.
+
+**No-fallback/legacy result:** unit, integration, end-to-end, and vertical-
+slice labels do not establish evidence fidelity. Lower-fidelity checks, partial
+traversal, successful builds or smoke, realistic simulation, checklist
+completion, and default success cannot satisfy a stronger path claim.
+
+**Verification:** focused decisions cover 16 allowed, invalid, unsupported,
+and unavailable outcomes plus exact replacement and seven dispositions. All
+127 `verify-*.sh` checkers pass; the train reports 237 completed and 352
+remaining IDs across 61 completed and 36 pending logical clusters, with child
+`18.8` active.
+
+**Next slice:** `7.4b8cd`, refine `STD-0618` through `STD-0624` into
+Verification focused test-design evidence.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

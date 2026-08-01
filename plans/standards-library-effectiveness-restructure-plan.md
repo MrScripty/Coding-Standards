@@ -10,9 +10,9 @@
 Language Bindings, Resilience, Contracts, Frontend, and Performance children
 are accepted.
 
-**Next slice:** Milestone 7.4b8cc refine `STD-0608`, `STD-0609`, `STD-0610`,
-`STD-0612`, `STD-0613`, `STD-0614`, and `STD-0615` into Verification-owned
-acceptance-path evidence.
+**Next slice:** Milestone 7.4b8cd refine `STD-0618`, `STD-0619`, `STD-0620`,
+`STD-0621`, `STD-0622`, `STD-0623`, and `STD-0624` into Verification-owned
+focused test-design evidence.
 
 **Acceptance status:** `partial`
 
@@ -1512,8 +1512,12 @@ all structural/routing fixtures pass.
      path evidence, focused test design, organization, coverage/documentation,
      test data, async/failure evidence, supporting diagnosis, and final legacy
      closure. Allocate every identifier exactly once and keep closure last.
-   - `7.4b8cc` (`Planned`): refine `STD-0608`, `STD-0609`, `STD-0610`, and
+   - `7.4b8cc` (`Accepted`): refine `STD-0608`, `STD-0609`, `STD-0610`, and
      `STD-0612` through `STD-0615` into Verification acceptance-path evidence.
+     Name observable starts and results, traversed boundaries, authorities,
+     consumers, and material environments. Reject suite labels, fidelity
+     hierarchies, lower-fidelity checks, partial traversal, builds, smoke,
+     realistic simulation, checklist completion, and default success.
    - `7.4b8cd` (`Planned`): refine `STD-0618` through `STD-0624` into focused
      test-design evidence.
    - `7.4b8ce` (`Planned`): refine `STD-0603` through `STD-0607` into

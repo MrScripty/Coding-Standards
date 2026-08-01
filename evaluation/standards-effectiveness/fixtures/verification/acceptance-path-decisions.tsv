@@ -1,0 +1,17 @@
+case	authority	path	boundaries	environment	result	substitute	expected
+integration_path	owned	integration	complete	representative	observed	none	allow
+contract_and_system	owned	system	complete	representative	observed	none	allow
+user_workflow	owned	user-workflow	complete	required-real	observed	none	allow
+smallest_useful_path	owned	integration	minimal-complete	representative	observed	none	allow
+contradictory_authority	contradictory	integration	complete	representative	observed	none	typed-invalid
+contradictory_boundary	owned	integration	contradictory	representative	observed	none	typed-invalid
+unsupported_path	owned	unsupported	complete	representative	observed	none	typed-unsupported
+missing_boundary	owned	system	missing	representative	observed	none	typed-unavailable
+missing_environment	owned	user-workflow	complete	missing	observed	none	typed-unavailable
+missing_result	owned	integration	complete	representative	missing	none	typed-unavailable
+suite_label	owned	integration	complete	representative	observed	suite-label	typed-invalid
+lower_fidelity	owned	user-workflow	complete	required-real	observed	lower-fidelity	typed-invalid
+partial_traversal	owned	system	complete	representative	observed	partial-path	typed-invalid
+build_substitute	owned	system	complete	representative	observed	build-success	typed-invalid
+realistic_substitute	owned	user-workflow	complete	required-real	observed	realistic-simulation	typed-invalid
+checklist_success	owned	integration	complete	representative	observed	checklist	typed-invalid

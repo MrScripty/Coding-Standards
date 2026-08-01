@@ -93,104 +93,15 @@ describe('UserService', () => {
 
 ## Test Suite Shapes
 
-Repositories may label suites `unit`, `integration`, `e2e`, or with
-ecosystem-specific names for organization. These labels do not define what
-evidence proves or where it must run. Map each required acceptance claim through
-[the verification workflow](workflows/verification.md), then schedule the
-implementing suite according to project cost and environment.
-
-Do not impose universal duration thresholds or CI-only categories.
-
-### Unit Tests
-
-- Test a single function or method in isolation
-- No external dependencies (database, network, filesystem)
-- Fast enough to run on every save
-
-### Integration Tests
-
-- Test multiple components working together
-- May use test databases or mock services
-- Verify interfaces between modules
+Suite labels are repository organization mechanisms. Acceptance-path evidence,
+boundary selection, environment fidelity, and typed unavailable outcomes are
+owned by [Verification](workflows/verification.md#acceptance-paths-and-boundaries).
 
 ### Global State and Durable Resource Isolation
 
 Canonical verification-resource ownership and coordination requirements are in
 [Concurrency](topics/concurrency.md#isolate-verification-resources). This
 legacy heading is a non-normative migration route.
-
-### End-to-End Tests
-
-- Test complete user workflows
-- Run against real (or realistic) environments
-- Slower but catch integration issues
-
-### Cross-Layer Acceptance Checks
-
-For changes that span multiple layers or components, require at least one
-acceptance check that exercises the full path from producer input to consumer
-output.
-
-This check should verify that, in practice:
-- schema or metadata production is correct
-- consumer binding preserves the produced contract
-- execution behavior matches the bound values
-- output handling agrees with the original producer semantics
-
-Do not treat typecheck, isolated unit tests, or partial integration tests as a
-substitute for one end-to-end acceptance path when the feature crosses layers.
-
-### Boundary Invariant Tests
-
-For architectural boundaries, prefer tests that protect invariants over tests
-that merely exercise methods or increase coverage percentages.
-
-Good invariant tests prove that:
-- Forbidden data cannot cross a boundary
-- Policy is owned by exactly one component
-- State transitions are legal, replayable, and fail closed
-- Fallback behavior does not silently invent authority
-- Adapters cannot reinterpret canonical backend facts
-- Runtime, persistence, lifecycle, and transport concerns stay separated where
-  the design depends on that separation
-
-When a boundary invariant spans several DTOs, adapters, or modules, add at
-least one test or documented verification check that makes the cross-contract
-rule visible in one place.
-
-### Vertical Slice Verification
-
-For new cross-layer features, prefer validating the thinnest useful vertical
-slice before broadening individual layers horizontally. A vertical slice starts
-from the lowest practical feature input, runs through the real layer boundaries,
-and asserts the user-visible or top-level output without coupling the test to
-intermediate implementation details.
-
-Use vertical slice tests to prove:
-- the minimum end-to-end system works as a whole
-- layer contracts are shaped well enough for real data flow
-- the current design exposes useful failure signals
-- adjacent features can reuse the same path without hidden coupling
-
-Rules:
-
-1. The first cross-layer feature slice should include at least one full-path
-   acceptance test before the implementation expands into broad horizontal
-   layer work.
-2. Write the vertical slice acceptance test before implementing the slice. It
-   should fail for the expected reason until the implementation satisfies the
-   externally meaningful input/output contract.
-3. Do not weaken the acceptance assertion to make the test pass. Change the
-   implementation until the observed output matches the expected outcome.
-4. Assert externally meaningful inputs and outputs. Do not assert every internal
-   hop unless that hop owns a separate contract that needs direct coverage.
-5. Add focused unit or integration tests only where the slice exposes a risky
-   branch, algorithm, error path, or reusable contract.
-6. As adjacent vertical slices are added, verify that shared layers handle more
-   than one feature path without special-case coupling.
-7. When shared layers become performance-sensitive or concurrency-sensitive,
-   add horizontal scaling checks for throughput, contention, resource cleanup,
-   or batching behavior.
 
 ### Binding Verification Requirements
 
