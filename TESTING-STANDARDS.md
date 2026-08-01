@@ -76,42 +76,10 @@ Documentation mechanisms follow the owning repository and evidence artifact.
 
 ## Test Data Management
 
-### Use Factories or Builders
-
-```typescript
-// BAD: Inline object construction
-const user = {
-    id: '123',
-    email: 'test@example.com',
-    name: 'Test User',
-    role: 'admin',
-    createdAt: new Date(),
-    // ... 10 more fields
-};
-
-// GOOD: Factory with defaults
-const user = createUser({ role: 'admin' });
-// Only specify what matters for this test
-```
-
-Use builders or factories in languages where they make fixtures clearer than
-inline object construction.
-
-### Avoid Shared Mutable State
-
-```typescript
-// BAD: Tests depend on shared state
-let sharedDb: Database;
-
-beforeAll(() => {
-    sharedDb = new Database();
-});
-
-// GOOD: Fresh state per test
-beforeEach(() => {
-    db = new InMemoryDatabase();
-});
-```
+Test-data authority, identity, construction, isolation, and lifecycle are owned
+by [Verification](workflows/verification.md#test-data-authority-and-lifecycle).
+Factories, builders, direct construction, and shared or isolated fixtures are
+mechanisms selected from that contract, not defaults.
 
 ### Validate Persisted Dynamic Artifacts
 

@@ -219,6 +219,38 @@ usable oracle.
 Never weaken an assertion, narrow an input domain, replace the real objective
 with substitute behavior, or accept successful execution as default success.
 
+## Test Data Authority And Lifecycle
+
+Identify the contract that owns each material test-data field, identity,
+relationship, state transition, and validity rule. Construct only the data
+needed by the claim while keeping material values and defaults reviewable.
+Factories, builders, direct construction, generators, snapshots, seeded stores,
+and external fixtures are mechanisms selected from the data contract, setup
+cost, reuse, diagnosis, and repository tooling; none is a default hierarchy.
+
+Define fixture identity and lifetime independently from the workflow or check
+that first created it. Select immutable sharing, per-check construction, scoped
+mutable sharing, transactions, namespaces, reset, cleanup, or another isolation
+mechanism from mutation, concurrency, ordering, resource cost, and the proved
+boundary. Shared mutable data is valid only when its owner, scope, synchronization,
+initial state, transitions, reset or disposal, and failure recovery are explicit
+and the selected evidence exercises that lifecycle.
+
+Do not let a factory default, prior check, ambient database, clock, random seed,
+process-global cache, external account, or persisted artifact silently supply a
+material precondition. A reused fixture carries no originating check input or
+claim context into another check. Preserve stable identity only when the claim
+requires it, and allocate or derive distinct identity when parallel or repeated
+execution could collide.
+
+Contradictory data authority, identity, ownership, isolation, or lifecycle facts
+are `invalid`. A required construction or isolation mechanism outside supported
+repository or platform capability is `unsupported`. Missing material authority,
+identity, reset, cleanup, synchronization, or environment facts are
+`unavailable`. Do not substitute factory use, fresh allocation, transaction
+rollback, cleanup success, test ordering, serial execution, or passing retries
+for the required claim.
+
 ## Test Placement And Naming
 
 Place evidence where its owner, affected implementation, fixtures, environment

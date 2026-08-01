@@ -4640,6 +4640,34 @@ child `18.11` active.
 **Next slice:** `7.4b8cg`, refine `STD-0632` through `STD-0634` into
 Verification test-data authority and lifecycle.
 
+## Milestone 7.4b8cg: Testing Data Authority And Lifecycle
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Verification now selects test-data identity, construction,
+sharing, isolation, reset, cleanup, and disposal from the owned data contract,
+mutation and concurrency facts, resource cost, and the boundary being proved.
+
+**No-fallback/legacy result:** factories, builders, direct construction, fresh
+allocation, shared fixtures, transactions, ordering, and serial execution are
+mechanisms rather than defaults. Reused fixtures cannot carry originating check
+inputs or claim context, and missing material authority or lifecycle facts
+return typed diagnostics.
+
+**Verification:** focused decisions cover 16 allowed, invalid, unsupported, and
+unavailable outcomes plus exact replacement and three dispositions. All 131
+repository checkers pass; the execution train reports 259 completed and 330
+remaining IDs across 65 completed and 32 pending logical clusters, with child
+`18.12` active.
+
+**Next slice:** `7.4b8ch`, refine `STD-0636` through `STD-0638` and `STD-0640`
+into Verification async completion and failure-boundary evidence.
+
+**Verification deviation:** the mechanical active-cursor advance initially
+changed frozen row `18.11` from `STD-0632` to `STD-0636`. The immutable row was
+restored before focused verification, and the next-slice assertion was bounded
+to all four row `18.12` identifiers.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

@@ -582,3 +582,6 @@ STD-0628	TESTING-STANDARDS.md	workflows/verification.md	refine	treat coverage as
 STD-0629	TESTING-STANDARDS.md	workflows/verification.md	index	replace test documentation parent with a non-normative route to canonical durable evidence records
 STD-0630	TESTING-STANDARDS.md	workflows/verification.md	refine	record non-recoverable defect invariant environment and interpretation context at the owning evidence without mandatory inline comments
 STD-0631	TESTING-STANDARDS.md	workflows/verification.md	refine	record non-recoverable fixture shape authority at the owning artifact without mandatory diagrams tables or templates
+STD-0632	TESTING-STANDARDS.md	workflows/verification.md	index	replace test-data management parent with a non-normative route to canonical data authority identity isolation construction and lifecycle
+STD-0633	TESTING-STANDARDS.md	workflows/verification.md	refine	select factories builders direct construction generators snapshots seeded stores or external fixtures from the owned data contract without mechanism defaults
+STD-0634	TESTING-STANDARDS.md	workflows/verification.md	refine	select immutable sharing scoped mutation synchronization reset cleanup and identity from lifecycle and concurrency facts without fresh-state serial-execution or ordering defaults

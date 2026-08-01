@@ -1,0 +1,17 @@
+case	authority	identity	construction	mutation	isolation	lifecycle	substitute	expected
+direct_owned	owned	distinct	direct	immutable	none	complete	none	allow
+factory_owned	owned	distinct	factory	immutable	none	complete	none	allow
+builder_owned	owned	distinct	builder	immutable	none	complete	none	allow
+immutable_shared	owned	stable	fixture	immutable	shared	complete	none	allow
+mutable_scoped	owned	distinct	seeded-store	mutable	namespace	complete	none	allow
+transactional	owned	distinct	seeded-store	mutable	transaction	complete	none	allow
+external_owned	owned	stable	external	mutable	lease	complete	none	allow
+contradictory_authority	contradictory	distinct	direct	immutable	none	complete	none	typed-invalid
+contradictory_identity	owned	contradictory	factory	immutable	none	complete	none	typed-invalid
+contradictory_lifecycle	owned	distinct	fixture	mutable	namespace	contradictory	none	typed-invalid
+unsupported_isolation	owned	distinct	seeded-store	mutable	unsupported	complete	none	typed-unsupported
+missing_authority	missing	distinct	direct	immutable	none	complete	none	typed-unavailable
+missing_identity	owned	missing	factory	immutable	none	complete	none	typed-unavailable
+missing_lifecycle	owned	distinct	fixture	mutable	shared	missing	none	typed-unavailable
+factory_default	owned	distinct	factory	immutable	none	complete	factory-default	typed-invalid
+serial_fallback	owned	stable	fixture	mutable	shared	complete	serial-execution	typed-invalid

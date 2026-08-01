@@ -10,9 +10,9 @@
 Language Bindings, Resilience, Contracts, Frontend, and Performance children
 are accepted.
 
-**Next slice:** Milestone 7.4b8cg refine `STD-0632`, `STD-0633`, and `STD-0634`
-into Verification-owned test-data authority, identity, isolation, construction,
-and lifecycle.
+**Next slice:** Milestone 7.4b8ch refine `STD-0636`, `STD-0637`, `STD-0638`,
+and `STD-0640` into Verification-owned async completion and failure-boundary
+evidence.
 
 **Acceptance status:** `partial`
 
@@ -1533,8 +1533,11 @@ all structural/routing fixtures pass.
      thresholds, exclusions, and records from named risks and non-recoverable
      evidence facts. Reject fixed percentages, conventional exclusions,
      coverage-as-quality, inline-comment, diagram, and documentation defaults.
-   - `7.4b8cg` (`Planned`): refine `STD-0632` through `STD-0634` into test-data
-     authority, identity, isolation, construction, and lifecycle.
+   - `7.4b8cg` (`Accepted`): refine `STD-0632` through `STD-0634` into test-data
+     authority, identity, isolation, construction, and lifecycle. Select
+     factories, builders, direct construction, sharing, reset, and cleanup from
+     the owned data contract without factory, fresh-state, ordering, or serial
+     execution defaults.
    - `7.4b8ch` (`Planned`): refine `STD-0636` through `STD-0638` and `STD-0640`
      into async completion and failure-boundary evidence.
    - `7.4b8ci` (`Planned`): refine `STD-0645` through `STD-0652` into
