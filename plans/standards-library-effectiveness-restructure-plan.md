@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 and 19.2 are accepted; non-normative
-hook recipe extraction for child 19.3 is active.
+**Current phase:** Tooling children 19.1 through 19.3 are accepted;
+editor-neutral configuration and settings selection for child 19.4 is active.
 
-**Next slice:** Milestone 7.4b9d for `STD-0656`, `STD-0657`, `STD-0658`, `STD-0659`, and `STD-0661`;
-move hook rationale, Lefthook selection,
-installation, and configuration examples to non-normative reference.
+**Next slice:** Milestone 7.4b9e for `STD-0666` and `STD-0673`; select
+editor-neutral configuration and settings from repository, consumer, and
+file-format facts without EditorConfig or universal-setting defaults.
 
 **Acceptance status:** `partial`
 
@@ -1565,10 +1565,13 @@ all structural/routing fixtures pass.
    - `7.4b9c` (`Accepted`): refine `STD-0663` and `STD-0703` into Commit
      authority for history review and explicit hook bypass without automated
      rewrite, inferred authority, or bypass defaults.
-   - `7.4b9d` (`Planned`): move `STD-0656`, `STD-0657`, `STD-0658`,
+   - `7.4b9d` (`Accepted`): move `STD-0656`, `STD-0657`, `STD-0658`,
      `STD-0659`, and `STD-0661` into non-normative Tooling recipes without
      selecting Lefthook, installation commands, templates, or configuration as
      canonical defaults.
+   - `7.4b9e` (`Planned`): refine `STD-0666` and `STD-0673` into editor-neutral
+     configuration and settings selection from repository, consumer, and
+     file-format facts without EditorConfig or universal-setting defaults.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

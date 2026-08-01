@@ -17,63 +17,19 @@ not competing generic authority.
 
 ### Why Pre-Commit Hooks
 
-Catch issues before they enter version control:
-- Formatting inconsistencies
-- Linting errors
-- Type errors
-- Failing tests
+The former rationale is retained only as a non-normative
+[Tooling recipe](reference/recipes/tooling.md#hook-feedback).
 
-### Recommended Tool: Lefthook
+### Hook Runner Example
 
-Lefthook is language-agnostic and supports parallel execution.
-
-**Installation:**
-```bash
-# npm
-npm install lefthook --save-dev
-
-# Or standalone
-curl -sSfL https://get.lh.run | sh
-```
-
-**Initialize:**
-```bash
-lefthook install
-```
+The former Lefthook selection and installation example is retained only in the
+non-normative [Tooling recipe](reference/recipes/tooling.md#lefthook-example).
 
 ### Basic Configuration
 
 Canonical configuration selection is defined by [Tooling](workflows/tooling.md).
-The example below remains migration input pending its reference disposition.
-
-See [templates/lefthook.yml](templates/lefthook.yml) for a ready-to-use template.
-
-```yaml
-# lefthook.yml
-pre-commit:
-  parallel: true
-  commands:
-    lint:
-      glob: "*.{ts,js}"
-      run: npm run lint {staged_files}
-
-    format-check:
-      glob: "*.{ts,js,json,css}"
-      run: npm run format:check {staged_files}
-
-    typecheck:
-      run: npm run typecheck
-
-    decision-traceability:
-      run: >-
-        ./scripts/check-decision-traceability.sh --mode staged
-        --map .standards/decision-traceability.tsv
-
-pre-push:
-  commands:
-    test:
-      run: npm test
-```
+The former configuration is retained only as a non-normative
+[Tooling recipe](reference/recipes/tooling.md#lefthook-example).
 
 ### Hook Categories
 

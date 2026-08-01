@@ -4841,6 +4841,29 @@ owner proposal to the reviewed Commit destination. Focused execution-train
 verification correctly rejected mutation of that frozen baseline evidence; the
 override and generated-map edits were removed before acceptance.
 
+## Milestone 7.4b9d: Non-Normative Tooling Recipes
+
+**Outcome:** Accepted implementation slice.
+
+**Reference result:** Hook rationale, the Lefthook example, installation
+commands, and configuration YAML are retained in
+`reference/recipes/tooling.md` as explicitly non-normative material. Canonical
+tool selection and dependency installation remain owned by Tooling and
+Dependencies respectively.
+
+**No-fallback result:** the reference does not select a hook runner,
+installation source, stage, parallel mode, glob, command, or check allocation.
+The legacy source no longer presents Lefthook, installation commands, or its
+template as recommended or ready-to-use authority.
+
+**Verification:** focused reference metadata, authority, link, negative legacy,
+and five exact-disposition checks pass. All 138 repository checkers pass. The
+execution train reports 286 completed and 303 remaining IDs across 71 completed
+and 44 pending logical clusters, with child `19.4` active.
+
+**Next slice:** `7.4b9e`, refine `STD-0666` and `STD-0673` into editor-neutral
+configuration and settings selection.
+
 **Verification deviation:** the mechanical cursor advance initially changed
 the frozen first identifier of row `18.14` from `STD-0602` to `STD-0654`. The
 immutable row was restored before focused verification, and the active planning

@@ -29,7 +29,10 @@ rg -F -q '`7.4b9b` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b9c` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9d` (`Planned`)' \
+rg -F -q '`7.4b9d` (`Accepted`)' \
+  "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b9e` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 [[ -e "$R/workflows/tooling.md" ]]
+[[ -e "$R/reference/recipes/tooling.md" ]]
 printf 'Milestone 7 row-19 owner validation passed: 50 exact proposals\n'

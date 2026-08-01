@@ -28,6 +28,7 @@ reference material.
 | [reference/recipes/commits.md](reference/recipes/commits.md) | Non-normative staging and conventional commit examples | Formatting a commit after the workflow has selected process rules |
 | [reference/recipes/documentation.md](reference/recipes/documentation.md) | Non-normative comment, Markdown, public-interface, and algorithm examples | Applying a selected documentation requirement |
 | [reference/recipes/releases.md](reference/recipes/releases.md) | Non-normative changelog automation example | Configuring a selected release tool |
+| [reference/recipes/tooling.md](reference/recipes/tooling.md) | Non-normative hook runner examples | Configuring an already selected tooling mechanism |
 | [topics/contracts.md](topics/contracts.md) | Runtime decoding proof, contract classes, migration, compatibility, degraded outcomes, and typed diagnostics | Boundary decoding, contract evolution, persisted state, or fallback decisions |
 | [topics/concurrency.md](topics/concurrency.md) | Shared-state coordination, lock boundaries, nonblocking async lifecycle, failure observation, and cancellation ownership | Concurrent state or asynchronous work with lifecycle obligations |
 | [topics/dependencies.md](topics/dependencies.md) | Dependency requirements, ownership, selection, resolution, provisioning, and lifecycle policy | Adding, changing, resolving, installing, updating, or removing a dependency |
