@@ -109,11 +109,35 @@ Cold-start and lazy-rebuild behavior is valid only as a selected reconstruction
 contract. A missing cache does not authorize stale reads, alternate stores, or
 weaker evidence.
 
+## Replay And Resumption Evidence
+
+When durable commands, events, projections, workers, retries, or reconnects can
+repeat or resume work, declare the authoritative history or checkpoint, replay
+boundary, duplicate identity, idempotency contract, projection convergence
+rule, partial-failure state, and condition permitting new work to resume.
+
+Evidence exercises the real persistence and execution boundaries applicable to
+the claim. It proves bootstrap or replay from authoritative state, duplicate
+request handling, projection convergence after recovery, worker or connection
+resumption from the selected position, and repair or rejection of partial work
+before later work proceeds. A pure helper, successful restart, empty-state
+bootstrap, log message, or final snapshot without the transition path does not
+prove recovery.
+
+Return `invalid` when replay, duplicate, convergence, or resume facts
+contradict the operation contract; `unsupported` when the requested recovery
+mode is outside the declared contract; and `unavailable` when authoritative
+history, checkpoint, persistence, execution boundary, or required evidence
+cannot be obtained. Do not restart from an inferred position, discard or
+reapply unknown work, reset authoritative state, continue after unproven
+partial failure, or substitute a helper-only or weaker recovery path.
+
 ## Acceptance Evidence
 
 Verification covers required and best-effort behavior at startup and runtime,
 bounded retry and cancellation, degraded result shape, health transitions,
-terminal diagnostics, reconstruction authority, and recovery. Availability
+terminal diagnostics, reconstruction authority, replay, duplicate handling,
+projection convergence, resumption, partial-failure repair, and recovery. Availability
 claims must match the service surface that remains valid during degradation.
 
 ## No Fallback

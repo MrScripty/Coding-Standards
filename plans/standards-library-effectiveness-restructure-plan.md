@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Testing-source owner decomposition is active; Concurrency is
-complete and the Language Bindings child is accepted.
+**Current phase:** Testing-source owner decomposition is active; Concurrency,
+Language Bindings, and Resilience children are accepted.
 
-**Next slice:** Milestone 7.4b8bx refine `STD-0617` into the existing Resilience
+**Next slice:** Milestone 7.4b8by refine `STD-0635` into the existing Contracts
 owner package.
 
 **Acceptance status:** `partial`
@@ -1482,8 +1482,14 @@ all structural/routing fixtures pass.
      native-only, host-only smoke, generated-type, producer-snapshot,
      experimental-label, fixed-schedule, alternate-artifact, and weaker-
      evidence substitutions with typed diagnostics.
-   - `7.4b8bx` (`Planned`): refine `STD-0617` into the existing Resilience
-     owner package.
+   - `7.4b8bx` (`Accepted`): refine `STD-0617` into Resilience. Require
+     authoritative history/checkpoints, replay boundaries, duplicate identity
+     and idempotency, projection convergence, resumption position, and partial-
+     failure repair before new work. Reject helper-only, restart smoke, empty-
+     state bootstrap, log, final-snapshot, inferred-position, state-reset, and
+     weaker recovery substitutions with typed diagnostics.
+   - `7.4b8by` (`Planned`): refine `STD-0635` into the existing Contracts owner
+     package.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

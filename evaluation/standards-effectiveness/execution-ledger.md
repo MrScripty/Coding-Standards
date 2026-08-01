@@ -4419,6 +4419,28 @@ clusters, with child `18.3` active.
 **Next slice:** `7.4b8bx`, refine `STD-0617` into the existing Resilience owner
 package.
 
+## Milestone 7.4b8bx: Testing Resilience Replay Evidence
+
+**Outcome:** Accepted implementation slice.
+
+**Canonical result:** Resilience now owns authoritative replay/checkpoint,
+duplicate identity and idempotency, projection convergence, resume position,
+and partial-failure repair contracts through real persistence and execution
+boundaries. The legacy section is a bounded route.
+
+**No-fallback/legacy result:** helper-only checks, successful restart smoke,
+empty-state bootstrap, logs, final snapshots, inferred positions, state reset,
+and weaker recovery paths cannot satisfy recovery claims.
+
+**Verification:** 14 focused decisions cover allowed, invalid, unsupported,
+and unavailable replay/resumption outcomes plus exact replacement and one
+disposition. All 123 `verify-*.sh` checkers pass; the train reports 225
+completed and 364 remaining IDs across 57 completed and 33 pending logical
+clusters, with child `18.4` active.
+
+**Next slice:** `7.4b8by`, refine `STD-0635` into the existing Contracts owner
+package.
+
 **Verification deviation:** the first focused run exposed a mechanical cursor
 replacement that also changed the frozen row-16 start assertion in the
 Dependencies owner checker. The frozen assertion was restored to `STD-0300`;

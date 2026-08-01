@@ -200,17 +200,10 @@ This legacy heading is a non-normative migration route.
 
 ### Replay, Recovery, and Idempotency Checks
 
-For systems that use durable commands/events, projections, background workers,
-or reconnect/retry behavior, add verification for:
-
-- replay/bootstrap from persisted state
-- duplicate command/request handling
-- projection/read-model consistency after recovery
-- partial failure recovery before new work resumes
-
-These checks may be integration or end-to-end tests depending on system shape,
-but they must exercise the real workflow boundaries rather than only pure helper
-functions.
+Canonical replay, duplicate-handling, convergence, resumption, and partial-
+failure evidence requirements are in
+[Replay and Resumption Evidence](topics/resilience.md#replay-and-resumption-evidence).
+This legacy heading is a non-normative migration route.
 
 ---
 

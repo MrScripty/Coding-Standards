@@ -51,7 +51,9 @@ row="$(awk -F '\t' '$1=="STD-0616" {print $2 FS $3 FS $4 FS $5}' \
 
 rg -F -q '`7.4b8bw` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8bx` (`Planned`)' \
+rg -F -q '`7.4b8bx` (`Accepted`)' \
+  "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b8by` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing language-binding evidence passed: 16 decisions, 1 disposition\n'
