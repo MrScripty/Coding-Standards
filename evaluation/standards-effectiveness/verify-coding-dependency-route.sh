@@ -11,7 +11,7 @@ mapfile -t rows < <(awk -F '\t' '$1=="STD-0157"{print $2 FS $3 FS $4}' \
 [[ "${rows[*]}" == $'CODING-STANDARDS.md\tCODING-STANDARDS.md\tindex' ]]
 rg -F -q '`7.4b8bi` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9a` (`Planned`)' \
+rg -F -q '`7.4b9b` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-dependencies-owner-contract.sh"
 "$S/verify-milestone-7-row-15-decomposition.sh"

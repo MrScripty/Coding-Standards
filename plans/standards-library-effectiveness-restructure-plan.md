@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Testing-source closure is accepted; row 19 Tooling owner
-contract and complete decomposition planning is active.
+**Current phase:** Testing-source closure and row 19 Tooling decomposition are
+accepted; bounded Tooling owner implementation is active.
 
-**Next slice:** Milestone 7.4b9a for `STD-0654` through `STD-0703`; define the
-validated Tooling owner contract and complete semantic decomposition before any
-normative Tooling population.
+**Next slice:** Milestone 7.4b9b for `STD-0654`, `STD-0655`, `STD-0660`,
+`STD-0662`, `STD-0664`, and `STD-0665`; establish the bounded Tooling owner and
+hook orchestration contract.
 
 **Acceptance status:** `partial`
 
@@ -1554,10 +1554,14 @@ all structural/routing fixtures pass.
      scheduling, cost, and reporting while routing acceptance, implementation,
      commit, documentation, dependency, language-specific, and reference
      concerns to their proper owners.
-   - `7.4b9a` (`Planned`): perform the row 19 complete decomposition after
+   - `7.4b9a` (`Accepted`): perform the row 19 complete decomposition after
      `7.4b8cj`; define the validated Tooling owner contract and decompose all 50
      row-19 identifiers together as a planning package before any normative
      Tooling population.
+   - `7.4b9b` (`Planned`): create the bounded `workflows/tooling.md` owner and
+     refine `STD-0654`, `STD-0655`, `STD-0660`, `STD-0662`, `STD-0664`, and
+     `STD-0665` into hook selection, configuration, scheduling, cost, and
+     persisted-artifact check orchestration without tool or stage defaults.
 6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
    and duplication verification only after the rolling remainder reaches zero
    and every required canonical owner exists.

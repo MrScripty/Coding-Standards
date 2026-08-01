@@ -23,7 +23,9 @@ for text in '## Boundary Result' 'validates creating `workflows/tooling.md`' \
 done
 rg -F -q 'Row 19 owner-validation gate (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9a` (`Planned`): perform the row 19 complete decomposition' \
+rg -F -q '`7.4b9a` (`Accepted`): perform the row 19 complete decomposition' \
+  "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b9b` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 [[ ! -e "$R/workflows/tooling.md" ]]
 printf 'Milestone 7 row-19 owner validation passed: 50 exact proposals\n'

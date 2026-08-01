@@ -30,6 +30,6 @@ rg -F -q 'workflows/verification.md' "$R/TESTING-STANDARDS.md"
 mapfile -t ids < <(awk -F '\t' '$1>="STD-0645"&&$1<="STD-0652"{print $1}' "$S/consolidation-dispositions.tsv" | sort)
 [[ "${ids[*]}" == 'STD-0645 STD-0646 STD-0647 STD-0648 STD-0649 STD-0650 STD-0651 STD-0652' ]]
 rg -F -q '`7.4b8ci` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9a` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b9b` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-18-decomposition.sh"
 printf 'Testing gates diagnosis passed: 16 decisions, 8 dispositions\n'

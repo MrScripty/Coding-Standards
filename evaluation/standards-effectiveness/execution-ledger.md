@@ -4768,6 +4768,32 @@ across 68 completed and 29 pending logical clusters, with row 19 active.
 complete semantic decomposition for all 50 row-19 identifiers before normative
 population.
 
+## Milestone 7.4b9a: Tooling Owner Contract And Decomposition
+
+**Outcome:** Accepted planning slice.
+
+**Result:** the validated generic Tooling boundary is defined and all 50
+row-19 identifiers are assigned exactly once across 19 ordered,
+owner-homogeneous semantic children. Existing owners retain acceptance,
+implementation, commit, documentation, dependency, and TypeScript authority;
+recipes remain non-normative reference.
+
+**No-fallback result:** the planned owner rejects conventional tools, hook
+stages, editor settings, warning policies, formatter/linter pairs, CI providers,
+gate lists, fail-fast modes, tiers, caches, timeouts, path filters, installation
+commands, and passing automation as defaults or acceptance.
+
+**Verification:** exact 50-ID coverage, child order, row shape, owner coverage,
+owner-contract anchors, accepted/planned lifecycle, and absent normative Tooling
+owner are checked by `verify-milestone-7-row-19-decomposition.sh`. All 136
+repository checkers pass; the execution train reports 273 completed and 316
+remaining IDs across 68 completed and 47 pending logical clusters, with child
+`19.1` active.
+
+**Next slice:** `7.4b9b`, create the bounded Tooling owner and implement child
+`19.1` for `STD-0654`, `STD-0655`, `STD-0660`, `STD-0662`, `STD-0664`, and
+`STD-0665`.
+
 **Verification deviation:** the mechanical cursor advance initially changed
 the frozen first identifier of row `18.14` from `STD-0602` to `STD-0654`. The
 immutable row was restored before focused verification, and the active planning
