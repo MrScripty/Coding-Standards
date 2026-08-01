@@ -30,6 +30,6 @@ rg -F -q 'topics/contracts.md#inbound-and-outbound-boundary-proof' "$R/ARCHITECT
 mapfile -t ids < <(awk -F '\t' '$1>="STD-0155"&&$1<="STD-0156"{print $1}' "$S/consolidation-dispositions.tsv" | sort)
 [[ "${ids[*]}" == 'STD-0155 STD-0156' ]]
 rg -F -q '`7.4b8bh` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9k` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b9l` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
 printf 'Contract boundary proof passed: 15 decisions, 2 dispositions\n'

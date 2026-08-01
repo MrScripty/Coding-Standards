@@ -164,14 +164,8 @@ The former VS Code example is retained only in the non-normative
 ### Principle: Check in CI
 
 Select formatting checks and their schedule through canonical Tooling. The
-command below remains migration input for the next reference slice.
-
-```bash
-# Prettier check mode
-prettier --check "src/**/*.ts"
-
-# Exit code 1 if files would change
-```
+former command and output example is retained only in the non-normative
+[Tooling recipe](reference/recipes/tooling.md#formatting-automation-examples).
 
 ### Format vs. Lint
 

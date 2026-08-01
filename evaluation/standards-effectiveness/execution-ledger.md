@@ -5004,6 +5004,21 @@ completed and 38 pending logical clusters, with child `19.10` active.
 **Next slice:** `7.4b9k`, move standalone formatter command examples to
 non-normative reference.
 
+## Milestone 7.4b9k: Non-Normative Formatter Command
+
+**Outcome:** Accepted implementation slice.
+
+The Prettier check command, source glob, and exit-code interpretation now reside
+only in the non-normative Tooling recipe. They cannot select a formatter,
+command mode, scope, or evidence meaning.
+
+**Verification:** reference authority, legacy negative coverage, and two exact
+dispositions pass. All 142 repository checkers pass. The execution train
+reports 307 completed and 282 remaining IDs across 78 completed and 37 pending
+logical clusters, with child `19.11` active.
+
+**Next slice:** `7.4b9l`, route quality-gate evidence meaning to Verification.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

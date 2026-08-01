@@ -157,3 +157,12 @@ style rules.
 Those editor settings, products, extension identifiers, package commands, and
 format-on-save behavior are examples only. They do not select formatting
 authority, grant mutation authority, or establish when evidence must run.
+
+A selected Prettier check might use:
+
+```bash
+prettier --check "src/**/*.ts"
+```
+
+The command, check mode, source glob, and nonzero result interpretation depend
+on the selected product version and formatting claim. They are not defaults.

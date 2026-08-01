@@ -64,9 +64,9 @@ mapfile -t actual < <(
 rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b9k'* ]]
-[[ "$next_slice_line" == *'STD-0684'* ]]
-[[ "$next_slice_line" == *'STD-0685'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b9l'* ]]
+[[ "$next_slice_line" == *'STD-0688'* ]]
+[[ "$next_slice_line" == *'STD-0695'* ]]
 
 "$S/verify-dependencies-owner-contract.sh"
 "$S/verify-launcher-population.sh"

@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.9 are accepted; standalone
-formatter command and output examples for child 19.10 are active.
+**Current phase:** Tooling children 19.1 through 19.10 are accepted; quality-gate
+acceptance and local-versus-CI evidence meaning for child 19.11 are active.
 
-**Next slice:** Milestone 7.4b9k for `STD-0684` and `STD-0685`; move formatter
-command and output examples to non-normative reference without command, glob,
-or exit-code defaults.
+**Next slice:** Milestone 7.4b9l for `STD-0688` and `STD-0695`; route quality-gate
+acceptance and local-versus-CI evidence meaning to Verification without gate-list
+or environment-hierarchy defaults.
 
 **Acceptance status:** `partial`
 
@@ -1586,9 +1586,12 @@ all structural/routing fixtures pass.
    - `7.4b9j` (`Accepted`): refine `STD-0681`, `STD-0682`, `STD-0683`, and
      `STD-0686` into formatting ownership, automation, scheduling, and lint
      separation without format-on-save, CI, or tool-pair defaults.
-   - `7.4b9k` (`Planned`): move `STD-0684` and `STD-0685` into non-normative
+   - `7.4b9k` (`Accepted`): move `STD-0684` and `STD-0685` into non-normative
      formatter command and output examples without command, glob, or exit-code
      defaults.
+   - `7.4b9l` (`Planned`): refine `STD-0688` and `STD-0695` under Verification
+     authority for quality-gate acceptance and local-versus-CI evidence meaning
+     without mandatory gate lists or environment hierarchy.
    - Row 19 formatting split replan (`Accepted`): retain Tooling as the sole
      canonical owner for child `19.9`; refine `STD-0681` and `STD-0683`
      directly, use split dispositions for `STD-0682` and `STD-0686`, and

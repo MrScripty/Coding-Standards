@@ -62,4 +62,8 @@ rg -F -q '[reference/recipes/tooling.md](reference/recipes/tooling.md)' "$R/READ
 ! rg -F -q '| Category | Purpose | Examples |' "$L"
 ! rg -F -q 'Enable all strict checks for type safety' "$L"
 ! rg -F -q '| Mistake | Symptom | Fix |' "$L"
+rg -F -q 'prettier --check "src/**/*.ts"' "$F"
+rg -F -q $'STD-0684\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove' "$D"
+rg -F -q $'STD-0685\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tretire' "$D"
+! rg -F -q 'prettier --check "src/**/*.ts"' "$L"
 printf 'Tooling reference recipes passed: non-normative examples with 12 exact dispositions\n'
