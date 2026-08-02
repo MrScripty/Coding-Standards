@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 and 21 are accepted and closed; row 22 Rust release
-owner review is active.
+**Current phase:** Rows 20 and 21 are accepted and closed; row 22 is decomposed,
+and Rust Release owner creation child 22.1 is active.
 
-**Next slice:** Milestone 7.4b12a for row 22 `STD-0810` through `STD-0820`;
-validate the missing Rust Release owner boundary and prerequisites, and
-decompose the row before creating or populating the owner.
+**Next slice:** Milestone 7.4b12b for row 22 child 22.1 `STD-0810`; create the
+narrow Rust Release owner and non-normative recipe boundary, route the parent,
+and add typed owner-contract evidence before population.
 
 **Acceptance status:** `partial`
 
@@ -1733,9 +1733,15 @@ all structural/routing fixtures pass.
    - `7.4b11i` (`Accepted`): replace the stale Rust profile route to the removed
      dependency legacy anchor with the canonical Rust Dependency profile link;
      no normative ownership, disposition, or execution cursor changes.
-   - `7.4b12a` (`Planned`): review row 22 `STD-0810` through `STD-0820`, validate
-     the missing Rust Release owner boundary and dependencies, and produce an
-     exact owner-bounded decomposition before normative movement.
+   - `7.4b12a` (`Accepted`): review row 22 `STD-0810` through `STD-0820` and
+     reject whole-source movement because generic release, reproducibility,
+     dependency, licensing, documentation, performance, tooling, verification,
+     recipe, and Rust mechanism authority are mixed. Freeze seven ordered
+     children, one exact disposition per identifier, four reference moves, and
+     zero premature dispositions before owner creation.
+   - `7.4b12b` (`Planned`): create the useful narrow Rust Release owner and
+     non-normative recipe boundary with `STD-0810`, then route the parent without
+     generic policy or example defaults.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public

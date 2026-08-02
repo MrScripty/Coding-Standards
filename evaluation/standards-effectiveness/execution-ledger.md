@@ -5783,6 +5783,38 @@ execution cursor changed.
 **Next slice:** `7.4b12a`, decompose row 22 before creating or populating the
 missing Rust Release owner.
 
+## Milestone 7.4b12a: Rust Release Owner And Correctness Decomposition
+
+**Outcome:** Accepted planning correction.
+
+The row 22 source combines generic release boundaries, version and artifact
+authority, reproducibility claims, dependency resolution, lockfile policy,
+licensing and documentation facts, performance claims, tool selection,
+verification claims, Cargo mechanisms, product configuration, commands, and a
+fixed checklist. Moving it intact into the missing Rust Release profile would
+create competing authority and retain examples as defaults.
+
+The accepted decomposition defines a narrow Rust and Cargo release mechanism
+owner, a non-normative Rust release recipe, eleven exact single dispositions,
+and seven ordered children. One parent becomes an index, six sections split
+generic authority from Rust mechanisms, and four separately identified
+manifests/configurations move to reference. Embedded examples in split sections
+are extracted under their section's single disposition.
+
+No normative source, generated artifact, final disposition, router, owner, or
+recipe changed in this planning slice. The train remains at 355 completed and
+234 remaining identifiers, with child `22.1` active and zero row 22 premature
+dispositions.
+
+**Verification:** exact-ID coverage, owner/disposition counts, ordered overlay,
+missing-owner state, zero premature dispositions, report contract, plan cursor,
+and execution-train state.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b12b`, create the narrow Rust Release owner and
+non-normative recipe boundary with `STD-0810` before population.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
