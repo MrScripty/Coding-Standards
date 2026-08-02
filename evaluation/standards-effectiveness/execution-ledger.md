@@ -5360,6 +5360,27 @@ across 89 completed and 30 pending logical clusters, with child `20.4` active.
 **Next slice:** `7.4b10e`, split generic failure authority from Rust failure
 expression mechanisms.
 
+## Row 20 Child 20.4 Failure-Authority Replan
+
+**Outcome:** Accepted planning correction.
+
+Lookahead found that “generic failure authority” merged independent Contracts
+and Resilience decisions. Contracts owns expected absence, invariant violation,
+validation, and impossible-state semantics. Resilience owns operational
+failure, recovery, retry, degradation, and availability. Rust API owns only
+`Result`, `Option`, panic, assertion, `unreachable!`, `unwrap`, and `expect`
+expression after all applicable generic contracts are accepted.
+
+**No-fallback result:** no situation table, error-crate preference, context
+rule, path-based exception list, or `expect` preference may complete missing
+generic facts. The two IDs and child ordering remain valid, so no objective,
+source scope, or dependency change is required.
+
+**Verification:** row-20 owner, decomposition, execution-train, and plan
+lifecycle checks pass. All 154 repository checkers pass.
+
+**Next slice:** `7.4b10e`, implement the corrected child 20.4 ownership split.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

@@ -10,9 +10,10 @@
 mechanisms for child 20.4 are active.
 
 **Next slice:** Milestone 7.4b10e for row 20 child 20.4 `STD-0711` and `STD-0712`;
-split generic failure authority from Rust `Result`, `Option`, panic, `unwrap`,
-and `expect` mechanisms without error-crate, context, table, or exception-list
-defaults.
+split Contracts absence/invariant/impossible-state authority and Resilience
+operational-failure/recovery authority from Rust `Result`, `Option`, panic,
+assertion, `unreachable!`, `unwrap`, and `expect` mechanisms without
+error-crate, context, situation-table, or exception-list defaults.
 
 **Acceptance status:** `partial`
 
@@ -1655,7 +1656,11 @@ all structural/routing fixtures pass.
      154 repository checkers pass; the execution train advances to 330
      completed and 259 remaining identifiers.
    - `7.4b10e` (`Planned`): split `STD-0711` and `STD-0712` into generic
-     failure authority and Rust failure-expression mechanisms.
+     failure authority and Rust failure-expression mechanisms. Child 20.4
+     ownership replan (`Accepted`) refines generic authority: Contracts owns
+     expected absence, invariant violation, and impossible-state semantics;
+     Resilience owns operational failure, recovery, retry, degradation, and
+     availability; Rust API owns only supported language expression.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

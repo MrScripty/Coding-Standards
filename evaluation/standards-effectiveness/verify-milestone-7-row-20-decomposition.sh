@@ -29,7 +29,10 @@ mapfile -t validated < <(awk -F '\t' 'NR > 1 {print $1}' "$VALIDATION")
 for text in '## Owner Contract' 'narrow language specialization' \
   'does not own domain invariants' 'Generic owners' \
   'selects a supported Rust expression' \
-  '## Exact Dispositions' '## Ordered Children' '## Re-plan Triggers'; do
+  '## Exact Dispositions' '## Ordered Children' '## Re-plan Triggers' \
+  '## Child 20.4 Ownership Replan' \
+  'Contracts owns expected absence, invariant violation' \
+  'Resilience owns operational failure, recovery'; do
   rg -F -q "$text" "$REPORT"
 done
 

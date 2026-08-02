@@ -42,8 +42,12 @@ baselines, Cargo command lists, or documentation checklists.
    boundary authority plus Rust type and conversion mechanisms.
 3. `20.3`: split `STD-0709` and `STD-0710` into Architecture authority
    plus Rust crate, module, visibility, and conditional-compilation mechanisms.
-4. `20.4`: split `STD-0711` and `STD-0712` into generic failure authority
-   plus Rust `Result`, `Option`, panic, `unwrap`, and `expect` mechanisms.
+4. `20.4`: split `STD-0711` and `STD-0712` across Contracts authority for
+   expected absence, invariant violation, and impossible-state semantics;
+   Resilience authority for operational failure, recovery, retry, degradation,
+   and availability; and Rust `Result`, `Option`, panic, assertion,
+   `unreachable!`, `unwrap`, and `expect` mechanisms. Neither generic owner may
+   infer the other's contract, and the Rust profile may not select either.
 5. `20.5`: split `STD-0715` into dependency and public-contract authority
    plus Cargo feature expression.
 6. `20.6`: split `STD-0716` into Documentation authority plus Rustdoc
@@ -60,3 +64,18 @@ Stop if the profile must select a generic contract, creates a dependency cycle,
 duplicates another Rust profile, requires a compatibility shim, cannot provide
 a useful first child, or an identifier cannot receive exactly one disposition
 without competing normative authority.
+
+## Child 20.4 Ownership Replan
+
+Lookahead found that “generic failure authority” collapsed two independent
+contracts. Contracts owns expected absence, invariant violation, validation,
+and impossible-state semantics. Resilience owns operational failure, recovery,
+retry, degradation, and availability. Rust API owns only the supported language
+expression after every applicable generic contract is accepted.
+
+The child retains its two IDs and one atomic implementation slice because both
+legacy sections jointly prescribe the same Rust failure-expression family.
+Focused decisions must distinguish expected absence, recoverable operational
+failure, invariant violation, and impossible state. Missing or contradictory
+generic ownership returns typed diagnostics; no situation table, error crate,
+context rule, path exception, or `expect` preference survives as a fallback.

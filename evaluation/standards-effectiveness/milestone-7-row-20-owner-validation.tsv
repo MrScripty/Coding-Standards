@@ -4,8 +4,8 @@ STD-0707	profiles/languages/rust/api.md	split	invariant-policy-and-rust-type-mec
 STD-0708	profiles/languages/rust/api.md	split	boundary-validation-and-rust-conversion-mechanisms
 STD-0709	profiles/languages/rust/api.md	split	architecture-policy-and-rust-crate-mechanisms
 STD-0710	profiles/languages/rust/api.md	split	architecture-policy-and-rust-module-mechanisms
-STD-0711	profiles/languages/rust/api.md	split	failure-policy-and-rust-result-option-panic-mechanisms
-STD-0712	profiles/languages/rust/api.md	split	panic-contract-and-rust-unwrap-expect-mechanisms
+STD-0711	profiles/languages/rust/api.md	split	contracts-absence-invariant-resilience-operational-failure-and-rust-result-option-panic-mechanisms
+STD-0712	profiles/languages/rust/api.md	split	contracts-impossible-state-resilience-lifecycle-failure-and-rust-assertion-unwrap-expect-mechanisms
 STD-0713	profiles/languages/rust/api.md	refine	rust-public-contract-trait-mechanisms
 STD-0714	profiles/languages/rust/api.md	refine	rust-parameter-ownership-mechanisms
 STD-0715	profiles/languages/rust/api.md	split	dependency-contract-and-cargo-feature-mechanisms
