@@ -6,7 +6,7 @@ STD-0734	reference/recipes/rust-dependencies.md	move	cargo-reverse-dependency-re
 STD-0735	profiles/languages/rust/dependencies.md	split	dependency-ownership-and-cargo-workspace-inheritance
 STD-0736	reference/recipes/rust-dependencies.md	move	workspace-dependency-manifest-recipe
 STD-0737	reference/recipes/rust-dependencies.md	move	workspace-member-manifest-recipe
-STD-0738	profiles/languages/rust/dependencies.md	split	dependency-feature-authority-and-cargo-feature-mechanisms
+STD-0738	profiles/languages/rust/dependencies.md	split	dependency-feature-authority-and-cargo-manifest-dependency-feature-mechanisms
 STD-0739	reference/recipes/rust-dependencies.md	move	cargo-full-feature-example
 STD-0740	reference/recipes/rust-dependencies.md	move	cargo-selected-feature-example
 STD-0741	profiles/languages/rust/dependencies.md	split	dependency-graph-claim-and-cargo-tree-mechanisms

@@ -8,5 +8,5 @@ STD-0711	profiles/languages/rust/api.md	split	contracts-absence-invariant-resili
 STD-0712	profiles/languages/rust/api.md	split	contracts-impossible-state-resilience-lifecycle-failure-and-rust-assertion-unwrap-expect-mechanisms
 STD-0713	profiles/languages/rust/api.md	refine	rust-public-contract-trait-mechanisms
 STD-0714	profiles/languages/rust/api.md	refine	rust-parameter-ownership-mechanisms
-STD-0715	profiles/languages/rust/api.md	split	dependencies-contracts-library-documentation-verification-authority-and-cargo-feature-mechanisms
+STD-0715	profiles/languages/rust/api.md	split	dependencies-contracts-library-documentation-verification-authority-and-rust-source-public-api-feature-mechanisms
 STD-0716	profiles/languages/rust/api.md	split	documentation-contracts-resilience-dependencies-unsafe-library-authority-and-rustdoc-mechanisms

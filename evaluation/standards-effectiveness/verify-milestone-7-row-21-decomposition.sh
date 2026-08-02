@@ -26,7 +26,10 @@ mapfile -t validated < <(awk -F '\t' 'NR > 1 {print $1}' "$VALIDATION")
 for text in '## Owner Contract' 'narrow Rust and Cargo mechanism' \
   'does not own dependency selection' '## Exact Dispositions' \
   'Fourteen command, manifest, and shell examples move' \
-  '## Ordered Children' '## Re-plan Triggers'; do
+  '## Ordered Children' '## Child 21.4 Artifact-Surface Ownership Replan' \
+  'Rust Dependency owns Cargo manifest dependency optionality' \
+  'Rust API separately owns Rust' 'retain aliases, compatibility wording' \
+  '## Re-plan Triggers'; do
   rg -F -q "$text" "$REPORT"
 done
 

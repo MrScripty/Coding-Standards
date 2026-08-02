@@ -54,7 +54,9 @@ baselines, Cargo command lists, or documentation checklists.
    Library authority for real consumer configurations; Documentation authority
    for durable feature-contract documentation; Verification authority for
    claim-matched feature-combination evidence; and Rust API authority only for
-   supported Cargo feature and compile-time enforcement mechanisms.
+   Rust source configuration, public API feature exposure, and compile-time
+   enforcement. Cargo manifest dependency feature expressions belong to the
+   Rust Dependency profile.
 6. `20.6`: split `STD-0716` across Documentation authority for triggers,
    artifacts, placement, and quality; Contracts authority for invariant,
    compatibility, and consumer-contract facts; Resilience authority for
@@ -99,7 +101,9 @@ default behavior, target variants, and footprint. Contracts owns
 consumer-visible behavior and compatibility. Library owns supported real
 consumer configurations. Documentation owns documentation triggers and
 artifacts. Verification owns claim-matched feature-combination evidence. Rust
-API owns only Cargo feature syntax and compile-time enforcement mechanisms.
+API owns only Rust source configuration, public API feature exposure, and
+compile-time enforcement mechanisms. The Rust Dependency profile owns Cargo
+manifest dependency optionality, forwarding, grouping, and target mechanisms.
 
 The child retains `STD-0715` and its ordering because the legacy section is one
 mixed feature-contract policy. Focused decisions must reject minimal defaults,
@@ -108,6 +112,20 @@ mixed feature-contract policy. Focused decisions must reject minimal defaults,
 matrices when their canonical owner has not selected them. Missing or
 contradictory facts return typed diagnostics rather than a conventional Cargo
 configuration.
+
+## Child 20.5 Artifact-Surface Ownership Correction
+
+Row 21 lookahead found that the earlier phrase “Cargo feature syntax” overlaps
+the Rust Dependency profile's planned Cargo manifest authority. The corrected
+boundary has no compatibility overlap: Rust Dependency owns Cargo manifest
+dependency optionality, `dep:` forwarding, dependency feature grouping, and
+target-specific dependency declarations; Rust API owns Rust `cfg`, public
+feature exposure in Rust source, and compile-time conflict diagnostics.
+
+`STD-0715` remains one split disposition to Rust API because its retained Rust
+source and public-API mechanism lineage is still valid. The correction narrows
+that owner; it does not preserve displaced Cargo manifest mechanisms in Rust
+API or create another disposition.
 
 ## Child 20.6 Ownership Replan
 

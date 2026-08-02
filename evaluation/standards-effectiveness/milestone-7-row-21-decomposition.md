@@ -40,6 +40,20 @@ legacy fallback, plan and ledger updates, and one atomic commit. The profile,
 reference recipe, dispositions, legacy source, plan, and routing remain serial
 integration-owner files.
 
+## Child 21.4 Artifact-Surface Ownership Replan
+
+Rust Dependency owns Cargo manifest dependency optionality, `dep:` forwarding,
+dependency feature grouping, and target-specific dependency declarations after
+generic owners accept the feature contract. Rust API separately owns Rust
+source `cfg`, public API feature exposure, and compile-time conflict diagnostics.
+
+Child `21.4` removes Cargo manifest dependency mechanisms from Rust API in the
+same atomic implementation slice that adds them to Rust Dependency. It cannot
+retain aliases, compatibility wording, or overlapping authority. The existing
+`STD-0715` disposition remains tied to narrowed Rust API mechanism lineage;
+`STD-0738` supplies the distinct Cargo manifest dependency mechanism lineage.
+Concrete manifests remain non-normative reference.
+
 ## Re-plan Triggers
 
 Stop if the Rust profile must select generic policy, an example must remain

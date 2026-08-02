@@ -1710,6 +1710,12 @@ all structural/routing fixtures pass.
    - `7.4b11e` (`Planned`): split `STD-0738` generic feature authority from
      Cargo dependency feature mechanisms and move `STD-0739` and `STD-0740`
      manifests to non-normative Rust dependency reference.
+   - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
+     owns Cargo manifest dependency optionality, forwarding, grouping, and
+     target declarations; Rust API owns only Rust source configuration, public
+     API feature exposure, and compile-time diagnostics. Remove overlap in the
+     same implementation slice without changing the single dispositions for
+     `STD-0715` or `STD-0738`.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

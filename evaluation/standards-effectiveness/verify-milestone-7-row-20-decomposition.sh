@@ -36,6 +36,9 @@ for text in '## Owner Contract' 'narrow language specialization' \
   '## Child 20.5 Ownership Replan' \
   'Library owns supported real' \
   'Verification owns claim-matched' \
+  '## Child 20.5 Artifact-Surface Ownership Correction' \
+  'Rust Dependency owns Cargo manifest' \
+  'Rust API owns Rust `cfg`' \
   '## Child 20.6 Ownership Replan' \
   'Rust Unsafe owns public unsafe' \
   'Rust API owns only Rustdoc syntax'; do

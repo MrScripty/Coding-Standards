@@ -5629,6 +5629,31 @@ clauses; normative content and behavioral fixtures were unchanged.
 dependency feature mechanisms and move `STD-0739` and `STD-0740` manifests to
 non-normative Rust dependency reference.
 
+## Row 21 Child 21.4 Artifact-Surface Ownership Replan
+
+**Outcome:** Accepted planning correction.
+
+Lookahead found competing planned authority: Rust API already claimed Cargo
+feature expressions while child `21.4` assigned Cargo dependency feature
+mechanisms to Rust Dependency. The corrected boundary follows the changed
+artifact. Rust Dependency owns Cargo manifest dependency optionality, `dep:`
+forwarding, dependency feature grouping, and target-specific dependency
+declarations. Rust API owns Rust source `cfg`, public API feature exposure, and
+compile-time conflict diagnostics.
+
+The implementation removes displaced manifest mechanisms from Rust API as it
+adds them to Rust Dependency. `STD-0715` remains the single lineage for the
+narrowed Rust API mechanisms, while `STD-0738` remains the single lineage for
+Cargo manifest dependency mechanisms. Generic feature, contract, consumer,
+documentation, and evidence authority does not move.
+
+**Verification:** row 20 and row 21 exact-ID, owner, disposition, ordering,
+execution-train, and plan lifecycle checks pass with the corrected non-overlap
+contract. No normative standards content changed.
+
+**Next slice:** `7.4b11e`, implement the corrected child `21.4` boundary and
+move `STD-0739` and `STD-0740` manifests to non-normative reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
