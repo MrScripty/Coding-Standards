@@ -6,12 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 and 21 are accepted and closed; row 22 owner and
-toolchain children are accepted, and package-metadata child 22.3 is active.
+**Current phase:** Rows 20 and 21 are accepted and closed; row 22 owner,
+toolchain, and package-metadata children are accepted; publish-control child
+22.4 is active.
 
-**Next slice:** Milestone 7.4b12d for row 22 child 22.3 `STD-0813`; split
-release, contract, licensing, and documentation authority from Cargo package
-metadata mechanisms and extract the manifest example to reference.
+**Next slice:** Milestone 7.4b12e for row 22 child 22.4 `STD-0814`; split
+artifact and publication authority from Cargo publication-control mechanisms
+and extract manifest and crate-category examples to reference.
 
 **Acceptance status:** `partial`
 
@@ -1752,11 +1753,15 @@ all structural/routing fixtures pass.
      policy, Rust Dependency owns Cargo resolver and lockfile mechanisms, and
      Rust Release owns only Rust toolchain declaration mechanisms. Retain one
      `STD-0811` split disposition without aliases or context-dependent ownership.
-   - `7.4b12d` (`Planned`): split `STD-0813` release, contract, licensing, and
+   - `7.4b12d` (`Accepted`): split `STD-0813` release, contract, licensing, and
      documentation authority from Cargo package metadata mechanisms, extract
      the manifest to non-normative reference under the same disposition, and
      reject package-field, edition, version, license, repository, README,
      keyword, category, completeness, and product-name defaults.
+   - `7.4b12e` (`Planned`): split `STD-0814` artifact and publication authority
+     from Cargo publication-control mechanisms, extract manifest and crate-
+     category examples under the same disposition, and reject registry,
+     publish-false, binary, cdylib, tooling, harness, and workspace defaults.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public

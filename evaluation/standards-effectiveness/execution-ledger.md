@@ -5899,6 +5899,30 @@ without compatibility ownership.
 **Next slice:** `7.4b12d`, split `STD-0813` Cargo package metadata mechanisms
 and extract its manifest example to reference.
 
+## Milestone 7.4b12d: Cargo Package Release Metadata
+
+**Outcome:** Accepted.
+
+Release and Contracts retain artifact identity, version, publication, and
+consumer promises; Licensing and Documentation retain their facts. Rust Release
+now expresses only accepted facts through supported Cargo package metadata.
+The embedded manifest moved to non-normative reference under the section's one
+split disposition.
+
+Sixteen decisions reject required field sets, fixed edition and Rust versions,
+license, repository, README, taxonomy, crate/product identity, completeness,
+and registry-success defaults. `STD-0813` has one exact split disposition.
+The train advances to 359 completed and 230 remaining identifiers across 102
+completed and 29 pending clusters, with child `22.4` active.
+
+**Verification:** package-metadata decisions, toolchain regression, exact
+disposition, canonical routes, reference non-authority, row/train and plan
+checks, and affected shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b12e`, split `STD-0814` publication-control mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

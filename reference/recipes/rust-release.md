@@ -35,3 +35,26 @@ components, targets, profile, update behavior, consumers, and evidence. This
 example does not require pinning, select listed components, distinguish
 applications from libraries, decide lockfile ownership, or prove a
 reproducible build.
+
+## Cargo Package Metadata Example
+
+One legacy publishable-package example used:
+
+```toml
+[package]
+name = "my-library"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.78"
+description = "Brief description of what the crate does"
+license = "MIT"
+repository = "https://github.com/org/repo"
+readme = "README.md"
+keywords = ["keyword1", "keyword2"]
+categories = ["category"]
+```
+
+Every value and included field must come from accepted canonical contracts and
+the selected registry capability. This example does not define required fields,
+versions, licensing, documentation placement, taxonomy, completeness, or a
+relationship between crate and product names.

@@ -23,29 +23,14 @@ Concrete syntax is non-normative in the
 
 ## Cargo.toml Metadata
 
-Publishable crates should have complete metadata:
-
-```toml
-[package]
-name = "my-library"
-version = "0.1.0"
-edition = "2021"
-rust-version = "1.78"
-description = "Brief description of what the crate does"
-license = "MIT"
-repository = "https://github.com/org/repo"
-readme = "README.md"
-keywords = ["keyword1", "keyword2"]
-categories = ["category"]
-```
-
-Rules:
-
-- Set `rust-version` to the minimum supported Rust version for published
-  libraries and reusable workspace crates.
-- Keep package metadata accurate before publishing or cutting release artifacts.
-- Avoid using the crate name as the product name when the release artifact is a
-  generated binding, native library, or host-language package.
+Artifact identity, version, publication, and consumer promises are owned by
+[Release](../../workflows/release.md). Contract identity and compatibility are
+owned by [Contracts](../../topics/contracts.md); license and documentation facts
+remain with Licensing and Documentation. Supported Cargo package release
+metadata mechanisms are owned by the
+[Rust Release profile](../../profiles/languages/rust/release.md#cargo-package-release-metadata-mechanisms).
+Concrete manifest syntax is non-normative in the
+[Rust release recipes](../../reference/recipes/rust-release.md#cargo-package-metadata-example).
 
 ## Publish Control
 

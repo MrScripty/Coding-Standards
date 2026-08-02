@@ -54,6 +54,19 @@ Rust Release consumes those accepted facts and their evidence; it does not
 re-own, alias, or infer them from repository type, package category, an existing
 lockfile, or a successful resolved graph.
 
+## Cargo Package Release Metadata Mechanisms
+
+After Release and Contracts define artifact identity, version, publication, and
+consumer promises, and Licensing and Documentation accept their applicable
+facts, express the selected Rust package facts through supported Cargo package
+metadata fields. Include only fields required by the accepted release unit,
+channel, registry, package consumer, toolchain, and evidence contracts.
+
+Cargo metadata does not select a package name, product identity, version,
+edition, minimum Rust version, description, license, repository, README,
+keywords, categories, field completeness, or publication readiness. Existing
+manifest values and registry acceptance cannot complete missing authority.
+
 ## Verification
 
 Evidence covers the accepted release unit and channels, actual supported Rust

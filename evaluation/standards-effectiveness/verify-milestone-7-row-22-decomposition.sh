@@ -19,12 +19,13 @@ for text in '## Owner Contract' 'narrow Rust and Cargo release' 'does not own re
 rg -F -q '`7.4b12a` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b12b` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b12c` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b12d` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b12d` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b12e` (`Planned`)' "$PLAN"
 next="$(awk '/^\*\*Next slice:\*\*/{c=1} c&&/^$/{exit} c{print}' "$PLAN")"
-[[ "$next" == *'row 22 child 22.3'* && "$next" == *'STD-0813'* ]]
+[[ "$next" == *'row 22 child 22.4'* && "$next" == *'STD-0814'* ]]
 [[ -e "$R/profiles/languages/rust/release.md" ]]
 [[ -e "$R/reference/recipes/rust-release.md" ]]
 mapfile -t disposed < <(awk -F '\t' '$1 >= "STD-0810" && $1 <= "STD-0820" {print $1}' "$S/consolidation-dispositions.tsv")
-[[ "${disposed[*]}" == 'STD-0810 STD-0811 STD-0812' ]]
+[[ "${disposed[*]}" == 'STD-0810 STD-0811 STD-0812 STD-0813' ]]
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-22 decomposition passed: 11 IDs across 7 children, zero premature dispositions\n'
