@@ -5869,6 +5869,36 @@ introduced.
 
 **Next slice:** `7.4b12c`, implement the corrected toolchain-only split.
 
+## Milestone 7.4b12c: Rust Toolchain Declaration Mechanisms
+
+**Outcome:** Accepted.
+
+Release retains reproducibility claims, Dependencies retains lockfile selection
+and resolution policy, and Rust Dependency retains Cargo resolver and lockfile
+mechanisms. Rust Release now selects only supported toolchain declaration
+mechanisms after those contracts establish channel, components, targets,
+consumers, and evidence.
+
+The legacy section is a canonical route and its `rust-toolchain.toml` moved to
+non-normative Rust release reference. Fifteen decisions include an explicit
+route to Rust Dependency for lockfile mechanisms and reject fixed versions,
+components, application/library lockfile categories, incumbent lockfiles,
+resolved-graph success, and universal pinning. `STD-0811` has one split and
+`STD-0812` one move disposition.
+
+The train advances to 358 completed and 231 remaining identifiers across 101
+completed and 30 pending logical clusters, with child `22.3` active.
+
+**Verification:** toolchain decisions, owner regression, exact dispositions,
+legacy routes, reference non-authority, row decomposition, train counts, plan
+structure, and affected shared cursor checks.
+
+**Deviation:** the accepted lockfile ownership correction was implemented
+without compatibility ownership.
+
+**Next slice:** `7.4b12d`, split `STD-0813` Cargo package metadata mechanisms
+and extract its manifest example to reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

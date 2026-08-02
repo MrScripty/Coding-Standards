@@ -1,0 +1,16 @@
+case	contract	release_claim	dependency_contract	mechanism	capability	evidence	fallback	expected
+toolchain_declaration	accepted	known	known	toolchain	supported	complete	none	allow
+lockfile_route	accepted	known	known	lockfile	supported	complete	none	route-rust-dependency
+missing_contract	missing	known	known	toolchain	supported	complete	none	typed-unavailable
+contradictory_contract	contradictory	known	known	toolchain	supported	complete	none	typed-invalid
+missing_release_claim	accepted	missing	known	toolchain	supported	complete	none	typed-unavailable
+missing_dependency_contract	accepted	known	missing	lockfile	supported	complete	none	typed-unavailable
+unsupported_toolchain	accepted	known	known	toolchain	unsupported	complete	none	typed-unsupported
+incomplete_evidence	accepted	known	known	toolchain	supported	incomplete	none	typed-unavailable
+fixed_version	accepted	known	known	toolchain	supported	complete	fixed-version	typed-invalid
+fixed_components	accepted	known	known	toolchain	supported	complete	fixed-components	typed-invalid
+application_lockfile	accepted	known	known	lockfile	supported	complete	application-lockfile	typed-invalid
+library_omission	accepted	known	known	lockfile	supported	complete	library-omission	typed-invalid
+existing_lockfile	accepted	known	known	lockfile	supported	complete	existing-lockfile	typed-invalid
+resolved_graph	accepted	known	known	lockfile	supported	complete	resolved-graph-success	typed-invalid
+pinning_default	accepted	known	known	toolchain	supported	complete	pinning-default	typed-invalid

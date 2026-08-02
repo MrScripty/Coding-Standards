@@ -18,3 +18,20 @@ applicable generic owners select policy and claims. The
 supported Rust and Cargo mechanisms after those contracts are accepted.
 Examples added during migration cannot select versions, package metadata,
 publication, tools, commands, schedules, thresholds, or acceptance.
+
+## Toolchain Declaration Example
+
+One legacy example expressed selected Rust toolchain facts as:
+
+```toml
+# rust-toolchain.toml
+[toolchain]
+channel = "1.78.0"
+components = ["rustfmt", "clippy"]
+```
+
+The accepted reproducibility and toolchain contracts select channel, version,
+components, targets, profile, update behavior, consumers, and evidence. This
+example does not require pinning, select listed components, distinguish
+applications from libraries, decide lockfile ownership, or prove a
+reproducible build.

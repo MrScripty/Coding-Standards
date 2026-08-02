@@ -10,18 +10,16 @@ authority.
 
 ## Toolchain Pinning
 
-Pin the Rust toolchain for reproducible builds:
-
-```toml
-# rust-toolchain.toml
-[toolchain]
-channel = "1.78.0"
-components = ["rustfmt", "clippy"]
-```
-
-Application repositories and production workspaces should commit `Cargo.lock`.
-Published library crates may omit `Cargo.lock` when they intentionally allow
-consumer resolution, but CI must still test a resolved dependency graph.
+Reproducibility claims and released lockfile ownership are governed by
+[Release](../../workflows/release.md#reproducibility). Dependency resolution
+and lockfile policy are governed by
+[Dependencies](../../topics/dependencies.md#resolution-and-reproducibility),
+with Cargo resolver and lockfile mechanisms owned by the
+[Rust Dependency profile](../../profiles/languages/rust/dependencies.md).
+Supported Rust toolchain declaration mechanisms are owned by the
+[Rust Release profile](../../profiles/languages/rust/release.md#toolchain-declaration-mechanisms).
+Concrete syntax is non-normative in the
+[Rust release recipes](../../reference/recipes/rust-release.md#toolchain-declaration-example).
 
 ## Cargo.toml Metadata
 

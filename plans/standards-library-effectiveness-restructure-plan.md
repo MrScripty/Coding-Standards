@@ -6,13 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 and 21 are accepted and closed; row 22 is decomposed,
-the Rust Release owner exists, and toolchain child 22.2 is active.
+**Current phase:** Rows 20 and 21 are accepted and closed; row 22 owner and
+toolchain children are accepted, and package-metadata child 22.3 is active.
 
-**Next slice:** Milestone 7.4b12c for row 22 child 22.2 `STD-0811` and
-`STD-0812`; preserve lockfile policy and mechanisms in their dependency owners,
-split only Rust toolchain declaration mechanisms, and move the manifest to
-reference.
+**Next slice:** Milestone 7.4b12d for row 22 child 22.3 `STD-0813`; split
+release, contract, licensing, and documentation authority from Cargo package
+metadata mechanisms and extract the manifest example to reference.
 
 **Acceptance status:** `partial`
 
@@ -1744,7 +1743,7 @@ all structural/routing fixtures pass.
      non-normative recipe boundary with `STD-0810`; route the parent, router,
      library index, and Rust profile; add sixteen typed owner decisions and one
      exact disposition without generic policy or example defaults.
-   - `7.4b12c` (`Planned`): split `STD-0811` reproducibility and dependency-
+   - `7.4b12c` (`Accepted`): split `STD-0811` reproducibility and dependency-
      resolution authority while preserving Cargo lockfile mechanisms in Rust
      Dependency; move `STD-0812` to non-normative reference, and reject version,
      component, application/library, lockfile, and resolved-graph defaults.
@@ -1753,6 +1752,11 @@ all structural/routing fixtures pass.
      policy, Rust Dependency owns Cargo resolver and lockfile mechanisms, and
      Rust Release owns only Rust toolchain declaration mechanisms. Retain one
      `STD-0811` split disposition without aliases or context-dependent ownership.
+   - `7.4b12d` (`Planned`): split `STD-0813` release, contract, licensing, and
+     documentation authority from Cargo package metadata mechanisms, extract
+     the manifest to non-normative reference under the same disposition, and
+     reject package-field, edition, version, license, repository, README,
+     keyword, category, completeness, and product-name defaults.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public

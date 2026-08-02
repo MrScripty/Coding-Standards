@@ -40,6 +40,20 @@ Do not fall back to incumbent metadata, a pinned version, committed lockfile,
 installed release tool, manual steps, conventional command, fixed checklist,
 successful build, or smallest diff.
 
+## Toolchain Declaration Mechanisms
+
+After Release defines the reproducibility claim and required controlled inputs,
+select supported Rust toolchain declaration mechanisms for the accepted channel,
+components, targets, consumers, and evidence environment. A declaration records
+selected toolchain facts; it does not select a version, channel, component,
+target, pinning policy, or reproducibility threshold.
+
+Lockfile selection and resolution policy remain with Release and Dependencies.
+Cargo resolver metadata and lockfile mechanisms remain with Rust Dependency.
+Rust Release consumes those accepted facts and their evidence; it does not
+re-own, alias, or infer them from repository type, package category, an existing
+lockfile, or a successful resolved graph.
+
 ## Verification
 
 Evidence covers the accepted release unit and channels, actual supported Rust
