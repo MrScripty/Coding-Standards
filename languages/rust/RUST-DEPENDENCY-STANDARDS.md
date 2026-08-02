@@ -1,7 +1,11 @@
 # Rust Dependency Standards
 
-Cargo dependency rules for Rust workspaces. These specialize the generic
-[Dependency Standards](../../DEPENDENCY-STANDARDS.md).
+Canonical Rust and Cargo dependency mechanisms are migrating to the
+[Rust Dependency profile](../../profiles/languages/rust/dependencies.md).
+Generic dependency policy remains with
+[Dependencies](../../topics/dependencies.md). This parent is a non-normative
+migration route; unmoved sections below retain only their separately tracked
+authority.
 
 ## Before Adding A Crate
 

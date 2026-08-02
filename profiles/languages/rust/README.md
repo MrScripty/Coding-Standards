@@ -38,6 +38,9 @@ according to the crate's feature contract.
 - Route public or boundary-facing Rust type, trait, parameter, conversion,
   visibility, result, panic, feature, and Rustdoc mechanisms through the
   [Rust API profile](api.md).
+- Route Cargo declaration, workspace, resolver, dependency-graph, audit-adapter,
+  and build-cost measurement mechanisms through the
+  [Rust Dependency profile](dependencies.md).
 - Route async API and suspension-boundary selection through the
   [Rust Async profile](async.md).
 - Route Rust target selection, configuration placement, and target evidence
@@ -62,7 +65,7 @@ here:
 
 - [Remaining API guidance](../../../languages/rust/RUST-API-STANDARDS.md)
 - [Remaining Async mechanisms](../../../languages/rust/RUST-ASYNC-STANDARDS.md#runtime-boundaries)
-- [Dependencies](../../../languages/rust/RUST-DEPENDENCY-STANDARDS.md)
+- [Remaining dependency guidance](../../../languages/rust/RUST-DEPENDENCY-STANDARDS.md#before-adding-a-crate)
 - [Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)
 - [Remaining security guidance](../../../languages/rust/RUST-SECURITY-STANDARDS.md)
 - [Tooling](../../../languages/rust/RUST-TOOLING-STANDARDS.md)

@@ -1,0 +1,15 @@
+case	contract	consumer	resolver	mechanism	capability	fallback	expected
+manifest_declaration	accepted	known	known	manifest	supported	none	allow
+workspace_expression	accepted	known	known	workspace	supported	none	allow
+graph_query	accepted	known	known	graph	supported	none	allow
+audit_adapter	accepted	known	known	audit-adapter	supported	none	allow
+measurement_adapter	accepted	known	known	measurement	supported	none	allow
+contradictory_contract	contradictory	known	known	manifest	supported	none	typed-invalid
+missing_contract	missing	known	known	manifest	supported	none	typed-unavailable
+unknown_consumer	accepted	unknown	known	manifest	supported	none	typed-unavailable
+unknown_resolver	accepted	known	unknown	manifest	supported	none	typed-unavailable
+unsupported_mechanism	accepted	known	known	manifest	unsupported	none	typed-unsupported
+incumbent_manifest	accepted	known	known	manifest	supported	incumbent	typed-invalid
+workspace_default	accepted	known	known	workspace	supported	root-workspace	typed-invalid
+installed_tool	accepted	known	known	audit-adapter	supported	installed-tool	typed-invalid
+command_success	accepted	known	known	graph	supported	command-success	typed-invalid

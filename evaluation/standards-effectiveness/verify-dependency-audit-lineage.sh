@@ -59,6 +59,8 @@ next_slice_block="$(awk '
   capture { print }
 ' "$PLAN")"
 [[ "$next_slice_block" == *'row 21'* ]]
-[[ "$next_slice_block" == *'STD-0731'* ]]
+for id in STD-0732 STD-0733 STD-0734; do
+  [[ "$next_slice_block" == *"$id"* ]]
+done
 
 printf 'Dependency audit lineage passed: 12 decisions, 2 exact dispositions\n'

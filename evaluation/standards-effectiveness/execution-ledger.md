@@ -5542,6 +5542,35 @@ overlay was aligned without changing IDs, ordering, ownership, or outcomes.
 **Next slice:** `7.4b11b`, create the narrow Rust dependency owner and route
 `STD-0731`.
 
+## Milestone 7.4b11b: Rust Dependency Mechanism Owner
+
+**Outcome:** Accepted implementation slice.
+
+The Rust Dependency profile now owns only Cargo declaration, workspace,
+resolver, feature-expression, graph-query, audit-adapter, and build-cost
+measurement mechanisms after applicable generic contracts are accepted.
+Dependencies, Security, Licensing, Performance, Verification, Tooling, and Rust
+API retain policy authority. The legacy parent routes to the profile while its
+unmoved, separately tracked sections remain pending.
+
+**No-fallback result:** incumbent manifests, root workspaces, inherited
+dependencies, enabled features, cached resolutions, installed tools,
+conventional commands, successful compiles, and smallest diffs cannot complete
+a mechanism decision. Invalid, unsupported, and unavailable decisions remain
+typed.
+
+**Verification:** fourteen owner decisions, metadata and route coverage, one
+exact index disposition, row decomposition, package state, execution-train,
+and complete repository verification pass. The train advances to 335 completed
+and 254 remaining identifiers with child `21.2` active; six canonical owners
+remain to be created.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b11c`, split `STD-0732` candidate authority from
+`STD-0733` Cargo inspection mechanisms and move `STD-0734` command syntax to
+non-normative Rust dependency reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

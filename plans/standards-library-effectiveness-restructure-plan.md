@@ -6,12 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Row 20 is accepted and closed; row 21 owner review is
-accepted, and Rust dependency owner creation for child 21.1 is active.
+**Current phase:** Row 20 is accepted and closed; row 21 owner review and owner
+creation are accepted, and Rust dependency candidate inspection child 21.2 is
+active.
 
-**Next slice:** Milestone 7.4b11b for row 21 child 21.1 `STD-0731`; create the
-narrow Rust dependency mechanism owner and parent route without generic policy,
-tool, schedule, threshold, recipe, or incumbent-manifest defaults.
+**Next slice:** Milestone 7.4b11c for row 21 child 21.2 `STD-0732`, `STD-0733`,
+and `STD-0734`; split dependency candidate authority from Cargo inspection
+mechanisms and move concrete command recipes to non-normative reference.
 
 **Acceptance status:** `partial`
 
@@ -1690,8 +1691,13 @@ all structural/routing fixtures pass.
      Licensing, Performance, Verification, Tooling, and Rust API retain their
      canonical authority. All 158 repository checkers pass; the train remains
      at 334 completed and 255 remaining identifiers with child `21.1` active.
-   - `7.4b11b` (`Planned`): create the useful Rust dependency owner and route
-     `STD-0731` without populating later child semantics.
+   - `7.4b11b` (`Accepted`): create the useful Rust dependency mechanism owner,
+     route `STD-0731`, and reject generic-policy ownership and Cargo fallback
+     defaults. Fourteen owner decisions and one exact index disposition pass;
+     all repository checkers pass, and child `21.2` becomes active.
+   - `7.4b11c` (`Planned`): split `STD-0732` dependency candidate authority
+     from `STD-0733` Cargo inspection mechanisms and move `STD-0734` command
+     syntax to non-normative Rust dependency reference.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent
