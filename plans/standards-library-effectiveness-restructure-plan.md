@@ -10,8 +10,9 @@
 legacy closure for child 20.6 are active.
 
 **Next slice:** Milestone 7.4b10g for row 20 child 20.6 `STD-0716`; split
-Documentation authority from Rustdoc expression without required section or
-artifact checklists, then close the Rust API legacy source as an index.
+Documentation, Contracts, Resilience, Dependencies, Rust Unsafe, and Library
+authority from Rustdoc expression without required section, artifact-location,
+or example checklists, then close the Rust API legacy source as an index.
 
 **Acceptance status:** `partial`
 
@@ -1674,6 +1675,10 @@ all structural/routing fixtures pass.
      train advances to 333 completed and 256 remaining identifiers.
    - `7.4b10g` (`Planned`): split `STD-0716` into Documentation authority and
      Rustdoc mechanisms, then close the Rust API legacy source as an index.
+     Child 20.6 ownership replan (`Accepted`) preserves Contracts authority for
+     documented contract facts, Resilience for failure behavior, Dependencies
+     for feature facts, Rust Unsafe for safety contracts, and Library for
+     external-consumer applicability; Rust API remains limited to Rustdoc form.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

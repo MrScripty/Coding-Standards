@@ -55,8 +55,14 @@ baselines, Cargo command lists, or documentation checklists.
    for durable feature-contract documentation; Verification authority for
    claim-matched feature-combination evidence; and Rust API authority only for
    supported Cargo feature and compile-time enforcement mechanisms.
-6. `20.6`: split `STD-0716` into Documentation authority plus Rustdoc
-   expression, then close the legacy source as an index.
+6. `20.6`: split `STD-0716` across Documentation authority for triggers,
+   artifacts, placement, and quality; Contracts authority for invariant,
+   compatibility, and consumer-contract facts; Resilience authority for
+   failure and panic behavior; Dependencies authority for feature-contract
+   facts; Rust Unsafe authority for public unsafe contracts and `# Safety`
+   obligations; Library authority for external-consumer applicability; and
+   Rust API authority only for supported Rustdoc expression. Then close the
+   legacy source as an index.
 
 Every child has an exact bounded write set, focused positive and negative
 fixtures, canonical-owner checks, no legacy fallback, plan and ledger updates,
@@ -102,3 +108,21 @@ mixed feature-contract policy. Focused decisions must reject minimal defaults,
 matrices when their canonical owner has not selected them. Missing or
 contradictory facts return typed diagnostics rather than a conventional Cargo
 configuration.
+
+## Child 20.6 Ownership Replan
+
+Lookahead found that “Documentation authority plus Rustdoc expression” did not
+name the owners of the documented facts. Documentation selects triggers,
+artifact type, placement, and quality. Contracts owns invariant, compatibility,
+and consumer-contract facts. Resilience owns failure and panic behavior.
+Dependencies owns feature-contract facts. Rust Unsafe owns public unsafe
+contracts and `# Safety` obligations. Library owns external-consumer
+applicability. Rust API owns only Rustdoc syntax and placement within the
+already selected Rust artifact.
+
+The child retains `STD-0716`, legacy closure, and ordering. Focused decisions
+must reject fixed crate-doc, `# Errors`, `# Panics`, `# Safety`, feature-doc,
+README, crate-doc, and example requirements when their canonical owner has not
+selected them. Missing or contradictory applicability or content authority
+returns typed diagnostics. Closure must leave only canonical routes and no
+residual normative checklist.

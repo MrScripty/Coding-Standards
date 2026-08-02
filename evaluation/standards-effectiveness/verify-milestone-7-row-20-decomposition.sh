@@ -35,7 +35,10 @@ for text in '## Owner Contract' 'narrow language specialization' \
   'Resilience owns operational failure, recovery' \
   '## Child 20.5 Ownership Replan' \
   'Library owns supported real' \
-  'Verification owns claim-matched'; do
+  'Verification owns claim-matched' \
+  '## Child 20.6 Ownership Replan' \
+  'Rust Unsafe owns public unsafe' \
+  'Rust API owns only Rustdoc syntax'; do
   rg -F -q "$text" "$REPORT"
 done
 

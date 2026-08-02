@@ -5458,6 +5458,29 @@ fragments before acceptance; policy and ownership outcomes did not change.
 **Next slice:** `7.4b10g`, split Documentation authority from Rustdoc
 mechanisms and close the Rust API legacy source.
 
+## Row 20 Child 20.6 Rustdoc-Authority Replan
+
+**Outcome:** Accepted planning correction.
+
+Lookahead found that “Documentation authority plus Rustdoc expression” omitted
+the owners of documented facts. Documentation selects triggers, artifacts,
+placement, and quality. Contracts owns invariant, compatibility, and consumer
+facts. Resilience owns failure and panic behavior. Dependencies owns feature
+facts. Rust Unsafe owns unsafe contracts and `# Safety` obligations. Library
+owns external-consumer applicability. Rust API owns only Rustdoc expression.
+
+**No-fallback result:** crate-doc, `# Errors`, `# Panics`, `# Safety`, feature
+documentation, README, crate-doc placement, and example requirements cannot be
+selected from a fixed checklist. Missing content or applicability authority
+returns typed diagnostics. `STD-0716`, ordering, and legacy closure remain
+unchanged.
+
+**Verification:** row-20 owner, decomposition, execution-train, and plan
+lifecycle checks pass. All 156 repository checkers pass.
+
+**Next slice:** `7.4b10g`, implement the corrected Rustdoc split and close the
+legacy Rust API source as an index.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
