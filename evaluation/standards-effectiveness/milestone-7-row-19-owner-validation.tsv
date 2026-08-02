@@ -37,7 +37,7 @@ STD-0688	workflows/verification.md	route	acceptance-gates
 STD-0689	workflows/tooling.md	split	failure-reporting-and-reference-recipe
 STD-0690	workflows/tooling.md	split	ci-scheduling-and-reference-recipe
 STD-0691	workflows/tooling.md	retain	debt-ratchet
-STD-0692	workflows/tooling.md	retain	ci-cost
+STD-0692	workflows/tooling.md	split	ci-cost-and-reference-recipe
 STD-0693	reference	move	ci-recipe
 STD-0694	reference	move	ci-recipe
 STD-0695	workflows/verification.md	route	evidence-scheduling

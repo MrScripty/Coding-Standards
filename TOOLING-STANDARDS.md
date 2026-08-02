@@ -177,6 +177,10 @@ non-normative [Tooling recipe](reference/recipes/tooling.md#formatting-automatio
 
 ## CI Integration
 
+Canonical CI orchestration, dependency-graph, failure-reporting, and scheduling
+authority are defined by
+[Tooling](workflows/tooling.md#ci-orchestration-and-scheduling).
+
 ### Quality Gates Are Mandatory
 
 Canonical gate acceptance and blocking authority are defined by
@@ -185,54 +189,17 @@ The former universal gate catalog is retired and defines no mandatory checks.
 
 ### Prefer Failure Aggregation Over Fail-Fast
 
-Long-running CI should maximize defect visibility per run. Do not structure GitHub
-Actions so one blocking failure cancels unrelated checks that could have reported
-additional problems.
-
-Rules:
-- Run independent blocking gates as separate jobs when possible so lint, typecheck,
-  formatting, tests, and platform builds all report in the same workflow run.
-- For job matrices, set `strategy.fail-fast: false` unless cancelling the remaining
-  matrix work is an intentional cost-saving tradeoff.
-- Use an optional final summary job with `if: always()` to collect job outcomes and
-  present one list of failures at the end of the run.
-- Do not use `continue-on-error: true` on blocking gates just to keep the workflow
-  moving. Prefer separate jobs. Reserve `continue-on-error` for explicitly
-  non-blocking audit/reporting steps such as full-lint debt inventory.
-- If a single command can surface multiple findings in one invocation (for example,
-  a linter or test runner that reports all failures before exiting), prefer that
-  mode over wrappers that stop on the first issue.
+Select failure aggregation and reporting through canonical Tooling. The former
+GitHub matrix, fail-fast, summary-job, and error-continuation examples are
+retained only in the non-normative
+[Tooling recipe](reference/recipes/tooling.md#ci-orchestration-examples).
 
 ### Tiered CI Execution
 
-CI should fail quickly when later work would be pointless, while still reporting
-independent failures that help developers fix the branch in one pass.
-
-Use three tiers:
-
-| Tier | Purpose | Examples | Execution Rule |
-|---|---|---|---|
-| Preflight | Cheap checks that prove later jobs can run meaningfully | dependency install, lockfile integrity, tool bootstrap, generated-file drift, basic config validation | Run first; fail fast |
-| Core quality | Independent blocking gates with high diagnostic value | critical lint, no-new lint, typecheck, format check, unit tests | Run in parallel after preflight |
-| Expensive validation | Slow or resource-heavy checks that are wasteful if core quality fails | integration tests, browser tests, cross-platform builds, package builds, release smoke, coverage upload | Run only after required core gates pass |
-
-Rules:
-- Keep preflight small. It should catch invalid setup, missing tools, stale
-  generated artifacts, and dependency/lockfile failures; it should not become a
-  second copy of the full test suite.
-- Do not gate one independent core quality job behind another just because both
-  are blocking. For example, lint, typecheck, and unit tests should usually run
-  side by side after preflight.
-- Gate expensive jobs with `needs` on the relevant core jobs and the default
-  `success()` behavior. If an expensive job is still useful after partial core
-  failure, document why and make the condition explicit.
-- Use `strategy.fail-fast: false` inside diagnostic matrices by default so one
-  platform or shard failure does not hide the rest.
-- The final CI summary job should use `if: always()` and report skipped jobs as
-  intentionally skipped when an upstream tier failed.
-- Preflight commands should be runnable locally through the launcher or package
-  scripts, for example `./launcher.sh --ci-preflight` or
-  `npm run ci:preflight`.
+Select the dependency graph, schedule, cancellation, and reporting behavior
+through canonical Tooling. The former fixed tiers, GitHub dependency syntax,
+and launcher and package commands are retained only in the non-normative
+[Tooling recipe](reference/recipes/tooling.md#ci-orchestration-examples).
 
 ### Lint Debt Ratchet (When Full Lint Is Temporarily Non-Blocking)
 

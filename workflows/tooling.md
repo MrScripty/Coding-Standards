@@ -115,3 +115,29 @@ Contradictory formatting authorities or overlapping responsibilities are
 facts are `unavailable`. Required formatting unsupported by selected tools is
 `unsupported`; do not silently skip files, substitute conventional settings,
 or treat unchanged command execution as proof.
+
+## CI Orchestration And Scheduling
+
+Select the CI dependency graph, execution groups, concurrency, cancellation,
+failure aggregation, and reporting from required Verification claims, real data
+and artifact dependencies, supported environments, resource limits, measured
+cost, diagnostic value, and failure-isolation behavior. A dependency edge must
+represent a required input, prerequisite claim, or explicit cost decision; a
+shared label or blocking status does not create an edge.
+
+Choose whether independent work continues after a failure by balancing the
+value of additional evidence against its measured cost and resource impact.
+Cancellation must identify which work becomes obsolete and must not hide a
+required result. Reporting must preserve each required claim's outcome and
+distinguish failed, unavailable, cancelled, and intentionally unselected work.
+
+Do not default to GitHub Actions, parallel execution, fail-fast or aggregate
+execution, a preflight/core/expensive tier model, a summary job, CI-local
+commands, or cancellation of superseded runs. Provider syntax and job location
+do not define claim dependencies or evidence meaning.
+
+Contradictory claim, dependency, schedule, or cancellation facts are `invalid`.
+Missing required dependency, cost, resource, or reporting facts are
+`unavailable`. An orchestration contract that the selected provider or
+environment cannot represent is `unsupported`; do not substitute a conventional
+topology, skip the claim, weaken reporting, or silently serialize the work.

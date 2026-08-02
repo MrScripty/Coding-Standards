@@ -635,3 +635,6 @@ STD-0684	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative fo
 STD-0685	TOOLING-STANDARDS.md	reference/recipes/tooling.md	retire	non-normative formatter exit-code interpretation example
 STD-0688	TOOLING-STANDARDS.md	workflows/verification.md	refine	derive blocking and advisory quality gates from named claims risks contracts environments and authority without a mandatory gate catalog
 STD-0695	TOOLING-STANDARDS.md	workflows/verification.md	refine	derive execution location from claim inputs environment and authority without local versus CI evidence hierarchy
+STD-0687	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select provider-neutral CI dependency graph scheduling cancellation and reporting from claims dependencies resources cost and diagnostic facts
+STD-0689	TOOLING-STANDARDS.md	workflows/tooling.md	split	select failure aggregation and reporting while extracting GitHub matrix fail-fast summary and continue-on-error syntax to non-normative Tooling reference
+STD-0690	TOOLING-STANDARDS.md	workflows/tooling.md	split	select CI dependency graph and schedule while extracting fixed tiers GitHub needs and success syntax and launcher and package commands to non-normative Tooling reference

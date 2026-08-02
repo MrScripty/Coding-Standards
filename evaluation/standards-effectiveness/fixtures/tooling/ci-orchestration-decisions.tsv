@@ -1,0 +1,13 @@
+case	facts	dependencies	capability	reporting	fallback	expected
+supported	complete	complete	supported	complete	none	allow
+contradictory	contradictory	complete	supported	complete	none	typed-invalid
+missing_dependencies	complete	missing	supported	complete	none	typed-unavailable
+missing_reporting	complete	complete	supported	missing	none	typed-unavailable
+unsupported_provider	complete	complete	unsupported	complete	none	typed-unsupported
+provider_default	complete	complete	supported	complete	github	typed-invalid
+parallel_default	complete	complete	supported	complete	parallel	typed-invalid
+fail_fast_default	complete	complete	supported	complete	fail-fast	typed-invalid
+aggregate_default	complete	complete	supported	complete	aggregate	typed-invalid
+tier_default	complete	complete	supported	complete	three-tiers	typed-invalid
+summary_default	complete	complete	supported	complete	summary-job	typed-invalid
+silent_serialization	complete	complete	supported	complete	serialize	typed-invalid

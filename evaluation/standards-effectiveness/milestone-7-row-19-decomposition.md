@@ -67,6 +67,14 @@ GitHub matrix, `fail-fast`, `if: always()`, `continue-on-error`, `needs`,
 non-normative Tooling recipes. Child `19.14` remains independently responsible
 for the full CI workflow YAML.
 
+Child `19.13` applies the same boundary to debt and automation cost. Tooling
+remains the sole canonical owner for debt-boundary selection, measured cost,
+cache suitability, cancellation, filtering, timeout, retention, and diagnostic
+strategy. `STD-0691` is a direct refinement and `STD-0692` receives one `split`
+disposition while GitHub permissions, concurrency, setup, cache, package-command,
+summary, and artifact syntax move only to non-normative Tooling recipes. Child
+`19.14` remains independently responsible for the full CI workflow YAML.
+
 ## Implementation Sequence
 
 1. Create the bounded Tooling owner with hook orchestration (`19.1`).

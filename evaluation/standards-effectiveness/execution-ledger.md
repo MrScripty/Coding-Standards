@@ -5058,6 +5058,44 @@ reviewing that section's authority and examples.
 
 **Next slice:** `7.4b9m`, implement the reviewed CI orchestration split package.
 
+## Milestone 7.4b9m: CI Orchestration And Scheduling
+
+**Outcome:** Accepted implementation slice.
+
+Tooling now selects provider-neutral dependency graphs, scheduling,
+cancellation, failure aggregation, and reporting from claims, real dependencies,
+resources, measured cost, diagnostic value, and failure isolation. GitHub matrix,
+condition, tier, launcher, and package-command syntax is non-normative reference.
+
+**No-fallback result:** provider, parallel, fail-fast, aggregation, fixed-tier,
+summary-job, command, and silent-serialization defaults are prohibited. Missing,
+contradictory, or unsupported orchestration facts return typed diagnostics.
+
+**Verification:** 12 CI-orchestration decisions, legacy negative coverage, one
+direct and two split dispositions pass. All 144 repository checkers pass. The
+execution train reports 312 completed and 277 remaining IDs across 80 completed
+and 35 pending logical clusters, with child `19.13` active.
+
+**Next slice:** `7.4b9n`, govern tool debt and automation cost.
+
+## Row 19 Debt And Automation-Cost Policy And Recipe Split Replan
+
+**Outcome:** Accepted planning correction.
+
+Lookahead found that `STD-0692` combines durable automation-cost policy with
+GitHub permissions, concurrency, setup, cache, package-command, summary, and
+artifact syntax. Routing the complete section to Tooling would make provider and
+product recipes normative, while moving it whole to reference would discard
+required cost, security, and evidence policy.
+
+Child `19.13` therefore keeps Tooling as its sole canonical owner, directly
+refines `STD-0691`, and gives `STD-0692` one split disposition. Product syntax
+moves only to non-normative Tooling recipes. Child `19.14` remains unchanged for
+the complete workflow YAML. The duplicated live-matrix sentence is removed in
+the bounded implementation slice.
+
+**Next slice:** `7.4b9n`, implement the reviewed debt and automation-cost split.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

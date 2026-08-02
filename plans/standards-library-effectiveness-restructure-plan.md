@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.11 are accepted; CI
-orchestration, failure aggregation, and scheduling for child 19.12 are active.
+**Current phase:** Tooling children 19.1 through 19.12 are accepted; tool-debt
+and automation-cost policy for child 19.13 are active.
 
-**Next slice:** Milestone 7.4b9m for `STD-0687`, `STD-0689`, and `STD-0690`;
-select CI orchestration, dependency graph, failure aggregation, and schedule from
-cost and diagnostic facts without provider, fail-fast, tier, or parallel defaults.
+**Next slice:** Milestone 7.4b9n for `STD-0691` and `STD-0692`; select tool-debt
+and automation-cost policy from measured authority while extracting provider and
+package recipes without ratchet, cache, timeout, filter, or cancellation defaults.
 
 **Acceptance status:** `partial`
 
@@ -1592,9 +1592,20 @@ all structural/routing fixtures pass.
    - `7.4b9l` (`Accepted`): refine `STD-0688` and `STD-0695` under Verification
      authority for quality-gate acceptance and local-versus-CI evidence meaning
      without mandatory gate lists or environment hierarchy.
-   - `7.4b9m` (`Planned`): refine `STD-0687`, `STD-0689`, and `STD-0690` into
+   - `7.4b9m` (`Accepted`): refine `STD-0687`, `STD-0689`, and `STD-0690` into
      CI orchestration and scheduling without provider, fail-fast, tier, or
      parallel defaults.
+   - `7.4b9n` (`Planned`): refine `STD-0691` and split `STD-0692` into
+     tool-debt and automation-cost policy while extracting GitHub Actions,
+     package-manager, cache, and diagnostic syntax to non-normative Tooling
+     recipes without ratchet, cache, timeout, path-filter, or cancellation
+     defaults.
+   - Row 19 debt and automation-cost split replan (`Accepted`): retain Tooling
+     as the sole canonical owner for child `19.13`; refine `STD-0691` directly
+     and give `STD-0692` one split disposition. Extract GitHub permissions,
+     concurrency, setup, cache, package-command, summary, and artifact syntax
+     only to non-normative Tooling recipes. Keep child `19.14` unchanged for the
+     complete workflow YAML.
    - Row 19 CI orchestration split replan (`Accepted`): retain Tooling as the
      sole canonical owner for child `19.12`; refine `STD-0687` directly and use
      split dispositions for `STD-0689` and `STD-0690`. Extract GitHub matrix,

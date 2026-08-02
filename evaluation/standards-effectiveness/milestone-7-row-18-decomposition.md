@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9m` selects CI orchestration, failure aggregation, and scheduling
-without provider, fail-fast, tier, or parallel defaults.
+Milestone `7.4b9n` selects tool-debt and automation-cost policy
+without ratchet, cache, timeout, path-filter, or cancellation defaults.

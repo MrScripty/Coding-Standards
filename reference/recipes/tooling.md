@@ -166,3 +166,21 @@ prettier --check "src/**/*.ts"
 
 The command, check mode, source glob, and nonzero result interpretation depend
 on the selected product version and formatting claim. They are not defaults.
+
+## CI Orchestration Examples
+
+After canonical [CI orchestration](../../workflows/tooling.md#ci-orchestration-and-scheduling)
+selects dependencies, continuation, cancellation, and reporting behavior, a
+GitHub Actions matrix can express selected continuation with
+`strategy.fail-fast: false`. A final reporting job can use `if: always()`, and
+an explicitly advisory step can use `continue-on-error: true`.
+
+One possible three-group graph places setup validation before independent
+quality checks and runs expensive checks only after their required claims pass.
+GitHub Actions can express those edges with `needs` and conditions such as
+`success()`. Selected commands might include `./launcher.sh --ci-preflight` or
+`npm run ci:preflight`.
+
+The provider, matrix behavior, summary job, error continuation, dependency
+syntax, group names, group count, execution order, and commands are examples
+only. They do not define a fallback topology or evidence contract.

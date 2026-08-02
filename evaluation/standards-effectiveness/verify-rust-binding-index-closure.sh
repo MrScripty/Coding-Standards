@@ -21,7 +21,7 @@ done
 rg -F -q '`7.4b8af` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ag` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'Milestone 7.4b9m'* ]]
+[[ "$next_slice_line" == *'Milestone 7.4b9n'* ]]
 
 "$S/verify-milestone-7-row-8-decomposition.sh"
 printf 'Rust binding legacy-index closure passed: STD-0789 exact index disposition\n'
