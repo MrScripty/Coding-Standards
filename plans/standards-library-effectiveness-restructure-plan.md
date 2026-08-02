@@ -7,11 +7,11 @@
 **Plan status:** `Active`
 
 **Current phase:** Tooling children 19.1 through 19.16 are accepted; dependency
-auditing and tool provisioning for child 19.17 are active.
+auditing and parent-heading closure for child 19.17 are active.
 
 **Next slice:** Milestone 7.4b9r for `STD-0699` and `STD-0700`; route dependency
-auditing and tool provisioning to Dependencies without audit-tool, minimum-setup,
-installation, or command defaults.
+auditing to Dependencies and index the empty installation-checklist parent
+without audit-tool, minimum-setup, installation, or command defaults.
 
 **Acceptance status:** `partial`
 
@@ -1611,9 +1611,15 @@ all structural/routing fixtures pass.
      change-description evidence while extracting GitHub template placement and
      installation commands to a non-normative Implementation recipe without
      provider, pull-request, template, heading, or checklist defaults.
-   - `7.4b9r` (`Planned`): refine `STD-0699` and `STD-0700` under Dependencies
-     authority for dependency auditing and tool provisioning without audit-tool,
-     minimum-setup, installation, or command defaults.
+   - `7.4b9r` (`Planned`): route `STD-0699` to Dependencies authority for
+     dependency auditing and give the empty `STD-0700` installation-checklist
+     parent an index-only disposition without audit-tool, minimum-setup,
+     installation, or command defaults.
+   - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
+     as the sole canonical owner for the substantive `STD-0699` audit route,
+     classify `STD-0700` as an empty parent heading with no independent
+     provisioning policy, and keep `STD-0701` and `STD-0702` in child
+     `19.18` for non-normative setup and command examples.
    - Row 19 change-evidence split replan (`Accepted`): retain Implementation as
      the sole canonical owner for child `19.16`, give `STD-0698` one split
      disposition, and create `reference/recipes/implementation.md` for provider

@@ -45,7 +45,7 @@ STD-0696	workflows/documentation.md	index	obsolete-directory-validation-parent-l
 STD-0697	workflows/documentation.md	split	traceability-policy-and-reference-recipe
 STD-0698	workflows/implementation.md	split	change-evidence-and-reference-recipe
 STD-0699	topics/dependencies.md	route	dependency-auditing
-STD-0700	topics/dependencies.md	route	tool-provisioning
+STD-0700	topics/dependencies.md	index	empty-installation-checklist-parent
 STD-0701	reference	move	tool-install-recipe
 STD-0702	reference	move	command-recipe
 STD-0703	workflows/commit.md	route	hook-bypass
