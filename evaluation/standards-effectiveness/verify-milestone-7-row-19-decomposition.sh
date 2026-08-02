@@ -9,7 +9,7 @@ RPT="$S/milestone-7-row-19-decomposition.md"
 mapfile -t ids < <(awk -F '\t' '$1==19{n=split($3,a,",");for(i=1;i<=n;i++)print a[i]}' "$O" | sort)
 expected=(STD-{0654..0703})
 [[ "${ids[*]}" == "${expected[*]}" ]]
-[[ "$(awk -F '\t' '$1==19{print $2}' "$O" | sort -n | paste -sd ' ' -)" == "$(seq 1 19 | paste -sd ' ' -)" ]]
+[[ "$(awk -F '\t' '$1==19{print $2}' "$O" | sort -n | paste -sd ' ' -)" == "$(seq 1 18 | paste -sd ' ' -)" ]]
 [[ "$(awk -F '\t' '$1==19&&NF!=9{n++}END{print n+0}' "$O")" -eq 0 ]]
 
 for owner in workflows/tooling.md workflows/verification.md workflows/commit.md \
@@ -18,11 +18,12 @@ for owner in workflows/tooling.md workflows/verification.md workflows/commit.md 
   rg -F -q "$owner" "$O"
 done
 for text in '## Proposed Owner Contract' 'does not own what evidence proves' \
-  'must not fall back' '## Ordered Children' '19 overlay rows' \
+  'must not fall back' '## Ordered Children' '18 overlay rows' \
   'canonical-owner-homogeneous' 'Child `19.8` is a reviewed split package' \
   'exactly one `split` disposition' 'Child `19.9` applies the same boundary' \
   'Child `19.12` applies the split boundary' \
   'Child `19.13` applies the same boundary' \
+  'Child `19.15` reconciles replacement lineage' \
   '## Implementation Sequence' '## Re-plan Triggers'; do
   rg -F -q "$text" "$RPT"
 done
@@ -43,10 +44,12 @@ rg -F -q 'Row 19 TypeScript split replan (`Accepted`)' "$P"
 rg -F -q 'Row 19 formatting split replan (`Accepted`)' "$P"
 rg -F -q 'Row 19 CI orchestration split replan (`Accepted`)' "$P"
 rg -F -q 'Row 19 debt and automation-cost split replan (`Accepted`)' "$P"
+rg -F -q 'Row 19 traceability-lineage replan (`Accepted`)' "$P"
 awk -F '\t' '$1==19&&$2==8&&$5=="profiles/languages/typescript.md"&&$7=="pre-slice-review"&&$9~/non-normative Tooling reference/{f=1}END{exit !f}' "$O"
 awk -F '\t' '$1==19&&$2==9&&$5=="workflows/tooling.md"&&$9~/VS Code format-on-save Prettier ESLint pairing/{f=1}END{exit !f}' "$O"
 awk -F '\t' '$1==19&&$2==12&&$5=="workflows/tooling.md"&&$9~/GitHub fail-fast summary continue-on-error/{f=1}END{exit !f}' "$O"
 awk -F '\t' '$1==19&&$2==13&&$5=="workflows/tooling.md"&&$9~/GitHub permissions concurrency setup cache/{f=1}END{exit !f}' "$O"
+awk -F '\t' '$1==19&&$2==15&&$3=="STD-0696,STD-0697"&&$5=="workflows/documentation.md"&&$9~/pre-migration Decision Traceability lineage/{f=1}END{exit !f}' "$O"
 [[ -e "$R/workflows/tooling.md" ]]
 [[ -e "$R/reference/recipes/tooling.md" ]]
-printf 'Milestone 7 row-19 decomposition passed: 50 IDs across 19 children\n'
+printf 'Milestone 7 row-19 decomposition passed: 50 IDs across 18 children\n'

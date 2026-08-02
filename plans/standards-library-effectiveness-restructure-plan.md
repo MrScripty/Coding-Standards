@@ -9,9 +9,9 @@
 **Current phase:** Tooling children 19.1 through 19.14 are accepted; repository
 structure validation for child 19.15 is active.
 
-**Next slice:** Milestone 7.4b9p for `STD-0696`; select repository-structure
-validation from owned repository contracts without directory, file, or README
-assumptions.
+**Next slice:** Milestone 7.4b9p for `STD-0696` and `STD-0697`; reconcile the
+pre-migration Decision Traceability replacement under Documentation authority
+while extracting maps, commands, hook YAML, and provider syntax to reference.
 
 **Acceptance status:** `partial`
 
@@ -1603,9 +1603,17 @@ all structural/routing fixtures pass.
    - `7.4b9o` (`Accepted`): move `STD-0693` and `STD-0694` into non-normative
      complete CI workflow and provider-action examples without workflow,
      provider, action, cache, command, or diagnostic defaults.
-   - `7.4b9p` (`Planned`): refine `STD-0696` into repository-structure
-     validation selected from owned repository contracts without directory,
-     file, or README assumptions.
+   - `7.4b9p` (`Planned`): reconcile `STD-0696` and `STD-0697` under
+     Documentation authority, preserving the obsolete parent as an index
+     disposition and splitting durable traceability policy from non-normative
+     maps, commands, hook YAML, and provider syntax.
+   - Row 19 traceability-lineage replan (`Accepted`): replace former children
+     `19.15` and `19.16` with one Documentation-owned package for `STD-0696`
+     and `STD-0697`; renumber the remaining children without changing their
+     identifiers, owners, or order. The pre-migration `Decision Traceability`,
+     `Impact Map`, and `Explicit Diff Modes` replacement is the source lineage;
+     obsolete Directory Validation and universal README semantics must not be
+     restored.
    - Row 19 debt and automation-cost split replan (`Accepted`): retain Tooling
      as the sole canonical owner for child `19.13`; refine `STD-0691` directly
      and give `STD-0692` one split disposition. Extract GitHub permissions,

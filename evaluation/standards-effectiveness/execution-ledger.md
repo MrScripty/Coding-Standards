@@ -5138,6 +5138,28 @@ across 82 completed and 33 pending logical clusters, with child `19.15` active.
 
 **Next slice:** `7.4b9p`, govern repository-structure validation.
 
+## Row 19 Decision-Traceability Lineage Replan
+
+**Outcome:** Accepted planning correction.
+
+Lookahead found that the frozen inventory still names `STD-0696` as Directory
+Validation and `STD-0697` as README Enforcement, but commit `c2f38e0` replaced
+that source before migration with Decision Traceability, Impact Map, and
+Explicit Diff Modes. Implementing the old children literally would restore
+superseded policy or disposition missing text.
+
+Former children `19.15` and `19.16` are therefore one Documentation-owned
+lineage package. `STD-0696` records the obsolete parent/index lineage and
+`STD-0697` splits durable policy from non-normative map, command, hook, and
+provider recipes. Remaining children retain their identifiers, owners, and
+order with mechanical renumbering only.
+
+**No-fallback result:** universal directory/README enforcement, inferred diff
+modes or branches, unrelated artifact substitution, and restoration of obsolete
+text are prohibited.
+
+**Next slice:** `7.4b9p`, implement the reviewed traceability-lineage package.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

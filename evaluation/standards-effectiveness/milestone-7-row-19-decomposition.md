@@ -27,7 +27,7 @@ automation as acceptance.
 
 ## Ordered Children
 
-The 19 overlay rows are exact, canonical-owner-homogeneous semantic outcomes. Child
+The 18 overlay rows are exact, canonical-owner-homogeneous semantic outcomes. Child
 `19.1` creates a useful owner and focused decision fixture before any later
 Tooling population. Shared legacy-source edits, plan state, dispositions,
 generated artifacts, router changes, metadata, and reference indexes remain
@@ -75,6 +75,14 @@ disposition while GitHub permissions, concurrency, setup, cache, package-command
 summary, and artifact syntax move only to non-normative Tooling recipes. Child
 `19.14` remains independently responsible for the full CI workflow YAML.
 
+Child `19.15` reconciles replacement lineage rather than restoring obsolete
+headings. `STD-0696` records the former Directory Validation parent as an index
+lineage disposition. `STD-0697` receives one `split` disposition with
+Documentation as sole canonical owner for impact selection, stable boundary
+association, explicit diff inputs, and typed diagnostics. Maps, commands, hook
+YAML, and provider syntax move only to non-normative reference. The remaining
+children are renumbered without changing their ownership or dependency order.
+
 ## Implementation Sequence
 
 1. Create the bounded Tooling owner with hook orchestration (`19.1`).
@@ -87,8 +95,8 @@ summary, and artifact syntax move only to non-normative Tooling recipes. Child
 6. Separate Verification gate meaning from provider-neutral CI orchestration
    and product recipes (`19.11`-`19.12`).
 7. Govern debt/cost and move CI recipes (`19.13`-`19.14`).
-8. Route repository, documentation, PR, dependency, and setup concerns
-   (`19.15`-`19.19`).
+8. Reconcile traceability lineage, then route PR, dependency, and setup concerns
+   (`19.15`-`19.18`).
 
 ## Re-plan Triggers
 
