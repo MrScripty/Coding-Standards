@@ -1,0 +1,13 @@
+case	scope	evidence	finding_owner	automation	bootstrap	fallback	expected
+selected_audit	risk-derived	claim-matched	canonical	declared	explicit	none	allow
+manual_review	risk-derived	claim-matched	canonical	manual	not-needed	none	allow
+missing_scope	missing	claim-matched	canonical	declared	explicit	none	typed-unavailable
+missing_evidence	risk-derived	missing	canonical	declared	explicit	none	typed-unavailable
+unknown_owner	risk-derived	claim-matched	unknown	declared	explicit	none	typed-unavailable
+fixed_tool	risk-derived	claim-matched	canonical	declared	explicit	audit-tool-default	typed-invalid
+fixed_severity	risk-derived	claim-matched	canonical	declared	explicit	severity-default	typed-invalid
+fixed_schedule	risk-derived	claim-matched	canonical	declared	explicit	schedule-default	typed-invalid
+ambient_bootstrap	risk-derived	claim-matched	canonical	declared	ambient	ambient-tool	typed-invalid
+tool_output_proof	risk-derived	tool-only	canonical	declared	explicit	tool-proof	typed-invalid
+implicit_install	risk-derived	claim-matched	canonical	declared	implicit	implicit-install	typed-invalid
+default_success	missing	missing	unknown	undeclared	missing	default-success	typed-invalid

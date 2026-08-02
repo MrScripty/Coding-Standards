@@ -17,6 +17,8 @@ expected=(STD-{0654..0703})
 [[ "$(awk -F '\t' '$1=="STD-0696"&&$2=="workflows/documentation.md"&&$3=="index"{n++}END{print n+0}' "$F")" -eq 1 ]]
 [[ "$(awk -F '\t' '$1=="STD-0697"&&$2=="workflows/documentation.md"&&$3=="split"{n++}END{print n+0}' "$F")" -eq 1 ]]
 [[ "$(awk -F '\t' '$1=="STD-0698"&&$2=="workflows/implementation.md"&&$3=="split"{n++}END{print n+0}' "$F")" -eq 1 ]]
+[[ "$(awk -F '\t' '$1=="STD-0699"&&$2=="topics/dependencies.md"&&$3=="route"{n++}END{print n+0}' "$F")" -eq 1 ]]
+[[ "$(awk -F '\t' '$1=="STD-0700"&&$2=="topics/dependencies.md"&&$3=="index"{n++}END{print n+0}' "$F")" -eq 1 ]]
 
 for owner in workflows/tooling.md workflows/verification.md \
   workflows/implementation.md workflows/commit.md workflows/documentation.md \
@@ -54,7 +56,7 @@ rg -F -q '`7.4b9k` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b9l` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9r` (`Planned`)' \
+rg -F -q '`7.4b9s` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q 'Row 19 TypeScript split replan (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"

@@ -256,12 +256,21 @@ checklist, or command default.
 
 ## Dependency Auditing
 
-See [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) for security auditing, lock file
-integrity, unused dependency detection, and CI integration for dependency checks.
+Select dependency audit scope, evidence, finding ownership, automation, and
+bootstrap dependencies through canonical
+[Dependencies](topics/dependencies.md#audit-and-review). This legacy route
+defines no audit tool, finding severity, schedule, CI placement, installation,
+or success default.
 
 ---
 
 ## Tool Installation Checklist
+
+This heading is an index for the non-normative setup and command examples below.
+Canonical dependency satisfaction and provisioning authority belong to
+[Dependencies](topics/dependencies.md#satisfaction-and-provisioning). The
+heading defines no required tool set, installation checklist, package manager,
+command, or implicit provisioning authority.
 
 ### Minimum Setup
 

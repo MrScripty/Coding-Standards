@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.16 are accepted; dependency
-auditing and parent-heading closure for child 19.17 are active.
+**Current phase:** Tooling children 19.1 through 19.17 are accepted; minimum
+setup and command examples for child 19.18 are active.
 
-**Next slice:** Milestone 7.4b9r for `STD-0699` and `STD-0700`; route dependency
-auditing to Dependencies and index the empty installation-checklist parent
-without audit-tool, minimum-setup, installation, or command defaults.
+**Next slice:** Milestone 7.4b9s for `STD-0701` and `STD-0702`; move minimum
+setup and command examples to non-normative Tooling reference without
+installation-checklist, required-tool, package-manager, or command defaults.
 
 **Acceptance status:** `partial`
 
@@ -1611,10 +1611,15 @@ all structural/routing fixtures pass.
      change-description evidence while extracting GitHub template placement and
      installation commands to a non-normative Implementation recipe without
      provider, pull-request, template, heading, or checklist defaults.
-   - `7.4b9r` (`Planned`): route `STD-0699` to Dependencies authority for
+   - `7.4b9r` (`Accepted`): route `STD-0699` to Dependencies authority for
      dependency auditing and give the empty `STD-0700` installation-checklist
      parent an index-only disposition without audit-tool, minimum-setup,
-     installation, or command defaults.
+     installation, or command defaults. Twelve focused lineage decisions, two
+     exact dispositions, and all 149 repository checkers pass; the execution
+     train advances to 321 completed and 268 remaining identifiers.
+   - `7.4b9s` (`Planned`): move `STD-0701` and `STD-0702` to
+     non-normative Tooling reference without installation-checklist,
+     required-tool, package-manager, command, script, or hook defaults.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

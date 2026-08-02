@@ -36,7 +36,7 @@ expected=(STD-{0300..0348})
 [[ "${ids[*]}" == "${expected[*]}" ]]
 rg -F -q '`7.4b8bs` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9r` (`Planned`)' \
+rg -F -q '`7.4b9s` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-dependencies-owner-contract.sh"
 "$S/verify-milestone-7-execution-train.sh"

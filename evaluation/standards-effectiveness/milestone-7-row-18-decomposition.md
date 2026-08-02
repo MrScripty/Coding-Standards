@@ -65,8 +65,6 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9r` routes dependency auditing to Dependencies and gives the
-empty installation-checklist parent an index-only disposition without
-audit-tool, setup, installation, or command defaults. The parent does not
-create provisioning policy; child `19.18` retains the substantive setup and
-command examples.
+Milestone `7.4b9s` moves minimum setup and command examples to non-normative
+Tooling reference without installation-checklist, required-tool,
+package-manager, script, command, or hook defaults.

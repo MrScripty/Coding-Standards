@@ -5220,7 +5220,30 @@ coverage, and one split disposition pass. All 148 repository checkers pass. The
 execution train reports 319 completed and 270 remaining IDs across 84 completed
 and 30 pending logical clusters, with child `19.17` active.
 
-**Next slice:** `7.4b9r`, route dependency auditing and tool provisioning.
+**Next slice:** `7.4b9r`, route dependency auditing and close the empty
+installation-checklist parent.
+
+## Milestone 7.4b9r: Dependency Audit Lineage
+
+**Outcome:** Accepted implementation slice.
+
+Dependency audit scope, evidence, finding ownership, automation, and bootstrap
+authority now route to Dependencies. The empty installation-checklist parent is
+an index only; it creates no provisioning policy and leaves its setup and command
+children unchanged for child `19.18`.
+
+**No-fallback result:** audit tool, severity, schedule, CI placement, ambient
+bootstrap, implicit installation, tool-output proof, and default success are
+not defaults. Missing audit scope, evidence, owner, or bootstrap capability
+returns typed diagnostics.
+
+**Verification:** 12 dependency-audit lineage decisions, canonical and legacy
+negative coverage, and two exact dispositions pass. All 149 repository checkers
+pass. The execution train reports 321 completed and 268 remaining IDs across
+85 completed and 29 pending logical clusters, with child `19.18` active.
+
+**Next slice:** `7.4b9s`, move minimum setup and command examples to
+non-normative Tooling reference.
 
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
