@@ -111,3 +111,18 @@ not establish a required pre-addition, upgrade, or release schedule; a count or
 duplicate threshold; dependency quality or necessity; or release readiness.
 Shell pipeline success proves only the declared transformation of its selected
 input.
+
+## Audit Adapter Examples
+
+Legacy examples named `cargo audit`, `cargo deny`, `cargo machete`, `cargo
+udeps`, and `cargo tree --duplicates`, with commands matching those products.
+They also illustrated a source search:
+
+```bash
+rg "use <crate>|<crate>::" <path>/src
+```
+
+These products and commands are alternatives, not a required suite. They do not
+select installation, PR or nightly cadence, precision, masking interpretation,
+finding severity, blocking behavior, or disposition. Canonical owners must
+select those facts and account for each adapter's actual detection contract.

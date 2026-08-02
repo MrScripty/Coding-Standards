@@ -49,30 +49,13 @@ Concrete commands are non-normative in the
 
 ## Auditing
 
-Recommended Rust dependency checks:
-
-| Check | Tool | Baseline Command |
-| --- | --- | --- |
-| Security advisories | `cargo audit` | `cargo audit` |
-| Licenses, duplicate bans, sources, advisories | `cargo deny` | `cargo deny check` |
-| Unused dependencies, fast heuristic | `cargo machete` | `cargo machete --with-metadata` |
-| Unused dependencies, precise nightly check | `cargo udeps` | `cargo +nightly udeps` |
-| Duplicate versions | Cargo | `cargo tree --duplicates` |
-
-`cargo machete` is fast enough for most PR workflows. `cargo udeps` is more
-precise but requires nightly, so treat it as an optional deeper audit unless the
-repository explicitly adopts it.
-
-Manual usage checks are still useful when tools are inconclusive:
-
-```bash
-# Replace <crate> and <path> with the dependency and source directory.
-rg "use <crate>|<crate>::" <path>/src
-```
-
-Watch for masking: a local `mod foo` can shadow an external crate `foo`. If
-source contains `use foo::` and also declares `mod foo;`, the external crate may
-not actually be in use.
+Audit policy and findings remain with
+[Dependencies](../../topics/dependencies.md#audit-and-review), Security,
+Licensing, Verification, and Tooling as applicable. Supported Rust adapter
+mechanisms are owned by the
+[Rust Dependency profile](../../profiles/languages/rust/dependencies.md#dependency-audit-adapter-mechanisms).
+Concrete products and commands are non-normative in the
+[Rust dependency recipes](../../reference/recipes/rust-dependencies.md#audit-adapter-examples).
 
 ## Build-Time Cost
 

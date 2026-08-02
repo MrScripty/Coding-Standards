@@ -5709,6 +5709,32 @@ clusters, with child `21.6` active.
 audit mechanisms and move `STD-0748` source-search syntax to non-normative
 reference.
 
+## Milestone 7.4b11g: Rust Dependency Audit Adapters
+
+**Outcome:** Accepted implementation slice.
+
+Dependencies, Security, Licensing, Verification, and Tooling retain audit scope,
+tool selection, cadence, finding classification, evidence, and disposition
+authority. Rust Dependency now owns only supported adapters that expose an
+accepted advisory, license, source, duplicate, unused, provenance, or graph
+claim. Product and source-search examples moved to non-normative reference.
+
+**No-fallback result:** product choice, installation, PR or nightly cadence,
+precision, severity, masking interpretation, blocking behavior, empty results,
+and tool availability cannot complete an audit decision.
+
+**Verification:** twelve audit-adapter decisions, generic-owner and reference
+authority checks, legacy negative coverage, two exact dispositions, row
+decomposition, execution-train, and complete repository verification pass. The
+train advances to 352 completed and 237 remaining identifiers across 98
+completed and 27 pending logical clusters, with child `21.7` active.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b11h`, split `STD-0749` performance claims from Cargo cost
+measurement mechanisms, move `STD-0750` and `STD-0751` commands to
+non-normative reference, and close the legacy source.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

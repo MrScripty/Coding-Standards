@@ -86,6 +86,19 @@ dependency category, dependency forwarding, or target placement. Rust `cfg`,
 public API exposure, and compile-time conflict diagnostics belong only to the
 Rust API profile.
 
+## Dependency Audit Adapter Mechanisms
+
+After Dependencies selects audit scope and lifecycle consequences; Security and
+Licensing classify their findings; Verification selects evidence; and Tooling
+selects execution and scheduling, use supported Rust audit adapters only to
+produce the accepted claim. Adapter capabilities may include advisory, license,
+source, duplicate, unused-dependency, provenance, or dependency-graph findings.
+
+An adapter does not select its product, installation, cadence, precision,
+severity, blocking behavior, finding disposition, or fallback. Tool availability
+and an empty result cannot establish satisfaction; missing capability or
+evidence retains a typed outcome.
+
 ## Verification
 
 Evidence covers the actual supported Cargo resolver and toolchain, affected
