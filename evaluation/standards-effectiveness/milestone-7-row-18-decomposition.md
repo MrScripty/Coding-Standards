@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Row 20 requires pre-slice owner review for `STD-0706` through `STD-0716`
-because `profiles/languages/rust/api.md` does not yet exist.
+Row 20 child `20.1` creates the missing Rust API owner with `STD-0706`,
+`STD-0713`, and `STD-0714` after accepted concern decomposition.

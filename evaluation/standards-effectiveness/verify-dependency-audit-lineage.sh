@@ -60,6 +60,6 @@ next_slice_block="$(awk '
 ' "$PLAN")"
 [[ "$next_slice_block" == *'row 20'* ]]
 [[ "$next_slice_block" == *'STD-0706'* ]]
-[[ "$next_slice_block" == *'STD-0716'* ]]
+[[ "$next_slice_block" == *'STD-0714'* ]]
 
 printf 'Dependency audit lineage passed: 12 decisions, 2 exact dispositions\n'

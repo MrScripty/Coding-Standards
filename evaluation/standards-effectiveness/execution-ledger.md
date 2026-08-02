@@ -5267,6 +5267,28 @@ and 28 pending logical clusters, with row 20 active.
 Rust API profile is missing and must receive a validated owner contract before
 normative implementation.
 
+## Milestone 7.4b10a: Rust API Owner Decomposition
+
+**Outcome:** Accepted planning slice.
+
+Row 20 is decomposed into six ordered children. Generic invariant,
+architecture, failure, dependency, public-consumer, and documentation authority
+remains with existing canonical owners. The missing Rust API profile is limited
+to Rust-specific type, conversion, crate/module visibility, result/panic,
+trait/parameter, Cargo-feature, and Rustdoc mechanisms.
+
+**No-fallback result:** the profile cannot select or weaken a generic contract,
+and the migration cannot retain severity, crate layout, error crate, feature,
+command, or documentation checklist defaults.
+
+**Verification:** 11 exact owner decisions across six ordered children,
+missing-owner activation checks, plan structure, and all 151 repository
+checkers pass. The execution train remains at 323 completed and 266 remaining
+IDs, with child `20.1` active.
+
+**Next slice:** `7.4b10b`, create the useful narrow owner with public trait and
+parameter mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
