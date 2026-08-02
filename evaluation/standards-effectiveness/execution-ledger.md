@@ -5599,6 +5599,36 @@ completed and 31 pending logical clusters, with child `21.3` active.
 workspace inheritance mechanisms and move `STD-0736` and `STD-0737` manifest
 syntax to non-normative Rust dependency reference.
 
+## Milestone 7.4b11d: Rust Workspace Dependency Inheritance
+
+**Outcome:** Accepted implementation slice.
+
+Dependencies retains requirement and consumer ownership. The Rust Dependency
+profile now expresses an accepted shared resolution through supported Cargo
+workspace declarations and member inheritance without transferring ownership
+to the workspace root. The two concrete manifests moved to non-normative Rust
+dependency reference.
+
+**No-fallback result:** member count, repository layout, an existing root
+manifest, available inheritance, and universal centralization cannot require
+workspace inheritance. Missing ownership, consumers, or resolution facts are
+typed `unavailable`; unsupported Cargo expression is typed `unsupported`;
+contradictory contracts and fallback decisions are typed `invalid`.
+
+**Verification:** eleven workspace-inheritance decisions, canonical owner and
+reference authority checks, legacy negative coverage, three exact dispositions,
+row decomposition, execution-train, and complete repository verification pass.
+The train advances to 341 completed and 248 remaining identifiers across 95
+completed and 30 pending logical clusters, with child `21.4` active.
+
+**Deviation:** the first focused run exposed two checker assertions coupled to
+Markdown line wrapping. They were replaced with stable line-local semantic
+clauses; normative content and behavioral fixtures were unchanged.
+
+**Next slice:** `7.4b11e`, split `STD-0738` generic feature authority from Cargo
+dependency feature mechanisms and move `STD-0739` and `STD-0740` manifests to
+non-normative Rust dependency reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

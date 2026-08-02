@@ -1,0 +1,12 @@
+case	ownership	consumers	resolution	cargo_support	fallback	expected
+shared_contract	accepted	known	accepted	supported	none	allow
+member_contract	accepted	known	accepted	supported	none	allow
+missing_ownership	missing	known	accepted	supported	none	typed-unavailable
+unknown_consumers	accepted	unknown	accepted	supported	none	typed-unavailable
+missing_resolution	accepted	known	missing	supported	none	typed-unavailable
+unsupported_cargo	accepted	known	accepted	unsupported	none	typed-unsupported
+contradictory_contract	contradictory	known	accepted	supported	none	typed-invalid
+member_count	accepted	known	accepted	supported	two-members	typed-invalid
+root_manifest	accepted	known	accepted	supported	root-placement	typed-invalid
+existing_inheritance	accepted	known	accepted	supported	incumbent-inheritance	typed-invalid
+centralization	accepted	known	accepted	supported	centralize-all	typed-invalid

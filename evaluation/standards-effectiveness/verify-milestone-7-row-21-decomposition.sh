@@ -33,10 +33,11 @@ done
 rg -F -q '`7.4b11a` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b11b` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b11c` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b11d` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b11d` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b11e` (`Planned`)' "$PLAN"
 next_slice="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice" == *'row 21 child 21.3'* ]]
-for id in STD-0735 STD-0736; do
+[[ "$next_slice" == *'row 21 child 21.4'* ]]
+for id in STD-0738 STD-0739; do
   [[ "$next_slice" == *"$id"* ]]
 done
 next_slice_block="$(awk '
@@ -44,7 +45,7 @@ next_slice_block="$(awk '
   capture && /^$/ { exit }
   capture { print }
 ' "$PLAN")"
-[[ "$next_slice_block" == *'STD-0737'* ]]
+[[ "$next_slice_block" == *'STD-0740'* ]]
 
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-21 decomposition passed: 21 IDs across 7 children\n'

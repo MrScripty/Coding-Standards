@@ -18,24 +18,12 @@ Concrete commands are non-normative examples in the
 
 ## Workspace Dependency Inheritance
 
-All dependencies used by two or more workspace members should be declared in the
-root `Cargo.toml` under `[workspace.dependencies]` and referenced with
-`{ workspace = true }` in member crates.
-
-```toml
-# Cargo.toml (workspace root)
-[workspace.dependencies]
-serde = { version = "1.0", features = ["derive"] }
-tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
-
-# member/Cargo.toml
-[dependencies]
-serde = { workspace = true }
-tokio = { workspace = true }
-```
-
-Centralized version management is for consistency, not for hiding dependency
-ownership. A crate should still declare every dependency it directly uses.
+Dependency ownership is defined by
+[Dependencies](../../topics/dependencies.md#requirement-and-ownership). Cargo
+workspace inheritance expression is owned by the
+[Rust Dependency profile](../../profiles/languages/rust/dependencies.md#workspace-inheritance-mechanisms).
+Concrete manifests are non-normative examples in the
+[Rust dependency recipes](../../reference/recipes/rust-dependencies.md#workspace-inheritance-examples).
 
 ## Feature Selection
 

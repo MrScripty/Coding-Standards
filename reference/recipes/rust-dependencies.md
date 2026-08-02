@@ -37,3 +37,25 @@ resolver, and result interpretation must come from the accepted contract and
 supported Cargo capabilities. These commands do not make transitive count,
 current graph presence, standard-library availability, framework size, or
 written justification a selection rule.
+
+## Workspace Inheritance Examples
+
+An accepted workspace coordination contract might be expressed as:
+
+```toml
+[workspace.dependencies]
+serde = { version = "1.0", features = ["derive"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
+```
+
+An accepted consuming member might inherit those selected facts:
+
+```toml
+[dependencies]
+serde = { workspace = true }
+tokio = { workspace = true }
+```
+
+Package names, versions, features, declaration location, and inheritance must
+come from canonical ownership and resolution decisions. The examples do not
+make member count, root placement, centralization, or inheritance defaults.

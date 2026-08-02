@@ -52,6 +52,19 @@ turn a transitive-count threshold, framework label, current graph presence, or
 written justification into policy. Unsupported queries and incomplete graph
 facts retain the typed outcomes above.
 
+## Workspace Inheritance Mechanisms
+
+After Dependencies assigns each requirement to its owning consumers and
+selects any shared resolution contract, express accepted coordination through
+supported Cargo workspace dependency declarations and member-level
+`workspace = true` inheritance. Each consuming package still declares its
+direct requirement; inheritance coordinates selected manifest facts and does
+not transfer ownership to the workspace root.
+
+Select inheritance per accepted consumer, release, resolver, feature, target,
+and source-identity facts. Member count, repository layout, an existing root
+manifest, or available workspace inheritance cannot require centralization.
+
 ## Verification
 
 Evidence covers the actual supported Cargo resolver and toolchain, affected
