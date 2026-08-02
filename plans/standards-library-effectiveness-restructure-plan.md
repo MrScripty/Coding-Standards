@@ -10,8 +10,9 @@
 mechanisms for child 20.5 are active.
 
 **Next slice:** Milestone 7.4b10f for row 20 child 20.5 `STD-0715`; split
-Dependencies and public-contract authority from Cargo feature expression
-without default-feature, optional-dependency syntax, conflict, documentation,
+Dependencies, Contracts, Library, Documentation, and Verification authority
+from Cargo feature and compile-time enforcement mechanisms without
+default-feature, optional-dependency syntax, conflict, documentation-placement,
 or command-matrix defaults.
 
 **Acceptance status:** `partial`
@@ -1665,7 +1666,11 @@ all structural/routing fixtures pass.
      checkers pass; the execution train advances to 332 completed and 257
      remaining identifiers.
    - `7.4b10f` (`Planned`): split `STD-0715` into Dependencies and public
-     contract authority plus Cargo feature mechanisms.
+     contract authority plus Cargo feature mechanisms. Child 20.5 ownership
+     replan (`Accepted`) adds Library authority for real consumer
+     configurations, Documentation authority for durable feature-contract
+     artifacts, and Verification authority for claim-matched combination
+     evidence; Rust API remains limited to supported Cargo expression.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

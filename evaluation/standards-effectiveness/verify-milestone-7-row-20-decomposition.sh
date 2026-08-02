@@ -32,7 +32,10 @@ for text in '## Owner Contract' 'narrow language specialization' \
   '## Exact Dispositions' '## Ordered Children' '## Re-plan Triggers' \
   '## Child 20.4 Ownership Replan' \
   'Contracts owns expected absence, invariant violation' \
-  'Resilience owns operational failure, recovery'; do
+  'Resilience owns operational failure, recovery' \
+  '## Child 20.5 Ownership Replan' \
+  'Library owns supported real' \
+  'Verification owns claim-matched'; do
   rg -F -q "$text" "$REPORT"
 done
 

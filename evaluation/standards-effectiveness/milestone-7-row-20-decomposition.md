@@ -48,8 +48,13 @@ baselines, Cargo command lists, or documentation checklists.
    and availability; and Rust `Result`, `Option`, panic, assertion,
    `unreachable!`, `unwrap`, and `expect` mechanisms. Neither generic owner may
    infer the other's contract, and the Rust profile may not select either.
-5. `20.5`: split `STD-0715` into dependency and public-contract authority
-   plus Cargo feature expression.
+5. `20.5`: split `STD-0715` across Dependencies authority for feature
+   selection, optional dependencies, defaults, target variants, and footprint;
+   Contracts authority for consumer-visible behavior and compatibility;
+   Library authority for real consumer configurations; Documentation authority
+   for durable feature-contract documentation; Verification authority for
+   claim-matched feature-combination evidence; and Rust API authority only for
+   supported Cargo feature and compile-time enforcement mechanisms.
 6. `20.6`: split `STD-0716` into Documentation authority plus Rustdoc
    expression, then close the legacy source as an index.
 
@@ -79,3 +84,21 @@ Focused decisions must distinguish expected absence, recoverable operational
 failure, invariant violation, and impossible state. Missing or contradictory
 generic ownership returns typed diagnostics; no situation table, error crate,
 context rule, path exception, or `expect` preference survives as a fallback.
+
+## Child 20.5 Ownership Replan
+
+Lookahead found that “dependency and public-contract authority” omitted three
+independent owners. Dependencies selects features, optional dependencies,
+default behavior, target variants, and footprint. Contracts owns
+consumer-visible behavior and compatibility. Library owns supported real
+consumer configurations. Documentation owns documentation triggers and
+artifacts. Verification owns claim-matched feature-combination evidence. Rust
+API owns only Cargo feature syntax and compile-time enforcement mechanisms.
+
+The child retains `STD-0715` and its ordering because the legacy section is one
+mixed feature-contract policy. Focused decisions must reject minimal defaults,
+`dep:` syntax, optionality categories, mutual-exclusion rules,
+`compile_error!`, README or crate-doc placement, and fixed Cargo command
+matrices when their canonical owner has not selected them. Missing or
+contradictory facts return typed diagnostics rather than a conventional Cargo
+configuration.

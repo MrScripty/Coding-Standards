@@ -5408,6 +5408,29 @@ corrected before acceptance; policy outcomes and ownership did not change.
 **Next slice:** `7.4b10f`, split Dependencies and public-contract authority from
 Cargo feature mechanisms.
 
+## Row 20 Child 20.5 Feature-Authority Replan
+
+**Outcome:** Accepted planning correction.
+
+Lookahead found that “Dependencies and public-contract authority” omitted
+Library, Documentation, and Verification ownership. Dependencies selects
+features, optional dependencies, default behavior, target variants, and
+footprint. Contracts owns consumer-visible behavior and compatibility. Library
+owns supported real consumer configurations. Documentation owns durable
+feature-contract documentation. Verification owns claim-matched combination
+evidence. Rust API owns only Cargo feature and compile-time enforcement
+mechanisms.
+
+**No-fallback result:** minimal defaults, `dep:` syntax, optionality labels,
+mutual-exclusion rules, `compile_error!`, README or crate-doc placement, and
+fixed Cargo command matrices cannot complete missing generic decisions. The ID,
+source, child ordering, and objective remain unchanged.
+
+**Verification:** row-20 owner, decomposition, execution-train, and plan
+lifecycle checks pass. All 155 repository checkers pass.
+
+**Next slice:** `7.4b10f`, implement the corrected child 20.5 ownership split.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
