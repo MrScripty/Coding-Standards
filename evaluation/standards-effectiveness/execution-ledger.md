@@ -5096,6 +5096,30 @@ the bounded implementation slice.
 
 **Next slice:** `7.4b9n`, implement the reviewed debt and automation-cost split.
 
+## Milestone 7.4b9n: Tool Debt And Automation Cost
+
+**Outcome:** Accepted implementation slice.
+
+Tooling now selects debt boundaries and automation-cost behavior from owned
+findings, claims, measurements, invalidation boundaries, data sensitivity,
+provider capability, and explicit authority. GitHub, Node, Rust, cache, command,
+summary, and artifact syntax is non-normative reference.
+
+**No-fallback result:** snapshot, count, zero-debt, cache, timeout, path-filter,
+cancellation, upload, stale-state, and discarded-diagnostic defaults are
+prohibited. Missing, contradictory, or unsupported facts return typed
+diagnostics.
+
+**Verification:** 16 debt-and-cost decisions, legacy negative coverage, one
+direct and one split disposition pass. All 145 repository checkers pass. The
+execution train reports 314 completed and 275 remaining IDs across 81 completed
+and 34 pending logical clusters, with child `19.14` active.
+
+**Deviation resolved:** the duplicated live-matrix sentence and all embedded
+provider/package examples were removed with the authoritative legacy section.
+
+**Next slice:** `7.4b9o`, move complete CI workflow examples to reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

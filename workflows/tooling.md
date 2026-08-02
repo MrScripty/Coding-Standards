@@ -141,3 +141,49 @@ Missing required dependency, cost, resource, or reporting facts are
 `unavailable`. An orchestration contract that the selected provider or
 environment cannot represent is `unsupported`; do not substitute a conventional
 topology, skip the claim, weaken reporting, or silently serialize the work.
+
+## Tool-Debt Governance
+
+When a selected tool reports existing debt that cannot be resolved in the
+current change, define the debt boundary from owned findings, affected scope,
+stable identity, required claims, and explicit authority. Select the comparison
+method, stored evidence, update procedure, blocking behavior, and retirement
+condition so new or changed violations cannot be accepted accidentally.
+
+Do not default to a committed snapshot, total-count comparison, changed-file
+comparison, zero-debt threshold, named command, tier promotion, or temporary
+non-blocking state. A debt boundary cannot weaken an independently required
+Verification claim or convert unknown findings into accepted debt.
+
+Contradictory debt and acceptance authority is `invalid`. Missing debt identity,
+scope, baseline authority, update procedure, or retirement condition is
+`unavailable`. A selected tool unable to distinguish governed debt from new
+findings is `unsupported`; do not accept all findings, preserve an unverifiable
+baseline, or infer a ratchet algorithm.
+
+## Automation Cost And Operational Evidence
+
+Optimize automation only from measured duration, resource consumption,
+contention, transfer cost, cache behavior, and diagnostic needs while preserving
+every required Verification claim and supported environment. Select caching,
+timeouts, filtering, cancellation, artifact retention, and diagnostic transport
+from authoritative inputs, invalidation boundaries, data sensitivity, provider
+capability, and operational cost.
+
+A cache must define its authoritative inputs, invalidation key, excluded mutable
+state, trust boundary, and miss behavior. A timeout or filter must identify the
+work it may omit and prove that required claims remain represented. Diagnostic
+storage must define audience, retention, redaction, recursion prevention, and
+secret-handling behavior.
+
+Do not default to caching, cache contents or keys, lockfile commands, timeouts,
+path filters, cancellation, artifact upload, retention periods, GitHub summaries,
+diagnostic branches, or a provider. Optimization cannot replace evidence with a
+successful cache hit, omit a required platform, hide a blocking failure, or
+publish sensitive state.
+
+Contradictory optimization, evidence, or data-handling facts are `invalid`.
+Missing measurement, invalidation, omission, retention, or diagnostic authority
+is `unavailable`. A provider unable to represent the selected safety and evidence
+contract is `unsupported`; do not disable the claim, use stale state, select a
+conventional cache, or silently discard diagnostics.

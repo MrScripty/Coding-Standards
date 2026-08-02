@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.12 are accepted; tool-debt
-and automation-cost policy for child 19.13 are active.
+**Current phase:** Tooling children 19.1 through 19.13 are accepted; complete CI
+workflow examples for child 19.14 are active.
 
-**Next slice:** Milestone 7.4b9n for `STD-0691` and `STD-0692`; select tool-debt
-and automation-cost policy from measured authority while extracting provider and
-package recipes without ratchet, cache, timeout, filter, or cancellation defaults.
+**Next slice:** Milestone 7.4b9o for `STD-0693` and `STD-0694`; move the complete
+CI workflow and its provider actions, cache, and diagnostic syntax to
+non-normative reference without workflow or product defaults.
 
 **Acceptance status:** `partial`
 
@@ -1595,11 +1595,14 @@ all structural/routing fixtures pass.
    - `7.4b9m` (`Accepted`): refine `STD-0687`, `STD-0689`, and `STD-0690` into
      CI orchestration and scheduling without provider, fail-fast, tier, or
      parallel defaults.
-   - `7.4b9n` (`Planned`): refine `STD-0691` and split `STD-0692` into
+   - `7.4b9n` (`Accepted`): refine `STD-0691` and split `STD-0692` into
      tool-debt and automation-cost policy while extracting GitHub Actions,
      package-manager, cache, and diagnostic syntax to non-normative Tooling
      recipes without ratchet, cache, timeout, path-filter, or cancellation
      defaults.
+   - `7.4b9o` (`Planned`): move `STD-0693` and `STD-0694` into non-normative
+     complete CI workflow and provider-action examples without workflow,
+     provider, action, cache, command, or diagnostic defaults.
    - Row 19 debt and automation-cost split replan (`Accepted`): retain Tooling
      as the sole canonical owner for child `19.13`; refine `STD-0691` directly
      and give `STD-0692` one split disposition. Extract GitHub permissions,

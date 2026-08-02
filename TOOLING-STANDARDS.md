@@ -203,127 +203,19 @@ and launcher and package commands are retained only in the non-normative
 
 ### Lint Debt Ratchet (When Full Lint Is Temporarily Non-Blocking)
 
-1. Keep a committed baseline snapshot of current full-lint violations.
-2. `lint:no-new` must fail if a PR increases total violations or introduces new violations in changed code.
-3. Baseline updates are allowed only when counts stay the same or decrease.
-4. When a rule/category reaches zero debt, promote it into a blocking tier.
-5. Full lint returns to fully blocking once baseline debt is zero.
+Select tool-debt boundaries, evidence, change rules, and retirement conditions
+through canonical [Tooling](workflows/tooling.md#tool-debt-governance). The former
+fixed snapshot, count, changed-code, zero-debt, and blocking-tier ratchet defines
+no default algorithm.
 
 ### CI Performance Standards
 
-CI performance work must preserve the same quality signal. Do not speed up CI by
-removing required gates, narrowing required platform coverage, hiding blocking
-failures, or skipping tests without an explicit affected-test strategy.
-
-Rules:
-- Cache dependency downloads in every job that installs dependencies. Prefer
-  package-manager-aware setup actions such as `actions/setup-node` with
-  `cache: npm`, `actions/setup-python` with `cache: pip`, or ecosystem-specific
-  cache actions that key from lockfiles.
-- Cache package-manager stores and build-tool caches, not generated source
-  trees or runtime state that can hide missing build steps. Avoid caching
-  `node_modules`; use `npm ci` with an npm cache instead.
-- Cache keys must include the runner OS, package manager, relevant lockfile
-  hash, and toolchain version when the cache contains compiled artifacts. Use
-  broad restore keys only for dependency download caches, not compiled outputs.
-- Every job that invokes a package manager must still run the lockfile-enforcing
-  install command (`npm ci`, `pnpm install --frozen-lockfile`,
-  `cargo build`/`cargo test` with `Cargo.lock`, `dotnet restore --locked-mode`,
-  etc.) after restoring cache.
-- Add `timeout-minutes` to jobs or slow steps so hung tests and stalled
-  dependency downloads fail clearly.
-- Use top-level `concurrency` to cancel superseded runs for the same PR or
-  branch. Do not use concurrency cancellation to replace `fail-fast: false`
-  inside a live matrix run.
-- Use path filters only to skip whole workflows whose owned files are untouched.
-  Required checks must remain present for protected branches, either through
-  matching always-run placeholder jobs or branch protection that matches the
-  filtered workflow design.
-- Do not make path filters the only guard around release work. Release workflows
-  should be constrained by tag triggers; path filters are for skipping
-  irrelevant validation work, not for deciding whether a commit is a release.
-- Split independent gates into separate jobs even when this repeats dependency
-  installation. Use caching or a small reusable setup action/composite action to
-  reduce repeated setup cost rather than combining unrelated gates into one
-  low-visibility job.
-- Upload artifacts only when a downstream job, release process, or failure
-  diagnosis needs them. Set retention periods intentionally for large artifacts.
-- On CI failure, prefer GitHub job summaries, annotations, and uploaded
-  artifacts for logs/results. Do not commit failure logs such as
-  `docs/ci/ci.log` back to the default branch as part of normal CI.
-- If durable CI logs are required, write them to a separate diagnostics branch,
-  issue/PR comment, or external artifact store. The workflow must avoid
-  recursive CI triggers and must not publish secrets, tokens, environment dumps,
-  or unredacted third-party service output.
-- Measure before adding heavyweight optimization. Track job duration, cache hit
-  rate, and slowest steps when CI time becomes a recurring cost.
-
-Recommended GitHub Actions defaults:
-
-```yaml
-permissions:
-  contents: read
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
-```
-
-Recommended Node dependency setup:
-
-```yaml
-- uses: actions/setup-node@v4
-  with:
-    node-version: '20'
-    cache: npm
-    cache-dependency-path: package-lock.json
-
-- run: npm ci
-```
-
-Recommended Rust dependency setup:
-
-```yaml
-- uses: actions/cache@v4
-  with:
-    path: |
-      ~/.cargo/registry
-      ~/.cargo/git
-    key: cargo-${{ runner.os }}-${{ hashFiles('rust-toolchain.toml', '**/Cargo.lock') }}
-    restore-keys: |
-      cargo-${{ runner.os }}-
-
-- run: cargo test --workspace
-```
-
-If caching Rust `target/` or other compiled outputs, use exact keys that include
-the OS, Rust toolchain, target triple, feature mode, and lockfile hash. Do not
-use broad restore keys for compiled output caches.
-
-Recommended failure diagnostics:
-
-```yaml
-- name: Write failure summary
-  if: failure()
-  run: |
-    {
-      echo "## CI Failure"
-      echo "- Workflow: $GITHUB_WORKFLOW"
-      echo "- Job: $GITHUB_JOB"
-      echo "- Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-    } >> "$GITHUB_STEP_SUMMARY"
-
-- name: Upload failure logs
-  if: failure()
-  uses: actions/upload-artifact@v4
-  with:
-    name: ci-logs-${{ github.run_id }}-${{ github.job }}
-    path: |
-      logs/**/*.log
-      test-results/**/*.xml
-    if-no-files-found: ignore
-    retention-days: 14
-```
+Select automation-cost optimization, caching, timeouts, filtering, retention,
+and diagnostics through canonical
+[Tooling](workflows/tooling.md#automation-cost-and-operational-evidence). The
+former GitHub Actions, Node, Rust, cache, package-command, summary, and artifact
+examples are retained only in the non-normative
+[Tooling recipe](reference/recipes/tooling.md#automation-cost-examples).
 
 ### Recommended CI Workflow
 

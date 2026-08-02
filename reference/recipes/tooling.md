@@ -184,3 +184,33 @@ GitHub Actions can express those edges with `needs` and conditions such as
 The provider, matrix behavior, summary job, error continuation, dependency
 syntax, group names, group count, execution order, and commands are examples
 only. They do not define a fallback topology or evidence contract.
+
+## Automation Cost Examples
+
+After canonical [automation-cost policy](../../workflows/tooling.md#automation-cost-and-operational-evidence)
+selects caching, cancellation, and diagnostics, GitHub Actions can express
+read-only contents permission and per-run cancellation:
+
+```yaml
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+```
+
+Selected Node and Rust dependency caches might use `actions/setup-node@v4` with
+`cache: npm`, or `actions/cache@v4` for Cargo registry and Git data. Commands
+such as `npm ci` and `cargo test --workspace`, lockfile-derived keys, exact
+compiled-output keys, and broad dependency-download restore keys are
+product-specific examples, not defaults.
+
+GitHub failure diagnostics might append a redacted summary to
+`$GITHUB_STEP_SUMMARY` and conditionally use `actions/upload-artifact@v4` for
+selected log or test-result paths. Artifact names, missing-file behavior, and
+retention periods must come from the canonical decision; the legacy example's
+14-day retention is illustrative only.
+
+These provider actions, versions, permissions, concurrency expressions, cache
+paths, key fields, commands, summary variables, artifact paths, and retention
+values cannot select automation behavior or satisfy evidence by themselves.
