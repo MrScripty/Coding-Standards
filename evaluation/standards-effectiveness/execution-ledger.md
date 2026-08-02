@@ -5842,8 +5842,32 @@ execution-train counts, and affected shared plan checks.
 
 **Deviation:** none.
 
-**Next slice:** `7.4b12c`, split `STD-0811` toolchain and lockfile authority and
-move `STD-0812` to non-normative reference.
+**Next slice:** `7.4b12c`, preserve lockfile policy and mechanisms in their
+dependency owners, split only `STD-0811` Rust toolchain declaration mechanisms,
+and move `STD-0812` to non-normative reference.
+
+## Child 22.2 Lockfile Ownership Replan
+
+**Outcome:** Accepted planning correction.
+
+Pre-edit review found that assigning Cargo lockfile mechanisms to Rust Release
+would overlap the existing Rust Dependency owner. Release continues to own the
+reproducibility claim and application of the released dependency-resolution
+contract; Dependencies owns lockfile selection and resolution policy; Rust
+Dependency owns Cargo resolver metadata and lockfile mechanisms. Rust Release
+owns only Rust toolchain declaration mechanisms.
+
+The child retains one `STD-0811` split disposition for toolchain lineage and
+one `STD-0812` reference move. No normative source, final disposition, owner,
+router, generated artifact, or execution cursor changed.
+
+**Verification:** corrected report boundary, owner outcome, exact child IDs,
+overlay rationale, plan structure, and row 22 decomposition checks.
+
+**Deviation:** corrected before implementation; no compatibility ownership was
+introduced.
+
+**Next slice:** `7.4b12c`, implement the corrected toolchain-only split.
 
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 

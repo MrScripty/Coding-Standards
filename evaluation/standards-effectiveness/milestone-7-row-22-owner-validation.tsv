@@ -1,6 +1,6 @@
 id	owner	disposition	outcome
 STD-0810	profiles/languages/rust/release.md	index	rust-release-parent-route
-STD-0811	profiles/languages/rust/release.md	split	reproducibility-dependency-policy-and-rust-toolchain-lockfile-mechanisms
+STD-0811	profiles/languages/rust/release.md	split	reproducibility-dependency-and-cargo-resolution-authority-plus-rust-toolchain-declaration-mechanisms
 STD-0812	reference/recipes/rust-release.md	move	rust-toolchain-manifest-recipe
 STD-0813	profiles/languages/rust/release.md	split	release-contract-license-documentation-and-cargo-package-metadata-mechanisms
 STD-0814	profiles/languages/rust/release.md	split	artifact-publication-authority-and-cargo-publish-control-mechanisms

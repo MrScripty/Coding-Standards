@@ -35,9 +35,10 @@ they do not acquire independent normative ownership.
 
 1. `22.1`: create the useful Rust Release owner, recipe boundary, and parent
    route with `STD-0810`.
-2. `22.2`: split `STD-0811` reproducibility and dependency-resolution policy
-   from Rust toolchain and Cargo lockfile mechanisms; move `STD-0812` to
-   reference.
+2. `22.2`: preserve reproducibility and lockfile policy in Release and
+   Dependencies, preserve Cargo resolver and lockfile mechanisms in Rust
+   Dependency, split only Rust toolchain declaration mechanisms from
+   `STD-0811`, and move `STD-0812` to reference.
 3. `22.3`: split `STD-0813` release, contract, licensing, and documentation
    authority from Cargo package metadata mechanisms while extracting its
    manifest example under the same disposition.
@@ -57,6 +58,18 @@ Each child adds focused positive and negative decisions, records exact
 dispositions, updates plan and ledger state, and creates one atomic commit.
 The profile, recipe, legacy source, dispositions, routing, and shared planning
 artifacts remain serial integration-owner files.
+
+## Child 22.2 Lockfile Ownership Replan
+
+Release owns the reproducibility claim and applies the accepted released
+dependency-resolution contract. Dependencies owns lockfile selection and
+resolution policy. Rust Dependency owns Cargo resolver metadata and lockfile
+mechanisms. Rust Release owns only Rust toolchain declaration mechanisms.
+
+`STD-0811` retains one split disposition to Rust Release for its toolchain
+lineage while its canonical routes preserve the already-owned release,
+dependency, and Cargo resolution semantics. No alias, shared lockfile owner, or
+context-dependent transfer of mechanism authority is permitted.
 
 ## Re-plan Triggers
 
