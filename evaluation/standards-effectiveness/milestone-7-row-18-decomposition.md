@@ -65,5 +65,6 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Row 20 child `20.6` splits `STD-0716` into Documentation authority and Rustdoc
-mechanisms, then closes the Rust API legacy source as an index.
+Row 21 owner review covers `STD-0731` through `STD-0751`, validates the proposed
+Rust dependency specialization, and freezes thin implementation children before
+creating the missing owner.

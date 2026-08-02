@@ -6,13 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Row 20 children 20.1 through 20.5 are accepted; Rustdoc and
-legacy closure for child 20.6 are active.
+**Current phase:** Row 20 children 20.1 through 20.6 are accepted and the Rust
+API legacy source is closed; row 21 Rust dependency owner review is active.
 
-**Next slice:** Milestone 7.4b10g for row 20 child 20.6 `STD-0716`; split
-Documentation, Contracts, Resilience, Dependencies, Rust Unsafe, and Library
-authority from Rustdoc expression without required section, artifact-location,
-or example checklists, then close the Rust API legacy source as an index.
+**Next slice:** Milestone 7.4b11a for row 21 owner review `STD-0731` through `STD-0751`;
+validate the proposed Rust dependency specialization, exact dispositions, and
+thin implementation children before creating the missing canonical owner.
 
 **Acceptance status:** `partial`
 
@@ -1673,12 +1672,19 @@ all structural/routing fixtures pass.
      focused decisions and one exact disposition pass without conventional
      Cargo policy defaults. All 156 repository checkers pass; the execution
      train advances to 333 completed and 256 remaining identifiers.
-   - `7.4b10g` (`Planned`): split `STD-0716` into Documentation authority and
+   - `7.4b10g` (`Accepted`): split `STD-0716` into Documentation authority and
      Rustdoc mechanisms, then close the Rust API legacy source as an index.
      Child 20.6 ownership replan (`Accepted`) preserves Contracts authority for
      documented contract facts, Resilience for failure behavior, Dependencies
      for feature facts, Rust Unsafe for safety contracts, and Library for
      external-consumer applicability; Rust API remains limited to Rustdoc form.
+     Eighteen focused decisions and one exact disposition pass, and the legacy
+     file is a bounded non-normative index. All 157 repository checkers pass;
+     the execution train advances to 334 completed and 255 remaining
+     identifiers, with 18 legacy sources and 17 owners remaining.
+   - `7.4b11a` (`Planned`): review row 21 `STD-0731` through `STD-0751`, validate
+     the missing Rust dependency owner contract, and freeze implementation
+     children before owner creation.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

@@ -43,11 +43,9 @@ done
 ! rg -F -q 'Keep default features minimal' "$LEGACY"
 ! rg -F -q 'cargo check --workspace --all-features' "$LEGACY"
 ! rg -F -q 'Optional deeper checks with `cargo hack`' "$LEGACY"
-for route in '[Dependencies](../../topics/dependencies.md#features-and-footprint)' \
-  '[Contracts](../../topics/contracts.md#public-and-independently-deployed-evolution)' \
-  '[Library profile](../../profiles/applications/library.md#dependencies)' \
-  '[Documentation](../../workflows/documentation.md#contract-documentation)' \
-  '[Verification](../../workflows/verification.md#selecting-claims)'; do
+for route in 'topics/dependencies.md' 'topics/contracts.md' \
+  'profiles/applications/library.md' 'workflows/documentation.md' \
+  'workflows/verification.md'; do
   rg -F -q "$route" "$LEGACY"
 done
 

@@ -43,7 +43,7 @@ for text in '## API Mechanism Authority' \
   rg -F -q "$text" "$PROFILE"
 done
 
-rg -F -q '[Rust API profile](../../profiles/languages/rust/api.md)' "$LEGACY"
+rg -F -q '[Rust API mechanisms](../../profiles/languages/rust/api.md)' "$LEGACY"
 ! sed -n '/^## Public Contract Traits$/,/^## Parameter Ergonomics$/p' "$LEGACY" |
   rg -F -q 'Implement or derive'
 ! sed -n '/^## Parameter Ergonomics$/,/^## Feature Contracts$/p' "$LEGACY" |

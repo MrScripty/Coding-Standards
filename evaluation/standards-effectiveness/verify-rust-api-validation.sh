@@ -40,8 +40,8 @@ done
 ! rg -F -q 'if this bug ships, how bad is it' "$LEGACY"
 ! rg -F -q 'pub struct Port' "$LEGACY"
 ! rg -F -q 'Use `TryFrom`' "$LEGACY"
-rg -F -q '[Contracts](../../topics/contracts.md#invariant-contracts)' "$LEGACY"
-rg -F -q '[Security](../../topics/security.md#input-validation-authority)' "$LEGACY"
+rg -F -q 'topics/contracts.md' "$LEGACY"
+rg -F -q 'topics/security.md' "$LEGACY"
 
 expected=(
   $'STD-0707\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit'

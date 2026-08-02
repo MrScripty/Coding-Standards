@@ -5481,6 +5481,37 @@ lifecycle checks pass. All 156 repository checkers pass.
 **Next slice:** `7.4b10g`, implement the corrected Rustdoc split and close the
 legacy Rust API source as an index.
 
+## Milestone 7.4b10g: Rustdoc Mechanisms And Legacy Closure
+
+**Outcome:** Accepted implementation slice.
+
+Documentation retains trigger, artifact, placement, audience, and quality
+authority; Contracts, Resilience, Dependencies, Rust Unsafe, and Library retain
+authority over the documented facts and applicability. Rust API now selects
+only supported crate, item, heading, code, doctest, example, link, and attribute
+forms after those decisions are accepted.
+
+**No-fallback result:** crate-level docs, `# Errors`, `# Panics`, `# Safety`,
+feature sections, README or crate-doc placement, examples, and implementation
+mechanics explanations are not defaults. The Rust API legacy source is now a
+bounded non-normative migration index with canonical routes and no policy
+sections.
+
+**Verification:** 18 Rustdoc decisions, canonical route and legacy negative
+coverage, one exact split disposition, and legacy-index closure pass. All 157
+repository checkers pass. The execution train reports 334 completed and 255
+remaining IDs across 92 completed and 27 pending logical clusters, with row 21
+active; 18 legacy sources and 17 owners remain.
+
+**Deviation:** complete-suite integration exposed stale shared next-row cursor
+assertions and earlier Rust API checkers that required detailed anchored routes
+inside the legacy file. Cursors now target row 21, while closure-sensitive
+checks assert canonical owner paths in the bounded index. Permanent semantic,
+negative, and exact-disposition assertions remain unchanged.
+
+**Next slice:** `7.4b11a`, review row 21 `STD-0731` through `STD-0751` and
+freeze the missing Rust dependency owner contract and implementation children.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

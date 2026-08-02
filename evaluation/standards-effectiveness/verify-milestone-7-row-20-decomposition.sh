@@ -48,13 +48,14 @@ rg -F -q '`7.4b10c` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b10d` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b10e` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b10f` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b10g` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b10g` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b11a` (`Planned`)' "$PLAN"
 next_slice_block="$(awk '
   /^\*\*Next slice:\*\*/ { capture = 1 }
   capture && /^$/ { exit }
   capture { print }
 ' "$PLAN")"
-for id in STD-0716; do
+for id in STD-0731 STD-0751; do
   [[ "$next_slice_block" == *"$id"* ]]
 done
 

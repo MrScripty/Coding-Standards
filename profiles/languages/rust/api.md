@@ -151,6 +151,29 @@ dependencies, avoidance or acceptance of mutually exclusive features,
 matrices, `cargo hack`, or an all-features configuration without the applicable
 generic owner decisions and capability evidence.
 
+## Rustdoc Expression Mechanisms
+
+After Documentation selects the documentation trigger, artifact, placement,
+audience, and quality contract, and after each content owner supplies its
+authoritative facts, select a supported Rustdoc expression. Content owners may
+include Contracts for invariant and compatibility facts, Resilience for failure
+behavior, Dependencies for feature facts, Rust Unsafe for safety contracts, and
+Library for external-consumer applicability.
+
+Applicable mechanisms include crate-level `//!` documentation, item-level
+`///` documentation, headings, code blocks, doctests, examples, intra-doc links,
+and attributes that control rendered documentation. Select the form from the
+accepted artifact and audience, public surface, content contract, supported
+toolchain, and evidence claim. Rustdoc form cannot create or weaken the fact it
+describes, and generated output cannot replace its canonical source.
+
+Rustdoc forms are not documentation defaults. Do not require crate-level docs,
+`# Errors`, `# Panics`, `# Safety`, feature sections, README or crate-doc
+placement, examples, or explanations of implementation mechanics without the
+applicable owner decision. The Rust Unsafe profile remains authoritative for
+public unsafe contracts and `# Safety` obligations; this profile only expresses
+an accepted obligation in Rustdoc.
+
 ## Typed Outcomes
 
 Return typed `invalid` when the selected Rust mechanism contradicts the
