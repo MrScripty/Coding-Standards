@@ -14,7 +14,7 @@ train_order	package_id	risk_class	owner	owner_action	verification_family	draft_m
 17	P12	consolidation	workflows/planning.md	existing-review	decision-table	serial-only	full-suite	planning-rule-consolidation	core,workflow.implementation,workflow.verification
 18	P13	refinement	workflows/verification.md	existing-review	decision-table	serial-only	full-suite	verification-rule-consolidation	core
 19	P14	new-owner-design	workflows/tooling.md	existing-review	owner-contract	serial-only	full-suite	tooling-governance-contract	core,workflow.implementation,workflow.verification,workflow.commit
-20	P15	new-owner-design	profiles/languages/rust/api.md	create-before-populate	owner-contract	isolated-draft	full-suite	rust-api-contract	core,workflow.verification,profile.language.rust,topic.contracts
+20	P15	new-owner-design	profiles/languages/rust/api.md	existing-review	owner-contract	isolated-draft	full-suite	rust-api-contract	core,workflow.verification,profile.language.rust,topic.contracts
 21	P16	new-owner-design	profiles/languages/rust/dependencies.md	create-before-populate	owner-contract	isolated-draft	full-suite	rust-dependency-specialization	core,workflow.verification,profile.language.rust,topic.dependencies
 22	P17	new-owner-design	profiles/languages/rust/release.md	create-before-populate	owner-contract	isolated-draft	full-suite	rust-release-specialization	core,workflow.verification,workflow.release,profile.language.rust,profile.language.rust.dependencies
 23	P18	new-owner-design	profiles/languages/rust/tooling.md	create-before-populate	owner-contract	isolated-draft	full-suite	rust-tooling-specialization	core,workflow.verification,workflow.tooling,profile.language.rust

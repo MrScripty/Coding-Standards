@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** All 18 Tooling children are accepted; row 20 is decomposed
-into six owner-bounded Rust API children and owner creation is active.
+**Current phase:** Row 20 child 20.1 is accepted; invariant and validated-type
+mechanisms for child 20.2 are active.
 
-**Next slice:** Milestone 7.4b10b for row 20 child 20.1 `STD-0706`, `STD-0713`, and `STD-0714`;
-create a useful narrow Rust API owner for public trait and parameter mechanisms
-without generic contract defaults.
+**Next slice:** Milestone 7.4b10c for row 20 child 20.2 `STD-0707` and `STD-0708`;
+split generic invariant and boundary authority from Rust type and conversion
+mechanisms without severity, parse-once, or primitive-wrapper defaults.
 
 **Acceptance status:** `partial`
 
@@ -1633,8 +1633,14 @@ all structural/routing fixtures pass.
      Dependencies, Documentation, and Library, and reserve the missing Rust API
      profile for Rust-specific mechanisms. Eleven exact owner decisions and all
      151 repository checkers pass.
-   - `7.4b10b` (`Planned`): create the useful narrow Rust API owner with
-     `STD-0706`, `STD-0713`, and `STD-0714`.
+   - `7.4b10b` (`Accepted`): create the useful narrow Rust API owner with
+     `STD-0706`, `STD-0713`, and `STD-0714`, including public trait,
+     parameter, typed-outcome, no-fallback, routing, and evidence contracts.
+     Fourteen focused decisions, three exact dispositions, and all 152
+     repository checkers pass; the execution train advances to 326 completed
+     and 263 remaining identifiers.
+   - `7.4b10c` (`Planned`): split `STD-0707` and `STD-0708` into generic
+     authority and Rust type/conversion mechanisms.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

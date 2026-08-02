@@ -5289,6 +5289,28 @@ IDs, with child `20.1` active.
 **Next slice:** `7.4b10b`, create the useful narrow owner with public trait and
 parameter mechanisms.
 
+## Milestone 7.4b10b: Rust API Owner Creation
+
+**Outcome:** Accepted implementation slice.
+
+The new Rust API profile specializes accepted generic contracts into public
+trait and parameter mechanisms. It owns typed mechanism outcomes and evidence
+without selecting domain invariants, architecture, recovery, dependencies,
+documentation, compatibility, or consumer promises.
+
+**No-fallback result:** derive sets, display traits, result-use attributes,
+extension shape, dispatch, associated types, wrappers, borrowing, ownership,
+`Cow`, allocation, cloning, primitive parameters, compile success, and the
+incumbent signature are not defaults.
+
+**Verification:** 14 API-owner decisions, metadata and routing checks, legacy
+negative coverage, and three exact dispositions pass. All 152 repository
+checkers pass. The execution train reports 326 completed and 263 remaining IDs
+across 87 completed and 32 pending logical clusters, with child `20.2` active.
+
+**Next slice:** `7.4b10c`, split invariant and boundary authority from Rust
+type and conversion mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

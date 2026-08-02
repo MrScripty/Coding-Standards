@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Row 20 child `20.1` creates the missing Rust API owner with `STD-0706`,
-`STD-0713`, and `STD-0714` after accepted concern decomposition.
+Row 20 child `20.2` splits `STD-0707` and `STD-0708` into generic
+invariant/boundary authority and Rust type/conversion mechanisms.

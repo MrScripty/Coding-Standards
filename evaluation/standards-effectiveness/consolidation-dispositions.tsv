@@ -649,3 +649,6 @@ STD-0699	TOOLING-STANDARDS.md	topics/dependencies.md	refine	route dependency aud
 STD-0700	TOOLING-STANDARDS.md	topics/dependencies.md	index	classify the empty installation checklist parent as a non-normative index without independent provisioning policy
 STD-0701	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	move the legacy minimum setup product list to non-normative Tooling reference without required tool category or installation authority
 STD-0702	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	move package scripts commands flags globs and ESLint note to non-normative Tooling reference without package manager command hook or result defaults
+STD-0706	languages/rust/RUST-API-STANDARDS.md	profiles/languages/rust/api.md	index	route the Rust API parent to the narrow mechanism specialization while generic authority remains routed
+STD-0713	languages/rust/RUST-API-STANDARDS.md	profiles/languages/rust/api.md	refine	select public contract trait mechanisms from accepted consumer semantic evolution dispatch ownership and compatibility facts without derive or trait-shape defaults
+STD-0714	languages/rust/RUST-API-STANDARDS.md	profiles/languages/rust/api.md	refine	select parameter borrowing ownership conversion allocation and lifetime mechanisms from the accepted operation and consumer contract without wrapper clone or signature defaults

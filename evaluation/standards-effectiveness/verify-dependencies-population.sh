@@ -65,8 +65,8 @@ rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
 [[ "$next_slice_line" == *'row 20'* ]]
-[[ "$next_slice_line" == *'STD-0706'* ]]
-[[ "$next_slice_line" == *'STD-0714'* ]]
+[[ "$next_slice_line" == *'STD-0707'* ]]
+[[ "$next_slice_line" == *'STD-0708'* ]]
 
 "$S/verify-dependencies-owner-contract.sh"
 "$S/verify-launcher-population.sh"

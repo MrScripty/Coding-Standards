@@ -35,6 +35,9 @@ according to the crate's feature contract.
 ## Rust Invariants
 
 - Prefer validated types and checked conversions at boundaries.
+- Route public or boundary-facing Rust type, trait, parameter, conversion,
+  visibility, result, panic, feature, and Rustdoc mechanisms through the
+  [Rust API profile](api.md).
 - Route async API and suspension-boundary selection through the
   [Rust Async profile](async.md).
 - Route Rust target selection, configuration placement, and target evidence
@@ -57,7 +60,7 @@ according to the crate's feature contract.
 The current Rust documents remain canonical for specialized rules not stated
 here:
 
-- [API](../../../languages/rust/RUST-API-STANDARDS.md)
+- [Remaining API guidance](../../../languages/rust/RUST-API-STANDARDS.md)
 - [Remaining Async mechanisms](../../../languages/rust/RUST-ASYNC-STANDARDS.md#runtime-boundaries)
 - [Dependencies](../../../languages/rust/RUST-DEPENDENCY-STANDARDS.md)
 - [Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)

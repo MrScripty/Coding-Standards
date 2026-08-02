@@ -1,0 +1,15 @@
+case	contract	consumer	mechanism	semantics	ownership	capability	fallback	expected
+borrowed_parameter	accepted	known	borrowed	preserved	borrowed	supported	none	allow
+owned_parameter	accepted	known	owned	preserved	transferred	supported	none	allow
+semantic_derive	accepted	known	derive	preserved	owned	supported	none	allow
+sealed_trait	accepted	known	sealed	preserved	owned	supported	none	allow
+contradictory_contract	contradictory	known	borrowed	preserved	borrowed	supported	none	typed-invalid
+missing_contract	missing	known	borrowed	preserved	borrowed	supported	none	typed-unavailable
+unknown_consumer	accepted	unknown	borrowed	preserved	borrowed	supported	none	typed-unavailable
+unsupported_mechanism	accepted	known	generic	preserved	owned	unsupported	none	typed-unsupported
+invalid_semantics	accepted	known	derive	contradictory	owned	supported	none	typed-invalid
+invalid_ownership	accepted	known	borrowed	preserved	contradictory	supported	none	typed-invalid
+derive_default	accepted	known	derive	preserved	owned	supported	universal-derive	typed-invalid
+owned_default	accepted	known	owned	preserved	owned	supported	owned-parameter	typed-invalid
+clone_fallback	accepted	known	owned	preserved	owned	supported	clone	typed-invalid
+compile_only	accepted	known	generic	preserved	owned	supported	compile-success	typed-invalid

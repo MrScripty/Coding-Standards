@@ -1,0 +1,82 @@
+# Rust API Profile
+
+**Standards metadata**
+
+- ID: `profile.language.rust.api`
+- Role: `profile`
+- Level: `PROFILE`
+- Applies when: A Rust change selects or changes public or boundary-facing type, conversion, visibility, result, panic, trait, parameter, Cargo-feature, or Rustdoc mechanisms.
+- Does not apply when: No Rust API mechanism changes, or the task only selects the generic invariant, architecture, failure, dependency, documentation, compatibility, or consumer contract.
+- Requires: `core`, `topic.contracts`, `topic.architecture`, `topic.resilience`, `topic.dependencies`, `workflow.documentation`, `profile.application.library`, `profile.language.rust`
+- Specializes: `profile.language.rust`
+- Verification: Rust API decision fixtures plus affected public API, consumer, compile, and documentation evidence selected by the generic owners.
+- Canonical owner: `profiles/languages/rust/api.md`
+
+## API Mechanism Authority
+
+Generic owners select invariants, architecture, failure behavior, dependency
+and feature contracts, documentation obligations, compatibility, and consumer
+promises. This profile selects a Rust mechanism only after those contracts are
+accepted. A Rust type, trait, derive, visibility modifier, parameter wrapper,
+conversion trait, feature, attribute, or documentation form cannot create,
+weaken, or silently complete a missing generic contract.
+
+Select the smallest supported Rust surface that preserves the accepted
+contract, consumer capabilities, ownership and lifetime semantics, evolution
+policy, performance constraints, and evidence claim. Existing syntax,
+ecosystem convention, brevity, or compiler acceptance alone does not select the
+mechanism.
+
+## Public Contract Trait Mechanisms
+
+Implement or derive a trait only when its semantics are part of the accepted
+consumer contract and every represented value can satisfy those semantics.
+Select static or dynamic dispatch, associated or generic parameters, sealed or
+downstream-implementable traits, extension markers, and result-use attributes
+from actual consumer, evolution, object-safety, ownership, performance, and
+compatibility facts.
+
+`Debug`, `Display`, `Clone`, `Copy`, equality, ordering, hashing,
+`Default`, `#[must_use]`, `#[non_exhaustive]`, sealed traits, associated
+types, generics, and trait objects are mechanisms, not baseline requirements.
+Do not derive a trait because neighboring types do, expose implementation state
+to satisfy formatting, make an expensive or identity-bearing value copyable,
+invent a default state, seal an intended extension point, or make a contract
+non-exhaustive without an evolution need.
+
+## Parameter And Ownership Mechanisms
+
+Select borrowed or owned parameters from what the operation reads, stores,
+transfers, mutates, and returns, including the accepted lifetime and allocation
+contract. Select `&str`, `&Path`, slices, owned values, `AsRef`, `Into`,
+`Cow`, or a domain type only when that mechanism preserves those facts for
+the supported consumers.
+
+Do not accept an owned value when borrowing satisfies the contract, clone only
+to satisfy an incidental signature, add a generic conversion wrapper solely
+for convenience, or use `Cow` without a real borrow-or-own behavior. Do not
+replace a validated domain type with a primitive parameter or introduce a
+wrapper whose conversion, error, allocation, ambiguity, or compatibility
+effects are unowned.
+
+## Typed Outcomes
+
+Return typed `invalid` when the selected Rust mechanism contradicts the
+accepted contract, ownership, lifetime, consumer, or semantic facts. Return
+typed `unsupported` when a valid contract has no supported Rust expression
+for the selected toolchain or consumers. Return typed `unavailable` when a
+required contract, owner, consumer capability, toolchain fact, or evidence
+claim cannot be established.
+
+Do not fall back to an incumbent signature, universal derive set, conventional
+trait shape, trait object, generic wrapper, owned parameter, clone, primitive
+type, successful compile, or smallest diff.
+
+## Verification
+
+Evidence covers applicable public consumers, trait semantics, downstream
+implementation or sealing, dispatch behavior, ownership and borrowing,
+allocation and conversion, compatibility, ignored-result behavior, and the
+actual supported toolchain. Compile success proves only that the selected
+program is accepted by that compiler invocation; it does not prove semantic,
+consumer, compatibility, performance, or documentation claims.

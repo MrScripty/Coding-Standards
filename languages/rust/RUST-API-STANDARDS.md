@@ -1,7 +1,9 @@
 # Rust API Standards
 
-Crate architecture, API design, error handling, feature contracts, and
-correct-by-construction rules for Rust codebases.
+Canonical Rust API mechanisms are migrating to the
+[Rust API profile](../../profiles/languages/rust/api.md). Generic contracts
+remain with their routed owners. This legacy file retains authority only for
+sections not yet moved.
 
 ## Correct-By-Construction Policy
 
@@ -163,32 +165,17 @@ being asserted.
 
 ## Public Contract Traits
 
-Rules:
-
-- Implement or derive `Debug` for most public types.
-- Implement `Display` for user-facing or error-like types.
-- Derive `Clone`, `Copy`, `Eq`, `Ord`, `Hash`, and `Default` only when their
-  semantics are correct and cheap enough.
-- Use `#[must_use]` on guard types, validated values, builders, and return
-  values that are almost certainly bugs when ignored.
-- Use `#[non_exhaustive]` on public enums or structs when future extension is
-  likely.
-- Seal traits that downstream crates should use but not implement.
-- Prefer associated types when one implementation has one natural output type.
-- Use trait objects only when runtime polymorphism is required; otherwise prefer
-  generics for static dispatch.
+Select public contract trait mechanisms through the canonical
+[Rust API profile](../../profiles/languages/rust/api.md#public-contract-trait-mechanisms).
+This legacy route defines no derive, display, result-use, extension, dispatch,
+associated-type, generic, sealing, or trait-object default.
 
 ## Parameter Ergonomics
 
-Rules:
-
-- Accept borrowed data when ownership is not needed: `&str`, `&Path`, `&[u8]`.
-- Use `impl AsRef<Path>` or `impl AsRef<str>` for ergonomic read-only APIs.
-- Use `impl Into<String>` or `impl Into<PathBuf>` only when the function stores
-  or owns the value.
-- Use `Cow<'_, T>` when mutation is rare and borrowing is common.
-- Avoid accepting `String` when `&str` is sufficient.
-- Avoid cloning inputs just to satisfy an API shape.
+Select Rust parameter and ownership mechanisms through the canonical
+[Rust API profile](../../profiles/languages/rust/api.md#parameter-and-ownership-mechanisms).
+This legacy route defines no borrowing, ownership, conversion-wrapper, `Cow`,
+allocation, cloning, primitive, or signature default.
 
 ## Feature Contracts
 
@@ -236,4 +223,3 @@ Required documentation:
 Do not document obvious implementation mechanics. Document invariants,
 contracts, safety obligations, compatibility expectations, and why a design
 exists.
-

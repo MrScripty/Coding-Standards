@@ -49,7 +49,7 @@ for text in 'Those concerns do not share one canonical' \
   '## Ordered Implementation' 'suite labels as evidence' 'typed diagnostics' \
   'no normative or legacy standard' '## Refined Verification Boundary' \
   'eight Verification children' 'final legacy-closure child' \
-  'Row 20 child `20.1` creates the missing Rust API owner'; do
+  'Row 20 child `20.2` splits `STD-0707` and `STD-0708`'; do
   rg -F -q "$text" "$REPORT"
 done
 
@@ -74,7 +74,7 @@ next_slice_block="$(awk '
   capture { print }
 ' "$PLAN")"
 [[ "$next_slice_block" == *'row 20'* ]]
-for id in STD-0706 STD-0714; do
+for id in STD-0707 STD-0708; do
   [[ "$next_slice_block" == *"$id"* ]]
 done
 
