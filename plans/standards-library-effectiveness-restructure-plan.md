@@ -6,13 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Row 20 is accepted and closed; row 21 owner creation,
-candidate inspection, and workspace inheritance are accepted, and Rust feature
-selection child 21.4 is active.
+**Current phase:** Row 20 is accepted and closed; row 21 owner creation through
+feature mechanisms are accepted, and Rust dependency graph inspection child
+21.5 is active.
 
-**Next slice:** Milestone 7.4b11e for row 21 child 21.4 `STD-0738`, `STD-0739`,
-and `STD-0740`; split generic feature authority from Cargo dependency feature
-mechanisms and move concrete manifests to non-normative reference.
+**Next slice:** Milestone 7.4b11f for row 21 child 21.5 `STD-0741`, `STD-0742`,
+`STD-0743`, `STD-0744`, `STD-0745`, and `STD-0746`; split claim-matched graph
+inspection from Cargo tree mechanisms and move concrete command pipelines to
+non-normative reference.
 
 **Acceptance status:** `partial`
 
@@ -1707,9 +1708,15 @@ all structural/routing fixtures pass.
      Eleven decisions and three exact dispositions pass without member-count,
      root-placement, centralization, or incumbent-inheritance defaults; child
      `21.4` becomes active.
-   - `7.4b11e` (`Planned`): split `STD-0738` generic feature authority from
-     Cargo dependency feature mechanisms and move `STD-0739` and `STD-0740`
-     manifests to non-normative Rust dependency reference.
+   - `7.4b11e` (`Accepted`): implement the corrected artifact-surface boundary,
+     retaining Rust source and public API feature mechanisms in Rust API while
+     moving Cargo manifest dependency feature mechanisms to Rust Dependency.
+     Move `STD-0739` and `STD-0740` manifests to non-normative reference;
+     fifteen dependency and sixteen API decisions plus exact dispositions pass
+     without broad, minimal, optional-category, `cfg`, or conflict defaults.
+   - `7.4b11f` (`Planned`): split `STD-0741` claim-matched graph inspection from
+     Cargo tree mechanisms and move `STD-0742` through `STD-0746` command
+     pipelines to non-normative Rust dependency reference.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public

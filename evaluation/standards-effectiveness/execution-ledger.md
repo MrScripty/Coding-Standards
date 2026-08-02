@@ -5654,6 +5654,35 @@ contract. No normative standards content changed.
 **Next slice:** `7.4b11e`, implement the corrected child `21.4` boundary and
 move `STD-0739` and `STD-0740` manifests to non-normative reference.
 
+## Milestone 7.4b11e: Rust Dependency Feature Mechanisms
+
+**Outcome:** Accepted implementation slice.
+
+Rust Dependency now owns Cargo manifest dependency feature optionality,
+forwarding, grouping, and target declarations after generic feature contracts
+are accepted. Rust API was narrowed in the same slice to Rust source `cfg`,
+public API feature exposure, and compile-time diagnostics. No manifest mechanism
+or compatibility alias remains in Rust API. Concrete manifests and source
+examples moved to non-normative Rust dependency reference.
+
+**No-fallback result:** broad or minimal feature sets, empty defaults,
+dependency-category optionality, `dep:` syntax, target placement, `cfg`,
+conflict handling, documentation placement, and command matrices cannot select
+a feature policy or mechanism.
+
+**Verification:** fifteen Cargo manifest mechanism decisions, sixteen Rust API
+mechanism decisions, owner non-overlap and legacy negative coverage, three new
+exact dispositions plus preserved `STD-0715` lineage, row decomposition,
+execution-train, and complete repository verification pass. The train advances
+to 344 completed and 245 remaining identifiers across 96 completed and 29
+pending logical clusters, with child `21.5` active.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b11f`, split `STD-0741` claim-matched graph inspection from
+Cargo tree mechanisms and move `STD-0742` through `STD-0746` commands to
+non-normative Rust dependency reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

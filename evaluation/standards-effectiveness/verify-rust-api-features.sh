@@ -31,12 +31,14 @@ while IFS=$'\t' read -r case_id dependencies contracts library documentation \
   }
 done < "$FIXTURE"
 
-for text in '## Cargo Feature Expression Mechanisms' \
+for text in '## Rust Source Feature Expression Mechanisms' \
   'After Dependencies selects feature, optional-dependency, default, target' \
   'selects supported real consumer configurations; Documentation selects durable' \
   'artifacts; and Verification selects claim-matched evidence' \
-  'Cargo mechanisms are not feature-policy defaults' \
-  'generic owner decisions and capability evidence'; do
+  'Rust source mechanisms are not feature-policy defaults' \
+  'Cargo manifest dependency mechanisms belong only' \
+  'configuration without the applicable generic owner decisions' \
+  'capability' 'evidence. Cargo manifest dependency mechanisms'; do
   rg -F -q "$text" "$PROFILE"
 done
 
@@ -55,4 +57,4 @@ actual="$(awk -F '\t' '$1 == "STD-0715" {
 }' "$DISPOSITIONS")"
 [[ "$actual" == "$expected" ]]
 
-printf 'Rust API features passed: 19 decisions, 1 exact disposition\n'
+printf 'Rust API features passed: 16 decisions, 1 exact disposition\n'

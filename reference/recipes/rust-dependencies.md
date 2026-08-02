@@ -59,3 +59,36 @@ tokio = { workspace = true }
 Package names, versions, features, declaration location, and inheritance must
 come from canonical ownership and resolution decisions. The examples do not
 make member count, root placement, centralization, or inheritance defaults.
+
+## Dependency Feature Examples
+
+Legacy examples contrasted broad dependency features with selected features:
+
+```toml
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+hyper = { version = "1", features = ["full"] }
+```
+
+```toml
+[dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "net", "macros"] }
+hyper = { version = "1", features = ["client", "http1"] }
+```
+
+Another legacy manifest grouped optional dependencies:
+
+```toml
+[features]
+default = []
+visualization = ["dep:plotters"]
+
+[dependencies]
+plotters = { version = "0.3", optional = true }
+```
+
+An associated Rust source example used `#[cfg(feature = "visualization")]`.
+These examples do not select broad or minimal features, empty defaults,
+optional dependency categories, forwarding syntax, package versions, `cfg`, or
+public API exposure. Adapt them only after the applicable canonical owners
+accept every represented fact.

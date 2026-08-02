@@ -27,47 +27,15 @@ Concrete manifests are non-normative examples in the
 
 ## Feature Selection
 
-Enable only the features the crate actually needs.
-
-```toml
-# BAD: Pulling in everything
-[dependencies]
-tokio = { version = "1", features = ["full"] }
-hyper = { version = "1", features = ["full"] }
-
-# GOOD: Only what is used
-[dependencies]
-tokio = { version = "1", features = ["rt-multi-thread", "net", "macros"] }
-hyper = { version = "1", features = ["client", "http1"] }
-```
-
-Heavy optional functionality must be behind explicit Cargo features:
-
-```toml
-[features]
-default = []
-rag = ["dep:lancedb", "dep:arrow-array", "dep:arrow-schema"]
-visualization = ["dep:plotters"]
-export-pdf = ["dep:printpdf"]
-
-[dependencies]
-lancedb = { version = "0.22", optional = true }
-arrow-array = { version = "53", optional = true }
-arrow-schema = { version = "53", optional = true }
-plotters = { version = "0.3", optional = true }
-printpdf = { version = "0.7", optional = true }
-```
-
-```rust
-#[cfg(feature = "visualization")]
-pub mod visualization {
-    // Only compiled when the consumer opts in.
-}
-```
-
-For public feature contracts, also follow
-[RUST-API-STANDARDS.md](RUST-API-STANDARDS.md#feature-contracts) and
-[RUST-TOOLING-STANDARDS.md](RUST-TOOLING-STANDARDS.md#optional-feature-matrix-checks).
+Generic feature policy is owned by
+[Dependencies](../../topics/dependencies.md#features-and-footprint), with
+consumer and evidence obligations in their applicable canonical owners. Cargo
+manifest dependency feature mechanisms are owned by the
+[Rust Dependency profile](../../profiles/languages/rust/dependencies.md#cargo-manifest-dependency-feature-mechanisms).
+Rust source and public API feature mechanisms are owned by the
+[Rust API profile](../../profiles/languages/rust/api.md#rust-source-feature-expression-mechanisms).
+Concrete examples are non-normative in the
+[Rust dependency recipes](../../reference/recipes/rust-dependencies.md#dependency-feature-examples).
 
 ## Tree Inspection
 

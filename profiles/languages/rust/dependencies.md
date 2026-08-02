@@ -65,6 +65,21 @@ Select inheritance per accepted consumer, release, resolver, feature, target,
 and source-identity facts. Member count, repository layout, an existing root
 manifest, or available workspace inheritance cannot require centralization.
 
+## Cargo Manifest Dependency Feature Mechanisms
+
+After Dependencies selects feature behavior, optionality, defaults, footprint,
+and target variants, express accepted dependency facts through supported Cargo
+manifest mechanisms. Applicable mechanisms include dependency `features`,
+`optional = true`, `dep:` forwarding, dependency feature grouping, and
+target-specific dependency declarations.
+
+Select each expression from the accepted consumer, compatibility, release,
+resolver, target, and evidence contracts. A manifest mechanism cannot require
+minimal or empty defaults, `full` or selected feature sets, optionality for a
+dependency category, dependency forwarding, or target placement. Rust `cfg`,
+public API exposure, and compile-time conflict diagnostics belong only to the
+Rust API profile.
+
 ## Verification
 
 Evidence covers the actual supported Cargo resolver and toolchain, affected

@@ -128,28 +128,26 @@ specific error-enum shape, prohibition of `Result<T, String>`, added context,
 or preference for `expect` over `unwrap` without the accepted contract and
 consumer facts.
 
-## Cargo Feature Expression Mechanisms
+## Rust Source Feature Expression Mechanisms
 
 After Dependencies selects feature, optional-dependency, default, target, and
 footprint behavior; Contracts selects consumer-visible compatibility; Library
 selects supported real consumer configurations; Documentation selects durable
 artifacts; and Verification selects claim-matched evidence, express the
-accepted result with supported Cargo and Rust mechanisms.
+accepted public API result with supported Rust source mechanisms.
 
-Applicable mechanisms include named Cargo features, a `default` feature set,
-optional dependency declarations, explicit dependency forwarding, `dep:`
-references, feature grouping, target-specific dependency declarations,
-item-level or module-level `cfg`, and compile-time conflict diagnostics. Select
-only mechanisms supported by the declared Cargo resolver and toolchain, and
-preserve each accepted consumer configuration without exposing an unintended
-public feature or silently changing behavior.
+Applicable mechanisms include item-level or module-level `cfg`, public item and
+module exposure under an accepted feature contract, and compile-time conflict
+diagnostics. Select only mechanisms supported by the declared Rust toolchain,
+and preserve each accepted consumer configuration without exposing an
+unintended public API or silently changing behavior.
 
-Cargo mechanisms are not feature-policy defaults. Do not require minimal or
-empty defaults, `dep:` syntax, optionality for expensive/platform/unsafe/binding
-dependencies, avoidance or acceptance of mutually exclusive features,
-`compile_error!`, README or crate-doc placement, default/all/no-default command
-matrices, `cargo hack`, or an all-features configuration without the applicable
-generic owner decisions and capability evidence.
+Rust source mechanisms are not feature-policy defaults. Do not require `cfg`,
+public feature exposure, mutually exclusive feature handling, `compile_error!`,
+README or crate-doc placement, command matrices, or an all-features
+configuration without the applicable generic owner decisions and capability
+evidence. Cargo manifest dependency mechanisms belong only to the Rust
+Dependency profile.
 
 ## Rustdoc Expression Mechanisms
 
