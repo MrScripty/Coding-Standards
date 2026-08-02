@@ -1606,9 +1606,14 @@ all structural/routing fixtures pass.
      Documentation authority, preserving the obsolete parent as an index
      disposition and splitting durable traceability policy from non-normative
      maps, commands, hook YAML, and provider syntax.
-   - `7.4b9q` (`Planned`): refine `STD-0698` under Implementation authority
-     for change-description evidence without provider, template, installation,
-     or checklist defaults.
+   - `7.4b9q` (`Planned`): split `STD-0698` under Implementation authority for
+     change-description evidence while extracting GitHub template placement and
+     installation commands to a non-normative Implementation recipe without
+     provider, pull-request, template, heading, or checklist defaults.
+   - Row 19 change-evidence split replan (`Accepted`): retain Implementation as
+     the sole canonical owner for child `19.16`, give `STD-0698` one split
+     disposition, and create `reference/recipes/implementation.md` for provider
+     and template examples. Keep dependency and setup children unchanged.
    - Row 19 traceability-lineage replan (`Accepted`): replace former children
      `19.15` and `19.16` with one Documentation-owned package for `STD-0696`
      and `STD-0697`; renumber the remaining children without changing their

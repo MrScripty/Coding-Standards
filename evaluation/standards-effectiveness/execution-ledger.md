@@ -5182,6 +5182,25 @@ clusters, with child `19.16` active.
 
 **Next slice:** `7.4b9q`, route pull-request template enforcement.
 
+## Row 19 Change-Evidence Policy And Template Recipe Split Replan
+
+**Outcome:** Accepted planning correction.
+
+Lookahead found that `STD-0698` combines durable change-context requirements
+with a universal pull-request-template claim and GitHub-specific placement and
+copy commands. Direct routing would make provider and template syntax normative;
+moving the section whole to reference would discard useful review policy.
+
+Child `19.16` therefore retains Implementation as sole canonical owner and gives
+`STD-0698` one split disposition. Provider and template examples move only to a
+new non-normative Implementation recipe. Dependency and setup children remain
+unchanged.
+
+**No-fallback result:** pull request, provider, template, fixed headings,
+checklist, duplicated rationale, and installation commands are not defaults.
+
+**Next slice:** `7.4b9q`, implement the reviewed change-evidence split.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

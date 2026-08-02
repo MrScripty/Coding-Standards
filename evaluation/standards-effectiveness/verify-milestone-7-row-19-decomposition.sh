@@ -24,6 +24,7 @@ for text in '## Proposed Owner Contract' 'does not own what evidence proves' \
   'Child `19.12` applies the split boundary' \
   'Child `19.13` applies the same boundary' \
   'Child `19.15` reconciles replacement lineage' \
+  'Child `19.16` keeps Implementation' \
   '## Implementation Sequence' '## Re-plan Triggers'; do
   rg -F -q "$text" "$RPT"
 done
@@ -45,11 +46,13 @@ rg -F -q 'Row 19 formatting split replan (`Accepted`)' "$P"
 rg -F -q 'Row 19 CI orchestration split replan (`Accepted`)' "$P"
 rg -F -q 'Row 19 debt and automation-cost split replan (`Accepted`)' "$P"
 rg -F -q 'Row 19 traceability-lineage replan (`Accepted`)' "$P"
+rg -F -q 'Row 19 change-evidence split replan (`Accepted`)' "$P"
 awk -F '\t' '$1==19&&$2==8&&$5=="profiles/languages/typescript.md"&&$7=="pre-slice-review"&&$9~/non-normative Tooling reference/{f=1}END{exit !f}' "$O"
 awk -F '\t' '$1==19&&$2==9&&$5=="workflows/tooling.md"&&$9~/VS Code format-on-save Prettier ESLint pairing/{f=1}END{exit !f}' "$O"
 awk -F '\t' '$1==19&&$2==12&&$5=="workflows/tooling.md"&&$9~/GitHub fail-fast summary continue-on-error/{f=1}END{exit !f}' "$O"
 awk -F '\t' '$1==19&&$2==13&&$5=="workflows/tooling.md"&&$9~/GitHub permissions concurrency setup cache/{f=1}END{exit !f}' "$O"
 awk -F '\t' '$1==19&&$2==15&&$3=="STD-0696,STD-0697"&&$5=="workflows/documentation.md"&&$9~/pre-migration Decision Traceability lineage/{f=1}END{exit !f}' "$O"
+awk -F '\t' '$1==19&&$2==16&&$3=="STD-0698"&&$5=="workflows/implementation.md"&&$9~/GitHub template placement installation/{f=1}END{exit !f}' "$O"
 [[ -e "$R/workflows/tooling.md" ]]
 [[ -e "$R/reference/recipes/tooling.md" ]]
 printf 'Milestone 7 row-19 decomposition passed: 50 IDs across 18 children\n'

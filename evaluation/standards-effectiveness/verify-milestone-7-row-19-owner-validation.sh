@@ -16,6 +16,7 @@ expected=(STD-{0654..0703})
 [[ "$(awk -F '\t' '$1=="STD-0692"&&$2=="workflows/tooling.md"&&$3=="split"{n++}END{print n+0}' "$F")" -eq 1 ]]
 [[ "$(awk -F '\t' '$1=="STD-0696"&&$2=="workflows/documentation.md"&&$3=="index"{n++}END{print n+0}' "$F")" -eq 1 ]]
 [[ "$(awk -F '\t' '$1=="STD-0697"&&$2=="workflows/documentation.md"&&$3=="split"{n++}END{print n+0}' "$F")" -eq 1 ]]
+[[ "$(awk -F '\t' '$1=="STD-0698"&&$2=="workflows/implementation.md"&&$3=="split"{n++}END{print n+0}' "$F")" -eq 1 ]]
 
 for owner in workflows/tooling.md workflows/verification.md \
   workflows/implementation.md workflows/commit.md workflows/documentation.md \
@@ -64,6 +65,8 @@ rg -F -q 'Row 19 CI orchestration split replan (`Accepted`)' \
 rg -F -q 'Row 19 debt and automation-cost split replan (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q 'Row 19 traceability-lineage replan (`Accepted`)' \
+  "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q 'Row 19 change-evidence split replan (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 [[ -e "$R/workflows/tooling.md" ]]
 [[ -e "$R/reference/recipes/tooling.md" ]]

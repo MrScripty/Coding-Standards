@@ -43,7 +43,7 @@ STD-0694	reference	move	ci-recipe
 STD-0695	workflows/verification.md	route	evidence-scheduling
 STD-0696	workflows/documentation.md	index	obsolete-directory-validation-parent-lineage
 STD-0697	workflows/documentation.md	split	traceability-policy-and-reference-recipe
-STD-0698	workflows/implementation.md	route	pr-enforcement
+STD-0698	workflows/implementation.md	split	change-evidence-and-reference-recipe
 STD-0699	topics/dependencies.md	route	dependency-auditing
 STD-0700	topics/dependencies.md	route	tool-provisioning
 STD-0701	reference	move	tool-install-recipe

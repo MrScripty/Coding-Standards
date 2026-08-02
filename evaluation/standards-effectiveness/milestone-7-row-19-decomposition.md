@@ -83,6 +83,12 @@ association, explicit diff inputs, and typed diagnostics. Maps, commands, hook
 YAML, and provider syntax move only to non-normative reference. The remaining
 children are renumbered without changing their ownership or dependency order.
 
+Child `19.16` keeps Implementation as sole canonical owner for selecting change
+description evidence from risk, affected contracts, decisions, review needs,
+and Verification claims. `STD-0698` receives one `split` disposition while
+GitHub template placement, installation commands, headings, and checklist
+syntax move only to a non-normative Implementation recipe.
+
 ## Implementation Sequence
 
 1. Create the bounded Tooling owner with hook orchestration (`19.1`).
