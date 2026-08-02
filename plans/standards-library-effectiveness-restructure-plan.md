@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.17 are accepted; minimum
-setup and command examples for child 19.18 are active.
+**Current phase:** All 18 Tooling children are accepted; row 20 requires
+pre-slice owner review because the canonical Rust API profile does not exist.
 
-**Next slice:** Milestone 7.4b9s for `STD-0701` and `STD-0702`; move minimum
-setup and command examples to non-normative Tooling reference without
-installation-checklist, required-tool, package-manager, or command defaults.
+**Next slice:** Milestone 7.4b10a for row 20 `STD-0706` through `STD-0716`;
+validate the boundary and creation contract for missing owner
+`profiles/languages/rust/api.md` before normative implementation.
 
 **Acceptance status:** `partial`
 
@@ -1617,9 +1617,19 @@ all structural/routing fixtures pass.
      installation, or command defaults. Twelve focused lineage decisions, two
      exact dispositions, and all 149 repository checkers pass; the execution
      train advances to 321 completed and 268 remaining identifiers.
-   - `7.4b9s` (`Planned`): move `STD-0701` and `STD-0702` to
+   - `7.4b9s` (`Accepted`): move `STD-0701` and `STD-0702` to
      non-normative Tooling reference without installation-checklist,
-     required-tool, package-manager, command, script, or hook defaults.
+     required-tool, package-manager, command, script, or hook defaults. Ten
+     focused reference decisions, two exact move dispositions, and all 150
+     repository checkers pass; the execution train advances to 323 completed
+     and 266 remaining identifiers.
+   - Row 20 Rust API owner review (`Re-plan required`): `STD-0706` through
+     `STD-0716` target missing owner `profiles/languages/rust/api.md`.
+     Validate its applicability, exclusions, dependencies, precedence, typed
+     outcomes, and overlap with generic Contracts, Errors, Boundaries, and the
+     Rust language profile before creating or populating it.
+   - `7.4b10a` (`Planned`): perform the row 20 Rust API owner review and
+     freeze a useful owner-creation contract before any normative migration.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

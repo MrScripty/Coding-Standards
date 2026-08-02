@@ -5245,6 +5245,28 @@ pass. The execution train reports 321 completed and 268 remaining IDs across
 **Next slice:** `7.4b9s`, move minimum setup and command examples to
 non-normative Tooling reference.
 
+## Milestone 7.4b9s: Tool Setup Reference
+
+**Outcome:** Accepted implementation slice.
+
+The legacy minimum-setup list, package scripts, commands, flags, globs, and
+ESLint note now reside only in non-normative Tooling reference. The legacy
+parent routes to that example while preserving canonical Tooling selection and
+Dependencies provisioning authority.
+
+**No-fallback result:** minimum setup, required tool category, product,
+package-manager, script, command, hook, flag, glob, and command-success behavior
+are not defaults.
+
+**Verification:** 10 reference-boundary decisions, legacy negative coverage,
+and two exact move dispositions pass. All 150 repository checkers pass. The
+execution train reports 323 completed and 266 remaining IDs across 86 completed
+and 28 pending logical clusters, with row 20 active.
+
+**Next slice:** stop for row 20 pre-slice owner review. The proposed canonical
+Rust API profile is missing and must receive a validated owner contract before
+normative implementation.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

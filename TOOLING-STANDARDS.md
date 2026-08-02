@@ -266,41 +266,12 @@ or success default.
 
 ## Tool Installation Checklist
 
-This heading is an index for the non-normative setup and command examples below.
+This heading indexes the non-normative
+[legacy setup and package-script examples](reference/recipes/tooling.md#legacy-tool-setup-and-package-script-example).
 Canonical dependency satisfaction and provisioning authority belong to
 [Dependencies](topics/dependencies.md#satisfaction-and-provisioning). The
 heading defines no required tool set, installation checklist, package manager,
 command, or implicit provisioning authority.
-
-### Minimum Setup
-
-1. **EditorConfig** - `.editorconfig` file
-2. **Formatter** - Prettier or equivalent
-3. **Linter** - ESLint or language equivalent
-4. **Pre-commit hooks** - Lefthook or Husky
-
-### Commands to Add
-
-```json
-// package.json
-{
-  "scripts": {
-    "lint": "npm run lint:critical && npm run lint:no-new",
-    "lint:critical": "node scripts/lint-critical.mjs",
-    "lint:no-new": "node scripts/lint-no-new.mjs",
-    "lint:full": "eslint src/",
-    "lint:fix": "eslint src/ --fix",
-    "format": "prettier --write \"src/**/*.{ts,js,json,css}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,js,json,css}\"",
-    "typecheck": "tsc --noEmit",
-    "test": "jest",
-    "prepare": "lefthook install"
-  }
-}
-```
-
-> **Note:** ESLint 9+ flat config ignores `--ext` flags. File filtering is handled by `files`
-> patterns in `eslint.config.js`. Use `eslint src/` without `--ext`.
 
 ---
 

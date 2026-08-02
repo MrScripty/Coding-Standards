@@ -65,6 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9s` moves minimum setup and command examples to non-normative
-Tooling reference without installation-checklist, required-tool,
-package-manager, script, command, or hook defaults.
+Row 20 requires pre-slice owner review for `STD-0706` through `STD-0716`
+because `profiles/languages/rust/api.md` does not yet exist.

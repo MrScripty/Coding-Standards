@@ -17,6 +17,39 @@ selection, configuration, automation, and scheduling. [Dependencies](../../topic
 owns dependency selection and installation. Projects must make those decisions
 before adapting an example below.
 
+## Legacy Tool Setup And Package Script Example
+
+The legacy setup example listed EditorConfig, a formatter such as Prettier, a
+linter such as ESLint, and a hook runner such as Lefthook or Husky. This list is
+historical illustration only. It does not establish a minimum setup, required
+tool category, product choice, installation checklist, or provisioning
+authority.
+
+One legacy `package.json` example used:
+
+```json
+{
+  "scripts": {
+    "lint": "npm run lint:critical && npm run lint:no-new",
+    "lint:critical": "node scripts/lint-critical.mjs",
+    "lint:no-new": "node scripts/lint-no-new.mjs",
+    "lint:full": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "format": "prettier --write \"src/**/*.{ts,js,json,css}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js,json,css}\"",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "prepare": "lefthook install"
+  }
+}
+```
+
+For ESLint versions using flat configuration, the legacy note omitted `--ext`
+and relied on configuration `files` patterns. Product version, package manager,
+script names, command composition, paths, globs, flags, check allocation, hook
+installation, and result interpretation must come from canonical decisions;
+none of this example is a default.
+
 ## Hook Feedback
 
 A local hook can shorten feedback time for formatting, linting, type, or test

@@ -36,7 +36,8 @@ for text in '## Audit And Review' '## Automation And Bootstrap' \
 done
 
 rg -F -q '[Dependencies](topics/dependencies.md#audit-and-review)' "$LEGACY"
-rg -F -q 'This heading is an index for the non-normative setup and command examples below.' "$LEGACY"
+rg -F -q 'This heading indexes the non-normative' "$LEGACY"
+rg -F -q 'legacy setup and package-script examples' "$LEGACY"
 rg -F -q 'heading defines no required tool set' "$LEGACY"
 ! rg -F -q '[DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md)' "$LEGACY"
 
@@ -57,8 +58,8 @@ next_slice_block="$(awk '
   capture && /^$/ { exit }
   capture { print }
 ' "$PLAN")"
-[[ "$next_slice_block" == *'Milestone 7.4b9s'* ]]
-[[ "$next_slice_block" == *'STD-0701'* ]]
-[[ "$next_slice_block" == *'STD-0702'* ]]
+[[ "$next_slice_block" == *'row 20'* ]]
+[[ "$next_slice_block" == *'STD-0706'* ]]
+[[ "$next_slice_block" == *'STD-0716'* ]]
 
 printf 'Dependency audit lineage passed: 12 decisions, 2 exact dispositions\n'
