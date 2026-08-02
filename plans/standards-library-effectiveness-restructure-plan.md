@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.13 are accepted; complete CI
-workflow examples for child 19.14 are active.
+**Current phase:** Tooling children 19.1 through 19.14 are accepted; repository
+structure validation for child 19.15 is active.
 
-**Next slice:** Milestone 7.4b9o for `STD-0693` and `STD-0694`; move the complete
-CI workflow and its provider actions, cache, and diagnostic syntax to
-non-normative reference without workflow or product defaults.
+**Next slice:** Milestone 7.4b9p for `STD-0696`; select repository-structure
+validation from owned repository contracts without directory, file, or README
+assumptions.
 
 **Acceptance status:** `partial`
 
@@ -1600,9 +1600,12 @@ all structural/routing fixtures pass.
      package-manager, cache, and diagnostic syntax to non-normative Tooling
      recipes without ratchet, cache, timeout, path-filter, or cancellation
      defaults.
-   - `7.4b9o` (`Planned`): move `STD-0693` and `STD-0694` into non-normative
+   - `7.4b9o` (`Accepted`): move `STD-0693` and `STD-0694` into non-normative
      complete CI workflow and provider-action examples without workflow,
      provider, action, cache, command, or diagnostic defaults.
+   - `7.4b9p` (`Planned`): refine `STD-0696` into repository-structure
+     validation selected from owned repository contracts without directory,
+     file, or README assumptions.
    - Row 19 debt and automation-cost split replan (`Accepted`): retain Tooling
      as the sole canonical owner for child `19.13`; refine `STD-0691` directly
      and give `STD-0692` one split disposition. Extract GitHub permissions,

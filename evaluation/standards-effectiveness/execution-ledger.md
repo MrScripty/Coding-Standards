@@ -5120,6 +5120,24 @@ provider/package examples were removed with the authoritative legacy section.
 
 **Next slice:** `7.4b9o`, move complete CI workflow examples to reference.
 
+## Milestone 7.4b9o: Non-Normative Complete CI Workflow
+
+**Outcome:** Accepted implementation slice.
+
+The complete GitHub Actions workflow, including provider actions, caches,
+commands, timeouts, matrices, dependency edges, summaries, and shell logic, now
+resides only in non-normative Tooling reference.
+
+**No-fallback result:** the example cannot select a provider, workflow topology,
+gate, command, cache, diagnostic, or failure-handling behavior.
+
+**Verification:** reference authority, complete-example preservation, legacy
+negative coverage, and two exact move dispositions pass. All 146 repository
+checkers pass. The execution train reports 316 completed and 273 remaining IDs
+across 82 completed and 33 pending logical clusters, with child `19.15` active.
+
+**Next slice:** `7.4b9p`, govern repository-structure validation.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

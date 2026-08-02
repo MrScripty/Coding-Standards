@@ -51,7 +51,7 @@ rg -F -q '`7.4b9k` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b9l` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9o` (`Planned`)' \
+rg -F -q '`7.4b9p` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q 'Row 19 TypeScript split replan (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"

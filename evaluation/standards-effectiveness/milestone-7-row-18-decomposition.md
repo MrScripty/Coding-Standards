@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9o` moves complete CI workflow and provider examples to
-non-normative reference without workflow, product, or command defaults.
+Milestone `7.4b9p` selects repository-structure validation from owned contracts
+without directory, file, or README assumptions.
