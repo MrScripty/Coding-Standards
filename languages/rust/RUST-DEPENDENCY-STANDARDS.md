@@ -9,24 +9,12 @@ authority.
 
 ## Before Adding A Crate
 
-Check transitive dependency cost before adding a new crate:
-
-```bash
-# How many transitive deps does this crate bring?
-cargo tree -p <crate> --depth=0 -e normal
-
-# Is it already in the tree as a transitive dep?
-cargo tree -i <crate>
-```
-
-Rules:
-
-- Prefer `std` when the required behavior is small and well-supported.
-- Avoid adding large framework crates for one small utility.
-- If a crate adds 100+ transitive dependencies, it must be feature-gated or
-  justified in writing.
-- Dependencies used by only one workspace member belong in that member, not in
-  the root manifest.
+Candidate selection policy is owned by
+[Dependencies](../../topics/dependencies.md#candidate-selection). Supported
+Cargo inspection mechanisms are owned by the
+[Rust Dependency profile](../../profiles/languages/rust/dependencies.md#candidate-inspection-mechanisms).
+Concrete commands are non-normative examples in the
+[Rust dependency recipes](../../reference/recipes/rust-dependencies.md#candidate-inspection-examples).
 
 ## Workspace Dependency Inheritance
 

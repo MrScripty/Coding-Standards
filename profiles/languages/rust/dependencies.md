@@ -37,6 +37,21 @@ Do not fall back to the incumbent manifest, root workspace, inherited
 dependency, enabled feature, cached resolution, installed audit tool,
 conventional command, successful compile, or smallest diff.
 
+## Candidate Inspection Mechanisms
+
+After Dependencies defines the requirement, candidate set, material comparison
+facts, and evidence claim, select supported Cargo graph queries that expose the
+required facts. Applicable mechanisms include package-scoped trees, dependency
+kind and target filters, depth controls, feature views, duplicate views, and
+reverse-dependency paths.
+
+The query scope and interpretation must match the accepted consumer, target,
+feature, resolver, and dependency-kind facts. A graph query cannot select a
+candidate, establish that a standard-library implementation is suitable, or
+turn a transitive-count threshold, framework label, current graph presence, or
+written justification into policy. Unsupported queries and incomplete graph
+facts retain the typed outcomes above.
+
 ## Verification
 
 Evidence covers the actual supported Cargo resolver and toolchain, affected

@@ -1,0 +1,15 @@
+case	contract	candidate	consumer	resolver	query_support	evidence	fallback	expected
+package_tree	accepted	selected	known	known	supported	complete	none	allow
+reverse_path	accepted	selected	known	known	supported	complete	none	allow
+missing_contract	missing	selected	known	known	supported	complete	none	typed-unavailable
+unknown_candidate	accepted	unknown	known	known	supported	complete	none	typed-unavailable
+unknown_consumer	accepted	selected	unknown	known	supported	complete	none	typed-unavailable
+unknown_resolver	accepted	selected	known	unknown	supported	complete	none	typed-unavailable
+unsupported_query	accepted	selected	known	known	unsupported	complete	none	typed-unsupported
+incomplete_graph	accepted	selected	known	known	supported	incomplete	none	typed-unavailable
+contradictory_scope	contradictory	selected	known	known	supported	complete	none	typed-invalid
+transitive_threshold	accepted	selected	known	known	supported	complete	count-threshold	typed-invalid
+standard_library_default	accepted	selected	known	known	supported	complete	std-preference	typed-invalid
+current_graph_default	accepted	selected	known	known	supported	complete	current-presence	typed-invalid
+framework_label	accepted	selected	known	known	supported	complete	framework-size	typed-invalid
+written_justification	accepted	selected	known	known	supported	complete	written-justification	typed-invalid

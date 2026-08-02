@@ -55,6 +55,11 @@ signal cannot select or reject a candidate by itself. Do not choose an
 in-house implementation, incumbent package, largest framework, smallest
 package, or first available alternative as fallback.
 
+Inspection output is candidate evidence, not selection authority. A dependency
+graph, reverse-dependency path, transitive count, or standard-library
+alternative can inform applicable contract facts but cannot independently
+accept or reject a candidate.
+
 ## Resolution And Reproducibility
 
 Select manifest constraints, lock or snapshot material, feature sets, target

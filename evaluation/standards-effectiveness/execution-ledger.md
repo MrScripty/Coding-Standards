@@ -5571,6 +5571,34 @@ remain to be created.
 `STD-0733` Cargo inspection mechanisms and move `STD-0734` command syntax to
 non-normative Rust dependency reference.
 
+## Milestone 7.4b11c: Rust Dependency Candidate Inspection
+
+**Outcome:** Accepted implementation slice.
+
+Dependencies retains requirement, comparison, evidence, and candidate-selection
+authority. The Rust Dependency profile now selects supported Cargo graph-query
+mechanisms only after those facts are accepted. The package-scoped tree and
+reverse-dependency commands moved to a non-normative Rust dependency recipe.
+
+**No-fallback result:** transitive counts, standard-library availability,
+framework labels, current graph presence, written justification, command
+success, and concrete Cargo flags cannot select or reject a candidate.
+Incomplete facts remain typed `unavailable`; unsupported queries remain typed
+`unsupported`; contradictory scopes and fallback decisions remain typed
+`invalid`.
+
+**Verification:** fourteen candidate-inspection decisions, canonical owner and
+reference authority checks, legacy negative coverage, three exact dispositions,
+row decomposition, execution-train, and complete repository verification pass.
+The train advances to 338 completed and 251 remaining identifiers across 94
+completed and 31 pending logical clusters, with child `21.3` active.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b11d`, split `STD-0735` ownership authority from Cargo
+workspace inheritance mechanisms and move `STD-0736` and `STD-0737` manifest
+syntax to non-normative Rust dependency reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

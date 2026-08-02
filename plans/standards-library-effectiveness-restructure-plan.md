@@ -6,13 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Row 20 is accepted and closed; row 21 owner review and owner
-creation are accepted, and Rust dependency candidate inspection child 21.2 is
+**Current phase:** Row 20 is accepted and closed; row 21 owner creation and
+candidate inspection are accepted, and Rust workspace dependency child 21.3 is
 active.
 
-**Next slice:** Milestone 7.4b11c for row 21 child 21.2 `STD-0732`, `STD-0733`,
-and `STD-0734`; split dependency candidate authority from Cargo inspection
-mechanisms and move concrete command recipes to non-normative reference.
+**Next slice:** Milestone 7.4b11d for row 21 child 21.3 `STD-0735`, `STD-0736`,
+and `STD-0737`; split dependency ownership from Cargo workspace inheritance
+mechanisms and move concrete manifests to non-normative reference.
 
 **Acceptance status:** `partial`
 
@@ -1695,9 +1695,15 @@ all structural/routing fixtures pass.
      route `STD-0731`, and reject generic-policy ownership and Cargo fallback
      defaults. Fourteen owner decisions and one exact index disposition pass;
      all repository checkers pass, and child `21.2` becomes active.
-   - `7.4b11c` (`Planned`): split `STD-0732` dependency candidate authority
-     from `STD-0733` Cargo inspection mechanisms and move `STD-0734` command
-     syntax to non-normative Rust dependency reference.
+   - `7.4b11c` (`Accepted`): preserve candidate selection authority in
+     Dependencies, add contract-driven Cargo graph-query mechanisms to the Rust
+     Dependency profile, and move `STD-0733` and `STD-0734` command syntax to
+     non-normative reference. Fourteen decisions and three exact dispositions
+     pass without transitive-count, standard-library, framework, current-graph,
+     or written-justification defaults; child `21.3` becomes active.
+   - `7.4b11d` (`Planned`): split `STD-0735` dependency ownership from Cargo
+     workspace inheritance mechanisms and move `STD-0736` and `STD-0737`
+     manifest syntax to non-normative Rust dependency reference.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent
