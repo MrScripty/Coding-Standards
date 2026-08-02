@@ -5735,6 +5735,37 @@ completed and 27 pending logical clusters, with child `21.7` active.
 measurement mechanisms, move `STD-0750` and `STD-0751` commands to
 non-normative reference, and close the legacy source.
 
+## Milestone 7.4b11h: Rust Dependency Build-Cost Measurement And Closure
+
+**Outcome:** Accepted.
+
+Performance retains authority for build-cost claims, measurement contracts,
+budgets, thresholds, and optimization decisions. Rust Dependency now owns only
+supported Cargo timing and dependency-graph measurement mechanisms selected
+after that contract is accepted. The two command pipelines moved to
+non-normative Rust dependency reference, and the legacy source is now a pure
+migration index.
+
+Fourteen focused decisions distinguish supported timing and graph-count
+measurements from typed invalid, unsupported, and unavailable outcomes. Exact
+negative cases reject the legacy fixed percentage, required alternative,
+feature-reduction, leaf-crate, count-threshold, and command-success defaults.
+`STD-0749` has one split disposition; `STD-0750` and `STD-0751` each have one
+move disposition.
+
+The execution train advances to 355 completed and 234 remaining identifiers
+across 99 completed and 26 pending logical clusters, with row 22 active.
+
+**Verification:** build-cost decisions, graph-inspection and audit-adapter
+regressions, row 21 exact-ID closure, owner/population checks, execution-train
+counts, metadata, links, plan structure, and the complete repository suite.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b12a`, review row 22 `STD-0810` through `STD-0820`, validate
+the missing Rust Release owner boundary and prerequisites, and decompose the
+row before creating or populating the owner.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

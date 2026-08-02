@@ -6,13 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Row 20 is accepted and closed; row 21 owner creation through
-dependency auditing are accepted, and Rust dependency build-cost child 21.7 is
-active.
+**Current phase:** Rows 20 and 21 are accepted and closed; row 22 Rust release
+owner review is active.
 
-**Next slice:** Milestone 7.4b11h for row 21 child 21.7 `STD-0749`, `STD-0750`,
-and `STD-0751`; split performance claims from Cargo cost-measurement mechanisms,
-move command pipelines to non-normative reference, and close the legacy source.
+**Next slice:** Milestone 7.4b12a for row 22 `STD-0810` through `STD-0820`;
+validate the missing Rust Release owner boundary and prerequisites, and
+decompose the row before creating or populating the owner.
 
 **Acceptance status:** `partial`
 
@@ -1725,9 +1724,15 @@ all structural/routing fixtures pass.
      and `STD-0748` search examples to non-normative reference. Twelve decisions
      and two exact dispositions pass without product, install, PR, nightly,
      precision, masking, severity, schedule, or empty-result defaults.
-   - `7.4b11h` (`Planned`): split `STD-0749` performance claims from Cargo
-     build-cost measurement mechanisms, move `STD-0750` and `STD-0751` command
-     pipelines to non-normative reference, and close the legacy source.
+   - `7.4b11h` (`Accepted`): preserve performance claim, measurement-contract,
+     budget, threshold, and optimization authority in Performance; add only
+     supported Cargo build-cost measurement mechanisms to Rust Dependency;
+     move `STD-0750` and `STD-0751` command pipelines to non-normative
+     reference; and close the legacy source without percentage, alternative,
+     feature-reduction, leaf-crate, count, cache, or command-success defaults.
+   - `7.4b12a` (`Planned`): review row 22 `STD-0810` through `STD-0820`, validate
+     the missing Rust Release owner boundary and dependencies, and produce an
+     exact owner-bounded decomposition before normative movement.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public

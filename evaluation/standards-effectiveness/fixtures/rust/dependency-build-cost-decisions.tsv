@@ -1,0 +1,15 @@
+case	claim	measurement	inputs	baseline	capability	evidence	fallback	expected
+cargo_timing	accepted	timing	known	known	supported	complete	none	allow
+graph_count	accepted	graph-count	known	known	supported	complete	none	allow
+missing_claim	missing	timing	known	known	supported	complete	none	typed-unavailable
+contradictory_claim	contradictory	timing	known	known	supported	complete	none	typed-invalid
+unknown_inputs	accepted	timing	unknown	known	supported	complete	none	typed-unavailable
+missing_baseline	accepted	timing	known	missing	supported	complete	none	typed-unavailable
+unsupported_measurement	accepted	timing	known	known	unsupported	complete	none	typed-unsupported
+incomplete_evidence	accepted	timing	known	known	supported	incomplete	none	typed-unavailable
+fixed_percentage	accepted	timing	known	known	supported	complete	fixed-percentage	typed-invalid
+required_alternative	accepted	timing	known	known	supported	complete	required-alternative	typed-invalid
+feature_reduction	accepted	timing	known	known	supported	complete	feature-reduction	typed-invalid
+leaf_crate	accepted	timing	known	known	supported	complete	leaf-crate	typed-invalid
+count_threshold	accepted	graph-count	known	known	supported	complete	count-threshold	typed-invalid
+command_success	accepted	timing	known	known	supported	complete	command-success	typed-invalid

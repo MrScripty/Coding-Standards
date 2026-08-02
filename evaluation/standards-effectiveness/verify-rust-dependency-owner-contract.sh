@@ -25,7 +25,7 @@ for text in '## Mechanism Authority' 'Generic owners select dependency requireme
   '## Verification'; do rg -F -q "$text" "$P"; done
 rg -F -q 'profiles/languages/rust/dependencies.md' "$R/STANDARDS-ROUTER.md"
 rg -F -q 'profiles/languages/rust/dependencies.md' "$R/README.md"
-rg -F -q '[Rust Dependency profile](../../profiles/languages/rust/dependencies.md)' "$L"
+rg -F -q '[Rust dependency mechanisms](../../profiles/languages/rust/dependencies.md)' "$L"
 actual="$(awk -F '\t' '$1 == "STD-0731" {print $1 "\t" $2 "\t" $3 "\t" $4}' "$S/consolidation-dispositions.tsv")"
 expected=$'STD-0731\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\tprofiles/languages/rust/dependencies.md\tindex'
 [[ "$actual" == "$expected" ]]

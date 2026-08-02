@@ -47,9 +47,9 @@ for text in 'Level: `REFERENCE`' 'This material is non-normative' \
   rg -F -q "$text" "$RECIPE"
 done
 
-rg -F -q 'topics/dependencies.md#candidate-selection' "$LEGACY"
-rg -F -q 'profiles/languages/rust/dependencies.md#candidate-inspection-mechanisms' "$LEGACY"
-rg -F -q 'reference/recipes/rust-dependencies.md#candidate-inspection-examples' "$LEGACY"
+rg -F -q '# Rust Dependency Standards Migration Index' "$LEGACY"
+rg -F -q '[Dependencies](../../topics/dependencies.md)' "$LEGACY"
+rg -F -q '[Rust dependency recipes](../../reference/recipes/rust-dependencies.md)' "$LEGACY"
 ! rg -F -q '100+ transitive dependencies' "$LEGACY"
 ! rg -F -q 'cargo tree -p <crate>' "$LEGACY"
 ! rg -F -q 'cargo tree -i <crate>' "$LEGACY"

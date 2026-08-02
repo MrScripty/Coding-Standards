@@ -87,7 +87,7 @@ rg -F -q '`7.4b8ax` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'row 21'* ]]
+[[ "$next_slice_line" == *'row 22'* ]]
 
 "$S/verify-milestone-7-row-13-decomposition.sh"
 "$S/check-plan-structure.sh" "$PLAN"

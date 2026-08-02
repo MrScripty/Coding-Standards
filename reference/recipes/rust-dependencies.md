@@ -126,3 +126,24 @@ These products and commands are alternatives, not a required suite. They do not
 select installation, PR or nightly cadence, precision, masking interpretation,
 finding severity, blocking behavior, or disposition. Canonical owners must
 select those facts and account for each adapter's actual detection contract.
+
+## Build-Cost Measurement Examples
+
+One legacy example requested Cargo build timing output:
+
+```bash
+cargo build --timings
+```
+
+Another counted unique dependency graph entries for a selected package:
+
+```bash
+cargo tree -p <crate> --prefix none --no-dedupe | sort -u | wc -l
+```
+
+The accepted Performance measurement contract selects the package, workspace,
+target, features, profile, resolver, cache state, aggregation, baseline, and
+interpretation. These commands do not establish a 20 percent threshold,
+required alternative search, feature reduction, leaf-crate placement, or
+optimization decision. Command success is not acceptance evidence beyond the
+declared measurement it actually produced.

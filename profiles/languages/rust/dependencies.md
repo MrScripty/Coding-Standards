@@ -99,6 +99,21 @@ severity, blocking behavior, finding disposition, or fallback. Tool availability
 and an empty result cannot establish satisfaction; missing capability or
 evidence retains a typed outcome.
 
+## Build-Cost Measurement Mechanisms
+
+After Performance defines the build-cost claim, metric, workload, environment,
+baseline, variability policy, and decision threshold, use supported Cargo
+timing and dependency-graph mechanisms to measure the accepted claim. Select
+package, workspace, target, feature, profile, resolver, cache, and aggregation
+scope from that measurement contract.
+
+A timing report or dependency count proves only its declared measurement. It
+does not select a percentage threshold, alternative dependency, feature
+reduction, leaf-crate placement, optimization, or acceptance decision. Missing
+claim authority, representative inputs, baseline, or required capability
+retains the typed outcomes above; do not substitute a conventional command,
+available graph, warm cache, or successful build.
+
 ## Verification
 
 Evidence covers the actual supported Cargo resolver and toolchain, affected
