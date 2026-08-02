@@ -34,8 +34,8 @@ STD-0685	reference	retire	formatter-output
 STD-0686	workflows/tooling.md	split	tool-responsibility-and-reference-recipe
 STD-0687	workflows/tooling.md	retain	ci-orchestration
 STD-0688	workflows/verification.md	route	acceptance-gates
-STD-0689	workflows/tooling.md	retain	failure-reporting
-STD-0690	workflows/tooling.md	retain	ci-scheduling
+STD-0689	workflows/tooling.md	split	failure-reporting-and-reference-recipe
+STD-0690	workflows/tooling.md	split	ci-scheduling-and-reference-recipe
 STD-0691	workflows/tooling.md	retain	debt-ratchet
 STD-0692	workflows/tooling.md	retain	ci-cost
 STD-0693	reference	move	ci-recipe

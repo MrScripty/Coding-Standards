@@ -5038,6 +5038,26 @@ logical clusters, with child `19.12` active.
 
 **Next slice:** `7.4b9m`, govern CI orchestration and scheduling.
 
+## Row 19 CI Orchestration Policy And Recipe Split Replan
+
+**Outcome:** Accepted planning correction.
+
+Lookahead found that `STD-0689` mixes provider-neutral failure aggregation with
+GitHub Actions matrix, summary-job, and error-continuation syntax, while
+`STD-0690` mixes dependency and scheduling policy with a fixed three-tier model,
+GitHub dependency syntax, and launcher/package commands.
+
+Child `19.12` therefore keeps Tooling as its sole canonical owner, directly
+refines `STD-0687`, and gives `STD-0689` and `STD-0690` one split disposition
+each. Provider and command syntax moves only to non-normative Tooling recipes.
+Child `19.14` remains unchanged for full workflow YAML examples.
+
+**Discovered follow-up:** `STD-0692` contains a duplicated sentence about live
+matrix fail-fast behavior. Remove it in the bounded child `19.13` slice while
+reviewing that section's authority and examples.
+
+**Next slice:** `7.4b9m`, implement the reviewed CI orchestration split package.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

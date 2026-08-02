@@ -58,6 +58,15 @@ Tooling recipes. `STD-0681` and `STD-0683` remain direct Tooling refinements.
 Child `19.10` remains independently responsible for standalone formatter
 command and output examples.
 
+Child `19.12` applies the split boundary to CI orchestration. Tooling remains
+the sole canonical owner for provider-neutral dependency graphs, failure
+aggregation, scheduling, cancellation, and reporting. `STD-0687` is a direct
+refinement; `STD-0689` and `STD-0690` receive one `split` disposition each while
+GitHub matrix, `fail-fast`, `if: always()`, `continue-on-error`, `needs`,
+`success()`, fixed-tier, launcher, and package-command examples move only to
+non-normative Tooling recipes. Child `19.14` remains independently responsible
+for the full CI workflow YAML.
+
 ## Implementation Sequence
 
 1. Create the bounded Tooling owner with hook orchestration (`19.1`).
@@ -67,7 +76,8 @@ command and output examples.
    product recipes (`19.6`-`19.8`).
 5. Split formatting policy from product recipes, then move standalone command
    examples (`19.9`-`19.10`).
-6. Separate Verification gate meaning from CI orchestration (`19.11`-`19.12`).
+6. Separate Verification gate meaning from provider-neutral CI orchestration
+   and product recipes (`19.11`-`19.12`).
 7. Govern debt/cost and move CI recipes (`19.13`-`19.14`).
 8. Route repository, documentation, PR, dependency, and setup concerns
    (`19.15`-`19.19`).

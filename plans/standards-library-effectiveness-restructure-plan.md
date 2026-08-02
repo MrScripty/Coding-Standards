@@ -1595,6 +1595,12 @@ all structural/routing fixtures pass.
    - `7.4b9m` (`Planned`): refine `STD-0687`, `STD-0689`, and `STD-0690` into
      CI orchestration and scheduling without provider, fail-fast, tier, or
      parallel defaults.
+   - Row 19 CI orchestration split replan (`Accepted`): retain Tooling as the
+     sole canonical owner for child `19.12`; refine `STD-0687` directly and use
+     split dispositions for `STD-0689` and `STD-0690`. Extract GitHub matrix,
+     fail-fast, summary-job, continue-on-error, dependency, tier, launcher, and
+     package-command syntax only to non-normative Tooling recipes. Keep child
+     `19.14` unchanged for the full workflow YAML.
    - Row 19 formatting split replan (`Accepted`): retain Tooling as the sole
      canonical owner for child `19.9`; refine `STD-0681` and `STD-0683`
      directly, use split dispositions for `STD-0682` and `STD-0686`, and
