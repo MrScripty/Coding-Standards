@@ -5766,6 +5766,23 @@ counts, metadata, links, plan structure, and the complete repository suite.
 the missing Rust Release owner boundary and prerequisites, and decompose the
 row before creating or populating the owner.
 
+## Milestone 7.4b11i: Rust Dependency Route Remediation
+
+**Outcome:** Accepted.
+
+Row 22 lookahead found that the Rust language profile still linked to the
+removed `before-adding-a-crate` anchor after row 21 closed the dependency legacy
+source. The route now targets the canonical Rust Dependency profile. This is a
+navigation correction only: no normative rule, disposition, owner contract, or
+execution cursor changed.
+
+**Verification:** Rust profile metadata and repository links pass.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b12a`, decompose row 22 before creating or populating the
+missing Rust Release owner.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

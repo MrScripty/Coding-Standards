@@ -1730,6 +1730,9 @@ all structural/routing fixtures pass.
      move `STD-0750` and `STD-0751` command pipelines to non-normative
      reference; and close the legacy source without percentage, alternative,
      feature-reduction, leaf-crate, count, cache, or command-success defaults.
+   - `7.4b11i` (`Accepted`): replace the stale Rust profile route to the removed
+     dependency legacy anchor with the canonical Rust Dependency profile link;
+     no normative ownership, disposition, or execution cursor changes.
    - `7.4b12a` (`Planned`): review row 22 `STD-0810` through `STD-0820`, validate
      the missing Rust Release owner boundary and dependencies, and produce an
      exact owner-bounded decomposition before normative movement.

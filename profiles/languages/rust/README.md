@@ -65,7 +65,7 @@ here:
 
 - [Remaining API guidance](../../../languages/rust/RUST-API-STANDARDS.md)
 - [Remaining Async mechanisms](../../../languages/rust/RUST-ASYNC-STANDARDS.md#runtime-boundaries)
-- [Remaining dependency guidance](../../../languages/rust/RUST-DEPENDENCY-STANDARDS.md#before-adding-a-crate)
+- [Rust dependency mechanisms](dependencies.md)
 - [Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)
 - [Remaining security guidance](../../../languages/rust/RUST-SECURITY-STANDARDS.md)
 - [Tooling](../../../languages/rust/RUST-TOOLING-STANDARDS.md)
