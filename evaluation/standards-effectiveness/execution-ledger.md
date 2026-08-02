@@ -5683,6 +5683,32 @@ pending logical clusters, with child `21.5` active.
 Cargo tree mechanisms and move `STD-0742` through `STD-0746` commands to
 non-normative Rust dependency reference.
 
+## Milestone 7.4b11f: Rust Dependency Graph Inspection
+
+**Outcome:** Accepted implementation slice.
+
+Generic owners retain dependency graph claim and evidence authority. Rust
+Dependency now consolidates supported full, direct, reverse, unique, duplicate,
+feature, target, and dependency-kind Cargo graph views. All five concrete Cargo
+and shell commands moved to non-normative Rust dependency reference.
+
+**No-fallback result:** dependency addition, upgrade, or release schedules;
+full or direct scope; count and duplicate thresholds; command success;
+dependency quality, necessity, performance, and release readiness cannot be
+inferred from a graph query.
+
+**Verification:** fifteen graph-inspection decisions, claim-scope and legacy
+negative coverage, six exact dispositions, row decomposition, execution-train,
+and complete repository verification pass. The train advances to 350 completed
+and 239 remaining identifiers across 97 completed and 28 pending logical
+clusters, with child `21.6` active.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b11g`, split `STD-0747` audit policy from supported Rust
+audit mechanisms and move `STD-0748` source-search syntax to non-normative
+reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

@@ -39,25 +39,13 @@ Concrete examples are non-normative in the
 
 ## Tree Inspection
 
-Use `cargo tree` before dependency additions, dependency upgrades, and release
-audits:
-
-```bash
-# Full tree
-cargo tree
-
-# Direct deps only
-cargo tree --depth 1
-
-# Who depends on a specific crate?
-cargo tree -i lancedb
-
-# Total unique deps for one workspace member
-cargo tree -p my-crate --prefix none --no-dedupe | sort -u | wc -l
-
-# Find duplicate versions of the same crate
-cargo tree --duplicates
-```
+Dependency graph claims and evidence requirements are selected by
+[Dependencies](../../topics/dependencies.md) and
+[Verification](../../workflows/verification.md). Supported Cargo graph-query
+mechanisms are owned by the
+[Rust Dependency profile](../../profiles/languages/rust/dependencies.md#candidate-inspection-mechanisms).
+Concrete commands are non-normative in the
+[Rust dependency recipes](../../reference/recipes/rust-dependencies.md#dependency-graph-inspection-examples).
 
 ## Auditing
 

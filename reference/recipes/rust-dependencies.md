@@ -92,3 +92,22 @@ These examples do not select broad or minimal features, empty defaults,
 optional dependency categories, forwarding syntax, package versions, `cfg`, or
 public API exposure. Adapt them only after the applicable canonical owners
 accept every represented fact.
+
+## Dependency Graph Inspection Examples
+
+Legacy examples used these Cargo graph views and one shell pipeline:
+
+```bash
+cargo tree
+cargo tree --depth 1
+cargo tree -i lancedb
+cargo tree -p my-crate --prefix none --no-dedupe | sort -u | wc -l
+cargo tree --duplicates
+```
+
+The accepted claim selects package, target, feature, dependency-kind, resolver,
+depth, reverse-path, deduplication, and aggregation behavior. These commands do
+not establish a required pre-addition, upgrade, or release schedule; a count or
+duplicate threshold; dependency quality or necessity; or release readiness.
+Shell pipeline success proves only the declared transformation of its selected
+input.

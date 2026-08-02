@@ -1,0 +1,16 @@
+case	claim	consumer	resolver	graph_scope	capability	evidence	fallback	expected
+full_graph	accepted	known	known	full	supported	complete	none	allow
+direct_graph	accepted	known	known	direct	supported	complete	none	allow
+reverse_graph	accepted	known	known	reverse	supported	complete	none	allow
+unique_graph	accepted	known	known	unique	supported	complete	none	allow
+duplicate_graph	accepted	known	known	duplicates	supported	complete	none	allow
+missing_claim	missing	known	known	full	supported	complete	none	typed-unavailable
+unknown_consumer	accepted	unknown	known	full	supported	complete	none	typed-unavailable
+unknown_resolver	accepted	known	unknown	full	supported	complete	none	typed-unavailable
+incomplete_evidence	accepted	known	known	full	supported	incomplete	none	typed-unavailable
+unsupported_query	accepted	known	known	full	unsupported	complete	none	typed-unsupported
+contradictory_claim	contradictory	known	known	full	supported	complete	none	typed-invalid
+release_schedule	accepted	known	known	full	supported	complete	release-audit	typed-invalid
+count_threshold	accepted	known	known	unique	supported	complete	count-threshold	typed-invalid
+duplicate_threshold	accepted	known	known	duplicates	supported	complete	duplicate-threshold	typed-invalid
+command_success	accepted	known	known	full	supported	complete	command-success	typed-invalid

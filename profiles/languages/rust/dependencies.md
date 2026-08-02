@@ -52,6 +52,12 @@ turn a transitive-count threshold, framework label, current graph presence, or
 written justification into policy. Unsupported queries and incomplete graph
 facts retain the typed outcomes above.
 
+Graph inspection scope comes from the claim being evaluated. Full, direct,
+reverse, unique, duplicate, feature, target, or dependency-kind views prove
+only their declared graph facts for the selected resolver inputs. They cannot
+establish dependency quality, necessity, release readiness, performance, or a
+required audit schedule by themselves.
+
 ## Workspace Inheritance Mechanisms
 
 After Dependencies assigns each requirement to its owning consumers and

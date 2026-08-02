@@ -7,13 +7,12 @@
 **Plan status:** `Active`
 
 **Current phase:** Row 20 is accepted and closed; row 21 owner creation through
-feature mechanisms are accepted, and Rust dependency graph inspection child
-21.5 is active.
+dependency graph inspection are accepted, and Rust dependency auditing child
+21.6 is active.
 
-**Next slice:** Milestone 7.4b11f for row 21 child 21.5 `STD-0741`, `STD-0742`,
-`STD-0743`, `STD-0744`, `STD-0745`, and `STD-0746`; split claim-matched graph
-inspection from Cargo tree mechanisms and move concrete command pipelines to
-non-normative reference.
+**Next slice:** Milestone 7.4b11g for row 21 child 21.6 `STD-0747` and
+`STD-0748`; split multi-owner audit policy from supported Rust audit mechanisms
+and move the concrete source-search command to non-normative reference.
 
 **Acceptance status:** `partial`
 
@@ -1714,9 +1713,15 @@ all structural/routing fixtures pass.
      Move `STD-0739` and `STD-0740` manifests to non-normative reference;
      fifteen dependency and sixteen API decisions plus exact dispositions pass
      without broad, minimal, optional-category, `cfg`, or conflict defaults.
-   - `7.4b11f` (`Planned`): split `STD-0741` claim-matched graph inspection from
-     Cargo tree mechanisms and move `STD-0742` through `STD-0746` command
-     pipelines to non-normative Rust dependency reference.
+   - `7.4b11f` (`Accepted`): preserve dependency graph claim and evidence
+     authority in generic owners, consolidate supported Cargo graph queries in
+     Rust Dependency, and move `STD-0742` through `STD-0746` commands to
+     non-normative reference. Fifteen decisions and six exact dispositions pass
+     without lifecycle schedule, graph-scope, count, duplicate, or command
+     success defaults; child `21.6` becomes active.
+   - `7.4b11g` (`Planned`): split `STD-0747` multi-owner audit policy from
+     supported Rust audit mechanisms and move `STD-0748` source-search syntax
+     to non-normative Rust dependency reference.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public
