@@ -5431,6 +5431,33 @@ lifecycle checks pass. All 155 repository checkers pass.
 
 **Next slice:** `7.4b10f`, implement the corrected child 20.5 ownership split.
 
+## Milestone 7.4b10f: Cargo Feature Expression Mechanisms
+
+**Outcome:** Accepted implementation slice.
+
+Dependencies retains feature selection and footprint authority; Contracts
+retains consumer behavior and compatibility; Library retains real consumer
+configuration authority; Documentation retains durable artifact authority; and
+Verification retains claim-matched evidence authority. Rust API now selects
+only supported Cargo feature and compile-time enforcement mechanisms.
+
+**No-fallback result:** minimal or empty defaults, `dep:` syntax, dependency
+optionality categories, mutual-exclusion policy, `compile_error!`, README or
+crate-doc placement, fixed Cargo command matrices, `cargo hack`, and an
+all-features configuration are not defaults.
+
+**Verification:** 19 feature-expression decisions, canonical route and legacy
+negative coverage, and one exact split disposition pass. All 156 repository
+checkers pass. The execution train reports 333 completed and 256 remaining IDs
+across 91 completed and 28 pending logical clusters, with child `20.6` active.
+
+**Deviation:** the first focused run exposed checker assertions that crossed
+Markdown line boundaries. They were replaced with line-local semantic
+fragments before acceptance; policy and ownership outcomes did not change.
+
+**Next slice:** `7.4b10g`, split Documentation authority from Rustdoc
+mechanisms and close the Rust API legacy source.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

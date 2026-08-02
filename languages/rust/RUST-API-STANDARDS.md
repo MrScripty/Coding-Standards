@@ -83,32 +83,21 @@ allocation, cloning, primitive, or signature default.
 
 ## Feature Contracts
 
-Cargo features are part of the public contract for libraries and reusable
-workspace members.
-
-Rules:
-
-- Keep default features minimal.
-- Use `dep:` syntax for optional dependencies to avoid implicit public feature
-  names.
-- Document all public features in README and crate-level docs.
-- Make expensive, platform-specific, unsafe, or binding-specific dependencies
-  optional when consumers should not always pay their cost.
-- Do not use mutually exclusive features unless unavoidable.
-- If mutually exclusive features are unavoidable, enforce conflicts with
-  `compile_error!`.
-- Public library crates with feature flags must at minimum compile with default,
-  all-features, and no-default-features modes.
-
-Required baseline checks for crates with public feature contracts:
-
-```bash
-cargo check --workspace --all-features
-cargo check --workspace --no-default-features
-```
-
-Optional deeper checks with `cargo hack` are covered in
-[RUST-TOOLING-STANDARDS.md](RUST-TOOLING-STANDARDS.md#optional-feature-matrix-checks).
+Canonical feature selection and footprint belong to
+[Dependencies](../../topics/dependencies.md#features-and-footprint);
+consumer-visible compatibility belongs to
+[Contracts](../../topics/contracts.md#public-and-independently-deployed-evolution);
+real consumer configurations belong to the
+[Library profile](../../profiles/applications/library.md#dependencies);
+durable feature artifacts belong to
+[Documentation](../../workflows/documentation.md#contract-documentation); and
+evidence selection belongs to
+[Verification](../../workflows/verification.md#selecting-claims). Select Cargo
+expression through the
+[Rust API profile](../../profiles/languages/rust/api.md#cargo-feature-expression-mechanisms).
+This legacy route defines no minimal-default, `dep:`, optionality-category,
+mutual-exclusion, `compile_error!`, README, crate-doc, Cargo-command,
+all-features, or `cargo hack` default.
 
 ## Documentation
 

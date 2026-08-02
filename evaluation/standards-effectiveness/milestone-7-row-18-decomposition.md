@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Row 20 child `20.5` splits `STD-0715` into Dependencies and public-contract
-authority plus Cargo feature mechanisms.
+Row 20 child `20.6` splits `STD-0716` into Documentation authority and Rustdoc
+mechanisms, then closes the Rust API legacy source as an index.

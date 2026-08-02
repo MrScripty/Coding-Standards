@@ -128,6 +128,29 @@ specific error-enum shape, prohibition of `Result<T, String>`, added context,
 or preference for `expect` over `unwrap` without the accepted contract and
 consumer facts.
 
+## Cargo Feature Expression Mechanisms
+
+After Dependencies selects feature, optional-dependency, default, target, and
+footprint behavior; Contracts selects consumer-visible compatibility; Library
+selects supported real consumer configurations; Documentation selects durable
+artifacts; and Verification selects claim-matched evidence, express the
+accepted result with supported Cargo and Rust mechanisms.
+
+Applicable mechanisms include named Cargo features, a `default` feature set,
+optional dependency declarations, explicit dependency forwarding, `dep:`
+references, feature grouping, target-specific dependency declarations,
+item-level or module-level `cfg`, and compile-time conflict diagnostics. Select
+only mechanisms supported by the declared Cargo resolver and toolchain, and
+preserve each accepted consumer configuration without exposing an unintended
+public feature or silently changing behavior.
+
+Cargo mechanisms are not feature-policy defaults. Do not require minimal or
+empty defaults, `dep:` syntax, optionality for expensive/platform/unsafe/binding
+dependencies, avoidance or acceptance of mutually exclusive features,
+`compile_error!`, README or crate-doc placement, default/all/no-default command
+matrices, `cargo hack`, or an all-features configuration without the applicable
+generic owner decisions and capability evidence.
+
 ## Typed Outcomes
 
 Return typed `invalid` when the selected Rust mechanism contradicts the
