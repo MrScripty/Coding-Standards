@@ -104,6 +104,30 @@ tree; `lib.rs`, `error.rs`, `types.rs`, `platform`, test, benchmark, or example
 placement; public re-exports; `pub(crate)` implementation modules; or thin
 platform modules without the accepted architecture and consumer facts.
 
+## Failure Expression Mechanisms
+
+After Contracts selects expected absence, invariant, validation, and
+impossible-state semantics, and after Resilience selects every applicable
+operational failure, recovery, retry, degradation, and availability outcome,
+express those decisions with supported Rust mechanisms. The Rust profile does
+not infer whether a condition is absent, failed, invalid, impossible,
+recoverable, degradable, or terminal.
+
+Select `Result`, `Option`, an error type, propagation with `?`, matching,
+assertion, panic, `unreachable!`, `unwrap`, or `expect` only when the accepted
+contract gives that mechanism the required value, error, termination,
+diagnostic, and consumer semantics. An `Option` must not erase failure or
+unavailability. Panic, assertion, `unreachable!`, `unwrap`, and `expect` must
+not replace a missing proof, recovery decision, or typed outcome.
+
+These are language mechanisms, not situation defaults. Do not select them from
+an external-input label, public visibility, request or lifecycle path, test or
+example location, prototype status, compile-time construction, or a claim that
+an operation is "truly infallible." Do not mandate `thiserror`, `anyhow`, a
+specific error-enum shape, prohibition of `Result<T, String>`, added context,
+or preference for `expect` over `unwrap` without the accepted contract and
+consumer facts.
+
 ## Typed Outcomes
 
 Return typed `invalid` when the selected Rust mechanism contradicts the

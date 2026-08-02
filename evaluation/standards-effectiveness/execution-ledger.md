@@ -5381,6 +5381,33 @@ lifecycle checks pass. All 154 repository checkers pass.
 
 **Next slice:** `7.4b10e`, implement the corrected child 20.4 ownership split.
 
+## Milestone 7.4b10e: Rust Failure Expression Mechanisms
+
+**Outcome:** Accepted implementation slice.
+
+Contracts retains expected-absence, invariant, validation, and impossible-state
+authority. Resilience retains operational failure, recovery, retry,
+degradation, and availability authority. Rust API now selects only supported
+`Result`, `Option`, error, propagation, assertion, panic, `unreachable!`,
+`unwrap`, and `expect` mechanisms after every applicable contract is accepted.
+
+**No-fallback result:** situation labels, public visibility, request or
+lifecycle paths, test/example/prototype locations, compile-time construction,
+infallibility claims, error crates, string-error prohibitions, context rules,
+and `expect` preferences are not defaults.
+
+**Verification:** 18 failure-expression decisions, canonical route and legacy
+negative coverage, and two exact split dispositions pass. All 155 repository
+checkers pass. The execution train reports 332 completed and 257 remaining IDs
+across 90 completed and 29 pending logical clusters, with child `20.5` active.
+
+**Deviation:** pre-acceptance review found line-crossing prose assertions in the
+new checker and non-ASCII quotation marks in new normative prose. Both were
+corrected before acceptance; policy outcomes and ownership did not change.
+
+**Next slice:** `7.4b10f`, split Dependencies and public-contract authority from
+Cargo feature mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

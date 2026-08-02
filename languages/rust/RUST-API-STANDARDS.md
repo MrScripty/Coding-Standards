@@ -47,38 +47,25 @@ benchmark, example, thin-module, or inline-`cfg` default.
 
 ## Result, Option, Panic
 
-| Situation | Use |
-| --- | --- |
-| External input or recoverable failure | `Result<T, E>` |
-| Expected absence | `Option<T>` |
-| Internal invariant violation | `debug_assert!`, `panic!`, or `unreachable!` |
-| Compile-time impossibility | type-state, enum, trait bound, or sealed trait |
-
-Rules:
-
-- Return `Result`, not `panic!`, for fallible public APIs.
-- Prefer specific error enums with `thiserror` for libraries and production
-  code.
-- Reserve `anyhow` for top-level binaries, scripts, tests, or contexts that only
-  report errors.
-- Avoid `Result<T, String>` in public APIs.
-- Add context when adapting lower-level errors into higher-level errors.
+Canonical expected-absence, invariant, validation, and impossible-state
+semantics belong to [Contracts](../../topics/contracts.md); operational failure,
+recovery, retry, degradation, and availability belong to
+[Resilience](../../topics/resilience.md). Select Rust failure expression through
+the [Rust API profile](../../profiles/languages/rust/api.md#failure-expression-mechanisms).
+This legacy route defines no situation table, `Result`, `Option`, panic,
+assertion, `unreachable!`, error-enum, `thiserror`, `anyhow`, string-error, or
+context default.
 
 ## `unwrap` And `expect`
 
-Do not use `unwrap()` or `expect()` in production request paths, lifecycle code,
-background services, library APIs, or startup/shutdown flows.
-
-Allowed exceptions:
-
-- tests
-- examples where brevity is explicitly acceptable
-- prototypes not intended for production
-- immediately guarded invariants with a useful `expect` message
-- compile-time constants or construction that is truly infallible by design
-
-Prefer `expect("why this cannot fail")` over `unwrap()` when an invariant is
-being asserted.
+Canonical proof, invariant, impossible-state, and operational-failure authority
+belongs to [Contracts](../../topics/contracts.md) and
+[Resilience](../../topics/resilience.md). Select Rust assertion, panic,
+`unreachable!`, `unwrap`, and `expect` expression through the
+[Rust API profile](../../profiles/languages/rust/api.md#failure-expression-mechanisms).
+This legacy route defines no production-path prohibition, test, example,
+prototype, guarded-invariant, compile-time, infallibility, message, or `expect`
+preference exception.
 
 ## Public Contract Traits
 

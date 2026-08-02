@@ -6,14 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Row 20 children 20.1 through 20.3 are accepted; failure
-mechanisms for child 20.4 are active.
+**Current phase:** Row 20 children 20.1 through 20.4 are accepted; Cargo feature
+mechanisms for child 20.5 are active.
 
-**Next slice:** Milestone 7.4b10e for row 20 child 20.4 `STD-0711` and `STD-0712`;
-split Contracts absence/invariant/impossible-state authority and Resilience
-operational-failure/recovery authority from Rust `Result`, `Option`, panic,
-assertion, `unreachable!`, `unwrap`, and `expect` mechanisms without
-error-crate, context, situation-table, or exception-list defaults.
+**Next slice:** Milestone 7.4b10f for row 20 child 20.5 `STD-0715`; split
+Dependencies and public-contract authority from Cargo feature expression
+without default-feature, optional-dependency syntax, conflict, documentation,
+or command-matrix defaults.
 
 **Acceptance status:** `partial`
 
@@ -1655,12 +1654,18 @@ all structural/routing fixtures pass.
      mechanisms. Sixteen focused decisions, two exact dispositions, and all
      154 repository checkers pass; the execution train advances to 330
      completed and 259 remaining identifiers.
-   - `7.4b10e` (`Planned`): split `STD-0711` and `STD-0712` into generic
+   - `7.4b10e` (`Accepted`): split `STD-0711` and `STD-0712` into generic
      failure authority and Rust failure-expression mechanisms. Child 20.4
      ownership replan (`Accepted`) refines generic authority: Contracts owns
      expected absence, invariant violation, and impossible-state semantics;
      Resilience owns operational failure, recovery, retry, degradation, and
-     availability; Rust API owns only supported language expression.
+     availability; Rust API owns only supported language expression. Eighteen
+     focused decisions and two exact dispositions pass without situation-table,
+     error-crate, path-exception, or preference defaults. All 155 repository
+     checkers pass; the execution train advances to 332 completed and 257
+     remaining identifiers.
+   - `7.4b10f` (`Planned`): split `STD-0715` into Dependencies and public
+     contract authority plus Cargo feature mechanisms.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent
