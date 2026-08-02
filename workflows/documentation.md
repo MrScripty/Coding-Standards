@@ -124,6 +124,30 @@ An unrelated ADR cannot satisfy traceability for a changed boundary.
 Plans and pull requests link to accepted rationale. They may summarize the
 current change, but they do not become duplicate long-term owners.
 
+When automation enforces traceability, select its impact mapping from
+project-owned trigger paths or stable contract identifiers, the exact durable
+knowledge each trigger can change, the canonical artifact that owns that
+knowledge, and the accepted documentation profile. A broad directory may be a
+trigger only when every relevant change beneath it affects the same owned
+knowledge. Routine implementation paths do not acquire documentation
+obligations from location alone.
+
+Each invocation must identify the exact change input it evaluates. Staged mode
+evaluates only index state. Range mode requires explicit base and head revisions and
+evaluates both prior and current mapping state so deleting a trigger or map row
+cannot hide an obligation. A changed artifact satisfies only its mapped boundary
+or stable contract; an unrelated README, ADR, plan, or pull request is not a
+substitute.
+
+Do not default to a `src/` directory, README per directory, fixed headings,
+placeholder content, one map location, staged or range mode, a branch name,
+adjacent revisions, or a documentation artifact. Contradictory trigger,
+boundary, profile, or artifact authority is `invalid`. Missing maps, modes,
+revisions, paths, or canonical artifacts are `unavailable`. An enforcement
+mechanism unable to evaluate the selected repository state or prior mapping is
+`unsupported`; do not infer a diff, broaden the map, accept unrelated artifacts,
+or silently skip unresolved inputs.
+
 ## Quality Rules
 
 - Write project-specific information that cannot be inferred from names alone.

@@ -642,3 +642,5 @@ STD-0691	TOOLING-STANDARDS.md	workflows/tooling.md	refine	select tool-debt bound
 STD-0692	TOOLING-STANDARDS.md	workflows/tooling.md	split	select measured automation cost caching timeout filtering retention and diagnostics while extracting GitHub Node Rust cache command summary and artifact syntax to non-normative Tooling reference
 STD-0693	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative complete CI workflow example
 STD-0694	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative GitHub Actions workflow path provider actions cache commands matrix and diagnostic syntax
+STD-0696	TOOLING-STANDARDS.md	workflows/documentation.md	index	reconcile obsolete Directory Validation parent as a non-normative route to canonical Decision Traceability
+STD-0697	TOOLING-STANDARDS.md	workflows/documentation.md	split	govern documentation impact mapping explicit change inputs and typed diagnostics while extracting maps commands hook YAML and provider syntax to non-normative Documentation reference

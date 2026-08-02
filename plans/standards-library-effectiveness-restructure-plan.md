@@ -6,12 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.14 are accepted; repository
-structure validation for child 19.15 is active.
+**Current phase:** Tooling children 19.1 through 19.15 are accepted; pull-request
+template enforcement for child 19.16 is active.
 
-**Next slice:** Milestone 7.4b9p for `STD-0696` and `STD-0697`; reconcile the
-pre-migration Decision Traceability replacement under Documentation authority
-while extracting maps, commands, hook YAML, and provider syntax to reference.
+**Next slice:** Milestone 7.4b9q for `STD-0698`; route pull-request template
+enforcement to Implementation without provider, template, or checklist defaults.
 
 **Acceptance status:** `partial`
 
@@ -1603,10 +1602,13 @@ all structural/routing fixtures pass.
    - `7.4b9o` (`Accepted`): move `STD-0693` and `STD-0694` into non-normative
      complete CI workflow and provider-action examples without workflow,
      provider, action, cache, command, or diagnostic defaults.
-   - `7.4b9p` (`Planned`): reconcile `STD-0696` and `STD-0697` under
+   - `7.4b9p` (`Accepted`): reconcile `STD-0696` and `STD-0697` under
      Documentation authority, preserving the obsolete parent as an index
      disposition and splitting durable traceability policy from non-normative
      maps, commands, hook YAML, and provider syntax.
+   - `7.4b9q` (`Planned`): refine `STD-0698` under Implementation authority
+     for change-description evidence without provider, template, installation,
+     or checklist defaults.
    - Row 19 traceability-lineage replan (`Accepted`): replace former children
      `19.15` and `19.16` with one Documentation-owned package for `STD-0696`
      and `STD-0697`; renumber the remaining children without changing their

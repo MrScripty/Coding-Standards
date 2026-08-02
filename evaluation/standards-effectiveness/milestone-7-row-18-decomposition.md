@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9p` selects repository-structure validation from owned contracts
-without directory, file, or README assumptions.
+Milestone `7.4b9q` routes pull-request template enforcement to Implementation
+without provider, template, installation, or checklist defaults.

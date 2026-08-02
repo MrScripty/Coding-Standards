@@ -5160,6 +5160,28 @@ text are prohibited.
 
 **Next slice:** `7.4b9p`, implement the reviewed traceability-lineage package.
 
+## Milestone 7.4b9p: Decision-Traceability Lineage
+
+**Outcome:** Accepted implementation slice.
+
+Documentation now solely owns project-specific impact mapping, stable boundary
+association, explicit staged/range inputs, prior-map evaluation, artifact
+matching, and typed traceability diagnostics. Tooling retains only a
+non-normative route; maps, commands, hook YAML, and GitHub syntax reside in the
+Documentation recipe.
+
+**No-fallback result:** universal directory or README enforcement, broad maps,
+implicit mode or branch selection, adjacent-revision guesses, unrelated artifact
+substitution, and silent unresolved-input skips are prohibited.
+
+**Verification:** 14 policy decisions, isolated-Git traceability regressions,
+Documentation consolidation, legacy negative coverage, one index and one split
+disposition pass. All 147 repository checkers pass. The execution train reports
+318 completed and 271 remaining IDs across 83 completed and 31 pending logical
+clusters, with child `19.16` active.
+
+**Next slice:** `7.4b9q`, route pull-request template enforcement.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

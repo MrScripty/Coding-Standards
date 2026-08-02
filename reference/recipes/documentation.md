@@ -128,3 +128,103 @@ Based on Kahn's algorithm, adapted to preserve deterministic node ordering.
 Useful details may include preconditions, postconditions, invariants,
 complexity, failure outcomes, attribution, or a small text diagram. Include
 only details that are non-obvious and material to maintenance or use.
+
+
+## Decision Traceability Examples
+
+The following legacy impact-map, installation, and invocation material is
+non-normative. Canonical Documentation policy must select every represented
+boundary, artifact, input, and enforcement behavior before adaptation.
+
+
+### Impact Map
+
+Follow the
+[Documentation Workflow](workflows/documentation.md). Automated enforcement
+must operate on project-owned facts rather than treating every source change as
+a decision change.
+
+Configure only paths whose modification is known to alter a durable
+responsibility, contract, decision, or procedure:
+
+```text
+trigger_path	boundary_id	profile	artifact_path
+src/api/public-contract.ts	api	contract-readme	src/api/README.md
+src/engine/policy/	engine-policy	adr	docs/adr/ADR-001-engine-policy.md
+ops/recovery/	recovery	runbook	docs/runbooks/recovery.md
+```
+
+- `trigger_path` is an exact repository-relative path, or a prefix when it ends
+  in `/`.
+- `boundary_id` is a stable project-owned identifier.
+- `profile` is `boundary-readme`, `contract-readme`, `adr`, or `runbook`.
+- `artifact_path` is the canonical durable artifact that owns the knowledge.
+
+Do not map broad source directories unless every change beneath that prefix
+really changes the named durable knowledge. Routine implementation paths stay
+out of the map.
+
+An ADR row requires `## Affected Boundaries` with an exact entry such as:
+
+```markdown
+- `boundary:engine-policy`
+```
+
+This association prevents an unrelated changed ADR from satisfying every
+boundary. A mapped artifact is not interchangeable with another artifact type.
+
+```bash
+mkdir -p scripts .standards
+cp templates/check-decision-traceability.sh scripts/check-decision-traceability.sh
+cp templates/decision-traceability-map.tsv \
+  .standards/decision-traceability.tsv
+chmod +x scripts/check-decision-traceability.sh
+```
+
+Copy [templates/check-decision-traceability.sh](templates/check-decision-traceability.sh)
+into your repo as `scripts/check-decision-traceability.sh` and replace every
+example map row with project-owned facts.
+
+### Explicit Diff Modes
+
+Every invocation names what it inspects:
+
+- `--mode staged` reads only the index with `git diff --cached`;
+- `--mode range` requires explicit `--base-ref` and `--head-ref` commits and
+  reads their three-dot diff.
+
+Missing modes, maps, refs, or invalid refs fail with a configuration diagnostic.
+The checker never guesses a branch, falls back to another range, or silently
+skips an unresolved diff. It evaluates both prior and current map rows so
+removing a row cannot hide the change that deletes or relocates a mapped path.
+
+Add staged mode to pre-commit:
+
+```yaml
+pre-commit:
+  commands:
+    decision-traceability:
+      run: >-
+        ./scripts/check-decision-traceability.sh --mode staged
+        --map .standards/decision-traceability.tsv
+```
+
+Use explicit pull-request commits in CI:
+
+```yaml
+jobs:
+  quality:
+    steps:
+      - name: Decision traceability
+        run: |
+          ./scripts/check-decision-traceability.sh \
+            --mode range \
+            --map .standards/decision-traceability.tsv \
+            --base-ref "${{ github.event.pull_request.base.sha }}" \
+            --head-ref "${{ github.event.pull_request.head.sha }}"
+```
+
+
+The paths, boundary identifiers, profiles, artifact locations, commands, map
+location, staged hook, GitHub job, and provider expressions are examples only.
+They define no fallback impact map, diff range, or documentation requirement.
