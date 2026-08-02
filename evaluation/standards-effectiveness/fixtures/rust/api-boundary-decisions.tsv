@@ -1,0 +1,17 @@
+case	architecture	public_surface	platform	mechanism	capability	fallback	expected
+private_module	accepted	private	shared	private-module	supported	none	allow
+crate_visibility	accepted	workspace	shared	pub-crate	supported	none	allow
+public_reexport	accepted	public	shared	reexport	supported	none	allow
+target_module	accepted	public	variable	target-module	supported	none	allow
+item_cfg	accepted	private	variable	item-cfg	supported	none	allow
+contradictory_architecture	contradictory	public	shared	reexport	supported	none	typed-invalid
+missing_architecture	missing	public	shared	reexport	supported	none	typed-unavailable
+missing_public_surface	accepted	missing	shared	reexport	supported	none	typed-unavailable
+unsupported_cfg	accepted	public	variable	target-module	unsupported	none	typed-unsupported
+crate_role_default	accepted	private	shared	workspace-crate	supported	role-name	typed-invalid
+tree_default	accepted	private	shared	module	supported	fixed-tree	typed-invalid
+file_default	accepted	private	shared	module	supported	file-name	typed-invalid
+reexport_default	accepted	private	shared	reexport	supported	public-reexport	typed-invalid
+visibility_default	accepted	public	shared	pub-crate	supported	implementation-visibility	typed-invalid
+thin_platform_default	accepted	public	variable	target-module	supported	thin-platform	typed-invalid
+cfg_authority_change	accepted	public	variable	item-cfg	supported	behavior-switch	typed-invalid

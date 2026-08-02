@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Row 20 children 20.1 and 20.2 are accepted; crate and module
-mechanisms for child 20.3 are active.
+**Current phase:** Row 20 children 20.1 through 20.3 are accepted; failure
+mechanisms for child 20.4 are active.
 
-**Next slice:** Milestone 7.4b10d for row 20 child 20.3 `STD-0709` and `STD-0710`;
-split Architecture authority from Rust crate, module, visibility, and
-conditional-compilation mechanisms without role-name, tree, or placement
+**Next slice:** Milestone 7.4b10e for row 20 child 20.4 `STD-0711` and `STD-0712`;
+split generic failure authority from Rust `Result`, `Option`, panic, `unwrap`,
+and `expect` mechanisms without error-crate, context, table, or exception-list
 defaults.
 
 **Acceptance status:** `partial`
@@ -1648,8 +1648,14 @@ all structural/routing fixtures pass.
      remaining identifiers. Verification exposed and corrected one new checker
      assertion that incorrectly required prose to remain on one Markdown line;
      no policy or ownership deviation was required.
-   - `7.4b10d` (`Planned`): split `STD-0709` and `STD-0710` into
-     Architecture authority and Rust crate/module mechanisms.
+   - `7.4b10d` (`Accepted`): split `STD-0709` and `STD-0710` into Architecture
+     responsibility, dependency-direction, public-surface, and placement
+     authority plus Rust crate, module, visibility, re-export, and `cfg`
+     mechanisms. Sixteen focused decisions, two exact dispositions, and all
+     154 repository checkers pass; the execution train advances to 330
+     completed and 259 remaining identifiers.
+   - `7.4b10e` (`Planned`): split `STD-0711` and `STD-0712` into generic
+     failure authority and Rust failure-expression mechanisms.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

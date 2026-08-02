@@ -81,6 +81,29 @@ replace a validated domain type with a primitive parameter or introduce a
 wrapper whose conversion, error, allocation, ambiguity, or compatibility
 effects are unowned.
 
+## Crate And Module Boundary Mechanisms
+
+After Architecture selects responsibility, dependency direction, public
+surface, and composition boundaries, express those decisions with supported
+Rust crate membership, modules, visibility, re-exports, and conditional
+compilation. Keep business policy independent of adapters and bindings when the
+accepted architecture requires that separation; do not infer the separation
+from crate names or an incumbent workspace layout.
+
+Choose `pub`, `pub(crate)`, private modules, curated re-exports, nested modules,
+workspace crates, target modules, or item-level `cfg` from the accepted owner
+and consumer contract, compilation boundary, platform variation, test surface,
+and toolchain capability. Conditional compilation must preserve one coherent
+public contract or expose typed unsupported capability; it cannot silently
+select a different authority or behavior.
+
+Crates, modules, visibility modifiers, re-exports, and `cfg` are mechanisms,
+not architecture defaults. Do not prescribe `core`, `contracts`, `adapter`,
+`infra`, `bindings`, `app`, `server`, `cli`, or `xtask` roles; a fixed source
+tree; `lib.rs`, `error.rs`, `types.rs`, `platform`, test, benchmark, or example
+placement; public re-exports; `pub(crate)` implementation modules; or thin
+platform modules without the accepted architecture and consumer facts.
+
 ## Typed Outcomes
 
 Return typed `invalid` when the selected Rust mechanism contradicts the

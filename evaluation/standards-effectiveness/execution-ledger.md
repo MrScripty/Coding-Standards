@@ -5338,6 +5338,28 @@ ownership, dispositions, and policy outcomes did not change.
 **Next slice:** `7.4b10d`, split Architecture authority from Rust crate and
 module mechanisms.
 
+## Milestone 7.4b10d: Rust Crate And Module Mechanisms
+
+**Outcome:** Accepted implementation slice.
+
+Architecture retains responsibility, dependency-direction, public-surface,
+placement, and composition authority. The Rust API profile now selects only
+supported crate, module, visibility, re-export, and conditional-compilation
+mechanisms after that architecture is accepted.
+
+**No-fallback result:** crate-role names, workspace layout, fixed trees and file
+names, public re-exports, implementation visibility, error or feature modules,
+test/benchmark/example placement, thin platform modules, and behavior-changing
+`cfg` are not defaults.
+
+**Verification:** 16 crate/module decisions, canonical route and legacy
+negative coverage, and two exact split dispositions pass. All 154 repository
+checkers pass. The execution train reports 330 completed and 259 remaining IDs
+across 89 completed and 30 pending logical clusters, with child `20.4` active.
+
+**Next slice:** `7.4b10e`, split generic failure authority from Rust failure
+expression mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

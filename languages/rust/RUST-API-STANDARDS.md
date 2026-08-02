@@ -27,61 +27,23 @@ error-crate default.
 
 ## Crate Roles
 
-Cargo workspace members should have clear architectural roles.
-
-Common roles:
-
-- `*-core`: domain logic, validated types, pure services, traits
-- `*-contracts`: shared wire DTOs, schema types, boundary enums
-- `*-adapter` or `*-infra`: persistence, network, OS, hardware, or subprocess
-  integration
-- `*-bindings`: FFI or host-language wrappers around core
-- `*-cli`, `*-server`, `*-app`: composition roots and runtime wiring
-- `xtask`: repository-owned automation
-
-Rules:
-
-- Core crates must not depend on app, transport, binding, or framework crates.
-- Binding crates wrap core; core must compile and test without binding features.
-- App crates compose other crates and own runtime wiring.
-- Infrastructure crates may depend on core contracts but should expose narrow
-  traits or adapters upward.
-- Shared utility crates must stay small and generic. Promote workflow ownership
-  into a clearer core or app crate.
+Canonical responsibility, dependency-direction, and composition authority
+belongs to [Architecture](../../topics/architecture.md). Select Rust crate and
+module expression through the
+[Rust API profile](../../profiles/languages/rust/api.md#crate-and-module-boundary-mechanisms).
+This legacy route defines no crate-role name, workspace-member, core, contract,
+adapter, infrastructure, binding, application, server, CLI, `xtask`, utility,
+or dependency-direction default.
 
 ## Module Layout
 
-Prefer a crate root that curates the public API with re-exports.
-
-```text
-crate_name/
-├── Cargo.toml
-├── src/
-│   ├── lib.rs          # public API and re-exports
-│   ├── error.rs        # crate-level error types
-│   ├── types.rs        # common domain types
-│   ├── feature/
-│   │   ├── mod.rs      # feature API
-│   │   ├── impl.rs     # implementation details
-│   │   └── tests.rs    # unit tests
-│   └── platform/
-│       ├── mod.rs      # cfg re-exports
-│       ├── linux.rs
-│       └── windows.rs
-├── tests/              # public API integration tests
-├── benches/            # Criterion benchmarks
-└── examples/           # runnable examples
-```
-
-Rules:
-
-- Public types used by most consumers should be re-exported from `lib.rs`.
-- Keep implementation modules `pub(crate)` unless they are intentionally part
-  of the public contract.
-- Use `error.rs` for structured error types when the crate has meaningful
-  fallible operations.
-- Keep `cfg()` in thin platform modules. Inline `cfg()` is acceptable only for
-  small documented exceptions.
+Canonical module, public-surface, and placement authority belongs to
+[Architecture](../../topics/architecture.md). Select Rust visibility,
+re-export, module, crate, and conditional-compilation expression through the
+[Rust API profile](../../profiles/languages/rust/api.md#crate-and-module-boundary-mechanisms).
+This legacy route defines no source tree, file name, crate-root re-export,
+`pub(crate)`, error-module, feature-module, platform-module, integration-test,
+benchmark, example, thin-module, or inline-`cfg` default.
 
 ## Result, Option, Panic
 
