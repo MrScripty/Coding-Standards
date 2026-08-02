@@ -5512,6 +5512,36 @@ negative, and exact-disposition assertions remain unchanged.
 **Next slice:** `7.4b11a`, review row 21 `STD-0731` through `STD-0751` and
 freeze the missing Rust dependency owner contract and implementation children.
 
+## Milestone 7.4b11a: Rust Dependency Row Decomposition
+
+**Outcome:** Accepted planning slice.
+
+Row 21 is decomposed into seven ordered children. The missing Rust dependency
+profile will own only Cargo declaration, workspace, resolver, feature,
+inspection, audit-adapter, and measurement mechanisms after generic contracts
+are accepted. Dependencies, Security, Licensing, Performance, Verification,
+Tooling, and Rust API retain policy authority.
+
+**Recipe split:** fourteen concrete commands, manifests, and shell pipelines
+move to non-normative `reference/recipes/rust-dependencies.md`. The recipe cannot
+select tools, schedules, thresholds, or dependency policy.
+
+**No-fallback result:** Cargo conventions, installed tools, incumbent manifests,
+successful commands, member counts, transitive counts, percentages, audit
+products, schedules, and command sequences are not defaults.
+
+**Verification:** exact 21-ID coverage, seven ordered children, one index, six
+splits, fourteen moves, execution-train, and plan lifecycle checks pass. All
+158 repository checkers pass. The train reports 334 completed and 255 remaining
+IDs, with child `21.1` active.
+
+**Deviation:** execution-train verification required every child of the still
+missing owner to retain `owner-review` activation until owner creation. The
+overlay was aligned without changing IDs, ordering, ownership, or outcomes.
+
+**Next slice:** `7.4b11b`, create the narrow Rust dependency owner and route
+`STD-0731`.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

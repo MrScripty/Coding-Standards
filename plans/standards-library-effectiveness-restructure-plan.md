@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Row 20 children 20.1 through 20.6 are accepted and the Rust
-API legacy source is closed; row 21 Rust dependency owner review is active.
+**Current phase:** Row 20 is accepted and closed; row 21 owner review is
+accepted, and Rust dependency owner creation for child 21.1 is active.
 
-**Next slice:** Milestone 7.4b11a for row 21 owner review `STD-0731` through `STD-0751`;
-validate the proposed Rust dependency specialization, exact dispositions, and
-thin implementation children before creating the missing canonical owner.
+**Next slice:** Milestone 7.4b11b for row 21 child 21.1 `STD-0731`; create the
+narrow Rust dependency mechanism owner and parent route without generic policy,
+tool, schedule, threshold, recipe, or incumbent-manifest defaults.
 
 **Acceptance status:** `partial`
 
@@ -1682,9 +1682,16 @@ all structural/routing fixtures pass.
      file is a bounded non-normative index. All 157 repository checkers pass;
      the execution train advances to 334 completed and 255 remaining
      identifiers, with 18 legacy sources and 17 owners remaining.
-   - `7.4b11a` (`Planned`): review row 21 `STD-0731` through `STD-0751`, validate
+   - `7.4b11a` (`Accepted`): review row 21 `STD-0731` through `STD-0751`, validate
      the missing Rust dependency owner contract, and freeze implementation
-     children before owner creation.
+     children before owner creation. The row has seven children, one parent
+     index, six policy/mechanism splits, and fourteen non-normative recipe
+     moves. The Rust owner remains mechanism-only while Dependencies, Security,
+     Licensing, Performance, Verification, Tooling, and Rust API retain their
+     canonical authority. All 158 repository checkers pass; the train remains
+     at 334 completed and 255 remaining identifiers with child `21.1` active.
+   - `7.4b11b` (`Planned`): create the useful Rust dependency owner and route
+     `STD-0731` without populating later child semantics.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

@@ -49,7 +49,7 @@ for text in 'Those concerns do not share one canonical' \
   '## Ordered Implementation' 'suite labels as evidence' 'typed diagnostics' \
   'no normative or legacy standard' '## Refined Verification Boundary' \
   'eight Verification children' 'final legacy-closure child' \
-  'Row 21 owner review covers `STD-0731` through `STD-0751`'; do
+  'Row 21 child `21.1` creates the narrow Rust dependency'; do
   rg -F -q "$text" "$REPORT"
 done
 
@@ -74,7 +74,7 @@ next_slice_block="$(awk '
   capture { print }
 ' "$PLAN")"
 [[ "$next_slice_block" == *'row 21'* ]]
-for id in STD-0731 STD-0751; do
+for id in STD-0731; do
   [[ "$next_slice_block" == *"$id"* ]]
 done
 

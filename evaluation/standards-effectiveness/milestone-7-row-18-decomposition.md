@@ -65,6 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Row 21 owner review covers `STD-0731` through `STD-0751`, validates the proposed
-Rust dependency specialization, and freezes thin implementation children before
-creating the missing owner.
+Row 21 child `21.1` creates the narrow Rust dependency mechanism owner and routes
+`STD-0731` without populating later child semantics.
