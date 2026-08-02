@@ -5311,6 +5311,33 @@ across 87 completed and 32 pending logical clusters, with child `20.2` active.
 **Next slice:** `7.4b10c`, split invariant and boundary authority from Rust
 type and conversion mechanisms.
 
+## Milestone 7.4b10c: Rust Validated-Type Mechanisms
+
+**Outcome:** Accepted implementation slice.
+
+Contracts retains invariant, enforcement-point, and proof-lifetime authority;
+Security retains untrusted-input authorization. The Rust API profile now selects
+only supported proof-bearing type, constructor, enum, and fallible-conversion
+mechanisms after those contracts are accepted.
+
+**No-fallback result:** bug cost, visibility, state count, security labels,
+parse-once behavior, conversion traits, newtypes, enums, boolean replacement,
+private constructors, primitive wrappers, parser success, tests, assertions,
+and error crates are not defaults.
+
+**Verification:** 15 validated-type decisions, canonical route and legacy
+negative coverage, and two exact split dispositions pass. All 153 repository
+checkers pass. The execution train reports 328 completed and 261 remaining IDs
+across 88 completed and 31 pending logical clusters, with child `20.3` active.
+
+**Deviation:** the first complete-suite run exposed a new checker assertion that
+matched prose across a Markdown line boundary. The checker now uses stable
+line-local semantic fragments. This was a verification defect; canonical
+ownership, dispositions, and policy outcomes did not change.
+
+**Next slice:** `7.4b10d`, split Architecture authority from Rust crate and
+module mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

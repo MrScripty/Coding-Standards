@@ -1,0 +1,16 @@
+case	contract	enforcement	proof	source	mechanism	capability	fallback	expected
+newtype_constructor	accepted	construction	current	structured	newtype	supported	none	allow
+text_conversion	accepted	boundary	current	text	from-str	supported	none	allow
+structured_conversion	accepted	boundary	current	structured	try-from	supported	none	allow
+enum_state	accepted	construction	current	variant	enum	supported	none	allow
+contradictory_contract	contradictory	construction	current	structured	newtype	supported	none	typed-invalid
+missing_contract	missing	construction	current	structured	newtype	supported	none	typed-unavailable
+missing_enforcement	accepted	missing	current	structured	newtype	supported	none	typed-unavailable
+stale_proof	accepted	construction	stale	structured	newtype	supported	none	typed-invalid
+unsupported_mechanism	accepted	construction	current	structured	typestate	unsupported	none	typed-unsupported
+bug_cost_default	accepted	construction	current	structured	newtype	supported	bug-cost	typed-invalid
+state_count_default	accepted	construction	current	variant	enum	supported	state-count	typed-invalid
+parse_once_default	accepted	boundary	current	text	from-str	supported	parse-once	typed-invalid
+primitive_wrapper_default	accepted	construction	current	structured	newtype	supported	wrap-primitives	typed-invalid
+conversion_trait_default	accepted	boundary	current	text	from-str	supported	input-category	typed-invalid
+parser_as_proof	accepted	boundary	current	text	from-str	supported	parse-success	typed-invalid

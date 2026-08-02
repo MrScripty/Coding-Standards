@@ -6,12 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Row 20 child 20.1 is accepted; invariant and validated-type
-mechanisms for child 20.2 are active.
+**Current phase:** Row 20 children 20.1 and 20.2 are accepted; crate and module
+mechanisms for child 20.3 are active.
 
-**Next slice:** Milestone 7.4b10c for row 20 child 20.2 `STD-0707` and `STD-0708`;
-split generic invariant and boundary authority from Rust type and conversion
-mechanisms without severity, parse-once, or primitive-wrapper defaults.
+**Next slice:** Milestone 7.4b10d for row 20 child 20.3 `STD-0709` and `STD-0710`;
+split Architecture authority from Rust crate, module, visibility, and
+conditional-compilation mechanisms without role-name, tree, or placement
+defaults.
 
 **Acceptance status:** `partial`
 
@@ -1639,8 +1640,16 @@ all structural/routing fixtures pass.
      Fourteen focused decisions, three exact dispositions, and all 152
      repository checkers pass; the execution train advances to 326 completed
      and 263 remaining identifiers.
-   - `7.4b10c` (`Planned`): split `STD-0707` and `STD-0708` into generic
-     authority and Rust type/conversion mechanisms.
+   - `7.4b10c` (`Accepted`): split `STD-0707` and `STD-0708` into generic
+     invariant, proof-lifetime, and untrusted-input authority plus Rust
+     proof-bearing type, constructor, and fallible-conversion mechanisms.
+     Fifteen focused decisions, two exact dispositions, and all 153 repository
+     checkers pass; the execution train advances to 328 completed and 261
+     remaining identifiers. Verification exposed and corrected one new checker
+     assertion that incorrectly required prose to remain on one Markdown line;
+     no policy or ownership deviation was required.
+   - `7.4b10d` (`Planned`): split `STD-0709` and `STD-0710` into
+     Architecture authority and Rust crate/module mechanisms.
    - Row 19 dependency-audit lineage replan (`Accepted`): retain Dependencies
      as the sole canonical owner for the substantive `STD-0699` audit route,
      classify `STD-0700` as an empty parent heading with no independent

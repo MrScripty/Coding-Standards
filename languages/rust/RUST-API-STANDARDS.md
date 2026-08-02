@@ -7,68 +7,23 @@ sections not yet moved.
 
 ## Correct-By-Construction Policy
 
-Use the type system to make invalid states impossible when the bug class is
-expensive or crosses a module boundary.
-
-Use stronger type-level guarantees for:
-
-- safety-critical or security-sensitive boundaries
-- public APIs consumed across crates or teams
-- state machines with three or more meaningful states
-- protocol, capability, permission, or lifecycle constraints
-- parsed external input that downstream code must trust
-
-Do not overuse type-level machinery for:
-
-- small private helpers with obvious local invariants
-- throwaway prototypes
-- code where the domain is still being discovered
-- trivial formatting or display logic
-
-The decision test is: if this bug ships, how bad is it? Use types for expensive
-bugs; use tests and assertions for cheap bugs.
+Canonical invariant authority belongs to
+[Contracts](../../topics/contracts.md#invariant-contracts). Select a Rust
+proof-bearing representation through the
+[Rust API profile](../../profiles/languages/rust/api.md#validated-type-and-conversion-mechanisms).
+This legacy route defines no bug-cost, visibility, state-count, security-label,
+type-level-complexity, test, or assertion default.
 
 ## Parse, Do Not Re-Validate
 
-Raw external input should be parsed once at the boundary into a validated type.
-Internal code should accept the validated type, not the raw unchecked value.
-
-```rust
-pub struct Port(u16);
-
-#[derive(Debug, thiserror::Error)]
-pub enum PortError {
-    #[error("port must be non-zero")]
-    Zero,
-}
-
-impl TryFrom<u16> for Port {
-    type Error = PortError;
-
-    fn try_from(value: u16) -> Result<Self, Self::Error> {
-        if value == 0 {
-            Err(PortError::Zero)
-        } else {
-            Ok(Self(value))
-        }
-    }
-}
-
-fn start_server(port: Port) {
-    // No re-validation needed. The type is the proof.
-}
-```
-
-Rules:
-
-- Use `TryFrom` for fallible conversion from raw structured data.
-- Use `FromStr` for CLI, config, and text boundary parsing.
-- Use newtypes for values with domain invariants.
-- Prefer enums over stringly typed mode, kind, state, or action fields.
-- Replace unclear boolean parameters with named two-variant enums.
-- Keep constructors private when callers must go through validation.
-- Do not pass raw `String`, `u16`, `usize`, `PathBuf`, or byte slices through
-  internal APIs when a domain type would encode required validity.
+Canonical runtime proof and proof lifetime belong to
+[Contracts](../../topics/contracts.md#validation-proof-lifetime); untrusted
+input authorization belongs to [Security](../../topics/security.md#input-validation-authority).
+Select Rust validated types, constructors, and fallible conversions through the
+[Rust API profile](../../profiles/languages/rust/api.md#validated-type-and-conversion-mechanisms).
+This legacy route defines no parse-once, no-revalidation, `TryFrom`, `FromStr`,
+newtype, enum, boolean replacement, private-constructor, primitive-wrapper, or
+error-crate default.
 
 ## Crate Roles
 

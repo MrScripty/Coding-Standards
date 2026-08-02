@@ -44,6 +44,28 @@ to satisfy formatting, make an expensive or identity-bearing value copyable,
 invent a default state, seal an intended extension point, or make a contract
 non-exhaustive without an evolution need.
 
+## Validated Type And Conversion Mechanisms
+
+After Contracts selects an invariant owner, enforcement point, proof lifetime,
+and failure outcome, select a Rust representation that preserves those facts.
+Applicable mechanisms include a private-field newtype, enum, state-specific
+type, smart constructor, `TryFrom`, `FromStr`, or another fallible conversion
+whose success yields the accepted proof-bearing representation.
+
+Choose the mechanism from the source representation, trust boundary, invariant
+complexity, mutation paths, consumer needs, error contract, and toolchain
+capability. A type cannot preserve proof after mutation or external state
+invalidates its invariant; re-establish proof at the canonical enforcement
+point rather than trusting stale construction.
+
+Newtypes, enums, private constructors, `TryFrom`, `FromStr`, typestate, and
+named two-variant enums are mechanisms, not defaults. Do not select type-level
+complexity from subjective bug cost, a fixed state count, public visibility,
+security labels, primitive type names, a parse-once slogan, or preference over
+tests and assertions. Do not wrap every primitive, replace every boolean,
+mandate one conversion trait by input category, or treat successful parsing as
+complete operation-specific validation.
+
 ## Parameter And Ownership Mechanisms
 
 Select borrowed or owned parameters from what the operation reads, stores,
@@ -75,8 +97,10 @@ type, successful compile, or smallest diff.
 ## Verification
 
 Evidence covers applicable public consumers, trait semantics, downstream
-implementation or sealing, dispatch behavior, ownership and borrowing,
-allocation and conversion, compatibility, ignored-result behavior, and the
-actual supported toolchain. Compile success proves only that the selected
-program is accepted by that compiler invocation; it does not prove semantic,
-consumer, compatibility, performance, or documentation claims.
+implementation or sealing, dispatch behavior, invariant representation and
+proof lifetime, fallible conversion and rejected inputs, ownership and
+borrowing, allocation and conversion, compatibility, ignored-result behavior,
+and the actual supported toolchain. Compile success proves only that the
+selected program is accepted by that compiler invocation; it does not prove
+semantic, validation, consumer, compatibility, performance, or documentation
+claims.

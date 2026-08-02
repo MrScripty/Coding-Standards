@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Row 20 child `20.2` splits `STD-0707` and `STD-0708` into generic
-invariant/boundary authority and Rust type/conversion mechanisms.
+Row 20 child `20.3` splits `STD-0709` and `STD-0710` into Architecture
+authority and Rust crate/module mechanisms.
