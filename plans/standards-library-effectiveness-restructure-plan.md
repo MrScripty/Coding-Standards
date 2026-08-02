@@ -6,11 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Tooling children 19.1 through 19.15 are accepted; pull-request
-template enforcement for child 19.16 is active.
+**Current phase:** Tooling children 19.1 through 19.16 are accepted; dependency
+auditing and tool provisioning for child 19.17 are active.
 
-**Next slice:** Milestone 7.4b9q for `STD-0698`; route pull-request template
-enforcement to Implementation without provider, template, or checklist defaults.
+**Next slice:** Milestone 7.4b9r for `STD-0699` and `STD-0700`; route dependency
+auditing and tool provisioning to Dependencies without audit-tool, minimum-setup,
+installation, or command defaults.
 
 **Acceptance status:** `partial`
 
@@ -1606,10 +1607,13 @@ all structural/routing fixtures pass.
      Documentation authority, preserving the obsolete parent as an index
      disposition and splitting durable traceability policy from non-normative
      maps, commands, hook YAML, and provider syntax.
-   - `7.4b9q` (`Planned`): split `STD-0698` under Implementation authority for
+   - `7.4b9q` (`Accepted`): split `STD-0698` under Implementation authority for
      change-description evidence while extracting GitHub template placement and
      installation commands to a non-normative Implementation recipe without
      provider, pull-request, template, heading, or checklist defaults.
+   - `7.4b9r` (`Planned`): refine `STD-0699` and `STD-0700` under Dependencies
+     authority for dependency auditing and tool provisioning without audit-tool,
+     minimum-setup, installation, or command defaults.
    - Row 19 change-evidence split replan (`Accepted`): retain Implementation as
      the sole canonical owner for child `19.16`, give `STD-0698` one split
      disposition, and create `reference/recipes/implementation.md` for provider

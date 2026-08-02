@@ -1,0 +1,14 @@
+case	facts	authority	capability	evidence	fallback	expected
+supported_plan	complete	explicit	supported	complete	none	allow
+supported_review	complete	explicit	supported	complete	none	allow
+contradictory	contradictory	explicit	supported	complete	none	typed-invalid
+missing_authority	complete	missing	supported	complete	none	typed-unavailable
+missing_evidence	complete	explicit	supported	missing	none	typed-unavailable
+unsupported_review	complete	explicit	unsupported	complete	none	typed-unsupported
+pr_default	complete	explicit	supported	complete	pull-request	typed-invalid
+provider_default	complete	explicit	supported	complete	github	typed-invalid
+template_default	complete	explicit	supported	complete	template	typed-invalid
+heading_default	complete	explicit	supported	complete	fixed-headings	typed-invalid
+checklist_default	complete	explicit	supported	complete	checklist	typed-invalid
+duplicate_rationale	complete	explicit	supported	complete	duplicate-rationale	typed-invalid
+completion_default	complete	explicit	supported	complete	template-complete	typed-invalid

@@ -65,5 +65,5 @@ row-18 identifiers and accepted status for children `18.1` through `18.13`.
 
 ## Next Slice
 
-Milestone `7.4b9q` routes pull-request template enforcement to Implementation
-without provider, template, installation, or checklist defaults.
+Milestone `7.4b9r` routes dependency auditing and tool provisioning to
+Dependencies without audit-tool, setup, installation, or command defaults.

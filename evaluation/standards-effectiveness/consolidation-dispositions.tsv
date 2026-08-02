@@ -644,3 +644,4 @@ STD-0693	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative co
 STD-0694	TOOLING-STANDARDS.md	reference/recipes/tooling.md	move	non-normative GitHub Actions workflow path provider actions cache commands matrix and diagnostic syntax
 STD-0696	TOOLING-STANDARDS.md	workflows/documentation.md	index	reconcile obsolete Directory Validation parent as a non-normative route to canonical Decision Traceability
 STD-0697	TOOLING-STANDARDS.md	workflows/documentation.md	split	govern documentation impact mapping explicit change inputs and typed diagnostics while extracting maps commands hook YAML and provider syntax to non-normative Documentation reference
+STD-0698	TOOLING-STANDARDS.md	workflows/implementation.md	split	select change-description evidence from affected risk contracts decisions review needs and Verification claims while extracting GitHub template placement commands headings and checklist syntax to non-normative Implementation reference

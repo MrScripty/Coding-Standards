@@ -39,7 +39,7 @@ rg -F -q '`7.4b8bq` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 rg -F -q '`7.4b8bz` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9q` (`Planned`)' \
+rg -F -q '`7.4b9r` (`Planned`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
 printf 'Frontend owner contract passed: 17 decisions, 1 disposition\n'

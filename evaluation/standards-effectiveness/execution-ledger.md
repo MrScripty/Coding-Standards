@@ -5201,6 +5201,27 @@ checklist, duplicated rationale, and installation commands are not defaults.
 
 **Next slice:** `7.4b9q`, implement the reviewed change-evidence split.
 
+## Milestone 7.4b9q: Change-Description Evidence
+
+**Outcome:** Accepted implementation slice.
+
+Implementation now selects change-description evidence from affected risk,
+contracts, decisions, alternatives, behavioral effects, operational consequences,
+review needs, and Verification claims. GitHub template placement, commands,
+headings, and checklist syntax reside only in non-normative Implementation
+reference.
+
+**No-fallback result:** pull request, provider, template, fixed-heading,
+checklist, duplicated-rationale, and template-completion defaults are prohibited.
+Missing, contradictory, or unsupported evidence facts return typed diagnostics.
+
+**Verification:** 13 change-evidence decisions, metadata and legacy negative
+coverage, and one split disposition pass. All 148 repository checkers pass. The
+execution train reports 319 completed and 270 remaining IDs across 84 completed
+and 30 pending logical clusters, with child `19.17` active.
+
+**Next slice:** `7.4b9r`, route dependency auditing and tool provisioning.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

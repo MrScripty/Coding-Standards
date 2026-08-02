@@ -244,13 +244,13 @@ command, hook, or provider default.
 
 ### PR Template Enforcement
 
-Use a PR template so every change records problem, constraints, rationale, and
-alternatives:
-
-```bash
-mkdir -p .github
-cp templates/PULL_REQUEST_TEMPLATE.md .github/PULL_REQUEST_TEMPLATE.md
-```
+Select change-description evidence through the canonical
+[Implementation Workflow](workflows/implementation.md#change-description-evidence).
+The former GitHub template placement and installation commands are retained only
+in the non-normative
+[Implementation recipe](reference/recipes/implementation.md#pull-request-template-example).
+This legacy route defines no pull-request, provider, template, heading,
+checklist, or command default.
 
 ---
 

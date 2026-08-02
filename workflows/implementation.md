@@ -85,6 +85,30 @@ Verification must cover the changed behavior and any boundary whose contract
 changed. A passing build, startup smoke, or method-level test is not a substitute
 for the selected acceptance level.
 
+## Change-Description Evidence
+
+Select the change context reviewers and integrators require from affected risk,
+contracts, accepted decisions, alternatives, behavioral effects, migration or
+operational consequences, and Verification claims. Identify the owned artifact
+for each required fact and link durable rationale rather than copying it into a
+temporary review record.
+
+The selected evidence may reside in an active plan, change request, review
+record, commit, issue, or another project-owned artifact. Its location does not
+change what the evidence proves. Require a problem statement, constraints,
+rationale, alternatives, behavioral summary, or verification result only when
+the affected facts make that information material.
+
+Do not default to a pull request, hosting provider, template, fixed headings,
+checkbox list, command, or duplicated durable rationale. A template transports
+selected evidence; empty headings and checked boxes are not evidence.
+
+Contradictory evidence or ownership requirements are `invalid`. Missing required
+context, rationale, acceptance evidence, or owning artifact is `unavailable`.
+A review mechanism unable to represent or link the selected evidence is
+`unsupported`; do not substitute a conventional template, omit the fact, or
+infer successful review from template completion.
+
 ## State And Findings
 
 When an active plan exists:
