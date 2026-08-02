@@ -41,6 +41,9 @@ according to the crate's feature contract.
 - Route Cargo declaration, workspace, resolver, dependency-graph, audit-adapter,
   and build-cost measurement mechanisms through the
   [Rust Dependency profile](dependencies.md).
+- Route Rust toolchain, Cargo release metadata, publication-control,
+  release-adapter, and release-evidence mechanisms through the
+  [Rust Release profile](release.md).
 - Route async API and suspension-boundary selection through the
   [Rust Async profile](async.md).
 - Route Rust target selection, configuration placement, and target evidence
@@ -66,7 +69,7 @@ here:
 - [Remaining API guidance](../../../languages/rust/RUST-API-STANDARDS.md)
 - [Remaining Async mechanisms](../../../languages/rust/RUST-ASYNC-STANDARDS.md#runtime-boundaries)
 - [Rust dependency mechanisms](dependencies.md)
-- [Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)
+- [Remaining release guidance](../../../languages/rust/RUST-RELEASE-STANDARDS.md#toolchain-pinning)
 - [Remaining security guidance](../../../languages/rust/RUST-SECURITY-STANDARDS.md)
 - [Tooling](../../../languages/rust/RUST-TOOLING-STANDARDS.md)
 

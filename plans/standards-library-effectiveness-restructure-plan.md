@@ -7,11 +7,11 @@
 **Plan status:** `Active`
 
 **Current phase:** Rows 20 and 21 are accepted and closed; row 22 is decomposed,
-and Rust Release owner creation child 22.1 is active.
+the Rust Release owner exists, and toolchain child 22.2 is active.
 
-**Next slice:** Milestone 7.4b12b for row 22 child 22.1 `STD-0810`; create the
-narrow Rust Release owner and non-normative recipe boundary, route the parent,
-and add typed owner-contract evidence before population.
+**Next slice:** Milestone 7.4b12c for row 22 child 22.2 `STD-0811` and
+`STD-0812`; split reproducibility and dependency-resolution authority from Rust
+toolchain and Cargo lockfile mechanisms, and move the manifest to reference.
 
 **Acceptance status:** `partial`
 
@@ -1739,9 +1739,14 @@ all structural/routing fixtures pass.
      recipe, and Rust mechanism authority are mixed. Freeze seven ordered
      children, one exact disposition per identifier, four reference moves, and
      zero premature dispositions before owner creation.
-   - `7.4b12b` (`Planned`): create the useful narrow Rust Release owner and
-     non-normative recipe boundary with `STD-0810`, then route the parent without
-     generic policy or example defaults.
+   - `7.4b12b` (`Accepted`): create the useful narrow Rust Release owner and
+     non-normative recipe boundary with `STD-0810`; route the parent, router,
+     library index, and Rust profile; add sixteen typed owner decisions and one
+     exact disposition without generic policy or example defaults.
+   - `7.4b12c` (`Planned`): split `STD-0811` reproducibility and dependency-
+     resolution authority from Rust toolchain and Cargo lockfile mechanisms,
+     move `STD-0812` to non-normative reference, and reject version, component,
+     application/library, lockfile, and resolved-graph defaults.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public

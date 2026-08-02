@@ -17,11 +17,13 @@ mapfile -t validated < <(awk -F '\t' 'NR>1 {print $1}' "$VALIDATION")
 [[ "$(awk -F '\t' '$3=="move" {n++} END {print n+0}' "$VALIDATION")" -eq 4 ]]
 for text in '## Owner Contract' 'narrow Rust and Cargo release' 'does not own release boundaries' '## Exact Dispositions' 'Four manifest and configuration examples move' '## Ordered Children' '## Re-plan Triggers' 'checklist, threshold, or category example must remain normative'; do rg -F -q "$text" "$REPORT"; done
 rg -F -q '`7.4b12a` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b12b` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b12b` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b12c` (`Planned`)' "$PLAN"
 next="$(awk '/^\*\*Next slice:\*\*/{c=1} c&&/^$/{exit} c{print}' "$PLAN")"
-[[ "$next" == *'row 22 child 22.1'* && "$next" == *'STD-0810'* && "$next" == *'narrow Rust Release owner'* ]]
-[[ ! -e "$R/profiles/languages/rust/release.md" ]]
-[[ ! -e "$R/reference/recipes/rust-release.md" ]]
-! awk -F '\t' '$1 >= "STD-0810" && $1 <= "STD-0820" {found=1} END {exit found?0:1}' "$S/consolidation-dispositions.tsv"
+[[ "$next" == *'row 22 child 22.2'* && "$next" == *'STD-0811'* && "$next" == *'STD-0812'* ]]
+[[ -e "$R/profiles/languages/rust/release.md" ]]
+[[ -e "$R/reference/recipes/rust-release.md" ]]
+mapfile -t disposed < <(awk -F '\t' '$1 >= "STD-0810" && $1 <= "STD-0820" {print $1}' "$S/consolidation-dispositions.tsv")
+[[ "${disposed[*]}" == 'STD-0810' ]]
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-22 decomposition passed: 11 IDs across 7 children, zero premature dispositions\n'

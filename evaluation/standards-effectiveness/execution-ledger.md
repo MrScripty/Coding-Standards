@@ -5815,6 +5815,36 @@ and execution-train state.
 **Next slice:** `7.4b12b`, create the narrow Rust Release owner and
 non-normative recipe boundary with `STD-0810` before population.
 
+## Milestone 7.4b12b: Rust Release Owner Contract
+
+**Outcome:** Accepted.
+
+The narrow Rust Release profile now specializes accepted generic contracts
+through supported Rust toolchain, Cargo package/workspace release metadata,
+publication-control, release-automation adapter, and release-evidence
+mechanisms. It expressly excludes release boundaries, artifacts, versions,
+reproducibility claims, dependency and lockfile policy, licensing,
+documentation, performance, tool selection, procedures, verification claims,
+and recipes.
+
+The non-normative Rust release recipe exists before example extraction. The
+router, library index, Rust profile, and legacy parent route to the new owner.
+Sixteen decisions reject incumbent metadata, installed tools, fixed checklists,
+and command success while preserving typed invalid, unsupported, and
+unavailable outcomes. `STD-0810` has one exact index disposition.
+
+The execution train advances to 356 completed and 233 remaining identifiers
+across 100 completed and 31 pending logical clusters, with child `22.2` active.
+
+**Verification:** owner decisions, metadata dependencies, routing, reference
+non-authority, exact disposition, row decomposition, package owner state,
+execution-train counts, and affected shared plan checks.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b12c`, split `STD-0811` toolchain and lockfile authority and
+move `STD-0812` to non-normative reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

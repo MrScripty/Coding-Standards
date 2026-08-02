@@ -93,7 +93,7 @@ done
 
 rg -F -q '| Rust source, Cargo metadata, or Rust-generated artifacts change |' \
   "$ROUTER"
-rg -F -q '[Release](../../../languages/rust/RUST-RELEASE-STANDARDS.md)' \
+rg -F -q '[Rust Release profile](release.md)' \
   "$RUST_PROFILE"
 
 if rg -q '^## (Language-Specific Guidance|Release Checklist)$' "$LEGACY"; then

@@ -1,7 +1,12 @@
 # Rust Release Standards
 
-Cargo release rules for Rust workspaces. These specialize the generic
-[Release Standards](../../RELEASE-STANDARDS.md).
+Canonical Rust and Cargo release mechanisms are migrating to the
+[Rust Release profile](../../profiles/languages/rust/release.md). Generic
+release policy remains with [Release](../../workflows/release.md), and concrete
+syntax belongs in the non-normative
+[Rust release recipes](../../reference/recipes/rust-release.md). This parent is
+a migration route; unmoved sections below retain only their separately tracked
+authority.
 
 ## Toolchain Pinning
 
