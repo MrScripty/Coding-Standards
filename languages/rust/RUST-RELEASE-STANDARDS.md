@@ -52,24 +52,13 @@ Concrete root and member manifests are non-normative in the
 
 ## cargo-release
 
-For automating version bumps, tag creation, and optional crates.io publishing,
-`cargo-release` is recommended once release cadence stabilizes:
-
-```toml
-# release.toml (workspace root)
-[workspace]
-shared-version = true
-consolidate-commits = true
-tag-prefix = "v"
-
-[[pre-release-replacements]]
-file = "CHANGELOG.md"
-search = "## \\[Unreleased\\]"
-replace = "## [Unreleased]\n\n## [{{version}}] - {{date}}"
-```
-
-`cargo-release` is optional for first releases. Manual release steps are
-acceptable if they are documented and repeatable.
+Release-procedure authority belongs to [Release](../../workflows/release.md),
+and tool selection and orchestration belong to
+[Tooling](../../workflows/tooling.md). Supported Rust release-automation adapter
+mechanisms are owned by the
+[Rust Release profile](../../profiles/languages/rust/release.md#rust-release-automation-adapter-mechanisms).
+Concrete `cargo-release` configuration is non-normative in the
+[Rust release recipes](../../reference/recipes/rust-release.md#cargo-release-adapter-example).
 
 ## Rust Release Checklist
 

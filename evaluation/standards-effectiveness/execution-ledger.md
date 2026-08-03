@@ -5974,6 +5974,33 @@ reference non-authority, row/train and plan checks, and affected shared cursors.
 **Next slice:** `7.4b12g`, split `STD-0818` release-automation adapter
 mechanisms and move `STD-0819` configuration to non-normative reference.
 
+## Milestone 7.4b12g: Rust Release-Automation Adapter
+
+**Outcome:** Accepted.
+
+Release retains release-procedure and operation authority, and Tooling retains
+tool selection, configuration, and orchestration authority. Rust Release now
+expresses accepted operations only through supported Rust release-automation
+adapter mechanisms. The `cargo-release` configuration moved to non-normative
+reference under the section's split and move dispositions.
+
+Sixteen decisions reject tool, installation, cadence, manual-procedure,
+shared-version, commit-consolidation, tag, changelog, first-release, and command-
+success defaults. `STD-0818` has one exact split disposition and `STD-0819` one
+exact move disposition. The execution train advances to 365 completed and 224
+remaining identifiers across 105 completed and 26 pending logical clusters,
+with child `22.7` active.
+
+**Verification:** release-automation decisions, workspace-package-metadata
+regression, exact dispositions, Release/Tooling owner separation, canonical
+routes, reference non-authority, row/train and plan checks, and affected shared
+cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b12h`, split `STD-0820` Rust release evidence mechanisms,
+extract fixed commands to reference, and close the legacy source.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

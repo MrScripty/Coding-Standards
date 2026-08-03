@@ -94,6 +94,20 @@ Workspace membership, repository layout, an existing root manifest, shared
 versions, or support for `.workspace = true` cannot require lockstep versioning
 or inheritance of any package field.
 
+## Rust Release-Automation Adapter Mechanisms
+
+After Release defines the release procedure and Tooling selects the automation
+tool, orchestration, and configuration authority, express accepted operations
+through a supported Rust release-automation adapter. Map only selected version,
+commit, tag, changelog, publication, package, workspace, and evidence facts that
+the adapter can represent without changing their meaning.
+
+Adapter availability or successful execution does not select `cargo-release`,
+make automation preferable to a manual procedure, establish release cadence,
+couple package versions, consolidate commits, choose tag syntax, mutate a
+changelog, or define first-release behavior. Missing or contradictory procedure,
+tool, capability, configuration, or evidence facts retain the typed outcomes.
+
 ## Verification
 
 Evidence covers the accepted release unit and channels, actual supported Rust

@@ -99,3 +99,25 @@ repository.workspace = true
 This example does not select a release unit, require shared versions, prescribe
 workspace layout, or authorize inheritance of any field. Dependency inheritance
 uses the separately owned Rust Dependency mechanisms.
+
+## Cargo-Release Adapter Example
+
+This legacy configuration illustrates syntax only after Release and Tooling
+have selected the procedure, tool, operations, and evidence contract:
+
+```toml
+# release.toml (workspace root)
+[workspace]
+shared-version = true
+consolidate-commits = true
+tag-prefix = "v"
+
+[[pre-release-replacements]]
+file = "CHANGELOG.md"
+search = "## \\[Unreleased\\]"
+replace = "## [Unreleased]\n\n## [{{version}}] - {{date}}"
+```
+
+The example does not recommend `cargo-release`, select workspace placement,
+require shared versions or consolidated commits, define tags or changelog
+policy, establish cadence, or choose automation over a manual procedure.
