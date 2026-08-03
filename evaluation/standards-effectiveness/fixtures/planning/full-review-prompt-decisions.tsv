@@ -1,0 +1,8 @@
+case	versioned	router	planning	planning_only	copied_process	machine_path	fallback	expected
+thin_entrypoint	yes	yes	yes	yes	no	no	none	allow
+missing_router	yes	no	yes	yes	no	no	none	typed-unavailable
+missing_planning	yes	yes	no	yes	no	no	none	typed-unavailable
+implementation_prompt	yes	yes	yes	no	no	no	none	typed-invalid
+copied_procedure	yes	yes	yes	yes	yes	no	copied-process	typed-invalid
+machine_specific	yes	yes	yes	yes	no	yes	machine-path	typed-invalid
+unversioned	no	yes	yes	yes	no	no	local-prompt	typed-invalid

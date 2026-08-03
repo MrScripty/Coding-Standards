@@ -9,7 +9,9 @@ mapfile -t validated < <(awk -F '\t' 'NR>1{print $1}' "$V");[[ "${validated[*]}"
 for t in '## Owner Contract' 'sole normative owner' '## Exact Dispositions' '`STD-0849`, `STD-0850`, and `STD-0851`' '## Ordered Children' '`24.1`' '## Re-plan Triggers';do rg -F -q "$t" "$S/milestone-7-row-24-decomposition.md";done
 [[ "$(awk -F '\t' '$1=="prompts/full-codebase-standards-refactor.md"{print $2"\t"$3}' "$S/owner-map.tsv")" == $'workflows/planning.md\treplace-with-derived-entrypoint' ]]
 [[ "$(awk -F '\t' '$1==24{print $6}' "$S/milestone-7-execution-train.tsv")" == 'workflows/planning.md' ]]
-rg -F -q '`7.4b14a` (`Accepted`)' "$P";rg -F -q '`7.4b14b` (`Planned`)' "$P"
-next="$(awk '/^\*\*Next slice:\*\*/{c=1}c&&/^$/{exit}c{print}' "$P")";[[ "$next" == *'24.1'* && "$next" == *'STD-0849'* && "$next" == *'STD-0851'* ]]
+rg -F -q '`7.4b14a` (`Accepted`)' "$P";rg -F -q '`7.4b14b` (`Accepted`)' "$P";rg -F -q '`7.4b15a` (`Planned`)' "$P"
+next="$(awk '/^\*\*Next slice:\*\*/{c=1}c&&/^$/{exit}c{print}' "$P")";[[ "$next" == *'row 25'* && "$next" == *'STD-0852'* && "$next" == *'STD-0858'* ]]
+mapfile -t disposed < <(awk -F '\t' '$1>="STD-0849"&&$1<="STD-0851"{print $1}' "$S/consolidation-dispositions.tsv");[[ "${disposed[*]}" == 'STD-0849 STD-0850 STD-0851' ]]
+"$S/verify-full-review-prompt-entrypoint.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-24 decomposition passed: 3 IDs assigned to one Planning-owned child\n'

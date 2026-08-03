@@ -6436,6 +6436,31 @@ then used. No artifact changed during discovery.
 **Next slice:** `7.4b14b`, implement child 24.1 as a thin Planning entrypoint
 for `STD-0849` through `STD-0851`.
 
+## Milestone 7.4b14b: Thin Full-Review Planning Entrypoint
+
+**Outcome:** Accepted.
+
+The versioned full-codebase review prompt now preserves only planning intent,
+Router discovery, the canonical Planning route, the requested objective, and
+acceptance-evidence intent. Duplicated artifact, findings, decomposition,
+delegation, and recheck procedure was removed rather than retained as alternate
+authority.
+
+Seven decisions reject missing routes, implementation intent, copied process,
+machine paths, and local unversioned fallback. `STD-0849` through `STD-0851`
+have exact Planning-owned index dispositions. The train advances to 381
+completed and 208 remaining identifiers across 119 completed and 23 pending
+logical clusters; row 25 is active but undecomposed.
+
+**Verification:** prompt projection decisions, versioned-file check, canonical
+links, prohibited legacy content, exact dispositions, row/train and plan checks,
+and complete suite.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b15a`, perform row 25 owner and child decomposition review
+for `STD-0852` through `STD-0858` without normative movement.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
