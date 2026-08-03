@@ -72,3 +72,30 @@ The release and channel contracts decide whether this mechanism is applicable.
 The example does not make `publish = false` a default for binaries, `cdylib`
 packages, internal tools, test harnesses, integration crates, or workspace-only
 packages, and it does not select crates.io or any other channel.
+
+## Workspace Package-Metadata Example
+
+The following manifests illustrate Cargo syntax after Release has selected a
+lockstep release unit and the applicable owners have accepted each shared fact:
+
+```toml
+# Workspace root Cargo.toml
+[workspace.package]
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.78"
+license = "MIT"
+repository = "https://github.com/org/repo"
+
+# Member crate Cargo.toml
+[package]
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+```
+
+This example does not select a release unit, require shared versions, prescribe
+workspace layout, or authorize inheritance of any field. Dependency inheritance
+uses the separately owned Rust Dependency mechanisms.

@@ -5947,6 +5947,33 @@ plan checks, and affected shared cursors.
 **Next slice:** `7.4b12f`, split `STD-0815` workspace release metadata and move
 `STD-0816` and `STD-0817` manifests to non-normative reference.
 
+## Milestone 7.4b12f: Cargo Workspace Package Metadata
+
+**Outcome:** Accepted.
+
+Release retains release-unit and version-relationship authority, while the
+applicable generic owners retain each package fact. Rust Release now expresses
+accepted coordination only through supported Cargo `[workspace.package]` and
+member package-field inheritance mechanisms. The root and member manifests
+moved to non-normative reference, distinct from Rust Dependency's dependency
+inheritance mechanisms.
+
+Sixteen decisions reject workspace-layout, existing-root-manifest,
+shared-version, product-coupling, field-inheritance, and dependency-inheritance
+defaults. `STD-0815` has one exact split disposition; `STD-0816` and `STD-0817`
+have exact move dispositions. The execution train advances to 363 completed and
+226 remaining identifiers across 104 completed and 27 pending logical clusters,
+with child `22.6` active.
+
+**Verification:** workspace package-metadata decisions, publication-control
+regression, exact dispositions, dependency-owner separation, canonical routes,
+reference non-authority, row/train and plan checks, and affected shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b12g`, split `STD-0818` release-automation adapter
+mechanisms and move `STD-0819` configuration to non-normative reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

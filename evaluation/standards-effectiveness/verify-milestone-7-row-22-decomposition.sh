@@ -21,12 +21,13 @@ rg -F -q '`7.4b12b` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b12c` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b12d` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b12e` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b12f` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b12f` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b12g` (`Planned`)' "$PLAN"
 next="$(awk '/^\*\*Next slice:\*\*/{c=1} c&&/^$/{exit} c{print}' "$PLAN")"
-[[ "$next" == *'row 22 child 22.5'* && "$next" == *'STD-0815'* && "$next" == *'STD-0817'* ]]
+[[ "$next" == *'row 22 child 22.6'* && "$next" == *'STD-0818'* && "$next" == *'STD-0819'* ]]
 [[ -e "$R/profiles/languages/rust/release.md" ]]
 [[ -e "$R/reference/recipes/rust-release.md" ]]
 mapfile -t disposed < <(awk -F '\t' '$1 >= "STD-0810" && $1 <= "STD-0820" {print $1}' "$S/consolidation-dispositions.tsv")
-[[ "${disposed[*]}" == 'STD-0810 STD-0811 STD-0812 STD-0813 STD-0814' ]]
+[[ "${disposed[*]}" == 'STD-0810 STD-0811 STD-0812 STD-0813 STD-0814 STD-0815 STD-0816 STD-0817' ]]
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-22 decomposition passed: 11 IDs across 7 children, zero premature dispositions\n'

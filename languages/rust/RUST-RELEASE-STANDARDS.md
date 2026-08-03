@@ -43,29 +43,12 @@ Concrete syntax and legacy category examples are non-normative in the
 
 ## Workspace Version Management
 
-Use `[workspace.package]` to define shared version metadata once:
-
-```toml
-# Workspace root Cargo.toml
-[workspace.package]
-version = "0.2.0"
-edition = "2021"
-rust-version = "1.78"
-license = "MIT"
-repository = "https://github.com/org/repo"
-
-# Member crate Cargo.toml
-[package]
-version.workspace = true
-edition.workspace = true
-rust-version.workspace = true
-license.workspace = true
-repository.workspace = true
-```
-
-Do not force shared versions across unrelated crates only because they live in
-one workspace. Shared versions are appropriate when crates ship as one product
-or must remain version-matched.
+Release-unit and version authority belongs to
+[Release](../../workflows/release.md#contract-and-version-decision). Supported
+Cargo workspace package-metadata mechanisms are owned by the
+[Rust Release profile](../../profiles/languages/rust/release.md#cargo-workspace-package-metadata-mechanisms).
+Concrete root and member manifests are non-normative in the
+[Rust release recipes](../../reference/recipes/rust-release.md#workspace-package-metadata-example).
 
 ## cargo-release
 

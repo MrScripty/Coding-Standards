@@ -65,10 +65,10 @@ next_slice_block="$(awk '
   capture && /^$/ { exit }
   capture { print }
 ' "$PLAN")"
-for id in STD-0815 STD-0816 STD-0817; do
+for id in STD-0818 STD-0819; do
   [[ "$next_slice_block" == *"$id"* ]]
 done
-[[ "$next_slice_block" == *'child 22.5'* ]]
+[[ "$next_slice_block" == *'child 22.6'* ]]
 
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-20 decomposition passed: 11 IDs across 6 children\n'

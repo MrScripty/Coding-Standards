@@ -7,12 +7,12 @@
 **Plan status:** `Active`
 
 **Current phase:** Rows 20 and 21 are accepted and closed; row 22 owner,
-toolchain, package-metadata, and publish-control children are accepted;
-workspace-version child 22.5 is active.
+toolchain, package-metadata, publish-control, and workspace-package-metadata
+children are accepted; release-automation child 22.6 is active.
 
-**Next slice:** Milestone 7.4b12f for row 22 child 22.5 `STD-0815`, `STD-0816`,
-and `STD-0817`; split release-unit/version authority from Cargo workspace package
-metadata mechanisms and move both manifests to reference.
+**Next slice:** Milestone 7.4b12g for row 22 child 22.6 `STD-0818` and
+`STD-0819`; split release-procedure and tool-selection authority from supported
+Rust release-automation adapters and move configuration to reference.
 
 **Acceptance status:** `partial`
 
@@ -1762,7 +1762,8 @@ all structural/routing fixtures pass.
      from Cargo publication-control mechanisms, extract manifest and crate-
      category examples under the same disposition, and reject registry,
      publish-false, binary, cdylib, tooling, harness, and workspace defaults.
-   - `7.4b12f` (`Planned`): split `STD-0815` release-unit/version authority from Cargo workspace package metadata mechanisms and move `STD-0816` and `STD-0817` manifests to reference without shared-version or inheritance defaults.
+   - `7.4b12f` (`Accepted`): split `STD-0815` release-unit/version authority from Cargo workspace package metadata mechanisms and move `STD-0816` and `STD-0817` manifests to reference without shared-version or inheritance defaults.
+   - `7.4b12g` (`Planned`): split `STD-0818` release-procedure and tool-selection authority from supported Rust release-automation adapters and move `STD-0819` configuration to reference without cadence, manual-procedure, version, commit, tag, changelog, or first-release defaults.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public

@@ -79,6 +79,21 @@ tool, test harness, integration package, or workspace member is publishable.
 Package category, crate type, workspace placement, an existing `publish` field,
 or registry behavior cannot create publication authority.
 
+## Cargo Workspace Package-Metadata Mechanisms
+
+After Release defines the release units and their version relationships, and
+the applicable generic owners accept shared package facts, express selected
+coordination through supported Cargo `[workspace.package]` declarations and
+member package-field inheritance. Each inherited field remains an accepted fact
+of the member's release unit; inheritance does not merge release units or make
+the workspace root their policy owner.
+
+Select coordination per accepted release unit, package consumer, publication
+channel, contract, toolchain, licensing, documentation, and evidence facts.
+Workspace membership, repository layout, an existing root manifest, shared
+versions, or support for `.workspace = true` cannot require lockstep versioning
+or inheritance of any package field.
+
 ## Verification
 
 Evidence covers the accepted release unit and channels, actual supported Rust
