@@ -6001,6 +6001,35 @@ cursors.
 **Next slice:** `7.4b12h`, split `STD-0820` Rust release evidence mechanisms,
 extract fixed commands to reference, and close the legacy source.
 
+## Milestone 7.4b12h: Rust Release Evidence And Source Closure
+
+**Outcome:** Accepted.
+
+Release retains release-gate authority and Verification retains claim meaning
+and evidence sufficiency. Rust Release now selects only supported Rust and Cargo
+evidence mechanisms for accepted claim scopes. Fixed commands moved to non-
+normative reference under `STD-0820`'s single split disposition, and the legacy
+Rust release source is now a pure migration index.
+
+Seventeen decisions reject every-release, workspace, all-feature, warning,
+audit, benchmark, metadata, changelog, tag, artifact-name, and command-success
+defaults. The execution train advances to 366 completed and 223 remaining
+identifiers across 106 completed and 25 pending logical clusters. Row 22 is
+closed; row 23 is active with a missing Rust Tooling owner.
+
+**Verification:** release-evidence decisions, automation-adapter regression,
+exact disposition, index purity, canonical routes, reference non-authority,
+row/train and plan checks, and affected shared cursors.
+
+**Deviation:** none.
+
+**Replan trigger:** row 23 targets missing
+`profiles/languages/rust/tooling.md`. No normative movement may begin until its
+owner boundary, dependencies, exclusions, decomposition, and verification
+contract are reviewed and accepted.
+
+**Next slice:** `7.4b13a`, planning only, for `STD-0831` through `STD-0842`.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

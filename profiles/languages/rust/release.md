@@ -108,6 +108,21 @@ couple package versions, consolidate commits, choose tag syntax, mutate a
 changelog, or define first-release behavior. Missing or contradictory procedure,
 tool, capability, configuration, or evidence facts retain the typed outcomes.
 
+## Rust Release Evidence Mechanisms
+
+After Release identifies the required release gates and Verification accepts
+each claim and its evidence contract, select supported Rust and Cargo mechanisms
+that collect the named evidence for the accepted packages, features, targets,
+artifacts, consumers, and environments. Each mechanism result proves only its
+declared claim and remains subject to the generic owner's acceptance decision.
+
+No fixed command set applies before every release. Workspace-wide scope, all
+targets or features, warning denial, dependency audits, benchmarks, metadata
+comparison, changelog checks, tag checks, artifact-name checks, and successful
+commands cannot create or complete a release claim. Missing, contradictory, or
+unsupported claim, scope, mechanism, environment, or evidence facts retain the
+typed outcomes rather than selecting a conventional checklist.
+
 ## Verification
 
 Evidence covers the accepted release unit and channels, actual supported Rust

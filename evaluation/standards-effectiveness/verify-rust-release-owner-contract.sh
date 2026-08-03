@@ -14,7 +14,7 @@ for text in '## Mechanism Authority' 'Generic owners select release boundaries' 
 for text in 'Level: `REFERENCE`' 'This material is non-normative' 'cannot select versions'; do rg -F -q "$text" "$X"; done
 rg -F -q 'profiles/languages/rust/release.md' "$R/STANDARDS-ROUTER.md"
 rg -F -q 'profiles/languages/rust/release.md' "$R/README.md"
-rg -F -q '[Rust Release profile](../../profiles/languages/rust/release.md)' "$L"
+rg -F -q '[Rust release mechanisms](../../profiles/languages/rust/release.md)' "$L"
 actual="$(awk -F '\t' '$1=="STD-0810" {print $1 "\t" $2 "\t" $3 "\t" $4}' "$S/consolidation-dispositions.tsv")"
 [[ "$actual" == $'STD-0810\tlanguages/rust/RUST-RELEASE-STANDARDS.md\tprofiles/languages/rust/release.md\tindex' ]]
 printf 'Rust release owner passed: 16 decisions, 1 exact disposition\n'

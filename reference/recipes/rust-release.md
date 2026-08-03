@@ -121,3 +121,21 @@ replace = "## [Unreleased]\n\n## [{{version}}] - {{date}}"
 The example does not recommend `cargo-release`, select workspace placement,
 require shared versions or consolidated commits, define tags or changelog
 policy, establish cadence, or choose automation over a manual procedure.
+
+## Release Evidence Command Examples
+
+The legacy checklist used commands such as:
+
+```sh
+cargo fmt --all -- --check
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+cargo test --workspace
+cargo test --workspace --doc
+cargo check --workspace --all-features
+cargo check --workspace --no-default-features
+```
+
+These examples are selected only when their scope and output match accepted
+Verification claims. They do not form an every-release checklist or require
+workspace scope, all features, warning denial, audits, benchmarks, metadata,
+changelog, tags, or artifact-name comparisons.

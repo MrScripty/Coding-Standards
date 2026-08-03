@@ -6,13 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 and 21 are accepted and closed; row 22 owner,
-toolchain, package-metadata, publish-control, workspace-package-metadata, and
-release-automation children are accepted; evidence child 22.7 is active.
+**Current phase:** Rows 20, 21, and 22 are accepted and closed; row 23 Rust
+Tooling owner creation requires planning review before population.
 
-**Next slice:** Milestone 7.4b12h for row 22 child 22.7 `STD-0820`; split
-release and verification claim authority from supported Rust evidence
-mechanisms, extract fixed commands to reference, and close the legacy source.
+**Next slice:** Milestone 7.4b13a for planning-only row 23 `STD-0831` through
+`STD-0842`; define the missing Rust Tooling owner contract, dependencies,
+exclusions, child decomposition, fixtures, and source-closure sequence.
 
 **Acceptance status:** `partial`
 
@@ -1764,7 +1763,8 @@ all structural/routing fixtures pass.
      publish-false, binary, cdylib, tooling, harness, and workspace defaults.
    - `7.4b12f` (`Accepted`): split `STD-0815` release-unit/version authority from Cargo workspace package metadata mechanisms and move `STD-0816` and `STD-0817` manifests to reference without shared-version or inheritance defaults.
    - `7.4b12g` (`Accepted`): split `STD-0818` release-procedure and tool-selection authority from supported Rust release-automation adapters and move `STD-0819` configuration to reference without cadence, manual-procedure, version, commit, tag, changelog, or first-release defaults.
-   - `7.4b12h` (`Planned`): split `STD-0820` release and verification claim authority from supported Rust evidence mechanisms, extract fixed commands to reference, and close the legacy source without every-release, all-feature, warning, audit, benchmark, metadata, changelog, tag, or artifact-name checklist defaults.
+   - `7.4b12h` (`Accepted`): split `STD-0820` release and verification claim authority from supported Rust evidence mechanisms, extract fixed commands to reference, and close the legacy source without every-release, all-feature, warning, audit, benchmark, metadata, changelog, tag, or artifact-name checklist defaults.
+   - `7.4b13a` (`Planned`): planning-only owner review for row 23 `STD-0831` through `STD-0842`; establish the missing Rust Tooling specialization before any normative movement or disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public
