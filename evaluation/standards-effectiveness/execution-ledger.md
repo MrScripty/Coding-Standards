@@ -6285,6 +6285,30 @@ shared cursors.
 
 **Next slice:** `7.4b13j`, refine `STD-0839` Rust test style into Verification.
 
+## Milestone 7.4b13j: Rust Test-Style Refinement
+
+**Outcome:** Accepted.
+
+Existing Verification sections remain the sole owners of test design, data and
+helper selection, placement, naming, and durable regression context. The
+legacy Rust section now routes to those contracts, while Rust-specific syntax
+and directory examples are non-normative reference.
+
+Sixteen decisions reject naming-template, colocation, directory, builder,
+helper, issue, invariant, symptom, and documentation defaults. `STD-0839` has
+one exact refine disposition. The train advances to 375 completed and 214
+remaining identifiers across 115 completed and 27 pending logical clusters,
+with child `23.9` active.
+
+**Verification:** Verification owner regression, test-style decisions, exact
+disposition, reference non-authority, row/train and plan checks, and affected
+shared cursors.
+
+**Deviation:** no new normative Verification text was required because the
+canonical owner already covered every retained semantic.
+
+**Next slice:** `7.4b13k`, split `STD-0840` Rust tool-adapter inventory.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

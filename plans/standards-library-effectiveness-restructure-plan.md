@@ -9,12 +9,12 @@
 **Current phase:** Rows 20, 21, and 22 are accepted and closed; row 23 is
 decomposed, the Rust Tooling owner, baseline-command, workspace-lint, and
 Criterion, test-runner, and feature-matrix adapter mechanisms are accepted, and
-compile-fail and property-test children are accepted, and Rust test-style child
-23.8 is active.
+compile-fail, property-test, and Rust test-style children are accepted, and
+Rust tool-inventory child 23.9 is active.
 
-**Next slice:** Milestone 7.4b13j for row 23 child 23.8 `STD-0839`; refine test
-design, naming, placement, and regression-record authority into Verification
-and extract Rust syntax to non-normative reference.
+**Next slice:** Milestone 7.4b13k for row 23 child 23.9 `STD-0840`; split
+generic owner decisions from a capability-matched Rust tool-adapter inventory
+without preserving legacy status labels or product defaults.
 
 **Acceptance status:** `partial`
 
@@ -1777,7 +1777,8 @@ all structural/routing fixtures pass.
    - Child 23.7 harness decomposition replan (`Accepted`): preserve separate `STD-0837` and `STD-0838` dispositions and order while implementing compile-fail and property-test harness contracts as separate atomic children with separate focused evidence.
    - `7.4b13h` (`Accepted`): split `STD-0837` compile-time rejection contract and evidence authority from compile-fail harness mechanisms and extract examples without trybuild, restriction-category, CI, or syntax defaults.
    - `7.4b13i` (`Accepted`): split `STD-0838` invariant, property, generator, and evidence authority from property-test harness mechanisms and extract examples without proptest, invariant-category, parser, state-machine, or syntax defaults.
-   - `7.4b13j` (`Planned`): refine `STD-0839` test design, naming, placement, and regression-record authority into Verification and extract Rust syntax without naming, placement, helper, directory, or documentation defaults.
+   - `7.4b13j` (`Accepted`): refine `STD-0839` test design, naming, placement, and regression-record authority into Verification and extract Rust syntax without naming, placement, helper, directory, or documentation defaults.
+   - `7.4b13k` (`Planned`): split `STD-0840` generic owner decisions from a capability-matched Rust tool-adapter inventory without required, optional, recommended, product, category, or Miri defaults.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

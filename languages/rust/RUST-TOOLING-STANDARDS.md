@@ -92,18 +92,15 @@ Illustrative categories and syntax are non-normative in the
 
 ## Rust Test Style
 
-Rules:
-
-- Name tests as `condition_expected_behavior` or
-  `operation_condition_expected_behavior`.
-- Keep unit tests close to the module with `#[cfg(test)]` when they need private
-  access.
-- Put public API and cross-crate behavior tests under `tests/`.
-- Put Criterion benchmarks under `benches/`.
-- Use builders or fixture helpers when setup data would obscure the behavior
-  being asserted.
-- Document regression tests with the issue, failed invariant, or production
-  symptom that made the test necessary.
+Test design belongs to [Verification](../../workflows/verification.md#test-design),
+data and helper selection to
+[Verification](../../workflows/verification.md#test-data-authority-and-lifecycle),
+placement and naming to
+[Verification](../../workflows/verification.md#test-placement-and-naming), and
+durable regression context to
+[Verification](../../workflows/verification.md#coverage-and-durable-evidence-records).
+Rust-specific syntax and directory examples are non-normative in the
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md#rust-test-style-examples).
 
 ## Recommended Rust Tools
 

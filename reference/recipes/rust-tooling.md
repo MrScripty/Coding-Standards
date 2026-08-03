@@ -134,3 +134,15 @@ roundtrips, state machines, ordering, deduplication, and normalization.
 
 These examples do not select proptest, a property, input domain, generator,
 strategy, oracle, seed, shrink behavior, case count, or CI schedule.
+
+## Rust Test-Style Examples
+
+Legacy guidance used `condition_expected_behavior` and
+`operation_condition_expected_behavior` names, colocated `#[cfg(test)]` units,
+`tests/` for public or cross-crate behavior, `benches/` for Criterion, and
+builders or fixture helpers for verbose setup. It also suggested recording an
+issue, invariant, or production symptom for regressions.
+
+These are illustrative Rust forms only. They do not select naming vocabulary,
+placement, helper type, directory, colocation, benchmark location, or durable
+documentation content.

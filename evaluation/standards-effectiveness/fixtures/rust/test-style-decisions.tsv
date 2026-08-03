@@ -1,0 +1,17 @@
+case	claim	ownership	discovery	context	fallback	expected
+accepted	accepted	known	known	known	none	allow
+missing_claim	missing	known	known	known	none	typed-unavailable
+missing_owner	accepted	missing	known	known	none	typed-unavailable
+missing_discovery	accepted	known	missing	known	none	typed-unavailable
+missing_context	accepted	known	known	missing	none	typed-unavailable
+contradictory	contradictory	known	known	known	none	typed-invalid
+naming	accepted	known	known	known	naming-template	typed-invalid
+colocation	accepted	known	known	known	colocation	typed-invalid
+tests_directory	accepted	known	known	known	tests-directory	typed-invalid
+benches_directory	accepted	known	known	known	benches-directory	typed-invalid
+builder	accepted	known	known	known	builder	typed-invalid
+helper	accepted	known	known	known	fixture-helper	typed-invalid
+issue	accepted	known	known	known	issue	typed-invalid
+invariant	accepted	known	known	known	invariant	typed-invalid
+symptom	accepted	known	known	known	production-symptom	typed-invalid
+documentation	accepted	known	known	known	documentation	typed-invalid
