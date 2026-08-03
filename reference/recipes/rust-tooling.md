@@ -116,3 +116,11 @@ cargo check --workspace --no-default-features
 These commands do not select cargo-hack, each-feature or powerset coverage,
 feature-count thresholds, package or workspace scope, dependency exclusions,
 baseline commands, target support, or evidence claims.
+
+## Compile-Fail Harness Examples
+
+Legacy guidance listed single-use tokens, capability tokens, typestate,
+dimensional types, sealed traits, and non-exhaustive matching as possible
+compile-time rejection claims. These categories are illustrative only. They do
+not select trybuild, a fixture layout, expected diagnostics, CI execution, or a
+compile-fail claim.

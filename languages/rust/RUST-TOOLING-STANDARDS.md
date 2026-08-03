@@ -68,17 +68,15 @@ Commands are non-normative in the
 
 ## Compile-Fail Tests
 
-Use `trybuild` when the API promises compile-time rejection:
-
-- single-use tokens or nonces
-- capability tokens
-- type-state transitions
-- dimensional/unit types
-- sealed traits
-- non-exhaustive enums requiring wildcard matches
-
-Compile-fail tests should run in CI for crates whose safety or correctness
-claims depend on type-level restrictions.
+Compile-time rejection contracts belong to
+[Contracts](../../topics/contracts.md), Rust source expression belongs to the
+[Rust API profile](../../profiles/languages/rust/api.md), harness selection and
+scheduling belong to [Tooling](../../workflows/tooling.md), and evidence claims
+belong to [Verification](../../workflows/verification.md). Supported compile-
+fail harness adapters are owned by the
+[Rust Tooling profile](../../profiles/languages/rust/tooling.md#compile-fail-harness-adapter-mechanisms).
+Illustrative categories are non-normative in the
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md#compile-fail-harness-examples).
 
 ## Property-Based Tests
 

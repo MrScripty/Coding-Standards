@@ -6239,6 +6239,28 @@ coverage, execution train, plan structure, and affected shared cursors.
 
 **Next slice:** `7.4b13h`, split `STD-0837` compile-fail harness mechanisms.
 
+## Milestone 7.4b13h: Compile-Fail Harness Adapter Mechanisms
+
+**Outcome:** Accepted.
+
+Contracts retains compile-time rejection authority, Rust API retains source
+expression, Tooling retains harness selection and scheduling, and Verification
+retains rejection-evidence authority. Rust Tooling now owns only supported
+compile-fail fixture, diagnostic, invocation, and result adapter mechanisms.
+
+Sixteen decisions reject trybuild, restriction-category, fixture, diagnostic,
+CI, compile-check, runtime-assertion, panic, and build-success defaults.
+`STD-0837` has one exact split disposition. The train advances to 373 completed
+and 216 remaining identifiers across 113 completed and 29 pending logical
+clusters, with child `23.7b` active.
+
+**Verification:** compile-fail decisions, owner regression, exact disposition,
+reference non-authority, row/train and plan checks, and affected shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b13i`, split `STD-0838` property-test harness mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

@@ -115,6 +115,19 @@ baseline commands, or CI schedule. Missing or unsupported matrix facts retain
 typed outcomes rather than selecting all features, no default features, a
 feature-count threshold, or weaker evidence.
 
+## Compile-Fail Harness Adapter Mechanisms
+
+After Contracts accepts a compile-time rejection contract, Rust API accepts
+the source expression, Tooling selects a harness and schedule, and Verification
+accepts the rejection evidence, express the claim through supported Rust
+compile-fail harness, fixture, diagnostic-matching, and invocation mechanisms.
+
+Type-level syntax, public API status, safety or correctness labels, an installed
+trybuild dependency, or a restriction category cannot select trybuild, fixture
+shape, diagnostic matching, CI execution, or claim coverage. Missing or
+unsupported adapter facts retain typed outcomes rather than substituting a
+compile check, runtime assertion, panic, or successful build.
+
 ## Verification
 
 Evidence covers the accepted claim and scope, actual supported Rust and Cargo
