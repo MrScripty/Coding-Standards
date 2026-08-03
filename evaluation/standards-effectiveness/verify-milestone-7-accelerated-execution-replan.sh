@@ -78,7 +78,7 @@ done < "$PACKAGES"
 
 [[ "$row_count" -eq 43 ]]
 [[ "${#seen_orders[@]}" -eq 43 ]]
-[[ "${#package_seen[@]}" -eq 39 ]]
+[[ "${#package_seen[@]}" -eq 40 ]]
 [[ "${#missing_owners[@]}" -eq 4 ]]
 
 for order in $(seq 5 47); do
@@ -87,7 +87,6 @@ done
 
 expected_multi_packages=(
   'P08:2'
-  'P19:2'
   'P30:2'
   'P32:2'
 )
@@ -96,11 +95,11 @@ for expected in "${expected_multi_packages[@]}"; do
   count="${expected##*:}"
   [[ "$(awk -F '\t' -v package="$package" 'NR > 1 && $2 == package { n += 1 } END { print n + 0 }' "$PACKAGES")" -eq "$count" ]]
 done
-[[ "$(awk -F '\t' 'NR > 1 { n[$2] += 1 } END { for (p in n) if (n[p] > 1 && p != "P08" && p != "P19" && p != "P30" && p != "P32") print p }' "$PACKAGES")" == "" ]]
+[[ "$(awk -F '\t' 'NR > 1 { n[$2] += 1 } END { for (p in n) if (n[p] > 1 && p != "P08" && p != "P30" && p != "P32") print p }' "$PACKAGES")" == "" ]]
 
 required_report=(
   '570 frozen identifiers remain in 43 pending logical clusters'
-  'maps every pending immutable-train row to one of 39 packages'
+  'maps every pending immutable-train row to one of 40 packages'
   'Every legacy identifier receives exactly one final disposition'
   'No risk class permits compatibility copies'
   '`decision-table`'

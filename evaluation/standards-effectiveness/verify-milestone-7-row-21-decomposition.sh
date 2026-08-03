@@ -60,7 +60,8 @@ rg -F -q '`7.4b13k` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b13l` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b13m` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b13n` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b14a` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b14a` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b14b` (`Planned`)' "$PLAN"
 next_slice="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
 [[ "$next_slice" == *'row 24'* ]]
 [[ "$next_slice" == *'STD-0849'* ]]

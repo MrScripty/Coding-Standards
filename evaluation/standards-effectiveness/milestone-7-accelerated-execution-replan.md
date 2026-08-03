@@ -60,7 +60,7 @@ or semantic cohesion.
 
 The
 [acceleration manifest](milestone-7-accelerated-packages.tsv)
-maps every pending immutable-train row to one of 39 packages. A package may
+maps every pending immutable-train row to one of 40 packages. A package may
 contain more than one row only when all rows share:
 
 - one canonical owner;
@@ -73,7 +73,8 @@ contain more than one row only when all rows share:
 The only multi-row packages are:
 
 - `P08`, the two C# concurrency rows;
-- `P19`, the two thin implementation-prompt rows; and
+- `P19P` and `P19I`, the separately owned thin Planning and Implementation
+  prompt rows; and
 - `P30` and `P32`, two contiguous non-normative architecture-pattern
   reference rows each.
 

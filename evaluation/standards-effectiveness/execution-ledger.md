@@ -6411,6 +6411,31 @@ purity, row/train and plan checks, and complete suite.
 **Next slice:** `7.4b14a`, perform row 24 owner and child decomposition review
 for `STD-0849` through `STD-0851` without normative movement.
 
+## Milestone 7.4b14a: Full-Review Prompt Ownership Replan
+
+**Outcome:** Accepted planning correction.
+
+The baseline mapped the full-codebase standards-review prompt to
+Implementation, but the prompt explicitly performs planning and analysis only.
+Planning already owns its artifact model, findings, decomposition, delegation,
+and acceptance semantics. Row 24 therefore assigns `STD-0849` through
+`STD-0851` to `workflows/planning.md` as exact `index` dispositions and freezes
+one coherent derived-entrypoint child.
+
+No normative content moved. The prompt may retain the requested full-review
+intent and Router route, but cannot copy canonical procedure or acquire an
+independent lifecycle. Counts and the active train row remain unchanged.
+
+**Verification:** exact owner validation, decomposition completeness, package
+and train ownership, plan lifecycle, and execution-train checks.
+
+**Deviation:** the generated owner-map paths initially requested during review
+were one directory too high; the repository's actual `generated/` paths were
+then used. No artifact changed during discovery.
+
+**Next slice:** `7.4b14b`, implement child 24.1 as a thin Planning entrypoint
+for `STD-0849` through `STD-0851`.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

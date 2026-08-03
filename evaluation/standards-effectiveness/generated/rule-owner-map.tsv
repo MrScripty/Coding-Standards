@@ -847,9 +847,9 @@ STD-0845	languages/rust/RUST-UNSAFE-STANDARDS.md	37	profiles/languages/rust/unsa
 STD-0846	languages/rust/RUST-UNSAFE-STANDARDS.md	52	profiles/languages/rust/unsafe.md	move-and-index	Unsafe Exception Checklist
 STD-0847	languages/rust/RUST-UNSAFE-STANDARDS.md	65	profiles/languages/rust/unsafe.md	move-and-index	Unsafe Verification Matrix
 STD-0848	languages/rust/RUST-UNSAFE-STANDARDS.md	84	profiles/languages/rust/unsafe.md	move-and-index	Feature-Gated Unsafe Paths
-STD-0849	prompts/full-codebase-standards-refactor.md	1	workflows/implementation.md	replace-with-derived-entrypoint	Intent
-STD-0850	prompts/full-codebase-standards-refactor.md	7	workflows/implementation.md	replace-with-derived-entrypoint	Artifact Rules
-STD-0851	prompts/full-codebase-standards-refactor.md	16	workflows/implementation.md	replace-with-derived-entrypoint	Process
+STD-0849	prompts/full-codebase-standards-refactor.md	1	workflows/planning.md	replace-with-derived-entrypoint	Intent
+STD-0850	prompts/full-codebase-standards-refactor.md	7	workflows/planning.md	replace-with-derived-entrypoint	Artifact Rules
+STD-0851	prompts/full-codebase-standards-refactor.md	16	workflows/planning.md	replace-with-derived-entrypoint	Process
 STD-0852	prompts/implement-plan.md	1	workflows/implementation.md	replace-with-derived-entrypoint	Intent
 STD-0853	prompts/implement-plan.md	8	workflows/implementation.md	replace-with-derived-entrypoint	Standards
 STD-0854	prompts/implement-plan.md	18	workflows/implementation.md	replace-with-derived-entrypoint	Preflight

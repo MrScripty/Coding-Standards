@@ -29,7 +29,7 @@ languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	sp
 languages/rust/RUST-STANDARDS.md	profiles/languages/rust/README.md	replace-with-profile-router
 languages/rust/RUST-TOOLING-STANDARDS.md	profiles/languages/rust/tooling.md	split-and-index
 languages/rust/RUST-UNSAFE-STANDARDS.md	profiles/languages/rust/unsafe.md	move-and-index
-prompts/full-codebase-standards-refactor.md	workflows/implementation.md	replace-with-derived-entrypoint
+prompts/full-codebase-standards-refactor.md	workflows/planning.md	replace-with-derived-entrypoint
 prompts/implement-plan.md	workflows/implementation.md	replace-with-derived-entrypoint
 prompts/planning.md	workflows/planning.md	replace-with-derived-entrypoint
 templates/PLAN-TEMPLATE.md	workflows/planning.md	align-derived-template

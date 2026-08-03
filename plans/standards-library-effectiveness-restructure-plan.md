@@ -10,13 +10,12 @@
 decomposed, the Rust Tooling owner, baseline-command, workspace-lint, and
 Criterion, test-runner, and feature-matrix adapter mechanisms are accepted, and
 compile-fail, property-test, and Rust test-style children are accepted, and
-Rows 20 through 23 are accepted and closed; row 24 requires owner and child
-decomposition review before prompt policy moves.
+Rows 20 through 23 are accepted and closed; row 24 has one Planning-owned
+derived-entrypoint child ready for implementation.
 
-**Next slice:** Milestone 7.4b14a for row 24 `STD-0849` through `STD-0851`;
-review `prompts/full-codebase-standards-refactor.md` against Implementation and
-other canonical owners, freeze exact dispositions and ordered children, and
-make no normative movement.
+**Next slice:** Milestone 7.4b14b row 24 child 24.1 for `STD-0849`, `STD-0850`, and `STD-0851`;
+replace `prompts/full-codebase-standards-refactor.md` with a thin Planning
+entrypoint, record exact index dispositions, and advance to row 25 review.
 
 **Acceptance status:** `partial`
 
@@ -1785,7 +1784,8 @@ all structural/routing fixtures pass.
    - `7.4b13l` (`Accepted`): create and route the useful generic Build workflow with typed owner decisions before moving `STD-0841`; retain the active identifier and train counts.
    - `7.4b13m` (`Accepted`): split `STD-0841` Build and narrower generic authority from supported Cargo build-script mechanisms without sparing-use, purpose, directive, output, compiler, runtime-detection, timestamp, or dependency defaults.
    - `7.4b13n` (`Accepted`): split `STD-0842` target and `no_std` authority into Rust Cross-Platform, preserve API, Dependency, and Tooling routes, extract commands, and close the legacy source without target, crate-category, feature, dependency, host-test, or practical-coverage defaults.
-   - `7.4b14a` (`Planned`): review row 24 `STD-0849` through `STD-0851` against Implementation and all applicable canonical owners, freeze exact dispositions and ordered children, and make no normative movement.
+   - `7.4b14a` (`Accepted`): reject the baseline Implementation owner for planning-only row 24, assign `STD-0849` through `STD-0851` to Planning as exact index dispositions, and freeze one derived-entrypoint child without normative movement.
+   - `7.4b14b` (`Planned`): replace the duplicated full-review prompt procedure with one thin, versioned, path-neutral Planning entrypoint; record exact dispositions and advance to row 25 review.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

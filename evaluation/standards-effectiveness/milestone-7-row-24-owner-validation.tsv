@@ -1,0 +1,4 @@
+id	owner	disposition	rationale
+STD-0849	workflows/planning.md	index	full-review intent routes to canonical Planning without implementation authority
+STD-0850	workflows/planning.md	index	plan artifact ownership already belongs to canonical Planning
+STD-0851	workflows/planning.md	index	planning findings decomposition delegation and acceptance already belong to canonical Planning
