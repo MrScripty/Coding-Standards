@@ -7,12 +7,12 @@
 **Plan status:** `Active`
 
 **Current phase:** Rows 20 and 21 are accepted and closed; row 22 owner,
-toolchain, and package-metadata children are accepted; publish-control child
-22.4 is active.
+toolchain, package-metadata, and publish-control children are accepted;
+workspace-version child 22.5 is active.
 
-**Next slice:** Milestone 7.4b12e for row 22 child 22.4 `STD-0814`; split
-artifact and publication authority from Cargo publication-control mechanisms
-and extract manifest and crate-category examples to reference.
+**Next slice:** Milestone 7.4b12f for row 22 child 22.5 `STD-0815`, `STD-0816`,
+and `STD-0817`; split release-unit/version authority from Cargo workspace package
+metadata mechanisms and move both manifests to reference.
 
 **Acceptance status:** `partial`
 
@@ -1758,10 +1758,11 @@ all structural/routing fixtures pass.
      the manifest to non-normative reference under the same disposition, and
      reject package-field, edition, version, license, repository, README,
      keyword, category, completeness, and product-name defaults.
-   - `7.4b12e` (`Planned`): split `STD-0814` artifact and publication authority
+   - `7.4b12e` (`Accepted`): split `STD-0814` artifact and publication authority
      from Cargo publication-control mechanisms, extract manifest and crate-
      category examples under the same disposition, and reject registry,
      publish-false, binary, cdylib, tooling, harness, and workspace defaults.
+   - `7.4b12f` (`Planned`): split `STD-0815` release-unit/version authority from Cargo workspace package metadata mechanisms and move `STD-0816` and `STD-0817` manifests to reference without shared-version or inheritance defaults.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public

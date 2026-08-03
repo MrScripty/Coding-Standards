@@ -1,0 +1,16 @@
+case	contract	unit	channel	capability	evidence	fallback	expected
+accepted	accepted	known	known	supported	complete	none	allow
+contradictory	contradictory	known	known	supported	complete	none	typed-invalid
+missing	missing	known	known	supported	complete	none	typed-unavailable
+unknown_unit	accepted	unknown	known	supported	complete	none	typed-unavailable
+unknown_channel	accepted	known	unknown	supported	complete	none	typed-unavailable
+unsupported	accepted	known	known	unsupported	complete	none	typed-unsupported
+incomplete	accepted	known	known	supported	incomplete	none	typed-unavailable
+crates_io	accepted	known	known	supported	complete	crates-io	typed-invalid
+publish_false	accepted	known	known	supported	complete	publish-false	typed-invalid
+binary	accepted	known	known	supported	complete	binary-category	typed-invalid
+cdylib	accepted	known	known	supported	complete	cdylib-category	typed-invalid
+tooling	accepted	known	known	supported	complete	tooling-category	typed-invalid
+harness	accepted	known	known	supported	complete	harness-category	typed-invalid
+workspace	accepted	known	known	supported	complete	workspace-category	typed-invalid
+registry_success	accepted	known	known	supported	complete	registry-success	typed-invalid

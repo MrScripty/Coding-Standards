@@ -5923,6 +5923,30 @@ checks, and affected shared cursors.
 
 **Next slice:** `7.4b12e`, split `STD-0814` publication-control mechanisms.
 
+## Milestone 7.4b12e: Cargo Publication-Control Mechanisms
+
+**Outcome:** Accepted.
+
+Release retains artifact and publication-channel authority. Rust Release now
+expresses an accepted decision only through supported Cargo publication-control
+mechanisms. The embedded `publish = false` manifest and crate-category examples
+moved to non-normative reference under the section's single split disposition.
+
+Fifteen decisions reject crates.io, `publish = false`, binary, `cdylib`,
+tooling, test-harness, integration, workspace-only, and registry-success
+defaults. `STD-0814` has one exact split disposition. The execution train
+advances to 360 completed and 229 remaining identifiers across 103 completed
+and 28 pending logical clusters, with child `22.5` active.
+
+**Verification:** publication-control decisions, package-metadata regression,
+exact disposition, canonical routes, reference non-authority, row/train and
+plan checks, and affected shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b12f`, split `STD-0815` workspace release metadata and move
+`STD-0816` and `STD-0817` manifests to non-normative reference.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

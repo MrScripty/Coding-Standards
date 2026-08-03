@@ -34,20 +34,12 @@ Concrete manifest syntax is non-normative in the
 
 ## Publish Control
 
-Crates that should never be published to crates.io must set:
-
-```toml
-[package]
-publish = false
-```
-
-Use `publish = false` for:
-
-- binary-only crates
-- `cdylib` crates for specific runtimes
-- internal tooling
-- test harness crates
-- workspace-only integration crates
+Artifact and publication-channel authority belongs to
+[Release](../../workflows/release.md). Supported Cargo publication-control
+mechanisms are owned by the
+[Rust Release profile](../../profiles/languages/rust/release.md#cargo-publication-control-mechanisms).
+Concrete syntax and legacy category examples are non-normative in the
+[Rust release recipes](../../reference/recipes/rust-release.md#publication-control-example).
 
 ## Workspace Version Management
 

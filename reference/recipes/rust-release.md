@@ -58,3 +58,17 @@ Every value and included field must come from accepted canonical contracts and
 the selected registry capability. This example does not define required fields,
 versions, licensing, documentation placement, taxonomy, completeness, or a
 relationship between crate and product names.
+
+## Publication-Control Example
+
+One legacy example disabled registry publication:
+
+```toml
+[package]
+publish = false
+```
+
+The release and channel contracts decide whether this mechanism is applicable.
+The example does not make `publish = false` a default for binaries, `cdylib`
+packages, internal tools, test harnesses, integration crates, or workspace-only
+packages, and it does not select crates.io or any other channel.

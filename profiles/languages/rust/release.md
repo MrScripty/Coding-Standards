@@ -67,6 +67,18 @@ edition, minimum Rust version, description, license, repository, README,
 keywords, categories, field completeness, or publication readiness. Existing
 manifest values and registry acceptance cannot complete missing authority.
 
+## Cargo Publication-Control Mechanisms
+
+After Release defines which package artifacts may be published through each
+channel, express the accepted decision through supported Cargo publication
+controls. Select the mechanism from the release unit, package identity,
+channel, consumer, artifact composition, and registry capability.
+
+A Cargo control does not decide whether a binary, native library, internal
+tool, test harness, integration package, or workspace member is publishable.
+Package category, crate type, workspace placement, an existing `publish` field,
+or registry behavior cannot create publication authority.
+
 ## Verification
 
 Evidence covers the accepted release unit and channels, actual supported Rust
