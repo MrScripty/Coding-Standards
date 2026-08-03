@@ -6113,6 +6113,31 @@ checks, and affected shared cursors.
 
 **Next slice:** `7.4b13d`, split `STD-0833` workspace lint mechanisms.
 
+## Milestone 7.4b13d: Cargo Workspace Lint-Expression Mechanisms
+
+**Outcome:** Accepted.
+
+Tooling retains lint purpose, rule, scope, severity, debt, and orchestration
+authority, while Rust Unsafe retains unsafe-boundary authority. Rust Tooling
+now expresses accepted rules only through supported Cargo workspace lint tables
+and member inheritance mechanisms. Manifest syntax moved to non-normative
+reference under one split disposition.
+
+Sixteen decisions reject workspace-root, existing-manifest, inheritance, lint-
+set, severity, unsafe-policy, member-opt-in, and command-success defaults.
+`STD-0833` has one exact split disposition. The train advances to 369 completed
+and 220 remaining identifiers across 109 completed and 32 pending logical
+clusters, with child `23.4` active.
+
+**Verification:** workspace-lint decisions, owner regression, exact
+disposition, canonical routes, reference non-authority, row/train and plan
+checks, and affected shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b13e`, split `STD-0834` Criterion benchmark adapter
+mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

@@ -53,6 +53,19 @@ denial, doctests, no-default-feature checks, or a public-feature category.
 Missing or contradictory claim, scope, capability, environment, or evidence
 facts retain the typed outcomes instead of selecting a conventional command.
 
+## Cargo Workspace Lint-Expression Mechanisms
+
+After Tooling selects lint purpose, rules, scope, severity, debt handling, and
+orchestration, and Rust Unsafe accepts any unsafe-code boundary, express the
+accepted rules through supported Cargo workspace lint tables and member
+inheritance mechanisms. Each member remains within the selected lint scope;
+inheritance does not transfer lint-policy authority to the workspace root.
+
+Workspace layout, a root manifest, available inheritance, an existing lint
+table, or a lint name cannot require centralization, member opt-in, a rule set,
+severity, warning or denial, or relaxation of unsafe policy. Unsupported or
+missing expression facts retain typed outcomes rather than changing policy.
+
 ## Verification
 
 Evidence covers the accepted claim and scope, actual supported Rust and Cargo

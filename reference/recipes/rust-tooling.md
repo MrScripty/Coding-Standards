@@ -35,3 +35,26 @@ These commands are illustrative only after Verification selects matching
 claims and scopes. They do not require workspace, local, CI, all-target,
 all-feature, warning-denial, doctest, no-default-feature, or public-feature
 coverage.
+
+## Cargo Workspace Lint Examples
+
+One legacy configuration used workspace lint tables and member inheritance:
+
+```toml
+[workspace.lints.clippy]
+dbg_macro = "deny"
+todo = "warn"
+unwrap_used = "warn"
+large_enum_variant = "warn"
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+missing_docs = "warn"
+
+[lints]
+workspace = true
+```
+
+The example does not select root ownership, lint rules, severity, member
+inheritance, or unsafe-boundary policy. Those facts must be accepted by Tooling
+and Rust Unsafe before Cargo syntax is selected.

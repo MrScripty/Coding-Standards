@@ -7,12 +7,13 @@
 **Plan status:** `Active`
 
 **Current phase:** Rows 20, 21, and 22 are accepted and closed; row 23 is
-decomposed, the Rust Tooling owner and baseline-command mechanisms are
-accepted, and workspace-lint child 23.3 is active.
+decomposed, the Rust Tooling owner, baseline-command mechanisms, and workspace-
+lint mechanisms are accepted, and Criterion child 23.4 is active.
 
-**Next slice:** Milestone 7.4b13d for row 23 child 23.3 `STD-0833`; split
-Tooling lint authority from Cargo workspace lint-expression mechanisms and
-extract manifests to non-normative reference.
+**Next slice:** Milestone 7.4b13e for row 23 child 23.4 `STD-0834`; split
+Performance claim and benchmark-design authority from supported Criterion
+benchmark adapter mechanisms and extract setup and source examples to non-
+normative reference.
 
 **Acceptance status:** `partial`
 
@@ -1768,7 +1769,8 @@ all structural/routing fixtures pass.
    - `7.4b13a` (`Accepted`): reject whole-source movement for row 23 `STD-0831` through `STD-0842`; establish a narrow Rust Tooling mechanism owner, route `STD-0839` to Verification and `STD-0842` to Rust Cross-Platform, and freeze eleven ordered children with one disposition per identifier.
    - `7.4b13b` (`Accepted`): create the useful narrow Rust Tooling mechanism owner, non-normative recipe boundary, routes, and parent index with `STD-0831` without selecting claims, tests, lint policy, performance, dependencies, security, targets, features, tools, schedules, or commands.
    - `7.4b13c` (`Accepted`): split `STD-0832` Verification claim authority from Cargo baseline command mechanisms and extract fixed commands without workspace, CI, all-target, all-feature, warning, doctest, or public-feature defaults.
-   - `7.4b13d` (`Planned`): split `STD-0833` Tooling lint authority from Cargo workspace lint-expression mechanisms and extract manifests without root, lint-set, severity, inheritance, or unsafe defaults.
+   - `7.4b13d` (`Accepted`): split `STD-0833` Tooling lint authority from Cargo workspace lint-expression mechanisms and extract manifests without root, lint-set, severity, inheritance, or unsafe defaults.
+   - `7.4b13e` (`Planned`): split `STD-0834` Performance claim and benchmark-design authority from supported Criterion benchmark adapter mechanisms and extract setup and source examples without Criterion, benchmark-trigger, threshold, input, storage, CI, or noise-control defaults.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public

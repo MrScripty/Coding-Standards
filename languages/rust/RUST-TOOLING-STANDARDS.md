@@ -20,29 +20,13 @@ Concrete commands are non-normative in the
 
 ## Workspace Lints
 
-Configure shared lint policy at the workspace root when possible.
-
-```toml
-[workspace.lints.clippy]
-dbg_macro = "deny"
-todo = "warn"
-unwrap_used = "warn"
-large_enum_variant = "warn"
-
-[workspace.lints.rust]
-unsafe_code = "deny"
-missing_docs = "warn"
-```
-
-Each member crate should opt in:
-
-```toml
-[lints]
-workspace = true
-```
-
-Crates that intentionally own unsafe boundaries may relax `unsafe_code` to
-`warn` as described in [RUST-UNSAFE-STANDARDS.md](RUST-UNSAFE-STANDARDS.md).
+Lint policy and orchestration belong to [Tooling](../../workflows/tooling.md),
+and unsafe-boundary policy belongs to the
+[Rust Unsafe profile](../../profiles/languages/rust/unsafe.md). Supported Cargo
+workspace lint-expression mechanisms are owned by the
+[Rust Tooling profile](../../profiles/languages/rust/tooling.md#cargo-workspace-lint-expression-mechanisms).
+Concrete manifests are non-normative in the
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md#cargo-workspace-lint-examples).
 
 ## Required Criterion Benchmarks
 

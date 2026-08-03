@@ -1,0 +1,17 @@
+case	policy	scope	unsafe	capability	fallback	expected
+accepted	accepted	known	accepted	supported	none	allow
+missing_policy	missing	known	accepted	supported	none	typed-unavailable
+unknown_scope	accepted	unknown	accepted	supported	none	typed-unavailable
+missing_unsafe	accepted	known	missing	supported	none	typed-unavailable
+contradictory	contradictory	known	accepted	supported	none	typed-invalid
+unsupported	accepted	known	accepted	unsupported	none	typed-unsupported
+workspace_root	accepted	known	accepted	supported	workspace-root	typed-invalid
+existing_manifest	accepted	known	accepted	supported	existing-manifest	typed-invalid
+inheritance	accepted	known	accepted	supported	inheritance	typed-invalid
+lint_set	accepted	known	accepted	supported	lint-set	typed-invalid
+deny	accepted	known	accepted	supported	deny-severity	typed-invalid
+warn	accepted	known	accepted	supported	warn-severity	typed-invalid
+unsafe_deny	accepted	known	accepted	supported	unsafe-deny	typed-invalid
+unsafe_relax	accepted	known	accepted	supported	unsafe-relaxation	typed-invalid
+member_opt_in	accepted	known	accepted	supported	member-opt-in	typed-invalid
+command_success	accepted	known	accepted	supported	command-success	typed-invalid
