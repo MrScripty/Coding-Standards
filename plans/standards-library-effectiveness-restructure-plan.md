@@ -10,11 +10,13 @@
 decomposed, the Rust Tooling owner, baseline-command, workspace-lint, and
 Criterion, test-runner, and feature-matrix adapter mechanisms are accepted, and
 compile-fail, property-test, and Rust test-style children are accepted, and
-Rust tool-inventory child 23.9 is active.
+Rust tool-inventory child 23.9 is accepted, and build-script child 23.10 is
+active.
 
-**Next slice:** Milestone 7.4b13k for row 23 child 23.9 `STD-0840`; split
-generic owner decisions from a capability-matched Rust tool-adapter inventory
-without preserving legacy status labels or product defaults.
+**Next slice:** Milestone 7.4b13l for row 23 child 23.10 `STD-0841`; split build
+and supply-chain authority from supported Cargo build-script mechanisms without
+legacy purpose, directive, output, compiler, detection, timestamp, or dependency
+defaults.
 
 **Acceptance status:** `partial`
 
@@ -1778,7 +1780,8 @@ all structural/routing fixtures pass.
    - `7.4b13h` (`Accepted`): split `STD-0837` compile-time rejection contract and evidence authority from compile-fail harness mechanisms and extract examples without trybuild, restriction-category, CI, or syntax defaults.
    - `7.4b13i` (`Accepted`): split `STD-0838` invariant, property, generator, and evidence authority from property-test harness mechanisms and extract examples without proptest, invariant-category, parser, state-machine, or syntax defaults.
    - `7.4b13j` (`Accepted`): refine `STD-0839` test design, naming, placement, and regression-record authority into Verification and extract Rust syntax without naming, placement, helper, directory, or documentation defaults.
-   - `7.4b13k` (`Planned`): split `STD-0840` generic owner decisions from a capability-matched Rust tool-adapter inventory without required, optional, recommended, product, category, or Miri defaults.
+   - `7.4b13k` (`Accepted`): split `STD-0840` generic owner decisions from a capability-matched Rust tool-adapter inventory without required, optional, recommended, product, category, or Miri defaults.
+   - `7.4b13l` (`Planned`): split `STD-0841` build and supply-chain authority from supported Cargo build-script mechanisms without sparing-use, purpose, directive, output, compiler, runtime-detection, timestamp, or dependency defaults.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

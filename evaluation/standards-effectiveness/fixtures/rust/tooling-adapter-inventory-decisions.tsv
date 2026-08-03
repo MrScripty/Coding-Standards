@@ -1,0 +1,17 @@
+case	claim	tooling	owner	capability	fallback	expected
+accepted	accepted	accepted	known	supported	none	allow
+missing_claim	missing	accepted	known	supported	none	typed-unavailable
+missing_tooling	accepted	missing	known	supported	none	typed-unavailable
+missing_owner	accepted	accepted	missing	supported	none	typed-unavailable
+contradictory	contradictory	accepted	known	supported	none	typed-invalid
+unsupported	accepted	accepted	known	unsupported	none	typed-unsupported
+required	accepted	accepted	known	supported	required	typed-invalid
+optional	accepted	accepted	known	supported	optional	typed-invalid
+recommended	accepted	accepted	known	supported	recommended	typed-invalid
+product	accepted	accepted	known	supported	product-name	typed-invalid
+category	accepted	accepted	known	supported	category	typed-invalid
+miri	accepted	accepted	known	supported	miri	typed-invalid
+installed	accepted	accepted	known	supported	installed	typed-invalid
+popular	accepted	accepted	known	supported	popularity	typed-invalid
+pure_rust	accepted	accepted	known	supported	pure-rust	typed-invalid
+success	accepted	accepted	known	supported	command-success	typed-invalid

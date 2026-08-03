@@ -142,6 +142,22 @@ strategy, oracle, case count, seed, shrink behavior, CI execution, or claim.
 Missing or unsupported adapter facts retain typed outcomes rather than
 narrowing the domain, weakening the property, or accepting harness success.
 
+## Capability-Matched Tool Adapters
+
+After each generic owner accepts its claim and Tooling selects a supported
+product, configuration, scope, and schedule, select only the Rust adapter that
+expresses that contract. Applicable capabilities may include formatting,
+linting, test execution, benchmarking, feature matrices, coverage collection,
+macro inspection, or unsafe-usage inventory. Rust Dependency owns Cargo graph,
+audit, advisory, license, duplicate, and unused-dependency adapters; Rust Unsafe
+owns Miri applicability and evidence requirements.
+
+A product name, installation, legacy required/optional/recommended label,
+category, ecosystem popularity, pure-Rust label, or successful command cannot
+select a tool, adapter, scope, schedule, policy, or acceptance. Missing or
+unsupported adapter facts retain typed outcomes rather than substituting a
+nearby tool or treating visibility as proof.
+
 ## Verification
 
 Evidence covers the accepted claim and scope, actual supported Rust and Cargo

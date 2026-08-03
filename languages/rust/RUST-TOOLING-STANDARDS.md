@@ -104,22 +104,16 @@ Rust-specific syntax and directory examples are non-normative in the
 
 ## Recommended Rust Tools
 
-| Tool | Status | Use |
-| --- | --- | --- |
-| `cargo fmt` | Required | formatting |
-| `cargo clippy` | Required | linting and correctness hints |
-| `cargo test` | Required | standard test execution and doctests |
-| Criterion | Required for performance claims | statistical benchmarks |
-| `cargo nextest` | Optional | faster isolated test execution and CI reporting |
-| `cargo hack` | Optional | deeper feature matrix verification |
-| `cargo llvm-cov` | Recommended | coverage |
-| `cargo audit` | Recommended | vulnerability scanning |
-| `cargo deny` | Recommended | license, source, duplicate, and advisory policy |
-| `cargo machete` or `cargo udeps` | Recommended | unused dependency detection |
-| `cargo tree` | Recommended | dependency graph inspection |
-| `cargo expand` | Optional | macro expansion inspection |
-| `cargo geiger` | Optional | unsafe usage visibility |
-| Miri | Required for pure-Rust unsafe where practical | undefined behavior checks |
+Tool selection, configuration, scope, and scheduling belongs to
+[Tooling](../../workflows/tooling.md), while each claim remains with its generic
+owner. Supported general Rust tool adapters belong to the
+[Rust Tooling profile](../../profiles/languages/rust/tooling.md#capability-matched-tool-adapters),
+dependency and audit adapters to the
+[Rust Dependency profile](../../profiles/languages/rust/dependencies.md), and
+Miri applicability to the
+[Rust Unsafe profile](../../profiles/languages/rust/unsafe.md). The legacy
+product catalog is non-normative in the
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md#rust-tool-catalog-example).
 
 ## Build Scripts
 

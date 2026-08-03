@@ -146,3 +146,14 @@ issue, invariant, or production symptom for regressions.
 These are illustrative Rust forms only. They do not select naming vocabulary,
 placement, helper type, directory, colocation, benchmark location, or durable
 documentation content.
+
+## Rust Tool Catalog Example
+
+Legacy guidance listed cargo fmt, cargo clippy, cargo test, Criterion, cargo
+nextest, cargo hack, cargo llvm-cov, cargo audit, cargo deny, cargo machete or
+cargo udeps, cargo tree, cargo expand, cargo geiger, and Miri. It labeled these
+products required, optional, recommended, or required in a named situation.
+
+The catalog is illustrative discovery material only. Product presence, order,
+category, or legacy status does not select a tool, claim, policy, scope,
+schedule, adapter, or acceptance result.

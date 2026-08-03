@@ -6309,6 +6309,30 @@ canonical owner already covered every retained semantic.
 
 **Next slice:** `7.4b13k`, split `STD-0840` Rust tool-adapter inventory.
 
+## Milestone 7.4b13k: Capability-Matched Rust Tool Adapters
+
+**Outcome:** Accepted.
+
+Generic owners retain claim and policy authority, Tooling retains product,
+configuration, scope, and schedule selection, Rust Dependency retains Cargo
+graph and audit adapters, and Rust Unsafe retains Miri applicability. Rust
+Tooling now selects only capability-matched general Rust adapters after those
+decisions. The legacy product/status table is non-normative reference.
+
+Sixteen decisions reject required, optional, recommended, product, category,
+Miri, installation, popularity, pure-Rust, and command-success defaults.
+`STD-0840` has one exact split disposition. The train advances to 376 completed
+and 213 remaining identifiers across 116 completed and 26 pending logical
+clusters, with child `23.10` active.
+
+**Verification:** adapter-inventory decisions, narrower-owner regression,
+exact disposition, reference non-authority, row/train and plan checks, and
+affected shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b13l`, split `STD-0841` Cargo build-script mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
