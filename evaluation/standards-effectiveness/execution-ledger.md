@@ -6360,6 +6360,31 @@ before any `STD-0841` normative movement.
 
 **Next slice:** `7.4b13m`, split `STD-0841` Cargo build-script mechanisms.
 
+## Milestone 7.4b13m: Cargo Build-Script Expression Mechanisms
+
+**Outcome:** Accepted.
+
+Build retains action, phase, input/output, consumer, side-effect, invalidation,
+environment, and determinism authority, while narrower canonical owners retain
+generated-contract, dependency, target, security, release, orchestration, and
+evidence decisions. Rust Tooling now owns only supported Cargo and `build.rs`
+expression mechanisms. Legacy purposes and products are non-normative reference.
+
+Sixteen decisions reject existing-script, sparing-use, purpose, directive,
+output, compiler, detection-phase, timestamp, dependency, raw-command, and
+build-success defaults. `STD-0841` has one exact split disposition. The train
+advances to 377 completed and 212 remaining identifiers across 117 completed
+and 25 pending logical clusters, with child `23.11` active.
+
+**Verification:** build-script decisions, Build-owner regression, exact
+disposition, reference non-authority, row/train and plan checks, and affected
+shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b13n`, split `STD-0842` target and `no_std` authority and
+close the Rust tooling legacy source.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

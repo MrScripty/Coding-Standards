@@ -117,22 +117,14 @@ product catalog is non-normative in the
 
 ## Build Scripts
 
-Use `build.rs` sparingly. Build scripts are part of the supply chain and can
-make builds non-reproducible if abused.
-
-Rules:
-
-- Use `build.rs` only for compile-time metadata, generated code, C/C++ build
-  integration, system-library probing, or target-specific cfg emission.
-- Always emit precise `cargo::rerun-if-changed` or `cargo::rerun-if-env-changed`
-  instructions.
-- Write generated files to `OUT_DIR`, never to `src/`.
-- Use the `cc` crate for C/C++ compilation instead of raw compiler commands.
-- Prefer runtime detection over build-time detection for optional hardware or
-  environment capabilities.
-- Respect `SOURCE_DATE_EPOCH` when embedding timestamps so release builds can be
-  reproducible.
-- Keep build dependencies minimal and audited.
+Build-time action, input, output, side-effect, invalidation, environment, and
+determinism authority belongs to [Build](../../workflows/build.md). Generated
+contracts, dependencies, targets, security, release claims, orchestration, and
+evidence remain with their applicable canonical owners. Supported Cargo and
+`build.rs` expression mechanisms are owned by the
+[Rust Tooling profile](../../profiles/languages/rust/tooling.md#cargo-build-script-expression-mechanisms).
+Illustrative purposes and products are non-normative in the
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md#cargo-build-script-examples).
 
 ## `no_std` And Embedded-Compatible Crates
 

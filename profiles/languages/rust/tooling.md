@@ -158,6 +158,27 @@ select a tool, adapter, scope, schedule, policy, or acceptance. Missing or
 unsupported adapter facts retain typed outcomes rather than substituting a
 nearby tool or treating visibility as proof.
 
+## Cargo Build-Script Expression Mechanisms
+
+After Build accepts the action, phase, authoritative inputs and outputs,
+consumers, side effects, invalidation, environment access, and determinism;
+after Contracts, Dependencies, Cross-Platform, Security, Release, Tooling, and
+Verification accept their applicable narrower contracts; express those
+decisions through supported Cargo build-script mechanisms.
+
+Applicable mechanisms may include a `build.rs` entry point, precise Cargo rerun
+directives, Cargo metadata or configuration directives, `OUT_DIR` output,
+supported native compiler adapters, and accepted environment reads. Each
+mechanism transports an accepted fact and cannot create build authority.
+
+An existing build script, compile-time label, generated-code request, native
+source, system library, target condition, Cargo directive, output directory,
+compiler adapter, hardware capability, timestamp variable, or build dependency
+cannot select purpose, phase, output, invalidation, compiler, discovery timing,
+determinism, or dependency policy. Missing or unsupported expression facts
+retain typed outcomes rather than using a raw command, source-tree output,
+broad rerun, alternate detection phase, or successful build.
+
 ## Verification
 
 Evidence covers the accepted claim and scope, actual supported Rust and Cargo

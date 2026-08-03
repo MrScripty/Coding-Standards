@@ -157,3 +157,15 @@ products required, optional, recommended, or required in a named situation.
 The catalog is illustrative discovery material only. Product presence, order,
 category, or legacy status does not select a tool, claim, policy, scope,
 schedule, adapter, or acceptance result.
+
+## Cargo Build-Script Examples
+
+Legacy guidance listed compile-time metadata, generated code, C or C++ build
+integration, system-library probing, and target-specific configuration as
+possible `build.rs` purposes. It also mentioned precise Cargo rerun directives,
+`OUT_DIR`, the `cc` crate, runtime detection, `SOURCE_DATE_EPOCH`, and minimal
+audited build dependencies.
+
+These examples are discovery material only. They do not select a build action,
+purpose, phase, input, output, invalidation boundary, compiler, detection phase,
+timestamp contract, dependency, determinism claim, or acceptance result.

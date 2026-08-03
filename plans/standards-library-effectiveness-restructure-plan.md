@@ -10,13 +10,12 @@
 decomposed, the Rust Tooling owner, baseline-command, workspace-lint, and
 Criterion, test-runner, and feature-matrix adapter mechanisms are accepted, and
 compile-fail, property-test, and Rust test-style children are accepted, and
-Rust tool-inventory child 23.9 and the generic Build owner are accepted, and
-build-script child 23.10 is active.
+Rust tool-inventory, generic Build, and build-script children are accepted, and
+target/`no_std` closure child 23.11 is active.
 
-**Next slice:** Milestone 7.4b13m for row 23 child 23.10 `STD-0841`; split Build
-and narrower generic authority from supported Cargo build-script mechanisms
-without legacy purpose, directive, output, compiler, detection, timestamp, or
-dependency defaults.
+**Next slice:** Milestone 7.4b13n for row 23 child 23.11 `STD-0842`; split target
+and `no_std` authority into Rust Cross-Platform, preserve API, Dependency, and
+Tooling routes, extract commands, and close the legacy source.
 
 **Acceptance status:** `partial`
 
@@ -1783,7 +1782,7 @@ all structural/routing fixtures pass.
    - `7.4b13k` (`Accepted`): split `STD-0840` generic owner decisions from a capability-matched Rust tool-adapter inventory without required, optional, recommended, product, category, or Miri defaults.
    - Child 23.10 generic Build owner replan (`Accepted`): create `workflow.build` for build-time action, input/output, side-effect, invalidation, environment, and determinism authority while preserving narrower Contracts, Dependencies, Cross-Platform, Security, Release, Tooling, Verification, and language-profile ownership.
    - `7.4b13l` (`Accepted`): create and route the useful generic Build workflow with typed owner decisions before moving `STD-0841`; retain the active identifier and train counts.
-   - `7.4b13m` (`Planned`): split `STD-0841` Build and narrower generic authority from supported Cargo build-script mechanisms without sparing-use, purpose, directive, output, compiler, runtime-detection, timestamp, or dependency defaults.
+   - `7.4b13m` (`Accepted`): split `STD-0841` Build and narrower generic authority from supported Cargo build-script mechanisms without sparing-use, purpose, directive, output, compiler, runtime-detection, timestamp, or dependency defaults.
    - `7.4b13n` (`Planned`): split `STD-0842` target and `no_std` authority into Rust Cross-Platform, preserve API, Dependency, and Tooling routes, extract commands, and close the legacy source without target, crate-category, feature, dependency, host-test, or practical-coverage defaults.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
