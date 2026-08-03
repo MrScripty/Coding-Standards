@@ -6194,6 +6194,31 @@ new owner or additional disposition.
 **Next slice:** `7.4b13g`, split `STD-0836` Cargo feature-matrix adapter
 mechanisms.
 
+## Milestone 7.4b13g: Cargo Feature-Matrix Adapter Mechanisms
+
+**Outcome:** Accepted.
+
+Generic and Rust feature, consumer, footprint, target, support, manifest,
+source, tool, schedule, and evidence owners retain policy authority. Rust
+Tooling now expresses accepted matrix decisions only through supported Cargo
+and cargo-hack invocation and result mechanisms. Commands moved to non-
+normative reference under one split disposition.
+
+Sixteen decisions reject cargo-hack, crate-category, powerset, feature-count,
+workspace, dependency-exclusion, all-feature, no-default-feature, target, and
+command-success defaults. `STD-0836` has one exact split disposition. The train
+advances to 372 completed and 217 remaining identifiers across 112 completed
+and 29 pending logical clusters, with child `23.7` active.
+
+**Verification:** feature-matrix decisions, affected owner regression, exact
+disposition, reference non-authority, row/train and plan checks, and affected
+shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b13h`, split `STD-0837` and `STD-0838` compile-fail and
+property-test harness mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

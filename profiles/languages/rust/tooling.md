@@ -99,6 +99,22 @@ nextest or create policy. Runner success cannot satisfy omitted doctest or other
 claims. Missing or unsupported adapter facts retain typed outcomes rather than
 selecting `cargo test`, nextest, retries, or weaker evidence.
 
+## Cargo Feature-Matrix Adapter Mechanisms
+
+After Dependencies, Contracts, Library, and Cross-Platform accept feature,
+consumer-configuration, footprint, target, and support contracts; Rust
+Dependency and Rust API accept manifest and source expressions; Tooling selects
+a matrix tool and schedule; and Verification accepts the evidence claims,
+express the selected matrix through supported Cargo and cargo-hack invocation
+and result mechanisms.
+
+Cargo-hack availability, crate category, feature count, workspace layout,
+`no_std`, optional dependencies, platform conditions, or public visibility
+cannot select a tool, each-feature or powerset coverage, scope, exclusions,
+baseline commands, or CI schedule. Missing or unsupported matrix facts retain
+typed outcomes rather than selecting all features, no default features, a
+feature-count threshold, or weaker evidence.
+
 ## Verification
 
 Evidence covers the accepted claim and scope, actual supported Rust and Cargo

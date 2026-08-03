@@ -101,3 +101,18 @@ cargo test --workspace --doc
 
 These commands do not select nextest, workspace scope, CI execution, timeout,
 JUnit output, isolation, partitioning, retries, or doctest claims.
+
+## Cargo Feature-Matrix Command Examples
+
+Legacy examples included:
+
+```sh
+cargo hack check --each-feature --workspace --no-dev-deps
+cargo hack check --feature-powerset -p my-core-crate
+cargo check --workspace --all-features
+cargo check --workspace --no-default-features
+```
+
+These commands do not select cargo-hack, each-feature or powerset coverage,
+feature-count thresholds, package or workspace scope, dependency exclusions,
+baseline commands, target support, or evidence claims.

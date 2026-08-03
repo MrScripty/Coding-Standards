@@ -55,38 +55,16 @@ Concrete commands are non-normative in the
 
 ## Optional Feature Matrix Checks
 
-`cargo hack` is optional. Use it when feature interactions are important enough
-to justify the extra CI time.
-
-Recommended uses:
-
-- public library crates with multiple feature flags
-- `no_std` or `alloc`/`std` split crates
-- optional unsafe or platform-specific implementations
-- binding crates with feature-gated host integrations
-- crates where downstream consumers commonly select minimal features
-
-Do not require exhaustive feature powerset checks by default. Feature powersets
-are exponential and become expensive quickly.
-
-Practical optional checks:
-
-```bash
-cargo hack check --each-feature --workspace --no-dev-deps
-```
-
-Use powerset checks only for small core crates with fewer than eight features:
-
-```bash
-cargo hack check --feature-powerset -p my-core-crate
-```
-
-Baseline Cargo checks remain required for public feature contracts:
-
-```bash
-cargo check --workspace --all-features
-cargo check --workspace --no-default-features
-```
+Feature behavior belongs to [Dependencies](../../topics/dependencies.md),
+consumer configurations to Contracts and Library, and target and `no_std`
+support to Cross-Platform. Rust manifest and source expression belong to the
+Rust Dependency and Rust API profiles. Tool selection and scheduling belong to
+[Tooling](../../workflows/tooling.md), and evidence claims belong to
+[Verification](../../workflows/verification.md). Supported Cargo feature-
+matrix adapters are owned by the
+[Rust Tooling profile](../../profiles/languages/rust/tooling.md#cargo-feature-matrix-adapter-mechanisms).
+Commands are non-normative in the
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md#cargo-feature-matrix-command-examples).
 
 ## Compile-Fail Tests
 
