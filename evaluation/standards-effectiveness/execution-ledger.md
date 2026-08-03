@@ -6461,6 +6461,27 @@ and complete suite.
 **Next slice:** `7.4b15a`, perform row 25 owner and child decomposition review
 for `STD-0852` through `STD-0858` without normative movement.
 
+## Milestone 7.4b15a: Implementation Prompt Lineage Replan
+
+**Outcome:** Accepted planning correction.
+
+The immutable snapshot retains seven identifiers while the tracked prompt was
+already shortened in Milestone 3. Snapshot sections now establish lineage only;
+canonical workflows establish current authority. All seven identifiers are
+Implementation-owned exact index dispositions in one derived-entrypoint child.
+
+Planning, Verification, and Commit retain their own process authority. No
+normative content moved, no identifier was regenerated, and no legacy checklist
+is accepted as fallback. Counts and active train row remain unchanged.
+
+**Verification:** exact owner validation, decomposition completeness, plan
+lifecycle, and execution-train checks.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b15b`, implement row 25 child 25.1 as a thin Implementation
+entrypoint for `STD-0852` through `STD-0858`.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

@@ -1,0 +1,8 @@
+id	owner	disposition	rationale
+STD-0852	workflows/implementation.md	index	implementation intent routes to the canonical workflow
+STD-0853	workflows/implementation.md	index	standards routing is consumed through the canonical implementation entrypoint
+STD-0854	workflows/implementation.md	index	preflight behavior already belongs to Implementation and routed owners
+STD-0855	workflows/implementation.md	index	slice process already belongs to canonical Implementation
+STD-0856	workflows/implementation.md	index	delegation authority remains with canonical Planning and Implementation routes
+STD-0857	workflows/implementation.md	index	findings and replan authority remain with canonical Planning routes
+STD-0858	workflows/implementation.md	index	acceptance and commit completion remain with routed Verification and Commit owners
