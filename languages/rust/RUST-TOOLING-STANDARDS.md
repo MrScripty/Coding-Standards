@@ -11,21 +11,12 @@ authority.
 
 ## Required Baseline Verification
 
-Every Rust workspace should define local and CI commands that cover:
-
-```bash
-cargo fmt --all -- --check
-cargo clippy --workspace --all-targets --all-features -- -D warnings
-cargo test --workspace
-cargo test --workspace --doc
-cargo check --workspace --all-features
-```
-
-For crates with public feature contracts, also run:
-
-```bash
-cargo check --workspace --no-default-features
-```
+Verification claim and evidence authority belongs to
+[Verification](../../workflows/verification.md). Supported Cargo baseline
+command mechanisms are owned by the
+[Rust Tooling profile](../../profiles/languages/rust/tooling.md#cargo-baseline-command-mechanisms).
+Concrete commands are non-normative in the
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md#cargo-baseline-command-examples).
 
 ## Workspace Lints
 

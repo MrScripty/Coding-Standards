@@ -17,3 +17,21 @@ This material is non-normative. Generic owners select policy and claims. The
 supported Rust and Cargo mechanisms only after those contracts are accepted.
 Examples added during migration cannot select tools, commands, configurations,
 versions, targets, features, schedules, thresholds, or acceptance.
+
+## Cargo Baseline Command Examples
+
+One legacy baseline listed:
+
+```sh
+cargo fmt --all -- --check
+cargo clippy --workspace --all-targets --all-features -- -D warnings
+cargo test --workspace
+cargo test --workspace --doc
+cargo check --workspace --all-features
+cargo check --workspace --no-default-features
+```
+
+These commands are illustrative only after Verification selects matching
+claims and scopes. They do not require workspace, local, CI, all-target,
+all-feature, warning-denial, doctest, no-default-feature, or public-feature
+coverage.

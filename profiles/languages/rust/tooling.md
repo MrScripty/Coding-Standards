@@ -39,6 +39,20 @@ workspace-wide scope, all features or targets, fixed lint severity, CI
 execution, retries, a required/optional/recommended label, successful no-op, or
 smallest diff.
 
+## Cargo Baseline Command Mechanisms
+
+After Verification selects claims, scopes, environments, and evidence
+obligations, express each accepted Rust formatting, lint, build, test, doctest,
+or feature claim through supported Cargo and Rust tool command mechanisms. Map
+only the packages, targets, features, profiles, environments, and diagnostics
+required by that claim.
+
+A baseline command mechanism does not create a universal baseline or require
+local and CI duplication, workspace scope, all targets, all features, warning
+denial, doctests, no-default-feature checks, or a public-feature category.
+Missing or contradictory claim, scope, capability, environment, or evidence
+facts retain the typed outcomes instead of selecting a conventional command.
+
 ## Verification
 
 Evidence covers the accepted claim and scope, actual supported Rust and Cargo

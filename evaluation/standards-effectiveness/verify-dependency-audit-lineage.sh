@@ -59,7 +59,7 @@ next_slice_block="$(awk '
   capture { print }
 ' "$PLAN")"
 [[ "$next_slice_block" == *'row 23'* ]]
-for id in STD-0832; do
+for id in STD-0833; do
   [[ "$next_slice_block" == *"$id"* ]]
 done
 [[ "$next_slice_block" == *'row 23'* ]]

@@ -6090,6 +6090,29 @@ cursors.
 
 **Next slice:** `7.4b13c`, split `STD-0832` baseline command mechanisms.
 
+## Milestone 7.4b13c: Cargo Baseline Command Mechanisms
+
+**Outcome:** Accepted.
+
+Verification retains claim, scope, environment, and evidence authority. Rust
+Tooling now expresses accepted formatting, lint, build, test, doctest, and
+feature claims only through supported Cargo and Rust command mechanisms. Fixed
+commands moved to non-normative reference under one split disposition.
+
+Sixteen decisions reject workspace, local-and-CI, all-target, all-feature,
+warning-denial, doctest, no-default-feature, public-feature, conventional-
+command, and command-success defaults. `STD-0832` has one exact split
+disposition. The train advances to 368 completed and 221 remaining identifiers
+across 108 completed and 33 pending logical clusters, with child `23.3` active.
+
+**Verification:** baseline-command decisions, owner regression, exact
+disposition, canonical routes, reference non-authority, row/train and plan
+checks, and affected shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b13d`, split `STD-0833` workspace lint mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
