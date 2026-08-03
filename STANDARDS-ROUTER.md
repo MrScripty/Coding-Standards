@@ -36,6 +36,7 @@ observable task conditions. Do not read every document by default.
 | Multi-step work, architectural decisions, or re-planning | [Planning](workflows/planning.md) |
 | Commit creation or history maintenance | [Commit](workflows/commit.md) |
 | Durable responsibility, decision, contract, or operational procedure changes | [Documentation](workflows/documentation.md) |
+| Build-time actions, authoritative build inputs or outputs, invalidation, native integration, environment access, or deterministic-build requirements change | [Build](workflows/build.md) |
 | CI or development-tool selection, configuration, scheduling, or orchestration changes | [Tooling](workflows/tooling.md) |
 | Shipping an artifact, changing a published version promise, or preparing consumer-visible release information | [Release](workflows/release.md) |
 
@@ -75,7 +76,7 @@ contain infrastructure code.
 | Rust public or boundary-facing type, conversion, visibility, result, panic, trait, parameter, Cargo-feature, or Rustdoc mechanism changes | [Rust API profile](profiles/languages/rust/api.md) plus the Rust profile and applicable generic owners |
 | Rust Cargo dependency declaration, workspace inheritance, resolver metadata, dependency graph, audit adapter, or build-cost measurement mechanism changes | [Rust Dependency profile](profiles/languages/rust/dependencies.md) plus the Rust profile and applicable generic owners |
 | Rust toolchain, Cargo package/workspace release metadata, publication control, release automation adapter, or Rust release evidence mechanism changes | [Rust Release profile](profiles/languages/rust/release.md) plus Release, the Rust profile, and applicable generic owners |
-| Rust or Cargo formatting, lint, test-runner, feature-matrix, benchmark, coverage, diagnostic, or build-script adapter mechanism changes | [Rust Tooling profile](profiles/languages/rust/tooling.md) plus Tooling, Verification, the Rust profile, and applicable generic owners |
+| Rust or Cargo formatting, lint, test-runner, feature-matrix, benchmark, coverage, diagnostic, or build-script adapter mechanism changes | [Rust Tooling profile](profiles/languages/rust/tooling.md) plus Tooling, Verification, the Rust profile, Build for build-script behavior, and other applicable generic owners |
 | Rust async API, suspension boundary, concurrent I/O, stream, backpressure, cancellation-aware operation, or async resource lifetime changes | [Rust Async profile](profiles/languages/rust/async.md) plus the Rust profile |
 | Rust target contracts, triples, support claims, target-dependent source/configuration, target artifacts, or target evidence obligations change | [Rust Cross-Platform profile](profiles/languages/rust/cross-platform.md) plus the Rust profile and Cross-Platform topic |
 | TypeScript source, compiler configuration, declarations, generated TypeScript, or TypeScript-visible contract surfaces change | [TypeScript profile](profiles/languages/typescript.md) |

@@ -65,9 +65,10 @@ recipes.
 10. `23.9`: split `STD-0840` generic owner decisions from a capability-matched
    Rust tool-adapter inventory without required, optional, recommended, tool,
    category, or Miri defaults.
-11. `23.10`: split `STD-0841` build and supply-chain authority from supported
-    Cargo build-script mechanisms without sparing-use, purpose, directive,
-    output, compiler, runtime-detection, timestamp, or dependency defaults.
+11. `23.10`: split `STD-0841` Build, Contracts, Dependencies, Cross-Platform,
+    Security, Release, Tooling, and Verification authority from supported Cargo
+    build-script mechanisms without sparing-use, purpose, directive, output,
+    compiler, runtime-detection, timestamp, or dependency defaults.
 12. `23.11`: split `STD-0842` target and `no_std` authority into Rust Cross-
     Platform, preserve API, Dependency, and Tooling routes, extract commands,
     then close the legacy source without target, crate-category, feature,
@@ -98,6 +99,20 @@ Contracts-owned compile-time rejection requirements and Rust API expression.
 Property evidence starts from Contracts-owned invariants and Verification-owned
 domain, generator, and evidence design. Tooling selects each harness; Rust
 Tooling owns only the supported harness adapter mechanisms.
+
+## Child 23.10 Generic Build Owner Replan
+
+The original child named generic build authority that had no canonical owner.
+`workflows/build.md` now owns build-time action authorization, inputs, outputs,
+consumers, side effects, invalidation, environment access, and deterministic-
+build requirements. Contracts, Dependencies, Cross-Platform, Security, Release,
+Tooling, and Verification retain their narrower authority. Rust Tooling owns
+only supported Cargo and `build.rs` expression mechanisms after all applicable
+contracts are accepted.
+
+Create and verify Build as a useful generic owner before moving `STD-0841`.
+Retain one `STD-0841` split disposition and do not transfer build policy into a
+language profile.
 
 ## Re-plan Triggers
 

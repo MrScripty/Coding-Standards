@@ -24,6 +24,7 @@ reference material.
 | [workflows/planning.md](workflows/planning.md) | Active plans, lifecycle, re-planning, and delegated ownership | Multi-step or high-risk work |
 | [workflows/verification.md](workflows/verification.md) | Objective-aligned evidence selection | Any acceptance claim |
 | [workflows/documentation.md](workflows/documentation.md) | Proportional durable documentation and traceability profiles | Responsibility, decision, contract, or operational-boundary changes |
+| [workflows/build.md](workflows/build.md) | Build-time action, input/output, invalidation, side-effect, environment, and determinism contracts | Changing build programs, generated outputs, native integration, or build behavior |
 | [workflows/release.md](workflows/release.md) | Release applicability, versioning, changelog, contract, and acceptance boundaries | Shipping artifacts or changing published promises |
 | [reference/recipes/commits.md](reference/recipes/commits.md) | Non-normative staging and conventional commit examples | Formatting a commit after the workflow has selected process rules |
 | [reference/recipes/documentation.md](reference/recipes/documentation.md) | Non-normative comment, Markdown, public-interface, and algorithm examples | Applying a selected documentation requirement |

@@ -6333,6 +6333,33 @@ affected shared cursors.
 
 **Next slice:** `7.4b13l`, split `STD-0841` Cargo build-script mechanisms.
 
+## Milestone 7.4b13l: Generic Build Workflow Owner
+
+**Outcome:** Accepted.
+
+The new Build workflow owns build-time action authorization, authoritative
+inputs and outputs, consumers, side effects, invalidation, environment access,
+and deterministic-build requirements. Existing Contracts, Dependencies, Cross-
+Platform, Security, Release, Tooling, and Verification owners retain their
+narrower contracts; language profiles remain mechanism-only.
+
+Sixteen decisions cover valid, invalid, unavailable, and unsupported outcomes
+while rejecting existing-script, source-output, broad-rerun, raw-compiler,
+detection-swap, ambient-environment, timestamp, and build-success defaults.
+Canonical router, library, and legacy-index routes select the owner.
+
+The train remains at 376 completed and 213 remaining identifiers across 116
+completed and 26 pending logical clusters, with child `23.10` active.
+
+**Verification:** Build owner decisions, metadata, routing, row/train and plan
+checks, complete suite, and canonical-boundary review.
+
+**Deviation:** the row-23 plan referenced generic build authority without a
+canonical owner. The owner was created as a useful cross-language contract
+before any `STD-0841` normative movement.
+
+**Next slice:** `7.4b13m`, split `STD-0841` Cargo build-script mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

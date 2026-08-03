@@ -54,6 +54,12 @@ the [Implementation workflow](workflows/implementation.md#disabled-and-incomplet
 Acceptance evidence is selected by the
 [Verification workflow](workflows/verification.md#disabled-behavior-claims).
 
+## Build Behavior Route
+
+Build-time action, input, output, invalidation, side-effect, environment, and
+determinism authority is canonical in the
+[Build workflow](workflows/build.md).
+
 ## License Attribution Legacy Route
 
 Third-party provenance, license compatibility, obligation, attribution, and
