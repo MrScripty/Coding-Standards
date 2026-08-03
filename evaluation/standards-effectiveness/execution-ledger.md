@@ -6261,6 +6261,30 @@ reference non-authority, row/train and plan checks, and affected shared cursors.
 
 **Next slice:** `7.4b13i`, split `STD-0838` property-test harness mechanisms.
 
+## Milestone 7.4b13i: Property-Test Harness Adapter Mechanisms
+
+**Outcome:** Accepted.
+
+Contracts retains invariant and domain authority, Verification retains property,
+domain, generator, shrinking, reproducibility, oracle, and evidence authority,
+and Tooling retains harness selection and scheduling. Rust Tooling now owns only
+supported property-test generator, strategy, runner, seed, shrinking, and result
+adapter mechanisms.
+
+Sixteen decisions reject proptest, invariant-category, parser, state-machine,
+generator, strategy, seed, case-count, domain-narrowing, and harness-success
+defaults. `STD-0838` has one exact split disposition. The train advances to 374
+completed and 215 remaining identifiers across 114 completed and 28 pending
+logical clusters, with child `23.8` active.
+
+**Verification:** property-test decisions, compile-fail regression, exact
+disposition, reference non-authority, row/train and plan checks, and affected
+shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b13j`, refine `STD-0839` Rust test style into Verification.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

@@ -124,3 +124,13 @@ dimensional types, sealed traits, and non-exhaustive matching as possible
 compile-time rejection claims. These categories are illustrative only. They do
 not select trybuild, a fixture layout, expected diagnostics, CI execution, or a
 compile-fail claim.
+
+## Property-Test Harness Examples
+
+One legacy example used `proptest!` with generated graph and edge values and
+asserted that a successful edge insertion preserved acyclicity. Legacy
+categories also mentioned validated types, serialization and parser
+roundtrips, state machines, ordering, deduplication, and normalization.
+
+These examples do not select proptest, a property, input domain, generator,
+strategy, oracle, seed, shrink behavior, case count, or CI schedule.

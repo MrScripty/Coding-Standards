@@ -80,35 +80,15 @@ Illustrative categories are non-normative in the
 
 ## Property-Based Tests
 
-Use property tests for:
-
-- validated boundary types
-- serialization/deserialization round trips
-- parser/formatter round trips
-- state machine invariants
-- graph, ordering, deduplication, or normalization algorithms
-
-For validated boundary types, assert that any value that successfully parses can
-be used by all public accessors without panicking.
-
-Example:
-
-```rust
-use proptest::prelude::*;
-
-proptest! {
-    #[test]
-    fn graph_remains_acyclic_after_any_add(
-        graph in arbitrary_dag(),
-        edge in arbitrary_edge()
-    ) {
-        let mut graph = graph;
-        if graph.try_add_edge(edge).is_ok() {
-            prop_assert!(graph.is_acyclic());
-        }
-    }
-}
-```
+Invariant and domain authority belongs to
+[Contracts](../../topics/contracts.md). Property, domain, generator, shrinking,
+reproducibility, oracle, and evidence authority belongs to
+[Verification](../../workflows/verification.md), while harness selection and
+scheduling belongs to [Tooling](../../workflows/tooling.md). Supported Rust
+property-test harness adapters are owned by the
+[Rust Tooling profile](../../profiles/languages/rust/tooling.md#property-test-harness-adapter-mechanisms).
+Illustrative categories and syntax are non-normative in the
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md#property-test-harness-examples).
 
 ## Rust Test Style
 

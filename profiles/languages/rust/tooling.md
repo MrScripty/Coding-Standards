@@ -128,6 +128,20 @@ shape, diagnostic matching, CI execution, or claim coverage. Missing or
 unsupported adapter facts retain typed outcomes rather than substituting a
 compile check, runtime assertion, panic, or successful build.
 
+## Property-Test Harness Adapter Mechanisms
+
+After Contracts accepts the invariant and domain authority, Verification
+accepts the property, input domain, generator, shrinking, reproducibility,
+oracle, and evidence contract, and Tooling selects a harness and schedule,
+express those decisions through supported Rust property-test generator,
+strategy, runner, seed, shrinking, and result mechanisms.
+
+An algorithm, roundtrip, parser, state machine, validated type, graph operation,
+or installed proptest dependency cannot select property testing, a generator,
+strategy, oracle, case count, seed, shrink behavior, CI execution, or claim.
+Missing or unsupported adapter facts retain typed outcomes rather than
+narrowing the domain, weakening the property, or accepting harness success.
+
 ## Verification
 
 Evidence covers the accepted claim and scope, actual supported Rust and Cargo
