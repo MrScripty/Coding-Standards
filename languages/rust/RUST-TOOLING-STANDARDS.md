@@ -1,7 +1,13 @@
 # Rust Tooling Standards
 
-Rust verification, linting, benchmarks, feature checks, build scripts, and
-`no_std` guidance.
+Canonical Rust and Cargo tooling mechanisms are migrating to the
+[Rust Tooling profile](../../profiles/languages/rust/tooling.md). Generic
+tooling policy remains with [Tooling](../../workflows/tooling.md), verification
+claims remain with [Verification](../../workflows/verification.md), and concrete
+syntax belongs in the non-normative
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md). This parent is
+a migration route; unmoved sections below retain only their separately tracked
+authority.
 
 ## Required Baseline Verification
 

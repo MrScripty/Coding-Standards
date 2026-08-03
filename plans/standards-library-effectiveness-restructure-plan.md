@@ -7,11 +7,12 @@
 **Plan status:** `Active`
 
 **Current phase:** Rows 20, 21, and 22 are accepted and closed; row 23 is
-decomposed and Rust Tooling owner creation child 23.1 is active.
+decomposed, the Rust Tooling owner exists, and baseline-command child 23.2 is
+active.
 
-**Next slice:** Milestone 7.4b13b for row 23 child 23.1 `STD-0831`; create the
-narrow Rust Tooling mechanism owner, non-normative recipe boundary, canonical
-routes, and legacy parent index without moving child authority.
+**Next slice:** Milestone 7.4b13c for row 23 child 23.2 `STD-0832`; split
+Verification claim authority from Cargo baseline command mechanisms and extract
+fixed commands to non-normative reference.
 
 **Acceptance status:** `partial`
 
@@ -1765,7 +1766,8 @@ all structural/routing fixtures pass.
    - `7.4b12g` (`Accepted`): split `STD-0818` release-procedure and tool-selection authority from supported Rust release-automation adapters and move `STD-0819` configuration to reference without cadence, manual-procedure, version, commit, tag, changelog, or first-release defaults.
    - `7.4b12h` (`Accepted`): split `STD-0820` release and verification claim authority from supported Rust evidence mechanisms, extract fixed commands to reference, and close the legacy source without every-release, all-feature, warning, audit, benchmark, metadata, changelog, tag, or artifact-name checklist defaults.
    - `7.4b13a` (`Accepted`): reject whole-source movement for row 23 `STD-0831` through `STD-0842`; establish a narrow Rust Tooling mechanism owner, route `STD-0839` to Verification and `STD-0842` to Rust Cross-Platform, and freeze eleven ordered children with one disposition per identifier.
-   - `7.4b13b` (`Planned`): create the useful narrow Rust Tooling mechanism owner, non-normative recipe boundary, routes, and parent index with `STD-0831` without selecting claims, tests, lint policy, performance, dependencies, security, targets, features, tools, schedules, or commands.
+   - `7.4b13b` (`Accepted`): create the useful narrow Rust Tooling mechanism owner, non-normative recipe boundary, routes, and parent index with `STD-0831` without selecting claims, tests, lint policy, performance, dependencies, security, targets, features, tools, schedules, or commands.
+   - `7.4b13c` (`Planned`): split `STD-0832` Verification claim authority from Cargo baseline command mechanisms and extract fixed commands without workspace, CI, all-target, all-feature, warning, doctest, or public-feature defaults.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public

@@ -21,7 +21,7 @@ order	wave	start_id	end_id	source	owner	owner_state	activation	checkpoint
 20	process-dependencies	STD-0706	STD-0716	languages/rust/RUST-API-STANDARDS.md	profiles/languages/rust/api.md	exists	pre-slice-review	focused
 21	process-dependencies	STD-0731	STD-0751	languages/rust/RUST-DEPENDENCY-STANDARDS.md	profiles/languages/rust/dependencies.md	exists	pre-slice-review	focused
 22	process-dependencies	STD-0810	STD-0820	languages/rust/RUST-RELEASE-STANDARDS.md	profiles/languages/rust/release.md	exists	pre-slice-review	focused
-23	process-dependencies	STD-0831	STD-0842	languages/rust/RUST-TOOLING-STANDARDS.md	profiles/languages/rust/tooling.md	missing	owner-review	focused
+23	process-dependencies	STD-0831	STD-0842	languages/rust/RUST-TOOLING-STANDARDS.md	profiles/languages/rust/tooling.md	exists	pre-slice-review	focused
 24	process-dependencies	STD-0849	STD-0851	prompts/full-codebase-standards-refactor.md	workflows/implementation.md	exists	pre-slice-review	focused
 25	process-dependencies	STD-0852	STD-0858	prompts/implement-plan.md	workflows/implementation.md	exists	pre-slice-review	focused
 26	process-dependencies	STD-0859	STD-0887	templates/PLAN-TEMPLATE.md	workflows/planning.md	exists	pre-slice-review	focused

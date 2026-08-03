@@ -44,6 +44,9 @@ according to the crate's feature contract.
 - Route Rust toolchain, Cargo release metadata, publication-control,
   release-adapter, and release-evidence mechanisms through the
   [Rust Release profile](release.md).
+- Route Rust and Cargo formatting, lint, test-runner, feature-matrix,
+  benchmark, coverage, diagnostic, and build-script adapter mechanisms through
+  the [Rust Tooling profile](tooling.md).
 - Route async API and suspension-boundary selection through the
   [Rust Async profile](async.md).
 - Route Rust target selection, configuration placement, and target evidence
@@ -71,7 +74,7 @@ here:
 - [Rust dependency mechanisms](dependencies.md)
 - [Remaining release guidance](../../../languages/rust/RUST-RELEASE-STANDARDS.md#toolchain-pinning)
 - [Remaining security guidance](../../../languages/rust/RUST-SECURITY-STANDARDS.md)
-- [Tooling](../../../languages/rust/RUST-TOOLING-STANDARDS.md)
+- [Rust tooling mechanisms](tooling.md)
 
 If a legacy Rust rule conflicts with this profile for a moved rule, this
 profile is canonical. Conflicts in unmoved specialized rules must be reported

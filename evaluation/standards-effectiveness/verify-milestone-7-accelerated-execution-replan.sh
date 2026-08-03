@@ -79,7 +79,7 @@ done < "$PACKAGES"
 [[ "$row_count" -eq 43 ]]
 [[ "${#seen_orders[@]}" -eq 43 ]]
 [[ "${#package_seen[@]}" -eq 39 ]]
-[[ "${#missing_owners[@]}" -eq 5 ]]
+[[ "${#missing_owners[@]}" -eq 4 ]]
 
 for order in $(seq 5 47); do
   [[ -n "${seen_orders[$order]:-}" ]]

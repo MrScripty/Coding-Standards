@@ -6064,6 +6064,32 @@ Platform before normative movement.
 **Next slice:** `7.4b13b`, create the Rust Tooling owner and recipe boundary
 with `STD-0831`.
 
+## Milestone 7.4b13b: Rust Tooling Owner
+
+**Outcome:** Accepted.
+
+The new Rust Tooling profile owns only supported Rust and Cargo tooling adapter
+mechanisms after generic owners accept claims, tests, lint, tools, schedules,
+performance, dependencies, security, targets, features, build behavior, and
+evidence. A non-normative Rust tooling recipe boundary now owns extracted
+syntax. Router, library, Rust profile, and legacy parent routes select the new
+profile without moving child authority.
+
+Sixteen decisions cover supported adapter categories and typed invalid,
+unavailable, and unsupported outcomes while rejecting installed-tool,
+workspace-scope, legacy status-label, and command-success defaults. `STD-0831`
+has one exact index disposition. The train advances to 367 completed and 222
+remaining identifiers across 107 completed and 34 pending logical clusters,
+with child `23.2` active.
+
+**Verification:** owner decisions, metadata, canonical routes, recipe non-
+authority, exact disposition, row/train and plan checks, and affected shared
+cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b13c`, split `STD-0832` baseline command mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
