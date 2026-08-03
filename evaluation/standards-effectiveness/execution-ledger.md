@@ -6030,6 +6030,40 @@ contract are reviewed and accepted.
 
 **Next slice:** `7.4b13a`, planning only, for `STD-0831` through `STD-0842`.
 
+## Milestone 7.4b13a: Rust Tooling Owner And Decomposition Review
+
+**Outcome:** Accepted planning correction.
+
+Whole-source movement was rejected because the legacy Rust Tooling document
+mixes Verification claims and test design, Tooling selection and orchestration,
+Performance benchmarks, Dependency and Security policy, target and feature
+contracts, Rust/Cargo mechanisms, and product examples. The accepted design
+creates a narrow Rust Tooling mechanism specialization only where genuine
+Rust/Cargo adapters remain.
+
+Twelve identifiers are frozen into eleven ordered children. `STD-0839` refines
+Verification directly, and `STD-0842` splits into Rust Cross-Platform while
+preserving Rust API, Dependency, and Tooling routes. All other substantive
+sections split generic authority from Rust tooling mechanisms. Embedded
+commands, manifests, versions, thresholds, tables, and code examples become
+non-normative reference under one exact disposition per identifier.
+
+The execution train remains at 366 completed and 223 remaining identifiers.
+Row 23 expands from one baseline package to eleven logical children, producing
+106 completed and 35 pending logical clusters with child `23.1` active. No row-
+23 disposition was recorded during planning.
+
+**Verification:** exact ID coverage, owner-validation outcomes, ordered child
+coverage, missing-owner state, zero premature dispositions, execution-train
+cursor, plan structure, and lifecycle fixtures.
+
+**Deviation:** the baseline proposed Rust Tooling for every identifier. Owner
+review corrected `STD-0839` to Verification and `STD-0842` to Rust Cross-
+Platform before normative movement.
+
+**Next slice:** `7.4b13b`, create the Rust Tooling owner and recipe boundary
+with `STD-0831`.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
