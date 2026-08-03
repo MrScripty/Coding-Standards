@@ -6385,6 +6385,32 @@ shared cursors.
 **Next slice:** `7.4b13n`, split `STD-0842` target and `no_std` authority and
 close the Rust tooling legacy source.
 
+## Milestone 7.4b13n: Rust `no_std` Contract And Tooling Source Closure
+
+**Outcome:** Accepted.
+
+Rust Cross-Platform now owns target and `no_std` support claims. Dependencies,
+Contracts, Library, Rust API, Rust Dependency, Rust Tooling, and Verification
+retain feature, compatibility, consumer, source, manifest, adapter, and evidence
+authority. Commands and feature examples are non-normative reference, and the
+legacy Rust tooling source is a pure migration index with no normative sections.
+
+Sixteen decisions reject embedded, library, `std`-default, feature-split,
+dependency-default, host-test, compile-only, and nearby-target defaults.
+`STD-0842` has one exact split disposition; all 12 row identifiers are disposed
+exactly once. The train advances to 378 completed and 211 remaining identifiers
+across 118 completed and 24 pending logical clusters. Row 24 is active but
+undecomposed.
+
+**Verification:** `no_std` decisions, Cross-Platform and Rust Tooling owner
+regression, exact row dispositions, reference non-authority, legacy index
+purity, row/train and plan checks, and complete suite.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b14a`, perform row 24 owner and child decomposition review
+for `STD-0849` through `STD-0851` without normative movement.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

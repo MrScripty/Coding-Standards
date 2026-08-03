@@ -169,3 +169,14 @@ audited build dependencies.
 These examples are discovery material only. They do not select a build action,
 purpose, phase, input, output, invalidation boundary, compiler, detection phase,
 timestamp contract, dependency, determinism claim, or acceptance result.
+
+## `no_std` Command Examples
+
+Legacy guidance illustrated `cargo check --no-default-features`, a
+representative-target check, and `cargo test --lib` on a host. It also mentioned
+separate `core`, `alloc`, and `std` features and dependency declarations with
+`default-features = false`.
+
+These examples do not select `no_std` support, target or consumer coverage,
+feature structure or defaults, dependency configuration, package scope, host
+tests, commands, or evidence sufficiency.

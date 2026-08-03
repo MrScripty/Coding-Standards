@@ -25,6 +25,27 @@ target, artifact, or capability facts are `invalid`. Missing target,
 toolchain, linker, artifact, deployment, or evidence facts are `unavailable`.
 Do not relabel an unverified required target as best effort.
 
+## `no_std` Target Capability Contract
+
+Select `no_std`, `alloc`, or `std` support only from accepted target
+capabilities and real Library consumer configurations. Dependencies owns
+feature behavior, optionality, defaults, footprint, and dependency support;
+Contracts owns consumer-visible compatibility; Rust API owns source expression;
+Rust Dependency owns Cargo manifest expression; Rust Tooling owns command and
+evidence adapters; Verification owns claim sufficiency.
+
+Hosted, embedded, core-library, application, memory-constrained, or portability
+labels do not select a support mode. A target requirement cannot default to
+separate `core`/`alloc`/`std` features, `std` defaults, disabled dependency
+defaults, host tests, or compile-only evidence. Record each supported consumer
+and target combination independently.
+
+Contradictory target, consumer, feature, dependency, or support facts are
+`invalid`. A valid combination outside supported Rust, dependency, or target
+capability is `unsupported`. Missing target, consumer, feature, dependency,
+toolchain, or evidence facts are `unavailable`; do not substitute a host build,
+nearby target, default feature set, or practical-coverage claim.
+
 ## Configuration And Placement
 
 Select Rust `cfg`, build scripts, features, composition, and dispatch from the

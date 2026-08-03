@@ -179,6 +179,21 @@ determinism, or dependency policy. Missing or unsupported expression facts
 retain typed outcomes rather than using a raw command, source-tree output,
 broad rerun, alternate detection phase, or successful build.
 
+## `no_std` Evidence Adapter Mechanisms
+
+After Rust Cross-Platform accepts each target and support claim, Dependencies,
+Contracts, and Library accept feature and consumer configurations, Rust API and
+Rust Dependency accept source and manifest expressions, Tooling selects the
+execution contract, and Verification accepts the evidence claims, express only
+those claims through supported Cargo check, test, feature, package, and target
+adapter mechanisms.
+
+`no_std`, embedded, library, application, host-test, available target, or
+successful compile labels cannot select default features, disabled defaults,
+package scope, target, host tests, command combinations, or evidence strength.
+Missing or unsupported adapter facts retain typed outcomes rather than using a
+host build, compile-only result, nearby target, or conventional Cargo command.
+
 ## Verification
 
 Evidence covers the accepted claim and scope, actual supported Rust and Cargo
