@@ -47,9 +47,9 @@ recipes.
 4. `23.4`: split `STD-0834` Performance and Verification authority from
    Criterion adapter mechanisms without tool, PR, hot-path, budget, input,
    throughput, directory, dependency-version, harness, or CI defaults.
-5. `23.5`: split `STD-0835` Tooling and Verification authority from supported
-   Rust test-runner adapters without nextest, repository-size, timeout, JUnit,
-   partition, doctest, retry, or CI defaults.
+5. `23.5`: split `STD-0835` Tooling, Verification, and Resilience authority
+   from supported Rust test-runner adapters without nextest, repository-size,
+   timeout, JUnit, partition, doctest, retry, or CI defaults.
 6. `23.6`: split `STD-0836` feature-contract and evidence authority from Cargo
    feature-matrix adapters without cargo-hack, crate-category, powerset,
    feature-count, workspace, no-dev-deps, or baseline-command defaults.
@@ -74,6 +74,18 @@ Each child adds focused positive and negative decisions, records exact
 dispositions, updates plan and ledger state, and creates one atomic commit.
 Shared routing, profile indexes, recipes, dispositions, the legacy source, and
 planning artifacts remain serial integration-owner files.
+
+## Child 23.5 Test-Retry Ownership Replan
+
+Tooling owns runner selection, configuration, isolation, partitioning,
+reporting, and scheduling. Verification owns test and doctest claims and
+evidence sufficiency. Resilience owns retry eligibility, attempt and time
+budgets, repeated-execution safety, termination, and recovery outcomes. Rust
+Tooling owns only supported Cargo and nextest invocation and result-transport
+mechanisms after those contracts are accepted.
+
+Retain one `STD-0835` split disposition. Do not create a flaky-test owner,
+silently exclude retries, or let a runner capability select retry policy.
 
 ## Re-plan Triggers
 

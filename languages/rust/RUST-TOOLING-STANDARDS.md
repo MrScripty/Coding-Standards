@@ -42,32 +42,16 @@ Concrete Cargo and Rust syntax is non-normative in the
 
 ## Optional `cargo nextest`
 
-`cargo nextest` is not part of the official Rust/Cargo toolchain. It is a
-third-party Cargo subcommand and should be treated as an optional tooling choice.
-
-Use nextest when it materially improves local or CI feedback:
-
-- large workspaces with many test binaries
-- suites that need per-test timeouts
-- suites that benefit from JUnit output
-- suites that need better process isolation than plain `cargo test`
-- CI systems that partition tests across workers
-
-Rules:
-
-- Do not require nextest for small repos that are well served by `cargo test`.
-- If nextest is used in CI, still run doctests separately with `cargo test --doc`.
-- Configure timeouts deliberately; do not hide slow or deadlocked tests behind
-  broad retries.
-- Treat retries as a temporary diagnostic aid unless the test is explicitly
-  marked as integration-with-external-flake.
-
-Example:
-
-```bash
-cargo nextest run --workspace
-cargo test --workspace --doc
-```
+Runner selection, configuration, timeout, isolation, partition, reporting, and
+scheduling authority belongs to [Tooling](../../workflows/tooling.md). Test and
+doctest claim authority belongs to
+[Verification](../../workflows/verification.md). Retry eligibility, budgets,
+repeated-execution safety, termination, and recovery authority belongs to
+[Resilience](../../topics/resilience.md). Supported Cargo and nextest adapter
+mechanisms are owned by the
+[Rust Tooling profile](../../profiles/languages/rust/tooling.md#rust-test-runner-adapter-mechanisms).
+Concrete commands are non-normative in the
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md#nextest-command-examples).
 
 ## Optional Feature Matrix Checks
 

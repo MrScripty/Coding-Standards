@@ -89,3 +89,15 @@ criterion_main!(benches);
 This example does not select Criterion, a dependency version, benchmark
 trigger, workload, input, throughput report, directory, harness setting,
 regression threshold, CI schedule, or noise policy.
+
+## Nextest Command Examples
+
+One legacy example invoked nextest and Cargo doctests separately:
+
+```sh
+cargo nextest run --workspace
+cargo test --workspace --doc
+```
+
+These commands do not select nextest, workspace scope, CI execution, timeout,
+JUnit output, isolation, partitioning, retries, or doctest claims.

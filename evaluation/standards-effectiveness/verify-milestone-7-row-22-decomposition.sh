@@ -29,9 +29,10 @@ rg -F -q '`7.4b13b` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b13c` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b13d` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b13e` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13f` (`Planned`)' "$PLAN"
+rg -F -q '`7.4b13f` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4b13g` (`Planned`)' "$PLAN"
 next="$(awk '/^\*\*Next slice:\*\*/{c=1} c&&/^$/{exit} c{print}' "$PLAN")"
-[[ "$next" == *'row 23 child 23.5'* && "$next" == *'STD-0835'* ]]
+[[ "$next" == *'row 23 child 23.6'* && "$next" == *'STD-0836'* ]]
 [[ -e "$R/profiles/languages/rust/release.md" ]]
 [[ -e "$R/reference/recipes/rust-release.md" ]]
 mapfile -t disposed < <(awk -F '\t' '$1 >= "STD-0810" && $1 <= "STD-0820" {print $1}' "$S/consolidation-dispositions.tsv")

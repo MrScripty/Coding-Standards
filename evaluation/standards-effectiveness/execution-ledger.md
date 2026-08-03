@@ -6167,6 +6167,33 @@ verification ran after advancing the cursor.
 **Next slice:** `7.4b13f`, split `STD-0835` Rust test-runner adapter
 mechanisms.
 
+## Milestone 7.4b13f: Rust Test-Runner Adapter Mechanisms
+
+**Outcome:** Accepted.
+
+Tooling retains runner selection and orchestration, Verification retains test
+and doctest claims, and Resilience retains retry eligibility, budgets, safety,
+termination, and recovery. Rust Tooling now expresses accepted decisions only
+through supported Cargo and nextest invocation and result-transport mechanisms.
+Commands moved to non-normative reference under one split disposition.
+
+Sixteen decisions reject nextest, repository-size, timeout, JUnit, isolation,
+partition, doctest, retry, CI, and command-success defaults and require explicit
+Resilience authority. `STD-0835` has one exact split disposition. The train
+advances to 371 completed and 218 remaining identifiers across 111 completed
+and 30 pending logical clusters, with child `23.6` active.
+
+**Verification:** test-runner decisions, Tooling, Verification, and Resilience
+ownership regression, exact disposition, reference non-authority, row/train and
+plan checks, and affected shared cursors.
+
+**Deviation:** pre-slice review found retry authority omitted from the planned
+split. The accepted child 23.5 replan restored Resilience ownership without a
+new owner or additional disposition.
+
+**Next slice:** `7.4b13g`, split `STD-0836` Cargo feature-matrix adapter
+mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

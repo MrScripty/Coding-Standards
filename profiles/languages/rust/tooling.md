@@ -83,6 +83,22 @@ fixture policy, storage, schedules, or noise controls. Missing or unsupported
 adapter facts retain typed outcomes rather than weakening the accepted
 performance or evidence contract.
 
+## Rust Test-Runner Adapter Mechanisms
+
+After Tooling selects a test runner, configuration, timeout, isolation,
+partition, reporting, and schedule contract, Verification accepts the test and
+doctest claims, and Resilience accepts any retry eligibility, budgets, repeated-
+execution safety, termination, and recovery contract, express those decisions
+through supported Cargo and Rust test-runner invocation and result-transport
+mechanisms. When the accepted runner is nextest, its adapter may expose only
+capabilities selected by those contracts.
+
+An installed nextest command, workspace size, test-binary count, CI provider,
+available timeout, JUnit, isolation, partition, or retry feature cannot select
+nextest or create policy. Runner success cannot satisfy omitted doctest or other
+claims. Missing or unsupported adapter facts retain typed outcomes rather than
+selecting `cargo test`, nextest, retries, or weaker evidence.
+
 ## Verification
 
 Evidence covers the accepted claim and scope, actual supported Rust and Cargo

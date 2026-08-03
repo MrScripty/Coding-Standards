@@ -8,11 +8,12 @@
 
 **Current phase:** Rows 20, 21, and 22 are accepted and closed; row 23 is
 decomposed, the Rust Tooling owner, baseline-command, workspace-lint, and
-Criterion adapter mechanisms are accepted, and nextest child 23.5 is active.
+Criterion and test-runner adapter mechanisms are accepted, and feature-matrix
+child 23.6 is active.
 
-**Next slice:** Milestone 7.4b13f for row 23 child 23.5 `STD-0835`; split
-Tooling and Verification authority from supported Rust test-runner adapters and
-extract nextest commands to non-normative reference.
+**Next slice:** Milestone 7.4b13g for row 23 child 23.6 `STD-0836`; split
+feature-contract and evidence authority from Cargo feature-matrix adapters and
+extract cargo-hack commands to non-normative reference.
 
 **Acceptance status:** `partial`
 
@@ -1770,7 +1771,9 @@ all structural/routing fixtures pass.
    - `7.4b13c` (`Accepted`): split `STD-0832` Verification claim authority from Cargo baseline command mechanisms and extract fixed commands without workspace, CI, all-target, all-feature, warning, doctest, or public-feature defaults.
    - `7.4b13d` (`Accepted`): split `STD-0833` Tooling lint authority from Cargo workspace lint-expression mechanisms and extract manifests without root, lint-set, severity, inheritance, or unsafe defaults.
    - `7.4b13e` (`Accepted`): split `STD-0834` Performance claim and benchmark-design authority from supported Criterion benchmark adapter mechanisms and extract setup and source examples without Criterion, benchmark-trigger, threshold, input, storage, CI, or noise-control defaults.
-   - `7.4b13f` (`Planned`): split `STD-0835` Tooling and Verification authority from supported Rust test-runner adapters and extract nextest commands without nextest, repository-size, timeout, JUnit, partition, doctest, retry, or CI defaults.
+   - `7.4b13f` (`Accepted`): split `STD-0835` Tooling, Verification, and Resilience authority from supported Rust test-runner adapters and extract nextest commands without nextest, repository-size, timeout, JUnit, partition, doctest, retry, or CI defaults.
+   - `7.4b13g` (`Planned`): split `STD-0836` feature-contract and evidence authority from Cargo feature-matrix adapters and extract cargo-hack commands without cargo-hack, crate-category, powerset, feature-count, workspace, no-dev-deps, or baseline-command defaults.
+   - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
      target declarations; Rust API owns only Rust source configuration, public
