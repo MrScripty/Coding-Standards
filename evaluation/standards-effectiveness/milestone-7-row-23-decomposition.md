@@ -53,19 +53,22 @@ recipes.
 6. `23.6`: split `STD-0836` feature-contract and evidence authority from Cargo
    feature-matrix adapters without cargo-hack, crate-category, powerset,
    feature-count, workspace, no-dev-deps, or baseline-command defaults.
-7. `23.7`: split `STD-0837` and `STD-0838` contract and test-evidence authority
-   from compile-fail and property-test harness mechanisms without trybuild,
-   proptest, invariant-category, CI, parser, state-machine, or example defaults.
-8. `23.8`: refine `STD-0839` into Verification and move Rust syntax examples to
+7. `23.7a`: split `STD-0837` compile-time rejection contract and evidence
+   authority from compile-fail harness mechanisms without trybuild,
+   restriction-category, CI, or example defaults.
+8. `23.7b`: split `STD-0838` invariant, property, generator, and evidence
+   authority from property-test harness mechanisms without proptest,
+   invariant-category, parser, state-machine, or example defaults.
+9. `23.8`: refine `STD-0839` into Verification and move Rust syntax examples to
    reference without naming, placement, helper, directory, or documentation
    defaults.
-9. `23.9`: split `STD-0840` generic owner decisions from a capability-matched
+10. `23.9`: split `STD-0840` generic owner decisions from a capability-matched
    Rust tool-adapter inventory without required, optional, recommended, tool,
    category, or Miri defaults.
-10. `23.10`: split `STD-0841` build and supply-chain authority from supported
+11. `23.10`: split `STD-0841` build and supply-chain authority from supported
     Cargo build-script mechanisms without sparing-use, purpose, directive,
     output, compiler, runtime-detection, timestamp, or dependency defaults.
-11. `23.11`: split `STD-0842` target and `no_std` authority into Rust Cross-
+12. `23.11`: split `STD-0842` target and `no_std` authority into Rust Cross-
     Platform, preserve API, Dependency, and Tooling routes, extract commands,
     then close the legacy source without target, crate-category, feature,
     dependency, host-test, or practical-coverage defaults.
@@ -86,6 +89,15 @@ mechanisms after those contracts are accepted.
 
 Retain one `STD-0835` split disposition. Do not create a flaky-test owner,
 silently exclude retries, or let a runner capability select retry policy.
+
+## Child 23.7 Harness Decomposition Replan
+
+`STD-0837` and `STD-0838` retain separate split dispositions and identifier
+order but execute as separate atomic children. Compile-fail evidence starts from
+Contracts-owned compile-time rejection requirements and Rust API expression.
+Property evidence starts from Contracts-owned invariants and Verification-owned
+domain, generator, and evidence design. Tooling selects each harness; Rust
+Tooling owns only the supported harness adapter mechanisms.
 
 ## Re-plan Triggers
 

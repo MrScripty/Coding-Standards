@@ -6219,6 +6219,26 @@ shared cursors.
 **Next slice:** `7.4b13h`, split `STD-0837` and `STD-0838` compile-fail and
 property-test harness mechanisms.
 
+## Child 23.7 Harness Decomposition Replan
+
+**Outcome:** Accepted planning correction.
+
+The combined child shared a Rust Tooling destination but not one semantic or
+verification contract. `STD-0837` compile-time rejection evidence and
+`STD-0838` generative invariant evidence now execute as separate ordered
+children with separate fixture families and commits. Identifier order,
+canonical destinations, and one disposition per identifier remain unchanged.
+
+The train still has 372 completed and 217 remaining identifiers, but now has
+112 completed and 30 pending logical clusters. Child `23.7a` is active.
+
+**Verification:** row decomposition, owner validation, immutable identifier
+coverage, execution train, plan structure, and affected shared cursors.
+
+**Deviation:** none.
+
+**Next slice:** `7.4b13h`, split `STD-0837` compile-fail harness mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

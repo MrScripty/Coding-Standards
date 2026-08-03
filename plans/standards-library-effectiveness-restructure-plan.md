@@ -9,12 +9,11 @@
 **Current phase:** Rows 20, 21, and 22 are accepted and closed; row 23 is
 decomposed, the Rust Tooling owner, baseline-command, workspace-lint, and
 Criterion, test-runner, and feature-matrix adapter mechanisms are accepted, and
-compile-fail/property-test child 23.7 is active.
+compile-fail child 23.7a is active.
 
-**Next slice:** Milestone 7.4b13h for row 23 child 23.7 `STD-0837` and
-`STD-0838`; split contract and test-evidence authority from compile-fail and
-property-test harness mechanisms and extract examples to non-normative
-reference.
+**Next slice:** Milestone 7.4b13h for row 23 child 23.7a `STD-0837`; split
+compile-time rejection contract and evidence authority from compile-fail
+harness mechanisms and extract examples to non-normative reference.
 
 **Acceptance status:** `partial`
 
@@ -1774,7 +1773,9 @@ all structural/routing fixtures pass.
    - `7.4b13e` (`Accepted`): split `STD-0834` Performance claim and benchmark-design authority from supported Criterion benchmark adapter mechanisms and extract setup and source examples without Criterion, benchmark-trigger, threshold, input, storage, CI, or noise-control defaults.
    - `7.4b13f` (`Accepted`): split `STD-0835` Tooling, Verification, and Resilience authority from supported Rust test-runner adapters and extract nextest commands without nextest, repository-size, timeout, JUnit, partition, doctest, retry, or CI defaults.
    - `7.4b13g` (`Accepted`): split `STD-0836` feature-contract and evidence authority from Cargo feature-matrix adapters and extract cargo-hack commands without cargo-hack, crate-category, powerset, feature-count, workspace, no-dev-deps, or baseline-command defaults.
-   - `7.4b13h` (`Planned`): split `STD-0837` and `STD-0838` contract and test-evidence authority from compile-fail and property-test harness mechanisms and extract examples without trybuild, proptest, invariant-category, CI, parser, state-machine, or syntax defaults.
+   - Child 23.7 harness decomposition replan (`Accepted`): preserve separate `STD-0837` and `STD-0838` dispositions and order while implementing compile-fail and property-test harness contracts as separate atomic children with separate focused evidence.
+   - `7.4b13h` (`Planned`): split `STD-0837` compile-time rejection contract and evidence authority from compile-fail harness mechanisms and extract examples without trybuild, restriction-category, CI, or syntax defaults.
+   - `7.4b13i` (`Planned`): split `STD-0838` invariant, property, generator, and evidence authority from property-test harness mechanisms and extract examples without proptest, invariant-category, parser, state-machine, or syntax defaults.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
