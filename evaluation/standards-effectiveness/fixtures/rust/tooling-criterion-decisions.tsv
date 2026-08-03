@@ -1,0 +1,17 @@
+case	performance	tool	evidence	capability	fallback	expected
+accepted	accepted	criterion	accepted	supported	none	allow
+missing_performance	missing	criterion	accepted	supported	none	typed-unavailable
+missing_tool	accepted	missing	accepted	supported	none	typed-unavailable
+missing_evidence	accepted	criterion	missing	supported	none	typed-unavailable
+contradictory	contradictory	criterion	accepted	supported	none	typed-invalid
+unsupported	accepted	criterion	accepted	unsupported	none	typed-unsupported
+criterion_default	accepted	criterion	accepted	supported	criterion	typed-invalid
+pr_claim	accepted	criterion	accepted	supported	pr-claim	typed-invalid
+hot_path	accepted	criterion	accepted	supported	hot-path	typed-invalid
+budget_trigger	accepted	criterion	accepted	supported	budget-trigger	typed-invalid
+representative_input	accepted	criterion	accepted	supported	input-default	typed-invalid
+throughput	accepted	criterion	accepted	supported	throughput-default	typed-invalid
+benches_directory	accepted	criterion	accepted	supported	benches-directory	typed-invalid
+dependency_version	accepted	criterion	accepted	supported	dependency-version	typed-invalid
+harness	accepted	criterion	accepted	supported	harness-setting	typed-invalid
+ci_noise	accepted	criterion	accepted	supported	ci-noise	typed-invalid

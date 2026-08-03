@@ -8,8 +8,8 @@ mapfile -t validated < <(awk -F '\t' 'NR>1{print $1}' "$V");[[ "${validated[*]}"
 [[ "$(awk -F '\t' 'NR>1&&NF!=4{n++}END{print n+0}' "$V")" -eq 0 ]]
 [[ "$(awk -F '\t' '$3=="index"{n++}END{print n+0}' "$V")" -eq 1 ]];[[ "$(awk -F '\t' '$3=="split"{n++}END{print n+0}' "$V")" -eq 10 ]];[[ "$(awk -F '\t' '$3=="refine"{n++}END{print n+0}' "$V")" -eq 1 ]]
 for t in '## Owner Contract' 'narrow Rust and Cargo tooling' 'does not own claim selection' '## Exact Dispositions' '`STD-0839` refines' '`STD-0842` splits' '## Ordered Children' '## Re-plan Triggers';do rg -F -q "$t" "$S/milestone-7-row-23-decomposition.md";done
-rg -F -q '`7.4b13a` (`Accepted`)' "$P";rg -F -q '`7.4b13b` (`Accepted`)' "$P";rg -F -q '`7.4b13c` (`Accepted`)' "$P";rg -F -q '`7.4b13d` (`Accepted`)' "$P";rg -F -q '`7.4b13e` (`Planned`)' "$P"
-next="$(awk '/^\*\*Next slice:\*\*/{c=1}c&&/^$/{exit}c{print}' "$P")";[[ "$next" == *'row 23 child 23.4'* && "$next" == *'STD-0834'* ]]
-[[ -e "$R/profiles/languages/rust/tooling.md" ]];mapfile -t disposed < <(awk -F '\t' '$1>="STD-0831"&&$1<="STD-0842"{print $1}' "$D");[[ "${disposed[*]}" == 'STD-0831 STD-0832 STD-0833' ]]
+rg -F -q '`7.4b13a` (`Accepted`)' "$P";rg -F -q '`7.4b13b` (`Accepted`)' "$P";rg -F -q '`7.4b13c` (`Accepted`)' "$P";rg -F -q '`7.4b13d` (`Accepted`)' "$P";rg -F -q '`7.4b13e` (`Accepted`)' "$P";rg -F -q '`7.4b13f` (`Planned`)' "$P"
+next="$(awk '/^\*\*Next slice:\*\*/{c=1}c&&/^$/{exit}c{print}' "$P")";[[ "$next" == *'row 23 child 23.5'* && "$next" == *'STD-0835'* ]]
+[[ -e "$R/profiles/languages/rust/tooling.md" ]];mapfile -t disposed < <(awk -F '\t' '$1>="STD-0831"&&$1<="STD-0842"{print $1}' "$D");[[ "${disposed[*]}" == 'STD-0831 STD-0832 STD-0833 STD-0834' ]]
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-23 decomposition passed: 12 IDs across 11 children, zero premature dispositions\n'

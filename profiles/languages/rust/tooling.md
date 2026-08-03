@@ -66,6 +66,23 @@ table, or a lint name cannot require centralization, member opt-in, a rule set,
 severity, warning or denial, or relaxation of unsafe policy. Unsupported or
 missing expression facts retain typed outcomes rather than changing policy.
 
+## Criterion Benchmark Adapter Mechanisms
+
+After Performance accepts the claim, workload, metric, environment, baseline,
+variability policy, budget or comparison, input representativeness, and
+benchmark design, Tooling selects Criterion, and Verification accepts the
+evidence obligation, express that contract through supported Criterion Cargo
+configuration, harness, measurement, and reporting mechanisms. Adapter syntax
+may preserve accepted inputs and throughput reporting but cannot create them.
+
+A performance claim, changed hot path, regression budget, Rust project,
+installed Criterion package, conventional `benches` directory, available
+`black_box`, example dependency version, harness setting, or CI environment
+cannot select Criterion or create benchmark triggers, thresholds, workloads,
+fixture policy, storage, schedules, or noise controls. Missing or unsupported
+adapter facts retain typed outcomes rather than weakening the accepted
+performance or evidence contract.
+
 ## Verification
 
 Evidence covers the accepted claim and scope, actual supported Rust and Cargo

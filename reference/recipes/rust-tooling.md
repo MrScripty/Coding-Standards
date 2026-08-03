@@ -58,3 +58,34 @@ workspace = true
 The example does not select root ownership, lint rules, severity, member
 inheritance, or unsafe-boundary policy. Those facts must be accepted by Tooling
 and Rust Unsafe before Cargo syntax is selected.
+
+## Criterion Benchmark Examples
+
+One legacy setup used a Criterion development dependency, disabled the Cargo
+benchmark harness, and registered a benchmark function:
+
+```toml
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "critical_path"
+harness = false
+```
+
+```rust
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+
+fn bench_critical_path(c: &mut Criterion) {
+    c.bench_function("critical path", |b| {
+        b.iter(|| run_critical_path(black_box(sample_input())))
+    });
+}
+
+criterion_group!(benches, bench_critical_path);
+criterion_main!(benches);
+```
+
+This example does not select Criterion, a dependency version, benchmark
+trigger, workload, input, throughput report, directory, harness setting,
+regression threshold, CI schedule, or noise policy.

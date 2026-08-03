@@ -30,49 +30,15 @@ Concrete manifests are non-normative in the
 
 ## Required Criterion Benchmarks
 
-Criterion is required for Rust performance claims and performance regression
-protection.
-
-Use Criterion when:
-
-- a PR claims a Rust performance improvement
-- a PR changes performance-critical algorithms or hot paths
-- a crate has documented latency, throughput, memory, or scaling expectations
-- a regression budget is needed for a public API or production path
-
-Rules:
-
-- Do not make performance decisions from ad hoc `Instant::now()` benchmarks.
-- Do not use unstable `#[bench]` examples as the project standard.
-- Use `black_box` to prevent optimizer removal.
-- Benchmark representative input sizes and report throughput when applicable.
-- Store benchmarks under `benches/`.
-- Keep benchmark fixtures realistic and versioned with the code.
-- Gate benchmark comparisons in CI only where noise can be controlled.
-
-Minimal setup:
-
-```toml
-[dev-dependencies]
-criterion = { version = "0.5", features = ["html_reports"] }
-
-[[bench]]
-name = "critical_path"
-harness = false
-```
-
-```rust
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
-
-fn bench_critical_path(c: &mut Criterion) {
-    c.bench_function("critical path", |b| {
-        b.iter(|| run_critical_path(black_box(sample_input())))
-    });
-}
-
-criterion_group!(benches, bench_critical_path);
-criterion_main!(benches);
-```
+Performance claim, measurement, workload, budget, variability, benchmark-
+design, and regression authority belongs to
+[Performance](../../topics/performance.md). Tool selection and configuration
+authority belongs to [Tooling](../../workflows/tooling.md), and evidence
+sufficiency belongs to [Verification](../../workflows/verification.md).
+Supported Criterion adapter mechanisms are owned by the
+[Rust Tooling profile](../../profiles/languages/rust/tooling.md#criterion-benchmark-adapter-mechanisms).
+Concrete Cargo and Rust syntax is non-normative in the
+[Rust tooling recipes](../../reference/recipes/rust-tooling.md#criterion-benchmark-examples).
 
 ## Optional `cargo nextest`
 

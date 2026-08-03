@@ -6138,6 +6138,35 @@ checks, and affected shared cursors.
 **Next slice:** `7.4b13e`, split `STD-0834` Criterion benchmark adapter
 mechanisms.
 
+## Milestone 7.4b13e: Criterion Benchmark Adapter Mechanisms
+
+**Outcome:** Accepted.
+
+Performance retains claim, workload, metric, environment, baseline,
+variability, budget, input, and benchmark-design authority; Tooling retains
+tool selection; Verification retains evidence sufficiency. Rust Tooling now
+expresses an accepted Criterion choice only through supported Cargo, harness,
+measurement, and reporting mechanisms. Setup and source syntax moved to non-
+normative reference under one split disposition.
+
+Sixteen decisions reject Criterion, PR, hot-path, budget-trigger, input,
+throughput, directory, dependency-version, harness, CI, and noise defaults.
+`STD-0834` has one exact split disposition. The train advances to 370 completed
+and 219 remaining identifiers across 110 completed and 31 pending logical
+clusters, with child `23.5` active.
+
+**Verification:** Criterion adapter decisions, Performance owner regression,
+exact disposition, canonical routes, reference non-authority, row/train and
+plan checks, and affected shared cursors.
+
+**Deviation:** the pre-integration Performance checker reached its delegated
+execution-train check and correctly rejected the new disposition before the
+cursor advance. Semantic owner and adapter decisions passed; integrated
+verification ran after advancing the cursor.
+
+**Next slice:** `7.4b13f`, split `STD-0835` Rust test-runner adapter
+mechanisms.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
