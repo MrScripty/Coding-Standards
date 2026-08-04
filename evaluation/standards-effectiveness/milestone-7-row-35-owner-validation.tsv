@@ -1,0 +1,7 @@
+id	owner	disposition	rationale
+STD-0001	STANDARDS-ROUTER.md	index	legacy root parent becomes a non-normative entrypoint to canonical Router authority
+STD-0002	STANDARDS-ROUTER.md	split	Router owns module selection while adopting repositories own project contracts and exceptions
+STD-0003	STANDARDS-ROUTER.md	index	manual document applicability catalog yields to Router conditions and canonical metadata
+STD-0004	STANDARDS-ROUTER.md	index	template and reference links remain non-normative navigation selected only after routing
+STD-0005	STANDARDS-ROUTER.md	index	customization checklist yields to routed owners and adopting-repository contracts
+STD-0006	LICENSE	index	repository license summary yields to the authoritative CC0 license text

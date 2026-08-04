@@ -7598,3 +7598,28 @@ complete suite passed.
 decompose README routing and reference-index closure, freeze exact dispositions
 and negative non-authority evidence, and preserve Router ownership. This is
 milestone `7.4b25a`.
+
+## Milestone 7.4b25a Root Index Decomposition
+
+**Outcome:** Accepted.
+
+Row 35 is decomposed into two serial closure children. Child 35.1 migrates the
+root identity, Quick Start, and document catalog while consolidating positive
+route evidence under canonical Router or owner checks. Child 35.2 closes
+template, customization, and license material as concise non-normative
+navigation and runs the P29 full-suite gate.
+
+The ownership review assigns `STD-0001` through `STD-0005` to Router lineage
+and `STD-0006` to the authoritative repository `LICENSE`. A frozen dependency
+audit lists 31 checkers whose positive root README route or catalog assertions
+may change in child 35.1. Negative README source-purity checks remain outside
+that write set and continue to apply.
+
+**Verification:** exact six-identifier coverage, two ordered children, owner
+validation, 31 unique existing checker paths, final-closure activation, P29
+full-suite integration, immutable cursor, plan structure, shell syntax, and
+diff integrity passed.
+
+**Next slice:** `7.4b25b`, centralize canonical route evidence and migrate
+`STD-0001` through `STD-0003` without preserving README applicability or
+manual catalog authority.

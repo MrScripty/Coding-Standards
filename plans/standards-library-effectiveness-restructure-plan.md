@@ -6,15 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 34 are accepted and closed. The Frontend
-legacy source is a non-normative migration index, and its behavior, tooling,
-evidence, and Accessibility concerns route to canonical owners. The immutable
-cursor is row 35 and has reached its required final-closure decomposition
-re-plan.
+**Current phase:** Rows 20 through 34 are accepted and closed. Row 35 is
+decomposed into two serial root-index closure children with 31 frozen checker
+dependencies. The immutable cursor is child 35.1.
 
-**Next slice:** Milestone 7.4b25a decomposes row 35 `STD-0001`, `STD-0002`,
-`STD-0003`, `STD-0004`, `STD-0005`, and `STD-0006` for README router and
-reference-index closure without changing normative policy.
+**Next slice:** Milestone 7.4b25b migrates `STD-0001`, `STD-0002`, and
+`STD-0003`, centralizes canonical route evidence, and removes root README
+applicability and manual document-catalog authority.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1926,9 +1924,15 @@ all structural/routing fixtures pass.
      lineage to accepted claim-selected Frontend evidence.
    - `7.4b24g` (`Accepted`): route `STD-0464` to Accessibility, close the
      legacy source, and run the P28 full-suite integration gate.
-   - `7.4b25a` (`Planned`): decompose row 35 `STD-0001` through `STD-0006`
+   - `7.4b25a` (`Accepted`): decompose row 35 `STD-0001` through `STD-0006`
      for README router and reference-index closure without changing normative
      policy.
+   - `7.4b25b` (`Planned`): migrate `STD-0001` through `STD-0003`, centralize
+     Router evidence, and remove positive root README route and catalog
+     assertions from the frozen checker set.
+   - `7.4b25c` (`Planned`): migrate `STD-0004` through `STD-0006`, close the
+     root README as a concise non-normative entrypoint, and run the P29
+     full-suite integration gate.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
