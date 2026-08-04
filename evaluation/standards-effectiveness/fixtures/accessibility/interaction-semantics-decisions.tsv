@@ -1,0 +1,16 @@
+case	purpose	role	capability	modalities	state	feedback	fallback	expected
+native_action	declared	action	supported	selected	complete	complete	none	allow
+native_navigation	declared	navigation	supported	selected	complete	complete	none	allow
+custom_interaction	declared	custom	supported	selected	complete	complete	none	allow
+multiple_modalities	declared	action	supported	multiple	complete	complete	none	allow
+contradictory_purpose	contradictory	action	supported	selected	complete	complete	none	typed-invalid
+contradictory_role	declared	contradictory	supported	selected	complete	complete	none	typed-invalid
+unsupported_mechanism	declared	custom	unsupported	selected	complete	complete	none	typed-unsupported
+missing_purpose	missing	action	supported	selected	complete	complete	none	typed-unavailable
+missing_modalities	declared	action	supported	missing	complete	complete	none	typed-unavailable
+missing_state	declared	custom	supported	selected	missing	complete	none	typed-unavailable
+missing_feedback	declared	custom	supported	selected	complete	missing	none	typed-unavailable
+html_default	declared	action	supported	selected	complete	complete	html	typed-invalid
+keyboard_only	declared	custom	supported	keyboard	complete	complete	keyboard-only	typed-invalid
+role_only	declared	custom	supported	selected	missing	missing	role-only	typed-invalid
+visual_equivalence	declared	custom	supported	selected	complete	complete	visual-match	typed-invalid

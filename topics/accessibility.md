@@ -39,6 +39,43 @@ project contract selects its authority, scope, version, target platform, and
 evidence obligations. Do not silently select, upgrade, weaken, or substitute an
 external standard when those facts are absent.
 
+## Semantic Meaning And Role
+
+Expose each user-facing element's purpose, role, relationships, value, state,
+availability, and change through every modality required by the accepted
+contract. Derive that meaning from the user task and observable behavior, not
+from appearance, event-handler name, current widget, or implementation type.
+
+Use a platform-native mechanism when it satisfies the complete selected
+meaning, modality, state, feedback, and lifecycle contract. A native mechanism
+is preferred only on that evidence; semantic markup, an accessibility API role,
+or a conventional control is not a universal mechanism and does not prove the
+outcome by itself.
+
+## Action And Navigation Outcomes
+
+Classify an interaction by its user-visible result. An action changes
+application state or performs an operation. Navigation changes the user's
+location or active destination. A control that can do both declares the
+conditions, resulting state, destination, feedback, and required modalities
+for each outcome.
+
+Do not select action or navigation semantics from visual styling, click
+handling, a URL-shaped value, or an incumbent element. Do not substitute one
+outcome for the other when the required platform mechanism is unavailable.
+
+## Custom Interaction Outcomes
+
+A custom interaction is permitted only when supported mechanisms cannot satisfy
+the accepted task and its implementation covers the complete selected role,
+state, value, relationships, activation, modalities, feedback, focus or
+position lifecycle, cancellation, and failure outcomes.
+
+Support through one event, input method, visual state, role declaration, or
+assistive mechanism does not prove another modality or the complete custom
+interaction. Missing required capability or evidence is a typed outcome, not
+authority to omit behavior or emulate a nearby control incompletely.
+
 ## Responsibility Boundaries
 
 Accessibility owns required user-access outcomes and conformance obligations.

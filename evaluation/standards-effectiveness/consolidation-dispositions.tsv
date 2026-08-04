@@ -1,5 +1,10 @@
 id	source	target	disposition	rationale
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
+STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
+STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference
+STD-0010	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	action outcome moved while button and JSX mechanisms moved to reference
+STD-0011	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	navigation outcome moved while anchor mechanisms moved to reference
+STD-0012	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	custom interaction completeness moved while ARIA and event mechanisms moved to reference
 STD-0195	COMMIT-STANDARDS.md	COMMIT-STANDARDS.md	index	legacy path retained as migration index
 STD-0196	COMMIT-STANDARDS.md	workflows/commit.md	move	conventional message contract
 STD-0197	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	format component explanation

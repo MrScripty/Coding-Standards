@@ -6864,3 +6864,24 @@ to the execution-train verifier.
 
 **Next slice:** `7.4b18c`, migrate `STD-0008` through `STD-0012` while
 extracting web-specific mechanisms to Accessibility reference.
+
+## Milestone 7.4b18c Accessibility Interaction Semantics
+
+**Outcome:** Accepted.
+
+Accessibility now owns purpose, role, action, navigation, and complete custom
+interaction outcomes without selecting HTML, ARIA, JSX, one input method, or a
+visual-equivalence fallback. Web button, link, generic-element, attribute, and
+event examples moved to non-normative Accessibility recipes.
+
+`STD-0008` through `STD-0012` each have one exact `split` disposition. The
+legacy interaction block is a migration route and no longer contains normative
+web mechanisms.
+
+**Verification:** interaction semantic decisions, Accessibility owner contract,
+metadata, row-28 decomposition, execution train, and diff integrity passed.
+The decomposition declares a focused checkpoint for this owner-local population
+slice; the complete suite last passed at the preceding shared-contract boundary.
+
+**Next slice:** `7.4b18d`, migrate `STD-0013` through `STD-0016` keyboard and
+focus outcomes while extracting CSS and web mechanisms.

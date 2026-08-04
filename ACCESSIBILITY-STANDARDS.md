@@ -7,93 +7,11 @@ Non-normative platform and tool examples move to
 [Accessibility Recipes](reference/recipes/accessibility.md) with their owning
 semantic child.
 
-## Core Principle: Use Semantic Elements
+## Interaction Semantics (Migrated)
 
-HTML provides built-in accessibility for interactive elements. Using the correct
-element eliminates the need for ARIA attributes and custom keyboard handling.
-
-```
-Semantic Element ──► Built-in accessibility (focus, keyboard, screen reader)
-Generic Element  ──► Must manually add role, tabIndex, keyboard handlers, labels
-```
-
-**Prefer semantic elements.** Only use generic elements with ARIA when a semantic
-element cannot achieve the required visual or behavioral result.
-
-## Interactive Elements
-
-### Use `<button>` for Actions
-
-Any element that triggers an action on click must be a `<button>`, not a `<div>`,
-`<span>`, or `<a>`.
-
-```tsx
-// BAD: div with click handler — no keyboard support, no screen reader role
-<div className="close-btn" onClick={onClose}>
-  X
-</div>
-
-// BAD: anchor as button — announces as link, href="#" is meaningless
-<a href="#" onClick={(e) => { e.preventDefault(); doAction(); }}>
-  Do something
-</a>
-
-// GOOD: semantic button
-<button type="button" onClick={onClose}>
-  X
-</button>
-
-// GOOD: button with accessible label when there's no visible text
-<button type="button" onClick={onClose} aria-label="Close dialog">
-  <XIcon />
-</button>
-```
-
-**Why `type="button"`:** Without it, buttons inside forms default to `type="submit"`.
-Always set `type="button"` for non-submit buttons.
-
-### Use `<a>` Only for Navigation
-
-Anchors are for navigating to a URL. If clicking an element does not navigate
-the user to a new page or location, use `<button>`.
-
-```tsx
-// GOOD: anchor navigates to a page
-<a href="/settings">Settings</a>
-
-// GOOD: anchor opens external URL
-<a href="https://example.com" target="_blank" rel="noopener noreferrer">
-  Documentation
-</a>
-
-// BAD: anchor triggers an action — use button instead
-<a href="#" onClick={handleExport}>Export</a>
-```
-
-### When a Generic Element Must Be Interactive
-
-In rare cases where a semantic element cannot achieve the required result
-(e.g., a full-screen backdrop overlay), add all necessary accessibility
-attributes:
-
-```tsx
-<div
-  role="button"
-  tabIndex={0}
-  onClick={onClose}
-  onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") onClose(); }}
-  aria-label="Close dialog"
->
-```
-
-**Required attributes for interactive generic elements:**
-
-| Attribute | Purpose |
-|-----------|---------|
-| `role` | Tells screen readers the element's function |
-| `tabIndex={0}` | Makes the element focusable via keyboard |
-| `onKeyDown` | Handles Enter and Space for activation |
-| `aria-label` | Provides an accessible name if no visible text |
+The former semantic-element, action, navigation, and generic-interaction rules
+are migrated to [Accessibility](topics/accessibility.md). Their web-specific
+examples are non-normative [Accessibility Recipes](reference/recipes/accessibility.md).
 
 ## Keyboard Navigation
 
