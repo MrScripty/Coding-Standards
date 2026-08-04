@@ -6732,6 +6732,21 @@ plan-structure, and complete standards suites passed.
 **Next slice:** `7.4b17a`, re-plan row 27 `STD-0888` through `STD-0898`; no
 pull-request template implementation is authorized before decomposition.
 
+## Row 27 Pull-Request Template Decomposition
+
+**Outcome:** Accepted planning correction.
+
+`STD-0888` through `STD-0898` form one conditional Implementation-derived
+projection package with exact `index` dispositions. The template may transport
+selected summary, material decision or migration evidence links, and selected
+Verification claims; it cannot impose a pull request, provider, fixed headings,
+checklist, duplicated rationale, or template-completion evidence.
+
+One child `27.1` owns the template, dispositions, focused evidence, plan, ledger,
+and cursor assertions. Narrower owners retain their policy.
+
+**Next slice:** `7.4b17b`, implement the frozen one-package projection contract.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

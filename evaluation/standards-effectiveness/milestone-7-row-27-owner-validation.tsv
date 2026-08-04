@@ -1,0 +1,12 @@
+id	owner	disposition	rationale
+STD-0888	workflows/implementation.md	index	summary projects selected Implementation change evidence
+STD-0889	workflows/implementation.md	index	decision traceability remains conditional evidence selection
+STD-0890	workflows/implementation.md	index	problem context is selected only when material
+STD-0891	workflows/implementation.md	index	constraints are selected only when material
+STD-0892	workflows/implementation.md	index	decision evidence links its durable owner
+STD-0893	workflows/implementation.md	index	alternatives are selected only when material
+STD-0894	workflows/implementation.md	index	invariant effects link affected contract evidence
+STD-0895	workflows/implementation.md	index	simplicity review remains conditional on affected reasoning risk
+STD-0896	workflows/implementation.md	index	revisit triggers remain with durable planning or issue authority
+STD-0897	workflows/implementation.md	index	traceability links project selected Documentation evidence
+STD-0898	workflows/implementation.md	index	fixed checklist completion is replaced by selected evidence links
