@@ -6523,6 +6523,23 @@ authorize execution, and operation intent is never inferred.
 **Next slice:** `7.4b15c`, implement identity and admission together with typed
 boundary-specific evidence.
 
+## Row 25 Concurrent Admission Replan
+
+**Outcome:** Accepted planning correction.
+
+Admission now carries an expected plan revision. Planning decides admission,
+Concurrency owns stale observation and conditional transition, and only the
+serial integration owner may mutate shared plan and ledger state. Revision
+mismatch requires fresh admission; old decisions are never retried
+automatically. The contract does not reserve external resources or authorize
+worker plan advancement.
+
+Locks, leases, scheduler infrastructure, state-only commits, and duplicate
+execution with later reconciliation are rejected as generic fallbacks.
+
+**Next slice:** `7.4b15c`, establish a canonical revision representation before
+implementing the complete admission contract.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

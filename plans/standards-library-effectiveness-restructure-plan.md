@@ -17,7 +17,8 @@ derived-entrypoint child ready for implementation.
 repository-relative plan identity and typed selection diagnostics in
 Implementation, consuming Security path authority and conditional Cross-Platform
 representation plus Planning-owned explicit lifecycle admission, before
-deriving the prompt.
+deriving the prompt; admission uses an expected plan revision and
+Concurrency-owned conditional transition.
 
 **Acceptance status:** `partial`
 
@@ -1790,7 +1791,7 @@ all structural/routing fixtures pass.
    - `7.4b14b` (`Accepted`): replace the duplicated full-review prompt procedure with one thin, versioned, path-neutral Planning entrypoint and record three exact index dispositions without implementation authority or copied process.
    - `7.4b15a` (`Accepted`): preserve the frozen snapshot strictly as identifier lineage, assign `STD-0852` through `STD-0858` to Implementation as exact index dispositions, and freeze one derived-entrypoint child without normative movement.
    - `7.4b15b` (`Accepted`): split row 25 execution so canonical explicit plan-identity selection precedes prompt derivation; reject scanning, recency, conventional-path, conversation-state, and global-pointer fallbacks.
-   - `7.4b15c` (`Planned`): establish Planning-owned explicit `start`, `continue`, and `verify` admission plus repository-relative plan identity consumed by Implementation; preserve Security containment and conditional Cross-Platform representation without copied policy or inferred operation.
+   - `7.4b15c` (`Planned`): establish Planning-owned explicit `start`, `continue`, and `verify` admission plus repository-relative identity and expected revision consumed by Implementation; preserve Security containment, conditional Cross-Platform representation, and Concurrency conditional-transition authority without copied policy, inferred operation, or automatic stale retry.
    - `7.4b15d` (`Planned`): replace the tracked implementation checklist with one thin, versioned, path-neutral Implementation entrypoint; record exact dispositions and advance to row 26 review.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency

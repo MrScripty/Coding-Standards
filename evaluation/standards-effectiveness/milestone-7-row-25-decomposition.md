@@ -71,10 +71,29 @@ Implementation transports the explicit operation and consumes Planning's
 decision without copying this admission table. The accepted transition and its
 ledger update occur in the same coherent slice.
 
+## Child 25.1 Concurrent Admission Replan
+
+Admission includes an explicit expected revision of the selected plan.
+Planning owns the decision against that revision; Concurrency owns stale-read
+and conditional-transition semantics. The serial integration owner alone may
+change shared plan and ledger state. Delegated workers receive read-only plan
+context and cannot advance lifecycle state.
+
+Before transition or next-slice advancement, compare the authoritative current
+revision with the admitted revision and apply the state change only when they
+match. A mismatch is `invalid` stale admission and requires rereading the plan
+and obtaining a new decision. Do not retry the old operation automatically.
+This contract protects plan-state mutation; it does not reserve external
+resources, prevent independent analysis, or authorize overlapping write sets.
+
+Do not introduce lock files, leases, scheduler infrastructure, state-only Git
+commits, or duplicate execution with later reconciliation as fallback.
+
 ## Re-plan Triggers
 
-Stop if admission requires concurrent mutation coordination not already owned,
-plan identity requires repository-global mutable state, snapshot
+Stop if the expected-revision representation has no canonical source or cannot
+support conditional replacement, plan identity requires repository-global
+mutable state, snapshot
 lineage must be regenerated, the prompt needs an independent
 lifecycle or generation system, copied canonical procedure must remain, one
 identifier needs multiple dispositions, or implementation requires files
