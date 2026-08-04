@@ -1,4 +1,5 @@
 id	source	target	disposition	rationale
+STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0195	COMMIT-STANDARDS.md	COMMIT-STANDARDS.md	index	legacy path retained as migration index
 STD-0196	COMMIT-STANDARDS.md	workflows/commit.md	move	conventional message contract
 STD-0197	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	format component explanation

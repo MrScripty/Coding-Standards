@@ -10,7 +10,7 @@ mapfile -t ids < <(awk -F '\t' '$1==19{n=split($3,a,",");for(i=1;i<=n;i++)print 
 expected=(STD-{0654..0703})
 [[ "${ids[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' '$1==19{print $2}' "$O" | sort -n | paste -sd ' ' -)" == "$(seq 1 18 | paste -sd ' ' -)" ]]
-[[ "$(awk -F '\t' '$1==19&&NF!=9{n++}END{print n+0}' "$O")" -eq 0 ]]
+[[ "$(awk -F '\t' '$1==19&&NF!=10{n++}END{print n+0}' "$O")" -eq 0 ]]
 
 for owner in workflows/tooling.md workflows/verification.md workflows/commit.md \
   workflows/documentation.md workflows/implementation.md topics/dependencies.md \

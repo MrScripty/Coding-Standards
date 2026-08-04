@@ -29,9 +29,10 @@ done < "$OWNER_MAP"
 
 overlay_row_count=0
 while IFS=$'\t' read -r baseline_order child_order ids source owner owner_state \
-  activation checkpoint rationale extra; do
+  activation checkpoint rationale owner_transition extra; do
   if [[ "$baseline_order" == baseline_order ]]; then
-    [[ "$child_order" == child_order && "$ids" == ids ]]
+    [[ "$child_order" == child_order && "$ids" == ids &&
+       "$owner_transition" == owner_transition ]]
     continue
   fi
   [[ "$baseline_order" =~ ^[0-9]+$ ]]
@@ -40,11 +41,13 @@ while IFS=$'\t' read -r baseline_order child_order ids source owner owner_state 
   [[ "$owner_state" =~ ^(exists|missing)$ ]]
   [[ "$activation" =~ ^(pre-slice-review|owner-review|final-closure)$ ]]
   [[ "$checkpoint" =~ ^(focused|full-suite)$ ]]
+  [[ "$owner_transition" =~ ^(none|missing-to-exists)$ ]]
   [[ -z "${extra:-}" ]]
   overlay_lines["$baseline_order"]+="$baseline_order"$'\t'"$child_order"$'\t'
   overlay_lines["$baseline_order"]+="$ids"$'\t'"$source"$'\t'"$owner"$'\t'
   overlay_lines["$baseline_order"]+="$owner_state"$'\t'"$activation"$'\t'
-  overlay_lines["$baseline_order"]+="$checkpoint"$'\t'"$rationale"$'\n'
+  overlay_lines["$baseline_order"]+="$checkpoint"$'\t'"$rationale"$'\t'
+  overlay_lines["$baseline_order"]+="$owner_transition"$'\n'
   ((overlay_row_count += 1))
 done < "$DECOMPOSITION"
 [[ "$overlay_row_count" -gt 0 ]]
@@ -106,11 +109,7 @@ while IFS=$'\t' read -r order wave start_id end_id source owner owner_state \
   [[ "$checkpoint" =~ ^(focused|full-suite)$ ]]
   [[ -z "${extra:-}" ]]
 
-  if [[ -e "$REPO_ROOT/$owner" ]]; then
-    [[ "$owner_state" == exists ]]
-  else
-    [[ "$owner_state" == missing && "$activation" == owner-review ]]
-  fi
+  [[ "$owner_state" != missing || "$activation" == owner-review ]]
   [[ "$activation" != final-closure || "$wave" == reference-index-closure ]]
 
   start_number=$((10#${start_id#STD-}))
@@ -133,10 +132,12 @@ while IFS=$'\t' read -r order wave start_id end_id source owner owner_state \
     overlay_orders_seen["$order"]=1
     expected_child=0
     overlay_id_count=0
+    owner_transition_count=0
+    owner_transition_complete=0
     declare -A overlay_seen=()
     while IFS=$'\t' read -r overlay_order child_order ids overlay_source \
       overlay_owner overlay_owner_state overlay_activation overlay_checkpoint \
-      rationale overlay_extra; do
+      rationale overlay_owner_transition overlay_extra; do
       [[ -z "$overlay_order" ]] && continue
       ((expected_child += 1))
       [[ "$overlay_order" -eq "$order" ]]
@@ -144,14 +145,31 @@ while IFS=$'\t' read -r order wave start_id end_id source owner owner_state \
       [[ "$overlay_source" == "$source" ]]
       [[ "$overlay_activation" =~ ^(pre-slice-review|owner-review|final-closure)$ ]]
       [[ "$overlay_checkpoint" == focused ]]
+      [[ "$overlay_owner_transition" =~ ^(none|missing-to-exists)$ ]]
       [[ -n "$rationale" && -z "${overlay_extra:-}" ]]
       [[ "$overlay_activation" != final-closure ||
           "$wave" == reference-index-closure ]]
-      if [[ -e "$REPO_ROOT/$overlay_owner" ]]; then
+      if [[ "$overlay_owner_transition" == missing-to-exists ]]; then
+        ((owner_transition_count += 1))
+        [[ "$owner_transition_count" -eq 1 ]]
+        [[ "$owner_state" == missing && "$overlay_owner" == "$owner" ]]
         [[ "$overlay_owner_state" == exists ]]
-      else
-        [[ "$overlay_owner_state" == missing &&
-            "$overlay_activation" == owner-review ]]
+        [[ "$overlay_activation" == pre-slice-review ]]
+        transition_disposed=0
+        IFS=',' read -r -a transition_ids <<< "$ids"
+        for transition_id in "${transition_ids[@]}"; do
+          [[ -n "${disposed[$transition_id]:-}" ]] && ((transition_disposed += 1))
+        done
+        [[ "$transition_disposed" -eq 0 ||
+           "$transition_disposed" -eq "${#transition_ids[@]}" ]]
+        [[ "$transition_disposed" -eq 0 ]] || owner_transition_complete=1
+      elif [[ "$overlay_owner" != "$owner" ]]; then
+        if [[ -e "$REPO_ROOT/$overlay_owner" ]]; then
+          [[ "$overlay_owner_state" == exists ]]
+        else
+          [[ "$overlay_owner_state" == missing &&
+             "$overlay_activation" == owner-review ]]
+        fi
       fi
 
       IFS=',' read -r -a child_ids <<< "$ids"
@@ -165,7 +183,20 @@ while IFS=$'\t' read -r order wave start_id end_id source owner owner_state \
       process_cluster "$order.$child_order" "$ids" "$ids"
     done <<< "${overlay_lines[$order]}"
     [[ "$overlay_id_count" -eq "$cluster_size" ]]
+    [[ "$owner_transition_count" -le 1 ]]
+    effective_owner_state="$owner_state"
+    [[ "$owner_transition_complete" -eq 0 ]] || effective_owner_state=exists
+    if [[ -e "$REPO_ROOT/$owner" ]]; then
+      [[ "$effective_owner_state" == exists ]]
+    else
+      [[ "$effective_owner_state" == missing ]]
+    fi
   else
+    if [[ -e "$REPO_ROOT/$owner" ]]; then
+      [[ "$owner_state" == exists ]]
+    else
+      [[ "$owner_state" == missing ]]
+    fi
     process_cluster "$order" "$baseline_ids_csv" "$start_id,$end_id"
   fi
 
@@ -213,6 +244,7 @@ fi
 "$SCRIPT_DIR/verify-milestone-7-decomposition.sh"
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
+"$SCRIPT_DIR/verify-owner-state-transitions.sh"
 
 printf 'Milestone 7 execution train passed: %s baseline IDs; %s completed and %s remaining across %s completed and %s pending logical clusters; active row %s\n' \
   "$baseline_count" "$completed_id_count" "$remaining_count" \

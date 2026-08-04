@@ -1,6 +1,11 @@
 # Accessibility Standards
 
-Semantic HTML, keyboard interaction, and ARIA guidelines for building accessible UI components.
+Migration index. [Accessibility](topics/accessibility.md) owns modality-neutral
+user-access outcomes and conformance obligations. The remaining sections await
+their ordered semantic migration; they do not override the canonical owner.
+Non-normative platform and tool examples move to
+[Accessibility Recipes](reference/recipes/accessibility.md) with their owning
+semantic child.
 
 ## Core Principle: Use Semantic Elements
 

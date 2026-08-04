@@ -38,6 +38,7 @@ reference material.
 | [topics/licensing.md](topics/licensing.md) | Third-party provenance, license authority, compatibility, obligations, attribution, and distribution evidence | Incorporating, adapting, generating from, or distributing third-party material |
 | [topics/performance.md](topics/performance.md) | Performance claims, measurement contracts, optimization decisions, benchmarks, and regression evidence | Changing performance budgets, measurements, optimizations, or resource-use claims |
 | [topics/architecture.md](topics/architecture.md) | Concern boundaries, dependency direction, data/state authority, services, and runtime composition | Changing architectural ownership or boundaries |
+| [topics/accessibility.md](topics/accessibility.md) | Modality-neutral user-access outcomes, conformance obligations, typed diagnostics, and evidence boundaries | Changing user-facing behavior or accessibility claims |
 | [topics/security.md](topics/security.md) | Canonical untrusted-input authority and filesystem-containment policy | Untrusted values authorizing operations or resource access |
 | [topics/cross-platform.md](topics/cross-platform.md) | Canonical path construction and filesystem-identity policy | Path behavior across supported platforms or filesystems |
 | [profiles/boundaries/interop.md](profiles/boundaries/interop.md) | Foreign memory, resource authority, lifecycle, thread, and validated-adapter contracts | Foreign pointers, handles, callbacks, runtimes, or resources |
@@ -76,7 +77,8 @@ reference material.
 | [LAUNCHER-STANDARDS.md](LAUNCHER-STANDARDS.md) | `launcher.sh` contract, lifecycle flags, dependency checks, and app startup | Standardizing app entry points and setup workflows |
 | [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Binding architecture, FFI wrapper design, code generation, type mapping | Exposing a core library to multiple target languages |
 | [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Migration index for canonical release workflow and recipe reference | Existing links only |
-| [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) | Semantic HTML, keyboard interaction, ARIA, a11y linting | UI components in web or desktop apps |
+| [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) | Migration index plus accessibility semantics awaiting ordered canonical population | Existing links and unmoved accessibility concerns |
+| [reference/recipes/accessibility.md](reference/recipes/accessibility.md) | Non-normative accessibility mechanism adaptation boundary | Applying an accepted accessibility outcome through a selected platform mechanism |
 | [languages/README.md](languages/README.md) | Language-specific extensions to the generic standards | Rust and future language-specific rules |
 
 ## Templates

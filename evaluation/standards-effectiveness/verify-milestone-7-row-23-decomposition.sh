@@ -3,7 +3,7 @@ set -euo pipefail
 S="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)";R="$(cd -- "$S/../.." && pwd)";O="$S/milestone-7-execution-decomposition.tsv";V="$S/milestone-7-row-23-owner-validation.tsv";P="$R/plans/standards-library-effectiveness-restructure-plan.md";D="$S/consolidation-dispositions.tsv"
 mapfile -t ids < <(awk -F '\t' '$1==23{n=split($3,a,",");for(i=1;i<=n;i++)print a[i]}' "$O"|sort);expected=(STD-{0831..0842});[[ "${ids[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' '$1==23{print $2}' "$O"|paste -sd ' ' -)" == '1 2 3 4 5 6 7 8 9 10 11 12' ]]
-[[ "$(awk -F '\t' '$1==23&&NF!=9{n++}END{print n+0}' "$O")" -eq 0 ]]
+[[ "$(awk -F '\t' '$1==23&&NF!=10{n++}END{print n+0}' "$O")" -eq 0 ]]
 mapfile -t validated < <(awk -F '\t' 'NR>1{print $1}' "$V");[[ "${validated[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' 'NR>1&&NF!=4{n++}END{print n+0}' "$V")" -eq 0 ]]
 [[ "$(awk -F '\t' '$3=="index"{n++}END{print n+0}' "$V")" -eq 1 ]];[[ "$(awk -F '\t' '$3=="split"{n++}END{print n+0}' "$V")" -eq 10 ]];[[ "$(awk -F '\t' '$3=="refine"{n++}END{print n+0}' "$V")" -eq 1 ]]

@@ -6,12 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 27 are accepted and closed. Row 28 requires
-pre-slice owner creation and decomposition review for Accessibility.
+**Current phase:** Rows 20 through 27 are accepted and closed. Row 28 has its
+canonical Accessibility owner and is advancing through semantic population.
 
-**Next slice:** Milestone 7.4b18b row 28 child 28.1 for `STD-0007`; create the
-generic modality-neutral Accessibility owner, reference boundary, canonical
-routes, metadata, and focused owner evidence before moving legacy semantics.
+**Next slice:** Milestone 7.4b18c row 28 child 28.2 for `STD-0008`, `STD-0009`,
+`STD-0010`, `STD-0011`, and `STD-0012`; migrate semantic role, action,
+navigation, and custom-interaction outcomes while extracting web syntax to
+non-normative reference.
 
 **Acceptance status:** `partial`
 
@@ -1814,8 +1815,19 @@ all structural/routing fixtures pass.
    - `7.4b18a` (`Accepted`): review row 28 `STD-0007` through `STD-0026`, create
      the missing Accessibility owner contract, and freeze exact semantic
      children and write sets before legacy movement.
-   - `7.4b18b` (`Planned`): create and route the useful generic Accessibility
-     owner with `STD-0007` before semantic population.
+   - `7.4b18b` (`Accepted`): create and route the useful generic Accessibility
+     owner with `STD-0007` before semantic population; establish project-selected
+     users, tasks, platforms, modalities, conformance, capability, and evidence
+     without web, external-standard, input-method, assistive-technology, tool,
+     or default-success fallback authority.
+   - `7.4b18br` (`Accepted`): reconcile immutable baseline owner-state evidence
+     with authorized mutable decomposition transitions when a planned missing
+     owner is created through one explicit `missing-to-exists` transition;
+     reject undeclared, premature, partial, repeated, regressive, or
+     filesystem-inconsistent transitions without rewriting baseline history.
+   - `7.4b18c` (`Planned`): migrate `STD-0008` through `STD-0012` semantic role,
+     action, navigation, and custom-interaction outcomes while extracting web
+     syntax to non-normative Accessibility reference.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

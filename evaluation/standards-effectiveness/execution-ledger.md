@@ -2,7 +2,7 @@
 
 ## 2026-07-28: Milestone 0 Baseline And Fixtures
 
-**Outcome:** Accepted.
+**Outcome:** Accepted after owner-transition contract correction.
 
 **Write set:**
 
@@ -6830,3 +6830,37 @@ remain available without allowing the heading to introduce build policy.
 
 **Next slice:** `7.4b8ag`, review and implement `STD-0792` and `STD-0793`
 under the Rust Language Binding profile.
+
+## Milestone 7.4b18b Accessibility Owner Contract
+
+**Outcome:** Accepted.
+
+Created the modality-neutral Accessibility topic and non-normative recipe
+boundary. The owner selects user-access outcomes from project users, tasks,
+platforms, modalities, capabilities, conformance authority, and claim-matched
+evidence. Typed decisions reject contradictory, unsupported, unavailable, web,
+external-standard, input-method, lint-only, and default-success fallbacks.
+
+`STD-0007` now has one exact `index` disposition to
+`topics/accessibility.md`. Canonical README and router routes point to the new
+owner, the legacy parent is a migration index, and every row-28 child now sees
+the owner as existing without moving later web semantics early.
+
+**Verification:** Accessibility owner decisions, explicit owner-state
+transition decisions, metadata, row-28 decomposition, execution train, and
+complete standards suites passed.
+
+The immutable baseline retains the historical `missing` fact. The mutable
+decomposition now appends one `owner_transition` field and child 28.1 alone
+declares `missing-to-exists`. The shared verifier derives current state only
+from completion of that authorized transition and rejects implicit filesystem
+inference, partial completion, repetition, regression, and inconsistency.
+
+**Verification deviation:** schema regression runs exposed stale row 5, 6,
+and 7 assertions that coupled accepted historical evidence to the former live
+row-25 cursor. Those unrelated cursor assertions were removed; each historical
+checker retains its frozen row evidence and delegates current cursor authority
+to the execution-train verifier.
+
+**Next slice:** `7.4b18c`, migrate `STD-0008` through `STD-0012` while
+extracting web-specific mechanisms to Accessibility reference.

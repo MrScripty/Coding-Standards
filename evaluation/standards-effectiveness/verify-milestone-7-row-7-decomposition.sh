@@ -25,11 +25,11 @@ mapfile -t actual_rows < <(
 
 row_count=0
 while IFS=$'\t' read -r baseline child ids source owner owner_state activation \
-  checkpoint rationale extra; do
+  checkpoint rationale owner_transition extra; do
   [[ "$baseline" == baseline_order ]] && continue
   [[ "$baseline" -eq 7 ]] || continue
   [[ "$child" -eq $((row_count + 1)) ]]
-  [[ -n "$ids" && -n "$rationale" && -z "${extra:-}" ]]
+  [[ -n "$ids" && -n "$rationale" && "$owner_transition" == none && -z "${extra:-}" ]]
   [[ "$source" == languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md ]]
   [[ -e "$REPO_ROOT/$owner" && "$owner_state" == exists ]]
   [[ "$activation" == pre-slice-review && "$checkpoint" == focused ]]
@@ -85,9 +85,6 @@ rg -F -q '`7.4b8z` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8aa` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ab` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ac` (`Accepted`)' "$PLAN"
-next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'row 25'* ]]
-
 "$SCRIPT_DIR/verify-milestone-7-accelerated-execution-replan.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 

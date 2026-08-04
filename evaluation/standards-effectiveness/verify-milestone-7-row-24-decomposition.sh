@@ -3,7 +3,7 @@ set -euo pipefail
 S="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)";R="$(cd -- "$S/../.." && pwd)";O="$S/milestone-7-execution-decomposition.tsv";V="$S/milestone-7-row-24-owner-validation.tsv";P="$R/plans/standards-library-effectiveness-restructure-plan.md"
 mapfile -t ids < <(awk -F '\t' '$1==24{n=split($3,a,",");for(i=1;i<=n;i++)print a[i]}' "$O"|sort);expected=(STD-{0849..0851});[[ "${ids[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' '$1==24{print $2}' "$O"|paste -sd ' ' -)" == '1' ]]
-[[ "$(awk -F '\t' '$1==24&&NF!=9{n++}END{print n+0}' "$O")" -eq 0 ]]
+[[ "$(awk -F '\t' '$1==24&&NF!=10{n++}END{print n+0}' "$O")" -eq 0 ]]
 mapfile -t validated < <(awk -F '\t' 'NR>1{print $1}' "$V");[[ "${validated[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' 'NR>1&&($2!="workflows/planning.md"||$3!="index"||NF!=4){n++}END{print n+0}' "$V")" -eq 0 ]]
 for t in '## Owner Contract' 'sole normative owner' '## Exact Dispositions' '`STD-0849`, `STD-0850`, and `STD-0851`' '## Ordered Children' '`24.1`' '## Re-plan Triggers';do rg -F -q "$t" "$S/milestone-7-row-24-decomposition.md";done

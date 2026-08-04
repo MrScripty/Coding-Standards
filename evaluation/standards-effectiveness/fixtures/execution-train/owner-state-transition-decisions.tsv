@@ -1,0 +1,12 @@
+case	baseline	transition	completion	filesystem	expected
+existing_owner	exists	none	pending	exists	allow
+planned_missing_owner	missing	none	pending	missing	allow
+pending_creation	missing	missing-to-exists	pending	missing	allow
+completed_creation	missing	missing-to-exists	complete	exists	allow
+undeclared_creation	missing	none	pending	exists	typed-invalid
+premature_creation	missing	missing-to-exists	pending	exists	typed-invalid
+missing_completed_owner	missing	missing-to-exists	complete	missing	typed-invalid
+creation_from_existing	exists	missing-to-exists	complete	exists	typed-invalid
+partial_creation	missing	missing-to-exists	partial	exists	typed-invalid
+repeated_creation	missing	repeated	complete	exists	typed-invalid
+regressive_transition	exists	exists-to-missing	complete	missing	typed-invalid
