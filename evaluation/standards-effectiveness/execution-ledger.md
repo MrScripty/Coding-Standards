@@ -6767,6 +6767,18 @@ row-27 decomposition, execution-train, and complete standards suites passed.
 **Next slice:** `7.4b18a`, re-plan row 28 and establish the missing
 Accessibility owner before implementation.
 
+## Row 28 Accessibility Owner And Population Decomposition
+
+**Outcome:** Accepted planning correction.
+
+Row 28 is split into six ordered children: generic owner/routing, semantic
+interaction, keyboard/focus, names/forms, media, and lint/evidence closure.
+Accessibility owns modality-neutral obligations; Frontend, Tooling, and
+Verification retain mechanisms and evidence authority. Web, product, tool,
+command, rule-set, CI, and external-standard version defaults are rejected.
+
+**Next slice:** `7.4b18b`, create the useful generic owner with `STD-0007`.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

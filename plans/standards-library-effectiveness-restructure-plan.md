@@ -9,10 +9,9 @@
 **Current phase:** Rows 20 through 27 are accepted and closed. Row 28 requires
 pre-slice owner creation and decomposition review for Accessibility.
 
-**Next slice:** Milestone 7.4b18a row 28 pre-slice review for `STD-0007` through
-`STD-0026` from `ACCESSIBILITY-STANDARDS.md`; establish the missing
-Accessibility owner contract, exact ownership, semantic batches, write sets,
-fixtures, and ordered children before implementation.
+**Next slice:** Milestone 7.4b18b row 28 child 28.1 for `STD-0007`; create the
+generic modality-neutral Accessibility owner, reference boundary, canonical
+routes, metadata, and focused owner evidence before moving legacy semantics.
 
 **Acceptance status:** `partial`
 
@@ -1812,9 +1811,11 @@ all structural/routing fixtures pass.
    - `7.4b17b` (`Accepted`): implement one conditional Implementation-derived
      evidence projection, record 11 exact index dispositions, and advance to row
      28 review.
-   - `7.4b18a` (`Planned`): review row 28 `STD-0007` through `STD-0026`, create
+   - `7.4b18a` (`Accepted`): review row 28 `STD-0007` through `STD-0026`, create
      the missing Accessibility owner contract, and freeze exact semantic
      children and write sets before legacy movement.
+   - `7.4b18b` (`Planned`): create and route the useful generic Accessibility
+     owner with `STD-0007` before semantic population.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
