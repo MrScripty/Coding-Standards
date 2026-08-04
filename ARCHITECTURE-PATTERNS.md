@@ -701,30 +701,15 @@ continuation, or startup success.
 
 ## HTTP API Error Convention
 
-### The Pattern
+Canonical outcome meaning, selected protocol mapping, response representation,
+typed projection failures, and no-fallback policy moved to
+[Protocol Outcome Projection](topics/contracts.md#protocol-outcome-projection).
+Fixed HTTP status, envelope, and response-shape examples moved to the
+non-normative [HTTP Projection Mechanism Recipes](reference/recipes/http.md).
 
-HTTP APIs must use status codes to communicate success or failure. Error
-details are returned in a consistent JSON envelope so clients can handle
-errors uniformly.
-
-### Error Response Format
-
-```json
-{
-    "error": "Human-readable description of what went wrong"
-}
-```
-
-### Status Code Usage
-
-| Status Code | Meaning | When to Use |
-|-------------|---------|-------------|
-| 200 | OK | Successful retrieval or action |
-| 201 | Created | Resource successfully created |
-| 400 | Bad Request | Invalid input, missing fields |
-| 404 | Not Found | Resource does not exist |
-| 409 | Conflict | Concurrent modification conflict |
-| 500 | Internal Server Error | Unhandled server-side failure |
+This is a migration index, not an HTTP convention. It does not mandate a status
+table, JSON envelope, message field, default `500`, or inference of operation
+success from transport success.
 
 ### Server Implementation
 

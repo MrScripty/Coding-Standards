@@ -29,6 +29,10 @@ STD-0115	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	pres
 STD-0116	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	split	own deterministic discovery while extracting numbered timestamped and SQL filename mechanisms to non-normative reference
 STD-0117	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	split	own ledger-state consistency and selected lifecycle triggering while extracting SQL table and startup adapter mechanisms to non-normative reference
 STD-0118	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	derive overlap and compatibility handling from actual deployments consumers and retained states without additive or coexistence defaults
+STD-0126	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy HTTP convention heading routes to selected outcome and protocol projection policy
+STD-0127	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	project authoritative operation outcomes only through an explicitly selected protocol contract
+STD-0128	ARCHITECTURE-PATTERNS.md	topics/contracts.md	split	own selected response representation while extracting the fixed JSON error envelope to non-normative HTTP recipes
+STD-0129	ARCHITECTURE-PATTERNS.md	topics/contracts.md	split	own outcome-to-status consistency while extracting the universal status table to non-normative HTTP recipes
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
 STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference

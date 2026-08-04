@@ -164,6 +164,46 @@ response wrappers, middleware, or a particular decoder. Do not treat a default
 body, empty object, alternate parser, guessed status, successful transport, or
 the original unchecked value as a valid fallback.
 
+## Protocol Outcome Projection
+
+Classify the authoritative operation outcome before projecting it through a
+protocol. Record the outcome authority, applicable protocol and version,
+supported outcome variants, status or control metadata, response
+representation, disclosure decision, consumers, and evidence that each
+projection preserves the selected meaning.
+
+The selected protocol contract decides how an outcome is represented. A
+transport-level success may carry a rejected application outcome only when that
+is an explicit supported representation; a transport-level failure does not by
+itself classify the operation. Status, headers or equivalent control metadata,
+and body must describe one consistent selected outcome. Serialization,
+readability, a status class, or a familiar envelope does not establish that
+consistency.
+
+Do not infer a universal mapping from outcome names to HTTP status codes or
+other protocol controls. A protocol may define different mappings for
+different operations, versions, consumers, or externally governed promises.
+Likewise, no JSON envelope, human-readable message field, error code, empty
+body, or response wrapper is a default. Security selects what may be disclosed;
+Diagnostics selects reporting projections without changing the operation
+outcome.
+
+Return:
+
+- `unavailable` when the authoritative outcome, protocol contract,
+  representation, disclosure decision, adapter capability, or required
+  evidence cannot be obtained;
+- `invalid` when status, control metadata, body, or disclosure contradicts the
+  selected outcome or representation; or
+- `unsupported` when a well-formed outcome or representation has no supported
+  projection in the selected protocol contract.
+
+Do not guess a status or envelope, map an unknown failure to a default internal
+error, treat transport success as operation success, expose raw diagnostic text,
+switch representations or decoders, retry, recover, or emit a partial response
+as a fallback. Illustrative HTTP mechanisms are isolated in the
+[HTTP projection recipes](../reference/recipes/http.md).
+
 ## Validation Proof Lifetime
 
 Validation authority belongs to the proof-bearing representation produced by

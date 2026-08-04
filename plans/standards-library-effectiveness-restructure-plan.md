@@ -6,15 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 32 are accepted and closed. Row 33 has an
-accepted two-child Contracts decomposition that separates normative outcome
-and adapter proof from non-normative HTTP mechanisms. The immutable cursor is
-child 33.1.
+**Current phase:** Rows 20 through 32 are accepted and closed. Row 33 child
+33.1 is accepted: Contracts owns selected protocol outcome projection and HTTP
+status/envelope mechanisms are non-normative. The immutable cursor is child
+33.2.
 
-**Next slice:** Milestone 7.4b23b migrates `STD-0126`, `STD-0127`,
-`STD-0128`, and `STD-0129` selected outcome-to-HTTP projection and response
-representation, creates the non-normative HTTP recipe boundary, and extracts
-fixed envelope and status mechanisms without universal defaults.
+**Next slice:** Milestone 7.4b23c migrates `STD-0130`, `STD-0131`,
+`STD-0132`, and `STD-0133` producer and consumer adapter proof, extracts
+pseudocode and fixed examples, retires conditional benefit claims, and closes
+row 33.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1905,7 +1905,7 @@ all structural/routing fixtures pass.
      children; retain generic outcome and adapter proof as normative policy,
      isolate HTTP mechanisms in a non-normative recipe, and freeze Diagnostics,
      Security, Resilience, typed-outcome, and no-fallback boundaries.
-   - `7.4b23b` (`Planned`): migrate `STD-0126` through `STD-0129` selected
+   - `7.4b23b` (`Accepted`): migrate `STD-0126` through `STD-0129` selected
      outcome projection and response representation, create the HTTP recipe,
      and extract fixed JSON envelope and status table mechanisms.
    - `7.4b23c` (`Planned`): migrate `STD-0130` through `STD-0133` producer and

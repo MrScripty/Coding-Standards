@@ -7341,3 +7341,32 @@ diff integrity passed.
 **Next slice:** `7.4b23b`, migrate `STD-0126` through `STD-0129` selected
 outcome projection and response representation and extract fixed HTTP response
 mechanisms.
+
+## Milestone 7.4b23b HTTP Outcome Projection
+
+**Outcome:** Accepted.
+
+Contracts now classifies an authoritative operation outcome before protocol
+projection and requires the selected status or control metadata, response body,
+disclosure decision, and consumer evidence to preserve one consistent meaning.
+Transport success and readable serialization do not prove operation success.
+
+The fixed JSON envelope and six-row status table are isolated in a
+non-normative HTTP recipe. They cannot authorize another operation, version, or
+consumer. Missing authority, mapping, representation, disclosure, capability,
+or evidence returns a typed diagnostic; contradictory status/body/disclosure,
+default `500`, guessed envelope, transport-success inference, raw-message
+disclosure, decoder switching, retry, and recovery are rejected.
+
+`STD-0126` through `STD-0129` each have one exact disposition. Twenty-four
+decisions cover accepted projections, an explicit application error over
+successful transport, non-applicability, missing facts, unsupported variants,
+contradictions, unsafe disclosure, and prohibited fallbacks.
+
+**Verification:** HTTP outcome projection decisions, metadata, exact
+dispositions, row 33 decomposition, immutable cursor, plan structure, shell
+syntax, and diff integrity passed.
+
+**Next slice:** `7.4b23c`, migrate `STD-0130` through `STD-0133` producer
+and consumer adapter proof, extract pseudocode and fixed examples, retire
+conditional benefit claims, and close row 33.
