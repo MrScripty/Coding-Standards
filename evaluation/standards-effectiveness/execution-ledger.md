@@ -7271,3 +7271,47 @@ structure, and diff integrity passed.
 **Next slice:** `7.4b22d`, migrate `STD-0113` through `STD-0118` migration
 execution, extract SQL, filename, ledger-schema, and startup-loop mechanisms,
 and close row 32.
+
+## Milestone 7.4b22d Persistence Migration Execution
+
+**Outcome:** Accepted; row 32 closed.
+
+Persistence now executes only source-to-destination transitions selected by
+Contracts. Before mutation it requires authoritative current-state proof,
+accepted artifact identity and integrity, deterministic ordering, store
+capability, ledger consistency, coordination authority, selected re-entry and
+interruption behavior, and an owned lifecycle trigger.
+
+Completion is recorded only after the destination postcondition is proven.
+Prior attempts, restarts, pending ledger entries, filename order, and startup
+hooks do not authorize execution or repetition. Rollback, rebuild, roll-forward,
+implicit startup, additive-is-safe, and speculative coexistence remain rejected
+defaults. Contracts retains version-overlap and compatibility authority, while
+Resilience retains recovery authority.
+
+SQL, numbered and timestamped filenames, ledger schemas, and startup adapters
+are isolated in non-normative recipes. The legacy migration section is an index
+to Persistence and Contracts. `STD-0113` through `STD-0118` each have one exact
+disposition, and 25 decisions cover accepted manual and startup adapters,
+missing facts, unsupported states and mechanisms, identity/integrity/order and
+ledger failures, re-entry, interruption, overlap, triggers, and fallbacks.
+
+**Verification:** migration-execution, durable-mutation, and owner decisions;
+exact disposition coverage; row 32 decomposition; execution train; S1 routing;
+shell syntax; plan structure; and diff integrity passed.
+
+The package suite initially stopped because shared
+`verify-contract-ownership.sh` required removed legacy Architecture wording.
+Milestone `7.4b22dr` accepted the narrow repair: the stale assertion was removed,
+generic Contracts checks stayed in the shared verifier, and owner-local
+`verify-persistence-migration-execution.sh` now proves the legacy policy cannot
+return. The dependent binding-contract chain passes, and the complete package
+integration suite passes all 217 top-level checkers.
+
+**Re-plan trigger:** Row 33's immutable Contracts package for `STD-0126` through
+`STD-0133` has no accepted child decomposition, owner-validation table, or row
+verifier. HTTP outcome meaning, transport projection, diagnostics, security,
+resilience, and adapter examples cannot be migrated safely as one inferred
+slice.
+
+**Next slice:** `7.4b23a`, review and decompose row 33 before implementation.

@@ -674,78 +674,14 @@ state crosses a durable boundary.
 
 ## Schema Versioning and Migration
 
-### The Pattern
-
-Use migrations when [the contract decision](topics/contracts.md) requires
-retained persisted states to move between schema versions. A project may use
-numbered migrations applied in order with a version table; other stores may use
-transactional replacement, export/import, or explicit rejection when their
-recorded contract permits it.
-
-### Migration Rules
-
-| Rule | Rationale |
-|------|-----------|
-| Published migrations are immutable while supported states depend on them | Preserve reproducibility for retained data |
-| Re-entry behavior is explicit | Use idempotency or enforce one-shot transactional preconditions |
-| Rollback behavior is explicit | Provide down migration, restore, forward repair, or documented no-rollback handling |
-| A version table tracks applied migrations | Know exactly what state the schema is in |
-| Test migrations against realistic data | Empty-table migrations can mask column-type or constraint issues |
-
-### Migration File Structure
-
-```
-migrations/
-├── 001_initial_schema.sql
-├── 002_add_user_preferences.sql
-├── 003_add_index_on_created_at.sql
-└── 004_add_status_column.sql
-```
-
-Use sequential numbering (`NNN_description.sql`) for ordering clarity. Timestamp
-prefixes (`20240125_120000_description.sql`) work for teams where concurrent
-branch development would create numbering conflicts.
-
-### Schema Version Tracking
-
-Maintain a metadata table that records which migrations have been applied:
-
-```sql
-CREATE TABLE IF NOT EXISTS schema_migrations (
-    version     INTEGER PRIMARY KEY,
-    applied_at  TEXT NOT NULL DEFAULT (datetime('now')),
-    description TEXT NOT NULL
-);
-```
-
-At startup, check the current version and apply any pending migrations:
-
-```text
-function apply_pending_migrations(database, migrations):
-    current_version = read_current_schema_version(database)
-
-    for migration in migrations where migration.version > current_version:
-        apply migration SQL inside a transaction
-        record migration version and description
-        log applied migration
-```
-
-### Version Overlap
-
-Only require coexistence when recorded deployment facts allow different
-application versions to access the same database:
-
-| Change Type | Strategy | Example |
-|------------|----------|---------|
-| Add column | Add with a default value | `ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'member'` |
-| Add table | Create unconditionally | New table is ignored by older versions |
-| Remove column | Two-phase removal | Deprecate in v*N*, stop reading in v*N+1*, drop in v*N+2* |
-| Rename column | Add new + copy + two-phase remove old | Older versions still read the old column |
-
-Additive changes can still break defaults, constraints, readers, or exhaustive
-consumers. Validate each change against the selected contract class. When all
-consumers deploy atomically and retained states are migrated, coordinated
-destructive replacement does not require a speculative two-phase shim.
+Canonical migration selection, artifact identity and integrity, deterministic
+ordering, ledger consistency, re-entry, interruption, lifecycle triggering,
+overlap, and typed outcomes are owned by the
+[Persistence boundary profile](profiles/boundaries/persistence.md#migration-execution-contract)
+under the source and destination states selected by
+[Contracts](topics/contracts.md). SQL, filenames, ledger schemas, and startup
+adapters are non-normative examples in the
+[Persistence Mechanism Recipes](reference/recipes/persistence.md#illustrative-migration-adapters).
 
 ---
 

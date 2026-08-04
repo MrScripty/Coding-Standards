@@ -74,6 +74,42 @@ partly occurred or its outcome cannot be established, do not report success or
 continue from guessed state; preserve the typed outcome for the owning recovery
 contract.
 
+## Migration Execution Contract
+
+Execute a migration only for source and destination states selected by
+Contracts. Before mutation, prove the authoritative current state, applicable
+migration identity and integrity, deterministic dependency and ordering facts,
+required store capabilities, ledger consistency, and coordination authority.
+A migration directory, filename sort, pending row, startup hook, or newer
+application version does not prove those facts.
+
+Give each selected migration stable identity under the applicable contract and
+verify that the artifact to execute is the accepted artifact. Define how changed,
+missing, duplicate, or conflicting identities are classified. Discover and
+order migrations from explicit accepted metadata or another deterministic
+contract; do not infer authority from filesystem enumeration or an incidental
+lexical order.
+
+Keep durable state and its migration ledger consistent at every authoritative
+publication boundary. Record completion only after the destination postcondition
+is proven. Re-entry behavior is selected per migration: proven idempotent
+application, one-shot rejection, continuation from an owned checkpoint, or
+another explicit mechanism. Prior attempt, process restart, or an apparently
+pending ledger entry does not authorize repeated application.
+
+Define interruption and unknown-outcome handling before execution. Preserve the
+observed source, destination, and ledger facts for Resilience to select recovery;
+do not delete, rebuild, roll back, roll forward, or mark completion by default.
+The caller that owns an accepted lifecycle trigger invokes migration execution.
+Application startup is one possible trigger, not migration authority or a
+universal execution phase.
+
+Contracts determines whether different application versions or retained states
+must coexist. Derive overlap handling from actual deployment and consumer facts.
+Additive shape, a default value, ignored data, a two-phase shim, or coordinated
+replacement is safe only when the selected producer-consumer contract proves
+it; none is a compatibility default owned by Persistence.
+
 ## Responsibility Boundaries
 
 Persistence owns durable read, write, staging, publication, transaction,

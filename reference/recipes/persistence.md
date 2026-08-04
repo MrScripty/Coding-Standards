@@ -42,3 +42,35 @@ Omit, combine, or replace steps when the selected mechanism proves the same
 contract differently. The names and order above do not authorize placeholders,
 fixed phase counts, append-only behavior, debug-only proof, or partial
 authoritative publication.
+
+## Illustrative Migration Adapters
+
+A repository may represent selected migration identity through numbered files,
+timestamped files, embedded artifacts, package resources, or generated records.
+For example:
+
+```text
+migrations/001_initial_schema.sql
+migrations/002_add_preferences.sql
+```
+
+A store adapter may persist migration identity, integrity, and completion in a
+dedicated table or in another authoritative record:
+
+```sql
+CREATE TABLE migration_ledger (
+    identity TEXT PRIMARY KEY,
+    integrity TEXT NOT NULL,
+    completed_at TEXT NOT NULL
+);
+```
+
+These filenames, fields, SQL types, and table shape are illustrative. They do
+not select lexical ordering, a version table, SQL, timestamps, one ledger schema,
+or one migration tool.
+
+An accepted lifecycle adapter, including an explicitly selected startup adapter,
+may call the same migration-execution service after Contracts and Persistence
+have selected the transition. The adapter must preserve typed outcomes; it does
+not discover pending work by guess, repeat an unproven migration, select
+rollback, or convert migration failure into successful startup.

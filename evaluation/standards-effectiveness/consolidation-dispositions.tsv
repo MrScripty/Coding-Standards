@@ -23,6 +23,12 @@ STD-0109	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	index	legac
 STD-0110	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	apply durable mutation policy only when partial authoritative publication can violate a selected invariant
 STD-0111	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	prohibit observable partial authoritative state and preserve typed unknown-publication outcomes
 STD-0112	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	split	own durable mutation safety while extracting fixed phases pseudocode identifiers and mechanism tips to non-normative reference without placeholder or debug-only defaults
+STD-0113	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	index	legacy migration heading routes to selected persistence migration execution
+STD-0114	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	execute migration only for Contracts-selected retained source and destination states
+STD-0115	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	preserve migration identity integrity deterministic ordering re-entry interruption recovery handoff and ledger consistency
+STD-0116	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	split	own deterministic discovery while extracting numbered timestamped and SQL filename mechanisms to non-normative reference
+STD-0117	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	split	own ledger-state consistency and selected lifecycle triggering while extracting SQL table and startup adapter mechanisms to non-normative reference
+STD-0118	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	derive overlap and compatibility handling from actual deployments consumers and retained states without additive or coexistence defaults
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
 STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference

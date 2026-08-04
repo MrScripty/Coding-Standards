@@ -6,17 +6,17 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 31 are accepted and closed. Persistence
-children 32.1 and 32.2 are accepted: the boundary owner exists, and durable
-mutation now uses invariant-driven isolated staging, publication, and proof
-without fixed phase, placeholder, partial-write, or debug-only defaults. The
-active execution cursor is Persistence child 32.3.
+**Current phase:** Rows 20 through 32 are accepted and closed. Persistence owns
+durable mutation and migration execution mechanisms under Contracts-selected
+states. The stale shared Contracts assertion was removed, and migration policy
+now has one owner-local verifier. The immutable cursor is row 33, whose HTTP
+error-contract cluster has no accepted child decomposition.
 
-**Next slice:** Milestone 7.4b22d migrates `STD-0113`, `STD-0114`, `STD-0115`,
-`STD-0116`, `STD-0117`, and `STD-0118` migration execution semantics, extracts
-SQL, filename, ledger-schema, and startup-loop mechanisms, and closes row 32
-without guessed ordering, repeated application, startup, rollback, or
-speculative coexistence defaults.
+**Next slice:** Milestone 7.4b23a reviews and decomposes row 33 identifiers
+`STD-0126`, `STD-0127`, `STD-0128`, `STD-0129`, `STD-0130`, `STD-0131`,
+`STD-0132`, and `STD-0133`. Do not migrate HTTP error policy until canonical
+Contracts, transport-adapter, Diagnostics, Security, and Resilience ownership
+and ordered children are accepted.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1897,8 +1897,16 @@ all structural/routing fixtures pass.
      owner evidence, and `STD-0106` index.
    - `7.4b22c` (`Accepted`): migrate `STD-0107` through `STD-0112` durable
      mutation and extract fixed phase mechanisms.
-   - `7.4b22d` (`Planned`): migrate `STD-0113` through `STD-0118` migration
+   - `7.4b22d` (`Accepted`): migrate `STD-0113` through `STD-0118` migration
      execution, extract SQL/file/startup mechanisms, and close row 32.
+   - `7.4b22dr` (`Accepted`): resolve the stale shared
+     `verify-contract-ownership.sh` assertion that requires removed legacy
+     Architecture migration wording; freeze one canonical verifier owner,
+     rerun the package full-suite gate, and only then accept child 32.3.
+   - `7.4b23a` (`Planned`): review and decompose row 33 `STD-0126` through
+     `STD-0133` HTTP error-contract policy before implementation; freeze
+     canonical generic outcome, transport projection, diagnostic, security,
+     resilience, mechanism-reference, typed-outcome, and no-fallback ownership.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
