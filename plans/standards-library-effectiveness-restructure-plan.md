@@ -9,10 +9,15 @@
 **Current phase:** Rows 20 through 25 are accepted and closed. Row 26 requires
 pre-slice ownership and decomposition review for the plan template.
 
-**Next slice:** Milestone 7.4b16a row 26 pre-slice review for `STD-0859` through
-`STD-0887` from `templates/PLAN-TEMPLATE.md`; establish exact ownership,
-semantic batches, allowed write sets, fixtures, and ordered children before
-implementation.
+**Next slice:** Milestone 7.4b16b row 26 child 26.1 for `STD-0859`, `STD-0860`,
+`STD-0861`, `STD-0862`, `STD-0863`, `STD-0864`, `STD-0865`, `STD-0866`,
+`STD-0867`, `STD-0868`, `STD-0869`, `STD-0870`, `STD-0871`, `STD-0872`,
+`STD-0873`, `STD-0874`, `STD-0875`, `STD-0876`, `STD-0877`, `STD-0878`,
+`STD-0879`, `STD-0880`, `STD-0881`, `STD-0882`, `STD-0883`, `STD-0884`,
+`STD-0885`, `STD-0886`, and `STD-0887`; align one concise Planning-derived
+`PLAN-TEMPLATE.md`, record 29 exact index dispositions, and add focused
+projection evidence without restoring obsolete frozen sections or copied
+workflow policy.
 
 **Acceptance status:** `partial`
 
@@ -1800,9 +1805,12 @@ all structural/routing fixtures pass.
      operation, reservations, persistent coordination state, self-reference,
      false atomicity, automatic remedy, merge, retry, or stale overwrite.
    - `7.4b15d` (`Accepted`): replace the tracked implementation checklist with one thin, versioned, path-neutral Implementation entrypoint; record exact dispositions and advance to row 26 review.
-   - `7.4b16a` (`Planned`): review row 26 `STD-0859` through `STD-0887`, resolve
+   - `7.4b16a` (`Accepted`): review row 26 `STD-0859` through `STD-0887`, resolve
      template versus Planning ownership, and freeze exact semantic children and
      write sets before any plan-template implementation.
+   - `7.4b16b` (`Planned`): align the one Planning-derived template package,
+     record 29 exact index dispositions, add focused projection evidence, and
+     advance to row 27 review.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

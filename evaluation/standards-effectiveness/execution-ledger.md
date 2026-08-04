@@ -6693,6 +6693,24 @@ execution-train, plan-structure, and complete standards suites passed.
 row-26 implementation is authorized until ownership and ordered children are
 frozen.
 
+## Row 26 Plan Template Decomposition
+
+**Outcome:** Accepted planning correction.
+
+`STD-0859` through `STD-0887` form one Planning-owned derived-template package.
+The frozen headings provide lineage only; every identifier receives one
+`index` disposition to `workflows/planning.md`. The template transports current
+Planning fields and links to narrower owners without copying their policy or
+becoming a second authority.
+
+One child `26.1` owns the template, 29 dispositions, focused projection fixture
+and checker, plan, ledger, and affected cursor assertions. Fixed milestone
+counts, mandatory optional sections, copied commit or delegation procedure,
+historical completion narration, machine paths, obsolete frozen structure, and
+generation machinery are rejected.
+
+**Next slice:** `7.4b16b`, implement the frozen one-package projection contract.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

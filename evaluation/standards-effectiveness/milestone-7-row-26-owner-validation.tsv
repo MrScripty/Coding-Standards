@@ -1,0 +1,30 @@
+id	owner	disposition	rationale
+STD-0859	workflows/planning.md	index	template title and identity project canonical Planning artifact authority
+STD-0860	workflows/planning.md	index	objective fields project canonical Planning objective authority
+STD-0861	workflows/planning.md	index	scope projects canonical Planning scope authority
+STD-0862	workflows/planning.md	index	in-scope detail remains part of the Planning projection
+STD-0863	workflows/planning.md	index	out-of-scope detail remains part of the Planning projection
+STD-0864	workflows/planning.md	index	legacy inputs heading yields to current Planning artifact fields
+STD-0865	workflows/planning.md	index	problem context projects objective and decision evidence without a mandatory heading
+STD-0866	workflows/planning.md	index	constraints project canonical Planning decision inputs
+STD-0867	workflows/planning.md	index	assumptions project canonical Planning decision inputs
+STD-0868	workflows/planning.md	index	dependencies project sequencing facts without a mandatory standalone heading
+STD-0869	workflows/planning.md	index	risks project replan and decision facts without a mandatory standalone heading
+STD-0870	workflows/planning.md	index	simplicity and ownership review projects canonical Planning ownership review
+STD-0871	workflows/planning.md	index	clarification remains conditional Planning behavior not a mandatory template section
+STD-0872	workflows/planning.md	index	definition of done yields to objective acceptance claims
+STD-0873	workflows/planning.md	index	milestones project canonical Planning milestone authority
+STD-0874	workflows/planning.md	index	first example milestone does not establish a fixed count
+STD-0875	workflows/planning.md	index	second example milestone does not establish a fixed count
+STD-0876	workflows/planning.md	index	execution notes yield to plan ledger and issue artifact ownership
+STD-0877	workflows/planning.md	index	commit cadence yields to canonical Commit authority
+STD-0878	workflows/planning.md	index	optional subagent assignment yields to canonical concurrent-work records
+STD-0879	workflows/planning.md	index	replan triggers project canonical Planning authority
+STD-0880	workflows/planning.md	index	recommendations remain decision evidence not a mandatory section
+STD-0881	workflows/planning.md	index	completion summary yields to concise final acceptance and ledger evidence
+STD-0882	workflows/planning.md	index	completed narration yields to milestone state and ledger evidence
+STD-0883	workflows/planning.md	index	deviations yield to append-only ledger evidence
+STD-0884	workflows/planning.md	index	follow-ups project final acceptance ownership and triggers
+STD-0885	workflows/planning.md	index	verification summary yields to objective acceptance evidence
+STD-0886	workflows/planning.md	index	traceability links project owned artifacts without copied rationale
+STD-0887	workflows/planning.md	index	brevity guidance yields to canonical current-state planning policy
