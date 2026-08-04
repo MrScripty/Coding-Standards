@@ -7213,3 +7213,29 @@ slice; the complete suite last passed at the preceding shared-contract boundary.
 
 **Next slice:** `7.4b18d`, migrate `STD-0013` through `STD-0016` keyboard and
 focus outcomes while extracting CSS and web mechanisms.
+
+## Milestone 7.4b22b Persistence Boundary Owner
+
+**Outcome:** Accepted.
+
+The canonical Persistence boundary profile now owns durable read, write,
+staging, publication, transaction, migration-application, version-ledger, and
+store-adapter mechanism selection. It requires authoritative source and
+destination states, selected invariants, proven capabilities, supported
+versions, and claim-matched evidence without taking generic in-memory mutation,
+contract evolution, recovery, concurrency, security, build, diagnostics, or
+verification authority.
+
+The router and Architecture index now select the profile for real durable-state
+boundaries. A non-normative recipe boundary contains mechanism adaptation only,
+and `STD-0106` has one exact `index` disposition. Nineteen owner decisions cover
+selected and ephemeral boundaries, missing authority and facts, invalid partial
+publication or state, unsupported versions or mechanisms, and prohibited
+partial-write, rebuild, startup, and weaker-store fallbacks.
+
+**Verification:** Persistence owner decisions, owner metadata, S1 routing, row
+32 decomposition, execution-train cursor, and diff integrity passed. The
+complete fail-fast suite passed all 215 top-level checkers.
+
+**Next slice:** `7.4b22c`, migrate `STD-0107` through `STD-0112` durable
+mutation semantics and extract fixed phases and pseudocode mechanisms.

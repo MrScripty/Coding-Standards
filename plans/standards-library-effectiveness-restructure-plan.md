@@ -6,13 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 31 are accepted and closed. Row 32 has an
-accepted three-child Persistence decomposition. The three-gate verification,
-stable owner-review activation, and frozen package-action recovery are accepted;
-the active execution cursor is Persistence child 32.1.
+**Current phase:** Rows 20 through 31 are accepted and closed. Persistence child
+32.1 is accepted: the durable-state boundary owner, reference boundary, routing,
+owner evidence, and exact `STD-0106` index disposition exist. The active
+execution cursor is Persistence child 32.2.
 
-**Next slice:** Milestone 7.4b22b creates and routes the Persistence profile,
-recipe, owner evidence, and exact `STD-0106` index disposition.
+**Next slice:** Milestone 7.4b22c migrates `STD-0107`, `STD-0108`, `STD-0109`,
+`STD-0110`, `STD-0111`, and `STD-0112` durable mutation semantics and extracts
+fixed phase and pseudocode mechanisms without placeholder, partial-write, or
+debug-only validation fallbacks.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1889,7 +1891,7 @@ all structural/routing fixtures pass.
      and exact dispositions; and reject undeclared or partial creation without
      rewriting accepted package rows. Harden the fail-fast suite and historical
      checkers so each mutable execution fact has one canonical verifier.
-   - `7.4b22b` (`Planned`): create and route the Persistence profile, recipe,
+   - `7.4b22b` (`Accepted`): create and route the Persistence profile, recipe,
      owner evidence, and `STD-0106` index.
    - `7.4b22c` (`Planned`): migrate `STD-0107` through `STD-0112` durable
      mutation and extract fixed phase mechanisms.

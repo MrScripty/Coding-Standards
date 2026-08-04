@@ -29,6 +29,7 @@ reference material.
 | [reference/recipes/commits.md](reference/recipes/commits.md) | Non-normative staging and conventional commit examples | Formatting a commit after the workflow has selected process rules |
 | [reference/recipes/documentation.md](reference/recipes/documentation.md) | Non-normative comment, Markdown, public-interface, and algorithm examples | Applying a selected documentation requirement |
 | [reference/recipes/releases.md](reference/recipes/releases.md) | Non-normative changelog automation example | Configuring a selected release tool |
+| [reference/recipes/persistence.md](reference/recipes/persistence.md) | Non-normative durable-state mechanism adaptation boundary | Applying a selected Persistence boundary contract |
 | [reference/recipes/tooling.md](reference/recipes/tooling.md) | Non-normative hook runner examples | Configuring an already selected tooling mechanism |
 | [reference/recipes/rust-dependencies.md](reference/recipes/rust-dependencies.md) | Non-normative Cargo dependency inspection examples | Applying an accepted Rust dependency inspection contract |
 | [topics/contracts.md](topics/contracts.md) | Runtime decoding proof, contract classes, migration, compatibility, degraded outcomes, and typed diagnostics | Boundary decoding, contract evolution, persisted state, or fallback decisions |
@@ -45,6 +46,7 @@ reference material.
 | [profiles/boundaries/interop.md](profiles/boundaries/interop.md) | Foreign memory, resource authority, lifecycle, thread, and validated-adapter contracts | Foreign pointers, handles, callbacks, runtimes, or resources |
 | [profiles/boundaries/ipc.md](profiles/boundaries/ipc.md) | Action-specific message decoding and validated-variant dispatch | Structured data crossing process, message, worker, plugin-host, or independently deployed component boundaries |
 | [profiles/boundaries/language-bindings.md](profiles/boundaries/language-bindings.md) | Binding mechanisms, representation categories, thin adapters, conversion outcomes, and generated wrappers | Host-language APIs, generated bindings, stable ABIs, serialized values, or opaque handles |
+| [profiles/boundaries/persistence.md](profiles/boundaries/persistence.md) | Durable-state authority, mechanism selection, boundary ownership, typed outcomes, and evidence | Durable read, write, publication, transaction, migration, ledger, or store-mutation boundaries |
 | [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
 | [profiles/applications/launcher.md](profiles/applications/launcher.md) | Launcher command projection, procedure delegation, process lifecycle, and outcome preservation | Repository launcher or launcher-visible action changes |
 | [profiles/applications/frontend.md](profiles/applications/frontend.md) | Frontend projection, rendering, synchronization, interaction, and evidence boundaries | Web or web-technology user-interface changes |

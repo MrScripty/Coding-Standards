@@ -662,6 +662,12 @@ function get_or_create_service(address):
 
 ## Phased Mutation Pattern
 
+Canonical durable-state authority, mechanism selection, boundary ownership,
+and typed outcomes are owned by the
+[Persistence boundary profile](profiles/boundaries/persistence.md). The legacy
+mutation and migration mechanisms below remain only until their scheduled
+extraction in children 32.2 and 32.3.
+
 ### The Pattern
 
 For complex mutations that modify interconnected data structures, use explicit phases to ensure atomicity and debuggability:

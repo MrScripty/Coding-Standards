@@ -62,7 +62,7 @@ contract, or accessibility authority into the presentation layer.
 | Foreign memory, handles, callbacks, FFI, or cross-language resource access | [Interop boundary profile](profiles/boundaries/interop.md) |
 | Generated host-language APIs, binding adapters, host wrappers, or cross-language value representation | [Language Binding boundary profile](profiles/boundaries/language-bindings.md) |
 | Structured request, response, command, query, or event crosses a process, message, worker, plugin-host, or independently deployed component boundary | [IPC boundary profile](profiles/boundaries/ipc.md) |
-| Persisted data or migration | [Current architecture persistence guidance](ARCHITECTURE-PATTERNS.md) |
+| Durable read, write, publication, transaction, migration application, version ledger, or store mutation | [Persistence boundary profile](profiles/boundaries/persistence.md) plus Contracts and any applicable Resilience, Concurrency, Security, Build, Diagnostics, or Verification owner |
 
 Select a boundary from a real crossing, not because the repository happens to
 contain infrastructure code.
