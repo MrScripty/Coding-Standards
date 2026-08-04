@@ -6,14 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 33 are accepted and closed. Row 34 has an
-accepted six-child owner-aligned decomposition separating Frontend projection,
-TypeScript and Tooling configuration, Verification evidence, Accessibility
-outcomes, and non-normative mechanisms. The immutable cursor is child 34.1.
+**Current phase:** Rows 20 through 33 are accepted and closed. Row 34 child
+34.1 is accepted: Frontend applicability follows changed UI responsibilities
+rather than technology names. The immutable cursor is child 34.2.
 
-**Next slice:** Milestone 7.4b24b records `STD-0449` and `STD-0450`
-Frontend parent and applicability lineage without framework or product
-defaults.
+**Next slice:** Milestone 7.4b24c migrates `STD-0451`, `STD-0452`, and
+`STD-0453` selected rendering and synchronization and extracts fixed DOM,
+event, timer, and FFI mechanisms.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1913,7 +1912,7 @@ all structural/routing fixtures pass.
    - `7.4b24a` (`Accepted`): decompose row 34 into six owner-aligned children
      for Frontend scope, rendering and synchronization, lifecycle timers,
      TypeScript tooling, accepted testing evidence, and Accessibility closure.
-   - `7.4b24b` (`Planned`): record `STD-0449` and `STD-0450` Frontend
+   - `7.4b24b` (`Accepted`): record `STD-0449` and `STD-0450` Frontend
      parent and applicability lineage.
    - `7.4b24c` (`Planned`): migrate `STD-0451` through `STD-0453`
      rendering and synchronization and extract fixed mechanisms.

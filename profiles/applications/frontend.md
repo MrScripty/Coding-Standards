@@ -12,6 +12,28 @@
 - Verification: Frontend authority, projection, synchronization, interaction, accessibility, and evidence decision fixtures plus affected component and real-browser evidence.
 - Canonical owner: `profiles/applications/frontend.md`
 
+## Applicability Decision
+
+Apply this profile when a change creates or alters a web or web-technology UI
+projection, presentation-state owner, rendering lifecycle, user interaction,
+frontend synchronization path, or frontend-specific evidence claim. Determine
+applicability from the changed responsibility and observable behavior, not from
+a product label, executable type, repository directory, or named container
+technology.
+
+A browser, embedded web view, desktop shell, or hybrid application is not
+automatically in scope when the change has no frontend responsibility. A
+frontend remains in scope when its UI mechanism is hosted outside a conventional
+browser. Domain, persistence, transport, and native-host changes retain their
+own owners even when a frontend consumes their results.
+
+Missing responsibility or boundary facts are `unavailable`; contradictory
+ownership is `invalid`; and a selected UI requirement that the supported
+platform cannot represent is `unsupported`. Do not assume browser behavior,
+copy a neighboring product profile, infer scope from Electron, Tauri, WebView,
+or another framework name, or silently treat a cross-boundary change as
+frontend-owned.
+
 ## Projection Authority
 
 A frontend projects canonical application and domain state into a user

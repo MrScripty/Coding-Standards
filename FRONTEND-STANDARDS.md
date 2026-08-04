@@ -1,15 +1,18 @@
 # Frontend Standards
 
-Frontend architecture, rendering, state synchronization, tooling, and testing rules.
+Canonical Frontend application-boundary policy is owned by the
+[Frontend application profile](profiles/applications/frontend.md).
+This legacy source is a migration index and does not independently define
+frontend architecture, rendering, synchronization, tooling, testing, or
+accessibility policy.
 
 ## Scope
 
-These standards apply to browser UIs and desktop frontends (Electron/Tauri/WebView).
-They complement:
-- [CODING-STANDARDS.md](CODING-STANDARDS.md) for general coding rules
-- [TESTING-STANDARDS.md](TESTING-STANDARDS.md) for general test strategy
-- [TOOLING-STANDARDS.md](TOOLING-STANDARDS.md) for CI/hooks/lint infrastructure
-- [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) for a11y-specific requirements
+Applicability moved to the profile's
+[Applicability Decision](profiles/applications/frontend.md#applicability-decision).
+Browser, Electron, Tauri, WebView, desktop-shell, framework, and directory names
+do not select ownership. Contracts, Tooling, Verification, Accessibility, and
+language profiles retain their canonical responsibilities.
 
 ---
 

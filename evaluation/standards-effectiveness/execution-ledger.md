@@ -7435,3 +7435,30 @@ integrity passed.
 
 **Next slice:** `7.4b24b`, record `STD-0449` and `STD-0450` Frontend parent
 and applicability lineage.
+
+## Milestone 7.4b24b Frontend Applicability
+
+**Outcome:** Accepted.
+
+Frontend applicability now follows changed UI projection, presentation-state,
+rendering-lifecycle, interaction, synchronization, and evidence
+responsibilities. Browser, desktop shell, embedded web view, executable,
+directory, framework, Electron, Tauri, and WebView names do not select
+ownership.
+
+Missing responsibility or boundary facts return `unavailable`, contradictory
+ownership is `invalid`, and an unsupported selected platform requirement is
+`unsupported`. Product-name inference, copied profiles, and cross-boundary
+ownership takeover are rejected rather than retained as defaults.
+
+`STD-0449` and `STD-0450` have exact index and refine dispositions. Sixteen
+decisions cover browser, desktop, embedded, headless, and native scope plus
+missing facts, contradictions, unsupported platforms, and prohibited
+technology-name fallbacks.
+
+**Verification:** Frontend applicability decisions, exact dispositions, row 34
+decomposition, immutable cursor, plan structure, shell syntax, and diff
+integrity passed.
+
+**Next slice:** `7.4b24c`, migrate `STD-0451` through `STD-0453` selected
+rendering and synchronization and extract fixed mechanisms.
