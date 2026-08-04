@@ -1,0 +1,5 @@
+id	owner	disposition	rationale
+STD-0089	topics/diagnostics.md	index	legacy activity-tracing heading routes to the new generic diagnostic projection owner
+STD-0090	topics/diagnostics.md	refine	select causal identity context and channel from actual diagnostic purpose rather than mandating correlation and logging
+STD-0091	topics/diagnostics.md	split	own generic lifecycle and propagation while extracting TypeScript and logger mechanisms to reference
+STD-0092	topics/diagnostics.md	index	debugging performance and observability benefits remain claims under existing owners

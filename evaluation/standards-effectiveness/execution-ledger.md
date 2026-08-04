@@ -7017,6 +7017,17 @@ compatibility, semantic, example, or benefit fallback.
 
 **Next slice:** `7.4b21a`, review the missing Diagnostics owner for row 31.
 
+## Milestone 7.4b21a Row 31 Diagnostics Owner Review
+
+**Status:** Accepted.
+
+Row 31 is frozen as owner creation followed by semantic population. Diagnostics
+owns projection purpose, audience, causal identity, bounded context, channel,
+detail, propagation, retention, and failure behavior without taking business
+outcome, recovery, security, performance, evidence, or tooling authority.
+
+**Next slice:** `7.4b21b`, create and route the useful Diagnostics owner.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

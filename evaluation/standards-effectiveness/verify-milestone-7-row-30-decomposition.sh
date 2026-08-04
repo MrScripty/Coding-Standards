@@ -9,7 +9,7 @@ mapfile -t validated < <(awk -F '\t' 'NR>1{print $1}' "$V");[[ "${validated[*]}"
 [[ "$(awk -F '\t' 'NR>1&&$3=="refine"{n++}END{print n+0}' "$V")" -eq 5 ]];[[ "$(awk -F '\t' 'NR>1&&$3=="index"{n++}END{print n+0}' "$V")" -eq 3 ]]
 for text in '## Owner Contract' 'sole normative owner' '## Exact Ownership' '`STD-0055` and `STD-0056`' '`30.1`' '`30.2`' '## Typed Outcomes And No Fallback' '## Re-plan Triggers';do rg -F -q "$text" "$D";done
 [[ "$(awk -F '\t' '$1==30{print $6}' "$S/milestone-7-execution-train.tsv")" == topics/contracts.md ]]
-rg -F -q '`7.4b20a` (`Accepted`)' "$P";rg -F -q '`7.4b20b` (`Accepted`)' "$P";rg -F -q '`7.4b20c` (`Accepted`)' "$P";rg -F -q '`7.4b21a` (`Planned`)' "$P"
+rg -F -q '`7.4b20a` (`Accepted`)' "$P";rg -F -q '`7.4b20b` (`Accepted`)' "$P";rg -F -q '`7.4b20c` (`Accepted`)' "$P";rg -F -q '`7.4b21a` (`Accepted`)' "$P"
 mapfile -t disposed < <(awk -F '\t' '$1>="STD-0055"&&$1<="STD-0062"{print $1}' "$S/consolidation-dispositions.tsv");[[ "${disposed[*]}" == "${expected[*]}" ]]
 "$S/verify-contract-artifact-selection.sh"
 "$S/verify-contract-semantic-preservation.sh"
