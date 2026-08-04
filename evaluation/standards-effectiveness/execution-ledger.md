@@ -6555,6 +6555,21 @@ The digest identifies compared state but does not make replacement atomic.
 **Next slice:** `7.4b15c`, select a supported conditional-update mechanism that
 binds digest comparison to plan-state mutation.
 
+## Row 25 Revision-Checked Serial Integration Replan
+
+**Outcome:** Accepted planning correction.
+
+The generic contract uses optimistic serial integration rather than claiming
+atomic multi-file compare-and-swap. The integration owner checks the admission
+digest before mutation and immediately before integration. A coherent staged
+transition records operation, resulting state, ledger evidence, issue changes,
+and prior/resulting revisions. Either mismatch invalidates admission and
+requires a fresh decision; overwrite, stale merge, automatic retry, and
+latest-wins behavior are prohibited.
+
+**Next slice:** `7.4b15c`, establish the complete identity and admission
+contract with resulting-revision evidence.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

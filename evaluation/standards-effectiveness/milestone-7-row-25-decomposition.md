@@ -111,10 +111,30 @@ unavailable supported cryptographic or conditional-update mechanism is
 automatically. The digest identifies compared state but does not itself make
 replacement atomic.
 
+## Child 25.1 Revision-Checked Serial Integration Replan
+
+The designated serial integration owner performs two revision gates: compare
+`planning-admission-v1` immediately before mutating or staging the transition,
+and compare it again immediately before commit or other authoritative
+integration. This is optimistic integration validation, not atomic filesystem
+or multi-file compare-and-swap.
+
+The coherent staged transition contains the admitted operation, resulting plan
+state, corresponding ledger evidence, any required issue-state change, and the
+prior and resulting revision identities. Implementation owns those coherent
+edits; Commit owns staged-scope and pre-integration review; Planning owns the
+transition; Concurrency owns stale-decision rejection.
+
+A mismatch at either gate is stale `invalid`: discard the admission decision,
+reread authoritative state, and request new admission. Do not overwrite,
+automatically retry, merge stale state, or apply latest-wins behavior.
+Intermediate local disagreement is not accepted state and cannot be
+integrated. This contract does not claim to prevent non-cooperating local edits.
+
 ## Re-plan Triggers
 
-Stop if no supported conditional replacement can bind comparison to mutation,
-plan identity requires repository-global
+Stop if authoritative integration cannot provide both revision gates, resulting
+revision evidence has no canonical record, plan identity requires repository-global
 mutable state, snapshot
 lineage must be regenerated, the prompt needs an independent
 lifecycle or generation system, copied canonical procedure must remain, one
