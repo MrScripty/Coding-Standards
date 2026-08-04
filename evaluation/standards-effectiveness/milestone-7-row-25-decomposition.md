@@ -32,12 +32,21 @@ fixtures/checker, plan, ledger, and affected shared cursor assertions.
 ## Child 25.1 Plan Identity Replan
 
 The invocation must supply one explicit repository-relative `plan.md` path.
-Implementation validates repository containment, plan structure, implementable
-lifecycle state, linked artifact consistency, and exactly one next slice.
-Missing identity is `unavailable`; contradictory or malformed identity is
-`invalid`; a valid plan requiring unsupported mechanics is `unsupported`.
+Implementation owns identity presence and plan semantics. Security owns path
+resolution, canonicalization, traversal and symlink-escape rejection,
+containment, and validation/use safety. Cross-Platform applies conditionally
+when filesystem representation affects resolution. Planning owns plan
+structure, implementable lifecycle state, linked artifact consistency, and
+exactly one next slice.
 
-Do not scan for an active plan, select by filesystem order or recency, infer a
+Missing identity is Implementation `unavailable`; contradictory identity is
+Implementation `invalid`; traversal or repository escape is Security `invalid`;
+missing root or resolution facts are Security `unavailable`; unsupported
+filesystem mechanics are Security `unsupported`; invalid plan structure is
+Planning `invalid`, and missing required plan facts are Planning `unavailable`.
+
+Implementation links to these owners and does not copy their algorithms. Do not
+scan for an active plan, select by filesystem order or recency, infer a
 conventional path, use conversation history as authority, or create a
 repository-global pointer. A future default-selection mechanism requires
 downstream evidence and a separate replan.

@@ -6498,6 +6498,18 @@ canonical contract and `25.1b` for prompt projection and dispositions.
 
 **Next slice:** `7.4b15c`, implement child `25.1a` plan identity and validation.
 
+## Row 25 Plan-Path Authority Replan
+
+**Outcome:** Accepted planning correction.
+
+Implementation owns explicit identity and plan semantics, Security owns secure
+repository path resolution and containment, Cross-Platform applies
+conditionally to representation, and Planning owns document lifecycle and
+structure. Implementation consumes these contracts without copying filesystem
+algorithms or making Security an unconditional dependency.
+
+**Next slice:** `7.4b15c`, implement the corrected child `25.1a` contract.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
