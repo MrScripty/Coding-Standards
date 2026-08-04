@@ -57,6 +57,35 @@ a distinct purpose is `invalid`; an unavailable required artifact mechanism is
 `unsupported`. Do not fall back to an inferred mirror, duplicated schema,
 unrelated implementation dependency, or speculative compatibility artifact.
 
+## Producer-Consumer Semantic Preservation
+
+A structured contract governs every meaning selected by its canonical
+authority, not only field names or readable representation. Record which shape,
+optionality, discriminants, defaults, constraints, identifiers, ordering,
+labels, descriptions, and compatibility behavior affect producer output,
+consumer decisions, persisted identity, or operator action. A category is not
+contractual merely because it appears in this list; authority and observable
+use select the applicable semantics.
+
+Each producer proves that its emitted value satisfies the selected contract.
+Each consumer proves that it accepts and preserves the selected semantics it
+uses. A projection, form, menu, runtime object, generated configuration, or
+stored artifact is a new destination representation when it transforms those
+semantics and must satisfy its own explicit destination contract.
+
+A consumer may intentionally omit, transform, or reinterpret a source semantic
+only when the destination contract authorizes that behavior and the affected
+compatibility and persistence outcomes are explicit. Successful parsing,
+matching field names, a producer test, documentation of the transformation, or
+visual similarity does not prove destination conformance.
+
+Missing authority, consumer facts, or destination contract is `unavailable`;
+contradictory output, silently dropped selected meaning, or incomplete proof is
+`invalid`; a well-formed source variant outside the destination support set is
+`unsupported`. Do not fall back to inferred defaults, nearby labels, source
+ordering, guessed enum meaning, omitted constraints, or the original source
+representation when destination proof is absent.
+
 ## Runtime Decoding At Boundaries
 
 When a value enters through a trust, process, persistence, plugin, queue, or

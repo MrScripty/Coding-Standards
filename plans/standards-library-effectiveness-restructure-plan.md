@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 29 are accepted and closed. Row 30 has an
-accepted two-child Contracts decomposition and is ready for serial execution.
+**Current phase:** Rows 20 through 30 are accepted and closed. Row 31 requires
+missing-owner review before Diagnostics policy may be created or moved.
 
-**Next slice:** Milestone 7.4b20c child 30.2 migrates `STD-0058` through
-`STD-0062` producer-consumer semantic preservation, replaces duplicate
-Architecture policy with a concise index, and closes row 30.
+**Next slice:** Milestone 7.4b21a reviews row 31 `STD-0089` through `STD-0092`,
+defines the missing Diagnostics owner boundary and exact children, and does not
+create or migrate Diagnostics policy before that review is accepted.
 
 **Acceptance status:** `partial`
 
@@ -1853,9 +1853,12 @@ all structural/routing fixtures pass.
    - `7.4b20b` (`Accepted`): migrate `STD-0055` through `STD-0057` artifact
      necessity and authority-access placement with focused selection evidence,
      removing dedicated-package and mirrored-artifact defaults.
-   - `7.4b20c` (`Planned`): migrate `STD-0058` through `STD-0062` semantic
-     preservation, replace duplicate Architecture policy with an index, and
-     close row 30.
+   - `7.4b20c` (`Accepted`): migrate `STD-0058` through `STD-0062` selected
+     producer-consumer semantics and destination transformation proof, replace
+     duplicate Architecture policy with an index, and close row 30.
+   - `7.4b21a` (`Planned`): review row 31 `STD-0089` through `STD-0092`, define
+     the missing Diagnostics owner contract, exact semantic children, write
+     sets, and verification before implementation.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

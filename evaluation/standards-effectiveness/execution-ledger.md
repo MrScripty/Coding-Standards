@@ -7002,6 +7002,21 @@ pointless mirrors and framework-convention artifacts are invalid.
 
 **Next slice:** `7.4b20c`, execute child 30.2 and close row 30.
 
+## Milestone 7.4b20c Producer-Consumer Semantic Preservation
+
+**Status:** Accepted.
+
+Contracts now owns selected semantic meaning, producer and consumer proof, and
+destination-contract authorization for transformations. The policy rejects
+inferred defaults, labels, enum meaning, ordering, omitted constraints, and
+source-representation reuse when destination proof is absent. Architecture now
+contains only a concise canonical route.
+
+Row 30 is closed with eight exact dispositions and no package, mirror,
+compatibility, semantic, example, or benefit fallback.
+
+**Next slice:** `7.4b21a`, review the missing Diagnostics owner for row 31.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

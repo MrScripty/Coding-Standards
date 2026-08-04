@@ -7,6 +7,11 @@ STD-0050	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	benefit claims remai
 STD-0055	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	place authority where selected producers and consumers can depend on it without unrelated implementation coupling
 STD-0056	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	create an artifact only for a distinct authority invariant representation evolution generation or interpretation purpose
 STD-0057	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	benefit claims are evidence expectations rather than independent policy
+STD-0058	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy heading routes to canonical producer-consumer semantic preservation
+STD-0059	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	structured contracts preserve selected meaning in addition to readable representation
+STD-0060	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	canonical authority selects applicable shape default discriminant constraint ordering label and identity semantics
+STD-0061	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	consumer transformations require destination-contract proof and explicit compatibility effects
+STD-0062	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	benefit claims remain subordinate to observable producer-consumer evidence
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
 STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference
