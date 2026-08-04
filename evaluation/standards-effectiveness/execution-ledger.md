@@ -7544,3 +7544,29 @@ structure, shell syntax, and diff integrity passed.
 **Next slice:** `7.4b24f`, record `STD-0457` through `STD-0463` exact
 lineage to accepted claim-selected Frontend evidence without restoring retired
 mechanisms.
+
+## Milestone 7.4b24f Frontend Testing Lineage
+
+**Outcome:** Accepted.
+
+`STD-0457` through `STD-0463` now have exact index lineage to the accepted
+claim-selected Frontend evidence established under `STD-0641`. No duplicate
+normative policy was added.
+
+The legacy source explicitly keeps selector priorities, generic role counts,
+`userEvent` and `fireEvent` preferences, DOM-shim geometry, mocked
+rectangles, timer spies, and fixed embedded-control smoke checks retired.
+Frontend owns the observable UI specialization, while Verification owns
+evidence kind, environment, and acceptance meaning.
+
+The existing 15 decisions continue to cover semantic controls, pure and browser
+geometry, embedded controls, lifecycle cleanup, invalid and unsupported
+interactions, missing environments, and prohibited weaker evidence.
+
+**Verification:** accepted Frontend evidence decisions, negative legacy
+regressions, seven exact index dispositions, prior `STD-0641` lineage, row 34
+decomposition, immutable cursor, plan structure, shell syntax, and diff
+integrity passed.
+
+**Next slice:** `7.4b24g`, route `STD-0464` to Accessibility, close the
+legacy source, and run the P28 full-suite integration gate.

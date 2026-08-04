@@ -45,6 +45,13 @@ STD-0453	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	split	own sourc
 STD-0454	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	split	own frontend lifecycle and evidence specialization while extracting React ref hook interval cadence and teardown mechanisms to non-normative Frontend recipes
 STD-0455	FRONTEND-STANDARDS.md	profiles/languages/typescript.md	index	legacy frontend tooling parent routes to TypeScript static-analysis and canonical Tooling authority
 STD-0456	FRONTEND-STANDARDS.md	profiles/languages/typescript.md	split	own TypeScript lint configuration selection while extracting React automatic-JSX ESLint rule examples to non-normative Tooling recipes
+STD-0457	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	legacy Frontend testing parent routes to accepted claim-selected Frontend evidence
+STD-0458	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	selector priorities remain retired mechanisms under claim-selected evidence
+STD-0459	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	accessibility evidence routes through Frontend specialization and Accessibility authority without query defaults
+STD-0460	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	userEvent fireEvent act and dispatch APIs remain retired mechanism defaults
+STD-0461	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	browser geometry routes to required-environment evidence without DOM-shim or mocked-rectangle substitution
+STD-0462	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	polling cleanup routes to accepted lifecycle evidence without timer-spy or happy-path defaults
+STD-0463	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	embedded controls route to selected interaction and representative-browser evidence without fixed smoke checks
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
 STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference

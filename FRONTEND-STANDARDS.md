@@ -82,6 +82,12 @@ Canonical frontend evidence requirements are defined by the
 This legacy file does not prescribe selector, event-dispatch, simulated DOM,
 browser, or lifecycle-testing defaults.
 
+Selector priority tables, generic role counts, `userEvent` and `fireEvent`
+preferences, DOM-shim geometry, mocked rectangles, timer-spy assertions, and
+fixed embedded-control smoke checks are retired mechanisms. Verification
+selects evidence from the changed claim and required environment; Frontend
+specializes the user-observable behavior being proved.
+
 ---
 
 ## Accessibility
