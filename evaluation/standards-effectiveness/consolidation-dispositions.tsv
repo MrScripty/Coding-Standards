@@ -5,6 +5,7 @@ STD-0003	README.md	STANDARDS-ROUTER.md	index	manual document applicability catal
 STD-0004	README.md	STANDARDS-ROUTER.md	index	template links remain non-normative resources whose presence does not establish applicability
 STD-0005	README.md	STANDARDS-ROUTER.md	index	customization checklist yields to routed owners and adopting-repository contracts
 STD-0006	README.md	LICENSE	index	repository license summary yields to the authoritative license text
+STD-0027	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	index	legacy architecture-pattern catalog parent becomes a non-normative adaptation entry after canonical Architecture selection
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults

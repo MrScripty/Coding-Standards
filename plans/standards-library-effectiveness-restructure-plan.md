@@ -8,12 +8,12 @@
 
 **Current phase:** Rows 20 through 35 are accepted and closed. Row 36 is
 decomposed into four serial children that split canonical Architecture policy
-from conditional non-normative patterns. The immutable cursor remains row 36;
-its proposed reference owner does not yet exist.
+from conditional non-normative patterns. Its reference owner now exists with a
+verified non-authority boundary; the immutable cursor remains row 36.
 
-**Next slice:** Milestone 7.4b26b creates the useful non-normative
-`reference/patterns/architecture.md` owner, adds canonical Architecture
-discovery, and indexes `STD-0027` without moving substantive legacy text.
+**Next slice:** Milestone 7.4b26c migrates `STD-0028` through `STD-0033`,
+retains one conditional layered example, and removes universal layer,
+dependency, and benefit defaults.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1939,7 +1939,7 @@ all structural/routing fixtures pass.
      into owner creation, layered architecture, monorepo roles, and data
      authority children; freeze exact normative/reference dispositions; and
      defer the P30 full-suite gate through immutable package member row 37.
-   - `7.4b26b` (`Planned`): create the useful non-normative
+   - `7.4b26b` (`Accepted`): create the useful non-normative
      `reference/patterns/architecture.md` owner, add canonical Architecture
      discovery, and index `STD-0027` without moving substantive legacy text.
    - `7.4b26c` (`Planned`): migrate `STD-0028` through `STD-0033`, retain one

@@ -7718,3 +7718,27 @@ structure, shell syntax, and diff integrity passed.
 **Next slice:** `7.4b26b`, create and verify the non-normative architecture
 pattern reference owner and index `STD-0027` without substantive source
 movement.
+
+## Milestone 7.4b26b Architecture Pattern Reference Owner
+
+**Outcome:** Accepted.
+
+`reference/patterns/architecture.md` now provides a useful non-normative
+adaptation boundary, reading model, and typed-outcome handoff after canonical
+Architecture selection. Architecture links to the reference without routing to
+it or allowing reference presence to establish applicability.
+
+Seven focused decisions prove adaptation only after selected, complete, and
+supported facts. Missing facts remain unavailable, contradictory decisions and
+fallback selection are invalid, and unsupported mechanisms remain unsupported.
+The reference contains no layered, monorepo, backend-owned-data, or
+optimistic-update legacy body. `STD-0027` has one exact index disposition.
+
+**Verification:** reference metadata and dependency resolution, seven
+non-authority decisions, canonical Architecture discovery, prohibited legacy
+authority, exact disposition, row 36 decomposition, immutable execution train,
+plan structure, shell syntax, and diff integrity passed.
+
+**Next slice:** `7.4b26c`, migrate `STD-0028` through `STD-0033`, retain one
+conditional layered example, and remove universal layer, dependency, and
+benefit defaults.

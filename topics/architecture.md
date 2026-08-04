@@ -73,3 +73,8 @@ backend ownership, framework placement, global state, or the smallest diff.
 Evidence covers applicable dependency direction, owner uniqueness, independent
 business-policy tests, contract boundaries, state transitions, projection
 reconciliation, composition lifecycle, and real cross-boundary behavior.
+
+After these decisions are complete, the non-normative
+[Architecture Pattern Reference](../reference/patterns/architecture.md) may
+help communicate an illustrative structural shape. Reference presence does not
+select a pattern or establish applicability.

@@ -1,0 +1,8 @@
+case	architecture_decision	material_facts	mechanism_capability	fallback	expected
+selected_complete_supported	selected	complete	supported	none	adapt
+missing_architecture	missing	complete	supported	none	typed-unavailable
+missing_material_facts	selected	missing	supported	none	typed-unavailable
+contradictory_architecture	contradictory	complete	supported	none	typed-invalid
+unsupported_mechanism	selected	complete	unsupported	none	typed-unsupported
+fixed_layer_fallback	selected	complete	supported	fixed-layer	typed-invalid
+incumbent_pattern_fallback	selected	complete	supported	incumbent-pattern	typed-invalid
