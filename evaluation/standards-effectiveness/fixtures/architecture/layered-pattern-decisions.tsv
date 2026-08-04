@@ -1,0 +1,9 @@
+case	concerns	owners	contracts	change_axes	fallback	expected
+independent_selected	multiple	complete	complete	independent	none	illustrate
+single_concern	one	complete	complete	coherent	none	keep-together
+coupled_change	multiple	complete	complete	coupled	none	reconsider-boundary
+missing_owner	multiple	missing	complete	independent	none	typed-unavailable
+missing_contract	multiple	complete	missing	independent	none	typed-unavailable
+contradictory_owner	multiple	contradictory	complete	independent	none	typed-invalid
+fixed_layer_fallback	multiple	complete	complete	independent	four-layers	typed-invalid
+inward_fallback	multiple	complete	complete	independent	inward-only	typed-invalid

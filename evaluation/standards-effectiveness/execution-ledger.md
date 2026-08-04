@@ -7742,3 +7742,27 @@ plan structure, shell syntax, and diff integrity passed.
 **Next slice:** `7.4b26c`, migrate `STD-0028` through `STD-0033`, retain one
 conditional layered example, and remove universal layer, dependency, and
 benefit defaults.
+
+## Milestone 7.4b26c Conditional Layered Pattern
+
+**Outcome:** Accepted.
+
+The legacy layered section now routes concern boundaries and dependency
+direction to Architecture and one optional four-layer arrangement to the
+non-normative pattern reference. The illustration may be collapsed, split,
+reordered, or omitted when selected ownership, lifecycle, deployment, and
+change facts differ.
+
+Universal layer names and counts, inward-only dependencies, domain
+independence, and unconditional benefit claims are removed. Dependencies point
+toward selected stable-contract owners, and conditional consequences require
+affected behavior and dependency evidence.
+
+**Verification:** eight boundary decisions, six exact dispositions, reference
+metadata and non-authority, prohibited layered defaults, row 36 decomposition,
+immutable execution train, plan structure, shell syntax, and diff integrity
+passed.
+
+**Next slice:** `7.4b26d`, migrate `STD-0034` through `STD-0039`, retain
+conditional monorepo role examples, and remove fixed package-role,
+dependency-graph, and benefit defaults.

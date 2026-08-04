@@ -4,59 +4,14 @@ Reusable design patterns for multi-layer and client-server applications.
 
 ## Layered Separation of Concerns
 
-### The Pattern
+Canonical concern boundaries, responsibility placement, stable-contract
+dependency direction, and typed outcomes are owned by
+[Architecture](topics/architecture.md). No universal layer count, layer name,
+inward diagram, or domain-independence rule applies.
 
-Organize code into horizontal layers, each with a single responsibility:
-
-```
-┌─────────────────────────────────────┐
-│           Presentation              │  UI, views, user interaction
-├─────────────────────────────────────┤
-│           Application               │  Use cases, orchestration
-├─────────────────────────────────────┤
-│            Domain                   │  Business logic, rules
-├─────────────────────────────────────┤
-│          Infrastructure             │  External systems, I/O
-└─────────────────────────────────────┘
-```
-
-### Layer Responsibilities
-
-| Layer | Responsibility | Contains |
-|-------|---------------|----------|
-| Presentation | Display and user input | UI components, views, formatters |
-| Application | Orchestrate use cases | Controllers, handlers, coordinators |
-| Domain | Business logic | Services, entities, value objects |
-| Infrastructure | External communication | APIs, databases, file systems |
-
-### Dependency Rule
-
-**Dependencies point inward only.**
-
-```
-Presentation → Application → Domain ← Infrastructure
-```
-
-- Outer layers depend on inner layers
-- Inner layers never depend on outer layers
-- Domain is the core and depends on nothing
-
-### Benefits
-
-- **Testability:** Domain logic testable without UI or database
-- **Flexibility:** Replace infrastructure without changing business rules
-- **Maintainability:** Changes isolated to appropriate layer
-
-### Layering Is Not Simplicity By Itself
-
-Layering only helps when layers separate independent decisions. Moving complex,
-entangled behavior into separate files, packages, services, or layers does not
-make the design simple by itself.
-
-A boundary is justified when it prevents unrelated concerns from needing to be
-understood, changed, tested, or deployed together. If two layers must always be
-changed together for ordinary feature work, review whether the boundary is
-missing an explicit contract or whether the split is only organizational.
+One conditional four-layer illustration and its qualified consequences are in
+the non-normative
+[Architecture Pattern Reference](reference/patterns/architecture.md#conditional-layered-arrangement).
 
 ---
 

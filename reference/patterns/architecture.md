@@ -55,3 +55,43 @@ Canonical owners determine whether missing or contradictory facts are
 `invalid`, `unsupported`, or `unavailable`. This reference does not replace
 those outcomes with an incumbent pattern, nearest example, fixed diagram, or
 smallest structural change.
+
+## Conditional Layered Arrangement
+
+After Architecture selects four independently meaningful responsibilities, one
+possible arrangement is:
+
+```text
+presentation
+    |
+application coordination
+    |
+domain policy
+    ^
+infrastructure adapters
+```
+
+| Illustrative role | Possible responsibility |
+| --- | --- |
+| Presentation | Project selected state and translate interaction |
+| Application coordination | Orchestrate an accepted use case |
+| Domain policy | Own business rules that are independent of delivery mechanisms |
+| Infrastructure adapters | Implement selected external-system contracts |
+
+This shape does not require these names, four layers, horizontal organization,
+or a domain module with no dependencies. A selected design may collapse,
+split, reorder, or omit roles when its ownership, lifecycle, deployment, and
+change facts differ.
+
+Dependencies in an adaptation point toward the owner of each stable contract.
+For example, presentation and infrastructure adapters can both depend on
+application or domain contracts without depending on each other's concrete
+implementation.
+
+### Conditional Consequences
+
+When the selected boundaries actually isolate independent decisions, this
+arrangement can make business policy testable without delivery mechanisms and
+can allow an adapter to change without changing that policy. Those outcomes
+require affected dependency and behavior evidence; the diagram alone proves
+neither separation nor maintainability.

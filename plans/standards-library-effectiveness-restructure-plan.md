@@ -9,11 +9,12 @@
 **Current phase:** Rows 20 through 35 are accepted and closed. Row 36 is
 decomposed into four serial children that split canonical Architecture policy
 from conditional non-normative patterns. Its reference owner now exists with a
-verified non-authority boundary; the immutable cursor remains row 36.
+verified non-authority boundary, and layered architecture is migrated without
+universal structural defaults. The immutable cursor remains row 36.
 
-**Next slice:** Milestone 7.4b26c migrates `STD-0028` through `STD-0033`,
-retains one conditional layered example, and removes universal layer,
-dependency, and benefit defaults.
+**Next slice:** Milestone 7.4b26d migrates `STD-0034` through `STD-0039`,
+retains conditional monorepo role examples, and removes fixed package-role,
+dependency-graph, and benefit defaults.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1942,7 +1943,7 @@ all structural/routing fixtures pass.
    - `7.4b26b` (`Accepted`): create the useful non-normative
      `reference/patterns/architecture.md` owner, add canonical Architecture
      discovery, and index `STD-0027` without moving substantive legacy text.
-   - `7.4b26c` (`Planned`): migrate `STD-0028` through `STD-0033`, retain one
+   - `7.4b26c` (`Accepted`): migrate `STD-0028` through `STD-0033`, retain one
      conditional layered example, and remove universal layer, dependency, and
      benefit defaults.
    - `7.4b26d` (`Planned`): migrate `STD-0034` through `STD-0039`, retain

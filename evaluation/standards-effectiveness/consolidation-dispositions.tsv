@@ -6,6 +6,12 @@ STD-0004	README.md	STANDARDS-ROUTER.md	index	template links remain non-normative
 STD-0005	README.md	STANDARDS-ROUTER.md	index	customization checklist yields to routed owners and adopting-repository contracts
 STD-0006	README.md	LICENSE	index	repository license summary yields to the authoritative license text
 STD-0027	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	index	legacy architecture-pattern catalog parent becomes a non-normative adaptation entry after canonical Architecture selection
+STD-0028	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	index	legacy layered-pattern heading routes to canonical Architecture and a conditional non-normative illustration
+STD-0029	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture selects concern boundaries while reference illustrates one optional four-layer arrangement without count name or shape defaults
+STD-0030	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture owns responsibility placement while reference illustrates conditional roles without a universal layer catalog
+STD-0031	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	stable-contract dependency authority replaces universal inward direction while reference illustrates one selected dependency shape
+STD-0032	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	layered consequences remain qualified by accepted boundaries and affected evidence
+STD-0033	ARCHITECTURE-PATTERNS.md	topics/architecture.md	merge-duplicate	canonical concern-boundary policy already rejects organizational layers as proof of simplicity
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults

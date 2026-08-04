@@ -38,10 +38,12 @@ done
 [[ "$(awk -F '\t' '$1 == 36 { print $2 FS $4 FS $8 }' "$S/milestone-7-accelerated-packages.tsv")" == $'P30\treference/patterns/architecture.md\tfull-suite' ]]
 rg -F -q '`7.4b26a` (`Accepted`)' "$P"
 rg -F -q '`7.4b26b` (`Accepted`)' "$P"
-for milestone in 7.4b26c 7.4b26d 7.4b26e; do
+rg -F -q '`7.4b26c` (`Accepted`)' "$P"
+for milestone in 7.4b26d 7.4b26e; do
   printf -v pattern '`%s` (`Planned`)' "$milestone"
   rg -F -q "$pattern" "$P"
 done
 "$S/verify-architecture-pattern-reference-owner.sh"
+"$S/verify-architecture-layered-pattern.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-36 decomposition passed: 19 IDs across 4 serial children with P30 deferred through row 37\n'
