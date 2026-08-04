@@ -84,10 +84,22 @@ revision with the admitted revision and apply the state change only when they
 match. A mismatch is `invalid` stale admission and requires rereading the plan
 and obtaining a new decision. Do not retry the old operation automatically.
 This contract protects plan-state mutation; it does not reserve external
-resources, prevent independent analysis, or authorize overlapping write sets.
+resources or authorize overlapping write sets.
 
-Do not introduce lock files, leases, scheduler infrastructure, state-only Git
-commits, or duplicate execution with later reconciliation as fallback.
+Independent transitions may be planned or implemented concurrently only when
+each has an admitted transition envelope and their exact scopes, bounded write
+sets, dependencies, semantic outcomes, and verification contracts are
+compatible. Overlap, contradictory outcomes, unmet dependencies, changed base
+state, or missing compatibility facts reject admission with typed diagnostics.
+Compatible concurrent preparation does not grant authority to integrate shared
+state; plan, ledger, router, shared contracts, lockfiles, generated artifacts,
+and other declared shared authority remain serial integration-owner writes.
+
+Do not introduce lock files, reservations, leases, queues, heartbeats,
+scheduler infrastructure, state-only Git commits, duplicate execution with
+later reconciliation, or optimistic conflict acceptance as fallback. A future
+reservation protocol requires measured downstream contention and a separate
+replan; it is not implied by this admission contract.
 
 ## Child 25.1 Admission Revision Representation Replan
 
@@ -110,6 +122,42 @@ unavailable supported cryptographic or conditional-update mechanism is
 `unsupported`. Digest mismatch is stale `invalid` and is never retried
 automatically. The digest identifies compared state but does not itself make
 replacement atomic.
+
+## Child 25.1 Transition Envelope Replan
+
+Planning owns deterministic `planning-transition-v1` identity for each proposed
+transition. Its length-delimited digest input contains the scheme identifier,
+canonical repository-relative plan path, explicit operation, proposing actor,
+prior `planning-admission-v1`, exact affected scope and bounded write set,
+ordered prerequisite transition identities, intended semantic outcome and plan
+state, intended resulting `planning-admission-v1`, and required verification
+contract. Paths, sets, and dependency identities use one documented canonical
+ordering; absent and empty values remain distinguishable. The implementing
+environment records the supported cryptographic digest algorithm.
+
+The actor identifies responsibility and evidence; it does not own the plan,
+runtime resources, or shared integration authority. The envelope contains no
+workflow input, mutable execution context, inferred defaults, timestamps,
+filesystem metadata, or conversation state. Missing required facts are
+`unavailable`; malformed identity, framing, ordering, operation, scope, or
+outcome is `invalid`; an unavailable supported digest mechanism is
+`unsupported`.
+
+Concurrency owns compatibility decisions between admitted envelopes. Disjoint
+write sets alone are insufficient: transitions must also have compatible
+semantic outcomes, satisfied dependencies, unchanged admitted bases, and no
+shared-authority conflict. A compatible decision permits bounded preparation
+or implementation only. It never bypasses either revision gate or the serial
+integration owner. Conflicts return typed affected scopes, transition
+identities, and failed invariants; they are not merged, reordered, retried, or
+resolved by latest-wins behavior.
+
+Reconciliation receives a separate deterministic identity that references the
+failed `planning-transition-v1`, observed inconsistent revisions, explicitly
+selected remedy, current expected revision, intended result, authority, and
+verification contract. It cannot reuse or mutate the failed identity. Neither
+transition nor reconciliation identity creates a reservation or persistent
+coordination lifecycle.
 
 ## Child 25.1 Revision-Checked Serial Integration Replan
 
@@ -180,10 +228,12 @@ new persistent lifecycle state is introduced.
 ## Re-plan Triggers
 
 Stop if transition evidence cannot identify the applicable transition
-unambiguously, authoritative
-integration cannot provide both revision gates, plan identity requires repository-global
-mutable state, snapshot
-lineage must be regenerated, the prompt needs an independent
+unambiguously, compatibility cannot be decided from bounded canonical facts,
+actor identity would confer resource or integration ownership, concurrent
+admission requires a reservation or persistent coordination lifecycle,
+authoritative integration cannot provide both revision gates, plan identity
+requires repository-global mutable state, snapshot lineage must be regenerated,
+the prompt needs an independent
 lifecycle or generation system, copied canonical procedure must remain, one
 identifier needs multiple dispositions, or implementation requires files
 outside the approved write set.

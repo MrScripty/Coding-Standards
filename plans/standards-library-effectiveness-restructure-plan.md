@@ -23,7 +23,12 @@ Planning-owned digest of exact `plan.md` and linked `issues.md` state, enforced
 by pre-mutation and pre-integration gates under one serial integration owner.
 The ledger owns prior/resulting revision evidence but is never admission input.
 Partial integration blocks admission until explicit revision-checked
-reconciliation restores coherent state and evidence.
+reconciliation restores coherent state and evidence. A deterministic
+`planning-transition-v1` envelope binds actor, operation, base and intended
+result, exact scope and write set, dependencies, semantic outcome, and
+verification contract. Compatible envelopes may be prepared or implemented
+concurrently, but shared authority remains serially integrated; conflicts and
+stale state return typed diagnostics without merge, retry, or fallback.
 
 **Acceptance status:** `partial`
 
@@ -1796,7 +1801,16 @@ all structural/routing fixtures pass.
    - `7.4b14b` (`Accepted`): replace the duplicated full-review prompt procedure with one thin, versioned, path-neutral Planning entrypoint and record three exact index dispositions without implementation authority or copied process.
    - `7.4b15a` (`Accepted`): preserve the frozen snapshot strictly as identifier lineage, assign `STD-0852` through `STD-0858` to Implementation as exact index dispositions, and freeze one derived-entrypoint child without normative movement.
    - `7.4b15b` (`Accepted`): split row 25 execution so canonical explicit plan-identity selection precedes prompt derivation; reject scanning, recency, conventional-path, conversation-state, and global-pointer fallbacks.
-   - `7.4b15c` (`Planned`): establish Planning-owned explicit admission and `planning-admission-v1` consumed by Implementation, with Security path authority, conditional Cross-Platform representation, Concurrency stale rejection, serial revision gates, ledger-owned evidence, and explicit partial-integration reconciliation without copied policy, inferred operation, self-reference, false atomicity, automatic remedy, or stale overwrite.
+   - `7.4b15c` (`Planned`): establish Planning-owned explicit admission,
+     `planning-admission-v1`, and deterministic `planning-transition-v1`
+     consumed by Implementation, with actor, exact scope/write set,
+     dependencies, semantic outcome, verification contract, typed compatibility
+     diagnostics, Security path authority, conditional Cross-Platform
+     representation, Concurrency stale rejection, serial shared-authority
+     integration, ledger-owned evidence, and explicit separately identified
+     partial-integration reconciliation without copied policy, inferred
+     operation, reservations, persistent coordination state, self-reference,
+     false atomicity, automatic remedy, merge, retry, or stale overwrite.
    - `7.4b15d` (`Planned`): replace the tracked implementation checklist with one thin, versioned, path-neutral Implementation entrypoint; record exact dispositions and advance to row 26 review.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency

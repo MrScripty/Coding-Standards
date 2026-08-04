@@ -6598,6 +6598,36 @@ manager, or new persistent lifecycle state is introduced.
 **Next slice:** `7.4b15c`, define unambiguous transition evidence identity before
 implementing the complete admission contract.
 
+## Row 25 Concurrency-Ready Transition Envelope Replan
+
+**Outcome:** Accepted planning correction.
+
+`planning-transition-v1` deterministically binds the canonical plan path,
+explicit operation and actor, prior admission revision, exact affected scope and
+bounded write set, ordered dependencies, intended semantic outcome and state,
+intended resulting revision, and verification contract. Canonical ordering and
+length-delimited framing distinguish every required fact without timestamps,
+filesystem metadata, conversation state, inferred defaults, or workflow input.
+Actor identity records responsibility but confers no resource, plan, or
+integration ownership.
+
+Compatible transition envelopes may be prepared or implemented concurrently
+only when base state, dependencies, scopes, write sets, semantic outcomes, and
+verification contracts agree. Shared authority remains serially integrated.
+Stale, overlapping, contradictory, under-specified, or dependency-blocked
+proposals return typed diagnostics and are never merged, reordered, retried, or
+accepted by latest-wins behavior. Reconciliation has a separate deterministic
+identity referencing the failed transition and fresh selected remedy.
+
+Reservations, leases, queues, heartbeats, scheduling, and persistent
+coordination lifecycle are rejected for this slice. They require measured
+downstream contention and a separate replan rather than becoming generic
+fallbacks.
+
+**Next slice:** `7.4b15c`, implement child `25.1a` against the complete frozen
+identity, admission, transition-envelope, integration, evidence, and recovery
+contract.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
