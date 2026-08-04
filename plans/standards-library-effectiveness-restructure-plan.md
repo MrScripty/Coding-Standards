@@ -30,6 +30,10 @@ verification contract. Compatible envelopes may be prepared or implemented
 concurrently, but shared authority remains serially integrated; conflicts and
 stale state return typed diagnostics without merge, retry, or fallback.
 
+The prerequisite child `25.0` is accepted: completed row 21 through 24
+decomposition checkers validate only their row-owned historical facts and no
+longer own mutable future milestone status or the live global next-slice cursor.
+
 **Acceptance status:** `partial`
 
 **Execution ledger:** [Milestone execution ledger](../evaluation/standards-effectiveness/execution-ledger.md)
@@ -1801,6 +1805,10 @@ all structural/routing fixtures pass.
    - `7.4b14b` (`Accepted`): replace the duplicated full-review prompt procedure with one thin, versioned, path-neutral Planning entrypoint and record three exact index dispositions without implementation authority or copied process.
    - `7.4b15a` (`Accepted`): preserve the frozen snapshot strictly as identifier lineage, assign `STD-0852` through `STD-0858` to Implementation as exact index dispositions, and freeze one derived-entrypoint child without normative movement.
    - `7.4b15b` (`Accepted`): split row 25 execution so canonical explicit plan-identity selection precedes prompt derivation; reject scanning, recency, conventional-path, conversation-state, and global-pointer fallbacks.
+   - Row 25 checker-ownership prerequisite (`Accepted`): completed row 21
+     through 24 decomposition checkers retain row-owned milestone, structure,
+     disposition, owner, and train evidence while dropping mutable future-status
+     and live-cursor assertions before child `25.1a` advances row 25.
    - `7.4b15c` (`Planned`): establish Planning-owned explicit admission,
      `planning-admission-v1`, and deterministic `planning-transition-v1`
      consumed by Implementation, with actor, exact scope/write set,

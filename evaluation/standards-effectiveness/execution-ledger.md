@@ -6628,6 +6628,23 @@ fallbacks.
 identity, admission, transition-envelope, integration, evidence, and recovery
 contract.
 
+## Row 25 Historical Checker Ownership Prerequisite
+
+**Outcome:** Accepted and implemented.
+
+Completed row 21 through 24 decomposition checkers now verify only their own
+row structure, exact identifiers and dispositions, accepted row milestones,
+owner artifacts, and immutable execution-train evidence. Assertions about later
+milestone status and the mutable global next-slice cursor were removed because
+they made historical evidence a competing owner of active planning state.
+
+The row-25 checker remains the focused owner of current child `25.1a` status and
+cursor evidence. No normative standard, disposition, train row, milestone
+outcome, or fallback changed.
+
+**Next slice:** `7.4b15c`, implement child `25.1a` without editing completed-row
+checkers when row-25 lifecycle state advances.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

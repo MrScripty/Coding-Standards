@@ -41,38 +41,6 @@ rg -F -q '`7.4b11e` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b11f` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b11g` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b11h` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b12a` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b12b` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b12c` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b12d` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b12e` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13a` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13b` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13c` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13d` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13e` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13f` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13g` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13h` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13i` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13j` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13k` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13l` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13m` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b13n` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b14a` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b14b` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b15a` (`Accepted`)' "$PLAN";rg -F -q '`7.4b15b` (`Accepted`)' "$PLAN";rg -F -q '`7.4b15c` (`Planned`)' "$PLAN"
-next_slice="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice" == *'row 25'* ]]
-[[ "$next_slice" == *'STD-0852'* ]]
-next_slice_block="$(awk '
-  /^\*\*Next slice:\*\*/ { capture = 1 }
-  capture && /^$/ { exit }
-  capture { print }
-' "$PLAN")"
-[[ "$next_slice_block" == *'row 25'* ]]
-[[ "$next_slice_block" == *'STD-0852'* && "$next_slice_block" == *'STD-0858'* ]]
 
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-21 decomposition passed: 21 IDs across 7 children\n'

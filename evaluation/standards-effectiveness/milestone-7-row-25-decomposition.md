@@ -19,14 +19,19 @@ useful snapshot semantics already exist in canonical workflows.
 
 ## Ordered Children
 
-1. `25.1a`: establish Planning-owned `start`, `continue`, and `verify`
+1. `25.0`: remove mutable future-status and live-cursor assertions from the
+   completed row 21 through 24 decomposition checkers while preserving their
+   row-owned structure, dispositions, milestones, and train verification.
+2. `25.1a`: establish Planning-owned `start`, `continue`, and `verify`
    admission plus explicit repository-relative plan identity consumed by
    Implementation, with focused no-inference evidence.
-2. `25.1b`: replace the tracked checklist with one thin, versioned,
+3. `25.1b`: replace the tracked checklist with one thin, versioned,
    path-neutral Implementation entrypoint; record seven exact dispositions and
    focused positive and negative projection evidence.
 
-Child `25.1a` may touch Planning, Implementation, its focused fixtures/checker,
+Child `25.0` may touch only the completed row 21 through 24 checkers, this
+decomposition, plan, and ledger. It must not change row-owned outcomes or the
+current row-25 checker. Child `25.1a` may touch Planning, Implementation, its focused fixtures/checker,
 plan, and ledger. Child `25.1b` may touch the prompt, dispositions, focused
 fixtures/checker, plan, ledger, and affected shared cursor assertions.
 
@@ -227,7 +232,9 @@ new persistent lifecycle state is introduced.
 
 ## Re-plan Triggers
 
-Stop if transition evidence cannot identify the applicable transition
+Stop if historical checker cleanup weakens row-owned acceptance evidence,
+changes execution-train state, or requires normative owner changes; transition
+evidence cannot identify the applicable transition
 unambiguously, compatibility cannot be decided from bounded canonical facts,
 actor identity would confer resource or integration ownership, concurrent
 admission requires a reservation or persistent coordination lifecycle,
