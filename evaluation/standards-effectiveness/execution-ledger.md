@@ -7902,6 +7902,31 @@ advancement, plan structure, shell syntax, and diff integrity passed.
 Frontend, Architecture, recipe, and Verification authority without retaining
 the fixed view-model chain, mutable class, or benefit defaults.
 
+## Milestone 7.4b27d View-Model Lineage Closure
+
+**Outcome:** Accepted.
+
+The legacy view-model section now routes projection, presentation state,
+rendering, synchronization, interaction adaptation, and lifecycle to the
+Frontend profile; state authority to Architecture; and evidence claims to
+Verification. Existing Frontend recipes remain the non-normative mechanism
+owner, so no duplicate view-model example was added.
+
+The fixed source-view-model-view chain, component responsibility table,
+automatic subscription, action forwarding, backend-by-location authority,
+copied mutable state, dedicated TypeScript class, and unconditional testability
+and reuse claims are removed. A view model remains one possible mechanism only
+after the applicable contracts select it.
+
+**Verification:** twelve view-model decisions, six exact dispositions,
+prohibited class, backend-location, copied-state, and subscription defaults,
+existing Frontend owner and recipe evidence, prior Architecture pattern
+evidence, row 37 decomposition, immutable-train advancement, plan structure,
+shell syntax, and diff integrity passed.
+
+**Next slice:** `7.4b27e`, replace `STD-0087`, remove the universal directory
+template, close row 37, and run the deferred P30 complete-suite gate.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

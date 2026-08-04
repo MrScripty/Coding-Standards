@@ -7,15 +7,14 @@
 **Plan status:** `Active`
 
 **Current phase:** Rows 20 through 36 are accepted and closed. Row 37 children
-37.1 and 37.2 are accepted: composition and durable-workflow illustrations are
-conditional, while canonical owners retain authority for state, contracts,
-persistence, ordering, recovery, and evidence. P30 remains open until child
-37.4 runs its complete-suite gate, and child 37.3 is active.
+37.1 through 37.3 are accepted: conditional structural examples remain only
+where useful, and view-model lineage now routes to existing Frontend,
+Architecture, recipe, and Verification authority without a copied class. P30
+remains open, and final-closure child 37.4 is active.
 
-**Next slice:** Milestone 7.4b27d migrates `STD-0081`, `STD-0082`,
-`STD-0083`, `STD-0084`, `STD-0085`, and `STD-0086` to existing Frontend,
-Architecture, recipe, and Verification authority without retaining the fixed
-view-model chain, mutable class, or benefit defaults.
+**Next slice:** Milestone 7.4b27e replaces `STD-0087`, removes the universal
+directory template, closes row 37, and runs the deferred P30 complete-suite
+gate.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1969,7 +1968,7 @@ all structural/routing fixtures pass.
      Contracts, Persistence, Concurrency, Resilience, and Verification
      authority without event-sourcing, durable-acceptance, component, replay,
      or evidence defaults.
-   - `7.4b27d` (`Planned`): migrate `STD-0081` through `STD-0086` to existing
+   - `7.4b27d` (`Accepted`): migrate `STD-0081` through `STD-0086` to existing
      Frontend, Architecture, recipe, and Verification authority without
      retaining the fixed view-model chain, mutable class, or benefit defaults.
    - `7.4b27e` (`Planned`): replace `STD-0087`, remove the universal directory

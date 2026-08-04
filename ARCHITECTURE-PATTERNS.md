@@ -121,73 +121,19 @@ not acquire durability or recovery obligations from this pattern name.
 
 ## View Model Pattern
 
-### The Pattern
+Canonical frontend authority, presentation state, rendering, synchronization,
+interaction adaptation, and lifecycle moved to the
+[Frontend application profile](profiles/applications/frontend.md#projection-authority).
+Canonical data and state ownership remains with
+[Architecture](topics/architecture.md#data-and-state-authority), and evidence
+claims remain with [Verification](workflows/verification.md#selecting-claims).
 
-Separate data management from presentation using dedicated view model objects.
-
-```
-┌──────────────┐      ┌──────────────┐      ┌──────────────┐
-│    Source    │ ───▶ │  View Model  │ ───▶ │    View      │
-│   (backend)  │      │ (transforms) │      │   (renders)  │
-└──────────────┘      └──────────────┘      └──────────────┘
-```
-
-### Responsibilities
-
-| Component | Responsibility |
-|-----------|---------------|
-| Source | Provides raw data |
-| View Model | Transforms, derives, exposes data |
-| View | Renders what view model provides |
-
-### View Model Rules
-
-1. **Subscribe to data source** - Receive updates automatically
-2. **Expose derived values** - Computed properties for display
-3. **Forward actions** - Don't implement business logic
-4. **Don't duplicate backend-owned data** — The view model reflects backend
-   state; it does not maintain a separate copy. Local fields for
-   UI-only concerns (loading flags, filter strings, expanded nodes) are fine
-   because they have no backend equivalent.
-
-### Example
-
-```typescript
-// view-models/user-list.vm.ts
-
-class UserListViewModel {
-    // Raw data from source
-    private _users: User[] = [];
-
-    // Subscribe to data source
-    constructor(private dataSource: DataSource) {
-        dataSource.on('users:updated', (users) => {
-            this._users = users;
-        });
-    }
-
-    // Derived: Filtered for display
-    get activeUsers(): User[] {
-        return this._users.filter(u => u.isActive);
-    }
-
-    // Derived: Formatted for display
-    get userCount(): string {
-        return `${this.activeUsers.length} active users`;
-    }
-
-    // Forward action to backend (don't implement here)
-    selectUser(userId: string): void {
-        this.dataSource.send('selectUser', { userId });
-    }
-}
-```
-
-### Benefits
-
-- **Testable:** View models can be tested without UI
-- **Reusable:** Same view model for different view implementations
-- **Clean views:** Views only handle rendering
+A view model, component store, derived selector, presenter, controller, or
+framework binding is a possible frontend mechanism after those contracts are
+selected. Existing non-normative synchronization examples are in the
+[Frontend mechanism recipes](reference/recipes/frontend.md). The pattern name
+does not require a dedicated class, source-view-model-view chain, subscription,
+action forwarding, copied state, backend owner, or separate test surface.
 
 ---
 

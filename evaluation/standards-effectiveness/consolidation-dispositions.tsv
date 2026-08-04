@@ -36,6 +36,12 @@ STD-0077	ARCHITECTURE-PATTERNS.md	topics/resilience.md	split	Resilience owns rep
 STD-0078	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	component roles remain illustrative and cannot select stores handlers publishers or read models
 STD-0079	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	workflow consequences remain observable claims requiring affected evidence
 STD-0080	ARCHITECTURE-PATTERNS.md	workflows/verification.md	merge-duplicate	canonical Verification and Resilience evidence already cover replay duplicates convergence and partial failure
+STD-0081	ARCHITECTURE-PATTERNS.md	profiles/applications/frontend.md	index	legacy view-model label routes to canonical frontend projection and synchronization authority
+STD-0082	ARCHITECTURE-PATTERNS.md	profiles/applications/frontend.md	merge-duplicate	canonical Frontend projection already separates authoritative state interaction adaptation and rendering
+STD-0083	ARCHITECTURE-PATTERNS.md	profiles/applications/frontend.md	merge-duplicate	fixed source view-model view responsibilities yield to selected authority projection and interaction contracts
+STD-0084	ARCHITECTURE-PATTERNS.md	profiles/applications/frontend.md	split	selected synchronization and action contracts replace subscription forwarding and backend-by-location defaults
+STD-0085	ARCHITECTURE-PATTERNS.md	reference/recipes/frontend.md	merge-duplicate	existing recipes already illustrate selected synchronization so the mutable class example is removed
+STD-0086	ARCHITECTURE-PATTERNS.md	workflows/verification.md	merge-duplicate	testability reuse and clean-view benefits remain claims selected and proved by Verification
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults
