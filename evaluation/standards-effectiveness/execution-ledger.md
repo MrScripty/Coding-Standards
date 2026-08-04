@@ -6945,6 +6945,22 @@ integrity passed.
 
 **Next slice:** `7.4b19a`, review and decompose row 29 before implementation.
 
+## Milestone 7.4b19a Row 29 Contract Planning Review
+
+**Status:** Accepted.
+
+The five frozen identifiers form one Contracts-owned lineage cluster. Existing
+fact-driven contract classes and temporary implementation-freeze policy replace
+the legacy permanent freeze, universal append-only rule, TypeScript example,
+and benefit claims. Row 29 is frozen as one exact-index child with no normative
+movement or fallback behavior.
+
+**Allowed implementation write set:** row-29 decomposition and validation,
+legacy Contract Planning Boundary index, exact dispositions, focused contract
+planning fixtures/checker, plan, ledger, and affected cursor assertions.
+
+**Next slice:** `7.4b19b`, execute child 29.1 and close row 29.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

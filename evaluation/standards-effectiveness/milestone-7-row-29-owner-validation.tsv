@@ -1,0 +1,6 @@
+id	owner	disposition	rationale
+STD-0046	topics/contracts.md	index	legacy heading routes to canonical fact-driven contract planning
+STD-0047	topics/contracts.md	index	temporary implementation freeze is bounded by active concurrent dependency
+STD-0048	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults
+STD-0049	topics/contracts.md	index	language-specific frozen-shape example is rejected rather than retained as authority
+STD-0050	topics/contracts.md	index	benefit claims are subordinate to selected observable contract outcomes
