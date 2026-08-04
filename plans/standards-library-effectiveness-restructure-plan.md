@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 28 are accepted and closed. Row 29 has an
-accepted one-child Contracts index decomposition and is ready for execution.
+**Current phase:** Rows 20 through 29 are accepted and closed. Row 30 requires
+mandatory pre-slice review before its Contracts-owned identifiers may move.
 
-**Next slice:** Milestone 7.4b19b child 29.1 records exact index dispositions for
-`STD-0046` through `STD-0050`, verifies temporary contract freeze without
-universal compatibility defaults, and closes row 29.
+**Next slice:** Milestone 7.4b20a reviews row 30 `STD-0055` through `STD-0062`,
+freezes exact owner-coherent children and write sets, and does not implement the
+legacy Architecture Patterns material before that review is accepted.
 
 **Acceptance status:** `partial`
 
@@ -1843,9 +1843,12 @@ all structural/routing fixtures pass.
      Contracts-owned exact-index child because canonical fact-driven policy
      already replaces permanent freeze, universal append-only evolution, the
      language-specific example, and benefit claims.
-   - `7.4b19b` (`Planned`): execute child 29.1, record five exact index
-     dispositions, add focused positive and negative contract-planning evidence,
-     and close row 29.
+   - `7.4b19b` (`Accepted`): execute child 29.1, record five exact index
+     dispositions, verify temporary freeze and fact-driven evolution selection,
+     reject universal compatibility defaults, and close row 29.
+   - `7.4b20a` (`Planned`): review row 30 `STD-0055` through `STD-0062` and
+     freeze exact semantic children, ownership, write sets, and verification
+     before implementation.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

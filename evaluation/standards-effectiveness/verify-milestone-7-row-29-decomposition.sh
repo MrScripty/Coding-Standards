@@ -33,6 +33,12 @@ done
 
 [[ "$(awk -F '\t' '$1==29{print $6}' "$S/milestone-7-execution-train.tsv")" == 'topics/contracts.md' ]]
 rg -F -q '`7.4b19a` (`Accepted`)' "$P"
-rg -F -q '`7.4b19b` (`Planned`)' "$P"
+rg -F -q '`7.4b19b` (`Accepted`)' "$P"
+rg -F -q '`7.4b20a` (`Planned`)' "$P"
+
+mapfile -t disposed < <(awk -F '\t' '$1>="STD-0046"&&$1<="STD-0050"{print $1}' "$S/consolidation-dispositions.tsv")
+[[ "${disposed[*]}" == "${expected[*]}" ]]
+"$S/verify-contract-planning-boundary.sh"
+"$S/verify-milestone-7-execution-train.sh"
 
 printf 'Milestone 7 row-29 decomposition passed: 5 IDs assigned to one Contracts-owned index child\n'

@@ -6961,6 +6961,23 @@ planning fixtures/checker, plan, ledger, and affected cursor assertions.
 
 **Next slice:** `7.4b19b`, execute child 29.1 and close row 29.
 
+## Milestone 7.4b19b Contract Planning Index Closure
+
+**Status:** Accepted.
+
+Recorded exact index dispositions for `STD-0046` through `STD-0050`. Focused
+decision evidence proves temporary contract freezing during active concurrent
+work and fact-driven replacement, migration, versioning, negotiation, and
+regeneration after that dependency ends. Permanent freezing, universal
+append-only evolution, additive-is-safe claims, speculative compatibility, and
+language-example authority are typed invalid; missing facts are typed
+unavailable.
+
+The legacy Architecture Patterns section remains a concise route to canonical
+Contracts policy. No rejected example or compatibility fallback was restored.
+
+**Next slice:** `7.4b20a`, review and decompose row 30 before implementation.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

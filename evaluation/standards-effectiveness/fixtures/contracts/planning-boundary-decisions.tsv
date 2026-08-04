@@ -1,0 +1,13 @@
+case	facts	class	deployment	concurrent_dependency	request	expected
+active_parallel_work	complete	internal-coordinated	atomic	active	select	freeze-temporary
+coordinated_after_work	complete	internal-coordinated	atomic	complete	select	replace
+retained_state	complete	persisted	atomic	complete	select	migrate
+public_consumers	complete	public-versioned	independent	complete	select	version
+overlapping_deployments	complete	distributed-independent	independent	complete	select	negotiate
+generated_contract	complete	generated	atomic	complete	select	regenerate
+unknown_consumers	missing	internal-coordinated	atomic	complete	select	typed-unavailable
+permanent_freeze	complete	internal-coordinated	atomic	complete	permanent-freeze	typed-invalid
+append_only_default	complete	persisted	atomic	complete	append-only	typed-invalid
+additive_safe_default	complete	public-versioned	independent	complete	additive-safe	typed-invalid
+language_example_authority	complete	internal-coordinated	atomic	active	example-authority	typed-invalid
+speculative_compatibility	complete	internal-coordinated	atomic	complete	compatibility-shim	typed-invalid
