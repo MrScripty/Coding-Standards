@@ -6482,6 +6482,22 @@ lifecycle, and execution-train checks.
 **Next slice:** `7.4b15b`, implement row 25 child 25.1 as a thin Implementation
 entrypoint for `STD-0852` through `STD-0858`.
 
+## Row 25 Explicit Plan Identity Replan
+
+**Outcome:** Accepted planning correction.
+
+Pre-edit review found that “the active plan” has no authoritative identity when
+multiple, historical, nested, or absent plans exist. Row 25 now establishes an
+Implementation-owned explicit repository-relative plan-path contract before
+prompt derivation. Missing, invalid, and unsupported selection facts retain
+typed outcomes; scanning, recency, conventional paths, conversation inference,
+and global pointer state are prohibited fallbacks.
+
+The former child `25.1` is replaced by ordered children `25.1a` for the
+canonical contract and `25.1b` for prompt projection and dispositions.
+
+**Next slice:** `7.4b15c`, implement child `25.1a` plan identity and validation.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

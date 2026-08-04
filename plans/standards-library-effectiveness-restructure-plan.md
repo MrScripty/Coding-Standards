@@ -13,9 +13,9 @@ compile-fail, property-test, and Rust test-style children are accepted, and
 Rows 20 through 24 are accepted and closed; row 25 has one Implementation-owned
 derived-entrypoint child ready for implementation.
 
-**Next slice:** Milestone 7.4b15b row 25 child 25.1 for `STD-0852`, `STD-0853`, `STD-0854`, `STD-0855`, `STD-0856`, `STD-0857`, and `STD-0858`;
-replace `prompts/implement-plan.md` with a thin Implementation entrypoint,
-record exact index dispositions, and advance to row 26 review.
+**Next slice:** Milestone 7.4b15c row 25 child 25.1a for `STD-0852`, `STD-0853`, `STD-0854`, `STD-0855`, `STD-0856`, `STD-0857`, and `STD-0858`; establish explicit
+repository-relative plan identity and typed selection diagnostics in
+Implementation before deriving the prompt.
 
 **Acceptance status:** `partial`
 
@@ -1787,7 +1787,9 @@ all structural/routing fixtures pass.
    - `7.4b14a` (`Accepted`): reject the baseline Implementation owner for planning-only row 24, assign `STD-0849` through `STD-0851` to Planning as exact index dispositions, and freeze one derived-entrypoint child without normative movement.
    - `7.4b14b` (`Accepted`): replace the duplicated full-review prompt procedure with one thin, versioned, path-neutral Planning entrypoint and record three exact index dispositions without implementation authority or copied process.
    - `7.4b15a` (`Accepted`): preserve the frozen snapshot strictly as identifier lineage, assign `STD-0852` through `STD-0858` to Implementation as exact index dispositions, and freeze one derived-entrypoint child without normative movement.
-   - `7.4b15b` (`Planned`): replace the tracked implementation checklist with one thin, versioned, path-neutral Implementation entrypoint; record exact dispositions and advance to row 26 review.
+   - `7.4b15b` (`Accepted`): split row 25 execution so canonical explicit plan-identity selection precedes prompt derivation; reject scanning, recency, conventional-path, conversation-state, and global-pointer fallbacks.
+   - `7.4b15c` (`Planned`): establish explicit repository-relative plan identity and typed selection diagnostics in Implementation with focused no-inference evidence.
+   - `7.4b15d` (`Planned`): replace the tracked implementation checklist with one thin, versioned, path-neutral Implementation entrypoint; record exact dispositions and advance to row 26 review.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
