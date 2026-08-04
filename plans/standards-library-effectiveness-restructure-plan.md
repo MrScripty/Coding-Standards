@@ -11,12 +11,15 @@ decomposed into four serial children that split canonical Architecture policy
 from conditional non-normative patterns. Its reference owner now exists with a
 verified non-authority boundary, and layered architecture is migrated without
 universal structural defaults. Monorepo roles are also migrated without a
-fixed package catalog or dependency graph. The immutable cursor remains row 36.
+fixed package catalog or dependency graph. Shared owner state now derives from
+one completed owner-scoped transition without changing later row obligations.
+The immutable cursor remains row 36.
 
-**Next slice:** Milestone 7.4b26e migrates `STD-0040` through `STD-0045`,
-retains a conditional server-authoritative projection example, removes
-location-based authority and blanket optimistic-update defaults, closes row
-36, and stops for row 37 owner review.
+**Next slice:** Milestone 7.4b26e migrates `STD-0040`, `STD-0041`,
+`STD-0042`, `STD-0043`, `STD-0044`, and `STD-0045`; retains a conditional
+server-authoritative projection example; removes location-based authority and
+blanket optimistic-update defaults; closes row 36; and stops for row 37 owner
+review.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1951,6 +1954,10 @@ all structural/routing fixtures pass.
    - `7.4b26d` (`Accepted`): migrate `STD-0034` through `STD-0039`, retain
      conditional monorepo role examples, and remove fixed package-role,
      dependency-graph, and benefit defaults.
+   - `7.4b26er` (`Accepted`): reconcile one created owner shared by multiple
+     immutable rows through owner-scoped transition inheritance; preserve
+     row-scoped semantic review and reject duplicate, premature, regressive,
+     or filesystem-inconsistent creation without rewriting the train.
    - `7.4b26e` (`Planned`): migrate `STD-0040` through `STD-0045`, retain a
      conditional server-authoritative projection example, remove
      location-based authority and blanket optimistic-update defaults, close

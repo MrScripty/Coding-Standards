@@ -7767,6 +7767,32 @@ passed.
 conditional monorepo role examples, and remove fixed package-role,
 dependency-graph, and benefit defaults.
 
+## Milestone 7.4b26er Shared Owner State
+
+**Outcome:** Accepted.
+
+The execution train now treats owner creation as owner-scoped while keeping
+semantic completion row-scoped. The first completed `missing-to-exists`
+transition establishes current existence for later rows naming the same owner;
+those rows retain their own activation, ordering, decomposition, dispositions,
+and package gates.
+
+No mutable owner registry or baseline rewrite was added. Declared and completed
+transitions are derived from the decomposition overlay in immutable train
+order. Duplicate transitions, premature owner presence, missing completed
+owners, transition from historically existing owners, and filesystem
+disagreement remain invalid.
+
+**Verification:** fifteen shared-owner decisions, existing row and activation
+transition decisions, row 36 decomposition, execution-train current-state
+reconciliation, plan structure, shell syntax, diff integrity, and the complete
+fail-fast standards suite passed.
+
+**Next slice:** `7.4b26e`, migrate `STD-0040` through `STD-0045`, retain a
+conditional server-authoritative projection example, remove location-based
+authority and blanket optimistic-update defaults, close row 36, and stop for
+row 37 owner review.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

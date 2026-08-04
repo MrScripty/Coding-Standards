@@ -31,6 +31,7 @@ done
 for text in '## Owner Contract' 'sole normative owner' \
   'rows 37, 39, and 40' '## Exact Ownership' '`36.1`' '`36.2`' \
   '`36.3`' '`36.4`' 'P30 remains open' '## Bounded Write Sets' \
+  '## Shared Owner State Replan' 'do not inherit' \
   '## Typed Outcomes And No Fallback' '## Re-plan Triggers'; do
   rg -F -q "$text" "$D"
 done
@@ -40,6 +41,7 @@ rg -F -q '`7.4b26a` (`Accepted`)' "$P"
 rg -F -q '`7.4b26b` (`Accepted`)' "$P"
 rg -F -q '`7.4b26c` (`Accepted`)' "$P"
 rg -F -q '`7.4b26d` (`Accepted`)' "$P"
+rg -F -q '`7.4b26er` (`Accepted`)' "$P"
 for milestone in 7.4b26e; do
   printf -v pattern '`%s` (`Planned`)' "$milestone"
   rg -F -q "$pattern" "$P"

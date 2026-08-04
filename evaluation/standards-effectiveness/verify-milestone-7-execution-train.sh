@@ -11,6 +11,7 @@ readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan
 
 declare -A disposed source_by_id owner_by_id remaining seen
 declare -A overlay_lines overlay_orders_seen
+declare -A declared_owner_transitions completed_owner_transitions
 while IFS=$'\t' read -r id _rest; do
   [[ "$id" == id ]] && continue
   disposed["$id"]=1
@@ -129,6 +130,12 @@ while IFS=$'\t' read -r order wave start_id end_id source owner owner_state \
     baseline_ids_csv+="${baseline_ids_csv:+,}$id"
   done
 
+  effective_owner_state="$owner_state"
+  if [[ -n "${completed_owner_transitions[$owner]:-}" ]]; then
+    [[ "$owner_state" == missing ]]
+    effective_owner_state=exists
+  fi
+
   if [[ -n "${overlay_lines[$order]:-}" ]]; then
     overlay_orders_seen["$order"]=1
     expected_child=0
@@ -154,6 +161,8 @@ while IFS=$'\t' read -r order wave start_id end_id source owner owner_state \
         ((owner_transition_count += 1))
         [[ "$owner_transition_count" -eq 1 ]]
         [[ "$owner_state" == missing && "$overlay_owner" == "$owner" ]]
+        [[ -z "${declared_owner_transitions[$owner]:-}" ]]
+        declared_owner_transitions["$owner"]="$order.$child_order"
         [[ "$overlay_owner_state" == exists ]]
         [[ "$overlay_activation" == owner-review ]]
         transition_disposed=0
@@ -185,20 +194,18 @@ while IFS=$'\t' read -r order wave start_id end_id source owner owner_state \
     done <<< "${overlay_lines[$order]}"
     [[ "$overlay_id_count" -eq "$cluster_size" ]]
     [[ "$owner_transition_count" -le 1 ]]
-    effective_owner_state="$owner_state"
-    [[ "$owner_transition_complete" -eq 0 ]] || effective_owner_state=exists
-    if [[ -e "$REPO_ROOT/$owner" ]]; then
-      [[ "$effective_owner_state" == exists ]]
-    else
-      [[ "$effective_owner_state" == missing ]]
+    if [[ "$owner_transition_complete" -ne 0 ]]; then
+      completed_owner_transitions["$owner"]="$order"
+      effective_owner_state=exists
     fi
   else
-    if [[ -e "$REPO_ROOT/$owner" ]]; then
-      [[ "$owner_state" == exists ]]
-    else
-      [[ "$owner_state" == missing ]]
-    fi
     process_cluster "$order" "$baseline_ids_csv" "$start_id,$end_id"
+  fi
+
+  if [[ -e "$REPO_ROOT/$owner" ]]; then
+    [[ "$effective_owner_state" == exists ]]
+  else
+    [[ "$effective_owner_state" == missing ]]
   fi
 
   [[ "$checkpoint" == full-suite ]] && ((checkpoint_count += 1))

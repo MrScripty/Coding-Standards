@@ -34,4 +34,30 @@ while IFS=$'\t' read -r case transition activation expected; do
     exit 1
   }
 done < "$S/fixtures/execution-train/owner-activation-decisions.tsv"
-printf 'Owner-state transitions passed: 11 state and 7 activation decisions\n'
+while IFS=$'\t' read -r case baseline prior current completion filesystem expected extra; do
+  [[ "$case" == case ]] && continue
+  [[ -z "${extra:-}" ]]
+  actual=allow
+  if [[ ! "$baseline" =~ ^(exists|missing)$ ||
+        ! "$prior" =~ ^(none|pending|complete)$ ||
+        ! "$current" =~ ^(none|missing-to-exists)$ ||
+        ! "$completion" =~ ^(pending|complete)$ ]]; then
+    actual=typed-invalid
+  elif [[ "$baseline" == exists &&
+          ("$prior" != none || "$current" != none) ]]; then
+    actual=typed-invalid
+  elif [[ "$prior" != none && "$current" != none ]]; then
+    actual=typed-invalid
+  else
+    effective="$baseline"
+    [[ "$prior" == complete ]] && effective=exists
+    [[ "$current" == missing-to-exists &&
+       "$completion" == complete ]] && effective=exists
+    [[ "$effective" == "$filesystem" ]] || actual=typed-invalid
+  fi
+  [[ "$actual" == "$expected" ]] || {
+    printf '%s: expected %s, got %s\n' "$case" "$expected" "$actual" >&2
+    exit 1
+  }
+done < "$S/fixtures/execution-train/shared-owner-state-transition-decisions.tsv"
+printf 'Owner-state transitions passed: 11 row, 7 activation, and 15 shared-owner decisions\n'

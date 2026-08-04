@@ -56,6 +56,21 @@ Each child runs focused evidence. P30 remains open because immutable row 37 is
 also a P30 member; its full-suite package gate occurs only after row 37 is
 decomposed and accepted.
 
+## Shared Owner State Replan
+
+The immutable train records the proposed reference owner as historically
+missing in rows 36, 37, 39, and 40. One completed creation transition in row 36
+changes current owner state for every later row that names the same canonical
+owner. Later rows inherit only current owner existence; they do not inherit
+semantic review, disposition completion, activation, ordering, or package
+acceptance.
+
+The execution train derives this state from the first completed
+`missing-to-exists` decomposition transition. It rejects a second transition
+for the same owner, owner presence before completion, owner absence after
+completion, transition from a historically existing owner, and later source
+movement out of order. The immutable baseline remains unchanged.
+
 ## Bounded Write Sets
 
 Child `36.1` may touch the new reference owner, `topics/architecture.md`, a
@@ -98,4 +113,5 @@ Stop if implementation requires a normative rule in reference, a second
 Architecture owner, a universal pattern recommendation, a new Frontend policy,
 movement of row 37 or later identifiers, changes to immutable package
 membership, more than four semantic children, multiple dispositions for one
-identifier, or a P30 full-suite claim before row 37 is accepted.
+identifier, a duplicate owner-creation transition, inherited semantic
+completion, or a P30 full-suite claim before row 37 is accepted.
