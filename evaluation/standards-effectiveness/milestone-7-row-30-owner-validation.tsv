@@ -1,0 +1,9 @@
+id	owner	disposition	rationale
+STD-0055	topics/contracts.md	refine	place authority where selected producers and consumers can depend on it without unrelated implementation coupling
+STD-0056	topics/contracts.md	refine	create a contract artifact only for a distinct authority invariant representation evolution or interpretation purpose
+STD-0057	topics/contracts.md	index	benefits are evidence expectations rather than independent policy
+STD-0058	topics/contracts.md	index	legacy heading routes to canonical producer-consumer semantic policy
+STD-0059	topics/contracts.md	refine	structured contracts preserve selected meaning in addition to representation
+STD-0060	topics/contracts.md	refine	canonical authority selects applicable shape default discriminant constraint ordering and identity semantics
+STD-0061	topics/contracts.md	refine	consumer transformations require destination-contract proof and explicit compatibility effects
+STD-0062	topics/contracts.md	index	benefits are subordinate to observable producer-consumer evidence

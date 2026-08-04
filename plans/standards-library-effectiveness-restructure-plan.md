@@ -6,12 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 29 are accepted and closed. Row 30 requires
-mandatory pre-slice review before its Contracts-owned identifiers may move.
+**Current phase:** Rows 20 through 29 are accepted and closed. Row 30 has an
+accepted two-child Contracts decomposition and is ready for serial execution.
 
-**Next slice:** Milestone 7.4b20a reviews row 30 `STD-0055` through `STD-0062`,
-freezes exact owner-coherent children and write sets, and does not implement the
-legacy Architecture Patterns material before that review is accepted.
+**Next slice:** Milestone 7.4b20b child 30.1 migrates `STD-0055` through
+`STD-0057` contract artifact necessity and authority-access placement without a
+dedicated-package or mirrored-artifact default.
 
 **Acceptance status:** `partial`
 
@@ -1846,9 +1846,15 @@ all structural/routing fixtures pass.
    - `7.4b19b` (`Accepted`): execute child 29.1, record five exact index
      dispositions, verify temporary freeze and fact-driven evolution selection,
      reject universal compatibility defaults, and close row 29.
-   - `7.4b20a` (`Planned`): review row 30 `STD-0055` through `STD-0062` and
-     freeze exact semantic children, ownership, write sets, and verification
-     before implementation.
+   - `7.4b20a` (`Accepted`): split row 30 into two Contracts-owned children for
+     artifact necessity/placement and producer-consumer semantic preservation,
+     with exact refine/index dispositions and no universal package, mirror,
+     default, ordering, description, compatibility, or benefit authority.
+   - `7.4b20b` (`Planned`): migrate `STD-0055` through `STD-0057` artifact
+     necessity and authority-access placement with focused selection evidence.
+   - `7.4b20c` (`Planned`): migrate `STD-0058` through `STD-0062` semantic
+     preservation, replace duplicate Architecture policy with an index, and
+     close row 30.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

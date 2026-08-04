@@ -6978,6 +6978,18 @@ Contracts policy. No rejected example or compatibility fallback was restored.
 
 **Next slice:** `7.4b20a`, review and decompose row 30 before implementation.
 
+## Milestone 7.4b20a Row 30 Contract Artifact Review
+
+**Status:** Accepted.
+
+Row 30 is frozen as two serial Contracts-owned children. The first governs
+whether an artifact has a distinct contract purpose and where its authority is
+accessible. The second governs selected producer-consumer semantics and
+explicit transformation proof. Benefits become indexes, examples do not become
+authority, and Architecture retains only routing after closure.
+
+**Next slice:** `7.4b20b`, execute child 30.1.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.
