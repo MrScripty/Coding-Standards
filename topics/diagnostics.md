@@ -43,6 +43,13 @@ Define creation, propagation, uniqueness, scope, invalidation, and terminal
 behavior from that workflow. Do not generate or forward correlation identifiers
 merely because multiple layers exist.
 
+An activity context contains only the selected identity and bounded fields
+needed to connect those observations. Create child identity only for a selected
+causal child operation, preserve the declared parent relationship across each
+applicable boundary, and reject absent, malformed, reused, or contradictory
+identity according to the owning contract. A single-boundary operation does not
+need correlation merely to satisfy a tracing shape.
+
 Carry only bounded context required by the selected audience and claim. Field
 availability does not authorize disclosure. Apply Security authority before
 including sensitive data and preserve the selected redaction at every
@@ -54,6 +61,11 @@ Define which start, progress, completion, failure, cancellation, retry, and
 recovery observations are required. Emit each selected terminal observation
 once at the boundary that owns the diagnostic projection; do not report the
 same failure independently at every layer.
+
+Propagation follows the operation lifecycle, including asynchronous completion,
+cancellation, retries, and handoff when those states apply. A synchronous
+wrapper, lexical scope, thread-local value, or request lifetime does not prove
+that context remains valid through another lifecycle.
 
 Specify diagnostic channel failure, buffering, backpressure, recursion,
 shutdown, and retention behavior where applicable. A failed diagnostic channel

@@ -7039,6 +7039,21 @@ swallowed-outcome, and silent-discard defaults.
 
 **Next slice:** `7.4b21c`, migrate activity-context semantics and close row 31.
 
+## Milestone 7.4b21c Diagnostics Activity Context
+
+**Status:** Accepted.
+
+Diagnostics now selects causal identity only for workflows that require related
+observations across applicable boundaries, carries bounded authorized context,
+and preserves asynchronous lifecycle and one terminal projection. TypeScript
+and logger syntax moved to non-normative reference; Architecture now routes to
+the canonical owner.
+
+Row 31 is closed with four exact dispositions and no logging, tracing,
+correlation, layer, raw-context, telemetry, or benefit fallback.
+
+**Next slice:** `7.4b22a`, review the missing Persistence boundary owner.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

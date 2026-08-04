@@ -490,59 +490,9 @@ cross-boundary decisions and link to it instead of repeating its rationale.
 
 Canonical diagnostic purpose, audience, causal identity, context, projection,
 lifecycle, disclosure, and typed outcomes are owned by
-[Diagnostics](topics/diagnostics.md). The legacy mechanism below remains only
-until its scheduled extraction in child 31.2.
-
-### The Pattern
-
-Track operations across layers using correlation IDs and structured logging.
-
-```
-Request → [ID: abc-123]
-    ├── Controller [ID: abc-123] "Handling request"
-    ├── Service [ID: abc-123] "Processing business logic"
-    ├── Repository [ID: abc-123] "Querying database"
-    └── Response [ID: abc-123] "Request completed"
-```
-
-### Implementation
-
-```typescript
-interface ActivityContext {
-    traceId: string;      // Request-level ID
-    spanId: string;       // Operation-level ID
-    parentSpanId?: string;
-}
-
-function withActivity<T>(
-    name: string,
-    context: ActivityContext,
-    operation: () => T
-): T {
-    const span = {
-        id: generateId(),
-        parent: context.spanId,
-        name
-    };
-
-    logger.debug(`Starting: ${name}`, { ...context, spanId: span.id });
-
-    try {
-        const result = operation();
-        logger.debug(`Completed: ${name}`, { ...context, spanId: span.id });
-        return result;
-    } catch (error) {
-        logger.error(`Failed: ${name}`, { ...context, spanId: span.id, error });
-        throw error;
-    }
-}
-```
-
-### Benefits
-
-- **Debugging:** Trace issues across entire request flow
-- **Performance:** Identify slow operations
-- **Observability:** Understand system behavior
+[Diagnostics](topics/diagnostics.md). Illustrative TypeScript and logger
+mechanisms moved to the non-normative
+[Diagnostic Mechanism Recipes](reference/recipes/diagnostics.md).
 
 ---
 
