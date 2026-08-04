@@ -7,13 +7,14 @@
 **Plan status:** `Active`
 
 **Current phase:** Rows 20 through 33 are accepted and closed. Row 34 children
-34.1 through 34.3 are accepted: Frontend scope, rendering, synchronization, and
-lifecycle-owned work follow canonical ownership without framework defaults. The
-immutable cursor is child 34.4.
+34.1 through 34.4 are accepted: Frontend behavior and TypeScript tooling follow
+canonical owners without framework defaults. The immutable cursor is child
+34.5.
 
-**Next slice:** Milestone 7.4b24e migrates `STD-0455` and `STD-0456`
-TypeScript static-analysis routing and extracts React ESLint configuration
-without version, rule-disablement, preset, severity, or parser defaults.
+**Next slice:** Milestone 7.4b24f records `STD-0457`, `STD-0458`,
+`STD-0459`, `STD-0460`, `STD-0461`, `STD-0462`, and `STD-0463` exact
+lineage to accepted claim-selected Frontend evidence without restoring retired
+testing mechanisms.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1919,7 +1920,7 @@ all structural/routing fixtures pass.
      rendering and synchronization and extract fixed mechanisms.
    - `7.4b24d` (`Accepted`): migrate `STD-0454` frontend timer lifecycle
      proof and extract React hook mechanisms.
-   - `7.4b24e` (`Planned`): migrate `STD-0455` and `STD-0456` TypeScript
+   - `7.4b24e` (`Accepted`): migrate `STD-0455` and `STD-0456` TypeScript
      static-analysis routing and extract React ESLint mechanisms.
    - `7.4b24f` (`Planned`): record `STD-0457` through `STD-0463` exact
      lineage to accepted claim-selected Frontend evidence.

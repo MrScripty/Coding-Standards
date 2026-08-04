@@ -179,6 +179,24 @@ example might implement an owned prohibition through ESLint's
 `no-restricted-syntax`. These products, versions, presets, globs, project paths,
 flags, severities, and selectors are examples only, not defaults.
 
+### Illustrative React Automatic JSX Lint Adapter
+
+When the selected React runtime, TypeScript contract, lint purpose, and plugin
+semantics prove that legacy JSX-scope and runtime prop-validation rules do not
+apply, an ESLint adapter might contain:
+
+```javascript
+rules: {
+  'react/react-in-jsx-scope': 'off',
+  'react/prop-types': 'off',
+}
+```
+
+This snippet does not select React, a React version, the automatic JSX runtime,
+TypeScript, ESLint, these plugins, rule disablement, severity, parser, preset, or
+validation strategy. A project name or version label cannot replace evidence
+that each rule is inapplicable to every selected source and consumer.
+
 ## Formatting Automation Examples
 
 After canonical [formatting policy](../../workflows/tooling.md#formatting-policy-and-orchestration)

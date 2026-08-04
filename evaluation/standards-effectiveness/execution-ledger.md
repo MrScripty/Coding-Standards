@@ -7517,3 +7517,30 @@ structure, shell syntax, and diff integrity passed.
 
 **Next slice:** `7.4b24e`, migrate `STD-0455` and `STD-0456` TypeScript
 static-analysis routing and extract React ESLint configuration.
+
+## Milestone 7.4b24e Frontend TypeScript Tooling
+
+**Outcome:** Accepted.
+
+The legacy Frontend tooling note now routes TypeScript project boundaries,
+static-analysis selection, compiler and parser compatibility, and typed
+outcomes to the TypeScript profile. Tooling retains lint purpose, rules, scope,
+severity, orchestration, and evidence authority.
+
+The React automatic-JSX configuration moved to non-normative Tooling recipes.
+React and version labels do not authorize ESLint selection or rule disablement.
+Presets, severities, parsers, plugins, copied configurations, Frontend
+ownership, and compiler-pass substitution remain rejected defaults.
+
+Twenty decisions cover selected applicable and inapplicable rules, non-React
+projects, missing facts, unsupported toolchains, contradictions, and prohibited
+configuration defaults. `STD-0455` and `STD-0456` have exact index and split
+dispositions.
+
+**Verification:** TypeScript tooling decisions, TypeScript and Tooling owner
+checks, exact dispositions, row 34 decomposition, immutable cursor, plan
+structure, shell syntax, and diff integrity passed.
+
+**Next slice:** `7.4b24f`, record `STD-0457` through `STD-0463` exact
+lineage to accepted claim-selected Frontend evidence without restoring retired
+mechanisms.

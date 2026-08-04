@@ -61,16 +61,17 @@ cadence, dependency lists, retries, unmount cleanup, or one testing mechanism.
 
 ### React 19+ ESLint Configuration
 
-React 19 uses the automatic JSX runtime. Configure ESLint to avoid outdated
-rules:
+TypeScript project boundaries, static-analysis selection, compiler and parser
+compatibility, and typed outcomes are owned by the
+[TypeScript profile](profiles/languages/typescript.md#static-analysis-and-compiler-configuration).
+Lint purpose, rules, scope, severity, orchestration, and evidence are owned by
+[Tooling](workflows/tooling.md#lint-policy-and-orchestration).
 
-```javascript
-// Inside the files block for React projects
-rules: {
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
-}
-```
+The React automatic-JSX example moved to the non-normative
+[Tooling Recipes](reference/recipes/tooling.md#illustrative-react-automatic-jsx-lint-adapter).
+This index does not select React 19, the automatic JSX runtime, ESLint, plugin
+rules, rule disablement, prop validation, parser, preset, severity, or a copied
+configuration.
 
 ---
 

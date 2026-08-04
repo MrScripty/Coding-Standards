@@ -43,6 +43,8 @@ STD-0451	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	legacy re
 STD-0452	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	split	own rendering projection selection while extracting TypeScript DOM and framework-state examples to non-normative Frontend recipes
 STD-0453	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	split	own source-driven synchronization selection while extracting fixed event timer DOM-scan and FFI-drain mechanisms to non-normative Frontend recipes
 STD-0454	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	split	own frontend lifecycle and evidence specialization while extracting React ref hook interval cadence and teardown mechanisms to non-normative Frontend recipes
+STD-0455	FRONTEND-STANDARDS.md	profiles/languages/typescript.md	index	legacy frontend tooling parent routes to TypeScript static-analysis and canonical Tooling authority
+STD-0456	FRONTEND-STANDARDS.md	profiles/languages/typescript.md	split	own TypeScript lint configuration selection while extracting React automatic-JSX ESLint rule examples to non-normative Tooling recipes
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
 STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference
