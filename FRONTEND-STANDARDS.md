@@ -43,29 +43,17 @@ copied state, DOM authority, or alternate synchronization fallback.
 
 ### Hook/Composable Timer Management
 
-For polling hooks/composables/stores, timer lifecycle must be explicit and
-stale-closure-safe.
+Frontend timer, polling, subscription, observer, cancellation, supersession,
+cleanup, and stale-result obligations moved to
+[Lifecycle-Owned Frontend Work](profiles/applications/frontend.md#lifecycle-owned-frontend-work).
+Generic work lifecycle remains in [Concurrency](topics/concurrency.md), and
+TypeScript invocation mechanisms remain in the
+[TypeScript Async profile](profiles/languages/typescript/async.md).
 
-Rules:
-1. Store interval/timeout handles in refs or dedicated mutable holders, not state.
-2. Clear timers on completion, dependency changes, and unmount.
-3. Prevent duplicate timers when start/retry logic reruns.
-4. Add deterministic cleanup tests.
-
-```typescript
-// GOOD: Ref-based timer management with deterministic cleanup
-const timerRef = useRef<number | null>(null);
-
-useEffect(() => {
-    timerRef.current = window.setInterval(pollStatus, 500);
-    return () => {
-        if (timerRef.current !== null) {
-            window.clearInterval(timerRef.current);
-            timerRef.current = null;
-        }
-    };
-}, [pollStatus]);
-```
+The React hook example moved to the non-normative
+[Frontend Mechanism Recipes](reference/recipes/frontend.md#illustrative-react-timer-adapter).
+This index does not mandate refs, mutable holders, state exclusion, intervals,
+cadence, dependency lists, retries, unmount cleanup, or one testing mechanism.
 
 ---
 

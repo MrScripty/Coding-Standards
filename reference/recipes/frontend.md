@@ -56,3 +56,28 @@ A selected polling adapter may use a timer only after its owner, cadence,
 cancellation, stale-result handling, and terminal outcomes are established.
 These examples do not select event delivery, polling, a frequency, DOM reads,
 global timers, or periodic reconciliation.
+
+## Illustrative React Timer Adapter
+
+After Frontend, Concurrency, and TypeScript Async select lifecycle ownership, a
+React adapter might retain a timer handle in a ref:
+
+```typescript
+const timerRef = useRef<number | null>(null);
+
+useEffect(() => {
+  timerRef.current = window.setInterval(runSelectedPoll, selectedCadence);
+  return () => {
+    if (timerRef.current !== null) {
+      window.clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  };
+}, [runSelectedPoll, selectedCadence]);
+```
+
+This example does not select React, a ref rather than another owner, an
+interval, cadence, dependency list, retry behavior, or unmount as the only
+cleanup boundary. The adapter still proves duplicate exclusion, cancellation,
+completion classification, stale-result rejection, and every selected teardown
+path.

@@ -7489,3 +7489,31 @@ plan structure, shell syntax, and diff integrity passed.
 
 **Next slice:** `7.4b24d`, migrate `STD-0454` frontend timer lifecycle proof
 and extract React hook mechanisms.
+
+## Milestone 7.4b24d Frontend Lifecycle-Owned Work
+
+**Outcome:** Accepted.
+
+Frontend now records the owner, protected state, invocation authority, start,
+completion, cancellation, supersession, dependency change, teardown boundary,
+and terminal outcomes for work that outlives an immediate call. Concurrency
+retains generic work lifecycle, and TypeScript Async retains TypeScript
+invocation and result-application mechanisms.
+
+Refs, state, fields, closures, abort signals, generation tokens, intervals,
+cadence, retry, and unmount are mechanisms rather than defaults. The React hook
+example moved to the non-normative Frontend recipe. Timer clearing and one
+successful update do not prove cancellation, cleanup, terminal classification,
+or stale-result exclusion.
+
+Twenty-five decisions cover timers, subscriptions, observers, animations,
+superseded and uncancellable work, missing facts, unsupported mechanisms,
+duplicate work, stale application, incomplete cleanup, unobserved completion,
+and prohibited lifecycle fallbacks. `STD-0454` has one exact split disposition.
+
+**Verification:** lifecycle-work decisions, TypeScript Async and Frontend owner
+checks, exact disposition, row 34 decomposition, immutable cursor, plan
+structure, shell syntax, and diff integrity passed.
+
+**Next slice:** `7.4b24e`, migrate `STD-0455` and `STD-0456` TypeScript
+static-analysis routing and extract React ESLint configuration.

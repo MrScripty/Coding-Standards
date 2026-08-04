@@ -87,6 +87,33 @@ mechanism, lifecycle, or evidence.
 Illustrative mechanisms are isolated in the
 [Frontend mechanism recipes](../../reference/recipes/frontend.md).
 
+## Lifecycle-Owned Frontend Work
+
+For timers, polling, subscriptions, observers, animation callbacks, and other
+work that can outlive one immediate call, identify the frontend owner, protected
+state, invocation authority, start condition, completion, cancellation,
+supersession, dependency change, teardown boundary, and terminal outcomes.
+Concurrency owns generic work lifecycle; TypeScript Async owns TypeScript
+invocation and result-application mechanisms.
+
+Select a resource holder and cleanup trigger from the framework and lifecycle
+contract. A ref, component state, field, closure, abort signal, generation
+token, or owner object is a mechanism, not a default. Completion, dependency
+change, unmount, shutdown, retry, and replacement require cleanup only when they
+end or supersede the selected ownership interval.
+
+Prevent duplicate active work and stale result application through proven
+identity and lifecycle authority. Clearing a timer, returning from a callback,
+or observing one successful update does not prove cancellation, terminal
+classification, cleanup, or exclusion of a superseded result.
+
+Missing owner, identity, lifecycle, cleanup capability, or evidence is
+`unavailable`; contradictory ownership, duplicate work, stale application,
+unobserved completion, or incomplete cleanup is `invalid`; and a valid
+lifecycle unsupported by the selected mechanism is `unsupported`. Do not
+fall back to a global timer, fixed cadence, ref holder, state holder, silent
+stale-result discard, retry, detached work, or default success.
+
 ## Interaction And Accessibility
 
 Project every supported interaction through declared action and state
