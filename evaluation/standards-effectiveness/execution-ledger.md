@@ -6889,6 +6889,25 @@ checker.
 **Next slice:** `7.4b18e`, migrate `STD-0017` through `STD-0019` accessible-name
 and form-label outcomes while extracting JSX and web mechanisms.
 
+## Milestone 7.4b18e Accessibility Names And Inputs
+
+**Outcome:** Accepted.
+
+Accessibility now owns meaningful names, descriptions, and relationships among
+inputs, instructions, constraints, values, validation states, errors, and
+recovery actions. JSX, accessibility API, identifier, and placeholder examples
+moved to non-normative reference.
+
+`STD-0017` through `STD-0019` each have one exact `split` disposition. Focused
+decisions reject placeholder-only, visual-proximity, role-only, generated-name,
+and missing-relationship fallbacks.
+
+**Verification:** names and inputs decisions, prior Accessibility suites,
+row-28 decomposition, execution train, and diff integrity passed.
+
+**Next slice:** `7.4b18f`, migrate `STD-0020` through `STD-0022` informative and
+decorative media outcomes while extracting HTML and icon mechanisms.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

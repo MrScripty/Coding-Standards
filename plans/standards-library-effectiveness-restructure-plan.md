@@ -9,9 +9,9 @@
 **Current phase:** Rows 20 through 27 are accepted and closed. Row 28 has its
 canonical Accessibility owner and is advancing through semantic population.
 
-**Next slice:** Milestone 7.4b18e row 28 child 28.4 for `STD-0017`, `STD-0018`,
-and `STD-0019`; migrate accessible-name and form-label outcomes while
-extracting JSX and web mechanisms to reference.
+**Next slice:** Milestone 7.4b18f row 28 child 28.5 for `STD-0020`, `STD-0021`,
+and `STD-0022`; migrate informative and decorative media outcomes while
+extracting HTML and icon-library mechanisms to reference.
 
 **Acceptance status:** `partial`
 
@@ -1830,9 +1830,12 @@ all structural/routing fixtures pass.
    - `7.4b18d` (`Accepted`): migrate `STD-0013` through `STD-0016` keyboard,
      focus visibility, and focus lifecycle outcomes while extracting CSS and
      web-specific mechanisms to non-normative Accessibility reference.
-   - `7.4b18e` (`Planned`): migrate `STD-0017` through `STD-0019` accessible-name
+   - `7.4b18e` (`Accepted`): migrate `STD-0017` through `STD-0019` accessible-name
      and form-label outcomes while extracting JSX and web-specific mechanisms
      to non-normative Accessibility reference.
+   - `7.4b18f` (`Planned`): migrate `STD-0020` through `STD-0022` informative and
+     decorative media outcomes while extracting HTML and icon-library
+     mechanisms to non-normative Accessibility reference.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

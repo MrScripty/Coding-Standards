@@ -90,3 +90,31 @@ entry, constrain movement while modal, support a selected Escape dismissal,
 and restore focus on exit. Each behavior is conditional on the accepted task,
 platform, nesting, target-lifetime, and cancellation contract. “Trap focus and
 close on Escape” is not a universal dialog recipe.
+
+## Web Naming And Form Mechanisms
+
+After selecting naming and input-relationship outcomes, a web projection might
+use visible content, hidden content, or an accepted accessibility API name:
+
+```tsx
+<button type="button" onClick={onDelete} aria-label="Delete item">
+  <TrashIcon />
+</button>
+```
+
+One explicit form association might use matching identifiers:
+
+```tsx
+<label htmlFor="username">Username</label>
+<input id="username" type="text" />
+```
+
+When the selected web contract permits a non-visible name, another mechanism is:
+
+```tsx
+<input type="search" aria-label="Search models" placeholder="Search..." />
+```
+
+These attributes and JSX forms are illustrative. Placeholder text, visual
+proximity, an identifier match, or an API attribute proves only the relationship
+and modalities covered by the selected implementation and evidence.

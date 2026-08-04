@@ -1,0 +1,15 @@
+case	purpose	name	relationship	instructions	state	capability	fallback	expected
+named_control	declared	perceivable	complete	complete	complete	supported	none	allow
+named_input	declared	perceivable	complete	complete	complete	supported	none	allow
+dynamic_name	declared	perceivable	complete	complete	updated	supported	none	allow
+contradictory_name	declared	contradictory	complete	complete	complete	supported	none	typed-invalid
+contradictory_relationship	declared	perceivable	contradictory	complete	complete	supported	none	typed-invalid
+unsupported_naming	declared	perceivable	complete	complete	complete	unsupported	none	typed-unsupported
+missing_purpose	missing	perceivable	complete	complete	complete	supported	none	typed-unavailable
+missing_name	declared	missing	complete	complete	complete	supported	none	typed-unavailable
+missing_relationship	declared	perceivable	missing	complete	complete	supported	none	typed-unavailable
+missing_instructions	declared	perceivable	complete	missing	complete	supported	none	typed-unavailable
+placeholder_only	declared	missing	missing	missing	complete	supported	placeholder	typed-invalid
+visual_proximity	declared	perceivable	missing	complete	complete	supported	visual-proximity	typed-invalid
+role_only	declared	missing	complete	complete	complete	supported	role-only	typed-invalid
+generated_name	declared	generated	complete	complete	complete	supported	generated-default	typed-invalid

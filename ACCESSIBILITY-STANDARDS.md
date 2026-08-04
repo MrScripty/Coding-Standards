@@ -19,43 +19,12 @@ The former keyboard, focus visibility, and dialog-focus rules are migrated to
 [Accessibility](topics/accessibility.md). CSS, key, and web dialog mechanisms
 are non-normative [Accessibility Recipes](reference/recipes/accessibility.md).
 
-## Labels and Names
+## Names And Forms Semantics (Migrated)
 
-### Every Interactive Element Needs an Accessible Name
-
-Screen readers announce the accessible name of focused elements. Without one,
-the element is announced as just "button" or "link" with no context.
-
-```tsx
-// BAD: icon-only button with no name — announced as just "button"
-<button onClick={onDelete}>
-  <TrashIcon />
-</button>
-
-// GOOD: aria-label provides the name
-<button onClick={onDelete} aria-label="Delete item">
-  <TrashIcon />
-</button>
-
-// ALSO GOOD: visually hidden text
-<button onClick={onDelete}>
-  <TrashIcon />
-  <span className="sr-only">Delete item</span>
-</button>
-```
-
-### Form Inputs Need Labels
-
-Every `<input>`, `<select>`, and `<textarea>` must have an associated label:
-
-```tsx
-// GOOD: explicit label association
-<label htmlFor="username">Username</label>
-<input id="username" type="text" />
-
-// GOOD: aria-label when no visible label exists
-<input type="search" aria-label="Search models" placeholder="Search..." />
-```
+The former accessible-name and form-label rules are migrated to
+[Accessibility](topics/accessibility.md). JSX, accessibility-API, and web form
+association mechanisms are non-normative
+[Accessibility Recipes](reference/recipes/accessibility.md).
 
 ## Images and Media
 

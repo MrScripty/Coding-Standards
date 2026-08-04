@@ -114,6 +114,30 @@ If the authoritative target no longer exists, resolve the next target through
 the selected task lifecycle or return a typed diagnostic; do not silently lose
 or guess focus.
 
+## Names And Descriptions
+
+Provide each user-facing control, region, status, and task-relevant item a name
+or description sufficient to distinguish its purpose, scope, current target,
+and effect through every required modality. Names remain stable enough for task
+continuity and update when the represented purpose or state changes.
+
+Visible text, hidden text, platform naming APIs, associated content, and
+generated descriptions are mechanisms. A role, icon, position, implementation
+identifier, or generated default does not independently establish a meaningful
+name. Do not expose internal detail as a substitute for user-task meaning.
+
+## Input Relationships And Instructions
+
+For user input, expose the relationship among the input, its purpose, name,
+instructions, units or format, constraints, current value, validation state,
+errors, and recovery action through the required modalities. Preserve those
+relationships when layout, state, content, or validation changes.
+
+Visual proximity, placeholder content, color, field order, or one assistive
+projection does not prove the relationship. If required naming, instruction,
+state, or error capability is missing, return a typed outcome rather than
+accepting an unlabeled or ambiguously associated input.
+
 ## Responsibility Boundaries
 
 Accessibility owns required user-access outcomes and conformance obligations.
