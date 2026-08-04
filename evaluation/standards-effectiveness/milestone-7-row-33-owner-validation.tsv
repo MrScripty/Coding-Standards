@@ -1,0 +1,9 @@
+id	owner	disposition	rationale
+STD-0126	topics/contracts.md	index	legacy HTTP convention heading routes to selected outcome and transport projection policy
+STD-0127	topics/contracts.md	refine	project authoritative outcome meaning through an explicitly selected protocol contract
+STD-0128	topics/contracts.md	split	own selected response representation while extracting the fixed JSON error envelope
+STD-0129	topics/contracts.md	split	own outcome-to-status consistency while extracting the universal status table
+STD-0130	topics/contracts.md	split	own producer adapter proof while extracting shared error type and response pseudocode
+STD-0131	topics/contracts.md	split	own consumer adapter proof while extracting HTTP response decoding order examples
+STD-0132	topics/contracts.md	split	prohibit contradiction of the selected protocol outcome while extracting fixed 200 and 404 examples
+STD-0133	topics/contracts.md	index	uniformity observability and self-documentation benefits are conditional evidence claims

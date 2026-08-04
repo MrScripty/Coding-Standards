@@ -7315,3 +7315,29 @@ resilience, and adapter examples cannot be migrated safely as one inferred
 slice.
 
 **Next slice:** `7.4b23a`, review and decompose row 33 before implementation.
+
+## Milestone 7.4b23a HTTP Error Contract Decomposition
+
+**Outcome:** Accepted.
+
+Row 33 is decomposed into two ordered Contracts children. Contracts remains the
+sole normative owner for authoritative outcome meaning, selected protocol
+projection, response representation, and producer/consumer adapter proof.
+IPC remains transport-independent; Security owns disclosure, Diagnostics owns
+reporting projection, Resilience owns retry and recovery, and Verification owns
+claims.
+
+Fixed JSON envelopes, universal status tables, shared error-type pseudocode,
+client parsing examples, and fixed 200/404 examples move only to the
+non-normative HTTP recipe. Missing projection facts produce typed diagnostics;
+guessed status or envelope, default `500`, transport-success inference, raw
+message disclosure, decoder switching, retry, and recovery remain prohibited
+fallbacks.
+
+**Verification:** exact eight-identifier coverage, two-child order, Contracts
+owner validation, immutable train alignment, plan structure, shell syntax, and
+diff integrity passed.
+
+**Next slice:** `7.4b23b`, migrate `STD-0126` through `STD-0129` selected
+outcome projection and response representation and extract fixed HTTP response
+mechanisms.

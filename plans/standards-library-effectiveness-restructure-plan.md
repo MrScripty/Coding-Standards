@@ -6,17 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 32 are accepted and closed. Persistence owns
-durable mutation and migration execution mechanisms under Contracts-selected
-states. The stale shared Contracts assertion was removed, and migration policy
-now has one owner-local verifier. The immutable cursor is row 33, whose HTTP
-error-contract cluster has no accepted child decomposition.
+**Current phase:** Rows 20 through 32 are accepted and closed. Row 33 has an
+accepted two-child Contracts decomposition that separates normative outcome
+and adapter proof from non-normative HTTP mechanisms. The immutable cursor is
+child 33.1.
 
-**Next slice:** Milestone 7.4b23a reviews and decomposes row 33 identifiers
-`STD-0126`, `STD-0127`, `STD-0128`, `STD-0129`, `STD-0130`, `STD-0131`,
-`STD-0132`, and `STD-0133`. Do not migrate HTTP error policy until canonical
-Contracts, transport-adapter, Diagnostics, Security, and Resilience ownership
-and ordered children are accepted.
+**Next slice:** Milestone 7.4b23b migrates `STD-0126`, `STD-0127`,
+`STD-0128`, and `STD-0129` selected outcome-to-HTTP projection and response
+representation, creates the non-normative HTTP recipe boundary, and extracts
+fixed envelope and status mechanisms without universal defaults.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1903,10 +1901,16 @@ all structural/routing fixtures pass.
      `verify-contract-ownership.sh` assertion that requires removed legacy
      Architecture migration wording; freeze one canonical verifier owner,
      rerun the package full-suite gate, and only then accept child 32.3.
-   - `7.4b23a` (`Planned`): review and decompose row 33 `STD-0126` through
-     `STD-0133` HTTP error-contract policy before implementation; freeze
-     canonical generic outcome, transport projection, diagnostic, security,
-     resilience, mechanism-reference, typed-outcome, and no-fallback ownership.
+   - `7.4b23a` (`Accepted`): decompose row 33 into two ordered Contracts
+     children; retain generic outcome and adapter proof as normative policy,
+     isolate HTTP mechanisms in a non-normative recipe, and freeze Diagnostics,
+     Security, Resilience, typed-outcome, and no-fallback boundaries.
+   - `7.4b23b` (`Planned`): migrate `STD-0126` through `STD-0129` selected
+     outcome projection and response representation, create the HTTP recipe,
+     and extract fixed JSON envelope and status table mechanisms.
+   - `7.4b23c` (`Planned`): migrate `STD-0130` through `STD-0133` producer and
+     consumer adapter proof, extract pseudocode and fixed examples, retire
+     conditional benefit claims, and close row 33.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
