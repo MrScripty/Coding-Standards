@@ -12,6 +12,12 @@ STD-0030	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture owns
 STD-0031	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	stable-contract dependency authority replaces universal inward direction while reference illustrates one selected dependency shape
 STD-0032	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	layered consequences remain qualified by accepted boundaries and affected evidence
 STD-0033	ARCHITECTURE-PATTERNS.md	topics/architecture.md	merge-duplicate	canonical concern-boundary policy already rejects organizational layers as proof of simplicity
+STD-0034	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	index	legacy monorepo-role heading routes to canonical Architecture Contracts and a conditional non-normative catalog
+STD-0035	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture selects package boundaries from ownership and change facts while reference illustrates optional role labels
+STD-0036	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture owns responsibility placement while the fixed package catalog becomes a conditional illustration
+STD-0037	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	stable-contract dependency authority replaces the fixed package graph while reference illustrates selected arrows
+STD-0038	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	monorepo consequences remain qualified by accepted boundaries contracts and consumer evidence
+STD-0039	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	schema-sharing example remains conditional on Contracts-selected independent consumers and artifact necessity
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults

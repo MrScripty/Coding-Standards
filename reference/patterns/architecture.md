@@ -95,3 +95,50 @@ arrangement can make business policy testable without delivery mechanisms and
 can allow an adapter to change without changing that policy. Those outcomes
 require affected dependency and behavior evidence; the diagram alone proves
 neither separation nor maintainability.
+
+## Conditional Monorepo Role Catalog
+
+After Architecture selects independently meaningful package boundaries, one
+repository might describe them with roles such as:
+
+| Illustrative role | Possible responsibility |
+| --- | --- |
+| Application entrypoint | Compose selected implementations and own process startup |
+| Contract artifact | Represent a boundary consumed independently by its participants |
+| Policy module | Own business or application decisions independent of delivery |
+| Adapter | Implement a selected transport, storage, or platform contract |
+| Development tooling | Support build and repository workflows outside product runtime |
+
+These are descriptive labels, not required package kinds. One coherent package
+may contain several roles, and one responsibility may span packages when its
+deployment, lifecycle, generation, or consumer contracts require that split.
+Names and directory locations do not establish ownership.
+
+An illustrative dependency shape is:
+
+```text
+application entrypoint --> selected policy and contracts
+adapter ----------------> contract it implements
+independent consumer ---> shared contract artifact, when one is required
+```
+
+The arrows follow selected stable contracts. They do not require every
+application to depend on a domain package, every adapter to use a dedicated
+contracts package, or development tooling to have no declared runtime
+relationship.
+
+### Conditional Schema-Sharing Example
+
+When a web client and server independently consume the same request or response
+representation, [Contracts](../../topics/contracts.md) may select one shared or
+generated artifact that both can access. Coordinated components with no
+independent consumer or boundary may instead keep the representation with its
+owner. Similar type shapes alone do not authorize importing an implementation
+module or creating a shared package.
+
+### Conditional Consequences
+
+When package boundaries match real ownership and contracts, import evidence can
+make misplaced responsibility and unintended coupling easier to detect.
+Refactor safety and reuse remain claims to prove for the affected consumers;
+the role catalog does not guarantee them.

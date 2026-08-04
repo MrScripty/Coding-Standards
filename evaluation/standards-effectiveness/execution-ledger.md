@@ -7766,3 +7766,29 @@ passed.
 **Next slice:** `7.4b26d`, migrate `STD-0034` through `STD-0039`, retain
 conditional monorepo role examples, and remove fixed package-role,
 dependency-graph, and benefit defaults.
+
+## Milestone 7.4b26d Conditional Monorepo Roles
+
+**Outcome:** Accepted.
+
+The legacy monorepo section now routes package responsibility and dependency
+direction to Architecture, shared artifact necessity to Contracts, and
+illustrations to the non-normative pattern reference. The reference describes
+possible application, contract, policy, adapter, and tooling roles but permits
+roles to collapse, split, or span packages according to selected ownership,
+lifecycle, deployment, generation, and consumer facts.
+
+The fixed role catalog, package dependency graph, universal contracts-package
+placement, and unconditional benefit claims are removed. Similar shapes and
+repository layout cannot create package authority or justify importing an
+implementation module.
+
+**Verification:** eight package-boundary decisions, six exact dispositions,
+reference metadata and non-authority, prohibited monorepo defaults, prior
+layered evidence, row 36 decomposition, immutable execution train, plan
+structure, shell syntax, and diff integrity passed.
+
+**Next slice:** `7.4b26e`, migrate `STD-0040` through `STD-0045`, retain a
+conditional server-authoritative projection example, remove location-based
+authority and blanket optimistic-update defaults, close row 36, and stop for
+row 37 owner review.

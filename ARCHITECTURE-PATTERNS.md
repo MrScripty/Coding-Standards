@@ -17,63 +17,15 @@ the non-normative
 
 ## Monorepo Package Roles
 
-### The Pattern
+Canonical package responsibility, boundary selection, and stable-contract
+dependency direction are owned by
+[Architecture](topics/architecture.md). Shared artifact necessity and
+producer-consumer semantics are owned by [Contracts](topics/contracts.md).
+Repository layout and repeated data shapes do not select a package boundary.
 
-In multi-package repositories, assign each package a stable architectural role.
-Package boundaries should enforce responsibility and dependency direction, not
-just group files by convenience.
-
-Package names and folder names may vary. The rule is about what a package is
-allowed to contain and which other roles it may depend on.
-
-### Common Roles
-
-| Role | Contains | Must Not Contain |
-|------|----------|------------------|
-| App | Deployable/runtime entrypoints, composition, startup, transport wiring | Reusable shared logic that should live outside the app |
-| Contracts | Shared schemas, DTOs, message formats, boundary enums/IDs | I/O, side effects, business workflows, framework runtime glue |
-| Domain/Core | Business rules, entities, pure orchestration rules | UI, transport handlers, persistence drivers |
-| Shared Utilities | Small reusable helpers and low-level utilities | Feature ownership, workflow orchestration, app entrypoints |
-| Tooling/Config | Build config, lint config, shared scripts, codegen config | Product runtime logic |
-
-Only create the roles your repo actually needs. Small repos may collapse some
-roles into directories instead of separate packages.
-
-### Dependency Direction
-
-```
-apps ─────────────▶ contracts
-apps ─────────────▶ domain/core
-apps ─────────────▶ shared utilities
-domain/core ──────▶ contracts
-shared utilities ─▶ contracts (only when truly generic)
-tooling/config ───▶ none of the runtime app layers by default
-```
-
-Rules:
-- App packages may compose other roles, but should not import another app's
-  internal implementation modules.
-- Contracts packages should be safe for both producers and consumers to depend
-  on.
-- Domain/core packages should depend on contracts or narrow infrastructure
-  interfaces, not UI or transport implementations.
-- Shared utilities should stay narrow; if a package starts owning workflow
-  decisions, promote it to a clearer domain/app role.
-- Tooling/config packages should support development workflows without becoming
-  a back door for runtime dependencies.
-
-### Why This Helps
-
-- **Boundary enforcement:** Imports reflect architecture, not accidental file location
-- **Refactor safety:** Shared contracts and shared logic can move without cross-app tangling
-- **Review clarity:** Misplaced code is easier to spot during review
-- **Reuse control:** Shared packages stay intentional instead of becoming dump folders
-
-### Example Decision
-
-If a web app and a server both need the same request/response schema, place it
-in a contracts package. Do not import server implementation modules into the
-web app just to reuse type definitions.
+A conditional role catalog, dependency illustration, and schema-sharing
+example are in the non-normative
+[Architecture Pattern Reference](reference/patterns/architecture.md#conditional-monorepo-role-catalog).
 
 ---
 
