@@ -37,7 +37,7 @@ while IFS=$'\t' read -r file current replacement; do
   [[ -f "$R/$file" ]]
 done < "$A"
 
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 31 ]]
+[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 32 ]]
 "$S/verify-root-readme-consumer-audit.sh"
 
 expected_callers=(
@@ -68,7 +68,8 @@ done
 [[ "$(awk -F '\t' '$1 == 35 { print $8 }' "$S/milestone-7-accelerated-packages.tsv")" == full-suite ]]
 rg -F -q '`7.4b25a` (`Accepted`)' "$P"
 rg -F -q '`7.4b25b` (`Accepted`)' "$P"
-rg -F -q '`7.4b25c` (`Planned`)' "$P"
+rg -F -q '`7.4b25c` (`Accepted`)' "$P"
+"$S/verify-root-index-closure.sh"
 "$S/verify-root-router-evidence.sh"
 "$S/verify-milestone-7-execution-train.sh"
-printf 'Milestone 7 row-35 decomposition passed: 6 IDs across 2 serial closure children, 33 frozen checker dependencies, 31 classified README consumers, and 3 shared-checker callers\n'
+printf 'Milestone 7 row-35 decomposition passed: 6 IDs across 2 serial closure children, 33 frozen checker dependencies, 32 classified README consumers, and 3 shared-checker callers\n'

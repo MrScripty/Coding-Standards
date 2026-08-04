@@ -18,12 +18,14 @@ mapfile -t observed < <(
   exit 1
 }
 
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 31 ]]
+[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 32 ]]
 [[ "$(awk -F '\t' 'NR > 1 && NF != 3 { n++ } END { print n+0 }' "$M")" -eq 0 ]]
-[[ "$(awk -F '\t' 'NR > 1 && $2 !~ /^(none|negative-purity|root-authority-verifier|consumer-audit-infrastructure)$/ { n++ } END { print n+0 }' "$M")" -eq 0 ]]
+[[ "$(awk -F '\t' 'NR > 1 && $2 !~ /^(none|negative-purity|root-authority-verifier|root-closure-verifier|consumer-audit-infrastructure)$/ { n++ } END { print n+0 }' "$M")" -eq 0 ]]
 [[ "$(awk -F '\t' 'NR > 1 && $3 !~ /^(none|fixture-data|legacy-heading-pattern|rust-profile-index)$/ { n++ } END { print n+0 }' "$M")" -eq 0 ]]
 [[ "$(awk -F '\t' '$2 == "root-authority-verifier" { print $1 }' "$M")" == \
   evaluation/standards-effectiveness/verify-root-router-evidence.sh ]]
+[[ "$(awk -F '\t' '$2 == "root-closure-verifier" { print $1 }' "$M")" == \
+  evaluation/standards-effectiveness/verify-root-index-closure.sh ]]
 [[ "$(awk -F '\t' '$2 == "consumer-audit-infrastructure" { print $1 }' "$M")" == \
   evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh ]]
 [[ "$(awk -F '\t' '$2 == "negative-purity" { print $1 }' "$M" | sort | paste -sd ' ' -)" == \
@@ -36,4 +38,4 @@ rg -F -q 'topics/contracts.md' "$R/STANDARDS-ROUTER.md"
 ! rg -F -q '(workflows/commit.md)' "$R/README.md"
 ! rg -F -q '(topics/contracts.md)' "$R/README.md"
 
-printf 'Root README consumer audit passed: 31 classified verifier consumers, no positive route consumers\n'
+printf 'Root README consumer audit passed: 32 classified verifier consumers, no positive route consumers\n'

@@ -18,32 +18,15 @@ it does not select modules or establish canonical ownership.
 Unknown applicability is a Router diagnostic. Do not read every document,
 select guidance from this README, or use a linked module as fallback authority.
 
-The remaining template, customization, and license sections are scheduled for
-closure in row 35.2. They cannot override Core or Router.
+## Resources
 
-## Templates
+These links are non-normative repository resources. Their presence does not
+establish applicability or ownership.
 
-Ready-to-use configuration files in `/templates/`:
-
-| Template | Purpose |
-|----------|---------|
-| [README-TEMPLATE.md](templates/README-TEMPLATE.md) | Concise boundary and contract README profiles |
-| [PLAN-TEMPLATE.md](templates/PLAN-TEMPLATE.md) | Implementation plan template |
-| [PULL_REQUEST_TEMPLATE.md](templates/PULL_REQUEST_TEMPLATE.md) | PR checklist for decision traceability |
-| [check-decision-traceability.sh](templates/check-decision-traceability.sh) | CI/hook script to enforce README/ADR decision updates |
-| [decision-traceability-map.tsv](templates/decision-traceability-map.tsv) | Project-owned decision-bearing path and artifact map |
-| [lefthook.yml](templates/lefthook.yml) | Pre-commit hook configuration |
-| [.editorconfig](templates/.editorconfig) | Editor formatting settings |
-
-## Customization
-
-These standards are intentionally generic. When adopting them:
-
-1. **Replace placeholders** - Look for `[YOUR-...]` markers
-2. **Add tech-specific rules** - Extend with language-specific conventions
-3. **Define your scopes** - Map commit scopes to your project structure
-4. **Configure tooling** - Adapt hook commands to your build tools
+- [README template](templates/README-TEMPLATE.md)
+- [Plan template](templates/PLAN-TEMPLATE.md)
+- [Pull request template](templates/PULL_REQUEST_TEMPLATE.md)
 
 ## License
 
-These standards are provided as-is for free use in any project.
+Repository license terms are in [LICENSE](LICENSE).

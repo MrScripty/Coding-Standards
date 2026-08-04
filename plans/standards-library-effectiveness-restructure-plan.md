@@ -6,15 +6,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 34 are accepted and closed. Row 35 child
-35.1 is accepted: root route evidence is centralized under Router, the manual
-document applicability catalog is removed, and every README-bearing verifier
-has an explicit content-aware classification. The immutable cursor is child
-35.2.
+**Current phase:** Rows 20 through 35 are accepted and closed. Root README is a
+concise non-normative Core-to-Router entrypoint with resource navigation and an
+authoritative `LICENSE` link. The immutable cursor is row 36, whose proposed
+reference owner does not yet exist and requires decomposition before movement.
 
-**Next slice:** Milestone 7.4b25c migrates `STD-0004`, `STD-0005`, and
-`STD-0006`, closes README as a concise non-normative entrypoint, and runs the
-P29 full-suite integration gate.
+**Next slice:** Milestone 7.4b26a reviews and decomposes row 36 without moving
+normative text: `STD-0027`, `STD-0028`, `STD-0029`, `STD-0030`, `STD-0031`,
+`STD-0032`, `STD-0033`, `STD-0034`, `STD-0035`, `STD-0036`, `STD-0037`,
+`STD-0038`, `STD-0039`, `STD-0040`, `STD-0041`, `STD-0042`, `STD-0043`,
+`STD-0044`, and `STD-0045`.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1933,9 +1934,12 @@ all structural/routing fixtures pass.
      Router evidence, remove positive root README route and catalog assertions
      from 33 affected checkers, and classify all 31 remaining README-bearing
      verifier files by root and non-root use.
-   - `7.4b25c` (`Planned`): migrate `STD-0004` through `STD-0006`, close the
+   - `7.4b25c` (`Accepted`): migrate `STD-0004` through `STD-0006`, close the
      root README as a concise non-normative entrypoint, and run the P29
      full-suite integration gate.
+   - `7.4b26a` (`Planned`): review and decompose row 36 `STD-0027` through
+     `STD-0045`, establish the missing `reference/patterns/architecture.md`
+     owner contract before population, and make no normative movement.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

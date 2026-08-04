@@ -1,0 +1,7 @@
+resource	target	role
+core	CORE-STANDARDS.md	canonical-foundation
+router	STANDARDS-ROUTER.md	canonical-routing
+readme_template	templates/README-TEMPLATE.md	non-normative-resource
+plan_template	templates/PLAN-TEMPLATE.md	non-normative-resource
+pull_request_template	templates/PULL_REQUEST_TEMPLATE.md	non-normative-resource
+license	LICENSE	authoritative-license

@@ -7662,3 +7662,29 @@ shell syntax, whitespace integrity, and the fail-fast complete suite passed.
 **Next slice:** `7.4b25c`, migrate `STD-0004` through `STD-0006`, remove the
 remaining checklist and license paraphrase, close README as a non-normative
 entrypoint, and run the P29 full-suite integration gate.
+
+## Milestone 7.4b25c Root Index Closure
+
+**Outcome:** Accepted.
+
+`STD-0004` through `STD-0006` close the root source. README now exposes only a
+Core-to-Router entrypoint, three non-normative template links, and an
+authoritative `LICENSE` link. Template presence does not establish
+applicability, the copied customization checklist is removed, and license terms
+are no longer paraphrased.
+
+The closure fixture proves six bounded links and roles. The closure verifier
+proves the exact four-heading surface, concise size, absence of the manual
+catalog, template table, customization defaults, stale closure text, and license
+paraphrase, plus all six exact root dispositions. The README consumer inventory
+now classifies 32 verifier files, including the closure verifier itself.
+
+**Verification:** root index closure, root Router evidence, README consumer
+audit, row 35 decomposition, immutable execution train, plan structure, shell
+syntax, whitespace integrity, and the P29 fail-fast complete suite passed.
+
+**Re-plan trigger:** row 36 carries `owner-review` activation and proposes the
+missing `reference/patterns/architecture.md` owner for `STD-0027` through
+`STD-0045`. Decompose the architecture-pattern reference extraction and create
+a useful non-normative owner contract before moving source text. This is
+milestone `7.4b26a`.
