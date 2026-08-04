@@ -6990,6 +6990,18 @@ authority, and Architecture retains only routing after closure.
 
 **Next slice:** `7.4b20b`, execute child 30.1.
 
+## Milestone 7.4b20b Contract Artifact Selection
+
+**Status:** Accepted.
+
+Contracts now selects an artifact only for a distinct authority, invariant,
+representation, evolution, generation, or interpretation purpose and places
+that authority where selected consumers can depend on it without unrelated
+implementation coupling. Dedicated packages are permitted but not required;
+pointless mirrors and framework-convention artifacts are invalid.
+
+**Next slice:** `7.4b20c`, execute child 30.2 and close row 30.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

@@ -218,42 +218,6 @@ Canonical applicability, runtime-proof, validated-construction, and typed
 diagnostic policy moved to
 [Runtime Decoding At Boundaries](topics/contracts.md#runtime-decoding-at-boundaries).
 
-### Packaging Guidance
-
-For multi-package repos, keep executable boundary contracts in a dedicated
-contracts/schema module or package when multiple producers/consumers depend on
-them.
-
-Do not hide boundary schemas inside one app's implementation package if another
-app or process needs to trust the same contract.
-
-### Contract Cost Test
-
-A new contract, DTO, projection, wrapper, schema, or generated artifact must
-either:
-- Let producer and consumer evolve independently
-- Preserve a boundary invariant
-- Make invalid states unrepresentable
-- Support persistence, replay, migration, or compatibility
-- Remove duplicated interpretation logic
-
-Do not add a contract that simply mirrors another shape unless the mirror has a
-clear ownership, validation, compatibility, or transport purpose.
-
-Evaluate constructs by the artifacts they produce, not by how convenient they
-are to write. A construct is costly when it produces hidden coupling, unclear
-ownership, implicit lifecycle behavior, broad dependency reach, difficult
-debugging, or future changes that require unrelated concepts to be considered
-together.
-
-### Benefits
-
-- **Runtime safety:** Invalid inputs fail early and predictably
-- **Compatibility control:** Persisted artifacts and messages drift less silently
-- **Shared truth:** Producers and consumers agree on semantics, not only field names
-
----
-
 ## Structured Producer-Consumer Contracts
 
 ### The Pattern

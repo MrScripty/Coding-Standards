@@ -9,9 +9,9 @@
 **Current phase:** Rows 20 through 29 are accepted and closed. Row 30 has an
 accepted two-child Contracts decomposition and is ready for serial execution.
 
-**Next slice:** Milestone 7.4b20b child 30.1 migrates `STD-0055` through
-`STD-0057` contract artifact necessity and authority-access placement without a
-dedicated-package or mirrored-artifact default.
+**Next slice:** Milestone 7.4b20c child 30.2 migrates `STD-0058` through
+`STD-0062` producer-consumer semantic preservation, replaces duplicate
+Architecture policy with a concise index, and closes row 30.
 
 **Acceptance status:** `partial`
 
@@ -1850,8 +1850,9 @@ all structural/routing fixtures pass.
      artifact necessity/placement and producer-consumer semantic preservation,
      with exact refine/index dispositions and no universal package, mirror,
      default, ordering, description, compatibility, or benefit authority.
-   - `7.4b20b` (`Planned`): migrate `STD-0055` through `STD-0057` artifact
-     necessity and authority-access placement with focused selection evidence.
+   - `7.4b20b` (`Accepted`): migrate `STD-0055` through `STD-0057` artifact
+     necessity and authority-access placement with focused selection evidence,
+     removing dedicated-package and mirrored-artifact defaults.
    - `7.4b20c` (`Planned`): migrate `STD-0058` through `STD-0062` semantic
      preservation, replace duplicate Architecture policy with an index, and
      close row 30.

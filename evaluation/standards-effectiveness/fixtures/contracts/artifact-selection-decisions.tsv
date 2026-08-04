@@ -1,0 +1,12 @@
+case	purpose	authority	consumers	placement	capability	expected
+shared_schema	wire-representation	known	multiple	dedicated-package	supported	allow
+producer_owned_contract	boundary-invariant	known	multiple	producer-module	supported	allow
+generated_authority	deterministic-generation	known	multiple	generator-input	supported	allow
+local_validated_value	invalid-states	known	one	owner-module	supported	allow
+pointless_mirror	none	known	multiple	dedicated-package	supported	typed-invalid
+framework_convention	convenience	known	multiple	dedicated-package	supported	typed-invalid
+hidden_shared_authority	wire-representation	known	multiple	unrelated-implementation	supported	typed-invalid
+duplicated_schema	boundary-invariant	duplicated	multiple	dedicated-package	supported	typed-invalid
+unknown_authority	wire-representation	missing	multiple	dedicated-package	supported	typed-unavailable
+unknown_consumers	evolution	known	unknown	owner-module	supported	typed-unavailable
+mechanism_unavailable	wire-representation	known	multiple	dedicated-package	unsupported	typed-unsupported

@@ -4,6 +4,9 @@ STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementa
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults
 STD-0049	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	language-specific frozen-shape example is rejected rather than retained as authority
 STD-0050	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	benefit claims remain subordinate to selected observable contract outcomes
+STD-0055	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	place authority where selected producers and consumers can depend on it without unrelated implementation coupling
+STD-0056	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	create an artifact only for a distinct authority invariant representation evolution generation or interpretation purpose
+STD-0057	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	benefit claims are evidence expectations rather than independent policy
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
 STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference

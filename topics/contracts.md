@@ -27,6 +27,36 @@ Before selecting compatibility or migration behavior, record:
 Unknown facts produce an unresolved-contract diagnostic. Do not select the most
 compatible-looking default.
 
+## Contract Artifact Necessity And Authority Placement
+
+Create a contract artifact only when it has a distinct purpose that the
+existing authoritative representation does not already satisfy. Valid purposes
+include establishing independently consumed authority, enforcing a boundary
+invariant, making invalid states unrepresentable, defining a distinct wire or
+persistence representation, governing evolution, enabling deterministic
+generation, or removing duplicated interpretation.
+
+A DTO, projection, wrapper, schema, interface, or generated artifact that only
+mirrors another shape is not justified without a distinct ownership,
+validation, representation, evolution, or transport obligation. Convenience,
+framework convention, symmetry, and possible future reuse are not sufficient
+contract purposes.
+
+Place canonical authority where every selected producer, consumer, validator,
+and generator can depend on it without depending on an unrelated
+implementation. This may be a dedicated package, an owned schema or generator
+input, or a producer-owned module with an appropriate dependency boundary. A
+dedicated package is not required when one owner and its consumers can access
+the authority without cycles, duplicated definitions, or implementation
+coupling.
+
+Record the authority, purpose, consumers, derivation, invalidation, and
+evolution class before introducing the artifact. Missing required facts or
+authority is `unavailable`; an artifact that contradicts its authority or lacks
+a distinct purpose is `invalid`; an unavailable required artifact mechanism is
+`unsupported`. Do not fall back to an inferred mirror, duplicated schema,
+unrelated implementation dependency, or speculative compatibility artifact.
+
 ## Runtime Decoding At Boundaries
 
 When a value enters through a trust, process, persistence, plugin, queue, or
