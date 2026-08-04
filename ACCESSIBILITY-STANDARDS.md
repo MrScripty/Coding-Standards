@@ -13,36 +13,11 @@ The former semantic-element, action, navigation, and generic-interaction rules
 are migrated to [Accessibility](topics/accessibility.md). Their web-specific
 examples are non-normative [Accessibility Recipes](reference/recipes/accessibility.md).
 
-## Keyboard Navigation
+## Keyboard And Focus Semantics (Migrated)
 
-### All Interactive Elements Must Be Keyboard-Accessible
-
-Every element that responds to `onClick` must also be reachable and activatable
-via keyboard. Semantic `<button>` and `<a>` elements handle this automatically.
-
-### Focus Indicators
-
-Never remove focus outlines without providing an alternative:
-
-```css
-/* BAD: removes focus indicator entirely */
-button:focus { outline: none; }
-
-/* GOOD: custom focus indicator */
-button:focus-visible {
-  outline: 2px solid var(--accent-primary);
-  outline-offset: 2px;
-}
-```
-
-### Dialog Focus Management
-
-When opening a modal or dialog:
-
-1. Move focus into the dialog on open
-2. Trap focus within the dialog while open
-3. Return focus to the triggering element on close
-4. Close on Escape key press
+The former keyboard, focus visibility, and dialog-focus rules are migrated to
+[Accessibility](topics/accessibility.md). CSS, key, and web dialog mechanisms
+are non-normative [Accessibility Recipes](reference/recipes/accessibility.md).
 
 ## Labels and Names
 

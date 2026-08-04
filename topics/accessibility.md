@@ -76,6 +76,44 @@ assistive mechanism does not prove another modality or the complete custom
 interaction. Missing required capability or evidence is a typed outcome, not
 authority to omit behavior or emulate a nearby control incompletely.
 
+## Input Modality Equivalence
+
+For every required modality, define how a user reaches, identifies, activates,
+adjusts, cancels, and receives feedback from the interaction. Preserve task
+order, state effects, and failure outcomes across modalities where the contract
+requires equivalent access. Support through pointer activation, a click event,
+or one native control does not establish another input modality.
+
+Keyboard, switch, voice, touch, pointer, and programmatic interaction are
+selected capabilities, not mutual substitutes or universal requirements. When
+a required modality cannot be supported or established, return its typed
+outcome instead of omitting it or treating another modality as sufficient.
+
+## Focus Visibility And Authority
+
+When the selected interaction model has an active position or focus concept,
+assign authority for its current target and make that target perceivable through
+the required modalities and states. Visibility must remain distinguishable in
+the supported environment and must not depend only on color, pointer hover, or
+an implementation-specific default unless the accepted contract proves it.
+
+Removing, hiding, or moving focus is valid only as part of an owned transition
+that preserves task continuity and feedback. Styling, browser defaults, or a
+successful focus API call alone do not prove visibility or correct authority.
+
+## Focus Lifecycle
+
+For composite, transient, modal, or dynamically replaced interactions, define
+the initial target, movement boundaries, active-order behavior, dismissal and
+cancellation, restoration destination, target removal, nested interaction, and
+failure outcomes from the user task and supported platform.
+
+A fixed trap, first-control target, Escape binding, return-to-trigger rule, or
+DOM-presence check is a possible mechanism, not a generic lifecycle contract.
+If the authoritative target no longer exists, resolve the next target through
+the selected task lifecycle or return a typed diagnostic; do not silently lose
+or guess focus.
+
 ## Responsibility Boundaries
 
 Accessibility owns required user-access outcomes and conformance obligations.

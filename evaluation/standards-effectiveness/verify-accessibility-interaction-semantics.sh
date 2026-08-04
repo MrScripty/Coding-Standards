@@ -18,13 +18,12 @@ for text in '## Semantic Meaning And Role' '## Action And Navigation Outcomes' \
   'not prove another modality'; do rg -F -q "$text" "$R/topics/accessibility.md"; done
 for text in '## Web Interaction Mechanisms' '<button type="button"' \
   '<a href="/settings">' 'role="button"'; do rg -F -q "$text" "$R/reference/recipes/accessibility.md"; done
-legacy_block="$(sed -n '/^## Interaction Semantics/,/^## Keyboard Navigation/p' "$R/ACCESSIBILITY-STANDARDS.md")"
+legacy_block="$(sed -n '/^## Interaction Semantics/,/^## Keyboard And Focus/p' "$R/ACCESSIBILITY-STANDARDS.md")"
 [[ "$legacy_block" != *'<button'* && "$legacy_block" != *'role="button"'* &&
    "$legacy_block" == *'Migrated'* ]]
 mapfile -t ids < <(awk -F '\t' '$1>="STD-0008"&&$1<="STD-0012"{print $1}' "$S/consolidation-dispositions.tsv")
 [[ "${ids[*]}" == 'STD-0008 STD-0009 STD-0010 STD-0011 STD-0012' ]]
 rg -F -q '`7.4b18c` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b18d` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-accessibility-owner-contract.sh"
 "$S/verify-milestone-7-row-28-decomposition.sh"
 printf 'Accessibility interaction semantics passed: 15 decisions, 5 exact dispositions\n'

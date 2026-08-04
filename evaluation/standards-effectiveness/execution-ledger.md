@@ -6865,6 +6865,30 @@ to the execution-train verifier.
 **Next slice:** `7.4b18c`, migrate `STD-0008` through `STD-0012` while
 extracting web-specific mechanisms to Accessibility reference.
 
+## Milestone 7.4b18d Accessibility Focus Lifecycle
+
+**Outcome:** Accepted.
+
+Accessibility now owns selected input-modality equivalence, perceivable focus
+authority, and composite or transient focus lifecycle. CSS outlines, key names,
+focus traps, and dialog recipes moved to non-normative reference without making
+keyboard, Escape, first-control focus, or return-to-trigger universal defaults.
+
+`STD-0013` through `STD-0016` each have one exact `split` disposition. Focused
+decisions reject click-implies-keyboard, hidden focus, fixed trap, Escape, and
+silent focus-loss fallbacks.
+
+**Verification:** focus lifecycle decisions, prior Accessibility suites,
+row-28 decomposition, execution train, and diff integrity passed.
+
+**Verification deviation:** the accepted interaction-semantics checker still
+asserted that child 28.3 was the live planned cursor. That stale assertion was
+removed; row 28 retains current-cursor authority through its execution-train
+checker.
+
+**Next slice:** `7.4b18e`, migrate `STD-0017` through `STD-0019` accessible-name
+and form-label outcomes while extracting JSX and web mechanisms.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

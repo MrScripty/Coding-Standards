@@ -69,3 +69,24 @@ One illustrative projection is:
 The specific keys and attributes above follow one selected web contract. Do not
 copy them as proof that another role, platform, modality, state model, or
 assistive-technology contract is satisfied.
+
+## Web Focus Mechanisms
+
+After a web contract selects visible focus evidence, one CSS mechanism might be:
+
+```css
+button:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+```
+
+The selector, dimensions, color, and outline mechanism are illustrative. Test
+the selected contrast, visibility, state, browser, theme, and modality claims;
+do not copy these values as acceptance thresholds.
+
+For one selected modal interaction, a web implementation might move focus on
+entry, constrain movement while modal, support a selected Escape dismissal,
+and restore focus on exit. Each behavior is conditional on the accepted task,
+platform, nesting, target-lifetime, and cancellation contract. “Trap focus and
+close on Escape” is not a universal dialog recipe.
