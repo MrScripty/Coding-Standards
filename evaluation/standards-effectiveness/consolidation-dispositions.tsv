@@ -707,3 +707,10 @@ STD-0842	languages/rust/RUST-TOOLING-STANDARDS.md	profiles/languages/rust/cross-
 STD-0849	prompts/full-codebase-standards-refactor.md	workflows/planning.md	index	retain only versioned full-codebase planning intent and canonical routing without implementation authority or copied process
 STD-0850	prompts/full-codebase-standards-refactor.md	workflows/planning.md	index	replace duplicated artifact rules with the canonical Planning artifact model without path or file-list fallback
 STD-0851	prompts/full-codebase-standards-refactor.md	workflows/planning.md	index	replace duplicated review process with canonical Planning findings decomposition delegation and acceptance authority
+STD-0852	prompts/implement-plan.md	workflows/implementation.md	index	route explicit implementation intent through the canonical Implementation workflow without active-plan inference
+STD-0853	prompts/implement-plan.md	workflows/implementation.md	index	route standards selection through the canonical router and Implementation entrypoint without copied routing procedure
+STD-0854	prompts/implement-plan.md	workflows/implementation.md	index	replace duplicated preflight steps with canonical Implementation and Planning admission authority
+STD-0855	prompts/implement-plan.md	workflows/implementation.md	index	replace the tracked slice checklist with the canonical Implementation slice contract
+STD-0856	prompts/implement-plan.md	workflows/implementation.md	index	route concurrent preparation and delegation through canonical Planning and Implementation authority
+STD-0857	prompts/implement-plan.md	workflows/implementation.md	index	route findings and replan decisions through canonical Planning authority without copied procedure
+STD-0858	prompts/implement-plan.md	workflows/implementation.md	index	route verification acceptance and commit completion through canonical owners without copied checklist

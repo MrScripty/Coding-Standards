@@ -1,0 +1,10 @@
+case	versioned	explicit_path	explicit_operation	router	implementation	planning	copied	fallback	expected
+admitted-start	yes	yes	start	yes	yes	yes	no	none	allow
+admitted-continue	yes	yes	continue	yes	yes	yes	no	none	allow
+admitted-verify	yes	yes	verify	yes	yes	yes	no	none	allow
+missing-path	yes	no	continue	yes	yes	yes	no	none	typed-unavailable
+missing-operation	yes	yes	missing	yes	yes	yes	no	none	typed-unavailable
+missing-owner	yes	yes	continue	yes	no	yes	no	none	typed-unavailable
+copied-procedure	yes	yes	continue	yes	yes	yes	yes	none	typed-invalid
+scan-fallback	yes	no	continue	yes	yes	yes	no	scan	typed-invalid
+legacy-unversioned	no	yes	continue	yes	yes	yes	no	none	typed-invalid

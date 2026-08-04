@@ -29,7 +29,7 @@ useful snapshot semantics already exist in canonical workflows.
    path-neutral Implementation entrypoint; record seven exact dispositions and
    focused positive and negative projection evidence.
 
-Children `25.0` and `25.1a` are accepted. Child `25.1b` is next.
+Children `25.0`, `25.1a`, and `25.1b` are accepted. Row 25 is closed.
 
 Child `25.0` may touch only the completed row 21 through 24 checkers, this
 decomposition, plan, and ledger. It must not change row-owned outcomes or the

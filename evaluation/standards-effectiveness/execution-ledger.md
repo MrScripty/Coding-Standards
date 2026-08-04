@@ -6671,6 +6671,28 @@ execution-train, and plan-structure checks passed.
 **Next slice:** `7.4b15d`, derive the thin Implementation prompt entrypoint and
 record the seven exact row-25 dispositions.
 
+## Milestone 7.4b15d: Derived Plan Implementation Entrypoint
+
+**Outcome:** Accepted.
+
+`prompts/implement-plan.md` is now one thin, versioned, path-neutral entrypoint
+that requires explicit plan path and operation, routes through the standards
+router and canonical Implementation workflow, and consumes Planning admission.
+The duplicated preflight, slice, delegation, findings, verification, and commit
+checklist was removed rather than retained as compatibility procedure.
+
+Nine focused decisions cover all supported operations plus missing identity,
+operation, or owners and reject copied, scanning, and unversioned fallbacks.
+`STD-0852` through `STD-0858` have exact `index` dispositions to
+`workflows/implementation.md`. Row 25 is closed.
+
+**Verification:** plan-entrypoint, planning-admission, row-25 decomposition,
+execution-train, plan-structure, and complete standards suites passed.
+
+**Next slice:** `7.4b16a`, re-plan row 26 `STD-0859` through `STD-0887`; no
+row-26 implementation is authorized until ownership and ordered children are
+frozen.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
