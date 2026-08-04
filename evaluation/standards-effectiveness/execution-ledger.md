@@ -6510,6 +6510,19 @@ algorithms or making Security an unconditional dependency.
 
 **Next slice:** `7.4b15c`, implement the corrected child `25.1a` contract.
 
+## Row 25 Lifecycle Admission Replan
+
+**Outcome:** Accepted planning correction.
+
+Planning owns explicit `start`, `continue`, and `verify` admission and their
+state transitions. Implementation transports the operation and consumes the
+decision. Blocked and deferred states remain unavailable; accepted,
+superseded, and state/operation mismatches are invalid. A next slice does not
+authorize execution, and operation intent is never inferred.
+
+**Next slice:** `7.4b15c`, implement identity and admission together with typed
+boundary-specific evidence.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

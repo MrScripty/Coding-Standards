@@ -19,14 +19,15 @@ useful snapshot semantics already exist in canonical workflows.
 
 ## Ordered Children
 
-1. `25.1a`: establish explicit repository-relative plan identity and typed
-   selection diagnostics in Implementation, with focused no-inference evidence.
+1. `25.1a`: establish Planning-owned `start`, `continue`, and `verify`
+   admission plus explicit repository-relative plan identity consumed by
+   Implementation, with focused no-inference evidence.
 2. `25.1b`: replace the tracked checklist with one thin, versioned,
    path-neutral Implementation entrypoint; record seven exact dispositions and
    focused positive and negative projection evidence.
 
-Child `25.1a` may touch Implementation, its focused fixtures/checker, plan, and
-ledger. Child `25.1b` may touch the prompt, dispositions, focused
+Child `25.1a` may touch Planning, Implementation, its focused fixtures/checker,
+plan, and ledger. Child `25.1b` may touch the prompt, dispositions, focused
 fixtures/checker, plan, ledger, and affected shared cursor assertions.
 
 ## Child 25.1 Plan Identity Replan
@@ -51,9 +52,29 @@ conventional path, use conversation history as authority, or create a
 repository-global pointer. A future default-selection mechanism requires
 downstream evidence and a separate replan.
 
+## Child 25.1 Lifecycle Admission Replan
+
+The invocation supplies one explicit operation. Planning owns admission:
+
+- `start` accepts only `Planned` and transitions it to `Active`;
+- `continue` accepts only `Active` and preserves that state; and
+- `verify` accepts `Implemented` or `Verifying` and transitions
+  `Implemented` to `Verifying` when verification begins.
+
+`Blocked` is `unavailable` with its blocker. `Deferred` is `unavailable` until
+its revisit authority activates it. `Accepted` and `Superseded` are `invalid`
+for execution; a known replacement is diagnostic context only. Missing or
+inferred operation is `unavailable`, and a state/operation mismatch is
+`invalid`. The presence of a next slice does not grant execution authority.
+
+Implementation transports the explicit operation and consumes Planning's
+decision without copying this admission table. The accepted transition and its
+ledger update occur in the same coherent slice.
+
 ## Re-plan Triggers
 
-Stop if plan identity requires repository-global mutable state, snapshot
+Stop if admission requires concurrent mutation coordination not already owned,
+plan identity requires repository-global mutable state, snapshot
 lineage must be regenerated, the prompt needs an independent
 lifecycle or generation system, copied canonical procedure must remain, one
 identifier needs multiple dispositions, or implementation requires files
