@@ -662,78 +662,13 @@ function get_or_create_service(address):
 
 ## Phased Mutation Pattern
 
-Canonical durable-state authority, mechanism selection, boundary ownership,
+Canonical durable mutation invariants, isolated staging, publication, proof,
 and typed outcomes are owned by the
-[Persistence boundary profile](profiles/boundaries/persistence.md). The legacy
-mutation and migration mechanisms below remain only until their scheduled
-extraction in children 32.2 and 32.3.
-
-### The Pattern
-
-For complex mutations that modify interconnected data structures, use explicit phases to ensure atomicity and debuggability:
-
-```text
-function merge_nodes(source, target):
-    data = gather_merge_data(source, target)
-    validate_merge_preconditions(data)
-    new_elements = create_merged_edges(data)
-    reconnect_edges(data, new_elements)
-    update_indexes(data, new_elements)
-    validate_postconditions_in_debug_builds()
-    return merge result
-```
-
-### Phase Responsibilities
-
-| Phase | Purpose | Mutates State? |
-|-------|---------|----------------|
-| Gather | Collect all needed data | No |
-| Validate | Check preconditions | No |
-| Create | Allocate new elements | Yes (append only) |
-| Connect | Wire up relationships | Yes |
-| Update | Sync auxiliary structures | Yes |
-| Validate | Check postconditions | No (debug only) |
-
-### Benefits
-
-- **Fail early** - All validation happens before any mutation
-- **Atomic** - Either completes fully or not at all
-- **Debuggable** - Clear phase boundaries for stepping through code
-- **Documentable** - Each phase has a single responsibility
-- **Reversible** - Easier to implement undo when phases are clear
-
-### When to Use
-
-Use this pattern when:
-
-- Modifying graphs or linked structures (trees, dependency graphs, state machines)
-- Operations have multiple interrelated updates
-- Partial completion would corrupt state
-- You need to support undo/redo
-- Debugging complex state transitions
-
-### Anti-Pattern: Interleaved Mutation
-
-```text
-BAD:
-1. Read source node.
-2. Add new edge.
-3. Read target node.
-4. Add reference.
-
-If step 3 fails after step 2 mutates state, the operation leaves partial state.
-```
-
-### Implementation Tips
-
-1. **Gather returns a struct** - Bundle all gathered data into a typed struct
-2. **Create returns IDs** - Return identifiers of created elements for later phases
-3. **Use placeholder values** - Create elements with temporary/invalid values, fix in Connect phase
-4. **Validate is optional in release** - Keep expensive checks in debug or
-   diagnostic builds when runtime cost is too high for production paths.
-
-Bundle gathered data and created element IDs into named structures so later
-phases do not recompute or accidentally read partially mutated state.
+[Persistence boundary profile](profiles/boundaries/persistence.md#durable-mutation-contract).
+Fixed phases and pseudocode are non-normative examples in the
+[Persistence Mechanism Recipes](reference/recipes/persistence.md#illustrative-staged-publication).
+Generic process-local mutation remains outside the Persistence profile unless
+state crosses a durable boundary.
 
 ---
 

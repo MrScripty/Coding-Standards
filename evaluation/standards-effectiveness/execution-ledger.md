@@ -7239,3 +7239,35 @@ complete fail-fast suite passed all 215 top-level checkers.
 
 **Next slice:** `7.4b22c`, migrate `STD-0107` through `STD-0112` durable
 mutation semantics and extract fixed phases and pseudocode mechanisms.
+
+## Milestone 7.4b22c Persistence Durable Mutation
+
+**Outcome:** Accepted.
+
+Persistence now selects durable mutation structure from the authoritative
+precondition, accepted postcondition, invariant, publication boundary,
+interruption behavior, proven store capabilities, and required evidence.
+Gathering, validation, isolated staging, publication, and proof remain distinct
+responsibilities only when required by that contract; they are not a fixed
+phase sequence.
+
+Incomplete staged representations must remain non-authoritative and
+unobservable. Publication must preserve the complete selected invariant, and
+required correctness proof runs in every supported production path. Placeholder
+state, partial publication, fixed phases, append-only assumptions, undo defaults,
+interleaved writes, and debug-only proof are rejected rather than retained as
+fallbacks.
+
+The legacy phased-mutation section is now an index to canonical policy and
+non-normative recipes. `STD-0107` through `STD-0112` each have one exact
+disposition. Nineteen decisions cover selected and process-local mutations,
+missing facts, unsupported mechanisms, unsafe staging or publication, missing
+proof, and prohibited mechanism defaults.
+
+**Verification:** durable-mutation and owner decisions, exact disposition
+coverage, row 32 decomposition, execution-train cursor, shell syntax, plan
+structure, and diff integrity passed.
+
+**Next slice:** `7.4b22d`, migrate `STD-0113` through `STD-0118` migration
+execution, extract SQL, filename, ledger-schema, and startup-loop mechanisms,
+and close row 32.

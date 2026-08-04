@@ -44,6 +44,36 @@ record, journal, object publication, explicit version ledger, or another proven
 mechanism. None is a universal default. If no durable state crosses the
 boundary, do not introduce persistence work merely because a store is present.
 
+## Durable Mutation Contract
+
+For each durable mutation, define the authoritative precondition, accepted
+postcondition, integrity constraints, publication boundary, interruption
+behavior, and proof required by actual consumers. Select operation structure
+from those facts and the available store guarantees. Gathering, validation,
+isolated staging, publication, and postcondition proof are distinct
+responsibilities when the selected contract requires them; they are not a
+mandatory five-phase implementation sequence.
+
+Complete every precondition and input proof that must hold before publication.
+Staging may use incomplete representations only when they are non-authoritative,
+unobservable to consumers, bounded by an owned lifecycle, and either completed
+or removed according to the selected failure contract. Never publish a
+placeholder or temporarily invalid representation as authoritative state.
+
+Publish through a mechanism that makes the selected postcondition observable
+without exposing a prohibited partial state. A transaction, atomic replacement,
+journal, or append-only operation satisfies this requirement only when its
+proven guarantees match the complete invariant. Successful API return, an
+allocated identifier, or completion of one write does not prove related
+indexes, references, records, or metadata are consistent.
+
+Run every proof required for authoritative correctness in each supported
+production path. Optional debug audits may add evidence, but they cannot replace
+required runtime validation or postcondition proof. If publication may have
+partly occurred or its outcome cannot be established, do not report success or
+continue from guessed state; preserve the typed outcome for the owning recovery
+contract.
+
 ## Responsibility Boundaries
 
 Persistence owns durable read, write, staging, publication, transaction,
@@ -76,10 +106,11 @@ typed diagnostic selected by the failed durable contract.
 ## Verification
 
 Verify the claims selected for the changed boundary. Applicable evidence covers
-authoritative source and destination state, interruption before and during
-publication, reopening through real store adapters, supported and unsupported
-versions, overlapping access, corrupt or contradictory state, and rejection of
-every prohibited fallback.
+authoritative source and destination state, precondition and postcondition
+proof, isolated staging, interruption before and during publication, reopening
+through real store adapters, supported and unsupported versions, overlapping
+access, corrupt or contradictory state, and rejection of every prohibited
+fallback.
 
 Illustrative mechanism adaptation belongs in the non-normative
 [Persistence Mechanism Recipes](../../reference/recipes/persistence.md).

@@ -17,6 +17,12 @@ STD-0090	ARCHITECTURE-PATTERNS.md	topics/diagnostics.md	refine	select causal ide
 STD-0091	ARCHITECTURE-PATTERNS.md	topics/diagnostics.md	split	own generic lifecycle and propagation while extracting TypeScript and logger mechanisms to non-normative reference
 STD-0092	ARCHITECTURE-PATTERNS.md	topics/diagnostics.md	index	debugging performance and observability benefits remain claims under existing owners
 STD-0106	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	index	legacy phased-mutation heading routes to the durable-state boundary owner
+STD-0107	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	select durable mutation sequencing from authoritative invariant and proven store guarantees
+STD-0108	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	separate fact gathering validation isolated staging publication and proof responsibilities only when the selected contract requires them
+STD-0109	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	index	legacy benefits become claim-matched durable mutation evidence rather than policy
+STD-0110	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	apply durable mutation policy only when partial authoritative publication can violate a selected invariant
+STD-0111	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	refine	prohibit observable partial authoritative state and preserve typed unknown-publication outcomes
+STD-0112	ARCHITECTURE-PATTERNS.md	profiles/boundaries/persistence.md	split	own durable mutation safety while extracting fixed phases pseudocode identifiers and mechanism tips to non-normative reference without placeholder or debug-only defaults
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
 STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference

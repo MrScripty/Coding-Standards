@@ -6,15 +6,17 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 31 are accepted and closed. Persistence child
-32.1 is accepted: the durable-state boundary owner, reference boundary, routing,
-owner evidence, and exact `STD-0106` index disposition exist. The active
-execution cursor is Persistence child 32.2.
+**Current phase:** Rows 20 through 31 are accepted and closed. Persistence
+children 32.1 and 32.2 are accepted: the boundary owner exists, and durable
+mutation now uses invariant-driven isolated staging, publication, and proof
+without fixed phase, placeholder, partial-write, or debug-only defaults. The
+active execution cursor is Persistence child 32.3.
 
-**Next slice:** Milestone 7.4b22c migrates `STD-0107`, `STD-0108`, `STD-0109`,
-`STD-0110`, `STD-0111`, and `STD-0112` durable mutation semantics and extracts
-fixed phase and pseudocode mechanisms without placeholder, partial-write, or
-debug-only validation fallbacks.
+**Next slice:** Milestone 7.4b22d migrates `STD-0113`, `STD-0114`, `STD-0115`,
+`STD-0116`, `STD-0117`, and `STD-0118` migration execution semantics, extracts
+SQL, filename, ledger-schema, and startup-loop mechanisms, and closes row 32
+without guessed ordering, repeated application, startup, rollback, or
+speculative coexistence defaults.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1893,7 +1895,7 @@ all structural/routing fixtures pass.
      checkers so each mutable execution fact has one canonical verifier.
    - `7.4b22b` (`Accepted`): create and route the Persistence profile, recipe,
      owner evidence, and `STD-0106` index.
-   - `7.4b22c` (`Planned`): migrate `STD-0107` through `STD-0112` durable
+   - `7.4b22c` (`Accepted`): migrate `STD-0107` through `STD-0112` durable
      mutation and extract fixed phase mechanisms.
    - `7.4b22d` (`Planned`): migrate `STD-0113` through `STD-0118` migration
      execution, extract SQL/file/startup mechanisms, and close row 32.
