@@ -1,0 +1,20 @@
+id	canonical_owner	disposition	reference_treatment	rationale
+STD-0027	reference/patterns/architecture.md	index	owner-entry	legacy catalog parent becomes the non-normative architecture-pattern reference entry
+STD-0028	reference/patterns/architecture.md	index	conditional-layer-pattern	layered pattern label remains discoverable only after Architecture selects applicable boundaries
+STD-0029	topics/architecture.md	split	conditional-layer-pattern	Architecture selects boundaries while reference may illustrate one four-layer arrangement
+STD-0030	topics/architecture.md	split	conditional-layer-pattern	Architecture owns responsibilities while reference may illustrate selected layer roles
+STD-0031	topics/architecture.md	split	conditional-layer-pattern	stable-contract dependency authority replaces universal inward direction while reference may illustrate one selected graph
+STD-0032	reference/patterns/architecture.md	move	conditional-layer-pattern	benefits remain only as qualified consequences of an accepted layered design
+STD-0033	topics/architecture.md	merge-duplicate	none	canonical concern-boundary policy already rejects organizational layering as simplicity
+STD-0034	reference/patterns/architecture.md	index	conditional-monorepo-pattern	monorepo role label remains discoverable only after Architecture selects package boundaries
+STD-0035	topics/architecture.md	split	conditional-monorepo-pattern	Architecture owns package responsibility while reference may illustrate stable roles
+STD-0036	topics/architecture.md	split	conditional-monorepo-pattern	fixed role catalog becomes an illustrative set under selected responsibilities
+STD-0037	topics/architecture.md	split	conditional-monorepo-pattern	stable-contract dependency authority replaces the fixed package graph while reference may illustrate one selected graph
+STD-0038	reference/patterns/architecture.md	move	conditional-monorepo-pattern	benefits remain only as qualified consequences of accepted package boundaries
+STD-0039	reference/patterns/architecture.md	move	conditional-monorepo-pattern	schema-sharing example remains illustrative and cannot select a contracts package
+STD-0040	reference/patterns/architecture.md	index	conditional-server-authority-pattern	server-authoritative projection label remains discoverable only after authority selection
+STD-0041	topics/architecture.md	split	conditional-server-authority-pattern	Architecture assigns one data owner while reference may illustrate a server-selected owner
+STD-0042	topics/architecture.md	split	conditional-server-authority-pattern	location-based frontend prohibitions yield to selected authority and Frontend projection contracts
+STD-0043	topics/architecture.md	split	conditional-server-authority-pattern	fixed push-action flow becomes one illustration selected by source and consumer contracts
+STD-0044	topics/architecture.md	split	conditional-server-authority-pattern	blanket optimistic-update prohibition yields to explicit reconciliation and failure semantics
+STD-0045	reference/patterns/architecture.md	move	conditional-server-authority-pattern	benefits remain only as qualified consequences of an accepted authority and projection contract

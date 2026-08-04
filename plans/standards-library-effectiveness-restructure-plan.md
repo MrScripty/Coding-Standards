@@ -6,16 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 35 are accepted and closed. Root README is a
-concise non-normative Core-to-Router entrypoint with resource navigation and an
-authoritative `LICENSE` link. The immutable cursor is row 36, whose proposed
-reference owner does not yet exist and requires decomposition before movement.
+**Current phase:** Rows 20 through 35 are accepted and closed. Row 36 is
+decomposed into four serial children that split canonical Architecture policy
+from conditional non-normative patterns. The immutable cursor remains row 36;
+its proposed reference owner does not yet exist.
 
-**Next slice:** Milestone 7.4b26a reviews and decomposes row 36 without moving
-normative text: `STD-0027`, `STD-0028`, `STD-0029`, `STD-0030`, `STD-0031`,
-`STD-0032`, `STD-0033`, `STD-0034`, `STD-0035`, `STD-0036`, `STD-0037`,
-`STD-0038`, `STD-0039`, `STD-0040`, `STD-0041`, `STD-0042`, `STD-0043`,
-`STD-0044`, and `STD-0045`.
+**Next slice:** Milestone 7.4b26b creates the useful non-normative
+`reference/patterns/architecture.md` owner, adds canonical Architecture
+discovery, and indexes `STD-0027` without moving substantive legacy text.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1937,9 +1935,23 @@ all structural/routing fixtures pass.
    - `7.4b25c` (`Accepted`): migrate `STD-0004` through `STD-0006`, close the
      root README as a concise non-normative entrypoint, and run the P29
      full-suite integration gate.
-   - `7.4b26a` (`Planned`): review and decompose row 36 `STD-0027` through
-     `STD-0045`, establish the missing `reference/patterns/architecture.md`
-     owner contract before population, and make no normative movement.
+   - `7.4b26a` (`Accepted`): decompose row 36 `STD-0027` through `STD-0045`
+     into owner creation, layered architecture, monorepo roles, and data
+     authority children; freeze exact normative/reference dispositions; and
+     defer the P30 full-suite gate through immutable package member row 37.
+   - `7.4b26b` (`Planned`): create the useful non-normative
+     `reference/patterns/architecture.md` owner, add canonical Architecture
+     discovery, and index `STD-0027` without moving substantive legacy text.
+   - `7.4b26c` (`Planned`): migrate `STD-0028` through `STD-0033`, retain one
+     conditional layered example, and remove universal layer, dependency, and
+     benefit defaults.
+   - `7.4b26d` (`Planned`): migrate `STD-0034` through `STD-0039`, retain
+     conditional monorepo role examples, and remove fixed package-role,
+     dependency-graph, and benefit defaults.
+   - `7.4b26e` (`Planned`): migrate `STD-0040` through `STD-0045`, retain a
+     conditional server-authoritative projection example, remove
+     location-based authority and blanket optimistic-update defaults, close
+     row 36, and stop for row 37 owner review before the P30 package gate.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

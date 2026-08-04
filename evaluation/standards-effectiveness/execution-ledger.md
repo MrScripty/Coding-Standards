@@ -7688,3 +7688,33 @@ missing `reference/patterns/architecture.md` owner for `STD-0027` through
 `STD-0045`. Decompose the architecture-pattern reference extraction and create
 a useful non-normative owner contract before moving source text. This is
 milestone `7.4b26a`.
+
+## Milestone 7.4b26a Architecture Pattern Decomposition
+
+**Outcome:** Accepted.
+
+Row 36 is decomposed into four serial children: reference-owner creation,
+layered architecture, monorepo package roles, and data authority. Exact
+validation assigns each of `STD-0027` through `STD-0045` one index, split,
+move, or duplicate-merge outcome. `topics/architecture.md` remains the sole
+normative owner; the proposed reference may retain only conditional examples
+and qualified consequences after canonical selection.
+
+The decomposition replaces universal inward dependencies, fixed package roles,
+backend ownership by location, frontend state prohibitions, and the blanket
+optimistic-update ban. It does not carry them into reference as advisory
+defaults. The owner contract accounts for later consumers in rows 37, 39, and
+40 without authorizing their movement.
+
+P30 spans immutable rows 36 and 37, so row 36 receives focused child evidence
+and cannot claim the package full-suite gate. Row 37 retains its independent
+`owner-review` obligation and becomes the next re-plan trigger after row 36
+closes.
+
+**Verification:** exact nineteen-identifier coverage, four ordered children,
+owner/disposition validation, immutable train and package membership, plan
+structure, shell syntax, and diff integrity passed.
+
+**Next slice:** `7.4b26b`, create and verify the non-normative architecture
+pattern reference owner and index `STD-0027` without substantive source
+movement.
