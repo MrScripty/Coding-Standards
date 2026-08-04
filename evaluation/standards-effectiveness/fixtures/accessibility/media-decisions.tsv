@@ -1,0 +1,14 @@
+case	meaning	classification	equivalent	context	state	capability	fallback	expected
+informative_media	material	informative	complete	complete	complete	supported	none	allow
+decorative_media	none	decorative	not-required	complete	complete	supported	none	allow
+functional_icon	material	functional	complete	complete	complete	supported	none	allow
+dynamic_media	material	informative	complete	complete	updated	supported	none	allow
+contradictory_classification	material	contradictory	complete	complete	complete	supported	none	typed-invalid
+unsupported_equivalent	material	informative	complete	complete	complete	unsupported	none	typed-unsupported
+missing_meaning	missing	informative	complete	complete	complete	supported	none	typed-unavailable
+missing_classification	material	missing	complete	complete	complete	supported	none	typed-unavailable
+missing_equivalent	material	informative	missing	complete	complete	supported	none	typed-unavailable
+empty_alt_default	missing	decorative	not-required	complete	complete	supported	empty-alt	typed-invalid
+filename_description	material	informative	filename	complete	complete	supported	filename	typed-invalid
+icon_library_default	material	functional	missing	complete	complete	supported	library-default	typed-invalid
+visual_context_only	material	informative	missing	visual-only	complete	supported	visual-context	typed-invalid

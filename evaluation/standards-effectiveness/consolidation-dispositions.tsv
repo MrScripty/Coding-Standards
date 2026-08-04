@@ -12,6 +12,9 @@ STD-0016	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	focus lifecycl
 STD-0017	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	naming and form parent moved while web organization moved to reference
 STD-0018	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	meaningful name outcome moved while JSX and accessibility API mechanisms moved to reference
 STD-0019	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	input relationship outcome moved while web label and placeholder mechanisms moved to reference
+STD-0020	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	media parent moved while web image organization moved to reference
+STD-0021	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	media classification and equivalence moved while HTML alternate text moved to reference
+STD-0022	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	functional icon outcomes moved while icon component mechanisms moved to reference
 STD-0195	COMMIT-STANDARDS.md	COMMIT-STANDARDS.md	index	legacy path retained as migration index
 STD-0196	COMMIT-STANDARDS.md	workflows/commit.md	move	conventional message contract
 STD-0197	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	format component explanation

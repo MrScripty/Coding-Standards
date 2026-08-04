@@ -6908,6 +6908,24 @@ row-28 decomposition, execution train, and diff integrity passed.
 **Next slice:** `7.4b18f`, migrate `STD-0020` through `STD-0022` informative and
 decorative media outcomes while extracting HTML and icon mechanisms.
 
+## Milestone 7.4b18f Accessibility Media Semantics
+
+**Outcome:** Accepted.
+
+Accessibility now owns contextual informative, decorative, and functional media
+classification plus equivalent task outcomes across required modalities. HTML
+alternate-text and icon-component mechanisms moved to non-normative reference.
+
+`STD-0020` through `STD-0022` each have one exact `split` disposition. Focused
+decisions reject empty-alt, filename-description, icon-library, and visual-only
+classification or equivalence fallbacks.
+
+**Verification:** media decisions, prior Accessibility suites, row-28
+decomposition, execution train, and diff integrity passed.
+
+**Next slice:** `7.4b18g`, migrate `STD-0023` through `STD-0026` evidence and
+tooling obligations, extract lint and CI mechanisms, and close the legacy source.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

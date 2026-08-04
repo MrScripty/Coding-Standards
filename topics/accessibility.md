@@ -138,6 +138,32 @@ projection does not prove the relationship. If required naming, instruction,
 state, or error capability is missing, return a typed outcome rather than
 accepting an unlabeled or ambiguously associated input.
 
+## Media Meaning And Classification
+
+Classify media, imagery, icons, animation, audio, and visual or auditory effects
+from the meaning and function they contribute to the user task in context.
+Informative media contributes content, status, identity, instruction, or
+function. Decorative media contributes no task-relevant meaning after the
+surrounding context and supported modalities are considered.
+
+Classification is an owned content decision, not a property of file type,
+component name, placement, repetition, visual subtlety, or library convention.
+Re-evaluate it when content, context, state, or function changes.
+
+## Equivalent Media Outcomes
+
+For informative or functional media, provide the selected users an equivalent
+task outcome through every required modality, preserving relevant meaning,
+state, timing, controls, and change notification. For decorative media, prevent
+the mechanism from introducing misleading or redundant meaning where the
+selected platform supports that projection.
+
+Alternate text, captions, transcripts, descriptions, hidden semantics, visible
+labels, and adjacent content are mechanisms selected from the media and task
+contract. An empty string, filename, icon-library default, nearby visual text,
+or successful API attribute does not independently prove classification or
+equivalence.
+
 ## Responsibility Boundaries
 
 Accessibility owns required user-access outcomes and conformance obligations.

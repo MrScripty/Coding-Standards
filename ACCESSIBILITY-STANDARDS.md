@@ -26,34 +26,12 @@ The former accessible-name and form-label rules are migrated to
 association mechanisms are non-normative
 [Accessibility Recipes](reference/recipes/accessibility.md).
 
-## Images and Media
+## Media Semantics (Migrated)
 
-### Decorative vs Informative Images
-
-```tsx
-// Decorative: adds no information — hide from screen readers
-<img src="divider.svg" alt="" />
-
-// Informative: conveys meaning — describe it
-<img src="error-icon.svg" alt="Error" />
-```
-
-### Icon Components
-
-When using icon components (Lucide, Heroicons, etc.):
-
-```tsx
-// Decorative icon next to text — hide from screen readers
-<button>
-  <SaveIcon aria-hidden="true" />
-  Save
-</button>
-
-// Standalone icon — parent needs aria-label (see Labels section)
-<button aria-label="Save">
-  <SaveIcon aria-hidden="true" />
-</button>
-```
+The former informative, decorative, image, and icon rules are migrated to
+[Accessibility](topics/accessibility.md). HTML alternate-text and icon-library
+mechanisms are non-normative
+[Accessibility Recipes](reference/recipes/accessibility.md).
 
 ## Linting Enforcement
 

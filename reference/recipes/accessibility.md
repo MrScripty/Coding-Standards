@@ -118,3 +118,32 @@ When the selected web contract permits a non-visible name, another mechanism is:
 These attributes and JSX forms are illustrative. Placeholder text, visual
 proximity, an identifier match, or an API attribute proves only the relationship
 and modalities covered by the selected implementation and evidence.
+
+## Web Image And Icon Mechanisms
+
+After content ownership classifies one web image as decorative, an illustrative
+HTML projection can suppress alternate text:
+
+```tsx
+<img src="divider.svg" alt="" />
+```
+
+An informative image might project its selected equivalent meaning:
+
+```tsx
+<img src="error-icon.svg" alt="Error" />
+```
+
+An icon already accompanied by an accepted visible name might be hidden from a
+selected accessibility API projection:
+
+```tsx
+<button type="button">
+  <SaveIcon aria-hidden="true" />
+  Save
+</button>
+```
+
+The empty `alt`, text value, `aria-hidden` attribute, icon component, and parent
+control are web mechanisms. They do not classify the content or prove equivalent
+meaning across other states, contexts, platforms, or modalities.
