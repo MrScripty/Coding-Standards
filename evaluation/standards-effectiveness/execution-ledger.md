@@ -7406,3 +7406,32 @@ accessibility, async behavior, and framework examples cannot be migrated as one
 inferred slice.
 
 **Next slice:** `7.4b24a`, review and decompose row 34 before implementation.
+
+## Milestone 7.4b24a Frontend Decomposition
+
+**Outcome:** Accepted.
+
+Row 34 is decomposed into six ordered children. Frontend retains UI projection,
+rendering lifecycle, synchronization, interaction adaptation, and
+frontend-specific evidence. TypeScript Async and Concurrency retain overlapping
+work and stale-result authority; TypeScript and Tooling retain static-analysis
+configuration; Verification retains evidence meaning and environment;
+Accessibility retains user-access outcomes.
+
+The frozen legacy source proves that `STD-0457` through `STD-0463` mechanisms
+were already removed when accepted claim-selected Frontend evidence was
+established under `STD-0641`. Row 34 records exact index lineage without
+restoring selector priorities, event API defaults, DOM-shim proof, mocked
+geometry, timer spies, or fixed smoke checks.
+
+Sixteen identifiers have one frozen owner and disposition. Declarative
+rendering, event synchronization, polling, timer holders, React hooks, React
+lint rules, selector APIs, browser simulations, and accessibility mechanisms
+remain selected mechanisms rather than defaults.
+
+**Verification:** exact identifier coverage, six-child order, cross-owner
+validation, immutable train alignment, plan structure, shell syntax, and diff
+integrity passed.
+
+**Next slice:** `7.4b24b`, record `STD-0449` and `STD-0450` Frontend parent
+and applicability lineage.

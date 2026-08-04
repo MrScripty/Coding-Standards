@@ -1,0 +1,17 @@
+id	owner	disposition	rationale
+STD-0449	profiles/applications/frontend.md	index	legacy parent routes to the canonical Frontend application boundary
+STD-0450	profiles/applications/frontend.md	refine	select applicability from actual UI projection interaction state and evidence changes
+STD-0451	profiles/applications/frontend.md	index	legacy rendering parent routes to selected rendering and synchronization policy
+STD-0452	profiles/applications/frontend.md	split	own rendering projection selection while extracting TypeScript DOM and framework-state examples
+STD-0453	profiles/applications/frontend.md	split	own synchronization selection while extracting fixed polling timer event and FFI examples
+STD-0454	profiles/applications/frontend.md	split	own frontend lifecycle evidence while extracting React timer-holder and hook mechanisms
+STD-0455	profiles/languages/typescript.md	index	legacy frontend tooling parent routes to TypeScript static-analysis and Tooling authority
+STD-0456	profiles/languages/typescript.md	split	own TypeScript lint configuration selection while extracting React ESLint rule examples
+STD-0457	profiles/applications/frontend.md	index	legacy testing parent routes to accepted claim-selected Frontend evidence
+STD-0458	profiles/applications/frontend.md	index	selector priorities remain retired mechanisms under claim-selected evidence
+STD-0459	profiles/applications/frontend.md	index	accessibility evidence routes through Frontend specialization and Accessibility authority
+STD-0460	profiles/applications/frontend.md	index	userEvent fireEvent and dispatch APIs remain retired mechanism defaults
+STD-0461	profiles/applications/frontend.md	index	browser geometry requires claim-selected environment evidence without DOM-shim substitution
+STD-0462	profiles/applications/frontend.md	index	polling cleanup routes to accepted lifecycle evidence without timer-spy defaults
+STD-0463	profiles/applications/frontend.md	index	embedded-control checks route to selected interaction and representative-browser evidence
+STD-0464	topics/accessibility.md	index	legacy accessibility route yields to canonical outcome authority and Frontend mechanisms

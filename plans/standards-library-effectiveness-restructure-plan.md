@@ -6,15 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 33 are accepted and closed. Contracts owns
-protocol outcome projection and producer/consumer adapter proof; HTTP
-mechanisms remain non-normative. The immutable cursor is row 34, whose Frontend
-cluster has no accepted child decomposition.
+**Current phase:** Rows 20 through 33 are accepted and closed. Row 34 has an
+accepted six-child owner-aligned decomposition separating Frontend projection,
+TypeScript and Tooling configuration, Verification evidence, Accessibility
+outcomes, and non-normative mechanisms. The immutable cursor is child 34.1.
 
-**Next slice:** Milestone 7.4b24a reviews and decomposes row 34 identifiers
-`STD-0449` through `STD-0464`. Do not migrate Frontend authority and
-projection policy until canonical owner boundaries and ordered children are
-accepted.
+**Next slice:** Milestone 7.4b24b records `STD-0449` and `STD-0450`
+Frontend parent and applicability lineage without framework or product
+defaults.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1911,10 +1910,21 @@ all structural/routing fixtures pass.
    - `7.4b23c` (`Accepted`): migrate `STD-0130` through `STD-0133` producer and
      consumer adapter proof, extract pseudocode and fixed examples, retire
      conditional benefit claims, and close row 33.
-   - `7.4b24a` (`Planned`): review and decompose row 34 `STD-0449` through
-     `STD-0464` Frontend authority and projection policy before implementation;
-     freeze application-boundary ownership, ordered children, typed outcomes,
-     mechanism extraction, and no-fallback constraints.
+   - `7.4b24a` (`Accepted`): decompose row 34 into six owner-aligned children
+     for Frontend scope, rendering and synchronization, lifecycle timers,
+     TypeScript tooling, accepted testing evidence, and Accessibility closure.
+   - `7.4b24b` (`Planned`): record `STD-0449` and `STD-0450` Frontend
+     parent and applicability lineage.
+   - `7.4b24c` (`Planned`): migrate `STD-0451` through `STD-0453`
+     rendering and synchronization and extract fixed mechanisms.
+   - `7.4b24d` (`Planned`): migrate `STD-0454` frontend timer lifecycle
+     proof and extract React hook mechanisms.
+   - `7.4b24e` (`Planned`): migrate `STD-0455` and `STD-0456` TypeScript
+     static-analysis routing and extract React ESLint mechanisms.
+   - `7.4b24f` (`Planned`): record `STD-0457` through `STD-0463` exact
+     lineage to accepted claim-selected Frontend evidence.
+   - `7.4b24g` (`Planned`): route `STD-0464` to Accessibility, close the
+     legacy source, and run the P28 full-suite integration gate.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
