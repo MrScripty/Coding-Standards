@@ -7054,6 +7054,17 @@ correlation, layer, raw-context, telemetry, or benefit fallback.
 
 **Next slice:** `7.4b22a`, review the missing Persistence boundary owner.
 
+## Milestone 7.4b22a Row 32 Persistence Owner Review
+
+**Status:** Accepted.
+
+Row 32 is frozen as owner creation, durable mutation, and migration execution.
+Persistence owns durable mechanisms without taking generic mutation, contract
+evolution, recovery, concurrency, security, build, diagnostics, or evidence
+authority and without fixed store or migration defaults.
+
+**Next slice:** `7.4b22b`, create and route the useful Persistence profile.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

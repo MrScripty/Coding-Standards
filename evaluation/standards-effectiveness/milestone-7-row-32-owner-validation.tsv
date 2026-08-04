@@ -1,0 +1,14 @@
+id	owner	disposition	rationale
+STD-0106	profiles/boundaries/persistence.md	index	legacy phased-mutation heading routes to durable mutation policy
+STD-0107	profiles/boundaries/persistence.md	refine	select durable mutation sequencing from authoritative invariant and store guarantees
+STD-0108	profiles/boundaries/persistence.md	refine	separate fact gathering validation isolated staging publication and proof responsibilities when applicable
+STD-0109	profiles/boundaries/persistence.md	index	benefits are evidence claims rather than policy
+STD-0110	profiles/boundaries/persistence.md	refine	apply only when durable partial publication can violate a selected invariant
+STD-0111	profiles/boundaries/persistence.md	refine	prohibit observable partial authoritative state
+STD-0112	profiles/boundaries/persistence.md	split	own durable safety while extracting fixed phases placeholders identifiers and debug-build tips
+STD-0113	profiles/boundaries/persistence.md	index	legacy migration heading routes to selected persistence migration execution
+STD-0114	profiles/boundaries/persistence.md	refine	execute migration only for Contracts-selected retained source and destination states
+STD-0115	profiles/boundaries/persistence.md	refine	preserve migration identity integrity ordering reentry interruption and repair decisions
+STD-0116	profiles/boundaries/persistence.md	split	own deterministic discovery while extracting numbered and timestamped SQL filenames
+STD-0117	profiles/boundaries/persistence.md	split	own ledger-state consistency while extracting SQL table and startup-loop mechanisms
+STD-0118	profiles/boundaries/persistence.md	refine	derive overlap and compatibility from actual deployments and retained states

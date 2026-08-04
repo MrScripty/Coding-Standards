@@ -6,12 +6,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 31 are accepted and closed. Row 32 requires
-missing-owner review before Persistence boundary policy may be created or moved.
+**Current phase:** Rows 20 through 31 are accepted and closed. Row 32 has an
+accepted three-child Persistence decomposition and is ready for execution.
 
-**Next slice:** Milestone 7.4b22a reviews row 32 `STD-0106` through `STD-0118`,
-defines the missing Persistence boundary owner and exact children, and does not
-create or migrate Persistence policy before that review is accepted.
+**Next slice:** Milestone 7.4b22b child 32.1 creates and routes the narrow
+Persistence boundary profile, recipe, owner evidence, and `STD-0106` index.
 
 **Acceptance status:** `partial`
 
@@ -1866,9 +1865,16 @@ all structural/routing fixtures pass.
    - `7.4b21c` (`Accepted`): migrate `STD-0090` through `STD-0092` conditional
      causal identity, lifecycle, and propagation; extract TypeScript/logger
      mechanisms; replace Architecture policy with an index; and close row 31.
-   - `7.4b22a` (`Planned`): review row 32 `STD-0106` through `STD-0118`, define
-     the missing Persistence boundary owner, exact semantic children, write
-     sets, and verification before implementation.
+   - `7.4b22a` (`Accepted`): create a narrow Persistence boundary owner, then
+     migrate durable mutation and schema execution in two children while
+     preserving Contracts, Resilience, Concurrency, Security, Build,
+     Diagnostics, and Verification authority.
+   - `7.4b22b` (`Planned`): create and route the Persistence profile, recipe,
+     owner evidence, and `STD-0106` index.
+   - `7.4b22c` (`Planned`): migrate `STD-0107` through `STD-0112` durable
+     mutation and extract fixed phase mechanisms.
+   - `7.4b22d` (`Planned`): migrate `STD-0113` through `STD-0118` migration
+     execution, extract SQL/file/startup mechanisms, and close row 32.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
