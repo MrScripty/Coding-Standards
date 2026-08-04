@@ -6,14 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 26 are accepted and closed. Row 27 requires
-pre-slice ownership and decomposition review for the pull-request template.
+**Current phase:** Rows 20 through 27 are accepted and closed. Row 28 requires
+pre-slice owner creation and decomposition review for Accessibility.
 
-**Next slice:** Milestone 7.4b17b row 27 child 27.1 for `STD-0888`, `STD-0889`,
-`STD-0890`, `STD-0891`, `STD-0892`, `STD-0893`, `STD-0894`, `STD-0895`,
-`STD-0896`, `STD-0897`, and `STD-0898`; replace the fixed questionnaire and
-checklist with one conditional Implementation-derived evidence projection,
-record exact index dispositions, and add focused evidence.
+**Next slice:** Milestone 7.4b18a row 28 pre-slice review for `STD-0007` through
+`STD-0026` from `ACCESSIBILITY-STANDARDS.md`; establish the missing
+Accessibility owner contract, exact ownership, semantic batches, write sets,
+fixtures, and ordered children before implementation.
 
 **Acceptance status:** `partial`
 
@@ -1810,9 +1809,12 @@ all structural/routing fixtures pass.
    - `7.4b17a` (`Accepted`): review row 27 `STD-0888` through `STD-0898`, resolve
      pull-request template projection ownership, and freeze exact semantic
      children and write sets before implementation.
-   - `7.4b17b` (`Planned`): implement one conditional Implementation-derived
+   - `7.4b17b` (`Accepted`): implement one conditional Implementation-derived
      evidence projection, record 11 exact index dispositions, and advance to row
      28 review.
+   - `7.4b18a` (`Planned`): review row 28 `STD-0007` through `STD-0026`, create
+     the missing Accessibility owner contract, and freeze exact semantic
+     children and write sets before legacy movement.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

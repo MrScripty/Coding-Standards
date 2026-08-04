@@ -743,3 +743,14 @@ STD-0884	templates/PLAN-TEMPLATE.md	workflows/planning.md	index	follow-ups proje
 STD-0885	templates/PLAN-TEMPLATE.md	workflows/planning.md	index	verification summary yields to objective acceptance evidence
 STD-0886	templates/PLAN-TEMPLATE.md	workflows/planning.md	index	traceability links project owned artifacts without copied rationale
 STD-0887	templates/PLAN-TEMPLATE.md	workflows/planning.md	index	brevity guidance yields to canonical current-state planning policy
+STD-0888	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	summary projects selected Implementation change evidence
+STD-0889	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	decision traceability remains conditional evidence selection
+STD-0890	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	problem context is selected only when material
+STD-0891	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	constraints are selected only when material
+STD-0892	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	decision evidence links its durable owner
+STD-0893	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	alternatives are selected only when material
+STD-0894	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	invariant effects link affected contract evidence
+STD-0895	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	simplicity review remains conditional on affected reasoning risk
+STD-0896	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	revisit triggers remain with durable planning or issue authority
+STD-0897	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	traceability links project selected Documentation evidence
+STD-0898	templates/PULL_REQUEST_TEMPLATE.md	workflows/implementation.md	index	fixed checklist completion is replaced by selected evidence links

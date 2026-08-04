@@ -1,43 +1,15 @@
 ## Summary
 
-Describe what changed and why.
+Describe the observable behavior or standards outcome and why it changed.
 
-## Decision Impact
+## Selected Evidence
 
-### Problem
-What problem does this PR solve?
+Link only evidence selected by the affected risk and canonical workflows, such
+as the active plan or ADR, affected contract or migration record, and required
+operational consequence. Omit categories that are not material. Link durable
+rationale instead of restating it here.
 
-### Constraints
-What constraints affected the decision?
+## Verification
 
-### Decision
-What approach was chosen and why?
-
-### Alternatives
-- Link the accepted ADR/plan when one owns this rationale.
-- For a local implementation choice, summarize only the material alternative.
-
-### Invariants Impacted
-- Invariant preserved/introduced/changed
-
-### Simplicity Review
-- Which policy/state/lifecycle decisions does this change own?
-- Which concepts are intentionally coupled?
-- Which concepts were kept separate?
-- Why do any new abstractions or contracts reduce reasoning load?
-
-### Traceability Links
-- Documentation profile: `none`, `boundary-readme`, `contract-readme`, `adr`,
-  or `runbook`
-- Affected boundary or contract:
-- Canonical README/ADR/contract/runbook link, or why profile `none` applies:
-
-## Checklist
-
-- [ ] I selected documentation from decision/contract impact, not directory changes
-- [ ] Any affected durable responsibility, invariant, contract, or procedure is updated
-- [ ] Any ADR names its affected boundaries or contract identifiers
-- [ ] I linked canonical rationale instead of restating it
-- [ ] I identified the owner of each new policy/state/lifecycle decision
-- [ ] New abstractions or contracts reduce caller reasoning load
-- [ ] Tests were added/updated as needed
+Link the selected Verification claims and results. A checked box, empty heading,
+or completed template is not acceptance evidence.

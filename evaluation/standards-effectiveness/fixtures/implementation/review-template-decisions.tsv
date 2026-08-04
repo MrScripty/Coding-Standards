@@ -1,0 +1,10 @@
+case	summary	selection	verification	conditional	copied	checklist	fallback	expected
+material-contract-change	yes	material	yes	yes	no	no	none	allow
+local-change	yes	none	yes	yes	no	no	none	allow
+missing-summary	no	material	yes	yes	no	no	none	typed-unavailable
+missing-verification	yes	material	no	yes	no	no	none	typed-unavailable
+mandatory-all-context	yes	all	yes	no	no	no	none	typed-invalid
+copied-rationale	yes	material	yes	yes	yes	no	none	typed-invalid
+fixed-checklist	yes	material	yes	yes	no	yes	none	typed-invalid
+github-default	yes	material	yes	yes	no	no	github	typed-invalid
+template-complete-default	yes	material	yes	yes	no	no	complete-template	typed-invalid

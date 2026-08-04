@@ -6,6 +6,8 @@ mapfile -t ids < <(awk -F '\t' '$1==27{n=split($3,a,",");for(i=1;i<=n;i++)print 
 mapfile -t validated < <(awk -F '\t' 'NR>1{print $1}' "$V");[[ "${validated[*]}" == "${expected[*]}" ]];[[ "$(awk -F '\t' 'NR>1&&($2!="workflows/implementation.md"||$3!="index"||NF!=4){n++}END{print n+0}' "$V")" -eq 0 ]]
 for t in '## Owner Contract' 'sole normative owner' 'optional derived projection' '## Exact Dispositions' '`STD-0888` through `STD-0898`' '`27.1`' '## Projection Requirements' 'checked boxes' '## Re-plan Triggers';do rg -F -q "$t" "$S/milestone-7-row-27-decomposition.md";done
 [[ "$(awk -F '\t' '$1==27{print $6}' "$S/milestone-7-execution-train.tsv")" == 'workflows/implementation.md' ]]
-rg -F -q '`7.4b17a` (`Accepted`)' "$P";rg -F -q '`7.4b17b` (`Planned`)' "$P"
+rg -F -q '`7.4b17a` (`Accepted`)' "$P";rg -F -q '`7.4b17b` (`Accepted`)' "$P";rg -F -q '`7.4b18a` (`Planned`)' "$P"
+mapfile -t disposed < <(awk -F '\t' '$1>="STD-0888"&&$1<="STD-0898"{print $1}' "$S/consolidation-dispositions.tsv");[[ "${disposed[*]}" == "${expected[*]}" ]]
+"$S/verify-review-template-projection.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-27 decomposition passed: 11 IDs assigned to one Implementation-owned child\n'

@@ -27,6 +27,8 @@ split ownership is required.
    conditional Implementation-derived evidence projection; record all 11 exact
    dispositions and focused positive and negative evidence.
 
+Child `27.1` is accepted. Row 27 is closed.
+
 The template, dispositions, focused fixtures/checker, row-27 decomposition and
 owner validation, plan, ledger, and affected cursor assertions are the only
 allowed implementation write set.

@@ -6747,6 +6747,26 @@ and cursor assertions. Narrower owners retain their policy.
 
 **Next slice:** `7.4b17b`, implement the frozen one-package projection contract.
 
+## Milestone 7.4b17b: Conditional Review Evidence Projection
+
+**Outcome:** Accepted.
+
+The pull-request template now transports one behavioral summary, conditionally
+selected links to material owned evidence, and Verification evidence. The fixed
+problem, constraint, decision, alternatives, invariant, simplicity,
+traceability, and checklist questionnaire was removed without compatibility
+text. Nine focused decisions reject mandatory context, copied rationale, fixed
+checklists, provider defaults, and template-completion evidence.
+
+`STD-0888` through `STD-0898` have exact `index` dispositions to
+`workflows/implementation.md`. Row 27 is closed.
+
+**Verification:** review-template projection, canonical change-evidence,
+row-27 decomposition, execution-train, and complete standards suites passed.
+
+**Next slice:** `7.4b18a`, re-plan row 28 and establish the missing
+Accessibility owner before implementation.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
