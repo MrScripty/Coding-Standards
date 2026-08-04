@@ -7065,6 +7065,20 @@ authority and without fixed store or migration defaults.
 
 **Next slice:** `7.4b22b`, create and route the useful Persistence profile.
 
+## Milestone 7.4b22ar Checkpoint Contract Replan Trigger
+
+**Status:** Replan required.
+
+Extending the execution overlay to row 32 exposed a latent mismatch for row 31:
+the immutable execution train records a `focused` checkpoint while both accepted
+Diagnostics children record `full-suite`. The execution-train verifier now
+rejects the overlay before Persistence owner creation. No source or owner files
+were changed after discovery.
+
+**Next slice:** select one canonical row 31 checkpoint contract, update only its
+authorized authority and dependent assertions, run the complete suite, then
+resume `7.4b22b`.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

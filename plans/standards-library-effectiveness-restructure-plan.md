@@ -7,10 +7,13 @@
 **Plan status:** `Active`
 
 **Current phase:** Rows 20 through 31 are accepted and closed. Row 32 has an
-accepted three-child Persistence decomposition and is ready for execution.
+accepted three-child Persistence decomposition, but execution is paused at a
+shared checkpoint-contract replan trigger.
 
-**Next slice:** Milestone 7.4b22b child 32.1 creates and routes the narrow
-Persistence boundary profile, recipe, owner evidence, and `STD-0106` index.
+**Next slice:** Milestone 7.4b22ar resolves the latent row 31 checkpoint mismatch:
+the immutable train declares `focused` while the accepted Diagnostics
+decomposition declares `full-suite`. Do not create Persistence policy until one
+canonical checkpoint contract is selected and verified.
 
 **Acceptance status:** `partial`
 
@@ -1869,6 +1872,8 @@ all structural/routing fixtures pass.
      migrate durable mutation and schema execution in two children while
      preserving Contracts, Resilience, Concurrency, Security, Build,
      Diagnostics, and Verification authority.
+   - `7.4b22ar` (`Planned`): reconcile row 31 immutable-train `focused` versus
+     accepted-decomposition `full-suite` checkpoint authority before child 32.1.
    - `7.4b22b` (`Planned`): create and route the Persistence profile, recipe,
      owner evidence, and `STD-0106` index.
    - `7.4b22c` (`Planned`): migrate `STD-0107` through `STD-0112` durable
