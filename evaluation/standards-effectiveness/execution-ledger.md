@@ -7852,6 +7852,31 @@ source text moved in this planning slice.
 conditional composition-root illustration, and remove universal wiring,
 lifecycle, dependency-injection, and benefit defaults.
 
+## Milestone 7.4b27b Conditional Composition Root
+
+**Outcome:** Accepted.
+
+The legacy composition-root section now routes runtime composition,
+responsibility placement, stable-contract dependency direction, lifecycle
+ownership, and typed outcomes to canonical Architecture. One non-normative
+illustration remains after those facts are selected.
+
+The fixed facade, implementation, and root role catalog; universal application
+boundary; feature self-wiring prohibition; test-versus-production swapping
+rule; TypeScript good/bad examples; and unconditional benefit claims are
+removed. The illustration permits local construction and multiple composition
+boundaries when selected ownership, deployment, and lifecycle facts require
+them.
+
+**Verification:** nine composition decisions, five exact dispositions,
+prohibited ambient-global and incumbent-wiring defaults, prior Architecture
+pattern evidence, row 37 decomposition, immutable-train advancement, plan
+structure, shell syntax, and diff integrity passed.
+
+**Next slice:** `7.4b27c`, migrate `STD-0074` through `STD-0080`, retain one
+conditional durable-workflow illustration, and remove event-sourcing,
+durable-acceptance, component, replay, and evidence defaults.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

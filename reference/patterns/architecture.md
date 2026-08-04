@@ -190,3 +190,37 @@ One selected owner plus a proved synchronization contract can prevent a
 projection from becoming competing authority. Consistency, reliability, and
 simplicity remain observable claims; a server location, confirmed-only update,
 or single-source diagram does not prove them.
+
+## Conditional Composition Root
+
+After Architecture selects independently meaningful implementations, the
+stable contracts they satisfy, and a boundary that owns configuration and
+lifecycle, one possible arrangement is:
+
+```text
+selected composition boundary
+    |-- construct selected adapters and resources
+    |-- connect them through selected contracts
+    `-- hand control to the owned runtime entrypoint
+```
+
+| Illustrative participant | Possible responsibility |
+| --- | --- |
+| Composition boundary | Select supported implementations and provide configuration |
+| Contract consumer | Receive an implementation without selecting its mechanism |
+| Adapter or resource | Implement one selected external or lifecycle contract |
+| Runtime entrypoint | Begin work under the selected lifecycle owner |
+
+These labels do not require one composition module, facade type, dependency
+injection framework, application-wide root, or separate implementation package.
+A coherent component may construct a local dependency when its ownership and
+lifecycle do not cross the selected boundary. Several independently deployed
+or owned runtimes may require separate composition boundaries.
+
+### Conditional Consequences
+
+Explicit composition can make implementation selection and lifecycle evidence
+easier to inspect when the selected contracts actually isolate those decisions.
+Replaceability, testability, cleanup, and boundary discipline remain claims to
+prove for affected consumers. The diagram, alternate test implementation, or
+presence of an application entrypoint proves none of them.

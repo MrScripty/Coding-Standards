@@ -6,17 +6,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 36 are accepted and closed. Row 37 is
-decomposed into four serial children for composition-root illustration,
-durable-workflow ownership, view-model closure, and universal directory-tree
-removal. The existing Architecture reference does not inherit semantic
-approval from row 36. P30 remains open until child 37.4 runs its complete-suite
-gate, and child 37.1 is active.
+**Current phase:** Rows 20 through 36 are accepted and closed. Row 37 child
+37.1 is accepted: runtime composition remains canonical Architecture policy,
+and one conditional composition-root illustration remains non-normative. P30
+remains open until child 37.4 runs its complete-suite gate, and child 37.2 is
+active.
 
-**Next slice:** Milestone 7.4b27b migrates `STD-0069`, `STD-0070`,
-`STD-0071`, `STD-0072`, and `STD-0073`; retains one conditional
-composition-root illustration; and removes universal wiring, lifecycle,
-dependency-injection, and benefit defaults.
+**Next slice:** Milestone 7.4b27c migrates `STD-0074`, `STD-0075`,
+`STD-0076`, `STD-0077`, `STD-0078`, `STD-0079`, and `STD-0080`; retains one
+conditional durable-workflow illustration; and removes event-sourcing,
+durable-acceptance, component, replay, and evidence defaults.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1962,7 +1961,7 @@ all structural/routing fixtures pass.
    - `7.4b27a` (`Accepted`): review and decompose row 37 `STD-0069` through
      `STD-0087`, preserve its independent owner-review obligation, and perform
      no substantive legacy movement before the decomposition is accepted.
-   - `7.4b27b` (`Planned`): migrate `STD-0069` through `STD-0073`, retain one
+   - `7.4b27b` (`Accepted`): migrate `STD-0069` through `STD-0073`, retain one
      conditional composition-root illustration, and remove universal wiring,
      lifecycle, dependency-injection, and benefit defaults.
    - `7.4b27c` (`Planned`): migrate `STD-0074` through `STD-0080`, retain one

@@ -1,0 +1,10 @@
+case	responsibilities	contracts	lifecycle	mechanisms	fallback	expected
+selected_boundary	multiple	complete	complete	supported	none	illustrate
+single_coherent	one	complete	complete	supported	none	keep-together
+missing_responsibility	missing	complete	complete	supported	none	typed-unavailable
+missing_contract	multiple	missing	complete	supported	none	typed-unavailable
+missing_lifecycle	multiple	complete	missing	supported	none	typed-unavailable
+unsupported_mechanism	multiple	complete	complete	unsupported	none	typed-unsupported
+contradictory_boundary	contradictory	complete	complete	supported	none	typed-invalid
+ambient_global_fallback	multiple	complete	complete	supported	ambient-global	typed-invalid
+feature_wiring_fallback	multiple	complete	complete	supported	feature-self-wire	typed-invalid

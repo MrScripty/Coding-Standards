@@ -39,7 +39,8 @@ done
 [[ "$(awk -F '\t' '$1 == 37 { print $6 FS $7 FS $8 }' "$S/milestone-7-execution-train.tsv")" == $'reference/patterns/architecture.md\tmissing\towner-review' ]]
 [[ "$(awk -F '\t' '$1 == 37 { print $2 FS $4 FS $8 }' "$S/milestone-7-accelerated-packages.tsv")" == $'P30\treference/patterns/architecture.md\tfull-suite' ]]
 rg -F -q '`7.4b27a` (`Accepted`)' "$P"
-for milestone in 7.4b27b 7.4b27c 7.4b27d 7.4b27e; do
+rg -F -q '`7.4b27b` (`Accepted`)' "$P"
+for milestone in 7.4b27c 7.4b27d 7.4b27e; do
   printf -v pattern '`%s` (`Planned`)' "$milestone"
   rg -F -q "$pattern" "$P"
 done
@@ -47,5 +48,6 @@ done
 "$S/verify-architecture-pattern-reference-owner.sh"
 "$S/verify-resilience-owner-contract.sh"
 "$S/verify-frontend-owner-contract.sh"
+"$S/verify-architecture-composition-root-pattern.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-37 decomposition passed: 19 IDs across 4 serial children with P30 closing in child 37.4\n'

@@ -82,63 +82,17 @@ diagnostics, and validated-variant dispatch moved to the
 
 ## Composition Root Pattern
 
-### The Pattern
+Canonical composition boundaries, responsibility placement, dependency
+direction, lifecycle ownership, and typed outcomes moved to
+[Runtime Composition](topics/architecture.md#runtime-composition). A
+composition root is one possible arrangement after those facts are selected,
+not a required module, application entrypoint, role catalog, injection style,
+or test substitution mechanism.
 
-Assemble concrete implementations at one application boundary instead of
-letting wiring logic spread through feature modules.
-
-```
-composition root
-    ├── create infrastructure implementations
-    ├── create service implementations
-    ├── connect them together
-    └── expose only the app/runtime entrypoint
-```
-
-Use this pattern for apps with multiple services, infrastructure clients,
-background workers, or process lifecycle concerns.
-
-### Roles
-
-| Module Type | Responsibility |
-|-------------|----------------|
-| Contract/facade module | Defines the public interface used by consumers |
-| Implementation module | Contains the concrete behavior and dependency usage |
-| Composition root | Chooses implementations, wires dependencies, owns startup/shutdown |
-
-### Rules
-
-- Consumers depend on service contracts/facades, not concrete implementations.
-- Concrete implementations are selected at the application boundary.
-- Startup and shutdown ownership for sockets, workers, timers, and background
-  loops belongs in the composition root or another single lifecycle owner.
-- Feature modules may request dependencies, but should not create global
-  infrastructure instances ad hoc.
-- If a module needs different implementations in test vs production, swap them
-  in the composition root rather than branching inside business logic.
-
-```typescript
-// GOOD: App boundary wires the implementation
-const userRepository = new SqlUserRepository(db);
-const userService = new UserService(userRepository);
-const server = new ApiServer(userService);
-```
-
-```typescript
-// BAD: Feature module reaches outward and self-wires infrastructure
-export function handleRequest(input: Request) {
-    const db = createDatabaseConnection();
-    const repo = new SqlUserRepository(db);
-    const service = new UserService(repo);
-    return service.handle(input);
-}
-```
-
-### Benefits
-
-- **Replaceability:** Tests, local dev, and production can use different implementations cleanly
-- **Lifecycle clarity:** One place owns long-lived resources and cleanup
-- **Boundary discipline:** Business logic depends on contracts, not environment wiring
+One non-normative adaptation is available in the
+[Conditional Composition Root](reference/patterns/architecture.md#conditional-composition-root).
+Its diagram and role labels do not authorize ambient globals, feature-owned
+infrastructure, one universal startup owner, or incumbent wiring as fallback.
 
 ---
 

@@ -24,6 +24,11 @@ STD-0042	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture and 
 STD-0043	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	source and consumer contracts select synchronization while reference illustrates non-default event response subscription and query flows
 STD-0044	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture owns reconciliation and failure semantics while reference permits confirmed or contract-approved optimistic projection
 STD-0045	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	data-authority consequences remain qualified by owner synchronization reconciliation and affected evidence
+STD-0069	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	index	legacy composition-root label remains discoverable only after Architecture selects runtime composition
+STD-0070	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture owns composition boundaries while reference may illustrate one application-boundary arrangement
+STD-0071	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture assigns responsibilities while the fixed role table becomes a qualified illustration
+STD-0072	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	runtime composition and stable-contract dependency authority replace universal wiring and injection rules
+STD-0073	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	composition consequences remain qualified by selected ownership lifecycle and affected evidence
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults
