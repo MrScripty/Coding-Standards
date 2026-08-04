@@ -7079,6 +7079,13 @@ were changed after discovery.
 authorized authority and dependent assertions, run the complete suite, then
 resume `7.4b22b`.
 
+**Expanded trigger:** A monotonic-checkpoint prototype correctly accepted row
+31 escalation but exposed row 14 Launcher decomposition downgrades from the
+train's `full-suite` minimum to `focused`. The prototype was removed without
+commit. Recovery now requires a complete overlay checkpoint audit, explicit
+dispositions for every escalation and downgrade, checker self-tests, and
+fail-fast full-suite verification before Persistence owner creation.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

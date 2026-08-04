@@ -15,6 +15,11 @@ the immutable train declares `focused` while the accepted Diagnostics
 decomposition declares `full-suite`. Do not create Persistence policy until one
 canonical checkpoint contract is selected and verified.
 
+Monotonic-checkpoint prototyping exposed the inverse mismatch at row 14: its
+train minimum is `full-suite`, while accepted Launcher children are `focused`.
+`7.4b22ar` must therefore inventory every train/decomposition checkpoint pair
+and disposition all escalations and downgrades before checker semantics change.
+
 **Acceptance status:** `partial`
 
 **Execution ledger:** [Milestone execution ledger](../evaluation/standards-effectiveness/execution-ledger.md)
@@ -1873,7 +1878,9 @@ all structural/routing fixtures pass.
      preserving Contracts, Resilience, Concurrency, Security, Build,
      Diagnostics, and Verification authority.
    - `7.4b22ar` (`Planned`): reconcile row 31 immutable-train `focused` versus
-     accepted-decomposition `full-suite` checkpoint authority before child 32.1.
+     accepted-decomposition `full-suite`, audit the complete overlay for inverse
+     downgrades including row 14, and freeze one monotonic checkpoint contract
+     before child 32.1.
    - `7.4b22b` (`Planned`): create and route the Persistence profile, recipe,
      owner evidence, and `STD-0106` index.
    - `7.4b22c` (`Planned`): migrate `STD-0107` through `STD-0112` durable
