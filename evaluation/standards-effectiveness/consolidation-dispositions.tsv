@@ -12,6 +12,7 @@ STD-0059	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	structured contract
 STD-0060	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	canonical authority selects applicable shape default discriminant constraint ordering label and identity semantics
 STD-0061	ARCHITECTURE-PATTERNS.md	topics/contracts.md	refine	consumer transformations require destination-contract proof and explicit compatibility effects
 STD-0062	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	benefit claims remain subordinate to observable producer-consumer evidence
+STD-0089	ARCHITECTURE-PATTERNS.md	topics/diagnostics.md	index	legacy activity-tracing heading routes to the generic diagnostic projection owner
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
 STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference

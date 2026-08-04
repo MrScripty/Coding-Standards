@@ -1,0 +1,11 @@
+case	purpose	audience	outcome	context	disclosure	capability	fallback	expected
+selected_projection	selected	selected	preserved	bounded	authorized	supported	none	allow
+no_extra_diagnostic	not-required	not-required	preserved	none	not-required	supported	none	allow
+missing_purpose	missing	selected	preserved	bounded	authorized	supported	none	typed-unavailable
+missing_audience	selected	missing	preserved	bounded	authorized	supported	none	typed-unavailable
+raw_context	selected	selected	preserved	raw	unauthorized	supported	none	typed-invalid
+swallowed_outcome	selected	selected	swallowed	bounded	authorized	supported	none	typed-invalid
+unsupported_channel	selected	selected	preserved	bounded	authorized	unsupported	none	typed-unsupported
+logging_default	selected	selected	preserved	bounded	authorized	supported	logging	typed-invalid
+correlation_default	selected	selected	preserved	bounded	authorized	supported	correlation	typed-invalid
+silent_discard	selected	selected	preserved	bounded	authorized	supported	discard	typed-invalid

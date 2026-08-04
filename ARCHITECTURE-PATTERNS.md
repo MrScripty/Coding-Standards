@@ -488,6 +488,11 @@ cross-boundary decisions and link to it instead of repeating its rationale.
 
 ## Activity Tracing Pattern
 
+Canonical diagnostic purpose, audience, causal identity, context, projection,
+lifecycle, disclosure, and typed outcomes are owned by
+[Diagnostics](topics/diagnostics.md). The legacy mechanism below remains only
+until its scheduled extraction in child 31.2.
+
 ### The Pattern
 
 Track operations across layers using correlation IDs and structured logging.

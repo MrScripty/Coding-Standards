@@ -104,6 +104,7 @@ condition is present:
 | Concern | Current owner |
 | --- | --- |
 | Accessibility outcome, user interaction semantics, modality, or conformance obligations | [Accessibility](topics/accessibility.md) |
+| Diagnostic purpose, audience, causal identity, context, propagation, retention, disclosure projection, or reporting claim | [Diagnostics](topics/diagnostics.md) |
 | Runtime decoding, contract evolution, persistence compatibility, version overlap, or degraded outcomes | [Contracts](topics/contracts.md) |
 | Shared mutable state, overlapping work, async failure ownership, cancellation, or shutdown | [Concurrency](topics/concurrency.md) |
 | Dependency or service failure, retry, degradation, startup resilience, or recovery semantics | [Resilience](topics/resilience.md) |

@@ -39,6 +39,7 @@ reference material.
 | [topics/performance.md](topics/performance.md) | Performance claims, measurement contracts, optimization decisions, benchmarks, and regression evidence | Changing performance budgets, measurements, optimizations, or resource-use claims |
 | [topics/architecture.md](topics/architecture.md) | Concern boundaries, dependency direction, data/state authority, services, and runtime composition | Changing architectural ownership or boundaries |
 | [topics/accessibility.md](topics/accessibility.md) | Modality-neutral user-access outcomes, conformance obligations, typed diagnostics, and evidence boundaries | Changing user-facing behavior or accessibility claims |
+| [topics/diagnostics.md](topics/diagnostics.md) | Diagnostic purpose, audience, causal context, projection lifecycle, disclosure, and typed outcomes | Changing diagnostic context, propagation, reporting, retention, or claims |
 | [topics/security.md](topics/security.md) | Canonical untrusted-input authority and filesystem-containment policy | Untrusted values authorizing operations or resource access |
 | [topics/cross-platform.md](topics/cross-platform.md) | Canonical path construction and filesystem-identity policy | Path behavior across supported platforms or filesystems |
 | [profiles/boundaries/interop.md](profiles/boundaries/interop.md) | Foreign memory, resource authority, lifecycle, thread, and validated-adapter contracts | Foreign pointers, handles, callbacks, runtimes, or resources |

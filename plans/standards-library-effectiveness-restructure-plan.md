@@ -9,9 +9,9 @@
 **Current phase:** Rows 20 through 30 are accepted and closed. Row 31 has an
 accepted two-child Diagnostics owner decomposition and is ready for execution.
 
-**Next slice:** Milestone 7.4b21b child 31.1 creates and routes the narrow generic
-Diagnostics owner, reference boundary, metadata, owner decisions, and exact
-`STD-0089` index disposition.
+**Next slice:** Milestone 7.4b21c child 31.2 migrates `STD-0090` through
+`STD-0092` conditional activity-context semantics, extracts TypeScript/logger
+mechanisms, replaces Architecture policy with an index, and closes row 31.
 
 **Acceptance status:** `partial`
 
@@ -1860,8 +1860,9 @@ all structural/routing fixtures pass.
      migrate conditional causal-context semantics in a second child while
      extracting TypeScript/logger mechanisms and preserving existing Contracts,
      Resilience, Security, Performance, Verification, and Tooling authority.
-   - `7.4b21b` (`Planned`): create and route the useful Diagnostics owner,
-     reference boundary, metadata, owner evidence, and `STD-0089` index.
+   - `7.4b21b` (`Accepted`): create and route the useful Diagnostics owner,
+     reference boundary, metadata, owner evidence, and `STD-0089` index without
+     logging, tracing, correlation, telemetry, or raw-context defaults.
    - `7.4b21c` (`Planned`): migrate `STD-0090` through `STD-0092`, extract
      mechanisms, replace Architecture policy with an index, and close row 31.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.

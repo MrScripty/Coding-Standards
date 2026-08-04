@@ -7028,6 +7028,17 @@ outcome, recovery, security, performance, evidence, or tooling authority.
 
 **Next slice:** `7.4b21b`, create and route the useful Diagnostics owner.
 
+## Milestone 7.4b21b Diagnostics Owner Creation
+
+**Status:** Accepted.
+
+Created and routed a useful generic Diagnostics owner and non-normative recipe
+boundary. Owner evidence preserves typed outcomes, bounded authorized context,
+and optional projection while rejecting logging, correlation, raw-context,
+swallowed-outcome, and silent-discard defaults.
+
+**Next slice:** `7.4b21c`, migrate activity-context semantics and close row 31.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.
