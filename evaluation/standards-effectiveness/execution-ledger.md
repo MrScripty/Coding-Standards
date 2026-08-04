@@ -6570,6 +6570,20 @@ latest-wins behavior are prohibited.
 **Next slice:** `7.4b15c`, establish the complete identity and admission
 contract with resulting-revision evidence.
 
+## Row 25 Revision Evidence Ownership Replan
+
+**Outcome:** Accepted planning correction.
+
+The execution ledger owns append-only prior/resulting revision evidence and is
+excluded from admission identity. Resulting state is digested before the ledger
+entry is prepared and recomputed after integration; mismatch blocks acceptance.
+Historical evidence cannot authorize admission, digest inputs contain no
+self-referential revision field, and commit metadata or separate manifests are
+not canonical substitutes.
+
+**Next slice:** `7.4b15c`, define partial-integration recovery before
+implementing the complete admission contract.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

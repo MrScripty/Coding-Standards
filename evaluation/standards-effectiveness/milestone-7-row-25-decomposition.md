@@ -131,10 +131,30 @@ automatically retry, merge stale state, or apply latest-wins behavior.
 Intermediate local disagreement is not accepted state and cannot be
 integrated. This contract does not claim to prevent non-cooperating local edits.
 
+## Child 25.1 Revision Evidence Replan
+
+`execution-ledger.md` is the canonical, append-only owner for transition
+evidence and remains outside `planning-admission-v1`. Each accepted transition
+records the explicit operation, prior revision, resulting revision, resulting
+plan state, resulting next-slice identity, integration owner, and applicable
+integration evidence. A historical ledger entry never authorizes admission.
+
+After preparing resulting `plan.md` and `issues.md`, compute their resulting
+digest, write both revisions into the ledger entry, perform the pre-integration
+gate against authoritative prior state, and integrate the coherent state and
+evidence change. Post-integration verification recomputes the digest and must
+match the recorded result before the transition is accepted.
+
+Do not place a digest field in either digest input, exclude selected fields,
+create a transition manifest, or make commit metadata the evidence owner.
+Failure to integrate ledger evidence with the state change leaves the
+transition unaccepted and requires explicit repair or re-evaluation; do not
+report success from the state files alone.
+
 ## Re-plan Triggers
 
-Stop if authoritative integration cannot provide both revision gates, resulting
-revision evidence has no canonical record, plan identity requires repository-global
+Stop if partial integration recovery has no owned procedure, authoritative
+integration cannot provide both revision gates, plan identity requires repository-global
 mutable state, snapshot
 lineage must be regenerated, the prompt needs an independent
 lifecycle or generation system, copied canonical procedure must remain, one
