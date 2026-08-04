@@ -29,6 +29,13 @@ STD-0070	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture owns
 STD-0071	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture assigns responsibilities while the fixed role table becomes a qualified illustration
 STD-0072	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	runtime composition and stable-contract dependency authority replace universal wiring and injection rules
 STD-0073	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	composition consequences remain qualified by selected ownership lifecycle and affected evidence
+STD-0074	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	index	legacy realtime-workflow label remains discoverable only after canonical workflow facts are selected
+STD-0075	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture separates transport state authority and projection responsibilities without prescribing event sourcing
+STD-0076	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	workflow shape remains illustrative without selecting durable commands events projections publication or replay
+STD-0077	ARCHITECTURE-PATTERNS.md	topics/resilience.md	split	Resilience owns replay resumption duplicates convergence and partial failure while linked owners retain contracts persistence ordering and authority
+STD-0078	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	component roles remain illustrative and cannot select stores handlers publishers or read models
+STD-0079	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	workflow consequences remain observable claims requiring affected evidence
+STD-0080	ARCHITECTURE-PATTERNS.md	workflows/verification.md	merge-duplicate	canonical Verification and Resilience evidence already cover replay duplicates convergence and partial failure
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults

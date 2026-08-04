@@ -98,65 +98,24 @@ infrastructure, one universal startup owner, or incumbent wiring as fallback.
 
 ## Realtime Workflow Systems
 
-### The Pattern
+Canonical state authority and participant placement remain with
+[Architecture](topics/architecture.md#data-and-state-authority). Operation and
+transition meaning remain with
+[Invariant Contracts](topics/contracts.md#invariant-contracts); durable
+acceptance remains with the selected
+[Persistence contract](profiles/boundaries/persistence.md#durable-mutation-contract);
+ordering remains with
+[Concurrency](topics/concurrency.md#select-coordination-from-the-invariant);
+and replay, duplicate handling, convergence, and partial-failure recovery remain
+with [Resilience](topics/resilience.md#replay-and-resumption-evidence).
+Verification selects evidence through
+[Selecting Claims](workflows/verification.md#selecting-claims).
 
-For systems that handle durable commands, long-lived sessions, reconnects, or
-partial failures, separate transport handling from canonical workflow state and
-event progression.
-
-This is an optional pattern. Use it when the system must stay predictable across
-restarts, retries, reconnects, or partial processing, not for every CRUD app.
-
-### Workflow Shape
-
-```
-command/request
-    ├── validate + dedupe/idempotency check
-    ├── append canonical event(s)
-    ├── project read model(s)
-    ├── publish updates to consumers
-    └── replay/bootstrap on restart
-```
-
-### Rules
-
-- Transport layers decode requests and forward commands, but should not own the
-  workflow state machine.
-- Use stable command identifiers when retries or duplicate delivery are possible.
-- Persist canonical events or equivalent durable state transitions before
-  treating work as accepted.
-- Build read models/projections for query and UI needs instead of coupling
-  consumers directly to transient workflow internals.
-- On startup, bootstrap workflow state from durable state instead of trusting
-  in-memory leftovers.
-- After partial failure, reconcile from the persisted source of truth before
-  resuming new work.
-- Keep event ordering, replay semantics, and projection compatibility explicit.
-
-### Typical Components
-
-| Component | Responsibility |
-|-----------|----------------|
-| Transport adapter | Decode requests, encode responses, manage connection details |
-| Command handler/orchestrator | Validate commands and decide next state transition(s) |
-| Durable store | Persist events or equivalent durable transitions |
-| Projection/read model | Build query-friendly state for consumers |
-| Update publisher | Push new state/events to subscribers |
-
-### Benefits
-
-- **Recovery:** Restarts and reconnects do not silently corrupt workflow state
-- **Idempotency:** Retries are less likely to duplicate work
-- **Separation:** UI/query consumers read stable projections instead of mutable internals
-- **Auditability:** Durable transitions create a clearer history of what happened
-
-### Verification Note
-
-When using this pattern, require tests for replay/bootstrap, duplicate command
-handling, projection consistency, and recovery after partial failure. See
-[TESTING-STANDARDS.md](TESTING-STANDARDS.md) for cross-layer acceptance
-expectations and [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) for
-lifecycle/overlap safety.
+A non-normative [Conditional Durable Workflow Map](reference/patterns/architecture.md#conditional-durable-workflow-map)
+may communicate one arrangement after those owners select the applicable facts.
+It does not require event sourcing, commands, a durable store, read models,
+publishers, replay, or one fixed component catalog. A transient workflow does
+not acquire durability or recovery obligations from this pattern name.
 
 ---
 

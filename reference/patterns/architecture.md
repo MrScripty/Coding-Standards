@@ -224,3 +224,39 @@ easier to inspect when the selected contracts actually isolate those decisions.
 Replaceability, testability, cleanup, and boundary discipline remain claims to
 prove for affected consumers. The diagram, alternate test implementation, or
 presence of an application entrypoint proves none of them.
+
+## Conditional Durable Workflow Map
+
+After canonical owners select a workflow whose accepted state or recovery
+crosses a durable boundary, one possible structural map is:
+
+```text
+selected boundary adapter
+    --> selected operation and state-transition owner
+        --> selected durable adapter, when durability is required
+        --> selected projections or consumers
+
+selected recovery owner
+    --> declared authoritative history or checkpoint
+        --> proved reconciliation and resumption boundary
+```
+
+The operation contract selects identity, preconditions, transitions, and
+outcomes. Persistence selects whether and how acceptance crosses a durable
+boundary. Resilience selects replay, duplicate, convergence, and partial-failure
+behavior. Concurrency selects required atomicity and ordering. Architecture
+selects authority and participant placement, and Verification selects evidence.
+
+This map does not require commands, events, event sourcing, a read model,
+publisher, durable store, bootstrap at startup, or one component per box. A
+transient operation or a workflow with no replay contract can omit the durable
+and recovery paths. Missing facts return the canonical typed diagnostic rather
+than selecting the illustrated mechanism or continuing from in-memory state.
+
+### Conditional Consequences
+
+Explicit durable and recovery boundaries can make accepted state, duplicate
+handling, and resumption evidence easier to inspect when the selected contracts
+actually require them. Recovery, idempotency, separation, auditability, and
+projection consistency remain claims to prove through affected real boundaries;
+the map or a final snapshot proves none of them.

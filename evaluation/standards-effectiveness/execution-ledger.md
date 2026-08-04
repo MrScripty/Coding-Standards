@@ -7877,6 +7877,31 @@ structure, shell syntax, and diff integrity passed.
 conditional durable-workflow illustration, and remove event-sourcing,
 durable-acceptance, component, replay, and evidence defaults.
 
+## Milestone 7.4b27c Conditional Durable Workflow Map
+
+**Outcome:** Accepted.
+
+The legacy realtime-workflow section now routes state authority and participant
+placement to Architecture, operation meaning to Contracts, durable acceptance
+to Persistence, ordering to Concurrency, replay and partial-failure recovery to
+Resilience, and evidence selection to Verification. One non-normative
+structural map remains after those owners select the applicable facts.
+
+The fixed command/event pipeline, durable-event acceptance rule, component
+catalog, read-model and publisher defaults, startup bootstrap rule, in-memory
+resume fallback, and copied replay-test checklist are removed. The reference
+permits transient workflows and omission of durability or recovery paths when
+their selected contracts do not require them.
+
+**Verification:** twelve workflow decisions, seven exact dispositions,
+prohibited event-sourcing, in-memory, and fixed-component defaults, prior
+Architecture pattern evidence, row 37 decomposition, immutable-train
+advancement, plan structure, shell syntax, and diff integrity passed.
+
+**Next slice:** `7.4b27d`, migrate `STD-0081` through `STD-0086` to existing
+Frontend, Architecture, recipe, and Verification authority without retaining
+the fixed view-model chain, mutable class, or benefit defaults.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.
