@@ -116,8 +116,8 @@ rg -F -q \
   'topics/contracts.md#runtime-decoding-at-boundaries' "$LEGACY"
 legacy_runtime="$(
   awk '
-    /^## Executable Boundary Contracts$/ { capture = 1 }
-    /^### Packaging Guidance$/ { capture = 0 }
+    /^## Executable Boundary Contracts$/ { capture = 1; next }
+    capture && /^## / { exit }
     capture { print }
   ' "$LEGACY"
 )"

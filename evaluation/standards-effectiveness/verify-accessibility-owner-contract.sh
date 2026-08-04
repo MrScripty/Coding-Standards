@@ -36,7 +36,11 @@ rg -F -q '[Accessibility](topics/accessibility.md)' "$R/STANDARDS-ROUTER.md"
 rg -F -q '[Accessibility](topics/accessibility.md)' "$R/ACCESSIBILITY-STANDARDS.md"
 rg -F -q $'STD-0007\tACCESSIBILITY-STANDARDS.md\ttopics/accessibility.md\tindex' \
   "$S/consolidation-dispositions.tsv"
-[[ "$(awk -F '\t' '$1==28&&($6!="exists"||$7!="pre-slice-review"){n++}END{print n+0}' \
+[[ "$(awk -F '\t' '$1==28&&$6!="exists"{n++}END{print n+0}' \
+  "$S/milestone-7-execution-decomposition.tsv")" -eq 0 ]]
+[[ "$(awk -F '\t' '$1==28&&$2==1{print $7}' \
+  "$S/milestone-7-execution-decomposition.tsv")" == owner-review ]]
+[[ "$(awk -F '\t' '$1==28&&$2>1&&$7!="pre-slice-review"{n++}END{print n+0}' \
   "$S/milestone-7-execution-decomposition.tsv")" -eq 0 ]]
 rg -F -q '`7.4b18b` (`Accepted`)' \
   "$R/plans/standards-library-effectiveness-restructure-plan.md"

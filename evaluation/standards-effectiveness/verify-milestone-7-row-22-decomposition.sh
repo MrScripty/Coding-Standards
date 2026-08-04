@@ -8,7 +8,7 @@ PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 mapfile -t ids < <(awk -F '\t' '$1 == 22 {n=split($3,a,","); for(i=1;i<=n;i++) print a[i]}' "$OVERLAY" | sort)
 expected=(STD-{0810..0820}); [[ "${ids[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' '$1 == 22 {print $2}' "$OVERLAY" | paste -sd ' ' -)" == '1 2 3 4 5 6 7' ]]
-[[ "$(awk -F '\t' '$1 == 22 && NF != 9 {n++} END {print n+0}' "$OVERLAY")" -eq 0 ]]
+[[ "$(awk -F '\t' '$1 == 22 && NF != 10 {n++} END {print n+0}' "$OVERLAY")" -eq 0 ]]
 mapfile -t validated < <(awk -F '\t' 'NR>1 {print $1}' "$VALIDATION")
 [[ "${validated[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' 'NR>1 && NF!=4 {n++} END {print n+0}' "$VALIDATION")" -eq 0 ]]

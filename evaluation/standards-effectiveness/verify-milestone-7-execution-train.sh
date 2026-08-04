@@ -51,6 +51,7 @@ while IFS=$'\t' read -r baseline_order child_order ids source owner owner_state 
   ((overlay_row_count += 1))
 done < "$DECOMPOSITION"
 [[ "$overlay_row_count" -gt 0 ]]
+"$SCRIPT_DIR/verify-verification-gate-model.sh"
 
 completed_cluster_count=0
 completed_id_count=0
@@ -154,7 +155,7 @@ while IFS=$'\t' read -r order wave start_id end_id source owner owner_state \
         [[ "$owner_transition_count" -eq 1 ]]
         [[ "$owner_state" == missing && "$overlay_owner" == "$owner" ]]
         [[ "$overlay_owner_state" == exists ]]
-        [[ "$overlay_activation" == pre-slice-review ]]
+        [[ "$overlay_activation" == owner-review ]]
         transition_disposed=0
         IFS=',' read -r -a transition_ids <<< "$ids"
         for transition_id in "${transition_ids[@]}"; do

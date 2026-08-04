@@ -7,18 +7,17 @@
 **Plan status:** `Active`
 
 **Current phase:** Rows 20 through 31 are accepted and closed. Row 32 has an
-accepted three-child Persistence decomposition, but execution is paused at a
-shared checkpoint-contract replan trigger.
+accepted three-child Persistence decomposition. The three-gate verification,
+stable owner-review activation, and frozen package-action recovery are accepted;
+the active execution cursor is Persistence child 32.1.
 
-**Next slice:** Milestone 7.4b22ar resolves the latent row 31 checkpoint mismatch:
-the immutable train declares `focused` while the accepted Diagnostics
-decomposition declares `full-suite`. Do not create Persistence policy until one
-canonical checkpoint contract is selected and verified.
+**Next slice:** Milestone 7.4b22b creates and routes the Persistence profile,
+recipe, owner evidence, and exact `STD-0106` index disposition.
 
-Monotonic-checkpoint prototyping exposed the inverse mismatch at row 14: its
-train minimum is `full-suite`, while accepted Launcher children are `focused`.
-`7.4b22ar` must therefore inventory every train/decomposition checkpoint pair
-and disposition all escalations and downgrades before checker semantics change.
+The three-gate recovery distinguishes focused child evidence, package
+integration gates, and immutable wave checkpoints. Activation is a stable review
+obligation, package owner action is frozen execution intent, and live completion
+is proved only by owner transition, owner presence, and exact dispositions.
 
 **Acceptance status:** `partial`
 
@@ -1877,10 +1876,19 @@ all structural/routing fixtures pass.
      migrate durable mutation and schema execution in two children while
      preserving Contracts, Resilience, Concurrency, Security, Build,
      Diagnostics, and Verification authority.
-   - `7.4b22ar` (`Planned`): reconcile row 31 immutable-train `focused` versus
-     accepted-decomposition `full-suite`, audit the complete overlay for inverse
-     downgrades including row 14, and freeze one monotonic checkpoint contract
-     before child 32.1.
+   - `7.4b22ar` (`Accepted`): distinguish focused child checks, package
+     integration gates, and immutable wave checkpoints; normalize rows 31 and
+     32; add cross-layer invariants and a canonical fail-fast suite runner; and
+     supersede affected aggregate claims.
+   - `7.4b22as` (`Accepted`): define activation as the stable review obligation,
+     require every `missing-to-exists` creation child to remain `owner-review`,
+     and align rows 28, 31, and 32 plus dependent assertions.
+   - `7.4b22at` (`Accepted`): define package `owner_action` as frozen execution
+     intent rather than live filesystem state; validate owner creation through
+     train baseline state, decomposition transition, current owner presence,
+     and exact dispositions; and reject undeclared or partial creation without
+     rewriting accepted package rows. Harden the fail-fast suite and historical
+     checkers so each mutable execution fact has one canonical verifier.
    - `7.4b22b` (`Planned`): create and route the Persistence profile, recipe,
      owner evidence, and `STD-0106` index.
    - `7.4b22c` (`Planned`): migrate `STD-0107` through `STD-0112` durable

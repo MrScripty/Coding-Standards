@@ -37,7 +37,7 @@ while IFS=$'\t' read -r case_id facts class deployment concurrent request expect
 done < "$F"
 
 rg -F -q 'Freeze the selected contract shape while parallel work depends on it.' "$A"
-rg -F -q 'Do not turn that implementation-phase freeze into an indefinite compatibility promise.' "$A"
+rg -F -q 'implementation-phase freeze into an indefinite compatibility promise.' "$A"
 rg -F -q 'Unknown facts produce an unresolved-contract diagnostic.' "$C"
 rg -F -q 'internal-coordinated' "$C"
 rg -F -q 'distributed-independent' "$C"

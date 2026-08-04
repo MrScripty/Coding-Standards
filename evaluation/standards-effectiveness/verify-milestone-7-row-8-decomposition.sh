@@ -44,8 +44,6 @@ rg -F -q '`7.4b8ab` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ac` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ad` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b8ae` (`Accepted`)' "$PLAN"
-next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-[[ "$next_slice_line" == *'row 25'* ]]
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"

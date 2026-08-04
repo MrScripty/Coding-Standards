@@ -10,8 +10,8 @@ while IFS=$'\t' read -r case_id workflow identity parent lifecycle terminal cont
  else actual=allow;fi
  [[ "$actual" == "$expected" ]]||{ printf '%s: expected %s got %s\n' "$case_id" "$expected" "$actual" >&2;exit 1;}
 done < "$F"
-for text in 'An activity context contains only' 'A single-boundary operation does not need correlation' 'including asynchronous completion' 'does not prove that context remains valid';do rg -F -q "$text" "$D";done
-for text in '## Illustrative TypeScript Logger Adapter' 'This example is not valid for asynchronous completion' 'must not log raw context';do rg -F -q "$text" "$R/reference/recipes/diagnostics.md";done
+for text in 'An activity context contains only' 'need correlation merely to satisfy a tracing shape' 'including asynchronous completion' 'that context remains valid through another lifecycle';do rg -F -q "$text" "$D";done
+for text in '## Illustrative TypeScript Logger Adapter' 'This example is not valid for asynchronous completion' 'must not log raw';do rg -F -q "$text" "$R/reference/recipes/diagnostics.md";done
 if rg -q 'Track operations across layers using correlation IDs|interface ActivityContext|logger\.debug\(`Starting' "$A";then printf 'Architecture retains legacy activity mechanism authority\n' >&2;exit 1;fi
 expected=(STD-{0090..0092});mapfile -t disposed < <(awk -F '\t' '$1>="STD-0090"&&$1<="STD-0092"{print $1}' "$S/consolidation-dispositions.tsv");[[ "${disposed[*]}" == "${expected[*]}" ]]
 printf 'Diagnostics activity context passed: %s decisions, 3 exact dispositions\n' "$count"

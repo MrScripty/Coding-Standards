@@ -53,15 +53,4 @@ mapfile -t actual < <(
 [[ "${actual[*]}" == "${expected[*]}" ]]
 
 rg -F -q '`7.4b9r` (`Accepted`)' "$PLAN"
-next_slice_block="$(awk '
-  /^\*\*Next slice:\*\*/ { capture = 1 }
-  capture && /^$/ { exit }
-  capture { print }
-' "$PLAN")"
-[[ "$next_slice_block" == *'row 25'* ]]
-for id in STD-0852 STD-0858; do
-  [[ "$next_slice_block" == *"$id"* ]]
-done
-[[ "$next_slice_block" == *'row 25'* ]]
-
 printf 'Dependency audit lineage passed: 12 decisions, 2 exact dispositions\n'

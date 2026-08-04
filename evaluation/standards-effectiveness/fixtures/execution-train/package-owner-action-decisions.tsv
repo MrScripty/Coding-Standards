@@ -1,0 +1,11 @@
+case	owner_action	baseline	prior_creation	risk	verification	integration_gate	expected
+existing_owner	existing-review	exists	no	consolidation	owner-contract	focused	allow
+closure_owner	closure-only	exists	no	mechanical	migration-structure	focused	allow
+creation_owner	create-before-populate	missing	no	new-owner-design	owner-contract	full-suite	allow
+population_owner	populate-after-create	missing	yes	consolidation	migration-structure	focused	allow
+creation_existing_baseline	create-before-populate	exists	no	new-owner-design	owner-contract	full-suite	typed-invalid
+creation_weak_gate	create-before-populate	missing	no	new-owner-design	owner-contract	focused	typed-invalid
+population_without_creation	populate-after-create	missing	no	consolidation	migration-structure	focused	typed-invalid
+population_existing_baseline	populate-after-create	exists	yes	consolidation	migration-structure	focused	typed-invalid
+existing_missing_baseline	existing-review	missing	no	consolidation	owner-contract	focused	typed-invalid
+unknown_action	implicit	exists	no	consolidation	owner-contract	focused	typed-invalid

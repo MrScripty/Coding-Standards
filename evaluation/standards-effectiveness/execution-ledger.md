@@ -7067,7 +7067,7 @@ authority and without fixed store or migration defaults.
 
 ## Milestone 7.4b22ar Checkpoint Contract Replan Trigger
 
-**Status:** Replan required.
+**Status:** Resolved by the three-gate verification recovery.
 
 Extending the execution overlay to row 32 exposed a latent mismatch for row 31:
 the immutable execution train records a `focused` checkpoint while both accepted
@@ -7085,6 +7085,113 @@ train's `full-suite` minimum to `focused`. The prototype was removed without
 commit. Recovery now requires a complete overlay checkpoint audit, explicit
 dispositions for every escalation and downgrade, checker self-tests, and
 fail-fast full-suite verification before Persistence owner creation.
+
+## Milestone 7.4b22ar Three-Gate Verification Recovery
+
+**Status:** Accepted.
+
+Child gates are focused, package integration gates govern owner-package
+acceptance, and five immutable train rows govern wave checkpoints. Rows 31 and
+32 were normalized without weakening their `P25` and `P26` full-suite package
+gates. The aggregate suite claims for row 31 and row 32 planning are superseded
+by the canonical fail-fast runner result from this recovery slice.
+
+The canonical runner stopped at its second checker because the shared train
+checker requires every completed `missing-to-exists` child to use
+`pre-slice-review`. Row 28 follows that representation, while accepted row 31
+and planned row 32 use `owner-review`. The transition and disposition fields
+already carry completion state, so activation must not also be rewritten as a
+completion marker.
+
+**Recommended resolution:** Treat activation as the stable review obligation.
+Every owner-creation child remains `owner-review`; normalize row 28 to match rows
+31 and 32; update the shared and row-specific assertions; add negative evidence
+against `pre-slice-review` creation; and rerun the canonical fail-fast suite.
+
+**Rejected alternatives:** Rewriting activation from `owner-review` to
+`pre-slice-review` after completion makes accepted decomposition history
+stateful and duplicates transition state. Adding another lifecycle field is
+unnecessary because `owner_transition`, owner presence, and exact dispositions
+already express pending versus complete.
+
+**Acceptance:** The three-gate model is canonical: every decomposition child has
+a focused gate, package rows carry their declared integration gate, and five
+immutable train checkpoints retain wave-level full-suite authority. The
+canonical runner executes every top-level verifier in lexical order and stops
+at the first failure.
+
+**Next slice:** `7.4b22as`, resolve owner-creation activation before Persistence
+source movement.
+
+## Milestone 7.4b22as Stable Owner-Review Recovery
+
+**Status:** Accepted.
+
+The stable activation correction passes focused checks. Every
+`missing-to-exists` child now requires `owner-review`; seven activation decisions
+reject completion-derived activation and unknown values. The execution train
+reports row `32.1` active with 465 completed and 124 remaining identifiers.
+
+The canonical fail-fast suite then exposed a separate package lifecycle
+conflict. `milestone-7-accelerated-packages.tsv` freezes
+`create-before-populate` for Accessibility, Diagnostics, Persistence, and the
+Architecture reference owner, but its checker requires every such owner to be
+absent on the live filesystem. Accessibility and Diagnostics now exist, so an
+accepted frozen package becomes invalid immediately after successful creation.
+
+**Recommended resolution:** Keep `owner_action` as stable execution intent.
+Validate `create-before-populate` against the immutable train's missing baseline
+and require exactly one decomposition `missing-to-exists` transition. Use owner
+presence plus transition dispositions to distinguish pending, complete, and
+invalid partial creation. Do not rewrite accepted package rows.
+
+**Rejected alternatives:** Mutating package action after completion rewrites
+accepted planning history. Adding package lifecycle state duplicates the
+existing transition, owner-presence, and disposition evidence.
+
+**Acceptance:** Activation now records the stable review obligation rather than
+completion state. All `missing-to-exists` children require `owner-review`, and
+seven positive and negative decisions reject completion-derived or unknown
+activation values.
+
+**Next slice:** `7.4b22at`, repair package-action lifecycle validation and rerun
+the canonical fail-fast suite before Persistence source movement.
+
+## Milestone 7.4b22at Frozen Package-Action Recovery
+
+**Status:** Accepted.
+
+Package `owner_action` now records frozen execution intent. A
+`create-before-populate` package must originate from a missing train-baseline
+owner and have exactly one `missing-to-exists` decomposition transition;
+`populate-after-create` requires that earlier creation package. Live owner
+presence and exact transition dispositions prove pending or completed creation
+without rewriting accepted package rows or adding duplicate lifecycle state.
+
+Ten package-action decisions cover valid creation and population plus wrong
+baseline state, missing transition, duplicate transition, population without a
+creator, undeclared action, and action/state mismatch. The accelerated checker
+passes 43 rows, 40 packages, and four creation owners.
+
+Fail-fast execution also exposed checker defects that had been masked by
+aggregate invocation: historical row and owner checkers duplicated the mutable
+plan cursor or a future row's status; several exact-text assertions depended on
+Markdown line wrapping; the runtime-decoding legacy extractor used a removed
+heading as its terminator; and row 20 through 22 verifiers still required the
+pre-transition nine-column decomposition schema. Those checkers now validate
+stable historical contracts, while the execution-train checker alone owns the
+live cursor and canonical ten-column decomposition state.
+
+**Verification:** owner-state transitions passed 11 state and seven activation
+decisions; the verification-gate model passed focused children, 23 package
+gates, and five wave checkpoints; the execution train passed 589 baseline IDs,
+465 completed IDs, 124 remaining IDs, and active row 32.1; the downstream suite
+passed 136 checkers. The final canonical complete-suite result is recorded by
+the acceptance commit: all 214 top-level checkers passed after the recovery and
+plan update.
+
+**Next slice:** `7.4b22b`, create and route the Persistence owner before moving
+any durable-state semantics.
 
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 

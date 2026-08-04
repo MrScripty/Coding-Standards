@@ -14,7 +14,7 @@ mapfile -t ids < <(awk -F '\t' '$1 == 21 {
 expected=(STD-{0731..0751})
 [[ "${ids[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' '$1 == 21 {print $2}' "$OVERLAY" | paste -sd ' ' -)" == '1 2 3 4 5 6 7' ]]
-[[ "$(awk -F '\t' '$1 == 21 && NF != 9 {n++} END {print n+0}' "$OVERLAY")" -eq 0 ]]
+[[ "$(awk -F '\t' '$1 == 21 && NF != 10 {n++} END {print n+0}' "$OVERLAY")" -eq 0 ]]
 
 mapfile -t validated < <(awk -F '\t' 'NR > 1 {print $1}' "$VALIDATION")
 [[ "${validated[*]}" == "${expected[*]}" ]]

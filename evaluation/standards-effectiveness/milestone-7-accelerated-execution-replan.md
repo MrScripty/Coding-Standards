@@ -168,6 +168,13 @@ prerequisites, precedence, semantic outcome, candidate IDs, fixture family,
 shared-file effects, and escalation conditions before normative movement.
 Later population is consolidation work only when that contract remains valid.
 
+`owner_action` records that frozen execution intent, not live progress.
+`create-before-populate` remains attached after successful owner creation, and
+`populate-after-create` records an ordering dependency on an earlier creation
+package. The immutable train baseline proves whether an owner originally
+existed; decomposition transitions, exact dispositions, and current owner
+presence prove whether creation is pending or complete.
+
 ## Parallel Work
 
 `isolated-draft` packages may be analyzed or drafted concurrently only when

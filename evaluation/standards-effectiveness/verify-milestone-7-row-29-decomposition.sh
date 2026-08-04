@@ -21,7 +21,7 @@ mapfile -t validated < <(awk -F '\t' 'NR>1{print $1}' "$V")
 for text in \
   '## Owner Contract' \
   'sole normative owner' \
-  'implementation freeze' \
+  'freeze coordinates concurrent work' \
   '## Exact Dispositions' \
   '`STD-0046` through `STD-0050`' \
   '`29.1`' \

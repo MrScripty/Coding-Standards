@@ -17,7 +17,7 @@ mapfile -t ids < <(
 expected=(STD-{0706..0716})
 [[ "${ids[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' '$1 == 20 {print $2}' "$OVERLAY" | paste -sd ' ' -)" == '1 2 3 4 5 6' ]]
-[[ "$(awk -F '\t' '$1 == 20 && NF != 9 {n++} END {print n+0}' "$OVERLAY")" -eq 0 ]]
+[[ "$(awk -F '\t' '$1 == 20 && NF != 10 {n++} END {print n+0}' "$OVERLAY")" -eq 0 ]]
 
 mapfile -t validated < <(awk -F '\t' 'NR > 1 {print $1}' "$VALIDATION")
 [[ "${validated[*]}" == "${expected[*]}" ]]
@@ -60,15 +60,5 @@ rg -F -q '`7.4b11e` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b11f` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b11g` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4b11h` (`Accepted`)' "$PLAN"
-next_slice_block="$(awk '
-  /^\*\*Next slice:\*\*/ { capture = 1 }
-  capture && /^$/ { exit }
-  capture { print }
-' "$PLAN")"
-for id in STD-0852 STD-0858; do
-  [[ "$next_slice_block" == *"$id"* ]]
-done
-[[ "$next_slice_block" == *'row 25'* ]]
-
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-20 decomposition passed: 11 IDs across 6 children\n'
