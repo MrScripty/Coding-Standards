@@ -35,6 +35,5 @@ for id in STD-0654 STD-0655 STD-0660 STD-0662 STD-0664 STD-0665 STD-0666 STD-067
     "$S/consolidation-dispositions.tsv"
 done
 
-rg -F -q '[workflows/tooling.md](workflows/tooling.md)' "$R/README.md"
 rg -F -q '[Tooling](workflows/tooling.md)' "$R/STANDARDS-ROUTER.md"
 printf 'Tooling owner contract passed: 12 decisions, 14 exact dispositions\n'

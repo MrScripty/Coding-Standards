@@ -113,7 +113,7 @@ for text in "${required_profile[@]}"; do
   rg -F -q "$text" "$PROFILE"
 done
 
-for file in "$REPO_ROOT/README.md" "$LEGACY"; do
+for file in "$LEGACY"; do
   rg -F -q 'profiles/languages/rust/interop.md' "$file"
 done
 rg -F -q '(interop.md)' "$RUST_INDEX"

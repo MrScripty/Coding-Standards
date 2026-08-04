@@ -31,7 +31,6 @@ for text in 'ID: `reference.recipes.accessibility`' \
   'This material is non-normative' '## Adapting A Mechanism'; do
   rg -F -q "$text" "$R/reference/recipes/accessibility.md"
 done
-rg -F -q '[topics/accessibility.md](topics/accessibility.md)' "$R/README.md"
 rg -F -q '[Accessibility](topics/accessibility.md)' "$R/STANDARDS-ROUTER.md"
 rg -F -q '[Accessibility](topics/accessibility.md)' "$R/ACCESSIBILITY-STANDARDS.md"
 rg -F -q $'STD-0007\tACCESSIBILITY-STANDARDS.md\ttopics/accessibility.md\tindex' \

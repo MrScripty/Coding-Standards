@@ -103,7 +103,7 @@ for text in "${required_profile[@]}"; do
   rg -F -q "$text" "$PROFILE"
 done
 
-for file in "$REPO_ROOT/README.md" "$REPO_ROOT/STANDARDS-ROUTER.md" "$LEGACY"; do
+for file in "$REPO_ROOT/STANDARDS-ROUTER.md" "$LEGACY"; do
   rg -F -q 'profiles/boundaries/language-bindings.md' "$file"
 done
 

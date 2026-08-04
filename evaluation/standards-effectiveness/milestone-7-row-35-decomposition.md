@@ -32,8 +32,9 @@ but those links never establish applicability or canonical ownership.
 
 1. `35.1`: migrate `STD-0001` through `STD-0003`; create one table-driven
    root-route verifier; remove positive root-README route and catalog assertions
-   listed in the frozen dependency audit; and leave the remaining resource,
-   adoption, and license sections untouched.
+   listed in the frozen transitive dependency audit; execute every direct caller
+   of an amended shared checker; and leave the remaining resource, adoption,
+   and license sections untouched.
 2. `35.2`: migrate `STD-0004` through `STD-0006`; close README as a concise
    non-normative entrypoint; add source-purity and exact-disposition evidence;
    and run the P29 full-suite package gate.
@@ -44,8 +45,14 @@ gate because root-index closure changes a shared navigation surface.
 ## Bounded Write Sets
 
 Child `35.1` may touch the root README through the document-catalog boundary,
-the dependency-audit-listed checker files, a root-route fixture and verifier,
-the three exact dispositions, the row checker, plan, and ledger.
+the dependency-audit-listed checker files, the frozen shared-checker caller
+manifest, the complete README-consumer classification manifest and verifier, a
+root-route fixture and verifier, the three exact dispositions, the row checker,
+plan, and ledger. The dependency audit contains 31 direct README consumers, one
+shared transitive consumer, and one computed-path consumer. All direct callers
+of the shared checker must remain enumerated and pass before acceptance. Every
+remaining verifier containing `README.md` must have exactly one file-level root
+and non-root classification.
 
 Child `35.2` may touch the root README, a root-index closure fixture and
 verifier, the remaining three exact dispositions, the row checker, plan, and
@@ -64,5 +71,5 @@ continue through a README fallback.
 
 Stop if implementation requires routing policy in README, a new canonical
 module owner, generated catalog machinery, changes outside the frozen checker
-audit, multiple dispositions per identifier, preservation of the manual
-`When to Use` catalog, or a third semantic child.
+or caller audits, multiple dispositions per identifier, preservation of the
+manual `When to Use` catalog, or a third semantic child.

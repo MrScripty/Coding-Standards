@@ -107,7 +107,7 @@ required_profile=(
 for text in "${required_profile[@]}"; do rg -F -q "$text" "$PROFILE"; done
 
 rg -F -q '(language-bindings.md)' "$RUST_INDEX"
-rg -F -q 'profiles/languages/rust/language-bindings.md' "$REPO_ROOT/README.md" "$LEGACY"
+rg -F -q 'profiles/languages/rust/language-bindings.md' "$LEGACY"
 rg -F -q 'Rust specialization' "$GENERIC"
 
 legacy_forbidden=(

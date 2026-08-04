@@ -1,4 +1,7 @@
 id	source	target	disposition	rationale
+STD-0001	README.md	STANDARDS-ROUTER.md	index	legacy root parent becomes a non-normative entrypoint to canonical Router authority
+STD-0002	README.md	STANDARDS-ROUTER.md	split	Router owns module selection while adopting repositories own project contracts and exceptions
+STD-0003	README.md	STANDARDS-ROUTER.md	index	manual document applicability catalog yields to Router conditions and canonical metadata
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults

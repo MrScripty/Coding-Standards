@@ -6,7 +6,6 @@ readonly R="$(cd -- "$S/../.." && pwd)"
 readonly FIXTURE="$S/fixtures/godot/owner-contract-decisions.tsv"
 readonly OWNER="$R/profiles/frameworks/godot.md"
 readonly ROUTER="$R/STANDARDS-ROUTER.md"
-readonly README="$R/README.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
 readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
@@ -48,7 +47,6 @@ for text in \
 done
 
 rg -F -q 'Godot object, node, scene-tree, signal, resource, thread-affinity, deferred-dispatch, or object-lifetime mechanism changes' "$ROUTER"
-rg -F -q '[profiles/frameworks/godot.md](profiles/frameworks/godot.md)' "$README"
 
 mapfile -t dispositions < <(
   awk -F '\t' 'NR > 1 && $1 >= "STD-0277" && $1 <= "STD-0279" {

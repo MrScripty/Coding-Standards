@@ -52,7 +52,6 @@ done
 
 rg -F -q '[Tooling recipe](reference/recipes/tooling.md#hook-feedback)' "$L"
 rg -F -q '[Tooling recipe](reference/recipes/tooling.md#lefthook-example)' "$L"
-rg -F -q '[reference/recipes/tooling.md](reference/recipes/tooling.md)' "$R/README.md"
 ! rg -F -q '### Recommended Tool: Lefthook' "$L"
 ! rg -F -q 'npm install lefthook --save-dev' "$L"
 ! rg -F -q 'curl -sSfL https://get.lh.run | sh' "$L"

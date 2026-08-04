@@ -1,88 +1,25 @@
 # Standards Library
 
 Reusable engineering standards with routed workflows, profiles, topics, and
-reference material.
+non-normative reference material.
 
-## Quick Start
+Canonical applicability and dependency selection are owned by the
+[Standards Router](STANDARDS-ROUTER.md). This README is a repository entrypoint;
+it does not select modules or establish canonical ownership.
+
+## Start Here
 
 1. Read [Core Standards](CORE-STANDARDS.md).
-2. Use the [Standards Router](STANDARDS-ROUTER.md) to select only applicable
-   workflows, profiles, and topics.
+2. Use the [Standards Router](STANDARDS-ROUTER.md) to select guidance from
+   observable task and repository facts.
 3. Record project-specific contracts and exceptions in the adopting
-   repository.
-4. Copy a template or tool only when routed guidance requires it.
-5. Reference the adopted standards version in the project's main README.
+   repository through the selected canonical owners.
 
-## Documents
+Unknown applicability is a Router diagnostic. Do not read every document,
+select guidance from this README, or use a linked module as fallback authority.
 
-| Document | Purpose | When to Use |
-|----------|---------|-------------|
-| [CORE-STANDARDS.md](CORE-STANDARDS.md) | Universal ownership, boundary, failure, lifecycle, quality, and verification invariants | Every adopted project |
-| [STANDARDS-ROUTER.md](STANDARDS-ROUTER.md) | Applicability, exclusions, dependency routing, and migration authority | Start of every task |
-| [workflows/implementation.md](workflows/implementation.md) | Bounded implementation slices and commit boundary | Any repository change |
-| [workflows/commit.md](workflows/commit.md) | Atomic commits, branch review, and explicit history-rewrite authority | Commit creation or history maintenance |
-| [workflows/planning.md](workflows/planning.md) | Active plans, lifecycle, re-planning, and delegated ownership | Multi-step or high-risk work |
-| [workflows/verification.md](workflows/verification.md) | Objective-aligned evidence selection | Any acceptance claim |
-| [workflows/documentation.md](workflows/documentation.md) | Proportional durable documentation and traceability profiles | Responsibility, decision, contract, or operational-boundary changes |
-| [workflows/build.md](workflows/build.md) | Build-time action, input/output, invalidation, side-effect, environment, and determinism contracts | Changing build programs, generated outputs, native integration, or build behavior |
-| [workflows/release.md](workflows/release.md) | Release applicability, versioning, changelog, contract, and acceptance boundaries | Shipping artifacts or changing published promises |
-| [reference/recipes/commits.md](reference/recipes/commits.md) | Non-normative staging and conventional commit examples | Formatting a commit after the workflow has selected process rules |
-| [reference/recipes/documentation.md](reference/recipes/documentation.md) | Non-normative comment, Markdown, public-interface, and algorithm examples | Applying a selected documentation requirement |
-| [reference/recipes/releases.md](reference/recipes/releases.md) | Non-normative changelog automation example | Configuring a selected release tool |
-| [reference/recipes/persistence.md](reference/recipes/persistence.md) | Non-normative durable-state mechanism adaptation boundary | Applying a selected Persistence boundary contract |
-| [reference/recipes/tooling.md](reference/recipes/tooling.md) | Non-normative hook runner examples | Configuring an already selected tooling mechanism |
-| [reference/recipes/rust-dependencies.md](reference/recipes/rust-dependencies.md) | Non-normative Cargo dependency inspection examples | Applying an accepted Rust dependency inspection contract |
-| [topics/contracts.md](topics/contracts.md) | Runtime decoding proof, contract classes, migration, compatibility, degraded outcomes, and typed diagnostics | Boundary decoding, contract evolution, persisted state, or fallback decisions |
-| [topics/concurrency.md](topics/concurrency.md) | Shared-state coordination, lock boundaries, nonblocking async lifecycle, failure observation, and cancellation ownership | Concurrent state or asynchronous work with lifecycle obligations |
-| [topics/dependencies.md](topics/dependencies.md) | Dependency requirements, ownership, selection, resolution, provisioning, and lifecycle policy | Adding, changing, resolving, installing, updating, or removing a dependency |
-| [workflows/tooling.md](workflows/tooling.md) | Development-tool selection, configuration, automation, scheduling, cost, and reporting | Changing development tools, hooks, CI orchestration, or automation configuration |
-| [topics/licensing.md](topics/licensing.md) | Third-party provenance, license authority, compatibility, obligations, attribution, and distribution evidence | Incorporating, adapting, generating from, or distributing third-party material |
-| [topics/performance.md](topics/performance.md) | Performance claims, measurement contracts, optimization decisions, benchmarks, and regression evidence | Changing performance budgets, measurements, optimizations, or resource-use claims |
-| [topics/architecture.md](topics/architecture.md) | Concern boundaries, dependency direction, data/state authority, services, and runtime composition | Changing architectural ownership or boundaries |
-| [topics/accessibility.md](topics/accessibility.md) | Modality-neutral user-access outcomes, conformance obligations, typed diagnostics, and evidence boundaries | Changing user-facing behavior or accessibility claims |
-| [topics/diagnostics.md](topics/diagnostics.md) | Diagnostic purpose, audience, causal context, projection lifecycle, disclosure, and typed outcomes | Changing diagnostic context, propagation, reporting, retention, or claims |
-| [topics/security.md](topics/security.md) | Canonical untrusted-input authority and filesystem-containment policy | Untrusted values authorizing operations or resource access |
-| [topics/cross-platform.md](topics/cross-platform.md) | Canonical path construction and filesystem-identity policy | Path behavior across supported platforms or filesystems |
-| [profiles/boundaries/interop.md](profiles/boundaries/interop.md) | Foreign memory, resource authority, lifecycle, thread, and validated-adapter contracts | Foreign pointers, handles, callbacks, runtimes, or resources |
-| [profiles/boundaries/ipc.md](profiles/boundaries/ipc.md) | Action-specific message decoding and validated-variant dispatch | Structured data crossing process, message, worker, plugin-host, or independently deployed component boundaries |
-| [profiles/boundaries/language-bindings.md](profiles/boundaries/language-bindings.md) | Binding mechanisms, representation categories, thin adapters, conversion outcomes, and generated wrappers | Host-language APIs, generated bindings, stable ABIs, serialized values, or opaque handles |
-| [profiles/boundaries/persistence.md](profiles/boundaries/persistence.md) | Durable-state authority, mechanism selection, boundary ownership, typed outcomes, and evidence | Durable read, write, publication, transaction, migration, ledger, or store-mutation boundaries |
-| [profiles/applications/library.md](profiles/applications/library.md) | Reusable library ownership and consumer conditions | Library/package changes |
-| [profiles/applications/launcher.md](profiles/applications/launcher.md) | Launcher command projection, procedure delegation, process lifecycle, and outcome preservation | Repository launcher or launcher-visible action changes |
-| [profiles/applications/frontend.md](profiles/applications/frontend.md) | Frontend projection, rendering, synchronization, interaction, and evidence boundaries | Web or web-technology user-interface changes |
-| [profiles/frameworks/godot.md](profiles/frameworks/godot.md) | Godot engine affinity, dispatch ownership, and point-of-use object lifetime | Godot thread, deferred-dispatch, or object-lifetime mechanisms |
-| [profiles/languages/csharp/async.md](profiles/languages/csharp/async.md) | C# continuation scheduling, affinity, invocation isolation, and typed outcomes | C# async continuation or affinity mechanisms |
-| [profiles/languages/typescript.md](profiles/languages/typescript.md) | TypeScript public surfaces, inference, runtime decoding, and contract-type projection | TypeScript source, declarations, compiler configuration, generated types, or consumer surfaces |
-| [profiles/languages/typescript/async.md](profiles/languages/typescript/async.md) | TypeScript current-invocation authority, terminal classification, cancellation, and state application | Overlapping TypeScript async operations or stale results |
-| [profiles/languages/rust/README.md](profiles/languages/rust/README.md) | Rust mechanisms and focused verification | Rust-owned changes |
-| [profiles/languages/rust/api.md](profiles/languages/rust/api.md) | Rust public API trait, parameter, ownership, and typed mechanism selection | Rust public or boundary-facing API mechanism changes |
-| [profiles/languages/rust/dependencies.md](profiles/languages/rust/dependencies.md) | Rust and Cargo dependency expression and inspection mechanisms | Cargo dependency declaration, workspace, resolver, graph, audit-adapter, or measurement changes |
-| [profiles/languages/rust/release.md](profiles/languages/rust/release.md) | Rust and Cargo release expression and evidence mechanisms | Rust toolchain, package/workspace release metadata, publication control, release adapter, or release evidence changes |
-| [profiles/languages/rust/tooling.md](profiles/languages/rust/tooling.md) | Rust and Cargo tooling adapter mechanisms | Rust formatting, lint, test-runner, feature-matrix, benchmark, coverage, diagnostic, or build-script adapter changes |
-| [profiles/languages/rust/async.md](profiles/languages/rust/async.md) | Rust async applicability and contract-driven sync/async boundary selection | Rust async APIs, suspension boundaries, concurrent I/O, streams, backpressure, cancellation, or async resource lifetimes |
-| [profiles/languages/rust/cross-platform.md](profiles/languages/rust/cross-platform.md) | Rust target contracts, configuration placement, and claim-matched evidence | Rust target contracts, triples, support claims, target-dependent mechanisms/artifacts, or target evidence |
-| [profiles/languages/rust/interop.md](profiles/languages/rust/interop.md) | Checked dimensions, raw-slice preconditions, callback lifetimes, and copy-after-proof | Rust access to foreign memory or borrowed callback data |
-| [profiles/languages/rust/language-bindings.md](profiles/languages/rust/language-bindings.md) | Rust binding representations, fallible conversion, and native/host evidence | Rust APIs exposed through another language |
-| [CODING-STANDARDS.md](CODING-STANDARDS.md) | Code organization, simplicity/complection guidance, layering, service independence, runtime wiring guidance | Setting up any new codebase |
-| [TESTING-STANDARDS.md](TESTING-STANDARDS.md) | Test placement strategy, naming, coverage, vertical slices, and cross-layer verification guidance | Writing maintainable tests |
-| [COMMIT-STANDARDS.md](COMMIT-STANDARDS.md) | Migration index, conventional commit syntax, and message examples | Existing links and commit-message reference |
-| [ARCHITECTURE-PATTERNS.md](ARCHITECTURE-PATTERNS.md) | System design patterns, monorepo package roles, executable contracts, composition roots, and resilient workflow coordination | Multi-layer, client-server, monorepo, or service-oriented apps |
-| [TOOLING-STANDARDS.md](TOOLING-STANDARDS.md) | Linting, hooks, automation | Enforcing code quality |
-| [FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md) | Remaining frontend mechanism and testing guidance pending canonical population | Existing links and unmoved frontend concerns |
-| [DOCUMENTATION-STANDARDS.md](DOCUMENTATION-STANDARDS.md) | Migration index for canonical documentation, release, and recipe owners | Existing links only |
-| [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) | Remaining string sanitization and network transport guidance | Security concerns not yet migrated to canonical topics and profiles |
-| [CONCURRENCY-STANDARDS.md](CONCURRENCY-STANDARDS.md) | Migration index plus remaining language-specific concurrency material | Existing links and unmoved language-specific concerns |
-| [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) | Remaining platform abstraction, native library, and CI guidance | Cross-platform concerns not yet migrated to topics |
-| [INTEROP-STANDARDS.md](INTEROP-STANDARDS.md) | Migration index plus remaining event, cross-language contract, and serialization guidance | Existing links and unmoved interop concerns |
-| [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Migration index for canonical Language Binding boundary guidance | Existing links only |
-| [DEPENDENCY-STANDARDS.md](DEPENDENCY-STANDARDS.md) | Migration index for canonical dependency and related policy owners | Existing links only |
-| [PLAN-STANDARDS.md](PLAN-STANDARDS.md) | Migration index for planning guidance | Existing links only |
-| [LAUNCHER-STANDARDS.md](LAUNCHER-STANDARDS.md) | `launcher.sh` contract, lifecycle flags, dependency checks, and app startup | Standardizing app entry points and setup workflows |
-| [LANGUAGE-BINDINGS-STANDARDS.md](LANGUAGE-BINDINGS-STANDARDS.md) | Binding architecture, FFI wrapper design, code generation, type mapping | Exposing a core library to multiple target languages |
-| [RELEASE-STANDARDS.md](RELEASE-STANDARDS.md) | Migration index for canonical release workflow and recipe reference | Existing links only |
-| [ACCESSIBILITY-STANDARDS.md](ACCESSIBILITY-STANDARDS.md) | Migration index plus accessibility semantics awaiting ordered canonical population | Existing links and unmoved accessibility concerns |
-| [reference/recipes/accessibility.md](reference/recipes/accessibility.md) | Non-normative accessibility mechanism adaptation boundary | Applying an accepted accessibility outcome through a selected platform mechanism |
-| [languages/README.md](languages/README.md) | Language-specific extensions to the generic standards | Rust and future language-specific rules |
+The remaining template, customization, and license sections are scheduled for
+closure in row 35.2. They cannot override Core or Router.
 
 ## Templates
 

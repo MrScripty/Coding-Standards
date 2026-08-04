@@ -153,7 +153,7 @@ for text in "${required_security[@]}"; do
   rg -F -q "$text" "$SECURITY"
 done
 
-for file in "$REPO_ROOT/README.md" "$REPO_ROOT/STANDARDS-ROUTER.md"; do
+for file in "$REPO_ROOT/STANDARDS-ROUTER.md"; do
   rg -F -q 'profiles/boundaries/ipc.md' "$file"
 done
 rg -F -q 'profiles/boundaries/ipc.md' "$LEGACY_ARCH"

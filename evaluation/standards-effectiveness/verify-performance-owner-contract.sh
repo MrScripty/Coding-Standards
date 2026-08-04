@@ -25,7 +25,6 @@ for text in 'ID: `topic.performance`' '## Performance Claim Authority' \
   'Documentation records durable claim'; do
   rg -F -q "$text" "$R/topics/performance.md"
 done
-rg -F -q '[topics/performance.md](topics/performance.md)' "$R/README.md"
 rg -F -q '[Performance](topics/performance.md)' "$R/STANDARDS-ROUTER.md"
 rg -F -q '[Performance](topics/performance.md)' "$R/CODING-STANDARDS.md"
 ! rg -F -q 'Avoid allocations in hot paths' "$R/CODING-STANDARDS.md"

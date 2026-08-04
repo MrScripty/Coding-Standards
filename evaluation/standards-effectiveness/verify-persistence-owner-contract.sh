@@ -13,6 +13,6 @@ done < "$F"
 for text in 'ID: `profile.boundary.persistence`' '## Durable Boundary Authority' '## Select The Durable Mechanism' '## Responsibility Boundaries' 'does not own every in-memory mutation' '## Typed Outcomes And No Fallback' 'nearby weaker store' '## Verification';do rg -F -q "$text" "$D";done
 for text in 'ID: `reference.recipes.persistence`' 'This material is non-normative' '## Adapting A Mechanism' 'examples rather than defaults';do rg -F -q "$text" "$R/reference/recipes/persistence.md";done
 "$S/check-metadata.sh" "$R" "$R/CORE-STANDARDS.md" "$R/workflows/verification.md" "$R/topics/contracts.md" "$D" "$R/reference/recipes/persistence.md"
-rg -F -q '[profiles/boundaries/persistence.md](profiles/boundaries/persistence.md)' "$R/README.md";rg -F -q '[Persistence boundary profile](profiles/boundaries/persistence.md)' "$R/STANDARDS-ROUTER.md";rg -F -q '[Persistence boundary profile]' "$R/ARCHITECTURE-PATTERNS.md"
+rg -F -q '[Persistence boundary profile](profiles/boundaries/persistence.md)' "$R/STANDARDS-ROUTER.md";rg -F -q '[Persistence boundary profile]' "$R/ARCHITECTURE-PATTERNS.md"
 rg -F -q $'STD-0106\tARCHITECTURE-PATTERNS.md\tprofiles/boundaries/persistence.md\tindex' "$S/consolidation-dispositions.tsv"
 printf 'Persistence owner contract passed: %s decisions, 1 disposition\n' "$count"

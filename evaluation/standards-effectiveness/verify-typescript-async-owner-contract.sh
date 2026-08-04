@@ -6,7 +6,6 @@ readonly R="$(cd -- "$S/../.." && pwd)"
 readonly FIXTURE="$S/fixtures/typescript/async-owner-contract-decisions.tsv"
 readonly OWNER="$R/profiles/languages/typescript/async.md"
 readonly ROUTER="$R/STANDARDS-ROUTER.md"
-readonly README="$R/README.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
 readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
@@ -46,7 +45,6 @@ for text in \
 done
 
 rg -F -q 'TypeScript `Promise`, overlapping invocation, stale-result, cancellation, or async state-application mechanism changes' "$ROUTER"
-rg -F -q '[profiles/languages/typescript/async.md](profiles/languages/typescript/async.md)' "$README"
 
 mapfile -t dispositions < <(
   awk -F '\t' 'NR > 1 && ($1 == "STD-0275" || $1 == "STD-0276") {

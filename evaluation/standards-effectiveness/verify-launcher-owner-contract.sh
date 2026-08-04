@@ -6,7 +6,6 @@ readonly R="$(cd -- "$S/../.." && pwd)"
 readonly FIXTURE="$S/fixtures/launcher/owner-contract-decisions.tsv"
 readonly OWNER="$R/profiles/applications/launcher.md"
 readonly ROUTER="$R/STANDARDS-ROUTER.md"
-readonly README="$R/README.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly TRAIN="$S/milestone-7-execution-train.tsv"
 readonly PACKAGES="$S/milestone-7-accelerated-packages.tsv"
@@ -47,7 +46,6 @@ for text in \
 done
 
 rg -F -q 'Common application launcher command projection, lifecycle, delegation, or outcome-preservation contract is required' "$ROUTER"
-rg -F -q '[profiles/applications/launcher.md](profiles/applications/launcher.md)' "$README"
 
 mapfile -t dispositions < <(
   awk -F '\t' 'NR > 1 && $1 >= "STD-0487" && $1 <= "STD-0512" {

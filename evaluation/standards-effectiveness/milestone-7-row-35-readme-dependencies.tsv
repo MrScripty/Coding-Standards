@@ -2,6 +2,8 @@ file	current_dependency	replacement
 evaluation/standards-effectiveness/verify-accessibility-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-build-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-concurrency-policy.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
+evaluation/standards-effectiveness/verify-commit-authority.sh	computed-root-readme-route-assertion	canonical-router-or-owner-evidence
+evaluation/standards-effectiveness/verify-contract-ownership.sh	transitive-root-readme-route-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-csharp-async-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-dependencies-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-diagnostics-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence

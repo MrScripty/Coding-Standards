@@ -6,7 +6,6 @@ readonly R="$(cd -- "$S/../.." && pwd)"
 readonly FIXTURE="$S/fixtures/csharp/async-owner-contract-decisions.tsv"
 readonly OWNER="$R/profiles/languages/csharp/async.md"
 readonly ROUTER="$R/STANDARDS-ROUTER.md"
-readonly README="$R/README.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
 readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
@@ -45,7 +44,6 @@ for text in \
 done
 
 rg -F -q 'C# `await`, `Task`, continuation scheduling, synchronization context, or thread-affinity mechanism changes' "$ROUTER"
-rg -F -q '[profiles/languages/csharp/async.md](profiles/languages/csharp/async.md)' "$README"
 
 disposition="$(
   awk -F '\t' 'NR > 1 && $1 == "STD-0273" {

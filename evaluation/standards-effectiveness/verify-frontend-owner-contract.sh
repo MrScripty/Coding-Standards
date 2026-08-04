@@ -24,8 +24,6 @@ for text in 'ID: `profile.application.frontend`' '## Projection Authority' \
   'not interaction proof'; do
   rg -F -q "$text" "$R/profiles/applications/frontend.md"
 done
-rg -F -q '[profiles/applications/frontend.md](profiles/applications/frontend.md)' \
-  "$R/README.md"
 rg -F -q '[Frontend application profile](profiles/applications/frontend.md)' \
   "$R/STANDARDS-ROUTER.md"
 rg -F -q '[Frontend application profile](profiles/applications/frontend.md)' \

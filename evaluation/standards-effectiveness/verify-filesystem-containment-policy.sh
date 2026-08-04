@@ -111,7 +111,7 @@ done < <(tail -n +2 "$DISPOSITIONS")
   "$SECURITY" \
   "$CROSS_PLATFORM"
 
-for file in "$REPO_ROOT/README.md" "$REPO_ROOT/STANDARDS-ROUTER.md"; do
+for file in "$REPO_ROOT/STANDARDS-ROUTER.md"; do
   rg -F -q 'topics/security.md' "$file"
   rg -F -q 'topics/cross-platform.md' "$file"
 done

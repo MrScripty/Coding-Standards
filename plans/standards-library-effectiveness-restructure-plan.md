@@ -6,13 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 34 are accepted and closed. Row 35 is
-decomposed into two serial root-index closure children with 31 frozen checker
-dependencies. The immutable cursor is child 35.1.
+**Current phase:** Rows 20 through 34 are accepted and closed. Row 35 child
+35.1 is accepted: root route evidence is centralized under Router, the manual
+document applicability catalog is removed, and every README-bearing verifier
+has an explicit content-aware classification. The immutable cursor is child
+35.2.
 
-**Next slice:** Milestone 7.4b25b migrates `STD-0001`, `STD-0002`, and
-`STD-0003`, centralizes canonical route evidence, and removes root README
-applicability and manual document-catalog authority.
+**Next slice:** Milestone 7.4b25c migrates `STD-0004`, `STD-0005`, and
+`STD-0006`, closes README as a concise non-normative entrypoint, and runs the
+P29 full-suite integration gate.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1927,9 +1929,10 @@ all structural/routing fixtures pass.
    - `7.4b25a` (`Accepted`): decompose row 35 `STD-0001` through `STD-0006`
      for README router and reference-index closure without changing normative
      policy.
-   - `7.4b25b` (`Planned`): migrate `STD-0001` through `STD-0003`, centralize
-     Router evidence, and remove positive root README route and catalog
-     assertions from the frozen checker set.
+   - `7.4b25b` (`Accepted`): migrate `STD-0001` through `STD-0003`, centralize
+     Router evidence, remove positive root README route and catalog assertions
+     from 33 affected checkers, and classify all 31 remaining README-bearing
+     verifier files by root and non-root use.
    - `7.4b25c` (`Planned`): migrate `STD-0004` through `STD-0006`, close the
      root README as a concise non-normative entrypoint, and run the P29
      full-suite integration gate.

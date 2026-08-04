@@ -54,7 +54,6 @@ done < "$DISPOSITIONS"
   "$REFERENCE"
 
 required_links=(
-  "$REPO_ROOT/README.md"
   "$LEGACY"
 )
 for file in "${required_links[@]}"; do

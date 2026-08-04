@@ -26,8 +26,6 @@ for text in 'ID: `profile.language.typescript`' '## Public Type Surfaces' \
 done
 rg -F -q '`profile.language.typescript`' \
   "$R/profiles/languages/typescript/async.md"
-rg -F -q '[profiles/languages/typescript.md](profiles/languages/typescript.md)' \
-  "$R/README.md"
 rg -F -q '[TypeScript profile](profiles/languages/typescript.md)' \
   "$R/STANDARDS-ROUTER.md"
 rg -F -q '[TypeScript profile](profiles/languages/typescript.md)' \

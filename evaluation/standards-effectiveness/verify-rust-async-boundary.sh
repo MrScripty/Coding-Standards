@@ -67,7 +67,7 @@ done < <(tail -n +2 "$DISPOSITIONS")
   "$REPO_ROOT/profiles/languages/rust/README.md" \
   "$PROFILE"
 
-for file in "$REPO_ROOT/README.md" "$REPO_ROOT/STANDARDS-ROUTER.md" "$LEGACY"; do
+for file in "$REPO_ROOT/STANDARDS-ROUTER.md" "$LEGACY"; do
   rg -F -q 'profiles/languages/rust/async.md' "$file"
 done
 rg -F -q '(async.md)' "$RUST_INDEX"

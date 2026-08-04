@@ -24,7 +24,6 @@ for text in 'ID: `topic.licensing`' '## Authority And Ownership' \
   'designated legal or licensing owner' 'Do not require one copied'; do
   rg -F -q "$text" "$R/topics/licensing.md"
 done
-rg -F -q '[topics/licensing.md](topics/licensing.md)' "$R/README.md"
 rg -F -q '[Licensing](topics/licensing.md)' "$R/STANDARDS-ROUTER.md"
 rg -F -q '[Licensing](topics/licensing.md)' "$R/CODING-STANDARDS.md"
 ! rg -F -q '| GPL | GPL projects only | Viral license |' "$R/CODING-STANDARDS.md"

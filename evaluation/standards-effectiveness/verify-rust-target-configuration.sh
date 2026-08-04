@@ -126,9 +126,6 @@ rg -F -q 'Rust target selection, configuration placement' "$RUST_INDEX"
 rg -F -q '[Rust Cross-Platform profile](cross-platform.md)' "$RUST_INDEX"
 rg -F -q '[Rust Cross-Platform profile](profiles/languages/rust/cross-platform.md)' \
   "$ROUTER"
-rg -F -q '| [profiles/languages/rust/cross-platform.md](profiles/languages/rust/cross-platform.md) |' \
-  "$README"
-
 for pattern in 'RUST-CROSS-PLATFORM-STANDARDS.md' \
   'x86_64-unknown-linux-gnu' 'x86_64-pc-windows-msvc' \
   'aarch64-apple-darwin' 'Best-effort' 'five lines or fewer' \

@@ -7,7 +7,6 @@ readonly RUST_BINDINGS="$ROOT/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md
 readonly CONTRACTS="$ROOT/topics/contracts.md"
 
 for file in \
-  "$ROOT/README.md" \
   "$ROOT/CODING-STANDARDS.md" \
   "$ROOT/INTEROP-STANDARDS.md" \
   "$ROOT/LANGUAGE-BINDINGS-STANDARDS.md" \

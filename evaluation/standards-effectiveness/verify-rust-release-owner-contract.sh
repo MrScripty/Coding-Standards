@@ -13,7 +13,6 @@ done < "$F"
 for text in '## Mechanism Authority' 'Generic owners select release boundaries' 'create or complete generic policy' '## Typed Outcomes' 'Do not fall back to incumbent metadata' '## Verification'; do rg -F -q "$text" "$P"; done
 for text in 'Level: `REFERENCE`' 'This material is non-normative' 'cannot select versions'; do rg -F -q "$text" "$X"; done
 rg -F -q 'profiles/languages/rust/release.md' "$R/STANDARDS-ROUTER.md"
-rg -F -q 'profiles/languages/rust/release.md' "$R/README.md"
 rg -F -q '[Rust release mechanisms](../../profiles/languages/rust/release.md)' "$L"
 actual="$(awk -F '\t' '$1=="STD-0810" {print $1 "\t" $2 "\t" $3 "\t" $4}' "$S/consolidation-dispositions.tsv")"
 [[ "$actual" == $'STD-0810\tlanguages/rust/RUST-RELEASE-STANDARDS.md\tprofiles/languages/rust/release.md\tindex' ]]

@@ -99,7 +99,7 @@ done < <(tail -n +2 "$DISPOSITIONS")
   "$REPO_ROOT/workflows/verification.md" \
   "$TOPIC"
 
-for file in "$REPO_ROOT/README.md" "$REPO_ROOT/STANDARDS-ROUTER.md" "$LEGACY"; do
+for file in "$REPO_ROOT/STANDARDS-ROUTER.md" "$LEGACY"; do
   rg -F -q 'topics/concurrency.md' "$file"
 done
 

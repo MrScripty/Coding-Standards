@@ -61,7 +61,6 @@ done < "$BYPASS_FIXTURE"
 
 required_links=(
   "STANDARDS-ROUTER.md"
-  "README.md"
   "COMMIT-STANDARDS.md"
   "TOOLING-STANDARDS.md"
   "workflows/implementation.md"

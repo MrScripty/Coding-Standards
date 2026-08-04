@@ -12,6 +12,6 @@ while IFS=$'\t' read -r case_id purpose audience outcome context disclosure capa
 done < "$F"
 for text in 'ID: `topic.diagnostics`' '## Diagnostic Authority' '## Diagnostic Selection' '## Causal Identity And Context' '## Lifecycle And Failure' '## Responsibility Boundaries' '## Typed Outcomes' 'not universal requirements' 'Diagnostics owns only the generic projection contract' 'telemetry product, fixed application layers';do rg -F -q "$text" "$D";done
 for text in 'ID: `reference.recipes.diagnostics`' 'This material is non-normative' '## Adapting A Mechanism';do rg -F -q "$text" "$R/reference/recipes/diagnostics.md";done
-rg -F -q '[topics/diagnostics.md](topics/diagnostics.md)' "$R/README.md";rg -F -q '[Diagnostics](topics/diagnostics.md)' "$R/STANDARDS-ROUTER.md";rg -F -q '[Diagnostics](topics/diagnostics.md)' "$R/ARCHITECTURE-PATTERNS.md"
+rg -F -q '[Diagnostics](topics/diagnostics.md)' "$R/STANDARDS-ROUTER.md";rg -F -q '[Diagnostics](topics/diagnostics.md)' "$R/ARCHITECTURE-PATTERNS.md"
 rg -F -q $'STD-0089\tARCHITECTURE-PATTERNS.md\ttopics/diagnostics.md\tindex' "$S/consolidation-dispositions.tsv"
 printf 'Diagnostics owner contract passed: %s decisions, 1 disposition\n' "$count"

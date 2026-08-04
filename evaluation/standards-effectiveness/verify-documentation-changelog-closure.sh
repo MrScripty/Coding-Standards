@@ -104,8 +104,4 @@ for content in "${removed_legacy_content[@]}"; do
   fi
 done
 
-rg -F -q \
-  'Migration index for canonical documentation, release, and recipe owners' \
-  "$REPO_ROOT/README.md"
-
 printf 'Documentation changelog closure passed\n'

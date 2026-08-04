@@ -6,7 +6,6 @@ readonly R="$(cd -- "$S/../.." && pwd)"
 readonly FIXTURE="$S/fixtures/dependencies/owner-contract-decisions.tsv"
 readonly OWNER="$R/topics/dependencies.md"
 readonly ROUTER="$R/STANDARDS-ROUTER.md"
-readonly README="$R/README.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
 readonly TRAIN="$S/milestone-7-execution-train.tsv"
@@ -53,7 +52,6 @@ for text in "${required_owner[@]}"; do
 done
 
 rg -F -q 'Dependency requirement, ownership, selection, resolution, provisioning, update, or removal policy is required' "$ROUTER"
-rg -F -q '[topics/dependencies.md](topics/dependencies.md)' "$README"
 
 mapfile -t dispositions < <(
   awk -F '\t' 'NR > 1 && $1 >= "STD-0496" && $1 <= "STD-0498" {

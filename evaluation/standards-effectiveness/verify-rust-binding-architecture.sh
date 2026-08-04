@@ -110,7 +110,7 @@ done
 
 rg -F -q '(language-bindings.md)' "$RUST_INDEX"
 rg -F -q 'profiles/languages/rust/language-bindings.md' \
-  "$REPO_ROOT/README.md" "$LEGACY"
+  "$LEGACY"
 rg -F -q '## Layer Ownership' "$GENERIC"
 
 legacy_architecture="$(

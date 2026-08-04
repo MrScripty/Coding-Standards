@@ -80,7 +80,7 @@ done < <(tail -n +2 "$DISPOSITIONS")
   "$REPO_ROOT/topics/contracts.md" \
   "$WORKFLOW"
 
-for file in "$REPO_ROOT/STANDARDS-ROUTER.md" "$REPO_ROOT/README.md" "$LEGACY"; do
+for file in "$REPO_ROOT/STANDARDS-ROUTER.md" "$LEGACY"; do
   if ! rg -F -q "workflows/release.md" "$file"; then
     printf '%s does not link the canonical release workflow\n' \
       "${file#"$REPO_ROOT"/}" >&2

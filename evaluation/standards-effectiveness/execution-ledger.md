@@ -7623,3 +7623,42 @@ diff integrity passed.
 **Next slice:** `7.4b25b`, centralize canonical route evidence and migrate
 `STD-0001` through `STD-0003` without preserving README applicability or
 manual catalog authority.
+
+## Milestone 7.4b25b Root Router Evidence
+
+**Outcome:** Accepted.
+
+`STD-0001` through `STD-0003` now route root identity, startup, and document
+selection to canonical Router authority. README retains a short Core-to-Router
+entrypoint but no manual document table, `When to Use` applicability, stale
+legacy-owner descriptions, or fallback selection.
+
+A table-driven fixture proves 27 direct Router paths, including Contracts. The
+31 direct owner and reference consumers no longer use root README presence as
+positive canonical route or catalog evidence. The corrected transitive audit
+also removes root README from the shared contract-ownership assertion while
+retaining canonical contract-link requirements for the actual contract-bearing
+legacy documents.
+
+A frozen caller manifest proves that binding contract evolution, cross-language
+contracts, and the independent trust re-plan are the only direct callers of the
+shared checker, and executes all three. Indirect Rust Interop and Rust Language
+Binding specializations continue through the Rust profile and their focused
+lineage checks rather than being promoted into root Router entries. Existing
+negative README source checks remain intact.
+
+The content-aware consumer audit classifies every verifier containing the
+`README.md` token, including direct paths, variables, profile indexes, fixture
+data, legacy-heading patterns, negative purity checks, and audit
+infrastructure. The computed Commit assertion is removed, while Router retains
+the canonical Commit route. New or unclassified verifier consumers now fail the
+audit instead of escaping a full-path search.
+
+**Verification:** 28 canonical Router routes, three exact dispositions, 33
+frozen checker dependencies, 31 classified README-bearing verifiers, all three
+shared-checker callers, row 35 decomposition, immutable cursor, plan structure,
+shell syntax, whitespace integrity, and the fail-fast complete suite passed.
+
+**Next slice:** `7.4b25c`, migrate `STD-0004` through `STD-0006`, remove the
+remaining checklist and license paraphrase, close README as a non-normative
+entrypoint, and run the P29 full-suite integration gate.
