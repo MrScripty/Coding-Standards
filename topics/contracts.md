@@ -204,6 +204,46 @@ switch representations or decoders, retry, recover, or emit a partial response
 as a fallback. Illustrative HTTP mechanisms are isolated in the
 [HTTP projection recipes](../reference/recipes/http.md).
 
+## Protocol Adapter Proof
+
+A producer adapter accepts an already authoritative operation outcome, selects
+the exact operation and protocol-version projection, constructs its complete
+response representation, proves status or control metadata, body, and
+disclosure consistency, and only then emits the response. A shared error type,
+middleware layer, exception mapping, or response wrapper is optional mechanism,
+not outcome authority.
+
+A consumer adapter treats the received response as unknown. It selects the
+applicable operation and protocol-version contract, validates all required
+status or control metadata, headers, content type, and body variant, constructs
+the validated outcome representation, and only then exposes that outcome to its
+caller. Checking status before body, body before status, or both in one decoder
+is a mechanism decision; neither status nor body alone proves the outcome when
+the selected contract requires both.
+
+Producer and consumer proof must agree on every selected variant, including
+success, rejection, failure, empty, and degraded responses. A protocol may
+explicitly represent an application error through successful HTTP transport;
+that is valid only when producer and consumer contracts select and prove the
+same representation. Conversely, a status convention cannot hide a body that
+contradicts it.
+
+Adapters do not select disclosure, diagnostic reporting, retry, recovery, or
+degradation policy. Security owns disclosure, Diagnostics owns reporting
+projection, Resilience owns retry and recovery, and Verification owns claims
+that clients, intermediaries, or monitoring systems interpret the projection.
+
+Return `unavailable` when the adapter, mapping, decoder, disclosure decision,
+consumer facts, or evidence is absent; `invalid` for incomplete proof,
+contradictory response parts, unsafe disclosure, duplicate or partial emission,
+or a false interpretation claim; and `unsupported` for a well-formed response
+variant outside the selected contract.
+
+Do not substitute a generic error, raw message, default internal-error mapping,
+status-only or body-only interpretation, alternate decoder, successful
+transport, retry, recovery, or duplicate response. Preserve the typed outcome
+when complete adapter proof cannot be established.
+
 ## Validation Proof Lifetime
 
 Validation authority belongs to the proof-bearing representation produced by

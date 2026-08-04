@@ -711,51 +711,13 @@ This is a migration index, not an HTTP convention. It does not mandate a status
 table, JSON envelope, message field, default `500`, or inference of operation
 success from transport success.
 
-### Server Implementation
-
-Use a shared error type that converts to the correct status code:
-
-```text
-ApiError:
-    status_code
-    message
-
-not_found(message) -> ApiError(404, message)
-bad_request(message) -> ApiError(400, message)
-
-HTTP adapter converts ApiError into:
-    status: error.status_code
-    body: { "error": error.message }
-```
-
-### Client Implementation
-
-Clients must check the status code before parsing the response body.
-See [Contracts](topics/contracts.md#inbound-and-outbound-boundary-proof) for
-canonical boundary-proof policy.
-
-### Anti-Pattern: Status 200 with Error Body
-
-```
-// BAD: Returns 200 with an error message in the body
-HTTP/1.1 200 OK
-{ "error": "Project not found" }
-
-// GOOD: Returns proper status code
-HTTP/1.1 404 Not Found
-{ "error": "Project not found" }
-```
-
-**Why:** Returning 200 for errors breaks HTTP semantics. Clients, proxies,
-and monitoring tools all rely on status codes to distinguish success from
-failure. An error hidden inside a 200 response is invisible to everything
-except custom parsing logic.
-
-### Benefits
-
-- **Uniform error handling:** Clients use one pattern for all error responses
-- **Observable:** Monitoring and logging tools can alert on 4xx/5xx rates
-- **Self-documenting:** Status codes convey intent without reading the body
+Producer and consumer proof moved to
+[Protocol Adapter Proof](topics/contracts.md#protocol-adapter-proof).
+General boundary decoding remains in
+[Inbound And Outbound Boundary Proof](topics/contracts.md#inbound-and-outbound-boundary-proof).
+Pseudocode, selected `200` and `404` examples, and conditional interpretation
+claims remain only in the non-normative recipes. Security, Diagnostics,
+Resilience, and Verification retain their existing authority.
 
 ---
 

@@ -62,3 +62,65 @@ One application contract could select the following mappings:
 These values are not defaults. Missing outcome authority or mapping remains a
 typed diagnostic; an adapter must not choose the nearest row, default an unknown
 failure to `500`, or infer operation success from a `2xx` status.
+
+## Illustrative Producer Adapter
+
+An adapter may use an explicit lookup and proof sequence:
+
+```text
+outcome = execute_validated_operation(request)
+mapping = selected_http_contract.lookup(operation, version, outcome.variant)
+response = mapping.construct(outcome, selected_disclosure)
+mapping.prove_complete(response)
+emit_once(response)
+```
+
+The adapter may use a shared error type, middleware, exceptions, result values,
+or direct response construction. None of those mechanisms may classify an
+unknown outcome, select a default status, expose an unapproved message, or emit
+before complete proof.
+
+## Illustrative Consumer Adapter
+
+A consumer may adapt a response through one complete decoder:
+
+```text
+raw_response = receive()
+mapping = selected_http_contract.for(operation, version)
+validated_response = mapping.decode_complete(raw_response)
+outcome = mapping.construct_outcome(validated_response)
+```
+
+The decoder may inspect status before the body as an optimization, but it must
+still validate every response part required by the selected variant. A generic
+catch-all branch, alternate decoder, empty object, or readable body is not a
+valid replacement for an unsupported or unavailable mapping.
+
+## Selected HTTP Success And Error Representations
+
+One contract may represent a missing resource as:
+
+```text
+HTTP/1.1 404 Not Found
+{"error": "Project not found"}
+```
+
+Another explicitly governed application protocol may carry a rejected
+application outcome through successful HTTP transport:
+
+```text
+HTTP/1.1 200 OK
+{"errors": [{"code": "PROJECT_NOT_FOUND"}]}
+```
+
+Neither example is universally good or bad. The valid representation is the one
+selected and proven by the producer and every applicable consumer. Human-
+readable text remains subject to the Security-owned disclosure decision.
+
+## Conditional Interpretation Claims
+
+Uniform handling, intermediary visibility, monitoring, and self-documentation
+are claims, not automatic benefits of status codes. Verify each claim against
+the actual consumer, proxy, cache, monitoring rule, body decoder, and disclosure
+contract. A `4xx` or `5xx` count does not by itself prove operation-level
+failure observability, and a `2xx` count does not prove operation success.
