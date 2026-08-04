@@ -89,10 +89,32 @@ resources, prevent independent analysis, or authorize overlapping write sets.
 Do not introduce lock files, leases, scheduler infrastructure, state-only Git
 commits, or duplicate execution with later reconciliation as fallback.
 
+## Child 25.1 Admission Revision Representation Replan
+
+Planning owns a versioned `planning-admission-v1` digest over authoritative
+current state: the selected repository-relative `plan.md` and its linked
+repository-relative `issues.md`. `execution-ledger.md` remains append-only
+evidence written with an accepted transition; it cannot independently
+authorize admission and is not digest input.
+
+Construct the digest from stable path ordering, an explicit presence marker,
+the exact path bytes, unambiguous length-delimited framing, and exact artifact
+bytes. The supported implementing environment selects a cryptographic digest
+algorithm and records it with the scheme identifier. Do not normalize newlines,
+use timestamps or filesystem metadata, depend on Git identity, omit a required
+artifact, or infer an issues path.
+
+A missing required artifact or digest input is `unavailable`; malformed or
+contradictory framing, scheme, algorithm, or identity is `invalid`; an
+unavailable supported cryptographic or conditional-update mechanism is
+`unsupported`. Digest mismatch is stale `invalid` and is never retried
+automatically. The digest identifies compared state but does not itself make
+replacement atomic.
+
 ## Re-plan Triggers
 
-Stop if the expected-revision representation has no canonical source or cannot
-support conditional replacement, plan identity requires repository-global
+Stop if no supported conditional replacement can bind comparison to mutation,
+plan identity requires repository-global
 mutable state, snapshot
 lineage must be regenerated, the prompt needs an independent
 lifecycle or generation system, copied canonical procedure must remain, one

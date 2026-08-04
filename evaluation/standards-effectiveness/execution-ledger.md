@@ -6540,6 +6540,21 @@ execution with later reconciliation are rejected as generic fallbacks.
 **Next slice:** `7.4b15c`, establish a canonical revision representation before
 implementing the complete admission contract.
 
+## Row 25 Admission Revision Representation Replan
+
+**Outcome:** Accepted planning correction.
+
+`planning-admission-v1` digests exact bytes for the selected `plan.md` and its
+linked `issues.md`, framed by stable repository-relative path order, explicit
+presence, and unambiguous lengths. The ledger remains append-only evidence and
+cannot independently authorize admission. Git identity, filesystem metadata,
+newline normalization, inferred paths, and automatic stale retry are rejected.
+
+The digest identifies compared state but does not make replacement atomic.
+
+**Next slice:** `7.4b15c`, select a supported conditional-update mechanism that
+binds digest comparison to plan-state mutation.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in
