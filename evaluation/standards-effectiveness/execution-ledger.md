@@ -6584,6 +6584,20 @@ not canonical substitutes.
 **Next slice:** `7.4b15c`, define partial-integration recovery before
 implementing the complete admission contract.
 
+## Row 25 Partial Integration Recovery Replan
+
+**Outcome:** Accepted planning correction.
+
+State/evidence inconsistency blocks all normal admission. The serial integration
+owner explicitly selects complete, restore, or supersede reconciliation against
+fresh current state and normal revision gates, then records and verifies the
+result before clearing the diagnostic. No state-file/ledger precedence,
+automatic remedy, timestamp selection, evidence deletion, journal, transaction
+manager, or new persistent lifecycle state is introduced.
+
+**Next slice:** `7.4b15c`, define unambiguous transition evidence identity before
+implementing the complete admission contract.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

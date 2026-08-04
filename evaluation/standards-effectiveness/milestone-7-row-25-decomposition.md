@@ -151,9 +151,36 @@ Failure to integrate ledger evidence with the state change leaves the
 transition unaccepted and requires explicit repair or re-evaluation; do not
 report success from the state files alone.
 
+## Child 25.1 Partial Integration Recovery Replan
+
+When current `planning-admission-v1` does not match the applicable recorded
+result, or transition evidence is missing, malformed, duplicated, or
+contradictory, normal `start`, `continue`, and `verify` admission is
+`unavailable`. Report the affected artifact paths, observed revisions, and
+failed invariant. Do not execute work under the disputed transition.
+
+The serial integration owner must explicitly select `complete-transition`,
+`restore-prior-state`, or `supersede-transition`, provide exact candidate state
+and the expected current revision, and pass the normal pre-mutation and
+pre-integration gates. Recovery never reuses the original admission
+automatically and never selects a remedy from timestamps, file precedence, or
+apparent completeness.
+
+Append reconciliation evidence identifying the failed transition evidence,
+observed inconsistent state, selected remedy and authority, current and
+resulting revisions, and verification result. Recompute the resulting digest
+and confirm ledger agreement before clearing the diagnostic. Normal work
+resumes only through a new explicit admission operation and revision.
+
+Do not automatically roll back or complete, declare state-file-wins or
+ledger-wins, delete contradictory evidence, select latest timestamps, or report
+success while artifacts disagree. No recovery journal, transaction manager, or
+new persistent lifecycle state is introduced.
+
 ## Re-plan Triggers
 
-Stop if partial integration recovery has no owned procedure, authoritative
+Stop if transition evidence cannot identify the applicable transition
+unambiguously, authoritative
 integration cannot provide both revision gates, plan identity requires repository-global
 mutable state, snapshot
 lineage must be regenerated, the prompt needs an independent
