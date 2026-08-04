@@ -1,0 +1,20 @@
+id	canonical_owner	disposition	reference_treatment	rationale
+STD-0069	reference/patterns/architecture.md	index	conditional-composition-root	legacy composition-root label remains discoverable only after Architecture selects runtime composition
+STD-0070	topics/architecture.md	split	conditional-composition-root	Architecture owns composition boundaries while reference may illustrate one application-boundary arrangement
+STD-0071	topics/architecture.md	split	conditional-composition-root	Architecture assigns responsibilities while the fixed role table becomes a qualified illustration
+STD-0072	topics/architecture.md	split	conditional-composition-root	runtime composition and stable-contract dependency authority replace universal wiring and injection rules
+STD-0073	reference/patterns/architecture.md	move	conditional-composition-root	composition consequences remain qualified by selected ownership lifecycle and affected evidence
+STD-0074	reference/patterns/architecture.md	index	conditional-durable-workflow	legacy realtime-workflow label remains discoverable only after canonical workflow facts are selected
+STD-0075	topics/architecture.md	split	conditional-durable-workflow	Architecture separates transport state authority and projection responsibilities without prescribing event sourcing
+STD-0076	reference/patterns/architecture.md	move	conditional-durable-workflow	workflow shape remains illustrative without selecting durable commands events projections publication or replay
+STD-0077	topics/resilience.md	split	conditional-durable-workflow	Resilience owns replay resumption duplicates convergence and partial failure while linked owners retain contracts persistence ordering and authority
+STD-0078	reference/patterns/architecture.md	move	conditional-durable-workflow	component roles remain illustrative and cannot select stores handlers publishers or read models
+STD-0079	reference/patterns/architecture.md	move	conditional-durable-workflow	workflow consequences remain observable claims requiring affected evidence
+STD-0080	workflows/verification.md	merge-duplicate	none	canonical Verification and Resilience evidence already cover replay duplicates convergence and partial failure
+STD-0081	profiles/applications/frontend.md	index	none	legacy view-model label routes to canonical frontend projection and synchronization authority
+STD-0082	profiles/applications/frontend.md	merge-duplicate	none	canonical Frontend projection already separates authoritative state interaction adaptation and rendering
+STD-0083	profiles/applications/frontend.md	merge-duplicate	none	fixed source view-model view responsibilities yield to selected authority projection and interaction contracts
+STD-0084	profiles/applications/frontend.md	split	none	selected synchronization and action contracts replace subscription forwarding and backend-by-location defaults
+STD-0085	reference/recipes/frontend.md	merge-duplicate	existing-frontend-mechanisms	existing recipes already illustrate selected synchronization so the mutable class example is removed
+STD-0086	workflows/verification.md	merge-duplicate	none	testability reuse and clean-view benefits remain claims selected and proved by Verification
+STD-0087	topics/architecture.md	merge-duplicate	none	canonical concern-boundary policy already rejects a universal directory tree and location-based ownership

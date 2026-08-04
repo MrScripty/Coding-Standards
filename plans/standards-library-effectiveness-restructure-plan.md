@@ -6,19 +6,17 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 36 are accepted and closed. Row 36 now
-separates canonical Architecture policy from conditional non-normative
-patterns, including data authority selected from contract facts rather than
-server location. Shared owner state derives from one completed owner-scoped
-transition without changing later row obligations. P30 remains open because
-immutable row 37 is its remaining package member, and the cursor is row 37.
+**Current phase:** Rows 20 through 36 are accepted and closed. Row 37 is
+decomposed into four serial children for composition-root illustration,
+durable-workflow ownership, view-model closure, and universal directory-tree
+removal. The existing Architecture reference does not inherit semantic
+approval from row 36. P30 remains open until child 37.4 runs its complete-suite
+gate, and child 37.1 is active.
 
-**Next slice:** Milestone 7.4b27a reviews and decomposes row 37 `STD-0069`,
-`STD-0070`, `STD-0071`, `STD-0072`, `STD-0073`, `STD-0074`, `STD-0075`,
-`STD-0076`, `STD-0077`, `STD-0078`, `STD-0079`, `STD-0080`, `STD-0081`,
-`STD-0082`, `STD-0083`, `STD-0084`, `STD-0085`, `STD-0086`, and `STD-0087`;
-preserves its independent owner-review obligation; and performs no substantive
-legacy movement before the decomposition is accepted.
+**Next slice:** Milestone 7.4b27b migrates `STD-0069`, `STD-0070`,
+`STD-0071`, `STD-0072`, and `STD-0073`; retains one conditional
+composition-root illustration; and removes universal wiring, lifecycle,
+dependency-injection, and benefit defaults.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1961,9 +1959,22 @@ all structural/routing fixtures pass.
      conditional server-authoritative projection example, remove
      location-based authority and blanket optimistic-update defaults, close
      row 36, and stop for row 37 owner review before the P30 package gate.
-   - `7.4b27a` (`Planned`): review and decompose row 37 `STD-0069` through
+   - `7.4b27a` (`Accepted`): review and decompose row 37 `STD-0069` through
      `STD-0087`, preserve its independent owner-review obligation, and perform
      no substantive legacy movement before the decomposition is accepted.
+   - `7.4b27b` (`Planned`): migrate `STD-0069` through `STD-0073`, retain one
+     conditional composition-root illustration, and remove universal wiring,
+     lifecycle, dependency-injection, and benefit defaults.
+   - `7.4b27c` (`Planned`): migrate `STD-0074` through `STD-0080`, retain one
+     conditional durable-workflow illustration, and preserve Architecture,
+     Contracts, Persistence, Concurrency, Resilience, and Verification
+     authority without event-sourcing, durable-acceptance, component, replay,
+     or evidence defaults.
+   - `7.4b27d` (`Planned`): migrate `STD-0081` through `STD-0086` to existing
+     Frontend, Architecture, recipe, and Verification authority without
+     retaining the fixed view-model chain, mutable class, or benefit defaults.
+   - `7.4b27e` (`Planned`): replace `STD-0087`, remove the universal directory
+     template, close row 37, and run the deferred P30 complete-suite gate.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

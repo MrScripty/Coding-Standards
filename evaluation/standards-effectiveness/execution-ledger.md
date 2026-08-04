@@ -7821,6 +7821,37 @@ package member; no package full-suite claim is made by this focused child.
 **Next slice:** `7.4b27a`, planning only, to review and decompose row 37
 `STD-0069` through `STD-0087` before substantive legacy movement.
 
+## Milestone 7.4b27a Row 37 Reference Closure Decomposition
+
+**Outcome:** Accepted.
+
+Row 37 is split into four owner-coherent children: composition-root
+illustration, durable-workflow ownership, view-model closure, and universal
+directory-tree removal. The owner review confirms that row 36's creation of
+`reference/patterns/architecture.md` establishes current existence only; it
+does not pre-approve row 37 semantics or make reference normative.
+
+The selected decomposition retains conditional composition-root and
+durable-workflow structural illustrations. It removes the legacy view-model
+class because existing Frontend recipes already cover selected synchronization
+mechanisms, and removes the directory template because Architecture rejects a
+universal tree and location-based ownership.
+
+Every `STD-0069` through `STD-0087` identifier has one frozen candidate owner,
+disposition, and reference treatment. Existing Architecture, Resilience,
+Frontend, Contracts, Persistence, Concurrency, Verification, and reference
+owners are sufficient; no new canonical owner is authorized.
+
+**Verification:** exact nineteen-identifier coverage, four ordered children,
+owner and disposition validation, immutable row and P30 membership, existing
+owner contracts, shared owner-state inheritance, active-cursor integrity, plan
+structure, shell syntax, and diff integrity passed. No normative or legacy
+source text moved in this planning slice.
+
+**Next slice:** `7.4b27b`, migrate `STD-0069` through `STD-0073`, retain one
+conditional composition-root illustration, and remove universal wiring,
+lifecycle, dependency-injection, and benefit defaults.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.
