@@ -6,20 +6,19 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 35 are accepted and closed. Row 36 is
-decomposed into four serial children that split canonical Architecture policy
-from conditional non-normative patterns. Its reference owner now exists with a
-verified non-authority boundary, and layered architecture is migrated without
-universal structural defaults. Monorepo roles are also migrated without a
-fixed package catalog or dependency graph. Shared owner state now derives from
-one completed owner-scoped transition without changing later row obligations.
-The immutable cursor remains row 36.
+**Current phase:** Rows 20 through 36 are accepted and closed. Row 36 now
+separates canonical Architecture policy from conditional non-normative
+patterns, including data authority selected from contract facts rather than
+server location. Shared owner state derives from one completed owner-scoped
+transition without changing later row obligations. P30 remains open because
+immutable row 37 is its remaining package member, and the cursor is row 37.
 
-**Next slice:** Milestone 7.4b26e migrates `STD-0040`, `STD-0041`,
-`STD-0042`, `STD-0043`, `STD-0044`, and `STD-0045`; retains a conditional
-server-authoritative projection example; removes location-based authority and
-blanket optimistic-update defaults; closes row 36; and stops for row 37 owner
-review.
+**Next slice:** Milestone 7.4b27a reviews and decomposes row 37 `STD-0069`,
+`STD-0070`, `STD-0071`, `STD-0072`, `STD-0073`, `STD-0074`, `STD-0075`,
+`STD-0076`, `STD-0077`, `STD-0078`, `STD-0079`, `STD-0080`, `STD-0081`,
+`STD-0082`, `STD-0083`, `STD-0084`, `STD-0085`, `STD-0086`, and `STD-0087`;
+preserves its independent owner-review obligation; and performs no substantive
+legacy movement before the decomposition is accepted.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1958,10 +1957,13 @@ all structural/routing fixtures pass.
      immutable rows through owner-scoped transition inheritance; preserve
      row-scoped semantic review and reject duplicate, premature, regressive,
      or filesystem-inconsistent creation without rewriting the train.
-   - `7.4b26e` (`Planned`): migrate `STD-0040` through `STD-0045`, retain a
+   - `7.4b26e` (`Accepted`): migrate `STD-0040` through `STD-0045`, retain a
      conditional server-authoritative projection example, remove
      location-based authority and blanket optimistic-update defaults, close
      row 36, and stop for row 37 owner review before the P30 package gate.
+   - `7.4b27a` (`Planned`): review and decompose row 37 `STD-0069` through
+     `STD-0087`, preserve its independent owner-review obligation, and perform
+     no substantive legacy movement before the decomposition is accepted.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

@@ -142,3 +142,51 @@ When package boundaries match real ownership and contracts, import evidence can
 make misplaced responsibility and unintended coupling easier to detect.
 Refactor safety and reuse remain claims to prove for the affected consumers;
 the role catalog does not guarantee them.
+
+## Conditional Server-Authoritative Projection
+
+After Architecture selects a server-side component as the owner of particular
+application state and the Frontend profile selects its projection contract, one
+possible shape is:
+
+```text
+selected server owner -- event, response, or query --> frontend projection
+selected server owner <-- declared action ----------- frontend interaction
+```
+
+The server location does not create authority. Another contract may select a
+frontend, local process, device, peer, or external service as owner. Each
+authoritative datum and transition still has one selected owner.
+
+| Illustrative state | Possible owner |
+| --- | --- |
+| Accepted application state | Selected server component |
+| Presentation state | Frontend projection owner |
+| Unsubmitted input | Frontend interaction owner |
+| Derived display value | Frontend projection, linked to its canonical source |
+
+These examples do not classify all business, selection, configuration,
+persistent, or transient state. The domain and interaction contracts decide
+whether a value is authoritative, pending input, a projection, or purely
+presentational.
+
+### Conditional Flow
+
+The selected source and consumer contracts may use events, subscriptions,
+responses, or queries. A frontend can issue a declared action and apply the
+next authoritative projection when that contract produces it. Push, pull,
+read-only display, and a six-step request cycle are not defaults.
+
+Confirmed projection is useful when the UI contract requires authoritative
+acceptance before displaying the result. Optimistic projection is also valid
+when the selected contract defines pending state, reconciliation, rejection,
+ordering, stale-result handling, and user-visible failure semantics. If those
+facts are missing, return the canonical typed diagnostic instead of silently
+switching projection modes.
+
+### Conditional Consequences
+
+One selected owner plus a proved synchronization contract can prevent a
+projection from becoming competing authority. Consistency, reliability, and
+simplicity remain observable claims; a server location, confirmed-only update,
+or single-source diagram does not prove them.

@@ -7793,6 +7793,34 @@ conditional server-authoritative projection example, remove location-based
 authority and blanket optimistic-update defaults, close row 36, and stop for
 row 37 owner review.
 
+## Milestone 7.4b26e Conditional Data Authority
+
+**Outcome:** Accepted.
+
+The legacy backend-owned-data section now routes data and state authority to
+Architecture, frontend projection and synchronization to the Frontend profile,
+and one server-authoritative illustration to the non-normative pattern
+reference. Server location does not create authority, and the reference
+explicitly permits another contract to select a frontend, process, device,
+peer, or external service as owner.
+
+The frontend allow/deny lists, fixed push/action sequence, backend-by-location
+test, blanket optimistic-update ban, and unconditional consistency claims are
+removed. Confirmed projection remains one possible contract. Optimistic
+projection is valid only with selected pending state, reconciliation,
+rejection, ordering, stale-result, and user-visible failure semantics.
+
+**Verification:** ten authority and projection decisions, six exact
+dispositions, prohibited location and confirmed-only defaults, all row 36
+owner and pattern evidence, owner-scoped state reconciliation, immutable train
+advancement, plan structure, shell syntax, and diff integrity passed.
+
+Row 36 is closed. P30 remains open because immutable row 37 is its remaining
+package member; no package full-suite claim is made by this focused child.
+
+**Next slice:** `7.4b27a`, planning only, to review and decompose row 37
+`STD-0069` through `STD-0087` before substantive legacy movement.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

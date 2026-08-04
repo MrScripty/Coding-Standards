@@ -18,6 +18,12 @@ STD-0036	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture owns
 STD-0037	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	stable-contract dependency authority replaces the fixed package graph while reference illustrates selected arrows
 STD-0038	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	monorepo consequences remain qualified by accepted boundaries contracts and consumer evidence
 STD-0039	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	schema-sharing example remains conditional on Contracts-selected independent consumers and artifact necessity
+STD-0040	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	index	legacy backend-owned-data heading routes to Architecture Frontend and a conditional server-authoritative illustration
+STD-0041	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture assigns one state owner from contract facts while reference illustrates a server-selected owner without location authority
+STD-0042	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture and Frontend classify authority projection pending input and presentation state without broad frontend prohibitions
+STD-0043	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	source and consumer contracts select synchronization while reference illustrates non-default event response subscription and query flows
+STD-0044	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture owns reconciliation and failure semantics while reference permits confirmed or contract-approved optimistic projection
+STD-0045	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	data-authority consequences remain qualified by owner synchronization reconciliation and affected evidence
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults

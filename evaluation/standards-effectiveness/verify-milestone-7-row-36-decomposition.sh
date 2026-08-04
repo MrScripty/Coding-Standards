@@ -42,12 +42,11 @@ rg -F -q '`7.4b26b` (`Accepted`)' "$P"
 rg -F -q '`7.4b26c` (`Accepted`)' "$P"
 rg -F -q '`7.4b26d` (`Accepted`)' "$P"
 rg -F -q '`7.4b26er` (`Accepted`)' "$P"
-for milestone in 7.4b26e; do
-  printf -v pattern '`%s` (`Planned`)' "$milestone"
-  rg -F -q "$pattern" "$P"
-done
+rg -F -q '`7.4b26e` (`Accepted`)' "$P"
+rg -F -q '`7.4b27a` (`Planned`)' "$P"
 "$S/verify-architecture-pattern-reference-owner.sh"
 "$S/verify-architecture-layered-pattern.sh"
 "$S/verify-architecture-monorepo-pattern.sh"
+"$S/verify-architecture-data-authority-pattern.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-36 decomposition passed: 19 IDs across 4 serial children with P30 deferred through row 37\n'

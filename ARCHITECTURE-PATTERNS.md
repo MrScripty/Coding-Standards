@@ -31,78 +31,17 @@ example are in the non-normative
 
 ## Backend-Owned Data
 
-### The Pattern
+Canonical data and state authority, projections, reconciliation, and typed
+outcomes are owned by [Architecture](topics/architecture.md). Web-technology
+projection, synchronization, interaction, lifecycle, and evidence specialize
+that decision through the
+[Frontend application profile](profiles/applications/frontend.md). Process
+location does not determine authority, and optimistic projection is neither
+universally required nor prohibited.
 
-In client-server applications, the backend is the **single source of truth** for all persistent data.
-
-```
-┌──────────────────┐         ┌──────────────────┐
-│     Backend      │ ──push─▶│    Frontend      │
-│  (source of      │         │   (display)      │
-│    truth)        │◀─action─│                  │
-└──────────────────┘         └──────────────────┘
-```
-
-### Rules
-
-**Frontend CAN hold (transient UI state):**
-- Hover/focus state
-- Animation state
-- Form input before submission
-- Drag/drop state
-- Modal open/closed state
-
-**Frontend CANNOT hold (backend-owned):**
-- Business data (users, products, orders)
-- Selection state that affects business logic
-- Configuration that affects behavior
-- Anything that should persist
-
-### Data Flow
-
-1. Backend pushes data to frontend
-2. Frontend displays data (read-only view)
-3. User takes action
-4. Frontend sends action to backend
-5. Backend processes and pushes new state
-6. Frontend displays updated state
-
-### No Optimistic Updates for Backend-Owned Data
-
-Backend-owned data must never be updated speculatively. The frontend waits
-for the backend to confirm the new state before displaying it.
-
-```typescript
-// BAD: Update UI before backend confirms
-function deleteItem(id) {
-    items = items.filter(i => i.id !== id);  // Optimistic — creates desync risk
-    api.deleteItem(id);
-}
-
-// GOOD: Wait for backend to push new state
-async function deleteItem(id) {
-    await api.deleteItem(id);
-    // Backend pushes updated state → view model updates → UI renders
-}
-```
-
-**What IS acceptable to update locally:**
-
-- Transient UI state (hover, focus, drag position, loading spinners)
-- Animation state
-- Form input before submission
-- Purely presentational state with no backend equivalent (scroll position,
-  panel sizes, expanded/collapsed UI sections)
-- Framework-specific reactive state for UI-only reactivity
-
-**The test:** If the backend has no concept of this state, the frontend can
-own it. If the backend stores or acts on this data, the backend owns it.
-
-### Benefits
-
-- **Consistency:** No state synchronization bugs
-- **Reliability:** UI always reflects actual state
-- **Simplicity:** One source of truth
+A conditional server-authoritative projection example and its qualified
+consequences are in the non-normative
+[Architecture Pattern Reference](reference/patterns/architecture.md#conditional-server-authoritative-projection).
 
 ---
 
