@@ -6926,6 +6926,25 @@ decomposition, execution train, and diff integrity passed.
 **Next slice:** `7.4b18g`, migrate `STD-0023` through `STD-0026` evidence and
 tooling obligations, extract lint and CI mechanisms, and close the legacy source.
 
+## Milestone 7.4b18g Accessibility Evidence Closure
+
+**Outcome:** Accepted; row 28 closed.
+
+Accessibility now owns claim selection for user-access outcomes while Tooling
+retains lint selection and orchestration and Verification retains evidence
+meaning. ESLint product, installation, named-rule, severity, command, and CI
+examples moved to non-normative reference.
+
+`STD-0023` through `STD-0026` each have one exact `split` disposition. The
+legacy Accessibility source is now a pure migration index with no remaining
+normative sections.
+
+**Verification:** evidence decisions, all Accessibility suites, metadata,
+row-28 decomposition, execution train, complete standards suite, and diff
+integrity passed.
+
+**Next slice:** `7.4b19a`, review and decompose row 29 before implementation.
+
 ## Milestone 7.4b18c Accessibility Interaction Semantics
 
 **Outcome:** Accepted.

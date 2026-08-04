@@ -14,6 +14,6 @@ for t in '## Media Meaning And Classification' '## Equivalent Media Outcomes' 'f
 for t in '## Web Image And Icon Mechanisms' 'alt=""' 'alt="Error"' 'aria-hidden="true"';do rg -F -q "$t" "$R/reference/recipes/accessibility.md";done
 block="$(sed -n '/^## Media Semantics/,/^## Linting Enforcement/p' "$R/ACCESSIBILITY-STANDARDS.md")";[[ "$block" == *Migrated* && "$block" != *'<img'* ]]
 mapfile -t ids < <(awk -F '\t' '$1>="STD-0020"&&$1<="STD-0022"{print $1}' "$S/consolidation-dispositions.tsv");[[ "${ids[*]}" == 'STD-0020 STD-0021 STD-0022' ]]
-rg -F -q '`7.4b18f` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md";rg -F -q '`7.4b18g` (`Planned`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
+rg -F -q '`7.4b18f` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-accessibility-name-input.sh"
 printf 'Accessibility media semantics passed: 13 decisions, 3 exact dispositions\n'

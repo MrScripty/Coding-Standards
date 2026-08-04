@@ -147,3 +147,17 @@ selected accessibility API projection:
 The empty `alt`, text value, `aria-hidden` attribute, icon component, and parent
 control are web mechanisms. They do not classify the content or prove equivalent
 meaning across other states, contexts, platforms, or modalities.
+
+## Legacy JSX Lint Mechanisms
+
+The legacy web example used `eslint-plugin-jsx-a11y`, installed with an npm
+development-dependency command, and named rules such as
+`click-events-have-key-events`, `no-static-element-interactions`,
+`anchor-is-valid`, `alt-text`, and `label-has-associated-control`. It also ran
+those checks as CI errors.
+
+This is historical mechanism information only. Tooling must select the product,
+dependency procedure, rules, scope, severity, command, schedule, and CI
+placement from current repository contracts. Verification must define what any
+result proves. Do not treat this list as a minimum, current syntax, installation
+authority, or accessibility acceptance evidence.

@@ -32,32 +32,3 @@ The former informative, decorative, image, and icon rules are migrated to
 [Accessibility](topics/accessibility.md). HTML alternate-text and icon-library
 mechanisms are non-normative
 [Accessibility Recipes](reference/recipes/accessibility.md).
-
-## Linting Enforcement
-
-### Required ESLint Plugin
-
-Projects with React/JSX must include `eslint-plugin-jsx-a11y`:
-
-```bash
-npm install eslint-plugin-jsx-a11y --save-dev
-```
-
-### Recommended Rules
-
-At minimum, enable these rules as errors (not warnings):
-
-| Rule | What It Catches |
-|------|----------------|
-| `jsx-a11y/click-events-have-key-events` | `onClick` without `onKeyDown` on non-interactive elements |
-| `jsx-a11y/no-static-element-interactions` | Interactive handlers on `<div>`, `<span>`, etc. |
-| `jsx-a11y/anchor-is-valid` | `<a href="#">` or `<a>` without valid href |
-| `jsx-a11y/no-noninteractive-element-interactions` | Click handlers on elements like `<p>`, `<li>` |
-| `jsx-a11y/alt-text` | Missing `alt` on `<img>` |
-| `jsx-a11y/label-has-associated-control` | `<input>` without associated `<label>` |
-
-### CI Gate
-
-Accessibility lint rules must be enforced in CI. See
-[TOOLING-STANDARDS.md](TOOLING-STANDARDS.md) for the CI quality gates that
-include a11y as part of the lint step.

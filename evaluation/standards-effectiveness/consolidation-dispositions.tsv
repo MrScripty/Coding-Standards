@@ -15,6 +15,10 @@ STD-0019	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	input relation
 STD-0020	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	media parent moved while web image organization moved to reference
 STD-0021	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	media classification and equivalence moved while HTML alternate text moved to reference
 STD-0022	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	functional icon outcomes moved while icon component mechanisms moved to reference
+STD-0023	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	accessibility evidence claims moved while lint organization moved to reference
+STD-0024	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	tool selection delegation moved while ESLint installation moved to reference
+STD-0025	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	claim-scoped automation rule ownership moved while named rules moved to reference
+STD-0026	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	evidence and scheduling delegation moved while CI mechanism moved to reference
 STD-0195	COMMIT-STANDARDS.md	COMMIT-STANDARDS.md	index	legacy path retained as migration index
 STD-0196	COMMIT-STANDARDS.md	workflows/commit.md	move	conventional message contract
 STD-0197	COMMIT-STANDARDS.md	reference/recipes/commits.md	reference	format component explanation

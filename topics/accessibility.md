@@ -164,6 +164,19 @@ contract. An empty string, filename, icon-library default, nearby visual text,
 or successful API attribute does not independently prove classification or
 equivalence.
 
+## Accessibility Evidence Claims
+
+Define evidence from each accepted accessibility outcome, affected users and
+tasks, supported platforms and modalities, relevant states, failure paths, and
+conformance obligations. Select automated, manual, assistive-technology, user,
+inspection, or combined evidence only for the claims each method can establish.
+
+Tooling selects and orchestrates lint products, rules, severity, scope, commands,
+and schedules. Verification owns evidence kind, environment, execution, and
+acceptance meaning. Accessibility owns the user-access claim those systems
+consume. A configured plugin, named rule set, zero lint findings, CI execution,
+or successful command does not prove a broader accessibility outcome.
+
 ## Responsibility Boundaries
 
 Accessibility owns required user-access outcomes and conformance obligations.
