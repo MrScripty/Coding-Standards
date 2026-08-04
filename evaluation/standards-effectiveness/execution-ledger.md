@@ -6645,6 +6645,32 @@ outcome, or fallback changed.
 **Next slice:** `7.4b15c`, implement child `25.1a` without editing completed-row
 checkers when row-25 lifecycle state advances.
 
+## Milestone 7.4b15c: Explicit Planning Admission And Transition Contract
+
+**Outcome:** Accepted.
+
+Planning now owns explicit repository-relative plan identity, operation/state
+admission, exact-byte `planning-admission-v1`, deterministic
+`planning-transition-v1`, concurrent compatibility decisions, two serial
+revision gates, coherent ledger evidence, and separately identified explicit
+reconciliation. Implementation transports explicit plan and operation facts and
+consumes those decisions without copying lifecycle policy.
+
+Twenty focused decisions cover valid lifecycle operations and typed invalid,
+unavailable, and unsupported outcomes for missing or escaping paths, inferred
+operations, lifecycle mismatch, stale or missing revisions, malformed or
+incomplete transitions, overlap, contradictory outcomes, unmet dependencies,
+unsupported mechanisms, scanning, and latest-wins fallback.
+
+No reservation, lease, queue, heartbeat, scheduler, persistent coordination
+state, automatic merge, retry, or legacy selection path was introduced.
+
+**Verification:** `verify-planning-admission.sh`, row-25 decomposition,
+execution-train, and plan-structure checks passed.
+
+**Next slice:** `7.4b15d`, derive the thin Implementation prompt entrypoint and
+record the seven exact row-25 dispositions.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

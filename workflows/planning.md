@@ -88,6 +88,87 @@ claim to be satisfied.
 Exactly one current phase is identified. Multiple independent milestones may be
 implemented, but the active plan still names one next integration slice.
 
+## Explicit Plan Admission
+
+An implementation invocation that uses a written plan supplies one canonical
+repository-relative `plan.md` path and one explicit operation. Do not discover
+an active plan by scanning, recency, conventional location, conversation state,
+or a repository-global pointer.
+
+Planning owns these admission decisions:
+
+- `start` accepts only `Planned` and transitions it to `Active`;
+- `continue` accepts only `Active` without changing that state; and
+- `verify` accepts `Implemented` or `Verifying`, transitioning `Implemented` to
+  `Verifying` when objective verification begins.
+
+`Blocked` and `Deferred` are `unavailable`; report the blocker or revisit
+authority. `Accepted`, `Superseded`, and operation/state contradictions are
+`invalid`. Missing plan identity, operation, lifecycle facts, or required linked
+artifacts are `unavailable`. Security owns containment and traversal or symlink
+escape rejection; unsupported filesystem representation routes conditionally
+through Cross-Platform. Never infer the operation or treat a next slice as
+execution authority.
+
+## Revision-Bound Transitions
+
+`planning-admission-v1` identifies authoritative current plan state. Digest the
+exact bytes of the selected `plan.md` and linked `issues.md` in canonical
+repository-relative path order using explicit presence markers and
+length-delimited path and content fields. Record the supported cryptographic
+algorithm with the scheme. Do not normalize content or use Git identity,
+timestamps, filesystem metadata, inferred paths, or the append-only ledger as
+digest input.
+
+Each proposal has a deterministic `planning-transition-v1` identity over its
+scheme and algorithm, canonical plan path, explicit operation and actor, prior
+admission identity, exact affected scope and bounded write set, canonically
+ordered prerequisite transition identities, intended semantic outcome and plan
+state, intended resulting admission identity, and verification contract. Empty
+and absent values remain distinct. Actor identity records responsibility; it
+does not confer plan, resource, or integration ownership.
+
+Missing required identity facts are `unavailable`; malformed framing, ordering,
+identity, scope, operation, or outcome is `invalid`; an unavailable supported
+digest or conditional-update mechanism is `unsupported`. A changed admission
+identity is stale `invalid`. Do not retry, merge, overwrite, or select latest
+state automatically.
+
+## Concurrent Preparation And Serial Integration
+
+Transitions may be prepared or implemented concurrently only when their
+admitted bases are current, prerequisites are satisfied, affected scopes and
+write sets are compatible, semantic outcomes do not conflict, verification
+contracts remain valid, and no shared-authority write overlaps. Disjoint files
+alone do not prove compatibility. Return typed transition identities, affected
+scopes, and failed invariants for stale, overlapping, contradictory,
+under-specified, or dependency-blocked proposals.
+
+One designated integration owner serially changes active plans, ledgers,
+routers, shared contracts, lockfiles, generated artifacts, and other declared
+shared authority. Compare `planning-admission-v1` immediately before mutation
+or staging and again immediately before authoritative integration. Either
+mismatch invalidates admission and requires a new decision from fresh state.
+This is optimistic revision validation, not atomic multi-file replacement.
+
+The coherent transition contains plan and issue changes, ledger evidence, the
+operation, prior and resulting revisions, resulting state and next slice,
+integration owner, and verification result. Recompute the resulting digest
+after integration. State/evidence disagreement blocks normal admission.
+
+The integration owner explicitly reconciles disagreement by selecting
+`complete-transition`, `restore-prior-state`, or `supersede-transition` against
+fresh current state and both revision gates. Reconciliation has a separate
+deterministic identity referencing the failed transition, observed revisions,
+selected remedy and authority, intended result, and verification contract. It
+never reuses the failed admission or chooses from timestamps, file precedence,
+or apparent completeness.
+
+Do not introduce reservations, leases, queues, heartbeats, scheduling,
+state-only commits, recovery journals, transaction managers, duplicate
+execution, or persistent coordination lifecycle as generic fallback. Such a
+mechanism requires measured downstream need and a separate plan.
+
 ## Acceptance Claims
 
 Follow [the verification workflow](verification.md). Record each required claim

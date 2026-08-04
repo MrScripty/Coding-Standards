@@ -21,6 +21,13 @@
    verification ambiguous.
 5. Read only routed standards and directly affected source context.
 
+When a written plan governs the change, require its explicit canonical
+repository-relative `plan.md` path and explicit `start`, `continue`, or `verify`
+operation. Consume the Planning workflow's admission, transition identity,
+compatibility, revision-gate, evidence, and reconciliation decisions. Do not
+scan for a plan, infer an operation, copy the lifecycle table, or treat a next
+slice as authority.
+
 A large plan is required when sequencing, ownership, migration, concurrency, or
 cross-layer acceptance cannot be held unambiguously in the task. A bounded local
 fix may proceed without one.

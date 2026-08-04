@@ -13,26 +13,12 @@ compile-fail, property-test, and Rust test-style children are accepted, and
 Rows 20 through 24 are accepted and closed; row 25 has one Implementation-owned
 derived-entrypoint child ready for implementation.
 
-**Next slice:** Milestone 7.4b15c row 25 child 25.1a for `STD-0852`, `STD-0853`, `STD-0854`, `STD-0855`, `STD-0856`, `STD-0857`, and `STD-0858`; establish explicit
-repository-relative plan identity and typed selection diagnostics in
-Implementation, consuming Security path authority and conditional Cross-Platform
-representation plus Planning-owned explicit lifecycle admission, before
-deriving the prompt; admission uses an expected plan revision and
-Concurrency-owned conditional transition. Revision identity is the versioned
-Planning-owned digest of exact `plan.md` and linked `issues.md` state, enforced
-by pre-mutation and pre-integration gates under one serial integration owner.
-The ledger owns prior/resulting revision evidence but is never admission input.
-Partial integration blocks admission until explicit revision-checked
-reconciliation restores coherent state and evidence. A deterministic
-`planning-transition-v1` envelope binds actor, operation, base and intended
-result, exact scope and write set, dependencies, semantic outcome, and
-verification contract. Compatible envelopes may be prepared or implemented
-concurrently, but shared authority remains serially integrated; conflicts and
-stale state return typed diagnostics without merge, retry, or fallback.
-
-The prerequisite child `25.0` is accepted: completed row 21 through 24
-decomposition checkers validate only their row-owned historical facts and no
-longer own mutable future milestone status or the live global next-slice cursor.
+**Next slice:** Milestone 7.4b15d row 25 child 25.1b for `STD-0852`, `STD-0853`,
+`STD-0854`, `STD-0855`, `STD-0856`, `STD-0857`, and `STD-0858`; derive one thin,
+versioned, path-neutral Implementation prompt entrypoint from the accepted
+Planning admission and transition contract, record exact index dispositions,
+and remove the tracked legacy checklist without preserving inference or
+fallback behavior.
 
 **Acceptance status:** `partial`
 
@@ -1809,7 +1795,7 @@ all structural/routing fixtures pass.
      through 24 decomposition checkers retain row-owned milestone, structure,
      disposition, owner, and train evidence while dropping mutable future-status
      and live-cursor assertions before child `25.1a` advances row 25.
-   - `7.4b15c` (`Planned`): establish Planning-owned explicit admission,
+   - `7.4b15c` (`Accepted`): establish Planning-owned explicit admission,
      `planning-admission-v1`, and deterministic `planning-transition-v1`
      consumed by Implementation, with actor, exact scope/write set,
      dependencies, semantic outcome, verification contract, typed compatibility
