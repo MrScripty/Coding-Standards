@@ -7462,3 +7462,30 @@ integrity passed.
 
 **Next slice:** `7.4b24c`, migrate `STD-0451` through `STD-0453` selected
 rendering and synchronization and extract fixed mechanisms.
+
+## Milestone 7.4b24c Frontend Rendering And Synchronization
+
+**Outcome:** Accepted.
+
+Frontend now selects rendering from authoritative state, required output,
+interaction, lifecycle, platform capability, and evidence. Declarative and
+imperative mechanisms are both valid when selected and proven; neither becomes
+state authority or fallback.
+
+Synchronization selects event, subscription, query, polling, or boundary-drain
+mechanisms from source and consumer contracts. A pull FFI adapter does not
+authorize a second UI polling loop. Ordering, duplicate, stale-result,
+cancellation, lifecycle, and unavailable-source outcomes remain explicit.
+
+TypeScript DOM, framework-state, event, polling, and FFI examples moved to a
+non-normative Frontend recipe. Twenty-six decisions cover selected rendering
+and synchronization mechanisms, missing facts, unsupported capability,
+contradictions, unsafe mutation, and prohibited mechanism defaults.
+`STD-0451` through `STD-0453` each have one exact disposition.
+
+**Verification:** rendering/synchronization decisions, recipe metadata, exact
+dispositions, Frontend owner checks, row 34 decomposition, immutable cursor,
+plan structure, shell syntax, and diff integrity passed.
+
+**Next slice:** `7.4b24d`, migrate `STD-0454` frontend timer lifecycle proof
+and extract React hook mechanisms.

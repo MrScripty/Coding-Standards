@@ -55,14 +55,37 @@ required output and lifecycle. Direct DOM, canvas, WebGL, native-widget, or
 other imperative access is valid when the interaction or rendering contract
 requires it and ownership, cleanup, and synchronization are explicit.
 
+Select rendering from the authoritative state, required output, interaction,
+lifecycle, platform capability, and evidence. Declarative bindings do not
+become state authority, and imperative access does not authorize reconstruction
+from the rendered tree. Isolate mechanism-owned mutation from declarative
+ownership only when the selected renderer requires it, and prove cleanup and
+reconciliation at that boundary.
+
 Synchronize from authoritative state through the selected event, subscription,
 query, or boundary mechanism. Polling is valid only when the source contract is
 pull-based or no supported event mechanism satisfies the requirement. Its
 owner, cadence, cancellation, stale-result handling, and terminal outcomes
 must be explicit.
 
+Event delivery, subscriptions, direct queries, and polling are alternatives
+selected by the source and consumer contracts; none is a universal preference.
+A pull-style FFI or message drain remains a boundary adapter and does not
+authorize a second UI polling loop. The synchronization mechanism must preserve
+ordering, duplicate, stale-result, cancellation, and unavailable-source
+outcomes required by its owners.
+
 Do not use a second UI store, DOM reads, global timer, copied response, or
 periodic reconciliation as fallback for missing authority or synchronization.
+Do not switch between declarative and imperative rendering, event and polling,
+or push and pull sources when the selected mechanism is unavailable. Return
+`invalid` for contradictory authority, unsafe mutation, stale application, or
+incomplete lifecycle; `unsupported` for a valid requirement outside platform
+capability; and `unavailable` for missing authority, source contract,
+mechanism, lifecycle, or evidence.
+
+Illustrative mechanisms are isolated in the
+[Frontend mechanism recipes](../../reference/recipes/frontend.md).
 
 ## Interaction And Accessibility
 

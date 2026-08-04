@@ -39,6 +39,9 @@ STD-0132	ARCHITECTURE-PATTERNS.md	topics/contracts.md	split	prohibit contradicti
 STD-0133	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	uniformity observability and self-documentation benefits become conditional claim evidence
 STD-0449	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	legacy Frontend parent routes to the canonical application boundary
 STD-0450	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	refine	select applicability from changed UI projection interaction state synchronization and evidence responsibilities without technology-name defaults
+STD-0451	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	legacy rendering parent routes to selected Frontend rendering and synchronization policy
+STD-0452	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	split	own rendering projection selection while extracting TypeScript DOM and framework-state examples to non-normative Frontend recipes
+STD-0453	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	split	own source-driven synchronization selection while extracting fixed event timer DOM-scan and FFI-drain mechanisms to non-normative Frontend recipes
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
 STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference

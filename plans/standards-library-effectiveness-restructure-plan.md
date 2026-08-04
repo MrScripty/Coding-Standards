@@ -6,13 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 33 are accepted and closed. Row 34 child
-34.1 is accepted: Frontend applicability follows changed UI responsibilities
-rather than technology names. The immutable cursor is child 34.2.
+**Current phase:** Rows 20 through 33 are accepted and closed. Row 34 children
+34.1 and 34.2 are accepted: Frontend applicability and rendering/synchronization
+follow owned contracts rather than technology or mechanism defaults. The
+immutable cursor is child 34.3.
 
-**Next slice:** Milestone 7.4b24c migrates `STD-0451`, `STD-0452`, and
-`STD-0453` selected rendering and synchronization and extracts fixed DOM,
-event, timer, and FFI mechanisms.
+**Next slice:** Milestone 7.4b24d migrates `STD-0454` frontend timer lifecycle
+proof and extracts React hook mechanisms without holder, cadence, retry, or
+cleanup-test defaults.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1914,7 +1915,7 @@ all structural/routing fixtures pass.
      TypeScript tooling, accepted testing evidence, and Accessibility closure.
    - `7.4b24b` (`Accepted`): record `STD-0449` and `STD-0450` Frontend
      parent and applicability lineage.
-   - `7.4b24c` (`Planned`): migrate `STD-0451` through `STD-0453`
+   - `7.4b24c` (`Accepted`): migrate `STD-0451` through `STD-0453`
      rendering and synchronization and extract fixed mechanisms.
    - `7.4b24d` (`Planned`): migrate `STD-0454` frontend timer lifecycle
      proof and extract React hook mechanisms.
