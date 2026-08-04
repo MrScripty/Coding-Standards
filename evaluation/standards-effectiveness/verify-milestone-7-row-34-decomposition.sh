@@ -10,11 +10,12 @@ mapfile -t validated < <(awk -F '\t' 'NR>1{print $1}' "$V");[[ "${validated[*]}"
 [[ "$(awk -F '\t' '$1=="STD-0464"{print $2}' "$V")" == topics/accessibility.md ]]
 for t in '## Owner Contract' 'does not own domain state' '## Exact Ownership' '`34.1`' '`34.2`' '`34.3`' '`34.4`' '`34.5`' '`34.6`' 'Deleted selector, event, DOM-shim' '## Typed Outcomes And No Fallback' '## Re-plan Triggers';do rg -F -q "$t" "$D";done
 [[ "$(awk -F '\t' '$1==34{print $6}' "$S/milestone-7-execution-train.tsv")" == profiles/applications/frontend.md ]]
-for m in a b c d e f;do needle="$(printf '`7.4b24%s` (`Accepted`)' "$m")";rg -F -q "$needle" "$P";done;rg -F -q '`7.4b24g` (`Planned`)' "$P"
+for m in a b c d e f g;do needle="$(printf '`7.4b24%s` (`Accepted`)' "$m")";rg -F -q "$needle" "$P";done
 "$S/verify-frontend-applicability.sh"
 "$S/verify-frontend-rendering-synchronization.sh"
 "$S/verify-frontend-lifecycle-work.sh"
 "$S/verify-frontend-typescript-tooling.sh"
 "$S/verify-frontend-testing-lineage.sh"
+"$S/verify-frontend-source-closure.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-34 decomposition passed: 16 IDs across 6 owner-aligned children\n'

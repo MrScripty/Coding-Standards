@@ -7570,3 +7570,31 @@ integrity passed.
 
 **Next slice:** `7.4b24g`, route `STD-0464` to Accessibility, close the
 legacy source, and run the P28 full-suite integration gate.
+
+## Milestone 7.4b24g Frontend Source Closure
+
+**Outcome:** Accepted.
+
+`STD-0464` now routes user-access outcomes to canonical Accessibility while
+Frontend retains only concrete application mechanism specialization. The
+legacy Frontend source is closed as a non-normative compatibility index with
+nine explicit routes and no independent frontend, accessibility, tooling,
+lifecycle, verification, framework, platform, mechanism, or fallback policy.
+
+The closure verifier proves all sixteen Frontend identifiers have exactly one
+disposition, `STD-0464` targets Accessibility, every index route resolves, old
+section and mechanism text is absent, and the accepted 17-case Accessibility
+owner contract remains authoritative. Earlier child verifiers now inspect
+their canonical owners and fixtures instead of depending on deleted legacy
+headings.
+
+**Verification:** Frontend source closure, all five prior Frontend child gates,
+row 34 decomposition, Accessibility owner evidence, immutable execution train,
+plan structure, shell syntax, whitespace integrity, and the P28 fail-fast
+complete suite passed.
+
+**Re-plan trigger:** row 35 is the next immutable package and carries
+`final-closure` activation. Before changing `STD-0001` through `STD-0006`,
+decompose README routing and reference-index closure, freeze exact dispositions
+and negative non-authority evidence, and preserve Router ownership. This is
+milestone `7.4b25a`.

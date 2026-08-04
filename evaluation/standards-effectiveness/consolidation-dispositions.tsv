@@ -52,6 +52,7 @@ STD-0460	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	userEvent
 STD-0461	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	browser geometry routes to required-environment evidence without DOM-shim or mocked-rectangle substitution
 STD-0462	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	polling cleanup routes to accepted lifecycle evidence without timer-spy or happy-path defaults
 STD-0463	FRONTEND-STANDARDS.md	profiles/applications/frontend.md	index	embedded controls route to selected interaction and representative-browser evidence without fixed smoke checks
+STD-0464	FRONTEND-STANDARDS.md	topics/accessibility.md	index	legacy Frontend accessibility route delegates user-access outcomes to canonical Accessibility and frontend mechanisms to the Frontend profile
 STD-0007	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	index	legacy accessibility parent now routes to the canonical modality-neutral owner
 STD-0008	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	semantic mechanism selection moved while web comparison syntax moved to reference
 STD-0009	ACCESSIBILITY-STANDARDS.md	topics/accessibility.md	split	interaction semantics parent moved while web organization moved to reference
