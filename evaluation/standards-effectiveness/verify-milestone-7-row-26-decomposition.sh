@@ -7,7 +7,8 @@ mapfile -t validated < <(awk -F '\t' 'NR>1{print $1}' "$V");[[ "${validated[*]}"
 for t in '## Owner Contract' 'sole normative owner' 'derived' '## Exact Dispositions' '`STD-0859` through `STD-0887`' '## Ordered Children' '`26.1`' '## Projection Requirements' 'fixed milestone counts' '## Re-plan Triggers';do rg -F -q "$t" "$S/milestone-7-row-26-decomposition.md";done
 [[ "$(awk -F '\t' '$1==26{print $6}' "$S/milestone-7-execution-train.tsv")" == 'workflows/planning.md' ]]
 [[ "$(awk -F '\t' '$1==26{print $5}' "$S/milestone-7-execution-train.tsv")" == 'templates/PLAN-TEMPLATE.md' ]]
-rg -F -q '`7.4b16a` (`Accepted`)' "$P";rg -F -q '`7.4b16b` (`Planned`)' "$P"
-next="$(awk '/^\*\*Next slice:\*\*/{c=1}c&&/^$/{exit}c{print}' "$P")";[[ "$next" == *'Milestone 7.4b16b'* && "$next" == *'STD-0859'* && "$next" == *'STD-0887'* ]]
+rg -F -q '`7.4b16a` (`Accepted`)' "$P";rg -F -q '`7.4b16b` (`Accepted`)' "$P";rg -F -q '`7.4b17a` (`Planned`)' "$P"
+mapfile -t disposed < <(awk -F '\t' '$1>="STD-0859"&&$1<="STD-0887"{print $1}' "$S/consolidation-dispositions.tsv");[[ "${disposed[*]}" == "${expected[*]}" ]]
+"$S/verify-plan-template-projection.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-26 decomposition passed: 29 IDs assigned to one Planning-owned child\n'

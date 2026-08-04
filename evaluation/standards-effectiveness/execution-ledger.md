@@ -6711,6 +6711,27 @@ generation machinery are rejected.
 
 **Next slice:** `7.4b16b`, implement the frozen one-package projection contract.
 
+## Milestone 7.4b16b: Planning-Derived Template Projection
+
+**Outcome:** Accepted.
+
+The current concise `PLAN-TEMPLATE.md` already satisfies the frozen projection
+contract, so no source churn was introduced. Eight focused decisions prove the
+required projection and reject mandatory optional sections, fixed milestone
+counts, copied owner procedure, and frozen-structure fallback. Structural
+checks cover all required current fields and prohibit obsolete headings and
+machine paths.
+
+`STD-0859` through `STD-0887` now have exact `index` dispositions to
+`workflows/planning.md`. The template remains a projection rather than a second
+normative owner. Row 26 is closed.
+
+**Verification:** template-projection, row-26 decomposition, execution-train,
+plan-structure, and complete standards suites passed.
+
+**Next slice:** `7.4b17a`, re-plan row 27 `STD-0888` through `STD-0898`; no
+pull-request template implementation is authorized before decomposition.
+
 ## Milestone 7.4b9i Remediation: Embedded Prettier Recipe
 
 Lookahead before child `19.9` found that the `.prettierrc` block embedded in

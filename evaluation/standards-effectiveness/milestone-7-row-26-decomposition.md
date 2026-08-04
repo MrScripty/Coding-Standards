@@ -27,6 +27,8 @@ normative movement or split disposition is required.
    projection; record all 29 exact dispositions and focused positive and
    negative projection evidence in one atomic slice.
 
+Child `26.1` is accepted. Row 26 is closed.
+
 The template, dispositions, focused fixtures/checker, row-26 decomposition and
 owner validation, plan, ledger, and affected current-cursor assertions are the
 only allowed implementation write set.
