@@ -164,84 +164,26 @@ mechanisms moved to the non-normative
 
 ## Process Instance Coordination
 
-### The Pattern
+Canonical exclusion and atomicity are owned by
+[Concurrency](topics/concurrency.md#select-coordination-from-the-invariant).
+Instance identity and representation meaning remain with
+[Contracts](topics/contracts.md), supported process-observation mechanisms with
+[Cross-Platform](topics/cross-platform.md#platform-support-contract), and
+stale-state classification and recovery with
+[Resilience](topics/resilience.md#failure-classification-and-decision).
+Architecture selects lifecycle ownership, while Diagnostics selects any
+required reporting.
 
-Ensure only one instance of a process or service is running by using PID files
-with liveness checks. This prevents duplicate instances while handling crashes
-and stale state gracefully.
+A PID file, operating-system mutex, supervisor, bound endpoint, lock, or other
+mechanism is selected only after those facts are complete. No PID contents,
+process-start-time check, liveness probe, cleanup action, or log is a universal
+requirement.
 
-```
-Process starts
-    │
-    ├── PID file exists?
-    │       │
-    │       ├── Yes → Is PID alive AND start time matches?
-    │       │           │
-    │       │           ├── Yes → Another instance is running (exit or connect)
-    │       │           │
-    │       │           └── No → Stale PID file (delete and reclaim)
-    │       │
-    │       └── No → Continue
-    │
-    ├── Create PID file (write atomically)
-    ├── Run
-    └── Clean up PID file on exit
-```
-
-### PID File Rules
-
-| Rule | Rationale |
-|------|-----------|
-| Write PID file atomically (write-to-temp, then rename) | Prevents partial reads by concurrent starters |
-| Include process start time alongside PID | Detects PID reuse by the OS (see below) |
-| Lock the PID file while running | OS-level mutual exclusion prevents TOCTOU races |
-| Clean up PID file on graceful exit | Prevents stale files from blocking future starts |
-| Always verify PID is alive before trusting | PID files survive crashes; the process may not |
-
-### PID File Contents
-
-Store enough information to distinguish a live instance from a stale file:
-
-```json
-{
-    "pid": 48210,
-    "start_time": 1706140800,
-    "version": "1.2.0"
-}
-```
-
-### Handling PID Reuse
-
-Operating systems recycle PIDs. After a process dies, the OS may assign its PID
-to an unrelated process. Checking `kill(pid, 0)` alone will return "alive" for
-the wrong process.
-
-**The fix:** Store the process start time in the PID file and compare it against
-the actual start time of the running process.
-
-```text
-function is_original_process_alive(pid_file):
-    recorded = read_and_parse_pid_file(pid_file)
-    if recorded is invalid:
-        return false
-
-    if process_does_not_exist(recorded.pid):
-        return false
-
-    actual_start = get_process_start_time(recorded.pid)
-    return actual_start == recorded.start_time
-```
-
-On Linux, process start time can be read from `/proc/[pid]/stat`. On Windows,
-use the process creation time via the Windows API. See
-[CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) for platform
-abstraction strategies.
-
-### Stale PID File Cleanup
-
-When a PID file references a dead process (or a reused PID with a different
-start time), the file is stale. Delete it and proceed with normal startup.
-Always log when reclaiming a stale PID file — it indicates a previous crash.
+One non-normative arrangement is available in the
+[Conditional Process Instance Coordination](reference/patterns/architecture.md#conditional-process-instance-coordination).
+Missing or contradictory identity, coordination, lifecycle, target, recovery,
+or diagnostic facts retain the canonical typed outcome instead of selecting a
+PID file or incumbent mechanism.
 
 ---
 

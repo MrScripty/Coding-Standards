@@ -260,3 +260,42 @@ handling, and resumption evidence easier to inspect when the selected contracts
 actually require them. Recovery, idempotency, separation, auditability, and
 projection consistency remain claims to prove through affected real boundaries;
 the map or a final snapshot proves none of them.
+
+## Conditional Process Instance Coordination
+
+After Contracts defines the identity of one current instance, Architecture
+assigns its lifecycle owner, Concurrency selects the exclusion invariant, and
+Cross-Platform and Resilience establish supported observation and recovery
+behavior, one possible arrangement is:
+
+```text
+candidate participant
+    --> selected instance identity
+        --> selected coordination boundary
+            |-- acquired  --> run under the selected lifecycle owner
+            |-- occupied  --> return the declared already-active outcome
+            `-- unresolved --> return the canonical typed diagnostic
+```
+
+The coordination boundary may use an operating-system facility, supervisor,
+endpoint, lock, file-backed mechanism, or another capability whose guarantees
+satisfy the selected invariant. The illustration does not select a PID file,
+identity fields, process-start-time API, liveness test, cleanup action, or
+diagnostic channel.
+
+Evidence that appears stale is not deletion authority. Resilience and Contracts
+must establish whether the state is disposable, what authoritative observation
+supports recovery, who may perform it, and which result is visible. Diagnostics
+selects reporting only when an accepted operator or consumer claim requires it.
+
+If one-instance exclusion is not required, this pattern does not apply. Missing
+identity, ownership, coordination, platform, recovery, or evidence facts return
+the canonical typed outcome rather than selecting the nearest mechanism.
+
+### Conditional Consequences
+
+One selected identity and proved exclusion boundary can prevent overlapping
+participants from claiming the same instance role. Crash recovery, portability,
+race freedom, and operational visibility remain separate claims requiring
+affected real-boundary evidence; the diagram or successful startup proves none
+of them.

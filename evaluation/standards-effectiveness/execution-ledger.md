@@ -8110,6 +8110,32 @@ integrity.
 **Next slice:** `7.4b29b`, migrate `STD-0093` through `STD-0098` without
 PID-file, liveness, cleanup, platform-API, logging, legacy, or fallback defaults.
 
+## Milestone 7.4b29b Conditional Process Instance Coordination
+
+**Outcome:** Accepted.
+
+The legacy process-instance section now routes exclusion and atomicity to
+Concurrency, identity and representation meaning to Contracts, supported
+process-observation capability to Cross-Platform, stale-state recovery to
+Resilience, lifecycle ownership to Architecture, and selected reporting to
+Diagnostics.
+
+The Architecture reference retains one mechanism-neutral conditional map. PID
+files, mutexes, supervisors, endpoints, locks, and other mechanisms are merely
+possible implementations after canonical facts are complete. Fixed PID
+contents, start-time APIs, liveness probes, cleanup actions, and mandatory logs
+were removed rather than preserved as defaults.
+
+**Verification:** fifteen positive, unavailable, unsupported, invalid, and
+prohibited-fallback decisions; six exact dispositions; canonical route and
+reference assertions; removed legacy PID headings and mechanisms; row-39
+decomposition; execution-train advancement; plan structure; shell syntax; and
+diff integrity.
+
+**Next slice:** `7.4b29c`, migrate `STD-0099` through `STD-0103` without
+connect-first, creation-lock, backoff, health, lifecycle-model, or fallback
+defaults.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

@@ -44,6 +44,12 @@ STD-0085	ARCHITECTURE-PATTERNS.md	reference/recipes/frontend.md	merge-duplicate	
 STD-0086	ARCHITECTURE-PATTERNS.md	workflows/verification.md	merge-duplicate	testability reuse and clean-view benefits remain claims selected and proved by Verification
 STD-0087	ARCHITECTURE-PATTERNS.md	topics/architecture.md	merge-duplicate	canonical concern-boundary policy already rejects a universal directory tree and location-based ownership
 STD-0088	ARCHITECTURE-PATTERNS.md	workflows/documentation.md	merge-duplicate	canonical Documentation already selects boundary READMEs from durable responsibility and rejects directory-based obligations
+STD-0093	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	index	legacy process-instance label remains discoverable only after canonical identity coordination lifecycle and recovery facts are selected
+STD-0094	ARCHITECTURE-PATTERNS.md	topics/concurrency.md	split	Concurrency owns the exclusion invariant while reference may illustrate one selected process-coordination arrangement
+STD-0095	ARCHITECTURE-PATTERNS.md	topics/concurrency.md	refine	coordination follows invariant and capability facts without universal PID-file atomic-write lock cleanup or liveness rules
+STD-0096	ARCHITECTURE-PATTERNS.md	topics/contracts.md	split	Contracts owns instance identity semantics while the fixed PID start-time version JSON representation is removed
+STD-0097	ARCHITECTURE-PATTERNS.md	topics/cross-platform.md	split	Cross-Platform owns supported process-identity capability and target evidence without Linux proc or Windows API defaults
+STD-0098	ARCHITECTURE-PATTERNS.md	topics/resilience.md	split	Resilience owns stale-state classification and recovery authority while Diagnostics rejects mandatory reclaim logging
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults

@@ -42,7 +42,8 @@ done
 [[ "$(awk -F '\t' '$1 == 39 { print $2 FS $4 FS $8 }' "$S/milestone-7-accelerated-packages.tsv")" == $'P32\treference/patterns/architecture.md\tfocused' ]]
 rg -F -q '| F075 | Resolved in Milestone 7.4b29a |' "$F"
 rg -F -q '`7.4b29a` (`Accepted`)' "$P"
-rg -F -q '`7.4b29b` (`Planned`)' "$P"
+rg -F -q '`7.4b29b` (`Accepted`)' "$P"
+rg -F -q '`7.4b29c` (`Planned`)' "$P"
 "$S/verify-architecture-owner-contract.sh"
 "$S/verify-architecture-pattern-reference-owner.sh"
 "$S/verify-concurrency-policy.sh"
