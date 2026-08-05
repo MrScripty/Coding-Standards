@@ -274,17 +274,14 @@ Resilience, and Verification retain their existing authority.
 
 ## Choosing Patterns
 
-| Situation | Recommended Pattern |
-|-----------|-------------------|
-| Multi-layer application | Layered Separation of Concerns |
-| Client-server state management | Backend-Owned Data |
-| Parallel team development | Immutable Contracts |
-| Multi-process communication | IPC/Message Contract |
-| Complex UI with data | View Model |
-| Distributed debugging | Activity Tracing |
-| Single-instance process requirement | Process Instance Coordination |
-| Service that any process may need to start | Discover-or-Create |
-| Complex data structure mutations | Phased Mutation |
-| Evolving database schemas across versions | Schema Versioning and Migration |
-| Handling infrastructure failures | [Resilience](topics/resilience.md) |
-| Consistent error responses from HTTP APIs | HTTP API Error Convention |
+Select applicable canonical owners through the
+[Standards Router](STANDARDS-ROUTER.md) from the actual responsibility,
+authority, contract, lifecycle, platform, persistence, recovery, security, and
+evidence facts. A broad situation label does not select an architecture,
+mechanism, or pattern.
+
+After canonical decisions are complete, the non-normative
+[Architecture Pattern Reference](reference/patterns/architecture.md) may help
+communicate one conditional arrangement. Missing or contradictory facts retain
+their canonical typed outcome instead of selecting the nearest example,
+incumbent pattern, fixed diagram, or smallest structural change.

@@ -57,6 +57,7 @@ STD-0102	ARCHITECTURE-PATTERNS.md	topics/concurrency.md	split	Concurrency owns t
 STD-0103	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture selects lifecycle ownership from actual boundaries while fixed creator last-client and daemon models become variation points
 STD-0104	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	pseudocode remains qualified by selected contracts and cannot authorize unbounded retry or default locking
 STD-0105	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	consequences remain observable claims requiring affected evidence rather than guaranteed benefits
+STD-0134	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	merge-duplicate	canonical fact-driven routing and pattern non-authority replace the universal situation-to-pattern selection table
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults

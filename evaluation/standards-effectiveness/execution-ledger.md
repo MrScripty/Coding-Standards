@@ -8214,6 +8214,32 @@ syntax, and diff integrity.
 **Next slice:** `7.4b30b`, remove the universal situation-to-pattern table,
 record `STD-0134`, close row 40 and P32, and advance to row 41.
 
+## Milestone 7.4b30b Pattern Selection Closure Blocked
+
+**Outcome:** Blocked; re-plan trigger reached before acceptance.
+
+The table replacement, focused fixture, verifier, and plan projection were
+drafted. Focused decision and text assertions reached the accepted row-39
+preservation chain, where `verify-milestone-7-row-39-decomposition.sh` rejected
+the valid row-40 lifecycle because it still required later milestone
+`7.4b30a` to remain `Planned`.
+
+That assertion was historical later-row authority. Row 40's checker, the active
+plan, and the execution train own current lifecycle. Repairing row 39 was
+outside child `40.1`'s approved write set and required a separate atomic
+verifier slice.
+
+The unaccepted `STD-0134` disposition was removed. Row 40 and P32 remained open
+until the checker repair passed; no objective closure was claimed.
+
+**Verification:** eighteen decision cases and row-40-local text assertions
+passed before the historical row-39 lifecycle assertion failed. Plan structure,
+shell syntax, and diff integrity remained green.
+
+**Next slice:** `7.4b30br`, isolate the historical row-39 checker from later-row
+lifecycle with negative regression evidence, then resume `7.4b30b` from the
+same explicit `STD-0134` outcome.
+
 ## Milestone 7.4b30br Historical Row-39 Checker Ownership Recovery
 
 **Outcome:** Accepted.
@@ -8234,6 +8260,30 @@ the complete fail-fast standards suite pass.
 
 **Next slice:** `7.4b30b`, restore the preserved pattern-selection closure,
 record `STD-0134`, close row 40 and P32, and advance to row 41.
+
+## Milestone 7.4b30b Pattern Selection Closure
+
+**Outcome:** Accepted.
+
+The universal situation-to-pattern table is removed. Selection now routes
+through the Standards Router from actual responsibility, authority, contract,
+lifecycle, capability, and evidence facts. Broad labels, nearest examples,
+incumbent patterns, and fixed diagrams cannot select policy.
+
+`STD-0134` has one exact `merge-duplicate` disposition to the existing
+Architecture pattern reference. Missing facts and unsupported or contradictory
+conditions return typed outcomes; no prior pattern or label-based fallback is
+preserved. Row 40 and focused package P32 are closed, and immutable row 41 is
+active.
+
+**Verification:** eighteen focused routing and rejection decisions, exact
+disposition uniqueness, prohibited-table absence, Architecture reference
+preservation, row-39 and row-40 decomposition, historical-checker ownership,
+execution-train advancement, plan structure, shell syntax, and diff integrity
+pass.
+
+**Next slice:** `7.4b31a`, planning only, to review `STD-0349` Documentation
+index closure and focused P33 evidence before substantive movement.
 
 ## Milestone 7.4b26d Conditional Monorepo Roles
 

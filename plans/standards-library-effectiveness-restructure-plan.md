@@ -6,14 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 39 are accepted and closed. Historical row-39
-verification no longer owns row-40 lifecycle. Row 40 owner review confirms
-`STD-0134` as duplicate Architecture reference selection guidance. One
-final-closure child remains before P32 can close.
+**Current phase:** Rows 20 through 40 are accepted and closed. The universal
+pattern-selection table is removed, `STD-0134` has one exact disposition, and
+P32 is closed. Immutable row 41 is active for the `STD-0349` Documentation
+index closure and focused P33 gate.
 
-**Next slice:** Milestone 7.4b30b migrates `STD-0134`, removes the universal
-situation-to-pattern table, records one exact `merge-duplicate` disposition,
-closes row 40 and P32, and advances to immutable row 41.
+**Next slice:** Milestone 7.4b31a is planning only: review the row-41
+`STD-0349` Documentation index lineage, exact closure outcome, bounded write
+set, and P33 evidence before substantive movement.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2012,9 +2012,11 @@ all structural/routing fixtures pass.
      historical row-39 checker, extend negative regression coverage to row 39,
      and preserve current lifecycle authority in the row-40 checker, execution
      train, and plan.
-   - `7.4b30b` (`Planned`): remove the universal Choosing Patterns table,
+   - `7.4b30b` (`Accepted`): remove the universal Choosing Patterns table,
      record one exact reference `merge-duplicate` disposition, close row 40
      and P32, and advance to immutable row 41.
+   - `7.4b31a` (`Planned`): review row 41 `STD-0349` Documentation index
+     closure and P33 evidence without substantive movement.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

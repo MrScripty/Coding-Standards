@@ -26,7 +26,9 @@ done
 [[ "$(awk -F '\t' '$1 == 40 { print $6 FS $7 FS $8 }' "$S/milestone-7-execution-train.tsv")" == $'reference/patterns/architecture.md\tmissing\towner-review' ]]
 [[ "$(awk -F '\t' '$1 == 40 { print $2 FS $4 FS $8 }' "$S/milestone-7-accelerated-packages.tsv")" == $'P32\treference/patterns/architecture.md\tfocused' ]]
 rg -F -q '`7.4b30a` (`Accepted`)' "$P"
-rg -F -q '`7.4b30b` (`Planned`)' "$P"
+rg -F -q '`7.4b30br` (`Accepted`)' "$P"
+rg -F -q '`7.4b30b` (`Accepted`)' "$P"
+rg -F -q '`7.4b31a` (`Planned`)' "$P"
 "$S/verify-architecture-pattern-reference-owner.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-40 decomposition passed: STD-0134 has one reference merge-duplicate child closing P32\n'
