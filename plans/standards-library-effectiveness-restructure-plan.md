@@ -6,9 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 39 are accepted and closed. Row 40 owner
-review confirms `STD-0134` as duplicate Architecture reference selection
-guidance. One final-closure child remains before P32 can close.
+**Current phase:** Rows 20 through 39 are accepted and closed. Historical row-39
+verification no longer owns row-40 lifecycle. Row 40 owner review confirms
+`STD-0134` as duplicate Architecture reference selection guidance. One
+final-closure child remains before P32 can close.
 
 **Next slice:** Milestone 7.4b30b migrates `STD-0134`, removes the universal
 situation-to-pattern table, records one exact `merge-duplicate` disposition,
@@ -2007,6 +2008,10 @@ all structural/routing fixtures pass.
    - `7.4b30a` (`Accepted`): review row 40 `STD-0134`, confirm its current
      Architecture reference lineage and exact disposition, and perform no
      substantive movement before owner review is accepted.
+   - `7.4b30br` (`Accepted`): remove row-40 lifecycle authority from the
+     historical row-39 checker, extend negative regression coverage to row 39,
+     and preserve current lifecycle authority in the row-40 checker, execution
+     train, and plan.
    - `7.4b30b` (`Planned`): remove the universal Choosing Patterns table,
      record one exact reference `merge-duplicate` disposition, close row 40
      and P32, and advance to immutable row 41.

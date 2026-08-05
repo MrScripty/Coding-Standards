@@ -8214,6 +8214,27 @@ syntax, and diff integrity.
 **Next slice:** `7.4b30b`, remove the universal situation-to-pattern table,
 record `STD-0134`, close row 40 and P32, and advance to row 41.
 
+## Milestone 7.4b30br Historical Row-39 Checker Ownership Recovery
+
+**Outcome:** Accepted.
+
+The completed row-39 checker no longer asserts the lifecycle state of row 40.
+The table-driven historical-checker ownership regression now rejects row-40
+milestone references in the row-39 checker, preserving row-39 evidence while
+leaving current lifecycle and cursor authority with the row-40 checker,
+execution train, and plan.
+
+No normative standard, disposition, decomposition row, package gate, or legacy
+text changed. The recovery addresses verification ownership only and does not
+relax an acceptance claim or introduce a compatibility fallback.
+
+**Verification:** the historical-checker ownership regression, row-39 and
+row-40 decomposition checks, plan structure, shell syntax, diff integrity, and
+the complete fail-fast standards suite pass.
+
+**Next slice:** `7.4b30b`, restore the preserved pattern-selection closure,
+record `STD-0134`, close row 40 and P32, and advance to row 41.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

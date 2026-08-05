@@ -26,5 +26,5 @@ while IFS=$'\t' read -r checker_path owned_row forbidden reason extra; do
   count=$((count + 1))
 done < "$F"
 
-[[ "$count" -eq 2 ]]
+[[ "$count" -eq 3 ]]
 printf 'Historical row-checker ownership passed: %d later-milestone exclusions\n' "$count"
