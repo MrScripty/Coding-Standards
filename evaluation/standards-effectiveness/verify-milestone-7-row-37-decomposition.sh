@@ -42,10 +42,7 @@ rg -F -q '`7.4b27a` (`Accepted`)' "$P"
 rg -F -q '`7.4b27b` (`Accepted`)' "$P"
 rg -F -q '`7.4b27c` (`Accepted`)' "$P"
 rg -F -q '`7.4b27d` (`Accepted`)' "$P"
-for milestone in 7.4b27e; do
-  printf -v pattern '`%s` (`Planned`)' "$milestone"
-  rg -F -q "$pattern" "$P"
-done
+rg -F -q '`7.4b27e` (`Accepted`)' "$P"
 "$S/verify-architecture-owner-contract.sh"
 "$S/verify-architecture-pattern-reference-owner.sh"
 "$S/verify-resilience-owner-contract.sh"
@@ -53,5 +50,6 @@ done
 "$S/verify-architecture-composition-root-pattern.sh"
 "$S/verify-architecture-durable-workflow-pattern.sh"
 "$S/verify-frontend-view-model-lineage.sh"
+"$S/verify-architecture-directory-template-closure.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-37 decomposition passed: 19 IDs across 4 serial children with P30 closing in child 37.4\n'

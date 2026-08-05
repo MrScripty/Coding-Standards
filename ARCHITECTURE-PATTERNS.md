@@ -139,55 +139,16 @@ action forwarding, copied state, backend owner, or separate test surface.
 
 ## Directory Structure Template
 
-A general-purpose project layout:
+Canonical module, package, and directory placement moved to
+[Concern Boundaries](topics/architecture.md#concern-boundaries). Documentation
+selection, boundary README use, and ADR linkage remain with the
+[Documentation Workflow](workflows/documentation.md).
 
-```
-project-root/
-├── src/
-│   ├── presentation/           # UI layer
-│   │   ├── components/         # Reusable UI components
-│   │   ├── views/              # Page/screen compositions
-│   │   └── styles/             # CSS/styling
-│   │
-│   ├── application/            # Application layer
-│   │   ├── controllers/        # Request handlers
-│   │   ├── handlers/           # Event/message handlers
-│   │   └── mappers/            # DTO transformations
-│   │
-│   ├── domain/                 # Domain layer
-│   │   ├── services/           # Business logic
-│   │   ├── entities/           # Domain objects
-│   │   └── value-objects/      # Immutable values
-│   │
-│   ├── infrastructure/         # Infrastructure layer
-│   │   ├── api/                # External API clients
-│   │   ├── database/           # Database access
-│   │   └── messaging/          # Message queue/IPC
-│   │
-│   └── shared/                 # Cross-cutting concerns
-│       ├── types/              # Shared type definitions
-│       ├── utils/              # Utility functions
-│       └── constants/          # Application constants
-│
-├── tests/                      # Test files
-│   ├── unit/
-│   ├── integration/
-│   └── e2e/
-│
-├── docs/                       # Documentation
-├── scripts/                    # Build/deploy scripts
-└── config/                     # Configuration files
-```
-
-### Directory README Requirement
-
-Document meaningful architecture boundaries according to the
-[Documentation Workflow](workflows/documentation.md). Directory depth and the
-presence of a `src/` path do not create a documentation obligation.
-
-Use a boundary README when this structure owns a responsibility or invariant
-that is not clear from its public entry points. Use an ADR for durable
-cross-boundary decisions and link to it instead of repeating its rationale.
+No general-purpose project tree is retained. Names such as `src`, `domain`,
+`shared`, `tests`, or `docs`, directory depth, and a neighboring repository do
+not select responsibilities, dependencies, ownership, documentation, or
+evidence. Missing boundary or documentation facts return the canonical typed
+diagnostic instead of selecting this legacy layout.
 
 ---
 

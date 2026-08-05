@@ -6,15 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 36 are accepted and closed. Row 37 children
-37.1 through 37.3 are accepted: conditional structural examples remain only
-where useful, and view-model lineage now routes to existing Frontend,
-Architecture, recipe, and Verification authority without a copied class. P30
-remains open, and final-closure child 37.4 is active.
+**Current phase:** Rows 20 through 37 are accepted and closed. Row 37 retains
+only conditional composition and durable-workflow illustrations, routes
+view-model lineage to existing owners, and removes the universal directory
+tree. P30 passed its complete-suite gate. The immutable cursor is row 38.
 
-**Next slice:** Milestone 7.4b27e replaces `STD-0087`, removes the universal
-directory template, closes row 37, and runs the deferred P30 complete-suite
-gate.
+**Next slice:** Milestone 7.4b28a reviews `STD-0088`, confirms Documentation
+ownership and exact closure treatment for the legacy Activity Tracing pattern,
+and performs no substantive movement before the pre-slice review is accepted.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1975,8 +1974,11 @@ all structural/routing fixtures pass.
      historical row checkers, add negative regression coverage for rows 36 and
      37, and retain active lifecycle and cursor authority in the current row
      checker, execution train, and plan.
-   - `7.4b27e` (`Planned`): replace `STD-0087`, remove the universal directory
+   - `7.4b27e` (`Accepted`): replace `STD-0087`, remove the universal directory
      template, close row 37, and run the deferred P30 complete-suite gate.
+   - `7.4b28a` (`Planned`): review `STD-0088`, confirm Documentation ownership
+     and exact closure treatment for the legacy Activity Tracing pattern, and
+     perform no substantive movement before the pre-slice review is accepted.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

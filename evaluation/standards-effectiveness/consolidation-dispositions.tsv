@@ -42,6 +42,7 @@ STD-0083	ARCHITECTURE-PATTERNS.md	profiles/applications/frontend.md	merge-duplic
 STD-0084	ARCHITECTURE-PATTERNS.md	profiles/applications/frontend.md	split	selected synchronization and action contracts replace subscription forwarding and backend-by-location defaults
 STD-0085	ARCHITECTURE-PATTERNS.md	reference/recipes/frontend.md	merge-duplicate	existing recipes already illustrate selected synchronization so the mutable class example is removed
 STD-0086	ARCHITECTURE-PATTERNS.md	workflows/verification.md	merge-duplicate	testability reuse and clean-view benefits remain claims selected and proved by Verification
+STD-0087	ARCHITECTURE-PATTERNS.md	topics/architecture.md	merge-duplicate	canonical concern-boundary policy already rejects a universal directory tree and location-based ownership
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults

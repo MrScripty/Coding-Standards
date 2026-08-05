@@ -7948,6 +7948,29 @@ the complete fail-fast standards suite pass.
 **Next slice:** `7.4b27e`, restore the preserved directory-template closure,
 remove row 37's later-row lifecycle assertion before acceptance, and rerun P30.
 
+## Milestone 7.4b27e Directory Template And P30 Closure
+
+**Outcome:** Accepted.
+
+The universal project tree is removed. The legacy section now routes module,
+package, and directory placement to Architecture concern boundaries and
+documentation selection to the Documentation workflow. Directory names,
+depth, neighboring layouts, and a `src` path cannot create responsibility,
+ownership, documentation, or evidence obligations.
+
+No replacement reference tree was added. Existing canonical owners already
+state the useful decisions, so retaining a second layout would preserve an
+incumbent default without unique explanatory value.
+
+**Verification:** ten directory decisions, the exact `STD-0087` disposition,
+all nineteen row 37 dispositions, preservation of later architecture sections,
+historical-checker ownership, all focused row 36 and row 37 evidence,
+immutable-train advancement, plan structure, shell syntax, diff integrity, and
+the complete fail-fast standards suite pass. Row 37 and P30 are closed.
+
+**Next slice:** `7.4b28a`, planning only, to review `STD-0088` Documentation
+ownership and exact closure treatment before substantive legacy movement.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

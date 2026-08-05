@@ -1,0 +1,11 @@
+case	boundaries	documentation	ownership	fallback	expected
+selected_boundaries	complete	complete	complete	none	route
+single_coherent	complete	not-needed	complete	none	route
+missing_boundaries	missing	complete	complete	none	typed-unavailable
+missing_documentation	complete	missing	complete	none	typed-unavailable
+missing_ownership	complete	complete	missing	none	typed-unavailable
+contradictory_ownership	complete	complete	contradictory	none	typed-invalid
+universal_tree_fallback	complete	complete	complete	universal-tree	typed-invalid
+src_threshold_fallback	complete	complete	complete	src-threshold	typed-invalid
+neighbor_layout_fallback	complete	complete	complete	neighbor-layout	typed-invalid
+directory_owner_fallback	complete	complete	complete	location-owner	typed-invalid
