@@ -6,14 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 38 are accepted and closed. `STD-0088` now
-has its exact Documentation disposition, P31 is closed, and the source-gap
-audit proves two retained diff artifacts plus sixteen deferred row-47 gaps.
-The immutable cursor is row 39.
+**Current phase:** Rows 20 through 38 are accepted and closed. Row 39 owner
+review is accepted as three ordered process-coordination, discover-or-create,
+and reference-closure children. P32 remains open through immutable row 40, and
+the immutable cursor remains row 39 until all thirteen dispositions exist.
 
-**Next slice:** Milestone 7.4b29a reviews row 39 `STD-0093` through
-`STD-0105`, confirms Architecture reference ownership and decomposition, and
-performs no substantive movement before owner review is accepted.
+**Next slice:** Milestone 7.4b29b migrates `STD-0093`, `STD-0094`, `STD-0095`,
+`STD-0096`, `STD-0097`, and `STD-0098`; preserves canonical coordination,
+identity, platform, recovery, and diagnostic authority; and retains at most one
+conditional process-coordination illustration without PID-file defaults.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1992,9 +1993,19 @@ all structural/routing fixtures pass.
    - `7.4b28b2` (`Accepted`): add the exact `STD-0088` Documentation disposition,
      focused canonical-owner evidence, row-38 decomposition and P31 closure,
      and reduce the audit expectation to the sixteen row-47 gaps.
-   - `7.4b29a` (`Planned`): review and decompose row 39 `STD-0093` through
-     `STD-0105` against the existing Architecture reference owner without
-     substantive movement before owner review is accepted.
+   - `7.4b29a` (`Accepted`): reject row 39's single-reference-owner assumption,
+     decompose `STD-0093` through `STD-0105` into three ordered existing-owner
+     children, and freeze exact normative/reference outcomes without
+     substantive movement.
+   - `7.4b29b` (`Planned`): migrate `STD-0093` through `STD-0098`, retain at
+     most one conditional process-coordination illustration, and remove
+     PID-file, liveness, cleanup, platform-API, and logging defaults.
+   - `7.4b29c` (`Planned`): migrate `STD-0099` through `STD-0103`, retain one
+     conditional discover-or-create map, and remove connect-first,
+     creation-lock, backoff, health, and fixed lifecycle-model defaults.
+   - `7.4b29d` (`Planned`): migrate `STD-0104` and `STD-0105`, retain only
+     qualified pseudocode and consequences, close row 39, and leave P32 open
+     for immutable row 40.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

@@ -8081,6 +8081,35 @@ shell syntax, diff integrity, and complete repository verification pass.
 **Next slice:** `7.4b29a`, planning only, to review `STD-0093` through
 `STD-0105` Architecture reference ownership before substantive movement.
 
+## Milestone 7.4b29a Row 39 Process Coordination Re-plan
+
+**Outcome:** Accepted.
+
+Owner review rejected the planned single-reference-owner assumption. Frozen
+`STD-0093` through `STD-0105` combine normative process exclusion, identity,
+platform capability, stale-state recovery, service lifecycle, retry, readiness,
+transport, diagnostics, and evidence with non-normative diagrams and
+pseudocode. The Architecture reference cannot own those decisions.
+
+Row 39 now has three ordered children. Existing Architecture, Concurrency,
+Contracts, Cross-Platform, Resilience, Security, Diagnostics, and Verification
+authority remains canonical; the Architecture reference may retain only
+conditional illustrations. Every identifier has one frozen primary owner and
+disposition, and no substantive legacy or canonical-owner text moved.
+
+P32 remains open through immutable row 40. Canonical owners remain read-only
+unless focused implementation evidence proves a policy gap, which triggers
+re-planning rather than fallback or silent scope expansion.
+
+**Verification:** exact 13-ID/three-child coverage, exact owner-validation
+schema, existing-owner presence, immutable row and P32 identity, F075 closure,
+canonical Architecture, Concurrency, Contracts, Resilience, and reference
+checks, execution-train integrity, plan structure, shell syntax, and diff
+integrity.
+
+**Next slice:** `7.4b29b`, migrate `STD-0093` through `STD-0098` without
+PID-file, liveness, cleanup, platform-API, logging, legacy, or fallback defaults.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

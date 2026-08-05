@@ -1,0 +1,14 @@
+id	canonical_owner	disposition	reference_treatment	rationale
+STD-0093	reference/patterns/architecture.md	index	conditional-process-coordination	legacy process-instance label remains discoverable only after canonical identity coordination lifecycle and recovery facts are selected
+STD-0094	topics/concurrency.md	split	conditional-process-coordination	Concurrency owns the exclusion invariant while reference may illustrate one selected process-coordination arrangement
+STD-0095	topics/concurrency.md	refine	none	coordination follows invariant and capability facts without universal PID-file atomic-write lock cleanup or liveness rules
+STD-0096	topics/contracts.md	split	none	Contracts owns instance identity semantics while the fixed PID start-time version JSON representation is removed
+STD-0097	topics/cross-platform.md	split	none	Cross-Platform owns supported process-identity capability and target evidence without Linux proc or Windows API defaults
+STD-0098	topics/resilience.md	split	none	Resilience owns stale-state classification and recovery authority while Diagnostics rejects mandatory reclaim logging
+STD-0099	reference/patterns/architecture.md	index	conditional-discover-or-create	legacy discover-or-create label remains discoverable only after service ownership coordination readiness and recovery facts are selected
+STD-0100	topics/architecture.md	split	conditional-discover-or-create	Architecture owns service placement and lifecycle authority while reference may illustrate one convergence arrangement
+STD-0101	reference/patterns/architecture.md	move	conditional-discover-or-create	the convergence flow remains illustrative and cannot select connection creation locking retry readiness or ownership policy
+STD-0102	topics/concurrency.md	split	conditional-discover-or-create	Concurrency owns the creation exclusion invariant while Contracts Resilience Security and lifecycle owners retain their decisions
+STD-0103	topics/architecture.md	split	conditional-discover-or-create	Architecture selects lifecycle ownership from actual boundaries while fixed creator last-client and daemon models become variation points
+STD-0104	reference/patterns/architecture.md	move	conditional-discover-or-create	pseudocode remains qualified by selected contracts and cannot authorize unbounded retry or default locking
+STD-0105	reference/patterns/architecture.md	move	conditional-discover-or-create	consequences remain observable claims requiring affected evidence rather than guaranteed benefits
