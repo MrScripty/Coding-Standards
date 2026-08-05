@@ -6,16 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 37 are accepted and closed. Row 38 remains
-blocked after the undisposed-source audit. The audit confirms the `STD-0088`
-gap and finds sixteen absent README-template identifiers scheduled for row 47.
-Those identifiers were replaced by the conditional boundary template in
-milestone 6.1 without exact dispositions. P31 has not started.
+**Current phase:** Rows 20 through 37 are accepted and closed. Row 38 recovery
+is approved with immutable train order preserved. `STD-0088` closes in row 38;
+sixteen absent README-template identifiers remain explicit row-47 debt under an
+executable exact-set audit. P31 remains pending the row-38 closure slice.
 
-**Next slice:** Milestone 7.4b28arr selects recovery sequencing for the seventeen
-confirmed source gaps. It must decide whether row 38 closes `STD-0088` while
-row-47 debt remains explicitly bounded, or whether immutable train order is
-replanned. Legacy restoration is prohibited.
+**Next slice:** Milestone 7.4b28b closes `STD-0088` through Documentation,
+installs the exact-set undisposed-source audit with sixteen explicit row-47
+gaps, closes P31, and advances the immutable cursor without restoring legacy
+text or completing row 47 early.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1985,9 +1984,12 @@ all structural/routing fixtures pass.
    - `7.4b28ar` (`Accepted`): audit every baseline Markdown heading deleted
      without a disposition; classify two retained-heading false positives and
      confirm seventeen source gaps in rows 38 and 47.
-   - `7.4b28arr` (`Planned`): choose ordered recovery for the row-38 and row-47
-     source gaps without restoring legacy policy or silently completing row 47
-     ahead of the immutable train.
+   - `7.4b28arr` (`Accepted`): preserve immutable train order, close
+     `STD-0088` in row 38, and bound the sixteen row-47 gaps with an executable
+     exact-set audit that rejects additions and must reach zero at row 47.
+   - `7.4b28b` (`Planned`): add the exact `STD-0088` Documentation disposition,
+     focused canonical-owner evidence, row-38 decomposition and closure, and the
+     bounded row-47 audit without restoring removed legacy text.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

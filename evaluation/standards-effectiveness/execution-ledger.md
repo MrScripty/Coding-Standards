@@ -8018,6 +8018,26 @@ milestone 6.1 commit diff and ledger evidence, and the audit report agree.
 debt with normal train order and an explicit immutable-train replan. Restoring
 the legacy template is prohibited.
 
+## Milestone 7.4b28arr Ordered Source-Gap Recovery
+
+**Outcome:** Accepted.
+
+Recovery preserves immutable train order. Row 38 closes `STD-0088` against the
+existing Documentation owner. The sixteen README-template identifiers remain
+undisposed until row 47 and are not treated as completed migration work.
+
+An executable audit will own the temporary gap boundary. Its fixture lists
+exactly two retained-heading diff artifacts and sixteen deferred row-47 gaps.
+The checker rejects any unlisted orphan, verifies retained headings remain,
+verifies deferred headings are absent, and requires the deferred set to become
+empty when row 47 is accepted.
+
+Legacy template restoration, immutable identity rewriting, premature row-47
+dispositions, and silent audit exceptions remain prohibited.
+
+**Next slice:** `7.4b28b`, close `STD-0088`, install the exact-set audit, close
+P31, and advance to the next immutable row.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.
