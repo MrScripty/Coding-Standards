@@ -1971,6 +1971,10 @@ all structural/routing fixtures pass.
    - `7.4b27d` (`Accepted`): migrate `STD-0081` through `STD-0086` to existing
      Frontend, Architecture, recipe, and Verification authority without
      retaining the fixed view-model chain, mutable class, or benefit defaults.
+   - `7.4b27er` (`Accepted`): remove later-row lifecycle assertions from
+     historical row checkers, add negative regression coverage for rows 36 and
+     37, and retain active lifecycle and cursor authority in the current row
+     checker, execution train, and plan.
    - `7.4b27e` (`Planned`): replace `STD-0087`, remove the universal directory
      template, close row 37, and run the deferred P30 complete-suite gate.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.

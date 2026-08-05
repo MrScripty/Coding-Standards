@@ -7927,6 +7927,27 @@ shell syntax, and diff integrity passed.
 **Next slice:** `7.4b27e`, replace `STD-0087`, remove the universal directory
 template, close row 37, and run the deferred P30 complete-suite gate.
 
+## Milestone 7.4b27er Historical Row-Checker Ownership Recovery
+
+**Outcome:** Accepted.
+
+The completed row-36 checker no longer asserts the lifecycle state of row 37.
+A table-driven negative check rejects later-row milestone references in the
+row-36 and row-37 checkers, preserving historical row evidence while leaving
+current lifecycle and cursor authority with the active row checker, execution
+train, and plan.
+
+No normative standard, disposition, decomposition row, package gate, or legacy
+text changed. The recovery addresses verification ownership only and does not
+relax an acceptance claim or introduce a compatibility fallback.
+
+**Verification:** the historical-checker ownership regression, row-36 and
+row-37 decomposition checks, plan structure, shell syntax, diff integrity, and
+the complete fail-fast standards suite pass.
+
+**Next slice:** `7.4b27e`, restore the preserved directory-template closure,
+remove row 37's later-row lifecycle assertion before acceptance, and rerun P30.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.
