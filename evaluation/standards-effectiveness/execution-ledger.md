@@ -8188,6 +8188,32 @@ advancement; plan structure; shell syntax; and diff integrity.
 **Next slice:** `7.4b30a`, planning only, to review `STD-0134` Architecture
 reference lineage before substantive movement or P32 closure.
 
+## Milestone 7.4b30a Row 40 Pattern Selection Review
+
+**Outcome:** Accepted.
+
+Owner review confirms `STD-0134` is duplicate Architecture reference selection
+guidance. The frozen Choosing Patterns table maps broad situation labels to
+named patterns before canonical ownership, contract, lifecycle, platform,
+recovery, security, and evidence facts are known.
+
+The current Architecture reference already requires canonical decisions before
+adaptation, treats pattern presence as non-applicability evidence, records
+variation and rejection conditions, and rejects incumbent examples and fixed
+diagrams. The table has no unique canonical rule and will not be copied.
+
+Row 40 has one final-closure child with one `merge-duplicate` outcome. P32 closes
+only after the table is removed and the exact disposition and focused evidence
+pass.
+
+**Verification:** exact one-ID/one-child coverage, exact owner-validation
+schema, inherited owner presence, immutable row and P32 identity, Architecture
+reference non-authority, execution-train integrity, plan structure, shell
+syntax, and diff integrity.
+
+**Next slice:** `7.4b30b`, remove the universal situation-to-pattern table,
+record `STD-0134`, close row 40 and P32, and advance to row 41.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

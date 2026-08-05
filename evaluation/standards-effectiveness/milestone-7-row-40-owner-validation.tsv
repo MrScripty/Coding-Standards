@@ -1,0 +1,2 @@
+id	canonical_owner	disposition	reference_treatment	rationale
+STD-0134	reference/patterns/architecture.md	merge-duplicate	none	existing reference adaptation boundaries already require canonical decisions and reject situation-label pattern selection incumbent examples and fixed diagrams
