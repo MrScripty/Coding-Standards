@@ -31,7 +31,8 @@ done
 
 [[ -e "$R/workflows/documentation.md" ]]
 rg -F -q '`7.4b31a` (`Accepted`)' "$P"
-rg -F -q '`7.4b31b` (`Planned`)' "$P"
+rg -F -q '`7.4b31b` (`Accepted`)' "$P"
+rg -F -q '`7.4b32a` (`Planned`)' "$P"
 "$S/verify-documentation-decisions.sh"
 "$S/verify-documentation-policy-consolidation.sh"
 "$S/verify-milestone-7-execution-train.sh"

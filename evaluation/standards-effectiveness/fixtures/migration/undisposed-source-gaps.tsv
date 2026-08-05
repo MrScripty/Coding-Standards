@@ -1,5 +1,4 @@
 id	classification	reason
-STD-0349	retained-diff	documentation index heading remains after whole-file rewrite
 STD-0899	deferred-row47	directory title replaced by boundary title
 STD-0900	retained-diff	purpose heading remains after template rewrite
 STD-0901	deferred-row47	fixed contents inventory removed

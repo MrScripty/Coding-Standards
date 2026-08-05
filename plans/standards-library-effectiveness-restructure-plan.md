@@ -6,14 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 40 are accepted and closed. Row 41 owner
-review confirms `STD-0349` is the retained title of an already non-normative
-Documentation migration index. One mechanical closure child remains before P33
-can close.
+**Current phase:** Rows 20 through 41 are accepted and closed. `STD-0349` has
+one exact disposition, the Documentation migration index remains
+non-authoritative, and P33 is closed. Immutable row 42 is active for the
+`STD-0582` Security index closure and focused P34 gate.
 
-**Next slice:** Milestone 7.4b31b records one exact `index` disposition, removes
-only the resolved `STD-0349` retained-diff audit row, proves the index remains
-non-authoritative, closes row 41 and P33, and advances to immutable row 42.
+**Next slice:** Milestone 7.4b32a is planning only: review the row-42
+`STD-0582` Security index lineage, exact closure outcome, bounded write set,
+and P34 evidence before substantive movement.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2017,9 +2017,11 @@ all structural/routing fixtures pass.
      and P32, and advance to immutable row 41.
    - `7.4b31a` (`Accepted`): review row 41 `STD-0349` Documentation index
      closure and P33 evidence without substantive movement.
-   - `7.4b31b` (`Planned`): record one exact Documentation `index`
+   - `7.4b31b` (`Accepted`): record one exact Documentation `index`
      disposition, remove only the resolved audit exception, close row 41 and
      P33, and advance to immutable row 42.
+   - `7.4b32a` (`Planned`): review row 42 `STD-0582` Security index closure and
+     P34 evidence without substantive movement.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

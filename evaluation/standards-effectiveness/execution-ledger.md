@@ -8313,6 +8313,32 @@ shell syntax, and diff integrity pass.
 **Next slice:** `7.4b31b`, record the exact `STD-0349` index disposition,
 remove its audit exception, close row 41 and P33, and advance to row 42.
 
+## Milestone 7.4b31b Documentation Index Closure
+
+**Outcome:** Accepted.
+
+`STD-0349` has one exact `index` disposition to the canonical Documentation
+workflow. The existing `DOCUMENTATION-STANDARDS.md` migration index remains
+unchanged and non-authoritative; it continues to route examples and changelog
+policy to their separately owned destinations without copying those rules.
+
+Only the resolved `STD-0349` retained-diff audit row is removed. The focused
+fixture proves the exact seventeen remaining candidates, including retained
+`STD-0900` and all sixteen deferred row-47 identifiers.
+
+**No-fallback result:** no legacy Documentation policy is restored, no
+canonical rule is copied into the index, no generic Documentation default is
+introduced, and no unrelated audit exception is removed. Missing or
+contradictory lineage remains a typed planning failure.
+
+**Verification:** exact disposition uniqueness, exact remaining audit set,
+undisposed-source audit, Documentation decision and consolidation evidence,
+row-41 decomposition, execution-train advancement, plan structure, unchanged
+source index, shell syntax, and diff integrity pass. Row 41 and P33 are closed.
+
+**Next slice:** `7.4b32a`, planning only, to review `STD-0582` Security index
+closure and focused P34 evidence before substantive movement.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

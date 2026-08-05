@@ -200,6 +200,7 @@ STD-0259	COMMIT-STANDARDS.md	none	remove	implicit merge base example
 STD-0260	COMMIT-STANDARDS.md	workflows/commit.md	move	post-rewrite graph verification
 STD-0261	COMMIT-STANDARDS.md	none	remove	implicit verification range
 STD-0262	COMMIT-STANDARDS.md	none	remove	implicit verification example
+STD-0349	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	index	retain the legacy title only as a non-normative migration index to canonical Documentation example and Release owners
 STD-0350	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	boundary-based documentation selection
 STD-0351	DOCUMENTATION-STANDARDS.md	none	remove	universal per-directory README requirement
 STD-0352	DOCUMENTATION-STANDARDS.md	workflows/documentation.md	move	durable knowledge rationale
