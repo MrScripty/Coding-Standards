@@ -6,14 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 41 are accepted and closed. Row 42 owner
-review confirms `STD-0582` is the title of an existing Security routing index
-with no independent rule. One mechanical closure child remains before P34 can
-close.
+**Current phase:** Rows 20 through 41, row 42 owner review, and the row 42
+verification recovery are accepted. `STD-0582` remains undisposed, row 42
+remains active, and P34 is open.
 
-**Next slice:** Milestone 7.4b32b records one exact `STD-0582` `index`
-disposition, proves the unchanged Security index remains non-authoritative,
-closes row 42 and P34, and advances to immutable row 43.
+**Next slice:** Milestone 7.4b32b2 resumes the exact `STD-0582` Security index
+closure, restores the checksummed focused verifier, closes row 42 and P34, and
+advances to immutable row 43.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2022,9 +2021,27 @@ all structural/routing fixtures pass.
      P33, and advance to immutable row 42.
    - `7.4b32a` (`Accepted`): review row 42 `STD-0582` Security index closure and
      P34 evidence without substantive movement.
-   - `7.4b32b` (`Planned`): record one exact Security `index` disposition,
-     prove existing canonical routes, close row 42 and P34, and advance to
-     immutable row 43.
+   - `7.4b32b` (`Blocked`): the exact disposition and focused verifier are
+     drafted, but zero-valued arithmetic in the accepted independent-trust
+     checker trips `set -e` when Security reaches zero current identifiers;
+     `STD-0582` remains undisposed and P34 remains open.
+   - `7.4b32br` (`Blocked`): assignment-form accumulation and focused
+     zero-current evidence pass, including an isolated row-43 transition, but
+     the required full suite exposes a pre-existing row-40 checker assertion
+     that row 41 must still be planned.
+   - `7.4b32br1` (`Blocked`): generalized completed-row lifecycle checks and
+     row-40/row-41 repairs pass, but the required full suite exposes a separate
+     row-35 checker that compares a frozen three-caller inventory with the
+     mutable repository-wide four-caller graph.
+   - `7.4b32br2` (`Blocked`): the single-source four-caller manifest and all row
+     checkers pass, but the later full suite exposes a Resilience verifier that
+     requires a pattern-selection table row intentionally removed by row 40.
+   - `7.4b32br3` (`Accepted`): replace stale legacy table-row evidence with the
+     exact Standards Router Resilience route and explicit non-restoration
+     evidence, then accept the recovery after complete-suite verification.
+   - `7.4b32b2` (`Planned`): resume the exact Security `index` disposition,
+     restore the checksummed focused verifier, prove existing canonical routes,
+     close row 42 and P34, and advance to immutable row 43.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

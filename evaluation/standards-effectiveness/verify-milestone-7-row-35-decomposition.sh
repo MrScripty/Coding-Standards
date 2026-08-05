@@ -40,20 +40,15 @@ done < "$A"
 [[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 32 ]]
 "$S/verify-root-readme-consumer-audit.sh"
 
-expected_callers=(
-  evaluation/standards-effectiveness/verify-binding-contract-evolution.sh
-  evaluation/standards-effectiveness/verify-cross-language-contract.sh
-  evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
-)
 mapfile -t callers < <(awk -F '\t' 'NR > 1 { print $1 }' "$C" | sort)
-[[ "${callers[*]}" == "${expected_callers[*]}" ]]
+[[ "${#callers[@]}" -gt 0 ]]
 [[ "$(awk -F '\t' 'NR > 1 && ($2 != "evaluation/standards-effectiveness/verify-contract-ownership.sh" || NF != 2) { n++ } END { print n+0 }' "$C")" -eq 0 ]]
 mapfile -t observed_callers < <(
   rg -l '^"\$(SCRIPT_DIR|S)/verify-contract-ownership\.sh"$' "$S"/verify-*.sh |
     sed "s#^$R/##" |
     sort
 )
-[[ "${observed_callers[*]}" == "${expected_callers[*]}" ]]
+[[ "${observed_callers[*]}" == "${callers[*]}" ]]
 for caller in "${callers[@]}"; do
   [[ -f "$R/$caller" ]]
   "$R/$caller"
@@ -72,4 +67,5 @@ rg -F -q '`7.4b25c` (`Accepted`)' "$P"
 "$S/verify-root-index-closure.sh"
 "$S/verify-root-router-evidence.sh"
 "$S/verify-milestone-7-execution-train.sh"
-printf 'Milestone 7 row-35 decomposition passed: 6 IDs across 2 serial closure children, 33 frozen checker dependencies, 32 classified README consumers, and 3 shared-checker callers\n'
+printf 'Milestone 7 row-35 decomposition passed: 6 IDs across 2 serial closure children, 33 frozen checker dependencies, 32 classified README consumers, and %d shared-checker callers\n' \
+  "${#callers[@]}"

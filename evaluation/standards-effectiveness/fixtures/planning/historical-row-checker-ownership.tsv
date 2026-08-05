@@ -1,4 +1,2 @@
-checker_path	owned_row	forbidden_later_milestone	reason
-evaluation/standards-effectiveness/verify-milestone-7-row-36-decomposition.sh	36	7.4b27	later-row-lifecycle
-evaluation/standards-effectiveness/verify-milestone-7-row-37-decomposition.sh	37	7.4b28	later-row-lifecycle
-evaluation/standards-effectiveness/verify-milestone-7-row-39-decomposition.sh	39	7.4b30	later-row-lifecycle
+forbidden_status	reason
+Planned	completed-row-live-lifecycle

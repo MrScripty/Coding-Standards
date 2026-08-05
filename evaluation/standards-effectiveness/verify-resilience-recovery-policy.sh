@@ -6,6 +6,7 @@ readonly R="$(cd -- "$S/../.." && pwd)"
 readonly FIXTURE="$S/fixtures/resilience/recovery-policy-decisions.tsv"
 readonly OWNER="$R/topics/resilience.md"
 readonly LEGACY="$R/ARCHITECTURE-PATTERNS.md"
+readonly ROUTER="$R/STANDARDS-ROUTER.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
@@ -78,7 +79,11 @@ for removed in \
   'class BestEffortRegistry'; do
   ! rg -F -q "$removed" "$LEGACY" "$OWNER"
 done
-rg -F -q '| Handling infrastructure failures | [Resilience](topics/resilience.md) |' "$LEGACY"
+rg -F -q '| Dependency or service failure, retry, degradation, startup resilience, or recovery semantics | [Resilience](topics/resilience.md) |' "$ROUTER"
+if rg -F -q '| Handling infrastructure failures | [Resilience](topics/resilience.md) |' "$LEGACY"; then
+  printf 'invalid: legacy situation-to-pattern Resilience route was restored\n' >&2
+  exit 1
+fi
 
 rg -F -q '`7.4b8aj` (`Accepted`)' "$PLAN"
 

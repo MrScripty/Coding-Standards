@@ -136,7 +136,7 @@ while IFS=$'\t' read -r order owner count owner_state prerequisite status \
     [[ ! -e "$REPO_ROOT/$known_missing_owner" ]]
   fi
   ((baseline_trust_total += count))
-  ((current_trust_total += expected_count))
+  current_trust_total=$((current_trust_total + expected_count))
   ((owner_groups += 1))
 done < "$GROUP_FILE"
 [[ "$baseline_trust_total" -eq 61 ]]

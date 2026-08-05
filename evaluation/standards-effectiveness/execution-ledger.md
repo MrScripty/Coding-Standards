@@ -8366,6 +8366,206 @@ shell syntax, and diff integrity pass.
 **Next slice:** `7.4b32b`, record the exact `STD-0582` index disposition, close
 row 42 and P34, and advance to row 43.
 
+## Milestone 7.4b32b Security Index Closure Blocked
+
+**Outcome:** Blocked; re-plan trigger reached before acceptance.
+
+The exact disposition and focused Security index verifier were drafted. Local
+route, prohibited-mechanism, and execution-train checks show the closure would
+correctly advance row 42 to row 43. The accepted historical
+`verify-milestone-7-independent-trust-replan.sh` checker derives the correct
+two-identifier residual set, then exits because Security's zero current count
+makes `(( current_trust_total += expected_count ))` return a failing arithmetic
+status under `set -e`.
+
+The execution train and active row own current residual lifecycle. The
+historical checker still owns mutable post-acceptance remainder state, so
+repairing it is outside child `42.1`'s approved write set and requires a
+separate atomic verifier replan.
+
+The unaccepted `STD-0582` disposition was removed. Row 42 and P34 remain open;
+the focused verifier remains current-slice draft work and objective closure is
+not claimed.
+
+**Verification:** local disposition, route, prohibited-mechanism, and train
+advancement evidence passes with the draft disposition; an isolated worktree
+reproduces the historical checker failure after its exact residual-set equality
+passes and before its first zero-valued accumulation completes. Plan structure,
+shell syntax, and diff integrity remain green after restoring the undisposed
+state.
+
+**Next slice:** `7.4b32br`, replan historical independent-trust residual-set
+ownership, then resume `7.4b32b` from the same explicit `STD-0582` outcome.
+
+## Milestone 7.4b32br Independent-Trust Zero-Count Repair Blocked
+
+**Outcome:** Blocked at the required full-suite boundary.
+
+The historical checker retains its frozen 61-identifier baseline, exact dynamic
+residual-set equality, six owner groups, and accepted semantic evidence. Only
+its current-total accumulation changes from an arithmetic command, whose zero
+result is a failing Bash status under `set -e`, to assignment-form arithmetic.
+
+A focused fixture binds the protected checker, accumulator, and addend. Its
+verifier rejects reintroduction of the unsafe command, requires the selected
+assignment form, and executes that exact source expression with a zero addend
+under `bash -euo pipefail`. Current lifecycle and active-row authority remain in
+the immutable execution train.
+
+**No-fallback result:** the repair does not suppress failures, weaken exact-set
+comparison, remove `errexit`, special-case `STD-0582`, or accept an incorrect
+remainder. A real mismatch still returns a failing typed verification outcome.
+
+**Bounded write set:** the independent-trust checker, one planning fixture and
+focused verifier, row-42 gate, active plan, and execution ledger. No canonical
+standard, disposition, owner map, execution manifest, generated artifact, or
+legacy source changes.
+
+**Verification:** focused zero-valued accumulation, independent-trust chain,
+row-42 decomposition, execution train, plan structure, shell syntax, and diff
+integrity pass with `STD-0582` still undisposed. In an isolated accepted row-42
+state, the repaired checker passes with two current identifiers and the train
+advances to row 43.
+
+The mandatory complete suite then fails in
+`verify-architecture-pattern-selection-closure.sh`, which delegates to the
+completed row-40 checker. That historical checker still requires
+`7.4b31a` to be `Planned`, although row 41 is accepted and row 42 is active. A
+clean `c45e8ed` worktree reproduces the failure, proving it predates this draft.
+Repairing row 40 is outside the approved zero-count write set, so no acceptance
+or commit is claimed.
+
+**Next slice:** `7.4b32br1`, remove the later-row lifecycle assertion from the
+completed row-40 checker, add row 40 to the existing historical-checker
+negative fixture, and rerun the complete suite before accepting this repair.
+
+## Milestone 7.4b32br1 Generalized Completed-Row Lifecycle Isolation Blocked
+
+**Outcome:** Blocked at the required full-suite boundary.
+
+The historical-checker guard no longer carries a hand-maintained list of three
+past incidents. It derives every fully dispositioned baseline row from the
+immutable execution train, scans each existing completed-row checker, and
+rejects live `Planned` lifecycle assertions. Active and partially completed rows
+are excluded by their exact disposition state.
+
+The generalized scan identified two violations: row 40 retained row 41's
+`7.4b31a` planned state, and row 41 retained row 42's `7.4b32a` planned state.
+Both assertions are removed. Each checker retains its own accepted milestone,
+decomposition, owner, disposition, source, and focused semantic evidence.
+
+**No-fallback result:** the repair does not accept stale status, infer completion
+from plan prose, skip a completed row with an existing checker, or weaken row
+evidence. Current lifecycle and cursor authority remain in the execution train
+and active row checker.
+
+**Bounded write set:** the generalized fixture and verifier, row-40 and row-41
+checkers, row-42 gate, independent-trust zero-count recovery files, active plan,
+and execution ledger. The deferred Security closure verifier remains untouched;
+no disposition, canonical standard, legacy source, owner map, train manifest,
+or generated artifact changes.
+
+**Verification:** generalized completed-row scan, row-40 and row-41 focused
+checkers, architecture pattern-selection closure, Documentation index closure,
+zero-count regression, independent-trust chain, row-42 decomposition, execution
+train, plan structure, shell syntax, and diff integrity pass.
+
+The complete suite then fails in the unchanged row-35 decomposition checker.
+Its frozen transitive caller fixture names three direct callers of
+`verify-contract-ownership.sh`, while its repository-wide rescan observes four:
+the three frozen callers plus the completed row-39 checker. This slice did not
+change row 35, row 39, or the caller fixture. The failure is a distinct
+pre-existing ownership conflict between immutable row evidence and mutable
+shared-verifier topology, outside the approved lifecycle-isolation write set.
+
+**Next slice:** `7.4b32br2`, replan row-35 caller-inventory ownership without
+weakening exact contract evidence, then rerun the complete suite before
+accepting this recovery draft.
+
+## Milestone 7.4b32br2 Single-Source Shared-Caller Inventory Blocked
+
+**Outcome:** Blocked at the required full-suite boundary.
+
+The row-35 transitive caller manifest now includes the omitted completed row-39
+checker as the fourth direct caller of `verify-contract-ownership.sh`. The
+row-35 verifier no longer duplicates that manifest in a hard-coded array; it
+loads the exact reviewed manifest, compares the current repository scan against
+it, and executes every listed caller.
+
+The manifest remains serial shared-contract evidence. Future direct callers
+must update one explicit inventory in the same slice that adds the dependency,
+and the repository scan rejects missing, stale, or extra entries.
+
+**No-fallback result:** the repair does not skip row 39, accept an unenumerated
+caller, discover callers without reviewed evidence, weaken exact equality, or
+stop executing listed callers. A caller-graph mismatch remains a failing typed
+verification outcome.
+
+**Bounded write set:** the row-35 shared-caller manifest and checker, pending
+verification-recovery files, row-42 gate, active plan, and execution ledger.
+The deferred Security closure verifier remains untouched; no disposition,
+canonical standard, legacy source, owner map, execution manifest, generated
+artifact, or workflow fixture changes.
+
+**Verification:** row-35 decomposition and all four callers, generalized
+completed-row lifecycle scan, row-40 and row-41 focused checkers, architecture
+and Documentation closures, zero-count regression, independent-trust chain,
+row-42 decomposition, execution train, plan structure, shell syntax, and diff
+integrity pass. The complete suite passes every row checker and continues through
+the Release and Resilience owner gates before the later failure.
+
+`verify-resilience-recovery-policy.sh` still requires the legacy table row
+`Handling infrastructure failures | Resilience`. Accepted row 40 removed that
+universal situation-to-pattern table because labels cannot select architecture.
+The Resilience verifier already proves the canonical owner and the legacy
+migration-index route, so restoring the table would preserve forbidden legacy
+selection behavior. Repairing this assertion is outside the approved
+caller-manifest write set and requires a separate route-evidence replan.
+
+**Next slice:** `7.4b32br3`, replace the stale legacy table assertion with
+canonical Resilience route evidence and explicit table non-restoration, then
+rerun the complete suite before accepting this recovery draft.
+
+## Milestone 7.4b32br3 Canonical Resilience Route Evidence
+
+**Outcome:** Accepted.
+
+The Resilience recovery verifier no longer requires the removed universal
+situation-to-pattern table row. It now requires the exact Standards Router route
+for dependency or service failure, retry, degradation, startup resilience, and
+recovery semantics; retains canonical Resilience owner and architecture
+migration-index checks; and explicitly rejects restoration of the legacy table
+row.
+
+**No-fallback result:** the repair does not restore label-selected architecture,
+accept a nearest pattern, remove typed recovery outcomes, or weaken migration
+lineage. Missing canonical Router, owner, or migration-index evidence remains a
+failing typed verification outcome.
+
+**Bounded write set:** the Resilience recovery verifier, pending recovery files,
+row-42 gate, active plan, and execution ledger. The Router, Resilience owner,
+architecture index, deferred Security closure verifier, dispositions, owner map,
+execution manifests, generated artifacts, and workflow fixtures remain
+unchanged.
+
+**Verification:** Resilience recovery policy, architecture pattern-selection
+closure, all row checkers, single-source shared-caller inventory, generalized
+completed-row lifecycle scan, zero-count regression, independent-trust chain,
+row-42 decomposition, execution train, plan structure, shell syntax, diff
+integrity, and complete verifier suite pass.
+
+The first complete-suite rerun reached the unaccepted row-42 Security verifier
+draft because its `verify-*.sh` name placed it in the active checker namespace.
+The draft correctly failed while `STD-0582` remained undisposed. Its exact bytes
+are preserved at `/tmp/cs-7.4b32b2-security-index-closure.sh` with SHA-256
+`bac9620ebbacffe844aa0e2ce85e97767b4dcbc20ad8b210df47527194f80b01`, and the
+untracked active-name copy is removed. Slice `7.4b32b2` must verify that checksum
+before restoring the verifier with its disposition.
+
+**Next slice:** `7.4b32b2`, verify and restore the checksummed Security verifier,
+resume the exact `STD-0582` index disposition, close row 42 and P34, and advance
+to row 43.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.
