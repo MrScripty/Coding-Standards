@@ -8285,6 +8285,34 @@ pass.
 **Next slice:** `7.4b31a`, planning only, to review `STD-0349` Documentation
 index closure and focused P33 evidence before substantive movement.
 
+## Milestone 7.4b31a Row 41 Documentation Index Review
+
+**Outcome:** Accepted.
+
+Owner review confirms `STD-0349` is the retained title of
+`DOCUMENTATION-STANDARDS.md`, which is already a non-normative migration index.
+The immutable train's existing `workflows/documentation.md` owner remains
+correct. Documentation examples and changelog policy remain separately routed
+to their existing recipe and Release owners; the index creates no authority.
+
+Row 41 has one mechanical child. It records one exact `index` disposition and
+removes only the corresponding retained-diff audit fixture row. The source,
+canonical owners, generated inventory, immutable train, and package manifest
+remain unchanged. No substantive movement or disposition occurs in this
+planning slice.
+
+**No-fallback result:** missing or contradictory lineage blocks closure. The
+implementation cannot restore legacy guidance, copy canonical rules into the
+index, retain the resolved exception, remove unrelated audit candidates, or
+substitute another owner.
+
+**Verification:** exact row and P33 identity, one-ID owner-validation schema,
+current index and owner evidence, execution-train integrity, plan structure,
+shell syntax, and diff integrity pass.
+
+**Next slice:** `7.4b31b`, record the exact `STD-0349` index disposition,
+remove its audit exception, close row 41 and P33, and advance to row 42.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.
