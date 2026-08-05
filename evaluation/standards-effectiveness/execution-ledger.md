@@ -7995,6 +7995,29 @@ confirm the mismatch.
 without restoring legacy text, rewriting immutable identity, inferring Activity
 Tracing ownership, or beginning P31 substantive movement.
 
+## Milestone 7.4b28ar Undisposed Source Audit
+
+**Outcome:** Accepted; expanded re-plan trigger reached.
+
+The baseline deletion audit examined all Markdown sources, correlated deleted
+heading lines with frozen file-and-line identities, and excluded identifiers
+that already have exact dispositions. It found nineteen undisposed candidates.
+Current-heading review classified `STD-0349` and `STD-0900` as retained-heading
+diff artifacts and confirmed seventeen genuine source gaps.
+
+The confirmed set is `STD-0088` plus `STD-0899`, `STD-0901` through
+`STD-0905`, and `STD-0907` through `STD-0916`. Milestone 6.1 replaced the
+sixteen template sections with the conditional boundary template, but those
+frozen identifiers remain scheduled for row 47 and have no dispositions.
+
+**Verification:** frozen baseline identity, generated section inventory,
+current exact headings, consolidation dispositions, immutable rows 38 and 47,
+milestone 6.1 commit diff and ledger evidence, and the audit report agree.
+
+**Next slice:** `7.4b28arr`, planning only, to choose between bounded row-47
+debt with normal train order and an explicit immutable-train replan. Restoring
+the legacy template is prohibited.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.
