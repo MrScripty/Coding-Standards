@@ -8339,6 +8339,33 @@ source index, shell syntax, and diff integrity pass. Row 41 and P33 are closed.
 **Next slice:** `7.4b32a`, planning only, to review `STD-0582` Security index
 closure and focused P34 evidence before substantive movement.
 
+## Milestone 7.4b32a Row 42 Security Index Review
+
+**Outcome:** Accepted.
+
+Owner review confirms `STD-0582` is the retained `Security Standards` title.
+The current legacy file already routes its accepted child concerns to Security,
+Contracts, Concurrency, and IPC owners, and the title contains no independent
+validation, filesystem, payload, transport, or proof-lifetime policy.
+
+Row 42 has one mechanical child with one exact `index` outcome to
+`topics/security.md`. The source and canonical owners remain read-only. P34's
+`core` and `workflow.verification` dependencies match the Security owner's
+metadata and existing focused evidence.
+
+**No-fallback result:** missing or contradictory lineage blocks closure. The
+implementation cannot restore prior validators or mechanisms, copy canonical
+rules into the index, retain an undisposed title, or substitute another owner
+or weaker Security default.
+
+**Verification:** exact row and P34 identity, one-ID owner-validation schema,
+current Security routes and owner evidence, Verification dependency evidence,
+execution-train integrity, plan structure, unchanged source/disposition state,
+shell syntax, and diff integrity pass.
+
+**Next slice:** `7.4b32b`, record the exact `STD-0582` index disposition, close
+row 42 and P34, and advance to row 43.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.
