@@ -1,0 +1,2 @@
+id	canonical_owner	disposition	reference_treatment	rationale
+STD-0088	workflows/documentation.md	merge-duplicate	none	Documentation already selects boundary READMEs from durable responsibility and rejects directory-count path and fixed-section requirements

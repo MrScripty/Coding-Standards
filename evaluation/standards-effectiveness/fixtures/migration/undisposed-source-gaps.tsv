@@ -1,5 +1,4 @@
 id	classification	reason
-STD-0088	deferred-row38	directory README requirement removed with parent row 37 section
 STD-0349	retained-diff	documentation index heading remains after whole-file rewrite
 STD-0899	deferred-row47	directory title replaced by boundary title
 STD-0900	retained-diff	purpose heading remains after template rewrite

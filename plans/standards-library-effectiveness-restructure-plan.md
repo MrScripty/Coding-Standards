@@ -6,14 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 37 are accepted and closed. The exact-set
-source-gap audit is active and proves two retained diff artifacts, active
-`STD-0088`, and sixteen deferred row-47 gaps. Row 38 recovery and P31 remain
-pending without legacy restoration or premature row-47 dispositions.
+**Current phase:** Rows 20 through 38 are accepted and closed. `STD-0088` now
+has its exact Documentation disposition, P31 is closed, and the source-gap
+audit proves two retained diff artifacts plus sixteen deferred row-47 gaps.
+The immutable cursor is row 39.
 
-**Next slice:** Milestone 7.4b28b2 closes `STD-0088` through Documentation,
-updates the audit expectation to the sixteen row-47 gaps, closes P31, and
-advances the immutable cursor without restoring legacy text.
+**Next slice:** Milestone 7.4b29a reviews row 39 `STD-0093` through
+`STD-0105`, confirms Architecture reference ownership and decomposition, and
+performs no substantive movement before owner review is accepted.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1989,9 +1989,12 @@ all structural/routing fixtures pass.
    - `7.4b28b1` (`Accepted`): install the exact-set source-gap audit and prove
      nineteen candidates: two retained diff artifacts, active `STD-0088`, and
      sixteen deferred row-47 gaps.
-   - `7.4b28b2` (`Planned`): add the exact `STD-0088` Documentation disposition,
+   - `7.4b28b2` (`Accepted`): add the exact `STD-0088` Documentation disposition,
      focused canonical-owner evidence, row-38 decomposition and P31 closure,
      and reduce the audit expectation to the sixteen row-47 gaps.
+   - `7.4b29a` (`Planned`): review and decompose row 39 `STD-0093` through
+     `STD-0105` against the existing Architecture reference owner without
+     substantive movement before owner review is accepted.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

@@ -8059,6 +8059,28 @@ immutable execution train, and the complete fail-fast standards suite pass.
 **Next slice:** `7.4b28b2`, close `STD-0088`, reduce the audit expectation to
 the sixteen row-47 gaps, close P31, and advance the cursor.
 
+## Milestone 7.4b28b2 Row 38 Documentation Closure
+
+**Outcome:** Accepted.
+
+`STD-0088` now has one exact `merge-duplicate` disposition to the existing
+Documentation workflow. Canonical policy already selects boundary READMEs from
+durable responsibility and rejects directory-count, path, fixed-section, and
+speculative-artifact defaults, so no source or owner text was added.
+
+The row-38 decomposition records the prior source-removal deviation without
+rewriting identity or restoring legacy policy. The exact-set audit now proves
+eighteen candidates: two retained diff artifacts and sixteen deferred row-47
+gaps. No row-47 identifier is disposed.
+
+**Verification:** thirteen Documentation decisions, exact owner and disposition,
+absent legacy authority, Documentation policy consolidation, source-gap audit,
+row-38 decomposition, P31 identity, immutable-train advancement, plan structure,
+shell syntax, diff integrity, and complete repository verification pass.
+
+**Next slice:** `7.4b29a`, planning only, to review `STD-0093` through
+`STD-0105` Architecture reference ownership before substantive movement.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.
