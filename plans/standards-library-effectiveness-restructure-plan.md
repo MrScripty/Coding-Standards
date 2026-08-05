@@ -6,14 +6,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 37 are accepted and closed. Row 37 retains
-only conditional composition and durable-workflow illustrations, routes
-view-model lineage to existing owners, and removes the universal directory
-tree. P30 passed its complete-suite gate. The immutable cursor is row 38.
+**Current phase:** Rows 20 through 37 are accepted and closed. Row 38 is blocked
+at pre-slice review. Frozen inventory identifies `STD-0088` as the nested
+Directory README Requirement, but row 37 removed that source text while
+recording only the `STD-0087` directory-template disposition. Activity Tracing
+is `STD-0089` and was already closed by row 31. P31 has not started.
 
-**Next slice:** Milestone 7.4b28a reviews `STD-0088`, confirms Documentation
-ownership and exact closure treatment for the legacy Activity Tracing pattern,
-and performs no substantive movement before the pre-slice review is accepted.
+**Next slice:** Milestone 7.4b28ar evaluates `STD-0088` exact-disposition
+recovery against the frozen Directory README Requirement identity. It records
+the approved recovery scope and acceptance evidence without restoring removed
+legacy policy, rewriting immutable identifiers, or beginning P31 movement.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -1976,9 +1978,13 @@ all structural/routing fixtures pass.
      checker, execution train, and plan.
    - `7.4b27e` (`Accepted`): replace `STD-0087`, remove the universal directory
      template, close row 37, and run the deferred P30 complete-suite gate.
-   - `7.4b28a` (`Planned`): review `STD-0088`, confirm Documentation ownership
-     and exact closure treatment for the legacy Activity Tracing pattern, and
-     perform no substantive movement before the pre-slice review is accepted.
+   - `7.4b28a` (`Blocked`): pre-slice review confirmed Documentation ownership
+     but found that row 37 removed the nested `STD-0088` Directory README
+     Requirement without its exact disposition; Activity Tracing is
+     `STD-0089` and was already closed by row 31. Re-plan recovery before P31.
+   - `7.4b28ar` (`Planned`): select a bounded exact-disposition recovery for
+     `STD-0088`, define negative regression evidence, and prohibit legacy-text
+     restoration, immutable-identity rewriting, and P31 movement.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

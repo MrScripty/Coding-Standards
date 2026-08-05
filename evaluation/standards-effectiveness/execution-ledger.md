@@ -7971,6 +7971,30 @@ the complete fail-fast standards suite pass. Row 37 and P30 are closed.
 **Next slice:** `7.4b28a`, planning only, to review `STD-0088` Documentation
 ownership and exact closure treatment before substantive legacy movement.
 
+## Milestone 7.4b28a Row 38 Documentation Ownership Review
+
+**Outcome:** Blocked; re-plan trigger reached.
+
+Frozen rule inventory, owner overrides, and the immutable train identify
+`STD-0088` as the nested Directory README Requirement with Documentation as its
+existing owner. Activity Tracing is `STD-0089`, not `STD-0088`, and its row-31
+Diagnostics migration is already accepted.
+
+Review of the parent of `d9af0d9` confirms that child 37.4 removed both the
+universal directory tree and the nested README requirement. The accepted slice
+recorded only the `STD-0087` disposition, while its focused verifier bounded
+completeness to row 37's nineteen identifiers. `STD-0088` therefore has no
+remaining source text and no exact disposition.
+
+**Verification:** clean-boundary status, frozen owner map, section inventory,
+owner override, rows 37 through 39 immutable metadata, accepted row-31
+Diagnostics evidence, prior-source inspection, and current disposition absence
+confirm the mismatch.
+
+**Next slice:** `7.4b28ar`, planning only, to select exact-disposition recovery
+without restoring legacy text, rewriting immutable identity, inferring Activity
+Tracing ownership, or beginning P31 substantive movement.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.
