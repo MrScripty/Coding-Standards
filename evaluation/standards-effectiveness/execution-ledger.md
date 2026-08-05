@@ -8038,6 +8038,27 @@ dispositions, and silent audit exceptions remain prohibited.
 **Next slice:** `7.4b28b`, close `STD-0088`, install the exact-set audit, close
 P31, and advance to the next immutable row.
 
+## Milestone 7.4b28b1 Exact-Set Source-Gap Audit
+
+**Outcome:** Accepted.
+
+The audit derives deleted Markdown heading identities from the frozen baseline
+diff, excludes identifiers with exact dispositions, and compares the observed
+set with an explicit fixture. Retained candidates must still have their exact
+heading; deferred candidates must remain absent.
+
+The current fixture proves nineteen candidates: `STD-0349` and `STD-0900` are
+retained diff artifacts, `STD-0088` is active row-38 debt, and sixteen
+README-template identifiers are deferred to row 47. Any additional orphan,
+missing expected candidate, restored deferred heading, or absent retained
+heading fails with a typed diagnostic.
+
+**Verification:** exact-set audit, shell syntax, diff integrity, plan structure,
+immutable execution train, and the complete fail-fast standards suite pass.
+
+**Next slice:** `7.4b28b2`, close `STD-0088`, reduce the audit expectation to
+the sixteen row-47 gaps, close P31, and advance the cursor.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

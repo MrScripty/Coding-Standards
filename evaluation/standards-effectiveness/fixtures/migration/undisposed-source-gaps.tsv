@@ -1,0 +1,20 @@
+id	classification	reason
+STD-0088	deferred-row38	directory README requirement removed with parent row 37 section
+STD-0349	retained-diff	documentation index heading remains after whole-file rewrite
+STD-0899	deferred-row47	directory title replaced by boundary title
+STD-0900	retained-diff	purpose heading remains after template rewrite
+STD-0901	deferred-row47	fixed contents inventory removed
+STD-0902	deferred-row47	problem boilerplate replaced by selected responsibility
+STD-0903	deferred-row47	mandatory constraints section removed
+STD-0904	deferred-row47	decision boilerplate replaced by canonical decision links
+STD-0905	deferred-row47	alternatives boilerplate routed to canonical decisions
+STD-0907	deferred-row47	mandatory revisit-trigger section removed
+STD-0908	deferred-row47	mandatory dependency inventory removed
+STD-0909	deferred-row47	internal dependency subsection removed
+STD-0910	deferred-row47	external dependency subsection removed
+STD-0911	deferred-row47	related ADR list replaced by selected decision links
+STD-0912	deferred-row47	universal usage example removed
+STD-0913	deferred-row47	API consumer contract renamed to selected consumer contract
+STD-0914	deferred-row47	structured producer contract renamed to produced contract
+STD-0915	deferred-row47	universal testing section removed
+STD-0916	deferred-row47	universal notes section removed
