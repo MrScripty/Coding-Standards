@@ -209,31 +209,6 @@ One non-normative structural map is available in the
 It cannot establish applicability, service identity, readiness, ownership,
 transport, retry, or evidence.
 
-### Example
-
-```text
-function get_or_create_service(address):
-    if connect(address) succeeds:
-        return existing connection
-
-    lock = acquire_creation_lock()
-
-    if connect(address) succeeds:
-        release lock
-        return existing connection
-
-    start service
-    release lock
-
-    retry connect(address) until ready or timeout
-```
-
-### Benefits
-
-- No duplicate services consuming resources
-- Automatic recovery from crashed instances
-- Race-condition-safe startup sequence via double-check after lock acquisition
-
 ---
 
 ## Phased Mutation Pattern

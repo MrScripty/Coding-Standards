@@ -6,15 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 38 and children 39.1 through 39.2 are
-accepted. Canonical service ownership, coordination, readiness, transport, and
-recovery authority now replace fixed discover-or-create startup rules. P32
-remains open, and active child 39.3 owns final example and claim closure.
+**Current phase:** Rows 20 through 39 are accepted and closed. Process
+coordination and discover-or-create lineage now preserve canonical policy and
+only conditional reference illustrations. P32 remains open through immutable
+row 40, which requires independent owner review before substantive movement.
 
-**Next slice:** Milestone 7.4b29d migrates `STD-0104` and `STD-0105`, retains
-only qualified discover-or-create pseudocode and consequences, removes
-unbounded retry and guaranteed-benefit claims, closes row 39, and leaves P32
-open for immutable row 40.
+**Next slice:** Milestone 7.4b30a reviews `STD-0134`, confirms its current
+Architecture reference lineage and exact disposition, and performs no
+substantive movement before row 40 owner review is accepted.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2003,9 +2002,12 @@ all structural/routing fixtures pass.
    - `7.4b29c` (`Accepted`): migrate `STD-0099` through `STD-0103`, retain one
      conditional discover-or-create map, and remove connect-first,
      creation-lock, backoff, health, and fixed lifecycle-model defaults.
-   - `7.4b29d` (`Planned`): migrate `STD-0104` and `STD-0105`, retain only
+   - `7.4b29d` (`Accepted`): migrate `STD-0104` and `STD-0105`, retain only
      qualified pseudocode and consequences, close row 39, and leave P32 open
      for immutable row 40.
+   - `7.4b30a` (`Planned`): review row 40 `STD-0134`, confirm its current
+     Architecture reference lineage and exact disposition, and perform no
+     substantive movement before owner review is accepted.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

@@ -8161,6 +8161,33 @@ structure; shell syntax; and diff integrity.
 **Next slice:** `7.4b29d`, migrate `STD-0104` and `STD-0105`, remove unbounded
 retry and guaranteed benefits, close row 39, and retain P32 through row 40.
 
+## Milestone 7.4b29d Discover-Or-Create Reference Closure
+
+**Outcome:** Accepted.
+
+The fixed legacy pseudocode and unconditional benefits are removed. The
+Architecture reference now retains contract-qualified pseudocode that consumes
+selected discovery, creation authority, coordination, readiness, retry,
+lifecycle, and outcome contracts. It returns typed results without carrying
+prior invocation state or converting unresolved work into success.
+
+Conditional consequences distinguish possible convergence value from claims
+about duplicate prevention, recovery, race freedom, readiness, and efficiency.
+Each claim requires evidence at its named real boundary. No successful startup,
+diagram, example, or final state proves those outcomes by itself.
+
+Row 39 is closed with thirteen exact dispositions. P32 remains open through
+row 40 and cannot be claimed from this focused closure.
+
+**Verification:** fourteen retained, unavailable, unsupported, invalid, and
+prohibited-fallback decisions; two exact dispositions; absent fixed legacy
+pseudocode and benefit claims; qualified reference inputs and consequences;
+children 39.1 and 39.2 preservation; row-39 closure; execution-train
+advancement; plan structure; shell syntax; and diff integrity.
+
+**Next slice:** `7.4b30a`, planning only, to review `STD-0134` Architecture
+reference lineage before substantive movement or P32 closure.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

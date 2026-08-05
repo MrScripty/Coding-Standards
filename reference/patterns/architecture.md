@@ -333,3 +333,37 @@ Missing service identity, discovery authority, exclusion, readiness, transport,
 retry, lifecycle, or evidence facts retain the canonical typed outcome. Do not
 create an incumbent service, connect to a nearby endpoint, or loop until success
 as fallback.
+
+### Conditional Pseudocode
+
+```text
+function resolve_selected_service(contracts):
+    observed = contracts.discovery.observe()
+    if observed satisfies contracts.usable_instance:
+        return observed.instance
+
+    if not contracts.creation.authorizes(observed):
+        return contracts.outcomes.unavailable(observed)
+
+    permit = contracts.coordination.acquire()
+    if permit is not acquired:
+        return contracts.outcomes.from_coordination(permit)
+
+    created = contracts.creation.start(permit)
+    return contracts.readiness.observe_within_selected_budget(created)
+```
+
+Every named operation above is a selected contract, not a required function,
+order, or mechanism. Discovery need not run first, creation may not be local,
+coordination may be unnecessary, and readiness may produce a terminal typed
+outcome without retry. The pseudocode does not carry prior invocation state or
+convert an unresolved result into success.
+
+### Conditional Consequences
+
+When selected discovery and creation contracts converge on one authoritative
+service identity, the arrangement can avoid competing creation and expose
+readiness and lifecycle outcomes at one boundary. Duplicate prevention,
+automatic recovery, race freedom, prompt readiness, and resource efficiency
+remain separate claims. Each requires evidence across the real coordination,
+process, transport, and lifecycle boundaries that the claim names.

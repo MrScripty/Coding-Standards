@@ -55,6 +55,8 @@ STD-0100	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture owns
 STD-0101	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	the convergence flow remains illustrative and cannot select connection creation locking retry readiness or ownership policy
 STD-0102	ARCHITECTURE-PATTERNS.md	topics/concurrency.md	split	Concurrency owns the creation exclusion invariant while Contracts Resilience Security and lifecycle owners retain their decisions
 STD-0103	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture selects lifecycle ownership from actual boundaries while fixed creator last-client and daemon models become variation points
+STD-0104	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	pseudocode remains qualified by selected contracts and cannot authorize unbounded retry or default locking
+STD-0105	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	consequences remain observable claims requiring affected evidence rather than guaranteed benefits
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults
