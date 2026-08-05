@@ -8136,6 +8136,31 @@ diff integrity.
 connect-first, creation-lock, backoff, health, lifecycle-model, or fallback
 defaults.
 
+## Milestone 7.4b29c Conditional Discover-Or-Create Convergence
+
+**Outcome:** Accepted.
+
+The legacy discover-or-create section now routes service placement and
+lifecycle to Architecture, identity and discovery outcomes to Contracts,
+creation exclusion to Concurrency, readiness and retry to Resilience, and
+listener exposure and liveness to Security.
+
+The Architecture reference retains one conditional structural map. Discovery
+and creation mechanisms remain selected variation points. Connection-first,
+creation-lock, backoff, health-probe, and creator, last-client, or daemon
+ownership defaults were removed. Failed discovery does not authorize creation,
+and missing facts retain typed outcomes rather than selecting an incumbent
+service or looping until success.
+
+**Verification:** sixteen positive, unavailable, unsupported, invalid, and
+prohibited-fallback decisions; five exact dispositions; canonical route and
+reference assertions; removed fixed flow, rules, and ownership models; child
+39.1 preservation; row-39 decomposition; execution-train advancement; plan
+structure; shell syntax; and diff integrity.
+
+**Next slice:** `7.4b29d`, migrate `STD-0104` and `STD-0105`, remove unbounded
+retry and guaranteed benefits, close row 39, and retain P32 through row 40.
+
 ## Milestone 7.4b26d Conditional Monorepo Roles
 
 **Outcome:** Accepted.

@@ -299,3 +299,37 @@ participants from claiming the same instance role. Crash recovery, portability,
 race freedom, and operational visibility remain separate claims requiring
 affected real-boundary evidence; the diagram or successful startup proves none
 of them.
+
+## Conditional Discover-Or-Create Convergence
+
+After Architecture assigns service responsibility and lifecycle, Contracts
+defines service identity and discovery outcomes, Concurrency selects any
+creation exclusion, Resilience selects readiness and recovery behavior, and
+Security selects applicable listener obligations, one possible map is:
+
+```text
+requesting participant
+    --> selected discovery operation
+        |-- usable selected instance --> consume its declared contract
+        |-- creation authorized ------> coordinate selected creation
+        `-- unresolved ---------------> return the canonical typed outcome
+
+selected created instance
+    --> satisfy the declared readiness contract
+        --> become discoverable through the selected authority
+```
+
+Discovery may use a registry, supervisor, endpoint, process capability, injected
+handle, or another selected authority. Creation may be external, independently
+owned, or performed by an authorized participant. Neither discovery failure nor
+an absent connection proves that creation is permitted.
+
+The map does not require connection before creation, double checking, a lock,
+backoff, health probing, or creator, last-client, or daemon ownership. Those
+mechanisms are valid only when their contracts, lifecycle authority, target
+capabilities, termination conditions, and evidence are established.
+
+Missing service identity, discovery authority, exclusion, readiness, transport,
+retry, lifecycle, or evidence facts retain the canonical typed outcome. Do not
+create an incumbent service, connect to a nearby endpoint, or loop until success
+as fallback.

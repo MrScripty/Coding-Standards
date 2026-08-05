@@ -50,6 +50,11 @@ STD-0095	ARCHITECTURE-PATTERNS.md	topics/concurrency.md	refine	coordination foll
 STD-0096	ARCHITECTURE-PATTERNS.md	topics/contracts.md	split	Contracts owns instance identity semantics while the fixed PID start-time version JSON representation is removed
 STD-0097	ARCHITECTURE-PATTERNS.md	topics/cross-platform.md	split	Cross-Platform owns supported process-identity capability and target evidence without Linux proc or Windows API defaults
 STD-0098	ARCHITECTURE-PATTERNS.md	topics/resilience.md	split	Resilience owns stale-state classification and recovery authority while Diagnostics rejects mandatory reclaim logging
+STD-0099	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	index	legacy discover-or-create label remains discoverable only after service ownership coordination readiness and recovery facts are selected
+STD-0100	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture owns service placement and lifecycle authority while reference may illustrate one convergence arrangement
+STD-0101	ARCHITECTURE-PATTERNS.md	reference/patterns/architecture.md	move	the convergence flow remains illustrative and cannot select connection creation locking retry readiness or ownership policy
+STD-0102	ARCHITECTURE-PATTERNS.md	topics/concurrency.md	split	Concurrency owns the creation exclusion invariant while Contracts Resilience Security and lifecycle owners retain their decisions
+STD-0103	ARCHITECTURE-PATTERNS.md	topics/architecture.md	split	Architecture selects lifecycle ownership from actual boundaries while fixed creator last-client and daemon models become variation points
 STD-0046	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	legacy immutable-contract heading routes to canonical fact-driven contract planning
 STD-0047	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	temporary implementation freeze remains bounded by active concurrent dependency
 STD-0048	ARCHITECTURE-PATTERNS.md	topics/contracts.md	index	contract classes replace universal append-only and synchronized-change defaults

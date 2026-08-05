@@ -189,57 +189,25 @@ PID file or incumbent mechanism.
 
 ## Discover-or-Create Pattern
 
-### The Pattern
+Canonical service placement, participant responsibility, and lifecycle
+authority are owned by [Architecture](topics/architecture.md). Instance
+identity and discovery outcomes remain with [Contracts](topics/contracts.md),
+creation exclusion with
+[Concurrency](topics/concurrency.md#select-coordination-from-the-invariant),
+readiness and bounded retry with [Resilience](topics/resilience.md), and any
+listener exposure or transport liveness with
+[Security](topics/security.md#network-transport-boundary).
 
-When a process needs access to a shared service (local server, registry,
-coordinator), it first attempts to discover an existing instance. If none
-exists, it creates one itself. All processes converge to using the same
-instance.
+Discovery before creation, a creation lock, retry with backoff, a health probe,
+and creator, client, or daemon ownership are possible mechanisms or lifecycle
+arrangements, not defaults. Select each from the applicable contracts and
+capabilities without substituting another mechanism when required facts are
+missing.
 
-This pattern builds on [Process Instance Coordination](#process-instance-coordination)
-for detecting existing instances and uses network transport safety practices
-from [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) `## Network Transport Safety`
-for the listener.
-
-### Instance Convergence Flow
-
-```
-Process starts
-    │
-    ├─► Try to connect to existing service (known address/port)
-    │       │
-    │       ├── Success → Use existing instance
-    │       │
-    │       └── Failure → No instance found
-    │               │
-    │               ├─► Acquire creation lock (file lock, PID file)
-    │               │       │
-    │               │       ├── Lock acquired → Create service, release lock
-    │               │       │
-    │               │       └── Lock failed → Another process is creating
-    │               │               │
-    │               │               └─► Retry connection with backoff
-    │               │
-    │               └─► Connect to newly created service
-```
-
-### Rules
-
-| Rule | Rationale |
-|------|-----------|
-| Attempt connection before creation | Avoids duplicate instances |
-| Use a creation lock | Prevents race between concurrent starters |
-| Retry with backoff after lock failure | Gives the creator time to finish startup |
-| Verify service health after connecting | Existing instance may be shutting down |
-| Define an ownership model | Determines when the service exits |
-
-### Ownership Models
-
-| Model | How It Works | When to Use |
-|-------|-------------|-------------|
-| Creator-owned | Service exits when the process that created it exits | Simple tools, short-lived sessions |
-| Last-client-standing | Service exits when all clients disconnect | Shared background services |
-| Independent daemon | Service runs until explicitly stopped | Long-lived infrastructure |
+One non-normative structural map is available in the
+[Conditional Discover-Or-Create Convergence](reference/patterns/architecture.md#conditional-discover-or-create-convergence).
+It cannot establish applicability, service identity, readiness, ownership,
+transport, retry, or evidence.
 
 ### Example
 

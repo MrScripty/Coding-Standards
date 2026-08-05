@@ -6,15 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 38 and child 39.1 are accepted. Canonical
-coordination, identity, platform, recovery, lifecycle, and diagnostic authority
-now replace the PID-file prescription. P32 remains open through immutable row
-40, and active child 39.2 owns the discover-or-create lineage.
+**Current phase:** Rows 20 through 38 and children 39.1 through 39.2 are
+accepted. Canonical service ownership, coordination, readiness, transport, and
+recovery authority now replace fixed discover-or-create startup rules. P32
+remains open, and active child 39.3 owns final example and claim closure.
 
-**Next slice:** Milestone 7.4b29c migrates `STD-0099`, `STD-0100`, `STD-0101`,
-`STD-0102`, and `STD-0103`; preserves service ownership, coordination,
-readiness, transport, and recovery authority; and retains one conditional
-discover-or-create map without fixed startup or lifecycle defaults.
+**Next slice:** Milestone 7.4b29d migrates `STD-0104` and `STD-0105`, retains
+only qualified discover-or-create pseudocode and consequences, removes
+unbounded retry and guaranteed-benefit claims, closes row 39, and leaves P32
+open for immutable row 40.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2000,7 +2000,7 @@ all structural/routing fixtures pass.
    - `7.4b29b` (`Accepted`): migrate `STD-0093` through `STD-0098`, retain at
      most one conditional process-coordination illustration, and remove
      PID-file, liveness, cleanup, platform-API, and logging defaults.
-   - `7.4b29c` (`Planned`): migrate `STD-0099` through `STD-0103`, retain one
+   - `7.4b29c` (`Accepted`): migrate `STD-0099` through `STD-0103`, retain one
      conditional discover-or-create map, and remove connect-first,
      creation-lock, backoff, health, and fixed lifecycle-model defaults.
    - `7.4b29d` (`Planned`): migrate `STD-0104` and `STD-0105`, retain only
