@@ -30,7 +30,7 @@ mapfile -t remaining < <(
       !($1 in disposed) { print $1 }
   ' "$S/consolidation-dispositions.tsv" "$S/generated/rule-owner-map.tsv"
 )
-[[ "${remaining[*]}" == 'STD-0758' ]]
+[[ "${#remaining[@]}" -eq 0 ]]
 [[ "$(awk -F '\t' '$2 == "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md" { n++ } END { print n+0 }' "$S/generated/rule-owner-map.tsv")" -eq 52 ]]
 
 for text in '# Rust Language Bindings Standards' \
@@ -46,14 +46,13 @@ for metadata in 'ID: `profile.language.rust.language-bindings`' \
   rg -F -q "$metadata" "$PROFILE"
 done
 [[ -e "$R/CORE-STANDARDS.md" && -e "$R/workflows/verification.md" ]]
-[[ -e "$R/profiles/languages/rust/README.md" ]]
 [[ -e "$R/profiles/boundaries/language-bindings.md" ]]
 
 rg -F -q 'STD-0789' "$EXISTING"
 ! rg -F -q 'STD-0758' "$EXISTING"
 rg -F -q '`7.4b32b2` (`Accepted`)' "$P"
 rg -F -q '`7.4b33a` (`Accepted`)' "$P"
-rg -F -q '`7.4b33b` (`Planned`)' "$P"
+rg -F -q '`7.4b33b` (`Accepted`)' "$P"
 "$S/verify-rust-binding-index-closure.sh"
 "$S/verify-rust-binding-architecture.sh"
 "$S/verify-language-profile-routing.sh"

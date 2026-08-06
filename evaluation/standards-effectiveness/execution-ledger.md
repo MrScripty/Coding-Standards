@@ -8673,3 +8673,52 @@ diff integrity pass.
 **Next slice:** `7.4b33b`, record the exact `STD-0758` index disposition
 through the title-specific verifier, close row 43 and P35, and advance to
 immutable row 44.
+
+## Milestone 7.4b33b Rust Language Bindings Title Index Closure
+
+**Outcome:** Accepted.
+
+`STD-0758` now has one exact `index` disposition to
+`profiles/languages/rust/language-bindings.md`. All 52 frozen identifiers in
+the Rust Language Bindings migration source now have exactly one disposition.
+The unchanged introductory route contains no normative or fallback selector and
+continues to direct interop safety, cross-platform build concerns, and contract
+evolution to their accepted owners.
+
+The new `verify-rust-binding-title-index-closure.sh` owns only the document
+title closure. The accepted `verify-rust-binding-index-closure.sh` remains
+unchanged and continues to own only the `STD-0789` Build System Organization
+index. P35's semantic result is complete without combining those independent
+verification contracts.
+
+**No-fallback result:** no framework, ABI, runtime, package layout, generator,
+representation, conversion, lifecycle, compatibility mode, native-only
+evidence substitute, or default success path is restored. No canonical rule is
+copied into the migration document, and contradictory lineage remains a failing
+typed verification outcome.
+
+**Bounded write set:** one exact disposition, one new title-specific verifier,
+the row-43 checker, active plan, and execution ledger. The legacy source,
+canonical owners, accepted nested-index verifier, generated inventories,
+immutable train, package manifest, README files, templates, configuration,
+lockfiles, and downstream repositories remain unchanged.
+
+The first complete-suite run stopped at the serial row-35 README consumer audit
+because the row-43 checker directly named the Rust profile README. That
+existence assertion duplicated the accepted Rust binding architecture and
+language-profile routing verifiers already executed by row 43. Removing only
+the redundant assertion preserves canonical dependency evidence without
+expanding the shared inventory or coupling P35 to historical row-35 ownership.
+
+**Verification:** exact disposition uniqueness, all 52 source identifiers
+closed, introductory-route non-authority, explicit verifier separation,
+accepted nested-index closure, binding mechanism selection, Rust binding
+architecture, runtime, conversion, generation, and cross-language contract
+evidence, row-43 decomposition, historical lifecycle isolation,
+execution-train advancement, plan structure, shell syntax, diff integrity, and
+the complete fail-fast verifier suite pass. Row 43 and P35 are closed;
+immutable row 44 is active.
+
+**Next slice:** `7.4b34a`, planning only, to review `STD-0821` Rust Security
+index lineage, exact closure outcome, bounded write set, and focused P36
+evidence before substantive movement.
