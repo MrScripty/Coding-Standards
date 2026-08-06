@@ -44,14 +44,27 @@ mapfile -t remaining < <(
     $2 == source && !($1 in disposed) { print $1 }
   ' "$S/consolidation-dispositions.tsv" "$S/generated/rule-owner-map.tsv"
 )
-[[ "${remaining[*]}" == 'STD-0827 STD-0828 STD-0829 STD-0830' ]]
+[[ "${#remaining[@]}" -eq 0 ]]
+
+while IFS=$'\t' read -r id expected_owner expected_outcome _reference _rationale; do
+  [[ "$id" == id ]] && continue
+  [[ "$(awk -F '\t' -v id="$id" '$1 == id { print $2 FS $3 FS $4 }' "$S/consolidation-dispositions.tsv")" == "$source"$'\t'"$expected_owner"$'\t'"$expected_outcome" ]]
+  [[ "$(awk -F '\t' -v id="$id" '$1 == id { n++ } END { print n+0 }' "$S/consolidation-dispositions.tsv")" -eq 1 ]]
+done < "$V"
 
 legacy="$R/$source"
 profile="$R/$owner"
-for text in '# Rust Standards' '## Documents' \
-  '## Relationship To Generic Standards' '## Default Rust Position' \
-  'Criterion for Rust performance claims'; do
+for text in '# Rust Standards Migration Index' '## Canonical Route' \
+  'non-normative migration navigation' '[canonical Rust profile]' \
+  'typed `unavailable`' 'typed `invalid`' 'typed `unsupported`' \
+  'fallback authority'; do
   rg -F -q "$text" "$legacy"
+done
+for text in '## Documents' '## Relationship To Generic Standards' \
+  '## Default Rust Position' '| Document | Purpose | When to Use |' \
+  'Criterion' 'rule wins for Rust crates' 'retain authority' \
+  'RUST-API-STANDARDS.md' 'RUST-TOOLING-STANDARDS.md'; do
+  ! rg -F -q "$text" "$legacy"
 done
 for metadata in 'ID: `profile.language.rust`' 'Requires: `core`' \
   "Canonical owner: \`$owner\`"; do
@@ -75,7 +88,7 @@ adoption="$R/languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md"
 
 [[ -x "$S/verify-rust-profile-authority-closure.sh" ]]
 [[ -x "$S/verify-rust-adoption-notes-retirement.sh" ]]
-[[ ! -e "$S/verify-rust-index-closure.sh" ]]
+[[ -x "$S/verify-rust-index-closure.sh" ]]
 [[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 34 ]]
 [[ "$(awk -F '\t' '$1 == "evaluation/standards-effectiveness/verify-rust-profile-authority-closure.sh" { print $2 FS $3 }' "$M")" == $'none\trust-profile-index' ]]
 
@@ -83,7 +96,7 @@ rg -F -q '`7.4b35b` (`Accepted`)' "$P"
 rg -F -q '`7.4b36a` (`Accepted`)' "$P"
 rg -F -q '`7.4b36b` (`Accepted`)' "$P"
 rg -F -q '`7.4b36c` (`Accepted`)' "$P"
-rg -F -q '`7.4b36d` (`Planned`)' "$P"
+rg -F -q '`7.4b36d` (`Accepted`)' "$P"
 "$S/verify-rust-api-owner-contract.sh"
 "$S/verify-rust-async-boundary.sh"
 "$S/verify-rust-unsafe-contracts.sh"
@@ -91,4 +104,4 @@ rg -F -q '`7.4b36d` (`Planned`)' "$P"
 "$S/verify-language-profile-routing.sh"
 "$S/verify-root-readme-consumer-audit.sh"
 "$S/verify-milestone-7-execution-train.sh"
-printf 'Milestone 7 row-46 decomposition passed: 4 IDs across 3 serial Rust authority closure children with one bounded README-consumer addition\n'
+printf 'Milestone 7 row-46 closure passed: 4 exact dispositions, P38 closed, row 47 active\n'

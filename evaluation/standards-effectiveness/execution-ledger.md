@@ -9005,3 +9005,49 @@ plan structure, shell syntax, and diff integrity pass.
 navigation, record exact `index`, `index`, `split`, and `split`
 dispositions for `STD-0827`, `STD-0828`, `STD-0829`, and `STD-0830`,
 close row 46 and P38, and advance to immutable row 47.
+
+## Milestone 7.4b36d Rust Index Closure
+
+**Outcome:** Accepted.
+
+The legacy Rust parent is now a concise non-normative migration index that
+routes applicability, baseline verification, and specialization selection to
+the canonical Rust profile. The manual document and when-to-use table, copied
+generic precedence rule, mandatory Criterion claim, sync/async default, unsafe
+default, feature default, and tool-selection guidance are removed.
+
+`STD-0827` and `STD-0828` each receive one exact `index` disposition.
+`STD-0829` and `STD-0830` each receive one exact `split` disposition so
+the base Rust profile retains only its accepted routing boundary while generic
+and specialized owners retain their established contracts. Row 46 and P38 are
+closed, and immutable row 47 is active.
+
+The first complete-suite run stopped at the historical-checker ownership gate
+because the completed row-46 checker asserted row 47's live `Planned` status.
+That forward lifecycle assertion is removed. The row-46 checker proves only its
+accepted closure, while execution-train evidence and the active plan retain
+current row-47 activation authority.
+
+**No-fallback result:** the migration index owns no Rust policy, cannot select a
+nearby legacy document or default mechanism, and cannot override Router or
+specialized owner authority. Missing, contradictory, and unsupported facts
+remain typed diagnostics through the selected canonical owner.
+
+**Bounded write set:** legacy Rust index, exact disposition table, one new
+index-closure verifier, row-46 checker, active plan, and execution ledger.
+Canonical owners, adoption retirement, corpus, consumer files, generated
+inventories, immutable train, package manifest, configuration, lockfiles, and
+downstream repositories remain unchanged.
+
+**Verification:** four unique exact dispositions, zero remaining row-46 IDs,
+concise index headings and negative legacy coverage, canonical profile and
+adoption-retirement evidence, P38 closure, row-47 activation, plan structure,
+shell syntax, diff integrity, and all 266 entrypoints in the complete fail-fast
+suite pass.
+
+**Next slice:** `7.4b37a`, review `STD-0899`, `STD-0900`, `STD-0901`,
+`STD-0902`, `STD-0903`, `STD-0904`, `STD-0905`, `STD-0906`,
+`STD-0907`, `STD-0908`, `STD-0909`, `STD-0910`, `STD-0911`,
+`STD-0912`, `STD-0913`, `STD-0914`, `STD-0915`, and `STD-0916`
+as one Documentation-owned README-template derivation package before
+substantive movement.
