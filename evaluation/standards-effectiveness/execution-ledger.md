@@ -8591,3 +8591,43 @@ structure, shell syntax, and diff integrity passed.
 conditional server-authoritative projection example, remove location-based
 authority and blanket optimistic-update defaults, close row 36, and stop for
 row 37 owner review.
+
+## Milestone 7.4b32b2 Security Index Closure
+
+**Outcome:** Accepted.
+
+`STD-0582` now has one exact `index` disposition to
+`topics/security.md`. The existing `SECURITY-STANDARDS.md` migration index
+remains unchanged and non-authoritative; it continues to route validation proof
+lifetime, filesystem containment, input validation, IPC payload validation,
+network transport, and cancellation concerns to their separately accepted
+canonical owners.
+
+The focused verifier was restored only after its preserved SHA-256
+`bac9620ebbacffe844aa0e2ce85e97767b4dcbc20ad8b210df47527194f80b01`
+matched the recorded recovery artifact. It proves exact disposition uniqueness,
+current canonical routes, prohibited legacy-mechanism absence, and all required
+Security, Contracts, IPC, Concurrency, and Verification evidence.
+
+**No-fallback result:** no prior validator, mechanism, runtime check, binding
+default, or single-implementation rule is restored. No canonical rule is copied
+into the index, no weaker Security default is introduced, and missing or
+contradictory owner evidence remains a failing typed verification outcome.
+
+**Bounded write set:** one exact disposition, the restored focused verifier,
+the row-42 gate, active plan, and execution ledger. The Security migration
+index, canonical owners, generated inventories, immutable train, package
+manifest, templates, configuration, lockfiles, and downstream repositories
+remain unchanged.
+
+**Verification:** preserved-verifier checksum, exact disposition uniqueness,
+Security index closure, validation proof lifetime, filesystem containment,
+input validation, IPC payload validation, network transport, row-42
+decomposition, historical lifecycle isolation, zero-count regression,
+independent-trust chain, execution-train advancement, plan structure, shell
+syntax, diff integrity, and the complete fail-fast verifier suite pass. Row 42
+and P34 are closed; immutable row 43 is active.
+
+**Next slice:** `7.4b33a`, planning only, to review `STD-0758` Rust Language
+Bindings index lineage, exact closure outcome, bounded write set, and focused
+P35 evidence before substantive movement.
