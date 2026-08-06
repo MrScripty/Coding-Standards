@@ -6,14 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 45 are accepted and closed. Row 46 child
-`46.1` finalizes canonical Rust profile authority and registers its verifier as
-the 34th exact README consumer. Adoption-note retirement and the four active
-`STD-0827` through `STD-0830` dispositions remain serial.
+**Current phase:** Rows 20 through 45 are accepted and closed. Row 46 children
+`46.1` and `46.2` finalize canonical Rust profile authority, register its
+verifier as the 34th exact README consumer, and retire stale adoption notes.
+The four active `STD-0827` through `STD-0830` dispositions remain serial.
 
-**Next slice:** Milestone 7.4b36c deletes stale adoption notes for active
-`STD-0827`, `STD-0828`, `STD-0829`, and `STD-0830` lineage, removes their
-corpus route, and preserves frozen generated evidence.
+**Next slice:** Milestone 7.4b36d rewrites the legacy Rust index as
+non-normative navigation, records exact `index`, `index`, `split`, and
+`split` dispositions for `STD-0827`, `STD-0828`, `STD-0829`, and
+`STD-0830`, closes row 46 and P38, and advances to immutable row 47.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2072,9 +2073,9 @@ all structural/routing fixtures pass.
      row verification now proves its own verifier's exact presence and
      classification, while row 35 and the root audit retain exact-current-count
      authority.
-   - `7.4b36c` (`Planned`): delete unconsumed stale Rust adoption notes, remove
-     their corpus route, and prove retirement without changing frozen generated
-     inventories.
+   - `7.4b36c` (`Accepted`): delete unconsumed stale Rust adoption notes,
+     remove their corpus route, and prove retirement without changing frozen
+     generated inventories.
    - `7.4b36d` (`Planned`): rewrite the legacy Rust index as non-normative
      navigation, record four exact index/split dispositions, close row 46 and
      P38, and advance to immutable row 47.

@@ -8971,3 +8971,37 @@ all 264 entrypoints in the complete fail-fast suite pass.
 **Next slice:** `7.4b36c`, delete stale adoption notes for active `STD-0827`,
 `STD-0828`, `STD-0829`, and `STD-0830` lineage, remove their corpus route, and
 preserve frozen generated evidence.
+
+## Milestone 7.4b36c Rust Adoption Notes Retirement
+
+**Outcome:** Accepted.
+
+The unconsumed Rust adoption-notes reference and its live corpus classification
+are deleted. Its stale mandatory Criterion rule, manual legacy document table,
+integration defaults, review checklist, and routes back to the legacy Rust
+index no longer compete with canonical owners.
+
+The generated file-metrics record remains frozen baseline evidence with its
+original path, classification, digest, and measurements. Current cleanup does
+not rewrite historical extraction evidence.
+
+**No-fallback result:** no compatibility page, redirect, replacement adoption
+note, or legacy route preserves the deleted defaults. Canonical Rust routing
+continues through the accepted profile authority and returns typed diagnostics
+when required facts are unavailable, invalid, or unsupported.
+
+**Bounded write set:** deleted adoption-notes file, live corpus inventory, one
+new retirement verifier, row-46 checker, active plan, and execution ledger.
+Legacy Rust index, dispositions, canonical owners, consumer files, generated
+inventories, immutable train, package manifest, configuration, lockfiles, and
+downstream repositories remain unchanged.
+
+**Verification:** absent adoption file and corpus route, exact frozen metrics
+record, absent active Router and legacy-index links, canonical Rust
+profile-authority evidence, row-46 decomposition, execution-train integrity,
+plan structure, shell syntax, and diff integrity pass.
+
+**Next slice:** `7.4b36d`, rewrite the legacy Rust index as non-normative
+navigation, record exact `index`, `index`, `split`, and `split`
+dispositions for `STD-0827`, `STD-0828`, `STD-0829`, and `STD-0830`,
+close row 46 and P38, and advance to immutable row 47.

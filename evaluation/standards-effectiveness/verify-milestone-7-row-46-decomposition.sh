@@ -9,6 +9,7 @@ P="$R/plans/standards-library-effectiveness-restructure-plan.md"
 M="$S/milestone-7-row-35-readme-consumers.tsv"
 TRAIN="$S/milestone-7-execution-train.tsv"
 CORPUS="$S/corpus.tsv"
+FROZEN_METRICS="$S/generated/file-metrics.tsv"
 
 row="$(awk -F '\t' '$1 == 46 { print $2 FS $3 FS $4 FS $5 FS $6 FS $7 FS $8 FS $9 }' "$TRAIN")"
 IFS=$'\t' read -r wave start_id end_id source owner owner_state activation checkpoint <<< "$row"
@@ -68,26 +69,20 @@ for text in '## Detailed Guidance During Migration' \
 done
 
 adoption="$R/languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md"
-[[ -f "$adoption" ]]
-for text in 'Criterion is required for Rust performance claims' \
-  '[RUST-STANDARDS.md](RUST-STANDARDS.md)' \
-  'New Rust-specific standards are listed'; do
-  rg -F -q "$text" "$adoption"
-done
-[[ "$(awk -F '\t' '$1 == "languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md" { print $2 FS $3 FS $4 FS $5 }' "$CORPUS")" == $'reference\tno\treference\tmove' ]]
+[[ ! -e "$adoption" ]]
+[[ "$(awk -F '\t' '$1 == "languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md" { n++ } END { print n+0 }' "$CORPUS")" -eq 0 ]]
+[[ "$(awk -F '\t' '$1 == "languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md" { print $2 FS $3 FS $4 FS $5 FS $6 FS $7 FS $8 FS $9 FS $10 }' "$FROZEN_METRICS")" == $'reference\tno\treference\tmove\tgit\t77f53cb2ca8807c4a93d717e9206ea8348d3eabbd78f56f4f3367b0678152054\t53\t5\t2' ]]
 
 [[ -x "$S/verify-rust-profile-authority-closure.sh" ]]
-for verifier in verify-rust-adoption-notes-retirement.sh \
-  verify-rust-index-closure.sh; do
-  [[ ! -e "$S/$verifier" ]]
-done
+[[ -x "$S/verify-rust-adoption-notes-retirement.sh" ]]
+[[ ! -e "$S/verify-rust-index-closure.sh" ]]
 [[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 34 ]]
 [[ "$(awk -F '\t' '$1 == "evaluation/standards-effectiveness/verify-rust-profile-authority-closure.sh" { print $2 FS $3 }' "$M")" == $'none\trust-profile-index' ]]
 
 rg -F -q '`7.4b35b` (`Accepted`)' "$P"
 rg -F -q '`7.4b36a` (`Accepted`)' "$P"
 rg -F -q '`7.4b36b` (`Accepted`)' "$P"
-rg -F -q '`7.4b36c` (`Planned`)' "$P"
+rg -F -q '`7.4b36c` (`Accepted`)' "$P"
 rg -F -q '`7.4b36d` (`Planned`)' "$P"
 "$S/verify-rust-api-owner-contract.sh"
 "$S/verify-rust-async-boundary.sh"

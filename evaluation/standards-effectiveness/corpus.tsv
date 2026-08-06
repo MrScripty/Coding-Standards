@@ -27,7 +27,6 @@ languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profile	yes	language-profile	
 languages/rust/RUST-RELEASE-STANDARDS.md	profile	yes	language-profile	refine	git
 languages/rust/RUST-SECURITY-STANDARDS.md	profile	yes	language-profile	refine	git
 languages/rust/RUST-STANDARDS.md	entrypoint	derived	language-router	replace	git
-languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md	reference	no	reference	move	git
 languages/rust/RUST-TOOLING-STANDARDS.md	profile	yes	language-profile	split	git
 languages/rust/RUST-UNSAFE-STANDARDS.md	profile	yes	language-profile	refine	git
 prompts/full-codebase-standards-refactor.md	local-only-prompt	derived	workflow	decide-versioning	snapshot
