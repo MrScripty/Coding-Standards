@@ -8882,3 +8882,46 @@ verifiers pass. Row 45 and P37 are closed; immutable row 46 is active.
 **Next slice:** `7.4b36a`, planning only, to review `STD-0827`, `STD-0828`,
 `STD-0829`, and `STD-0830` Rust index lineage, exact closure outcomes, bounded
 write set, and focused P38 evidence before substantive movement.
+
+## Milestone 7.4b36a Row 46 Rust Authority Re-plan
+
+**Outcome:** Accepted.
+
+The four row-46 identifiers cannot close as one mechanical index update.
+`STD-0830` groups contracts already owned by Rust API, Async, Unsafe, Tooling,
+Performance, Verification, and other selected modules. The base Rust profile
+owns applicability, baseline verification, and routing; it does not absorb
+those specialized responsibilities.
+
+The canonical Rust profile still declares fully migrated legacy files
+authoritative. The unplanned Rust adoption-notes reference has no inbound
+consumer outside the corpus inventory but retains active defaults, including
+mandatory Criterion, and two routes back to `RUST-STANDARDS.md`. Those facts
+would leave competing legacy authority after a four-disposition-only closure.
+
+Row 46 is therefore decomposed into three serial children: finalize canonical
+profile authority and add one precisely classified README consumer; delete the
+obsolete adoption notes and corpus route; then rewrite the legacy Rust index,
+record exact `index`, `index`, `split`, and `split` dispositions, and close P38.
+
+**No-fallback result:** no legacy authority, mandatory Criterion, universal
+sync/async or unsafe default, manual when-to-use table, generic-policy override,
+adoption route, compatibility index, or generated-baseline rewrite is retained.
+Missing and contradictory routing facts remain typed diagnostics.
+
+**Bounded write set:** row-46 decomposition, owner-validation fixture and
+checker, active plan, and execution ledger. Canonical and legacy sources,
+adoption notes, corpus, dispositions, consumer files, generated inventories,
+immutable train, package manifest, configuration, lockfiles, and downstream
+repositories remain unchanged during planning.
+
+**Verification:** exact row and P38 identity, four undisposed IDs, current
+legacy-authority and stale-reference detection, owner metadata, prospective
+verifier uniqueness, 33-consumer baseline, Rust API, Async, Unsafe, Tooling,
+Router, README audit, execution-train integrity, plan structure, shell syntax,
+and diff integrity pass.
+
+**Next slice:** `7.4b36b`, finalize canonical Rust profile authority for active
+`STD-0827`, `STD-0828`, `STD-0829`, and `STD-0830` lineage, add the one exact
+README consumer, and leave source retirement and dispositions to their frozen
+serial children.

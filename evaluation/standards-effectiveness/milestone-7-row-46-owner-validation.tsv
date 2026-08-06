@@ -1,0 +1,5 @@
+id	canonical_owner	disposition	reference_treatment	rationale
+STD-0827	profiles/languages/rust/README.md	index	none	canonical Rust profile owns applicability baseline verification and specialized profile routing
+STD-0828	profiles/languages/rust/README.md	index	none	manual legacy document table becomes non-normative navigation through the canonical Rust profile
+STD-0829	profiles/languages/rust/README.md	split	none	Rust profile owns specialization routing while generic owners retain generic policy and precedence
+STD-0830	profiles/languages/rust/README.md	split	none	Rust profile owns baseline routing while API Async Unsafe Tooling Performance Verification and other selected owners retain their contracts

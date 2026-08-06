@@ -6,14 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 45 are accepted and closed. `STD-0704` and
-`STD-0705` have exact Router index dispositions, the language index is concise
-non-normative navigation, and the shared audit classifies its verifier as the
-33rd README consumer. Immutable row 46 is active for Rust index closure.
+**Current phase:** Rows 20 through 45 are accepted and closed. Row 46 review
+found competing legacy authority in the canonical Rust profile and unplanned
+adoption notes, so `STD-0827` through `STD-0830` are decomposed into three
+serial authority-closure children before P38 can close.
 
-**Next slice:** Milestone 7.4b36a is planning only: review row 46 `STD-0827`,
-`STD-0828`, `STD-0829`, and `STD-0830` Rust index lineage, exact closure
-outcomes, bounded write set, and P38 evidence before substantive movement.
+**Next slice:** Milestone 7.4b36b finalizes canonical Rust profile authority
+for active `STD-0827`, `STD-0828`, `STD-0829`, and `STD-0830` lineage, adds one
+classified README consumer, and leaves source retirement and dispositions to
+the following serial children.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2062,8 +2063,18 @@ all structural/routing fixtures pass.
      navigation, record both exact Router `index` dispositions, register the
      new language-index verifier in the shared README-consumer audit, close row
      45 and P37, and advance to immutable row 46.
-   - `7.4b36a` (`Planned`): review row 46 `STD-0827` through `STD-0830` Rust
-     index closure and P38 evidence without substantive movement.
+   - `7.4b36a` (`Accepted`): re-plan row 46 `STD-0827` through `STD-0830` as
+     canonical Rust profile finalization, adoption-note retirement, and exact
+     Rust-index closure without substantive movement.
+   - `7.4b36b` (`Planned`): remove legacy authority from the canonical Rust
+     profile, add typed no-legacy routing, and register one exact
+     profile-authority README consumer.
+   - `7.4b36c` (`Planned`): delete unconsumed stale Rust adoption notes, remove
+     their corpus route, and prove retirement without changing frozen generated
+     inventories.
+   - `7.4b36d` (`Planned`): rewrite the legacy Rust index as non-normative
+     navigation, record four exact index/split dispositions, close row 46 and
+     P38, and advance to immutable row 47.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and
