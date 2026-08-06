@@ -7,15 +7,14 @@
 **Plan status:** `Active`
 
 **Current phase:** Rows 20 through 46 and P38 are accepted and closed. Row 47
-is active for bounded pre-slice review of the derived README template under
-canonical Documentation ownership.
+pre-slice review is accepted; one bounded Documentation-owned implementation
+child remains before final Milestone 7 source closure.
 
-**Next slice:** Milestone 7.4b37a reviews `STD-0899`, `STD-0900`,
-`STD-0901`, `STD-0902`, `STD-0903`, `STD-0904`, `STD-0905`,
-`STD-0906`, `STD-0907`, `STD-0908`, `STD-0909`, `STD-0910`,
-`STD-0911`, `STD-0912`, `STD-0913`, `STD-0914`, `STD-0915`, and
-`STD-0916` as one Documentation-owned README-template derivation package
-before substantive movement.
+**Next slice:** Milestone 7.4b37b records one exact Documentation `split`
+disposition for each of `STD-0899` through `STD-0916`, clears the resolved
+source-gap exceptions, proves that the existing template is derived and
+non-normative, closes row 47 and P39, and advances to final Milestone 7 source
+closure without rewriting the template or canonical workflow.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2083,8 +2082,14 @@ all structural/routing fixtures pass.
      forward row-47 lifecycle assertion from the completed row-46 checker;
      execution-train evidence and the active plan own current activation. All
      266 verifier entrypoints pass after the repair.
-   - `7.4b37a` (`Planned`): review row 47 `STD-0899` through `STD-0916`
-     and P39 README-template derivation evidence before substantive movement.
+   - `7.4b37a` (`Accepted`): retain row 47 as one Documentation-owned
+     consolidation package, freeze eighteen exact `split` outcomes, and
+     authorize one closure child without changing the already aligned derived
+     template or canonical workflow. All 267 complete-suite verifier
+     entrypoints pass.
+   - `7.4b37b` (`Planned`): record the eighteen exact dispositions, clear the
+     resolved source-gap audit, add focused derivation-closure evidence, close
+     row 47 and P39, and advance to final Milestone 7 source closure.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

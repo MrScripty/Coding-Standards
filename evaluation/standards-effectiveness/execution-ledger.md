@@ -9051,3 +9051,49 @@ suite pass.
 `STD-0912`, `STD-0913`, `STD-0914`, `STD-0915`, and `STD-0916`
 as one Documentation-owned README-template derivation package before
 substantive movement.
+
+## Milestone 7.4b37a README Template Derivation Review
+
+**Outcome:** Accepted.
+
+The frozen row-47 template headings remain one coherent P39 consolidation
+package under `workflows/documentation.md`. Milestone 6.1 already replaced the
+universal directory README with a conditional boundary template. The current
+template is derived, non-normative, and usable only after the Documentation
+Workflow selects `boundary-readme` or `contract-readme`.
+
+All eighteen identifiers receive prospective `split` outcomes. Purpose and
+invariants remain selected boundary content; directory identity narrows to a
+responsibility boundary; contents, problem, constraints, decision,
+alternatives, revisit, dependency, example, testing, and notes boilerplate
+yield to selected semantic content and explicit omission; and consumer and
+producer contracts remain only as workflow-selected prompts. No fixed heading
+or universal directory obligation returns.
+
+One implementation child is sufficient because every identifier shares the
+same owner, prerequisite, consolidation decision, migration-structure evidence,
+and full-suite package gate. The aligned template and canonical workflow remain
+read-only.
+
+**No-fallback result:** the template cannot select applicability, infer a README
+from directory shape, make optional sections mandatory, invent contract facts,
+retain placeholder defaults, accept an unrelated artifact, or restore the
+frozen template when documentation facts are unavailable, invalid, or
+unsupported.
+
+**Bounded write set:** row-47 decomposition, owner-validation fixture and
+checker, active plan, and execution ledger. Template, workflow, dispositions,
+gap audit, corpus, owner map, generated inventories, immutable train, package
+manifest, router, metadata, configuration, lockfiles, and downstream
+repositories remain unchanged.
+
+**Verification:** exact row and P39 identity, eighteen ordered frozen IDs, one
+Documentation owner and `split` outcome per ID, eleven explicit template
+treatments, derived corpus classification, conditional template selection,
+negative universal-heading coverage, canonical Documentation decisions and
+consolidation, execution-train integrity, plan structure, shell syntax, diff
+integrity, and all 267 complete-suite verifier entrypoints pass.
+
+**Next slice:** `7.4b37b`, record the eighteen exact dispositions, clear all
+resolved source-gap exceptions, add focused README-template derivation closure
+evidence, close row 47 and P39, and advance to final Milestone 7 source closure.

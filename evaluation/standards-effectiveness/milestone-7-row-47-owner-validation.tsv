@@ -1,0 +1,19 @@
+id	canonical_owner	disposition	template_outcome	rationale
+STD-0899	workflows/documentation.md	split	rename-boundary	directory identity narrows to a workflow-selected responsibility boundary
+STD-0900	workflows/documentation.md	split	retain-selected	purpose remains required only for a selected boundary documentation profile
+STD-0901	workflows/documentation.md	split	replace-entry-points	fixed contents inventory yields to stable entry points and applicable owner links
+STD-0902	workflows/documentation.md	split	merge-responsibility	problem boilerplate yields to purpose and owned responsibility
+STD-0903	workflows/documentation.md	split	select-contract-facts	fixed constraints section yields to applicable contract lifecycle compatibility and operational facts
+STD-0904	workflows/documentation.md	split	replace-decision-links	duplicated decision prose yields to canonical decision links
+STD-0905	workflows/documentation.md	split	replace-decision-links	rejected alternatives remain with the canonical decision owner rather than the README
+STD-0906	workflows/documentation.md	split	retain-selected	invariants remain required only for a selected boundary documentation profile
+STD-0907	workflows/documentation.md	split	omit-universal	mandatory revisit section yields to selected decision lifecycle and traceability
+STD-0908	workflows/documentation.md	split	omit-universal	mandatory dependency inventory yields to selected entry points contracts and owner links
+STD-0909	workflows/documentation.md	split	omit-universal	internal dependency catalog is not a universal README obligation
+STD-0910	workflows/documentation.md	split	omit-universal	external dependency catalog is not a universal README obligation
+STD-0911	workflows/documentation.md	split	replace-decision-links	fixed ADR list yields to applicable canonical decision links
+STD-0912	workflows/documentation.md	split	select-examples	examples remain only when aligned with real public entry points
+STD-0913	workflows/documentation.md	split	rename-consumer-contract	API consumer boilerplate becomes a selected Consumer Contract prompt
+STD-0914	workflows/documentation.md	split	rename-produced-contract	structured producer boilerplate becomes a selected Produced Contract prompt
+STD-0915	workflows/documentation.md	split	select-verification	universal testing section yields to applicable contract and executable verification evidence
+STD-0916	workflows/documentation.md	split	omit-universal	generic notes catch-all yields to specific selected sections and canonical owners
