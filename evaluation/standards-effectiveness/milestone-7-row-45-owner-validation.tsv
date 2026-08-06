@@ -1,0 +1,3 @@
+id	canonical_owner	disposition	reference_treatment	rationale
+STD-0704	STANDARDS-ROUTER.md	index	none	language-profile applicability and dependency selection belongs exclusively to the Router
+STD-0705	STANDARDS-ROUTER.md	index	none	manual language catalog becomes non-normative canonical-profile navigation without copied policy or legacy routing

@@ -8801,3 +8801,46 @@ immutable row 45 is active.
 **Next slice:** `7.4b35a`, planning only, to review `STD-0704` through
 `STD-0705` language index lineage, exact closure outcomes, bounded write set,
 and focused P37 evidence before substantive movement.
+
+## Milestone 7.4b35a Row 45 Language Index Review
+
+**Outcome:** Accepted.
+
+Owner review confirms `STD-0704` and `STD-0705` are the title/introduction and
+manual catalog of `languages/README.md`. Both route language-profile selection
+to `STANDARDS-ROUTER.md` and own no independent language mechanism. Each will
+receive one exact `index` disposition.
+
+The current source is not closure-ready: it repeats Router policy through "do
+not replace" and "should not live inline" statements and retains the legacy
+Rust index as an entrypoint. Implementation must replace that text with concise
+non-normative navigation to the Router Language Profiles section and canonical
+Rust profile. It cannot retain the legacy index as a fallback route.
+
+The required `verify-language-index-closure.sh` is a genuine new non-root
+README consumer. The shared audit currently classifies 32 consumers.
+Implementation will add exactly this verifier with one
+`language-index-closure` classification, update the audit schema and row-35
+count to 33, and run the complete fail-fast suite. No existing classification
+is broadened.
+
+**No-fallback result:** unknown language applicability remains a Router
+diagnostic. README presence cannot select a profile, inline policy cannot
+replace Router authority, and the catalog cannot route through the legacy Rust
+index, infer applicability, or substitute weaker evidence.
+
+**Bounded write set:** the row-45 decomposition, owner-validation fixture and
+checker, active plan, and execution ledger. Source, dispositions, Router,
+canonical Rust profile, legacy Rust index, shared consumer files, other
+consumers, generated inventories, immutable train, package manifest,
+configuration, lockfiles, and downstream repositories remain unchanged.
+
+**Verification:** exact row and P37 identity, owner-validation schema, two
+undisposed source identifiers, current source-policy and legacy-route detection,
+prospective verifier uniqueness, frozen 32-consumer baseline, Router and
+language-profile routing, root README consumer audit, execution-train
+integrity, plan structure, shell syntax, and diff integrity pass.
+
+**Next slice:** `7.4b35b`, rewrite the source as non-normative navigation,
+record both exact dispositions, add the precisely classified consumer, close
+row 45 and P37, and advance to immutable row 46.
