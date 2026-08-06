@@ -9097,3 +9097,64 @@ integrity, and all 267 complete-suite verifier entrypoints pass.
 **Next slice:** `7.4b37b`, record the eighteen exact dispositions, clear all
 resolved source-gap exceptions, add focused README-template derivation closure
 evidence, close row 47 and P39, and advance to final Milestone 7 source closure.
+
+## Milestone 7.4b37b README Template Derivation Closure
+
+**Outcome:** Accepted.
+
+Each of `STD-0899` through `STD-0916` now has one exact `split` disposition to
+`workflows/documentation.md`. The dispositions preserve Documentation as the
+only policy owner while retaining the current README template solely as a
+derived, non-normative resource selected after `boundary-readme` or
+`contract-readme` classification.
+
+The seventeen deferred or retained-diff source-gap exceptions are removed. The
+gap fixture now contains only its schema header, and the executable baseline
+audit observes zero undisposed deleted headings. The audit continues to fail
+on any future unrecorded orphan.
+
+The first focused closure run exposed a shared-checker defect before live
+application: `verify-undisposed-source-gaps.sh` expanded the length of an empty
+associative array under `set -u`, so the intended zero-gap state terminated as
+an unbound variable. The approved bounded replan adds that checker to child
+`47.1` and replaces only the fragile length expansion with an explicit
+zero-safe observed counter. The row-47 closure verifier exercises the empty
+state directly.
+
+The next focused gate exposed the same Bash terminal-state defect in the
+rolling-decomposition and independent-trust checkers when no source or owner
+remained. A bounded audit of verifier array-length expressions found these as
+the only additional mutable-remainder arrays. The approved expansion gives
+both checkers explicit unique source and owner counters without changing their
+historical ownership, upper bounds, or accepted trust decisions.
+
+The already aligned template and canonical workflow are unchanged. Fixed
+Contents, Problem, Constraints, Decision, Alternatives, Revisit, Dependencies,
+Usage Examples, Testing, and Notes headings remain absent, while purpose,
+responsibility, invariants, entry points, selected decision links, and selected
+consumer or produced contracts remain derived prompts.
+
+**No-fallback result:** no universal directory requirement, fixed heading list,
+placeholder default, invented contract fact, unrelated artifact, or frozen
+template compatibility path is restored. Unclassifiable, contradictory,
+missing, and unsupported facts remain owned diagnostics in the Documentation
+Workflow.
+
+**Bounded write set:** exact disposition table, source-gap fixture and audit,
+shared source-gap, rolling-decomposition, and independent-trust checkers,
+Documentation index checker, one new derivation-closure verifier, row-47
+checker, active plan, and execution ledger. Template, canonical workflow,
+corpus, owner map, generated inventories, immutable train, package manifest,
+router, metadata, configuration, lockfiles, and downstream repositories remain
+unchanged.
+
+**Verification:** eighteen ordered unique `split` dispositions, zero remaining
+template IDs and source gaps, derived corpus classification, conditional
+template selection, negative universal-heading coverage, canonical
+Documentation decisions and consolidation, row-47 and execution-train closure,
+plan structure, shell syntax, diff integrity, and the complete fail-fast suite
+of all 268 verifier entrypoints pass.
+
+**Next slice:** `7.4c`, review final legacy indexes, exact disposition and
+source-gap closure, and cross-owner duplication evidence before authorizing
+final Milestone 7 acceptance work.

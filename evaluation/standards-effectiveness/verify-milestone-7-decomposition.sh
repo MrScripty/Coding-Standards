@@ -17,6 +17,8 @@ declare -A disposed_disposition
 declare -A remaining_by_owner
 declare -A remaining_sources
 declare -A proposed_owners
+remaining_source_count=0
+proposed_owner_count=0
 
 while IFS=$'\t' read -r id source target disposition _rationale; do
   [[ "$id" == 'id' ]] && continue
@@ -31,14 +33,20 @@ while IFS=$'\t' read -r id source _line owner _disposition _heading; do
   [[ "$id" == 'id' ]] && continue
   [[ -n "${disposed[$id]:-}" ]] && continue
   ((remaining_count += 1))
-  remaining_sources["$source"]=1
-  proposed_owners["$owner"]=1
+  if [[ -z "${remaining_sources[$source]:-}" ]]; then
+    remaining_sources["$source"]=1
+    remaining_source_count=$((remaining_source_count + 1))
+  fi
+  if [[ -z "${proposed_owners[$owner]:-}" ]]; then
+    proposed_owners["$owner"]=1
+    proposed_owner_count=$((proposed_owner_count + 1))
+  fi
   remaining_by_owner["$owner"]=$(( ${remaining_by_owner[$owner]:-0} + 1 ))
 done < "$OWNER_MAP"
 
 [[ "$remaining_count" -le 698 ]]
-[[ "${#remaining_sources[@]}" -le 33 ]]
-[[ "${#proposed_owners[@]}" -le 33 ]]
+[[ "$remaining_source_count" -le 33 ]]
+[[ "$proposed_owner_count" -le 33 ]]
 
 missing_owners=0
 for owner in "${!proposed_owners[@]}"; do
@@ -106,4 +114,4 @@ rg -F -q 'typed diagnostic' "$REPORT"
 rg -F -q 'milestone-7-decomposition.md' "$PLAN"
 
 printf 'Milestone 7 rolling decomposition passed: 698 planned IDs; %s IDs, %s sources, %s owners, %s missing owners currently remain.\n' \
-  "$remaining_count" "${#remaining_sources[@]}" "${#proposed_owners[@]}" "$missing_owners"
+  "$remaining_count" "$remaining_source_count" "$proposed_owner_count" "$missing_owners"

@@ -897,3 +897,21 @@ STD-0827	languages/rust/RUST-STANDARDS.md	profiles/languages/rust/README.md	inde
 STD-0828	languages/rust/RUST-STANDARDS.md	profiles/languages/rust/README.md	index	manual legacy document table becomes concise non-normative navigation through the canonical Rust profile
 STD-0829	languages/rust/RUST-STANDARDS.md	profiles/languages/rust/README.md	split	generic relationships yield to Router and canonical topic owners while the Rust profile retains specialization routing
 STD-0830	languages/rust/RUST-STANDARDS.md	profiles/languages/rust/README.md	split	baseline Rust routing remains in the profile while specialized defaults remain with their selected canonical owners
+STD-0899	templates/README-TEMPLATE.md	workflows/documentation.md	split	directory identity narrows to a workflow-selected responsibility boundary while the template remains derived
+STD-0900	templates/README-TEMPLATE.md	workflows/documentation.md	split	purpose remains selected boundary content without restoring universal directory applicability
+STD-0901	templates/README-TEMPLATE.md	workflows/documentation.md	split	fixed contents inventory yields to stable entry points and applicable canonical owner links
+STD-0902	templates/README-TEMPLATE.md	workflows/documentation.md	split	problem boilerplate yields to purpose and explicitly owned responsibility
+STD-0903	templates/README-TEMPLATE.md	workflows/documentation.md	split	fixed constraints yield to applicable contract lifecycle compatibility and operational facts
+STD-0904	templates/README-TEMPLATE.md	workflows/documentation.md	split	duplicated decision prose yields to links to the canonical decision owner
+STD-0905	templates/README-TEMPLATE.md	workflows/documentation.md	split	rejected alternatives remain with the canonical decision owner rather than the derived template
+STD-0906	templates/README-TEMPLATE.md	workflows/documentation.md	split	invariants remain selected boundary content without becoming a universal directory requirement
+STD-0907	templates/README-TEMPLATE.md	workflows/documentation.md	split	mandatory revisit sections yield to selected decision lifecycle and traceability
+STD-0908	templates/README-TEMPLATE.md	workflows/documentation.md	split	mandatory dependency inventories yield to selected entry points contracts and owner links
+STD-0909	templates/README-TEMPLATE.md	workflows/documentation.md	split	internal dependency catalogs are omitted unless represented by selected owned knowledge
+STD-0910	templates/README-TEMPLATE.md	workflows/documentation.md	split	external dependency catalogs are omitted unless represented by selected owned knowledge
+STD-0911	templates/README-TEMPLATE.md	workflows/documentation.md	split	fixed related ADR lists yield to applicable canonical decision links
+STD-0912	templates/README-TEMPLATE.md	workflows/documentation.md	split	examples remain only when aligned with real public entry points
+STD-0913	templates/README-TEMPLATE.md	workflows/documentation.md	split	API consumer boilerplate becomes a workflow-selected Consumer Contract prompt
+STD-0914	templates/README-TEMPLATE.md	workflows/documentation.md	split	structured producer boilerplate becomes a workflow-selected Produced Contract prompt
+STD-0915	templates/README-TEMPLATE.md	workflows/documentation.md	split	universal testing sections yield to applicable contract and executable verification evidence
+STD-0916	templates/README-TEMPLATE.md	workflows/documentation.md	split	generic notes yield to specific selected sections and canonical owners

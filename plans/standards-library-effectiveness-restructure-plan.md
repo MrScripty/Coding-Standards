@@ -6,15 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 46 and P38 are accepted and closed. Row 47
-pre-slice review is accepted; one bounded Documentation-owned implementation
-child remains before final Milestone 7 source closure.
+**Current phase:** Rows 20 through 47 and P39 are accepted and closed. The
+rolling migration remainder is zero, and final Milestone 7 source closure is
+active.
 
-**Next slice:** Milestone 7.4b37b records one exact Documentation `split`
-disposition for each of `STD-0899` through `STD-0916`, clears the resolved
-source-gap exceptions, proves that the existing template is derived and
-non-normative, closes row 47 and P39, and advances to final Milestone 7 source
-closure without rewriting the template or canonical workflow.
+**Next slice:** Milestone 7.4c reviews every remaining legacy index, exact
+disposition closure, source-gap closure, and cross-owner duplication result
+before authorizing final Milestone 7 acceptance work.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2087,9 +2085,14 @@ all structural/routing fixtures pass.
      authorize one closure child without changing the already aligned derived
      template or canonical workflow. All 267 complete-suite verifier
      entrypoints pass.
-   - `7.4b37b` (`Planned`): record the eighteen exact dispositions, clear the
+   - `7.4b37b` (`Accepted`): record the eighteen exact dispositions, clear the
      resolved source-gap audit, add focused derivation-closure evidence, close
-     row 47 and P39, and advance to final Milestone 7 source closure.
+     row 47 and P39, and advance to final Milestone 7 source closure. The
+     aligned template and canonical workflow remain unchanged. The accepted
+     bounded replan repairs empty associative-array counts in the shared
+     source-gap, rolling-decomposition, and independent-trust checkers with
+     explicit zero-safe unique counters; row-47 closure supplies the terminal
+     regression case. All 268 complete-suite verifier entrypoints pass.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

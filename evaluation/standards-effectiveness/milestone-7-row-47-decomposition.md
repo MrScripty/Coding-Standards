@@ -73,9 +73,12 @@ Planning may touch only this decomposition, its owner-validation fixture and
 checker, the active plan, and the execution ledger.
 
 Child `47.1` may touch only the exact disposition table, undisposed-source gap
-fixture and audit, Documentation index-closure checker, one new README-template
-derivation closure verifier, row-47 decomposition checker, active plan, and
-execution ledger.
+fixture and audit, the shared source-gap checker, Documentation index-closure
+checker, rolling-decomposition checker, independent-trust checker, one new
+README-template derivation closure verifier, row-47 decomposition checker,
+active plan, and execution ledger. These shared-checker additions are the
+accepted terminal-state repair: explicit unique counters replace empty
+associative-array length expansion under `set -u`.
 
 The template, canonical Documentation Workflow, corpus, owner map, generated
 inventories, immutable train, package manifest, router, metadata, other
@@ -96,8 +99,9 @@ Child `47.1` requires eighteen unique exact dispositions, zero remaining
 source-gap exceptions, zero remaining undisposed identifiers, unchanged
 derived-template classification, no restored universal headings or placeholder
 defaults, canonical Documentation decision evidence, P39 closure, and final
-source-closure activation. It runs focused checks and the complete fail-fast
-suite.
+source-closure activation. The zero-gap and zero-remainder closure path is the
+regression case for all three shared checkers' empty-set handling. It runs
+focused checks and the complete fail-fast suite.
 
 ## Typed Outcomes And No Fallback
 

@@ -22,6 +22,8 @@ declare -A remaining_owners
 declare -A source_by_id
 declare -A owner_by_id
 declare -a f048_actual_ids
+remaining_source_count=0
+remaining_owner_count=0
 
 while IFS=$'\t' read -r id source target disposition _rationale; do
   [[ "$id" == 'id' ]] && continue
@@ -45,8 +47,14 @@ while IFS=$'\t' read -r id source _line owner _disposition _heading; do
   owner_by_id["$id"]="$owner"
   [[ -n "${disposed[$id]:-}" ]] && continue
   ((global_remaining += 1))
-  remaining_sources["$source"]=1
-  remaining_owners["$owner"]=1
+  if [[ -z "${remaining_sources[$source]:-}" ]]; then
+    remaining_sources["$source"]=1
+    remaining_source_count=$((remaining_source_count + 1))
+  fi
+  if [[ -z "${remaining_owners[$owner]:-}" ]]; then
+    remaining_owners["$owner"]=1
+    remaining_owner_count=$((remaining_owner_count + 1))
+  fi
   remaining_by_owner["$owner"]=$(( ${remaining_by_owner[$owner]:-0} + 1 ))
   case "$owner" in
     topics/security.md|topics/cross-platform.md|profiles/boundaries/interop.md|\
@@ -57,8 +65,8 @@ profiles/languages/rust/language-bindings.md)
   esac
 done < "$OWNER_MAP"
 [[ "$global_remaining" -le 589 ]]
-[[ "${#remaining_sources[@]}" -le 28 ]]
-[[ "${#remaining_owners[@]}" -le 27 ]]
+[[ "$remaining_source_count" -le 28 ]]
+[[ "$remaining_owner_count" -le 27 ]]
 
 missing_owners=0
 for owner in "${!remaining_owners[@]}"; do

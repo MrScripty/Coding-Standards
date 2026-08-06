@@ -87,7 +87,9 @@ for heading in '## Contents' '## Problem' '## Constraints' '## Decision' \
 done
 
 rg -F -q '`7.4b37a` (`Accepted`)' "$P"
+rg -F -q '`7.4b37b` (`Accepted`)' "$P"
+"$S/verify-readme-template-derivation-closure.sh"
 "$S/verify-documentation-decisions.sh"
 "$S/verify-documentation-policy-consolidation.sh"
 "$S/verify-milestone-7-execution-train.sh"
-printf 'Milestone 7 row-47 decomposition passed: 18 split outcomes, one Documentation owner, child 47.1 authorized\n'
+printf 'Milestone 7 row-47 closure passed: 18 split dispositions, P39 closed, final source closure active\n'

@@ -13,6 +13,7 @@ git -C "$R" cat-file -e "$BASELINE^{commit}"
 
 declare -A id_by_location path_by_id level_by_id heading_by_id
 declare -A disposed expected_class expected_reason observed
+observed_count=0
 
 while IFS=$'\t' read -r id path line level _role _disposition heading extra; do
   [[ "$id" == id ]] && continue
@@ -42,7 +43,10 @@ done < "$EXPECTED"
 while IFS=$'\t' read -r path line; do
   id="${id_by_location["$path"$'\t'"$line"]:-}"
   [[ -n "$id" && -z "${disposed[$id]:-}" ]] || continue
-  observed["$id"]=1
+  if [[ -z "${observed[$id]:-}" ]]; then
+    observed["$id"]=1
+    observed_count=$((observed_count + 1))
+  fi
 done < <(
   git -C "$R" diff --no-ext-diff --unified=0 "$BASELINE" -- '*.md' |
     awk '
@@ -107,4 +111,4 @@ for id in "${!expected_class[@]}"; do
   fi
 done
 
-printf 'Undisposed source-gap audit passed: %d exact candidates\n' "${#observed[@]}"
+printf 'Undisposed source-gap audit passed: %d exact candidates\n' "$observed_count"
