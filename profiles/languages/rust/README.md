@@ -64,18 +64,18 @@ according to the crate's feature contract.
 - Keep generated bindings derived and test both native and host sides when that
   boundary changes.
 
-## Detailed Guidance During Migration
+## Canonical Routing And No Legacy Authority
 
-The current Rust documents remain canonical for specialized rules not stated
-here:
+This profile and the specialized profiles linked above are the canonical Rust
+mechanism owners. Files under the legacy Rust standards directory are
+non-normative migration indexes; they do not own Rust policy or supply a route
+when canonical facts are missing.
 
-- [Remaining API guidance](../../../languages/rust/RUST-API-STANDARDS.md)
-- [Remaining Async mechanisms](../../../languages/rust/RUST-ASYNC-STANDARDS.md#runtime-boundaries)
-- [Rust dependency mechanisms](dependencies.md)
-- [Remaining release guidance](../../../languages/rust/RUST-RELEASE-STANDARDS.md#toolchain-pinning)
-- [Remaining security guidance](../../../languages/rust/RUST-SECURITY-STANDARDS.md)
-- [Rust tooling mechanisms](tooling.md)
+Return typed `unavailable` when the required owner, applicability, or capability
+facts cannot be established, typed `invalid` when routing facts contradict, and
+typed `unsupported` through the selected owner when a required mechanism is not
+supported.
 
-If a legacy Rust rule conflicts with this profile for a moved rule, this
-profile is canonical. Conflicts in unmoved specialized rules must be reported
-rather than resolved by convenience.
+Do not fall back to a legacy Rust file, a nearby profile, every Rust profile, or
+a default runtime, tool, target, feature matrix, benchmark adapter, unsafe
+policy, or verification command.

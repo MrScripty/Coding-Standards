@@ -8925,3 +8925,49 @@ and diff integrity pass.
 `STD-0827`, `STD-0828`, `STD-0829`, and `STD-0830` lineage, add the one exact
 README consumer, and leave source retirement and dispositions to their frozen
 serial children.
+
+## Milestone 7.4b36b Canonical Rust Profile Authority
+
+**Outcome:** Accepted.
+
+The canonical Rust profile no longer declares legacy Rust files authoritative.
+Its existing API, Dependency, Release, Tooling, Async, Cross-Platform, Unsafe,
+Interop, Security, and Language Binding routes remain canonical and unchanged.
+A new routing boundary identifies legacy files as non-normative migration
+indexes and returns typed unavailable, invalid, and unsupported outcomes through
+the selected owner instead of choosing a nearby document or default mechanism.
+
+`verify-rust-profile-authority-closure.sh` is the only new direct README
+consumer. It is classified under the existing `none` / `rust-profile-index`
+contract, increasing the exact shared inventory and row-35 checker from 33 to
+34 without broadening an existing classification.
+
+The first complete-suite run stopped at the historical row-45 checker after all
+of that checker's substantive owner and consumer checks passed. Row 45
+hard-coded the then-current global count of 33 and inspected that literal in
+the row-35 and root audit checkers. Row 46 legitimately raises the inventory to
+34. The repair removes that competing mutable-count authority: row 45 now
+proves its language-index verifier occurs exactly once with its frozen
+classification, while row 35 and the root audit continue to own the exact
+current total.
+
+**No-fallback result:** the profile cannot fall back to a legacy Rust file,
+nearby profile, every Rust profile, or a default runtime, tool, target, feature
+matrix, benchmark adapter, unsafe policy, or verification command.
+
+**Bounded write set:** canonical Rust profile, one new authority verifier,
+README-consumer manifest and audit checker, row-35, row-45, and row-46 checkers,
+active plan, and execution ledger. Legacy index, adoption notes, corpus,
+dispositions, specialized owners, generated inventories, immutable train,
+package manifest, configuration, lockfiles, and downstream repositories remain
+unchanged.
+
+**Verification:** canonical route completeness, typed no-legacy outcomes,
+absence of legacy authority links, Rust API, Async, Unsafe, and Tooling owner
+evidence, exact 34-consumer audit, row-35, row-45, and row-46 decomposition,
+execution-train integrity, plan structure, shell syntax, diff integrity, and
+all 264 entrypoints in the complete fail-fast suite pass.
+
+**Next slice:** `7.4b36c`, delete stale adoption notes for active `STD-0827`,
+`STD-0828`, `STD-0829`, and `STD-0830` lineage, remove their corpus route, and
+preserve frozen generated evidence.

@@ -56,10 +56,15 @@ for metadata in 'ID: `profile.language.rust`' 'Requires: `core`' \
   "Canonical owner: \`$owner\`"; do
   rg -F -q "$metadata" "$profile"
 done
-for text in '## Detailed Guidance During Migration' \
-  'remain canonical for specialized rules' \
-  'legacy Rust rule conflicts'; do
+for text in '## Canonical Routing And No Legacy Authority' \
+  'non-normative migration indexes' 'typed `unavailable`' 'typed `invalid`' \
+  'typed `unsupported`' 'Do not fall back to a legacy Rust file'; do
   rg -F -q "$text" "$profile"
+done
+for text in '## Detailed Guidance During Migration' \
+  'remain canonical for specialized rules' 'legacy Rust rule conflicts' \
+  '../../../languages/rust/'; do
+  ! rg -F -q "$text" "$profile"
 done
 
 adoption="$R/languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md"
@@ -71,15 +76,17 @@ for text in 'Criterion is required for Rust performance claims' \
 done
 [[ "$(awk -F '\t' '$1 == "languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md" { print $2 FS $3 FS $4 FS $5 }' "$CORPUS")" == $'reference\tno\treference\tmove' ]]
 
-for verifier in verify-rust-profile-authority-closure.sh \
-  verify-rust-adoption-notes-retirement.sh verify-rust-index-closure.sh; do
+[[ -x "$S/verify-rust-profile-authority-closure.sh" ]]
+for verifier in verify-rust-adoption-notes-retirement.sh \
+  verify-rust-index-closure.sh; do
   [[ ! -e "$S/$verifier" ]]
 done
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 33 ]]
+[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 34 ]]
+[[ "$(awk -F '\t' '$1 == "evaluation/standards-effectiveness/verify-rust-profile-authority-closure.sh" { print $2 FS $3 }' "$M")" == $'none\trust-profile-index' ]]
 
 rg -F -q '`7.4b35b` (`Accepted`)' "$P"
 rg -F -q '`7.4b36a` (`Accepted`)' "$P"
-rg -F -q '`7.4b36b` (`Planned`)' "$P"
+rg -F -q '`7.4b36b` (`Accepted`)' "$P"
 rg -F -q '`7.4b36c` (`Planned`)' "$P"
 rg -F -q '`7.4b36d` (`Planned`)' "$P"
 "$S/verify-rust-api-owner-contract.sh"

@@ -6,15 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 45 are accepted and closed. Row 46 review
-found competing legacy authority in the canonical Rust profile and unplanned
-adoption notes, so `STD-0827` through `STD-0830` are decomposed into three
-serial authority-closure children before P38 can close.
+**Current phase:** Rows 20 through 45 are accepted and closed. Row 46 child
+`46.1` finalizes canonical Rust profile authority and registers its verifier as
+the 34th exact README consumer. Adoption-note retirement and the four active
+`STD-0827` through `STD-0830` dispositions remain serial.
 
-**Next slice:** Milestone 7.4b36b finalizes canonical Rust profile authority
-for active `STD-0827`, `STD-0828`, `STD-0829`, and `STD-0830` lineage, adds one
-classified README consumer, and leaves source retirement and dispositions to
-the following serial children.
+**Next slice:** Milestone 7.4b36c deletes stale adoption notes for active
+`STD-0827`, `STD-0828`, `STD-0829`, and `STD-0830` lineage, removes their
+corpus route, and preserves frozen generated evidence.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2066,9 +2065,13 @@ all structural/routing fixtures pass.
    - `7.4b36a` (`Accepted`): re-plan row 46 `STD-0827` through `STD-0830` as
      canonical Rust profile finalization, adoption-note retirement, and exact
      Rust-index closure without substantive movement.
-   - `7.4b36b` (`Planned`): remove legacy authority from the canonical Rust
+   - `7.4b36b` (`Accepted`): remove legacy authority from the canonical Rust
      profile, add typed no-legacy routing, and register one exact
-     profile-authority README consumer.
+     profile-authority README consumer. The full-suite gate found and repaired
+     row 45's stale ownership of the mutable global consumer count: historical
+     row verification now proves its own verifier's exact presence and
+     classification, while row 35 and the root audit retain exact-current-count
+     authority.
    - `7.4b36c` (`Planned`): delete unconsumed stale Rust adoption notes, remove
      their corpus route, and prove retirement without changing frozen generated
      inventories.

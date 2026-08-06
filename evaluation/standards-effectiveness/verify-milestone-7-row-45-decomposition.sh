@@ -7,8 +7,6 @@ V="$S/milestone-7-row-45-owner-validation.tsv"
 D="$S/milestone-7-row-45-decomposition.md"
 P="$R/plans/standards-library-effectiveness-restructure-plan.md"
 M="$S/milestone-7-row-35-readme-consumers.tsv"
-A="$S/verify-root-readme-consumer-audit.sh"
-ROW35="$S/verify-milestone-7-row-35-decomposition.sh"
 TRAIN="$S/milestone-7-execution-train.tsv"
 
 row="$(awk -F '\t' '$1 == 45 { print $2 FS $3 FS $4 FS $5 FS $6 FS $7 FS $8 FS $9 }' "$TRAIN")"
@@ -62,10 +60,8 @@ done
 rg -F -q '## Language Profiles' "$R/STANDARDS-ROUTER.md"
 
 [[ -x "$S/verify-language-index-closure.sh" ]]
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 33 ]]
+[[ "$(awk -F '\t' '$1 == "evaluation/standards-effectiveness/verify-language-index-closure.sh" { n++ } END { print n+0 }' "$M")" -eq 1 ]]
 [[ "$(awk -F '\t' '$1 == "evaluation/standards-effectiveness/verify-language-index-closure.sh" { print $2 FS $3 }' "$M")" == $'none\tlanguage-index-closure' ]]
-rg -F -q '"$(awk -F '\''\t'\'' '\''NR > 1 { n++ } END { print n+0 }'\'' "$M")" -eq 33' "$A"
-rg -F -q '"$(awk -F '\''\t'\'' '\''NR > 1 { n++ } END { print n+0 }'\'' "$M")" -eq 33' "$ROW35"
 
 rg -F -q '`7.4b34b` (`Accepted`)' "$P"
 rg -F -q '`7.4b35a` (`Accepted`)' "$P"
