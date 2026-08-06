@@ -30,7 +30,7 @@ mapfile -t remaining < <(
       !($1 in disposed) { print $1 }
   ' "$S/consolidation-dispositions.tsv" "$S/generated/rule-owner-map.tsv"
 )
-[[ "${remaining[*]}" == 'STD-0821' ]]
+[[ "${#remaining[@]}" -eq 0 ]]
 [[ "$(awk -F '\t' '$2 == "languages/rust/RUST-SECURITY-STANDARDS.md" { n++ } END { print n+0 }' "$S/generated/rule-owner-map.tsv")" -eq 6 ]]
 
 for text in '# Rust Security Standards' 'Security Standards' \
@@ -49,7 +49,7 @@ rg -F -q 'STD-0582' "$EXISTING"
 ! rg -F -q 'STD-0821' "$EXISTING"
 rg -F -q '`7.4b33b` (`Accepted`)' "$P"
 rg -F -q '`7.4b34a` (`Accepted`)' "$P"
-rg -F -q '`7.4b34b` (`Planned`)' "$P"
+rg -F -q '`7.4b34b` (`Accepted`)' "$P"
 "$S/verify-security-index-closure.sh"
 "$S/verify-rust-filesystem-authority.sh"
 "$S/verify-rust-boundary-arithmetic.sh"

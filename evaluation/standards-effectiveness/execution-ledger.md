@@ -8760,3 +8760,44 @@ structure, shell syntax, and diff integrity pass.
 **Next slice:** `7.4b34b`, record the exact `STD-0821` index disposition
 through the Rust title-specific verifier, close row 44 and P36, and advance to
 immutable row 45.
+
+## Milestone 7.4b34b Rust Security Title Index Closure
+
+**Outcome:** Accepted.
+
+`STD-0821` now has one exact `index` disposition to
+`profiles/languages/rust/security.md`. All six frozen identifiers in the Rust
+Security migration source now have exactly one disposition. The unchanged
+introductory route contains no normative or fallback selector and continues to
+direct filesystem authority, checked sizing, external-input queues, listener
+lifecycle, and panic boundaries to their accepted owners.
+
+The new `verify-rust-security-title-index-closure.sh` owns only the Rust
+document title closure. The accepted `verify-security-index-closure.sh`
+remains unchanged and continues to own only the generic `STD-0582` Security
+index. P36's semantic result is complete without combining those independent
+verification contracts.
+
+**No-fallback result:** no validator, filesystem mechanism, numeric recovery,
+resource default, queue behavior, listener exposure, runtime, panic policy,
+evidence substitute, or default success path is restored. No canonical rule is
+copied into the migration document, and contradictory lineage remains a
+failing typed verification outcome.
+
+**Bounded write set:** one exact disposition, one new title-specific verifier,
+the row-44 checker, active plan, and execution ledger. The legacy source,
+canonical owners, accepted generic Security verifier, generated inventories,
+immutable train, package manifest, README files, templates, configuration,
+lockfiles, and downstream repositories remain unchanged.
+
+**Verification:** exact disposition uniqueness, all six source identifiers
+closed, introductory-route non-authority, explicit verifier separation,
+accepted generic Security closure, Rust filesystem, arithmetic, queue,
+listener, panic, and language-profile evidence, row-44 decomposition,
+execution-train advancement, plan structure, shell syntax, diff integrity, and
+the complete fail-fast suite of 260 verifiers pass. Row 44 and P36 are closed;
+immutable row 45 is active.
+
+**Next slice:** `7.4b35a`, planning only, to review `STD-0704` through
+`STD-0705` language index lineage, exact closure outcomes, bounded write set,
+and focused P37 evidence before substantive movement.

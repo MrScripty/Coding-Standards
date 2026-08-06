@@ -436,6 +436,7 @@ STD-0798	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/r
 STD-0799	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	consume injected lifecycle capability instead of embedding an owned runtime
 STD-0800	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	adapt host async calls without alternate runtime or synchronous-drive fallback
 STD-0781	languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md	profiles/languages/rust/language-bindings.md	refine	delegate only the explicit typed unsupported outcome
+STD-0821	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	index	retain the legacy title only as a non-normative migration index to canonical Rust Security and separately owned concerns
 STD-0822	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	preserve validated filesystem authority through the Rust operation
 STD-0825	languages/rust/RUST-SECURITY-STANDARDS.md	profiles/languages/rust/security.md	refine	bind listener exposure admission connection work outcomes and shutdown to explicit owners
 STD-0596	SECURITY-STANDARDS.md	topics/security.md	refine	establish the generic network transport boundary
