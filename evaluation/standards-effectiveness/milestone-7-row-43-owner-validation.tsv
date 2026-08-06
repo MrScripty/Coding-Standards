@@ -1,0 +1,2 @@
+id	canonical_owner	disposition	reference_treatment	rationale
+STD-0758	profiles/languages/rust/language-bindings.md	index	none	legacy title routes already-disposed binding concerns to canonical Rust Binding Interop Cross-Platform Contracts Release and Verification owners without independent authority
