@@ -9218,3 +9218,45 @@ syntax, diff integrity, and all 269 complete-suite verifier entrypoints pass.
 
 **Next slice:** `7.4c2`, remove the two temporary Router legacy routes and add
 global negative evidence before beginning source package `7.4c3.1`.
+
+## Milestone 7.4c2 Router Legacy-Route Closure
+
+**Outcome:** Accepted.
+
+The Router no longer selects `CROSS-PLATFORM-STANDARDS.md` for other operating-
+system concerns or `SECURITY-STANDARDS.md` for other transport and secret
+concerns. Their canonical Cross-Platform and Security topic routes already
+cover fact-selected applicability and remain unchanged.
+
+Inspection also found a broader stale migration clause stating that existing
+files retained authority for rules not yet moved. All 916 frozen identifiers
+are now dispositioned, so that clause would preserve implicit fallback
+authority after deleting the two explicit links. The same Router-bounded slice
+replaces it with a canonical-only legacy-entrypoint contract: retained former
+standards and profiles are non-normative navigation, conflicts make the index
+invalid, and missing canonical routes produce Invalid Routing diagnostics.
+
+The focused replacement fixture names the two removed links and their canonical
+owners. A global closure verifier derives all 27 former source paths from the
+immutable final source-closure manifest, rejects any Router occurrence, rejects
+temporary migration language, and confirms the canonical routes and typed
+diagnostic contract.
+
+**No-fallback result:** no former standard/profile file can be selected as
+authority, preserve an old rule, decide applicability, or substitute for a
+missing canonical route. Invalid or unresolved routing returns a diagnostic.
+
+**Bounded write set:** Router, one focused legacy-route replacement fixture,
+one global legacy-route closure verifier, active plan, and execution ledger.
+Canonical standards, all 27 former source files, corpus, owner map,
+dispositions, source-gap fixtures, generated inventories, metadata,
+configuration, lockfiles, and downstream repositories remain unchanged.
+
+**Verification:** two unique canonical-only replacements, all 27 manifest
+sources globally excluded from Router selection, canonical Cross-Platform and
+Security routes retained, stale migration authority absent, root Router
+evidence, final source-closure planning evidence, plan structure, shell syntax,
+diff integrity, and all 270 complete-suite verifier entrypoints pass.
+
+**Next slice:** `7.4c3.1`, rewrite `CODING-STANDARDS.md` as a concise
+non-normative index to `CORE-STANDARDS.md` and update its corpus state.

@@ -98,8 +98,7 @@ policy remains in Core, workflows, and topics.
 
 ## Topic Selection
 
-Until topic migration completes, use the current canonical file only when its
-condition is present:
+Select a canonical topic only when its observable condition is present:
 
 | Concern | Current owner |
 | --- | --- |
@@ -109,13 +108,11 @@ condition is present:
 | Shared mutable state, overlapping work, async failure ownership, cancellation, or shutdown | [Concurrency](topics/concurrency.md) |
 | Dependency or service failure, retry, degradation, startup resilience, or recovery semantics | [Resilience](topics/resilience.md) |
 | Filesystem path construction, identity, comparison, or supported-filesystem behavior | [Cross-platform](topics/cross-platform.md) |
-| Other multiple declared operating-system target concerns | [CROSS-PLATFORM-STANDARDS.md](CROSS-PLATFORM-STANDARDS.md) until migration |
 | Dependency requirement, ownership, selection, resolution, provisioning, update, or removal policy is required | [Dependencies](topics/dependencies.md) |
 | Third-party material is selected, incorporated, adapted, generated from, redistributed, or published | [Licensing](topics/licensing.md) |
 | Performance budget, measurement, optimization, benchmark, resource use, or regression claim changes | [Performance](topics/performance.md) |
 | Module, layer, service, data/state authority, dependency direction, or runtime composition changes | [Architecture](topics/architecture.md) |
 | Untrusted input authorizes an operation, resource access, side effect, or security-relevant decision | [Security](topics/security.md) |
-| Other network transport or secret concerns | [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) until migration |
 
 The presence of a topic document in the repository is not an applicability
 condition.
@@ -139,14 +136,16 @@ Acceptance is a focused regression test plus affected Rust static/toolchain
 checks. No ADR, release procedure, directory README, or large plan is required
 unless the investigation discovers a corresponding condition.
 
-## Migration Authority
+## Legacy Entry Points
 
-New modules are canonical for the rules they state. Existing files retain
-authority only for rules not yet moved and carry migration notices when overlap
-exists. If old and new wording conflict for a moved rule, the new module wins.
+Canonical modules own all normative rules. A retained former standards or
+profile entrypoint is non-normative navigation only. It does not establish
+applicability, preserve an older rule, or provide fallback authority.
 
-This is explicit migration ownership, not runtime fallback or duplicated
-normative authority.
+If a legacy index conflicts with its canonical owner, report the index as
+invalid and use only the canonical owner after the conflict is corrected. If a
+canonical route is missing or unresolved, return an Invalid Routing diagnostic
+instead of selecting a legacy entrypoint.
 
 ## Invalid Routing
 

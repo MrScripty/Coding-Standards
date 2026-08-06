@@ -6,13 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c1 final source-closure decomposition is
-accepted. Exact identifier migration is complete, while Router fallback removal
-and the ordered closure of 27 former normative source entrypoints remain active.
+**Current phase:** Milestone 7.4c2 Router legacy-route closure is accepted.
+Exact identifier migration is complete, no former standard/profile source is a
+Router authority, and the ordered closure of 27 former normative source
+entrypoints remains active.
 
-**Next slice:** Milestone 7.4c2 removes the Router's two temporary
-Cross-Platform and Security legacy routes and establishes global negative route
-evidence before source-index packages begin.
+**Next slice:** Milestone 7.4c3.1 rewrites `CODING-STANDARDS.md` as a concise
+non-normative index to `CORE-STANDARDS.md` and updates its corpus state with
+focused purity and complete-suite evidence.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2153,9 +2154,12 @@ all structural/routing fixtures pass.
      trust/lifecycle re-plan checkers that parent `7.4c` remain `Planned`. The
      train proves the stable accepted `7.4b37b` to `7.4c1` handoff; the earlier
      trust/lifecycle checker retains only its owned accepted evidence.
-   - `7.4c2` (`Planned`): remove the Router's temporary Cross-Platform and
-     Security legacy routes and add global negative evidence that no legacy
-     standard or profile is selected as authority.
+   - `7.4c2` (`Accepted`): remove the Router's temporary Cross-Platform and
+     Security legacy routes, replace the stale partial-migration authority text
+     with canonical-only routing and typed invalid/unresolved outcomes, and add
+     global negative evidence that none of the 27 former standard/profile
+     sources is selected as authority. Canonical topics remain the only routes;
+     no compatibility or legacy fallback is retained.
    - `7.4c3` (`Planned`): execute source packages `7.4c3.1` through
      `7.4c3.27` in immutable manifest order, changing each former source to a
      non-normative pure index and updating its corpus state without restoring
