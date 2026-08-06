@@ -1,0 +1,2 @@
+id	canonical_owner	disposition	reference_treatment	rationale
+STD-0821	profiles/languages/rust/security.md	index	none	legacy title routes already-disposed Rust security concerns to canonical Rust Security Security Rust Async Rust API and Verification owners without independent authority
