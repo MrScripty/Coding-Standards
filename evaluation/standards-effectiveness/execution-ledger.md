@@ -9158,3 +9158,63 @@ of all 268 verifier entrypoints pass.
 **Next slice:** `7.4c`, review final legacy indexes, exact disposition and
 source-gap closure, and cross-owner duplication evidence before authorizing
 final Milestone 7 acceptance work.
+
+## Milestone 7.4c1 Final Source-Closure Decomposition
+
+**Outcome:** Accepted.
+
+Exact rule migration is complete but source authority is not. All 916 frozen
+identifiers have one disposition, the immutable execution train has no
+remainder, and the source-gap audit is empty. The corpus nevertheless retains
+27 former standard/profile sources as normative, and the Router still contains
+two temporary "until migration" routes for Cross-Platform and Security.
+
+The final closure manifest freezes all 27 entrypoints in generic-to-specialized
+owner order. Eleven concise sources receive `retain-index` treatment only after
+focused purity review. Sixteen sources receive `rewrite-index` treatment,
+including three concise files whose wording still asserts policy. Every source
+has frozen stable-entrypoint evidence and an accepted file-level owner-map
+outcome ending in `-and-index`; no deletion is pre-approved. If pure navigation
+cannot be proved, the package must re-plan to deletion rather than preserve
+competing authority.
+
+Execution is Router-first. Child `7.4c2` removes the two stale legacy routes and
+adds global negative route evidence. Children `7.4c3.1` through `7.4c3.27`
+convert each former source to a non-normative pure index and update its corpus
+state in immutable manifest order. Child `7.4c4` regenerates derived
+inventories, proves terminal disposition/source/route state, and performs the
+manual `D001` through `D010` semantic-ownership review.
+
+Focused and complete validation exposed one shared-checker defect in two
+locations. The immutable execution-train verifier required parent Milestone
+`7.4c` to remain `Planned` after all 589 train identifiers had passed, and the
+earlier trust/lifecycle re-plan verifier required the same unrelated future
+state after proving its accepted `7.4b4a` evidence. The approved bounded
+expansion gives the train verifier the stable accepted `7.4b37b` to `7.4c1`
+handoff and removes the unrelated assertion from the trust/lifecycle verifier.
+All terminal train counts, dispositions, owner transitions, decompositions,
+package/wave gates, trust, and lifecycle evidence remain enforced.
+
+**No-fallback result:** retention preserves only stable navigation to one
+canonical owner. A package cannot copy a rule, retain dual authority, infer an
+owner, keep a temporary Router route, weaken index purity, or use the frozen
+legacy source when facts are missing, invalid, unsupported, or contradictory.
+Those conditions produce a typed re-plan outcome.
+
+**Bounded write set:** final source-closure report and immutable manifest, one
+focused planning verifier, bounded immutable-train and trust/lifecycle verifier
+repairs, findings, active plan, and execution ledger.
+Normative standards, legacy source text, Router, corpus, owner map,
+dispositions, source-gap fixtures, generated inventories, metadata,
+configuration, lockfiles, and downstream repositories remain unchanged.
+
+**Verification:** 27 ordered unique sources exactly match all standard/profile
+corpus rows; source shape counts are fourteen concise and thirteen expanded;
+treatment counts are eleven retain, sixteen rewrite, and zero delete; every
+source and owner exists; every file-level disposition ends in `-and-index`;
+every source owns frozen identifier lineage; all 916 exact dispositions and
+zero source gaps remain valid; execution-train integrity, plan structure, shell
+syntax, diff integrity, and all 269 complete-suite verifier entrypoints pass.
+
+**Next slice:** `7.4c2`, remove the two temporary Router legacy routes and add
+global negative evidence before beginning source package `7.4c3.1`.

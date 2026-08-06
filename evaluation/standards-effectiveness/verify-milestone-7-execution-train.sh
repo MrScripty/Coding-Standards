@@ -246,8 +246,8 @@ if [[ -n "$active_label" ]]; then
   [[ "$next_milestone" != "$next_slice_line" ]]
   rg -F -q "\`$next_milestone\` (\`Planned\`)" "$PLAN"
 else
-  [[ "$next_slice_line" == *'Milestone 7.4c'* ]]
-  rg -F -q '`7.4c` (`Planned`)' "$PLAN"
+  rg -F -q '`7.4b37b` (`Accepted`)' "$PLAN"
+  rg -F -q '`7.4c1` (`Accepted`)' "$PLAN"
 fi
 "$SCRIPT_DIR/verify-milestone-7-decomposition.sh"
 "$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"

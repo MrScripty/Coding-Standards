@@ -169,7 +169,6 @@ done
 rg -F -q '(milestone-7-trust-lifecycle-replan.md)' "$PARENT"
 rg -F -q '| F044 | Resolved in Milestone 7.4b4a |' "$FINDINGS"
 rg -F -q '`7.4b4a` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4c` (`Planned`)' "$PLAN"
 if [[ "$next_dispositions" -eq 0 ]]; then
   rg -F -q '**Next slice:** Milestone 7.4b4b' "$PLAN"
   rg -F -q '`7.4b4b` (`Planned`)' "$PLAN"

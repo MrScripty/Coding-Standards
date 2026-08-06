@@ -6,13 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 47 and P39 are accepted and closed. The
-rolling migration remainder is zero, and final Milestone 7 source closure is
-active.
+**Current phase:** Milestone 7.4c1 final source-closure decomposition is
+accepted. Exact identifier migration is complete, while Router fallback removal
+and the ordered closure of 27 former normative source entrypoints remain active.
 
-**Next slice:** Milestone 7.4c reviews every remaining legacy index, exact
-disposition closure, source-gap closure, and cross-owner duplication result
-before authorizing final Milestone 7 acceptance work.
+**Next slice:** Milestone 7.4c2 removes the Router's two temporary
+Cross-Platform and Security legacy routes and establishes global negative route
+evidence before source-index packages begin.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -42,6 +42,8 @@ is proved only by owner transition, owner presence, and exact dispositions.
 **Independent trust-boundary re-plan:** [Six proposed-owner groups and corrected Rust wire-representation next slice](../evaluation/standards-effectiveness/milestone-7-independent-trust-replan.md)
 
 **Accelerated execution re-plan:** [Risk-classified owner packages and verification gates](../evaluation/standards-effectiveness/milestone-7-accelerated-execution-replan.md)
+
+**Final source-closure decomposition:** [Router-first closure of 27 former normative entrypoints](../evaluation/standards-effectiveness/milestone-7-final-source-closure.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -2139,9 +2141,29 @@ all structural/routing fixtures pass.
      custom-rule syntax to non-normative Tooling recipes in the same bounded
      package. Require `split` dispositions and reject product, version,
      compiler-flag, and rule defaults.
-6. `7.4c` (`Planned`): perform final legacy-index review, disposition closure,
-   and duplication verification only after the rolling remainder reaches zero
-   and every required canonical owner exists.
+6. `7.4c` (`Active`): close source-level legacy authority after exact rule
+   migration reaches zero remainder.
+   - `7.4c1` (`Accepted`): freeze one owner-ordered manifest for all 27 former
+     standard/profile entrypoints, retain eleven only after purity review,
+     rewrite sixteen as concise indexes, require complete-suite gates, and make
+     deletion the required re-plan option when pure navigation cannot be
+     proved. Exact identifier dispositions, corpus rows, Router behavior, and
+     normative owners remain unchanged in this planning slice. The bounded
+     verifier repair removes stale requirements from the immutable-train and
+     trust/lifecycle re-plan checkers that parent `7.4c` remain `Planned`. The
+     train proves the stable accepted `7.4b37b` to `7.4c1` handoff; the earlier
+     trust/lifecycle checker retains only its owned accepted evidence.
+   - `7.4c2` (`Planned`): remove the Router's temporary Cross-Platform and
+     Security legacy routes and add global negative evidence that no legacy
+     standard or profile is selected as authority.
+   - `7.4c3` (`Planned`): execute source packages `7.4c3.1` through
+     `7.4c3.27` in immutable manifest order, changing each former source to a
+     non-normative pure index and updating its corpus state without restoring
+     policy or fallback behavior.
+   - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
+     dispositions, zero source gaps, zero normative legacy source rows, and no
+     legacy Router routes; then complete the manual `D001` through `D010`
+     semantic-ownership review before Milestone 7 acceptance.
 
 **Status:** `Active`
 
