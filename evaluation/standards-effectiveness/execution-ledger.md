@@ -8844,3 +8844,41 @@ integrity, plan structure, shell syntax, and diff integrity pass.
 **Next slice:** `7.4b35b`, rewrite the source as non-normative navigation,
 record both exact dispositions, add the precisely classified consumer, close
 row 45 and P37, and advance to immutable row 46.
+
+## Milestone 7.4b35b Language Index Closure
+
+**Outcome:** Accepted.
+
+`STD-0704` and `STD-0705` now each have one exact `index` disposition to
+`STANDARDS-ROUTER.md`. `languages/README.md` is concise non-normative
+navigation to the Router Language Profiles section and canonical Rust profile.
+Copied "do not replace" and "should not live inline" policy and the legacy Rust
+index route are removed.
+
+The new `verify-language-index-closure.sh` owns source purity, canonical links,
+and both exact dispositions. It is the only new README consumer and is recorded
+as `none` / `language-index-closure`. The shared audit and row-35 checker now
+require exactly 33 consumers; all previous classifications remain unchanged.
+
+**No-fallback result:** unknown language applicability remains a Router
+diagnostic. The index does not select profiles, establish applicability or
+ownership, preserve inline policy, route through the legacy Rust index, infer
+selection from catalog presence, or provide weaker fallback authority.
+
+**Bounded write set:** language index, two exact dispositions, one new verifier,
+row-45 checker, README-consumer manifest and audit checker, row-35 checker count,
+active plan, and execution ledger. Router, canonical Rust profile, legacy Rust
+index, other consumers, generated inventories, immutable train, package
+manifest, templates, configuration, lockfiles, and downstream repositories
+remain unchanged.
+
+**Verification:** two exact dispositions, source heading and link purity,
+absence of copied policy and legacy routing, one precise consumer addition,
+root Router and language-profile evidence, root README authority and consumer
+audit, row-35 and row-45 decomposition, execution-train advancement, plan
+structure, shell syntax, diff integrity, and the complete fail-fast suite of 262
+verifiers pass. Row 45 and P37 are closed; immutable row 46 is active.
+
+**Next slice:** `7.4b36a`, planning only, to review `STD-0827`, `STD-0828`,
+`STD-0829`, and `STD-0830` Rust index lineage, exact closure outcomes, bounded
+write set, and focused P38 evidence before substantive movement.

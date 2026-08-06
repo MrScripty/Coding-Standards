@@ -39,14 +39,21 @@ mapfile -t remaining < <(
     $2 == source && !($1 in disposed) { print $1 }
   ' "$S/consolidation-dispositions.tsv" "$S/generated/rule-owner-map.tsv"
 )
-[[ "${remaining[*]}" == 'STD-0704 STD-0705' ]]
+[[ "${#remaining[@]}" -eq 0 ]]
 [[ "$(awk -F '\t' -v source="$source" '$2 == source { n++ } END { print n+0 }' "$S/generated/rule-owner-map.tsv")" -eq 2 ]]
 
 legacy="$R/$source"
-for text in '# Language-Specific Standards' '## Languages' \
-  'They do not replace Core' 'should not live inline' \
-  'legacy [Rust index]'; do
+for text in '# Language-Specific Standards' '## Available Profiles' \
+  'non-normative navigation' \
+  '[Language Profiles](../STANDARDS-ROUTER.md#language-profiles)' \
+  'not select a profile or establish applicability or ownership' \
+  '[Rust profile]' \
+  'Unknown applicability is a Router diagnostic' 'fallback authority'; do
   rg -F -q "$text" "$legacy"
+done
+for text in '## Languages' 'They do not replace Core' \
+  'should not live inline' 'legacy [Rust index]' 'rust/RUST-STANDARDS.md'; do
+  ! rg -F -q "$text" "$legacy"
 done
 for metadata in 'ID: `router`' 'Requires: `core`' \
   'Canonical owner: `STANDARDS-ROUTER.md`'; do
@@ -54,15 +61,15 @@ for metadata in 'ID: `router`' 'Requires: `core`' \
 done
 rg -F -q '## Language Profiles' "$R/STANDARDS-ROUTER.md"
 
-[[ ! -e "$S/verify-language-index-closure.sh" ]]
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 32 ]]
-! rg -F -q 'verify-language-index-closure.sh' "$M"
-rg -F -q '"$(awk -F '\''\t'\'' '\''NR > 1 { n++ } END { print n+0 }'\'' "$M")" -eq 32' "$A"
-rg -F -q '"$(awk -F '\''\t'\'' '\''NR > 1 { n++ } END { print n+0 }'\'' "$M")" -eq 32' "$ROW35"
+[[ -x "$S/verify-language-index-closure.sh" ]]
+[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 33 ]]
+[[ "$(awk -F '\t' '$1 == "evaluation/standards-effectiveness/verify-language-index-closure.sh" { print $2 FS $3 }' "$M")" == $'none\tlanguage-index-closure' ]]
+rg -F -q '"$(awk -F '\''\t'\'' '\''NR > 1 { n++ } END { print n+0 }'\'' "$M")" -eq 33' "$A"
+rg -F -q '"$(awk -F '\''\t'\'' '\''NR > 1 { n++ } END { print n+0 }'\'' "$M")" -eq 33' "$ROW35"
 
 rg -F -q '`7.4b34b` (`Accepted`)' "$P"
 rg -F -q '`7.4b35a` (`Accepted`)' "$P"
-rg -F -q '`7.4b35b` (`Planned`)' "$P"
+rg -F -q '`7.4b35b` (`Accepted`)' "$P"
 "$S/verify-language-profile-routing.sh"
 "$S/verify-root-router-evidence.sh"
 "$S/verify-root-readme-consumer-audit.sh"

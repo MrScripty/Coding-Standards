@@ -6,15 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Rows 20 through 44 are accepted and closed. Row 45 owner
-review confirms `STD-0704` and `STD-0705` belong to the Router and own no
-independent language policy. Closure requires one source-purity rewrite and one
-bounded addition to the shared README-consumer contract before P37 can close.
+**Current phase:** Rows 20 through 45 are accepted and closed. `STD-0704` and
+`STD-0705` have exact Router index dispositions, the language index is concise
+non-normative navigation, and the shared audit classifies its verifier as the
+33rd README consumer. Immutable row 46 is active for Rust index closure.
 
-**Next slice:** Milestone 7.4b35b rewrites the `STD-0704` through `STD-0705`
-language index as non-normative navigation, records two exact `index`
-dispositions, adds one classified README consumer, closes row 45 and P37, and
-advances to immutable row 46.
+**Next slice:** Milestone 7.4b36a is planning only: review row 46 `STD-0827`,
+`STD-0828`, `STD-0829`, and `STD-0830` Rust index lineage, exact closure
+outcomes, bounded write set, and P38 evidence before substantive movement.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2059,10 +2058,12 @@ all structural/routing fixtures pass.
      row 45.
    - `7.4b35a` (`Accepted`): review row 45 `STD-0704` through `STD-0705`
      language index closure and P37 evidence without substantive movement.
-   - `7.4b35b` (`Planned`): rewrite the language index as non-normative
+   - `7.4b35b` (`Accepted`): rewrite the language index as non-normative
      navigation, record both exact Router `index` dispositions, register the
      new language-index verifier in the shared README-consumer audit, close row
      45 and P37, and advance to immutable row 46.
+   - `7.4b36a` (`Planned`): review row 46 `STD-0827` through `STD-0830` Rust
+     index closure and P38 evidence without substantive movement.
    - Child 23.5 test-retry ownership replan (`Accepted`): Tooling owns runner selection and orchestration, Verification owns test and doctest claims, Resilience owns retry eligibility, budgets, safety, termination, and recovery, and Rust Tooling owns only accepted Cargo and nextest adapter mechanisms under the single `STD-0835` split disposition.
    - Child 21.4 artifact-surface ownership replan (`Accepted`): Rust Dependency
      owns Cargo manifest dependency optionality, forwarding, grouping, and

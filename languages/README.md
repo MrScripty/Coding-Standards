@@ -1,18 +1,13 @@
 # Language-Specific Standards
 
-Language profiles specialize mechanisms selected by
-[STANDARDS-ROUTER.md](../STANDARDS-ROUTER.md). They do not replace Core,
-workflows, or topics unless their metadata explicitly names a specialized rule.
+This README is non-normative navigation. Canonical applicability and dependency
+selection are owned by
+[Language Profiles](../STANDARDS-ROUTER.md#language-profiles); this index does
+not select a profile or establish applicability or ownership.
 
-## Languages
+## Available Profiles
 
-| Language | Standards |
-| --- | --- |
-| Rust | [Rust profile](../profiles/languages/rust/README.md) |
+- [Rust profile](../profiles/languages/rust/README.md)
 
-Language-specific details should not live inline in the root standards. Keep the
-root standards focused on cross-language principles, then link to the matching
-language standard for toolchain-specific rules and examples.
-
-The legacy [Rust index](rust/RUST-STANDARDS.md) remains an entrypoint for
-specialized documents not yet migrated.
+Unknown applicability is a Router diagnostic. Do not infer a profile from this
+index or use a linked profile as fallback authority.
