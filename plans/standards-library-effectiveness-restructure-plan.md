@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3v source-index verifier re-plan is accepted.
+**Current phase:** Milestone 7.4c3v1r lifecycle-checker repair is accepted.
 Exact identifier migration and Router authority closure are complete; one of 27
-former normative source entrypoints is derived, and shared verifier
-infrastructure must be established before the remaining packages continue.
+former normative source entrypoints is derived, and the shared parent checker
+no longer owns the transient state of the pending verifier implementation.
 
 **Next slice:** Milestone 7.4c3v1 establishes the reusable source-index closure
 engine, negative engine fixtures, source-owned Coding fixture directory, and
@@ -2177,6 +2177,10 @@ all structural/routing fixtures pass.
        aggregate verifier, and isolated per-source fixture directories. The
        immutable manifest retains owner/order/treatment authority; registered
        fixtures supply only source shape, routes, and prohibited literals.
+     - `7.4c3v1r` (`Accepted`): remove the parent final-closure checker's
+       transient requirement that child `7.4c3v1` remain planned. The parent
+       retains durable design and child-presence evidence; the active plan and
+       live aggregate verifier own implementation lifecycle and acceptance.
      - `7.4c3v1` (`Planned`): establish the shared engine using the already
        accepted Coding index as its first live contract, remove the bespoke
        Coding closure verifier instead of retaining a compatibility wrapper,

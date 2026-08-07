@@ -111,7 +111,7 @@ done
 [[ "$(wc -l < "$DISPOSITIONS")" -eq 917 ]]
 rg -F -q '`7.4c1` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4c3v` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4c3v1` (`Planned`)' "$PLAN"
+rg -F -q '`7.4c3v1` (' "$PLAN"
 
 required_verifier_replan=(
   '## Re-plan Finding'
@@ -122,6 +122,9 @@ required_verifier_replan=(
   '## Negative Engine Evidence'
   'same engine used by the live aggregate verifier'
   '`7.4c3v1` establishes the engine and self-tests'
+  'durable package contract. It does not own the'
+  'mutable lifecycle state of `7.4c3v1`.'
+  'live source-index aggregate verifier owns implementation acceptance'
   '## Bounded Write Sets'
   '## No Fallback'
   'old bespoke Coding verifier is removed'
@@ -131,6 +134,13 @@ required_verifier_replan=(
 for text in "${required_verifier_replan[@]}"; do
   rg -F -q "$text" "$VERIFIER_REPLAN"
 done
+
+transient_state='Planned'
+transient_marker="\`7.4c3v1\` (\`$transient_state\`)"
+if rg -F -q "$transient_marker" "$0"; then
+  printf 'invalid: parent closure checker owns transient 7.4c3v1 state\n' >&2
+  exit 1
+fi
 
 "$SCRIPT_DIR/verify-consolidation-dispositions.sh"
 "$SCRIPT_DIR/verify-undisposed-source-gaps.sh"

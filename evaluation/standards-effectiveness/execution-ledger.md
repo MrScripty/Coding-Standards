@@ -9345,3 +9345,36 @@ and all 271 complete-suite verifier entrypoints pass.
 
 **Next slice:** `7.4c3v1`, implement and validate the reusable source-index
 closure engine before resuming `COMMIT-STANDARDS.md` package `7.4c3.2`.
+
+## Milestone 7.4c3v1r Source-Index Lifecycle Repair
+
+**Outcome:** Accepted.
+
+Pre-implementation review found that the parent final source-closure checker
+required child `7.4c3v1` to remain `Planned`. Accepting the engine would make
+that shared checker reject correct later state, repeating the mutable
+lifecycle coupling already resolved by F077.
+
+The parent checker now proves durable source-closure design and child presence
+without owning the child's transient state. The active plan remains lifecycle
+authority, and the live aggregate verifier will own implementation acceptance
+after `7.4c3v1` establishes it. The engine implementation is explicitly
+authorized to resolve F078 when it removes the bespoke Coding verifier.
+
+**No-fallback result:** no stale planned marker, duplicate status marker, or
+compatibility assertion is retained to make both lifecycle states pass. The
+incorrect parent assertion is removed and guarded by negative evidence.
+
+**Bounded write set:** source-index verifier re-plan, final source-closure
+planning checker, active plan, and execution ledger. Standards, source indexes,
+fixtures, executable engine code, corpus, findings status, Router,
+dispositions, owner map, generated inventories, metadata, configuration, and
+lockfiles remain unchanged.
+
+**Verification:** durable design and child-presence assertions, negative
+transient-state scan, final source-closure planning evidence, plan structure,
+shell syntax, diff integrity, and all 271 complete-suite verifier entrypoints
+pass.
+
+**Next slice:** `7.4c3v1`, integrate the already focused-validated reusable
+source-index closure engine and resolve F078.

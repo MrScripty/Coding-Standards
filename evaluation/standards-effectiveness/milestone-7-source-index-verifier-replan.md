@@ -114,14 +114,35 @@ only parser or reduced policy copy is not acceptable.
    and full-suite gate; a source package cannot modify the engine to make its
    own content pass.
 
+## Lifecycle Verification Ownership
+
+The final source-closure planning checker owns the accepted aggregate design,
+immutable source order, and durable package contract. It does not own the
+mutable lifecycle state of `7.4c3v1`. The active plan records that state while
+the live source-index aggregate verifier owns implementation acceptance after
+the engine exists.
+
+Requiring `7.4c3v1` to remain `Planned` after its evidence is accepted would
+repeat finding F077 and make a completed parent checker invalidate correct
+later work. The planning checker therefore requires the child milestone to
+exist without fixing its transient state. The implementation slice is
+authorized to mark F078 resolved when the bespoke verifier has been removed
+and the aggregate engine owns the accepted evidence.
+
 ## Bounded Write Sets
+
+Lifecycle repair `7.4c3v1r` may change only this re-plan, the final
+source-closure planning checker, the active plan, and the execution ledger. It
+cannot change standards, source indexes, fixtures, executable engine code,
+corpus data, findings status, Router, dispositions, owner map, generated
+inventories, metadata, configuration, or lockfiles.
 
 The `7.4c3v1` implementation slice may change only the reusable engine, engine
 self-test fixtures and verifier, live aggregate verifier, existing Coding
-closure verifier and fixture paths, active plan, and execution ledger. Coding
-source text, corpus, manifest, dispositions, owner map, Router, canonical
-owners, other former sources, generated inventories, metadata, configuration,
-and lockfiles remain unchanged.
+closure verifier and fixture paths, F078 resolution status, active plan, and
+execution ledger. Coding source text, corpus, manifest, dispositions, owner
+map, Router, canonical owners, other former sources, generated inventories,
+metadata, configuration, and lockfiles remain unchanged.
 
 Each later source package may change only its former source, its corpus row, its
 own new fixture directory, active plan, and execution ledger. It cannot change
@@ -142,6 +163,10 @@ authority; it is not retained as a compatibility path.
 The planning slice requires this re-plan's focused structural assertions, final
 source-closure planning evidence, plan structure, shell syntax, diff integrity,
 and the complete suite because shared closure verification is being authorized.
+
+Lifecycle repair `7.4c3v1r` requires a negative scan for transient child-state
+ownership, durable child-presence evidence, plan structure, shell syntax, diff
+integrity, and the complete suite because the shared parent checker changes.
 
 `7.4c3v1` requires engine positive and negative fixtures, unchanged Coding
 source/corpus semantics, exact Coding closure, aggregate discovery, Router
