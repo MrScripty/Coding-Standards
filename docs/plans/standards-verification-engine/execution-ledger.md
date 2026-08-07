@@ -309,3 +309,14 @@
   or owner-specific engine branch.
 - Scope: planning authority only; no implementation or evidence file changed.
 - Next slice: implement and verify `M2-P5` as one atomic package.
+
+## 2026-08-07 - Milestone 2 Package M2-P5
+
+- Accepted four declarative Rust Dependency suites preserving 53 decisions,
+  canonical/negative text, and 14 dispositions; deleted four Bash leaves.
+- Verification: 13 self-tests, 21 focused checks, 27 suites/130 checks,
+  inventory/removal/diff gates, and all 248 mixed entrypoints passed.
+- No fallback, wrapper, compatibility schema, engine special case, or shared
+  contract change was introduced.
+- Next slice: reclassify the remaining graph and decide whether Milestone 2 can
+  continue or shared-contract Milestone 3 must begin.

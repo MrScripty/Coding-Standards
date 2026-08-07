@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: implement Rust Dependency package `M2-P5`
+**Next slice:** Milestone 2: reclassify the remaining checker graph
 
 **Acceptance status:** `pending`
 
@@ -197,6 +197,8 @@ and plan records selected per slice.
   scripts without changing engine source.
 - [x] Migrate accepted Rust API package `M2-P4` and remove its four leaf scripts
   without changing engine source.
+- [x] Migrate accepted Rust Dependency package `M2-P5` and remove its four leaf
+  scripts without changing engine source.
 - [ ] Classify every checker by assertion family, inbound dependency, owner,
   risk, and migration disposition.
 - [ ] Add strict table, Markdown heading/route, exact-row/set/order, and count
@@ -318,7 +320,7 @@ and contract scans passed; and the complete 252-entrypoint mixed suite passed.
 
 #### Package M2-P5: Rust Dependency Leaf Consolidation
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 **Owner:** `profile.language.rust.dependencies`
 
@@ -340,6 +342,9 @@ and remain assigned to Milestone 3.
 **No-fallback rule:** use existing strict text and ordered-decision checks,
 delete all four replaced scripts atomically, and add no wrapper, compatibility
 schema, source alias, or owner-specific engine branch.
+
+**Acceptance evidence:** 13 self-tests; 27 suites and 130 checks; fresh
+248-entrypoint inventory; removed-path scans; and complete mixed suite passed.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 

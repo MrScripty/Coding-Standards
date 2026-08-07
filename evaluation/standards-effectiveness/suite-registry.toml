@@ -51,6 +51,26 @@ path = "evaluation/standards-effectiveness/suites/rust-api-validation.toml"
 requires = []
 
 [[suites]]
+id = "rust-dependency-audit-adapters"
+path = "evaluation/standards-effectiveness/suites/rust-dependency-audit-adapters.toml"
+requires = []
+
+[[suites]]
+id = "rust-dependency-feature-mechanisms"
+path = "evaluation/standards-effectiveness/suites/rust-dependency-feature-mechanisms.toml"
+requires = []
+
+[[suites]]
+id = "rust-dependency-graph-inspection"
+path = "evaluation/standards-effectiveness/suites/rust-dependency-graph-inspection.toml"
+requires = []
+
+[[suites]]
+id = "rust-dependency-workspace-inheritance"
+path = "evaluation/standards-effectiveness/suites/rust-dependency-workspace-inheritance.toml"
+requires = []
+
+[[suites]]
 id = "tooling-ci-orchestration"
 path = "evaluation/standards-effectiveness/suites/tooling-ci-orchestration.toml"
 requires = []

@@ -201,7 +201,7 @@ package.
 
 ## Fifth Reviewed Package
 
-Package `M2-P5` is frozen for implementation as four Rust Dependency leaf
+Package `M2-P5` is accepted as four Rust Dependency leaf
 checkers:
 
 | Suite | Replaced checker | Decision fixture | Exact IDs |
@@ -229,3 +229,7 @@ checkers:
 - Gate: 13 engine/inventory self-tests, all registered suites, generic launcher,
   inventory and removed-path scans, plan/diff integrity, and one complete mixed
   suite expected to contain 248 Bash entrypoints.
+
+Acceptance preserved 53 decisions and 14 dispositions without an engine
+change. The launcher now evaluates 27 suites and 130 checks; inventory and the
+complete mixed suite report 248 Bash entrypoints.
