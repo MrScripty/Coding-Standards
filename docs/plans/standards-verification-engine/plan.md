@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: classify the next dependency-free owner package
+**Next slice:** Milestone 2: implement Rust API package `M2-P4`
 
 **Acceptance status:** `pending`
 
@@ -277,6 +277,37 @@ source alias, compatibility schema, or owner-specific engine branch.
 suites passed 93 checks directly and through the migration launcher; generated
 inventory is fresh at 256 Bash entrypoints; all five deleted-path executable
 and contract scans passed; and the complete 256-entrypoint mixed suite passed.
+
+#### Package M2-P4: Rust API Leaf Consolidation
+
+**Status:** `Planned`
+
+**Owner:** `profile.language.rust.api`
+
+**Risk:** `consolidation`
+
+**Allowed write set:**
+
+- `evaluation/standards-effectiveness/suite-registry.toml`
+- four suite contracts named in the checker-inventory report
+- the four corresponding Bash checkers (delete only)
+- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+- this plan, ledger, issues, and checker-inventory report
+- parent plan reconciliation after package acceptance
+
+**Preserved contract:** 65 ordered typed decisions; canonical Rust API and
+former-source route evidence; legacy architecture, failure, feature, and
+validation default prohibitions; and exact dispositions `STD-0707` through
+`STD-0712` plus `STD-0715`.
+
+**Exclusions:** `verify-rust-api-owner-contract.sh` has executable and frozen
+row-35 inbound references and depends on shared metadata verification.
+`verify-rust-api-rustdoc.sh` is frozen by source-package preparation. Both
+remain assigned to shared-contract Milestone 3.
+
+**No-fallback rule:** implement with existing strict text and ordered-decision
+checks, delete all four replaced scripts in the same slice, and add no wrapper,
+source alias, compatibility schema, or owner-specific engine branch.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 

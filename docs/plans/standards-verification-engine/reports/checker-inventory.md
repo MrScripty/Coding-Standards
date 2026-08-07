@@ -156,3 +156,40 @@ both report 256 remaining Bash entrypoints.
 The Rust API and Rust Dependency four-script candidates remain independent
 future owner packages. They are not combined with `M2-P3` merely to enlarge the
 batch.
+
+## Fourth Reviewed Package
+
+Package `M2-P4` is frozen for implementation as four Rust API leaf checkers:
+
+| Suite | Replaced checker | Decision fixture | Exact IDs |
+| --- | --- | --- | --- |
+| `rust-api-boundaries` | `verify-rust-api-boundaries.sh` | `rust/api-boundary-decisions.tsv` | `STD-0709`, `STD-0710` |
+| `rust-api-failures` | `verify-rust-api-failures.sh` | `rust/api-failure-decisions.tsv` | `STD-0711`, `STD-0712` |
+| `rust-api-features` | `verify-rust-api-features.sh` | `rust/api-feature-decisions.tsv` | `STD-0715` |
+| `rust-api-validation` | `verify-rust-api-validation.sh` | `rust/api-validation-decisions.tsv` | `STD-0707`, `STD-0708` |
+
+### M2-P4 Cohesion Decision
+
+- Canonical owner: `profile.language.rust.api`.
+- Observable package outcome: generic Architecture, Contracts, Resilience,
+  Dependencies, Library, Documentation, Verification, and Security decisions
+  remain authoritative while Rust API selects only supported language
+  mechanisms without layout, error, feature, trait, or proof defaults.
+- Risk: `consolidation`; the 65 accepted fixture outcomes, standards text, and
+  dispositions do not change.
+- Dependencies: all four scripts have zero executable and frozen-contract
+  inbound references and no verifier/helper dependency.
+- Assertion family: existing ordered predicates, required/prohibited text, and
+  exact disposition-row prefixes. No engine source change is authorized.
+- Exclusions: the API owner contract has executable and row-35 inbound
+  references and invokes shared metadata verification; the rustdoc checker is
+  frozen by source-package preparation. Both remain for Milestone 3.
+- Write owner: one package author may edit only the four suite TOMLs, registry
+  rows, four deleted scripts, generated inventory, and child plan records.
+- Gate: 13 engine/inventory self-tests, direct execution of all registered
+  suites, generic launcher, stale-inventory and removed-path scans, plan/diff
+  integrity, and one complete mixed suite expected to contain 252 Bash
+  entrypoints.
+
+The Rust Dependency four-script candidate remains an independent future owner
+package.

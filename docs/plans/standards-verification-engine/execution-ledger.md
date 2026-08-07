@@ -249,3 +249,23 @@
   disposition remains.
 - Next slice: classify the next dependency-free same-owner package from exact
   inventory evidence, with Rust API and Rust Dependency as measured candidates.
+
+## 2026-08-07 - Milestone 2 Rust API Package Freeze
+
+- Outcome: froze `M2-P4` as four dependency-free Rust API suites for crate and
+  module boundaries, failure expression, source feature expression, and
+  validated type/conversion mechanisms.
+- Preserved evidence: 65 typed decision rows, canonical Rust API and
+  former-source route text, legacy-default prohibitions, and seven exact
+  dispositions.
+- Dependency review: all four have zero executable and frozen-contract inbound
+  references and no verifier/helper dependency.
+- Exclusions: the API owner contract remains coupled to executable, row-35,
+  and shared-metadata contracts; rustdoc remains frozen by source-package
+  preparation. Both stay assigned to Milestone 3.
+- No-fallback result: implementation must use existing engine primitives,
+  delete all four scripts, and add no wrapper, compatibility path, source
+  exception, or owner-specific engine branch.
+- Scope: planning authority only; no engine, registry, suite, fixture, checker,
+  generated inventory, standard, disposition, or historical contract changed.
+- Next slice: implement and verify `M2-P4` as one atomic package.
