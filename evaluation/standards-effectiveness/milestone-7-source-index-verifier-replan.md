@@ -150,10 +150,50 @@ or canonical wording, or preserve migration-era text as compatibility
 evidence.
 
 Shared engine code, aggregate policy, cross-source checkers, canonical-owner
-checkers, and historical execution-train checkers remain serial infrastructure.
-A checker that reads multiple former sources or owns shared policy cannot be
-claimed by one source package. Such a conflict stops the package for a separate
-checker-infrastructure re-plan.
+checkers, and historical execution-train checkers remain serial integration
+authority. Their isolated preparation may proceed concurrently only after the
+package inventory assigns each mutable checker to exactly one package and
+freezes the semantic evidence that must remain. A checker that cannot receive
+an exclusive write owner, or whose semantic obligations remain disputed, stops
+that package for a checker-infrastructure re-plan.
+
+## Concurrent Preparation And Serial Acceptance
+
+Preparation order and acceptance order are separate contracts. Independent
+packages may be analyzed, edited, and focused-tested concurrently in isolated
+worktrees when the preparation inventory gives them non-overlapping former
+source, fixture directory, and checker write sets. Shared engine, aggregate,
+Router, corpus, manifest, disposition, owner-map, generated, plan, findings,
+and ledger files remain read-only to preparation workers.
+
+Workers cannot edit shared acceptance state. Each worker returns a patch for
+its exclusive source, fixture directory, and listed checker set; the proposed
+single corpus-row transition; focused command results; and any semantic or
+write-set conflict. A worker cannot weaken owner, route, disposition, typed
+outcome, or negative-policy evidence to make an index pass. It cannot add a
+legacy-compatible branch, alternate title, permissive route, or inferred
+fixture value.
+
+A prepared package is not accepted evidence. The serial integration owner
+reviews semantic and mechanical changes separately, applies packages only in
+contiguous manifest order, writes each shared corpus and planning transition,
+and runs every package's focused gates. Later packages may remain prepared
+while an earlier manifest package is unresolved; they cannot be registered or
+reported accepted ahead of it.
+
+After a contiguous group is integrated, one complete-suite run may accept
+every contiguous integrated package in that group. Until that run passes, the
+packages remain implementation work with verification pending. A failure is
+localized with package-focused gates and corrected in the owning package; it
+cannot be bypassed by dropping a checker or preserving obsolete source prose.
+
+Preparation wave `p1` is frozen in
+`milestone-7-source-package-preparation.tsv`. Its eight packages have exclusive
+checker write sets and identical semantic preservation obligations.
+Architecture remains excluded from preparation wave `p1` because its three
+known mixed policy checkers inspect overlapping sections of one high-risk
+source; it requires one separately frozen Architecture package before work may
+begin.
 
 ## Historical Checker Repair
 
@@ -163,12 +203,14 @@ the canonical routes established when that row was accepted. It cannot require
 mutable source prose to retain a migration-era sentence after a later source
 closure package supersedes that wording.
 
-When such coupling is found, a separate serial repair slice removes only the
-obsolete prose assertion before the source package begins. The repair must
-preserve immutable train/package/validation evidence, semantic routes,
+When such coupling is found, the preparation inventory assigns the checker to
+one exclusive package before editing. Isolated repair preparation may proceed
+concurrently with disjoint packages; serial integration removes only the
+obsolete prose assertion before that source package is accepted. The repair
+must preserve immutable train/package/validation evidence, semantic routes,
 non-authority evidence, typed outcomes, and all transitive owner checks. A
 negative self-scan prevents the historical checker from reclaiming the obsolete
-source wording. The source remains unchanged until the repair is accepted.
+source wording.
 
 ## Mixed Documentation Changelog Checker Repair
 
@@ -219,6 +261,21 @@ active plan, and the execution ledger. It cannot change standards, former
 sources, source-specific checkers, fixtures, engine code, corpus data, Router,
 dispositions, owner map, generated inventories, metadata, configuration, or
 lockfiles.
+
+Concurrent preparation protocol `7.4c3p` may change only this re-plan, the
+final source-closure planning checker, the preparation inventory and its
+focused verifier, findings, the active plan, and the execution ledger. It
+cannot change standards, former sources, source-specific or mixed policy
+checkers, source fixtures, engine code, corpus data, Router, manifests,
+dispositions, owner map, generated inventories, metadata, configuration, or
+lockfiles.
+
+Preparation workers are limited to the former source, isolated fixture
+directory, and checker paths assigned to their inventory row. Their returned
+patch excludes corpus, plan, findings, ledger, manifest, Router, aggregate,
+engine, generated, metadata, configuration, and lockfiles. Only the serial
+integration owner may combine a prepared patch with those package-owned shared
+state transitions.
 
 The `7.4c3v1` implementation slice may change only the reusable engine, engine
 self-test fixtures and verifier, live aggregate verifier, existing Coding
@@ -271,6 +328,11 @@ final source-closure planning checks, historical checker ownership, shell
 syntax, diff integrity, and the complete suite because a mixed policy checker
 changes.
 
+Concurrent preparation protocol `7.4c3p` requires the preparation inventory
+verifier, final source-closure planning evidence, plan structure, shell syntax,
+diff integrity, and the complete suite because shared migration procedure and
+verification authority change.
+
 `7.4c3v1` requires engine positive and negative fixtures, unchanged Coding
 source/corpus semantics, exact Coding closure, aggregate discovery, Router
 closure, historical checker ownership, shell syntax, diff integrity, and the
@@ -284,7 +346,10 @@ Stop and re-plan when:
 
 - a source needs a structural invariant not shared by final indexes;
 - source-specific semantics would have to enter the generic engine;
-- a checker reads multiple former sources or owns shared policy;
+- a mutable checker cannot be assigned to one exclusive preparation package;
+- concurrent packages require overlapping source, fixture, or checker writes;
+- a prepared package would need to mutate shared acceptance state;
+- manifest-contiguous serial integration cannot be preserved;
 - removing obsolete structural wording would weaken semantic owner, route,
   disposition, typed-outcome, or negative evidence;
 - fixture isolation cannot avoid overlapping draft write sets;

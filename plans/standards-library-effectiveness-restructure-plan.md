@@ -6,13 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3.4 Documentation index source closure is
+**Current phase:** Milestone 7.4c3p concurrent source-package preparation is
 accepted. Exact identifier migration and Router authority closure are complete;
-four of 27 former normative source entrypoints are derived, and Documentation
-has no residual source or checker authority.
+four of 27 former normative source entrypoints are derived, and eight pending
+packages now have exclusive preparation writes without weakening serial shared
+authority or manifest-ordered acceptance.
 
-**Next slice:** Milestone 7.4c3.5 rewrites `CONCURRENCY-STANDARDS.md` as the
-next manifest-ordered source package without changing shared engine code.
+**Next slice:** prepare the frozen `p1` packages in isolated worktrees while
+integrating `7.4c3.5` Concurrency first in manifest order. Later prepared
+packages cannot be accepted until every preceding source package closes.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2220,6 +2222,17 @@ all structural/routing fixtures pass.
        100 frozen source dispositions without changing canonical Documentation
        or Release policy. Its focused checker retains semantic evidence and
        rejects renewed ownership of obsolete source prose.
+     - `7.4c3p` (`Accepted`): separate concurrent preparation from serial
+       acceptance. The frozen
+       `evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv`
+       assigns eight pending packages exclusive former-source, fixture, and
+       checker write sets while preserving owner, route, disposition, typed
+       outcome, and negative-policy evidence. Workers cannot edit corpus,
+       manifests, Router, engines, generated artifacts, or planning state. One
+       integration owner applies packages in contiguous manifest order and may
+       use one complete-suite run to accept a contiguous integrated group after
+       every package-focused gate passes. Architecture remains separately
+       blocked from `p1` until its overlapping mixed-checker package is frozen.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`

@@ -9645,3 +9645,42 @@ and all 272 complete-suite verifier entrypoints pass.
 
 **Next slice:** `7.4c3.5`, rewrite and register
 `CONCURRENCY-STANDARDS.md` without changing shared engine code.
+
+## Milestone 7.4c3p Concurrent Source-Package Preparation Protocol
+
+**Outcome:** Accepted.
+
+The former protocol serialized every mixed or historical checker repair even
+when packages had disjoint source, fixture, and checker writes. The revised
+contract separates isolated preparation from acceptance: eight `p1` packages
+may be prepared concurrently, but shared corpus and planning state remain under
+one integration owner and packages are accepted only in contiguous manifest
+order.
+
+The machine-readable preparation inventory assigns nine mutable checkers to
+exactly one of eight packages. Every package must preserve canonical owner,
+route, exact disposition, typed outcome, and negative-policy evidence. Returned
+worker patches exclude all shared authority files. Architecture is excluded
+until its overlapping high-risk checker set receives one separately frozen
+package contract.
+
+**No-fallback result:** concurrency changes execution topology only. It does
+not permit legacy wording, alternate routes, inferred fixtures, permissive
+titles, skipped semantic checks, or out-of-order acceptance. A prepared package
+has no acceptance authority until focused gates and the contiguous wave's
+complete suite pass.
+
+**Bounded write set:** source-index re-plan, final source-closure planning
+checker, preparation inventory and verifier, findings, active plan, and
+execution ledger. Standards, former sources, canonical owners, existing source
+or mixed policy checkers, fixtures, engine, corpus, Router, manifests,
+dispositions, owner map, generated inventories, metadata, configuration, and
+lockfiles remain unchanged.
+
+**Verification:** preparation inventory ownership and manifest mapping, final
+source-closure planning evidence, plan structure, shell syntax, diff integrity,
+and the complete verifier suite.
+
+**Next slice:** concurrently prepare frozen `p1` packages, then integrate
+`7.4c3.5` Concurrency first without accepting any later manifest source ahead
+of unresolved orders 6 and 7.

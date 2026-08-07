@@ -131,10 +131,16 @@ required_verifier_replan=(
   'cannot add dual old/new assertions'
   'Shared engine code, aggregate policy, cross-source checkers'
   'checker-infrastructure re-plan'
+  '## Concurrent Preparation And Serial Acceptance'
+  'Preparation order and acceptance order are separate contracts.'
+  'Workers cannot edit shared acceptance state.'
+  'A prepared package is not accepted evidence.'
+  'one complete-suite run may accept'
+  'Architecture remains excluded from preparation wave `p1`'
   '## Historical Checker Repair'
   'routes established when that row was accepted. It cannot require'
   'mutable source prose to retain a migration-era sentence'
-  'separate serial repair slice removes only the'
+  'the preparation inventory assigns the checker to'
   'negative self-scan prevents the historical checker'
   '## Mixed Documentation Changelog Checker Repair'
   'mixed policy infrastructure and'
@@ -151,6 +157,8 @@ required_verifier_replan=(
 for text in "${required_verifier_replan[@]}"; do
   rg -F -q "$text" "$VERIFIER_REPLAN"
 done
+
+"$SCRIPT_DIR/verify-milestone-7-source-package-preparation.sh"
 
 transient_state='Planned'
 transient_marker="\`7.4c3v1\` (\`$transient_state\`)"
