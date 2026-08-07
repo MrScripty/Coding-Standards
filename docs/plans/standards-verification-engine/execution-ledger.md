@@ -183,3 +183,26 @@
 - Scope: planning authority only; no engine, registry, suite, fixture, checker,
   generated inventory, standard, disposition, or historical contract changed.
 - Next slice: implement and verify `M2-P2` as one atomic package.
+
+## 2026-08-07 - Milestone 2 Package M2-P2
+
+- Outcome: accepted five declarative Rust Release suites for automation
+  adapters, package metadata, publication control, toolchain declarations, and
+  workspace package metadata.
+- Preserved evidence: all 78 decision rows, canonical profile/reference and
+  former-source route text, five legacy-default prohibitions, and all nine
+  exact dispositions `STD-0811` through `STD-0819`.
+- Removed authority: five dependency-free Bash leaf checkers. Release evidence,
+  Release owner-contract, shared metadata, fixtures, standards, dispositions,
+  and historical contracts remain unchanged.
+- Focused verification: 13 engine/inventory tests passed; five selected suites
+  passed 25 checks; all 14 registered suites passed 70 checks directly and
+  through the generic launcher; inventory freshness, removed executable and
+  contract paths, and diff integrity passed.
+- Complete verification: all 261 remaining mixed Bash entrypoints passed. The
+  generated inventory fell from 266 to 261 records.
+- No-fallback result: no wrapper, shell command action, compatibility schema,
+  source alias, owner-specific engine branch, weakened decision, or missing
+  disposition remains.
+- Next slice: classify the next dependency-free same-owner package from exact
+  inventory evidence, keeping shared historical contracts for Milestone 3.

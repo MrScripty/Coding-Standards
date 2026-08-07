@@ -1,0 +1,56 @@
+schema_version = 1
+id = "rust-release-workspace-package-metadata"
+owner = "profile.language.rust.release"
+description = "Accepted Cargo workspace package-metadata mechanisms without layout or inheritance defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/release-workspace-package-metadata-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+release_unit = ["accepted", "contradictory", "missing"]
+package_facts = ["accepted", "missing"]
+capability = ["supported", "unsupported"]
+evidence = ["complete", "incomplete"]
+fallback = ["dependency-inheritance", "edition-inheritance", "existing-root-manifest", "license-inheritance", "none", "one-product", "repository-inheritance", "rust-version-inheritance", "shared-version", "version-inheritance", "workspace-layout"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "release_unit", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "release_unit", op = "eq", value = "missing" }, { field = "package_facts", op = "eq", value = "missing" }, { field = "evidence", op = "eq", value = "incomplete" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/release.md"
+required = ["## Cargo Workspace Package-Metadata Mechanisms", "Each inherited field remains an accepted fact", "cannot require lockstep versioning"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-release.md"
+required = ["## Workspace Package-Metadata Example", "[workspace.package]", "separately owned Rust Dependency mechanisms"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-RELEASE-STANDARDS.md"
+required = []
+prohibited = ["Use `[workspace.package]` to define shared version metadata once"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0815\tlanguages/rust/RUST-RELEASE-STANDARDS.md\tprofiles/languages/rust/release.md\tsplit\t", "STD-0816\tlanguages/rust/RUST-RELEASE-STANDARDS.md\treference/recipes/rust-release.md\tmove\t", "STD-0817\tlanguages/rust/RUST-RELEASE-STANDARDS.md\treference/recipes/rust-release.md\tmove\t"]
+prohibited = []

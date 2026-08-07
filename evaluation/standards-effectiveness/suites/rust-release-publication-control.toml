@@ -1,0 +1,57 @@
+schema_version = 1
+id = "rust-release-publication-control"
+owner = "profile.language.rust.release"
+description = "Accepted Cargo publication-control mechanisms without registry or package-category defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/release-publication-control-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["accepted", "contradictory", "missing"]
+unit = ["known", "unknown"]
+channel = ["known", "unknown"]
+capability = ["supported", "unsupported"]
+evidence = ["complete", "incomplete"]
+fallback = ["binary-category", "cdylib-category", "crates-io", "harness-category", "none", "publish-false", "registry-success", "tooling-category", "workspace-category"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "contract", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "contract", op = "eq", value = "missing" }, { field = "unit", op = "eq", value = "unknown" }, { field = "channel", op = "eq", value = "unknown" }, { field = "evidence", op = "eq", value = "incomplete" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/release.md"
+required = ["## Cargo Publication-Control Mechanisms", "express the accepted decision", "does not decide whether a binary"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-release.md"
+required = ["## Publication-Control Example", "publish = false", "does not make `publish = false` a default"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-RELEASE-STANDARDS.md"
+required = []
+prohibited = ["Use `publish = false` for"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0814\tlanguages/rust/RUST-RELEASE-STANDARDS.md\tprofiles/languages/rust/release.md\tsplit\t"]
+prohibited = []

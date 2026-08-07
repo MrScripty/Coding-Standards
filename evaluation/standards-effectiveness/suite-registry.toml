@@ -6,6 +6,31 @@ path = "evaluation/standards-effectiveness/suites/rust-test-style.toml"
 requires = []
 
 [[suites]]
+id = "rust-release-automation-adapter"
+path = "evaluation/standards-effectiveness/suites/rust-release-automation-adapter.toml"
+requires = []
+
+[[suites]]
+id = "rust-release-package-metadata"
+path = "evaluation/standards-effectiveness/suites/rust-release-package-metadata.toml"
+requires = []
+
+[[suites]]
+id = "rust-release-publication-control"
+path = "evaluation/standards-effectiveness/suites/rust-release-publication-control.toml"
+requires = []
+
+[[suites]]
+id = "rust-release-toolchain"
+path = "evaluation/standards-effectiveness/suites/rust-release-toolchain.toml"
+requires = []
+
+[[suites]]
+id = "rust-release-workspace-package-metadata"
+path = "evaluation/standards-effectiveness/suites/rust-release-workspace-package-metadata.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

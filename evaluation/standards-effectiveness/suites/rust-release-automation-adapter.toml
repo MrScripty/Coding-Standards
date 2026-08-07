@@ -1,0 +1,56 @@
+schema_version = 1
+id = "rust-release-automation-adapter"
+owner = "profile.language.rust.release"
+description = "Contract-selected Rust release automation adapters without tool or procedure defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/release-automation-adapter-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+procedure = ["accepted", "contradictory", "missing"]
+tool = ["missing", "selected"]
+capability = ["supported", "unsupported"]
+evidence = ["complete", "incomplete"]
+fallback = ["cargo-release", "changelog-replacement", "command-success", "consolidate-commits", "first-release", "installed-tool", "manual-acceptable", "none", "shared-version", "stable-cadence", "tag-prefix"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "procedure", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "procedure", op = "eq", value = "missing" }, { field = "tool", op = "eq", value = "missing" }, { field = "evidence", op = "eq", value = "incomplete" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/release.md"
+required = ["## Rust Release-Automation Adapter Mechanisms", "Tooling selects the automation", "does not select `cargo-release`"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-release.md"
+required = ["## Cargo-Release Adapter Example", "shared-version = true", "does not recommend `cargo-release`"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-RELEASE-STANDARDS.md"
+required = []
+prohibited = ["`cargo-release` is recommended"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0818\tlanguages/rust/RUST-RELEASE-STANDARDS.md\tprofiles/languages/rust/release.md\tsplit\t", "STD-0819\tlanguages/rust/RUST-RELEASE-STANDARDS.md\treference/recipes/rust-release.md\tmove\t"]
+prohibited = []

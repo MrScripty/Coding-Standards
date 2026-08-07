@@ -1,0 +1,58 @@
+schema_version = 1
+id = "rust-release-package-metadata"
+owner = "profile.language.rust.release"
+description = "Accepted Cargo release metadata mechanisms without package-field defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/release-package-metadata-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contracts = ["accepted", "contradictory", "missing"]
+release_unit = ["known", "unknown"]
+channel = ["known", "unknown"]
+metadata = ["selected"]
+capability = ["supported", "unsupported"]
+evidence = ["complete", "incomplete"]
+fallback = ["crate-product-identity", "fixed-edition", "fixed-license", "fixed-rust-version", "none", "readme-default", "registry-success", "repository-default", "required-fields", "taxonomy-default"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "contracts", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "contracts", op = "eq", value = "missing" }, { field = "release_unit", op = "eq", value = "unknown" }, { field = "channel", op = "eq", value = "unknown" }, { field = "evidence", op = "eq", value = "incomplete" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/release.md"
+required = ["## Cargo Package Release Metadata Mechanisms", "express the selected Rust package facts", "Cargo metadata does not select a package name", "registry acceptance cannot complete missing authority"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-release.md"
+required = ["## Cargo Package Metadata Example", "name = \"my-library\"", "does not define required fields"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-RELEASE-STANDARDS.md"
+required = ["[Release](../../workflows/release.md)", "[Contracts](../../topics/contracts.md)", "[Rust release mechanisms](../../profiles/languages/rust/release.md)"]
+prohibited = ["Publishable crates should have complete metadata"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0813\tlanguages/rust/RUST-RELEASE-STANDARDS.md\tprofiles/languages/rust/release.md\tsplit\t"]
+prohibited = []

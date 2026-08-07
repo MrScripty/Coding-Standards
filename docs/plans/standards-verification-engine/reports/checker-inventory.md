@@ -63,17 +63,12 @@ Package `M2-P1` is accepted and replaced these eight Rust Tooling leaf checkers:
   and stale-inventory checks, plan/diff integrity, and one complete mixed suite.
 
 Acceptance reduced current Bash verifier entrypoints from 274 to 266. The one
-generic launcher now evaluates nine registered suites and 45 checks in one
-Python process. All 266 mixed entrypoints passed after removal.
-
-The similarly short `verify-rust-release-automation-adapter.sh` is excluded: it
-belongs to the Rust Release owner and has a two-disposition Release/reference
-contract. Similar shell shape does not authorize cross-owner batching.
+generic launcher evaluated nine registered suites and 45 checks in one Python
+process. All 266 mixed entrypoints passed after removal.
 
 ## Next Classification Work
 
-Package `M2-P2` is frozen for implementation as five Rust Release leaf
-checkers:
+Package `M2-P2` is accepted as five Rust Release leaf checkers:
 
 | Suite | Replaced checker | Decision fixture | Exact IDs |
 | --- | --- | --- | --- |
@@ -107,6 +102,11 @@ checkers:
   suites, generic launcher, stale-inventory and removed-path scans, plan/diff
   integrity, and one complete mixed suite expected to contain 261 Bash
   entrypoints.
+
+Acceptance preserved all 78 decision rows and nine dispositions without an
+engine change. The generic launcher now evaluates 14 registered suites and 70
+checks in one Python process. Generated inventory and the complete mixed suite
+both report 261 remaining Bash entrypoints.
 
 No script is scheduled for deletion solely because it is short, unreferenced,
 or mechanically similar. Executable and frozen-contract references are resolved
