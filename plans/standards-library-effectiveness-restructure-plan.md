@@ -6,14 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3hs Security checker-repair decomposition is
-accepted. Its four exclusive packages preserve durable semantics while
-removing mutable legacy-shape ownership before Security source closure. Five
-of 27 former normative source entrypoints are derived.
+**Current phase:** Serial cross-source IPC repair `7.4c3hs1` is accepted. The
+three disjoint local Security-reader repairs are ready for concurrent
+preparation before their serial group integration. Five of 27 former normative
+source entrypoints are derived.
 
-**Next slice:** integrate serial cross-source IPC repair `7.4c3hs1`, prepare the
-three disjoint `7.4c3hs2` checker repairs concurrently, and accept the group
-gate before preparing `7.4c3.6`.
+**Next slice:** prepare `7.4c3hs2a`, `7.4c3hs2b`, and `7.4c3hs2c` concurrently,
+integrate their non-overlapping checker patches serially, and run the checker
+repair group gate before preparing `7.4c3.6`.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2255,7 +2255,7 @@ all structural/routing fixtures pass.
        typed-outcome, and negative-policy evidence remains mandatory.
        Transitional headings, `HEAD` comparisons, compatibility branches,
        source exceptions, and weakened checks are prohibited.
-       - `7.4c3hs1` (`Planned`): remove Architecture/Interop/Security
+       - `7.4c3hs1` (`Accepted`): remove Architecture/Interop/Security
          heading-delimited legacy extraction from the shared IPC verifier;
          retain canonical IPC and Security behavior, exact dispositions,
          required former-source routes, and source-wide unsafe-mechanism

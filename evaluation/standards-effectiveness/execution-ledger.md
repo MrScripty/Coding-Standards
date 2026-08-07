@@ -9848,3 +9848,33 @@ verifier, active plan, findings status, and execution ledger.
 **Next slice:** integrate `7.4c3hs1`, integrate the three independently
 prepared local repairs, run the complete group gate, and resolve `F084` before
 Security source closure.
+
+## Milestone 7.4c3hs1 Cross-Source IPC Checker Repair
+
+**Outcome:** Accepted.
+
+The IPC verifier no longer extracts heading-delimited sections from
+Architecture, Interop, or Security. Required canonical IPC and Security routes
+remain whole-source assertions for every former source, and exact unsafe cast
+and deserialization patterns are now rejected across all applicable canonical
+and former source files, including Interop.
+
+Canonical IPC decode-before-dispatch behavior, Security untrusted-input
+consequences, the complete decision fixture, all 11 exact dispositions,
+metadata, Router, historical findings, and no-fallback assertions remain
+unchanged.
+
+**No-fallback result:** no old/new parser branch, section alias, transitional
+heading, source exception, inferred route, or permissive decoding path was
+added. Structural source shape belongs only to the aggregate closure engine.
+
+**Bounded write set:** shared IPC verifier, active plan state, and execution
+ledger. Former sources, canonical standards, fixtures, dispositions, corpus,
+manifests, Router, generated artifacts, findings, configuration, and lockfiles
+remain unchanged.
+
+**Verification:** IPC focused checker, Security closure checker, repair re-plan
+contract, shell syntax, plan structure, and diff integrity.
+
+**Next slice:** prepare the three exclusive local checker repairs concurrently,
+then integrate them serially before the complete checker-repair group gate.

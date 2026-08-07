@@ -161,55 +161,6 @@ rg -F -q 'profiles/boundaries/ipc.md#decode-before-dispatch' "$LEGACY_INTEROP"
 rg -F -q 'profiles/boundaries/ipc.md' "$LEGACY_SECURITY"
 rg -F -q 'topics/security.md#untrusted-structured-input' "$LEGACY_SECURITY"
 
-legacy_arch_section="$(
-  awk '
-    {
-      line = $0
-      sub(/\r$/, "", line)
-    }
-    line == "## IPC/Message Contract Pattern" { capture = 1 }
-    line == "## Composition Root Pattern" { capture = 0 }
-    capture { print }
-  ' "$LEGACY_ARCH"
-)"
-legacy_security_section="$(
-  awk '
-    {
-      line = $0
-      sub(/\r$/, "", line)
-    }
-    line == "## Message/API Payload Validation" { capture = 1 }
-    line == "## Network Transport Safety" { capture = 0 }
-    capture { print }
-  ' "$LEGACY_SECURITY"
-)"
-for section in "$legacy_arch_section" "$legacy_security_section"; do
-  if rg -q '^### |```| as ValidatedMessage|payload as |JsonSerializer.Deserialize|ipcMain.handle' \
-    <<< "$section"; then
-    printf 'legacy payload-validation policy remains active\n' >&2
-    exit 1
-  fi
-done
-
-legacy_interop_section="$(
-  awk '
-    {
-      line = $0
-      sub(/\r$/, "", line)
-    }
-    line == "### Validate Received Messages" { capture = 1 }
-    line == "---" { capture = 0 }
-    capture { print }
-  ' "$LEGACY_INTEROP"
-)"
-if rg -q '```|JSON\.parse|typeof parsed|console\.error|return;' \
-  <<< "$legacy_interop_section"; then
-  printf 'legacy Interop partial-message validation remains active\n' >&2
-  exit 1
-fi
-rg -F -q 'profiles/boundaries/ipc.md#decode-before-dispatch' \
-  <<< "$legacy_interop_section"
-
 removed_patterns=(
   "msg.payload as SelectItemCommand['payload']"
   'msg as ValidatedMessage'
@@ -217,7 +168,8 @@ removed_patterns=(
   'JsonSerializer.Deserialize<OpenProjectRequest>'
 )
 for pattern in "${removed_patterns[@]}"; do
-  if rg -F -q "$pattern" "$IPC" "$SECURITY" "$LEGACY_ARCH" "$LEGACY_SECURITY"; then
+  if rg -F -q "$pattern" \
+    "$IPC" "$SECURITY" "$LEGACY_ARCH" "$LEGACY_INTEROP" "$LEGACY_SECURITY"; then
     printf 'unsafe payload-validation guidance remains: %s\n' "$pattern" >&2
     exit 1
   fi
