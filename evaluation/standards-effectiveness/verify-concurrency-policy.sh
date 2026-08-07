@@ -119,7 +119,6 @@ done
 
 retained_legacy=(
   '## C# Async/Await Index'
-  'This is a non-normative migration index'
   '### C# Continuation Scheduling'
   '## Rust Concurrency Routing Index'
   '## TypeScript Async Index'
@@ -127,6 +126,11 @@ retained_legacy=(
 )
 for text in "${retained_legacy[@]}"; do
   rg -F -q "$text" "$LEGACY"
+done
+
+for obsolete in 'This is a non-normative migration index' \
+  'remain migration material' 'retained below' 'legacy authority'; do
+  ! rg -F -q "$obsolete" "$LEGACY"
 done
 
 removed_patterns=(

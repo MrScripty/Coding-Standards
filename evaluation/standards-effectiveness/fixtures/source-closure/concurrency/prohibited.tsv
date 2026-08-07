@@ -1,0 +1,9 @@
+literal
+This is a non-normative migration index
+remain migration material
+retained below
+legacy authority
+## Core Principles
+### Always Observe Task Errors
+### Never Block on Async
+### Pass CancellationToken Through Async Chains

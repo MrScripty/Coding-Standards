@@ -6,14 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3rh nested route schema replacement is
+**Current phase:** Milestone 7.4c3.5 Concurrency index source closure is
 accepted. Exact identifier migration and Router authority closure are complete;
-four of 27 former normative source entrypoints are derived, and nested source
-hrefs now resolve to canonical repository targets without bypasses.
+five of 27 former normative source entrypoints are derived, and Concurrency has
+no residual policy or migration authority.
 
-**Next slice:** resume concurrent preparation of the frozen `p1` packages while
-integrating `7.4c3.5` Concurrency first in manifest order. Later packages remain
-preparation-only until every preceding source closes.
+**Next slice:** prepare and integrate `7.4c3.6` Security in manifest order while
+independent frozen `p1` packages continue preparation-only work.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2240,6 +2239,12 @@ all structural/routing fixtures pass.
        parser or nested-source bypass. Migrate all registered fixtures
        atomically and prove the contract with a nested Rust-style positive case
        plus focused negative cases.
+     - `7.4c3.5` (`Accepted`): replace Concurrency migration and residual policy
+       prose with concise non-normative navigation, set its corpus state to
+       derived, preserve canonical generic, C#, Rust, TypeScript, and Godot
+       routes, and register isolated shape, route, and prohibited-literal
+       fixtures. Preserve all 17 frozen source dispositions and every dependent
+       owner checker without dual wording or compatibility fallback.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`

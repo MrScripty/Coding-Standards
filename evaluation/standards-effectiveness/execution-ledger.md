@@ -9743,3 +9743,41 @@ syntax, diff integrity, and the complete verifier suite.
 
 **Next slice:** resume the frozen concurrent preparation wave and integrate
 `7.4c3.5` Concurrency first in manifest order.
+
+## Milestone 7.4c3.5 Concurrency Index Source Closure
+
+**Outcome:** Accepted.
+
+`CONCURRENCY-STANDARDS.md` is now concise non-normative navigation. It routes
+to the Standards Router, canonical generic Concurrency topic, and the C#, Rust,
+TypeScript, and Godot specialization owners while owning no rule,
+applicability decision, default, example, or fallback authority. Durable route
+headings remain because dependent owner checkers use them as stable navigation,
+not as policy sections.
+
+The source corpus row changes from normative to derived without changing kind,
+target role, preliminary disposition, or baseline source. Its isolated fixture
+directory records exact title and headings, a 36-line bound, seven unique
+canonical target/href pairs, and prohibited migration and removed-policy text.
+The mixed Concurrency checker drops only its obsolete migration-sentence
+assertion and retains topic semantics, route, exact disposition, typed outcome,
+and negative fallback evidence.
+
+**No-fallback result:** no migration phrase, legacy authority, removed generic
+policy subsection, old source route, or dual old/new wording remains. Missing
+or inapplicable navigation returns the Router's typed diagnostic instead of
+using prior source wording.
+
+**Bounded write set:** Concurrency former source, its one corpus row, isolated
+source-closure fixture directory, assigned mixed checker, active plan, and
+execution ledger. Shared engine, canonical owners, Router, manifests,
+dispositions, owner map, generated inventories, metadata, configuration, and
+lockfiles remain unchanged.
+
+**Verification:** Concurrency aggregate closure with seven routes and 17 frozen
+IDs; generic Concurrency, C# Async, TypeScript Async, Godot, row 13, and
+trust/lifecycle checks; plan structure; shell syntax; diff integrity; and the
+complete verifier suite.
+
+**Next slice:** `7.4c3.6`, close `SECURITY-STANDARDS.md` before accepting any
+later prepared source package.
