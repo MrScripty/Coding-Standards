@@ -22,6 +22,17 @@ Run engine self-tests:
 python3 -m unittest discover -s tools/standards_verifier/tests -v
 ```
 
+Regenerate or verify the exact Bash checker structure inventory:
+
+```bash
+python3 tools/standards_verifier/generate_inventory.py --write
+python3 tools/standards_verifier/generate_inventory.py --check
+```
+
+The generated inventory measures structure only. It does not infer canonical
+owner, semantic risk, or migration disposition from a filename or shell
+mechanism; those remain reviewed planning decisions.
+
 Suite and registry TOML is strict. Unknown keys, schema versions, check kinds,
 operators, dependencies, and paths fail with typed diagnostics. Configuration
 cannot execute commands, import modules, evaluate code, interpolate environment

@@ -183,6 +183,7 @@ and plan records selected per slice.
 
 **Tasks:**
 
+- [x] Generate and continuously verify exact structural checker inventory.
 - [ ] Classify every checker by assertion family, inbound dependency, owner,
   risk, and migration disposition.
 - [ ] Add strict table, Markdown heading/route, exact-row/set/order, and count

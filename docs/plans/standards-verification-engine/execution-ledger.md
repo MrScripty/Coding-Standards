@@ -88,3 +88,28 @@
 - This transition changes planning state only. Engine source, registry, suites,
   standards, fixtures, migration manifests, and generated artifacts are
   unchanged.
+
+## 2026-08-07 - Milestone 2 Exact Structural Inventory
+
+- Outcome: accepted a deterministic Python generator and committed TSV for all
+  274 current Bash verifier entrypoints. The generic launcher checks freshness
+  before running declarative suites.
+- Measured fields: line count; total and executable/contract/documentation
+  inbound references; verifier/helper dependencies; and `sed`, AWK, `rg`, and
+  legacy decision-helper use.
+- Baseline: 77 scripts have no named verifier/helper dependency, 47 use `sed`,
+  249 use AWK, 264 use `rg`, and 13 invoke the legacy decision helper.
+- Focused verification: 13 engine/inventory self-tests, generated-inventory
+  check, generic launcher, launcher syntax, and diff integrity passed. The stale
+  inventory negative case returned `INVENTORY.STALE`.
+- Complete verification: all 274 mixed migration entrypoints passed with
+  inventory freshness enforced.
+- Semantic review: froze `M2-P1` as eight dependency-free Rust Tooling suites
+  with one owner, consolidation risk, common assertion family, no executable or
+  frozen-contract path dependencies, and one package gate. Rust Release remains
+  separate despite matching shell shape.
+- No-fallback result: inventory does not infer owner/risk/disposition, execute
+  commands, ignore stale output, or classify documentation as an executable
+  dependency.
+- Next slice: implement `M2-P1` without changing engine source or shared
+  historical migration contracts.
