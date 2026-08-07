@@ -13,8 +13,8 @@ package `M2-P4` are accepted. Owner-reviewed suite migration continues under
 the Generic Standards Verification Engine Plan before Cross-Platform source
 closure. Six of 27 former normative source entrypoints are derived.
 
-**Next slice:** classify the delegated engine's remaining standalone and
-structural leaves before selecting another package or Milestone 3 transition.
+**Next slice:** implement delegated TypeScript static-analysis package `M2-P7`,
+then Verification quality-gate package `M2-P8`, before structural replanning.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2321,6 +2321,9 @@ all structural/routing fixtures pass.
          leaves preserving ten decisions, non-normative examples, former-source
          prohibitions, and four exact move dispositions; reduce inventory to
          246 Bash entrypoints.
+       - `7.4c3ve9` (`Planned`): serially replace the final two ordinary
+         dependency-free owner leaves as separate TypeScript and Verification
+         packages, then replan the structural/shared-contract remainder.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

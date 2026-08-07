@@ -342,3 +342,13 @@
   inventory/removal/diff gates, and all 246 mixed entrypoints passed.
 - No wrapper, fallback, compatibility schema, or engine special case remains.
 - Next slice: classify remaining standalone and structural leaves.
+
+## 2026-08-07 - Remaining Standalone Leaf Freeze
+
+- Froze `M2-P7` TypeScript static analysis and `M2-P8` Verification quality
+  gates as separate single-owner packages with 21 decisions and six exact
+  dispositions in total. Existing primitives suffice.
+- The seven other dependency-free leaves are migration/acceptance structure or
+  the temporary launcher; they are not authorized as ordinary text/decision
+  migrations.
+- Next slice: implement `M2-P7`, then `M2-P8`, then replan structural work.

@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: classify remaining standalone and structural leaves
+**Next slice:** Milestone 2: implement TypeScript static-analysis package `M2-P7`
 
 **Acceptance status:** `pending`
 
@@ -375,6 +375,34 @@ scripts atomically, and add no wrapper, compatibility schema, or engine branch.
 
 **Acceptance evidence:** 13 self-tests; 29 suites/137 checks; fresh 246-record
 inventory; removed-path scans; and complete mixed suite passed.
+
+#### Package M2-P7: TypeScript Static Analysis
+
+**Status:** `Planned`
+
+**Owner:** `profile.language.typescript`
+
+**Allowed write set:** registry, one suite TOML, its Bash checker deletion,
+generated inventory, and plan records.
+
+**Preserved contract:** ten typed decisions, canonical TypeScript and Tooling
+reference text, former-source prohibitions, and split dispositions `STD-0677`
+through `STD-0680`. Existing text/decision primitives suffice; no wrapper or
+engine change is authorized.
+
+#### Package M2-P8: Verification Quality Gates
+
+**Status:** `Planned`
+
+**Owner:** `workflow.verification`
+
+**Allowed write set:** registry, one suite TOML, its Bash checker deletion,
+generated inventory, and plan records.
+
+**Preserved contract:** eleven typed decisions, canonical Verification text,
+former-source prohibition, and refine dispositions `STD-0688` and `STD-0695`.
+Existing text/decision primitives suffice; no wrapper or engine change is
+authorized.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 
