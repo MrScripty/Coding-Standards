@@ -3,7 +3,7 @@ README.md	entrypoint	derived	router	replace	git
 ACCESSIBILITY-STANDARDS.md	standard	yes	topic	refine	git
 ARCHITECTURE-PATTERNS.md	standard	yes	mixed	split	git
 CODING-STANDARDS.md	standard	derived	core	split	git
-COMMIT-STANDARDS.md	standard	yes	workflow	refine	git
+COMMIT-STANDARDS.md	standard	derived	workflow	refine	git
 CONCURRENCY-STANDARDS.md	standard	yes	topic	refine	git
 CROSS-PLATFORM-STANDARDS.md	standard	yes	topic	refine	git
 DEPENDENCY-STANDARDS.md	standard	yes	topic	split	git

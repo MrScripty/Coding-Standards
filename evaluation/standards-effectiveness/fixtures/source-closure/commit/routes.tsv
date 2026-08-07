@@ -1,0 +1,4 @@
+route	target
+router	STANDARDS-ROUTER.md
+commit_workflow	workflows/commit.md
+commit_recipe	reference/recipes/commits.md

@@ -1,12 +1,14 @@
-# Commit Standards Migration Index
+# Commit Standards Legacy Index
 
-Commit process and history authority moved to the
-[Commit Workflow](workflows/commit.md).
+This former standards entrypoint is non-normative navigation. Commit and
+history policy is owned by the [Commit Workflow](workflows/commit.md); select
+applicability through the [Standards Router](STANDARDS-ROUTER.md). This file
+owns no commit rule, history rule, default, example, or fallback authority.
 
-Conventional commit syntax, staging commands, footer forms, and message examples
-moved to the non-normative
-[Commit Recipe](reference/recipes/commits.md).
+If a link is missing, conflicting, or inapplicable, return the Router's typed
+diagnostic instead of using prior wording from this file.
 
-Existing links may continue to target this index during migration. This file
-owns no commit or history policy. When old wording conflicts with the canonical
-workflow, the workflow applies.
+## Canonical Commit Routes
+
+- Commit and history policy: [Commit Workflow](workflows/commit.md)
+- Syntax and command examples: [Commit Recipe](reference/recipes/commits.md)

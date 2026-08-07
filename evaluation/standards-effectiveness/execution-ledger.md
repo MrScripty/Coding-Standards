@@ -9429,3 +9429,38 @@ pass.
 
 **Next slice:** `7.4c3.2`, close and register `COMMIT-STANDARDS.md` without
 changing shared engine code.
+
+## Milestone 7.4c3.2 Commit Index Source Closure
+
+**Outcome:** Accepted.
+
+`COMMIT-STANDARDS.md` is now a concise non-normative legacy index. It routes to
+the Standards Router, canonical Commit workflow, and non-normative Commit
+recipe while owning no rule, applicability decision, default, example, or
+fallback authority. Missing, conflicting, or inapplicable navigation returns
+the Router's typed diagnostic instead of using prior wording.
+
+The source corpus row changes from normative to derived without changing kind,
+target role, preliminary disposition, or baseline source. An isolated Commit
+fixture directory records the exact title, ordered headings, 20-line bound,
+three unique routes, and prohibited migration-era authority literals.
+
+**No-fallback result:** migration authority, continued-link permission,
+conflict-based use of old wording, inferred workflow authority, and fallback to
+the former source are removed. The aggregate engine rejects stale normative
+state, route or shape drift, authority wording, and identifier disagreement.
+
+**Bounded write set:** Commit legacy index, its corpus row, its independent
+source-closure fixture directory, active plan, and execution ledger. Shared
+engine code, canonical Commit workflow and recipe, Router, other former
+sources, dispositions, owner map, generated inventories, metadata,
+configuration, and lockfiles remain unchanged.
+
+**Verification:** Commit aggregate closure with three routes and 68 frozen IDs,
+exact Commit dispositions, Commit authority fixtures, Router closure,
+historical checker ownership, final source-closure planning evidence, plan
+structure, shell syntax, diff integrity, and all 272 complete-suite verifier
+entrypoints pass.
+
+**Next slice:** `7.4c3.3`, close and register `PLAN-STANDARDS.md` without
+changing shared engine code.
