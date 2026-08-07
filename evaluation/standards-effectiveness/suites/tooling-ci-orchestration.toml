@@ -1,0 +1,56 @@
+schema_version = 1
+id = "tooling-ci-orchestration"
+owner = "workflow.tooling"
+description = "Provider-neutral CI orchestration selected from repository claims and dependencies."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/tooling/ci-orchestration-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+facts = ["complete", "contradictory"]
+dependencies = ["complete", "missing"]
+capability = ["supported", "unsupported"]
+reporting = ["complete", "missing"]
+fallback = ["aggregate", "fail-fast", "github", "none", "parallel", "serialize", "summary-job", "three-tiers"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "facts", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "dependencies", op = "eq", value = "missing" }, { field = "reporting", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "workflow"
+type = "text"
+path = "workflows/tooling.md"
+required = ["## CI Orchestration And Scheduling", "required Verification claims", "Do not default to GitHub Actions", "typed `invalid`", "typed `unavailable`", "is `unsupported`"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/tooling.md"
+required = ["## CI Orchestration Examples"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "TOOLING-STANDARDS.md"
+required = []
+prohibited = ["strategy.fail-fast: false", "Use three tiers:", "./launcher.sh --ci-preflight"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0687\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0689\tTOOLING-STANDARDS.md\tworkflows/tooling.md\tsplit\t", "STD-0690\tTOOLING-STANDARDS.md\tworkflows/tooling.md\tsplit\t"]
+prohibited = []

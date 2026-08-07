@@ -31,6 +31,31 @@ path = "evaluation/standards-effectiveness/suites/rust-release-workspace-package
 requires = []
 
 [[suites]]
+id = "tooling-ci-orchestration"
+path = "evaluation/standards-effectiveness/suites/tooling-ci-orchestration.toml"
+requires = []
+
+[[suites]]
+id = "tooling-debt-cost"
+path = "evaluation/standards-effectiveness/suites/tooling-debt-cost.toml"
+requires = []
+
+[[suites]]
+id = "tooling-editor-configuration"
+path = "evaluation/standards-effectiveness/suites/tooling-editor-configuration.toml"
+requires = []
+
+[[suites]]
+id = "tooling-formatting-policy"
+path = "evaluation/standards-effectiveness/suites/tooling-formatting-policy.toml"
+requires = []
+
+[[suites]]
+id = "tooling-lint-policy"
+path = "evaluation/standards-effectiveness/suites/tooling-lint-policy.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

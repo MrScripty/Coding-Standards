@@ -1,0 +1,56 @@
+schema_version = 1
+id = "tooling-debt-cost"
+owner = "workflow.tooling"
+description = "Tool-debt and automation-cost governance without snapshot, cache, or schedule defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/tooling/debt-cost-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+facts = ["complete", "contradictory"]
+authority = ["explicit", "missing"]
+capability = ["supported", "unsupported"]
+scope = ["complete", "missing"]
+fallback = ["cache", "cancel", "discard", "none", "path-filter", "snapshot", "stale-state", "timeout", "total-count", "upload", "zero-debt"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "facts", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "authority", op = "eq", value = "missing" }, { field = "scope", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "workflow"
+type = "text"
+path = "workflows/tooling.md"
+required = ["## Tool-Debt Governance", "## Automation Cost And Operational Evidence", "Do not default to a committed snapshot", "Do not default to caching", "is `invalid`", "is `unavailable`", "is `unsupported`"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/tooling.md"
+required = ["## Automation Cost Examples"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "TOOLING-STANDARDS.md"
+required = []
+prohibited = ["Keep a committed baseline snapshot", "actions/setup-node@v4", "actions/upload-artifact@v4", "inside a live matrix run"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0691\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0692\tTOOLING-STANDARDS.md\tworkflows/tooling.md\tsplit\t"]
+prohibited = []

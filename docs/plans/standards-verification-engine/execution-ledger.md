@@ -226,3 +226,26 @@
 - Scope: planning authority only; no engine, registry, suite, fixture, checker,
   generated inventory, standard, disposition, or historical contract changed.
 - Next slice: implement and verify `M2-P3` as one atomic package.
+
+## 2026-08-07 - Milestone 2 Package M2-P3
+
+- Outcome: accepted five declarative Tooling workflow suites for editor
+  configuration, lint policy, formatting policy, CI orchestration, and
+  tool-debt/automation-cost governance.
+- Preserved evidence: all 60 decision rows, canonical Tooling workflow and
+  reference text, former-source routes, 11 legacy-default prohibitions, and all
+  13 exact dispositions.
+- Removed authority: five dependency-free Bash leaf checkers. Row-35-frozen
+  Tooling checks, separately owned adjacent checks, fixtures, standards,
+  dispositions, and historical contracts remain unchanged.
+- Focused verification: 13 engine/inventory tests passed; five selected suites
+  passed 23 checks; all 19 registered suites passed 93 checks directly and
+  through the generic launcher; inventory freshness, removed executable and
+  contract paths, and diff integrity passed.
+- Complete verification: all 256 remaining mixed Bash entrypoints passed. The
+  generated inventory fell from 261 to 256 records.
+- No-fallback result: no wrapper, shell command action, compatibility schema,
+  source alias, owner-specific engine branch, weakened decision, or missing
+  disposition remains.
+- Next slice: classify the next dependency-free same-owner package from exact
+  inventory evidence, with Rust API and Rust Dependency as measured candidates.

@@ -115,8 +115,7 @@ to Milestone 3's shared migration-contract replacement.
 
 ## Third Reviewed Package
 
-Package `M2-P3` is frozen for implementation as five Tooling policy leaf
-checkers:
+Package `M2-P3` is accepted as five Tooling policy leaf checkers:
 
 | Suite | Replaced checker | Decision fixture | Exact IDs |
 | --- | --- | --- | --- |
@@ -148,6 +147,11 @@ checkers:
   suites, generic launcher, stale-inventory and removed-path scans, plan/diff
   integrity, and one complete mixed suite expected to contain 256 Bash
   entrypoints.
+
+Acceptance preserved all 60 decision rows and 13 dispositions without an
+engine change. The generic launcher now evaluates 19 registered suites and 93
+checks in one Python process. Generated inventory and the complete mixed suite
+both report 256 remaining Bash entrypoints.
 
 The Rust API and Rust Dependency four-script candidates remain independent
 future owner packages. They are not combined with `M2-P3` merely to enlarge the

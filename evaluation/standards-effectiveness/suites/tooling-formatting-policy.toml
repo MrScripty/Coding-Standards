@@ -1,0 +1,56 @@
+schema_version = 1
+id = "tooling-formatting-policy"
+owner = "workflow.tooling"
+description = "Formatting policy and orchestration without tool, mutation, or execution defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/tooling/formatting-policy-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+facts = ["complete", "contradictory"]
+authority = ["explicit", "missing"]
+capability = ["supported", "unsupported"]
+scope = ["complete", "missing"]
+fallback = ["ci", "format-on-save", "mutate", "none", "prettier-eslint", "unchanged-success"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "facts", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "authority", op = "eq", value = "missing" }, { field = "scope", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "workflow"
+type = "text"
+path = "workflows/tooling.md"
+required = ["## Formatting Policy And Orchestration", "formatter and linter", "Do not default to format-on-save", "mutation authority", "`invalid`", "`unavailable`", "`unsupported`"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/tooling.md"
+required = ["## Formatting Automation Examples"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "TOOLING-STANDARDS.md"
+required = []
+prohibited = ["\"editor.formatOnSave\": true", "npm install eslint-config-prettier"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0681\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0682\tTOOLING-STANDARDS.md\tworkflows/tooling.md\tsplit\t", "STD-0683\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0686\tTOOLING-STANDARDS.md\tworkflows/tooling.md\tsplit\t"]
+prohibited = []

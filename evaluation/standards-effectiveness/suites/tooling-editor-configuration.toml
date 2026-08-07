@@ -1,0 +1,51 @@
+schema_version = 1
+id = "tooling-editor-configuration"
+owner = "workflow.tooling"
+description = "Editor-neutral file configuration selected from repository facts and precedence."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/tooling/editor-configuration-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+facts = ["complete", "contradictory"]
+mechanism = ["missing", "selected"]
+scope = ["complete", "missing"]
+precedence = ["complete", "missing"]
+representable = ["no", "yes"]
+fallback = ["editorconfig", "lf", "none", "silent-omit", "spaces", "utf8"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "facts", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "mechanism", op = "eq", value = "missing" }, { field = "scope", op = "eq", value = "missing" }, { field = "precedence", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "representable", op = "eq", value = "no" }]
+
+[[checks]]
+id = "workflow"
+type = "text"
+path = "workflows/tooling.md"
+required = ["## Editor And File Configuration", "editor-neutral configuration mechanism", "file-format semantics", "generated-file authority", "configuration's scope", "EditorConfig is one possible transport", "Do not default to spaces", "typed `invalid`", "typed `unavailable`", "typed `unsupported`"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "TOOLING-STANDARDS.md"
+required = ["[Tooling](workflows/tooling.md#editor-and-file-configuration)"]
+prohibited = ["| Setting | Recommended |"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0666\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t", "STD-0673\tTOOLING-STANDARDS.md\tworkflows/tooling.md\trefine\t"]
+prohibited = []
