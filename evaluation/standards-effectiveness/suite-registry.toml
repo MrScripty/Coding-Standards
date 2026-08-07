@@ -96,6 +96,16 @@ path = "evaluation/standards-effectiveness/suites/tooling-lint-policy.toml"
 requires = []
 
 [[suites]]
+id = "tool-setup-reference"
+path = "evaluation/standards-effectiveness/suites/tool-setup-reference.toml"
+requires = []
+
+[[suites]]
+id = "tooling-ci-workflow-reference"
+path = "evaluation/standards-effectiveness/suites/tooling-ci-workflow-reference.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

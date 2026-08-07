@@ -1,0 +1,23 @@
+schema_version = 1
+id = "tooling-ci-workflow-reference"
+owner = "reference/recipes/tooling.md"
+description = "Complete legacy CI workflow retained only as a non-normative example."
+
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/tooling.md"
+required = ["## Complete CI Workflow Example", "This is the complete legacy GitHub Actions example", "# .github/workflows/ci.yml", "actions/checkout@v4", "ci_summary:", "define no fallback"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "TOOLING-STANDARDS.md"
+required = ["defines no provider, trigger, permission, job, gate, cache, command"]
+prohibited = ["# .github/workflows/ci.yml", "actions/checkout@v4", "ci_summary:"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0693\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t", "STD-0694\tTOOLING-STANDARDS.md\treference/recipes/tooling.md\tmove\t"]
+prohibited = []

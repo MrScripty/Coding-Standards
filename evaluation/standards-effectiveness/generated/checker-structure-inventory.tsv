@@ -235,8 +235,6 @@ evaluation/standards-effectiveness/verify-testing-performance-evidence.sh	49	0		
 evaluation/standards-effectiveness/verify-testing-persisted-contract-artifacts.sh	48	0		0		0		0		verify-milestone-7-row-18-decomposition.sh		no	yes	yes	no
 evaluation/standards-effectiveness/verify-testing-resilience-replay.sh	50	0		0		0		0		verify-milestone-7-row-18-decomposition.sh		no	yes	yes	no
 evaluation/standards-effectiveness/verify-testing-source-closure.sh	33	0		0		0		0		verify-milestone-7-row-18-decomposition.sh		no	yes	yes	no
-evaluation/standards-effectiveness/verify-tool-setup-reference.sh	48	0		0		0		0				no	yes	yes	no
-evaluation/standards-effectiveness/verify-tooling-ci-workflow-reference.sh	14	0		0		0		0				no	yes	yes	no
 evaluation/standards-effectiveness/verify-tooling-owner-contract.sh	39	1	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	0		1	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	0				no	yes	yes	no
 evaluation/standards-effectiveness/verify-tooling-reference-recipes.sh	68	1	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	0		1	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	0				no	no	yes	no
 evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	92	2	evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	0		1	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	1	evaluation/standards-effectiveness/README.md	verify-milestone-7-row-13-decomposition.sh,verify-plan-fixtures.sh	check-plan-structure.sh	no	yes	yes	no

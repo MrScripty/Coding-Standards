@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: implement Tooling reference package `M2-P6`
+**Next slice:** Milestone 2: classify remaining standalone and structural leaves
 
 **Acceptance status:** `pending`
 
@@ -199,6 +199,8 @@ and plan records selected per slice.
   without changing engine source.
 - [x] Migrate accepted Rust Dependency package `M2-P5` and remove its four leaf
   scripts without changing engine source.
+- [x] Migrate accepted Tooling reference package `M2-P6` and remove its two leaf
+  scripts without changing engine source.
 - [ ] Classify every checker by assertion family, inbound dependency, owner,
   risk, and migration disposition.
 - [ ] Add strict table, Markdown heading/route, exact-row/set/order, and count
@@ -353,7 +355,7 @@ was omitted.
 
 #### Package M2-P6: Tooling Reference Consolidation
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 **Owner:** `reference/recipes/tooling.md`
 
@@ -370,6 +372,9 @@ and `STD-0702`.
 
 **No-fallback rule:** use existing text and ordered-decision checks, delete both
 scripts atomically, and add no wrapper, compatibility schema, or engine branch.
+
+**Acceptance evidence:** 13 self-tests; 29 suites/137 checks; fresh 246-record
+inventory; removed-path scans; and complete mixed suite passed.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 

@@ -332,3 +332,13 @@
   decisions, canonical/non-normative text, former-source prohibitions, and four
   move dispositions. Existing engine primitives suffice.
 - Scope is planning authority only. Next slice: implement `M2-P6` atomically.
+
+## 2026-08-07 - Milestone 2 Package M2-P6
+
+- Accepted two Tooling reference suites preserving ten decisions, canonical
+  non-normative examples, former-source prohibitions, and four move
+  dispositions; deleted both Bash leaves.
+- Verification: 13 self-tests, seven focused checks, 29 suites/137 checks,
+  inventory/removal/diff gates, and all 246 mixed entrypoints passed.
+- No wrapper, fallback, compatibility schema, or engine special case remains.
+- Next slice: classify remaining standalone and structural leaves.

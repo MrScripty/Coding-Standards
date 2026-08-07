@@ -236,7 +236,7 @@ complete mixed suite report 248 Bash entrypoints.
 
 ## Sixth Reviewed Package
 
-Package `M2-P6` is frozen as two dependency-free Tooling reference leaves:
+Package `M2-P6` is accepted as two dependency-free Tooling reference leaves:
 
 | Suite | Replaced checker | Decision fixture | Exact IDs |
 | --- | --- | --- | --- |
@@ -248,3 +248,7 @@ contract inbound references and no helper/verifier dependencies, and fit
 existing text/decision primitives. The gate expects inventory to fall to 246
 and runs self-tests, all suites, launcher, removal/inventory/plan checks, and
 the complete mixed suite.
+
+Acceptance preserved ten decisions and four dispositions without an engine
+change. The launcher evaluates 29 suites and 137 checks; inventory and the
+complete mixed suite report 246 Bash entrypoints.
