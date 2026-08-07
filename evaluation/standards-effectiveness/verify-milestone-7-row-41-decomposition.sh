@@ -21,13 +21,19 @@ for text in '## Owner Review' '`STD-0349`' 'independent normative rule' \
   rg -F -q "$text" "$D"
 done
 
-for text in '# Documentation Standards' 'This file is a migration index' \
+for text in '# Documentation Standards' \
   '[Documentation Workflow](workflows/documentation.md)' \
   '[Documentation Recipe](reference/recipes/documentation.md)' \
   '[Release Workflow](workflows/release.md)' \
   'This index has no independent normative authority'; do
   rg -F -q "$text" "$LEGACY"
 done
+
+obsolete_source_assertion='This file is a migration ''index'
+if rg -F -q "$obsolete_source_assertion" "$0"; then
+  printf 'invalid: row 41 checker owns obsolete Documentation source wording\n' >&2
+  exit 1
+fi
 
 [[ -e "$R/workflows/documentation.md" ]]
 rg -F -q '`7.4b31a` (`Accepted`)' "$P"

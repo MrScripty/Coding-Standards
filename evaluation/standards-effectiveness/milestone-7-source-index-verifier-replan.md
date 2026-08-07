@@ -155,6 +155,21 @@ A checker that reads multiple former sources or owns shared policy cannot be
 claimed by one source package. Such a conflict stops the package for a separate
 checker-infrastructure re-plan.
 
+## Historical Checker Repair
+
+A completed historical checker may prove immutable row identity, package
+identity, owner review, exact dispositions, bounded historical outcomes, and
+the canonical routes established when that row was accepted. It cannot require
+mutable source prose to retain a migration-era sentence after a later source
+closure package supersedes that wording.
+
+When such coupling is found, a separate serial repair slice removes only the
+obsolete prose assertion before the source package begins. The repair must
+preserve immutable train/package/validation evidence, semantic routes,
+non-authority evidence, typed outcomes, and all transitive owner checks. A
+negative self-scan prevents the historical checker from reclaiming the obsolete
+source wording. The source remains unchanged until the repair is accepted.
+
 ## Bounded Write Sets
 
 Lifecycle repair `7.4c3v1r` may change only this re-plan, the final
@@ -168,6 +183,13 @@ source-closure planning checker, findings, the active plan, and the execution
 ledger. It cannot change standards, former sources, source-specific checkers,
 fixtures, engine code, corpus data, Router, dispositions, owner map, generated
 inventories, metadata, configuration, or lockfiles.
+
+Historical repair `7.4c3h41` may change only the row 41 historical checker,
+this re-plan, the final source-closure planning checker, findings, the active
+plan, and the execution ledger. It cannot change standards, former sources,
+source-specific checkers, fixtures, engine code, corpus data, Router,
+dispositions, owner map, generated inventories, metadata, configuration, or
+lockfiles.
 
 The `7.4c3v1` implementation slice may change only the reusable engine, engine
 self-test fixtures and verifier, live aggregate verifier, existing Coding
@@ -209,6 +231,11 @@ explicit user direction on 2026-08-06, the complete suite is skipped for this
 planning-only shared-checker change; the exception is recorded in the active
 plan and execution ledger. Source package `7.4c3.4` returns to its declared
 verification gate unless separately authorized.
+
+Historical repair `7.4c3h41` requires the focused row 41 checker, the final
+source-closure planning checker, historical checker ownership, shell syntax,
+diff integrity, and the complete suite because accepted historical verifier
+behavior changes.
 
 `7.4c3v1` requires engine positive and negative fixtures, unchanged Coding
 source/corpus semantics, exact Coding closure, aggregate discovery, Router

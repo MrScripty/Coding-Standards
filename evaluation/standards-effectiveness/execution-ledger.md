@@ -9535,3 +9535,36 @@ its declared gate unless separately authorized.
 
 **Next slice:** `7.4c3.4`, update the Documentation source and its own focused
 index-closure checker atomically while preserving all semantic evidence.
+
+## Milestone 7.4c3h41 Row 41 Historical-Checker Repair
+
+**Outcome:** Accepted.
+
+The source-checker protocol preflight found a second exact requirement for
+`This file is a migration index` in the completed row 41 execution-train
+checker. Because historical checkers remain serial infrastructure, the
+Documentation source package cannot own that repair.
+
+The row 41 checker no longer requires mutable migration-era source prose. It
+continues to prove immutable row 41 and P33 identity, `STD-0349` owner
+validation and exact index outcome, accepted decomposition evidence, canonical
+Documentation workflow/recipe/Release routes, non-authority semantics,
+transitive Documentation owner checks, and execution-train integrity. A
+negative self-scan rejects renewed ownership of the obsolete sentence.
+
+**No-fallback result:** no dual old/new wording assertion or compatibility
+allowance is added. The obsolete assertion is removed before source closure,
+while all semantic and historical evidence remains mandatory.
+
+**Bounded write set:** row 41 historical checker, source-index re-plan, final
+source-closure planning checker, findings, active plan, and execution ledger.
+Standards, former sources, source-specific checkers, fixtures, engine code,
+corpus, Router, dispositions, owner map, generated inventories, metadata,
+configuration, and lockfiles remain unchanged.
+
+**Verification:** focused row 41 decomposition, final source-closure planning,
+historical checker ownership, shell syntax, diff integrity, and all 272
+complete-suite verifier entrypoints pass.
+
+**Next slice:** `7.4c3.4`, update the Documentation source and its own focused
+index-closure checker atomically while preserving all semantic evidence.
