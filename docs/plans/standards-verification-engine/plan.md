@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: reclassify the remaining checker graph
+**Next slice:** Milestone 2: implement Tooling reference package `M2-P6`
 
 **Acceptance status:** `pending`
 
@@ -345,6 +345,31 @@ schema, source alias, or owner-specific engine branch.
 
 **Acceptance evidence:** 13 self-tests; 27 suites and 130 checks; fresh
 248-entrypoint inventory; removed-path scans; and complete mixed suite passed.
+
+**Approved deviation:** implementation and serial integration records appear as
+two adjacent commits because a delegated worker advanced `main` directly. The
+maintainer approved retaining that history; no behavior or verification gate
+was omitted.
+
+#### Package M2-P6: Tooling Reference Consolidation
+
+**Status:** `Planned`
+
+**Owner:** `reference/recipes/tooling.md`
+
+**Risk:** `consolidation`
+
+**Allowed write set:** registry; `tool-setup-reference.toml` and
+`tooling-ci-workflow-reference.toml`; their two Bash checkers (delete only);
+generated inventory; child plan records; and parent reconciliation.
+
+**Preserved contract:** ten typed setup-reference decisions, canonical
+non-normative setup and complete CI examples, former-source routes and
+prohibitions, and exact move dispositions `STD-0693`, `STD-0694`, `STD-0701`,
+and `STD-0702`.
+
+**No-fallback rule:** use existing text and ordered-decision checks, delete both
+scripts atomically, and add no wrapper, compatibility schema, or engine branch.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 

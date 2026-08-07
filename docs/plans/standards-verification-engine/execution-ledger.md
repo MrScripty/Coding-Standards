@@ -320,3 +320,15 @@
   contract change was introduced.
 - Next slice: reclassify the remaining graph and decide whether Milestone 2 can
   continue or shared-contract Milestone 3 must begin.
+
+## 2026-08-07 - M2-P5 History Exception And M2-P6 Freeze
+
+- The maintainer approved retaining M2-P5 as adjacent implementation and
+  serial-integration commits after a worker advanced shared `main`; all package
+  evidence passed and no tree correction is required.
+- Recorded `VE007`: future delegated writes must not move shared integration
+  refs and require before/after branch verification.
+- Froze `M2-P6` as two dependency-free Tooling reference suites preserving ten
+  decisions, canonical/non-normative text, former-source prohibitions, and four
+  move dispositions. Existing engine primitives suffice.
+- Scope is planning authority only. Next slice: implement `M2-P6` atomically.

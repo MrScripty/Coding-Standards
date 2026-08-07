@@ -233,3 +233,18 @@ checkers:
 Acceptance preserved 53 decisions and 14 dispositions without an engine
 change. The launcher now evaluates 27 suites and 130 checks; inventory and the
 complete mixed suite report 248 Bash entrypoints.
+
+## Sixth Reviewed Package
+
+Package `M2-P6` is frozen as two dependency-free Tooling reference leaves:
+
+| Suite | Replaced checker | Decision fixture | Exact IDs |
+| --- | --- | --- | --- |
+| `tool-setup-reference` | `verify-tool-setup-reference.sh` | `tooling/tool-setup-reference-decisions.tsv` | `STD-0701`, `STD-0702` |
+| `tooling-ci-workflow-reference` | `verify-tooling-ci-workflow-reference.sh` | none | `STD-0693`, `STD-0694` |
+
+Both share the non-normative Tooling reference owner, have zero executable and
+contract inbound references and no helper/verifier dependencies, and fit
+existing text/decision primitives. The gate expects inventory to fall to 246
+and runs self-tests, all suites, launcher, removal/inventory/plan checks, and
+the complete mixed suite.
