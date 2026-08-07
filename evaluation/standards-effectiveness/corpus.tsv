@@ -7,7 +7,7 @@ COMMIT-STANDARDS.md	standard	derived	workflow	refine	git
 CONCURRENCY-STANDARDS.md	standard	yes	topic	refine	git
 CROSS-PLATFORM-STANDARDS.md	standard	yes	topic	refine	git
 DEPENDENCY-STANDARDS.md	standard	yes	topic	split	git
-DOCUMENTATION-STANDARDS.md	standard	yes	workflow	split	git
+DOCUMENTATION-STANDARDS.md	standard	derived	workflow	split	git
 FRONTEND-STANDARDS.md	standard	yes	profile	refine	git
 INTEROP-STANDARDS.md	standard	yes	topic	refine	git
 LANGUAGE-BINDINGS-STANDARDS.md	standard	yes	boundary-profile	refine	git

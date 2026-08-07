@@ -9605,3 +9605,43 @@ planning, historical checker ownership, shell syntax, diff integrity, and all
 
 **Next slice:** `7.4c3.4`, update the Documentation source and its own focused
 index-closure checker atomically while preserving all semantic evidence.
+
+## Milestone 7.4c3.4 Documentation Index Source Closure
+
+**Outcome:** Accepted.
+
+`DOCUMENTATION-STANDARDS.md` is now concise non-normative navigation. It routes
+to the Standards Router, canonical Documentation workflow, non-normative
+Documentation recipe, and canonical Release workflow while owning no rule,
+default, example, changelog decision, or fallback authority. Missing,
+conflicting, or inapplicable navigation returns the Router's typed diagnostic
+instead of using prior source wording.
+
+The source corpus row changes from normative to derived without changing kind,
+target role, preliminary disposition, or baseline source. An isolated
+Documentation fixture directory records the exact title, ordered headings,
+20-line bound, four unique routes, and prohibited migration-era authority
+literals. The source-specific checker removes its obsolete exact prose
+assertion, retains owner, route, disposition, and transitive policy evidence,
+and rejects renewed ownership of that wording.
+
+**No-fallback result:** migration-index and existing-link wording are removed,
+not accepted alongside the new index. The aggregate engine rejects stale
+normative state, route or shape drift, authority wording, identifier-count
+disagreement, and Router selection of the former source.
+
+**Bounded write set:** Documentation legacy index, its corpus row, its
+independent source-closure fixture directory, its source-specific checker,
+active plan, and execution ledger. Shared engine code, canonical Documentation
+and Release workflows, recipe, Router, other former sources, dispositions,
+owner map, generated inventories, metadata, configuration, and lockfiles remain
+unchanged.
+
+**Verification:** Documentation aggregate closure with four routes and 100
+frozen IDs, exact Documentation dispositions, Documentation authority fixtures,
+row 41 decomposition, Router closure, historical checker ownership, final
+source-closure planning evidence, plan structure, shell syntax, diff integrity,
+and all 272 complete-suite verifier entrypoints pass.
+
+**Next slice:** `7.4c3.5`, rewrite and register
+`CONCURRENCY-STANDARDS.md` without changing shared engine code.

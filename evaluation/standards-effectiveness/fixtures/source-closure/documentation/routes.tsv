@@ -1,0 +1,5 @@
+route	target
+router	STANDARDS-ROUTER.md
+documentation_workflow	workflows/documentation.md
+documentation_recipe	reference/recipes/documentation.md
+release_workflow	workflows/release.md

@@ -15,13 +15,21 @@ mapfile -t actual < <(awk -F '\t' 'NR > 1 { print $1 }' "$GAPS")
 [[ "${actual[*]}" == "${expected[*]}" ]]
 [[ "$(awk -F '\t' 'NR > 1 && NF != 3 { n++ } END { print n+0 }' "$GAPS")" -eq 0 ]]
 
-for text in '# Documentation Standards' 'This file is a migration index' \
+for text in '# Documentation Standards' 'non-normative navigation' \
+  "Router's typed" \
   '[Documentation Workflow](workflows/documentation.md)' \
   '[Documentation Recipe](reference/recipes/documentation.md)' \
   '[Release Workflow](workflows/release.md)' \
   'This index has no independent normative authority'; do
   rg -F -q "$text" "$LEGACY"
 done
+
+obsolete_source_assertion='This file is a migration ''index'
+if rg -F -q "$obsolete_source_assertion" "$0"; then
+  printf 'Documentation checker owns obsolete source prose: %s\n' \
+    "$obsolete_source_assertion" >&2
+  exit 1
+fi
 
 "$S/verify-undisposed-source-gaps.sh"
 "$S/verify-documentation-decisions.sh"

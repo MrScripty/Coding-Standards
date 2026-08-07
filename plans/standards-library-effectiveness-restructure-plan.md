@@ -6,14 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3hdoc mixed Documentation changelog checker
-repair is accepted. Exact identifier migration and Router authority closure are
-complete; three of 27 former normative source entrypoints are derived, and
-mixed Release evidence no longer misclassifies navigation headings as policy.
+**Current phase:** Milestone 7.4c3.4 Documentation index source closure is
+accepted. Exact identifier migration and Router authority closure are complete;
+four of 27 former normative source entrypoints are derived, and Documentation
+has no residual source or checker authority.
 
-**Next slice:** Milestone 7.4c3.4 performs the retained-index purity review for
-`DOCUMENTATION-STANDARDS.md`, updates its corpus state, and registers its
-isolated source fixture directory without changing shared engine code.
+**Next slice:** Milestone 7.4c3.5 rewrites `CONCURRENCY-STANDARDS.md` as the
+next manifest-ordered source package without changing shared engine code.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2215,6 +2214,12 @@ all structural/routing fixtures pass.
        prohibitions. Preserve all 16 changelog dispositions, canonical Release
        behavior, required routes, and removed-content evidence while assigning
        final title, heading, and line-shape ownership to the aggregate engine.
+     - `7.4c3.4` (`Accepted`): replace Documentation migration wording with a
+       concise non-normative index, set its corpus state to derived, register
+       isolated Router/workflow/recipe/release route fixtures, and preserve all
+       100 frozen source dispositions without changing canonical Documentation
+       or Release policy. Its focused checker retains semantic evidence and
+       rejects renewed ownership of obsolete source prose.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`
