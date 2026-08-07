@@ -10005,3 +10005,39 @@ complete 274-checker suite.
 
 **Next slice:** preflight Cross-Platform source closure in immutable manifest
 order.
+
+## Milestone 7.4c3hcp Cross-Platform Checker Preflight
+
+**Outcome:** Re-plan required.
+
+Cross-Platform is next in immutable source-manifest order, but four verifiers
+still locate durable evidence through transitional former-source headings.
+`verify-platform-target-policy.sh` reads the opening through `File System
+Conventions`; `verify-native-artifact-loading.sh` delimits `Native Library
+Rules`; `verify-native-artifact-release.sh` starts at `Library Naming`; and
+`verify-platform-evidence-coverage.sh` starts at `CI Matrix`. None has an
+exclusive order-7 write owner in the frozen preparation inventory.
+
+The shared filesystem-containment verifier already checks canonical owners,
+routes, dispositions, and unsafe path patterns across complete sources without
+depending on Cross-Platform headings. It remains read-only.
+
+**Durable evidence:** canonical platform-target, native-loading, Release
+artifact, and Verification evidence behavior; exact dispositions for
+`STD-0280` through `STD-0299`; all decision fixtures and typed outcomes;
+required former-source routes; and negative evidence against fixed platform,
+loader, filename, installation, CI-provider, and scheduling defaults must
+remain.
+
+**No-fallback result:** Cross-Platform and its checkers were not edited. No
+transitional heading, old/new parser, source exception, alternate loader,
+conventional filename, fixed target matrix, or weaker verification was added.
+
+**Re-plan boundary:** choose and freeze checker ownership before any order-7
+implementation. Shared planning and acceptance remain serial; only explicitly
+non-overlapping checker repairs may prepare concurrently.
+
+**Bounded write set:** active plan, findings, and execution ledger only.
+
+**Next slice:** resolve `F085`, then close Cross-Platform in manifest order
+without preserving transitional source shape.

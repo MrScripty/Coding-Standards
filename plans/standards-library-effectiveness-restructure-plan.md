@@ -6,12 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Security source closure `7.4c3.6` is accepted. Six of 27
-former normative source entrypoints are derived, and Security has no residual
-policy, migration, default, example, or fallback authority.
+**Current phase:** Security source closure `7.4c3.6` is accepted. Cross-Platform
+closure is blocked before implementation because four canonical-owner checkers
+still own transitional source sections and have no frozen exclusive repair
+packages. Six of 27 former normative source entrypoints are derived.
 
-**Next slice:** preflight and integrate `7.4c3.7` Cross-Platform in immutable
-manifest order while later frozen preparation remains non-accepted work.
+**Next slice:** re-plan `7.4c3hcp` to assign non-overlapping repair ownership for
+Cross-Platform target, native-loading, Release artifact, and Verification
+evidence checkers before preparing `7.4c3.7`.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2273,6 +2275,14 @@ all structural/routing fixtures pass.
        Concurrency route fixtures, and preserve all 20 frozen source
        dispositions. Transitional headings and validation, filesystem,
        payload, transport, or proof fallback mechanisms are absent.
+     - `7.4c3hcp` (`Blocked`): assign checker-repair ownership before changing
+       `CROSS-PLATFORM-STANDARDS.md`. Platform-target, native-loading, Release
+       artifact, and platform-evidence verifiers extract routes and negative
+       evidence through transitional headings. The re-plan must preserve each
+       canonical owner, all exact dispositions, typed outcomes, canonical
+       routes, and negative defaults while removing source-shape ownership. It
+       must not retain headings as compatibility shims, assign one checker to
+       multiple packages, or weaken checks to permit source closure.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`
@@ -2301,7 +2311,8 @@ not need the full library or introduce downstream-specific root policy.
 
 ## Blockers
 
-- None.
+- `7.4c3hcp`: Cross-Platform source closure requires frozen exclusive ownership
+  for four canonical-owner checker repairs. See `F085` and the execution ledger.
 
 ## Slice Procedure
 
@@ -2346,6 +2357,7 @@ not create competing core, precedence, or taxonomy rules.
 | Shared taxonomy must change outside a slice | Stop and re-plan a serial contract slice. |
 | Nested source cannot express a valid aggregate route | Replace the shared route schema and engine contract; do not add broken links or a source-specific bypass. |
 | One checker owns mutable legacy shape for multiple source packages | Stop and assign one shared infrastructure package or split the checker by durable semantic owner before any source package edits it. |
+| A source closure requires edits to unassigned canonical-owner checkers | Stop and freeze exclusive repair packages with preserved semantic evidence before editing the source or checkers. |
 | Pilot evidence invalidates sequence or targets | Record evidence and revise milestones before continuing. |
 
 Isolated urgent safety corrections may proceed only as separate, verified work
