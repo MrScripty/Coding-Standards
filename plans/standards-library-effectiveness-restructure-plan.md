@@ -6,14 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Security source closure `7.4c3.6` is accepted. Cross-Platform
-closure is blocked before implementation because four canonical-owner checkers
-still own transitional source sections and have no frozen exclusive repair
-packages. Six of 27 former normative source entrypoints are derived.
+**Current phase:** Security source closure `7.4c3.6` is accepted. Checker-engine
+architecture and migration are delegated to the active Generic Standards
+Verification Engine Plan before Cross-Platform source closure. Six of 27 former
+normative source entrypoints are derived.
 
-**Next slice:** re-plan `7.4c3hcp` to assign non-overlapping repair ownership for
+**Next slice:** complete delegated engine Milestone 1, then migrate the
 Cross-Platform target, native-loading, Release artifact, and Verification
-evidence checkers before preparing `7.4c3.7`.
+evidence suites before preparing `7.4c3.7`.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2275,14 +2275,16 @@ all structural/routing fixtures pass.
        Concurrency route fixtures, and preserve all 20 frozen source
        dispositions. Transitional headings and validation, filesystem,
        payload, transport, or proof fallback mechanisms are absent.
-     - `7.4c3hcp` (`Blocked`): assign checker-repair ownership before changing
-       `CROSS-PLATFORM-STANDARDS.md`. Platform-target, native-loading, Release
-       artifact, and platform-evidence verifiers extract routes and negative
-       evidence through transitional headings. The re-plan must preserve each
-       canonical owner, all exact dispositions, typed outcomes, canonical
-       routes, and negative defaults while removing source-shape ownership. It
-       must not retain headings as compatibility shims, assign one checker to
-       multiple packages, or weaken checks to permit source closure.
+     - `7.4c3ve` (`Active`): implement the delegated
+       [Generic Standards Verification Engine Plan](../docs/plans/standards-verification-engine/plan.md).
+       That plan owns checker-engine architecture, declarative suite migration,
+       and removal of replaced Bash checkers. It supersedes the assumption that
+       Cross-Platform must receive four more bespoke checker repairs.
+     - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
+       suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
+       transitional headings. Preserve every canonical owner, exact
+       disposition, typed outcome, route, and negative default. Do not retain a
+       Bash checker, compatibility schema, source exception, or weaker check.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`
@@ -2311,8 +2313,10 @@ not need the full library or introduce downstream-specific root policy.
 
 ## Blockers
 
-- `7.4c3hcp`: Cross-Platform source closure requires frozen exclusive ownership
-  for four canonical-owner checker repairs. See `F085` and the execution ledger.
+- `7.4c3hcp`: Cross-Platform source closure depends on accepted engine
+  primitives and migration of its four canonical-owner suites under delegated
+  plan `docs/plans/standards-verification-engine/plan.md`. See `F085`, `F086`,
+  and the execution ledger.
 
 ## Slice Procedure
 

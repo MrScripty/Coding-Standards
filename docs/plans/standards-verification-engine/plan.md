@@ -1,0 +1,346 @@
+# Plan: Generic Standards Verification Engine
+
+**Plan status:** `Active`
+
+**Current phase:** Milestone 1: Executable Kernel And First Replaced Checker
+
+**Next slice:** Milestone 1: replace the Build owner checker with the executable engine
+
+**Acceptance status:** `pending`
+
+**Execution ledger:** [execution-ledger.md](execution-ledger.md)
+
+**Issues:** [issues.md](issues.md)
+
+## Objective
+
+Replace most bespoke Bash verification scripts with one maintainable,
+declarative verification engine that runs repository-owned suites once through
+a deterministic dependency graph, returns typed diagnostics, and preserves the
+standards migration's exact ownership, disposition, no-fallback, and evidence
+contracts.
+
+## Objective Acceptance
+
+| ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| A1 | One documented command discovers and runs every registered declarative suite once in dependency order. | `integration` | `not-applicable` | `automated` | `pending` | pending |
+| A2 | Strict configuration, path containment, dependency, assertion, and typed-diagnostic self-tests pass. | `focused` | `not-applicable` | `automated` | `pending` | pending |
+| A3 | Decision, text, table, metadata, migration, plan, and source-index contracts needed by the current repository are represented without arbitrary command execution. | `contract` | `not-applicable` | `automated` | `pending` | pending |
+| A4 | Migrated suites delete their replaced Bash checkers in the same accepted slice and preserve positive, negative, ownership, disposition, and no-fallback evidence. | `integration` | `not-applicable` | `automated` | `pending` | pending |
+| A5 | Inventory proves every remaining Bash checker is migrated, explicitly retained as a bounded exceptional adapter, or scheduled with one owner and gate. | `contract` | `not-applicable` | `automated` | `pending` | pending |
+| A6 | The final engine-only suite passes and the former repeated transitive checker graph is absent. | `system` | `not-applicable` | `automated` | `pending` | pending |
+
+## Scope
+
+### In Scope
+
+- A Python 3.11+ standard-library verification package and one stable generic
+  launcher for the migration period.
+- Strict TOML suite/registry contracts and TSV/Markdown assertion inputs.
+- Deterministic dependency scheduling with each suite evaluated at most once.
+- Typed text and JSON diagnostics with stable codes and source locations.
+- Reusable text, decision, table, metadata, disposition, plan, route, and
+  source-index checks required by measured checker inventory.
+- Incremental removal of replaced Bash checkers and obsolete helper scripts.
+- A generated migration inventory derived from registered and remaining
+  checkers.
+
+### Out Of Scope
+
+- Normative standards policy changes unrelated to verification mechanics.
+- A general-purpose expression language, arbitrary shell execution, `eval`,
+  embedded Python from configuration, or compatibility parsing for old suite
+  schemas.
+- Copying or depending on another repository's orchestration design.
+- Replacing real downstream product verification with documentation checks.
+- Installing Python, third-party packages, or a second build toolchain.
+
+## Constraints And Assumptions
+
+### Constraints
+
+- The engine owns mechanics only; standards and fixture data own policy.
+- Unknown keys, assertion kinds, operators, diagnostic outcomes, paths, suite
+  IDs, or dependencies are typed `invalid`, never ignored.
+- Missing required files or the declared Python capability are typed
+  `unavailable`; unsupported requested engine capabilities are typed
+  `unsupported`.
+- Repository paths are relative, normalized, and contained beneath the selected
+  repository root. Symlink resolution cannot escape that root.
+- Suite dependencies form an acyclic graph and execute once in stable order.
+- Shared registry, engine contracts, parent plan, and migration inventory remain
+  serial integration-owner files.
+- A migrated checker and its old helper path are removed, not wrapped or kept as
+  fallback.
+
+### Assumptions
+
+- Python 3.11 or newer is a supportable verification dependency because it
+  provides strict TOML parsing in the standard library; Milestone 1 validates
+  and documents this requirement before it is relied on broadly.
+- Most current checks decompose into reusable assertions plus ordered decision
+  rules; the inventory milestone measures exceptions before plugin design.
+- One stable Bash launcher is acceptable only as a process entrypoint while the
+  repository's complete-suite convention still discovers `verify-*.sh`; it
+  contains no policy or fallback behavior and is removed when that convention
+  is replaced.
+
+## Binding Decisions
+
+| Decision | Owner | Evidence | Supersedes |
+| --- | --- | --- | --- |
+| Implement the engine as a Python 3.11+ standard-library package with no runtime package dependencies. | This plan | [Architecture report](reports/architecture.md#runtime-and-packaging) | Repeated Bash/AWK/rg implementations |
+| Use strict TOML for suite composition and TSV/Markdown for repository evidence. | This plan | [Architecture report](reports/architecture.md#contract-model) | Per-script argument and parsing conventions |
+| Keep policy in standards and fixtures; the engine exposes bounded assertion primitives and ordered decision predicates. | This plan | [Architecture report](reports/architecture.md#ownership-boundary) | Policy embedded in shell control flow |
+| Prohibit arbitrary commands and compatibility schemas in declarative suites. | This plan | [Architecture report](reports/architecture.md#security-and-no-fallback) | Shell-command check actions and old/new parser branches |
+| Migrate by semantic family, deleting each replaced checker in the accepting slice. | This plan | [Architecture report](reports/architecture.md#migration-sequence) | Indefinite dual execution |
+| Keep the parent standards restructure plan authoritative for normative migration and this child plan authoritative for checker-engine architecture and migration. | Integration owner | Parent-plan delegation | `7.4c3hcp` bespoke Cross-Platform repair assumption |
+
+## Simplicity And Ownership Review
+
+- Independent concepts: suite registry, scheduling, assertion evaluation,
+  diagnostics, repository evidence, and migration bookkeeping.
+- Intentional coupling: assertion configurations name evidence paths and stable
+  diagnostic expectations; suite dependencies name only required prerequisite
+  suites.
+- Accidental coupling risk: document headings, shell exit behavior, child
+  script invocation, fixture layout, or mutable migration narration becoming
+  hidden assertion authority.
+- Policy/state/lifecycle owners: standards and fixtures own policy; suite TOML
+  owns selected assertions; the engine owns execution and diagnostics; this
+  plan owns migration lifecycle.
+- Future changes that should remain independent: adding an assertion kind,
+  adding a policy suite, changing human-readable output, and changing a
+  standard's semantics.
+
+## Milestones
+
+### Milestone 0: Contract And Migration Authority
+
+**Goal:** Establish one approved engine boundary, dependency decision, parent
+delegation, migration sequence, and acceptance model before source changes.
+
+**Allowed write set:**
+
+- `docs/plans/standards-verification-engine/plan.md`
+- `docs/plans/standards-verification-engine/execution-ledger.md`
+- `docs/plans/standards-verification-engine/issues.md`
+- `docs/plans/standards-verification-engine/reports/architecture.md`
+- `plans/standards-library-effectiveness-restructure-plan.md`
+- `evaluation/standards-effectiveness/findings.md`
+
+**Tasks:**
+
+- [x] Record measured checker topology and the selected runtime.
+- [x] Freeze engine ownership, no-fallback rules, migration waves, and gates.
+- [x] Delegate checker modernization from the parent migration plan.
+
+**Acceptance gate:** Current plan structure passes, parent blocker names this
+plan, and staged review contains only planning authority.
+
+**Status:** `Accepted`
+
+### Milestone 1: Executable Kernel And First Replaced Checker
+
+**Goal:** Deliver a strict executable engine that replaces one complete,
+representative leaf checker without a wrapper or policy loss.
+
+**Allowed write set:**
+
+- `tools/standards_verifier/**`
+- `evaluation/standards-effectiveness/suite-registry.toml`
+- `evaluation/standards-effectiveness/suites/build-owner-contract.toml`
+- `evaluation/standards-effectiveness/verify-declarative-suites.sh`
+- `evaluation/standards-effectiveness/verify-build-owner-contract.sh` (delete)
+- this plan, ledger, and issues
+
+**Tasks:**
+
+- [ ] Implement strict registry/config loading, repository path containment,
+  acyclic once-only scheduling, typed diagnostics, text assertions, and ordered
+  decision-table rules.
+- [ ] Add malformed-contract, path-escape, cycle, decision, diagnostic, and
+  scheduling self-tests.
+- [ ] Register and run the Build owner contract suite.
+- [ ] Delete the replaced Build Bash checker.
+
+**Acceptance gate:** Engine self-tests and negative fixtures pass; direct and
+launcher execution pass; removed-checker scan passes; complete mixed suite
+passes once.
+
+**Status:** `Active`
+
+### Milestone 2: Inventory And Structural Assertion Families
+
+**Goal:** Derive an exact migration inventory and replace low-risk leaf scripts
+that use only text, route, heading, table-shape, count, and exact-row checks.
+
+**Allowed write set:** engine assertion modules/tests, suite contracts,
+generated checker inventory source/generator/output, replaced leaf scripts,
+and plan records selected per slice.
+
+**Tasks:**
+
+- [ ] Classify every checker by assertion family, inbound dependency, owner,
+  risk, and migration disposition.
+- [ ] Add strict table, Markdown heading/route, exact-row/set/order, and count
+  assertions from observed requirements.
+- [ ] Migrate coherent leaf packages and remove their scripts.
+
+**Acceptance gate:** Inventory coverage is exact; each package's focused suites
+and complete mixed suite pass; no migrated behavior has two authorities.
+
+**Status:** `Planned`
+
+### Milestone 3: Shared Metadata, Plan, And Migration Contracts
+
+**Goal:** Replace shared Bash parsers for metadata graphs, plan lifecycle,
+dispositions, ownership, and source-index closure with typed engine checks.
+
+**Allowed write set:** affected engine modules/tests, declarative suites and
+fixtures, replaced shared helpers/checkers, migration inventory, and plan
+records selected per slice.
+
+**Tasks:**
+
+- [ ] Implement metadata uniqueness/dependency/cycle and canonical-owner checks.
+- [ ] Implement plan lifecycle and acceptance-claim checks.
+- [ ] Implement exact disposition/owner-map and source-index closure checks.
+- [ ] Delete superseded generic Bash engines and their wrappers atomically.
+
+**Acceptance gate:** Existing positive and negative fixture families pass via
+the engine; old helpers and compatibility paths are absent; complete mixed
+suite passes at every shared-contract slice.
+
+**Status:** `Planned`
+
+### Milestone 4: Semantic Decision Migration
+
+**Goal:** Move repeated policy decision derivation from shell branches into
+strict ordered declarative predicates without embedding policy in engine code.
+
+**Allowed write set:** decision assertion modules/tests, decision suite
+contracts, affected existing fixtures, replaced semantic scripts, inventory,
+and plan records selected per package.
+
+**Tasks:**
+
+- [ ] Support bounded `all`, `any`, `not`, equality, membership, and explicit
+  default outcomes with strict field/domain validation.
+- [ ] Migrate same-owner decision packages in risk order.
+- [ ] Record computations that cannot be expressed without unsafe or opaque
+  configuration as exceptional candidates rather than expanding the DSL by
+  default.
+
+**Acceptance gate:** Positive, negative, typed-outcome, and no-fallback cases
+match existing accepted behavior; package scripts are removed; complete mixed
+suite passes at package boundaries.
+
+**Status:** `Planned`
+
+### Milestone 5: Dependency Graph And Cross-Platform Unblock
+
+**Goal:** Replace repeated transitive shell invocation with suite dependencies
+and resolve `F085` through durable canonical evidence rather than former-source
+headings.
+
+**Allowed write set:** registry/dependency contracts, affected Cross-Platform
+suites, the four obsolete Cross-Platform scripts, source-closure fixtures and
+source only after checker migration, parent migration records, and this plan.
+
+**Tasks:**
+
+- [ ] Convert transitive verifier calls into declared suite dependencies.
+- [ ] Migrate platform-target, native-loading, release-artifact, and
+  platform-evidence suites with source-wide route/prohibition assertions.
+- [ ] Delete the four replaced scripts and close the Cross-Platform source in
+  the parent plan's manifest order.
+
+**Acceptance gate:** Each dependency executes once; all Cross-Platform
+decisions/dispositions/routes/no-fallback cases pass; `F085` resolves; source
+closure and complete mixed suite pass.
+
+**Status:** `Planned`
+
+### Milestone 6: Exceptional Checks And Bash Retirement
+
+**Goal:** Resolve the measured remainder without turning the engine into a
+general-purpose programming language.
+
+**Allowed write set:** bounded typed Python check modules/tests, suite
+contracts, replaced scripts, inventory, launcher/complete-suite entrypoint,
+documentation, and plan records.
+
+**Tasks:**
+
+- [ ] Review each exception for a missing reusable primitive, bad test design,
+  historical-only assertion, or genuinely custom algorithm.
+- [ ] Add reusable primitives only when at least two coherent owners require
+  them or one safety-critical invariant cannot otherwise be expressed clearly.
+- [ ] Keep any custom check typed, side-effect-free, registered, directly
+  tested, and owned; remove all other Bash verifiers and helpers.
+- [ ] Replace the migration launcher with the final engine command.
+
+**Acceptance gate:** Exact inventory has no unowned remainder; engine-only full
+suite passes; no obsolete Bash verifier, transitive execution graph, arbitrary
+command action, or duplicate authority remains.
+
+**Status:** `Planned`
+
+### Milestone 7: Documentation And Objective Acceptance
+
+**Goal:** Make suite authoring, focused execution, diagnostics, and maintenance
+clear, then prove the objective against the final repository.
+
+**Allowed write set:** engine documentation/examples, final inventory/report,
+this plan/ledger/issues, and parent migration references.
+
+**Tasks:**
+
+- [ ] Document dependency satisfaction, suite schema, assertion catalog,
+  diagnostics, focused execution, and extension criteria.
+- [ ] Compare final script count, process graph, runtime, and maintenance
+  surface with the baseline.
+- [ ] Run every objective acceptance claim and record residual limitations.
+
+**Acceptance gate:** A1-A6 are satisfied with linked evidence and both plans
+identify one current verification authority.
+
+**Status:** `Planned`
+
+## Blockers
+
+- `none`
+
+## Re-Plan Triggers
+
+- Python 3.11+ cannot be declared and satisfied in supported verification
+  environments without adding an unacceptable provisioning or release burden.
+- A required invariant needs arbitrary command execution, dynamic code, or a
+  policy-specific engine branch rather than a bounded reusable check.
+- Migration evidence shows TOML/TSV cannot represent suites legibly enough for
+  maintainers to review policy and outcomes.
+- A migrated suite loses accepted negative, disposition, ownership, typed
+  outcome, route, or source-closure evidence.
+- Engine or registry work overlaps an unrelated dirty shared-authority file.
+- The complete mixed suite cannot run without treating a removed checker as a
+  compatibility fallback.
+
+## Concurrent Work
+
+| Owner | Primary write set | Adjacent write set | Forbidden/shared | Output/report | Integration order |
+| --- | --- | --- | --- | --- | --- |
+| Assertion-family analyst | Read-only checker/fixture families | none | Engine, registry, plans, inventory | Proposed family map | Before inventory integration |
+| Suite package author | One frozen suite/config/fixture package | Its replaced checker | Engine, registry, plans, shared helpers | Patch plus behavior/evidence report | After required primitives |
+| Engine integration owner | Engine, registry, inventory, plans | Shared helpers and launcher | none | Accepted serial transition | Dependency order |
+
+Parallel package work requires frozen configuration schema, non-overlapping
+suite/checker/fixture paths, no shared dependency change, and fresh revision
+admission. Shared contracts and registry integration remain serial.
+
+## Final Acceptance
+
+- Acceptance status: `pending`
+- Deferred follow-ups: `none`
+- Final status: `Active`
