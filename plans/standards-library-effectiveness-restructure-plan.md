@@ -12,9 +12,10 @@ four of 27 former normative source entrypoints are derived, and eight pending
 packages now have exclusive preparation writes without weakening serial shared
 authority or manifest-ordered acceptance.
 
-**Next slice:** prepare the frozen `p1` packages in isolated worktrees while
-integrating `7.4c3.5` Concurrency first in manifest order. Later prepared
-packages cannot be accepted until every preceding source package closes.
+**Next slice:** re-plan the aggregate route fixture contract for nested former
+sources before preparing any `languages/rust/` package. Root-level `p1`
+packages remain authorized, but shared engine authority cannot change inside a
+source package.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2261,7 +2262,13 @@ not need the full library or introduce downstream-specific root policy.
 
 ## Blockers
 
-- None.
+- `F083`: the aggregate engine accepts only repository-relative route targets,
+  rejects `../`, and requires that exact target string in source Markdown.
+  Nested former sources require relative `../../` links for valid navigation,
+  so the current schema cannot represent both a safe repository target and a
+  correct nested-source hyperlink. Resolve the shared route contract without a
+  nested-source bypass or broken-link convention before preparing Rust source
+  packages.
 
 ## Slice Procedure
 
@@ -2304,6 +2311,7 @@ not create competing core, precedence, or taxonomy rules.
 | Scores fall despite lower context | Preserve quality and revise structure/targets. |
 | Root guidance becomes stack/product-specific | Move specialization to a profile or project policy. |
 | Shared taxonomy must change outside a slice | Stop and re-plan a serial contract slice. |
+| Nested source cannot express a valid aggregate route | Replace the shared route schema and engine contract; do not add broken links or a source-specific bypass. |
 | Pilot evidence invalidates sequence or targets | Record evidence and revise milestones before continuing. |
 
 Isolated urgent safety corrections may proceed only as separate, verified work

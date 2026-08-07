@@ -9684,3 +9684,28 @@ and the complete verifier suite.
 **Next slice:** concurrently prepare frozen `p1` packages, then integrate
 `7.4c3.5` Concurrency first without accepting any later manifest source ahead
 of unresolved orders 6 and 7.
+
+## Milestone 7.4c3p Nested-Source Route Preflight
+
+**Outcome:** Re-plan required.
+
+Preflight for the frozen Rust packages found that the aggregate route contract
+cannot describe a valid nested-source link. The engine rejects absolute and
+`../` fixture targets, resolves the target from the repository root, and then
+requires that exact value between Markdown link parentheses. A correct link
+from `languages/rust/` to a root canonical owner uses `../../`, which the same
+contract rejects.
+
+**No-fallback result:** no Rust source was changed to a repository-relative link
+that would be broken from its document location. No nested-source exception,
+alternate aggregate path, or unverified route was added. The source-package
+worktrees remain preparation-only and clean.
+
+**Affected scope:** shared route fixture schema, aggregate engine and its
+positive/negative fixtures, all registered source-closure route fixtures, and
+the source-index re-plan. This exceeds every source package's exclusive write
+set and therefore activates the declared shared-infrastructure re-plan trigger.
+
+**Next slice:** choose and freeze one strict route representation that validates
+both the repository target and the source-relative Markdown hyperlink, replaces
+the old schema without compatibility fallback, and runs the complete suite.
