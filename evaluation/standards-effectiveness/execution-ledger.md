@@ -9709,3 +9709,37 @@ set and therefore activates the declared shared-infrastructure re-plan trigger.
 **Next slice:** choose and freeze one strict route representation that validates
 both the repository target and the source-relative Markdown hyperlink, replaces
 the old schema without compatibility fallback, and runs the complete suite.
+
+## Milestone 7.4c3rh Nested Route Schema Replacement
+
+**Outcome:** Accepted.
+
+The selected route contract separates canonical identity from document
+projection. Every route fixture now provides a unique repository-relative
+`target` and source-relative `href`. The engine verifies the target exists,
+normalizes the href against the former source directory, rejects repository
+escape, requires exact path and anchor agreement, and confirms the exact href
+is present in Markdown.
+
+The engine's positive fixture is now a nested `languages/rust/` source linked
+to a root owner through `../../`. Focused negatives reject the removed
+two-column schema, duplicate targets and hrefs, unresolved targets, mismatched
+or escaping hrefs, and hrefs absent from source text. The four live registered
+fixture directories use the replacement schema.
+
+**No-fallback result:** the old route schema is not parsed, target and href are
+not inferred from one another, root-relative broken links are not accepted, and
+nested sources receive no exception from path, anchor, or source-text checks.
+
+**Bounded write set:** reusable closure engine, engine verifier and positive
+fixture, four registered route fixtures, source-index re-plan, final closure
+planning checker, F083 status, active plan, and execution ledger. Standards,
+former sources, corpus, Router, manifests, dispositions, owner map, generated
+inventories, metadata, configuration, and lockfiles remain unchanged.
+
+**Verification:** nested positive and 15 negative engine cases, all registered
+source closures, final source-closure planning evidence, plan structure, shell
+syntax, diff integrity, and the complete verifier suite.
+
+**Next slice:** resume the frozen concurrent preparation wave and integrate
+`7.4c3.5` Concurrency first in manifest order.

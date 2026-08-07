@@ -1,2 +1,2 @@
 order	source	canonical_owner	current_shape	treatment	retention_evidence	risk	concurrency	gate
-1	LEGACY.md	OWNER.md	concise	retain-index	frozen-stable-entrypoint	mechanical	isolated-draft	full-suite
+1	languages/rust/LEGACY.md	OWNER.md	concise	retain-index	frozen-stable-entrypoint	mechanical	isolated-draft	full-suite

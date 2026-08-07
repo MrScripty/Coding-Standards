@@ -1,2 +1,2 @@
-route	target
-owner	OWNER.md
+route	target	href
+owner	OWNER.md	../../OWNER.md

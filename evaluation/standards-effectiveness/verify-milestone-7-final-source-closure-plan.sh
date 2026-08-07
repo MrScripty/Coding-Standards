@@ -112,6 +112,7 @@ done
 rg -F -q '`7.4c1` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4c3v` (`Accepted`)' "$PLAN"
 rg -F -q '`7.4c3v1` (' "$PLAN"
+rg -F -q '`7.4c3rh` (`Accepted`)' "$PLAN"
 
 required_verifier_replan=(
   '## Re-plan Finding'
@@ -137,6 +138,11 @@ required_verifier_replan=(
   'A prepared package is not accepted evidence.'
   'one complete-suite run may accept'
   'Architecture remains excluded from preparation wave `p1`'
+  '## Nested Route Schema Replacement'
+  'three-column schema `route`, `target`, and `href`'
+  'normalizes `href` against the'
+  'The old two-column schema is invalid after this repair.'
+  'compatibility parser, inferred href, root-relative-link convention, or nested'
   '## Historical Checker Repair'
   'routes established when that row was accepted. It cannot require'
   'mutable source prose to retain a migration-era sentence'

@@ -24,6 +24,35 @@ fail() {
   exit 1
 }
 
+normalize_repo_path() {
+  local candidate="$1"
+  local original="$2"
+  local segment
+  local -a segments=()
+  local -a normalized=()
+
+  IFS='/' read -r -a segments <<< "$candidate"
+  for segment in "${segments[@]}"; do
+    case "$segment" in
+      ''|.)
+        ;;
+      ..)
+        [[ "${#normalized[@]}" -gt 0 ]] || \
+          fail "route href escapes the repository: $original"
+        unset 'normalized[${#normalized[@]}-1]'
+        ;;
+      *)
+        normalized+=("$segment")
+        ;;
+    esac
+  done
+
+  [[ "${#normalized[@]}" -gt 0 ]] || \
+    fail "route href has no repository target: $original"
+  local IFS='/'
+  printf '%s\n' "${normalized[*]}"
+}
+
 for file in "$CONTRACT" "$HEADINGS" "$ROUTES" "$PROHIBITED" \
   "$MANIFEST" "$CORPUS" "$OWNER_MAP" "$DISPOSITIONS" "$ROUTER"; do
   [[ -f "$file" ]] || fail "required input is unavailable: $file"
@@ -195,31 +224,58 @@ line_count="$(wc -l < "$SOURCE_FILE")"
 [[ "$line_count" -le "$MAX_LINES" ]] || \
   fail "line bound exceeded for $SOURCE: maximum $MAX_LINES, observed $line_count"
 
-declare -A seen_route_names seen_route_targets
+declare -A seen_route_names seen_route_targets seen_route_hrefs
 route_count=0
 route_line=0
-while IFS=$'\t' read -r route target extra; do
+while IFS=$'\t' read -r route target href extra; do
   route_line=$((route_line + 1))
   if [[ "$route_line" -eq 1 ]]; then
-    [[ "$route" == route ]] || fail 'routes header must be: route<TAB>target'
-    [[ "$target" == target && -z "${extra:-}" ]] || \
-      fail 'routes header must be: route<TAB>target'
+    [[ "$route" == route ]] || \
+      fail 'routes header must be: route<TAB>target<TAB>href'
+    [[ "$target" == target && "$href" == href && -z "${extra:-}" ]] || \
+      fail 'routes header must be: route<TAB>target<TAB>href'
     continue
   fi
-  [[ -n "$route" && -n "$target" && -z "${extra:-}" ]] || \
-    fail 'route rows require exactly route and target'
+  [[ -n "$route" && -n "$target" && -n "$href" && -z "${extra:-}" ]] || \
+    fail 'route rows require exactly route, target, and href'
   [[ -z "${seen_route_names[$route]:-}" ]] || fail "duplicate route: $route"
   [[ -z "${seen_route_targets[$target]:-}" ]] || \
     fail "duplicate route target: $target"
+  [[ -z "${seen_route_hrefs[$href]:-}" ]] || \
+    fail "duplicate route href: $href"
+
   target_path="${target%%#*}"
+  target_anchor=''
+  if [[ "$target" == *'#'* ]]; then
+    target_anchor="${target#*#}"
+    [[ -n "$target_anchor" && "$target_anchor" != *'#'* ]] || \
+      fail "route target has an invalid anchor: $target"
+  fi
   [[ -n "$target_path" && "$target_path" != /* && \
     "$target_path" != *'../'* && "$target_path" != '../'* ]] || \
     fail "route target escapes the repository: $target"
   [[ -f "$REPO_ROOT/$target_path" ]] || fail "route target is unresolved: $target"
-  rg -F -q "($target)" "$SOURCE_FILE" || \
-    fail "required route is absent from $SOURCE: $target"
+
+  href_path="${href%%#*}"
+  href_anchor=''
+  if [[ "$href" == *'#'* ]]; then
+    href_anchor="${href#*#}"
+    [[ -n "$href_anchor" && "$href_anchor" != *'#'* ]] || \
+      fail "route href has an invalid anchor: $href"
+  fi
+  [[ -n "$href_path" && "$href_path" != /* ]] || \
+    fail "route href must be source-relative: $href"
+  source_dir="$(dirname -- "$SOURCE")"
+  resolved_href_path="$(normalize_repo_path "$source_dir/$href_path" "$href")"
+  [[ "$resolved_href_path" == "$target_path" && \
+    "$href_anchor" == "$target_anchor" ]] || \
+    fail "route href does not resolve to target: $href -> $target"
+  rg -F -q "($href)" "$SOURCE_FILE" || \
+    fail "required route href is absent from $SOURCE: $href"
+
   seen_route_names["$route"]=1
   seen_route_targets["$target"]=1
+  seen_route_hrefs["$href"]=1
   route_count=$((route_count + 1))
 done < "$ROUTES"
 [[ "$route_count" -gt 0 ]] || fail 'routes table has no rows'

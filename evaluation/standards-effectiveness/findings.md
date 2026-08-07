@@ -74,7 +74,7 @@ changes and focused fixture evidence.
 | F080 | Resolved in Milestone 7.4c3h41 | The completed row 41 checker also required obsolete Documentation migration-index prose. A separate serial repair removes only that mutable assertion while preserving immutable row 41, P33, STD-0349, route, disposition, non-authority, and transitive owner evidence. |
 | F081 | Resolved in Milestone 7.4c3hdoc | The mixed Documentation changelog checker treated every level-two heading as policy. A serial repair preserves exact changelog and Release semantics, prohibits actual legacy policy sections, and leaves final index shape to the aggregate closure engine. |
 | F082 | Resolved in Milestone 7.4c3p | Source closure no longer serializes disjoint checker preparation. A frozen inventory gives eight packages exclusive source, fixture, and checker writes; shared authority and manifest-ordered acceptance remain serial, and one complete-suite run closes each contiguous integrated group. |
-| F083 | Active re-plan trigger after Milestone 7.4c3p | The aggregate route schema rejects `../` targets but also searches nested source Markdown for the exact repository-relative target. Valid links from `languages/rust/` require `../../`, so no valid fixture value satisfies both checks. |
+| F083 | Resolved in Milestone 7.4c3rh | Route fixtures now separate canonical repository targets from source-relative Markdown hrefs. The engine resolves and compares path plus anchor, rejects repository escape and mismatch, and accepts no old-schema or nested-source fallback. |
 
 ## Systemic Findings
 

@@ -1,2 +1,2 @@
 path	kind	normative	target_role	preliminary_disposition	baseline_source
-LEGACY.md	standard	derived	topic	refine	git
+languages/rust/LEGACY.md	standard	derived	topic	refine	git

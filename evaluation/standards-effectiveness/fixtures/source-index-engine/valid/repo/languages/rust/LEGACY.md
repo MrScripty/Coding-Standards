@@ -9,4 +9,4 @@ file.
 
 ## Routes
 
-- Current owner: [Owner](OWNER.md)
+- Current owner: [Owner](../../OWNER.md)

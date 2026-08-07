@@ -54,7 +54,8 @@ A per-source fixture does not repeat those decisions. It supplies only:
 
 - source path, maximum concise line count, and expected title;
 - the complete ordered heading set;
-- unique required navigation targets; and
+- unique route names, canonical repository targets, and source-relative
+  Markdown hrefs; and
 - exact prohibited legacy-authority literals specific to that source.
 
 Missing fields, duplicate routes, duplicate headings, unresolved targets,
@@ -72,8 +73,10 @@ For every registered source, the engine must prove:
 3. the corpus row is `derived` and retains its frozen kind, target role,
    preliminary disposition, and baseline source;
 4. the current title, full ordered headings, and line count match the fixture;
-5. every required route is unique, exists after anchor removal, and appears as
-   a Markdown target in the source;
+5. every required route has a unique canonical target and unique href, the
+   target exists after anchor removal, the href resolves from the source
+   directory to that exact target and anchor without escaping the repository,
+   and the exact href appears as a Markdown target in the source;
 6. every prohibited literal is absent;
 7. generic legacy-authority and fallback phrases are absent;
 8. the generated owner map and exact disposition table contain the same
@@ -92,6 +95,9 @@ Focused engine fixtures must prove rejection of at least:
 - malformed contract or table columns;
 - a duplicate heading or route;
 - an unresolved route target;
+- the removed two-column route schema;
+- a source-relative href that escapes the repository, resolves to a different
+  canonical target or anchor, or is absent from the source;
 - a source absent from the closure manifest;
 - a corpus row that remains normative;
 - legacy authority or fallback wording;
@@ -100,6 +106,22 @@ Focused engine fixtures must prove rejection of at least:
 
 Tests must invoke the same engine used by the live aggregate verifier. A test-
 only parser or reduced policy copy is not acceptable.
+
+## Nested Route Schema Replacement
+
+Repair `7.4c3rh` replaces every registered `routes.tsv` row with the strict
+three-column schema `route`, `target`, and `href`. `target` is the canonical
+repository-relative identity used for existence and uniqueness checks. `href`
+is the source-relative Markdown projection and may contain the `../` segments
+required by nested stable entrypoints. The engine normalizes `href` against the
+former source's directory, rejects repository escape, and requires its path and
+anchor to equal `target` exactly before checking the source text.
+
+The old two-column schema is invalid after this repair. The engine has no
+compatibility parser, inferred href, root-relative-link convention, or nested
+source bypass. All registered route fixtures change atomically, and the engine
+positive fixture uses a nested `languages/rust/` source so the accepted
+contract is directly exercised.
 
 ## Ordered Implementation
 
@@ -270,6 +292,13 @@ checkers, source fixtures, engine code, corpus data, Router, manifests,
 dispositions, owner map, generated inventories, metadata, configuration, or
 lockfiles.
 
+Nested route repair `7.4c3rh` may change only the reusable closure engine, its
+self-test verifier and fixtures, all currently registered source-closure route
+fixtures, this re-plan, the final source-closure planning checker, F083 status,
+the active plan, and the execution ledger. It cannot change standards, former
+sources, corpus data, Router, manifests, dispositions, owner map, generated
+inventories, metadata, configuration, or lockfiles.
+
 Preparation workers are limited to the former source, isolated fixture
 directory, and checker paths assigned to their inventory row. Their returned
 patch excludes corpus, plan, findings, ledger, manifest, Router, aggregate,
@@ -332,6 +361,12 @@ Concurrent preparation protocol `7.4c3p` requires the preparation inventory
 verifier, final source-closure planning evidence, plan structure, shell syntax,
 diff integrity, and the complete suite because shared migration procedure and
 verification authority change.
+
+Nested route repair `7.4c3rh` requires nested positive engine evidence,
+negative old-schema, mismatch, escape, and absent-href evidence, the live
+aggregate result for every registered source, final source-closure planning
+evidence, plan structure, shell syntax, diff integrity, and the complete suite
+because shared engine and fixture contracts change.
 
 `7.4c3v1` requires engine positive and negative fixtures, unchanged Coding
 source/corpus semantics, exact Coding closure, aggregate discovery, Router

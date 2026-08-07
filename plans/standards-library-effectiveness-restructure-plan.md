@@ -6,16 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3p concurrent source-package preparation is
+**Current phase:** Milestone 7.4c3rh nested route schema replacement is
 accepted. Exact identifier migration and Router authority closure are complete;
-four of 27 former normative source entrypoints are derived, and eight pending
-packages now have exclusive preparation writes without weakening serial shared
-authority or manifest-ordered acceptance.
+four of 27 former normative source entrypoints are derived, and nested source
+hrefs now resolve to canonical repository targets without bypasses.
 
-**Next slice:** re-plan the aggregate route fixture contract for nested former
-sources before preparing any `languages/rust/` package. Root-level `p1`
-packages remain authorized, but shared engine authority cannot change inside a
-source package.
+**Next slice:** resume concurrent preparation of the frozen `p1` packages while
+integrating `7.4c3.5` Concurrency first in manifest order. Later packages remain
+preparation-only until every preceding source closes.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2234,6 +2232,14 @@ all structural/routing fixtures pass.
        use one complete-suite run to accept a contiguous integrated group after
        every package-focused gate passes. Architecture remains separately
        blocked from `p1` until its overlapping mixed-checker package is frozen.
+     - `7.4c3rh` (`Accepted`): replace the aggregate route fixture schema with
+       explicit `route`, canonical repository `target`, and source-relative
+       `href` fields. Resolve each href against its source directory, require
+       exact target-path and anchor agreement, reject repository escape and
+       absent hrefs, and remove the old two-column schema without a compatibility
+       parser or nested-source bypass. Migrate all registered fixtures
+       atomically and prove the contract with a nested Rust-style positive case
+       plus focused negative cases.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`
@@ -2262,13 +2268,7 @@ not need the full library or introduce downstream-specific root policy.
 
 ## Blockers
 
-- `F083`: the aggregate engine accepts only repository-relative route targets,
-  rejects `../`, and requires that exact target string in source Markdown.
-  Nested former sources require relative `../../` links for valid navigation,
-  so the current schema cannot represent both a safe repository target and a
-  correct nested-source hyperlink. Resolve the shared route contract without a
-  nested-source bypass or broken-link convention before preparing Rust source
-  packages.
+- None.
 
 ## Slice Procedure
 
