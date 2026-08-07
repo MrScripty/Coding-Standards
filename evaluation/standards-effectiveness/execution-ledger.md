@@ -9906,3 +9906,31 @@ configuration, and lockfiles remain unchanged.
 scan, plan structure, repair re-plan contract, and diff integrity.
 
 **Next slice:** integrate prepared proof-lifetime repair `7.4c3hs2b`.
+
+## Milestone 7.4c3hs2b Validation-Proof Checker Repair
+
+**Outcome:** Accepted.
+
+The validation-proof verifier no longer compares Security source regions to
+`HEAD` or locates the Contracts route through transitional headings. It checks
+the canonical validation-proof-lifetime route and the same prohibited legacy
+guidance across the complete former source.
+
+The canonical Contracts proof-lifetime contract, all 16 decision cases, two
+exact dispositions, metadata, findings, and transitive runtime and trust checks
+remain unchanged.
+
+**No-fallback result:** no old/new source branch, heading alias, snapshot,
+source exception, historical validation flag, stale proof, implicit trust, or
+redundant-decoding fallback is accepted.
+
+**Bounded write set:** validation-proof checker, active plan state, and
+execution ledger. All standards, former sources, fixtures, shared verifiers,
+dispositions, corpus, manifests, Router, generated artifacts, findings,
+configuration, and lockfiles remain unchanged.
+
+**Verification:** validation-proof focused checker, shell syntax, removed-shape
+scan, plan structure, repair re-plan contract, and diff integrity.
+
+**Next slice:** integrate prepared network repair `7.4c3hs2c`, then run the
+complete checker-repair group gate.

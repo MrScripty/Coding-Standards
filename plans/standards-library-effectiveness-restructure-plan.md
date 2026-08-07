@@ -6,14 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Input-validation checker repair `7.4c3hs2a` is accepted.
-Proof-lifetime and network repairs are prepared with disjoint write sets and
-await serial integration. Five of 27 former normative source entrypoints are
-derived.
+**Current phase:** Input-validation and proof-lifetime checker repairs
+`7.4c3hs2a` and `7.4c3hs2b` are accepted. The prepared network repair awaits
+serial integration and the complete checker-repair group gate. Five of 27
+former normative source entrypoints are derived.
 
-**Next slice:** integrate prepared proof-lifetime repair `7.4c3hs2b`, then
-network repair `7.4c3hs2c`, and run the checker-repair group gate before
-preparing `7.4c3.6`.
+**Next slice:** integrate prepared network repair `7.4c3hs2c`, then run the
+checker-repair group gate before preparing `7.4c3.6`.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2263,7 +2262,7 @@ all structural/routing fixtures pass.
        - `7.4c3hs2a` (`Accepted`): remove Security input-validation `HEAD` and
          transitional-section coupling while retaining its canonical route,
          source-wide negative evidence, exact dispositions, and decision suite.
-       - `7.4c3hs2b` (`Planned`): remove Contracts proof-lifetime `HEAD` and
+       - `7.4c3hs2b` (`Accepted`): remove Contracts proof-lifetime `HEAD` and
          transitional-section coupling while retaining its canonical route,
          source-wide negative evidence, exact dispositions, and decision suite.
        - `7.4c3hs2c` (`Planned`): remove network heading coupling while

@@ -87,24 +87,7 @@ for text in "${required_contract_text[@]}"; do
   rg -F -q "$text" "$CONTRACTS"
 done
 
-prefix_head="$(git -C "$REPO_ROOT" show HEAD:SECURITY-STANDARDS.md |
-  sed '/^## Core Principle: Validate Once, at the Boundary/,$d')"
-prefix_current="$(sed '/^## Core Principle: Validate Once, at the Boundary/,$d' \
-  "$LEGACY")"
-middle_head="$(git -C "$REPO_ROOT" show HEAD:SECURITY-STANDARDS.md |
-  sed -n '/^## Path Validation/,/^## What NOT to Validate/p' |
-  sed '$d')"
-middle_current="$(sed -n '/^## Path Validation/,/^## What NOT to Validate/p' \
-  "$LEGACY" | sed '$d')"
-[[ "$prefix_current" == "$prefix_head" && "$middle_current" == "$middle_head" ]]
-
-core_section="$(sed -n \
-  '/^## Core Principle: Validate Once, at the Boundary/,/^## Path Validation/p' \
-  "$LEGACY")"
-final_section="$(sed -n '/^## What NOT to Validate/,$p' "$LEGACY")"
-for section in "$core_section" "$final_section"; do
-  rg -F -q 'topics/contracts.md#validation-proof-lifetime' <<< "$section"
-done
+rg -F -q 'topics/contracts.md#validation-proof-lifetime' "$LEGACY"
 for pattern in 'External Input' 'Trust internally' 'ProcessFile'; do
   ! rg -F -q "$pattern" "$LEGACY"
 done
