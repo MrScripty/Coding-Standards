@@ -1,0 +1,57 @@
+schema_version = 1
+id = "rust-tooling-compile-fail"
+owner = "profile.language.rust.tooling"
+description = "Compile-fail harness adaptation after Contracts and Verification decisions."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/tooling-compile-fail-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["accepted", "contradictory", "missing"]
+source = ["accepted", "missing"]
+tooling = ["accepted", "missing"]
+verification = ["accepted", "missing"]
+capability = ["supported", "unsupported"]
+fallback = ["build-success", "ci", "compile-check", "diagnostic-match", "fixture-shape", "none", "panic", "restriction-category", "runtime-assertion", "trybuild"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "contract", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "contract", op = "eq", value = "missing" }, { field = "source", op = "eq", value = "missing" }, { field = "tooling", op = "eq", value = "missing" }, { field = "verification", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/tooling.md"
+required = ["## Compile-Fail Harness Adapter Mechanisms", "After Contracts accepts a compile-time rejection contract", "cannot select trybuild"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-tooling.md"
+required = ["## Compile-Fail Harness Examples", "single-use tokens", "illustrative only"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-TOOLING-STANDARDS.md"
+required = []
+prohibited = ["Use `trybuild` when the API promises"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0837\tlanguages/rust/RUST-TOOLING-STANDARDS.md\tprofiles/languages/rust/tooling.md\tsplit\t"]
+prohibited = []

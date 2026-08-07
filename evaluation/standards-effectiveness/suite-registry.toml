@@ -4,3 +4,43 @@ schema_version = 1
 id = "rust-test-style"
 path = "evaluation/standards-effectiveness/suites/rust-test-style.toml"
 requires = []
+
+[[suites]]
+id = "rust-tooling-adapter-inventory"
+path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
+requires = []
+
+[[suites]]
+id = "rust-tooling-baseline-commands"
+path = "evaluation/standards-effectiveness/suites/rust-tooling-baseline-commands.toml"
+requires = []
+
+[[suites]]
+id = "rust-tooling-build-script"
+path = "evaluation/standards-effectiveness/suites/rust-tooling-build-script.toml"
+requires = []
+
+[[suites]]
+id = "rust-tooling-compile-fail"
+path = "evaluation/standards-effectiveness/suites/rust-tooling-compile-fail.toml"
+requires = []
+
+[[suites]]
+id = "rust-tooling-feature-matrix"
+path = "evaluation/standards-effectiveness/suites/rust-tooling-feature-matrix.toml"
+requires = []
+
+[[suites]]
+id = "rust-tooling-property-test"
+path = "evaluation/standards-effectiveness/suites/rust-tooling-property-test.toml"
+requires = []
+
+[[suites]]
+id = "rust-tooling-test-runner"
+path = "evaluation/standards-effectiveness/suites/rust-tooling-test-runner.toml"
+requires = []
+
+[[suites]]
+id = "rust-tooling-workspace-lints"
+path = "evaluation/standards-effectiveness/suites/rust-tooling-workspace-lints.toml"
+requires = []

@@ -30,7 +30,7 @@ or measured mechanism changes require explicit regeneration and review.
 
 ## First Reviewed Package
 
-Package `M2-P1` contains these eight Rust Tooling leaf checkers:
+Package `M2-P1` is accepted and replaced these eight Rust Tooling leaf checkers:
 
 | Suite | Replaced checker | Decision fixture | Exact ID |
 | --- | --- | --- | --- |
@@ -62,13 +62,18 @@ Package `M2-P1` contains these eight Rust Tooling leaf checkers:
 - Gate: direct execution of all eight suite IDs, generic launcher, removed-path
   and stale-inventory checks, plan/diff integrity, and one complete mixed suite.
 
+Acceptance reduced current Bash verifier entrypoints from 274 to 266. The one
+generic launcher now evaluates nine registered suites and 45 checks in one
+Python process. All 266 mixed entrypoints passed after removal.
+
 The similarly short `verify-rust-release-automation-adapter.sh` is excluded: it
 belongs to the Rust Release owner and has a two-disposition Release/reference
 contract. Similar shell shape does not authorize cross-owner batching.
 
 ## Next Classification Work
 
-After `M2-P1`, classification proceeds by canonical owner and dependency shape.
+After accepted `M2-P1`, classification proceeds by canonical owner and
+dependency shape.
 No script is scheduled for deletion solely because it is short, unreferenced,
 or mechanically similar. Executable and frozen-contract references are resolved
 in the accepting package; historical checker-identity contracts remain deferred

@@ -1,0 +1,56 @@
+schema_version = 1
+id = "rust-tooling-feature-matrix"
+owner = "profile.language.rust.tooling"
+description = "Cargo feature-matrix adapters after dependency and contract selection."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/tooling-feature-matrix-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contracts = ["accepted", "contradictory", "missing"]
+tooling = ["accepted", "missing"]
+verification = ["accepted", "missing"]
+capability = ["supported", "unsupported"]
+fallback = ["all-features", "cargo-hack", "command-success", "crate-category", "feature-count", "no-default-features", "no-dev-deps", "none", "powerset", "target-default", "workspace"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "contracts", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "contracts", op = "eq", value = "missing" }, { field = "tooling", op = "eq", value = "missing" }, { field = "verification", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/tooling.md"
+required = ["## Cargo Feature-Matrix Adapter Mechanisms", "After Dependencies, Contracts, Library, and Cross-Platform", "cannot select a tool"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-tooling.md"
+required = ["## Cargo Feature-Matrix Command Examples", "cargo hack check --each-feature", "do not select cargo-hack"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-TOOLING-STANDARDS.md"
+required = []
+prohibited = ["Use powerset checks only for small core crates"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0836\tlanguages/rust/RUST-TOOLING-STANDARDS.md\tprofiles/languages/rust/tooling.md\tsplit\t"]
+prohibited = []

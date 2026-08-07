@@ -113,3 +113,27 @@
   dependency.
 - Next slice: implement `M2-P1` without changing engine source or shared
   historical migration contracts.
+
+## 2026-08-07 - Milestone 2 Package M2-P1
+
+- Outcome: accepted eight declarative Rust Tooling suites for capability-matched
+  adapters, baseline commands, build scripts, compile-fail harnesses, feature
+  matrices, property tests, test runners, and workspace lint expression.
+- Preserved evidence: 128 decision cases, required canonical profile and
+  illustrative reference text, eight former-source default prohibitions, and
+  exact dispositions for `STD-0832`, `STD-0833`, `STD-0835` through `STD-0838`,
+  `STD-0840`, and `STD-0841`.
+- Removed authority: eight unreferenced, dependency-free Bash leaf checkers.
+  Engine source, fixtures, standards, dispositions, historical manifests, and
+  the separate Rust Release checker remain unchanged.
+- Focused verification: 13 engine/inventory self-tests, nine direct suites with
+  45 checks, generic launcher, stale inventory, removed-path scan, launcher
+  syntax, and diff integrity passed.
+- Complete verification: all 266 remaining mixed Bash entrypoints passed. The
+  generated structural inventory reports 266 records, down from 274.
+- No-fallback result: no per-suite wrapper, shell command action, source alias,
+  compatibility schema, default tool selection, weakened outcome, or missing
+  disposition was retained.
+- Next slice: classify and freeze the next same-owner leaf package from the
+  exact inventory; keep shared migration-contract paths deferred to Milestone
+  3.

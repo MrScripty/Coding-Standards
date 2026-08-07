@@ -184,6 +184,8 @@ and plan records selected per slice.
 **Tasks:**
 
 - [x] Generate and continuously verify exact structural checker inventory.
+- [x] Migrate accepted Rust Tooling package `M2-P1` and remove its eight leaf
+  scripts without changing engine source.
 - [ ] Classify every checker by assertion family, inbound dependency, owner,
   risk, and migration disposition.
 - [ ] Add strict table, Markdown heading/route, exact-row/set/order, and count

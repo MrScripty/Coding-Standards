@@ -1,0 +1,55 @@
+schema_version = 1
+id = "rust-tooling-build-script"
+owner = "profile.language.rust.tooling"
+description = "Cargo build-script expression mechanisms after Build authority is accepted."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/tooling-build-script-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+build = ["accepted", "contradictory", "missing"]
+owners = ["accepted", "missing"]
+capability = ["supported", "unsupported"]
+fallback = ["build-success", "compiler", "dependency", "detection-phase", "directive", "existing-script", "none", "out-dir", "purpose", "raw-command", "sparing-use", "timestamp"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "build", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "build", op = "eq", value = "missing" }, { field = "owners", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/tooling.md"
+required = ["## Cargo Build-Script Expression Mechanisms", "After Build accepts the action", "cannot create build authority"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-tooling.md"
+required = ["## Cargo Build-Script Examples", "SOURCE_DATE_EPOCH", "discovery material only"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-TOOLING-STANDARDS.md"
+required = []
+prohibited = ["Use `build.rs` sparingly"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0841\tlanguages/rust/RUST-TOOLING-STANDARDS.md\tprofiles/languages/rust/tooling.md\tsplit\t"]
+prohibited = []

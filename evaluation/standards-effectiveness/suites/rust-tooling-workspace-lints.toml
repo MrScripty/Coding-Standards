@@ -1,0 +1,56 @@
+schema_version = 1
+id = "rust-tooling-workspace-lints"
+owner = "profile.language.rust.tooling"
+description = "Cargo workspace lint expression after lint policy and unsafe authority."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/tooling-workspace-lint-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+policy = ["accepted", "contradictory", "missing"]
+scope = ["known", "unknown"]
+unsafe = ["accepted", "missing"]
+capability = ["supported", "unsupported"]
+fallback = ["command-success", "deny-severity", "existing-manifest", "inheritance", "lint-set", "member-opt-in", "none", "unsafe-deny", "unsafe-relaxation", "warn-severity", "workspace-root"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "policy", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "policy", op = "eq", value = "missing" }, { field = "scope", op = "eq", value = "unknown" }, { field = "unsafe", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/tooling.md"
+required = ["## Cargo Workspace Lint-Expression Mechanisms", "After Tooling selects lint purpose", "inheritance does not transfer lint-policy authority"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-tooling.md"
+required = ["## Cargo Workspace Lint Examples", "[workspace.lints.clippy]", "does not select root ownership"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-TOOLING-STANDARDS.md"
+required = []
+prohibited = ["Configure shared lint policy at the workspace root when possible"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0833\tlanguages/rust/RUST-TOOLING-STANDARDS.md\tprofiles/languages/rust/tooling.md\tsplit\t"]
+prohibited = []

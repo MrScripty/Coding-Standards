@@ -1,0 +1,56 @@
+schema_version = 1
+id = "rust-tooling-test-runner"
+owner = "profile.language.rust.tooling"
+description = "Rust test-runner adaptation after Tooling, Verification, and Resilience selection."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/tooling-test-runner-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+tooling = ["accepted", "contradictory", "missing"]
+verification = ["accepted", "missing"]
+resilience = ["accepted", "missing"]
+capability = ["supported", "unsupported"]
+fallback = ["ci", "command-success", "doctest", "isolation", "junit", "nextest", "none", "partition", "repository-size", "retry", "timeout"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "tooling", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "tooling", op = "eq", value = "missing" }, { field = "verification", op = "eq", value = "missing" }, { field = "resilience", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/tooling.md"
+required = ["## Rust Test-Runner Adapter Mechanisms", "After Tooling selects a test runner", "cannot select"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-tooling.md"
+required = ["## Nextest Command Examples", "cargo nextest run --workspace", "do not select nextest"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-TOOLING-STANDARDS.md"
+required = []
+prohibited = ["Use nextest when it materially improves"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0835\tlanguages/rust/RUST-TOOLING-STANDARDS.md\tprofiles/languages/rust/tooling.md\tsplit\t"]
+prohibited = []
