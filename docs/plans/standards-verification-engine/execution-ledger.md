@@ -352,3 +352,12 @@
   the temporary launcher; they are not authorized as ordinary text/decision
   migrations.
 - Next slice: implement `M2-P7`, then `M2-P8`, then replan structural work.
+
+## 2026-08-07 - Milestone 2 Package M2-P7
+
+- Accepted TypeScript static analysis with ten decisions, canonical/reference
+  text, former-source prohibitions, and four split dispositions; deleted its
+  Bash leaf.
+- Verification: 13 self-tests, five focused checks, 30 suites/142 checks,
+  inventory/removal/diff gates, and all 245 mixed entrypoints passed.
+- Next slice: implement `M2-P8` without engine changes.

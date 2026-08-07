@@ -13,8 +13,8 @@ package `M2-P4` are accepted. Owner-reviewed suite migration continues under
 the Generic Standards Verification Engine Plan before Cross-Platform source
 closure. Six of 27 former normative source entrypoints are derived.
 
-**Next slice:** implement delegated TypeScript static-analysis package `M2-P7`,
-then Verification quality-gate package `M2-P8`, before structural replanning.
+**Next slice:** implement delegated Verification quality-gate package `M2-P8`
+before structural replanning.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

@@ -1,0 +1,56 @@
+schema_version = 1
+id = "typescript-static-analysis"
+owner = "profile.language.typescript"
+description = "TypeScript static-analysis mechanisms selected from project facts and authority."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/typescript/static-analysis-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+facts = ["complete", "contradictory"]
+authority = ["explicit", "missing"]
+capability = ["supported", "unsupported"]
+boundary = ["complete", "missing"]
+fallback = ["broaden-scope", "custom-rule", "eslint-9", "none", "strict-flags", "strict-preset"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "facts", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "authority", op = "eq", value = "missing" }, { field = "boundary", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/typescript.md"
+required = ["## Static Analysis And Compiler Configuration", "actual TypeScript project boundaries", "Architecture analysis must derive", "parser, preset, formatter integration", "are `invalid`", "is `unavailable`", "is `unsupported`"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/tooling.md"
+required = ["## TypeScript Tooling Examples", "\"singleQuote\": true"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "TOOLING-STANDARDS.md"
+required = []
+prohibited = ["Enable all strict checks for type safety", "// .prettierrc"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0677\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\t", "STD-0678\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\t", "STD-0679\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\t", "STD-0680\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\t"]
+prohibited = []

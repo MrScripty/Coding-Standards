@@ -106,6 +106,11 @@ path = "evaluation/standards-effectiveness/suites/tooling-ci-workflow-reference.
 requires = []
 
 [[suites]]
+id = "typescript-static-analysis"
+path = "evaluation/standards-effectiveness/suites/typescript-static-analysis.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

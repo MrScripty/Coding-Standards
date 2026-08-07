@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: implement TypeScript static-analysis package `M2-P7`
+**Next slice:** Milestone 2: implement Verification quality-gate package `M2-P8`
 
 **Acceptance status:** `pending`
 
@@ -378,7 +378,7 @@ inventory; removed-path scans; and complete mixed suite passed.
 
 #### Package M2-P7: TypeScript Static Analysis
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 **Owner:** `profile.language.typescript`
 
@@ -389,6 +389,9 @@ generated inventory, and plan records.
 reference text, former-source prohibitions, and split dispositions `STD-0677`
 through `STD-0680`. Existing text/decision primitives suffice; no wrapper or
 engine change is authorized.
+
+**Acceptance evidence:** 13 self-tests; 30 suites/142 checks; fresh 245-record
+inventory; removed-path scans; and complete mixed suite passed.
 
 #### Package M2-P8: Verification Quality Gates
 
