@@ -7,12 +7,13 @@
 **Plan status:** `Active`
 
 **Current phase:** Milestone 7.4c3.5 Concurrency index source closure is
-accepted. Exact identifier migration and Router authority closure are complete;
-five of 27 former normative source entrypoints are derived, and Concurrency has
-no residual policy or migration authority.
+accepted. Milestone 7.4c3.6 Security is blocked before implementation because
+its required checker changes do not have one exclusive source-package owner.
+Five of 27 former normative source entrypoints are derived.
 
-**Next slice:** prepare and integrate `7.4c3.6` Security in manifest order while
-independent frozen `p1` packages continue preparation-only work.
+**Next slice:** re-plan `7.4c3hs` to assign the Security-only historical
+assertions and the Architecture/Interop/Security IPC checker to non-overlapping
+checker-infrastructure packages before preparing `7.4c3.6`.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2245,6 +2246,16 @@ all structural/routing fixtures pass.
        routes, and register isolated shape, route, and prohibited-literal
        fixtures. Preserve all 17 frozen source dispositions and every dependent
        owner checker without dual wording or compatibility fallback.
+     - `7.4c3hs` (`Blocked`): assign ownership for Security closure checker
+       repairs before changing `SECURITY-STANDARDS.md`. Input-validation and
+       validation-proof verifiers compare unrelated legacy sections to `HEAD`;
+       network, row-42, and source-closure verifiers require transitional
+       headings; and the IPC verifier reads Architecture, Interop, and Security
+       legacy sections in one file. The re-plan must preserve canonical owner,
+       exact disposition, typed-outcome, and negative-policy evidence while
+       removing mutable legacy-shape ownership. It must not assign the shared
+       IPC checker to one source package, retain headings as compatibility
+       shims, or weaken the checks to permit source closure.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`
@@ -2273,7 +2284,8 @@ not need the full library or introduce downstream-specific root policy.
 
 ## Blockers
 
-- None.
+- `7.4c3hs`: Security source closure requires an explicit non-overlapping
+  checker-infrastructure decomposition. See `F084` and the execution ledger.
 
 ## Slice Procedure
 
@@ -2317,6 +2329,7 @@ not create competing core, precedence, or taxonomy rules.
 | Root guidance becomes stack/product-specific | Move specialization to a profile or project policy. |
 | Shared taxonomy must change outside a slice | Stop and re-plan a serial contract slice. |
 | Nested source cannot express a valid aggregate route | Replace the shared route schema and engine contract; do not add broken links or a source-specific bypass. |
+| One checker owns mutable legacy shape for multiple source packages | Stop and assign one shared infrastructure package or split the checker by durable semantic owner before any source package edits it. |
 | Pilot evidence invalidates sequence or targets | Record evidence and revise milestones before continuing. |
 
 Isolated urgent safety corrections may proceed only as separate, verified work

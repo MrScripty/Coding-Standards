@@ -9781,3 +9781,38 @@ complete verifier suite.
 
 **Next slice:** `7.4c3.6`, close `SECURITY-STANDARDS.md` before accepting any
 later prepared source package.
+
+## Milestone 7.4c3hs Security Checker-Ownership Preflight
+
+**Outcome:** Re-plan required.
+
+Security is next in immutable source-manifest order, but its closure cannot use
+the existing exclusive source-package protocol. The input-validation and
+validation-proof verifiers compare unrelated regions of
+`SECURITY-STANDARDS.md` to `HEAD`. The network, row-42, and Security closure
+verifiers require transitional section headings. Most importantly,
+`verify-ipc-payload-validation.sh` extracts legacy sections from Architecture,
+Interop, and Security and therefore cannot be assigned exclusively to the
+Security package without conflicting with later source packages.
+
+**Durable evidence:** canonical Contracts, Security, Concurrency, and IPC owner
+content; strict decision fixtures; exact frozen dispositions; required Router
+destinations; typed `invalid`, `unsupported`, and `unavailable` outcomes; and
+negative evidence against unsafe validation, transport, and dispatch fallbacks
+must remain. Historical accepted-state and immutable decomposition evidence
+remain independently owned.
+
+**No-fallback result:** Security was not edited. No transitional heading was
+retained as a compatibility shim, no checker was assigned to two packages, no
+source-specific aggregate exception was introduced, and no semantic assertion
+was removed merely to make closure pass.
+
+**Re-plan boundary:** choose and freeze non-overlapping ownership for local
+Security historical assertions and the cross-source IPC checker. Shared checker
+infrastructure must land serially before `7.4c3.6`; independent preparation may
+resume only where write sets remain exclusive.
+
+**Bounded write set:** active plan, findings, and execution ledger only.
+
+**Next slice:** resolve `F084`, then prepare and integrate Security in manifest
+order without preserving transitional source shape.
