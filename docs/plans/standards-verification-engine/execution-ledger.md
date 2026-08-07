@@ -292,3 +292,20 @@
   disposition remains.
 - Next slice: classify the Rust Dependency leaf candidate from exact inventory
   evidence before crossing into shared-contract migration.
+
+## 2026-08-07 - Milestone 2 Rust Dependency Package Freeze
+
+- Outcome: froze `M2-P5` as four dependency-free Rust Dependency suites for
+  audit adapters, feature mechanisms, graph inspection, and workspace
+  inheritance.
+- Preserved evidence: 53 typed decisions, canonical Dependency/API/reference
+  and former-source text, legacy-default prohibitions, and all 14 exact
+  dispositions `STD-0735` through `STD-0748`.
+- Dependency review: all four have zero executable and frozen-contract inbound
+  references and no verifier/helper dependency; adjacent shared-contract
+  checkers remain excluded.
+- No-fallback result: implementation uses existing engine primitives, deletes
+  all four scripts, and adds no wrapper, compatibility path, source exception,
+  or owner-specific engine branch.
+- Scope: planning authority only; no implementation or evidence file changed.
+- Next slice: implement and verify `M2-P5` as one atomic package.

@@ -198,3 +198,34 @@ both report 252 remaining Bash entrypoints.
 
 The Rust Dependency four-script candidate remains an independent future owner
 package.
+
+## Fifth Reviewed Package
+
+Package `M2-P5` is frozen for implementation as four Rust Dependency leaf
+checkers:
+
+| Suite | Replaced checker | Decision fixture | Exact IDs |
+| --- | --- | --- | --- |
+| `rust-dependency-audit-adapters` | `verify-rust-dependency-audit-adapters.sh` | `rust/dependency-audit-adapter-decisions.tsv` | `STD-0747`, `STD-0748` |
+| `rust-dependency-feature-mechanisms` | `verify-rust-dependency-feature-mechanisms.sh` | `rust/dependency-feature-mechanism-decisions.tsv` | `STD-0738` through `STD-0740` |
+| `rust-dependency-graph-inspection` | `verify-rust-dependency-graph-inspection.sh` | `rust/dependency-graph-inspection-decisions.tsv` | `STD-0741` through `STD-0746` |
+| `rust-dependency-workspace-inheritance` | `verify-rust-dependency-workspace-inheritance.sh` | `rust/dependency-workspace-inheritance-decisions.tsv` | `STD-0735` through `STD-0737` |
+
+### M2-P5 Cohesion Decision
+
+- Canonical owner: `profile.language.rust.dependencies`.
+- Observable package outcome: accepted dependency, consumer, resolver,
+  ownership, Tooling, and evidence decisions select only supported Cargo
+  mechanisms without feature, graph, workspace, audit-product, or schedule
+  defaults; Rust API retains source-level feature expression.
+- Risk: `consolidation`; 53 fixture outcomes, standards text, and 14 contiguous
+  dispositions do not change.
+- Dependencies: all four scripts have zero executable and frozen-contract
+  inbound references and no verifier/helper dependency.
+- Assertion family: existing ordered predicates, required/prohibited text, and
+  exact disposition prefixes. No engine source change is authorized.
+- Exclusions: adjacent owner and source-closure checkers remain coupled to
+  executable, historical, or shared-helper contracts and stay in Milestone 3.
+- Gate: 13 engine/inventory self-tests, all registered suites, generic launcher,
+  inventory and removed-path scans, plan/diff integrity, and one complete mixed
+  suite expected to contain 248 Bash entrypoints.

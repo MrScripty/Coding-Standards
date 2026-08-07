@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: classify the Rust Dependency leaf package
+**Next slice:** Milestone 2: implement Rust Dependency package `M2-P5`
 
 **Acceptance status:** `pending`
 
@@ -315,6 +315,31 @@ source alias, compatibility schema, or owner-specific engine branch.
 suites passed 109 checks directly and through the migration launcher; generated
 inventory is fresh at 252 Bash entrypoints; all four deleted-path executable
 and contract scans passed; and the complete 252-entrypoint mixed suite passed.
+
+#### Package M2-P5: Rust Dependency Leaf Consolidation
+
+**Status:** `Planned`
+
+**Owner:** `profile.language.rust.dependencies`
+
+**Risk:** `consolidation`
+
+**Allowed write set:** registry; four suite contracts named in the inventory
+report; the four corresponding Bash checkers (delete only); generated checker
+inventory; child plan records; and parent reconciliation after acceptance.
+
+**Preserved contract:** 53 ordered typed decisions; canonical Rust Dependency,
+Rust API, reference, and former-source evidence; legacy feature, graph,
+workspace, and audit defaults; and all 14 exact dispositions `STD-0735` through
+`STD-0748`.
+
+**Exclusions:** adjacent Rust Dependency owner/source-closure checks have
+executable or frozen-contract inbound references or shared-helper dependencies
+and remain assigned to Milestone 3.
+
+**No-fallback rule:** use existing strict text and ordered-decision checks,
+delete all four replaced scripts atomically, and add no wrapper, compatibility
+schema, source alias, or owner-specific engine branch.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 
