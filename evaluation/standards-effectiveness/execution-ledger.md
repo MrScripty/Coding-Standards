@@ -9967,3 +9967,41 @@ contract; shell syntax; plan structure; diff integrity; and the complete
 
 **Next slice:** close `SECURITY-STANDARDS.md` as a pure non-normative index in
 immutable manifest order.
+
+## Milestone 7.4c3.6 Security Index Source Closure
+
+**Outcome:** Accepted.
+
+`SECURITY-STANDARDS.md` is now concise non-normative navigation. It routes to
+the Standards Router; canonical filesystem-containment, input-validation,
+untrusted-input, and network Security owners; Contracts proof-lifetime and
+runtime-decoding owners; the IPC boundary profile; and Concurrency-owned work
+and cancellation. It owns no policy, applicability decision, default, example,
+or fallback authority.
+
+The source corpus row changes from normative to derived without changing kind,
+target role, preliminary disposition, or baseline source. Its isolated fixture
+directory records the exact title and headings, a 28-line bound, nine unique
+canonical target/href pairs, and prohibited transitional headings and unsafe
+legacy mechanisms. All 20 frozen source identifiers remain exactly
+dispositioned.
+
+**No-fallback result:** no transitional Security heading, validation utility,
+fixed rule, cast, path helper, payload shortcut, transport default, proof
+carry-forward, old/new branch, or prior-source authority remains. Missing or
+inapplicable routing produces the Router's typed diagnostic instead of prior
+wording.
+
+**Bounded write set:** Security former source, its one corpus row, isolated
+Security source-closure fixture directory, active plan, and execution ledger.
+Canonical owners, existing semantic checkers, shared engine, aggregate, Router,
+manifests, dispositions, owner map, generated inventories, metadata,
+configuration, findings, and lockfiles remain unchanged.
+
+**Verification:** Security aggregate closure with nine routes and 20 frozen
+IDs; proof-lifetime, filesystem, input-validation, IPC, network, row-42, and
+Security source-specific checks; plan structure; diff integrity; and the
+complete 274-checker suite.
+
+**Next slice:** preflight Cross-Platform source closure in immutable manifest
+order.

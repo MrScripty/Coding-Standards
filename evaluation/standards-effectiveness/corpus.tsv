@@ -14,7 +14,7 @@ LANGUAGE-BINDINGS-STANDARDS.md	standard	yes	boundary-profile	refine	git
 LAUNCHER-STANDARDS.md	standard	yes	application-profile	split	git
 PLAN-STANDARDS.md	standard	derived	workflow	replace	git
 RELEASE-STANDARDS.md	standard	yes	workflow	split	git
-SECURITY-STANDARDS.md	standard	yes	topic	refine	git
+SECURITY-STANDARDS.md	standard	derived	topic	refine	git
 TESTING-STANDARDS.md	standard	yes	workflow	split	git
 TOOLING-STANDARDS.md	standard	yes	workflow	split	git
 languages/README.md	entrypoint	derived	router	replace	git

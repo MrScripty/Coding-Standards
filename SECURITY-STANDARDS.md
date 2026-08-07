@@ -1,60 +1,23 @@
 # Security Standards
 
-Input validation, path safety, and sanitization requirements.
+This former standards entrypoint is non-normative navigation. This file owns no
+rule, applicability decision, default, example, or fallback authority.
 
-## Core Principle: Validate Once, at the Boundary
+If a route is missing or inapplicable, return the Router's typed diagnostic
+instead of using prior wording. Use that diagnostic instead of using prior
+wording from this file.
 
-Canonical validated-representation authority and invalidation behavior moved
-to
-[Validation Proof Lifetime](topics/contracts.md#validation-proof-lifetime).
-Security continues to own when untrusted input requires proof and the
-consequences of invalid input.
+## Canonical Security Routes
 
-## Path Validation
+- [Standards Router](STANDARDS-ROUTER.md)
+- [Filesystem Containment](topics/security.md#filesystem-containment)
+- [Input Validation Authority](topics/security.md#input-validation-authority)
+- [Untrusted Structured Input](topics/security.md#untrusted-structured-input)
+- [Network Transport Boundary](topics/security.md#network-transport-boundary)
 
-Canonical path-containment policy moved to
-[Security](topics/security.md#filesystem-containment). That topic owns
-component boundaries, canonical identity, symlinks, non-existing targets,
-validation/use races, and typed unresolved outcomes.
+## Contract And Execution Routes
 
----
-
-## Input Validation
-
-Canonical untrusted-input validation authority moved to
-[Input Validation Authority](topics/security.md#input-validation-authority).
-That topic selects authority per operation contract, routes specialized
-filesystem and IPC mechanisms, consumes Contracts proof semantics, and rejects
-global-validator, fixed-rule, cast, duplicate-inline, and weaker-mechanism
-fallbacks.
-
----
-
-## Message/API Payload Validation
-
-Canonical untrusted-input consequences moved to
-[Security](topics/security.md#untrusted-structured-input). Runtime proof belongs
-to [Contracts](topics/contracts.md#runtime-decoding-at-boundaries), and
-action-specific message decoding belongs to the
-[IPC Boundary Profile](profiles/boundaries/ipc.md).
-
----
-
-## Network Transport Safety
-
-Canonical listener exposure, admission, shutdown, and liveness policy moved to
-the [Security topic](topics/security.md#network-transport-boundary).
-Connection-work ownership and shutdown mechanics belong to
-[Concurrency](topics/concurrency.md#own-work-failure-and-cancellation).
-Message proof and dispatch remain with
-[Contracts](topics/contracts.md#runtime-decoding-at-boundaries) and the
-[IPC Boundary Profile](profiles/boundaries/ipc.md).
-
----
-
-## What NOT to Validate
-
-Consume an intact proof-bearing representation without redundant decoding.
-Re-establish proof when the representation, invariant, contract, or applicable
-boundary changes. See
-[Validation Proof Lifetime](topics/contracts.md#validation-proof-lifetime).
+- [Validation Proof Lifetime](topics/contracts.md#validation-proof-lifetime)
+- [Runtime Decoding At Boundaries](topics/contracts.md#runtime-decoding-at-boundaries)
+- [IPC Boundary Profile](profiles/boundaries/ipc.md)
+- [Owned Work And Cancellation](topics/concurrency.md#own-work-failure-and-cancellation)

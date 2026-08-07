@@ -6,13 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Security checker-repair group `7.4c3hs` is accepted and
-`F084` is resolved. All four verifiers use durable whole-source and canonical
-evidence without mutable legacy-shape ownership. Five of 27 former normative
-source entrypoints are derived.
+**Current phase:** Security source closure `7.4c3.6` is accepted. Six of 27
+former normative source entrypoints are derived, and Security has no residual
+policy, migration, default, example, or fallback authority.
 
-**Next slice:** prepare and integrate `7.4c3.6` Security in immutable manifest
-order without preserving transitional headings or policy prose.
+**Next slice:** preflight and integrate `7.4c3.7` Cross-Platform in immutable
+manifest order while later frozen preparation remains non-accepted work.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2268,6 +2267,12 @@ all structural/routing fixtures pass.
        - `7.4c3hs2c` (`Accepted`): remove network heading coupling while
          retaining all canonical routes, source-wide transport-default
          prohibitions, exact dispositions, and decision suite.
+     - `7.4c3.6` (`Accepted`): replace Security transitional routing and policy
+       explanations with concise non-normative navigation, set its corpus state
+       to derived, register isolated Router, Security, Contracts, IPC, and
+       Concurrency route fixtures, and preserve all 20 frozen source
+       dispositions. Transitional headings and validation, filesystem,
+       payload, transport, or proof fallback mechanisms are absent.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`
