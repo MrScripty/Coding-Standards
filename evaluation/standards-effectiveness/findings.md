@@ -69,7 +69,7 @@ changes and focused fixture evidence.
 | F075 | Resolved in Milestone 7.4b29a | Immutable row 39 now separates process coordination, identity, platform capability, recovery, service ownership, convergence, and evidence authority from non-normative illustrations; the Architecture reference cannot own PID-file, retry, readiness, lifecycle, transport, diagnostic, or benefit policy. |
 | F076 | Active in Milestone 7.4c | All 916 frozen identifiers are dispositioned and the source-gap audit is empty, but 27 former standard/profile sources remain normative. Sixteen require index rewrites, eleven require final purity review, and the Router retains two temporary "until migration" routes. |
 | F077 | Resolved in Milestone 7.4c1 | The immutable execution-train and earlier trust/lifecycle re-plan verifiers coupled accepted evidence to parent Milestone `7.4c` remaining `Planned`; the train now proves the stable `7.4b37b` to `7.4c1` handoff and the trust/lifecycle verifier owns only its accepted `7.4b4a` evidence. |
-| F078 | Active in Milestone 7.4c3v | The first source package used a bespoke structural closure verifier; repeating that design for 26 sources would duplicate policy and conflict with reusable-verifier and concurrency goals. A table-driven aggregate engine is planned before package `7.4c3.2`. |
+| F078 | Resolved in Milestone 7.4c3v1 | One strict reusable engine now validates source-owned fixture directories; focused negative fixtures exercise the same engine, the aggregate runs accepted sources in immutable manifest order, and the bespoke Coding verifier and flat fixture are removed. |
 
 ## Systemic Findings
 

@@ -6,14 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3v1r lifecycle-checker repair is accepted.
-Exact identifier migration and Router authority closure are complete; one of 27
-former normative source entrypoints is derived, and the shared parent checker
-no longer owns the transient state of the pending verifier implementation.
+**Current phase:** Milestone 7.4c3v1 source-index verifier foundation is
+accepted. Exact identifier migration and Router authority closure are complete;
+one of 27 former normative source entrypoints is derived and registered with
+the reusable aggregate closure verifier.
 
-**Next slice:** Milestone 7.4c3v1 establishes the reusable source-index closure
-engine, negative engine fixtures, source-owned Coding fixture directory, and
-live aggregate verifier without changing source or corpus semantics.
+**Next slice:** Milestone 7.4c3.2 performs the retained-index purity review for
+`COMMIT-STANDARDS.md`, updates its corpus state, and registers its isolated
+source fixture directory without changing shared engine code.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2181,11 +2181,13 @@ all structural/routing fixtures pass.
        transient requirement that child `7.4c3v1` remain planned. The parent
        retains durable design and child-presence evidence; the active plan and
        live aggregate verifier own implementation lifecycle and acceptance.
-     - `7.4c3v1` (`Planned`): establish the shared engine using the already
+     - `7.4c3v1` (`Accepted`): establish the shared engine using the already
        accepted Coding index as its first live contract, remove the bespoke
        Coding closure verifier instead of retaining a compatibility wrapper,
-       and prove positive, negative, aggregate, and historical evidence before
-       package `7.4c3.2` begins.
+       and prove positive, negative, aggregate, and historical evidence. Strict
+       contracts reject malformed schemas, duplicate or unresolved routes,
+       authority wording, shape drift, stale corpus state, and identifier-count
+       disagreement without source-specific bypasses.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`

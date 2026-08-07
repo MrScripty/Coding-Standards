@@ -9378,3 +9378,54 @@ pass.
 
 **Next slice:** `7.4c3v1`, integrate the already focused-validated reusable
 source-index closure engine and resolve F078.
+
+## Milestone 7.4c3v1 Source-Index Verifier Foundation
+
+**Outcome:** Accepted.
+
+One reusable source-index closure engine now validates an explicit repository
+root and source-owned fixture directory. The engine strictly validates
+contract, heading, route, and prohibition schemas; immutable manifest
+membership and owner existence; derived corpus state; exact ordered headings
+and line bounds; unique resolvable routes; absent authority language; positive
+and equal identifier counts; and Router exclusion.
+
+The live aggregate discovers only complete source fixture directories, maps
+them to immutable manifest order, rejects loose or duplicate registration, and
+requires accepted implementation evidence. Coding is the first registered
+source with independent contract, heading, route, and prohibition fixtures.
+The bespoke Coding verifier and flat route fixture are removed rather than
+retained as a compatibility path.
+
+Focused self-tests invoke the same engine against one synthetic valid
+repository and ten invalid mutations covering malformed contract schema,
+duplicate heading and route target, unresolved target, absent manifest source,
+normative corpus state, legacy authority wording, heading and line-bound drift,
+and identifier-count disagreement.
+
+**Discovered issue (`Resolved`):** initial parser review found that absent table
+headers could be interpreted as data. All four source fixture parsers now
+require exact first-row schemas, and manifest and corpus rows require exact
+widths. The Coding prohibition fixture uses the stronger whitespace-safe `###`
+literal instead of encoding a trailing-space value.
+
+**No-fallback result:** partial fixtures, unknown fields, inferred owners,
+pending or absent acceptance, permissive headings, unresolved targets, stale
+normative state, mismatched identifiers, source-specific bypasses, and the old
+Coding verifier are rejected or removed. No compatibility wrapper remains.
+
+**Bounded write set:** reusable engine, engine self-test fixtures and verifier,
+live aggregate verifier, Coding fixture migration, removal of the bespoke
+Coding verifier, F078 status, active plan, and execution ledger. Coding source
+text, corpus, manifest, dispositions, owner map, Router, canonical owners, the
+other 26 sources, generated inventories, metadata, configuration, and lockfiles
+remain unchanged.
+
+**Verification:** engine shell syntax; one positive and ten negative engine
+fixtures; live Coding aggregate with 17 routes and 60 frozen IDs; Core,
+Contracts, language-profile, Router, historical-checker, final-source-closure,
+plan-structure, diff-integrity, and all 272 complete-suite verifier entrypoints
+pass.
+
+**Next slice:** `7.4c3.2`, close and register `COMMIT-STANDARDS.md` without
+changing shared engine code.
