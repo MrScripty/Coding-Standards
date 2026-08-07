@@ -9498,3 +9498,40 @@ syntax, diff integrity, and all 272 complete-suite verifier entrypoints pass.
 
 **Next slice:** `7.4c3.4`, close and register
 `DOCUMENTATION-STANDARDS.md` without changing shared engine code.
+
+## Milestone 7.4c3s Source-Specific Checker Repair Protocol
+
+**Outcome:** Accepted.
+
+Documentation preflight found that
+`verify-documentation-index-closure.sh` requires the exact obsolete sentence
+`This file is a migration index`. Preserving that sentence would violate the
+source-closure no-legacy contract, while editing the checker was outside the
+source package's approved write set.
+
+The standing repair protocol classifies checker assertions before each source
+package. Semantic owner, route, disposition, typed-outcome, and negative
+evidence must remain. A package may remove only obsolete structural wording
+from its own source-specific checker and may delegate shared source shape and
+registration to the aggregate engine. Shared, mixed-source, canonical-owner,
+and historical-train checkers remain serial infrastructure and trigger a
+separate re-plan.
+
+**No-fallback result:** packages cannot preserve migration wording, accept
+either old or new text, or add compatibility assertions. Checker ownership is
+explicit and semantic evidence cannot be weakened to make a source pass.
+
+**Bounded write set:** source-index re-plan, final source-closure planning
+checker, findings, active plan, and execution ledger. Standards, former
+sources, source-specific checkers, fixtures, engine code, corpus, Router,
+dispositions, owner map, generated inventories, metadata, configuration, and
+lockfiles remain unchanged.
+
+**Verification deviation (`Approved`, 2026-08-06):** by explicit user
+direction, the complete suite is skipped for this planning-only shared-checker
+change. The final source-closure planning checker is invoked successfully once;
+shell syntax and diff integrity also pass. Source package `7.4c3.4` returns to
+its declared gate unless separately authorized.
+
+**Next slice:** `7.4c3.4`, update the Documentation source and its own focused
+index-closure checker atomically while preserving all semantic evidence.

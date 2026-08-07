@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3.3 Plan index source closure is accepted.
-Exact identifier migration and Router authority closure are complete; three of
-27 former normative source entrypoints are derived and registered with the
-reusable aggregate closure verifier.
+**Current phase:** Milestone 7.4c3s source-specific checker repair protocol is
+accepted. Exact identifier migration and Router authority closure are complete;
+three of 27 former normative source entrypoints are derived, and pending source
+packages may repair only their own obsolete structural checker assertions.
 
 **Next slice:** Milestone 7.4c3.4 performs the retained-index purity review for
 `DOCUMENTATION-STANDARDS.md`, updates its corpus state, and registers its
@@ -2196,6 +2196,15 @@ all structural/routing fixtures pass.
        concise non-normative index, set its corpus state to derived, register
        isolated Router/workflow/template route fixtures, and preserve all 18
        frozen source dispositions without changing canonical Planning policy.
+     - `7.4c3s` (`Accepted`): classify source-specific checker assertions before
+       each package. Permit the owning package to remove obsolete structural
+       migration wording only while preserving semantic owner, route,
+       disposition, typed-outcome, and negative evidence. Shared or mixed-source
+       checker changes remain separate serial infrastructure work.
+       - Verification deviation (`Approved`, 2026-08-06): by explicit user
+         direction, verify this planning-only shared-checker change with one
+         focused final source-closure checker invocation, shell syntax, and
+         diff integrity instead of the complete suite.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`

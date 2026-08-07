@@ -129,12 +129,44 @@ exist without fixing its transient state. The implementation slice is
 authorized to mark F078 resolved when the bespoke verifier has been removed
 and the aggregate engine owns the accepted evidence.
 
+## Source-Specific Checker Repair
+
+Preflight for each source package must inspect checkers that read the former
+source. Assertions are classified before editing:
+
+- semantic assertions prove canonical owner behavior, required routes, exact
+  dispositions, typed outcomes, or prohibited legacy policy;
+- structural assertions repeat title, heading, size, corpus, registration, or
+  generic non-authority wording now owned by the aggregate engine; and
+- obsolete assertions require migration-era wording or a temporary lifecycle
+  state that the accepted source package must remove.
+
+A source package may update only its own source-specific checker when an
+obsolete structural assertion would otherwise require preserving legacy text.
+It must retain semantic owner, route, disposition, and negative evidence; it
+may delegate shared shape and registration evidence to the live aggregate
+verifier. The package cannot add dual old/new assertions, accept either legacy
+or canonical wording, or preserve migration-era text as compatibility
+evidence.
+
+Shared engine code, aggregate policy, cross-source checkers, canonical-owner
+checkers, and historical execution-train checkers remain serial infrastructure.
+A checker that reads multiple former sources or owns shared policy cannot be
+claimed by one source package. Such a conflict stops the package for a separate
+checker-infrastructure re-plan.
+
 ## Bounded Write Sets
 
 Lifecycle repair `7.4c3v1r` may change only this re-plan, the final
 source-closure planning checker, the active plan, and the execution ledger. It
 cannot change standards, source indexes, fixtures, executable engine code,
 corpus data, findings status, Router, dispositions, owner map, generated
+inventories, metadata, configuration, or lockfiles.
+
+Standing protocol slice `7.4c3s` may change only this re-plan, the final
+source-closure planning checker, findings, the active plan, and the execution
+ledger. It cannot change standards, former sources, source-specific checkers,
+fixtures, engine code, corpus data, Router, dispositions, owner map, generated
 inventories, metadata, configuration, or lockfiles.
 
 The `7.4c3v1` implementation slice may change only the reusable engine, engine
@@ -145,10 +177,13 @@ map, Router, canonical owners, other former sources, generated inventories,
 metadata, configuration, and lockfiles remain unchanged.
 
 Each later source package may change only its former source, its corpus row, its
-own new fixture directory, active plan, and execution ledger. It cannot change
-the shared engine, another source's fixtures, canonical owners, Router,
-dispositions, owner map, or generated inventories. If the engine cannot express
-a genuinely shared invariant, stop and re-plan a separate infrastructure slice.
+own new fixture directory, active plan, execution ledger, and one explicitly
+identified source-specific checker when preflight proves that checker owns an
+obsolete structural assertion. It cannot change the shared engine, another
+source's fixtures or checker, canonical owners, Router, dispositions, owner map,
+or generated inventories. If the engine cannot express a genuinely shared
+invariant, or the checker is not source-specific, stop and re-plan a separate
+infrastructure slice.
 
 ## No Fallback
 
@@ -168,6 +203,13 @@ Lifecycle repair `7.4c3v1r` requires a negative scan for transient child-state
 ownership, durable child-presence evidence, plan structure, shell syntax, diff
 integrity, and the complete suite because the shared parent checker changes.
 
+Standing protocol slice `7.4c3s` requires one successful focused invocation of
+the final source-closure planning checker, shell syntax, and diff integrity. By
+explicit user direction on 2026-08-06, the complete suite is skipped for this
+planning-only shared-checker change; the exception is recorded in the active
+plan and execution ledger. Source package `7.4c3.4` returns to its declared
+verification gate unless separately authorized.
+
 `7.4c3v1` requires engine positive and negative fixtures, unchanged Coding
 source/corpus semantics, exact Coding closure, aggregate discovery, Router
 closure, historical checker ownership, shell syntax, diff integrity, and the
@@ -181,6 +223,9 @@ Stop and re-plan when:
 
 - a source needs a structural invariant not shared by final indexes;
 - source-specific semantics would have to enter the generic engine;
+- a checker reads multiple former sources or owns shared policy;
+- removing obsolete structural wording would weaken semantic owner, route,
+  disposition, typed-outcome, or negative evidence;
 - fixture isolation cannot avoid overlapping draft write sets;
 - replacing the Coding verifier weakens an accepted assertion;
 - engine self-tests require a second parser or policy copy;
