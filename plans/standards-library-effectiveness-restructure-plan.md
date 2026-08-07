@@ -8,13 +8,13 @@
 
 **Current phase:** Security source closure `7.4c3.6`, delegated verification
 engine Milestone 1, exact checker inventory, Rust Tooling package `M2-P1`, and
-Rust Release package `M2-P2`, and Tooling policy package `M2-P3` are accepted.
-Owner-reviewed suite migration continues under the Generic Standards
-Verification Engine Plan before Cross-Platform source closure. Six of 27
-former normative source entrypoints are derived.
+Rust Release package `M2-P2`, Tooling policy package `M2-P3`, and Rust API
+package `M2-P4` are accepted. Owner-reviewed suite migration continues under
+the Generic Standards Verification Engine Plan before Cross-Platform source
+closure. Six of 27 former normative source entrypoints are derived.
 
-**Next slice:** implement the delegated engine's frozen Rust API package
-`M2-P4` without engine or shared historical-contract changes.
+**Next slice:** classify the delegated engine's Rust Dependency leaf candidate
+from exact inventory evidence before crossing into shared-contract migration.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2308,10 +2308,11 @@ all structural/routing fixtures pass.
          canonical and negative text evidence, and 13 exact dispositions;
          reduce current Bash inventory from 261 to 256 while retaining
          row-35-frozen and separately owned adjacent Tooling checkers.
-       - `7.4c3ve6` (`Planned`): replace four dependency-free Rust API leaf
+       - `7.4c3ve6` (`Accepted`): replace four dependency-free Rust API leaf
          checkers with declarative suites preserving 65 typed decisions,
          canonical and negative text evidence, and seven exact dispositions;
-         retain shared-contract API owner and rustdoc checkers.
+         reduce current Bash inventory from 256 to 252 while retaining
+         shared-contract API owner and rustdoc checkers.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

@@ -159,7 +159,7 @@ batch.
 
 ## Fourth Reviewed Package
 
-Package `M2-P4` is frozen for implementation as four Rust API leaf checkers:
+Package `M2-P4` is accepted as four Rust API leaf checkers:
 
 | Suite | Replaced checker | Decision fixture | Exact IDs |
 | --- | --- | --- | --- |
@@ -190,6 +190,11 @@ Package `M2-P4` is frozen for implementation as four Rust API leaf checkers:
   suites, generic launcher, stale-inventory and removed-path scans, plan/diff
   integrity, and one complete mixed suite expected to contain 252 Bash
   entrypoints.
+
+Acceptance preserved all 65 decision rows and seven dispositions without an
+engine change. The generic launcher now evaluates 23 registered suites and 109
+checks in one Python process. Generated inventory and the complete mixed suite
+both report 252 remaining Bash entrypoints.
 
 The Rust Dependency four-script candidate remains an independent future owner
 package.

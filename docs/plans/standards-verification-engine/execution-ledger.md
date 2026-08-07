@@ -269,3 +269,26 @@
 - Scope: planning authority only; no engine, registry, suite, fixture, checker,
   generated inventory, standard, disposition, or historical contract changed.
 - Next slice: implement and verify `M2-P4` as one atomic package.
+
+## 2026-08-07 - Milestone 2 Package M2-P4
+
+- Outcome: accepted four declarative Rust API suites for crate/module
+  boundaries, failure expression, source feature expression, and validated
+  type/conversion mechanisms.
+- Preserved evidence: all 65 decision rows, canonical Rust API and
+  former-source route text, legacy-default prohibitions, and all seven exact
+  dispositions.
+- Removed authority: four dependency-free Bash leaf checkers. The API owner
+  contract, rustdoc checker, shared metadata, fixtures, standards,
+  dispositions, and historical contracts remain unchanged.
+- Focused verification: 13 engine/inventory tests passed; four selected suites
+  passed 16 checks; all 23 registered suites passed 109 checks directly and
+  through the generic launcher; inventory freshness, removed executable and
+  contract paths, and diff integrity passed.
+- Complete verification: all 252 remaining mixed Bash entrypoints passed. The
+  generated inventory fell from 256 to 252 records.
+- No-fallback result: no wrapper, shell command action, compatibility schema,
+  source alias, owner-specific engine branch, weakened decision, or missing
+  disposition remains.
+- Next slice: classify the Rust Dependency leaf candidate from exact inventory
+  evidence before crossing into shared-contract migration.

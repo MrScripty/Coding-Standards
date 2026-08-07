@@ -1,0 +1,51 @@
+schema_version = 1
+id = "rust-api-boundaries"
+owner = "profile.language.rust.api"
+description = "Rust crate and module boundary mechanisms selected by Architecture and consumer facts."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/api-boundary-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+architecture = ["accepted", "contradictory", "missing"]
+public_surface = ["missing", "private", "public", "workspace"]
+platform = ["shared", "variable"]
+mechanism = ["item-cfg", "module", "private-module", "pub-crate", "reexport", "target-module", "workspace-crate"]
+capability = ["supported", "unsupported"]
+fallback = ["behavior-switch", "file-name", "fixed-tree", "implementation-visibility", "none", "public-reexport", "role-name", "thin-platform"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "architecture", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "architecture", op = "eq", value = "missing" }, { field = "public_surface", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/api.md"
+required = ["## Crate And Module Boundary Mechanisms", "After Architecture selects responsibility, dependency direction", "and toolchain capability. Conditional compilation must preserve one coherent", "Crates, modules, visibility modifiers, re-exports, and `cfg` are mechanisms", "not architecture defaults. Do not prescribe `core`, `contracts`, `adapter`", "without the accepted architecture and consumer facts"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-API-STANDARDS.md"
+required = ["[Architecture](../../topics/architecture.md)"]
+prohibited = ["Common roles:", "crate_name/", "Keep `cfg()` in thin platform modules"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0709\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t", "STD-0710\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t"]
+prohibited = []

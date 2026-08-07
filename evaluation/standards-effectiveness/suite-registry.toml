@@ -31,6 +31,26 @@ path = "evaluation/standards-effectiveness/suites/rust-release-workspace-package
 requires = []
 
 [[suites]]
+id = "rust-api-boundaries"
+path = "evaluation/standards-effectiveness/suites/rust-api-boundaries.toml"
+requires = []
+
+[[suites]]
+id = "rust-api-failures"
+path = "evaluation/standards-effectiveness/suites/rust-api-failures.toml"
+requires = []
+
+[[suites]]
+id = "rust-api-features"
+path = "evaluation/standards-effectiveness/suites/rust-api-features.toml"
+requires = []
+
+[[suites]]
+id = "rust-api-validation"
+path = "evaluation/standards-effectiveness/suites/rust-api-validation.toml"
+requires = []
+
+[[suites]]
 id = "tooling-ci-orchestration"
 path = "evaluation/standards-effectiveness/suites/tooling-ci-orchestration.toml"
 requires = []

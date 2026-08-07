@@ -1,0 +1,53 @@
+schema_version = 1
+id = "rust-api-features"
+owner = "profile.language.rust.api"
+description = "Rust source feature mechanisms selected by generic dependency and evidence owners."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/api-feature-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+dependencies = ["accepted", "contradictory", "missing"]
+contracts = ["accepted", "contradictory", "missing"]
+library = ["accepted", "contradictory", "missing"]
+documentation = ["accepted", "contradictory", "missing"]
+verification = ["accepted", "contradictory", "missing"]
+mechanism = ["compile-error", "item-cfg", "module-cfg", "public-exposure"]
+capability = ["supported", "unsupported"]
+fallback = ["cfg-default", "command-matrix", "doc-placement", "exclusive-policy", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "dependencies", op = "eq", value = "contradictory" }, { field = "contracts", op = "eq", value = "contradictory" }, { field = "library", op = "eq", value = "contradictory" }, { field = "documentation", op = "eq", value = "contradictory" }, { field = "verification", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "dependencies", op = "eq", value = "missing" }, { field = "contracts", op = "eq", value = "missing" }, { field = "library", op = "eq", value = "missing" }, { field = "documentation", op = "eq", value = "missing" }, { field = "verification", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/api.md"
+required = ["## Rust Source Feature Expression Mechanisms", "After Dependencies selects feature, optional-dependency, default, target", "selects supported real consumer configurations; Documentation selects durable", "artifacts; and Verification selects claim-matched evidence", "Rust source mechanisms are not feature-policy defaults", "Cargo manifest dependency mechanisms belong only", "configuration without the applicable generic owner decisions", "capability", "evidence. Cargo manifest dependency mechanisms"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-API-STANDARDS.md"
+required = ["topics/dependencies.md", "topics/contracts.md", "profiles/applications/library.md", "workflows/documentation.md", "workflows/verification.md"]
+prohibited = ["Keep default features minimal", "cargo check --workspace --all-features", "Optional deeper checks with `cargo hack`"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0715\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t"]
+prohibited = []

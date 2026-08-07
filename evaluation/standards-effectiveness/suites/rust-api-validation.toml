@@ -1,0 +1,52 @@
+schema_version = 1
+id = "rust-api-validation"
+owner = "profile.language.rust.api"
+description = "Rust validated-type and conversion mechanisms selected by invariant contracts."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/api-validation-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["accepted", "contradictory", "missing"]
+enforcement = ["boundary", "construction", "missing"]
+proof = ["current", "stale"]
+source = ["structured", "text", "variant"]
+mechanism = ["enum", "from-str", "newtype", "try-from", "typestate"]
+capability = ["supported", "unsupported"]
+fallback = ["bug-cost", "input-category", "none", "parse-once", "parse-success", "state-count", "wrap-primitives"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "contract", op = "eq", value = "contradictory" }, { field = "proof", op = "eq", value = "stale" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "contract", op = "eq", value = "missing" }, { field = "enforcement", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/api.md"
+required = ["## Validated Type And Conversion Mechanisms", "selects an invariant owner, enforcement point, proof lifetime", "invalidates its invariant; re-establish proof at the canonical enforcement", "are mechanisms, not defaults", "a parse-once slogan", "mandate one conversion trait by input category", "complete operation-specific validation"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-API-STANDARDS.md"
+required = ["topics/contracts.md", "topics/security.md"]
+prohibited = ["if this bug ships, how bad is it", "pub struct Port", "Use `TryFrom`"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0707\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t", "STD-0708\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t"]
+prohibited = []
