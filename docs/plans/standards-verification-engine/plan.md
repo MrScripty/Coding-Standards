@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: derive the exact checker migration inventory and first structural package
+**Next slice:** Milestone 2: classify and freeze the Rust Release leaf package
 
 **Acceptance status:** `pending`
 

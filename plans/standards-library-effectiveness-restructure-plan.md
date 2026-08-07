@@ -6,15 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Security source closure `7.4c3.6` and delegated verification
-engine Milestone 1 are accepted. Checker inventory and structural suite
-migration continue under the Generic Standards Verification Engine Plan before
-Cross-Platform source closure. Six of 27 former normative source entrypoints
-are derived.
+**Current phase:** Security source closure `7.4c3.6`, delegated verification
+engine Milestone 1, exact checker inventory, and Rust Tooling package `M2-P1`
+are accepted. Owner-reviewed suite migration continues under the Generic
+Standards Verification Engine Plan before Cross-Platform source closure. Six
+of 27 former normative source entrypoints are derived.
 
-**Next slice:** derive the delegated engine's exact checker-family and
-dependency inventory, then freeze its first coherent structural migration
-package.
+**Next slice:** classify and freeze the delegated engine's Rust Release leaf
+package from exact executable/contract dependency evidence before editing its
+suite or checker files.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2287,6 +2287,14 @@ all structural/routing fixtures pass.
          decision checks, and one policy-free migration launcher; replace the
          complete Rust test-style leaf checker without a wrapper or lost
          decision, text, prohibition, or disposition evidence.
+       - `7.4c3ve2` (`Accepted`): generate and freshness-check exact structural
+         inventory for 274 Bash verifiers, distinguish executable, frozen
+         contract, and documentation references, and freeze one coherent Rust
+         Tooling package without inferring semantic ownership from filenames.
+       - `7.4c3ve3` (`Accepted`): replace eight dependency-free Rust Tooling
+         leaf checkers with declarative suites preserving 128 typed decisions,
+         canonical and negative text evidence, and eight exact dispositions;
+         reduce current Bash inventory to 266 without engine special cases.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

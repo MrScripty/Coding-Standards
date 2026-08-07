@@ -137,3 +137,11 @@
 - Next slice: classify and freeze the next same-owner leaf package from the
   exact inventory; keep shared migration-contract paths deferred to Milestone
   3.
+
+## 2026-08-07 - M2-P1 Parent Reconciliation
+
+- Parent milestones `7.4c3ve2` and `7.4c3ve3` now record exact inventory and
+  the accepted eight-suite Rust Tooling package.
+- Both plans name Rust Release semantic classification as the one next slice.
+  No Rust Release suite or checker is authorized for editing until that review
+  freezes package ownership, evidence, and write sets.
