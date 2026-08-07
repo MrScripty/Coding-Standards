@@ -6,14 +6,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Security source closure `7.4c3.6` is accepted. Checker-engine
-architecture and migration are delegated to the active Generic Standards
-Verification Engine Plan before Cross-Platform source closure. Six of 27 former
-normative source entrypoints are derived.
+**Current phase:** Security source closure `7.4c3.6` and delegated verification
+engine Milestone 1 are accepted. Checker inventory and structural suite
+migration continue under the Generic Standards Verification Engine Plan before
+Cross-Platform source closure. Six of 27 former normative source entrypoints
+are derived.
 
-**Next slice:** complete delegated engine Milestone 1, then migrate the
-Cross-Platform target, native-loading, Release artifact, and Verification
-evidence suites before preparing `7.4c3.7`.
+**Next slice:** derive the delegated engine's exact checker-family and
+dependency inventory, then freeze its first coherent structural migration
+package.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2280,6 +2281,12 @@ all structural/routing fixtures pass.
        That plan owns checker-engine architecture, declarative suite migration,
        and removal of replaced Bash checkers. It supersedes the assumption that
        Cross-Platform must receive four more bespoke checker repairs.
+       - `7.4c3ve1` (`Accepted`): establish the Python 3.11+ standard-library
+         kernel, strict registry/configuration, contained paths, typed
+         diagnostics, once-only dependency scheduling, text and ordered
+         decision checks, and one policy-free migration launcher; replace the
+         complete Rust test-style leaf checker without a wrapper or lost
+         decision, text, prohibition, or disposition evidence.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

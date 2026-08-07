@@ -80,3 +80,11 @@
   deleted Rust checker remains available.
 - Next slice: derive exact checker-family/dependency inventory and freeze the
   first coherent structural migration package.
+
+## 2026-08-07 - Parent Plan Reconciliation
+
+- Parent milestone `7.4c3ve1` now records delegated engine Milestone 1 as
+  accepted and points its one next slice at exact checker inventory.
+- This transition changes planning state only. Engine source, registry, suites,
+  standards, fixtures, migration manifests, and generated artifacts are
+  unchanged.
