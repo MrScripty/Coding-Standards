@@ -5,6 +5,7 @@ readonly SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 readonly REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 readonly MANIFEST="$SCRIPT_DIR/milestone-7-final-source-closure.tsv"
 readonly REPORT="$SCRIPT_DIR/milestone-7-final-source-closure.md"
+readonly VERIFIER_REPLAN="$SCRIPT_DIR/milestone-7-source-index-verifier-replan.md"
 readonly CORPUS="$SCRIPT_DIR/corpus.tsv"
 readonly OWNER_MAP="$SCRIPT_DIR/owner-map.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
@@ -109,6 +110,27 @@ done
 [[ "$(wc -l < "$OWNER_MAP")" -eq 37 ]]
 [[ "$(wc -l < "$DISPOSITIONS")" -eq 917 ]]
 rg -F -q '`7.4c1` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4c3v` (`Accepted`)' "$PLAN"
+rg -F -q '`7.4c3v1` (`Planned`)' "$PLAN"
+
+required_verifier_replan=(
+  '## Re-plan Finding'
+  'one reusable source-index closure engine'
+  'Each accepted source package owns one distinct fixture directory.'
+  '## Canonical Inputs'
+  '## Engine Contract'
+  '## Negative Engine Evidence'
+  'same engine used by the live aggregate verifier'
+  '`7.4c3v1` establishes the engine and self-tests'
+  '## Bounded Write Sets'
+  '## No Fallback'
+  'old bespoke Coding verifier is removed'
+  '## Verification Gates'
+  '## Re-plan Triggers'
+)
+for text in "${required_verifier_replan[@]}"; do
+  rg -F -q "$text" "$VERIFIER_REPLAN"
+done
 
 "$SCRIPT_DIR/verify-consolidation-dispositions.sh"
 "$SCRIPT_DIR/verify-undisposed-source-gaps.sh"

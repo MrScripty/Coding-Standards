@@ -9303,3 +9303,45 @@ complete-suite verifier entrypoints pass.
 
 **Next slice:** `7.4c3.2`, review `COMMIT-STANDARDS.md` as a retained pure index,
 remove any residual authority wording, and update its corpus state.
+
+## Milestone 7.4c3v Source-Index Verifier Re-plan
+
+**Outcome:** Accepted.
+
+The first source package demonstrated the final structural contract but used a
+bespoke Coding verifier and flat route fixture. Repeating that implementation
+for 26 pending sources would duplicate manifest, corpus, link, heading, size,
+authority-language, and identifier checks and would create avoidable conflicts
+for concurrent isolated drafts.
+
+The accepted replacement is one reusable engine, focused engine self-tests, and
+one live aggregate verifier. Each accepted source owns a distinct fixture
+directory containing its contract, ordered headings, required routes, and
+prohibited literals. The immutable final source-closure manifest remains the
+authority for source order, owner, historical shape, and treatment; corpus and
+identifier tables retain their existing authority.
+
+Child `7.4c3v1` establishes the engine with the already accepted Coding index,
+moves Coding fixtures into a source-owned directory, and removes the bespoke
+Coding verifier when aggregate verification takes ownership. Later source
+packages can add independent fixture directories but cannot alter shared engine
+policy. Engine changes require a separate infrastructure slice.
+
+**No-fallback result:** malformed or partial fixtures, unregistered sources,
+inferred owners, unresolved targets, permissive headings, stale normative
+corpus rows, weaker identifier counts, legacy authority wording, and
+source-specific bypasses are typed invalid outcomes. The bespoke Coding
+verifier is replaced, not retained as a compatibility path.
+
+**Bounded write set:** source-index verifier re-plan, final closure report and
+checker, findings, active plan, and execution ledger. Standards, source files,
+corpus, Router, fixtures, executable engine code, dispositions, owner map,
+generated inventories, metadata, configuration, lockfiles, and downstream
+repositories remain unchanged.
+
+**Verification:** re-plan structure and required invariants, immutable final
+source-closure planning evidence, plan structure, shell syntax, diff integrity,
+and all 271 complete-suite verifier entrypoints pass.
+
+**Next slice:** `7.4c3v1`, implement and validate the reusable source-index
+closure engine before resuming `COMMIT-STANDARDS.md` package `7.4c3.2`.

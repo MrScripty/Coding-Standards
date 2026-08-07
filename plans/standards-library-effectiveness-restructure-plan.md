@@ -6,13 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3.1 Coding index source closure is accepted.
+**Current phase:** Milestone 7.4c3v source-index verifier re-plan is accepted.
 Exact identifier migration and Router authority closure are complete; one of 27
-former normative source entrypoints is now a derived pure index.
+former normative source entrypoints is derived, and shared verifier
+infrastructure must be established before the remaining packages continue.
 
-**Next slice:** Milestone 7.4c3.2 performs the retained-index purity review for
-`COMMIT-STANDARDS.md`, updates its corpus state, and removes any residual
-authority wording without changing the canonical Commit Workflow.
+**Next slice:** Milestone 7.4c3v1 establishes the reusable source-index closure
+engine, negative engine fixtures, source-owned Coding fixture directory, and
+live aggregate verifier without changing source or corpus semantics.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -44,6 +45,8 @@ is proved only by owner transition, owner presence, and exact dispositions.
 **Accelerated execution re-plan:** [Risk-classified owner packages and verification gates](../evaluation/standards-effectiveness/milestone-7-accelerated-execution-replan.md)
 
 **Final source-closure decomposition:** [Router-first closure of 27 former normative entrypoints](../evaluation/standards-effectiveness/milestone-7-final-source-closure.md)
+
+**Source-index verifier re-plan:** [Reusable aggregate engine and isolated source fixtures](../evaluation/standards-effectiveness/milestone-7-source-index-verifier-replan.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -2169,6 +2172,16 @@ all structural/routing fixtures pass.
        frozen source identifiers remain exactly dispositioned. Missing or
        conflicting routes produce typed Router diagnostics; no residual coding
        authority or compatibility wording remains.
+     - `7.4c3v` (`Accepted`): replace the proposed per-source verifier pattern
+       with one reusable closure engine, engine negative fixtures, one live
+       aggregate verifier, and isolated per-source fixture directories. The
+       immutable manifest retains owner/order/treatment authority; registered
+       fixtures supply only source shape, routes, and prohibited literals.
+     - `7.4c3v1` (`Planned`): establish the shared engine using the already
+       accepted Coding index as its first live contract, remove the bespoke
+       Coding closure verifier instead of retaining a compatibility wrapper,
+       and prove positive, negative, aggregate, and historical evidence before
+       package `7.4c3.2` begins.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`

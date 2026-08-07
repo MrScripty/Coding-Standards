@@ -55,6 +55,12 @@ longer appears as normative in the corpus. Source packages may be drafted in
 isolation, but Router, corpus, shared inventories, plans, and ledgers remain
 serial integration-owner files.
 
+Structural package verification follows the
+[source-index verifier re-plan](milestone-7-source-index-verifier-replan.md):
+one reusable engine consumes source-owned fixture directories, while existing
+owner verifiers retain source-specific semantic evidence. A package cannot add
+a bespoke structural verifier or modify the shared engine to admit itself.
+
 ## Ordered Execution
 
 1. `7.4c2` removes the two stale Router routes and establishes global negative
