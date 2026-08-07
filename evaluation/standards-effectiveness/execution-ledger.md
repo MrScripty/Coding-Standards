@@ -9568,3 +9568,40 @@ complete-suite verifier entrypoints pass.
 
 **Next slice:** `7.4c3.4`, update the Documentation source and its own focused
 index-closure checker atomically while preserving all semantic evidence.
+
+## Milestone 7.4c3hdoc Mixed Documentation Changelog Checker Repair
+
+**Outcome:** Accepted.
+
+The complete-suite preflight for Documentation source package `7.4c3.4`
+stopped because `verify-documentation-changelog-closure.sh` treated every
+level-two heading as a policy section. The proposed
+`## Canonical Documentation Routes` heading is navigation, while the checker
+also owns shared Release policy and therefore cannot be changed by one source
+package.
+
+The serial repair removes blanket heading and line-shape assertions and
+replaces them with explicit prohibitions for the legacy Documentation policy
+sections. It preserves all 16 exact changelog dispositions, required
+Documentation workflow/recipe/Release routes, canonical Release metadata and
+rules, and removed legacy changelog content. Final title, ordered headings, and
+line bounds remain the aggregate source-closure engine's responsibility when
+the Documentation package registers its fixtures.
+
+**No-fallback result:** the checker neither treats arbitrary navigation
+headings as policy nor accepts legacy policy headings. It rejects the actual
+legacy policy sections and content, while the following source package must
+satisfy the one strict aggregate shape contract.
+
+**Bounded write set:** mixed Documentation changelog checker, source-index
+re-plan, final source-closure planning checker, findings, active plan, and
+execution ledger. Standards, former sources, source-specific checkers,
+fixtures, engine code, corpus, Router, dispositions, owner map, generated
+inventories, metadata, configuration, and lockfiles remain unchanged.
+
+**Verification:** focused Documentation changelog closure, final source-closure
+planning, historical checker ownership, shell syntax, diff integrity, and all
+272 complete-suite verifier entrypoints pass.
+
+**Next slice:** `7.4c3.4`, update the Documentation source and its own focused
+index-closure checker atomically while preserving all semantic evidence.

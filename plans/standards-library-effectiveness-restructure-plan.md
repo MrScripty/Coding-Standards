@@ -6,10 +6,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3h41 row 41 historical-checker repair is
-accepted. Exact identifier migration and Router authority closure are complete;
-three of 27 former normative source entrypoints are derived, and the completed
-row 41 checker no longer owns obsolete Documentation source prose.
+**Current phase:** Milestone 7.4c3hdoc mixed Documentation changelog checker
+repair is accepted. Exact identifier migration and Router authority closure are
+complete; three of 27 former normative source entrypoints are derived, and
+mixed Release evidence no longer misclassifies navigation headings as policy.
 
 **Next slice:** Milestone 7.4c3.4 performs the retained-index purity review for
 `DOCUMENTATION-STANDARDS.md`, updates its corpus state, and registers its
@@ -2210,6 +2210,11 @@ all structural/routing fixtures pass.
        slice. Preserve immutable row 41, P33, STD-0349, owner-review,
        disposition, canonical-route, non-authority, and transitive owner
        evidence; add a negative self-scan against renewed prose ownership.
+     - `7.4c3hdoc` (`Accepted`): replace the mixed Documentation changelog
+       checker's blanket heading rejection with explicit legacy policy-section
+       prohibitions. Preserve all 16 changelog dispositions, canonical Release
+       behavior, required routes, and removed-content evidence while assigning
+       final title, heading, and line-shape ownership to the aggregate engine.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`

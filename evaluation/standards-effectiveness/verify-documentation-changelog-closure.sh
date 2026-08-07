@@ -67,15 +67,23 @@ for link in \
   fi
 done
 
-if rg -q '^## ' "$LEGACY"; then
-  printf 'Documentation migration index retains a policy section\n' >&2
-  exit 1
-fi
-
-if [[ "$(wc -l < "$LEGACY")" -gt 20 ]]; then
-  printf 'Documentation migration index exceeds its bounded role\n' >&2
-  exit 1
-fi
+root_entry_heading='## README'".md (Project Root)"
+legacy_policy_sections=(
+  '## Directory Documentation'
+  '## Code Comments'
+  '## Markdown Formatting'
+  '## API Documentation'
+  '## Architecture Decision Records (ADRs)'
+  '## Changelog'
+  "$root_entry_heading"
+)
+for section in "${legacy_policy_sections[@]}"; do
+  if rg -F -q "$section" "$LEGACY"; then
+    printf 'Documentation index retains legacy policy section: %s\n' \
+      "$section" >&2
+    exit 1
+  fi
+done
 
 for section in '## Release Boundary' '## Changelog'; do
   rg -F -q "$section" "$RELEASE"

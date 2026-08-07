@@ -170,6 +170,28 @@ non-authority evidence, typed outcomes, and all transitive owner checks. A
 negative self-scan prevents the historical checker from reclaiming the obsolete
 source wording. The source remains unchanged until the repair is accepted.
 
+## Mixed Documentation Changelog Checker Repair
+
+The complete-suite preflight for source package `7.4c3.4` found that
+`verify-documentation-changelog-closure.sh` classified every level-two heading
+as a policy section. That checker also owns exact changelog dispositions and
+canonical Release workflow behavior, so it is mixed policy infrastructure and
+cannot be edited by the Documentation source package.
+
+Separate serial repair `7.4c3hdoc` removes the blanket heading and line-shape
+assertions. It preserves all 16 exact changelog dispositions, canonical Release
+metadata and rules, required Documentation workflow/recipe/Release routes, and
+negative legacy changelog evidence. Explicit prohibited legacy policy headings
+replace the blanket test, so a canonical navigation heading is not
+misclassified as policy. Final title, complete heading set, and line bound are
+owned by the aggregate source-closure engine when package `7.4c3.4` registers
+the Documentation fixtures.
+
+The repair cannot introduce dual old/new source assertions, exempt
+Documentation from the aggregate engine, weaken Release semantics, or add a
+source-specific fallback. The source and its pending fixtures remain unchanged
+until the repair is accepted.
+
 ## Bounded Write Sets
 
 Lifecycle repair `7.4c3v1r` may change only this re-plan, the final
@@ -188,6 +210,13 @@ Historical repair `7.4c3h41` may change only the row 41 historical checker,
 this re-plan, the final source-closure planning checker, findings, the active
 plan, and the execution ledger. It cannot change standards, former sources,
 source-specific checkers, fixtures, engine code, corpus data, Router,
+dispositions, owner map, generated inventories, metadata, configuration, or
+lockfiles.
+
+Mixed-checker repair `7.4c3hdoc` may change only the Documentation changelog
+checker, this re-plan, the final source-closure planning checker, findings, the
+active plan, and the execution ledger. It cannot change standards, former
+sources, source-specific checkers, fixtures, engine code, corpus data, Router,
 dispositions, owner map, generated inventories, metadata, configuration, or
 lockfiles.
 
@@ -236,6 +265,11 @@ Historical repair `7.4c3h41` requires the focused row 41 checker, the final
 source-closure planning checker, historical checker ownership, shell syntax,
 diff integrity, and the complete suite because accepted historical verifier
 behavior changes.
+
+Mixed-checker repair `7.4c3hdoc` requires focused Documentation changelog and
+final source-closure planning checks, historical checker ownership, shell
+syntax, diff integrity, and the complete suite because a mixed policy checker
+changes.
 
 `7.4c3v1` requires engine positive and negative fixtures, unchanged Coding
 source/corpus semantics, exact Coding closure, aggregate discovery, Router
