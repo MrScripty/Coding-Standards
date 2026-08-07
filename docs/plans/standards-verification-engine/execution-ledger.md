@@ -206,3 +206,23 @@
   disposition remains.
 - Next slice: classify the next dependency-free same-owner package from exact
   inventory evidence, keeping shared historical contracts for Milestone 3.
+
+## 2026-08-07 - Milestone 2 Tooling Policy Package Freeze
+
+- Outcome: froze `M2-P3` as five dependency-free Tooling workflow suites for
+  editor configuration, lint policy, formatting policy, CI orchestration, and
+  debt/cost governance.
+- Preserved evidence: 60 typed decision rows, canonical Tooling workflow and
+  reference text, former-source routes, 11 legacy-default prohibitions, and 13
+  exact dispositions.
+- Dependency review: all five have zero executable and frozen-contract inbound
+  references and no verifier/helper dependency.
+- Exclusions: row-35-frozen Tooling owner/reference checkers and separately
+  owned Tooling reference, TypeScript, and Verification checkers remain outside
+  the package.
+- No-fallback result: implementation must use existing engine primitives,
+  delete all five scripts, and add no wrapper, compatibility path, source
+  exception, or owner-specific engine branch.
+- Scope: planning authority only; no engine, registry, suite, fixture, checker,
+  generated inventory, standard, disposition, or historical contract changed.
+- Next slice: implement and verify `M2-P3` as one atomic package.

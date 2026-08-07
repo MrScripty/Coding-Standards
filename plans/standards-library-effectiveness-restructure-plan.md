@@ -13,9 +13,8 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** classify the delegated engine's next dependency-free
-same-owner package from exact inventory evidence without editing shared
-historical contracts.
+**Next slice:** implement the delegated engine's frozen Tooling policy package
+`M2-P3` without engine or shared historical-contract changes.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2304,6 +2303,10 @@ all structural/routing fixtures pass.
          `STD-0811` through `STD-0819`; reduce current Bash inventory from 266
          to 261 while keeping the frozen Release evidence and owner-contract
          checkers for shared-contract Milestone 3.
+       - `7.4c3ve5` (`Planned`): replace five dependency-free Tooling policy
+         checkers with declarative suites preserving 60 typed decisions,
+         canonical and negative text evidence, and 13 exact dispositions;
+         retain row-35-frozen and separately owned adjacent Tooling checkers.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

@@ -112,3 +112,43 @@ No script is scheduled for deletion solely because it is short, unreferenced,
 or mechanically similar. Executable and frozen-contract references are resolved
 in the accepting package; historical checker-identity contracts remain deferred
 to Milestone 3's shared migration-contract replacement.
+
+## Third Reviewed Package
+
+Package `M2-P3` is frozen for implementation as five Tooling policy leaf
+checkers:
+
+| Suite | Replaced checker | Decision fixture | Exact IDs |
+| --- | --- | --- | --- |
+| `tooling-ci-orchestration` | `verify-tooling-ci-orchestration.sh` | `tooling/ci-orchestration-decisions.tsv` | `STD-0687`, `STD-0689`, `STD-0690` |
+| `tooling-debt-cost` | `verify-tooling-debt-cost.sh` | `tooling/debt-cost-decisions.tsv` | `STD-0691`, `STD-0692` |
+| `tooling-editor-configuration` | `verify-tooling-editor-configuration.sh` | `tooling/editor-configuration-decisions.tsv` | `STD-0666`, `STD-0673` |
+| `tooling-formatting-policy` | `verify-tooling-formatting-policy.sh` | `tooling/formatting-policy-decisions.tsv` | `STD-0681`, `STD-0682`, `STD-0683`, `STD-0686` |
+| `tooling-lint-policy` | `verify-tooling-lint-policy.sh` | `tooling/lint-policy-decisions.tsv` | `STD-0674`, `STD-0675` |
+
+### M2-P3 Cohesion Decision
+
+- Canonical owner: `workflow.tooling`.
+- Observable package outcome: repository facts and upstream authority select
+  editor, lint, formatting, CI, debt, and automation-cost orchestration without
+  editor, product, provider, schedule, cache, mutation, or warning defaults.
+- Risk: `consolidation`; the 60 accepted fixture outcomes, standards text, and
+  dispositions do not change.
+- Dependencies: all five scripts have zero executable and frozen-contract
+  inbound references and no verifier/helper dependency.
+- Assertion family: existing ordered predicates, required/prohibited text, and
+  exact disposition-row prefixes. No engine source change is authorized.
+- Exclusions: Tooling owner-contract and reference-recipe scripts remain frozen
+  by row-35 contracts; CI workflow and setup reference scripts belong to the
+  Tooling reference owner; TypeScript static analysis and Verification quality
+  gates belong to different canonical owners.
+- Write owner: one package author may edit only the five suite TOMLs, registry
+  rows, five deleted scripts, generated inventory, and child plan records.
+- Gate: 13 engine/inventory self-tests, direct execution of all registered
+  suites, generic launcher, stale-inventory and removed-path scans, plan/diff
+  integrity, and one complete mixed suite expected to contain 256 Bash
+  entrypoints.
+
+The Rust API and Rust Dependency four-script candidates remain independent
+future owner packages. They are not combined with `M2-P3` merely to enlarge the
+batch.

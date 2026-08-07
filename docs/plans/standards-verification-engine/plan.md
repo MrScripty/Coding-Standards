@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: classify the next dependency-free owner package
+**Next slice:** Milestone 2: implement Tooling policy package `M2-P3`
 
 **Acceptance status:** `pending`
 
@@ -238,6 +238,38 @@ source alias, compatibility schema, or owner-specific engine branch.
 suites passed 70 checks directly and through the migration launcher; generated
 inventory is fresh at 261 Bash entrypoints; all five deleted-path executable
 and contract scans passed; and the complete 261-entrypoint mixed suite passed.
+
+#### Package M2-P3: Tooling Policy Consolidation
+
+**Status:** `Planned`
+
+**Owner:** `workflow.tooling`
+
+**Risk:** `consolidation`
+
+**Allowed write set:**
+
+- `evaluation/standards-effectiveness/suite-registry.toml`
+- five suite contracts named in the checker-inventory report
+- the five corresponding Bash checkers (delete only)
+- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+- this plan, ledger, issues, and checker-inventory report
+- parent plan reconciliation after package acceptance
+
+**Preserved contract:** 60 ordered typed decisions; canonical Tooling workflow,
+Tooling reference, and former-source route evidence; 11 prohibited legacy
+defaults; and 13 exact dispositions across `STD-0666`, `STD-0673` through
+`STD-0675`, `STD-0681` through `STD-0683`, `STD-0686`, `STD-0687`, and
+`STD-0689` through `STD-0692`.
+
+**Exclusions:** Tooling owner-contract and reference-recipe checkers remain
+frozen by row-35 contracts. Tooling CI workflow reference and tool-setup
+reference belong to the Tooling reference owner; TypeScript static analysis and
+Verification quality gates belong to different canonical owners.
+
+**No-fallback rule:** implement with existing strict text and ordered-decision
+checks, delete all five replaced scripts in the same slice, and add no wrapper,
+source alias, compatibility schema, or owner-specific engine branch.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 
