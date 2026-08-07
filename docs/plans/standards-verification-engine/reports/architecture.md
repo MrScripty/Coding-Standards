@@ -142,8 +142,9 @@ loads arbitrary module paths from suite configuration.
 5. Migrate repeated ordered decision packages by owner and risk.
 6. Replace transitive calls with registry dependencies and unblock
    Cross-Platform closure.
-7. Review exceptions, retire obsolete Bash and the migration launcher, and run
-   final engine-only acceptance.
+7. Implement any justified exceptional algorithm as a registered typed Python
+   check, retire every Bash verifier/helper and the migration launcher, and run
+   final Python engine-only acceptance.
 
 Migration batches share an owner, semantic outcome, dependency set, assertion
 family, and verification gate. Adjacency or short script length is not enough.

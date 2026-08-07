@@ -14,11 +14,11 @@
 
 ## Objective
 
-Replace most bespoke Bash verification scripts with one maintainable,
-declarative verification engine that runs repository-owned suites once through
-a deterministic dependency graph, returns typed diagnostics, and preserves the
-standards migration's exact ownership, disposition, no-fallback, and evidence
-contracts.
+Eliminate the Bash verification and helper surface in favor of one
+maintainable, declarative Python verification engine that runs repository-owned
+suites once through a deterministic dependency graph, returns typed
+diagnostics, and preserves the standards migration's exact ownership,
+disposition, no-fallback, and evidence contracts.
 
 ## Objective Acceptance
 
@@ -28,8 +28,8 @@ contracts.
 | A2 | Strict configuration, path containment, dependency, assertion, and typed-diagnostic self-tests pass. | `focused` | `not-applicable` | `automated` | `pending` | pending |
 | A3 | Decision, text, table, metadata, migration, plan, and source-index contracts needed by the current repository are represented without arbitrary command execution. | `contract` | `not-applicable` | `automated` | `pending` | pending |
 | A4 | Migrated suites delete their replaced Bash checkers in the same accepted slice and preserve positive, negative, ownership, disposition, and no-fallback evidence. | `integration` | `not-applicable` | `automated` | `pending` | pending |
-| A5 | Inventory proves every remaining Bash checker is migrated, explicitly retained as a bounded exceptional adapter, or scheduled with one owner and gate. | `contract` | `not-applicable` | `automated` | `pending` | pending |
-| A6 | The final engine-only suite passes and the former repeated transitive checker graph is absent. | `system` | `not-applicable` | `automated` | `pending` | pending |
+| A5 | Final inventory proves every Bash verifier, verification helper, and migration launcher is deleted after its behavior is migrated or intentionally retired with reviewed evidence. | `contract` | `not-applicable` | `automated` | `pending` | pending |
+| A6 | The final Python engine-only suite passes through a documented Python entrypoint; the former Bash and repeated transitive checker graphs are absent. | `system` | `not-applicable` | `automated` | `pending` | pending |
 
 ## Scope
 
@@ -42,7 +42,8 @@ contracts.
 - Typed text and JSON diagnostics with stable codes and source locations.
 - Reusable text, decision, table, metadata, disposition, plan, route, and
   source-index checks required by measured checker inventory.
-- Incremental removal of replaced Bash checkers and obsolete helper scripts.
+- Incremental removal of every Bash checker, verification helper, and temporary
+  migration launcher.
 - A generated migration inventory derived from registered and remaining
   checkers.
 
@@ -73,6 +74,9 @@ contracts.
   serial integration-owner files.
 - A migrated checker and its old helper path are removed, not wrapped or kept as
   fallback.
+- A genuinely custom algorithm remains eligible only as a typed,
+  side-effect-free Python check registered through the engine; Bash is not an
+  exceptional-check representation.
 
 ### Assumptions
 
@@ -95,6 +99,7 @@ contracts.
 | Keep policy in standards and fixtures; the engine exposes bounded assertion primitives and ordered decision predicates. | This plan | [Architecture report](reports/architecture.md#ownership-boundary) | Policy embedded in shell control flow |
 | Prohibit arbitrary commands and compatibility schemas in declarative suites. | This plan | [Architecture report](reports/architecture.md#security-and-no-fallback) | Shell-command check actions and old/new parser branches |
 | Migrate by semantic family, deleting each replaced checker in the accepting slice. | This plan | [Architecture report](reports/architecture.md#migration-sequence) | Indefinite dual execution |
+| Retire all Bash verifiers, verification helpers, and the migration launcher; represent exceptional algorithms only as registered typed Python checks. | This plan | [Architecture report](reports/architecture.md#extension-rule) | Bounded exceptional Bash adapters |
 | Keep the parent standards restructure plan authoritative for normative migration and this child plan authoritative for checker-engine architecture and migration. | Integration owner | Parent-plan delegation | `7.4c3hcp` bespoke Cross-Platform repair assumption |
 
 ## Simplicity And Ownership Review
@@ -282,13 +287,16 @@ documentation, and plan records.
   historical-only assertion, or genuinely custom algorithm.
 - [ ] Add reusable primitives only when at least two coherent owners require
   them or one safety-critical invariant cannot otherwise be expressed clearly.
-- [ ] Keep any custom check typed, side-effect-free, registered, directly
-  tested, and owned; remove all other Bash verifiers and helpers.
-- [ ] Replace the migration launcher with the final engine command.
+- [ ] Keep any custom check typed, side-effect-free, implemented in Python,
+  registered, directly tested, and owned.
+- [ ] Remove every Bash verifier and verification helper after its accepted
+  replacement or reviewed retirement.
+- [ ] Replace and delete the Bash migration launcher with the final Python
+  engine command.
 
-**Acceptance gate:** Exact inventory has no unowned remainder; engine-only full
-suite passes; no obsolete Bash verifier, transitive execution graph, arbitrary
-command action, or duplicate authority remains.
+**Acceptance gate:** Exact inventory reports zero Bash verifiers, verification
+helpers, or launchers; the Python engine-only full suite passes; no transitive
+execution graph, arbitrary command action, or duplicate authority remains.
 
 **Status:** `Planned`
 

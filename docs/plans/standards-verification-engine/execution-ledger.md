@@ -145,3 +145,20 @@
 - Both plans name Rust Release semantic classification as the one next slice.
   No Rust Release suite or checker is authorized for editing until that review
   freezes package ownership, evidence, and write sets.
+
+## 2026-08-07 - Complete Bash Retirement Objective
+
+- Trigger: the maintainer clarified that the engine must eventually eliminate
+  all Bash verification scripts, not merely most bespoke checkers.
+- Decision: final acceptance requires zero Bash verifiers, verification
+  helpers, or launchers. A genuinely custom algorithm may survive only as a
+  registered, typed, side-effect-free, directly tested Python check.
+- Migration boundary: the existing policy-free Bash launcher remains temporary
+  only while the current complete-suite convention discovers `verify-*.sh`;
+  Milestone 6 replaces and deletes it atomically with that convention.
+- No-fallback result: this revision does not authorize wrappers, exceptional
+  Bash adapters, compatibility schemas, or weaker retirement evidence.
+- Scope: planning authority only; no engine, suite, fixture, checker,
+  generated inventory, standard, or disposition changed.
+- Next slice: classify and freeze the Rust Release leaf package under the
+  clarified zero-Bash acceptance target.

@@ -2279,8 +2279,10 @@ all structural/routing fixtures pass.
      - `7.4c3ve` (`Active`): implement the delegated
        [Generic Standards Verification Engine Plan](../docs/plans/standards-verification-engine/plan.md).
        That plan owns checker-engine architecture, declarative suite migration,
-       and removal of replaced Bash checkers. It supersedes the assumption that
-       Cross-Platform must receive four more bespoke checker repairs.
+       and complete retirement of Bash verifiers, verification helpers, and the
+       temporary migration launcher. Exceptional algorithms remain eligible
+       only as registered typed Python checks. This supersedes the assumption
+       that Cross-Platform must receive four more bespoke checker repairs.
        - `7.4c3ve1` (`Accepted`): establish the Python 3.11+ standard-library
          kernel, strict registry/configuration, contained paths, typed
          diagnostics, once-only dependency scheduling, text and ordered
