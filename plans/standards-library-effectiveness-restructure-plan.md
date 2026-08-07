@@ -6,14 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c2 Router legacy-route closure is accepted.
-Exact identifier migration is complete, no former standard/profile source is a
-Router authority, and the ordered closure of 27 former normative source
-entrypoints remains active.
+**Current phase:** Milestone 7.4c3.1 Coding index source closure is accepted.
+Exact identifier migration and Router authority closure are complete; one of 27
+former normative source entrypoints is now a derived pure index.
 
-**Next slice:** Milestone 7.4c3.1 rewrites `CODING-STANDARDS.md` as a concise
-non-normative index to `CORE-STANDARDS.md` and updates its corpus state with
-focused purity and complete-suite evidence.
+**Next slice:** Milestone 7.4c3.2 performs the retained-index purity review for
+`COMMIT-STANDARDS.md`, updates its corpus state, and removes any residual
+authority wording without changing the canonical Commit Workflow.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2164,6 +2163,12 @@ all structural/routing fixtures pass.
      `7.4c3.27` in immutable manifest order, changing each former source to a
      non-normative pure index and updating its corpus state without restoring
      policy or fallback behavior.
+     - `7.4c3.1` (`Accepted`): replace `CODING-STANDARDS.md` with a concise
+       non-normative index, set its corpus state to derived, preserve only
+       navigation to Core and the accepted split owners, and prove all 60
+       frozen source identifiers remain exactly dispositioned. Missing or
+       conflicting routes produce typed Router diagnostics; no residual coding
+       authority or compatibility wording remains.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`

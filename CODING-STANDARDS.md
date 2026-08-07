@@ -1,90 +1,62 @@
 # Coding Standards Legacy Index
 
-> **Migration authority:** [CORE-STANDARDS.md](CORE-STANDARDS.md) is canonical
-> for universal simplicity, ownership, boundary, failure, lifecycle, and change
-> integrity rules. This file remains canonical only for detailed coding topics
-> not yet moved. Conflicts for moved rules resolve to Core.
+This former standards entrypoint is non-normative navigation. Universal coding
+policy is owned by [Core](CORE-STANDARDS.md); select additional owners through
+the [Standards Router](STANDARDS-ROUTER.md). This file owns no coding rule,
+applicability decision, default, example, or fallback authority.
 
-This file is a migration index for detailed coding topics not yet moved.
-Universal simplicity and ownership are canonical in
-[Core](CORE-STANDARDS.md#simplicity-and-ownership).
+If a link is missing, conflicting, or inapplicable, return the Router's typed
+diagnostic instead of using prior wording from this file.
 
-Architecture authority is canonical in
-[Architecture](topics/architecture.md). This legacy index does not define file,
-layer, service, data/state ownership, dependency-direction, or composition
-policy.
+## Universal Coding Routes
 
-Constants and configuration authority is canonical in
-[Core](CORE-STANDARDS.md#semantic-constants-and-configuration).
+- Simplicity and ownership: [Core](CORE-STANDARDS.md#simplicity-and-ownership)
+- Code and terminology: [Core](CORE-STANDARDS.md#code-and-terminology-discipline)
+- Constants and configuration: [Core](CORE-STANDARDS.md#semantic-constants-and-configuration)
+- Architecture and state authority: [Architecture](topics/architecture.md)
 
 ## Error Handling Legacy Route
 
-Failure handling and diagnostic authority is canonical in
-[Resilience](topics/resilience.md#failure-boundaries-and-diagnostics).
-
+- Failure boundaries and diagnostics: [Resilience](topics/resilience.md#failure-boundaries-and-diagnostics)
 
 ## Boundary Validation Legacy Route
 
-Inbound and outbound validation authority is canonical in
-[Contracts](topics/contracts.md#inbound-and-outbound-boundary-proof).
+- Inbound and outbound proof: [Contracts](topics/contracts.md#inbound-and-outbound-boundary-proof)
 
 ## Dependency Management Legacy Route
 
-Dependency requirement, ownership, selection, resolution, provisioning,
-update, and removal authority is canonical in
-[Dependencies](topics/dependencies.md).
-
-## Code And Naming Legacy Route
-
-Code volume, abstraction, duplication, deletion, naming, and terminology
-authority is canonical in
-[Core](CORE-STANDARDS.md#code-and-terminology-discipline).
+- Dependency lifecycle and selection: [Dependencies](topics/dependencies.md)
 
 ## Invariants And Safety Legacy Route
 
-Invariant, precondition, postcondition, and enforcement authority is canonical
-in [Contracts](topics/contracts.md#invariant-contracts). Verification evidence
-is selected by the
-[Verification workflow](workflows/verification.md#selecting-claims).
+- Invariant contracts: [Contracts](topics/contracts.md#invariant-contracts)
+- Evidence selection: [Verification](workflows/verification.md#selecting-claims)
 
 ## Disabled Features Legacy Route
 
-Disabled, removed, and incomplete behavior lifecycle authority is canonical in
-the [Implementation workflow](workflows/implementation.md#disabled-and-incomplete-behavior).
-Acceptance evidence is selected by the
-[Verification workflow](workflows/verification.md#disabled-behavior-claims).
+- Disabled and incomplete behavior: [Implementation](workflows/implementation.md#disabled-and-incomplete-behavior)
+- Disabled behavior claims: [Verification](workflows/verification.md#disabled-behavior-claims)
 
 ## Build Behavior Route
 
-Build-time action, input, output, invalidation, side-effect, environment, and
-determinism authority is canonical in the
-[Build workflow](workflows/build.md).
+- Build behavior and evidence: [Build workflow](workflows/build.md)
 
 ## License Attribution Legacy Route
 
-Third-party provenance, license compatibility, obligation, attribution, and
-distribution authority is canonical in [Licensing](topics/licensing.md).
+- Third-party obligations and attribution: [Licensing](topics/licensing.md)
 
 ## Language-Specific Guidelines Legacy Route
 
-Select language mechanism guidance from the
-[Language Profiles](STANDARDS-ROUTER.md#language-profiles) table. Generic
-policy remains in Core, workflows, and topics.
+Generic policy remains in Core, workflows, and topics.
 
-## TypeScript-Specific Guidelines Legacy Route
-
-TypeScript mechanism guidance is canonical in the
-[TypeScript profile](profiles/languages/typescript.md). Async concurrency
-mechanisms additionally use the
-[TypeScript Async profile](profiles/languages/typescript/async.md).
+- Language selection: [Language Profiles](STANDARDS-ROUTER.md#language-profiles)
+- TypeScript mechanisms: [TypeScript profile](profiles/languages/typescript.md)
+- TypeScript async mechanisms: [TypeScript Async profile](profiles/languages/typescript/async.md)
 
 ## Frontend Standards Legacy Route
 
-Frontend projection, rendering, synchronization, interaction, and
-frontend-specific evidence are canonical in the
-[Frontend application profile](profiles/applications/frontend.md).
+- Frontend projection and interaction: [Frontend application profile](profiles/applications/frontend.md)
 
 ## Performance Legacy Route
 
-Performance claims, measurement contracts, optimization decisions, benchmarks,
-and regression evidence are canonical in [Performance](topics/performance.md).
+- Performance claims and evidence: [Performance](topics/performance.md)

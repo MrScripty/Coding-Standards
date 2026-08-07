@@ -9260,3 +9260,46 @@ diff integrity, and all 270 complete-suite verifier entrypoints pass.
 
 **Next slice:** `7.4c3.1`, rewrite `CODING-STANDARDS.md` as a concise
 non-normative index to `CORE-STANDARDS.md` and update its corpus state.
+
+## Milestone 7.4c3.1 Coding Index Source Closure
+
+**Outcome:** Accepted.
+
+`CODING-STANDARDS.md` is now a concise non-normative migration index. Core
+remains its file-level canonical owner, while the index preserves navigation to
+Architecture, Resilience, Contracts, Dependencies, Implementation,
+Verification, Build, Licensing, language profiles, Frontend, and Performance
+only because accepted split dispositions placed the corresponding frozen rules
+with those owners.
+
+The source no longer claims residual authority for detailed topics "not yet
+moved," resolves conflicts by reviving old text, or contains coding rules,
+defaults, or examples. Missing, conflicting, and inapplicable routes return the
+Router's typed diagnostic. The corpus row changes from normative `yes` to
+`derived`; the frozen source-closure manifest remains immutable and continues
+to record the pre-package expanded shape and `rewrite-index` treatment.
+
+The focused route fixture names seventeen unique canonical links. The closure
+verifier limits the index to its exact heading set and concise size, rejects
+legacy authority language and third-level rule sections, proves all 60 frozen
+source identifiers remain in both owner-map and disposition evidence, and
+reuses Core, Contracts, language-routing, and Router closure checks.
+
+**No-fallback result:** the legacy index cannot own policy, decide
+applicability, restore prior wording, or substitute for a missing canonical
+route. It contains navigation only.
+
+**Bounded write set:** `CODING-STANDARDS.md`, its corpus row, one focused route
+fixture and source-closure verifier, active plan, and execution ledger. Core,
+other canonical owners, Router, the other 26 former sources, owner map,
+dispositions, source-gap fixtures, generated inventories, metadata,
+configuration, lockfiles, and downstream repositories remain unchanged.
+
+**Verification:** seventeen unique existing canonical routes, exact concise
+index headings and size, derived corpus state, 60 owner-map and disposition
+identifiers, immutable manifest treatment, Core/Contracts/language/Router
+ownership checks, plan structure, shell syntax, diff integrity, and all 271
+complete-suite verifier entrypoints pass.
+
+**Next slice:** `7.4c3.2`, review `COMMIT-STANDARDS.md` as a retained pure index,
+remove any residual authority wording, and update its corpus state.
