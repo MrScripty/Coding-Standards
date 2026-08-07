@@ -9816,3 +9816,35 @@ resume only where write sets remain exclusive.
 
 **Next slice:** resolve `F084`, then prepare and integrate Security in manifest
 order without preserving transitional source shape.
+
+## Milestone 7.4c3hs Security Checker-Repair Decomposition
+
+**Outcome:** Accepted.
+
+The selected dependency graph assigns the cross-source IPC verifier to one
+serial infrastructure package and the input-validation, validation-proof, and
+network verifiers to three independent local packages. The frozen package table
+gives every mutable checker exactly one write owner and allows the three local
+repairs to be prepared concurrently without sharing source, fixture, planning,
+or checker files.
+
+Each package removes only mutable legacy-shape evidence. Canonical owner text,
+strict decision outcomes, exact dispositions, required former-source routes,
+and negative fallback evidence remain mandatory. Heading-delimited negative
+checks become exact source-wide prohibitions so they survive pure-index closure
+without accepting old and new layouts.
+
+**No-fallback result:** the plan forbids transitional-heading retention,
+`HEAD` snapshots, old/new checker branches, source exceptions, and semantic
+weakening. Security remains unchanged until the repair group passes.
+
+**Concurrency:** `7.4c3hs2a`, `7.4c3hs2b`, and `7.4c3hs2c` may prepare in
+isolated worktrees. `7.4c3hs1`, shared state updates, integration, and the group
+suite remain serial.
+
+**Bounded write set:** repair design, frozen package table, focused re-plan
+verifier, active plan, findings status, and execution ledger.
+
+**Next slice:** integrate `7.4c3hs1`, integrate the three independently
+prepared local repairs, run the complete group gate, and resolve `F084` before
+Security source closure.

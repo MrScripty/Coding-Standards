@@ -1,0 +1,5 @@
+package	sequence	scope	writable_checker	preparation	preserved_evidence	integration_gate
+7.4c3hs1	1	cross-source-ipc	evaluation/standards-effectiveness/verify-ipc-payload-validation.sh	serial	owner+routes+dispositions+typed-outcomes+negative-policy	focused-then-group-suite
+7.4c3hs2a	2	security-input-validation	evaluation/standards-effectiveness/verify-input-validation-authority.sh	parallel-local	owner+routes+dispositions+typed-outcomes+negative-policy	focused-then-group-suite
+7.4c3hs2b	2	contracts-proof-lifetime	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	parallel-local	owner+routes+dispositions+typed-outcomes+negative-policy	focused-then-group-suite
+7.4c3hs2c	2	security-network-transport	evaluation/standards-effectiveness/verify-network-transport-policy.sh	parallel-local	owner+routes+dispositions+typed-outcomes+negative-policy	focused-then-group-suite

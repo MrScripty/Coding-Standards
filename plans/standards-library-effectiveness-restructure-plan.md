@@ -6,14 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3.5 Concurrency index source closure is
-accepted. Milestone 7.4c3.6 Security is blocked before implementation because
-its required checker changes do not have one exclusive source-package owner.
-Five of 27 former normative source entrypoints are derived.
+**Current phase:** Milestone 7.4c3hs Security checker-repair decomposition is
+accepted. Its four exclusive packages preserve durable semantics while
+removing mutable legacy-shape ownership before Security source closure. Five
+of 27 former normative source entrypoints are derived.
 
-**Next slice:** re-plan `7.4c3hs` to assign the Security-only historical
-assertions and the Architecture/Interop/Security IPC checker to non-overlapping
-checker-infrastructure packages before preparing `7.4c3.6`.
+**Next slice:** integrate serial cross-source IPC repair `7.4c3hs1`, prepare the
+three disjoint `7.4c3hs2` checker repairs concurrently, and accept the group
+gate before preparing `7.4c3.6`.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -47,6 +47,8 @@ is proved only by owner transition, owner presence, and exact dispositions.
 **Final source-closure decomposition:** [Router-first closure of 27 former normative entrypoints](../evaluation/standards-effectiveness/milestone-7-final-source-closure.md)
 
 **Source-index verifier re-plan:** [Reusable aggregate engine and isolated source fixtures](../evaluation/standards-effectiveness/milestone-7-source-index-verifier-replan.md)
+
+**Security checker repair re-plan:** [Dependency-ordered exclusive checker packages](../evaluation/standards-effectiveness/milestone-7-security-checker-repair-replan.md)
 
 This is the active implementation plan. Detailed findings, command output, and
 dated execution history belong in linked reports and an execution ledger, not
@@ -2246,16 +2248,27 @@ all structural/routing fixtures pass.
        routes, and register isolated shape, route, and prohibited-literal
        fixtures. Preserve all 17 frozen source dispositions and every dependent
        owner checker without dual wording or compatibility fallback.
-     - `7.4c3hs` (`Blocked`): assign ownership for Security closure checker
-       repairs before changing `SECURITY-STANDARDS.md`. Input-validation and
-       validation-proof verifiers compare unrelated legacy sections to `HEAD`;
-       network, row-42, and source-closure verifiers require transitional
-       headings; and the IPC verifier reads Architecture, Interop, and Security
-       legacy sections in one file. The re-plan must preserve canonical owner,
-       exact disposition, typed-outcome, and negative-policy evidence while
-       removing mutable legacy-shape ownership. It must not assign the shared
-       IPC checker to one source package, retain headings as compatibility
-       shims, or weaken the checks to permit source closure.
+     - `7.4c3hs` (`Accepted`): repair checker ownership through one serial
+       cross-source IPC package and three independently preparable local
+       packages before changing `SECURITY-STANDARDS.md`. Every checker has one
+       exclusive write owner; canonical owner, route, exact disposition,
+       typed-outcome, and negative-policy evidence remains mandatory.
+       Transitional headings, `HEAD` comparisons, compatibility branches,
+       source exceptions, and weakened checks are prohibited.
+       - `7.4c3hs1` (`Planned`): remove Architecture/Interop/Security
+         heading-delimited legacy extraction from the shared IPC verifier;
+         retain canonical IPC and Security behavior, exact dispositions,
+         required former-source routes, and source-wide unsafe-mechanism
+         prohibitions.
+       - `7.4c3hs2a` (`Planned`): remove Security input-validation `HEAD` and
+         transitional-section coupling while retaining its canonical route,
+         source-wide negative evidence, exact dispositions, and decision suite.
+       - `7.4c3hs2b` (`Planned`): remove Contracts proof-lifetime `HEAD` and
+         transitional-section coupling while retaining its canonical route,
+         source-wide negative evidence, exact dispositions, and decision suite.
+       - `7.4c3hs2c` (`Planned`): remove network heading coupling while
+         retaining all canonical routes, source-wide transport-default
+         prohibitions, exact dispositions, and decision suite.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`
@@ -2284,8 +2297,7 @@ not need the full library or introduce downstream-specific root policy.
 
 ## Blockers
 
-- `7.4c3hs`: Security source closure requires an explicit non-overlapping
-  checker-infrastructure decomposition. See `F084` and the execution ledger.
+- None.
 
 ## Slice Procedure
 

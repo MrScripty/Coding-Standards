@@ -75,7 +75,7 @@ changes and focused fixture evidence.
 | F081 | Resolved in Milestone 7.4c3hdoc | The mixed Documentation changelog checker treated every level-two heading as policy. A serial repair preserves exact changelog and Release semantics, prohibits actual legacy policy sections, and leaves final index shape to the aggregate closure engine. |
 | F082 | Resolved in Milestone 7.4c3p | Source closure no longer serializes disjoint checker preparation. A frozen inventory gives eight packages exclusive source, fixture, and checker writes; shared authority and manifest-ordered acceptance remain serial, and one complete-suite run closes each contiguous integrated group. |
 | F083 | Resolved in Milestone 7.4c3rh | Route fixtures now separate canonical repository targets from source-relative Markdown hrefs. The engine resolves and compares path plus anchor, rejects repository escape and mismatch, and accepts no old-schema or nested-source fallback. |
-| F084 | Active in Milestone 7.4c3hs | Security closure is blocked because several verifiers own transitional legacy headings or compare unrelated source regions to `HEAD`, while the IPC verifier owns legacy-section assertions for Architecture, Interop, and Security in one mutable checker. |
+| F084 | Implementation active in Milestone 7.4c3hs | Four exclusive checker-repair packages are frozen: shared IPC integrates serially, three local owner checkers may prepare concurrently, and one group gate precedes Security closure. |
 
 ## Systemic Findings
 
