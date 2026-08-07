@@ -33,3 +33,20 @@
   generated artifact, source index, configuration, or lockfile changed.
 - Next slice: implement the strict kernel, register Build owner behavior, and
   delete `verify-build-owner-contract.sh`.
+
+## 2026-08-07 - Milestone 1 Target Re-plan
+
+- Trigger: deletion preflight found `verify-build-owner-contract.sh` in the
+  frozen row-35 README dependency audit. Its owning verifier requires all 33
+  paths to exist, so deleting Build alone would invalidate shared historical
+  evidence and retaining a wrapper would violate the no-legacy contract.
+- Decision: keep shared row-35 migration authority unchanged in the kernel
+  slice. Replace `verify-rust-test-style.sh`, a measured leaf with no inbound
+  script, manifest, plan, or documentation reference.
+- Preserved behavior: 16 typed test-style decisions; Verification and Rust
+  recipe text; rejection of old mandatory test naming; and exact `STD-0839`
+  disposition.
+- No-fallback result: the unaccepted Build declarative draft is not retained,
+  and no Build wrapper, path alias, or historical-manifest exception is added.
+- Deferred owner: Milestone 3 must migrate historical checker-identity audits
+  when it replaces shared migration contracts.

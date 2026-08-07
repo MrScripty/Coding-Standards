@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 1: Executable Kernel And First Replaced Checker
 
-**Next slice:** Milestone 1: replace the Build owner checker with the executable engine
+**Next slice:** Milestone 1: replace the Rust test-style leaf checker with the executable engine
 
 **Acceptance status:** `pending`
 
@@ -144,15 +144,16 @@ plan, and staged review contains only planning authority.
 ### Milestone 1: Executable Kernel And First Replaced Checker
 
 **Goal:** Deliver a strict executable engine that replaces one complete,
-representative leaf checker without a wrapper or policy loss.
+representative and independently removable leaf checker without a wrapper or
+policy loss.
 
 **Allowed write set:**
 
 - `tools/standards_verifier/**`
 - `evaluation/standards-effectiveness/suite-registry.toml`
-- `evaluation/standards-effectiveness/suites/build-owner-contract.toml`
+- `evaluation/standards-effectiveness/suites/rust-test-style.toml`
 - `evaluation/standards-effectiveness/verify-declarative-suites.sh`
-- `evaluation/standards-effectiveness/verify-build-owner-contract.sh` (delete)
+- `evaluation/standards-effectiveness/verify-rust-test-style.sh` (delete)
 - this plan, ledger, and issues
 
 **Tasks:**
@@ -162,8 +163,8 @@ representative leaf checker without a wrapper or policy loss.
   decision-table rules.
 - [ ] Add malformed-contract, path-escape, cycle, decision, diagnostic, and
   scheduling self-tests.
-- [ ] Register and run the Build owner contract suite.
-- [ ] Delete the replaced Build Bash checker.
+- [ ] Register and run the Rust test-style suite.
+- [ ] Delete the replaced Rust test-style Bash checker.
 
 **Acceptance gate:** Engine self-tests and negative fixtures pass; direct and
 launcher execution pass; removed-checker scan passes; complete mixed suite
