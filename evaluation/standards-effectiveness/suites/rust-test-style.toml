@@ -1,0 +1,77 @@
+schema_version = 1
+id = "rust-test-style"
+owner = "workflow.verification"
+description = "Contract-selected test design, data, placement, naming, discovery, context, evidence, and Rust examples."
+
+[[checks]]
+id = "test-style-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/test-style-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+
+[checks.domains]
+case = ["*"]
+claim = ["accepted", "missing", "contradictory"]
+ownership = ["known", "missing"]
+discovery = ["known", "missing"]
+context = ["known", "missing"]
+fallback = ["none", "naming-template", "colocation", "tests-directory", "benches-directory", "builder", "fixture-helper", "issue", "invariant", "production-symptom", "documentation"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+
+[[checks.rules]]
+outcome = "typed-invalid"
+
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "claim", op = "eq", value = "contradictory" },
+]
+
+[[checks.rules]]
+outcome = "typed-unavailable"
+
+[checks.rules.when]
+any = [
+  { field = "claim", op = "eq", value = "missing" },
+  { field = "ownership", op = "eq", value = "missing" },
+  { field = "discovery", op = "eq", value = "missing" },
+  { field = "context", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "verification-owner"
+type = "text"
+path = "workflows/verification.md"
+required = [
+  "## Test Design",
+  "## Test Data Authority And Lifecycle",
+  "## Test Placement And Naming",
+  "## Coverage And Durable Evidence Records",
+]
+prohibited = []
+
+[[checks]]
+id = "rust-examples"
+type = "text"
+path = "reference/recipes/rust-tooling.md"
+required = [
+  "## Rust Test-Style Examples",
+  "condition_expected_behavior",
+  "illustrative Rust forms only",
+]
+prohibited = []
+
+[[checks]]
+id = "former-source-no-default"
+type = "text"
+path = "languages/rust/RUST-TOOLING-STANDARDS.md"
+required = []
+prohibited = ["Name tests as `condition_expected_behavior`"]
+
+[[checks]]
+id = "exact-disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0839\tlanguages/rust/RUST-TOOLING-STANDARDS.md\tworkflows/verification.md\trefine\t"]
+prohibited = []

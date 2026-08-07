@@ -1,0 +1,9 @@
+[project]
+name = "standards-verifier"
+version = "0.1.0"
+description = "Repository-local declarative verification engine"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.unittest]
+start-directory = "tests"

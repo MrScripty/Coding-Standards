@@ -1,0 +1,6 @@
+schema_version = 1
+
+[[suites]]
+id = "rust-test-style"
+path = "evaluation/standards-effectiveness/suites/rust-test-style.toml"
+requires = []

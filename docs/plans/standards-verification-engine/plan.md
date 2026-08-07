@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1: Executable Kernel And First Replaced Checker
+**Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 1: replace the Rust test-style leaf checker with the executable engine
+**Next slice:** Milestone 2: derive the exact checker migration inventory and first structural package
 
 **Acceptance status:** `pending`
 
@@ -158,19 +158,19 @@ policy loss.
 
 **Tasks:**
 
-- [ ] Implement strict registry/config loading, repository path containment,
+- [x] Implement strict registry/config loading, repository path containment,
   acyclic once-only scheduling, typed diagnostics, text assertions, and ordered
   decision-table rules.
-- [ ] Add malformed-contract, path-escape, cycle, decision, diagnostic, and
+- [x] Add malformed-contract, path-escape, cycle, decision, diagnostic, and
   scheduling self-tests.
-- [ ] Register and run the Rust test-style suite.
-- [ ] Delete the replaced Rust test-style Bash checker.
+- [x] Register and run the Rust test-style suite.
+- [x] Delete the replaced Rust test-style Bash checker.
 
 **Acceptance gate:** Engine self-tests and negative fixtures pass; direct and
 launcher execution pass; removed-checker scan passes; complete mixed suite
 passes once.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 2: Inventory And Structural Assertion Families
 
@@ -192,7 +192,7 @@ and plan records selected per slice.
 **Acceptance gate:** Inventory coverage is exact; each package's focused suites
 and complete mixed suite pass; no migrated behavior has two authorities.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 

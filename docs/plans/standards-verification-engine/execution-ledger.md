@@ -50,3 +50,33 @@
   and no Build wrapper, path alias, or historical-manifest exception is added.
 - Deferred owner: Milestone 3 must migrate historical checker-identity audits
   when it replaces shared migration contracts.
+
+## 2026-08-07 - Milestone 1 Kernel And First Replacement
+
+- Outcome: accepted a Python 3.11+ standard-library engine with strict TOML
+  registry/suite loading, contained repository paths, acyclic dependency
+  scheduling, once-only execution, typed text/JSON diagnostics, required and
+  prohibited text checks, and ordered decision predicates.
+- Migrated suite: `rust-test-style` preserves 16 typed decisions, four
+  Verification sections, three Rust recipe signals, rejection of the old
+  mandatory naming phrase, and the exact `STD-0839` disposition prefix.
+- Removed authority: `verify-rust-test-style.sh` is deleted. One policy-free
+  `verify-declarative-suites.sh` launcher lets the current complete-suite
+  convention execute all registered engine suites; it contains no assertion,
+  command action, compatibility parser, or fallback.
+- Focused verification: 10 Python self-tests passed, including malformed TOML,
+  path and symlink escape, missing input, dependency cycle, reverse registry
+  order, dependency diamond once-only execution, decision mismatch, strict
+  fields, and JSON diagnostics. Direct and launcher suite runs passed; Python
+  compilation, launcher shell syntax, removed-path scan, and diff integrity
+  passed.
+- Complete verification: all 274 mixed migration entrypoints passed. The count
+  remains stable because one generic launcher replaced one deleted leaf script.
+- Deviation: the proposed Build pilot was replaced before acceptance after
+  preflight found its frozen row-35 path dependency. No Build suite or wrapper
+  remains.
+- No-fallback result: no arbitrary command, dynamic code, environment
+  interpolation, old schema, path escape, skipped dependency, Build alias, or
+  deleted Rust checker remains available.
+- Next slice: derive exact checker-family/dependency inventory and freeze the
+  first coherent structural migration package.
