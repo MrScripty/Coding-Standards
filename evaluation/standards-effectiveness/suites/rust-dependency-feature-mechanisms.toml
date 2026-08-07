@@ -1,0 +1,64 @@
+schema_version = 1
+id = "rust-dependency-feature-mechanisms"
+owner = "profile.language.rust.dependencies"
+description = "Cargo manifest dependency-feature mechanisms selected from accepted dependency contracts."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/dependency-feature-mechanism-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+dependencies = ["accepted", "contradictory", "missing"]
+consumer = ["known", "unknown"]
+resolver = ["known", "unknown"]
+target = ["known", "unknown"]
+mechanism = ["dep-forward", "dependency-features", "item-cfg", "optional-dependency", "target-dependency"]
+capability = ["supported", "unsupported"]
+fallback = ["cfg", "dep-syntax", "dependency-category", "full-features", "minimal-features", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "dependencies", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "dependencies", op = "eq", value = "missing" }, { field = "consumer", op = "eq", value = "unknown" }, { field = "resolver", op = "eq", value = "unknown" }, { field = "target", op = "eq", value = "unknown" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/dependencies.md"
+required = ["## Cargo Manifest Dependency Feature Mechanisms", "dependency `features`", "target-specific dependency declarations", "public API exposure, and compile-time conflict diagnostics", "Rust API profile."]
+prohibited = []
+[[checks]]
+id = "api-profile"
+type = "text"
+path = "profiles/languages/rust/api.md"
+required = ["## Rust Source Feature Expression Mechanisms", "item-level or module-level `cfg`", "Cargo manifest dependency mechanisms belong only", "Dependency profile."]
+prohibited = ["optional dependency declarations", "target-specific dependency declarations"]
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-dependencies.md"
+required = ["## Dependency Feature Examples", "features = [\"full\"]", "optional = true", "do not select broad or minimal features"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
+required = []
+prohibited = ["features = [\"full\"]", "#[cfg(feature"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0738\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\tprofiles/languages/rust/dependencies.md\tsplit\t", "STD-0739\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0740\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t"]
+prohibited = []

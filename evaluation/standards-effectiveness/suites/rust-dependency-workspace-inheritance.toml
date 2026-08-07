@@ -1,0 +1,56 @@
+schema_version = 1
+id = "rust-dependency-workspace-inheritance"
+owner = "profile.language.rust.dependencies"
+description = "Cargo workspace inheritance mechanisms without transferring dependency ownership."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/dependency-workspace-inheritance-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+ownership = ["accepted", "contradictory", "missing"]
+consumers = ["known", "unknown"]
+resolution = ["accepted", "missing"]
+cargo_support = ["supported", "unsupported"]
+fallback = ["centralize-all", "incumbent-inheritance", "none", "root-placement", "two-members"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "ownership", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "ownership", op = "eq", value = "missing" }, { field = "consumers", op = "eq", value = "unknown" }, { field = "resolution", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "cargo_support", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/dependencies.md"
+required = ["## Workspace Inheritance Mechanisms", "inheritance coordinates selected manifest facts", "not transfer ownership to the workspace root", "Member count"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-dependencies.md"
+required = ["## Workspace Inheritance Examples", "workspace = true", "make member count, root placement"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
+required = []
+prohibited = ["two or more workspace members", "serde = { workspace = true }"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0735\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\tprofiles/languages/rust/dependencies.md\tsplit\t", "STD-0736\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0737\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t"]
+prohibited = []

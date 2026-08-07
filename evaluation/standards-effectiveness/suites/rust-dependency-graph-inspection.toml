@@ -1,0 +1,58 @@
+schema_version = 1
+id = "rust-dependency-graph-inspection"
+owner = "profile.language.rust.dependencies"
+description = "Rust dependency-graph inspection scoped by accepted claims and available graph evidence."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/dependency-graph-inspection-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+claim = ["accepted", "contradictory", "missing"]
+consumer = ["known", "unknown"]
+resolver = ["known", "unknown"]
+graph_scope = ["direct", "duplicates", "full", "reverse", "unique"]
+capability = ["supported", "unsupported"]
+evidence = ["complete", "incomplete"]
+fallback = ["command-success", "count-threshold", "duplicate-threshold", "none", "release-audit"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "claim", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "claim", op = "eq", value = "missing" }, { field = "consumer", op = "eq", value = "unknown" }, { field = "resolver", op = "eq", value = "unknown" }, { field = "evidence", op = "eq", value = "incomplete" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/dependencies.md"
+required = ["Graph inspection scope comes from the claim", "only their declared graph facts", "required audit schedule"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-dependencies.md"
+required = ["## Dependency Graph Inspection Examples", "cargo tree --depth 1", "cargo tree --duplicates", "not establish a required pre-addition"]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
+required = []
+prohibited = ["cargo tree --depth 1", "before dependency additions"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0741\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\tprofiles/languages/rust/dependencies.md\tsplit\t", "STD-0742\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0743\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0744\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0745\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0746\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t"]
+prohibited = []

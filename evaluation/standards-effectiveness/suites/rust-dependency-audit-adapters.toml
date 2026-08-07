@@ -1,0 +1,57 @@
+schema_version = 1
+id = "rust-dependency-audit-adapters"
+owner = "profile.language.rust.dependencies"
+description = "Supported Rust dependency-audit adapters selected by an accepted audit contract."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/dependency-audit-adapter-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["accepted", "contradictory", "missing"]
+tooling = ["accepted", "missing"]
+finding_owner = ["known", "unknown"]
+capability = ["supported", "unsupported"]
+evidence = ["complete", "incomplete"]
+fallback = ["empty-result", "nightly", "none", "product"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "contract", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "contract", op = "eq", value = "missing" }, { field = "tooling", op = "eq", value = "missing" }, { field = "finding_owner", op = "eq", value = "unknown" }, { field = "evidence", op = "eq", value = "incomplete" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/dependencies.md"
+required = ["## Dependency Audit Adapter Mechanisms", "use supported Rust audit adapters only", "does not select its product"]
+prohibited = []
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-dependencies.md"
+required = ["## Audit Adapter Examples", "alternatives, not a required suite", "rg \"use <crate>|<crate>::\""]
+prohibited = []
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
+required = []
+prohibited = ["cargo machete"]
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0747\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\tprofiles/languages/rust/dependencies.md\tsplit\t", "STD-0748\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t"]
+prohibited = []
