@@ -6,14 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7.4c3.2 Commit index source closure is accepted.
-Exact identifier migration and Router authority closure are complete; two of 27
-former normative source entrypoints are derived and registered with the
+**Current phase:** Milestone 7.4c3.3 Plan index source closure is accepted.
+Exact identifier migration and Router authority closure are complete; three of
+27 former normative source entrypoints are derived and registered with the
 reusable aggregate closure verifier.
 
-**Next slice:** Milestone 7.4c3.3 performs the retained-index purity review for
-`PLAN-STANDARDS.md`, updates its corpus state, and registers its isolated source
-fixture directory without changing shared engine code.
+**Next slice:** Milestone 7.4c3.4 performs the retained-index purity review for
+`DOCUMENTATION-STANDARDS.md`, updates its corpus state, and registers its
+isolated source fixture directory without changing shared engine code.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2192,6 +2192,10 @@ all structural/routing fixtures pass.
        concise non-normative index, set its corpus state to derived, register
        isolated Router/workflow/recipe route fixtures, and preserve all 68
        frozen source dispositions without changing canonical Commit policy.
+     - `7.4c3.3` (`Accepted`): replace residual Plan migration wording with a
+       concise non-normative index, set its corpus state to derived, register
+       isolated Router/workflow/template route fixtures, and preserve all 18
+       frozen source dispositions without changing canonical Planning policy.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`

@@ -1,19 +1,16 @@
 # Plan Standards
 
-Planning guidance has moved to
-[workflows/planning.md](workflows/planning.md).
+This former standards entrypoint is non-normative navigation. Planning policy
+is owned by [workflows/planning.md](workflows/planning.md); select applicability
+through the [Standards Router](STANDARDS-ROUTER.md). This file owns no planning
+rule, lifecycle decision, default, example, or fallback authority.
 
-The workflow is canonical for:
+If a link is missing, conflicting, or inapplicable, return the Router's typed
+diagnostic instead of using prior wording from this file.
 
-- deciding when a written plan is required;
-- active-plan, execution-ledger, issue, report, and ADR ownership;
-- lifecycle states and objective acceptance;
-- vertical slices, write sets, and milestone gates;
-- decision supersession and plan compaction;
-- findings and re-plan handling; and
-- concurrent worker boundaries.
+## Canonical Planning Routes
 
-Use [templates/PLAN-TEMPLATE.md](templates/PLAN-TEMPLATE.md) for new plans.
+- Planning policy: [Planning Workflow](workflows/planning.md)
+- New plan structure: [Plan Template](templates/PLAN-TEMPLATE.md)
 
-This file is a migration index and contains no independent normative planning
-rules.
+This index contains no independent normative planning rules.

@@ -1,0 +1,4 @@
+route	target
+router	STANDARDS-ROUTER.md
+planning_workflow	workflows/planning.md
+plan_template	templates/PLAN-TEMPLATE.md

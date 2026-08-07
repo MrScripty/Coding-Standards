@@ -12,7 +12,7 @@ FRONTEND-STANDARDS.md	standard	yes	profile	refine	git
 INTEROP-STANDARDS.md	standard	yes	topic	refine	git
 LANGUAGE-BINDINGS-STANDARDS.md	standard	yes	boundary-profile	refine	git
 LAUNCHER-STANDARDS.md	standard	yes	application-profile	split	git
-PLAN-STANDARDS.md	standard	yes	workflow	replace	git
+PLAN-STANDARDS.md	standard	derived	workflow	replace	git
 RELEASE-STANDARDS.md	standard	yes	workflow	split	git
 SECURITY-STANDARDS.md	standard	yes	topic	refine	git
 TESTING-STANDARDS.md	standard	yes	workflow	split	git

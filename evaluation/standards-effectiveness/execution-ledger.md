@@ -9464,3 +9464,37 @@ entrypoints pass.
 
 **Next slice:** `7.4c3.3`, close and register `PLAN-STANDARDS.md` without
 changing shared engine code.
+
+## Milestone 7.4c3.3 Plan Index Source Closure
+
+**Outcome:** Accepted.
+
+`PLAN-STANDARDS.md` is now a concise non-normative legacy index. It routes to
+the Standards Router, canonical Planning workflow, and Plan template while
+owning no rule, lifecycle decision, default, example, or fallback authority.
+Missing, conflicting, or inapplicable navigation returns the Router's typed
+diagnostic instead of using prior wording.
+
+The source corpus row changes from normative to derived without changing kind,
+target role, preliminary disposition, or baseline source. An isolated Planning
+fixture directory records the exact title, ordered headings, 20-line bound,
+three unique routes, and prohibited migration-era authority literals.
+
+**No-fallback result:** migration-index status, moved-guidance authority,
+canonical-workflow declarations, and fallback to prior planning wording are
+removed. The aggregate engine rejects stale normative state, route or shape
+drift, authority wording, and identifier disagreement.
+
+**Bounded write set:** Plan legacy index, its corpus row, its independent
+source-closure fixture directory, active plan, and execution ledger. Shared
+engine code, canonical Planning workflow and template, Router, other former
+sources, dispositions, owner map, generated inventories, metadata,
+configuration, and lockfiles remain unchanged.
+
+**Verification:** Planning aggregate closure with three routes and 18 frozen
+IDs, Planning consolidation checks, Router closure, historical checker
+ownership, final source-closure planning evidence, plan structure, shell
+syntax, diff integrity, and all 272 complete-suite verifier entrypoints pass.
+
+**Next slice:** `7.4c3.4`, close and register
+`DOCUMENTATION-STANDARDS.md` without changing shared engine code.
