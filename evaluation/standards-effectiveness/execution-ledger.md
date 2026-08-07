@@ -9878,3 +9878,31 @@ contract, shell syntax, plan structure, and diff integrity.
 
 **Next slice:** prepare the three exclusive local checker repairs concurrently,
 then integrate them serially before the complete checker-repair group gate.
+
+## Milestone 7.4c3hs2a Input-Validation Checker Repair
+
+**Outcome:** Accepted.
+
+The input-validation verifier no longer compares unrelated Security source
+regions to `HEAD` or requires migration explanation terms. It requires the
+canonical input-validation-authority route anywhere in the former source and
+rejects the same exact legacy validator, fixed-rule, cast, duplicate, and code
+mechanisms across the complete source.
+
+The canonical Security owner contract, all 17 decision cases, four exact
+dispositions, metadata, findings, and transitive runtime, filesystem, and trust
+checks remain unchanged.
+
+**No-fallback result:** no old/new source branch, heading alias, snapshot,
+source exception, global validator, fixed rule, cast, or weaker validator is
+accepted.
+
+**Bounded write set:** input-validation checker, active plan state, and
+execution ledger. All standards, former sources, fixtures, shared verifiers,
+dispositions, corpus, manifests, Router, generated artifacts, findings,
+configuration, and lockfiles remain unchanged.
+
+**Verification:** input-validation focused checker, shell syntax, removed-shape
+scan, plan structure, repair re-plan contract, and diff integrity.
+
+**Next slice:** integrate prepared proof-lifetime repair `7.4c3hs2b`.

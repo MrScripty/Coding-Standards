@@ -101,37 +101,15 @@ for text in "${required_security[@]}"; do
   rg -F -q "$text" "$SECURITY"
 done
 
-legacy_input="$(
-  sed -n '/^## Input Validation$/,/^## Message\/API Payload Validation$/p' \
-    "$LEGACY"
-)"
-for link in \
-  'topics/security.md#input-validation-authority' \
-  'global-validator' \
-  'duplicate-inline'; do
-  rg -F -q "$link" <<< "$legacy_input"
-done
+rg -F -q 'topics/security.md#input-validation-authority' "$LEGACY"
 for pattern in 'InputValidator' 'SafeNamePattern' 'Regex' 'minLength' \
   'maxLength' 'Runtime type check before cast' 'Bounds check before use' \
   'single implementation' '```csharp'; do
-  if rg -F -q "$pattern" <<< "$legacy_input"; then
+  if rg -F -q "$pattern" "$LEGACY"; then
     printf 'legacy validation fallback remains: %s\n' "$pattern" >&2
     exit 1
   fi
 done
-
-prefix_head="$(git -C "$REPO_ROOT" show HEAD:SECURITY-STANDARDS.md |
-  tr -d '\r' |
-  sed '/^## Input Validation$/,$d')"
-prefix_current="$(tr -d '\r' < "$LEGACY" |
-  sed '/^## Input Validation$/,$d')"
-suffix_head="$(git -C "$REPO_ROOT" show HEAD:SECURITY-STANDARDS.md |
-  tr -d '\r' |
-  sed -n '/^## Message\/API Payload Validation$/,$p')"
-suffix_current="$(tr -d '\r' < "$LEGACY" |
-  sed -n '/^## Message\/API Payload Validation$/,$p')"
-[[ "$prefix_current" == "$prefix_head" ]]
-[[ "$suffix_current" == "$suffix_head" ]]
 
 rg -F -q '| F056 | Resolved in Milestone 7.4b8a |' "$FINDINGS"
 rg -F -q '`7.4b8a` (`Accepted`)' "$PLAN"

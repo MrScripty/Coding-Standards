@@ -6,14 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Serial cross-source IPC repair `7.4c3hs1` is accepted. The
-three disjoint local Security-reader repairs are ready for concurrent
-preparation before their serial group integration. Five of 27 former normative
-source entrypoints are derived.
+**Current phase:** Input-validation checker repair `7.4c3hs2a` is accepted.
+Proof-lifetime and network repairs are prepared with disjoint write sets and
+await serial integration. Five of 27 former normative source entrypoints are
+derived.
 
-**Next slice:** prepare `7.4c3hs2a`, `7.4c3hs2b`, and `7.4c3hs2c` concurrently,
-integrate their non-overlapping checker patches serially, and run the checker
-repair group gate before preparing `7.4c3.6`.
+**Next slice:** integrate prepared proof-lifetime repair `7.4c3hs2b`, then
+network repair `7.4c3hs2c`, and run the checker-repair group gate before
+preparing `7.4c3.6`.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2260,7 +2260,7 @@ all structural/routing fixtures pass.
          retain canonical IPC and Security behavior, exact dispositions,
          required former-source routes, and source-wide unsafe-mechanism
          prohibitions.
-       - `7.4c3hs2a` (`Planned`): remove Security input-validation `HEAD` and
+       - `7.4c3hs2a` (`Accepted`): remove Security input-validation `HEAD` and
          transitional-section coupling while retaining its canonical route,
          source-wide negative evidence, exact dispositions, and decision suite.
        - `7.4c3hs2b` (`Planned`): remove Contracts proof-lifetime `HEAD` and
