@@ -4,7 +4,9 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: implement Verification quality-gate package `M2-P8`
+**Next slice:** Replan the seven remaining dependency-free structural,
+acceptance, and launcher leaves before authorizing another implementation
+package.
 
 **Acceptance status:** `pending`
 
@@ -201,6 +203,10 @@ and plan records selected per slice.
   scripts without changing engine source.
 - [x] Migrate accepted Tooling reference package `M2-P6` and remove its two leaf
   scripts without changing engine source.
+- [x] Migrate accepted TypeScript static-analysis package `M2-P7` and remove its
+  leaf script without changing engine source.
+- [x] Migrate accepted Verification quality-gate package `M2-P8` and remove its
+  leaf script without changing engine source.
 - [ ] Classify every checker by assertion family, inbound dependency, owner,
   risk, and migration disposition.
 - [ ] Add strict table, Markdown heading/route, exact-row/set/order, and count
@@ -395,7 +401,7 @@ inventory; removed-path scans; and complete mixed suite passed.
 
 #### Package M2-P8: Verification Quality Gates
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 **Owner:** `workflow.verification`
 
@@ -406,6 +412,9 @@ generated inventory, and plan records.
 former-source prohibition, and refine dispositions `STD-0688` and `STD-0695`.
 Existing text/decision primitives suffice; no wrapper or engine change is
 authorized.
+
+**Acceptance evidence:** 13 self-tests; 31 suites/146 checks; fresh 244-record
+inventory; removed-path scans; and complete mixed suite passed.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 

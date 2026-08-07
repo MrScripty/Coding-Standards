@@ -111,6 +111,11 @@ path = "evaluation/standards-effectiveness/suites/typescript-static-analysis.tom
 requires = []
 
 [[suites]]
+id = "verification-quality-gates"
+path = "evaluation/standards-effectiveness/suites/verification-quality-gates.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

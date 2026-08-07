@@ -255,15 +255,19 @@ complete mixed suite report 246 Bash entrypoints.
 
 ## Remaining Standalone Leaves
 
-`M2-P7` accepts replacement of `verify-typescript-static-analysis.sh` under
+`M2-P7` accepted replacement of `verify-typescript-static-analysis.sh` under
 `profile.language.typescript`: ten decisions and dispositions `STD-0677`
-through `STD-0680`. `M2-P8` freezes `verify-verification-quality-gates.sh`
+through `STD-0680`. `M2-P8` accepted replacement of
+`verify-verification-quality-gates.sh`
 under `workflow.verification`: eleven decisions and dispositions `STD-0688`
 and `STD-0695`. Both have zero executable/contract inbound references and no
 helper/verifier dependencies, and both fit existing text/decision primitives.
 `M2-P7` preserved all ten decisions and four dispositions; inventory and the
-complete mixed suite passed at 245 Bash entrypoints. `M2-P8` remains frozen.
+complete mixed suite passed at 245 Bash entrypoints. `M2-P8` preserved all
+eleven decisions and both dispositions; the launcher now evaluates 31 suites
+and 146 checks, and inventory plus the complete mixed suite passed at 244 Bash
+entrypoints.
 
-They remain separate packages because they have different owners. After both,
-the dependency-free remainder is migration/acceptance infrastructure plus the
-temporary launcher and requires structural/shared-contract planning.
+They remain separate packages because they have different owners. The seven
+dependency-free leaves now remaining are migration/acceptance infrastructure
+plus the temporary launcher and require structural/shared-contract planning.

@@ -361,3 +361,19 @@
 - Verification: 13 self-tests, five focused checks, 30 suites/142 checks,
   inventory/removal/diff gates, and all 245 mixed entrypoints passed.
 - Next slice: implement `M2-P8` without engine changes.
+
+## 2026-08-07 - Milestone 2 Package M2-P8
+
+- Accepted Verification quality gates with eleven typed decisions, canonical
+  Verification text, former-source prohibition, and refine dispositions
+  `STD-0688` and `STD-0695`; deleted its Bash leaf.
+- Verification: 13 self-tests, four focused checks, 31 suites/146 checks,
+  inventory/removal/diff gates, and all 244 mixed entrypoints passed.
+- No wrapper, fallback, compatibility schema, owner-specific engine branch,
+  weakened decision, or missing disposition was introduced.
+- Replan trigger: the seven remaining dependency-free leaves implement
+  migration, acceptance, or launcher structure rather than ordinary
+  text/decision policy. Existing package authorization is insufficient for
+  their shared contracts.
+- Next slice: classify those structural leaves and freeze reusable assertion
+  contracts before another implementation package is authorized.
