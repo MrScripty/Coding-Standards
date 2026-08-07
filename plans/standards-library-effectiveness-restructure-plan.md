@@ -6,13 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Input-validation and proof-lifetime checker repairs
-`7.4c3hs2a` and `7.4c3hs2b` are accepted. The prepared network repair awaits
-serial integration and the complete checker-repair group gate. Five of 27
-former normative source entrypoints are derived.
+**Current phase:** Security checker-repair group `7.4c3hs` is accepted and
+`F084` is resolved. All four verifiers use durable whole-source and canonical
+evidence without mutable legacy-shape ownership. Five of 27 former normative
+source entrypoints are derived.
 
-**Next slice:** integrate prepared network repair `7.4c3hs2c`, then run the
-checker-repair group gate before preparing `7.4c3.6`.
+**Next slice:** prepare and integrate `7.4c3.6` Security in immutable manifest
+order without preserving transitional headings or policy prose.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2265,7 +2265,7 @@ all structural/routing fixtures pass.
        - `7.4c3hs2b` (`Accepted`): remove Contracts proof-lifetime `HEAD` and
          transitional-section coupling while retaining its canonical route,
          source-wide negative evidence, exact dispositions, and decision suite.
-       - `7.4c3hs2c` (`Planned`): remove network heading coupling while
+       - `7.4c3hs2c` (`Accepted`): remove network heading coupling while
          retaining all canonical routes, source-wide transport-default
          prohibitions, exact dispositions, and decision suite.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact

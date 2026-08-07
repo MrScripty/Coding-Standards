@@ -116,28 +116,22 @@ for text in "${required_profile[@]}"; do
 done
 rg -F -q '## Own Work, Failure, And Cancellation' "$CONCURRENCY"
 
-legacy_network="$(
-  sed -n '/^## Network Transport Safety$/,/^## What NOT to Validate$/p' \
-    "$LEGACY"
-)"
 for link in \
   'topics/security.md#network-transport-boundary' \
   'topics/concurrency.md#own-work-failure-and-cancellation' \
   'topics/contracts.md#runtime-decoding-at-boundaries' \
   'profiles/boundaries/ipc.md'; do
-  rg -F -q "$link" <<< "$legacy_network"
+  rg -F -q "$link" "$LEGACY"
 done
 for pattern in '127.0.0.1' '0.0.0.0' '::1' 'platform'\''s loopback address' \
   'Every listener must define' 'semaphore' 'bounded worker pool' \
   'force-close remaining' '30–60 seconds' \
   'Graceful Shutdown of Spawned Services'; do
-  if rg -F -q "$pattern" <<< "$legacy_network"; then
+  if rg -F -q "$pattern" "$LEGACY"; then
     printf 'legacy network transport default remains: %s\n' "$pattern" >&2
     exit 1
   fi
 done
-rg -F -q '## Input Validation' "$LEGACY"
-rg -F -q '## What NOT to Validate' "$LEGACY"
 
 rg -F -q '| F016 | Resolved in Milestone 7.4b7a |' "$FINDINGS"
 rg -F -q '`7.4b7a` (`Accepted`)' "$PLAN"

@@ -9934,3 +9934,36 @@ scan, plan structure, repair re-plan contract, and diff integrity.
 
 **Next slice:** integrate prepared network repair `7.4c3hs2c`, then run the
 complete checker-repair group gate.
+
+## Milestone 7.4c3hs2c Network Checker Repair And Group Gate
+
+**Outcome:** Accepted.
+
+The network verifier no longer extracts a heading-delimited Security section or
+requires unrelated transitional headings. It requires all Security,
+Concurrency, Contracts, and IPC routes anywhere in the former source and
+rejects the same fixed bind, capacity, worker, shutdown, timeout, and liveness
+defaults across the complete source.
+
+The canonical network transport contract, all 32 decision cases, five exact
+dispositions, Concurrency ownership, metadata, findings, and transitive trust
+checks remain unchanged. Together with `7.4c3hs1`, `7.4c3hs2a`, and
+`7.4c3hs2b`, every frozen checker repair now has one accepted write owner.
+
+**No-fallback result:** no old/new source branch, heading alias, snapshot,
+source exception, default address, default capacity, detached work, forced
+shutdown, fixed timeout, default liveness, or alternate runtime/listener is
+accepted.
+
+**Bounded write set:** network checker, active plan state, F084 status, and
+execution ledger. All standards, former sources, fixtures, shared verifiers,
+dispositions, corpus, manifests, Router, generated artifacts, configuration,
+and lockfiles remain unchanged.
+
+**Verification:** network, input-validation, validation-proof, IPC, and current
+Security closure checkers; all four removed-shape scans; repair re-plan
+contract; shell syntax; plan structure; diff integrity; and the complete
+274-checker suite.
+
+**Next slice:** close `SECURITY-STANDARDS.md` as a pure non-normative index in
+immutable manifest order.
