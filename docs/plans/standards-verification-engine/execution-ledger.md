@@ -162,3 +162,24 @@
   generated inventory, standard, or disposition changed.
 - Next slice: classify and freeze the Rust Release leaf package under the
   clarified zero-Bash acceptance target.
+
+## 2026-08-07 - Milestone 2 Rust Release Package Freeze
+
+- Outcome: froze `M2-P2` as five dependency-free Rust Release leaf suites for
+  automation adapters, package metadata, publication control, toolchain
+  declarations, and workspace package metadata.
+- Preserved evidence: 78 typed decision rows, required canonical profile,
+  reference, and former-source route text, five legacy-default prohibitions,
+  and exact dispositions `STD-0811` through `STD-0819`.
+- Dependency review: all five have zero executable and frozen-contract inbound
+  references and no verifier/helper dependency; the automation checker's only
+  inbound reference is this plan's documentation report.
+- Exclusions: Release evidence remains frozen by source-package preparation;
+  the Release owner contract remains frozen by row-35 identity contracts and
+  uses shared metadata verification. Both remain assigned to Milestone 3.
+- No-fallback result: package implementation must use existing engine
+  primitives, delete all five scripts, and add no wrapper, compatibility path,
+  source exception, or owner-specific engine branch.
+- Scope: planning authority only; no engine, registry, suite, fixture, checker,
+  generated inventory, standard, disposition, or historical contract changed.
+- Next slice: implement and verify `M2-P2` as one atomic package.

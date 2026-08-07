@@ -72,8 +72,42 @@ contract. Similar shell shape does not authorize cross-owner batching.
 
 ## Next Classification Work
 
-After accepted `M2-P1`, classification proceeds by canonical owner and
-dependency shape.
+Package `M2-P2` is frozen for implementation as five Rust Release leaf
+checkers:
+
+| Suite | Replaced checker | Decision fixture | Exact IDs |
+| --- | --- | --- | --- |
+| `rust-release-automation-adapter` | `verify-rust-release-automation-adapter.sh` | `release-automation-adapter-decisions.tsv` | `STD-0818`, `STD-0819` |
+| `rust-release-package-metadata` | `verify-rust-release-package-metadata.sh` | `release-package-metadata-decisions.tsv` | `STD-0813` |
+| `rust-release-publication-control` | `verify-rust-release-publication-control.sh` | `release-publication-control-decisions.tsv` | `STD-0814` |
+| `rust-release-toolchain` | `verify-rust-release-toolchain.sh` | `release-toolchain-decisions.tsv` | `STD-0811`, `STD-0812` |
+| `rust-release-workspace-package-metadata` | `verify-rust-release-workspace-package-metadata.sh` | `release-workspace-package-metadata-decisions.tsv` | `STD-0815`, `STD-0816`, `STD-0817` |
+
+### M2-P2 Cohesion Decision
+
+- Canonical owner: `profile.language.rust.release`.
+- Observable package outcome: accepted Release, Contracts, Dependencies, and
+  Tooling decisions remain authoritative while Rust Release selects only
+  supported Cargo and toolchain mechanisms; former named-tool, metadata,
+  publication, workspace, pinning, and lockfile defaults remain prohibited.
+- Risk: `consolidation`; the 78 accepted fixture outcomes and standards text do
+  not change.
+- Dependencies: none of the five scripts invokes a verifier/helper or has an
+  executable or frozen-contract inbound path reference. The automation checker
+  has one documentation reference in this report, which this package updates.
+- Assertion family: existing ordered predicates, required/prohibited text, and
+  exact disposition-row prefixes. No engine source change is authorized.
+- Exclusions: `verify-rust-release-evidence.sh` is frozen by
+  `milestone-7-source-package-preparation.tsv`;
+  `verify-rust-release-owner-contract.sh` is frozen by both row-35 contracts
+  and invokes `check-metadata.sh`. They remain for Milestone 3.
+- Write owner: one package author may edit only the five suite TOMLs, registry
+  rows, five deleted scripts, generated inventory, and child plan records.
+- Gate: 13 engine/inventory self-tests, direct execution of all registered
+  suites, generic launcher, stale-inventory and removed-path scans, plan/diff
+  integrity, and one complete mixed suite expected to contain 261 Bash
+  entrypoints.
+
 No script is scheduled for deletion solely because it is short, unreferenced,
 or mechanically similar. Executable and frozen-contract references are resolved
 in the accepting package; historical checker-identity contracts remain deferred

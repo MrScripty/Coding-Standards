@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 2: Inventory And Structural Assertion Families
 
-**Next slice:** Milestone 2: classify and freeze the Rust Release leaf package
+**Next slice:** Milestone 2: implement Rust Release package `M2-P2`
 
 **Acceptance status:** `pending`
 
@@ -201,6 +201,36 @@ and plan records selected per slice.
 and complete mixed suite pass; no migrated behavior has two authorities.
 
 **Status:** `Active`
+
+#### Package M2-P2: Rust Release Leaf Consolidation
+
+**Status:** `Planned`
+
+**Owner:** `profile.language.rust.release`
+
+**Risk:** `consolidation`
+
+**Allowed write set:**
+
+- `evaluation/standards-effectiveness/suite-registry.toml`
+- five suite contracts named in the checker-inventory report
+- the five corresponding Bash checkers (delete only)
+- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+- this plan, ledger, issues, and checker-inventory report
+- parent plan reconciliation after package acceptance
+
+**Preserved contract:** 78 ordered typed decisions, required canonical profile,
+reference, and former-source route evidence, five prohibited legacy defaults,
+and exact dispositions `STD-0811` through `STD-0819`.
+
+**Exclusions:** `verify-rust-release-evidence.sh` remains frozen by the source
+package preparation contract; `verify-rust-release-owner-contract.sh` remains
+frozen by row-35 identity contracts and depends on the shared metadata helper.
+Both move only with Milestone 3's shared-contract migration.
+
+**No-fallback rule:** implement with existing strict text and ordered-decision
+checks, delete all five replaced scripts in the same slice, and add no wrapper,
+source alias, compatibility schema, or owner-specific engine branch.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 

@@ -12,9 +12,8 @@ are accepted. Owner-reviewed suite migration continues under the Generic
 Standards Verification Engine Plan before Cross-Platform source closure. Six
 of 27 former normative source entrypoints are derived.
 
-**Next slice:** classify and freeze the delegated engine's Rust Release leaf
-package from exact executable/contract dependency evidence before editing its
-suite or checker files.
+**Next slice:** implement the delegated engine's frozen Rust Release leaf
+package `M2-P2` without engine or shared historical-contract changes.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2297,6 +2296,11 @@ all structural/routing fixtures pass.
          leaf checkers with declarative suites preserving 128 typed decisions,
          canonical and negative text evidence, and eight exact dispositions;
          reduce current Bash inventory to 266 without engine special cases.
+       - `7.4c3ve4` (`Planned`): replace five dependency-free Rust Release leaf
+         checkers with declarative suites preserving 78 typed decisions,
+         canonical and negative text evidence, and exact dispositions
+         `STD-0811` through `STD-0819`; keep the frozen Release evidence and
+         owner-contract checkers for shared-contract Milestone 3.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact
