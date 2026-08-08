@@ -5,6 +5,7 @@ from typing import Any
 from ..diagnostics import Diagnostic, EngineError
 from ..model import Check
 from .decision import parse_decision_check
+from .table import parse_table_check
 from .text import parse_text_check
 
 
@@ -23,6 +24,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_text_check(raw, suite_id)
     if kind == "decision":
         return parse_decision_check(raw, suite_id)
+    if kind == "table":
+        return parse_table_check(raw, suite_id)
     raise EngineError(
         Diagnostic(
             code="CONFIG.UNKNOWN_CHECK",

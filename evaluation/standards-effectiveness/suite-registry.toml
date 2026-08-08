@@ -71,6 +71,11 @@ path = "evaluation/standards-effectiveness/suites/rust-dependency-workspace-inhe
 requires = []
 
 [[suites]]
+id = "dependency-audit-lineage"
+path = "evaluation/standards-effectiveness/suites/dependency-audit-lineage.toml"
+requires = []
+
+[[suites]]
 id = "tooling-ci-orchestration"
 path = "evaluation/standards-effectiveness/suites/tooling-ci-orchestration.toml"
 requires = []

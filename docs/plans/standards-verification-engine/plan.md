@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 2: Shared Structural Assertion Foundation
 
-**Next slice:** Implement `M2-S1`: strict table assertions with Dependency audit
-lineage as the first complete consumer.
+**Next slice:** Implement `M2-P9`: migrate Implementation change evidence with
+the existing decision and text checks.
 
 **Acceptance status:** `pending`
 
@@ -207,6 +207,9 @@ and plan records selected per slice.
   leaf script without changing engine source.
 - [x] Migrate accepted Verification quality-gate package `M2-P8` and remove its
   leaf script without changing engine source.
+- [x] Add strict table header, row-width, count, non-empty, literal-domain,
+  uniqueness, bounded-predicate projection, split, and ordering assertions;
+  migrate `M2-S1` as the first complete consumer.
 - [ ] Classify every checker by assertion family, inbound dependency, owner,
   risk, and migration disposition.
 - [ ] Add strict table, Markdown heading/route, exact-row/set/order, and count
@@ -425,7 +428,7 @@ package:
 
 | Package | Owner | Contract | Disposition |
 | --- | --- | --- | --- |
-| `M2-S1` Dependency audit lineage | `topics.dependencies` | decision, canonical text, exact disposition projection, accepted plan marker | Implement with the first strict table consumer. |
+| `M2-S1` Dependency audit lineage | `topics.dependencies` | decision, canonical text, exact disposition projection, accepted plan marker | Accepted with the first strict table consumer. |
 | `M2-P9` Implementation change evidence | `workflow.implementation` | decision, canonical/reference text, exact split disposition | Migrate with existing checks after `M2-S1`. |
 | `M3-C1` Acceptance claims | `workflow.verification` | canonical claim grammar and required-to-observed set satisfaction | Implement as one typed shared contract, then update its README invocation. |
 | `M3-S1` F018 decomposition | parent migration plan | strict map, exact IDs/order, inventory/disposition relations, accepted lifecycle state | Implement after relation checks; remove obsolete planned-state branches. |
@@ -457,6 +460,25 @@ missing-input, path-containment, and stable-diagnostic tests before a consumer
 script is deleted. Engine and registry files remain serial. After a primitive
 is accepted, disjoint suite packages may be prepared concurrently but are
 integrated one at a time with fresh-revision admission.
+
+#### Package M2-S1: Table Assertions And Dependency Audit Lineage
+
+**Status:** `Accepted`
+
+**Owner:** engine mechanics and `topics.dependencies`
+
+**Preserved contract:** twelve ordered audit-lineage decisions, canonical
+Dependencies and former-source text, exact `STD-0699`/`STD-0700` disposition
+projection, and accepted `7.4b9r` lifecycle state.
+
+**Acceptance evidence:** 19 engine/inventory tests; focused suite passed five
+checks; all 32 suites passed 151 checks directly and through the launcher;
+fresh 243-record inventory, removed-path scan, diff integrity, and complete
+mixed suite passed.
+
+**No-fallback result:** predicates have one shared parser; the table schema is
+strict; the old Bash checker is deleted; no command action, expression string,
+compatibility parser, source alias, or policy-specific callback exists.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 

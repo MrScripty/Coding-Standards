@@ -271,3 +271,16 @@ entrypoints.
 They remain separate packages because they have different owners. The seven
 dependency-free leaves now remaining are migration/acceptance infrastructure
 plus the temporary launcher and require structural/shared-contract planning.
+
+## First Structural Consumer
+
+Package `M2-S1` accepted the reusable strict table family and replaced
+`verify-dependency-audit-lineage.sh`. The suite preserves twelve decisions,
+canonical/former-source text, exact dispositions `STD-0699` and `STD-0700`, and
+accepted plan state. Nineteen engine tests and all 32 suites/151 checks pass;
+inventory and the complete mixed suite report 243 Bash entrypoints.
+
+The table family is justified beyond this package by measured recurring
+structure: 219 remaining scripts use AWK, 198 validate row shape, 165 collect
+projections, 83 count rows, and 58 declare expected projections. Cross-file
+relations and acceptance claims remain separate shared contracts.

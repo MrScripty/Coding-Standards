@@ -397,3 +397,19 @@
   launcher until final convention replacement in `M6-L1`.
 - Next slice: implement strict table assertions and migrate Dependency audit
   lineage as the first complete consumer.
+
+## 2026-08-08 - Milestone 2 Package M2-S1
+
+- Accepted one strict `table` assertion family covering exact headers and row
+  widths, row counts, non-empty columns, literal domains, unique keys, bounded
+  predicates, deterministic projections, one-field splitting, and source or
+  lexical order.
+- Moved bounded predicate parsing from `decision` into one shared engine module;
+  all existing decision suites retained their accepted behavior.
+- Migrated Dependency audit lineage with all twelve decisions, canonical and
+  former-source text, exact `STD-0699`/`STD-0700` projection, and accepted
+  `7.4b9r` plan state; deleted its Bash checker.
+- Verification: 19 self-tests, five focused checks, 32 suites/151 checks direct
+  and launcher execution, inventory/removal/diff gates, and all 243 mixed
+  entrypoints passed.
+- Next slice: migrate `M2-P9` with existing checks; do not broaden the engine.

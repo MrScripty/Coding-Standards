@@ -126,6 +126,47 @@ class EngineTest(unittest.TestCase):
         )
         return "suites/decision.toml"
 
+    def write_table_suite(
+        self,
+        *,
+        path: str = "rows.tsv",
+        expected_state: str = "done",
+        predicate_field: str = "state",
+    ) -> str:
+        self.write(
+            "suites/table.toml",
+            f"""
+            schema_version = 1
+            id = "table"
+            owner = "test.owner"
+            description = "Table suite"
+
+            [[checks]]
+            id = "structure"
+            type = "table"
+            path = {json.dumps(path)}
+            header = ["id", "state", "tags"]
+            row_count = 2
+            non_empty = ["id", "state", "tags"]
+            unique = [["id"]]
+            [checks.domains]
+            state = ["ready", "done"]
+
+            [[checks.projections]]
+            columns = ["id", "state"]
+            order = "source"
+            expected = [["a", "ready"], ["b", {json.dumps(expected_state)}]]
+
+            [[checks.projections]]
+            columns = ["tags"]
+            order = "lexical"
+            expected = [["alpha"], ["beta"], ["gamma"]]
+            where = {{ field = {json.dumps(predicate_field)}, op = "in", values = ["ready", "done"] }}
+            split = {{ field = "tags", delimiter = "," }}
+            """,
+        )
+        return "suites/table.toml"
+
     def test_text_and_decision_suites_pass(self) -> None:
         self.write("evidence.md", "required\n")
         text_suite = self.write_text_suite("text")
@@ -138,6 +179,64 @@ class EngineTest(unittest.TestCase):
 
         self.assertEqual([result.id for result in results], ["text", "decision"])
         self.assertTrue(all(result.status == "passed" for result in results))
+
+    def test_table_structure_and_projections_pass(self) -> None:
+        self.write("rows.tsv", "id\tstate\ttags\na\tready\tbeta,alpha\nb\tdone\tgamma\n")
+        suite_path = self.write_table_suite()
+        self.write_registry([("table", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "passed")
+
+    def test_table_projection_mismatch_has_stable_diagnostic(self) -> None:
+        self.write("rows.tsv", "id\tstate\ttags\na\tready\tbeta,alpha\nb\tdone\tgamma\n")
+        suite_path = self.write_table_suite(expected_state="ready")
+        self.write_registry([("table", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "ASSERT.TABLE_PROJECTION")
+
+    def test_malformed_table_row_is_invalid(self) -> None:
+        self.write("rows.tsv", "id\tstate\ttags\na\tready\n")
+        suite_path = self.write_table_suite()
+        self.write_registry([("table", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "TABLE.ROW_WIDTH")
+        self.assertEqual(result.diagnostics[0].row, 2)
+
+    def test_table_unknown_predicate_field_is_invalid(self) -> None:
+        self.write("rows.tsv", "id\tstate\ttags\na\tready\tbeta,alpha\nb\tdone\tgamma\n")
+        suite_path = self.write_table_suite(predicate_field="missing")
+        self.write_registry([("table", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.TABLE_COLUMN")
+
+    def test_missing_table_is_unavailable(self) -> None:
+        suite_path = self.write_table_suite(path="missing.tsv")
+        self.write_registry([("table", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_table_path_escape_is_invalid(self) -> None:
+        suite_path = self.write_table_suite(path="../outside.tsv")
+        self.write_registry([("table", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "PATH.OUTSIDE_REPOSITORY")
 
     def test_dependency_diamond_executes_each_suite_once(self) -> None:
         self.write("evidence.md", "required\n")

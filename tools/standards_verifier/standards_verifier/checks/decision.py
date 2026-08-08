@@ -8,38 +8,7 @@ from typing import Any
 from ..diagnostics import Diagnostic, EngineError
 from ..model import CheckContext
 from ..paths import contained_file
-
-
-@dataclass(frozen=True, slots=True)
-class Predicate:
-    kind: str
-    field: str | None = None
-    values: tuple[str, ...] = ()
-    children: tuple["Predicate", ...] = ()
-
-    def evaluate(self, row: dict[str, str]) -> bool:
-        if self.kind == "all":
-            return all(child.evaluate(row) for child in self.children)
-        if self.kind == "any":
-            return any(child.evaluate(row) for child in self.children)
-        if self.kind == "not":
-            return not self.children[0].evaluate(row)
-        assert self.field is not None
-        observed = row[self.field]
-        if self.kind == "eq":
-            return observed == self.values[0]
-        if self.kind == "ne":
-            return observed != self.values[0]
-        if self.kind == "in":
-            return observed in self.values
-        if self.kind == "not_in":
-            return observed not in self.values
-        raise AssertionError(f"unhandled predicate kind: {self.kind}")
-
-    def fields(self) -> set[str]:
-        if self.field is not None:
-            return {self.field}
-        return set().union(*(child.fields() for child in self.children))
+from .predicates import Predicate, parse_predicate
 
 
 @dataclass(frozen=True, slots=True)
@@ -149,35 +118,6 @@ class DecisionCheck:
         return diagnostics
 
 
-def _predicate(raw: Any, suite: str, check: str) -> Predicate:
-    if not isinstance(raw, dict):
-        raise EngineError(Diagnostic("CONFIG.PREDICATE", "invalid", "predicate must be a TOML table", suite=suite, check=check))
-    branches = [key for key in ("all", "any", "not") if key in raw]
-    if branches:
-        if len(branches) != 1 or len(raw) != 1:
-            raise EngineError(Diagnostic("CONFIG.PREDICATE_SHAPE", "invalid", "predicate branch must contain exactly one of all, any, or not", suite=suite, check=check))
-        kind = branches[0]
-        value = raw[kind]
-        if kind == "not":
-            return Predicate(kind="not", children=(_predicate(value, suite, check),))
-        if not isinstance(value, list) or not value:
-            raise EngineError(Diagnostic("CONFIG.PREDICATE_CHILDREN", "invalid", f"{kind} predicate requires a non-empty array", suite=suite, check=check))
-        return Predicate(kind=kind, children=tuple(_predicate(child, suite, check) for child in value))
-
-    field = raw.get("field")
-    op = raw.get("op")
-    if not isinstance(field, str) or not field or op not in {"eq", "ne", "in", "not_in"}:
-        raise EngineError(Diagnostic("CONFIG.PREDICATE_LEAF", "invalid", "predicate leaf requires field and a supported operator", suite=suite, check=check))
-    if op in {"eq", "ne"}:
-        if set(raw) != {"field", "op", "value"} or not isinstance(raw.get("value"), str):
-            raise EngineError(Diagnostic("CONFIG.PREDICATE_VALUE", "invalid", f"{op} predicate requires one string value", suite=suite, check=check))
-        return Predicate(kind=op, field=field, values=(raw["value"],))
-    values = raw.get("values")
-    if set(raw) != {"field", "op", "values"} or not isinstance(values, list) or not values or any(not isinstance(value, str) for value in values) or len(set(values)) != len(values):
-        raise EngineError(Diagnostic("CONFIG.PREDICATE_VALUES", "invalid", f"{op} predicate requires unique string values", suite=suite, check=check))
-    return Predicate(kind=op, field=field, values=tuple(values))
-
-
 def parse_decision_check(raw: dict[str, Any], suite_id: str) -> DecisionCheck:
     allowed = {"id", "type", "path", "expected_column", "default", "domains", "rules"}
     unknown = set(raw) - allowed
@@ -211,5 +151,10 @@ def parse_decision_check(raw: dict[str, Any], suite_id: str) -> DecisionCheck:
     for raw_rule in raw_rules:
         if not isinstance(raw_rule, dict) or set(raw_rule) != {"outcome", "when"} or not isinstance(raw_rule.get("outcome"), str):
             raise EngineError(Diagnostic("CONFIG.RULE", "invalid", "rule requires exactly outcome and when", suite=suite_id, check=check_id))
-        rules.append(Rule(raw_rule["outcome"], _predicate(raw_rule["when"], suite_id, check_id)))
+        rules.append(
+            Rule(
+                raw_rule["outcome"],
+                parse_predicate(raw_rule["when"], suite_id, check_id),
+            )
+        )
     return DecisionCheck(check_id, path, expected, default, domains, tuple(rules))
