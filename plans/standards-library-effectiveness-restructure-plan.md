@@ -13,8 +13,8 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** implement delegated verifier package `M2-P9`: migrate
-Implementation change evidence with existing engine checks.
+**Next slice:** implement delegated verifier package `M3-C1`: canonical
+acceptance-claim parsing and set satisfaction with its first consumer.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2338,6 +2338,11 @@ all structural/routing fixtures pass.
          preserving twelve decisions, canonical lineage, two exact
          dispositions, and accepted plan state; reduce Bash inventory from 244
          to 243 without a command action or policy-specific engine branch.
+       - `7.4c3ve12` (`Accepted`): replace Implementation change evidence with
+         existing declarative checks, preserving thirteen decisions, canonical
+         and reference text, exact `STD-0698` split lineage, and former-source
+         prohibitions; reduce Bash inventory from 243 to 242 without changing
+         engine source.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

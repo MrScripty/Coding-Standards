@@ -1,0 +1,59 @@
+schema_version = 1
+id = "implementation-change-evidence"
+owner = "workflow.implementation"
+description = "Change-description evidence and non-normative pull-request projection without provider or template defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/implementation/change-evidence-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+facts = ["complete", "contradictory"]
+authority = ["explicit", "missing"]
+capability = ["supported", "unsupported"]
+evidence = ["complete", "missing"]
+fallback = ["checklist", "duplicate-rationale", "fixed-headings", "github", "none", "pull-request", "template", "template-complete"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "facts", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "authority", op = "eq", value = "missing" }, { field = "evidence", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "workflow"
+type = "text"
+path = "workflows/implementation.md"
+required = ["## Change-Description Evidence", "affected risk", "Do not default to a pull request", "are `invalid`", "is `unavailable`", "`unsupported`; do not substitute"]
+prohibited = []
+
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0698\tTOOLING-STANDARDS.md\tworkflows/implementation.md\tsplit\t"]
+prohibited = []
+
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/implementation.md"
+required = ["ID: `reference.recipes.implementation`", "## Pull-Request Template Example", "mkdir -p .github", "define no fallback"]
+prohibited = []
+
+[[checks]]
+id = "former-source"
+type = "text"
+path = "TOOLING-STANDARDS.md"
+required = []
+prohibited = ["mkdir -p .github", "PULL_REQUEST_TEMPLATE.md"]

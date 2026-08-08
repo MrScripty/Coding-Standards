@@ -76,6 +76,11 @@ path = "evaluation/standards-effectiveness/suites/dependency-audit-lineage.toml"
 requires = []
 
 [[suites]]
+id = "implementation-change-evidence"
+path = "evaluation/standards-effectiveness/suites/implementation-change-evidence.toml"
+requires = []
+
+[[suites]]
 id = "tooling-ci-orchestration"
 path = "evaluation/standards-effectiveness/suites/tooling-ci-orchestration.toml"
 requires = []

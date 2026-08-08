@@ -284,3 +284,14 @@ The table family is justified beyond this package by measured recurring
 structure: 219 remaining scripts use AWK, 198 validate row shape, 165 collect
 projections, 83 count rows, and 58 declare expected projections. Cross-file
 relations and acceptance claims remain separate shared contracts.
+
+## Final Milestone 2 Policy Leaf
+
+Package `M2-P9` accepted replacement of
+`verify-implementation-change-evidence.sh` under `workflow.implementation`.
+The suite preserves thirteen decisions, canonical and reference text, the exact
+`STD-0698` split, and former-source prohibitions. All 33 suites/156 checks pass;
+inventory and the complete mixed suite report 242 Bash entrypoints.
+
+The next dependency-free consumer is the shared acceptance-claim contract;
+migration-structure leaves remain assigned to relation and table packages.

@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2: Shared Structural Assertion Foundation
+**Current phase:** Milestone 3: Shared Metadata, Plan, And Migration Contracts
 
-**Next slice:** Implement `M2-P9`: migrate Implementation change evidence with
-the existing decision and text checks.
+**Next slice:** Implement `M3-C1`: canonical acceptance-claim parsing and set
+satisfaction with its first complete consumer.
 
 **Acceptance status:** `pending`
 
@@ -429,7 +429,7 @@ package:
 | Package | Owner | Contract | Disposition |
 | --- | --- | --- | --- |
 | `M2-S1` Dependency audit lineage | `topics.dependencies` | decision, canonical text, exact disposition projection, accepted plan marker | Accepted with the first strict table consumer. |
-| `M2-P9` Implementation change evidence | `workflow.implementation` | decision, canonical/reference text, exact split disposition | Migrate with existing checks after `M2-S1`. |
+| `M2-P9` Implementation change evidence | `workflow.implementation` | decision, canonical/reference text, exact split disposition | Accepted with existing checks after `M2-S1`. |
 | `M3-C1` Acceptance claims | `workflow.verification` | canonical claim grammar and required-to-observed set satisfaction | Implement as one typed shared contract, then update its README invocation. |
 | `M3-S1` F018 decomposition | parent migration plan | strict map, exact IDs/order, inventory/disposition relations, accepted lifecycle state | Implement after relation checks; remove obsolete planned-state branches. |
 | `M3-S2` Row 19 decomposition and owner validation | parent migration plan | strict tables, exact/expanded projections, uniqueness, counts, canonical report and accepted plan state | Migrate as one owner-coherent two-script package. |
@@ -480,6 +480,25 @@ mixed suite passed.
 strict; the old Bash checker is deleted; no command action, expression string,
 compatibility parser, source alias, or policy-specific callback exists.
 
+#### Package M2-P9: Implementation Change Evidence
+
+**Status:** `Accepted`
+
+**Owner:** `workflow.implementation`
+
+**Preserved contract:** thirteen ordered decisions, canonical
+change-description evidence, exact `STD-0698` split disposition,
+non-normative pull-request recipe projection, and former-source prohibitions.
+
+**Acceptance evidence:** 19 engine/inventory tests; focused suite passed five
+checks; all 33 suites passed 156 checks directly and through the launcher;
+fresh 242-record inventory, removed-path scan, diff integrity, and complete
+mixed suite passed.
+
+**No-fallback result:** existing checks express the complete behavior; the old
+Bash checker is deleted and no engine branch, wrapper, alias, or weaker
+evidence path was introduced.
+
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 
 **Goal:** Replace shared Bash parsers for metadata graphs, plan lifecycle,
@@ -500,7 +519,7 @@ records selected per slice.
 the engine; old helpers and compatibility paths are absent; complete mixed
 suite passes at every shared-contract slice.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 4: Semantic Decision Migration
 

@@ -413,3 +413,16 @@
   and launcher execution, inventory/removal/diff gates, and all 243 mixed
   entrypoints passed.
 - Next slice: migrate `M2-P9` with existing checks; do not broaden the engine.
+
+## 2026-08-08 - Milestone 2 Package M2-P9
+
+- Accepted Implementation change evidence with all thirteen ordered decisions,
+  canonical workflow text, exact `STD-0698` split disposition, non-normative
+  recipe projection, and former-source prohibitions.
+- Deleted the dependency-free Bash leaf without changing engine source or
+  adding a wrapper, alias, fallback schema, or policy-specific branch.
+- Verification: 19 self-tests, five focused checks, 33 suites/156 checks direct
+  and launcher execution, inventory/removal/diff gates, and all 242 mixed
+  entrypoints passed.
+- Milestone 2 ordinary and first structural leaves are complete. Next slice:
+  implement `M3-C1` canonical acceptance claims as a shared typed contract.
