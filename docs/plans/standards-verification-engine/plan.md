@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2: Inventory And Structural Assertion Families
+**Current phase:** Milestone 2: Shared Structural Assertion Foundation
 
-**Next slice:** Replan the seven remaining dependency-free structural,
-acceptance, and launcher leaves before authorizing another implementation
-package.
+**Next slice:** Implement `M2-S1`: strict table assertions with Dependency audit
+lineage as the first complete consumer.
 
 **Acceptance status:** `pending`
 
@@ -102,6 +101,7 @@ disposition, no-fallback, and evidence contracts.
 | Prohibit arbitrary commands and compatibility schemas in declarative suites. | This plan | [Architecture report](reports/architecture.md#security-and-no-fallback) | Shell-command check actions and old/new parser branches |
 | Migrate by semantic family, deleting each replaced checker in the accepting slice. | This plan | [Architecture report](reports/architecture.md#migration-sequence) | Indefinite dual execution |
 | Retire all Bash verifiers, verification helpers, and the migration launcher; represent exceptional algorithms only as registered typed Python checks. | This plan | [Architecture report](reports/architecture.md#extension-rule) | Bounded exceptional Bash adapters |
+| Add bounded table, relation, and acceptance-claim checks from measured recurring contracts; do not add query strings, arbitrary transforms, or policy-specific callbacks. | This plan | 219 remaining scripts use AWK, 198 validate row shape, 165 collect projections, 83 count rows, 58 declare expected projections, and 109 compare lineage/owner/disposition data. | Per-script AWK/mapfile/sort pipelines |
 | Keep the parent standards restructure plan authoritative for normative migration and this child plan authoritative for checker-engine architecture and migration. | Integration owner | Parent-plan delegation | `7.4c3hcp` bespoke Cross-Platform repair assumption |
 
 ## Simplicity And Ownership Review
@@ -415,6 +415,48 @@ authorized.
 
 **Acceptance evidence:** 13 self-tests; 31 suites/146 checks; fresh 244-record
 inventory; removed-path scans; and complete mixed suite passed.
+
+### Structural And Shared-Contract Replan
+
+**Status:** `Accepted`
+
+The seven dependency-free leaves remaining after `M2-P8` are not one coherent
+package:
+
+| Package | Owner | Contract | Disposition |
+| --- | --- | --- | --- |
+| `M2-S1` Dependency audit lineage | `topics.dependencies` | decision, canonical text, exact disposition projection, accepted plan marker | Implement with the first strict table consumer. |
+| `M2-P9` Implementation change evidence | `workflow.implementation` | decision, canonical/reference text, exact split disposition | Migrate with existing checks after `M2-S1`. |
+| `M3-C1` Acceptance claims | `workflow.verification` | canonical claim grammar and required-to-observed set satisfaction | Implement as one typed shared contract, then update its README invocation. |
+| `M3-S1` F018 decomposition | parent migration plan | strict map, exact IDs/order, inventory/disposition relations, accepted lifecycle state | Implement after relation checks; remove obsolete planned-state branches. |
+| `M3-S2` Row 19 decomposition and owner validation | parent migration plan | strict tables, exact/expanded projections, uniqueness, counts, canonical report and accepted plan state | Migrate as one owner-coherent two-script package. |
+| `M6-L1` Declarative-suite launcher | verification engine | inventory freshness plus complete Python execution | Retain only until the complete-suite convention changes; replace, do not wrap. |
+
+The shared contract is bounded as follows:
+
+- `table` reads one contained UTF-8 TSV file, requires an exact unique header
+  and exact row widths, and may assert row count, non-empty columns, literal
+  domains, unique column keys, and deterministic projections.
+- A projection may use the existing bounded field predicates, select named
+  columns, optionally split one selected field by one literal delimiter, and
+  compare source order or lexical order with explicit expected rows. It cannot
+  execute expressions, coerce types, interpolate variables, or mutate data.
+- `relation` compares named projections from two strict table inputs for exact
+  ordered or set equality. Both sides remain independently contained and
+  validated; missing inputs are typed `unavailable` and malformed or unequal
+  relations are typed `invalid`.
+- `acceptance_claims` owns the canonical `kind@environment@mode` grammar and
+  required-to-observed set satisfaction. `either` matches only the same kind
+  and environment with explicit `automated` or `manual`; no evidence kind or
+  environment implication is inferred.
+- Common predicate parsing moves to one engine module shared by `decision`,
+  `table`, and `relation`. There is one strict schema and no old/new parser.
+
+Each primitive requires positive, mismatch, malformed-input, unknown-field,
+missing-input, path-containment, and stable-diagnostic tests before a consumer
+script is deleted. Engine and registry files remain serial. After a primitive
+is accepted, disjoint suite packages may be prepared concurrently but are
+integrated one at a time with fresh-revision admission.
 
 ### Milestone 3: Shared Metadata, Plan, And Migration Contracts
 

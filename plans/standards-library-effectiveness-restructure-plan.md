@@ -13,8 +13,8 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** replan the seven remaining dependency-free structural,
-acceptance, and launcher leaves before authorizing implementation.
+**Next slice:** implement delegated verifier package `M2-S1`: strict table
+assertions with Dependency audit lineage as the first complete consumer.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2326,6 +2326,13 @@ all structural/routing fixtures pass.
          packages, preserving 21 decisions and six exact dispositions; reduce
          inventory from 246 to 244 Bash entrypoints, then trigger replanning of
          the seven structural/shared-contract leaves.
+       - `7.4c3ve10` (`Accepted planning authority`): classify the seven leaves
+         into policy, acceptance, migration-structure, and launcher packages;
+         authorize bounded strict table, relation, and acceptance-claim checks
+         in sequence `M2-S1`, `M2-P9`, `M3-C1`, `M3-S1`, and `M3-S2`, while
+         retaining the temporary launcher only until final convention
+         replacement. Do not add a query language, arbitrary transform,
+         compatibility parser, policy callback, or Bash fallback.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

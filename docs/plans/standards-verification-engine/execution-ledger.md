@@ -377,3 +377,23 @@
   their shared contracts.
 - Next slice: classify those structural leaves and freeze reusable assertion
   contracts before another implementation package is authorized.
+
+## 2026-08-08 - Structural And Shared-Contract Replan
+
+- Accepted the shared-contract option: bounded `table`, `relation`, and
+  `acceptance_claims` checks replace recurring AWK/mapfile/sort behavior without
+  adding arbitrary expressions, transforms, commands, or policy callbacks.
+- Repository evidence: 219 remaining scripts use AWK, 198 validate row shape,
+  165 collect projections, 83 count rows, 58 declare expected projections, and
+  109 compare lineage, owner, inventory, or disposition data.
+- Classified the seven dependency-free leaves into two policy migrations, one
+  acceptance contract, two migration-structure packages, and the temporary
+  launcher. They do not share one owner or acceptance gate.
+- Lifecycle decision: F018 and row-19 suites require their current accepted
+  state; obsolete planned-state branches are removed rather than carried as a
+  compatibility path. Historical validators remain active because their TSV,
+  plan, and report evidence is still mutable repository authority.
+- Sequence: `M2-S1`, `M2-P9`, `M3-C1`, `M3-S1`, `M3-S2`; retain the generic
+  launcher until final convention replacement in `M6-L1`.
+- Next slice: implement strict table assertions and migrate Dependency audit
+  lineage as the first complete consumer.
