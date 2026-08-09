@@ -1122,3 +1122,30 @@
   root README, finding, historical evidence, lockfile, wrapper, bridge,
   compatibility parser, or fallback was added or changed.
 - Next slice: audit M5-CP6 source closure and temporary M5-CP0 retirement.
+
+## 2026-08-08 - M5-CP6 Cross-Platform Source-Closure Admission
+
+- Confirmed manifest-order source 7 is the next parent closure and all 20
+  frozen identifiers have exact dispositions to Cross-Platform, Release, or
+  Verification owners.
+- Confirmed the accepted generic source-index engine already provides durable
+  structural authority for heading, route, prohibition, corpus, owner-map,
+  disposition, Router-exclusion, and line-bound checks. No new verifier or
+  source-specific engine behavior is required.
+- Admitted one safety-critical package that rewrites the source and corpus row,
+  registers isolated Cross-Platform closure fixtures, removes all four M5-CP0
+  dependency edges, deletes M5-CP0, resolves F085, and updates generated graph
+  and parent/child acceptance records atomically.
+- Excluded canonical policy, semantic fixtures, dispositions, owner map,
+  Router, final source manifest, generic closure engine/aggregate, frozen
+  source-preparation inventory, README, engine source/tests, configuration,
+  lockfiles, and unrelated historical evidence.
+- Prohibited transitional headings, replacement prerequisites, source
+  exceptions, compatibility schemas, alternate routes, duplicated semantic
+  assertions, fixed defaults, permissive wording, and prior-source fallback.
+- Admission verification passed exact package authority, all 46 declarative
+  suites, all 42 engine tests, both plan checks, lifecycle fixtures, Python
+  compilation, graph freshness at 230 Bash verifiers / 235 nodes / 989 edges /
+  231 components, diff integrity, and all 230 mixed entrypoints.
+- Next slice: implement the admitted package and run focused owner/closure
+  checks plus the complete mixed-suite wave gate.

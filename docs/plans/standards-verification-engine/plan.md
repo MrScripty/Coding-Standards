@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: M5-CP6 source-closure admission
+**Current phase:** Milestone 5: M5-CP6 source-closure implementation
 
-**Next slice:** Audit and admit M5-CP6 Cross-Platform source closure and
+**Next slice:** Implement admitted M5-CP6 Cross-Platform source closure and
 same-wave retirement of temporary M5-CP0.
 
 **Acceptance status:** `pending`
@@ -1602,6 +1602,60 @@ compilation, protected-input immutability, both plan checks, plan lifecycle
 fixtures, removed-path scans, diff integrity, and all 230 mixed entrypoints
 passed. The regenerated graph contains 230 Bash verifiers, 235 nodes, 989
 edges, and 231 components.
+
+#### M5-CP6 Cross-Platform Source-Closure Admission
+
+**Status:** `Active`
+
+**Owner:** verification-engine migration source closure, integrated with parent
+source package `7.4c3.7`
+
+**Observable outcome:** manifest-order source 7 becomes a concise
+non-normative index, its corpus row becomes `derived`, the existing generic
+source-index engine verifies its exact heading, routes, prohibited authority,
+20 frozen identifiers, canonical owner, and Router exclusion, and temporary
+M5-CP0 is absent after the same commit. The four former M5-CP0 consumers become
+independent roots; Rust Target continues to depend only on Platform Target.
+
+**Exact implementation write set:** `CROSS-PLATFORM-STANDARDS.md`; its corpus
+row; a new `fixtures/source-closure/cross-platform/` contract, heading, route,
+and prohibition set; the suite registry; deletion of the temporary M5-CP0
+suite; the migration-package manifest and exact projection; `F085`; generated
+checker graph artifacts; the parent execution ledger and plan; and this child
+plan's ledger, issues, and inventory report.
+
+Canonical topics, workflows, profiles, decision fixtures, dispositions,
+rule-owner map, Router, final source manifest, generic source-closure engine and
+aggregate, source-preparation inventory, README, engine source/tests,
+configuration, lockfiles, and unrelated historical evidence are excluded.
+Order 7 does not enter the frozen preparation inventory: accepted delegated
+M5 packages replaced the unassigned source-shape checkers that caused its
+absence, and the generic aggregate is shared structural authority rather than
+an exclusive writable semantic verifier.
+
+**Preserved semantics:** exact dispositions `STD-0280` through `STD-0299`;
+Cross-Platform platform-support, filesystem, and native-loading routes;
+Security containment; Release artifact identity and consumer information;
+Verification target evidence; Router-selected specialization; all owner-local
+typed outcomes and prohibited fixed targets, mechanisms, layouts, loaders,
+artifact names, and CI schedules.
+
+**No-fallback rule:** do not retain transitional headings, old source prose,
+M5-CP0, a replacement prerequisite suite, source exceptions, compatibility
+schemas, alternate routes, duplicated semantic assertions, fixed defaults, or
+permissive index wording. Missing or inapplicable routes return the Router's
+typed diagnostic instead of prior source wording.
+
+**Acceptance gate:** focused generic source closure; focused Platform/Rust,
+Native Loading, Native Release, and Platform Evidence suites; exact proof that
+M5-CP0 and all four dependency edges are absent; package authority; all
+declarative suites and engine tests; corpus-derived and F085-resolved state;
+graph freshness; both plan checks; diff integrity; and the complete mixed suite.
+
+**Admission evidence:** exact package authority, all 46 declarative suites, all
+42 engine tests, both plan checks, lifecycle fixtures, Python compilation,
+graph freshness at 230 Bash verifiers / 235 nodes / 989 edges / 231 components,
+diff integrity, and all 230 mixed entrypoints passed.
 
 #### Migration-Package Stable-Identity Re-plan Trigger
 

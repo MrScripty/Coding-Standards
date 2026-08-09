@@ -13,8 +13,9 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** resolve delegated engine `F085` source-shape ownership and
-retirement sequencing before another Cross-Platform source package begins.
+**Next slice:** implement admitted delegated package `M5-CP6` to close
+Cross-Platform source package `7.4c3.7`, resolve `F085`, and retire temporary
+M5-CP0 in the same wave.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2483,11 +2484,18 @@ all structural/routing fixtures pass.
          transfer source-package authority to the Rust suite, and reconcile
          Bash-only README inventories without an engine, policy, source-index,
          compatibility, or fallback change.
-       - `7.4c3ve45` (`Active`): audit and admit M5-CP6 Cross-Platform source
+       - `7.4c3ve45` (`Accepted planning authority`): audit and admit M5-CP6 Cross-Platform source
          closure with same-wave M5-CP0 retirement. After M5 closure, accelerate
          the remainder through dependency-closed owner packages prepared
          concurrently and integrated serially; retain separate suites and no
          Bash bridges.
+       - `7.4c3ve46` (`Active`): implement admitted M5-CP6 and parent source
+         package `7.4c3.7` atomically. Register a source-owned fixture with the
+         existing generic closure engine, rewrite the source as concise
+         non-normative navigation, set its corpus row to derived, remove all
+         four M5-CP0 dependency edges, delete M5-CP0, and resolve F085. Do not
+         add a replacement prerequisite, bespoke verifier, source exception,
+         compatibility schema, alternate route, or fallback to prior wording.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

@@ -835,3 +835,28 @@ pass. Final graph freshness reports 230 Bash verifiers / 235 nodes / 989 edges
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
 edges, and 235 components.
+
+### M5-CP6 Source-Closure Admission
+
+Cross-Platform is next at order 7 in the immutable final source manifest. Its
+20 identifiers have exact dispositions, and the five former heading-dependent
+semantic checkers now have accepted owner-local declarative replacements. The
+remaining temporary M5-CP0 suite is migration structure, not policy.
+
+The existing generic source-index engine is the durable closure authority. The
+admitted package adds only a source-owned fixture directory, rewrites the
+legacy source as concise non-normative navigation, marks its corpus row
+`derived`, removes the four M5-CP0 dependency edges, deletes M5-CP0, and
+resolves F085 in one commit. It does not add another verifier or change the
+shared engine, Router, dispositions, semantic suites, or canonical standards.
+
+Order 7 remains outside the frozen concurrent-preparation inventory. That
+inventory assigns exclusive writable semantic verifiers; the accepted M5
+train removed the four unassigned source-shape readers, while the aggregate
+closure engine remains shared structural authority. Adding it as an exclusive
+order-7 verifier would create false ownership and duplicate-subject pressure.
+
+Admission verification passed the exact package suite, all 46 declarative
+suites, 42 engine tests, both plan checks, lifecycle fixtures, graph freshness
+at 230 Bash verifiers / 235 nodes / 989 edges / 231 components, and all 230
+mixed entrypoints.
