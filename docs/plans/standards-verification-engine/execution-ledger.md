@@ -918,3 +918,31 @@
   / 234 components, removed-path scans, protected-input immutability, both plan
   checks, diff integrity, and all 233 mixed checker entrypoints.
 - Next slice: audit and admit M5-CP3 Platform Evidence Coverage.
+
+## 2026-08-08 - M5-CP3 Platform Evidence Coverage Admission
+
+- Admitted stable subject
+  `checker:evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh`
+  as one Verification-owned declarative suite over the retained 21-row
+  platform-evidence decisions fixture. Current component `0148` remains
+  snapshot evidence only.
+- Froze two exact dispositions, canonical Platform Evidence Coverage text,
+  accepted lineage, README projection, and temporary whole-source coverage.
+- Classified temporary M5-CP0 as the only suite dependency. Verification
+  Ownership remains a same-owner integration gate; Row 6 and execution-train
+  checks remain package/wave gates; the decision-table helper is replacement
+  mechanics.
+- Scheduled the Bash checker and redundant schema/observed mirrors for deletion
+  in the implementation commit. Source, canonical Verification policy,
+  decisions, ownership checker, engine, findings, and historical records remain
+  unchanged.
+- No wrapper, compatibility schema, source heading alias, duplicated ownership
+  policy, default targets, current-platform or simulated-environment
+  substitution, weakened support, provider inference, fixed orchestration, or
+  default success is permitted.
+- Verification passed: focused package authority, all 43 declarative suites,
+  37 engine tests, Python compilation, both plan checks, protected-input
+  immutability, diff integrity, graph freshness at 233 Bash verifiers / 238
+  nodes / 1,009 edges / 234 components, and all 233 mixed checker entrypoints.
+- Next slice: implement admitted M5-CP3 and prove the complete acceptance gate
+  before commit.

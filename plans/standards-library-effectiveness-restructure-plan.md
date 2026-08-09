@@ -2443,8 +2443,14 @@ all structural/routing fixtures pass.
          dependency, canonical Artifact Plan evidence, and two exact
          dispositions; delete its Bash checker and redundant mirrors without a
          wrapper, duplicate Release policy, heading range, or fallback.
-       - `7.4c3ve36` (`Active`): audit and admit M5-CP3 Platform Evidence
-         Coverage as the next independent owner package.
+       - `7.4c3ve36` (`Accepted planning authority`): admit M5-CP3 Platform
+         Evidence Coverage with its stable checker subject, 21 typed decisions,
+         two exact dispositions, temporary M5-CP0 dependency, and accepted
+         VE019 integration-gate classification.
+       - `7.4c3ve37` (`Active`): replace Platform Evidence Coverage with one
+         registered owner-bounded suite and delete its Bash checker and
+         redundant mirrors without a wrapper, heading alias, duplicated
+         ownership policy, environment substitution, or inferred fallback.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

@@ -666,6 +666,30 @@ Acceptance verification passed all 43 declarative suites, 37 engine tests, and
 all 233 mixed checker entrypoints. The regenerated graph has 238 nodes, 1,007
 edges, and 234 components.
 
+### Platform Evidence Coverage Admission
+
+`M5-CP3` selects current component `0148`: 66 Bash lines, 21 ordered decisions,
+two exact dispositions, one Verification owner, one README projection, and two
+redundant fixture mirrors. The retained decisions fixture is canonical package
+input.
+
+The admitted suite requires temporary M5-CP0 only. The former nested
+Verification Ownership call checks the broader owner boundary and remains a
+same-owner integration gate. Row 6 and execution-train calls are migration
+gates, while the decision-table helper is replaced by engine mechanics. No
+nested checker becomes a suite dependency.
+
+Implementation must remove all nested execution without dropping support
+contracts, target coverage, real-environment evidence, selected scheduling and
+orchestration, typed outcomes, dispositions, canonical owner evidence, or
+negative fallback coverage. The stable package subject is
+`checker:evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh`;
+component `0148` remains snapshot evidence only.
+
+Admission verification passed all 43 declarative suites, 37 engine tests, and
+all 233 mixed checker entrypoints. The admission graph contains 238 nodes,
+1,009 edges, and 234 components.
+
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
 edges, and 235 components.

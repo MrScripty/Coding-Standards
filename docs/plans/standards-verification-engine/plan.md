@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: Platform Evidence Coverage admission
+**Current phase:** Milestone 5: Platform Evidence Coverage implementation
 
-**Next slice:** Audit and admit `M5-CP3` Platform Evidence Coverage as the next
+**Next slice:** Implement admitted `M5-CP3` Platform Evidence Coverage as one
 independent owner package.
 
 **Acceptance status:** `pending`
@@ -1278,6 +1278,62 @@ success remains.
 removed-path scans, protected-input immutability, both plan checks, diff
 integrity, and all 233 mixed checker entrypoints passed. The regenerated graph
 contains 233 Bash verifiers, 238 nodes, 1,007 edges, and 234 components.
+
+#### M5-CP3 Package Admission: Platform Evidence Coverage
+
+**Status:** `Accepted`
+
+**Owner:** `workflow.verification`
+
+**Observable outcome:** one registered Platform Evidence Coverage suite depends
+on `cross-platform-source-closure-prerequisite`, derives all 21 support,
+coverage, environment, scheduling, orchestration, and fallback decisions
+through strict domains and ordered typed outcomes, preserves canonical
+Verification text, two exact dispositions, accepted lineage, and README
+projection, and contains no former-source heading assertion.
+
+**Exact implementation write set:**
+
+- migration-package manifest and validating suite;
+- suite registry and `suites/platform-evidence-coverage.toml`;
+- obsolete `verify-platform-evidence-coverage.sh`,
+  `platform-evidence-schema.tsv`, and `platform-evidence-observed.tsv` for
+  deletion;
+- standards-effectiveness README projection;
+- generated checker structure/dependency inventories; and
+- this plan, ledger, issues, inventory report, and parent plan.
+
+The retained `platform-evidence-decisions.tsv`,
+`CROSS-PLATFORM-STANDARDS.md`, `workflows/verification.md`, Verification
+Ownership checker, engine source, findings, historical ledger, source-closure
+manifests, lockfiles, and all unrelated fixtures are excluded.
+
+**Dependency contract:** temporary `M5-CP0` is the only suite dependency.
+Verification Ownership is a same-owner integration gate under VE019; Row 6 and
+execution-train evidence remain package/wave gates and are not nested
+dependencies. The decision-table helper supplies replacement mechanics only.
+
+**No-fallback rule:** retain no Bash wrapper, schema compatibility parser,
+observed-outcome mirror, heading alias, duplicated Verification Ownership
+policy, default target set, current-platform substitution, weakened required
+support, provider-matrix inference, fixed trigger/fail-fast default, simulated
+environment substitution, or default-success path.
+
+**Acceptance gate:** focused dependency-order execution, package authority, all
+declarative suites, 37 engine tests, Python compilation, graph freshness,
+removed-path scanning, source and semantic-input immutability, both plan
+checks, diff integrity, and the complete mixed suite pass before implementation
+is accepted.
+
+**Admission identity:** the stable package subject is
+`checker:evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh`.
+Current `component-0148` is non-authoritative graph snapshot evidence.
+
+**Admission evidence:** focused package authority and all 43 declarative suites
+passed; 37 engine tests, Python compilation, both plan checks, protected-input
+immutability, and diff integrity passed. The admission graph is fresh at 233
+Bash verifiers, 238 nodes, 1,009 edges, and 234 components; all 233 mixed
+checker entrypoints passed.
 
 #### Migration-Package Stable-Identity Re-plan Trigger
 
