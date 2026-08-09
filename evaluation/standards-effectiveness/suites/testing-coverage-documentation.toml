@@ -1,0 +1,77 @@
+schema_version = 1
+id = "testing-coverage-documentation"
+owner = "workflow.verification"
+description = "Coverage interpretation and durable evidence records without percentage, exclusion-list, inline-comment, template, documentation, or tool-success fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/verification/coverage-documentation-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+claim = ["named"]
+metric = ["branch", "contradictory", "line", "none", "unsupported"]
+scope = ["bounded", "fixture"]
+authority = ["contradictory", "missing", "owned"]
+baseline = ["applicable", "missing", "none"]
+context = ["missing", "recorded", "recoverable"]
+substitute = ["conventional-exclusions", "diagram-required", "documentation-proof", "fixed-percent", "high-coverage", "inline-required", "none", "tool-success"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "substitute", op = "ne", value = "none" },
+  { field = "metric", op = "eq", value = "contradictory" },
+  { field = "authority", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "metric", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "baseline", op = "eq", value = "missing" },
+  { field = "context", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "workflows/verification.md"
+required = ["## Coverage And Durable Evidence Records", "does not prove observable", "named risk or claim", "cannot be recovered from the check name", "requiring an inline comment", "successful instrumentation"]
+prohibited = []
+
+[[checks]]
+id = "legacy-routes"
+type = "text"
+path = "TESTING-STANDARDS.md"
+required = ["| Acceptance claims, evidence kinds, environments, test design, placement, coverage, test data, async evidence, supporting gates, and diagnosis | [Verification](workflows/verification.md) |"]
+prohibited = ["Simple getters/setters with no logic", "directly above the test"]
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0625\tTESTING-STANDARDS.md\tworkflows/verification.md\tindex\treplace coverage guidance parent with a non-normative route to canonical coverage interpretation",
+  "STD-0626\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tselect coverage metric scope threshold and baseline from named risk history tooling and decision cost without universal percentages",
+  "STD-0627\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tselect coverage exclusions from generated unreachable and instrumentation authority without conventional exclusion lists",
+  "STD-0628\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\ttreat coverage as a path diagnostic without inferring behavior assertion quality evidence fidelity or acceptance from target attainment",
+  "STD-0629\tTESTING-STANDARDS.md\tworkflows/verification.md\tindex\treplace test documentation parent with a non-normative route to canonical durable evidence records",
+  "STD-0630\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\trecord non-recoverable defect invariant environment and interpretation context at the owning evidence without mandatory inline comments",
+  "STD-0631\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\trecord non-recoverable fixture shape authority at the owning artifact without mandatory diagrams tables or templates",
+]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8cf` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []

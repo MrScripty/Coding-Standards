@@ -1,0 +1,78 @@
+schema_version = 1
+id = "testing-async-evidence"
+owner = "workflow.verification"
+description = "Async completion and failure evidence at the selected boundary without syntax, generic-error, or weaker-boundary fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/verification/async-completion-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+completion = ["contradictory", "missing", "owned"]
+states = ["cancellation", "contradictory", "failure", "missing", "partial", "retry-exhausted", "running", "success", "timeout"]
+boundary = ["contradictory", "local", "process", "service"]
+timing = ["missing", "not-applicable", "owned"]
+diagnostics = ["not-applicable", "owned"]
+mechanism = ["await", "clock", "event", "harness", "join", "observe", "unsupported"]
+substitute = ["await-syntax", "generic-error", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "substitute", op = "ne", value = "none" },
+  { field = "completion", op = "eq", value = "contradictory" },
+  { field = "states", op = "eq", value = "contradictory" },
+  { field = "boundary", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "mechanism", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "completion", op = "eq", value = "missing" },
+  { field = "states", op = "eq", value = "missing" },
+  { field = "timing", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "workflows/verification.md"
+required = ["## Async Completion And Failure Evidence", "terminal state and externally meaningful", "not a universal pair", "cannot substitute for the selected boundary", "weaker-boundary evidence"]
+prohibited = []
+
+[[checks]]
+id = "legacy-routes"
+type = "text"
+path = "TESTING-STANDARDS.md"
+required = [
+  "| Acceptance claims, evidence kinds, environments, test design, placement, coverage, test data, async evidence, supporting gates, and diagnosis | [Verification](workflows/verification.md) |",
+  "| Concurrent test resources and asynchronous lifecycle obligations | [Concurrency](topics/concurrency.md) |",
+]
+prohibited = ["// GOOD: Properly awaited", "Upstream non-success responses"]
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0636\tTESTING-STANDARDS.md\tworkflows/verification.md\tindex\treplace async-testing parent with a non-normative route to canonical completion and outcome evidence while preserving Concurrency lifecycle ownership",
+  "STD-0637\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tselect await join event callback polling clock harness or process observation from the owned terminal state without await-syntax or runner-exit defaults",
+  "STD-0638\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tderive success failure cancellation timeout retry and partial-result cases from the owned contract without universal success-and-failure pairs",
+  "STD-0640\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tprove service-boundary outcomes effects termination and diagnostics at the selected boundary without generic error checklists mocks or weaker-boundary substitution",
+]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8ch` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []
