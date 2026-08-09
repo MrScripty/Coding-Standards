@@ -359,3 +359,28 @@ requires = []
 id = "testing-source-closure"
 path = "evaluation/standards-effectiveness/suites/testing-source-closure.toml"
 requires = []
+
+[[suites]]
+id = "contract-invariants"
+path = "evaluation/standards-effectiveness/suites/contract-invariants.toml"
+requires = []
+
+[[suites]]
+id = "core-code-discipline"
+path = "evaluation/standards-effectiveness/suites/core-code-discipline.toml"
+requires = []
+
+[[suites]]
+id = "core-simplicity"
+path = "evaluation/standards-effectiveness/suites/core-simplicity.toml"
+requires = []
+
+[[suites]]
+id = "implementation-disabled-lifecycle"
+path = "evaluation/standards-effectiveness/suites/implementation-disabled-lifecycle.toml"
+requires = []
+
+[[suites]]
+id = "resilience-failure-boundaries"
+path = "evaluation/standards-effectiveness/suites/resilience-failure-boundaries.toml"
+requires = []

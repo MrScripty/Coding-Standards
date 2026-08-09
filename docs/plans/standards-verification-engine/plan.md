@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: accelerated Wave 5 admission
+**Current phase:** Milestone 6: post-Wave-5 dependency audit
 
-**Next slice:** Implement the five admitted contract and lifecycle suites,
-replace two README checker routes, delete the five Bash checkers, and accept
-their exact historical edge rows.
+**Next slice:** Audit the fresh 199-verifier graph, classify exact dependency
+closures and semantic ownership, and admit the next owner-coherent accelerated
+wave only if its complete no-fallback write set can be frozen.
 
 **Acceptance status:** `pending`
 
@@ -2058,7 +2058,7 @@ compatibility path changed.
 
 #### Slice M6-EDGE-2: Accelerated Multi-Owner Wave
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 After M6-EDGE-1 acceptance, classify high-reuse helper and historical-gate
 edges, select disjoint owner packages, and migrate them in one integrated wave.
@@ -2201,7 +2201,7 @@ surviving entrypoints.
 
 ##### Wave 5 Admission: Contract And Lifecycle Leaves
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Packages:** Contract invariants, Core code discipline, Core simplicity,
 disabled implementation lifecycle, and Resilience failure boundaries.
@@ -2237,10 +2237,23 @@ both plan checks, diff integrity, and one complete mixed checkpoint pass.
 **Implementation gate:** each suite preserves its complete typed decisions,
 exact routes or dispositions, positive and negative canonical text, legacy
 source closure, and accepted-plan claims. Package and edge rows transition
-together to `accepted`; all 13 checker paths and live references are absent;
+together to `accepted`; all five checker paths and live references are absent;
 focused suites, package and edge authority, 57 engine tests, all declarative
 suites, graph freshness, both plan checks, diff integrity, and one complete
 mixed checkpoint pass.
+
+**Implementation summary:** Five registered declarative suites now replace the
+five admitted Bash checkers and preserve all 69 typed decisions and 26 exact
+dispositions. The Core simplicity and Resilience README routes name canonical
+suite identities. All 12 row-15 and execution-train edges remain independent
+historical lifecycle gates; no false suite dependency, wrapper, bridge, alias,
+compatibility schema, inferred decision, or weaker evidence was introduced.
+
+**Implementation verification:** all five focused suites plus package and edge
+authority passed; all 57 engine tests and all 77 declarative suites passed;
+graph freshness passed at 199 Bash verifiers / 204 nodes / 933 edges / 200
+components; diff integrity and the complete mixed checkpoint passed all 199
+surviving entrypoints.
 
 **Tasks:**
 

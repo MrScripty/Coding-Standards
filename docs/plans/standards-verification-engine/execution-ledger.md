@@ -1458,3 +1458,25 @@
   and all 204 mixed entrypoints.
 - Next slice: implement all five suites, replace two README routes, delete all
   five Bash paths, and transition package and edge history together.
+
+## 2026-08-09 - Milestone 6 Wave 5 Implementation
+
+- Added and registered five declarative suites for Contract invariants, Core
+  code discipline, Core simplicity, disabled implementation lifecycle, and
+  Resilience failure boundaries using existing strict engine primitives.
+- Preserved 69 typed decisions, 26 exact dispositions, canonical routes,
+  former-source prohibitions, and accepted-plan evidence. Policy, fixtures,
+  canonical sources, row 15, and the execution train are unchanged.
+- Replaced the Core simplicity and Resilience README checker routes with their
+  canonical suite identities, then deleted all five admitted Bash checkers
+  without wrappers, bridges, aliases, inferred outcomes, compatibility schemas,
+  or weaker evidence.
+- Accepted all five package rows and all 12 historical edge rows. Row 15 and
+  the execution train remain independently discovered lifecycle gates rather
+  than copied assertions or false suite dependencies.
+- Focused verification passed all five replacements plus package and edge
+  authority; all 57 engine tests and all 77 declarative suites passed; graph
+  freshness passed at 199 Bash verifiers / 204 nodes / 933 edges / 200
+  components; and diff integrity passed.
+- The complete mixed-suite Wave 5 checkpoint passed all 199 surviving
+  entrypoints. Wave 5 is accepted; the next slice is a fresh dependency audit.

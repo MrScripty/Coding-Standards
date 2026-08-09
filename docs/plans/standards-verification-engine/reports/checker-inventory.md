@@ -1131,3 +1131,22 @@ Admission verification passed package and edge authority, all 57 engine tests,
 all 72 declarative suites, graph freshness at 204 Bash verifiers / 209 nodes /
 960 edges / 205 components, both plan checks, diff integrity, and all 204 mixed
 entrypoints.
+
+### Implemented Milestone 6 Wave 5
+
+The five admitted Contract, Core, Implementation, and Resilience checkers are
+now five registered declarative suites. Their 69 typed decisions, 26 exact
+dispositions, canonical routes, former-source prohibitions, and accepted-plan
+evidence are preserved. The Core simplicity and Resilience README routes now
+name canonical suite identities.
+
+All five Bash paths are deleted, all package rows and 12 historical edge rows
+are accepted, and row 15 plus the execution train remain independently
+discovered lifecycle gates. No wrapper, bridge, alias, compatibility schema,
+inferred outcome, false suite dependency, or duplicate policy remains.
+
+Focused verification passed all five replacements, package and edge authority,
+all 57 engine tests, and all 77 declarative suites. Graph freshness passed at
+199 Bash verifiers / 204 nodes / 933 edges / 200 components. Complete
+mixed-suite Wave 5 verification passed all 199 surviving entrypoints, accepting
+the wave without a compatibility execution path.

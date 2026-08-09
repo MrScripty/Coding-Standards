@@ -116,7 +116,7 @@ zero premature dispositions, no-fallback findings, and the next bounded child.
 `milestone-7-row-15-decomposition.md` splits immutable row 15 into 15
 owner-coherent coding-policy children and records five missing owner contracts.
 
-`fixtures/core/simplicity-decisions.tsv` and `verify-core-simplicity.sh` prove
+`fixtures/core/simplicity-decisions.tsv` and the registered `core-simplicity` suite prove
 entanglement- and ownership-based simplicity without visible-count or
 smallest-diff defaults.
 
@@ -133,8 +133,8 @@ backend, framework, composition, and state-owner recipes.
 semantic constant/configuration ownership without universal literal,
 centralization, ambient, duplicated-default, or incumbent-value fallbacks.
 
-`fixtures/resilience/failure-boundary-decisions.tsv` and
-`verify-resilience-failure-boundaries.sh` prove owned failure translation,
+`fixtures/resilience/failure-boundary-decisions.tsv` and the registered
+`resilience-failure-boundaries` suite prove owned failure translation,
 cause preservation, bounded diagnostics, and rejection of catch/log/trace
 defaults.
 
