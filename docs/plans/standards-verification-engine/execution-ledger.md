@@ -580,3 +580,21 @@
 - No-fallback result: no wrapper, stale documentation, dual authority,
   out-of-scope edit, or weakened reference scan is authorized.
 - Next slice: implement and verify re-admitted package `M3-DT1`.
+
+## 2026-08-08 - Package M3-DT1 Language Binding Surface Contract
+
+- Replaced the 74-line Bash checker with one registered five-check declarative
+  suite over the retained 19-row decisions fixture.
+- Preserved the exact typed-invalid, typed-unavailable, omit, and expose
+  derivation order; canonical profile literals; former-source route and
+  prohibitions; four inventory IDs; and four exact dispositions.
+- Deleted the redundant schema and observed-outcome mirrors and reconciled the
+  README to the suite and retained decisions fixture.
+- Verification: the focused suite passed five checks; all 38 suites/176 checks,
+  37 engine tests, Python compilation, graph freshness at 237 Bash
+  verifiers/242 nodes/1,039 edges/238 components, removed operational-path
+  scanning, diff integrity, and all 237 mixed checker entrypoints passed.
+- No-fallback result: no wrapper, transitive Bash dependency, duplicate outcome
+  authority, stale README entrypoint, or implicit export/default-success path
+  remains.
+- Next slice: review the post-migration graph for the next bounded consumer.

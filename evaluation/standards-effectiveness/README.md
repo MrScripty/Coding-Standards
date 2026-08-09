@@ -222,12 +222,12 @@ contradictions, unavailable evidence, target-count and host-label defaults,
 UI-technology defaults, alternate mechanisms, process substitution, and
 default success.
 
-`fixtures/language-bindings/surface-contract-*.tsv` and
-`verify-language-binding-surface-contract.sh` select exported operations,
-host-language subsets, semantic ownership, support, documentation,
-compatibility, and evidence from declared consumer and product contracts.
-They reject automatic exports, fixed support tiers, forced parity,
-wrapper-owned domain semantics, native-only evidence, and default success.
+The registered `language-binding-surface-contract` suite evaluates
+`fixtures/language-bindings/surface-contract-decisions.tsv` to select exported
+operations, host-language subsets, semantic ownership, support, documentation,
+compatibility, and evidence from declared consumer and product contracts. It
+rejects automatic exports, fixed support tiers, forced parity, wrapper-owned
+domain semantics, native-only evidence, and default success.
 
 `fixtures/contracts/binding-evolution-*.tsv` and
 `verify-binding-contract-evolution.sh` classify binding artifacts by applicable

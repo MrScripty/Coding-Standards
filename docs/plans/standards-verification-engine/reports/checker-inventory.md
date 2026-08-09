@@ -416,3 +416,16 @@ projection, suite registration, obsolete-authority deletion, generated graph
 updates, and package lifecycle in one owner-coherent integration outcome. The
 package is again eligible for implementation; no compatibility entrypoint or
 intermediate documentation authority is permitted.
+
+## First Decision Consumer Migration
+
+Accepted package `M3-DT1` replaces Language Binding Surface Contract with a
+five-check declarative suite and retains only the canonical 19-row decisions
+fixture. Its Bash checker, schema mirror, and observed-outcome mirror are
+deleted; the README projects the suite instead of an executable entrypoint.
+
+The current inventory is 237 Bash verifiers and five helpers. The generated
+graph contains 242 nodes, 1,039 typed edges, and 238 components. The migration
+therefore removed one verifier node, eight dependency/reference edges, and one
+component while preserving strict typed decisions, four exact section IDs, four
+exact dispositions, canonical profile evidence, and former-source closure.

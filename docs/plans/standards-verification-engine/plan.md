@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 3: Decision Table Consumer Migration
 
-**Next slice:** Implement admitted package `M3-DT1`, replace the Language
-Binding Surface Contract checker with one declarative suite, reconcile its
-README projection, and remove all obsolete checker and mirror authorities.
+**Next slice:** Review the post-`M3-DT1` graph and admit the next smallest
+inbound-free, owner-coherent decision-table consumer package. Include all
+documentation projections before freezing its exact write set.
 
 **Acceptance status:** `pending`
 
@@ -217,6 +217,8 @@ and plan records selected per slice.
 - [ ] Add strict table, Markdown heading/route, exact-row/set/order, and count
   assertions from observed requirements.
 - [ ] Migrate coherent leaf packages and remove their scripts.
+- [x] Migrate `M3-DT1` Language Binding Surface Contract and remove its Bash
+  checker plus redundant schema and observed-outcome mirrors.
 
 **Acceptance gate:** Inventory coverage is exact; each package's focused suites
 and complete mixed suite pass; no migrated behavior has two authorities.
@@ -760,6 +762,29 @@ removed-path gate to its verification contract. The implementation slice must
 replace the README's Bash-entrypoint projection with the registered suite and
 retained decisions fixture in the same atomic outcome. No intermediate
 documentation authority or compatibility entrypoint is authorized.
+
+#### Package M3-DT1: Language Binding Surface Contract
+
+**Status:** `Accepted`
+
+**Owner:** `profile.boundary.language-bindings`
+
+**Observable outcome:** one registered five-check suite derives all 19 surface
+decisions from strict domains and ordered predicates, preserves exact canonical
+profile, former-source, inventory, and disposition evidence, and retains typed
+invalid and unavailable outcomes without implicit export defaults.
+
+**Acceptance evidence:** the focused suite passed five checks; all 38
+declarative suites/176 checks and 37 engine tests passed; Python compilation
+passed with bytecode directed outside the read-only worktree; graph freshness
+reports 237 Bash verifiers, 242 nodes, 1,039 edges, and 238 components. The
+removed-path scan finds obsolete paths only in the accepted package's frozen
+write-set history, and all 237 mixed checker entrypoints passed.
+
+**No-fallback result:** the Bash checker and redundant schema/observed mirrors
+were deleted, the README now projects the registered suite and retained
+decisions fixture, and no Bash wrapper, transitive checker call, dual outcome
+authority, stale operational reference, or default-success path remains.
 
 ### Milestone 4: Semantic Decision Migration
 

@@ -13,9 +13,9 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** implement re-admitted delegated engine package `M3-DT1`.
-Option 1 added the README projection and removed-path gate to the exact package
-contract; replace the checker without retaining stale or dual authority.
+**Next slice:** review the delegated engine's post-`M3-DT1` graph and admit the
+next inbound-free owner-coherent decision consumer, including documentation
+projections before its exact write set is frozen.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2372,9 +2372,12 @@ all structural/routing fixtures pass.
        - `7.4c3ve19` (`Accepted`): re-admit `M3-DT1` with the README in its
          exact write set and explicit removed-path verification; do not retain
          stale documented authority or an intermediate compatibility path.
-       - `7.4c3ve20` (`Active`): replace the Language Binding Surface Contract
+       - `7.4c3ve20` (`Accepted`): replace the Language Binding Surface Contract
          checker with one registered declarative suite, retain only canonical
          decisions, reconcile README projection, and regenerate graph evidence.
+       - `7.4c3ve21` (`Active`): inspect the 237-verifier/242-node post-package
+         graph and admit the next bounded decision consumer without inferred
+         ownership, omitted documentation, or compatibility authority.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact
