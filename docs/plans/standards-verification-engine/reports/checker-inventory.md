@@ -1217,7 +1217,7 @@ authority, all 62 engine tests, and all 87 declarative suites. Graph freshness
 passed at 189 Bash verifiers / 194 nodes / 910 edges / 190 components. The
 complete mixed Wave 6 checkpoint passed all 189 surviving entrypoints.
 
-### Admitted M6-K1 Metadata Kernel
+### Accepted M6-K1 Metadata Kernel
 
 One safety-critical package owns the metadata fixture checker and its bounded
 native replacement. Its two executable graph rows both target the shared
@@ -1234,3 +1234,20 @@ Admission verification passed package and edge authority, all 62 engine tests,
 all 87 declarative suites, graph freshness at 189 Bash verifiers / 194 nodes /
 914 edges / 190 components, both plan checks, diff integrity, and the complete
 189-entrypoint mixed checkpoint.
+
+The accepted replacement registers one typed metadata graph suite with
+direct and exact fixture-corpus modes, 20 focused engine tests, and 19 corpus
+cases. It enforces field grammar, owner equality, module-only specialization,
+exact relation resolution, and relation-specific plus combined cycles without
+calling the retained helper or consulting legacy rule maps.
+
+The fixture checker is absent. Package and edge authority pass in accepted
+state, while the shared helper remains for its 52 independently owned semantic
+consumers. Regenerated graph artifacts contain 188 Bash verifiers / 193 nodes /
+909 edges / 189 components.
+
+Acceptance passed the focused suite, all 82 engine tests, all 88 declarative
+suites, strict validation of 57 live canonical modules, both plan checks,
+removed-path proof, diff integrity, graph freshness, and all 188 mixed
+entrypoints. No helper consumer, canonical module, legacy map, wrapper, alias,
+compatibility parser, or fallback path changed in M6-K1.

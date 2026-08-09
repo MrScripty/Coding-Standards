@@ -1667,3 +1667,30 @@
   / 914 edges / 190 components, and diff integrity.
 - Next slice: restore M6-K1 from its isolated state, rerun the 57-module audit,
   and resume the admitted metadata-kernel implementation.
+
+## 2026-08-09 - M6-K1 Metadata Kernel Implemented
+
+- Restored the isolated implementation after VE036 and reran its 20 focused
+  tests plus a strict read-only audit of all 57 canonical modules; both pass
+  with zero live-corpus diagnostics.
+- Added the typed `metadata_graph` primitive with direct and exact
+  fixture-corpus modes, strict configuration, contained input reads,
+  field-specific grammar, canonical-owner equality, exact relation resolution,
+  profile-only module specialization, and three cycle diagnostics.
+- Added thirteen missing fixtures and one registered suite containing nineteen
+  positive and negative cases. The suite passes without helper execution.
+- Updated schema, precedence, and engine/evaluation routing documentation;
+  deleted only the admitted fixture checker. The helper and its 52 semantic
+  consumers remain unchanged with no wrapper, alias, compatibility parser,
+  legacy-map lookup, fallback, or silent normalization.
+- Transitioned package and historical edge rows to accepted. Package and edge
+  authority pass after graph regeneration at 188 Bash verifiers / 193 nodes /
+  909 edges / 189 components; all 82 engine tests pass.
+- Acceptance passed the focused suite, package and edge authority, all 82
+  engine tests, all 88 declarative suites, strict validation of all 57 live
+  canonical modules, graph freshness at 188 Bash verifiers / 193 nodes / 909
+  edges / 189 components, both plan checks, removed-path proof, diff integrity,
+  and all 188 mixed entrypoints.
+- Package state is `Accepted`; the fixture checker is absent. Next slice is a
+  read-only audit for the smallest owner-coherent metadata-helper consumer
+  package before any further admission or implementation.

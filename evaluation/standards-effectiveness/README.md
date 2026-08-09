@@ -53,8 +53,10 @@ fixture requires a recorded reason and before/after rescoring.
 - `owner-map.tsv` and `owner-overrides.tsv` map the baseline corpus to proposed
   canonical owners.
 - `generate-owner-map.sh` writes the complete 916-section owner proposal.
-- `check-metadata.sh` and `verify-metadata-fixtures.sh` validate the metadata
-  contract and its negative cases.
+- The registered `metadata-fixtures` suite validates the metadata contract and
+  its exact positive and negative diagnostic corpus through the Python engine.
+- `check-metadata.sh` remains a migration-owned helper for its existing
+  semantic consumers only; migrated suites do not execute it as a fallback.
 
 ## Accelerated Milestone 7 Execution
 

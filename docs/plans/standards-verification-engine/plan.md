@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: metadata-kernel implementation
+**Current phase:** Milestone 6: post-kernel package selection
 
-**Next slice:** Restore and resume the admitted `M6-K1` module metadata-graph
-primitive, focused corpus, and registered fixture suite; delete only the
-fixture checker after every declared implementation gate passes.
+**Next slice:** Audit the regenerated graph for the smallest inbound-safe,
+owner-coherent package of semantic consumers of the retained metadata helper;
+do not change a consumer, helper, suite, or package state before admission.
 
 **Acceptance status:** `pending`
 
@@ -2375,7 +2375,7 @@ checkpoint passed all 189 surviving entrypoints.
 
 **Decision status:** `Accepted`
 
-**Package status:** `Admitted`
+**Package status:** `Accepted`
 
 The metadata audit found that the canonical schema advertised module IDs or
 rule IDs in `Specializes`, while every live specialization names a module, the
@@ -2478,6 +2478,30 @@ Verification, Contracts, Diagnostics, and the reference dependency closure
 pass. No schema, helper, engine, registry, package, fixture, canonical
 Diagnostics policy, or unrelated reference content changed. M6-K1 remains
 admitted and resumes only after this correction's atomic commit.
+
+**Implementation result:** the engine now has one side-effect-free
+`metadata_graph` check with mutually exclusive direct-graph and exact
+fixture-corpus modes. It preserves prose, enforces field-specific symbolic and
+relation grammar, validates canonical owner and role/level contracts, resolves
+module relations exactly, and reports self-edges plus `Requires`,
+`Specializes`, and combined cycles with typed diagnostics. Twenty focused tests
+and nineteen registered corpus cases cover positive workflow/profile graphs
+and every admitted negative behavior.
+
+The canonical schema and information architecture now define module-level
+specialization without blanket override authority. The registered
+`metadata-fixtures` suite replaces the deleted fixture checker directly; it
+does not execute the shared metadata helper. The helper and all 52 semantic
+consumers remain unchanged for later owner-coherent migration. Package and edge
+authority pass with M6-K1 accepted and its two historical helper edges absent
+from the regenerated graph.
+
+**Acceptance evidence:** the focused metadata suite, package and edge
+authority, all 82 engine tests, all 88 declarative suites, strict validation of
+all 57 live canonical modules, graph freshness at 188 Bash verifiers / 193
+nodes / 909 edges / 189 components, both plan checks, removed-path proof, diff
+integrity, and all 188 mixed entrypoints pass. The package is accepted and the
+fixture checker is absent.
 
 **Implementation gate after admission:** focused parser/graph tests cover every
 typed diagnostic; the positive corpus and every negative fixture pass through

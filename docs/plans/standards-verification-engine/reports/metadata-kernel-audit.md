@@ -86,3 +86,11 @@ accepts the complete selected dependency closure from Core through
 Verification, Contracts, Diagnostics, and the reference. The correction did
 not change metadata semantics or transfer ownership to M6-K1; it removed one
 invalid canonical value before strict engine acceptance.
+
+## Acceptance Result
+
+M6-K1 is accepted. The registered fixture suite and all 20 focused metadata
+tests pass, and the strict primitive accepts all 57 live canonical modules.
+Package and historical-edge authority pass with the fixture checker absent;
+the shared helper remains independently owned for later semantic-consumer
+packages and is not an execution path of the replacement suite.

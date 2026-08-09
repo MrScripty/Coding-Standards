@@ -1,0 +1,125 @@
+schema_version = 1
+id = "metadata-fixtures"
+owner = "evaluation.metadata-schema"
+description = "Exact positive and negative metadata field, ownership, relation, specialization, and cycle diagnostics without helper execution or fallback parsing."
+
+[[checks]]
+id = "corpus"
+type = "metadata_graph"
+
+[[checks.cases]]
+id = "valid-workflow"
+paths = [
+  "evaluation/standards-effectiveness/fixtures/metadata/valid-core.md",
+  "evaluation/standards-effectiveness/fixtures/metadata/valid-workflow.md",
+]
+expected = []
+
+[[checks.cases]]
+id = "valid-profile"
+paths = [
+  "evaluation/standards-effectiveness/fixtures/metadata/valid-core.md",
+  "evaluation/standards-effectiveness/fixtures/metadata/valid-workflow.md",
+  "evaluation/standards-effectiveness/fixtures/metadata/valid-profile.md",
+]
+expected = []
+
+[[checks.cases]]
+id = "invalid-level"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-level.md"]
+expected = ["METADATA.LEVEL"]
+
+[[checks.cases]]
+id = "invalid-missing-owner"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-missing-owner.md"]
+expected = ["METADATA.FIELD_COUNT"]
+
+[[checks.cases]]
+id = "invalid-owner"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-owner.md"]
+expected = ["METADATA.CANONICAL_OWNER"]
+
+[[checks.cases]]
+id = "invalid-self-dependency"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-self-dependency.md"]
+expected = ["METADATA.SELF_EDGE"]
+
+[[checks.cases]]
+id = "invalid-missing-dependency"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-missing-dependency.md"]
+expected = ["METADATA.UNRESOLVED_TARGET"]
+
+[[checks.cases]]
+id = "invalid-requires-cycle"
+paths = [
+  "evaluation/standards-effectiveness/fixtures/metadata/invalid-cycle-a.md",
+  "evaluation/standards-effectiveness/fixtures/metadata/invalid-cycle-b.md",
+]
+expected = ["METADATA.REQUIRES_CYCLE", "METADATA.COMBINED_CYCLE"]
+
+[[checks.cases]]
+id = "invalid-duplicate-id"
+paths = [
+  "evaluation/standards-effectiveness/fixtures/metadata/invalid-duplicate-a.md",
+  "evaluation/standards-effectiveness/fixtures/metadata/invalid-duplicate-b.md",
+]
+expected = ["METADATA.DUPLICATE_ID"]
+
+[[checks.cases]]
+id = "invalid-specialization-role"
+paths = [
+  "evaluation/standards-effectiveness/fixtures/metadata/valid-core.md",
+  "evaluation/standards-effectiveness/fixtures/metadata/invalid-specialization-role.md",
+]
+expected = ["METADATA.SPECIALIZATION_ROLE"]
+
+[[checks.cases]]
+id = "invalid-missing-specialization"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-missing-specialization.md"]
+expected = ["METADATA.UNRESOLVED_TARGET"]
+
+[[checks.cases]]
+id = "invalid-self-specialization"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-self-specialization.md"]
+expected = ["METADATA.SELF_EDGE"]
+
+[[checks.cases]]
+id = "invalid-specialization-cycle"
+paths = [
+  "evaluation/standards-effectiveness/fixtures/metadata/invalid-specialization-cycle-a.md",
+  "evaluation/standards-effectiveness/fixtures/metadata/invalid-specialization-cycle-b.md",
+]
+expected = ["METADATA.SPECIALIZES_CYCLE", "METADATA.COMBINED_CYCLE"]
+
+[[checks.cases]]
+id = "invalid-combined-cycle"
+paths = [
+  "evaluation/standards-effectiveness/fixtures/metadata/invalid-combined-cycle-a.md",
+  "evaluation/standards-effectiveness/fixtures/metadata/invalid-combined-cycle-b.md",
+]
+expected = ["METADATA.COMBINED_CYCLE"]
+
+[[checks.cases]]
+id = "invalid-relation-empty-item"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-relation-empty-item.md"]
+expected = ["METADATA.RELATION_FORMAT"]
+
+[[checks.cases]]
+id = "invalid-relation-duplicate"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-relation-duplicate.md"]
+expected = ["METADATA.RELATION_DUPLICATE"]
+
+[[checks.cases]]
+id = "invalid-relation-none-mixed"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-relation-none-mixed.md"]
+expected = ["METADATA.RELATION_FORMAT"]
+
+[[checks.cases]]
+id = "invalid-unquoted-id"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-unquoted-id.md"]
+expected = ["METADATA.SYMBOLIC_FORMAT"]
+
+[[checks.cases]]
+id = "invalid-empty-verification"
+paths = ["evaluation/standards-effectiveness/fixtures/metadata/invalid-empty-verification.md"]
+expected = ["METADATA.PROSE_EMPTY"]

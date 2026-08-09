@@ -434,3 +434,8 @@ requires = []
 id = "gui-smoke-evidence"
 path = "evaluation/standards-effectiveness/suites/gui-smoke-evidence.toml"
 requires = ["verification-ownership"]
+
+[[suites]]
+id = "metadata-fixtures"
+path = "evaluation/standards-effectiveness/suites/metadata-fixtures.toml"
+requires = []

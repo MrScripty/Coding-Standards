@@ -112,6 +112,12 @@ The metadata describes module applicability. Individual requirements still use
 plain normative language. Metadata must not become a second prose standards
 system.
 
+`Requires` selects another canonical module as an inclusion dependency.
+`Specializes` is module-level precedence metadata available only to profiles: a
+selected profile may provide narrower mechanisms for the named module, but the
+named module's generic obligations remain authoritative. Neither relation
+infers rule identity from prose, file order, or legacy migration identifiers.
+
 ## Level Semantics
 
 - `MUST`: selected requirements are mandatory for compliance.
@@ -148,7 +154,8 @@ From highest to lowest:
 2. The adopted project's explicit public/persisted contracts and accepted
    architecture decisions.
 3. Core invariants.
-4. A selected profile, but only for rules named by `Specializes`.
+4. A selected profile, but only for mechanisms owned by modules named in
+   `Specializes` and without weakening their generic obligations.
 5. Selected workflows and topics, which add requirements without overriding
    higher levels.
 6. `SHOULD` defaults.
@@ -162,8 +169,8 @@ Additional rules:
 - A profile cannot silently weaken Core.
 - A topic cannot override another topic.
 - Examples never establish precedence.
-- A conflict or dependency cycle is an invalid standards set and must produce
-  a diagnostic.
+- A conflict or cycle in `Requires`, `Specializes`, or their combined graph is
+  an invalid standards set and must produce a diagnostic.
 
 ## Existing Entrypoint Migration
 

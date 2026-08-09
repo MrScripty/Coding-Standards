@@ -49,6 +49,22 @@ with inline expected TOML text encoded as UTF-8. It performs no newline,
 whitespace, Unicode, or encoding normalization and accepts only `id`, `type`,
 `path`, and `expected` fields.
 
+The `metadata_graph` check parses the nine canonical Markdown metadata fields
+without global normalization. Direct mode accepts one non-empty `paths` list
+and validates the selected module graph. Fixture-corpus mode accepts one
+non-empty `cases` list; each case has a unique `id`, non-empty `paths`, and the
+exact ordered `expected` diagnostic-code sequence. The two modes are mutually
+exclusive. The check validates field grammar, role and level domains,
+canonical-owner equality, module-ID uniqueness, exact relation resolution,
+profile-only specialization, self-edges, and cycles in `Requires`,
+`Specializes`, and their combined graph. It does not infer targets, consult
+legacy owner maps, execute helpers, or fall back to prose or file order.
+
+Metadata diagnostics use the `METADATA.*` family. Configuration defects are
+typed `CONFIG.*`, unavailable files remain `INPUT.UNAVAILABLE`, and a fixture
+whose observed sequence differs from its declared sequence produces
+`ASSERT.METADATA_FIXTURE`.
+
 The `edge_dispositions` check validates migration packages against the exact
 generated executable graph. Packages opt into exactly one configured mode.
 `edge-dispositions` requires every outgoing `executable_reference`,
