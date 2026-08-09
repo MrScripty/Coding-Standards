@@ -2425,8 +2425,18 @@ all structural/routing fixtures pass.
          dependency, canonical owner evidence, and two exact dispositions;
          delete its Bash checker and redundant mirrors without a wrapper,
          duplicate target policy, heading range, or fallback.
-       - `7.4c3ve32` (`Active`): audit and admit `M5-CP2` Native Artifact
-         Release as the next independent owner package.
+       - `7.4c3ve32` (`Blocked by re-plan`): the M5-CP2 owner audit is complete,
+         but admission cannot use current `component-0137` because accepted
+         M5-CP1 recorded that ordinal before graph renumbering. Do not weaken
+         exact subject uniqueness or treat generated SCC ordinals as durable
+         package identity.
+       - `7.4c3ve33` (`Accepted`): replace generated component ordinals in
+         package authority with unique typed checker/source subjects; retain
+         component ordinal and baseline only as report evidence and include
+         graph regeneration at admission boundaries.
+       - `7.4c3ve34` (`Active`): resume M5-CP2 admission using the stable Native
+         Artifact Release checker subject and accepted VE017 dependency
+         classification.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

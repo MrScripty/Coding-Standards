@@ -7,22 +7,22 @@ description = "Reviewed migration-package authority without graph-derived semant
 id = "admitted-packages"
 type = "table"
 path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
-header = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
+header = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 row_count = 5
-non_empty = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
-unique = [["train_order"], ["package_id"], ["components"]]
+non_empty = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
+unique = [["train_order"], ["package_id"], ["subject"]]
 
 [checks.domains]
 risk = ["mechanical", "consolidation", "refinement", "safety-critical", "new-owner-design"]
 state = ["admitted", "accepted", "blocked"]
 
 [[checks.projections]]
-columns = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
+columns = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 order = "source"
 expected = [[
   "1",
   "M3-DT1",
-  "component-0085",
+  "checker:evaluation/standards-effectiveness/verify-language-binding-surface-contract.sh",
   "profiles/boundaries/language-bindings.md",
   "consolidation",
   "language-binding-surface-contract-declarative-authority",
@@ -33,7 +33,7 @@ expected = [[
 ], [
   "2",
   "M3-DT2",
-  "component-0183",
+  "checker:evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh",
   "profiles/languages/rust/language-bindings.md",
   "consolidation",
   "rust-binding-contract-discovery-declarative-authority",
@@ -44,7 +44,7 @@ expected = [[
 ], [
   "3",
   "M3-DT3",
-  "component-0024",
+  "checker:evaluation/standards-effectiveness/verify-binding-artifact-composition.sh",
   "workflows/release.md",
   "consolidation",
   "binding-artifact-composition-declarative-authority",
@@ -66,7 +66,7 @@ expected = [[
 ], [
   "5",
   "M5-CP1",
-  "component-0137",
+  "checker:evaluation/standards-effectiveness/verify-native-artifact-loading.sh",
   "topics/cross-platform.md",
   "consolidation",
   "native-artifact-loading-declarative-authority",

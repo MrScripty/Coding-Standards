@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: Native Artifact Loading admission
+**Current phase:** Milestone 5: Native Artifact Release admission
 
-**Next slice:** Audit and admit `M5-CP2` Native Artifact Release as the next
-independent owner package.
+**Next slice:** Resume and complete `M5-CP2` admission using the stable checker
+subject and explicit admission-time graph regeneration.
 
 **Acceptance status:** `pending`
 
@@ -622,7 +622,7 @@ Structural generation and semantic migration authority remain separate:
   deterministic topological wave. A cycle is evidence to migrate one coherent
   component or re-plan its ownership; it is not broken by wrappers.
 - `checker-migration-packages.tsv` is reviewed planning authority rather than
-  generated inference. It assigns admitted components to canonical owner,
+  generated inference. It assigns stable checker or source subjects to owner,
   risk, semantic outcome, exact write set, prerequisite packages, verification
   contract, and lifecycle state.
 
@@ -1200,6 +1200,118 @@ authority, removed-path scans, protected-input immutability, both plan checks,
 diff integrity, and all `234` mixed checker entrypoints passed. The regenerated
 graph contains `234` Bash verifiers, `239` nodes, `1,015` edges, and `235`
 components.
+
+#### M5-CP2 Package Admission: Native Artifact Release
+
+**Status:** `Planned`
+
+**Owner:** `workflow.release`
+
+**Observable outcome:** one registered Native Artifact Release suite depends on
+`cross-platform-source-closure-prerequisite`, derives all 19 release identity
+and consumer-information decisions through strict domains and ordered typed
+outcomes, preserves the canonical Artifact Plan text, two exact dispositions,
+accepted lineage, and README projection, and contains no former-source heading
+assertion.
+
+**Exact implementation write set:**
+
+- migration-package manifest and validating suite;
+- suite registry and `suites/native-artifact-release.toml`;
+- obsolete `verify-native-artifact-release.sh`,
+  `native-artifact-schema.tsv`, and `native-artifact-observed.tsv` for deletion;
+- standards-effectiveness README projection;
+- generated checker structure/dependency inventories; and
+- this plan, ledger, issues, inventory report, and parent plan.
+
+The retained `native-artifact-decisions.tsv`,
+`CROSS-PLATFORM-STANDARDS.md`, `workflows/release.md`, Release Artifact Policy
+checker, engine source, findings, historical ledger, source-closure manifests,
+lockfiles, and all unrelated fixtures are excluded.
+
+**Dependency contract:** temporary `M5-CP0` is the only suite dependency.
+Release Artifact Policy independently owns `STD-0543` through `STD-0551` and is
+an owner-umbrella integration gate under VE017; Row 6 and execution-train
+evidence remain package/wave gates and are not nested dependencies.
+
+**No-fallback rule:** retain no Bash wrapper, schema compatibility parser,
+observed-outcome mirror, heading alias, duplicated Release Artifact policy,
+OS-name filename default, class-local installation prose, ambient package,
+alternate artifact, incomplete publication, or default-success path.
+
+**Acceptance gate:** focused dependency-order execution, package authority, all
+declarative suites, 37 engine tests, Python compilation, graph freshness,
+removed-path scanning, source and semantic-input immutability, both plan checks,
+diff integrity, and the complete mixed suite pass before implementation is
+accepted.
+
+Admission cannot complete under the current package schema: graph regeneration
+reused `component-0137`, already recorded for accepted M5-CP1, for the current
+Native Artifact Release checker. Component ordinals are deterministic only for
+one graph snapshot and cannot serve as unique historical package subjects.
+
+#### Migration-Package Stable-Identity Re-plan Trigger
+
+**Status:** `Accepted`
+
+The package manifest requires exact unique subjects, but its `components`
+column stores generated strongly connected component ordinals. Deleting one
+checker renumbers later components, so the same ordinal can identify unrelated
+packages at different admissions. Relaxing uniqueness would hide overlapping
+ownership; rewriting accepted rows to current ordinals would falsify their
+admission evidence.
+
+Admission plan and ledger references also participate in the generated
+dependency inventory. Therefore graph regeneration is an admission-boundary
+write, not only an implementation-boundary write.
+
+**Option 1 - Stable source subject plus snapshot evidence (`Recommended`):**
+replace `components` with a unique stable `subject` such as
+`checker:evaluation/standards-effectiveness/verify-native-artifact-release.sh`
+or `source:CROSS-PLATFORM-STANDARDS.md`. Keep generated component ordinal and
+baseline commit in reports as non-authoritative admission evidence. Migrate all
+accepted manifest rows atomically, retain unique package and subject checks,
+and include generated graph artifacts in admission write sets. Choose this for
+durable ownership, legible history, and exact overlap prevention.
+
+**Option 2 - Commit-qualified component snapshot:** store
+`component-0137@<baseline-commit>` as the unique subject. This preserves the
+exact historical graph observation but makes package identity opaque, couples
+planning authority to graph numbering, and requires lookup through old graph
+artifacts to discover the checker. Choose only when historical SCC identity is
+itself the reviewed subject.
+
+**Option 3 - Separate stable subject and graph snapshot columns:** add a unique
+source `subject` plus explicit `graph_component` and `graph_baseline` columns.
+This retains structured snapshot evidence in the manifest but expands every
+row and duplicates information already available in reports and commits.
+Choose when automated historical graph correlation is a demonstrated need.
+
+Dropping subject uniqueness, using current ordinals to rewrite accepted rows,
+adding arbitrary suffixes, or exempting admission changes from graph freshness
+are invalid options.
+
+**Selected option:** Option 1. The manifest's `subject` column uses typed,
+repository-relative checker paths or source identities. Accepted rows retain
+their original reviewed subject after checker deletion. Both `package_id` and
+`subject` remain unique. Generated component ordinal and baseline commit remain
+report evidence only, and generated graph artifacts are part of every admission
+boundary whose references affect graph freshness.
+
+**Recovery write set:** package manifest and validator, generated structure and
+dependency graph artifacts, this plan, ledger, issues, inventory report, and
+parent plan. Semantic policy, checkers, fixtures, registry, README, engine
+source, lockfiles, and unrelated migration authority are excluded.
+
+**Acceptance gate:** focused package authority, all declarative suites, 37
+engine tests, Python compilation, graph freshness, both plan checks, protected-
+input immutability, diff integrity, and the complete mixed suite.
+
+**Acceptance evidence:** package authority and all 42 declarative suites
+passed; 37 engine tests, Python compilation, both plan checks, protected-input
+immutability, and diff integrity passed. The regenerated graph is fresh at 234
+Bash verifiers, 239 nodes, 1,015 edges, and 235 components; all 234 mixed
+checker entrypoints passed.
 
 ### Milestone 4: Semantic Decision Migration
 

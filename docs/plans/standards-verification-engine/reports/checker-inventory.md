@@ -350,6 +350,11 @@ outcome, write set, prerequisites, verification, and lifecycle are reviewed in
 names. This preserves exact structural automation without allowing migration
 mechanics to decide standards ownership.
 
+Package authority identifies each reviewed unit by a stable typed checker or
+source subject. Generated component ordinals and baseline commits are snapshot
+evidence in this report, not durable package keys; deleting one checker may
+renumber later components without changing any accepted package subject.
+
 The admitted migration order is decision-table helpers, source-index and
 traceability helpers, plan-structure helpers, metadata helpers, then verifier
 hubs and frozen identity contracts in component order. Every package removes
@@ -608,3 +613,34 @@ evidence, typed-outcome, disposition, owner, or no-fallback evidence.
 Acceptance verification passed all `42` declarative suites, `37` engine tests,
 and all `234` remaining mixed checker entrypoints. The regenerated graph has
 `239` nodes, `1,015` edges, and `235` components.
+
+### Native Artifact Release Admission
+
+`M5-CP2` selects current component `0137`: 61 Bash lines, 19 ordered decisions,
+two exact dispositions, one Release owner, one README projection, and two
+redundant fixture mirrors. The retained decisions fixture is canonical package
+input.
+
+The admitted suite requires temporary `M5-CP0` only. The former nested Release
+Artifact Policy call covers separate `STD-0543` through `STD-0551`
+SBOM/checksum/lockfile policy and remains an independently selected same-owner
+integration gate. Row 6 and execution-train calls are migration gates. The
+implementation must remove all nested execution without dropping Native
+Release identity, consumer-information, evidence, typed-outcome, disposition,
+owner, or no-fallback evidence.
+
+Admission exposed that `component-0137` is also the historical ordinal recorded
+for accepted M5-CP1. This is not a semantic overlap: deleting M5-CP1 renumbered
+the generated graph. Component ordinals are snapshot evidence and cannot be the
+manifest's unique package subject. M5-CP2 remains unadmitted until the manifest
+uses a stable reviewed identity and admission graph regeneration is explicit.
+
+The accepted recovery uses the stable subject
+`checker:evaluation/standards-effectiveness/verify-native-artifact-release.sh`
+for M5-CP2. Existing package rows use typed checker/source subjects while
+retaining exact uniqueness. Admission-boundary graph regeneration is explicit;
+no ordinal rewrite or graph exception is used.
+
+Recovery verification passed all 42 declarative suites, 37 engine tests, and
+all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
+edges, and 235 components.

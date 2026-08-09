@@ -828,3 +828,64 @@
   edges / `235` components, removed-path scans, source immutability, both plan-
   structure checks, diff integrity, and all `234` mixed checker entrypoints.
 - Next slice: audit and admit `M5-CP2` Native Artifact Release.
+
+## 2026-08-08 - M5-CP2 Native Artifact Release Admission
+
+- Admitted current component `0137` as one Release-owned declarative suite over
+  the retained 19-row native artifact decisions fixture.
+- Froze two exact dispositions, canonical Artifact Plan text, accepted lineage,
+  README projection, and temporary whole-source coverage.
+- Classified temporary `M5-CP0` as the only suite dependency. The broader
+  Release Artifact Policy checker owns separate SBOM/checksum/lockfile rules
+  and remains an owner-umbrella integration gate; Row 6 and execution-train
+  checks remain package/wave gates.
+- Scheduled the Bash checker and redundant schema/observed mirrors for deletion
+  in the implementation commit. Source, canonical Release policy, decisions,
+  broader Release checker, engine, findings, and historical records remain
+  unchanged.
+- No wrapper, compatibility schema, source heading alias, duplicated Release
+  policy, filename default, ambient package, alternate artifact, incomplete
+  publication, or default success is permitted.
+- Next slice: implement admitted `M5-CP2` and prove the complete acceptance
+  gate before commit.
+
+## 2026-08-08 - Migration-Package Stable-Identity Re-plan Trigger
+
+- M5-CP2 admission failed package authority because current Native Artifact
+  Release and accepted M5-CP1 both resolve to `component-0137` across different
+  generated graph snapshots.
+- Confirmed generated SCC ordinals renumber after checker deletion and are not
+  stable historical package subjects. The unique-subject invariant is valid;
+  the selected identity representation is not.
+- Confirmed admission plan/ledger references can change generated graph edges,
+  so admission slices must include graph regeneration rather than defer it to
+  implementation.
+- Withdrew the unadmitted M5-CP2 manifest row. No policy, fixture, checker,
+  registry, README, engine, or generated artifact was changed.
+- Recommended stable source subjects with graph ordinal/commit retained as
+  non-authoritative report evidence. Commit-qualified components and a wider
+  subject-plus-snapshot schema remain standards-aligned alternatives.
+- Rejected weakened uniqueness, historical ordinal rewrites, arbitrary
+  suffixes, and graph-freshness exceptions.
+- Next slice: select the package identity model before M5-CP2 admission.
+
+## 2026-08-08 - Stable Migration-Package Subjects
+
+- Accepted Option 1 and replaced generated SCC ordinals in package authority
+  with stable typed checker/source subjects.
+- Migrated all five accepted package rows atomically. Historical checker paths
+  remain reviewed subjects after deletion; the Cross-Platform prerequisite
+  retains its source subject.
+- Preserved exact uniqueness for train order, package ID, and subject. Generated
+  component ordinal and baseline commit remain non-authoritative report
+  evidence rather than migration identity.
+- Made graph regeneration explicit at admission boundaries whose plan or ledger
+  references affect the graph.
+- Retained no duplicate subject, arbitrary suffix, ordinal rewrite, weakened
+  uniqueness, graph exception, compatibility field, or second authority.
+- Verification passed: focused package authority, all 42 declarative suites,
+  37 engine tests, Python compilation, both plan checks, protected-input
+  immutability, diff integrity, graph freshness at 234 Bash verifiers / 239
+  nodes / 1,015 edges / 235 components, and all 234 mixed checker entrypoints.
+- Next slice: resume M5-CP2 admission with the stable Native Artifact Release
+  checker subject.
