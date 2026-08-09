@@ -1335,3 +1335,29 @@
   integrity, and all 223 mixed entrypoints.
 - Next slice: classify shared targets once and admit the first disjoint
   multi-owner package wave through the typed manifest.
+
+## 2026-08-09 - Milestone 6 Wave 3 Admission
+
+- Admitted six inbound-free owner packages for Contracts, Core constants,
+  disabled-behavior verification, Licensing, Performance, and TypeScript.
+- Froze 93 decision cases, 24 exact dispositions, canonical owner and route
+  text, former-source prohibitions, and accepted-plan evidence.
+- Classified all 12 outgoing edges exactly. Each source has one executable
+  reference and one verifier dependency to row 15; both are independent
+  historical lifecycle gates rather than semantic suite dependencies.
+- Froze three row-35 identity removals: dependency count 29 to 26 and direct
+  root-route count 27 to 24, retaining transitive/computed counts at 1/1 and
+  consumers at 33.
+- Excluded policy, fixtures, dispositions, canonical sources, metadata, Router,
+  source-package authority, engine changes, compatibility, wrappers, bridges,
+  alternate identities, inferred outcomes, weaker evidence, and silent
+  success.
+- Regenerated the admission graph at 223 Bash verifiers / 228 nodes / 1,002
+  edges / 224 components. Nineteen new contract references come from exact
+  package and edge admission records; executable classifications remain 12
+  exact rows.
+- Admission verification passed package and edge authority, all 57 engine
+  tests, all 53 declarative suites, graph freshness, both plan checks, diff
+  integrity, and all 223 mixed entrypoints.
+- Next slice: implement all six declarative suites, reconcile row 35, delete
+  the six admitted checkers, and transition package and edge history together.

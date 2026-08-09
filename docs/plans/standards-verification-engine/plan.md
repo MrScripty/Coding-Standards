@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: accelerated multi-owner wave preparation
+**Current phase:** Milestone 6: accelerated Wave 3 implementation
 
-**Next slice:** Classify shared executable targets and admit the first exact,
-disjoint multi-owner package wave through the accepted edge contract.
+**Next slice:** Implement the six admitted Wave 3 owner suites, reconcile three
+row-35 lifecycle identities, delete all six Bash checkers, and accept their
+historical edge rows.
 
 **Acceptance status:** `pending`
 
@@ -2057,7 +2058,7 @@ compatibility path changed.
 
 #### Slice M6-EDGE-2: Accelerated Multi-Owner Wave
 
-**Status:** `Planned`
+**Status:** `Active`
 
 After M6-EDGE-1 acceptance, classify high-reuse helper and historical-gate
 edges, select disjoint owner packages, and migrate them in one integrated wave.
@@ -2070,6 +2071,51 @@ their checker deletion.
 **Acceptance gate:** every removed checker has exact package and edge coverage;
 all focused suites and typed edge checks pass; no unresolved row, wrapper,
 bridge, or live deleted-path reference remains; one complete wave gate passes.
+
+##### Wave 3 Admission: Six Independent Owners
+
+**Status:** `Active`
+
+**Packages:** `M6-W3-CONTRACT-BOUNDARY`, `M6-W3-CORE-CONSTANTS`,
+`M6-W3-DISABLED-BEHAVIOR`, `M6-W3-LICENSING`, `M6-W3-PERFORMANCE`, and
+`M6-W3-TYPESCRIPT-OWNER`.
+
+**Frozen behavior:** 93 decision cases and 24 exact dispositions across
+Contracts, Core constants, disabled-behavior verification, Licensing,
+Performance, and TypeScript. Existing canonical owner, router, legacy-source
+prohibition, accepted-plan, and disposition evidence remains unchanged.
+
+**Edge contract:** every checker is inbound-free and has exactly two outgoing
+typed edges to
+`evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh`:
+one `executable_reference` and one `verifier_dependency`. All 12 rows are
+`independent-gate` because row 15 proves historical migration lifecycle rather
+than any package's semantic policy. It remains independently discovered and is
+not copied, wrapped, inferred, or converted into a suite dependency.
+
+**Implementation write set:** six new suite TOMLs, six deleted checker paths,
+the unchanged decision fixtures as read-only evidence, package and edge
+manifests, registry, package contract, the standards-effectiveness README for
+the Core checker route, row-35 dependency fixture and checker for three frozen
+README identities, generated graph artifacts, and this plan's records.
+
+**Lifecycle reconciliation:** deleting Licensing, Performance, and TypeScript
+owner checkers removes three root-route rows. Row 35 changes from 29 to 26
+dependencies and from 27 to 24 direct root-route assertions; its transitive and
+computed counts remain 1/1 and its consumer inventory remains 33.
+
+**No-fallback rule:** no policy, fixture, disposition, canonical source,
+metadata, Router, source package, engine, compatibility schema, wrapper,
+bridge, alternate checker identity, inferred decision, weaker evidence, or
+silent success may be added or changed.
+
+**Implementation gate:** each suite must reproduce its exact decision outcomes,
+positive and negative canonical text, exact dispositions, and route/source
+closure. Package and edge rows transition together to `accepted`; all six
+checkers and every live reference to them are absent; the row-15 gate remains;
+focused suites, both authority contracts, 57 engine tests, all declarative
+suites, row-35 lifecycle, graph freshness, both plan checks, diff integrity,
+and one complete mixed gate pass.
 
 **Tasks:**
 

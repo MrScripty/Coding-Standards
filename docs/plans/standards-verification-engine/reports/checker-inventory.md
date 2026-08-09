@@ -1023,3 +1023,28 @@ suite evidence, empty package coverage, and path escape. All 57 engine tests,
 53 declarative suites, graph freshness at 223 Bash verifiers / 228 nodes / 983
 edges / 224 components, both plan checks, and all 223 mixed entrypoints passed.
 The contract slice changed no Bash checker or generated graph artifact.
+
+### Milestone 6 Wave 3 Admission
+
+The first contract-governed accelerated wave admits six independent semantic
+owners: Contracts boundary proof, Core constants, disabled behavior claims,
+Licensing, Performance, and TypeScript owner policy. Their 93 decision cases,
+24 exact dispositions, canonical routes and owners, source prohibitions, and
+accepted-plan evidence are frozen.
+
+Each source is inbound-free. Each has exactly one executable reference and one
+verifier dependency to the row-15 decomposition checker. All 12 edges are
+classified `independent-gate`: row 15 owns historical migration lifecycle and
+remains independently discovered; it is not semantic policy for any of the six
+owners and will not be copied into their suites.
+
+Three packages are exact row-35 README identities. Implementation removes those
+rows and reconciles 29 to 26 total dependencies and 27 to 24 direct routes,
+while preserving transitive/computed counts at 1/1 and consumers at 33. The
+admission graph has 223 Bash verifiers, 228 nodes, 1,002 edges, and 224
+components; the 19-edge increase is contract evidence from package and edge
+manifests, not new execution.
+
+Admission verification passed both authority suites, all 57 engine tests, all
+53 declarative suites, graph freshness, both plan checks, diff integrity, and
+all 223 mixed entrypoints.

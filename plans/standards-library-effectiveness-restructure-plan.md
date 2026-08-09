@@ -12,8 +12,9 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1 and 2
 and M6-EDGE-1 are accepted; exact typed executable-edge semantics now govern
 further checker deletion.
 
-**Next slice:** classify shared executable targets and admit the delegated
-verification engine's first exact disjoint multi-owner wave.
+**Next slice:** implement the delegated verification engine's six admitted
+Wave 3 owner suites, delete their Bash checkers, and accept their exact edge
+history.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

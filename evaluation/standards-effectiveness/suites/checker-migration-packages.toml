@@ -8,7 +8,7 @@ id = "admitted-packages"
 type = "table"
 path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
 header = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
-row_count = 17
+row_count = 23
 non_empty = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 unique = [["train_order"], ["package_id"], ["subject"]]
 
@@ -206,4 +206,70 @@ expected = [[
   "VE022,7.4c3p,M6-W1-TOOLING-REF",
   "focused-suite,engine-tests,graph-freshness,declarative-all,removed-paths,lifecycle-transfer,source-unchanged,complete-suite",
   "accepted",
+], [
+  "18",
+  "M6-W3-CONTRACT-BOUNDARY",
+  "checker:evaluation/standards-effectiveness/verify-contract-boundary-proof.sh",
+  "topics/contracts.md",
+  "consolidation",
+  "contract-boundary-proof-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/contract-boundary-proof.toml,evaluation/standards-effectiveness/verify-contract-boundary-proof.sh,evaluation/standards-effectiveness/fixtures/contracts/boundary-proof-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
+  "admitted",
+], [
+  "19",
+  "M6-W3-CORE-CONSTANTS",
+  "checker:evaluation/standards-effectiveness/verify-core-constants.sh",
+  "CORE-STANDARDS.md",
+  "consolidation",
+  "core-constants-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/core-constants.toml,evaluation/standards-effectiveness/verify-core-constants.sh,evaluation/standards-effectiveness/fixtures/core/constants-decisions.tsv,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
+  "admitted",
+], [
+  "20",
+  "M6-W3-DISABLED-BEHAVIOR",
+  "checker:evaluation/standards-effectiveness/verify-disabled-behavior-claims.sh",
+  "workflows/verification.md",
+  "consolidation",
+  "disabled-behavior-claims-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/disabled-behavior-claims.toml,evaluation/standards-effectiveness/verify-disabled-behavior-claims.sh,evaluation/standards-effectiveness/fixtures/verification/disabled-behavior-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
+  "admitted",
+], [
+  "21",
+  "M6-W3-LICENSING",
+  "checker:evaluation/standards-effectiveness/verify-licensing-owner-contract.sh",
+  "topics/licensing.md",
+  "consolidation",
+  "licensing-owner-contract-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/licensing-owner-contract.toml,evaluation/standards-effectiveness/verify-licensing-owner-contract.sh,evaluation/standards-effectiveness/fixtures/licensing/owner-contract-decisions.tsv,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,lifecycle-transfer,complete-suite",
+  "admitted",
+], [
+  "22",
+  "M6-W3-PERFORMANCE",
+  "checker:evaluation/standards-effectiveness/verify-performance-owner-contract.sh",
+  "topics/performance.md",
+  "consolidation",
+  "performance-owner-contract-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/performance-owner-contract.toml,evaluation/standards-effectiveness/verify-performance-owner-contract.sh,evaluation/standards-effectiveness/fixtures/performance/owner-contract-decisions.tsv,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,lifecycle-transfer,complete-suite",
+  "admitted",
+], [
+  "23",
+  "M6-W3-TYPESCRIPT-OWNER",
+  "checker:evaluation/standards-effectiveness/verify-typescript-owner-contract.sh",
+  "profiles/languages/typescript.md",
+  "consolidation",
+  "typescript-owner-contract-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/typescript-owner-contract.toml,evaluation/standards-effectiveness/verify-typescript-owner-contract.sh,evaluation/standards-effectiveness/fixtures/typescript/owner-contract-decisions.tsv,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,lifecycle-transfer,complete-suite",
+  "admitted",
 ]]
