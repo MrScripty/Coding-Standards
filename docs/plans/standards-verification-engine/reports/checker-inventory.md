@@ -401,3 +401,11 @@ mechanism selection, native release, core/adapter testability, and workspace
 evidence also have unresolved inbound callers. They require later admitted
 caller or frozen-identity packages before deletion. The helper remains until
 all direct consumers and executable references are removed.
+
+`M3-DT1` pre-implementation review also found a documentation-only reference in
+the standards-effectiveness README. Documentation edges do not constrain graph
+order, but they still require exact stale-authority reconciliation. The admitted
+write set did not include that file, so implementation stopped and was restored
+before source integration. Re-admission must either include the README or defer
+the package; it cannot ignore the reference because it is absent from the typed
+dependency graph.

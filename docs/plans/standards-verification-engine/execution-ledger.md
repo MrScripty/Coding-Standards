@@ -543,3 +543,23 @@
   redundant mirrors; no Bash-to-Python wrapper, cross-owner package, inferred
   admission, or early helper deletion is authorized.
 - Next slice: implement and verify `M3-DT1`.
+
+## 2026-08-08 - M3-DT1 Documentation Scope Trigger
+
+- Pre-implementation reference review found that the standards-effectiveness
+  README documents the Bash entrypoint, but the admitted package omitted that
+  shared documentation file.
+- The focused replacement draft was not integrated. All source, fixture, and
+  registry edits were restored; the repository returned to accepted `M3-P1`
+  state with fresh 243-node/1,047-edge/239-component graph evidence.
+- Recorded `VE014` and three bounded options. The recommended resolution is to
+  re-admit the same owner-coherent package with README projection and removed-
+  path verification rather than create an intermediate package.
+- Verification: the package manifest records `blocked`; its focused suite and
+  all 37 declarative suites/171 checks passed; 243-node/1,047-edge/239-component
+  graph freshness, both plan-structure checks, and diff integrity passed.
+- No-fallback result: stale documentation, out-of-scope editing, a wrapper,
+  retained dual authority, and deletion without reference reconciliation remain
+  prohibited.
+- Next slice: select and record the `M3-DT1` scope resolution before source
+  implementation resumes.

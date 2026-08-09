@@ -13,10 +13,9 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** implement delegated engine package `M3-DT1`, the admitted
-Language Binding Surface Contract leaf replacement. The decision-table helper
-and temporary launcher remain until their complete consumer and convention
-replacements.
+**Next slice:** resolve delegated engine package `M3-DT1`'s documentation-scope
+trigger. The admitted package omitted a README that names the Bash entrypoint;
+source implementation remains blocked until exact write-set re-admission.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2370,6 +2369,9 @@ all structural/routing fixtures pass.
          and admit only inbound-free Language Binding Surface Contract package
          `M3-DT1`; record the decision-helper's cross-owner and 44-verifier
          transitive closure without inferring package cohesion.
+       - `7.4c3ve19` (`Active`): resolve the `M3-DT1` README-reference scope
+         trigger before source implementation; do not retain stale documented
+         authority or edit outside the admitted write set.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

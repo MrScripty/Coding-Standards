@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3: Decision Table Consumer Migration
+**Current phase:** Milestone 3: M3-DT1 Scope Re-plan
 
-**Next slice:** Implement admitted package `M3-DT1` by replacing
-`component-0085` with one canonical declarative suite, deleting its obsolete
-schema/observed mirror and Bash checker, and regenerating exact graph evidence.
+**Next slice:** Resolve the `M3-DT1` documentation-reference scope trigger.
+Implementation remains blocked until the package either includes the
+standards-effectiveness README or is replaced by another reviewed package.
 
 **Acceptance status:** `pending`
 
@@ -723,6 +723,36 @@ serial integration-owner files.
 **Re-plan trigger:** if `component-0085` contains semantics outside the bounded
 decision, text, table, and relation checks already supported by the engine, stop
 rather than add command execution, retain the checker, or weaken evidence.
+
+#### M3-DT1 Documentation Scope Re-plan Trigger
+
+**Status:** `Active`
+
+Pre-implementation review found that the standards-effectiveness README names
+the current Bash entrypoint. The admitted write set omitted that shared
+documentation file. Deleting the entrypoint would therefore leave a stale
+documented authority, while editing the README would violate exact package
+admission. The attempted source changes were restored before integration.
+
+**Option 1 - Expand the same package (`Recommended`):** re-admit `M3-DT1` with
+the README in its exact write set, replace the obsolete entrypoint reference
+with the canonical suite and retained decisions fixture, and add the README to
+removed-path verification. This is one owner-coherent outcome with one extra
+mechanical projection file and no intermediate competing authority.
+
+**Option 2 - Documentation prerequisite:** admit a serial mechanical package
+that updates the README first, then keep the consumer replacement as a dependent
+package. Choose this only if the README has concurrent changes or requires an
+independent reviewer; otherwise it creates an avoidable intermediate reference
+to a suite that is not yet registered.
+
+**Option 3 - Defer and select another leaf:** leave `M3-DT1` admitted but blocked
+and analyze another inbound-free decision consumer. Choose this only if README
+ownership is disputed. It preserves safety but does not resolve the stale
+reference or advance this component.
+
+Retaining the Bash checker, adding a wrapper, deleting without documentation
+reconciliation, or weakening the removed-path scan are not valid options.
 
 ### Milestone 4: Semantic Decision Migration
 
