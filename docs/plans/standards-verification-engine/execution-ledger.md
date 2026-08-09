@@ -1036,3 +1036,22 @@
   diff integrity, and all 232 mixed checker entrypoints.
 - Next slice: select exact-text, broader source-index purity, or source-closure
   deferral before admitting M5-CP4+5.
+
+## 2026-08-08 - Exact-Text Selection And Accelerated-Wave Contract
+
+- Accepted VE021 Option 1: implement one generic `exact_text` assertion with
+  strict `id`, `type`, `path`, and `expected` fields, contained regular-file
+  resolution, inline UTF-8 expected content, raw-byte comparison, and no
+  normalization or alternate authority.
+- Required focused pass, mismatch, missing-input, path-escape, and unknown-field
+  tests before M5-CP4+5 admission. Mirrors, wrappers, opaque hashes, callbacks,
+  compatibility parsing, and literal-only weakening remain prohibited.
+- Accepted dependency-closed owner waves for the post-M5 remainder. The graph's
+  69 inbound-free verifiers are candidates, not independently removable units;
+  package closure must account for outbound Bash prerequisites and inbound
+  callers of every deleted verifier.
+- Authorized concurrent preparation of two to four disjoint owner packages in
+  isolated worktrees, followed by serial shared-authority integration, focused
+  package verification, and one complete-suite wave gate.
+- Next slice: implement and verify the shared `exact_text` primitive without
+  changing policy, suites, fixtures, the registry, or migration authority.

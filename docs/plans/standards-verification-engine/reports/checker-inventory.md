@@ -778,6 +778,30 @@ Trigger verification passed both plan checks, all 44 declarative suites, graph
 freshness at 232 Bash verifiers / 237 nodes / 999 edges / 233 components, diff
 integrity, and all 232 mixed checker entrypoints.
 
+### Accepted Exact-Text And Accelerated-Wave Direction
+
+VE021 Option 1 is selected. The shared engine will add one strict generic
+`exact_text` assertion over a contained regular file and inline expected TOML
+content encoded as UTF-8. Comparison is byte-for-byte with no newline,
+whitespace, or encoding normalization. The assertion is mechanics only; the
+suite remains the sole owner of expected policy evidence.
+
+The post-M5 remainder will use dependency-closed owner waves. The current graph
+has 69 inbound-free verifiers, including 13 Testing and eight Release leaves,
+but inbound-free does not imply independently removable: the Testing leaves
+invoke row-18 decomposition, and other branches retain callers of prospective
+prerequisites. Package admission must therefore compute the exact closure that
+prevents any remaining Bash verifier from calling a deleted path and prevents
+any declarative suite from duplicating an unmigrated Bash prerequisite.
+
+Two to four disjoint owner packages may be prepared concurrently in isolated
+worktrees. Suites, fixtures, and deleted checker paths must not overlap. The
+registry, package manifest, README, generated graph, and plan remain serial
+integration-owner files. Each package keeps separate suite identity and
+focused diagnostics; the complete suite runs once at the integrated wave gate.
+Filename adjacency, one cross-owner suite, Bash bridges, compatibility
+launchers, and duplicated prerequisite evidence are not valid acceleration.
+
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
 edges, and 235 components.

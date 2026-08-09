@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: Rust index exact-evidence re-plan
+**Current phase:** Milestone 5: generic exact-text implementation
 
-**Next slice:** Select one canonical representation for the Rust migration
-index's exact-content evidence before admitting atomic `M5-CP4+5`.
+**Next slice:** Implement and verify the accepted strict generic `exact_text`
+assertion before admitting atomic `M5-CP4+5`.
 
 **Acceptance status:** `pending`
 
@@ -105,6 +105,8 @@ disposition, no-fallback, and evidence contracts.
 | Derive coupled-checker migration order from one exact typed graph manifest with explicit unresolved targets, strongly connected components, condensation dependencies, and separately reviewed owner/risk/write-set classifications. | Integration owner | [Checker inventory report](reports/checker-inventory.md#coupled-graph-resolution) | Leaf-only selection and filename-adjacent batching |
 | Keep the parent standards restructure plan authoritative for normative migration and this child plan authoritative for checker-engine architecture and migration. | Integration owner | Parent-plan delegation | `7.4c3hcp` bespoke Cross-Platform repair assumption |
 | Resolve `F085` through one temporary whole-source route/prohibition contract followed by dependency-ordered owner suites and same-wave contract retirement at source closure. | Verification-engine migration mechanics | Cross-Platform `F085` dependency audit | Heading-range evidence, cross-owner replacement suites, and one oversized atomic closure wave |
+| Preserve exact Bash evidence with one strict generic `exact_text` assertion over contained raw UTF-8 bytes and inline expected content. | Verification-engine assertion mechanics | M5-CP4+5 exact-evidence audit and accepted VE021 Option 1 | Literal-only weakening, expected-file mirrors, opaque hashes, normalization, wrappers, and source-specific callbacks |
+| Accelerate the remainder through dependency-closed owner packages prepared concurrently and integrated serially in waves, with focused package checks and one complete-suite wave gate. | Verification-engine migration mechanics | Post-M5 graph audit: 69 inbound-free verifiers, including owner families whose outbound Bash prerequisites prevent naive leaf deletion | Per-script full-suite ceremony, filename-adjacent batching, cross-owner suites, Bash bridges, and duplicated prerequisite evidence |
 
 ## Simplicity And Ownership Review
 
@@ -1431,9 +1433,9 @@ freshness at 232 Bash verifiers / 237 nodes / 999 edges / 233 components, diff
 integrity, and all 232 mixed checker entrypoints passed with no implementation
 or policy changes.
 
-#### Rust Migration-Index Exact-Evidence Re-plan Trigger
+#### Rust Migration-Index Exact-Evidence Decision
 
-**Status:** `Blocked`
+**Status:** `Accepted`
 
 The clean-tree M5-CP4+5 re-audit confirmed that the typed Rust verifier subject
 can transfer atomically and identified every live Bash-only inventory update:
@@ -1482,8 +1484,12 @@ Required/prohibited literals alone, an opaque content hash, an expected-file
 mirror, a Bash or Python wrapper, partial generic/Rust migration, compatibility
 parsing, or dropping exact index evidence are invalid options.
 
-**Recommendation:** select Option 1 as a dedicated shared-engine slice, run the
-complete suite, then admit and implement M5-CP4+5 with no engine changes in the
+**Decision:** Option 1 is accepted as a dedicated shared-engine slice. The
+implementation must use strict keys `id`, `type`, `path`, and `expected`, the
+existing contained regular-file resolver, inline TOML UTF-8 content, and a raw
+byte comparison without normalization. Focused tests must cover pass,
+mismatch, missing input, path escape, and unknown fields. After the complete
+suite passes, admit and implement M5-CP4+5 with no engine changes in the
 package commit.
 
 **Trigger evidence:** the audit was read-only after commit `d95e4e9`; no source,
@@ -1622,6 +1628,18 @@ documentation, and plan records.
 
 **Tasks:**
 
+- [ ] Generate exact dependency closures before package admission; a package
+  must include or already have declarative versions of every semantic
+  prerequisite and every Bash caller that would otherwise reference a deleted
+  verifier.
+- [ ] Admit two to four non-overlapping owner-coherent packages per accelerated
+  wave where their owner, dependency set, semantic decision, fixture family,
+  and verification contract are frozen.
+- [ ] Permit concurrent package preparation only in isolated worktrees with
+  disjoint suite, fixture, and deleted-checker paths; keep registry, package
+  manifest, README, generated graph, and plan integration serial.
+- [ ] Run focused verification for every package and the complete suite once at
+  each integrated wave boundary or shared-contract change.
 - [ ] Review each exception for a missing reusable primitive, bad test design,
   historical-only assertion, or genuinely custom algorithm.
 - [ ] Add reusable primitives only when at least two coherent owners require

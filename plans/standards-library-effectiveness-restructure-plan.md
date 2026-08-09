@@ -2463,10 +2463,16 @@ all structural/routing fixtures pass.
          reconciliation audit is complete, but Rust Target's exact seven-line
          migration-index comparison cannot be represented by the current text
          primitive without weakening accepted evidence.
-       - `7.4c3ve41` (`Active`): select a strict generic `exact_text` assertion,
-         a broader reviewed source-index purity contract, or deferral to
-         manifest-order source closure before admitting M5-CP4+5. Do not use
-         literal-only weakening, mirrors, wrappers, hashes, or partial migration.
+       - `7.4c3ve41` (`Accepted planning authority`): select a strict generic
+         `exact_text` assertion over contained raw UTF-8 bytes and inline
+         expected content. Do not use literal-only weakening, normalization,
+         mirrors, wrappers, hashes, callbacks, compatibility parsing, or
+         partial migration.
+       - `7.4c3ve42` (`Active`): implement and verify the shared `exact_text`
+         primitive, then admit atomic M5-CP4+5 without changing engine source
+         in the package commit. After M5 closure, accelerate the remainder
+         through dependency-closed owner packages prepared concurrently and
+         integrated serially; retain separate suites and no Bash bridges.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact
