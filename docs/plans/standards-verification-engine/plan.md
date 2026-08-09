@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 3: Decision Table Consumer Migration
 
-**Next slice:** Review the post-`M3-DT2` graph and admit the next ordinary
-inbound-free decision consumer, with Binding Artifact Composition as the
-leading candidate and Cross-Platform consumers still reserved for `F085`.
+**Next slice:** Implement admitted package `M3-DT3`, replacing Binding Artifact
+Composition with one declarative suite and reconciling its README projection
+while deleting the obsolete checker and redundant mirrors.
 
 **Acceptance status:** `pending`
 
@@ -843,6 +843,31 @@ were deleted, the README now projects the registered suite and retained
 decisions fixture, and no wrapper, transitive checker call, universal version,
 package-version substitution, alternate discovery, or default-success path
 remains.
+
+#### M3-DT3 Package Admission: Binding Artifact Composition
+
+**Status:** `Accepted`
+
+**Owner:** verification-engine migration mechanics
+
+**Selected package:** `component-0024` remains inbound-free after `M3-DT2` and
+has one Release owner, 75 Bash lines, 23 strict decisions, four exact
+dispositions, one accepted parent marker, and one README projection. It has no
+frozen identity or unresolved source-closure dependency.
+
+**Exact package outcome:** `M3-DT3` includes the replacement suite, obsolete
+checker/schema/observed authorities, README projection, shared registry and
+package authority, generated graph artifacts, and serial plan records. The
+decisions fixture remains canonical input and is not rewritten.
+
+**Acceptance evidence:** the three-row package-authority suite passed; all 39
+declarative suites/181 checks, 37 engine tests, Python compilation, both plan
+structure checks, diff integrity, graph freshness at 236 Bash verifiers/241
+nodes/1,033 edges/237 components, and all 236 mixed checker entrypoints passed.
+
+**No-fallback result:** no fixed artifact count, package/bundle default,
+framework or example identity, internal-input publication, graph-derived owner,
+omitted documentation, Bash wrapper, or compatibility authority is admitted.
 
 ### Milestone 4: Semantic Decision Migration
 

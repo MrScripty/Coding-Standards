@@ -13,9 +13,9 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** review the delegated engine's post-`M3-DT2` graph and admit the
-next ordinary inbound-free decision consumer. Binding Artifact Composition is
-the leading candidate; Cross-Platform consumers remain reserved for `F085`.
+**Next slice:** implement delegated engine package `M3-DT3`, replacing Binding
+Artifact Composition with one declarative suite while preserving Release
+ownership, four exact dispositions, source closure, and README projection.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2382,9 +2382,13 @@ all structural/routing fixtures pass.
          Discovery package `M3-DT2`; preserve 13 typed decisions, one exact
          disposition, Rust profile evidence, former-source closure, and the
          README projection without a Bash wrapper or alternate discovery.
-       - `7.4c3ve23` (`Active`): inspect the 236-verifier/241-node post-package
+       - `7.4c3ve23` (`Accepted`): inspect the 236-verifier/241-node post-package
          graph and admit the next ordinary bounded decision consumer without
          bypassing the Cross-Platform `F085` dependency.
+       - `7.4c3ve24` (`Active`): migrate admitted Binding Artifact Composition
+         package `M3-DT3`; preserve 23 typed decisions, four exact dispositions,
+         Release and former-source evidence, accepted lineage, and README
+         projection without fixed package defaults or a Bash wrapper.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

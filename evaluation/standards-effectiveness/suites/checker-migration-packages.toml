@@ -8,7 +8,7 @@ id = "admitted-packages"
 type = "table"
 path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
 header = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
-row_count = 2
+row_count = 3
 non_empty = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 unique = [["train_order"], ["package_id"], ["components"]]
 
@@ -41,4 +41,15 @@ expected = [[
   "M3-DT1",
   "focused-suite,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
   "accepted",
+], [
+  "3",
+  "M3-DT3",
+  "component-0024",
+  "workflows/release.md",
+  "consolidation",
+  "binding-artifact-composition-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/binding-artifact-composition.toml,evaluation/standards-effectiveness/verify-binding-artifact-composition.sh,evaluation/standards-effectiveness/fixtures/release/binding-artifact-composition-schema.tsv,evaluation/standards-effectiveness/fixtures/release/binding-artifact-composition-observed.tsv,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M3-DT2",
+  "focused-suite,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
+  "admitted",
 ]]

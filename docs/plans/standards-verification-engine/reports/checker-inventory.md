@@ -458,3 +458,15 @@ graph contains 241 nodes, 1,031 typed edges, and 237 components. The migration
 removed one verifier, ten dependency/reference edges, and one component while
 preserving one exact disposition, canonical Rust profile and former-source
 evidence, accepted plan lineage, and every typed outcome.
+
+### Third Decision Consumer Admission
+
+`M3-DT3` selects Binding Artifact Composition (`component-0024`). It remains
+inbound-free and has one Release owner, 75 Bash lines, 23 decisions, four exact
+dispositions, one accepted plan marker, and one README reference. Its decision
+fixture remains canonical; schema and observed mirrors are obsolete package
+authorities scheduled for deletion.
+
+This is the final ordinary inbound-free decision consumer identified by the
+current review. Cross-Platform candidates remain governed by `F085`; package
+admission does not weaken or bypass that source-shape dependency.

@@ -638,3 +638,20 @@
   default-success path remains.
 - Next slice: review Binding Artifact Composition as the next ordinary
   candidate.
+
+## 2026-08-08 - Package M3-DT3 Admission
+
+- Selected Binding Artifact Composition (`component-0024`) after confirming it
+  remains inbound-free and has one Release owner, 23 bounded decisions, four
+  exact dispositions, one accepted marker, and one README projection.
+- Froze the complete suite/checker/mirror/documentation/registry/graph/plan
+  write set while retaining the decisions fixture as canonical input.
+- Verification: the focused three-row package suite, all 39 declarative
+  suites/181 checks, 37 engine tests, Python compilation, both plan-structure
+  checks, diff integrity, 236-verifier/241-node/1,033-edge/237-component graph
+  freshness, and all 236 mixed checker entrypoints passed.
+- No-fallback result: no fixed artifact count, package or bundle default,
+  framework/example identity, internal-input publication, wrapper, omitted
+  documentation, or inferred owner is authorized.
+- Next slice: validate package authority and implement `M3-DT3` only after the
+  admission commit is accepted.
