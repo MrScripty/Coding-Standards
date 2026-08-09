@@ -882,3 +882,27 @@ owner suites, all 45 registered suites, 42 engine tests, package authority,
 M5-CP0 absence, both plan checks, lifecycle fixtures, all five surviving source
 readers, graph freshness at 230 Bash verifiers / 235 nodes / 989 edges / 231
 components, and all 230 mixed entrypoints.
+
+### Milestone 6 Wave 1 Admission
+
+The corrected caller analysis uses executable inbound count from graph column
+8. Nine scripts are caller-free and prerequisite-free; migration launchers,
+historical infrastructure, and pending source-package checkers are excluded.
+The first accelerated wave admits four disjoint owners: Build owner,
+Documentation traceability, Tooling owner, and Tooling reference recipes.
+
+All required mechanics already exist as strict decision, text, and table
+checks. Existing decision fixtures remain unchanged. Three Bash-only root
+README dependency rows retire serially, reducing that inventory from 32 to 29;
+the 33-row consumer inventory is unchanged. Four separate suite identities and
+diagnostics remain visible even though shared registry, package, graph, and
+plan changes integrate atomically.
+
+The audit also found VE023: Tooling reference validates 14 exact dispositions
+while its success message says 12. The replacement uses all 14 canonical rows
+and does not preserve the incorrect diagnostic or weaken evidence.
+
+Admission verification passed exact package authority, all 45 registered
+suites, 42 engine tests, Python compilation, both plan checks, lifecycle
+fixtures, graph freshness at 230 Bash verifiers / 235 nodes / 997 edges / 231
+components, diff integrity, and all 230 mixed entrypoints.

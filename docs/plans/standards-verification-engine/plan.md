@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: first dependency-closed owner-wave audit
+**Current phase:** Milestone 6: Wave 1 implementation
 
-**Next slice:** Regenerate and inspect the post-M5 dependency graph, then admit
-the smallest owner-coherent accelerated wave whose complete Bash caller and
-prerequisite closure is known.
+**Next slice:** Implement admitted Milestone 6 Wave 1 as four separate suites
+with one serial shared-authority integration and one complete-suite wave gate.
 
 **Acceptance status:** `pending`
 
@@ -1809,13 +1808,62 @@ general-purpose programming language.
 contracts, replaced scripts, inventory, launcher/complete-suite entrypoint,
 documentation, and plan records.
 
+#### Wave 1 Admission: Four Caller-Free Owner Packages
+
+**Status:** `Active`
+
+**Graph basis:** the fresh post-M5 graph contains 230 Bash verifiers, 235
+nodes, 989 edges, and 231 components. Corrected column-8 analysis identifies
+caller-free scripts; nine are also prerequisite-free. Migration infrastructure
+and pending source-package authorities are excluded from this first wave.
+
+**Admitted packages:** `M6-W1-BUILD` owns Build's 16-row decision contract and
+canonical routes; `M6-W1-DOC-TRACE` owns Documentation's 14-row traceability
+decision contract, two exact dispositions, policy/reference split, and legacy
+negative evidence; `M6-W1-TOOLING` owns Tooling's 12-row decision contract, 14
+exact dispositions, owner evidence, and Router route; and
+`M6-W1-TOOLING-REF` owns the non-normative Tooling recipe contract, 14 exact
+dispositions, legacy-source route evidence, and negative defaults.
+
+Each script has zero executable callers and zero verifier/helper prerequisites.
+The four owners and suite paths are distinct. Their existing decision fixtures
+remain read-only inputs; no engine primitive, policy, disposition, source
+index, Router, metadata, configuration, or compatibility schema changes.
+
+**VE023 correction:** the Tooling reference script asserts 14 distinct exact
+dispositions but prints a stale success count of 12. The suite freezes all 14
+actual rows. Preserving the incorrect message as authority, dropping two rows,
+or adding a compatibility expectation is prohibited.
+
+**Shared serial integration:** register four separate suites; update exact
+package authority; remove Build, Tooling owner, and Tooling reference from the
+root-README dependency inventory; change its exact count from 32 to 29 in the
+row-35 verifier; delete the four scripts; regenerate the checker graph; update
+plan records. Documentation traceability has no root-README lifecycle entry.
+The consumer inventory remains exactly 33.
+
+**No-fallback rule:** do not retain wrappers, Bash bridges, duplicated suite
+dependencies, inferred decisions, partial disposition sets, default tools,
+default build behavior, default documentation paths, normative recipe examples,
+weaker negative evidence, or silent success.
+
+**Acceptance gate:** each focused suite, all 45 pre-wave suites, 42 engine
+tests, exact package authority, root-consumer/row-35 lifecycle checks at 29/33,
+removed-path scans, graph freshness, both plan checks, diff integrity, and one
+complete mixed-suite wave gate pass.
+
+**Admission verification:** exact package authority, all 45 registered suites,
+42 engine tests, Python compilation, both plan checks, lifecycle fixtures,
+graph freshness at 230 Bash verifiers / 235 nodes / 997 edges / 231
+components, diff integrity, and all 230 mixed entrypoints passed.
+
 **Tasks:**
 
-- [ ] Generate exact dependency closures before package admission; a package
+- [x] Generate exact dependency closures before package admission; a package
   must include or already have declarative versions of every semantic
   prerequisite and every Bash caller that would otherwise reference a deleted
   verifier.
-- [ ] Admit two to four non-overlapping owner-coherent packages per accelerated
+- [x] Admit two to four non-overlapping owner-coherent packages per accelerated
   wave where their owner, dependency set, semantic decision, fixture family,
   and verification contract are frozen.
 - [ ] Permit concurrent package preparation only in isolated worktrees with

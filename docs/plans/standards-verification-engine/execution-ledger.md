@@ -1176,3 +1176,29 @@
   all 230 mixed entrypoints.
 - Next slice: inspect the fresh post-M5 graph and admit the smallest complete
   dependency-closed owner wave for Milestone 6.
+
+## 2026-08-08 - Milestone 6 Wave 1 Admission
+
+- Corrected the exploratory node-column query and joined executable caller
+  counts with the structural mechanism inventory. The post-M5 graph has 230
+  Bash verifiers, 235 nodes, 989 edges, and 231 components.
+- Admitted four scripts with zero executable callers and zero prerequisites as
+  four separate owner suites: Build owner, Documentation traceability, Tooling
+  owner, and Tooling reference recipes.
+- Froze existing decision fixtures at 16 Build, 14 Documentation, and 12
+  Tooling cases; exact dispositions at 2 Documentation, 14 Tooling owner, and
+  14 Tooling reference rows; and all canonical route, role, and negative text
+  evidence.
+- Recorded VE023: Tooling reference asserts 14 dispositions but prints 12.
+  Wave 1 preserves the 14 actual rows and removes the stale Bash diagnostic.
+- Froze serial removal of three root-README dependency rows and row-35 count
+  reconciliation from 32 to 29; the consumer inventory remains 33.
+- Excluded engine changes, policy, decision fixtures, dispositions, sources,
+  Router, metadata, configuration, wrappers, bridges, compatibility schemas,
+  inferred outcomes, defaults, weaker evidence, and silent success.
+- Admission verification passed exact package authority; all 45 registered
+  suites; 42 engine tests; Python compilation; both plan checks; lifecycle
+  fixtures; graph freshness at 230 Bash verifiers / 235 nodes / 997 edges /
+  231 components; diff integrity; and all 230 mixed entrypoints.
+- Next slice: implement all four suites and delete all four Bash paths in one
+  integrated wave, then run focused package checks and one complete-suite gate.

@@ -11,9 +11,9 @@ verification-engine Milestone 5 are accepted. Seven of 27 former normative
 source entrypoints are derived. Verification-engine Milestone 6 now prepares
 the first post-M5 dependency-closed owner wave.
 
-**Next slice:** inspect the regenerated post-M5 checker graph and admit the
-smallest owner-coherent dependency-closed accelerated wave under the delegated
-verification-engine plan.
+**Next slice:** implement delegated verification-engine Milestone 6 Wave 1:
+four caller-free, prerequisite-free Build, Documentation, Tooling, and Tooling
+reference suites with serial shared integration.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2502,10 +2502,19 @@ all structural/routing fixtures pass.
          four M5-CP0 dependency edges, delete M5-CP0, and resolve F085. Do not
          add a replacement prerequisite, bespoke verifier, source exception,
          compatibility schema, alternate route, or fallback to prior wording.
-       - `7.4c3ve47` (`Active`): regenerate and inspect the post-M5 graph, then
+       - `7.4c3ve47` (`Accepted planning authority`): regenerate and inspect the post-M5 graph, then
          admit the smallest dependency-closed owner wave whose Bash callers,
          semantic prerequisites, suite boundaries, fixture ownership, and
          serial shared integration set are all explicit.
+       - `7.4c3ve48` (`Active`): replace four caller-free,
+         prerequisite-free Build owner, Documentation traceability, Tooling
+         owner, and Tooling reference scripts with separate declarative suites.
+         Preserve 42 decision cases, 30 exact dispositions, canonical
+         owner/reference/routes, non-normative examples, and negative defaults;
+         reconcile root-README dependencies from 32 to 29; retain 33 consumers;
+         correct VE023's stale 12-versus-14 diagnostic by enforcing all 14
+         actual rows. Do not add wrappers, bridges, inferred outcomes,
+         compatibility schemas, default tools/paths, or weaker evidence.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.
