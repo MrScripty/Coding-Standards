@@ -1,0 +1,93 @@
+schema_version = 1
+id = "native-artifact-release"
+owner = "workflow.release"
+description = "Contract-derived native artifact identity and consumer information with typed outcomes and no filename, ambient-package, alternate-artifact, or incomplete-publication fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/release/native-artifact-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+release_contract = ["declared", "missing", "contradictory"]
+channel = ["registry", "archive", "installer", "system", "internal", "unknown"]
+identity = ["exact", "missing", "ambiguous"]
+target = ["exact", "unknown", "unsupported"]
+consumer_info = ["complete", "missing", "not-required"]
+evidence = ["matched", "missing"]
+fallback = ["none", "os-filename", "platform-class-doc", "ambient-package", "alternate-artifact", "default-success"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "release_contract", op = "eq", value = "contradictory" },
+  { field = "identity", op = "eq", value = "ambiguous" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "target", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "release_contract", op = "eq", value = "missing" },
+  { field = "channel", op = "eq", value = "unknown" },
+  { field = "identity", op = "eq", value = "missing" },
+  { field = "target", op = "eq", value = "unknown" },
+  { field = "consumer_info", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "release-owner"
+type = "text"
+path = "workflows/release.md"
+required = [
+  "## Artifact Plan",
+  "For a native artifact",
+  "operating-system name alone",
+  "authoritative acquisition location",
+  "install or provision, and load",
+  "do not attach installation prose",
+  "unresolved artifact-plan diagnostic",
+  "guess a conventional filename",
+  "publish with incomplete consumer information",
+]
+prohibited = []
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0296", "CROSS-PLATFORM-STANDARDS.md", "workflows/release.md", "refine", "derive native artifact identity from release ecosystem channel and target contracts"],
+  ["STD-0297", "CROSS-PLATFORM-STANDARDS.md", "workflows/release.md", "refine", "provide consumer acquisition installation loading and verification information"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0296", "STD-0297"]
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8u` (`Accepted`)"]
+prohibited = []
+
+[[checks]]
+id = "removed-authority"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["registered `native-artifact-release` suite"]
+prohibited = ["verify-native-artifact-release.sh", "native-artifact-*.tsv"]

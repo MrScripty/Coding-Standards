@@ -898,3 +898,23 @@
   nodes / 1,015 edges / 235 components, and all 234 mixed checker entrypoints.
 - Next slice: resume M5-CP2 admission with the stable Native Artifact Release
   checker subject.
+
+## 2026-08-08 - M5-CP2 Native Artifact Release
+
+- Replaced the 61-line Bash checker with one registered five-check suite over
+  the retained 19-row decisions fixture.
+- Declared temporary M5-CP0 as the only suite dependency and removed nested
+  Release Artifact Policy, Row 6, and execution-train calls under VE017.
+- Preserved canonical Artifact Plan text, two exact dispositions, accepted
+  lineage, typed invalid/unsupported/unavailable outcomes, and README
+  projection.
+- Deleted redundant schema and observed-outcome mirrors; retained no wrapper,
+  compatibility input, heading boundary, duplicate Release policy, filename
+  default, ambient package, alternate artifact, incomplete publication, or
+  default success.
+- Verification passed: focused dependency execution (2 suites / 6 checks),
+  package authority, all 43 declarative suites, 37 engine tests, Python
+  compilation, graph freshness at 233 Bash verifiers / 238 nodes / 1,007 edges
+  / 234 components, removed-path scans, protected-input immutability, both plan
+  checks, diff integrity, and all 233 mixed checker entrypoints.
+- Next slice: audit and admit M5-CP3 Platform Evidence Coverage.

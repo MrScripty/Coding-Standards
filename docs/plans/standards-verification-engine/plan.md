@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: Native Artifact Release admission
+**Current phase:** Milestone 5: Platform Evidence Coverage admission
 
-**Next slice:** Implement admitted `M5-CP2` Native Artifact Release and delete
-its Bash checker plus redundant schema/observed mirrors.
+**Next slice:** Audit and admit `M5-CP3` Platform Evidence Coverage as the next
+independent owner package.
 
 **Acceptance status:** `pending`
 
@@ -1255,6 +1255,29 @@ passed; 37 engine tests, Python compilation, both plan checks, protected-input
 immutability, and diff integrity passed. The admission graph is fresh at 234
 Bash verifiers, 239 nodes, 1,017 edges, and 235 components; all 234 mixed
 checker entrypoints passed.
+
+#### Package M5-CP2: Native Artifact Release
+
+**Status:** `Accepted`
+
+**Owner:** `workflow.release`
+
+**Observable outcome:** one registered five-check suite depends on M5-CP0,
+derives 19 ordered native release decisions, preserves canonical Artifact Plan
+policy, two exact dispositions, accepted lineage, and README projection, and
+executes the temporary whole-source prerequisite once before focused checks.
+
+**No-fallback result:** the Bash checker and redundant schema/observed mirrors
+are deleted. No broader Release Artifact Policy duplication, wrapper, heading
+range, compatibility input, OS filename default, class-local installation
+prose, ambient package, alternate artifact, incomplete publication, or default
+success remains.
+
+**Verification:** focused dependency execution passed 2 suites / 6 checks; all
+43 declarative suites, 37 engine tests, Python compilation, package authority,
+removed-path scans, protected-input immutability, both plan checks, diff
+integrity, and all 233 mixed checker entrypoints passed. The regenerated graph
+contains 233 Bash verifiers, 238 nodes, 1,007 edges, and 234 components.
 
 #### Migration-Package Stable-Identity Re-plan Trigger
 

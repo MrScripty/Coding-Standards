@@ -171,6 +171,11 @@ path = "evaluation/standards-effectiveness/suites/native-artifact-loading.toml"
 requires = ["cross-platform-source-closure-prerequisite"]
 
 [[suites]]
+id = "native-artifact-release"
+path = "evaluation/standards-effectiveness/suites/native-artifact-release.toml"
+requires = ["cross-platform-source-closure-prerequisite"]
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

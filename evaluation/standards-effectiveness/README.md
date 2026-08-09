@@ -379,11 +379,11 @@ exact dispositions and rejects mandatory Strategy, guessed names, ambient
 discovery, alternate loaders/artifacts, embedded copies, and default success
 with typed outcomes.
 
-`fixtures/release/native-artifact-*.tsv` and
-`verify-native-artifact-release.sh` derive native identity and consumer
-information from release and channel facts. They prove two exact dispositions
-and reject OS filename tables, class-local installation prose, ambient package
-identity, alternate artifacts, and incomplete publication.
+The registered `native-artifact-release` suite evaluates
+`fixtures/release/native-artifact-decisions.tsv` to derive native identity and
+consumer information from release and channel facts. It proves two exact
+dispositions and rejects OS filename tables, class-local installation prose,
+ambient package identity, alternate artifacts, and incomplete publication.
 
 The registered `binding-artifact-composition` suite evaluates
 `fixtures/release/binding-artifact-composition-decisions.tsv` to classify native

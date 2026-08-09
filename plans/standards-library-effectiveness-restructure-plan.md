@@ -2438,10 +2438,13 @@ all structural/routing fixtures pass.
          stable Native Artifact Release checker subject, 19 typed decisions,
          two exact dispositions, temporary M5-CP0 dependency, and accepted
          VE017 integration-gate classification.
-       - `7.4c3ve35` (`Active`): implement admitted M5-CP2, delete its Bash
-         checker and redundant schema/observed mirrors, update README and graph
-         evidence, and retain no wrapper, heading alias, duplicate Release
-         policy, or fallback.
+       - `7.4c3ve35` (`Accepted`): replace Native Artifact Release with one
+         registered suite over 19 typed decisions, temporary whole-source
+         dependency, canonical Artifact Plan evidence, and two exact
+         dispositions; delete its Bash checker and redundant mirrors without a
+         wrapper, duplicate Release policy, heading range, or fallback.
+       - `7.4c3ve36` (`Active`): audit and admit M5-CP3 Platform Evidence
+         Coverage as the next independent owner package.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

@@ -649,6 +649,23 @@ Admission verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The admission graph contains 239 nodes,
 1,017 edges, and 235 components.
 
+### Native Artifact Release Migration
+
+Accepted M5-CP2 replaces stable Native Artifact Release checker subject with
+one five-check suite. The suite retains the 19-row decisions fixture, depends
+once on temporary whole-source coverage, and owns only `STD-0296` and
+`STD-0297` Native Release semantics. The Bash checker and schema/observed
+mirrors are deleted; README projects the suite.
+
+The broader Release Artifact Policy and migration-lifecycle invocations do not
+become suite dependencies under VE017. Their removal eliminates nested
+execution without dropping identity, consumer-information, evidence,
+typed-outcome, disposition, owner, or no-fallback evidence.
+
+Acceptance verification passed all 43 declarative suites, 37 engine tests, and
+all 233 mixed checker entrypoints. The regenerated graph has 238 nodes, 1,007
+edges, and 234 components.
+
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
 edges, and 235 components.
