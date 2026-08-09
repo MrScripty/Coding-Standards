@@ -1738,3 +1738,24 @@
   engine file, or unrelated consumer changed. Fifty-one metadata-helper
   consumers remain for later owner-coherent packages.
 - Next slice is a read-only graph audit before another package is admitted.
+
+## 2026-08-09 - M6-K3 Release Recovery Admission
+
+- Audited all 51 metadata-helper consumers after M6-K2. Five Release-owned
+  consumers have zero executable inbound callers, zero contract references,
+  one acyclic node, and only the helper dependency.
+- Selected the 113-line Release Recovery checker as the smallest safe package.
+  Its six-row decision, five IDs/dispositions, metadata closure, canonical
+  rules, typed diagnostics, removed defaults, and legacy-index claims map to
+  existing declarative behavior.
+- Reuse the accepted Release Reference suite through a registered dependency
+  for stronger byte-exact legacy-index proof; do not duplicate legacy authority.
+- Admitted package M6-K3 and both exact helper edges. No implementation,
+  canonical source, fixture, registry, suite, README, helper, consumer, or
+  engine file changed during admission.
+- Admission verification passed package and edge authority, all 89 declarative
+  suites, both plan checks, diff integrity, graph freshness at 187 Bash
+  verifiers / 192 nodes / 910 edges / 188 components, and all 187 mixed
+  entrypoints.
+- Next slice: verify admission, then implement the exact package without a
+  wrapper, compatibility path, command action, fallback, or weaker assertion.

@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-K2 package selection
+**Current phase:** Milestone 6: M6-K3 release-recovery admission
 
-**Next slice:** Audit the regenerated graph for the smallest inbound-safe,
-owner-coherent package among the 51 remaining metadata-helper consumers; do
-not admit or implement another package before its behavior and write set are
-frozen.
+**Next slice:** Implement admitted `M6-K3` as one Release Workflow-owned
+declarative recovery package and delete only its checker after every declared
+gate passes.
 
 **Acceptance status:** `pending`
 
@@ -2581,6 +2580,57 @@ authority, all 89 declarative suites, graph freshness at 187 Bash verifiers /
 removed-path proof, diff integrity, and all 187 mixed entrypoints pass.
 Canonical sources, frozen inventory and dispositions, helper, engine, fixtures,
 and the other 51 helper consumers remained unchanged.
+
+##### M6-K3: Release Recovery Policy
+
+**Package status:** `Admitted`
+
+The post-M6-K2 graph has 51 remaining metadata-helper consumers. Five have zero
+executable inbound callers and zero contract references; all are Release-owned
+and depend only on the helper. `verify-release-recovery-policy.sh` is the
+smallest at 113 lines and forms one acyclic owner-local component.
+
+**Owner and behavior:** `workflows/release.md` owns recovery and withdrawal.
+The checker proves the six-row all-required recovery decision, exact frozen
+inventory IDs `STD-0577` through `STD-0581`, exact move dispositions and
+rationales, the Core/Verification/Contracts/Release metadata graph, required
+recovery rules and typed diagnostics, removal of provider/registry/branch/
+patch-version/consensus/changelog defaults, and non-authoritative legacy-index
+routing.
+
+**Declarative replacement:** use the existing `decision` primitive for the
+explicit Boolean contract, `table` projections for exact inventory and
+dispositions, one direct `metadata_graph`, and `text` for canonical and
+removed workflow rules. Register `release-reference-closure` as a suite
+dependency so its stronger byte-exact legacy-index proof replaces the old
+checker's weaker route and heading assertions without duplicated authority.
+No new primitive, fixture, source edit, helper call, regex approximation,
+wrapper, alias, compatibility path, command action, or fallback is admitted.
+
+**Exact implementation write set:** package and edge manifests, suite registry,
+package authority suite, new `release-recovery-policy` suite, deleted checker,
+evaluation README route, generated checker graph artifacts, this plan, its
+ledger/issues/inventory report, and the parent-plan cursor. The recovery
+fixture, Core, Verification, Contracts, Release Workflow, legacy Release
+index, frozen inventory, dispositions, accepted Release Reference suite,
+helper, other consumers, engine, lockfiles, and unrelated files are read-only.
+
+**Edge disposition:** both exact current edges target the shared metadata
+helper and remain a retained external-owned artifact. The replacement suite
+validates metadata natively and depends only on the registered declarative
+Release Reference suite. Accepted state requires the checker and both helper
+edges to be absent while the helper remains for other owners.
+
+**Admission evidence:** package M6-K3 and both exact helper edges are admitted.
+Implementation begins only after package/edge authority, graph freshness, both
+plan checks, all declarative suites, diff integrity, and the complete mixed
+checkpoint pass with no implementation file changed.
+
+**Re-plan triggers:** stop if the Boolean fixture cannot be represented exactly;
+the five frozen identifiers or dispositions disagree with their accepted
+owners; a canonical source or fixture must change; another executable or
+contract inbound edge exists; the suite dependency creates a cycle or competing
+legacy authority; or existing primitives would weaken an observable claim.
 
 **Tasks:**
 

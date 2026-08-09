@@ -1278,3 +1278,16 @@ authority, all 89 declarative suites, graph freshness at 187 Bash verifiers /
 192 nodes / 907 edges / 188 components, both plan checks, removed-path and
 README-route proof, diff integrity, and all 187 mixed entrypoints pass. The
 shared metadata helper remains independently owned for 51 consumers.
+
+### Admitted M6-K3 Release Recovery Policy
+
+The selected checker has zero executable inbound callers, zero contract
+references, one acyclic node, and exactly two typed edges to the shared metadata
+helper. It is the smallest of five equally inbound-safe Release-owned
+consumers.
+
+Existing decision, table, metadata-graph, and text primitives preserve its
+direct behavior. A registered dependency on the accepted Release Reference
+suite preserves stronger byte-exact legacy-index evidence without duplication.
+The fixture, canonical and legacy sources, frozen migration evidence, helper,
+engine, other consumers, and accepted dependency suite remain read-only.
