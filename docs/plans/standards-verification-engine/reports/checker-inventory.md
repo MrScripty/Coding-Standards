@@ -1291,3 +1291,26 @@ direct behavior. A registered dependency on the accepted Release Reference
 suite preserves stronger byte-exact legacy-index evidence without duplication.
 The fixture, canonical and legacy sources, frozen migration evidence, helper,
 engine, other consumers, and accepted dependency suite remain read-only.
+
+### Accepted M6-K3 Release Recovery Policy
+
+The registered replacement has five direct checks: the six-row recovery
+decision, exact inventory and dispositions, direct metadata validation, and
+canonical/removed workflow text. Its registered dependency executes the
+accepted six-check byte-exact Release index suite without duplicating that
+authority.
+
+The Bash checker and its two helper edges are absent. Package and edge
+authority, all 90 declarative suites, graph freshness at 186 Bash verifiers /
+191 nodes / 905 edges / 187 components, both plan checks, dependency, route,
+removed-path, read-only-source, and diff gates pass. The mixed Bash checkpoint
+is deferred to M6-K-W1 closure under VE037; commit `4a39062` is the passing
+187-entrypoint opening baseline. Fifty metadata helper consumers remain.
+
+### Accepted VE037 Wave Checkpoint Scope
+
+The generated graph proves M6-K3 has no retained executable or contract inbound
+consumer. Re-running all transitive Bash checkers therefore repeats unrelated
+evidence. M6-K-W1 uses fast package gates for Recovery and the four other
+currently inbound-safe Release consumers, then one closing mixed checkpoint.
+Shared verification contracts still force immediate before/after checkpoints.

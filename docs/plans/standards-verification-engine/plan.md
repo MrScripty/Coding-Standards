@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-K3 release-recovery admission
+**Current phase:** Milestone 6: post-M6-K3 package selection
 
-**Next slice:** Implement admitted `M6-K3` as one Release Workflow-owned
-declarative recovery package and delete only its checker after every declared
-gate passes.
+**Next slice:** Audit and jointly admit the four remaining inbound-safe
+Release-owned metadata-helper packages for M6-K-W1, then implement each through
+fast package gates before one closing mixed Bash checkpoint.
 
 **Acceptance status:** `pending`
 
@@ -2583,7 +2583,7 @@ and the other 51 helper consumers remained unchanged.
 
 ##### M6-K3: Release Recovery Policy
 
-**Package status:** `Admitted`
+**Package status:** `Accepted`
 
 The post-M6-K2 graph has 51 remaining metadata-helper consumers. Five have zero
 executable inbound callers and zero contract references; all are Release-owned
@@ -2632,6 +2632,50 @@ owners; a canonical source or fixture must change; another executable or
 contract inbound edge exists; the suite dependency creates a cycle or competing
 legacy authority; or existing primitives would weaken an observable claim.
 
+**Implementation result:** the registered `release-recovery-policy` suite
+uses one exact Boolean decision, exact inventory and disposition projections,
+one direct metadata graph, and canonical/removed workflow text. Its registered
+dependency executes the accepted byte-exact Release legacy-index proof once.
+The suite does not call the metadata helper. The Bash checker and both helper
+edges are absent, with no wrapper, alias, compatibility path, command action,
+duplicated legacy authority, or fallback.
+
+**Acceptance evidence:** the focused dependency closure, package and edge
+authority, all 90 declarative suites, graph freshness at 186 Bash verifiers /
+191 nodes / 905 edges / 187 components, both plan checks, README route,
+removed-path proof, read-only-source proof, and diff integrity pass. The mixed
+Bash checkpoint is intentionally deferred to M6-K-W1 closure under VE037;
+commit `4a39062` supplies the wave's passing 187-entrypoint opening baseline.
+Canonical and legacy sources, the recovery fixture, frozen inventory and
+dispositions, helper, engine, accepted dependency suite, and the other 50
+helper consumers remained unchanged.
+
+##### VE037: Wave-Scoped Mixed Bash Checkpoints
+
+**Status:** `Accepted`
+
+The acceleration contract already requires focused verification per package
+and one complete mixed suite per integrated wave or shared-contract change.
+Package rows continued to require `complete-suite`, causing each admission and
+implementation to spend roughly nine minutes re-executing the same transitive
+Bash closures. That stale row-level ceremony is removed for M6-K-W1 and future
+waves; accepted historical evidence is not rewritten.
+
+Every package still requires its focused registered dependency closure,
+package/edge authority, all declarative suites, graph freshness, both plan
+checks, route/removal/diff evidence, and exact read-only-source proof. Run a
+surviving Bash checker between wave checkpoints only when generated executable
+or contract edges prove that changed package evidence reaches it. Run the full
+mixed suite once at wave closure and immediately around shared engine, helper,
+launcher, metadata-schema, edge-contract, or routing-contract changes.
+
+M6-K-W1 opens from commit `4a39062`, whose admitted state passed all 187 mixed
+entrypoints. It contains M6-K3 and no more than the four other currently
+inbound-safe Release-owned helper consumers. Close the wave after those
+packages, or earlier if an inbound edge, ownership conflict, shared-contract
+change, unexpected retained-Bash consumer, or focused/declarative failure
+appears. The closing checkpoint validates the integrated deletions once.
+
 **Tasks:**
 
 - [x] Generate exact dependency closures before package admission; a package
@@ -2645,7 +2689,7 @@ legacy authority; or existing primitives would weaken an observable claim.
 - [ ] Permit concurrent package preparation only in isolated worktrees with
   disjoint suite, fixture, and deleted-checker paths; keep registry, package
   manifest, README, generated graph, and plan integration serial.
-- [ ] Run focused verification for every package and the complete suite once at
+- [x] Run focused verification for every package and the complete suite once at
   each integrated wave boundary or shared-contract change.
 - [ ] Review each exception for a missing reusable primitive, bad test design,
   historical-only assertion, or genuinely custom algorithm.

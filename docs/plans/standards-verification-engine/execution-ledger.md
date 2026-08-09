@@ -1759,3 +1759,41 @@
   entrypoints.
 - Next slice: verify admission, then implement the exact package without a
   wrapper, compatibility path, command action, fallback, or weaker assertion.
+
+## 2026-08-09 - VE037 Wave-Scoped Bash Checkpoints
+
+- The plan already requires focused package checks and one complete mixed suite
+  per integrated wave or shared-contract change, but package rows retained a
+  stale per-package `complete-suite` gate.
+- A mixed run takes roughly nine minutes and repeatedly executes unrelated
+  transitive closures for inbound-free leaf replacements.
+- M6-K-W1 uses commit `4a39062`'s passing 187-entrypoint admission checkpoint
+  as its opening baseline. Fast gates cover M6-K3 and the four remaining
+  currently inbound-safe Release packages; one mixed checkpoint closes the
+  bounded wave.
+- A graph-proven affected retained Bash consumer still runs immediately.
+  Shared engine, helper, launcher, metadata-schema, edge-contract, and
+  routing-contract changes still require before/after mixed checkpoints.
+- The redundant M6-K3 final mixed run was interrupted on maintainer direction;
+  no result from that partial run is acceptance evidence.
+
+## 2026-08-09 - M6-K3 Release Recovery Acceptance
+
+- Added and registered one Release Workflow-owned suite for the exact recovery
+  decision, five migration IDs/dispositions, direct metadata graph, required
+  recovery rules, typed diagnostics, and removed provider-specific defaults.
+- Registered the accepted Release Reference suite as its dependency for one
+  stronger byte-exact legacy-index proof without duplicated authority.
+- Deleted `verify-release-recovery-policy.sh`; no wrapper, alias,
+  compatibility path, command action, helper call, or fallback remains.
+- Accepted package M6-K3 and its two historical helper edges. Verification
+  passed the focused dependency closure, package and edge authority, all 90
+  declarative suites, both plan checks, README route, removed-path and
+  read-only-source proof, diff integrity, and graph freshness at 186 Bash
+  verifiers / 191 nodes / 905 edges / 187 components.
+- The mixed checkpoint is deferred to M6-K-W1 closure under VE037; commit
+  `4a39062` supplies the passing 187-entrypoint opening baseline.
+- No fixture, canonical or legacy source, frozen migration evidence, helper,
+  engine file, accepted dependency suite, or unrelated consumer changed.
+  Fifty metadata-helper consumers remain.
+- Next slice jointly admits the four remaining inbound-safe Release packages.

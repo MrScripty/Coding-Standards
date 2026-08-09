@@ -1,0 +1,105 @@
+schema_version = 1
+id = "release-recovery-policy"
+owner = "workflow.release"
+description = "Impact- and capability-driven release recovery with explicit authority, safe actions, replacement evidence, exact migration ownership, and no provider-specific fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/release/recovery-decisions.tsv"
+expected_column = "expected_recovery"
+default = "no"
+[checks.domains]
+case = ["*"]
+affected_scope = ["yes", "no"]
+channel_capability = ["yes", "no"]
+authority_resolved = ["yes", "no"]
+safe_action = ["yes", "no"]
+replacement_evidence = ["yes", "no"]
+expected_recovery = ["yes", "no"]
+[[checks.rules]]
+outcome = "yes"
+[checks.rules.when]
+all = [
+  { field = "affected_scope", op = "eq", value = "yes" },
+  { field = "channel_capability", op = "eq", value = "yes" },
+  { field = "authority_resolved", op = "eq", value = "yes" },
+  { field = "safe_action", op = "eq", value = "yes" },
+  { field = "replacement_evidence", op = "eq", value = "yes" },
+]
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0577", "RELEASE-STANDARDS.md", "539", "2", "workflow", "split", "Rollback Procedure"],
+  ["STD-0578", "RELEASE-STANDARDS.md", "541", "3", "workflow", "split", "When to Rollback"],
+  ["STD-0579", "RELEASE-STANDARDS.md", "547", "3", "workflow", "split", "Procedure"],
+  ["STD-0580", "RELEASE-STANDARDS.md", "558", "3", "workflow", "split", "Authority"],
+  ["STD-0581", "RELEASE-STANDARDS.md", "563", "3", "workflow", "split", "Post-Incident"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0577", "STD-0578", "STD-0579", "STD-0580", "STD-0581"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0577", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "canonical recovery and withdrawal policy"],
+  ["STD-0578", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "evidence-and-impact recovery trigger"],
+  ["STD-0579", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "channel-capability recovery actions"],
+  ["STD-0580", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "explicit normal and emergency authority"],
+  ["STD-0581", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "impact-driven incident record"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0577", "STD-0578", "STD-0579", "STD-0580", "STD-0581"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "workflows/release.md",
+]
+
+[[checks]]
+id = "workflow-policy"
+type = "text"
+path = "workflows/release.md"
+required = [
+  "## Recovery And Withdrawal",
+  "Published artifacts may be immutable, cached",
+  "Classify affected release units, versions, channels",
+  "withdrawal as erasure",
+  "Urgency does not grant implicit authority",
+  "recovery status cannot waive normal acceptance",
+  "it is not a universal post-incident record",
+  "typed release-recovery",
+]
+prohibited = [
+  "Revert the GitHub Release to draft",
+  "crates.io, npm, PyPI",
+  "Address the issue on `main`",
+  "[Hotfix Workflow](#hotfix-workflow)",
+  "Publish a new patch version",
+  "do not wait for consensus",
+  "Add a brief post-mortem note to the changelog",
+]

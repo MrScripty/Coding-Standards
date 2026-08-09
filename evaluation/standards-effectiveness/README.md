@@ -71,6 +71,15 @@ coverage, package cohesion, missing-owner state, immutable-train alignment,
 active-plan handoff, and plan lifecycle. Shared integration remains serial,
 and complete-suite checkpoints remain fail-fast.
 
+During Bash-to-declarative migration, package admission and implementation run
+focused dependency closure, package/edge authority, the complete declarative
+registry, graph and plan checks, route/removal evidence, diff integrity, and
+declared read-only-source checks. Run the transitive mixed Bash suite once at a
+bounded wave checkpoint, or immediately before and after a shared engine,
+helper, launcher, metadata-schema, edge-contract, or routing-contract change.
+Run a retained Bash checker between checkpoints only when the generated graph
+proves that the package changed evidence it consumes.
+
 `check-decision-table.sh` is the reusable semantic-fixture engine. A package
 supplies an ordered schema, decisions with expected outcomes, and observed
 outcomes derived by its own domain logic. The engine validates exact headers,
@@ -837,11 +846,11 @@ exact disposition of `STD-0575` through `STD-0576`, decision-derived release
 steps, typed unresolved outcomes, and removal of universal language, commit,
 tag, audit-tool, and publication-command defaults.
 
-`verify-release-recovery-policy.sh` checks impact- and capability-driven
-recovery decisions, exact disposition of `STD-0577` through `STD-0581`,
-explicit emergency authority, immutable publication behavior, typed unresolved
-outcomes, and removal of provider, registry, branch, patch-version, and
-universal incident-record defaults.
+The registered `release-recovery-policy` suite checks impact- and
+capability-driven recovery decisions, exact disposition of `STD-0577` through
+`STD-0581`, explicit emergency authority, immutable publication behavior,
+typed unresolved outcomes, and removal of provider, registry, branch,
+patch-version, and universal incident-record defaults.
 
 ## Scoring
 
