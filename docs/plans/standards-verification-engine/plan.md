@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: next dependency-closed owner-wave audit
+**Current phase:** Milestone 6: executable-edge semantics re-plan
 
-**Next slice:** Inspect the fresh post-Wave-2 graph and admit the next smallest
-owner-coherent package set with complete Bash caller and prerequisite closure.
+**Next slice:** Select and freeze how executable edges map to declarative
+dependencies before any Wave 3 package admission.
 
 **Acceptance status:** `pending`
 
@@ -1947,6 +1947,52 @@ fixtures, and dispositions are unchanged; and the regenerated graph is fresh
 at 223 Bash verifiers / 228 nodes / 983 edges / 224 components. The complete
 mixed-suite wave gate passed all 223 surviving entrypoints, accepting Wave 2
 without a compatibility execution path.
+
+#### Post-Wave-2 Re-Plan Trigger: Executable Edge Semantics
+
+**Status:** `Active`
+
+The fresh graph has 223 Bash verifiers, 228 nodes, 983 edges, and 224
+components. Its only caller-free and prerequisite-free roots are the
+declarative-suite launcher and a historical security re-plan checker. Every
+remaining semantic leaf executes another path.
+
+Those edges are not one semantic category. They include shared generic helpers,
+historical lifecycle/decomposition gates, owner-local semantic prerequisites,
+and an external owned template command. The largest shared targets have 53,
+16, 14, and 64 Bash callers. Treating all edges as semantic suite dependencies
+would force oversized cross-owner waves; deleting leaves without a disposition
+would violate VE022; retaining wrappers or Bash-to-Python bridges is prohibited.
+
+**Option 1 - Typed executable-edge disposition contract (recommended):** add
+one exact manifest and declarative table contract that classifies every edge a
+wave removes as `native-engine`, `independent-gate`, `suite-requires`,
+`same-owner-package`, `external-owned-artifact`, or `invalid`. Require the
+target, owner, rationale, replacement evidence, and package identity. Migrate
+owner packages only after every removed edge has one disposition. This enables
+parallel owner preparation, preserves true dependencies, retires historical
+coupling explicitly, and prevents both giant waves and one-off exceptions.
+
+**Option 2 - Shared-prerequisite closure waves:** migrate a shared prerequisite
+and every Bash caller atomically, then express retained semantics with suite
+dependencies. This preserves the executable graph literally but creates large
+cross-owner write sets, serial integration pressure, and difficult review. It
+is appropriate only if audit proves most callers genuinely require the same
+semantic contract.
+
+**Option 3 - Owner-family waves with local edge review:** migrate one complete
+owner chain at a time and document external-edge treatment inside each package.
+This can start quickly for chains such as Accessibility, but repeats taxonomy
+and review decisions, weakens global completeness evidence, and risks
+inconsistent treatment of the same shared target.
+
+**Rejected option:** wrappers, Bash bridges, dual checker/suite identities,
+silent dependency deletion, implicit full-suite reliance, or one-off engine
+callbacks preserve legacy execution or hide semantics and remain prohibited.
+
+**Decision required:** choose the executable-edge disposition model before
+Wave 3 admission. No source, suite, checker, registry, lifecycle, or generated
+artifact may change under this trigger.
 
 **Tasks:**
 

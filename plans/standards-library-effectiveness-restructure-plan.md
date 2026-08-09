@@ -9,11 +9,10 @@
 **Current phase:** Cross-Platform source closure `7.4c3.7` and delegated
 verification-engine Milestone 5 are accepted. Seven of 27 former normative
 source entrypoints are derived. Verification-engine Milestone 6 Waves 1 and 2
-are accepted and the next dependency-closed owner audit is active.
+are accepted; VE026 requires executable-edge semantics before Wave 3.
 
-**Next slice:** inspect the fresh post-Wave-2 checker graph and admit the next
-smallest owner-coherent package set under the delegated verification-engine
-plan.
+**Next slice:** select and freeze the delegated verification engine's typed
+executable-edge disposition contract before Wave 3 admission.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2528,6 +2527,11 @@ all structural/routing fixtures pass.
        - `7.4c3ve51` (`Accepted gate`): run the complete mixed suite for the
          integrated Wave 2 replacement, record accepted graph and suite counts,
          then audit the fresh graph before admitting another owner wave.
+       - `7.4c3ve52` (`Re-plan required`): classify executable edges as native
+         engine replacement, independent historical gate, true suite
+         dependency, same-owner package inclusion, external owned artifact, or
+         invalid/unresolved. Require exact coverage before deleting a caller;
+         do not force 14-to-64-caller cross-owner waves or preserve bridges.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

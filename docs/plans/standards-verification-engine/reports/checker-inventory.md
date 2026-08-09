@@ -969,3 +969,19 @@ removed-reference scans, admission-source immutability, and graph freshness at
 223 Bash verifiers / 228 nodes / 983 edges / 224 components. Complete
 mixed-suite Wave 2 verification passed all 223 surviving entrypoints, accepting
 the wave without a compatibility execution path.
+
+### Post-Wave-2 Re-Plan Trigger
+
+The 223-verifier graph has no caller-free, prerequisite-free semantic root.
+Remaining semantic leaves execute shared helpers, historical migration gates,
+owner-local prerequisites, or an external owned template. The largest shared
+targets have 53, 16, 14, and 64 Bash callers, so literal closure would turn the
+next migration into oversized cross-owner waves.
+
+VE026 freezes the decision boundary. The recommended next contract is an exact,
+typed executable-edge disposition manifest: native-engine replacement,
+independent historical gate, true suite dependency, same-owner package,
+external owned artifact, or invalid/unresolved. This preserves semantic
+dependencies without treating historical execution coupling as policy and
+supports independent owner-package preparation with serial shared integration.
+No Wave 3 package is admitted.

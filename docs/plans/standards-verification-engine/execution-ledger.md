@@ -1278,3 +1278,21 @@
 - Complete mixed-suite Wave 2 verification passed all 223 surviving
   entrypoints. Wave 2 is accepted; the next slice is a fresh dependency audit
   before another package admission.
+
+## 2026-08-08 - Post-Wave-2 Executable-Edge Re-Plan Trigger
+
+- Confirmed the only caller-free and prerequisite-free roots are the
+  declarative launcher and a historical security re-plan checker; no semantic
+  package can repeat the first two wave shapes.
+- Classified the remaining dependency problem at a high level: shared generic
+  helpers, historical lifecycle/decomposition gates, owner-local semantic
+  prerequisites, and one external owned template command.
+- Shared targets have up to 53, 16, 14, and 64 Bash callers. Literal dependency
+  closure would create oversized cross-owner waves, while leaf-only deletion
+  would violate VE022 or require a prohibited bridge.
+- Recorded VE026 and three standards-aligned options. Recommended is one typed,
+  exact executable-edge disposition manifest that distinguishes native-engine
+  replacement, independent gates, true suite dependencies, same-owner package
+  inclusion, external owned artifacts, and invalid/unresolved edges.
+- Stopped before Wave 3 admission. No suite, checker, registry, lifecycle,
+  source, generated artifact, or compatibility path changed.
