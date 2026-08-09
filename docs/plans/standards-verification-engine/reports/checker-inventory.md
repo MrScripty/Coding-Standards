@@ -470,3 +470,21 @@ authorities scheduled for deletion.
 This is the final ordinary inbound-free decision consumer identified by the
 current review. Cross-Platform candidates remain governed by `F085`; package
 admission does not weaken or bypass that source-shape dependency.
+
+### Third Decision Consumer Migration
+
+Accepted package `M3-DT3` replaces Binding Artifact Composition with a
+five-check declarative suite over its canonical 23-row decisions fixture. The
+75-line Bash checker, schema mirror, and observed-outcome mirror are deleted;
+the README projects the suite rather than an executable entrypoint.
+
+The current inventory is 235 Bash verifiers and five helpers. The generated
+graph contains 240 nodes, 1,023 typed edges, and 236 components. The migration
+removed one verifier, ten dependency/reference edges, and one component while
+preserving four exact dispositions, Release/former-source evidence, accepted
+plan lineage, and all typed outcomes.
+
+The next boundary is `F085`: remaining inbound-free consumers use legacy
+Cross-Platform heading ranges, but their canonical behavior belongs to three
+owners. Another ordinary package is not admissible until source-wide migration
+evidence and its retirement owner are selected.

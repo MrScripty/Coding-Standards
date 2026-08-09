@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3: Decision Table Consumer Migration
+**Current phase:** Milestone 5: Cross-Platform F085 Re-plan
 
-**Next slice:** Implement admitted package `M3-DT3`, replacing Binding Artifact
-Composition with one declarative suite and reconciling its README projection
-while deleting the obsolete checker and redundant mirrors.
+**Next slice:** Select and record the `F085` source-shape ownership and
+retirement sequence before admitting another Cross-Platform source slice.
 
 **Acceptance status:** `pending`
 
@@ -221,6 +220,8 @@ and plan records selected per slice.
   checker plus redundant schema and observed-outcome mirrors.
 - [x] Migrate `M3-DT2` Rust Binding Contract Discovery and remove its Bash
   checker plus redundant schema and observed-outcome mirrors.
+- [x] Migrate `M3-DT3` Binding Artifact Composition and remove its Bash checker
+  plus redundant schema and observed-outcome mirrors.
 
 **Acceptance gate:** Inventory coverage is exact; each package's focused suites
 and complete mixed suite pass; no migrated behavior has two authorities.
@@ -868,6 +869,66 @@ nodes/1,033 edges/237 components, and all 236 mixed checker entrypoints passed.
 **No-fallback result:** no fixed artifact count, package/bundle default,
 framework or example identity, internal-input publication, graph-derived owner,
 omitted documentation, Bash wrapper, or compatibility authority is admitted.
+
+#### Package M3-DT3: Binding Artifact Composition
+
+**Status:** `Accepted`
+
+**Owner:** `workflow.release`
+
+**Observable outcome:** one registered five-check suite derives all 23 artifact
+composition decisions from strict domains and ordered predicates, preserves the
+Release owner, former-source route/prohibitions, four exact dispositions, and
+the accepted parent marker, and returns typed invalid or unavailable outcomes
+without fixed artifact/package defaults.
+
+**Acceptance evidence:** the focused suite passed five checks; all 40
+declarative suites/186 checks, 37 engine tests, Python compilation, graph
+freshness at 235 Bash verifiers/240 nodes/1,023 edges/236 components, removed
+operational-path scanning, diff integrity, and all 235 mixed checker
+entrypoints passed.
+
+**No-fallback result:** the Bash checker and redundant schema/observed mirrors
+were deleted, the README now projects the registered suite and retained
+decisions fixture, and no wrapper, transitive checker call, fixed composition,
+framework/example identity, internal-input publication, or default-success path
+remains.
+
+#### Cross-Platform F085 Re-plan Trigger
+
+**Status:** `Active`
+
+After `M3-DT3`, every remaining inbound-free decision-table consumer is within
+the Cross-Platform source-shape boundary. Native Artifact Loading, Native
+Artifact Release, Platform Evidence Coverage, and Platform Target Policy derive
+former-source evidence from legacy heading ranges that must disappear when
+`CROSS-PLATFORM-STANDARDS.md` closes. Their canonical semantics belong to
+Cross-Platform, Release, and Verification owners, so one ordinary package would
+either cross owners or leave transitional heading authority.
+
+**Option 1 - Shared closure prerequisite plus owner packages (`Recommended`):**
+create one bounded migration-only source-closure contract that proves exact
+source-wide routes and prohibited legacy text without heading-range aliases.
+Then admit dependency-ordered owner-coherent suites for Cross-Platform, Release,
+and Verification, integrate shared registry/graph changes serially, close the
+legacy source, and retire the migration-only contract in the same closure wave.
+Choose this when owner boundaries and reviewable thin slices must both remain
+explicit.
+
+**Option 2 - Coordinated atomic closure wave:** freeze separate owner subpackages
+but integrate all four checker replacements and legacy-source closure in one
+atomic wave checkpoint. Choose this only if no valid intermediate legacy index
+state exists; it reduces transitional state but creates a much larger review and
+rollback surface.
+
+**Option 3 - Defer F085 and resolve other caller chains:** leave all four
+Cross-Platform source-shape checkers intact and continue with graph packages
+outside this source. Choose this if source-closure ownership is unavailable; it
+preserves safety but delays Milestone 5 and helper retirement.
+
+Heading aliases, compatibility sections, source exceptions, one cross-owner
+semantic suite, weaker whole-file checks, or deleting scripts before their
+replacement evidence exists are not valid options.
 
 ### Milestone 4: Semantic Decision Migration
 

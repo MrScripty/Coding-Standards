@@ -1,0 +1,84 @@
+schema_version = 1
+id = "binding-artifact-composition"
+owner = "workflow.release"
+description = "Release-owned binding artifact roles and composition without fixed package, bundle, identity, or publication defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/release/binding-artifact-composition-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+release_contract = ["declared", "missing", "contradictory"]
+roles = ["complete", "missing", "contradictory"]
+composition = ["separate", "bundled", "mixed", "native-only", "host-only", "none", "unknown"]
+identity = ["product", "ecosystem", "framework-default", "ambiguous", "missing"]
+relationships = ["complete", "not-required", "missing"]
+consumer_info = ["complete", "not-required", "missing"]
+evidence = ["complete", "missing"]
+fallback = ["none", "one-native-per-target", "separate-default", "bundle-default", "example-names", "publish-input", "default-success"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "release_contract", op = "eq", value = "contradictory" },
+  { field = "roles", op = "eq", value = "contradictory" },
+  { field = "identity", op = "in", values = ["framework-default", "ambiguous"] },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "release_contract", op = "eq", value = "missing" },
+  { field = "roles", op = "eq", value = "missing" },
+  { field = "composition", op = "eq", value = "unknown" },
+  { field = "identity", op = "eq", value = "missing" },
+  { field = "relationships", op = "eq", value = "missing" },
+  { field = "consumer_info", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "release-owner"
+type = "text"
+path = "workflows/release.md"
+required = ["### Binding Artifact Roles And Composition", "internal adapter, wrapper, generator, schema, or build input", "Record which items are release artifacts", "separate or bundled composition", "not the product identity", "compatibility and version relationships remain Contracts-owned", "unresolved artifact-plan diagnostic", "Do not assume one native library per target", "Do not publish an internal build input"]
+prohibited = []
+
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+required = ["workflows/release.md#binding-artifact-roles-and-composition"]
+prohibited = ["Ship one product-native shared library", "Package generated host-language bindings separately", "pantograph-headless-native-linux-x64.zip", "optional secondary artifacts"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0763", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "refine", "classify native internal generator generated host and bundled binding artifact roles"],
+  ["STD-0764", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "refine", "derive shipped artifact set composition identity relationships and evidence from release and consumer facts"],
+  ["STD-0765", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "remove", "remove product-specific example archive names rather than treating them as release policy"],
+  ["STD-0766", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "refine", "preserve product identity and explicit artifact relationships without fixed package architecture"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0763", "STD-0764", "STD-0765", "STD-0766"]
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8y` (`Accepted`)"]
+prohibited = []

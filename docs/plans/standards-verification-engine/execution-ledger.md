@@ -655,3 +655,32 @@
   documentation, or inferred owner is authorized.
 - Next slice: validate package authority and implement `M3-DT3` only after the
   admission commit is accepted.
+
+## 2026-08-08 - Package M3-DT3 Binding Artifact Composition
+
+- Replaced the 75-line Bash checker with one registered five-check declarative
+  suite over the retained 23-row decisions fixture.
+- Preserved ordered typed-invalid, typed-unavailable, and allow outcomes;
+  Release and former-source evidence; four exact dispositions; and the accepted
+  parent marker.
+- Deleted redundant schema and observed mirrors and reconciled the README to the
+  suite and retained decisions fixture.
+- Verification: the focused suite passed five checks; all 40 suites/186 checks,
+  37 engine tests, Python compilation, graph freshness at 235 Bash
+  verifiers/240 nodes/1,023 edges/236 components, removed operational-path
+  scanning, diff integrity, and all 235 mixed checker entrypoints passed.
+- No-fallback result: no wrapper, duplicate authority, fixed package/bundle
+  composition, framework/example identity, internal-input publication, or
+  default-success path remains.
+
+## 2026-08-08 - Cross-Platform F085 Re-plan Trigger
+
+- All remaining inbound-free family consumers depend on legacy Cross-Platform
+  heading ranges while canonical semantics span three owners.
+- Recommended a bounded migration-only whole-source route/prohibition contract,
+  followed by dependency-ordered owner packages and retirement of the temporary
+  contract in the final source-closure wave.
+- Rejected heading aliases, compatibility sections, source exceptions,
+  cross-owner semantic suites, weaker checks, and early script deletion.
+- Next slice: select and record the `F085` ownership/retirement option before
+  another source package begins.
