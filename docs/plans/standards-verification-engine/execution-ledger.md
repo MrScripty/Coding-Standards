@@ -743,3 +743,24 @@
 - No-fallback result: the suite is temporary migration evidence only and is
   scheduled for deletion with `M5-CP6`; it owns no semantic policy.
 - Next slice: audit and admit `M5-CP1` Native Artifact Loading.
+
+## 2026-08-08 - Cross-Platform Dependency-Semantics Re-plan Trigger
+
+- Confirmed the engine accepts only registered suite IDs as dependencies; it
+  has no external-command or Bash dependency path.
+- Confirmed Native Artifact Loading and Rust Target Configuration both invoke
+  Platform Target Policy. Caller-first replacement can lose focused coverage,
+  while callee-first replacement would break callers or require forbidden
+  wrappers or dual authority.
+- Found that the same chain mixes possible semantic prerequisites with
+  migration/integration gates. Preserving every nested call would recreate an
+  unbounded process graph; deleting every call without classification could
+  weaken evidence.
+- Recommended an owner review that classifies each outbound call before
+  package admission, declares only true semantic suite dependencies, and keeps
+  migration/integration gates at package or wave scope.
+- Rejected external Bash dependencies, arbitrary commands, wrappers, duplicate
+  Platform Target semantics, dual checker authority, and unreviewed call
+  deletion.
+- Next slice: select the dependency-semantics option before admitting
+  `M5-CP1`, `M5-CP4`, or `M5-CP5`.

@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: Cross-Platform source-closure prerequisite
+**Current phase:** Milestone 5: Cross-Platform dependency-semantics re-plan
 
-**Next slice:** Audit and admit `M5-CP1` Native Artifact Loading with an exact
-owner-local replacement contract and declared prerequisite dependency.
+**Next slice:** Select and record how legacy transitive calls are classified as
+semantic suite dependencies or independent integration gates before admitting
+`M5-CP1`.
 
 **Acceptance status:** `pending`
 
@@ -1041,6 +1042,57 @@ all 41 declarative suites/187 checks, 37 engine tests, Python compilation, both
 plan-structure checks, graph freshness at 235 Bash verifiers/240 nodes/1,023
 edges/236 components, admission-to-implementation source immutability, diff
 integrity, and all 235 mixed checker entrypoints passed.
+
+#### Cross-Platform Dependency-Semantics Re-plan Trigger
+
+**Status:** `Active`
+
+The `M5-CP1` audit found that Native Artifact Loading invokes Platform Target
+Policy, while Rust Target Configuration also invokes Platform Target Policy.
+The engine intentionally permits dependencies only on registered declarative
+suites. Replacing a caller before classifying that invocation could silently
+drop focused prerequisite coverage. Replacing the callee first would break its
+two Bash callers or require prohibited dual semantic authority, a wrapper, or
+an external-command dependency.
+
+The same scripts also invoke migration lifecycle and broad integration checks
+such as Row 6 decomposition, the execution train, independent-trust evidence,
+and filesystem containment. Treating every historical nested invocation as a
+permanent semantic dependency would reproduce the Bash process graph and could
+expand one package into an unbounded transitive closure. Treating every call as
+redundant without review could weaken focused evidence.
+
+**Option 1 - Classify dependency semantics before package admission
+(`Recommended`):** for every outbound call in `M5-CP1`, `M5-CP4`, and
+`M5-CP5`, record whether the callee supplies an owner-required semantic
+precondition or an independent migration/integration gate. Convert only true
+semantic prerequisites into registered suite dependencies. Preserve
+integration gates through package and wave acceptance, not nested suite
+execution. Admit each caller only when its own decisions, owner evidence,
+dispositions, routes, typed outcomes, and negative cases form a complete
+focused contract. Choose this to preserve thin owner packages and remove
+accidental orchestration coupling without weakening evidence.
+
+**Option 2 - Atomic connected semantic replacement:** replace Native Artifact
+Loading, Rust Target Configuration, and Platform Target Policy together as
+three owner-coherent declarative suites, with dependencies frozen before the
+wave. Migration/integration calls still require classification, but the
+Platform Target caller edge cannot create an intermediate state. Choose this
+when review proves Platform Target is a mandatory focused prerequisite for
+both callers. This has a larger write, review, verification, and rollback
+surface.
+
+**Option 3 - Defer the connected chain:** migrate independent Native Release
+and Platform Evidence packages first, leaving Native Loading, Rust Target, and
+Platform Target unchanged until dependency semantics are resolved. Choose
+this only if the semantic owner review is unavailable; it preserves current
+coverage but delays source closure and does not resolve the architectural
+question.
+
+External Bash dependencies, arbitrary command actions, wrapper suites,
+retaining a semantic Bash checker beside its declarative replacement,
+duplicating Platform Target policy in caller suites, or dropping nested calls
+without a recorded ownership classification are invalid options.
 
 ### Milestone 4: Semantic Decision Migration
 

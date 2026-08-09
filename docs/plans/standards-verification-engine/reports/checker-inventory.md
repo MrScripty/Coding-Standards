@@ -540,3 +540,19 @@ The source and all semantic evidence remain unchanged. `M5-CP1` is now the
 smallest useful owner package: Native Artifact Loading is inbound-free, owns
 two exact Cross-Platform dispositions, and is the first live caller that must
 leave Platform Target Policy before that downstream checker can retire.
+
+### Cross-Platform Dependency-Semantics Trigger
+
+Pre-admission review shows that graph direction alone is insufficient for the
+next package. Native Artifact Loading and Rust Target Configuration both invoke
+Platform Target Policy, but their scripts also invoke lifecycle and integration
+checkers. The graph records executable coupling, not whether a callee is part
+of the caller's permanent focused semantic contract.
+
+The engine correctly rejects dependencies that are not registered suites.
+Therefore a Bash bridge is unavailable by design. The next planning decision
+must classify each nested call as either an owner-required semantic
+precondition, which becomes a declarative dependency, or an independent
+package/wave gate, which must not remain nested. This classification is needed
+before caller deletion; otherwise the migration either weakens evidence or
+recreates legacy orchestration under a new schema.

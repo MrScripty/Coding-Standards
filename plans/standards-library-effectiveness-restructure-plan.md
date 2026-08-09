@@ -2403,9 +2403,16 @@ all structural/routing fixtures pass.
        - `7.4c3ve27` (`Accepted`): register the temporary `M5-CP0` whole-source
          route/prohibition suite without changing normative policy, source
          shape, any semantic checker, or the engine. Retire it in `M5-CP6`.
-       - `7.4c3ve28` (`Active`): audit and admit `M5-CP1` Native Artifact
-         Loading as an owner-local declarative replacement with explicit
-         prerequisite dependencies and no heading-range authority.
+       - `7.4c3ve28` (`Blocked by re-plan`): Native Artifact Loading and Rust
+         Target Configuration both invoke Platform Target Policy, while other
+         nested calls mix migration gates with possible semantic prerequisites.
+         Caller-first or callee-first replacement is unsafe without ownership
+         classification and cannot use wrappers or dual authority.
+       - `7.4c3ve29` (`Active`): select whether to classify each nested call
+         before thin package admission, replace the connected semantic chain
+         atomically, or defer that chain. Recommended: declare only proven
+         owner-required suite dependencies and retain migration/integration
+         checks as package or wave gates.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact
