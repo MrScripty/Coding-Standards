@@ -1055,3 +1055,20 @@
   package verification, and one complete-suite wave gate.
 - Next slice: implement and verify the shared `exact_text` primitive without
   changing policy, suites, fixtures, the registry, or migration authority.
+
+## 2026-08-08 - Generic Exact-Text Assertion
+
+- Added one bounded `exact_text` check kind with strict `id`, `type`, `path`,
+  and `expected` fields and the existing contained regular-file resolver.
+- Encoded inline TOML expected content as UTF-8 and compared raw bytes without
+  newline, whitespace, Unicode, or encoding normalization. Mismatches report
+  stable expected/observed lengths and the first differing byte offset.
+- Added focused pass, mismatch, missing-input, parent-path escape, and
+  unknown-field tests. No policy callback, command execution, expected-file
+  mirror, hash-only oracle, compatibility schema, or fallback was introduced.
+- Verification passed: five focused cases; all 42 engine tests; all 44
+  registered suites; Python compilation with bytecode cache under `/tmp` due
+  the external repository's read-only execution mount; graph freshness; both
+  plan checks; diff integrity; and all 232 mixed checker entrypoints.
+- Next slice: admit atomic M5-CP4+5 against the accepted exact-text primitive
+  and the frozen typed-subject/README lifecycle reconciliation.

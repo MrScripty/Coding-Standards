@@ -780,11 +780,17 @@ integrity, and all 232 mixed checker entrypoints.
 
 ### Accepted Exact-Text And Accelerated-Wave Direction
 
-VE021 Option 1 is selected. The shared engine will add one strict generic
+VE021 Option 1 is accepted. The shared engine provides one strict generic
 `exact_text` assertion over a contained regular file and inline expected TOML
 content encoded as UTF-8. Comparison is byte-for-byte with no newline,
 whitespace, or encoding normalization. The assertion is mechanics only; the
 suite remains the sole owner of expected policy evidence.
+
+Focused identical-byte, mismatch-offset, missing-input, path-escape, and
+unknown-field cases pass. All 42 engine tests, all 44 registered suites, Python
+compilation with its cache redirected to `/tmp`, graph freshness, both plan
+checks, diff integrity, and all 232 mixed entrypoints pass. M5-CP4+5 can now be
+admitted without changing engine source in its package commit.
 
 The post-M5 remainder will use dependency-closed owner waves. The current graph
 has 69 inbound-free verifiers, including 13 Testing and eight Release leaves,

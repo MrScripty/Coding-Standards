@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: generic exact-text implementation
+**Current phase:** Milestone 5: M5-CP4+5 admission
 
-**Next slice:** Implement and verify the accepted strict generic `exact_text`
-assertion before admitting atomic `M5-CP4+5`.
+**Next slice:** Admit atomic `M5-CP4+5` against the accepted generic
+`exact_text` contract and frozen lifecycle reconciliation.
 
 **Acceptance status:** `pending`
 
@@ -1603,6 +1603,8 @@ exact write set before implementation.
 
 - [x] Establish and verify `M5-CP0` without changing normative policy or the
   legacy source.
+- [x] Add and verify the strict generic `exact_text` assertion required by the
+  Rust migration-index contract.
 - [ ] Convert transitive verifier calls into declared suite dependencies.
 - [ ] Migrate platform-target, native-loading, release-artifact,
   platform-evidence, and Rust target-configuration suites while preserving

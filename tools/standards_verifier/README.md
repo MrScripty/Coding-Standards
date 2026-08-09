@@ -44,6 +44,11 @@ operators, dependencies, and paths fail with typed diagnostics. Configuration
 cannot execute commands, import modules, evaluate code, interpolate environment
 variables, or write files.
 
+The bounded `exact_text` check compares a contained regular file's raw bytes
+with inline expected TOML text encoded as UTF-8. It performs no newline,
+whitespace, Unicode, or encoding normalization and accepts only `id`, `type`,
+`path`, and `expected` fields.
+
 ## Exit Status
 
 | Status | Meaning |

@@ -2468,11 +2468,16 @@ all structural/routing fixtures pass.
          expected content. Do not use literal-only weakening, normalization,
          mirrors, wrappers, hashes, callbacks, compatibility parsing, or
          partial migration.
-       - `7.4c3ve42` (`Active`): implement and verify the shared `exact_text`
-         primitive, then admit atomic M5-CP4+5 without changing engine source
-         in the package commit. After M5 closure, accelerate the remainder
-         through dependency-closed owner packages prepared concurrently and
-         integrated serially; retain separate suites and no Bash bridges.
+       - `7.4c3ve42` (`Accepted`): implement and verify the shared `exact_text`
+         primitive over contained raw bytes and inline UTF-8 content without
+         normalization, alternate authority, compatibility parsing, or
+         fallback. All 42 engine tests, 44 suites, and 232 mixed entrypoints
+         pass.
+       - `7.4c3ve43` (`Active`): admit and implement atomic M5-CP4+5 without
+         changing engine source in the package commit. After M5 closure,
+         accelerate the remainder through dependency-closed owner packages
+         prepared concurrently and integrated serially; retain separate suites
+         and no Bash bridges.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

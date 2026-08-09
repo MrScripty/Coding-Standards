@@ -126,6 +126,31 @@ class EngineTest(unittest.TestCase):
         )
         return "suites/decision.toml"
 
+    def write_exact_text_suite(
+        self,
+        *,
+        path: str = "exact.md",
+        expected: str = "first\nsecond\n",
+        extra: str = "",
+    ) -> str:
+        self.write(
+            "suites/exact-text.toml",
+            f'''
+            schema_version = 1
+            id = "exact-text"
+            owner = "test.owner"
+            description = "Exact text suite"
+
+            [[checks]]
+            id = "exact"
+            type = "exact_text"
+            path = {json.dumps(path)}
+            expected = {json.dumps(expected)}
+            {extra}
+            ''',
+        )
+        return "suites/exact-text.toml"
+
     def write_table_suite(
         self,
         *,
@@ -260,6 +285,59 @@ class EngineTest(unittest.TestCase):
 
         self.assertEqual([result.id for result in results], ["text", "decision"])
         self.assertTrue(all(result.status == "passed" for result in results))
+
+    def test_exact_text_passes_for_identical_utf8_bytes(self) -> None:
+        self.write("exact.md", "first\nsecond\n")
+        suite_path = self.write_exact_text_suite()
+        self.write_registry([("exact-text", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "passed")
+
+    def test_exact_text_reports_first_raw_byte_mismatch(self) -> None:
+        self.write("exact.md", "first\nsecond\nextra\n")
+        suite_path = self.write_exact_text_suite()
+        self.write_registry([("exact-text", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.exit_code, 1)
+        self.assertEqual(result.diagnostics[0].code, "ASSERT.EXACT_TEXT")
+        self.assertEqual(result.diagnostics[0].expected, "13 bytes")
+        self.assertEqual(
+            result.diagnostics[0].observed,
+            "19 bytes; first mismatch at byte 13",
+        )
+
+    def test_exact_text_missing_input_is_unavailable(self) -> None:
+        suite_path = self.write_exact_text_suite(path="missing.md")
+        self.write_registry([("exact-text", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_exact_text_path_escape_is_invalid(self) -> None:
+        suite_path = self.write_exact_text_suite(path="../outside.md")
+        self.write_registry([("exact-text", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.exit_code, 2)
+        self.assertEqual(result.diagnostics[0].code, "PATH.OUTSIDE_REPOSITORY")
+
+    def test_exact_text_unknown_field_is_invalid(self) -> None:
+        self.write("exact.md", "first\nsecond\n")
+        suite_path = self.write_exact_text_suite(extra="normalize = true")
+        self.write_registry([("exact-text", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
+        self.assertEqual(raised.exception.diagnostic.field, "normalize")
 
     def test_table_structure_and_projections_pass(self) -> None:
         self.write("rows.tsv", "id\tstate\ttags\na\tready\tbeta,alpha\nb\tdone\tgamma\n")
