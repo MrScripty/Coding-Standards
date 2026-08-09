@@ -1,0 +1,36 @@
+literal
+This is a non-normative migration index
+remain migration material
+retained below
+legacy authority
+## File System Conventions
+## Native Library Rules
+### Loading Strategy
+### Library Naming
+### Installation Documentation
+## CI Matrix
+### When to Build
+Linux x86_64
+Windows x86_64
+Best-effort
+Strategy + Factory Pattern
+One Platform Per File
+Use runtime detection only
+FeatureServiceFactory
+RUST-CROSS-PLATFORM-STANDARDS.md
+should be loaded
+Strategy pattern
+embedded in managed assemblies
+`.so`
+`.dll`
+`.dylib`
+| Linux |
+| Windows |
+| macOS |
+platform-specific class
+ubuntu-latest
+windows-latest
+fail-fast: false
+| Pre-commit |
+| Pre-push |
+CI (push/PR)

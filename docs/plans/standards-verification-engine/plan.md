@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: M5-CP6 source-closure implementation
+**Current phase:** Milestone 6: first dependency-closed owner-wave audit
 
-**Next slice:** Implement admitted M5-CP6 Cross-Platform source closure and
-same-wave retirement of temporary M5-CP0.
+**Next slice:** Regenerate and inspect the post-M5 dependency graph, then admit
+the smallest owner-coherent accelerated wave whose complete Bash caller and
+prerequisite closure is known.
 
 **Acceptance status:** `pending`
 
@@ -229,7 +230,7 @@ and plan records selected per slice.
 **Acceptance gate:** Inventory coverage is exact; each package's focused suites
 and complete mixed suite pass; no migrated behavior has two authorities.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 #### Package M2-P2: Rust Release Leaf Consolidation
 
@@ -1657,6 +1658,28 @@ graph freshness; both plan checks; diff integrity; and the complete mixed suite.
 graph freshness at 230 Bash verifiers / 235 nodes / 989 edges / 231 components,
 diff integrity, and all 230 mixed entrypoints passed.
 
+**Implementation result:** the 51-line transitional source is now a 21-line
+index with one title, two route headings, seven canonical routes, no former
+policy headings, and no fixed target, mechanism, loader, artifact, or CI
+defaults. The corpus row is `derived`; the generic aggregate verifies seven
+closed sources and 20 Cross-Platform identifiers; all four temporary dependency
+edges and the M5-CP0 suite are absent. F085 is resolved without adding order 7
+to the frozen preparation inventory or creating replacement authority.
+
+**No-fallback result:** semantic owner suites remain unchanged and independent;
+Rust Target still requires only Platform Target. There is no legacy source
+selection, transitional heading, M5-CP0 alias, replacement prerequisite,
+bespoke verifier, source exception, compatibility schema, alternate route,
+duplicated semantic evidence, permissive wording, or prior-source fallback.
+
+**Acceptance evidence:** the generic aggregate passed seven registered source
+closures, including Cross-Platform with seven routes and 20 frozen IDs. All
+five owner suites, all 45 registered suites, 42 engine tests, Python
+compilation, package authority, M5-CP0 absence, both plan checks, lifecycle
+fixtures, five surviving global/historical source readers, graph freshness at
+230 Bash verifiers / 235 nodes / 989 edges / 231 components, diff integrity,
+and all 230 mixed entrypoints passed.
+
 #### Migration-Package Stable-Identity Re-plan Trigger
 
 **Status:** `Accepted`
@@ -1767,7 +1790,7 @@ exact write set before implementation.
 - [x] Migrate platform-target, native-loading, release-artifact,
   platform-evidence, and Rust target-configuration suites while preserving
   owner-local semantics and whole-source route/prohibition coverage.
-- [ ] Delete the five replaced scripts, close the Cross-Platform source in the
+- [x] Delete the five replaced scripts, close the Cross-Platform source in the
   parent plan's manifest order, and delete `M5-CP0` in the same closure wave.
 
 **Acceptance gate:** Each dependency executes once; all five semantic suites'
@@ -1775,7 +1798,7 @@ decisions/dispositions/routes/no-fallback cases pass; no suite depends on
 former-source headings; `F085` resolves; `M5-CP0` is absent after source
 closure; and the complete mixed suite passes.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 6: Exceptional Checks And Bash Retirement
 

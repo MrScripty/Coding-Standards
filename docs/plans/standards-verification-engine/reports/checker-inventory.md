@@ -860,3 +860,25 @@ Admission verification passed the exact package suite, all 46 declarative
 suites, 42 engine tests, both plan checks, lifecycle fixtures, graph freshness
 at 230 Bash verifiers / 235 nodes / 989 edges / 231 components, and all 230
 mixed entrypoints.
+
+### Accepted M5-CP6 Source Closure
+
+The former Cross-Platform source is now a 21-line non-normative index with one
+title, two route headings, and seven canonical routes. The source-owned generic
+fixture enforces its exact structure, 24-line bound, route resolution, 35
+source-specific prohibited literals, generic non-authority language, all 20
+frozen identifiers, derived corpus state, canonical owner, and Router absence.
+
+M5-CP0 and its four registry edges are deleted. Native Loading, Native Release,
+Platform Evidence, and Platform Target are independent declarative roots; Rust
+Target retains only its true specialization dependency on Platform Target. All
+five semantic suites are otherwise unchanged. F085 and parent source package
+7 are closed without a replacement prerequisite, bespoke verifier, source
+exception, preparation-inventory false owner, compatibility schema, or prior
+source fallback.
+
+Acceptance verification passed the seven-source aggregate, all five focused
+owner suites, all 45 registered suites, 42 engine tests, package authority,
+M5-CP0 absence, both plan checks, lifecycle fixtures, all five surviving source
+readers, graph freshness at 230 Bash verifiers / 235 nodes / 989 edges / 231
+components, and all 230 mixed entrypoints.

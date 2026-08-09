@@ -6,16 +6,14 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Security source closure `7.4c3.6`, delegated verification
-engine Milestone 1, exact checker inventory, and ordinary dependency-free
-packages `M2-P1` through `M2-P8` are accepted. Structural suite planning now
-continues under the Generic Standards Verification Engine Plan before
-Cross-Platform source closure. Six of 27 former normative source entrypoints
-are derived.
+**Current phase:** Cross-Platform source closure `7.4c3.7` and delegated
+verification-engine Milestone 5 are accepted. Seven of 27 former normative
+source entrypoints are derived. Verification-engine Milestone 6 now prepares
+the first post-M5 dependency-closed owner wave.
 
-**Next slice:** implement admitted delegated package `M5-CP6` to close
-Cross-Platform source package `7.4c3.7`, resolve `F085`, and retire temporary
-M5-CP0 in the same wave.
+**Next slice:** inspect the regenerated post-M5 checker graph and admit the
+smallest owner-coherent dependency-closed accelerated wave under the delegated
+verification-engine plan.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2277,6 +2275,14 @@ all structural/routing fixtures pass.
        Concurrency route fixtures, and preserve all 20 frozen source
        dispositions. Transitional headings and validation, filesystem,
        payload, transport, or proof fallback mechanisms are absent.
+     - `7.4c3.7` (`Accepted`): replace Cross-Platform transitional headings and
+       policy explanations with concise non-normative navigation, set its
+       corpus state to derived, register seven exact canonical routes with the
+       generic source-index engine, preserve all 20 frozen dispositions and
+       five owner-local semantic suites, and retire temporary M5-CP0 plus all
+       four dependency edges without replacement authority or fallback. The
+       seven-source aggregate, all 45 registered suites, 42 engine tests, fresh
+       230-verifier graph, and all 230 mixed entrypoints pass.
      - `7.4c3ve` (`Active`): implement the delegated
        [Generic Standards Verification Engine Plan](../docs/plans/standards-verification-engine/plan.md).
        That plan owns checker-engine architecture, declarative suite migration,
@@ -2489,18 +2495,20 @@ all structural/routing fixtures pass.
          the remainder through dependency-closed owner packages prepared
          concurrently and integrated serially; retain separate suites and no
          Bash bridges.
-       - `7.4c3ve46` (`Active`): implement admitted M5-CP6 and parent source
+       - `7.4c3ve46` (`Accepted`): implement admitted M5-CP6 and parent source
          package `7.4c3.7` atomically. Register a source-owned fixture with the
          existing generic closure engine, rewrite the source as concise
          non-normative navigation, set its corpus row to derived, remove all
          four M5-CP0 dependency edges, delete M5-CP0, and resolve F085. Do not
          add a replacement prerequisite, bespoke verifier, source exception,
          compatibility schema, alternate route, or fallback to prior wording.
-     - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
-       suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
-       transitional headings. Preserve every canonical owner, exact
-       disposition, typed outcome, route, and negative default. Do not retain a
-       Bash checker, compatibility schema, source exception, or weaker check.
+       - `7.4c3ve47` (`Active`): regenerate and inspect the post-M5 graph, then
+         admit the smallest dependency-closed owner wave whose Bash callers,
+         semantic prerequisites, suite boundaries, fixture ownership, and
+         serial shared integration set are all explicit.
+     - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
+       heading-dependent semantic authority and closed source package 7 without
+       transitional headings, weaker checks, or fallback.
    - `7.4c4` (`Planned`): regenerate derived inventories; prove 916 exact
      dispositions, zero source gaps, zero normative legacy source rows, and no
      legacy Router routes; then complete the manual `D001` through `D010`
@@ -2529,10 +2537,7 @@ not need the full library or introduce downstream-specific root policy.
 
 ## Blockers
 
-- `7.4c3hcp`: Cross-Platform source closure depends on accepted engine
-  primitives and migration of its four canonical-owner suites under delegated
-  plan `docs/plans/standards-verification-engine/plan.md`. See `F085`, `F086`,
-  and the execution ledger.
+None.
 
 ## Slice Procedure
 

@@ -5,7 +5,7 @@ ARCHITECTURE-PATTERNS.md	standard	yes	mixed	split	git
 CODING-STANDARDS.md	standard	derived	core	split	git
 COMMIT-STANDARDS.md	standard	derived	workflow	refine	git
 CONCURRENCY-STANDARDS.md	standard	derived	topic	refine	git
-CROSS-PLATFORM-STANDARDS.md	standard	yes	topic	refine	git
+CROSS-PLATFORM-STANDARDS.md	standard	derived	topic	refine	git
 DEPENDENCY-STANDARDS.md	standard	yes	topic	split	git
 DOCUMENTATION-STANDARDS.md	standard	derived	workflow	split	git
 FRONTEND-STANDARDS.md	standard	yes	profile	refine	git

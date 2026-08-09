@@ -161,29 +161,24 @@ path = "evaluation/standards-effectiveness/suites/binding-artifact-composition.t
 requires = []
 
 [[suites]]
-id = "cross-platform-source-closure-prerequisite"
-path = "evaluation/standards-effectiveness/suites/cross-platform-source-closure-prerequisite.toml"
-requires = []
-
-[[suites]]
 id = "native-artifact-loading"
 path = "evaluation/standards-effectiveness/suites/native-artifact-loading.toml"
-requires = ["cross-platform-source-closure-prerequisite"]
+requires = []
 
 [[suites]]
 id = "native-artifact-release"
 path = "evaluation/standards-effectiveness/suites/native-artifact-release.toml"
-requires = ["cross-platform-source-closure-prerequisite"]
+requires = []
 
 [[suites]]
 id = "platform-evidence-coverage"
 path = "evaluation/standards-effectiveness/suites/platform-evidence-coverage.toml"
-requires = ["cross-platform-source-closure-prerequisite"]
+requires = []
 
 [[suites]]
 id = "platform-target-policy"
 path = "evaluation/standards-effectiveness/suites/platform-target-policy.toml"
-requires = ["cross-platform-source-closure-prerequisite"]
+requires = []
 
 [[suites]]
 id = "rust-target-configuration"

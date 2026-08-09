@@ -1149,3 +1149,30 @@
   231 components, diff integrity, and all 230 mixed entrypoints.
 - Next slice: implement the admitted package and run focused owner/closure
   checks plus the complete mixed-suite wave gate.
+
+## 2026-08-08 - M5-CP6 Cross-Platform Source Closure
+
+- Replaced the 51-line transitional source with a 21-line non-normative index
+  containing one title, two route headings, and seven canonical routes to the
+  Router, Cross-Platform, Security, Release, and Verification owners.
+- Added the isolated order-7 generic closure fixture with exact heading, route,
+  line-bound, and former-authority prohibitions. The aggregate passes seven
+  registered sources and proves all 20 Cross-Platform identifiers.
+- Changed the Cross-Platform corpus row from normative `yes` to `derived`,
+  resolved both F085 records, removed all four M5-CP0 dependency edges, deleted
+  the temporary suite, and accepted the M5-CP6 package row.
+- Preserved all five semantic owner suites unchanged. Native Loading, Native
+  Release, Platform Evidence, and Platform Target are independent roots; Rust
+  Target requires only Platform Target.
+- No source heading alias, replacement prerequisite, bespoke verifier, source
+  exception, compatibility schema, alternate route, duplicated semantic
+  assertion, fixed default, permissive wording, or prior-source fallback was
+  added.
+- Verification passed the seven-source aggregate; all five focused owner
+  suites; all 45 registered suites; 42 engine tests; Python compilation;
+  package authority; exact M5-CP0 absence; both plan checks; lifecycle fixtures;
+  all five surviving global/historical source readers; graph freshness at 230
+  Bash verifiers / 235 nodes / 989 edges / 231 components; diff integrity; and
+  all 230 mixed entrypoints.
+- Next slice: inspect the fresh post-M5 graph and admit the smallest complete
+  dependency-closed owner wave for Milestone 6.

@@ -1,51 +1,21 @@
 # Cross-Platform Standards
 
-Canonical target support, platform-behavior isolation, mechanism selection,
-semantic fidelity, and typed unresolved outcomes moved to the
-[Cross-Platform topic](topics/cross-platform.md#platform-support-contract).
-Language-specific mechanisms are selected through the
-[Standards Router](STANDARDS-ROUTER.md).
+This former standards entrypoint is non-normative navigation. This file owns no
+rule, applicability decision, target, mechanism, default, or example. It owns
+no fallback authority.
 
----
+If a route is missing or inapplicable, return the Router's typed diagnostic
+instead of using prior wording from this file.
 
-## File System Conventions
+## Canonical Platform Routes
 
-Canonical path construction, display/lexical/canonical identity, comparison,
-alias, space, and filesystem-family verification policy moved to
-[Cross-Platform](topics/cross-platform.md#filesystem-paths). Untrusted
-filesystem authorization additionally follows
-[Security containment](topics/security.md#filesystem-containment).
+- [Standards Router](STANDARDS-ROUTER.md)
+- [Platform Support Contract](topics/cross-platform.md#platform-support-contract)
+- [Filesystem Paths](topics/cross-platform.md#filesystem-paths)
+- [Filesystem Containment](topics/security.md#filesystem-containment)
+- [Native Artifact Loading](topics/cross-platform.md#native-artifact-loading)
 
----
+## Release And Verification Routes
 
-## Native Library Rules
-
-Native artifact loading is governed by the canonical
-[Cross-Platform loading contract](topics/cross-platform.md#native-artifact-loading).
-
-### Loading Strategy
-
-See the
-[Cross-Platform loading contract](topics/cross-platform.md#native-artifact-loading).
-
-### Library Naming
-
-Native artifact identity is governed by the canonical
-[Release artifact plan](workflows/release.md#artifact-plan).
-
-### Installation Documentation
-
-Native artifact acquisition, installation, and loading information is governed
-by the canonical [Release artifact plan](workflows/release.md#artifact-plan).
-
----
-
-## CI Matrix
-
-Platform evidence coverage is governed by the canonical
-[Verification workflow](workflows/verification.md#platform-evidence-coverage).
-
-### When to Build
-
-Evidence scheduling is governed by the canonical
-[Verification workflow](workflows/verification.md#platform-evidence-coverage).
+- [Release Artifact Plan](workflows/release.md#artifact-plan)
+- [Platform Evidence Coverage](workflows/verification.md#platform-evidence-coverage)

@@ -10041,3 +10041,43 @@ non-overlapping checker repairs may prepare concurrently.
 
 **Next slice:** resolve `F085`, then close Cross-Platform in manifest order
 without preserving transitional source shape.
+
+## Milestone 7.4c3.7 Cross-Platform Source Closure
+
+**Outcome:** Accepted through delegated verification-engine package `M5-CP6`.
+
+`CROSS-PLATFORM-STANDARDS.md` is now concise non-normative navigation with one
+title, two route headings, and seven canonical routes. Its corpus row is
+`derived`; the generic source-index aggregate verifies 20 frozen identifiers,
+all exact dispositions, route resolution, canonical owner, Router exclusion,
+line bound, and source-wide former-authority prohibitions.
+
+The delegated M5 train replaced all five heading-dependent semantic checkers
+with owner-local declarative suites before closure. Temporary M5-CP0 and its
+four dependency edges are now absent. Native Loading, Native Release, Platform
+Evidence, and Platform Target are independent roots; Rust Target retains only
+its true Platform Target specialization dependency.
+
+**No-fallback result:** no transitional heading, old source prose, replacement
+prerequisite, Bash bridge, source exception, compatibility schema, alternate
+route, duplicated semantic assertion, fixed default, permissive index wording,
+or prior-source fallback remains.
+
+**Bounded write set:** former source, corpus row, isolated source-closure
+fixtures, registry and temporary suite retirement, package authority, F085,
+generated graph, parent/child plans and ledgers, child issue/report records.
+Canonical policy, semantic fixtures, dispositions, owner map, Router, source
+manifest, generic engine/aggregate, preparation inventory, README, engine code,
+configuration, and lockfiles remain unchanged.
+
+**Verification:** the generic aggregate passed seven source closures, with
+Cross-Platform proving seven routes and 20 frozen IDs. All five focused owner
+suites, all 45 registered suites, 42 engine tests, Python compilation, package
+authority, exact M5-CP0 absence, both plan checks, lifecycle fixtures, all five
+surviving source readers, graph freshness at 230 Bash verifiers / 235 nodes /
+989 edges / 231 components, diff integrity, and all 230 mixed entrypoints
+passed.
+
+**Next slice:** continue delegated engine Milestone 6 from a fresh
+dependency-closure audit, while parent source-manifest order remains at source
+8 until the delegated wave boundary is accepted.
