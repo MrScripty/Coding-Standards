@@ -802,10 +802,10 @@ fixed-section, placeholder, and per-change README obligations.
 applicability decisions, exact disposition of `STD-0531` through `STD-0540`,
 canonical workflow metadata and routing, and the optional-reference boundary.
 
-`verify-release-reference-closure.sh` checks exact disposition of `STD-0541`
-and `STD-0542`, validates the non-normative release-recipe owner and workflow
-route, and rejects normative or executable guidance in the legacy release
-index.
+The registered `release-reference-closure` suite checks exact disposition of
+`STD-0541` and `STD-0542`, validates the non-normative release-recipe owner
+and workflow route, and rejects any byte-level change that would restore policy
+or executable guidance in the legacy release index.
 
 `verify-documentation-changelog-closure.sh` checks exact disposition of
 `STD-0421` through `STD-0436`, canonical release ownership of retained

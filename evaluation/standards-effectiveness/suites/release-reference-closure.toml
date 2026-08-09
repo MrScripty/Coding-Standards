@@ -1,0 +1,79 @@
+schema_version = 1
+id = "release-reference-closure"
+owner = "reference.recipes.releases"
+description = "Exact Release Recipe ownership, metadata closure, legacy dispositions, and migration-index bytes without helper execution or fallback parsing."
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0541", "RELEASE-STANDARDS.md", "110", "3", "workflow", "split", "Automation"],
+  ["STD-0542", "RELEASE-STANDARDS.md", "116", "1", "workflow", "split", "cliff.toml (minimal)"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0541", "STD-0542"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0541", "RELEASE-STANDARDS.md", "reference/recipes/releases.md", "move", "non-normative changelog automation example"],
+  ["STD-0542", "RELEASE-STANDARDS.md", "reference/recipes/releases.md", "move", "non-normative git-cliff configuration"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0541", "STD-0542"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "workflows/release.md",
+  "reference/recipes/releases.md",
+]
+
+[[checks]]
+id = "recipe-owner"
+type = "text"
+path = "reference/recipes/releases.md"
+required = ["- Level: `REFERENCE`", "does not require git-cliff"]
+prohibited = []
+
+[[checks]]
+id = "workflow-route"
+type = "text"
+path = "workflows/release.md"
+required = ["../reference/recipes/releases.md"]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "exact_text"
+path = "RELEASE-STANDARDS.md"
+expected = """# Release Standards
+
+> Migration index. [Release Workflow](workflows/release.md) is the canonical
+> policy owner. Optional tool examples live in the non-normative
+> [Release Recipe](reference/recipes/releases.md).
+
+This file remains only for existing inbound links while language and profile
+migration continues. It defines no release policy or tool requirement.
+"""

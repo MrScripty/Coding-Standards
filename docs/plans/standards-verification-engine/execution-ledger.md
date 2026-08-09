@@ -1720,3 +1720,21 @@
   The complete mixed checkpoint passed all 188 surviving Bash entrypoints.
 - Next slice: verify admission, then implement the exact package without a
   wrapper, compatibility path, command action, fallback, or weaker assertion.
+
+## 2026-08-09 - M6-K2 Release Reference Acceptance
+
+- Added and registered one Release Recipe-owned declarative suite with exact
+  frozen inventory and disposition projections, direct metadata validation,
+  canonical recipe/workflow evidence, and byte-exact legacy-index authority.
+- Deleted `verify-release-reference-closure.sh`; no wrapper, alias,
+  compatibility path, command action, helper call, or fallback remains.
+- Accepted package M6-K2 and its two historical helper edges. The shared helper
+  and all other consumers remain unchanged and independently owned.
+- Verification passed the focused six-check suite, package and edge authority,
+  all 89 declarative suites, both plan checks, README route, removed-path proof,
+  diff integrity, graph freshness at 187 Bash verifiers / 192 nodes / 907 edges
+  / 188 components, and all 187 mixed entrypoints.
+- No canonical policy source, frozen inventory, disposition, fixture, helper,
+  engine file, or unrelated consumer changed. Fifty-one metadata-helper
+  consumers remain for later owner-coherent packages.
+- Next slice is a read-only graph audit before another package is admitted.

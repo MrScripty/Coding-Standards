@@ -1265,3 +1265,16 @@ inventory, dispositions, helper, other consumers, engine, and fixtures remain
 read-only. The implementation package adds one suite and registry route,
 replaces the README route, deletes only the checker, and updates required
 serial lifecycle and graph artifacts.
+
+### Accepted M6-K2 Release Reference Closure
+
+The registered replacement has six checks: exact inventory and disposition
+projections, one direct metadata graph, recipe and workflow text evidence, and
+the complete legacy index bytes. It calls no helper and introduces no fixture,
+engine branch, command action, parser exception, or fallback.
+
+The Bash checker and its two helper edges are absent. Package and edge
+authority, all 89 declarative suites, graph freshness at 187 Bash verifiers /
+192 nodes / 907 edges / 188 components, both plan checks, removed-path and
+README-route proof, diff integrity, and all 187 mixed entrypoints pass. The
+shared metadata helper remains independently owned for 51 consumers.

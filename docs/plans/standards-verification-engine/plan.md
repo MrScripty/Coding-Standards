@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-K2 release-reference admission
+**Current phase:** Milestone 6: post-M6-K2 package selection
 
-**Next slice:** Implement admitted `M6-K2` as one Release Recipe-owned
-declarative closure and delete only its checker after every declared gate
-passes.
+**Next slice:** Audit the regenerated graph for the smallest inbound-safe,
+owner-coherent package among the 51 remaining metadata-helper consumers; do
+not admit or implement another package before its behavior and write set are
+frozen.
 
 **Acceptance status:** `pending`
 
@@ -2518,7 +2519,7 @@ consumer of `check-metadata.sh`.
 
 ##### M6-K2: Release Reference Closure
 
-**Package status:** `Admitted`
+**Package status:** `Accepted`
 
 The post-kernel graph has 52 remaining metadata-helper consumers. Twenty have
 zero executable inbound callers. `verify-release-reference-closure.sh` is the
@@ -2565,6 +2566,21 @@ current index; the two frozen identifiers or dispositions do not match their
 accepted source ownership; a canonical source must change; another executable
 or contract inbound edge exists; or existing primitives cannot preserve one of
 the checker's observable claims without weakening it.
+
+**Implementation result:** the registered `release-reference-closure` suite
+uses six side-effect-free checks for exact frozen inventory and dispositions,
+the complete direct metadata graph, canonical recipe and workflow evidence,
+and the byte-exact legacy Release index. It does not execute the retained
+metadata helper. The Bash checker is deleted, both historical helper edges are
+accepted and absent, and package authority records one canonical declarative
+replacement without a wrapper, alias, compatibility path, or fallback.
+
+**Acceptance evidence:** the focused six-check suite, package and edge
+authority, all 89 declarative suites, graph freshness at 187 Bash verifiers /
+192 nodes / 907 edges / 188 components, both plan checks, README route,
+removed-path proof, diff integrity, and all 187 mixed entrypoints pass.
+Canonical sources, frozen inventory and dispositions, helper, engine, fixtures,
+and the other 51 helper consumers remained unchanged.
 
 **Tasks:**
 

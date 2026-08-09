@@ -439,3 +439,8 @@ requires = ["verification-ownership"]
 id = "metadata-fixtures"
 path = "evaluation/standards-effectiveness/suites/metadata-fixtures.toml"
 requires = []
+
+[[suites]]
+id = "release-reference-closure"
+path = "evaluation/standards-effectiveness/suites/release-reference-closure.toml"
+requires = []

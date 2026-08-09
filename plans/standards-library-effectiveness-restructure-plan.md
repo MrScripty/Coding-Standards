@@ -12,10 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, and M6-EDGE-FREE are accepted; exact typed
 executable-edge semantics govern further checker deletion.
 
-**Next slice:** implement the delegated verification engine's admitted M6-K2
-Release Reference Closure package and delete only its checker after focused,
-edge, graph, plan, README-route, removed-path, and complete mixed acceptance.
-M6-K1 and VE036 remain accepted.
+**Next slice:** audit the delegated verification engine's regenerated graph for
+the smallest inbound-safe, owner-coherent package among the 51 remaining
+metadata-helper consumers. M6-K2, M6-K1, and VE036 are accepted; no further
+package is admitted before its behavior and exact write set are frozen.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
