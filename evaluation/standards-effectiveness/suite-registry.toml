@@ -384,3 +384,53 @@ requires = []
 id = "resilience-failure-boundaries"
 path = "evaluation/standards-effectiveness/suites/resilience-failure-boundaries.toml"
 requires = []
+
+[[suites]]
+id = "contract-planning-boundary"
+path = "evaluation/standards-effectiveness/suites/contract-planning-boundary.toml"
+requires = []
+
+[[suites]]
+id = "milestone-7-row-29-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-29-decomposition.toml"
+requires = ["contract-planning-boundary"]
+
+[[suites]]
+id = "contract-artifact-selection"
+path = "evaluation/standards-effectiveness/suites/contract-artifact-selection.toml"
+requires = []
+
+[[suites]]
+id = "contract-semantic-preservation"
+path = "evaluation/standards-effectiveness/suites/contract-semantic-preservation.toml"
+requires = []
+
+[[suites]]
+id = "milestone-7-row-30-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-30-decomposition.toml"
+requires = ["contract-artifact-selection", "contract-semantic-preservation"]
+
+[[suites]]
+id = "diagnostics-owner-contract"
+path = "evaluation/standards-effectiveness/suites/diagnostics-owner-contract.toml"
+requires = []
+
+[[suites]]
+id = "diagnostics-activity-context"
+path = "evaluation/standards-effectiveness/suites/diagnostics-activity-context.toml"
+requires = []
+
+[[suites]]
+id = "milestone-7-row-31-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-31-decomposition.toml"
+requires = ["diagnostics-owner-contract", "diagnostics-activity-context"]
+
+[[suites]]
+id = "verification-ownership"
+path = "evaluation/standards-effectiveness/suites/verification-ownership.toml"
+requires = []
+
+[[suites]]
+id = "gui-smoke-evidence"
+path = "evaluation/standards-effectiveness/suites/gui-smoke-evidence.toml"
+requires = ["verification-ownership"]

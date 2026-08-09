@@ -1,0 +1,136 @@
+schema_version = 1
+id = "gui-smoke-evidence"
+owner = "workflow.verification"
+description = "GUI smoke evidence selection from explicit claim, environment, execution mode, capability, lifecycle, and assertion facts without weakened-runtime or startup-only fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/verification/gui-smoke-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+claim = ["release-artifact", "user-workflow", "missing"]
+environment = ["representative", "required-real", "missing", "contradictory"]
+mode = ["automated", "manual", "missing"]
+capabilities = ["complete", "missing"]
+lifecycle = ["bounded", "premature"]
+assertions = ["passed", "failed", "startup-only"]
+fallback = [
+  "none",
+  "fixed-display",
+  "weaken-runtime",
+  "host-session",
+  "upgrade-evidence",
+  "alternate-environment",
+  "default-success",
+]
+expected = ["allow", "typed-invalid", "typed-unavailable", "acceptance-blocked"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "environment", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "claim", op = "eq", value = "missing" },
+  { field = "environment", op = "eq", value = "missing" },
+  { field = "mode", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "acceptance-blocked"
+[checks.rules.when]
+any = [
+  { field = "capabilities", op = "eq", value = "missing" },
+  { field = "lifecycle", op = "ne", value = "bounded" },
+  { field = "assertions", op = "ne", value = "passed" },
+]
+
+[[checks]]
+id = "decision-table-shape"
+type = "table"
+path = "evaluation/standards-effectiveness/fixtures/verification/gui-smoke-decisions.tsv"
+header = [
+  "case",
+  "claim",
+  "environment",
+  "mode",
+  "capabilities",
+  "lifecycle",
+  "assertions",
+  "fallback",
+  "expected",
+]
+row_count = 14
+non_empty = [
+  "case",
+  "claim",
+  "environment",
+  "mode",
+  "capabilities",
+  "lifecycle",
+  "assertions",
+  "fallback",
+  "expected",
+]
+unique = [["case"]]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "workflows/verification.md"
+required = [
+  "### GUI Smoke Evidence",
+  "display or session capability",
+  "sandbox policy",
+  "software rendering, sandbox flags",
+  "state isolation",
+  "bounded process-lifecycle behavior",
+  "verification-only procedure separate from normal interactive startup",
+  "Verification owns its evidence kind",
+  "runner behavior, missing required capability",
+  "does not fall back to startup-only evidence",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-removal"
+type = "text"
+path = "LAUNCHER-STANDARDS.md"
+required = []
+prohibited = [
+  "## GUI CI Smoke Requirements",
+  "xvfb",
+  "CI-like environment variables",
+]
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [["STD-0495", "LAUNCHER-STANDARDS.md", "workflows/verification.md", "refine"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0495"
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = [
+  "`7.4b8aw` (`Accepted`)",
+  "`7.4b8ax` (`Accepted`)",
+  "`7.4b8ay` (`Accepted`)",
+  "`7.4b8az` (`Accepted`)",
+]
+prohibited = []

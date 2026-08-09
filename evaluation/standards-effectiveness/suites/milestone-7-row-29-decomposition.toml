@@ -1,0 +1,95 @@
+schema_version = 1
+id = "milestone-7-row-29-decomposition"
+owner = "migration.parent-plan"
+description = "Accepted Row 29 Contracts-owned index decomposition with exact assignment, ownership, lineage, and plan state."
+
+[[checks]]
+id = "execution-decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+[[checks.projections]]
+columns = ["ids"]
+order = "lexical"
+expected = [["STD-0046"], ["STD-0047"], ["STD-0048"], ["STD-0049"], ["STD-0050"]]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "29"
+[checks.projections.split]
+field = "ids"
+delimiter = ","
+[[checks.projections]]
+columns = ["child_order"]
+order = "source"
+expected = [["1"]]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "29"
+
+[[checks]]
+id = "owner-validation"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-row-29-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+row_count = 5
+[checks.domains]
+owner = ["topics/contracts.md"]
+disposition = ["index"]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [["STD-0046"], ["STD-0047"], ["STD-0048"], ["STD-0049"], ["STD-0050"]]
+
+[[checks]]
+id = "decomposition-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-29-decomposition.md"
+required = [
+  "## Owner Contract",
+  "sole normative owner",
+  "freeze coordinates concurrent work",
+  "## Exact Dispositions",
+  "`STD-0046` through `STD-0050`",
+  "`29.1`",
+  "## Decision Requirements",
+  "universal append-only evolution",
+  "## Re-plan Triggers",
+]
+prohibited = []
+
+[[checks]]
+id = "execution-train-owner"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+[[checks.projections]]
+columns = ["owner"]
+order = "source"
+expected = [["topics/contracts.md"]]
+[checks.projections.where]
+field = "order"
+op = "eq"
+value = "29"
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b19a` (`Accepted`)", "`7.4b19b` (`Accepted`)", "`7.4b20a` (`Accepted`)"]
+prohibited = []
+
+[[checks]]
+id = "disposition-coverage"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [["STD-0046"], ["STD-0047"], ["STD-0048"], ["STD-0049"], ["STD-0050"]]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0046", "STD-0047", "STD-0048", "STD-0049", "STD-0050"]

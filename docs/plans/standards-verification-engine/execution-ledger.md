@@ -1528,3 +1528,35 @@
   and all 199 mixed entrypoints.
 - Next slice: prepare the four disjoint suite closures concurrently, integrate
   registry and lifecycle authority serially, and delete all ten Bash paths.
+
+## 2026-08-09 - Milestone 6 Wave 6 Accepted
+
+- Prepared four disjoint Contracts, Diagnostics, and Verification closures
+  concurrently and integrated all shared registry, lifecycle, README,
+  generated, and plan authority serially.
+- Registered ten declarative suites. Six former same-owner checker calls are
+  now exact `suite-requires` relationships; execution train, Launcher
+  population, and row 14 remain independent lifecycle gates.
+- Replaced both README checker routes and removed the Bash-only Diagnostics
+  row-35 identity. Row-35 dependency/direct-route counts are 25/23;
+  transitive/computed counts remain 1/1 and consumers remain 33.
+- Deleted all ten Bash checkers and accepted all ten package rows plus 24 edge
+  rows without wrappers, aliases, bridges, compatibility schemas, fabricated
+  edges, inferred outcomes, or weaker evidence.
+- Recorded VE032: two duplicate-heading prohibitions are conservatively
+  stricter because the generic text primitive rejects the exact literals
+  anywhere rather than only at line start. No special regex primitive was
+  added.
+- Focused validation rejected and exposed a temporary duplicate package-state
+  domain caused by the mechanical state transition. The accepted domain is
+  exactly `admitted | accepted | blocked`.
+- Final plan review found the implemented and verified Wave 3 admission still
+  labeled `Active`. Corrected that stale historical status to `Accepted`
+  and recorded VE033; no Wave 3 policy, suite, fixture, or lifecycle authority
+  changed.
+- All 12 focused replacement/authority suites, 62 engine tests, 87
+  declarative suites, row-35 lifecycle, graph freshness, both plan checks,
+  and diff integrity passed. The graph is 189 Bash verifiers / 194 nodes /
+  910 edges / 190 components; all 189 mixed entrypoints passed.
+- Next slice: audit and admit the strict M6-K1 metadata-graph primitive before
+  changing shared engine source or migrating metadata consumers.

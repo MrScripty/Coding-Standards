@@ -1,0 +1,103 @@
+schema_version = 1
+id = "milestone-7-row-31-decomposition"
+owner = "migration.parent-plan"
+description = "Accepted Milestone 7 row 31 decomposition with exact Diagnostics children, owner validation, execution ownership, dispositions, and plan lineage."
+
+[[checks]]
+id = "execution-decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+non_empty = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+unique = [["baseline_order", "child_order"]]
+[[checks.projections]]
+columns = ["child_order"]
+order = "source"
+expected = [["1"], ["2"]]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "31"
+[[checks.projections]]
+columns = ["ids"]
+order = "lexical"
+expected = [["STD-0089"], ["STD-0090"], ["STD-0091"], ["STD-0092"]]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "31"
+[checks.projections.split]
+field = "ids"
+delimiter = ","
+
+[[checks]]
+id = "owner-validation"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-row-31-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+row_count = 4
+non_empty = ["id", "owner", "disposition", "rationale"]
+unique = [["id"]]
+[checks.domains]
+owner = ["topics/diagnostics.md"]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [["STD-0089"], ["STD-0090"], ["STD-0091"], ["STD-0092"]]
+
+[[checks]]
+id = "decomposition-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-31-decomposition.md"
+required = [
+  "## Owner Contract",
+  "Contracts owns typed outcome meaning",
+  "does not mandate logging",
+  "## Exact Ownership",
+  "`31.1`",
+  "`31.2`",
+  "## Typed Outcomes And No Fallback",
+  "## Re-plan Triggers",
+]
+prohibited = []
+
+[[checks]]
+id = "execution-train-owner"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+[[checks.projections]]
+columns = ["owner"]
+order = "source"
+expected = [["topics/diagnostics.md"]]
+[checks.projections.where]
+field = "order"
+op = "eq"
+value = "31"
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = [
+  "`7.4b21a` (`Accepted`)",
+  "`7.4b21b` (`Accepted`)",
+  "`7.4b21c` (`Accepted`)",
+  "`7.4b22a` (`Accepted`)",
+]
+prohibited = []
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "lexical"
+expected = [["STD-0089"], ["STD-0090"], ["STD-0091"], ["STD-0092"]]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0089", "STD-0090", "STD-0091", "STD-0092"]

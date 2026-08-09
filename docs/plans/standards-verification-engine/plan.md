@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: Wave 6 connected-package implementation
+**Current phase:** Milestone 6: metadata-kernel recovery planning
 
-**Next slice:** Implement the ten admitted Contracts, Diagnostics, and
-Verification suites, replace connected checker calls with six real suite
-dependencies, reconcile README and row-35 identities, and delete all ten Bash
-checkers atomically.
+**Next slice:** Audit the exact metadata grammar, fixture corpus, dependency
+graph, and 52 semantic consumers; then freeze and admit the smallest strict
+`M6-K1` metadata-graph primitive package before changing engine source.
 
 **Acceptance status:** `pending`
 
@@ -2075,7 +2074,7 @@ bridge, or live deleted-path reference remains; one complete wave gate passes.
 
 ##### Wave 3 Admission: Six Independent Owners
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Packages:** `M6-W3-CONTRACT-BOUNDARY`, `M6-W3-CORE-CONSTANTS`,
 `M6-W3-DISABLED-BEHAVIOR`, `M6-W3-LICENSING`, `M6-W3-PERFORMANCE`, and
@@ -2293,7 +2292,7 @@ passed; and the complete mixed checkpoint passed all 199 entrypoints.
 
 ##### Wave 6 Admission: Connected Contracts, Diagnostics, And Verification
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Packages:** ten checker packages form four owner-coherent closures: Contracts
 planning boundary plus row 29; Contracts artifact selection and semantic
@@ -2339,6 +2338,38 @@ one complete mixed checkpoint after all ten Bash paths are absent.
 all 77 declarative suites, graph freshness at 199 Bash verifiers / 204 nodes /
 965 edges / 200 components, both plan checks, diff integrity, and all 199 mixed
 entrypoints pass before implementation.
+
+**Implementation:** four disjoint owner closures produced ten registered
+declarative suites. Row 29 requires Contract Planning Boundary; row 30 requires
+Contract Artifact Selection and Contract Semantic Preservation; row 31
+requires Diagnostics Owner Contract and Diagnostics Activity Context; and GUI
+Smoke Evidence requires Verification Ownership. All six relationships are
+real registry dependencies, while execution train, Launcher population, and
+row 14 remain independently registered lifecycle gates.
+
+The two README routes now name suite identities. The Bash-only row-35
+Diagnostics identity is removed, with dependency/direct-route counts accepted
+at 25/23 and transitive/computed/consumer counts preserved at 1/1/33. All ten
+Bash paths are absent; package and edge state transitioned atomically to
+`accepted`; no wrapper, alias, bridge, compatibility schema, or alternate
+execution path remains.
+
+**Deviation:** the generic text primitive rejects the two former
+Contracts duplicate-heading literals anywhere, while the deleted Bash checks
+anchored them at line start. This conservative check cannot make invalid
+duplicate authority valid and avoids a policy-specific regex primitive. It is
+recorded as VE032. A bulk state edit briefly duplicated the package
+state-domain value; focused typed validation rejected it before acceptance,
+and the domain remains exactly `admitted | accepted | blocked`. Final plan
+review also found Wave 3 still labeled `Active` despite its accepted
+implementation and evidence; VE033 records the bookkeeping correction to
+`Accepted`.
+
+**Verification:** all 12 focused replacement/authority suites, all 62 engine
+tests, all 87 declarative suites, row-35 lifecycle, graph freshness, both plan
+checks, and diff integrity passed. The regenerated graph contains 189 Bash
+verifiers / 194 nodes / 910 edges / 190 components. The complete mixed
+checkpoint passed all 189 surviving entrypoints.
 
 **Tasks:**
 

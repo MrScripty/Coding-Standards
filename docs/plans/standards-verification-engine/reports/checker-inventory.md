@@ -1192,3 +1192,27 @@ while preserving transitive/computed counts at 1/1 and consumers at 33.
 Admission verification passed package and edge authority, all 62 engine tests,
 all 77 suites, graph freshness at 199 Bash verifiers / 204 nodes / 965 edges /
 200 components, both plan checks, diff integrity, and all 199 mixed entrypoints.
+
+### Implemented Milestone 6 Wave 6
+
+Ten Contracts, Diagnostics, and Verification Bash checkers are now ten
+registered declarative suites. Six semantic caller relationships are explicit
+suite dependencies; six execution-train, Launcher-population, and row-14
+relationships remain independent lifecycle gates. The six semantic leaves
+remain explicitly edge-free.
+
+Both README routes now name canonical suite identities. The Bash-only
+Diagnostics row-35 identity is absent, and row-35 current counts are
+25 dependency rows, 23 direct routes, one transitive route, one computed
+route, and 33 consumers.
+
+All ten checker paths are deleted, all ten package rows and 24 edge rows are
+accepted, and no Bash wrapper or compatibility execution path remains. The
+generic text primitive conservatively rejects two duplicate-heading literals
+anywhere rather than only at line start; VE032 records that bounded
+strengthening.
+
+Focused verification passed all ten replacements plus package and edge
+authority, all 62 engine tests, and all 87 declarative suites. Graph freshness
+passed at 189 Bash verifiers / 194 nodes / 910 edges / 190 components. The
+complete mixed Wave 6 checkpoint passed all 189 surviving entrypoints.

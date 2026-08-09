@@ -1,0 +1,69 @@
+schema_version = 1
+id = "verification-ownership"
+owner = "workflow.verification"
+description = "Canonical verification ownership, routing, evidence boundaries, and removal of universal timing, taxonomy, and scheduling authority from legacy sources."
+
+[[checks]]
+id = "canonical-workflow-sections"
+type = "text"
+path = "workflows/verification.md"
+required = [
+  "\n## Acceptance Is A Set Of Claims\n",
+  "\n## Evidence Kinds\n",
+  "\n## Environment Qualification\n",
+  "\n## Execution Mode\n",
+  "\n## Quality Gates And Execution Location\n",
+  "\n## Smoke Checks\n",
+  "\n## Scheduling And Duration\n",
+  "Startup alone is usually",
+  "evidence and never substitutes",
+]
+prohibited = []
+
+[[checks]]
+id = "testing-route-and-legacy-removal"
+type = "text"
+path = "TESTING-STANDARDS.md"
+required = ["workflows/verification.md"]
+prohibited = [
+  "< 10ms",
+  "< 1s",
+  "< 30s",
+  "CI only",
+  "\n## Verification Layers\n",
+  "\n### Targets\n",
+]
+
+[[checks]]
+id = "tooling-route-and-legacy-removal"
+type = "text"
+path = "TOOLING-STANDARDS.md"
+required = ["workflows/verification.md"]
+prohibited = [
+  "| Tests | Affected only | Full suite |",
+  "| Gate | What it catches | Non-negotiable? |",
+]
+
+[[checks]]
+id = "launcher-route"
+type = "text"
+path = "LAUNCHER-STANDARDS.md"
+required = ["workflows/verification.md"]
+prohibited = []
+
+[[checks]]
+id = "release-route"
+type = "text"
+path = "RELEASE-STANDARDS.md"
+required = ["workflows/release.md"]
+prohibited = []
+
+[[checks]]
+id = "release-workflow-boundary"
+type = "text"
+path = "workflows/release.md"
+required = [
+  "(verification.md)",
+  "does not prove changed feature behavior",
+]
+prohibited = []

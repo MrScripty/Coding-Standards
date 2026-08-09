@@ -9,13 +9,13 @@
 **Current phase:** Cross-Platform source closure `7.4c3.7` and delegated
 verification-engine Milestone 5 are accepted. Seven of 27 former normative
 source entrypoints are derived. Verification-engine Milestone 6 Waves 1
-through 5 and M6-EDGE-1 are accepted; exact typed executable-edge semantics
-govern further checker deletion.
+through 6, M6-EDGE-1, and M6-EDGE-FREE are accepted; exact typed
+executable-edge semantics govern further checker deletion.
 
-**Next slice:** implement the delegated verification engine's ten admitted
-Contracts, Diagnostics, and Verification suites, replace six connected calls
-with suite dependencies, reconcile shared README/row-35 identities, and delete
-all ten Bash paths without fallback execution.
+**Next slice:** audit and admit the delegated verification engine's strict
+`M6-K1` metadata-graph primitive package, including exact grammar, fixture,
+dependency, cycle, canonical-owner, and consumer boundaries, before shared
+engine implementation begins.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

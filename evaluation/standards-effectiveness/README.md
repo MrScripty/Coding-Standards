@@ -189,8 +189,8 @@ missing evidence, and default success.
 13 action, lifecycle, state, mechanism, and outcome decisions, 18 exact
 dispositions, bounded legacy replacement, and handoff to GUI smoke acceptance.
 
-`fixtures/verification/gui-smoke-decisions.tsv` and
-`verify-gui-smoke-evidence.sh` validate GUI smoke claim, environment, mode,
+`fixtures/verification/gui-smoke-decisions.tsv` and the registered
+`gui-smoke-evidence` suite validate GUI smoke claim, environment, mode,
 capability, lifecycle, and assertion decisions, exact `STD-0495` refinement,
 legacy removal, and handoff to the Dependencies owner contract.
 
@@ -324,10 +324,11 @@ with `python3 tools/standards_verifier/verify.py --suite acceptance-claims`:
 - startup smoke cannot substitute for a user workflow; and
 - manual execution is not a higher evidence kind.
 
-`verify-verification-ownership.sh` checks that Verification remains the single
-acceptance owner while Testing, Tooling, Launcher, and Release retain only their
-test-design, scheduling, command, and shipping responsibilities. It rejects the
-legacy universal timing/CI taxonomy and smoke-as-feature substitution.
+The registered `verification-ownership` suite checks that Verification remains
+the single acceptance owner while Testing, Tooling, Launcher, and Release
+retain only their test-design, scheduling, command, and shipping
+responsibilities. It rejects the legacy universal timing/CI taxonomy and
+smoke-as-feature substitution.
 
 ## Contract Decision Fixtures
 

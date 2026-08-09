@@ -1,0 +1,82 @@
+schema_version = 1
+id = "contract-semantic-preservation"
+owner = "topic.contracts"
+description = "Producer-consumer semantic preservation with explicit destination authority, typed outcomes, and no inferred or silently dropped meaning."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/contracts/semantic-preservation-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+authority = ["contradictory", "known", "missing"]
+selected_semantics = ["constraint", "default", "discriminant", "label-identity", "none", "ordering", "shape", "shape-default-constraint"]
+consumer_action = ["infer", "omit", "preserve", "reuse-source", "transform"]
+destination = ["declared", "missing"]
+capability = ["supported", "unsupported"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "destination", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "authority", op = "eq", value = "contradictory" },
+  { field = "consumer_action", op = "eq", value = "infer" },
+  { all = [
+    { field = "consumer_action", op = "eq", value = "omit" },
+    { field = "selected_semantics", op = "ne", value = "none" },
+  ] },
+]
+
+[[checks]]
+id = "owner-policy"
+type = "text"
+path = "topics/contracts.md"
+required = [
+  "## Producer-Consumer Semantic Preservation",
+  "not only field names",
+  "new destination representation",
+  "destination contract authorizes that behavior",
+  "silently dropped selected meaning",
+  "Do not fall back to inferred defaults",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-route-and-authority"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = ["[Producer-Consumer Semantic Preservation](topics/contracts.md#producer-consumer-semantic-preservation)"]
+prohibited = [
+  "### Contract Semantics to Preserve",
+  "### Consumer Responsibilities",
+  "Treat the following as part of the contract unless documented otherwise",
+]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [["STD-0058"], ["STD-0059"], ["STD-0060"], ["STD-0061"], ["STD-0062"]]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0058", "STD-0059", "STD-0060", "STD-0061", "STD-0062"]

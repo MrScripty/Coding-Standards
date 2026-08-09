@@ -1,0 +1,94 @@
+schema_version = 1
+id = "diagnostics-activity-context"
+owner = "topic.diagnostics"
+description = "Selected causal activity context and asynchronous lifecycle propagation with one terminal outcome, bounded disclosure, typed diagnostics, and no logging, correlation, discard, or synchronous-wrapper fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/diagnostics/activity-context-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+workflow = ["cross-boundary", "single"]
+identity = ["generated", "missing", "not-required", "selected"]
+parent = ["contradictory", "missing", "not-required", "valid"]
+lifecycle = ["asynchronous", "synchronous", "synchronous-wrapper"]
+terminal = ["duplicate", "once"]
+context = ["bounded", "raw"]
+channel = ["supported", "unsupported"]
+fallback = ["correlation", "discard", "logging", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "parent", op = "eq", value = "contradictory" },
+  { field = "terminal", op = "eq", value = "duplicate" },
+  { field = "context", op = "eq", value = "raw" },
+  { field = "lifecycle", op = "eq", value = "synchronous-wrapper" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "channel"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [
+  { field = "workflow", op = "eq", value = "cross-boundary" },
+  { field = "identity", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "topics/diagnostics.md"
+required = [
+  "An activity context contains only",
+  "need correlation merely to satisfy a tracing shape",
+  "including asynchronous completion",
+  "that context remains valid through another lifecycle",
+]
+prohibited = []
+
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/diagnostics.md"
+required = [
+  "## Illustrative TypeScript Logger Adapter",
+  "This example is not valid for asynchronous completion",
+  "must not log raw",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-authority-removed"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = []
+prohibited = [
+  "Track operations across layers using correlation IDs",
+  "interface ActivityContext",
+  "logger.debug(`Starting",
+]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "lexical"
+expected = [["STD-0090"], ["STD-0091"], ["STD-0092"]]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0090", "STD-0091", "STD-0092"]
