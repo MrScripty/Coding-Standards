@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3: Coupled Graph Boundary Replan
+**Current phase:** Milestone 3: Coupled Graph Manifest
 
-**Next slice:** Replan the 237 coupled Bash checkers from exact executable,
-frozen-contract, verifier, and helper dependency evidence. Do not remove the
-temporary launcher before the complete-suite convention is replaced.
+**Next slice:** Implement `M3-G1`, the exact typed checker dependency graph and
+dependency-wave manifest. Do not migrate or remove a coupled checker until its
+component, inbound identities, helper family, owner, risk, and write set are
+admitted from that evidence.
 
 **Acceptance status:** `pending`
 
@@ -103,6 +104,7 @@ disposition, no-fallback, and evidence contracts.
 | Migrate by semantic family, deleting each replaced checker in the accepting slice. | This plan | [Architecture report](reports/architecture.md#migration-sequence) | Indefinite dual execution |
 | Retire all Bash verifiers, verification helpers, and the migration launcher; represent exceptional algorithms only as registered typed Python checks. | This plan | [Architecture report](reports/architecture.md#extension-rule) | Bounded exceptional Bash adapters |
 | Add bounded table, relation, and acceptance-claim checks from measured recurring contracts; do not add query strings, arbitrary transforms, or policy-specific callbacks. | This plan | 219 remaining scripts use AWK, 198 validate row shape, 165 collect projections, 83 count rows, 58 declare expected projections, and 109 compare lineage/owner/disposition data. | Per-script AWK/mapfile/sort pipelines |
+| Derive coupled-checker migration order from one exact typed graph manifest with explicit unresolved targets, strongly connected components, condensation dependencies, and separately reviewed owner/risk/write-set classifications. | Integration owner | [Checker inventory report](reports/checker-inventory.md#coupled-graph-resolution) | Leaf-only selection and filename-adjacent batching |
 | Keep the parent standards restructure plan authoritative for normative migration and this child plan authoritative for checker-engine architecture and migration. | Integration owner | Parent-plan delegation | `7.4c3hcp` bespoke Cross-Platform repair assumption |
 
 ## Simplicity And Ownership Review
@@ -588,7 +590,7 @@ state, compatibility path, or weaker projection was introduced.
 
 #### Coupled Graph Replan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 After `M3-S2`, the only dependency-free Bash entrypoint is the temporary
 `verify-declarative-suites.sh` launcher. Of 238 remaining Bash entrypoints, 138
@@ -597,6 +599,79 @@ have both, 166 invoke verifiers, and 84 invoke helpers. The 237 non-launcher
 entries therefore require dependency-ordered shared-contract migration or
 authorized frozen-reference reconciliation; they cannot be admitted as leaf
 packages under the completed sequence.
+
+#### Coupled Graph Resolution
+
+The selected resolution is a graph-manifest, helper-first dependency train.
+Structural generation and semantic migration authority remain separate:
+
+- `checker-dependency-nodes.tsv` records every current Bash verifier and every
+  named helper target, whether each target resolves, structural degree, and a
+  deterministic strongly connected component identity.
+- `checker-dependency-edges.tsv` records one exact typed edge per executable
+  reference, frozen-contract reference, verifier invocation, or helper
+  invocation. Documentation references remain inventory evidence but do not
+  constrain migration order.
+- `checker-dependency-components.tsv` records component membership,
+  condensation dependencies, inbound component references, cyclic state, and
+  deterministic topological wave. A cycle is evidence to migrate one coherent
+  component or re-plan its ownership; it is not broken by wrappers.
+- `checker-migration-packages.tsv` is reviewed planning authority rather than
+  generated inference. It assigns admitted components to canonical owner,
+  risk, semantic outcome, exact write set, prerequisite packages, verification
+  contract, and lifecycle state.
+
+Generation must fail with a typed diagnostic for an ambiguous helper basename,
+an invocation target absent from the repository, a malformed generated
+artifact, or stale output. It must not infer canonical owner, semantic risk,
+package cohesion, or migration disposition from names, paths, or graph shape.
+
+Helper-family migration proceeds in ascending shared-contract blast radius:
+
+1. decision-table consumers;
+2. source-index closure and decision-traceability consumers;
+3. plan-structure consumers;
+4. metadata graph consumers;
+5. verifier hubs and frozen historical identity packages in condensation order.
+
+Each accepted package removes the complete replaced Bash authority and its
+direct invocation edges. Shared registry, engine, generated graph artifacts,
+package manifest, and plans remain serial. Disjoint package analysis and suite
+construction may proceed concurrently only after package rows are accepted.
+The temporary launcher remains until `M6-L1` replaces the complete-suite
+convention.
+
+#### Package M3-G1: Exact Checker Dependency Graph
+
+**Status:** `Active`
+
+**Owner:** verification-engine migration mechanics
+
+**Allowed write set:** inventory/graph generator modules and focused tests,
+generated structure and dependency graph TSVs, the temporary launcher's
+freshness gate, engine documentation, this plan, ledger, issues, checker
+inventory report, and parent-plan delegated state.
+
+**Observable outcome:** one deterministic command writes or verifies an exact
+repository-contained graph whose typed nodes, edges, components, unresolved
+targets, and condensation waves agree with all current checker sources and
+frozen references.
+
+**No-fallback rule:** do not treat missing targets as leaves, collapse edge
+types, infer semantic ownership, retain stale output, execute graph nodes, or
+use a Bash graph adapter. The existing structure inventory remains generated
+by the same Python authority and may be replaced by a coherent combined
+generator only if its freshness contract is preserved atomically.
+
+**Acceptance gate:** positive, cycle, unresolved-target, ambiguous-target,
+stale-output, and deterministic-order tests pass; generated artifacts are
+fresh; current graph counts are reconciled; direct engine and temporary
+launcher runs pass; complete mixed verification runs because generator and
+launcher contracts are shared.
+
+**Re-plan condition:** stop before helper migration if exact components cross
+multiple semantic owners, frozen contracts cannot be assigned to one owning
+package, or helper behavior needs an unbounded expression/command mechanism.
 
 ### Milestone 4: Semantic Decision Migration
 

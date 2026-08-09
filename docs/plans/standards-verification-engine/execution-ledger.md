@@ -475,3 +475,22 @@
   migration or authorized frozen-reference reconciliation.
 - Do not remove the launcher before replacing the complete-suite convention.
   Next action is planning and graph classification, not a source slice.
+
+## 2026-08-08 - Coupled Graph Resolution Selected
+
+- Accepted a graph-manifest, helper-first dependency train for the 237 coupled
+  non-launcher checkers. Another leaf scan is not an admissible migration
+  strategy because every candidate carries executable, frozen-contract,
+  verifier, or helper coupling.
+- `M3-G1` will generate exact typed node, edge, component, and condensation-wave
+  evidence and report unresolved or ambiguous targets with typed diagnostics.
+  It will not infer owner, risk, semantic cohesion, or disposition.
+- A separate reviewed package manifest owns canonical owner, risk, outcome,
+  write set, prerequisites, verification, and lifecycle before implementation.
+- Frozen helper order is decision tables; source-index and traceability;
+  plan structure; metadata; then verifier hubs and historical identity
+  contracts in condensation order.
+- No-fallback result: no shell wrapper, missing-target leaf classification,
+  edge-type collapse, stale generated graph, inferred semantic owner, or early
+  launcher removal is authorized.
+- Next slice: implement and verify `M3-G1` without migrating a checker.

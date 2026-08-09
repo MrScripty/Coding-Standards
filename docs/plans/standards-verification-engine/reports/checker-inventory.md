@@ -334,3 +334,24 @@ coupled. Of all 238 entries, 138 have executable inbound references, 72 have
 frozen-contract references, 44 have both, 166 invoke verifiers, and 84 invoke
 helpers. Another implementation package requires dependency-ordered graph
 planning; deleting the launcher would violate the complete-suite transition.
+
+## Coupled Graph Resolution
+
+The accepted next mechanism is an exact typed dependency graph plus a reviewed
+migration-package manifest. Generated graph evidence owns only repository
+structure: verifier and helper nodes, executable and frozen-contract inbound
+references, verifier and helper invocations, strongly connected components,
+and condensation waves. It reports unresolved and ambiguous targets instead of
+treating them as absent dependencies.
+
+Semantic classification remains planning authority. Owner, risk, intended
+outcome, write set, prerequisites, verification, and lifecycle are reviewed in
+`checker-migration-packages.tsv`; none are inferred from graph shape or file
+names. This preserves exact structural automation without allowing migration
+mechanics to decide standards ownership.
+
+The admitted migration order is decision-table helpers, source-index and
+traceability helpers, plan-structure helpers, metadata helpers, then verifier
+hubs and frozen identity contracts in component order. Every package removes
+its complete old authority and direct invocation edges. The launcher remains
+until the complete-suite convention is replaced.

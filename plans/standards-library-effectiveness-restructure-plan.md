@@ -13,9 +13,9 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** replan the 237 coupled Bash checkers under the delegated engine
-plan. The temporary launcher remains until complete-suite convention
-replacement.
+**Next slice:** implement delegated engine package `M3-G1`, the exact typed
+checker dependency graph and reviewed dependency-wave manifest. The temporary
+launcher remains until complete-suite convention replacement.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2357,7 +2357,7 @@ all structural/routing fixtures pass.
          one suite preserving 18 children, 50 IDs, strict tables, split
          boundaries, reports, accepted markers, and owner files; reduce Bash
          inventory from 240 to 238.
-       - `7.4c3ve16` (`Active replan`): classify the 237 coupled non-launcher
+       - `7.4c3ve16` (`Accepted planning authority`): classify the 237 coupled non-launcher
          Bash entries by executable, frozen-contract, verifier, and helper
          edges before another source slice. Retain the sole dependency-free
          launcher until the complete-suite convention is replaced.
