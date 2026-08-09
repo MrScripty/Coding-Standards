@@ -151,6 +151,11 @@ path = "evaluation/standards-effectiveness/suites/language-binding-surface-contr
 requires = []
 
 [[suites]]
+id = "rust-binding-contract-discovery"
+path = "evaluation/standards-effectiveness/suites/rust-binding-contract-discovery.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

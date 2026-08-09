@@ -445,3 +445,16 @@ Evidence and Native Loading remain deferred to the Cross-Platform `F085`
 source-shape package; Binding Artifact Composition remains the next ordinary
 eligible candidate. This ordering uses semantic risk and prerequisites rather
 than line count alone.
+
+### Second Decision Consumer Migration
+
+Accepted package `M3-DT2` replaces Rust Binding Contract Discovery with a
+five-check declarative suite over its canonical 13-row decisions fixture. The
+72-line Bash checker, schema mirror, and observed-outcome mirror are deleted;
+the README projects the suite rather than an executable entrypoint.
+
+The current inventory is 236 Bash verifiers and five helpers. The generated
+graph contains 241 nodes, 1,031 typed edges, and 237 components. The migration
+removed one verifier, ten dependency/reference edges, and one component while
+preserving one exact disposition, canonical Rust profile and former-source
+evidence, accepted plan lineage, and every typed outcome.

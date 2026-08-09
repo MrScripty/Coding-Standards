@@ -619,3 +619,22 @@
   Cross-Platform scope shortcut is authorized.
 - Next slice: validate package authority and implement `M3-DT2` only after the
   admission commit is accepted.
+
+## 2026-08-08 - Package M3-DT2 Rust Binding Contract Discovery
+
+- Replaced the 72-line Bash checker with one registered five-check declarative
+  suite over the retained 13-row decisions fixture.
+- Preserved ordered no-discovery, typed-invalid, typed-unsupported,
+  typed-unavailable, and allow outcomes; exact Rust profile and former-source
+  evidence; one exact disposition; and both accepted parent markers.
+- Deleted the redundant schema and observed-outcome mirrors and reconciled the
+  README to the suite and retained decisions fixture.
+- Verification: the focused suite passed five checks; all 39 suites/181 checks,
+  37 engine tests, Python compilation, graph freshness at 236 Bash
+  verifiers/241 nodes/1,031 edges/237 components, removed operational-path
+  scanning, diff integrity, and all 236 mixed checker entrypoints passed.
+- No-fallback result: no wrapper, duplicate outcome authority, stale README,
+  universal or package version, alternate discovery, guessed compatibility, or
+  default-success path remains.
+- Next slice: review Binding Artifact Composition as the next ordinary
+  candidate.

@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 3: Decision Table Consumer Migration
 
-**Next slice:** Implement admitted package `M3-DT2`, replacing Rust Binding
-Contract Discovery with one declarative suite and reconciling its README
-projection while deleting the obsolete checker and redundant mirrors.
+**Next slice:** Review the post-`M3-DT2` graph and admit the next ordinary
+inbound-free decision consumer, with Binding Artifact Composition as the
+leading candidate and Cross-Platform consumers still reserved for `F085`.
 
 **Acceptance status:** `pending`
 
@@ -218,6 +218,8 @@ and plan records selected per slice.
   assertions from observed requirements.
 - [ ] Migrate coherent leaf packages and remove their scripts.
 - [x] Migrate `M3-DT1` Language Binding Surface Contract and remove its Bash
+  checker plus redundant schema and observed-outcome mirrors.
+- [x] Migrate `M3-DT2` Rust Binding Contract Discovery and remove its Bash
   checker plus redundant schema and observed-outcome mirrors.
 
 **Acceptance gate:** Inventory coverage is exact; each package's focused suites
@@ -817,6 +819,30 @@ nodes/1,041 edges/238 components, and all 237 mixed checker entrypoints passed.
 **No-fallback result:** no graph-derived ownership, Cross-Platform scope
 shortcut, omitted documentation, Bash wrapper, compatibility authority, or
 alternate discovery mechanism is admitted.
+
+#### Package M3-DT2: Rust Binding Contract Discovery
+
+**Status:** `Accepted`
+
+**Owner:** `profile.language.rust.language-bindings`
+
+**Observable outcome:** one registered five-check suite derives all 13 Rust
+discovery decisions from strict domains and ordered predicates, preserves the
+canonical Rust profile, former-source route/prohibitions, one exact
+disposition, and both accepted parent markers, and distinguishes no-discovery,
+invalid, unsupported, and unavailable outcomes.
+
+**Acceptance evidence:** the focused suite passed five checks; all 39
+declarative suites/181 checks, 37 engine tests, Python compilation, graph
+freshness at 236 Bash verifiers/241 nodes/1,031 edges/237 components, removed
+operational-path scanning, diff integrity, and all 236 mixed checker
+entrypoints passed.
+
+**No-fallback result:** the Bash checker and redundant schema/observed mirrors
+were deleted, the README now projects the registered suite and retained
+decisions fixture, and no wrapper, transitive checker call, universal version,
+package-version substitution, alternate discovery, or default-success path
+remains.
 
 ### Milestone 4: Semantic Decision Migration
 

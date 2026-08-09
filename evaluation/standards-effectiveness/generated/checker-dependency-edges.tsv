@@ -1,5 +1,4 @@
 edge_type	source	target
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-decision-traceability.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
@@ -86,7 +85,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-source-package
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-rust-no-std-closure.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-rust-release-evidence.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-rust-target-configuration.sh
-contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh
 executable_reference	evaluation/standards-effectiveness/verify-accessibility-evidence-closure.sh	evaluation/standards-effectiveness/verify-accessibility-media.sh
 executable_reference	evaluation/standards-effectiveness/verify-accessibility-focus-lifecycle.sh	evaluation/standards-effectiveness/verify-accessibility-interaction-semantics.sh
 executable_reference	evaluation/standards-effectiveness/verify-accessibility-interaction-semantics.sh	evaluation/standards-effectiveness/verify-accessibility-owner-contract.sh
@@ -452,10 +450,6 @@ executable_reference	evaluation/standards-effectiveness/verify-rust-binding-call
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-rust-binding-executor-delegation.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh	evaluation/standards-effectiveness/check-decision-table.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-core-adapter-testability.sh	evaluation/standards-effectiveness/check-decision-table.sh
@@ -628,7 +622,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-rust-async-cancellat
 helper_dependency	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/check-metadata.sh
-helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh	evaluation/standards-effectiveness/check-decision-table.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-core-adapter-testability.sh	evaluation/standards-effectiveness/check-decision-table.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	evaluation/standards-effectiveness/check-metadata.sh
@@ -950,9 +943,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-callb
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-rust-binding-executor-delegation.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-core-adapter-testability.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-core-adapter-testability.sh	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh

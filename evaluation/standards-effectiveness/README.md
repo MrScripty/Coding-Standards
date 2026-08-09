@@ -279,11 +279,11 @@ derived-state reconstruction, and typed outcomes. They prove seven exact
 dispositions and reject destructive rebuild, defaults, stale or cached reads,
 partial results, alternate backends, and silent continuation.
 
-`fixtures/rust/binding-contract-discovery-*.tsv` and
-`verify-rust-binding-contract-discovery.sh` adapt only a Contracts-selected
-identity, version, or capability mechanism. They reject universal version
-exports, package-version substitution, alternate or stale discovery, guessed
-compatibility, missing evidence, and default success.
+The registered `rust-binding-contract-discovery` suite evaluates
+`fixtures/rust/binding-contract-discovery-decisions.tsv` to adapt only a
+Contracts-selected identity, version, or capability mechanism. It rejects
+universal version exports, package-version substitution, alternate or stale
+discovery, guessed compatibility, missing evidence, and default success.
 
 ## Routed Vertical Slice
 

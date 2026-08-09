@@ -1,0 +1,81 @@
+schema_version = 1
+id = "rust-binding-contract-discovery"
+owner = "profile.language.rust.language-bindings"
+description = "Rust adaptation of contract-selected discovery without universal or alternate discovery defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-contract-discovery-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["required", "not-required", "missing", "contradictory"]
+mechanism = ["selected", "none", "alternate"]
+value = ["supported", "unsupported", "invalid", "unavailable", "not-applicable"]
+evidence = ["native-host", "missing", "not-required"]
+fallback = ["none", "universal-version", "package-version", "guess", "stale", "default-success"]
+expected = ["allow", "no-discovery", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "mechanism", op = "eq", value = "alternate" },
+  { field = "contract", op = "eq", value = "contradictory" },
+  { field = "value", op = "eq", value = "invalid" },
+]
+[[checks.rules]]
+outcome = "no-discovery"
+[checks.rules.when]
+all = [{ field = "contract", op = "eq", value = "not-required" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "value", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "contract", op = "eq", value = "missing" },
+  { field = "mechanism", op = "eq", value = "none" },
+  { field = "value", op = "eq", value = "unavailable" },
+  { field = "evidence", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "rust-profile"
+type = "text"
+path = "profiles/languages/rust/language-bindings.md"
+required = ["## Contract Discovery Adaptation", "only when the selected Contracts-owned", "exported operation, handshake field, package", "not a universal", "Return `invalid`", "`unsupported`", "`unavailable`", "universal `version()`", "alternate discovery", "default success"]
+prohibited = []
+
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+required = ["language-bindings.md#contract-discovery-adaptation"]
+prohibited = ["pub fn version()", "CARGO_PKG_VERSION"]
+
+[[checks]]
+id = "disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [["STD-0809", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine", "adapt only a contract-selected discovery or negotiation mechanism"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0809"
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8r` (`Accepted`)", "`7.4b8s` (`Accepted`)"]
+prohibited = []
