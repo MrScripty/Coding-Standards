@@ -1835,3 +1835,19 @@
 - No source, fixture, helper, engine, accepted dependency, or unrelated
   consumer changed. Forty-nine helper consumers remain; the M6-K-W1 mixed
   checkpoint remains deferred.
+
+## 2026-08-09 - M6-K5 Release Pipeline Acceptance
+
+- Added and registered the exact authenticated immutable handoff decision,
+  inventory/dispositions, metadata closure, canonical pipeline rules, and
+  removed provider defaults with the accepted byte-exact Release index
+  dependency.
+- Deleted `verify-release-pipeline-policy.sh` and accepted both historical
+  helper edges without a helper call, wrapper, alias, command, compatibility
+  route, or fallback.
+- Focused dependency closure, package/edge authority, all 92 declarative suites,
+  graph freshness at 184 Bash verifiers / 189 nodes / 907 edges / 185
+  components, both plan checks, route/removal/diff/read-only evidence pass.
+- No source, fixture, helper, engine, accepted dependency, or unrelated
+  consumer changed. Forty-eight helper consumers remain; the M6-K-W1 mixed
+  checkpoint remains deferred. Next slice is admitted M6-K6 Release Artifact.

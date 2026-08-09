@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-K4 through M6-K7 joint admission
+**Current phase:** Milestone 6: M6-K4 through M6-K7 release wave
 
-**Next slice:** Implement admitted M6-K5 Release Pipeline through the fast
-package gates; keep M6-K6 and M6-K7 admitted and read-only.
+**Next slice:** Implement admitted M6-K6 Release Artifact through the fast
+package gates; keep M6-K7 admitted and read-only.
 
 **Acceptance status:** `pending`
 
@@ -2677,7 +2677,7 @@ appears. The closing checkpoint validates the integrated deletions once.
 
 ##### M6-K4 Through M6-K7: Release Wave Remainder
 
-**Package status:** `M6-K4 Accepted; M6-K5 through M6-K7 Admitted`
+**Package status:** `M6-K4 and M6-K5 Accepted; M6-K6 and M6-K7 Admitted`
 
 After M6-K3, Maintenance, Pipeline, Artifact, and Publication remain separate
 acyclic one-node components with zero executable inbound callers, zero contract
@@ -2729,6 +2729,16 @@ Focused dependency closure, package/edge authority, all 91 declarative suites,
 graph freshness at 185 Bash verifiers / 190 nodes / 912 edges / 186 components,
 both plan checks, route/removal/diff/read-only evidence pass. The mixed
 checkpoint remains deferred to M6-K-W1 closure.
+
+**M6-K5 result:** the registered `release-pipeline-policy` suite preserves the
+six-row authenticated immutable handoff decision, nine exact IDs and
+dispositions, direct metadata closure, required-artifact failure behavior,
+least-privilege publication handoff, and removed provider trigger/matrix
+recipes, with the accepted byte-exact index dependency. The checker and both
+helper edges are absent. Focused dependency closure, package/edge authority,
+all 92 declarative suites, graph freshness at 184 Bash verifiers / 189 nodes /
+907 edges / 185 components, both plan checks, route/removal/diff/read-only
+evidence pass. The mixed checkpoint remains deferred to M6-K-W1 closure.
 
 **Tasks:**
 

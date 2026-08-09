@@ -1336,3 +1336,13 @@ The five-check direct suite plus accepted byte-exact index dependency preserves
 the full Maintenance behavior. The Bash checker and both helper edges are
 absent. All fast gates pass at 185 Bash verifiers / 190 nodes / 912 edges / 186
 components and 91 declarative suites; 49 helper consumers remain.
+
+### Accepted M6-K5 Release Pipeline
+
+The five-check direct suite plus accepted byte-exact index dependency preserves
+the authenticated immutable handoff decision, exact migration evidence, direct
+metadata closure, required-artifact failure behavior, least-privilege handoff,
+and removal of provider-specific triggers and target defaults. The Bash checker
+and both helper edges are absent. All fast gates pass at 184 Bash verifiers /
+189 nodes / 907 edges / 185 components and 92 declarative suites; 48 helper
+consumers remain.

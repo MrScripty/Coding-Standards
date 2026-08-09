@@ -1,0 +1,107 @@
+schema_version = 1
+id = "release-pipeline-policy"
+owner = "workflow.release"
+description = "Authenticated immutable release handoff with accepted claims, artifacts, destination, and no provider-specific trigger or matrix fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/release/pipeline-decisions.tsv"
+expected_column = "expected_handoff"
+default = "no"
+[checks.domains]
+case = ["*"]
+authenticated_dispatch = ["yes", "no"]
+immutable_source = ["yes", "no"]
+required_claims_satisfied = ["yes", "no"]
+artifact_plan_satisfied = ["yes", "no"]
+explicit_destination = ["yes", "no"]
+expected_handoff = ["yes", "no"]
+[[checks.rules]]
+outcome = "yes"
+[checks.rules.when]
+all = [
+  { field = "authenticated_dispatch", op = "eq", value = "yes" },
+  { field = "immutable_source", op = "eq", value = "yes" },
+  { field = "required_claims_satisfied", op = "eq", value = "yes" },
+  { field = "artifact_plan_satisfied", op = "eq", value = "yes" },
+  { field = "explicit_destination", op = "eq", value = "yes" },
+]
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0552", "RELEASE-STANDARDS.md", "275", "2", "workflow", "split", "CI/CD Release Pipeline"],
+  ["STD-0553", "RELEASE-STANDARDS.md", "277", "3", "workflow", "split", "Trigger"],
+  ["STD-0554", "RELEASE-STANDARDS.md", "287", "1", "workflow", "split", ".github/workflows/release.yml"],
+  ["STD-0555", "RELEASE-STANDARDS.md", "296", "1", "workflow", "split", ".github/workflows/ci.yml"],
+  ["STD-0556", "RELEASE-STANDARDS.md", "315", "3", "workflow", "split", "Build Matrix"],
+  ["STD-0557", "RELEASE-STANDARDS.md", "322", "1", "workflow", "split", "Target values are ecosystem-specific (see Naming Convention above)"],
+  ["STD-0558", "RELEASE-STANDARDS.md", "338", "3", "workflow", "split", "Artifact Upload"],
+  ["STD-0559", "RELEASE-STANDARDS.md", "355", "3", "workflow", "split", "Release Job"],
+  ["STD-0560", "RELEASE-STANDARDS.md", "394", "3", "workflow", "split", "Code Signing"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0552", "STD-0553", "STD-0554", "STD-0555", "STD-0556", "STD-0557", "STD-0558", "STD-0559", "STD-0560"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0552", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "canonical pipeline mechanics"],
+  ["STD-0553", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "authenticated release dispatch contract"],
+  ["STD-0554", "RELEASE-STANDARDS.md", "none", "remove", "provider-specific release trigger recipe"],
+  ["STD-0555", "RELEASE-STANDARDS.md", "none", "remove", "provider-specific validation trigger recipe"],
+  ["STD-0556", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "artifact-plan and claim-driven matrix"],
+  ["STD-0557", "RELEASE-STANDARDS.md", "none", "remove", "stale provider target example"],
+  ["STD-0558", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "required artifact collection"],
+  ["STD-0559", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "gated least-privilege publication handoff"],
+  ["STD-0560", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "conditional signature and provenance execution"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0552", "STD-0553", "STD-0554", "STD-0555", "STD-0556", "STD-0557", "STD-0558", "STD-0559", "STD-0560"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md"]
+
+[[checks]]
+id = "workflow-policy"
+type = "text"
+path = "workflows/release.md"
+required = [
+  "## Pipeline Mechanics",
+  "one authenticated release decision",
+  "release-dispatch",
+  "matrix follows supported target and environment claims",
+  "must not ignore a missing required output",
+  "Use least-privilege credentials",
+  "cannot replace missing behavior or user-workflow evidence",
+]
+prohibited = [
+  "Pushing a `v*` tag",
+  "# .github/workflows/release.yml",
+  "# .github/workflows/ci.yml",
+  "startsWith(github.ref",
+  "if-no-files-found: ignore",
+  "`macos-latest` on GitHub Actions",
+  "runs only on tag pushes",
+]
