@@ -1,0 +1,100 @@
+schema_version = 1
+id = "release-maintenance-policy"
+owner = "workflow.release"
+description = "Explicit maintenance and release-channel contracts without fixed branch, duration, channel-name, or feature-flag defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/release/maintenance-decisions.tsv"
+expected_column = "expected_release"
+default = "no"
+[checks.domains]
+case = ["*"]
+maintenance_contract = ["yes", "no"]
+immutable_lineage = ["yes", "no"]
+supported_line = ["yes", "no"]
+reconciliation = ["yes", "no"]
+channel_contract = ["yes", "no"]
+expected_release = ["yes", "no"]
+[[checks.rules]]
+outcome = "yes"
+[checks.rules.when]
+all = [
+  { field = "maintenance_contract", op = "eq", value = "yes" },
+  { field = "immutable_lineage", op = "eq", value = "yes" },
+  { field = "supported_line", op = "eq", value = "yes" },
+  { field = "reconciliation", op = "eq", value = "yes" },
+  { field = "channel_contract", op = "eq", value = "yes" },
+]
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0561", "RELEASE-STANDARDS.md", "405", "2", "workflow", "split", "Hotfix and LTS Workflow"],
+  ["STD-0562", "RELEASE-STANDARDS.md", "407", "3", "workflow", "split", "Standard Releases"],
+  ["STD-0563", "RELEASE-STANDARDS.md", "412", "3", "workflow", "split", "Hotfix Workflow"],
+  ["STD-0564", "RELEASE-STANDARDS.md", "425", "3", "workflow", "split", "LTS Releases"],
+  ["STD-0565", "RELEASE-STANDARDS.md", "438", "2", "workflow", "split", "Feature Flags and Release Channels"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0561", "STD-0562", "STD-0563", "STD-0564", "STD-0565"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0561", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "canonical maintenance policy"],
+  ["STD-0562", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "explicit standard-release maintenance contract"],
+  ["STD-0563", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "supported-line remediation and reconciliation"],
+  ["STD-0564", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "explicit long-term support contract"],
+  ["STD-0565", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "consumer release-channel contract without feature-flag defaults"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0561", "STD-0562", "STD-0563", "STD-0564", "STD-0565"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md"]
+
+[[checks]]
+id = "workflow-policy"
+type = "text"
+path = "workflows/release.md"
+required = [
+  "## Maintenance And Channels",
+  "maintenance contract before making that promise",
+  "has no intrinsic branch, tag, maintenance duration",
+  "Do not mutate published bytes or silently omit an affected supported",
+  "release-maintenance diagnostic",
+  "A release channel is a consumer contract",
+  "Prerelease identifiers and channels are independent decisions",
+  "release-channel diagnostic",
+  "Feature flags and runtime activation controls do not define release channels",
+]
+prohibited = [
+  "git checkout -b hotfix/vX.Y.Z",
+  "release/X.Y",
+  "12 months of security patches",
+  "`stable`, `beta`, `nightly`",
+  "Flags should be short-lived",
+  "Library releases typically do not need feature flags",
+]

@@ -1821,3 +1821,17 @@
   cleanliness. VE037 defers the mixed checkpoint to wave closure.
 - Implement in order through fast package gates. Run one mixed Bash checkpoint
   after M6-K7 closes M6-K-W1.
+
+## 2026-08-09 - M6-K4 Release Maintenance Acceptance
+
+- Added and registered the exact Maintenance decision, inventory/dispositions,
+  metadata closure, canonical rules, and removed defaults with the accepted
+  byte-exact Release index dependency.
+- Deleted `verify-release-maintenance-policy.sh` and accepted both historical
+  helper edges without a helper call, wrapper, alias, command, or fallback.
+- Focused dependency closure, package/edge authority, all 91 declarative suites,
+  graph freshness at 185 Bash verifiers / 190 nodes / 912 edges / 186
+  components, both plan checks, route/removal/diff/read-only evidence pass.
+- No source, fixture, helper, engine, accepted dependency, or unrelated
+  consumer changed. Forty-nine helper consumers remain; the M6-K-W1 mixed
+  checkpoint remains deferred.

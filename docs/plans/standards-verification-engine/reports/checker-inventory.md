@@ -1329,3 +1329,10 @@ projections, native metadata validation, canonical/removed text, and the
 accepted byte-exact Release index dependency. No source, fixture, engine,
 helper, accepted suite, or unrelated consumer enters the implementation write
 sets. M6-K4 through K7 close M6-K-W1 in order.
+
+### Accepted M6-K4 Release Maintenance
+
+The five-check direct suite plus accepted byte-exact index dependency preserves
+the full Maintenance behavior. The Bash checker and both helper edges are
+absent. All fast gates pass at 185 Bash verifiers / 190 nodes / 912 edges / 186
+components and 91 declarative suites; 49 helper consumers remain.
