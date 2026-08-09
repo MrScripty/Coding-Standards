@@ -1,0 +1,105 @@
+schema_version = 1
+id = "testing-language-binding-evidence"
+owner = "profile.boundary.language-bindings"
+description = "Claim-selected native, real-host, and package-cohort binding evidence without wrapper, partial, generated-type, fixed-schedule, alternate-artifact, or weaker-evidence substitution."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/language-bindings/evidence-cohort-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+claim = ["not-selected", "selected", "unsupported"]
+native_evidence = ["complete", "missing", "not-required"]
+host_evidence = ["complete", "missing", "not-required", "unsupported"]
+package_relation = ["declared", "missing", "not-required", "not-separate"]
+provenance = ["complete", "missing", "not-required"]
+substitute = ["alternate-artifact", "experimental-label", "fixed-schedule", "generated-type", "host-smoke", "native-only", "none", "producer-snapshot", "wrapper"]
+expected = ["allow", "omit", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+field = "substitute"
+op = "ne"
+value = "none"
+[[checks.rules]]
+outcome = "omit"
+[checks.rules.when]
+field = "claim"
+op = "eq"
+value = "not-selected"
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+any = [
+  { field = "claim", op = "eq", value = "unsupported" },
+  { field = "host_evidence", op = "eq", value = "unsupported" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+field = "package_relation"
+op = "eq"
+value = "missing"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "native_evidence", op = "eq", value = "missing" },
+  { field = "host_evidence", op = "eq", value = "missing" },
+  { field = "provenance", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "profiles/boundaries/language-bindings.md"
+required = [
+  "## Binding Evidence Cohorts",
+  "select evidence that independently covers the",
+  "native adapter contract and the real host consumer contract",
+  "release cohort or compatibility contract",
+  "sharing a build directory, version string, or generation run is not",
+  "Evidence breadth follows declared consumers",
+  "helper path, wrapper test, native-only test, host-only smoke",
+  "do not infer per-change, pre-push, CI, or release cadence",
+  "Do not substitute another artifact",
+  "host, wrapper, smoke path, schedule, or weaker evidence",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "TESTING-STANDARDS.md"
+required = ["language-bindings.md"]
+prohibited = ["for most repos this means pre-push", "Recommended coverage split"]
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "lexical"
+expected = [["STD-0616", "TESTING-STANDARDS.md", "profiles/boundaries/language-bindings.md", "refine", "require claim-selected native real-host and package-cohort compatibility evidence without wrapper native-only host-only generated-type fixed-schedule alternate-artifact or weaker-evidence substitution"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0616"
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = [
+  "`7.4b8bw` (`Accepted`)",
+  "`7.4b8bx` (`Accepted`)",
+  "`7.4b8by` (`Accepted`)",
+  "`7.4b9s` (`Accepted`)",
+]
+prohibited = []

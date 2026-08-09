@@ -1,0 +1,88 @@
+schema_version = 1
+id = "testing-gates-diagnosis"
+owner = "workflow.verification"
+description = "Claim-directed supporting gates and diagnosis without build-success, fixed-layer-order, authority, observation, or acceptance substitution."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/verification/supporting-gate-diagnosis-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+claim = ["behavior", "contract", "contradictory", "format", "missing", "package", "startup"]
+gate = ["build", "compile", "documentation", "formatter", "launch", "probe", "source"]
+evidence = ["contradictory", "direct", "supporting"]
+authority = ["contradictory", "missing", "owned"]
+observation = ["available", "missing", "unsupported"]
+substitute = ["build-success", "layer-order", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "substitute", op = "ne", value = "none" },
+  { field = "claim", op = "eq", value = "contradictory" },
+  { field = "evidence", op = "eq", value = "contradictory" },
+  { field = "authority", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "observation"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "claim", op = "eq", value = "missing" },
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "observation", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "workflows/verification.md"
+required = [
+  "## Supporting Gates And Claim-Directed Diagnosis",
+  "supporting gate and cannot replace",
+  "information gain",
+  "source order is",
+  "default acceptance",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "TESTING-STANDARDS.md"
+required = ["workflows/verification.md"]
+prohibited = ["Is it a compiler/type error?", "Always compile after edits"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "lexical"
+expected = [
+  ["STD-0645"], ["STD-0646"], ["STD-0647"], ["STD-0648"],
+  ["STD-0649"], ["STD-0650"], ["STD-0651"], ["STD-0652"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0645", "STD-0646", "STD-0647", "STD-0648", "STD-0649", "STD-0650", "STD-0651", "STD-0652"]
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8ci` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []

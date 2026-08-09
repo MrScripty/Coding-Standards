@@ -1,0 +1,87 @@
+schema_version = 1
+id = "testing-focused-design"
+owner = "workflow.verification"
+description = "Claim-coherent focused test structure, boundaries, domains, oracles, and generative evidence without template, hierarchy, checklist, label, or weakened-assertion fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/verification/focused-test-design-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+claim = ["contradictory", "invariant", "modeled", "observable", "property", "unsupported"]
+structure = ["coherent", "generated", "table"]
+boundary = ["missing", "real", "simulated"]
+domain = ["meaningful", "missing", "named"]
+oracle = ["missing", "usable"]
+substitute = ["aaa-template", "algorithm-label", "edge-checklist", "mock-hierarchy", "none", "one-assertion", "weakened-assertion"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "substitute", op = "ne", value = "none" },
+  { field = "claim", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "claim"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "boundary", op = "eq", value = "missing" },
+  { field = "domain", op = "eq", value = "missing" },
+  { field = "oracle", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "workflows/verification.md"
+required = [
+  "one coherent observable claim or invariant",
+  "Do not split or combine checks",
+  "preference hierarchy",
+  "not universal requirements",
+  "generation, shrinking, reproducibility",
+  "Never weaken an assertion",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "TESTING-STANDARDS.md"
+required = ["workflows/verification.md"]
+prohibited = ["Prefer (in order)", "Always test:"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "lexical"
+expected = [
+  ["STD-0618"], ["STD-0619"], ["STD-0620"], ["STD-0621"],
+  ["STD-0622"], ["STD-0623"], ["STD-0624"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0618", "STD-0619", "STD-0620", "STD-0621", "STD-0622", "STD-0623", "STD-0624"]
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8cd` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []
