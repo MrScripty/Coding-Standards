@@ -1,0 +1,95 @@
+schema_version = 1
+id = "contract-boundary-proof"
+owner = "topic.contracts"
+description = "Inbound, outbound, and trusted-internal boundary proof without transport, parser, body, or validation fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/contracts/boundary-proof-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+direction = ["inbound", "internal", "outbound"]
+boundary = ["new", "same"]
+input = ["produced", "unknown", "validated"]
+proof = ["complete", "failed", "missing", "retained"]
+outcome = ["error", "not-required", "success", "unsupported"]
+capability = ["available", "unavailable"]
+fallback = ["alternate-parser", "default-body", "none", "original-input", "reinterpret-success", "revalidate", "transport-success"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "direction", op = "eq", value = "internal" },
+  { any = [
+    { field = "boundary", op = "ne", value = "same" },
+    { field = "input", op = "ne", value = "validated" },
+    { field = "proof", op = "ne", value = "retained" },
+    { field = "fallback", op = "ne", value = "none" },
+  ] },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [
+  { field = "direction", op = "in", values = ["inbound", "outbound"] },
+  { field = "capability", op = "eq", value = "unavailable" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [
+  { field = "direction", op = "in", values = ["inbound", "outbound"] },
+  { field = "outcome", op = "eq", value = "unsupported" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "direction", op = "in", values = ["inbound", "outbound"] },
+  { any = [
+    { field = "proof", op = "ne", value = "complete" },
+    { field = "fallback", op = "ne", value = "none" },
+  ] },
+]
+
+[[checks]]
+id = "owner-and-routes"
+type = "text"
+path = "topics/contracts.md"
+required = ["## Inbound And Outbound Boundary Proof", "Apply the complete applicable contract in both directions", "classify the operation or", "does not mandate HTTP status checks", "alternate parser"]
+prohibited = []
+
+[[checks]]
+id = "legacy-and-routes"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["topics/contracts.md#inbound-and-outbound-boundary-proof"]
+prohibited = ["### Validate at Boundaries", "### Validate Outbound Responses"]
+
+[[checks]]
+id = "architecture-route"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = ["topics/contracts.md#inbound-and-outbound-boundary-proof"]
+prohibited = []
+
+[[checks]]
+id = "dispositions-and-plan"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0155\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tapply complete inbound proof at the owning boundary without redundant internal validation or exception mechanism defaults",
+  "STD-0156\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tclassify outbound outcomes and prove destination representations without HTTP status default-body or alternate-parser fallback",
+]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bh` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []

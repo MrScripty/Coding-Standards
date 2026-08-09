@@ -1,0 +1,89 @@
+schema_version = 1
+id = "typescript-owner-contract"
+owner = "profile.language.typescript"
+description = "TypeScript public surfaces, runtime boundaries, contract projection, and static analysis without blanket annotation, primitive, any, assertion, copied-shape, or alternate-generator fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/typescript/owner-contract-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+surface = ["boundary", "local", "public"]
+authority = ["contradictory", "missing", "owned", "schema"]
+runtime_input = ["not-applicable", "unsupported", "untrusted"]
+projection = ["any", "assertion", "copied", "decoded", "explicit", "generated", "inferred", "missing", "primitive", "wrapper"]
+evidence = ["missing", "proved"]
+fallback = ["alternate-generator", "any", "assertion", "blanket-domain", "blanket-explicit", "copied-shape", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "authority", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "runtime_input", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "projection", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "profiles/languages/typescript.md"
+required = ["ID: `profile.language.typescript`", "## Public Type Surfaces", "## Runtime Boundaries", "## Contract Type Projection", "## Static Analysis And Compiler Configuration", "Do not require explicit return types for every exported function", "TypeScript types do not validate runtime values", "wrapping every string or"]
+prohibited = []
+
+[[checks]]
+id = "async-route"
+type = "text"
+path = "profiles/languages/typescript/async.md"
+required = ["`profile.language.typescript`"]
+prohibited = []
+
+[[checks]]
+id = "routes-and-legacy"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["[TypeScript profile](profiles/languages/typescript.md)"]
+prohibited = ["// GOOD: Explicit return type", "Don't pass raw `string` or `any`"]
+
+[[checks]]
+id = "router"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["[TypeScript profile](profiles/languages/typescript.md)"]
+prohibited = []
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0184\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the TypeScript-specific parent with routes to the canonical general and async TypeScript profiles",
+  "STD-0185\tCODING-STANDARDS.md\tprofiles/languages/typescript.md\trefine\tselect explicit annotations or inference from consumer declaration and evidence facts without exported-function or private-function defaults",
+  "STD-0186\tCODING-STANDARDS.md\tprofiles/languages/typescript.md\trefine\tproject contract types from canonical authority and require runtime decoding without copied response raw-primitive any or assertion fallback",
+  "STD-0677\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\tgovern TypeScript analysis scope while extracting ESLint Prettier version preset glob and configuration syntax to non-normative Tooling reference",
+  "STD-0678\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\tgovern project-boundary and compatibility diagnostics while extracting product-specific flat-config pitfalls to non-normative Tooling reference",
+  "STD-0679\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\tselect compiler checks from owned contracts while extracting tsconfig flag examples to non-normative Tooling reference",
+  "STD-0680\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\tderive analysis from architecture authority while extracting custom ESLint rule syntax to non-normative Tooling reference",
+]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bp` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []

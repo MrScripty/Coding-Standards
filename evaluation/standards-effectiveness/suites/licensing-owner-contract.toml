@@ -1,0 +1,86 @@
+schema_version = 1
+id = "licensing-owner-contract"
+owner = "topic.licensing"
+description = "Licensing ownership, compatibility, obligations, attribution, and provenance from authoritative terms without matrices, slogans, labels, or templates."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/licensing/owner-contract-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+material = ["project-owned", "third-party"]
+source = ["conflicting", "identified", "missing", "not-required"]
+terms = ["authoritative", "missing", "not-required"]
+activity = ["declared", "missing", "unsupported"]
+obligations = ["complete", "missing", "not-required"]
+artifact_evidence = ["missing", "proved"]
+fallback = ["label", "linking-slogan", "matrix", "none", "omit-notice", "template"]
+expected = ["allow", "not-applicable", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "not-applicable"
+[checks.rules.when]
+all = [{ field = "material", op = "eq", value = "project-owned" }]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "source", op = "eq", value = "conflicting" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "activity", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "source", op = "eq", value = "missing" },
+  { field = "terms", op = "eq", value = "missing" },
+  { field = "activity", op = "eq", value = "missing" },
+  { field = "obligations", op = "eq", value = "missing" },
+  { field = "artifact_evidence", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "topics/licensing.md"
+required = ["ID: `topic.licensing`", "## Authority And Ownership", "## Compatibility And Obligations", "## Attribution And Provenance", "authoritative terms", "fixed license-name matrix", "designated legal or licensing owner", "Do not require one copied"]
+prohibited = []
+
+[[checks]]
+id = "routes-and-legacy"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["[Licensing](topics/licensing.md)"]
+prohibited = ["| GPL | GPL projects only | Viral license |", "Priority Queue with Decrease-Key"]
+
+[[checks]]
+id = "router"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["[Licensing](topics/licensing.md)"]
+prohibited = []
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0179\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the license-attribution parent with a non-normative route to canonical Licensing authority",
+  "STD-0180\tCODING-STANDARDS.md\ttopics/licensing.md\trefine\tderive attribution contents and placement from authoritative terms provenance and distribution facts without copied templates",
+  "STD-0181\tCODING-STANDARDS.md\ttopics/licensing.md\trefine\tevaluate compatibility and obligations from authoritative terms and actual activity without fixed license matrices labels or linking slogans",
+  "STD-0182\tCODING-STANDARDS.md\ttopics/licensing.md\trefine\tplace file artifact or distribution attribution only where selected obligations require it without file-level template defaults",
+]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bn` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []

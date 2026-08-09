@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: accelerated Wave 3 implementation
+**Current phase:** Milestone 6: post-Wave-3 dependency audit
 
-**Next slice:** Implement the six admitted Wave 3 owner suites, reconcile three
-row-35 lifecycle identities, delete all six Bash checkers, and accept their
-historical edge rows.
+**Next slice:** Inspect the fresh 217-verifier graph, classify exact executable
+edges, and admit the next owner-coherent packages through the accepted typed
+edge contract.
 
 **Acceptance status:** `pending`
 
@@ -532,7 +532,7 @@ records selected per slice.
 the engine; old helpers and compatibility paths are absent; complete mixed
 suite passes at every shared-contract slice.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 #### Package M3-C1: Canonical Acceptance Claims
 
@@ -2116,6 +2116,28 @@ checkers and every live reference to them are absent; the row-15 gate remains;
 focused suites, both authority contracts, 57 engine tests, all declarative
 suites, row-35 lifecycle, graph freshness, both plan checks, diff integrity,
 and one complete mixed gate pass.
+
+**Implementation:** six separate declarative suites now own Contracts boundary
+proof, Core constants, disabled-behavior claims, Licensing, Performance, and
+TypeScript owner policy. They preserve all 93 frozen decisions, 24 exact
+dispositions, canonical routes and owners, former-source prohibitions, and
+accepted-plan evidence using existing strict engine primitives. All six Bash
+checkers are deleted without wrappers, bridges, aliases, alternate identities,
+or duplicated policy.
+
+The six package rows and all 12 historical edge rows transitioned together to
+`accepted`. Row 15 remains an independently discovered historical lifecycle
+gate and is not a suite dependency. Row 35 now owns 26 Bash dependencies: 24
+direct root-route assertions plus the unchanged one transitive and one computed
+assertion; its consumer inventory remains 33.
+
+**Verification:** all six focused suites, package authority, edge authority,
+row-35 lifecycle, all 57 engine tests, and all 59 declarative suites passed.
+Graph freshness passed at 217 Bash verifiers / 222 nodes / 969 edges / 218
+components. Diff integrity and the complete mixed gate passed all 217 surviving
+entrypoints. No policy, decision fixture, disposition, canonical source,
+metadata, Router, source-package authority, engine, compatibility schema, or
+fallback path changed.
 
 **Tasks:**
 

@@ -151,6 +151,36 @@ path = "evaluation/standards-effectiveness/suites/executable-edge-dispositions.t
 requires = []
 
 [[suites]]
+id = "contract-boundary-proof"
+path = "evaluation/standards-effectiveness/suites/contract-boundary-proof.toml"
+requires = []
+
+[[suites]]
+id = "core-constants"
+path = "evaluation/standards-effectiveness/suites/core-constants.toml"
+requires = []
+
+[[suites]]
+id = "disabled-behavior-claims"
+path = "evaluation/standards-effectiveness/suites/disabled-behavior-claims.toml"
+requires = []
+
+[[suites]]
+id = "licensing-owner-contract"
+path = "evaluation/standards-effectiveness/suites/licensing-owner-contract.toml"
+requires = []
+
+[[suites]]
+id = "performance-owner-contract"
+path = "evaluation/standards-effectiveness/suites/performance-owner-contract.toml"
+requires = []
+
+[[suites]]
+id = "typescript-owner-contract"
+path = "evaluation/standards-effectiveness/suites/typescript-owner-contract.toml"
+requires = []
+
+[[suites]]
 id = "language-binding-surface-contract"
 path = "evaluation/standards-effectiveness/suites/language-binding-surface-contract.toml"
 requires = []

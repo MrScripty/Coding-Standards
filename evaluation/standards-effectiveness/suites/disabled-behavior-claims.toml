@@ -1,0 +1,72 @@
+schema_version = 1
+id = "disabled-behavior-claims"
+owner = "workflow.verification"
+description = "Disabled and removed behavior acceptance from complete surfaces, typed outcomes, lifecycle facts, direct behavior, and isolation without substitute evidence."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/verification/disabled-behavior-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+state = ["disabled", "incomplete", "removed"]
+surfaces = ["complete", "contradicted", "missing"]
+typed_outcome = ["missing", "proved"]
+lifecycle_facts = ["missing", "not-required", "proved"]
+direct_behavior = ["missing", "proved"]
+test_isolation = ["missing", "not-required", "proved"]
+fallback = ["documentation", "flag", "issue", "none", "startup", "stub", "workaround"]
+expected = ["allow", "blocked"]
+[[checks.rules]]
+outcome = "blocked"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "surfaces", op = "ne", value = "complete" },
+  { field = "typed_outcome", op = "ne", value = "proved" },
+  { field = "direct_behavior", op = "ne", value = "proved" },
+]
+[[checks.rules]]
+outcome = "blocked"
+[checks.rules.when]
+all = [
+  { field = "state", op = "ne", value = "removed" },
+  { field = "lifecycle_facts", op = "ne", value = "proved" },
+]
+[[checks.rules]]
+outcome = "blocked"
+[checks.rules.when]
+all = [
+  { field = "state", op = "eq", value = "incomplete" },
+  { field = "test_isolation", op = "ne", value = "proved" },
+]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "workflows/verification.md"
+required = ["## Disabled Behavior Claims", "every affected advertised, registered", "unreachable from production consumers", "configuration check may prove one local state", "Acceptance remains blocked", "observable disabled behavior."]
+prohibited = []
+
+[[checks]]
+id = "legacy-and-route"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["workflows/verification.md#disabled-behavior-claims"]
+prohibited = ["### Review Checklist", "Issue created for tracking"]
+
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0178\tCODING-STANDARDS.md\tworkflows/verification.md\trefine\tderive disabled-behavior acceptance from lifecycle surfaces typed outcomes and direct claims without fixed checklist issue documentation workaround or startup fallback"]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bm` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []

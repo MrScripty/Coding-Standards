@@ -1,0 +1,76 @@
+schema_version = 1
+id = "core-constants"
+owner = "core.constants"
+description = "Semantic constant and configuration ownership without universal naming, centralization, ambient, incumbent, or duplicated-default fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/core/constants-decisions.tsv"
+expected_column = "expected"
+default = "name"
+[checks.domains]
+case = ["*"]
+meaning = ["declared", "missing", "obvious"]
+unit = ["clear", "missing"]
+owner = ["local", "missing", "shared"]
+reuse = ["multiple", "one"]
+variation = ["authorized", "invariant", "unauthorized"]
+fallback = ["ambient", "duplicate", "global", "incumbent", "name-all", "none"]
+expected = ["configure", "keep-local", "name", "share", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "meaning", op = "eq", value = "missing" },
+  { field = "unit", op = "eq", value = "missing" },
+  { field = "owner", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "configure"
+[checks.rules.when]
+all = [{ field = "variation", op = "eq", value = "authorized" }]
+[[checks.rules]]
+outcome = "share"
+[checks.rules.when]
+all = [{ field = "owner", op = "eq", value = "shared" }]
+[[checks.rules]]
+outcome = "keep-local"
+[checks.rules.when]
+all = [{ field = "meaning", op = "eq", value = "obvious" }]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "CORE-STANDARDS.md"
+required = ["### Semantic Constants And Configuration", "coordinated change must be explicit", "narrowest concern that owns", "imports do not transfer ownership", "Do not turn invariants into settings"]
+prohibited = []
+
+[[checks]]
+id = "legacy"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = []
+prohibited = ["### No Magic Numbers or Strings"]
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0148\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tdefine semantic constant and configuration ownership from meaning units policy lifecycle and override authority",
+  "STD-0149\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tname literals only when semantic ownership or coordinated change requires it rather than banning every literal",
+  "STD-0150\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tplace values with the narrowest owning concern rather than a universal centralized constants container",
+]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bf` (`Accepted`)", "`7.4b8bg` (`Accepted`)"]
+prohibited = []

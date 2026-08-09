@@ -129,7 +129,7 @@ incumbent-structure fallback.
 legacy architecture identifiers and removal of fixed organization, layer,
 backend, framework, composition, and state-owner recipes.
 
-`fixtures/core/constants-decisions.tsv` and `verify-core-constants.sh` prove
+`fixtures/core/constants-decisions.tsv` and the registered `core-constants` suite prove
 semantic constant/configuration ownership without universal literal,
 centralization, ambient, duplicated-default, or incumbent-value fallbacks.
 

@@ -15,8 +15,6 @@ evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	root-readme
 evaluation/standards-effectiveness/verify-ipc-payload-validation.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-language-binding-boundary.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-launcher-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-licensing-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-performance-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-persistence-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-release-workflow-foundation.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-async-boundary.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
@@ -27,4 +25,3 @@ evaluation/standards-effectiveness/verify-rust-interop-memory.sh	root-readme-rou
 evaluation/standards-effectiveness/verify-rust-release-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-tooling-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-typescript-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence

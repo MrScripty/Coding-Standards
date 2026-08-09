@@ -1361,3 +1361,28 @@
   integrity, and all 223 mixed entrypoints.
 - Next slice: implement all six declarative suites, reconcile row 35, delete
   the six admitted checkers, and transition package and edge history together.
+
+## 2026-08-09 - Milestone 6 Wave 3 Implementation
+
+- Added six independent declarative suites for Contracts boundary proof, Core
+  constants, disabled-behavior claims, Licensing, Performance, and TypeScript
+  owner policy using existing strict engine primitives.
+- Preserved 93 decision cases, 24 exact dispositions, canonical owner and route
+  evidence, former-source prohibitions, and accepted-plan evidence. Frozen
+  decision fixtures and canonical policy sources are unchanged.
+- Deleted all six admitted Bash checkers without wrappers, bridges, aliases,
+  alternate identities, inferred outcomes, compatibility schemas, or weaker
+  evidence.
+- Accepted all six package rows and all 12 historical executable-edge rows.
+  Row 15 remains an independently discovered lifecycle gate rather than a
+  copied assertion or suite dependency.
+- Removed the Licensing, Performance, and TypeScript root-route identities from
+  row 35. Its exact lifecycle totals are now 26 Bash dependencies, 24 direct
+  routes, one transitive assertion, one computed assertion, and 33 consumers.
+- Focused verification passed all six suites, package and edge authority,
+  row-35 lifecycle, all 57 engine tests, all 59 declarative suites, graph
+  freshness at 217 Bash verifiers / 222 nodes / 969 edges / 218 components,
+  and diff integrity.
+- The complete mixed-suite Wave 3 gate passed all 217 surviving entrypoints.
+  Wave 3 is accepted; the next slice is a fresh dependency audit before another
+  package admission.

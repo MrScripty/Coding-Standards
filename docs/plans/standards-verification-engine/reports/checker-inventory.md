@@ -1048,3 +1048,25 @@ manifests, not new execution.
 Admission verification passed both authority suites, all 57 engine tests, all
 53 declarative suites, graph freshness, both plan checks, diff integrity, and
 all 223 mixed entrypoints.
+
+### Implemented Milestone 6 Wave 3
+
+Contracts boundary proof, Core constants, disabled-behavior claims, Licensing,
+Performance, and TypeScript owner policy are now six independent declarative
+suites. Their 93 decision cases, 24 exact dispositions, canonical routes and
+owners, former-source prohibitions, and accepted-plan evidence are preserved.
+The six Bash paths are deleted without wrappers, bridges, aliases, alternate
+identities, or duplicated policy.
+
+All six package rows and all 12 historical executable-edge rows are accepted.
+Row 15 remains an independently discovered historical lifecycle gate. It is
+not copied into the semantic suites and is not represented as a false suite
+dependency. Row 35 now records 26 Bash dependencies and 24 direct root routes;
+its transitive/computed counts remain 1/1 and its consumer inventory remains
+33.
+
+Focused verification passed all six replacements, package and edge authority,
+row-35 lifecycle, all 57 engine tests, and all 59 declarative suites. Graph
+freshness passed at 217 Bash verifiers / 222 nodes / 969 edges / 218 components.
+Complete mixed-suite Wave 3 verification passed all 217 surviving entrypoints,
+accepting the wave without a compatibility execution path.
