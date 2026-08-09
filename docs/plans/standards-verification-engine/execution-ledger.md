@@ -1386,3 +1386,30 @@
 - The complete mixed-suite Wave 3 gate passed all 217 surviving entrypoints.
   Wave 3 is accepted; the next slice is a fresh dependency audit before another
   package admission.
+
+## 2026-08-09 - Milestone 6 Wave 4 Admission
+
+- Audited the fresh 217-verifier graph and admitted 13 separate testing-family
+  packages. Each source has zero executable and contract callers, no helper
+  dependency, and exactly one dependency on the row-18 lifecycle checker.
+- Froze 187 typed decisions, eight Testing index routes, 101 exact
+  dispositions, canonical owner text, legacy-source prohibitions, and accepted
+  plan claims across Verification, Concurrency, Language Bindings, Performance,
+  Contracts, and Resilience owners.
+- Classified all 26 outgoing edges as independent historical row-18 gates.
+  Row 18 remains independently discovered and is neither copied nor converted
+  into 13 false suite dependencies.
+- Excluded Frontend testing evidence because its Frontend lineage caller chain
+  is still active. Confirmed no admitted source is a row-35 identity,
+  source-package subject, or README checker route.
+- Recorded and resolved VE028 by replacing the stale two-to-four package limit
+  with the accepted semantic-review, exact-edge, and disjoint-write-set bound.
+- Excluded policy, fixtures, dispositions, canonical sources, metadata, Router,
+  row 18, the Frontend chain, engine changes, wrappers, bridges, aliases,
+  inferred outcomes, weaker evidence, and silent success.
+- Regenerated the admission graph at 217 Bash verifiers / 222 nodes / 1,009
+  edges / 218 components. Package and edge authority, all 57 engine tests, all
+  59 declarative suites, graph freshness, both plan checks, diff integrity, and
+  all 217 mixed entrypoints passed.
+- Next slice: implement all 13 suites, delete all 13 Bash paths, transition
+  package and edge history together, and run one complete wave checkpoint.

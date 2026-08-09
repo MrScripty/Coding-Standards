@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-Wave-3 dependency audit
+**Current phase:** Milestone 6: accelerated Wave 4 admission
 
-**Next slice:** Inspect the fresh 217-verifier graph, classify exact executable
-edges, and admit the next owner-coherent packages through the accepted typed
-edge contract.
+**Next slice:** Implement the 13 admitted testing-family suites, delete their
+Bash checkers, and accept their exact row-18 edge history in one integrated
+wave.
 
 **Acceptance status:** `pending`
 
@@ -2139,15 +2139,65 @@ entrypoints. No policy, decision fixture, disposition, canonical source,
 metadata, Router, source-package authority, engine, compatibility schema, or
 fallback path changed.
 
+##### Wave 4 Admission: Testing Evidence Family
+
+**Status:** `Active`
+
+**Packages:** 13 separate packages for acceptance paths, async evidence,
+concurrency consolidation, coverage documentation, test-data lifecycle,
+focused design, supporting-gate diagnosis, language-binding evidence,
+organization, performance evidence, persisted contract artifacts, resilience
+replay, and Testing source closure.
+
+**Frozen behavior:** 187 typed decision cases, eight exact source-index routes,
+and 101 exact dispositions across Verification, Concurrency, Language Bindings,
+Performance, Contracts, Resilience, and the Testing former source. Canonical
+owner text, legacy-source prohibitions, and accepted-plan evidence remain
+unchanged.
+
+**Boundary:** all 13 sources are executable-inbound-free, contract-inbound-free,
+and helper-free. Frontend testing evidence is excluded because Frontend testing
+lineage still calls it; neither member of that active caller chain changes.
+None of the admitted sources is a row-35 identity, source-package subject, or
+README checker route.
+
+**Edge contract:** every admitted checker has exactly one executable reference
+and one verifier dependency to the row-18 decomposition checker. All 26 rows
+are `independent-gate`: row 18 proves historical Testing migration lifecycle,
+remains independently discovered, and is not semantic policy for any package.
+
+**Implementation write set:** 13 new suite TOMLs, 13 deleted checker paths,
+unchanged fixtures as read-only evidence, package and edge manifests, registry,
+package contract, generated graph artifacts, and this plan's serial records.
+
+**No-fallback rule:** no policy, fixture, disposition, canonical source,
+metadata, Router, row-18 checker, Frontend caller chain, engine, compatibility
+schema, wrapper, bridge, alias, inferred decision, weaker evidence, or silent
+success may be added or changed.
+
+**Admission verification:** package and edge authority, all 57 engine tests,
+all 59 declarative suites, graph freshness at 217 Bash verifiers / 222 nodes /
+1,009 edges / 218 components, both plan checks, diff integrity, and all 217
+mixed entrypoints passed.
+
+**Implementation gate:** each suite preserves its complete typed decisions,
+exact routes or dispositions, positive and negative canonical text, legacy
+source closure, and accepted-plan claims. Package and edge rows transition
+together to `accepted`; all 13 checker paths and live references are absent;
+focused suites, package and edge authority, 57 engine tests, all declarative
+suites, graph freshness, both plan checks, diff integrity, and one complete
+mixed checkpoint pass.
+
 **Tasks:**
 
 - [x] Generate exact dependency closures before package admission; a package
   must include or already have declarative versions of every semantic
   prerequisite and every Bash caller that would otherwise reference a deleted
   verifier.
-- [x] Admit two to four non-overlapping owner-coherent packages per accelerated
-  wave where their owner, dependency set, semantic decision, fixture family,
-  and verification contract are frozen.
+- [x] Admit non-overlapping owner-coherent packages per accelerated wave only
+  where their owner, dependency set, semantic decision, fixture family, and
+  verification contract are frozen; bound size by semantic review and
+  write-set overlap rather than an arbitrary package count.
 - [ ] Permit concurrent package preparation only in isolated worktrees with
   disjoint suite, fixture, and deleted-checker paths; keep registry, package
   manifest, README, generated graph, and plan integration serial.

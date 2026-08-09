@@ -1070,3 +1070,28 @@ row-35 lifecycle, all 57 engine tests, and all 59 declarative suites. Graph
 freshness passed at 217 Bash verifiers / 222 nodes / 969 edges / 218 components.
 Complete mixed-suite Wave 3 verification passed all 217 surviving entrypoints,
 accepting the wave without a compatibility execution path.
+
+### Milestone 6 Wave 4 Admission
+
+The fresh graph exposes 13 inbound-free, helper-free testing-family semantic
+checkers with the same historical lifecycle dependency. They own 187 typed
+decisions, eight exact Testing index routes, 101 exact dispositions, canonical
+owner text, legacy-source prohibitions, and accepted-plan claims across six
+canonical policy areas.
+
+Each checker has exactly one executable reference and one verifier dependency
+to row 18. All 26 edges are independently retained lifecycle evidence rather
+than semantic suite requirements. Frontend testing evidence is excluded because
+Frontend testing lineage remains its live caller; neither checker in that chain
+is admitted.
+
+The 13 packages have exclusive suite, fixture, and deleted-checker paths and no
+row-35, source-package, or README checker identity. Shared package, edge,
+registry, graph, and plan authority remains serial. VE028 removes the stale
+numeric package limit while preserving the stricter semantic-review,
+exact-edge, and non-overlapping-write-set admission controls.
+
+Admission verification passed package and edge authority, all 57 engine tests,
+all 59 declarative suites, graph freshness at 217 Bash verifiers / 222 nodes /
+1,009 edges / 218 components, both plan checks, diff integrity, and all 217
+mixed entrypoints.
