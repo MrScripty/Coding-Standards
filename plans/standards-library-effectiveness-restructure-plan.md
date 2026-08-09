@@ -2473,11 +2473,15 @@ all structural/routing fixtures pass.
          normalization, alternate authority, compatibility parsing, or
          fallback. All 42 engine tests, 44 suites, and 232 mixed entrypoints
          pass.
-       - `7.4c3ve43` (`Active`): admit and implement atomic M5-CP4+5 without
-         changing engine source in the package commit. After M5 closure,
-         accelerate the remainder through dependency-closed owner packages
-         prepared concurrently and integrated serially; retain separate suites
-         and no Bash bridges.
+       - `7.4c3ve43` (`Accepted planning authority`): admit Platform Target and
+         Rust Target as two owner rows sharing one atomic implementation write
+         set. Register Platform before Rust, transfer the Rust source package
+         from `checker:` to `suite:`, reconcile Bash-only README inventories,
+         and retain exact raw-byte index evidence without an engine change.
+       - `7.4c3ve44` (`Active`): implement and verify atomic M5-CP4+5. After M5
+         closure, accelerate the remainder through dependency-closed owner
+         packages prepared concurrently and integrated serially; retain
+         separate suites and no Bash bridges.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

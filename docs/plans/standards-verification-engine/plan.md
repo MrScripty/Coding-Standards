@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: M5-CP4+5 admission
+**Current phase:** Milestone 5: M5-CP4+5 implementation
 
-**Next slice:** Admit atomic `M5-CP4+5` against the accepted generic
-`exact_text` contract and frozen lifecycle reconciliation.
+**Next slice:** Implement admitted atomic `M5-CP4+5` without engine, policy,
+fixture, source-index, or compatibility changes.
 
 **Acceptance status:** `pending`
 
@@ -1498,6 +1498,76 @@ or generated artifact changed before this re-plan record. Both plan checks, all
 44 declarative suites, graph freshness at 232 Bash verifiers / 237 nodes / 999
 edges / 233 components, diff integrity, and all 232 mixed checker entrypoints
 passed.
+
+#### M5-CP4+5 Package Admission: Platform And Rust Target Policy
+
+**Status:** `Accepted`
+
+**Owners:** `topic.cross-platform` and
+`profile.language.rust.cross-platform`
+
+**Observable outcome:** two separately registered owner suites replace the
+connected Bash pair atomically. Platform Target derives 25 decisions and nine
+exact generic dispositions while requiring temporary M5-CP0. Rust Target
+derives 30 decisions and five exact specialization dispositions, requires
+Platform Target, and preserves the seven-line migration index through the
+accepted raw-byte `exact_text` assertion.
+
+**Exact implementation write set:**
+
+- migration-package manifest and validating suite;
+- suite registry and `suites/platform-target-policy.toml` plus
+  `suites/rust-target-configuration.toml`;
+- `verify-platform-target-policy.sh` and
+  `verify-rust-target-configuration.sh` for deletion;
+- standards-effectiveness README projection;
+- source-package preparation subject transfer;
+- row-35 README dependency and consumer manifests;
+- root README consumer audit plus row-35 and row-46 current-count validators;
+- generated checker structure/dependency inventories; and
+- this plan, ledger, issues, inventory report, and parent plan.
+
+The retained decision fixtures, `CROSS-PLATFORM-STANDARDS.md`,
+`languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md`, canonical Cross-Platform and
+Rust profiles, Router, root README, findings, historical reports, engine source,
+lockfiles, and all unrelated fixtures are excluded.
+
+**Dependency contract:** register Platform before Rust. Platform requires only
+`cross-platform-source-closure-prerequisite`; Rust requires only
+`platform-target-policy`. Metadata, filesystem containment, independent-trust,
+row-35, row-46, and root-consumer checks remain integration gates rather than
+suite dependencies.
+
+**Lifecycle contract:** remove the Rust checker from the Bash-only dependency
+and consumer manifests, reduce their current counts from 33/34 to 32/33,
+reduce negative-purity ownership to `verify-s1-routing.sh`, and transfer source
+package `7.4c3.20` from its `checker:` subject to
+`suite:evaluation/standards-effectiveness/suites/rust-target-configuration.toml`
+in the same implementation commit. Historical transition prose remains
+unchanged.
+
+**No-fallback rule:** retain no Bash wrapper, checker-to-suite bridge, dual
+subject, literal-only index evidence, expected-file mirror, heading alias,
+fixed target list, best-effort support, Strategy/Factory requirement,
+universal layout, runtime/compile-only substitution, stub, silent omission,
+alternate target/mechanism, named tool, weaker evidence, or default success.
+
+**Acceptance gate:** focused dependency-order execution, exact package
+authority, all declarative suites and engine tests, Python compilation, graph
+freshness, removed-path and lifecycle scans, source/profile/fixture
+immutability, both plan checks, diff integrity, and the complete mixed suite
+pass before implementation is accepted.
+
+**Admission identity:** package row 8 is stable Platform checker subject
+`M5-CP5`; row 9 is stable Rust checker subject `M5-CP4`. The manifest records
+Platform before Rust because semantic dependency order, not numeric package
+suffix, controls execution. Both rows are admitted and share one bounded
+atomic implementation write set.
+
+**Admission evidence:** the focused package suite, all 44 declarative suites,
+all 42 engine tests, both plan checks, plan lifecycle fixtures, diff integrity,
+and all 232 mixed entrypoints passed. The regenerated admission graph is fresh
+at 232 Bash verifiers, 237 nodes, 1,009 edges, and 233 components.
 
 #### Migration-Package Stable-Identity Re-plan Trigger
 

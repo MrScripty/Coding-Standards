@@ -8,7 +8,7 @@ id = "admitted-packages"
 type = "table"
 path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
 header = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
-row_count = 7
+row_count = 9
 non_empty = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 unique = [["train_order"], ["package_id"], ["subject"]]
 
@@ -96,4 +96,26 @@ expected = [[
   "M5-CP0,VE019-owner-audit",
   "focused-suite,dependency-once,engine-tests,graph-freshness,declarative-all,removed-paths,source-unchanged,complete-suite",
   "accepted",
+], [
+  "8",
+  "M5-CP5",
+  "checker:evaluation/standards-effectiveness/verify-platform-target-policy.sh",
+  "topics/cross-platform.md",
+  "consolidation",
+  "platform-target-policy-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/platform-target-policy.toml,evaluation/standards-effectiveness/suites/rust-target-configuration.toml,evaluation/standards-effectiveness/verify-platform-target-policy.sh,evaluation/standards-effectiveness/verify-rust-target-configuration.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv,evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/verify-milestone-7-row-46-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M5-CP0,M5-CP1,VE016-option-1,VE020-option-1,VE021-option-1",
+  "focused-suites,dependency-once,engine-tests,graph-freshness,declarative-all,removed-paths,lifecycle-transfer,source-unchanged,complete-suite",
+  "admitted",
+], [
+  "9",
+  "M5-CP4",
+  "checker:evaluation/standards-effectiveness/verify-rust-target-configuration.sh",
+  "profiles/languages/rust/cross-platform.md",
+  "consolidation",
+  "rust-target-configuration-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/platform-target-policy.toml,evaluation/standards-effectiveness/suites/rust-target-configuration.toml,evaluation/standards-effectiveness/verify-platform-target-policy.sh,evaluation/standards-effectiveness/verify-rust-target-configuration.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv,evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/verify-milestone-7-row-46-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M5-CP0,M5-CP5,VE016-option-1,VE020-option-1,VE021-option-1",
+  "focused-suites,dependency-once,engine-tests,graph-freshness,declarative-all,removed-paths,lifecycle-transfer,source-unchanged,complete-suite",
+  "admitted",
 ]]

@@ -1072,3 +1072,29 @@
   plan checks; diff integrity; and all 232 mixed checker entrypoints.
 - Next slice: admit atomic M5-CP4+5 against the accepted exact-text primitive
   and the frozen typed-subject/README lifecycle reconciliation.
+
+## 2026-08-08 - M5-CP4+5 Platform And Rust Target Admission
+
+- Admitted generic Platform Target as manifest row 8 (`M5-CP5`) and Rust Target
+  as row 9 (`M5-CP4`) with separate stable checker subjects and one shared
+  atomic implementation write set.
+- Ordered Platform before Rust because Rust specializes the generic owner.
+  Platform requires temporary M5-CP0; Rust requires Platform. Metadata,
+  filesystem, independent-trust, row, and root-consumer checks remain
+  integration gates rather than nested suite dependencies.
+- Froze 25 generic and 30 Rust decisions, nine generic and five Rust exact
+  dispositions, canonical owner text, accepted lineage, negative evidence, and
+  raw-byte equality for the seven-line Rust migration index.
+- Froze same-commit deletion of both Bash checkers, package-20 `checker:` to
+  `suite:` transfer, dependency/consumer inventory reductions to 32/33,
+  negative-purity reduction to S1, exact validator count updates, README
+  projection replacement, and graph regeneration.
+- Engine, policy, retained fixtures, both legacy sources, canonical profiles,
+  Router, root README, findings, historical evidence, and lockfiles remain
+  outside the implementation write set.
+- Admission verification passed: exact package authority; all 44 declarative
+  suites; all 42 engine tests; both plan checks and lifecycle fixtures; graph
+  freshness at 232 Bash verifiers / 237 nodes / 1,009 edges / 233 components;
+  diff integrity; and all 232 mixed checker entrypoints.
+- Next slice: implement the admitted pair atomically without a wrapper, bridge,
+  dual subject, compatibility parser, policy duplication, or fallback.

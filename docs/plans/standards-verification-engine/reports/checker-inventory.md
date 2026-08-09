@@ -808,6 +808,22 @@ focused diagnostics; the complete suite runs once at the integrated wave gate.
 Filename adjacency, one cross-owner suite, Bash bridges, compatibility
 launchers, and duplicated prerequisite evidence are not valid acceleration.
 
+### M5-CP4+5 Admission
+
+The connected pair is admitted as two rows sharing one atomic implementation
+write set. Manifest row 8 admits generic Platform Target (`M5-CP5`) before row
+9 admits Rust Target (`M5-CP4`) because Rust specializes and depends on the
+generic suite. Numeric package suffixes do not override semantic dependency
+order.
+
+Platform will require temporary M5-CP0; Rust will require Platform. The
+implementation retains the 25-row and 30-row decision fixtures, canonical
+owners, nine generic and five Rust dispositions, and the exact seven-line Rust
+index. It deletes both Bash paths and reconciles the typed source-preparation
+subject, Bash-only README inventories, negative-purity set, current count
+validators, README projection, and generated graph in the same commit. Engine,
+policy, fixture, legacy-index, and historical evidence changes are excluded.
+
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
 edges, and 235 components.
