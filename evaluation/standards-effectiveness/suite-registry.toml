@@ -141,6 +141,11 @@ path = "evaluation/standards-effectiveness/suites/milestone-7-row-19-structure.t
 requires = []
 
 [[suites]]
+id = "checker-migration-packages"
+path = "evaluation/standards-effectiveness/suites/checker-migration-packages.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

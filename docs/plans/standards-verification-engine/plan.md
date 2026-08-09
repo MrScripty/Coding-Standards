@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3: Migration Package Authority
+**Current phase:** Milestone 3: Decision Table Consumer Migration
 
-**Next slice:** Freeze the reviewed migration-package manifest and the first
-decision-table helper package from component `component-0001`, its 13 direct
-dependency consumers, executable references, semantic owners, and complete
-replacement evidence. Do not edit helper or consumer source before admission.
+**Next slice:** Implement admitted package `M3-DT1` by replacing
+`component-0085` with one canonical declarative suite, deleting its obsolete
+schema/observed mirror and Bash checker, and regenerating exact graph evidence.
 
 **Acceptance status:** `pending`
 
@@ -686,6 +685,44 @@ list fields use explicit `-` values and pass whitespace verification.
 malformed and stale graph artifacts are rejected; generated artifacts are
 excluded from graph inputs; no owner, risk, cohesion, or disposition is
 inferred; and the launcher remains unchanged.
+
+#### Package M3-P1: Reviewed Migration Package Authority
+
+**Status:** `Accepted`
+
+**Owner:** verification-engine migration mechanics
+
+**Allowed write set:** the reviewed package manifest, its declarative contract
+suite and shared registry row, generated structure/dependency artifacts, this
+plan, ledger, issues, checker inventory report, and parent-plan delegated state.
+Helper and consumer source is excluded.
+
+**Observable outcome:** the manifest admits exactly one bounded implementation
+package: `M3-DT1`, component `component-0085`, owned by the canonical Language
+Bindings profile. Its exact write set, prerequisite, verification contract,
+risk, semantic outcome, and lifecycle state are machine checked.
+
+**Decision-table family evidence:** the helper has 13 direct consumers across
+multiple semantic owners. Five consumer components currently have no dependency
+callers or executable/frozen references. The remaining consumers are blocked by
+inbound verifier chains; the helper self-test has a 44-verifier transitive
+inbound closure through the accelerated-execution checker. Graph shape therefore
+does not authorize one 1,199-line cross-owner migration package.
+
+**Acceptance evidence:** the focused package-authority suite passed its one
+check; all 37 declarative suites/171 checks, 37 engine tests, Python compilation,
+plan structure, generated freshness at 243 nodes/1,047 edges/239 components,
+whitespace integrity, and all 238 complete-suite checkers passed.
+
+**No-fallback result:** `M3-DT1` must remove the complete Bash authority and its
+schema/observed mirror rather than invoke Python from Bash or retain a wrapper.
+No other component is admitted by proximity, basename, shared helper use, or
+generated wave. Shared registry, graph artifacts, manifest, and plans remain
+serial integration-owner files.
+
+**Re-plan trigger:** if `component-0085` contains semantics outside the bounded
+decision, text, table, and relation checks already supported by the engine, stop
+rather than add command execution, retain the checker, or weaken evidence.
 
 ### Milestone 4: Semantic Decision Migration
 

@@ -1,0 +1,33 @@
+schema_version = 1
+id = "checker-migration-packages"
+owner = "verification-engine.migration-packages"
+description = "Reviewed migration-package authority without graph-derived semantic defaults or unbounded write sets."
+
+[[checks]]
+id = "admitted-packages"
+type = "table"
+path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
+header = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
+row_count = 1
+non_empty = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
+unique = [["train_order"], ["package_id"], ["components"]]
+
+[checks.domains]
+risk = ["mechanical", "consolidation", "refinement", "safety-critical", "new-owner-design"]
+state = ["admitted", "accepted", "blocked"]
+
+[[checks.projections]]
+columns = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
+order = "source"
+expected = [[
+  "1",
+  "M3-DT1",
+  "component-0085",
+  "profiles/boundaries/language-bindings.md",
+  "consolidation",
+  "language-binding-surface-contract-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/language-binding-surface-contract.toml,evaluation/standards-effectiveness/verify-language-binding-surface-contract.sh,evaluation/standards-effectiveness/fixtures/language-bindings/surface-contract-schema.tsv,evaluation/standards-effectiveness/fixtures/language-bindings/surface-contract-observed.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M3-G1",
+  "focused-suite,engine-tests,graph-freshness,declarative-all,complete-suite",
+  "admitted",
+]]

@@ -381,3 +381,23 @@ The path-shaped dependency rule corrected seven false dependency records caused
 by quoted expected checker names. Those occurrences remain executable-reference
 edges and therefore still block unreviewed deletion; they no longer distort the
 runtime dependency graph or component waves.
+
+### Decision Table Family Admission
+
+The decision-table helper has 13 direct dependency consumers and 15 executable
+references. Eleven consumers own policy behavior; one owns helper fixtures; one
+owns the accelerated migration plan. They total 1,199 Bash lines and span
+multiple canonical owners, so shared helper use is not package cohesion.
+
+Five direct consumers are presently inbound-free and have no executable or
+frozen-contract references: Binding Artifact Composition, Language Binding
+Surface Contract, Native Artifact Loading, Platform Evidence Coverage, and Rust
+Binding Contract Discovery. `M3-DT1` admits only Language Binding Surface
+Contract (`component-0085`) because it is a bounded owner-coherent leaf.
+
+The helper self-test has one direct caller but a 44-verifier transitive inbound
+closure through Accelerated Execution. Binding evolution, generation authority,
+mechanism selection, native release, core/adapter testability, and workspace
+evidence also have unresolved inbound callers. They require later admitted
+caller or frozen-identity packages before deletion. The helper remains until
+all direct consumers and executable references are removed.

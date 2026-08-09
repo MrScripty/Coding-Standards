@@ -520,3 +520,26 @@
   risk, package, or disposition; the Bash launcher remains temporary.
 - Next slice: freeze the reviewed package manifest and decision-table helper
   package before editing helper or consumer source.
+
+## 2026-08-08 - Package M3-P1 Migration Package Authority
+
+- Accepted one reviewed, declaratively checked package manifest. It admits only
+  `M3-DT1` for inbound-free `component-0085`; graph structure does not infer
+  owner, cohesion, risk, write set, or lifecycle state.
+- Decision-table family audit: 13 direct consumers across Contracts,
+  Cross-Platform, Release, Verification, boundary-profile, Rust-profile, and
+  migration-plan ownership; five are currently inbound-free and unreferenced.
+- Discovered `VE013`: the helper self-test has a 44-verifier transitive inbound
+  closure through the accelerated-execution checker. The helper cannot be
+  removed as a small shared-contract slice.
+- `M3-DT1` exact write set includes its replacement suite, obsolete Bash/schema/
+  observed authorities, shared registry and generated graph artifacts, and
+  serial plan records. Its decisions fixture remains canonical input.
+- Verification: the focused package-authority suite passed one check; all 37
+  declarative suites/171 checks, 37 engine tests, Python compilation, plan
+  structure, graph freshness at 243 nodes/1,047 edges/239 components,
+  whitespace integrity, and all 238 complete-suite checkers passed.
+- No-fallback result: implementation must delete the complete old checker and
+  redundant mirrors; no Bash-to-Python wrapper, cross-owner package, inferred
+  admission, or early helper deletion is authorized.
+- Next slice: implement and verify `M3-DT1`.
