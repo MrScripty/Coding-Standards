@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 5: Native Artifact Loading admission
 
-**Next slice:** Admit `M5-CP1` Native Artifact Loading with `M5-CP0` as its only
-suite dependency and all semantic evidence in its Cross-Platform-owned suite.
+**Next slice:** Implement admitted `M5-CP1` Native Artifact Loading and delete
+its Bash checker plus redundant schema/observed mirrors.
 
 **Acceptance status:** `pending`
 
@@ -1127,6 +1127,56 @@ generic policy in the Rust suite.
 **Revised train:** `M5-CP1`, `M5-CP2`, and `M5-CP3` remain independently
 reviewable packages after `M5-CP0`; `M5-CP4+5` is the bounded connected
 generic/Rust dependency wave; `M5-CP6` closes the source and retires `M5-CP0`.
+
+#### M5-CP1 Package Admission: Native Artifact Loading
+
+**Status:** `Accepted`
+
+**Owner:** `topic.cross-platform`
+
+**Observable outcome:** one registered Native Loading suite depends on
+`cross-platform-source-closure-prerequisite`, derives all 23 loading decisions
+through strict domains and ordered typed outcomes, preserves the canonical
+Native Artifact Loading section, two exact dispositions, and accepted lineage,
+and contains no former-source heading assertion.
+
+**Exact implementation write set:**
+
+- migration-package manifest and validating suite;
+- suite registry and
+  `suites/native-artifact-loading.toml`;
+- obsolete `verify-native-artifact-loading.sh`,
+  `native-artifact-loading-schema.tsv`, and
+  `native-artifact-loading-observed.tsv` for deletion;
+- standards-effectiveness README projection;
+- generated checker structure/dependency inventories; and
+- this plan, ledger, issues, inventory report, and parent plan.
+
+The canonical decisions fixture, `CROSS-PLATFORM-STANDARDS.md`,
+`topics/cross-platform.md`, Platform Target checker, engine source, findings,
+historical ledger, source-closure manifests, lockfiles, and all unrelated
+fixtures are excluded.
+
+**Dependency contract:** `M5-CP0` is the only suite dependency. Platform
+Target remains an independently selected integration gate under the accepted
+VE016 classification; Row 6 and execution-train evidence remain package/wave
+gates and are not nested dependencies.
+
+**No-fallback rule:** retain no Bash wrapper, schema compatibility parser,
+observed-outcome mirror, heading alias, duplicated Platform Target policy,
+alternate loader/artifact, ambient identity, guessed filename, embedded copy,
+or default-success path.
+
+**Acceptance gate:** focused dependency-order execution, package authority, all
+declarative suites, 37 engine tests, Python compilation, graph freshness,
+removed-path scanning, source immutability, both plan checks, diff integrity,
+and the complete mixed suite pass before implementation is accepted.
+
+**Admission evidence:** the focused package-authority suite passed; all 41
+declarative suites/187 checks, 37 engine tests, Python compilation, both
+plan-structure checks, graph freshness at 235 Bash verifiers/240 nodes/1,025
+edges/236 components, source and semantic-input immutability, diff integrity,
+and all 235 mixed checker entrypoints passed.
 
 ### Milestone 4: Semantic Decision Migration
 

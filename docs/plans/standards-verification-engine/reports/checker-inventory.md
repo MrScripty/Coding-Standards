@@ -578,3 +578,17 @@ connected pair. `M5-CP4+5` creates separate generic and Rust suites, registers
 Platform Target before Rust Target, declares the Rust dependency, and deletes
 both Bash authorities atomically. This preserves owner boundaries and acyclic
 once-only execution without reproducing the legacy process graph.
+
+### Native Artifact Loading Admission
+
+`M5-CP1` selects inbound-free `component-0137`: 110 Bash lines, 23 ordered
+decisions, two exact dispositions, one Cross-Platform owner, one README
+projection, and two redundant fixture mirrors. The retained decisions fixture
+is canonical package input.
+
+The admitted suite requires temporary `M5-CP0` and no Platform Target suite.
+That dependency boundary follows VE016: Native Loading directly owns target,
+capability, evidence, and typed outcomes, while its former nested Platform
+Target, Row 6, and execution-train calls are integration or migration gates.
+Implementation deletes the checker and mirrors atomically and regenerates the
+graph; no wrapper or duplicate semantic authority is permitted.

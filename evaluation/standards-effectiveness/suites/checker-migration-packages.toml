@@ -8,7 +8,7 @@ id = "admitted-packages"
 type = "table"
 path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
 header = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
-row_count = 4
+row_count = 5
 non_empty = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 unique = [["train_order"], ["package_id"], ["components"]]
 
@@ -63,4 +63,15 @@ expected = [[
   "M3-DT3,F085-option-1",
   "focused-suite,engine-tests,graph-freshness,declarative-all,source-unchanged,complete-suite",
   "accepted",
+], [
+  "5",
+  "M5-CP1",
+  "component-0137",
+  "topics/cross-platform.md",
+  "consolidation",
+  "native-artifact-loading-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/native-artifact-loading.toml,evaluation/standards-effectiveness/verify-native-artifact-loading.sh,evaluation/standards-effectiveness/fixtures/cross-platform/native-artifact-loading-schema.tsv,evaluation/standards-effectiveness/fixtures/cross-platform/native-artifact-loading-observed.tsv,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M5-CP0,VE016-option-1",
+  "focused-suite,dependency-once,engine-tests,graph-freshness,declarative-all,removed-paths,source-unchanged,complete-suite",
+  "admitted",
 ]]

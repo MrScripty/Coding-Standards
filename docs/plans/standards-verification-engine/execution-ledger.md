@@ -787,3 +787,24 @@
   execution.
 - Next slice: admit `M5-CP1` with temporary `M5-CP0` as its only suite
   dependency.
+
+## 2026-08-08 - M5-CP1 Native Artifact Loading Admission
+
+- Admitted component `0137` as one Cross-Platform-owned declarative suite over
+  the retained 23-row decisions fixture.
+- Froze two exact dispositions, canonical loading policy, accepted lineage,
+  README projection, and temporary whole-source coverage.
+- Classified `M5-CP0` as the only suite dependency. Platform Target remains
+  an independently selected integration gate; lifecycle checks remain
+  package/wave gates.
+- Scheduled the Bash checker and redundant schema/observed mirrors for deletion
+  in the implementation commit. The source, canonical topic, decision fixture,
+  Platform Target checker, engine, findings, and historical records remain
+  unchanged.
+- Verification: focused package authority, all 41 declarative suites/187
+  checks, 37 engine tests, Python compilation, both plan-structure checks,
+  graph freshness at 235 Bash verifiers/240 nodes/1,025 edges/236 components,
+  source and semantic-input immutability, diff integrity, and all 235 mixed
+  checker entrypoints passed.
+- Next slice: implement admitted `M5-CP1` without a wrapper, compatibility
+  schema, heading alias, duplicate target policy, or fallback.

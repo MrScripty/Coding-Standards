@@ -136,7 +136,7 @@ evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.s
 evaluation/standards-effectiveness/verify-milestone-7-security-checker-repair-replan.sh	verifier	yes	component-0134	1	no	0	0	0	0	0
 evaluation/standards-effectiveness/verify-milestone-7-source-package-preparation.sh	verifier	yes	component-0135	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	verifier	yes	component-0136	1	no	3	5	0	5	4
-evaluation/standards-effectiveness/verify-native-artifact-loading.sh	verifier	yes	component-0137	1	no	7	0	0	0	4
+evaluation/standards-effectiveness/verify-native-artifact-loading.sh	verifier	yes	component-0137	1	no	7	0	2	0	4
 evaluation/standards-effectiveness/verify-native-artifact-release.sh	verifier	yes	component-0138	1	no	5	0	0	0	4
 evaluation/standards-effectiveness/verify-network-transport-policy.sh	verifier	yes	component-0139	1	no	6	2	1	2	3
 evaluation/standards-effectiveness/verify-owner-state-transitions.sh	verifier	yes	component-0140	1	no	0	1	0	1	0

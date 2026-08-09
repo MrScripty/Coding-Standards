@@ -2416,9 +2416,14 @@ all structural/routing fixtures pass.
          then replace Rust Target and Platform Target atomically as two suites
          with a declared Rust-to-generic dependency. Do not use Bash bridges,
          wrappers, dual authority, duplicated policy, or unreviewed deletion.
-       - `7.4c3ve30` (`Active`): admit `M5-CP1` Native Artifact Loading with
-         temporary `M5-CP0` as its only suite dependency and no former-source
-         heading authority.
+       - `7.4c3ve30` (`Accepted planning authority`): admit `M5-CP1`
+         Native Artifact Loading with temporary `M5-CP0` as its only suite
+         dependency, 23 typed decisions, two exact dispositions, canonical
+         owner evidence, and no former-source heading authority.
+       - `7.4c3ve31` (`Active`): implement admitted `M5-CP1`, delete its
+         Bash checker and redundant schema/observed mirrors, update README and
+         graph evidence, and retain no wrapper, duplicate target policy, or
+         fallback.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact
