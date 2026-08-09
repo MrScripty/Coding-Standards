@@ -708,6 +708,30 @@ Acceptance verification passed all 44 declarative suites, 37 engine tests, and
 all 232 mixed checker entrypoints. The regenerated graph has 237 nodes, 999
 edges, and 233 components.
 
+### M5-CP4+5 Verifier-Subject Conflict
+
+Platform Target is current component `0148` with 139 Bash lines and 25
+decisions. Rust Target is component `0202` with 169 Bash lines and 30
+decisions. The Rust checker directly invokes Platform Target, confirming the
+planned generic-to-specialization suite dependency and atomic deletion wave.
+
+The Rust checker is also a live subject in three migration contracts. Root-
+README dependency and consumer inventories require the path, while source-
+package preparation assigns it as the exclusive writable verifier for Rust
+Cross-Platform closure package `7.4c3.20`. These are not semantic Rust policy
+dependencies, but they are accepted lifecycle authority. Deleting the path
+without transferring that authority would invalidate source-closure ownership;
+retaining it would create dual semantic authority.
+
+The recommended recovery generalizes source-preparation identity to strict
+typed `checker:` and `suite:` subjects, rewrites existing values atomically,
+and transfers package 20 to the Rust Target suite in M5-CP4+5. Bash-only README
+inventories then remove the retired checker and update exact counts. No source,
+checker, fixture, registry, or canonical policy changes before selection.
+
+Trigger verification passed all 44 declarative suites and all 232 mixed
+checker entrypoints; the graph remains 237 nodes, 999 edges, and 233 components.
+
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
 edges, and 235 components.

@@ -2451,9 +2451,14 @@ all structural/routing fixtures pass.
          registered owner-bounded suite and delete its Bash checker and
          redundant mirrors without a wrapper, heading alias, duplicated
          ownership policy, environment substitution, or inferred fallback.
-       - `7.4c3ve38` (`Active`): audit and admit atomic M5-CP4+5 Rust Target
-         Configuration and Platform Target Policy as two owner-bounded suites
-         with one explicit specialization dependency and no dual authority.
+       - `7.4c3ve38` (`Blocked by re-plan`): M5-CP4's Bash path remains exact
+         root-README inventory evidence and the exclusive writable verifier for
+         future Rust Cross-Platform source closure. Deletion would break
+         accepted migration authority; retention would create dual authority.
+       - `7.4c3ve39` (`Active`): select one canonical verifier-subject lifecycle
+         that preserves exclusive source-closure ownership and permits atomic
+         M5-CP4+5 replacement without wrappers, compatibility parsing, count
+         exceptions, or out-of-order source closure.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

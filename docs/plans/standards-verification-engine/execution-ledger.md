@@ -967,3 +967,24 @@
   checks, diff integrity, and all 232 mixed checker entrypoints.
 - Next slice: audit and admit atomic M5-CP4+5 Rust Target Configuration and
   Platform Target Policy.
+
+## 2026-08-08 - M5-CP4+5 Verifier-Subject Re-plan Trigger
+
+- Confirmed the accepted owner dependency: Platform Target is generic policy;
+  Rust Target is a specialization and must require the generic suite.
+- Found three live migration authorities for the Rust Target Bash path: the
+  33-row root-README dependency inventory, the 34-row consumer inventory and
+  exact negative-purity set, and source-package preparation's exclusive
+  writable checker for Rust Cross-Platform closure package `7.4c3.20`.
+- Stopped before package admission. No checker, fixture, registry, canonical
+  policy, migration manifest, README inventory, engine, or source was changed.
+- Recommended strict typed verifier subjects so the future source-closure owner
+  can transfer atomically from `checker:` to `suite:` without dual authority or
+  compatibility parsing. Deferral to package 20 and contiguous source closure
+  remain standards-aligned alternatives with larger schedule or scope cost.
+- Rejected wrappers, dual entries, untyped alternate paths, count exceptions,
+  removed source-package ownership, and out-of-order source acceptance.
+- Verification passed: both plan checks, all 44 declarative suites, graph
+  freshness at 232 Bash verifiers / 237 nodes / 999 edges / 233 components,
+  diff integrity, and all 232 mixed checker entrypoints.
+- Next slice: select the verifier-subject lifecycle before M5-CP4+5 admission.

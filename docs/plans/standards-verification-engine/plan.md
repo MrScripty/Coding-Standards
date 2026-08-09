@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: Rust Target and Platform Target wave audit
+**Current phase:** Milestone 5: verifier-subject lifecycle re-plan
 
-**Next slice:** Audit and admit atomic `M5-CP4+5` Rust Target Configuration and
-Platform Target Policy as the next dependency-connected owner wave.
+**Next slice:** Select one canonical verifier-subject lifecycle for source-
+closure preparation before admitting atomic `M5-CP4+5`.
 
 **Acceptance status:** `pending`
 
@@ -1358,6 +1358,65 @@ orchestration, or default success remains.
 removed-path scans, protected-input immutability, both plan checks, diff
 integrity, and all 232 mixed checker entrypoints passed. The regenerated graph
 contains 232 Bash verifiers, 237 nodes, 999 edges, and 233 components.
+
+#### Source-Closure Verifier-Subject Re-plan Trigger
+
+**Status:** `Blocked`
+
+The M5-CP4+5 audit confirmed the accepted semantic dependency direction:
+Platform Target is the generic prerequisite and Rust Target is its
+specialization. It also found that the Rust Target Bash path remains live
+migration authority in three places outside the admitted wave:
+
+- the root-README dependency inventory requires the path to exist;
+- the root-README consumer inventory and audit require it as one of 34 exact
+  Bash consumers and one of two negative-purity consumers; and
+- source-closure preparation assigns that exact Bash checker as the exclusive
+  writable verifier for package `7.4c3.20`.
+
+Deleting the checker under the current plan would invalidate accepted source-
+closure and concurrency contracts. Retaining it beside a declarative suite,
+adding a wrapper, or weakening exact inventories would violate the engine
+plan's no-legacy and no-fallback rules.
+
+**Option 1 - Canonical typed verifier subjects (`Recommended`):** replace the
+source-preparation manifest's path-only `writable_checkers` field with exact
+typed `writable_verifiers` subjects. Rewrite every existing value atomically as
+`checker:<repository-path>`, admit `suite:<repository-path>` as the only other
+kind, require existence and uniqueness by kind, and reject untyped or unknown
+subjects. During M5-CP4+5, replace the Rust package's checker subject with the
+new Rust Target suite subject in the same commit. Remove the retired checker
+from the Bash-only README inventories and update their exact counts and
+negative-purity set. Choose this to preserve exclusive future source-closure
+ownership, concurrent preparation boundaries, and one canonical verifier
+without compatibility parsing.
+
+**Option 2 - Defer the connected wave to Rust source closure:** leave both Bash
+checkers and all current inventories unchanged until package `7.4c3.20` can
+replace the Rust checker, register both suites, and reconcile source-closure
+authority in one manifest-ordered wave. Choose this when changing shared
+preparation contracts now is riskier than delaying Cross-Platform closure. It
+preserves current evidence but postpones M5-CP4+5 and M5-CP6.
+
+**Option 3 - Expand the wave through contiguous source closure:** execute every
+pending source package required to reach manifest order 20, then integrate
+M5-CP4+5 with Rust Cross-Platform source closure. Choose this only when those
+earlier source packages are already prepared and independently accepted for
+integration. It preserves serial source order but creates a substantially
+larger verification and rollback surface.
+
+Untyped alternate paths, dual checker/suite entries, wrapper checkers, source-
+package ownership removal, count exceptions, and out-of-order source closure
+are invalid options.
+
+**Recommendation:** select Option 1 in a dedicated shared-contract slice, run
+the complete suite, then re-audit and admit M5-CP4+5 against the resulting
+typed verifier authority.
+
+**Trigger evidence:** both plan checks, all 44 declarative suites, graph
+freshness at 232 Bash verifiers / 237 nodes / 999 edges / 233 components, diff
+integrity, and all 232 mixed checker entrypoints passed with no implementation
+or policy changes.
 
 #### Migration-Package Stable-Identity Re-plan Trigger
 
