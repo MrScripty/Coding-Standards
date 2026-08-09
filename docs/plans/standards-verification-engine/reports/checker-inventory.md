@@ -1150,3 +1150,23 @@ all 57 engine tests, and all 77 declarative suites. Graph freshness passed at
 199 Bash verifiers / 204 nodes / 933 edges / 200 components. Complete
 mixed-suite Wave 5 verification passed all 199 surviving entrypoints, accepting
 the wave without a compatibility execution path.
+
+### Post-Wave-5 Edge-Free Contract
+
+The next owner-coherent wave contains six semantic child checkers with exactly
+zero outgoing executable edges and four callers with explicit dependency or
+lifecycle edges. The former edge contract required participating packages to
+have manifest rows, so it could not distinguish exact edge-free proof from
+omitted participation.
+
+The generic edge assertion now provides mutually exclusive
+`edge-dispositions` and `edge-free` package modes. Edge-free packages prohibit
+manifest rows and prove zero generated executable edges while admitted; after
+acceptance they additionally prove checker absence. This enables exact
+admission without fabricated edges, inferred graph defaults, or weakened
+package authority.
+
+All 20 focused edge tests, all 62 engine tests, all 77 declarative suites,
+graph freshness at 199 Bash verifiers / 204 nodes / 933 edges / 200 components,
+both plan checks, diff integrity, and all 199 mixed entrypoints passed. The
+contract is accepted before any Wave 6 package is admitted.

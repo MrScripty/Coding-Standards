@@ -11,3 +11,4 @@ packages_path = "evaluation/standards-effectiveness/checker-migration-packages.t
 edges_path = "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv"
 registry_path = "evaluation/standards-effectiveness/suite-registry.toml"
 participation_token = "edge-dispositions"
+edge_free_token = "edge-free"

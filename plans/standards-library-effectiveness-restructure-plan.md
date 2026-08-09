@@ -12,9 +12,9 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 5 and M6-EDGE-1 are accepted; exact typed executable-edge semantics
 govern further checker deletion.
 
-**Next slice:** audit the delegated verification engine's fresh 199-verifier
-graph and admit the next exact dependency-closed, owner-coherent accelerated
-wave only if its no-fallback write set and edge dispositions can be frozen.
+**Next slice:** admit the delegated verification engine's ten-checker
+Contracts, Diagnostics, and Verification wave using the accepted explicit
+edge-free and exact-edge package modes with no fallback execution.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

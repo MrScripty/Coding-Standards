@@ -1480,3 +1480,26 @@
   components; and diff integrity passed.
 - The complete mixed-suite Wave 5 checkpoint passed all 199 surviving
   entrypoints. Wave 5 is accepted; the next slice is a fresh dependency audit.
+
+## 2026-08-09 - Post-Wave-5 Edge-Free Re-Plan And Implementation
+
+- Audited the fresh graph and selected a ten-checker, four-owner-package wave
+  preserving 69 decisions and 18 dispositions with existing suite primitives.
+- Found six semantic child checker packages with zero outgoing executable
+  edges. The existing edge contract could neither prove that state explicitly
+  nor accept a participating package without fabricated rows.
+- Added a configured `edge-free` mode alongside `edge-dispositions`. The modes
+  are mutually exclusive; edge-free packages prohibit rows, prove zero graph
+  edges, require the checker while admitted, and require its absence when
+  accepted.
+- Recorded VE030 for the accepted Milestone 3 metadata task that remains
+  incomplete. The metadata kernel follows the immediate ten-checker wave and
+  precedes the larger Release-family migration.
+- Focused verification passed all 20 edge-contract tests and both package and
+  edge declarative authority suites. Complete acceptance evidence follows in
+  this slice before admission begins.
+- All 62 engine tests and all 77 declarative suites passed. Graph freshness
+  remained at 199 Bash verifiers / 204 nodes / 933 edges / 200 components;
+  both plan checks and diff integrity passed.
+- The complete mixed checkpoint passed all 199 entrypoints. The edge-free
+  contract is accepted; the next slice admits the connected ten-checker wave.

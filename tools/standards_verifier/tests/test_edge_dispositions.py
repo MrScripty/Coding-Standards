@@ -95,6 +95,7 @@ class EdgeDispositionsTest(unittest.TestCase):
             edges_path = "edges.tsv"
             registry_path = "registry.toml"
             participation_token = "edge-dispositions"
+            edge_free_token = "edge-free"
             """,
         )
 
@@ -420,6 +421,61 @@ class EdgeDispositionsTest(unittest.TestCase):
         self.assertEqual(
             result.diagnostics[0].code, "ASSERT.EDGE_PACKAGE_COVERAGE"
         )
+
+    def test_admitted_edge_free_package_passes(self) -> None:
+        self.write("source.sh", "#!/usr/bin/env bash\n")
+        self.write_package(verification="focused,edge-free")
+        self.write("edges.tsv", EDGE_HEADER)
+        self.write("edge-dispositions.tsv", MANIFEST_HEADER)
+
+        self.assertEqual(self.run_contract().status, "passed")
+
+    def test_accepted_edge_free_package_passes_when_source_is_absent(self) -> None:
+        self.write_package(state="accepted", verification="focused,edge-free")
+        self.write("edges.tsv", EDGE_HEADER)
+        self.write("edge-dispositions.tsv", MANIFEST_HEADER)
+
+        self.assertEqual(self.run_contract().status, "passed")
+
+    def test_edge_free_package_rejects_graph_edges(self) -> None:
+        self.write("source.sh", "#!/usr/bin/env bash\n")
+        self.write_package(verification="focused,edge-free")
+        self.write(
+            "edges.tsv", EDGE_HEADER + "helper_dependency\tsource.sh\ttarget.sh\n"
+        )
+        self.write("edge-dispositions.tsv", MANIFEST_HEADER)
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_FREE_PRESENT", {item.code for item in result.diagnostics}
+        )
+
+    def test_edge_free_package_rejects_disposition_rows(self) -> None:
+        self.write("source.sh", "#!/usr/bin/env bash\n")
+        self.write_package(verification="focused,edge-free")
+        self.write(
+            "edges.tsv", EDGE_HEADER + "helper_dependency\tsource.sh\ttarget.sh\n"
+        )
+        self.write("edge-dispositions.tsv", MANIFEST_HEADER + self.row())
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_FREE_ROWS", {item.code for item in result.diagnostics}
+        )
+
+    def test_edge_participation_modes_are_mutually_exclusive(self) -> None:
+        self.write("source.sh", "#!/usr/bin/env bash\n")
+        self.write_package(
+            verification="focused,edge-dispositions,edge-free"
+        )
+        self.write("edges.tsv", EDGE_HEADER)
+        self.write("edge-dispositions.tsv", MANIFEST_HEADER)
+
+        result = self.run_contract()
+
+        self.assertIn("ASSERT.EDGE_MODE", {item.code for item in result.diagnostics})
 
 
 if __name__ == "__main__":

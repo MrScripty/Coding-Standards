@@ -136,6 +136,7 @@ class EdgeDispositionsCheck:
     edges_path: str
     registry_path: str
     participation_token: str
+    edge_free_token: str
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         root = context.repo_root
@@ -388,11 +389,76 @@ class EdgeDispositionsCheck:
             package_id: package
             for package_id, package in packages.items()
             if self.participation_token in package["verification"].split(",")
+            or self.edge_free_token in package["verification"].split(",")
         }
         for package_id, package in participating.items():
             source = package["subject"].removeprefix("checker:")
             declared = represented.get(package_id, set())
             actual = actual_by_source.get(source, set())
+            verification = package["verification"].split(",")
+            has_manifest = self.participation_token in verification
+            is_edge_free = self.edge_free_token in verification
+            if has_manifest and is_edge_free:
+                diagnostics.append(
+                    _diagnostic(
+                        context,
+                        self.id,
+                        "ASSERT.EDGE_MODE",
+                        "package cannot require edge rows and declare itself edge-free",
+                        path=self.packages_path,
+                        field="verification",
+                        expected="exactly one edge participation mode",
+                        observed=package["verification"],
+                    )
+                )
+                continue
+            if is_edge_free:
+                if declared:
+                    diagnostics.append(
+                        _diagnostic(
+                            context,
+                            self.id,
+                            "ASSERT.EDGE_FREE_ROWS",
+                            "edge-free package must not have disposition rows",
+                            path=self.path,
+                            field="package_id",
+                            expected="[]",
+                            observed=repr(sorted(declared)),
+                        )
+                    )
+                if actual:
+                    diagnostics.append(
+                        _diagnostic(
+                            context,
+                            self.id,
+                            "ASSERT.EDGE_FREE_PRESENT",
+                            "edge-free package has executable graph edges",
+                            path=self.edges_path,
+                            field="package_id",
+                            expected="[]",
+                            observed=repr(sorted(actual)),
+                        )
+                    )
+                if package["state"] == "admitted":
+                    contained_file(
+                        root,
+                        source,
+                        suite=context.suite_id,
+                        check=self.id,
+                    )
+                elif package["state"] == "accepted" and (root / source).exists():
+                    diagnostics.append(
+                        _diagnostic(
+                            context,
+                            self.id,
+                            "ASSERT.EDGE_ACCEPTED_SOURCE_PRESENT",
+                            "accepted checker source is still present",
+                            path=source,
+                            field="package_id",
+                            observed=package_id,
+                        )
+                    )
+                continue
             if not declared:
                 diagnostics.append(
                     _diagnostic(
@@ -723,6 +789,7 @@ def parse_edge_dispositions_check(
         "edges_path",
         "registry_path",
         "participation_token",
+        "edge_free_token",
     }
     unknown = set(raw) - allowed
     if unknown:
@@ -752,4 +819,5 @@ def parse_edge_dispositions_check(
         _required_string(raw, "edges_path", suite_id, check_id),
         _required_string(raw, "registry_path", suite_id, check_id),
         _required_string(raw, "participation_token", suite_id, check_id),
+        _required_string(raw, "edge_free_token", suite_id, check_id),
     )

@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-Wave-5 dependency audit
+**Current phase:** Milestone 6: Wave 6 connected-package admission
 
-**Next slice:** Audit the fresh 199-verifier graph, classify exact dependency
-closures and semantic ownership, and admit the next owner-coherent accelerated
-wave only if its complete no-fallback write set can be frozen.
+**Next slice:** Admit the ten-checker Contracts, Diagnostics, and Verification
+wave with six edge-free packages, four exact-edge packages, and final
+same-owner-package to suite-requires transitions frozen before implementation.
 
 **Acceptance status:** `pending`
 
@@ -2254,6 +2254,41 @@ authority passed; all 57 engine tests and all 77 declarative suites passed;
 graph freshness passed at 199 Bash verifiers / 204 nodes / 933 edges / 200
 components; diff integrity and the complete mixed checkpoint passed all 199
 surviving entrypoints.
+
+##### Post-Wave-5 Re-Plan: Explicit Edge-Free Packages
+
+**Status:** `Accepted`
+
+The fresh graph exposes a connected ten-checker wave whose six semantic child
+checkers have exactly zero outgoing executable edges. Omitting edge-contract
+participation would weaken explicit package proof; inventing manifest rows
+would falsify the generated graph; and treating semantic dependencies as
+independent gates would violate the no-fallback rule.
+
+**Decision:** extend the existing generic edge assertion with a configured
+`edge-free` token. Every newly admitted checker package must use exactly one of
+`edge-dispositions` or `edge-free`. Edge-free packages prohibit disposition
+rows, require zero generated executable edges, require their checker while
+admitted, and require checker absence when accepted. Edge packages retain the
+existing exact non-empty historical manifest contract.
+
+**Allowed write set:** the generic edge check, focused tests, its declarative
+configuration, engine documentation, this plan and ledger, issues and inventory
+report, and the parent plan. No package, policy, fixture, checker, registry,
+generated graph, compatibility schema, wrapper, bridge, or alias may change.
+
+**Acceptance gate:** focused mode, edge-presence, row-presence, admitted-source,
+and accepted-source tests; all engine tests and declarative suites; graph
+freshness; both plan checks; diff integrity; and one complete mixed checkpoint.
+
+**No-fallback rule:** no inferred edge-free state, empty edge-disposition mode,
+fabricated edge, optional participation, historical-row deletion, package
+exception, or silent success.
+
+**Verification:** all 20 focused edge tests and all 62 engine tests passed; all
+77 declarative suites passed; graph freshness remained 199 Bash verifiers /
+204 nodes / 933 edges / 200 components; both plan checks and diff integrity
+passed; and the complete mixed checkpoint passed all 199 entrypoints.
 
 **Tasks:**
 

@@ -50,11 +50,14 @@ whitespace, Unicode, or encoding normalization and accepts only `id`, `type`,
 `path`, and `expected` fields.
 
 The `edge_dispositions` check validates migration packages against the exact
-generated executable graph. Packages opt in with a configured verification
-token. Every participating checker package must classify its complete outgoing
-`executable_reference`, `helper_dependency`, and `verifier_dependency` edge
-set. Admitted packages must name present edges; accepted packages must retain
-their historical rows while their checker and graph edges are absent.
+generated executable graph. Packages opt into exactly one configured mode.
+`edge-dispositions` requires every outgoing `executable_reference`,
+`helper_dependency`, and `verifier_dependency` edge to have one exact manifest
+row. `edge-free` prohibits manifest rows and requires the generated graph to
+contain no outgoing executable edges. Admitted edge-free packages must retain
+their checker; accepted edge-free packages must not. Admitted edge packages
+must name present edges; accepted edge packages retain their historical rows
+while their checker and graph edges are absent.
 
 Each edge row has one of these dispositions and replacement forms:
 
