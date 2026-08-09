@@ -1216,3 +1216,21 @@ Focused verification passed all ten replacements plus package and edge
 authority, all 62 engine tests, and all 87 declarative suites. Graph freshness
 passed at 189 Bash verifiers / 194 nodes / 910 edges / 190 components. The
 complete mixed Wave 6 checkpoint passed all 189 surviving entrypoints.
+
+### Admitted M6-K1 Metadata Kernel
+
+One safety-critical package owns the metadata fixture checker and its bounded
+native replacement. Its two executable graph rows both target the shared
+metadata helper, which remains an external-owned artifact for 52 later
+semantic consumers and is not called by the replacement suite.
+
+The implementation may change only the canonical metadata contract wording,
+the focused metadata corpus, one typed Python check and tests, one registered
+suite, the admitted checker, and required serial integration artifacts. It may
+not change the helper, any semantic consumer, canonical module, legacy owner
+map, lockfile, unrelated suite, wrapper, alias, or compatibility path.
+
+Admission verification passed package and edge authority, all 62 engine tests,
+all 87 declarative suites, graph freshness at 189 Bash verifiers / 194 nodes /
+914 edges / 190 components, both plan checks, diff integrity, and the complete
+189-entrypoint mixed checkpoint.

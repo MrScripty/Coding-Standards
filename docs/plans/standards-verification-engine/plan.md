@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: metadata-kernel package admission
+**Current phase:** Milestone 6: metadata-kernel implementation
 
-**Next slice:** Freeze and admit the audited `M6-K1` module metadata-graph
-package through exact package and executable-edge authority, then pass baseline
-verification before changing standards policy, fixtures, engine source,
-registry, generated artifacts, or Bash paths.
+**Next slice:** Implement the admitted `M6-K1` module metadata-graph primitive,
+focused corpus, and registered fixture suite; delete only the fixture checker
+after all package, edge, engine, graph, plan, and mixed-suite gates pass.
 
 **Acceptance status:** `pending`
 
@@ -2376,7 +2375,7 @@ checkpoint passed all 189 surviving entrypoints.
 
 **Decision status:** `Accepted`
 
-**Package status:** `Planned`
+**Package status:** `Admitted`
 
 The metadata audit found that the canonical schema advertised module IDs or
 rule IDs in `Specializes`, while every live specialization names a module, the
@@ -2433,6 +2432,19 @@ package/edge authority, graph freshness, engine tests, declarative suites, both
 plan checks, diff integrity, and the complete mixed checkpoint with no policy,
 fixture, engine, registry, generated graph, or Bash deletion beyond admission
 bookkeeping.
+
+**Admission:** package `M6-K1` exclusively owns the fixture-checker subject and
+the proposed implementation write set. Its exact current executable-reference
+and helper-dependency edges both target the shared metadata helper and are
+classified as a retained external-owned artifact for 52 later consumers. The
+helper is not replacement execution for the new suite and remains excluded from
+this package's write set.
+
+**Admission evidence:** package and edge authority passed with one admitted
+package and two exact retained-artifact edges; all 62 engine tests and all 87
+declarative suites passed; graph freshness passed at 189 Bash verifiers / 194
+nodes / 914 edges / 190 components; both plan checks and diff integrity passed;
+and the complete mixed checkpoint passed all 189 entrypoints.
 
 **Implementation gate after admission:** focused parser/graph tests cover every
 typed diagnostic; the positive corpus and every negative fixture pass through

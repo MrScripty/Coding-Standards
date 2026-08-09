@@ -1607,3 +1607,23 @@
   suites, graph freshness at 189 Bash verifiers / 194 nodes / 910 edges / 190
   components, and diff integrity.
 - Next slice remains exact M6-K1 package and edge admission.
+
+## 2026-08-09 - M6-K1 Package Admission
+
+- Admitted one safety-critical package with the metadata fixture checker as its
+  exclusive stable subject and the metadata schema as owner.
+- Froze module-only specialization, field-specific grammar, canonical-owner
+  equality, exact target resolution, and relation-specific plus combined-cycle
+  diagnostics in the implementation write set.
+- Classified the subject's exact executable-reference and helper-dependency
+  edges to the shared metadata helper as an external-owned artifact retained
+  for 52 later semantic consumers. The helper is not a bridge or replacement
+  execution path for the new suite.
+- No standards policy, fixture, engine source, suite, registry entry, helper,
+  consumer, or checker path changed during admission.
+- Package and edge authority, all 62 engine tests, all 87 declarative suites,
+  graph freshness at 189 Bash verifiers / 194 nodes / 914 edges / 190
+  components, both plan checks, diff integrity, and the complete 189-entrypoint
+  mixed checkpoint passed.
+- Next slice: implement the native metadata primitive and fixture suite, then
+  delete only the admitted fixture checker.
