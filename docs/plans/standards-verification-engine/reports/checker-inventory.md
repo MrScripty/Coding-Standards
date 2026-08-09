@@ -906,3 +906,24 @@ Admission verification passed exact package authority, all 45 registered
 suites, 42 engine tests, Python compilation, both plan checks, lifecycle
 fixtures, graph freshness at 230 Bash verifiers / 235 nodes / 997 edges / 231
 components, diff integrity, and all 230 mixed entrypoints.
+
+### Implemented Milestone 6 Wave 1
+
+Build owner, Documentation traceability, Tooling owner, and Tooling reference
+recipes are now four independent declarative roots using existing strict
+decision and text primitives. Their 42 decision cases, 30 exact dispositions,
+canonical routes and owners, reference roles, and former-source prohibitions
+are preserved. The four Bash paths are deleted with no wrappers or bridges.
+
+Package authority is accepted. Root-README lifecycle authority now records 29
+Bash dependencies: 27 direct route assertions plus the unchanged one transitive
+and one computed assertion. The consumer inventory remains 33. VE023's actual
+14-row contract is authoritative and its stale 12-row success diagnostic no
+longer exists; VE024 records the associated subtype-count reconciliation.
+
+Focused verification passed all four replacements, package authority, all 49
+registered suites, 42 engine tests, Python compilation, row-35 lifecycle,
+removed-reference scans, admission-source immutability, and graph freshness at
+226 Bash verifiers / 231 nodes / 986 edges / 227 components. Complete
+mixed-suite Wave 1 verification passed all 226 surviving entrypoints, accepting
+the wave without a compatibility execution path.

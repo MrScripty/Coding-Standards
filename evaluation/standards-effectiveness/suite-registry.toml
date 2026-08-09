@@ -224,3 +224,23 @@ requires = []
 id = "rust-tooling-workspace-lints"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-workspace-lints.toml"
 requires = []
+
+[[suites]]
+id = "build-owner-contract"
+path = "evaluation/standards-effectiveness/suites/build-owner-contract.toml"
+requires = []
+
+[[suites]]
+id = "documentation-traceability-policy"
+path = "evaluation/standards-effectiveness/suites/documentation-traceability-policy.toml"
+requires = []
+
+[[suites]]
+id = "tooling-owner-contract"
+path = "evaluation/standards-effectiveness/suites/tooling-owner-contract.toml"
+requires = []
+
+[[suites]]
+id = "tooling-reference-recipes"
+path = "evaluation/standards-effectiveness/suites/tooling-reference-recipes.toml"
+requires = []

@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: Wave 1 implementation
+**Current phase:** Milestone 6: next dependency-closed owner-wave audit
 
-**Next slice:** Implement admitted Milestone 6 Wave 1 as four separate suites
-with one serial shared-authority integration and one complete-suite wave gate.
+**Next slice:** Inspect the fresh post-Wave-1 graph and admit the next smallest
+owner-coherent package set with complete Bash caller and prerequisite closure.
 
 **Acceptance status:** `pending`
 
@@ -1810,7 +1810,7 @@ documentation, and plan records.
 
 #### Wave 1 Admission: Four Caller-Free Owner Packages
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Graph basis:** the fresh post-M5 graph contains 230 Bash verifiers, 235
 nodes, 989 edges, and 231 components. Corrected column-8 analysis identifies
@@ -1838,9 +1838,10 @@ or adding a compatibility expectation is prohibited.
 **Shared serial integration:** register four separate suites; update exact
 package authority; remove Build, Tooling owner, and Tooling reference from the
 root-README dependency inventory; change its exact count from 32 to 29 in the
-row-35 verifier; delete the four scripts; regenerate the checker graph; update
-plan records. Documentation traceability has no root-README lifecycle entry.
-The consumer inventory remains exactly 33.
+row-35 verifier and its root-route subtype from 30 to 27; delete the four
+scripts; regenerate the checker graph; update plan records. Documentation
+traceability has no root-README lifecycle entry. The transitive/computed
+subtypes remain 1/1 and the consumer inventory remains exactly 33.
 
 **No-fallback rule:** do not retain wrappers, Bash bridges, duplicated suite
 dependencies, inferred decisions, partial disposition sets, default tools,
@@ -1856,6 +1857,26 @@ complete mixed-suite wave gate pass.
 42 engine tests, Python compilation, both plan checks, lifecycle fixtures,
 graph freshness at 230 Bash verifiers / 235 nodes / 997 edges / 231
 components, diff integrity, and all 230 mixed entrypoints passed.
+
+**Implementation:** four independent declarative suites now own the Build,
+Documentation traceability, Tooling owner, and Tooling reference contracts.
+The four Bash checkers are deleted without wrappers or bridges. Package rows
+are accepted; three root-README dependency rows are removed; row 35 now freezes
+29 total dependencies, 27 root-route dependencies, unchanged 1/1
+transitive/computed dependencies, and 33 consumers. VE023 is resolved by
+enforcing all 14 Tooling-reference dispositions; VE024 records the bounded
+subtype-count reconciliation omitted from admission prose.
+
+**Focused verification:** all four focused replacements and package authority
+passed; all 49 registered suites passed; all 42 engine tests and Python
+compilation passed; row-35 lifecycle passed at 29/27/1/1/33; no executable or
+lifecycle references to the four deleted paths remain; admission fixtures,
+owners, routes, dispositions, references, and former source are unchanged; and
+the regenerated graph is fresh at 226 Bash verifiers / 231 nodes / 986 edges /
+227 components.
+
+**Wave acceptance:** all 226 surviving mixed entrypoints passed. Wave 1 is
+accepted with four Bash verifiers removed and no compatibility execution path.
 
 **Tasks:**
 

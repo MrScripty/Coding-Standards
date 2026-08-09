@@ -1,0 +1,59 @@
+schema_version = 1
+id = "documentation-traceability-policy"
+owner = "workflow.documentation"
+description = "Documentation decision traceability from explicit change inputs and mappings without path, mode, branch, or skip defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/documentation/traceability-policy-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+facts = ["complete", "contradictory"]
+mapping = ["complete", "missing"]
+input = ["missing", "range", "staged"]
+capability = ["supported", "unsupported"]
+fallback = ["adjacent-revisions", "broad-directory", "default-branch", "none", "readme-per-directory", "skip-unresolved", "src-directory", "staged-mode", "unrelated-adr"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "facts", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "mapping", op = "eq", value = "missing" }, { field = "input", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "workflow"
+type = "text"
+path = "workflows/documentation.md"
+required = ["## Decision Traceability", "project-owned trigger paths", "evaluates only index state", "Do not default to a `src/` directory", "is `invalid`", "are `unavailable`", "`unsupported`; do not infer"]
+prohibited = []
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0696\tTOOLING-STANDARDS.md\tworkflows/documentation.md\tindex\t", "STD-0697\tTOOLING-STANDARDS.md\tworkflows/documentation.md\tsplit\t"]
+prohibited = []
+
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/documentation.md"
+required = ["## Decision Traceability Examples", "trigger_path", "check-decision-traceability.sh --mode staged", "--base-ref"]
+prohibited = []
+
+[[checks]]
+id = "former-source"
+type = "text"
+path = "TOOLING-STANDARDS.md"
+required = []
+prohibited = ["trigger_path", "check-decision-traceability.sh --mode staged", "--base-ref"]

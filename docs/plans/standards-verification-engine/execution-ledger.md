@@ -1202,3 +1202,29 @@
   231 components; diff integrity; and all 230 mixed entrypoints.
 - Next slice: implement all four suites and delete all four Bash paths in one
   integrated wave, then run focused package checks and one complete-suite gate.
+
+## 2026-08-08 - Milestone 6 Wave 1 Implementation
+
+- Added separate declarative suites for Build owner, Documentation
+  traceability, Tooling owner, and Tooling reference recipes using only the
+  existing strict decision and text primitives.
+- Preserved 42 decision cases, 30 exact dispositions, canonical owner and route
+  evidence, non-normative reference roles, and all former-source negative
+  assertions. Admission fixtures and canonical documents are unchanged.
+- Deleted all four admitted Bash checkers with no wrapper, bridge, duplicated
+  dependency, inferred result, compatibility schema, or alternate authority.
+- Accepted package rows and removed the Build and two Tooling Bash paths from
+  row 35's lifecycle inventory. Exact totals are now 29 dependencies, 27
+  root-route assertions, 1 transitive assertion, 1 computed assertion, and 33
+  consumers.
+- Resolved VE023 by preserving all 14 Tooling-reference dispositions and
+  deleting its stale 12-row diagnostic. Recorded and resolved VE024 because the
+  admission named the total count but omitted the corresponding 30-to-27
+  subtype count.
+- Focused verification passed all four replacements and package authority; all
+  49 declarative suites; 42 engine tests; Python compilation; row-35 lifecycle;
+  removed-reference scans; admission-source immutability; and graph freshness
+  at 226 Bash verifiers / 231 nodes / 986 edges / 227 components.
+- Complete mixed-suite Wave 1 verification passed all 226 surviving
+  entrypoints. Wave 1 is accepted; the next slice is a fresh dependency audit
+  before another package admission.

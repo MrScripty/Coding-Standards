@@ -1,6 +1,5 @@
 file	current_dependency	replacement
 evaluation/standards-effectiveness/verify-accessibility-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-build-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-concurrency-policy.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-commit-authority.sh	computed-root-readme-route-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-contract-ownership.sh	transitive-root-readme-route-assertion	canonical-router-or-owner-evidence
@@ -27,7 +26,5 @@ evaluation/standards-effectiveness/verify-rust-dependency-owner-contract.sh	root
 evaluation/standards-effectiveness/verify-rust-interop-memory.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-release-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-tooling-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-tooling-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-tooling-reference-recipes.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-typescript-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence

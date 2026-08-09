@@ -1,0 +1,54 @@
+schema_version = 1
+id = "build-owner-contract"
+owner = "workflow.build"
+description = "Build authority, inputs, outputs, invalidation, environment, and typed outcomes without inferred defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/build/owner-contract-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+authority = ["accepted", "contradictory", "missing"]
+inputs = ["known", "missing"]
+outputs = ["known", "missing"]
+invalidation = ["known", "missing"]
+environment = ["known", "missing"]
+capability = ["supported", "unsupported"]
+fallback = ["ambient-environment", "broad-rerun", "build-success", "detection-swap", "existing-script", "none", "raw-compiler", "source-output", "timestamp-convention"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "authority", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "authority", op = "eq", value = "missing" }, { field = "inputs", op = "eq", value = "missing" }, { field = "outputs", op = "eq", value = "missing" }, { field = "invalidation", op = "eq", value = "missing" }, { field = "environment", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "workflow"
+type = "text"
+path = "workflows/build.md"
+required = ["ID: `workflow.build`", "## Build Authority", "## Inputs, Outputs, And Side Effects", "## Invalidation And Incrementality", "## Environment And External Effects", "## Determinism And Reproducibility", "## Typed Outcomes"]
+prohibited = []
+
+[[checks]]
+id = "router"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["[Build](workflows/build.md)"]
+prohibited = []
+
+[[checks]]
+id = "root-index"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["[Build workflow](workflows/build.md)"]
+prohibited = []

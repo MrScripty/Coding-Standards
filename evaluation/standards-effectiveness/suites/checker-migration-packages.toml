@@ -139,7 +139,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/build-owner-contract.toml,evaluation/standards-effectiveness/verify-build-owner-contract.sh,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M5-CP6,VE022",
   "focused-suite,engine-tests,graph-freshness,declarative-all,removed-paths,lifecycle-transfer,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "12",
   "M6-W1-DOC-TRACE",
@@ -150,7 +150,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/documentation-traceability-policy.toml,evaluation/standards-effectiveness/verify-documentation-traceability-policy.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M5-CP6,VE022",
   "focused-suite,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "13",
   "M6-W1-TOOLING",
@@ -161,7 +161,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/tooling-owner-contract.toml,evaluation/standards-effectiveness/verify-tooling-owner-contract.sh,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M5-CP6,VE022",
   "focused-suite,engine-tests,graph-freshness,declarative-all,removed-paths,lifecycle-transfer,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "14",
   "M6-W1-TOOLING-REF",
@@ -172,5 +172,5 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/tooling-reference-recipes.toml,evaluation/standards-effectiveness/verify-tooling-reference-recipes.sh,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M5-CP6,VE022,VE023",
   "focused-suite,exact-disposition-count,engine-tests,graph-freshness,declarative-all,removed-paths,lifecycle-transfer,complete-suite",
-  "admitted",
+  "accepted",
 ]]
