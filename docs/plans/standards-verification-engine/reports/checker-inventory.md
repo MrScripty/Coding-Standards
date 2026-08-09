@@ -1251,3 +1251,17 @@ suites, strict validation of 57 live canonical modules, both plan checks,
 removed-path proof, diff integrity, graph freshness, and all 188 mixed
 entrypoints. No helper consumer, canonical module, legacy map, wrapper, alias,
 compatibility parser, or fallback path changed in M6-K1.
+
+### Admitted M6-K2 Release Reference Closure
+
+The selected checker has zero executable inbound callers, zero contract
+references, and exactly two outgoing graph edges: an executable reference and
+helper dependency to the shared metadata helper. It is an acyclic one-node
+component and is the smallest complete owner-local candidate after M6-K1.
+
+The Release Recipe owner can preserve every behavior with existing table,
+metadata graph, text, and exact-text checks. Canonical sources, frozen
+inventory, dispositions, helper, other consumers, engine, and fixtures remain
+read-only. The implementation package adds one suite and registry route,
+replaces the README route, deletes only the checker, and updates required
+serial lifecycle and graph artifacts.

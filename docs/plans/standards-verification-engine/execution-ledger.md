@@ -1694,3 +1694,29 @@
 - Package state is `Accepted`; the fixture checker is absent. Next slice is a
   read-only audit for the smallest owner-coherent metadata-helper consumer
   package before any further admission or implementation.
+
+## 2026-08-09 - M6-K2 Release Reference Admission
+
+- Audited all 52 remaining metadata-helper consumers against generated inbound,
+  contract-reference, component, wave, and outbound-dependency facts.
+- Twenty consumers have zero executable inbound callers. Selected Release
+  Reference Closure because it also has zero contract references, one acyclic
+  node, only the helper dependency, the smallest checker surface, and one
+  canonical Release Recipe owner.
+- Mapped every Bash assertion to existing table, direct metadata graph, text,
+  or exact-text primitives. Frozen inventory, dispositions, canonical sources,
+  and the complete legacy index remain read-only evidence.
+- Admitted package M6-K2 and both exact helper edges. The helper remains an
+  external-owned artifact for other consumers and cannot be called by the
+  replacement suite.
+- No checker, suite, registry route, README route, generated graph, canonical
+  source, fixture, helper, consumer, or engine file changed during admission.
+- Corrected the package authority's exact row count from 52 to 53 after its
+  full projection accepted M6-K2; this was required serial admission authority,
+  not an implementation or semantic-policy change.
+- Admission verification passed the package and edge authority suites, all 88
+  declarative suites, both plan-structure checks, diff integrity, and graph
+  freshness at 188 Bash verifiers, 193 nodes, 912 edges, and 189 components.
+  The complete mixed checkpoint passed all 188 surviving Bash entrypoints.
+- Next slice: verify admission, then implement the exact package without a
+  wrapper, compatibility path, command action, fallback, or weaker assertion.

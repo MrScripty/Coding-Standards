@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-kernel package selection
+**Current phase:** Milestone 6: M6-K2 release-reference admission
 
-**Next slice:** Audit the regenerated graph for the smallest inbound-safe,
-owner-coherent package of semantic consumers of the retained metadata helper;
-do not change a consumer, helper, suite, or package state before admission.
+**Next slice:** Implement admitted `M6-K2` as one Release Recipe-owned
+declarative closure and delete only its checker after every declared gate
+passes.
 
 **Acceptance status:** `pending`
 
@@ -2515,6 +2515,56 @@ registry is required; module-only semantics would weaken a profile contract;
 combined-cycle rejection invalidates an intended current graph; exact grammar
 cannot represent current metadata; or the first package must edit a semantic
 consumer of `check-metadata.sh`.
+
+##### M6-K2: Release Reference Closure
+
+**Package status:** `Admitted`
+
+The post-kernel graph has 52 remaining metadata-helper consumers. Twenty have
+zero executable inbound callers. `verify-release-reference-closure.sh` is the
+smallest owner-coherent candidate: it has zero executable inbound callers,
+zero contract references, one node in an acyclic component, and only the
+metadata helper as an executable dependency.
+
+**Owner and behavior:** `reference/recipes/releases.md` owns the non-normative
+Release Recipe closure. The checker proves exact frozen inventory IDs
+`STD-0541` and `STD-0542`, exact move dispositions and rationales, the complete
+selected metadata graph through Core, Verification, Contracts, Release, and
+the recipe, required workflow/recipe/index links, non-normative recipe wording,
+and the complete concise legacy Release index with no residual policy or
+executable recipe authority.
+
+**Declarative replacement:** use existing `table` checks for exact inventory
+and disposition projections, one direct `metadata_graph` check for the selected
+module graph, `text` checks for canonical links and recipe wording, and
+`exact_text` for the complete legacy index. No new engine primitive, fixture,
+canonical source edit, schema change, regex approximation, helper call, command
+action, wrapper, alias, compatibility path, or fallback is admitted.
+
+**Exact implementation write set:** package and edge manifests, suite registry,
+package authority suite, new `release-reference-closure` suite, deleted checker,
+evaluation README route, generated checker graph artifacts, this plan, its
+ledger/issues/inventory report, and the parent-plan cursor. Core, Verification,
+Contracts, Release Workflow, Release Recipe, legacy Release index, frozen
+section inventory, consolidation dispositions, helper, other consumers, engine,
+fixtures, lockfiles, and unrelated files are read-only evidence.
+
+**Edge disposition:** both exact current edges target the shared metadata
+helper and remain classified as a retained external-owned artifact. The new
+suite validates metadata natively and does not execute the helper. Accepted
+state requires the checker and both graph edges to be absent while the helper
+remains for other owners.
+
+**Admission evidence:** package `M6-K2` and its two exact helper edges are
+admitted. Implementation may begin only after package/edge authority, graph
+freshness, both plan checks, declarative suites, diff integrity, and the mixed
+checkpoint pass with no implementation file changed.
+
+**Re-plan triggers:** stop if exact legacy-index bytes conflict with an intended
+current index; the two frozen identifiers or dispositions do not match their
+accepted source ownership; a canonical source must change; another executable
+or contract inbound edge exists; or existing primitives cannot preserve one of
+the checker's observable claims without weakening it.
 
 **Tasks:**
 

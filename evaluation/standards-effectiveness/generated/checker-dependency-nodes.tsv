@@ -135,7 +135,7 @@ evaluation/standards-effectiveness/verify-release-pipeline-policy.sh	verifier	ye
 evaluation/standards-effectiveness/verify-release-procedure-policy.sh	verifier	yes	component-0133	1	no	1	1	1	1	1
 evaluation/standards-effectiveness/verify-release-publication-policy.sh	verifier	yes	component-0134	1	no	1	0	0	0	1
 evaluation/standards-effectiveness/verify-release-recovery-policy.sh	verifier	yes	component-0135	1	no	1	0	0	0	1
-evaluation/standards-effectiveness/verify-release-reference-closure.sh	verifier	yes	component-0136	1	no	1	0	0	0	1
+evaluation/standards-effectiveness/verify-release-reference-closure.sh	verifier	yes	component-0136	1	no	1	0	3	0	1
 evaluation/standards-effectiveness/verify-release-workflow-foundation.sh	verifier	yes	component-0137	1	no	1	0	1	0	1
 evaluation/standards-effectiveness/verify-resilience-owner-contract.sh	verifier	yes	component-0138	1	no	4	3	0	3	2
 evaluation/standards-effectiveness/verify-resilience-recovery-policy.sh	verifier	yes	component-0139	1	no	5	0	0	0	2
