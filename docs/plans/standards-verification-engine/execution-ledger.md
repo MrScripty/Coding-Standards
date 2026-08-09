@@ -457,3 +457,21 @@
 - Next slice: migrate the Row 19 decomposition and owner-validation pair with
   accepted table and relation mechanics; do not broaden the engine unless
   fixture evidence proves a missing reusable primitive.
+
+## 2026-08-08 - Milestone 3 Package M3-S2 And Graph Boundary
+
+- Accepted one Row 19 suite preserving 18 exact children, 50 expanded IDs,
+  strict execution and owner-validation tables, selected split boundaries,
+  report contracts, all accepted plan markers, and canonical owner files.
+- Deleted both Bash checkers and reconciled their two frozen ledger references
+  to the registered suite without changing historical outcomes.
+- Verification: 31 self-tests, eight focused checks, 36 suites/170 checks direct
+  and launcher execution, inventory/removal/diff gates, and all 238 mixed
+  entrypoints passed.
+- Replan trigger: the temporary launcher is now the only dependency-free Bash
+  entrypoint. Among 238 remaining entries, 138 have executable inbound edges,
+  72 have frozen-contract edges, 44 have both, 166 invoke verifiers, and 84
+  invoke helpers. The 237 non-launcher entries need dependency-ordered shared
+  migration or authorized frozen-reference reconciliation.
+- Do not remove the launcher before replacing the complete-suite convention.
+  Next action is planning and graph classification, not a source slice.

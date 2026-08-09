@@ -1,0 +1,150 @@
+schema_version = 1
+id = "milestone-7-row-19-structure"
+owner = "migration.parent-plan"
+description = "Accepted Row 19 decomposition and owner-validation structure without transitional owner or lifecycle defaults."
+
+[[checks]]
+id = "execution-decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+non_empty = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+unique = [["baseline_order", "child_order"]]
+[[checks.projections]]
+columns = ["ids"]
+order = "lexical"
+expected = [
+  ["STD-0654"], ["STD-0655"], ["STD-0656"], ["STD-0657"], ["STD-0658"],
+  ["STD-0659"], ["STD-0660"], ["STD-0661"], ["STD-0662"], ["STD-0663"],
+  ["STD-0664"], ["STD-0665"], ["STD-0666"], ["STD-0667"], ["STD-0668"],
+  ["STD-0669"], ["STD-0670"], ["STD-0671"], ["STD-0672"], ["STD-0673"],
+  ["STD-0674"], ["STD-0675"], ["STD-0676"], ["STD-0677"], ["STD-0678"],
+  ["STD-0679"], ["STD-0680"], ["STD-0681"], ["STD-0682"], ["STD-0683"],
+  ["STD-0684"], ["STD-0685"], ["STD-0686"], ["STD-0687"], ["STD-0688"],
+  ["STD-0689"], ["STD-0690"], ["STD-0691"], ["STD-0692"], ["STD-0693"],
+  ["STD-0694"], ["STD-0695"], ["STD-0696"], ["STD-0697"], ["STD-0698"],
+  ["STD-0699"], ["STD-0700"], ["STD-0701"], ["STD-0702"], ["STD-0703"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "19"
+[checks.projections.split]
+field = "ids"
+delimiter = ","
+[[checks.projections]]
+columns = ["child_order"]
+order = "source"
+expected = [["1"], ["2"], ["3"], ["4"], ["5"], ["6"], ["7"], ["8"], ["9"], ["10"], ["11"], ["12"], ["13"], ["14"], ["15"], ["16"], ["17"], ["18"]]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "19"
+[[checks.projections]]
+columns = ["child_order", "ids", "owner", "activation", "rationale"]
+order = "source"
+expected = [
+  ["8", "STD-0677,STD-0678,STD-0679,STD-0680", "profiles/languages/typescript.md", "pre-slice-review", "split durable TypeScript lint compiler and architecture semantics into the TypeScript profile while extracting ESLint Prettier tsconfig and custom-rule syntax to non-normative Tooling reference without product version preset flag glob or rule defaults"],
+  ["9", "STD-0681,STD-0682,STD-0683,STD-0686", "workflows/tooling.md", "pre-slice-review", "govern formatting ownership editor automation scheduling and lint separation while extracting VS Code format-on-save Prettier ESLint pairing and installation syntax to non-normative Tooling reference without editor CI or tool-pair defaults"],
+  ["12", "STD-0687,STD-0689,STD-0690", "workflows/tooling.md", "pre-slice-review", "govern CI orchestration dependency graph failure aggregation schedule and cancellation while extracting GitHub fail-fast summary continue-on-error needs success tier and launcher command syntax to non-normative Tooling reference without provider topology tier parallel or command defaults"],
+  ["13", "STD-0691,STD-0692", "workflows/tooling.md", "pre-slice-review", "govern tool debt and automation cost while extracting GitHub permissions concurrency setup cache package-command summary and artifact syntax to non-normative Tooling reference without ratchet cache timeout path-filter or cancellation defaults"],
+  ["15", "STD-0696,STD-0697", "workflows/documentation.md", "pre-slice-review", "reconcile pre-migration Decision Traceability lineage under Documentation while extracting maps commands hook YAML and provider syntax to non-normative reference without directory README diff-mode branch or artifact defaults"],
+  ["16", "STD-0698", "workflows/implementation.md", "pre-slice-review", "govern change-description evidence while extracting GitHub template placement installation headings and checklist syntax to non-normative Implementation reference without provider pull-request template or duplicated-rationale defaults"],
+]
+[checks.projections.where]
+all = [
+  { field = "baseline_order", op = "eq", value = "19" },
+  { field = "child_order", op = "in", values = ["8", "9", "12", "13", "15", "16"] },
+]
+
+[[checks]]
+id = "execution-owner-coverage"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+required = ["workflows/tooling.md", "workflows/verification.md", "workflows/commit.md", "workflows/documentation.md", "workflows/implementation.md", "topics/dependencies.md", "profiles/languages/typescript.md", "reference/recipes/tooling.md"]
+prohibited = []
+
+[[checks]]
+id = "owner-validation"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-row-19-owner-validation.tsv"
+header = ["id", "proposed_owner", "action", "semantic_group"]
+row_count = 50
+non_empty = ["id", "proposed_owner", "action", "semantic_group"]
+unique = [["id"]]
+[checks.domains]
+proposed_owner = ["profiles/languages/typescript.md", "reference", "topics/dependencies.md", "workflows/commit.md", "workflows/documentation.md", "workflows/implementation.md", "workflows/tooling.md", "workflows/verification.md"]
+action = ["index", "move", "retain", "retire", "route", "split"]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [
+  ["STD-0654"], ["STD-0655"], ["STD-0656"], ["STD-0657"], ["STD-0658"],
+  ["STD-0659"], ["STD-0660"], ["STD-0661"], ["STD-0662"], ["STD-0663"],
+  ["STD-0664"], ["STD-0665"], ["STD-0666"], ["STD-0667"], ["STD-0668"],
+  ["STD-0669"], ["STD-0670"], ["STD-0671"], ["STD-0672"], ["STD-0673"],
+  ["STD-0674"], ["STD-0675"], ["STD-0676"], ["STD-0677"], ["STD-0678"],
+  ["STD-0679"], ["STD-0680"], ["STD-0681"], ["STD-0682"], ["STD-0683"],
+  ["STD-0684"], ["STD-0685"], ["STD-0686"], ["STD-0687"], ["STD-0688"],
+  ["STD-0689"], ["STD-0690"], ["STD-0691"], ["STD-0692"], ["STD-0693"],
+  ["STD-0694"], ["STD-0695"], ["STD-0696"], ["STD-0697"], ["STD-0698"],
+  ["STD-0699"], ["STD-0700"], ["STD-0701"], ["STD-0702"], ["STD-0703"],
+]
+[[checks.projections]]
+columns = ["id", "proposed_owner", "action"]
+order = "source"
+expected = [
+  ["STD-0677", "profiles/languages/typescript.md", "split"],
+  ["STD-0678", "profiles/languages/typescript.md", "split"],
+  ["STD-0679", "profiles/languages/typescript.md", "split"],
+  ["STD-0680", "profiles/languages/typescript.md", "split"],
+  ["STD-0682", "workflows/tooling.md", "split"],
+  ["STD-0686", "workflows/tooling.md", "split"],
+  ["STD-0689", "workflows/tooling.md", "split"],
+  ["STD-0690", "workflows/tooling.md", "split"],
+  ["STD-0692", "workflows/tooling.md", "split"],
+  ["STD-0696", "workflows/documentation.md", "index"],
+  ["STD-0697", "workflows/documentation.md", "split"],
+  ["STD-0698", "workflows/implementation.md", "split"],
+  ["STD-0699", "topics/dependencies.md", "route"],
+  ["STD-0700", "topics/dependencies.md", "index"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0677", "STD-0678", "STD-0679", "STD-0680", "STD-0682", "STD-0686", "STD-0689", "STD-0690", "STD-0692", "STD-0696", "STD-0697", "STD-0698", "STD-0699", "STD-0700"]
+
+[[checks]]
+id = "decomposition-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-19-decomposition.md"
+required = ["## Proposed Owner Contract", "does not own what evidence proves", "must not fall back", "## Ordered Children", "18 overlay rows", "canonical-owner-homogeneous", "Child `19.8` is a reviewed split package", "exactly one `split` disposition", "Child `19.9` applies the same boundary", "Child `19.12` applies the split boundary", "Child `19.13` applies the same boundary", "Child `19.15` reconciles replacement lineage", "Child `19.16` keeps Implementation", "## Implementation Sequence", "## Re-plan Triggers"]
+prohibited = []
+
+[[checks]]
+id = "owner-validation-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-19-owner-validation.md"
+required = ["## Boundary Result", "validates creating `workflows/tooling.md`", "## Required Option 2 Package", "before normative implementation", "## Re-plan Triggers"]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["Row 19 owner-validation gate (`Accepted`)", "`7.4b9a` (`Accepted`): perform the row 19 complete decomposition", "`7.4b9b` (`Accepted`)", "`7.4b9c` (`Accepted`)", "`7.4b9d` (`Accepted`)", "`7.4b9e` (`Accepted`)", "`7.4b9f` (`Accepted`)", "`7.4b9g` (`Accepted`)", "`7.4b9h` (`Accepted`)", "`7.4b9i` (`Accepted`)", "`7.4b9j` (`Accepted`)", "`7.4b9k` (`Accepted`)", "`7.4b9l` (`Accepted`)", "`7.4b9s` (`Accepted`)", "Row 19 TypeScript split replan (`Accepted`)", "Row 19 formatting split replan (`Accepted`)", "Row 19 CI orchestration split replan (`Accepted`)", "Row 19 debt and automation-cost split replan (`Accepted`)", "Row 19 traceability-lineage replan (`Accepted`)", "Row 19 change-evidence split replan (`Accepted`)"]
+prohibited = []
+
+[[checks]]
+id = "tooling-owner"
+type = "text"
+path = "workflows/tooling.md"
+required = ["ID: `workflow.tooling`"]
+prohibited = []
+
+[[checks]]
+id = "tooling-reference"
+type = "text"
+path = "reference/recipes/tooling.md"
+required = ["ID: `reference.recipes.tooling`"]
+prohibited = []

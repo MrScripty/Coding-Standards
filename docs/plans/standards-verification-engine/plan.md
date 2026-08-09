@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3: Shared Metadata, Plan, And Migration Contracts
+**Current phase:** Milestone 3: Coupled Graph Boundary Replan
 
-**Next slice:** Implement `M3-S2`: migrate Row 19 decomposition and owner
-validation with accepted table and relation mechanics.
+**Next slice:** Replan the 237 coupled Bash checkers from exact executable,
+frozen-contract, verifier, and helper dependency evidence. Do not remove the
+temporary launcher before the complete-suite convention is replaced.
 
 **Acceptance status:** `pending`
 
@@ -432,7 +433,7 @@ package:
 | `M2-P9` Implementation change evidence | `workflow.implementation` | decision, canonical/reference text, exact split disposition | Accepted with existing checks after `M2-S1`. |
 | `M3-C1` Acceptance claims | `workflow.verification` | canonical claim grammar and required-to-observed set satisfaction | Implement as one typed shared contract, then update its README invocation. |
 | `M3-S1` F018 decomposition | parent migration plan | strict map, exact IDs/order, inventory/disposition relations, accepted lifecycle state | Accepted after relation checks; obsolete planned-state branches removed. |
-| `M3-S2` Row 19 decomposition and owner validation | parent migration plan | strict tables, exact/expanded projections, uniqueness, counts, canonical report and accepted plan state | Migrate as one owner-coherent two-script package. |
+| `M3-S2` Row 19 decomposition and owner validation | parent migration plan | strict tables, exact/expanded projections, uniqueness, counts, canonical report and accepted plan state | Accepted as one owner-coherent two-script package. |
 | `M6-L1` Declarative-suite launcher | verification engine | inventory freshness plus complete Python execution | Retain only until the complete-suite convention changes; replace, do not wrap. |
 
 The shared contract is bounded as follows:
@@ -563,6 +564,39 @@ integrity, and complete mixed suite passed.
 predicates, named projections, optional one-field splitting, and ordered or
 unique-set equality only. Transitional planned states, the Bash checker, and
 its historical command references are removed.
+
+#### Package M3-S2: Row 19 Structure
+
+**Status:** `Accepted`
+
+**Owner:** parent migration plan
+
+**Preserved contract:** 18 exact Row 19 children, 50 expanded IDs, strict
+ten-column execution rows, exact split-boundary projections, strict 50-row
+owner validation, unique IDs, bounded owner/action domains, both report
+contracts, all accepted plan markers, and canonical Tooling owner/reference
+presence.
+
+**Acceptance evidence:** 31 engine/inventory tests; focused suite passed eight
+checks; all 36 suites passed 170 checks directly and through the launcher;
+fresh 238-record inventory, two removed-path scans, diff integrity, and
+complete mixed suite passed.
+
+**No-fallback result:** both Bash checkers are deleted and their frozen ledger
+references now name the registered suite. No engine change, transitional owner
+state, compatibility path, or weaker projection was introduced.
+
+#### Coupled Graph Replan Trigger
+
+**Status:** `Active`
+
+After `M3-S2`, the only dependency-free Bash entrypoint is the temporary
+`verify-declarative-suites.sh` launcher. Of 238 remaining Bash entrypoints, 138
+have executable inbound references, 72 have frozen-contract references, 44
+have both, 166 invoke verifiers, and 84 invoke helpers. The 237 non-launcher
+entries therefore require dependency-ordered shared-contract migration or
+authorized frozen-reference reconciliation; they cannot be admitted as leaf
+packages under the completed sequence.
 
 ### Milestone 4: Semantic Decision Migration
 

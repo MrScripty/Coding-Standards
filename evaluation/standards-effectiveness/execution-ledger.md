@@ -4741,9 +4741,9 @@ changes in this audit.
 
 **Verification:** exact 50-ID coverage, unique four-column assignments, all
 named destinations, accepted/planned plan gates, and absent Tooling owner are
-checked by `verify-milestone-7-row-19-owner-validation.sh`. All 134 repository
-checkers pass; the execution train remains at 271 completed and 318 remaining
-IDs with row `18.14` active.
+now checked by the registered `milestone-7-row-19-structure` suite. All 134
+repository checkers pass; the execution train remains at 271 completed and 318
+remaining IDs with row `18.14` active.
 
 ## Milestone 7.4b8cj: Testing Source Closure
 
@@ -4785,9 +4785,9 @@ commands, and passing automation as defaults or acceptance.
 
 **Verification:** exact 50-ID coverage, child order, row shape, owner coverage,
 owner-contract anchors, accepted/planned lifecycle, and absent normative Tooling
-owner are checked by `verify-milestone-7-row-19-decomposition.sh`. All 136
-repository checkers pass; the execution train reports 273 completed and 316
-remaining IDs across 68 completed and 47 pending logical clusters, with child
+owner are now checked by the registered `milestone-7-row-19-structure` suite.
+All 136 repository checkers pass; the execution train reports 273 completed and
+316 remaining IDs across 68 completed and 47 pending logical clusters, with child
 `19.1` active.
 
 **Next slice:** `7.4b9b`, create the bounded Tooling owner and implement child

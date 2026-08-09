@@ -319,3 +319,18 @@ suite report 240 Bash entrypoints.
 
 The Row 19 decomposition and owner-validation pair is the final package in the
 frozen structural-leaf sequence. The temporary launcher remains separate.
+
+## Row 19 Package And New Boundary
+
+Package `M3-S2` replaced both Row 19 structure scripts with one owner-coherent
+suite preserving 18 children, 50 expanded IDs, strict execution and
+owner-validation tables, selected split boundaries, report contracts, accepted
+plan markers, and canonical owner files. All 36 suites/170 checks pass;
+inventory and the complete mixed suite report 238 Bash entrypoints.
+
+The graph now has one dependency-free entrypoint:
+`verify-declarative-suites.sh`, the temporary launcher. The other 237 are
+coupled. Of all 238 entries, 138 have executable inbound references, 72 have
+frozen-contract references, 44 have both, 166 invoke verifiers, and 84 invoke
+helpers. Another implementation package requires dependency-ordered graph
+planning; deleting the launcher would violate the complete-suite transition.

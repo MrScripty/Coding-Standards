@@ -136,6 +136,11 @@ path = "evaluation/standards-effectiveness/suites/milestone-7-f018-decomposition
 requires = []
 
 [[suites]]
+id = "milestone-7-row-19-structure"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-19-structure.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

@@ -13,8 +13,9 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** implement delegated verifier package `M3-S2`: migrate Row 19
-decomposition and owner validation with accepted table/relation mechanics.
+**Next slice:** replan the 237 coupled Bash checkers under the delegated engine
+plan. The temporary launcher remains until complete-suite convention
+replacement.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2352,6 +2353,14 @@ all structural/routing fixtures pass.
          inventory and final disposition lineage, report evidence, and
          accepted lifecycle while deleting planned-state compatibility; reduce
          Bash inventory from 241 to 240.
+       - `7.4c3ve15` (`Accepted`): replace both Row 19 structure scripts with
+         one suite preserving 18 children, 50 IDs, strict tables, split
+         boundaries, reports, accepted markers, and owner files; reduce Bash
+         inventory from 240 to 238.
+       - `7.4c3ve16` (`Active replan`): classify the 237 coupled non-launcher
+         Bash entries by executable, frozen-contract, verifier, and helper
+         edges before another source slice. Retain the sole dependency-free
+         launcher until the complete-suite convention is replaced.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact
