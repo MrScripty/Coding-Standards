@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: metadata-kernel recovery planning
+**Current phase:** Milestone 6: metadata-kernel package admission
 
-**Next slice:** Audit the exact metadata grammar, fixture corpus, dependency
-graph, and 52 semantic consumers; then freeze and admit the smallest strict
-`M6-K1` metadata-graph primitive package before changing engine source.
+**Next slice:** Freeze and admit the audited `M6-K1` module metadata-graph
+package through exact package and executable-edge authority, then pass baseline
+verification before changing standards policy, fixtures, engine source,
+registry, generated artifacts, or Bash paths.
 
 **Acceptance status:** `pending`
 
@@ -2370,6 +2371,75 @@ tests, all 87 declarative suites, row-35 lifecycle, graph freshness, both plan
 checks, and diff integrity passed. The regenerated graph contains 189 Bash
 verifiers / 194 nodes / 910 edges / 190 components. The complete mixed
 checkpoint passed all 189 surviving entrypoints.
+
+##### M6-K1 Re-Plan: Module Metadata Graph
+
+**Decision status:** `Accepted`
+
+**Package status:** `Planned`
+
+The metadata audit found that the canonical schema advertised module IDs or
+rule IDs in `Specializes`, while every live specialization names a module, the
+Bash validator resolves only modules, and no canonical current-rule identity
+registry exists. The generated `STD-*` owner map is migration bookkeeping for
+legacy sections and cannot authorize current rule-level precedence.
+
+**Decision:** `Specializes` is module-level in the current schema. It names
+canonical module IDs whose generic obligations remain authoritative while a
+selected profile supplies narrower mechanisms. It does not grant blanket
+override authority. Rule-level specialization is unsupported until a future
+version introduces namespaced stable rule IDs, canonical ownership, routing,
+and cycle semantics through a separately admitted plan.
+
+`Requires` is an inclusion edge and `Specializes` is a precedence edge. Each
+target must resolve to exactly one selected module; only profiles may declare
+specialization. Reject self-edges, duplicate IDs, malformed lists, unresolved
+targets, relation cycles, and cycles in the combined relation graph with typed
+diagnostics. Do not infer rule targets, consult the legacy owner map, or fall
+back from an unresolved specialization to prose or file order.
+
+**Exact grammar:** all nine metadata fields occur exactly once as line-oriented
+Markdown entries. Scalar and list values use one backtick pair per value;
+comma-separated module lists permit surrounding ASCII spaces but no empty or
+duplicate items. `none` is the complete empty-list token and cannot be mixed
+with an ID. Module IDs retain the lowercase dot-separated grammar. Canonical
+owner is a normalized repository-relative path equal to the declaring file.
+
+**Proposed first implementation boundary:** add one side-effect-free typed
+Python check and focused tests; add specialization and combined-cycle fixtures
+missing from the Bash corpus; register one declarative metadata fixture suite;
+migrate and delete only `verify-metadata-fixtures.sh`. The shared
+`check-metadata.sh` and its 52 semantic consumers remain unchanged until later
+exact owner-coherent waves. Migrated suites may not execute the helper through
+a bridge, wrapper, alias, or command action.
+
+**Proposed implementation write set:** metadata schema and information
+architecture wording; metadata fixtures; metadata check module, parser
+registration, and focused engine tests; metadata suite and registry; fixture
+checker deletion; package, edge, generated graph, README, plan, issue, report,
+and ledger integration artifacts required by the admitted package. Canonical
+modules, legacy owner maps, the shared helper, its 52 consumers, unrelated
+suites, lockfiles, and configuration remain unchanged.
+
+**Admission gate:** freeze one package subject for the fixture checker, classify
+every current executable edge, name exact replacement evidence, and pass
+package/edge authority, graph freshness, engine tests, declarative suites, both
+plan checks, diff integrity, and the complete mixed checkpoint with no policy,
+fixture, engine, registry, generated graph, or Bash deletion beyond admission
+bookkeeping.
+
+**Implementation gate after admission:** focused parser/graph tests cover every
+typed diagnostic; the positive corpus and every negative fixture pass through
+the registered suite; package and edge authority prove the deleted checker has
+one native replacement and no unresolved edge; all engine tests and
+declarative suites, graph freshness, both plan checks, diff integrity, and one
+complete mixed checkpoint pass.
+
+**Re-plan triggers:** stop if a live rule-level target exists; a canonical rule
+registry is required; module-only semantics would weaken a profile contract;
+combined-cycle rejection invalidates an intended current graph; exact grammar
+cannot represent current metadata; or the first package must edit a semantic
+consumer of `check-metadata.sh`.
 
 **Tasks:**
 

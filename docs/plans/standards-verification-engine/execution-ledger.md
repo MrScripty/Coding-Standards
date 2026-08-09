@@ -1560,3 +1560,33 @@
   910 edges / 190 components; all 189 mixed entrypoints passed.
 - Next slice: audit and admit the strict M6-K1 metadata-graph primitive before
   changing shared engine source or migrating metadata consumers.
+
+## 2026-08-09 - M6-K1 Metadata Contract Re-Plan
+
+- Audited the canonical metadata schema, information architecture, all live
+  `Requires` and `Specializes` fields, the Bash helper and fixture checker,
+  generated owner maps, registry, fixtures, and 52 remaining helper consumers.
+- Found no live rule-level specialization and no canonical current-rule ID
+  registry. The generated `STD-*` owner map is a proposal/disposition artifact
+  for frozen legacy sections, not current rule authority.
+- Recorded VE034 and accepted module-only specialization for the current
+  schema. `Requires` owns inclusion; `Specializes` owns profile precedence
+  without weakening generic obligations; relation-specific and combined graph
+  cycles are invalid.
+- Froze exact line-oriented Markdown grammar, typed malformed/unavailable
+  outcomes, normalized canonical-owner equality, and no inference from prose,
+  file order, legacy identifiers, or migration maps.
+- Bounded the proposed first implementation to one typed Python primitive,
+  focused tests and metadata fixtures, one registered fixture suite, and atomic
+  deletion of `verify-metadata-fixtures.sh`. The helper and all 52 semantic
+  consumers remain unchanged for later owner-coherent migrations.
+- Package admission and its baseline evidence remain pending. No standards
+  policy, fixture, engine, registry, or Bash path changed. Generated graph
+  artifacts refresh only the executable references introduced by this
+  planning record, as required by VE018.
+- Verification passed both plan-structure checks, all 62 engine tests, all 87
+  declarative suites, package and edge authority, graph freshness at 189 Bash
+  verifiers / 194 nodes / 910 edges / 190 components, diff integrity, and the
+  complete 189-entrypoint mixed checkpoint.
+- Next slice: admit `M6-K1` through package and edge authority before
+  implementation.
