@@ -1590,3 +1590,20 @@
   complete 189-entrypoint mixed checkpoint.
 - Next slice: admit `M6-K1` through package and edge authority before
   implementation.
+
+## 2026-08-09 - M6-K1 Field-Grammar Correction
+
+- Pre-admission inspection found that the first grammar draft treated all
+  scalar fields as backticked even though every live applicability, exclusion,
+  and verification field is readable Markdown prose.
+- Recorded VE035 and replaced that draft with field-specific grammar:
+  backticked symbolic values, individually backticked relation items or one
+  `none` token, and exact non-empty prose preservation.
+- No dual-format symbolic parser, global backtick stripping, corpus rewrite,
+  compatibility branch, or weaker field-presence rule is admitted.
+- Package state remains `Planned`; no policy, fixture, engine, registry,
+  generated artifact, or Bash path changed.
+- Verification passed both plan checks, all 62 engine tests, all 87 declarative
+  suites, graph freshness at 189 Bash verifiers / 194 nodes / 910 edges / 190
+  components, and diff integrity.
+- Next slice remains exact M6-K1 package and edge admission.

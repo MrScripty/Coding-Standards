@@ -37,6 +37,12 @@ Treat `Requires` and `Specializes` as distinct typed relations and reject
 cycles in either relation or their combined graph. Resolve every target exactly;
 return typed diagnostics for malformed, unavailable, or unsupported inputs.
 
+Use field-specific syntax. IDs, enums, owner paths, and relation items are
+backticked symbolic tokens. Applicability, exclusion, and verification are
+non-empty Markdown prose whose exact content is preserved, including embedded
+inline code. The parser does not strip backticks globally or accept unquoted
+symbolic values as a compatibility form.
+
 ## Proposed First Vertical Slice
 
 After package admission, implement one typed metadata-graph check, focused

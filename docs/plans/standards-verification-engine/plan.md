@@ -2399,11 +2399,17 @@ diagnostics. Do not infer rule targets, consult the legacy owner map, or fall
 back from an unresolved specialization to prose or file order.
 
 **Exact grammar:** all nine metadata fields occur exactly once as line-oriented
-Markdown entries. Scalar and list values use one backtick pair per value;
-comma-separated module lists permit surrounding ASCII spaces but no empty or
-duplicate items. `none` is the complete empty-list token and cannot be mixed
-with an ID. Module IDs retain the lowercase dot-separated grammar. Canonical
-owner is a normalized repository-relative path equal to the declaring file.
+Markdown entries. Symbolic fields (`ID`, `Role`, `Level`, and
+`Canonical owner`) contain exactly one backticked token. Relation fields
+(`Requires` and `Specializes`) contain individually backticked module IDs
+separated by commas and optional surrounding ASCII spaces, or exactly the
+single token `none`; empty, duplicate, unquoted, or mixed-`none` items are
+invalid. Prose fields (`Applies when`, `Does not apply when`, and
+`Verification`) preserve their complete non-empty Markdown value, including
+embedded inline code, without global backtick removal or outer-code
+normalization. Module IDs retain the lowercase dot-separated grammar.
+Canonical owner is a normalized repository-relative path equal to the
+declaring file.
 
 **Proposed first implementation boundary:** add one side-effect-free typed
 Python check and focused tests; add specialization and combined-cycle fixtures
