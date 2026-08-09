@@ -161,6 +161,11 @@ path = "evaluation/standards-effectiveness/suites/binding-artifact-composition.t
 requires = []
 
 [[suites]]
+id = "cross-platform-source-closure-prerequisite"
+path = "evaluation/standards-effectiveness/suites/cross-platform-source-closure-prerequisite.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

@@ -62,5 +62,5 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/cross-platform-source-closure-prerequisite.toml,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M3-DT3,F085-option-1",
   "focused-suite,engine-tests,graph-freshness,declarative-all,source-unchanged,complete-suite",
-  "admitted",
+  "accepted",
 ]]

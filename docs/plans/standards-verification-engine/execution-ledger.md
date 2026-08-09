@@ -725,3 +725,21 @@
   components, source immutability, diff integrity, and all 235 mixed checker
   entrypoints passed.
 - Next slice: implement `M5-CP0` only after this admission commit is accepted.
+
+## 2026-08-08 - M5-CP0 Whole-Source Prerequisite
+
+- Registered one migration-owned text suite requiring seven canonical routes
+  and prohibiting 24 fixed target, loading, release, and evidence defaults over
+  the complete Cross-Platform legacy index.
+- Reused the strict whole-file text assertion. Added no engine behavior,
+  policy callback, fixture schema, heading delimiter, or alternate route.
+- Kept the source, all five semantic checkers, canonical standards, README,
+  engine, lockfiles, and closure manifests unchanged.
+- Verification: focused suite and package-authority checks, all 41 declarative
+  suites/187 checks, 37 engine tests, Python compilation, both plan-structure
+  checks, graph freshness at 235 Bash verifiers/240 nodes/1,023 edges/236
+  components, admission-to-implementation source immutability, diff integrity,
+  and all 235 mixed checker entrypoints passed.
+- No-fallback result: the suite is temporary migration evidence only and is
+  scheduled for deletion with `M5-CP6`; it owns no semantic policy.
+- Next slice: audit and admit `M5-CP1` Native Artifact Loading.

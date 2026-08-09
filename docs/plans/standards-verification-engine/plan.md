@@ -4,9 +4,8 @@
 
 **Current phase:** Milestone 5: Cross-Platform source-closure prerequisite
 
-**Next slice:** Implement admitted `M5-CP0`, the bounded migration-only
-whole-source route/prohibition contract, without changing the source or any
-semantic checker.
+**Next slice:** Audit and admit `M5-CP1` Native Artifact Loading with an exact
+owner-local replacement contract and declared prerequisite dependency.
 
 **Acceptance status:** `pending`
 
@@ -1017,6 +1016,32 @@ plan-structure checks, graph freshness at 235 Bash verifiers/240 nodes/1,023
 edges/236 components, source immutability, diff integrity, and all 235 mixed
 checker entrypoints passed.
 
+#### Package M5-CP0: Whole-Source Prerequisite
+
+**Status:** `Accepted`
+
+**Owner:** verification-engine migration source closure
+
+**Observable outcome:** one registered text-only suite scans the complete
+Cross-Platform legacy index for seven canonical routes and 24 prohibited
+former defaults without asserting a heading, semantic decision, disposition,
+or canonical-owner rule.
+
+**No-fallback result:** the implementation uses the existing text assertion;
+the legacy source, five semantic checkers, canonical standards, engine,
+README, and closure manifests are unchanged. No wrapper, source exception,
+compatibility schema, alternate route, policy callback, or duplicate semantic
+authority exists.
+
+**Retirement:** this suite remains temporary and must be deleted in `M5-CP6`
+with source closure after `M5-CP1` through `M5-CP5` are accepted.
+
+**Acceptance evidence:** the focused suite and package-authority suite passed;
+all 41 declarative suites/187 checks, 37 engine tests, Python compilation, both
+plan-structure checks, graph freshness at 235 Bash verifiers/240 nodes/1,023
+edges/236 components, admission-to-implementation source immutability, diff
+integrity, and all 235 mixed checker entrypoints passed.
+
 ### Milestone 4: Semantic Decision Migration
 
 **Goal:** Move repeated policy decision derivation from shell branches into
@@ -1056,8 +1081,8 @@ exact write set before implementation.
 
 **Tasks:**
 
-- [ ] Implement and verify admitted `M5-CP0` without changing normative policy
-  or the legacy source.
+- [x] Establish and verify `M5-CP0` without changing normative policy or the
+  legacy source.
 - [ ] Convert transitive verifier calls into declared suite dependencies.
 - [ ] Migrate platform-target, native-loading, release-artifact,
   platform-evidence, and Rust target-configuration suites while preserving

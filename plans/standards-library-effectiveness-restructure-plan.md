@@ -2400,8 +2400,12 @@ all structural/routing fixtures pass.
          suite over seven exact canonical routes and the union of prohibited
          former defaults. Exclude the source, semantic checkers and fixtures,
          canonical standards, README, engine, and closure manifests.
-       - `7.4c3ve27` (`Active`): implement admitted `M5-CP0` without changing
-         normative policy, source shape, or any semantic checker.
+       - `7.4c3ve27` (`Accepted`): register the temporary `M5-CP0` whole-source
+         route/prohibition suite without changing normative policy, source
+         shape, any semantic checker, or the engine. Retire it in `M5-CP6`.
+       - `7.4c3ve28` (`Active`): audit and admit `M5-CP1` Native Artifact
+         Loading as an owner-local declarative replacement with explicit
+         prerequisite dependencies and no heading-range authority.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

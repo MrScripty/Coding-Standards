@@ -526,3 +526,17 @@ semantics, decisions, dispositions, or accepted migration markers. Those
 remain with `M5-CP1` through `M5-CP5`. Its exact write set excludes the source
 and every semantic checker, which makes source immutability an admission-to-
 implementation verification condition rather than a convention.
+
+### Whole-Source Prerequisite Implementation
+
+Accepted `M5-CP0` adds one registered text-only suite with no suite
+dependencies and no Bash replacement. It requires seven owner routes and
+prohibits 24 defaults over the complete file. The generated Bash graph remains
+235 verifiers, 240 nodes, 1,023 edges, and 236 components because the package
+adds declarative migration evidence without retaining or adding an executable
+checker.
+
+The source and all semantic evidence remain unchanged. `M5-CP1` is now the
+smallest useful owner package: Native Artifact Loading is inbound-free, owns
+two exact Cross-Platform dispositions, and is the first live caller that must
+leave Platform Target Policy before that downstream checker can retire.
