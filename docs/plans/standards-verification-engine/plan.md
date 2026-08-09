@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: atomic M5-CP4+5 audit and admission
+**Current phase:** Milestone 5: Rust index exact-evidence re-plan
 
-**Next slice:** Re-audit and admit atomic `M5-CP4+5` against the accepted typed
-verifier-subject authority.
+**Next slice:** Select one canonical representation for the Rust migration
+index's exact-content evidence before admitting atomic `M5-CP4+5`.
 
 **Acceptance status:** `pending`
 
@@ -1430,6 +1430,68 @@ diff integrity, and all 232 mixed checker entrypoints passed.
 freshness at 232 Bash verifiers / 237 nodes / 999 edges / 233 components, diff
 integrity, and all 232 mixed checker entrypoints passed with no implementation
 or policy changes.
+
+#### Rust Migration-Index Exact-Evidence Re-plan Trigger
+
+**Status:** `Blocked`
+
+The clean-tree M5-CP4+5 re-audit confirmed that the typed Rust verifier subject
+can transfer atomically and identified every live Bash-only inventory update:
+the dependency inventory falls from 33 to 32 rows, the README-consumer
+inventory falls from 34 to 33 rows, negative-purity ownership becomes
+`verify-s1-routing.sh` only, and the row-35, row-46, and root-consumer validators
+must update their exact current counts. Historical row-35 and row-46 prose
+remains immutable evidence of the transitions accepted at those milestones.
+
+The Rust Target checker also enforces the seven-line
+`languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md` migration index with
+byte-for-byte `diff`. The Python engine's text check supports required and
+prohibited literals only. Replacing the exact comparison with those literals
+would permit additional unreviewed or normative prose and would weaken
+accepted evidence. Keeping the Bash checker, adding a wrapper, or creating an
+expected-file mirror would preserve prohibited duplicate authority.
+
+**Option 1 - Generic exact-text assertion (`Recommended`):** add one bounded
+`exact_text` check kind with strict keys `id`, `type`, `path`, and `expected`.
+Resolve the path through the existing contained regular-file contract, encode
+the inline expected TOML string as UTF-8, compare raw bytes without newline or
+whitespace normalization, and return one stable mismatch diagnostic. Add
+focused pass, mismatch, missing-input, path-escape, and unknown-field tests.
+The Rust suite then owns its seven-line expected index inline; no fixture
+mirror, policy callback, command execution, compatibility schema, hash-only
+oracle, or normalization fallback is introduced. Choose this for the smallest
+reviewable extension that preserves the accepted invariant exactly.
+
+**Option 2 - Generic source-index purity assertion:** define a reusable typed
+Markdown index contract that permits only an approved title, route links, and
+bounded non-normative routing prose while prohibiting normative sections and
+unrecognized content. Choose this when multiple pending source indexes are
+ready to migrate together and semantic index purity should replace byte
+identity. This requires a separate grammar, fixtures over all selected index
+shapes, owner review of the refined invariant, and a larger engine/API surface
+before M5-CP4+5 can be admitted.
+
+**Option 3 - Defer the connected wave to source closure:** retain both Bash
+checkers and postpone M5-CP4+5 until manifest-order package `7.4c3.20` can use
+the source-index closure engine selected for Milestone 7. Choose this when no
+engine primitive should be added for one current consumer. It preserves exact
+evidence but delays both suites and cannot migrate Platform Target alone
+because the Rust checker directly invokes it.
+
+Required/prohibited literals alone, an opaque content hash, an expected-file
+mirror, a Bash or Python wrapper, partial generic/Rust migration, compatibility
+parsing, or dropping exact index evidence are invalid options.
+
+**Recommendation:** select Option 1 as a dedicated shared-engine slice, run the
+complete suite, then admit and implement M5-CP4+5 with no engine changes in the
+package commit.
+
+**Trigger evidence:** the audit was read-only after commit `d95e4e9`; no source,
+checker, fixture, registry, suite, engine, README inventory, migration manifest,
+or generated artifact changed before this re-plan record. Both plan checks, all
+44 declarative suites, graph freshness at 232 Bash verifiers / 237 nodes / 999
+edges / 233 components, diff integrity, and all 232 mixed checker entrypoints
+passed.
 
 #### Migration-Package Stable-Identity Re-plan Trigger
 

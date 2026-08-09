@@ -752,6 +752,32 @@ all 44 declarative suites, 37 engine tests, Python compilation, graph freshness
 at 232 Bash verifiers / 237 nodes / 999 edges / 233 components, both plan
 checks, diff integrity, and all 232 mixed checker entrypoints.
 
+### M5-CP4+5 Exact-Evidence Gap
+
+The connected package remains two owner-bounded suites: Platform Target has 25
+decisions and nine exact generic dispositions; Rust Target has 30 decisions and
+five exact specialization dispositions. Platform requires temporary M5-CP0,
+and Rust requires Platform. The audit classified metadata, filesystem
+containment, independent-trust, and historical row checks as integration gates.
+
+Deleting Rust Target requires one atomic typed-subject transfer, removal from
+the 33-row Bash dependency and 34-row README-consumer inventories, exact
+current-count updates in row 35 and row 46, and reduction of negative-purity
+ownership to S1. These are lifecycle mechanics, not suite dependencies.
+
+One semantic-preservation gap blocks admission. Rust Target uses `diff` to
+require exact UTF-8 content for its seven-line non-normative migration index;
+the engine text primitive cannot reject unrecognized extra prose. The smallest
+preserving extension is a strict generic `exact_text` check with inline expected
+content and raw-byte comparison. A generic source-index grammar is broader but
+valid if multiple indexes are admitted together; deferral to source closure is
+valid but delays the connected wave. Literal-only weakening, mirrors, wrappers,
+opaque hashes, and partial migration are invalid.
+
+Trigger verification passed both plan checks, all 44 declarative suites, graph
+freshness at 232 Bash verifiers / 237 nodes / 999 edges / 233 components, diff
+integrity, and all 232 mixed checker entrypoints.
+
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
 edges, and 235 components.

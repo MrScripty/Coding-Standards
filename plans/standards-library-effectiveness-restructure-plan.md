@@ -2459,9 +2459,14 @@ all structural/routing fixtures pass.
          strict typed `checker:` and `suite:` verifier subjects; rewrite all
          existing values atomically and reject untyped, unknown, missing, or
          duplicate authority without compatibility parsing.
-       - `7.4c3ve40` (`Active`): re-audit and admit atomic M5-CP4+5 against the
-         typed verifier-subject contract, including exact future transfer of
-         Rust package `7.4c3.20` and Bash-only README inventory reconciliation.
+       - `7.4c3ve40` (`Blocked by re-plan`): the typed-subject and README
+         reconciliation audit is complete, but Rust Target's exact seven-line
+         migration-index comparison cannot be represented by the current text
+         primitive without weakening accepted evidence.
+       - `7.4c3ve41` (`Active`): select a strict generic `exact_text` assertion,
+         a broader reviewed source-index purity contract, or deferral to
+         manifest-order source closure before admitting M5-CP4+5. Do not use
+         literal-only weakening, mirrors, wrappers, hashes, or partial migration.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

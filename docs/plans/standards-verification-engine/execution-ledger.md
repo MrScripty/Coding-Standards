@@ -1009,3 +1009,30 @@
   integrity; and all 232 mixed checker entrypoints.
 - Next slice: re-audit and admit atomic M5-CP4+5, including the same-commit Rust
   `checker:` to `suite:` transfer and Bash-only README inventory reconciliation.
+
+## 2026-08-08 - M5-CP4+5 Exact-Evidence Re-plan Trigger
+
+- Re-audited both target checkers, their retained 25-row and 30-row decision
+  fixtures, exact dispositions, canonical owners, nested calls, typed source-
+  preparation authority, README dependency/consumer manifests, root audit, and
+  row-35/46 current-count assertions from clean commit `d95e4e9`.
+- Confirmed the atomic dependency remains correct: Platform Target requires
+  temporary M5-CP0; Rust Target requires Platform Target; metadata,
+  filesystem-containment, independent-trust, and historical row checks remain
+  package or wave gates rather than suite dependencies.
+- Froze the lifecycle reconciliation for implementation: dependencies 33 to
+  32, consumers 34 to 33, negative-purity ownership to S1 only, row-35 and
+  row-46 current-count updates, package-20 `checker:` to `suite:` transfer, and
+  README projection replacement.
+- Found that Rust Target's exact seven-line migration-index `diff` cannot be
+  represented by the current required/prohibited text check without weakening
+  accepted evidence. No source, checker, fixture, registry, suite, engine,
+  README inventory, migration manifest, or generated artifact was changed.
+- Recommended one strict generic `exact_text` assertion with inline UTF-8
+  expected bytes and no normalization, mirror, wrapper, callback, hash-only
+  oracle, compatibility schema, or fallback.
+- Verification passed: both plan checks, all 44 declarative suites, graph
+  freshness at 232 Bash verifiers / 237 nodes / 999 edges / 233 components,
+  diff integrity, and all 232 mixed checker entrypoints.
+- Next slice: select exact-text, broader source-index purity, or source-closure
+  deferral before admitting M5-CP4+5.
