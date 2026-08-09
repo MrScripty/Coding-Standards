@@ -355,3 +355,29 @@ traceability helpers, plan-structure helpers, metadata helpers, then verifier
 hubs and frozen identity contracts in component order. Every package removes
 its complete old authority and direct invocation edges. The launcher remains
 until the complete-suite convention is replaced.
+
+### Accepted Graph Evidence
+
+`M3-G1` generated 243 resolved nodes: 238 verifiers and five helpers. The
+1,045 typed edges comprise 388 verifier dependencies, 85 helper dependencies,
+486 executable references, and 86 frozen-contract references. The 239
+components span waves zero through ten.
+
+Five helpers are acyclic wave-zero nodes. Direct dependency consumers are 13
+for decision tables, 55 for metadata, 14 for plan structure, two for
+source-index closure, and one for decision traceability. Executable-reference
+counts remain separately visible and can exceed direct consumer counts.
+
+Two verifier SCCs require later atomic package review:
+
+- `component-0087` contains Language index closure and Row 45 decomposition.
+- `component-0129` contains Row 46 decomposition, Rust adoption-notes
+  retirement, Rust index closure, and Rust profile-authority closure.
+
+Both SCCs are wave five and carry frozen row-35 consumer identity. No helper
+participates in a cycle, so the selected helper-first train remains valid.
+
+The path-shaped dependency rule corrected seven false dependency records caused
+by quoted expected checker names. Those occurrences remain executable-reference
+edges and therefore still block unreviewed deletion; they no longer distort the
+runtime dependency graph or component waves.

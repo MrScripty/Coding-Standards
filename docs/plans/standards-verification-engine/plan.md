@@ -2,12 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3: Coupled Graph Manifest
+**Current phase:** Milestone 3: Migration Package Authority
 
-**Next slice:** Implement `M3-G1`, the exact typed checker dependency graph and
-dependency-wave manifest. Do not migrate or remove a coupled checker until its
-component, inbound identities, helper family, owner, risk, and write set are
-admitted from that evidence.
+**Next slice:** Freeze the reviewed migration-package manifest and the first
+decision-table helper package from component `component-0001`, its 13 direct
+dependency consumers, executable references, semantic owners, and complete
+replacement evidence. Do not edit helper or consumer source before admission.
 
 **Acceptance status:** `pending`
 
@@ -643,7 +643,7 @@ convention.
 
 #### Package M3-G1: Exact Checker Dependency Graph
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Owner:** verification-engine migration mechanics
 
@@ -672,6 +672,20 @@ launcher contracts are shared.
 **Re-plan condition:** stop before helper migration if exact components cross
 multiple semantic owners, frozen contracts cannot be assigned to one owning
 package, or helper behavior needs an unbounded expression/command mechanism.
+
+**Acceptance evidence:** 37 engine/inventory/graph tests passed; generation and
+freshness checks produced 243 resolved nodes, 1,045 typed edges, 239 components,
+and 11 condensation waves; all 36 suites/170 checks and all 238 complete-suite
+checker entrypoints passed. Five helpers are acyclic wave-zero nodes. Two bounded
+verifier SCCs are reserved as coherent later packages. The refined path-shaped
+dependency rule removed seven false dependencies caused by quoted evidence
+strings without removing their typed executable-reference edges. Empty component
+list fields use explicit `-` values and pass whitespace verification.
+
+**No-fallback result:** unresolved and ambiguous targets are typed failures;
+malformed and stale graph artifacts are rejected; generated artifacts are
+excluded from graph inputs; no owner, risk, cohesion, or disposition is
+inferred; and the launcher remains unchanged.
 
 ### Milestone 4: Semantic Decision Migration
 

@@ -13,9 +13,9 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** implement delegated engine package `M3-G1`, the exact typed
-checker dependency graph and reviewed dependency-wave manifest. The temporary
-launcher remains until complete-suite convention replacement.
+**Next slice:** freeze the delegated engine migration-package manifest and the
+first decision-table helper package from accepted `M3-G1` graph evidence. The
+temporary launcher remains until complete-suite convention replacement.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2361,6 +2361,10 @@ all structural/routing fixtures pass.
          Bash entries by executable, frozen-contract, verifier, and helper
          edges before another source slice. Retain the sole dependency-free
          launcher until the complete-suite convention is replaced.
+       - `7.4c3ve17` (`Accepted`): generate and freshness-check 243 resolved
+         nodes, 1,045 typed edges, 239 components, 11 waves, and two bounded
+         SCCs; correct seven incidental-name dependencies without dropping
+         executable-reference coupling.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

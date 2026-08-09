@@ -11,8 +11,12 @@ from typing import Iterable, Sequence
 
 CHECKER_GLOB = "verify-*.sh"
 REFERENCE_SUFFIXES = frozenset({".md", ".py", ".sh", ".toml", ".tsv"})
-DEPENDENCY_PATTERN = re.compile(r"(?P<name>(?:verify|check)-[A-Za-z0-9_-]+\.sh)")
+DEPENDENCY_PATTERN = re.compile(
+    r"(?:\$(?:\{[A-Za-z_][A-Za-z0-9_]*\}|[A-Za-z_][A-Za-z0-9_]*)|\.\.?)/"
+    r"(?:[A-Za-z0-9_.-]+/)*(?P<name>(?:verify|check)-[A-Za-z0-9_-]+\.sh)"
+)
 OUTPUT_PATH = Path("evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv")
+GENERATED_ROOT = Path("evaluation/standards-effectiveness/generated")
 
 
 @dataclass(frozen=True, slots=True)
@@ -32,14 +36,14 @@ class CheckerRecord:
     uses_decision_table: bool
 
 
-def _repository_files(root: Path) -> Iterable[Path]:
+def repository_files(root: Path) -> Iterable[Path]:
     for path in sorted(root.rglob("*")):
         if not path.is_file() or path.suffix not in REFERENCE_SUFFIXES:
             continue
         relative = path.relative_to(root)
         if ".git" in relative.parts or "__pycache__" in relative.parts:
             continue
-        if relative == OUTPUT_PATH:
+        if relative.is_relative_to(GENERATED_ROOT):
             continue
         yield path
 
@@ -56,7 +60,7 @@ def collect_inventory(root: Path) -> tuple[CheckerRecord, ...]:
     evaluation = root / "evaluation/standards-effectiveness"
     checker_paths = sorted(evaluation.glob(CHECKER_GLOB))
     reference_content = []
-    for path in _repository_files(root):
+    for path in repository_files(root):
         content = _read_text(path)
         if content is not None:
             reference_content.append((path.relative_to(root).as_posix(), content))

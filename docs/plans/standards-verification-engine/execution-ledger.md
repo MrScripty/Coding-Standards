@@ -494,3 +494,29 @@
   edge-type collapse, stale generated graph, inferred semantic owner, or early
   launcher removal is authorized.
 - Next slice: implement and verify `M3-G1` without migrating a checker.
+
+## 2026-08-08 - Package M3-G1 Exact Dependency Graph
+
+- Accepted one Python-generated structural authority for checker inventory and
+  typed dependency graph freshness. It writes or verifies node, edge, and
+  component TSVs through the existing generator command and temporary launcher.
+- Evidence: 243 resolved nodes, 1,045 typed edges, 239 components, 11 waves,
+  five acyclic helper nodes, and two bounded verifier SCCs. All targets resolve
+  uniquely.
+- Corrected seven false dependency classifications where quoted expected names
+  had been treated as executable dependencies. Their executable-reference
+  coupling remains visible.
+- Verification: 37 focused tests passed, including cycle, incidental-name,
+  unavailable-target, ambiguous-target, malformed-artifact, stale-artifact,
+  deterministic-order, and no-trailing-tab cases; Python compilation, generated
+  freshness, and all 36 declarative suites/170 checks passed. The complete
+  standards suite passed all 238 checker entrypoints.
+- Discovered issue: both verifier SCCs carry frozen row-35 identity and must be
+  migrated as coherent packages; recorded as `VE011`.
+- Resolved generated-format issue `VE012`: empty list fields now use explicit
+  `-` values instead of producing trailing tabs.
+- No-fallback result: graph inputs exclude generated outputs; absent or
+  ambiguous targets fail; stale output fails; graph shape cannot infer owner,
+  risk, package, or disposition; the Bash launcher remains temporary.
+- Next slice: freeze the reviewed package manifest and decision-table helper
+  package before editing helper or consumer source.

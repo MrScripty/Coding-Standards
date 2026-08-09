@@ -22,16 +22,22 @@ Run engine self-tests:
 python3 -m unittest discover -s tools/standards_verifier/tests -v
 ```
 
-Regenerate or verify the exact Bash checker structure inventory:
+Regenerate or verify the exact Bash checker structure and dependency graph
+artifacts:
 
 ```bash
 python3 tools/standards_verifier/generate_inventory.py --write
 python3 tools/standards_verifier/generate_inventory.py --check
 ```
 
-The generated inventory measures structure only. It does not infer canonical
-owner, semantic risk, or migration disposition from a filename or shell
-mechanism; those remain reviewed planning decisions.
+The generated artifacts measure structure only. They record exact executable
+and frozen-contract references, uniquely resolved verifier/helper dependencies,
+strongly connected components, and condensation waves. Missing or ambiguous
+targets are typed diagnostics. The generator does not infer canonical owner,
+semantic risk, package cohesion, or migration disposition from a filename,
+shell mechanism, or graph shape; those remain reviewed planning decisions.
+Component list columns use `-` for an empty set and comma-separated repository
+paths or component identifiers otherwise.
 
 Suite and registry TOML is strict. Unknown keys, schema versions, check kinds,
 operators, dependencies, and paths fail with typed diagnostics. Configuration

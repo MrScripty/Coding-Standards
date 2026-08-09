@@ -12,7 +12,7 @@ if sys.version_info < (3, 11):
     )
     raise SystemExit(3)
 
-from standards_verifier.inventory import main
+from standards_verifier.generated_artifacts import main
 
 
 if __name__ == "__main__":
