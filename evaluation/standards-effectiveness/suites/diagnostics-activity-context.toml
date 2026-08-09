@@ -61,6 +61,7 @@ id = "reference"
 type = "text"
 path = "reference/recipes/diagnostics.md"
 required = [
+  "Level: `REFERENCE`",
   "## Illustrative TypeScript Logger Adapter",
   "This example is not valid for asynchronous completion",
   "must not log raw",

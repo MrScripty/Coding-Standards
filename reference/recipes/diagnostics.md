@@ -4,7 +4,7 @@
 
 - ID: `reference.recipes.diagnostics`
 - Role: `reference`
-- Level: `ADVISORY`
+- Level: `REFERENCE`
 - Applies when: A selected Diagnostics contract needs an illustrative implementation mechanism.
 - Does not apply when: Diagnostic policy or mechanism selection is unresolved.
 - Requires: `topic.diagnostics`

@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE036 owner-local metadata correction
+**Current phase:** Milestone 6: metadata-kernel implementation
 
-**Next slice:** Correct the Diagnostics reference module to the canonical
-`REFERENCE` level and add exact owner-suite evidence, then resume the admitted
-`M6-K1` implementation from its isolated worktree state.
+**Next slice:** Restore and resume the admitted `M6-K1` module metadata-graph
+primitive, focused corpus, and registered fixture suite; delete only the
+fixture checker after every declared implementation gate passes.
 
 **Acceptance status:** `pending`
 
@@ -2470,6 +2470,14 @@ is committed. Afterward restore it, preserve this decision, rerun the 57-module
 audit, and continue the admitted implementation. Do not add `ADVISORY`, accept
 both values, omit the invalid module, normalize it silently, or merge the
 cross-owner correction into the metadata-kernel package.
+
+**VE036 acceptance:** `reference/recipes/diagnostics.md` now uses the canonical
+`REFERENCE` level, and both existing Diagnostics suites assert that exact
+metadata token. The owner suites and legacy metadata helper over Core,
+Verification, Contracts, Diagnostics, and the reference dependency closure
+pass. No schema, helper, engine, registry, package, fixture, canonical
+Diagnostics policy, or unrelated reference content changed. M6-K1 remains
+admitted and resumes only after this correction's atomic commit.
 
 **Implementation gate after admission:** focused parser/graph tests cover every
 typed diagnostic; the positive corpus and every negative fixture pass through

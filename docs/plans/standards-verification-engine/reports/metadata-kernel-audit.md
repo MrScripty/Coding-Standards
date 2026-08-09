@@ -77,3 +77,12 @@ that already consume the file. M6-K1 remains admitted but paused and does not
 gain authority over the Diagnostics reference owner. Schema expansion, dual
 acceptance, corpus exclusion, silent normalization, and package broadening are
 rejected.
+
+## Corpus Correction Result
+
+The Diagnostics reference now declares `Level: REFERENCE`. Both existing
+Diagnostics suites require that exact token, and the legacy metadata helper
+accepts the complete selected dependency closure from Core through
+Verification, Contracts, Diagnostics, and the reference. The correction did
+not change metadata semantics or transfer ownership to M6-K1; it removed one
+invalid canonical value before strict engine acceptance.

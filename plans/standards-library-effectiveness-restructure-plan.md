@@ -12,10 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, and M6-EDGE-FREE are accepted; exact typed
 executable-edge semantics govern further checker deletion.
 
-**Next slice:** implement the delegated verification engine's accepted VE036
-Diagnostics reference-level correction, then resume admitted `M6-K1` and
-remove only its fixture checker after focused, package, graph, plan, and
-complete mixed-suite acceptance.
+**Next slice:** restore and resume the delegated verification engine's admitted
+`M6-K1` module metadata-graph primitive and remove only its fixture checker
+after focused, package, graph, plan, and complete mixed-suite acceptance. VE036
+is accepted through its separate Diagnostics owner-local correction.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

@@ -1648,3 +1648,22 @@
   / 914 edges / 190 components, diff integrity, and all 189 mixed entrypoints.
 - Next slice: implement and commit the bounded owner-local correction, then
   restore and resume the admitted metadata-kernel implementation.
+
+## 2026-08-09 - VE036 Owner-Local Correction Accepted
+
+- Replaced the Diagnostics reference module's unsupported `ADVISORY` level
+  with the canonical `REFERENCE` level; no other normative or reference prose
+  changed.
+- Added exact `Level: REFERENCE` evidence to both accepted Diagnostics suites
+  that already consume the reference module.
+- Both focused owner suites and the legacy metadata helper over the complete
+  selected dependency closure pass; no canonical `ADVISORY` level remains.
+- No schema, helper, engine, registry, fixture, package, generated source,
+  canonical Diagnostics policy, compatibility behavior, fallback, or unrelated
+  reference content changed.
+- Acceptance passed both focused Diagnostics suites, the legacy metadata helper
+  over the complete selected dependency closure, all 87 declarative suites,
+  both plan-structure checks, graph freshness at 189 Bash verifiers / 194 nodes
+  / 914 edges / 190 components, and diff integrity.
+- Next slice: restore M6-K1 from its isolated state, rerun the 57-module audit,
+  and resume the admitted metadata-kernel implementation.

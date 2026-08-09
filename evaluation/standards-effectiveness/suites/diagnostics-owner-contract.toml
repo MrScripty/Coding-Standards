@@ -66,6 +66,7 @@ type = "text"
 path = "reference/recipes/diagnostics.md"
 required = [
   "ID: `reference.recipes.diagnostics`",
+  "Level: `REFERENCE`",
   "This material is non-normative",
   "## Adapting A Mechanism",
 ]
