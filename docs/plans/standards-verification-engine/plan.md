@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: metadata-kernel implementation
+**Current phase:** Milestone 6: VE036 owner-local metadata correction
 
-**Next slice:** Implement the admitted `M6-K1` module metadata-graph primitive,
-focused corpus, and registered fixture suite; delete only the fixture checker
-after all package, edge, engine, graph, plan, and mixed-suite gates pass.
+**Next slice:** Correct the Diagnostics reference module to the canonical
+`REFERENCE` level and add exact owner-suite evidence, then resume the admitted
+`M6-K1` implementation from its isolated worktree state.
 
 **Acceptance status:** `pending`
 
@@ -2445,6 +2445,31 @@ package and two exact retained-artifact edges; all 62 engine tests and all 87
 declarative suites passed; graph freshness passed at 189 Bash verifiers / 194
 nodes / 914 edges / 190 components; both plan checks and diff integrity passed;
 and the complete mixed checkpoint passed all 189 entrypoints.
+
+**VE036 re-plan decision:** the strict implementation passed all 20 focused
+engine tests, then a read-only audit of all 57 live canonical modules found
+`reference/recipes/diagnostics.md` declares `Level: ADVISORY`. The schema,
+information architecture, legacy metadata helper, and new primitive permit
+only `REFERENCE` for a `reference` module. This is isolated existing corpus
+non-compliance, not replacement drift.
+
+Resolve the defect first as a separate Diagnostics-owned correction. Its exact
+implementation write set is `reference/recipes/diagnostics.md`, the existing
+`diagnostics-owner-contract` and `diagnostics-activity-context` suite files,
+this plan, its issue register, metadata audit, execution ledger, and the parent
+plan cursor. Change only the level token and add exact positive level evidence
+to both suites that already consume the reference. Verify both owner suites,
+the legacy metadata helper over the reference's complete dependency closure,
+all declarative suites, plan structure, graph freshness, and diff integrity.
+No metadata schema, helper, fixture, engine, registry, package manifest,
+generated graph source, canonical Diagnostics policy, or unrelated reference
+content may change. This correction neither broadens nor accepts M6-K1.
+
+The paused M6-K1 source and test work remains isolated until this prerequisite
+is committed. Afterward restore it, preserve this decision, rerun the 57-module
+audit, and continue the admitted implementation. Do not add `ADVISORY`, accept
+both values, omit the invalid module, normalize it silently, or merge the
+cross-owner correction into the metadata-kernel package.
 
 **Implementation gate after admission:** focused parser/graph tests cover every
 typed diagnostic; the positive corpus and every negative fixture pass through

@@ -56,3 +56,24 @@ owner-coherent waves.
 No rule registry, namespaced rule syntax, legacy-map lookup, compatibility
 parser, helper wrapper, command action, consumer migration, canonical-module
 rewrite, lockfile change, or fallback path is admitted.
+
+## Implementation Corpus Finding
+
+The first strict implementation passed 20 focused engine tests. A subsequent
+read-only audit selected all 57 live modules under Core, Router, workflows,
+profiles, topics, and reference. It produced one diagnostic:
+
+- `METADATA.LEVEL` for `reference/recipes/diagnostics.md`, whose `reference`
+  role declares `Level: ADVISORY`.
+
+The current metadata schema, information architecture, Bash helper, and new
+primitive define `REFERENCE` as the only valid level for a reference module.
+The helper therefore rejects the same module; this is existing canonical-corpus
+non-compliance rather than replacement drift.
+
+VE036 accepts an owner-local prerequisite correction: change that one level
+token to `REFERENCE` and add exact evidence to both existing Diagnostics suites
+that already consume the file. M6-K1 remains admitted but paused and does not
+gain authority over the Diagnostics reference owner. Schema expansion, dual
+acceptance, corpus exclusion, silent normalization, and package broadening are
+rejected.

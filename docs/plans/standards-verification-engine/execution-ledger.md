@@ -1627,3 +1627,24 @@
   mixed checkpoint passed.
 - Next slice: implement the native metadata primitive and fixture suite, then
   delete only the admitted fixture checker.
+
+## 2026-08-09 - VE036 Owner-Local Correction Re-Plan
+
+- Implemented the side-effect-free metadata graph primitive and added 20
+  focused parser, field, relation, graph, fixture-corpus, and configuration
+  tests in an isolated worktree state; the focused test module passes.
+- Before changing schema, fixtures, registry, or Bash paths, ran the strict
+  primitive read-only across all 57 live canonical modules.
+- Found one existing violation: `reference/recipes/diagnostics.md` uses
+  `Level: ADVISORY` although its role is `reference` and both the current schema
+  and legacy helper require `REFERENCE`.
+- Accepted a separate Diagnostics-owned prerequisite that changes only the
+  level token, strengthens both existing owner suites with exact positive
+  evidence, and verifies the complete metadata dependency closure.
+- Rejected compatibility values, corpus exclusion, silent normalization,
+  schema weakening, and implicit cross-owner expansion of M6-K1.
+- Re-plan verification passed both plan-structure checks, all 62 engine tests,
+  all 87 declarative suites, graph freshness at 189 Bash verifiers / 194 nodes
+  / 914 edges / 190 components, diff integrity, and all 189 mixed entrypoints.
+- Next slice: implement and commit the bounded owner-local correction, then
+  restore and resume the admitted metadata-kernel implementation.
