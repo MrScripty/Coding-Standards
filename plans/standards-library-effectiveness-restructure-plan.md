@@ -13,9 +13,9 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** review the delegated engine's post-`M3-DT1` graph and admit the
-next inbound-free owner-coherent decision consumer, including documentation
-projections before its exact write set is frozen.
+**Next slice:** implement delegated engine package `M3-DT2`, replacing Rust
+Binding Contract Discovery with one declarative suite and atomically
+reconciling its README projection and obsolete fixture mirrors.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2375,9 +2375,13 @@ all structural/routing fixtures pass.
        - `7.4c3ve20` (`Accepted`): replace the Language Binding Surface Contract
          checker with one registered declarative suite, retain only canonical
          decisions, reconcile README projection, and regenerate graph evidence.
-       - `7.4c3ve21` (`Active`): inspect the 237-verifier/242-node post-package
+       - `7.4c3ve21` (`Accepted`): inspect the 237-verifier/242-node post-package
          graph and admit the next bounded decision consumer without inferred
          ownership, omitted documentation, or compatibility authority.
+       - `7.4c3ve22` (`Active`): migrate admitted Rust Binding Contract
+         Discovery package `M3-DT2`; preserve 13 typed decisions, one exact
+         disposition, Rust profile evidence, former-source closure, and the
+         README projection without a Bash wrapper or alternate discovery.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

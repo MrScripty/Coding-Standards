@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 3: Decision Table Consumer Migration
 
-**Next slice:** Review the post-`M3-DT1` graph and admit the next smallest
-inbound-free, owner-coherent decision-table consumer package. Include all
-documentation projections before freezing its exact write set.
+**Next slice:** Implement admitted package `M3-DT2`, replacing Rust Binding
+Contract Discovery with one declarative suite and reconciling its README
+projection while deleting the obsolete checker and redundant mirrors.
 
 **Acceptance status:** `pending`
 
@@ -785,6 +785,38 @@ write-set history, and all 237 mixed checker entrypoints passed.
 were deleted, the README now projects the registered suite and retained
 decisions fixture, and no Bash wrapper, transitive checker call, dual outcome
 authority, stale operational reference, or default-success path remains.
+
+#### M3-DT2 Package Admission: Rust Binding Contract Discovery
+
+**Status:** `Accepted`
+
+**Owner:** verification-engine migration mechanics
+
+**Selected package:** post-`M3-DT1` graph review found four inbound-free direct
+decision consumers. Rust Binding Contract Discovery is the smallest
+owner-coherent candidate not coupled to unresolved source closure: 72 Bash
+lines, one Rust profile owner, 13 strict decisions, one exact disposition, and
+one README projection. Its current identity is `component-0183`.
+
+**Deferred candidates:** Platform Evidence Coverage is nominally smaller, but
+it and Native Artifact Loading are governed by unresolved Cross-Platform
+source-shape finding `F085`; they remain reserved for Milestone 5. Binding
+Artifact Composition is independently eligible but larger and follows this
+package in reviewed risk order.
+
+**Exact package outcome:** `M3-DT2` includes the replacement suite, obsolete
+checker/schema/observed authorities, README projection, shared registry and
+package authority, generated graph artifacts, and serial plan records. The
+decisions fixture remains canonical input and is not rewritten.
+
+**Acceptance evidence:** the two-row package-authority suite passed; all 38
+declarative suites/176 checks, 37 engine tests, Python compilation, both plan
+structure checks, diff integrity, graph freshness at 237 Bash verifiers/242
+nodes/1,041 edges/238 components, and all 237 mixed checker entrypoints passed.
+
+**No-fallback result:** no graph-derived ownership, Cross-Platform scope
+shortcut, omitted documentation, Bash wrapper, compatibility authority, or
+alternate discovery mechanism is admitted.
 
 ### Milestone 4: Semantic Decision Migration
 

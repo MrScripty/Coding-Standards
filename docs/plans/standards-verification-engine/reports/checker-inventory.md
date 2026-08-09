@@ -429,3 +429,19 @@ graph contains 242 nodes, 1,039 typed edges, and 238 components. The migration
 therefore removed one verifier node, eight dependency/reference edges, and one
 component while preserving strict typed decisions, four exact section IDs, four
 exact dispositions, canonical profile evidence, and former-source closure.
+
+### Next Decision Consumer
+
+The remaining inbound-free direct consumers are Binding Artifact Composition
+(`component-0024`, 75 lines), Native Artifact Loading (`component-0138`, 110
+lines), Platform Evidence Coverage (`component-0151`, 66 lines), and Rust
+Binding Contract Discovery (`component-0183`, 72 lines). All have zero inbound
+dependency, executable-reference, and contract-reference counts before package
+admission.
+
+`M3-DT2` selects Rust Binding Contract Discovery. It has one Rust profile owner,
+13 bounded decisions, one exact disposition, and one README reference. Platform
+Evidence and Native Loading remain deferred to the Cross-Platform `F085`
+source-shape package; Binding Artifact Composition remains the next ordinary
+eligible candidate. This ordering uses semantic risk and prerequisites rather
+than line count alone.

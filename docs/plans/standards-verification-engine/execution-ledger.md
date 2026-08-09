@@ -598,3 +598,24 @@
   authority, stale README entrypoint, or implicit export/default-success path
   remains.
 - Next slice: review the post-migration graph for the next bounded consumer.
+
+## 2026-08-08 - Package M3-DT2 Admission
+
+- Reviewed the four remaining inbound-free decision consumers after `M3-DT1`.
+  Selected Rust Binding Contract Discovery (`component-0183`) as the smallest
+  owner-coherent candidate without unresolved source-closure coupling.
+- The package owns 72 Bash lines, 13 Rust adaptation decisions, one exact
+  disposition, one README projection, two redundant fixture mirrors, shared
+  registry/package authority, generated graph evidence, and serial plan state.
+- Recorded `VE015`: Native Artifact Loading and Platform Evidence Coverage
+  remain reserved for the Cross-Platform `F085` source-shape package rather than
+  bypassing its source-wide evidence contract.
+- Verification: the focused two-row package suite, all 38 declarative
+  suites/176 checks, 37 engine tests, Python compilation, both plan-structure
+  checks, diff integrity, 237-verifier/242-node/1,041-edge/238-component graph
+  freshness, and all 237 mixed checker entrypoints passed.
+- No-fallback result: package choice is reviewed, not graph-derived; no omitted
+  documentation, wrapper, compatibility path, alternate discovery, or
+  Cross-Platform scope shortcut is authorized.
+- Next slice: validate package authority and implement `M3-DT2` only after the
+  admission commit is accepted.

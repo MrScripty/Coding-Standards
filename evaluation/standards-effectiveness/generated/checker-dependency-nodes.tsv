@@ -183,7 +183,7 @@ evaluation/standards-effectiveness/verify-rust-binding-annotation-placement.sh	v
 evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	verifier	yes	component-0180	1	no	5	4	2	4	2
 evaluation/standards-effectiveness/verify-rust-binding-artifact-selection.sh	verifier	yes	component-0181	1	no	8	0	0	0	2
 evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	verifier	yes	component-0182	1	no	6	0	1	0	5
-evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh	verifier	yes	component-0183	1	no	6	0	0	0	4
+evaluation/standards-effectiveness/verify-rust-binding-contract-discovery.sh	verifier	yes	component-0183	1	no	6	0	2	0	4
 evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	verifier	yes	component-0184	1	no	1	5	2	5	2
 evaluation/standards-effectiveness/verify-rust-binding-core-adapter-testability.sh	verifier	yes	component-0185	1	no	6	1	0	1	5
 evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	verifier	yes	component-0186	1	no	7	0	1	0	4
