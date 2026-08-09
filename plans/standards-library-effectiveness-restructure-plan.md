@@ -12,9 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 5 and M6-EDGE-1 are accepted; exact typed executable-edge semantics
 govern further checker deletion.
 
-**Next slice:** admit the delegated verification engine's ten-checker
-Contracts, Diagnostics, and Verification wave using the accepted explicit
-edge-free and exact-edge package modes with no fallback execution.
+**Next slice:** implement the delegated verification engine's ten admitted
+Contracts, Diagnostics, and Verification suites, replace six connected calls
+with suite dependencies, reconcile shared README/row-35 identities, and delete
+all ten Bash paths without fallback execution.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

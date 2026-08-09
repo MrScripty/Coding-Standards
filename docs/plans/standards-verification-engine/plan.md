@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: Wave 6 connected-package admission
+**Current phase:** Milestone 6: Wave 6 connected-package implementation
 
-**Next slice:** Admit the ten-checker Contracts, Diagnostics, and Verification
-wave with six edge-free packages, four exact-edge packages, and final
-same-owner-package to suite-requires transitions frozen before implementation.
+**Next slice:** Implement the ten admitted Contracts, Diagnostics, and
+Verification suites, replace connected checker calls with six real suite
+dependencies, reconcile README and row-35 identities, and delete all ten Bash
+checkers atomically.
 
 **Acceptance status:** `pending`
 
@@ -2289,6 +2290,55 @@ exception, or silent success.
 77 declarative suites passed; graph freshness remained 199 Bash verifiers /
 204 nodes / 933 edges / 200 components; both plan checks and diff integrity
 passed; and the complete mixed checkpoint passed all 199 entrypoints.
+
+##### Wave 6 Admission: Connected Contracts, Diagnostics, And Verification
+
+**Status:** `Active`
+
+**Packages:** ten checker packages form four owner-coherent closures: Contracts
+planning boundary plus row 29; Contracts artifact selection and semantic
+preservation plus row 30; Diagnostics owner and activity context plus row 31;
+and Verification ownership plus GUI smoke evidence.
+
+**Frozen behavior:** 69 typed decisions and 18 exact dispositions, exact row
+29/30/31 decomposition and owner-validation projections, canonical Contracts,
+Diagnostics, and Verification evidence, legacy mechanism prohibitions, Router
+and reference routes, and accepted parent-plan claims.
+
+**Package modes:** the six semantic child packages are explicitly `edge-free`.
+The three row packages and GUI smoke package classify all 24 current executable
+reference and verifier-dependency rows. Six same-owner relationships must
+become registered `suite-requires` edges at acceptance; execution train,
+Launcher population, row 14, and their duplicate graph edge kinds remain six
+independent historical gates.
+
+**Shared serial integration:** register ten separate suites; replace GUI smoke
+and Verification owner README routes; replace the Diagnostics owner checker
+identity in row 35 with its suite identity; reconcile row-35 dependency and
+direct-route totals from 26/24 to 25/23 while preserving transitive/computed
+counts at 1/1 and consumers at 33; accept package and edge state together;
+delete ten checkers; regenerate the graph; and update serial plan records.
+
+**Implementation write set:** ten suite TOMLs and ten deleted checker paths;
+unchanged fixtures, decomposition, owner-validation, disposition, and canonical
+policy files as read-only evidence; registry, package and edge manifests,
+package contract, README, row-35 dependency data and checker, generated graph,
+and serial plan records.
+
+**No-fallback rule:** no policy, fixture, disposition, canonical source,
+metadata, Router, execution train, Launcher population, row 14, engine,
+compatibility schema, wrapper, bridge, alias, duplicate authority, inferred
+outcome, false independent gate, or weaker evidence may be added or changed.
+
+**Acceptance gate:** ten focused suites, package and edge authority, exact six
+registry dependencies, README and row-35 lifecycle closure, all engine tests
+and declarative suites, graph freshness, both plan checks, diff integrity, and
+one complete mixed checkpoint after all ten Bash paths are absent.
+
+**Admission verification:** package and edge authority, all 62 engine tests,
+all 77 declarative suites, graph freshness at 199 Bash verifiers / 204 nodes /
+965 edges / 200 components, both plan checks, diff integrity, and all 199 mixed
+entrypoints pass before implementation.
 
 **Tasks:**
 

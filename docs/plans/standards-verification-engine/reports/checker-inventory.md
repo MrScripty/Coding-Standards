@@ -1170,3 +1170,25 @@ All 20 focused edge tests, all 62 engine tests, all 77 declarative suites,
 graph freshness at 199 Bash verifiers / 204 nodes / 933 edges / 200 components,
 both plan checks, diff integrity, and all 199 mixed entrypoints passed. The
 contract is accepted before any Wave 6 package is admitted.
+
+### Milestone 6 Wave 6 Admission
+
+Ten checkers form four owner-coherent closures covering Contracts planning,
+Contracts artifact/semantic preservation, Diagnostics ownership/context, and
+Verification ownership/GUI smoke. Their accepted behavior comprises 69 typed
+decisions, 18 exact dispositions, exact row 29/30/31 decomposition and owner
+validation, canonical routes, former-mechanism prohibitions, and parent-plan
+claims.
+
+Six semantic child packages are exactly edge-free. The four callers expose 24
+typed graph rows: twelve rows represent six same-owner semantic relationships
+that must become registered suite dependencies, while twelve rows retain six
+independent execution-train, Launcher population, and row-14 lifecycle gates.
+No edge is omitted, invented, or inferred.
+
+Implementation also replaces two README routes and one row-35 Diagnostics
+identity, changing row-35 dependency/direct-route counts from 26/24 to 25/23
+while preserving transitive/computed counts at 1/1 and consumers at 33.
+Admission verification passed package and edge authority, all 62 engine tests,
+all 77 suites, graph freshness at 199 Bash verifiers / 204 nodes / 965 edges /
+200 components, both plan checks, diff integrity, and all 199 mixed entrypoints.

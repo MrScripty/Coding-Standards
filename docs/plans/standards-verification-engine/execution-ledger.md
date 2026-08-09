@@ -1503,3 +1503,28 @@
   both plan checks and diff integrity passed.
 - The complete mixed checkpoint passed all 199 entrypoints. The edge-free
   contract is accepted; the next slice admits the connected ten-checker wave.
+
+## 2026-08-09 - Milestone 6 Wave 6 Admission
+
+- Admitted ten checker packages in four owner-coherent closures spanning
+  Contracts rows 29 and 30, Diagnostics row 31, and Verification GUI smoke.
+- Froze 69 typed decisions, 18 exact dispositions, three decomposition and
+  owner-validation contracts, canonical owner/routes, legacy prohibitions, and
+  accepted parent-plan evidence using existing engine primitives.
+- Classified six semantic child checkers as explicitly edge-free. Classified
+  all 24 executable rows from row 29, row 30, row 31, and GUI smoke: twelve
+  same-owner rows must become six real suite dependencies, and twelve rows
+  retain six independent lifecycle gates.
+- Froze replacement of two README checker routes and the Diagnostics row-35
+  identity. Row-35 dependency/direct-route counts become 25/23 while
+  transitive/computed counts remain 1/1 and consumers remain 33.
+- Excluded policy, fixtures, dispositions, canonical sources, metadata,
+  Router, execution train, Launcher population, row 14, engine changes,
+  wrappers, bridges, aliases, inferred outcomes, false gates, weaker evidence,
+  and silent success.
+- Admission verification passed package and edge authority, all 62 engine
+  tests, all 77 declarative suites, graph freshness at 199 Bash verifiers /
+  204 nodes / 965 edges / 200 components, both plan checks, diff integrity,
+  and all 199 mixed entrypoints.
+- Next slice: prepare the four disjoint suite closures concurrently, integrate
+  registry and lifecycle authority serially, and delete all ten Bash paths.
