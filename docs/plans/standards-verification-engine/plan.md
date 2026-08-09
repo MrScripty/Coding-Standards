@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: executable-edge semantics re-plan
+**Current phase:** Milestone 6: typed executable-edge contract
 
-**Next slice:** Select and freeze how executable edges map to declarative
-dependencies before any Wave 3 package admission.
+**Next slice:** Implement and test the generic executable-edge disposition
+assertion before any Wave 3 package admission.
 
 **Acceptance status:** `pending`
 
@@ -1950,7 +1950,7 @@ without a compatibility execution path.
 
 #### Post-Wave-2 Re-Plan Trigger: Executable Edge Semantics
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 The fresh graph has 223 Bash verifiers, 228 nodes, 983 edges, and 224
 components. Its only caller-free and prerequisite-free roots are the
@@ -1990,9 +1990,57 @@ inconsistent treatment of the same shared target.
 silent dependency deletion, implicit full-suite reliance, or one-off engine
 callbacks preserve legacy execution or hide semantics and remain prohibited.
 
-**Decision required:** choose the executable-edge disposition model before
-Wave 3 admission. No source, suite, checker, registry, lifecycle, or generated
-artifact may change under this trigger.
+**Accepted decision:** Option 1. Implement one generic Python assertion over a
+typed TSV manifest. Every package checker source must have exact outgoing-edge
+coverage before deletion. `admitted` rows must name current executable edges;
+`accepted` rows must name removed edges. Package and edge states must agree.
+`native-engine`, `independent-gate`, `suite-requires`, `same-owner-package`, and
+`external-owned-artifact` rows require typed replacement evidence;
+`invalid/unresolved` blocks acceptance. Paths remain contained, keys unique,
+and wrappers, bridges, implicit deletion, and duplicate authority prohibited.
+
+**Acceleration model:** classify high-fan-out shared targets once, then admit
+many disjoint owner packages in one wave. Package authors own only their suite,
+fixture, deleted checker, and edge rows. Shared edge manifest, package manifest,
+registry, generated graph, and plans integrate serially. A wave may remove many
+scripts when their owners and edge dispositions are independent; batch size is
+bounded by semantic review and write-set overlap, not an arbitrary script count.
+
+#### Slice M6-EDGE-1: Generic Edge-Disposition Assertion
+
+**Status:** `Planned`
+
+**Allowed write set:** one Python check module, check parser registration,
+focused engine tests/fixtures, one declarative contract suite, suite registry,
+edge manifest/schema fixture, engine documentation, generated graph artifacts,
+and plan records.
+
+**No-fallback rule:** no arbitrary command execution, Bash checker, bridge,
+graph-derived default disposition, inferred owner, wildcard acceptance,
+unresolved accepted row, or missing-path exception.
+
+**Acceptance gate:** focused positive and negative engine tests prove malformed
+schema, duplicate edges, package mismatch, incomplete outgoing coverage,
+missing admitted edges, present accepted edges, unresolved acceptance, invalid
+replacement evidence, and path containment fail with typed diagnostics. The
+contract suite, all declarative suites, graph freshness, both plan checks, and
+the complete mixed suite pass.
+
+#### Slice M6-EDGE-2: Accelerated Multi-Owner Wave
+
+**Status:** `Planned`
+
+After M6-EDGE-1 acceptance, classify high-reuse helper and historical-gate
+edges, select disjoint owner packages, and migrate them in one integrated wave.
+True semantic dependencies become suite `requires`; generic helper behavior
+uses native engine assertions; historical gates remain independently
+registered; same-owner chains migrate together; external artifacts retain an
+explicit owner. Exact edge rows transition from `admitted` to `accepted` with
+their checker deletion.
+
+**Acceptance gate:** every removed checker has exact package and edge coverage;
+all focused suites and typed edge checks pass; no unresolved row, wrapper,
+bridge, or live deleted-path reference remains; one complete wave gate passes.
 
 **Tasks:**
 

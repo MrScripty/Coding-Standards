@@ -1296,3 +1296,18 @@
   inclusion, external owned artifacts, and invalid/unresolved edges.
 - Stopped before Wave 3 admission. No suite, checker, registry, lifecycle,
   source, generated artifact, or compatibility path changed.
+
+## 2026-08-09 - VE026 Option 1 Accepted
+
+- Accepted the typed executable-edge disposition contract rather than literal
+  shared-prerequisite closure or package-local edge exceptions.
+- Split execution into M6-EDGE-1, a reusable Python assertion with negative
+  fixtures, and M6-EDGE-2, the first larger multi-owner migration wave.
+- Froze admitted/current and accepted/absent edge-state semantics, exact
+  outgoing coverage, package-state agreement, typed dispositions and
+  replacement evidence, contained paths, unique keys, and unresolved-row
+  rejection.
+- Established larger batching by semantic owner and disposition after shared
+  high-fan-out targets are classified once. Shared manifests, registry, graph,
+  and plans remain serial integration-owner files.
+- No implementation or Wave 3 package is admitted by this planning slice.

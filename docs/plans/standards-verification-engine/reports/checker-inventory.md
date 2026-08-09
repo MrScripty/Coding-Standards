@@ -985,3 +985,19 @@ external owned artifact, or invalid/unresolved. This preserves semantic
 dependencies without treating historical execution coupling as policy and
 supports independent owner-package preparation with serial shared integration.
 No Wave 3 package is admitted.
+
+### Accepted VE026 Resolution
+
+Option 1 is accepted. A generic Python assertion will validate a typed edge
+manifest against the package manifest and current executable graph. It enforces
+complete outgoing coverage for admitted checker packages, current-edge presence
+before deletion, accepted-edge absence afterward, package-state agreement,
+typed replacement evidence, unique contained paths, and unresolved-row
+rejection.
+
+This contract permits larger waves without weaker review. High-fan-out shared
+targets are classified once; disjoint owner packages can then be prepared in
+parallel and integrated serially. True semantic dependencies become suite
+requirements, generic helper behavior uses native assertions, historical gates
+remain independent, and same-owner chains migrate together. M6-EDGE-1 builds
+the assertion before M6-EDGE-2 admits broad deletion packages.
