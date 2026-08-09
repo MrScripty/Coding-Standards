@@ -831,8 +831,11 @@
 
 ## 2026-08-08 - M5-CP2 Native Artifact Release Admission
 
-- Admitted current component `0137` as one Release-owned declarative suite over
-  the retained 19-row native artifact decisions fixture.
+- Admitted stable subject
+  `checker:evaluation/standards-effectiveness/verify-native-artifact-release.sh`
+  as one Release-owned declarative suite over the retained 19-row native
+  artifact decisions fixture. Current component `0137` remains snapshot
+  evidence only.
 - Froze two exact dispositions, canonical Artifact Plan text, accepted lineage,
   README projection, and temporary whole-source coverage.
 - Classified temporary `M5-CP0` as the only suite dependency. The broader
@@ -846,8 +849,14 @@
 - No wrapper, compatibility schema, source heading alias, duplicated Release
   policy, filename default, ambient package, alternate artifact, incomplete
   publication, or default success is permitted.
-- Next slice: implement admitted `M5-CP2` and prove the complete acceptance
-  gate before commit.
+- Admission resumed after VE018 with exact subject uniqueness and explicit
+  admission-time graph regeneration.
+- Verification passed: focused package authority, all 42 declarative suites,
+  37 engine tests, Python compilation, both plan checks, protected-input
+  immutability, diff integrity, graph freshness at 234 Bash verifiers / 239
+  nodes / 1,017 edges / 235 components, and all 234 mixed checker entrypoints.
+- Next slice: implement admitted `M5-CP2` and prove the complete acceptance gate
+  before commit.
 
 ## 2026-08-08 - Migration-Package Stable-Identity Re-plan Trigger
 

@@ -632,14 +632,22 @@ owner, or no-fallback evidence.
 Admission exposed that `component-0137` is also the historical ordinal recorded
 for accepted M5-CP1. This is not a semantic overlap: deleting M5-CP1 renumbered
 the generated graph. Component ordinals are snapshot evidence and cannot be the
-manifest's unique package subject. M5-CP2 remains unadmitted until the manifest
-uses a stable reviewed identity and admission graph regeneration is explicit.
+manifest's unique package subject. M5-CP2 admission therefore uses a stable
+reviewed identity and explicit admission graph regeneration.
 
 The accepted recovery uses the stable subject
 `checker:evaluation/standards-effectiveness/verify-native-artifact-release.sh`
 for M5-CP2. Existing package rows use typed checker/source subjects while
 retaining exact uniqueness. Admission-boundary graph regeneration is explicit;
 no ordinal rewrite or graph exception is used.
+
+M5-CP2 is admitted under that stable checker subject. Current
+`component-0137` remains snapshot evidence and does not participate in package
+uniqueness or ownership.
+
+Admission verification passed all 42 declarative suites, 37 engine tests, and
+all 234 mixed checker entrypoints. The admission graph contains 239 nodes,
+1,017 edges, and 235 components.
 
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015

@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 5: Native Artifact Release admission
 
-**Next slice:** Resume and complete `M5-CP2` admission using the stable checker
-subject and explicit admission-time graph regeneration.
+**Next slice:** Implement admitted `M5-CP2` Native Artifact Release and delete
+its Bash checker plus redundant schema/observed mirrors.
 
 **Acceptance status:** `pending`
 
@@ -1203,7 +1203,7 @@ components.
 
 #### M5-CP2 Package Admission: Native Artifact Release
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 **Owner:** `workflow.release`
 
@@ -1245,10 +1245,16 @@ removed-path scanning, source and semantic-input immutability, both plan checks,
 diff integrity, and the complete mixed suite pass before implementation is
 accepted.
 
-Admission cannot complete under the current package schema: graph regeneration
-reused `component-0137`, already recorded for accepted M5-CP1, for the current
-Native Artifact Release checker. Component ordinals are deterministic only for
-one graph snapshot and cannot serve as unique historical package subjects.
+**Admission identity:** the stable package subject is
+`checker:evaluation/standards-effectiveness/verify-native-artifact-release.sh`.
+Current `component-0137` is non-authoritative graph snapshot evidence. The
+accepted VE018 recovery prevents ordinal reuse from changing package identity.
+
+**Admission evidence:** focused package authority and all 42 declarative suites
+passed; 37 engine tests, Python compilation, both plan checks, protected-input
+immutability, and diff integrity passed. The admission graph is fresh at 234
+Bash verifiers, 239 nodes, 1,017 edges, and 235 components; all 234 mixed
+checker entrypoints passed.
 
 #### Migration-Package Stable-Identity Re-plan Trigger
 

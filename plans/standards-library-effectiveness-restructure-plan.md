@@ -2434,9 +2434,14 @@ all structural/routing fixtures pass.
          package authority with unique typed checker/source subjects; retain
          component ordinal and baseline only as report evidence and include
          graph regeneration at admission boundaries.
-       - `7.4c3ve34` (`Active`): resume M5-CP2 admission using the stable Native
-         Artifact Release checker subject and accepted VE017 dependency
-         classification.
+       - `7.4c3ve34` (`Accepted planning authority`): admit M5-CP2 using the
+         stable Native Artifact Release checker subject, 19 typed decisions,
+         two exact dispositions, temporary M5-CP0 dependency, and accepted
+         VE017 integration-gate classification.
+       - `7.4c3ve35` (`Active`): implement admitted M5-CP2, delete its Bash
+         checker and redundant schema/observed mirrors, update README and graph
+         evidence, and retain no wrapper, heading alias, duplicate Release
+         policy, or fallback.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact
