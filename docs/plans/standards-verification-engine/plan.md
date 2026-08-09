@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3: M3-DT1 Scope Re-plan
+**Current phase:** Milestone 3: Decision Table Consumer Migration
 
-**Next slice:** Resolve the `M3-DT1` documentation-reference scope trigger.
-Implementation remains blocked until the package either includes the
-standards-effectiveness README or is replaced by another reviewed package.
+**Next slice:** Implement admitted package `M3-DT1`, replace the Language
+Binding Surface Contract checker with one declarative suite, reconcile its
+README projection, and remove all obsolete checker and mirror authorities.
 
 **Acceptance status:** `pending`
 
@@ -726,7 +726,7 @@ rather than add command execution, retain the checker, or weaken evidence.
 
 #### M3-DT1 Documentation Scope Re-plan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 Pre-implementation review found that the standards-effectiveness README names
 the current Bash entrypoint. The admitted write set omitted that shared
@@ -753,6 +753,13 @@ reference or advance this component.
 
 Retaining the Bash checker, adding a wrapper, deleting without documentation
 reconciliation, or weakening the removed-path scan are not valid options.
+
+**Selected resolution:** Option 1. The re-admitted package includes the
+standards-effectiveness README in its exact write set and adds an explicit
+removed-path gate to its verification contract. The implementation slice must
+replace the README's Bash-entrypoint projection with the registered suite and
+retained decisions fixture in the same atomic outcome. No intermediate
+documentation authority or compatibility entrypoint is authorized.
 
 ### Milestone 4: Semantic Decision Migration
 

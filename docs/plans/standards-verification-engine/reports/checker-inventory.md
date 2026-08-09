@@ -409,3 +409,10 @@ write set did not include that file, so implementation stopped and was restored
 before source integration. Re-admission must either include the README or defer
 the package; it cannot ignore the reference because it is absent from the typed
 dependency graph.
+
+The selected resolution re-admits `M3-DT1` with the README in its exact write
+set and an explicit removed-path verification gate. This keeps documentation
+projection, suite registration, obsolete-authority deletion, generated graph
+updates, and package lifecycle in one owner-coherent integration outcome. The
+package is again eligible for implementation; no compatibility entrypoint or
+intermediate documentation authority is permitted.

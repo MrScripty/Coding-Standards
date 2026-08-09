@@ -563,3 +563,20 @@
   prohibited.
 - Next slice: select and record the `M3-DT1` scope resolution before source
   implementation resumes.
+
+## 2026-08-08 - M3-DT1 Re-admitted With Documentation Scope
+
+- Accepted Option 1 and re-admitted the same owner-coherent package rather than
+  creating an intermediate documentation authority or deferring the component.
+- Added the standards-effectiveness README to the exact write set and added an
+  explicit removed-path gate to the package verification contract.
+- Resolved `VE014`; implementation must replace the README's Bash entrypoint
+  projection with the registered suite and retained decisions fixture while
+  deleting the complete obsolete checker and schema/observed mirrors.
+- Verification: the focused package suite passed; all 37 declarative suites
+  and 171 checks, 37 engine tests, 243-node/1,047-edge/239-component graph
+  freshness, both plan-structure checks, diff integrity, and all 238 mixed
+  checker entrypoints passed.
+- No-fallback result: no wrapper, stale documentation, dual authority,
+  out-of-scope edit, or weakened reference scan is authorized.
+- Next slice: implement and verify re-admitted package `M3-DT1`.
