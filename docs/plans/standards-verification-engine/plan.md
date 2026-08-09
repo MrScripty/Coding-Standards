@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: accelerated Wave 4 admission
+**Current phase:** Milestone 6: post-Wave-4 dependency audit
 
-**Next slice:** Implement the 13 admitted testing-family suites, delete their
-Bash checkers, and accept their exact row-18 edge history in one integrated
-wave.
+**Next slice:** Inspect the fresh 204-verifier graph, classify exact executable
+edges, and admit the next owner-coherent packages through the accepted typed
+edge contract.
 
 **Acceptance status:** `pending`
 
@@ -1606,7 +1606,7 @@ edges, and 231 components.
 
 #### M5-CP6 Cross-Platform Source-Closure Admission
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Owner:** verification-engine migration source closure, integrated with parent
 source package `7.4c3.7`
@@ -2179,6 +2179,25 @@ success may be added or changed.
 all 59 declarative suites, graph freshness at 217 Bash verifiers / 222 nodes /
 1,009 edges / 218 components, both plan checks, diff integrity, and all 217
 mixed entrypoints passed.
+
+**Implementation:** 13 registered declarative suites now own the complete
+testing-family behavior. They preserve 187 typed decisions, eight exact Testing
+index routes, 101 exact dispositions, canonical owner text, legacy-source
+prohibitions, and accepted-plan evidence. All 13 Bash paths are deleted; their
+package rows and all 26 historical edge rows transitioned together to
+`accepted`. Row 18 remains independently discovered, and the Frontend testing
+caller chain remains unchanged.
+
+VE029 records one strict evidence refinement: the Testing source suite rejects
+Markdown checkbox tokens anywhere rather than only line-start checklist syntax.
+This removes more residual checklist authority without changing policy,
+fixtures, the source, or the engine.
+
+**Implementation verification:** all 13 focused suites plus package and edge
+authority passed; all 57 engine tests and all 72 declarative suites passed;
+graph freshness passed at 204 Bash verifiers / 209 nodes / 944 edges / 205
+components; diff integrity and the complete mixed checkpoint passed all 204
+surviving entrypoints.
 
 **Implementation gate:** each suite preserves its complete typed decisions,
 exact routes or dispositions, positive and negative canonical text, legacy

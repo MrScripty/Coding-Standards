@@ -1413,3 +1413,27 @@
   all 217 mixed entrypoints passed.
 - Next slice: implement all 13 suites, delete all 13 Bash paths, transition
   package and edge history together, and run one complete wave checkpoint.
+
+## 2026-08-09 - Milestone 6 Wave 4 Implementation
+
+- Added and registered 13 separate declarative suites for the admitted Testing
+  evidence family using only existing strict decision, text, and table
+  primitives.
+- Preserved 187 typed decisions, eight exact Testing index routes, 101 exact
+  dispositions, canonical owner text, legacy-source prohibitions, and accepted
+  plan claims. Policy, fixtures, canonical sources, and row 18 are unchanged.
+- Deleted all 13 admitted Bash checkers and accepted all 13 package rows plus
+  all 26 historical edge rows without wrappers, bridges, aliases, inferred
+  outcomes, compatibility schemas, or weaker evidence.
+- Retained row 18 as an independently discovered historical lifecycle gate.
+  Retained the excluded Frontend testing evidence and Frontend lineage caller
+  chain unchanged.
+- Recorded VE029: the generic source suite strictly prohibits checkbox tokens
+  anywhere instead of only line-start checklist syntax. This strengthens legacy
+  authority removal without adding a regex primitive or source exception.
+- Focused verification passed all 13 replacements plus package and edge
+  authority; all 57 engine tests and all 72 declarative suites passed; graph
+  freshness passed at 204 Bash verifiers / 209 nodes / 944 edges / 205
+  components; and diff integrity passed.
+- The complete mixed-suite Wave 4 checkpoint passed all 204 surviving
+  entrypoints. Wave 4 is accepted; the next slice is a fresh dependency audit.

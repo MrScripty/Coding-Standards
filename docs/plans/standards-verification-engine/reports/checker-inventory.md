@@ -1095,3 +1095,22 @@ Admission verification passed package and edge authority, all 57 engine tests,
 all 59 declarative suites, graph freshness at 217 Bash verifiers / 222 nodes /
 1,009 edges / 218 components, both plan checks, diff integrity, and all 217
 mixed entrypoints.
+
+### Implemented Milestone 6 Wave 4
+
+The 13 admitted testing-family checkers are now 13 registered declarative
+suites. Their 187 typed decisions, eight exact Testing index routes, 101 exact
+dispositions, canonical owner text, former-source prohibitions, and accepted
+plan claims are preserved. All 13 Bash paths are deleted without wrappers,
+bridges, aliases, alternate identities, or duplicated policy.
+
+All package rows and 26 historical edge rows are accepted. Row 18 remains an
+independently discovered lifecycle gate, and the excluded Frontend testing
+caller chain remains unchanged. VE029 records the strict source-closure
+refinement that rejects checkbox tokens anywhere rather than only at line start.
+
+Focused verification passed all 13 replacements, package and edge authority,
+all 57 engine tests, and all 72 declarative suites. Graph freshness passed at
+204 Bash verifiers / 209 nodes / 944 edges / 205 components. Complete
+mixed-suite Wave 4 verification passed all 204 surviving entrypoints, accepting
+the wave without a compatibility execution path.

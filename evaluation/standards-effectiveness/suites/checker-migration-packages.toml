@@ -282,7 +282,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-acceptance-paths.toml,evaluation/standards-effectiveness/verify-testing-acceptance-paths.sh,evaluation/standards-effectiveness/fixtures/verification/acceptance-path-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "25",
   "M6-W4-TEST-ASYNC",
@@ -293,7 +293,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-async-evidence.toml,evaluation/standards-effectiveness/verify-testing-async-evidence.sh,evaluation/standards-effectiveness/fixtures/verification/async-completion-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "26",
   "M6-W4-TEST-CONCURRENCY",
@@ -304,7 +304,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-concurrency-consolidation.toml,evaluation/standards-effectiveness/verify-testing-concurrency-consolidation.sh,evaluation/standards-effectiveness/fixtures/concurrency/verification-resource-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "27",
   "M6-W4-TEST-COVERAGE",
@@ -315,7 +315,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-coverage-documentation.toml,evaluation/standards-effectiveness/verify-testing-coverage-documentation.sh,evaluation/standards-effectiveness/fixtures/verification/coverage-documentation-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "28",
   "M6-W4-TEST-DATA",
@@ -326,7 +326,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-data-lifecycle.toml,evaluation/standards-effectiveness/verify-testing-data-lifecycle.sh,evaluation/standards-effectiveness/fixtures/verification/test-data-lifecycle-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "29",
   "M6-W4-TEST-FOCUSED",
@@ -337,7 +337,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-focused-design.toml,evaluation/standards-effectiveness/verify-testing-focused-design.sh,evaluation/standards-effectiveness/fixtures/verification/focused-test-design-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "30",
   "M6-W4-TEST-GATES",
@@ -348,7 +348,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-gates-diagnosis.toml,evaluation/standards-effectiveness/verify-testing-gates-diagnosis.sh,evaluation/standards-effectiveness/fixtures/verification/supporting-gate-diagnosis-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "31",
   "M6-W4-TEST-BINDINGS",
@@ -359,7 +359,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-language-binding-evidence.toml,evaluation/standards-effectiveness/verify-testing-language-binding-evidence.sh,evaluation/standards-effectiveness/fixtures/language-bindings/evidence-cohort-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "32",
   "M6-W4-TEST-ORGANIZATION",
@@ -370,7 +370,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-organization.toml,evaluation/standards-effectiveness/verify-testing-organization.sh,evaluation/standards-effectiveness/fixtures/verification/test-organization-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "33",
   "M6-W4-TEST-PERFORMANCE",
@@ -381,7 +381,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-performance-evidence.toml,evaluation/standards-effectiveness/verify-testing-performance-evidence.sh,evaluation/standards-effectiveness/fixtures/performance/testing-evidence-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "34",
   "M6-W4-TEST-PERSISTED",
@@ -392,7 +392,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-persisted-contract-artifacts.toml,evaluation/standards-effectiveness/verify-testing-persisted-contract-artifacts.sh,evaluation/standards-effectiveness/fixtures/contracts/persisted-artifact-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "35",
   "M6-W4-TEST-RESILIENCE",
@@ -403,7 +403,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-resilience-replay.toml,evaluation/standards-effectiveness/verify-testing-resilience-replay.sh,evaluation/standards-effectiveness/fixtures/resilience/replay-resumption-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ], [
   "36",
   "M6-W4-TEST-SOURCE",
@@ -414,6 +414,6 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/testing-source-closure.toml,evaluation/standards-effectiveness/verify-testing-source-closure.sh,evaluation/standards-effectiveness/fixtures/verification/testing-index-routes.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
-  "admitted",
+  "accepted",
 ]
 ]

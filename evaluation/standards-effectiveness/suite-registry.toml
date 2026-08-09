@@ -294,3 +294,68 @@ requires = []
 id = "rust-release-evidence"
 path = "evaluation/standards-effectiveness/suites/rust-release-evidence.toml"
 requires = []
+
+[[suites]]
+id = "testing-acceptance-paths"
+path = "evaluation/standards-effectiveness/suites/testing-acceptance-paths.toml"
+requires = []
+
+[[suites]]
+id = "testing-async-evidence"
+path = "evaluation/standards-effectiveness/suites/testing-async-evidence.toml"
+requires = []
+
+[[suites]]
+id = "testing-concurrency-consolidation"
+path = "evaluation/standards-effectiveness/suites/testing-concurrency-consolidation.toml"
+requires = []
+
+[[suites]]
+id = "testing-coverage-documentation"
+path = "evaluation/standards-effectiveness/suites/testing-coverage-documentation.toml"
+requires = []
+
+[[suites]]
+id = "testing-data-lifecycle"
+path = "evaluation/standards-effectiveness/suites/testing-data-lifecycle.toml"
+requires = []
+
+[[suites]]
+id = "testing-focused-design"
+path = "evaluation/standards-effectiveness/suites/testing-focused-design.toml"
+requires = []
+
+[[suites]]
+id = "testing-gates-diagnosis"
+path = "evaluation/standards-effectiveness/suites/testing-gates-diagnosis.toml"
+requires = []
+
+[[suites]]
+id = "testing-language-binding-evidence"
+path = "evaluation/standards-effectiveness/suites/testing-language-binding-evidence.toml"
+requires = []
+
+[[suites]]
+id = "testing-organization"
+path = "evaluation/standards-effectiveness/suites/testing-organization.toml"
+requires = []
+
+[[suites]]
+id = "testing-performance-evidence"
+path = "evaluation/standards-effectiveness/suites/testing-performance-evidence.toml"
+requires = []
+
+[[suites]]
+id = "testing-persisted-contract-artifacts"
+path = "evaluation/standards-effectiveness/suites/testing-persisted-contract-artifacts.toml"
+requires = []
+
+[[suites]]
+id = "testing-resilience-replay"
+path = "evaluation/standards-effectiveness/suites/testing-resilience-replay.toml"
+requires = []
+
+[[suites]]
+id = "testing-source-closure"
+path = "evaluation/standards-effectiveness/suites/testing-source-closure.toml"
+requires = []
