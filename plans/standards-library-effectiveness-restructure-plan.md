@@ -2388,9 +2388,16 @@ all structural/routing fixtures pass.
          package `M3-DT3`; preserve 23 typed decisions, four exact dispositions,
          Release and former-source evidence, accepted lineage, and README
          projection without fixed package defaults or a Bash wrapper.
-       - `7.4c3ve25` (`Active`): resolve `F085` source-wide evidence ownership
-         and retirement across Cross-Platform, Release, and Verification before
-         checker replacement or legacy source closure.
+       - `7.4c3ve25` (`Accepted planning authority`): resolve `F085` with one
+         bounded migration-only whole-source route/prohibition contract,
+         followed by owner-coherent Native Loading, Native Release, Platform
+         Evidence, Rust Target Configuration, and Platform Target suites in
+         dependency order; retire the temporary contract with source closure.
+         Do not retain heading aliases, compatibility schemas, source
+         exceptions, cross-owner semantic suites, or weaker checks.
+       - `7.4c3ve26` (`Active`): admit the migration-only Cross-Platform
+         whole-source prerequisite without changing normative policy, source
+         shape, or any semantic checker.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

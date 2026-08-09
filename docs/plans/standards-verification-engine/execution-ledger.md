@@ -684,3 +684,24 @@
   cross-owner semantic suites, weaker checks, and early script deletion.
 - Next slice: select and record the `F085` ownership/retirement option before
   another source package begins.
+
+## 2026-08-08 - Cross-Platform F085 Resolution Selection
+
+- Accepted Option 1: establish one bounded migration-only whole-source
+  route/prohibition contract, migrate owner-coherent suites in dependency
+  order, and retire the temporary contract with final source closure.
+- Expanded the dependency train after confirming Platform Target Policy has
+  two live callers: Native Artifact Loading and Rust Target Configuration.
+  The accepted semantic packages are Native Loading, Native Release, Platform
+  Evidence, Rust Target Configuration, and Platform Target Policy.
+- Reserved normative decisions, exact dispositions, typed outcomes, owner
+  evidence, and no-fallback policy for each canonical owner. The temporary
+  contract owns only migration coverage and may assert neither policy nor
+  former-source heading ranges.
+- Rejected heading aliases, compatibility sections or schemas, source
+  exceptions, cross-owner semantic suites, early checker deletion, and
+  permanent migration authority.
+- Verification: both plan-structure checks and diff integrity must pass before
+  this planning authority is accepted.
+- Next slice: admit `M5-CP0` with an exact contract/fixture/registry/test and
+  plan write set; do not modify the legacy source or semantic checkers.

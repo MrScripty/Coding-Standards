@@ -488,3 +488,27 @@ The next boundary is `F085`: remaining inbound-free consumers use legacy
 Cross-Platform heading ranges, but their canonical behavior belongs to three
 owners. Another ordinary package is not admissible until source-wide migration
 evidence and its retirement owner are selected.
+
+### Cross-Platform Source-Closure Train
+
+Option 1 is selected. A temporary migration-owned whole-source contract will
+first prove exact canonical routes and prohibited legacy defaults across the
+entire `CROSS-PLATFORM-STANDARDS.md` index without section delimiters. It is a
+closure prerequisite, not a policy owner, and is deleted with final source
+closure.
+
+The graph audit adds Rust Target Configuration to the initially identified four
+checkers. Platform Target Policy has two live callers: inbound-free Native
+Artifact Loading and Rust Target Configuration. Rust Target Configuration is
+itself referenced by frozen README/source-preparation evidence but has no live
+semantic caller other than those migration contracts. The safe owner train is
+Native Loading, Native Release, Platform Evidence, Rust Target Configuration,
+then Platform Target Policy. The first three are independently inbound-free;
+both Native Loading and Rust Target Configuration must be replaced before
+Platform Target Policy can be deleted.
+
+Final source closure follows only after all five replacement suites are
+accepted. That closure removes the transitional headings and the temporary
+whole-source contract together, preserving exact routes, dispositions,
+owner-local typed decisions, and source-wide prohibitions without a wrapper,
+compatibility schema, source exception, or cross-owner semantic suite.

@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: Cross-Platform F085 Re-plan
+**Current phase:** Milestone 5: Cross-Platform source-closure prerequisite
 
-**Next slice:** Select and record the `F085` source-shape ownership and
-retirement sequence before admitting another Cross-Platform source slice.
+**Next slice:** Admit `M5-CP0`, the bounded migration-only whole-source
+route/prohibition contract, before replacing any `F085` checker.
 
 **Acceptance status:** `pending`
 
@@ -104,6 +104,7 @@ disposition, no-fallback, and evidence contracts.
 | Add bounded table, relation, and acceptance-claim checks from measured recurring contracts; do not add query strings, arbitrary transforms, or policy-specific callbacks. | This plan | 219 remaining scripts use AWK, 198 validate row shape, 165 collect projections, 83 count rows, 58 declare expected projections, and 109 compare lineage/owner/disposition data. | Per-script AWK/mapfile/sort pipelines |
 | Derive coupled-checker migration order from one exact typed graph manifest with explicit unresolved targets, strongly connected components, condensation dependencies, and separately reviewed owner/risk/write-set classifications. | Integration owner | [Checker inventory report](reports/checker-inventory.md#coupled-graph-resolution) | Leaf-only selection and filename-adjacent batching |
 | Keep the parent standards restructure plan authoritative for normative migration and this child plan authoritative for checker-engine architecture and migration. | Integration owner | Parent-plan delegation | `7.4c3hcp` bespoke Cross-Platform repair assumption |
+| Resolve `F085` through one temporary whole-source route/prohibition contract followed by dependency-ordered owner suites and same-wave contract retirement at source closure. | Verification-engine migration mechanics | Cross-Platform `F085` dependency audit | Heading-range evidence, cross-owner replacement suites, and one oversized atomic closure wave |
 
 ## Simplicity And Ownership Review
 
@@ -894,9 +895,9 @@ decisions fixture, and no wrapper, transitive checker call, fixed composition,
 framework/example identity, internal-input publication, or default-success path
 remains.
 
-#### Cross-Platform F085 Re-plan Trigger
+#### Cross-Platform F085 Re-plan Decision
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 After `M3-DT3`, every remaining inbound-free decision-table consumer is within
 the Cross-Platform source-shape boundary. Native Artifact Loading, Native
@@ -930,6 +931,41 @@ Heading aliases, compatibility sections, source exceptions, one cross-owner
 semantic suite, weaker whole-file checks, or deleting scripts before their
 replacement evidence exists are not valid options.
 
+**Selected option:** Option 1. `M5-CP0` establishes one migration-owned,
+non-normative whole-source contract over the complete
+`CROSS-PLATFORM-STANDARDS.md` index. It proves the exact canonical routes and
+source-wide prohibited legacy defaults without using section delimiters. It
+does not own Cross-Platform, Release, Verification, or Rust policy and cannot
+survive source closure.
+
+**Dependency audit refinement:** Platform Target Policy has two live callers,
+Native Artifact Loading and Rust Target Configuration. The owner-coherent
+replacement train is therefore:
+
+1. `M5-CP0` whole-source migration prerequisite;
+2. `M5-CP1` Native Artifact Loading (`topic.cross-platform`);
+3. `M5-CP2` Native Artifact Release (`workflow.release`);
+4. `M5-CP3` Platform Evidence Coverage (`workflow.verification`);
+5. `M5-CP4` Rust Target Configuration
+   (`profile.language.rust.cross-platform`);
+6. `M5-CP5` Platform Target Policy (`topic.cross-platform`); and
+7. `M5-CP6` Cross-Platform source closure and `M5-CP0` retirement.
+
+Each semantic package preserves its own decisions, exact dispositions,
+canonical owner evidence, typed outcomes, routes, and prohibited defaults.
+Suite dependencies replace transitive checker calls only when both endpoints
+have accepted declarative owners. Shared registry, graph, source-closure, and
+plan integration remains serial. Package order may advance independent
+inbound-free `M5-CP1` through `M5-CP3` in any reviewed order, but `M5-CP4` and
+`M5-CP1` must both be accepted before `M5-CP5`, and `M5-CP6` cannot begin until
+all five semantic replacements are accepted.
+
+**Retirement condition:** `M5-CP0` is deleted in `M5-CP6` after the final
+Cross-Platform index shape, all exact routes/prohibitions, all dispositions,
+and all replacement suites pass together. It must not become a permanent
+source exception, policy owner, compatibility schema, or duplicate assertion
+authority.
+
 ### Milestone 4: Semantic Decision Migration
 
 **Goal:** Move repeated policy decision derivation from shell branches into
@@ -960,23 +996,30 @@ suite passes at package boundaries.
 and resolve `F085` through durable canonical evidence rather than former-source
 headings.
 
-**Allowed write set:** registry/dependency contracts, affected Cross-Platform
-suites, the four obsolete Cross-Platform scripts, source-closure fixtures and
-source only after checker migration, parent migration records, and this plan.
+**Allowed write set:** registry/dependency contracts, the temporary
+whole-source contract, affected Cross-Platform/Release/Verification/Rust suites,
+the five obsolete semantic scripts, source-closure fixtures and source only
+after checker migration, generated graph artifacts, README projections, parent
+migration records, and this plan's records. Every package freezes a narrower
+exact write set before implementation.
 
 **Tasks:**
 
+- [ ] Establish and verify `M5-CP0` without changing normative policy or the
+  legacy source.
 - [ ] Convert transitive verifier calls into declared suite dependencies.
-- [ ] Migrate platform-target, native-loading, release-artifact, and
-  platform-evidence suites with source-wide route/prohibition assertions.
-- [ ] Delete the four replaced scripts and close the Cross-Platform source in
-  the parent plan's manifest order.
+- [ ] Migrate platform-target, native-loading, release-artifact,
+  platform-evidence, and Rust target-configuration suites while preserving
+  owner-local semantics and whole-source route/prohibition coverage.
+- [ ] Delete the five replaced scripts, close the Cross-Platform source in the
+  parent plan's manifest order, and delete `M5-CP0` in the same closure wave.
 
-**Acceptance gate:** Each dependency executes once; all Cross-Platform
-decisions/dispositions/routes/no-fallback cases pass; `F085` resolves; source
-closure and complete mixed suite pass.
+**Acceptance gate:** Each dependency executes once; all five semantic suites'
+decisions/dispositions/routes/no-fallback cases pass; no suite depends on
+former-source headings; `F085` resolves; `M5-CP0` is absent after source
+closure; and the complete mixed suite passes.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 6: Exceptional Checks And Bash Retirement
 
