@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: next dependency-closed owner-wave audit
+**Current phase:** Milestone 6: Wave 2 implementation
 
-**Next slice:** Inspect the fresh post-Wave-1 graph and admit the next smallest
-owner-coherent package set with complete Bash caller and prerequisite closure.
+**Next slice:** Implement admitted Milestone 6 Wave 2 as three separate Rust
+owner suites with atomic source-package subject transfer and one wave gate.
 
 **Acceptance status:** `pending`
 
@@ -1877,6 +1877,53 @@ the regenerated graph is fresh at 226 Bash verifiers / 231 nodes / 986 edges /
 
 **Wave acceptance:** all 226 surviving mixed entrypoints passed. Wave 1 is
 accepted with four Bash verifiers removed and no compatibility execution path.
+
+#### Wave 2 Admission: Three Rust Source-Preparation Owners
+
+**Status:** `Active`
+
+**Graph basis:** the fresh post-Wave-1 graph contains 226 Bash verifiers, 231
+nodes, 986 edges, and 227 components. After excluding the declarative launcher
+and historical security re-plan checker, its only caller-free,
+prerequisite-free semantic roots are Rust API Rustdoc, Rust dependency build
+cost, and Rust release evidence.
+
+**Admitted packages:** `M6-W2-RUST-API-RUSTDOC` owns 18 Rustdoc decisions, one
+exact disposition, Rust API mechanism evidence, and the closed Rust API source
+index; `M6-W2-RUST-DEP-BUILD-COST` owns 14 decisions, three exact dispositions,
+generic/Rust/reference evidence, and the closed Rust Dependency source index;
+and `M6-W2-RUST-RELEASE-EVIDENCE` owns 17 decisions, one exact disposition,
+Rust release/reference evidence, and the closed Rust Release source index.
+
+Each script has zero executable callers and zero verifier/helper prerequisites.
+All mechanics fit existing strict decision and text assertions. The three suite
+paths and owners are distinct. No engine primitive, policy, fixture,
+disposition, source index, Router, metadata, configuration, or compatibility
+schema changes are allowed.
+
+**Typed subject transfer:** source-package preparation order 18 changes its one
+Rust API checker subject to `suite:.../rust-api-rustdoc.toml`; order 21 changes
+only the Rust dependency build-cost subject and retains the independent
+candidate-inspection checker; order 24 changes its one Rust Release subject to
+`suite:.../rust-release-evidence.toml`. The inventory remains eight packages
+and nine exclusive typed subjects. No wrapper, missing path, duplicate subject,
+or checker/suite dual identity is permitted.
+
+**No-fallback rule:** do not retain Bash bridges, wrappers, duplicated suite
+dependencies, inferred decisions, partial dispositions, fixed build-cost
+thresholds, every-release command defaults, Rustdoc checklists, weaker source
+closure, compatibility parsing, or silent success.
+
+**Acceptance gate:** each focused suite, all 49 pre-wave suites, 42 engine
+tests, exact package authority, exact source-package transfer at 8/9,
+admission-source immutability, removed-path scans, graph freshness, both plan
+checks, diff integrity, and one complete mixed-suite wave gate pass.
+
+**Admission verification:** exact package authority, all 49 registered suites,
+42 engine tests, Python compilation, source-package preparation at eight
+packages / nine exclusive subjects, both plan checks, graph freshness at 226
+Bash verifiers / 231 nodes / 992 edges / 227 components, diff integrity, and
+all 226 mixed entrypoints passed.
 
 **Tasks:**
 

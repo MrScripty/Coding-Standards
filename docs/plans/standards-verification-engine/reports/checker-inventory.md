@@ -927,3 +927,24 @@ removed-reference scans, admission-source immutability, and graph freshness at
 226 Bash verifiers / 231 nodes / 986 edges / 227 components. Complete
 mixed-suite Wave 1 verification passed all 226 surviving entrypoints, accepting
 the wave without a compatibility execution path.
+
+### Milestone 6 Wave 2 Admission
+
+The fresh post-Wave-1 graph has five caller-free and prerequisite-free
+verifiers. The declarative launcher and historical security re-plan checker
+are infrastructure, leaving exactly three semantic roots: Rust API Rustdoc,
+Rust dependency build cost, and Rust release evidence.
+
+The three packages preserve 49 decisions, five exact dispositions, canonical
+profile/reference evidence, and three closed legacy-source indexes using only
+existing strict decision and text primitives. Their scripts are exclusive
+typed subjects in source-package preparation. Orders 18 and 24 transfer one
+checker subject to one suite subject; order 21 transfers only build cost and
+retains candidate inspection. The inventory remains eight packages and nine
+exclusive subjects, with no dual identity or compatibility path.
+
+Admission verification passed exact package authority, all 49 registered
+suites, 42 engine tests, Python compilation, source-package preparation at
+eight packages / nine exclusive subjects, both plan checks, graph freshness at
+226 Bash verifiers / 231 nodes / 992 edges / 227 components, diff integrity,
+and all 226 mixed entrypoints.

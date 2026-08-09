@@ -1228,3 +1228,27 @@
 - Complete mixed-suite Wave 1 verification passed all 226 surviving
   entrypoints. Wave 1 is accepted; the next slice is a fresh dependency audit
   before another package admission.
+
+## 2026-08-08 - Milestone 6 Wave 2 Admission
+
+- Inspected the fresh 226-verifier graph and excluded the declarative launcher
+  and historical security re-plan checker from semantic migration packages.
+- Admitted the only three caller-free, prerequisite-free semantic roots as
+  separate Rust API Rustdoc, Rust dependency build-cost, and Rust release
+  evidence packages.
+- Froze 49 decision cases, five exact dispositions, canonical profile and
+  reference evidence, and the three existing closed legacy-source indexes.
+- Identified each checker as a typed subject in source-package preparation.
+  Implementation transfers orders 18 and 24 to one suite subject each and only
+  the build-cost half of order 21, retaining its candidate-inspection checker.
+  Inventory cardinality remains eight packages and nine exclusive subjects.
+- Excluded engine, policy, fixture, disposition, source, Router, metadata,
+  configuration, wrapper, bridge, compatibility, default, weaker-evidence, and
+  silent-success changes.
+- Admission verification passed exact package authority; all 49 registered
+  suites; 42 engine tests; Python compilation; source-package preparation at
+  eight packages / nine exclusive subjects; both plan checks; graph freshness
+  at 226 Bash verifiers / 231 nodes / 992 edges / 227 components; diff
+  integrity; and all 226 mixed entrypoints.
+- Next slice: implement all three suites, transfer typed subjects atomically,
+  delete the three Bash paths, and run one complete-suite Wave 2 gate.
