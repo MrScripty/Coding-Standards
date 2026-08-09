@@ -948,3 +948,24 @@ suites, 42 engine tests, Python compilation, source-package preparation at
 eight packages / nine exclusive subjects, both plan checks, graph freshness at
 226 Bash verifiers / 231 nodes / 992 edges / 227 components, diff integrity,
 and all 226 mixed entrypoints.
+
+### Implemented Milestone 6 Wave 2
+
+Rust API Rustdoc, Rust dependency build cost, and Rust release evidence are now
+three independent declarative roots. Their 49 decision cases, five exact
+dispositions, canonical profile/reference evidence, and complete source indexes
+are preserved. Existing generic exact-text checks strengthen the three source
+closures over the former line-bound and substring approximation; VE025 records
+that bounded deviation.
+
+The three Bash paths are deleted without wrappers or bridges. Source-package
+orders 18 and 24 now name one suite subject each; order 21 names the build-cost
+suite and retains the independent candidate-inspection checker. The protocol
+still owns eight packages and nine exclusive subjects.
+
+Focused verification passed all three replacements, package authority, all 52
+suites, 42 engine tests, Python compilation, source-package preparation,
+removed-reference scans, admission-source immutability, and graph freshness at
+223 Bash verifiers / 228 nodes / 983 edges / 224 components. Complete
+mixed-suite Wave 2 verification passed all 223 surviving entrypoints, accepting
+the wave without a compatibility execution path.

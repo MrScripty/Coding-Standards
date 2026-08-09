@@ -1,0 +1,71 @@
+schema_version = 1
+id = "rust-api-rustdoc"
+owner = "profile.language.rust.api"
+description = "Rustdoc expression selected from canonical content owners without documentation checklists or mechanism defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/api-rustdoc-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+documentation = ["accepted", "contradictory", "missing"]
+contracts = ["accepted", "contradictory", "missing"]
+resilience = ["accepted", "contradictory", "missing", "not-applicable"]
+dependencies = ["accepted", "contradictory", "missing", "not-applicable"]
+unsafe = ["accepted", "contradictory", "missing", "not-applicable"]
+library = ["accepted", "contradictory", "missing"]
+mechanism = ["crate-doc", "doctest", "heading", "intra-doc-link", "item-doc"]
+capability = ["supported", "unsupported"]
+fallback = ["crate-checklist", "errors-checklist", "example-checklist", "feature-location", "mechanics-rule", "none", "safety-checklist"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "documentation", op = "eq", value = "contradictory" }, { field = "contracts", op = "eq", value = "contradictory" }, { field = "resilience", op = "eq", value = "contradictory" }, { field = "dependencies", op = "eq", value = "contradictory" }, { field = "unsafe", op = "eq", value = "contradictory" }, { field = "library", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "documentation", op = "eq", value = "missing" }, { field = "contracts", op = "eq", value = "missing" }, { field = "resilience", op = "eq", value = "missing" }, { field = "dependencies", op = "eq", value = "missing" }, { field = "unsafe", op = "eq", value = "missing" }, { field = "library", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/api.md"
+required = ["## Rustdoc Expression Mechanisms", "After Documentation selects the documentation trigger, artifact, placement", "audience, and quality contract, and after each content owner supplies its", "toolchain, and evidence claim. Rustdoc form cannot create or weaken the fact it", "Rustdoc forms are not documentation defaults", "applicable owner decision. The Rust Unsafe profile remains authoritative for"]
+prohibited = []
+
+[[checks]]
+id = "source-index"
+type = "exact_text"
+path = "languages/rust/RUST-API-STANDARDS.md"
+expected = """# Rust API Standards Migration Index
+
+This is a non-normative migration index. Rust API policy has moved to canonical
+owners; this file defines no API, architecture, failure, feature,
+documentation, compatibility, safety, consumer, or mechanism requirement.
+
+- [Rust API mechanisms](../../profiles/languages/rust/api.md)
+- [Contracts](../../topics/contracts.md)
+- [Security](../../topics/security.md)
+- [Architecture](../../topics/architecture.md)
+- [Resilience](../../topics/resilience.md)
+- [Dependencies](../../topics/dependencies.md)
+- [Documentation](../../workflows/documentation.md)
+- [Verification](../../workflows/verification.md)
+- [Library application profile](../../profiles/applications/library.md)
+- [Rust Unsafe profile](../../profiles/languages/rust/unsafe.md)
+"""
+
+[[checks]]
+id = "disposition"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0716\tlanguages/rust/RUST-API-STANDARDS.md\tprofiles/languages/rust/api.md\tsplit\t"]
+prohibited = []

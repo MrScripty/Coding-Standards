@@ -1252,3 +1252,29 @@
   integrity; and all 226 mixed entrypoints.
 - Next slice: implement all three suites, transfer typed subjects atomically,
   delete the three Bash paths, and run one complete-suite Wave 2 gate.
+
+## 2026-08-08 - Milestone 6 Wave 2 Implementation
+
+- Added separate declarative suites for Rust API Rustdoc, Rust dependency build
+  cost, and Rust release evidence using existing decision, text, and exact-text
+  primitives.
+- Preserved 49 decision cases, five exact dispositions, canonical
+  profile/reference evidence, and every byte of the three closed legacy source
+  indexes. Admission inputs are unchanged.
+- Deleted all three admitted Bash checkers with no wrapper, bridge, duplicated
+  dependency, inferred result, compatibility schema, default, weaker evidence,
+  or alternate authority.
+- Accepted package rows and transferred source-package orders 18 and 24 to one
+  suite subject each and build cost in order 21 to a suite subject while
+  retaining candidate inspection. Cardinality remains eight packages / nine
+  exclusive subjects.
+- Recorded VE025: exact-text evidence strictly replaces the Bash source-shape
+  approximation and requires no engine or policy change.
+- Focused verification passed all three replacements and package authority;
+  all 52 suites; 42 engine tests; Python compilation; source-package
+  preparation; removed-reference scans; admission-source immutability; and
+  graph freshness at 223 Bash verifiers / 228 nodes / 983 edges / 224
+  components.
+- Complete mixed-suite Wave 2 verification passed all 223 surviving
+  entrypoints. Wave 2 is accepted; the next slice is a fresh dependency audit
+  before another package admission.

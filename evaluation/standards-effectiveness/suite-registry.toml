@@ -244,3 +244,18 @@ requires = []
 id = "tooling-reference-recipes"
 path = "evaluation/standards-effectiveness/suites/tooling-reference-recipes.toml"
 requires = []
+
+[[suites]]
+id = "rust-api-rustdoc"
+path = "evaluation/standards-effectiveness/suites/rust-api-rustdoc.toml"
+requires = []
+
+[[suites]]
+id = "rust-dependency-build-cost"
+path = "evaluation/standards-effectiveness/suites/rust-dependency-build-cost.toml"
+requires = []
+
+[[suites]]
+id = "rust-release-evidence"
+path = "evaluation/standards-effectiveness/suites/rust-release-evidence.toml"
+requires = []

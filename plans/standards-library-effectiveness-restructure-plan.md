@@ -8,11 +8,12 @@
 
 **Current phase:** Cross-Platform source closure `7.4c3.7` and delegated
 verification-engine Milestone 5 are accepted. Seven of 27 former normative
-source entrypoints are derived. Verification-engine Milestone 6 Wave 1 is
-accepted and Wave 2 is admitted for three Rust source-preparation owners.
+source entrypoints are derived. Verification-engine Milestone 6 Waves 1 and 2
+are accepted and the next dependency-closed owner audit is active.
 
-**Next slice:** implement delegated verification-engine Milestone 6 Wave 2 as
-three Rust owner suites with atomic source-package subject transfer.
+**Next slice:** inspect the fresh post-Wave-2 checker graph and admit the next
+smallest owner-coherent package set under the delegated verification-engine
+plan.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2517,13 +2518,16 @@ all structural/routing fixtures pass.
        - `7.4c3ve49` (`Accepted gate`): run the complete mixed suite for the
          integrated Wave 1 replacement, record accepted graph and suite counts,
          then audit the fresh graph before admitting another owner wave.
-       - `7.4c3ve50` (`Active`): replace caller-free, prerequisite-free Rust API
+       - `7.4c3ve50` (`Accepted`): replace caller-free, prerequisite-free Rust API
          Rustdoc, Rust dependency build-cost, and Rust release-evidence scripts
          with three declarative suites. Preserve 49 decisions, five exact
          dispositions, profile/reference/source-closure evidence, and transfer
          their typed source-package subjects while retaining the independent
          dependency candidate-inspection checker. Do not add wrappers, bridges,
          dual checker/suite identities, defaults, or weaker source evidence.
+       - `7.4c3ve51` (`Accepted gate`): run the complete mixed suite for the
+         integrated Wave 2 replacement, record accepted graph and suite counts,
+         then audit the fresh graph before admitting another owner wave.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

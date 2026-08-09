@@ -1,0 +1,76 @@
+schema_version = 1
+id = "rust-dependency-build-cost"
+owner = "profile.language.rust.dependencies"
+description = "Rust dependency build-cost measurement from explicit claims, inputs, baselines, and evidence without fixed thresholds or command defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/dependency-build-cost-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+claim = ["accepted", "contradictory", "missing"]
+measurement = ["graph-count", "timing"]
+inputs = ["known", "unknown"]
+baseline = ["known", "missing"]
+capability = ["supported", "unsupported"]
+evidence = ["complete", "incomplete"]
+fallback = ["command-success", "count-threshold", "feature-reduction", "fixed-percentage", "leaf-crate", "none", "required-alternative"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "claim", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "claim", op = "eq", value = "missing" }, { field = "inputs", op = "eq", value = "unknown" }, { field = "baseline", op = "eq", value = "missing" }, { field = "evidence", op = "eq", value = "incomplete" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/dependencies.md"
+required = ["## Build-Cost Measurement Mechanisms", "Performance defines the build-cost claim", "does not select a percentage threshold"]
+prohibited = []
+
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-dependencies.md"
+required = ["## Build-Cost Measurement Examples", "cargo build --timings", "do not establish a 20 percent threshold"]
+prohibited = []
+
+[[checks]]
+id = "source-index"
+type = "exact_text"
+path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
+expected = """# Rust Dependency Standards Migration Index
+
+This is a non-normative migration index. Rust dependency policy has moved to
+canonical owners; this file defines no dependency, security, licensing,
+performance, verification, tooling, public-feature, recipe, or Cargo mechanism
+requirement.
+
+- [Rust dependency mechanisms](../../profiles/languages/rust/dependencies.md)
+- [Rust API mechanisms](../../profiles/languages/rust/api.md)
+- [Dependencies](../../topics/dependencies.md)
+- [Performance](../../topics/performance.md)
+- [Security](../../topics/security.md)
+- [Licensing](../../topics/licensing.md)
+- [Verification](../../workflows/verification.md)
+- [Tooling](../../workflows/tooling.md)
+- [Rust dependency recipes](../../reference/recipes/rust-dependencies.md)
+"""
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0749\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\tprofiles/languages/rust/dependencies.md\tsplit\t", "STD-0750\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t", "STD-0751\tlanguages/rust/RUST-DEPENDENCY-STANDARDS.md\treference/recipes/rust-dependencies.md\tmove\t"]
+prohibited = []

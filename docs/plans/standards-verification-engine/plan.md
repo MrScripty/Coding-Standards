@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: Wave 2 implementation
+**Current phase:** Milestone 6: next dependency-closed owner-wave audit
 
-**Next slice:** Implement admitted Milestone 6 Wave 2 as three separate Rust
-owner suites with atomic source-package subject transfer and one wave gate.
+**Next slice:** Inspect the fresh post-Wave-2 graph and admit the next smallest
+owner-coherent package set with complete Bash caller and prerequisite closure.
 
 **Acceptance status:** `pending`
 
@@ -1880,7 +1880,7 @@ accepted with four Bash verifiers removed and no compatibility execution path.
 
 #### Wave 2 Admission: Three Rust Source-Preparation Owners
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Graph basis:** the fresh post-Wave-1 graph contains 226 Bash verifiers, 231
 nodes, 986 edges, and 227 components. After excluding the declarative launcher
@@ -1924,6 +1924,29 @@ checks, diff integrity, and one complete mixed-suite wave gate pass.
 packages / nine exclusive subjects, both plan checks, graph freshness at 226
 Bash verifiers / 231 nodes / 992 edges / 227 components, diff integrity, and
 all 226 mixed entrypoints passed.
+
+**Implementation:** three independent declarative suites now own Rust API
+Rustdoc, Rust dependency build-cost, and Rust release-evidence verification.
+The three Bash checkers are deleted without wrappers or bridges. Package rows
+are accepted, and source-package orders 18, 21, and 24 transfer directly to
+suite subjects while retaining candidate inspection at order 21 and preserving
+eight packages / nine exclusive subjects.
+
+**Deviation:** admission named decision and text mechanics. Implementation uses
+the already accepted generic `exact_text` assertion for each complete short
+source index, strictly preserving every byte instead of reproducing weaker
+line-count, route-substring, and heading-absence approximations. VE025 records
+this evidence strengthening; no engine, policy, source, or compatibility change
+was required.
+
+**Focused verification:** all three replacements and package authority passed;
+all 52 registered suites passed; all 42 engine tests and Python compilation
+passed; source-package preparation passed at 8/9; no live reference to the
+three deleted paths remains; admission policies, references, source indexes,
+fixtures, and dispositions are unchanged; and the regenerated graph is fresh
+at 223 Bash verifiers / 228 nodes / 983 edges / 224 components. The complete
+mixed-suite wave gate passed all 223 surviving entrypoints, accepting Wave 2
+without a compatibility execution path.
 
 **Tasks:**
 
