@@ -1,0 +1,72 @@
+schema_version = 1
+id = "testing-concurrency-consolidation"
+owner = "topic.concurrency"
+description = "Verification-resource ownership, coordination, cleanup, and lifecycle evidence without serialization, ambient identity, weakened parallelism, or weaker-evidence fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/concurrency/verification-resource-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+overlap = ["none", "possible"]
+resource_owner = ["ambient", "exclusive", "missing", "not-required", "shared", "unavailable"]
+coordination = ["explicit", "implicit", "missing", "not-required"]
+cleanup = ["complete", "missing"]
+lifecycle_evidence = ["complete", "missing", "not-applicable"]
+substitute = ["ambient", "happy-path", "none", "serialization", "smoke", "weaken-parallelism"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [{ field = "resource_owner", op = "eq", value = "unavailable" }]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "resource_owner", op = "in", values = ["ambient", "missing"] },
+  { field = "coordination", op = "in", values = ["implicit", "missing"] },
+  { field = "cleanup", op = "eq", value = "missing" },
+  { field = "lifecycle_evidence", op = "eq", value = "missing" },
+  { field = "substitute", op = "ne", value = "none" },
+]
+
+[[checks]]
+id = "canonical-policy"
+type = "text"
+path = "topics/concurrency.md"
+required = ["## Isolate Verification Resources", "Restore borrowed global state and terminate owned work", "Serialization is a valid selected mechanism only when", "Do not serialize as a fallback", "timer, subscription, polling, and retry cleanup", "current-invocation results winning over stale overlapping work", "passing build, startup smoke, happy path, serialized rerun"]
+prohibited = []
+
+[[checks]]
+id = "testing-route-and-legacy"
+type = "text"
+path = "TESTING-STANDARDS.md"
+required = ["[Concurrency](topics/concurrency.md)"]
+prohibited = ["If isolation is impossible, serialize", "Run affected suites with normal parallelism enabled"]
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0611\tTESTING-STANDARDS.md\ttopics/concurrency.md\trefine\trequire verification-resource ownership or explicit invariant-matched coordination without serialization ambient identity weakened parallelism or stale-state fallback",
+  "STD-0639\tTESTING-STANDARDS.md\ttopics/concurrency.md\trefine\trequire lifecycle cleanup retry restart stale-result cancellation and partial-state evidence without build smoke happy-path serialized-rerun or weakened-assertion substitution",
+]
+prohibited = []
+
+[[checks]]
+id = "row-18-route"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+required = ["18\t1\tSTD-0611,STD-0639\tTESTING-STANDARDS.md\ttopics/concurrency.md\texists\tpre-slice-review\tfocused"]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bv` (`Accepted`)", "`7.4b8bw` (`Accepted`)", "`7.4b8bx` (`Accepted`)", "`7.4b8by` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []

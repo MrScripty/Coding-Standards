@@ -1,0 +1,77 @@
+schema_version = 1
+id = "testing-resilience-replay"
+owner = "topic.resilience"
+description = "Replay and resumption evidence through authoritative history, duplicate handling, convergence, partial-state repair, and real boundaries without inferred or weaker substitutes."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/resilience/replay-resumption-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["declared", "unsupported"]
+history = ["authoritative", "inferred", "missing"]
+duplicate = ["contradictory", "declared", "idempotent", "rejected"]
+convergence = ["missing", "proved"]
+partial_state = ["repaired", "unknown"]
+boundary = ["helper", "missing", "real"]
+substitute = ["empty-state", "helper", "inferred-position", "none", "restart", "snapshot"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "substitute", op = "ne", value = "none" },
+  { field = "history", op = "eq", value = "inferred" },
+  { field = "duplicate", op = "eq", value = "contradictory" },
+  { field = "convergence", op = "eq", value = "missing" },
+  { field = "partial_state", op = "eq", value = "unknown" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "contract", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "history", op = "eq", value = "missing" },
+  { field = "boundary", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "canonical-policy"
+type = "text"
+path = "topics/resilience.md"
+required = ["## Replay And Resumption Evidence", "authoritative history or checkpoint", "projection convergence after recovery", "repair or rejection of partial work", "A pure helper, successful restart, empty-state", "Do not restart from an inferred position"]
+prohibited = []
+
+[[checks]]
+id = "testing-route-and-legacy"
+type = "text"
+path = "TESTING-STANDARDS.md"
+required = ["topics/resilience.md"]
+prohibited = ["These checks may be integration or end-to-end tests"]
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = ["STD-0617\tTESTING-STANDARDS.md\ttopics/resilience.md\trefine\trequire authoritative replay duplicate convergence resumption and partial-failure evidence through real persistence and execution boundaries without helper restart snapshot inferred-position state-reset or weaker-path substitution"]
+prohibited = []
+
+[[checks]]
+id = "row-18-route"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+required = ["18\t3\tSTD-0617\tTESTING-STANDARDS.md\ttopics/resilience.md\texists\tpre-slice-review\tfocused"]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bx` (`Accepted`)", "`7.4b8by` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []
