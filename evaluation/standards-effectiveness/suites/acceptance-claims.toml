@@ -1,0 +1,12 @@
+schema_version = 1
+id = "acceptance-claims"
+owner = "workflow.verification"
+description = "Canonical acceptance-claim grammar and exact required-to-observed satisfaction."
+
+[[checks]]
+id = "claims"
+type = "acceptance_claims"
+path = "evaluation/standards-effectiveness/fixtures/verification/acceptance-claims.tsv"
+kinds = ["focused", "integration", "contract", "system", "user-workflow", "release-artifact"]
+environments = ["not-applicable", "simulated", "representative", "required-real"]
+modes = ["automated", "manual", "either"]

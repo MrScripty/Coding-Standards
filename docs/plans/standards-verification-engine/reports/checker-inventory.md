@@ -295,3 +295,15 @@ inventory and the complete mixed suite report 242 Bash entrypoints.
 
 The next dependency-free consumer is the shared acceptance-claim contract;
 migration-structure leaves remain assigned to relation and table packages.
+
+## Acceptance Contract Consumer
+
+Package `M3-C1` accepted the canonical acceptance-claim parser and satisfaction
+check and replaced `verify-acceptance-claims.sh`. Its seven scenarios preserve
+kind, environment, and mode separation without inferred hierarchy. The README
+now names the focused Python suite command. All 34 suites/157 checks pass;
+inventory and the complete mixed suite report 241 Bash entrypoints.
+
+The remaining dependency-free migration consumers require cross-table lineage
+and strict structural projections; the temporary launcher remains assigned to
+final convention replacement.

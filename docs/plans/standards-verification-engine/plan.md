@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 3: Shared Metadata, Plan, And Migration Contracts
 
-**Next slice:** Implement `M3-C1`: canonical acceptance-claim parsing and set
-satisfaction with its first complete consumer.
+**Next slice:** Implement `M3-S1`: strict cross-table relations with F018
+decomposition as the first complete consumer.
 
 **Acceptance status:** `pending`
 
@@ -511,7 +511,9 @@ records selected per slice.
 **Tasks:**
 
 - [ ] Implement metadata uniqueness/dependency/cycle and canonical-owner checks.
-- [ ] Implement plan lifecycle and acceptance-claim checks.
+- [x] Implement canonical acceptance-claim grammar and exact set-satisfaction
+  checks; migrate `M3-C1` as the first complete consumer.
+- [ ] Implement remaining plan lifecycle checks.
 - [ ] Implement exact disposition/owner-map and source-index closure checks.
 - [ ] Delete superseded generic Bash engines and their wrappers atomically.
 
@@ -520,6 +522,27 @@ the engine; old helpers and compatibility paths are absent; complete mixed
 suite passes at every shared-contract slice.
 
 **Status:** `Active`
+
+#### Package M3-C1: Canonical Acceptance Claims
+
+**Status:** `Accepted`
+
+**Owner:** engine mechanics and `workflow.verification`
+
+**Preserved contract:** seven canonical scenarios, exact
+`kind@environment@mode` grammar, separate kind and environment identity, and
+same-kind/same-environment `either` satisfaction by explicit automated or
+manual evidence only.
+
+**Acceptance evidence:** 25 engine/inventory tests; focused suite passed;
+all 34 suites passed 157 checks directly and through the launcher; fresh
+241-record inventory, removed-path and README scans, diff integrity, and
+complete mixed suite passed.
+
+**No-fallback result:** configuration declares the allowed kind and environment
+domains; the engine infers no hierarchy, substitution, or environment
+equivalence; the Bash checker is deleted and its README invocation is replaced
+by the focused Python command.
 
 ### Milestone 4: Semantic Decision Migration
 

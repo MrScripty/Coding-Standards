@@ -314,8 +314,9 @@ objective.
 
 ## Acceptance Claim Fixtures
 
-`verify-acceptance-claims.sh` checks the seven fixed scenarios and focused
-regressions against the canonical claim model:
+The registered `acceptance-claims` declarative suite checks the seven fixed
+scenarios and focused regressions against the canonical claim model. Run it
+with `python3 tools/standards_verifier/verify.py --suite acceptance-claims`:
 
 - evidence kind, environment qualification, and execution mode are separate;
 - every required claim must have matching observed evidence;

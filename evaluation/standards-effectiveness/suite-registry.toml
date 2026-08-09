@@ -126,6 +126,11 @@ path = "evaluation/standards-effectiveness/suites/verification-quality-gates.tom
 requires = []
 
 [[suites]]
+id = "acceptance-claims"
+path = "evaluation/standards-effectiveness/suites/acceptance-claims.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

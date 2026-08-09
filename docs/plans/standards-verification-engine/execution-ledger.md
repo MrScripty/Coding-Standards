@@ -426,3 +426,19 @@
   entrypoints passed.
 - Milestone 2 ordinary and first structural leaves are complete. Next slice:
   implement `M3-C1` canonical acceptance claims as a shared typed contract.
+
+## 2026-08-08 - Milestone 3 Package M3-C1
+
+- Accepted the canonical `acceptance_claims` check with configured kind and
+  environment domains, exact three-part grammar, unique claim sets, and exact
+  required-to-observed satisfaction.
+- Preserved all seven scenarios. `either` matches only explicit automated or
+  manual evidence with the same kind and environment; no evidence hierarchy or
+  environment substitution is inferred.
+- Deleted the Bash checker and replaced its README invocation with the focused
+  Python suite command.
+- Verification: 25 self-tests, focused acceptance suite, 34 suites/157 checks
+  direct and launcher execution, inventory/removal/diff gates, and all 241
+  mixed entrypoints passed.
+- Next slice: implement strict cross-table relations and migrate F018 as the
+  first complete consumer.
