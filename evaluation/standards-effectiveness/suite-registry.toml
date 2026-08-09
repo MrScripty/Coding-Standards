@@ -131,6 +131,11 @@ path = "evaluation/standards-effectiveness/suites/acceptance-claims.toml"
 requires = []
 
 [[suites]]
+id = "milestone-7-f018-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-f018-decomposition.toml"
+requires = []
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

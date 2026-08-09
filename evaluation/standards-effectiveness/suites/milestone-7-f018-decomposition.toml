@@ -1,0 +1,89 @@
+schema_version = 1
+id = "milestone-7-f018-decomposition"
+owner = "migration.parent-plan"
+description = "Accepted F018 decomposition with exact slice, inventory, disposition, report, and plan lineage."
+
+[[checks]]
+id = "slice-map"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-f018-slices.tsv"
+header = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
+row_count = 14
+non_empty = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
+unique = [["id"], ["slice", "order"]]
+[checks.domains]
+slice = ["7.4b2b", "7.4b2c"]
+source = ["ARCHITECTURE-PATTERNS.md", "SECURITY-STANDARDS.md"]
+target = ["profiles/boundaries/ipc.md", "topics/contracts.md", "topics/security.md"]
+disposition = ["merge", "move", "refine"]
+[[checks.projections]]
+columns = ["slice", "order", "id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["7.4b2b", "1", "STD-0051", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "merge"],
+  ["7.4b2b", "2", "STD-0052", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "refine"],
+  ["7.4b2b", "3", "STD-0053", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "refine"],
+  ["7.4b2b", "4", "STD-0054", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "refine"],
+  ["7.4b2c", "1", "STD-0063", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "move"],
+  ["7.4b2c", "2", "STD-0064", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "refine"],
+  ["7.4b2c", "3", "STD-0065", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "refine"],
+  ["7.4b2c", "4", "STD-0066", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "move"],
+  ["7.4b2c", "5", "STD-0067", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "refine"],
+  ["7.4b2c", "6", "STD-0068", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/ipc.md", "merge"],
+  ["7.4b2c", "7", "STD-0592", "SECURITY-STANDARDS.md", "topics/security.md", "merge"],
+  ["7.4b2c", "8", "STD-0593", "SECURITY-STANDARDS.md", "profiles/boundaries/ipc.md", "refine"],
+  ["7.4b2c", "9", "STD-0594", "SECURITY-STANDARDS.md", "topics/security.md", "refine"],
+  ["7.4b2c", "10", "STD-0595", "SECURITY-STANDARDS.md", "profiles/boundaries/ipc.md", "refine"],
+]
+
+[[checks]]
+id = "inventory-source-lineage"
+type = "relation"
+mode = "ordered"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-f018-slices.tsv"
+header = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
+columns = ["id", "source"]
+order = "source"
+[checks.right]
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+columns = ["id", "path"]
+order = "lexical"
+[checks.right.where]
+field = "id"
+op = "in"
+values = ["STD-0051", "STD-0052", "STD-0053", "STD-0054", "STD-0063", "STD-0064", "STD-0065", "STD-0066", "STD-0067", "STD-0068", "STD-0592", "STD-0593", "STD-0594", "STD-0595"]
+
+[[checks]]
+id = "disposition-lineage"
+type = "relation"
+mode = "ordered"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-f018-slices.tsv"
+header = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+[checks.right]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["id", "source", "target", "disposition"]
+order = "lexical"
+[checks.right.where]
+field = "id"
+op = "in"
+values = ["STD-0051", "STD-0052", "STD-0053", "STD-0054", "STD-0063", "STD-0064", "STD-0065", "STD-0066", "STD-0067", "STD-0068", "STD-0592", "STD-0593", "STD-0594", "STD-0595"]
+
+[[checks]]
+id = "report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-f018-decomposition.md"
+required = ["[milestone-7-f018-slices.tsv](milestone-7-f018-slices.tsv)", "fixtures/contracts/runtime-decoding-decisions.tsv", "fixtures/ipc/action-payload-decisions.tsv", "type assertion", "typed `unsupported`", "no default action", "Finding `F018` is resolved"]
+prohibited = ["both slices `Planned`", "`7.4b2c` `Planned`"]
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["milestone-7-f018-decomposition.md", "`7.4b2a` (`Accepted`)", "`7.4b2b` (`Accepted`)", "`7.4b2c` (`Accepted`)"]
+prohibited = ["**Next slice:** Milestone 7.4b2b", "**Next slice:** Milestone 7.4b2c"]

@@ -203,6 +203,51 @@ class EngineTest(unittest.TestCase):
             )
         return "suites/claims.toml"
 
+    def write_relation_suite(
+        self,
+        *,
+        right_path: str = "right.tsv",
+        right_column: str = "values",
+        extra: str = "",
+    ) -> str:
+        self.write(
+            "left.tsv",
+            "group\titems\nselected\tb,a\nignored\tz\n",
+        )
+        if right_path == "right.tsv":
+            self.write(right_path, "scope\tvalues\nselected\ta\nselected\tb\n")
+        self.write(
+            "suites/relation.toml",
+            f"""
+            schema_version = 1
+            id = "relation"
+            owner = "test.owner"
+            description = "Relation suite"
+
+            [[checks]]
+            id = "relation"
+            type = "relation"
+            mode = "set"
+            {extra}
+
+            [checks.left]
+            path = "left.tsv"
+            header = ["group", "items"]
+            columns = ["items"]
+            order = "source"
+            where = {{ field = "group", op = "eq", value = "selected" }}
+            split = {{ field = "items", delimiter = "," }}
+
+            [checks.right]
+            path = {json.dumps(right_path)}
+            header = ["scope", "values"]
+            columns = [{json.dumps(right_column)}]
+            order = "source"
+            where = {{ field = "scope", op = "eq", value = "selected" }}
+            """,
+        )
+        return "suites/relation.toml"
+
     def test_text_and_decision_suites_pass(self) -> None:
         self.write("evidence.md", "required\n")
         text_suite = self.write_text_suite("text")
@@ -327,6 +372,61 @@ class EngineTest(unittest.TestCase):
     def test_acceptance_claim_path_escape_is_invalid(self) -> None:
         suite_path = self.write_acceptance_claims_suite(path="../claims.tsv")
         self.write_registry([("claims", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "PATH.OUTSIDE_REPOSITORY")
+
+    def test_table_relation_with_split_passes(self) -> None:
+        suite_path = self.write_relation_suite()
+        self.write_registry([("relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "passed")
+
+    def test_table_relation_mismatch_has_stable_diagnostic(self) -> None:
+        suite_path = self.write_relation_suite()
+        self.write("right.tsv", "scope\tvalues\nselected\ta\nselected\tc\n")
+        self.write_registry([("relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "ASSERT.TABLE_RELATION")
+
+    def test_malformed_relation_row_is_invalid(self) -> None:
+        suite_path = self.write_relation_suite()
+        self.write("right.tsv", "scope\tvalues\nselected\n")
+        self.write_registry([("relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "TABLE.ROW_WIDTH")
+
+    def test_unknown_relation_field_is_invalid(self) -> None:
+        suite_path = self.write_relation_suite(extra="unknown = true")
+        self.write_registry([("relation", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
+
+    def test_missing_relation_input_is_unavailable(self) -> None:
+        suite_path = self.write_relation_suite(right_path="missing.tsv")
+        self.write_registry([("relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_relation_path_escape_is_invalid(self) -> None:
+        suite_path = self.write_relation_suite(right_path="../outside.tsv")
+        self.write_registry([("relation", suite_path, [])])
 
         result = Verifier(self.root, self.registry).run()[0]
 

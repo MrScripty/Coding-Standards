@@ -13,8 +13,8 @@ continues under the Generic Standards Verification Engine Plan before
 Cross-Platform source closure. Six of 27 former normative source entrypoints
 are derived.
 
-**Next slice:** implement delegated verifier package `M3-S1`: strict
-cross-table relations with F018 decomposition as the first consumer.
+**Next slice:** implement delegated verifier package `M3-S2`: migrate Row 19
+decomposition and owner validation with accepted table/relation mechanics.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
@@ -2347,6 +2347,11 @@ all structural/routing fixtures pass.
          exact required-to-observed satisfaction, preserve all seven scenarios
          without evidence hierarchy or environment substitution, replace the
          README invocation, and reduce Bash inventory from 242 to 241.
+       - `7.4c3ve14` (`Accepted`): add bounded strict cross-table relations and
+         replace F018 decomposition, preserving its exact fourteen-row map,
+         inventory and final disposition lineage, report evidence, and
+         accepted lifecycle while deleting planned-state compatibility; reduce
+         Bash inventory from 241 to 240.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

@@ -307,3 +307,15 @@ inventory and the complete mixed suite report 241 Bash entrypoints.
 The remaining dependency-free migration consumers require cross-table lineage
 and strict structural projections; the temporary launcher remains assigned to
 final convention replacement.
+
+## First Relation Consumer
+
+Package `M3-S1` accepted strict ordered and duplicate-free set relations and
+replaced `verify-milestone-7-f018-decomposition.sh`. The suite preserves the
+exact fourteen-row map, inventory and final-disposition lineage, report
+evidence, and accepted lifecycle while removing obsolete planned-state
+compatibility. All 35 suites/162 checks pass; inventory and the complete mixed
+suite report 240 Bash entrypoints.
+
+The Row 19 decomposition and owner-validation pair is the final package in the
+frozen structural-leaf sequence. The temporary launcher remains separate.

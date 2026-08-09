@@ -442,3 +442,18 @@
   mixed entrypoints passed.
 - Next slice: implement strict cross-table relations and migrate F018 as the
   first complete consumer.
+
+## 2026-08-08 - Milestone 3 Package M3-S1
+
+- Accepted strict cross-table `relation` checks over contained TSV inputs,
+  bounded predicates, named projections, optional one-field splitting, and
+  ordered or duplicate-free set equality.
+- Migrated F018 with its exact fourteen-row map, source-inventory relation,
+  final disposition relation, report evidence, and accepted three-slice plan
+  lifecycle. Removed obsolete planned-state branches and Bash command paths.
+- Verification: 31 self-tests, five focused checks, 35 suites/162 checks direct
+  and launcher execution, inventory/removal/diff gates, and all 240 mixed
+  entrypoints passed.
+- Next slice: migrate the Row 19 decomposition and owner-validation pair with
+  accepted table and relation mechanics; do not broaden the engine unless
+  fixture evidence proves a missing reusable primitive.

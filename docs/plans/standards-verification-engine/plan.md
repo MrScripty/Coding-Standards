@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 3: Shared Metadata, Plan, And Migration Contracts
 
-**Next slice:** Implement `M3-S1`: strict cross-table relations with F018
-decomposition as the first complete consumer.
+**Next slice:** Implement `M3-S2`: migrate Row 19 decomposition and owner
+validation with accepted table and relation mechanics.
 
 **Acceptance status:** `pending`
 
@@ -431,7 +431,7 @@ package:
 | `M2-S1` Dependency audit lineage | `topics.dependencies` | decision, canonical text, exact disposition projection, accepted plan marker | Accepted with the first strict table consumer. |
 | `M2-P9` Implementation change evidence | `workflow.implementation` | decision, canonical/reference text, exact split disposition | Accepted with existing checks after `M2-S1`. |
 | `M3-C1` Acceptance claims | `workflow.verification` | canonical claim grammar and required-to-observed set satisfaction | Implement as one typed shared contract, then update its README invocation. |
-| `M3-S1` F018 decomposition | parent migration plan | strict map, exact IDs/order, inventory/disposition relations, accepted lifecycle state | Implement after relation checks; remove obsolete planned-state branches. |
+| `M3-S1` F018 decomposition | parent migration plan | strict map, exact IDs/order, inventory/disposition relations, accepted lifecycle state | Accepted after relation checks; obsolete planned-state branches removed. |
 | `M3-S2` Row 19 decomposition and owner validation | parent migration plan | strict tables, exact/expanded projections, uniqueness, counts, canonical report and accepted plan state | Migrate as one owner-coherent two-script package. |
 | `M6-L1` Declarative-suite launcher | verification engine | inventory freshness plus complete Python execution | Retain only until the complete-suite convention changes; replace, do not wrap. |
 
@@ -543,6 +543,26 @@ complete mixed suite passed.
 domains; the engine infers no hierarchy, substitution, or environment
 equivalence; the Bash checker is deleted and its README invocation is replaced
 by the focused Python command.
+
+#### Package M3-S1: Relations And F018 Decomposition
+
+**Status:** `Accepted`
+
+**Owner:** engine mechanics and parent migration plan
+
+**Preserved contract:** exact fourteen-row slice map, IDs and source order,
+unique slice/order and ID keys, source-inventory agreement, final disposition
+agreement, report evidence, and accepted `7.4b2a`/`7.4b2b`/`7.4b2c` lifecycle.
+
+**Acceptance evidence:** 31 engine/inventory tests; focused suite passed five
+checks; all 35 suites passed 162 checks directly and through the launcher;
+fresh 240-record inventory, removed-path and report/README scans, diff
+integrity, and complete mixed suite passed.
+
+**No-fallback result:** relation sides use contained strict TSV inputs, bounded
+predicates, named projections, optional one-field splitting, and ordered or
+unique-set equality only. Transitional planned states, the Bash checker, and
+its historical command references are removed.
 
 ### Milestone 4: Semantic Decision Migration
 

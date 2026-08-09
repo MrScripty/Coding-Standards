@@ -591,11 +591,11 @@ and exact first-slice proposal without treating later proposed dispositions as
 accepted.
 
 `milestone-7-f018-decomposition.md` and
-`milestone-7-f018-slices.tsv` split critical untrusted-payload finding `F018`
-into a generic runtime-decoding contract followed by action-specific IPC
-decoding and Security linkage. `verify-milestone-7-f018-decomposition.sh`
-checks the exact fourteen identifiers, owners, dispositions, ordering, named
-fixtures, and active-plan handoff without moving normative guidance.
+`milestone-7-f018-slices.tsv` record the accepted split of critical
+untrusted-payload finding `F018` into a generic runtime-decoding contract
+followed by action-specific IPC decoding and Security linkage. The registered
+`milestone-7-f018-decomposition` suite checks the exact fourteen identifiers,
+owners, dispositions, ordering, named fixtures, and accepted plan state.
 
 `milestone-7-f022-f023-decomposition.md` and
 `milestone-7-f022-f023-slices.tsv` split critical foreign-memory, unsafe-

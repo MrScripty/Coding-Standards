@@ -52,23 +52,16 @@ between them while unsafe IPC guidance remains active.
 
 ## Planning Correction 7.4b2a1: Lifecycle Handoff
 
-The decomposition checker is an allowed adjacent file for both implementation
-slices. It may change only to preserve the approved identifier, owner,
-disposition, lifecycle, and next-slice contracts as dispositions are accepted.
-It cannot weaken semantic gates, remove fixture requirements, or admit partial
-disposition states.
+The decomposition suite preserves the approved identifier, owner, disposition,
+and accepted lifecycle contracts. It cannot weaken semantic gates, remove
+fixture requirements, or admit partial disposition states.
 
-The valid checked states are:
+The valid checked state is both slices `Accepted`, all fourteen dispositions
+complete, and neither completed slice remaining next. Transitional planned
+states are obsolete and are not compatibility inputs.
 
-1. both slices `Planned`, no F018 dispositions, next slice `7.4b2b`;
-2. `7.4b2b` `Accepted`, its four dispositions complete, `7.4b2c` `Planned`,
-   next slice `7.4b2c`; or
-3. both slices `Accepted`, all fourteen dispositions complete, and neither
-   completed slice remains next.
-
-The correction slice may touch only this report, the F018 decomposition
-checker, the active plan, and execution ledger. It changes no normative owner,
-frozen-ID proposal, fixture contract, objective, or implementation order.
+The historical correction changed no normative owner, frozen-ID proposal,
+fixture contract, objective, or implementation order.
 
 ## Slice 7.4b2b: Runtime-Decoding Proof
 
@@ -78,8 +71,8 @@ frozen-ID proposal, fixture contract, objective, or implementation order.
 - `ARCHITECTURE-PATTERNS.md`;
 - `evaluation/standards-effectiveness/fixtures/contracts/runtime-decoding-decisions.tsv`;
 - `evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh`;
-- `evaluation/standards-effectiveness/verify-milestone-7-f018-decomposition.sh`
-  for lifecycle/disposition handoff only;
+- `evaluation/standards-effectiveness/suites/milestone-7-f018-decomposition.toml`
+  for accepted lifecycle and disposition lineage only;
 - consolidation dispositions, evaluation README, findings, active plan, and
   execution ledger.
 
@@ -128,8 +121,8 @@ competing rules, and focused plus affected global regressions pass.
 - `evaluation/standards-effectiveness/verify-ipc-payload-validation.sh`;
 - `evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh` for
   removal of duplicate next-slice lifecycle ownership only;
-- `evaluation/standards-effectiveness/verify-milestone-7-f018-decomposition.sh`
-  for lifecycle/disposition handoff only;
+- `evaluation/standards-effectiveness/suites/milestone-7-f018-decomposition.toml`
+  for accepted lifecycle and disposition lineage only;
 - consolidation dispositions, evaluation README, findings, active plan, and
   execution ledger.
 
@@ -138,8 +131,8 @@ generated inventory, template, lockfile, or downstream repository belongs to
 this slice.
 
 The prerequisite runtime-decoding checker owns the accepted `7.4b2b`
-semantic contract. The F018 decomposition checker exclusively owns
-cross-slice lifecycle and next-slice progression.
+semantic contract. The F018 decomposition suite owns accepted cross-slice
+lifecycle and lineage.
 
 **Required semantics:**
 

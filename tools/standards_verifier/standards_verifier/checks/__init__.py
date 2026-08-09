@@ -6,6 +6,7 @@ from ..diagnostics import Diagnostic, EngineError
 from ..model import Check
 from .acceptance_claims import parse_acceptance_claims_check
 from .decision import parse_decision_check
+from .relation import parse_relation_check
 from .table import parse_table_check
 from .text import parse_text_check
 
@@ -29,6 +30,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_table_check(raw, suite_id)
     if kind == "acceptance_claims":
         return parse_acceptance_claims_check(raw, suite_id)
+    if kind == "relation":
+        return parse_relation_check(raw, suite_id)
     raise EngineError(
         Diagnostic(
             code="CONFIG.UNKNOWN_CHECK",

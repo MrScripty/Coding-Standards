@@ -41,6 +41,96 @@ class Projection:
     split_delimiter: str | None = None
 
 
+def read_table_rows(
+    root: Path,
+    path: str,
+    header: tuple[str, ...],
+    *,
+    suite: str,
+    check: str,
+) -> list[dict[str, str]]:
+    source = contained_file(root, path, suite=suite, check=check)
+    try:
+        with source.open("r", encoding="utf-8", newline="") as handle:
+            values = list(csv.reader(handle, delimiter="\t"))
+    except UnicodeDecodeError as error:
+        raise EngineError(
+            Diagnostic(
+                "INPUT.INVALID_UTF8",
+                "invalid",
+                str(error),
+                suite=suite,
+                check=check,
+                path=path,
+            )
+        ) from error
+    if not values:
+        raise EngineError(
+            Diagnostic(
+                "TABLE.EMPTY",
+                "invalid",
+                "table requires an exact header",
+                suite=suite,
+                check=check,
+                path=path,
+            )
+        )
+    if tuple(values[0]) != header:
+        raise EngineError(
+            Diagnostic(
+                "TABLE.HEADER_CONTRACT",
+                "invalid",
+                "table header does not match the configured header",
+                suite=suite,
+                check=check,
+                path=path,
+                expected="\t".join(header),
+                observed="\t".join(values[0]),
+            )
+        )
+
+    rows = []
+    for line_number, row_values in enumerate(values[1:], start=2):
+        if len(row_values) != len(header):
+            raise EngineError(
+                Diagnostic(
+                    "TABLE.ROW_WIDTH",
+                    "invalid",
+                    "table row width does not match the header",
+                    suite=suite,
+                    check=check,
+                    path=path,
+                    row=line_number,
+                    expected=str(len(header)),
+                    observed=str(len(row_values)),
+                )
+            )
+        rows.append(dict(zip(header, row_values, strict=True)))
+    return rows
+
+
+def project_table_rows(
+    rows: list[dict[str, str]], projection: Projection
+) -> tuple[tuple[str, ...], ...]:
+    projected = []
+    for row in rows:
+        if projection.where is not None and not projection.where.evaluate(row):
+            continue
+        selected = tuple(row[field] for field in projection.columns)
+        if projection.split_field is None:
+            projected.append(selected)
+            continue
+        split_index = projection.columns.index(projection.split_field)
+        parts = selected[split_index].split(projection.split_delimiter)
+        for part in parts:
+            expanded = list(selected)
+            expanded[split_index] = part
+            projected.append(tuple(expanded))
+    if projection.order == "lexical":
+        projected.sort()
+    return tuple(projected)
+
+
 @dataclass(frozen=True, slots=True)
 class TableCheck:
     id: str
@@ -56,63 +146,13 @@ class TableCheck:
         root = context.repo_root
         if not isinstance(root, Path):
             raise TypeError("check context repository root must be a Path")
-        source = contained_file(root, self.path, suite=context.suite_id, check=self.id)
-        try:
-            with source.open("r", encoding="utf-8", newline="") as handle:
-                values = list(csv.reader(handle, delimiter="\t"))
-        except UnicodeDecodeError as error:
-            raise EngineError(
-                Diagnostic(
-                    "INPUT.INVALID_UTF8",
-                    "invalid",
-                    str(error),
-                    suite=context.suite_id,
-                    check=self.id,
-                    path=self.path,
-                )
-            ) from error
-        if not values:
-            raise EngineError(
-                Diagnostic(
-                    "TABLE.EMPTY",
-                    "invalid",
-                    "table requires an exact header",
-                    suite=context.suite_id,
-                    check=self.id,
-                    path=self.path,
-                )
-            )
-        if tuple(values[0]) != self.header:
-            raise EngineError(
-                Diagnostic(
-                    "TABLE.HEADER_CONTRACT",
-                    "invalid",
-                    "table header does not match the configured header",
-                    suite=context.suite_id,
-                    check=self.id,
-                    path=self.path,
-                    expected="\t".join(self.header),
-                    observed="\t".join(values[0]),
-                )
-            )
-
-        rows: list[dict[str, str]] = []
-        for line_number, row_values in enumerate(values[1:], start=2):
-            if len(row_values) != len(self.header):
-                raise EngineError(
-                    Diagnostic(
-                        "TABLE.ROW_WIDTH",
-                        "invalid",
-                        "table row width does not match the header",
-                        suite=context.suite_id,
-                        check=self.id,
-                        path=self.path,
-                        row=line_number,
-                        expected=str(len(self.header)),
-                        observed=str(len(row_values)),
-                    )
-                )
-            rows.append(dict(zip(self.header, row_values, strict=True)))
+        rows = read_table_rows(
+            root,
+            self.path,
+            self.header,
+            suite=context.suite_id,
+            check=self.id,
+        )
 
         diagnostics: list[Diagnostic] = []
         if self.row_count is not None and len(rows) != self.row_count:
@@ -184,23 +224,8 @@ class TableCheck:
                     seen[value] = line_number
 
         for projection in self.projections:
-            actual: list[tuple[str, ...]] = []
-            for row in rows:
-                if projection.where is not None and not projection.where.evaluate(row):
-                    continue
-                selected = tuple(row[field] for field in projection.columns)
-                if projection.split_field is None:
-                    actual.append(selected)
-                    continue
-                split_index = projection.columns.index(projection.split_field)
-                parts = selected[split_index].split(projection.split_delimiter)
-                for part in parts:
-                    expanded = list(selected)
-                    expanded[split_index] = part
-                    actual.append(tuple(expanded))
-            if projection.order == "lexical":
-                actual.sort()
-            if tuple(actual) != projection.expected:
+            actual = project_table_rows(rows, projection)
+            if actual != projection.expected:
                 diagnostics.append(
                     Diagnostic(
                         "ASSERT.TABLE_PROJECTION",
@@ -210,7 +235,7 @@ class TableCheck:
                         check=self.id,
                         path=self.path,
                         expected=repr(projection.expected),
-                        observed=repr(tuple(actual)),
+                        observed=repr(actual),
                     )
                 )
         return diagnostics
