@@ -556,3 +556,25 @@ precondition, which becomes a declarative dependency, or an independent
 package/wave gate, which must not remain nested. This classification is needed
 before caller deletion; otherwise the migration either weakens evidence or
 recreates legacy orchestration under a new schema.
+
+### Cross-Platform Dependency Classification
+
+Option 1 is accepted. Native Loading's target, capability, evidence, and typed
+outcomes are explicit within its own decision fixture, so its invocation of the
+broader same-owner Platform Target checker is an integration gate rather than
+a missing semantic prerequisite. Row 6 and execution-train invocations are
+migration gates; the decision-table helper is replaced by the engine. `M5-CP1`
+therefore depends only on temporary `M5-CP0`.
+
+Rust Target differs: `profile.language.rust.cross-platform` explicitly requires
+and specializes `topic.cross-platform`. Its Platform Target invocation is a
+true generic-to-specialization dependency. Platform Target's metadata,
+filesystem-containment, and independent-trust calls are structural, adjacent-
+owner, and migration gates for this bounded semantic package, not permanent
+nested suite dependencies.
+
+The resulting graph migration uses three independent packages followed by one
+connected pair. `M5-CP4+5` creates separate generic and Rust suites, registers
+Platform Target before Rust Target, declares the Rust dependency, and deletes
+both Bash authorities atomically. This preserves owner boundaries and acyclic
+once-only execution without reproducing the legacy process graph.

@@ -2408,11 +2408,17 @@ all structural/routing fixtures pass.
          nested calls mix migration gates with possible semantic prerequisites.
          Caller-first or callee-first replacement is unsafe without ownership
          classification and cannot use wrappers or dual authority.
-       - `7.4c3ve29` (`Active`): select whether to classify each nested call
-         before thin package admission, replace the connected semantic chain
-         atomically, or defer that chain. Recommended: declare only proven
-         owner-required suite dependencies and retain migration/integration
-         checks as package or wave gates.
+       - `7.4c3ve29` (`Accepted planning authority`): classify all ten outbound
+         calls before package admission. Native Loading's Platform Target call
+         is a same-owner integration gate; Rust Target's call is a true
+         specialization dependency. Keep lifecycle, structural, and adjacent-
+         owner checks at package/wave scope. Migrate Native Loading separately,
+         then replace Rust Target and Platform Target atomically as two suites
+         with a declared Rust-to-generic dependency. Do not use Bash bridges,
+         wrappers, dual authority, duplicated policy, or unreviewed deletion.
+       - `7.4c3ve30` (`Active`): admit `M5-CP1` Native Artifact Loading with
+         temporary `M5-CP0` as its only suite dependency and no former-source
+         heading authority.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

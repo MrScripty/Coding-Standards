@@ -764,3 +764,26 @@
   deletion.
 - Next slice: select the dependency-semantics option before admitting
   `M5-CP1`, `M5-CP4`, or `M5-CP5`.
+
+## 2026-08-08 - Cross-Platform Dependency-Semantics Selection
+
+- Accepted Option 1 and classified all ten outbound calls in Native Loading,
+  Rust Target, and Platform Target by semantic ownership.
+- Classified decision-table and metadata helpers as replacement/structural
+  mechanics; Row 6, execution-train, and independent-trust calls as migration
+  gates; and filesystem containment as an adjacent-owner integration gate for
+  the bounded Platform Target ID range.
+- Classified Native Loading's Platform Target call as a same-owner integration
+  gate because Native Loading directly owns target, capability, evidence, and
+  typed outcomes. Its permanent suite has no Platform Target dependency.
+- Classified Rust Target's Platform Target call as a true specialization
+  dependency because the Rust profile explicitly requires and specializes the
+  generic Cross-Platform topic.
+- Revised the train so `M5-CP1` remains thin, while `M5-CP4+5` is one atomic
+  integration wave containing two separate owner suites and a declared Rust-to-
+  generic dependency.
+- Rejected Bash/external dependencies, wrappers, dual authority, duplicated
+  generic policy, unreviewed call deletion, and permanent nested lifecycle
+  execution.
+- Next slice: admit `M5-CP1` with temporary `M5-CP0` as its only suite
+  dependency.

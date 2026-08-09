@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: Cross-Platform dependency-semantics re-plan
+**Current phase:** Milestone 5: Native Artifact Loading admission
 
-**Next slice:** Select and record how legacy transitive calls are classified as
-semantic suite dependencies or independent integration gates before admitting
-`M5-CP1`.
+**Next slice:** Admit `M5-CP1` Native Artifact Loading with `M5-CP0` as its only
+suite dependency and all semantic evidence in its Cross-Platform-owned suite.
 
 **Acceptance status:** `pending`
 
@@ -1045,7 +1044,7 @@ integrity, and all 235 mixed checker entrypoints passed.
 
 #### Cross-Platform Dependency-Semantics Re-plan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 The `M5-CP1` audit found that Native Artifact Loading invokes Platform Target
 Policy, while Rust Target Configuration also invokes Platform Target Policy.
@@ -1093,6 +1092,41 @@ External Bash dependencies, arbitrary command actions, wrapper suites,
 retaining a semantic Bash checker beside its declarative replacement,
 duplicating Platform Target policy in caller suites, or dropping nested calls
 without a recorded ownership classification are invalid options.
+
+**Selected option:** Option 1. Every outbound call in the connected chain has
+the following frozen disposition:
+
+| Caller package | Current callee | Classification | Declarative treatment |
+| --- | --- | --- | --- |
+| `M5-CP1` Native Loading | `check-decision-table.sh` | replacement mechanics | Native Loading owns one strict decision check; no dependency |
+| `M5-CP1` Native Loading | Platform Target Policy | owner-umbrella integration gate | no suite dependency; Native Loading's target field and typed outcomes remain complete; Platform Target remains an independently selected suite/checker |
+| `M5-CP1` Native Loading | Row 6 decomposition | migration lifecycle gate | package/wave acceptance only |
+| `M5-CP1` Native Loading | execution train | migration lifecycle gate | package/wave acceptance only |
+| `M5-CP4` Rust Target | metadata helper | repository structural gate | package/wave acceptance only |
+| `M5-CP4` Rust Target | Platform Target Policy | semantic specialization prerequisite | declare `platform-target-policy` in `requires` |
+| `M5-CP4` Rust Target | independent-trust re-plan | migration lifecycle gate | package/wave acceptance only |
+| `M5-CP5` Platform Target | metadata helper | repository structural gate | package/wave acceptance only |
+| `M5-CP5` Platform Target | filesystem containment | adjacent-owner integration gate | package/wave acceptance only; filesystem authorization is outside `STD-0280` through `STD-0288` |
+| `M5-CP5` Platform Target | independent-trust re-plan | migration lifecycle gate | package/wave acceptance only |
+
+Native Loading is independently admissible because its decision contract
+directly owns declared target, unsupported target, unknown target, capability,
+and evidence outcomes. Invoking the broader same-owner Platform Target checker
+does not supply a missing Native Loading rule. `M5-CP1`, `M5-CP2`, `M5-CP3`,
+and `M5-CP5` require temporary `M5-CP0` while they read the Cross-Platform
+former source.
+
+Rust Target is a genuine specialization: its metadata explicitly requires and
+specializes `topic.cross-platform`. To avoid either a missing dependency or
+dual authority, `M5-CP4` and `M5-CP5` form one atomic integration wave with two
+separate owner suites. Platform Target is registered first; Rust Target
+declares it in `requires`; both Bash checkers are deleted in the same commit.
+This atomic pair is not a cross-owner semantic suite and does not duplicate
+generic policy in the Rust suite.
+
+**Revised train:** `M5-CP1`, `M5-CP2`, and `M5-CP3` remain independently
+reviewable packages after `M5-CP0`; `M5-CP4+5` is the bounded connected
+generic/Rust dependency wave; `M5-CP6` closes the source and retires `M5-CP0`.
 
 ### Milestone 4: Semantic Decision Migration
 
