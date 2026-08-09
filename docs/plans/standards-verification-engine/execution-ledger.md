@@ -1437,3 +1437,24 @@
   components; and diff integrity passed.
 - The complete mixed-suite Wave 4 checkpoint passed all 204 surviving
   entrypoints. Wave 4 is accepted; the next slice is a fresh dependency audit.
+
+## 2026-08-09 - Milestone 6 Wave 5 Admission
+
+- Admitted five inbound-free, contract-inbound-free, helper-free packages for
+  Contract invariants, Core code discipline, Core simplicity, disabled
+  implementation lifecycle, and Resilience failure boundaries.
+- Froze 69 typed decisions, 26 exact dispositions, canonical routes,
+  legacy-source prohibitions, and accepted-plan evidence.
+- Classified ten row-15 edges and Core simplicity's two execution-train edges
+  as independently retained historical lifecycle gates.
+- Froze replacement of the Core simplicity and Resilience failure-boundary
+  README checker routes with their canonical suite identities.
+- Excluded policy, fixtures, dispositions, canonical sources, metadata, Router,
+  lifecycle gates, engine changes, wrappers, bridges, aliases, inferred
+  outcomes, weaker evidence, and silent success.
+- Admission verification passed package and edge authority, all 57 engine
+  tests, all 72 declarative suites, graph freshness at 204 Bash verifiers /
+  209 nodes / 960 edges / 205 components, both plan checks, diff integrity,
+  and all 204 mixed entrypoints.
+- Next slice: implement all five suites, replace two README routes, delete all
+  five Bash paths, and transition package and edge history together.

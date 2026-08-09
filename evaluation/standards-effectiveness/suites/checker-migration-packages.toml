@@ -8,7 +8,7 @@ id = "admitted-packages"
 type = "table"
 path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
 header = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
-row_count = 36
+row_count = 41
 non_empty = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 unique = [["train_order"], ["package_id"], ["subject"]]
 
@@ -415,5 +415,60 @@ expected = [[
   "M6-EDGE-1,VE026,VE028",
   "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
   "accepted",
+], [
+  "37",
+  "M6-W5-CONTRACT-INVARIANTS",
+  "checker:evaluation/standards-effectiveness/verify-contract-invariants.sh",
+  "topics/contracts.md",
+  "consolidation",
+  "contract-invariants-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/contract-invariants.toml,evaluation/standards-effectiveness/verify-contract-invariants.sh,evaluation/standards-effectiveness/fixtures/contracts/invariant-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026,VE028",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,readme-route,complete-suite",
+  "admitted",
+], [
+  "38",
+  "M6-W5-CORE-DISCIPLINE",
+  "checker:evaluation/standards-effectiveness/verify-core-code-discipline.sh",
+  "CORE-STANDARDS.md",
+  "consolidation",
+  "core-code-discipline-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/core-code-discipline.toml,evaluation/standards-effectiveness/verify-core-code-discipline.sh,evaluation/standards-effectiveness/fixtures/core/code-discipline-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026,VE028",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,readme-route,complete-suite",
+  "admitted",
+], [
+  "39",
+  "M6-W5-CORE-SIMPLICITY",
+  "checker:evaluation/standards-effectiveness/verify-core-simplicity.sh",
+  "CORE-STANDARDS.md",
+  "consolidation",
+  "core-simplicity-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/core-simplicity.toml,evaluation/standards-effectiveness/verify-core-simplicity.sh,evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026,VE028",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,readme-route,complete-suite",
+  "admitted",
+], [
+  "40",
+  "M6-W5-DISABLED-LIFECYCLE",
+  "checker:evaluation/standards-effectiveness/verify-implementation-disabled-lifecycle.sh",
+  "workflows/implementation.md",
+  "consolidation",
+  "implementation-disabled-lifecycle-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/implementation-disabled-lifecycle.toml,evaluation/standards-effectiveness/verify-implementation-disabled-lifecycle.sh,evaluation/standards-effectiveness/fixtures/implementation/disabled-lifecycle-decisions.tsv,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026,VE028",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,readme-route,complete-suite",
+  "admitted",
+], [
+  "41",
+  "M6-W5-RESILIENCE-BOUNDARY",
+  "checker:evaluation/standards-effectiveness/verify-resilience-failure-boundaries.sh",
+  "topics/resilience.md",
+  "consolidation",
+  "resilience-failure-boundaries-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/resilience-failure-boundaries.toml,evaluation/standards-effectiveness/verify-resilience-failure-boundaries.sh,evaluation/standards-effectiveness/fixtures/resilience/failure-boundary-decisions.tsv,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-EDGE-1,VE026,VE028",
+  "focused-suite,edge-dispositions,engine-tests,graph-freshness,declarative-all,removed-paths,readme-route,complete-suite",
+  "admitted",
 ]
 ]

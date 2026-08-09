@@ -12,8 +12,9 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1, 2,
 3, and 4 and M6-EDGE-1 are accepted; exact typed executable-edge semantics
 govern further checker deletion.
 
-**Next slice:** audit the fresh post-Wave-4 executable graph and admit the next
-owner-coherent delegated verification packages through the typed edge contract.
+**Next slice:** implement the delegated verification engine's five admitted
+Wave 5 contract and lifecycle suites, replace two README routes, delete their
+Bash checkers, and accept exact edge history.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

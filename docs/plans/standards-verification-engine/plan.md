@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-Wave-4 dependency audit
+**Current phase:** Milestone 6: accelerated Wave 5 admission
 
-**Next slice:** Inspect the fresh 204-verifier graph, classify exact executable
-edges, and admit the next owner-coherent packages through the accepted typed
-edge contract.
+**Next slice:** Implement the five admitted contract and lifecycle suites,
+replace two README checker routes, delete the five Bash checkers, and accept
+their exact historical edge rows.
 
 **Acceptance status:** `pending`
 
@@ -2198,6 +2198,41 @@ authority passed; all 57 engine tests and all 72 declarative suites passed;
 graph freshness passed at 204 Bash verifiers / 209 nodes / 944 edges / 205
 components; diff integrity and the complete mixed checkpoint passed all 204
 surviving entrypoints.
+
+##### Wave 5 Admission: Contract And Lifecycle Leaves
+
+**Status:** `Active`
+
+**Packages:** Contract invariants, Core code discipline, Core simplicity,
+disabled implementation lifecycle, and Resilience failure boundaries.
+
+**Frozen behavior:** 69 typed decisions and 26 exact dispositions across
+Contracts, Core, Implementation, and Resilience, including canonical routes,
+legacy-source prohibitions, and accepted-plan evidence.
+
+**Edge contract:** all five sources are executable-inbound-free,
+contract-inbound-free, and helper-free. Four have one row-15 reference and
+dependency; Core simplicity additionally has one execution-train reference and
+dependency. All 12 rows are `independent-gate` historical lifecycle evidence.
+
+**Implementation write set:** five new suite TOMLs, five deleted checker paths,
+unchanged fixtures as read-only evidence, two README checker-to-suite routes,
+package and edge manifests, registry, package contract, generated graph
+artifacts, and serial plan records.
+
+**No-fallback rule:** no policy, fixture, disposition, canonical source,
+metadata, Router, row-15 checker, execution train, engine, compatibility schema,
+wrapper, bridge, alias, inferred decision, weaker evidence, or silent success
+may be added or changed.
+
+**Admission verification:** package and edge authority, all 57 engine tests,
+all 72 declarative suites, graph freshness at 204 Bash verifiers / 209 nodes /
+960 edges / 205 components, both plan checks, diff integrity, and all 204 mixed
+entrypoints passed.
+
+**Implementation gate:** five focused suites, package and edge authority, 57
+engine tests, all declarative suites, graph freshness, README route closure,
+both plan checks, diff integrity, and one complete mixed checkpoint pass.
 
 **Implementation gate:** each suite preserves its complete typed decisions,
 exact routes or dispositions, positive and negative canonical text, legacy

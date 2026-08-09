@@ -1114,3 +1114,20 @@ all 57 engine tests, and all 72 declarative suites. Graph freshness passed at
 204 Bash verifiers / 209 nodes / 944 edges / 205 components. Complete
 mixed-suite Wave 4 verification passed all 204 surviving entrypoints, accepting
 the wave without a compatibility execution path.
+
+### Milestone 6 Wave 5 Admission
+
+Five inbound-free, helper-free semantic leaves preserve 69 typed decisions and
+26 exact dispositions across Contracts, Core, Implementation, and Resilience.
+Four depend only on row 15; Core simplicity also invokes the execution train.
+All 12 edges are independent historical lifecycle gates rather than semantic
+suite requirements.
+
+Core simplicity and Resilience failure boundaries have two live README checker
+routes that implementation must replace atomically with canonical suite names.
+No package owns a row-35 or source-package identity.
+
+Admission verification passed package and edge authority, all 57 engine tests,
+all 72 declarative suites, graph freshness at 204 Bash verifiers / 209 nodes /
+960 edges / 205 components, both plan checks, diff integrity, and all 204 mixed
+entrypoints.
