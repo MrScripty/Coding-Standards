@@ -824,6 +824,14 @@ subject, Bash-only README inventories, negative-purity set, current count
 validators, README projection, and generated graph in the same commit. Engine,
 policy, fixture, legacy-index, and historical evidence changes are excluded.
 
+The implementation is accepted. Focused Rust selection executes M5-CP0,
+Platform, and Rust once and passes 17 checks. Both Bash checkers are absent;
+source package 20 names the Rust suite; Bash-only dependency/consumer
+inventories are 32/33; S1 is the only negative-purity consumer; and lifecycle
+validators enforce those counts. All 46 declarative suites and 42 engine tests
+pass. Final graph freshness reports 230 Bash verifiers / 235 nodes / 989 edges
+/ 231 components, and all 230 mixed entrypoints pass.
+
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
 edges, and 235 components.

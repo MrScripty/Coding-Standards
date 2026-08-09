@@ -26,7 +26,6 @@ evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	root-readm
 evaluation/standards-effectiveness/verify-rust-dependency-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-interop-memory.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-release-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-rust-target-configuration.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-tooling-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-tooling-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-tooling-reference-recipes.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence

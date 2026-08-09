@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: M5-CP4+5 implementation
+**Current phase:** Milestone 5: M5-CP6 source-closure admission
 
-**Next slice:** Implement admitted atomic `M5-CP4+5` without engine, policy,
-fixture, source-index, or compatibility changes.
+**Next slice:** Audit and admit M5-CP6 Cross-Platform source closure and
+same-wave retirement of temporary M5-CP0.
 
 **Acceptance status:** `pending`
 
@@ -1569,6 +1569,40 @@ all 42 engine tests, both plan checks, plan lifecycle fixtures, diff integrity,
 and all 232 mixed entrypoints passed. The regenerated admission graph is fresh
 at 232 Bash verifiers, 237 nodes, 1,009 edges, and 233 components.
 
+#### Package M5-CP4+5: Platform And Rust Target Policy
+
+**Status:** `Accepted`
+
+**Owners:** `topic.cross-platform` and
+`profile.language.rust.cross-platform`
+
+**Observable outcome:** Platform Target is one six-check suite requiring
+temporary M5-CP0; Rust Target is one ten-check specialization suite requiring
+Platform. Focused selection executes three suites once and preserves 55 typed
+decisions, 14 exact dispositions, canonical owner/routing evidence, accepted
+lineage, source-wide negative evidence, and byte-for-byte Rust migration-index
+content.
+
+**Lifecycle result:** both Bash checkers are deleted. Source package
+`7.4c3.20` now owns the Rust suite subject; Bash-only README dependency and
+consumer manifests contain 32 and 33 rows; S1 is the sole negative-purity
+consumer; and row-35, row-46, and root-consumer validators enforce the new
+current state. Historical transition prose remains unchanged.
+
+**No-fallback result:** no wrapper, Bash bridge, dual subject, compatibility
+schema, expected-file mirror, heading alias, policy duplication, fixed target
+or support default, universal layout, substitute tool/environment, alternate
+target/mechanism, weaker evidence, silent omission, stub, or default-success
+path remains.
+
+**Verification:** focused dependency execution passed three suites / 17
+checks; exact package, source-preparation, root-consumer, row-35, and row-46
+authority passed; all 46 declarative suites, 42 engine tests, Python
+compilation, protected-input immutability, both plan checks, plan lifecycle
+fixtures, removed-path scans, diff integrity, and all 230 mixed entrypoints
+passed. The regenerated graph contains 230 Bash verifiers, 235 nodes, 989
+edges, and 231 components.
+
 #### Migration-Package Stable-Identity Re-plan Trigger
 
 **Status:** `Accepted`
@@ -1675,8 +1709,8 @@ exact write set before implementation.
   legacy source.
 - [x] Add and verify the strict generic `exact_text` assertion required by the
   Rust migration-index contract.
-- [ ] Convert transitive verifier calls into declared suite dependencies.
-- [ ] Migrate platform-target, native-loading, release-artifact,
+- [x] Convert transitive verifier calls into declared suite dependencies.
+- [x] Migrate platform-target, native-loading, release-artifact,
   platform-evidence, and Rust target-configuration suites while preserving
   owner-local semantics and whole-source route/prohibition coverage.
 - [ ] Delete the five replaced scripts, close the Cross-Platform source in the

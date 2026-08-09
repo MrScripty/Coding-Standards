@@ -181,6 +181,16 @@ path = "evaluation/standards-effectiveness/suites/platform-evidence-coverage.tom
 requires = ["cross-platform-source-closure-prerequisite"]
 
 [[suites]]
+id = "platform-target-policy"
+path = "evaluation/standards-effectiveness/suites/platform-target-policy.toml"
+requires = ["cross-platform-source-closure-prerequisite"]
+
+[[suites]]
+id = "rust-target-configuration"
+path = "evaluation/standards-effectiveness/suites/rust-target-configuration.toml"
+requires = ["platform-target-policy"]
+
+[[suites]]
 id = "rust-tooling-adapter-inventory"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-adapter-inventory.toml"
 requires = []

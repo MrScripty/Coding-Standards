@@ -2478,10 +2478,16 @@ all structural/routing fixtures pass.
          set. Register Platform before Rust, transfer the Rust source package
          from `checker:` to `suite:`, reconcile Bash-only README inventories,
          and retain exact raw-byte index evidence without an engine change.
-       - `7.4c3ve44` (`Active`): implement and verify atomic M5-CP4+5. After M5
-         closure, accelerate the remainder through dependency-closed owner
-         packages prepared concurrently and integrated serially; retain
-         separate suites and no Bash bridges.
+       - `7.4c3ve44` (`Accepted`): replace Platform Target and Rust Target with
+         separate dependency-ordered suites, delete both Bash checkers,
+         transfer source-package authority to the Rust suite, and reconcile
+         Bash-only README inventories without an engine, policy, source-index,
+         compatibility, or fallback change.
+       - `7.4c3ve45` (`Active`): audit and admit M5-CP6 Cross-Platform source
+         closure with same-wave M5-CP0 retirement. After M5 closure, accelerate
+         the remainder through dependency-closed owner packages prepared
+         concurrently and integrated serially; retain separate suites and no
+         Bash bridges.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

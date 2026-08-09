@@ -363,8 +363,8 @@ fallback.
 
 ## Platform Target Decision Fixtures
 
-`fixtures/cross-platform/platform-target-decisions.tsv` and
-`verify-platform-target-policy.sh` check declared target support, cohesive
+The registered `platform-target-policy` suite evaluates
+`fixtures/cross-platform/platform-target-decisions.tsv` for declared target support, cohesive
 platform isolation, contract-selected mechanism and layout, semantic fidelity,
 typed invalid/unsupported/unavailable outcomes, exact disposition of
 `STD-0280` through `STD-0288`, bounded legacy replacement, and rejection of
@@ -721,7 +721,8 @@ silent callback dropping, wrong-thread retry, alternate events, detached work,
 input carry-forward, assumed idempotence, universal ordering, and false cleanup
 success.
 
-`verify-rust-target-configuration.sh` checks declared Rust targets,
+The registered `rust-target-configuration` suite evaluates
+`fixtures/rust/target-configuration-decisions.tsv` for declared Rust targets,
 contract-selected `cfg`/build/feature/composition/dispatch mechanisms with
 explicit basis/ownership/precedence, cohesive placement, claim-matched
 evidence, profile metadata and routing, exact legacy replacement, and exact

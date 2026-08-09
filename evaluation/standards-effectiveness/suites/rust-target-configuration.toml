@@ -1,0 +1,214 @@
+schema_version = 1
+id = "rust-target-configuration"
+owner = "profile.language.rust.cross-platform"
+description = "Declared Rust target and claim selection with explicit mechanism ownership, precedence, cohesive placement, typed outcomes, exact migration-index evidence, and no fixed-target, layout, tool, substitute, alternate-target, or weaker-evidence fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/target-configuration-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+targets = ["single", "multiple", "unknown", "default"]
+target_contract = ["declared", "missing", "contradictory"]
+rust_target = ["selected", "unsupported", "unknown", "fixed-default"]
+artifact_claim = ["compile", "link", "package", "integration", "runtime", "unknown"]
+mechanism = ["cfg", "build-script", "feature", "composition", "dispatch", "combined", "unknown", "default"]
+mechanism_basis = ["declared", "missing", "target-substitute", "unjustified"]
+mechanism_owner = ["explicit", "missing"]
+precedence = ["explicit", "not-applicable", "ambiguous", "missing"]
+boundary = ["cohesive", "domain-inline", "universal-trait", "universal-module", "missing"]
+cfg_placement = ["inline", "module", "build-selected", "not-applicable", "numeric-threshold"]
+evidence = ["matched", "compile-only", "simulated", "missing"]
+environment = ["real-target", "toolchain", "declared-simulator", "substitute-tool", "unknown"]
+fallback = ["none", "default-triples", "best-effort", "universal-layout", "numeric-threshold", "named-tool", "simulated-substitute", "alternate-target", "weaker-evidence"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "targets", op = "eq", value = "default" },
+  { field = "target_contract", op = "eq", value = "contradictory" },
+  { field = "rust_target", op = "eq", value = "fixed-default" },
+  { field = "mechanism", op = "eq", value = "default" },
+  { field = "mechanism_basis", op = "in", values = ["target-substitute", "unjustified"] },
+  { field = "precedence", op = "eq", value = "ambiguous" },
+  { all = [
+    { field = "mechanism", op = "eq", value = "combined" },
+    { field = "precedence", op = "eq", value = "not-applicable" },
+  ] },
+  { field = "boundary", op = "in", values = ["domain-inline", "universal-trait", "universal-module"] },
+  { field = "cfg_placement", op = "eq", value = "numeric-threshold" },
+  { field = "evidence", op = "in", values = ["compile-only", "simulated"] },
+  { field = "environment", op = "eq", value = "substitute-tool" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "rust_target", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "targets", op = "eq", value = "unknown" },
+  { field = "target_contract", op = "eq", value = "missing" },
+  { field = "rust_target", op = "eq", value = "unknown" },
+  { field = "artifact_claim", op = "eq", value = "unknown" },
+  { field = "mechanism", op = "eq", value = "unknown" },
+  { field = "mechanism_basis", op = "eq", value = "missing" },
+  { field = "mechanism_owner", op = "eq", value = "missing" },
+  { field = "precedence", op = "eq", value = "missing" },
+  { field = "boundary", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+  { field = "environment", op = "eq", value = "unknown" },
+]
+
+[[checks]]
+id = "rust-owner"
+type = "text"
+path = "profiles/languages/rust/cross-platform.md"
+required = [
+  "## Rust Target Contract",
+  "project, product, or release target",
+  "## Configuration And Placement",
+  "`cfg`",
+  "build scripts, features, composition, and dispatch",
+  "smallest",
+  "No shared trait,",
+  "Inline `cfg`",
+  "## Evidence By Claim",
+  "Target compilation does not prove linking",
+  "typed `invalid`, `unsupported`, or `unavailable`",
+  "## No Fallback",
+]
+prohibited = [
+  "RUST-CROSS-PLATFORM-STANDARDS.md",
+  "x86_64-unknown-linux-gnu",
+  "x86_64-pc-windows-msvc",
+  "aarch64-apple-darwin",
+  "Best-effort",
+  "five lines or fewer",
+  "three or more parameters",
+  "two inline `cfg()` blocks",
+  "Use `cross`",
+  "containerized builds",
+  "hosted CI runners",
+]
+
+[[checks]]
+id = "rust-profile-index"
+type = "text"
+path = "profiles/languages/rust/README.md"
+required = [
+  "Rust target selection, configuration placement",
+  "[Rust Cross-Platform profile](cross-platform.md)",
+]
+prohibited = [
+  "RUST-CROSS-PLATFORM-STANDARDS.md",
+  "x86_64-unknown-linux-gnu",
+  "x86_64-pc-windows-msvc",
+  "aarch64-apple-darwin",
+  "Best-effort",
+  "five lines or fewer",
+  "three or more parameters",
+  "two inline `cfg()` blocks",
+  "Use `cross`",
+  "containerized builds",
+  "hosted CI runners",
+]
+
+[[checks]]
+id = "router"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["[Rust Cross-Platform profile](profiles/languages/rust/cross-platform.md)"]
+prohibited = [
+  "RUST-CROSS-PLATFORM-STANDARDS.md",
+  "x86_64-unknown-linux-gnu",
+  "x86_64-pc-windows-msvc",
+  "aarch64-apple-darwin",
+  "Best-effort",
+  "five lines or fewer",
+  "three or more parameters",
+  "two inline `cfg()` blocks",
+  "Use `cross`",
+  "containerized builds",
+  "hosted CI runners",
+]
+
+[[checks]]
+id = "root-readme-negative"
+type = "text"
+path = "README.md"
+required = []
+prohibited = [
+  "RUST-CROSS-PLATFORM-STANDARDS.md",
+  "x86_64-unknown-linux-gnu",
+  "x86_64-pc-windows-msvc",
+  "aarch64-apple-darwin",
+  "Best-effort",
+  "five lines or fewer",
+  "three or more parameters",
+  "two inline `cfg()` blocks",
+  "Use `cross`",
+  "containerized builds",
+  "hosted CI runners",
+]
+
+[[checks]]
+id = "exact-migration-index"
+type = "exact_text"
+path = "languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md"
+expected = """# Rust Cross-Platform Standards
+
+Canonical Rust target selection, configuration placement, and evidence policy
+moved to the
+[Rust Cross-Platform profile](../../profiles/languages/rust/cross-platform.md).
+Generic target support and semantic-fidelity policy remains in
+[Cross-Platform](../../topics/cross-platform.md).
+"""
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0726", "languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md", "profiles/languages/rust/cross-platform.md", "move", "establish the declared Rust cross-platform specialization"],
+  ["STD-0727", "languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md", "profiles/languages/rust/cross-platform.md", "refine", "derive Rust targets support claims and evidence from the selected target contract"],
+  ["STD-0728", "languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md", "profiles/languages/rust/cross-platform.md", "refine", "select cfg build composition and module boundaries from Rust and artifact facts"],
+  ["STD-0729", "languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md", "profiles/languages/rust/cross-platform.md", "refine", "place inline cfg by cohesion and reviewability without numeric layout thresholds"],
+  ["STD-0730", "languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md", "profiles/languages/rust/cross-platform.md", "refine", "verify each declared Rust target claim with contract-matched evidence"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0726", "STD-0727", "STD-0728", "STD-0729", "STD-0730"]
+
+[[checks]]
+id = "accepted-finding"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F047 | Resolved in Milestone 7.4b7e |"]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b7e` (`Accepted`)"]
+prohibited = []
+
+[[checks]]
+id = "removed-authority"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["registered `rust-target-configuration` suite"]
+prohibited = ["verify-rust-target-configuration.sh"]

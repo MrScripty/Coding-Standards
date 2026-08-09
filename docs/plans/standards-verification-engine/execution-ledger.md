@@ -1098,3 +1098,27 @@
   diff integrity; and all 232 mixed checker entrypoints.
 - Next slice: implement the admitted pair atomically without a wrapper, bridge,
   dual subject, compatibility parser, policy duplication, or fallback.
+
+## 2026-08-08 - M5-CP4+5 Platform And Rust Target Migration
+
+- Replaced the 139-line Platform Target and 169-line Rust Target Bash checkers
+  with separate six-check and ten-check declarative suites.
+- Registered Platform with temporary M5-CP0 and Rust with Platform. Focused
+  Rust selection executes the three suites once and passes 17 checks.
+- Preserved 25 generic and 30 Rust typed decisions, nine generic and five Rust
+  exact dispositions, canonical owner/profile/index/router evidence, accepted
+  findings and plan lineage, source-wide negative evidence, and byte-for-byte
+  equality of the seven-line Rust migration index.
+- Transferred source package `7.4c3.20` from its checker subject to the Rust
+  suite subject, removed the retired Rust path from Bash-only README dependency
+  and consumer manifests, reduced exact counts to 32/33, and reduced
+  negative-purity ownership to S1.
+- Row-35, row-46, root-consumer, package-authority, and source-preparation gates
+  pass. Both removed checker paths are absent; all 46 suites, 42 engine tests,
+  Python compilation, graph freshness at 230 Bash verifiers / 235 nodes / 989
+  edges / 231 components, protected-input immutability, both plan checks,
+  lifecycle fixtures, diff integrity, and all 230 mixed entrypoints pass.
+- No engine, policy, retained fixture, source index, canonical profile, Router,
+  root README, finding, historical evidence, lockfile, wrapper, bridge,
+  compatibility parser, or fallback was added or changed.
+- Next slice: audit M5-CP6 source closure and temporary M5-CP0 retirement.

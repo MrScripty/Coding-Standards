@@ -28,7 +28,6 @@ evaluation/standards-effectiveness/verify-rust-interop-memory.sh	none	rust-profi
 evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-profile-authority-closure.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-release-owner-contract.sh	none	rust-profile-index
-evaluation/standards-effectiveness/verify-rust-target-configuration.sh	negative-purity	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-tooling-owner-contract.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-unsafe-contracts.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-wire-representation.sh	none	rust-profile-index
