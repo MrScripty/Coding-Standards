@@ -1797,3 +1797,27 @@
   engine file, accepted dependency suite, or unrelated consumer changed.
   Fifty metadata-helper consumers remain.
 - Next slice jointly admits the four remaining inbound-safe Release packages.
+
+## 2026-08-09 - M6-K4 Through M6-K7 Joint Admission
+
+- Re-audited the four remaining inbound-safe Release helper consumers. Each has
+  zero executable inbound callers, zero contract references, one acyclic node,
+  and only the metadata helper dependency.
+- Froze four separate owner-local contracts: Maintenance and channels, Pipeline
+  handoff, Artifact SBOM/checksum/lockfile selection, and Publication
+  presentation. Their fixtures, ID ranges, disposition variants, required
+  policy, and removed defaults remain independent.
+- Artifact uses three declarative output decisions and reserves typed
+  unavailable for unresolved dependency-resolution ownership; it does not
+  infer a lockfile default.
+- Every package depends on the accepted Release Reference suite for byte-exact
+  legacy-index evidence and validates metadata natively.
+- Admitted M6-K4 through M6-K7 and their eight exact helper edges. No checker,
+  suite, fixture, registry, README, source, helper, consumer, or engine file
+  changed during joint admission.
+- Admission verification passed package and edge authority, all 90 declarative
+  suites, graph freshness at 186 Bash verifiers / 191 nodes / 917 edges / 187
+  components, both plan checks, diff integrity, and implementation-path
+  cleanliness. VE037 defers the mixed checkpoint to wave closure.
+- Implement in order through fast package gates. Run one mixed Bash checkpoint
+  after M6-K7 closes M6-K-W1.

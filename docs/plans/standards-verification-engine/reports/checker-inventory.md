@@ -1314,3 +1314,18 @@ consumer. Re-running all transitive Bash checkers therefore repeats unrelated
 evidence. M6-K-W1 uses fast package gates for Recovery and the four other
 currently inbound-safe Release consumers, then one closing mixed checkpoint.
 Shared verification contracts still force immediate before/after checkpoints.
+
+### Admitted M6-K4 Through M6-K7 Release Remainder
+
+All four checkers are acyclic single-node components with zero executable and
+contract inbound callers and only two typed representations of the metadata
+helper dependency. They are separate Release Workflow semantic packages with
+disjoint fixtures, suite paths, and deletion paths.
+
+Maintenance, Pipeline, and Publication map to exact all-required decisions.
+Artifact maps to three exact output decisions, with unresolved dependency
+resolution represented as typed unavailable. All four use exact migration
+projections, native metadata validation, canonical/removed text, and the
+accepted byte-exact Release index dependency. No source, fixture, engine,
+helper, accepted suite, or unrelated consumer enters the implementation write
+sets. M6-K4 through K7 close M6-K-W1 in order.

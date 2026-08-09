@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-K3 package selection
+**Current phase:** Milestone 6: M6-K4 through M6-K7 joint admission
 
-**Next slice:** Audit and jointly admit the four remaining inbound-safe
-Release-owned metadata-helper packages for M6-K-W1, then implement each through
-fast package gates before one closing mixed Bash checkpoint.
+**Next slice:** Implement admitted M6-K4 Release Maintenance through the fast
+package gates; keep M6-K5 through M6-K7 admitted and read-only until each prior
+package is accepted.
 
 **Acceptance status:** `pending`
 
@@ -2675,6 +2675,52 @@ inbound-safe Release-owned helper consumers. Close the wave after those
 packages, or earlier if an inbound edge, ownership conflict, shared-contract
 change, unexpected retained-Bash consumer, or focused/declarative failure
 appears. The closing checkpoint validates the integrated deletions once.
+
+##### M6-K4 Through M6-K7: Release Wave Remainder
+
+**Package status:** `Admitted`
+
+After M6-K3, Maintenance, Pipeline, Artifact, and Publication remain separate
+acyclic one-node components with zero executable inbound callers, zero contract
+references, and only the shared metadata helper dependency. They share the
+Release Workflow owner, direct metadata closure, accepted byte-exact legacy
+index dependency, read-only source set, package gates, and M6-K-W1 checkpoint,
+but retain separate semantic contracts and atomic implementation commits.
+
+| Package | Direct contract | Frozen IDs | Special behavior |
+| --- | --- | --- | --- |
+| M6-K4 Maintenance | six-row all-required maintenance/channel decision | `STD-0561` through `STD-0565` | removes fixed branches, durations, channel names, and feature-flag defaults |
+| M6-K5 Pipeline | six-row all-required authenticated handoff decision | `STD-0552` through `STD-0560` | preserves three exact removals and removes provider workflow/target defaults |
+| M6-K6 Artifact | five-row SBOM/checksum/lockfile decisions | `STD-0543` through `STD-0551` | three decision checks; unresolved resolution ownership is typed unavailable |
+| M6-K7 Publication | six-row all-required publication decision | `STD-0566` through `STD-0574` | preserves move/merge/remove dispositions and removes hosted-product examples |
+
+**Declarative replacements:** every suite uses exact decision domains and
+outcomes, exact inventory and disposition projections, direct
+`metadata_graph`, and canonical/removed workflow text. Each registers
+`release-reference-closure` as its sole suite dependency for stronger
+byte-exact legacy-index evidence. No fixture, primitive, engine branch,
+canonical source, legacy source, helper call, regex approximation, wrapper,
+alias, compatibility path, command action, or fallback is admitted.
+
+**Write ownership:** each package owns only its new suite and deleted checker.
+Package/edge manifests, registry, package authority, README, generated graph,
+this plan/ledger/issues/report, and parent cursor remain serial integration
+files. All four fixtures; Core, Verification, Contracts, Release Workflow and
+legacy Release index; frozen inventory/dispositions; accepted suites; helper;
+engine; other consumers; lockfiles; and unrelated files are read-only.
+
+**Edge and verification contract:** each package admits exactly one executable
+reference and one helper dependency to the retained external-owned metadata
+helper. Implement M6-K4, K5, K6, then K7. For each, run focused dependency
+closure, package/edge authority, all declarative suites, graph and plan checks,
+route/removal/diff/read-only evidence, and any graph-proven affected retained
+Bash checker. Run the mixed Bash suite once after M6-K7 closes M6-K-W1.
+
+**Re-plan triggers:** stop if any inbound or cross-package edge appears; owner
+semantics overlap rather than compose; exact fixtures/IDs/dispositions cannot
+be represented; Artifact cannot preserve typed unresolved ownership; a source,
+fixture, engine, helper, or accepted suite must change; or a retained Bash
+consumer is affected but absent from package verification.
 
 **Tasks:**
 
