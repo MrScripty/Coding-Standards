@@ -808,3 +808,23 @@
   checker entrypoints passed.
 - Next slice: implement admitted `M5-CP1` without a wrapper, compatibility
   schema, heading alias, duplicate target policy, or fallback.
+
+## 2026-08-08 - M5-CP1 Native Artifact Loading
+
+- Replaced the 110-line Bash checker with one registered five-check suite over
+  the retained 23-row decisions fixture.
+- Declared temporary `M5-CP0` as the only suite dependency and removed nested
+  Platform Target, Row 6, and execution-train calls under the accepted VE016
+  classification.
+- Preserved canonical Native Loading text, two exact dispositions, accepted
+  lineage, typed invalid/unsupported/unavailable outcomes, and README
+  projection.
+- Deleted redundant schema and observed-outcome mirrors; retained no wrapper,
+  compatibility input, heading boundary, duplicated target policy, guessed or
+  alternate loading path, or default success.
+- Verification passed: focused dependency execution (`2` suites, `6` checks),
+  package authority, all `42` declarative suites, `37` engine tests, Python
+  compilation, graph freshness at `234` Bash verifiers / `239` nodes / `1,015`
+  edges / `235` components, removed-path scans, source immutability, both plan-
+  structure checks, diff integrity, and all `234` mixed checker entrypoints.
+- Next slice: audit and admit `M5-CP2` Native Artifact Release.

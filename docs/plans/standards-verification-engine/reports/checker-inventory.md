@@ -592,3 +592,19 @@ capability, evidence, and typed outcomes, while its former nested Platform
 Target, Row 6, and execution-train calls are integration or migration gates.
 Implementation deletes the checker and mirrors atomically and regenerates the
 graph; no wrapper or duplicate semantic authority is permitted.
+
+### Native Artifact Loading Migration
+
+Accepted `M5-CP1` replaces component `0137` with one five-check suite. The
+suite retains the 23-row decisions fixture, depends once on temporary whole-
+source coverage, and owns only Native Loading semantics. The Bash checker and
+schema/observed mirrors are deleted; README now projects the suite.
+
+The former Platform Target and migration-lifecycle invocations do not become
+suite dependencies under VE016. Their removal eliminates accidental nested
+execution without dropping Native Loading's direct target, capability,
+evidence, typed-outcome, disposition, owner, or no-fallback evidence.
+
+Acceptance verification passed all `42` declarative suites, `37` engine tests,
+and all `234` remaining mixed checker entrypoints. The regenerated graph has
+`239` nodes, `1,015` edges, and `235` components.

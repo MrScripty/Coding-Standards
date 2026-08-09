@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 5: Native Artifact Loading admission
 
-**Next slice:** Implement admitted `M5-CP1` Native Artifact Loading and delete
-its Bash checker plus redundant schema/observed mirrors.
+**Next slice:** Audit and admit `M5-CP2` Native Artifact Release as the next
+independent owner package.
 
 **Acceptance status:** `pending`
 
@@ -1177,6 +1177,29 @@ declarative suites/187 checks, 37 engine tests, Python compilation, both
 plan-structure checks, graph freshness at 235 Bash verifiers/240 nodes/1,025
 edges/236 components, source and semantic-input immutability, diff integrity,
 and all 235 mixed checker entrypoints passed.
+
+#### Package M5-CP1: Native Artifact Loading
+
+**Status:** `Accepted`
+
+**Owner:** `topic.cross-platform`
+
+**Observable outcome:** one registered five-check suite depends on `M5-CP0`,
+derives 23 ordered loading decisions, preserves canonical policy, two exact
+dispositions, accepted lineage, and README projection, and executes the
+temporary whole-source prerequisite once before focused Native Loading checks.
+
+**No-fallback result:** the Bash checker and redundant schema/observed mirrors
+are deleted. No Platform Target duplication, wrapper, heading range,
+compatibility input, alternate loader/artifact, ambient identity, guessed
+filename, embedded copy, or default-success path remains.
+
+**Verification:** focused dependency execution passed `2` suites / `6` checks;
+all `42` declarative suites, `37` engine tests, Python compilation, package
+authority, removed-path scans, protected-input immutability, both plan checks,
+diff integrity, and all `234` mixed checker entrypoints passed. The regenerated
+graph contains `234` Bash verifiers, `239` nodes, `1,015` edges, and `235`
+components.
 
 ### Milestone 4: Semantic Decision Migration
 
