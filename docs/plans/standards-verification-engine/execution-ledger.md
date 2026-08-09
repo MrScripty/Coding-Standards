@@ -705,3 +705,23 @@
   this planning authority is accepted.
 - Next slice: admit `M5-CP0` with an exact contract/fixture/registry/test and
   plan write set; do not modify the legacy source or semantic checkers.
+
+## 2026-08-08 - M5-CP0 Whole-Source Prerequisite Admission
+
+- Admitted one migration-owned, text-only suite over the complete
+  `CROSS-PLATFORM-STANDARDS.md` source. The suite requires seven canonical
+  routes and prohibits the exact union of defaults rejected by the four
+  source-coupled semantic checkers.
+- Froze the implementation write set to registry, suite contract,
+  package-authority data, regenerated graph evidence, and serial plan records.
+  The legacy source, semantic checkers and fixtures, canonical standards,
+  README, engine, lockfiles, and source-closure manifests remain read-only.
+- Selected the existing whole-file text assertion; no new engine primitive,
+  fixture schema, heading boundary, policy assertion, wrapper, alternate
+  route, or source exception is authorized.
+- Verification: the focused package-authority suite, all 40 declarative
+  suites/186 checks, 37 engine tests, Python compilation, both plan-structure
+  checks, graph freshness at 235 Bash verifiers/240 nodes/1,023 edges/236
+  components, source immutability, diff integrity, and all 235 mixed checker
+  entrypoints passed.
+- Next slice: implement `M5-CP0` only after this admission commit is accepted.

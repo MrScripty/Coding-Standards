@@ -2395,9 +2395,13 @@ all structural/routing fixtures pass.
          dependency order; retire the temporary contract with source closure.
          Do not retain heading aliases, compatibility schemas, source
          exceptions, cross-owner semantic suites, or weaker checks.
-       - `7.4c3ve26` (`Active`): admit the migration-only Cross-Platform
-         whole-source prerequisite without changing normative policy, source
-         shape, or any semantic checker.
+       - `7.4c3ve26` (`Accepted planning authority`): admit the migration-only
+         Cross-Platform whole-source prerequisite as one registered text-only
+         suite over seven exact canonical routes and the union of prohibited
+         former defaults. Exclude the source, semantic checkers and fixtures,
+         canonical standards, README, engine, and closure manifests.
+       - `7.4c3ve27` (`Active`): implement admitted `M5-CP0` without changing
+         normative policy, source shape, or any semantic checker.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

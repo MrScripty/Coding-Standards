@@ -4,8 +4,9 @@
 
 **Current phase:** Milestone 5: Cross-Platform source-closure prerequisite
 
-**Next slice:** Admit `M5-CP0`, the bounded migration-only whole-source
-route/prohibition contract, before replacing any `F085` checker.
+**Next slice:** Implement admitted `M5-CP0`, the bounded migration-only
+whole-source route/prohibition contract, without changing the source or any
+semantic checker.
 
 **Acceptance status:** `pending`
 
@@ -966,6 +967,56 @@ and all replacement suites pass together. It must not become a permanent
 source exception, policy owner, compatibility schema, or duplicate assertion
 authority.
 
+#### M5-CP0 Package Admission: Whole-Source Prerequisite
+
+**Status:** `Accepted`
+
+**Owner:** verification-engine migration source closure
+
+**Observable outcome:** one registered text-only suite scans all of
+`CROSS-PLATFORM-STANDARDS.md` and requires the complete canonical route set
+while prohibiting the union of former platform-target, native-loading,
+native-release, and platform-evidence defaults. It asserts no heading, policy
+decision, disposition, or canonical-owner prose.
+
+**Exact implementation write set:**
+
+- `evaluation/standards-effectiveness/suite-registry.toml`;
+- `evaluation/standards-effectiveness/suites/cross-platform-source-closure-prerequisite.toml`;
+- the migration-package manifest and its validating suite;
+- generated checker structure/dependency node/edge/component inventories;
+- this plan, ledger, issues, checker-inventory report, and parent plan.
+
+`CROSS-PLATFORM-STANDARDS.md`, all semantic fixtures, all five semantic Bash
+checkers, canonical standards, README projections, engine source, lockfiles,
+and source-closure manifests are excluded.
+
+**Required routes:** platform-support Cross-Platform topic, Standards Router,
+filesystem Cross-Platform topic, Security containment, native-artifact-loading
+Cross-Platform topic, Release artifact plan, and Verification platform-evidence
+coverage.
+
+**Required prohibitions:** the exact union of fixed target/tier/Strategy/layout,
+fixed native extension/embedding/loading, fixed OS filename/class-local release,
+and fixed runner/schedule/fail-fast evidence defaults checked by the four
+current source slices.
+
+**No-fallback rule:** use the existing whole-file `text` assertion. Do not add
+an engine primitive, source heading, compatibility fixture/schema, source
+exception, policy assertion, alternate route, or Bash wrapper. The source must
+remain unchanged during implementation.
+
+**Acceptance gate:** the focused suite, all declarative suites, engine tests,
+Python compilation, package-authority suite, graph freshness, source-unchanged
+proof from the admission commit, diff integrity, and the complete mixed suite
+pass before the package becomes accepted.
+
+**Acceptance evidence:** the focused package-authority suite passed; all 40
+declarative suites/186 checks, 37 engine tests, Python compilation, both
+plan-structure checks, graph freshness at 235 Bash verifiers/240 nodes/1,023
+edges/236 components, source immutability, diff integrity, and all 235 mixed
+checker entrypoints passed.
+
 ### Milestone 4: Semantic Decision Migration
 
 **Goal:** Move repeated policy decision derivation from shell branches into
@@ -1005,8 +1056,8 @@ exact write set before implementation.
 
 **Tasks:**
 
-- [ ] Establish and verify `M5-CP0` without changing normative policy or the
-  legacy source.
+- [ ] Implement and verify admitted `M5-CP0` without changing normative policy
+  or the legacy source.
 - [ ] Convert transitive verifier calls into declared suite dependencies.
 - [ ] Migrate platform-target, native-loading, release-artifact,
   platform-evidence, and Rust target-configuration suites while preserving

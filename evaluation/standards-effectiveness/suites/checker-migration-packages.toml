@@ -8,7 +8,7 @@ id = "admitted-packages"
 type = "table"
 path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
 header = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
-row_count = 3
+row_count = 4
 non_empty = ["train_order", "package_id", "components", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 unique = [["train_order"], ["package_id"], ["components"]]
 
@@ -52,4 +52,15 @@ expected = [[
   "M3-DT2",
   "focused-suite,engine-tests,graph-freshness,declarative-all,removed-paths,complete-suite",
   "accepted",
+], [
+  "4",
+  "M5-CP0",
+  "source:CROSS-PLATFORM-STANDARDS.md",
+  "verification-engine.migration-source-closure",
+  "safety-critical",
+  "cross-platform-whole-source-route-prohibition-prerequisite",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/cross-platform-source-closure-prerequisite.toml,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M3-DT3,F085-option-1",
+  "focused-suite,engine-tests,graph-freshness,declarative-all,source-unchanged,complete-suite",
+  "admitted",
 ]]

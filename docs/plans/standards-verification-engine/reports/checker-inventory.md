@@ -512,3 +512,17 @@ accepted. That closure removes the transitional headings and the temporary
 whole-source contract together, preserving exact routes, dispositions,
 owner-local typed decisions, and source-wide prohibitions without a wrapper,
 compatibility schema, source exception, or cross-owner semantic suite.
+
+### Whole-Source Prerequisite Admission
+
+`M5-CP0` is admitted as a safety-critical migration package with no graph
+component because it replaces no semantic checker. Its implementation adds one
+registered text-only suite that scans the complete legacy source for seven
+canonical routes and the union of prohibited defaults currently distributed
+across four heading-bounded scripts.
+
+The package does not inspect headings and does not validate any canonical-owner
+semantics, decisions, dispositions, or accepted migration markers. Those
+remain with `M5-CP1` through `M5-CP5`. Its exact write set excludes the source
+and every semantic checker, which makes source immutability an admission-to-
+implementation verification condition rather than a convention.
