@@ -732,6 +732,26 @@ checker, fixture, registry, or canonical policy changes before selection.
 Trigger verification passed all 44 declarative suites and all 232 mixed
 checker entrypoints; the graph remains 237 nodes, 999 edges, and 233 components.
 
+### Typed Source-Preparation Verifier Authority
+
+Source preparation now identifies every exclusive verifier as either
+`checker:<repository-path>` or `suite:<repository-path>`. The eight preparation
+packages retain nine unique current checker paths, but path-only and unknown
+subjects are invalid. Symlink paths are invalid. Subject and resolved-path
+uniqueness prevent a checker and suite alias from claiming the same
+preparation authority.
+
+This shared contract creates the required transfer operation for M5-CP4+5:
+package `7.4c3.20` can replace its Rust Target `checker:` subject with the
+registered Rust Target `suite:` subject in the same atomic migration that
+deletes the Bash checker. The Bash-only root-README inventories remain
+unchanged until that migration and cannot treat suite subjects as Bash paths.
+
+Focused source-preparation and aggregate source-closure checks passed, as did
+all 44 declarative suites, 37 engine tests, Python compilation, graph freshness
+at 232 Bash verifiers / 237 nodes / 999 edges / 233 components, both plan
+checks, diff integrity, and all 232 mixed checker entrypoints.
+
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
 edges, and 235 components.

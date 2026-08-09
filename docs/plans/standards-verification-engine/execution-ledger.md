@@ -988,3 +988,24 @@
   freshness at 232 Bash verifiers / 237 nodes / 999 edges / 233 components,
   diff integrity, and all 232 mixed checker entrypoints.
 - Next slice: select the verifier-subject lifecycle before M5-CP4+5 admission.
+
+## 2026-08-08 - Typed Source-Preparation Verifier Subjects
+
+- Selected Option 1 and replaced the path-only `writable_checkers` field with
+  exact typed `writable_verifiers` authority.
+- Rewrote all nine existing values as `checker:<repository-path>` without
+  changing package ownership, source order, verifier paths, or preserved
+  evidence.
+- Restricted the validator to `checker:evaluation/standards-effectiveness/verify-*.sh`
+  and `suite:evaluation/standards-effectiveness/suites/*.toml`; unknown,
+  untyped, missing, symlink, duplicate-subject, and duplicate-path entries fail
+  closed.
+- Added no compatibility field, parser branch, alias, fallback, policy change,
+  suite, fixture, registry entry, or README-inventory exception.
+- Verification passed: focused source-preparation and aggregate source closure
+  for eight packages / nine exclusive verifier subjects; all 44 declarative
+  suites; 37 engine tests; Python compilation; graph freshness at 232 Bash
+  verifiers / 237 nodes / 999 edges / 233 components; both plan checks; diff
+  integrity; and all 232 mixed checker entrypoints.
+- Next slice: re-audit and admit atomic M5-CP4+5, including the same-commit Rust
+  `checker:` to `suite:` transfer and Bash-only README inventory reconciliation.

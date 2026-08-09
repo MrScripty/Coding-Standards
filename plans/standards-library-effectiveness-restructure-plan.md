@@ -2455,10 +2455,13 @@ all structural/routing fixtures pass.
          root-README inventory evidence and the exclusive writable verifier for
          future Rust Cross-Platform source closure. Deletion would break
          accepted migration authority; retention would create dual authority.
-       - `7.4c3ve39` (`Active`): select one canonical verifier-subject lifecycle
-         that preserves exclusive source-closure ownership and permits atomic
-         M5-CP4+5 replacement without wrappers, compatibility parsing, count
-         exceptions, or out-of-order source closure.
+       - `7.4c3ve39` (`Accepted`): replace source-preparation checker paths with
+         strict typed `checker:` and `suite:` verifier subjects; rewrite all
+         existing values atomically and reject untyped, unknown, missing, or
+         duplicate authority without compatibility parsing.
+       - `7.4c3ve40` (`Active`): re-audit and admit atomic M5-CP4+5 against the
+         typed verifier-subject contract, including exact future transfer of
+         Rust package `7.4c3.20` and Bash-only README inventory reconciliation.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

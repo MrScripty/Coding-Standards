@@ -189,12 +189,12 @@ Router, corpus, manifest, disposition, owner-map, generated, plan, findings,
 and ledger files remain read-only to preparation workers.
 
 Workers cannot edit shared acceptance state. Each worker returns a patch for
-its exclusive source, fixture directory, and listed checker set; the proposed
-single corpus-row transition; focused command results; and any semantic or
-write-set conflict. A worker cannot weaken owner, route, disposition, typed
-outcome, or negative-policy evidence to make an index pass. It cannot add a
-legacy-compatible branch, alternate title, permissive route, or inferred
-fixture value.
+its exclusive source, fixture directory, and listed verifier-subject set; the
+proposed single corpus-row transition; focused command results; and any
+semantic or write-set conflict. A worker cannot weaken owner, route,
+disposition, typed outcome, or negative-policy evidence to make an index pass.
+It cannot add a legacy-compatible branch, alternate title, permissive route,
+or inferred fixture value.
 
 A prepared package is not accepted evidence. The serial integration owner
 reviews semantic and mechanical changes separately, applies packages only in
@@ -211,7 +211,11 @@ cannot be bypassed by dropping a checker or preserving obsolete source prose.
 
 Preparation wave `p1` is frozen in
 `milestone-7-source-package-preparation.tsv`. Its eight packages have exclusive
-checker write sets and identical semantic preservation obligations.
+typed verifier-subject write sets and identical semantic preservation
+obligations. A subject is exactly `checker:<repository-path>` or
+`suite:<repository-path>`; untyped and unknown subjects are invalid, and each
+subject and resolved path is unique across the preparation wave. Missing and
+symlink paths are invalid.
 Architecture remains excluded from preparation wave `p1` because its three
 known mixed policy checkers inspect overlapping sections of one high-risk
 source; it requires one separately frozen Architecture package before work may

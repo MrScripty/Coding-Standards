@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: verifier-subject lifecycle re-plan
+**Current phase:** Milestone 5: atomic M5-CP4+5 audit and admission
 
-**Next slice:** Select one canonical verifier-subject lifecycle for source-
-closure preparation before admitting atomic `M5-CP4+5`.
+**Next slice:** Re-audit and admit atomic `M5-CP4+5` against the accepted typed
+verifier-subject authority.
 
 **Acceptance status:** `pending`
 
@@ -1361,7 +1361,7 @@ contains 232 Bash verifiers, 237 nodes, 999 edges, and 233 components.
 
 #### Source-Closure Verifier-Subject Re-plan Trigger
 
-**Status:** `Blocked`
+**Status:** `Accepted`
 
 The M5-CP4+5 audit confirmed the accepted semantic dependency direction:
 Platform Target is the generic prerequisite and Rust Target is its
@@ -1412,6 +1412,19 @@ are invalid options.
 **Recommendation:** select Option 1 in a dedicated shared-contract slice, run
 the complete suite, then re-audit and admit M5-CP4+5 against the resulting
 typed verifier authority.
+
+**Selected option:** Option 1. Source preparation now owns exact typed
+`checker:` and `suite:` verifier subjects. All nine existing subjects were
+rewritten atomically as `checker:` values; the validator rejects untyped,
+unknown, missing, symlink, duplicate-subject, and duplicate-path entries
+without a compatibility branch. No source package, verifier path, semantic
+evidence, or acceptance order changed.
+
+**Acceptance result:** focused source-preparation and aggregate source-closure
+checks passed for eight packages and nine exclusive verifier subjects. All 44
+declarative suites, 37 engine tests, Python compilation, graph freshness at
+232 Bash verifiers / 237 nodes / 999 edges / 233 components, both plan checks,
+diff integrity, and all 232 mixed checker entrypoints passed.
 
 **Trigger evidence:** both plan checks, all 44 declarative suites, graph
 freshness at 232 Bash verifiers / 237 nodes / 999 edges / 233 components, diff
