@@ -1,0 +1,74 @@
+schema_version = 1
+id = "core-simplicity"
+owner = "core.simplicity"
+description = "Simplicity from concern coherence, ownership, change axes, and invariants without file-length, construct-count, smallest-diff, or incumbent thresholds."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/core/simplicity-decisions.tsv"
+expected_column = "expected"
+default = "separate"
+[checks.domains]
+case = ["*"]
+coherence = ["multiple", "one"]
+ownership = ["clear", "split", "unknown"]
+change_axes = ["multiple", "one"]
+invariants = ["enforceable", "known", "unknown"]
+lifecycle = ["known"]
+failure = ["known"]
+metric = ["callsites", "count", "dependencies", "diff", "lines", "none", "types"]
+fallback = ["incumbent", "minimize", "none", "threshold"]
+expected = ["keep-together", "separate", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "metric", op = "ne", value = "none" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "ownership", op = "eq", value = "unknown" },
+  { field = "invariants", op = "eq", value = "unknown" },
+]
+[[checks.rules]]
+outcome = "keep-together"
+[checks.rules.when]
+all = [
+  { field = "coherence", op = "eq", value = "one" },
+  { field = "change_axes", op = "eq", value = "one" },
+]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "CORE-STANDARDS.md"
+required = ["reduction of entanglement and reasoning load", "Keep one coherent concern together", "More named components can be simpler", "Do not select a design from a file-length threshold"]
+prohibited = []
+
+[[checks]]
+id = "legacy"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["# Coding Standards Legacy Index"]
+prohibited = ["## Simplicity Principle"]
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0135\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\tconvert the Coding Standards title and introduction into a bounded migration index",
+  "STD-0136\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tdefine simplicity by entanglement ownership invariants and reasoning load rather than visible construct counts or smallest-diff fallback",
+]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bc` (`Accepted`)", "`7.4b8bd` (`Accepted`)"]
+prohibited = []

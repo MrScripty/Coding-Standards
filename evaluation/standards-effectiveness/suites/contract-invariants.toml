@@ -1,0 +1,83 @@
+schema_version = 1
+id = "contract-invariants"
+owner = "topic.contracts"
+description = "Owned invariant contracts, enforcement, and evidence without hidden caller, partial outcome, build-mode, logging, panic, or test-name fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/contracts/invariant-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+owner = ["clear", "unknown"]
+contract = ["complete", "unsupported", "violated"]
+caller_fact = ["establishable", "hidden", "not-required"]
+outcomes = ["complete", "partial"]
+enforcement = ["missing", "selected"]
+evidence = ["missing", "selected"]
+capability = ["available", "unavailable"]
+fallback = ["debug-only", "logging", "none", "panic", "test-name"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "caller_fact", op = "eq", value = "hidden" },
+  { field = "outcomes", op = "eq", value = "partial" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [{ field = "contract", op = "eq", value = "violated" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "contract", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "owner", op = "eq", value = "unknown" },
+  { field = "capability", op = "eq", value = "unavailable" },
+  { field = "enforcement", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "topics/contracts.md"
+required = ["## Invariant Contracts", "Preconditions describe facts", "mode alone does not decide", "Verification selects evidence", "Do not require one test per sentence", "debug-only enforcement"]
+prohibited = []
+
+[[checks]]
+id = "legacy-and-routes"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["topics/contracts.md#invariant-contracts", "workflows/verification.md#selecting-claims"]
+prohibited = ["### Validation Strategy", "Every invariant should have corresponding tests"]
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0167\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the invariants parent with routes to canonical Contracts and Verification authority",
+  "STD-0168\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tdocument material invariants at their canonical owner when meaning enforcement invalidation or outcomes are not evident",
+  "STD-0169\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tdefine owned observable invariant contracts without copied graph examples",
+  "STD-0170\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tdefine caller-establishable preconditions without transferring implementation obligations",
+  "STD-0171\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tdefine outcome-specific postconditions guaranteed by the operation",
+  "STD-0172\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tselect enforcement from authority impact boundaries mutation and proof lifetime without build-mode or failure-mechanism defaults",
+  "STD-0173\tCODING-STANDARDS.md\tworkflows/verification.md\trefine\tselect objective-aligned invariant evidence without mandatory test-per-invariant or test-name proof",
+]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bk` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []

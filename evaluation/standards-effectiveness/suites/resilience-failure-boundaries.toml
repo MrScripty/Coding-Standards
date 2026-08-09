@@ -1,0 +1,60 @@
+schema_version = 1
+id = "resilience-failure-boundaries"
+owner = "topic.resilience"
+description = "Failure representation and diagnostics at the narrowest owning boundary without exception, catch-all, duplicate, swallow, default, mandatory-trace, or context-free wrapping fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/resilience/failure-boundary-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+classification = ["contradictory", "declared"]
+owner = ["clear", "missing"]
+cause = ["missing", "preserved"]
+context = ["complete", "missing"]
+fallback = ["catch-all", "default", "duplicate", "exception", "none", "swallow", "trace-all", "wrap"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "classification", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "owner", op = "eq", value = "missing" },
+  { field = "cause", op = "eq", value = "missing" },
+  { field = "context", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "topics/resilience.md"
+required = ["## Failure Boundaries And Diagnostics", "narrowest", "Preserve original", "Do not mandate logging", "successful fallback"]
+prohibited = []
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0151\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace error handling with canonical Resilience routing",
+  "STD-0152\tCODING-STANDARDS.md\ttopics/resilience.md\trefine\tselect failure representation from language and operation contracts",
+  "STD-0153\tCODING-STANDARDS.md\ttopics/resilience.md\trefine\thandle failures at the narrowest boundary owning recovery outcome or diagnostics while preserving causes",
+  "STD-0154\tCODING-STANDARDS.md\ttopics/resilience.md\trefine\tderive bounded diagnostic context and channels from operator and application contracts",
+]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bg` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []

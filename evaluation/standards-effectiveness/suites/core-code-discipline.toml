@@ -1,0 +1,115 @@
+schema_version = 1
+id = "core-code-discipline"
+owner = "core.code-discipline"
+description = "Code and terminology decisions from owned concerns, invariants, lifecycle, and contracts without blanket extraction, DRY, call-count, smallest-diff, speculative, or incumbent fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/core/code-discipline-decisions.tsv"
+expected_column = "expected"
+default = "keep-name"
+[checks.domains]
+case = ["*"]
+concerns = ["multiple", "one"]
+ownership = ["clear", "none", "unknown"]
+invariants = ["different", "known", "none", "unknown"]
+lifecycle = ["active", "different", "known", "none"]
+contract = ["multiple", "none", "one", "supported"]
+divergence = ["none", "risk"]
+meaning = ["clear", "incorrect"]
+fallback = ["blanket-dry", "call-count", "incumbent", "none", "smallest-diff", "speculative"]
+expected = ["consolidate", "delete", "direct", "keep-name", "keep-separate", "preserve", "rename", "separate", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "ownership", op = "eq", value = "unknown" },
+  { field = "invariants", op = "eq", value = "unknown" },
+]
+[[checks.rules]]
+outcome = "delete"
+[checks.rules.when]
+all = [
+  { field = "ownership", op = "eq", value = "none" },
+  { field = "contract", op = "eq", value = "none" },
+]
+[[checks.rules]]
+outcome = "preserve"
+[checks.rules.when]
+all = [
+  { field = "contract", op = "eq", value = "supported" },
+  { field = "lifecycle", op = "eq", value = "active" },
+]
+[[checks.rules]]
+outcome = "rename"
+[checks.rules.when]
+all = [{ field = "meaning", op = "eq", value = "incorrect" }]
+[[checks.rules]]
+outcome = "consolidate"
+[checks.rules.when]
+all = [
+  { field = "divergence", op = "eq", value = "risk" },
+  { field = "contract", op = "eq", value = "one" },
+]
+[[checks.rules]]
+outcome = "keep-separate"
+[checks.rules.when]
+all = [
+  { field = "concerns", op = "eq", value = "multiple" },
+  { field = "contract", op = "eq", value = "multiple" },
+]
+[[checks.rules]]
+outcome = "separate"
+[checks.rules.when]
+all = [{ field = "concerns", op = "eq", value = "multiple" }]
+[[checks.rules]]
+outcome = "keep-name"
+[checks.rules.when]
+all = [{ field = "case", op = "eq", value = "descriptive_name" }]
+[[checks.rules]]
+outcome = "direct"
+[checks.rules.when]
+all = [{ field = "meaning", op = "eq", value = "clear" }]
+
+[[checks]]
+id = "owner"
+type = "text"
+path = "CORE-STANDARDS.md"
+required = ["### Code And Terminology Discipline", "call site may", "Do not apply blanket extraction", "Delete code, aliases, adapters", "Choose names from domain meaning", "Do not fall back to fixed call counts"]
+prohibited = []
+
+[[checks]]
+id = "legacy-and-route"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["CORE-STANDARDS.md#code-and-terminology-discipline"]
+prohibited = ["### Don't Repeat Yourself", "### Be Descriptive"]
+
+[[checks]]
+id = "dispositions"
+type = "text"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+required = [
+  "STD-0158\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the code-style parent with a route to canonical Core code discipline",
+  "STD-0159\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tselect code volume from owned behavior invariants lifecycle and reasoning load without universal brevity",
+  "STD-0160\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tbound change scope by objective ownership and demonstrated need without smallest-diff or incumbent fallback",
+  "STD-0161\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tcreate abstractions only when they own a concern callers can safely ignore without call-count defaults",
+  "STD-0162\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tconsolidate only the same owned contract when copies create divergence risk without blanket DRY",
+  "STD-0163\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tdelete unowned unsupported code while preserving only declared consumer state deployment or lifecycle obligations",
+  "STD-0164\tCODING-STANDARDS.md\tCODING-STANDARDS.md\tindex\treplace the naming parent with the canonical Core terminology route",
+  "STD-0165\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tderive names from domain role unit ownership lifecycle and observable effect",
+  "STD-0166\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tuse one term per concept and distinguish different concepts without incumbent or copied naming recipes",
+]
+prohibited = []
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bj` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []
