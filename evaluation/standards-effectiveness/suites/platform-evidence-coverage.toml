@@ -1,0 +1,104 @@
+schema_version = 1
+id = "platform-evidence-coverage"
+owner = "workflow.verification"
+description = "Complete real-environment platform evidence with project-selected scheduling, typed outcomes, and no target, environment, support, provider, orchestration, or success fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/verification/platform-evidence-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+support_contract = ["declared", "missing", "contradictory"]
+support = ["required", "best-effort", "unsupported"]
+target_coverage = ["complete", "partial", "unknown"]
+environment = ["matched", "simulated-substitute", "missing"]
+result = ["passed", "failed", "not-run"]
+schedule = ["risk-selected", "fixed", "unknown"]
+orchestration = ["project-selected", "fixed-fail-fast", "unknown"]
+fallback = ["none", "default-targets", "current-platform", "weaken-required", "provider-matrix", "fixed-triggers", "default-success"]
+expected = ["allow", "acceptance-blocked", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "support_contract", op = "eq", value = "contradictory" },
+  { field = "schedule", op = "eq", value = "fixed" },
+  { field = "orchestration", op = "eq", value = "fixed-fail-fast" },
+  { field = "environment", op = "eq", value = "simulated-substitute" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "support", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "support_contract", op = "eq", value = "missing" },
+  { field = "target_coverage", op = "eq", value = "unknown" },
+  { field = "schedule", op = "eq", value = "unknown" },
+  { field = "orchestration", op = "eq", value = "unknown" },
+]
+[[checks.rules]]
+outcome = "acceptance-blocked"
+[checks.rules.when]
+all = [
+  { field = "support", op = "eq", value = "required" },
+  { any = [
+    { field = "target_coverage", op = "eq", value = "partial" },
+    { field = "environment", op = "eq", value = "missing" },
+    { field = "result", op = "ne", value = "passed" },
+  ] },
+]
+
+[[checks]]
+id = "verification-owner"
+type = "text"
+path = "workflows/verification.md"
+required = [
+  "## Platform Evidence Coverage",
+  "record every required target",
+  "result from one target does not prove",
+  "remain explicit and cannot satisfy",
+  "Failure fan-out and early termination",
+  "required target result is missing",
+  "Do not infer Linux and Windows",
+  "fixed pre-commit",
+]
+prohibited = []
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0298", "CROSS-PLATFORM-STANDARDS.md", "workflows/verification.md", "refine", "map every declared platform-support claim to complete target evidence"],
+  ["STD-0299", "CROSS-PLATFORM-STANDARDS.md", "workflows/verification.md", "refine", "select evidence scheduling and orchestration from project risk and environment facts"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0298", "STD-0299"]
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8v` (`Accepted`)"]
+prohibited = []
+
+[[checks]]
+id = "removed-authority"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["registered `platform-evidence-coverage` suite"]
+prohibited = ["verify-platform-evidence-coverage.sh", "platform-evidence-*.tsv"]

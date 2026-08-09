@@ -1,5 +1,4 @@
 edge_type	source	target
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-decision-traceability.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
@@ -86,7 +85,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-source-package
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-rust-no-std-closure.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-rust-release-evidence.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-rust-target-configuration.sh
-contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh
 executable_reference	evaluation/standards-effectiveness/verify-accessibility-evidence-closure.sh	evaluation/standards-effectiveness/verify-accessibility-media.sh
 executable_reference	evaluation/standards-effectiveness/verify-accessibility-focus-lifecycle.sh	evaluation/standards-effectiveness/verify-accessibility-interaction-semantics.sh
 executable_reference	evaluation/standards-effectiveness/verify-accessibility-interaction-semantics.sh	evaluation/standards-effectiveness/verify-accessibility-owner-contract.sh
@@ -377,10 +375,6 @@ executable_reference	evaluation/standards-effectiveness/verify-performance-owner
 executable_reference	evaluation/standards-effectiveness/verify-persistence-owner-contract.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-plan-fixtures.sh	evaluation/standards-effectiveness/check-plan-structure.sh
 executable_reference	evaluation/standards-effectiveness/verify-planning-consolidation.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh	evaluation/standards-effectiveness/check-decision-table.sh
-executable_reference	evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh	evaluation/standards-effectiveness/verify-milestone-7-row-6-decomposition.sh
-executable_reference	evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh	evaluation/standards-effectiveness/verify-verification-ownership.sh
 executable_reference	evaluation/standards-effectiveness/verify-platform-target-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-platform-target-policy.sh	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh
 executable_reference	evaluation/standards-effectiveness/verify-platform-target-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
@@ -591,7 +585,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-milestone-7-trust-li
 helper_dependency	evaluation/standards-effectiveness/verify-network-transport-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-persistence-owner-contract.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-plan-fixtures.sh	evaluation/standards-effectiveness/check-plan-structure.sh
-helper_dependency	evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh	evaluation/standards-effectiveness/check-decision-table.sh
 helper_dependency	evaluation/standards-effectiveness/verify-platform-target-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-release-artifact-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-release-maintenance-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
@@ -881,9 +874,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-network-transport-
 verifier_dependency	evaluation/standards-effectiveness/verify-network-transport-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-performance-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-planning-consolidation.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh	evaluation/standards-effectiveness/verify-milestone-7-row-6-decomposition.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-platform-evidence-coverage.sh	evaluation/standards-effectiveness/verify-verification-ownership.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-platform-target-policy.sh	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-platform-target-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh	evaluation/standards-effectiveness/verify-documentation-decisions.sh

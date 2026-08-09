@@ -946,3 +946,24 @@
   nodes / 1,009 edges / 234 components, and all 233 mixed checker entrypoints.
 - Next slice: implement admitted M5-CP3 and prove the complete acceptance gate
   before commit.
+
+## 2026-08-08 - M5-CP3 Platform Evidence Coverage
+
+- Replaced the 66-line Bash checker with one registered five-check suite over
+  the retained 21-row decisions fixture.
+- Declared temporary M5-CP0 as the only suite dependency and removed nested
+  Verification Ownership, Row 6, and execution-train calls under VE019.
+- Preserved canonical Platform Evidence Coverage text, two exact dispositions,
+  accepted lineage, typed invalid/unsupported/unavailable/blocked outcomes,
+  and README projection.
+- Deleted redundant schema and observed-outcome mirrors; retained no wrapper,
+  compatibility input, heading boundary, duplicate ownership policy, target or
+  environment substitution, weakened support, provider inference, fixed
+  orchestration, or default success.
+- Verification passed: focused dependency execution (2 suites / 6 checks),
+  package authority, all 44 declarative suites, 37 engine tests, Python
+  compilation, graph freshness at 232 Bash verifiers / 237 nodes / 999 edges /
+  233 components, removed-path scans, protected-input immutability, both plan
+  checks, diff integrity, and all 232 mixed checker entrypoints.
+- Next slice: audit and admit atomic M5-CP4+5 Rust Target Configuration and
+  Platform Target Policy.

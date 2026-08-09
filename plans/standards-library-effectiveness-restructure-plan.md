@@ -2447,10 +2447,13 @@ all structural/routing fixtures pass.
          Evidence Coverage with its stable checker subject, 21 typed decisions,
          two exact dispositions, temporary M5-CP0 dependency, and accepted
          VE019 integration-gate classification.
-       - `7.4c3ve37` (`Active`): replace Platform Evidence Coverage with one
+       - `7.4c3ve37` (`Accepted`): replace Platform Evidence Coverage with one
          registered owner-bounded suite and delete its Bash checker and
          redundant mirrors without a wrapper, heading alias, duplicated
          ownership policy, environment substitution, or inferred fallback.
+       - `7.4c3ve38` (`Active`): audit and admit atomic M5-CP4+5 Rust Target
+         Configuration and Platform Target Policy as two owner-bounded suites
+         with one explicit specialization dependency and no dual authority.
      - `7.4c3hcp` (`Blocked`): after the engine dependency and Cross-Platform
        suites are accepted, close `CROSS-PLATFORM-STANDARDS.md` without
        transitional headings. Preserve every canonical owner, exact

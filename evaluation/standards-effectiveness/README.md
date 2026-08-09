@@ -393,12 +393,13 @@ identities, relationships, consumer information, or evidence plus fixed
 artifact counts, package/bundle defaults, framework names, example names,
 internal-input publication, and default success.
 
-`fixtures/verification/platform-evidence-*.tsv` and
-`verify-platform-evidence-coverage.sh` require complete evidence for declared
-target claims and project-selected scheduling. They prove two exact
-dispositions and reject fixed targets, current-platform substitution, weakened
-support, provider matrices, fixed triggers/fail-fast behavior, and default
-success.
+The registered `platform-evidence-coverage` suite evaluates
+`fixtures/verification/platform-evidence-decisions.tsv` to require complete
+real-environment evidence for declared target claims and project-selected
+scheduling and orchestration. It proves two exact dispositions and rejects
+fixed targets, current-platform or simulated-environment substitution,
+weakened support, provider matrices, fixed triggers/fail-fast behavior, and
+default success with typed outcomes.
 
 ## IPC Payload Decision Fixtures
 

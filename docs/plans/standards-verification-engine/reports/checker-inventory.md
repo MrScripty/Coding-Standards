@@ -690,6 +690,24 @@ Admission verification passed all 43 declarative suites, 37 engine tests, and
 all 233 mixed checker entrypoints. The admission graph contains 238 nodes,
 1,009 edges, and 234 components.
 
+### Platform Evidence Coverage Migration
+
+Accepted M5-CP3 replaces the stable Platform Evidence Coverage checker subject
+with one five-check suite. The suite retains the 21-row decisions fixture,
+depends once on temporary whole-source coverage, and owns only `STD-0298` and
+`STD-0299` platform-evidence semantics. The Bash checker and schema/observed
+mirrors are deleted; README projects the suite.
+
+The broader Verification Ownership and migration-lifecycle invocations do not
+become suite dependencies under VE019. Their removal eliminates nested
+execution without dropping support contracts, complete target evidence,
+real-environment proof, project-selected scheduling/orchestration, typed
+outcomes, dispositions, owner evidence, or no-fallback coverage.
+
+Acceptance verification passed all 44 declarative suites, 37 engine tests, and
+all 232 mixed checker entrypoints. The regenerated graph has 237 nodes, 999
+edges, and 233 components.
+
 Recovery verification passed all 42 declarative suites, 37 engine tests, and
 all 234 mixed checker entrypoints. The fresh graph remains 239 nodes, 1,015
 edges, and 235 components.

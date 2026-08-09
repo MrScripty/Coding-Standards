@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 5: Platform Evidence Coverage implementation
+**Current phase:** Milestone 5: Rust Target and Platform Target wave audit
 
-**Next slice:** Implement admitted `M5-CP3` Platform Evidence Coverage as one
-independent owner package.
+**Next slice:** Audit and admit atomic `M5-CP4+5` Rust Target Configuration and
+Platform Target Policy as the next dependency-connected owner wave.
 
 **Acceptance status:** `pending`
 
@@ -1334,6 +1334,30 @@ passed; 37 engine tests, Python compilation, both plan checks, protected-input
 immutability, and diff integrity passed. The admission graph is fresh at 233
 Bash verifiers, 238 nodes, 1,009 edges, and 234 components; all 233 mixed
 checker entrypoints passed.
+
+#### Package M5-CP3: Platform Evidence Coverage
+
+**Status:** `Accepted`
+
+**Owner:** `workflow.verification`
+
+**Observable outcome:** one registered five-check suite depends on M5-CP0,
+derives 21 ordered platform-evidence decisions, preserves canonical
+Verification policy, two exact dispositions, accepted lineage, and README
+projection, and executes the temporary whole-source prerequisite once before
+focused checks.
+
+**No-fallback result:** the Bash checker and redundant schema/observed mirrors
+are deleted. No Verification Ownership duplication, wrapper, heading range,
+compatibility input, default target set, current-platform or simulated-
+environment substitution, weakened support, provider inference, fixed
+orchestration, or default success remains.
+
+**Verification:** focused dependency execution passed 2 suites / 6 checks; all
+44 declarative suites, 37 engine tests, Python compilation, package authority,
+removed-path scans, protected-input immutability, both plan checks, diff
+integrity, and all 232 mixed checker entrypoints passed. The regenerated graph
+contains 232 Bash verifiers, 237 nodes, 999 edges, and 233 components.
 
 #### Migration-Package Stable-Identity Re-plan Trigger
 
