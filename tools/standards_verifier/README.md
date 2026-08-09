@@ -49,6 +49,32 @@ with inline expected TOML text encoded as UTF-8. It performs no newline,
 whitespace, Unicode, or encoding normalization and accepts only `id`, `type`,
 `path`, and `expected` fields.
 
+The `edge_dispositions` check validates migration packages against the exact
+generated executable graph. Packages opt in with a configured verification
+token. Every participating checker package must classify its complete outgoing
+`executable_reference`, `helper_dependency`, and `verifier_dependency` edge
+set. Admitted packages must name present edges; accepted packages must retain
+their historical rows while their checker and graph edges are absent.
+
+Each edge row has one of these dispositions and replacement forms:
+
+| Disposition | Replacement form |
+| --- | --- |
+| `native-engine` | `assertion:<suite-path>#<check-id>` |
+| `independent-gate` | `checker:<path>` |
+| `suite-requires` | `suite:<source-suite-id>-><target-suite-id>` |
+| `same-owner-package` | `package:<package-id>` |
+| `external-owned-artifact` | `artifact:<path>` |
+| `invalid/unresolved` | `unresolved:none` |
+
+Native assertions must name an existing check in a registered package-owned
+suite. Suite requirements must name an actual registry `requires` edge whose
+source suite is in the package write set. Retained checkers and external
+artifacts must equal the current edge target. Replacement and evidence paths
+are repository-contained regular files. An `invalid/unresolved` row may
+document an admitted blocker but cannot be accepted. The check never infers a
+disposition from graph shape or executes a replacement.
+
 ## Exit Status
 
 | Status | Meaning |

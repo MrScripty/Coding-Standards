@@ -1001,3 +1001,25 @@ parallel and integrated serially. True semantic dependencies become suite
 requirements, generic helper behavior uses native assertions, historical gates
 remain independent, and same-owner chains migrate together. M6-EDGE-1 builds
 the assertion before M6-EDGE-2 admits broad deletion packages.
+
+### Implemented M6-EDGE-1 Contract
+
+The registered `edge_dispositions` assertion now validates exact package,
+graph, and registry relations. It distinguishes all three executable edge
+types, requires exact admitted coverage and accepted absence, preserves edge
+history, checks owner and state agreement, and rejects unresolved acceptance.
+
+VE027 strengthened the first draft before acceptance. A native replacement now
+proves a registered package-owned suite and existing check ID. A suite
+replacement proves an actual registry `requires` edge whose source suite is in
+the package write set. Independent checkers and external artifacts equal the
+edge target; same-owner package references resolve through package authority.
+No nominal path-only evidence remains.
+
+Fifteen focused tests cover both lifecycle states, every disposition form,
+malformed schema, duplicates, package mismatch, missing and extra admitted
+edges, present accepted edges, unresolved acceptance, invalid assertion and
+suite evidence, empty package coverage, and path escape. All 57 engine tests,
+53 declarative suites, graph freshness at 223 Bash verifiers / 228 nodes / 983
+edges / 224 components, both plan checks, and all 223 mixed entrypoints passed.
+The contract slice changed no Bash checker or generated graph artifact.

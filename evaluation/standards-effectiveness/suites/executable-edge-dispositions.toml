@@ -1,0 +1,13 @@
+schema_version = 1
+id = "executable-edge-dispositions"
+owner = "verification-engine.migration"
+description = "Exact executable-edge dispositions for admitted checker packages"
+
+[[checks]]
+id = "edge-contract"
+type = "edge_dispositions"
+path = "evaluation/standards-effectiveness/executable-edge-dispositions.tsv"
+packages_path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
+edges_path = "evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv"
+registry_path = "evaluation/standards-effectiveness/suite-registry.toml"
+participation_token = "edge-dispositions"

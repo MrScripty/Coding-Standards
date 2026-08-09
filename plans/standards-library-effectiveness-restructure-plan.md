@@ -9,10 +9,11 @@
 **Current phase:** Cross-Platform source closure `7.4c3.7` and delegated
 verification-engine Milestone 5 are accepted. Seven of 27 former normative
 source entrypoints are derived. Verification-engine Milestone 6 Waves 1 and 2
-are accepted; VE026 Option 1 now establishes typed executable-edge semantics.
+and M6-EDGE-1 are accepted; exact typed executable-edge semantics now govern
+further checker deletion.
 
-**Next slice:** implement the delegated verification engine's generic typed
-executable-edge disposition assertion before Wave 3 admission.
+**Next slice:** classify shared executable targets and admit the delegated
+verification engine's first exact disjoint multi-owner wave.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: typed executable-edge contract
+**Current phase:** Milestone 6: accelerated multi-owner wave preparation
 
-**Next slice:** Implement and test the generic executable-edge disposition
-assertion before any Wave 3 package admission.
+**Next slice:** Classify shared executable targets and admit the first exact,
+disjoint multi-owner package wave through the accepted edge contract.
 
 **Acceptance status:** `pending`
 
@@ -2008,7 +2008,7 @@ bounded by semantic review and write-set overlap, not an arbitrary script count.
 
 #### Slice M6-EDGE-1: Generic Edge-Disposition Assertion
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 **Allowed write set:** one Python check module, check parser registration,
 focused engine tests/fixtures, one declarative contract suite, suite registry,
@@ -2025,6 +2025,35 @@ missing admitted edges, present accepted edges, unresolved acceptance, invalid
 replacement evidence, and path containment fail with typed diagnostics. The
 contract suite, all declarative suites, graph freshness, both plan checks, and
 the complete mixed suite pass.
+
+**Implementation:** the strict `edge_dispositions` check joins one exact TSV
+manifest to package authority, the generated graph, and the suite registry.
+Packages opt in explicitly. Their complete outgoing `executable_reference`,
+`helper_dependency`, and `verifier_dependency` sets must match while admitted;
+accepted packages retain historical rows only after their checker and graph
+edges are absent. Edge identity includes type so coincident dependency and
+reference edges cannot collapse.
+
+Replacement evidence is executable rather than nominal: native assertions
+name a registered package-owned suite and existing check ID; suite requirements
+name an actual registry `requires` edge whose source suite is package-owned;
+retained checker and external-artifact paths equal the edge target; same-owner
+packages resolve through package authority; and unresolved rows cannot be
+accepted. All paths remain contained and no replacement is executed.
+
+**Deviation:** the first implementation draft checked only replacement path
+existence. Semantic review found that fabricated assertion IDs or unproved
+suite dependencies could pass. VE027 records the pre-acceptance correction to
+registered assertion identity and actual registry-edge evidence. This
+strengthens the accepted contract without changing its objective or adding a
+fallback.
+
+**Verification:** all 15 focused edge tests and all 57 engine tests passed;
+all 53 registered suites passed; Python compilation, graph freshness at 223
+Bash verifiers / 228 nodes / 983 edges / 224 components, both plan checks, and
+diff integrity passed; and the complete mixed gate passed all 223 entrypoints.
+No Bash checker, generated graph artifact, policy source, wrapper, bridge, or
+compatibility path changed.
 
 #### Slice M6-EDGE-2: Accelerated Multi-Owner Wave
 

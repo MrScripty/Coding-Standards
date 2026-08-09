@@ -146,6 +146,11 @@ path = "evaluation/standards-effectiveness/suites/checker-migration-packages.tom
 requires = []
 
 [[suites]]
+id = "executable-edge-dispositions"
+path = "evaluation/standards-effectiveness/suites/executable-edge-dispositions.toml"
+requires = []
+
+[[suites]]
 id = "language-binding-surface-contract"
 path = "evaluation/standards-effectiveness/suites/language-binding-surface-contract.toml"
 requires = []

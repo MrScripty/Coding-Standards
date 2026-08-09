@@ -1311,3 +1311,27 @@
   high-fan-out targets are classified once. Shared manifests, registry, graph,
   and plans remain serial integration-owner files.
 - No implementation or Wave 3 package is admitted by this planning slice.
+
+## 2026-08-09 - M6-EDGE-1 Typed Edge Contract
+
+- Added one strict `edge_dispositions` engine check, an exact manifest, a
+  registered declarative suite, documentation, and 15 focused tests.
+- Joined opt-in package authority to all three executable graph edge types.
+  Admitted rows require exact current outgoing coverage; accepted rows require
+  checker and edge absence while preserving historical classifications.
+- Enforced unique typed edge identities, package/source/owner/state agreement,
+  contained evidence, same-owner package resolution, and rejection of accepted
+  unresolved rows.
+- Recorded VE027 during semantic review: path existence did not prove a named
+  assertion or suite dependency. Strengthened native evidence to a registered
+  package-owned suite/check ID and suite evidence to an actual registry
+  `requires` edge whose source suite is package-owned.
+- Retained no Bash bridge, wrapper, inferred disposition, wildcard,
+  compatibility schema, arbitrary execution, or silent success. No checker or
+  generated graph artifact changed in this contract-only slice.
+- Verification passed 15 focused tests, all 57 engine tests, Python
+  compilation, all 53 declarative suites, graph freshness at 223 Bash
+  verifiers / 228 nodes / 983 edges / 224 components, both plan checks, diff
+  integrity, and all 223 mixed entrypoints.
+- Next slice: classify shared targets once and admit the first disjoint
+  multi-owner package wave through the typed manifest.

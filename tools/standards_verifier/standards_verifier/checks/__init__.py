@@ -6,6 +6,7 @@ from ..diagnostics import Diagnostic, EngineError
 from ..model import Check
 from .acceptance_claims import parse_acceptance_claims_check
 from .decision import parse_decision_check
+from .edge_dispositions import parse_edge_dispositions_check
 from .exact_text import parse_exact_text_check
 from .relation import parse_relation_check
 from .table import parse_table_check
@@ -27,6 +28,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_text_check(raw, suite_id)
     if kind == "decision":
         return parse_decision_check(raw, suite_id)
+    if kind == "edge_dispositions":
+        return parse_edge_dispositions_check(raw, suite_id)
     if kind == "exact_text":
         return parse_exact_text_check(raw, suite_id)
     if kind == "table":
