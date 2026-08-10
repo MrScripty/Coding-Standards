@@ -2004,3 +2004,19 @@
   changed. Forty-three metadata-helper consumers remain. M6-L-W1 mixed
   verification is deferred; next slice is admitted M6-L4 Rust Dependency
   Owner.
+
+## 2026-08-09 - M6-L4 Rust Dependency Owner Acceptance
+
+- Added and registered one six-check suite preserving 14 typed dependency
+  mechanism decisions, direct Rust Dependency metadata closure, canonical
+  profile and routing evidence, and the exact `STD-0731` index disposition.
+- Deleted the Bash checker, accepted both helper edges, removed its row-35
+  dependency and consumer records, and reconciled fixed counts from 22/20/33
+  to 21/19/32 under the unchanged lifecycle schemas.
+- Focused suite, root-consumer and row-35 closure, package/edge authority, all
+  98 declarative suites, graph freshness at 178 Bash verifiers / 183 nodes /
+  895 edges / 179 components, both plan checks, route/removal/diff/read-only
+  evidence pass.
+- No source, fixture, engine, helper, schema, or unrelated lifecycle record
+  changed. Forty-two metadata-helper consumers remain. M6-L-W1 mixed
+  verification is deferred; next slice is admitted M6-L5 Rust Release Owner.

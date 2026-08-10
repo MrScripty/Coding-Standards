@@ -811,6 +811,11 @@ The registered `release-workflow-foundation` suite checks release and changelog
 applicability decisions, exact disposition of `STD-0531` through `STD-0540`,
 canonical workflow metadata and routing, and the optional-reference boundary.
 
+The registered `rust-dependency-owner-contract` suite checks 14 typed Rust
+dependency mechanism decisions, canonical profile metadata and routing, and
+the exact `STD-0731` parent-index disposition without manifest or tool
+fallback.
+
 The registered `release-reference-closure` suite checks exact disposition of
 `STD-0541` and `STD-0542`, validates the non-normative release-recipe owner
 and workflow route, and rejects any byte-level change that would restore policy

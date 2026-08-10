@@ -21,7 +21,6 @@ evaluation/standards-effectiveness/verify-rust-binding-executor-delegation.sh	no
 evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh	none	rust-profile-index
-evaluation/standards-effectiveness/verify-rust-dependency-owner-contract.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-external-input-queue.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-interop-memory.sh	none	rust-profile-index

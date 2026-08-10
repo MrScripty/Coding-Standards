@@ -1,0 +1,96 @@
+schema_version = 1
+id = "rust-dependency-owner-contract"
+owner = "profile.language.rust.dependencies"
+description = "Rust dependency mechanism authority and typed outcomes without incumbent-manifest, workspace, installed-tool, or command-success fallback."
+
+[[checks]]
+id = "mechanism-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/dependency-owner-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["accepted", "contradictory", "missing"]
+consumer = ["known", "unknown"]
+resolver = ["known", "unknown"]
+mechanism = ["manifest", "workspace", "graph", "audit-adapter", "measurement"]
+capability = ["supported", "unsupported"]
+fallback = ["none", "incumbent", "root-workspace", "installed-tool", "command-success"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "contract", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "contract", op = "eq", value = "missing" },
+  { field = "consumer", op = "eq", value = "unknown" },
+  { field = "resolver", op = "eq", value = "unknown" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unsupported"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "workflows/release.md",
+  "topics/contracts.md",
+  "topics/dependencies.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/dependencies.md",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/dependencies.md"
+required = [
+  "## Mechanism Authority",
+  "Generic owners select dependency requirements",
+  "Existing manifests",
+  "## Typed Outcomes",
+  "Do not fall back to the incumbent manifest",
+  "## Verification",
+]
+
+[[checks]]
+id = "router-route"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["profiles/languages/rust/dependencies.md"]
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
+required = ["[Rust dependency mechanisms](../../profiles/languages/rust/dependencies.md)"]
+
+[[checks]]
+id = "disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0731", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "profiles/languages/rust/dependencies.md", "index", "route the Rust dependency parent to the narrow Cargo mechanism specialization while generic policy and separately tracked legacy sections remain with their canonical owners"],
+]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0731"

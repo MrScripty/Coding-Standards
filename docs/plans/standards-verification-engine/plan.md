@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: M6-L1 through M6-L7 leaf wave
 
-**Next slice:** Implement admitted M6-L4 Rust Dependency Owner through fast
-package and lifecycle-transfer gates. M6-L5 through M6-L7 remain admitted and
+**Next slice:** Implement admitted M6-L5 Rust Release Owner through fast
+package and lifecycle-transfer gates. M6-L6 and M6-L7 remain admitted and
 read-only.
 
 **Acceptance status:** `pending`
@@ -2932,6 +2932,17 @@ suites and graph freshness at 179 Bash verifiers / 184 nodes / 902 edges / 180
 components pass. Forty-three metadata-helper consumers remain; no source,
 fixture, engine, helper, schema, or unrelated lifecycle record changed. The
 mixed checkpoint remains deferred to M6-L-W1.
+
+**M6-L4 result:** the registered `rust-dependency-owner-contract` suite
+preserves 14 typed mechanism decisions, direct Rust Dependency metadata
+closure, canonical profile policy and Router/index routes, and the exact
+`STD-0731` parent-index disposition. The Bash checker, both helper edges, its
+row-35 dependency, and its classified README-consumer record are absent.
+Row-35 passes at 21 dependencies / 19 direct route dependencies / 32 consumers.
+All 98 declarative suites and graph freshness at 178 Bash verifiers / 183 nodes
+/ 895 edges / 179 components pass. Forty-two metadata-helper consumers remain;
+no source, fixture, engine, helper, schema, or unrelated lifecycle record
+changed. The mixed checkpoint remains deferred to M6-L-W1.
 
 **Tasks:**
 

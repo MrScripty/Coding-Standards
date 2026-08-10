@@ -484,3 +484,8 @@ requires = []
 id = "release-workflow-foundation"
 path = "evaluation/standards-effectiveness/suites/release-workflow-foundation.toml"
 requires = []
+
+[[suites]]
+id = "rust-dependency-owner-contract"
+path = "evaluation/standards-effectiveness/suites/rust-dependency-owner-contract.toml"
+requires = []
