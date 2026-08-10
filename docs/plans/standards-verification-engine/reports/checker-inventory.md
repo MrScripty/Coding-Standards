@@ -1364,3 +1364,14 @@ Ten focused cases pass within 92 engine tests; all 92 declarative suites,
 compilation, graph and plan checks, and both 184-entrypoint shared-contract
 checkpoints pass. M6-K6 can now preserve all three artifact outcomes without
 fixture duplication, combined typing, snapshots, or Bash fallback.
+
+### Accepted M6-K6 Release Artifact
+
+The five-check direct suite plus accepted byte-exact index dependency parses
+the canonical five-row fixture once and independently preserves SBOM,
+checksum, and lockfile decisions. Unresolved lockfile ownership is typed
+unavailable. Exact migration evidence, direct metadata closure, canonical
+artifact/reproducibility policy, and removed legacy defaults remain enforced.
+The Bash checker and both helper edges are absent. All fast gates pass at 183
+Bash verifiers / 188 nodes / 902 edges / 184 components and 93 declarative
+suites; 47 helper consumers remain.

@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: M6-K4 through M6-K7 release wave
 
-**Next slice:** Implement admitted M6-K6 Release Artifact through the fast
-package gates; keep M6-K7 admitted and read-only.
+**Next slice:** Implement admitted M6-K7 Release Publication through the fast
+package gates, then run the M6-K-W1 closing mixed checkpoint.
 
 **Acceptance status:** `pending`
 
@@ -2814,6 +2814,18 @@ helper edges are absent. Focused dependency closure, package/edge authority,
 all 92 declarative suites, graph freshness at 184 Bash verifiers / 189 nodes /
 907 edges / 185 components, both plan checks, route/removal/diff/read-only
 evidence pass. The mixed checkpoint remains deferred to M6-K-W1 closure.
+
+**M6-K6 result:** the registered `release-artifact-policy` suite parses the
+single five-row matrix once and preserves independent SBOM, checksum, and
+lockfile outcomes, including typed unavailable when lockfile ownership cannot
+be resolved. It also preserves nine exact IDs/dispositions, direct metadata
+closure, canonical artifact/reproducibility policy, and removed legacy
+defaults through the accepted byte-exact index dependency. The checker and
+both helper edges are absent. Focused dependency closure, package/edge
+authority, all 93 declarative suites, graph freshness at 183 Bash verifiers /
+188 nodes / 902 edges / 184 components, both plan checks, and
+route/removal/diff/read-only evidence pass. Forty-seven helper consumers
+remain; the mixed checkpoint remains deferred to M6-K-W1 closure.
 
 **Tasks:**
 

@@ -645,7 +645,7 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/release-artifact-policy.toml,evaluation/standards-effectiveness/verify-release-artifact-policy.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-K5,VE030,VE037",
   "focused-suite,dependency-once,typed-unavailable,edge-dispositions,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-K-W1",
-  "admitted",
+  "accepted",
 ], [
   "58",
   "M6-K7",

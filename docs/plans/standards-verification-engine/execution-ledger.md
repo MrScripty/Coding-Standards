@@ -1892,3 +1892,23 @@
   184 closing mixed entrypoints pass.
 - Next slice: implement admitted M6-K6 Release Artifact with the accepted
   multi-output capability and fast package gates; keep M6-K7 read-only.
+
+## 2026-08-09 - M6-K6 Release Artifact Acceptance
+
+- Added and registered one multi-output Release Workflow suite that parses the
+  canonical five-row fixture once and independently derives SBOM, checksum,
+  and lockfile outcomes. Unresolved lockfile ownership remains typed
+  unavailable; no implicit default or fixture copy was introduced.
+- Preserved nine exact migration IDs/dispositions, direct metadata closure,
+  canonical artifact and reproducibility policy, removed legacy defaults, and
+  the accepted byte-exact Release index dependency.
+- Deleted `verify-release-artifact-policy.sh` and accepted both historical
+  helper edges without a helper call, wrapper, alias, compatibility path,
+  command action, or fallback.
+- Focused dependency closure, package/edge authority, all 93 declarative
+  suites, graph freshness at 183 Bash verifiers / 188 nodes / 902 edges / 184
+  components, both plan checks, route/removal/diff/read-only evidence pass.
+- No source, fixture, helper, engine, accepted dependency, or unrelated
+  consumer changed. Forty-seven helper consumers remain; the M6-K-W1 mixed
+  checkpoint remains deferred. Next slice is admitted M6-K7 Release
+  Publication.

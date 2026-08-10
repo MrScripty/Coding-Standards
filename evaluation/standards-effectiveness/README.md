@@ -821,8 +821,8 @@ or executable guidance in the legacy release index.
 changelog semantics, removal of fixed-format boilerplate, and the bounded
 legacy documentation migration index.
 
-`verify-release-artifact-policy.sh` checks artifact, SBOM, checksum, and
-lockfile decisions, exact disposition of `STD-0543` through `STD-0551`,
+The registered `release-artifact-policy` suite checks artifact, SBOM, checksum,
+and lockfile decisions, exact disposition of `STD-0543` through `STD-0551`,
 canonical artifact and reproducibility ownership, and dependent legacy sections
 for conflicting defaults.
 

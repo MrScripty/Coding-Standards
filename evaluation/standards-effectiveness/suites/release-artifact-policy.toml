@@ -1,0 +1,145 @@
+schema_version = 1
+id = "release-artifact-policy"
+owner = "workflow.release"
+description = "Fact-driven artifact, SBOM, checksum, and lockfile decisions with typed unresolved dependency-resolution ownership."
+
+[[checks]]
+id = "artifact-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/release/artifact-decisions.tsv"
+input_columns = [
+  "ships_artifact",
+  "bundles_dependencies",
+  "external_sbom_requirement",
+  "checksum_consumed",
+  "resolved_closure_source",
+  "consumer_resolves",
+]
+[checks.domains]
+case = ["*"]
+ships_artifact = ["yes", "no"]
+bundles_dependencies = ["yes", "no"]
+external_sbom_requirement = ["yes", "no"]
+checksum_consumed = ["yes", "no"]
+resolved_closure_source = ["yes", "no"]
+consumer_resolves = ["yes", "no"]
+expected_sbom = ["yes", "no"]
+expected_checksum = ["yes", "no"]
+expected_lockfile = ["yes", "no", "typed-unavailable"]
+
+[[checks.outputs]]
+column = "expected_sbom"
+default = "no"
+[[checks.outputs.rules]]
+outcome = "yes"
+[checks.outputs.rules.when]
+all = [
+  { field = "ships_artifact", op = "eq", value = "yes" },
+  { any = [
+    { field = "bundles_dependencies", op = "eq", value = "yes" },
+    { field = "external_sbom_requirement", op = "eq", value = "yes" },
+  ] },
+]
+
+[[checks.outputs]]
+column = "expected_checksum"
+default = "no"
+[[checks.outputs.rules]]
+outcome = "yes"
+[checks.outputs.rules.when]
+all = [
+  { field = "ships_artifact", op = "eq", value = "yes" },
+  { field = "checksum_consumed", op = "eq", value = "yes" },
+]
+
+[[checks.outputs]]
+column = "expected_lockfile"
+default = "typed-unavailable"
+[[checks.outputs.rules]]
+outcome = "yes"
+[checks.outputs.rules.when]
+all = [
+  { field = "ships_artifact", op = "eq", value = "yes" },
+  { field = "resolved_closure_source", op = "eq", value = "yes" },
+]
+[[checks.outputs.rules]]
+outcome = "no"
+[checks.outputs.rules.when]
+any = [
+  { field = "ships_artifact", op = "eq", value = "no" },
+  { field = "consumer_resolves", op = "eq", value = "yes" },
+]
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0543", "RELEASE-STANDARDS.md", "153", "2", "workflow", "split", "Release Artifacts"],
+  ["STD-0544", "RELEASE-STANDARDS.md", "155", "3", "workflow", "split", "What to Ship"],
+  ["STD-0545", "RELEASE-STANDARDS.md", "166", "3", "workflow", "split", "Naming Convention"],
+  ["STD-0546", "RELEASE-STANDARDS.md", "199", "3", "workflow", "split", "Checksum File Format"],
+  ["STD-0547", "RELEASE-STANDARDS.md", "216", "3", "workflow", "split", "Software Bill of Materials"],
+  ["STD-0548", "RELEASE-STANDARDS.md", "235", "2", "workflow", "split", "Reproducible Builds"],
+  ["STD-0549", "RELEASE-STANDARDS.md", "240", "3", "workflow", "split", "Toolchain Pinning"],
+  ["STD-0550", "RELEASE-STANDARDS.md", "252", "3", "workflow", "split", "Lockfile Policy"],
+  ["STD-0551", "RELEASE-STANDARDS.md", "265", "3", "workflow", "split", "Build Hygiene"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0543", "STD-0544", "STD-0545", "STD-0546", "STD-0547", "STD-0548", "STD-0549", "STD-0550", "STD-0551"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0543", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "fact-driven artifact plan"],
+  ["STD-0544", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "consumer-contract artifact selection"],
+  ["STD-0545", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "channel-unique artifact identity"],
+  ["STD-0546", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "conditional integrity metadata"],
+  ["STD-0547", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "risk-driven SBOM selection"],
+  ["STD-0548", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "evidence-bounded reproducibility claim"],
+  ["STD-0549", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "claim-driven build input pinning"],
+  ["STD-0550", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "resolution-contract lockfile ownership"],
+  ["STD-0551", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "nondeterministic build input control"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0543", "STD-0544", "STD-0545", "STD-0546", "STD-0547", "STD-0548", "STD-0549", "STD-0550", "STD-0551"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md"]
+
+[[checks]]
+id = "workflow-policy"
+type = "text"
+path = "workflows/release.md"
+required = [
+  "## Artifact Plan",
+  "## Reproducibility",
+  "Major version zero does not by itself",
+]
+prohibited = [
+  "SHA256 checksums | Always",
+  "Recommended for all releases",
+  "Commit lockfiles for applications; omit them for libraries.",
+  "not required for initial or pre-1.0 releases",
+  "Use GitHub's pre-release flag for `0.x.y`",
+  "Generate `checksums-sha256.txt`",
+  "Generate SBOM",
+]
