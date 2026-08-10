@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 6: M6-L1 through M6-L7 leaf wave
 
-**Next slice:** Implement admitted M6-L2 Documentation Reference through fast
-package and lifecycle-transfer gates. M6-L3 through M6-L7 remain admitted and
-read-only.
+**Next slice:** Implement admitted M6-L3 Release Workflow Foundation through
+fast package and lifecycle-transfer gates. M6-L4 through M6-L7 remain admitted
+and read-only.
 
 **Acceptance status:** `pending`
 
@@ -2910,6 +2910,16 @@ dependencies / 33 consumers. All 95 declarative suites and graph freshness at
 181 Bash verifiers / 186 nodes / 914 edges / 182 components pass. Forty-five
 metadata-helper consumers remain; the mixed checkpoint remains deferred to
 M6-L-W1.
+
+**M6-L2 result:** the registered `documentation-reference` suite preserves
+24 exact inventory/reference-disposition rows, native metadata closure, the
+non-normative recipe boundary, legacy routing, and negative evidence against
+blanket API, table-alignment, algorithm-template, and former-section rules.
+The Bash checker, both helper edges, and its exact row-35 dependency are
+absent. Row-35 passes at 23 dependencies / 21 direct route dependencies / 33
+consumers. All 96 declarative suites and graph freshness at 180 Bash verifiers
+/ 185 nodes / 908 edges / 181 components pass. Forty-four metadata-helper
+consumers remain; the mixed checkpoint remains deferred to M6-L-W1.
 
 **Tasks:**
 

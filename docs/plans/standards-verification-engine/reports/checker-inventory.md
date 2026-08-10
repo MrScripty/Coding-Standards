@@ -1414,3 +1414,13 @@ The Bash checker, both helper edges, and its row-35 dependency are absent.
 Row-35 passes at 24 dependencies / 22 direct route dependencies / 33 consumers;
 the graph has 181 Bash verifiers / 186 nodes / 914 edges / 182 components, 95
 declarative suites, and 45 remaining metadata-helper consumers.
+
+### Accepted M6-L2 Documentation Reference
+
+The five-check suite preserves 24 exact migration rows, native metadata,
+non-normative recipe authority, legacy routing, and negative evidence against
+blanket documentation and former-section rules. The Bash checker, both helper
+edges, and its row-35 dependency are absent. Row-35 passes at 23 dependencies /
+21 direct route dependencies / 33 consumers; the graph has 180 Bash verifiers
+/ 185 nodes / 908 edges / 181 components, 96 declarative suites, and 44
+remaining metadata-helper consumers.

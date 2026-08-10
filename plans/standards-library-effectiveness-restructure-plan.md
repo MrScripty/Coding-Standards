@@ -12,10 +12,11 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, and M6-EDGE-FREE are accepted; exact typed
 executable-edge semantics govern further checker deletion.
 
-**Next slice:** implement the delegated verification engine's admitted M6-L2
-Documentation Reference package, then continue in frozen order through M6-L7.
-M6-L1 is accepted. The inbound-free leaf wave uses fast package and lifecycle
-gates; run one mixed checkpoint after M6-L7 closes M6-L-W1.
+**Next slice:** implement the delegated verification engine's admitted M6-L3
+Release Workflow Foundation package, then continue in frozen order through
+M6-L7. M6-L1 and M6-L2 are accepted. The inbound-free leaf wave uses fast
+package and lifecycle gates; run one mixed checkpoint after M6-L7 closes
+M6-L-W1.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

@@ -797,7 +797,7 @@ fail-fast complete suite.
 68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
 legacy path is only a bounded migration index.
 
-`verify-documentation-reference.sh` proves exact disposition of frozen
+The registered `documentation-reference` suite proves exact disposition of frozen
 documentation identifiers `STD-0376` through `STD-0399`, validates the
 non-normative reference owner, and rejects restoration of the removed blanket
 API, TODO, table-alignment, and algorithm-template rules.

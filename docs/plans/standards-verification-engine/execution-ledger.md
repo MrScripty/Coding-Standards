@@ -1973,3 +1973,17 @@
   components, both plan checks, route/removal/diff/read-only evidence pass.
 - Forty-five metadata-helper consumers remain. M6-L-W1 mixed verification is
   deferred; next slice is admitted M6-L2 Documentation Reference.
+
+## 2026-08-09 - M6-L2 Documentation Reference Acceptance
+
+- Added and registered exact inventory/reference-disposition, metadata,
+  non-normative recipe, legacy-route, and removed-blanket-rule evidence without
+  a fixture, source, engine, helper, or schema change.
+- Deleted `verify-documentation-reference.sh`, accepted both helper edges,
+  removed its exact row-35 dependency, and reconciled fixed counts from 24/22
+  to 23/21 under the unchanged lifecycle schema.
+- Focused suite and row-35 closure, package/edge authority, all 96 declarative
+  suites, graph freshness at 180 Bash verifiers / 185 nodes / 908 edges / 181
+  components, both plan checks, route/removal/diff/read-only evidence pass.
+- Forty-four metadata-helper consumers remain. M6-L-W1 mixed verification is
+  deferred; next slice is admitted M6-L3 Release Workflow Foundation.
