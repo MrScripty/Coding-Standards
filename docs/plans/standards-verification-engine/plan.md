@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-L-W1 graph and ownership audit
+**Current phase:** Milestone 6: M6-M1 through M6-M3 low-coupling wave
 
-**Next slice:** Re-audit the fresh post-M6-L-W1 graph and freeze the next
-owner-coherent package before implementation. No later package is admitted.
+**Next slice:** Implement admitted M6-M1 Rust Async Blocking and Mutex, then
+continue in frozen order through M6-M3 and close M6-M-W1.
 
 **Acceptance status:** `pending`
 
@@ -2981,6 +2981,67 @@ all 175 remaining Bash entrypoints. Thirty-nine metadata-helper consumers
 remain; no source, fixture, engine, helper, schema, or unrelated lifecycle
 record changed. No later package is admitted; a fresh graph and ownership
 audit is required before implementation continues.
+
+#### M6-M1 Through M6-M3 Low-Coupling Semantic Wave
+
+**Goal:** Replace the three remaining metadata-helper consumers that have no
+executable callers and whose only non-metadata executable outputs are
+independently owned historical decomposition or lifecycle gates.
+
+**Admission evidence:** the fresh 175-verifier graph contains 39 metadata-helper
+consumers. Seven have no executable callers. Rust Async Blocking and Mutex,
+Rust Async Cancellation and Observability, and Rust Interop Memory call only
+the metadata helper plus retained decomposition/lifecycle checkers. The other
+four caller-free consumers depend on active semantic checkers across multiple
+owners and remain unadmitted.
+
+| Package | Owner | Direct contract | Independent gates | Lifecycle transfer |
+| --- | --- | --- | --- | --- |
+| M6-M1 | Rust Async profile | 18 typed blocking/synchronization decisions and two exact dispositions | Rust Async decomposition and trust/lifecycle re-plan | remove one row-35 consumer |
+| M6-M2 | Rust Async profile | 20 typed cancellation/observation decisions and two exact dispositions | Rust Async decomposition and trust/lifecycle re-plan | remove one row-35 consumer |
+| M6-M3 | Rust Interop profile | 22 typed foreign-memory decisions and five exact dispositions | F022/F023 decomposition | remove one row-35 dependency and consumer |
+
+**Declarative contract:** existing decision, metadata-graph, exact-row/table,
+and text checks preserve all three behaviors. M6-M3 applies source-wide
+prohibitions to the non-normative legacy Rust Interop index for executable
+examples and unsafe mechanism defaults. This is a reviewed conservative
+strengthening of the Bash check's former moved-section range: a legacy index
+cannot regain normative mechanism text in another section. It does not freeze
+the canonical Interop or Language Bindings owners. No engine, fixture, policy
+source, legacy source, helper, compatibility schema, wrapper, command action,
+heading-range alias, or fallback is admitted.
+
+**Edge contract:** metadata calls use direct native metadata assertions while
+the shared helper remains independently owned. Decomposition and trust calls
+are migration-lifecycle gates, not semantic policy prerequisites; each remains
+an independently executable checker and runs as an affected package gate. No
+suite duplicates those lifecycle contracts or retains a Bash invocation.
+
+**Lifecycle contract:** M6-M1 and M6-M2 each remove one exact row-35 consumer
+record. M6-M3 removes one exact dependency and consumer record. Fixed counts
+reconcile under the existing schemas from 19 dependencies / 17 direct route
+dependencies / 29 consumers to 18 / 16 / 26 after the complete wave. Any
+schema, allowed-value, owner, or interpretation change is a re-plan trigger.
+
+**Concurrency and integration:** M6-M1, M6-M2, and M6-M3 suite/checker paths
+are disjoint and may be prepared in isolated worktrees. Fixtures, canonical and
+legacy sources, engine, helper, registry, README, package/edge manifests,
+lifecycle inventories/checkers, generated graph, and plans remain read-only to
+package authors and serial integration-owner work.
+
+**Verification:** each package runs its focused dependency closure, package and
+edge authority, affected retained lifecycle gates, row-35/root audit, all
+declarative suites, graph freshness, both plan checks, route/removal/diff, and
+read-only evidence. The mixed Bash suite runs once after M6-M3 closes M6-M-W1.
+A source, fixture, engine, helper, schema, router, lifecycle-meaning, or shared
+edge-contract change requires an immediate checkpoint instead.
+
+**Re-plan triggers:** stop if a candidate gains an executable caller; an
+independent gate proves to be semantic policy authority; existing primitives
+cannot preserve typed outcomes, exact dispositions, or no-legacy evidence; a
+fixture or source must change; lifecycle rows cannot transfer exactly; package
+paths overlap outside serial integration files; or a shared contract must
+change.
 
 **Tasks:**
 

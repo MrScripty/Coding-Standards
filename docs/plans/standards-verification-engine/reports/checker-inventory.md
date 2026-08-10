@@ -1490,3 +1490,20 @@ closing checkpoint passed all 175 remaining Bash entrypoints. No source,
 fixture, engine, helper, schema, or unrelated lifecycle record changed. The
 admitted train is closed and the next package requires a fresh graph and
 ownership audit.
+
+### Admitted M6-M1 Through M6-M3 Low-Coupling Semantic Wave
+
+The fresh graph has 39 metadata-helper consumers and seven with no executable
+callers. Three are independently removable after exact edge review: Rust Async
+Blocking and Mutex, Rust Async Cancellation and Observability, and Rust
+Interop Memory. Their non-metadata calls are historical decomposition or
+lifecycle gates, not semantic policy prerequisites.
+
+The packages preserve 18, 20, and 22 typed decision cases and two, two, and
+five exact dispositions respectively. M6-M3 uses reviewed source-wide
+legacy-index prohibitions instead of a heading-range alias. The wave removes
+three row-35 consumer records and one dependency record, reaching 18
+dependencies / 16 direct route dependencies / 26 consumers and 36 remaining
+metadata-helper consumers after M6-M3. One mixed checkpoint closes M6-M-W1;
+the four caller-free semantic-dependent Rust Binding consumers remain
+unadmitted.

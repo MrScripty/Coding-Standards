@@ -2079,3 +2079,33 @@
   is a read-only fresh graph and ownership audit that must freeze the next
   owner, dependency closure, semantic contract, write set, edge dispositions,
   lifecycle transfers, and verification gates before implementation.
+
+## 2026-08-10 - M6-M1 Through M6-M3 Low-Coupling Wave Admission
+
+- Re-audited all 39 remaining metadata-helper consumers against the fresh
+  graph. Seven have no executable callers; three call only the helper plus
+  independently owned decomposition/lifecycle gates and are admitted. Four
+  caller-free Rust Binding consumers retain active semantic dependencies and
+  remain unadmitted.
+- Froze separate Rust Async Blocking and Mutex, Rust Async Cancellation and
+  Observability, and Rust Interop Memory packages. Existing declarative
+  decision, metadata, table, disposition, and text primitives preserve all 18,
+  20, and 22 decision cases plus exact owner evidence.
+- Classified Rust Async decomposition, trust/lifecycle re-plan, and F022/F023
+  decomposition calls as independent migration gates. They remain executable
+  package evidence and do not become duplicated suite dependencies or Bash
+  bridges.
+- Accepted source-wide legacy Rust Interop index prohibitions as conservative
+  no-legacy strengthening. They prohibit executable examples and unsafe
+  mechanism defaults from returning anywhere in a non-normative index without
+  freezing either canonical owner.
+- Froze exact row-35 reconciliation from 19 dependencies / 17 direct route
+  dependencies / 29 consumers to 18 / 16 / 26 after the full wave.
+- Package authors own only disjoint suite/checker paths. Shared manifests,
+  registry, README, lifecycle data/checkers, graph, and plans remain serial;
+  fixtures, sources, engine, helper, schema, and lockfiles remain read-only.
+- No checker, suite, fixture, source, engine, helper, lifecycle inventory,
+  registry, README, or lockfile changed during admission.
+- Next slice: implement M6-M1, then M6-M2 and M6-M3 in frozen order. Use fast
+  package and affected-lifecycle gates and run one mixed checkpoint at
+  M6-M-W1 closure unless a shared-contract re-plan trigger appears.
