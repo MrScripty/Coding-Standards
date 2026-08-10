@@ -816,6 +816,11 @@ dependency mechanism decisions, canonical profile metadata and routing, and
 the exact `STD-0731` parent-index disposition without manifest or tool
 fallback.
 
+The registered `rust-release-owner-contract` suite checks 16 typed Rust
+release mechanism decisions, canonical profile/reference metadata and routing,
+and the exact `STD-0810` parent-index disposition without metadata, tool,
+checklist, or command fallback.
+
 The registered `release-reference-closure` suite checks exact disposition of
 `STD-0541` and `STD-0542`, validates the non-normative release-recipe owner
 and workflow route, and rejects any byte-level change that would restore policy

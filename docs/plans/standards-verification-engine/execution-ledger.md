@@ -2020,3 +2020,20 @@
 - No source, fixture, engine, helper, schema, or unrelated lifecycle record
   changed. Forty-two metadata-helper consumers remain. M6-L-W1 mixed
   verification is deferred; next slice is admitted M6-L5 Rust Release Owner.
+
+## 2026-08-09 - M6-L5 Rust Release Owner Acceptance
+
+- Added and registered one seven-check suite preserving 16 typed release
+  mechanism decisions, direct Rust Release/reference metadata closure,
+  canonical profile/reference/routing evidence, and the exact `STD-0810`
+  index disposition.
+- Deleted the Bash checker, accepted both helper edges, removed its row-35
+  dependency and consumer records, and reconciled fixed counts from 21/19/32
+  to 20/18/31 under the unchanged lifecycle schemas.
+- Focused suite, root-consumer and row-35 closure, package/edge authority, all
+  99 declarative suites, graph freshness at 177 Bash verifiers / 182 nodes /
+  888 edges / 178 components, both plan checks, route/removal/diff/read-only
+  evidence pass.
+- No source, fixture, engine, helper, schema, or unrelated lifecycle record
+  changed. Forty-one metadata-helper consumers remain. M6-L-W1 mixed
+  verification is deferred; next slice is admitted M6-L6 Rust Tooling Owner.

@@ -1448,3 +1448,15 @@ Row-35 passes at 21 dependencies / 19 direct route dependencies / 32 consumers;
 the graph has 178 Bash verifiers / 183 nodes / 895 edges / 179 components, 98
 declarative suites, and 42 remaining metadata-helper consumers. No source,
 fixture, engine, helper, schema, or unrelated lifecycle record changed.
+
+### Accepted M6-L5 Rust Release Owner
+
+The seven-check suite preserves 16 typed mechanism decisions, direct Rust
+Release/reference metadata closure, canonical profile/reference policy and
+Router/index routes, and the exact `STD-0810` parent-index disposition. The
+Bash checker, both helper edges, its row-35 dependency, and its README-consumer
+record are absent. Row-35 passes at 20 dependencies / 18 direct route
+dependencies / 31 consumers; the graph has 177 Bash verifiers / 182 nodes /
+888 edges / 178 components, 99 declarative suites, and 41 remaining
+metadata-helper consumers. No source, fixture, engine, helper, schema, or
+unrelated lifecycle record changed.

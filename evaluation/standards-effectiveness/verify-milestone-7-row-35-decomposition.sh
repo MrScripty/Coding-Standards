@@ -25,10 +25,10 @@ mapfile -t validated < <(awk -F '\t' 'NR > 1 { print $1 }' "$V")
 [[ "$(awk -F '\t' '$1 >= "STD-0001" && $1 <= "STD-0005" && $2 != "STANDARDS-ROUTER.md" { n++ } END { print n+0 }' "$V")" -eq 0 ]]
 [[ "$(awk -F '\t' '$1 == "STD-0006" { print $2 FS $3 }' "$V")" == $'LICENSE\tindex' ]]
 
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$A")" -eq 21 ]]
+[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$A")" -eq 20 ]]
 [[ "$(awk -F '\t' 'NR > 1 && ($2 != "root-readme-route-or-catalog-assertion" && $2 != "transitive-root-readme-route-assertion" && $2 != "computed-root-readme-route-assertion") { n++ } END { print n+0 }' "$A")" -eq 0 ]]
 [[ "$(awk -F '\t' 'NR > 1 && ($3 != "canonical-router-or-owner-evidence" || NF != 3) { n++ } END { print n+0 }' "$A")" -eq 0 ]]
-[[ "$(awk -F '\t' '$2 == "root-readme-route-or-catalog-assertion" { n++ } END { print n+0 }' "$A")" -eq 19 ]]
+[[ "$(awk -F '\t' '$2 == "root-readme-route-or-catalog-assertion" { n++ } END { print n+0 }' "$A")" -eq 18 ]]
 [[ "$(awk -F '\t' '$2 == "transitive-root-readme-route-assertion" { n++ } END { print n+0 }' "$A")" -eq 1 ]]
 [[ "$(awk -F '\t' '$2 == "computed-root-readme-route-assertion" { n++ } END { print n+0 }' "$A")" -eq 1 ]]
 [[ "$(awk -F '\t' 'NR > 1 { print $1 }' "$A" | sort | uniq -d | wc -l)" -eq 0 ]]
@@ -37,7 +37,7 @@ while IFS=$'\t' read -r file current replacement; do
   [[ -f "$R/$file" ]]
 done < "$A"
 
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 32 ]]
+[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 31 ]]
 "$S/verify-root-readme-consumer-audit.sh"
 
 mapfile -t callers < <(awk -F '\t' 'NR > 1 { print $1 }' "$C" | sort)
@@ -67,5 +67,5 @@ rg -F -q '`7.4b25c` (`Accepted`)' "$P"
 "$S/verify-root-index-closure.sh"
 "$S/verify-root-router-evidence.sh"
 "$S/verify-milestone-7-execution-train.sh"
-printf 'Milestone 7 row-35 decomposition passed: 6 IDs across 2 serial closure children, 21 frozen checker dependencies, 32 classified README consumers, and %d shared-checker callers\n' \
+printf 'Milestone 7 row-35 decomposition passed: 6 IDs across 2 serial closure children, 20 frozen checker dependencies, 31 classified README consumers, and %d shared-checker callers\n' \
   "${#callers[@]}"
