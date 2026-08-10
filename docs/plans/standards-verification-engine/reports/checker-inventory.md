@@ -1460,3 +1460,15 @@ dependencies / 31 consumers; the graph has 177 Bash verifiers / 182 nodes /
 888 edges / 178 components, 99 declarative suites, and 41 remaining
 metadata-helper consumers. No source, fixture, engine, helper, schema, or
 unrelated lifecycle record changed.
+
+### Accepted M6-L6 Rust Tooling Owner
+
+The seven-check suite preserves 16 typed mechanism decisions, direct Rust
+Tooling/reference metadata closure, canonical profile/reference policy and
+Router/index routes, and the exact `STD-0831` parent-index disposition. The
+Bash checker, both helper edges, its row-35 dependency, and its README-consumer
+record are absent. Row-35 passes at 19 dependencies / 17 direct route
+dependencies / 30 consumers; the graph has 176 Bash verifiers / 181 nodes /
+881 edges / 177 components, 100 declarative suites, and 40 remaining
+metadata-helper consumers. No source, fixture, engine, helper, schema, or
+unrelated lifecycle record changed.

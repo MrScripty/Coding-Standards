@@ -1,0 +1,109 @@
+schema_version = 1
+id = "rust-tooling-owner-contract"
+owner = "profile.language.rust.tooling"
+description = "Rust tooling mechanism authority and typed outcomes without installed-tool, workspace-scope, status-label, or command-success fallback."
+
+[[checks]]
+id = "mechanism-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/tooling-owner-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["accepted", "contradictory", "missing"]
+scope = ["known", "unknown"]
+tool = ["selected", "missing"]
+target = ["known", "unknown"]
+mechanism = ["format", "lint", "test-runner", "feature-matrix", "benchmark", "build-script"]
+capability = ["supported", "unsupported"]
+fallback = ["none", "installed-tool", "workspace-scope", "required-label", "command-success"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "contract", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "contract", op = "eq", value = "missing" },
+  { field = "scope", op = "eq", value = "unknown" },
+  { field = "tool", op = "eq", value = "missing" },
+  { field = "target", op = "eq", value = "unknown" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unsupported"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/implementation.md",
+  "workflows/commit.md",
+  "workflows/verification.md",
+  "workflows/tooling.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/tooling.md",
+  "reference/recipes/rust-tooling.md",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/tooling.md"
+required = [
+  "## Mechanism Authority",
+  "Generic owners select claims",
+  "cannot create or complete generic policy",
+  "## Typed Outcomes",
+  "Do not fall back to an installed",
+  "## Verification",
+]
+
+[[checks]]
+id = "reference-boundary"
+type = "text"
+path = "reference/recipes/rust-tooling.md"
+required = [
+  "Level: `REFERENCE`",
+  "This material is non-normative",
+  "cannot select tools",
+]
+
+[[checks]]
+id = "router-route"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["profiles/languages/rust/tooling.md"]
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "languages/rust/RUST-TOOLING-STANDARDS.md"
+required = ["(../../profiles/languages/rust/tooling.md)"]
+
+[[checks]]
+id = "disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0831", "languages/rust/RUST-TOOLING-STANDARDS.md", "profiles/languages/rust/tooling.md", "index", "route the Rust tooling parent to the narrow Rust and Cargo mechanism specialization while generic policy recipes and separately tracked legacy sections remain with their canonical owners"],
+]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0831"

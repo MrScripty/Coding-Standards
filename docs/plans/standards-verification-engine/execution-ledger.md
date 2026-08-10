@@ -2037,3 +2037,21 @@
 - No source, fixture, engine, helper, schema, or unrelated lifecycle record
   changed. Forty-one metadata-helper consumers remain. M6-L-W1 mixed
   verification is deferred; next slice is admitted M6-L6 Rust Tooling Owner.
+
+## 2026-08-09 - M6-L6 Rust Tooling Owner Acceptance
+
+- Added and registered one seven-check suite preserving 16 typed tooling
+  mechanism decisions, direct Rust Tooling/reference metadata closure,
+  canonical profile/reference/routing evidence, and the exact `STD-0831`
+  index disposition.
+- Deleted the Bash checker, accepted both helper edges, removed its row-35
+  dependency and consumer records, and reconciled fixed counts from 20/18/31
+  to 19/17/30 under the unchanged lifecycle schemas.
+- Focused suite, root-consumer and row-35 closure, package/edge authority, all
+  100 declarative suites, graph freshness at 176 Bash verifiers / 181 nodes /
+  881 edges / 177 components, both plan checks, route/removal/diff/read-only
+  evidence pass.
+- No source, fixture, engine, helper, schema, or unrelated lifecycle record
+  changed. Forty metadata-helper consumers remain. M6-L-W1 mixed verification
+  is deferred; next slice is admitted M6-L7 Rust Dependency Candidate
+  Inspection.

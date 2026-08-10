@@ -4,8 +4,9 @@
 
 **Current phase:** Milestone 6: M6-L1 through M6-L7 leaf wave
 
-**Next slice:** Implement admitted M6-L6 Rust Tooling Owner through fast
-package and lifecycle-transfer gates. M6-L7 remains admitted and read-only.
+**Next slice:** Implement admitted M6-L7 Rust Dependency Candidate Inspection,
+run its source-package lifecycle transfer, then close M6-L-W1 with the mixed
+Bash checkpoint.
 
 **Acceptance status:** `pending`
 
@@ -2953,6 +2954,17 @@ consumers. All 99 declarative suites and graph freshness at 177 Bash verifiers
 / 182 nodes / 888 edges / 178 components pass. Forty-one metadata-helper
 consumers remain; no source, fixture, engine, helper, schema, or unrelated
 lifecycle record changed. The mixed checkpoint remains deferred to M6-L-W1.
+
+**M6-L6 result:** the registered `rust-tooling-owner-contract` suite
+preserves 16 typed mechanism decisions, direct Rust Tooling/reference metadata
+closure, canonical profile/reference policy and Router/index routes, and the
+exact `STD-0831` parent-index disposition. The Bash checker, both helper
+edges, its row-35 dependency, and its classified README-consumer record are
+absent. Row-35 passes at 19 dependencies / 17 direct route dependencies / 30
+consumers. All 100 declarative suites and graph freshness at 176 Bash verifiers
+/ 181 nodes / 881 edges / 177 components pass. Forty metadata-helper consumers
+remain; no source, fixture, engine, helper, schema, or unrelated lifecycle
+record changed. The mixed checkpoint remains deferred to M6-L-W1.
 
 **Tasks:**
 
