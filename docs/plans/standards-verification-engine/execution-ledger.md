@@ -1959,3 +1959,17 @@
 - Next slice: implement M6-L1, then continue in frozen order through M6-L7.
   Use fast package/lifecycle gates and run one mixed checkpoint at M6-L-W1
   closure unless a shared-contract re-plan trigger appears.
+
+## 2026-08-09 - M6-L1 Documentation Changelog Acceptance
+
+- Added and registered exact inventory/disposition, metadata, legacy-index,
+  canonical Release changelog, and removed-boilerplate evidence without a
+  fixture, source, engine, helper, or schema change.
+- Deleted `verify-documentation-changelog-closure.sh`, accepted both helper
+  edges, removed its exact row-35 dependency, and reconciled fixed counts from
+  25/23 to 24/22 under the unchanged lifecycle schema.
+- Focused suite and row-35 closure, package/edge authority, all 95 declarative
+  suites, graph freshness at 181 Bash verifiers / 186 nodes / 914 edges / 182
+  components, both plan checks, route/removal/diff/read-only evidence pass.
+- Forty-five metadata-helper consumers remain. M6-L-W1 mixed verification is
+  deferred; next slice is admitted M6-L2 Documentation Reference.

@@ -469,3 +469,8 @@ requires = ["release-reference-closure"]
 id = "release-publication-policy"
 path = "evaluation/standards-effectiveness/suites/release-publication-policy.toml"
 requires = ["release-reference-closure"]
+
+[[suites]]
+id = "documentation-changelog-closure"
+path = "evaluation/standards-effectiveness/suites/documentation-changelog-closure.toml"
+requires = []

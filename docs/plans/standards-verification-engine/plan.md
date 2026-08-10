@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: M6-L1 through M6-L7 leaf wave
 
-**Next slice:** Implement admitted M6-L1 Documentation Changelog through fast
-package and lifecycle-transfer gates. M6-L2 through M6-L7 remain admitted and
+**Next slice:** Implement admitted M6-L2 Documentation Reference through fast
+package and lifecycle-transfer gates. M6-L3 through M6-L7 remain admitted and
 read-only.
 
 **Acceptance status:** `pending`
@@ -2899,6 +2899,17 @@ checker; a fixture or source must change; existing primitives cannot preserve
 typed outcomes or exact evidence; package paths overlap outside serial
 integration files; M6-L7 cannot transfer source-preparation authority directly
 to a registered suite; or a lifecycle schema/meaning change is required.
+
+**M6-L1 result:** the registered `documentation-changelog-closure` suite
+preserves 16 exact inventory/disposition rows, direct Release metadata closure,
+all canonical changelog requirements, the three-route Documentation index, and
+negative evidence against seven former headings plus fixed-format/stale
+examples. The Bash checker, both helper edges, and its exact row-35 dependency
+are absent. Row-35 reconciliation passes at 24 dependencies / 22 direct route
+dependencies / 33 consumers. All 95 declarative suites and graph freshness at
+181 Bash verifiers / 186 nodes / 914 edges / 182 components pass. Forty-five
+metadata-helper consumers remain; the mixed checkpoint remains deferred to
+M6-L-W1.
 
 **Tasks:**
 

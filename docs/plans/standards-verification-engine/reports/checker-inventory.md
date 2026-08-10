@@ -1404,3 +1404,13 @@ engine, or helper changes. Frozen row-35 references transfer with checker
 deletion under the unchanged lifecycle schema; candidate inspection also
 transfers its source-preparation subject directly to registered suite evidence.
 The other 39 helper consumers remain unadmitted connected work.
+
+### Accepted M6-L1 Documentation Changelog
+
+The five-check suite preserves 16 exact migration rows, direct Release metadata
+closure, canonical changelog requirements, Documentation-index routes, and
+negative evidence against former headings and fixed-format/stale examples.
+The Bash checker, both helper edges, and its row-35 dependency are absent.
+Row-35 passes at 24 dependencies / 22 direct route dependencies / 33 consumers;
+the graph has 181 Bash verifiers / 186 nodes / 914 edges / 182 components, 95
+declarative suites, and 45 remaining metadata-helper consumers.
