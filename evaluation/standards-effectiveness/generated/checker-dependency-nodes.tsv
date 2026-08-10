@@ -40,12 +40,12 @@ evaluation/standards-effectiveness/verify-declarative-suites.sh	verifier	yes	com
 evaluation/standards-effectiveness/verify-dependencies-owner-contract.sh	verifier	yes	component-0039	1	no	4	3	1	3	4
 evaluation/standards-effectiveness/verify-dependencies-population.sh	verifier	yes	component-0040	1	no	6	0	0	0	4
 evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh	verifier	yes	component-0041	1	no	5	0	1	0	2
-evaluation/standards-effectiveness/verify-documentation-changelog-closure.sh	verifier	yes	component-0042	1	no	1	0	1	0	1
+evaluation/standards-effectiveness/verify-documentation-changelog-closure.sh	verifier	yes	component-0042	1	no	1	0	4	0	1
 evaluation/standards-effectiveness/verify-documentation-decisions.sh	verifier	yes	component-0043	1	no	0	4	0	4	0
 evaluation/standards-effectiveness/verify-documentation-directory-readme-closure.sh	verifier	yes	component-0044	1	no	2	1	0	1	2
 evaluation/standards-effectiveness/verify-documentation-index-closure.sh	verifier	yes	component-0045	1	no	4	0	0	0	4
 evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh	verifier	yes	component-0046	1	no	1	5	1	5	1
-evaluation/standards-effectiveness/verify-documentation-reference.sh	verifier	yes	component-0047	1	no	1	0	1	0	1
+evaluation/standards-effectiveness/verify-documentation-reference.sh	verifier	yes	component-0047	1	no	1	0	4	0	1
 evaluation/standards-effectiveness/verify-errexit-zero-accumulation.sh	verifier	yes	component-0048	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh	verifier	yes	component-0049	1	no	1	4	1	4	1
 evaluation/standards-effectiveness/verify-frontend-applicability.sh	verifier	yes	component-0050	1	no	0	1	0	1	0
@@ -114,7 +114,7 @@ evaluation/standards-effectiveness/verify-milestone-7-row-7-decomposition.sh	ver
 evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh	verifier	yes	component-0112	1	no	4	4	0	4	2
 evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh	verifier	yes	component-0113	1	no	2	5	0	5	2
 evaluation/standards-effectiveness/verify-milestone-7-security-checker-repair-replan.sh	verifier	yes	component-0114	1	no	0	0	0	0	0
-evaluation/standards-effectiveness/verify-milestone-7-source-package-preparation.sh	verifier	yes	component-0115	1	no	0	1	0	1	0
+evaluation/standards-effectiveness/verify-milestone-7-source-package-preparation.sh	verifier	yes	component-0115	1	no	0	1	2	1	0
 evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	verifier	yes	component-0116	1	no	3	5	0	5	4
 evaluation/standards-effectiveness/verify-network-transport-policy.sh	verifier	yes	component-0117	1	no	6	2	1	2	3
 evaluation/standards-effectiveness/verify-owner-state-transitions.sh	verifier	yes	component-0118	1	no	0	1	0	1	0
@@ -130,7 +130,7 @@ evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh	
 evaluation/standards-effectiveness/verify-release-binding-generation-procedure.sh	verifier	yes	component-0128	1	no	5	0	0	0	2
 evaluation/standards-effectiveness/verify-release-build-procedure.sh	verifier	yes	component-0129	1	no	5	0	0	0	2
 evaluation/standards-effectiveness/verify-release-procedure-policy.sh	verifier	yes	component-0130	1	no	1	1	1	1	1
-evaluation/standards-effectiveness/verify-release-workflow-foundation.sh	verifier	yes	component-0131	1	no	1	0	1	0	1
+evaluation/standards-effectiveness/verify-release-workflow-foundation.sh	verifier	yes	component-0131	1	no	1	0	4	0	1
 evaluation/standards-effectiveness/verify-resilience-owner-contract.sh	verifier	yes	component-0132	1	no	4	3	0	3	2
 evaluation/standards-effectiveness/verify-resilience-recovery-policy.sh	verifier	yes	component-0133	1	no	5	0	0	0	2
 evaluation/standards-effectiveness/verify-review-template-projection.sh	verifier	yes	component-0134	1	no	0	1	0	1	0
@@ -160,8 +160,8 @@ evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	verifier	yes	c
 evaluation/standards-effectiveness/verify-rust-binding-title-index-closure.sh	verifier	yes	component-0157	1	no	7	1	0	0	8
 evaluation/standards-effectiveness/verify-rust-binding-workspace-evidence.sh	verifier	yes	component-0158	1	no	7	1	0	1	4
 evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	verifier	yes	component-0159	1	no	1	3	1	3	2
-evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh	verifier	yes	component-0160	1	no	1	0	2	0	1
-evaluation/standards-effectiveness/verify-rust-dependency-owner-contract.sh	verifier	yes	component-0161	1	no	1	0	2	0	1
+evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh	verifier	yes	component-0160	1	no	1	0	5	0	1
+evaluation/standards-effectiveness/verify-rust-dependency-owner-contract.sh	verifier	yes	component-0161	1	no	1	0	5	0	1
 evaluation/standards-effectiveness/verify-rust-external-input-queue.sh	verifier	yes	component-0162	1	no	6	2	1	2	3
 evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh	verifier	yes	component-0163	1	no	5	3	1	3	3
 evaluation/standards-effectiveness/verify-rust-index-closure.sh	verifier	yes	component-0107	4	yes	5	1	0	1	3
@@ -169,11 +169,11 @@ evaluation/standards-effectiveness/verify-rust-interop-memory.sh	verifier	yes	co
 evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh	verifier	yes	component-0165	1	no	5	3	1	3	3
 evaluation/standards-effectiveness/verify-rust-no-std-closure.sh	verifier	yes	component-0166	1	no	0	1	1	1	0
 evaluation/standards-effectiveness/verify-rust-profile-authority-closure.sh	verifier	yes	component-0107	4	yes	5	3	1	3	7
-evaluation/standards-effectiveness/verify-rust-release-owner-contract.sh	verifier	yes	component-0167	1	no	1	0	2	0	1
+evaluation/standards-effectiveness/verify-rust-release-owner-contract.sh	verifier	yes	component-0167	1	no	1	0	5	0	1
 evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh	verifier	yes	component-0168	1	no	6	2	0	2	3
 evaluation/standards-effectiveness/verify-rust-security-title-index-closure.sh	verifier	yes	component-0169	1	no	10	1	0	0	8
 evaluation/standards-effectiveness/verify-rust-tooling-criterion.sh	verifier	yes	component-0170	1	no	0	2	0	2	0
-evaluation/standards-effectiveness/verify-rust-tooling-owner-contract.sh	verifier	yes	component-0171	1	no	1	0	2	0	1
+evaluation/standards-effectiveness/verify-rust-tooling-owner-contract.sh	verifier	yes	component-0171	1	no	1	0	5	0	1
 evaluation/standards-effectiveness/verify-rust-unsafe-contracts.sh	verifier	yes	component-0172	1	no	1	2	1	2	2
 evaluation/standards-effectiveness/verify-rust-wire-representation.sh	verifier	yes	component-0173	1	no	6	1	1	1	4
 evaluation/standards-effectiveness/verify-s1-routing.sh	verifier	yes	component-0174	1	no	1	1	1	0	1

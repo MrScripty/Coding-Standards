@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-K-W1 accepted; next package requires audit
+**Current phase:** Milestone 6: M6-L1 through M6-L7 leaf wave
 
-**Next slice:** Re-audit the fresh dependency graph and admit the next
-owner-coherent helper-consumer package. No post-M6-K7 package is currently
-admitted.
+**Next slice:** Implement admitted M6-L1 Documentation Changelog through fast
+package and lifecycle-transfer gates. M6-L2 through M6-L7 remain admitted and
+read-only.
 
 **Acceptance status:** `pending`
 
@@ -2840,6 +2840,65 @@ and route/removal/diff/read-only evidence pass. The one M6-K-W1 closing mixed
 checkpoint passed all 182 remaining Bash entrypoints. Forty-six metadata-helper
 consumers remain. No later package is admitted; a fresh dependency and
 ownership audit is required before implementation continues.
+
+#### M6-L1 Through M6-L7 Inbound-Free Leaf Wave
+
+**Goal:** Replace the seven remaining metadata-helper consumers that have zero
+executable inbound callers and zero non-metadata executable dependencies while
+preserving their independent owners, exact lifecycle evidence, and one bounded
+wave checkpoint.
+
+**Admission evidence:** the fresh graph contains 46 metadata-helper consumers.
+Exactly seven are executable leaves after excluding the helper: Documentation
+Changelog, Documentation Reference, Release Workflow Foundation, Rust
+Dependency Owner, Rust Release Owner, Rust Tooling Owner, and Rust Dependency
+Candidate Inspection. Each has only the metadata helper as executable output.
+All seven are named by frozen lifecycle inventories but none is an executable
+prerequisite of another checker.
+
+| Package | Owner | Direct contract | Lifecycle transfer |
+| --- | --- | --- | --- |
+| M6-L1 | Release Workflow | 16 exact changelog dispositions and canonical changelog policy | remove one row-35 dependency |
+| M6-L2 | Documentation Reference | 24 exact reference dispositions and non-normative recipe boundary | remove one row-35 dependency |
+| M6-L3 | Release Workflow | release/changelog two-output decision and ten exact dispositions | remove one row-35 dependency |
+| M6-L4 | Rust Dependency profile | 14 typed mechanism decisions and one exact index disposition | remove row-35 dependency and consumer rows |
+| M6-L5 | Rust Release profile | 16 typed mechanism decisions and one exact index disposition | remove row-35 dependency and consumer rows |
+| M6-L6 | Rust Tooling profile | 16 typed mechanism decisions and one exact index disposition | remove row-35 dependency and consumer rows |
+| M6-L7 | Rust Dependency profile | 14 typed inspection decisions and three exact dispositions | remove one row-35 consumer and replace one source-preparation checker subject with suite evidence |
+
+**Declarative contract:** existing decision, multi-output decision, table,
+metadata-graph, and text checks represent all seven behaviors. No engine,
+fixture, canonical source, legacy source, helper, compatibility schema,
+wrapper, command action, regex approximation, or fallback is admitted.
+
+**Lifecycle contract:** removing a checker also removes its exact row-35
+dependency/consumer records and updates only the fixed counts and diagnostics
+that describe those records. M6-L7 replaces its source-preparation
+`checker:` subject with its registered `suite:` subject. These are
+data-lifecycle reconciliations under the existing schema, not schema or
+semantic changes. Any required change to allowed values, columns, ownership,
+or interpretation is a shared-contract re-plan trigger.
+
+**Concurrency and integration:** package authors may prepare only their
+exclusive suite and checker paths in isolated worktrees. Fixtures, policy,
+engine, helper, and shared lifecycle files remain read-only to package authors.
+The integration owner applies registry, README, package/edge authority,
+row-35/source-preparation reconciliation, generated graph, and plan records
+serially in M6-L1 through M6-L7 order.
+
+**Verification:** each package runs its focused dependency closure, package and
+edge authority, affected row-35/root-audit/source-preparation checks, all
+declarative suites, graph freshness, both plan checks, route/removal/diff and
+read-only evidence. The mixed Bash suite runs once after M6-L7 closes
+M6-L-W1. A schema, helper, engine, router, or lifecycle-meaning change requires
+an immediate shared-contract checkpoint instead.
+
+**Re-plan triggers:** stop if a candidate gains an executable caller or
+non-metadata dependency; exact lifecycle rows cannot be removed with the
+checker; a fixture or source must change; existing primitives cannot preserve
+typed outcomes or exact evidence; package paths overlap outside serial
+integration files; M6-L7 cannot transfer source-preparation authority directly
+to a registered suite; or a lifecycle schema/meaning change is required.
 
 **Tasks:**
 

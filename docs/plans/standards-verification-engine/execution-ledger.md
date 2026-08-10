@@ -1932,3 +1932,30 @@
 - The package train ends at M6-K7. Before another implementation slice, re-audit
   the fresh graph and freeze the next owner, dependency closure, semantic
   contract, write set, edge dispositions, and verification gates.
+
+## 2026-08-09 - M6-L1 Through M6-L7 Leaf Wave Admission
+
+- Re-audited all 46 remaining metadata-helper consumers against the fresh
+  graph. Seven have zero executable inbound callers and no executable output
+  other than `check-metadata.sh`; the other 39 remain connected and
+  unadmitted.
+- Froze seven separate owner-coherent packages in Documentation Changelog,
+  Documentation Reference, Release Foundation, three Rust owner contracts,
+  and Rust dependency candidate inspection. Existing declarative primitives
+  cover every decision, exact disposition, metadata, route, required policy,
+  and prohibited fallback.
+- Each checker has exactly one executable-reference and one helper-dependency
+  edge to the retained helper. No package gains another executable edge.
+- Resolved VE039 by treating exact row-35 row removal and fixed-count updates
+  as lifecycle-data reconciliation under the existing schema. Rust dependency
+  candidate inspection additionally transfers source-preparation authority
+  directly from its checker subject to its registered suite.
+- Package authors own only disjoint suite/checker paths. Shared registry,
+  README, manifests, lifecycle inventories/checkers, generated graph, and plans
+  remain serial integration-owner work.
+- No checker, suite, fixture, policy source, legacy source, engine, helper,
+  lifecycle inventory, registry, README, generated artifact, or lockfile
+  changed during admission.
+- Next slice: implement M6-L1, then continue in frozen order through M6-L7.
+  Use fast package/lifecycle gates and run one mixed checkpoint at M6-L-W1
+  closure unless a shared-contract re-plan trigger appears.

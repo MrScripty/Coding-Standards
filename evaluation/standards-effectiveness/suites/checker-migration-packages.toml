@@ -8,7 +8,7 @@ id = "admitted-packages"
 type = "table"
 path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
 header = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
-row_count = 58
+row_count = 65
 non_empty = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 unique = [["train_order"], ["package_id"], ["subject"]]
 
@@ -657,5 +657,82 @@ expected = [[
   "M6-K6,VE030,VE037",
   "focused-suite,dependency-once,edge-dispositions,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-K-W1",
   "accepted",
+], [
+  "59",
+  "M6-L1",
+  "checker:evaluation/standards-effectiveness/verify-documentation-changelog-closure.sh",
+  "workflows/release.md",
+  "consolidation",
+  "documentation-changelog-closure-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/documentation-changelog-closure.toml,evaluation/standards-effectiveness/verify-documentation-changelog-closure.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-K7,VE030,VE037,VE039",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-L-W1",
+  "admitted",
+], [
+  "60",
+  "M6-L2",
+  "checker:evaluation/standards-effectiveness/verify-documentation-reference.sh",
+  "reference/recipes/documentation.md",
+  "consolidation",
+  "documentation-reference-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/documentation-reference.toml,evaluation/standards-effectiveness/verify-documentation-reference.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-L1,VE030,VE037,VE039",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-L-W1",
+  "admitted",
+], [
+  "61",
+  "M6-L3",
+  "checker:evaluation/standards-effectiveness/verify-release-workflow-foundation.sh",
+  "workflows/release.md",
+  "consolidation",
+  "release-workflow-foundation-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/release-workflow-foundation.toml,evaluation/standards-effectiveness/verify-release-workflow-foundation.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-L2,VE030,VE037,VE039",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-L-W1",
+  "admitted",
+], [
+  "62",
+  "M6-L4",
+  "checker:evaluation/standards-effectiveness/verify-rust-dependency-owner-contract.sh",
+  "profiles/languages/rust/dependencies.md",
+  "consolidation",
+  "rust-dependency-owner-contract-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/rust-dependency-owner-contract.toml,evaluation/standards-effectiveness/verify-rust-dependency-owner-contract.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv,evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-L3,VE030,VE037,VE039",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-L-W1",
+  "admitted",
+], [
+  "63",
+  "M6-L5",
+  "checker:evaluation/standards-effectiveness/verify-rust-release-owner-contract.sh",
+  "profiles/languages/rust/release.md",
+  "consolidation",
+  "rust-release-owner-contract-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/rust-release-owner-contract.toml,evaluation/standards-effectiveness/verify-rust-release-owner-contract.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv,evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-L4,VE030,VE037,VE039",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-L-W1",
+  "admitted",
+], [
+  "64",
+  "M6-L6",
+  "checker:evaluation/standards-effectiveness/verify-rust-tooling-owner-contract.sh",
+  "profiles/languages/rust/tooling.md",
+  "consolidation",
+  "rust-tooling-owner-contract-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/rust-tooling-owner-contract.toml,evaluation/standards-effectiveness/verify-rust-tooling-owner-contract.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv,evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-L5,VE030,VE037,VE039",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-L-W1",
+  "admitted",
+], [
+  "65",
+  "M6-L7",
+  "checker:evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh",
+  "profiles/languages/rust/dependencies.md",
+  "consolidation",
+  "rust-dependency-candidate-inspection-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/rust-dependency-candidate-inspection.toml,evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv,evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv,evaluation/standards-effectiveness/verify-milestone-7-source-package-preparation.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-L6,VE030,VE037,VE039",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,source-package-transfer,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-L-W1",
+  "admitted",
 ]
 ]

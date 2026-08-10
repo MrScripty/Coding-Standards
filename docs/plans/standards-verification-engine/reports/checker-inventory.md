@@ -1389,3 +1389,18 @@ The M6-K-W1 closing checkpoint passed all 182 mixed Bash entrypoints against
 commit `4a39062`'s accepted 187-entrypoint opening baseline. The admitted
 train ends at M6-K7, so the next package requires a fresh graph and ownership
 audit before implementation.
+
+### Admitted M6-L1 Through M6-L7 Inbound-Free Leaves
+
+The fresh 182-verifier graph has 46 metadata-helper consumers. Seven are
+executable leaves after excluding the helper and are now admitted as separate
+packages: Documentation Changelog, Documentation Reference, Release Workflow
+Foundation, Rust Dependency Owner, Rust Release Owner, Rust Tooling Owner, and
+Rust Dependency Candidate Inspection.
+
+Each has two exact helper edges and no executable caller or other executable
+dependency. Existing primitives preserve all behavior without fixture, source,
+engine, or helper changes. Frozen row-35 references transfer with checker
+deletion under the unchanged lifecycle schema; candidate inspection also
+transfers its source-preparation subject directly to registered suite evidence.
+The other 39 helper consumers remain unadmitted connected work.
