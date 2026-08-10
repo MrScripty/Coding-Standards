@@ -499,3 +499,8 @@ requires = []
 id = "rust-tooling-owner-contract"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-owner-contract.toml"
 requires = []
+
+[[suites]]
+id = "rust-dependency-candidate-inspection"
+path = "evaluation/standards-effectiveness/suites/rust-dependency-candidate-inspection.toml"
+requires = []

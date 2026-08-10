@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-L1 through M6-L7 leaf wave
+**Current phase:** Milestone 6: post-M6-L-W1 graph and ownership audit
 
-**Next slice:** Implement admitted M6-L7 Rust Dependency Candidate Inspection,
-run its source-package lifecycle transfer, then close M6-L-W1 with the mixed
-Bash checkpoint.
+**Next slice:** Re-audit the fresh post-M6-L-W1 graph and freeze the next
+owner-coherent package before implementation. No later package is admitted.
 
 **Acceptance status:** `pending`
 
@@ -2965,6 +2964,23 @@ consumers. All 100 declarative suites and graph freshness at 176 Bash verifiers
 / 181 nodes / 881 edges / 177 components pass. Forty metadata-helper consumers
 remain; no source, fixture, engine, helper, schema, or unrelated lifecycle
 record changed. The mixed checkpoint remains deferred to M6-L-W1.
+
+**M6-L7 and M6-L-W1 result:** the registered
+`rust-dependency-candidate-inspection` suite preserves the 14-row typed
+inspection decision, direct Rust Dependency metadata closure, canonical
+generic/profile/reference policy, legacy-index routing and prohibitions, and
+the exact `STD-0732` through `STD-0734` dispositions. The Bash checker, both
+helper edges, and its classified README-consumer record are absent. Its
+source-preparation authority transferred directly from the removed `checker:`
+subject to the registered `suite:` subject without dual authority. Row-35
+passes at 19 dependencies / 17 direct route dependencies / 29 consumers;
+source preparation passes at 8 packages / 9 unique subjects. All 101
+declarative suites and graph freshness at 175 Bash verifiers / 180 nodes / 874
+edges / 176 components pass. The one M6-L-W1 closing mixed checkpoint passed
+all 175 remaining Bash entrypoints. Thirty-nine metadata-helper consumers
+remain; no source, fixture, engine, helper, schema, or unrelated lifecycle
+record changed. No later package is admitted; a fresh graph and ownership
+audit is required before implementation continues.
 
 **Tasks:**
 

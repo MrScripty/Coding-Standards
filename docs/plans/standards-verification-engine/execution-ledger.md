@@ -2055,3 +2055,27 @@
   changed. Forty metadata-helper consumers remain. M6-L-W1 mixed verification
   is deferred; next slice is admitted M6-L7 Rust Dependency Candidate
   Inspection.
+
+## 2026-08-09 - M6-L7 Rust Dependency Candidate And M6-L-W1 Acceptance
+
+- Added and registered one seven-check suite preserving the 14-row typed
+  inspection decision, direct Rust Dependency metadata closure, canonical
+  generic/profile/reference policy, legacy-index routing and prohibitions, and
+  exact `STD-0732` through `STD-0734` dispositions.
+- Deleted the Bash checker, accepted both helper edges, removed its exact
+  row-35 consumer record, and reconciled the fixed consumer count from 30 to
+  29 under the unchanged lifecycle schema.
+- Transferred source-preparation authority directly from the removed checker
+  subject to the registered suite subject. Source preparation passes at 8
+  packages / 9 unique subjects with no bridge or dual authority.
+- Focused suite, root-consumer, row-35, source-preparation, package/edge
+  authority, all 101 declarative suites, graph freshness at 175 Bash verifiers
+  / 180 nodes / 874 edges / 176 components, both plan checks, and
+  route/removal/diff/read-only evidence pass.
+- The M6-L-W1 closing mixed checkpoint passed all 175 remaining Bash
+  entrypoints. No source, fixture, engine, helper, schema, or unrelated
+  lifecycle record changed; 39 metadata-helper consumers remain.
+- The admitted M6-L train is closed. No later package is admitted; next slice
+  is a read-only fresh graph and ownership audit that must freeze the next
+  owner, dependency closure, semantic contract, write set, edge dispositions,
+  lifecycle transfers, and verification gates before implementation.

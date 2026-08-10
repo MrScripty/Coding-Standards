@@ -1,0 +1,125 @@
+schema_version = 1
+id = "rust-dependency-candidate-inspection"
+owner = "profile.language.rust.dependencies"
+description = "Claim-scoped Rust dependency candidate inspection with typed outcomes and no threshold, standard-library, current-graph, framework, or written-justification defaults."
+
+[[checks]]
+id = "inspection-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/dependency-candidate-inspection-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["accepted", "contradictory", "missing"]
+candidate = ["selected", "unknown"]
+consumer = ["known", "unknown"]
+resolver = ["known", "unknown"]
+query_support = ["supported", "unsupported"]
+evidence = ["complete", "incomplete"]
+fallback = ["none", "count-threshold", "std-preference", "current-presence", "framework-size", "written-justification"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "contract", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "contract", op = "eq", value = "missing" },
+  { field = "candidate", op = "eq", value = "unknown" },
+  { field = "consumer", op = "eq", value = "unknown" },
+  { field = "resolver", op = "eq", value = "unknown" },
+  { field = "evidence", op = "eq", value = "incomplete" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "query_support"
+op = "eq"
+value = "unsupported"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "workflows/release.md",
+  "topics/contracts.md",
+  "topics/dependencies.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/dependencies.md",
+  "reference/recipes/rust-dependencies.md",
+]
+
+[[checks]]
+id = "generic-owner-policy"
+type = "text"
+path = "topics/dependencies.md"
+required = [
+  "Inspection output is candidate evidence",
+  "cannot independently",
+  "transitive count",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/dependencies.md"
+required = [
+  "## Candidate Inspection Mechanisms",
+  "After Dependencies defines the requirement",
+  "graph query cannot select",
+  "written justification into policy",
+]
+
+[[checks]]
+id = "reference-boundary"
+type = "text"
+path = "reference/recipes/rust-dependencies.md"
+required = [
+  "Level: `REFERENCE`",
+  "This material is non-normative",
+  "cargo tree -p <crate> --depth=0 -e normal",
+  "cargo tree -i <crate>",
+  "do not select a candidate",
+]
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "languages/rust/RUST-DEPENDENCY-STANDARDS.md"
+required = [
+  "# Rust Dependency Standards Migration Index",
+  "[Dependencies](../../topics/dependencies.md)",
+  "[Rust dependency recipes](../../reference/recipes/rust-dependencies.md)",
+]
+prohibited = [
+  "100+ transitive dependencies",
+  "cargo tree -p <crate>",
+  "cargo tree -i <crate>",
+]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0732", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "profiles/languages/rust/dependencies.md", "split", "preserve candidate requirement comparison evidence and selection authority in Dependencies while selecting supported Cargo graph-query mechanisms without standard-library framework transitive-count current-presence or written-justification defaults"],
+  ["STD-0733", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move", "move the package-scoped cargo tree command to non-normative reference without making its package depth or dependency-kind flags defaults"],
+  ["STD-0734", "languages/rust/RUST-DEPENDENCY-STANDARDS.md", "reference/recipes/rust-dependencies.md", "move", "move the reverse-dependency cargo tree command to non-normative reference without making current graph presence or command success selection evidence"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0732", "STD-0733", "STD-0734"]

@@ -826,6 +826,10 @@ tooling mechanism decisions, canonical profile/reference metadata and routing,
 and the exact `STD-0831` parent-index disposition without installed-tool,
 workspace-scope, status-label, or command fallback.
 
+The registered `rust-dependency-candidate-inspection` suite checks 14 typed
+candidate-inspection decisions, generic/profile/reference ownership, three
+exact dispositions, and legacy-index purity without selection defaults.
+
 The registered `release-reference-closure` suite checks exact disposition of
 `STD-0541` and `STD-0542`, validates the non-normative release-recipe owner
 and workflow route, and rejects any byte-level change that would restore policy

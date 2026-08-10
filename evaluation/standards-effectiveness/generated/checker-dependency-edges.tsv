@@ -3,14 +3,12 @@ contract_reference	evaluation/standards-effectiveness/checker-migration-packages
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-46-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-source-package-preparation.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-launcher-population.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-18-decomposition.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-decision-traceability.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
@@ -33,7 +31,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-executor-delegation.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-external-input-queue.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-interop-memory.sh
@@ -73,13 +70,11 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-security-check
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-launcher-population.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-rust-no-std-closure.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-row-46-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-source-package-preparation.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
-contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh
 contract_reference	evaluation/standards-effectiveness/suites/documentation-traceability-policy.toml	templates/check-decision-traceability.sh
 executable_reference	evaluation/standards-effectiveness/verify-accessibility-evidence-closure.sh	evaluation/standards-effectiveness/verify-accessibility-media.sh
 executable_reference	evaluation/standards-effectiveness/verify-accessibility-focus-lifecycle.sh	evaluation/standards-effectiveness/verify-accessibility-interaction-semantics.sh
@@ -429,7 +424,6 @@ executable_reference	evaluation/standards-effectiveness/verify-rust-binding-work
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-workspace-evidence.sh	evaluation/standards-effectiveness/verify-rust-binding-core-adapter-testability.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-external-input-queue.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-external-input-queue.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-external-input-queue.sh	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh
@@ -538,7 +532,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-executo
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-workspace-evidence.sh	evaluation/standards-effectiveness/check-decision-table.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	evaluation/standards-effectiveness/check-metadata.sh
-helper_dependency	evaluation/standards-effectiveness/verify-rust-dependency-candidate-inspection.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-external-input-queue.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-interop-memory.sh	evaluation/standards-effectiveness/check-metadata.sh

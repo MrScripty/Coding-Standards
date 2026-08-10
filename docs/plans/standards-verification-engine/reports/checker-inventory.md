@@ -1472,3 +1472,21 @@ dependencies / 30 consumers; the graph has 176 Bash verifiers / 181 nodes /
 881 edges / 177 components, 100 declarative suites, and 40 remaining
 metadata-helper consumers. No source, fixture, engine, helper, schema, or
 unrelated lifecycle record changed.
+
+### Accepted M6-L7 Rust Dependency Candidate And M6-L-W1
+
+The seven-check suite preserves the 14-row typed inspection decision, direct
+Rust Dependency metadata closure, canonical generic/profile/reference policy,
+legacy-index routing and prohibitions, and exact `STD-0732` through `STD-0734`
+dispositions. The Bash checker, both helper edges, and its README-consumer
+record are absent. Source-preparation authority names the registered suite
+directly, with no checker bridge or dual authority.
+
+Row-35 passes at 19 dependencies / 17 direct route dependencies / 29
+consumers; source preparation passes at 8 packages / 9 unique subjects. The
+graph has 175 Bash verifiers / 180 nodes / 874 edges / 176 components, all 101
+declarative suites pass, and 39 metadata-helper consumers remain. The M6-L-W1
+closing checkpoint passed all 175 remaining Bash entrypoints. No source,
+fixture, engine, helper, schema, or unrelated lifecycle record changed. The
+admitted train is closed and the next package requires a fresh graph and
+ownership audit.
