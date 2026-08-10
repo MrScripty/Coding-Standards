@@ -1,0 +1,143 @@
+schema_version = 1
+id = "release-workflow-foundation"
+owner = "workflow.release"
+description = "Release and changelog applicability, exact foundation ownership, and bounded legacy routing without implicit version or changelog defaults."
+
+[[checks]]
+id = "release-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/release/decisions.tsv"
+input_columns = ["ships_artifact", "published_promise", "consumer_visible"]
+[checks.domains]
+case = ["*"]
+ships_artifact = ["yes", "no"]
+published_promise = ["yes", "no"]
+consumer_visible = ["yes", "no"]
+expected_release = ["yes", "no"]
+expected_changelog = ["yes", "no"]
+
+[[checks.outputs]]
+column = "expected_release"
+default = "no"
+[[checks.outputs.rules]]
+outcome = "yes"
+[checks.outputs.rules.when]
+any = [
+  { field = "ships_artifact", op = "eq", value = "yes" },
+  { field = "published_promise", op = "eq", value = "yes" },
+]
+
+[[checks.outputs]]
+column = "expected_changelog"
+default = "no"
+[[checks.outputs.rules]]
+outcome = "yes"
+[checks.outputs.rules.when]
+all = [
+  { field = "consumer_visible", op = "eq", value = "yes" },
+  { any = [
+    { field = "ships_artifact", op = "eq", value = "yes" },
+    { field = "published_promise", op = "eq", value = "yes" },
+  ] },
+]
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0531", "RELEASE-STANDARDS.md", "1", "1", "workflow", "split", "Release Standards"],
+  ["STD-0532", "RELEASE-STANDARDS.md", "5", "2", "workflow", "split", "Semantic Versioning"],
+  ["STD-0533", "RELEASE-STANDARDS.md", "9", "3", "workflow", "split", "Version Bump Decision Table"],
+  ["STD-0534", "RELEASE-STANDARDS.md", "18", "3", "workflow", "split", "Pre-1.0 Rules"],
+  ["STD-0535", "RELEASE-STANDARDS.md", "32", "3", "workflow", "split", "Deprecation Policy"],
+  ["STD-0536", "RELEASE-STANDARDS.md", "51", "3", "workflow", "split", "Migration Guides"],
+  ["STD-0537", "RELEASE-STANDARDS.md", "68", "3", "workflow", "split", "Workspace Version Alignment"],
+  ["STD-0538", "RELEASE-STANDARDS.md", "78", "2", "workflow", "split", "Changelog Management"],
+  ["STD-0539", "RELEASE-STANDARDS.md", "84", "3", "workflow", "split", "Maintenance Workflow"],
+  ["STD-0540", "RELEASE-STANDARDS.md", "90", "3", "workflow", "split", "Conventional Commits to Changelog Categories"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0531", "STD-0532", "STD-0533", "STD-0534", "STD-0535", "STD-0536", "STD-0537", "STD-0538", "STD-0539", "STD-0540"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0531", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "release workflow authority"],
+  ["STD-0532", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "contract-driven version policy"],
+  ["STD-0533", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "observable version decision"],
+  ["STD-0534", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "major-zero and prerelease distinction"],
+  ["STD-0535", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "published-promise deprecation policy"],
+  ["STD-0536", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "consumer-driven migration guidance"],
+  ["STD-0537", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "project-owned release unit"],
+  ["STD-0538", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "consumer-visible changelog policy"],
+  ["STD-0539", "RELEASE-STANDARDS.md", "workflows/release.md", "move", "release-time changelog assembly"],
+  ["STD-0540", "RELEASE-STANDARDS.md", "none", "remove", "implicit commit-type changelog mapping"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0531", "STD-0532", "STD-0533", "STD-0534", "STD-0535", "STD-0536", "STD-0537", "STD-0538", "STD-0539", "STD-0540"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md"]
+
+[[checks]]
+id = "workflow-policy"
+type = "text"
+path = "workflows/release.md"
+required = [
+  "## Release Boundary",
+  "## Contract And Version Decision",
+  "## Deprecation And Migration",
+  "## Changelog",
+  "## Acceptance Boundary",
+  "## Optional Reference",
+]
+prohibited = [
+  "All versioned software must follow",
+  "`0.x` signals instability",
+  "all member packages share a version",
+  "Every PR that adds user-visible changes updates",
+  "map commit types to changelog categories",
+]
+
+[[checks]]
+id = "router-route"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["workflows/release.md"]
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "RELEASE-STANDARDS.md"
+required = ["workflows/release.md"]
+prohibited = [
+  "## Semantic Versioning",
+  "## Changelog Management",
+  "## Release Acceptance Boundary",
+  "## Release Artifacts",
+  "## Reproducible Builds",
+  "All versioned software must follow",
+  "`0.x` signals instability",
+  "all member packages share a version",
+  "Every PR that adds user-visible changes updates",
+  "map commit types to changelog categories",
+]

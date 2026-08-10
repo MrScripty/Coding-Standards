@@ -1987,3 +1987,20 @@
   components, both plan checks, route/removal/diff/read-only evidence pass.
 - Forty-four metadata-helper consumers remain. M6-L-W1 mixed verification is
   deferred; next slice is admitted M6-L3 Release Workflow Foundation.
+
+## 2026-08-09 - M6-L3 Release Workflow Foundation Acceptance
+
+- Added and registered one seven-check suite preserving the five-row
+  release/changelog multi-output decision, ten exact inventory/disposition
+  rows, direct Release metadata closure, canonical workflow and routing
+  evidence, and removed legacy/default evidence.
+- Deleted the Bash checker, accepted both helper edges, removed its exact
+  row-35 dependency, and reconciled fixed counts from 23/21 to 22/20 under the
+  unchanged lifecycle schema.
+- Focused suite and row-35 closure, package/edge authority, all 97 declarative
+  suites, graph freshness at 179 Bash verifiers / 184 nodes / 902 edges / 180
+  components, both plan checks, route/removal/diff/read-only evidence pass.
+- No source, fixture, engine, helper, schema, or unrelated lifecycle record
+  changed. Forty-three metadata-helper consumers remain. M6-L-W1 mixed
+  verification is deferred; next slice is admitted M6-L4 Rust Dependency
+  Owner.

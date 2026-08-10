@@ -807,7 +807,7 @@ directory/README, ADR, and project-entry identifiers, validates the workflow
 and derived boundary template, and rejects restoration of universal directory,
 fixed-section, placeholder, and per-change README obligations.
 
-`verify-release-workflow-foundation.sh` checks release and changelog
+The registered `release-workflow-foundation` suite checks release and changelog
 applicability decisions, exact disposition of `STD-0531` through `STD-0540`,
 canonical workflow metadata and routing, and the optional-reference boundary.
 

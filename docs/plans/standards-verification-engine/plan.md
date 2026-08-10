@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 6: M6-L1 through M6-L7 leaf wave
 
-**Next slice:** Implement admitted M6-L3 Release Workflow Foundation through
-fast package and lifecycle-transfer gates. M6-L4 through M6-L7 remain admitted
-and read-only.
+**Next slice:** Implement admitted M6-L4 Rust Dependency Owner through fast
+package and lifecycle-transfer gates. M6-L5 through M6-L7 remain admitted and
+read-only.
 
 **Acceptance status:** `pending`
 
@@ -2920,6 +2920,18 @@ absent. Row-35 passes at 23 dependencies / 21 direct route dependencies / 33
 consumers. All 96 declarative suites and graph freshness at 180 Bash verifiers
 / 185 nodes / 908 edges / 181 components pass. Forty-four metadata-helper
 consumers remain; the mixed checkpoint remains deferred to M6-L-W1.
+
+**M6-L3 result:** the registered `release-workflow-foundation` suite
+preserves the five-row release/changelog two-output decision, ten exact
+inventory/disposition rows, direct Release metadata closure, canonical
+workflow sections and Router route, and negative evidence against former
+headings and implicit version/changelog defaults. The Bash checker, both helper
+edges, and its exact row-35 dependency are absent. Row-35 passes at 22
+dependencies / 20 direct route dependencies / 33 consumers. All 97 declarative
+suites and graph freshness at 179 Bash verifiers / 184 nodes / 902 edges / 180
+components pass. Forty-three metadata-helper consumers remain; no source,
+fixture, engine, helper, schema, or unrelated lifecycle record changed. The
+mixed checkpoint remains deferred to M6-L-W1.
 
 **Tasks:**
 

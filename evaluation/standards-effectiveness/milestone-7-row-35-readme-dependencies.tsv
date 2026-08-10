@@ -13,7 +13,6 @@ evaluation/standards-effectiveness/verify-ipc-payload-validation.sh	root-readme-
 evaluation/standards-effectiveness/verify-language-binding-boundary.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-launcher-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-persistence-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-release-workflow-foundation.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-async-boundary.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence

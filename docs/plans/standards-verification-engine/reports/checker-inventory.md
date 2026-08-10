@@ -1424,3 +1424,16 @@ edges, and its row-35 dependency are absent. Row-35 passes at 23 dependencies /
 21 direct route dependencies / 33 consumers; the graph has 180 Bash verifiers
 / 185 nodes / 908 edges / 181 components, 96 declarative suites, and 44
 remaining metadata-helper consumers.
+
+### Accepted M6-L3 Release Workflow Foundation
+
+The seven-check suite preserves the five-row release/changelog two-output
+decision, ten exact inventory/disposition rows, direct Release metadata
+closure, required workflow sections, canonical Router/index routes, and
+negative evidence against former headings and implicit version/changelog
+defaults. The Bash checker, both helper edges, and its row-35 dependency are
+absent. Row-35 passes at 22 dependencies / 20 direct route dependencies / 33
+consumers; the graph has 179 Bash verifiers / 184 nodes / 902 edges / 180
+components, 97 declarative suites, and 43 remaining metadata-helper consumers.
+No source, fixture, engine, helper, schema, or unrelated lifecycle record
+changed.

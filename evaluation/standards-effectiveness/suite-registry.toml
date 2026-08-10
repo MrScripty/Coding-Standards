@@ -479,3 +479,8 @@ requires = []
 id = "documentation-reference"
 path = "evaluation/standards-effectiveness/suites/documentation-reference.toml"
 requires = []
+
+[[suites]]
+id = "release-workflow-foundation"
+path = "evaluation/standards-effectiveness/suites/release-workflow-foundation.toml"
+requires = []
