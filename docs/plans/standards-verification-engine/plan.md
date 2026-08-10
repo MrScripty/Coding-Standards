@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-K4 through M6-K7 release wave
+**Current phase:** Milestone 6: M6-DM1 multi-output decision recovery
 
-**Next slice:** Implement admitted M6-K6 Release Artifact through the fast
-package gates; keep M6-K7 admitted and read-only.
+**Next slice:** Implement admitted M6-DM1 as a bounded shared-engine contract;
+keep M6-K6 and M6-K7 admitted and read-only.
 
 **Acceptance status:** `pending`
 
@@ -2678,6 +2678,71 @@ appears. The closing checkpoint validates the integrated deletions once.
 ##### M6-K4 Through M6-K7: Release Wave Remainder
 
 **Package status:** `M6-K4 and M6-K5 Accepted; M6-K6 and M6-K7 Admitted`
+
+##### M6-DM1: Multi-Output Decision Contract
+
+**Package status:** `Admitted`
+
+**Trigger:** M6-K6 owns one five-row scenario matrix with three independently
+typed outputs: SBOM, checksum, and lockfile. The current generic `decision`
+check requires one configured expected column at the end of the table. It
+cannot evaluate the first two outputs without duplicating the fixture,
+collapsing outputs into a combined string, weakening them to snapshot rows, or
+changing the engine. M6-K6's admitted contract prohibits those substitutions
+and requires typed unavailable for unresolved lockfile ownership.
+
+**Decision:** extend the canonical `decision` check with one mutually exclusive
+multi-output form. It requires an exact ordered `input_columns` list and at
+least two `[[checks.outputs]]` entries. Each output declares exactly `column`,
+`default`, and one or more ordered `rules`. The table header must equal `case`,
+then the declared inputs, then the declared output columns. Domains must still
+cover every column exactly. Output columns are unique, cannot be predicate
+inputs, and each default and rule outcome must belong to that output's domain.
+Every output is evaluated independently in declaration order and mismatch
+diagnostics identify both case and output column.
+
+The existing single-output form remains the canonical compact representation
+for one output and retains its exact schema and final-column contract. A check
+must use exactly one form; mixed forms, inferred inputs, one-entry multi-output
+forms, output-to-output predicates, duplicate inputs/outputs, unlisted columns,
+empty rules, unknown keys, and malformed domains are typed invalid. There is no
+schema fallback, topic callback, executable action, fixture normalization, or
+implicit output derivation.
+
+**Implementation write set:**
+
+- `tools/standards_verifier/standards_verifier/checks/decision.py`;
+- `tools/standards_verifier/tests/test_engine.py`;
+- `tools/standards_verifier/README.md`;
+- `docs/plans/standards-verification-engine/reports/architecture.md`;
+- this plan, ledger, issues, inventory report, and parent plan.
+
+All suites, fixtures, registry entries, standards sources, checker/package/edge
+manifests, generated inventories, Bash files, helper files, lockfiles, and
+unrelated engine modules remain read-only. M6-K6 consumes the accepted
+capability in a later package commit; M6-DM1 does not alter policy evidence or
+delete a checker.
+
+**Focused evidence:** add pass coverage with three outputs including a typed
+unavailable result; independent mismatch diagnostics naming the output;
+single-output regression coverage; mixed-form, one-output, duplicate-column,
+header-order, undeclared-predicate, default-domain, and rule-domain rejection;
+and existing missing/path/domain/row diagnostics. Run focused and complete
+engine tests, all declarative suites, compilation, graph freshness, both plan
+checks, diff/read-only evidence, and the mixed checkpoint immediately before
+and after this shared-contract implementation. Resume M6-K6 fast package gates
+only after M6-DM1 acceptance.
+
+**No-fallback rule:** do not split or copy the artifact fixture, encode a
+combined output, use expected output columns as rule inputs, retain Bash as an
+alternate evaluator, silently select one output, or weaken semantic decisions
+to exact-row snapshots.
+
+**Admission evidence:** all 92 declarative suites, graph freshness at 184 Bash
+verifiers / 189 nodes / 907 edges / 185 components, both plan checks, diff
+integrity, and the complete 184-entrypoint mixed opening checkpoint pass. No
+engine, test, documentation contract, suite, fixture, registry, policy,
+checker, helper, manifest, or generated graph file changed during admission.
 
 After M6-K3, Maintenance, Pipeline, Artifact, and Publication remain separate
 acyclic one-node components with zero executable inbound callers, zero contract

@@ -1851,3 +1851,25 @@
 - No source, fixture, helper, engine, accepted dependency, or unrelated
   consumer changed. Forty-eight helper consumers remain; the M6-K-W1 mixed
   checkpoint remains deferred. Next slice is admitted M6-K6 Release Artifact.
+
+## 2026-08-09 - M6-DM1 Multi-Output Decision Re-plan
+
+- M6-K6 stopped before edits because the generic decision check requires one
+  final expected column while the read-only artifact scenario matrix owns
+  three independently typed outputs.
+- Rejected three duplicated fixtures, one combined output, snapshot-only row
+  checks, Bash retention, and an output-as-input convention because they create
+  drift, weaken typing or behavior, or preserve alternate authority.
+- Admitted one bounded shared-engine extension: exact declared input columns
+  plus at least two independent output contracts, strict mode exclusivity,
+  exact header/domain coverage, output-isolated predicates, and output-specific
+  diagnostics. Existing single-output suites retain their exact contract.
+- M6-DM1 owns only decision engine source, focused tests, engine documentation,
+  architecture documentation, and serial plan artifacts. M6-K6 fixtures,
+  suites, registry, policy, manifests, checkers, helper, and generated evidence
+  remain read-only until the later package slice.
+- Admission passed all 92 declarative suites, graph freshness at 184 Bash
+  verifiers / 189 nodes / 907 edges / 185 components, both plan checks, diff
+  integrity, and all 184 mixed opening-checkpoint entrypoints.
+- Next slice: implement M6-DM1 and run focused plus closing shared-contract
+  evidence before resuming M6-K6.
