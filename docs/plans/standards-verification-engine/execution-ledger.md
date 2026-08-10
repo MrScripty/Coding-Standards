@@ -2150,3 +2150,29 @@
 - No source, fixture, engine, helper, schema, or unrelated lifecycle record
   changed. Thirty-seven metadata-helper consumers remain; M6-M-W1 is deferred
   and next slice is admitted M6-M3 Rust Interop Memory.
+
+## 2026-08-10 - M6-M3 Rust Interop Memory And M6-M-W1 Acceptance
+
+- Added and registered one eight-check suite preserving 22 typed
+  foreign-memory decisions, exact `STD-0752` through `STD-0756` inventory and
+  dispositions, direct Rust Interop metadata closure, canonical policy and
+  Rust-index routing, and source-wide legacy-index prohibitions against
+  executable examples and unsafe mechanism defaults.
+- Deleted the Bash checker, accepted its metadata and independent-gate edges,
+  removed its exact row-35 dependency and consumer records, and reconciled
+  fixed counts from 19/17/27 to 18/16/26 under the unchanged lifecycle schema.
+- F022/F023 decomposition remains independent executable lifecycle evidence;
+  the suite duplicates neither its authority nor its Bash invocation. VE040 is
+  resolved without a heading-range alias, source exception, compatibility
+  checker, or weaker assertion.
+- Focused suite, affected lifecycle, root-consumer and row-35 closure,
+  package/edge authority, all 104 declarative suites, graph freshness at 172
+  Bash verifiers / 177 nodes / 857 edges / 173 components, both plan checks,
+  and route/removal/diff/read-only evidence pass.
+- The M6-M-W1 closing mixed checkpoint passed all 172 remaining Bash
+  entrypoints. No source, fixture, engine, helper, schema, or unrelated
+  lifecycle record changed; 36 metadata-helper consumers remain.
+- The admitted M6-M train is closed. No later package is admitted; next slice
+  is a read-only fresh graph and ownership audit that must freeze the next
+  owner, dependency closure, semantic contract, write set, edge dispositions,
+  lifecycle transfers, and verification gates before implementation.

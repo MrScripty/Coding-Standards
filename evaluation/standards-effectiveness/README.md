@@ -491,8 +491,8 @@ fallback.
 
 ## Rust Foreign-Memory Decision Fixtures
 
-`fixtures/rust/foreign-memory-decisions.tsv` and
-`verify-rust-interop-memory.sh` check checked conversion before arithmetic,
+`fixtures/rust/foreign-memory-decisions.tsv` and the registered
+`rust-interop-memory` suite check checked conversion before arithmetic,
 pointer/alignment/allocation/provenance proof, initialized extent, zero-length
 rules, callback lifetime, copy ordering, typed failures, exact dispositions,
 metadata, routing, and legacy unsafe-pattern removal.

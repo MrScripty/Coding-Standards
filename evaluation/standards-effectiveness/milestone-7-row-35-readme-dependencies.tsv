@@ -16,5 +16,4 @@ evaluation/standards-effectiveness/verify-persistence-owner-contract.sh	root-rea
 evaluation/standards-effectiveness/verify-rust-async-boundary.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-rust-interop-memory.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence

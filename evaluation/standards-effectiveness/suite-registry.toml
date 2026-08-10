@@ -514,3 +514,8 @@ requires = []
 id = "rust-async-cancellation-observability"
 path = "evaluation/standards-effectiveness/suites/rust-async-cancellation-observability.toml"
 requires = []
+
+[[suites]]
+id = "rust-interop-memory"
+path = "evaluation/standards-effectiveness/suites/rust-interop-memory.toml"
+requires = []

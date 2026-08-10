@@ -1,0 +1,147 @@
+schema_version = 1
+id = "rust-interop-memory"
+owner = "profile.language.rust.interop"
+description = "Checked Rust foreign-memory conversion, arithmetic, raw-view proof, lifetime, and copy ordering with typed unavailable outcomes and no unchecked or sentinel fallback."
+
+[[checks]]
+id = "foreign-memory-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/foreign-memory-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+conversion = ["valid", "negative", "too-wide"]
+arithmetic = ["valid", "overflow", "not-checked"]
+pointer = ["valid", "null", "unknown"]
+alignment = ["valid", "invalid", "unknown"]
+allocation = ["single", "split", "unknown"]
+initialized = ["full", "partial", "not-required", "unknown"]
+extent = ["valid", "too-large", "zero", "unknown"]
+lifetime = ["valid", "expired", "unknown"]
+copy = ["after-proof", "before-proof", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "conversion", op = "ne", value = "valid" },
+  { field = "arithmetic", op = "ne", value = "valid" },
+  { field = "pointer", op = "eq", value = "null" },
+  { field = "alignment", op = "eq", value = "invalid" },
+  { field = "allocation", op = "eq", value = "split" },
+  { field = "initialized", op = "eq", value = "partial" },
+  { field = "extent", op = "eq", value = "too-large" },
+  { field = "lifetime", op = "eq", value = "expired" },
+  { field = "copy", op = "eq", value = "before-proof" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "pointer", op = "eq", value = "unknown" },
+  { field = "alignment", op = "eq", value = "unknown" },
+  { field = "allocation", op = "eq", value = "unknown" },
+  { field = "initialized", op = "eq", value = "unknown" },
+  { field = "extent", op = "eq", value = "unknown" },
+  { field = "lifetime", op = "eq", value = "unknown" },
+]
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0752", "languages/rust/RUST-INTEROP-STANDARDS.md"],
+  ["STD-0753", "languages/rust/RUST-INTEROP-STANDARDS.md"],
+  ["STD-0754", "languages/rust/RUST-INTEROP-STANDARDS.md"],
+  ["STD-0755", "languages/rust/RUST-INTEROP-STANDARDS.md"],
+  ["STD-0756", "languages/rust/RUST-INTEROP-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0752", "STD-0753", "STD-0754", "STD-0755", "STD-0756"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0752", "languages/rust/RUST-INTEROP-STANDARDS.md", "profiles/languages/rust/interop.md", "move", "establish the Rust foreign-boundary specialization"],
+  ["STD-0753", "languages/rust/RUST-INTEROP-STANDARDS.md", "profiles/languages/rust/interop.md", "refine", "require complete raw slice construction proof"],
+  ["STD-0754", "languages/rust/RUST-INTEROP-STANDARDS.md", "profiles/languages/rust/interop.md", "refine", "copy only after foreign-memory preconditions hold"],
+  ["STD-0755", "languages/rust/RUST-INTEROP-STANDARDS.md", "profiles/languages/rust/interop.md", "refine", "isolate unsafe operations behind safe validated APIs"],
+  ["STD-0756", "languages/rust/RUST-INTEROP-STANDARDS.md", "profiles/languages/rust/interop.md", "refine", "bind callback thread and borrowed lifetime contracts"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0752", "STD-0753", "STD-0754", "STD-0755", "STD-0756"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "topics/security.md",
+  "profiles/boundaries/interop.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/interop.md",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/interop.md"
+required = [
+  "## Checked Dimensions",
+  "checked conversion before",
+  "## Raw Slice Preconditions",
+  "one allocation with compatible provenance",
+  "initialized and valid to read",
+  "does not exceed `isize::MAX`",
+  "## Zero-Length Views",
+  "## Copy After Proof",
+  "typed `unavailable`",
+  "typed `invalid`",
+  "## No Fallback",
+]
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "languages/rust/RUST-INTEROP-STANDARDS.md"
+required = ["profiles/languages/rust/interop.md"]
+prohibited = [
+  "```",
+  "width as usize",
+  "unwrap_or(0)",
+  "from_raw_parts",
+  "raw_data.to_vec",
+  "raw pointer manipulation",
+]
+
+[[checks]]
+id = "rust-index-route"
+type = "text"
+path = "profiles/languages/rust/README.md"
+required = ["(interop.md)"]
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b3d` (`Accepted`)"]

@@ -1533,3 +1533,21 @@ dependencies / 17 direct route dependencies / 27 consumers; the graph has 173
 Bash verifiers / 178 nodes / 866 edges / 174 components, 103 declarative
 suites, and 37 remaining metadata-helper consumers. No source, fixture,
 engine, helper, schema, or unrelated lifecycle record changed.
+
+### Accepted M6-M3 Rust Interop Memory
+
+The eight-check suite preserves 22 typed foreign-memory decisions, exact
+`STD-0752` through `STD-0756` inventory and dispositions, direct Rust Interop
+metadata closure, canonical policy and Rust-index routing, and source-wide
+negative evidence against executable examples and unsafe mechanism defaults in
+the non-normative legacy index. This is the accepted VE040 no-legacy
+strengthening; no heading-range alias or compatibility checker was introduced.
+
+The Bash checker and all four classified edges are absent while F022/F023
+decomposition remains an independent gate. Row-35 passes at 18 dependencies /
+16 direct route dependencies / 26 consumers; the graph has 172 Bash verifiers /
+177 nodes / 857 edges / 173 components, all 104 declarative suites pass, and 36
+metadata-helper consumers remain. No source, fixture, engine, helper, schema,
+or unrelated lifecycle record changed. The M6-M-W1 closing mixed checkpoint
+passed all 172 remaining Bash entrypoints. The wave is closed with no later
+package admitted; a fresh graph and ownership audit is required next.

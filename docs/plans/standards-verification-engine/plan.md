@@ -2,10 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-M1 through M6-M3 low-coupling wave
+**Current phase:** Milestone 6: post-M6-M-W1 graph and ownership audit
 
-**Next slice:** Implement admitted M6-M3 Rust Interop Memory and close
-M6-M-W1 with the mixed Bash checkpoint.
+**Next slice:** Re-audit the fresh 172-verifier graph and remaining ownership
+closures. Freeze the next package's owner, semantic contract, dependencies,
+write set, edge dispositions, lifecycle transfers, and verification gates
+before admission or implementation.
 
 **Acceptance status:** `pending`
 
@@ -3069,6 +3071,23 @@ All 103 declarative suites and graph freshness at 173 Bash verifiers / 178
 nodes / 866 edges / 174 components pass. Thirty-seven metadata-helper
 consumers remain; no source, fixture, engine, helper, schema, or unrelated
 lifecycle record changed. The mixed checkpoint remains deferred to M6-M-W1.
+
+**M6-M3 result:** the registered `rust-interop-memory` suite preserves the
+22-case typed foreign-memory decision, exact `STD-0752` through `STD-0756`
+inventory and dispositions, direct Rust Interop metadata closure, canonical
+profile and Rust-index routing evidence, and negative evidence against
+executable examples and unsafe mechanism defaults anywhere in the
+non-normative legacy index. The source-wide prohibition is the accepted
+no-legacy strengthening from VE040; no heading-range alias or compatibility
+checker was added. The Bash checker and all four classified edges are absent;
+F022/F023 decomposition remains an independent executable gate. Row-35 passes
+at 18 dependencies / 16 direct route dependencies / 26 consumers. All 104
+declarative suites and graph freshness at 172 Bash verifiers / 177 nodes / 857
+edges / 173 components pass. Thirty-six metadata-helper consumers remain; no
+source, fixture, engine, helper, schema, or unrelated lifecycle record changed.
+The M6-M-W1 closing mixed checkpoint passed all 172 remaining Bash entrypoints.
+The wave is closed with no later package admitted; a fresh graph and ownership
+audit is required before implementation continues.
 
 **Tasks:**
 
