@@ -1507,3 +1507,16 @@ dependencies / 16 direct route dependencies / 26 consumers and 36 remaining
 metadata-helper consumers after M6-M3. One mixed checkpoint closes M6-M-W1;
 the four caller-free semantic-dependent Rust Binding consumers remain
 unadmitted.
+
+### Accepted M6-M1 Rust Async Blocking And Mutex
+
+The seven-check suite preserves 18 typed blocking/synchronization decisions,
+exact `STD-0722` and `STD-0723` inventory and dispositions, direct Rust Async
+metadata closure, canonical policy, legacy-index headings, and negative
+evidence against named runtime/mutex defaults. The Bash checker and all six
+classified edges are absent while both decomposition/lifecycle checkers remain
+independent gates. Row-35 passes at 19 dependencies / 17 direct route
+dependencies / 28 consumers; the graph has 174 Bash verifiers / 179 nodes /
+876 edges / 175 components, 102 declarative suites, and 38 remaining
+metadata-helper consumers. No source, fixture, engine, helper, schema, or
+unrelated lifecycle record changed.

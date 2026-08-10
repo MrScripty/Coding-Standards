@@ -37,7 +37,7 @@ while IFS=$'\t' read -r file current replacement; do
   [[ -f "$R/$file" ]]
 done < "$A"
 
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 29 ]]
+[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 28 ]]
 "$S/verify-root-readme-consumer-audit.sh"
 
 mapfile -t callers < <(awk -F '\t' 'NR > 1 { print $1 }' "$C" | sort)
@@ -67,5 +67,5 @@ rg -F -q '`7.4b25c` (`Accepted`)' "$P"
 "$S/verify-root-index-closure.sh"
 "$S/verify-root-router-evidence.sh"
 "$S/verify-milestone-7-execution-train.sh"
-printf 'Milestone 7 row-35 decomposition passed: 6 IDs across 2 serial closure children, 19 frozen checker dependencies, 29 classified README consumers, and %d shared-checker callers\n' \
+printf 'Milestone 7 row-35 decomposition passed: 6 IDs across 2 serial closure children, 19 frozen checker dependencies, 28 classified README consumers, and %d shared-checker callers\n' \
   "${#callers[@]}"

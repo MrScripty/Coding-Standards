@@ -12,9 +12,9 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, and M6-EDGE-FREE are accepted; exact typed
 executable-edge semantics govern further checker deletion.
 
-**Next slice:** implement the delegated verification engine's admitted M6-M1
-Rust Async Blocking and Mutex package, then continue through M6-M3 and close
-M6-M-W1. M6-L1 through M6-L7 and M6-L-W1 are accepted.
+**Next slice:** implement the delegated verification engine's admitted M6-M2
+Rust Async Cancellation and Observability package, then continue through
+M6-M3 and close M6-M-W1. M6-M1 is accepted.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

@@ -7,7 +7,6 @@ evaluation/standards-effectiveness/verify-root-index-closure.sh	root-closure-ver
 evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh	consumer-audit-infrastructure	none
 evaluation/standards-effectiveness/verify-root-router-evidence.sh	root-authority-verifier	none
 evaluation/standards-effectiveness/verify-rust-api-owner-contract.sh	none	rust-profile-index
-evaluation/standards-effectiveness/verify-rust-async-blocking-mutex.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-async-boundary.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-async-cancellation-observability.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	none	rust-profile-index

@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: M6-M1 through M6-M3 low-coupling wave
 
-**Next slice:** Implement admitted M6-M1 Rust Async Blocking and Mutex, then
-continue in frozen order through M6-M3 and close M6-M-W1.
+**Next slice:** Implement admitted M6-M2 Rust Async Cancellation and
+Observability, then continue to M6-M3 and close M6-M-W1.
 
 **Acceptance status:** `pending`
 
@@ -3042,6 +3042,19 @@ cannot preserve typed outcomes, exact dispositions, or no-legacy evidence; a
 fixture or source must change; lifecycle rows cannot transfer exactly; package
 paths overlap outside serial integration files; or a shared contract must
 change.
+
+**M6-M1 result:** the registered `rust-async-blocking-mutex` suite preserves
+the 18-case typed blocking/synchronization decision, exact `STD-0722` and
+`STD-0723` inventory and dispositions, direct Rust Async metadata closure,
+canonical profile policy, legacy-index headings, and negative evidence against
+named runtime/mutex defaults. The Bash checker and all six classified edges
+are absent; Rust Async decomposition and trust/lifecycle re-plan remain
+independent executable gates. Row-35 passes at 19 dependencies / 17 direct
+route dependencies / 28 consumers. All 102 declarative suites and graph
+freshness at 174 Bash verifiers / 179 nodes / 876 edges / 175 components pass.
+Thirty-eight metadata-helper consumers remain; no source, fixture, engine,
+helper, schema, or unrelated lifecycle record changed. The mixed checkpoint
+remains deferred to M6-M-W1.
 
 **Tasks:**
 

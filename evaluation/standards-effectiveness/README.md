@@ -771,12 +771,12 @@ and rejects broad binding, fixed default capacity, accept-first ordering,
 detached or discarded work, leaf-only logging, open admission during shutdown,
 unsafe force-abort, and alternate-runtime fallback.
 
-`verify-rust-async-blocking-mutex.sh` checks equivalent async execution,
-governed blocking isolation, capacity availability, guard behavior, invariant
-preservation, and synchronization capability. It proves exact disposition of
-`STD-0722` and `STD-0723` and rejects inline or guard-held blocking, unbounded
-isolation, alternate executor/thread fallback, unsupported suspended guards,
-split invariants, and universal mutex defaults.
+The registered `rust-async-blocking-mutex` suite checks equivalent async
+execution, governed blocking isolation, capacity availability, guard behavior,
+invariant preservation, and synchronization capability. It proves exact
+disposition of `STD-0722` and `STD-0723` and rejects inline or guard-held
+blocking, unbounded isolation, alternate executor/thread fallback, unsupported
+suspended guards, split invariants, and universal mutex defaults.
 
 `verify-rust-async-cancellation-observability.sh` checks future-polling versus
 external-operation state, durable cancellation design, owned async cleanup,

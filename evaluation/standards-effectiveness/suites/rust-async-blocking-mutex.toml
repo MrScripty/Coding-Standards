@@ -1,0 +1,136 @@
+schema_version = 1
+id = "rust-async-blocking-mutex"
+owner = "profile.language.rust.async"
+description = "Contract-selected Rust async blocking isolation and synchronization with typed unavailable outcomes and no inline, unbounded, alternate-executor, split-invariant, or universal-mutex fallback."
+
+[[checks]]
+id = "blocking-mutex-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/async-blocking-mutex-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+operation = ["nonblocking", "blocking-io", "cpu-heavy"]
+execution = ["direct", "async-equivalent", "isolated", "inline-blocking"]
+isolation = ["not-required", "available", "unavailable"]
+capacity = ["not-required", "bounded", "unbounded", "unavailable"]
+guard = ["none", "released", "held-supported", "held-unsupported"]
+critical = ["none", "synchronous", "suspending"]
+invariant = ["not-required", "preserved", "split"]
+mutex = ["not-required", "sync-capable", "suspend-capable", "unavailable"]
+fallback = ["none", "alternate-executor", "new-thread", "universal-mutex"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { all = [{ field = "operation", op = "ne", value = "nonblocking" }, { field = "execution", op = "in", values = ["direct", "inline-blocking"] }] },
+  { all = [{ field = "execution", op = "eq", value = "isolated" }, { field = "capacity", op = "eq", value = "unbounded" }] },
+  { all = [{ field = "operation", op = "ne", value = "nonblocking" }, { field = "guard", op = "in", values = ["held-supported", "held-unsupported"] }] },
+  { field = "guard", op = "eq", value = "held-unsupported" },
+  { field = "invariant", op = "eq", value = "split" },
+  { all = [{ field = "critical", op = "eq", value = "suspending" }, { field = "guard", op = "eq", value = "held-supported" }, { field = "mutex", op = "ne", value = "suspend-capable" }] },
+  { all = [{ field = "critical", op = "eq", value = "synchronous" }, { field = "guard", op = "eq", value = "held-supported" }, { field = "mutex", op = "ne", value = "sync-capable" }] },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { all = [{ field = "operation", op = "ne", value = "nonblocking" }, { field = "execution", op = "eq", value = "isolated" }, { any = [{ field = "isolation", op = "eq", value = "unavailable" }, { field = "capacity", op = "eq", value = "unavailable" }] }] },
+  { all = [{ field = "critical", op = "ne", value = "none" }, { field = "mutex", op = "eq", value = "unavailable" }] },
+]
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0722", "languages/rust/RUST-ASYNC-STANDARDS.md"],
+  ["STD-0723", "languages/rust/RUST-ASYNC-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0722", "STD-0723"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0722", "languages/rust/RUST-ASYNC-STANDARDS.md", "profiles/languages/rust/async.md", "refine", "select equivalent async execution or governed blocking isolation from the operation contract"],
+  ["STD-0723", "languages/rust/RUST-ASYNC-STANDARDS.md", "profiles/languages/rust/async.md", "refine", "select synchronization from suspension invariant contention and capability facts"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0722", "STD-0723"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/concurrency.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/async.md",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/async.md"
+required = [
+  "## Isolate Blocking Work",
+  "async capability only when it preserves",
+  "lifecycle boundary owns the isolation capability",
+  "Isolation without a bounded or otherwise governed capacity contract",
+  "## Select Synchronization From Contract",
+  "whether the protected critical section can suspend",
+  "A guard crosses suspension only when the selected mechanism",
+  "Do not select one synchronization implementation as a universal",
+]
+prohibited = [
+  "spawn_blocking",
+  "parking_lot::Mutex",
+  "tokio::sync::Mutex",
+  "tokio::sync::RwLock",
+  "std::sync::Mutex",
+]
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "languages/rust/RUST-ASYNC-STANDARDS.md"
+required = [
+  "## Blocking Work",
+  "## Mutex Selection",
+  "## Cancellation Safety",
+  "## Observability",
+]
+prohibited = [
+  "spawn_blocking",
+  "parking_lot::Mutex",
+  "tokio::sync::Mutex",
+  "tokio::sync::RwLock",
+  "std::sync::Mutex",
+]
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b4f` (`Accepted`)"]

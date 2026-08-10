@@ -2109,3 +2109,23 @@
 - Next slice: implement M6-M1, then M6-M2 and M6-M3 in frozen order. Use fast
   package and affected-lifecycle gates and run one mixed checkpoint at
   M6-M-W1 closure unless a shared-contract re-plan trigger appears.
+
+## 2026-08-10 - M6-M1 Rust Async Blocking And Mutex Acceptance
+
+- Added and registered one seven-check suite preserving 18 typed blocking and
+  synchronization decisions, exact `STD-0722`/`STD-0723` inventory and
+  dispositions, direct Rust Async metadata closure, canonical policy,
+  legacy-index headings, and prohibited named-runtime/mutex defaults.
+- Deleted the Bash checker, accepted its metadata and independent-gate edges,
+  removed its exact row-35 consumer record, and reconciled the fixed consumer
+  count from 29 to 28 under the unchanged lifecycle schema.
+- Rust Async decomposition and trust/lifecycle re-plan remain independent
+  executable package gates; the suite duplicates neither lifecycle policy nor
+  Bash invocation.
+- Focused suite, both affected lifecycle gates, root-consumer and row-35
+  closure, package/edge authority, all 102 declarative suites, graph freshness
+  at 174 Bash verifiers / 179 nodes / 876 edges / 175 components, both plan
+  checks, and route/removal/diff/read-only evidence pass.
+- No source, fixture, engine, helper, schema, or unrelated lifecycle record
+  changed. Thirty-eight metadata-helper consumers remain; M6-M-W1 is deferred
+  and next slice is admitted M6-M2 Rust Async Cancellation and Observability.

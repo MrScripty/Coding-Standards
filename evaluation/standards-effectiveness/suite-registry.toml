@@ -504,3 +504,8 @@ requires = []
 id = "rust-dependency-candidate-inspection"
 path = "evaluation/standards-effectiveness/suites/rust-dependency-candidate-inspection.toml"
 requires = []
+
+[[suites]]
+id = "rust-async-blocking-mutex"
+path = "evaluation/standards-effectiveness/suites/rust-async-blocking-mutex.toml"
+requires = []
