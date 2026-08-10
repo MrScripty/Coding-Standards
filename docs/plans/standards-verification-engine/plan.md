@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-K4 through M6-K7 release wave
+**Current phase:** Milestone 6: M6-K-W1 accepted; next package requires audit
 
-**Next slice:** Implement admitted M6-K7 Release Publication through the fast
-package gates, then run the M6-K-W1 closing mixed checkpoint.
+**Next slice:** Re-audit the fresh dependency graph and admit the next
+owner-coherent helper-consumer package. No post-M6-K7 package is currently
+admitted.
 
 **Acceptance status:** `pending`
 
@@ -2826,6 +2827,19 @@ authority, all 93 declarative suites, graph freshness at 183 Bash verifiers /
 188 nodes / 902 edges / 184 components, both plan checks, and
 route/removal/diff/read-only evidence pass. Forty-seven helper consumers
 remain; the mixed checkpoint remains deferred to M6-K-W1 closure.
+
+**M6-K7 and M6-K-W1 result:** the registered
+`release-publication-policy` suite preserves the six-row all-required
+publication decision, nine exact move/merge/remove dispositions, direct
+metadata closure, canonical provider-neutral presentation, and removal of
+hosted-service/product defaults through the accepted byte-exact index
+dependency. The checker and both helper edges are absent. Focused dependency
+closure, package/edge authority, all 94 declarative suites, graph freshness at
+182 Bash verifiers / 187 nodes / 897 edges / 183 components, both plan checks,
+and route/removal/diff/read-only evidence pass. The one M6-K-W1 closing mixed
+checkpoint passed all 182 remaining Bash entrypoints. Forty-six metadata-helper
+consumers remain. No later package is admitted; a fresh dependency and
+ownership audit is required before implementation continues.
 
 **Tasks:**
 

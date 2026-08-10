@@ -1375,3 +1375,17 @@ artifact/reproducibility policy, and removed legacy defaults remain enforced.
 The Bash checker and both helper edges are absent. All fast gates pass at 183
 Bash verifiers / 188 nodes / 902 edges / 184 components and 93 declarative
 suites; 47 helper consumers remain.
+
+### Accepted M6-K7 Release Publication And M6-K-W1
+
+The six-check direct suite plus accepted byte-exact index dependency preserves
+the all-required publication decision, exact move/merge/remove evidence,
+metadata closure, provider-neutral presentation, legacy route, and removal of
+hosted-service and product-specific defaults. The Bash checker and both helper
+edges are absent. All fast gates pass at 182 Bash verifiers / 187 nodes / 897
+edges / 183 components and 94 declarative suites; 46 helper consumers remain.
+
+The M6-K-W1 closing checkpoint passed all 182 mixed Bash entrypoints against
+commit `4a39062`'s accepted 187-entrypoint opening baseline. The admitted
+train ends at M6-K7, so the next package requires a fresh graph and ownership
+audit before implementation.

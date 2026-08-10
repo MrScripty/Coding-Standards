@@ -1912,3 +1912,23 @@
   consumer changed. Forty-seven helper consumers remain; the M6-K-W1 mixed
   checkpoint remains deferred. Next slice is admitted M6-K7 Release
   Publication.
+
+## 2026-08-09 - M6-K7 Release Publication And M6-K-W1 Acceptance
+
+- Added and registered the exact six-row publication decision, nine
+  move/merge/remove dispositions, direct metadata closure, provider-neutral
+  presentation policy, legacy-index route, and hosted-service/product-default
+  prohibitions with the accepted byte-exact Release index dependency.
+- Deleted `verify-release-publication-policy.sh` and accepted both historical
+  helper edges without a helper call, wrapper, alias, compatibility path,
+  command action, or fallback.
+- Focused dependency closure, package/edge authority, all 94 declarative
+  suites, graph freshness at 182 Bash verifiers / 187 nodes / 897 edges / 183
+  components, both plan checks, route/removal/diff/read-only evidence pass.
+- The one M6-K-W1 closing mixed checkpoint passed all 182 remaining Bash
+  entrypoints. Commit `4a39062` remains the 187-entrypoint opening baseline.
+- No source, fixture, helper, engine, accepted dependency, or unrelated
+  consumer changed. Forty-six helper consumers remain.
+- The package train ends at M6-K7. Before another implementation slice, re-audit
+  the fresh graph and freeze the next owner, dependency closure, semantic
+  contract, write set, edge dispositions, and verification gates.

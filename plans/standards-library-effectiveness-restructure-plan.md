@@ -12,10 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, and M6-EDGE-FREE are accepted; exact typed
 executable-edge semantics govern further checker deletion.
 
-**Next slice:** implement the delegated verification engine's admitted M6-K7
-Release Publication package through fast package gates. M6-DM1 and M6-K4
-through M6-K6 are accepted. Run the wave checkpoint after M6-K7 closes
-M6-K-W1.
+**Next slice:** re-audit the delegated verification engine's fresh dependency
+graph and admit the next owner-coherent metadata-helper consumer package.
+M6-DM1, M6-K4 through M6-K7, and the M6-K-W1 closing checkpoint are accepted;
+no later implementation package is currently admitted.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
