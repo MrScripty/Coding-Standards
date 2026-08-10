@@ -1,0 +1,135 @@
+schema_version = 1
+id = "rust-async-cancellation-observability"
+owner = "profile.language.rust.async"
+description = "Lifecycle-owned Rust async cancellation, durability, cleanup, terminal health, and inspection evidence with typed unavailable outcomes and no assumption, detachment, leaf-ownership, or tool-availability fallback."
+
+[[checks]]
+id = "cancellation-observability-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/async-cancellation-observability-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+polling = ["active", "dropped", "completed"]
+external = ["none", "cancelled", "continues", "unknown"]
+durability = ["not-required", "transactional", "idempotent", "resumable", "compensating", "unprotected"]
+cleanup = ["not-required", "explicit-async", "drop-sync", "drop-async-assumed", "detached"]
+owner = ["lifecycle", "leaf", "missing", "not-required"]
+terminal = ["observed", "silent", "not-required"]
+inspection = ["evidence", "tool-only", "not-required"]
+capability = ["available", "unavailable"]
+fallback = ["none", "assume-external-cancel", "drop-cleanup", "leaf-log", "tool-availability"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "durability", op = "eq", value = "unprotected" },
+  { field = "cleanup", op = "in", values = ["drop-async-assumed", "detached"] },
+  { field = "owner", op = "in", values = ["leaf", "missing"] },
+  { field = "terminal", op = "eq", value = "silent" },
+  { field = "inspection", op = "eq", value = "tool-only" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unavailable"
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0724", "languages/rust/RUST-ASYNC-STANDARDS.md"],
+  ["STD-0725", "languages/rust/RUST-ASYNC-STANDARDS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0724", "STD-0725"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0724", "languages/rust/RUST-ASYNC-STANDARDS.md", "profiles/languages/rust/async.md", "refine", "distinguish future polling from external cancellation and preserve durable work and cleanup"],
+  ["STD-0725", "languages/rust/RUST-ASYNC-STANDARDS.md", "profiles/languages/rust/async.md", "refine", "assign terminal health and inspection evidence to the lifecycle owner"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0724", "STD-0725"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/concurrency.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/async.md",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/async.md"
+required = [
+  "## Prove Cancellation State",
+  "does not prove that external I/O",
+  "## Preserve Durable Work",
+  "transactional, idempotent, resumable, or compensating design",
+  "## Own Asynchronous Cleanup",
+  "Synchronous destruction may release synchronous resources",
+  "## Own Lifecycle Evidence",
+  "leaf logging does not establish terminal-state ownership",
+  "Tool availability is not evidence",
+]
+prohibited = [
+  "Dropping a future cancels it",
+  "async fn close",
+  "`Drop` is only",
+  "`tracing` spans",
+  "tokio-console",
+]
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "languages/rust/RUST-ASYNC-STANDARDS.md"
+required = ["## Cancellation Safety", "## Observability"]
+prohibited = [
+  "Dropping a future cancels it",
+  "async fn close",
+  "`Drop` is only",
+  "`tracing` spans",
+  "tokio-console",
+]
+
+[[checks]]
+id = "accepted-finding"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F045 | Resolved in Milestone 7.4b4g |"]
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b4g` (`Accepted`)"]

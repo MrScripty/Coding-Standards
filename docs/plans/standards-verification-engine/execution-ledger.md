@@ -2129,3 +2129,24 @@
 - No source, fixture, engine, helper, schema, or unrelated lifecycle record
   changed. Thirty-eight metadata-helper consumers remain; M6-M-W1 is deferred
   and next slice is admitted M6-M2 Rust Async Cancellation and Observability.
+
+## 2026-08-10 - M6-M2 Rust Async Cancellation And Observability Acceptance
+
+- Added and registered one eight-check suite preserving 20 typed cancellation
+  and observation decisions, exact `STD-0724`/`STD-0725` inventory and
+  dispositions, direct Rust Async metadata closure, canonical policy, resolved
+  finding/plan evidence, legacy headings, and prohibited cancellation,
+  cleanup, ownership, and tool defaults.
+- Deleted the Bash checker, accepted its metadata and independent-gate edges,
+  removed its exact row-35 consumer record, and reconciled the fixed consumer
+  count from 28 to 27 under the unchanged lifecycle schema.
+- Rust Async decomposition and trust/lifecycle re-plan remain independent
+  executable package gates; the suite duplicates neither lifecycle policy nor
+  Bash invocation.
+- Focused suite, both affected lifecycle gates, root-consumer and row-35
+  closure, package/edge authority, all 103 declarative suites, graph freshness
+  at 173 Bash verifiers / 178 nodes / 866 edges / 174 components, both plan
+  checks, and route/removal/diff/read-only evidence pass.
+- No source, fixture, engine, helper, schema, or unrelated lifecycle record
+  changed. Thirty-seven metadata-helper consumers remain; M6-M-W1 is deferred
+  and next slice is admitted M6-M3 Rust Interop Memory.

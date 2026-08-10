@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: M6-M1 through M6-M3 low-coupling wave
 
-**Next slice:** Implement admitted M6-M2 Rust Async Cancellation and
-Observability, then continue to M6-M3 and close M6-M-W1.
+**Next slice:** Implement admitted M6-M3 Rust Interop Memory and close
+M6-M-W1 with the mixed Bash checkpoint.
 
 **Acceptance status:** `pending`
 
@@ -3055,6 +3055,20 @@ freshness at 174 Bash verifiers / 179 nodes / 876 edges / 175 components pass.
 Thirty-eight metadata-helper consumers remain; no source, fixture, engine,
 helper, schema, or unrelated lifecycle record changed. The mixed checkpoint
 remains deferred to M6-M-W1.
+
+**M6-M2 result:** the registered `rust-async-cancellation-observability` suite
+preserves the 20-case typed cancellation/observation decision, exact
+`STD-0724` and `STD-0725` inventory and dispositions, direct Rust Async
+metadata closure, canonical profile policy, resolved finding and accepted-plan
+evidence, legacy-index headings, and negative evidence against assumed
+cancellation, destruction-only cleanup, leaf ownership, and tool defaults.
+The Bash checker and all six classified edges are absent; Rust Async
+decomposition and trust/lifecycle re-plan remain independent executable gates.
+Row-35 passes at 19 dependencies / 17 direct route dependencies / 27 consumers.
+All 103 declarative suites and graph freshness at 173 Bash verifiers / 178
+nodes / 866 edges / 174 components pass. Thirty-seven metadata-helper
+consumers remain; no source, fixture, engine, helper, schema, or unrelated
+lifecycle record changed. The mixed checkpoint remains deferred to M6-M-W1.
 
 **Tasks:**
 

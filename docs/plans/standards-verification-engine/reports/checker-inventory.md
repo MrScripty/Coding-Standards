@@ -1520,3 +1520,16 @@ dependencies / 28 consumers; the graph has 174 Bash verifiers / 179 nodes /
 876 edges / 175 components, 102 declarative suites, and 38 remaining
 metadata-helper consumers. No source, fixture, engine, helper, schema, or
 unrelated lifecycle record changed.
+
+### Accepted M6-M2 Rust Async Cancellation And Observability
+
+The eight-check suite preserves 20 typed cancellation/observation decisions,
+exact `STD-0724` and `STD-0725` inventory and dispositions, direct Rust Async
+metadata closure, canonical policy, resolved finding/plan evidence, legacy
+headings, and negative cancellation, cleanup, ownership, and tool evidence.
+The Bash checker and all six classified edges are absent while both
+decomposition/lifecycle checkers remain independent gates. Row-35 passes at 19
+dependencies / 17 direct route dependencies / 27 consumers; the graph has 173
+Bash verifiers / 178 nodes / 866 edges / 174 components, 103 declarative
+suites, and 37 remaining metadata-helper consumers. No source, fixture,
+engine, helper, schema, or unrelated lifecycle record changed.

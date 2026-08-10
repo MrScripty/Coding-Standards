@@ -509,3 +509,8 @@ requires = []
 id = "rust-async-blocking-mutex"
 path = "evaluation/standards-effectiveness/suites/rust-async-blocking-mutex.toml"
 requires = []
+
+[[suites]]
+id = "rust-async-cancellation-observability"
+path = "evaluation/standards-effectiveness/suites/rust-async-cancellation-observability.toml"
+requires = []
