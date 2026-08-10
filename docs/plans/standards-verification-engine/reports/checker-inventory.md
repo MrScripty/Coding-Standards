@@ -1347,7 +1347,7 @@ and both helper edges are absent. All fast gates pass at 184 Bash verifiers /
 189 nodes / 907 edges / 185 components and 92 declarative suites; 48 helper
 consumers remain.
 
-### Admitted M6-DM1 Multi-Output Decision Contract
+### Accepted M6-DM1 Multi-Output Decision Contract
 
 The M6-K6 artifact checker derives SBOM, checksum, and lockfile outcomes from
 one five-row fixture. The current declarative decision primitive can select
@@ -1357,3 +1357,10 @@ inputs, at least two isolated output contracts, exact header/domain agreement,
 and output-specific diagnostics while preserving the existing single-output
 form. It changes no policy, fixture, suite, registry, checker, helper, package,
 edge, or generated graph authority.
+
+The accepted implementation adds exact mode, input, output, header, domain,
+predicate, default, and rule validation to the existing decision primitive.
+Ten focused cases pass within 92 engine tests; all 92 declarative suites,
+compilation, graph and plan checks, and both 184-entrypoint shared-contract
+checkpoints pass. M6-K6 can now preserve all three artifact outcomes without
+fixture duplication, combined typing, snapshots, or Bash fallback.

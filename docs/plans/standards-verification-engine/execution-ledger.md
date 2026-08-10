@@ -1873,3 +1873,22 @@
   integrity, and all 184 mixed opening-checkpoint entrypoints.
 - Next slice: implement M6-DM1 and run focused plus closing shared-contract
   evidence before resuming M6-K6.
+
+## 2026-08-09 - M6-DM1 Multi-Output Decision Acceptance
+
+- Extended the canonical `decision` check with a mutually exclusive
+  multi-output form: exact ordered inputs, at least two output contracts, exact
+  header/domain coverage, output-isolated predicates, and independent ordered
+  evaluation with output-specific diagnostics.
+- Preserved the existing single-output schema and behavior. Added no fixture
+  copy, combined output, inferred column, topic callback, command action,
+  executable fallback, compatibility parser, or alternate evaluator.
+- Added ten focused multi-output regressions covering typed unavailable,
+  mismatch attribution, mode exclusivity, output count and uniqueness,
+  domain coverage, header order, predicate isolation, and output domains. All
+  92 engine tests and all 92 declarative suites pass.
+- Python compilation, graph freshness at 184 Bash verifiers / 189 nodes / 907
+  edges / 185 components, both plan checks, diff/read-only evidence, and all
+  184 closing mixed entrypoints pass.
+- Next slice: implement admitted M6-K6 Release Artifact with the accepted
+  multi-output capability and fast package gates; keep M6-K7 read-only.

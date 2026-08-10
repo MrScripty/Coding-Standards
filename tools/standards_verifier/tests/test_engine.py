@@ -126,6 +126,113 @@ class EngineTest(unittest.TestCase):
         )
         return "suites/decision.toml"
 
+    def write_multi_decision_suite(
+        self,
+        *,
+        expected_checksum: str = "no",
+        extra: str = "",
+        output_count: int = 3,
+        duplicate_output: bool = False,
+        lockfile_predicate_field: str = "ships_artifact",
+        lockfile_default: str = "typed-unavailable",
+        sbom_rule_outcome: str = "yes",
+    ) -> str:
+        self.write(
+            "artifact-decisions.tsv",
+            f"""
+            case\tships_artifact\tbundles_dependencies\texternal_sbom_requirement\tchecksum_consumed\tresolved_closure_source\tconsumer_resolves\texpected_sbom\texpected_checksum\texpected_lockfile
+            full\tyes\tyes\tno\tyes\tyes\tno\tyes\tyes\tyes
+            consumer\tyes\tno\tno\tno\tno\tyes\tno\t{expected_checksum}\tno
+            unresolved\tyes\tno\tno\tno\tno\tno\tno\tno\ttyped-unavailable
+            internal\tno\tyes\tno\tno\tyes\tno\tno\tno\tno
+            """,
+        )
+        checksum_column = "expected_sbom" if duplicate_output else "expected_checksum"
+        output_blocks = [
+            f"""
+            [[checks.outputs]]
+            column = "expected_sbom"
+            default = "no"
+            [[checks.outputs.rules]]
+            outcome = {json.dumps(sbom_rule_outcome)}
+            [checks.outputs.rules.when]
+            all = [
+              {{ field = "ships_artifact", op = "eq", value = "yes" }},
+              {{ any = [
+                {{ field = "bundles_dependencies", op = "eq", value = "yes" }},
+                {{ field = "external_sbom_requirement", op = "eq", value = "yes" }},
+              ] }},
+            ]
+            """,
+            f"""
+            [[checks.outputs]]
+            column = {json.dumps(checksum_column)}
+            default = "no"
+            [[checks.outputs.rules]]
+            outcome = "yes"
+            [checks.outputs.rules.when]
+            all = [
+              {{ field = "ships_artifact", op = "eq", value = "yes" }},
+              {{ field = "checksum_consumed", op = "eq", value = "yes" }},
+            ]
+            """,
+            f"""
+            [[checks.outputs]]
+            column = "expected_lockfile"
+            default = {json.dumps(lockfile_default)}
+            [[checks.outputs.rules]]
+            outcome = "yes"
+            [checks.outputs.rules.when]
+            all = [
+              {{ field = {json.dumps(lockfile_predicate_field)}, op = "eq", value = "yes" }},
+              {{ field = "resolved_closure_source", op = "eq", value = "yes" }},
+            ]
+            [[checks.outputs.rules]]
+            outcome = "no"
+            [checks.outputs.rules.when]
+            any = [
+              {{ field = "ships_artifact", op = "eq", value = "no" }},
+              {{ field = "consumer_resolves", op = "eq", value = "yes" }},
+            ]
+            """,
+        ]
+        self.write(
+            "suites/multi-decision.toml",
+            f"""
+            schema_version = 1
+            id = "multi-decision"
+            owner = "test.owner"
+            description = "Multi-output decision suite"
+
+            [[checks]]
+            id = "artifact-outcomes"
+            type = "decision"
+            path = "artifact-decisions.tsv"
+            {extra}
+            input_columns = [
+              "ships_artifact",
+              "bundles_dependencies",
+              "external_sbom_requirement",
+              "checksum_consumed",
+              "resolved_closure_source",
+              "consumer_resolves",
+            ]
+            [checks.domains]
+            case = ["*"]
+            ships_artifact = ["yes", "no"]
+            bundles_dependencies = ["yes", "no"]
+            external_sbom_requirement = ["yes", "no"]
+            checksum_consumed = ["yes", "no"]
+            resolved_closure_source = ["yes", "no"]
+            consumer_resolves = ["yes", "no"]
+            expected_sbom = ["yes", "no"]
+            expected_checksum = ["yes", "no"]
+            expected_lockfile = ["yes", "no", "typed-unavailable"]
+            {''.join(output_blocks[:output_count])}
+            """,
+        )
+        return "suites/multi-decision.toml"
+
     def write_exact_text_suite(
         self,
         *,
@@ -285,6 +392,121 @@ class EngineTest(unittest.TestCase):
 
         self.assertEqual([result.id for result in results], ["text", "decision"])
         self.assertTrue(all(result.status == "passed" for result in results))
+
+    def test_multi_output_decision_passes_with_typed_unavailable(self) -> None:
+        suite_path = self.write_multi_decision_suite()
+        self.write_registry([("multi-decision", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "passed")
+
+    def test_multi_output_mismatch_identifies_output_column(self) -> None:
+        suite_path = self.write_multi_decision_suite(expected_checksum="yes")
+        self.write_registry([("multi-decision", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "ASSERT.DECISION_OUTCOME")
+        self.assertEqual(result.diagnostics[0].field, "expected_checksum")
+
+    def test_multi_output_rejects_mixed_single_output_fields(self) -> None:
+        suite_path = self.write_multi_decision_suite(
+            extra='expected_column = "expected_lockfile"'
+        )
+        self.write_registry([("multi-decision", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.DECISION_MODE")
+
+    def test_multi_output_requires_at_least_two_outputs(self) -> None:
+        suite_path = self.write_multi_decision_suite(output_count=1)
+        self.write_registry([("multi-decision", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.DECISION_OUTPUTS")
+
+    def test_multi_output_rejects_duplicate_output_columns(self) -> None:
+        suite_path = self.write_multi_decision_suite(duplicate_output=True)
+        self.write_registry([("multi-decision", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.DECISION_OUTPUT")
+
+    def test_multi_output_domains_must_cover_exact_columns(self) -> None:
+        suite_path = self.write_multi_decision_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'expected_checksum = ["yes", "no"]\n', "", 1
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("multi-decision", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.DECISION_COLUMNS")
+
+    def test_multi_output_rejects_non_input_predicate(self) -> None:
+        suite_path = self.write_multi_decision_suite(
+            lockfile_predicate_field="expected_sbom"
+        )
+        self.write_registry([("multi-decision", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(raised.exception.diagnostic.code, "DECISION.NON_INPUT_FIELD")
+        self.assertEqual(raised.exception.diagnostic.field, "expected_sbom")
+
+    def test_multi_output_requires_exact_header_order(self) -> None:
+        suite_path = self.write_multi_decision_suite()
+        fixture = self.root / "artifact-decisions.tsv"
+        fixture.write_text(
+            fixture.read_text(encoding="utf-8").replace(
+                "expected_sbom\texpected_checksum",
+                "expected_checksum\texpected_sbom",
+                1,
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("multi-decision", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "TABLE.HEADER_CONTRACT")
+
+    def test_multi_output_default_must_belong_to_output_domain(self) -> None:
+        suite_path = self.write_multi_decision_suite(lockfile_default="missing")
+        self.write_registry([("multi-decision", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "DECISION.DEFAULT_OUTCOME")
+        self.assertEqual(result.diagnostics[0].field, "expected_lockfile")
+
+    def test_multi_output_rule_must_belong_to_output_domain(self) -> None:
+        suite_path = self.write_multi_decision_suite(
+            sbom_rule_outcome="typed-unavailable"
+        )
+        self.write_registry([("multi-decision", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "DECISION.RULE_OUTCOME")
+        self.assertEqual(result.diagnostics[0].field, "expected_sbom")
 
     def test_exact_text_passes_for_identical_utf8_bytes(self) -> None:
         self.write("exact.md", "first\nsecond\n")

@@ -44,6 +44,24 @@ operators, dependencies, and paths fail with typed diagnostics. Configuration
 cannot execute commands, import modules, evaluate code, interpolate environment
 variables, or write files.
 
+The `decision` check has two mutually exclusive canonical forms. The compact
+single-output form uses `expected_column`, `default`, and ordered `rules`; its
+TSV starts with `case` and ends with that expected column. The multi-output form
+uses one exact ordered `input_columns` list and at least two
+`[[checks.outputs]]` contracts. Its TSV header must be exactly `case`, the
+declared inputs, then the declared output columns. Every output declares
+exactly `column`, `default`, and ordered `rules`, and each is evaluated
+independently against the same validated row.
+
+Domains always cover every TSV column exactly. Multi-output rules may reference
+only declared inputs, never `case` or another output, so expected evidence
+cannot derive itself or influence a sibling decision. Defaults and rule
+outcomes must belong to the corresponding output domain. Mismatches retain
+`ASSERT.DECISION_OUTCOME` and identify the output column in `field`. Mixed
+single/multi forms, inferred columns, fewer than two outputs, duplicate columns,
+and output-to-output predicates are invalid; the engine does not select a
+fallback representation.
+
 The bounded `exact_text` check compares a contained regular file's raw bytes
 with inline expected TOML text encoded as UTF-8. It performs no newline,
 whitespace, Unicode, or encoding normalization and accepts only `id`, `type`,

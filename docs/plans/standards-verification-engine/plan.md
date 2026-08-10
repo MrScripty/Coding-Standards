@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-DM1 multi-output decision recovery
+**Current phase:** Milestone 6: M6-K4 through M6-K7 release wave
 
-**Next slice:** Implement admitted M6-DM1 as a bounded shared-engine contract;
-keep M6-K6 and M6-K7 admitted and read-only.
+**Next slice:** Implement admitted M6-K6 Release Artifact through the fast
+package gates; keep M6-K7 admitted and read-only.
 
 **Acceptance status:** `pending`
 
@@ -2681,7 +2681,7 @@ appears. The closing checkpoint validates the integrated deletions once.
 
 ##### M6-DM1: Multi-Output Decision Contract
 
-**Package status:** `Admitted`
+**Package status:** `Accepted`
 
 **Trigger:** M6-K6 owns one five-row scenario matrix with three independently
 typed outputs: SBOM, checksum, and lockfile. The current generic `decision`
@@ -2743,6 +2743,16 @@ verifiers / 189 nodes / 907 edges / 185 components, both plan checks, diff
 integrity, and the complete 184-entrypoint mixed opening checkpoint pass. No
 engine, test, documentation contract, suite, fixture, registry, policy,
 checker, helper, manifest, or generated graph file changed during admission.
+
+**Acceptance evidence:** the canonical `decision` primitive now parses one
+multi-output matrix once, validates exact declared inputs and output contracts,
+isolates every output's predicates/default/rules, and emits output-specific
+mismatch diagnostics. Ten focused multi-output cases plus all existing tests
+pass for 92 engine tests total. All 92 declarative suites, Python compilation,
+graph freshness at 184 Bash verifiers / 189 nodes / 907 edges / 185 components,
+both plan checks, diff/read-only evidence, and all 184 closing mixed entrypoints
+pass. No suite, fixture, registry, policy, checker, helper, package/edge
+manifest, generated graph, lockfile, or unrelated engine module changed.
 
 After M6-K3, Maintenance, Pipeline, Artifact, and Publication remain separate
 acyclic one-node components with zero executable inbound callers, zero contract

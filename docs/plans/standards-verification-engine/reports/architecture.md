@@ -65,6 +65,16 @@ Initial reusable checks are:
 - `decision`: strict TSV columns/domains plus ordered boolean predicates and an
   explicit default outcome.
 
+Decision checks support one compact output or several independently typed
+outputs over one canonical scenario matrix. Multi-output checks declare the
+exact ordered input columns and at least two output contracts. Their TSV header
+is exactly `case`, declared inputs, then output columns. Each output owns its
+default and ordered rules, while predicates may read only declared inputs.
+Output evidence therefore cannot feed another output or satisfy itself.
+Single-output and multi-output configuration are mutually exclusive; the
+engine does not infer a mode, split fixtures, combine outcomes, or fall back to
+an executable evaluator.
+
 Measured later families add:
 
 - exact TSV row/set/order/count checks;
@@ -75,9 +85,11 @@ Measured later families add:
 - source-index closure.
 
 Decision predicates are deliberately bounded to `all`, `any`, `not`, `eq`,
-`ne`, `in`, and `not_in` over named table fields. Rules are evaluated in
-declared order and produce one named outcome. There is no expression string,
-operator precedence parser, variable interpolation, or executable callback.
+`ne`, `in`, and `not_in` over named table fields; the multi-output form further
+restricts them to its declared input fields. Rules are evaluated in declared
+order and produce one named outcome for their owning output. There is no
+expression string, operator precedence parser, cross-output predicate, variable
+interpolation, or executable callback.
 
 ## Scheduling
 
