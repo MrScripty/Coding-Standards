@@ -2,12 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-P1-D1 owner decomposition
+**Current phase:** Milestone 6: VE045 P1 file-contract capability re-plan
 
-**Next slice:** perform the read-only VE043-P1-D1 responsibility, owner,
-incident-edge, declarative-coverage, and retirement-condition decomposition.
-Freeze an ordered owner-coherent package train or stop if one canonical owner
-or a valid intermediate state cannot be established. S1 remains unadmitted.
+**Next slice:** select one VE045 file-contract capability option before changing
+engine code or admitting a P1 package. Option 1 is recommended: add separate
+generic Markdown-structure and absent-path checks, then execute the frozen P1
+train. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -4209,6 +4209,98 @@ do not treat absence from a proposed package as retirement authority.
 report, and canonical execution ledger only. Checkers, suites, fixtures,
 registry, package and edge manifests, generated graph, numeric evidence,
 standards sources, lockfiles, and workflows remain read-only.
+
+##### VE043-P1-D1 Owner Decomposition And VE045 Capability Re-plan
+
+**P1-D1 status:** `Accepted`
+
+P1-D1 separates conservative graph references from executable behavior. The
+generated `executable_reference` edge means a shell or Python source contains a
+checker basename; `verifier_dependency` means the dependency extractor matched
+a quoted verifier path. Neither edge proves invocation by itself. Exact script
+review therefore owns whether a reference executes, inspects, or merely names
+another checker, while all generated incident edges remain lifecycle evidence
+that must be dispositioned before deletion.
+
+The ordered package train is:
+
+| Order | Package responsibility | Canonical owner | Existing coverage | Required transfer |
+| --- | --- | --- | --- | --- |
+| 1 | S1 routed vertical slice | `migration.parent-plan` | metadata graph, text, Markdown links, line budget | remove its root-consumer classification row |
+| 2 | row-35 migration lifecycle | `migration.parent-plan` | table, relation, reference inventory, text | retain only unique lifecycle evidence; remove nested checker execution |
+| 3 | root index closure | `STANDARDS-ROUTER.md` | table, relation, text | move root purity here; remove nested root-audit/router execution |
+| 4 | language index closure | `STANDARDS-ROUTER.md` | table, relation, text | remove row-45 duplicate semantic checks and invocation |
+| 5 | row-45 migration lifecycle | `migration.parent-plan` | table, relation, text | retain lifecycle evidence only |
+| 6 | Rust adoption-notes retirement | `migration.parent-plan` | table and text | remove duplicate retirement checks and calls from Rust index/row 46 |
+| 7 | Rust migration-index closure | `profiles/languages/rust/README.md` | table, relation, text | remove duplicate index checks and invocation from row 46 |
+| 8 | Rust profile authority closure | `profiles/languages/rust/README.md` | metadata graph, Markdown links, text | remove duplicate profile checks and invocation from row 46 |
+| 9 | row-46 migration lifecycle | `migration.parent-plan` | table, relation, text | retain lifecycle evidence only; remove nested checker execution |
+| 10 | root README consumer inventory | `verification-engine.migration` | reference inventory, table, relation, text | migrate remaining dynamic Bash-consumer evidence after group callers are gone |
+
+Every package receives its own checker subject, owner, exact incident-edge
+rows, suite, write set, and acceptance. Semantic transfer may edit a surviving
+caller only to remove the transferred invocation or duplicate assertion. It may
+not move that caller's remaining lifecycle authority. Shared registry, package,
+edge, README-consumer, generated graph, and plan integration stays serial;
+independent suite/fixture preparation may be isolated after capability
+acceptance.
+
+**VE045 status:** `Blocked`
+
+The train cannot yet preserve all observable contracts through existing engine
+checks. Root, language, and Rust migration indexes each require an exact ordered
+Markdown heading set plus a distinct explicit maximum line threshold. Required
+and prohibited text does not prove exact heading order or exclude additional
+headings, while `exact_text` would freeze unrelated prose. Rust adoption
+retirement also requires the former authority path itself to remain absent;
+empty table projections prove corpus state but cannot prove filesystem absence.
+
+**Option 1 - Two narrow generic checks (`Recommended`):** add
+`markdown_structure` with one contained UTF-8 path, exact ordered Markdown
+headings, and one positive maximum-line threshold; add `absent_paths` with one
+non-empty unique contained path list that succeeds only when every path is
+absent. Both are typed, side-effect-free, directly tested, and policy-neutral.
+The three index owners justify the structure primitive, and removed-authority
+non-reappearance justifies the absence primitive as a safety-critical
+invariant. Implement them as a shared-contract slice before package 1.
+
+**Option 2 - Freeze complete index files with `exact_text`:** preserve exact
+headings and line limits by snapshotting all bytes and add only `absent_paths`.
+This uses less engine code but turns unrelated prose and link edits into
+verification-contract changes, increasing churn and moving authority from the
+owned semantic constraints to whole-file snapshots. Choose it only if the
+index files are intentionally immutable; they are not.
+
+**Option 3 - Use required/prohibited text and table absence only:** avoid engine
+work by checking known headings as literals and proving the retired artifact is
+absent from corpus tables. This cannot reject extra/reordered headings, an
+over-budget index, or a reappearing untracked file. It is a lower-fidelity
+fallback and is rejected.
+
+**Option 4 - Add package-specific Python checks:** implement the missing logic
+inside S1, root, language, and Rust package checks. This preserves behavior but
+duplicates common mechanics, increases custom surface, and conflicts with the
+generic-engine objective. It is rejected unless generic contracts cannot
+express an observed invariant.
+
+**Recommendation:** select Option 1. The capability slice may touch only the
+two check modules, check registration, one focused test module, engine and
+architecture documentation, and serial plan records. Package suites, fixtures,
+registry, package/edge manifests, generated evidence, Bash checkers, standards
+sources, lockfiles, and workflows remain read-only until the shared-contract
+checkpoint passes.
+
+**Capability acceptance:** focused positive and typed negative tests for exact
+heading order, extra/missing headings, threshold equality/excess, invalid UTF-8,
+missing/escaping/symlink paths, malformed configuration, present forbidden
+paths, and absent paths; all engine tests; Python compilation; all declarative
+suites; generated graph freshness; both plan checks; diff integrity; and one
+canonical complete-suite checkpoint.
+
+**No-fallback rule:** do not replace exact structure with substring checks,
+replace absent-path evidence with table absence, freeze whole files for
+convenience, infer invocation from graph edge type, or retain a custom or Bash
+implementation beside the generic checks.
 
 **Tasks:**
 

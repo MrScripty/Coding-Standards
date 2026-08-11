@@ -12,11 +12,23 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** execute delegated VE043-P1-D1 as a read-only responsibility,
-owner, incident-edge, declarative-coverage, and retirement-condition
-decomposition. Freeze an ordered owner-coherent package train or stop if one
-canonical owner or a valid intermediate state cannot be established. Release
-Procedure, S1, and the Rust Binding train remain unadmitted.
+**Next slice:** select one delegated VE045 file-contract capability option.
+Option 1 is recommended: add generic exact Markdown-structure and absent-path
+checks before executing the accepted ten-package P1 train. Release Procedure,
+S1, and the Rust Binding train remain unadmitted.
+
+VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
+language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
+README consumer packages with canonical owners, exact incident-edge
+dispositions, duplicate/caller transfer, and serial shared-file integration.
+Generated reference edges remain lifecycle obligations but are not treated as
+proof of invocation or ownership.
+
+VE045 is the current re-plan trigger. Existing generic assertions cannot
+preserve exact heading order and explicit line ceilings across the three index
+owners or direct retired-path absence without lower-fidelity substring checks,
+corpus-only inference, or whole-file snapshots. The recommended two-check
+capability slice preserves those contracts without package-specific code.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure
@@ -27,7 +39,7 @@ recommended recovery freezes separate owner contracts, incident-edge closure,
 suite dependencies, write sets, and retirement conditions before admitting
 packages in dependency order; no package is admitted yet.
 
-VE043-P1 Option 1 is selected. P1-D1 owns decomposition evidence only and may
+VE043-P1 Option 1 is selected. P1-D1 owned decomposition evidence only and did
 not edit checker, suite, fixture, registry, package, edge, graph, numeric,
 standards, lockfile, or workflow authority. Shared integration remains serial,
 and every later package requires its own admission and exact no-fallback gate.

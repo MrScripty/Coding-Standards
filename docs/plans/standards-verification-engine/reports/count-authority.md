@@ -296,6 +296,25 @@ generated incident edges, registered suites, package authority, and canonical
 owner documents. It does not add expected totals, infer an owner, admit a
 package, remove a call, or change lifecycle evidence.
 
+P1-D1 freezes ten ordered responsibility packages: S1; row 35; root index;
+language index; row 45; Rust adoption retirement; Rust migration index; Rust
+profile authority; row 46; then the root README consumer inventory. Root and
+language index authority remains with `STANDARDS-ROUTER.md`; Rust index/profile
+authority remains with `profiles/languages/rust/README.md`; scenario and row
+lifecycle evidence remains with `migration.parent-plan`; dynamic Bash-consumer
+inventory remains with `verification-engine.migration` until final retirement.
+
+The audit distinguishes conservative path references from actual behavior.
+Generated incident edges remain exact package-lifecycle obligations, but a
+checker basename in a command argument, identity assertion, or manifest does
+not by itself establish runtime invocation or semantic ownership.
+
+VE045 blocks package admission. Existing checks cannot prove exact ordered
+headings plus explicit line ceilings for three indexes or direct filesystem
+absence for retired Rust adoption notes. The recommended recovery adds generic
+`markdown_structure` and `absent_paths` checks; it does not convert these fixed
+policy and safety contracts into mutable counts or whole-file snapshots.
+
 ## Acceptance
 
 - no README-family checker compares a mutable aggregate to a literal;

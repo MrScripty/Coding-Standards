@@ -10535,3 +10535,44 @@ and this ledger only.
 
 **Next slice:** perform P1-D1 and stop if any responsibility lacks one canonical
 owner or the proposed train requires an invalid intermediate state.
+
+## 2026-08-11 VE043-P1-D1 Acceptance And VE045 Re-plan Trigger
+
+**Outcome:** P1-D1 accepted; capability selection required before packages.
+
+Exact script review separated checker invocation, checker-content inspection,
+identity assertions, and manifest references. The generated graph intentionally
+records conservative basename references and quoted path dependencies; these
+edges remain exact lifecycle obligations but do not independently own runtime
+ordering or semantic ownership.
+
+P1-D1 freezes ten ordered packages: S1 routing; row-35 lifecycle; root-index
+closure; language-index closure; row-45 lifecycle; Rust adoption retirement;
+Rust migration-index closure; Rust profile authority; row-46 lifecycle; and
+root README consumer inventory. Each has one canonical owner and a valid
+intermediate transfer: registered semantic evidence is accepted before a
+surviving caller loses the invocation or duplicate assertion it previously
+carried.
+
+The existing engine covers metadata, text, Markdown links, line ratios, tables,
+relations, exact inventories, and lifecycle joins. It does not cover exact
+ordered Markdown headings plus explicit maximum lines, required independently
+by root, language, and Rust indexes. It also cannot prove that retired Rust
+adoption notes remain absent from the filesystem. Text approximation,
+whole-file snapshots, and corpus-only absence would change acceptance fidelity.
+
+**No-fallback result:** no owner was inferred from edge shape; no graph edge was
+silently dropped; no package, checker, call, suite, fixture, registry, manifest,
+generated artifact, numeric evidence, standards source, lockfile, or workflow
+changed. P1-D1 observations introduce no expected count.
+
+**Recommended option:** add generic `markdown_structure` and `absent_paths`
+checks in one shared-contract capability slice, then resume the frozen P1 train.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** select one VE045 option before changing engine or package
+authority.
