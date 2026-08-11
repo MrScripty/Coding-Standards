@@ -252,6 +252,13 @@ snapshot, manually maintained owner mapping, callback source, mutable baseline,
 or Bash bridge is admitted. The existing strict byte-equality path must be
 removed or delegated to the same lifecycle authority in the accepted slice.
 
+L1 selects Option 1. Implementation will add the narrow typed Python lifecycle
+check and retire or delegate strict byte equality in the same accepted slice.
+The canonical collector derives current membership; immutable baseline and C1
+records preserve audit history; accepted package rows remain the only
+checker-owner authority. No additional mutable evidence table or expected total
+is authorized.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge

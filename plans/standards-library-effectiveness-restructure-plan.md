@@ -12,11 +12,17 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** select and admit delegated VE043-A1-L1 lifecycle capability.
-Preflight proves existing static relations and strict snapshot equality cannot
-preserve immutable audit history while authorizing exact package-owned
-disappearance. No engine or migration package change is admitted yet. Release
+**Next slice:** implement delegated VE043-A1-L1 Option 1. Add one typed Python
+lifecycle check, reuse canonical candidate collection and accepted package-owner
+evidence, and remove competing strict snapshot equality atomically. Release
 Procedure, S1, and the Rust Binding train remain unadmitted.
+
+VE043-A1-L1 selects Option 1. The engine will derive live candidates in-process
+and authorize a missing baseline identity only when its checker is no longer
+live and exactly one accepted checker-package row supplies a non-empty owner.
+Baseline, C1 decisions, and package evidence remain read-only authorities. No
+current snapshot, owner map, expected count, callback, Bash bridge, mutable
+baseline, or inference fallback is admitted.
 
 VE043-A1-L1 has reached a capability re-plan trigger. Existing evidence is
 sufficient: immutable baseline identity and checker path, exact C1 coverage,

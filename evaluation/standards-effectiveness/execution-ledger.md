@@ -10420,3 +10420,30 @@ and this ledger only.
 
 **Next slice:** select one L1 capability option before changing engine code or
 migration evidence.
+
+## 2026-08-11 VE043-A1-L1 Capability Admission
+
+**Outcome:** Option 1 accepted.
+
+L1 will use one narrow typed Python check that reuses canonical numeric
+candidate collection. Current identities must remain a subset of the immutable
+baseline. A missing baseline identity is authorized only when its checker is no
+longer live and exactly one accepted `checker:<path>` package row supplies a
+non-empty explicit owner.
+
+The existing byte-equality freshness path must be removed or delegated to this
+same lifecycle authority atomically. Baseline, C1 decisions, and package rows
+remain read-only evidence. All counts and progress remain derived diagnostics.
+
+**No-fallback result:** no current snapshot, owner mapping, expected count,
+callback, relation source adapter, Bash bridge, mutable baseline, package
+inference, or owner inference is admitted.
+
+**Bounded write set:** numeric-audit and check-dispatch modules; one focused
+lifecycle-check module; focused numeric lifecycle tests; numeric suite and
+registry only if required; engine documentation; count-authority and
+architecture reports; and serial plan, issue, and ledger records.
+
+**Verification:** both plan checks and diff integrity before implementation.
+
+**Next slice:** implement and directly test the admitted L1 lifecycle check.

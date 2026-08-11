@@ -2,13 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-L1 lifecycle capability re-plan
+**Current phase:** Milestone 6: VE043-A1-L1 lifecycle implementation
 
-**Next slice:** select and admit one VE043-A1-L1 lifecycle capability. Existing
-generic contracts cannot compare a live derived inventory with immutable
-historical evidence and conditionally authorize missing rows through exact
-accepted-package ownership. No engine, baseline, decision, package, checker, or
-standards change is admitted yet. S1 remains unadmitted.
+**Next slice:** implement the accepted typed numeric-audit lifecycle check with
+focused positive and negative evidence. Reuse the canonical collector and
+existing package authority, derive all totals, and remove the competing strict
+byte-equality freshness path atomically. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3746,7 +3745,7 @@ coverage, class domain, and exception absence are verified mechanically.
 
 ##### VE043-A1 Derived Audit Admission
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 The selected recovery executes in three serial, independently verified slices:
 
@@ -4067,6 +4066,16 @@ subject prefix, but policy remains in the immutable baseline, explicit C1
 decisions, and accepted package rows. It must not infer package or owner from a
 name, graph edge, standards route, source text, or classifier. It must not write
 current rows, expected counts, progress, owner mappings, or compatibility data.
+
+**Decision:** Option 1 is selected. L1 will add one typed, side-effect-free
+Python lifecycle check that reuses canonical candidate collection. The check
+owns mechanics only: baseline and C1 records remain immutable evidence, and the
+existing migration-package row remains the sole package/owner authority. A
+missing candidate is valid only when its checker is absent from canonical live
+inventory and exactly one accepted checker-package row supplies a non-empty
+owner. The old strict current-versus-baseline byte-equality check must be removed
+or delegate to the same lifecycle implementation in this slice; dual freshness
+authority is prohibited.
 
 **Proposed implementation write set:** numeric-audit and check-dispatch modules;
 one focused lifecycle-check module; focused numeric lifecycle tests; the
