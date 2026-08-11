@@ -10576,3 +10576,27 @@ and this ledger only.
 
 **Next slice:** select one VE045 option before changing engine or package
 authority.
+
+## 2026-08-11 VE045 Option 1 Selection
+
+**Outcome:** Option 1 accepted; shared file-contract implementation is active.
+
+The engine will add separate generic `markdown_structure` and `absent_paths`
+checks. The first proves one contained UTF-8 Markdown file's exact ordered
+heading list and positive maximum-line threshold. The second proves that every
+member of one non-empty unique contained path list is absent, including direct
+protection against retired-authority reappearance.
+
+**No-fallback result:** package suites, fixtures, registry, package and edge
+manifests, generated evidence, Bash checkers, standards sources, lockfiles, and
+workflows remain frozen. Whole-file snapshots, substring or corpus-only
+approximations, package-specific implementations, Bash bridges, callbacks, and
+inferred defaults are prohibited.
+
+**Bounded write set:** the two check modules, check registration, one focused
+test module, engine and architecture documentation, and serial plan records.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** implement and directly test both generic checks, then run the
+shared-contract checkpoint before admitting the first P1 package.

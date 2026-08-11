@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE045 P1 file-contract capability re-plan
+**Current phase:** Milestone 6: VE045 P1 file-contract shared capability
 
-**Next slice:** select one VE045 file-contract capability option before changing
-engine code or admitting a P1 package. Option 1 is recommended: add separate
-generic Markdown-structure and absent-path checks, then execute the frozen P1
-train. S1 remains unadmitted.
+**Next slice:** implement and validate the selected VE045 Option 1 generic
+`markdown_structure` and `absent_paths` checks. Do not admit a P1 package until
+the shared-contract checkpoint passes. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -4245,7 +4244,7 @@ edge, README-consumer, generated graph, and plan integration stays serial;
 independent suite/fixture preparation may be isolated after capability
 acceptance.
 
-**VE045 status:** `Blocked`
+**VE045 status:** `Accepted for implementation`
 
 The train cannot yet preserve all observable contracts through existing engine
 checks. Root, language, and Rust migration indexes each require an exact ordered
@@ -4289,6 +4288,13 @@ architecture documentation, and serial plan records. Package suites, fixtures,
 registry, package/edge manifests, generated evidence, Bash checkers, standards
 sources, lockfiles, and workflows remain read-only until the shared-contract
 checkpoint passes.
+
+**Decision:** Option 1 is selected. Implement the two policy-neutral checks as
+one shared-engine contract, prove their positive and typed-negative behavior,
+and run the complete shared-contract checkpoint before any P1 admission. Do
+not add whole-file snapshots, substring or corpus-only approximations,
+package-specific implementations, Bash bridges, callbacks, or inferred
+defaults.
 
 **Capability acceptance:** focused positive and typed negative tests for exact
 heading order, extra/missing headings, threshold equality/excess, invalid UTF-8,

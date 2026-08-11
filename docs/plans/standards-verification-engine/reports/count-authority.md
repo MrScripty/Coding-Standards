@@ -315,6 +315,12 @@ absence for retired Rust adoption notes. The recommended recovery adds generic
 `markdown_structure` and `absent_paths` checks; it does not convert these fixed
 policy and safety contracts into mutable counts or whole-file snapshots.
 
+VE045 Option 1 is selected. The capability slice adds only the two generic
+typed checks, their registration and focused tests, implementation
+documentation, and serial planning evidence. Package authority remains frozen
+until the shared-contract checkpoint passes; no expected count, inferred
+default, approximation, or duplicate Bash/custom implementation is admitted.
+
 ## Acceptance
 
 - no README-family checker compares a mutable aggregate to a literal;
