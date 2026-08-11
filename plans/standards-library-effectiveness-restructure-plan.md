@@ -12,11 +12,20 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform delegated VE043-P1 read-only incident-edge and ownership
-preflight for the root README consumer checker and rows 35, 45, and 46. Stop if
-one dependency-closed owner package cannot preserve exact authority without a
-Bash bridge or cross-owner scope. Release Procedure, S1, and the Rust Binding
-train remain unadmitted.
+**Next slice:** select one delegated VE043-P1 owner-closure option before any
+checker or package edit. Option 1 is recommended: replace the superseded
+one-package assumption with a read-only decomposition into an ordered
+owner-coherent train. Release Procedure, S1, and the Rust Binding train remain
+unadmitted.
+
+VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
+in a two-checker Language Index component, row 46 in a four-checker Rust closure
+component, row 35 orchestrating multiple owners, and the separate root audit
+coupled to root-index and unadmitted S1 routing. None has package authority.
+One package would cross owners or preserve nested Bash authority. The
+recommended recovery freezes separate owner contracts, incident-edge closure,
+suite dependencies, write sets, and retirement conditions before admitting
+packages in dependency order; no package is admitted yet.
 
 VE043-A1-L1 is accepted. One registered typed Python check derives canonical
 live candidates, rejects new or unexplained missing identities, prohibits

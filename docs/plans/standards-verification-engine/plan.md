@@ -2,13 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-P1 package preflight
+**Current phase:** Milestone 6: VE043-P1 owner-closure re-plan trigger
 
-**Next slice:** perform the read-only VE043-P1 incident-edge and ownership audit
-for the root README consumer checker and rows 35, 45, and 46. Stop if one
-dependency-closed owner package cannot be admitted without a Bash bridge,
-duplicate authority, inferred owner, or cross-owner write set. S1 remains
-unadmitted.
+**Next slice:** select one VE043-P1 decomposition option before editing a
+checker, suite, fixture, package, registry, generated artifact, or standards
+source. The recommended option replaces the superseded one-package assumption
+with an ordered owner-coherent package train. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3690,10 +3689,11 @@ evidence in their owner packages. Do not build a Bash-expression parser for
 scripts scheduled for deletion.
 
 After `reference_inventory` acceptance, audit the exact incident-edge and owner
-closure of the root README consumer checker and rows 35, 45, and 46. This audit
-is the next package-admission re-plan gate. It must not delete a checker while a
-Bash caller remains, introduce a Python-through-Bash bridge, or retain duplicate
-declarative and Bash authority.
+closure of the root README consumer checker and rows 35, 45, and 46. The former
+assumption that these paths could enter one dependency-closed owner package is
+superseded by the VE043-P1 owner-closure trigger below. No checker may be deleted
+while a Bash caller remains, no Python-through-Bash bridge may be introduced,
+and declarative and Bash authority may not coexist for the same behavior.
 
 ##### VE043-A1 Candidate-Authority Re-plan Trigger
 
@@ -4119,6 +4119,87 @@ the focused three-check repository suite, generated inventory/graph freshness
 at 170 verifiers / 175 nodes / 855 edges / 171 components, both plan checks,
 diff integrity, and all 170 canonical mixed entrypoints pass. Baseline, C1,
 package, graph, checker, standards, lockfile, and workflow evidence is unchanged.
+
+##### VE043-P1 Owner-Closure Re-plan Trigger
+
+**Status:** `Blocked`
+
+The read-only incident-edge audit invalidates P1's one-package assumption. The
+four named checkers do not form one dependency-closed owner-coherent unit:
+
+- row 35 is a singleton generated component, but it executes Commit Authority,
+  Contract Ownership, the execution train, root-index closure, root README
+  audit, and root-router evidence and dynamically executes transitive contract
+  consumers;
+- row 45 is in a generated two-checker strongly connected component with
+  Language Index Closure and also executes Language Profile Routing, the root
+  README audit, root-router evidence, and the execution train;
+- row 46 is in a generated four-checker strongly connected component with Rust
+  Adoption Notes Retirement, Rust Index Closure, and Rust Profile Authority
+  Closure, while also executing independently owned Rust API, Rust Async, Rust
+  Tooling, Rust Unsafe, language-routing, root-audit, and execution-train
+  checks; and
+- the root README audit is a separate infrastructure checker with inbound
+  executable references from root-index, language-index, rows 35/45/46, and
+  Rust profile closure and outbound checks of Commit Authority, language-index,
+  root-index, root-router, and unadmitted S1 routing.
+
+None of the four named checkers or the reciprocal language/Rust closure
+checkers has a canonical migration-package row. The immutable numeric baseline
+currently associates 27 candidates with row 35, nine with row 45, 11 with row
+46, and eight with the root audit; these are derived audit observations, not
+expected counts. A single package would therefore either cross policy owners,
+preserve nested Bash orchestration, duplicate authority, or silently omit
+incident edges and prerequisites. All are prohibited.
+
+**Option 1 - Ordered owner-coherent package train (`Recommended`):** replace P1
+with a decomposition stage that freezes one canonical owner, responsibility
+set, exact incident-edge closure, declarative dependency, allowed write set,
+and retirement condition for each package. Keep root README/routing
+infrastructure, Language Index closure, Rust profile/index closure, and
+Milestone 7 lifecycle evidence as separate semantic owners. Include discovered
+root-index and S1 prerequisites in the train rather than hiding them, and
+transfer each executable caller edge only when its callee's registered suite is
+accepted. Integrate shared registry, package, graph, README, and plan changes
+serially. This preserves exact authority while allowing bounded owner packages.
+
+**Option 2 - One atomic transitive-closure wave:** migrate every named checker,
+reciprocal component member, inbound caller, and prerequisite together. This
+can eliminate dangling calls in one state transition, but it creates a broad
+cross-owner write set with several independently changing contracts and weakens
+reviewability. Choose it only if later evidence proves the contracts cannot be
+separated without an invalid intermediate state; current evidence does not.
+
+**Option 3 - Retain the orchestration checkers while migrating semantic
+leaves:** register owner suites but keep rows 35/45/46 and the root audit as
+long-lived Bash integration gates. This minimizes immediate graph edits, but it
+retains repeated transitive Bash execution and delays the engine-only objective.
+It is valid only for a checker proven to own a durable independent integration
+contract, not as a compatibility bridge or default.
+
+**Option 4 - Reviewed retirement of historical-only checks:** delete a checker
+without replacement only after exact evidence proves every observable contract
+is historical bookkeeping already owned by accepted declarative suites and no
+caller remains. This may apply to individual lifecycle assertions during the
+Option 1 train, but cannot retire the four candidates as a group: the root audit
+still owns live dynamic inventory and route checks, and the row checkers still
+own migration evidence.
+
+**Recommendation:** select Option 1. Its first slice is read-only P1-D1
+decomposition: produce an exact responsibility/owner/edge matrix and an ordered
+package train, then stop if any behavior lacks one canonical owner or any
+intermediate state requires dual authority. No package is admitted by this
+trigger record.
+
+**No-fallback rule:** do not infer owner from graph adjacency, checker name, or
+file location; do not preserve a Bash caller around a migrated suite; do not
+invoke Python through Bash; do not combine owners to reduce package count; and
+do not treat absence from a proposed package as retirement authority.
+
+**Trigger write set:** this plan, the parent plan, issues, count-authority
+report, and canonical execution ledger only. Checkers, suites, fixtures,
+registry, package and edge manifests, generated graph, numeric evidence,
+standards sources, lockfiles, and workflows remain read-only.
 
 **Tasks:**
 

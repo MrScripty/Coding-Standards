@@ -10475,3 +10475,40 @@ canonical mixed entrypoints.
 
 **Next slice:** audit exact incident-edge and owner closure for VE043-P1 without
 editing package, checker, or standards authority.
+
+## 2026-08-11 VE043-P1 Owner-Closure Re-plan Trigger
+
+**Outcome:** Re-plan required before package admission.
+
+The read-only generated-graph audit invalidates P1's one-package assumption.
+Row 35 is a singleton component but executes and dynamically discovers checks
+owned by multiple domains. Row 45 is in a two-checker component with Language
+Index Closure. Row 46 is in a four-checker component with Rust Adoption Notes
+Retirement, Rust Index Closure, and Rust Profile Authority Closure. The root
+README audit is a separate infrastructure checker with additional inbound
+root-index and outbound unadmitted S1 routing relationships.
+
+None of the four P1 checkers or the reciprocal language/Rust closure checkers
+has a package row. The immutable numeric baseline derives 27, nine, 11, and
+eight candidates respectively for row 35, row 45, row 46, and the root audit;
+these are observations, not expected values.
+
+**No-fallback result:** no package, edge, checker, suite, fixture, registry,
+generated graph, numeric evidence, owner, standards source, lockfile, or
+workflow changed. No owner was inferred from graph adjacency or naming, no
+Bash caller was removed, and no historical checker was treated as retired.
+
+**Recommended option:** replace P1 with an ordered owner-coherent package train.
+First freeze an exact responsibility/owner/edge matrix for root README/routing
+infrastructure, Language Index closure, Rust profile/index closure, and
+Milestone 7 lifecycle evidence, including root-index and S1 prerequisites.
+Then admit bounded packages in dependency order and transfer caller edges only
+with accepted registered suites.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** select one P1 decomposition option before changing executable or
+package authority.

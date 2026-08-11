@@ -269,11 +269,27 @@ cardinality remain derived; baseline, C1, and package rows are unchanged.
 
 ### VE043-P1: README Consumer Package Audit
 
-After `reference_inventory` is accepted, perform a fresh read-only incident-edge
-and ownership audit for the root README consumer checker and rows 35, 45, and
-46. Admit only a dependency-closed package. Do not leave Bash callers pointing
-to a deleted checker, run declarative evidence through a Bash bridge, or retain
-dual authority.
+The completed read-only audit supersedes the former assumption that the root
+README consumer checker and rows 35, 45, and 46 can be admitted as one package.
+The generated graph places row 45 in a two-checker Language Index component and
+row 46 in a four-checker Rust closure component. Row 35 dynamically orchestrates
+multiple owners. The separate root audit has inbound callers from those groups
+and root-index closure and invokes unadmitted S1 routing. None of these subjects
+has current migration-package authority.
+
+The lifecycle baseline currently derives 27 row-35 candidates, nine row-45
+candidates, 11 row-46 candidates, and eight root-audit candidates. These values
+are observations only. Their retirement remains governed by checker absence and
+one exact accepted package row with an explicit owner; no count is copied into
+package authority.
+
+Option 1 is recommended but not yet selected: decompose P1 into an ordered
+owner-coherent train for root README/routing infrastructure, Language Index
+closure, Rust profile/index closure, and Milestone 7 lifecycle evidence. Freeze
+root-index and S1 prerequisites explicitly, transfer executable caller edges
+only with accepted registered suites, and integrate shared authority files
+serially. A cross-owner mega-package, retained Bash bridge, inferred owner, and
+blanket historical retirement remain prohibited.
 
 ## Acceptance
 
