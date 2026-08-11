@@ -85,13 +85,20 @@ whose observed sequence differs from its declared sequence produces
 
 The `edge_dispositions` check validates migration packages against the exact
 generated executable graph. Packages opt into exactly one configured mode.
-`edge-dispositions` requires every outgoing `executable_reference`,
+`edge-dispositions` requires every incident `executable_reference`,
 `helper_dependency`, and `verifier_dependency` edge to have one exact manifest
 row. `edge-free` prohibits manifest rows and requires the generated graph to
-contain no outgoing executable edges. Admitted edge-free packages must retain
+contain no incident executable edges. Admitted edge-free packages must retain
 their checker; accepted edge-free packages must not. Admitted edge packages
 must name present edges; accepted edge packages retain their historical rows
 while their checker and graph edges are absent.
+
+Edge identity is the exact type, source, and target tuple. The package checker
+must be exactly one endpoint, which determines direction without a separate
+schema field or inferred default. Retained checker and artifact replacements
+name the opposite endpoint: the callee for an outbound edge or the caller for
+an inbound edge. Accepted packages reject both surviving prerequisites and
+dangling callers that still reference the deleted checker.
 
 Each edge row has one of these dispositions and replacement forms:
 
@@ -107,8 +114,8 @@ Each edge row has one of these dispositions and replacement forms:
 Native assertions must name an existing check in a registered package-owned
 suite. Suite requirements must name an actual registry `requires` edge whose
 source suite is in the package write set. Retained checkers and external
-artifacts must equal the current edge target. Replacement and evidence paths
-are repository-contained regular files. An `invalid/unresolved` row may
+artifacts must equal the endpoint opposite the package checker. Replacement and
+evidence paths are repository-contained regular files. An `invalid/unresolved` row may
 document an admitted blocker but cannot be accepted. The check never infers a
 disposition from graph shape or executes a replacement.
 

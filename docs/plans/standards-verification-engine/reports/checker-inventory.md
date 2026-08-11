@@ -1571,7 +1571,7 @@ source/target model to exact incident-edge authority, adds directional negative
 coverage, and runs a shared-contract checkpoint before the two semantic
 packages are reconsidered.
 
-### Admitted M6-EDGE-2 Exact Incident-Edge Authority
+### Accepted M6-EDGE-2 Exact Incident-Edge Authority
 
 Option 1 is selected for VE041. The existing manifest schema is sufficient:
 the package checker endpoint determines whether a row is outbound or inbound,
@@ -1582,5 +1582,14 @@ to name the opposite endpoint, and reject accepted dangling caller edges.
 The slice owns only the existing assertion, its focused tests, engine
 documentation, and serial plan records. Manifests, suites, generated graph,
 semantic checkers and fixtures, standards sources, helpers, and schemas remain
-read-only. M6-N1 and M6-N2 remain unadmitted until focused, engine,
-declarative, graph, plan, and mixed shared-contract gates pass.
+read-only. The implementation indexes every executable edge under both
+endpoints, compares exact type/source/target identity, and validates that
+directional retained evidence names the opposite endpoint. Accepted and
+edge-free states reject inbound dangling callers without a schema fork,
+compatibility parser, bespoke scan, or package exception.
+
+All 27 focused edge tests, all 99 engine tests, Python compilation, the
+registered edge contract, all 104 declarative suites, both plan checks, diff
+integrity, and the complete mixed 172-entrypoint checkpoint pass. The generated
+graph remains 172 Bash verifiers / 177 nodes / 857 edges / 173 components.
+M6-N1 and M6-N2 remain unadmitted pending a fresh exact-caller package audit.

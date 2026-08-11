@@ -2209,3 +2209,25 @@
   read-only.
 - M6-N1 and M6-N2 remain unadmitted. A shared-contract checkpoint is required
   before either semantic package can proceed.
+
+## 2026-08-11 - M6-EDGE-2 Exact Incident-Edge Authority Acceptance
+
+- Replaced source-only package edge comparison with exact incident-edge
+  comparison over `(edge_type, source, target)` while preserving the existing
+  manifest schema and every historical row.
+- Indexed executable edges under both endpoints, inferred direction from the
+  package-checker endpoint, and required retained checker/artifact evidence to
+  name the opposite endpoint.
+- Added focused positive inbound coverage and typed negative coverage for
+  omitted, fabricated, wrong-endpoint, dangling accepted, and edge-free inbound
+  cases. Existing outbound behavior remains directly covered.
+- All 27 focused edge tests, all 99 engine tests, Python compilation, the
+  registered edge contract, all 104 declarative suites, graph freshness at 172
+  Bash verifiers / 177 nodes / 857 edges / 173 components, both plan checks,
+  and diff integrity pass.
+- The complete mixed checkpoint passed all 172 remaining Bash entrypoints. No
+  manifest, suite, registry, graph, semantic checker/fixture, standards source,
+  helper, schema, lockfile, or workflow artifact changed.
+- VE041 is resolved without a schema fork, compatibility parser, bespoke scan,
+  package exception, or legacy bridge. M6-N1 and M6-N2 remain unadmitted; next
+  slice is a fresh exact incident-edge and lifecycle-caller package audit.

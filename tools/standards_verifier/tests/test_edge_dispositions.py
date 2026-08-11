@@ -181,6 +181,29 @@ class EdgeDispositionsTest(unittest.TestCase):
 
         self.assertEqual(self.run_contract().status, "passed")
 
+    def test_admitted_inbound_independent_gate_passes(self) -> None:
+        self.write("source.sh", "#!/usr/bin/env bash\n")
+        self.write("caller.sh", "#!/usr/bin/env bash\n")
+        self.write_package()
+        self.write(
+            "edges.tsv",
+            EDGE_HEADER + "verifier_dependency\tcaller.sh\tsource.sh\n",
+        )
+        self.write(
+            "edge-dispositions.tsv",
+            MANIFEST_HEADER
+            + self.row(
+                edge_type="verifier_dependency",
+                source="caller.sh",
+                target="source.sh",
+                disposition="independent-gate",
+                replacement="checker:caller.sh",
+                evidence="caller.sh",
+            ),
+        )
+
+        self.assertEqual(self.run_contract().status, "passed")
+
     def test_accepted_absent_edge_contract_passes(self) -> None:
         self.write_package(state="accepted")
         self.write("edges.tsv", EDGE_HEADER)
@@ -296,6 +319,92 @@ class EdgeDispositionsTest(unittest.TestCase):
             {item.code for item in result.diagnostics},
         )
 
+    def test_omitted_inbound_coverage_is_invalid(self) -> None:
+        self.admitted_contract()
+        self.write("caller.sh", "#!/usr/bin/env bash\n")
+        self.write(
+            "edges.tsv",
+            EDGE_HEADER
+            + "helper_dependency\tsource.sh\ttarget.sh\n"
+            + "verifier_dependency\tcaller.sh\tsource.sh\n",
+        )
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_INCOMPLETE_COVERAGE",
+            {item.code for item in result.diagnostics},
+        )
+
+    def test_fabricated_inbound_edge_is_invalid(self) -> None:
+        self.admitted_contract()
+        self.write("caller.sh", "#!/usr/bin/env bash\n")
+        current = (self.root / "edge-dispositions.tsv").read_text(encoding="utf-8")
+        self.write(
+            "edge-dispositions.tsv",
+            current
+            + self.row(
+                edge_type="verifier_dependency",
+                source="caller.sh",
+                target="source.sh",
+                disposition="independent-gate",
+                replacement="checker:caller.sh",
+                evidence="caller.sh",
+            ),
+        )
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_ADMITTED_ABSENT", {item.code for item in result.diagnostics}
+        )
+
+    def test_edge_without_package_endpoint_is_invalid(self) -> None:
+        self.admitted_contract()
+        self.write("caller.sh", "#!/usr/bin/env bash\n")
+        self.write(
+            "edge-dispositions.tsv",
+            MANIFEST_HEADER
+            + self.row(
+                source="caller.sh",
+                disposition="independent-gate",
+                replacement="checker:target.sh",
+            ),
+        )
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_ENDPOINT", {item.code for item in result.diagnostics}
+        )
+
+    def test_inbound_gate_must_name_retained_caller(self) -> None:
+        self.write("source.sh", "#!/usr/bin/env bash\n")
+        self.write("caller.sh", "#!/usr/bin/env bash\n")
+        self.write_package()
+        self.write(
+            "edges.tsv",
+            EDGE_HEADER + "verifier_dependency\tcaller.sh\tsource.sh\n",
+        )
+        self.write(
+            "edge-dispositions.tsv",
+            MANIFEST_HEADER
+            + self.row(
+                edge_type="verifier_dependency",
+                source="caller.sh",
+                target="source.sh",
+                disposition="independent-gate",
+                replacement="checker:source.sh",
+                evidence="caller.sh",
+            ),
+        )
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_REPLACEMENT", {item.code for item in result.diagnostics}
+        )
+
     def test_absent_admitted_edge_is_invalid(self) -> None:
         self.admitted_contract()
         self.write("edges.tsv", EDGE_HEADER)
@@ -317,6 +426,33 @@ class EdgeDispositionsTest(unittest.TestCase):
             + self.row(
                 disposition="suite-requires",
                 replacement="suite:edges->target",
+                state="accepted",
+            ),
+        )
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_ACCEPTED_PRESENT", {item.code for item in result.diagnostics}
+        )
+
+    def test_dangling_inbound_accepted_edge_is_invalid(self) -> None:
+        self.write("caller.sh", "#!/usr/bin/env bash\n")
+        self.write_package(state="accepted")
+        self.write(
+            "edges.tsv",
+            EDGE_HEADER + "verifier_dependency\tcaller.sh\tsource.sh\n",
+        )
+        self.write(
+            "edge-dispositions.tsv",
+            MANIFEST_HEADER
+            + self.row(
+                edge_type="verifier_dependency",
+                source="caller.sh",
+                target="source.sh",
+                disposition="independent-gate",
+                replacement="checker:caller.sh",
+                evidence="caller.sh",
                 state="accepted",
             ),
         )
@@ -442,6 +578,22 @@ class EdgeDispositionsTest(unittest.TestCase):
         self.write_package(verification="focused,edge-free")
         self.write(
             "edges.tsv", EDGE_HEADER + "helper_dependency\tsource.sh\ttarget.sh\n"
+        )
+        self.write("edge-dispositions.tsv", MANIFEST_HEADER)
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_FREE_PRESENT", {item.code for item in result.diagnostics}
+        )
+
+    def test_edge_free_package_rejects_inbound_graph_edges(self) -> None:
+        self.write("source.sh", "#!/usr/bin/env bash\n")
+        self.write("caller.sh", "#!/usr/bin/env bash\n")
+        self.write_package(verification="focused,edge-free")
+        self.write(
+            "edges.tsv",
+            EDGE_HEADER + "verifier_dependency\tcaller.sh\tsource.sh\n",
         )
         self.write("edge-dispositions.tsv", MANIFEST_HEADER)
 

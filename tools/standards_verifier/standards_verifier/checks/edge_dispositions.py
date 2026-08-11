@@ -184,19 +184,19 @@ class EdgeDispositionsCheck:
             else:
                 packages[package_id] = package
 
-        actual_by_source: dict[str, set[tuple[str, str]]] = {}
+        actual_by_subject: dict[str, set[tuple[str, str, str]]] = {}
         for edge in graph_rows:
             if edge["edge_type"] not in EXECUTABLE_EDGE_TYPES:
                 continue
-            actual_by_source.setdefault(edge["source"], set()).add(
-                (edge["edge_type"], edge["target"])
-            )
+            identity = (edge["edge_type"], edge["source"], edge["target"])
+            actual_by_subject.setdefault(edge["source"], set()).add(identity)
+            actual_by_subject.setdefault(edge["target"], set()).add(identity)
 
         packages_by_owner: dict[str, set[str]] = {}
         for package_id, package in packages.items():
             packages_by_owner.setdefault(package["owner"], set()).add(package_id)
 
-        represented: dict[str, set[tuple[str, str]]] = {}
+        represented: dict[str, set[tuple[str, str, str]]] = {}
         seen: set[tuple[str, str, str, str]] = set()
         for line_number, row in enumerate(rows, start=2):
             for field, value in row.items():
@@ -267,23 +267,30 @@ class EdgeDispositionsCheck:
                     )
                 )
 
-            expected_source = package["subject"].removeprefix("checker:")
+            package_checker = package["subject"].removeprefix("checker:")
+            source_is_package = row["source"] == package_checker
+            target_is_package = row["target"] == package_checker
+            retained_endpoint: str | None = None
             if (
                 not package["subject"].startswith("checker:")
-                or row["source"] != expected_source
+                or source_is_package == target_is_package
             ):
                 diagnostics.append(
                     _diagnostic(
                         context,
                         self.id,
-                        "ASSERT.EDGE_SOURCE",
-                        "edge source must equal the package checker subject",
+                        "ASSERT.EDGE_ENDPOINT",
+                        "exactly one edge endpoint must equal the package checker subject",
                         path=self.path,
                         row=line_number,
-                        field="source",
-                        expected=expected_source,
-                        observed=row["source"],
+                        field="source,target",
+                        expected=package_checker,
+                        observed=f"{row['source']}->{row['target']}",
                     )
+                )
+            else:
+                retained_endpoint = (
+                    row["target"] if source_is_package else row["source"]
                 )
             if row["owner"] != package["owner"]:
                 diagnostics.append(
@@ -357,11 +364,12 @@ class EdgeDispositionsCheck:
                         field="disposition",
                     )
                 )
-            else:
+            elif retained_endpoint is not None:
                 self._validate_replacement(
                     context,
                     row,
                     package,
+                    retained_endpoint,
                     line_number,
                     packages_by_owner.get(package["owner"], set()),
                     registry_paths,
@@ -382,7 +390,7 @@ class EdgeDispositionsCheck:
                 check=self.id,
             )
             represented.setdefault(row["package_id"], set()).add(
-                (row["edge_type"], row["target"])
+                (row["edge_type"], row["source"], row["target"])
             )
 
         participating = {
@@ -394,7 +402,7 @@ class EdgeDispositionsCheck:
         for package_id, package in participating.items():
             source = package["subject"].removeprefix("checker:")
             declared = represented.get(package_id, set())
-            actual = actual_by_source.get(source, set())
+            actual = actual_by_subject.get(source, set())
             verification = package["verification"].split(",")
             has_manifest = self.participation_token in verification
             is_edge_free = self.edge_free_token in verification
@@ -432,7 +440,7 @@ class EdgeDispositionsCheck:
                             context,
                             self.id,
                             "ASSERT.EDGE_FREE_PRESENT",
-                            "edge-free package has executable graph edges",
+                            "edge-free package has incident executable graph edges",
                             path=self.edges_path,
                             field="package_id",
                             expected="[]",
@@ -481,7 +489,7 @@ class EdgeDispositionsCheck:
                             context,
                             self.id,
                             "ASSERT.EDGE_INCOMPLETE_COVERAGE",
-                            "admitted package omits current executable edges",
+                            "admitted package omits current incident executable edges",
                             path=self.path,
                             field="package_id",
                             expected=repr(sorted(actual)),
@@ -494,7 +502,7 @@ class EdgeDispositionsCheck:
                             context,
                             self.id,
                             "ASSERT.EDGE_ADMITTED_ABSENT",
-                            "admitted disposition names an absent executable edge",
+                            "admitted disposition names an absent incident executable edge",
                             path=self.path,
                             field="package_id",
                             expected=repr(sorted(actual)),
@@ -520,7 +528,7 @@ class EdgeDispositionsCheck:
                             context,
                             self.id,
                             "ASSERT.EDGE_ACCEPTED_PRESENT",
-                            "accepted package still has executable graph edges",
+                            "accepted package still has incident executable graph edges",
                             path=self.edges_path,
                             field="package_id",
                             expected="[]",
@@ -534,6 +542,7 @@ class EdgeDispositionsCheck:
         context: CheckContext,
         row: dict[str, str],
         package: dict[str, str],
+        retained_endpoint: str,
         line_number: int,
         same_owner_packages: set[str],
         registry_paths: dict[str, str],
@@ -591,17 +600,18 @@ class EdgeDispositionsCheck:
             return
 
         if kind in {"checker", "artifact"}:
-            if value != row["target"]:
+            if value != retained_endpoint:
                 diagnostics.append(
                     _diagnostic(
                         context,
                         self.id,
                         "ASSERT.EDGE_REPLACEMENT",
-                        "retained checker or artifact must equal the edge target",
+                        "retained checker or artifact must equal the edge endpoint "
+                        "opposite the package checker",
                         path=self.path,
                         row=line_number,
                         field="replacement",
-                        expected=f"{kind}:{row['target']}",
+                        expected=f"{kind}:{retained_endpoint}",
                         observed=row["replacement"],
                     )
                 )

@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-EDGE-2 exact incident-edge authority
+**Current phase:** Milestone 6: post-M6-EDGE-2 lifecycle-caller package audit
 
-**Next slice:** Implement admitted M6-EDGE-2, run the shared-contract
-checkpoint, and re-evaluate M6-N1 Contract HTTP Outcome and M6-N2 Persistence
-Owner only after exact incident-edge authority is accepted.
+**Next slice:** Re-audit the unchanged executable graph and admit M6-N1
+Contract HTTP Outcome and M6-N2 Persistence Owner only with exact incident-edge
+rows, explicit row-33/row-32 caller transfer, bounded write sets, and frozen
+package gates.
 
 **Acceptance status:** `pending`
 
@@ -2141,7 +2142,7 @@ fallback path changed.
 
 ##### Wave 4 Admission: Testing Evidence Family
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Packages:** 13 separate packages for acceptance paths, async evidence,
 concurrency consolidation, coverage documentation, test-data lifecycle,
@@ -3192,6 +3193,21 @@ freshness, both plan checks, diff/whitespace validation, and one complete mixed
 Bash checkpoint pass. Any manifest/schema rewrite, accepted historical-row
 change, graph-generation change, owner inference, arbitrary execution, or
 failure requiring a package-specific exception is a re-plan trigger.
+
+**Outcome:** The generic assertion now indexes every executable edge under
+both endpoints and compares exact `(edge_type, source, target)` identities.
+Direction is inferred from the existing package-checker endpoint, retained
+checker or artifact evidence names the opposite endpoint, and accepted or
+edge-free packages reject dangling inbound callers. No schema version,
+compatibility parser, package-specific exception, removed-path substitute, or
+legacy execution bridge was added.
+
+**Verification:** all 27 focused edge-disposition tests and all 99 engine tests
+pass; Python compilation passes with an isolated bytecode cache; the registered
+edge contract and all 104 declarative suites pass; graph freshness remains 172
+Bash verifiers / 177 nodes / 857 edges / 173 components; both plan checks and
+diff integrity pass; and the complete mixed 172-entrypoint checkpoint exits
+zero.
 
 **Tasks:**
 
