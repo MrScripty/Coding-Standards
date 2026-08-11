@@ -1694,3 +1694,37 @@ checks, and all 170 mixed entrypoints. The S1 checker, caller, fixture, suite
 registry, manifests, graph, standards, helpers, and lifecycle artifacts remain
 read-only until the capability contract is accepted and S1 is separately
 audited.
+
+### M6-RC1 Closing-Checkpoint Integrity Re-plan
+
+The implemented routing primitives pass 24 focused tests, all 123 engine tests,
+all 106 declarative suites, compilation, graph freshness, both plan checks, and
+diff integrity. A canonical fail-fast mixed audit finds one root defect:
+row 46 requires 33 current README-consumer rows while the accepted live
+manifest and root audit contain 26. Its three Rust callers consequently fail;
+the other 166 entrypoints pass.
+
+The hard-coded total is duplicated mutable authority. Row 46 already checks the
+exact retained Rust profile consumer and calls the root audit, while its
+33-to-34 statement records the historical activation event. VE043 recommends
+removing only the duplicate live-total assertion, retaining both exact proofs,
+and using `run-complete-suite.sh` as the sole mixed acceptance entrypoint. No S1
+package is admitted and M6-RC1 is not accepted before that repair.
+
+### VE043 Count-Authority Recovery Admission
+
+The row-46 failure exposed a family rather than an isolated literal. Row 35
+duplicates mutable totals for 17 dependency rows, their 15/1/1 categories, and
+26 consumer rows; the root audit duplicates 26 despite already comparing exact
+observed and manifested path sets. The table engine also accepts `row_count`,
+which eight registered suites use. Seven uses duplicate exact projections; GUI
+smoke requires an exact case-key projection before removal.
+
+VE043-R1 is admitted to remove only README-family mutable totals, derive report
+counts, retain exact classification and historical identities, and restore the
+canonical fail-fast baseline without changing either manifest. VE043-E1 is a
+later shared engine package that removes `row_count` with no legacy parser and
+adds bounded `reference_inventory` set derivation. A 359-candidate numeric scan
+is an audit queue, not a blanket defect count; VE043-A1 classifies each by
+semantic kind before owner-local migration. README checker deletion remains
+blocked on the later VE043-P1 incident-edge audit.

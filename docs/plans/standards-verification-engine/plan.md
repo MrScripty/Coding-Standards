@@ -2,17 +2,20 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-RC1 routing evidence primitives
+**Current phase:** Milestone 6: M6-RC1 closing-checkpoint integrity re-plan
 
-**Next slice:** Implement admitted M6-RC1 `markdown_links` and `line_budget`
-assertions, run the closing shared-contract checkpoint, and only then audit S1
-for package admission.
+**Next slice:** implement admitted VE043-R1, removing duplicated mutable README
+totals without changing either manifest; then close M6-RC1 through the
+repository-owned fail-fast 170-entrypoint runner. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
 **Issues:** [issues.md](issues.md)
+
+**Count-authority recovery:**
+[reports/count-authority.md](reports/count-authority.md)
 
 ## Objective
 
@@ -3477,6 +3480,156 @@ all 106 declarative suites, graph freshness at 170 Bash verifiers / 175 nodes /
 Bash entrypoints. No engine, test, documentation, suite, registry, checker,
 fixture, source, helper, manifest, generated artifact, schema, or lockfile
 changed during admission.
+
+#### M6-RC1 Closing-Checkpoint Integrity Re-plan Trigger
+
+**Status:** `Active`
+
+Implementation of the two admitted generic assertions is complete and passes
+24 focused routing tests, all 123 engine tests, Python compilation, all 106
+declarative suites, graph freshness at 170 Bash verifiers / 175 nodes / 854
+edges / 171 components, both plan checks, and diff integrity. M6-RC1 is not
+accepted because the canonical fail-fast mixed checkpoint is not green.
+
+The first failure is
+`evaluation/standards-effectiveness/verify-milestone-7-row-46-decomposition.sh`:
+it requires the live README-consumer manifest to contain 33 rows, while the
+accepted manifest and its owning root audit contain 26. Three other failing
+entrypoints call row 46; the other 166 entrypoints pass. The row-46 contract
+already proves the retained Rust profile consumer's exact classification and
+calls the root README audit, so its hard-coded mutable total duplicates current
+manifest authority. Its 33-to-34 statement is valid historical activation
+evidence, not a valid invariant for a manifest that decreases as Bash consumers
+are migrated.
+
+The earlier M6-N-W1 and M6-RC1 opening mixed-checkpoint claims were produced by
+an ad hoc loop that did not fail fast and could return the final checker's
+success after an intermediate failure. Those claims are superseded for current
+acceptance purposes. The repository-owned
+`evaluation/standards-effectiveness/run-complete-suite.sh` is the only accepted
+mixed-checkpoint entrypoint for this recovery and later slices.
+
+**Option 1 - Restore single current-state authority (`Recommended`):** admit one
+bounded lifecycle repair that removes the row-46 hard-coded live total, retains
+its exact Rust profile consumer/classification proof, preserves the historical
+33-to-34 activation statement, and makes the decomposition explicit that the
+root README audit owns current manifest completeness and count. Add focused
+negative evidence for a missing or misclassified retained consumer, run row 46
+and its three callers, then run the canonical complete-suite launcher. Choose
+this to eliminate duplicated mutable authority without weakening historical or
+current evidence.
+
+**Option 2 - Rebase row 46 to 26:** change the hard-coded total and narrative to
+the current count. This is the smallest textual patch, but every later consumer
+migration would require another unrelated row-46 edit. Choose it only if row 46
+is intentionally made a current-manifest co-owner; that conflicts with the
+repository's single-owner and maintainability goals and is not recommended.
+
+**Option 3 - Add immutable historical consumer evidence:** preserve an exact
+34-row acceptance snapshot owned by row 46 and validate the historical
+transition against that artifact, while leaving the live 26-row manifest to the
+root audit. Choose this only if exact historical consumer membership is a
+required audit product. It adds a new fixture and lifecycle contract that the
+current objective does not otherwise require.
+
+**Rejected:** accepting M6-RC1 with a waived mixed gate, keeping the non-failing
+ad hoc loop, dropping row-46 caller evidence, or adding a compatibility path.
+Select and admit one repair before editing row-46 lifecycle files or accepting
+the shared engine change.
+
+**Decision:** Option 1 is selected and broadened into the VE043 count-authority
+recovery. Mutable aggregate membership and cardinality are derived from
+canonical evidence. Exact finite contracts use row/key projections, historical
+snapshots retain exact identities, structural zero/one multiplicity remains a
+valid operator, and named policy thresholds remain policy data. Scalar totals
+must not duplicate a mutable manifest, generated inventory, or package set.
+The measured taxonomy and execution sequence are in the
+[count-authority report](reports/count-authority.md).
+
+##### VE043-R1: Baseline Authority Repair
+
+**Status:** `Active`
+
+**Goal:** restore a trustworthy fail-fast baseline and accept the already
+implemented M6-RC1 capability without preserving any mutable README total as a
+literal.
+
+**Allowed write set:** the existing M6-RC1 implementation and documentation
+set; `verify-root-readme-consumer-audit.sh`;
+`verify-milestone-7-row-35-decomposition.sh`;
+`verify-milestone-7-row-46-decomposition.sh`; row-35 and row-46 decomposition
+documents; this plan, ledger, issues, count-authority and checker-inventory
+reports, and parent plan. README manifests, row 45, suites, registry, package
+and edge manifests, generated artifacts, standards sources, schemas, helpers,
+lockfiles, and workflows remain read-only.
+
+**Required behavior:**
+
+- root audit retains exact observed-versus-manifest path equality, schema,
+  classification domains, special identities, and prohibitions; it removes the
+  literal 26 and derives its report count from the observed set;
+- row 35 removes literal dependency totals 17/15/1/1 and consumer total 26,
+  retains exact schema/domain/unique/path evidence, replaces category
+  multiplicity with exact special-path identities where semantics require one,
+  delegates consumer completeness to the root audit, and derives report totals;
+- row 46 removes literal 33, retains the exact Rust profile consumer and
+  classification, preserves 33-to-34 as historical activation evidence, and
+  delegates current completeness to the root audit; and
+- no manifest row, classification, caller, historical identity, or no-fallback
+  assertion changes.
+
+**Verification:** shell syntax; focused root audit, rows 35, 45, and 46, and the
+three row-46 Rust callers; static absence of the removed mutable literals in the
+three repaired checkers; 24 routing tests; all engine tests; Python compilation;
+all declarative suites; graph freshness; both plan checks; diff/read-only proof;
+and `evaluation/standards-effectiveness/run-complete-suite.sh`. The canonical
+runner's pass jointly closes VE043-R1 and M6-RC1 because the M6-RC1
+implementation was already present but unaccepted when the baseline defect was
+found. This bounded integration is not precedent for combining unrelated
+future slices.
+
+##### VE043-E1: Count-Safe Engine Contract
+
+**Status:** `Planned`
+
+After VE043-R1 and M6-RC1 acceptance, remove `row_count` from the strict table
+schema and reject it as unknown with no compatibility parsing. Remove all eight
+live uses; preserve seven through their existing exact projections and add one
+exact GUI smoke case-key projection. In the same owner-coherent shared engine
+package, add the bounded `reference_inventory` assertion specified by the
+count-authority report, its focused tests, and engine documentation. No glob,
+regex, command, shell parser, callback, inferred candidate set, normalization,
+or policy-specific behavior is allowed.
+
+**Allowed write set:** table parser and tests; one new registered
+`reference_inventory` check and focused test module; the eight named suite
+files in the count-authority report; engine README and architecture report;
+this plan, ledger, issues, count-authority and checker-inventory reports, and
+parent plan. Registry, manifests, generated artifacts, Bash checkers, standards
+sources, fixtures other than the GUI case projection's existing suite data,
+lockfiles, and workflows remain read-only.
+
+**Acceptance:** focused schema-removal and reference-inventory tests, all engine
+tests, Python compilation, all declarative suites, graph freshness, both plan
+checks, diff/read-only proof, and one canonical fail-fast complete-suite
+checkpoint pass.
+
+##### VE043-A1 And VE043-P1: Audit And Package Admission
+
+**Status:** `Planned`
+
+Classify the 359 broad numeric-comparison candidates as mutable aggregate,
+declared finite contract, historical snapshot, structural multiplicity, or
+policy threshold. Record exact paths and dispositions before editing another
+owner. Confirmed mutable aggregates migrate to set/relation evidence in their
+owner packages; reporting counts are derived. Do not build a Bash-expression
+parser for scripts scheduled for deletion.
+
+After `reference_inventory` acceptance, audit the exact incident-edge and owner
+closure of the root README consumer checker and rows 35, 45, and 46. This audit
+is the next package-admission re-plan gate. It must not delete a checker while a
+Bash caller remains, introduce a Python-through-Bash bridge, or retain duplicate
+declarative and Bash authority.
 
 **Tasks:**
 

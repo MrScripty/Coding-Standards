@@ -2345,3 +2345,47 @@
   components, both plan checks, diff integrity, and all 170 mixed entrypoints.
 - Next slice: implement M6-RC1 and run its closing shared-contract checkpoint
   before auditing S1 for admission.
+
+## 2026-08-11 - M6-RC1 Closing-Checkpoint Integrity Re-plan Trigger
+
+- Implemented the admitted generic `markdown_links` and `line_budget`
+  assertions without S1-specific behavior, commands, expressions, network
+  access, inferred defaults, normalization, wrappers, or fallback authority.
+- Verification passes 24 focused routing tests, all 123 engine tests, Python
+  compilation, all 106 declarative suites, graph freshness at 170 Bash
+  verifiers / 175 nodes / 854 edges / 171 components, both plan checks, and
+  diff integrity.
+- The canonical fail-fast mixed run stops at row 46 because its checker requires
+  33 live README consumers while the accepted manifest and root audit own 26.
+  Rust adoption retirement, Rust index closure, and Rust profile authority also
+  fail only because they invoke row 46; the other 166 entrypoints pass.
+- The prior M6-N-W1 and M6-RC1 opening claims used a non-fail-fast ad hoc loop
+  whose final success could mask an intermediate failure. Current acceptance
+  now requires the repository-owned `run-complete-suite.sh` entrypoint.
+- VE043 records three repair options. Recommended Option 1 restores one current
+  manifest owner while retaining row 46's exact consumer classification and
+  historical 33-to-34 activation evidence. M6-RC1 remains unaccepted and
+  uncommitted; S1 remains unadmitted pending selection and repair.
+
+## 2026-08-11 - VE043 Count-Authority Recovery Re-plan
+
+- Selected Option 1 and broadened it from one stale row-46 literal to the
+  underlying count-authority contract. Mutable aggregate membership is derived;
+  declared finite and historical contracts retain exact identities; structural
+  zero/one checks and explicit policy thresholds remain valid.
+- Confirmed duplicated mutable totals in row 35, row 46, and the root README
+  audit. Row 45 already demonstrates the intended exact introduced-consumer
+  model. VE043-R1 is admitted to remove totals without changing either manifest
+  and to close through the canonical fail-fast runner.
+- Found eight declarative suites using the table check's `row_count`. Seven
+  already have exact membership projections; GUI smoke evidence needs an exact
+  case-key projection. VE043-E1 removes the schema field with no compatibility
+  parser and adds one bounded generic `reference_inventory` assertion.
+- A broad scan records 359 numeric-comparison candidates. VE043-A1 must classify
+  them by semantics before migration; it must not treat fixed multiplicity or a
+  named policy threshold as a mutable aggregate, and it must not add a Bash
+  expression parser for scripts being retired.
+- VE043-P1 remains a re-plan gate after the generic assertion is accepted. It
+  will audit exact callers and owners for the README consumer checker and rows
+  35, 45, and 46 before package admission. No Bash bridge, silent caller
+  deletion, dual authority, inferred set, or fallback is authorized.

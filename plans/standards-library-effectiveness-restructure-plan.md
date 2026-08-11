@@ -12,10 +12,30 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement delegated M6-RC1 generic `markdown_links` and
-`line_budget` assertions under the accepted Option 2 contract, close its shared
-engine checkpoint, and only then audit S1 for admission. Release Procedure and
-the Rust Binding train remain unadmitted.
+**Next slice:** implement delegated VE043-R1, removing duplicated mutable README
+totals without changing either manifest; then close M6-RC1 through the
+repository-owned fail-fast mixed runner. Release Procedure, S1, and the Rust
+Binding train remain unadmitted.
+
+The M6-RC1 implementation passes focused, engine, declarative, graph, plan, and
+diff gates but is not accepted. The canonical fail-fast mixed runner exposes a
+stale row-46 requirement for 33 live README consumers after the owning manifest
+and root audit reached 26. Three Rust entrypoints fail only through row 46; the
+other 166 pass. VE043 recommends retaining row 46's exact historical and
+consumer-classification evidence while returning mutable current-count
+authority exclusively to the root README audit. Earlier mixed claims produced
+by a non-fail-fast ad hoc loop are superseded for current acceptance.
+
+VE043 is replanned as a four-stage count-authority recovery. VE043-R1 restores
+the baseline by deriving README consumer and dependency reporting from exact
+membership and retaining only exact historical identities in rows 45 and 46.
+VE043-E1 then removes the declarative table `row_count` field without a legacy
+parser, replaces its eight uses with exact projections, and adds a generic
+literal-based `reference_inventory` assertion. VE043-A1 classifies the 359 broad
+numeric-comparison candidates before owner-local migration; VE043-P1 performs a
+fresh dependency-closure audit before deleting any README checker. Structural
+zero/one multiplicity and explicit policy thresholds remain valid. Mutable
+aggregate literals, inferred sets, wrappers, and duplicate authority do not.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review
