@@ -1659,3 +1659,21 @@ surviving Bash entrypoints pass. The fresh graph has 175 nodes, 854 edges, and
 171 components; 34 metadata-helper consumers remain. M6-N-W1 is accepted, and
 the next action is a fresh read-only dependency and ownership audit before any
 further package admission.
+
+### Post-M6-N-W1 Candidate Audit
+
+The clean 170-verifier graph does not authorize another single-checker leaf.
+Release Procedure is expressible with current declarative assertions but has a
+semantic inbound caller from Release Binding Generation. Binding Generation is
+caller-free and otherwise depends only on row-8 lifecycle evidence, making the
+two Release-owned contracts the smallest dependency-closed existing-primitive
+wave. They must become separate registered suites with an explicit dependency
+and be removed atomically; deleting the callee alone or dropping the call would
+weaken authority.
+
+S1 Routing is graph-shallow but not currently expressible without weakening
+its exact module, repository-local link, and aggregate line-budget evidence.
+The Rust Binding caller-free leaves expand into multiple semantic provider
+owners. VE042 records the choice between the recommended Release pair, prior
+generic routing capability work, and a broader Rust Binding decomposition. No
+later package is admitted pending selection.

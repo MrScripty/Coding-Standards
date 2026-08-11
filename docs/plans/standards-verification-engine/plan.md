@@ -2,12 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-N-W1 dependency and ownership audit
+**Current phase:** Milestone 6: post-M6-N-W1 candidate re-plan trigger
 
-**Next slice:** Audit the fresh accepted graph for the smallest owner-coherent
-package. Do not admit or implement another package until its complete incident
-edge set, lifecycle callers, semantic dependencies, and bounded write set are
-frozen.
+**Next slice:** Select and freeze one post-M6-N-W1 option. No later package is
+admitted; implementation must not begin until the chosen owner boundary,
+complete incident edges, suite dependencies, lifecycle transfers, write set,
+and checkpoint contract are accepted.
 
 **Acceptance status:** `pending`
 
@@ -3349,6 +3349,61 @@ declarative suites pass. Fresh generated inventory records 170 Bash verifiers,
 175 nodes, 854 edges, and 171 components; 34 metadata-helper consumers remain.
 Removed-path proof, graph freshness, diff integrity, and the complete mixed
 170-entrypoint M6-N-W1 checkpoint pass.
+
+#### Post-M6-N-W1 Candidate Re-plan Trigger
+
+**Status:** `Active`
+
+The clean accepted graph contains 34 metadata-helper consumers. The shallowest
+candidate that uses only existing declarative primitives is Release Procedure,
+but it is not independently deletable: Release Binding Generation invokes it
+as a semantic prerequisite. Binding Generation itself has no executable caller
+and invokes only Release Procedure plus the independently owned row-8 lifecycle
+gate. Deleting Release Procedure alone, silently dropping that invocation, or
+temporarily retaining dual Bash/declarative authority would violate exact
+incident-edge ownership and the no-bridge/no-fallback rule.
+
+S1 Routing is also shallow, with one metadata dependency and one inbound root
+README audit caller, but its contract additionally proves exact routed module
+identity, repository-local Markdown link closure, and an aggregate routed-line
+ratio against generated summary data. The current engine has no generic link
+closure or aggregate budget assertion. Approximating those checks with required
+text would weaken evidence. The caller-free Rust Binding leaves are deeper and
+depend on Rust Binding conversions/wire/runtime, Concurrency, Interop, Rust
+Async, and lifecycle owners; combining that closure now would cross unresolved
+semantic ownership.
+
+**Option 1 - Dependency-closed Release pair (`Recommended`):** admit Release
+Procedure and Release Binding Generation as one serial two-package wave and
+implement them atomically after admission. Create two registered suites using
+existing decision, table, metadata, and text assertions; make Binding
+Generation explicitly require Release Procedure. Freeze all Release Procedure
+metadata and inbound Binding Generation edges, all Binding Generation
+Release/row-8 edges, the row-35 consumer transfer, exact removed paths, and one
+closing mixed checkpoint. Choose this for the fastest standards-compliant
+progress without shared engine work or implicit dependency loss.
+
+**Option 2 - Generic routing capabilities before S1:** design separate typed,
+side-effect-free Python assertions for repository-local Markdown link closure
+and aggregate line-budget comparison, with focused positive and negative tests.
+Accept that shared engine contract with opening and closing checkpoints, then
+admit S1 and transfer the root README audit caller explicitly. Choose this when
+improving reusable routing/documentation verification is more important than
+immediate Bash reduction. Do not add an S1-specific callback or arbitrary
+command action.
+
+**Option 3 - Rust Binding dependency train:** first decompose the remaining
+Rust Binding graph into owner-local prerequisite waves, then migrate the
+caller-free error, callback, enum, and event leaves only after their semantic
+providers are registered suites. Choose this when completing the Rust Binding
+family is the priority and the larger multi-owner planning cost is accepted.
+Do not combine Concurrency, Interop, Rust Async, wire, runtime, and lifecycle
+authority into one package merely because the leaves share a profile.
+
+**Re-plan gate:** select one option and record its exact package train before
+implementation. Any proposal that drops a semantic call, preserves a Bash
+wrapper, introduces dual authority, weakens S1 link/budget evidence, or merges
+unresolved owners is rejected rather than treated as a fallback.
 
 **Tasks:**
 

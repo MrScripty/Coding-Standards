@@ -12,10 +12,11 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform the delegated post-M6-N-W1 read-only graph and ownership
-audit. Do not admit or implement another verifier package until its semantic
-owner, complete incident-edge set, lifecycle callers, dependencies, and bounded
-write set are frozen.
+**Next slice:** resolve the delegated post-M6-N-W1 candidate re-plan trigger.
+The recommended path is an atomic dependency-closed Release Procedure and
+Release Binding Generation wave using existing declarative primitives. S1
+requires prior generic link/budget capability work, while the Rust Binding
+train requires broader owner decomposition. No later package is admitted.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

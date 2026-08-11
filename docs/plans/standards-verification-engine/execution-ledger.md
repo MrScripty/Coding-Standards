@@ -2298,3 +2298,26 @@
   change.
 - Next slice is a fresh read-only graph and ownership audit. No later package
   is admitted.
+
+## 2026-08-11 - Post-M6-N-W1 Candidate Re-plan Trigger
+
+- Confirmed a clean worktree and fresh accepted graph at 170 Bash verifiers /
+  175 nodes / 854 edges / 171 components with 34 metadata-helper consumers.
+- Release Procedure is the shallowest existing-primitive semantic candidate,
+  but Release Binding Generation invokes it. Binding Generation has no
+  executable caller and invokes only Release Procedure and the independently
+  owned row-8 lifecycle gate. The pair therefore requires an atomic,
+  dependency-closed two-suite wave rather than caller deletion or dual
+  authority.
+- S1 Routing has one metadata edge and one inbound root README audit caller,
+  but also owns local Markdown link closure and an aggregate routed-line ratio.
+  The engine has no equivalent generic assertions; text approximation would
+  weaken evidence and an S1-specific callback would violate engine policy.
+- The caller-free Rust Binding leaves depend on Rust Binding, Concurrency,
+  Interop, Rust Async, wire, runtime, and lifecycle providers. Their current
+  closure is not one owner-coherent package.
+- Recorded three standards-aligned options. The recommendation is the atomic
+  Release pair because existing assertions can preserve both contracts and an
+  explicit suite dependency without shared engine work. No package was
+  admitted and no verifier, suite, fixture, source, helper, engine, schema,
+  registry, manifest, graph, lifecycle inventory, or lockfile changed.
