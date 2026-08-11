@@ -12,16 +12,19 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** resolve delegated VE043-A1 candidate authority. Select and admit
-a reproducible exact queue before classification or owner-local migration.
-Release Procedure, S1, and the Rust Binding train remain unadmitted.
+**Next slice:** implement delegated VE043-A1-G1 by machine-generating an
+immutable numeric-audit candidate baseline from canonical Bash verifier
+inventory. Do not classify candidates or edit owners in G1. Release Procedure,
+S1, and the Rust Binding train remain unadmitted.
 
-VE043-A1 has reached a re-plan trigger. The historical 359-candidate total has
-no frozen rows, extraction contract, baseline revision, or path-level evidence.
-The recommended option treats that number as non-authoritative context and
-freezes a new verifier-scoped lexical candidate manifest with derived totals
-and explicit reviewed taxonomy, ownership, disposition, and rationale. No Bash
-parser, owner edit, or package admission is authorized before selection.
+VE043-A1 Option 2 is selected with corrected authority. The historical
+359-candidate total is non-authoritative context. G1 machine-generates candidate
+identity, location, expression, and fingerprint and derives every total. C1
+reviews only irreducible semantic class and explicit exceptions; owner and
+normal disposition come from canonical evidence and taxonomy. L1 derives
+progress and rejects new or unexplained missing candidates. No manually
+maintained candidate facts, Bash parser, owner edit, or package admission is
+authorized in G1.
 
 VE043-E1 is accepted. The strict table schema rejects `row_count`; all eight
 former uses preserve exact membership evidence, and the generic bounded

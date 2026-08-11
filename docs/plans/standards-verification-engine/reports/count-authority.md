@@ -129,13 +129,15 @@ move to projections or relations; historical membership moves to exact rows;
 reporting totals are derived. Do not build a Bash-expression parser solely to
 police scripts that the migration is deleting.
 
-The audit is blocked on candidate authority. The historical total of 359 has no
-frozen rows, extraction rule, baseline revision, or exact locations and cannot
-serve as a classification input. The recommended recovery replaces that total
-with a current verifier-scoped lexical candidate manifest whose cardinality is
-derived. Candidate discovery remains mechanical; taxonomy, ownership,
-disposition, and rationale remain explicit reviewed fields. No owner migration
-is admitted until the queue and freshness contract are selected and frozen.
+The historical total of 359 has no frozen rows, extraction rule, baseline
+revision, or exact locations and is non-authoritative context. The selected
+recovery machine-generates one immutable verifier-scoped lexical candidate
+snapshot and derives its cardinality. Candidate identity, path, expression,
+source diagnostics, fingerprint, owner, normal disposition, progress, and
+totals remain derived. A separate reviewed layer records only generated
+candidate identity, irreducible taxonomy class, and optional rationale for an
+explicit exception. Exact coverage and lifecycle drift are verified; no owner
+migration is admitted before generated baseline and classification acceptance.
 
 ### VE043-P1: README Consumer Package Audit
 

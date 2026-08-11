@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1 candidate-authority re-plan
+**Current phase:** Milestone 6: VE043-A1-G1 derived candidate snapshot
 
-**Next slice:** select and admit one reproducible candidate-source contract for
-VE043-A1. Do not classify candidates or edit an owner until the exact queue is
-frozen and its cardinality is derived. S1 remains unadmitted.
+**Next slice:** implement VE043-A1-G1: derive and freeze the exact numeric-audit
+candidate baseline from canonical Bash verifier inventory without manually
+stating candidate facts or cardinality. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3679,12 +3679,13 @@ diff integrity, and all 170 canonical mixed entrypoints pass.
 
 **Status:** `Planned`
 
-Classify the 359 broad numeric-comparison candidates as mutable aggregate,
+Classify the machine-generated numeric-comparison baseline as mutable aggregate,
 declared finite contract, historical snapshot, structural multiplicity, or
-policy threshold. Record exact paths and dispositions before editing another
-owner. Confirmed mutable aggregates migrate to set/relation evidence in their
-owner packages; reporting counts are derived. Do not build a Bash-expression
-parser for scripts scheduled for deletion.
+policy threshold. Candidate paths, expressions, source locations, fingerprints,
+owners, standard dispositions, progress, and all totals are derived rather than
+restated in reviewed data. Confirmed mutable aggregates migrate to set/relation
+evidence in their owner packages. Do not build a Bash-expression parser for
+scripts scheduled for deletion.
 
 After `reference_inventory` acceptance, audit the exact incident-edge and owner
 closure of the root README consumer checker and rows 35, 45, and 46. This audit
@@ -3694,7 +3695,7 @@ declarative and Bash authority.
 
 ##### VE043-A1 Candidate-Authority Re-plan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 The recorded total of 359 broad numeric-comparison candidates has no frozen
 candidate artifact, extraction contract, baseline revision, or exact path-level
@@ -3709,15 +3710,18 @@ classify them. This may preserve the historical number but cannot prove it
 reconstructs the original candidate semantics. Choose it only if matching the
 historical observation is itself required; it is not recommended.
 
-**Option 2 - Freeze a new exact verifier-scoped audit manifest
+**Option 2 - Freeze a generated verifier-scoped audit snapshot
 (`Recommended`):** treat 359 as non-authoritative historical context. Enumerate
-the current canonical Bash verifier paths from generated inventory, apply one
-documented conservative lexical extraction contract, and write every exact
-candidate location to a reviewable TSV. Derive all totals from its rows, record
-one taxonomy class, owner, disposition, and rationale per candidate, and verify
-path uniqueness plus source-location freshness. The extractor discovers
-candidates only; semantic classification remains explicit human-reviewed data.
-This provides complete current scope without a shell parser or inferred owner.
+the current canonical Bash verifier paths from generated inventory and apply
+one documented conservative lexical extraction contract. Machine-generate an
+immutable baseline containing candidate identity, path, exact expression,
+occurrence/source diagnostics, and fingerprint. Derive its cardinality. Keep a
+separate reviewed decision layer containing only generated candidate identity,
+one semantic taxonomy class, and an optional rationale for an explicit
+exception. Resolve owners from canonical ownership/package records, map normal
+dispositions from the taxonomy, and derive progress from baseline, current
+inventory, and accepted package evidence. This provides complete current scope
+without manually maintaining observed facts or inferring semantic meaning.
 
 **Option 3 - Defer global inventory to owner-package audits:** remove the broad
 queue claim and inspect numeric authority only when each owner package is
@@ -3731,13 +3735,61 @@ syntax coverage, but semantic count ownership still requires review and the
 parser would exist mainly for Bash scheduled for deletion. It conflicts with
 the admitted no-parser boundary and is rejected.
 
-**Recommended admission boundary:** Option 2 may write one extraction contract,
-one generated candidate-location TSV, one reviewed classification TSV or
-equivalent single manifest, focused freshness/completeness evidence, and the
-serial plan/report/ledger records. Bash verifiers, standards owners, suites,
-registry, package and edge manifests, generated dependency artifacts,
-lockfiles, and workflows remain read-only. The candidate total must always be
-derived. Select and admit an option before creating audit artifacts.
+**Decision:** Option 2 is selected with generated-fact and reviewed-decision
+authority separated. Candidate rows and counts are never hand-authored. The
+reviewed layer states only irreducible semantic class and an optional exception
+rationale; it does not duplicate path, location, expression, fingerprint,
+owner, standard disposition, package, progress, or total. Exact candidate-ID
+coverage, class domain, and exception requirements are verified mechanically.
+
+##### VE043-A1 Derived Audit Admission
+
+**Status:** `Active`
+
+The selected recovery executes in three serial, independently verified slices:
+
+1. **VE043-A1-G1 generated baseline:** add a deterministic Python lexical
+   collector under the existing verifier inventory boundary, focused tests, a
+   write/check entrypoint, and one machine-generated immutable candidate TSV.
+   Its rows derive from canonical Bash verifier inventory and contain stable
+   content-based identity plus review diagnostics. The historical 359 is not an
+   expected value. The generated file is never hand-edited.
+2. **VE043-A1-C1 semantic coverage:** add one reviewed decision table containing
+   only candidate identity, taxonomy class, and optional exception rationale.
+   Require exact one-to-one coverage of the generated baseline. Derive owner
+   from canonical ownership/package evidence and derive the normal migration
+   action from the taxonomy. Missing, duplicate, unknown, ambiguous-owner, and
+   unjustified-exception outcomes are typed diagnostics.
+3. **VE043-A1-L1 lifecycle guard:** compare current derived candidates with the
+   immutable baseline and accepted package evidence. Reject a new candidate or
+   an unexplained disappearance; accept disappearance only through the owning
+   migration package. Retain the baseline and decisions as historical audit
+   evidence while deriving current progress and all report totals.
+
+**G1 allowed write set:**
+`tools/standards_verifier/standards_verifier/numeric_audit.py`;
+`tools/standards_verifier/generate_numeric_audit.py`; focused inventory/audit
+tests in `tools/standards_verifier/tests/test_numeric_audit.py`;
+`tools/standards_verifier/README.md`;
+`evaluation/standards-effectiveness/generated/numeric-comparison-candidates.tsv`;
+architecture and count-authority reports; and serial plan/issue/ledger records.
+The existing mutable inventory and dependency-graph implementation and
+artifacts; classification, owner, package, edge, suite, and registry data; Bash
+verifiers; standards sources; lockfiles; and workflows remain read-only.
+
+**G1 acceptance:** deterministic output from the same source state; exact
+canonical verifier scope; unique content-based candidate identities; contained
+UTF-8 paths; conservative documented lexical coverage; derived reporting only;
+positive and negative tests for malformed, duplicate, unavailable, escaping,
+and invalid UTF-8 evidence; Python compilation; all engine tests; generated
+dependency freshness; both plan checks; diff integrity; and one shared-contract
+complete-suite checkpoint. G1 does not classify candidates or edit an owner.
+
+**No-fallback rule:** no expected candidate count, manually authored candidate
+fact, wildcard owner, inferred taxonomy class, heuristic default, compatibility
+manifest, source annotation, shell parser, Python-through-Bash bridge, or
+silent drift is allowed. Mechanical suggestions may be reported but never own
+semantic classification.
 
 **Tasks:**
 

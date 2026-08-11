@@ -10140,3 +10140,38 @@ authority; both plan checks and diff integrity after recording the trigger.
 
 **Next slice:** select and admit one VE043-A1 candidate-source option before
 creating the audit manifest.
+
+## 2026-08-11 VE043-A1 Derived-Authority Decision
+
+**Outcome:** Option 2 selected and corrected.
+
+The first recommendation incorrectly required reviewed data to restate
+mechanically observable candidate paths, locations, owners, dispositions, and
+rationales. That would create duplicate mutable authority and unnecessary
+maintenance churn. The admitted design now machine-generates one immutable
+candidate baseline and derives all mechanical facts and totals.
+
+The only reviewed per-candidate decision is semantic taxonomy class, plus an
+optional rationale for an explicit exception. Candidate identity comes from
+the generated baseline; owner comes from canonical ownership/package evidence;
+normal disposition comes from the taxonomy; current status and progress come
+from baseline, current candidates, and accepted package evidence. Exact set
+coverage and typed drift diagnostics prevent forgotten or silently changed
+decisions.
+
+**Execution sequence:** G1 generates and verifies the immutable candidate
+baseline without classification; C1 adds exact semantic-class coverage without
+duplicating derived facts; L1 derives lifecycle progress and rejects new or
+unexplained missing candidates. Owner migration remains blocked through G1.
+
+**No-fallback result:** no historical total, manual candidate fact, inferred
+semantic class, wildcard owner, default exception, source annotation,
+compatibility manifest, shell parser, or silent drift is authorized.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only. Implementation remains unchanged in this decision slice.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** implement VE043-A1-G1 generated baseline and stop before
+semantic classification or owner edits.
