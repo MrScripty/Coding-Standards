@@ -1551,3 +1551,22 @@ metadata-helper consumers remain. No source, fixture, engine, helper, schema,
 or unrelated lifecycle record changed. The M6-M-W1 closing mixed checkpoint
 passed all 172 remaining Bash entrypoints. The wave is closed with no later
 package admitted; a fresh graph and ownership audit is required next.
+
+### M6-N Inbound-Caller Audit And VE041
+
+The fresh 172-verifier graph identifies Contract HTTP Outcome Projection and
+Persistence Owner Contract as the shallowest next semantic candidates. They
+preserve 24/four and 19/one decision/disposition contracts respectively and
+have no outgoing semantic checker dependency beyond the shared metadata
+helper. Row-33 decomposition invokes Contract HTTP Outcome, while row-32
+decomposition invokes Persistence Owner; Persistence also has one frozen
+row-35 direct-route dependency.
+
+The generic package assertion currently compares only edges originating at the
+package checker. It does not require disposition of edges targeting that
+checker, so it cannot by itself reject a retained row checker that references a
+deleted semantic child. VE041 records this as a shared-contract re-plan trigger.
+No package is admitted. Recommended M6-EDGE-2 work extends the existing
+source/target model to exact incident-edge authority, adds directional negative
+coverage, and runs a shared-contract checkpoint before the two semantic
+packages are reconsidered.

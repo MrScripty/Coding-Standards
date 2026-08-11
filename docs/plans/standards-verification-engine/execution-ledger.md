@@ -2176,3 +2176,21 @@
   is a read-only fresh graph and ownership audit that must freeze the next
   owner, dependency closure, semantic contract, write set, edge dispositions,
   lifecycle transfers, and verification gates before implementation.
+
+## 2026-08-11 - Post-M6-M-W1 Inbound-Caller Audit
+
+- Confirmed a clean worktree and fresh graph at 172 Bash verifiers / 177 nodes
+  / 857 edges / 173 components with 36 metadata-helper consumers.
+- Selected Contract HTTP Outcome Projection and Persistence Owner Contract as
+  the shallowest semantic candidates: both use existing declarative assertion
+  families and call no semantic checker beyond metadata verification.
+- Confirmed row-33 decomposition invokes Contract HTTP Outcome and row-32
+  decomposition invokes Persistence Owner. Those callers are lifecycle
+  aggregation, but their edges must still be transferred exactly before either
+  child checker can be deleted.
+- Discovered VE041: package edge authority covers outgoing edges only and can
+  accept a deleted checker whose retained caller still names the missing path.
+  Removed-path scans are not sufficient canonical authority.
+- No checker, fixture, engine, manifest, registry, generated artifact, source,
+  helper, schema, or lockfile changed. M6-N1 and M6-N2 remain unadmitted pending
+  selection and acceptance of an inbound-edge authority design.

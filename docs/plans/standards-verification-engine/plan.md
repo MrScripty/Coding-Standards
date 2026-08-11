@@ -2,12 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-M-W1 graph and ownership audit
+**Current phase:** Milestone 6: inbound-caller edge-authority re-plan
 
-**Next slice:** Re-audit the fresh 172-verifier graph and remaining ownership
-closures. Freeze the next package's owner, semantic contract, dependencies,
-write set, edge dispositions, lifecycle transfers, and verification gates
-before admission or implementation.
+**Next slice:** Resolve VE041 before admitting M6-N1 Contract HTTP Outcome or
+M6-N2 Persistence Owner. The package contract must prove exact incoming as well
+as outgoing executable-edge transfer without a Bash bridge, bespoke scan, or
+dual semantic authority.
 
 **Acceptance status:** `pending`
 
@@ -3088,6 +3088,65 @@ source, fixture, engine, helper, schema, or unrelated lifecycle record changed.
 The M6-M-W1 closing mixed checkpoint passed all 172 remaining Bash entrypoints.
 The wave is closed with no later package admitted; a fresh graph and ownership
 audit is required before implementation continues.
+
+#### M6-N Inbound-Caller Edge-Authority Re-plan Trigger
+
+**Status:** `Blocked`
+
+The fresh graph audit selected two shallow semantic candidates. Contract HTTP
+Outcome Projection owns 24 typed decisions and four exact dispositions, calls
+only the metadata helper, and is invoked by row-33 decomposition. Persistence
+Owner Contract owns 19 typed decisions and one exact disposition, calls only
+the metadata helper, and is invoked by row-32 decomposition. Persistence also
+owns one exact row-35 direct-route dependency. Existing decision, table, text,
+and metadata assertions can preserve both semantic contracts without source,
+fixture, schema, helper, or compatibility changes.
+
+The audit discovered that the generic `edge_dispositions` assertion freezes
+only executable edges whose source is the package checker. It does not require
+rows for executable edges whose target is that checker. Consequently, an
+accepted package could delete its checker while a retained caller still names
+the missing path; graph freshness would retain a dangling target node, but the
+typed package contract would not reject it. A separate removed-path scan is
+useful defense-in-depth but is not canonical package authority. Implementing
+M6-N1 or M6-N2 under the current contract would therefore violate exact edge
+ownership and the no-legacy/no-bridge rule.
+
+**Option 1 - Exact incident-edge authority (`Recommended`):** extend the
+existing generic assertion from exact outgoing-edge coverage to exact incident
+coverage. Determine direction from the package subject and each row's existing
+`source`/`target` fields; do not version, duplicate, or add a compatibility
+manifest. For an inbound `independent-gate` row, the retained caller endpoint
+is the typed checker replacement; accepted state requires the checker source
+and every incident edge to be absent. Add focused positive and negative tests
+for omitted inbound edges, fabricated inbound edges, wrong retained endpoint,
+accepted dangling references, and unaffected historical outbound rows. Accept
+this shared M6-EDGE-2 contract with engine, declarative, graph, plan, and mixed
+checkpoints before admitting M6-N1 or M6-N2. Choose this to establish one
+reusable authority model for the many remaining caller-connected packages.
+
+**Option 2 - Atomic caller-and-child package trains:** migrate each row
+decomposition checker and its semantic child as separate, dependency-ordered
+packages in one wave so no dangling edge exists between commits. This avoids an
+immediate engine change but expands each semantic package into migration-owner
+work, requires classification of every other row-checker call, and still leaves
+the generic package contract unable to detect future incoming-edge omissions.
+Choose this only if caller review proves the row checker itself should now be
+retired and all of its remaining dependencies can be represented without
+cross-owner coupling.
+
+**Option 3 - Defer caller-connected packages:** leave M6-N1 and M6-N2
+unchanged and audit S1 routing or the Rust Binding dependency train. This
+preserves current evidence but does not resolve the incoming-edge gap; S1 needs
+shared route/link/budget capability and Rust Binding requires larger semantic
+provider closures. Choose this only if shared edge-contract work cannot be
+reviewed now.
+
+Bespoke package scans, retaining deleted checker wrappers, invoking Python
+suites from Bash callers, silently dropping row-32/row-33 calls, weakening
+graph freshness, or treating all callers as one owner are invalid options.
+No package is admitted until one option is selected and its exact write set,
+tests, checkpoint boundary, and caller dispositions are frozen.
 
 **Tasks:**
 
