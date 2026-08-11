@@ -1677,3 +1677,20 @@ The Rust Binding caller-free leaves expand into multiple semantic provider
 owners. VE042 records the choice between the recommended Release pair, prior
 generic routing capability work, and a broader Rust Binding decomposition. No
 later package is admitted pending selection.
+
+### Admitted M6-RC1 Routing Evidence Primitives
+
+Option 2 is selected. M6-RC1 adds generic, independent `markdown_links` and
+`line_budget` assertions before any S1 package is admitted. Link evidence is
+offline, explicit-path, UTF-8, repository-contained local-target existence;
+budget evidence is raw newline aggregation against one unique positive metric
+with a fixed strict integer ratio. Neither assertion can execute commands,
+fetch resources, evaluate expressions, infer paths or defaults, normalize
+evidence, or branch on S1 identity.
+
+The clean opening checkpoint passes 99 engine tests, 106 declarative suites,
+the fresh 170-verifier / 175-node / 854-edge / 171-component graph, both plan
+checks, and all 170 mixed entrypoints. The S1 checker, caller, fixture, suite
+registry, manifests, graph, standards, helpers, and lifecycle artifacts remain
+read-only until the capability contract is accepted and S1 is separately
+audited.

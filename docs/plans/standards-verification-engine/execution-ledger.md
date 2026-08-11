@@ -2321,3 +2321,27 @@
   explicit suite dependency without shared engine work. No package was
   admitted and no verifier, suite, fixture, source, helper, engine, schema,
   registry, manifest, graph, lifecycle inventory, or lockfile changed.
+
+## 2026-08-11 - M6-RC1 Routing Evidence Admission
+
+- Selected post-M6-N-W1 Option 2: establish generic routing evidence before
+  admitting S1. Release Procedure and the Rust Binding train remain unchanged
+  and unadmitted.
+- Froze independent `markdown_links` and `line_budget` assertions with strict
+  fields, contained explicit paths, typed invalid/unavailable diagnostics, and
+  no callbacks, commands, network access, expressions, normalization, inferred
+  defaults, or S1-specific engine behavior.
+- `markdown_links` preserves inline local-target existence, relative resolution,
+  fragment handling, and the existing external-scheme exclusions while adding
+  explicit repository-containment rejection. `line_budget` preserves raw
+  newline counting and strict integer-ratio comparison against one unique typed
+  metric row.
+- Bounded implementation to two new assertion modules, assertion registration,
+  one focused test module, engine/architecture documentation, and serial plan
+  records. S1 and all suite, registry, graph, manifest, lifecycle, standards,
+  helper, schema, fixture, workflow, and lockfile artifacts remain read-only.
+- Opening evidence passes all 99 engine tests, all 106 declarative suites,
+  graph freshness at 170 Bash verifiers / 175 nodes / 854 edges / 171
+  components, both plan checks, diff integrity, and all 170 mixed entrypoints.
+- Next slice: implement M6-RC1 and run its closing shared-contract checkpoint
+  before auditing S1 for admission.

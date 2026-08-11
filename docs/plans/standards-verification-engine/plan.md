@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-N-W1 candidate re-plan trigger
+**Current phase:** Milestone 6: M6-RC1 routing evidence primitives
 
-**Next slice:** Select and freeze one post-M6-N-W1 option. No later package is
-admitted; implementation must not begin until the chosen owner boundary,
-complete incident edges, suite dependencies, lifecycle transfers, write set,
-and checkpoint contract are accepted.
+**Next slice:** Implement admitted M6-RC1 `markdown_links` and `line_budget`
+assertions, run the closing shared-contract checkpoint, and only then audit S1
+for package admission.
 
 **Acceptance status:** `pending`
 
@@ -3211,7 +3210,7 @@ zero.
 
 #### M6-N-W1 Lifecycle-Caller Wave Admission
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 The unchanged graph confirms exactly four executable incident edges for each
 candidate. Both checkers have outbound `executable_reference` and
@@ -3404,6 +3403,80 @@ authority into one package merely because the leaves share a profile.
 implementation. Any proposal that drops a semantic call, preserves a Bash
 wrapper, introduces dual authority, weakens S1 link/budget evidence, or merges
 unresolved owners is rejected rather than treated as a fallback.
+
+**Decision:** Option 2 is selected. M6-RC1 establishes generic routing evidence
+before S1 is admitted. Release Procedure and the Rust Binding train remain
+unchanged and unadmitted.
+
+#### M6-RC1: Routing Evidence Primitives
+
+**Status:** `Active`
+
+**Goal:** add two independent, typed, side-effect-free declarative assertions
+that preserve S1's currently unrepresentable local-link and routed-context
+budget evidence without embedding S1 policy in the engine.
+
+**`markdown_links` contract:** accepts exactly `id`, `type`, and one non-empty,
+duplicate-free `paths` list. It reads each contained UTF-8 file, recognizes the
+same inline Markdown destination form as the current S1 checker, skips only
+`http://`, `https://`, and `mailto:` destinations, strips a fragment before
+resolution, treats a fragment-only destination as the containing file, and
+requires every remaining target to exist relative to the containing document.
+Absolute targets, parent or symlink escape, malformed configuration, and
+invalid UTF-8 are typed invalid; missing source or target evidence is typed
+unavailable. It does not fetch URLs, validate anchors, normalize or decode
+destinations, parse reference-style links, infer files, or execute commands.
+
+**`line_budget` contract:** accepts exactly `id`, `type`, a non-empty unique
+`paths` list, `baseline_path`, `baseline_key`, `maximum_numerator`, and
+`maximum_denominator`. Both ratio values are positive integers. It counts raw
+newline bytes across the explicit contained files, reads one exact
+`metric<TAB>value` table with a unique requested key and positive decimal
+integer value, and requires
+`observed * maximum_denominator < baseline * maximum_numerator`. Equality is a
+failure. Missing files or key evidence are typed unavailable; malformed tables,
+duplicates, invalid integers, unsafe paths, and invalid ratios are typed
+invalid. It supports no expression language, inferred metric, default ratio,
+unit conversion, command action, or normalization.
+
+**Allowed write set:**
+
+- `tools/standards_verifier/standards_verifier/checks/__init__.py`;
+- `tools/standards_verifier/standards_verifier/checks/markdown_links.py`;
+- `tools/standards_verifier/standards_verifier/checks/line_budget.py`;
+- `tools/standards_verifier/tests/test_routing_checks.py`;
+- `tools/standards_verifier/README.md`;
+- `docs/plans/standards-verification-engine/reports/architecture.md`;
+- this plan, execution ledger, issues, checker-inventory report, and parent
+  plan.
+
+S1 checker, fixture, root README audit, lifecycle data, suites, registry,
+package/edge manifests, generated graph, standards sources, helpers, schemas,
+lockfiles, and workflow artifacts remain read-only. S1 may consume the
+capabilities only after M6-RC1 acceptance in a separately admitted package.
+
+**Focused evidence:** cover valid nested local links, allowed external links,
+fragment-only and file-plus-fragment targets, missing targets, absolute/parent/
+symlink escape, missing sources, invalid UTF-8, empty/duplicate paths, and
+unknown fields. Cover a passing strict line ratio, equality and exceeded-budget
+failures, raw newline counting, malformed header/rows, duplicate or missing
+metrics, non-positive/non-decimal values, missing/escaping inputs, invalid
+ratios, empty/duplicate paths, and unknown fields. Diagnostics must retain
+stable `CONFIG.*`, `PATH.*`, `INPUT.*`, and assertion-specific codes.
+
+**Acceptance gate:** focused routing tests, all engine tests, Python
+compilation, all declarative suites, graph freshness, both plan checks,
+diff/read-only evidence, and a complete mixed closing checkpoint pass. Any need
+for Markdown AST dependencies, network access, anchor policy, arbitrary
+expressions, S1-specific branches, weaker text approximation, or changes
+outside the allowed write set is a re-plan trigger.
+
+**Admission evidence:** the clean opening baseline passes all 99 engine tests,
+all 106 declarative suites, graph freshness at 170 Bash verifiers / 175 nodes /
+854 edges / 171 components, both plan checks, diff integrity, and all 170 mixed
+Bash entrypoints. No engine, test, documentation, suite, registry, checker,
+fixture, source, helper, manifest, generated artifact, schema, or lockfile
+changed during admission.
 
 **Tasks:**
 
