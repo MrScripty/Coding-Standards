@@ -1593,3 +1593,27 @@ registered edge contract, all 104 declarative suites, both plan checks, diff
 integrity, and the complete mixed 172-entrypoint checkpoint pass. The generated
 graph remains 172 Bash verifiers / 177 nodes / 857 edges / 173 components.
 M6-N1 and M6-N2 remain unadmitted pending a fresh exact-caller package audit.
+
+### Admitted M6-N-W1 Lifecycle-Caller Packages
+
+The post-M6-EDGE-2 audit confirms exactly four executable incident edges for
+each candidate: two outbound metadata-helper edges and two inbound lifecycle
+edges from row 33 or row 32. Contract HTTP Outcome and Persistence Owner are
+admitted as serial packages M6-N1 and M6-N2 with exact type/source/target rows.
+
+M6-N1 preserves 24 typed decisions and four exact dispositions, then transfers
+row 33 from direct child invocation to independently registered suite
+authority. M6-N2 preserves 19 typed decisions and one exact disposition,
+transfers row 32 the same way, and removes its non-executable row-35 dependency
+record while reconciling 18/16/26 to 17/15/26. Canonical sources, fixtures,
+helper, engine, schemas, lockfiles, and workflow artifacts remain read-only.
+
+Serial inventory regeneration preserves 172 Bash verifiers / 177 nodes / 173
+components and increases the graph from 857 to 869 edges. All 12 additions are
+non-executable `contract_reference` edges generated from the package manifest,
+edge manifest, and expected package projection to four newly named
+checker/caller paths. No semantic file changed during admission.
+Package-specific scans, caller wrappers, Bash-to-Python bridges, duplicated
+suite execution, silent caller deletion, schema forks, and compatibility
+behavior remain prohibited. M6-N1 is next; M6-N2 remains admitted but serially
+blocked on M6-N1 acceptance.

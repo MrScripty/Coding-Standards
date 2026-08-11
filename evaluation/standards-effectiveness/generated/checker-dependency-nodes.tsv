@@ -30,7 +30,7 @@ evaluation/standards-effectiveness/verify-concurrency-policy.sh	verifier	yes	com
 evaluation/standards-effectiveness/verify-consolidation-dispositions.sh	verifier	yes	component-0029	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-contract-decisions.sh	verifier	yes	component-0030	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-contract-http-adapter-proof.sh	verifier	yes	component-0031	1	no	0	1	0	1	0
-evaluation/standards-effectiveness/verify-contract-http-outcome-projection.sh	verifier	yes	component-0032	1	no	1	1	0	1	1
+evaluation/standards-effectiveness/verify-contract-http-outcome-projection.sh	verifier	yes	component-0032	1	no	1	1	3	1	1
 evaluation/standards-effectiveness/verify-contract-ownership.sh	verifier	yes	component-0033	1	no	0	5	2	4	0
 evaluation/standards-effectiveness/verify-cross-language-contract.sh	verifier	yes	component-0034	1	no	3	2	1	2	4
 evaluation/standards-effectiveness/verify-csharp-async-owner-contract.sh	verifier	yes	component-0035	1	no	5	0	1	0	3
@@ -90,8 +90,8 @@ evaluation/standards-effectiveness/verify-milestone-7-row-25-decomposition.sh	ve
 evaluation/standards-effectiveness/verify-milestone-7-row-26-decomposition.sh	verifier	yes	component-0089	1	no	3	0	0	0	2
 evaluation/standards-effectiveness/verify-milestone-7-row-27-decomposition.sh	verifier	yes	component-0090	1	no	3	0	0	0	2
 evaluation/standards-effectiveness/verify-milestone-7-row-28-decomposition.sh	verifier	yes	component-0091	1	no	3	1	0	1	1
-evaluation/standards-effectiveness/verify-milestone-7-row-32-decomposition.sh	verifier	yes	component-0092	1	no	3	0	0	0	4
-evaluation/standards-effectiveness/verify-milestone-7-row-33-decomposition.sh	verifier	yes	component-0093	1	no	3	0	0	0	3
+evaluation/standards-effectiveness/verify-milestone-7-row-32-decomposition.sh	verifier	yes	component-0092	1	no	3	0	3	0	4
+evaluation/standards-effectiveness/verify-milestone-7-row-33-decomposition.sh	verifier	yes	component-0093	1	no	3	0	3	0	3
 evaluation/standards-effectiveness/verify-milestone-7-row-34-decomposition.sh	verifier	yes	component-0094	1	no	6	0	0	0	7
 evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh	verifier	yes	component-0095	1	no	3	0	2	0	4
 evaluation/standards-effectiveness/verify-milestone-7-row-36-decomposition.sh	verifier	yes	component-0096	1	no	5	0	0	0	5
@@ -118,7 +118,7 @@ evaluation/standards-effectiveness/verify-network-transport-policy.sh	verifier	y
 evaluation/standards-effectiveness/verify-owner-state-transitions.sh	verifier	yes	component-0116	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-persistence-durable-mutation.sh	verifier	yes	component-0117	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-persistence-migration-execution.sh	verifier	yes	component-0118	1	no	0	1	0	1	0
-evaluation/standards-effectiveness/verify-persistence-owner-contract.sh	verifier	yes	component-0119	1	no	1	1	1	1	1
+evaluation/standards-effectiveness/verify-persistence-owner-contract.sh	verifier	yes	component-0119	1	no	1	1	4	1	1
 evaluation/standards-effectiveness/verify-plan-fixtures.sh	verifier	yes	component-0120	1	no	1	12	0	12	1
 evaluation/standards-effectiveness/verify-plan-implementation-entrypoint.sh	verifier	yes	component-0121	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-plan-template-projection.sh	verifier	yes	component-0122	1	no	0	1	0	1	0

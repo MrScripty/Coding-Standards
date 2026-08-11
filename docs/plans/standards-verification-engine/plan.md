@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-EDGE-2 lifecycle-caller package audit
+**Current phase:** Milestone 6: admitted M6-N lifecycle-caller wave
 
-**Next slice:** Re-audit the unchanged executable graph and admit M6-N1
-Contract HTTP Outcome and M6-N2 Persistence Owner only with exact incident-edge
-rows, explicit row-33/row-32 caller transfer, bounded write sets, and frozen
-package gates.
+**Next slice:** Implement admitted M6-N1 Contract HTTP Outcome, transfer its
+row-33 caller to registered declarative authority, and accept the package only
+after its focused and affected-lifecycle gates pass.
 
 **Acceptance status:** `pending`
 
@@ -3208,6 +3207,105 @@ edge contract and all 104 declarative suites pass; graph freshness remains 172
 Bash verifiers / 177 nodes / 857 edges / 173 components; both plan checks and
 diff integrity pass; and the complete mixed 172-entrypoint checkpoint exits
 zero.
+
+#### M6-N-W1 Lifecycle-Caller Wave Admission
+
+**Status:** `Active`
+
+The unchanged graph confirms exactly four executable incident edges for each
+candidate. Both checkers have outbound `executable_reference` and
+`helper_dependency` edges to `check-metadata.sh`. Row 33 has inbound
+`executable_reference` and `verifier_dependency` edges to Contract HTTP
+Outcome; row 32 has the same two inbound edges to Persistence Owner. The
+Persistence row-35 inventory reference is non-executable lifecycle data and is
+transferred separately.
+
+M6-N1 and M6-N2 are admitted in serial train order 69 and 70. Package manifests
+declare every exact incident edge with direction inferred from the existing
+source/target endpoints. The row checkers remain independently owned migration
+evidence; implementation removes only their semantic-child invocation after a
+registered suite becomes canonical. No caller wrapper, Bash-to-Python bridge,
+duplicate suite invocation, package-specific scan, source fallback, fixture
+rewrite, schema change, or compatibility mode is permitted.
+
+Shared manifests, registry, README, generated graph, and plan records remain
+serial integration-owner work. The semantic suites/checkers and row-33/row-32
+callers have disjoint package write sets, but M6-N2 follows M6-N1 so package
+state and shared records never conflict. Canonical standards, semantic fixtures,
+metadata helper, engine code, schemas, lockfiles, and workflow artifacts remain
+read-only for the full wave.
+
+**Admission verification:** package projection and exact incident-edge
+authority pass for both admitted rows. Serial inventory regeneration preserves
+172 Bash verifiers / 177 nodes / 173 components and records 869 edges; the 12
+new non-executable `contract_reference` edges are generated references from the
+three shared package-authority artifacts to the four newly named checker/caller
+paths, not semantic prerequisites or executable fallbacks.
+
+#### Slice M6-N1: Contract HTTP Outcome Projection
+
+**Status:** `Active`
+
+**Package state:** `admitted`
+
+**Goal:** replace the Bash checker with one registered Contracts-owned suite
+that preserves all 24 typed outcome-projection decisions, four exact
+dispositions, canonical protocol-outcome authority, non-normative HTTP recipe
+evidence, former architecture-index closure, metadata relations, and negative
+evidence against guessed status/envelope defaults.
+
+**Allowed write set:** package and edge manifests, package expected rows, suite
+registry, `suites/contract-http-outcome-projection.toml`, the deleted Contract
+HTTP checker, row-33 decomposition checker, verification README, generated
+checker inventories, and serial child/parent plan records. Everything else is
+read-only.
+
+**Caller transfer:** register and pass the semantic suite before removing the
+single Contract HTTP child invocation from row 33. Row 33 continues to prove
+its eight-ID/two-child decomposition, owner validation, plan history, adapter
+proof, complete dispositions, and execution-train lifecycle. Accepted package
+state requires the deleted checker and all four incident graph edges to be
+absent.
+
+**Acceptance gate:** focused suite, affected row-33 checker, package and exact
+incident-edge authority, all declarative suites, graph freshness, both plan
+checks, removed paths, README route, source/fixture/helper/engine/schema
+read-only proof, and diff integrity pass. The mixed checkpoint is deferred to
+M6-N-W1 closure.
+
+#### Slice M6-N2: Persistence Owner Contract
+
+**Status:** `Planned`
+
+**Package state:** `admitted`, serially blocked on M6-N1 acceptance
+
+**Goal:** replace the Bash checker with one registered Persistence-owned suite
+that preserves all 19 typed owner decisions, the exact `STD-0106` disposition,
+canonical and reference evidence, Router and architecture routes, metadata
+relations, and negative evidence against nearby weaker-store fallback.
+
+**Allowed write set:** package and edge manifests, package expected rows, suite
+registry, `suites/persistence-owner-contract.toml`, the deleted Persistence
+checker, row-32 decomposition checker, row-35 dependency inventory and checker,
+verification README, generated checker inventories, and serial child/parent
+plan records. Everything else is read-only.
+
+**Caller and lifecycle transfer:** register and pass the semantic suite before
+removing the single Persistence child invocation from row 32. Row 32 continues
+to prove its 13-ID/three-child decomposition, owner validation, plan history,
+durable-mutation and migration-execution children, exact disposition, and
+execution train. Remove the deleted checker from row-35 dependency data and
+reconcile exact counts from 18/16/26 to 17/15/26 without changing the lifecycle
+schema. Accepted package state requires the deleted checker and all four
+incident executable edges to be absent.
+
+**Acceptance gate:** focused suite, affected row-32 and row-35 checkers,
+package and exact incident-edge authority, all declarative suites, graph
+freshness, both plan checks, removed paths, README route,
+source/fixture/helper/engine/schema read-only proof, diff integrity, and one
+complete mixed Bash checkpoint pass at M6-N-W1 closure. Any additional caller,
+semantic prerequisite, lifecycle owner, or required reusable assertion is a
+re-plan trigger.
 
 **Tasks:**
 

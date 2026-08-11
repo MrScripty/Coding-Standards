@@ -2231,3 +2231,29 @@
 - VE041 is resolved without a schema fork, compatibility parser, bespoke scan,
   package exception, or legacy bridge. M6-N1 and M6-N2 remain unadmitted; next
   slice is a fresh exact incident-edge and lifecycle-caller package audit.
+
+## 2026-08-11 - M6-N-W1 Lifecycle-Caller Wave Admission
+
+- Re-audited the unchanged 172-verifier graph and froze exactly four executable
+  incident edges for each package: outbound metadata executable/helper edges
+  and inbound executable/verifier edges from row 33 or row 32.
+- Admitted M6-N1 Contract HTTP Outcome at train order 69 and M6-N2 Persistence
+  Owner at train order 70. Both use the accepted incident-edge contract and
+  existing declarative assertion families; no engine or schema change is
+  authorized.
+- Froze explicit caller transfer: each semantic suite must be registered and
+  pass before its direct row-checker invocation is removed. The retained row
+  checker continues to own decomposition and lifecycle evidence and does not
+  invoke Python or duplicate semantic authority.
+- Froze Persistence lifecycle transfer: remove its non-executable row-35
+  dependency entry and reconcile exact counts from 18/16/26 to 17/15/26.
+- Canonical sources, semantic fixtures, metadata helper, engine, schemas,
+  lockfiles, and workflow artifacts remain read-only. Shared manifests,
+  registry, README, graph, and plans remain serial integration-owner work.
+- Serial inventory regeneration preserved 172 Bash verifiers / 177 nodes / 173
+  components and increased the graph from 857 to 869 edges. The 12 additions
+  are generated non-executable contract references from the three package
+  authority artifacts to four newly named checker/caller paths.
+- No semantic checker, suite, caller, lifecycle inventory, registry, README,
+  source, fixture, helper, engine, schema, or lockfile changed during admission.
+  Next slice is admitted M6-N1 implementation.

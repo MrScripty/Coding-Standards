@@ -8,7 +8,7 @@ id = "admitted-packages"
 type = "table"
 path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
 header = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
-row_count = 68
+row_count = 70
 non_empty = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 unique = [["train_order"], ["package_id"], ["subject"]]
 
@@ -767,5 +767,27 @@ expected = [[
   "M6-M2,VE030,VE037,VE039,VE040",
   "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,affected-lifecycle,legacy-index-no-fallback,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-M-W1",
   "accepted",
+], [
+  "69",
+  "M6-N1",
+  "checker:evaluation/standards-effectiveness/verify-contract-http-outcome-projection.sh",
+  "topics/contracts.md",
+  "consolidation",
+  "contract-http-outcome-projection-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/contract-http-outcome-projection.toml,evaluation/standards-effectiveness/verify-contract-http-outcome-projection.sh,evaluation/standards-effectiveness/verify-milestone-7-row-33-decomposition.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-M3,VE030,VE037,VE039,VE041",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-caller-transfer,affected-lifecycle,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-N-W1",
+  "admitted",
+], [
+  "70",
+  "M6-N2",
+  "checker:evaluation/standards-effectiveness/verify-persistence-owner-contract.sh",
+  "profiles/boundaries/persistence.md",
+  "consolidation",
+  "persistence-owner-contract-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/persistence-owner-contract.toml,evaluation/standards-effectiveness/verify-persistence-owner-contract.sh,evaluation/standards-effectiveness/verify-milestone-7-row-32-decomposition.sh,evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv,evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-N1,VE030,VE037,VE039,VE041",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-caller-transfer,lifecycle-transfer,affected-lifecycle,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-N-W1",
+  "admitted",
 ]
 ]
