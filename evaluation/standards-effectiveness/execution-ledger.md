@@ -10112,3 +10112,31 @@ entrypoints.
 
 **Next slice:** classify the VE043-A1 broad numeric-comparison queue by exact
 path and semantic taxonomy before admitting owner-local changes.
+
+## 2026-08-11 VE043-A1 Candidate-Authority Re-plan Trigger
+
+**Outcome:** Re-plan required.
+
+Preflight found no frozen artifact, extraction contract, baseline revision, or
+exact locations behind the reported 359 broad numeric-comparison candidates.
+The original planning commit and current repository retain only that aggregate
+claim. Classification cannot begin from an unreproducible queue, and preserving
+the scalar as authority would contradict VE043's derived-count objective.
+
+**No-fallback result:** no likely regular expression was reverse-engineered to
+force the historical total; no shell parser, inferred semantic class, owner
+edit, candidate disposition, package admission, or alternate queue was added.
+
+**Recommended option:** freeze a new current verifier-scoped lexical candidate
+manifest from one documented extraction contract, derive its cardinality, and
+record explicit reviewed taxonomy, owner, disposition, and rationale. Generated
+discovery must not infer semantic ownership or policy decisions.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only. Implementation remains unchanged.
+
+**Verification:** clean preflight; repository and history search for candidate
+authority; both plan checks and diff integrity after recording the trigger.
+
+**Next slice:** select and admit one VE043-A1 candidate-source option before
+creating the audit manifest.

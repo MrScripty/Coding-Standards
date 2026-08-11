@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1 remaining numeric audit
+**Current phase:** Milestone 6: VE043-A1 candidate-authority re-plan
 
-**Next slice:** classify the frozen broad numeric-comparison audit queue by the
-VE043 taxonomy and record exact path-level dispositions before admitting any
-owner-local migration. S1 remains unadmitted.
+**Next slice:** select and admit one reproducible candidate-source contract for
+VE043-A1. Do not classify candidates or edit an owner until the exact queue is
+frozen and its cardinality is derived. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3677,7 +3677,7 @@ diff integrity, and all 170 canonical mixed entrypoints pass.
 
 ##### VE043-A1 And VE043-P1: Audit And Package Admission
 
-**Status:** `Active`
+**Status:** `Planned`
 
 Classify the 359 broad numeric-comparison candidates as mutable aggregate,
 declared finite contract, historical snapshot, structural multiplicity, or
@@ -3691,6 +3691,53 @@ closure of the root README consumer checker and rows 35, 45, and 46. This audit
 is the next package-admission re-plan gate. It must not delete a checker while a
 Bash caller remains, introduce a Python-through-Bash bridge, or retain duplicate
 declarative and Bash authority.
+
+##### VE043-A1 Candidate-Authority Re-plan Trigger
+
+**Status:** `Active`
+
+The recorded total of 359 broad numeric-comparison candidates has no frozen
+candidate artifact, extraction contract, baseline revision, or exact path-level
+rows. Repository and commit-history inspection finds only the aggregate claim.
+The queue therefore cannot be reproduced or classified exactly, and retaining
+359 as its authority would repeat the mutable-count defect VE043 exists to
+remove. No owner file or candidate disposition has been changed.
+
+**Option 1 - Reconstruct the undocumented historical scan:** infer likely
+regular expressions until they reproduce 359, freeze those results, and then
+classify them. This may preserve the historical number but cannot prove it
+reconstructs the original candidate semantics. Choose it only if matching the
+historical observation is itself required; it is not recommended.
+
+**Option 2 - Freeze a new exact verifier-scoped audit manifest
+(`Recommended`):** treat 359 as non-authoritative historical context. Enumerate
+the current canonical Bash verifier paths from generated inventory, apply one
+documented conservative lexical extraction contract, and write every exact
+candidate location to a reviewable TSV. Derive all totals from its rows, record
+one taxonomy class, owner, disposition, and rationale per candidate, and verify
+path uniqueness plus source-location freshness. The extractor discovers
+candidates only; semantic classification remains explicit human-reviewed data.
+This provides complete current scope without a shell parser or inferred owner.
+
+**Option 3 - Defer global inventory to owner-package audits:** remove the broad
+queue claim and inspect numeric authority only when each owner package is
+admitted. This minimizes up-front work but cannot prove repository-wide audit
+coverage and makes cross-owner consistency harder to review. Choose it only if
+the global completeness objective is intentionally dropped.
+
+**Option 4 - Build a shell AST or expression parser:** parse all checker
+expressions and infer candidate semantics mechanically. This could broaden
+syntax coverage, but semantic count ownership still requires review and the
+parser would exist mainly for Bash scheduled for deletion. It conflicts with
+the admitted no-parser boundary and is rejected.
+
+**Recommended admission boundary:** Option 2 may write one extraction contract,
+one generated candidate-location TSV, one reviewed classification TSV or
+equivalent single manifest, focused freshness/completeness evidence, and the
+serial plan/report/ledger records. Bash verifiers, standards owners, suites,
+registry, package and edge manifests, generated dependency artifacts,
+lockfiles, and workflows remain read-only. The candidate total must always be
+derived. Select and admit an option before creating audit artifacts.
 
 **Tasks:**
 

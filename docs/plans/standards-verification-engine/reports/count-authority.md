@@ -129,6 +129,14 @@ move to projections or relations; historical membership moves to exact rows;
 reporting totals are derived. Do not build a Bash-expression parser solely to
 police scripts that the migration is deleting.
 
+The audit is blocked on candidate authority. The historical total of 359 has no
+frozen rows, extraction rule, baseline revision, or exact locations and cannot
+serve as a classification input. The recommended recovery replaces that total
+with a current verifier-scoped lexical candidate manifest whose cardinality is
+derived. Candidate discovery remains mechanical; taxonomy, ownership,
+disposition, and rationale remain explicit reviewed fields. No owner migration
+is admitted until the queue and freshness contract are selected and frozen.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge
