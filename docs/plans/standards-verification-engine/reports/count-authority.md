@@ -167,6 +167,14 @@ in C1, derives standard action from taxonomy, and defers owner resolution to
 the existing package-admission review. L1 then requires every candidate
 disappearance to join the accepted package and its canonical owner.
 
+Option 1 is selected. C1 now owns only exact candidate-ID-to-semantic-class
+coverage and uses existing generic table and relation assertions. It contains
+no owner field and cannot authorize modification or acceptance. Package
+admission remains the sole checker-owner decision, and L1 must join every
+candidate disappearance to an accepted package with an explicit canonical
+owner. This preserves graph relationships without a duplicate mutable owner
+map or an inferred fallback.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge

@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-C1 owner-join re-plan
+**Current phase:** Milestone 6: VE043-A1-C1 semantic coverage
 
-**Next slice:** select and admit one C1 owner-timing contract. Do not infer or
-manually duplicate current checker owners, classify candidates, or edit an
-owner before selection. S1 remains unadmitted.
+**Next slice:** implement exact reviewed semantic-class coverage with the
+existing generic table and relation assertions. Do not add an owner field,
+infer an owner, edit a checker, or admit an owner package. S1 remains
+unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3744,7 +3745,7 @@ coverage, class domain, and exception requirements are verified mechanically.
 
 ##### VE043-A1 Derived Audit Admission
 
-**Status:** `Planned`
+**Status:** `Active`
 
 The selected recovery executes in three serial, independently verified slices:
 
@@ -3756,15 +3757,17 @@ The selected recovery executes in three serial, independently verified slices:
    expected value. The generated file is never hand-edited.
 2. **VE043-A1-C1 semantic coverage:** add one reviewed decision table containing
    only candidate identity, taxonomy class, and optional exception rationale.
-   Require exact one-to-one coverage of the generated baseline. Derive owner
-   from canonical ownership/package evidence and derive the normal migration
-   action from the taxonomy. Missing, duplicate, unknown, ambiguous-owner, and
-   unjustified-exception outcomes are typed diagnostics.
+   Require exact one-to-one coverage of the generated baseline and derive the
+   normal migration action from the taxonomy. Owner is intentionally outside
+   the C1 schema. Missing, duplicate, unknown-class, and unjustified-exception
+   outcomes are typed diagnostics.
 3. **VE043-A1-L1 lifecycle guard:** compare current derived candidates with the
    immutable baseline and accepted package evidence. Reject a new candidate or
-   an unexplained disappearance; accept disappearance only through the owning
-   migration package. Retain the baseline and decisions as historical audit
-   evidence while deriving current progress and all report totals.
+   an unexplained disappearance; accept disappearance only through an accepted
+   migration package that explicitly names its canonical owner. Missing or
+   ambiguous package-owner authority is typed `unavailable` or `invalid` rather
+   than inferred. Retain the baseline and decisions as historical audit evidence
+   while deriving current progress and all report totals.
 
 **G1 allowed write set:**
 `tools/standards_verifier/standards_verifier/numeric_audit.py`;
@@ -3803,7 +3806,7 @@ semantic classification.
 
 ##### VE043-A1-C1 Owner-Join Re-plan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 C1 preflight proves that canonical package evidence cannot currently derive an
 owner for baseline candidates. The generated baseline has candidate rows in
@@ -3847,6 +3850,34 @@ join. The reviewed C1 table still contains only candidate identity, semantic
 class, and optional explicit-exception rationale. No owner manifest, inferred
 owner, package edit, checker edit, or standards-owner edit is authorized in
 C1. Select an option before creating classification evidence.
+
+**Decision:** Option 1 is selected. C1 is a read-only semantic audit and does
+not exercise modification or acceptance authority. It uses the existing generic
+`table` and `relation` assertions to require the exact three-column decision
+schema, the closed five-class taxonomy domain, unique candidate identities, and
+set equality with the generated baseline. The reviewed table does not restate
+candidate facts or contain owner, action, package, progress, or total fields.
+The taxonomy remains the authority for standard action. L1, not C1, requires an
+accepted package and explicit canonical owner before candidate disappearance.
+
+**C1 allowed write set:**
+`evaluation/standards-effectiveness/numeric-comparison-decisions.tsv`;
+`evaluation/standards-effectiveness/suites/numeric-comparison-classification.toml`;
+`evaluation/standards-effectiveness/suite-registry.toml`; engine documentation;
+count-authority and architecture reports; and serial plan, issue, and ledger
+records. Python engine implementation, generated baseline and graph artifacts,
+package/edge manifests, Bash verifiers, standards sources, lockfiles, and
+workflows remain read-only.
+
+**C1 acceptance:** every generated candidate identity occurs exactly once in
+the reviewed table; every class is one of `mutable-aggregate`,
+`declared-finite-contract`, `historical-snapshot`, `structural-multiplicity`, or
+`policy-threshold`; rationale is empty for normal taxonomy decisions and
+non-empty only for a separately admitted explicit exception; the registered
+declarative suite passes with focused positive and negative fixture evidence;
+all declarative suites, both plan checks, generated graph freshness, Python
+compilation, engine tests, and diff integrity pass. C1 does not authorize a
+checker or owner edit.
 
 **Tasks:**
 

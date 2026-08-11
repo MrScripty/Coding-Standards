@@ -12,10 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** resolve delegated VE043-A1-C1 owner timing. Select whether C1
-defers owner resolution to package admission or establishes new canonical
-current-checker ownership. Do not classify or infer owners before selection.
-Release Procedure, S1, and the Rust Binding train remain unadmitted.
+**Next slice:** implement delegated VE043-A1-C1 exact semantic-class coverage
+with existing generic table and relation assertions. Do not add an owner field,
+infer an owner, edit a checker, or admit an owner package. Release Procedure,
+S1, and the Rust Binding train remain unadmitted.
 
 VE043-A1-C1 has reached a re-plan trigger. Exact preflight finds no overlap
 between current candidate-bearing verifier paths and already migrated checker
@@ -23,6 +23,13 @@ package subjects. Other structured evidence owns dependencies, standards IDs,
 or graph relationships rather than current checker semantics. The recommended
 option keeps C1 limited to exact semantic class, derives standard action from
 taxonomy, and defers owner resolution to package admission for L1 enforcement.
+
+VE043-A1-C1 owner timing selects Option 1. The read-only classification stage
+does not require or assert modification authority. Exact owner resolution stays
+with migration-package admission, and lifecycle acceptance requires an explicit
+package-owner join. The classification table therefore contains only candidate
+identity, semantic class, and optional explicit-exception rationale; no second
+owner authority or inferred fallback is introduced.
 
 VE043-A1-G1 is accepted. Its fixed lexical contract derives an immutable
 708-row baseline from the canonical 170-verifier scope; both cardinalities are
@@ -32,12 +39,13 @@ integrity, and all 170 canonical mixed entrypoints pass. No candidate fact,
 semantic class, owner, disposition, package, progress, or expected total was
 manually added.
 
-VE043-A1 Option 2 is selected with corrected authority. The historical
+VE043-A1 audit Option 2 remains selected with corrected authority. The historical
 359-candidate total is non-authoritative context. G1 machine-generates candidate
 identity, location, expression, and fingerprint and derives every total. C1
-reviews only irreducible semantic class and explicit exceptions; owner and
-normal disposition come from canonical evidence and taxonomy. L1 derives
-progress and rejects new or unexplained missing candidates. No manually
+reviews only irreducible semantic class and explicit exceptions; normal action
+comes from taxonomy while owner is deferred to package admission. L1 derives
+progress and rejects new or unexplained missing candidates unless an accepted
+package explicitly names the canonical owner. No manually
 maintained candidate facts, Bash parser, owner edit, or package admission is
 authorized in G1.
 

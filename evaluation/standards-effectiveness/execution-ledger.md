@@ -10237,3 +10237,28 @@ checks and diff integrity after recording the trigger.
 
 **Next slice:** select and admit one C1 owner-timing option before creating
 semantic classification evidence.
+
+## 2026-08-11 VE043-A1-C1 Owner-Timing Admission
+
+**Outcome:** Option 1 accepted.
+
+C1 is limited to exact reviewed candidate-ID-to-semantic-class coverage. The
+existing generic table and relation assertions will enforce the three-column
+schema, closed five-class domain, unique identities, and exact set equality
+with the generated baseline. Normal action is read from the taxonomy; owner is
+intentionally absent from C1 and remains a package-admission decision.
+
+**No-fallback result:** no current-checker owner manifest, filename or graph
+inference, wildcard owner, duplicated candidate fact, hardcoded count, bespoke
+numeric validator, checker edit, or owner edit is authorized. L1 must reject
+candidate disappearance unless accepted package evidence explicitly names the
+canonical owner.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only. G1 implementation and generated evidence remain
+unchanged.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** implement C1 exact semantic-class coverage without owner,
+package, checker, generated-artifact, or standards-source edits.
