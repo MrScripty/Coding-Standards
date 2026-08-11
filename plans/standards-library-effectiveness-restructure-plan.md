@@ -12,10 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement and validate delegated VE045 Option 1: generic exact
-Markdown-structure and absent-path checks. Do not execute the accepted
-ten-package P1 train until the shared-contract checkpoint passes. Release
-Procedure, S1, and the Rust Binding train remain unadmitted.
+**Next slice:** preflight and admit the first package in the accepted P1 train:
+the S1 routed vertical slice. Freeze exact subject, owner, suite contract,
+incident-edge dispositions, dependencies, and write set before implementation.
+Release Procedure, S1, and the Rust Binding train remain unadmitted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -24,12 +24,13 @@ dispositions, duplicate/caller transfer, and serial shared-file integration.
 Generated reference edges remain lifecycle obligations but are not treated as
 proof of invocation or ownership.
 
-VE045 Option 1 is selected. Existing generic assertions cannot
-preserve exact heading order and explicit line ceilings across the three index
-owners or direct retired-path absence without lower-fidelity substring checks,
-corpus-only inference, or whole-file snapshots. The selected two-check
-capability slice preserves those contracts without package-specific code,
-Bash bridges, callbacks, or inferred defaults.
+VE045 Option 1 is accepted. Generic `markdown_structure` and `absent_paths`
+checks preserve exact heading order, explicit owner line ceilings, and direct
+retired-path absence without lower-fidelity substring checks, corpus-only
+inference, whole-file snapshots, package-specific code, Bash bridges,
+callbacks, or inferred defaults. The shared checkpoint passed 179 engine tests,
+107 declarative suites, fresh generated evidence, and all 170 mixed
+entrypoints.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

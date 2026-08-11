@@ -10600,3 +10600,26 @@ test module, engine and architecture documentation, and serial plan records.
 
 **Next slice:** implement and directly test both generic checks, then run the
 shared-contract checkpoint before admitting the first P1 package.
+
+## 2026-08-11 VE045 Generic File-Contract Acceptance
+
+**Outcome:** accepted; the frozen P1 package train is unblocked.
+
+The engine now registers policy-neutral `markdown_structure` and
+`absent_paths` checks. Markdown structure preserves the complete ordered ATX
+heading sequence and inclusive raw-newline ceiling without freezing unrelated
+prose. Path absence treats every filesystem object, including broken symlinks,
+as present and rejects absolute, parent-traversal, and symlink-escaping paths.
+
+**No-fallback result:** no package suite, fixture, registry entry, package or
+edge row, generated artifact, Bash checker, standards source, lockfile, or
+workflow changed. No snapshot, substring, corpus-only, callback, command,
+package-specific, or inferred-default path was added.
+
+**Verification:** 16 focused tests; 179 total engine tests; Python compilation;
+107 of 107 declarative suites; generated evidence fresh at 170 Bash verifiers,
+175 nodes, 855 edges, and 171 components; both plan checks; diff integrity; and
+all 170 canonical mixed checker entrypoints pass.
+
+**Next slice:** preflight and admit P1 package 1 for S1 routing, with exact
+subject, owner, dependency, suite, incident-edge, and write-set authority.

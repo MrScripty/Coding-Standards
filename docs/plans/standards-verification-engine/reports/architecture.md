@@ -154,6 +154,15 @@ positive metric through fixed strict integer-ratio arithmetic. Neither check
 contains a route name, policy threshold, expression evaluator, network client,
 normalizer, callback, or command surface.
 
+File-shape and retirement evidence use two separate generic mechanics.
+`markdown_structure` compares the complete ordered ATX heading sequence from
+one contained UTF-8 file and enforces one inclusive raw-newline ceiling.
+`absent_paths` proves explicit repository-contained paths do not exist while
+treating regular files, directories, valid symlinks, and broken symlinks as
+present. This separation keeps index structure independent from retired-path
+safety. Neither check infers inventory, owner, threshold, normalization, or a
+fallback source, and neither exposes callbacks or command execution.
+
 Derived reference membership uses `reference_inventory`: two explicit exact-
 header TSVs identify the bounded candidate corpus and expected manifest, while
 one exact UTF-8 literal selects current members. Exact path-set equality owns

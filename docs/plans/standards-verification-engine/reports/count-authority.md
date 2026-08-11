@@ -309,17 +309,23 @@ Generated incident edges remain exact package-lifecycle obligations, but a
 checker basename in a command argument, identity assertion, or manifest does
 not by itself establish runtime invocation or semantic ownership.
 
-VE045 blocks package admission. Existing checks cannot prove exact ordered
-headings plus explicit line ceilings for three indexes or direct filesystem
-absence for retired Rust adoption notes. The recommended recovery adds generic
-`markdown_structure` and `absent_paths` checks; it does not convert these fixed
-policy and safety contracts into mutable counts or whole-file snapshots.
+VE045 formerly blocked package admission because existing checks could not prove
+exact ordered headings plus explicit line ceilings for three indexes or direct
+filesystem absence for retired Rust adoption notes. The accepted recovery adds
+generic `markdown_structure` and `absent_paths` checks; it does not convert these
+fixed policy and safety contracts into mutable counts or whole-file snapshots.
 
 VE045 Option 1 is selected. The capability slice adds only the two generic
 typed checks, their registration and focused tests, implementation
-documentation, and serial planning evidence. Package authority remains frozen
-until the shared-contract checkpoint passes; no expected count, inferred
-default, approximation, or duplicate Bash/custom implementation is admitted.
+documentation, and serial planning evidence. Package authority remained frozen
+until the shared-contract checkpoint passed; no expected count, inferred
+default, approximation, or duplicate Bash/custom implementation was admitted.
+
+VE045 is accepted after 16 focused tests, all 179 engine tests, all 107
+declarative suites, fresh generated evidence, and all 170 mixed checker
+entrypoints passed. Its configured line ceilings remain explicit owner policy;
+observed newline counts are derived at runtime and are not copied into migration
+authority. The P1 train may now begin with a separate package-1 admission.
 
 ## Acceptance
 

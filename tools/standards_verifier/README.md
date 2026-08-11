@@ -118,6 +118,23 @@ maximum_numerator`. Both ratio values are required positive integers and
 equality fails. The check has no expression language, inferred metric, default
 ratio, unit conversion, command action, or content normalization.
 
+The `markdown_structure` check reads one contained UTF-8 Markdown file and
+requires its complete ordered set of ATX heading lines (`#` through `######`)
+to equal one explicit non-empty unique `headings` list. It also counts raw
+newline bytes and requires that count to be less than or equal to one explicit
+positive `maximum_lines` value. Missing inputs are unavailable; invalid UTF-8,
+escaping paths, heading drift, and line-limit excess are typed failures. The
+check does not parse prose, normalize content, infer headings or thresholds, or
+freeze unrelated bytes.
+
+The `absent_paths` check requires every member of one explicit non-empty unique
+`paths` list to be absent. Paths must remain repository-contained after symlink
+resolution. Files, directories, valid symlinks, and broken symlinks are all
+present; absolute paths, parent traversal, and symlink escapes are invalid.
+Missing paths are the asserted success state, not unavailable input. The check
+does not scan a corpus, infer retired paths, invoke commands, or ignore an
+unexpected filesystem object.
+
 The `reference_inventory` check reads one exact candidate TSV and one exact
 manifest TSV, using explicitly configured headers and path columns. It resolves
 every listed path as a contained regular file, selects candidate UTF-8 files

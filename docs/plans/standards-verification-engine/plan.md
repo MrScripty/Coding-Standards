@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE045 P1 file-contract shared capability
+**Current phase:** Milestone 6: VE043-P1 package 1 S1 admission
 
-**Next slice:** implement and validate the selected VE045 Option 1 generic
-`markdown_structure` and `absent_paths` checks. Do not admit a P1 package until
-the shared-contract checkpoint passes. S1 remains unadmitted.
+**Next slice:** preflight and admit the first frozen P1 package for the S1 routed
+vertical slice. Freeze its exact subject, owner, suite contract, incident-edge
+dispositions, dependencies, and bounded write set before implementation. S1
+remains unadmitted until that admission passes.
 
 **Acceptance status:** `pending`
 
@@ -4244,15 +4245,16 @@ edge, README-consumer, generated graph, and plan integration stays serial;
 independent suite/fixture preparation may be isolated after capability
 acceptance.
 
-**VE045 status:** `Accepted for implementation`
+**VE045 status:** `Accepted`
 
-The train cannot yet preserve all observable contracts through existing engine
-checks. Root, language, and Rust migration indexes each require an exact ordered
-Markdown heading set plus a distinct explicit maximum line threshold. Required
-and prohibited text does not prove exact heading order or exclude additional
-headings, while `exact_text` would freeze unrelated prose. Rust adoption
-retirement also requires the former authority path itself to remain absent;
-empty table projections prove corpus state but cannot prove filesystem absence.
+Before VE045, the train could not preserve all observable contracts through the
+existing engine checks. Root, language, and Rust migration indexes each require
+an exact ordered Markdown heading set plus a distinct explicit maximum line
+threshold. Required and prohibited text does not prove exact heading order or
+exclude additional headings, while `exact_text` would freeze unrelated prose.
+Rust adoption retirement also requires the former authority path itself to
+remain absent; empty table projections prove corpus state but cannot prove
+filesystem absence.
 
 **Option 1 - Two narrow generic checks (`Recommended`):** add
 `markdown_structure` with one contained UTF-8 path, exact ordered Markdown
@@ -4302,6 +4304,12 @@ missing/escaping/symlink paths, malformed configuration, present forbidden
 paths, and absent paths; all engine tests; Python compilation; all declarative
 suites; generated graph freshness; both plan checks; diff integrity; and one
 canonical complete-suite checkpoint.
+
+**Acceptance evidence:** 16 focused file-contract tests and all 179 engine tests
+pass; Python compilation succeeds; all 107 declarative suites pass; generated
+evidence is fresh at 170 Bash verifiers, 175 nodes, 855 edges, and 171
+components; both plan checks and diff integrity pass; and all 170 canonical
+mixed checker entrypoints pass. No package authority or legacy checker changed.
 
 **No-fallback rule:** do not replace exact structure with substring checks,
 replace absent-path evidence with table absence, freeze whole files for
