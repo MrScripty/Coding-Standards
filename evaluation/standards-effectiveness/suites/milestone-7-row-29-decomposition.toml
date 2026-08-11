@@ -33,7 +33,6 @@ id = "owner-validation"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-row-29-owner-validation.tsv"
 header = ["id", "owner", "disposition", "rationale"]
-row_count = 5
 [checks.domains]
 owner = ["topics/contracts.md"]
 disposition = ["index"]

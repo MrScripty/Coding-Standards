@@ -12,10 +12,17 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement delegated VE043-E1 by removing declarative table
-`row_count`, preserving all eight suite contracts through exact projections,
-and adding bounded generic `reference_inventory`. Release Procedure, S1, and
-the Rust Binding train remain unadmitted.
+**Next slice:** execute delegated VE043-A1 as a read-only classification audit
+of the frozen broad numeric-comparison queue. Record exact path-level
+dispositions before admitting any owner-local migration. Release Procedure,
+S1, and the Rust Binding train remain unadmitted.
+
+VE043-E1 is accepted. The strict table schema rejects `row_count`; all eight
+former uses preserve exact membership evidence, and the generic bounded
+`reference_inventory` assertion derives literal-containing membership without
+an inferred set or compatibility branch. Fifteen focused tests, all 138 engine
+tests, all 106 declarative suites, fresh generated evidence, both plan checks,
+diff integrity, and all 170 canonical mixed entrypoints pass.
 
 VE043-R1 focused behavior and all 123 engine tests pass, but generated
 freshness exposes a write-set contradiction. The committed recovery plan adds

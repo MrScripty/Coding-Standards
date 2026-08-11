@@ -10081,3 +10081,34 @@ passed.
 **Next slice:** continue delegated engine Milestone 6 from a fresh
 dependency-closure audit, while parent source-manifest order remains at source
 8 until the delegated wave boundary is accepted.
+
+## 2026-08-11 VE043-E1 Count-Safe Engine Contract
+
+**Outcome:** Accepted.
+
+The shared engine no longer accepts declarative table `row_count`; unknown-field
+validation rejects it without a compatibility parser. All eight registered
+uses were removed while preserving exact membership evidence, with one exact
+GUI smoke case-key projection added. The registered `reference_inventory`
+assertion derives exact literal-containing path membership from bounded
+candidate and manifest tables and reports typed malformed, unavailable, and
+assertion outcomes.
+
+**No-fallback result:** no scalar row-count authority, old/new schema branch,
+inferred candidate set, glob, regular expression, command execution, callback,
+normalization, or policy-specific behavior remains.
+
+**Bounded write set:** shared table parser and tests; registered
+`reference_inventory` check and focused tests; eight declared suites; engine
+README and architecture report; active and parent plans, issues, count-authority
+and checker-inventory reports, and this ledger. Registry manifests, generated
+artifacts, Bash checkers, standards sources, lockfiles, and workflows remain
+unchanged.
+
+**Verification:** 15 focused tests; all 138 engine tests; Python compilation;
+all 106 declarative suites; fresh graph at 170 verifiers / 175 nodes / 855 edges
+/ 171 components; both plan checks; diff integrity; and all 170 canonical mixed
+entrypoints.
+
+**Next slice:** classify the VE043-A1 broad numeric-comparison queue by exact
+path and semantic taxonomy before admitting owner-local changes.

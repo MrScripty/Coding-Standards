@@ -8,7 +8,6 @@ id = "admitted-packages"
 type = "table"
 path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
 header = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
-row_count = 70
 non_empty = ["train_order", "package_id", "subject", "owner", "risk", "semantic_outcome", "write_set", "prerequisites", "verification", "state"]
 unique = [["train_order"], ["package_id"], ["subject"]]
 

@@ -11,6 +11,7 @@ from .exact_text import parse_exact_text_check
 from .line_budget import parse_line_budget_check
 from .markdown_links import parse_markdown_links_check
 from .metadata import parse_metadata_graph_check
+from .reference_inventory import parse_reference_inventory_check
 from .relation import parse_relation_check
 from .table import parse_table_check
 from .text import parse_text_check
@@ -41,6 +42,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_line_budget_check(raw, suite_id)
     if kind == "metadata_graph":
         return parse_metadata_graph_check(raw, suite_id)
+    if kind == "reference_inventory":
+        return parse_reference_inventory_check(raw, suite_id)
     if kind == "table":
         return parse_table_check(raw, suite_id)
     if kind == "acceptance_claims":

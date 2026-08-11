@@ -69,7 +69,6 @@ id = "owner-validation"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-row-19-owner-validation.tsv"
 header = ["id", "proposed_owner", "action", "semantic_group"]
-row_count = 50
 non_empty = ["id", "proposed_owner", "action", "semantic_group"]
 unique = [["id"]]
 [checks.domains]

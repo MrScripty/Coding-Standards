@@ -154,6 +154,18 @@ positive metric through fixed strict integer-ratio arithmetic. Neither check
 contains a route name, policy threshold, expression evaluator, network client,
 normalizer, callback, or command surface.
 
+Derived reference membership uses `reference_inventory`: two explicit exact-
+header TSVs identify the bounded candidate corpus and expected manifest, while
+one exact UTF-8 literal selects current members. Exact path-set equality owns
+the result and cardinality is diagnostic-only. The mechanism does not infer a
+corpus, normalize paths or content, evaluate regular expressions, invoke
+commands, or embed an owner-specific rule.
+
+The generic table contract intentionally omits scalar `row_count`. Finite
+contracts use exact projections or relations; mutable aggregates use derived
+membership checks. The former field is rejected as unknown with no legacy
+schema path.
+
 ## Migration Sequence
 
 1. Establish the strict kernel and replace one representative leaf checker.

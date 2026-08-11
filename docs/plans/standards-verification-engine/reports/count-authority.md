@@ -112,6 +112,15 @@ all eight uses with exact projections, add the GUI case-key projection, and add
 the generic `reference_inventory` assertion with focused positive and negative
 tests. One shared-contract checkpoint covers the coherent engine package.
 
+E1 is accepted. The strict table schema rejects `row_count`; all eight suites
+retain exact membership evidence, including the GUI case-key projection. The
+registered `reference_inventory` assertion derives exact literal-containing
+file membership from contained UTF-8 evidence and returns typed diagnostics for
+missing, extra, duplicate, unavailable, invalid UTF-8, and escaping paths. The
+package passes 15 focused tests, all 138 engine tests, Python compilation, all
+106 declarative suites, fresh generated evidence, both plan checks, diff
+integrity, and all 170 canonical mixed entrypoints.
+
 ### VE043-A1: Remaining Numeric Audit
 
 Classify every remaining numeric comparison by the taxonomy above. Migrate

@@ -1749,3 +1749,20 @@ documentation-inbound evidence from the accepted plan. Freshness passes at 170
 Bash verifiers / 175 nodes / 855 edges / 171 components. R1 focused checks, all
 123 engine tests, all 106 declarative suites, and all 170 canonical mixed
 entrypoints pass; M6-RC1 is accepted and VE043-E1 is next.
+
+### VE043-E1 Count-Safe Engine Acceptance
+
+The table schema no longer accepts `row_count`, and no compatibility parser or
+legacy branch remains. Seven affected suites rely on their existing exact
+projections; GUI smoke evidence now declares its exact case-key projection.
+The generic `reference_inventory` assertion compares one bounded canonical
+candidate table with one bounded manifest by exact literal-containing path
+membership and derives counts only for diagnostics.
+
+Fifteen focused tests cover schema rejection and positive, missing, extra,
+duplicate, unavailable, invalid UTF-8, header, column, empty-literal, and
+containment outcomes. All 138 engine tests, Python compilation, all 106
+declarative suites, graph freshness at 170 verifiers / 175 nodes / 855 edges /
+171 components, both plan checks, diff integrity, and all 170 canonical mixed
+entrypoints pass. VE043-A1 is next; no owner migration is admitted from the
+broad numeric scan before exact classification.

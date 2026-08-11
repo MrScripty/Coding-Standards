@@ -8,7 +8,6 @@ id = "slice-map"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-f018-slices.tsv"
 header = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
-row_count = 14
 non_empty = ["slice", "order", "id", "source", "target", "disposition", "rationale"]
 unique = [["id"], ["slice", "order"]]
 [checks.domains]

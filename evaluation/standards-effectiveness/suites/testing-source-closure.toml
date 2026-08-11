@@ -45,7 +45,6 @@ id = "exact-routes"
 type = "table"
 path = "evaluation/standards-effectiveness/fixtures/verification/testing-index-routes.tsv"
 header = ["concern", "owner"]
-row_count = 8
 non_empty = ["concern", "owner"]
 unique = [["concern"], ["owner"]]
 [[checks.projections]]

@@ -136,7 +136,6 @@ class TableCheck:
     id: str
     path: str
     header: tuple[str, ...]
-    row_count: int | None
     non_empty: tuple[str, ...]
     domains: dict[str, tuple[str, ...]]
     unique: tuple[tuple[str, ...], ...]
@@ -155,20 +154,6 @@ class TableCheck:
         )
 
         diagnostics: list[Diagnostic] = []
-        if self.row_count is not None and len(rows) != self.row_count:
-            diagnostics.append(
-                Diagnostic(
-                    "ASSERT.TABLE_ROW_COUNT",
-                    "invalid",
-                    "table row count does not match",
-                    suite=context.suite_id,
-                    check=self.id,
-                    path=self.path,
-                    expected=str(self.row_count),
-                    observed=str(len(rows)),
-                )
-            )
-
         for line_number, row in enumerate(rows, start=2):
             for field in self.non_empty:
                 if not row[field]:
@@ -361,7 +346,6 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
         "type",
         "path",
         "header",
-        "row_count",
         "non_empty",
         "domains",
         "unique",
@@ -400,19 +384,6 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
             )
         )
     header = _strings(raw.get("header"), "header", suite_id, check_id)
-    row_count = raw.get("row_count")
-    if row_count is not None and (
-        not isinstance(row_count, int) or isinstance(row_count, bool) or row_count < 0
-    ):
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.ROW_COUNT",
-                "invalid",
-                "row_count must be a non-negative integer",
-                suite=suite_id,
-                check=check_id,
-            )
-        )
     non_empty = tuple(raw.get("non_empty", []))
     if any(not isinstance(field, str) for field in non_empty) or len(
         set(non_empty)
@@ -494,8 +465,7 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
         _projection(value, header, suite_id, check_id) for value in raw_projections
     )
     if (
-        row_count is None
-        and not non_empty
+        not non_empty
         and not domains
         and not unique
         and not projections
@@ -513,7 +483,6 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
         check_id,
         path,
         header,
-        row_count,
         non_empty,
         domains,
         unique,

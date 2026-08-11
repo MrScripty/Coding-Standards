@@ -66,7 +66,6 @@ header = [
   "fallback",
   "expected",
 ]
-row_count = 14
 non_empty = [
   "case",
   "claim",
@@ -79,6 +78,25 @@ non_empty = [
   "expected",
 ]
 unique = [["case"]]
+[[checks.projections]]
+columns = ["case"]
+order = "source"
+expected = [
+  ["declared_gui_smoke"],
+  ["required_real_gui"],
+  ["missing_claim"],
+  ["missing_environment"],
+  ["contradictory_environment"],
+  ["missing_gui_capability"],
+  ["premature_exit"],
+  ["failed_assertion"],
+  ["fixed_xvfb"],
+  ["weaken_interactive"],
+  ["ambient_desktop"],
+  ["startup_as_workflow"],
+  ["alternate_environment"],
+  ["default_success"],
+]
 
 [[checks]]
 id = "canonical-owner"

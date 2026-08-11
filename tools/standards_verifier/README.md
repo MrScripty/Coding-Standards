@@ -84,6 +84,21 @@ maximum_numerator`. Both ratio values are required positive integers and
 equality fails. The check has no expression language, inferred metric, default
 ratio, unit conversion, command action, or content normalization.
 
+The `reference_inventory` check reads one exact candidate TSV and one exact
+manifest TSV, using explicitly configured headers and path columns. It resolves
+every listed path as a contained regular file, selects candidate UTF-8 files
+containing one non-empty exact literal, and requires exact selected-versus-
+manifest path-set equality. Duplicate or empty paths, malformed tables,
+invalid UTF-8, and escaping paths are invalid; missing evidence is unavailable;
+missing or extra manifest membership fails the assertion. It has no glob,
+regular expression, command, callback, inferred candidate set, normalization,
+network access, or policy-specific branch.
+
+The `table` check has no scalar row-count field. Exact finite membership is
+expressed through projections or relations; mutable inventory cardinality is
+derived from canonical membership. A configured `row_count` is an unknown
+field and fails rather than using a compatibility parser.
+
 The `metadata_graph` check parses the nine canonical Markdown metadata fields
 without global normalization. Direct mode accepts one non-empty `paths` list
 and validates the selected module graph. Fixture-corpus mode accepts one

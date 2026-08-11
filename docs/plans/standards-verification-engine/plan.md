@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-E1 count-safe engine contract
+**Current phase:** Milestone 6: VE043-A1 remaining numeric audit
 
-**Next slice:** implement admitted VE043-E1: remove `row_count`, preserve all
-eight suite contracts through exact projections, and add the bounded generic
-`reference_inventory` assertion. S1 remains unadmitted.
+**Next slice:** classify the frozen broad numeric-comparison audit queue by the
+VE043 taxonomy and record exact path-level dispositions before admitting any
+owner-local migration. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3590,7 +3590,7 @@ future slices.
 
 ##### VE043-E1: Count-Safe Engine Contract
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 After VE043-R1 and M6-RC1 acceptance, remove `row_count` from the strict table
 schema and reject it as unknown with no compatibility parsing. Remove all eight
@@ -3613,6 +3613,14 @@ lockfiles, and workflows remain read-only.
 tests, Python compilation, all declarative suites, graph freshness, both plan
 checks, diff/read-only proof, and one canonical fail-fast complete-suite
 checkpoint pass.
+
+**Acceptance evidence:** 15 focused schema and inventory tests, all 138 engine
+tests, Python compilation, all 106 declarative suites, fresh generated evidence
+at 170 verifiers / 175 nodes / 855 edges / 171 components, both plan checks,
+diff integrity, and all 170 canonical mixed entrypoints pass. `row_count` is
+rejected as unknown, all eight suites retain exact membership evidence, and
+the generic assertion has no compatibility parser, inferred candidate set, or
+policy-specific fallback.
 
 ##### VE043-R1 Generated-Artifact Re-plan Trigger
 
@@ -3669,7 +3677,7 @@ diff integrity, and all 170 canonical mixed entrypoints pass.
 
 ##### VE043-A1 And VE043-P1: Audit And Package Admission
 
-**Status:** `Planned`
+**Status:** `Active`
 
 Classify the 359 broad numeric-comparison candidates as mutable aggregate,
 declared finite contract, historical snapshot, structural multiplicity, or

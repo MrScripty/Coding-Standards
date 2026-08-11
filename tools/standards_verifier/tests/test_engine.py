@@ -278,7 +278,6 @@ class EngineTest(unittest.TestCase):
             type = "table"
             path = {json.dumps(path)}
             header = ["id", "state", "tags"]
-            row_count = 2
             non_empty = ["id", "state", "tags"]
             unique = [["id"]]
             [checks.domains]
@@ -298,6 +297,22 @@ class EngineTest(unittest.TestCase):
             """,
         )
         return "suites/table.toml"
+
+    def test_table_row_count_is_an_unknown_field(self) -> None:
+        suite_path = self.write_table_suite()
+        self.write_registry([("table", suite_path, [])])
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'header = ["id", "state", "tags"]',
+                'header = ["id", "state", "tags"]\nrow_count = 2',
+            ),
+            encoding="utf-8",
+        )
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
+        self.assertEqual(raised.exception.diagnostic.field, "row_count")
 
     def write_acceptance_claims_suite(
         self,
