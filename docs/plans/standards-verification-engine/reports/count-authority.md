@@ -283,13 +283,18 @@ are observations only. Their retirement remains governed by checker absence and
 one exact accepted package row with an explicit owner; no count is copied into
 package authority.
 
-Option 1 is recommended but not yet selected: decompose P1 into an ordered
+Option 1 is selected: decompose P1 into an ordered
 owner-coherent train for root README/routing infrastructure, Language Index
 closure, Rust profile/index closure, and Milestone 7 lifecycle evidence. Freeze
 root-index and S1 prerequisites explicitly, transfer executable caller edges
 only with accepted registered suites, and integrate shared authority files
 serially. A cross-owner mega-package, retained Bash bridge, inferred owner, and
 blanket historical retirement remain prohibited.
+
+P1-D1 is read-only. It derives its matrix from current checker behavior,
+generated incident edges, registered suites, package authority, and canonical
+owner documents. It does not add expected totals, infer an owner, admit a
+package, remove a call, or change lifecycle evidence.
 
 ## Acceptance
 

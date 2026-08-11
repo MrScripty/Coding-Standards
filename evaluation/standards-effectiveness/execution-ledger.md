@@ -10512,3 +10512,26 @@ and this ledger only.
 
 **Next slice:** select one P1 decomposition option before changing executable or
 package authority.
+
+## 2026-08-11 VE043-P1 Option 1 Selection
+
+**Outcome:** Option 1 accepted; read-only P1-D1 decomposition is active.
+
+P1-D1 will derive an exact responsibility, canonical-owner, incident-edge,
+declarative-coverage, and retirement-condition matrix for the root
+README/routing infrastructure, Language Index closure, Rust profile/index
+closure, and Milestone 7 lifecycle groups. It must include root-index and S1
+prerequisites and produce a dependency-ordered package train.
+
+**No-fallback result:** no package is admitted and no checker, caller, suite,
+fixture, registry, package or edge manifest, generated graph, numeric evidence,
+owner source, standards source, lockfile, or workflow may change during P1-D1.
+Graph adjacency, names, and file location are not owner authority.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** perform P1-D1 and stop if any responsibility lacks one canonical
+owner or the proposed train requires an invalid intermediate state.

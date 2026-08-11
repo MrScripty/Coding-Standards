@@ -2,12 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-P1 owner-closure re-plan trigger
+**Current phase:** Milestone 6: VE043-P1-D1 owner decomposition
 
-**Next slice:** select one VE043-P1 decomposition option before editing a
-checker, suite, fixture, package, registry, generated artifact, or standards
-source. The recommended option replaces the superseded one-package assumption
-with an ordered owner-coherent package train. S1 remains unadmitted.
+**Next slice:** perform the read-only VE043-P1-D1 responsibility, owner,
+incident-edge, declarative-coverage, and retirement-condition decomposition.
+Freeze an ordered owner-coherent package train or stop if one canonical owner
+or a valid intermediate state cannot be established. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -4122,7 +4122,7 @@ package, graph, checker, standards, lockfile, and workflow evidence is unchanged
 
 ##### VE043-P1 Owner-Closure Re-plan Trigger
 
-**Status:** `Blocked`
+**Status:** `Accepted`
 
 The read-only incident-edge audit invalidates P1's one-package assumption. The
 four named checkers do not form one dependency-closed owner-coherent unit:
@@ -4190,6 +4190,15 @@ decomposition: produce an exact responsibility/owner/edge matrix and an ordered
 package train, then stop if any behavior lacks one canonical owner or any
 intermediate state requires dual authority. No package is admitted by this
 trigger record.
+
+**Decision:** Option 1 is selected. P1-D1 must classify every observable
+responsibility of the candidate checkers, resolve its canonical owner from
+existing standards and migration authority, record exact incident edges and
+available declarative coverage, and define the retirement condition for each
+proposed package. The resulting train must be dependency ordered and keep
+shared registry, package, edge, README, graph, and plan integration serial. P1-D1
+is read-only with respect to executable and package authority and admits no
+checker migration by itself.
 
 **No-fallback rule:** do not infer owner from graph adjacency, checker name, or
 file location; do not preserve a Bash caller around a migrated suite; do not

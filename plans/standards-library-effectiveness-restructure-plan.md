@@ -12,11 +12,11 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** select one delegated VE043-P1 owner-closure option before any
-checker or package edit. Option 1 is recommended: replace the superseded
-one-package assumption with a read-only decomposition into an ordered
-owner-coherent train. Release Procedure, S1, and the Rust Binding train remain
-unadmitted.
+**Next slice:** execute delegated VE043-P1-D1 as a read-only responsibility,
+owner, incident-edge, declarative-coverage, and retirement-condition
+decomposition. Freeze an ordered owner-coherent package train or stop if one
+canonical owner or a valid intermediate state cannot be established. Release
+Procedure, S1, and the Rust Binding train remain unadmitted.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure
@@ -26,6 +26,11 @@ One package would cross owners or preserve nested Bash authority. The
 recommended recovery freezes separate owner contracts, incident-edge closure,
 suite dependencies, write sets, and retirement conditions before admitting
 packages in dependency order; no package is admitted yet.
+
+VE043-P1 Option 1 is selected. P1-D1 owns decomposition evidence only and may
+not edit checker, suite, fixture, registry, package, edge, graph, numeric,
+standards, lockfile, or workflow authority. Shared integration remains serial,
+and every later package requires its own admission and exact no-fallback gate.
 
 VE043-A1-L1 is accepted. One registered typed Python check derives canonical
 live candidates, rejects new or unexplained missing identities, prohibits
