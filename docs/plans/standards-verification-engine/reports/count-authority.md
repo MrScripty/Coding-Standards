@@ -183,6 +183,12 @@ and semantic class. A separate exception artifact and exact join are admitted
 only if semantic review discovers a real taxonomy exception; absence of that
 artifact means no exception is authorized.
 
+Schema Option 3 is selected. The C1 table contains exactly candidate identity
+and semantic class. No exception artifact or exception field is admitted. If
+review finds a candidate outside the five classes, work stops for a separately
+owned exception-artifact and exact-join decision rather than recording a
+sentinel, free-form rationale, or default class.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge

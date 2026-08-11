@@ -10285,3 +10285,24 @@ and this ledger only.
 **Verification:** both plan checks and diff integrity.
 
 **Next slice:** select one exception-schema option before creating C1 evidence.
+
+## 2026-08-11 VE043-A1-C1 Exception-Schema Admission
+
+**Outcome:** Option 3 accepted.
+
+C1 records exactly generated candidate identity and reviewed semantic class.
+The absence of an exception artifact means no exception is admitted. A real
+candidate outside the five-class taxonomy stops review and requires separate
+artifact, authority, exact-join, and verification admission before recording.
+
+**No-fallback result:** no repeated blank rationale, exception sentinel,
+default class, conditional-empty primitive, custom validator, owner, package,
+checker, or generated artifact is introduced.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** implement exact two-column C1 coverage and stop on the first
+observed taxonomy exception.

@@ -2,12 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-C1 exception-schema re-plan
+**Current phase:** Milestone 6: VE043-A1-C1 semantic coverage
 
-**Next slice:** select whether C1 retains a repeated optional rationale column
-or uses a two-column classification table with exceptions admitted separately
-only when evidence requires one. Do not create classification data before this
-schema decision. S1 remains unadmitted.
+**Next slice:** implement exact two-column candidate/class coverage with the
+existing generic table and relation assertions. Stop if review discovers a
+taxonomy exception; do not infer a class, owner, or exception. S1 remains
+unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3847,13 +3847,12 @@ Choose it only if owner-at-classification is mandatory.
 acceptance, retain exact candidate-ID/class coverage and taxonomy-derived
 standard action, and make accepted package owner a required L1 disappearance
 join. The reviewed C1 table still contains only candidate identity, semantic
-class, and optional explicit-exception rationale. No owner manifest, inferred
-owner, package edit, checker edit, or standards-owner edit is authorized in
-C1. Select an option before creating classification evidence.
+class. No owner manifest, inferred owner, exception field, package edit, checker
+edit, or standards-owner edit is authorized in C1.
 
 **Decision:** Option 1 is selected. C1 is a read-only semantic audit and does
 not exercise modification or acceptance authority. It uses the existing generic
-`table` and `relation` assertions to require the exact three-column decision
+`table` and `relation` assertions to require the exact two-column decision
 schema, the closed five-class taxonomy domain, unique candidate identities, and
 set equality with the generated baseline. The reviewed table does not restate
 candidate facts or contain owner, action, package, progress, or total fields.
@@ -3872,16 +3871,15 @@ workflows remain read-only.
 **C1 acceptance:** every generated candidate identity occurs exactly once in
 the reviewed table; every class is one of `mutable-aggregate`,
 `declared-finite-contract`, `historical-snapshot`, `structural-multiplicity`, or
-`policy-threshold`; rationale is empty for normal taxonomy decisions and
-non-empty only for a separately admitted explicit exception; the registered
-declarative suite passes with focused positive and negative fixture evidence;
+`policy-threshold`; no exception artifact is admitted; the registered
+declarative suite passes with focused positive and negative assertion evidence;
 all declarative suites, both plan checks, generated graph freshness, Python
 compilation, engine tests, and diff integrity pass. C1 does not authorize a
 checker or owner edit.
 
 ##### VE043-A1-C1 Exception-Schema Re-plan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 Preflight of the generic table contract shows that the admitted optional
 `exception_rationale` column would be empty on every normal row. The existing
@@ -3920,6 +3918,13 @@ two-column table. Absence of an exception artifact means no exception is
 admitted, not that a default rationale applies. Discovery of a real exception
 is a typed re-plan trigger; it cannot be represented through an unknown class,
 free-form fallback, or silently non-empty field.
+
+**Decision:** Option 3 is selected. C1 has exactly `candidate_id` and
+`semantic_class` columns. No exception artifact, sentinel class, rationale
+field, default, or conditional-empty primitive exists. If semantic review finds
+a candidate outside the five-class taxonomy, classification stops and a new
+plan admission must define the exception artifact, exact candidate join,
+authority, and verification before any exception is recorded.
 
 **Tasks:**
 
