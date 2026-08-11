@@ -166,6 +166,33 @@ contracts use exact projections or relations; mutable aggregates use derived
 membership checks. The former field is rejected as unknown with no legacy
 schema path.
 
+## Generated Numeric Audit Baseline
+
+VE043-A1 derives its mechanical candidate evidence through
+`standards_verifier.numeric_audit`. Canonical scope comes from the existing Bash
+verifier inventory. Two fixed lexical matchers select shell numeric comparisons
+and symbolic comparisons only when an adjacent operand is an exact integer or
+decimal literal. This is conservative discovery, not a Bash parser or semantic
+classifier.
+
+Each generated row contains a content-based candidate identity, checker path,
+line and column diagnostics, matcher and operator, exact numeric literals and
+expression, source-line fingerprint, and exact source text. Identity excludes
+line number so unrelated line insertion does not churn review keys; repeated
+identical expressions receive deterministic occurrence identities. All paths
+remain repository-contained and all source and snapshot inputs require UTF-8.
+
+The snapshot writer creates an absent baseline or accepts byte-identical
+content. It rejects replacing changed content. The checker requires exact TSV
+schema, unique non-empty rows, byte-for-byte agreement with baseline inputs,
+and typed malformed, duplicate, unavailable, invalid UTF-8, containment, stale,
+and immutable outcomes. Candidate cardinality is computed only for reporting.
+
+The baseline contains no taxonomy, owner, disposition, package, or progress
+field. Those are either reviewed semantic decisions or later derived joins.
+This prevents generated facts from becoming duplicate manually maintained
+authority.
+
 ## Migration Sequence
 
 1. Establish the strict kernel and replace one representative leaf checker.

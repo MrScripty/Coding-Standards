@@ -139,6 +139,25 @@ candidate identity, irreducible taxonomy class, and optional rationale for an
 explicit exception. Exact coverage and lifecycle drift are verified; no owner
 migration is admitted before generated baseline and classification acceptance.
 
+G1 implements the generated baseline with two fixed lexical matcher families:
+shell numeric operators and symbolic comparison operators with at least one
+exact numeric-literal operand. Stable candidate identity derives from checker
+path, matcher, exact expression, and repeated-expression occurrence; line and
+column remain diagnostics. The machine-generated TSV also owns exact source
+text and fingerprint. It contains no semantic class, owner, disposition,
+package, progress, or expected cardinality, and an existing changed baseline
+cannot be overwritten.
+
+G1 is accepted. The generated snapshot currently contains 708 derived rows
+across the canonical 170-verifier scope; both values are runtime reports, not
+expected policy data. Fourteen focused tests cover deterministic identity,
+exact rendering, idempotent write, immutable-change refusal, malformed and
+duplicate snapshots, unavailable and invalid UTF-8 inputs, and containment
+escapes. All 152 engine tests, Python compilation, all 106 declarative suites,
+existing graph freshness, both plan checks, diff integrity, and all 170
+canonical mixed entrypoints pass. C1 is next and may add semantic classes but
+must not restate generated candidate facts.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge

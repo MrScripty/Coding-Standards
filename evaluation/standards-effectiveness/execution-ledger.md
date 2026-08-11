@@ -10175,3 +10175,33 @@ and this ledger only. Implementation remains unchanged in this decision slice.
 
 **Next slice:** implement VE043-A1-G1 generated baseline and stop before
 semantic classification or owner edits.
+
+## 2026-08-11 VE043-A1-G1 Generated Candidate Baseline
+
+**Outcome:** Accepted.
+
+The new Python numeric audit collector derives canonical scope from current
+Bash verifier inventory and applies two fixed lexical matcher families to exact
+numeric-literal comparisons. It writes one immutable candidate TSV with stable
+content-based identity, exact source evidence, diagnostics, and fingerprints.
+The observed 708 candidates across 170 verifiers are reported values only.
+
+**No-fallback result:** the baseline has no expected count, hand-authored row,
+semantic class, owner, disposition, package, progress, inferred default, source
+annotation, shell parser, compatibility manifest, or Python-through-Bash
+bridge. Changed existing content is rejected rather than overwritten.
+
+**Bounded write set:** new numeric-audit module, CLI, focused tests, and
+generated baseline; engine README; architecture and count-authority reports;
+active and parent plans, issues, and this ledger. Existing inventory/graph
+implementation and artifacts, classification/owner/package/edge/suite/registry
+data, Bash verifiers, standards sources, lockfiles, and workflows remain
+unchanged.
+
+**Verification:** 14 focused audit tests; all 152 engine tests; Python
+compilation; byte-exact baseline check; all 106 declarative suites; existing
+graph freshness at 170 verifiers / 175 nodes / 855 edges / 171 components; both
+plan checks; diff integrity; and all 170 canonical mixed entrypoints.
+
+**Next slice:** preflight VE043-A1-C1 exact semantic-class coverage and derived
+owner/action joins without editing an owner.

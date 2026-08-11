@@ -39,6 +39,23 @@ shell mechanism, or graph shape; those remain reviewed planning decisions.
 Component list columns use `-` for an empty set and comma-separated repository
 paths or component identifiers otherwise.
 
+Freeze or verify the immutable numeric-comparison audit baseline:
+
+```bash
+python3 tools/standards_verifier/generate_numeric_audit.py --write
+python3 tools/standards_verifier/generate_numeric_audit.py --check
+```
+
+The numeric audit derives canonical scope from current `verify-*.sh` inventory
+and records comparisons where an adjacent operand is an exact numeric literal.
+It recognizes shell numeric operators and symbolic comparison operators through
+two fixed lexical matchers; it does not parse Bash or infer semantic meaning.
+Candidate IDs derive from checker path, matcher, exact expression, and repeated
+expression occurrence, so unrelated line movement changes diagnostics but not
+identity. The generated TSV owns paths, expressions, source positions,
+fingerprints, and cardinality and must not be hand-edited. `--write` is
+idempotent for identical content and refuses to replace a changed baseline.
+
 Suite and registry TOML is strict. Unknown keys, schema versions, check kinds,
 operators, dependencies, and paths fail with typed diagnostics. Configuration
 cannot execute commands, import modules, evaluate code, interpolate environment
@@ -98,6 +115,14 @@ The `table` check has no scalar row-count field. Exact finite membership is
 expressed through projections or relations; mutable inventory cardinality is
 derived from canonical membership. A configured `row_count` is an unknown
 field and fails rather than using a compatibility parser.
+
+Numeric count-authority migration uses a generated immutable lexical snapshot,
+not a manually maintained candidate manifest. The snapshot derives all
+mechanical candidate facts and totals from canonical Bash verifier inventory.
+It is deliberately semantic-free: later reviewed evidence may classify a
+generated identity, but cannot restate its path, expression, owner, normal
+disposition, package, progress, or cardinality. Missing, malformed, duplicate,
+escaping, invalid UTF-8, changed, and unavailable evidence has typed outcomes.
 
 The `metadata_graph` check parses the nine canonical Markdown metadata fields
 without global normalization. Direct mode accepts one non-empty `paths` list

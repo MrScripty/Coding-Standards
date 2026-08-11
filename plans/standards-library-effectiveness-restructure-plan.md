@@ -12,10 +12,18 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement delegated VE043-A1-G1 by machine-generating an
-immutable numeric-audit candidate baseline from canonical Bash verifier
-inventory. Do not classify candidates or edit owners in G1. Release Procedure,
-S1, and the Rust Binding train remain unadmitted.
+**Next slice:** preflight and implement delegated VE043-A1-C1 exact semantic-
+class coverage over the generated baseline. Derive owner and standard action;
+do not edit standards owners. Release Procedure, S1, and the Rust Binding train
+remain unadmitted.
+
+VE043-A1-G1 is accepted. Its fixed lexical contract derives an immutable
+708-row baseline from the canonical 170-verifier scope; both cardinalities are
+reported rather than expected. Fourteen focused and all 152 engine tests, all
+106 declarative suites, existing graph freshness, both plan checks, diff
+integrity, and all 170 canonical mixed entrypoints pass. No candidate fact,
+semantic class, owner, disposition, package, progress, or expected total was
+manually added.
 
 VE043-A1 Option 2 is selected with corrected authority. The historical
 359-candidate total is non-authoritative context. G1 machine-generates candidate

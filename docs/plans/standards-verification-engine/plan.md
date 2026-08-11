@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-G1 derived candidate snapshot
+**Current phase:** Milestone 6: VE043-A1-C1 semantic coverage
 
-**Next slice:** implement VE043-A1-G1: derive and freeze the exact numeric-audit
-candidate baseline from canonical Bash verifier inventory without manually
-stating candidate facts or cardinality. S1 remains unadmitted.
+**Next slice:** preflight and implement VE043-A1-C1 exact semantic-class
+coverage over the generated baseline while deriving owner and standard action
+from canonical evidence. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3748,7 +3748,7 @@ coverage, class domain, and exception requirements are verified mechanically.
 
 The selected recovery executes in three serial, independently verified slices:
 
-1. **VE043-A1-G1 generated baseline:** add a deterministic Python lexical
+1. **VE043-A1-G1 generated baseline (`Accepted`):** add a deterministic Python lexical
    collector under the existing verifier inventory boundary, focused tests, a
    write/check entrypoint, and one machine-generated immutable candidate TSV.
    Its rows derive from canonical Bash verifier inventory and contain stable
@@ -3784,6 +3784,16 @@ positive and negative tests for malformed, duplicate, unavailable, escaping,
 and invalid UTF-8 evidence; Python compilation; all engine tests; generated
 dependency freshness; both plan checks; diff integrity; and one shared-contract
 complete-suite checkpoint. G1 does not classify candidates or edit an owner.
+
+**G1 acceptance evidence:** the fixed lexical contract machine-generates 708
+candidate rows from all 170 canonical Bash verifiers; this observed cardinality
+is diagnostic and is not stored as an expected value. All 14 focused audit
+tests and all 152 engine tests pass, Python compilation succeeds, the baseline
+write is idempotent and its check is byte-exact, all 106 declarative suites
+pass, existing graph evidence remains fresh at 170 verifiers / 175 nodes / 855
+edges / 171 components, and all 170 canonical mixed entrypoints pass. The
+snapshot has no semantic, owner, disposition, package, progress, or expected-
+count field, and no file outside the G1 write set changed.
 
 **No-fallback rule:** no expected candidate count, manually authored candidate
 fact, wildcard owner, inferred taxonomy class, heuristic default, compatibility
