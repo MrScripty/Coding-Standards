@@ -14,7 +14,6 @@ sys.path.insert(0, str(ENGINE_ROOT))
 from standards_verifier.numeric_audit import (
     HEADER,
     NumericAuditDiagnostic,
-    check_snapshot,
     collect_candidates,
     render_candidates,
     write_snapshot,
@@ -99,13 +98,12 @@ class NumericAuditTest(unittest.TestCase):
         self.assertEqual(rows[1][1], checker)
         self.assertEqual(rows[1][6], "0")
 
-    def test_write_then_check_is_idempotent(self) -> None:
+    def test_write_is_idempotent(self) -> None:
         self.checker("owner", "[[ \"$count\" -eq 0 ]]\n")
         output = Path("snapshot.tsv")
 
         self.assertEqual(write_snapshot(self.root, output), 0)
         self.assertEqual(write_snapshot(self.root, output), 0)
-        self.assertEqual(check_snapshot(self.root, output), 0)
 
     def test_write_rejects_changed_existing_baseline(self) -> None:
         checker = self.checker("owner", "[[ \"$count\" -eq 0 ]]\n")
@@ -115,21 +113,18 @@ class NumericAuditTest(unittest.TestCase):
 
         self.assertEqual(write_snapshot(self.root, output), 2)
 
-    def test_check_reports_missing_snapshot_as_unavailable(self) -> None:
-        self.assertEqual(check_snapshot(self.root, Path("missing.tsv")), 3)
-
-    def test_check_rejects_malformed_header(self) -> None:
+    def test_write_rejects_malformed_existing_header(self) -> None:
         self.write("snapshot.tsv", "wrong\theader\n")
 
-        self.assertEqual(check_snapshot(self.root, Path("snapshot.tsv")), 2)
+        self.assertEqual(write_snapshot(self.root, Path("snapshot.tsv")), 2)
 
-    def test_check_rejects_duplicate_candidate_identity(self) -> None:
+    def test_write_rejects_duplicate_existing_candidate_identity(self) -> None:
         checker = self.checker("owner", "[[ \"$count\" -eq 0 ]]\n")
         content = render_candidates(collect_candidates(self.root, (checker,)))
         rows = content.splitlines()
         self.write("snapshot.tsv", "\n".join((rows[0], rows[1], rows[1])) + "\n")
 
-        self.assertEqual(check_snapshot(self.root, Path("snapshot.tsv")), 2)
+        self.assertEqual(write_snapshot(self.root, Path("snapshot.tsv")), 2)
 
     def test_collect_rejects_duplicate_checker_scope(self) -> None:
         checker = self.checker("owner", "[[ \"$count\" -eq 0 ]]\n")
@@ -175,7 +170,6 @@ class NumericAuditTest(unittest.TestCase):
 
     def test_snapshot_path_rejects_parent_escape(self) -> None:
         self.assertEqual(write_snapshot(self.root, Path("../snapshot.tsv")), 2)
-        self.assertEqual(check_snapshot(self.root, Path("../snapshot.tsv")), 2)
 
 
 if __name__ == "__main__":

@@ -11,6 +11,7 @@ from .exact_text import parse_exact_text_check
 from .line_budget import parse_line_budget_check
 from .markdown_links import parse_markdown_links_check
 from .metadata import parse_metadata_graph_check
+from .numeric_lifecycle import parse_numeric_lifecycle_check
 from .reference_inventory import parse_reference_inventory_check
 from .relation import parse_relation_check
 from .table import parse_table_check
@@ -50,6 +51,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_acceptance_claims_check(raw, suite_id)
     if kind == "relation":
         return parse_relation_check(raw, suite_id)
+    if kind == "numeric_audit_lifecycle":
+        return parse_numeric_lifecycle_check(raw, suite_id)
     raise EngineError(
         Diagnostic(
             code="CONFIG.UNKNOWN_CHECK",

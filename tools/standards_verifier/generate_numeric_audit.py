@@ -13,24 +13,20 @@ if sys.version_info < (3, 11):
     )
     raise SystemExit(3)
 
-from standards_verifier.numeric_audit import check_snapshot, write_snapshot
+from standards_verifier.numeric_audit import write_snapshot
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Freeze or verify the derived numeric-comparison audit baseline."
+        description="Freeze the immutable numeric-comparison audit baseline."
     )
     parser.add_argument(
         "--repo-root",
         type=Path,
         default=Path(__file__).resolve().parents[2],
     )
-    mode = parser.add_mutually_exclusive_group(required=True)
-    mode.add_argument("--check", action="store_true")
-    mode.add_argument("--write", action="store_true")
+    parser.add_argument("--write", action="store_true", required=True)
     args = parser.parse_args()
-    if args.check:
-        return check_snapshot(args.repo_root)
     return write_snapshot(args.repo_root)
 
 

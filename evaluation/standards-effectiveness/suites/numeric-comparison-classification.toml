@@ -33,3 +33,10 @@ path = "evaluation/standards-effectiveness/generated/numeric-comparison-candidat
 header = ["candidate_id", "checker", "line", "column", "matcher", "operator", "numeric_literals", "expression", "source_fingerprint", "source_text"]
 columns = ["candidate_id"]
 order = "source"
+
+[[checks]]
+id = "candidate-lifecycle"
+type = "numeric_audit_lifecycle"
+baseline_path = "evaluation/standards-effectiveness/generated/numeric-comparison-candidates.tsv"
+decisions_path = "evaluation/standards-effectiveness/numeric-comparison-decisions.tsv"
+packages_path = "evaluation/standards-effectiveness/checker-migration-packages.tsv"

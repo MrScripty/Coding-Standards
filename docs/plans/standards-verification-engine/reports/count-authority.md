@@ -259,6 +259,14 @@ records preserve audit history; accepted package rows remain the only
 checker-owner authority. No additional mutable evidence table or expected total
 is authorized.
 
+L1 is accepted. The registered lifecycle check derives current candidate
+membership and live checker presence, requires exact C1 identity coverage, and
+joins every retired checker to one accepted package with an explicit owner. It
+rejects new identities and partial disappearance while a checker remains live.
+The former byte-equality snapshot check is deleted, leaving immutable write-once
+baseline creation and one registered current-state authority. All progress and
+cardinality remain derived; baseline, C1, and package rows are unchanged.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge

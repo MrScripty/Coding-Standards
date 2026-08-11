@@ -39,11 +39,10 @@ shell mechanism, or graph shape; those remain reviewed planning decisions.
 Component list columns use `-` for an empty set and comma-separated repository
 paths or component identifiers otherwise.
 
-Freeze or verify the immutable numeric-comparison audit baseline:
+Create the immutable numeric-comparison audit baseline:
 
 ```bash
 python3 tools/standards_verifier/generate_numeric_audit.py --write
-python3 tools/standards_verifier/generate_numeric_audit.py --check
 ```
 
 The numeric audit derives canonical scope from current `verify-*.sh` inventory
@@ -55,6 +54,24 @@ expression occurrence, so unrelated line movement changes diagnostics but not
 identity. The generated TSV owns paths, expressions, source positions,
 fingerprints, and cardinality and must not be hand-edited. `--write` is
 idempotent for identical content and refuses to replace a changed baseline.
+It has no current-state check mode because accepted checker retirement must not
+rewrite or invalidate historical evidence.
+
+Verify baseline classification and current lifecycle:
+
+```bash
+python3 tools/standards_verifier/verify.py --suite numeric-comparison-classification
+```
+
+The suite's `numeric_audit_lifecycle` check derives current candidates from the
+same canonical collector. Current identities must remain a subset of the
+immutable baseline. A missing identity is valid only when its checker is absent
+from canonical live inventory and exactly one accepted `checker:<path>` package
+row supplies a non-empty owner. A still-live checker, new identity, missing or
+ambiguous package, non-accepted package, and unavailable owner produce typed
+diagnostics. Baseline, classification, and package schemas are exact. The check
+writes no current snapshot, owner map, progress, or count and infers neither
+package nor owner from names, routes, source text, or graph relationships.
 
 Suite and registry TOML is strict. Unknown keys, schema versions, check kinds,
 operators, dependencies, and paths fail with typed diagnostics. Configuration
@@ -122,7 +139,8 @@ mechanical candidate facts and totals from canonical Bash verifier inventory.
 It is deliberately semantic-free: later reviewed evidence may classify a
 generated identity, but cannot restate its path, expression, owner, normal
 disposition, package, progress, or cardinality. Missing, malformed, duplicate,
-escaping, invalid UTF-8, changed, and unavailable evidence has typed outcomes.
+escaping, invalid UTF-8, changed, unavailable, and unauthorized lifecycle
+evidence has typed outcomes.
 
 The `metadata_graph` check parses the nine canonical Markdown metadata fields
 without global normalization. Direct mode accepts one non-empty `paths` list

@@ -183,10 +183,20 @@ identical expressions receive deterministic occurrence identities. All paths
 remain repository-contained and all source and snapshot inputs require UTF-8.
 
 The snapshot writer creates an absent baseline or accepts byte-identical
-content. It rejects replacing changed content. The checker requires exact TSV
-schema, unique non-empty rows, byte-for-byte agreement with baseline inputs,
-and typed malformed, duplicate, unavailable, invalid UTF-8, containment, stale,
-and immutable outcomes. Candidate cardinality is computed only for reporting.
+content. It rejects replacing changed content. It has no current-state check
+mode: historical evidence must remain immutable after accepted checker
+retirement.
+
+The registered `numeric_audit_lifecycle` check owns current freshness. It reads
+the exact baseline, reviewed classification, and migration-package schemas,
+then reuses canonical candidate collection in-process. Current identities must
+remain a subset of baseline identities. A missing identity is valid only when
+its checker is absent from canonical live inventory and exactly one accepted
+`checker:<path>` package supplies a non-empty owner. Partial removal from a
+still-live checker, new identity, unexplained retirement, ambiguous package,
+non-accepted package, and unavailable owner are typed failures. The check is
+side-effect-free and derives cardinality only for diagnostics; it creates no
+current snapshot, owner map, callback, inferred package, or inferred owner.
 
 The baseline contains no taxonomy, owner, disposition, package, or progress
 field. Those are either reviewed semantic decisions or later derived joins.

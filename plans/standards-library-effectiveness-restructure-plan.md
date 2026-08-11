@@ -12,10 +12,21 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement delegated VE043-A1-L1 Option 1. Add one typed Python
-lifecycle check, reuse canonical candidate collection and accepted package-owner
-evidence, and remove competing strict snapshot equality atomically. Release
-Procedure, S1, and the Rust Binding train remain unadmitted.
+**Next slice:** perform delegated VE043-P1 read-only incident-edge and ownership
+preflight for the root README consumer checker and rows 35, 45, and 46. Stop if
+one dependency-closed owner package cannot preserve exact authority without a
+Bash bridge or cross-owner scope. Release Procedure, S1, and the Rust Binding
+train remain unadmitted.
+
+VE043-A1-L1 is accepted. One registered typed Python check derives canonical
+live candidates, rejects new or unexplained missing identities, prohibits
+partial removal from a live checker, and requires one accepted checker-package
+row with an explicit owner for retirement. The strict byte-equality snapshot
+check is removed, so immutable history and current lifecycle no longer compete.
+Twelve focused lifecycle tests, all 163 engine tests, all 107 declarative
+suites, fresh generated graph evidence, and all 170 mixed entrypoints pass. No
+baseline, C1, package, checker, standards, lockfile, workflow, current snapshot,
+owner map, expected count, callback, or fallback changed.
 
 VE043-A1-L1 selects Option 1. The engine will derive live candidates in-process
 and authorize a missing baseline identity only when its checker is no longer

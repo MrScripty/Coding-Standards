@@ -2,12 +2,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-L1 lifecycle implementation
+**Current phase:** Milestone 6: VE043-P1 package preflight
 
-**Next slice:** implement the accepted typed numeric-audit lifecycle check with
-focused positive and negative evidence. Reuse the canonical collector and
-existing package authority, derive all totals, and remove the competing strict
-byte-equality freshness path atomically. S1 remains unadmitted.
+**Next slice:** perform the read-only VE043-P1 incident-edge and ownership audit
+for the root README consumer checker and rows 35, 45, and 46. Stop if one
+dependency-closed owner package cannot be admitted without a Bash bridge,
+duplicate authority, inferred owner, or cross-owner write set. S1 remains
+unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -4092,6 +4093,32 @@ remains live; all engine tests; Python compilation; all declarative suites;
 generated graph freshness; both plan checks; diff integrity; and one shared-
 contract complete-suite checkpoint. The byte-equality freshness path must not
 remain as competing authority.
+
+##### VE043-A1-L1 Lifecycle Acceptance
+
+**Status:** `Accepted`
+
+The registered numeric-classification suite now includes one typed
+`numeric_audit_lifecycle` check. It reads the exact immutable baseline, C1
+decisions, and package schemas, derives canonical live checker inventory and
+current candidates in-process, rejects every new identity, rejects candidate
+removal from a still-live checker, and authorizes retired-checker candidates
+only through one exact accepted checker-package row with a non-empty owner.
+Missing package or owner authority is typed `unavailable`; malformed,
+ambiguous, non-accepted, and unexplained evidence is typed `invalid`.
+
+The former numeric `--check` byte-equality mode and `check_snapshot` API are
+removed. Baseline creation remains write-once and immutable, while the
+registered lifecycle check is the sole current-state authority. No current
+snapshot, expected total, progress field, owner map, callback, relation adapter,
+Bash bridge, inferred package, inferred owner, or compatibility path remains.
+
+Twelve focused lifecycle tests and 13 baseline collector/writer tests pass. All
+163 engine tests, Python compilation, all 107 registered declarative suites,
+the focused three-check repository suite, generated inventory/graph freshness
+at 170 verifiers / 175 nodes / 855 edges / 171 components, both plan checks,
+diff integrity, and all 170 canonical mixed entrypoints pass. Baseline, C1,
+package, graph, checker, standards, lockfile, and workflow evidence is unchanged.
 
 **Tasks:**
 

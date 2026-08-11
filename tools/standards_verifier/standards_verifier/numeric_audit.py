@@ -286,7 +286,7 @@ def _parse_snapshot(content: str, path: str) -> None:
         candidate_ids.add(candidate_id)
 
 
-def _target(root: Path, output_path: Path, *, must_exist: bool) -> Path:
+def _target(root: Path, output_path: Path) -> Path:
     value = output_path.as_posix()
     pure = PurePosixPath(value)
     if not value or pure.is_absolute() or ".." in pure.parts:
@@ -306,51 +306,12 @@ def _target(root: Path, output_path: Path, *, must_exist: bool) -> Path:
             exit_code=2,
             path=value,
         )
-    if must_exist and not target.is_file():
-        raise NumericAuditDiagnostic(
-            code="NUMERIC_AUDIT.SNAPSHOT_UNAVAILABLE",
-            outcome="unavailable",
-            message="generated candidate snapshot is absent",
-            exit_code=3,
-            path=value,
-        )
     return target
-
-
-def check_snapshot(root: Path, output_path: Path = OUTPUT_PATH) -> int:
-    try:
-        target = _target(root, output_path, must_exist=True)
-        try:
-            observed = target.read_text(encoding="utf-8")
-        except UnicodeDecodeError as error:
-            raise NumericAuditDiagnostic(
-                code="NUMERIC_AUDIT.INVALID_UTF8",
-                outcome="invalid",
-                message="generated candidate snapshot is not valid UTF-8",
-                exit_code=2,
-                path=output_path.as_posix(),
-            ) from error
-        _parse_snapshot(observed, output_path.as_posix())
-        expected = expected_snapshot(root)
-        if observed != expected:
-            raise NumericAuditDiagnostic(
-                code="NUMERIC_AUDIT.SNAPSHOT_STALE",
-                outcome="invalid",
-                message="generated candidate snapshot does not match baseline inputs",
-                exit_code=1,
-                path=output_path.as_posix(),
-            )
-    except NumericAuditDiagnostic as error:
-        print(error)
-        return error.exit_code
-    count = len(observed.splitlines()) - 1
-    print(f"PASS numeric-comparison-candidates ({count} derived candidates)")
-    return 0
 
 
 def write_snapshot(root: Path, output_path: Path = OUTPUT_PATH) -> int:
     try:
-        target = _target(root, output_path, must_exist=False)
+        target = _target(root, output_path)
         content = expected_snapshot(root)
         if target.exists():
             try:

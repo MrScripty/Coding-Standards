@@ -10447,3 +10447,31 @@ architecture reports; and serial plan, issue, and ledger records.
 **Verification:** both plan checks and diff integrity before implementation.
 
 **Next slice:** implement and directly test the admitted L1 lifecycle check.
+
+## 2026-08-11 VE043-A1-L1 Lifecycle Acceptance
+
+**Outcome:** L1 accepted; P1 read-only package preflight is next.
+
+One registered `numeric_audit_lifecycle` check now derives current candidates
+from canonical live checker inventory and compares them with immutable baseline
+and exact C1 identities. New identities and partial disappearance from a live
+checker fail. Retired-checker identities require exactly one accepted
+`checker:<path>` package row with a non-empty owner.
+
+The old `check_snapshot` API and numeric generator `--check` mode are removed.
+Write-once baseline creation remains, and the registered check is the only
+current-state lifecycle authority.
+
+**No-fallback result:** no baseline, C1 decision, package row, checker,
+standards source, graph artifact, lockfile, workflow, current snapshot, expected
+count, progress field, owner map, callback, Bash bridge, inferred package,
+inferred owner, or compatibility path changed.
+
+**Verification:** 12 focused lifecycle tests; 13 baseline collector/writer
+tests; all 163 engine tests; Python compilation; focused three-check repository
+suite; all 107 registered suites; fresh 170-verifier / 175-node / 855-edge /
+171-component generated evidence; both plan checks; diff integrity; and all 170
+canonical mixed entrypoints.
+
+**Next slice:** audit exact incident-edge and owner closure for VE043-P1 without
+editing package, checker, or standards authority.
