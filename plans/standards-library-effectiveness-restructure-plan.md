@@ -12,10 +12,17 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** preflight and implement delegated VE043-A1-C1 exact semantic-
-class coverage over the generated baseline. Derive owner and standard action;
-do not edit standards owners. Release Procedure, S1, and the Rust Binding train
-remain unadmitted.
+**Next slice:** resolve delegated VE043-A1-C1 owner timing. Select whether C1
+defers owner resolution to package admission or establishes new canonical
+current-checker ownership. Do not classify or infer owners before selection.
+Release Procedure, S1, and the Rust Binding train remain unadmitted.
+
+VE043-A1-C1 has reached a re-plan trigger. Exact preflight finds no overlap
+between current candidate-bearing verifier paths and already migrated checker
+package subjects. Other structured evidence owns dependencies, standards IDs,
+or graph relationships rather than current checker semantics. The recommended
+option keeps C1 limited to exact semantic class, derives standard action from
+taxonomy, and defers owner resolution to package admission for L1 enforcement.
 
 VE043-A1-G1 is accepted. Its fixed lexical contract derives an immutable
 708-row baseline from the canonical 170-verifier scope; both cardinalities are

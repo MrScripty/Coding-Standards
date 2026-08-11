@@ -10205,3 +10205,35 @@ plan checks; diff integrity; and all 170 canonical mixed entrypoints.
 
 **Next slice:** preflight VE043-A1-C1 exact semantic-class coverage and derived
 owner/action joins without editing an owner.
+
+## 2026-08-11 VE043-A1-C1 Owner-Join Re-plan Trigger
+
+**Outcome:** Re-plan required.
+
+Exact read-only preflight shows 124 current verifier paths with generated
+numeric candidates and 68 checker subjects in the package manifest, with zero
+path overlap because all package subjects are already migrated. README
+dependency evidence does not name semantic owners; rule-owner evidence maps
+standards identifiers; graph evidence owns relationships. None can provide the
+admitted C1 owner join without inference. These counts are derived observations,
+not expected values.
+
+**No-fallback result:** no owner was inferred from filename, topic wording,
+dependency edge, inbound reference, standards content, or README classification.
+No duplicate owner manifest, semantic classification, package change, checker
+change, or standards-owner edit was introduced.
+
+**Recommended option:** C1 should require exact candidate-ID/class coverage and
+derive standard action from taxonomy while intentionally deferring owner to
+package admission. L1 should accept candidate disappearance only when joined to
+that accepted package and canonical owner.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only. G1 implementation and baseline remain unchanged.
+
+**Verification:** clean preflight; exact set comparison across generated
+baseline and package subjects; repository ownership-source audit; both plan
+checks and diff integrity after recording the trigger.
+
+**Next slice:** select and admit one C1 owner-timing option before creating
+semantic classification evidence.

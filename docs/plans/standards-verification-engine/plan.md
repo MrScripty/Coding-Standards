@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-C1 semantic coverage
+**Current phase:** Milestone 6: VE043-A1-C1 owner-join re-plan
 
-**Next slice:** preflight and implement VE043-A1-C1 exact semantic-class
-coverage over the generated baseline while deriving owner and standard action
-from canonical evidence. S1 remains unadmitted.
+**Next slice:** select and admit one C1 owner-timing contract. Do not infer or
+manually duplicate current checker owners, classify candidates, or edit an
+owner before selection. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3744,7 +3744,7 @@ coverage, class domain, and exception requirements are verified mechanically.
 
 ##### VE043-A1 Derived Audit Admission
 
-**Status:** `Active`
+**Status:** `Planned`
 
 The selected recovery executes in three serial, independently verified slices:
 
@@ -3800,6 +3800,53 @@ fact, wildcard owner, inferred taxonomy class, heuristic default, compatibility
 manifest, source annotation, shell parser, Python-through-Bash bridge, or
 silent drift is allowed. Mechanical suggestions may be reported but never own
 semantic classification.
+
+##### VE043-A1-C1 Owner-Join Re-plan Trigger
+
+**Status:** `Active`
+
+C1 preflight proves that canonical package evidence cannot currently derive an
+owner for baseline candidates. The generated baseline has candidate rows in
+124 current verifier paths. The package manifest has 68 checker subjects, all
+already migrated, and exact path-set intersection with the 124 current paths is
+empty. README dependency evidence classifies dependency shape but does not name
+semantic owner. Rule-owner maps own standards identifiers, not verifier paths.
+The graph owns executable relationships, not policy ownership. These are
+derived preflight observations, not expected totals.
+
+**Option 1 - Defer owner resolution to package admission (`Recommended`):** C1
+records exact semantic-class coverage only. The taxonomy derives the standard
+action, but owner remains intentionally unresolved until a checker migration
+package is admitted through existing owner review. L1 joins candidate
+disappearance to that accepted package and its canonical owner. This keeps C1
+globally complete without creating a second checker-owner authority or
+premature owner decisions.
+
+**Option 2 - Establish a canonical current-checker owner manifest:** review all
+current candidate-bearing verifier paths now and create one owner mapping before
+C1. This makes owner available early, but duplicates ownership that package
+admission must later state and creates a large mutable mapping for Bash being
+deleted. Choose it only if current-checker ownership is required independently
+of migration; it is not recommended.
+
+**Option 3 - Infer owner from names, references, graph edges, or standards
+content:** compute likely owners mechanically. These signals are not ownership
+contracts and can be multi-owner or infrastructural. This violates explicit
+ownership and no-inference rules and is rejected.
+
+**Option 4 - Block C1 until every remaining package is admitted:** obtain owner
+coverage first through package planning, then classify candidates. This avoids
+new owner authority but serializes the global audit behind the entire migration
+train and prevents count-authority findings from informing package design.
+Choose it only if owner-at-classification is mandatory.
+
+**Recommended admission boundary:** select Option 1, remove owner from C1
+acceptance, retain exact candidate-ID/class coverage and taxonomy-derived
+standard action, and make accepted package owner a required L1 disappearance
+join. The reviewed C1 table still contains only candidate identity, semantic
+class, and optional explicit-exception rationale. No owner manifest, inferred
+owner, package edit, checker edit, or standards-owner edit is authorized in
+C1. Select an option before creating classification evidence.
 
 **Tasks:**
 

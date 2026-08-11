@@ -158,6 +158,15 @@ existing graph freshness, both plan checks, diff integrity, and all 170
 canonical mixed entrypoints pass. C1 is next and may add semantic classes but
 must not restate generated candidate facts.
 
+C1 preflight reaches an owner-join re-plan trigger. The baseline's current
+candidate-bearing verifier paths have no exact overlap with checker subjects in
+the package manifest because those package subjects are already migrated.
+README dependency classes, rule-owner maps, and graph edges do not own current
+checker semantics. The recommended recovery keeps exact semantic-class coverage
+in C1, derives standard action from taxonomy, and defers owner resolution to
+the existing package-admission review. L1 then requires every candidate
+disappearance to join the accepted package and its canonical owner.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge
