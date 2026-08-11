@@ -189,6 +189,15 @@ review finds a candidate outside the five classes, work stops for a separately
 owned exception-artifact and exact-join decision rather than recording a
 sentinel, free-form rationale, or default class.
 
+The first semantic-review batch reaches a taxonomy-precedence re-plan trigger.
+Historical counts can also be zero/one multiplicity; explicitly enumerated
+sets can resemble mutable aggregates; and header, field-arity, and status
+comparisons are finite contracts not named by the current row/key wording. The
+recommended recovery retains five compact classes but classifies by
+authority-first precedence: policy threshold, immutable history, explicit
+finite schema/identity/protocol contract, zero/one presence or uniqueness, then
+current mutable aggregate. Syntax does not select the class.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge

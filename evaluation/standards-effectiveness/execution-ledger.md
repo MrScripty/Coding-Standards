@@ -10306,3 +10306,32 @@ and this ledger only.
 
 **Next slice:** implement exact two-column C1 coverage and stop on the first
 observed taxonomy exception.
+
+## 2026-08-11 VE043-A1-C1 Taxonomy-Precedence Re-plan Trigger
+
+**Outcome:** Re-plan required before classification rows.
+
+The first bounded review batch finds overlapping and incomplete applicability:
+a historical fixture count of one is both historical and multiplicity evidence;
+an explicit set count can appear finite or mutable; and header framing, table
+arity, and status sentinels are finite contracts outside the current row/key
+wording. The two-column schema remains valid, but one canonical class cannot be
+selected reproducibly from the present taxonomy description.
+
+**No-fallback result:** no candidate received a mechanically inferred class,
+reviewer-default class, multiple tag set, exception sentinel, owner, package, or
+checker change. Temporary review views remain outside the repository and own no
+decision.
+
+**Recommended option:** retain the five classes and add authority-first
+precedence: policy threshold, immutable historical evidence, explicit finite
+schema/identity/protocol contract, zero/one presence or uniqueness, then current
+mutable aggregate. Syntax remains non-authoritative.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** select one taxonomy-precedence option before resuming semantic
+review.

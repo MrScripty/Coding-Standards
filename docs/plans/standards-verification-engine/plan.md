@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-C1 semantic coverage
+**Current phase:** Milestone 6: VE043-A1-C1 taxonomy-precedence re-plan
 
-**Next slice:** implement exact two-column candidate/class coverage with the
-existing generic table and relation assertions. Stop if review discovers a
-taxonomy exception; do not infer a class, owner, or exception. S1 remains
-unadmitted.
+**Next slice:** select a mutually exclusive taxonomy decision procedure before
+classifying candidates. Do not resolve overlapping classes by reviewer
+convention, literal shape, or checker name. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3925,6 +3924,50 @@ field, default, or conditional-empty primitive exists. If semantic review finds
 a candidate outside the five-class taxonomy, classification stops and a new
 plan admission must define the exception artifact, exact candidate join,
 authority, and verification before any exception is recorded.
+
+##### VE043-A1-C1 Taxonomy-Precedence Re-plan Trigger
+
+**Status:** `Active`
+
+The first bounded semantic-review batch proves that the five taxonomy rows are
+not yet a mutually exclusive decision procedure. A historical fixture count of
+one can satisfy both historical snapshot and structural multiplicity. A count
+of an explicitly listed set can appear to be either a declared finite contract
+or mutable aggregate. Header framing (`NR > 1`), schema arity (`NF != 5`), and
+status/sentinel comparisons are finite structural contracts but are not named
+by the current declared-row/key wording. Classifying these by reviewer habit or
+numeric shape would create an unrecorded fallback and non-reproducible evidence.
+
+**Option 1 - Add an authority-first precedence procedure (`Recommended`):**
+retain the five class identifiers, broaden declared finite contract to include
+explicit schema framing, arity, fixed identity, and status protocol, and select
+in order: policy-owned threshold; immutable historical evidence; explicit
+finite contract; zero/one presence or uniqueness multiplicity; otherwise
+current mutable aggregate. Require the selected class to be determined from
+the number's authoritative purpose, not syntax. This keeps the compact schema
+and gives every overlap one canonical result.
+
+**Option 2 - Add structural framing and status classes:** create separate
+classes for schema/header ordinals and protocol sentinels. This is more
+descriptive but expands the taxonomy around Bash mechanisms rather than
+migration action; all finite structural contracts still derive from explicit
+schema or protocol authority.
+
+**Option 3 - Permit several classes per candidate:** record every applicable
+semantic tag. This preserves overlap information but complicates exact coverage,
+action derivation, package grouping, and lifecycle joins without evidence that
+multiple actions are needed.
+
+**Option 4 - Keep the current table and use reviewer judgment:** choose whichever
+class seems most useful for each overlap. This leaves precedence implicit and
+is rejected as non-reproducible authority.
+
+**Recommended boundary:** select Option 1 and make the precedence procedure
+canonical beside the taxonomy. The procedure refines class applicability but
+does not derive a class mechanically. C1 remains explicit per-candidate review;
+the engine verifies only exact identity coverage and the closed class domain.
+If a candidate still lacks one result after precedence, it triggers the already
+admitted exception re-plan rather than receiving a default.
 
 **Tasks:**
 

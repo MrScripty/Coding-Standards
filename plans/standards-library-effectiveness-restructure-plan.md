@@ -12,10 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement delegated VE043-A1-C1 exact two-column candidate/class
-coverage with existing generic table and relation assertions. Stop if semantic
-review discovers a taxonomy exception. Release Procedure, S1, and the Rust
-Binding train remain unadmitted.
+**Next slice:** resolve delegated VE043-A1-C1 taxonomy precedence before
+classification. Select a mutually exclusive authority-first procedure or revise
+the taxonomy; do not use reviewer convention or literal syntax as fallback.
+Release Procedure, S1, and the Rust Binding train remain unadmitted.
 
 VE043-A1-C1 has reached a re-plan trigger. Exact preflight finds no overlap
 between current candidate-bearing verifier paths and already migrated checker
@@ -42,6 +42,12 @@ VE043-A1-C1 exception schema selects Option 3. No exception artifact or blank
 rationale field is admitted. A candidate outside the closed taxonomy stops
 classification and requires a separate artifact, authority, exact join, and
 verification decision before it can be represented.
+
+VE043-A1-C1 review exposes overlapping taxonomy applicability. Historical
+one-row evidence also has structural multiplicity, explicit finite sets can
+look like aggregates, and schema/status constants are not named by the current
+row/key wording. The recommended recovery retains five classes and adds an
+authority-first precedence procedure before classification resumes.
 
 VE043-A1-G1 is accepted. Its fixed lexical contract derives an immutable
 708-row baseline from the canonical 170-verifier scope; both cardinalities are
