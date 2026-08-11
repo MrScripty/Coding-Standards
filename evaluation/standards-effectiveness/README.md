@@ -497,6 +497,16 @@ pointer/alignment/allocation/provenance proof, initialized extent, zero-length
 rules, callback lifetime, copy ordering, typed failures, exact dispositions,
 metadata, routing, and legacy unsafe-pattern removal.
 
+## Contract HTTP Outcome Decision Fixtures
+
+`fixtures/contracts/http-outcome-projection-decisions.tsv` and the registered
+`contract-http-outcome-projection` suite check authoritative operation outcome
+projection through an explicitly selected protocol, consistent control/body
+representation, disclosure authority, typed invalid/unsupported/unavailable
+results, four exact dispositions, metadata, non-normative HTTP recipes, legacy
+architecture-index closure, and rejection of guessed status, envelope,
+decoder, retry, or recovery fallback.
+
 ## Rust Boundary-Arithmetic Decision Fixtures
 
 `fixtures/rust/checked-boundary-arithmetic-decisions.tsv` and

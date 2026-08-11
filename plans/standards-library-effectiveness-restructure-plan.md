@@ -12,9 +12,9 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, and M6-EDGE-2 are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement delegated M6-N1 Contract HTTP Outcome under the
-accepted incident-edge contract. M6-N2 Persistence Owner is admitted after it
-and remains serially blocked until M6-N1 acceptance.
+**Next slice:** implement delegated M6-N2 Persistence Owner under the accepted
+incident-edge contract, reconcile row-32/row-35 lifecycle evidence, and close
+M6-N-W1 with one mixed checkpoint. M6-N1 Contract HTTP Outcome is accepted.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

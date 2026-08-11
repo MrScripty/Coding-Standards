@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: admitted M6-N lifecycle-caller wave
+**Current phase:** Milestone 6: M6-N2 Persistence Owner implementation
 
-**Next slice:** Implement admitted M6-N1 Contract HTTP Outcome, transfer its
-row-33 caller to registered declarative authority, and accept the package only
-after its focused and affected-lifecycle gates pass.
+**Next slice:** Implement admitted M6-N2 Persistence Owner, complete row-32 and
+row-35 lifecycle transfer, and run the M6-N-W1 closing mixed checkpoint.
 
 **Acceptance status:** `pending`
 
@@ -3090,7 +3089,7 @@ audit is required before implementation continues.
 
 #### M6-N Inbound-Caller Edge-Authority Re-plan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 The fresh graph audit selected two shallow semantic candidates. Contract HTTP
 Outcome Projection owns 24 typed decisions and four exact dispositions, calls
@@ -3244,9 +3243,9 @@ paths, not semantic prerequisites or executable fallbacks.
 
 #### Slice M6-N1: Contract HTTP Outcome Projection
 
-**Status:** `Active`
+**Status:** `Accepted`
 
-**Package state:** `admitted`
+**Package state:** `accepted`
 
 **Goal:** replace the Bash checker with one registered Contracts-owned suite
 that preserves all 24 typed outcome-projection decisions, four exact
@@ -3273,11 +3272,25 @@ checks, removed paths, README route, source/fixture/helper/engine/schema
 read-only proof, and diff integrity pass. The mixed checkpoint is deferred to
 M6-N-W1 closure.
 
+**Outcome:** one registered seven-check suite now owns the 24 typed decisions,
+four exact dispositions, metadata closure, canonical and reference policy, and
+former architecture-index closure. The Bash checker and row-33 invocation are
+removed; row 33 continues to pass its independent decomposition, adapter,
+disposition, plan, and execution-train evidence. No Python bridge, wrapper,
+duplicate invocation, source/fixture rewrite, or compatibility path remains.
+
+**Verification:** focused suite, retained row-33 checker, package authority,
+and exact incident-edge authority pass. Regenerated inventory records 171 Bash
+verifiers / 176 nodes / 862 edges / 172 components, and metadata-helper
+consumers fall from 36 to 35. All-wave declarative, plan, diff, read-only, and
+removed-path gates remain required before this package commit; the mixed gate
+remains deferred to M6-N-W1 closure.
+
 #### Slice M6-N2: Persistence Owner Contract
 
-**Status:** `Planned`
+**Status:** `Active`
 
-**Package state:** `admitted`, serially blocked on M6-N1 acceptance
+**Package state:** `admitted`
 
 **Goal:** replace the Bash checker with one registered Persistence-owned suite
 that preserves all 19 typed owner decisions, the exact `STD-0106` disposition,

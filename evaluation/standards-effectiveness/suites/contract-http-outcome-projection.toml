@@ -1,0 +1,153 @@
+schema_version = 1
+id = "contract-http-outcome-projection"
+owner = "topic.contracts"
+description = "Selected protocol outcome projection with typed invalid, unsupported, and unavailable results and no guessed status, envelope, decoder, retry, or recovery fallback."
+
+[[checks]]
+id = "outcome-projection-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/contracts/http-outcome-projection-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+scope = ["selected", "unselected"]
+authority = ["present", "missing"]
+outcome = ["success", "failure", "application-error", "unsupported", "missing"]
+protocol = ["supported", "unsupported", "missing"]
+projection = ["selected", "unsupported", "missing"]
+status = ["consistent", "contradictory", "missing"]
+body = ["consistent", "contradictory", "missing"]
+disclosure = ["safe", "unsafe", "missing"]
+fallback = ["none", "default-500", "default-envelope", "transport-success", "raw-message", "alternate-decoder", "retry", "recover"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "status", op = "eq", value = "contradictory" },
+  { field = "body", op = "eq", value = "contradictory" },
+  { field = "disclosure", op = "eq", value = "unsafe" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+any = [
+  { field = "outcome", op = "eq", value = "unsupported" },
+  { field = "protocol", op = "eq", value = "unsupported" },
+  { field = "projection", op = "eq", value = "unsupported" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [
+  { field = "scope", op = "eq", value = "selected" },
+  { any = [
+    { field = "authority", op = "eq", value = "missing" },
+    { field = "outcome", op = "eq", value = "missing" },
+    { field = "protocol", op = "eq", value = "missing" },
+    { field = "projection", op = "eq", value = "missing" },
+    { field = "status", op = "eq", value = "missing" },
+    { field = "body", op = "eq", value = "missing" },
+    { field = "disclosure", op = "eq", value = "missing" },
+  ] },
+]
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [
+  ["STD-0126", "ARCHITECTURE-PATTERNS.md"],
+  ["STD-0127", "ARCHITECTURE-PATTERNS.md"],
+  ["STD-0128", "ARCHITECTURE-PATTERNS.md"],
+  ["STD-0129", "ARCHITECTURE-PATTERNS.md"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0126", "STD-0127", "STD-0128", "STD-0129"]
+
+[[checks]]
+id = "dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0126", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "index", "legacy HTTP convention heading routes to selected outcome and protocol projection policy"],
+  ["STD-0127", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "refine", "project authoritative operation outcomes only through an explicitly selected protocol contract"],
+  ["STD-0128", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "split", "own selected response representation while extracting the fixed JSON error envelope to non-normative HTTP recipes"],
+  ["STD-0129", "ARCHITECTURE-PATTERNS.md", "topics/contracts.md", "split", "own outcome-to-status consistency while extracting the universal status table to non-normative HTTP recipes"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0126", "STD-0127", "STD-0128", "STD-0129"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/security.md",
+  "topics/contracts.md",
+  "reference/recipes/http.md",
+]
+
+[[checks]]
+id = "contract-policy"
+type = "text"
+path = "topics/contracts.md"
+required = [
+  "## Protocol Outcome Projection",
+  "authoritative operation outcome",
+  "transport-level success may carry a rejected application outcome",
+  "Status, headers or equivalent control metadata",
+  "Security selects what may be disclosed",
+  "Do not guess a status or envelope",
+  "[HTTP projection recipes]",
+]
+prohibited = []
+
+[[checks]]
+id = "http-reference"
+type = "text"
+path = "reference/recipes/http.md"
+required = [
+  "ID: `reference.recipes.http`",
+  "This material is non-normative",
+  "## Illustrative Projection Record",
+  "## Illustrative Response Shapes",
+  "These values are not defaults",
+  "default an unknown",
+  "failure to `500`",
+]
+prohibited = []
+
+[[checks]]
+id = "architecture-index-closure"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = [
+  "[Protocol Outcome Projection]",
+  "[HTTP Projection Mechanism Recipes]",
+  "This is a migration index",
+]
+prohibited = [
+  "### The Pattern",
+  "### Error Response Format",
+  "### Status Code Usage",
+  "Human-readable description",
+  "| 500 |",
+]

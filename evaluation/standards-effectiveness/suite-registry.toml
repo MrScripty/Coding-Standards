@@ -519,3 +519,8 @@ requires = []
 id = "rust-interop-memory"
 path = "evaluation/standards-effectiveness/suites/rust-interop-memory.toml"
 requires = []
+
+[[suites]]
+id = "contract-http-outcome-projection"
+path = "evaluation/standards-effectiveness/suites/contract-http-outcome-projection.toml"
+requires = []

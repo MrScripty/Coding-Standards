@@ -2257,3 +2257,21 @@
 - No semantic checker, suite, caller, lifecycle inventory, registry, README,
   source, fixture, helper, engine, schema, or lockfile changed during admission.
   Next slice is admitted M6-N1 implementation.
+
+## 2026-08-11 - M6-N1 Contract HTTP Outcome Acceptance
+
+- Added and registered one seven-check Contracts suite preserving 24 typed
+  outcome-projection decisions, four exact dispositions, metadata closure,
+  canonical policy, non-normative recipes, and architecture-index closure.
+- Deleted the Bash checker only after the focused suite passed, removed its
+  single row-33 invocation, and retained row 33 as independent decomposition,
+  adapter, disposition, plan, and execution-train lifecycle evidence.
+- Accepted all four exact incident-edge rows. Package authority rejects the
+  removed checker and any retained executable caller; no wrapper,
+  Bash-to-Python bridge, duplicate invocation, or package-specific scan exists.
+- Regenerated inventory records 171 Bash verifiers / 176 nodes / 862 edges /
+  172 components. Thirty-five metadata-helper consumers and 105 registered
+  declarative suites remain.
+- Canonical sources, semantic fixtures, metadata helper, engine, schemas,
+  lockfiles, and unrelated lifecycle records remain unchanged. M6-N-W1 stays
+  open and next slice is admitted M6-N2 Persistence Owner.

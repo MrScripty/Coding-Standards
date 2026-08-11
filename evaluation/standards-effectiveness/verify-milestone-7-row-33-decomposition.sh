@@ -7,7 +7,6 @@ mapfile -t validated < <(awk -F '\t' 'NR>1{print $1}' "$V");[[ "${validated[*]}"
 for t in '## Owner Contract' 'sole normative owner for outcome meaning' 'IPC remains transport-independent' '## Exact Ownership' '`33.1`' '`33.2`' 'reference/recipes/http.md' '## Typed Outcomes And No Fallback' 'default an unknown failure to `500`' '## Re-plan Triggers';do rg -F -q "$t" "$D";done
 [[ "$(awk -F '\t' '$1==33{print $6}' "$S/milestone-7-execution-train.tsv")" == topics/contracts.md ]]
 rg -F -q '`7.4b23a` (`Accepted`)' "$P";rg -F -q '`7.4b23b` (`Accepted`)' "$P";rg -F -q '`7.4b23c` (`Accepted`)' "$P"
-"$S/verify-contract-http-outcome-projection.sh"
 "$S/verify-contract-http-adapter-proof.sh"
 mapfile -t disposed < <(awk -F '\t' '$1>="STD-0126"&&$1<="STD-0133"{print $1}' "$S/consolidation-dispositions.tsv");[[ "${disposed[*]}" == "${expected[*]}" ]]
 "$S/verify-milestone-7-execution-train.sh"

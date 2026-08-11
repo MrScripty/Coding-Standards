@@ -1617,3 +1617,22 @@ Package-specific scans, caller wrappers, Bash-to-Python bridges, duplicated
 suite execution, silent caller deletion, schema forks, and compatibility
 behavior remain prohibited. M6-N1 is next; M6-N2 remains admitted but serially
 blocked on M6-N1 acceptance.
+
+### Accepted M6-N1 Contract HTTP Outcome Projection
+
+The registered seven-check Contracts suite preserves all 24 typed decisions,
+four exact dispositions, metadata relations, canonical projection policy,
+non-normative HTTP recipes, and legacy architecture-index closure. It rejects
+guessed status, envelope, transport-success, raw-message, alternate-decoder,
+retry, and recovery fallback through typed decision evidence.
+
+The Bash checker and its row-33 invocation are absent. Row 33 still passes its
+eight-ID/two-child decomposition, owner validation, plan history, adapter proof,
+complete dispositions, and execution-train lifecycle. Exact package authority
+proves all four incident executable edges are absent without a wrapper or
+Python bridge.
+
+The graph now has 171 Bash verifiers / 176 nodes / 862 edges / 172 components;
+35 metadata-helper consumers remain and 105 declarative suites are registered.
+Canonical sources, fixtures, helper, engine, schemas, lockfiles, and unrelated
+lifecycle records did not change. M6-N2 is now active.
