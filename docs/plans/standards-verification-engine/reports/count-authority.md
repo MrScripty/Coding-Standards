@@ -234,6 +234,24 @@ generated graph and numeric-audit freshness. L1 is next and must derive current
 progress while rejecting disappearance that lacks exact accepted-package and
 canonical-owner evidence.
 
+L1 preflight reaches a capability re-plan trigger. The immutable baseline and
+C1 decision coverage are suitable historical authority, and the package table
+already owns accepted checker subjects and explicit canonical owners. The
+generic relation check is static, however, and cannot compare those records to
+the live result of the canonical numeric collector or validate a conditional
+set difference. The existing numeric snapshot check instead requires immutable
+history to equal current derivation exactly, so it would reject every accepted
+checker retirement.
+
+The recommended recovery is one typed, side-effect-free numeric lifecycle check
+inside the Python engine. It reuses the canonical collector, rejects new
+candidates, and authorizes a missing baseline identity only when its checker is
+no longer live and exactly one accepted `checker:<path>` package row supplies a
+non-empty owner. All totals remain derived diagnostics. No second current
+snapshot, manually maintained owner mapping, callback source, mutable baseline,
+or Bash bridge is admitted. The existing strict byte-equality path must be
+removed or delegated to the same lifecycle authority in the accepted slice.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge

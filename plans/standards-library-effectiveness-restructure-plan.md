@@ -12,10 +12,22 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** preflight delegated VE043-A1-L1 lifecycle evidence. Join the
-immutable baseline, current derived candidates, reviewed C1 decisions, and
-accepted package-owner authority without inferring owner or package identity.
-Release Procedure, S1, and the Rust Binding train remain unadmitted.
+**Next slice:** select and admit delegated VE043-A1-L1 lifecycle capability.
+Preflight proves existing static relations and strict snapshot equality cannot
+preserve immutable audit history while authorizing exact package-owned
+disappearance. No engine or migration package change is admitted yet. Release
+Procedure, S1, and the Rust Binding train remain unadmitted.
+
+VE043-A1-L1 has reached a capability re-plan trigger. Existing evidence is
+sufficient: immutable baseline identity and checker path, exact C1 coverage,
+and accepted package rows with explicit owners. Existing mechanics are not:
+static relations cannot consume current collector output or conditionally join
+missing identities, while the current byte-equality snapshot check would reject
+the first authorized checker retirement. The recommended recovery adds one
+narrow typed Python lifecycle assertion, reuses the canonical collector, and
+removes competing strict-equality freshness semantics atomically. It introduces
+no current snapshot, owner map, expected count, callback, Bash bridge, or
+inference fallback.
 
 VE043-A1-C1 is accepted. One registered declarative suite enforces the exact
 two-column reviewed schema, closed taxonomy domain, unique candidate identity,

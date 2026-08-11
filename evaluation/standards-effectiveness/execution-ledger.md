@@ -10385,3 +10385,38 @@ checks; and diff integrity.
 **Next slice:** preflight L1 exact current-versus-baseline lifecycle evidence
 and stop if accepted-package/canonical-owner disappearance authority cannot be
 joined through existing generic contracts.
+
+## 2026-08-11 VE043-A1-L1 Live-Derivation Capability Re-plan Trigger
+
+**Outcome:** Re-plan required before lifecycle implementation.
+
+The immutable baseline, exact C1 decisions, and accepted package-owner rows
+provide the required evidence. Existing engine mechanics cannot join it to live
+state: `relation` reads committed tables only, while the numeric snapshot check
+requires immutable history to remain byte-equal to current derivation. The
+first authorized checker retirement would therefore fail the old freshness
+contract.
+
+The baseline currently derives candidate rows from 124 checker paths. The
+package table currently contains 68 accepted checker subjects across 29
+explicit owner values. These figures are review observations, not stored
+expectations or policy thresholds.
+
+**No-fallback result:** no baseline, C1 decision, package, owner, current
+snapshot, expected count, checker, standards source, engine behavior, graph
+artifact, lockfile, or workflow changed. No owner or package was inferred from
+syntax, names, routes, or graph relationships.
+
+**Recommended option:** admit one narrow typed Python numeric-audit lifecycle
+check. Reuse the canonical collector, reject every new identity, and accept a
+missing baseline identity only when its checker is no longer live and one exact
+accepted checker-package row supplies a non-empty owner. Remove or delegate the
+old byte-equality path atomically so only one freshness authority remains.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** select one L1 capability option before changing engine code or
+migration evidence.

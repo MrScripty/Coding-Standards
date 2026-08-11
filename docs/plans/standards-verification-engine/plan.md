@@ -2,13 +2,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-L1 lifecycle guard
+**Current phase:** Milestone 6: VE043-A1-L1 lifecycle capability re-plan
 
-**Next slice:** preflight the VE043-A1-L1 lifecycle join between the immutable
-baseline, current derived candidates, reviewed C1 decisions, and accepted
-package-owner evidence. Stop if disappearance authority cannot be expressed by
-existing generic contracts without inferring owner or package identity. S1
-remains unadmitted.
+**Next slice:** select and admit one VE043-A1-L1 lifecycle capability. Existing
+generic contracts cannot compare a live derived inventory with immutable
+historical evidence and conditionally authorize missing rows through exact
+accepted-package ownership. No engine, baseline, decision, package, checker, or
+standards change is admitted yet. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -4002,6 +4002,87 @@ authority-first procedure. No syntax classifier, default class, inferred owner,
 exception sentinel, compatibility schema, or duplicate candidate fact was
 introduced. L1 remains responsible for proving that any future candidate
 disappearance joins an accepted package and its explicit canonical owner.
+
+##### VE043-A1-L1 Live-Derivation Capability Re-plan Trigger
+
+**Status:** `Active`
+
+L1 preflight proves that the admitted evidence exists but the current engine
+cannot express its lifecycle. The immutable baseline contains derived candidate
+identity and checker path, C1 covers every baseline identity, and the migration
+package table supplies unique checker subjects, explicit owners, and reviewed
+state. The current baseline spans 124 candidate-bearing checker paths, while 68
+checker packages are accepted under 29 explicit owner values; these are derived
+review observations, not expected totals.
+
+The generic `relation` assertion reads two committed tables and can prove static
+set equality, but it cannot obtain the current candidate set from the canonical
+collector or authorize a set difference through a third table. Conversely,
+`generate_numeric_audit.py --check` requires the committed immutable baseline
+to equal the current live scan byte-for-byte. Its first authorized checker
+retirement would therefore be reported as stale even when an accepted package
+explicitly owns that retirement. Keeping both behaviors would make historical
+baseline and current inventory competing authorities.
+
+**Option 1 - Admit one typed numeric-audit lifecycle check (`Recommended`):**
+add a side-effect-free Python assertion that reuses `collect_candidates` and
+reads the immutable baseline, C1 decisions, and existing package table through
+strict contained schemas. It rejects every current identity absent from the
+baseline. For each baseline identity absent from current derivation, it requires
+the baseline checker itself to be absent from canonical current inventory and
+an exact unique package subject `checker:<baseline checker>` whose state is
+`accepted` and whose owner is non-empty. Missing authority is typed
+`unavailable`; duplicate, ambiguous, malformed, still-live-checker, and new-
+candidate evidence is typed `invalid`. It derives current, missing, and
+completed totals only for diagnostics. The strict byte-equality check is removed
+or made to use this same lifecycle implementation atomically, so there is one
+freshness authority. This qualifies under the custom-capability rule because a
+safety-critical no-unexplained-disappearance invariant cannot otherwise be
+expressed clearly.
+
+**Option 2 - Generate and commit a second current-candidate artifact:** retain
+the immutable baseline, regenerate a separate current snapshot after every
+checker package, and add generated lifecycle rows for package joins. This can be
+made exact, but it adds update ordering, generated churn, and another freshness
+gate while still requiring custom logic to derive and validate conditional
+package authority. Choose it only if a reviewable current snapshot is required
+independently; no such requirement is established.
+
+**Option 3 - Extend generic relations with executable source adapters or
+callbacks:** allow relation sides to invoke the numeric collector and perform
+conditional joins. This could generalize live derivation, but it introduces an
+executable configuration surface and a broad abstraction without a second
+coherent consumer. It conflicts with the engine's no-callback and capability-
+admission boundaries and is rejected.
+
+**Option 4 - Rewrite the baseline and C1 after every accepted package:** make
+the historical baseline represent only current candidates. This avoids a new
+assertion but destroys accepted audit evidence, forces semantic re-review churn,
+and makes an unexplained disappearance indistinguishable from a routine
+refresh. It violates L1's immutable-history objective and is rejected.
+
+**Recommended admission boundary:** select Option 1 with no generalized live-
+source plugin. The check may know the numeric candidate contract and package
+subject prefix, but policy remains in the immutable baseline, explicit C1
+decisions, and accepted package rows. It must not infer package or owner from a
+name, graph edge, standards route, source text, or classifier. It must not write
+current rows, expected counts, progress, owner mappings, or compatibility data.
+
+**Proposed implementation write set:** numeric-audit and check-dispatch modules;
+one focused lifecycle-check module; focused numeric lifecycle tests; the
+numeric-classification suite and registry only if registration structure
+requires it; engine documentation; count-authority and architecture reports;
+and serial plan, issue, and ledger records. The immutable baseline, C1 decision
+table, package manifest, generated graph, Bash checkers, standards sources,
+lockfiles, and workflows remain read-only.
+
+**Proposed acceptance:** focused positive evidence plus negative cases for new
+identity, unexplained missing identity, missing package, ambiguous package,
+non-accepted package, empty owner, and a candidate removed while its checker
+remains live; all engine tests; Python compilation; all declarative suites;
+generated graph freshness; both plan checks; diff integrity; and one shared-
+contract complete-suite checkpoint. The byte-equality freshness path must not
+remain as competing authority.
 
 **Tasks:**
 
