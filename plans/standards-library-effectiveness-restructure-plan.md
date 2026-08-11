@@ -9,12 +9,13 @@
 **Current phase:** Cross-Platform source closure `7.4c3.7` and delegated
 verification-engine Milestone 5 are accepted. Seven of 27 former normative
 source entrypoints are derived. Verification-engine Milestone 6 Waves 1
-through 6, M6-EDGE-1, M6-EDGE-FREE, and M6-EDGE-2 are accepted; exact typed
-incident-edge semantics govern further checker deletion.
+through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
+typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement delegated M6-N2 Persistence Owner under the accepted
-incident-edge contract, reconcile row-32/row-35 lifecycle evidence, and close
-M6-N-W1 with one mixed checkpoint. M6-N1 Contract HTTP Outcome is accepted.
+**Next slice:** perform the delegated post-M6-N-W1 read-only graph and ownership
+audit. Do not admit or implement another verifier package until its semantic
+owner, complete incident-edge set, lifecycle callers, dependencies, and bounded
+write set are frozen.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

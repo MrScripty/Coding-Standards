@@ -524,3 +524,8 @@ requires = []
 id = "contract-http-outcome-projection"
 path = "evaluation/standards-effectiveness/suites/contract-http-outcome-projection.toml"
 requires = []
+
+[[suites]]
+id = "persistence-owner-contract"
+path = "evaluation/standards-effectiveness/suites/persistence-owner-contract.toml"
+requires = []

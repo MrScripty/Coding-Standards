@@ -507,6 +507,16 @@ results, four exact dispositions, metadata, non-normative HTTP recipes, legacy
 architecture-index closure, and rejection of guessed status, envelope,
 decoder, retry, or recovery fallback.
 
+## Persistence Owner Decision Fixtures
+
+`fixtures/persistence/owner-contract-decisions.tsv` and the registered
+`persistence-owner-contract` suite check durable-boundary authority, selected
+source/destination/invariant/mechanism/version/coordination evidence, complete
+publication, typed invalid/unsupported/unavailable results, the exact
+`STD-0106` disposition, metadata, canonical and reference policy, Router and
+architecture routes, and rejection of partial-write, rebuild, startup, or
+weaker-store fallback.
+
 ## Rust Boundary-Arithmetic Decision Fixtures
 
 `fixtures/rust/checked-boundary-arithmetic-decisions.tsv` and

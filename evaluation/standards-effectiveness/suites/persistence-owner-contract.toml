@@ -1,0 +1,140 @@
+schema_version = 1
+id = "persistence-owner-contract"
+owner = "profile.boundary.persistence"
+description = "Durable-boundary ownership and mechanism selection with typed invalid, unsupported, and unavailable outcomes and no partial-write, rebuild, startup, or weaker-store fallback."
+
+[[checks]]
+id = "owner-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/persistence/owner-contract-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+durable_scope = ["selected", "not-required"]
+authority = ["selected", "missing", "not-required"]
+source = ["known", "missing", "not-required"]
+destination = ["known", "missing", "not-required"]
+invariant = ["selected", "missing", "not-required"]
+capability = ["supported", "unsupported", "missing", "not-required"]
+version = ["supported", "unsupported", "not-required"]
+coordination = ["selected", "missing", "not-required"]
+evidence = ["complete", "incomplete", "missing", "not-required"]
+publication = ["complete", "partial", "not-required"]
+state = ["consistent", "contradictory", "corrupt"]
+fallback = ["none", "partial-write", "rebuild", "startup", "weaker-store"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "publication", op = "eq", value = "partial" },
+  { field = "state", op = "in", values = ["contradictory", "corrupt"] },
+  { field = "evidence", op = "eq", value = "incomplete" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+any = [
+  { field = "version", op = "eq", value = "unsupported" },
+  { field = "capability", op = "eq", value = "unsupported" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [
+  { field = "durable_scope", op = "eq", value = "selected" },
+  { any = [
+    { field = "authority", op = "eq", value = "missing" },
+    { field = "source", op = "eq", value = "missing" },
+    { field = "destination", op = "eq", value = "missing" },
+    { field = "invariant", op = "eq", value = "missing" },
+    { field = "capability", op = "eq", value = "missing" },
+    { field = "coordination", op = "eq", value = "missing" },
+    { field = "evidence", op = "eq", value = "missing" },
+  ] },
+]
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path"]
+order = "source"
+expected = [["STD-0106", "ARCHITECTURE-PATTERNS.md"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0106"
+
+[[checks]]
+id = "disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [["STD-0106", "ARCHITECTURE-PATTERNS.md", "profiles/boundaries/persistence.md", "index", "legacy phased-mutation heading routes to the durable-state boundary owner"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0106"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "profiles/boundaries/persistence.md",
+  "reference/recipes/persistence.md",
+]
+
+[[checks]]
+id = "boundary-policy"
+type = "text"
+path = "profiles/boundaries/persistence.md"
+required = [
+  "ID: `profile.boundary.persistence`",
+  "## Durable Boundary Authority",
+  "## Select The Durable Mechanism",
+  "## Responsibility Boundaries",
+  "does not own every in-memory mutation",
+  "## Typed Outcomes And No Fallback",
+  "nearby weaker store",
+  "## Verification",
+]
+prohibited = []
+
+[[checks]]
+id = "reference-policy"
+type = "text"
+path = "reference/recipes/persistence.md"
+required = [
+  "ID: `reference.recipes.persistence`",
+  "This material is non-normative",
+  "## Adapting A Mechanism",
+  "examples rather than defaults",
+]
+prohibited = []
+
+[[checks]]
+id = "routes"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["[Persistence boundary profile](profiles/boundaries/persistence.md)"]
+prohibited = []
+
+[[checks]]
+id = "architecture-route"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = ["[Persistence boundary profile]"]
+prohibited = []

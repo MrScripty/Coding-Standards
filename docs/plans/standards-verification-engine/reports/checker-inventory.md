@@ -1636,3 +1636,26 @@ The graph now has 171 Bash verifiers / 176 nodes / 862 edges / 172 components;
 35 metadata-helper consumers remain and 105 declarative suites are registered.
 Canonical sources, fixtures, helper, engine, schemas, lockfiles, and unrelated
 lifecycle records did not change. M6-N2 is now active.
+
+### Accepted M6-N2 Persistence Owner And M6-N-W1
+
+The registered eight-check Persistence suite preserves all 19 typed owner
+decisions, the exact `STD-0106` disposition, metadata relations, canonical and
+reference policy, and Router and architecture routes. Its ordered decisions
+return typed invalid, unsupported, and unavailable outcomes and prohibit
+nearby weaker-store fallback.
+
+The Bash checker and its row-32 invocation are absent. Row 32 still proves its
+13-ID/three-child decomposition, durable-mutation and migration-execution
+children, exact dispositions, owner validation, plan history, and execution
+train. Row 35 no longer inventories the deleted checker and passes with 17
+frozen dependencies, 15 direct-route dependencies, and 26 classified README
+consumers. Exact package authority proves all four incident executable edges
+are absent without a wrapper, bridge, duplicate suite invocation, or bespoke
+removed-path exception.
+
+All 106 declarative suites and the complete mixed checkpoint over all 170
+surviving Bash entrypoints pass. The fresh graph has 175 nodes, 854 edges, and
+171 components; 34 metadata-helper consumers remain. M6-N-W1 is accepted, and
+the next action is a fresh read-only dependency and ownership audit before any
+further package admission.

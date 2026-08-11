@@ -2275,3 +2275,26 @@
 - Canonical sources, semantic fixtures, metadata helper, engine, schemas,
   lockfiles, and unrelated lifecycle records remain unchanged. M6-N-W1 stays
   open and next slice is admitted M6-N2 Persistence Owner.
+
+## 2026-08-11 - M6-N2 Persistence Owner And M6-N-W1 Acceptance
+
+- Added and registered one eight-check Persistence suite preserving 19 typed
+  owner decisions, the exact `STD-0106` disposition, metadata closure,
+  canonical and reference policy, and Router and architecture routes.
+- Deleted the Bash checker only after focused suite success, removed its one
+  row-32 invocation, and retained row 32 as independent 13-ID/three-child
+  decomposition, owner, disposition, plan, and execution-train evidence.
+- Removed the deleted checker from row-35 lifecycle data and reconciled exact
+  counts from 18/16/26 to 17/15/26. Both affected lifecycle checkers pass.
+- Accepted all four exact incident-edge rows. Package authority rejects the
+  removed checker and every dangling caller; no wrapper, Python bridge,
+  duplicate suite invocation, package-specific scan, or fallback remains.
+- All 106 declarative suites pass. Fresh inventory records 170 Bash verifiers /
+  175 nodes / 854 edges / 171 components, with 34 metadata-helper consumers.
+  Removed-path, graph-freshness, and diff-integrity checks pass.
+- The complete mixed checkpoint passed all 170 surviving Bash entrypoints,
+  closing M6-N-W1. Canonical sources, fixtures, helper, engine, schemas,
+  lockfiles, workflow artifacts, and unrelated lifecycle records did not
+  change.
+- Next slice is a fresh read-only graph and ownership audit. No later package
+  is admitted.

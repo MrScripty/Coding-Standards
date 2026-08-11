@@ -2,10 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-N2 Persistence Owner implementation
+**Current phase:** Milestone 6: post-M6-N-W1 dependency and ownership audit
 
-**Next slice:** Implement admitted M6-N2 Persistence Owner, complete row-32 and
-row-35 lifecycle transfer, and run the M6-N-W1 closing mixed checkpoint.
+**Next slice:** Audit the fresh accepted graph for the smallest owner-coherent
+package. Do not admit or implement another package until its complete incident
+edge set, lifecycle callers, semantic dependencies, and bounded write set are
+frozen.
 
 **Acceptance status:** `pending`
 
@@ -3147,7 +3149,7 @@ Option 1 is selected. No semantic package is admitted until M6-EDGE-2 passes.
 
 #### Slice M6-EDGE-2: Exact Incident-Edge Authority
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Goal:** make package authority cover every executable graph edge incident to
 the package checker, preventing both undeclared prerequisites and retained
@@ -3241,6 +3243,19 @@ new non-executable `contract_reference` edges are generated references from the
 three shared package-authority artifacts to the four newly named checker/caller
 paths, not semantic prerequisites or executable fallbacks.
 
+**Wave outcome:** M6-N1 and M6-N2 are accepted in frozen order. Their registered
+suites replace both semantic Bash authorities, row 33 and row 32 retain only
+independent decomposition/lifecycle evidence, and row 35 no longer inventories
+the deleted Persistence checker. No caller wrapper, Python bridge, duplicate
+suite invocation, source fallback, fixture rewrite, or compatibility path
+remains.
+
+**Wave verification:** all 106 declarative suites, focused package and exact
+incident-edge authority, affected row-32 and row-35 lifecycle checkers,
+removed-path and graph-freshness checks, and the complete mixed checkpoint over
+all 170 surviving Bash entrypoints pass. The accepted graph has 175 nodes, 854
+edges, and 171 components.
+
 #### Slice M6-N1: Contract HTTP Outcome Projection
 
 **Status:** `Accepted`
@@ -3288,9 +3303,9 @@ remains deferred to M6-N-W1 closure.
 
 #### Slice M6-N2: Persistence Owner Contract
 
-**Status:** `Active`
+**Status:** `Accepted`
 
-**Package state:** `admitted`
+**Package state:** `accepted`
 
 **Goal:** replace the Bash checker with one registered Persistence-owned suite
 that preserves all 19 typed owner decisions, the exact `STD-0106` disposition,
@@ -3319,6 +3334,21 @@ source/fixture/helper/engine/schema read-only proof, diff integrity, and one
 complete mixed Bash checkpoint pass at M6-N-W1 closure. Any additional caller,
 semantic prerequisite, lifecycle owner, or required reusable assertion is a
 re-plan trigger.
+
+**Outcome:** one registered eight-check Persistence suite now owns all 19 typed
+owner decisions, the exact `STD-0106` disposition, metadata closure, canonical
+and reference policy, and Router and architecture routes. The Bash checker and
+row-32 invocation are absent; row 32 retains its 13-ID/three-child lifecycle
+authority. Row 35 now freezes 17 total and 15 direct-route dependencies while
+preserving 26 classified README consumers. No weaker-store fallback, wrapper,
+bridge, duplicate execution, or compatibility authority remains.
+
+**Verification:** the focused eight-check suite, row-32 and row-35 lifecycle
+checkers, package authority, and exact incident-edge authority pass. All 106
+declarative suites pass. Fresh generated inventory records 170 Bash verifiers,
+175 nodes, 854 edges, and 171 components; 34 metadata-helper consumers remain.
+Removed-path proof, graph freshness, diff integrity, and the complete mixed
+170-entrypoint M6-N-W1 checkpoint pass.
 
 **Tasks:**
 
