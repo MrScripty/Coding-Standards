@@ -1570,3 +1570,17 @@ No package is admitted. Recommended M6-EDGE-2 work extends the existing
 source/target model to exact incident-edge authority, adds directional negative
 coverage, and runs a shared-contract checkpoint before the two semantic
 packages are reconsidered.
+
+### Admitted M6-EDGE-2 Exact Incident-Edge Authority
+
+Option 1 is selected for VE041. The existing manifest schema is sufficient:
+the package checker endpoint determines whether a row is outbound or inbound,
+and exact identity includes edge type, source, and target. The contract will
+cover all incident executable edges, require retained checker/artifact evidence
+to name the opposite endpoint, and reject accepted dangling caller edges.
+
+The slice owns only the existing assertion, its focused tests, engine
+documentation, and serial plan records. Manifests, suites, generated graph,
+semantic checkers and fixtures, standards sources, helpers, and schemas remain
+read-only. M6-N1 and M6-N2 remain unadmitted until focused, engine,
+declarative, graph, plan, and mixed shared-contract gates pass.

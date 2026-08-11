@@ -2194,3 +2194,18 @@
 - No checker, fixture, engine, manifest, registry, generated artifact, source,
   helper, schema, or lockfile changed. M6-N1 and M6-N2 remain unadmitted pending
   selection and acceptance of an inbound-edge authority design.
+
+## 2026-08-11 - M6-EDGE-2 Admission
+
+- Selected VE041 Option 1: extend the existing generic edge contract from
+  exact outgoing coverage to exact incident coverage without changing its TSV
+  schema or preserving a legacy mode.
+- Froze edge identity as type/source/target and directional retained-endpoint
+  evidence. Existing outbound rows remain canonical; inbound rows name the
+  retained caller for independent-gate evidence.
+- Bounded the write set to the existing assertion, focused tests, engine
+  documentation, and serial plan records. Manifests, registry, graph,
+  standards, semantic fixtures/checkers, helpers, schemas, and lockfiles remain
+  read-only.
+- M6-N1 and M6-N2 remain unadmitted. A shared-contract checkpoint is required
+  before either semantic package can proceed.

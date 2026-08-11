@@ -12,11 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, and M6-EDGE-FREE are accepted; exact typed
 executable-edge semantics govern further checker deletion.
 
-**Next slice:** resolve delegated verification-engine issue VE041 before
-admitting Contract HTTP Outcome or Persistence Owner. The current package
-contract proves outgoing but not incoming executable-edge transfer; no later
-package is admitted until exact incident-edge authority is selected and
-accepted without compatibility behavior.
+**Next slice:** implement the delegated verification engine's admitted
+M6-EDGE-2 exact incident-edge authority for VE041. Contract HTTP Outcome and
+Persistence Owner remain unadmitted until the shared-contract checkpoint
+passes without a schema fork, compatibility behavior, or Bash bridge.
 
 The three-gate recovery distinguishes focused child evidence, package
 integration gates, and immutable wave checkpoints. Activation is a stable review

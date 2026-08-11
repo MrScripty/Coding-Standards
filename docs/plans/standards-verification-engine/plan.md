@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: inbound-caller edge-authority re-plan
+**Current phase:** Milestone 6: M6-EDGE-2 exact incident-edge authority
 
-**Next slice:** Resolve VE041 before admitting M6-N1 Contract HTTP Outcome or
-M6-N2 Persistence Owner. The package contract must prove exact incoming as well
-as outgoing executable-edge transfer without a Bash bridge, bespoke scan, or
-dual semantic authority.
+**Next slice:** Implement admitted M6-EDGE-2, run the shared-contract
+checkpoint, and re-evaluate M6-N1 Contract HTTP Outcome and M6-N2 Persistence
+Owner only after exact incident-edge authority is accepted.
 
 **Acceptance status:** `pending`
 
@@ -3091,7 +3090,7 @@ audit is required before implementation continues.
 
 #### M6-N Inbound-Caller Edge-Authority Re-plan Trigger
 
-**Status:** `Blocked`
+**Status:** `Active`
 
 The fresh graph audit selected two shallow semantic candidates. Contract HTTP
 Outcome Projection owns 24 typed decisions and four exact dispositions, calls
@@ -3145,8 +3144,54 @@ reviewed now.
 Bespoke package scans, retaining deleted checker wrappers, invoking Python
 suites from Bash callers, silently dropping row-32/row-33 calls, weakening
 graph freshness, or treating all callers as one owner are invalid options.
-No package is admitted until one option is selected and its exact write set,
-tests, checkpoint boundary, and caller dispositions are frozen.
+Option 1 is selected. No semantic package is admitted until M6-EDGE-2 passes.
+
+#### Slice M6-EDGE-2: Exact Incident-Edge Authority
+
+**Status:** `Active`
+
+**Goal:** make package authority cover every executable graph edge incident to
+the package checker, preventing both undeclared prerequisites and retained
+callers that reference a deleted checker.
+
+**Allowed write set:**
+
+- `tools/standards_verifier/standards_verifier/checks/edge_dispositions.py`
+- `tools/standards_verifier/tests/test_edge_dispositions.py`
+- `tools/standards_verifier/README.md`
+- this child plan, its ledger, issue register, and checker-inventory report
+- the parent standards-library restructure plan
+
+Package manifests, edge rows, suite registry/configuration, generated graph,
+canonical and legacy standards, semantic fixtures/checkers, helpers, schemas,
+lockfiles, and workflow artifacts remain read-only.
+
+**Canonical contract:** preserve the existing manifest header and infer edge
+direction from whether the package checker equals `source` or `target`. Exact
+identity is `(edge_type, source, target)`. An admitted `edge-dispositions`
+package must declare every current incident executable edge once and no absent
+edge. An admitted `edge-free` package must have no incident executable edge.
+Accepted packages retain historical rows only when their checker and every
+incident graph edge are absent.
+
+For `independent-gate` and `external-owned-artifact`, replacement evidence must
+equal the retained endpoint opposite the package checker. Existing outbound
+rows therefore remain valid; inbound retained callers use the same typed
+contract without a new disposition, schema version, compatibility parser, or
+direction default. A row that contains neither package endpoint is invalid.
+
+**Focused evidence:** preserve every current outbound and edge-free test, then
+add positive inbound retained-gate coverage and typed negative coverage for an
+omitted inbound edge, fabricated/absent inbound row, wrong retained endpoint,
+accepted dangling inbound edge, and edge-free package with an inbound edge.
+No test may rely only on a removed-path scan.
+
+**Acceptance gate:** focused edge-disposition tests, all engine tests, Python
+compilation, the registered edge contract, all declarative suites, graph
+freshness, both plan checks, diff/whitespace validation, and one complete mixed
+Bash checkpoint pass. Any manifest/schema rewrite, accepted historical-row
+change, graph-generation change, owner inference, arbitrary execution, or
+failure requiring a package-specific exception is a re-plan trigger.
 
 **Tasks:**
 
