@@ -90,6 +90,21 @@ its declared dependency manifest without duplicating its cardinality. Row 46
 retains the exact Rust profile consumer and historical 33-to-34 event without
 asserting a present total.
 
+R1 implementation exposed a generated-evidence write-set conflict. The
+committed recovery plan creates documentation-inbound references to the three
+repaired checker paths, and the exact computed-consumer identity creates a new
+executable reference. VE044 must reconcile the generated structure inventory
+and dependency graph before R1 can satisfy freshness; count semantics and both
+README manifests remain unchanged.
+
+VE044 Option 1 is selected. The canonical generator updates the structure
+inventory and all three graph artifacts atomically; exact review must show only
+derived relationship changes from the accepted plan and R1 checker evidence.
+
+R1 and VE044 are accepted. Exact membership remains canonical, current report
+counts are derived, and the regenerated graph is fresh at 170 verifiers / 175
+nodes / 855 edges / 171 components. All 170 canonical mixed entrypoints pass.
+
 ### VE043-E1: Count-Safe Engine Contract
 
 Remove `row_count` from the table schema with no compatibility parser. Replace

@@ -78,7 +78,8 @@ an executable evaluator.
 Measured later families add:
 
 - exact TSV row/set/order/count checks;
-- Markdown heading and repository-relative route checks;
+- Markdown heading, repository-relative route, and local-link closure checks;
+- strict aggregate newline budgets against typed metric tables;
 - metadata ownership and dependency graph checks;
 - disposition and owner-map agreement;
 - plan lifecycle and acceptance-claim checks; and
@@ -144,6 +145,14 @@ positive, negative, malformed-input, and typed-diagnostic tests.
 A custom Python check is the last option. It must be side-effect-free, directly
 registered, typed, unit-tested, and owned by a named package. The engine never
 loads arbitrary module paths from suite configuration.
+
+Routing evidence is split into two composable mechanics. `markdown_links`
+resolves only explicit inline local destinations from configured UTF-8 files,
+with repository containment and typed missing-target diagnostics. `line_budget`
+counts raw newline bytes from configured files and compares them to one unique
+positive metric through fixed strict integer-ratio arithmetic. Neither check
+contains a route name, policy threshold, expression evaluator, network client,
+normalizer, callback, or command surface.
 
 ## Migration Sequence
 

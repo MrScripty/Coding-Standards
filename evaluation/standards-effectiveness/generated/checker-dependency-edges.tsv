@@ -249,6 +249,7 @@ executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-3
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-34-decomposition.sh	evaluation/standards-effectiveness/verify-frontend-testing-lineage.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-34-decomposition.sh	evaluation/standards-effectiveness/verify-frontend-typescript-tooling.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-34-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
+executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh	evaluation/standards-effectiveness/verify-commit-authority.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh	evaluation/standards-effectiveness/verify-contract-ownership.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-35-decomposition.sh	evaluation/standards-effectiveness/verify-root-index-closure.sh

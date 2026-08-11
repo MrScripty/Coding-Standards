@@ -12,10 +12,29 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement delegated VE043-R1, removing duplicated mutable README
-totals without changing either manifest; then close M6-RC1 through the
-repository-owned fail-fast mixed runner. Release Procedure, S1, and the Rust
-Binding train remain unadmitted.
+**Next slice:** implement delegated VE043-E1 by removing declarative table
+`row_count`, preserving all eight suite contracts through exact projections,
+and adding bounded generic `reference_inventory`. Release Procedure, S1, and
+the Rust Binding train remain unadmitted.
+
+VE043-R1 focused behavior and all 123 engine tests pass, but generated
+freshness exposes a write-set contradiction. The committed recovery plan adds
+documentation references to all three repaired checkers, and row 35's exact
+computed-consumer identity adds an executable reference to
+`verify-commit-authority.sh`. The current R1 contract requires freshness while
+keeping all generated artifacts read-only. VE044 recommends applying the
+existing VE018 rule and reconciling all four generated artifacts atomically;
+no generated evidence has changed pending selection.
+
+VE044 Option 1 is selected. The four artifacts are derived evidence in the R1
+write set and must be generator-produced, exact-diff reviewed, and accepted in
+the same commit as the relationship changes that make them stale.
+
+VE043-R1, VE044, and M6-RC1 are accepted. The generic routing checks pass 24
+focused and all 123 engine tests; all 106 declarative suites pass. Generated
+evidence is fresh at 170 verifiers / 175 nodes / 855 edges / 171 components,
+and the canonical fail-fast suite passes all 170 Bash entrypoints. S1 remains
+separately unadmitted.
 
 The M6-RC1 implementation passes focused, engine, declarative, graph, plan, and
 diff gates but is not accepted. The canonical fail-fast mixed runner exposes a

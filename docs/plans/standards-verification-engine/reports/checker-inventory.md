@@ -1728,3 +1728,24 @@ adds bounded `reference_inventory` set derivation. A 359-candidate numeric scan
 is an audit queue, not a blanket defect count; VE043-A1 classifies each by
 semantic kind before owner-local migration. README checker deletion remains
 blocked on the later VE043-P1 incident-edge audit.
+
+### VE043-R1 Generated-Artifact Re-plan Trigger
+
+The focused R1 behavior and all 123 engine tests pass, but exact generated
+inventory freshness fails. The committed VE043 plan is now a documentation
+inbound source for the three R1 checkers, and row 35's exact computed-consumer
+identity creates an executable reference to `verify-commit-authority.sh`.
+Original checker line counts were preserved, proving the delta is relationship
+evidence rather than incidental line-count churn.
+
+The admitted R1 write set incorrectly keeps the structure inventory and three
+dependency-graph artifacts read-only. Recommended VE044 Option 1 applies the
+existing VE018 rule: include and regenerate all four generated artifacts in the
+same accepted slice. No artifact has been changed pending that decision.
+
+VE044 Option 1 is accepted. The generated diff contains the intended row-35 to
+commit-authority executable reference, its node/component projections, and
+documentation-inbound evidence from the accepted plan. Freshness passes at 170
+Bash verifiers / 175 nodes / 855 edges / 171 components. R1 focused checks, all
+123 engine tests, all 106 declarative suites, and all 170 canonical mixed
+entrypoints pass; M6-RC1 is accepted and VE043-E1 is next.

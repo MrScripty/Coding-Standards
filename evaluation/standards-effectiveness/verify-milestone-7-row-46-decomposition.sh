@@ -89,8 +89,8 @@ adoption="$R/languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md"
 [[ -x "$S/verify-rust-profile-authority-closure.sh" ]]
 [[ -x "$S/verify-rust-adoption-notes-retirement.sh" ]]
 [[ -x "$S/verify-rust-index-closure.sh" ]]
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 33 ]]
 [[ "$(awk -F '\t' '$1 == "evaluation/standards-effectiveness/verify-rust-profile-authority-closure.sh" { print $2 FS $3 }' "$M")" == $'none\trust-profile-index' ]]
+
 
 rg -F -q '`7.4b35b` (`Accepted`)' "$P"
 rg -F -q '`7.4b36a` (`Accepted`)' "$P"

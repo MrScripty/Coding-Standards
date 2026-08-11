@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-RC1 closing-checkpoint integrity re-plan
+**Current phase:** Milestone 6: VE043-E1 count-safe engine contract
 
-**Next slice:** implement admitted VE043-R1, removing duplicated mutable README
-totals without changing either manifest; then close M6-RC1 through the
-repository-owned fail-fast 170-entrypoint runner. S1 remains unadmitted.
+**Next slice:** implement admitted VE043-E1: remove `row_count`, preserve all
+eight suite contracts through exact projections, and add the bounded generic
+`reference_inventory` assertion. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3354,7 +3354,7 @@ Removed-path proof, graph freshness, diff integrity, and the complete mixed
 
 #### Post-M6-N-W1 Candidate Re-plan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 The clean accepted graph contains 34 metadata-helper consumers. The shallowest
 candidate that uses only existing declarative primitives is Release Procedure,
@@ -3413,7 +3413,7 @@ unchanged and unadmitted.
 
 #### M6-RC1: Routing Evidence Primitives
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Goal:** add two independent, typed, side-effect-free declarative assertions
 that preserve S1's currently unrepresentable local-link and routed-context
@@ -3483,7 +3483,7 @@ changed during admission.
 
 #### M6-RC1 Closing-Checkpoint Integrity Re-plan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 Implementation of the two admitted generic assertions is complete and passes
 24 focused routing tests, all 123 engine tests, Python compilation, all 106
@@ -3548,7 +3548,7 @@ The measured taxonomy and execution sequence are in the
 
 ##### VE043-R1: Baseline Authority Repair
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Goal:** restore a trustworthy fail-fast baseline and accept the already
 implemented M6-RC1 capability without preserving any mutable README total as a
@@ -3590,7 +3590,7 @@ future slices.
 
 ##### VE043-E1: Count-Safe Engine Contract
 
-**Status:** `Planned`
+**Status:** `Active`
 
 After VE043-R1 and M6-RC1 acceptance, remove `row_count` from the strict table
 schema and reject it as unknown with no compatibility parsing. Remove all eight
@@ -3613,6 +3613,59 @@ lockfiles, and workflows remain read-only.
 tests, Python compilation, all declarative suites, graph freshness, both plan
 checks, diff/read-only proof, and one canonical fail-fast complete-suite
 checkpoint pass.
+
+##### VE043-R1 Generated-Artifact Re-plan Trigger
+
+**Status:** `Accepted`
+
+The focused R1 checkers pass, as do all 24 M6-RC1 routing tests and all 123
+engine tests. The declarative launcher stops at generated-inventory freshness.
+The committed VE043 plan adds documentation references to the three repaired
+checker paths, and R1's required exact computed-consumer identity adds a new
+executable reference from row 35 to `verify-commit-authority.sh`. The current
+generated structure inventory and dependency graph therefore cannot remain
+read-only while R1 also requires exact graph freshness. Preserving checker line
+counts does not resolve these changed inbound relationships.
+
+**Option 1 - Reconcile generated evidence atomically (`Recommended`):** add the
+generated checker structure inventory and three dependency-graph TSVs to R1's
+bounded write set, regenerate them once from the accepted implementation, and
+review the exact diff. This follows VE018, keeps generated evidence truthful,
+and creates no second authority or fallback.
+
+**Option 2 - Obscure references to preserve the old graph:** rewrite plan and
+checker text so exact checker basenames are assembled indirectly or omitted.
+This can avoid measured reference edges, but makes ownership evidence less
+legible and causes the graph to under-report an intentional executable
+reference. It is not recommended.
+
+**Option 3 - Change graph collection semantics:** exclude active plans or
+comparison-only checker identities from generated inbound evidence. This is a
+shared engine contract change requiring new classification semantics, tests,
+and a separate checkpoint. Choose it only if the repository decides those
+references should never be graph evidence; it is disproportionate to R1.
+
+**Rejected:** waive freshness, hand-edit only selected generated rows, remove
+the exact identity assertion, or split regeneration into a stale intermediate
+commit. Select and admit one option before changing generated artifacts or
+running the canonical complete-suite acceptance gate.
+
+**Decision:** Option 1 is selected. Add
+`generated/checker-structure-inventory.tsv`,
+`generated/checker-dependency-nodes.tsv`,
+`generated/checker-dependency-edges.tsv`, and
+`generated/checker-dependency-components.tsv` beneath the standards-
+effectiveness evaluation directory to VE043-R1's bounded write set. These
+files are regenerated together by the canonical generator and reviewed as
+derived evidence; no hand-edited row, graph-semantic change, or fallback is
+authorized.
+
+**Acceptance evidence:** the canonical generator produces a fresh 170-verifier
+/ 175-node / 855-edge / 171-component graph. Exact review shows one intentional
+executable-reference edge and its derived node/component updates plus plan-
+documentation inbound evidence. Focused R1 checks, 24 routing tests, all 123
+engine tests, Python compilation, all 106 declarative suites, both plan checks,
+diff integrity, and all 170 canonical mixed entrypoints pass.
 
 ##### VE043-A1 And VE043-P1: Audit And Package Admission
 

@@ -54,6 +54,12 @@ of the shared checker must remain enumerated and pass before acceptance. Every
 remaining verifier containing `README.md` must have exactly one file-level root
 and non-root classification.
 
+Those dependency cardinalities record the historical row-35 acceptance state;
+they are not current repository invariants. As checkers retire or migrate, the
+live dependency and consumer manifests shrink. Current totals are derived from
+the exact manifest membership, while the transitive and computed dependency
+classes retain exact identity assertions.
+
 Child `35.2` may touch the root README, a root-index closure fixture and
 verifier, the remaining three exact dispositions, the row checker, plan, and
 ledger. Shared manifests, dispositions, plan, ledger, and README remain serial

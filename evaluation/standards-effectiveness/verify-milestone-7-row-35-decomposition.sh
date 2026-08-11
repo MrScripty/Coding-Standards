@@ -25,19 +25,18 @@ mapfile -t validated < <(awk -F '\t' 'NR > 1 { print $1 }' "$V")
 [[ "$(awk -F '\t' '$1 >= "STD-0001" && $1 <= "STD-0005" && $2 != "STANDARDS-ROUTER.md" { n++ } END { print n+0 }' "$V")" -eq 0 ]]
 [[ "$(awk -F '\t' '$1 == "STD-0006" { print $2 FS $3 }' "$V")" == $'LICENSE\tindex' ]]
 
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$A")" -eq 17 ]]
 [[ "$(awk -F '\t' 'NR > 1 && ($2 != "root-readme-route-or-catalog-assertion" && $2 != "transitive-root-readme-route-assertion" && $2 != "computed-root-readme-route-assertion") { n++ } END { print n+0 }' "$A")" -eq 0 ]]
 [[ "$(awk -F '\t' 'NR > 1 && ($3 != "canonical-router-or-owner-evidence" || NF != 3) { n++ } END { print n+0 }' "$A")" -eq 0 ]]
-[[ "$(awk -F '\t' '$2 == "root-readme-route-or-catalog-assertion" { n++ } END { print n+0 }' "$A")" -eq 15 ]]
-[[ "$(awk -F '\t' '$2 == "transitive-root-readme-route-assertion" { n++ } END { print n+0 }' "$A")" -eq 1 ]]
-[[ "$(awk -F '\t' '$2 == "computed-root-readme-route-assertion" { n++ } END { print n+0 }' "$A")" -eq 1 ]]
+[[ "$(awk -F '\t' '$2 == "transitive-root-readme-route-assertion" { print $1 }' "$A")" == \
+  evaluation/standards-effectiveness/verify-contract-ownership.sh ]]
+[[ "$(awk -F '\t' '$2 == "computed-root-readme-route-assertion" { print $1 }' "$A")" == \
+  evaluation/standards-effectiveness/verify-commit-authority.sh ]]
 [[ "$(awk -F '\t' 'NR > 1 { print $1 }' "$A" | sort | uniq -d | wc -l)" -eq 0 ]]
 while IFS=$'\t' read -r file current replacement; do
   [[ "$file" == file ]] && continue
   [[ -f "$R/$file" ]]
 done < "$A"
 
-[[ "$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")" -eq 26 ]]
 "$S/verify-root-readme-consumer-audit.sh"
 
 mapfile -t callers < <(awk -F '\t' 'NR > 1 { print $1 }' "$C" | sort)
@@ -67,5 +66,6 @@ rg -F -q '`7.4b25c` (`Accepted`)' "$P"
 "$S/verify-root-index-closure.sh"
 "$S/verify-root-router-evidence.sh"
 "$S/verify-milestone-7-execution-train.sh"
-printf 'Milestone 7 row-35 decomposition passed: 6 IDs across 2 serial closure children, 17 frozen checker dependencies, 26 classified README consumers, and %d shared-checker callers\n' \
-  "${#callers[@]}"
+dependency_count="$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$A")" consumer_count="$(awk -F '\t' 'NR > 1 { n++ } END { print n+0 }' "$M")"
+printf 'Milestone 7 row-35 decomposition passed: 6 IDs across 2 serial closure children, %d current checker dependencies, %d classified README consumers, and %d shared-checker callers\n' \
+  "$dependency_count" "$consumer_count" "${#callers[@]}"

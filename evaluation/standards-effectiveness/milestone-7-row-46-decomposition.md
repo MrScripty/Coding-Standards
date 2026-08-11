@@ -45,8 +45,9 @@ delegation; it does not copy specialized rules into the base profile.
 
 1. `46.1` removes legacy-authority wording from the canonical Rust profile,
    adds typed no-legacy routing, creates focused profile-authority evidence,
-   and registers that verifier as the 34th exact README consumer. Because this
-   amends a shared audit contract, the child runs the complete fail-fast suite.
+   and registers that verifier in the exact README-consumer inventory. At the
+   time of acceptance it was the 34th consumer. Because this amended a shared
+   audit contract, the child ran the complete fail-fast suite.
 2. `46.2` deletes the obsolete adoption-notes reference, removes its exact
    corpus row, and adds retirement evidence proving no active file or corpus
    route remains. Generated baseline inventories remain frozen history.
@@ -62,12 +63,16 @@ change a source, owner, disposition, corpus row, or consumer manifest.
 
 `verify-rust-profile-authority-closure.sh` will directly inspect the canonical
 Rust profile README and is the only new direct README consumer. It receives the
-existing `rust-profile-index` classification, increasing the exact inventory
-from 33 to 34. The adoption-retirement and Rust-index verifiers consume that
-accepted checker rather than creating additional direct README consumers.
+existing `rust-profile-index` classification. The historical acceptance event
+increased the exact inventory from 33 to 34. The adoption-retirement and
+Rust-index verifiers consume that accepted checker rather than creating
+additional direct README consumers.
 
-The consumer manifest, audit schema/count, and historical row-35 count remain
-serial integration-owner files. Existing classifications are unchanged.
+The consumer manifest, audit schema, and historical row-35 evidence remain
+serial integration-owner files. The live manifest may shrink as checkers retire
+or migrate. The root consumer audit exclusively owns current membership and
+derives its current count; row 46 owns only the exact introduced consumer
+identity and classification. Existing classifications are unchanged.
 
 ## Bounded Write Sets
 
@@ -89,7 +94,8 @@ repositories remain read-only.
 
 Planning requires exact row and P38 identity, four undisposed source IDs,
 current legacy-authority and stale-reference detection, canonical owner
-metadata, prospective verifier uniqueness, the frozen 33-consumer baseline,
+metadata, prospective verifier uniqueness, the historical 33-to-34 consumer
+transition and the current exact root-consumer audit,
 accepted Rust API, Async, Unsafe, Tooling, Router, and execution-train evidence,
 plan structure, shell syntax, and diff integrity.
 

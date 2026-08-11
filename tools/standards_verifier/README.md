@@ -67,6 +67,23 @@ with inline expected TOML text encoded as UTF-8. It performs no newline,
 whitespace, Unicode, or encoding normalization and accepts only `id`, `type`,
 `path`, and `expected` fields.
 
+The `markdown_links` check accepts one explicit non-empty `paths` list and
+requires every inline repository-local Markdown destination to exist relative
+to its containing UTF-8 document. It skips only `http://`, `https://`, and
+`mailto:` destinations, removes fragments before resolution, and treats a
+fragment-only destination as the containing file. Absolute targets and parent
+or symlink escapes are invalid; missing sources or targets are unavailable. It
+does not fetch URLs, validate anchors, decode destinations, parse reference
+links, infer files, or normalize content.
+
+The `line_budget` check counts raw newline bytes across one explicit non-empty
+`paths` list. It reads one exact two-column `metric`/`value` TSV, requires one
+unique configured key with a positive ASCII decimal value, and applies a
+strict integer ratio: `observed * maximum_denominator < baseline *
+maximum_numerator`. Both ratio values are required positive integers and
+equality fails. The check has no expression language, inferred metric, default
+ratio, unit conversion, command action, or content normalization.
+
 The `metadata_graph` check parses the nine canonical Markdown metadata fields
 without global normalization. Direct mode accepts one non-empty `paths` list
 and validates the selected module graph. Fixture-corpus mode accepts one

@@ -2389,3 +2389,44 @@
   will audit exact callers and owners for the README consumer checker and rows
   35, 45, and 46 before package admission. No Bash bridge, silent caller
   deletion, dual authority, inferred set, or fallback is authorized.
+
+## 2026-08-11 - VE043-R1 Generated-Artifact Re-plan Trigger
+
+- Implemented the bounded README count-authority repair. Shell syntax and the
+  root audit, rows 35/45/46, and all three row-46 Rust caller paths pass.
+- All 24 routing tests and all 123 engine tests pass. The declarative launcher
+  then fails fast at generated-inventory freshness before suite execution.
+- Exact comparison shows the committed VE043 plan introduced documentation
+  inbound references to the three repaired checkers. Row 35's required exact
+  computed-consumer identity also introduces an executable reference to
+  `verify-commit-authority.sh`. Preserving the original 43/71/107 checker line
+  counts does not remove those relationship changes.
+- The R1 contract simultaneously requires graph freshness and keeps the
+  generated structure inventory plus three graph TSVs read-only. VE044 records
+  three options. Recommended Option 1 reconciles all four generated artifacts
+  atomically under the already accepted VE018 rule. No generated artifact has
+  been changed, and the complete suite has not been run on a stale graph.
+- Option 1 selected: all four generated artifacts join R1's bounded write set
+  and must be regenerated together by the canonical generator. Exact review,
+  freshness, and the complete suite remain required; hand edits and graph-
+  semantic changes remain prohibited.
+
+## 2026-08-11 - VE043-R1, VE044, And M6-RC1 Acceptance
+
+- Removed mutable live totals from the root README audit and rows 35/46 while
+  preserving exact manifest equality, classification domains, special
+  identities, caller coverage, historical 33-to-34 evidence, and no-fallback
+  behavior. Current reporting derives 17 dependency and 26 consumer rows.
+- Accepted generic independent `markdown_links` and `line_budget` assertions
+  with 24 focused cases and no S1-specific policy, commands, expressions,
+  network access, normalization, inferred defaults, wrappers, or fallback.
+- VE044 Option 1 regenerated all four derived artifacts atomically. Exact review
+  shows one new row-35 executable reference to commit authority and resulting
+  node/component changes; plan references update documentation-inbound fields.
+- Verification passes shell syntax, static mutable-literal absence, focused R1
+  paths, 24 routing tests, all 123 engine tests, Python compilation, all 106
+  declarative suites, fresh 170-verifier / 175-node / 855-edge / 171-component
+  evidence, both plan checks, diff integrity, and the canonical fail-fast suite
+  across all 170 Bash entrypoints.
+- VE043-R1, VE044, and M6-RC1 are accepted. Next slice is VE043-E1; S1 remains
+  unadmitted.
