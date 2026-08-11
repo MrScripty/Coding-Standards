@@ -12,10 +12,26 @@ historical identities but do not co-own a changing global total.
 | Class | Representation | Decision |
 | --- | --- | --- |
 | Mutable aggregate | Exact observed-versus-manifest set equality; derive count for reporting | Literal expected totals are prohibited |
-| Declared finite contract | Exact expected row or key projection | Derive cardinality from the declared set |
+| Declared finite contract | Explicit schema framing or arity, fixed identity or status protocol, or exact expected member projection | Derive cardinality and validation from the declared contract |
 | Historical snapshot | Immutable versioned rows or exact projection | Do not replace membership with a scalar total |
 | Structural multiplicity | Empty, unique, exactly one selected identity | `0` and `1` operators remain valid |
 | Policy threshold | Named ratio, limit, or budget owned by policy data | Allowed when the number is itself the contract |
+
+Classify from authoritative purpose, never from literal value, operator, source
+language, filename, or graph relationship. When more than one description
+appears applicable, use this precedence:
+
+1. `policy-threshold` when the number itself is named normative policy;
+2. `historical-snapshot` when immutable completed-state evidence owns it;
+3. `declared-finite-contract` when an explicit schema, identity, enumerated set,
+   framing rule, or status protocol owns it;
+4. `structural-multiplicity` when it expresses only zero/one presence, absence,
+   uniqueness, or exactly-one selection; and
+5. `mutable-aggregate` when it summarizes a changing current inventory.
+
+Every selected class requires positive evidence. The last item is not a default.
+If no class is established, classification stops for explicit exception
+admission instead of inferring from syntax or choosing the nearest category.
 
 `line_budget` numerator and denominator values are explicit policy thresholds,
 not inventory cardinalities. They remain valid. A table's number of current
@@ -135,9 +151,9 @@ recovery machine-generates one immutable verifier-scoped lexical candidate
 snapshot and derives its cardinality. Candidate identity, path, expression,
 source diagnostics, fingerprint, owner, normal disposition, progress, and
 totals remain derived. A separate reviewed layer records only generated
-candidate identity, irreducible taxonomy class, and optional rationale for an
-explicit exception. Exact coverage and lifecycle drift are verified; no owner
-migration is admitted before generated baseline and classification acceptance.
+candidate identity and irreducible taxonomy class. Exact coverage, class
+domain, lifecycle drift, and exception absence are verified; no owner migration
+is admitted before generated baseline and classification acceptance.
 
 G1 implements the generated baseline with two fixed lexical matcher families:
 shell numeric operators and symbolic comparison operators with at least one
@@ -197,6 +213,12 @@ recommended recovery retains five compact classes but classifies by
 authority-first precedence: policy threshold, immutable history, explicit
 finite schema/identity/protocol contract, zero/one presence or uniqueness, then
 current mutable aggregate. Syntax does not select the class.
+
+Taxonomy Option 1 is selected with positive-evidence enforcement. The canonical
+procedure above resolves overlaps while retaining explicit per-candidate
+review. Mutable aggregate requires an observed changing current inventory and
+cannot absorb an unknown case. A candidate with no established class triggers
+exception admission rather than receiving a default.
 
 ### VE043-P1: README Consumer Package Audit
 

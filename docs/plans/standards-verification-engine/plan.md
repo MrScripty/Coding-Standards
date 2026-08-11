@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-C1 taxonomy-precedence re-plan
+**Current phase:** Milestone 6: VE043-A1-C1 semantic coverage
 
-**Next slice:** select a mutually exclusive taxonomy decision procedure before
-classifying candidates. Do not resolve overlapping classes by reviewer
-convention, literal shape, or checker name. S1 remains unadmitted.
+**Next slice:** resume explicit candidate classification with the accepted
+authority-first procedure. Stop if authoritative context cannot establish one
+class; do not use syntax, checker name, or mutable aggregate as a default. S1
+remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3716,10 +3717,10 @@ the current canonical Bash verifier paths from generated inventory and apply
 one documented conservative lexical extraction contract. Machine-generate an
 immutable baseline containing candidate identity, path, exact expression,
 occurrence/source diagnostics, and fingerprint. Derive its cardinality. Keep a
-separate reviewed decision layer containing only generated candidate identity,
-one semantic taxonomy class, and an optional rationale for an explicit
-exception. Resolve owners from canonical ownership/package records, map normal
-dispositions from the taxonomy, and derive progress from baseline, current
+separate reviewed decision layer containing only generated candidate identity
+and one semantic taxonomy class. Resolve owners from canonical
+ownership/package records, map normal dispositions from the taxonomy, and
+derive progress from baseline, current
 inventory, and accepted package evidence. This provides complete current scope
 without manually maintaining observed facts or inferring semantic meaning.
 
@@ -3737,10 +3738,10 @@ the admitted no-parser boundary and is rejected.
 
 **Decision:** Option 2 is selected with generated-fact and reviewed-decision
 authority separated. Candidate rows and counts are never hand-authored. The
-reviewed layer states only irreducible semantic class and an optional exception
-rationale; it does not duplicate path, location, expression, fingerprint,
-owner, standard disposition, package, progress, or total. Exact candidate-ID
-coverage, class domain, and exception requirements are verified mechanically.
+reviewed layer states only irreducible semantic class; it does not duplicate
+path, location, expression, fingerprint, owner, standard disposition, package,
+progress, or total. Exact candidate-ID
+coverage, class domain, and exception absence are verified mechanically.
 
 ##### VE043-A1 Derived Audit Admission
 
@@ -3755,11 +3756,11 @@ The selected recovery executes in three serial, independently verified slices:
    content-based identity plus review diagnostics. The historical 359 is not an
    expected value. The generated file is never hand-edited.
 2. **VE043-A1-C1 semantic coverage:** add one reviewed decision table containing
-   only candidate identity, taxonomy class, and optional exception rationale.
+   only candidate identity and taxonomy class.
    Require exact one-to-one coverage of the generated baseline and derive the
    normal migration action from the taxonomy. Owner is intentionally outside
-   the C1 schema. Missing, duplicate, unknown-class, and unjustified-exception
-   outcomes are typed diagnostics.
+   the C1 schema. Missing, duplicate, and unknown-class outcomes are typed
+   diagnostics.
 3. **VE043-A1-L1 lifecycle guard:** compare current derived candidates with the
    immutable baseline and accepted package evidence. Reject a new candidate or
    an unexplained disappearance; accept disappearance only through an accepted
@@ -3927,7 +3928,7 @@ authority, and verification before any exception is recorded.
 
 ##### VE043-A1-C1 Taxonomy-Precedence Re-plan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 The first bounded semantic-review batch proves that the five taxonomy rows are
 not yet a mutually exclusive decision procedure. A historical fixture count of
@@ -3968,6 +3969,14 @@ does not derive a class mechanically. C1 remains explicit per-candidate review;
 the engine verifies only exact identity coverage and the closed class domain.
 If a candidate still lacks one result after precedence, it triggers the already
 admitted exception re-plan rather than receiving a default.
+
+**Decision:** Option 1 is selected with positive-evidence enforcement. Review
+tests classes in precedence order, but a class is selected only when its own
+authority condition is established. `mutable-aggregate` is not an `otherwise`
+default; it requires evidence that the literal summarizes a changing current
+inventory. If no class has positive evidence, review stops for the admitted
+exception re-plan. The procedure records one semantic decision and does not
+infer it from a literal, operator, filename, or graph relationship.
 
 **Tasks:**
 

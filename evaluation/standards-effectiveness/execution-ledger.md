@@ -10335,3 +10335,29 @@ and this ledger only.
 
 **Next slice:** select one taxonomy-precedence option before resuming semantic
 review.
+
+## 2026-08-11 VE043-A1-C1 Taxonomy-Precedence Admission
+
+**Outcome:** Option 1 accepted with positive-evidence enforcement.
+
+The five classes retain their identifiers. Declared finite contract now covers
+explicit schema framing and arity, fixed identity, enumerated membership, and
+status protocol. Review applies authority-first precedence: policy threshold,
+immutable history, explicit finite contract, zero/one multiplicity, then
+changing current aggregate.
+
+Every class requires positive evidence. Mutable aggregate is not an `otherwise`
+default, and a candidate with no established class stops for the accepted
+exception re-plan.
+
+**No-fallback result:** no syntax classifier, reviewer convention, default
+class, extra taxonomy tag, candidate row, owner, package, checker, engine, or
+generated artifact is introduced.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** resume explicit two-column C1 classification and stop on the
+first candidate without positive class evidence.
