@@ -175,6 +175,14 @@ candidate disappearance to an accepted package with an explicit canonical
 owner. This preserves graph relationships without a duplicate mutable owner
 map or an inferred fallback.
 
+C1 schema preflight reaches a second re-plan trigger. Repeating an empty
+exception-rationale cell on every normal classification row adds manually
+maintained data, while existing generic assertions cannot enforce its
+conditional authority. The recommended recovery uses only candidate identity
+and semantic class. A separate exception artifact and exact join are admitted
+only if semantic review discovers a real taxonomy exception; absence of that
+artifact means no exception is authorized.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge

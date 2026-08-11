@@ -12,10 +12,11 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement delegated VE043-A1-C1 exact semantic-class coverage
-with existing generic table and relation assertions. Do not add an owner field,
-infer an owner, edit a checker, or admit an owner package. Release Procedure,
-S1, and the Rust Binding train remain unadmitted.
+**Next slice:** resolve delegated VE043-A1-C1 exception representation. Select
+whether classification repeats an optional rationale column or uses an exact
+two-column table with separately admitted exceptions only when observed. Do not
+create classification data before selection. Release Procedure, S1, and the
+Rust Binding train remain unadmitted.
 
 VE043-A1-C1 has reached a re-plan trigger. Exact preflight finds no overlap
 between current candidate-bearing verifier paths and already migrated checker
@@ -30,6 +31,13 @@ with migration-package admission, and lifecycle acceptance requires an explicit
 package-owner join. The classification table therefore contains only candidate
 identity, semantic class, and optional explicit-exception rationale; no second
 owner authority or inferred fallback is introduced.
+
+VE043-A1-C1 exception-schema preflight finds that the planned optional rationale
+column would repeat empty data and is not conditionally enforceable by current
+generic assertions. The recommended design records only candidate identity and
+semantic class. A separate exception artifact is admitted only when an observed
+candidate requires it, preventing hypothetical exceptions from creating a
+permanent weak field or one-use engine primitive.
 
 VE043-A1-G1 is accepted. Its fixed lexical contract derives an immutable
 708-row baseline from the canonical 170-verifier scope; both cardinalities are

@@ -10262,3 +10262,26 @@ unchanged.
 
 **Next slice:** implement C1 exact semantic-class coverage without owner,
 package, checker, generated-artifact, or standards-source edits.
+
+## 2026-08-11 VE043-A1-C1 Exception-Schema Re-plan Trigger
+
+**Outcome:** Re-plan required before classification data.
+
+The admitted optional rationale column would repeat an empty field on every
+normal candidate. Existing generic table assertions can enforce non-empty
+values and non-empty literal domains, but cannot express “empty unless a
+separately admitted exception” without a new primitive. No current evidence
+demonstrates such an exception or a second coherent consumer for that primitive.
+
+**No-fallback result:** no classification row, default rationale, exception
+sentinel, custom validator, generic one-use primitive, owner, package, checker,
+or generated artifact was added. The recommended option is a two-column exact
+classification table; a real exception must trigger separate artifact and join
+admission before it can be recorded.
+
+**Bounded write set:** active and parent plans, issues, count-authority report,
+and this ledger only.
+
+**Verification:** both plan checks and diff integrity.
+
+**Next slice:** select one exception-schema option before creating C1 evidence.

@@ -2,12 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-C1 semantic coverage
+**Current phase:** Milestone 6: VE043-A1-C1 exception-schema re-plan
 
-**Next slice:** implement exact reviewed semantic-class coverage with the
-existing generic table and relation assertions. Do not add an owner field,
-infer an owner, edit a checker, or admit an owner package. S1 remains
-unadmitted.
+**Next slice:** select whether C1 retains a repeated optional rationale column
+or uses a two-column classification table with exceptions admitted separately
+only when evidence requires one. Do not create classification data before this
+schema decision. S1 remains unadmitted.
 
 **Acceptance status:** `pending`
 
@@ -3878,6 +3878,48 @@ declarative suite passes with focused positive and negative fixture evidence;
 all declarative suites, both plan checks, generated graph freshness, Python
 compilation, engine tests, and diff integrity pass. C1 does not authorize a
 checker or owner edit.
+
+##### VE043-A1-C1 Exception-Schema Re-plan Trigger
+
+**Status:** `Active`
+
+Preflight of the generic table contract shows that the admitted optional
+`exception_rationale` column would be empty on every normal row. The existing
+`table` assertion can require values to be non-empty or belong to a non-empty
+literal domain, but cannot require a field to remain empty unless a separately
+admitted exception exists. Keeping the column would therefore repeat empty data
+without mechanically enforcing its authority. Adding a bespoke numeric check or
+a generic conditional-empty primitive used only here would increase engine
+surface before evidence demonstrates a reusable need.
+
+**Option 1 - Keep the three-column table and add an empty-field primitive:**
+enforce that rationale is empty for current rows and later extend the contract
+for admitted exceptions. This is mechanically strong but adds a new primitive
+for one anticipated use and conflicts with the capability-admission threshold.
+
+**Option 2 - Keep the three-column table with manual review only:** retain the
+blank column and inspect it outside the engine. This is concise to implement but
+leaves accepted evidence less strict than its declared contract and is
+rejected.
+
+**Option 3 - Use a two-column classification table and admit exceptions only
+when observed (`Recommended`):** C1 records exactly `candidate_id` and
+`semantic_class`. If review finds a candidate that cannot use the five-class
+taxonomy, stop and admit a separate exception artifact and its exact candidate
+join before recording the exception. This removes repeated empty values, needs
+no new assertion, and prevents hypothetical exceptions from weakening current
+coverage.
+
+**Option 4 - Require rationale on every row:** this makes every classification
+self-describing but duplicates source evidence and taxonomy meaning across the
+entire baseline. It adds review and maintenance cost without increasing
+authority and is rejected.
+
+**Recommended boundary:** select Option 3 and change C1 acceptance to an exact
+two-column table. Absence of an exception artifact means no exception is
+admitted, not that a default rationale applies. Discovery of a real exception
+is a typed re-plan trigger; it cannot be represented through an unknown class,
+free-form fallback, or silently non-empty field.
 
 **Tasks:**
 
