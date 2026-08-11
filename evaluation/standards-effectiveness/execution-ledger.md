@@ -10361,3 +10361,27 @@ and this ledger only.
 
 **Next slice:** resume explicit two-column C1 classification and stop on the
 first candidate without positive class evidence.
+
+## 2026-08-11 VE043-A1-C1 Semantic Coverage Acceptance
+
+**Outcome:** C1 accepted; L1 lifecycle preflight is next.
+
+Every generated numeric-comparison candidate has one explicit reviewed class
+under the accepted authority-first taxonomy. The two-column decision table is
+joined to the immutable generated baseline by candidate-ID set equality. Its
+registered suite also enforces exact header, non-empty values, unique identity,
+and the closed five-class domain.
+
+**No-fallback result:** the reviewed table contains no repeated candidate fact,
+owner, action, package, progress, count, rationale, or exception. No syntax
+classifier, default class, inferred owner, compatibility schema, engine change,
+generated edit, Bash edit, standards edit, or workflow edit was introduced.
+
+**Verification:** focused C1 suite; four focused positive/negative generic table
+and relation tests; all 152 engine tests; Python compilation; all 107 registered
+declarative suites; generated graph and numeric-audit freshness; both plan
+checks; and diff integrity.
+
+**Next slice:** preflight L1 exact current-versus-baseline lifecycle evidence
+and stop if accepted-package/canonical-owner disappearance authority cannot be
+joined through existing generic contracts.

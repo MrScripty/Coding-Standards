@@ -529,3 +529,8 @@ requires = []
 id = "persistence-owner-contract"
 path = "evaluation/standards-effectiveness/suites/persistence-owner-contract.toml"
 requires = []
+
+[[suites]]
+id = "numeric-comparison-classification"
+path = "evaluation/standards-effectiveness/suites/numeric-comparison-classification.toml"
+requires = []

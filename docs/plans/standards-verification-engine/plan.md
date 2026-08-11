@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-A1-C1 semantic coverage
+**Current phase:** Milestone 6: VE043-A1-L1 lifecycle guard
 
-**Next slice:** resume explicit candidate classification with the accepted
-authority-first procedure. Stop if authoritative context cannot establish one
-class; do not use syntax, checker name, or mutable aggregate as a default. S1
+**Next slice:** preflight the VE043-A1-L1 lifecycle join between the immutable
+baseline, current derived candidates, reviewed C1 decisions, and accepted
+package-owner evidence. Stop if disappearance authority cannot be expressed by
+existing generic contracts without inferring owner or package identity. S1
 remains unadmitted.
 
 **Acceptance status:** `pending`
@@ -3977,6 +3978,30 @@ default; it requires evidence that the literal summarizes a changing current
 inventory. If no class has positive evidence, review stops for the admitted
 exception re-plan. The procedure records one semantic decision and does not
 infer it from a literal, operator, filename, or graph relationship.
+
+##### VE043-A1-C1 Semantic Coverage Acceptance
+
+**Status:** `Accepted`
+
+Every generated candidate identity has one explicit reviewed semantic class in
+`numeric-comparison-decisions.tsv`. The registered
+`numeric-comparison-classification` suite enforces the exact two-column schema,
+closed five-class domain, unique candidate identity, and candidate-ID set
+equality with the immutable generated baseline. The table contains no path,
+expression, owner, action, package, progress, count, rationale, or exception
+field.
+
+The focused suite and four focused positive/negative generic table and relation
+tests pass. All 152 engine tests, Python compilation, all 107 registered
+declarative suites, generated graph and numeric-audit freshness, both plan
+checks, and diff integrity pass. No engine, generated artifact, Bash checker,
+owner, package, standards source, lockfile, or workflow changed.
+
+**No-fallback result:** every class was selected through the accepted
+authority-first procedure. No syntax classifier, default class, inferred owner,
+exception sentinel, compatibility schema, or duplicate candidate fact was
+introduced. L1 remains responsible for proving that any future candidate
+disappearance joins an accepted package and its explicit canonical owner.
 
 **Tasks:**
 

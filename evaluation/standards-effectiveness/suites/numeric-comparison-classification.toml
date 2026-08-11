@@ -1,0 +1,35 @@
+schema_version = 1
+id = "numeric-comparison-classification"
+owner = "migration.parent-plan"
+description = "Exact reviewed semantic classification of the generated numeric-comparison baseline without owner, action, package, progress, count, or exception inference."
+
+[[checks]]
+id = "classification-schema"
+type = "table"
+path = "evaluation/standards-effectiveness/numeric-comparison-decisions.tsv"
+header = ["candidate_id", "semantic_class"]
+non_empty = ["candidate_id", "semantic_class"]
+unique = [["candidate_id"]]
+[checks.domains]
+semantic_class = [
+  "declared-finite-contract",
+  "historical-snapshot",
+  "mutable-aggregate",
+  "policy-threshold",
+  "structural-multiplicity",
+]
+
+[[checks]]
+id = "generated-candidate-coverage"
+type = "relation"
+mode = "set"
+[checks.left]
+path = "evaluation/standards-effectiveness/numeric-comparison-decisions.tsv"
+header = ["candidate_id", "semantic_class"]
+columns = ["candidate_id"]
+order = "source"
+[checks.right]
+path = "evaluation/standards-effectiveness/generated/numeric-comparison-candidates.tsv"
+header = ["candidate_id", "checker", "line", "column", "matcher", "operator", "numeric_literals", "expression", "source_fingerprint", "source_text"]
+columns = ["candidate_id"]
+order = "source"

@@ -220,6 +220,20 @@ review. Mutable aggregate requires an observed changing current inventory and
 cannot absorb an unknown case. A candidate with no established class triggers
 exception admission rather than receiving a default.
 
+C1 is accepted. The reviewed `numeric-comparison-decisions.tsv` contains only
+generated candidate identity and semantic class. Its registered suite uses the
+generic table assertion for exact schema, non-empty values, uniqueness, and the
+closed taxonomy domain, then a set relation for exact identity coverage against
+the immutable generated baseline. No candidate mechanics, owner, action,
+package, progress, cardinality, rationale, or exception is repeated in reviewed
+data.
+
+Focused positive and negative table/relation evidence passes, as do all 152
+engine tests, Python compilation, all 107 registered declarative suites, and
+generated graph and numeric-audit freshness. L1 is next and must derive current
+progress while rejecting disappearance that lacks exact accepted-package and
+canonical-owner evidence.
+
 ### VE043-P1: README Consumer Package Audit
 
 After `reference_inventory` is accepted, perform a fresh read-only incident-edge

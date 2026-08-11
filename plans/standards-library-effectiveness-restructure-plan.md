@@ -12,10 +12,19 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** resume delegated VE043-A1-C1 explicit classification under the
-accepted authority-first procedure. Stop when no class has positive evidence;
-do not use syntax, checker name, or mutable aggregate as fallback. Release
-Procedure, S1, and the Rust Binding train remain unadmitted.
+**Next slice:** preflight delegated VE043-A1-L1 lifecycle evidence. Join the
+immutable baseline, current derived candidates, reviewed C1 decisions, and
+accepted package-owner authority without inferring owner or package identity.
+Release Procedure, S1, and the Rust Binding train remain unadmitted.
+
+VE043-A1-C1 is accepted. One registered declarative suite enforces the exact
+two-column reviewed schema, closed taxonomy domain, unique candidate identity,
+and set equality with the generated baseline. Focused positive and negative
+generic assertion evidence, all 152 engine tests, Python compilation, all 107
+registered suites, graph and numeric-audit freshness, both plan checks, and
+diff integrity pass. C1 adds no generated fact, owner, action, package,
+progress, count, rationale, exception, engine behavior, Bash edit, standards
+edit, or fallback.
 
 VE043-A1-C1 has reached a re-plan trigger. Exact preflight finds no overlap
 between current candidate-bearing verifier paths and already migrated checker
