@@ -11601,3 +11601,13 @@ six-check disposable suite plus review-template and execution-train gates pass.
 Four exact typed edges keep both gates independent. Implementation is next.
 Admission regeneration records 766 total edges without changing executable
 topology.
+
+## 2026-08-12 M6-T2 Row 27 Acceptance
+
+**Outcome:** accepted at train order 89.
+
+The dependency-free row-27 suite passes six generic checks and replaces the
+deleted Bash checker without a wrapper or fallback. Its four former gate edges
+remain independent. The graph now has 151 Bash verifiers, 156 nodes, 759 edges,
+and 156 components. A fresh audit is next.
+All 126 declarative suites and all 151 mixed-suite entrypoints pass.

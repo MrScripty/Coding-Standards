@@ -2504,3 +2504,12 @@ typed incident edges preserve both gates independently. M6-T2 is admitted at
 train order 89 without an engine change, wrapper, copied count, or fallback.
 Regeneration adds four reference-only authority edges for 766 total;
 executable topology remains unchanged.
+
+### M6-T2 Acceptance
+
+The registered row-27 suite passes six exact generic checks and replaces its
+Bash checker without a wrapper. Review-template behavior and execution-train
+integrity remain independently owned gates represented by four accepted
+historical edge records. The graph now contains 151 Bash verifiers, 156 nodes,
+759 edges, and 156 components. Another package requires a fresh audit.
+All 126 declarative suites and the complete mixed suite of 151 checkers pass.

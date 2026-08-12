@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-T2 row 27 migration
+**Current phase:** Milestone 6: post-M6-T2 graph and ownership audit
 
-**Next slice:** implement admitted M6-T2 without a wrapper, false dependency,
-owner transfer, or compatibility path.
+**Next slice:** inspect the fresh post-M6-T2 graph and remaining row-family
+ownership/evidence shapes before admitting another bounded package.
 
 **Acceptance status:** `pending`
 
@@ -5955,7 +5955,7 @@ checkers pass, and no legacy execution path remains.
 
 ##### M6-T2 Row 27 Admission
 
-**Status:** Admitted at train order 89.
+**Status:** Accepted at train order 89.
 
 The fresh post-M6-T1 graph contains 152 Bash verifiers, 157 nodes, 762 edges,
 and 157 components. Among caller-free rows 23 and 25 through 27, row 27 is the
@@ -5983,6 +5983,13 @@ the admitted write set is a re-plan trigger.
 Admission regeneration adds four reference-only authority edges. The resulting
 graph has 152 Bash verifiers, 157 nodes, 766 edges, and 157 components;
 executable caller and independent-gate topology is unchanged.
+
+Acceptance registers the dependency-free six-check suite and deletes the Bash
+checker. All four former gate edges are accepted as independent lifecycle
+evidence. The regenerated graph contains 151 Bash verifiers, 156 nodes, 759
+edges, and 156 components. The review-template projection and execution train
+pass independently, all 126 declarative suites and the complete mixed suite of
+151 checkers pass, and no legacy execution path remains.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

@@ -3076,3 +3076,17 @@
   engine, registry, suite, checker, standards source, or fixture changed.
   Regeneration adds four reference-only authority edges for 766 total without
   changing executable topology.
+
+## 2026-08-12 - M6-T2 Row 27 Acceptance
+
+- Registered and passed the dependency-free six-check row-27 suite before
+  deleting its Bash checker.
+- Preserved exact decomposition identity, owner/disposition lineage, report
+  semantics, execution-train identity, and accepted plan claims without copied
+  counts or a compatibility path.
+- Accepted all four former review-template and train edges independently. The
+  regenerated graph has 151 Bash verifiers, 156 nodes, 759 edges, and 156
+  components.
+- Focused suite, package/edge authority, independent gates, all 126 declarative
+  suites, all 151 complete mixed-suite entrypoints, graph freshness, removal,
+  plan, and diff verification pass. The next slice is a fresh read-only audit.
