@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
-**Next slice:** revalidate and serially integrate the prepared verification-
-engine M6-Q3 Architecture Population proposal.
+**Next slice:** select and record the delegated VE051 Q3 README-authority
+recovery before Architecture Population integration resumes.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -222,6 +222,16 @@ Architecture Owner and row-15 decomposition are separate checker-backed
 independent gates, not registry dependencies or copied Q3 behavior. No
 permanent suite, registry, checker, standards, fixture, engine, schema,
 lockfile, build output, or workflow authority changed; Q4 preflight is next.
+
+VE051 blocks Q3 implementation. Fresh reconstruction found that the
+standards-effectiveness README still names Q3's Bash checker as the
+Architecture-population entrypoint, while Q3 admission excludes that README.
+The recommended recovery re-admits Q3 with the README and `readme-route`
+verification, then registers the suite, updates the README projection, deletes
+the checker, and proves removed-path closure atomically. A separate README
+prerequisite is warranted only for real concurrent ownership; otherwise defer
+Q3 and Q4. Wrappers, aliases, stale documentation, out-of-scope editing,
+skipped integration order, and weaker proof remain prohibited.
 
 `M6-Q4` is admitted at train order 83. A disposable dependency-free three-check
 suite exactly matches the Coding dependency route, exact disposition, and two

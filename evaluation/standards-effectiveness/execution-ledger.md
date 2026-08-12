@@ -11218,3 +11218,22 @@ from the unchanged immutable baseline and the accepted Q2 package owner. No
 manual candidate, count, baseline, or classification update was required. No
 wrapper, bridge, alias, dual authority, compatibility representation, or
 fallback remains. Q3 serial integration is next.
+
+## 2026-08-11 VE051 Q3 README Authority Re-plan Trigger
+
+**Outcome:** Q3 integration unavailable; no implementation authority changed.
+
+The Q3 local proposal was reconstructed on accepted Q2 state and remained
+within its suite/checker write set. A fresh consumer audit found that the
+standards-effectiveness README still presents the Bash checker as the
+Architecture-population entrypoint, but Q3's admitted write set excludes the
+README. Checker deletion would leave stale documented authority; README editing
+would violate admission.
+
+The recommended recovery re-admits Q3 with the README and a `readme-route`
+gate, then registers and passes the suite, updates the mechanical README
+projection, deletes the checker, and proves removed-path closure atomically.
+A serial README prerequisite is justified only by real concurrent ownership;
+otherwise Q3/Q4 deferral is the safe alternative. Wrappers, aliases, stale
+documentation, out-of-scope edits, skipped order, and weaker proof remain
+prohibited.

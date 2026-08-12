@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** revalidate and serially integrate the prepared M6-Q3
-Architecture Population proposal.
+**Next slice:** select and record the VE051 Q3 README-authority recovery before
+resuming Architecture Population integration.
 
 **Acceptance status:** `pending`
 
@@ -5229,7 +5229,7 @@ checkpoint remains deferred to `M6-Q-W1`.
 
 ##### M6-Q3 Architecture Population Package Admission
 
-**Status:** `Active`
+**Status:** `Blocked`; implementation is unavailable pending VE051.
 
 **Package state:** `admitted` at train order 82.
 
@@ -5278,6 +5278,48 @@ both pass route, prohibition, eleven-disposition, and lifecycle evidence.
 Package projection and exact edge authority pass against the current graph. No
 permanent suite, registry entry, checker, standards source, fixture, engine,
 schema, numeric evidence, lockfile, build output, or workflow changed.
+
+##### VE051 Q3 README Authority Re-plan
+
+**Status:** `Active`; Q3 shared integration has not started.
+
+Fresh-base proposal reconstruction found a shared consumer omitted from Q3's
+admitted write set. The standards-effectiveness README names the current Bash
+checker as the entrypoint proving Architecture population. Deleting that
+checker would leave stale documented authority. Editing the README under the
+current package would exceed exact admission. The proposal worktree changed
+only its permitted suite and checker paths; no shared implementation authority
+was changed.
+
+**Option 1 - Re-admit Q3 with the README (`Recommended`):** add the README to
+Q3's exact implementation write set and add `readme-route` to its verification
+contract. During one atomic acceptance, replace the obsolete Bash-entrypoint
+sentence with the registered `architecture-population` suite and the evidence
+it derives. Register and pass the suite before checker deletion, then prove the
+README contains the suite identity and no deleted checker path. This is one
+owner-coherent Architecture-population outcome; the README remains a mechanical
+projection rather than a second semantic owner. It matches the accepted M3-DT1
+recovery precedent and creates no intermediate invalid state.
+
+**Option 2 - Serial README prerequisite:** admit a separate documentation-only
+transition that changes the README before Q3 acceptance, then make Q3 depend on
+it. Choose this only if the README has concurrent edits or needs an independent
+review owner. Otherwise it creates an avoidable interval in which documentation
+names an unregistered suite and adds lifecycle ceremony without separating a
+real concern.
+
+**Option 3 - Defer Q3 and the Q wave:** leave Q3 admitted but unavailable and
+pause Q3/Q4 integration until README authority can be resolved. This preserves
+the frozen serial order and avoids unauthorized edits, but does not advance the
+migration. Skipping to Q4 would violate the accepted Q1-through-Q4 integration
+order and is not part of this option.
+
+Retaining the Bash checker, adding a wrapper or alias, deleting it while the
+README remains stale, changing the README outside package authority, weakening
+removed-path verification, or treating the stale reference as non-authoritative
+noise are not valid options. Selection must update package manifest and
+projection, plan/ledger/report authority, exact write set, and verification
+contract before Q3 implementation resumes.
 
 ##### M6-Q4 Coding Dependencies Route Package Admission
 

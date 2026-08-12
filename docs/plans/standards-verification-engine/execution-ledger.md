@@ -2676,3 +2676,18 @@
   candidate from the unchanged reviewed baseline and Q2's accepted owner; no
   numeric baseline or decision file changed.
 - The mixed checkpoint remains deferred to `M6-Q-W1`; Q3 integration is next.
+
+## 2026-08-11 - VE051 Q3 README Authority Re-plan Trigger
+
+- Reconstructed prepared Q3 proposal `42c3ab0` on accepted Q2 revision
+  `8786863`; its local diff remained one suite addition and one checker deletion.
+- Fresh consumer audit found the standards-effectiveness README still names the
+  deleted checker as Architecture-population authority, while Q3 admission
+  excludes that shared README.
+- Stopped before registry, package, edge, README, generated, lifecycle, plan,
+  source, fixture, engine, schema, numeric, lockfile, build-output, or workflow
+  implementation changes.
+- Recommended re-admitting Q3 with the README and `readme-route` gate so suite
+  registration, README projection, checker deletion, and removed-path proof are
+  one atomic owner-coherent acceptance. Separate prerequisite and wave deferral
+  remain bounded alternatives.

@@ -2180,6 +2180,21 @@ creates a registry dependency or transfers callee behavior into Q3. Canonical
 sources, dispositions, lifecycle claims, retained gates, engine, and schemas
 remain read-only. Q4 preflight is next.
 
+### VE051 Q3 README Authority Gap
+
+Fresh integration audit found one additional non-executable consumer: the
+standards-effectiveness README names Q3's Bash checker as the
+Architecture-population entrypoint. Q3 admission excludes the README, so the
+checker cannot be deleted without either stale documentation or an
+out-of-authority edit.
+
+Recommended recovery is same-package re-admission with the README and a
+`readme-route` gate. The accepting slice would replace only the obsolete
+entrypoint projection with the registered suite while preserving canonical
+Architecture and migration evidence. A separate README prerequisite is valid
+only for actual concurrent ownership; otherwise defer Q3 and Q4. No wrapper,
+alias, stale reference, skipped order, or weakened removed-path proof is valid.
+
 ### Admitted M6-Q4 Coding Dependencies Route
 
 A disposable dependency-free three-check suite matches the Coding dependency
