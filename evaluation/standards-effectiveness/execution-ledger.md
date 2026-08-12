@@ -11499,3 +11499,12 @@ declarative verification, but duplicates security-sensitive containment logic
 because the existing helper also requires a regular file. Recommended recovery
 extracts one shared contained-path resolver and keeps `contained_file` as a
 strict specialization. No canonical executable authority changed.
+
+## 2026-08-12 VE058 Shared Containment Selection
+
+**Outcome:** Option 1 selected; implementation pending.
+
+One `contained_path` resolver will own repository containment and symlink
+escape. Existing `contained_file` remains its strict existing regular-file
+specialization, while `path_state` owns only filesystem-state semantics.
+No mode flags, fallback, or duplicated containment are authorized.

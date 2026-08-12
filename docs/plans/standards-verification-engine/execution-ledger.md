@@ -2946,3 +2946,15 @@
   `path_state` consume the resolver.
 - Recorded bounded duplication, multi-mode file helper, and lexical-only
   alternatives. No canonical executable authority changed.
+
+## 2026-08-12 - VE058 Shared Containment Selection
+
+- Selected Option 1: `contained_path` becomes the sole containment and
+  symlink-escape resolver in the existing paths module.
+- Kept `contained_file` as an unchanged strict existence and regular-file
+  specialization; no current caller requires migration.
+- Required `path_state` to own only present/absent semantics over the shared
+  resolver.
+- Prohibited file-helper mode flags, permissive fallbacks, duplicate private
+  containment logic, and VE057 configuration changes.
+- Changed no executable authority in this selection slice.

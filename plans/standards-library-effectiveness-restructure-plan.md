@@ -3031,6 +3031,11 @@ all structural/routing fixtures pass.
          resolver, preserve `contained_file` as a strict specialization, and
          make `path_state` consume the resolver. Do not accept duplicate
          security logic or weaken symlink containment.
+       - `7.4c3ve61` (`Selected`): make one `contained_path` resolver the
+         containment and symlink-escape owner, preserve `contained_file` as
+         its unchanged strict regular-file specialization, and layer
+         `path_state` semantics on the resolver. Add no file-helper modes,
+         fallback, duplicate resolver, or configuration change.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

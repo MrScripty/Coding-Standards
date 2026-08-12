@@ -2404,3 +2404,7 @@ Recommended Option 1 extracts one shared contained-path resolver, retains
 `contained_file` as the strict existing-file specialization, and lets
 `path_state` layer filesystem-state semantics on the same containment owner.
 VE057 remains unaccepted pending this helper decision.
+
+Option 1 is selected. The implementation introduces one lower-level
+`contained_path` resolver, leaves all strict `contained_file` consumers
+unchanged, and removes the unaccepted path-state duplicate before acceptance.

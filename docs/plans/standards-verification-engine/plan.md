@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: VE058 containment-helper re-plan
 
-**Next slice:** select one shared containment resolver before completing the
-unified path-state implementation.
+**Next slice:** implement the selected shared containment resolver and unified
+path-state contract atomically.
 
 **Acceptance status:** `pending`
 
@@ -5868,6 +5868,19 @@ The recommended implementation may additionally edit
 It must preserve every existing `contained_file` outcome and caller, expose
 no compatibility parser, and keep path-state configuration unchanged. The
 complete mixed gate remains required at shared-contract acceptance.
+
+**Selected recovery:** Option 1. Add one `contained_path` resolver in the
+existing paths module as the sole repository-containment and symlink-escape
+authority. It validates a nonempty repository-relative path and returns the
+contained candidate without imposing file type. Existing `contained_file`
+delegates to it, then preserves its current existence, regular-file, diagnostic,
+and exit-code behavior. `path_state` delegates to the same resolver and owns
+only present/absent state semantics.
+
+The implementation must prove all existing `contained_file` callers remain
+unchanged and add direct resolver coverage. It may not add mode flags to
+`contained_file`, expose a permissive fallback, retain a private duplicate,
+or change VE057 configuration.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 
