@@ -12,8 +12,8 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** preflight and admit M6-P7 Rust migration-index closure without
-implementation. M6-P6 is admitted; no Rust SCC member may yet implement.
+**Next slice:** preflight and admit M6-P8 Rust profile authority closure without
+implementation. M6-P6/P7 are admitted; no Rust SCC member may yet implement.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -127,6 +127,12 @@ exclusion, exact frozen history, and route absence with existing generic
 assertions and no dependencies. Exact owner-local edge authority is admitted;
 implementation remains prohibited until M6-P7 through M6-P9 are admitted and
 all four checker retirements can accept atomically.
+
+M6-P7 is admitted at train order 77 under the canonical Rust profile owner. A
+dependency-free four-check isolated suite preserves exact migration-index
+structure, owner-map membership, dispositions, and no-legacy authority. Exact
+owner-local edge rows are admitted; M6-P6/P7 remain unimplemented pending
+M6-P8/M6-P9 and atomic four-checker acceptance.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

@@ -2007,3 +2007,16 @@ checkers are independent gates during admission; their future registered suites
 replace those identities only during the four-package atomic acceptance. No
 aggregate edge or numeric count is declared. M6-P6 remains unimplemented until
 M6-P7 through M6-P9 are admitted.
+
+### Admitted M6-P7 Rust Migration Index
+
+M6-P7 is admitted at train order 77 under
+`profiles/languages/rust/README.md`. Its isolated four-check suite preserves
+exact index structure, owner-map membership, dispositions, and no-legacy
+authority with existing generic assertions and no dependencies.
+
+Eight owner-local rows cover both generated views of the reciprocal row-46
+relationship and Rust-index calls to adoption and profile closure. Live
+opposite checkers remain independent gates until atomic acceptance; the Bash
+cycle does not establish declarative dependencies. M6-P6/P7 remain admitted
+and unimplemented while M6-P8 is next.

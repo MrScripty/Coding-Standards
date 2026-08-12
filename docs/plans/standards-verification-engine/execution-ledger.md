@@ -2464,3 +2464,14 @@
   workflows remain unchanged. M6-P6 cannot implement until M6-P7 through
   M6-P9 are admitted and all four suites pass before atomic deletion.
 - Next slice is read-only M6-P7 Rust migration-index preflight and admission.
+
+## 2026-08-11 - M6-P7 Rust Migration-Index Admission
+
+- Proved a dependency-free four-check suite in isolation for exact Rust index
+  structure, owner-map membership, dispositions, and no-legacy authority.
+- Admitted M6-P7 at train order 77 under the canonical Rust profile owner and
+  recorded both generated views of all incident relationships without totals.
+- M6-P6/P7 remain unimplemented. Canonical Rust sources and evidence, registry,
+  proposed suites, engine, schemas, numeric baseline, lockfiles, build output,
+  and workflows remain unchanged.
+- Next slice is M6-P8 Rust profile authority preflight and admission.

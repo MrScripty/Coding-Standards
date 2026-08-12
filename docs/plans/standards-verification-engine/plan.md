@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-P6 admitted under VE048
+**Current phase:** Milestone 6: M6-P6/P7 admitted under VE048
 
-**Next slice:** preflight and admit M6-P7 Rust migration-index closure without
-implementation. M6-P6 remains admitted and no SCC member may be implemented.
+**Next slice:** preflight and admit M6-P8 Rust profile authority closure without
+implementation. M6-P6/P7 remain admitted and no SCC member may be implemented.
 
 **Acceptance status:** `pending`
 
@@ -4839,6 +4839,46 @@ and exact edge authority pass; all declarative suites, graph freshness, both
 plan checks, read-only hashes, and diff integrity must close this admission.
 Any added incident edge, changed source contract, required suite dependency,
 or failed future isolated suite is a re-plan trigger.
+
+##### M6-P7 Rust Migration-Index Closure Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 77; implementation is prohibited
+until M6-P8 and M6-P9 are also admitted.
+
+The isolated dependency-free four-check suite preserves the complete two-
+heading Rust migration-index structure and explicit line ceiling, exact
+`STD-0827` through `STD-0830` owner-map membership, their exact two `index` and
+two `split` dispositions, required typed routing diagnostics, and prohibited
+legacy catalog and policy authority. Existing `markdown_structure`, `table`,
+and `text` assertions represent the contract without source edits, mutable
+counts, snapshots, callbacks, commands, or engine changes.
+
+M6-P7 owns only the Rust migration-index contract. Exact graph projection
+records row 46 calling Rust index and Rust index calling row 46, adoption
+retirement, and Rust profile closure in both generated edge views. Each row
+uses the live opposite checker as independent evidence during admission. The
+future atomic acceptance must use the opposite registered suites without
+turning obsolete Bash calls into suite dependencies.
+
+**Allowed implementation write set:** the same serial SCC integration files
+frozen by VE048 and M6-P6, plus `suites/rust-index-closure.toml`. Canonical Rust
+index content, owner map, dispositions, profile, Router, adoption evidence,
+numeric baseline, engine, schemas, unrelated suites and fixtures, lockfiles,
+build output, and workflows remain read-only.
+
+**Acceptance gate:** M6-P8/M6-P9 admitted; all four suites pass before deletion;
+all packages and owner-local edges accept atomically; numeric lifecycle,
+removed paths, all declarative suites, graph freshness, both plan checks,
+read-only hashes, and diff integrity pass. `M6-P-W1` remains the mixed wave
+checkpoint.
+
+**Admission evidence:** the isolated suite passes all four checks. Current SCC
+checkers, package and exact edge authority, all declarative suites, graph
+freshness, plan checks, read-only hashes, and diff integrity must close this
+admission. New semantics, changed ownership, or a required dependency triggers
+re-plan.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 
