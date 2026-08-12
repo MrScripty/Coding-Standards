@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: M6-S1 through M6-S3 row-family implementation
 
-**Next slice:** implement admitted M6-S1 at train order 85, register and pass
-the row-20 suite, delete its Bash checker, and preserve execution train as an
+**Next slice:** implement admitted M6-S2 at train order 86, register and pass
+the row-21 suite, delete its Bash checker, and preserve execution train as an
 independent gate.
 
 **Acceptance status:** `pending`

@@ -2439,3 +2439,12 @@ dependency. All six are admitted as independent gates, not registry
 dependencies. No checker has an inbound caller or historical checker-evidence
 transfer. M6-S1 through M6-S3 are admitted at train orders 85 through 87 with
 disjoint local suite/checker paths and serial shared-authority integration.
+
+### M6-S1 Acceptance
+
+The registered row-20 suite passes seven exact generic checks and is now the
+sole verifier for its parent-owned lifecycle evidence. The Bash checker is
+absent. Its two former edges to execution train remain accepted independent
+gates, not suite dependencies. The regenerated graph contains 155 Bash
+verifiers, 160 nodes, 775 edges, and 160 components; all 122 declarative suites
+pass. M6-S2 remains admitted at train order 86.

@@ -11538,3 +11538,14 @@ Each admitted package has one local suite/checker replacement and exactly two
 incident edges to execution train, retained as independent gates with no
 registry dependency. Package and edge authority validators pass. M6-S1 is the
 next implementation slice; M6-S2 and M6-S3 follow in frozen order.
+
+## 2026-08-12 M6-S1 Row 20 Acceptance
+
+**Outcome:** accepted at train order 85.
+
+The dependency-free row-20 suite passes seven checks and replaces the deleted
+Bash checker without a wrapper or fallback. Exact decomposition identities,
+owner validation, dispositions, report evidence, plan lineage, and execution
+owner are preserved. The graph now has 155 Bash verifiers, 160 nodes, 775
+edges, and 160 components. All 122 declarative suites and the retained
+execution-train gate pass. M6-S2 is next.

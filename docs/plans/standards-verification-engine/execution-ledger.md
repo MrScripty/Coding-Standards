@@ -2995,3 +2995,17 @@
   edges to execution train, both classified as independent gates.
 - Package and edge validators pass against the live graph. Next slice is M6-S1
   implementation; S2 and S3 remain admitted and ordered.
+
+## 2026-08-12 - M6-S1 Row 20 Acceptance
+
+- Registered the dependency-free seven-check row-20 suite before deleting the
+  Bash checker; no wrapper, alias, or execution-train dependency remains.
+- Preserved exact child order, identity relation, owner validation,
+  disposition lineage, report semantics, execution-train owner, and accepted
+  plan claims.
+- Regenerated 155 Bash verifiers, 160 nodes, 775 edges, and 160 components.
+  The initially stale generated candidate inventory correctly became current
+  during the declared graph step; no new lifecycle edge was required.
+- All 122 declarative suites, execution train, package/edge authority, graph
+  freshness, removal, plan, and diff checks pass. M6-S1 and its two edge
+  records are accepted; M6-S2 is next.

@@ -396,6 +396,11 @@ path = "evaluation/standards-effectiveness/suites/milestone-7-row-29-decompositi
 requires = ["contract-planning-boundary"]
 
 [[suites]]
+id = "milestone-7-row-20-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-20-decomposition.toml"
+requires = []
+
+[[suites]]
 id = "contract-artifact-selection"
 path = "evaluation/standards-effectiveness/suites/contract-artifact-selection.toml"
 requires = []
