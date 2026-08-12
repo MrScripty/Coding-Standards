@@ -1,0 +1,56 @@
+schema_version = 1
+id = "rust-index-closure"
+owner = "profiles/languages/rust/README.md"
+description = "Exact concise Rust migration index, disposition lineage, and no-legacy authority without nested checker execution."
+
+[[checks]]
+id = "rust-index-structure"
+type = "markdown_structure"
+path = "languages/rust/RUST-STANDARDS.md"
+headings = ["# Rust Standards Migration Index", "## Canonical Route"]
+maximum_lines = 16
+
+[[checks]]
+id = "rust-index-owner-map"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
+header = ["id", "current_path", "line", "future_owner", "disposition", "heading"]
+[[checks.projections]]
+columns = ["id", "current_path", "future_owner"]
+order = "source"
+expected = [
+  ["STD-0827", "languages/rust/RUST-STANDARDS.md", "profiles/languages/rust/README.md"],
+  ["STD-0828", "languages/rust/RUST-STANDARDS.md", "profiles/languages/rust/README.md"],
+  ["STD-0829", "languages/rust/RUST-STANDARDS.md", "profiles/languages/rust/README.md"],
+  ["STD-0830", "languages/rust/RUST-STANDARDS.md", "profiles/languages/rust/README.md"],
+]
+[checks.projections.where]
+field = "current_path"
+op = "eq"
+value = "languages/rust/RUST-STANDARDS.md"
+
+[[checks]]
+id = "rust-index-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0827", "languages/rust/RUST-STANDARDS.md", "profiles/languages/rust/README.md", "index"],
+  ["STD-0828", "languages/rust/RUST-STANDARDS.md", "profiles/languages/rust/README.md", "index"],
+  ["STD-0829", "languages/rust/RUST-STANDARDS.md", "profiles/languages/rust/README.md", "split"],
+  ["STD-0830", "languages/rust/RUST-STANDARDS.md", "profiles/languages/rust/README.md", "split"],
+]
+[checks.projections.where]
+field = "source"
+op = "eq"
+value = "languages/rust/RUST-STANDARDS.md"
+
+[[checks]]
+id = "rust-index-authority"
+type = "text"
+path = "languages/rust/RUST-STANDARDS.md"
+required = ["non-normative migration navigation", "does not establish applicability, precedence, or a default mechanism", "[canonical Rust profile]", "routing to specialized owners", "typed `unavailable`", "typed `invalid`", "typed `unsupported`", "fallback authority"]
+prohibited = ["## Documents", "## Relationship To Generic Standards", "## Default Rust Position", "| Document | Purpose | When to Use |", "Criterion", "rule wins for Rust crates", "retain authority", "RUST-API-STANDARDS.md", "RUST-TOOLING-STANDARDS.md"]

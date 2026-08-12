@@ -10983,3 +10983,48 @@ remains deferred to `M6-P-W1`.
 
 **Next slice:** read-only preflight for P1 package 6, Rust adoption-notes
 retirement.
+
+## 2026-08-11 M6-P6 Through M6-P9 Rust SCC Acceptance
+
+**Outcome:** four owner-separated packages accepted atomically at train orders
+76 through 79.
+
+The dependency-free five-check adoption-retirement, four-check Rust-index,
+three-check Rust-profile, and seven-check row-46 suites pass before and after
+deletion. All four Bash checkers and their generated strongly connected
+component are absent. The obsolete Rust-profile README-consumer row is removed,
+and the retained root audit derives 22 consumers.
+
+All 62 owner-local historical edge rows are accepted. Internal SCC evidence
+uses the opposite registered suite as an independent gate without adding suite
+dependencies; retained API, async, tooling, unsafe, routing, audit, execution-
+train, and migration gates remain independently checker-backed.
+
+**VE048 result:** numeric lifecycle passes unchanged because each absent
+checker has exactly one accepted package with an explicit canonical owner. No
+partial-candidate record, waiver, aggregate count, merged owner, wrapper, false
+dependency, or alternate authority was added.
+
+**Verification:** all four focused suites, package/edge authority, numeric
+lifecycle, removed-path proof, all 116 declarative suites, and graph freshness
+pass at 161 Bash verifiers / 166 nodes / 781 edges / 166 components. Canonical
+Rust sources, migration evidence, engine, schemas, numeric baseline, lockfiles,
+build output, and workflows remain unchanged. The mixed checkpoint remains
+deferred to `M6-P-W1`.
+
+**Next slice:** run `M6-P-W1`, then audit the fresh graph before another package
+admission.
+
+## 2026-08-11 M6-P-W1 P1 Wave Checkpoint
+
+**Outcome:** accepted.
+
+The canonical fail-fast mixed checkpoint passes all 161 remaining Bash
+entrypoints after M6-P1 through M6-P9 acceptance. The run includes all 116
+registered declarative suites and all retained migration, ownership, routing,
+lifecycle, and source-closure gates.
+
+No later package is admitted. The next slice is a read-only audit of the fresh
+161-verifier / 166-node / 781-edge / 166-component graph and canonical owner
+evidence. Package selection requires re-planning before any further authority or
+implementation edit.

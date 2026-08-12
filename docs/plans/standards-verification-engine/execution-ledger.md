@@ -2486,7 +2486,7 @@
 - Retained API, async, tooling, unsafe, language-routing, and root-audit checks
   remain independently owned gates; no nested Bash call became a suite
   dependency.
-- M6-P6/P7/P8 remain unimplemented. Canonical Rust sources, registry, proposed
+- At this admission boundary, M6-P6/P7/P8 remained unimplemented. Canonical Rust sources, registry, proposed
   suites, engine, schemas, fixtures, numeric baseline, lockfiles, build output,
   and workflows remain unchanged.
 - Package and exact edge authority, all 112 declarative suites, all four SCC
@@ -2514,3 +2514,24 @@
   frozen lifecycle hashes, and diff integrity passed. Regenerated graph files
   were byte-identical.
 - Next slice is one atomic four-suite registration and checker retirement.
+
+## 2026-08-11 - M6-P6 Through M6-P9 Rust SCC Acceptance
+
+- Registered four separately owned dependency-free suites and proved their
+  5/4/3/7 checks before and after deleting all four Bash SCC members.
+- Accepted all four package rows and 62 owner-local incident-edge rows in one
+  transition. Migrated internal gates use exact registered-suite evidence; all
+  retained gates remain independently checker-backed.
+- Removed the obsolete Rust-profile consumer identity; the root audit derives
+  22 remaining consumers. Numeric lifecycle derives each checker retirement
+  from its absent subject and accepted explicit owner.
+- All 116 declarative suites and fresh 161-verifier / 166-node / 781-edge /
+  166-component evidence pass. No wrapper, merged owner, false dependency,
+  waiver, copied count, source change, or fallback remains.
+
+## 2026-08-11 - M6-P-W1 P1 Wave Checkpoint
+
+- The canonical fail-fast mixed checkpoint passes all 161 remaining Bash
+  entrypoints after M6-P1 through M6-P9 acceptance.
+- No later package is admitted. Next is a read-only audit of the fresh graph and
+  canonical ownership evidence before the next package is planned.

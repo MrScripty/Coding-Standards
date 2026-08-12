@@ -19,6 +19,5 @@ evaluation/standards-effectiveness/verify-rust-boundary-arithmetic.sh	none	rust-
 evaluation/standards-effectiveness/verify-rust-external-input-queue.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh	none	rust-profile-index
-evaluation/standards-effectiveness/verify-rust-profile-authority-closure.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-unsafe-contracts.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-wire-representation.sh	none	rust-profile-index

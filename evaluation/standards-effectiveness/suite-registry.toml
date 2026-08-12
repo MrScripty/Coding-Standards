@@ -559,3 +559,23 @@ requires = []
 id = "milestone-7-row-45-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-45-decomposition.toml"
 requires = []
+
+[[suites]]
+id = "rust-adoption-notes-retirement"
+path = "evaluation/standards-effectiveness/suites/rust-adoption-notes-retirement.toml"
+requires = []
+
+[[suites]]
+id = "rust-index-closure"
+path = "evaluation/standards-effectiveness/suites/rust-index-closure.toml"
+requires = []
+
+[[suites]]
+id = "rust-profile-authority-closure"
+path = "evaluation/standards-effectiveness/suites/rust-profile-authority-closure.toml"
+requires = []
+
+[[suites]]
+id = "milestone-7-row-46-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-46-decomposition.toml"
+requires = []

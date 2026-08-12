@@ -1,0 +1,51 @@
+schema_version = 1
+id = "rust-adoption-notes-retirement"
+owner = "migration.parent-plan"
+description = "Exact retirement of obsolete Rust adoption notes without legacy routing or nested checker execution."
+
+[[checks]]
+id = "adoption-path-absent"
+type = "absent_paths"
+paths = ["languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md"]
+
+[[checks]]
+id = "adoption-corpus-absent"
+type = "table"
+path = "evaluation/standards-effectiveness/corpus.tsv"
+header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
+[[checks.projections]]
+columns = ["path"]
+order = "source"
+expected = []
+[checks.projections.where]
+field = "path"
+op = "eq"
+value = "languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md"
+
+[[checks]]
+id = "adoption-frozen-history"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/file-metrics.tsv"
+header = ["path", "kind", "normative", "target_role", "disposition", "baseline_source", "sha256", "lines", "headings", "imperatives"]
+[[checks.projections]]
+columns = ["path", "kind", "normative", "target_role", "disposition", "baseline_source", "sha256", "lines", "headings", "imperatives"]
+order = "source"
+expected = [["languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md", "reference", "no", "reference", "move", "git", "77f53cb2ca8807c4a93d717e9206ea8348d3eabbd78f56f4f3367b0678152054", "53", "5", "2"]]
+[checks.projections.where]
+field = "path"
+op = "eq"
+value = "languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md"
+
+[[checks]]
+id = "legacy-index-route-absent"
+type = "text"
+path = "languages/rust/RUST-STANDARDS.md"
+required = []
+prohibited = ["RUST-STANDARDS-ADOPTION-NOTES.md"]
+
+[[checks]]
+id = "router-route-absent"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = []
+prohibited = ["RUST-STANDARDS-ADOPTION-NOTES.md"]

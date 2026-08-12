@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-P6 through M6-P9 admitted under VE048
+**Current phase:** Milestone 6: `M6-P-W1` accepted
 
-**Next slice:** atomically register the four dependency-free suites, retire all
-four Rust SCC Bash checkers, and accept M6-P6 through M6-P9. No partial
-implementation is permitted.
+**Next slice:** audit the fresh post-P1 graph and re-plan the next owner-coherent
+package before any admission or implementation.
 
 **Acceptance status:** `pending`
 
@@ -4729,8 +4728,8 @@ merged owner, false dependency, wrapper, syntax evasion, or fallback remains.
 
 ##### VE048 Rust Four-Checker Lifecycle Re-plan
 
-**Status:** `Accepted`; Option 1 must be implemented through staged admissions
-and one atomic acceptance.
+**Status:** `Accepted`; Option 1 is implemented through staged admissions and
+one atomic acceptance.
 
 Read-only preflight of P1 package 6 found that Rust adoption-notes retirement
 is not an independently removable leaf. The generated graph places it in one
@@ -4795,12 +4794,11 @@ isolated suite probe, an unrepresentable assertion, a real cross-suite semantic
 dependency, a dirty authority file, or inability to close all four members in
 one accepted state is a new re-plan trigger.
 
-##### M6-P6 Rust Adoption-Notes Retirement Admission
+##### M6-P6 Rust Adoption-Notes Retirement Acceptance
 
-**Status:** `Active`
+**Status:** `Accepted`
 
-**Package state:** `admitted` at train order 76; implementation is prohibited
-until M6-P7, M6-P8, and M6-P9 are also admitted.
+**Package state:** `accepted` at train order 76.
 
 The isolated five-check suite proves the retired adoption-notes path is absent,
 the canonical six-column live corpus contains no matching path, frozen metrics
@@ -4841,12 +4839,20 @@ plan checks, read-only hashes, and diff integrity must close this admission.
 Any added incident edge, changed source contract, required suite dependency,
 or failed future isolated suite is a re-plan trigger.
 
-##### M6-P7 Rust Migration-Index Closure Admission
+**Acceptance evidence:** the registered five-check suite passes with no
+dependencies and the Bash checker is absent. Package and exact owner-local edge
+authority are accepted atomically with M6-P7 through M6-P9; internal historical
+edges use registered-suite independent-gate evidence without creating registry
+dependencies. Numeric lifecycle, removed-path proof, all 116 declarative
+suites, and fresh generated evidence at 161 Bash verifiers / 166 nodes / 781
+edges / 166 components pass. Canonical Rust sources, frozen history, Router,
+engine, schemas, and numeric baseline remain unchanged.
 
-**Status:** `Active`
+##### M6-P7 Rust Migration-Index Closure Acceptance
 
-**Package state:** `admitted` at train order 77; implementation is prohibited
-until M6-P8 and M6-P9 are also admitted.
+**Status:** `Accepted`
+
+**Package state:** `accepted` at train order 77.
 
 The isolated dependency-free four-check suite preserves the complete two-
 heading Rust migration-index structure and explicit line ceiling, exact
@@ -4881,12 +4887,17 @@ freshness, plan checks, read-only hashes, and diff integrity must close this
 admission. New semantics, changed ownership, or a required dependency triggers
 re-plan.
 
-##### M6-P8 Rust Profile Authority Closure Admission
+**Acceptance evidence:** the registered four-check suite passes with no
+dependencies and the Bash checker is absent. Its exact package and owner-local
+edge rows accepted in the same four-member transition. Rust index structure,
+owner-map membership, dispositions, and no-legacy authority remain canonical;
+no wrapper, suite dependency, source edit, or fallback was introduced.
 
-**Status:** `Active`
+##### M6-P8 Rust Profile Authority Closure Acceptance
 
-**Package state:** `admitted` at train order 78; implementation is prohibited
-until M6-P9 is also admitted.
+**Status:** `Accepted`
+
+**Package state:** `accepted` at train order 78.
 
 The isolated dependency-free three-check suite preserves canonical Rust profile
 metadata and dependency validity, all ten specialized profile links, typed
@@ -4932,12 +4943,18 @@ verifiers / 170 nodes / 838 edges / 167 components. Both plan checks, frozen
 profile/consumer/routing hashes, and diff integrity also pass. The mixed Bash
 suite remains intentionally deferred to `M6-P-W1`.
 
-##### M6-P9 Row-46 Lifecycle Admission
+**Acceptance evidence:** the registered three-check suite passes with no
+dependencies and the Bash checker plus its obsolete README-consumer identity
+are absent. The root audit derives 22 remaining consumers. Exact package and
+edge authority preserve retained API, async, tooling, unsafe, language-routing,
+and root-audit checks as independently checker-backed gates. Canonical profile
+content and specialized owners remain unchanged.
 
-**Status:** `Active`
+##### M6-P9 Row-46 Lifecycle Acceptance
 
-**Package state:** `admitted` at train order 79. All four SCC packages are now
-admitted; implementation remains prohibited except as one atomic transition.
+**Status:** `Accepted`
+
+**Package state:** `accepted` at train order 79.
 
 The isolated dependency-free seven-check suite preserves exact row-46 execution
 and P38 package records, the four unique owner-validation rows, set-equal owner
@@ -4986,6 +5003,31 @@ nodes / 838 edges / 167 components. Both plan checks, frozen lifecycle hashes,
 and diff integrity also pass. Regeneration was byte-identical because prior SCC
 admissions already referenced every affected checker path. The mixed Bash suite
 remains intentionally deferred to `M6-P-W1`.
+
+**Acceptance evidence:** all four registered suites pass with empty dependency
+lists and all four Bash checkers are absent. All four package rows and 62
+owner-local edge rows accepted atomically; every internal historical edge names
+the opposite registered suite as independent evidence, while retained gates
+remain checker-backed. Package/edge authority, numeric lifecycle, all 116
+declarative suites, graph freshness at 161 Bash verifiers / 166 nodes / 781
+edges / 166 components, and removed-path proof pass. The subsequent `M6-P-W1`
+checkpoint passes all 161 remaining Bash entrypoints.
+
+##### M6-P-W1 P1 Wave Checkpoint
+
+**Status:** `Accepted`
+
+The canonical fail-fast mixed checkpoint passes all 161 remaining Bash
+entrypoints after M6-P1 through M6-P9 acceptance. It includes all 116 registered
+declarative suites and confirms that retained owner, lifecycle, routing,
+disposition, source-closure, and migration gates remain green after removal of
+the four Rust SCC members.
+
+No later package is admitted. The next action is a read-only fresh-graph and
+ownership audit. Any proposed package must derive its canonical owner, semantic
+contract, exact incident edges, dependencies, write set, and verification gates
+from current evidence before admission; stale pre-P1 graph shape is not
+authority.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

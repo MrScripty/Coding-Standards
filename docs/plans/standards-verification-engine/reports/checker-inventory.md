@@ -2033,7 +2033,8 @@ Twenty owner-local rows cover both generated views of three inbound SCC calls,
 the reciprocal row-46 call, and six retained outbound gates. The API, async,
 tooling, unsafe, language-routing, and root-audit checks retain their own
 authority; nested execution is not reclassified as profile semantics or suite
-dependency. M6-P6/P7/P8 remain admitted and unimplemented while M6-P9 is next.
+dependency. At this admission boundary, M6-P6/P7/P8 remained admitted and
+unimplemented while M6-P9 was next.
 Package and edge authority, all declarative suites, current SCC checks, numeric
 lifecycle, graph freshness, plan structure, read-only hashes, and diff integrity
 pass for the admission.
@@ -2053,3 +2054,28 @@ unimplemented; only one atomic four-checker transition may follow.
 Package and edge authority, all declarative suites, current SCC and retained
 lifecycle gates, numeric lifecycle, graph freshness, plan structure, frozen
 lifecycle hashes, and diff integrity pass for the admission.
+
+### Accepted M6-P6 Through M6-P9 Rust SCC Closure
+
+The four dependency-free suites preserve adoption-retirement, Rust migration-
+index, Rust profile, and row-46 lifecycle contracts under their separate
+canonical owners. All four Bash checkers and the generated SCC are absent; the
+obsolete Rust-profile README-consumer identity is removed and the root audit
+derives 22 remaining consumers.
+
+All four package rows and 62 owner-local incident-edge rows are accepted.
+Internal historical relationships use the opposite registered suite as
+independent-gate evidence without declaring dependencies; retained Rust,
+routing, audit, and lifecycle gates remain checker-backed. Numeric lifecycle
+passes unchanged through absent checker subjects and accepted explicit owners.
+All 116 declarative suites and fresh 161-verifier / 166-node / 781-edge /
+166-component evidence pass. No wrapper, merged owner, false dependency,
+candidate waiver, copied count, source change, or fallback remains.
+
+### Accepted M6-P-W1 Checkpoint
+
+The bounded P1 wave closes with all 161 remaining Bash entrypoints passing in
+the canonical fail-fast mixed checkpoint. No later package is admitted. The
+fresh 161-verifier / 166-node / 781-edge / 166-component graph must be audited
+for canonical ownership and semantic closure before selecting the next package;
+pre-P1 graph shape is historical evidence only.

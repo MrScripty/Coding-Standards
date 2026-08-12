@@ -1,0 +1,21 @@
+schema_version = 1
+id = "rust-profile-authority-closure"
+owner = "profiles/languages/rust/README.md"
+description = "Canonical Rust profile metadata, routes, typed diagnostics, and no-legacy authority without nested checker execution."
+
+[[checks]]
+id = "rust-profile-metadata"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "profiles/languages/rust/README.md"]
+
+[[checks]]
+id = "rust-profile-links"
+type = "markdown_links"
+paths = ["profiles/languages/rust/README.md"]
+
+[[checks]]
+id = "rust-profile-boundary"
+type = "text"
+path = "profiles/languages/rust/README.md"
+required = ["ID: `profile.language.rust`", "Requires: `core`", "Canonical owner: `profiles/languages/rust/README.md`", "(api.md)", "(dependencies.md)", "(release.md)", "(tooling.md)", "(async.md)", "(cross-platform.md)", "(unsafe.md)", "(interop.md)", "(security.md)", "(language-bindings.md)", "## Canonical Routing And No Legacy Authority", "non-normative migration indexes", "they do not own Rust policy", "typed `unavailable`", "typed `invalid`", "typed `unsupported`", "Do not fall back to a legacy Rust file", "default runtime, tool, target", "feature matrix, benchmark adapter, unsafe"]
+prohibited = ["## Detailed Guidance During Migration", "../../../languages/rust/", "remain canonical for specialized rules", "legacy Rust rule conflicts", "Criterion is required"]

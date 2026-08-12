@@ -9,12 +9,12 @@
 **Current phase:** Cross-Platform source closure `7.4c3.7` and delegated
 verification-engine Milestone 5 are accepted. Seven of 27 former normative
 source entrypoints are derived. Verification-engine Milestone 6 Waves 1
-through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
-typed incident-edge semantics govern further checker deletion.
+through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
+through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
+further checker deletion.
 
-**Next slice:** atomically register four dependency-free suites, retire the
-four Rust SCC Bash checkers, and accept M6-P6 through M6-P9. No partial
-implementation is permitted.
+**Next slice:** audit the fresh post-P1 graph and re-plan the next owner-coherent
+package before any admission or implementation.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -139,8 +139,9 @@ M6-P8 is admitted at train order 78 under the canonical Rust profile owner. A
 dependency-free three-check isolated suite preserves exact profile metadata,
 specialized links, typed diagnostics, and no-legacy/no-default authority.
 Exact owner-local edge rows preserve six retained outbound checks as
-independent gates rather than profile-owned dependencies. M6-P6/P7/P8 remain
-unimplemented pending M6-P9 and atomic four-checker acceptance.
+independent gates rather than profile-owned dependencies. At this admission
+boundary, M6-P6/P7/P8 remained unimplemented pending M6-P9 and atomic four-
+checker acceptance.
 
 M6-P9 is admitted at train order 79 under `migration.parent-plan`. A
 dependency-free seven-check isolated suite preserves exact row/package
@@ -148,6 +149,22 @@ identity, owner-validation and set-equal owner/disposition lineage,
 decomposition, and accepted-plan claims. Exact owner-local edge rows preserve
 all opposite checks as independent gates. All four packages remain
 unimplemented until one atomic four-checker acceptance.
+
+M6-P6 through M6-P9 are accepted atomically. Four dependency-free suites
+preserve their separate migration-parent and Rust-profile owner contracts; all
+four Bash checkers and the generated SCC are absent. All 62 owner-local edge
+rows pass with registered-suite evidence only for migrated independent gates,
+while retained checks remain checker-backed. Numeric lifecycle derives each
+retirement from an absent checker and accepted explicit owner; the root audit
+derives 22 consumers. All 116 declarative suites and fresh 161-verifier /
+166-node / 781-edge / 166-component evidence pass without source, engine,
+schema, baseline, wrapper, waiver, false dependency, or fallback changes. The
+mixed checkpoint was deferred to `M6-P-W1` and passed there.
+
+`M6-P-W1` is accepted. The canonical fail-fast mixed checkpoint passes all 161
+remaining Bash entrypoints, including all 116 registered declarative suites.
+No later package is admitted; the fresh post-P1 graph and canonical ownership
+evidence must be audited before the next package is planned.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure
