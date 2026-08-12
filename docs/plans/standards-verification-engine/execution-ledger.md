@@ -2977,3 +2977,21 @@
   checks, and the complete mixed suite of 156 checkers.
 - VE057 and VE058 are accepted. Next slice resumes disposable M6-S1 through
   M6-S3 preflight for rows 20 through 22 before package admission.
+
+## 2026-08-12 - M6-S1 Through M6-S3 Preflight And Admission
+
+- Built disposable dependency-free suites for rows 20 through 22 using exact
+  owner-validation identities, decomposition relations, disposition lineage,
+  report semantics, execution-train owner projection, accepted plan claims,
+  and row-22 positive path state.
+- Passed all 22 generic checks: seven for row 20, seven for row 21, and eight
+  for row 22. All three live Bash checkers and execution train pass
+  independently.
+- Derived identity cardinality through relations rather than copying Bash
+  numeric counts. Added no engine capability, schema, fixture, or permanent
+  probe artifact.
+- Admitted M6-S1, M6-S2, and M6-S3 at train orders 85, 86, and 87. Each owns
+  one local suite/checker replacement and has exactly two admitted incident
+  edges to execution train, both classified as independent gates.
+- Package and edge validators pass against the live graph. Next slice is M6-S1
+  implementation; S2 and S3 remain admitted and ordered.

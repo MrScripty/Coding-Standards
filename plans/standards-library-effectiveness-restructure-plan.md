@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** resume M6-S1 through M6-S3 disposable preflight for rows 20
-through 22 against the accepted unified path-state and containment contracts.
+**Next slice:** implement admitted M6-S1 row 20 at train order 85, then M6-S2
+and M6-S3 in frozen order through train order 87.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3043,6 +3043,12 @@ all structural/routing fixtures pass.
          `contained_file` remains the existing regular-file specialization.
          Focused, engine, declarative, and all 156 mixed checkers pass. Resume
          M6-S1 through M6-S3 preflight without a compatibility path.
+       - `7.4c3ve63` (`Admitted`): disposable suites for rows 20 through 22
+         pass 22 generic checks, all three live Bash checkers pass, and the
+         execution-train gate passes independently. Admit M6-S1 through M6-S3
+         at train orders 85 through 87 with six exact independent-gate edge
+         dispositions. Implement serially without registry dependencies,
+         owner transfer, wrappers, copied counts, or compatibility paths.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

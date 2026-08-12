@@ -2424,3 +2424,18 @@ directories, valid and broken symlinks, missing positive paths, traversal,
 symlink escape, duplicate and overlapping declarations, strict keys, and the
 retired type. All 195 engine tests, 121 declarative suites, and 156 mixed-suite
 checkers pass. M6-S rows 20 through 22 may resume disposable preflight.
+
+### M6-S1 Through M6-S3 Admission
+
+Disposable row suites preserve the live parent-owned contracts with existing
+generic checks. Row 20 and row 21 each pass seven checks. Row 22 passes eight,
+including exact positive state for the Rust release profile and recipe. The
+decomposition and owner-validation identity sets are related directly; no
+copied numeric count is authoritative.
+
+The generated graph has exactly two outgoing incident edges from each row
+checker to execution train: one executable reference and one verifier
+dependency. All six are admitted as independent gates, not registry
+dependencies. No checker has an inbound caller or historical checker-evidence
+transfer. M6-S1 through M6-S3 are admitted at train orders 85 through 87 with
+disjoint local suite/checker paths and serial shared-authority integration.

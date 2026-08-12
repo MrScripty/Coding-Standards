@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-S1 through M6-S3 row-family preflight
+**Current phase:** Milestone 6: M6-S1 through M6-S3 row-family implementation
 
-**Next slice:** prove rows 20 through 22 with disposable contained suites,
-their live Bash checkers, and the independent execution-train gate before
-admitting any package.
+**Next slice:** implement admitted M6-S1 at train order 85, register and pass
+the row-20 suite, delete its Bash checker, and preserve execution train as an
+independent gate.
 
 **Acceptance status:** `pending`
 
@@ -5747,9 +5747,9 @@ suite owner. Local suite/checker paths are disjoint and may be prepared
 concurrently after admission. Registry, package/edge authority, generated
 graph, plans, and ledgers remain serial integration-owner files.
 
-**Preflight write set:** disposable contained suite and registry files outside
-the repository plus these six serial planning records for admission results.
-All permanent repository files remain read-only during preflight.
+**Preflight result:** Accepted. Disposable suites pass 22 existing generic
+checks, all three live checkers pass, and execution train passes independently.
+No permanent probe artifact or engine capability was added.
 
 **Admission gate:** each disposable suite must preserve exact decomposition
 rows and identifier sets, owner validation, reports, execution-train owner,
@@ -5761,13 +5761,12 @@ is a re-plan trigger.
 
 ##### VE057 Positive Path-State Capability Trigger
 
-**Status:** Re-plan required; M6-S1 through M6-S3 remain unadmitted.
+**Status:** Accepted through VE057 and VE058; M6-S preflight resumed.
 
-Row 22 requires content-neutral proof that the Rust release profile and recipe
-paths exist. Current generic checks cannot express that exact contract.
-absent_paths proves only absence; text, Markdown-link, reference-inventory, and
-exact-content checks would add unowned content or relationship requirements.
-Omitting the checks would weaken the Bash contract.
+Row 22 required content-neutral proof that the Rust release profile and recipe
+paths exist. The former generic checks could not express that exact contract.
+The accepted `path_state` contract now preserves this evidence without content
+or relationship authority.
 
 This is a recurring generic invariant, not a row-specific exception. Eleven
 surviving Bash verifiers contain positive path-existence checks, including
@@ -5834,8 +5833,7 @@ rewritten as if the old contract never existed.
 
 ##### VE058 Shared Containment Helper Trigger
 
-**Status:** Re-plan required; the VE057 implementation proposal is not
-accepted.
+**Status:** Accepted with VE057 in canonical shared-contract implementation.
 
 Focused VE057 implementation passes 26 file-contract tests, all 193 engine
 tests, its migrated consumer, and all 121 declarative suites. Review found a
@@ -5886,6 +5884,36 @@ The implementation must prove all existing `contained_file` callers remain
 unchanged and add direct resolver coverage. It may not add mode flags to
 `contained_file`, expose a permissive fallback, retain a private duplicate,
 or change VE057 configuration.
+
+Acceptance returned the validated lexical candidate after checking resolved
+containment so broken symlinks remain observable to `path_state`. Focused,
+engine, declarative, and all 156 mixed checkers pass.
+
+##### M6-S1 Through M6-S3 Admission
+
+**Status:** Admitted at train orders 85 through 87.
+
+The accepted preflight uses seven generic checks for row 20, seven for row 21,
+and eight for row 22. Exact table relations connect decomposition identities
+to owner validation and canonical dispositions; no copied numeric count owns
+cardinality. Row 22 uses `path_state` for its two canonical paths.
+
+Each package owns `migration.parent-plan` historical evidence and one local
+suite/checker replacement. Rust profiles remain canonical domain owners.
+Every row checker has exactly two outgoing incident edges to execution train,
+and all six are admitted as independent gates rather than suite dependencies.
+
+Implementation proceeds serially as M6-S1, M6-S2, then M6-S3. Each accepting
+slice registers and passes the dependency-free suite before deleting its Bash
+checker, changes only that package and its two edge records to accepted,
+regenerates the graph, proves source/evidence files unchanged, and updates the
+six serial records. The mixed Bash checkpoint runs after M6-S3 as M6-S-W1.
+
+**No-fallback rule:** no wrapper, Bash bridge, checker alias, copied
+execution-train behavior, false registry dependency, compatibility parser,
+or owner transfer is permitted. A changed incident edge, stale evidence,
+unrepresentable contract, or required edit outside the admitted write set is a
+re-plan trigger.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

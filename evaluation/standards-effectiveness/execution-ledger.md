@@ -11523,3 +11523,18 @@ Focused verification passed 72 tests, the full engine passed 195 tests, the
 consumer passed 5 checks, all 121 declarative suites passed, and the complete
 mixed suite passed 156 checkers. Next slice is disposable preflight for rows
 20 through 22; no package is admitted by this acceptance.
+
+## 2026-08-12 M6-S1 Through M6-S3 Preflight And Admission
+
+**Outcome:** admitted at train orders 85 through 87; implementation pending.
+
+Disposable dependency-free suites for rows 20, 21, and 22 pass 22 generic
+checks in total. Their three live Bash checkers and execution train pass
+independently. Exact table relations derive decomposition identity consistency
+without copied numeric counts, and row 22 uses the accepted `path_state`
+contract for its two canonical paths.
+
+Each admitted package has one local suite/checker replacement and exactly two
+incident edges to execution train, retained as independent gates with no
+registry dependency. Package and edge authority validators pass. M6-S1 is the
+next implementation slice; M6-S2 and M6-S3 follow in frozen order.
