@@ -2243,6 +2243,18 @@ creates a registry dependency or transfers callee behavior into Q4. Canonical
 sources, dispositions, lifecycle claims, retained gates, engine, and schemas
 remain read-only. All four Q packages are now admitted.
 
+### VE053 Q4 Scope Authority Consistency
+
+Q4's active plan section still copies the exact package file list. The copy
+currently matches the checked manifest, but retaining it after VE052 would
+leave adjacent active Q packages under different scope-authority models and
+preserve manual drift risk.
+
+Recommended recovery points Q4 prose to its unchanged checked package row and
+retains semantic exclusions only. A one-time exception preserves the risk; a
+historical all-package refactor is disproportionate to this active package.
+The prepared Q4 proposal remains unapplied to canonical state.
+
 ### Accepted Q-Wave Preparation Boundary
 
 Q1 through Q4 have pairwise-disjoint local suite and deleted-checker paths.

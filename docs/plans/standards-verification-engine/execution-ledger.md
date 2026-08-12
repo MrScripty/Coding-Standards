@@ -2746,3 +2746,19 @@
   gates, fixtures, engine/schema, numeric evidence, lockfiles, outputs, and
   workflows unchanged. The mixed checkpoint remains deferred to `M6-Q-W1`;
   Q4 integration is next.
+
+## 2026-08-11 - VE053 Q4 Scope Authority Consistency Trigger
+
+- Fresh Q4 audit confirmed the prepared suite preserves its admitted route,
+  prohibition, disposition, lifecycle, and independent-gate contracts.
+- Pre-implementation procedure review found Q4 still copies its exact file
+  list in prose while adjacent Q3 now derives file scope solely from the
+  checked package manifest.
+- The Q4 copies currently agree; this is a consistency and future-drift
+  trigger, not an existing unauthorized path.
+- Stopped before proposal application or registry, package/edge state, graph,
+  source, fixture, engine, schema, lifecycle, numeric, lockfile, build-output,
+  workflow, or canonical implementation changes.
+- Recommended converting only active Q4 prose to the unchanged manifest row
+  plus semantic exclusions before integration. A one-time exception and broad
+  historical cleanup remain bounded alternatives.

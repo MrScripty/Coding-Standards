@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** revalidate and serially integrate the prepared M6-Q4 Coding
-Dependencies Route proposal.
+**Next slice:** select and record the VE053 Q4 scope-authority recovery before
+Coding Dependencies Route integration resumes.
 
 **Acceptance status:** `pending`
 
@@ -5096,7 +5096,7 @@ admission gates are frozen only after isolated suite probes.
 
 ##### M6-Q1 Rust Tooling Criterion Package Admission
 
-**Status:** `Active`
+**Status:** `Blocked`; implementation is unavailable pending VE053.
 
 **Package state:** `accepted` at train order 80.
 
@@ -5439,6 +5439,39 @@ both pass route, conservative prohibition, exact disposition, and lifecycle
 evidence. Package projection and exact edge authority pass against the current
 graph. No permanent suite, registry entry, checker, standards source, fixture,
 engine, schema, numeric evidence, lockfile, build output, or workflow changed.
+
+##### VE053 Q4 Scope Authority Consistency Re-plan
+
+**Status:** `Active`; Q4 shared integration has not started.
+
+Post-Q3 review found that Q4's active package section still copies its exact
+file-level write set into prose. It currently matches the canonical package
+row, so no present scope contradiction exists. However, VE052 established the
+manifest-derived design specifically to remove manual scope drift, and Q4 is
+the next active package governed by the same Q-wave freeze. Implementing Q4
+under the older duplicated representation would knowingly retain inconsistent
+procedure and recreate the failure mechanism just removed from Q3.
+
+**Option 1 - Apply manifest-derived scope to Q4 (`Recommended`):** replace
+Q4's copied file enumeration with a pointer to the checked `M6-Q4` manifest row
+and retain semantic exclusions only. Do not alter the already admitted row.
+Verify package projection, then resume the prepared proposal. This gives the
+remaining active Q-wave work one scope authority without touching accepted
+historical package sections.
+
+**Option 2 - One-time Q4 exception:** retain the matching prose list and
+implement Q4. This is immediately valid because no contradiction exists, but
+it leaves adjacent active Q packages under different scope models and depends
+on reviewers manually proving synchronization.
+
+**Option 3 - Refactor every package section:** convert all active and accepted
+package prose to manifest-derived scope before Q4. This creates broad
+consistency, but expands a local integration prerequisite into historical plan
+cleanup with large review cost and no additional Q4 semantic evidence.
+
+Silently treating Q4 as exempt, changing its manifest scope without admission,
+editing outside the checked row, or introducing generated/copy authority is
+invalid. Selection must be recorded before Q4 implementation resumes.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 
