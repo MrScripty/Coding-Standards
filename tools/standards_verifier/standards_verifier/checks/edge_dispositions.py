@@ -50,12 +50,12 @@ DISPOSITIONS = frozenset(
     }
 )
 REPLACEMENT_KINDS = {
-    "native-engine": "assertion",
-    "independent-gate": "checker",
-    "suite-requires": "suite",
-    "same-owner-package": "package",
-    "external-owned-artifact": "artifact",
-    "invalid/unresolved": "unresolved",
+    "native-engine": ("assertion",),
+    "independent-gate": ("checker", "suite"),
+    "suite-requires": ("suite",),
+    "same-owner-package": ("package",),
+    "external-owned-artifact": ("artifact",),
+    "invalid/unresolved": ("unresolved",),
 }
 STATES = frozenset({"admitted", "accepted"})
 
@@ -550,8 +550,8 @@ class EdgeDispositionsCheck:
         diagnostics: list[Diagnostic],
     ) -> None:
         kind, separator, value = row["replacement"].partition(":")
-        expected_kind = REPLACEMENT_KINDS[row["disposition"]]
-        if not separator or not value or kind != expected_kind:
+        expected_kinds = REPLACEMENT_KINDS[row["disposition"]]
+        if not separator or not value or kind not in expected_kinds:
             diagnostics.append(
                 _diagnostic(
                     context,
@@ -561,7 +561,10 @@ class EdgeDispositionsCheck:
                     path=self.path,
                     row=line_number,
                     field="replacement",
-                    expected=f"{expected_kind}:<value>",
+                    expected=" or ".join(
+                        f"{expected_kind}:<value>"
+                        for expected_kind in expected_kinds
+                    ),
                     observed=row["replacement"],
                 )
             )
@@ -622,6 +625,38 @@ class EdgeDispositionsCheck:
                 suite=context.suite_id,
                 check=self.id,
             )
+            return
+
+        if kind == "suite" and row["disposition"] == "independent-gate":
+            suite_path = registry_paths.get(value)
+            if suite_path is None:
+                diagnostics.append(
+                    _diagnostic(
+                        context,
+                        self.id,
+                        "ASSERT.EDGE_REPLACEMENT",
+                        "independent suite gate is not registered",
+                        path=self.path,
+                        row=line_number,
+                        field="replacement",
+                        observed=row["replacement"],
+                    )
+                )
+                return
+            if row["evidence"] != suite_path:
+                diagnostics.append(
+                    _diagnostic(
+                        context,
+                        self.id,
+                        "ASSERT.EDGE_REPLACEMENT",
+                        "independent suite gate evidence must equal its registered path",
+                        path=self.path,
+                        row=line_number,
+                        field="evidence",
+                        expected=suite_path,
+                        observed=row["evidence"],
+                    )
+                )
             return
 
         if kind == "assertion":

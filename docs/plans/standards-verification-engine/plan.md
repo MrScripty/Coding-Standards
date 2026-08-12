@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-P3 blocked by VE046 edge-evidence lifecycle
+**Current phase:** Milestone 6: M6-P3 root-index closure implementation
 
-**Next slice:** select and implement a VE046 shared edge-contract recovery that
-can represent an independently owned gate after its Bash checker migrates to a
-registered suite, without inventing suite execution dependencies.
+**Next slice:** implement and accept admitted M6-P3 using the accepted VE046
+suite-backed independent-gate evidence contract.
 
 **Acceptance status:** `pending`
 
@@ -4522,8 +4521,8 @@ contract references; diff integrity passes.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 
-**Status:** `Active`; M6-P3 implementation is restored to its clean admission
-boundary and must not resume until one option is selected and accepted.
+**Status:** `Accepted`; Option 1 is implemented and M6-P3 may resume from its
+clean admission boundary.
 
 The focused root-index suite and transferred root audit both passed during the
 aborted implementation, but exact edge authority returned
@@ -4560,15 +4559,25 @@ record only package lineage or allow the deleted checker path to remain as
 nominal evidence. Neither proves the current independent gate is registered
 and executable; both weaken acceptance and are rejected.
 
-**Recommendation:** select Option 1 in a shared-contract slice before resuming
-M6-P3. The slice may change only edge-disposition engine code/tests and docs,
-the active/parent plans, issue register, checker report, and canonical ledger.
-Run focused engine regressions, all engine tests and declarative suites, graph
-freshness, plan/diff checks, and the mixed Bash checkpoint because edge
-interpretation is shared. Do not edit M6-P2 rows or M6-P3 implementation files
-until the capability is accepted. M6-P3 acceptance may then atomically convert
-the two affected M6-P2 historical rows to explicit suite evidence while
-accepting its own five rows.
+**Accepted decision and implementation:** Option 1 retains one semantic
+`independent-gate` disposition with two explicit representation tags. A live
+gate uses `checker:<contained-path>`. A migrated gate uses
+`suite:<registered-id>`, whose evidence must equal the suite's exact registered
+path. The suite form neither requires nor synthesizes a registry dependency;
+`suite-requires` remains reserved for an actual registered `requires` edge.
+The validator does not infer representation, ownership, or dependency from
+graph shape, syntax, or registry topology.
+
+Focused coverage proves an accepted historical gate can transition to a suite
+with an empty dependency list and rejects unknown suite IDs, mismatched
+evidence paths, and dependency-expression syntax. Existing checker-backed and
+`suite-requires` behavior remains strict. Verification passes 31 focused edge
+tests, all 183 engine tests, Python compilation, all 109 declarative suites,
+fresh graph evidence at 168 Bash verifiers / 173 nodes / 852 edges / 169
+components, and the complete mixed checkpoint. No M6-P2 row or M6-P3
+implementation file changed in the capability slice. M6-P3 acceptance may now
+atomically convert the two affected M6-P2 historical rows to explicit suite
+evidence while accepting its own five rows.
 
 **Tasks:**
 

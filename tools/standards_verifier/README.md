@@ -197,19 +197,22 @@ Each edge row has one of these dispositions and replacement forms:
 | Disposition | Replacement form |
 | --- | --- |
 | `native-engine` | `assertion:<suite-path>#<check-id>` |
-| `independent-gate` | `checker:<path>` |
+| `independent-gate` | `checker:<path>` or `suite:<registered-suite-id>` |
 | `suite-requires` | `suite:<source-suite-id>-><target-suite-id>` |
 | `same-owner-package` | `package:<package-id>` |
 | `external-owned-artifact` | `artifact:<path>` |
 | `invalid/unresolved` | `unresolved:none` |
 
 Native assertions must name an existing check in a registered package-owned
-suite. Suite requirements must name an actual registry `requires` edge whose
-source suite is in the package write set. Retained checkers and external
-artifacts must equal the endpoint opposite the package checker. Replacement and
-evidence paths are repository-contained regular files. An `invalid/unresolved` row may
-document an admitted blocker but cannot be accepted. The check never infers a
-disposition from graph shape or executes a replacement.
+suite. A suite-backed independent gate names one registered suite, and its
+evidence must equal that suite's exact registry path. It does not create or
+require a registry dependency. Suite requirements are distinct: they must name
+an actual registry `requires` edge whose source suite is in the package write
+set. Retained checkers and external artifacts must equal the endpoint opposite
+the package checker. Replacement and evidence paths are repository-contained
+regular files. An `invalid/unresolved` row may document an admitted blocker but
+cannot be accepted. The check never infers a disposition from graph shape,
+replacement syntax, or registry topology, and it never executes a replacement.
 
 ## Exit Status
 

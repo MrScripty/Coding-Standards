@@ -10815,3 +10815,28 @@ M6-P3 resumes.
 
 **Next slice:** select one VE046 option. No M6-P3 implementation file is
 authorized before the shared edge contract is accepted.
+
+## 2026-08-11 VE046 Independent-Gate Evidence Acceptance
+
+**Outcome:** Option 1 accepted; M6-P3 is unblocked at its admitted boundary.
+
+The edge-disposition contract retains one semantic `independent-gate`
+disposition and accepts two explicit representations. `checker:<path>` proves a
+live Bash gate. `suite:<registered-id>` proves a migrated declarative gate and
+requires evidence equal to the suite's exact registered path. The suite form
+does not create or require a registry dependency; `suite-requires` continues to
+prove only actual registry `requires` edges.
+
+**No-fallback result:** the validator does not infer representation,
+dependency, ownership, or current evidence from graph shape or package lineage.
+Unknown suite IDs, mismatched evidence paths, and dependency-expression syntax
+are typed invalid. No wrapper, compatibility parser, waived path, false
+dependency, M6-P2 row change, or M6-P3 implementation change is present.
+
+**Verification:** 31 focused edge tests pass; all 183 engine tests and Python
+compilation pass; all 109 declarative suites pass; generated evidence remains
+fresh at 168 Bash verifiers / 173 nodes / 852 edges / 169 components; and the
+complete mixed checkpoint passes across all 168 surviving Bash verifiers.
+
+**Next slice:** implement and accept M6-P3 within its frozen write set, including
+the exact historical independent-gate evidence transition authorized here.

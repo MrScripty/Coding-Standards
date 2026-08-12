@@ -43,10 +43,10 @@ class EdgeDispositionsTest(unittest.TestCase):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(textwrap.dedent(content).lstrip(), encoding="utf-8")
 
-    def write_registry(self) -> None:
+    def write_registry(self, *, edge_requires: tuple[str, ...] = ("target",)) -> None:
         self.write(
             "registry.toml",
-            """
+            f"""
             schema_version = 1
 
             [[suites]]
@@ -57,7 +57,7 @@ class EdgeDispositionsTest(unittest.TestCase):
             [[suites]]
             id = "edges"
             path = "suites/edges.toml"
-            requires = ["target"]
+            requires = {json.dumps(list(edge_requires))}
             """,
         )
 
@@ -218,6 +218,85 @@ class EdgeDispositionsTest(unittest.TestCase):
         )
 
         self.assertEqual(self.run_contract().status, "passed")
+
+    def test_accepted_independent_suite_gate_requires_no_registry_edge(self) -> None:
+        self.write_registry(edge_requires=())
+        (self.root / "target.sh").unlink()
+        self.write_package(state="accepted")
+        self.write("edges.tsv", EDGE_HEADER)
+        self.write(
+            "edge-dispositions.tsv",
+            MANIFEST_HEADER
+            + self.row(
+                disposition="independent-gate",
+                replacement="suite:target",
+                evidence="suites/target.toml",
+                state="accepted",
+            ),
+        )
+
+        self.assertEqual(self.run_contract().status, "passed")
+
+    def test_independent_suite_gate_rejects_unknown_suite(self) -> None:
+        self.write_registry(edge_requires=())
+        self.write_package(state="accepted")
+        self.write("edges.tsv", EDGE_HEADER)
+        self.write(
+            "edge-dispositions.tsv",
+            MANIFEST_HEADER
+            + self.row(
+                disposition="independent-gate",
+                replacement="suite:missing",
+                state="accepted",
+            ),
+        )
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_REPLACEMENT", {item.code for item in result.diagnostics}
+        )
+
+    def test_independent_suite_gate_rejects_mismatched_evidence(self) -> None:
+        self.write_registry(edge_requires=())
+        self.write_package(state="accepted")
+        self.write("edges.tsv", EDGE_HEADER)
+        self.write(
+            "edge-dispositions.tsv",
+            MANIFEST_HEADER
+            + self.row(
+                disposition="independent-gate",
+                replacement="suite:target",
+                evidence="evidence.md",
+                state="accepted",
+            ),
+        )
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_REPLACEMENT", {item.code for item in result.diagnostics}
+        )
+
+    def test_independent_suite_gate_rejects_dependency_expression(self) -> None:
+        self.write_registry(edge_requires=())
+        self.write_package(state="accepted")
+        self.write("edges.tsv", EDGE_HEADER)
+        self.write(
+            "edge-dispositions.tsv",
+            MANIFEST_HEADER
+            + self.row(
+                disposition="independent-gate",
+                replacement="suite:edges->target",
+                state="accepted",
+            ),
+        )
+
+        result = self.run_contract()
+
+        self.assertIn(
+            "ASSERT.EDGE_REPLACEMENT", {item.code for item in result.diagnostics}
+        )
 
     def test_all_non_suite_replacement_forms_pass_while_admitted(self) -> None:
         self.write("source.sh", "#!/usr/bin/env bash\n")

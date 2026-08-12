@@ -1865,3 +1865,19 @@ recommended recovery is one explicit checker-or-registered-suite tagged union
 under `independent-gate`, with no inferred dependency or fallback. M6-P3 remains
 admitted but unimplemented until the shared contract and checkpoint are
 accepted.
+
+### Accepted VE046 Suite-Backed Independent Gates
+
+Option 1 is accepted. The edge validator preserves `independent-gate` as one
+semantic disposition and now accepts either `checker:<contained-path>` for a
+live Bash gate or `suite:<registered-id>` for a migrated declarative gate. A
+suite-backed gate must name a registered suite and use that suite's exact
+registry path as evidence. It does not create or require a registry dependency;
+actual dependency authority remains exclusively `suite-requires`.
+
+Focused tests prove the accepted-history transition with an empty dependency
+list and reject unknown suites, mismatched evidence, and dependency syntax in
+the independent form. All 31 edge tests, all 183 engine tests, Python
+compilation, all 109 declarative suites, fresh 168-verifier / 173-node /
+852-edge / 169-component graph evidence, and the complete mixed checkpoint
+pass. M6-P3 remains admitted and is now unblocked.
