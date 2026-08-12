@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-S1 through M6-S3 row-family implementation
+**Current phase:** Milestone 6: post-M6-S graph and ownership audit
 
-**Next slice:** implement admitted M6-S3 at train order 87, register and pass
-the row-22 suite, delete its Bash checker, and run the M6-S-W1 mixed checkpoint.
+**Next slice:** inspect the fresh 153-verifier graph and remaining row-family
+ownership/evidence shapes before admitting another bounded package.
 
 **Acceptance status:** `pending`
 

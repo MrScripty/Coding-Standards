@@ -1,5 +1,4 @@
 edge_type	source	target
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-22-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-32-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-33-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-source-package-preparation.sh
@@ -17,7 +16,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-18-decomposition.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-22-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-32-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-33-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
@@ -80,7 +78,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-source-package
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-launcher-population.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-rust-no-std-closure.sh
-contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-row-22-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-row-32-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-row-33-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-source-package-preparation.sh
@@ -224,7 +221,6 @@ executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-1
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-18-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-22-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-23-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-23-decomposition.sh	evaluation/standards-effectiveness/verify-rust-no-std-closure.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-24-decomposition.sh	evaluation/standards-effectiveness/verify-full-review-prompt-entrypoint.sh
@@ -594,7 +590,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-14
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-18-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-22-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-23-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-23-decomposition.sh	evaluation/standards-effectiveness/verify-rust-no-std-closure.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-24-decomposition.sh	evaluation/standards-effectiveness/verify-full-review-prompt-entrypoint.sh

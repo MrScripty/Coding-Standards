@@ -11558,3 +11558,13 @@ The dependency-free row-21 suite passes seven exact checks and replaces the
 deleted Bash checker without a wrapper or fallback. The graph now has 154 Bash
 verifiers, 159 nodes, 770 edges, and 159 components. Declarative and retained
 execution-train gates pass. M6-S3 and the M6-S-W1 mixed checkpoint are next.
+
+## 2026-08-12 M6-S3 Row 22 And M6-S-W1 Acceptance
+
+**Outcome:** M6-S3 accepted at train order 87; wave checkpoint accepted.
+
+The dependency-free row-22 suite passes eight checks, including canonical
+positive path state, and replaces the deleted Bash checker without a wrapper
+or fallback. The graph now has 153 Bash verifiers, 158 nodes, 765 edges, and
+158 components. All 124 declarative suites and all 153 complete mixed-suite
+entrypoints pass. No later package is admitted; a fresh audit is next.

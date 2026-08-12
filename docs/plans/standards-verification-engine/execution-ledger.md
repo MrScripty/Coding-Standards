@@ -3021,3 +3021,16 @@
 - All declarative suites, execution train, package/edge authority, graph,
   removal, plan, and diff gates pass. M6-S2 and its two edge records are
   accepted; M6-S3 and the M6-S-W1 mixed checkpoint are next.
+
+## 2026-08-12 - M6-S3 Row 22 And M6-S-W1 Acceptance
+
+- Registered and passed the dependency-free eight-check row-22 suite before
+  deleting its Bash checker.
+- Preserved exact child order, identities, owner validation, disposition
+  lineage, report semantics, execution owner, plan claims, and positive state
+  for the Rust release profile and recipe through canonical `path_state`.
+- Regenerated 153 Bash verifiers, 158 nodes, 765 edges, and 158 components.
+- All 124 declarative suites and all 153 complete mixed-suite entrypoints pass,
+  along with graph, package/edge, execution-train, removal, plan, and diff
+  gates. M6-S1 through M6-S3 and M6-S-W1 are accepted.
+- No later package is admitted. Next slice is a fresh graph and ownership audit.

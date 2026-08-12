@@ -2455,3 +2455,12 @@ The registered row-21 suite passes seven exact checks and replaces its Bash
 checker without a wrapper. Its two execution-train edges remain accepted
 independent gates. The regenerated graph contains 154 Bash verifiers, 159
 nodes, 770 edges, and 159 components. M6-S3 remains admitted at train order 87.
+
+### M6-S3 And M6-S-W1 Acceptance
+
+The registered row-22 suite passes eight exact checks, including positive
+state for both canonical Rust release paths, and replaces its Bash checker.
+All six former S-wave execution-train edges remain accepted independent gates.
+The graph now contains 153 Bash verifiers, 158 nodes, 765 edges, and 158
+components. All 124 declarative suites and all 153 mixed-suite checkers pass.
+M6-S1 through M6-S3 are accepted; another package requires a fresh audit.
