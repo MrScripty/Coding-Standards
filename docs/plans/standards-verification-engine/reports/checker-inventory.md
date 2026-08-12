@@ -2339,3 +2339,20 @@ shared authority. One mixed Bash checkpoint follows Q4. Stale, overlapping,
 semantically changed, or capability-blocked proposals trigger re-planning;
 wrappers, bridges, aliases, dual authority, copied gates, inferred dependencies,
 and compatibility fallbacks remain prohibited.
+
+### VE055 Parent-Owned Row-Family Preflight
+
+The post-M6-R1 graph contains 156 Bash verifiers, 161 nodes, 771 edges, and 161
+components. Rows 29 through 31 already use generic declarative checks under
+`migration.parent-plan`; remaining rows 20 through 28 and 32 through 34 vary
+in child sets, owner projections, reports, dispositions, accepted claims, and
+independent gate fan-out.
+
+Option 4 assigns historical row identity, ordering, owner validation,
+disposition lineage, and accepted lifecycle evidence to
+`migration.parent-plan` while leaving current behavior and domain gates with
+their canonical owners. Rows 24, 25, and 34 form the representability probe
+set. The probes are disposable and contained, derive mechanical values, and
+cannot change permanent engine, suite, registry, checker, package, edge, graph,
+source, fixture, or schema authority. A generic engine addition requires the
+same exact missing invariant in at least two probes.

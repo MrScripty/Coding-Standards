@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** audit the fresh post-M6-R1 graph and owner evidence before
-selecting or admitting another checker-migration package.
+**Next slice:** run VE055 disposable representability probes for rows 24, 25,
+and 34 before classifying or admitting remaining row-decomposition packages.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3001,6 +3001,13 @@ all structural/routing fixtures pass.
          evidence, retain Name/Input independently, apply source-wide legacy
          purity, and delete the Bash checker. All focused, declarative, graph,
          plan, removal, read-only, diff, and complete mixed checks pass.
+       - `7.4c3ve56` (`Active preflight`): assign historical row-decomposition
+         and migration-lifecycle evidence to `migration.parent-plan`, retain
+         current behavior and gates with canonical domain owners, and probe
+         rows 24, 25, and 34 with disposable contained suites. Derive
+         mechanical values and add engine capability only when the same exact
+         invariant is unrepresentable in at least two probes. No row package is
+         admitted by this planning slice.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

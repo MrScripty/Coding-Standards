@@ -2868,3 +2868,23 @@
   and complete mixed verification pass.
 - Accepted M6-R1 at train order 84. No later package is admitted; a fresh graph
   and ownership audit is required before another selection.
+
+## 2026-08-12 - VE055 Parent-Owned Row-Family Preflight
+
+- Selected Option 4 after the fresh post-M6-R1 audit.
+- Assigned historical row decomposition, owner projection, order,
+  disposition lineage, and accepted lifecycle evidence to
+  `migration.parent-plan`; current policy remains with canonical domain
+  owners.
+- Kept domain verifiers independent unless a row suite truly consumes their
+  result. Historical evidence may transfer directly to a registered suite
+  without becoming a dependency.
+- Selected rows 24, 25, and 34 as disposable representability probes spanning
+  simple, narration-heavy, and multi-owner/multi-gate structures.
+- Prohibited copied counts and permanent suite, registry, engine, schema,
+  package, edge, graph, source, fixture, checker, lockfile, output, or workflow
+  changes during the probes.
+- A shared engine addition requires the same exact missing invariant in at
+  least two probes. Otherwise the remaining rows are classified into bounded
+  parent-owned packages and concurrent preparation waves with serial shared
+  integration.

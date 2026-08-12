@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-R1 fresh-graph audit
+**Current phase:** Milestone 6: VE055 parent-owned row-family preflight
 
-**Next slice:** audit the fresh post-M6-R1 graph and owner evidence before
-selecting or admitting another checker-migration package.
+**Next slice:** run disposable representability probes for rows 24, 25, and 34
+before classifying or admitting the remaining row-decomposition packages.
 
 **Acceptance status:** `pending`
 
@@ -5641,6 +5641,72 @@ authority, all declarative suites, generated graph freshness, plan checks,
 read-only source evidence, diff integrity, and the complete mixed suite pass.
 The fresh graph contains 156 Bash verifiers, 161 nodes, 771 edges, and 161
 components. No later package is admitted.
+
+##### VE055 Parent-Owned Row-Family Preflight
+
+**Status:** `Active`; Option 4 selected for bounded family architecture and
+representability proof.
+
+The fresh post-M6-R1 graph contains 156 Bash verifiers, 161 nodes, 771 edges,
+and 161 components. Rows 29 through 31 already demonstrate that historical
+row-decomposition contracts can use existing generic table and text
+assertions under `migration.parent-plan`. Rows 20 through 28 and 32 through 34
+remain Bash-backed, but they are not one mechanically identical contract:
+their child cardinality, owner projections, disposition evidence, accepted
+claims, reports, and independent domain-gate sets differ.
+
+The ownership boundary is frozen as follows:
+
+- `migration.parent-plan` owns historical decomposition identity, expected
+  owner projection, execution order, disposition lineage, and accepted
+  migration-lifecycle evidence;
+- canonical domain modules own current policy behavior and remain the only
+  normative owners of that behavior;
+- a domain verifier remains an independent package or wave gate unless the
+  declarative row suite consumes its result as a true prerequisite;
+- accepted historical checker evidence transfers directly to the registered
+  row suite with `suite:<registered-id>` and does not create a suite
+  dependency;
+- counts, cardinalities, owner totals, and other mechanical values are derived
+  from checked rows and projections. Configuration may state semantic
+  identities and exact expected sets, but may not duplicate their lengths as
+  count authority.
+
+Before any family package is admitted, three disposable contained suites must
+probe the structural range of the remaining rows:
+
+| Probe | Structural role | Required proof |
+| --- | --- | --- |
+| row 24 | one owner and one child | exact decomposition, owner map, execution-train identity, disposition lineage, accepted claims, and separately executed full-review and train gates |
+| row 25 | one child with complex planning/concurrency/recovery narration | exact decomposition and owner projection, required report semantics and accepted claims, plus separately executed planning, implementation-entrypoint, and train gates |
+| row 34 | six children across Frontend, TypeScript, and Accessibility domains | exact per-child owner/lifecycle projection, report and accepted claims, plus all separately owned domain gates and the train gate |
+
+Each probe uses the current generic assertion vocabulary and a disposable
+contained registry. It may read the live row evidence and run the live Bash
+checker for comparison, but it may not add a permanent suite, alter the shared
+registry, edit the engine or schemas, change evidence, admit a package, or
+delete a checker. Temporary probe files are removed after execution.
+
+An engine capability is authorized for design only when at least two probes
+expose the same invariant that cannot be represented exactly by current
+generic checks. A row-specific assertion, copied Bash algorithm, arbitrary
+command action, wrapper, compatibility schema, false dependency, or weakened
+projection is invalid. If all probes are representable, the next planning
+slice classifies rows 20 through 28 and 32 through 34 into owner-local packages
+and bounded concurrent preparation waves with serial shared-authority
+integration.
+
+**Probe write set:** temporary contained suite and registry files outside the
+repository plus these six serial planning records for results. Canonical
+standards, evidence, fixtures, suites, registry, checkers, package/edge state,
+generated graph, engine, schemas, lockfiles, outputs, and workflows remain
+read-only.
+
+**Re-plan triggers:** a repeated unrepresentable invariant in at least two
+probes; evidence requiring a different canonical owner; a true domain-suite
+dependency; conflicting historical evidence authority; or a required edit
+outside the frozen probe write set. One exceptional row does not authorize a
+family-wide engine abstraction.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

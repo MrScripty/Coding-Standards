@@ -11432,3 +11432,21 @@ The fresh generated graph has 156 Bash verifiers, 161 nodes, 771 edges, and 161
 components. Focused, package, edge, declarative, graph, plan, removal,
 read-only-source, diff, and complete mixed verification pass. No later package
 is admitted; package selection requires a fresh audit.
+
+## 2026-08-12 VE055 Parent-Owned Row-Family Preflight
+
+**Outcome:** Option 4 selected; no package admitted.
+
+Historical decomposition identity, owner projection, order, disposition
+lineage, and accepted migration-lifecycle evidence are assigned to
+`migration.parent-plan`. Current behavior remains with canonical domain
+owners, and domain verifiers remain independent gates unless a row suite truly
+consumes their result.
+
+Rows 24, 25, and 34 will receive disposable contained-suite probes spanning a
+single-child row, a narration-heavy planning/concurrency row, and a six-child
+multi-domain row. Mechanical values are derived from checked evidence rather
+than copied as count authority. Only the same exact unrepresentable invariant
+in at least two probes can justify a new generic engine capability. No package,
+edge, suite, checker, registry, graph, source, fixture, engine, schema,
+lifecycle, numeric, lockfile, output, or workflow authority changed.
