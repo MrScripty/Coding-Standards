@@ -1794,3 +1794,26 @@ removed paths, shell syntax, and diff integrity pass. Final evidence records
 169 Bash verifiers, 174 nodes, 852 edges, and 170 components. The bounded-wave
 mixed checkpoint is deferred to `M6-P-W1`; no routed standards source, engine,
 schema, numeric evidence, lockfile, build output, or workflow changed.
+
+### Admitted M6-P2 Row-35 Lifecycle
+
+Row 35 has ten executable incident edges, all outbound to retained independent
+gates. It also reads a four-caller manifest and dynamically executes those
+callers, behavior that conservative graph extraction does not represent as
+row-35 edges. Exact script review therefore freezes both contracts separately:
+typed edge rows preserve the six retained gates, while the planned suite derives
+and line-validates the four direct caller paths without executing them.
+
+The unique row-35 contract is finite lifecycle evidence in execution,
+owner-validation, README-dependency, transitive-caller, train, package, plan,
+and decomposition records. Existing table, reference-inventory, and text
+checks can preserve it without expected mutable totals, regex, callbacks,
+commands, wrapper execution, or package-specific engine code. M6-P2 changes no
+lifecycle input, caller, gate, standards source, or engine contract at
+admission.
+
+The current checker, package projection, all ten exact incident-edge rows, all
+108 declarative suites, graph freshness, both plan checks, and diff integrity
+pass. Admission preserves 169 Bash verifiers, 174 nodes, and 170 components;
+five new contract references bring the graph to 857 edges without changing
+executable topology.

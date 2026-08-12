@@ -12,10 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** preflight and admit P1 package 2 for row-35 migration lifecycle.
-Freeze its unique retained lifecycle evidence, nested checker-execution
-removal, exact incident edges, dependencies, and bounded write set before
-implementation. Release Procedure and remaining P1 packages stay unadmitted.
+**Next slice:** implement admitted M6-P2 for row-35 migration lifecycle. Add one
+registered lifecycle suite, remove the Bash checker, and preserve all retained
+gate and dynamic-caller evidence without nested execution. Release Procedure
+and remaining P1 packages stay unadmitted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -41,6 +41,17 @@ row-35 lifecycle checks, all 108 declarative suites, removed paths, shell
 syntax, plan/diff integrity, and fresh 169-verifier / 174-node / 852-edge /
 170-component evidence pass. The mixed checkpoint remains deferred to
 `M6-P-W1`.
+
+M6-P2 is admitted at train order 72 under `migration.parent-plan`. Exact review
+separates finite row-35 lifecycle tables and plan text from six independently
+owned retained gates and four manifest-derived dynamic callers. Ten executable
+incident edges have exact independent-gate dispositions; dynamic caller
+membership and invocation remain suite evidence rather than invented graph
+edges. Lifecycle inputs, callers, retained gates, standards, and engine remain
+read-only through implementation.
+Admission verification passes the current row-35 checker, package and all ten
+edge dispositions, all 108 declarative suites, both plan checks, diff integrity,
+and fresh 169-verifier / 174-node / 857-edge / 170-component evidence.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

@@ -10688,3 +10688,38 @@ mixed Bash checkpoint remains deferred to `M6-P-W1`.
 
 **Next slice:** preflight and admit the row-35 lifecycle package only after its
 unique retained evidence and every incident edge are frozen.
+
+## 2026-08-11 M6-P2 Row-35 Lifecycle Admission
+
+**Outcome:** admitted at train order 72; implementation is active.
+
+Exact review identifies finite unique lifecycle evidence across row-35
+execution decomposition, owner validation, README dependency, transitive
+caller, execution-train, accelerated-package, decomposition, and parent-plan
+records. Existing generic table, reference-inventory, and text assertions can
+preserve every retained decision while deriving mutable report totals.
+
+All ten executable incident edges are outbound to six retained independent
+gates and have exact typed dispositions. Four additional callers are loaded and
+executed dynamically from the transitive-caller manifest, so they are not
+invented as graph edges. The suite will derive their exact membership and prove
+their newline-bounded invocation lines, then remove every nested execution from
+the deleted row-35 checker.
+
+**No-fallback result:** no suite, registry entry, checker, lifecycle record,
+caller, gate, generated artifact, standards source, engine, schema, numeric
+evidence, lockfile, build output, or workflow changed. No wrapper, bridge,
+graph-inferred invocation, mutable expected count, caller snapshot, or duplicate
+semantic owner is authorized.
+
+**Bounded write set:** package and edge manifests, package projection, four
+generated checker artifacts, active and parent plans, checker-inventory report,
+and this ledger only.
+
+**Verification:** current row-35 checker passes; package projection and all ten
+exact incident-edge rows pass; all 108 declarative suites pass; generated
+evidence is fresh at 169 Bash verifiers / 174 nodes / 857 edges / 170 components
+and contains only five intended new contract references; both plan checks and
+diff integrity pass.
+
+**Next slice:** implement and accept M6-P2 within its frozen write set.

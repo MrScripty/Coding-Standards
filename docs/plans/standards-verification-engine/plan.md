@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-P1 accepted; P1 package 2 preflight
+**Current phase:** Milestone 6: admitted M6-P2 row-35 lifecycle replacement
 
-**Next slice:** preflight and admit the second frozen P1 package for row-35
-migration lifecycle. Freeze its retained unique lifecycle behavior, nested
-checker-execution removal, exact incident edges, dependencies, and bounded
-write set before implementation.
+**Next slice:** implement admitted M6-P2 by registering the exact row-35
+lifecycle suite, removing its Bash checker, and retaining all independently
+owned gates and dynamic callers without nested execution.
 
 **Acceptance status:** `pending`
 
@@ -4380,6 +4379,68 @@ components; shell syntax and removed-path evidence pass. Canonical standards,
 metadata helper, engine, tests, schemas, numeric evidence, lockfiles, build
 output, and workflows are unchanged. The mixed Bash checkpoint remains
 explicitly deferred to `M6-P-W1`.
+
+##### M6-P2 Row-35 Lifecycle Package Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 72.
+
+Exact script review separates row 35's unique lifecycle evidence from nested
+execution. The unique contract is: two ordered execution-decomposition rows
+covering `STD-0001` through `STD-0006`; six exact owner/disposition rows;
+reviewed README-dependency classifications and live evidence paths; four exact
+transitive Contract Ownership callers; required decomposition headings and
+no-fallback statements; exact row-35 execution-train and package-gate records;
+and three historical parent-plan acceptance markers. Current dependency,
+consumer, and caller totals are derived reports and are not expected values.
+
+The declarative suite uses exact `table` projections for finite lifecycle
+membership and fields, `reference_inventory` for contained evidence and caller
+membership, and newline-bounded `text` assertions for direct invocation and
+decomposition/parent-plan evidence. One exact caller-selection suffix derives
+the four current caller paths from canonical live checker inventory after the
+row-35 source is removed; per-caller newline-bounded assertions preserve the
+two accepted shell variable forms without regex, command execution, or parser
+inference.
+
+The generated graph has ten executable incident edges, all outbound to six
+retained independent gates: Commit Authority, Contract Ownership, execution
+train, root index closure, root README consumer audit, and root Router evidence.
+All ten receive exact `independent-gate` dispositions. Four additional checker
+executions are loaded dynamically from the transitive-caller manifest and do
+not appear as row-35 graph edges; the suite preserves their exact membership and
+invocation lines while removing their nested execution. Generated package
+contract references remain lifecycle evidence only.
+
+**Allowed implementation write set:** package and edge manifests; package
+projection; suite registry; `suites/milestone-7-row-35-decomposition.toml`; the
+deleted row-35 checker; verification README; all four generated checker
+artifacts; this plan; checker-inventory report; canonical evaluation ledger;
+and parent plan. Every lifecycle TSV/Markdown input, all four dynamic callers,
+all six retained gate checkers, standards sources, engine code/tests, schemas,
+numeric evidence, unrelated suites/fixtures/checkers, lockfiles, build output,
+and workflows remain read-only.
+
+**No-fallback rule:** register and pass the suite before deleting the checker.
+Do not execute a retained checker from Python or Bash, preserve a wrapper,
+infer invocation from graph shape, copy mutable counts, add a caller snapshot,
+rewrite lifecycle evidence, duplicate another owner's semantic assertions, or
+retain Bash and declarative authority together. Any missing exact table/text
+representation, additional incident edge, caller form, or changed lifecycle
+owner is a re-plan trigger.
+
+**Acceptance gate:** focused row-35 suite; package and exact incident-edge
+authority; all declarative suites; removed checker path; README route; graph
+freshness; both plan checks; exact read-only lifecycle/caller/gate/source/engine
+evidence; diff integrity; and the deferred `M6-P-W1` mixed checkpoint.
+
+**Admission verification:** the current row-35 checker passes; package
+projection and all ten exact incident-edge dispositions pass; all 108
+declarative suites pass; generated evidence is fresh at 169 Bash verifiers /
+174 nodes / 857 edges / 170 components and adds only five non-executable
+contract references from package/edge authority; both plan checks and diff
+integrity pass.
 
 **No-fallback rule:** do not replace exact structure with substring checks,
 replace absent-path evidence with table absence, freeze whole files for
