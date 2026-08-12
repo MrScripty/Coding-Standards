@@ -2662,3 +2662,17 @@
   suite dependency; immutable historical checker endpoints remain lineage.
 - The mixed Bash checkpoint remains deferred to `M6-Q-W1`; Q2 integration is
   next.
+
+## 2026-08-11 - M6-Q2 Accessibility Evidence Closure Acceptance
+
+- Reconstructed proposal `e173989` on the accepted Q1 revision and confirmed
+  its diff remained limited to the suite addition and checker deletion.
+- Registered the dependency-free seven-check suite and accepted Q2 after all
+  thirteen decisions, source boundaries, heading policy, four dispositions,
+  and lifecycle claims passed.
+- Retained Accessibility Media as a checker-backed independent gate with no
+  copied behavior or suite dependency.
+- Confirmed numeric lifecycle authorizes the removed checker's symbolic
+  candidate from the unchanged reviewed baseline and Q2's accepted owner; no
+  numeric baseline or decision file changed.
+- The mixed checkpoint remains deferred to `M6-Q-W1`; Q3 integration is next.

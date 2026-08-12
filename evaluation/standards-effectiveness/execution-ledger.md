@@ -11201,3 +11201,20 @@ checker endpoints as immutable lineage while changing evidence to
 has no dependency. No wrapper, bridge, alias, copied count, compatibility
 representation, package-specific branch, or fallback remains. The mixed Q
 checkpoint is deferred until Q4; Q2 serial integration is next.
+
+## 2026-08-11 M6-Q2 Accessibility Evidence Closure Acceptance
+
+**Outcome:** accepted at train order 81.
+
+The Q2 proposal was reconstructed on the accepted Q1 revision, registered, and
+passed before Bash checker deletion. Seven generic checks preserve all thirteen
+typed decisions, canonical/reference/legacy boundaries, the nonempty derived
+level-two heading policy, four exact dispositions, and accepted lifecycle
+claims. Accessibility Media remains a separately selected checker-backed gate;
+Q2 has no registry dependency and copies no media semantics.
+
+Numeric lifecycle derives the former symbolic heading candidate's retirement
+from the unchanged immutable baseline and the accepted Q2 package owner. No
+manual candidate, count, baseline, or classification update was required. No
+wrapper, bridge, alias, dual authority, compatibility representation, or
+fallback remains. Q3 serial integration is next.

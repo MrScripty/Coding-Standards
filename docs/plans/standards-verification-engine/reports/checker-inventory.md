@@ -2158,6 +2158,14 @@ dependency or transfers media semantics into Q2. Canonical sources, fixture,
 dispositions, media gate, engine, and schemas remain read-only. Q3 preflight is
 next.
 
+### Accepted M6-Q2 Accessibility Evidence Closure
+
+The registered dependency-free seven-check suite replaces the absent Bash
+checker and preserves all admitted evidence. Accessibility Media remains a
+checker-backed independent gate. Numeric lifecycle derives the removed
+symbolic candidate from immutable reviewed evidence plus Q2's accepted owner,
+so no numeric evidence was edited. Q3 remains next.
+
 ### Admitted M6-Q3 Architecture Population
 
 A disposable dependency-free four-check suite matches the Coding Architecture

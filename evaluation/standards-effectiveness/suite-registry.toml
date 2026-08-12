@@ -584,3 +584,8 @@ requires = []
 id = "rust-tooling-criterion"
 path = "evaluation/standards-effectiveness/suites/rust-tooling-criterion.toml"
 requires = []
+
+[[suites]]
+id = "accessibility-evidence-closure"
+path = "evaluation/standards-effectiveness/suites/accessibility-evidence-closure.toml"
+requires = []

@@ -14,7 +14,7 @@ through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
 **Next slice:** revalidate and serially integrate the prepared verification-
-engine M6-Q2 Accessibility Evidence Closure proposal.
+engine M6-Q3 Architecture Population proposal.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -206,6 +206,14 @@ Its two current edges to Accessibility Media are separate checker-backed
 independent gates, not a registry dependency or copied Q2 behavior. No permanent
 suite, registry, checker, fixture, standards, engine, schema, lockfile, build
 output, or workflow authority changed; Q3 preflight is next.
+
+`M6-Q2` is accepted. Its registered dependency-free seven-check suite replaces
+the absent Bash checker while preserving all thirteen typed decisions, source
+boundaries, derived heading policy, four dispositions, and lifecycle claims.
+Accessibility Media remains an independent checker-backed gate with no suite
+dependency. Numeric retirement is derived from unchanged reviewed baseline
+evidence and Q2's accepted owner; no manual count or numeric evidence changed.
+Q3 serial integration is next.
 
 `M6-Q3` is admitted at train order 82. A disposable dependency-free four-check
 suite exactly matches the Coding Architecture route, retired literals, eleven

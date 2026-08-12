@@ -1,0 +1,84 @@
+schema_version = 1
+id = "accessibility-evidence-closure"
+owner = "topic.accessibility"
+description = "Accessibility evidence closure without lint, tool, or CI fallback authority."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/accessibility/evidence-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+claim = ["contradictory", "declared", "missing"]
+scope = ["complete", "missing"]
+mechanism = ["lint", "missing", "multiple", "selected", "unsupported"]
+environment = ["missing", "representative"]
+evidence = ["lint-only", "missing", "proved"]
+tooling = ["missing", "not-required", "selected"]
+fallback = ["ci-only", "eslint", "lint-proof", "named-rules", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "claim", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "mechanism", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "claim", op = "eq", value = "missing" }, { field = "scope", op = "eq", value = "missing" }, { field = "mechanism", op = "eq", value = "missing" }, { field = "environment", op = "eq", value = "missing" }, { field = "evidence", op = "eq", value = "missing" }, { field = "tooling", op = "eq", value = "missing" }]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "topics/accessibility.md"
+required = ["## Accessibility Evidence Claims", "Tooling selects", "does not prove"]
+prohibited = []
+
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/accessibility.md"
+required = ["## Legacy JSX Lint Mechanisms", "eslint-plugin-jsx-a11y", "click-events-have-key-events"]
+prohibited = []
+
+[[checks]]
+id = "legacy-headings"
+type = "markdown_headings"
+path = "ACCESSIBILITY-STANDARDS.md"
+level = 2
+required = ["Migrated"]
+prohibited = []
+
+[[checks]]
+id = "legacy-boundary"
+type = "text"
+path = "ACCESSIBILITY-STANDARDS.md"
+required = []
+prohibited = ["eslint-plugin", "jsx-a11y", "npm install"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [["STD-0023"], ["STD-0024"], ["STD-0025"], ["STD-0026"]]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0023", "STD-0024", "STD-0025", "STD-0026"]
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b18g` (`Accepted`)", "`7.4b19a` (`Accepted`)"]
+prohibited = []

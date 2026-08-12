@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** revalidate and serially integrate the prepared M6-Q2
-Accessibility Evidence Closure proposal.
+**Next slice:** revalidate and serially integrate the prepared M6-Q3
+Architecture Population proposal.
 
 **Acceptance status:** `pending`
 
@@ -5159,9 +5159,9 @@ integrity pass. The mixed checkpoint remains deferred to `M6-Q-W1`.
 
 ##### M6-Q2 Accessibility Evidence Closure Package Admission
 
-**Status:** `Active`
+**Status:** `Accepted`
 
-**Package state:** `admitted` at train order 81.
+**Package state:** `accepted` at train order 81.
 
 An isolated dependency-free suite proves the complete evidence-closure contract
 with seven generic checks. One `decision` check reproduces all thirteen fixture
@@ -5215,6 +5215,17 @@ dispositions, and lifecycle claims. Package projection and exact edge authority
 pass against the current graph. No permanent suite, registry entry, checker,
 fixture, standards source, engine, schema, numeric evidence, lockfile, build
 output, or workflow changed.
+
+**Acceptance evidence:** the dependency-free seven-check suite is registered
+and passes thirteen typed decisions, source boundaries, derived heading policy,
+four exact dispositions, and accepted lifecycle claims. The Bash checker is
+absent. Both historical Accessibility Media edges remain independent and
+checker-backed without a registry dependency. Numeric lifecycle derives the
+retired symbolic candidate from the unchanged reviewed baseline and Q2's
+accepted explicit owner; no baseline or decision row changed. Package/edge
+authority, retained media, all declarative suites, graph freshness, both plan
+checks, removed-path/read-only-source proof, and diff integrity pass. The mixed
+checkpoint remains deferred to `M6-Q-W1`.
 
 ##### M6-Q3 Architecture Population Package Admission
 
