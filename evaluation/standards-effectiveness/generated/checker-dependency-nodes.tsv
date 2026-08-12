@@ -25,7 +25,7 @@ evaluation/standards-effectiveness/verify-commit-authority.sh	verifier	yes	compo
 evaluation/standards-effectiveness/verify-concurrency-policy.sh	verifier	yes	component-0024	1	no	4	6	2	6	4
 evaluation/standards-effectiveness/verify-consolidation-dispositions.sh	verifier	yes	component-0025	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-contract-decisions.sh	verifier	yes	component-0026	1	no	0	1	0	1	0
-evaluation/standards-effectiveness/verify-contract-http-adapter-proof.sh	verifier	yes	component-0027	1	no	0	1	0	1	0
+evaluation/standards-effectiveness/verify-contract-http-adapter-proof.sh	verifier	yes	component-0027	1	no	0	1	1	1	0
 evaluation/standards-effectiveness/verify-contract-ownership.sh	verifier	yes	component-0028	1	no	0	4	4	4	0
 evaluation/standards-effectiveness/verify-cross-language-contract.sh	verifier	yes	component-0029	1	no	3	2	2	2	4
 evaluation/standards-effectiveness/verify-csharp-async-owner-contract.sh	verifier	yes	component-0030	1	no	5	0	1	0	3

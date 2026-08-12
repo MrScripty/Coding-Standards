@@ -2566,3 +2566,19 @@ historical edge records. The graph now contains 149 Bash verifiers, 154 nodes,
 752 edges, and 154 components. All protected row, template, workflow, and
 fixture evidence is unchanged. All 128 declarative suites and the complete
 mixed suite of 149 checkers pass. Another package requires a fresh audit.
+
+### Post-M6-T4 Audit And M6-T5 Admission
+
+The fresh graph contains 149 Bash verifiers, 154 nodes, 752 edges, and 154
+components. Row 33 is the smallest complete caller-free parent-owned package:
+two Contracts children, eight identities, and HTTP-adapter plus execution-train
+gates. Rows 23, 32, and 34 retain broader source-closure or gate sets.
+
+The corrected disposable six-check suite and both live gates pass. Four exact
+typed incident edges preserve the gates independently. Two accepted M6-N1
+rows require VE046's exact checker-to-suite evidence transition during
+implementation; their historical endpoints and semantics remain immutable.
+M6-T5 is admitted at train order 92 without an engine change, false dependency,
+wrapper, copied count, owner transfer, compatibility path, or fallback.
+Regeneration derives one reference-only edge for 753 total; executable topology
+is unchanged.

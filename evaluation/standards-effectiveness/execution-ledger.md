@@ -11656,3 +11656,16 @@ remain independent. The graph now has 149 Bash verifiers, 154 nodes, 752 edges,
 and 154 components. Plan-template projection, execution train, all 128
 declarative suites, and all 149 mixed-suite entrypoints pass. A fresh audit is
 next.
+
+## 2026-08-12 M6-T5 Row 33 Admission
+
+**Outcome:** admitted at train order 92.
+
+The fresh graph has 149 Bash verifiers, 154 nodes, 752 edges, and 154
+components. Row 33 is caller-free, has two Contracts-owned children, and its
+corrected six-check disposable suite plus HTTP-adapter and execution-train
+gates pass. Four exact typed edges keep both gates independent. VE046 already
+authorizes the exact two-row M6-N1 checker-to-suite evidence transition without
+changing historical endpoints or adding a dependency. Admission regeneration
+derives one reference-only edge and records 753 total edges without changing
+executable topology. Implementation is next.

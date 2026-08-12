@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T4 graph and ownership audit
+**Current phase:** Milestone 6: M6-T5 row 33 migration
 
-**Next slice:** inspect the fresh post-M6-T4 graph and remaining ownership and
-evidence shapes before admitting another bounded package.
+**Next slice:** implement admitted M6-T5 with exact M6-N1 suite-evidence
+transfer and no wrapper, false dependency, copied cardinality, or fallback.
 
 **Acceptance status:** `pending`
 
@@ -6084,6 +6084,51 @@ plan, and diff checks pass. Protected decomposition, owner-validation,
 disposition, report, execution-train, template, workflow, and fixture evidence
 is byte-identical to admission; no wrapper, fallback, or legacy execution path
 remains.
+
+##### M6-T5 Row 33 Admission
+
+**Status:** Admitted at train order 92.
+
+The fresh post-M6-T4 graph contains 149 Bash verifiers, 154 nodes, 752 edges,
+and 154 components. Caller-free row 33 is the smallest complete remaining
+parent-owned package: two Contracts-owned children, eight exact identities,
+one HTTP-adapter gate, and execution train. Row 32 has thirteen identities and
+two Persistence gates; row 23 spans twelve children plus Rust no-std source
+closure; row 34 retains six Frontend-family gates.
+
+A corrected disposable dependency-free suite passes six generic checks: exact
+two-child decomposition, decomposition-to-owner identity,
+owner-to-disposition lineage, report and typed no-fallback semantics,
+execution-train identity, and accepted plan claims. Its first strict run
+correctly rejected an overbroad right-side source filter; narrowing the probe
+to the eight row-derived identities passed without editing source evidence or
+weakening the relation. The live row checker, HTTP-adapter proof, and execution
+train pass independently. No engine or schema change is needed.
+
+M6-T5 has four exact outgoing incident edges, one executable-reference and one
+verifier-dependency edge to each independent gate. Two accepted M6-N1 rows
+retain immutable row-33-to-Contract-HTTP edge lineage but currently use the
+live row-33 checker as evidence. Implementation must first register and pass
+the row-33 suite, then atomically change only those two evidence representations
+to `suite:milestone-7-row-33-decomposition` and its exact registered TOML path.
+This is the accepted VE046 independent-gate lifecycle; it adds no registry
+dependency and does not change M6-N1 edge identity, owner, disposition,
+rationale, or accepted state.
+
+Implementation must accept only M6-T5 and its four edges, perform the exact
+two-row M6-N1 evidence transfer, regenerate the graph, prove decomposition,
+owner-validation, disposition, report, execution-train, plan, and adapter
+evidence unchanged, and update the serial records. Wrappers, Bash bridges,
+false `suite-requires` dependencies, compatibility parsing, copied counts,
+owner transfer, mutated historical endpoints, and retained legacy execution
+are prohibited. Changed incident identity, an evidence transfer beyond those
+two rows, stale source evidence, an unrepresentable invariant, or a required
+edit outside the admitted write set is a re-plan trigger.
+
+Admission regeneration derives one unique reference-only contract edge for the
+newly named HTTP-adapter gate, so the graph has 149 Bash verifiers, 154 nodes,
+753 edges, and 154 components. Existing M6-N1 shared references already name
+row 33; executable topology is unchanged.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

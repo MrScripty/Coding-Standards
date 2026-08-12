@@ -3148,3 +3148,17 @@
 - Focused suite, package/edge authority, both independent gates, all 128
   declarative suites, all 149 mixed-suite entrypoints, graph freshness,
   removal, plan, and diff checks pass. The next slice is a fresh audit.
+
+## 2026-08-12 - Post-M6-T4 Audit And M6-T5 Admission
+
+- Audited the fresh 149-verifier graph with 154 nodes, 752 edges, and 154
+  components. Selected caller-free row 33 over broader rows 23, 32, and 34.
+- Corrected one overbroad disposable disposition filter; the six-check suite,
+  live row checker, HTTP-adapter proof, and execution train then pass without
+  source changes.
+- Confirmed VE046 already supports the required exact two-row M6-N1 evidence
+  transition from the live row-33 checker to its registered suite without a
+  dependency or historical endpoint mutation.
+- Admitted M6-T5 at train order 92 with four exact typed incident edges.
+  Regeneration derives one reference-only edge for 753 total; executable
+  topology is unchanged.
