@@ -11611,3 +11611,15 @@ deleted Bash checker without a wrapper or fallback. Its four former gate edges
 remain independent. The graph now has 151 Bash verifiers, 156 nodes, 759 edges,
 and 156 components. A fresh audit is next.
 All 126 declarative suites and all 151 mixed-suite entrypoints pass.
+
+## 2026-08-12 M6-T3 Row 25 Admission
+
+**Outcome:** admitted at train order 90.
+
+The fresh graph has 151 Bash verifiers, 156 nodes, 759 edges, and 156
+components. Row 25 is caller-free, has one Implementation-owned child, and its
+current six-check disposable suite plus planning-admission,
+implementation-entrypoint, and execution-train gates pass. Six exact typed
+edges keep all three gates independent. Implementation is next. Admission
+regeneration derives five new reference-only contract edges and records 764
+total edges without changing executable topology.

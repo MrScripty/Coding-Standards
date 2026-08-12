@@ -3090,3 +3090,19 @@
 - Focused suite, package/edge authority, independent gates, all 126 declarative
   suites, all 151 complete mixed-suite entrypoints, graph freshness, removal,
   plan, and diff verification pass. The next slice is a fresh read-only audit.
+
+## 2026-08-12 - Post-M6-T2 Audit And M6-T3 Admission
+
+- Checked the fresh 151-verifier graph with 156 nodes, 759 edges, and 156
+  components, then compared caller-free rows 23, 25, and 26.
+- Selected row 25 as the smallest complete package: one Implementation child,
+  seven identities, and three independent gates. Row 23 retains twelve children
+  and source closure; row 26 retains twenty-nine identities.
+- Revalidated the accepted VE055 design with a disposable dependency-free
+  six-check suite. The live row checker, planning admission, implementation
+  entrypoint, and execution train all pass; temporary files were removed.
+- Admitted M6-T3 at train order 90 with six exact typed incident edges. No
+  engine, registry, permanent suite, checker, standards, workflow, prompt, or
+  fixture changed. Regeneration derives five new reference-only contract edges
+  for 764 total without changing the six existing typed incident edges or
+  executable topology.

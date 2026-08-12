@@ -2513,3 +2513,20 @@ integrity remain independently owned gates represented by four accepted
 historical edge records. The graph now contains 151 Bash verifiers, 156 nodes,
 759 edges, and 156 components. Another package requires a fresh audit.
 All 126 declarative suites and the complete mixed suite of 151 checkers pass.
+
+### Post-M6-T2 Audit And M6-T3 Admission
+
+The fresh graph contains 151 Bash verifiers, 156 nodes, 759 edges, and 156
+components. Row 25 is the smallest complete caller-free parent-owned package:
+one Implementation child, seven index identities, no separate historical
+checker-evidence transfer, and three independent gates. Row 23 retains twelve
+children and Rust no-std closure; row 26 retains twenty-nine identities and
+plan-template projection.
+
+Its disposable dependency-free suite passes six generic checks, and the live
+row checker, planning admission, implementation entrypoint, and execution train
+pass. Six exact typed incident edges preserve all three gates independently.
+M6-T3 is admitted at train order 90 without an engine change, wrapper, copied
+count, owner transfer, false dependency, or fallback. Regeneration derives five
+new reference-only contract edges for 764 total; the six typed incident edges
+and executable topology remain unchanged.

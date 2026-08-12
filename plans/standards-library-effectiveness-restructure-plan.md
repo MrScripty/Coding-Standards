@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform a fresh post-M6-T2 graph and ownership audit before
-admitting another bounded verification package.
+**Next slice:** implement admitted verification package M6-T3 for parent-owned
+row 25, then audit the fresh graph before another admission.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3089,6 +3089,13 @@ all structural/routing fixtures pass.
          independent gates, all 126 declarative suites, and the complete mixed
          suite of 151 checkers pass. Audit fresh graph and ownership state
          before another admission.
+       - `7.4c3ve71` (`Admitted`): the fresh post-M6-T2 audit selects caller-free
+         row 25 as the smallest complete package. Its current disposable
+         six-check generic suite, live checker, planning-admission,
+         implementation-entrypoint, and execution-train gates pass. Admit
+         M6-T3 at train order 90 with six exact typed independent-gate edges
+         and no engine change, copied count, wrapper, false dependency, owner
+         transfer, inferred plan selection, or compatibility path.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.
