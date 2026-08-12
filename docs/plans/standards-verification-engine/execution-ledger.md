@@ -3106,3 +3106,17 @@
   fixture changed. Regeneration derives five new reference-only contract edges
   for 764 total without changing the six existing typed incident edges or
   executable topology.
+
+## 2026-08-12 - M6-T3 Row 25 Acceptance
+
+- Registered and passed the dependency-free six-check row-25 suite before
+  deleting its Bash checker; no wrapper, alias, or compatibility path remains.
+- Preserved exact decomposition identity, owner/disposition lineage, dense
+  planning/concurrency/recovery report semantics, execution-train identity,
+  and accepted plan claims without copied counts or inferred plan selection.
+- Accepted all six former edges independently. Regenerated 150 Bash verifiers,
+  155 nodes, 755 edges, and 155 components; protected row, workflow, prompt,
+  and fixture evidence remains byte-identical to admission.
+- Focused suite, package/edge authority, all three independent gates, all 127
+  declarative suites, all 150 mixed-suite entrypoints, graph freshness,
+  removal, plan, and diff checks pass. The next slice is a fresh audit.

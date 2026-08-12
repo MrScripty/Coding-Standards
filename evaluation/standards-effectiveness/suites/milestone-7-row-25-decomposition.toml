@@ -1,0 +1,89 @@
+schema_version = 1
+id = "milestone-7-row-25-decomposition"
+owner = "migration.parent-plan"
+description = "Accepted row 25 implementation-entrypoint decomposition with exact identity, ownership, disposition, report, and lifecycle evidence."
+
+[[checks]]
+id = "execution-decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+non_empty = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+unique = [["baseline_order", "child_order"]]
+[[checks.projections]]
+columns = ["child_order", "ids", "source", "owner"]
+order = "source"
+expected = [["1", "STD-0852,STD-0853,STD-0854,STD-0855,STD-0856,STD-0857,STD-0858", "prompts/implement-plan.md", "workflows/implementation.md"]]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "25"
+
+[[checks]]
+id = "decomposition-identities"
+type = "relation"
+mode = "set"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["ids"]
+order = "source"
+[checks.left.where]
+field = "baseline_order"
+op = "eq"
+value = "25"
+[checks.left.split]
+field = "ids"
+delimiter = ","
+[checks.right]
+path = "evaluation/standards-effectiveness/milestone-7-row-25-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+columns = ["id"]
+order = "source"
+
+[[checks]]
+id = "disposition-lineage"
+type = "relation"
+mode = "set"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-row-25-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+columns = ["id", "owner", "disposition"]
+order = "source"
+[checks.right]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["id", "target", "disposition"]
+order = "source"
+[checks.right.where]
+field = "source"
+op = "eq"
+value = "prompts/implement-plan.md"
+
+[[checks]]
+id = "decomposition-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-25-decomposition.md"
+required = ["## Owner Contract", "identifier lineage", "## Exact Dispositions", "`STD-0852` through `STD-0858`", "## Ordered Children", "`25.1a`", "`25.1b`", "## Child 25.1 Plan Identity Replan", "Security owns path", "Cross-Platform applies conditionally", "## Child 25.1 Lifecycle Admission Replan", "`start` accepts only `Planned`", "`continue` accepts only `Active`", "`verify` accepts `Implemented` or `Verifying`", "## Child 25.1 Concurrent Admission Replan", "explicit expected revision", "Concurrency owns stale-read", "Independent transitions may be planned or implemented concurrently", "shared authority remain serial integration-owner writes", "## Child 25.1 Admission Revision Representation Replan", "`planning-admission-v1`", "## Child 25.1 Transition Envelope Replan", "`planning-transition-v1`", "proposing actor", "bounded write set", "prerequisite transition identities", "semantic outcomes", "separate deterministic identity", "## Child 25.1 Revision-Checked Serial Integration Replan", "two revision gates", "## Child 25.1 Revision Evidence Replan", "## Child 25.1 Partial Integration Recovery Replan", "`complete-transition`", "`restore-prior-state`", "`supersede-transition`", "Recovery never reuses", "state-file-wins or", "ledger-wins", "No recovery journal", "reservations, leases, queues, heartbeats", "## Re-plan Triggers"]
+prohibited = []
+
+[[checks]]
+id = "execution-train"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+[[checks.projections]]
+columns = ["start_id", "end_id", "source", "owner"]
+order = "source"
+expected = [["STD-0852", "STD-0858", "prompts/implement-plan.md", "workflows/implementation.md"]]
+[checks.projections.where]
+field = "order"
+op = "eq"
+value = "25"
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b15a` (`Accepted`)", "`7.4b15b` (`Accepted`)", "`7.4b15c` (`Accepted`)", "`7.4b15d` (`Accepted`)"]
+prohibited = []

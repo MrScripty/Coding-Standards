@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-T3 row 25 migration
+**Current phase:** Milestone 6: post-M6-T3 graph and ownership audit
 
-**Next slice:** implement admitted M6-T3 without a wrapper, false dependency,
-owner transfer, copied cardinality, or compatibility path.
+**Next slice:** inspect the fresh post-M6-T3 graph and remaining row-family
+ownership/evidence shapes before admitting another bounded package.
 
 **Acceptance status:** `pending`
 
@@ -5993,7 +5993,7 @@ pass independently, all 126 declarative suites and the complete mixed suite of
 
 ##### M6-T3 Row 25 Admission
 
-**Status:** Admitted at train order 90.
+**Status:** Accepted at train order 90.
 
 The fresh post-M6-T2 graph contains 151 Bash verifiers, 156 nodes, 759 edges,
 and 156 components. Caller-free rows 23, 25, and 26 remain. Row 25 is the
@@ -6027,6 +6027,15 @@ typed incident edges already exist in executable topology, and execution train
 is already a target of the shared edge manifest, so the derived graph has 151
 Bash verifiers, 156 nodes, 764 edges, and 156 components. Executable caller and
 independent-gate topology is unchanged.
+
+Acceptance registers the dependency-free six-check suite and deletes the Bash
+checker. All six former gate edges are accepted as independent lifecycle
+evidence. The regenerated graph contains 150 Bash verifiers, 155 nodes, 755
+edges, and 155 components. Planning admission, implementation entrypoint, and
+execution train pass independently; all 127 declarative suites and the complete
+mixed suite of 150 checkers pass. Protected decomposition, owner-validation,
+disposition, report, execution-train, workflow, prompt, and fixture evidence is
+byte-identical to admission, and no legacy execution path remains.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

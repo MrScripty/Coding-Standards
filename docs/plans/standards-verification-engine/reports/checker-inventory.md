@@ -2530,3 +2530,14 @@ M6-T3 is admitted at train order 90 without an engine change, wrapper, copied
 count, owner transfer, false dependency, or fallback. Regeneration derives five
 new reference-only contract edges for 764 total; the six typed incident edges
 and executable topology remain unchanged.
+
+### M6-T3 Acceptance
+
+The registered row-25 suite passes six exact generic checks and replaces its
+Bash checker without a wrapper. Planning admission, implementation entrypoint,
+and execution-train integrity remain independently owned gates represented by
+six accepted historical edge records. The graph now contains 150 Bash
+verifiers, 155 nodes, 755 edges, and 155 components. All protected row,
+workflow, prompt, and fixture evidence is unchanged. All 127 declarative suites
+and the complete mixed suite of 150 checkers pass. Another package requires a
+fresh audit.

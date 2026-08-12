@@ -11623,3 +11623,14 @@ implementation-entrypoint, and execution-train gates pass. Six exact typed
 edges keep all three gates independent. Implementation is next. Admission
 regeneration derives five new reference-only contract edges and records 764
 total edges without changing executable topology.
+
+## 2026-08-12 M6-T3 Row 25 Acceptance
+
+**Outcome:** accepted at train order 90.
+
+The dependency-free row-25 suite passes six generic checks and replaces the
+deleted Bash checker without a wrapper or fallback. Its six former gate edges
+remain independent. The graph now has 150 Bash verifiers, 155 nodes, 755 edges,
+and 155 components. Planning admission, implementation entrypoint, execution
+train, all 127 declarative suites, and all 150 mixed-suite entrypoints pass. A
+fresh audit is next.
