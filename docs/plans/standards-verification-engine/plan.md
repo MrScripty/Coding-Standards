@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE043-P1 package 1 S1 admission
+**Current phase:** Milestone 6: admitted M6-P1 S1 routing replacement
 
-**Next slice:** preflight and admit the first frozen P1 package for the S1 routed
-vertical slice. Freeze its exact subject, owner, suite contract, incident-edge
-dispositions, dependencies, and bounded write set before implementation. S1
-remains unadmitted until that admission passes.
+**Next slice:** implement admitted M6-P1 by registering the exact S1 routing
+suite, removing its Bash checker and private fixture, and transferring the root
+consumer lifecycle references without changing any routed standards source.
 
 **Acceptance status:** `pending`
 
@@ -4310,6 +4309,63 @@ pass; Python compilation succeeds; all 107 declarative suites pass; generated
 evidence is fresh at 170 Bash verifiers, 175 nodes, 855 edges, and 171
 components; both plan checks and diff integrity pass; and all 170 canonical
 mixed checker entrypoints pass. No package authority or legacy checker changed.
+
+##### M6-P1 S1 Routing Package Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 71.
+
+The clean preflight proves that the current S1 contract is fully expressible by
+existing generic engine checks. One `metadata_graph` assertion validates the
+six selected modules as a closed graph; six owner-local `text` assertions bind
+each selected path to its exact module ID; `markdown_links` validates local
+destinations; `line_budget` preserves the strict `observed * 4 < baseline`
+contract against `normative_and_derived_lines`; and one root `text` assertion
+prohibits `Read each document`. The legacy checker passes at 1,074 selected
+newline bytes against the current derived 11,066-line baseline, and an
+independent read-only engine preflight passes every proposed generic assertion.
+
+The generated graph has three executable incident edges: an inbound basename
+identity assertion from the root README consumer audit and outbound
+`executable_reference` and `helper_dependency` edges to `check-metadata.sh`.
+All three have exact typed dispositions. The retained root audit remains an
+independent gate after its obsolete S1-only identity assertion is removed; the
+metadata helper remains an independently owned artifact for other consumers.
+The fourth incident edge is a non-executable `contract_reference` from the
+README-consumer manifest. Implementation removes that obsolete classification
+row and the matching root-audit category/assertion; it is not treated as a
+runtime call or an executable-edge disposition.
+
+**Allowed implementation write set:** package and edge manifests; package
+projection; suite registry; `suites/s1-routing.toml`; the deleted
+`verify-s1-routing.sh` and its private
+`fixtures/routing/s1-rust-library.expected`; README-consumer manifest and root
+consumer audit; verification README; all four generated checker artifacts; this
+plan; checker-inventory report; canonical evaluation ledger; and parent plan.
+Canonical standards sources, metadata helper, engine code and tests, schemas,
+numeric evidence, unrelated suites/fixtures/checkers, lockfiles, generated
+build output, and workflows remain read-only.
+
+**No-fallback rule:** register and pass the declarative suite before deleting
+the Bash checker. Do not retain the fixture, wrapper, nested invocation,
+duplicate root-purity assertion, Bash-to-Python bridge, package-specific check,
+whole-file snapshot, inferred module set, alternate line baseline, or silent
+consumer-row removal. Any additional incident edge, consumer, routed behavior,
+or required engine capability is a re-plan trigger.
+
+**Acceptance gate:** focused S1 suite; retained root consumer audit; package and
+exact incident-edge authority; all declarative suites; removed checker and
+fixture paths; README route; graph freshness; both plan checks; exact read-only
+source/helper/engine/schema evidence; diff integrity; and the deferred
+`M6-P-W1` mixed checkpoint at the bounded P1 wave boundary.
+
+**Admission verification:** current S1 and the complete proposed generic
+assertion set pass; package projection and exact executable-edge authority
+pass; all 107 registered declarative suites pass; generated evidence is fresh
+at 170 Bash verifiers / 175 nodes / 859 edges / 171 components; exact generated
+review shows only four new contract references from package and edge authority;
+both plan checks and diff integrity pass.
 
 **No-fallback rule:** do not replace exact structure with substring checks,
 replace absent-path evidence with table absence, freeze whole files for

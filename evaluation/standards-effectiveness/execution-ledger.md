@@ -10623,3 +10623,37 @@ all 170 canonical mixed checker entrypoints pass.
 
 **Next slice:** preflight and admit P1 package 1 for S1 routing, with exact
 subject, owner, dependency, suite, incident-edge, and write-set authority.
+
+## 2026-08-11 M6-P1 S1 Routing Admission
+
+**Outcome:** admitted at train order 71; implementation is active.
+
+The legacy S1 checker passes with six selected modules and 1,074 of 11,066
+derived baseline newline bytes. A separate read-only engine preflight proves
+that existing `metadata_graph`, `text`, `markdown_links`, and `line_budget`
+checks preserve the exact selected path-to-ID map, metadata closure, local-link
+availability, strict under-25-percent budget, and root full-library-read
+prohibition.
+
+Three executable incident edges receive exact dispositions: the retained root
+consumer audit is an independent gate, and both metadata-helper edges retain
+the independently owned helper artifact. The consumer manifest's separate
+non-executable contract reference is frozen for explicit lifecycle-row and
+identity-assertion removal during implementation.
+
+**No-fallback result:** no suite, registry entry, checker, fixture, caller,
+consumer row, generated artifact, standards source, helper, engine, schema,
+numeric evidence, lockfile, or workflow changed. No wrapper, bridge, snapshot,
+inferred set, duplicate purity assertion, or alternate baseline is authorized.
+
+**Bounded write set:** package and edge manifests, package projection, four
+generated checker artifacts, active and parent plans, checker-inventory report,
+and this ledger only.
+
+**Verification:** current S1 checker and proposed generic assertions pass;
+package projection and exact incident-edge authority pass; all 107 declarative
+suites pass; generated evidence is fresh at 170 Bash verifiers / 175 nodes /
+859 edges / 171 components and contains only the four intended new contract
+references; both plan checks and diff integrity pass.
+
+**Next slice:** implement and accept M6-P1 within its frozen write set.

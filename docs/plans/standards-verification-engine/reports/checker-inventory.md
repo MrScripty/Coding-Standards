@@ -1766,3 +1766,24 @@ declarative suites, graph freshness at 170 verifiers / 175 nodes / 855 edges /
 171 components, both plan checks, diff integrity, and all 170 canonical mixed
 entrypoints pass. VE043-A1 is next; no owner migration is admitted from the
 broad numeric scan before exact classification.
+
+### Admitted M6-P1 S1 Routing
+
+The current S1 checker passes with six modules and 1,074 selected newline bytes
+against the derived 11,066-line baseline. Read-only generic-engine preflight
+also passes exact metadata closure, all six path-to-ID bindings, repository-local
+Markdown links, the strict one-quarter line budget, and root full-library-read
+prohibition. No new engine primitive or package-specific logic is required.
+
+The checker has three executable incident edges: one inbound identity reference
+from the root README consumer audit and two outbound metadata-helper edges. The
+consumer manifest adds one non-executable contract reference. M6-P1 freezes all
+four obligations: typed executable dispositions preserve the independent root
+audit and shared helper, while implementation removes the obsolete consumer row
+and S1-only root-audit assertion. The suite, registry, checker, private fixture,
+caller, manifest, and generated evidence remain unchanged at admission.
+
+Package and edge authority, all 107 declarative suites, graph freshness, both
+plan checks, and diff integrity pass. The admitted authority records add exactly
+four generated contract references while preserving 170 Bash verifiers, 175
+nodes, and 171 components; the graph now has 859 edges.

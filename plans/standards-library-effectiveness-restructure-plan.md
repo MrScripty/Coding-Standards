@@ -12,10 +12,11 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** preflight and admit the first package in the accepted P1 train:
-the S1 routed vertical slice. Freeze exact subject, owner, suite contract,
-incident-edge dispositions, dependencies, and write set before implementation.
-Release Procedure, S1, and the Rust Binding train remain unadmitted.
+**Next slice:** implement admitted M6-P1 for the S1 routed vertical slice. Add
+one registered declarative suite, remove the Bash checker and private fixture,
+and transfer its root-consumer lifecycle references without changing routed
+standards sources. Release Procedure and the remaining P1 train stay
+unadmitted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -31,6 +32,16 @@ inference, whole-file snapshots, package-specific code, Bash bridges,
 callbacks, or inferred defaults. The shared checkpoint passed 179 engine tests,
 107 declarative suites, fresh generated evidence, and all 170 mixed
 entrypoints.
+
+M6-P1 is admitted at train order 71 under `migration.parent-plan`. Existing
+generic metadata, text, Markdown-link, and line-budget checks preserve all S1
+behavior. Its three executable incident edges have exact typed dispositions;
+the separate README-consumer manifest reference is frozen for explicit row and
+identity-assertion removal. No suite, registry, checker, fixture, caller,
+standards source, or helper changes until implementation.
+Admission verification passes package and edge authority, all 107 declarative
+suites, both plan checks, diff integrity, and fresh 170-verifier / 175-node /
+859-edge / 171-component generated evidence.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure
