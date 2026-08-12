@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE057 generic path-state re-plan
+**Current phase:** Milestone 6: VE058 containment-helper re-plan
 
-**Next slice:** implement the selected unified path-state contract before
-resuming M6-S1 through M6-S3 preflight.
+**Next slice:** select one shared containment resolver before completing the
+unified path-state implementation.
 
 **Acceptance status:** `pending`
 
@@ -5826,6 +5826,48 @@ implementation commit that deletes the old module and tests. Active engine
 documentation and architecture references change to the new contract;
 historical accepted plan records remain historical evidence and are not
 rewritten as if the old contract never existed.
+
+##### VE058 Shared Containment Helper Trigger
+
+**Status:** Re-plan required; the VE057 implementation proposal is not
+accepted.
+
+Focused VE057 implementation passes 26 file-contract tests, all 193 engine
+tests, its migrated consumer, and all 121 declarative suites. Review found a
+maintenance and security-ownership conflict before acceptance: current
+`contained_file` combines repository containment with mandatory existing
+regular-file validation, while `path_state` must resolve contained paths that
+may be missing, directories, or broken symlinks. The proposal therefore
+duplicates absolute/traversal/symlink-escape logic in a second module.
+
+**Option 1 - Extract one shared contained-path resolver (Recommended):** add a
+private or module-level `contained_path` helper in the existing paths module.
+It validates nonempty repository-relative syntax and resolved containment,
+accepting a declared existence requirement. Existing `contained_file` calls
+that helper with existence required, then retains its regular-file check and
+existing diagnostics. `path_state` calls the shared resolver without requiring
+existence and applies only its present/absent semantics. Add focused helper
+tests for missing, directory, valid symlink, broken symlink, traversal, and
+escape behavior. This creates one containment owner and no compatibility path.
+
+**Option 2 - Keep bounded duplication:** accept the current standalone
+resolver inside `path_state`. This avoids modifying shared paths code but
+creates two security-sensitive containment implementations that can drift.
+
+**Option 3 - Broaden `contained_file` with optional type and existence flags:**
+reuse the public helper by adding several modes. This minimizes functions but
+makes a file-specific API conditional, weakens its name, and increases the
+chance existing callers select a permissive mode.
+
+**Option 4 - Resolve lexical paths only in `path_state`:** avoid shared helper
+work and reject only absolute/traversal syntax. This is invalid because
+symlinks could escape repository authority.
+
+The recommended implementation may additionally edit
+`tools/standards_verifier/standards_verifier/paths.py` and its focused tests.
+It must preserve every existing `contained_file` outcome and caller, expose
+no compatibility parser, and keep path-state configuration unchanged. The
+complete mixed gate remains required at shared-contract acceptance.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

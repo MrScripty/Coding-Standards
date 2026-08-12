@@ -2933,3 +2933,16 @@
   focused tests to change in one shared-contract commit.
 - Changed no engine, suite, registry, checker, package, edge, graph, source,
   fixture, schema, lockfile, output, or workflow implementation.
+
+## 2026-08-12 - VE058 Shared Containment Helper Trigger
+
+- Built an unaccepted VE057 proposal and passed 26 focused file-contract tests,
+  all 193 engine tests, the migrated consumer, and all 121 declarative suites.
+- Review found duplicated repository-containment and symlink-escape logic
+  because `contained_file` also mandates an existing regular file.
+- Stopped before executable acceptance or mixed-suite execution.
+- Recommended extracting one shared contained-path resolver, preserving
+  `contained_file` as its strict regular-file specialization, and making
+  `path_state` consume the resolver.
+- Recorded bounded duplication, multi-mode file helper, and lexical-only
+  alternatives. No canonical executable authority changed.

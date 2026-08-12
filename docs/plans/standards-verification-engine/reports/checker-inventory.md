@@ -2392,3 +2392,15 @@ Option 1 is selected. The shared-contract implementation replaces
 registered consumer atomically, and rejects the retired type. Historical
 accepted records remain historical; active engine documentation names only
 `path_state`.
+
+### VE058 Shared Containment Helper Trigger
+
+The unaccepted VE057 proposal proves the assertion semantics but duplicates
+the paths module's containment and symlink-escape algorithm. Existing
+`contained_file` cannot be reused directly because it also requires an
+existing regular file.
+
+Recommended Option 1 extracts one shared contained-path resolver, retains
+`contained_file` as the strict existing-file specialization, and lets
+`path_state` layer filesystem-state semantics on the same containment owner.
+VE057 remains unaccepted pending this helper decision.

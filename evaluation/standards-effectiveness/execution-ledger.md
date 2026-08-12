@@ -11489,3 +11489,13 @@ migrate its sole registered consumer, and reject the retired type immediately.
 Present and absent state remain content-neutral and repository-contained;
 cardinality is derived and no alias or fallback representation is authorized.
 No executable authority changed in this selection record.
+
+## 2026-08-12 VE058 Shared Containment Helper Trigger
+
+**Outcome:** better-design re-plan required before VE057 acceptance.
+
+The unaccepted path-state proposal passes focused, engine, consumer, and all
+declarative verification, but duplicates security-sensitive containment logic
+because the existing helper also requires a regular file. Recommended recovery
+extracts one shared contained-path resolver and keeps `contained_file` as a
+strict specialization. No canonical executable authority changed.
