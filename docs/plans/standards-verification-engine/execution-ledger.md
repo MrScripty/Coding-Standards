@@ -3062,3 +3062,17 @@
   declarative suites, all 152 complete mixed-suite entrypoints, graph
   freshness, removal, plan, and diff gates pass. Next slice is a fresh
   read-only graph and ownership audit.
+
+## 2026-08-12 - Post-M6-T1 Audit And M6-T2 Admission
+
+- Checked the fresh 152-verifier graph with 157 nodes, 762 edges, and 157
+  components, then compared caller-free rows 23 and 25 through 27.
+- Selected row 27 as the smallest complete package. It has one child, no
+  historical checker evidence, and only review-template and execution-train
+  gates; the larger or more complex alternatives remain unadmitted.
+- A disposable dependency-free suite passed six generic checks. The live row
+  checker and both independent gates also pass; temporary files were removed.
+- Admitted M6-T2 at train order 89 with four exact typed incident edges. No
+  engine, registry, suite, checker, standards source, or fixture changed.
+  Regeneration adds four reference-only authority edges for 766 total without
+  changing executable topology.

@@ -11590,3 +11590,14 @@ deleted Bash checker without a wrapper or fallback. Its four former prompt and
 execution-train edges remain accepted independent gates. The graph now has 152
 Bash verifiers, 157 nodes, 762 edges, and 157 components. A fresh audit is next.
 All 125 declarative suites and all 152 mixed-suite entrypoints pass.
+
+## 2026-08-12 M6-T2 Row 27 Admission
+
+**Outcome:** admitted at train order 89.
+
+The fresh graph has 152 Bash verifiers, 157 nodes, 762 edges, and 157
+components. Row 27 is caller-free, has one Implementation-owned child, and its
+six-check disposable suite plus review-template and execution-train gates pass.
+Four exact typed edges keep both gates independent. Implementation is next.
+Admission regeneration records 766 total edges without changing executable
+topology.

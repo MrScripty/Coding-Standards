@@ -2489,3 +2489,18 @@ owned gates, represented by four accepted historical edge records rather than
 registry dependencies. The graph now contains 152 Bash verifiers, 157 nodes,
 762 edges, and 157 components. Another package requires a fresh audit.
 All 125 declarative suites and the complete mixed suite of 152 checkers pass.
+
+### Post-M6-T1 Audit And M6-T2 Admission
+
+The fresh graph contains 152 Bash verifiers, 157 nodes, 762 edges, and 157
+components. Row 27 is the smallest complete caller-free parent-owned package:
+one Implementation child, eleven index identities, no historical checker
+evidence, and two independent gates. Rows 23, 25, and 26 retain materially
+larger child, evidence, or gate shapes.
+
+Its disposable dependency-free suite passes six generic checks, and the live
+row checker, review-template projection, and execution train pass. Four exact
+typed incident edges preserve both gates independently. M6-T2 is admitted at
+train order 89 without an engine change, wrapper, copied count, or fallback.
+Regeneration adds four reference-only authority edges for 766 total;
+executable topology remains unchanged.

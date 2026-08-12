@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T1 graph and ownership audit
+**Current phase:** Milestone 6: M6-T2 row 27 migration
 
-**Next slice:** inspect the fresh post-M6-T1 graph and remaining row-family
-ownership/evidence shapes before admitting another bounded package.
+**Next slice:** implement admitted M6-T2 without a wrapper, false dependency,
+owner transfer, or compatibility path.
 
 **Acceptance status:** `pending`
 
@@ -5952,6 +5952,37 @@ evidence. The regenerated graph contains 152 Bash verifiers, 157 nodes, 762
 edges, and 157 components. The full-review prompt and execution train pass
 independently, all 125 declarative suites and the complete mixed suite of 152
 checkers pass, and no legacy execution path remains.
+
+##### M6-T2 Row 27 Admission
+
+**Status:** Admitted at train order 89.
+
+The fresh post-M6-T1 graph contains 152 Bash verifiers, 157 nodes, 762 edges,
+and 157 components. Among caller-free rows 23 and 25 through 27, row 27 is the
+smallest complete package: one Implementation-owned child, eleven index
+identities, no historical checker-evidence transfer, and two independent
+gates. Row 23 retains twelve children and Rust no-std closure; row 25 has three
+gates and complex recovery evidence; row 26 contains twenty-nine identities.
+
+A disposable dependency-free suite passes six existing generic checks:
+decomposition identity, identity relation, disposition lineage, report
+semantics, execution-train identity, and accepted plan claims. The live row
+checker, review-template projection, and execution train pass independently.
+No engine capability, schema, copied cardinality, or permanent probe artifact
+is needed.
+
+M6-T2 has four exact incident edges, one executable-reference and one
+verifier-dependency edge to each independent gate. Implementation must register
+and pass the suite before deleting the checker, accept only M6-T2 and those
+four edges, regenerate the graph, prove source/evidence unchanged, and update
+the serial records. Wrappers, Bash bridges, false dependencies, owner transfer,
+compatibility parsing, and retained legacy authority are prohibited. Changed
+edge identity, stale evidence, an unrepresentable contract, or an edit outside
+the admitted write set is a re-plan trigger.
+
+Admission regeneration adds four reference-only authority edges. The resulting
+graph has 152 Bash verifiers, 157 nodes, 766 edges, and 157 components;
+executable caller and independent-gate topology is unchanged.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 
