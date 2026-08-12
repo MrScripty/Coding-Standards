@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE055 parent-owned row-family preflight
+**Current phase:** Milestone 6: M6-S1 through M6-S3 row-family preflight
 
-**Next slice:** run disposable representability probes for rows 24, 25, and 34
-before classifying or admitting the remaining row-decomposition packages.
+**Next slice:** prove rows 20, 21, and 22 through disposable contained suites
+before package admission.
 
 **Acceptance status:** `pending`
 
@@ -5707,6 +5707,52 @@ probes; evidence requiring a different canonical owner; a true domain-suite
 dependency; conflicting historical evidence authority; or a required edit
 outside the frozen probe write set. One exceptional row does not authorize a
 family-wide engine abstraction.
+
+##### VE055 Probe Result And Remaining-Row Classification
+
+**Status:** Accepted; no engine capability added and no package admitted.
+
+Disposable suites for rows 24, 25, and 34 pass 16 existing generic checks in
+total. Their live Bash checkers also pass with every independent domain gate.
+The probes derive cardinality from exact row and identifier projections and
+require no copied counts, custom assertion, schema change, command action, or
+weakened evidence. The initial row-24 probe used incorrect owner-map column
+names and failed with typed TABLE.HEADER_CONTRACT; correcting the disposable
+configuration to the exact live header passed without engine change.
+
+The remaining rows are classified by evidence and edge shape:
+
+| Class | Rows | Boundary |
+| --- | --- | --- |
+| Rust source lifecycle | 20-23 | rows 20-22 depend only on the execution-train gate; row 23 also retains Rust no-std closure independently |
+| Process and template lifecycle | 24-27 | each retains execution-train plus its Planning, Implementation, or template-projection gate |
+| Application-boundary lifecycle | 28, 32-34 | row 28 has an inbound Accessibility caller; rows 32 and 33 require accepted historical evidence transfer; row 34 retains six Frontend/TypeScript/Accessibility domain gates |
+
+Rows 20 through 22 form the first bounded preparation wave:
+
+| Package | Historical subject | Local result | Independent gate |
+| --- | --- | --- | --- |
+| M6-S1 | row 20 Rust API decomposition | dependency-free milestone-7-row-20-decomposition suite replaces its Bash checker | execution train |
+| M6-S2 | row 21 Rust dependency decomposition | dependency-free milestone-7-row-21-decomposition suite replaces its Bash checker | execution train |
+| M6-S3 | row 22 Rust release decomposition | dependency-free milestone-7-row-22-decomposition suite replaces its Bash checker | execution train |
+
+All three packages are owned by migration.parent-plan; the Rust profiles in
+their evidence remain canonical domain owners and are not transferred into the
+suite owner. Local suite/checker paths are disjoint and may be prepared
+concurrently after admission. Registry, package/edge authority, generated
+graph, plans, and ledgers remain serial integration-owner files.
+
+**Preflight write set:** disposable contained suite and registry files outside
+the repository plus these six serial planning records for admission results.
+All permanent repository files remain read-only during preflight.
+
+**Admission gate:** each disposable suite must preserve exact decomposition
+rows and identifier sets, owner validation, reports, execution-train owner,
+accepted plan claims, dispositions or source-closure evidence, and any
+repository-path existence checks from its Bash checker. Each live checker and
+the execution-train gate must pass independently. A missing generic invariant,
+new incident edge, stale source, conflicting owner, or required permanent edit
+is a re-plan trigger.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

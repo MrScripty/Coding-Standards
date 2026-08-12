@@ -2356,3 +2356,19 @@ set. The probes are disposable and contained, derive mechanical values, and
 cannot change permanent engine, suite, registry, checker, package, edge, graph,
 source, fixture, or schema authority. A generic engine addition requires the
 same exact missing invariant in at least two probes.
+
+### VE055 Probe Result And Family Classification
+
+All three disposable probes pass 16 existing generic checks, and their live
+Bash checkers pass with independent domain gates. No engine capability gap
+exists. Row 24's first probe failed only because the disposable configuration
+named the owner-map header incorrectly; typed rejection and exact correction
+confirmed strict schema behavior.
+
+Rows 20-22 are caller-free, have no historical checker-evidence references,
+and each calls only execution train. They are selected as three separately
+owned `migration.parent-plan` packages with disjoint local suite/checker paths.
+Row 23 is separated by Rust no-std closure; row 28 by an inbound Accessibility
+caller; rows 32/33 by accepted historical evidence; and row 34 by six domain
+gates. This classification prevents a broad package from hiding distinct edge
+semantics while allowing concurrent local preparation after admission.

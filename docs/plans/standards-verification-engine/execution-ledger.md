@@ -2888,3 +2888,20 @@
   least two probes. Otherwise the remaining rows are classified into bounded
   parent-owned packages and concurrent preparation waves with serial shared
   integration.
+
+## 2026-08-12 - VE055 Probe Result And Family Classification
+
+- Passed disposable rows 24, 25, and 34 with 16 existing generic checks; all
+  three live Bash checkers and their independent domain gates also pass.
+- Corrected one disposable row-24 header mismatch after the engine returned
+  typed `TABLE.HEADER_CONTRACT`; no engine or evidence defect was present.
+- Added no engine capability because no repeated or individual invariant was
+  unrepresentable.
+- Classified rows 20-23 as Rust source lifecycle, 24-27 as process/template
+  lifecycle, and 28/32-34 as application-boundary lifecycle.
+- Selected rows 20-22 for the first three-package wave because they have
+  disjoint local paths, no inbound callers or historical evidence transfers,
+  and only the execution-train independent gate.
+- Deferred row 23's no-std gate, row 28's inbound Accessibility caller,
+  rows 32/33 historical evidence transfers, and row 34's six domain gates to
+  later bounded packages.
