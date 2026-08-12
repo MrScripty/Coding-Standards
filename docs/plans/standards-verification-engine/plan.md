@@ -4,8 +4,9 @@
 
 **Current phase:** Milestone 6: VE054 post-Q package-selection re-plan
 
-**Next slice:** select one VE054 recovery before admitting or implementing
-another checker-migration package.
+**Next slice:** perform isolated Accessibility Media semantic preflight and
+admit a package only if its exact owner, evidence transfers, retained gate,
+write set, and verification contract close without fallback.
 
 **Acceptance status:** `pending`
 
@@ -5505,7 +5506,7 @@ graph shape is not authority.
 
 ##### VE054 Post-Q Package-Selection Re-plan
 
-**Status:** `Active`; selection required before another package admission.
+**Status:** `Accepted`; Option 1 selected for bounded owner-first continuation.
 
 The fresh accepted graph contains 157 Bash verifiers, 162 nodes, 773 edges,
 and 162 components. Forty-six verifiers have no executable caller, but only
@@ -5567,6 +5568,14 @@ Inferring owner from graph proximity, deleting either infrastructure gate as a
 semantic leaf, merging owners for batch size, retaining a Bash wrapper,
 declaring false suite dependencies, leaving historical checker evidence stale,
 or editing README projections outside an admitted write set is invalid.
+
+**Selected recovery:** Option 1. Accessibility Media receives isolated
+semantic preflight as the next bounded owner-coherent candidate. Admission must
+freeze its exact suite contract, two accepted Q2 historical evidence
+transfers, retained Accessibility Name/Input gate, write set, and verification
+contract before implementation. Lifecycle-row classification remains separate
+planning work and cannot broaden or block this package unless preflight finds a
+real shared dependency or ownership conflict.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

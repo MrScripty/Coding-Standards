@@ -2824,3 +2824,17 @@
 - Stopped before package admission or suite, checker, registry, edge, README,
   graph, source, fixture, engine, schema, lifecycle, numeric, lockfile, output,
   or workflow changes.
+
+## 2026-08-12 - VE054 Bounded Owner-First Selection
+
+- Selected Option 1 for isolated Accessibility Media preflight.
+- Required exact preservation of 13 typed decisions, canonical/reference/
+  legacy boundaries, three dispositions, and accepted lifecycle evidence.
+- Required explicit suite-backed transfer of two accepted Q2 historical
+  independent-gate evidence records while Accessibility Name/Input remains a
+  separate gate with no declared suite dependency or copied behavior.
+- Kept lifecycle-row ownership classification as separate planning work; it
+  cannot broaden or delay Media without a demonstrated dependency or conflict.
+- Changed no package, edge, suite, checker, registry, README, graph, source,
+  fixture, engine, schema, lifecycle, numeric, lockfile, output, or workflow
+  authority. Isolated Media preflight is next.

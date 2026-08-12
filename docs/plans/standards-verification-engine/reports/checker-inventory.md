@@ -2293,6 +2293,12 @@ consumers. Recommended Option 1 preflights Media next and leaves lifecycle
 classification as separate planning authority rather than guessing from the
 graph.
 
+Option 1 is selected. Accessibility Media receives isolated semantic preflight
+next, with exact owner, suite behavior, two historical Q2 evidence transfers,
+retained Name/Input gate, write set, and verification frozen before admission.
+Lifecycle-row ownership remains separate planning work and does not become an
+implicit Media prerequisite.
+
 ### Accepted Q-Wave Preparation Boundary
 
 Q1 through Q4 have pairwise-disjoint local suite and deleted-checker paths.
