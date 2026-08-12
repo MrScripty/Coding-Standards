@@ -3234,6 +3234,19 @@
 - Accelerated execution, execution train, all 132 declarative suites, and all
   145 mixed-suite entrypoints pass. The next slice is a fresh audit.
 
+## 2026-08-12 - Post-M6-T8 Audit And M6-T9 Admission
+
+- Audited all five caller-free lifecycle packages in the fresh 145-verifier
+  graph with 150 nodes, 733 edges, and 150 components.
+- Selected row 23 because its two-gate surface is smaller than rows 47, 36, 34,
+  and 37 at four, five, seven, and nine gates.
+- A dependency-free six-check probe preserves twelve ordered identities, exact
+  owner/disposition lineage, report semantics, train identity, and all fourteen
+  accepted plan claims. The live checker and both gates pass.
+- Admitted M6-T9 at train order 96 with four independent-gate edges and no
+  historical transfer, engine change, duplicate owner, fallback, or legacy
+  restore. Regeneration derives 737 edges without changing executable topology.
+
 ## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
 
 - Audited every caller-free lifecycle checker in the fresh 147-verifier graph

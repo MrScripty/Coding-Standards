@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T8 graph and ownership audit
+**Current phase:** Milestone 6: M6-T9 row 23 migration
 
-**Next slice:** inspect the fresh post-M6-T8 graph and remaining ownership and
-evidence shapes before admitting another bounded package.
+**Next slice:** implement admitted M6-T9 without a wrapper, false dependency,
+copied cardinality, source mutation, or fallback.
 
 **Acceptance status:** `pending`
 
@@ -6294,6 +6294,41 @@ The focused suite, package and edge authority, accelerated-execution and
 execution-train gates, all 132 declarative suites, and the complete mixed suite
 of 145 checkers pass. Graph freshness, removal, both plan, protected-hash, and
 diff checks also pass. A fresh graph and ownership audit is next.
+
+##### M6-T9 Row 23 Admission
+
+**Status:** Admitted at train order 96.
+
+The fresh post-M6-T8 graph contains 145 Bash verifiers, 150 nodes, 733 edges,
+and 150 components. Its remaining caller-free lifecycle packages are rows 23,
+34, 36, 37, and 47, with respectively two, seven, five, nine, and four
+independent gates. Row 23 therefore has the smallest gate surface. It covers
+twelve ordered identities, while the other candidates retain broader domain
+gate sets.
+
+A disposable dependency-free suite passes six generic checks: exact ordered
+decomposition, exact decomposition-to-owner identities, owner and disposition
+lineage, report and no-fallback semantics, execution-train identity, and all
+fourteen accepted plan claims. Its owner relation preserves the canonical
+exceptions for `STD-0839` and `STD-0842`; it neither infers ownership from
+prose nor adds another owner record. The live checker, Rust `no_std` closure,
+and execution train pass independently. No engine or schema change is needed.
+
+M6-T9 has four exact outgoing incident edges to those two independent gates and
+no historical caller-evidence rows. Implementation may change only the admitted
+15 paths. It must register and pass the suite before deleting Bash, accept only
+M6-T9 and its four edges, regenerate the graph, and prove decomposition, owner
+validation, dispositions, train, package, gate, findings, Rust Tooling, Rust
+Cross-Platform, Verification, legacy-source, and corpus evidence unchanged.
+Generic claim ownership, commands, products, workspace assumptions, test or
+lint defaults, target or feature defaults, wrappers, false dependencies,
+compatibility parsing, copied counts, duplicate ownership, and fallback remain
+prohibited. Changed incidence, unrepresentable semantics, protected evidence
+mutation, or an edit outside the write set is a re-plan trigger.
+
+Admission regeneration derives four reference-only package edges. The graph
+contains 145 Bash verifiers, 150 nodes, 737 edges, and 150 components;
+executable topology is unchanged.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

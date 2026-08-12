@@ -2678,3 +2678,19 @@ graph now contains 145 Bash verifiers, 150 nodes, 733 edges, and 150 components.
 All protected evidence is unchanged. The focused suite, package and edge
 authority, both independent gates, all 132 declarative suites, and the complete
 mixed suite of 145 checkers pass. Another package requires a fresh audit.
+
+### Post-M6-T8 Audit And M6-T9 Admission
+
+The fresh graph has 145 Bash verifiers, 150 nodes, 733 edges, and 150
+components. Rows 23, 34, 36, 37, and 47 are caller-free lifecycle packages with
+two, seven, five, nine, and four independent gates respectively. Row 23 has the
+smallest gate surface and is admitted at train order 96.
+
+Its dependency-free six-check probe preserves all twelve ordered identities,
+the exact owner-validation and disposition relation including the two
+non-Tooling owner exceptions, report and no-fallback semantics, execution-train
+identity, and fourteen accepted plan claims. The live checker, Rust `no_std`
+closure, and execution train pass independently. Four exact edge records are
+admitted with no engine change, historical transfer, duplicate ownership,
+wrapper, copied count, compatibility path, or fallback. Regeneration derives
+four reference-only edges for 737 total; executable topology is unchanged.
