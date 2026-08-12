@@ -5,7 +5,7 @@ from pathlib import Path, PurePosixPath
 from .diagnostics import Diagnostic, EngineError
 
 
-def contained_file(
+def contained_path(
     root: Path,
     value: str,
     *,
@@ -26,8 +26,9 @@ def contained_file(
         )
 
     resolved_root = root.resolve()
-    candidate = (resolved_root / Path(*path.parts)).resolve(strict=False)
-    if not candidate.is_relative_to(resolved_root):
+    candidate = resolved_root / Path(*path.parts)
+    resolved_candidate = candidate.resolve(strict=False)
+    if not resolved_candidate.is_relative_to(resolved_root):
         raise EngineError(
             Diagnostic(
                 code="PATH.OUTSIDE_REPOSITORY",
@@ -38,7 +39,24 @@ def contained_file(
                 path=value,
             )
         )
-    if not candidate.exists():
+    return candidate
+
+
+def contained_file(
+    root: Path,
+    value: str,
+    *,
+    suite: str | None = None,
+    check: str | None = None,
+) -> Path:
+    candidate = contained_path(
+        root,
+        value,
+        suite=suite,
+        check=check,
+    )
+    resolved_candidate = candidate.resolve(strict=False)
+    if not resolved_candidate.exists():
         raise EngineError(
             Diagnostic(
                 code="INPUT.UNAVAILABLE",
@@ -50,7 +68,7 @@ def contained_file(
             ),
             exit_code=3,
         )
-    if not candidate.is_file():
+    if not resolved_candidate.is_file():
         raise EngineError(
             Diagnostic(
                 code="INPUT.NOT_FILE",
@@ -61,4 +79,4 @@ def contained_file(
                 path=value,
             )
         )
-    return candidate
+    return resolved_candidate

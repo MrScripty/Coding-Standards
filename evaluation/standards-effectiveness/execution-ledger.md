@@ -11508,3 +11508,18 @@ One `contained_path` resolver will own repository containment and symlink
 escape. Existing `contained_file` remains its strict existing regular-file
 specialization, while `path_state` owns only filesystem-state semantics.
 No mode flags, fallback, or duplicated containment are authorized.
+
+## 2026-08-12 VE057 And VE058 Acceptance
+
+**Outcome:** accepted; M6-S row-family preflight resumes.
+
+The engine now has one strict `path_state` assertion and one shared
+`contained_path` resolver. The sole registered absence consumer migrated and
+the old assertion was deleted rather than retained as an alias or fallback.
+Resolved-target containment and lexical filesystem-state classification both
+hold, including for broken symlinks.
+
+Focused verification passed 72 tests, the full engine passed 195 tests, the
+consumer passed 5 checks, all 121 declarative suites passed, and the complete
+mixed suite passed 156 checkers. Next slice is disposable preflight for rows
+20 through 22; no package is admitted by this acceptance.

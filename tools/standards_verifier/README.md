@@ -136,13 +136,14 @@ The check has no regular-expression configuration, inferred level, heading
 inventory, count, line limit, callback, command execution, or content
 normalization.
 
-The `absent_paths` check requires every member of one explicit non-empty unique
-`paths` list to be absent. Paths must remain repository-contained after symlink
-resolution. Files, directories, valid symlinks, and broken symlinks are all
-present; absolute paths, parent traversal, and symlink escapes are invalid.
-Missing paths are the asserted success state, not unavailable input. The check
-does not scan a corpus, infer retired paths, invoke commands, or ignore an
-unexpected filesystem object.
+The `path_state` check accepts explicit unique `present` and `absent` path
+sets; at least one set must be non-empty, and a path cannot occur in both.
+Paths remain repository-contained after symlink resolution. Present paths may
+be files, directories, or valid symlinks; missing paths and broken symlinks are
+unavailable. Absent paths reject files, directories, valid symlinks, and broken
+symlinks. Absolute paths, parent traversal, and symlink escapes are invalid.
+The check derives cardinality and does not scan a corpus, inspect content,
+infer paths, invoke commands, or ignore an unexpected filesystem object.
 
 The `reference_inventory` check reads one exact candidate TSV and one exact
 manifest TSV, using explicitly configured headers and path columns. It resolves

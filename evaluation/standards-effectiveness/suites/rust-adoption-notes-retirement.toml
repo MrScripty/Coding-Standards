@@ -5,8 +5,8 @@ description = "Exact retirement of obsolete Rust adoption notes without legacy r
 
 [[checks]]
 id = "adoption-path-absent"
-type = "absent_paths"
-paths = ["languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md"]
+type = "path_state"
+absent = ["languages/rust/RUST-STANDARDS-ADOPTION-NOTES.md"]
 
 [[checks]]
 id = "adoption-corpus-absent"

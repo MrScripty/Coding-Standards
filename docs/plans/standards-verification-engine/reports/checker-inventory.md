@@ -2408,3 +2408,19 @@ VE057 remains unaccepted pending this helper decision.
 Option 1 is selected. The implementation introduces one lower-level
 `contained_path` resolver, leaves all strict `contained_file` consumers
 unchanged, and removes the unaccepted path-state duplicate before acceptance.
+
+### VE057 And VE058 Acceptance
+
+The shared contract is accepted. `path_state` is the only registered
+filesystem-state assertion and `absent_paths` has no parser, dispatcher entry,
+configuration consumer, documentation route, or fallback. Its sole former
+consumer uses an explicit absent set.
+
+`contained_path` validates repository-relative lexical paths and resolved
+symlink containment while returning the lexical candidate needed to
+distinguish missing paths from broken links. `contained_file` remains the
+strict existing regular-file specialization. Focused tests cover files,
+directories, valid and broken symlinks, missing positive paths, traversal,
+symlink escape, duplicate and overlapping declarations, strict keys, and the
+retired type. All 195 engine tests, 121 declarative suites, and 156 mixed-suite
+checkers pass. M6-S rows 20 through 22 may resume disposable preflight.

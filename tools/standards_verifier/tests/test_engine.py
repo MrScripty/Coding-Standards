@@ -17,7 +17,7 @@ sys.path.insert(0, str(ENGINE_ROOT))
 from standards_verifier.cli import main
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
-from standards_verifier.paths import contained_file
+from standards_verifier.paths import contained_file, contained_path
 
 
 class EngineTest(unittest.TestCase):
@@ -847,6 +847,49 @@ class EngineTest(unittest.TestCase):
             self.assertEqual(symlink_error.exception.diagnostic.code, "PATH.OUTSIDE_REPOSITORY")
         finally:
             outside.unlink(missing_ok=True)
+
+    def test_contained_path_accepts_missing_directory_and_valid_symlink(
+        self,
+    ) -> None:
+        (self.root / "directory").mkdir()
+        (self.root / "link").symlink_to("directory", target_is_directory=True)
+
+        self.assertEqual(
+            contained_path(self.root, "missing.md"),
+            self.root / "missing.md",
+        )
+        self.assertEqual(
+            contained_path(self.root, "directory"),
+            self.root / "directory",
+        )
+        self.assertEqual(
+            contained_path(self.root, "link"),
+            self.root / "link",
+        )
+
+    def test_contained_path_rejects_parent_and_symlink_escape(self) -> None:
+        with self.assertRaises(EngineError) as parent_error:
+            contained_path(self.root, "../outside.md")
+        self.assertEqual(
+            parent_error.exception.diagnostic.code,
+            "PATH.OUTSIDE_REPOSITORY",
+        )
+
+        outside = Path(self.temp_dir.name).parent / "standards-path-outside"
+        outside.mkdir(exist_ok=True)
+        try:
+            (self.root / "escape").symlink_to(
+                outside,
+                target_is_directory=True,
+            )
+            with self.assertRaises(EngineError) as symlink_error:
+                contained_path(self.root, "escape/missing.md")
+            self.assertEqual(
+                symlink_error.exception.diagnostic.code,
+                "PATH.OUTSIDE_REPOSITORY",
+            )
+        finally:
+            outside.rmdir()
 
     def test_cli_json_preserves_typed_diagnostics(self) -> None:
         suite_path = self.write_text_suite("text", path="missing.md")

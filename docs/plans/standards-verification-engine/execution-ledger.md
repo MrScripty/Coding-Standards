@@ -2958,3 +2958,22 @@
 - Prohibited file-helper mode flags, permissive fallbacks, duplicate private
   containment logic, and VE057 configuration changes.
 - Changed no executable authority in this selection slice.
+
+## 2026-08-12 - VE057 And VE058 Acceptance
+
+- Added one strict `path_state` assertion with explicit present and absent
+  sets, derived cardinality, duplicate/overlap rejection, and typed invalid or
+  unavailable outcomes.
+- Added `contained_path` as the sole repository-containment and symlink-escape
+  resolver. `contained_file` delegates containment to it and preserves strict
+  existing regular-file behavior.
+- Returned the validated lexical candidate from `contained_path`; the initial
+  resolved return lost the identity of broken symlinks and was corrected before
+  acceptance. This is a boundary correction, not a compatibility behavior.
+- Migrated the sole registered consumer and deleted `absent_paths`; the retired
+  assertion type is now rejected as unknown.
+- Passed 72 focused path/engine tests, all 195 engine tests, the focused
+  consumer's 5 checks, all 121 declarative suites, Python compilation, diff
+  checks, and the complete mixed suite of 156 checkers.
+- VE057 and VE058 are accepted. Next slice resumes disposable M6-S1 through
+  M6-S3 preflight for rows 20 through 22 before package admission.

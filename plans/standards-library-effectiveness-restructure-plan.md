@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** resolve VE058's shared containment helper before accepting
-VE057 path-state or resuming M6-S1 through M6-S3 preflight.
+**Next slice:** resume M6-S1 through M6-S3 disposable preflight for rows 20
+through 22 against the accepted unified path-state and containment contracts.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3036,6 +3036,13 @@ all structural/routing fixtures pass.
          its unchanged strict regular-file specialization, and layer
          `path_state` semantics on the resolver. Add no file-helper modes,
          fallback, duplicate resolver, or configuration change.
+       - `7.4c3ve62` (`Accepted`): `path_state` replaces `absent_paths`, the
+         sole registered consumer is migrated, and the retired type is
+         rejected. One lexical `contained_path` result preserves broken-link
+         classification after resolved-target containment validation;
+         `contained_file` remains the existing regular-file specialization.
+         Focused, engine, declarative, and all 156 mixed checkers pass. Resume
+         M6-S1 through M6-S3 preflight without a compatibility path.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

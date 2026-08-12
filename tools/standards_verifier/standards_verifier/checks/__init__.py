@@ -5,7 +5,6 @@ from typing import Any
 from ..diagnostics import Diagnostic, EngineError
 from ..model import Check
 from .acceptance_claims import parse_acceptance_claims_check
-from .absent_paths import parse_absent_paths_check
 from .decision import parse_decision_check
 from .edge_dispositions import parse_edge_dispositions_check
 from .exact_text import parse_exact_text_check
@@ -15,6 +14,7 @@ from .markdown_headings import parse_markdown_headings_check
 from .markdown_structure import parse_markdown_structure_check
 from .metadata import parse_metadata_graph_check
 from .numeric_lifecycle import parse_numeric_lifecycle_check
+from .path_state import parse_path_state_check
 from .reference_inventory import parse_reference_inventory_check
 from .relation import parse_relation_check
 from .table import parse_table_check
@@ -48,8 +48,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_markdown_structure_check(raw, suite_id)
     if kind == "line_budget":
         return parse_line_budget_check(raw, suite_id)
-    if kind == "absent_paths":
-        return parse_absent_paths_check(raw, suite_id)
+    if kind == "path_state":
+        return parse_path_state_check(raw, suite_id)
     if kind == "metadata_graph":
         return parse_metadata_graph_check(raw, suite_id)
     if kind == "reference_inventory":

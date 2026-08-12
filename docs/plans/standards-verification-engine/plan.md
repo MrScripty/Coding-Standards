@@ -2,12 +2,17 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE058 containment-helper re-plan
+**Current phase:** Milestone 6: M6-S1 through M6-S3 row-family preflight
 
-**Next slice:** implement the selected shared containment resolver and unified
-path-state contract atomically.
+**Next slice:** prove rows 20 through 22 with disposable contained suites,
+their live Bash checkers, and the independent execution-train gate before
+admitting any package.
 
 **Acceptance status:** `pending`
+
+**Latest accepted slice:** VE057 and VE058 unified filesystem path state and
+shared containment resolution. Focused tests, the full engine suite, all
+declarative suites, and the complete 156-checker mixed suite pass.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 

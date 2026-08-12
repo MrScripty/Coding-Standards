@@ -71,12 +71,19 @@ class FileContractsTest(unittest.TestCase):
         )
         return suite_path
 
-    def write_absent_suite(
+    def write_path_state_suite(
         self,
         *,
-        paths: object = ("retired/a.md", "retired/b.md"),
+        present: object | None = None,
+        absent: object | None = ("retired/a.md", "retired/b.md"),
+        check_type: str = "path_state",
         extra: str = "",
     ) -> str:
+        states = ""
+        if present is not None:
+            states += f"present = {json.dumps(present)}\n"
+        if absent is not None:
+            states += f"absent = {json.dumps(absent)}\n"
         suite_path = "suites/files.toml"
         self.write(
             suite_path,
@@ -84,12 +91,12 @@ class FileContractsTest(unittest.TestCase):
             schema_version = 1
             id = "files"
             owner = "test.owner"
-            description = "Absent paths test"
+            description = "Path state test"
 
             [[checks]]
-            id = "retired"
-            type = "absent_paths"
-            paths = {json.dumps(paths)}
+            id = "paths"
+            type = {json.dumps(check_type)}
+            {states}
             {extra}
             """,
         )
@@ -365,12 +372,45 @@ class FileContractsTest(unittest.TestCase):
                     Verifier(self.root, "registry.toml")
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
-    def test_absent_paths_accepts_missing_paths(self) -> None:
-        result = self.result(self.write_absent_suite())
+    def test_path_state_accepts_present_and_absent_paths(self) -> None:
+        self.write("present/file.md", "present\n")
+        (self.root / "present/directory").mkdir()
+        (self.root / "present/link").symlink_to("file.md")
+
+        result = self.result(
+            self.write_path_state_suite(
+                present=[
+                    "present/file.md",
+                    "present/directory",
+                    "present/link",
+                ]
+            )
+        )
 
         self.assertEqual(result.status, "passed")
 
-    def test_absent_paths_rejects_present_file_directory_and_symlinks(self) -> None:
+    def test_path_state_reports_missing_present_paths_unavailable(self) -> None:
+        (self.root / "present").mkdir()
+        (self.root / "present/broken").symlink_to("missing.md")
+        for path in ("present/missing.md", "present/broken"):
+            with self.subTest(path=path):
+                result = self.result(
+                    self.write_path_state_suite(
+                        present=[path],
+                        absent=None,
+                    )
+                )
+                self.assertEqual(result.exit_code, 3)
+                self.assertEqual(
+                    result.diagnostics[0].code,
+                    "INPUT.UNAVAILABLE",
+                )
+                self.assertEqual(
+                    result.diagnostics[0].outcome,
+                    "unavailable",
+                )
+
+    def test_path_state_rejects_entries_required_absent(self) -> None:
         self.write("present/file.md", "present\n")
         (self.root / "present/directory").mkdir()
         (self.root / "present/link").symlink_to("file.md")
@@ -382,19 +422,23 @@ class FileContractsTest(unittest.TestCase):
             "present/broken",
         ):
             with self.subTest(path=path):
-                result = self.result(self.write_absent_suite(paths=[path]))
+                result = self.result(
+                    self.write_path_state_suite(absent=[path])
+                )
                 self.assertEqual(result.exit_code, 1)
                 self.assertEqual(
                     result.diagnostics[0].code,
                     "ASSERT.PATH_PRESENT",
                 )
 
-    def test_absent_paths_reports_each_present_path(self) -> None:
+    def test_path_state_reports_each_entry_required_absent(self) -> None:
         self.write("present/a.md", "a\n")
         self.write("present/b.md", "b\n")
 
         result = self.result(
-            self.write_absent_suite(paths=["present/a.md", "present/b.md"])
+            self.write_path_state_suite(
+                absent=["present/a.md", "present/b.md"]
+            )
         )
 
         self.assertEqual(
@@ -402,31 +446,58 @@ class FileContractsTest(unittest.TestCase):
             ["present/a.md", "present/b.md"],
         )
 
-    def test_absent_paths_rejects_escaping_paths(self) -> None:
+    def test_path_state_rejects_escaping_paths_in_both_states(self) -> None:
         external = Path(self.external_dir.name)
         (self.root / "escape").symlink_to(external, target_is_directory=True)
-        for path in ("/tmp/retired.md", "../retired.md", "escape/retired.md"):
-            with self.subTest(path=path):
-                result = self.result(self.write_absent_suite(paths=[path]))
-                self.assertEqual(result.exit_code, 2)
-                self.assertEqual(
-                    result.diagnostics[0].code,
-                    "PATH.OUTSIDE_REPOSITORY",
-                )
+        for field in ("present", "absent"):
+            for path in (
+                "/tmp/retired.md",
+                "../retired.md",
+                "escape/retired.md",
+            ):
+                with self.subTest(field=field, path=path):
+                    options = {field: [path]}
+                    if field == "present":
+                        options["absent"] = None
+                    result = self.result(
+                        self.write_path_state_suite(**options)
+                    )
+                    self.assertEqual(result.exit_code, 2)
+                    self.assertEqual(
+                        result.diagnostics[0].code,
+                        "PATH.OUTSIDE_REPOSITORY",
+                    )
 
-    def test_absent_paths_rejects_configuration_errors(self) -> None:
+    def test_path_state_rejects_configuration_errors(self) -> None:
         cases = (
-            ({"paths": []}, "CONFIG.STRING_LIST"),
-            ({"paths": ["a.md", "a.md"]}, "CONFIG.STRING_LIST"),
+            ({"present": None, "absent": None}, "CONFIG.EMPTY_CHECK"),
+            ({"absent": []}, "CONFIG.STRING_LIST"),
+            ({"absent": ["a.md", "a.md"]}, "CONFIG.STRING_LIST"),
+            (
+                {"present": ["a.md"], "absent": ["a.md"]},
+                "CONFIG.CONTRADICTORY_PATH_STATE",
+            ),
             ({"extra": "allow_broken = true"}, "CONFIG.UNKNOWN_FIELD"),
         )
         for options, code in cases:
             with self.subTest(code=code):
-                suite = self.write_absent_suite(**options)
+                suite = self.write_path_state_suite(**options)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
                     Verifier(self.root, "registry.toml")
                 self.assertEqual(raised.exception.diagnostic.code, code)
+
+    def test_absent_paths_type_is_rejected(self) -> None:
+        suite = self.write_path_state_suite(check_type="absent_paths")
+        self.write_registry(suite)
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, "registry.toml")
+
+        self.assertEqual(
+            raised.exception.diagnostic.code,
+            "CONFIG.UNKNOWN_CHECK",
+        )
 
 
 if __name__ == "__main__":
