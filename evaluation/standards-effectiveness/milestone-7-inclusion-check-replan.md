@@ -71,8 +71,22 @@ semantics and diagnostics.
 
 ### M6-E1: Inclusion Engine Contract
 
+Pre-implementation inspection found that `relation.py` privately owns parsing
+for a projected table source even though `table.py` already owns table reading
+and projection execution. Copying that parser into `inclusion.py` would create
+two schema authorities. Importing the private relation parser would instead
+make containment depend on an equality-specific implementation boundary.
+
+M6-E1 therefore first extracts the existing projected-source structure and
+parser into `table.py` as shared tabular infrastructure. `relation` must consume
+that shared contract without changing its public schema, accepted inputs,
+outcomes, or diagnostics. `inclusion` then consumes the same parser through its
+distinct `members` and `container` roles.
+
 **Allowed write set:**
 
+- `tools/standards_verifier/standards_verifier/checks/table.py`;
+- `tools/standards_verifier/standards_verifier/checks/relation.py`;
 - `tools/standards_verifier/standards_verifier/checks/inclusion.py`;
 - `tools/standards_verifier/standards_verifier/checks/__init__.py`;
 - `tools/standards_verifier/tests/test_engine.py`;
@@ -86,6 +100,11 @@ configuration, unavailable input, path containment, projection-width mismatch,
 filtering, and split projection. Run engine self-tests, all declarative suites,
 plan checks, and diff integrity. Commit this engine capability independently;
 do not admit row 36 in the same commit.
+
+The extraction must not create a generic expression language or rename the
+existing equality fields. Shared infrastructure owns only strict projected
+table-source parsing and execution; each assertion retains its own relation
+semantics and public evidence-role vocabulary.
 
 ### M6-T11: Row 36 Admission
 
@@ -124,7 +143,8 @@ Re-plan before implementation if:
   partial-column matching beyond existing exact projections;
 - row 36 requires a standards-graph edge rather than evidence inclusion;
 - an existing equality suite would need a compatibility conversion;
+- relation parsing or diagnostics cannot remain behaviorally identical after
+  extraction;
 - implementing the check requires command execution, inferred identity lists,
   copied counts, or files outside the bounded write set;
 - fresh graph or owner evidence changes row 36's package boundary.
-

@@ -3221,6 +3221,15 @@ all structural/routing fixtures pass.
          Bash callback, or fall back to weaker evidence. The accepted contract,
          slices, bounded write sets, typed outcomes, and re-plan triggers are in
          `evaluation/standards-effectiveness/milestone-7-inclusion-check-replan.md`.
+       - `7.4c3ve88` (`Accepted planning authority`): M6-E1 inspection finds
+         projected table-source parsing privately duplicated inside the
+         equality-specific `relation` check. Expand the bounded engine slice to
+         extract that parser into `table.py`, migrate `relation` without public
+         or diagnostic drift, and implement `inclusion` over the same shared
+         contract. Do not copy the parser, import relation-private helpers,
+         rename equality fields, introduce aliases, or add an expression
+         language. The `members`/`container` decision and M6-T11 ordering remain
+         unchanged.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

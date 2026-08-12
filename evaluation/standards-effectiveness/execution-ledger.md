@@ -11834,3 +11834,21 @@ as an atomic slice. M6-T11 row-36 admission follows only after the capability
 passes focused, declarative, plan, and integrity verification. The complete
 contract and re-plan triggers are recorded in
 `milestone-7-inclusion-check-replan.md`.
+
+## 2026-08-12 M6-E1 Shared Projection Re-plan
+
+**Outcome:** accepted planning authority; implementation not started.
+
+Pre-implementation inspection finds that table reading and projection execution
+are shared, but projected table-source parsing remains private to
+`relation.py`. Duplicating it in `inclusion.py` would create competing schema
+and diagnostic implementations. Depending on the private equality helper would
+give the wrong module ownership.
+
+The accepted correction expands M6-E1 to extract the projected-source structure
+and parser into `table.py`. Existing `relation` suites must retain exactly their
+current `left`/`right` equality schema and behavior. The new `inclusion` check
+uses the same shared parser through only `members` and `container`. No alias,
+compatibility conversion, inferred projection, expression language, Bash
+mechanism, or fallback is authorized. M6-T11 remains blocked until this engine
+slice passes focused and complete declarative verification.
