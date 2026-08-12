@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** select and record the VE052 Q3 scope-authority recovery before
-Architecture Population integration resumes.
+**Next slice:** reconstruct and integrate M6-Q3 Architecture Population under
+the canonical package-manifest scope authority.
 
 **Acceptance status:** `pending`
 
@@ -5229,7 +5229,7 @@ checkpoint remains deferred to `M6-Q-W1`.
 
 ##### M6-Q3 Architecture Population Package Admission
 
-**Status:** `Blocked`; implementation is unavailable pending VE051.
+**Status:** `Active`; implementation is authorized after VE051 and VE052.
 
 **Package state:** `admitted` at train order 82.
 
@@ -5249,14 +5249,13 @@ disposition, or lifecycle result. All four rows therefore use
 `independent-gate` with exact retained checker evidence. Q3 declares no
 registry dependency and copies neither callee's behavior.
 
-**Allowed implementation write set:** package and edge manifests; package
-projection; suite registry; `suites/architecture-population.toml`; the deleted
-`verify-architecture-population.sh`; all four generated checker artifacts;
-this plan; child ledger; issues; checker-inventory report; canonical evaluation
-ledger; and parent plan. `CODING-STANDARDS.md`, consolidation dispositions,
-parent-plan lifecycle claims, Architecture Owner and row-15 checkers/evidence,
-all other suites/checkers, verification README, engine code/tests, schemas,
-numeric evidence, lockfiles, build output, and workflows remain read-only.
+**Allowed implementation write set:** the exact `M6-Q3` row in
+`checker-migration-packages.tsv`, verified by the registered
+`checker-migration-packages` projection suite, is the sole file-level scope
+authority. Canonical standards, consolidation dispositions, parent-plan
+lifecycle claims, retained Architecture Owner and row-15 gate behavior, all
+unlisted suites/checkers, fixtures, engine code/tests, schemas, numeric
+evidence, lockfiles, build output, and workflows remain semantically excluded.
 
 **No-fallback rule:** register and pass the four-check suite before deleting
 the Bash checker. Do not retain a wrapper or Bash bridge, copy either retained
@@ -5332,7 +5331,7 @@ re-admission.
 
 ##### VE052 Q3 Duplicated Scope Authority Re-plan
 
-**Status:** `Active`; Q3 shared integration remains unavailable.
+**Status:** `Accepted`; Option 1 selected and Q3 integration is authorized.
 
 Post-re-admission implementation review found that Q3's prose “Allowed
 implementation write set” still classifies the verification README as
@@ -5369,6 +5368,12 @@ Silently preferring one authority, editing the README under contradictory
 scope, dropping the accepted README change, weakening exact package
 projection, or adding a wrapper/alias is invalid. Selection must resolve the
 duplicate authority before Q3 implementation resumes.
+
+**Selected recovery:** Option 1. Q3's copied file enumeration is removed. The
+checked `M6-Q3` package row is the sole exact write-set authority, while this
+plan retains only semantic exclusions that constrain how authorized files may
+change. No generator or second scope projection is added. Q3 may resume only
+after the package projection passes against the current manifest.
 
 ##### M6-Q4 Coding Dependencies Route Package Admission
 

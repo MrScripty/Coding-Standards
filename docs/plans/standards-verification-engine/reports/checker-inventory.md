@@ -2214,6 +2214,11 @@ two-copy patch is valid but preserves drift; a generated prose projection is
 valid only if full inline lists are a demonstrated review requirement. Q3
 remains isolated and shared integration has not started.
 
+Option 1 is selected. The exact checked `M6-Q3` package row now supplies the
+only file-level scope; Q3 prose supplies semantic exclusions without copying
+the path list. This planning-only recovery adds no generator or implementation
+change. Fresh-base Q3 integration is authorized next.
+
 ### Admitted M6-Q4 Coding Dependencies Route
 
 A disposable dependency-free three-check suite matches the Coding dependency

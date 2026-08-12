@@ -2716,3 +2716,17 @@
   authority and reducing Q3 prose to a manifest pointer plus semantic
   exclusions. Patching both copies and generating prose remain bounded
   alternatives.
+
+## 2026-08-11 - VE052 Q3 Manifest-Derived Scope Recovery
+
+- Selected Option 1 and removed Q3's copied file-level write-set enumeration.
+- The exact `M6-Q3` package row, checked by the registered package-projection
+  suite, is now the sole file-level implementation authority.
+- Retained semantic exclusions in plan prose so authorized files cannot be
+  used to change canonical standards, fixtures, retained gates, engine/schema,
+  lifecycle/numeric evidence, lockfiles, outputs, or workflows indirectly.
+- Added no generator, template, compatibility representation, or second scope
+  projection. No suite, checker, registry, edge, README, graph, source,
+  fixture, engine, schema, lifecycle, numeric, lockfile, build-output, or
+  workflow implementation changed.
+- Next is fresh-base Q3 reconstruction and atomic integration.

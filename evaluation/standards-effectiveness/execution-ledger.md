@@ -11270,3 +11270,19 @@ for a demonstrated inline-list need. Registry, package/edge state, README,
 graph, source, fixture, engine, schema, lifecycle, numeric, lockfile,
 build-output, workflow, and canonical suite/checker implementation remain
 unchanged.
+
+## 2026-08-11 VE052 Q3 Manifest-Derived Scope Recovery
+
+**Outcome:** Option 1 accepted; Q3 implementation authority is unambiguous.
+
+The copied Q3 file enumeration is removed from plan prose. The exact `M6-Q3`
+manifest row, checked against its registered package projection, is now the
+sole file-level write-set authority. Plan prose retains semantic exclusions so
+the package cannot use an authorized integration file to alter canonical
+standards, fixtures, retained-gate behavior, engine/schema contracts,
+lifecycle/numeric evidence, lockfiles, build output, or workflows indirectly.
+
+No generated prose, second scope representation, suite, checker, registry,
+edge, README, graph, source, fixture, engine, schema, lifecycle, numeric,
+lockfile, build-output, or workflow implementation changed. Fresh-base Q3
+reconstruction and atomic integration are next.
