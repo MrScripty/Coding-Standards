@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
-**Next slice:** preflight and admit verification-engine package `M6-Q4` for the
-Coding Dependencies route, then freeze preparation and integration contracts.
+**Next slice:** freeze verification-engine Q1-Q4 concurrent local preparation
+and serial shared-integration contracts before implementation.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -206,6 +206,15 @@ Architecture Owner and row-15 decomposition are separate checker-backed
 independent gates, not registry dependencies or copied Q3 behavior. No
 permanent suite, registry, checker, standards, fixture, engine, schema,
 lockfile, build output, or workflow authority changed; Q4 preflight is next.
+
+`M6-Q4` is admitted at train order 83. A disposable dependency-free three-check
+suite exactly matches the Coding dependency route, exact disposition, and two
+accepted lifecycle claims while conservatively prohibiting the retired source
+throughout the legacy index. Its four current edges to Dependencies Owner and
+row-15 decomposition are separate checker-backed independent gates, not
+registry dependencies or copied Q4 behavior. No permanent suite, registry,
+checker, standards, fixture, engine, schema, lockfile, build output, or workflow
+authority changed. All four Q packages are admitted.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

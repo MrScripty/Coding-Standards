@@ -2161,3 +2161,19 @@ row-15 decomposition. All four remain checker-backed independent gates; none
 creates a registry dependency or transfers callee behavior into Q3. Canonical
 sources, dispositions, lifecycle claims, retained gates, engine, and schemas
 remain read-only. Q4 preflight is next.
+
+### Admitted M6-Q4 Coding Dependencies Route
+
+A disposable dependency-free three-check suite matches the Coding dependency
+route, exact `STD-0157` index disposition, and accepted `7.4b8bi`/`7.4b9s`
+lifecycle claims. The suite conservatively prohibits the retired dependency
+source throughout the non-normative Coding index; this is stronger than the
+former section-local parser and cannot restore legacy authority. Existing text
+and table assertions are sufficient.
+
+Q4 is admitted at train order 83. Its exact current executable edges are
+execution-reference and verifier-dependency pairs to Dependencies Owner and
+row-15 decomposition. All four remain checker-backed independent gates; none
+creates a registry dependency or transfers callee behavior into Q4. Canonical
+sources, dispositions, lifecycle claims, retained gates, engine, and schemas
+remain read-only. All four Q packages are now admitted.

@@ -11141,3 +11141,25 @@ Only package and edge authority, package projection, shared planning evidence,
 and derived graph artifacts change at admission. No permanent suite, registry
 entry, checker, standards source, fixture, engine, schema, numeric evidence,
 lockfile, build output, or workflow changes. Q4 isolated preflight is next.
+
+## 2026-08-11 M6-Q4 Coding Dependencies Route Admission
+
+**Outcome:** admitted at train order 83; implementation not started.
+
+A disposable dependency-free suite passed three generic checks covering the
+Coding dependency route, exact `STD-0157` disposition, and accepted
+`7.4b8bi`/`7.4b9s` lifecycle claims. The whole-index prohibition of the retired
+dependency source is conservatively stronger than the Bash section parser. The
+live Bash checker passed the same current evidence. Temporary probe files were
+removed.
+
+Fresh graph evidence gives Q4 execution-reference and verifier-dependency pairs
+to Dependencies Owner and row-15 decomposition. All four are independently
+owned gates and retain exact checker evidence; Q4 declares no registry
+dependency and copies no callee behavior.
+
+Only package and edge authority, package projection, shared planning evidence,
+and derived graph artifacts change at admission. No permanent suite, registry
+entry, checker, standards source, fixture, engine, schema, numeric evidence,
+lockfile, build output, or workflow changes. All four Q packages are admitted;
+next is the preparation and serial-integration contract freeze.

@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave package admission
 
-**Next slice:** preflight and admit `M6-Q4` Coding Dependencies Route, then
-freeze concurrent local preparation and serial integration contracts.
+**Next slice:** freeze concurrent Q1-Q4 local preparation and serial integration
+contracts before any checker replacement begins.
 
 **Acceptance status:** `pending`
 
@@ -5258,6 +5258,61 @@ both pass route, prohibition, eleven-disposition, and lifecycle evidence.
 Package projection and exact edge authority pass against the current graph. No
 permanent suite, registry entry, checker, standards source, fixture, engine,
 schema, numeric evidence, lockfile, build output, or workflow changed.
+
+##### M6-Q4 Coding Dependencies Route Package Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 83.
+
+An isolated dependency-free suite proves Q4's complete route-closure contract
+with three generic checks. One text check preserves the dependency-route heading
+and canonical Dependencies destination while prohibiting the retired
+`DEPENDENCY-STANDARDS.md` route throughout the non-normative Coding index. This
+is conservatively stronger than the Bash check's section-local prohibition and
+cannot authorize legacy policy. One exact table projection proves the
+`STD-0157` index disposition, and one text check preserves accepted `7.4b8bi`
+and `7.4b9s` lifecycle claims. The disposable suite and live Bash checker both
+pass; temporary files were removed.
+
+The current generated graph has exactly four executable incident edges for Q4:
+an `executable_reference` and `verifier_dependency` to Dependencies Owner, and
+the same pair to row-15 decomposition. Isolated preflight proves both are
+separately owned integration gates, not inputs to Q4's route, prohibition,
+disposition, or lifecycle result. All four rows therefore use
+`independent-gate` with exact retained checker evidence. Q4 declares no
+registry dependency and copies neither callee's behavior.
+
+**Allowed implementation write set:** package and edge manifests; package
+projection; suite registry; `suites/coding-dependency-route.toml`; the deleted
+`verify-coding-dependency-route.sh`; all four generated checker artifacts; this
+plan; child ledger; issues; checker-inventory report; canonical evaluation
+ledger; and parent plan. `CODING-STANDARDS.md`, consolidation dispositions,
+parent-plan lifecycle claims, Dependencies Owner and row-15 checkers/evidence,
+all other suites/checkers, verification README, engine code/tests, schemas,
+numeric evidence, lockfiles, build output, and workflows remain read-only.
+
+**No-fallback rule:** register and pass the three-check suite before deleting
+the Bash checker. Do not retain a wrapper or Bash bridge, copy either retained
+gate, add false `requires` dependencies, reintroduce a section parser, weaken
+the whole-index legacy-source prohibition, duplicate disposition evidence, use
+an aggregate count, infer lifecycle state, create package-specific code, or
+retain the deleted checker as evidence. Any changed source contract,
+additional incident edge, missing generic capability, unavailable retained
+gate, or inability to preserve exact disposition and lifecycle evidence is a
+re-plan trigger.
+
+**Acceptance gate:** focused Q4 suite; live checker equivalence before deletion;
+package projection and exact four-row edge authority; both retained gates
+without registry dependencies; all declarative suites; removed checker path;
+graph freshness; both plan checks; exact read-only source/disposition/lifecycle
+evidence; diff integrity; and the deferred `M6-Q-W1` mixed checkpoint.
+
+**Admission verification:** the disposable three-check suite and live checker
+both pass route, conservative prohibition, exact disposition, and lifecycle
+evidence. Package projection and exact edge authority pass against the current
+graph. No permanent suite, registry entry, checker, standards source, fixture,
+engine, schema, numeric evidence, lockfile, build output, or workflow changed.
 
 ##### VE050 Level-Selected Markdown Heading Policy Re-plan
 

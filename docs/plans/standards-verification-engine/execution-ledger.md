@@ -2618,3 +2618,17 @@
 - No permanent suite, registry entry, checker, standards source, fixture,
   engine, schema, numeric evidence, lockfile, build output, or workflow changed.
 - Next is Q4 isolated-suite preflight and admission.
+
+## 2026-08-11 - M6-Q4 Coding Dependencies Route Admission
+
+- A disposable dependency-free three-check suite and the live checker passed
+  the same Coding route, exact `STD-0157` disposition, and two lifecycle claims.
+- Conservatively prohibited the retired dependency source throughout the
+  non-normative Coding index rather than preserving a section-local parser.
+- Admitted Q4 at train order 83 with exact coverage of execution-reference and
+  verifier-dependency edges to Dependencies Owner and row-15 decomposition.
+- Classified all four edges as checker-backed independent gates. Q4 copies no
+  callee behavior and declares no registry dependency.
+- No permanent suite, registry entry, checker, standards source, fixture,
+  engine, schema, numeric evidence, lockfile, build output, or workflow changed.
+- Next is the Q1-Q4 preparation and serial-integration contract freeze.
