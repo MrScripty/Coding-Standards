@@ -10872,3 +10872,31 @@ pass. The mixed Bash checkpoint remains deferred to `M6-P-W1`.
 
 **Next slice:** perform read-only preflight for P1 package 4, Language Index
 closure, before admitting any executable or package change.
+
+## 2026-08-11 M6-P4 Language Index Closure Admission
+
+**Outcome:** admitted at train order 74 after isolated read-only preflight.
+
+Exact review freezes a seven-check dependency-free suite for the two-heading,
+14-line Language Index navigation surface; live links; required and prohibited
+text; exact `STD-0704`/`STD-0705` owner-map membership and dispositions; row-45
+owner validation; and Router metadata. The probe passed with existing generic
+checks and required no engine or standards change.
+
+All eleven executable incident edges are admitted as independent-gate
+transfers to retained Language Profile, row-45, root-audit, or root-Router
+authority. Acceptance must remove nested execution, the row-45 cycle, the
+obsolete consumer identity, and duplicate caller assertions without creating
+registry dependencies. Canonical standards and evidence remain read-only.
+
+**No-fallback result:** admission authorizes no wrapper, copied total,
+whole-file snapshot, inferred owner, callback, Bash bridge, compatibility path,
+or alternate authority. An additional edge, changed owner, unrepresentable
+assertion, required engine behavior, or retained-gate failure triggers re-plan.
+
+**Verification:** current Language Index and row-45 gates pass; package and all
+eleven edge rows pass; all 110 declarative suites pass; generated evidence is
+fresh at 167 Bash verifiers / 172 nodes / 850 edges / 168 components; both plan
+checks and diff integrity pass.
+
+**Next slice:** implement and accept M6-P4 within its frozen write set.

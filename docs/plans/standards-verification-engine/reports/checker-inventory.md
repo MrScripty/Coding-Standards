@@ -1899,3 +1899,30 @@ inventory at 167 Bash verifiers / 172 nodes / 843 edges / 168 components pass.
 Canonical root sources, fixtures, dispositions, retained Router evidence,
 engine code/tests, schemas, numeric evidence, lockfiles, build output, and
 workflows are unchanged. The mixed checkpoint remains deferred to `M6-P-W1`.
+
+### Admitted M6-P4 Language Index Closure
+
+The 45-line Language Index checker owns a finite two-heading navigation
+contract, exact positive and negative text, live links, two owner-map members,
+two dispositions, two row-45 owner outcomes, and Router owner metadata. An
+isolated worktree probe passed a seven-check declarative suite using only
+existing generic checks and an empty dependency list.
+
+Generated evidence records eleven executable incident edges: eight outbound
+call/reference identities to four retained gates, two inbound row-45 cycle
+identities, and one inbound root-audit identity. Every edge is admitted as an
+independent-gate transfer to the retained opposite endpoint. The separate
+consumer-manifest reference is duplicate Bash identity evidence to remove, not
+an executable edge or suite dependency.
+
+Implementation is bounded to the suite/registry, deleted checker, exact
+consumer/audit and row-45 duplicate transfers, migration authority, generated
+graph, and serial records. Canonical standards, owner/disposition/lifecycle
+evidence, retained gates, engine, schemas, numeric evidence, lockfiles, build
+output, and workflows remain read-only. Any new primitive or semantic
+dependency is a re-plan trigger.
+
+Admission verification passes the current Language Index and row-45 gates,
+package and all eleven edge rows, all 110 declarative suites, both plan checks,
+diff integrity, and fresh generated evidence at 167 Bash verifiers / 172 nodes
+/ 850 edges / 168 components.

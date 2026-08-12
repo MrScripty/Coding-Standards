@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-P3 accepted; P1 package 4 preflight
+**Current phase:** Milestone 6: M6-P3 accepted; M6-P4 admitted
 
-**Next slice:** perform read-only preflight for P1 package 4, Language Index
-closure, before admitting any executable or package change.
+**Next slice:** implement and accept M6-P4 Language Index closure within its
+frozen write set.
 
 **Acceptance status:** `pending`
 
@@ -4531,6 +4531,66 @@ registry dependency. All 110 declarative suites pass; generated evidence is
 fresh at 167 Bash verifiers / 172 nodes / 843 edges / 168 components; removed
 paths, both plan checks, read-only boundaries, and diff integrity pass. The
 mixed Bash checkpoint remains deferred to `M6-P-W1`.
+
+##### M6-P4 Language Index Closure Package Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 74.
+
+Exact review freezes the Language Index contract: the two ordered headings and
+14-line ceiling; live links; required non-normative navigation, Router,
+applicability, Rust-profile, diagnostic, and no-fallback statements; prohibited
+legacy catalog and policy text; exact owner-map membership for `STD-0704` and
+`STD-0705`; their exact index dispositions; exact row-45 owner-validation
+outcomes; and the Router owner metadata plus Language Profiles heading.
+
+An isolated worktree probe passed the proposed seven-check suite using existing
+`markdown_structure`, `markdown_links`, `text`, and `table` checks. The suite
+has `requires = []`. It needs no engine extension, callback, command, expected
+mutable total, whole-file snapshot, inferred owner, or changed standards
+source. `languages/README.md`, the owner map, dispositions, row-45 owner
+validation, Router, and retained route gates remain read-only evidence.
+
+The checker has eleven executable incident edges. Its four calls and matching
+dependency edges retain Language Profile Routing, row-45 lifecycle, root
+consumer audit, and root Router evidence as independent gates. The inbound
+row-45 call and dependency plus the inbound root-audit identity are duplicate
+lifecycle mechanisms to remove while both callers retain their remaining
+authority. The consumer-manifest contract reference is removed with the
+obsolete `language-index-closure` row; it is not reclassified as executable
+authority. No retained gate becomes a suite dependency.
+
+**Allowed implementation write set:** package and edge manifests; package
+projection; suite registry; `suites/language-index-closure.toml`; the deleted
+Language Index checker; verification README; README-consumer manifest; root
+README audit checker; row-45 lifecycle checker; all four generated checker
+artifacts; this plan; checker-inventory report; canonical evaluation ledger;
+and parent plan. Language Index, Router, owner map, dispositions, row-45 source
+records, retained route/audit checkers outside the exact duplicate transfer,
+all other suites/fixtures, engine code/tests, schemas, numeric evidence,
+lockfiles, build output, and workflows remain read-only.
+
+**No-fallback rule:** register and pass the exact suite before deleting the
+checker. Remove nested execution, the two-checker cycle, obsolete consumer
+identity, and duplicate row-45 assertions in the same acceptance slice. Do not
+retain a wrapper, add a registry dependency, copy mutable counts, infer owner
+or applicability from links, weaken exact projections to substring evidence,
+or preserve Bash as alternate authority.
+
+**Acceptance gate:** focused Language Index suite; retained Language Profile,
+row-45, root audit, and root Router gates; package and all eleven exact edge
+rows; all declarative suites; removed checker/consumer/caller proof; graph
+freshness; both plan checks; exact read-only evidence; diff integrity; and the
+deferred `M6-P-W1` mixed checkpoint.
+
+**Admission verification:** the isolated seven-check suite probe and current
+Language Index/row-45 checkers pass. Package projection and all eleven exact
+edge rows pass; all 110 declarative suites pass; generated evidence is fresh at
+167 Bash verifiers / 172 nodes / 850 edges / 168 components; both plan checks
+and diff integrity pass. Any additional incident edge, unrepresentable
+assertion, changed owner, required engine behavior, or failure of a retained
+gate is a re-plan trigger.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

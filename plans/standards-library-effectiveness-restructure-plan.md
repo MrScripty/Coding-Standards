@@ -12,7 +12,7 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform read-only preflight for P1 package 4, Language Index
+**Next slice:** implement and accept admitted P1 package 4, Language Index
 closure. Release Procedure and later P1 packages stay unadmitted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
@@ -77,6 +77,16 @@ independent gate. The affected M6-P2 history uses explicit suite-backed
 independent-gate evidence with no registry dependency. All 110 declarative
 suites and fresh 167-verifier / 172-node / 843-edge / 168-component evidence
 pass; the mixed checkpoint remains deferred to `M6-P-W1`.
+
+M6-P4 is admitted at train order 74 under `STANDARDS-ROUTER.md`. An isolated
+probe passes a dependency-free seven-check suite for exact Language Index
+structure, links, policy boundaries, owner/disposition membership, row-45
+outcomes, and Router metadata. Eleven executable incident edges are frozen as
+independent-gate transfers. Implementation must delete the checker and remove
+nested execution, the row-45 cycle, and obsolete consumer/caller identity
+assertions while retained gates keep their remaining authority. Canonical
+standards, owner/disposition/lifecycle evidence, engine, and schemas remain
+unchanged.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

@@ -65,8 +65,8 @@ evaluation/standards-effectiveness/verify-ipc-payload-validation.sh	verifier	yes
 evaluation/standards-effectiveness/verify-language-binding-boundary.sh	verifier	yes	component-0064	1	no	1	3	1	3	2
 evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh	verifier	yes	component-0065	1	no	5	1	0	1	4
 evaluation/standards-effectiveness/verify-language-binding-wire-representation.sh	verifier	yes	component-0066	1	no	4	1	0	1	4
-evaluation/standards-effectiveness/verify-language-index-closure.sh	verifier	yes	component-0067	2	yes	5	2	1	1	4
-evaluation/standards-effectiveness/verify-language-profile-routing.sh	verifier	yes	component-0068	1	no	4	7	0	7	1
+evaluation/standards-effectiveness/verify-language-index-closure.sh	verifier	yes	component-0067	2	yes	5	2	4	1	4
+evaluation/standards-effectiveness/verify-language-profile-routing.sh	verifier	yes	component-0068	1	no	4	7	1	7	1
 evaluation/standards-effectiveness/verify-launcher-owner-contract.sh	verifier	yes	component-0069	1	no	4	1	1	1	4
 evaluation/standards-effectiveness/verify-launcher-population.sh	verifier	yes	component-0070	1	no	5	1	2	1	3
 evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	verifier	yes	component-0071	1	no	3	9	0	9	5
@@ -101,7 +101,7 @@ evaluation/standards-effectiveness/verify-milestone-7-row-41-decomposition.sh	ve
 evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh	verifier	yes	component-0100	1	no	7	1	0	1	6
 evaluation/standards-effectiveness/verify-milestone-7-row-43-decomposition.sh	verifier	yes	component-0101	1	no	6	1	0	1	4
 evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh	verifier	yes	component-0102	1	no	9	1	0	1	8
-evaluation/standards-effectiveness/verify-milestone-7-row-45-decomposition.sh	verifier	yes	component-0067	2	yes	5	1	0	1	5
+evaluation/standards-effectiveness/verify-milestone-7-row-45-decomposition.sh	verifier	yes	component-0067	2	yes	5	1	3	1	5
 evaluation/standards-effectiveness/verify-milestone-7-row-46-decomposition.sh	verifier	yes	component-0103	4	yes	5	3	2	3	10
 evaluation/standards-effectiveness/verify-milestone-7-row-47-decomposition.sh	verifier	yes	component-0104	1	no	3	0	0	0	4
 evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh	verifier	yes	component-0105	1	no	4	3	0	3	2
