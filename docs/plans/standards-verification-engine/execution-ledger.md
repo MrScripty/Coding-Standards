@@ -3259,6 +3259,17 @@
 - Rust `no_std` closure, execution train, all 133 declarative suites, and all
   144 mixed-suite entrypoints pass. The next slice is a fresh audit.
 
+## 2026-08-12 - Post-M6-T9 Audit And M6-T10 Admission
+
+- Audited rows 47, 36, 34, and 37 in the fresh 144-verifier graph with 149
+  nodes, 730 edges, and 149 components; selected row 47 by its four-gate surface.
+- An eleven-check dependency-free probe derives identities from the generated
+  template inventory and validates owner/disposition lineage without copied
+  identity or outcome counts. The live checker and all four gates pass.
+- Admitted M6-T10 at train order 97 with eight exact incident-edge rows and no
+  historical transfer, engine change, wrapper, dependency, or fallback.
+  Regeneration records 736 edges without changing executable topology.
+
 ## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
 
 - Audited every caller-free lifecycle checker in the fresh 147-verifier graph

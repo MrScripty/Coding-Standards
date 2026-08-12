@@ -11785,3 +11785,16 @@ four former gate edges remain independent and no historical evidence changes.
 The graph now has 144 Bash verifiers, 149 nodes, 730 edges, and 149 components.
 Rust `no_std` closure, execution train, all 133 declarative suites, and all
 144 mixed-suite entrypoints pass. A fresh audit is next.
+
+## 2026-08-12 M6-T10 Row 47 Admission
+
+**Outcome:** admitted at train order 97.
+
+The fresh audit selects row 47 over rows 36, 34, and 37 by its four-gate
+surface. An eleven-check dependency-free probe derives identity completeness
+from the generated section inventory and preserves owner, disposition, corpus,
+workflow, template, train, package, report, and accepted-plan evidence without
+copied cardinalities. The live checker and all four gates pass. Eight exact
+incident-edge rows are admitted with no historical transfer, engine change,
+wrapper, false dependency, compatibility path, or fallback. The graph records
+736 edges without changing executable topology. Implementation is next.

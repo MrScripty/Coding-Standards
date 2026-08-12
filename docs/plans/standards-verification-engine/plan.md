@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T9 graph and ownership audit
+**Current phase:** Milestone 6: M6-T10 row 47 migration
 
-**Next slice:** inspect the fresh post-M6-T9 graph and remaining ownership and
-evidence shapes before admitting another bounded package.
+**Next slice:** implement admitted M6-T10 without copied cardinalities,
+wrapper, false dependency, protected-source mutation, or fallback.
 
 **Acceptance status:** `pending`
 
@@ -6343,6 +6343,40 @@ Verification, legacy-source, and corpus evidence is byte-identical to
 admission. No generic policy transfer, command or product default, workspace,
 test, lint, target, or feature default, duplicate ownership, wrapper, false
 dependency, fallback, compatibility path, or legacy execution remains.
+
+##### M6-T10 Row 47 Admission
+
+**Status:** Admitted at train order 97.
+
+The fresh post-M6-T9 graph contains 144 Bash verifiers, 149 nodes, 730 edges,
+and 149 components. Rows 47, 36, 34, and 37 are the remaining caller-free
+lifecycle packages with four, five, seven, and nine independent gates. Row 47
+therefore has the smallest gate surface.
+
+A disposable dependency-free suite passes eleven generic checks covering exact
+train and package identity, owner-table validity, inventory-derived identity
+completeness, owner-map and disposition lineage, decomposition report, corpus
+classification, workflow and derived-template state, and accepted plan claims.
+Identity completeness is derived by set equality with the generated section
+inventory. Outcome labels must be nonempty, but neither the eighteen identities
+nor eleven outcome labels are represented as copied counts. The live checker
+and all four gates pass independently; no engine or schema change is needed.
+
+M6-T10 has eight exact incident-edge rows for four independently retained
+gates and no historical caller-evidence rows. Implementation is limited to the
+admitted 15 paths. It must pass the permanent suite before deleting Bash,
+accept only M6-T10 and its edges, regenerate the graph, and prove train,
+package, owner-validation, dispositions, section inventory, owner map, corpus,
+template, Documentation workflow, all four gates, and findings unchanged.
+Universal README applicability, fixed headings, invented facts, placeholder
+defaults, copied cardinalities, wrappers, false dependencies, duplicate
+authority, compatibility parsing, and fallback are prohibited. Changed
+incidence, unrepresentable semantics, protected evidence mutation, or an edit
+outside the write set is a re-plan trigger.
+
+Admission regeneration records 144 Bash verifiers, 149 nodes, 736 edges, and
+149 components. Eight typed disposition rows produce six net graph edges after
+set-valued deduplication; executable topology is unchanged.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

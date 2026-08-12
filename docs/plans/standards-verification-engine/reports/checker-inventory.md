@@ -2708,3 +2708,18 @@ evidence is unchanged. Another package requires a fresh audit after the
 terminal checkpoint. The focused suite, package and edge authority, both
 independent gates, all 133 declarative suites, and the complete mixed suite of
 144 checkers pass.
+
+### Post-M6-T9 Audit And M6-T10 Admission
+
+The fresh graph contains 144 Bash verifiers, 149 nodes, 730 edges, and 149
+components. Row 47 has the smallest remaining lifecycle gate surface at four,
+ahead of rows 36, 34, and 37 at five, seven, and nine gates.
+
+Its dependency-free eleven-check probe derives complete template identities
+from the generated section inventory and proves owner-table validity,
+owner-map/disposition lineage, report, corpus, workflow/template, train,
+package, and accepted-plan state without copied identity or outcome counts.
+The live checker and all four gates pass. M6-T10 is admitted at train order 97
+with eight exact incident-edge rows, no historical transfer, and no engine,
+schema, wrapper, dependency, compatibility, or fallback change. Regeneration
+records 736 edges; executable topology is unchanged.
