@@ -1,0 +1,89 @@
+schema_version = 1
+id = "milestone-7-row-26-decomposition"
+owner = "migration.parent-plan"
+description = "Accepted row 26 plan-template decomposition with exact identity, ownership, disposition, report, and lifecycle evidence."
+
+[[checks]]
+id = "execution-decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+non_empty = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+unique = [["baseline_order", "child_order"]]
+[[checks.projections]]
+columns = ["child_order", "ids", "source", "owner"]
+order = "source"
+expected = [["1", "STD-0859,STD-0860,STD-0861,STD-0862,STD-0863,STD-0864,STD-0865,STD-0866,STD-0867,STD-0868,STD-0869,STD-0870,STD-0871,STD-0872,STD-0873,STD-0874,STD-0875,STD-0876,STD-0877,STD-0878,STD-0879,STD-0880,STD-0881,STD-0882,STD-0883,STD-0884,STD-0885,STD-0886,STD-0887", "templates/PLAN-TEMPLATE.md", "workflows/planning.md"]]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "26"
+
+[[checks]]
+id = "decomposition-identities"
+type = "relation"
+mode = "set"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["ids"]
+order = "source"
+[checks.left.where]
+field = "baseline_order"
+op = "eq"
+value = "26"
+[checks.left.split]
+field = "ids"
+delimiter = ","
+[checks.right]
+path = "evaluation/standards-effectiveness/milestone-7-row-26-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+columns = ["id"]
+order = "source"
+
+[[checks]]
+id = "disposition-lineage"
+type = "relation"
+mode = "set"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-row-26-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+columns = ["id", "owner", "disposition"]
+order = "source"
+[checks.right]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["id", "target", "disposition"]
+order = "source"
+[checks.right.where]
+field = "source"
+op = "eq"
+value = "templates/PLAN-TEMPLATE.md"
+
+[[checks]]
+id = "decomposition-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-26-decomposition.md"
+required = ["## Owner Contract", "sole normative owner", "is a derived", "projection that transports selected fields", "Do not restore frozen headings as compatibility text", "## Exact Dispositions", "`STD-0859` through `STD-0887`", "## Ordered Children", "`26.1`", "## Projection Requirements", "fixed milestone counts", "## Re-plan Triggers"]
+prohibited = []
+
+[[checks]]
+id = "execution-train"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+[[checks.projections]]
+columns = ["start_id", "end_id", "source", "owner"]
+order = "source"
+expected = [["STD-0859", "STD-0887", "templates/PLAN-TEMPLATE.md", "workflows/planning.md"]]
+[checks.projections.where]
+field = "order"
+op = "eq"
+value = "26"
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b16a` (`Accepted`)", "`7.4b16b` (`Accepted`)"]
+prohibited = []

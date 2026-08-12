@@ -2556,3 +2556,13 @@ the gates independent. M6-T4 is admitted at train order 91 without an engine
 change, wrapper, copied count, owner transfer, false dependency, or fallback.
 Regeneration derives four reference-only contract edges for 759 total;
 executable topology remains unchanged.
+
+### M6-T4 Acceptance
+
+The registered row-26 suite passes six exact generic checks and replaces its
+Bash checker without a wrapper. Plan-template projection and execution-train
+integrity remain independently owned gates represented by four accepted
+historical edge records. The graph now contains 149 Bash verifiers, 154 nodes,
+752 edges, and 154 components. All protected row, template, workflow, and
+fixture evidence is unchanged. All 128 declarative suites and the complete
+mixed suite of 149 checkers pass. Another package requires a fresh audit.

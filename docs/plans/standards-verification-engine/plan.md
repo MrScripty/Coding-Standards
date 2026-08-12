@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-T4 row 26 migration
+**Current phase:** Milestone 6: post-M6-T4 graph and ownership audit
 
-**Next slice:** implement admitted M6-T4 without a wrapper, false dependency,
-owner transfer, copied cardinality, or compatibility path.
+**Next slice:** inspect the fresh post-M6-T4 graph and remaining ownership and
+evidence shapes before admitting another bounded package.
 
 **Acceptance status:** `pending`
 
@@ -6039,7 +6039,7 @@ byte-identical to admission, and no legacy execution path remains.
 
 ##### M6-T4 Row 26 Admission
 
-**Status:** Admitted at train order 91.
+**Status:** Accepted at train order 91.
 
 The fresh post-M6-T3 graph contains 150 Bash verifiers, 155 nodes, 755 edges,
 and 155 components. Row 26 is the smallest complete caller-free parent-owned
@@ -6073,6 +6073,17 @@ Admission regeneration derives four unique reference-only contract edges. The
 four typed incident edges already exist in executable topology, and execution
 train is already a shared manifest target, so the graph has 150 Bash verifiers,
 155 nodes, 759 edges, and 155 components. Executable topology is unchanged.
+
+Acceptance registers and passes the dependency-free six-check suite before
+deleting the Bash checker. Both former gates remain independent through four
+accepted edge records. The regenerated graph contains 149 Bash verifiers, 154
+nodes, 752 edges, and 154 components. The focused suite, package and edge
+authority, plan-template projection, execution train, all 128 declarative
+suites, complete mixed suite of 149 checkers, graph freshness, removed-path,
+plan, and diff checks pass. Protected decomposition, owner-validation,
+disposition, report, execution-train, template, workflow, and fixture evidence
+is byte-identical to admission; no wrapper, fallback, or legacy execution path
+remains.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 
