@@ -431,6 +431,11 @@ path = "evaluation/standards-effectiveness/suites/milestone-7-row-26-decompositi
 requires = []
 
 [[suites]]
+id = "milestone-7-row-33-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-33-decomposition.toml"
+requires = []
+
+[[suites]]
 id = "contract-artifact-selection"
 path = "evaluation/standards-effectiveness/suites/contract-artifact-selection.toml"
 requires = []

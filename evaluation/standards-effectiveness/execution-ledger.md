@@ -11669,3 +11669,15 @@ authorizes the exact two-row M6-N1 checker-to-suite evidence transition without
 changing historical endpoints or adding a dependency. Admission regeneration
 derives one reference-only edge and records 753 total edges without changing
 executable topology. Implementation is next.
+
+## 2026-08-12 M6-T5 Row 33 Acceptance
+
+**Outcome:** accepted at train order 92.
+
+The dependency-free row-33 suite passes six generic checks and replaces the
+deleted Bash checker without a wrapper or fallback. Its four former gate edges
+remain independent. Two M6-N1 rows preserve historical endpoints while their
+evidence changes exactly to the registered suite under VE046, adding no
+dependency. The graph now has 148 Bash verifiers, 153 nodes, 746 edges, and 153
+components. HTTP-adapter proof, execution train, all 129 declarative suites,
+and all 148 mixed-suite entrypoints pass. A fresh audit is next.

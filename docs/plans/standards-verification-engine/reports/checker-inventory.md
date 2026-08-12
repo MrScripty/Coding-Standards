@@ -2582,3 +2582,15 @@ M6-T5 is admitted at train order 92 without an engine change, false dependency,
 wrapper, copied count, owner transfer, compatibility path, or fallback.
 Regeneration derives one reference-only edge for 753 total; executable topology
 is unchanged.
+
+### M6-T5 Acceptance
+
+The registered row-33 suite passes six exact generic checks and replaces its
+Bash checker without a wrapper. HTTP-adapter proof and execution-train
+integrity remain independent through four accepted M6-T5 edge records. Two
+accepted M6-N1 rows retain immutable historical endpoints while VE046 changes
+only their evidence representation to the registered row-33 suite, with no
+dependency. The graph now contains 148 Bash verifiers, 153 nodes, 746 edges,
+and 153 components. All protected evidence is unchanged. All 129 declarative
+suites and the complete mixed suite of 148 checkers pass. Another package
+requires a fresh audit.

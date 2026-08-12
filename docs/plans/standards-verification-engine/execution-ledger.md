@@ -3162,3 +3162,17 @@
 - Admitted M6-T5 at train order 92 with four exact typed incident edges.
   Regeneration derives one reference-only edge for 753 total; executable
   topology is unchanged.
+
+## 2026-08-12 - M6-T5 Row 33 Acceptance
+
+- Registered and passed the dependency-free six-check row-33 suite before
+  deleting its Bash checker; no wrapper, alias, or compatibility path remains.
+- Accepted all four M6-T5 edges independently and transitioned exactly two
+  M6-N1 evidence values to the registered suite without changing historical
+  endpoints, semantics, ownership, rationale, state, or registry dependencies.
+- Regenerated 148 Bash verifiers, 153 nodes, 746 edges, and 153 components;
+  all protected row, adapter, fixture, policy, reference, and index evidence
+  remains byte-identical to admission.
+- Focused suite, package/edge authority, both independent gates, all 129
+  declarative suites, all 148 mixed-suite entrypoints, graph freshness,
+  removal, plan, and diff checks pass. The next slice is a fresh audit.

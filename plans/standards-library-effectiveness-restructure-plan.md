@@ -13,9 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement admitted verification package M6-T5 for parent-owned
-row 33 with exact VE046 historical suite-evidence transfer, then audit the fresh
-graph before another admission.
+**Next slice:** perform a fresh post-M6-T5 graph and ownership audit before
+admitting another bounded verification package.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3124,6 +3123,14 @@ all structural/routing fixtures pass.
          and VE046's bounded two-row M6-N1 checker-to-suite evidence transfer;
          no engine change, historical endpoint mutation, dependency, copied
          count, wrapper, owner transfer, compatibility path, or fallback.
+       - `7.4c3ve76` (`Accepted`): M6-T5 registers the dependency-free row-33
+         suite, passes six exact checks, deletes its Bash checker, and changes
+         only two M6-N1 evidence representations to the registered suite under
+         VE046. Historical endpoints remain immutable and no dependency is
+         added. The graph has 148 Bash verifiers, 153 nodes, 746 edges, and 153
+         components; both independent gates, all 129 declarative suites, and
+         the complete mixed suite of 148 checkers pass. Protected Contracts
+         evidence remains unchanged. Audit fresh graph and ownership state.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

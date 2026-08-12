@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-T5 row 33 migration
+**Current phase:** Milestone 6: post-M6-T5 graph and ownership audit
 
-**Next slice:** implement admitted M6-T5 with exact M6-N1 suite-evidence
-transfer and no wrapper, false dependency, copied cardinality, or fallback.
+**Next slice:** inspect the fresh post-M6-T5 graph and remaining ownership and
+evidence shapes before admitting another bounded package.
 
 **Acceptance status:** `pending`
 
@@ -6087,7 +6087,7 @@ remains.
 
 ##### M6-T5 Row 33 Admission
 
-**Status:** Admitted at train order 92.
+**Status:** Accepted at train order 92.
 
 The fresh post-M6-T4 graph contains 149 Bash verifiers, 154 nodes, 752 edges,
 and 154 components. Caller-free row 33 is the smallest complete remaining
@@ -6129,6 +6129,19 @@ Admission regeneration derives one unique reference-only contract edge for the
 newly named HTTP-adapter gate, so the graph has 149 Bash verifiers, 154 nodes,
 753 edges, and 154 components. Existing M6-N1 shared references already name
 row 33; executable topology is unchanged.
+
+Acceptance registers and passes the dependency-free six-check row-33 suite
+before deleting the Bash checker. Four M6-T5 edge records remain independent,
+and the two accepted M6-N1 rows retain immutable historical endpoints while
+their evidence representation transitions exactly to the registered row-33
+suite under VE046. The regenerated graph contains 148 Bash verifiers, 153
+nodes, 746 edges, and 153 components. The focused suite, package and edge
+authority, HTTP-adapter proof, execution train, all 129 declarative suites,
+complete mixed suite of 148 checkers, graph freshness, removed-path, plan, and
+diff checks pass. Protected decomposition, owner-validation, disposition,
+report, execution-train, adapter, fixture, Contracts, HTTP-reference, and
+legacy-index evidence is byte-identical to admission; no wrapper, false
+dependency, fallback, compatibility path, or legacy execution remains.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 
