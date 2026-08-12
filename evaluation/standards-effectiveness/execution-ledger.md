@@ -11353,3 +11353,17 @@ dispositions, lifecycle claims, retained gates, fixtures, engine/schema,
 numeric evidence, lockfiles, outputs, and workflows remain unchanged. No
 wrapper, bridge, alias, dual authority, compatibility representation, or
 fallback remains. The closing `M6-Q-W1` mixed checkpoint is next.
+
+## 2026-08-12 M6-Q-W1 Q-Wave Checkpoint
+
+**Outcome:** accepted.
+
+The canonical fail-fast mixed checkpoint passes all 157 surviving Bash
+entrypoints after Q1 through Q4 acceptance. The run includes all 120 registered
+declarative suites and all retained migration, ownership, routing, lifecycle,
+disposition, and source-closure gates.
+
+No later package is admitted. The next slice is a read-only audit of the fresh
+157-verifier / 162-node / 773-edge / 162-component graph and canonical owner
+evidence. Package selection requires re-planning before any further authority
+or implementation edit.

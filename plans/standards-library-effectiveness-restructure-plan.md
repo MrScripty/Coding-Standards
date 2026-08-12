@@ -10,11 +10,11 @@
 verification-engine Milestone 5 are accepted. Seven of 27 former normative
 source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
-through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
-further checker deletion.
+through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
+incident-edge semantics govern further checker deletion.
 
-**Next slice:** run and record the delegated `M6-Q-W1` closing mixed Bash
-checkpoint, then audit the fresh graph before another package admission.
+**Next slice:** perform the delegated read-only fresh graph and ownership audit
+before another package admission.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -270,6 +270,11 @@ whole-index retired-source prohibition, exact `STD-0157` disposition, and
 accepted lifecycle claims. Dependencies Owner and row-15 remain independent
 checker-backed gates with no registry dependency. Canonical standards and
 evidence remain unchanged; the closing `M6-Q-W1` mixed checkpoint is next.
+
+`M6-Q-W1` is accepted. The canonical fail-fast mixed checkpoint passes all 157
+surviving Bash entrypoints, including all 120 registered declarative suites,
+after Q1 through Q4 acceptance. No later package is admitted; a fresh read-only
+graph and ownership audit must precede the next package decision.
 
 `M6-Q0` is accepted. Q1 through Q4 local suite/checker paths are disjoint and
 may be prepared concurrently as proposal-only commits from the accepted freeze

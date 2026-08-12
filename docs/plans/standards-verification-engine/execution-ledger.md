@@ -2792,3 +2792,16 @@
 - Preserved canonical standards, dispositions, lifecycle claims, retained
   gates, fixtures, engine/schema, numeric evidence, lockfiles, outputs, and
   workflows unchanged. The closing `M6-Q-W1` mixed checkpoint is next.
+
+## 2026-08-12 - M6-Q-W1 Q-Wave Checkpoint
+
+- Ran the canonical fail-fast `run-complete-suite.sh` entrypoint after Q1
+  through Q4 acceptance.
+- All 157 surviving Bash entrypoints passed, including all 120 registered
+  declarative suites and retained owner, lifecycle, routing, disposition,
+  source-closure, and migration gates.
+- Changed no suite, checker, manifest, projection, graph, standards source,
+  fixture, engine, schema, lifecycle, numeric, lockfile, output, or workflow
+  authority.
+- No later package is admitted. Next is a read-only fresh graph and ownership
+  audit before any package selection or implementation.

@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: Q-wave concurrent preparation
+**Current phase:** Milestone 6: post-Q-wave graph audit
 
-**Next slice:** run and record the `M6-Q-W1` closing mixed Bash checkpoint,
-then audit the fresh graph before admitting another package.
+**Next slice:** perform a read-only fresh graph and ownership audit before
+admitting another package.
 
 **Acceptance status:** `pending`
 
@@ -5486,6 +5486,22 @@ checked `M6-Q4` package row is the sole exact write-set authority, while this
 plan retains only semantic exclusions that constrain how authorized files may
 change. No generator, exception, or second scope projection is added. Q4 may
 resume only after the package projection passes against the current manifest.
+
+##### M6-Q-W1 Q-Wave Checkpoint
+
+**Status:** `Accepted`
+
+The canonical fail-fast mixed checkpoint passes all 157 surviving Bash
+entrypoints after Q1 through Q4 acceptance. The run includes all 120 registered
+declarative suites and confirms that retained owner, lifecycle, routing,
+disposition, source-closure, and migration gates remain green after the four
+Q-wave checker retirements.
+
+No later package is admitted. The next action is a read-only fresh graph and
+ownership audit. Any proposed package must derive its canonical owner,
+semantic contract, exact incident edges, dependencies, write set, and
+verification gates from current evidence before admission; stale pre-Q-wave
+graph shape is not authority.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

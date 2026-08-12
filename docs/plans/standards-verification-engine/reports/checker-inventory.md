@@ -2269,6 +2269,14 @@ Dependencies Owner and row-15 remain separately owned checker-backed gates
 without suite dependencies. All four Q packages are accepted; the closing
 `M6-Q-W1` mixed checkpoint is next.
 
+### Accepted M6-Q-W1 Q-Wave Checkpoint
+
+The canonical fail-fast mixed runner passes all 157 surviving Bash entrypoints,
+including all 120 registered declarative suites, after Q1 through Q4
+acceptance. No later package is admitted. The next package decision requires a
+fresh read-only graph and ownership audit; pre-Q-wave topology is not package
+authority.
+
 ### Accepted Q-Wave Preparation Boundary
 
 Q1 through Q4 have pairwise-disjoint local suite and deleted-checker paths.
