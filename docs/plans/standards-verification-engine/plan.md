@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: Q-wave package admission
+**Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** freeze concurrent Q1-Q4 local preparation and serial integration
-contracts before any checker replacement begins.
+**Next slice:** prepare the four admitted Q suites and checker deletions in
+isolated proposal worktrees, then begin serial integration with M6-Q1.
 
 **Acceptance status:** `pending`
 
@@ -5314,6 +5314,63 @@ evidence. Package projection and exact edge authority pass against the current
 graph. No permanent suite, registry entry, checker, standards source, fixture,
 engine, schema, numeric evidence, lockfile, build output, or workflow changed.
 
+##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
+
+**Status:** `Accepted`
+
+All four Q packages are individually admitted and their local write sets are
+disjoint. The admitted package manifest remains the source for package owner,
+semantic outcome, prerequisites, verification contract, suite path, and
+deleted checker path. This freeze does not copy those values into another
+machine-readable authority.
+
+Each proposal starts from the canonical revision containing this accepted
+freeze and may change only its package-local suite path and delete its admitted
+checker path:
+
+| Proposal | Package-local write set |
+| --- | --- |
+| `M6-Q1` | `evaluation/standards-effectiveness/suites/rust-tooling-criterion.toml`; delete `evaluation/standards-effectiveness/verify-rust-tooling-criterion.sh` |
+| `M6-Q2` | `evaluation/standards-effectiveness/suites/accessibility-evidence-closure.toml`; delete `evaluation/standards-effectiveness/verify-accessibility-evidence-closure.sh` |
+| `M6-Q3` | `evaluation/standards-effectiveness/suites/architecture-population.toml`; delete `evaluation/standards-effectiveness/verify-architecture-population.sh` |
+| `M6-Q4` | `evaluation/standards-effectiveness/suites/coding-dependency-route.toml`; delete `evaluation/standards-effectiveness/verify-coding-dependency-route.sh` |
+
+Local preparation may run concurrently in isolated worktrees. A local commit
+is a proposal only: it cannot edit the registry, package or edge manifests,
+package projection, README, generated graph, active plans, ledgers, reports,
+fixtures, canonical standards, lifecycle records, engine, schemas, numeric
+evidence, lockfiles, build output, or workflows. It cannot claim package
+acceptance. Each proposal must prove its suite through a disposable contained
+registry, preserve the admitted read-only source/fixture contract, and return
+its commit identity, exact diff, and focused result to the integration owner.
+
+The integration owner applies proposals serially in Q1, Q2, Q3, then Q4 order.
+Immediately before each integration it compares the current plan admission and
+proposal base, rebases or reconstructs the proposal from fresh state when
+stale, and confirms that no package-local or shared-authority write overlaps.
+The accepting commit registers and passes the suite before deleting the Bash
+checker, changes that package and its exact edge dispositions to accepted,
+reconciles any admitted historical checker evidence to the registered suite,
+updates shared plans/ledgers/reports, regenerates the graph, and proves the
+removed path. Focused package, authority, retained independent-gate, all-
+declarative, graph-freshness, plan, read-only-source, and diff checks run for
+each integration. The mixed Bash checkpoint runs once after Q4 at `M6-Q-W1`.
+
+**No-fallback rule:** prepared or integrated work cannot retain a wrapper,
+Bash bridge, checker alias, dual suite/checker authority, copied callee
+semantics, inferred dependency, package-specific engine branch, or compatibility
+representation. A stale base, changed semantic source, changed fixture,
+additional incident edge, failed local suite, overlapping write set, required
+shared capability, or inability to register before deletion is a re-plan
+trigger rather than authority to merge, retry automatically, or fall back.
+
+**Acceptance evidence:** Q1 through Q4 are admitted; their suite and checker
+paths are pairwise disjoint; shared authority is explicitly serial; proposal
+and integration verification are separated; integration order and the wave
+checkpoint are fixed; both plan structure checks pass; and no source, fixture,
+suite, registry, checker, engine, schema, generated artifact, lockfile, build
+output, or workflow changes in this planning slice.
+
 ##### VE050 Level-Selected Markdown Heading Policy Re-plan
 
 **Status:** `Accepted`; Option 1 is implemented and Q2 preflight may resume.
@@ -5443,7 +5500,7 @@ evidence while accepting its own five rows.
   where their owner, dependency set, semantic decision, fixture family, and
   verification contract are frozen; bound size by semantic review and
   write-set overlap rather than an arbitrary package count.
-- [ ] Permit concurrent package preparation only in isolated worktrees with
+- [x] Permit concurrent package preparation only in isolated worktrees with
   disjoint suite, fixture, and deleted-checker paths; keep registry, package
   manifest, README, generated graph, and plan integration serial.
 - [x] Run focused verification for every package and the complete suite once at

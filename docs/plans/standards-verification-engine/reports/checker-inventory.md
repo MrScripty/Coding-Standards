@@ -2177,3 +2177,23 @@ row-15 decomposition. All four remain checker-backed independent gates; none
 creates a registry dependency or transfers callee behavior into Q4. Canonical
 sources, dispositions, lifecycle claims, retained gates, engine, and schemas
 remain read-only. All four Q packages are now admitted.
+
+### Accepted Q-Wave Preparation Boundary
+
+Q1 through Q4 have pairwise-disjoint local suite and deleted-checker paths.
+Those local changes may be prepared concurrently in isolated worktrees from
+the accepted freeze revision. The package manifest remains authoritative for
+owner, outcome, prerequisites, paths, and verification; no second package
+inventory is introduced.
+
+Prepared commits are proposals. They use disposable contained registries for
+focused proof and cannot change shared registry, package/edge authority,
+projection, README, generated graph, plans, ledgers, reports, lifecycle
+records, standards, fixtures, engine, schemas, numeric evidence, lockfiles,
+build output, or workflows. One integration owner revalidates revision and
+write-set compatibility and accepts Q1 through Q4 serially. Each accepting
+commit registers and passes its suite before deleting the checker and updating
+shared authority. One mixed Bash checkpoint follows Q4. Stale, overlapping,
+semantically changed, or capability-blocked proposals trigger re-planning;
+wrappers, bridges, aliases, dual authority, copied gates, inferred dependencies,
+and compatibility fallbacks remain prohibited.

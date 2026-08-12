@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
-**Next slice:** freeze verification-engine Q1-Q4 concurrent local preparation
-and serial shared-integration contracts before implementation.
+**Next slice:** prepare verification-engine Q1-Q4 local suite/checker proposals
+in isolated worktrees, then begin serial shared integration with M6-Q1.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -215,6 +215,17 @@ row-15 decomposition are separate checker-backed independent gates, not
 registry dependencies or copied Q4 behavior. No permanent suite, registry,
 checker, standards, fixture, engine, schema, lockfile, build output, or workflow
 authority changed. All four Q packages are admitted.
+
+`M6-Q0` is accepted. Q1 through Q4 local suite/checker paths are disjoint and
+may be prepared concurrently as proposal-only commits from the accepted freeze
+revision. The admitted package manifest remains the package authority; registry,
+package/edge projection, README, generated graph, planning, lifecycle, and
+other shared files remain serial integration-owner work. Each proposal uses a
+disposable focused registry and is revalidated against fresh plan admission
+before Q1-through-Q4 integration. The accepting commit registers and passes
+the suite before checker deletion; one mixed checkpoint follows Q4. No wrapper,
+bridge, alias, dual authority, copied gate, inferred dependency, or fallback is
+permitted.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

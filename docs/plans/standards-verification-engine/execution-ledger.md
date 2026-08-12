@@ -2632,3 +2632,18 @@
 - No permanent suite, registry entry, checker, standards source, fixture,
   engine, schema, numeric evidence, lockfile, build output, or workflow changed.
 - Next is the Q1-Q4 preparation and serial-integration contract freeze.
+
+## 2026-08-11 - M6-Q0 Q-Wave Preparation Freeze
+
+- Accepted concurrent local preparation for the four admitted Q packages.
+- Derived ownership and semantic contracts from the admitted package manifest;
+  the freeze adds no duplicate machine-readable package authority.
+- Restricted each proposal to one new suite path and one deleted checker path.
+  Registry, manifests, projection, README, generated graph, plans, ledgers,
+  reports, lifecycle records, and other shared files remain serial.
+- Required proposal-only commits from isolated worktrees, disposable focused
+  registry proof, exact diffs, and fresh revision validation before integration.
+- Fixed serial acceptance order at Q1 through Q4 and retained one mixed Bash
+  checkpoint after Q4. No wrapper, bridge, alias, dual authority, copied gate,
+  inferred dependency, compatibility representation, or fallback is allowed.
+- Next is concurrent local preparation followed by M6-Q1 integration.

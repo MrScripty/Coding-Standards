@@ -11163,3 +11163,24 @@ and derived graph artifacts change at admission. No permanent suite, registry
 entry, checker, standards source, fixture, engine, schema, numeric evidence,
 lockfile, build output, or workflow changes. All four Q packages are admitted;
 next is the preparation and serial-integration contract freeze.
+
+## 2026-08-11 M6-Q0 Q-Wave Preparation Freeze
+
+**Outcome:** concurrent preparation authorized; implementation proposals not
+yet accepted.
+
+The accepted package manifest supplies Q1 through Q4 ownership, semantic
+outcomes, prerequisites, suite/checker paths, and verification contracts. Each
+isolated proposal may add only its suite and delete only its admitted checker;
+all registry, manifest, projection, README, generated, planning, lifecycle, and
+other shared authority remains with one serial integration owner.
+
+Proposal verification uses a disposable contained registry and returns an
+exact diff and focused result. Integration revalidates the current plan
+admission and proposal base, applies Q1 through Q4 in order, registers and
+passes each suite before checker deletion, updates exact package/edge authority,
+regenerates derived evidence, and runs all required focused and declarative
+checks. One mixed checkpoint follows Q4. Stale, overlapping, semantically
+changed, or capability-blocked proposals trigger re-planning; no merge guess,
+wrapper, Bash bridge, alias, dual authority, or compatibility fallback is
+permitted.
