@@ -2723,3 +2723,17 @@ The live checker and all four gates pass. M6-T10 is admitted at train order 97
 with eight exact incident-edge rows, no historical transfer, and no engine,
 schema, wrapper, dependency, compatibility, or fallback change. Regeneration
 records 736 edges; executable topology is unchanged.
+
+### M6-T10 Acceptance
+
+The registered count-free row-47 suite passes eleven generic checks and
+replaces its Bash checker without a wrapper. Documentation decisions,
+Documentation policy consolidation, execution train, and README-template
+derivation remain independent through eight accepted edge records. Complete
+identity and owner/disposition lineage is derived from existing inventories;
+no copied count, historical transfer, or duplicate authority occurs. The graph
+now contains 143 Bash verifiers, 148 nodes, 725 edges, and 148 components. All
+protected evidence is unchanged. Another package requires a fresh audit after
+the terminal checkpoint. The focused suite, package and edge authority, all
+four gates, all 134 declarative suites, and the complete mixed suite of 143
+checkers pass.

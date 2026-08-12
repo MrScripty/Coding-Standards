@@ -11798,3 +11798,14 @@ copied cardinalities. The live checker and all four gates pass. Eight exact
 incident-edge rows are admitted with no historical transfer, engine change,
 wrapper, false dependency, compatibility path, or fallback. The graph records
 736 edges without changing executable topology. Implementation is next.
+
+## 2026-08-12 M6-T10 Row 47 Acceptance
+
+**Outcome:** accepted at train order 97.
+
+The dependency-free count-free row-47 suite passes eleven generic checks and
+replaces the deleted Bash checker without duplicate authority, wrapper, or
+fallback. Its eight former edge rows preserve four independent gates and no
+historical evidence changes. The graph now has 143 Bash verifiers, 148 nodes,
+725 edges, and 148 components. All four independent gates, all 134 declarative
+suites, and all 143 mixed-suite entrypoints pass. A fresh audit is next.

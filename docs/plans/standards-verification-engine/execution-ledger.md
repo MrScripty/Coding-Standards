@@ -3270,6 +3270,19 @@
   historical transfer, engine change, wrapper, dependency, or fallback.
   Regeneration records 736 edges without changing executable topology.
 
+## 2026-08-12 - M6-T10 Row 47 Acceptance
+
+- Registered and passed the dependency-free count-free eleven-check row-47
+  suite before deleting its Bash checker; no wrapper or compatibility path
+  remains.
+- Accepted all eight M6-T10 edge rows independently; no historical evidence or
+  owner record required mutation.
+- Regenerated 143 Bash verifiers, 148 nodes, 725 edges, and 148 components;
+  all protected Documentation, template, inventory, lifecycle, gate, and
+  findings evidence remains byte-identical to admission.
+- All four independent gates, all 134 declarative suites, and all 143
+  mixed-suite entrypoints pass. The next slice is a fresh audit.
+
 ## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
 
 - Audited every caller-free lifecycle checker in the fresh 147-verifier graph
