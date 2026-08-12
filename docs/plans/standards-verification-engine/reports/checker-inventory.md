@@ -2386,3 +2386,9 @@ semantics; absence rejects files, directories, symlinks, and broken symlinks.
 The sole registered absence consumer migrates in the same shared-contract
 slice and the old assertion is deleted. M6-S preflight remains stopped until
 that capability is accepted.
+
+Option 1 is selected. The shared-contract implementation replaces
+`absent_paths` rather than adding a mirrored assertion, migrates its sole
+registered consumer atomically, and rejects the retired type. Historical
+accepted records remain historical; active engine documentation names only
+`path_state`.

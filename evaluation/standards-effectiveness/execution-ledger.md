@@ -11479,3 +11479,13 @@ Recommended recovery replaces one-sided `absent_paths` with a strict
 `path_state` assertion for explicit present and absent sets, migrates the sole
 registered absence consumer, and removes the old representation atomically.
 No executable or evidence authority changed in this planning record.
+
+## 2026-08-12 VE057 Unified Path-State Selection
+
+**Outcome:** Option 1 selected; implementation pending.
+
+One strict `path_state` assertion will replace `absent_paths` atomically,
+migrate its sole registered consumer, and reject the retired type immediately.
+Present and absent state remain content-neutral and repository-contained;
+cardinality is derived and no alias or fallback representation is authorized.
+No executable authority changed in this selection record.

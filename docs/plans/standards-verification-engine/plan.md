@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: VE057 generic path-state re-plan
 
-**Next slice:** select and implement an exact positive/negative path-state
-contract before resuming M6-S1 through M6-S3 preflight.
+**Next slice:** implement the selected unified path-state contract before
+resuming M6-S1 through M6-S3 preflight.
 
 **Acceptance status:** `pending`
 
@@ -5812,6 +5812,20 @@ changes.
 Any inability to preserve both states without compatibility parsing, any
 second registered absence representation, or any required policy-specific
 path behavior is a new re-plan trigger.
+
+**Selected recovery:** Option 1. One strict `path_state` assertion replaces
+`absent_paths` atomically. It accepts explicit `present` and/or `absent`
+sets, requires at least one nonempty set, derives all cardinality, rejects
+duplicates and cross-state overlap, and uses repository-contained filesystem
+state without content interpretation. The retired `absent_paths` type becomes
+unknown immediately; no alias, translation, fallback parser, or dual suite
+representation is permitted.
+
+The sole registered absence consumer changes to `path_state` in the same
+implementation commit that deletes the old module and tests. Active engine
+documentation and architecture references change to the new contract;
+historical accepted plan records remain historical evidence and are not
+rewritten as if the old contract never existed.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

@@ -3020,6 +3020,11 @@ all structural/routing fixtures pass.
          atomically migrate the sole `absent_paths` consumer, and delete the
          old representation. Do not infer existence from content, omit
          evidence, retain dual assertions, or resume M6-S admission first.
+       - `7.4c3ve59` (`Selected`): replace `absent_paths` atomically with one
+         strict `path_state` present/absent contract, migrate its sole
+         registered consumer, and reject the retired type immediately. Derive
+         cardinality and retain no alias, translation, fallback parser, or dual
+         suite representation.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

@@ -2920,3 +2920,16 @@
 - Recorded separate-addition, content-inference, and evidence-removal
   alternatives; none is authorized. No engine, suite, registry, checker,
   package, edge, graph, source, fixture, lockfile, output, or workflow changed.
+
+## 2026-08-12 - VE057 Unified Path-State Selection
+
+- Selected Option 1: one strict `path_state` assertion atomically replaces
+  `absent_paths`.
+- Froze explicit present/absent sets, derived cardinality, strict duplicate and
+  overlap rejection, contained filesystem-state semantics, and typed outcomes.
+- Required immediate unknown-type rejection for `absent_paths`; no alias,
+  translation, fallback parser, or dual suite representation may remain.
+- Required the sole registered consumer, active docs, implementation, and
+  focused tests to change in one shared-contract commit.
+- Changed no engine, suite, registry, checker, package, edge, graph, source,
+  fixture, schema, lockfile, output, or workflow implementation.
