@@ -2479,3 +2479,13 @@ verifier-dependency edges to each independent gate. M6-T1 is admitted at train
 order 88 with no suite dependency, engine change, wrapper, or compatibility
 path. Regeneration adds four reference-only authority edges for 769 total;
 executable topology remains unchanged.
+
+### M6-T1 Acceptance
+
+The registered row-24 suite passes seven exact generic checks and is now the
+sole verifier for its parent-owned lifecycle evidence. The Bash checker is
+absent. Full-review prompt and execution-train behavior remain independently
+owned gates, represented by four accepted historical edge records rather than
+registry dependencies. The graph now contains 152 Bash verifiers, 157 nodes,
+762 edges, and 157 components. Another package requires a fresh audit.
+All 125 declarative suites and the complete mixed suite of 152 checkers pass.

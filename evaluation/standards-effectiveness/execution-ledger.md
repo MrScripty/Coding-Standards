@@ -11580,3 +11580,13 @@ full-review prompt entrypoint and execution train as independent gates. The
 admission changes planning authority only. Regeneration adds four
 reference-only authority edges for 769 total without changing executable
 topology; implementation is next.
+
+## 2026-08-12 M6-T1 Row 24 Acceptance
+
+**Outcome:** accepted at train order 88.
+
+The dependency-free row-24 suite passes seven generic checks and replaces the
+deleted Bash checker without a wrapper or fallback. Its four former prompt and
+execution-train edges remain accepted independent gates. The graph now has 152
+Bash verifiers, 157 nodes, 762 edges, and 157 components. A fresh audit is next.
+All 125 declarative suites and all 152 mixed-suite entrypoints pass.
