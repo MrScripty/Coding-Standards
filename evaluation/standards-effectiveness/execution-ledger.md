@@ -11697,3 +11697,16 @@ and records 748 total edges without changing executable topology.
 Package and edge authority, graph freshness, both plan checks, all 129
 declarative suites, the live checker, and all three independent gates pass.
 Implementation is next.
+
+## 2026-08-12 M6-T6 Row 32 Acceptance
+
+**Outcome:** accepted at train order 93.
+
+The dependency-free row-32 suite passes six generic checks and replaces the
+deleted Bash checker without a wrapper or fallback. Its six former gate edges
+remain independent. Two M6-N2 rows preserve historical endpoints while their
+evidence changes exactly to the registered suite under VE046, adding no
+dependency. The graph now has 147 Bash verifiers, 152 nodes, 739 edges, and 152
+components. Durable-mutation, migration-execution, execution train, all 130
+declarative suites, and all 147 mixed-suite entrypoints pass. A fresh audit is
+next.

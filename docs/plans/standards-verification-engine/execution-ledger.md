@@ -3192,3 +3192,17 @@
 - Package and edge authority, graph freshness, both plan checks, all 129
   declarative suites, diff integrity, the live checker, and all three
   independent gates pass.
+
+## 2026-08-12 - M6-T6 Row 32 Acceptance
+
+- Registered and passed the dependency-free six-check row-32 suite before
+  deleting its Bash checker; no wrapper, alias, or compatibility path remains.
+- Accepted all six M6-T6 edges independently and transitioned exactly two
+  M6-N2 evidence values to the registered suite without changing historical
+  endpoints, semantics, ownership, rationale, state, or registry dependencies.
+- Regenerated 147 Bash verifiers, 152 nodes, 739 edges, and 152 components;
+  all protected row, Persistence gate, fixture, policy, reference, and index
+  evidence remains byte-identical to admission.
+- Focused suite, package/edge authority, all three independent gates, all 130
+  declarative suites, all 147 mixed-suite entrypoints, graph freshness,
+  removal, plan, hash, and diff checks pass. The next slice is a fresh audit.
