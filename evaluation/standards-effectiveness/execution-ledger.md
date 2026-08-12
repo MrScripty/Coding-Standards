@@ -11028,3 +11028,23 @@ No later package is admitted. The next slice is a read-only audit of the fresh
 161-verifier / 166-node / 781-edge / 166-component graph and canonical owner
 evidence. Package selection requires re-planning before any further authority or
 implementation edit.
+
+## 2026-08-11 VE049 Post-P1 Owner-Wave Decomposition
+
+**Outcome:** Option 2 selected; no package admitted.
+
+The fresh graph contains 161 Bash verifiers, five helpers, 781 edges, 166
+singleton components, and no cycles. Forty-eight verifiers are caller-free,
+but only the temporary declarative launcher and historical security re-plan
+checker are executable-edge-free; neither is an admissible semantic leaf.
+
+Four separately owned candidates are frozen for sequential admission and
+potential concurrent local preparation: Rust Tooling Criterion, Accessibility
+Evidence Closure, Architecture Population lifecycle, and Coding Dependencies
+routing. Nested Bash calls remain independently owned integration gates unless
+isolated preflight proves a real semantic dependency.
+
+Shared registry, package/edge authority, generated graph, README, plans,
+ledgers, and reports remain serial. Checker, suite, fixture, engine, schema,
+standards, baseline, lockfile, build output, and workflow authority are
+unchanged. Next is Q1 isolated-suite preflight and admission.

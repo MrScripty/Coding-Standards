@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: `M6-P-W1` accepted
+**Current phase:** Milestone 6: post-P1 owner-wave decomposition
 
-**Next slice:** audit the fresh post-P1 graph and re-plan the next owner-coherent
-package before any admission or implementation.
+**Next slice:** preflight and admit `M6-Q1` Rust Tooling Criterion, then preflight
+`M6-Q2` through `M6-Q4` independently before any concurrent preparation.
 
 **Acceptance status:** `pending`
 
@@ -5028,6 +5028,71 @@ ownership audit. Any proposed package must derive its canonical owner, semantic
 contract, exact incident edges, dependencies, write set, and verification gates
 from current evidence before admission; stale pre-P1 graph shape is not
 authority.
+
+##### VE049 Post-P1 Owner-Wave Decomposition
+
+**Status:** `Accepted`; Option 2 selected for staged admission, concurrent local
+preparation, and serial integration.
+
+The fresh post-P1 graph has 161 Bash verifiers, five helpers, 781 edges, 166
+singleton components, and no cycles. Forty-eight verifiers have no executable
+callers, but only the temporary declarative launcher and historical security
+re-plan checker are executable-edge-free. The launcher remains required by the
+current complete-suite convention. The security checker still owns four cross-
+owner package records and a live IPC-checker identity. Neither is an admissible
+semantic leaf.
+
+Four disjoint caller-free candidates have bounded unique contracts:
+
+| Package | Checker subject | Canonical owner | Unique contract | Current nested relationships |
+| --- | --- | --- | --- | --- |
+| `M6-Q1` | `checker:evaluation/standards-effectiveness/verify-rust-tooling-criterion.sh` | `profiles/languages/rust/tooling.md` | sixteen Criterion adapter decisions, canonical/profile/reference boundaries, one exact `STD-0834` split | no executable edge; four accepted historical independent-gate rows must transfer to the registered suite |
+| `M6-Q2` | `checker:evaluation/standards-effectiveness/verify-accessibility-evidence-closure.sh` | `topics/accessibility.md` | thirteen evidence decisions, canonical/reference/legacy boundaries, four exact dispositions, accepted lifecycle claims | Accessibility Media remains an independently owned gate, not evidence-closure semantics |
+| `M6-Q3` | `checker:evaluation/standards-effectiveness/verify-architecture-population.sh` | `migration.parent-plan` | legacy-index route purity, exact `STD-0137` through `STD-0147` population, accepted population lifecycle | Architecture Owner and row-15 lifecycle remain independent gates |
+| `M6-Q4` | `checker:evaluation/standards-effectiveness/verify-coding-dependency-route.sh` | `STANDARDS-ROUTER.md` | one non-normative Coding index route, one exact `STD-0157` index disposition, accepted route lifecycle | Dependencies Owner and row-15 lifecycle remain independent gates |
+
+Graph topology does not establish these owners. Q1 and Q2 are the canonical
+semantic owners named by their standards metadata. Q3 owns migration population
+closure rather than Architecture policy. Q4 owns route/index closure rather
+than Dependencies policy. Nested Bash execution is orchestration evidence and
+does not become a suite dependency unless an isolated semantic preflight proves
+that the candidate's own result cannot be evaluated without the callee result.
+
+**Concurrency contract:** each package receives its own suite TOML, retained
+fixture paths, deleted checker path, and focused probe. These local paths may be
+prepared in separate worktrees only after that package is individually
+admitted. Registry, package and edge manifests, package projection, README,
+generated graph, plans, ledgers, reports, and lifecycle consumer records are
+serial integration-owner files. Prepared patches are proposals, not accepted
+authority, and must be rebased and revalidated against the current integration
+revision.
+
+**Selected order:** preflight and admit Q1 first because it has no executable
+edge and exercises accepted checker-to-suite independent-gate transfer. Then
+preflight Q2, Q3, and Q4 independently. If all four isolated suites pass with
+existing primitives and no real cross-suite dependency, their local suite and
+checker paths may be prepared concurrently. Integrate one package at a time in
+Q1 through Q4 order, regenerate exact graph evidence after each deletion, and
+run one mixed checkpoint at `M6-Q-W1`.
+
+**No-fallback rule:** do not merge owners, copy callee semantics, infer suite
+dependencies from nested Bash calls, retain wrappers, preserve checker paths as
+aliases, create per-edge waivers, or encode mutable aggregate counts. Existing
+declarative assertions must preserve each unique contract at equal or greater
+fidelity. A missing primitive, changed canonical source, additional incident
+edge, disputed owner, non-disjoint local write set, true dependency on an
+unmigrated suite, or required shared-contract change is a new re-plan trigger.
+
+**Planning write set:** this plan, child and canonical ledgers, issue and
+checker-inventory reports, parent plan, and the four generated graph artifacts
+whose reference edges derive from plan text. Checker, fixture, suite, registry,
+package, edge, README, standards, engine, schema, baseline, lockfile, build
+output, and workflow authority remain unchanged.
+
+**Planning verification:** current four candidate checkers and all named
+retained gates; generated inventory freshness; all declarative suites; both
+plan checks; exact graph-diff review; and diff integrity. Package-specific
+admission gates are frozen only after isolated suite probes.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

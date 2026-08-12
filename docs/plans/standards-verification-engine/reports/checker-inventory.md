@@ -2079,3 +2079,21 @@ the canonical fail-fast mixed checkpoint. No later package is admitted. The
 fresh 161-verifier / 166-node / 781-edge / 166-component graph must be audited
 for canonical ownership and semantic closure before selecting the next package;
 pre-P1 graph shape is historical evidence only.
+
+### VE049 Post-P1 Owner-Wave Selection
+
+The fresh graph has 161 Bash verifiers, five helpers, 781 edges, 166 singleton
+components, and no cycles. Forty-eight verifiers are caller-free, but most
+still invoke retained gates or helpers. The temporary declarative launcher and
+historical security re-plan checker are the only executable-edge-free scripts;
+the former remains the mixed-suite convention and the latter still validates
+four cross-owner packages plus a live IPC identity.
+
+Option 2 selects four separately owned candidates: Rust Tooling Criterion,
+Accessibility Evidence Closure, Architecture Population lifecycle, and the
+Coding Dependencies route. Their nested Accessibility, Architecture,
+Dependencies, and row-15 checks remain independent gates unless isolated
+preflight proves a real semantic prerequisite. Each package requires separate
+admission and exact incident-edge authority. Disjoint suite/checker preparation
+may be concurrent; registry, manifests, graph, and plan integration remain
+serial. No package is admitted by this topology finding.

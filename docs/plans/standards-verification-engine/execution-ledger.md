@@ -2535,3 +2535,20 @@
   entrypoints after M6-P1 through M6-P9 acceptance.
 - No later package is admitted. Next is a read-only audit of the fresh graph and
   canonical ownership evidence before the next package is planned.
+
+## 2026-08-11 - VE049 Post-P1 Owner-Wave Decomposition
+
+- Audited the fresh 161-verifier / 166-node / 781-edge / 166-component graph;
+  every component is acyclic and singleton, while 48 verifiers are caller-free.
+- Rejected immediate launcher retirement and the historical security re-plan
+  checker as semantic leaves. The launcher remains the mixed-suite convention;
+  the security checker spans four owner packages and a live IPC identity.
+- Selected four separate Q packages for Rust Tooling Criterion, Accessibility
+  Evidence Closure, Architecture Population lifecycle, and Coding Dependencies
+  routing. Graph calls remain independent gates unless isolated preflight proves
+  a real suite dependency.
+- Local suite/checker preparation may become concurrent only after individual
+  admission. Shared registry, manifests, generated graph, README, and plan
+  integration remain serial. No package, suite, fixture, checker, engine,
+  schema, standards, baseline, lockfile, build output, or workflow changed.
+- Next is read-only Q1 isolated-suite preflight and admission.

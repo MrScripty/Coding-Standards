@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
-**Next slice:** audit the fresh post-P1 graph and re-plan the next owner-coherent
-package before any admission or implementation.
+**Next slice:** preflight and admit verification-engine package `M6-Q1` for the
+Rust Tooling Criterion contract, then preflight Q2 through Q4 independently.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -165,6 +165,15 @@ mixed checkpoint was deferred to `M6-P-W1` and passed there.
 remaining Bash entrypoints, including all 116 registered declarative suites.
 No later package is admitted; the fresh post-P1 graph and canonical ownership
 evidence must be audited before the next package is planned.
+
+VE049 Option 2 is selected from the fresh post-P1 graph. Four separately owned
+candidate packages cover Rust Tooling Criterion, Accessibility Evidence
+Closure, Architecture Population lifecycle, and Coding Dependencies routing.
+Each requires an isolated semantic preflight and separate admission. Disjoint
+suite/checker preparation may proceed concurrently only after admission;
+registry, package/edge authority, generated graph, README, and plan integration
+remain serial. Nested Bash calls remain independent gates unless preflight
+proves a true suite dependency. No package is admitted by this decomposition.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure
