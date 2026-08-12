@@ -2494,3 +2494,23 @@
   nodes / 838 edges / 167 components, both plan checks, frozen read-only hashes,
   and diff integrity passed. The mixed Bash checkpoint remains M6-P-W1.
 - Next slice is M6-P9 row-46 lifecycle preflight and admission.
+
+## 2026-08-11 - M6-P9 Row-46 Lifecycle Admission
+
+- Proved a dependency-free seven-check suite in isolation for exact execution
+  train and P38 package identity, owner-validation, owner-map/disposition
+  lineage, decomposition, and accepted parent-plan claims.
+- Admitted M6-P9 at train order 79 under `migration.parent-plan` and recorded
+  both generated views of all thirteen incident relationships without using an
+  aggregate total as acceptance authority.
+- Rust source and specialized-owner semantics remain with M6-P6/P7/P8 and
+  retained independent gates; no Bash call became a suite dependency.
+- M6-P6 through M6-P9 remain unimplemented. Registry, proposed suites, all four
+  checker paths, lifecycle tables, engine, schemas, fixtures, numeric baseline,
+  lockfiles, build output, and workflows remain unchanged.
+- Package and exact edge authority, all 112 declarative suites, all four SCC
+  checkers and retained lifecycle gates, numeric lifecycle, graph freshness at
+  165 Bash verifiers / 170 nodes / 838 edges / 167 components, both plan checks,
+  frozen lifecycle hashes, and diff integrity passed. Regenerated graph files
+  were byte-identical.
+- Next slice is one atomic four-suite registration and checker retirement.

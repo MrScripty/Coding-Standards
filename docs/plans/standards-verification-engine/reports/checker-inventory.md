@@ -2037,3 +2037,19 @@ dependency. M6-P6/P7/P8 remain admitted and unimplemented while M6-P9 is next.
 Package and edge authority, all declarative suites, current SCC checks, numeric
 lifecycle, graph freshness, plan structure, read-only hashes, and diff integrity
 pass for the admission.
+
+### Admitted M6-P9 Row-46 Lifecycle
+
+M6-P9 is admitted at train order 79 under `migration.parent-plan`. Its isolated
+seven-check suite preserves exact row/package identity, four owner-validation
+rows, set-equal owner-map and disposition lineage, decomposition, and accepted
+plan claims with existing generic assertions and no dependencies.
+
+Twenty-six owner-local rows cover both generated views of three inbound SCC
+calls and ten outbound gates. Rust semantic checks and retained shared gates
+keep their own authority; nested execution is not reclassified as lifecycle
+semantics or suite dependency. M6-P6 through M6-P9 are admitted and
+unimplemented; only one atomic four-checker transition may follow.
+Package and edge authority, all declarative suites, current SCC and retained
+lifecycle gates, numeric lifecycle, graph freshness, plan structure, frozen
+lifecycle hashes, and diff integrity pass for the admission.

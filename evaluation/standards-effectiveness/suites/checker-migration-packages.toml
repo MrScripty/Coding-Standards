@@ -876,5 +876,16 @@ expected = [[
   "M6-P7,VE030,VE037,VE043,VE045,VE046,VE047,VE048",
   "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,scc-atomic:M6-P6+M6-P7+M6-P9,numeric-lifecycle,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-P-W1",
   "admitted",
+], [
+  "79",
+  "M6-P9",
+  "checker:evaluation/standards-effectiveness/verify-milestone-7-row-46-decomposition.sh",
+  "migration.parent-plan",
+  "consolidation",
+  "milestone-7-row-46-lifecycle-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/milestone-7-row-46-decomposition.toml,evaluation/standards-effectiveness/verify-milestone-7-row-46-decomposition.sh,evaluation/standards-effectiveness/verify-rust-adoption-notes-retirement.sh,evaluation/standards-effectiveness/verify-rust-index-closure.sh,evaluation/standards-effectiveness/verify-rust-profile-authority-closure.sh,evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv,evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,evaluation/standards-effectiveness/execution-ledger.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-P8,VE030,VE037,VE043,VE045,VE046,VE047,VE048",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,scc-atomic:M6-P6+M6-P7+M6-P8,numeric-lifecycle,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-P-W1",
+  "admitted",
 ]
 ]

@@ -12,8 +12,9 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** preflight and admit M6-P9 row-46 lifecycle without
-implementation. M6-P6/P7/P8 are admitted; no Rust SCC member may yet implement.
+**Next slice:** atomically register four dependency-free suites, retire the
+four Rust SCC Bash checkers, and accept M6-P6 through M6-P9. No partial
+implementation is permitted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -140,6 +141,13 @@ specialized links, typed diagnostics, and no-legacy/no-default authority.
 Exact owner-local edge rows preserve six retained outbound checks as
 independent gates rather than profile-owned dependencies. M6-P6/P7/P8 remain
 unimplemented pending M6-P9 and atomic four-checker acceptance.
+
+M6-P9 is admitted at train order 79 under `migration.parent-plan`. A
+dependency-free seven-check isolated suite preserves exact row/package
+identity, owner-validation and set-equal owner/disposition lineage,
+decomposition, and accepted-plan claims. Exact owner-local edge rows preserve
+all opposite checks as independent gates. All four packages remain
+unimplemented until one atomic four-checker acceptance.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

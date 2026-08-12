@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-P6/P7/P8 admitted under VE048
+**Current phase:** Milestone 6: M6-P6 through M6-P9 admitted under VE048
 
-**Next slice:** preflight and admit M6-P9 row-46 lifecycle without
-implementation. M6-P6/P7/P8 remain admitted and no SCC member may be
-implemented.
+**Next slice:** atomically register the four dependency-free suites, retire all
+four Rust SCC Bash checkers, and accept M6-P6 through M6-P9. No partial
+implementation is permitted.
 
 **Acceptance status:** `pending`
 
@@ -4931,6 +4931,61 @@ passing, numeric lifecycle passing, and generated evidence fresh at 165 Bash
 verifiers / 170 nodes / 838 edges / 167 components. Both plan checks, frozen
 profile/consumer/routing hashes, and diff integrity also pass. The mixed Bash
 suite remains intentionally deferred to `M6-P-W1`.
+
+##### M6-P9 Row-46 Lifecycle Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 79. All four SCC packages are now
+admitted; implementation remains prohibited except as one atomic transition.
+
+The isolated dependency-free seven-check suite preserves exact row-46 execution
+and P38 package records, the four unique owner-validation rows, set-equal owner
+map and disposition lineage, the decomposition contract, and accepted parent-
+plan claims. Existing `table`, `relation`, and `text` assertions derive closure
+from canonical tables without aggregate counts, source duplication, callbacks,
+commands, engine changes, or nested checker execution.
+
+M6-P9 owns only migration lifecycle. It does not reassert Rust profile, index,
+adoption-retirement, API, async, tooling, unsafe, language-routing, root-audit,
+or execution-train semantics. Exact graph projection records three inbound SCC
+calls and ten outbound gates in both generated views. Every opposite checker
+remains independent evidence during admission; the obsolete Bash SCC creates no
+declarative dependency.
+
+**Allowed implementation write set:** the serial SCC integration files frozen
+by VE048, all four proposed suites and checker paths, registry/package/edge
+authority, obsolete README-consumer identity and its root audit, verification
+README, derived graph artifacts, numeric lifecycle evidence only through its
+existing derivation, and serial plan/report/ledger files. Canonical standards,
+owner-validation and decomposition records, train/package/disposition/owner-map
+tables, retained independent checkers, engine, schemas, unrelated suites and
+fixtures, lockfiles, build output, and workflows remain read-only.
+
+**Acceptance gate:** copy and register all four already-proved suites with empty
+dependency lists; prove them before deletion; remove the obsolete profile
+consumer identity; delete all four Bash paths; transition M6-P6 through M6-P9
+and all owner-local rows to accepted with internal evidence rewritten to the
+opposite registered suites; then pass focused suites, numeric lifecycle,
+removed paths, package/edge authority, all declarative suites, graph freshness,
+both plan checks, frozen read-only hashes, and diff integrity. The mixed Bash
+suite runs once at `M6-P-W1` after atomic acceptance.
+
+**Admission evidence:** the isolated suite passes all seven checks and has no
+dependencies. Current SCC and retained gates, package and exact edge authority,
+all declarative suites, graph freshness, plan checks, frozen lifecycle hashes,
+and diff integrity must close this admission. A suite requiring another SCC
+suite, an undeclared incident edge, inability to remove all four checkers, or a
+required edit outside the frozen atomic write set is a re-plan trigger.
+
+Admission closed with package and exact incident-edge authority passing, all
+112 registered declarative suites passing, all four current SCC checkers and
+the retained language-routing/root-audit/execution-train gates passing, numeric
+lifecycle passing, and generated evidence fresh at 165 Bash verifiers / 170
+nodes / 838 edges / 167 components. Both plan checks, frozen lifecycle hashes,
+and diff integrity also pass. Regeneration was byte-identical because prior SCC
+admissions already referenced every affected checker path. The mixed Bash suite
+remains intentionally deferred to `M6-P-W1`.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 
