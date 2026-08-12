@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T3 graph and ownership audit
+**Current phase:** Milestone 6: M6-T4 row 26 migration
 
-**Next slice:** inspect the fresh post-M6-T3 graph and remaining row-family
-ownership/evidence shapes before admitting another bounded package.
+**Next slice:** implement admitted M6-T4 without a wrapper, false dependency,
+owner transfer, copied cardinality, or compatibility path.
 
 **Acceptance status:** `pending`
 
@@ -6036,6 +6036,43 @@ execution train pass independently; all 127 declarative suites and the complete
 mixed suite of 150 checkers pass. Protected decomposition, owner-validation,
 disposition, report, execution-train, workflow, prompt, and fixture evidence is
 byte-identical to admission, and no legacy execution path remains.
+
+##### M6-T4 Row 26 Admission
+
+**Status:** Admitted at train order 91.
+
+The fresh post-M6-T3 graph contains 150 Bash verifiers, 155 nodes, 755 edges,
+and 155 components. Row 26 is the smallest complete caller-free parent-owned
+package: one Planning-owned child, twenty-nine index identities, no historical
+checker-evidence transfer, and two independent gates. Row 23 retains twelve
+children and Rust no-std source closure.
+
+A disposable dependency-free suite passes six generic checks: exact
+decomposition projection, decomposition-to-owner identity,
+owner-to-disposition lineage, report and no-compatibility semantics,
+execution-train identity, and accepted plan claims. Its first strict run
+correctly rejected two inverted or line-crossing text expectations; correcting
+the disposable configuration to the report's exact literals passed without
+editing source evidence or weakening the assertion. The live row checker,
+plan-template projection, and execution train pass independently. No engine
+capability, schema, copied cardinality, owner transfer, or permanent probe
+artifact is needed.
+
+M6-T4 has four exact incident edges, one executable-reference and one
+verifier-dependency edge to each independent gate. Implementation must register
+and pass the dependency-free suite before deleting the checker, accept only
+M6-T4 and those four edges, regenerate the graph, prove decomposition,
+owner-validation, disposition, report, execution-train, template, workflow,
+and projection-fixture evidence unchanged, and update the serial records.
+Wrappers, Bash bridges, false dependencies, compatibility parsing, fixed-count
+authority, and retained legacy execution are prohibited. Changed edge identity,
+stale evidence, an unrepresentable semantic invariant, or a required edit
+outside the admitted write set is a re-plan trigger.
+
+Admission regeneration derives four unique reference-only contract edges. The
+four typed incident edges already exist in executable topology, and execution
+train is already a shared manifest target, so the graph has 150 Bash verifiers,
+155 nodes, 759 edges, and 155 components. Executable topology is unchanged.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

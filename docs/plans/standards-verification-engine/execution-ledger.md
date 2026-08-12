@@ -3120,3 +3120,17 @@
 - Focused suite, package/edge authority, all three independent gates, all 127
   declarative suites, all 150 mixed-suite entrypoints, graph freshness,
   removal, plan, and diff checks pass. The next slice is a fresh audit.
+
+## 2026-08-12 - Post-M6-T3 Audit And M6-T4 Admission
+
+- Checked the fresh 150-verifier graph with 155 nodes, 755 edges, and 155
+  components. Selected caller-free row 26 over row 23's twelve-child Rust
+  source-closure package.
+- A corrected disposable dependency-free suite passes six generic checks. Its
+  initial typed text failures exposed probe mistakes without changing source;
+  the live checker, plan-template projection, and execution train also pass.
+- Admitted M6-T4 at train order 91 with four exact typed incident edges. No
+  engine, registry, permanent suite, checker, standard, template, workflow, or
+  fixture changed.
+- Regeneration derives four new reference-only contract edges for 759 total;
+  executable topology remains unchanged.

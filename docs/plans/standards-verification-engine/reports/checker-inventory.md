@@ -2541,3 +2541,18 @@ verifiers, 155 nodes, 755 edges, and 155 components. All protected row,
 workflow, prompt, and fixture evidence is unchanged. All 127 declarative suites
 and the complete mixed suite of 150 checkers pass. Another package requires a
 fresh audit.
+
+### Post-M6-T3 Audit And M6-T4 Admission
+
+The fresh graph contains 150 Bash verifiers, 155 nodes, 755 edges, and 155
+components. Row 26 is the smallest complete caller-free parent-owned package:
+one Planning child, twenty-nine index identities, no historical checker
+evidence, and plan-template plus execution-train gates. Row 23 remains separate
+because it spans twelve children and Rust no-std source closure.
+
+The corrected disposable dependency-free suite passes six generic checks, and
+the live row checker plus both gates pass. Four exact typed incident edges keep
+the gates independent. M6-T4 is admitted at train order 91 without an engine
+change, wrapper, copied count, owner transfer, false dependency, or fallback.
+Regeneration derives four reference-only contract edges for 759 total;
+executable topology remains unchanged.

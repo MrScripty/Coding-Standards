@@ -11634,3 +11634,14 @@ remain independent. The graph now has 150 Bash verifiers, 155 nodes, 755 edges,
 and 155 components. Planning admission, implementation entrypoint, execution
 train, all 127 declarative suites, and all 150 mixed-suite entrypoints pass. A
 fresh audit is next.
+
+## 2026-08-12 M6-T4 Row 26 Admission
+
+**Outcome:** admitted at train order 91.
+
+The fresh graph has 150 Bash verifiers, 155 nodes, 755 edges, and 155
+components. Row 26 is caller-free, has one Planning-owned child, and its
+corrected six-check disposable suite plus plan-template and execution-train
+gates pass. Four exact typed edges keep both gates independent. Admission
+regeneration derives four new reference-only contract edges and records 759
+total edges without changing executable topology. Implementation is next.
