@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement admitted M6-S2 row 21 at train order 86, then M6-S3
-at train order 87 and run the M6-S-W1 mixed checkpoint.
+**Next slice:** implement admitted M6-S3 row 22 at train order 87 and run the
+M6-S-W1 mixed checkpoint before selecting another package.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3054,6 +3054,11 @@ all structural/routing fixtures pass.
          regenerated graph has 155 Bash verifiers, 160 nodes, 775 edges, and
          160 components; all 122 declarative suites pass. Execution train
          remains an accepted independent gate. Continue with M6-S2.
+       - `7.4c3ve65` (`Accepted`): M6-S2 registers the dependency-free row-21
+         suite, passes seven exact checks, and deletes its Bash checker. The
+         graph now has 154 Bash verifiers, 159 nodes, 770 edges, and 159
+         components; all declarative suites pass. Continue with M6-S3 and the
+         closing mixed checkpoint.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

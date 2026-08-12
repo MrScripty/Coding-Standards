@@ -11549,3 +11549,12 @@ owner validation, dispositions, report evidence, plan lineage, and execution
 owner are preserved. The graph now has 155 Bash verifiers, 160 nodes, 775
 edges, and 160 components. All 122 declarative suites and the retained
 execution-train gate pass. M6-S2 is next.
+
+## 2026-08-12 M6-S2 Row 21 Acceptance
+
+**Outcome:** accepted at train order 86.
+
+The dependency-free row-21 suite passes seven exact checks and replaces the
+deleted Bash checker without a wrapper or fallback. The graph now has 154 Bash
+verifiers, 159 nodes, 770 edges, and 159 components. Declarative and retained
+execution-train gates pass. M6-S3 and the M6-S-W1 mixed checkpoint are next.

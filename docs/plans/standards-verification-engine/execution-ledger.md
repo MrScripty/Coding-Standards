@@ -3009,3 +3009,15 @@
 - All 122 declarative suites, execution train, package/edge authority, graph
   freshness, removal, plan, and diff checks pass. M6-S1 and its two edge
   records are accepted; M6-S2 is next.
+
+## 2026-08-12 - M6-S2 Row 21 Acceptance
+
+- Registered and passed the dependency-free seven-check row-21 suite before
+  deleting its Bash checker.
+- Preserved exact child order, identity relation, owner validation,
+  disposition lineage, report semantics, execution owner, and accepted plan
+  claims without copied counts or a compatibility path.
+- Regenerated 154 Bash verifiers, 159 nodes, 770 edges, and 159 components.
+- All declarative suites, execution train, package/edge authority, graph,
+  removal, plan, and diff gates pass. M6-S2 and its two edge records are
+  accepted; M6-S3 and the M6-S-W1 mixed checkpoint are next.

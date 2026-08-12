@@ -2448,3 +2448,10 @@ absent. Its two former edges to execution train remain accepted independent
 gates, not suite dependencies. The regenerated graph contains 155 Bash
 verifiers, 160 nodes, 775 edges, and 160 components; all 122 declarative suites
 pass. M6-S2 remains admitted at train order 86.
+
+### M6-S2 Acceptance
+
+The registered row-21 suite passes seven exact checks and replaces its Bash
+checker without a wrapper. Its two execution-train edges remain accepted
+independent gates. The regenerated graph contains 154 Bash verifiers, 159
+nodes, 770 edges, and 159 components. M6-S3 remains admitted at train order 87.
