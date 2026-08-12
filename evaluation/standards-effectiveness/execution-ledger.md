@@ -11710,3 +11710,17 @@ dependency. The graph now has 147 Bash verifiers, 152 nodes, 739 edges, and 152
 components. Durable-mutation, migration-execution, execution train, all 130
 declarative suites, and all 147 mixed-suite entrypoints pass. A fresh audit is
 next.
+
+## 2026-08-12 M6-T7 Row 38 Admission
+
+**Outcome:** admitted at train order 94.
+
+The fresh caller-free audit selects row 38 as the smallest complete package:
+one Documentation-owned identity and directory-README plus execution-train
+gates. Its corrected disposable six-check suite and both live gates pass.
+Four exact typed edges preserve those gates independently; no historical
+evidence transfer, engine change, legacy restore, dependency, or fallback is
+needed. Regeneration derives four reference-only package edges and records 743
+total edges without changing executable topology. Package and edge authority,
+graph freshness, both plan checks, all 130 declarative suites, the live checker,
+and both independent gates pass. Implementation is next.

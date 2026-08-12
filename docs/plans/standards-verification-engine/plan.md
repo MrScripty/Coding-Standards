@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T6 graph and ownership audit
+**Current phase:** Milestone 6: M6-T7 row 38 migration
 
-**Next slice:** inspect the fresh post-M6-T6 graph and remaining ownership and
-evidence shapes before admitting another bounded package.
+**Next slice:** implement admitted M6-T7 without wrapper, false dependency,
+copied cardinality, legacy restoration, or fallback.
 
 **Acceptance status:** `pending`
 
@@ -6201,6 +6201,41 @@ admission. No wrapper, false dependency, fallback, compatibility path, or
 legacy execution remains. The focused suite, package and edge authority, all
 three independent gates, all 130 declarative suites, complete mixed suite of
 147 checkers, graph freshness, removed-path, plan, hash, and diff checks pass.
+
+##### M6-T7 Row 38 Admission
+
+**Status:** Admitted at train order 94.
+
+The fresh post-M6-T6 graph contains 147 Bash verifiers, 152 nodes, 739 edges,
+and 152 components. Auditing every caller-free lifecycle checker selects row
+38 as the smallest complete package: one Documentation-owned identity, one
+exact merge-duplicate disposition, directory-README closure, and execution
+train. Rows 6 and 23 also have two gates but broader multi-identity and
+multi-child contracts; rows 34, 36, 37, and 47 have larger gate sets.
+
+A corrected disposable dependency-free suite passes six generic checks:
+decomposition, exact owner validation, disposition lineage, report and typed
+no-fallback semantics, execution-train identity, and accepted plan state. Its
+first run rejected a required phrase split across a Markdown line boundary;
+using the exact contiguous policy phrase passed without editing protected
+evidence. The live checker and both independent gates pass. No engine or schema
+change is needed.
+
+M6-T7 has four exact outgoing incident edges, one executable-reference and one
+verifier-dependency edge to each independent gate. There are no historical
+caller-evidence rows to transfer. Implementation may change only the admitted
+15-path write set; it must register and pass the replacement before deleting
+the Bash checker, accept only M6-T7 and its four edges, regenerate the graph,
+and prove row, disposition, Documentation gate, train, policy, and legacy-index
+evidence unchanged. Legacy restoration, row-47 ownership, wrappers, Bash
+bridges, false dependencies, compatibility parsing, copied counts, owner
+transfer, and fallback are prohibited. Changed incident identity, new source
+gaps, an unrepresentable invariant, or a required edit outside the write set is
+a re-plan trigger.
+
+Admission regeneration derives four reference-only package edges. The graph
+contains 147 Bash verifiers, 152 nodes, 743 edges, and 152 components;
+executable topology is unchanged.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

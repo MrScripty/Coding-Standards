@@ -3206,3 +3206,18 @@
 - Focused suite, package/edge authority, all three independent gates, all 130
   declarative suites, all 147 mixed-suite entrypoints, graph freshness,
   removal, plan, hash, and diff checks pass. The next slice is a fresh audit.
+
+## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
+
+- Audited every caller-free lifecycle checker in the fresh 147-verifier graph
+  with 152 nodes, 739 edges, and 152 components. Selected row 38 as the
+  smallest complete one-owner, one-identity package.
+- A corrected disposable six-check suite, live checker, directory-README
+  closure, and execution train pass without protected-source changes.
+- Admitted M6-T7 at train order 94 with four exact independent-gate edges and
+  no historical evidence transfer, engine change, fallback, or legacy restore.
+- Regeneration derives four reference-only package edges for 743 total;
+  executable topology is unchanged.
+- Package and edge authority, graph freshness, both plan checks, all 130
+  declarative suites, diff integrity, the live checker, and both independent
+  gates pass.

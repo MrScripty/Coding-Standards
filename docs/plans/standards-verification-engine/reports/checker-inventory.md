@@ -2625,3 +2625,19 @@ suite, with no dependency. The graph now contains 147 Bash verifiers, 152
 nodes, 739 edges, and 152 components. All protected evidence is unchanged.
 All 130 declarative suites and the complete mixed suite of 147 checkers pass.
 Another package requires a fresh audit.
+
+### Post-M6-T6 Audit And M6-T7 Admission
+
+The fresh graph has 147 Bash verifiers, 152 nodes, 739 edges, and 152
+components. A complete caller-free lifecycle audit selects row 38 over broader
+rows 6, 23, 34, 36, 37, and 47. Row 38 has one Documentation identity, one
+merge-duplicate disposition, and two independent gates.
+
+The corrected disposable six-check suite and both live gates pass. M6-T7 is
+admitted at train order 94 with four exact edge records and no engine change,
+historical evidence transfer, wrapper, copied count, owner transfer, legacy
+restoration, compatibility path, or fallback.
+Regeneration derives four reference-only package edges for 743 total;
+executable topology is unchanged.
+Package and edge authority, graph freshness, both plan checks, all 130
+declarative suites, the live checker, and both independent gates pass.
