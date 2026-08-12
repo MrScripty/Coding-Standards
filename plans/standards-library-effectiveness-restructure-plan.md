@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** prove rows 20, 21, and 22 through disposable contained suites
-before M6-S1 through M6-S3 package admission.
+**Next slice:** resolve VE057's generic positive/negative path-state assertion
+before resuming M6-S1 through M6-S3 preflight.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3014,6 +3014,12 @@ all structural/routing fixtures pass.
          and preflight parent-owned M6-S1 through M6-S3 for rows 20 through 22;
          each has disjoint local paths, no inbound caller or historical
          evidence transfer, and only the execution-train independent gate.
+       - `7.4c3ve58` (`Re-plan required`): row 22 and ten other surviving
+         verifiers require content-neutral positive path existence. Prefer one
+         strict `path_state` assertion with explicit present/absent sets,
+         atomically migrate the sole `absent_paths` consumer, and delete the
+         old representation. Do not infer existence from content, omit
+         evidence, retain dual assertions, or resume M6-S admission first.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

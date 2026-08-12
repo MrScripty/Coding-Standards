@@ -2372,3 +2372,17 @@ Row 23 is separated by Rust no-std closure; row 28 by an inbound Accessibility
 caller; rows 32/33 by accepted historical evidence; and row 34 by six domain
 gates. This classification prevents a broad package from hiding distinct edge
 semantics while allowing concurrent local preparation after admission.
+
+### VE057 Positive Path-State Capability Trigger
+
+Row 22's Bash checker proves two repository paths exist without asserting
+their content. The engine cannot express this through `absent_paths`, and all
+content-bearing alternatives change ownership. A corpus scan finds the same
+positive-existence shape in eleven surviving verifiers.
+
+Recommended Option 1 replaces `absent_paths` with a unified strict
+`path_state` assertion. Present state follows contained Bash existence
+semantics; absence rejects files, directories, symlinks, and broken symlinks.
+The sole registered absence consumer migrates in the same shared-contract
+slice and the old assertion is deleted. M6-S preflight remains stopped until
+that capability is accepted.

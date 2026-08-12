@@ -2905,3 +2905,18 @@
 - Deferred row 23's no-std gate, row 28's inbound Accessibility caller,
   rows 32/33 historical evidence transfers, and row 34's six domain gates to
   later bounded packages.
+
+## 2026-08-12 - VE057 Positive Path-State Capability Trigger
+
+- Stopped M6-S preflight before package admission after row 22 exposed a
+  content-neutral positive path-existence contract.
+- Confirmed current `absent_paths` is one-sided and content-bearing checks
+  would either strengthen the contract or omit evidence.
+- Found the same positive existence invariant in eleven surviving Bash
+  verifiers, satisfying VE055's repeated-invariant threshold.
+- Recommended replacing `absent_paths` with one strict `path_state` assertion
+  for explicit present and absent sets, migrating its sole registered consumer,
+  and deleting the old assertion atomically.
+- Recorded separate-addition, content-inference, and evidence-removal
+  alternatives; none is authorized. No engine, suite, registry, checker,
+  package, edge, graph, source, fixture, lockfile, output, or workflow changed.

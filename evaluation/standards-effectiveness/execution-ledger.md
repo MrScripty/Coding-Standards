@@ -11465,3 +11465,17 @@ Rows 20 through 22 are the first bounded parent-owned wave. Their local paths
 are disjoint, they have no inbound executable caller or historical evidence
 transfer, and execution train remains independently verified. No package is
 admitted yet and no permanent executable authority changed.
+
+## 2026-08-12 VE057 Positive Path-State Capability Trigger
+
+**Outcome:** re-planning required; M6-S packages remain unadmitted.
+
+Row 22 requires two content-neutral positive path-existence checks. Existing
+assertions can prove absence or add content/relationship requirements, but
+cannot preserve existence exactly. Eleven surviving Bash verifiers use the
+same invariant.
+
+Recommended recovery replaces one-sided `absent_paths` with a strict
+`path_state` assertion for explicit present and absent sets, migrates the sole
+registered absence consumer, and removes the old representation atomically.
+No executable or evidence authority changed in this planning record.

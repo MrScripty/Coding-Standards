@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-S1 through M6-S3 row-family preflight
+**Current phase:** Milestone 6: VE057 generic path-state re-plan
 
-**Next slice:** prove rows 20, 21, and 22 through disposable contained suites
-before package admission.
+**Next slice:** select and implement an exact positive/negative path-state
+contract before resuming M6-S1 through M6-S3 preflight.
 
 **Acceptance status:** `pending`
 
@@ -5753,6 +5753,65 @@ repository-path existence checks from its Bash checker. Each live checker and
 the execution-train gate must pass independently. A missing generic invariant,
 new incident edge, stale source, conflicting owner, or required permanent edit
 is a re-plan trigger.
+
+##### VE057 Positive Path-State Capability Trigger
+
+**Status:** Re-plan required; M6-S1 through M6-S3 remain unadmitted.
+
+Row 22 requires content-neutral proof that the Rust release profile and recipe
+paths exist. Current generic checks cannot express that exact contract.
+absent_paths proves only absence; text, Markdown-link, reference-inventory, and
+exact-content checks would add unowned content or relationship requirements.
+Omitting the checks would weaken the Bash contract.
+
+This is a recurring generic invariant, not a row-specific exception. Eleven
+surviving Bash verifiers contain positive path-existence checks, including
+Milestone 7 rows 13 through 15, 18, 22 through 23, and 40 through 44. The
+Option 4 threshold is therefore met.
+
+**Option 1 - Unified strict path-state assertion (Recommended):** replace
+absent_paths with one path_state assertion containing explicit nonempty
+present and/or absent path sets. Present paths use contained -e semantics: the
+resolved target may be a file or directory, but must exist; a missing or broken
+target is typed unavailable. Absent paths reject every filesystem entry,
+including broken symlinks, as typed invalid. Reject unknown fields, empty
+configurations, duplicate paths, overlap between states, absolute paths,
+parent traversal, and symlink escape. Migrate the sole registered absent_paths
+consumer atomically and delete the old parser, model, and tests so no legacy
+assertion remains.
+
+**Option 2 - Add a separate required-paths assertion:** preserve absent_paths
+and add its positive counterpart. This is a smaller immediate diff but
+duplicates containment, path-list validation, diagnostics, tests, and future
+maintenance across two concepts.
+
+**Option 3 - Infer existence through a content-bearing check:** use text,
+exact_text, Markdown links, or reference inventory. This is invalid for row 22
+because it silently strengthens existence into unrelated content or
+relationship authority.
+
+**Option 4 - Remove positive existence evidence:** omit the Bash checks because
+other suites currently consume the files. This is invalid because incidental
+consumers do not transfer row-22 ownership and may disappear independently.
+
+The recommended shared-contract slice may edit only the path-state check
+module, check dispatcher, focused tests, the sole registered absent-path suite,
+engine documentation or architecture records that enumerate assertion kinds,
+and these six serial planning records. It cannot edit row suites, registry,
+row checkers, standards, evidence fixtures, package/edge state, generated
+graph, lockfiles, outputs, or workflows.
+
+**Acceptance gate:** positive file and directory; symlink to contained target;
+missing and broken target; absent file, directory, symlink, and broken symlink;
+duplicate, overlap, empty, unknown-field, absolute, traversal, and symlink-
+escape cases; migrated existing absence consumer; all engine tests; all
+declarative suites; removed absent_paths scan; both plan checks; diff
+integrity; and complete mixed suite because the shared assertion contract
+changes.
+
+Any inability to preserve both states without compatibility parsing, any
+second registered absence representation, or any required policy-specific
+path behavior is a new re-plan trigger.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 
