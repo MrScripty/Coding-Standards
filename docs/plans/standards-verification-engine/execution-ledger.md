@@ -2838,3 +2838,18 @@
 - Changed no package, edge, suite, checker, registry, README, graph, source,
   fixture, engine, schema, lifecycle, numeric, lockfile, output, or workflow
   authority. Isolated Media preflight is next.
+
+## 2026-08-12 - M6-R1 Accessibility Media Admission
+
+- Proved a disposable dependency-free `accessibility-media` suite with six
+  generic checks against the live Bash checker; both pass all 13 decisions,
+  owner/reference/legacy evidence, three dispositions, and lifecycle evidence.
+- Authorized a source-wide `<img` prohibition in the migrated Accessibility
+  index as an explicit conservative refinement of the former section range.
+- Admitted M6-R1 at train order 84 with two exact independent-gate edges to the
+  retained Accessibility Name/Input checker and no registry dependency.
+- Froze atomic transfer of the two accepted Q2 Media evidence records from the
+  deleted checker to the registered suite during package acceptance.
+- Kept standards sources, fixtures, dispositions, lifecycle claims, retained
+  gate, README, engine/schema, numeric evidence, lockfiles, outputs, and
+  workflows read-only. M6-R1 implementation is next.

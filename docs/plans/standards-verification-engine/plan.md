@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE054 post-Q package-selection re-plan
+**Current phase:** Milestone 6: M6-R1 Accessibility Media
 
-**Next slice:** perform isolated Accessibility Media semantic preflight and
-admit a package only if its exact owner, evidence transfers, retained gate,
-write set, and verification contract close without fallback.
+**Next slice:** implement the admitted `M6-R1` package, register and pass its
+declarative suite, transfer historical evidence, then delete the Bash checker.
 
 **Acceptance status:** `pending`
 
@@ -5576,6 +5575,62 @@ transfers, retained Accessibility Name/Input gate, write set, and verification
 contract before implementation. Lifecycle-row classification remains separate
 planning work and cannot broaden or block this package unless preflight finds a
 real shared dependency or ownership conflict.
+
+##### M6-R1 Accessibility Media Package Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 84.
+
+Disposable preflight proved that one dependency-free suite with six generic
+checks preserves all thirteen typed decisions, canonical Accessibility media
+rules, non-normative web mechanisms, exact `STD-0020` through `STD-0022`
+dispositions, and accepted `7.4b18f` lifecycle evidence. The live Bash checker
+and the disposable suite both pass. The temporary suite and registry were
+removed after proof.
+
+The package intentionally refines the legacy boundary. The Bash checker
+prohibited `<img` only in the migrated Media section; the declarative suite
+prohibits `<img` across `ACCESSIBILITY-STANDARDS.md`. That file is a migrated
+navigation surface and must not regain HTML media mechanisms in any section.
+This conservative source-wide prohibition cannot authorize old behavior and
+requires no section parser, copied heading range, exception, or compatibility
+path.
+
+The generated graph has exactly two outgoing executable edges from Media to
+Accessibility Name/Input: one `executable_reference` and one
+`verifier_dependency`. Both are admitted as `independent-gate` evidence.
+Name/Input remains checker-backed, separately executed, and absent from Media's
+registry dependencies. The two accepted Q2 rows that currently retain the
+Media checker must transfer atomically to `suite:accessibility-media` and its
+registered suite path when M6-R1 is accepted.
+
+The checked `M6-R1` package manifest row is the sole exact file-level write-set
+authority. Semantically, implementation may register the proved suite, delete
+only the Media Bash checker, accept its package and incident edges, transfer
+only the two Q2 historical evidence records, regenerate the four graph
+artifacts, and update the listed planning records. Standards sources, fixtures,
+dispositions, lifecycle claims, the Name/Input checker, README, engine,
+schemas, numeric evidence, lockfiles, outputs, and workflows remain read-only.
+
+**No-fallback rule:** register and pass the six-check suite before checker
+deletion. Do not retain a wrapper or bridge, add a suite dependency on
+Name/Input, copy Name/Input behavior, preserve checker evidence after deletion,
+weaken the source-wide legacy prohibition, add a section parser or package-
+specific assertion, infer a default, or create dual checker/suite authority.
+
+**Acceptance gate:** focused suite; exact package projection and incident-edge
+authority; two Q2 historical evidence transfers; retained independent
+Name/Input gate; source-wide legacy-index purity; graph freshness; all
+declarative suites; removed checker path; exact read-only source, fixture,
+disposition, and lifecycle evidence; both plan checks; diff integrity; and the
+complete mixed suite because accepted shared edge evidence changes.
+
+**Admission verification:** the disposable six-check suite and live Bash
+checker pass; current graph evidence proves exactly two owner-local incident
+edges; the package projection and admitted edge rows are machine-readable.
+No permanent suite, registry, checker, source, fixture, engine, schema,
+lifecycle, numeric, lockfile, output, or workflow authority changed.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

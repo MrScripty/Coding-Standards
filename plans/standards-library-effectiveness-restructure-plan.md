@@ -13,9 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform delegated isolated Accessibility Media preflight and
-admit a package only if its exact owner, evidence transfers, retained gate,
-write set, and verification close without fallback.
+**Next slice:** implement admitted `M6-R1` Accessibility Media, register and
+pass its suite, transfer historical evidence, and delete the Bash checker.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -290,6 +289,14 @@ under its Accessibility owner, with exact behavior, two historical Q2 evidence
 transfers, retained Name/Input gate, write set, and verification frozen before
 admission. Lifecycle-row ownership remains separate planning work and is not an
 implicit prerequisite. No package is admitted by this selection.
+
+M6-R1 is admitted at train order 84 after the disposable six-check suite and
+live Bash checker both pass. Acceptance preserves all 13 typed decisions,
+three dispositions, owner/reference evidence, and `7.4b18f`; retains
+Accessibility Name/Input as an independent checker-backed gate; and transfers
+two Q2 historical rows to registered suite evidence. The authorized refinement
+prohibits `<img` throughout the migrated Accessibility index, preventing legacy
+mechanism authority without a section parser or compatibility path.
 
 `M6-Q0` is accepted. Q1 through Q4 local suite/checker paths are disjoint and
 may be prepared concurrently as proposal-only commits from the accepted freeze
@@ -2972,11 +2979,17 @@ all structural/routing fixtures pass.
          dependency, same-owner package inclusion, external owned artifact, or
          invalid/unresolved. Require exact coverage before deleting a caller;
          do not force 14-to-64-caller cross-owner waves or preserve bridges.
-       - `7.4c3ve53` (`Active`): implement one generic Python assertion that
+       - `7.4c3ve53` (`Accepted`): implement one generic Python assertion that
          validates exact package edge coverage, admitted/current and
          accepted/absent state transitions, typed replacement evidence,
          contained paths, unique keys, and unresolved-row rejection. Only after
          acceptance may a larger multi-owner Wave 3 be admitted.
+       - `7.4c3ve54` (`Accepted planning authority`): select bounded owner-first
+         continuation and admit M6-R1 Accessibility Media at train order 84.
+         Preserve thirteen decisions and three dispositions, retain Name/Input
+         independently, transfer two Q2 records to suite evidence, and refine
+         the migrated index to prohibit `<img` source-wide. Do not add a section
+         parser, wrapper, false dependency, copied gate, or fallback.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

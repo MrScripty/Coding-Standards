@@ -2299,6 +2299,20 @@ retained Name/Input gate, write set, and verification frozen before admission.
 Lifecycle-row ownership remains separate planning work and does not become an
 implicit Media prerequisite.
 
+### Admitted M6-R1 Accessibility Media
+
+Disposable proof shows that six generic checks preserve all 13 Media decisions,
+canonical and reference evidence, three exact dispositions, and accepted
+lifecycle evidence. M6-R1 is admitted at train order 84. Its two outgoing
+Name/Input edges remain independent checker-backed gates; the suite declares no
+dependency and copies no Name/Input behavior.
+
+Acceptance must transfer two Q2 historical Media records to registered suite
+evidence before deleting the checker. The suite also intentionally strengthens
+legacy-index purity from a Media-section `<img` prohibition to a source-wide
+prohibition. This prevents the migrated Accessibility index from regaining
+mechanism authority without adding a heading-range primitive or fallback.
+
 ### Accepted Q-Wave Preparation Boundary
 
 Q1 through Q4 have pairwise-disjoint local suite and deleted-checker paths.

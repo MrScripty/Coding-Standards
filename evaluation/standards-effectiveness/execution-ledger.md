@@ -11400,3 +11400,19 @@ Lifecycle-row ownership classification remains separate planning work. No
 package, edge, suite, checker, registry, README, graph, source, fixture,
 engine, schema, lifecycle, numeric, lockfile, output, or workflow authority
 changed. Media preflight is next.
+
+## 2026-08-12 M6-R1 Accessibility Media Admission
+
+**Outcome:** admitted at train order 84; implementation pending.
+
+A disposable dependency-free suite and the live Bash checker both pass all 13
+typed decisions, canonical/reference/legacy evidence, `STD-0020` through
+`STD-0022`, and accepted `7.4b18f` evidence. The suite uses six existing generic
+checks and requires no engine or schema change.
+
+The admitted refinement prohibits `<img` throughout the migrated Accessibility
+index rather than only its Media section. Two exact Media-to-Name/Input edges
+remain checker-backed independent gates with no registry dependency. Acceptance
+must atomically transfer two Q2 historical records to `suite:accessibility-media`
+before deleting the Media checker. No permanent suite or registry entry was
+added during admission.
