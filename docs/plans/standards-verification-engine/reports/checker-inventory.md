@@ -2147,3 +2147,17 @@ independent gates retaining the media checker; neither creates a registry
 dependency or transfers media semantics into Q2. Canonical sources, fixture,
 dispositions, media gate, engine, and schemas remain read-only. Q3 preflight is
 next.
+
+### Admitted M6-Q3 Architecture Population
+
+A disposable dependency-free four-check suite matches the Coding Architecture
+route, six retired literals, exact `STD-0137` through `STD-0147` disposition
+set, and accepted `7.4b8be`/`7.4b8bf` lifecycle claims. Existing text and table
+assertions are sufficient.
+
+Q3 is admitted at train order 82. Its exact current executable edges are
+execution-reference and verifier-dependency pairs to Architecture Owner and
+row-15 decomposition. All four remain checker-backed independent gates; none
+creates a registry dependency or transfers callee behavior into Q3. Canonical
+sources, dispositions, lifecycle claims, retained gates, engine, and schemas
+remain read-only. Q4 preflight is next.

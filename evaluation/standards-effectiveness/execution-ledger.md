@@ -11121,3 +11121,23 @@ Only package and edge authority, package projection, shared planning evidence,
 and derived graph artifacts change at admission. No permanent suite, registry
 entry, checker, fixture, standards source, engine, schema, numeric evidence,
 lockfile, build output, or workflow changes. Q3 isolated preflight is next.
+
+## 2026-08-11 M6-Q3 Architecture Population Admission
+
+**Outcome:** admitted at train order 82; implementation not started.
+
+A disposable dependency-free suite passed four generic checks covering the
+Coding Architecture route, six retired literals, exact `STD-0137` through
+`STD-0147` dispositions, and accepted `7.4b8be`/`7.4b8bf` lifecycle claims.
+The live Bash checker passed the same evidence. Temporary probe files were
+removed.
+
+Fresh graph evidence gives Q3 execution-reference and verifier-dependency pairs
+to Architecture Owner and row-15 decomposition. All four are independently
+owned gates and retain exact checker evidence; Q3 declares no registry
+dependency and copies no callee behavior.
+
+Only package and edge authority, package projection, shared planning evidence,
+and derived graph artifacts change at admission. No permanent suite, registry
+entry, checker, standards source, fixture, engine, schema, numeric evidence,
+lockfile, build output, or workflow changes. Q4 isolated preflight is next.

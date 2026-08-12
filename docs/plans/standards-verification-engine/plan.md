@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave package admission
 
-**Next slice:** preflight and admit `M6-Q3` Architecture Population, then
-preflight `M6-Q4` independently before concurrent local preparation.
+**Next slice:** preflight and admit `M6-Q4` Coding Dependencies Route, then
+freeze concurrent local preparation and serial integration contracts.
 
 **Acceptance status:** `pending`
 
@@ -5206,6 +5206,58 @@ dispositions, and lifecycle claims. Package projection and exact edge authority
 pass against the current graph. No permanent suite, registry entry, checker,
 fixture, standards source, engine, schema, numeric evidence, lockfile, build
 output, or workflow changed.
+
+##### M6-Q3 Architecture Population Package Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 82.
+
+An isolated dependency-free suite proves Q3's complete migration-population
+contract with four generic checks. One text check preserves the Architecture
+route in `CODING-STANDARDS.md`; a second prohibits the six retired architecture
+headings and mechanism literals. One exact table projection proves
+`STD-0137` through `STD-0147` without a copied count, and one text check
+preserves accepted `7.4b8be` and `7.4b8bf` lifecycle claims. The disposable
+suite and live Bash checker both pass; temporary files were removed.
+
+The current generated graph has exactly four executable incident edges for Q3:
+an `executable_reference` and `verifier_dependency` to Architecture Owner, and
+the same pair to row-15 decomposition. Isolated preflight proves both are
+separately owned integration gates, not inputs to Q3's route, prohibition,
+disposition, or lifecycle result. All four rows therefore use
+`independent-gate` with exact retained checker evidence. Q3 declares no
+registry dependency and copies neither callee's behavior.
+
+**Allowed implementation write set:** package and edge manifests; package
+projection; suite registry; `suites/architecture-population.toml`; the deleted
+`verify-architecture-population.sh`; all four generated checker artifacts;
+this plan; child ledger; issues; checker-inventory report; canonical evaluation
+ledger; and parent plan. `CODING-STANDARDS.md`, consolidation dispositions,
+parent-plan lifecycle claims, Architecture Owner and row-15 checkers/evidence,
+all other suites/checkers, verification README, engine code/tests, schemas,
+numeric evidence, lockfiles, build output, and workflows remain read-only.
+
+**No-fallback rule:** register and pass the four-check suite before deleting
+the Bash checker. Do not retain a wrapper or Bash bridge, copy either retained
+gate, add false `requires` dependencies, duplicate disposition evidence, use an
+aggregate count, freeze unrelated source bytes, infer lifecycle state, create
+package-specific code, or retain the deleted checker as evidence. Any changed
+source contract, additional incident edge, missing generic capability,
+unavailable retained gate, or inability to preserve exact disposition and
+lifecycle evidence is a re-plan trigger.
+
+**Acceptance gate:** focused Q3 suite; live checker equivalence before deletion;
+package projection and exact four-row edge authority; both retained gates
+without registry dependencies; all declarative suites; removed checker path;
+graph freshness; both plan checks; exact read-only source/disposition/lifecycle
+evidence; diff integrity; and the deferred `M6-Q-W1` mixed checkpoint.
+
+**Admission verification:** the disposable four-check suite and live checker
+both pass route, prohibition, eleven-disposition, and lifecycle evidence.
+Package projection and exact edge authority pass against the current graph. No
+permanent suite, registry entry, checker, standards source, fixture, engine,
+schema, numeric evidence, lockfile, build output, or workflow changed.
 
 ##### VE050 Level-Selected Markdown Heading Policy Re-plan
 

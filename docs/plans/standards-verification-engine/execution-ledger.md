@@ -2605,3 +2605,16 @@
 - No permanent suite, registry entry, checker, fixture, standards source,
   engine, schema, numeric evidence, lockfile, build output, or workflow changed.
 - Next is Q3 isolated-suite preflight and admission.
+
+## 2026-08-11 - M6-Q3 Architecture Population Admission
+
+- A disposable dependency-free four-check suite and the live checker passed
+  the same Coding route, six retired literals, eleven exact dispositions, and
+  two lifecycle claims.
+- Admitted Q3 at train order 82 with exact coverage of execution-reference and
+  verifier-dependency edges to Architecture Owner and row-15 decomposition.
+- Classified all four edges as checker-backed independent gates. Q3 copies no
+  callee behavior and declares no registry dependency.
+- No permanent suite, registry entry, checker, standards source, fixture,
+  engine, schema, numeric evidence, lockfile, build output, or workflow changed.
+- Next is Q4 isolated-suite preflight and admission.

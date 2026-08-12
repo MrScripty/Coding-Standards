@@ -17,10 +17,10 @@ evaluation/standards-effectiveness/verify-architecture-discover-or-create-refere
 evaluation/standards-effectiveness/verify-architecture-durable-workflow-pattern.sh	verifier	yes	component-0016	1	no	6	2	0	2	1
 evaluation/standards-effectiveness/verify-architecture-layered-pattern.sh	verifier	yes	component-0017	1	no	2	2	0	2	1
 evaluation/standards-effectiveness/verify-architecture-monorepo-pattern.sh	verifier	yes	component-0018	1	no	3	2	0	2	1
-evaluation/standards-effectiveness/verify-architecture-owner-contract.sh	verifier	yes	component-0019	1	no	4	3	0	3	1
+evaluation/standards-effectiveness/verify-architecture-owner-contract.sh	verifier	yes	component-0019	1	no	4	3	1	3	1
 evaluation/standards-effectiveness/verify-architecture-pattern-reference-owner.sh	verifier	yes	component-0020	1	no	1	5	0	5	1
 evaluation/standards-effectiveness/verify-architecture-pattern-selection-closure.sh	verifier	yes	component-0021	1	no	9	0	0	0	2
-evaluation/standards-effectiveness/verify-architecture-population.sh	verifier	yes	component-0022	1	no	5	0	0	0	2
+evaluation/standards-effectiveness/verify-architecture-population.sh	verifier	yes	component-0022	1	no	5	0	3	0	2
 evaluation/standards-effectiveness/verify-architecture-process-instance-coordination.sh	verifier	yes	component-0023	1	no	6	1	0	1	1
 evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	verifier	yes	component-0024	1	no	5	1	2	1	5
 evaluation/standards-effectiveness/verify-binding-generation-authority.sh	verifier	yes	component-0025	1	no	6	1	0	1	3
