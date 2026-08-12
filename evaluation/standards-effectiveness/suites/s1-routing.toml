@@ -1,0 +1,86 @@
+schema_version = 1
+id = "s1-routing"
+owner = "migration.parent-plan"
+description = "Exact S1 Rust-library route, metadata closure, local links, bounded context, and root full-library-read prohibition without Bash execution or fallback inference."
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "STANDARDS-ROUTER.md",
+  "workflows/implementation.md",
+  "workflows/verification.md",
+  "profiles/applications/library.md",
+  "profiles/languages/rust/README.md",
+]
+
+[[checks]]
+id = "core-id"
+type = "text"
+path = "CORE-STANDARDS.md"
+required = ["\n- ID: `core`\n"]
+
+[[checks]]
+id = "router-id"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["\n- ID: `router`\n"]
+
+[[checks]]
+id = "implementation-id"
+type = "text"
+path = "workflows/implementation.md"
+required = ["\n- ID: `workflow.implementation`\n"]
+
+[[checks]]
+id = "verification-id"
+type = "text"
+path = "workflows/verification.md"
+required = ["\n- ID: `workflow.verification`\n"]
+
+[[checks]]
+id = "library-profile-id"
+type = "text"
+path = "profiles/applications/library.md"
+required = ["\n- ID: `profile.application.library`\n"]
+
+[[checks]]
+id = "rust-profile-id"
+type = "text"
+path = "profiles/languages/rust/README.md"
+required = ["\n- ID: `profile.language.rust`\n"]
+
+[[checks]]
+id = "local-links"
+type = "markdown_links"
+paths = [
+  "CORE-STANDARDS.md",
+  "STANDARDS-ROUTER.md",
+  "workflows/implementation.md",
+  "workflows/verification.md",
+  "profiles/applications/library.md",
+  "profiles/languages/rust/README.md",
+]
+
+[[checks]]
+id = "context-budget"
+type = "line_budget"
+paths = [
+  "CORE-STANDARDS.md",
+  "STANDARDS-ROUTER.md",
+  "workflows/implementation.md",
+  "workflows/verification.md",
+  "profiles/applications/library.md",
+  "profiles/languages/rust/README.md",
+]
+baseline_path = "evaluation/standards-effectiveness/generated/summary.tsv"
+baseline_key = "normative_and_derived_lines"
+maximum_numerator = 1
+maximum_denominator = 4
+
+[[checks]]
+id = "root-routing-boundary"
+type = "text"
+path = "README.md"
+prohibited = ["Read each document"]

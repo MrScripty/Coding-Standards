@@ -534,3 +534,8 @@ requires = []
 id = "numeric-comparison-classification"
 path = "evaluation/standards-effectiveness/suites/numeric-comparison-classification.toml"
 requires = []
+
+[[suites]]
+id = "s1-routing"
+path = "evaluation/standards-effectiveness/suites/s1-routing.toml"
+requires = []

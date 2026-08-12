@@ -2,11 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: admitted M6-P1 S1 routing replacement
+**Current phase:** Milestone 6: M6-P1 accepted; P1 package 2 preflight
 
-**Next slice:** implement admitted M6-P1 by registering the exact S1 routing
-suite, removing its Bash checker and private fixture, and transferring the root
-consumer lifecycle references without changing any routed standards source.
+**Next slice:** preflight and admit the second frozen P1 package for row-35
+migration lifecycle. Freeze its retained unique lifecycle behavior, nested
+checker-execution removal, exact incident edges, dependencies, and bounded
+write set before implementation.
 
 **Acceptance status:** `pending`
 
@@ -4312,9 +4313,9 @@ mixed checker entrypoints pass. No package authority or legacy checker changed.
 
 ##### M6-P1 S1 Routing Package Admission
 
-**Status:** `Active`
+**Status:** `Accepted`
 
-**Package state:** `admitted` at train order 71.
+**Package state:** `accepted` at train order 71.
 
 The clean preflight proves that the current S1 contract is fully expressible by
 existing generic engine checks. One `metadata_graph` assertion validates the
@@ -4366,6 +4367,19 @@ pass; all 107 registered declarative suites pass; generated evidence is fresh
 at 170 Bash verifiers / 175 nodes / 859 edges / 171 components; exact generated
 review shows only four new contract references from package and edge authority;
 both plan checks and diff integrity pass.
+
+**Acceptance evidence:** the registered ten-check S1 suite passes exact
+path-to-ID bindings, metadata closure, local links, strict context ratio, and
+root routing boundary. The Bash checker and private fixture are absent. The
+root consumer audit derives and passes 25 remaining consumers after the obsolete
+classification and S1-only assertion are removed; row 35 passes with the same
+derived inventory. Package and edge authority prove the checker and all three
+executable incident edges are absent. All 108 declarative suites pass; generated
+evidence is fresh at 169 Bash verifiers / 174 nodes / 852 edges / 170
+components; shell syntax and removed-path evidence pass. Canonical standards,
+metadata helper, engine, tests, schemas, numeric evidence, lockfiles, build
+output, and workflows are unchanged. The mixed Bash checkpoint remains
+explicitly deferred to `M6-P-W1`.
 
 **No-fallback rule:** do not replace exact structure with substring checks,
 replace absent-path evidence with table absence, freeze whole files for

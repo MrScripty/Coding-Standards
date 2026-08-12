@@ -1767,7 +1767,7 @@ declarative suites, graph freshness at 170 verifiers / 175 nodes / 855 edges /
 entrypoints pass. VE043-A1 is next; no owner migration is admitted from the
 broad numeric scan before exact classification.
 
-### Admitted M6-P1 S1 Routing
+### Accepted M6-P1 S1 Routing
 
 The current S1 checker passes with six modules and 1,074 selected newline bytes
 against the derived 11,066-line baseline. Read-only generic-engine preflight
@@ -1783,7 +1783,14 @@ audit and shared helper, while implementation removes the obsolete consumer row
 and S1-only root-audit assertion. The suite, registry, checker, private fixture,
 caller, manifest, and generated evidence remain unchanged at admission.
 
-Package and edge authority, all 107 declarative suites, graph freshness, both
-plan checks, and diff integrity pass. The admitted authority records add exactly
-four generated contract references while preserving 170 Bash verifiers, 175
-nodes, and 171 components; the graph now has 859 edges.
+The registered ten-check suite is now canonical. The Bash checker and its
+private expected-ID fixture are absent, and the consumer inventory/root audit no
+longer retain the obsolete S1 classification or identity assertion. The root
+audit passes with 25 derived consumers, and row 35 passes with the same
+inventory. The metadata helper remains unchanged and independently owned.
+
+Package and edge authority, all 108 declarative suites, graph freshness,
+removed paths, shell syntax, and diff integrity pass. Final evidence records
+169 Bash verifiers, 174 nodes, 852 edges, and 170 components. The bounded-wave
+mixed checkpoint is deferred to `M6-P-W1`; no routed standards source, engine,
+schema, numeric evidence, lockfile, build output, or workflow changed.

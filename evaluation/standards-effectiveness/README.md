@@ -298,13 +298,18 @@ discovery, guessed compatibility, missing evidence, and default success.
 
 ## Routed Vertical Slice
 
-`verify-s1-routing.sh` checks the first complete routed path:
+The registered `s1-routing` suite checks the first complete routed path:
 
 - S1 small local bug fix;
 - Rust language profile;
 - library application profile;
 - Core, Router, implementation, and verification workflows; and
 - explicit exclusion of unrelated standards.
+
+It validates exact path-to-module identities, selected metadata closure,
+repository-local Markdown links, a strict derived context budget, and the root
+full-library-read prohibition without executing a helper or retaining a Bash
+fallback.
 
 The selected context is compared with the frozen baseline line count.
 

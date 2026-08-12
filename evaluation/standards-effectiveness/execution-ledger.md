@@ -10657,3 +10657,34 @@ suites pass; generated evidence is fresh at 170 Bash verifiers / 175 nodes /
 references; both plan checks and diff integrity pass.
 
 **Next slice:** implement and accept M6-P1 within its frozen write set.
+
+## 2026-08-11 M6-P1 S1 Routing Acceptance
+
+**Outcome:** accepted; P1 package 2 preflight is next.
+
+The registered `s1-routing` suite has ten generic assertions covering the exact
+six path-to-ID bindings, selected metadata graph, repository-local Markdown
+links, strict one-quarter derived context budget, and root full-library-read
+prohibition. It passes before and after the legacy checker is removed.
+
+The Bash checker and private expected-ID fixture are absent. The obsolete
+README-consumer row, classification value, and S1-only identity assertion are
+removed from the retained root audit. That audit derives and passes 25 remaining
+consumers; row 35 passes with the same inventory. Package and edge authority
+prove no executable S1 edge survives while retaining the independently owned
+root audit and metadata helper.
+
+**No-fallback result:** no wrapper, fixture copy, nested invocation, Bash bridge,
+package-specific assertion, full-file snapshot, inferred module set, alternate
+baseline, duplicate root-purity check, or routed standards change remains.
+Canonical standards, helper, engine, tests, schemas, numeric evidence,
+lockfiles, build output, and workflows are unchanged.
+
+**Verification:** focused S1 suite; root audit; row 35; package and exact
+incident-edge authority; all 108 declarative suites; retired-path absence;
+shell syntax; generated evidence fresh at 169 Bash verifiers / 174 nodes / 852
+edges / 170 components; both plan checks; and diff integrity. The canonical
+mixed Bash checkpoint remains deferred to `M6-P-W1`.
+
+**Next slice:** preflight and admit the row-35 lifecycle package only after its
+unique retained evidence and every incident edge are frozen.
