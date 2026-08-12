@@ -10900,3 +10900,31 @@ fresh at 167 Bash verifiers / 172 nodes / 850 edges / 168 components; both plan
 checks and diff integrity pass.
 
 **Next slice:** implement and accept M6-P4 within its frozen write set.
+
+## 2026-08-11 VE047 Language Index Numeric-Lifecycle Re-plan Trigger
+
+**Outcome:** M6-P4 implementation stopped and was restored to clean admission
+commit `e64890d`.
+
+The seven-check Language Index suite, retained route/audit/lifecycle gates,
+package authority, and all eleven edge rows passed after the proposed transfer.
+Numeric lifecycle then rejected disappearance of one row-45 candidate while
+that checker remained live. The candidate is the exact `-eq 1` assertion that
+the consumer manifest contains the Language Index Bash checker. Its source row
+and assertion must disappear with M6-P4; retaining or syntactically disguising
+it would preserve false authority or evade verification.
+
+**Recommended recovery:** admit separately owned M6-P5, preserve row-45
+lifecycle in a dependency-free declarative suite, and atomically accept M6-P4
+and M6-P5 as the existing two-checker SCC closure. Numeric lifecycle can then
+derive every vanished candidate from two absent checker paths with one accepted
+explicit-owner package each. This avoids a generic partial-candidate exception,
+cross-owner suite, wrapper, false dependency, manual waiver, or fallback.
+
+**No-fallback result:** all implementation changes were reversed. M6-P4 remains
+admitted; registry, checkers, consumer records, package/edge states, graph,
+standards, evidence, engine, schema, baseline, lockfiles, build output, and
+workflows match `e64890d`.
+
+**Next slice:** select one VE047 recovery. No executable M6-P4 or M6-P5 change
+is authorized before the plan decision.

@@ -1926,3 +1926,18 @@ Admission verification passes the current Language Index and row-45 gates,
 package and all eleven edge rows, all 110 declarative suites, both plan checks,
 diff integrity, and fresh generated evidence at 167 Bash verifiers / 172 nodes
 / 850 edges / 168 components.
+
+### VE047 M6-P4/Row-45 Lifecycle Trigger
+
+The M6-P4 implementation probe removed one immutable numeric candidate from the
+still-live row-45 checker: its `-eq 1` assertion for the obsolete Language Index
+Bash consumer row. All focused M6-P4 behavior passed, but numeric lifecycle
+correctly rejected partial candidate disappearance under its current contract.
+The implementation diff was fully reversed to `e64890d`.
+
+The recommended recovery preserves separate canonical owners while closing the
+generated two-checker component atomically: preflight and admit M6-P5, create a
+row-45 lifecycle suite, then accept both checker retirements in one integration
+commit. Existing absent-checker plus accepted-package lifecycle authority then
+explains every candidate disappearance without a new waiver manifest or engine
+exception.

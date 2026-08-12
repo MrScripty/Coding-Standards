@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-P3 accepted; M6-P4 admitted
+**Current phase:** Milestone 6: VE047 M6-P4/row-45 lifecycle replan
 
-**Next slice:** implement and accept M6-P4 Language Index closure within its
-frozen write set.
+**Next slice:** select a VE047 recovery. M6-P4 remains admitted and no
+executable package change is authorized before that decision.
 
 **Acceptance status:** `pending`
 
@@ -4591,6 +4591,60 @@ edge rows pass; all 110 declarative suites pass; generated evidence is fresh at
 and diff integrity pass. Any additional incident edge, unrepresentable
 assertion, changed owner, required engine behavior, or failure of a retained
 gate is a re-plan trigger.
+
+##### VE047 Language Index Numeric-Lifecycle Re-plan
+
+**Status:** `Active`
+
+The M6-P4 implementation probe passed its seven-check suite, four retained
+gates, package authority, and all eleven edge rows after deleting the Language
+Index checker and transferring duplicate audit/row-45 identity assertions.
+`numeric-comparison-classification` then returned
+`ASSERT.NUMERIC_LIFECYCLE_CHECKER_STILL_LIVE` for row 45. Exact comparison with
+the immutable baseline shows one vanished candidate: the row-45 `-eq 1`
+assertion that the README-consumer manifest contains exactly one Language Index
+Bash checker row. M6-P4 must remove that obsolete row and assertion, but row 45
+remains live under the admitted package boundary.
+
+The failed implementation was fully reversed to clean admission commit
+`e64890d`. M6-P4 remains `admitted`; no suite, registry, checker, consumer,
+edge/package state, generated artifact, standards source, evidence table,
+engine, schema, numeric baseline, lockfile, build output, or workflow change
+remains.
+
+**Option 1 - Add partial live-checker candidate retirement:** extend numeric
+lifecycle with explicit per-candidate retirement authority joined to an
+accepted package or edge transfer. This can represent the immediate edit but
+creates a second lifecycle manifest and broadens mutation authority for every
+live checker. It is justified only if row 45 must remain Bash after M6-P4 and is
+not recommended while its own declarative retirement is already planned.
+
+**Option 2 - Preserve or rewrite the numeric assertion:** keep an `-eq 1`
+comparison against another row, retain the obsolete consumer identity, or
+change syntax to evade candidate collection. This would preserve false
+authority or game verification and is prohibited.
+
+**Option 3 - Admit M6-P5 and close the owner-separated SCC atomically
+(`Recommended`):** retain separate M6-P4 (`STANDARDS-ROUTER.md`) and M6-P5
+(`migration.parent-plan`) packages and suites, but integrate both checker
+retirements in one commit. M6-P5 declaratively preserves row-45 lifecycle and
+removes its nested execution. Both Bash checkers then become absent with one
+accepted explicitly owned package each, satisfying the existing derived
+numeric lifecycle without a per-candidate waiver. Shared registry, package,
+edge, generated graph, README/audit, and plan files remain serial.
+
+**Option 4 - Broaden M6-P4 to own row 45:** delete both checkers under one
+package. This crosses canonical owners, conflicts with P1-D1, and obscures
+separate diagnostics and acceptance. It is rejected.
+
+**Recommendation:** select Option 3. Before executable work, preflight and admit
+M6-P5 with exact row-45 behavior, all incident edges not already dispositioned
+by M6-P4, a bounded write set, and a joint SCC acceptance condition. Verify the
+two suites before deletion; then delete both Bash checkers, transfer obsolete
+consumer/caller identities, accept both packages and edge rows, and prove
+numeric lifecycle from absent checker plus accepted owner evidence. Do not add
+numeric exceptions, duplicate shared edge rows, false suite dependencies,
+wrappers, syntax evasions, or cross-owner suite authority.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 
