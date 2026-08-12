@@ -2594,3 +2594,22 @@ dependency. The graph now contains 148 Bash verifiers, 153 nodes, 746 edges,
 and 153 components. All protected evidence is unchanged. All 129 declarative
 suites and the complete mixed suite of 148 checkers pass. Another package
 requires a fresh audit.
+
+### Post-M6-T5 Audit And M6-T6 Admission
+
+The fresh graph contains 148 Bash verifiers, 153 nodes, 746 edges, and 153
+components. Row 32 is the smallest complete caller-free parent-owned package:
+three Persistence children, thirteen identities, and durable-mutation,
+migration-execution, plus execution-train gates. Rows 23 and 34 retain broader
+source-closure or multi-owner gate sets.
+
+The disposable six-check suite and all three live gates pass. Six exact typed
+incident edges preserve the gates independently. Two accepted M6-N2 rows
+require VE046's exact checker-to-suite evidence transition during
+implementation; their historical endpoints and semantics remain immutable.
+M6-T6 is admitted at train order 93 without an engine change, false dependency,
+wrapper, copied count, owner transfer, compatibility path, or fallback.
+Regeneration derives two reference-only package edges for 748 total;
+executable topology is unchanged.
+Package and edge authority, graph freshness, both plan checks, all 129
+declarative suites, the live checker, and all three independent gates pass.

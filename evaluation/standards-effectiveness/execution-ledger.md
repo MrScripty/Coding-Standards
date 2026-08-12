@@ -11681,3 +11681,19 @@ evidence changes exactly to the registered suite under VE046, adding no
 dependency. The graph now has 148 Bash verifiers, 153 nodes, 746 edges, and 153
 components. HTTP-adapter proof, execution train, all 129 declarative suites,
 and all 148 mixed-suite entrypoints pass. A fresh audit is next.
+
+## 2026-08-12 M6-T6 Row 32 Admission
+
+**Outcome:** admitted at train order 93.
+
+The fresh graph has 148 Bash verifiers, 153 nodes, 746 edges, and 153
+components. Row 32 is caller-free, has three Persistence-owned children, and
+its six-check disposable suite plus durable-mutation, migration-execution, and
+execution-train gates pass. Six exact typed edges keep all three gates
+independent. VE046 already authorizes the exact two-row M6-N2 checker-to-suite
+evidence transition without changing historical endpoints or adding a
+dependency. Admission regeneration derives two reference-only package edges
+and records 748 total edges without changing executable topology.
+Package and edge authority, graph freshness, both plan checks, all 129
+declarative suites, the live checker, and all three independent gates pass.
+Implementation is next.
