@@ -2313,6 +2313,13 @@ legacy-index purity from a Media-section `<img` prohibition to a source-wide
 prohibition. This prevents the migrated Accessibility index from regaining
 mechanism authority without adding a heading-range primitive or fallback.
 
+M6-R1 is accepted. The registered suite is the sole Media verifier, the Bash
+path is absent, and both Q2 historical records use exact suite evidence.
+Accessibility Name/Input remains a separately executed checker-backed gate and
+is not a suite dependency. The regenerated graph contains 156 Bash verifiers,
+161 nodes, 771 edges, and 161 components. Another package requires a fresh
+owner and incident-edge audit.
+
 ### Accepted Q-Wave Preparation Boundary
 
 Q1 through Q4 have pairwise-disjoint local suite and deleted-checker paths.

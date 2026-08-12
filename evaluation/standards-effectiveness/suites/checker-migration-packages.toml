@@ -941,6 +941,6 @@ expected = [[
   "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/accessibility-media.toml,evaluation/standards-effectiveness/verify-accessibility-media.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,evaluation/standards-effectiveness/execution-ledger.md,plans/standards-library-effectiveness-restructure-plan.md",
   "M6-Q4,VE046,VE054",
   "focused-suite,dependency-once,edge-dispositions,historical-gate-transfer,independent-gate,legacy-index-purity,graph-freshness,declarative-all,removed-paths,source-unchanged,complete-suite",
-  "admitted",
+  "accepted",
 ]
 ]

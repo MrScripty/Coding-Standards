@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement admitted `M6-R1` Accessibility Media, register and
-pass its suite, transfer historical evidence, and delete the Bash checker.
+**Next slice:** audit the fresh post-M6-R1 graph and owner evidence before
+selecting or admitting another checker-migration package.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -297,6 +297,12 @@ Accessibility Name/Input as an independent checker-backed gate; and transfers
 two Q2 historical rows to registered suite evidence. The authorized refinement
 prohibits `<img` throughout the migrated Accessibility index, preventing legacy
 mechanism authority without a section parser or compatibility path.
+
+M6-R1 is accepted. The dependency-free suite is registered, the Bash checker
+is absent, two Q2 rows use exact suite evidence, and Name/Input remains an
+independent checker-backed gate. The source-wide legacy-index refinement and
+complete mixed suite pass. The fresh graph has 156 Bash verifiers, 161 nodes,
+771 edges, and 161 components; no later package is admitted.
 
 `M6-Q0` is accepted. Q1 through Q4 local suite/checker paths are disjoint and
 may be prepared concurrently as proposal-only commits from the accepted freeze
@@ -2990,6 +2996,11 @@ all structural/routing fixtures pass.
          independently, transfer two Q2 records to suite evidence, and refine
          the migrated index to prohibit `<img` source-wide. Do not add a section
          parser, wrapper, false dependency, copied gate, or fallback.
+       - `7.4c3ve55` (`Accepted`): register the dependency-free Accessibility
+         Media suite, transfer exactly two Q2 historical records to suite
+         evidence, retain Name/Input independently, apply source-wide legacy
+         purity, and delete the Bash checker. All focused, declarative, graph,
+         plan, removal, read-only, diff, and complete mixed checks pass.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

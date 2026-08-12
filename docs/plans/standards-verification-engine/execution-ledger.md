@@ -2853,3 +2853,18 @@
 - Kept standards sources, fixtures, dispositions, lifecycle claims, retained
   gate, README, engine/schema, numeric evidence, lockfiles, outputs, and
   workflows read-only. M6-R1 implementation is next.
+
+## 2026-08-12 - M6-R1 Accessibility Media Acceptance
+
+- Registered and passed the dependency-free six-check suite before deleting
+  `verify-accessibility-media.sh`.
+- Preserved all 13 typed decisions, canonical/reference evidence, three exact
+  dispositions, accepted lifecycle evidence, and source-wide legacy purity.
+- Transferred exactly two accepted Q2 records from deleted-checker evidence to
+  `suite:accessibility-media` and retained both Name/Input edges as accepted
+  checker-backed independent gates without a registry dependency.
+- Regenerated a fresh graph of 156 Bash verifiers, 161 nodes, 771 edges, and
+  161 components. Package, edge, declarative, plan, removal, read-only, diff,
+  and complete mixed verification pass.
+- Accepted M6-R1 at train order 84. No later package is admitted; a fresh graph
+  and ownership audit is required before another selection.

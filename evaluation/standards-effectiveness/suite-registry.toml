@@ -599,3 +599,8 @@ requires = []
 id = "coding-dependency-route"
 path = "evaluation/standards-effectiveness/suites/coding-dependency-route.toml"
 requires = []
+
+[[suites]]
+id = "accessibility-media"
+path = "evaluation/standards-effectiveness/suites/accessibility-media.toml"
+requires = []

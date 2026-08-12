@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-R1 Accessibility Media
+**Current phase:** Milestone 6: post-M6-R1 fresh-graph audit
 
-**Next slice:** implement the admitted `M6-R1` package, register and pass its
-declarative suite, transfer historical evidence, then delete the Bash checker.
+**Next slice:** audit the fresh post-M6-R1 graph and owner evidence before
+selecting or admitting another checker-migration package.
 
 **Acceptance status:** `pending`
 
@@ -5578,9 +5578,9 @@ real shared dependency or ownership conflict.
 
 ##### M6-R1 Accessibility Media Package Admission
 
-**Status:** `Active`
+**Status:** `Accepted`
 
-**Package state:** `admitted` at train order 84.
+**Package state:** `accepted` at train order 84.
 
 Disposable preflight proved that one dependency-free suite with six generic
 checks preserves all thirteen typed decisions, canonical Accessibility media
@@ -5631,6 +5631,16 @@ checker pass; current graph evidence proves exactly two owner-local incident
 edges; the package projection and admitted edge rows are machine-readable.
 No permanent suite, registry, checker, source, fixture, engine, schema,
 lifecycle, numeric, lockfile, output, or workflow authority changed.
+
+**Acceptance result:** the dependency-free six-check suite is registered and
+passes; the Bash checker is absent; both Q2 historical rows now retain exact
+`suite:accessibility-media` evidence; and both Name/Input rows remain accepted
+checker-backed independent gates without a registry dependency. The authorized
+source-wide legacy-index prohibition passes. Package projection, edge
+authority, all declarative suites, generated graph freshness, plan checks,
+read-only source evidence, diff integrity, and the complete mixed suite pass.
+The fresh graph contains 156 Bash verifiers, 161 nodes, 771 edges, and 161
+components. No later package is admitted.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

@@ -11416,3 +11416,19 @@ remain checker-backed independent gates with no registry dependency. Acceptance
 must atomically transfer two Q2 historical records to `suite:accessibility-media`
 before deleting the Media checker. No permanent suite or registry entry was
 added during admission.
+
+## 2026-08-12 M6-R1 Accessibility Media Acceptance
+
+**Outcome:** accepted at train order 84.
+
+The registered dependency-free suite passes all six checks and replaces the
+deleted Bash checker. It preserves 13 typed decisions, canonical and reference
+evidence, three exact dispositions, lifecycle evidence, and the authorized
+source-wide `<img` prohibition. The two Q2 records now use exact registered
+suite evidence. Both Media-to-Name/Input records remain accepted independent
+checker-backed gates with no registry dependency.
+
+The fresh generated graph has 156 Bash verifiers, 161 nodes, 771 edges, and 161
+components. Focused, package, edge, declarative, graph, plan, removal,
+read-only-source, diff, and complete mixed verification pass. No later package
+is admitted; package selection requires a fresh audit.
