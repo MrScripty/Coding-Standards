@@ -2430,3 +2430,24 @@
   across all 170 Bash entrypoints.
 - VE043-R1, VE044, and M6-RC1 are accepted. Next slice is VE043-E1; S1 remains
   unadmitted.
+
+## 2026-08-11 - VE048 Rust Four-Checker SCC Re-plan
+
+- Confirmed the canonical worktree was clean after accepted M6-P4/P5 and
+  performed read-only P1 package 6 preflight.
+- Generated evidence places Rust adoption retirement, Rust migration-index
+  closure, Rust profile authority closure, and row-46 lifecycle in one
+  four-checker SCC. Row 46 requires all three Rust checker paths, and the Rust
+  index checker invokes both adoption and profile closure.
+- Sequential package-6 implementation would leave live callers or require a
+  prohibited wrapper; partial caller edits would also remove immutable numeric
+  candidates from still-live checkers.
+- Selected VE048 Option 1: preserve M6-P6 through M6-P9 as four separately
+  owned packages and suites, admit each without implementation, then retire and
+  accept all four Bash members atomically. The Bash cycle does not become suite
+  dependency authority.
+- No checker, suite, registry, package, edge-authority, fixture, standards
+  source, engine, schema, numeric baseline, lockfile, build output, or workflow
+  file changed. The four generated graph artifacts are regenerated atomically
+  because plan references are graph inputs; their exact diff must contain only
+  derived VE048 documentation edges. Next slice is plan-only M6-P6 admission.

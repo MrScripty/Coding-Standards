@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-P4/P5 accepted
+**Current phase:** Milestone 6: VE048 Rust closure recovery selected
 
-**Next slice:** perform read-only preflight for P1 package 6, Rust adoption-notes
-retirement, before admitting another executable package.
+**Next slice:** preflight and admit M6-P6 Rust adoption-notes retirement without
+implementation, then repeat bounded admission for M6-P7 through M6-P9 before
+the four-package atomic SCC acceptance.
 
 **Acceptance status:** `pending`
 
@@ -4725,6 +4726,74 @@ the two absent checker paths plus their accepted package owners.
 commit after both suites passed. Both Bash checkers, the cycle, and obsolete
 consumer identity are absent. Numeric lifecycle passes unchanged; no waiver,
 merged owner, false dependency, wrapper, syntax evasion, or fallback remains.
+
+##### VE048 Rust Four-Checker Lifecycle Re-plan
+
+**Status:** `Accepted`; Option 1 must be implemented through staged admissions
+and one atomic acceptance.
+
+Read-only preflight of P1 package 6 found that Rust adoption-notes retirement
+is not an independently removable leaf. The generated graph places it in one
+four-member strongly connected component with Rust migration-index closure,
+Rust profile authority closure, and row-46 lifecycle. The members invoke one
+another, row 46 requires all three checker paths to remain executable, and
+Rust index closure also invokes adoption retirement. Removing or partially
+editing only package 6 would therefore leave a dangling caller, preserve a
+checker stub, or remove immutable numeric candidates from still-live checkers.
+
+The component crosses two canonical owners but not four semantic contracts:
+
+| Package | Checker subject | Canonical owner | Declarative responsibility |
+| --- | --- | --- | --- |
+| M6-P6 | `checker:evaluation/standards-effectiveness/verify-rust-adoption-notes-retirement.sh` | `migration.parent-plan` | retired path, corpus absence, frozen historical metrics, and route absence |
+| M6-P7 | `checker:evaluation/standards-effectiveness/verify-rust-index-closure.sh` | `profiles/languages/rust/README.md` | migration-index structure, four exact dispositions, and no legacy authority |
+| M6-P8 | `checker:evaluation/standards-effectiveness/verify-rust-profile-authority-closure.sh` | `profiles/languages/rust/README.md` | canonical profile metadata, specialized routes, typed diagnostics, and no legacy authority |
+| M6-P9 | `checker:evaluation/standards-effectiveness/verify-milestone-7-row-46-decomposition.sh` | `migration.parent-plan` | row-46 execution, package, decomposition, disposition, and accepted-plan lifecycle |
+
+**Option 1 - Separate packages with atomic SCC acceptance (`Recommended` and
+selected):** preflight and admit M6-P6 through M6-P9 separately, preserving one
+checker subject, canonical owner, suite, diagnostics, exact incident-edge
+projection, and bounded write set per package. Do not implement any member
+until all four admissions pass. Then register and verify the four suites before
+deleting all four Bash checkers and accepting all package and owner-local edge
+rows in one commit. Internal historical edges point to the opposite registered
+suite as `independent-gate` evidence and create no registry dependency unless
+preflight proves a real semantic prerequisite. Existing absent-checker plus
+accepted-package lifecycle authority must explain every retired numeric
+candidate without changing the engine or immutable baseline.
+
+**Option 2 - Sequential acceptance with partial live-checker lifecycle
+authority:** introduce explicit candidate-retirement records so one member can
+be edited or deleted while other SCC members remain live. This creates mutable
+per-candidate bookkeeping and additional authorization paths despite a bounded
+component already being known. It is rejected.
+
+**Option 3 - Preserve wrappers or checker stubs:** keep executable paths that
+delegate to suites until later packages migrate. This is a compatibility
+fallback, retains dual authority, and is prohibited.
+
+**Option 4 - Merge the component into one cross-owner package or suite:** make
+one acceptance unit own all four contracts. This obscures diagnostics and
+canonical ownership and conflicts with P1-D1. It is rejected.
+
+**Selected execution sequence:** admit M6-P6, M6-P7, M6-P8, and M6-P9 in that
+order through plan-only package/edge authority updates and focused isolated
+suite probes. Admissions derive edge and numeric identities from canonical
+inventories rather than declaring aggregate counts. After all four packages
+are admitted, one serial implementation may add/register their separate
+suites, remove duplicate consumer identity, delete all four Bash paths, accept
+all four packages and their owner-local edge rows, regenerate graph evidence,
+and run focused suites, numeric lifecycle, removed-path, package/edge,
+declarative-all, graph-freshness, plan, and diff checks. The mixed Bash
+checkpoint remains the already declared `M6-P-W1` wave boundary.
+
+**No-fallback rule:** no package may own another package's semantic contract;
+no suite dependency may be inferred from the obsolete Bash cycle; no wrapper,
+stub, candidate waiver, syntax evasion, duplicate authority, hand-maintained
+aggregate count, or sequential partial implementation is permitted. A failed
+isolated suite probe, an unrepresentable assertion, a real cross-suite semantic
+dependency, a dirty authority file, or inability to close all four members in
+one accepted state is a new re-plan trigger.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

@@ -12,8 +12,9 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform read-only preflight for P1 package 6, Rust
-adoption-notes retirement. Later P1 packages stay unadmitted.
+**Next slice:** preflight and admit M6-P6 Rust adoption-notes retirement without
+implementation, then admit M6-P7 through M6-P9 before atomic Rust SCC
+acceptance.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -110,6 +111,16 @@ two-node cycle are absent. All 23 owner-local edge rows and existing numeric
 lifecycle pass, the root audit derives 23 consumers, and all 112 declarative
 suites plus fresh 165-verifier / 170-node / 824-edge / 167-component evidence
 pass. No waiver, merged owner, dependency, wrapper, or fallback was introduced.
+
+VE048 Option 1 is selected. Read-only package-6 preflight confirmed that Rust
+adoption retirement, Rust index closure, Rust profile authority closure, and
+row-46 lifecycle form one four-checker SCC across the already frozen P1-D1
+owners. M6-P6 through M6-P9 must remain separate packages and suites, be
+admitted individually without implementation, and then accept atomically in
+one serial closure commit. Exact edge and numeric identities are derived from
+canonical evidence; the obsolete Bash cycle does not authorize suite
+dependencies. No wrapper, stub, waiver, aggregate count, merged owner, or
+partial implementation is permitted.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

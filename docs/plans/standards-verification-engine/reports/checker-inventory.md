@@ -1970,3 +1970,25 @@ remaining consumers. All 112 declarative suites and fresh 165-verifier /
 170-node / 824-edge / 167-component evidence pass. Canonical standards,
 ownership/disposition/lifecycle records, numeric baseline, and engine remain
 unchanged.
+
+### VE048 Rust Four-Checker SCC Trigger
+
+P1 package 6 preflight found that Rust adoption-notes retirement is a member of
+the generated four-checker Rust closure SCC, together with Rust index closure,
+Rust profile authority closure, and row-46 lifecycle. The current executable
+graph includes reciprocal calls among these members plus independently owned
+Rust, routing, audit, and execution-train gates. Row 46 also requires all three
+Rust closure checker paths to remain executable.
+
+Sequential deletion is therefore not an owner-safe intermediate state. It
+would leave a dangling caller or require a wrapper, while partial caller edits
+would retire immutable numeric candidates from a checker that remains live.
+VE048 Option 1 keeps four packages and suites under their P1-D1 owners, admits
+them separately, and requires one atomic four-member acceptance. Exact edge
+and numeric identities are derived during each admission rather than recorded
+as aggregate totals. Internal historical edges may transfer to explicit
+registered-suite `independent-gate` evidence, but the obsolete Bash cycle does
+not establish suite dependencies.
+
+No package is admitted by this finding. M6-P6 is the next plan-only admission;
+M6-P7 through M6-P9 follow before any executable implementation.
