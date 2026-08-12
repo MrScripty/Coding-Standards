@@ -1941,3 +1941,17 @@ row-45 lifecycle suite, then accept both checker retirements in one integration
 commit. Existing absent-checker plus accepted-package lifecycle authority then
 explains every candidate disappearance without a new waiver manifest or engine
 exception.
+
+### Admitted M6-P5 Row-45 Lifecycle
+
+M6-P5 is admitted at train order 75 under `migration.parent-plan`. Its isolated
+four-check suite preserves only exact execution-train, P37 package,
+decomposition, and accepted-plan lifecycle evidence. It has no dependencies and
+does not duplicate Language Index, Router, owner, disposition, or consumer
+semantics owned by M6-P4.
+
+The package records twelve row-45 incident edges. The four cycle identities are
+also represented by M6-P4 from the Language Index endpoint, preserving explicit
+owner-local accountability. Both packages must accept atomically so numeric
+lifecycle observes two absent, explicitly owned checker subjects rather than a
+partially edited live checker.

@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE047 M6-P4/row-45 lifecycle replan
+**Current phase:** Milestone 6: VE047 Option 3 selected; M6-P4/P5 admitted
 
-**Next slice:** select a VE047 recovery. M6-P4 remains admitted and no
-executable package change is authorized before that decision.
+**Next slice:** atomically implement and accept M6-P4 and M6-P5 as the
+owner-separated Language Index SCC closure.
 
 **Acceptance status:** `pending`
 
@@ -4592,9 +4592,61 @@ and diff integrity pass. Any additional incident edge, unrepresentable
 assertion, changed owner, required engine behavior, or failure of a retained
 gate is a re-plan trigger.
 
-##### VE047 Language Index Numeric-Lifecycle Re-plan
+##### M6-P5 Row-45 Lifecycle Package Admission
 
 **Status:** `Active`
+
+**Package state:** `admitted` at train order 75.
+
+Exact owner review reduces row 45 to migration lifecycle authority: one exact
+execution-train row, one exact P37 accelerated-package row, the bounded row-45
+decomposition record, and three accepted parent-plan claims. Language Index
+content, Router metadata, owner-map/disposition outcomes, and README-consumer
+identity belong to M6-P4 and are not duplicated by M6-P5.
+
+An isolated worktree probe passed the proposed four-check suite using existing
+`table` and `text` checks. It has `requires = []` and executes no retained
+checker. No engine extension, callback, command, mutable count, inferred owner,
+or changed lifecycle input is required.
+
+Generated evidence records twelve executable incident edges: two directions
+of the Language Index cycle plus row-45 calls to Language Profile Routing, the
+execution train, root consumer audit, and root Router evidence, each represented
+as an executable reference and verifier dependency. M6-P5 owns all twelve
+historical dispositions from the row-45 endpoint. The four cycle rows also
+appear under M6-P4 from its separately owned endpoint; this is explicit
+owner-local accountability, not one merged package or duplicated suite
+behavior. During joint acceptance, cycle evidence transitions to the opposite
+registered suite while retained gates remain checker-backed independent gates.
+
+**Allowed implementation write set:** M6-P4's admitted write set plus package
+and edge manifests; package projection; suite registry;
+`suites/milestone-7-row-45-decomposition.toml`; deletion of the row-45 checker;
+verification README; all four generated checker artifacts; this plan, issue
+register, checker-inventory report, canonical evaluation ledger, and parent
+plan. Execution train, accelerated packages, decomposition record, Language
+Index, Router, owner map, dispositions, row-45 owner validation, retained gates,
+engine, schemas, numeric baseline/classification, lockfiles, build output, and
+workflows remain read-only.
+
+**Joint no-fallback rule:** M6-P4 and M6-P5 retain separate owners, suites,
+diagnostics, and package rows but share one atomic acceptance commit. Register
+and pass both suites before deleting either checker. Delete both Bash checkers,
+remove obsolete consumer/audit identity, accept both packages and all 23
+owner-local edge rows, and prove numeric lifecycle from each absent checker and
+its own accepted package. Do not add partial-candidate waivers, merge owners,
+create suite dependencies, retain wrappers, disguise numeric expressions, or
+leave either package half accepted.
+
+**Admission verification:** the isolated four-check suite, current row-45 and
+Language Index checkers, package projection, and all M6-P4/P5 edge rows pass;
+all 110 declarative suites pass; generated evidence is fresh at 167 Bash
+verifiers / 172 nodes / 850 edges / 168 components. Both plan checks and diff
+integrity pass.
+
+##### VE047 Language Index Numeric-Lifecycle Re-plan
+
+**Status:** `Accepted`; Option 3 selected for implementation.
 
 The M6-P4 implementation probe passed its seven-check suite, four retained
 gates, package authority, and all eleven edge rows after deleting the Language
@@ -4645,6 +4697,12 @@ consumer/caller identities, accept both packages and edge rows, and prove
 numeric lifecycle from absent checker plus accepted owner evidence. Do not add
 numeric exceptions, duplicate shared edge rows, false suite dependencies,
 wrappers, syntax evasions, or cross-owner suite authority.
+
+**Decision:** Option 3 is selected. M6-P5 is admitted at train order 75 after
+its four-check suite passed in isolation. M6-P4 and M6-P5 remain separate
+canonical-owner packages and must transition to accepted together in one SCC
+closure commit. Existing numeric lifecycle remains unchanged and must pass from
+the two absent checker paths plus their accepted package owners.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

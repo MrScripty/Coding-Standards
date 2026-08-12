@@ -12,8 +12,8 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** select a VE047 recovery for the M6-P4/row-45 numeric lifecycle
-trigger. M6-P4 remains admitted; later P1 packages stay unadmitted.
+**Next slice:** atomically implement and accept M6-P4 and M6-P5 as the
+owner-separated Language Index SCC closure. Later P1 packages stay unadmitted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -96,6 +96,13 @@ before atomically retiring both members of the generated two-checker component.
 Existing numeric lifecycle can then authorize each absent checker through its
 own accepted explicit-owner package, without a per-candidate waiver, syntax
 evasion, cross-owner package, wrapper, or fallback.
+
+VE047 Option 3 is selected and M6-P5 is admitted at train order 75 under
+`migration.parent-plan`. Its dependency-free four-check suite preserves row-45
+lifecycle only. M6-P4 and M6-P5 retain separate owners and suites but must
+accept atomically, deleting both Bash members of the generated component and
+letting existing numeric lifecycle derive retirement from each accepted
+explicit-owner package.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

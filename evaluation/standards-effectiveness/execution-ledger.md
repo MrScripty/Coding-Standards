@@ -10928,3 +10928,28 @@ workflows match `e64890d`.
 
 **Next slice:** select one VE047 recovery. No executable M6-P4 or M6-P5 change
 is authorized before the plan decision.
+
+## 2026-08-11 VE047 Option 3 And M6-P5 Admission
+
+**Outcome:** Option 3 selected; M6-P5 admitted at train order 75.
+
+An isolated four-check suite passes exact row-45 execution-train identity, P37
+package identity, decomposition evidence, and accepted parent-plan claims using
+existing table/text primitives with no dependencies or nested execution.
+Language Index semantics remain exclusively in M6-P4.
+
+M6-P5 records twelve exact incident edges. Four cycle rows overlap M6-P4's
+historical edge identities from the other package endpoint; each package keeps
+its own owner-local disposition. Joint acceptance must transition those rows to
+the opposite registered suite and leave the other retained gates independently
+checker-backed.
+
+**No-fallback result:** the two packages retain separate owners and suites but
+must accept in one commit. No numeric waiver, merged owner, false dependency,
+wrapper, syntax evasion, copied count, or alternate authority is admitted.
+
+**Verification:** current checkers, package and edge authority, all 110
+declarative suites, and fresh 167-verifier / 172-node / 850-edge /
+168-component graph evidence pass. Both plan checks and diff integrity pass.
+
+**Next slice:** atomically implement and accept M6-P4 and M6-P5.
