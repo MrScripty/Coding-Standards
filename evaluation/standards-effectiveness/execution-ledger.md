@@ -11809,3 +11809,28 @@ fallback. Its eight former edge rows preserve four independent gates and no
 historical evidence changes. The graph now has 143 Bash verifiers, 148 nodes,
 725 edges, and 148 components. All four independent gates, all 134 declarative
 suites, and all 143 mixed-suite entrypoints pass. A fresh audit is next.
+
+## 2026-08-12 M6-E1 Inclusion Check Re-plan
+
+**Outcome:** accepted planning authority; implementation not started.
+
+The fresh post-M6-T10 audit selects row 36 as the smallest remaining
+caller-free lifecycle package. Its probe passes six checks and fails only the
+disposition-lineage relation because row 36's bounded records are part of a
+larger source-wide canonical disposition table. Existing `ordered` and `set`
+relation modes require equality. Restricting the canonical table would copy 19
+identifiers into suite configuration and create duplicate identity authority.
+
+The accepted recovery adds a separate generic `inclusion` assertion with
+`members` and `container` evidence roles. Every unique member must occur in the
+unique container; additional container records are valid. These roles do not
+represent standards graph edges, ownership, parent/child decomposition, or
+execution order. The existing equality relation is unchanged, and no
+`left`/`right` inclusion alias, Bash mechanism, inferred filter, copied count,
+or fallback is authorized.
+
+M6-E1 owns the engine implementation, self-tests, and public verifier contract
+as an atomic slice. M6-T11 row-36 admission follows only after the capability
+passes focused, declarative, plan, and integrity verification. The complete
+contract and re-plan triggers are recorded in
+`milestone-7-inclusion-check-replan.md`.

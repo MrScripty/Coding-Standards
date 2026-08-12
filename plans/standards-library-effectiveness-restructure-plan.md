@@ -3210,6 +3210,17 @@ all structural/routing fixtures pass.
          findings evidence remains unchanged. All four independent gates, all
          134 declarative suites, and the complete mixed suite of 143 checkers
          pass. Audit fresh graph and ownership state.
+       - `7.4c3ve87` (`Accepted planning authority`): the fresh row-36 probe
+         exposes a generic representability gap: its bounded owner-validation
+         records must be contained in a larger source-wide disposition table,
+         while existing relation checks require equality. Select a strict
+         native `inclusion` check whose public evidence roles are `members` and
+         `container`. M6-E1 implements and verifies that engine contract before
+         M6-T11 admission. Do not copy row-36 identifiers into a filter, infer
+         membership, broaden `relation`, add `left`/`right` aliases, execute a
+         Bash callback, or fall back to weaker evidence. The accepted contract,
+         slices, bounded write sets, typed outcomes, and re-plan triggers are in
+         `evaluation/standards-effectiveness/milestone-7-inclusion-check-replan.md`.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.
