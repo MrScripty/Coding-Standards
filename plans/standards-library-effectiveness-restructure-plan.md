@@ -12,10 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform read-only preflight for P1 package 3, root index
-closure. Freeze unique root-index semantics, every incident edge, retained
-independent gates, duplicate-transfer obligations, and the bounded write set
-before admission. Release Procedure and later P1 packages stay unadmitted.
+**Next slice:** implement admitted M6-P3 root-index closure with one exact
+declarative suite, delete its Bash checker, and remove the obsolete root-audit
+consumer identity while retaining independent root audit and Router evidence.
+Release Procedure and later P1 packages stay unadmitted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -51,6 +51,17 @@ remain. The focused suite, package/edge authority, all 109 declarative suites,
 retired-path proof, fresh 168-verifier / 173-node / 850-edge / 169-component
 evidence, both plan checks, and diff integrity pass. Lifecycle inputs, callers,
 retained gates, standards, and engine remain unchanged; `M6-P-W1` is deferred.
+
+M6-P3 is admitted at train order 73 under `STANDARDS-ROUTER.md`. Existing
+generic Markdown-structure, Markdown-link, table, and text checks preserve the
+exact root-index surface, six resources, root purity, and six dispositions.
+Five incident edges are frozen as independent gates. Implementation must remove
+the root checker's nested audit/Router execution and the root audit's obsolete
+root-closure consumer identity, while retaining both gates and their remaining
+authority. Admission passes the current checker, package/edge authority, all
+109 declarative suites, fresh 168-verifier / 173-node / 852-edge /
+169-component evidence, and diff integrity. Root standards and evidence remain
+unchanged.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

@@ -1831,3 +1831,22 @@ components. Both plan checks and diff integrity pass. Lifecycle inputs,
 callers, retained gates, standards, engine, schemas, numeric evidence,
 lockfiles, build output, and workflows are unchanged. The mixed checkpoint is
 deferred to `M6-P-W1`.
+
+### Admitted M6-P3 Root Index Closure
+
+The root-index checker owns exact README structure and line ceiling, six
+resource roles and live links, explicit root entrypoint/routing/resource/license
+statements, legacy-root purity prohibitions, and six exact dispositions. All
+behavior is representable with existing generic checks; the root README,
+resource fixture, dispositions, Router evidence, and engine remain read-only.
+
+Generated evidence records five executable incident edges. Four outbound edge
+identities retain the root audit and root Router checker as independent gates.
+The inbound audit identity is a duplicate lifecycle assertion to remove with
+the obsolete `root-closure-verifier` consumer row, following the accepted S1
+transfer without changing the audit's remaining owner contract.
+
+The current root-index checker and retained gates, package and all five edge
+rows, all 109 declarative suites, graph freshness, and diff integrity pass.
+Admission preserves 168 Bash verifiers, 173 nodes, and 169 components; two new
+contract references bring the graph to 852 edges.

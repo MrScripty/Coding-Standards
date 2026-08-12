@@ -10755,3 +10755,32 @@ checks and diff integrity pass. The mixed Bash checkpoint remains deferred to
 
 **Next slice:** perform read-only preflight for P1 package 3, root index
 closure, before admitting any executable or package change.
+
+## 2026-08-11 M6-P3 Root Index Closure Admission
+
+**Outcome:** admitted at train order 73; implementation is active.
+
+Read-only preflight freezes exact root README heading order and line ceiling,
+six resource identities/targets/roles and live links, required entrypoint and
+routing statements, legacy-root purity prohibitions, and six dispositions.
+Existing generic Markdown-structure, Markdown-link, table, and text checks
+preserve the complete contract without an engine change or snapshot.
+
+Five executable incident edges are exact. Four outbound reference/dependency
+edges retain the root audit and root Router evidence as independent gates. The
+inbound root-audit reference is an obsolete Bash consumer identity that must be
+removed with its `root-closure-verifier` manifest row while the audit's
+remaining authority stays independent.
+
+**No-fallback result:** admission changes only package/edge authority,
+generated graph evidence, and serial plan records. No suite, registry, checker,
+consumer row, fixture, disposition, root standard, retained gate, engine,
+schema, numeric evidence, lockfile, build output, or workflow changes.
+
+**Verification:** current root-index, root Router, and root audit checks pass;
+package projection and all five exact incident-edge rows pass; all 109
+declarative suites pass; generated evidence is fresh at 168 Bash verifiers /
+173 nodes / 852 edges / 169 components and adds only two contract references;
+diff integrity passes.
+
+**Next slice:** implement and accept M6-P3 within its frozen write set.

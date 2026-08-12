@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: accepted M6-P2 row-35 lifecycle replacement
+**Current phase:** Milestone 6: admitted M6-P3 root-index closure replacement
 
-**Next slice:** perform read-only preflight for P1 package 3, root index
-closure. Freeze its unique semantics, exact incident edges, retained independent
-gates, duplicate-transfer obligations, and bounded write set before admission.
+**Next slice:** implement admitted M6-P3 with one exact root-index suite, remove
+the Bash checker, remove its obsolete root-consumer classification and audit
+identity assertion, and retain the root audit and Router evidence independently.
 
 **Acceptance status:** `pending`
 
@@ -4463,6 +4463,62 @@ Bash checkpoint remains deferred to `M6-P-W1`.
 replace absent-path evidence with table absence, freeze whole files for
 convenience, infer invocation from graph edge type, or retain a custom or Bash
 implementation beside the generic checks.
+
+##### M6-P3 Root Index Closure Package Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 73.
+
+Exact review freezes the root index's unique contract: the four ordered README
+headings and 32-line ceiling; six exact resource/target/role rows and live
+repository-local links; explicit entrypoint, routing-diagnostic, resource, and
+license statements; exact prohibited legacy catalog, template, customization,
+license-paraphrase, and closure text; and exact dispositions for `STD-0001`
+through `STD-0006`. Resource and disposition totals are finite membership
+decisions, not separately copied expected counts.
+
+The suite can express this contract with existing `markdown_structure`,
+`markdown_links`, `table`, and newline-bounded `text` checks. It requires no
+engine extension, command, regex, callback, whole-file snapshot, inferred
+default, or changed standards source. `README.md`, the resource fixture, and
+consolidation dispositions remain read-only evidence.
+
+The checker has five executable incident edges. Its two calls to the root
+README audit and root Router evidence, plus their two verifier-dependency edges,
+are retained `independent-gate` relationships. The inbound root-audit identity
+assertion follows the accepted M6-P1 transfer: remove the obsolete
+`root-closure-verifier` manifest row and exact Bash identity assertion while the
+audit remains independently owned. Do not turn either retained gate into a
+suite dependency or duplicate its remaining semantics.
+
+**Allowed implementation write set:** package and edge manifests; package
+projection; suite registry; `suites/root-index-closure.toml`; the deleted root
+index checker; verification README; README-consumer manifest; root README audit
+checker; all four generated checker artifacts; this plan; checker-inventory
+report; canonical evaluation ledger; and parent plan. Root README, Router,
+resource fixture, dispositions, retained Router evidence checker, all other
+checkers/suites/fixtures, engine code/tests, schemas, numeric evidence,
+lockfiles, build output, and workflows remain read-only.
+
+**No-fallback rule:** register and pass the exact suite before deleting the
+checker. Do not retain a wrapper, nested execution, obsolete consumer identity,
+duplicate root-purity assertion, alternate route evidence, Bash-to-Python
+bridge, copied mutable count, or weaker substring approximation. Any additional
+incident edge, unmatched root-index assertion, changed canonical owner, or
+required engine behavior is a re-plan trigger.
+
+**Acceptance gate:** focused root-index suite; retained root audit; package and
+all five exact incident-edge rows; all declarative suites; removed checker and
+consumer-row proof; README route; graph freshness; both plan checks; exact
+read-only source/fixture/disposition/gate/engine evidence; diff integrity; and
+the deferred `M6-P-W1` mixed checkpoint.
+
+**Admission verification:** the current root-index checker and its retained
+Router/audit gates pass; package projection and all five exact incident-edge
+rows pass; all 109 declarative suites pass; generated evidence is fresh at 168
+Bash verifiers / 173 nodes / 852 edges / 169 components and adds only two
+contract references; diff integrity passes.
 
 **Tasks:**
 

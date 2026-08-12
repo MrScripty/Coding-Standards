@@ -810,5 +810,16 @@ expected = [[
   "M6-P1,VE030,VE037,VE043,VE045",
   "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,dynamic-caller-transfer,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-P-W1",
   "accepted",
+], [
+  "73",
+  "M6-P3",
+  "checker:evaluation/standards-effectiveness/verify-root-index-closure.sh",
+  "STANDARDS-ROUTER.md",
+  "consolidation",
+  "root-index-closure-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/root-index-closure.toml,evaluation/standards-effectiveness/verify-root-index-closure.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv,evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,evaluation/standards-effectiveness/execution-ledger.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-P2,VE030,VE037,VE043,VE045",
+  "focused-suite,dependency-once,edge-dispositions,lifecycle-transfer,duplicate-transfer,graph-freshness,declarative-all,removed-paths,readme-route,source-unchanged,wave-checkpoint-deferred:M6-P-W1",
+  "admitted",
 ]
 ]
