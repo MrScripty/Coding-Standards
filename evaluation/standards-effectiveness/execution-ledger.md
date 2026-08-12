@@ -10784,3 +10784,34 @@ declarative suites pass; generated evidence is fresh at 168 Bash verifiers /
 diff integrity passes.
 
 **Next slice:** implement and accept M6-P3 within its frozen write set.
+
+## 2026-08-11 VE046 Independent-Gate Evidence Re-plan Trigger
+
+**Outcome:** M6-P3 implementation stopped and was restored to clean admission
+commit `62c5c4b`.
+
+The proposed five-check root-index suite passed, and the retained root audit
+passed with 24 derived consumers after exact duplicate-identity transfer.
+Package acceptance then failed with `INPUT.UNAVAILABLE`: two accepted M6-P2
+historical `independent-gate` rows require the root-index Bash checker path to
+exist. The checker must be deleted by M6-P3, but the edge contract cannot name
+its registered suite replacement without falsely adding `suite-requires`.
+
+**No-fallback result:** no failed suite, checker deletion, consumer transfer,
+registry change, package/edge state transition, generated artifact, standard,
+fixture, disposition, retained gate, engine change, lockfile, build output, or
+workflow remains in the worktree. Do not waive evidence existence, preserve a
+wrapper, retain the Bash path, invent a suite dependency, or use package-only
+lineage as current gate proof.
+
+**Recommended option:** keep the `independent-gate` semantic disposition and
+add an explicit tagged union for live `checker:<path>` or migrated
+`suite:<registered-id>` evidence. Validate registered suite identity without a
+registry dependency and add focused transition/negative regressions. Treat this
+as a shared edge-contract change with full checkpoint verification before
+M6-P3 resumes.
+
+**Verification:** clean admission boundary; `git status --short` empty.
+
+**Next slice:** select one VE046 option. No M6-P3 implementation file is
+authorized before the shared edge contract is accepted.

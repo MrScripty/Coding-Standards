@@ -12,10 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement admitted M6-P3 root-index closure with one exact
-declarative suite, delete its Bash checker, and remove the obsolete root-audit
-consumer identity while retaining independent root audit and Router evidence.
-Release Procedure and later P1 packages stay unadmitted.
+**Next slice:** select the VE046 shared edge-evidence recovery before resuming
+admitted M6-P3. The recommended design keeps `independent-gate` and accepts an
+explicit live-checker or registered-suite evidence tag without creating a suite
+dependency. Release Procedure and later P1 packages stay unadmitted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -62,6 +62,14 @@ authority. Admission passes the current checker, package/edge authority, all
 109 declarative suites, fresh 168-verifier / 173-node / 852-edge /
 169-component evidence, and diff integrity. Root standards and evidence remain
 unchanged.
+
+VE046 blocks M6-P3 implementation at its clean admission boundary. Deleting the
+root-index checker invalidates two accepted M6-P2 `independent-gate` evidence
+paths, while `suite-requires` would invent a dependency between independently
+owned lifecycle and root-index suites. The recommended shared-contract recovery
+permits a strictly tagged registered-suite representation for the same
+independent-gate disposition, with focused negative coverage and a complete
+shared checkpoint before M6-P3 resumes.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

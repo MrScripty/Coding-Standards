@@ -1850,3 +1850,18 @@ The current root-index checker and retained gates, package and all five edge
 rows, all 109 declarative suites, graph freshness, and diff integrity pass.
 Admission preserves 168 Bash verifiers, 173 nodes, and 169 components; two new
 contract references bring the graph to 852 edges.
+
+### VE046 Independent-Gate Evidence Trigger
+
+An implementation probe passed the five-check root-index suite and retained
+root audit at 24 derived consumers, then failed exact edge authority. Two
+accepted M6-P2 rows still require the root-index Bash checker as
+`independent-gate` evidence. The current contract has no suite-backed form for
+the same independent gate and using `suite-requires` would create false
+execution semantics.
+
+The implementation diff was fully reversed to clean commit `62c5c4b`. The
+recommended recovery is one explicit checker-or-registered-suite tagged union
+under `independent-gate`, with no inferred dependency or fallback. M6-P3 remains
+admitted but unimplemented until the shared contract and checkpoint are
+accepted.

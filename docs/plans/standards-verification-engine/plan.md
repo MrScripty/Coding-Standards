@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: admitted M6-P3 root-index closure replacement
+**Current phase:** Milestone 6: M6-P3 blocked by VE046 edge-evidence lifecycle
 
-**Next slice:** implement admitted M6-P3 with one exact root-index suite, remove
-the Bash checker, remove its obsolete root-consumer classification and audit
-identity assertion, and retain the root audit and Router evidence independently.
+**Next slice:** select and implement a VE046 shared edge-contract recovery that
+can represent an independently owned gate after its Bash checker migrates to a
+registered suite, without inventing suite execution dependencies.
 
 **Acceptance status:** `pending`
 
@@ -4519,6 +4519,56 @@ Router/audit gates pass; package projection and all five exact incident-edge
 rows pass; all 109 declarative suites pass; generated evidence is fresh at 168
 Bash verifiers / 173 nodes / 852 edges / 169 components and adds only two
 contract references; diff integrity passes.
+
+##### VE046 Independent-Gate Evidence Lifecycle Re-plan
+
+**Status:** `Active`; M6-P3 implementation is restored to its clean admission
+boundary and must not resume until one option is selected and accepted.
+
+The focused root-index suite and transferred root audit both passed during the
+aborted implementation, but exact edge authority returned
+`INPUT.UNAVAILABLE`. Two accepted M6-P2 historical `independent-gate` rows name
+`verify-root-index-closure.sh` as their retained checker evidence. M6-P3 must
+delete that checker, yet the current edge contract accepts only
+`checker:<path>` evidence for an independent gate. It cannot name the canonical
+replacement suite without falsely declaring `suite-requires`.
+
+**Option 1 - Tagged independent-gate evidence (`Recommended`):** retain the
+single semantic disposition `independent-gate`, but permit exactly two explicit
+replacement variants: `checker:<contained-path>` for a live Bash gate and
+`suite:<registered-id>` for a migrated declarative gate. Validate checker
+evidence exactly as today; validate suite identity and registered suite path
+without requiring or synthesizing a registry dependency. Add focused accepted-
+history transition, missing suite, malformed tag, and false-dependency
+regressions. This models the same independent gate across representations with
+no compatibility bridge or inferred default.
+
+**Option 2 - New `independent-suite` disposition:** add a separate disposition
+with `suite:<registered-id>` evidence. This is explicit, but duplicates the
+independent-gate concept and forces disposition churn whenever a gate changes
+implementation. Choose it only if checker-backed and suite-backed independent
+gates later acquire different scheduling semantics; current evidence shows no
+such distinction.
+
+**Option 3 - Convert the M6-P2 rows to `suite-requires`:** register a dependency
+from the row-35 lifecycle suite to root-index closure. This would satisfy the
+current schema but invent runtime ordering and semantic dependence that exact
+review rejected. It is a no-fallback violation and is not recommended.
+
+**Option 4 - Point historical evidence at M6-P3 or waive evidence existence:**
+record only package lineage or allow the deleted checker path to remain as
+nominal evidence. Neither proves the current independent gate is registered
+and executable; both weaken acceptance and are rejected.
+
+**Recommendation:** select Option 1 in a shared-contract slice before resuming
+M6-P3. The slice may change only edge-disposition engine code/tests and docs,
+the active/parent plans, issue register, checker report, and canonical ledger.
+Run focused engine regressions, all engine tests and declarative suites, graph
+freshness, plan/diff checks, and the mixed Bash checkpoint because edge
+interpretation is shared. Do not edit M6-P2 rows or M6-P3 implementation files
+until the capability is accepted. M6-P3 acceptance may then atomically convert
+the two affected M6-P2 historical rows to explicit suite evidence while
+accepting its own five rows.
 
 **Tasks:**
 
