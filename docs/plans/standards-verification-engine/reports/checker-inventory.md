@@ -2255,6 +2255,11 @@ retains semantic exclusions only. A one-time exception preserves the risk; a
 historical all-package refactor is disproportionate to this active package.
 The prepared Q4 proposal remains unapplied to canonical state.
 
+Option 1 is selected. The exact checked `M6-Q4` package row now supplies the
+only file-level scope; Q4 prose supplies semantic exclusions without copying
+the path list. This planning-only recovery adds no generator, exception, or
+implementation change. Fresh-base Q4 integration is authorized next.
+
 ### Accepted Q-Wave Preparation Boundary
 
 Q1 through Q4 have pairwise-disjoint local suite and deleted-checker paths.

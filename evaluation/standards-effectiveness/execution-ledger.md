@@ -11321,3 +11321,19 @@ manifest row and retain semantic exclusions. A one-time exception and broad
 historical conversion remain alternatives. No proposal, suite, checker,
 registry, package/edge state, graph, source, fixture, engine, schema,
 lifecycle, numeric, lockfile, build-output, or workflow implementation changed.
+
+## 2026-08-11 VE053 Q4 Manifest-Derived Scope Recovery
+
+**Outcome:** Option 1 accepted; Q4 implementation authority is consistent.
+
+The copied Q4 file enumeration is removed from plan prose. The exact `M6-Q4`
+manifest row, checked against its registered package projection, is now the
+sole file-level write-set authority. Plan prose retains semantic exclusions so
+the package cannot use authorized integration files to alter canonical
+standards, fixtures, retained-gate behavior, engine/schema contracts,
+lifecycle/numeric evidence, lockfiles, build output, or workflows indirectly.
+
+No generated prose, exception, second scope representation, suite, checker,
+registry, package/edge state, graph, source, fixture, engine, schema,
+lifecycle, numeric, lockfile, build-output, or workflow implementation changed.
+Fresh-base Q4 reconstruction and atomic integration are next.

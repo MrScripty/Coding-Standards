@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** select and record the VE053 Q4 scope-authority recovery before
-Coding Dependencies Route integration resumes.
+**Next slice:** reconstruct and integrate M6-Q4 Coding Dependencies Route under
+the canonical package-manifest scope authority.
 
 **Acceptance status:** `pending`
 
@@ -5096,7 +5096,7 @@ admission gates are frozen only after isolated suite probes.
 
 ##### M6-Q1 Rust Tooling Criterion Package Admission
 
-**Status:** `Blocked`; implementation is unavailable pending VE053.
+**Status:** `Active`; implementation is authorized after VE053.
 
 **Package state:** `accepted` at train order 80.
 
@@ -5409,14 +5409,13 @@ disposition, or lifecycle result. All four rows therefore use
 `independent-gate` with exact retained checker evidence. Q4 declares no
 registry dependency and copies neither callee's behavior.
 
-**Allowed implementation write set:** package and edge manifests; package
-projection; suite registry; `suites/coding-dependency-route.toml`; the deleted
-`verify-coding-dependency-route.sh`; all four generated checker artifacts; this
-plan; child ledger; issues; checker-inventory report; canonical evaluation
-ledger; and parent plan. `CODING-STANDARDS.md`, consolidation dispositions,
-parent-plan lifecycle claims, Dependencies Owner and row-15 checkers/evidence,
-all other suites/checkers, verification README, engine code/tests, schemas,
-numeric evidence, lockfiles, build output, and workflows remain read-only.
+**Allowed implementation write set:** the exact `M6-Q4` row in
+`checker-migration-packages.tsv`, verified by the registered
+`checker-migration-packages` projection suite, is the sole file-level scope
+authority. Canonical standards, consolidation dispositions, parent-plan
+lifecycle claims, retained Dependencies Owner and row-15 gate behavior, all
+unlisted suites/checkers, fixtures, engine code/tests, schemas, numeric
+evidence, lockfiles, build output, and workflows remain semantically excluded.
 
 **No-fallback rule:** register and pass the three-check suite before deleting
 the Bash checker. Do not retain a wrapper or Bash bridge, copy either retained
@@ -5442,7 +5441,7 @@ engine, schema, numeric evidence, lockfile, build output, or workflow changed.
 
 ##### VE053 Q4 Scope Authority Consistency Re-plan
 
-**Status:** `Active`; Q4 shared integration has not started.
+**Status:** `Accepted`; Option 1 selected and Q4 integration is authorized.
 
 Post-Q3 review found that Q4's active package section still copies its exact
 file-level write set into prose. It currently matches the canonical package
@@ -5472,6 +5471,12 @@ cleanup with large review cost and no additional Q4 semantic evidence.
 Silently treating Q4 as exempt, changing its manifest scope without admission,
 editing outside the checked row, or introducing generated/copy authority is
 invalid. Selection must be recorded before Q4 implementation resumes.
+
+**Selected recovery:** Option 1. Q4's copied file enumeration is removed. The
+checked `M6-Q4` package row is the sole exact write-set authority, while this
+plan retains only semantic exclusions that constrain how authorized files may
+change. No generator, exception, or second scope projection is added. Q4 may
+resume only after the package projection passes against the current manifest.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

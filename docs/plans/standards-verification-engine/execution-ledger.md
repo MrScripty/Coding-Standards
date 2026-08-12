@@ -2762,3 +2762,17 @@
 - Recommended converting only active Q4 prose to the unchanged manifest row
   plus semantic exclusions before integration. A one-time exception and broad
   historical cleanup remain bounded alternatives.
+
+## 2026-08-11 - VE053 Q4 Manifest-Derived Scope Recovery
+
+- Selected Option 1 and removed Q4's copied file-level write-set enumeration.
+- The exact `M6-Q4` package row, checked by the registered package-projection
+  suite, is now the sole file-level implementation authority.
+- Retained semantic exclusions in plan prose so authorized files cannot alter
+  canonical standards, fixtures, retained gates, engine/schema,
+  lifecycle/numeric evidence, lockfiles, outputs, or workflows indirectly.
+- Added no generator, exception, compatibility representation, or second scope
+  projection. No suite, checker, registry, package/edge state, graph, source,
+  fixture, engine, schema, lifecycle, numeric, lockfile, build-output, or
+  workflow implementation changed.
+- Next is fresh-base Q4 reconstruction and atomic integration.

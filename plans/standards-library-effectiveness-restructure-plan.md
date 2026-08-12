@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
-**Next slice:** select and record the delegated VE053 Q4 scope-authority
-recovery before Coding Dependencies Route integration resumes.
+**Next slice:** reconstruct and integrate M6-Q4 Coding Dependencies Route under
+the canonical package-manifest scope authority.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -248,12 +248,12 @@ claims. The README names the suite, while Architecture Owner and row-15 remain
 independent checker-backed gates with no registry dependency. Canonical
 standards and evidence remain unchanged; Q4 serial integration is next.
 
-VE053 blocks Q4 implementation. Q4's active child-plan section still copies
-its exact file list, while VE052 established the checked package manifest as
-the sole file-level scope authority for adjacent Q3. The copies currently
-agree, but the recommended recovery converts only Q4 prose to its unchanged
-manifest row plus semantic exclusions before integration. A silent one-time
-exception, manifest broadening, or broad historical cleanup is not authorized.
+VE053 Option 1 is accepted. Q4's checked package row is the sole exact
+file-level scope authority; child-plan prose retains semantic exclusions
+without copying the path list. No generator, exception, or second scope
+projection was added. Q4 implementation may resume after package-projection
+verification; restoring a copied list, broadening manifest scope, or broad
+historical cleanup is prohibited.
 
 `M6-Q4` is admitted at train order 83. A disposable dependency-free three-check
 suite exactly matches the Coding dependency route, exact disposition, and two
