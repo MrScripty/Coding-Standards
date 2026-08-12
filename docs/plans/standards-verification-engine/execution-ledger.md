@@ -2691,3 +2691,14 @@
   registration, README projection, checker deletion, and removed-path proof are
   one atomic owner-coherent acceptance. Separate prerequisite and wave deferral
   remain bounded alternatives.
+
+## 2026-08-11 - VE051 Q3 README Authority Recovery
+
+- Selected Option 1 and re-admitted Q3 without changing implementation.
+- Added the standards-effectiveness README to Q3's exact write set and added
+  `readme-route` to its verification contract.
+- Added accepted VE051 authority to Q3's prerequisite record; suite, checker,
+  registry, edge, README content, source, fixture, engine, schema, lifecycle,
+  numeric, lockfile, build-output, and workflow state remain unchanged.
+- Next is fresh-base Q3 reconstruction and one atomic suite registration,
+  README projection update, checker deletion, and shared acceptance.

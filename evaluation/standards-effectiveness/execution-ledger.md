@@ -11237,3 +11237,18 @@ A serial README prerequisite is justified only by real concurrent ownership;
 otherwise Q3/Q4 deferral is the safe alternative. Wrappers, aliases, stale
 documentation, out-of-scope edits, skipped order, and weaker proof remain
 prohibited.
+
+## 2026-08-11 VE051 Q3 README Authority Recovery
+
+**Outcome:** Option 1 accepted; Q3 re-admitted for atomic implementation.
+
+Q3's exact write set now includes the standards-effectiveness README, its
+prerequisites include accepted VE051 authority, and its verification contract
+requires `readme-route`. This permits one serial acceptance to register and
+pass `architecture-population`, replace the obsolete README entrypoint
+projection, delete the Bash checker, and prove removed-path closure without a
+stale or dual-authority interval.
+
+No suite, checker, registry, executable edge, README content, standards source,
+fixture, engine, schema, lifecycle, numeric, lockfile, build-output, or workflow
+implementation changed. Fresh-base Q3 reconstruction and integration are next.

@@ -2195,6 +2195,12 @@ Architecture and migration evidence. A separate README prerequisite is valid
 only for actual concurrent ownership; otherwise defer Q3 and Q4. No wrapper,
 alias, stale reference, skipped order, or weakened removed-path proof is valid.
 
+Option 1 is selected. Q3's package manifest and exact projection now include
+the README, accepted VE051 authority, and `readme-route`. This planning-only
+re-admission changes no suite, checker, registry, executable edge, README
+content, source, fixture, engine, schema, or lifecycle evidence. Fresh-base Q3
+integration is next.
+
 ### Admitted M6-Q4 Coding Dependencies Route
 
 A disposable dependency-free three-check suite matches the Coding dependency

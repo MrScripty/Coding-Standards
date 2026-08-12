@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** select and record the VE051 Q3 README-authority recovery before
-resuming Architecture Population integration.
+**Next slice:** reconstruct and integrate re-admitted M6-Q3 Architecture
+Population with its README projection in one atomic acceptance.
 
 **Acceptance status:** `pending`
 
@@ -5281,7 +5281,8 @@ schema, numeric evidence, lockfile, build output, or workflow changed.
 
 ##### VE051 Q3 README Authority Re-plan
 
-**Status:** `Active`; Q3 shared integration has not started.
+**Status:** `Accepted`; Option 1 selected and Q3 shared integration has not
+started.
 
 Fresh-base proposal reconstruction found a shared consumer omitted from Q3's
 admitted write set. The standards-effectiveness README names the current Bash
@@ -5320,6 +5321,14 @@ removed-path verification, or treating the stale reference as non-authoritative
 noise are not valid options. Selection must update package manifest and
 projection, plan/ledger/report authority, exact write set, and verification
 contract before Q3 implementation resumes.
+
+**Selected recovery:** Option 1. Q3 is re-admitted with the README in its exact
+write set, `VE051` in its prerequisite authority, and `readme-route` in its
+verification contract. The implementation must register and pass
+`architecture-population`, replace only the obsolete README entrypoint
+projection, delete the Bash checker, and prove both the suite route and removed
+path in one atomic acceptance. No implementation file changed during
+re-admission.
 
 ##### M6-Q4 Coding Dependencies Route Package Admission
 
