@@ -579,3 +579,8 @@ requires = []
 id = "milestone-7-row-46-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-46-decomposition.toml"
 requires = []
+
+[[suites]]
+id = "rust-tooling-criterion"
+path = "evaluation/standards-effectiveness/suites/rust-tooling-criterion.toml"
+requires = []

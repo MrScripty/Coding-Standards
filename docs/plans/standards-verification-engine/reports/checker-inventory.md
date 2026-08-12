@@ -2112,6 +2112,16 @@ M6-P8/P9 independent-gate evidence values from the checker path to the exact
 suite ID without adding a dependency. Canonical sources, fixture, disposition,
 engine, schemas, and retained gates remain read-only. Q2 preflight is next.
 
+### Accepted M6-Q1 Rust Tooling Criterion
+
+The dependency-free five-check suite is registered and the Bash checker is
+absent. All sixteen typed decisions, profile/reference/former-source boundaries,
+and exact `STD-0834` disposition pass. Four accepted M6-P8/P9 historical edges
+retain their deleted-checker endpoints for lineage while using
+`suite:rust-tooling-criterion` and the exact registered TOML as evidence. This
+does not add a suite dependency. Shared authority, graph evidence, plans, and
+ledgers are reconciled serially; Q2 remains next.
+
 ### VE050 Q2 Heading-Policy Gap
 
 Q2's unique contract is otherwise expressible, and Accessibility Media remains

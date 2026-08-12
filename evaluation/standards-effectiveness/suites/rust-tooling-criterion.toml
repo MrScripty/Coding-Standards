@@ -1,0 +1,67 @@
+schema_version = 1
+id = "rust-tooling-criterion"
+owner = "profile.language.rust.tooling"
+description = "Criterion benchmark adapter selection after accepted performance evidence."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/tooling-criterion-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+performance = ["accepted", "contradictory", "missing"]
+tool = ["criterion", "missing"]
+evidence = ["accepted", "missing"]
+capability = ["supported", "unsupported"]
+fallback = ["benches-directory", "budget-trigger", "ci-noise", "criterion", "dependency-version", "harness-setting", "hot-path", "input-default", "none", "pr-claim", "throughput-default"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "performance", op = "eq", value = "contradictory" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "performance", op = "eq", value = "missing" }, { field = "tool", op = "eq", value = "missing" }, { field = "evidence", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "capability", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/languages/rust/tooling.md"
+required = ["## Criterion Benchmark Adapter Mechanisms", "After Performance accepts the claim", "Tooling selects Criterion", "cannot select Criterion"]
+prohibited = []
+
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/rust-tooling.md"
+required = ["## Criterion Benchmark Examples", "criterion = { version = \"0.5\"", "does not select Criterion"]
+prohibited = []
+
+[[checks]]
+id = "former-source"
+type = "text"
+path = "languages/rust/RUST-TOOLING-STANDARDS.md"
+required = []
+prohibited = ["Criterion is required for Rust performance claims"]
+
+[[checks]]
+id = "disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "target", "disposition"]
+order = "source"
+expected = [["STD-0834", "profiles/languages/rust/tooling.md", "split"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0834"

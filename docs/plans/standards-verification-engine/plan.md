@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** prepare the four admitted Q suites and checker deletions in
-isolated proposal worktrees, then begin serial integration with M6-Q1.
+**Next slice:** revalidate and serially integrate the prepared M6-Q2
+Accessibility Evidence Closure proposal.
 
 **Acceptance status:** `pending`
 
@@ -4534,7 +4534,7 @@ mixed Bash checkpoint remains deferred to `M6-P-W1`.
 
 ##### M6-P4 Language Index Closure Package Admission
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 **Package state:** `accepted` at train order 74.
 
@@ -5098,7 +5098,7 @@ admission gates are frozen only after isolated suite probes.
 
 **Status:** `Active`
 
-**Package state:** `admitted` at train order 80.
+**Package state:** `accepted` at train order 80.
 
 An isolated dependency-free suite proves the complete Criterion contract with
 existing generic assertions. One `decision` check reproduces all sixteen
@@ -5147,6 +5147,15 @@ projection, edge-free contract, all 116 registered declarative suites, fresh
 diff integrity pass. No suite, registry entry, edge row, checker, fixture,
 standards source, engine, schema, numeric evidence, lockfile, build output, or
 workflow authority changed.
+
+**Acceptance evidence:** the dependency-free five-check suite is registered
+and passes all sixteen decisions, source boundaries, and exact `STD-0834`
+disposition. The Bash checker is absent. Four accepted M6-P8/P9 historical
+independent-gate rows retain immutable checker lineage while naming
+`suite:rust-tooling-criterion` and its exact suite path as evidence; no registry
+dependency was added. Package/edge authority, all declarative suites, graph
+freshness, both plan checks, removed-path and read-only-source proof, and diff
+integrity pass. The mixed checkpoint remains deferred to `M6-Q-W1`.
 
 ##### M6-Q2 Accessibility Evidence Closure Package Admission
 

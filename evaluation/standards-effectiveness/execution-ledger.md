@@ -11184,3 +11184,20 @@ checks. One mixed checkpoint follows Q4. Stale, overlapping, semantically
 changed, or capability-blocked proposals trigger re-planning; no merge guess,
 wrapper, Bash bridge, alias, dual authority, or compatibility fallback is
 permitted.
+
+## 2026-08-11 M6-Q1 Rust Tooling Criterion Acceptance
+
+**Outcome:** accepted at train order 80.
+
+The prepared dependency-free five-check suite was revalidated from the
+accepted freeze revision, registered, and passed before the Bash checker was
+deleted. It preserves all sixteen typed Criterion decisions, canonical profile
+and reference evidence, former-source prohibition, and exact `STD-0834`
+disposition using generic checks only.
+
+Exactly four accepted M6-P8/P9 historical independent-gate rows retain their
+checker endpoints as immutable lineage while changing evidence to
+`suite:rust-tooling-criterion` and its exact registered suite path. The suite
+has no dependency. No wrapper, bridge, alias, copied count, compatibility
+representation, package-specific branch, or fallback remains. The mixed Q
+checkpoint is deferred until Q4; Q2 serial integration is next.

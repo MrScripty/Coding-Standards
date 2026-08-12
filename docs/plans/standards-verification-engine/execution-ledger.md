@@ -2647,3 +2647,18 @@
   checkpoint after Q4. No wrapper, bridge, alias, dual authority, copied gate,
   inferred dependency, compatibility representation, or fallback is allowed.
 - Next is concurrent local preparation followed by M6-Q1 integration.
+
+## 2026-08-11 - M6-Q1 Rust Tooling Criterion Acceptance
+
+- Revalidated proposal `a1a6b2f` against the accepted Q-wave freeze and
+  integrated only its suite addition and checker deletion before shared edits.
+- Registered the dependency-free five-check Criterion suite and accepted Q1 at
+  train order 80 after all sixteen decisions, three source boundaries, and the
+  exact `STD-0834` disposition passed.
+- Deleted the Bash checker with no wrapper, bridge, alias, duplicate fixture,
+  count, callback, package-specific engine behavior, or fallback.
+- Transferred exactly four accepted M6-P8/P9 independent-gate evidence values
+  to `suite:rust-tooling-criterion` and its registered path without adding a
+  suite dependency; immutable historical checker endpoints remain lineage.
+- The mixed Bash checkpoint remains deferred to `M6-Q-W1`; Q2 integration is
+  next.

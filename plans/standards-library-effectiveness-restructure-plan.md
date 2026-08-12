@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
-**Next slice:** prepare verification-engine Q1-Q4 local suite/checker proposals
-in isolated worktrees, then begin serial shared integration with M6-Q1.
+**Next slice:** revalidate and serially integrate the prepared verification-
+engine M6-Q2 Accessibility Evidence Closure proposal.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -182,6 +182,14 @@ no executable incident edge, so Q1 is explicitly edge-free. Implementation
 must transfer four accepted M6-P8/P9 independent-gate records to registered
 suite evidence without declaring a dependency. No implementation authority was
 changed during admission; Q2 preflight is next.
+
+`M6-Q1` is accepted. Its dependency-free five-check suite is registered and
+the Bash checker is absent. All sixteen typed Criterion decisions, source
+boundaries, and exact `STD-0834` disposition pass. Exactly four accepted
+M6-P8/P9 historical independent-gate rows retain immutable checker lineage
+while using `suite:rust-tooling-criterion` and its exact registered path as
+evidence; no suite dependency, wrapper, bridge, alias, dual authority, or
+fallback was introduced. Q2 serial integration is next.
 
 VE050 Option 1 is accepted. The generic `markdown_headings` assertion derives
 a nonempty set of ATX headings outside fenced code blocks at one explicit level
