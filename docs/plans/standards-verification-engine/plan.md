@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** reconstruct and integrate re-admitted M6-Q3 Architecture
-Population with its README projection in one atomic acceptance.
+**Next slice:** select and record the VE052 Q3 scope-authority recovery before
+Architecture Population integration resumes.
 
 **Acceptance status:** `pending`
 
@@ -5329,6 +5329,46 @@ verification contract. The implementation must register and pass
 projection, delete the Bash checker, and prove both the suite route and removed
 path in one atomic acceptance. No implementation file changed during
 re-admission.
+
+##### VE052 Q3 Duplicated Scope Authority Re-plan
+
+**Status:** `Active`; Q3 shared integration remains unavailable.
+
+Post-re-admission implementation review found that Q3's prose “Allowed
+implementation write set” still classifies the verification README as
+read-only, while the canonical package manifest and its checked projection now
+include that README. The Q-wave freeze declares the manifest to be the source
+for the exact write set, but contradictory plan prose still creates an
+ambiguous authorization boundary. Editing the README would violate one
+statement; not editing it would violate accepted VE051. The reconstructed Q3
+proposal remains isolated and no shared implementation edit was made.
+
+**Option 1 - Derive scope from the package manifest (`Recommended`):** replace
+Q3's copied file enumeration with a direct pointer to the canonical `M6-Q3`
+manifest row and retain only concise semantic exclusions/invariants in prose.
+Require package-projection verification to prove the machine-readable row.
+Then resume Q3 implementation under that single exact scope authority. This
+removes the drift mechanism, keeps the plan legible, and follows the freeze's
+existing declaration that package values are not copied into another
+machine-readable authority.
+
+**Option 2 - Patch both copies:** add the README to Q3's prose list and remove
+it from the read-only sentence. This is the smallest textual repair and leaves
+all current validators unchanged, but preserves two manually synchronized
+scope descriptions and can reproduce the same failure during later
+re-admission.
+
+**Option 3 - Separate generated plan projection:** generate Q3's prose scope
+from the package manifest and verify freshness. Choose this only if reviewers
+need a full file list inline in every package section. It eliminates manual
+drift but adds generator/template ownership and churn that are not justified
+for the current plan because the checked manifest already provides the exact
+list.
+
+Silently preferring one authority, editing the README under contradictory
+scope, dropping the accepted README change, weakening exact package
+projection, or adding a wrapper/alias is invalid. Selection must resolve the
+duplicate authority before Q3 implementation resumes.
 
 ##### M6-Q4 Coding Dependencies Route Package Admission
 

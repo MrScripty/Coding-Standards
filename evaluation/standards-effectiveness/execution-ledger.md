@@ -11252,3 +11252,21 @@ stale or dual-authority interval.
 No suite, checker, registry, executable edge, README content, standards source,
 fixture, engine, schema, lifecycle, numeric, lockfile, build-output, or workflow
 implementation changed. Fresh-base Q3 reconstruction and integration are next.
+
+## 2026-08-11 VE052 Q3 Duplicated Scope Authority Trigger
+
+**Outcome:** Q3 integration unavailable; no canonical implementation changed.
+
+Fresh reconstruction applied the prepared suite/checker proposal only in an
+isolated worktree. Before shared edits, review found Q3's prose write-set copy
+still marks the README read-only while the canonical package row includes it.
+The freeze declares the manifest authoritative, but silently ignoring
+contradictory prose would make authorization interpretation-dependent.
+
+Recommended recovery makes the checked package manifest the single exact scope
+authority and reduces Q3 prose to a manifest pointer plus semantic exclusions.
+Patching both copies is bounded but retains drift; generated prose is reserved
+for a demonstrated inline-list need. Registry, package/edge state, README,
+graph, source, fixture, engine, schema, lifecycle, numeric, lockfile,
+build-output, workflow, and canonical suite/checker implementation remain
+unchanged.

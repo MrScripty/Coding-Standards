@@ -2201,6 +2201,19 @@ re-admission changes no suite, checker, registry, executable edge, README
 content, source, fixture, engine, schema, or lifecycle evidence. Fresh-base Q3
 integration is next.
 
+### VE052 Q3 Duplicated Scope Authority
+
+Fresh implementation review found that Q3's prose write-set copy still marks
+the README read-only despite the canonical manifest authorizing it. The Q-wave
+freeze names the manifest as exact package authority, but contradictory prose
+cannot safely be ignored.
+
+Recommended recovery removes the copied file enumeration, points Q3 prose to
+its checked manifest row, and retains only semantic exclusions. A direct
+two-copy patch is valid but preserves drift; a generated prose projection is
+valid only if full inline lists are a demonstrated review requirement. Q3
+remains isolated and shared integration has not started.
+
 ### Admitted M6-Q4 Coding Dependencies Route
 
 A disposable dependency-free three-check suite matches the Coding dependency

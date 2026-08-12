@@ -2702,3 +2702,17 @@
   numeric, lockfile, build-output, and workflow state remain unchanged.
 - Next is fresh-base Q3 reconstruction and one atomic suite registration,
   README projection update, checker deletion, and shared acceptance.
+
+## 2026-08-11 - VE052 Q3 Duplicated Scope Authority Trigger
+
+- Fresh Q3 reconstruction applied only the prepared suite addition and checker
+  deletion in an isolated worktree; no shared integration edit was made.
+- Pre-edit review found Q3's copied prose write set still declares the README
+  read-only while the canonical package manifest now authorizes it.
+- Stopped before registry, package state, edge state, README, generated graph,
+  lifecycle, source, fixture, engine, schema, numeric, lockfile, build-output,
+  workflow, or canonical implementation changes.
+- Recommended making the checked package manifest the single exact scope
+  authority and reducing Q3 prose to a manifest pointer plus semantic
+  exclusions. Patching both copies and generating prose remain bounded
+  alternatives.
