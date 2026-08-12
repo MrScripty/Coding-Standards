@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: admitted M6-P2 row-35 lifecycle replacement
+**Current phase:** Milestone 6: accepted M6-P2 row-35 lifecycle replacement
 
-**Next slice:** implement admitted M6-P2 by registering the exact row-35
-lifecycle suite, removing its Bash checker, and retaining all independently
-owned gates and dynamic callers without nested execution.
+**Next slice:** perform read-only preflight for P1 package 3, root index
+closure. Freeze its unique semantics, exact incident edges, retained independent
+gates, duplicate-transfer obligations, and bounded write set before admission.
 
 **Acceptance status:** `pending`
 
@@ -4380,11 +4380,11 @@ metadata helper, engine, tests, schemas, numeric evidence, lockfiles, build
 output, and workflows are unchanged. The mixed Bash checkpoint remains
 explicitly deferred to `M6-P-W1`.
 
-##### M6-P2 Row-35 Lifecycle Package Admission
+##### M6-P2 Row-35 Lifecycle Package
 
-**Status:** `Active`
+**Status:** `Accepted`
 
-**Package state:** `admitted` at train order 72.
+**Package state:** `accepted` at train order 72.
 
 Exact script review separates row 35's unique lifecycle evidence from nested
 execution. The unique contract is: two ordered execution-decomposition rows
@@ -4441,6 +4441,23 @@ declarative suites pass; generated evidence is fresh at 169 Bash verifiers /
 174 nodes / 857 edges / 170 components and adds only five non-executable
 contract references from package/edge authority; both plan checks and diff
 integrity pass.
+
+**Implementation:** the registered 14-check suite now owns the exact finite
+decomposition, owner/disposition, execution-train, accelerated-package, report,
+and parent-plan decisions. It validates all open README-dependency paths and
+derives the exact four transitive callers from canonical generated checker
+inventory, then proves each caller's newline-bounded invocation without
+executing it. The Bash checker is deleted, and all ten incident-edge states
+transition with the package to `accepted`.
+
+**Acceptance verification:** the focused suite, package authority, and exact
+incident-edge authority pass; all 109 declarative suites pass; the retired path
+and generated-inventory row are absent; generated evidence is fresh at 168
+Bash verifiers / 173 nodes / 850 edges / 169 components; both plan checks and
+diff integrity pass. Every lifecycle TSV/Markdown input, all four callers, all
+six retained gates, standards sources, engine code/tests, schemas, numeric
+evidence, lockfiles, build output, and workflows remain unchanged. The mixed
+Bash checkpoint remains deferred to `M6-P-W1`.
 
 **No-fallback rule:** do not replace exact structure with substring checks,
 replace absent-path evidence with table absence, freeze whole files for

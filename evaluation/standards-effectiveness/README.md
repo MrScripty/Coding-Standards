@@ -313,6 +313,13 @@ fallback.
 
 The selected context is compared with the frozen baseline line count.
 
+The registered `milestone-7-row-35-decomposition` suite checks the exact
+root-index lifecycle decomposition, owner dispositions, dependency
+classifications, transitive caller membership, execution records, and accepted
+plan state. Open dependency and caller membership is derived from canonical
+inventories; retained independent checkers are line-validated but are not
+nested or executed by the suite.
+
 ## Plan Lifecycle Fixtures
 
 `check-plan-structure.sh` and `verify-plan-fixtures.sh` enforce deterministic

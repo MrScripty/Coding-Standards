@@ -10723,3 +10723,35 @@ and contains only five intended new contract references; both plan checks and
 diff integrity pass.
 
 **Next slice:** implement and accept M6-P2 within its frozen write set.
+
+## 2026-08-11 M6-P2 Row-35 Lifecycle Acceptance
+
+**Outcome:** accepted at train order 72.
+
+The registered 14-check suite preserves the exact finite row-35 decomposition,
+owner/disposition, report, execution-train, accelerated-package, and parent-plan
+decisions. It validates every open README-dependency path and derives the exact
+four transitive callers from canonical generated checker inventory. Exact
+newline-bounded caller assertions replace dynamic nested execution without
+adding a callback, command, snapshot, mutable expected count, or alternate
+owner.
+
+The Bash checker is deleted. The package and all ten exact incident-edge rows
+transition together to `accepted`; the six retained gates and four callers
+remain independently owned and unchanged.
+
+**No-fallback result:** no wrapper, bridge, nested checker execution,
+graph-inferred invocation, copied mutable count, caller snapshot, duplicate
+semantic assertion, or legacy authority remains. Every lifecycle TSV/Markdown
+input, caller, retained gate, standards source, engine file/test, schema,
+numeric evidence, lockfile, build output, and workflow is unchanged.
+
+**Verification:** the focused 14-check suite, package authority, and exact
+incident-edge authority pass; all 109 declarative suites pass; the retired
+checker path and generated inventory row are absent; generated evidence is
+fresh at 168 Bash verifiers / 173 nodes / 850 edges / 169 components; both plan
+checks and diff integrity pass. The mixed Bash checkpoint remains deferred to
+`M6-P-W1`.
+
+**Next slice:** perform read-only preflight for P1 package 3, root index
+closure, before admitting any executable or package change.

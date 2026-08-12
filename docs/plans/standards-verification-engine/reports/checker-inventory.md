@@ -1795,7 +1795,7 @@ removed paths, shell syntax, and diff integrity pass. Final evidence records
 mixed checkpoint is deferred to `M6-P-W1`; no routed standards source, engine,
 schema, numeric evidence, lockfile, build output, or workflow changed.
 
-### Admitted M6-P2 Row-35 Lifecycle
+### Accepted M6-P2 Row-35 Lifecycle
 
 Row 35 has ten executable incident edges, all outbound to retained independent
 gates. It also reads a four-caller manifest and dynamically executes those
@@ -1817,3 +1817,17 @@ The current checker, package projection, all ten exact incident-edge rows, all
 pass. Admission preserves 169 Bash verifiers, 174 nodes, and 170 components;
 five new contract references bring the graph to 857 edges without changing
 executable topology.
+
+The registered 14-check suite now owns the finite lifecycle contract and
+derives open dependency/caller membership from canonical tables and generated
+checker inventory. It line-validates each of the four transitive callers
+without executing any retained checker. The Bash path is absent, the package
+and all ten exact edge rows are accepted, and no wrapper or alternate authority
+remains.
+
+Focused, package, and edge verification pass; all 109 declarative suites pass;
+and fresh inventory contains 168 Bash verifiers, 173 nodes, 850 edges, and 169
+components. Both plan checks and diff integrity pass. Lifecycle inputs,
+callers, retained gates, standards, engine, schemas, numeric evidence,
+lockfiles, build output, and workflows are unchanged. The mixed checkpoint is
+deferred to `M6-P-W1`.

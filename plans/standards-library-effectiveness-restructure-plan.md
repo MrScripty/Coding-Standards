@@ -12,10 +12,10 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement admitted M6-P2 for row-35 migration lifecycle. Add one
-registered lifecycle suite, remove the Bash checker, and preserve all retained
-gate and dynamic-caller evidence without nested execution. Release Procedure
-and remaining P1 packages stay unadmitted.
+**Next slice:** perform read-only preflight for P1 package 3, root index
+closure. Freeze unique root-index semantics, every incident edge, retained
+independent gates, duplicate-transfer obligations, and the bounded write set
+before admission. Release Procedure and later P1 packages stay unadmitted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -42,16 +42,15 @@ syntax, plan/diff integrity, and fresh 169-verifier / 174-node / 852-edge /
 170-component evidence pass. The mixed checkpoint remains deferred to
 `M6-P-W1`.
 
-M6-P2 is admitted at train order 72 under `migration.parent-plan`. Exact review
-separates finite row-35 lifecycle tables and plan text from six independently
-owned retained gates and four manifest-derived dynamic callers. Ten executable
-incident edges have exact independent-gate dispositions; dynamic caller
-membership and invocation remain suite evidence rather than invented graph
-edges. Lifecycle inputs, callers, retained gates, standards, and engine remain
-read-only through implementation.
-Admission verification passes the current row-35 checker, package and all ten
-edge dispositions, all 108 declarative suites, both plan checks, diff integrity,
-and fresh 169-verifier / 174-node / 857-edge / 170-component evidence.
+M6-P2 is accepted at train order 72 under `migration.parent-plan`. Its
+registered 14-check suite preserves finite row-35 lifecycle decisions, derives
+open dependency and caller membership, and line-validates four exact callers
+without nested execution. The Bash checker is removed and all ten incident
+edges transition with the package to `accepted`; six independently owned gates
+remain. The focused suite, package/edge authority, all 109 declarative suites,
+retired-path proof, fresh 168-verifier / 173-node / 850-edge / 169-component
+evidence, both plan checks, and diff integrity pass. Lifecycle inputs, callers,
+retained gates, standards, and engine remain unchanged; `M6-P-W1` is deferred.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

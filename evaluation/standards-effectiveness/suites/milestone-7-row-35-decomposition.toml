@@ -1,0 +1,196 @@
+schema_version = 1
+id = "milestone-7-row-35-decomposition"
+owner = "migration.parent-plan"
+description = "Accepted row-35 root-index lifecycle evidence with derived dependency and caller membership and no nested checker execution."
+
+[[checks]]
+id = "execution-decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+[[checks.projections]]
+columns = ["child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "owner_transition"]
+order = "source"
+expected = [
+  ["1", "STD-0001,STD-0002,STD-0003", "README.md", "STANDARDS-ROUTER.md", "exists", "pre-slice-review", "focused", "none"],
+  ["2", "STD-0004,STD-0005,STD-0006", "README.md", "STANDARDS-ROUTER.md", "exists", "pre-slice-review", "focused", "none"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "35"
+[[checks.projections]]
+columns = ["ids"]
+order = "lexical"
+expected = [["STD-0001"], ["STD-0002"], ["STD-0003"], ["STD-0004"], ["STD-0005"], ["STD-0006"]]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "35"
+[checks.projections.split]
+field = "ids"
+delimiter = ","
+
+[[checks]]
+id = "owner-validation"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-row-35-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+non_empty = ["id", "owner", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "owner", "disposition"]
+order = "source"
+expected = [
+  ["STD-0001", "STANDARDS-ROUTER.md", "index"],
+  ["STD-0002", "STANDARDS-ROUTER.md", "split"],
+  ["STD-0003", "STANDARDS-ROUTER.md", "index"],
+  ["STD-0004", "STANDARDS-ROUTER.md", "index"],
+  ["STD-0005", "STANDARDS-ROUTER.md", "index"],
+  ["STD-0006", "LICENSE", "index"],
+]
+
+[[checks]]
+id = "readme-dependency-lifecycle"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv"
+header = ["file", "current_dependency", "replacement"]
+non_empty = ["file", "current_dependency", "replacement"]
+unique = [["file"]]
+[checks.domains]
+current_dependency = ["root-readme-route-or-catalog-assertion", "transitive-root-readme-route-assertion", "computed-root-readme-route-assertion"]
+replacement = ["canonical-router-or-owner-evidence"]
+[[checks.projections]]
+columns = ["file"]
+order = "source"
+expected = [["evaluation/standards-effectiveness/verify-contract-ownership.sh"]]
+[checks.projections.where]
+field = "current_dependency"
+op = "eq"
+value = "transitive-root-readme-route-assertion"
+[[checks.projections]]
+columns = ["file"]
+order = "source"
+expected = [["evaluation/standards-effectiveness/verify-commit-authority.sh"]]
+[checks.projections.where]
+field = "current_dependency"
+op = "eq"
+value = "computed-root-readme-route-assertion"
+
+[[checks]]
+id = "readme-dependency-paths"
+type = "reference_inventory"
+candidates_path = "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv"
+candidates_header = ["file", "current_dependency", "replacement"]
+candidate_path_column = "file"
+manifest_path = "evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv"
+manifest_header = ["file", "current_dependency", "replacement"]
+manifest_path_column = "file"
+literal = "#!/usr/bin/env bash\n"
+
+[[checks]]
+id = "transitive-callers"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv"
+header = ["caller", "shared_checker"]
+non_empty = ["caller", "shared_checker"]
+unique = [["caller"]]
+[[checks.projections]]
+columns = ["caller", "shared_checker"]
+order = "source"
+expected = [
+  ["evaluation/standards-effectiveness/verify-binding-contract-evolution.sh", "evaluation/standards-effectiveness/verify-contract-ownership.sh"],
+  ["evaluation/standards-effectiveness/verify-cross-language-contract.sh", "evaluation/standards-effectiveness/verify-contract-ownership.sh"],
+  ["evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh", "evaluation/standards-effectiveness/verify-contract-ownership.sh"],
+  ["evaluation/standards-effectiveness/verify-milestone-7-row-39-decomposition.sh", "evaluation/standards-effectiveness/verify-contract-ownership.sh"],
+]
+
+[[checks]]
+id = "derived-transitive-callers"
+type = "reference_inventory"
+candidates_path = "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv"
+candidates_header = ["checker", "lines", "inbound_count", "inbound_files", "executable_inbound_count", "executable_inbound_files", "contract_inbound_count", "contract_inbound_files", "documentation_inbound_count", "documentation_inbound_files", "verifier_dependencies", "helper_dependencies", "uses_sed", "uses_awk", "uses_rg", "uses_decision_table"]
+candidate_path_column = "checker"
+manifest_path = "evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv"
+manifest_header = ["caller", "shared_checker"]
+manifest_path_column = "caller"
+literal = "verify-contract-ownership.sh\"\n"
+
+[[checks]]
+id = "binding-contract-evolution-invocation"
+type = "text"
+path = "evaluation/standards-effectiveness/verify-binding-contract-evolution.sh"
+required = ["\n\"$SCRIPT_DIR/verify-contract-ownership.sh\"\n"]
+prohibited = []
+
+[[checks]]
+id = "cross-language-contract-invocation"
+type = "text"
+path = "evaluation/standards-effectiveness/verify-cross-language-contract.sh"
+required = ["\n\"$SCRIPT_DIR/verify-contract-ownership.sh\"\n"]
+prohibited = []
+
+[[checks]]
+id = "independent-trust-invocation"
+type = "text"
+path = "evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh"
+required = ["\n\"$SCRIPT_DIR/verify-contract-ownership.sh\"\n"]
+prohibited = []
+
+[[checks]]
+id = "row-39-invocation"
+type = "text"
+path = "evaluation/standards-effectiveness/verify-milestone-7-row-39-decomposition.sh"
+required = ["\n\"$S/verify-contract-ownership.sh\"\n"]
+prohibited = []
+
+[[checks]]
+id = "decomposition-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-35-decomposition.md"
+required = [
+  "## Owner Contract",
+  "sole authority",
+  "## Exact Ownership",
+  "`35.1`",
+  "`35.2`",
+  "## Bounded Write Sets",
+  "## Typed Outcomes And No Fallback",
+  "## Re-plan Triggers",
+]
+prohibited = []
+
+[[checks]]
+id = "execution-train"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+[[checks.projections]]
+columns = ["owner", "owner_state", "activation"]
+order = "source"
+expected = [["STANDARDS-ROUTER.md", "exists", "final-closure"]]
+[checks.projections.where]
+field = "order"
+op = "eq"
+value = "35"
+
+[[checks]]
+id = "accelerated-package-gate"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv"
+header = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+[[checks.projections]]
+columns = ["integration_gate"]
+order = "source"
+expected = [["full-suite"]]
+[checks.projections.where]
+field = "train_order"
+op = "eq"
+value = "35"
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b25a` (`Accepted`)", "`7.4b25b` (`Accepted`)", "`7.4b25c` (`Accepted`)"]
+prohibited = []
