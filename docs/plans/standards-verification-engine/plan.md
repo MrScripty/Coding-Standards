@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-Q-wave graph audit
+**Current phase:** Milestone 6: VE054 post-Q package-selection re-plan
 
-**Next slice:** perform a read-only fresh graph and ownership audit before
-admitting another package.
+**Next slice:** select one VE054 recovery before admitting or implementing
+another checker-migration package.
 
 **Acceptance status:** `pending`
 
@@ -5502,6 +5502,71 @@ ownership audit. Any proposed package must derive its canonical owner,
 semantic contract, exact incident edges, dependencies, write set, and
 verification gates from current evidence before admission; stale pre-Q-wave
 graph shape is not authority.
+
+##### VE054 Post-Q Package-Selection Re-plan
+
+**Status:** `Active`; selection required before another package admission.
+
+The fresh accepted graph contains 157 Bash verifiers, 162 nodes, 773 edges,
+and 162 components. Forty-six verifiers have no executable caller, but only
+two are also free of verifier dependencies: the declarative-suite bridge and
+the Milestone 7 Security checker-repair replan gate. Both are infrastructure
+or recovery gates, not ordinary semantic leaves. Graph topology therefore
+cannot safely choose the next migration.
+
+The smallest viable semantic candidate is the 19-line Accessibility Media
+checker. Its canonical owner is `topics/accessibility.md`; its call to
+Accessibility Name/Input is a separately owned gate; and two accepted Q2 edge
+records retain the Media checker as historical independent-gate evidence. A
+valid package must preserve the 13 typed decisions, canonical/reference/legacy
+boundaries, three exact dispositions, and accepted lifecycle claim, then
+transfer those two historical evidence values to the registered Media suite
+without declaring a dependency.
+
+Short row-decomposition candidates are not interchangeable with Media. Rows
+25 and 27 project Implementation lifecycle; rows 32 and 33 preserve
+Persistence and Contracts decomposition while accepted N-wave records retain
+their checker paths as independent lifecycle evidence. Their final package
+owner and evidence-transfer model must be decided explicitly before they can
+form a concurrent wave. Generated Command Security and Release Build are also
+caller-free, but the standards-effectiveness README names them and their
+retained row gates remain separate owners, so they require serial README
+projection and exact edge treatment.
+
+**Option 1 - Bounded owner-first continuation (`Recommended`):** preflight and
+admit Accessibility Media as the next single owner-coherent package. Freeze its
+exact suite contract, two historical evidence transfers, retained Name/Input
+gate, write set, and verification before implementation. In parallel only at
+the planning/proposal level, classify row-lifecycle candidates by canonical
+owner for a later wave. This advances executable retirement without letting an
+unresolved lifecycle model contaminate the package.
+
+**Option 2 - Freeze a multi-owner staged wave first:** perform read-only
+semantic preflight for Accessibility Media, Generated Command Security,
+Release Build, and selected lifecycle rows; admit each separately; then prepare
+disjoint local suites concurrently and integrate shared registry, edge,
+README, graph, and planning authority serially. This can increase throughput,
+but requires resolving every lifecycle owner and README consumer before any
+implementation starts.
+
+**Option 3 - Resolve lifecycle-checker ownership first:** defer ordinary
+semantic packages and define whether row-decomposition evidence is owned by
+the migration parent, the destination domain, or an explicit split between
+projection and domain gates. Then freeze and migrate the repeated row family
+as separately owned packages. This offers the largest later batching gain but
+adds an architecture prerequisite and leaves the already clear Media package
+idle.
+
+**Option 4 - Add a new generic engine capability first:** derive a common
+decomposition assertion only if isolated suite probes prove current text,
+table, relation, and Markdown checks cannot preserve the repeated row
+contracts. No current evidence demonstrates such a capability gap, so choosing
+this now risks package-specific overengineering.
+
+Inferring owner from graph proximity, deleting either infrastructure gate as a
+semantic leaf, merging owners for batch size, retaining a Bash wrapper,
+declaring false suite dependencies, leaving historical checker evidence stale,
+or editing README projections outside an admitted write set is invalid.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

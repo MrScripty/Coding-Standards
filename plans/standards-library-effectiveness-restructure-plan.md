@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform the delegated read-only fresh graph and ownership audit
-before another package admission.
+**Next slice:** select one delegated VE054 package-recovery option before
+another package admission.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -275,6 +275,14 @@ evidence remain unchanged; the closing `M6-Q-W1` mixed checkpoint is next.
 surviving Bash entrypoints, including all 120 registered declarative suites,
 after Q1 through Q4 acceptance. No later package is admitted; a fresh read-only
 graph and ownership audit must precede the next package decision.
+
+VE054 is active after that audit. The fresh graph has 46 caller-free verifiers,
+but only the declarative-suite bridge and Security repair-replan gate are also
+dependency-free; neither is an ordinary semantic leaf. Accessibility Media is
+the smallest clear owner-coherent candidate, while row lifecycle candidates
+need explicit owner classification and other shallow candidates have shared
+README consumers. Recommended Option 1 preflights Media as a bounded package
+and classifies lifecycle work separately. No package is admitted.
 
 `M6-Q0` is accepted. Q1 through Q4 local suite/checker paths are disjoint and
 may be prepared concurrently as proposal-only commits from the accepted freeze

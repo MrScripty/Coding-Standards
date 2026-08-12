@@ -2277,6 +2277,22 @@ acceptance. No later package is admitted. The next package decision requires a
 fresh read-only graph and ownership audit; pre-Q-wave topology is not package
 authority.
 
+### VE054 Post-Q Package-Selection Trigger
+
+Fresh evidence contains 157 Bash verifiers, 162 nodes, 773 edges, and 162
+components. Forty-six verifiers are caller-free, but the only two that also
+have no verifier dependencies are the declarative-suite bridge and the
+Security checker-repair replan gate. Neither is an ordinary semantic leaf.
+
+Accessibility Media is the smallest clear owner-coherent candidate: 13 typed
+decisions, canonical/reference/legacy boundaries, three dispositions, one
+lifecycle claim, one retained Name/Input gate, and two accepted Q2 historical
+evidence transfers. Row-decomposition candidates need an explicit lifecycle
+owner model; Generated Command Security and Release Build have README
+consumers. Recommended Option 1 preflights Media next and leaves lifecycle
+classification as separate planning authority rather than guessing from the
+graph.
+
 ### Accepted Q-Wave Preparation Boundary
 
 Q1 through Q4 have pairwise-disjoint local suite and deleted-checker paths.
