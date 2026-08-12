@@ -3034,3 +3034,16 @@
   along with graph, package/edge, execution-train, removal, plan, and diff
   gates. M6-S1 through M6-S3 and M6-S-W1 are accepted.
 - No later package is admitted. Next slice is a fresh graph and ownership audit.
+
+## 2026-08-12 - Post-M6-S Audit And M6-T1 Admission
+
+- Regenerated and checked the pre-admission 153-verifier graph with 158 nodes,
+  765 edges, and 158 components; Coding-Standards began clean.
+- Selected row 24 as the smallest remaining useful parent-owned package. It is
+  caller-free, has one Planning-owned child, no historical checker-evidence
+  transfer, and an already-passing seven-check disposable representation.
+- Admitted M6-T1 at train order 88. Its full-review prompt and execution-train
+  gates remain independent, represented by four exact typed incident edges.
+- No suite, registry, checker, engine, standards source, or fixture changed.
+  Regeneration records four reference-only authority edges, producing 769
+  edges without changing executable topology. Next slice is implementation.

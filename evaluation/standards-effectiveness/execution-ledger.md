@@ -11568,3 +11568,15 @@ positive path state, and replaces the deleted Bash checker without a wrapper
 or fallback. The graph now has 153 Bash verifiers, 158 nodes, 765 edges, and
 158 components. All 124 declarative suites and all 153 complete mixed-suite
 entrypoints pass. No later package is admitted; a fresh audit is next.
+
+## 2026-08-12 M6-T1 Row 24 Admission
+
+**Outcome:** admitted at train order 88.
+
+The pre-admission graph has 153 Bash verifiers, 158 nodes, 765 edges, and 158
+components. Row 24 is caller-free and its seven-check disposable suite already
+passes with existing generic assertions. Four exact typed edges preserve the
+full-review prompt entrypoint and execution train as independent gates. The
+admission changes planning authority only. Regeneration adds four
+reference-only authority edges for 769 total without changing executable
+topology; implementation is next.

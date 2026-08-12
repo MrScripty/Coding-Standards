@@ -2464,3 +2464,18 @@ All six former S-wave execution-train edges remain accepted independent gates.
 The graph now contains 153 Bash verifiers, 158 nodes, 765 edges, and 158
 components. All 124 declarative suites and all 153 mixed-suite checkers pass.
 M6-S1 through M6-S3 are accepted; another package requires a fresh audit.
+
+### Post-M6-S Audit And M6-T1 Admission
+
+Fresh pre-admission evidence contains 153 Bash verifiers, 158 nodes, 765 edges,
+and 158 components. Row 24 is the smallest useful remaining parent-owned
+candidate: one Planning-owned child, three index dispositions, no inbound
+caller, no historical checker-evidence transfer, and no standards movement.
+
+Its corrected disposable suite passes seven existing generic checks. The live
+checker, full-review prompt entrypoint, and execution train also pass. The row
+checker has exactly four typed incident edges: executable-reference and
+verifier-dependency edges to each independent gate. M6-T1 is admitted at train
+order 88 with no suite dependency, engine change, wrapper, or compatibility
+path. Regeneration adds four reference-only authority edges for 769 total;
+executable topology remains unchanged.

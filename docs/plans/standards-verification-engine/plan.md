@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-S graph and ownership audit
+**Current phase:** Milestone 6: M6-T1 row 24 migration
 
-**Next slice:** inspect the fresh 153-verifier graph and remaining row-family
-ownership/evidence shapes before admitting another bounded package.
+**Next slice:** implement admitted M6-T1 without a wrapper, false dependency,
+owner transfer, or compatibility path.
 
 **Acceptance status:** `pending`
 
@@ -5913,6 +5913,38 @@ execution-train behavior, false registry dependency, compatibility parser,
 or owner transfer is permitted. A changed incident edge, stale evidence,
 unrepresentable contract, or required edit outside the admitted write set is a
 re-plan trigger.
+
+##### M6-T1 Row 24 Admission
+
+**Status:** Admitted at train order 88.
+
+The fresh pre-admission graph contains 153 Bash verifiers, 158 nodes, 765
+edges, and 158 components. Row 24 is the smallest remaining caller-free parent-owned
+package: three Planning index identities, one child, no historical checker
+evidence, and no canonical standards movement. Its disposable probe already
+passed seven existing generic checks after strict correction of a malformed
+owner-map header.
+
+M6-T1 will register one dependency-free suite preserving exact decomposition
+identity, owner-validation and disposition lineage, report semantics, the
+derived Planning entrypoint owner-map decision, execution-train owner, and
+accepted plan claims. The full-review prompt entrypoint and execution train
+remain independently owned gates. The exact graph exposes four incident
+edges, one executable-reference and one verifier-dependency edge for each
+gate; all four are admitted without registry dependencies.
+
+Implementation must register and pass the suite before deleting the Bash
+checker, accept only M6-T1 and its four edge records, regenerate the graph,
+prove source and evidence files unchanged, and update the serial records. No
+wrapper, Bash bridge, copied helper behavior, false dependency, owner transfer,
+compatibility parser, hardcoded cardinality, or legacy authority is permitted.
+A changed incident edge, stale evidence, unrepresentable contract, or required
+edit outside the admitted write set is a re-plan trigger.
+
+Admission regeneration adds four reference-only authority edges from the
+package and edge manifests. The resulting graph has 153 Bash verifiers, 158
+nodes, 769 edges, and 158 components; executable caller and gate topology is
+unchanged.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 
