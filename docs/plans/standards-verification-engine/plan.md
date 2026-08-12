@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE047 Option 3 selected; M6-P4/P5 admitted
+**Current phase:** Milestone 6: M6-P4/P5 accepted
 
-**Next slice:** atomically implement and accept M6-P4 and M6-P5 as the
-owner-separated Language Index SCC closure.
+**Next slice:** perform read-only preflight for P1 package 6, Rust adoption-notes
+retirement, before admitting another executable package.
 
 **Acceptance status:** `pending`
 
@@ -4003,7 +4003,7 @@ disappearance joins an accepted package and its explicit canonical owner.
 
 ##### VE043-A1-L1 Live-Derivation Capability Re-plan Trigger
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 L1 preflight proves that the admitted evidence exists but the current engine
 cannot express its lifecycle. The immutable baseline contains derived candidate
@@ -4536,7 +4536,7 @@ mixed Bash checkpoint remains deferred to `M6-P-W1`.
 
 **Status:** `Active`
 
-**Package state:** `admitted` at train order 74.
+**Package state:** `accepted` at train order 74.
 
 Exact review freezes the Language Index contract: the two ordered headings and
 14-line ceiling; live links; required non-normative navigation, Router,
@@ -4592,11 +4592,17 @@ and diff integrity pass. Any additional incident edge, unrepresentable
 assertion, changed owner, required engine behavior, or failure of a retained
 gate is a re-plan trigger.
 
+**Joint acceptance evidence:** the registered seven-check suite passes and the
+Language Index Bash checker is absent. M6-P4 and all eleven owner-local edge
+rows are accepted; its four cycle rows use the registered row-45 suite as
+independent evidence with no dependency. The obsolete consumer row and audit
+classification are absent, and the retained audit derives 23 consumers.
+
 ##### M6-P5 Row-45 Lifecycle Package Admission
 
-**Status:** `Active`
+**Status:** `Accepted`
 
-**Package state:** `admitted` at train order 75.
+**Package state:** `accepted` at train order 75.
 
 Exact owner review reduces row 45 to migration lifecycle authority: one exact
 execution-train row, one exact P37 accelerated-package row, the bounded row-45
@@ -4644,9 +4650,20 @@ all 110 declarative suites pass; generated evidence is fresh at 167 Bash
 verifiers / 172 nodes / 850 edges / 168 components. Both plan checks and diff
 integrity pass.
 
+**Joint acceptance evidence:** the registered four-check suite passes and the
+row-45 Bash checker is absent. M6-P5 and all twelve owner-local edge rows are
+accepted; its four cycle rows use the registered Language Index suite as
+independent evidence with no dependency. Numeric lifecycle passes by deriving
+both absent checker subjects from their separately owned accepted packages.
+All 112 declarative suites pass; generated evidence is fresh at 165 Bash
+verifiers / 170 nodes / 824 edges / 167 components. Canonical standards,
+ownership/disposition/lifecycle records, numeric baseline and engine remain
+byte-identical to the captured implementation boundary. The mixed checkpoint
+remains deferred to `M6-P-W1`.
+
 ##### VE047 Language Index Numeric-Lifecycle Re-plan
 
-**Status:** `Accepted`; Option 3 selected for implementation.
+**Status:** `Accepted`; Option 3 implemented.
 
 The M6-P4 implementation probe passed its seven-check suite, four retained
 gates, package authority, and all eleven edge rows after deleting the Language
@@ -4703,6 +4720,11 @@ its four-check suite passed in isolation. M6-P4 and M6-P5 remain separate
 canonical-owner packages and must transition to accepted together in one SCC
 closure commit. Existing numeric lifecycle remains unchanged and must pass from
 the two absent checker paths plus their accepted package owners.
+
+**Acceptance:** both owner-separated packages transitioned to accepted in one
+commit after both suites passed. Both Bash checkers, the cycle, and obsolete
+consumer identity are absent. Numeric lifecycle passes unchanged; no waiver,
+merged owner, false dependency, wrapper, syntax evasion, or fallback remains.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

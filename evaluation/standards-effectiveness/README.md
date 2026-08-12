@@ -326,6 +326,13 @@ boundary, prohibited legacy authority, and six accepted dispositions. Root
 Router evidence and the README consumer audit remain independent gates; this
 suite neither depends on nor executes them.
 
+The registered `language-index-closure` suite checks exact Language Index
+structure, links, routing boundaries, owner/disposition outcomes, and Router
+metadata. The separately owned `milestone-7-row-45-decomposition` suite checks
+exact row-45 train, package, decomposition, and accepted-plan lifecycle. Both
+suites are dependency-free and replaced their two-checker Bash component in one
+atomic closure; retained route and audit gates remain independent.
+
 ## Plan Lifecycle Fixtures
 
 `check-plan-structure.sh` and `verify-plan-fixtures.sh` enforce deterministic

@@ -549,3 +549,13 @@ requires = []
 id = "root-index-closure"
 path = "evaluation/standards-effectiveness/suites/root-index-closure.toml"
 requires = []
+
+[[suites]]
+id = "language-index-closure"
+path = "evaluation/standards-effectiveness/suites/language-index-closure.toml"
+requires = []
+
+[[suites]]
+id = "milestone-7-row-45-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-45-decomposition.toml"
+requires = []

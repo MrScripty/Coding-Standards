@@ -1,0 +1,96 @@
+schema_version = 1
+id = "language-index-closure"
+owner = "STANDARDS-ROUTER.md"
+description = "Exact non-normative Language Index navigation, ownership, dispositions, and Router boundary without nested checker execution."
+
+[[checks]]
+id = "language-index-structure"
+type = "markdown_structure"
+path = "languages/README.md"
+headings = ["# Language-Specific Standards", "## Available Profiles"]
+maximum_lines = 14
+
+[[checks]]
+id = "language-index-links"
+type = "markdown_links"
+paths = ["languages/README.md"]
+
+[[checks]]
+id = "language-index-boundary"
+type = "text"
+path = "languages/README.md"
+required = [
+  "non-normative navigation",
+  "[Language Profiles](../STANDARDS-ROUTER.md#language-profiles)",
+  "not select a profile or establish applicability or ownership",
+  "[Rust profile](../profiles/languages/rust/README.md)",
+  "Unknown applicability is a Router diagnostic",
+  "fallback authority",
+]
+prohibited = [
+  "## Languages",
+  "They do not replace Core",
+  "should not live inline",
+  "legacy [Rust index]",
+  "rust/RUST-STANDARDS.md",
+  "| Language | Standards |",
+]
+
+[[checks]]
+id = "language-index-owner-map"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
+header = ["id", "current_path", "line", "future_owner", "disposition", "heading"]
+[[checks.projections]]
+columns = ["id", "current_path", "future_owner", "disposition"]
+order = "source"
+expected = [
+  ["STD-0704", "languages/README.md", "STANDARDS-ROUTER.md", "replace-with-router"],
+  ["STD-0705", "languages/README.md", "STANDARDS-ROUTER.md", "replace-with-router"],
+]
+[checks.projections.where]
+field = "current_path"
+op = "eq"
+value = "languages/README.md"
+
+[[checks]]
+id = "language-index-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0704", "languages/README.md", "STANDARDS-ROUTER.md", "index"],
+  ["STD-0705", "languages/README.md", "STANDARDS-ROUTER.md", "index"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0704", "STD-0705"]
+
+[[checks]]
+id = "language-index-owner-validation"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-row-45-owner-validation.tsv"
+header = ["id", "canonical_owner", "disposition", "reference_treatment", "rationale"]
+[[checks.projections]]
+columns = ["id", "canonical_owner", "disposition", "reference_treatment"]
+order = "source"
+expected = [
+  ["STD-0704", "STANDARDS-ROUTER.md", "index", "none"],
+  ["STD-0705", "STANDARDS-ROUTER.md", "index", "none"],
+]
+
+[[checks]]
+id = "language-index-router-owner"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = [
+  "ID: `router`",
+  "Requires: `core`",
+  "Canonical owner: `STANDARDS-ROUTER.md`",
+  "## Language Profiles",
+]
+prohibited = []

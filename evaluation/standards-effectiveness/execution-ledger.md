@@ -10953,3 +10953,33 @@ declarative suites, and fresh 167-verifier / 172-node / 850-edge /
 168-component graph evidence pass. Both plan checks and diff integrity pass.
 
 **Next slice:** atomically implement and accept M6-P4 and M6-P5.
+
+## 2026-08-11 M6-P4 And M6-P5 SCC Acceptance
+
+**Outcome:** both owner-separated packages accepted atomically at train orders
+74 and 75.
+
+The dependency-free seven-check Language Index suite and four-check row-45
+lifecycle suite pass. Both Bash checkers are deleted, removing their nested
+execution and two-node cycle. The obsolete Language Index consumer row and
+audit classification are absent; the retained audit derives 23 consumers.
+
+All 23 owner-local historical edge rows are accepted. The eight cycle rows use
+the opposite registered suite as independent evidence without adding registry
+dependencies; retained Language Profile, execution-train, root-audit, and
+root-Router gates remain independently checker-backed.
+
+**VE047 result:** numeric lifecycle passes unchanged because each absent checker
+has exactly one accepted package with an explicit canonical owner. No partial
+candidate record, waiver, merged owner, wrapper, syntax evasion, false
+dependency, copied count, or alternate authority was added.
+
+**Verification:** both focused suites, package/edge authority, numeric
+lifecycle, retained gates, all 112 declarative suites, and graph freshness pass
+at 165 Bash verifiers / 170 nodes / 824 edges / 167 components. Read-only hashes
+for standards, owner/disposition/lifecycle evidence, numeric baseline, and
+numeric engine match the clean implementation boundary. The mixed checkpoint
+remains deferred to `M6-P-W1`.
+
+**Next slice:** read-only preflight for P1 package 6, Rust adoption-notes
+retirement.

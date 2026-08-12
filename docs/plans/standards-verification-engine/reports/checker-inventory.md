@@ -1955,3 +1955,18 @@ also represented by M6-P4 from the Language Index endpoint, preserving explicit
 owner-local accountability. Both packages must accept atomically so numeric
 lifecycle observes two absent, explicitly owned checker subjects rather than a
 partially edited live checker.
+
+### Accepted M6-P4 And M6-P5 SCC Closure
+
+The two dependency-free suites preserve their separate Router and migration
+lifecycle ownership. Both Bash checkers and the generated two-node SCC are
+absent. M6-P4's eleven and M6-P5's twelve owner-local edge rows are accepted;
+cycle evidence points to the opposite registered suite without creating
+dependencies.
+
+Numeric lifecycle passes unchanged with both checker subjects absent and one
+accepted explicit-owner package each. The root consumer audit derives 23
+remaining consumers. All 112 declarative suites and fresh 165-verifier /
+170-node / 824-edge / 167-component evidence pass. Canonical standards,
+ownership/disposition/lifecycle records, numeric baseline, and engine remain
+unchanged.
