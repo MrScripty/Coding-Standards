@@ -2576,3 +2576,19 @@
   assertion with literal per-heading constraints and typed diagnostics.
 - Q2 remains unadmitted; no engine, suite, registry, package, edge, checker,
   fixture, standards source, generated graph, lockfile, or workflow changed.
+
+## 2026-08-11 - VE050 Generic Heading Policy Accepted
+
+- Added one strict `markdown_headings` engine primitive that derives ATX
+  headings outside fenced code blocks at an explicit level and rejects an
+  empty selection.
+- Required and prohibited literals apply independently to every selected
+  heading; failures retain exact source rows and typed diagnostics.
+- The primitive has no count, heading inventory, regular-expression input,
+  callback, command execution, normalization, inferred level, compatibility
+  representation, package-specific branch, or Bash fallback.
+- Verification passed: 24 focused file-contract tests, all 191 engine tests,
+  byte-compilation, isolated real-corpus Q2 proof, the live Accessibility
+  evidence-closure checker, and the complete mixed Bash checkpoint.
+- Q2 remains unadmitted and unchanged. Its isolated preflight and admission are
+  next.

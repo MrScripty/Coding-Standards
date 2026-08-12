@@ -95,6 +95,36 @@ class FileContractsTest(unittest.TestCase):
         )
         return suite_path
 
+    def write_heading_policy_suite(
+        self,
+        *,
+        path: str = "docs/index.md",
+        level: str = "2",
+        required: object = ("Migrated",),
+        prohibited: object = (),
+        extra: str = "",
+    ) -> str:
+        suite_path = "suites/files.toml"
+        self.write(
+            suite_path,
+            f"""
+            schema_version = 1
+            id = "files"
+            owner = "test.owner"
+            description = "Markdown heading policy test"
+
+            [[checks]]
+            id = "headings"
+            type = "markdown_headings"
+            path = {json.dumps(path)}
+            level = {level}
+            required = {json.dumps(required)}
+            prohibited = {json.dumps(prohibited)}
+            {extra}
+            """,
+        )
+        return suite_path
+
     def result(self, suite_path: str):
         self.write_registry(suite_path)
         return Verifier(self.root, "registry.toml").run()[0]
@@ -208,6 +238,128 @@ class FileContractsTest(unittest.TestCase):
         ):
             with self.subTest(code=code):
                 suite = self.write_structure_suite(**options)
+                self.write_registry(suite)
+                with self.assertRaises(EngineError) as raised:
+                    Verifier(self.root, "registry.toml")
+                self.assertEqual(raised.exception.diagnostic.code, code)
+
+    def test_markdown_headings_applies_literals_to_every_selected_heading(self) -> None:
+        self.write(
+            "docs/index.md",
+            """
+            # Index
+            ## First Migrated
+            prose
+            ### Nested
+            ## Second Migrated
+            """,
+        )
+
+        result = self.result(
+            self.write_heading_policy_suite(prohibited=["Legacy"])
+        )
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_headings_reports_each_required_and_prohibited_violation(self) -> None:
+        self.write(
+            "docs/index.md",
+            "## Missing marker\n## Legacy Migrated\n## Also missing\n",
+        )
+
+        result = self.result(
+            self.write_heading_policy_suite(prohibited=["Legacy"])
+        )
+
+        self.assertEqual(
+            [(item.code, item.row) for item in result.diagnostics],
+            [
+                ("ASSERT.MARKDOWN_HEADING_REQUIRED", 1),
+                ("ASSERT.MARKDOWN_HEADING_PROHIBITED", 2),
+                ("ASSERT.MARKDOWN_HEADING_REQUIRED", 3),
+            ],
+        )
+
+    def test_markdown_headings_requires_nonempty_level_selection(self) -> None:
+        self.write("docs/index.md", "# Migrated\n### Migrated\n")
+
+        result = self.result(self.write_heading_policy_suite())
+
+        self.assertEqual(result.exit_code, 1)
+        self.assertEqual(
+            result.diagnostics[0].code,
+            "ASSERT.MARKDOWN_HEADING_SELECTION",
+        )
+
+    def test_markdown_headings_ignores_heading_syntax_inside_fences(self) -> None:
+        self.write(
+            "docs/index.md",
+            (
+                "## Real Migrated\n"
+                "```markdown\n## Not migrated\n```\n"
+                "~~~text\n## Also not migrated\n~~~~\n"
+            ),
+        )
+
+        result = self.result(self.write_heading_policy_suite())
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_headings_recognizes_only_atx_heading_syntax(self) -> None:
+        self.write(
+            "docs/index.md",
+            "## Migrated\n  ## Indented Migrated\n##NoSpace\n####### TooMany\n",
+        )
+
+        result = self.result(self.write_heading_policy_suite())
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_headings_invalid_utf8_and_missing_input_are_typed(self) -> None:
+        target = self.root / "docs/index.md"
+        target.parent.mkdir(parents=True)
+        target.write_bytes(b"## Migrated\n\xff")
+        result = self.result(self.write_heading_policy_suite())
+        self.assertEqual(result.exit_code, 2)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.INVALID_UTF8")
+
+        target.unlink()
+        result = self.result(self.write_heading_policy_suite())
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_markdown_headings_rejects_escaping_paths(self) -> None:
+        external = Path(self.external_dir.name)
+        (external / "index.md").write_text("## Migrated\n", encoding="utf-8")
+        (self.root / "escape").symlink_to(external, target_is_directory=True)
+        for path in ("/tmp/index.md", "../index.md", "escape/index.md"):
+            with self.subTest(path=path):
+                result = self.result(self.write_heading_policy_suite(path=path))
+                self.assertEqual(result.exit_code, 2)
+                self.assertEqual(
+                    result.diagnostics[0].code,
+                    "PATH.OUTSIDE_REPOSITORY",
+                )
+
+    def test_markdown_headings_rejects_configuration_errors(self) -> None:
+        cases = (
+            ({"level": "0"}, "CONFIG.HEADING_LEVEL"),
+            ({"level": "7"}, "CONFIG.HEADING_LEVEL"),
+            ({"level": "true"}, "CONFIG.HEADING_LEVEL"),
+            ({"level": '"2"'}, "CONFIG.HEADING_LEVEL"),
+            ({"required": []}, "CONFIG.EMPTY_CHECK"),
+            ({"required": [""]}, "CONFIG.STRING_LIST"),
+            ({"required": ["x", "x"]}, "CONFIG.STRING_LIST"),
+            (
+                {"required": ["x"], "prohibited": ["x"]},
+                "CONFIG.CONTRADICTORY_TEXT",
+            ),
+            ({"path": ""}, "CONFIG.PATH"),
+            ({"extra": 'pattern = "Migrated"'}, "CONFIG.UNKNOWN_FIELD"),
+        )
+        for options, code in cases:
+            with self.subTest(code=code, options=options):
+                suite = self.write_heading_policy_suite(**options)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
                     Verifier(self.root, "registry.toml")

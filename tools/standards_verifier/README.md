@@ -127,6 +127,15 @@ escaping paths, heading drift, and line-limit excess are typed failures. The
 check does not parse prose, normalize content, infer headings or thresholds, or
 freeze unrelated bytes.
 
+The `markdown_headings` check reads one contained UTF-8 Markdown file, selects
+ATX headings outside fenced code blocks at one explicit level from 1 through 6,
+and applies each configured required and prohibited literal to every selected
+heading line. At least one heading must match the level, and at least one
+literal constraint must be configured. Violations identify the source line.
+The check has no regular-expression configuration, inferred level, heading
+inventory, count, line limit, callback, command execution, or content
+normalization.
+
 The `absent_paths` check requires every member of one explicit non-empty unique
 `paths` list to be absent. Paths must remain repository-contained after symlink
 resolution. Files, directories, valid symlinks, and broken symlinks are all

@@ -2124,3 +2124,11 @@ Q2 remains unadmitted. The recommended recovery is a generic, non-vacuous,
 level-selected Markdown heading assertion with per-heading literal constraints
 and typed diagnostics. This is shared engine capability work and must close its
 own full mixed checkpoint before Q2 preflight resumes.
+
+VE050 is accepted. `markdown_headings` now derives ATX headings outside fenced
+code blocks at one explicit level, requires a nonempty selection, and evaluates
+required and prohibited literals on every selected heading with typed source
+rows. It introduces no counts, copied heading inventory, snapshots, regex
+configuration, callbacks, package branches, compatibility, or Bash fallback.
+Focused, engine-wide, real-corpus, live-checker, and complete mixed verification
+passed. Q2 remains unadmitted and is the next isolated preflight.

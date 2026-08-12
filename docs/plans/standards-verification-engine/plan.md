@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE050 heading-policy re-plan
+**Current phase:** Milestone 6: Q-wave package admission
 
-**Next slice:** resolve VE050 before Q2 admission. Recommended Option 1 adds one
-generic level-selected Markdown-heading policy assertion.
+**Next slice:** resume isolated Q2 preflight and admit the package only if the
+complete declarative contract preserves its current behavior and edge semantics.
 
 **Acceptance status:** `pending`
 
@@ -5150,7 +5150,7 @@ workflow authority changed.
 
 ##### VE050 Level-Selected Markdown Heading Policy Re-plan
 
-**Status:** `Blocked`
+**Status:** `Accepted`; Option 1 is implemented and Q2 preflight may resume.
 
 Q2 preflight proves that its decision table, canonical and reference text,
 exact dispositions, and accepted lifecycle claims fit existing generic
@@ -5190,6 +5190,21 @@ limit, copy the current heading list, freeze the complete file, weaken the rule
 to known prohibited headings, invoke Bash from Python, keep a compatibility
 wrapper, or create an Accessibility-specific assertion. Engine/shared-contract
 work requires its own capability slice and mixed checkpoint before Q2 resumes.
+
+**Accepted implementation:** the generic `markdown_headings` check selects ATX
+headings outside fenced code blocks at one explicit level, rejects an empty
+selection, and applies every configured required and prohibited literal to
+every selected heading. Configuration is strict; paths are contained; missing
+or invalid UTF-8 input and per-line assertion failures are typed. It exposes no
+regular-expression configuration, count, copied inventory, callback, command,
+normalizer, inferred level, compatibility representation, or Bash fallback.
+
+**Acceptance evidence:** 24 focused file-contract tests, all 191 engine tests,
+Python byte-compilation, an isolated real-corpus Q2 proof against
+`ACCESSIBILITY-STANDARDS.md`, the live Accessibility evidence-closure checker,
+and the complete mixed Bash checkpoint passed. Q2's suite, registry entry,
+package, edge rows, checker, fixture, standards sources, and generated graph
+remain unchanged for the next isolated admission slice.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

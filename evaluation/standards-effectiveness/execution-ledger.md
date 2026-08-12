@@ -11083,3 +11083,21 @@ literal approximation.
 Recommended Option 1 adds one generic non-vacuous level-selected Markdown
 heading policy assertion with literal per-heading constraints and typed
 diagnostics. Q2 remains unadmitted and no implementation authority changed.
+
+## 2026-08-11 VE050 Generic Heading Policy Accepted
+
+**Outcome:** shared capability accepted; Q2 preflight may resume.
+
+The generic `markdown_headings` check derives ATX headings outside fenced code
+blocks at one explicit level, rejects an empty selection, and applies each
+required and prohibited literal to every selected heading. Strict
+configuration, repository containment, UTF-8 input handling, and source-row
+assertion diagnostics are typed. No count, copied inventory, snapshot, regex
+configuration, callback, command, normalizer, inferred level, compatibility
+representation, package-specific branch, or Bash fallback was added.
+
+Twenty-four focused file-contract tests, all 191 engine tests, byte-compilation,
+an isolated real-corpus Q2 proof, the live Accessibility evidence-closure
+checker, and the complete mixed Bash checkpoint passed. Q2 remains unadmitted;
+its suite, registry, package, edge rows, checker, fixture, sources, and generated
+graph did not change.

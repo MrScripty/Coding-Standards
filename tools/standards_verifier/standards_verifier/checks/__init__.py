@@ -11,6 +11,7 @@ from .edge_dispositions import parse_edge_dispositions_check
 from .exact_text import parse_exact_text_check
 from .line_budget import parse_line_budget_check
 from .markdown_links import parse_markdown_links_check
+from .markdown_headings import parse_markdown_headings_check
 from .markdown_structure import parse_markdown_structure_check
 from .metadata import parse_metadata_graph_check
 from .numeric_lifecycle import parse_numeric_lifecycle_check
@@ -41,6 +42,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_exact_text_check(raw, suite_id)
     if kind == "markdown_links":
         return parse_markdown_links_check(raw, suite_id)
+    if kind == "markdown_headings":
+        return parse_markdown_headings_check(raw, suite_id)
     if kind == "markdown_structure":
         return parse_markdown_structure_check(raw, suite_id)
     if kind == "line_budget":
