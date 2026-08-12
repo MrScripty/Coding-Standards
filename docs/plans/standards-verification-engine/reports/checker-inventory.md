@@ -2652,3 +2652,17 @@ graph now contains 146 Bash verifiers, 151 nodes, 736 edges, and 151
 components. All protected evidence is unchanged. Another package requires a
 fresh audit. All 131 declarative suites and the complete mixed suite of 146
 checkers pass.
+
+### Post-M6-T7 Audit And M6-T8 Admission
+
+The fresh graph has 146 Bash verifiers, 151 nodes, 736 edges, and 151
+components. Row 6 is the smallest remaining caller-free package: six identities
+across Cross-Platform, Release, and Verification, with accelerated-execution
+and execution-train gates. Its six-check probe derives ownership from existing
+decomposition edges and passes without a redundant owner table. M6-T8 is
+admitted at train order 95 with four exact edges and no engine change,
+historical transfer, wrapper, copied count, compatibility path, or fallback.
+Regeneration derives four reference-only package edges for 740 total;
+executable topology is unchanged.
+Package and edge authority, graph freshness, both plan checks, all 131
+declarative suites, the live checker, and both independent gates pass.

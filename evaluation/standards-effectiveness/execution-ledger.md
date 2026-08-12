@@ -11735,3 +11735,17 @@ four former gate edges remain independent and no historical evidence row
 changes. The graph now has 146 Bash verifiers, 151 nodes, 736 edges, and 151
 components. Documentation closure, execution train, all 131 declarative
 suites, and all 146 mixed-suite entrypoints pass. A fresh audit is next.
+
+## 2026-08-12 M6-T8 Row 6 Admission
+
+**Outcome:** admitted at train order 95.
+
+The fresh caller-free audit selects row 6 over broader row 23. Its six exact
+identities split across three existing owners, and a dependency-free six-check
+probe derives that ownership directly from the decomposition overlay. The live
+checker and both independent gates pass. Four exact edges are admitted with no
+historical transfer, duplicate owner record, engine change, or fallback.
+Regeneration derives four reference-only package edges and records 740 total
+edges without changing executable topology. Package and edge authority, graph
+freshness, both plan checks, all 131 declarative suites, the live checker, and
+both independent gates pass. Implementation is next.

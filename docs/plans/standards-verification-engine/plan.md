@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T7 graph and ownership audit
+**Current phase:** Milestone 6: M6-T8 row 6 migration
 
-**Next slice:** inspect the fresh post-M6-T7 graph and remaining ownership and
-evidence shapes before admitting another bounded package.
+**Next slice:** implement admitted M6-T8 without duplicate ownership, wrapper,
+false dependency, copied cardinality, or fallback.
 
 **Acceptance status:** `pending`
 
@@ -6248,6 +6248,39 @@ compatibility path, or legacy execution remains. The focused suite, package
 and edge authority, both independent gates, all 131 declarative suites,
 complete mixed suite of 146 checkers, graph freshness, removal, plan, hash, and
 diff checks pass.
+
+##### M6-T8 Row 6 Admission
+
+**Status:** Admitted at train order 95.
+
+The fresh post-M6-T7 graph contains 146 Bash verifiers, 151 nodes, 736 edges,
+and 151 components. Row 6 and row 23 are caller-free with two independent gates;
+row 6 is smaller at six identities across three owner-coherent children, while
+row 23 spans twelve children plus source closure. Other caller-free rows retain
+larger gate sets.
+
+A disposable dependency-free suite passes six generic checks: exact ordered
+decomposition, decomposition-to-disposition owner lineage, exact disposition
+kinds, report and no-fallback semantics, execution-train identity, and accepted
+plan state. It derives ownership directly from existing decomposition edges and
+does not add a redundant owner-validation table. The live checker, accelerated
+execution, and execution train pass independently; no engine or schema change
+is needed.
+
+M6-T8 has four exact outgoing incident edges to those two independent gates and
+no historical caller-evidence rows. Implementation may change only the admitted
+15 paths. It must register and pass the suite before deleting Bash, accept only
+M6-T8 and its four edges, regenerate the graph, and prove decomposition,
+dispositions, report, acceleration, train, findings, owner policies, fixtures,
+and legacy source unchanged. Mandatory Strategy, guessed artifact identities,
+fixed platform matrices, weaker evidence, wrappers, false dependencies,
+compatibility parsing, copied counts, duplicate ownership, and fallback are
+prohibited. Changed incidence, unrepresentable semantics, or an edit outside
+the write set is a re-plan trigger.
+
+Admission regeneration derives four reference-only package edges. The graph
+contains 146 Bash verifiers, 151 nodes, 740 edges, and 151 components;
+executable topology is unchanged.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

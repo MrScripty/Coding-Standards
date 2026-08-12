@@ -3207,6 +3207,21 @@
   declarative suites, all 147 mixed-suite entrypoints, graph freshness,
   removal, plan, hash, and diff checks pass. The next slice is a fresh audit.
 
+## 2026-08-12 - Post-M6-T7 Audit And M6-T8 Admission
+
+- Compared all caller-free lifecycle packages in the fresh 146-verifier graph
+  with 151 nodes, 736 edges, and 151 components. Selected row 6 over broader
+  row 23 and the larger-gate packages.
+- A dependency-free six-check probe derives all three owners from existing
+  decomposition edges and passes with the live checker and both gates.
+- Admitted M6-T8 at train order 95 with four independent-gate edges and no
+  historical transfer, duplicate owner record, engine change, or fallback.
+- Regeneration derives four reference-only package edges for 740 total;
+  executable topology is unchanged.
+- Package and edge authority, graph freshness, both plan checks, all 131
+  declarative suites, diff integrity, the live checker, and both independent
+  gates pass.
+
 ## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
 
 - Audited every caller-free lifecycle checker in the fresh 147-verifier graph

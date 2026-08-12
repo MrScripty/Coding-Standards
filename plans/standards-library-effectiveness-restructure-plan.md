@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform a fresh post-M6-T7 graph and ownership audit before
-admitting another bounded verification package.
+**Next slice:** implement admitted verification package M6-T8 for parent-owned
+row 6, then audit the fresh graph before another admission.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3162,6 +3162,12 @@ all structural/routing fixtures pass.
          mixed suite of 146 checkers pass. Protected Documentation and
          source-gap evidence remains unchanged. Audit fresh graph and ownership
          state.
+       - `7.4c3ve81` (`Admitted`): the fresh post-M6-T7 audit selects caller-free
+         row 6 over broader row 23. A six-check probe derives its three owners
+         from existing decomposition edges and passes with accelerated-execution
+         and execution-train gates. Admit M6-T8 at train order 95 with four exact
+         edges and no duplicate owner record, engine change, historical
+         transfer, wrapper, copied count, compatibility path, or fallback.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.
