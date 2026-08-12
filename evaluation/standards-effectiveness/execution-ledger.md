@@ -11749,3 +11749,14 @@ Regeneration derives four reference-only package edges and records 740 total
 edges without changing executable topology. Package and edge authority, graph
 freshness, both plan checks, all 131 declarative suites, the live checker, and
 both independent gates pass. Implementation is next.
+
+## 2026-08-12 M6-T8 Row 6 Acceptance
+
+**Outcome:** accepted at train order 95.
+
+The dependency-free row-6 suite passes six generic checks and replaces the
+deleted Bash checker without duplicate ownership, wrapper, or fallback. Its
+four former gate edges remain independent and no historical evidence changes.
+The graph now has 145 Bash verifiers, 150 nodes, 733 edges, and 150 components.
+Accelerated execution, execution train, all 132 declarative suites, and all 145
+mixed-suite entrypoints pass. A fresh audit is next.

@@ -3222,6 +3222,18 @@
   declarative suites, diff integrity, the live checker, and both independent
   gates pass.
 
+## 2026-08-12 - M6-T8 Row 6 Acceptance
+
+- Registered and passed the dependency-free six-check row-6 suite before
+  deleting its Bash checker; no wrapper, alias, or compatibility path remains.
+- Accepted all four M6-T8 edges independently; no historical evidence or owner
+  record required mutation.
+- Regenerated 145 Bash verifiers, 150 nodes, 733 edges, and 150 components;
+  all protected decomposition, owner policy, fixture, findings, and legacy
+  evidence remains byte-identical to admission.
+- Accelerated execution, execution train, all 132 declarative suites, and all
+  145 mixed-suite entrypoints pass. The next slice is a fresh audit.
+
 ## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
 
 - Audited every caller-free lifecycle checker in the fresh 147-verifier graph

@@ -1,0 +1,90 @@
+schema_version = 1
+id = "milestone-7-row-6-decomposition"
+owner = "migration.parent-plan"
+description = "Accepted row 6 multi-owner decomposition with exact disposition lineage and no-fallback evidence."
+
+[[checks]]
+id = "decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+[[checks.projections]]
+columns = ["child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "owner_transition"]
+order = "source"
+expected = [
+  ["1", "STD-0294,STD-0295", "CROSS-PLATFORM-STANDARDS.md", "topics/cross-platform.md", "exists", "pre-slice-review", "focused", "none"],
+  ["2", "STD-0296,STD-0297", "CROSS-PLATFORM-STANDARDS.md", "workflows/release.md", "exists", "pre-slice-review", "focused", "none"],
+  ["3", "STD-0298,STD-0299", "CROSS-PLATFORM-STANDARDS.md", "workflows/verification.md", "exists", "pre-slice-review", "focused", "none"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "6"
+
+[[checks]]
+id = "disposition-lineage"
+type = "relation"
+mode = "set"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["ids", "owner"]
+order = "source"
+[checks.left.where]
+field = "baseline_order"
+op = "eq"
+value = "6"
+[checks.left.split]
+field = "ids"
+delimiter = ","
+[checks.right]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["id", "target"]
+order = "source"
+[checks.right.where]
+field = "id"
+op = "in"
+values = ["STD-0294", "STD-0295", "STD-0296", "STD-0297", "STD-0298", "STD-0299"]
+
+[[checks]]
+id = "disposition-kind"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+[[checks.projections]]
+columns = ["id", "disposition"]
+order = "source"
+expected = [["STD-0294", "refine"], ["STD-0295", "refine"], ["STD-0296", "refine"], ["STD-0297", "refine"], ["STD-0298", "refine"], ["STD-0299", "refine"]]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0294", "STD-0295", "STD-0296", "STD-0297", "STD-0298", "STD-0299"]
+
+[[checks]]
+id = "report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-6-decomposition.md"
+required = ["## Cross-Platform Decomposition", "### Child 6.1: Native Artifact Loading", "### Child 6.2: Native Artifact Identity And Installation", "### Child 6.3: Platform Evidence Scheduling", "## No Fallback", "Strategy as a mandatory native-loading abstraction", "guessed prefixes, extensions, platform names", "fixed Linux/Windows target set", "alternate loader, artifact, target, or weaker evidence", "typed diagnostics"]
+prohibited = []
+
+[[checks]]
+id = "train"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+[[checks.projections]]
+columns = ["start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+order = "source"
+expected = [["STD-0294", "STD-0299", "CROSS-PLATFORM-STANDARDS.md", "topics/cross-platform.md", "exists", "owner-review", "focused"]]
+[checks.projections.where]
+field = "order"
+op = "eq"
+value = "6"
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8s` (`Accepted`)", "`7.4b8t` (`Accepted`)", "`7.4b8u` (`Accepted`)", "`7.4b8v` (`Accepted`)"]
+prohibited = []
