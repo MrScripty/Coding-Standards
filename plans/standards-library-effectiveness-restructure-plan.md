@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
-**Next slice:** preflight and admit verification-engine package `M6-Q2` for
-Accessibility Evidence Closure, then preflight Q3 and Q4 independently.
+**Next slice:** resolve verification-engine VE050 before Q2 admission. The
+recommended recovery adds one generic level-selected Markdown-heading policy.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -182,6 +182,14 @@ no executable incident edge, so Q1 is explicitly edge-free. Implementation
 must transfer four accepted M6-P8/P9 independent-gate records to registered
 suite evidence without declaring a dependency. No implementation authority was
 changed during admission; Q2 preflight is next.
+
+VE050 blocks Q2 admission. Existing generic checks cannot express the current
+rule that every level-two Accessibility legacy-index heading contains
+`Migrated` without adding a magic line ceiling, copying the current heading
+inventory, freezing the whole file, or weakening structural evidence. The
+recommended recovery is a generic non-vacuous `markdown_headings` assertion
+with a declared level and literal constraints applied to every selected
+heading. Q2 remains unadmitted pending that shared engine capability decision.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

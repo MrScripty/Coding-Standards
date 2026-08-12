@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: Q-wave package admission
+**Current phase:** Milestone 6: VE050 heading-policy re-plan
 
-**Next slice:** preflight and admit `M6-Q2` Accessibility Evidence Closure, then
-preflight `M6-Q3` and `M6-Q4` independently before concurrent local preparation.
+**Next slice:** resolve VE050 before Q2 admission. Recommended Option 1 adds one
+generic level-selected Markdown-heading policy assertion.
 
 **Acceptance status:** `pending`
 
@@ -5147,6 +5147,49 @@ projection, edge-free contract, all 116 registered declarative suites, fresh
 diff integrity pass. No suite, registry entry, edge row, checker, fixture,
 standards source, engine, schema, numeric evidence, lockfile, build output, or
 workflow authority changed.
+
+##### VE050 Level-Selected Markdown Heading Policy Re-plan
+
+**Status:** `Blocked`
+
+Q2 preflight proves that its decision table, canonical and reference text,
+exact dispositions, and accepted lifecycle claims fit existing generic
+assertions. The remaining Bash rule selects every level-two heading in
+`ACCESSIBILITY-STANDARDS.md` and rejects any selected heading that does not
+contain `Migrated`. The engine has exact-heading plus mandatory-line-limit
+`markdown_structure`, whole-file `exact_text`, and unstructured literal `text`,
+but no assertion for a property over a structurally selected heading set.
+
+**Option 1 - Generic level-selected heading policy (`Recommended`):** add a
+separate `markdown_headings` assertion that parses ATX headings, selects one
+declared level, requires at least one selected heading, and applies configured
+literal requirements or prohibitions to every selected heading. It returns
+typed configuration/input/assertion diagnostics and has focused positive and
+negative tests. This preserves Q2 exactly without regex, heading inventories,
+line limits, whole-file snapshots, callbacks, or package-specific code and is
+reusable for other derived indexes.
+
+**Option 2 - Exact `markdown_structure` inventory:** list the four current
+headings and add a positive maximum-line value. This passes current content but
+freezes heading membership and introduces unrelated count authority. Future
+valid migrated sections or prose growth would require suite churn, so this is
+not recommended.
+
+**Option 3 - Whole-file `exact_text`:** freeze the current short index bytes.
+This is deterministic but turns every prose, wrapping, or route edit into Q2
+authority and duplicates content rather than describing the closure invariant.
+It is not recommended.
+
+**Option 4 - Defer Q2 and retain Bash:** continue Q3/Q4 while leaving Q2
+unadmitted. This preserves current behavior but violates the selected Q-wave
+ordering and leaves the generic capability gap unresolved; it is appropriate
+only if heading-policy ownership is explicitly deferred to a later engine wave.
+
+**No-fallback boundary:** Q2 remains unadmitted. Do not encode a magic line
+limit, copy the current heading list, freeze the complete file, weaken the rule
+to known prohibited headings, invoke Bash from Python, keep a compatibility
+wrapper, or create an Accessibility-specific assertion. Engine/shared-contract
+work requires its own capability slice and mixed checkpoint before Q2 resumes.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

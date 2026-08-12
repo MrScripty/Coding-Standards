@@ -2111,3 +2111,16 @@ must register the suite, delete the Bash checker, and transfer four accepted
 M6-P8/P9 independent-gate evidence values from the checker path to the exact
 suite ID without adding a dependency. Canonical sources, fixture, disposition,
 engine, schemas, and retained gates remain read-only. Q2 preflight is next.
+
+### VE050 Q2 Heading-Policy Gap
+
+Q2's unique contract is otherwise expressible, and Accessibility Media remains
+an independent gate. The unresolved legacy-index rule evaluates a literal
+property over every level-two heading. Existing primitives would require an
+unrelated line count, a copied exact heading inventory, a whole-file snapshot,
+or weaker substring evidence.
+
+Q2 remains unadmitted. The recommended recovery is a generic, non-vacuous,
+level-selected Markdown heading assertion with per-heading literal constraints
+and typed diagnostics. This is shared engine capability work and must close its
+own full mixed checkpoint before Q2 preflight resumes.

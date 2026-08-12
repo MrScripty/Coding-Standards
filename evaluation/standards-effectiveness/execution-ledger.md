@@ -11067,3 +11067,19 @@ Only package authority, its exact projection, shared planning evidence, and
 derived graph artifacts change at admission. No suite, registry entry, edge
 row, checker, fixture, standards source, engine, schema, numeric evidence,
 lockfile, build output, or workflow changes. Q2 isolated preflight is next.
+
+## 2026-08-11 VE050 Q2 Heading-Policy Re-plan
+
+**Outcome:** Q2 not admitted; shared capability decision required.
+
+The isolated Q2 review maps thirteen decisions, owner/reference boundaries,
+four dispositions, and accepted lifecycle claims to existing generic checks.
+Its nested Accessibility Media checker is an independent gate. The remaining
+rule requires every level-two heading in the legacy index to contain
+`Migrated`; no existing primitive expresses that structural property without
+an unrelated line limit, copied heading list, whole-file freeze, or weaker
+literal approximation.
+
+Recommended Option 1 adds one generic non-vacuous level-selected Markdown
+heading policy assertion with literal per-heading constraints and typed
+diagnostics. Q2 remains unadmitted and no implementation authority changed.

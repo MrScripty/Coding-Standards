@@ -2564,3 +2564,15 @@
 - No suite, registry entry, edge row, checker, fixture, standards source,
   engine, schema, numeric evidence, lockfile, build output, or workflow changed.
 - Next is Q2 isolated-suite preflight and admission.
+
+## 2026-08-11 - VE050 Q2 Heading-Policy Re-plan
+
+- Q2 preflight mapped decisions, text boundaries, dispositions, and lifecycle
+  claims to existing generic checks while keeping Accessibility Media separate.
+- The engine cannot preserve the remaining all-level-two-headings `Migrated`
+  rule without a magic line bound, copied heading inventory, whole-file freeze,
+  or weaker text approximation.
+- Recommended one generic non-vacuous level-selected Markdown heading policy
+  assertion with literal per-heading constraints and typed diagnostics.
+- Q2 remains unadmitted; no engine, suite, registry, package, edge, checker,
+  fixture, standards source, generated graph, lockfile, or workflow changed.
