@@ -589,3 +589,8 @@ requires = []
 id = "accessibility-evidence-closure"
 path = "evaluation/standards-effectiveness/suites/accessibility-evidence-closure.toml"
 requires = []
+
+[[suites]]
+id = "architecture-population"
+path = "evaluation/standards-effectiveness/suites/architecture-population.toml"
+requires = []

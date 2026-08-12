@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
-**Next slice:** reconstruct and integrate M6-Q3 Architecture Population under
-the canonical package-manifest scope authority.
+**Next slice:** revalidate and serially integrate the prepared verification-
+engine M6-Q4 Coding Dependencies Route proposal.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -240,6 +240,13 @@ without copying the path list. No generator or second scope projection was
 added. Q3 implementation may resume after package-projection verification;
 restoring a copied list, silently selecting competing authority, or weakening
 exact package checks is prohibited.
+
+`M6-Q3` is accepted. Its registered dependency-free four-check suite replaces
+the absent Bash checker while preserving the Architecture route, source-wide
+retired-literal prohibitions, eleven exact dispositions, and accepted lifecycle
+claims. The README names the suite, while Architecture Owner and row-15 remain
+independent checker-backed gates with no registry dependency. Canonical
+standards and evidence remain unchanged; Q4 serial integration is next.
 
 `M6-Q4` is admitted at train order 83. A disposable dependency-free three-check
 suite exactly matches the Coding dependency route, exact disposition, and two

@@ -136,9 +136,9 @@ smallest-diff defaults.
 without fixed layers, location-derived authority, ambient globals, or
 incumbent-structure fallback.
 
-`verify-architecture-population.sh` proves exact replacement of the eleven
-legacy architecture identifiers and removal of fixed organization, layer,
-backend, framework, composition, and state-owner recipes.
+The registered `architecture-population` suite proves exact replacement of the
+eleven legacy architecture identifiers and removal of fixed organization,
+layer, backend, framework, composition, and state-owner recipes.
 
 `fixtures/core/constants-decisions.tsv` and the registered `core-constants` suite prove
 semantic constant/configuration ownership without universal literal,

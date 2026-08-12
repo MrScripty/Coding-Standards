@@ -2219,6 +2219,14 @@ only file-level scope; Q3 prose supplies semantic exclusions without copying
 the path list. This planning-only recovery adds no generator or implementation
 change. Fresh-base Q3 integration is authorized next.
 
+### Accepted M6-Q3 Architecture Population
+
+The registered dependency-free four-check suite replaces the absent Bash
+checker and preserves the Architecture route, source-wide retired-literal
+prohibitions, eleven exact dispositions, and accepted lifecycle evidence. The
+README now names the suite. Architecture Owner and row-15 remain separately
+owned checker-backed gates without suite dependencies. Q4 remains next.
+
 ### Admitted M6-Q4 Coding Dependencies Route
 
 A disposable dependency-free three-check suite matches the Coding dependency

@@ -2730,3 +2730,19 @@
   fixture, engine, schema, lifecycle, numeric, lockfile, build-output, or
   workflow implementation changed.
 - Next is fresh-base Q3 reconstruction and atomic integration.
+
+## 2026-08-11 - M6-Q3 Architecture Population Acceptance
+
+- Reconstructed proposal `42c3ab0` on the accepted VE052 revision and
+  confirmed its package-local diff remained one suite addition and one checker
+  deletion.
+- Registered and passed the dependency-free four-check suite before accepting
+  Q3 at train order 82 and deleting the Bash entrypoint.
+- Replaced the README's obsolete checker projection with the registered suite;
+  no stale or dual current entrypoint remains.
+- Retained Architecture Owner and row-15 as checker-backed independent gates
+  with no registry dependency or copied behavior.
+- Preserved canonical standards, dispositions, lifecycle claims, retained
+  gates, fixtures, engine/schema, numeric evidence, lockfiles, outputs, and
+  workflows unchanged. The mixed checkpoint remains deferred to `M6-Q-W1`;
+  Q4 integration is next.

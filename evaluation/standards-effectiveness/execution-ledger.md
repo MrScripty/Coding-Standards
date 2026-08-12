@@ -11286,3 +11286,21 @@ No generated prose, second scope representation, suite, checker, registry,
 edge, README, graph, source, fixture, engine, schema, lifecycle, numeric,
 lockfile, build-output, or workflow implementation changed. Fresh-base Q3
 reconstruction and atomic integration are next.
+
+## 2026-08-11 M6-Q3 Architecture Population Acceptance
+
+**Outcome:** accepted at train order 82.
+
+The Q3 proposal was reconstructed on accepted VE052 state, registered, and
+passed before Bash checker deletion. Four generic checks preserve the Coding
+Architecture route, source-wide removal of retired architecture recipes,
+eleven exact dispositions, and accepted population lifecycle claims. The
+README now projects the registered `architecture-population` suite and contains
+no obsolete checker entrypoint.
+
+Architecture Owner and row-15 remain separately selected checker-backed gates;
+Q3 has no registry dependency and copies neither behavior. Canonical standards,
+dispositions, lifecycle claims, retained gates, fixtures, engine/schema,
+numeric evidence, lockfiles, outputs, and workflows remain unchanged. No
+wrapper, bridge, alias, dual authority, compatibility representation, or
+fallback remains. Q4 serial integration is next.

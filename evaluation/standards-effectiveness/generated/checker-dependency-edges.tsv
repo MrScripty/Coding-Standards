@@ -1,5 +1,4 @@
 edge_type	source	target
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-architecture-population.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-coding-dependency-route.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-32-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-33-decomposition.sh
@@ -8,7 +7,6 @@ contract_reference	evaluation/standards-effectiveness/checker-migration-packages
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-accessibility-media.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-owner-contract.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-population.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-coding-dependency-route.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-commit-authority.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
@@ -82,7 +80,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-source-package
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-launcher-population.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv	evaluation/standards-effectiveness/verify-rust-no-std-closure.sh
-contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-architecture-population.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-coding-dependency-route.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-row-32-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-row-33-decomposition.sh
@@ -112,8 +109,6 @@ executable_reference	evaluation/standards-effectiveness/verify-architecture-owne
 executable_reference	evaluation/standards-effectiveness/verify-architecture-pattern-reference-owner.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-architecture-pattern-selection-closure.sh	evaluation/standards-effectiveness/verify-architecture-discover-or-create-reference.sh
 executable_reference	evaluation/standards-effectiveness/verify-architecture-pattern-selection-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-40-decomposition.sh
-executable_reference	evaluation/standards-effectiveness/verify-architecture-population.sh	evaluation/standards-effectiveness/verify-architecture-owner-contract.sh
-executable_reference	evaluation/standards-effectiveness/verify-architecture-population.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-architecture-process-instance-coordination.sh	evaluation/standards-effectiveness/verify-milestone-7-row-39-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/check-decision-table.sh
 executable_reference	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/verify-contract-decisions.sh
@@ -517,8 +512,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-architecture-monor
 verifier_dependency	evaluation/standards-effectiveness/verify-architecture-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-architecture-pattern-selection-closure.sh	evaluation/standards-effectiveness/verify-architecture-discover-or-create-reference.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-architecture-pattern-selection-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-40-decomposition.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-architecture-population.sh	evaluation/standards-effectiveness/verify-architecture-owner-contract.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-architecture-population.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-architecture-process-instance-coordination.sh	evaluation/standards-effectiveness/verify-milestone-7-row-39-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/verify-contract-decisions.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/verify-contract-ownership.sh

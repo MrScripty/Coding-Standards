@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** reconstruct and integrate M6-Q3 Architecture Population under
-the canonical package-manifest scope authority.
+**Next slice:** revalidate and serially integrate the prepared M6-Q4 Coding
+Dependencies Route proposal.
 
 **Acceptance status:** `pending`
 
@@ -5229,9 +5229,9 @@ checkpoint remains deferred to `M6-Q-W1`.
 
 ##### M6-Q3 Architecture Population Package Admission
 
-**Status:** `Active`; implementation is authorized after VE051 and VE052.
+**Status:** `Accepted`
 
-**Package state:** `admitted` at train order 82.
+**Package state:** `accepted` at train order 82.
 
 An isolated dependency-free suite proves Q3's complete migration-population
 contract with four generic checks. One text check preserves the Architecture
@@ -5277,6 +5277,16 @@ both pass route, prohibition, eleven-disposition, and lifecycle evidence.
 Package projection and exact edge authority pass against the current graph. No
 permanent suite, registry entry, checker, standards source, fixture, engine,
 schema, numeric evidence, lockfile, build output, or workflow changed.
+
+**Acceptance evidence:** the dependency-free four-check suite is registered
+and passes the Architecture route, source-wide retired-literal prohibitions,
+eleven exact dispositions, and accepted lifecycle claims. The Bash checker is
+absent and the README names only the registered suite as the current
+entrypoint. All four historical Architecture Owner and row-15 edges remain
+independent and checker-backed without registry dependencies or copied
+behavior. Package/edge authority, retained gates, all declarative suites,
+graph freshness, both plan checks, removed-path/README/read-only-source proof,
+and diff integrity pass. The mixed checkpoint remains deferred to `M6-Q-W1`.
 
 ##### VE051 Q3 README Authority Re-plan
 
