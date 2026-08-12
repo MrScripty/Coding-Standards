@@ -2552,3 +2552,15 @@
   integration remain serial. No package, suite, fixture, checker, engine,
   schema, standards, baseline, lockfile, build output, or workflow changed.
 - Next is read-only Q1 isolated-suite preflight and admission.
+
+## 2026-08-11 - M6-Q1 Rust Tooling Criterion Admission
+
+- A disposable dependency-free suite and the live checker passed the same
+  sixteen Criterion decisions, source boundaries, and exact disposition.
+- Admitted Q1 at train order 80 with explicit edge-free authority. Its sole
+  current graph edge is a non-executable contract reference.
+- Froze a four-row M6-P8/P9 independent-gate evidence transfer to the exact Q1
+  suite ID without a registry dependency.
+- No suite, registry entry, edge row, checker, fixture, standards source,
+  engine, schema, numeric evidence, lockfile, build output, or workflow changed.
+- Next is Q2 isolated-suite preflight and admission.

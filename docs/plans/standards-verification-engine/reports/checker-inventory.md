@@ -2097,3 +2097,17 @@ preflight proves a real semantic prerequisite. Each package requires separate
 admission and exact incident-edge authority. Disjoint suite/checker preparation
 may be concurrent; registry, manifests, graph, and plan integration remain
 serial. No package is admitted by this topology finding.
+
+### Admitted M6-Q1 Rust Tooling Criterion
+
+The live checker has no executable incident edge and one contract-reference
+edge from accepted historical edge authority. An isolated dependency-free
+five-check suite matches all sixteen Criterion decisions, profile, reference,
+and former-source boundaries, and the exact `STD-0834` split. Existing generic
+decision, text, and table assertions are sufficient.
+
+Q1 is admitted at train order 80 in explicit edge-free mode. Its implementation
+must register the suite, delete the Bash checker, and transfer four accepted
+M6-P8/P9 independent-gate evidence values from the checker path to the exact
+suite ID without adding a dependency. Canonical sources, fixture, disposition,
+engine, schemas, and retained gates remain read-only. Q2 preflight is next.

@@ -3,6 +3,7 @@ contract_reference	evaluation/standards-effectiveness/checker-migration-packages
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-33-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-source-package-preparation.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
+contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-rust-tooling-criterion.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-commit-authority.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
@@ -80,6 +81,7 @@ contract_reference	evaluation/standards-effectiveness/suites/checker-migration-p
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-row-33-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-milestone-7-source-package-preparation.sh
 contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
+contract_reference	evaluation/standards-effectiveness/suites/checker-migration-packages.toml	evaluation/standards-effectiveness/verify-rust-tooling-criterion.sh
 contract_reference	evaluation/standards-effectiveness/suites/documentation-traceability-policy.toml	templates/check-decision-traceability.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh
 contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-decomposition.toml	evaluation/standards-effectiveness/verify-commit-authority.sh

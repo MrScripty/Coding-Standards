@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-P1 owner-wave decomposition
+**Current phase:** Milestone 6: Q-wave package admission
 
-**Next slice:** preflight and admit `M6-Q1` Rust Tooling Criterion, then preflight
-`M6-Q2` through `M6-Q4` independently before any concurrent preparation.
+**Next slice:** preflight and admit `M6-Q2` Accessibility Evidence Closure, then
+preflight `M6-Q3` and `M6-Q4` independently before concurrent local preparation.
 
 **Acceptance status:** `pending`
 
@@ -5093,6 +5093,60 @@ output, and workflow authority remain unchanged.
 retained gates; generated inventory freshness; all declarative suites; both
 plan checks; exact graph-diff review; and diff integrity. Package-specific
 admission gates are frozen only after isolated suite probes.
+
+##### M6-Q1 Rust Tooling Criterion Package Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 80.
+
+An isolated dependency-free suite proves the complete Criterion contract with
+existing generic assertions. One `decision` check reproduces all sixteen
+fixture outcomes with typed invalid, unavailable, unsupported, and allow
+results. Three `text` checks preserve the canonical profile, reference recipe,
+and former-source boundary. One exact `table` projection proves the single
+`STD-0834` split without relying on a copied count. The probe and the live Bash
+checker both pass, and the temporary registry and suite were removed after the
+comparison.
+
+The current generated graph has no executable incident edge for the Q1
+checker, so the package uses explicit `edge-free` authority and must have no
+edge-disposition row. Its only current graph edge is a `contract_reference`
+from the accepted historical edge manifest. Four accepted M6-P8 and M6-P9
+`independent-gate` rows still use `checker:` evidence for Q1. Implementation
+must transfer those rows to `suite:rust-tooling-criterion` after registration;
+that evidence transition creates no registry dependency.
+
+**Allowed implementation write set:** package and edge manifests; package
+projection; suite registry; `suites/rust-tooling-criterion.toml`; the deleted
+`verify-rust-tooling-criterion.sh`; all four generated checker artifacts; this
+plan; child ledger; issues; checker-inventory report; canonical evaluation
+ledger; and parent plan. The Criterion fixture, canonical profile, reference
+recipe, former source, consolidation dispositions, all retained gates, other
+suites/checkers, verification README, engine code/tests, schemas, numeric
+evidence, lockfiles, build output, and workflows remain read-only.
+
+**No-fallback rule:** register and pass the five-check suite before deleting
+the Bash checker. Do not retain a wrapper, Bash-to-Python bridge, duplicate
+fixture, copied count, alternate Criterion defaults, whole-file snapshot,
+package-specific assertion, false `requires` dependency, or checker-backed
+historical evidence after deletion. Any new executable incident edge, changed
+source contract, missing generic capability, or inability to transfer all four
+historical rows is a re-plan trigger.
+
+**Acceptance gate:** focused Q1 suite; live checker equivalence before deletion;
+package projection and edge-free authority; exact four-row historical evidence
+transfer; all declarative suites; removed checker path; graph freshness; both
+plan checks; exact read-only source/fixture/disposition evidence; diff
+integrity; and the deferred `M6-Q-W1` mixed checkpoint.
+
+**Admission verification:** the disposable five-check suite and live checker
+both pass all sixteen decisions and the exact disposition. The package
+projection, edge-free contract, all 116 registered declarative suites, fresh
+161-verifier / 166-node / 783-edge / 166-component graph, both plan checks, and
+diff integrity pass. No suite, registry entry, edge row, checker, fixture,
+standards source, engine, schema, numeric evidence, lockfile, build output, or
+workflow authority changed.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

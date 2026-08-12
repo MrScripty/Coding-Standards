@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
-**Next slice:** preflight and admit verification-engine package `M6-Q1` for the
-Rust Tooling Criterion contract, then preflight Q2 through Q4 independently.
+**Next slice:** preflight and admit verification-engine package `M6-Q2` for
+Accessibility Evidence Closure, then preflight Q3 and Q4 independently.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -174,6 +174,14 @@ suite/checker preparation may proceed concurrently only after admission;
 registry, package/edge authority, generated graph, README, and plan integration
 remain serial. Nested Bash calls remain independent gates unless preflight
 proves a true suite dependency. No package is admitted by this decomposition.
+
+`M6-Q1` is admitted at train order 80. A disposable dependency-free five-check
+suite exactly matches all sixteen Criterion decisions, source boundaries, and
+the `STD-0834` split using existing generic assertions. The current checker has
+no executable incident edge, so Q1 is explicitly edge-free. Implementation
+must transfer four accepted M6-P8/P9 independent-gate records to registered
+suite evidence without declaring a dependency. No implementation authority was
+changed during admission; Q2 preflight is next.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

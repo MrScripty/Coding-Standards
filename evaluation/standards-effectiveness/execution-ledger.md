@@ -11048,3 +11048,22 @@ Shared registry, package/edge authority, generated graph, README, plans,
 ledgers, and reports remain serial. Checker, suite, fixture, engine, schema,
 standards, baseline, lockfile, build output, and workflow authority are
 unchanged. Next is Q1 isolated-suite preflight and admission.
+
+## 2026-08-11 M6-Q1 Rust Tooling Criterion Admission
+
+**Outcome:** admitted at train order 80; implementation not started.
+
+A disposable dependency-free suite passed five generic checks covering all
+sixteen Criterion decisions, canonical profile and reference boundaries,
+former-source prohibition, and the exact `STD-0834` split. The live Bash
+checker passed the same evidence. Temporary probe files were removed.
+
+Fresh graph evidence gives Q1 no executable incident edge and one contract
+reference from the accepted edge manifest, so Q1 uses explicit edge-free mode.
+Implementation must transfer four accepted M6-P8/P9 independent-gate evidence
+values to `suite:rust-tooling-criterion` without creating a dependency.
+
+Only package authority, its exact projection, shared planning evidence, and
+derived graph artifacts change at admission. No suite, registry entry, edge
+row, checker, fixture, standards source, engine, schema, numeric evidence,
+lockfile, build output, or workflow changes. Q2 isolated preflight is next.
