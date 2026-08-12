@@ -2641,3 +2641,14 @@ Regeneration derives four reference-only package edges for 743 total;
 executable topology is unchanged.
 Package and edge authority, graph freshness, both plan checks, all 130
 declarative suites, the live checker, and both independent gates pass.
+
+### M6-T7 Acceptance
+
+The registered row-38 suite passes six exact generic checks and replaces its
+Bash checker without a wrapper. Documentation directory-README closure and
+execution-train integrity remain independent through four accepted M6-T7 edge
+records. No historical evidence transfer or legacy restoration occurs. The
+graph now contains 146 Bash verifiers, 151 nodes, 736 edges, and 151
+components. All protected evidence is unchanged. Another package requires a
+fresh audit. All 131 declarative suites and the complete mixed suite of 146
+checkers pass.

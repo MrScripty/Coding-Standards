@@ -3221,3 +3221,16 @@
 - Package and edge authority, graph freshness, both plan checks, all 130
   declarative suites, diff integrity, the live checker, and both independent
   gates pass.
+
+## 2026-08-12 - M6-T7 Row 38 Acceptance
+
+- Registered and passed the dependency-free six-check row-38 suite before
+  deleting its Bash checker; no wrapper, alias, or compatibility path remains.
+- Accepted all four M6-T7 edges independently; no historical evidence record
+  required mutation.
+- Regenerated 146 Bash verifiers, 151 nodes, 736 edges, and 151 components;
+  all protected row, Documentation, source-gap, policy, and index evidence
+  remains byte-identical to admission.
+- Focused suite, package/edge authority, both independent gates, all 131
+  declarative suites, all 146 mixed-suite entrypoints, graph freshness,
+  removal, plan, hash, and diff checks pass. The next slice is a fresh audit.

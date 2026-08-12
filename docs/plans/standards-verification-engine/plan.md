@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-T7 row 38 migration
+**Current phase:** Milestone 6: post-M6-T7 graph and ownership audit
 
-**Next slice:** implement admitted M6-T7 without wrapper, false dependency,
-copied cardinality, legacy restoration, or fallback.
+**Next slice:** inspect the fresh post-M6-T7 graph and remaining ownership and
+evidence shapes before admitting another bounded package.
 
 **Acceptance status:** `pending`
 
@@ -6236,6 +6236,18 @@ a re-plan trigger.
 Admission regeneration derives four reference-only package edges. The graph
 contains 147 Bash verifiers, 152 nodes, 743 edges, and 152 components;
 executable topology is unchanged.
+
+Acceptance registers and passes the dependency-free six-check row-38 suite
+before deleting the Bash checker. Four M6-T7 edge records remain independent.
+The regenerated graph contains 146 Bash verifiers, 151 nodes, 736 edges, and
+151 components. Protected row, owner-validation, disposition, report,
+accelerated-package, execution-train, Documentation closure, source-gap,
+policy, and legacy-index evidence is byte-identical to admission. No legacy
+restoration, row-47 ownership, wrapper, false dependency, fallback,
+compatibility path, or legacy execution remains. The focused suite, package
+and edge authority, both independent gates, all 131 declarative suites,
+complete mixed suite of 146 checkers, graph freshness, removal, plan, hash, and
+diff checks pass.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 
