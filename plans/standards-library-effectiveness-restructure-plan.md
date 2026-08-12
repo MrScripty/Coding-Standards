@@ -12,9 +12,8 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** preflight and admit M6-P6 Rust adoption-notes retirement without
-implementation, then admit M6-P7 through M6-P9 before atomic Rust SCC
-acceptance.
+**Next slice:** preflight and admit M6-P7 Rust migration-index closure without
+implementation. M6-P6 is admitted; no Rust SCC member may yet implement.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -121,6 +120,13 @@ one serial closure commit. Exact edge and numeric identities are derived from
 canonical evidence; the obsolete Bash cycle does not authorize suite
 dependencies. No wrapper, stub, waiver, aggregate count, merged owner, or
 partial implementation is permitted.
+
+M6-P6 is admitted at train order 76 under `migration.parent-plan`. Its isolated
+five-check suite preserves retired-path absence, canonical live-corpus
+exclusion, exact frozen history, and route absence with existing generic
+assertions and no dependencies. Exact owner-local edge authority is admitted;
+implementation remains prohibited until M6-P7 through M6-P9 are admitted and
+all four checker retirements can accept atomically.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

@@ -1992,3 +1992,18 @@ not establish suite dependencies.
 
 No package is admitted by this finding. M6-P6 is the next plan-only admission;
 M6-P7 through M6-P9 follow before any executable implementation.
+
+### Admitted M6-P6 Rust Adoption Retirement
+
+M6-P6 is admitted at train order 76 under `migration.parent-plan`. A corrected
+isolated five-check suite uses the canonical six-column corpus schema and
+existing generic assertions to preserve direct path absence, live-corpus
+exclusion, the exact frozen historical row, and absence from both active route
+files. It has no suite dependencies and changes no source or engine contract.
+
+Exact owner-local edge authority records both generated views of every adoption
+incident relationship. The opposite live row-46, Rust-index, and Rust-profile
+checkers are independent gates during admission; their future registered suites
+replace those identities only during the four-package atomic acceptance. No
+aggregate edge or numeric count is declared. M6-P6 remains unimplemented until
+M6-P7 through M6-P9 are admitted.

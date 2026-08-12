@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE048 Rust closure recovery selected
+**Current phase:** Milestone 6: M6-P6 admitted under VE048
 
-**Next slice:** preflight and admit M6-P6 Rust adoption-notes retirement without
-implementation, then repeat bounded admission for M6-P7 through M6-P9 before
-the four-package atomic SCC acceptance.
+**Next slice:** preflight and admit M6-P7 Rust migration-index closure without
+implementation. M6-P6 remains admitted and no SCC member may be implemented.
 
 **Acceptance status:** `pending`
 
@@ -4794,6 +4793,52 @@ aggregate count, or sequential partial implementation is permitted. A failed
 isolated suite probe, an unrepresentable assertion, a real cross-suite semantic
 dependency, a dirty authority file, or inability to close all four members in
 one accepted state is a new re-plan trigger.
+
+##### M6-P6 Rust Adoption-Notes Retirement Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 76; implementation is prohibited
+until M6-P7, M6-P8, and M6-P9 are also admitted.
+
+The isolated five-check suite proves the retired adoption-notes path is absent,
+the canonical six-column live corpus contains no matching path, frozen metrics
+retain the one exact historical row, and neither the legacy Rust index nor the
+Router names the retired route. It uses existing `absent_paths`, `table`, and
+`text` assertions with `requires = []`; no engine extension, compatibility
+schema, inferred count, callback, command, or source change is needed.
+
+M6-P6 owns the adoption-retirement contract only. Exact generated evidence
+projects every incident relationship from the canonical graph: row 46 and Rust
+index call adoption retirement, while adoption retirement calls row 46 and
+Rust profile closure. Each executable relationship has matching reference and
+verifier-dependency authority. During admission, every row points to its live
+opposite checker as `independent-gate` evidence. Atomic acceptance must replace
+those internal checker identities with the opposite registered suite without
+creating registry dependencies.
+
+**Allowed implementation write set:** the four package/edge/registry authority
+files; `suites/rust-adoption-notes-retirement.toml`; all four Rust SCC Bash
+checkers solely for their jointly accepted deletion and duplicate-call removal;
+verification README; all four generated graph artifacts; this plan; issue and
+inventory reports; canonical evaluation ledger; and parent plan. The retired
+path, corpus, frozen metrics, Rust index, Router, numeric baseline, engine,
+schemas, all unrelated suites and fixtures, lockfiles, build output, and
+workflows remain read-only.
+
+**Acceptance gate:** M6-P7 through M6-P9 admitted; all four isolated suites
+pass before deletion; all four packages and their exact owner-local edge rows
+accept in one commit; numeric lifecycle derives every missing candidate from
+the four absent checker subjects and accepted explicit owners; removed paths,
+all declarative suites, graph freshness, plan checks, read-only hashes, and diff
+integrity pass. The mixed checkpoint remains deferred to `M6-P-W1`.
+
+**Admission evidence:** corrected isolated suite passes all five checks. The
+current adoption, index, profile, and row-46 checkers pass; package projection
+and exact edge authority pass; all declarative suites, graph freshness, both
+plan checks, read-only hashes, and diff integrity must close this admission.
+Any added incident edge, changed source contract, required suite dependency,
+or failed future isolated suite is a re-plan trigger.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

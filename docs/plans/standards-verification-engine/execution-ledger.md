@@ -2451,3 +2451,16 @@
   file changed. The four generated graph artifacts are regenerated atomically
   because plan references are graph inputs; their exact diff must contain only
   derived VE048 documentation edges. Next slice is plan-only M6-P6 admission.
+
+## 2026-08-11 - M6-P6 Rust Adoption Retirement Admission
+
+- Corrected the isolated probe to the canonical six-column `corpus.tsv` schema;
+  its five existing-primitive checks pass with an empty dependency list.
+- Admitted M6-P6 at train order 76 under `migration.parent-plan` and recorded
+  exact owner-local authority for every generated incident relationship. Edge
+  and numeric identities remain derived rather than represented by totals.
+- All SCC implementation files, canonical source evidence, registry, proposed
+  suite, engine, schemas, numeric baseline, lockfiles, build output, and
+  workflows remain unchanged. M6-P6 cannot implement until M6-P7 through
+  M6-P9 are admitted and all four suites pass before atomic deletion.
+- Next slice is read-only M6-P7 Rust migration-index preflight and admission.
