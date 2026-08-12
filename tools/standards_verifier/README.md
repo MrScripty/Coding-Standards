@@ -160,6 +160,18 @@ expressed through projections or relations; mutable inventory cardinality is
 derived from canonical membership. A configured `row_count` is an unknown
 field and fails rather than using a compatibility parser.
 
+The `inclusion` check compares two strict projected table sources named
+`members` and `container`. Every unique projected member row must occur in the
+unique projected container; additional container rows are valid. Both
+collections support the same explicit path, exact header, selected columns,
+source or lexical order, predicate, and single-field split contract used by
+table relations. Duplicate projections are invalid, missing members fail with
+a typed assertion, and missing inputs remain unavailable. The roles describe
+evidence containment only: they do not create metadata graph edges, ownership,
+parent/child decomposition, dependencies, or execution order. The check does
+not infer members, counts, filters, direction, or aliases and does not execute
+commands or fall back to equality or Bash.
+
 Numeric count-authority migration uses a generated immutable lexical snapshot,
 not a manually maintained candidate manifest. The snapshot derives all
 mechanical candidate facts and totals from canonical Bash verifier inventory.

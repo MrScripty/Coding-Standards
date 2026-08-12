@@ -8,6 +8,7 @@ from .acceptance_claims import parse_acceptance_claims_check
 from .decision import parse_decision_check
 from .edge_dispositions import parse_edge_dispositions_check
 from .exact_text import parse_exact_text_check
+from .inclusion import parse_inclusion_check
 from .line_budget import parse_line_budget_check
 from .markdown_links import parse_markdown_links_check
 from .markdown_headings import parse_markdown_headings_check
@@ -40,6 +41,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_edge_dispositions_check(raw, suite_id)
     if kind == "exact_text":
         return parse_exact_text_check(raw, suite_id)
+    if kind == "inclusion":
+        return parse_inclusion_check(raw, suite_id)
     if kind == "markdown_links":
         return parse_markdown_links_check(raw, suite_id)
     if kind == "markdown_headings":

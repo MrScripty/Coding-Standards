@@ -41,6 +41,13 @@ class Projection:
     split_delimiter: str | None = None
 
 
+@dataclass(frozen=True, slots=True)
+class ProjectedTableSource:
+    path: str
+    header: tuple[str, ...]
+    projection: Projection
+
+
 def read_table_rows(
     root: Path,
     path: str,
@@ -129,6 +136,129 @@ def project_table_rows(
     if projection.order == "lexical":
         projected.sort()
     return tuple(projected)
+
+
+def parse_projected_table_source(
+    raw: Any,
+    suite: str,
+    check: str,
+    label: str,
+    *,
+    invalid_code: str,
+    source_name: str,
+    projection_name: str,
+    predicate_name: str,
+) -> ProjectedTableSource:
+    if not isinstance(raw, dict):
+        raise EngineError(
+            Diagnostic(
+                invalid_code,
+                "invalid",
+                f"{source_name} must be a TOML table",
+                suite=suite,
+                check=check,
+                field=label,
+            )
+        )
+    allowed = {"path", "header", "columns", "order", "where", "split"}
+    unknown = set(raw) - allowed
+    if unknown:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.UNKNOWN_FIELD",
+                "invalid",
+                f"{source_name} contains unknown fields",
+                suite=suite,
+                check=check,
+                field=f"{label}.{sorted(unknown)[0]}",
+            )
+        )
+    path = raw.get("path")
+    if not isinstance(path, str) or not path:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.PATH",
+                "invalid",
+                f"{source_name} path must be a non-empty string",
+                suite=suite,
+                check=check,
+                field=label,
+            )
+        )
+    header = _strings(raw.get("header"), f"{label}.header", suite, check)
+    columns = _strings(raw.get("columns"), f"{label}.columns", suite, check)
+    unknown_columns = set(columns) - set(header)
+    if unknown_columns:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.TABLE_COLUMN",
+                "invalid",
+                f"{projection_name} references an unknown column",
+                suite=suite,
+                check=check,
+                field=sorted(unknown_columns)[0],
+            )
+        )
+    order = raw.get("order")
+    if order not in {"source", "lexical"}:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.PROJECTION_ORDER",
+                "invalid",
+                f"{projection_name} order must be source or lexical",
+                suite=suite,
+                check=check,
+                field=label,
+                observed=str(order),
+            )
+        )
+    where = None
+    if "where" in raw:
+        where = parse_predicate(raw["where"], suite, check)
+        unknown_fields = where.fields() - set(header)
+        if unknown_fields:
+            raise EngineError(
+                Diagnostic(
+                    "CONFIG.TABLE_COLUMN",
+                    "invalid",
+                    f"{predicate_name} references an unknown column",
+                    suite=suite,
+                    check=check,
+                    field=sorted(unknown_fields)[0],
+                )
+            )
+    split_field = None
+    split_delimiter = None
+    if "split" in raw:
+        split = raw["split"]
+        if (
+            not isinstance(split, dict)
+            or set(split) != {"field", "delimiter"}
+            or split.get("field") not in columns
+            or not isinstance(split.get("delimiter"), str)
+            or not split["delimiter"]
+        ):
+            raise EngineError(
+                Diagnostic(
+                    "CONFIG.PROJECTION_SPLIT",
+                    "invalid",
+                    "split requires one selected field and a non-empty delimiter",
+                    suite=suite,
+                    check=check,
+                    field=label,
+                )
+            )
+        split_field = split["field"]
+        split_delimiter = split["delimiter"]
+    projection = Projection(
+        columns,
+        order,
+        (),
+        where,
+        split_field,
+        split_delimiter,
+    )
+    return ProjectedTableSource(path, header, projection)
 
 
 @dataclass(frozen=True, slots=True)

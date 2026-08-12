@@ -395,6 +395,53 @@ class EngineTest(unittest.TestCase):
         )
         return "suites/relation.toml"
 
+    def write_inclusion_suite(
+        self,
+        *,
+        container_path: str = "container.tsv",
+        container_columns: str = 'columns = ["value"]',
+        extra: str = "",
+    ) -> str:
+        self.write(
+            "members.tsv",
+            "group\titems\nselected\tb,a\nignored\tz\n",
+        )
+        if container_path == "container.tsv":
+            self.write(
+                container_path,
+                "scope\tvalue\nselected\ta\nselected\tb\nselected\tc\nignored\tz\n",
+            )
+        self.write(
+            "suites/inclusion.toml",
+            f"""
+            schema_version = 1
+            id = "inclusion"
+            owner = "test.owner"
+            description = "Inclusion suite"
+
+            [[checks]]
+            id = "inclusion"
+            type = "inclusion"
+            {extra}
+
+            [checks.members]
+            path = "members.tsv"
+            header = ["group", "items"]
+            columns = ["items"]
+            order = "source"
+            where = {{ field = "group", op = "eq", value = "selected" }}
+            split = {{ field = "items", delimiter = "," }}
+
+            [checks.container]
+            path = {json.dumps(container_path)}
+            header = ["scope", "value"]
+            {container_columns}
+            order = "lexical"
+            where = {{ field = "scope", op = "eq", value = "selected" }}
+            """,
+        )
+        return "suites/inclusion.toml"
+
     def test_text_and_decision_suites_pass(self) -> None:
         self.write("evidence.md", "required\n")
         text_suite = self.write_text_suite("text")
@@ -730,6 +777,42 @@ class EngineTest(unittest.TestCase):
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
 
+    def test_relation_side_parser_retains_stable_diagnostic(self) -> None:
+        self.write(
+            "right.tsv",
+            "scope\tvalues\nselected\ta\n",
+        )
+        self.write(
+            "suites/relation.toml",
+            """
+            schema_version = 1
+            id = "relation"
+            owner = "test.owner"
+            description = "Relation suite"
+
+            [[checks]]
+            id = "relation"
+            type = "relation"
+            mode = "set"
+            left = true
+
+            [checks.right]
+            path = "right.tsv"
+            header = ["scope", "values"]
+            columns = ["values"]
+            order = "source"
+            """,
+        )
+        self.write_registry([("relation", "suites/relation.toml", [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        diagnostic = raised.exception.diagnostic
+        self.assertEqual(diagnostic.code, "CONFIG.RELATION_SIDE")
+        self.assertEqual(diagnostic.message, "relation side must be a TOML table")
+        self.assertEqual(diagnostic.field, "left")
+
     def test_missing_relation_input_is_unavailable(self) -> None:
         suite_path = self.write_relation_suite(right_path="missing.tsv")
         self.write_registry([("relation", suite_path, [])])
@@ -747,6 +830,149 @@ class EngineTest(unittest.TestCase):
 
         self.assertEqual(result.status, "failed")
         self.assertEqual(result.diagnostics[0].code, "PATH.OUTSIDE_REPOSITORY")
+
+    def test_table_inclusion_with_filter_split_and_extra_container_rows_passes(
+        self,
+    ) -> None:
+        suite_path = self.write_inclusion_suite()
+        self.write_registry([("inclusion", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "passed")
+
+    def test_table_inclusion_missing_member_has_stable_diagnostic(self) -> None:
+        suite_path = self.write_inclusion_suite()
+        self.write(
+            "container.tsv",
+            "scope\tvalue\nselected\ta\nselected\tc\n",
+        )
+        self.write_registry([("inclusion", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        diagnostic = result.diagnostics[0]
+        self.assertEqual(diagnostic.code, "ASSERT.TABLE_INCLUSION")
+        self.assertEqual(diagnostic.expected, "all members present in container")
+        self.assertEqual(diagnostic.observed, "(('b',),)")
+
+    def test_table_inclusion_rejects_duplicate_members(self) -> None:
+        suite_path = self.write_inclusion_suite()
+        self.write(
+            "members.tsv",
+            "group\titems\nselected\ta,a\n",
+        )
+        self.write_registry([("inclusion", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        diagnostic = result.diagnostics[0]
+        self.assertEqual(diagnostic.code, "ASSERT.INCLUSION_DUPLICATE")
+        self.assertEqual(diagnostic.observed, "members=2/1,container=3/3")
+
+    def test_table_inclusion_rejects_duplicate_container_rows(self) -> None:
+        suite_path = self.write_inclusion_suite()
+        self.write(
+            "container.tsv",
+            "scope\tvalue\nselected\ta\nselected\tb\nselected\tb\n",
+        )
+        self.write_registry([("inclusion", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        diagnostic = result.diagnostics[0]
+        self.assertEqual(diagnostic.code, "ASSERT.INCLUSION_DUPLICATE")
+        self.assertEqual(diagnostic.observed, "members=2/2,container=3/2")
+
+    def test_malformed_inclusion_collection_is_invalid(self) -> None:
+        self.write(
+            "container.tsv",
+            "scope\tvalue\nselected\ta\n",
+        )
+        self.write(
+            "suites/inclusion.toml",
+            """
+            schema_version = 1
+            id = "inclusion"
+            owner = "test.owner"
+            description = "Inclusion suite"
+
+            [[checks]]
+            id = "inclusion"
+            type = "inclusion"
+            members = true
+
+            [checks.container]
+            path = "container.tsv"
+            header = ["scope", "value"]
+            columns = ["value"]
+            order = "source"
+            """,
+        )
+        suite_path = "suites/inclusion.toml"
+        self.write_registry([("inclusion", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        diagnostic = raised.exception.diagnostic
+        self.assertEqual(diagnostic.code, "CONFIG.INCLUSION_COLLECTION")
+        self.assertEqual(diagnostic.field, "members")
+
+    def test_unknown_inclusion_field_is_invalid(self) -> None:
+        suite_path = self.write_inclusion_suite(extra="unknown = true")
+        self.write_registry([("inclusion", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
+
+    def test_inclusion_rejects_relation_side_aliases(self) -> None:
+        suite_path = self.write_inclusion_suite(extra="left = true")
+        self.write_registry([("inclusion", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        diagnostic = raised.exception.diagnostic
+        self.assertEqual(diagnostic.code, "CONFIG.UNKNOWN_FIELD")
+        self.assertEqual(diagnostic.field, "left")
+
+    def test_missing_inclusion_input_is_unavailable(self) -> None:
+        suite_path = self.write_inclusion_suite(container_path="missing.tsv")
+        self.write_registry([("inclusion", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_inclusion_path_escape_is_invalid(self) -> None:
+        suite_path = self.write_inclusion_suite(container_path="../outside.tsv")
+        self.write_registry([("inclusion", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "PATH.OUTSIDE_REPOSITORY")
+
+    def test_inclusion_projection_width_mismatch_is_invalid(self) -> None:
+        suite_path = self.write_inclusion_suite(
+            container_columns='columns = ["scope", "value"]'
+        )
+        self.write_registry([("inclusion", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        diagnostic = raised.exception.diagnostic
+        self.assertEqual(diagnostic.code, "CONFIG.INCLUSION_WIDTH")
+        self.assertEqual(diagnostic.expected, "1")
+        self.assertEqual(diagnostic.observed, "2")
 
     def test_dependency_diamond_executes_each_suite_once(self) -> None:
         self.write("evidence.md", "required\n")

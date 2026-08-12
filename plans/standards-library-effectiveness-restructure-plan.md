@@ -3230,6 +3230,15 @@ all structural/routing fixtures pass.
          rename equality fields, introduce aliases, or add an expression
          language. The `members`/`container` decision and M6-T11 ordering remain
          unchanged.
+       - `7.4c3ve89` (`Accepted`): M6-E1 extracts one strict projected-table
+         source parser into `table.py`, preserves the existing relation schema
+         and diagnostics, and adds a separate native `inclusion` assertion with
+         only `members` and `container` roles. The 206 engine self-tests,
+         generated 143-verifier/148-node/725-edge/148-component inventory, all
+         134 declarative suites, both plan checks, and all 143 mixed-suite
+         entrypoints pass. No copied identities or counts, aliases, Bash
+         callback, expression language, compatibility path, or fallback is
+         introduced. Rebuild the row-36 probe and proceed to M6-T11 admission.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

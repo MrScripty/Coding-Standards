@@ -11852,3 +11852,25 @@ uses the same shared parser through only `members` and `container`. No alias,
 compatibility conversion, inferred projection, expression language, Bash
 mechanism, or fallback is authorized. M6-T11 remains blocked until this engine
 slice passes focused and complete declarative verification.
+
+## 2026-08-12 M6-E1 Inclusion Engine Acceptance
+
+**Outcome:** accepted; M6-T11 unblocked.
+
+The verifier now owns one shared `ProjectedTableSource` parser in `table.py`.
+The existing `relation` assertion consumes it without changing its public
+`left`/`right` equality schema or diagnostic vocabulary. The new native
+`inclusion` assertion consumes the same strict parser through only `members`
+and `container`, rejects duplicate projections, and reports missing members as
+typed assertion failures while permitting additional container records.
+
+Focused coverage includes filtering and split projection, additional container
+rows, missing members with stable diagnostics, duplicate members, duplicate
+container rows, malformed collections, unknown fields, rejected relation-side
+aliases, unavailable inputs, path escape, projection-width mismatch, and
+relation parser parity. All 206 engine self-tests pass. Generated inventory is
+current at 143 Bash verifiers, 148 graph nodes, 725 edges, and 148 components;
+all 134 declarative suites, both plan checks, and all 143 mixed-suite
+entrypoints pass. No identity list, count, alias, command execution, Bash
+bridge, compatibility behavior, or fallback was added. Row-36 admission is
+next as a separate slice.

@@ -106,6 +106,16 @@ existing equality fields. Shared infrastructure owns only strict projected
 table-source parsing and execution; each assertion retains its own relation
 semantics and public evidence-role vocabulary.
 
+**Accepted:** `ProjectedTableSource` and its strict parser now live in
+`table.py`; `relation` consumes the shared parser with its existing schema and
+diagnostic vocabulary, while `inclusion` exposes only `members` and
+`container`. Positive containment, missing-member, duplicate-projection,
+malformed-collection, unknown-field, no-alias, unavailable-input,
+path-containment, width, filtering, split, and relation-parity tests pass. The
+engine has 206 passing self-tests; generated inventory is current at 143 Bash
+verifiers, 148 graph nodes, 725 edges, and 148 components; all 134 declarative
+suites and all 143 mixed-suite entrypoints pass. M6-T11 admission is next.
+
 ### M6-T11: Row 36 Admission
 
 After M6-E1 is accepted, rebuild the disposable row-36 suite with
