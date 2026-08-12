@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave concurrent preparation
 
-**Next slice:** reconstruct and integrate M6-Q4 Coding Dependencies Route under
-the canonical package-manifest scope authority.
+**Next slice:** run and record the `M6-Q-W1` closing mixed Bash checkpoint,
+then audit the fresh graph before admitting another package.
 
 **Acceptance status:** `pending`
 
@@ -5387,9 +5387,9 @@ after the package projection passes against the current manifest.
 
 ##### M6-Q4 Coding Dependencies Route Package Admission
 
-**Status:** `Active`
+**Status:** `Accepted`
 
-**Package state:** `admitted` at train order 83.
+**Package state:** `accepted` at train order 83.
 
 An isolated dependency-free suite proves Q4's complete route-closure contract
 with three generic checks. One text check preserves the dependency-route heading
@@ -5438,6 +5438,15 @@ both pass route, conservative prohibition, exact disposition, and lifecycle
 evidence. Package projection and exact edge authority pass against the current
 graph. No permanent suite, registry entry, checker, standards source, fixture,
 engine, schema, numeric evidence, lockfile, build output, or workflow changed.
+
+**Acceptance evidence:** the registered dependency-free three-check suite
+passes the Coding dependency route, whole-index retired-source prohibition,
+exact `STD-0157` disposition, and accepted lifecycle claims. The Bash checker
+is absent. All four historical Dependencies Owner and row-15 edges remain
+independent and checker-backed without registry dependencies or copied
+behavior. Package/edge authority, retained gates, all declarative suites,
+graph freshness, both plan checks, removed-path/read-only-source proof, and
+diff integrity pass. The closing mixed checkpoint is next at `M6-Q-W1`.
 
 ##### VE053 Q4 Scope Authority Consistency Re-plan
 

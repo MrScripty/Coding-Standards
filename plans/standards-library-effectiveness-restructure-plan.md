@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1` are accepted; exact typed incident-edge semantics govern
 further checker deletion.
 
-**Next slice:** reconstruct and integrate M6-Q4 Coding Dependencies Route under
-the canonical package-manifest scope authority.
+**Next slice:** run and record the delegated `M6-Q-W1` closing mixed Bash
+checkpoint, then audit the fresh graph before another package admission.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -263,6 +263,13 @@ row-15 decomposition are separate checker-backed independent gates, not
 registry dependencies or copied Q4 behavior. No permanent suite, registry,
 checker, standards, fixture, engine, schema, lockfile, build output, or workflow
 authority changed. All four Q packages are admitted.
+
+`M6-Q4` is accepted. Its registered dependency-free three-check suite replaces
+the absent Bash checker while preserving the Coding dependency route,
+whole-index retired-source prohibition, exact `STD-0157` disposition, and
+accepted lifecycle claims. Dependencies Owner and row-15 remain independent
+checker-backed gates with no registry dependency. Canonical standards and
+evidence remain unchanged; the closing `M6-Q-W1` mixed checkpoint is next.
 
 `M6-Q0` is accepted. Q1 through Q4 local suite/checker paths are disjoint and
 may be prepared concurrently as proposal-only commits from the accepted freeze

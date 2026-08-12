@@ -2776,3 +2776,19 @@
   fixture, engine, schema, lifecycle, numeric, lockfile, build-output, or
   workflow implementation changed.
 - Next is fresh-base Q4 reconstruction and atomic integration.
+
+## 2026-08-11 - M6-Q4 Coding Dependencies Route Acceptance
+
+- Reconstructed proposal `d5900d5` on the accepted VE053 revision and
+  confirmed its package-local diff remained one suite addition and one checker
+  deletion.
+- Registered and passed the dependency-free three-check suite before accepting
+  Q4 at train order 83 and deleting the Bash entrypoint.
+- Preserved the Coding dependency route, conservative whole-index retired-
+  source prohibition, exact `STD-0157` disposition, and accepted lifecycle
+  claims with generic checks only.
+- Retained Dependencies Owner and row-15 as checker-backed independent gates
+  with no registry dependency or copied behavior.
+- Preserved canonical standards, dispositions, lifecycle claims, retained
+  gates, fixtures, engine/schema, numeric evidence, lockfiles, outputs, and
+  workflows unchanged. The closing `M6-Q-W1` mixed checkpoint is next.

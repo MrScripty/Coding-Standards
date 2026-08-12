@@ -11337,3 +11337,19 @@ No generated prose, exception, second scope representation, suite, checker,
 registry, package/edge state, graph, source, fixture, engine, schema,
 lifecycle, numeric, lockfile, build-output, or workflow implementation changed.
 Fresh-base Q4 reconstruction and atomic integration are next.
+
+## 2026-08-11 M6-Q4 Coding Dependencies Route Acceptance
+
+**Outcome:** accepted at train order 83.
+
+The Q4 proposal was reconstructed on accepted VE053 state, registered, and
+passed before Bash checker deletion. Three generic checks preserve the Coding
+dependency route, conservative whole-index retired-source prohibition, exact
+`STD-0157` disposition, and accepted lifecycle claims.
+
+Dependencies Owner and row-15 remain separately selected checker-backed gates;
+Q4 has no registry dependency and copies neither behavior. Canonical standards,
+dispositions, lifecycle claims, retained gates, fixtures, engine/schema,
+numeric evidence, lockfiles, outputs, and workflows remain unchanged. No
+wrapper, bridge, alias, dual authority, compatibility representation, or
+fallback remains. The closing `M6-Q-W1` mixed checkpoint is next.

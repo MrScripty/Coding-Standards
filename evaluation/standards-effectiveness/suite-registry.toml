@@ -594,3 +594,8 @@ requires = []
 id = "architecture-population"
 path = "evaluation/standards-effectiveness/suites/architecture-population.toml"
 requires = []
+
+[[suites]]
+id = "coding-dependency-route"
+path = "evaluation/standards-effectiveness/suites/coding-dependency-route.toml"
+requires = []

@@ -2260,6 +2260,15 @@ only file-level scope; Q4 prose supplies semantic exclusions without copying
 the path list. This planning-only recovery adds no generator, exception, or
 implementation change. Fresh-base Q4 integration is authorized next.
 
+### Accepted M6-Q4 Coding Dependencies Route
+
+The registered dependency-free three-check suite replaces the absent Bash
+checker and preserves the Coding dependency route, whole-index retired-source
+prohibition, exact `STD-0157` disposition, and accepted lifecycle evidence.
+Dependencies Owner and row-15 remain separately owned checker-backed gates
+without suite dependencies. All four Q packages are accepted; the closing
+`M6-Q-W1` mixed checkpoint is next.
+
 ### Accepted Q-Wave Preparation Boundary
 
 Q1 through Q4 have pairwise-disjoint local suite and deleted-checker paths.
