@@ -12,9 +12,8 @@ source entrypoints are derived. Verification-engine Milestone 6 Waves 1
 through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, and M6-N-W1 are accepted; exact
 typed incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement and accept admitted M6-P3 using the accepted VE046
-suite-backed independent-gate evidence contract. Release Procedure and later
-P1 packages stay unadmitted.
+**Next slice:** perform read-only preflight for P1 package 4, Language Index
+closure. Release Procedure and later P1 packages stay unadmitted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -69,6 +68,15 @@ engine tests, all 109 declarative suites, fresh 168-verifier / 173-node /
 852-edge / 169-component evidence, and the complete mixed checkpoint pass.
 M6-P3 may resume from its clean admission boundary without a wrapper,
 compatibility parser, inferred dependency, or fallback authority.
+
+M6-P3 is accepted. Its registered five-check suite preserves exact root README
+structure, six resources and links, routing boundaries, prohibited legacy
+authority, and six dispositions. The Bash checker and five executable edges are
+absent; the root audit derives 24 consumers and root Router evidence remains an
+independent gate. The affected M6-P2 history uses explicit suite-backed
+independent-gate evidence with no registry dependency. All 110 declarative
+suites and fresh 167-verifier / 172-node / 843-edge / 168-component evidence
+pass; the mixed checkpoint remains deferred to `M6-P-W1`.
 
 VE043-P1 has reached a re-plan trigger. Exact generated evidence shows row 45
 in a two-checker Language Index component, row 46 in a four-checker Rust closure

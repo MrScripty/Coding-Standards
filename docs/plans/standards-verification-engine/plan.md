@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-P3 root-index closure implementation
+**Current phase:** Milestone 6: M6-P3 accepted; P1 package 4 preflight
 
-**Next slice:** implement and accept admitted M6-P3 using the accepted VE046
-suite-backed independent-gate evidence contract.
+**Next slice:** perform read-only preflight for P1 package 4, Language Index
+closure, before admitting any executable or package change.
 
 **Acceptance status:** `pending`
 
@@ -4465,9 +4465,9 @@ implementation beside the generic checks.
 
 ##### M6-P3 Root Index Closure Package Admission
 
-**Status:** `Active`
+**Status:** `Accepted`
 
-**Package state:** `admitted` at train order 73.
+**Package state:** `accepted` at train order 73.
 
 Exact review freezes the root index's unique contract: the four ordered README
 headings and 32-line ceiling; six exact resource/target/role rows and live
@@ -4518,6 +4518,19 @@ Router/audit gates pass; package projection and all five exact incident-edge
 rows pass; all 109 declarative suites pass; generated evidence is fresh at 168
 Bash verifiers / 173 nodes / 852 edges / 169 components and adds only two
 contract references; diff integrity passes.
+
+**Acceptance evidence:** the registered five-check suite passes exact root
+heading order and line ceiling, six resource identities/roles and live links,
+the routing boundary and legacy-authority prohibitions, and six exact
+dispositions. The Bash checker is absent. The retained root audit passes with
+24 derived consumers after its obsolete root-closure identity is removed, and
+root Router evidence still passes independently. M6-P3 and all five historical
+incident-edge rows are accepted; the two affected M6-P2 rows now point to the
+registered suite using the accepted VE046 independent-gate form without a
+registry dependency. All 110 declarative suites pass; generated evidence is
+fresh at 167 Bash verifiers / 172 nodes / 843 edges / 168 components; removed
+paths, both plan checks, read-only boundaries, and diff integrity pass. The
+mixed Bash checkpoint remains deferred to `M6-P-W1`.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 

@@ -320,6 +320,12 @@ plan state. Open dependency and caller membership is derived from canonical
 inventories; retained independent checkers are line-validated but are not
 nested or executed by the suite.
 
+The registered `root-index-closure` suite checks the root README's exact
+heading order and line ceiling, six resource roles and links, explicit routing
+boundary, prohibited legacy authority, and six accepted dispositions. Root
+Router evidence and the README consumer audit remain independent gates; this
+suite neither depends on nor executes them.
+
 ## Plan Lifecycle Fixtures
 
 `check-plan-structure.sh` and `verify-plan-fixtures.sh` enforce deterministic

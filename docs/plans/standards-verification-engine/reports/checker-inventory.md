@@ -1881,3 +1881,21 @@ the independent form. All 31 edge tests, all 183 engine tests, Python
 compilation, all 109 declarative suites, fresh 168-verifier / 173-node /
 852-edge / 169-component graph evidence, and the complete mixed checkpoint
 pass. M6-P3 remains admitted and is now unblocked.
+
+### Accepted M6-P3 Root Index Closure
+
+The registered five-check suite now owns exact root README structure, resource
+roles and links, routing boundaries, legacy-authority prohibitions, and six
+accepted dispositions. The replaced Bash checker and its five executable edges
+are absent. The root audit derives 24 remaining consumers after removal of the
+obsolete root-closure identity, and both the audit and root Router evidence
+remain independently executable.
+
+The two accepted M6-P2 historical edges now use
+`suite:root-index-closure` with the suite's exact registered path and no
+registry dependency. M6-P3 and its five historical edge rows are accepted.
+Focused authority, all 110 declarative suites, removed-path proof, and fresh
+inventory at 167 Bash verifiers / 172 nodes / 843 edges / 168 components pass.
+Canonical root sources, fixtures, dispositions, retained Router evidence,
+engine code/tests, schemas, numeric evidence, lockfiles, build output, and
+workflows are unchanged. The mixed checkpoint remains deferred to `M6-P-W1`.

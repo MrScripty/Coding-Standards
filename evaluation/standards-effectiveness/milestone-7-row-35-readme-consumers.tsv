@@ -3,7 +3,6 @@ evaluation/standards-effectiveness/verify-decision-traceability.sh	none	fixture-
 evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh	none	legacy-heading-pattern
 evaluation/standards-effectiveness/verify-language-index-closure.sh	none	language-index-closure
 evaluation/standards-effectiveness/verify-release-procedure-policy.sh	none	rust-profile-index
-evaluation/standards-effectiveness/verify-root-index-closure.sh	root-closure-verifier	none
 evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh	consumer-audit-infrastructure	none
 evaluation/standards-effectiveness/verify-root-router-evidence.sh	root-authority-verifier	none
 evaluation/standards-effectiveness/verify-rust-api-owner-contract.sh	none	rust-profile-index

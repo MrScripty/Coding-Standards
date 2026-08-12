@@ -10840,3 +10840,35 @@ complete mixed checkpoint passes across all 168 surviving Bash verifiers.
 
 **Next slice:** implement and accept M6-P3 within its frozen write set, including
 the exact historical independent-gate evidence transition authorized here.
+
+## 2026-08-11 M6-P3 Root Index Closure Acceptance
+
+**Outcome:** accepted at train order 73.
+
+The registered five-check suite preserves exact root README heading order and
+line ceiling, six resource roles and live links, explicit routing boundaries,
+prohibited legacy authority, and six exact dispositions. The replaced Bash
+checker is deleted. The root README audit no longer carries its obsolete
+root-closure identity and passes with 24 derived consumers; root Router evidence
+continues to pass as a separate owner.
+
+The package and all five historical incident edges are accepted. The two M6-P2
+historical rows whose retained gate migrated in this slice now use
+`suite:root-index-closure` with its exact registered path. The suite has no
+registry dependency, preserving semantic independence under VE046.
+
+**No-fallback result:** no wrapper, nested checker execution, obsolete consumer
+identity, duplicate root-purity assertion, false suite dependency, copied
+mutable count, whole-file snapshot, or weaker substring approximation remains.
+Root README, Router, resource fixture, dispositions, retained Router checker,
+engine code/tests, schemas, numeric evidence, lockfiles, build output, and
+workflows are unchanged.
+
+**Verification:** the focused suite, retained audit and Router evidence,
+package authority, exact edge authority, and removed-path checks pass; all 110
+declarative suites pass; generated evidence is fresh at 167 Bash verifiers /
+172 nodes / 843 edges / 168 components; both plan checks and diff integrity
+pass. The mixed Bash checkpoint remains deferred to `M6-P-W1`.
+
+**Next slice:** perform read-only preflight for P1 package 4, Language Index
+closure, before admitting any executable or package change.
