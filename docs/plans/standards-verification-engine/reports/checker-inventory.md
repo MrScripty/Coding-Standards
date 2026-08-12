@@ -2020,3 +2020,20 @@ relationship and Rust-index calls to adoption and profile closure. Live
 opposite checkers remain independent gates until atomic acceptance; the Bash
 cycle does not establish declarative dependencies. M6-P6/P7 remain admitted
 and unimplemented while M6-P8 is next.
+
+### Admitted M6-P8 Rust Profile Authority
+
+M6-P8 is admitted at train order 78 under
+`profiles/languages/rust/README.md`. Its isolated three-check suite preserves
+canonical metadata, all specialized profile links, typed diagnostics, and
+no-legacy/no-default authority with existing generic assertions and no
+dependencies.
+
+Twenty owner-local rows cover both generated views of three inbound SCC calls,
+the reciprocal row-46 call, and six retained outbound gates. The API, async,
+tooling, unsafe, language-routing, and root-audit checks retain their own
+authority; nested execution is not reclassified as profile semantics or suite
+dependency. M6-P6/P7/P8 remain admitted and unimplemented while M6-P9 is next.
+Package and edge authority, all declarative suites, current SCC checks, numeric
+lifecycle, graph freshness, plan structure, read-only hashes, and diff integrity
+pass for the admission.

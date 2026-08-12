@@ -2475,3 +2475,22 @@
   proposed suites, engine, schemas, numeric baseline, lockfiles, build output,
   and workflows remain unchanged.
 - Next slice is M6-P8 Rust profile authority preflight and admission.
+
+## 2026-08-11 - M6-P8 Rust Profile Authority Admission
+
+- Proved a dependency-free three-check suite in isolation for exact Rust
+  profile metadata, specialized links, typed diagnostics, and no-legacy
+  authority.
+- Admitted M6-P8 at train order 78 under the canonical Rust profile owner and
+  recorded both generated views of every incident relationship without totals.
+- Retained API, async, tooling, unsafe, language-routing, and root-audit checks
+  remain independently owned gates; no nested Bash call became a suite
+  dependency.
+- M6-P6/P7/P8 remain unimplemented. Canonical Rust sources, registry, proposed
+  suites, engine, schemas, fixtures, numeric baseline, lockfiles, build output,
+  and workflows remain unchanged.
+- Package and exact edge authority, all 112 declarative suites, all four SCC
+  checkers, numeric lifecycle, graph freshness at 165 Bash verifiers / 170
+  nodes / 838 edges / 167 components, both plan checks, frozen read-only hashes,
+  and diff integrity passed. The mixed Bash checkpoint remains M6-P-W1.
+- Next slice is M6-P9 row-46 lifecycle preflight and admission.

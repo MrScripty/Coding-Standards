@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-P6/P7 admitted under VE048
+**Current phase:** Milestone 6: M6-P6/P7/P8 admitted under VE048
 
-**Next slice:** preflight and admit M6-P8 Rust profile authority closure without
-implementation. M6-P6/P7 remain admitted and no SCC member may be implemented.
+**Next slice:** preflight and admit M6-P9 row-46 lifecycle without
+implementation. M6-P6/P7/P8 remain admitted and no SCC member may be
+implemented.
 
 **Acceptance status:** `pending`
 
@@ -4879,6 +4880,57 @@ checkers, package and exact edge authority, all declarative suites, graph
 freshness, plan checks, read-only hashes, and diff integrity must close this
 admission. New semantics, changed ownership, or a required dependency triggers
 re-plan.
+
+##### M6-P8 Rust Profile Authority Closure Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 78; implementation is prohibited
+until M6-P9 is also admitted.
+
+The isolated dependency-free three-check suite preserves canonical Rust profile
+metadata and dependency validity, all ten specialized profile links, typed
+`unavailable`, `invalid`, and `unsupported` diagnostics, and explicit
+prohibition of legacy Rust authority and inferred mechanism defaults. Existing
+`metadata_graph`, `markdown_links`, and `text` assertions represent the owner
+contract without source edits, snapshots, callbacks, commands, engine changes,
+or nested checker execution.
+
+M6-P8 owns only the Rust profile boundary. Exact graph projection records the
+three inbound SCC callers, reciprocal row-46 call, and six retained outbound
+gates in both generated edge views. The retained Rust API, async, tooling,
+unsafe, language-profile-routing, and root-audit checkers remain independently
+owned; the old profile checker's orchestration does not transfer their
+semantics or create declarative suite dependencies.
+
+**Allowed implementation write set:** the serial SCC integration files frozen
+by VE048; `suites/rust-profile-authority-closure.toml`; and the README-consumer
+manifest/root-audit files needed to remove the obsolete Bash-consumer identity.
+Canonical Rust profile content, specialized profiles, Router, adoption and
+index evidence, numeric baseline, retained independent checkers, engine,
+schemas, unrelated suites and fixtures, lockfiles, build output, and workflows
+remain read-only.
+
+**Acceptance gate:** M6-P9 admitted; all four suites pass before deletion; all
+packages and owner-local edges accept atomically; obsolete README-consumer
+identity is removed without weakening the root audit; numeric lifecycle,
+removed paths, all declarative suites, graph freshness, both plan checks,
+read-only hashes, and diff integrity pass. `M6-P-W1` remains the mixed wave
+checkpoint.
+
+**Admission evidence:** the isolated suite passes all three checks and has no
+dependencies. Current SCC and retained outbound checkers, package and exact
+edge authority, all declarative suites, graph freshness, plan checks, read-only
+hashes, and diff integrity must close this admission. New profile semantics,
+changed owner boundaries, an undeclared incident edge, or a required suite
+dependency is a re-plan trigger.
+
+Admission closed with package and exact incident-edge authority passing, all
+112 registered declarative suites passing, all four current SCC checkers
+passing, numeric lifecycle passing, and generated evidence fresh at 165 Bash
+verifiers / 170 nodes / 838 edges / 167 components. Both plan checks, frozen
+profile/consumer/routing hashes, and diff integrity also pass. The mixed Bash
+suite remains intentionally deferred to `M6-P-W1`.
 
 ##### VE046 Independent-Gate Evidence Lifecycle Re-plan
 
