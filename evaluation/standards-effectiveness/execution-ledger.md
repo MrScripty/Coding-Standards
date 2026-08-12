@@ -11774,3 +11774,14 @@ all pass. Four exact edges are admitted with no historical transfer, engine
 change, duplicate ownership, wrapper, compatibility path, copied count, or
 fallback. Regeneration records 737 edges without changing executable topology.
 Implementation is next.
+
+## 2026-08-12 M6-T9 Row 23 Acceptance
+
+**Outcome:** accepted at train order 96.
+
+The dependency-free row-23 suite passes six generic checks and replaces the
+deleted Bash checker without duplicate ownership, wrapper, or fallback. Its
+four former gate edges remain independent and no historical evidence changes.
+The graph now has 144 Bash verifiers, 149 nodes, 730 edges, and 149 components.
+Rust `no_std` closure, execution train, all 133 declarative suites, and all
+144 mixed-suite entrypoints pass. A fresh audit is next.

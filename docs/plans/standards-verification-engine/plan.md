@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-T9 row 23 migration
+**Current phase:** Milestone 6: post-M6-T9 graph and ownership audit
 
-**Next slice:** implement admitted M6-T9 without a wrapper, false dependency,
-copied cardinality, source mutation, or fallback.
+**Next slice:** inspect the fresh post-M6-T9 graph and remaining ownership and
+evidence shapes before admitting another bounded package.
 
 **Acceptance status:** `pending`
 
@@ -6142,6 +6142,10 @@ diff checks pass. Protected decomposition, owner-validation, disposition,
 report, execution-train, adapter, fixture, Contracts, HTTP-reference, and
 legacy-index evidence is byte-identical to admission; no wrapper, false
 dependency, fallback, compatibility path, or legacy execution remains.
+The focused suite, package and edge authority, Rust `no_std` closure and
+execution-train gates, all 133 declarative suites, and the complete mixed suite
+of 144 checkers pass. Graph freshness, removal, both plan, protected-hash, and
+diff checks also pass. A fresh graph and ownership audit is next.
 
 ##### M6-T6 Row 32 Admission
 
@@ -6329,6 +6333,16 @@ mutation, or an edit outside the write set is a re-plan trigger.
 Admission regeneration derives four reference-only package edges. The graph
 contains 145 Bash verifiers, 150 nodes, 737 edges, and 150 components;
 executable topology is unchanged.
+
+Acceptance registers and passes the dependency-free six-check row-23 suite
+before deleting the Bash checker. Four M6-T9 edge records remain independent.
+The regenerated graph contains 144 Bash verifiers, 149 nodes, 730 edges, and
+149 components. Protected decomposition, owner validation, dispositions,
+train, package, gate, findings, Rust Tooling, Rust Cross-Platform,
+Verification, legacy-source, and corpus evidence is byte-identical to
+admission. No generic policy transfer, command or product default, workspace,
+test, lint, target, or feature default, duplicate ownership, wrapper, false
+dependency, fallback, compatibility path, or legacy execution remains.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

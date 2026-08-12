@@ -3247,6 +3247,18 @@
   historical transfer, engine change, duplicate owner, fallback, or legacy
   restore. Regeneration derives 737 edges without changing executable topology.
 
+## 2026-08-12 - M6-T9 Row 23 Acceptance
+
+- Registered and passed the dependency-free six-check row-23 suite before
+  deleting its Bash checker; no wrapper, alias, or compatibility path remains.
+- Accepted all four M6-T9 edges independently; no historical evidence or owner
+  record required mutation.
+- Regenerated 144 Bash verifiers, 149 nodes, 730 edges, and 149 components;
+  all protected decomposition, owner, Rust policy, findings, legacy-source,
+  corpus, and gate evidence remains byte-identical to admission.
+- Rust `no_std` closure, execution train, all 133 declarative suites, and all
+  144 mixed-suite entrypoints pass. The next slice is a fresh audit.
+
 ## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
 
 - Audited every caller-free lifecycle checker in the fresh 147-verifier graph

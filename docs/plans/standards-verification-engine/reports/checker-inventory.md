@@ -2694,3 +2694,17 @@ closure, and execution train pass independently. Four exact edge records are
 admitted with no engine change, historical transfer, duplicate ownership,
 wrapper, copied count, compatibility path, or fallback. Regeneration derives
 four reference-only edges for 737 total; executable topology is unchanged.
+
+### M6-T9 Acceptance
+
+The registered row-23 suite passes six exact generic checks and replaces its
+Bash checker without a wrapper. Rust `no_std` source closure and
+execution-train integrity remain independent through four accepted M6-T9 edge
+records. Exact owner/disposition lineage, including the Verification and Rust
+Cross-Platform exceptions, remains authoritative in existing records; no
+historical transfer or duplicate owner table occurs. The graph now contains
+144 Bash verifiers, 149 nodes, 730 edges, and 149 components. All protected
+evidence is unchanged. Another package requires a fresh audit after the
+terminal checkpoint. The focused suite, package and edge authority, both
+independent gates, all 133 declarative suites, and the complete mixed suite of
+144 checkers pass.
