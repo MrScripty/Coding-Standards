@@ -11082,7 +11082,7 @@ literal approximation.
 
 Recommended Option 1 adds one generic non-vacuous level-selected Markdown
 heading policy assertion with literal per-heading constraints and typed
-diagnostics. Q2 remains unadmitted and no implementation authority changed.
+diagnostics. At that re-plan stage Q2 remained unadmitted and no implementation authority changed.
 
 ## 2026-08-11 VE050 Generic Heading Policy Accepted
 
@@ -11098,6 +11098,26 @@ representation, package-specific branch, or Bash fallback was added.
 
 Twenty-four focused file-contract tests, all 191 engine tests, byte-compilation,
 an isolated real-corpus Q2 proof, the live Accessibility evidence-closure
-checker, and the complete mixed Bash checkpoint passed. Q2 remains unadmitted;
+checker, and the complete mixed Bash checkpoint passed. At capability acceptance Q2 remained unadmitted;
 its suite, registry, package, edge rows, checker, fixture, sources, and generated
 graph did not change.
+
+## 2026-08-11 M6-Q2 Accessibility Evidence Closure Admission
+
+**Outcome:** admitted at train order 81; implementation not started.
+
+A disposable dependency-free suite passed seven generic checks covering all
+thirteen evidence decisions, canonical and reference boundaries, derived
+legacy-index heading policy, prohibited legacy mechanisms, four exact
+dispositions, and two accepted lifecycle claims. The live Bash checker passed
+the same evidence. Temporary probe files were removed.
+
+Fresh graph evidence gives Q2 exactly one executable reference and one verifier
+dependency to `verify-accessibility-media.sh`. Both are independently owned
+gates and retain exact checker evidence; Q2 declares no registry dependency and
+copies no media semantics.
+
+Only package and edge authority, package projection, shared planning evidence,
+and derived graph artifacts change at admission. No permanent suite, registry
+entry, checker, fixture, standards source, engine, schema, numeric evidence,
+lockfile, build output, or workflow changes. Q3 isolated preflight is next.

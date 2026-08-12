@@ -2574,7 +2574,7 @@
   or weaker text approximation.
 - Recommended one generic non-vacuous level-selected Markdown heading policy
   assertion with literal per-heading constraints and typed diagnostics.
-- Q2 remains unadmitted; no engine, suite, registry, package, edge, checker,
+- At this re-plan stage Q2 remained unadmitted; no engine, suite, registry, package, edge, checker,
   fixture, standards source, generated graph, lockfile, or workflow changed.
 
 ## 2026-08-11 - VE050 Generic Heading Policy Accepted
@@ -2590,5 +2590,18 @@
 - Verification passed: 24 focused file-contract tests, all 191 engine tests,
   byte-compilation, isolated real-corpus Q2 proof, the live Accessibility
   evidence-closure checker, and the complete mixed Bash checkpoint.
-- Q2 remains unadmitted and unchanged. Its isolated preflight and admission are
+- At capability acceptance Q2 remained unadmitted and unchanged. Its isolated preflight and admission were
   next.
+
+## 2026-08-11 - M6-Q2 Accessibility Evidence Closure Admission
+
+- A disposable dependency-free seven-check suite and the live checker passed
+  the same thirteen decisions, canonical/reference/legacy boundaries, derived
+  heading policy, four exact dispositions, and two lifecycle claims.
+- Admitted Q2 at train order 81 with exact coverage of one executable reference
+  and one verifier dependency to Accessibility Media.
+- Classified both edges as checker-backed independent gates. Q2 copies no media
+  semantics and declares no registry dependency.
+- No permanent suite, registry entry, checker, fixture, standards source,
+  engine, schema, numeric evidence, lockfile, build output, or workflow changed.
+- Next is Q3 isolated-suite preflight and admission.

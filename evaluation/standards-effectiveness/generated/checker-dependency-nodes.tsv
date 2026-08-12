@@ -3,10 +3,10 @@ evaluation/standards-effectiveness/check-decision-table.sh	helper	yes	component-
 evaluation/standards-effectiveness/check-metadata.sh	helper	yes	component-0002	1	no	0	33	1	33	0
 evaluation/standards-effectiveness/check-plan-structure.sh	helper	yes	component-0003	1	no	0	14	0	14	0
 evaluation/standards-effectiveness/check-source-index-closure.sh	helper	yes	component-0004	1	no	0	2	0	2	0
-evaluation/standards-effectiveness/verify-accessibility-evidence-closure.sh	verifier	yes	component-0005	1	no	8	0	0	0	1
+evaluation/standards-effectiveness/verify-accessibility-evidence-closure.sh	verifier	yes	component-0005	1	no	8	0	3	0	1
 evaluation/standards-effectiveness/verify-accessibility-focus-lifecycle.sh	verifier	yes	component-0006	1	no	5	1	0	1	1
 evaluation/standards-effectiveness/verify-accessibility-interaction-semantics.sh	verifier	yes	component-0007	1	no	4	1	0	1	2
-evaluation/standards-effectiveness/verify-accessibility-media.sh	verifier	yes	component-0008	1	no	7	1	0	1	1
+evaluation/standards-effectiveness/verify-accessibility-media.sh	verifier	yes	component-0008	1	no	7	1	1	1	1
 evaluation/standards-effectiveness/verify-accessibility-name-input.sh	verifier	yes	component-0009	1	no	6	1	0	1	1
 evaluation/standards-effectiveness/verify-accessibility-owner-contract.sh	verifier	yes	component-0010	1	no	0	2	1	2	0
 evaluation/standards-effectiveness/verify-architecture-composition-root-pattern.sh	verifier	yes	component-0011	1	no	5	2	0	2	1

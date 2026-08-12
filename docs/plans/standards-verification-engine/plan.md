@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6: Q-wave package admission
 
-**Next slice:** resume isolated Q2 preflight and admit the package only if the
-complete declarative contract preserves its current behavior and edge semantics.
+**Next slice:** preflight and admit `M6-Q3` Architecture Population, then
+preflight `M6-Q4` independently before concurrent local preparation.
 
 **Acceptance status:** `pending`
 
@@ -5148,6 +5148,65 @@ diff integrity pass. No suite, registry entry, edge row, checker, fixture,
 standards source, engine, schema, numeric evidence, lockfile, build output, or
 workflow authority changed.
 
+##### M6-Q2 Accessibility Evidence Closure Package Admission
+
+**Status:** `Active`
+
+**Package state:** `admitted` at train order 81.
+
+An isolated dependency-free suite proves the complete evidence-closure contract
+with seven generic checks. One `decision` check reproduces all thirteen fixture
+outcomes with typed invalid, unavailable, unsupported, and allow results. Two
+`text` checks preserve canonical Accessibility evidence claims and the
+non-normative legacy lint reference. `markdown_headings` derives every
+level-two legacy-index heading and requires `Migrated` on each without a count
+or copied inventory. A second legacy-index text check prohibits the three old
+mechanism literals. One exact table projection proves `STD-0023` through
+`STD-0026`, and one text check preserves the two accepted lifecycle claims.
+The disposable suite and live Bash checker both pass; temporary files were
+removed.
+
+The current generated graph has exactly two executable incident edges for Q2,
+both from the Q2 checker to `verify-accessibility-media.sh`: one
+`executable_reference` and one `verifier_dependency`. Isolated preflight proves
+Accessibility Media is a separately owned integration gate, not an input to
+Q2's decision result. Both rows therefore use `independent-gate` with exact
+retained checker evidence. Q2 declares no registry dependency and copies no
+media semantics.
+
+**Allowed implementation write set:** package and edge manifests; package
+projection; suite registry; `suites/accessibility-evidence-closure.toml`; the
+deleted `verify-accessibility-evidence-closure.sh`; all four generated checker
+artifacts; this plan; child ledger; issues; checker-inventory report; canonical
+evaluation ledger; and parent plan. The Accessibility decision fixture,
+canonical owner, reference recipe, legacy index, consolidation dispositions,
+parent-plan lifecycle claims, Accessibility Media checker and evidence, all
+other suites/checkers, verification README, engine code/tests, schemas, numeric
+evidence, lockfiles, build output, and workflows remain read-only.
+
+**No-fallback rule:** register and pass the seven-check suite before deleting
+the Bash checker. Do not retain a wrapper or Bash bridge, copy Accessibility
+Media behavior, add a false `requires` dependency, duplicate the decision
+fixture, copy a heading inventory or count, freeze the whole index, weaken the
+legacy prohibition, create package-specific code, infer outcomes, or retain the
+deleted checker as evidence. Any changed source contract, additional incident
+edge, missing generic capability, unavailable retained media gate, or inability
+to preserve exact typed outcomes is a re-plan trigger.
+
+**Acceptance gate:** focused Q2 suite; live checker equivalence before deletion;
+package projection and exact two-row edge authority; retained Accessibility
+Media gate without a registry dependency; all declarative suites; removed
+checker path; graph freshness; both plan checks; exact read-only
+source/fixture/disposition/lifecycle evidence; diff integrity; and the deferred
+`M6-Q-W1` mixed checkpoint.
+
+**Admission verification:** the disposable seven-check suite and live checker
+both pass all thirteen decisions, source boundaries, heading policy, four exact
+dispositions, and lifecycle claims. Package projection and exact edge authority
+pass against the current graph. No permanent suite, registry entry, checker,
+fixture, standards source, engine, schema, numeric evidence, lockfile, build
+output, or workflow changed.
+
 ##### VE050 Level-Selected Markdown Heading Policy Re-plan
 
 **Status:** `Accepted`; Option 1 is implemented and Q2 preflight may resume.
@@ -5185,7 +5244,8 @@ unadmitted. This preserves current behavior but violates the selected Q-wave
 ordering and leaves the generic capability gap unresolved; it is appropriate
 only if heading-policy ownership is explicitly deferred to a later engine wave.
 
-**No-fallback boundary:** Q2 remains unadmitted. Do not encode a magic line
+**No-fallback boundary at capability acceptance:** Q2 was not yet admitted. Do
+not encode a magic line
 limit, copy the current heading list, freeze the complete file, weaken the rule
 to known prohibited headings, invoke Bash from Python, keep a compatibility
 wrapper, or create an Accessibility-specific assertion. Engine/shared-contract

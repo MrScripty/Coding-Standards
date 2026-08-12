@@ -2120,7 +2120,7 @@ property over every level-two heading. Existing primitives would require an
 unrelated line count, a copied exact heading inventory, a whole-file snapshot,
 or weaker substring evidence.
 
-Q2 remains unadmitted. The recommended recovery is a generic, non-vacuous,
+At the VE050 trigger Q2 remained unadmitted. The recommended recovery was a generic, non-vacuous,
 level-selected Markdown heading assertion with per-heading literal constraints
 and typed diagnostics. This is shared engine capability work and must close its
 own full mixed checkpoint before Q2 preflight resumes.
@@ -2131,4 +2131,19 @@ required and prohibited literals on every selected heading with typed source
 rows. It introduces no counts, copied heading inventory, snapshots, regex
 configuration, callbacks, package branches, compatibility, or Bash fallback.
 Focused, engine-wide, real-corpus, live-checker, and complete mixed verification
-passed. Q2 remains unadmitted and is the next isolated preflight.
+passed. That acceptance unblocked Q2's now-completed isolated admission.
+
+### Admitted M6-Q2 Accessibility Evidence Closure
+
+A disposable dependency-free seven-check suite matches all thirteen evidence
+decisions, canonical owner and non-normative reference boundaries, derived
+level-two heading policy, prohibited legacy mechanisms, four exact
+dispositions, and two accepted lifecycle claims. Existing decision, text,
+table, and `markdown_headings` assertions are sufficient.
+
+Q2 is admitted at train order 81. Its exact current executable edges are an
+execution reference and verifier dependency to Accessibility Media. Both are
+independent gates retaining the media checker; neither creates a registry
+dependency or transfers media semantics into Q2. Canonical sources, fixture,
+dispositions, media gate, engine, and schemas remain read-only. Q3 preflight is
+next.
