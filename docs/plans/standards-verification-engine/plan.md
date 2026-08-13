@@ -2,20 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-C1 bounded Markdown section-text admission
+**Current phase:** Milestone 6: M6-C1 bounded Markdown section text accepted
 
-**Next slice:** implement and verify the admitted M6-C1 shared Markdown scanner
-and bounded `markdown_section_text` assertion, then stop before M6-C2 admission.
+**Next slice:** preflight and separately admit M6-C2 derived keyed table
+membership without changing any semantic candidate package.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I1 Python complete checkpoint. Eight focused
-tests, all 214 engine tests, all 137 declarative suites, and the Python complete
-checkpoint over 139 retained Bash verifiers pass.
-
-**Latest admitted slice:** M6-C1 bounded Markdown section text. Its write set is
-limited to the shared Markdown parser, existing heading-check adaptation, the
-new assertion, focused tests, engine documentation, and these planning records.
+**Latest accepted slice:** M6-C1 bounded Markdown section text. All 34 focused
+file-contract tests, all 222 engine tests, all 137 declarative suites, and the
+Python complete checkpoint over 139 retained Bash verifiers pass.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -154,7 +150,7 @@ delegation, migration sequence, and acceptance model before source changes.
 
 ##### VE059 M6-U0 Capability-First Semantic-Wave Recovery
 
-**Capability state:** `M6-C1 admitted`; M6-C2 through M6-C4 remain unadmitted.
+**Capability state:** `M6-C1 accepted`; M6-C2 through M6-C4 remain unadmitted.
 
 Read-only preflight of the twelve M6-U0 candidates found six owner lanes but
 four generic evidence relationships that the current engine cannot express
@@ -230,6 +226,23 @@ candidate; section boundaries require non-ATX syntax or ambiguous duplicate
 selection; sharing the scanner changes accepted `markdown_headings` behavior;
 the generic assertion needs a package-specific option; or focused evidence
 cannot distinguish invalid input from unavailable input without fallback.
+
+**M6-C1 acceptance:** one shared `scan_headings` implementation now owns
+fence-aware ATX recognition. The existing `markdown_headings` check consumes it
+without public schema or diagnostic changes. Native `markdown_section_text`
+requires one exact configured ATX heading outside fences, derives the section
+through nested headings to the next equal-or-higher heading or end of file, and
+applies required/prohibited literals only inside that section. Missing or
+duplicate starts, malformed configuration, invalid UTF-8, unavailable input,
+and path escape retain typed outcomes.
+
+All 34 focused file-contract tests and all 222 engine tests pass. Python byte
+compilation, all 137 registered suites, generated evidence at 139 Bash
+verifiers / 144 nodes / 699 edges / 144 components, both plan checks, the
+Python complete checkpoint, exact write-set review, and diff integrity pass.
+No semantic package, registry, fixture, checker, standards source, generated
+artifact, lockfile, build output, workflow, compatibility path, or fallback
+changed. No deviation or newly discovered issue remains.
 
 **Tasks:**
 
@@ -6919,7 +6932,7 @@ evidence while accepting its own five rows.
   each integrated wave boundary or shared-contract change.
 - [ ] Review each exception for a missing reusable primitive, bad test design,
   historical-only assertion, or genuinely custom algorithm.
-- [ ] Accept M6-C1 bounded Markdown section text without changing any semantic
+- [x] Accept M6-C1 bounded Markdown section text without changing any semantic
   candidate package.
 - [ ] Separately admit and accept M6-C2 derived keyed table membership.
 - [ ] Separately admit and accept M6-C3 semantic heading cardinality.

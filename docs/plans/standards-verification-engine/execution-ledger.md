@@ -3439,3 +3439,19 @@
   package row, edge disposition, Bash checker, fixture, standards source,
   generated artifact, lockfile, build output, and workflow file. A shared-
   contract complete checkpoint is required before M6-C2 can be admitted.
+
+## 2026-08-12 - M6-C1 Bounded Markdown Section-Text Acceptance
+
+- Added one shared fence-aware ATX scanner and refactored the existing heading
+  policy to consume it without changing public schema or diagnostics.
+- Added strict `markdown_section_text`: one exact start heading, one derived
+  equal-or-higher boundary, and required/prohibited literals scoped only to the
+  selected section. Configuration, selection, UTF-8, availability, and path
+  failures are typed; no regex, command, callback, inferred filter, inventory,
+  count, compatibility representation, Bash execution, or fallback exists.
+- All 34 focused file-contract tests, all 222 engine tests, Python compilation,
+  all 137 declarative suites, generated evidence at 139 / 144 / 699 / 144, and
+  both plan checks pass. The Python complete checkpoint and final write-set
+  review close acceptance.
+- No semantic candidate package or migration authority changed, no deviation
+  was required, and no new issue remains. M6-C2 admission is next.

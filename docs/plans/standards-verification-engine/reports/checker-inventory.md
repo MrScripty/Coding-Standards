@@ -2876,3 +2876,17 @@ preflight. M6-C1 alone is admitted. It introduces one internal fenced-Markdown
 scanner shared with existing heading policy and one exact-start, equal-or-higher
 bounded section-text assertion. No semantic suite, registry entry, package,
 edge, checker, fixture, source, or generated evidence is admitted or changed.
+
+### M6-C1 Bounded Markdown Section-Text Acceptance
+
+One shared scanner now supplies fence-aware ATX headings to the unchanged
+heading-policy contract and the new bounded section-text assertion. The latter
+requires exactly one configured start heading, includes nested subsections, and
+ends before the next equal-or-higher heading. Required and prohibited literals
+cannot observe unrelated file content.
+
+All 34 focused file-contract tests, all 222 engine tests, all 137 declarative
+suites, generated evidence at 139 Bash verifiers / 144 nodes / 699 edges / 144
+components, both plan checks, and the Python complete checkpoint pass. No Bash
+checker, semantic package, registry, fixture, standards source, or generated
+artifact changed. M6-C2 remains separately unadmitted.

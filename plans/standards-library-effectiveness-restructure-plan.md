@@ -13,9 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement admitted M6-C1 bounded Markdown section text, then
-admit the remaining generic M6-C2 through M6-C4 capabilities separately before
-re-preflighting the twelve owner-separated semantic candidates.
+**Next slice:** separately preflight and admit M6-C2 derived keyed table
+membership. M6-C3 and M6-C4 remain gated, and all twelve semantic candidates
+remain unadmitted until the capability sequence is accepted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3277,6 +3277,16 @@ all structural/routing fixtures pass.
          assertion. No candidate package, copied identity or count, snapshot,
          command, bespoke branch, retained Bash, compatibility, or fallback is
          authorized.
+       - `7.4c3ve99` (`Accepted`): M6-C1 centralizes fence-aware ATX scanning,
+         preserves the existing heading-policy schema and diagnostics, and adds
+         exact-start `markdown_section_text` bounded by the next equal-or-
+         higher heading. All 34 focused file-contract tests, all 222 engine
+         tests, all 137 declarative suites, generated evidence at 139 Bash
+         verifiers / 144 nodes / 699 edges / 144 components, both plan checks,
+         and the Python complete checkpoint pass. No semantic package,
+         registry, fixture, checker, standards source, generated artifact,
+         regex, count, command, compatibility, or fallback changed. Admit M6-C2
+         separately.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

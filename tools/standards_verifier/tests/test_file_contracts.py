@@ -132,6 +132,36 @@ class FileContractsTest(unittest.TestCase):
         )
         return suite_path
 
+    def write_section_text_suite(
+        self,
+        *,
+        path: str = "docs/index.md",
+        heading: str = "## Selected",
+        required: object = ("required text",),
+        prohibited: object = (),
+        extra: str = "",
+    ) -> str:
+        suite_path = "suites/files.toml"
+        self.write(
+            suite_path,
+            f"""
+            schema_version = 1
+            id = "files"
+            owner = "test.owner"
+            description = "Markdown section text test"
+
+            [[checks]]
+            id = "section"
+            type = "markdown_section_text"
+            path = {json.dumps(path)}
+            heading = {json.dumps(heading)}
+            required = {json.dumps(required)}
+            prohibited = {json.dumps(prohibited)}
+            {extra}
+            """,
+        )
+        return suite_path
+
     def result(self, suite_path: str):
         self.write_registry(suite_path)
         return Verifier(self.root, "registry.toml").run()[0]
@@ -367,6 +397,150 @@ class FileContractsTest(unittest.TestCase):
         for options, code in cases:
             with self.subTest(code=code, options=options):
                 suite = self.write_heading_policy_suite(**options)
+                self.write_registry(suite)
+                with self.assertRaises(EngineError) as raised:
+                    Verifier(self.root, "registry.toml")
+                self.assertEqual(raised.exception.diagnostic.code, code)
+
+    def test_markdown_section_text_selects_through_nested_headings(self) -> None:
+        self.write(
+            "docs/index.md",
+            """
+            # Index
+            outside prohibited
+            ## Selected
+            required text
+            ### Nested
+            nested text
+            ## Next
+            prohibited
+            """,
+        )
+
+        result = self.result(
+            self.write_section_text_suite(
+                required=["required text", "nested text"],
+                prohibited=["prohibited"],
+            )
+        )
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_section_text_stops_at_higher_heading(self) -> None:
+        self.write(
+            "docs/index.md",
+            "## Selected\nrequired text\n# Next\nprohibited\n",
+        )
+
+        result = self.result(
+            self.write_section_text_suite(prohibited=["prohibited"])
+        )
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_section_text_ignores_fenced_heading_boundaries(self) -> None:
+        self.write(
+            "docs/index.md",
+            (
+                "```markdown\n## Selected\n```\n"
+                "## Selected\nrequired text\n"
+                "~~~markdown\n# Not a boundary\n~~~\n"
+                "still selected\n## Next\n"
+            ),
+        )
+
+        result = self.result(
+            self.write_section_text_suite(required=["still selected"])
+        )
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_section_text_requires_one_exact_start_heading(self) -> None:
+        for content, observed in (
+            ("## Other\nrequired text\n", "absent"),
+            (
+                "## Selected\nrequired text\n## Selected\nrequired text\n",
+                "2 matches",
+            ),
+        ):
+            with self.subTest(observed=observed):
+                self.write("docs/index.md", content)
+                result = self.result(self.write_section_text_suite())
+                self.assertEqual(result.exit_code, 1)
+                self.assertEqual(
+                    result.diagnostics[0].code,
+                    "ASSERT.MARKDOWN_SECTION_SELECTION",
+                )
+                self.assertEqual(result.diagnostics[0].observed, observed)
+
+    def test_markdown_section_text_reports_literal_failures_in_order(self) -> None:
+        self.write("docs/index.md", "## Selected\nprohibited text\n")
+
+        result = self.result(
+            self.write_section_text_suite(
+                required=["first missing", "second missing"],
+                prohibited=["prohibited text"],
+            )
+        )
+
+        self.assertEqual(
+            [(item.code, item.expected, item.observed) for item in result.diagnostics],
+            [
+                ("ASSERT.MARKDOWN_SECTION_REQUIRED", "first missing", "absent"),
+                ("ASSERT.MARKDOWN_SECTION_REQUIRED", "second missing", "absent"),
+                ("ASSERT.MARKDOWN_SECTION_PROHIBITED", "absent", "prohibited text"),
+            ],
+        )
+
+    def test_markdown_section_text_invalid_utf8_and_missing_input_are_typed(
+        self,
+    ) -> None:
+        target = self.root / "docs/index.md"
+        target.parent.mkdir(parents=True)
+        target.write_bytes(b"## Selected\nrequired text\n\xff")
+        result = self.result(self.write_section_text_suite())
+        self.assertEqual(result.exit_code, 2)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.INVALID_UTF8")
+
+        target.unlink()
+        result = self.result(self.write_section_text_suite())
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_markdown_section_text_rejects_escaping_paths(self) -> None:
+        external = Path(self.external_dir.name)
+        (external / "index.md").write_text(
+            "## Selected\nrequired text\n", encoding="utf-8"
+        )
+        (self.root / "escape").symlink_to(external, target_is_directory=True)
+        for path in ("/tmp/index.md", "../index.md", "escape/index.md"):
+            with self.subTest(path=path):
+                result = self.result(self.write_section_text_suite(path=path))
+                self.assertEqual(result.exit_code, 2)
+                self.assertEqual(
+                    result.diagnostics[0].code,
+                    "PATH.OUTSIDE_REPOSITORY",
+                )
+
+    def test_markdown_section_text_rejects_configuration_errors(self) -> None:
+        cases = (
+            ({"heading": ""}, "CONFIG.MARKDOWN_HEADING"),
+            ({"heading": "Selected"}, "CONFIG.MARKDOWN_HEADING"),
+            ({"heading": "####### Selected"}, "CONFIG.MARKDOWN_HEADING"),
+            ({"heading": "## Selected\ntext"}, "CONFIG.MARKDOWN_HEADING"),
+            ({"required": []}, "CONFIG.EMPTY_CHECK"),
+            ({"required": [""]}, "CONFIG.STRING_LIST"),
+            ({"required": ["x", "x"]}, "CONFIG.STRING_LIST"),
+            (
+                {"required": ["x"], "prohibited": ["x"]},
+                "CONFIG.CONTRADICTORY_TEXT",
+            ),
+            ({"path": ""}, "CONFIG.PATH"),
+            ({"extra": 'pattern = "required"'}, "CONFIG.UNKNOWN_FIELD"),
+        )
+        for options, code in cases:
+            with self.subTest(code=code, options=options):
+                suite = self.write_section_text_suite(**options)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
                     Verifier(self.root, "registry.toml")

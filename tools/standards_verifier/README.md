@@ -152,6 +152,15 @@ The check has no regular-expression configuration, inferred level, heading
 inventory, count, line limit, callback, command execution, or content
 normalization.
 
+The `markdown_section_text` check reads one contained UTF-8 Markdown file and
+selects exactly one configured ATX heading outside fenced code blocks. Its
+section extends through nested headings and ends before the next heading of
+equal or higher level, or at end of file. Configured required and prohibited
+literals apply only to that bounded section. Missing or duplicate start
+headings fail explicitly. The check has no regular-expression configuration,
+inferred boundary, whole-file snapshot, callback, command execution, copied
+inventory, count, compatibility representation, or fallback.
+
 The `path_state` check accepts explicit unique `present` and `absent` path
 sets; at least one set must be non-empty, and a path cannot occur in both.
 Paths remain repository-contained after symlink resolution. Present paths may

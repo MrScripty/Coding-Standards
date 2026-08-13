@@ -12011,3 +12011,23 @@ start bounded section literal assertion. Its public schema has no regex,
 callback, command, inferred filter, copied identity, count, compatibility, or
 fallback. Existing heading behavior must remain unchanged, and the complete
 checkpoint is mandatory before M6-C2 admission.
+
+## 2026-08-12 M6-C1 Bounded Markdown Section-Text Acceptance
+
+**Outcome:** accepted; M6-C2 admission may begin separately.
+
+The engine now has one shared fence-aware ATX scanner. Existing
+`markdown_headings` behavior, schema, and diagnostics remain unchanged. New
+`markdown_section_text` selects exactly one configured heading outside fences,
+includes nested subsections, stops before the next equal-or-higher heading or
+at end of file, and applies required/prohibited literals only within that
+derived section. Selection, configuration, UTF-8, availability, and containment
+failures are typed.
+
+All 34 focused file-contract tests and all 222 engine tests pass. Python byte
+compilation, all 137 registered suites, generated evidence at 139 Bash
+verifiers / 144 nodes / 699 edges / 144 components, both plan checks, the
+Python complete checkpoint, exact write-set review, and diff integrity pass.
+No candidate package, registry, fixture, checker, source, generated artifact,
+count, regex, command, callback, compatibility path, or fallback changed. No
+deviation or new issue remains.

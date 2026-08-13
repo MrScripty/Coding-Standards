@@ -6,7 +6,7 @@ from typing import Any
 from ..diagnostics import Diagnostic, EngineError
 from ..model import CheckContext
 from ..paths import contained_file
-from .markdown import scan_headings
+from .markdown import heading_level, scan_headings
 
 
 def _literal_list(value: Any, field: str, suite: str, check: str) -> tuple[str, ...]:
@@ -28,27 +28,12 @@ def _literal_list(value: Any, field: str, suite: str, check: str) -> tuple[str, 
     return tuple(value)
 
 
-def _heading_level(value: Any, suite: str, check: str) -> int:
-    if isinstance(value, bool) or not isinstance(value, int) or not 1 <= value <= 6:
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.HEADING_LEVEL",
-                "invalid",
-                "heading level must be an integer from 1 through 6",
-                suite=suite,
-                check=check,
-                field="level",
-                observed=str(value),
-            )
-        )
-    return value
-
-
 @dataclass(frozen=True, slots=True)
-class MarkdownHeadingsCheck:
+class MarkdownSectionTextCheck:
     id: str
     path: str
-    level: int
+    heading: str
+    heading_level: int
     required: tuple[str, ...]
     prohibited: tuple[str, ...]
 
@@ -73,76 +58,86 @@ class MarkdownHeadingsCheck:
                 )
             ) from error
 
-        headings = tuple(
-            item for item in scan_headings(content) if item.level == self.level
-        )
-        if not headings:
+        headings = scan_headings(content)
+        starts = tuple(item for item in headings if item.text == self.heading)
+        if len(starts) != 1:
             return [
                 Diagnostic(
-                    "ASSERT.MARKDOWN_HEADING_SELECTION",
+                    "ASSERT.MARKDOWN_SECTION_SELECTION",
                     "invalid",
-                    "no heading matches the configured level",
+                    "section heading must occur exactly once outside fences",
                     suite=context.suite_id,
                     check=self.id,
                     path=self.path,
-                    field="level",
-                    expected=str(self.level),
-                    observed="no matches",
+                    field="heading",
+                    expected=self.heading,
+                    observed=("absent" if not starts else f"{len(starts)} matches"),
                 )
             ]
 
+        start = starts[0]
+        end_line = None
+        for item in headings:
+            if item.line_number > start.line_number and item.level <= self.heading_level:
+                end_line = item.line_number
+                break
+        lines = content.splitlines(keepends=True)
+        section = "".join(
+            lines[start.line_number - 1 : (end_line - 1) if end_line else None]
+        )
+
         diagnostics = []
-        for heading in headings:
-            for literal in self.required:
-                if literal not in heading.text:
-                    diagnostics.append(
-                        Diagnostic(
-                            "ASSERT.MARKDOWN_HEADING_REQUIRED",
-                            "invalid",
-                            "selected heading lacks a required literal",
-                            suite=context.suite_id,
-                            check=self.id,
-                            path=self.path,
-                            row=heading.line_number,
-                            expected=literal,
-                            observed=heading.text,
-                        )
+        for literal in self.required:
+            if literal not in section:
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.MARKDOWN_SECTION_REQUIRED",
+                        "invalid",
+                        "selected Markdown section lacks a required literal",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.path,
+                        row=start.line_number,
+                        expected=literal,
+                        observed="absent",
                     )
-            for literal in self.prohibited:
-                if literal in heading.text:
-                    diagnostics.append(
-                        Diagnostic(
-                            "ASSERT.MARKDOWN_HEADING_PROHIBITED",
-                            "invalid",
-                            "selected heading contains a prohibited literal",
-                            suite=context.suite_id,
-                            check=self.id,
-                            path=self.path,
-                            row=heading.line_number,
-                            expected="absent",
-                            observed=literal,
-                        )
+                )
+        for literal in self.prohibited:
+            if literal in section:
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.MARKDOWN_SECTION_PROHIBITED",
+                        "invalid",
+                        "selected Markdown section contains a prohibited literal",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.path,
+                        row=start.line_number,
+                        expected="absent",
+                        observed=literal,
                     )
+                )
         return diagnostics
 
 
-def parse_markdown_headings_check(
+def parse_markdown_section_text_check(
     raw: dict[str, Any], suite_id: str
-) -> MarkdownHeadingsCheck:
-    allowed = {"id", "type", "path", "level", "required", "prohibited"}
+) -> MarkdownSectionTextCheck:
+    allowed = {"id", "type", "path", "heading", "required", "prohibited"}
     unknown = set(raw) - allowed
     if unknown:
         raise EngineError(
             Diagnostic(
                 "CONFIG.UNKNOWN_FIELD",
                 "invalid",
-                "markdown_headings check contains unknown fields",
+                "markdown_section_text check contains unknown fields",
                 suite=suite_id,
                 field=sorted(unknown)[0],
             )
         )
     check_id = raw.get("id")
     path = raw.get("path")
+    heading = raw.get("heading")
     if not isinstance(check_id, str) or not check_id:
         raise EngineError(
             Diagnostic(
@@ -162,7 +157,24 @@ def parse_markdown_headings_check(
                 check=check_id,
             )
         )
-    level = _heading_level(raw.get("level"), suite_id, check_id)
+    level = heading_level(heading) if isinstance(heading, str) else None
+    if (
+        not isinstance(heading, str)
+        or not heading
+        or "\n" in heading
+        or "\r" in heading
+        or level is None
+    ):
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.MARKDOWN_HEADING",
+                "invalid",
+                "heading must be one exact non-empty ATX heading",
+                suite=suite_id,
+                check=check_id,
+                field="heading",
+            )
+        )
     required = _literal_list(raw.get("required", []), "required", suite_id, check_id)
     prohibited = _literal_list(
         raw.get("prohibited", []), "prohibited", suite_id, check_id
@@ -172,7 +184,7 @@ def parse_markdown_headings_check(
             Diagnostic(
                 "CONFIG.EMPTY_CHECK",
                 "invalid",
-                "markdown_headings check has no literal constraints",
+                "markdown_section_text check has no literal constraints",
                 suite=suite_id,
                 check=check_id,
             )
@@ -189,9 +201,10 @@ def parse_markdown_headings_check(
                 observed=sorted(overlap)[0],
             )
         )
-    return MarkdownHeadingsCheck(
+    return MarkdownSectionTextCheck(
         check_id,
         path,
+        heading,
         level,
         required,
         prohibited,
