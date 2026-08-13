@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** resume verification-engine VE062-P1 with the VE063-corrected
-final-manifest disposition mutation before any canonical cutover.
+**Next slice:** admit verification-engine M6-V1 source-package preparation as an
+unregistered proposal with exact package and incident-edge authority.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3484,6 +3484,13 @@ all structural/routing fixtures pass.
          `CODING-STANDARDS.md` dispositions and require
          `ASSERT.KEY_COVERAGE_MISSING`. Do not widen final-source scope, create
          a false dependency, weaken coverage, or edit canonical evidence.
+       - `7.4c3ve124` (`Accepted`): VE062-P1 passes the normalized 5/6/6-check
+         dependency chain. Stale checker authority fails `INPUT.UNAVAILABLE`;
+         removal of all 60 `CODING-STANDARDS.md` dispositions fails
+         `ASSERT.KEY_COVERAGE_MISSING`; Router insertion fails
+         `ASSERT.TABLE_TEXT_PRESENT`. All disposable mutations restore byte-
+         for-byte and the positive chain passes again. M6-V1 proposal admission
+         is next; registration and checker deletion remain atomic M6-V-W1 work.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

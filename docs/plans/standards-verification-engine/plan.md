@@ -2,16 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE063 final-source mutation attribution replan
+**Current phase:** Milestone 6: M6-V1 source-package proposal admission
 
-**Next slice:** rerun VE062-P1 with final-source disposition removal scoped to
-one source that belongs to the final manifest.
+**Next slice:** admit M6-V1 source-package preparation as an unregistered
+proposal with exact package and incident-edge authority.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE062-E1 reusable lifecycle relationships. Three
-strict generic assertions resolve typed repository subjects, require nonempty
-key coverage, and prohibit table-derived literals in contained UTF-8 text.
+**Latest accepted slice:** VE062-P1 normalized lifecycle mutation parity. The
+three-suite positive chain and all three typed negative mutations pass without
+canonical evidence or checker changes.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -786,6 +786,36 @@ checker, or standard. Resume only in the disposable worktree, prove the
 corrected mutation yields `ASSERT.KEY_COVERAGE_MISSING`, then run the Router
 mutation and restore the positive chain. A need to widen source selection,
 invent a dependency, or change canonical evidence remains a replan trigger.
+
+##### VE062-P1 Accepted Normalized Mutation Parity
+
+The disposable normalized chain passes 5 source-package, 6 final-source, and 6
+Router checks in exact dependency order. The normalized preparation table keeps
+only order, source, and canonical verifier subjects; suite subjects use
+registered IDs. Final closure derives corpus membership, owner agreement, and
+one-or-more disposition coverage without copied totals. Router exclusion
+derives literals from replacement and final-source tables.
+
+All required mutations fail with exact typed diagnostics:
+
+| Mutation | Diagnostic | Derived identity |
+| --- | --- | --- |
+| restore deleted row-26 checker subject | `INPUT.UNAVAILABLE` | deleted checker path |
+| remove all final-source dispositions | `ASSERT.KEY_COVERAGE_MISSING` | `CODING-STANDARDS.md` |
+| insert final-source path in Router | `ASSERT.TABLE_TEXT_PRESENT` | `CODING-STANDARDS.md` |
+
+Every mutated file was restored byte-for-byte and the positive chain passed
+again. The probe created no canonical suite, registry, evidence, package,
+generated, checker, source, or workflow change. VE062-P1 is accepted.
+
+M6-V1 is the next slice and owns only the source-package preparation proposal:
+its unregistered suite file, one admitted package row, exact incident-edge
+records for its one outbound absence and two inbound references, proposal
+verification, and the six serial plan authorities. The live registry,
+canonical source-package table, current row-26 authority, Bash checker,
+generated artifacts, README, final-source/Router suites and checkers, standards,
+and workflows remain read-only. Registration or deletion before M6-V-W1 would
+create dual or dangling authority and is prohibited.
 
 No expression language, regex configuration, callback, command execution,
 package-specific branch, copied row/key/literal list, inferred subject kind,

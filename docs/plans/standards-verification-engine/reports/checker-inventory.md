@@ -3188,7 +3188,7 @@ missing dynamic relationships.
 | Mutation | Bash authority | Declarative probe | Finding |
 | --- | --- | --- | --- |
 | stale deleted `checker:` row-26 subject | rejected unavailable | passed | typed repository subject resolution missing |
-| remove all `languages/README.md` dispositions | rejected | passed | nonempty key coverage missing |
+| remove all final-source dispositions | rejected | passed | nonempty key coverage missing |
 | insert a former source path in Router prose | rejected | passed | table-derived text absence missing |
 
 The probe separately represented preparation-to-final membership, final-to-
@@ -3236,3 +3236,18 @@ Mutation parity will instead remove all dispositions for
 `CODING-STANDARDS.md`, a key derived directly from the final manifest. This is
 the exact semantic case `key_coverage` owns. `languages/README.md` remains
 within the separately migrated consolidation-dispositions contract.
+
+### VE062-P1 Accepted Normalized Proof
+
+The corrected proof is complete. Its positive chain passes 17 checks across
+three suites in the intended dependency order. Restoring the deleted row-26
+checker fails `INPUT.UNAVAILABLE`; removing all 60 `CODING-STANDARDS.md`
+dispositions fails `ASSERT.KEY_COVERAGE_MISSING`; inserting that final-source
+path into Router fails `ASSERT.TABLE_TEXT_PRESENT`. Every mutation was restored
+byte-for-byte before the final positive run.
+
+No package-specific engine behavior, copied total, suite-path identity,
+aggregate-gate dependency, compatibility representation, skipped subject, or
+fallback was required. M6-V1 may now admit only the source-package proposal and
+its exact lifecycle authority; live registration and deletion remain atomic-
+cutover work.

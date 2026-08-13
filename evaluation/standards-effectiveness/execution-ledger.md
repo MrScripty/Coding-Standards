@@ -12410,3 +12410,19 @@ The accepted correction removes all dispositions for
 `ASSERT.KEY_COVERAGE_MISSING`. No false consolidation-dispositions dependency,
 scope widening, weakened assertion, engine change, or canonical edit is
 authorized. Implementation stops at this replan trigger.
+
+## 2026-08-13 VE062-P1 Normalized Mutation Parity Acceptance
+
+**Outcome:** accepted; M6-V1 source-package proposal admission is next.
+
+The restored normalized chain passes 5 source-package, 6 final-source, and 6
+Router checks in dependency order. Removing all 60 disposition rows for final-
+manifest member `CODING-STANDARDS.md` fails exact
+`ASSERT.KEY_COVERAGE_MISSING`. Inserting that path into Router prose fails
+exact `ASSERT.TABLE_TEXT_PRESENT`. The stale deleted row-26 checker mutation
+already failed exact `INPUT.UNAVAILABLE`.
+
+All disposable mutations were restored byte-for-byte and the positive chain
+passed again. No canonical evidence, suite, registry, package/edge manifest,
+generated artifact, Bash checker, standard, or workflow changed. Admission may
+now proceed owner by owner without registration or deletion before M6-V-W1.

@@ -3830,3 +3830,18 @@
   `ASSERT.KEY_COVERAGE_MISSING`; `languages/README.md` remains independent.
 - Stopped before rerunning the corrected mutation. No canonical file changed;
   the disposable worktree remains isolated for the resumed proof.
+
+## 2026-08-13 - VE062-P1 Normalized Mutation Parity Acceptance
+
+- Revalidated the restored positive chain: 5 source-package, 6 final-source,
+  and 6 Router checks pass in dependency order.
+- Removed all 60 `CODING-STANDARDS.md` disposition rows in disposable evidence;
+  final closure failed exactly `ASSERT.KEY_COVERAGE_MISSING` for that source.
+- Inserted `CODING-STANDARDS.md` into disposable Router prose; Router closure
+  failed exactly `ASSERT.TABLE_TEXT_PRESENT` for that derived literal.
+- The earlier stale row-26 checker mutation had already failed exactly
+  `INPUT.UNAVAILABLE`. All three mutated files were restored byte-for-byte and
+  the positive chain passed again.
+- Accepted VE062-P1 and retired its disposable proof. M6-V1 source-package
+  proposal admission is next; live registration and checker deletion remain
+  reserved for the three-owner atomic cutover.
