@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement and accept admitted M6-C3 semantic heading
-cardinality. All twelve semantic candidates remain unadmitted until the
+**Next slice:** separately preflight and admit M6-C4 repository-index
+membership. All twelve semantic candidates remain unadmitted until the
 capability sequence is accepted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
@@ -3315,6 +3315,15 @@ all structural/routing fixtures pass.
          alternate scanner, regex, callback, command, package branch, Bash,
          compatibility, or fallback is authorized. Semantic packages and
          M6-C4 remain unadmitted.
+       - `7.4c3ve103` (`Accepted`): M6-C3 adds native semantic heading
+         cardinality over the shared fence-aware ATX scanner. Expected states
+         are only `empty`, `single`, and `nonempty`; failed assertions report
+         `empty`, `single`, or `multiple`, not a consumer-interpreted number.
+         All 40 focused file-contract tests, all 237 engine tests, all 137
+         declarative suites, generated evidence at 139 Bash verifiers / 144
+         nodes / 699 edges / 144 components, both plan checks, and the Python
+         complete checkpoint pass. Existing Markdown behavior and every
+         semantic package remain unchanged. Admit M6-C4 separately.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

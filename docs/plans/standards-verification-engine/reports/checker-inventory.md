@@ -2932,3 +2932,16 @@ reports semantic states. Exact counts, ranges, title filters, Setext support,
 alternate scanners, regex, commands, callbacks, package logic, Bash,
 compatibility, and fallback remain prohibited. Candidate packages remain
 unadmitted.
+
+### M6-C3 Semantic Heading-Cardinality Acceptance
+
+Native `markdown_heading_cardinality` now derives one level's state through the
+shared scanner and compares only `empty`, `single`, or `nonempty`. Assertion
+diagnostics expose semantic `empty`, `single`, or `multiple` state, while
+configuration, UTF-8, availability, and containment retain typed outcomes.
+
+All 40 focused file-contract tests, all 237 engine tests, all 137 declarative
+suites, generated evidence at 139 Bash verifiers / 144 nodes / 699 edges / 144
+components, both plan checks, and the Python complete checkpoint pass. Existing
+Markdown checks and all semantic packages remain unchanged. M6-C4 is separately
+unadmitted.

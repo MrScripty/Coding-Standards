@@ -162,6 +162,34 @@ class FileContractsTest(unittest.TestCase):
         )
         return suite_path
 
+    def write_heading_cardinality_suite(
+        self,
+        *,
+        path: str = "docs/index.md",
+        level: str = "2",
+        cardinality: object = "single",
+        extra: str = "",
+    ) -> str:
+        suite_path = "suites/files.toml"
+        self.write(
+            suite_path,
+            f"""
+            schema_version = 1
+            id = "files"
+            owner = "test.owner"
+            description = "Markdown heading cardinality test"
+
+            [[checks]]
+            id = "heading-cardinality"
+            type = "markdown_heading_cardinality"
+            path = {json.dumps(path)}
+            level = {level}
+            cardinality = {json.dumps(cardinality)}
+            {extra}
+            """,
+        )
+        return suite_path
+
     def result(self, suite_path: str):
         self.write_registry(suite_path)
         return Verifier(self.root, "registry.toml").run()[0]
@@ -398,6 +426,150 @@ class FileContractsTest(unittest.TestCase):
             with self.subTest(code=code, options=options):
                 suite = self.write_heading_policy_suite(**options)
                 self.write_registry(suite)
+                with self.assertRaises(EngineError) as raised:
+                    Verifier(self.root, "registry.toml")
+                self.assertEqual(raised.exception.diagnostic.code, code)
+
+    def test_markdown_heading_cardinality_accepts_semantic_boundaries(self) -> None:
+        cases = (
+            ("empty", "# Root\n", "empty"),
+            ("single", "# Root\n## One\n", "single"),
+            ("nonempty-one", "## One\n", "nonempty"),
+            ("nonempty-many", "## One\n## Two\n", "nonempty"),
+        )
+        for name, content, cardinality in cases:
+            with self.subTest(name=name):
+                self.write("docs/index.md", content)
+                result = self.result(
+                    self.write_heading_cardinality_suite(
+                        cardinality=cardinality
+                    )
+                )
+                self.assertEqual(result.status, "passed")
+
+    def test_markdown_heading_cardinality_reports_semantic_states(self) -> None:
+        cases = (
+            ("## One\n", "empty", "single"),
+            ("## One\n## Two\n", "empty", "multiple"),
+            ("# Root\n", "single", "empty"),
+            ("## One\n## Two\n", "single", "multiple"),
+            ("# Root\n", "nonempty", "empty"),
+        )
+        for content, expected, observed in cases:
+            with self.subTest(expected=expected, observed=observed):
+                self.write("docs/index.md", content)
+                result = self.result(
+                    self.write_heading_cardinality_suite(
+                        cardinality=expected
+                    )
+                )
+                self.assertEqual(result.exit_code, 1)
+                diagnostic = result.diagnostics[0]
+                self.assertEqual(
+                    diagnostic.code,
+                    "ASSERT.MARKDOWN_HEADING_CARDINALITY",
+                )
+                self.assertEqual(diagnostic.expected, expected)
+                self.assertEqual(diagnostic.observed, observed)
+
+    def test_markdown_heading_cardinality_isolates_level_and_fences(self) -> None:
+        self.write(
+            "docs/index.md",
+            (
+                "# Root\n"
+                "```markdown\n## Fenced one\n## Fenced two\n```\n"
+                "### Nested\n"
+                "## Real\n"
+            ),
+        )
+
+        result = self.result(self.write_heading_cardinality_suite())
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_heading_cardinality_invalid_utf8_and_missing_are_typed(
+        self,
+    ) -> None:
+        target = self.root / "docs/index.md"
+        target.parent.mkdir(parents=True)
+        target.write_bytes(b"## Heading\n\xff")
+        result = self.result(self.write_heading_cardinality_suite())
+        self.assertEqual(result.exit_code, 2)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.INVALID_UTF8")
+
+        target.unlink()
+        result = self.result(self.write_heading_cardinality_suite())
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_markdown_heading_cardinality_rejects_escaping_paths(self) -> None:
+        external = Path(self.external_dir.name)
+        (external / "index.md").write_text("## Heading\n", encoding="utf-8")
+        (self.root / "escape").symlink_to(external, target_is_directory=True)
+        for path in ("/tmp/index.md", "../index.md", "escape/index.md"):
+            with self.subTest(path=path):
+                result = self.result(
+                    self.write_heading_cardinality_suite(path=path)
+                )
+                self.assertEqual(result.exit_code, 2)
+                self.assertEqual(
+                    result.diagnostics[0].code,
+                    "PATH.OUTSIDE_REPOSITORY",
+                )
+
+    def test_markdown_heading_cardinality_rejects_configuration_errors(
+        self,
+    ) -> None:
+        cases = (
+            ({"level": "0"}, "CONFIG.HEADING_LEVEL"),
+            ({"level": "7"}, "CONFIG.HEADING_LEVEL"),
+            ({"level": "true"}, "CONFIG.HEADING_LEVEL"),
+            ({"level": '"2"'}, "CONFIG.HEADING_LEVEL"),
+            ({"cardinality": ""}, "CONFIG.HEADING_CARDINALITY"),
+            ({"cardinality": "multiple"}, "CONFIG.HEADING_CARDINALITY"),
+            ({"cardinality": 1}, "CONFIG.HEADING_CARDINALITY"),
+            ({"path": ""}, "CONFIG.PATH"),
+            ({"extra": "count = 1"}, "CONFIG.UNKNOWN_FIELD"),
+            ({"extra": 'mode = "single"'}, "CONFIG.UNKNOWN_FIELD"),
+        )
+        for options, code in cases:
+            with self.subTest(code=code, options=options):
+                suite = self.write_heading_cardinality_suite(**options)
+                self.write_registry(suite)
+                with self.assertRaises(EngineError) as raised:
+                    Verifier(self.root, "registry.toml")
+                self.assertEqual(raised.exception.diagnostic.code, code)
+
+        for missing, code in (
+            ("path", "CONFIG.PATH"),
+            ("level", "CONFIG.HEADING_LEVEL"),
+            ("cardinality", "CONFIG.HEADING_CARDINALITY"),
+        ):
+            with self.subTest(missing=missing):
+                fields = {
+                    "path": 'path = "docs/index.md"',
+                    "level": "level = 2",
+                    "cardinality": 'cardinality = "single"',
+                }
+                del fields[missing]
+                suite_path = "suites/files.toml"
+                self.write(
+                    suite_path,
+                    f"""
+                    schema_version = 1
+                    id = "files"
+                    owner = "test.owner"
+                    description = "Missing field"
+
+                    [[checks]]
+                    id = "heading-cardinality"
+                    type = "markdown_heading_cardinality"
+                    {fields.get("path", "")}
+                    {fields.get("level", "")}
+                    {fields.get("cardinality", "")}
+                    """,
+                )
+                self.write_registry(suite_path)
                 with self.assertRaises(EngineError) as raised:
                     Verifier(self.root, "registry.toml")
                 self.assertEqual(raised.exception.diagnostic.code, code)

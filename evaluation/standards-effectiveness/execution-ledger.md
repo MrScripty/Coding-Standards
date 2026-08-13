@@ -12085,3 +12085,21 @@ heading checks remain unchanged. No count API, predicate, alternate parser,
 regex, command, callback, Bash, compatibility representation, or fallback is
 admitted. The implementation is engine/test/documentation only and requires a
 complete shared-contract checkpoint before M6-C4 may be admitted.
+
+## 2026-08-12 M6-C3 Semantic Heading-Cardinality Acceptance
+
+**Outcome:** accepted; M6-C4 admission may begin separately.
+
+The engine now selects one ATX heading level through the shared fence-aware
+scanner and compares its derived state to `empty`, `single`, or `nonempty`.
+Failed assertions report semantic `empty`, `single`, or `multiple` state rather
+than a number for suite consumers to interpret. Input and configuration
+failures remain typed.
+
+All 40 focused file-contract tests and all 237 engine tests pass. Python
+compilation, all 137 registered suites, generated evidence at 139 Bash
+verifiers / 144 nodes / 699 edges / 144 components, both plan checks, the
+Python complete checkpoint, exact write-set review, and diff integrity pass.
+Existing scanner, heading, and section behavior and every semantic candidate
+remain unchanged. No count API, alternate parser, command, compatibility, or
+fallback exists; no deviation or new issue remains.

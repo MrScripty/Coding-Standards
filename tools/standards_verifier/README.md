@@ -161,6 +161,15 @@ headings fail explicitly. The check has no regular-expression configuration,
 inferred boundary, whole-file snapshot, callback, command execution, copied
 inventory, count, compatibility representation, or fallback.
 
+The `markdown_heading_cardinality` check reads one contained UTF-8 Markdown
+file, selects one configured ATX heading level outside fenced code blocks, and
+requires its derived state to be `empty`, `single`, or `nonempty`. A failed
+assertion reports semantic states (`empty`, `single`, or `multiple`) rather
+than a number for consumers to interpret. The check has no exact count,
+minimum, maximum, range, heading-text predicate, Setext mode, alternate
+scanner, regular expression, callback, command, compatibility representation,
+package-specific branch, Bash execution, or fallback.
+
 The `path_state` check accepts explicit unique `present` and `absent` path
 sets; at least one set must be non-empty, and a path cannot occur in both.
 Paths remain repository-contained after symlink resolution. Present paths may

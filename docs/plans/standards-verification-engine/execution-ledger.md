@@ -3502,3 +3502,17 @@
 - No semantic suite, registry, package, edge, checker, fixture, standards
   source, generated artifact, lockfile, build output, or workflow is admitted.
   Shared-contract verification is required before M6-C4 admission.
+
+## 2026-08-12 - M6-C3 Semantic Heading-Cardinality Acceptance
+
+- Added `markdown_heading_cardinality` over the existing fence-aware ATX
+  scanner with only `empty`, `single`, and `nonempty` expected states.
+- Failed assertions report semantic `empty`, `single`, or `multiple` observed
+  state. Configuration, UTF-8, availability, and containment failures are
+  typed; no public number requires downstream interpretation.
+- All 40 focused file-contract tests, all 237 engine tests, Python compilation,
+  all 137 declarative suites, generated evidence at 139 / 144 / 699 / 144, and
+  both plan checks pass. The Python complete checkpoint and exact write-set
+  review close acceptance.
+- No candidate or migration authority changed, no deviation was required, and
+  no new issue remains. M6-C4 admission is next.

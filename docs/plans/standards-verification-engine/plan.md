@@ -2,16 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-C3 semantic heading cardinality admitted
+**Current phase:** Milestone 6: M6-C3 semantic heading cardinality accepted
 
-**Next slice:** implement and accept M6-C3 semantic heading cardinality without
-changing any semantic candidate package.
+**Next slice:** preflight and separately admit M6-C4 repository-index
+membership without changing any semantic candidate package.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-C2 derived keyed relation. All 66 focused engine
-tests, all 231 engine tests, all 137 declarative suites, and the Python complete
-checkpoint over 139 retained Bash verifiers pass.
+**Latest accepted slice:** M6-C3 semantic heading cardinality. All 40 focused
+file-contract tests, all 237 engine tests, all 137 declarative suites, and the
+Python complete checkpoint over 139 retained Bash verifiers pass.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -150,8 +150,7 @@ delegation, migration sequence, and acceptance model before source changes.
 
 ##### VE059 M6-U0 Capability-First Semantic-Wave Recovery
 
-**Capability state:** `M6-C1/M6-C2 accepted`; M6-C3 is admitted; M6-C4 remains
-unadmitted.
+**Capability state:** `M6-C1/M6-C2/M6-C3 accepted`; M6-C4 remains unadmitted.
 
 Read-only preflight of the twelve M6-U0 candidates found six owner lanes but
 four generic evidence relationships that the current engine cannot express
@@ -368,6 +367,21 @@ count or range, title-sensitive selection, Setext headings, another Markdown
 scanner, cross-file aggregation, or package-specific behavior; if semantic
 state cannot be reported without exposing numeric interpretation; or if using
 the shared scanner changes accepted heading behavior.
+
+**M6-C3 acceptance:** native `markdown_heading_cardinality` selects one ATX
+heading level through the shared fence-aware scanner and requires semantic
+`empty`, `single`, or `nonempty` state. Failed assertions report `empty`,
+`single`, or `multiple`, so consumers do not interpret a numeric result.
+Configuration, UTF-8, availability, and containment failures remain typed.
+
+All 40 focused file-contract tests and all 237 engine tests pass. Python byte
+compilation, all 137 declarative suites, generated evidence at 139 Bash
+verifiers / 144 nodes / 699 edges / 144 components, both plan checks, the
+Python complete checkpoint, exact write-set review, and diff integrity pass.
+The shared scanner and existing heading/section checks, every semantic
+candidate, registry, package, edge, checker, fixture, standards source,
+generated artifact, lockfile, build output, workflow, compatibility path, and
+fallback remain unchanged. No deviation or new issue remains.
 
 **Tasks:**
 
@@ -7060,7 +7074,7 @@ evidence while accepting its own five rows.
 - [x] Accept M6-C1 bounded Markdown section text without changing any semantic
   candidate package.
 - [x] Separately admit and accept M6-C2 derived keyed table membership.
-- [ ] Separately admit and accept M6-C3 semantic heading cardinality.
+- [x] Separately admit and accept M6-C3 semantic heading cardinality.
 - [ ] Separately admit and accept M6-C4 repository-index membership.
 - [ ] Re-preflight all twelve M6-U0 candidates after the four capabilities and
   freeze exact owner-separated package authority.
