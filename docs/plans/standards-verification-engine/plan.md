@@ -2,15 +2,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-U2 accepted
+**Current phase:** Milestone 6: M6-U3 accepted
 
-**Next slice:** revalidate and serially integrate the prepared M6-U3 Frontend
-Lifecycle Work proposal.
+**Next slice:** revalidate and serially integrate the prepared M6-U4 Frontend
+TypeScript Tooling proposal.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-U2 Frontend Applicability. Its dependency-free
-three-check suite replaces the Bash gate, and both historical M6-T12 gate
+**Latest accepted slice:** M6-U3 Frontend Lifecycle Work. Its dependency-free
+four-check suite replaces the Bash gate, and both historical M6-T12 gate
 records now name registered suite evidence.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
@@ -582,6 +582,16 @@ reports 137 Bash checkers / 142 nodes / 697 edges / 142 components. No wrapper,
 false dependency, product/directory/host fallback, compatibility behavior, or
 copied identifier range was introduced. The complete checkpoint remains
 deferred to M6-U-W1; M6-U3 is next.
+
+**M6-U3 acceptance evidence:** proposal `b301e7a` was revalidated against
+current canonical state. The dependency-free four-check suite preserves typed
+lifecycle decisions, canonical Frontend profile/reference projections, and
+row-derived dispositions. U3 is edge-free; exactly two immutable M6-T12 rows
+now use `suite:frontend-lifecycle-work` and its registered path. The checker is
+absent, the README routes to the suite, and generated evidence reports 136 Bash
+checkers / 141 nodes / 696 edges / 141 components. Sources and fixtures remain
+unchanged; no wrapper, false dependency, lifecycle fallback, compatibility
+path, or copied range exists. M6-U4 is next; M6-U-W1 remains deferred.
 
 **Tasks:**
 

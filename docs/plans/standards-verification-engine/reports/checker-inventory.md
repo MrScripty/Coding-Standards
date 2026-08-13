@@ -3030,3 +3030,15 @@ The README routes the fixture through the suite. Generated evidence derives
 137 Bash checkers / 142 nodes / 697 edges / 142 components. Sources and fixtures
 remain unchanged, and no wrapper, false dependency, copied count/range,
 product/directory/host fallback, or compatibility path exists. M6-U3 is next.
+
+### Accepted M6-U3 Frontend Lifecycle Work
+
+The dependency-free four-check suite replaces the Bash checker and preserves
+typed lifecycle outcomes, canonical profile/reference evidence, and row-34
+disposition ownership. U3 has no current incident edges; two historical M6-T12
+rows retain immutable checker endpoints while naming
+`suite:frontend-lifecycle-work` and its exact path. README routing and generated
+evidence are current at 136 Bash checkers / 141 nodes / 696 edges / 141
+components. Sources and fixtures are unchanged, with no wrapper, false
+dependency, copied range, lifecycle fallback, or compatibility path. M6-U4 is
+next.

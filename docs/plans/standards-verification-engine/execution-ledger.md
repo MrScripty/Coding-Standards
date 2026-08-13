@@ -3608,3 +3608,14 @@
 - Canonical regeneration reports 137 Bash checkers / 142 nodes / 697 edges /
   142 components. No wrapper, false dependency, copied range, host/product
   fallback, compatibility behavior, or fallback remains. M6-U3 is next.
+
+## 2026-08-12 - M6-U3 Frontend Lifecycle Work Acceptance
+
+- Revalidated proposal `b301e7a`, registered its dependency-free four-check
+  suite, and deleted the Bash checker without changing sources or fixtures.
+- Preserved lifecycle decisions, profile/reference projections, and row-34
+  disposition lineage. U3 remains edge-free; exactly two M6-T12 historical
+  records transfer to exact suite evidence without a dependency.
+- README and generated evidence are reconciled at 136 Bash checkers / 141
+  nodes / 696 edges / 141 components. No wrapper, bridge, copied range,
+  lifecycle fallback, or compatibility path remains. M6-U4 is next.

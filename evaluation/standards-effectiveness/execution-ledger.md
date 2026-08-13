@@ -12198,3 +12198,16 @@ independent-gate records retain immutable checker endpoints and now identify
 137 Bash checkers / 142 nodes / 697 edges / 142 components. No source, fixture,
 engine, schema, wrapper, false dependency, product/directory/host fallback,
 compatibility behavior, or fallback changed. M6-U3 is next.
+
+## 2026-08-12 M6-U3 Frontend Lifecycle Work Acceptance
+
+**Outcome:** accepted at train order 104.
+
+Proposal `b301e7a` was revalidated against current canonical state. Its
+dependency-free four-check suite preserves lifecycle decisions,
+profile/reference projections, and row-derived owner/disposition equality. The
+Bash checker is absent. U3 is edge-free, and exactly two M6-T12 historical
+records transfer to the exact registered suite evidence. Generated evidence is
+136 Bash checkers / 141 nodes / 696 edges / 141 components. No source, fixture,
+engine, wrapper, false dependency, copied range, lifecycle fallback, or
+compatibility path changed. M6-U4 is next.

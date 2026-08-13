@@ -549,6 +549,14 @@ responsibility and evidence, verify the canonical profile projection, and bind
 disposition ownership to row 34. Product names, directories, host containers,
 and owner takeover cannot act as scope fallbacks.
 
+## Frontend Lifecycle Work Fixtures
+
+`fixtures/frontend/lifecycle-work-decisions.tsv` and the registered
+`frontend-lifecycle-work` suite check explicit lifecycle ownership, identity,
+cleanup, terminal state, and evidence; verify canonical profile and reference
+projections; and bind disposition ownership to row 34. Timers, holders,
+detached work, retries, and silent stale-result handling are not defaults.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered
