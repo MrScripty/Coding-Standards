@@ -3619,3 +3619,14 @@
 - README and generated evidence are reconciled at 136 Bash checkers / 141
   nodes / 696 edges / 141 components. No wrapper, bridge, copied range,
   lifecycle fallback, or compatibility path remains. M6-U4 is next.
+
+## 2026-08-12 - M6-U4 Frontend TypeScript Tooling Acceptance
+
+- Revalidated proposal `e59cabe`, registered its dependency-free five-check
+  suite, and deleted the Bash checker with sources and fixtures unchanged.
+- Preserved tooling decisions, TypeScript/Tooling/reference projections, and
+  row-34 lineage. U4 is edge-free; two M6-T12 historical records transfer to
+  exact suite evidence without a dependency.
+- README and generated evidence are current at 135 Bash checkers / 140 nodes /
+  695 edges / 140 components. No wrapper, copied range, framework/configuration
+  fallback, or compatibility path remains. M6-U5 is next.

@@ -3042,3 +3042,13 @@ evidence are current at 136 Bash checkers / 141 nodes / 696 edges / 141
 components. Sources and fixtures are unchanged, with no wrapper, false
 dependency, copied range, lifecycle fallback, or compatibility path. M6-U4 is
 next.
+
+### Accepted M6-U4 Frontend TypeScript Tooling
+
+The dependency-free five-check suite replaces the Bash checker and preserves
+typed tooling outcomes, TypeScript/Tooling/reference projections, and row-34
+disposition ownership. U4 is edge-free; two historical M6-T12 rows name the
+exact registered suite. README and generated evidence are current at 135 Bash
+checkers / 140 nodes / 695 edges / 140 components. Sources and fixtures remain
+unchanged, with no false dependency, wrapper, copied range,
+framework/configuration fallback, or compatibility path. M6-U5 is next.

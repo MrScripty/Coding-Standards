@@ -557,6 +557,14 @@ cleanup, terminal state, and evidence; verify canonical profile and reference
 projections; and bind disposition ownership to row 34. Timers, holders,
 detached work, retries, and silent stale-result handling are not defaults.
 
+## Frontend TypeScript Tooling Fixtures
+
+`fixtures/frontend/typescript-tooling-decisions.tsv` and the registered
+`frontend-typescript-tooling` suite check project-, runtime-, purpose-, and
+compatibility-derived tooling selection; verify TypeScript, Tooling, and recipe
+projections; and bind disposition ownership to row 34. Framework versions,
+presets, plugins, parser choices, and copied configuration are not defaults.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered

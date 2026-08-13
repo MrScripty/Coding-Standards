@@ -12211,3 +12211,14 @@ records transfer to the exact registered suite evidence. Generated evidence is
 136 Bash checkers / 141 nodes / 696 edges / 141 components. No source, fixture,
 engine, wrapper, false dependency, copied range, lifecycle fallback, or
 compatibility path changed. M6-U4 is next.
+
+## 2026-08-12 M6-U4 Frontend TypeScript Tooling Acceptance
+
+**Outcome:** accepted at train order 105.
+
+Proposal `e59cabe` was revalidated. Its dependency-free five-check suite
+preserves tooling decisions, three canonical projections, and row-derived
+lineage. The checker is absent, U4 is edge-free, and two M6-T12 historical rows
+transfer to exact suite evidence. Generated evidence is 135 Bash checkers / 140
+nodes / 695 edges / 140 components. No source, fixture, false dependency,
+wrapper, copied range, fallback, or compatibility path changed. M6-U5 is next.

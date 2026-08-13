@@ -2,15 +2,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-U3 accepted
+**Current phase:** Milestone 6: M6-U4 accepted
 
-**Next slice:** revalidate and serially integrate the prepared M6-U4 Frontend
-TypeScript Tooling proposal.
+**Next slice:** revalidate and serially integrate the prepared M6-U5 Persistence
+Durable Mutation proposal.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-U3 Frontend Lifecycle Work. Its dependency-free
-four-check suite replaces the Bash gate, and both historical M6-T12 gate
+**Latest accepted slice:** M6-U4 Frontend TypeScript Tooling. Its dependency-
+free five-check suite replaces the Bash gate, and both historical M6-T12 gate
 records now name registered suite evidence.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
@@ -592,6 +592,15 @@ absent, the README routes to the suite, and generated evidence reports 136 Bash
 checkers / 141 nodes / 696 edges / 141 components. Sources and fixtures remain
 unchanged; no wrapper, false dependency, lifecycle fallback, compatibility
 path, or copied range exists. M6-U4 is next; M6-U-W1 remains deferred.
+
+**M6-U4 acceptance evidence:** proposal `e59cabe` was revalidated and its
+dependency-free five-check suite preserves typed tooling decisions, TypeScript,
+Tooling, and recipe projections, and row-derived dispositions. U4 is edge-free;
+two M6-T12 historical rows now name the exact registered suite. The Bash
+checker is absent, README routing is current, and generated evidence reports
+135 Bash checkers / 140 nodes / 695 edges / 140 components. Sources and fixtures
+remain unchanged; no false dependency, framework/configuration fallback,
+wrapper, compatibility path, or copied range exists. M6-U5 is next.
 
 **Tasks:**
 

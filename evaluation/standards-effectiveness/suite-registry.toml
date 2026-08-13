@@ -699,3 +699,8 @@ requires = []
 id = "frontend-lifecycle-work"
 path = "evaluation/standards-effectiveness/suites/frontend-lifecycle-work.toml"
 requires = []
+
+[[suites]]
+id = "frontend-typescript-tooling"
+path = "evaluation/standards-effectiveness/suites/frontend-typescript-tooling.toml"
+requires = []
