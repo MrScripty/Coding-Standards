@@ -12295,3 +12295,15 @@ historical rows transfer to exact suite evidence. Generated evidence is 129
 Bash checkers / 134 nodes / 689 edges / 134 components. No source, fixture,
 false dependency, wrapper, copied range, frozen/fixed/copied-policy fallback,
 or compatibility path changed. M6-U11 is next.
+
+## 2026-08-12 M6-U11 Review Template Projection Acceptance
+
+**Outcome:** accepted at train order 112.
+
+Proposal `e91e77a` was revalidated. Its dependency-free three-check suite
+preserves typed conditional-evidence decisions, canonical template projection,
+and row-derived lineage. The checker is absent, U11 is edge-free, and two
+M6-T2 historical rows transfer to exact suite evidence. Generated evidence is
+128 Bash checkers / 133 nodes / 688 edges / 133 components. No source, fixture,
+false dependency, wrapper, copied range, complete/provider/checklist fallback,
+or compatibility path changed. M6-U12 is next.

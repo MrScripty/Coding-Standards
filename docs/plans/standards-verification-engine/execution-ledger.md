@@ -3708,3 +3708,16 @@
   689 edges / 134 components. No frozen-structure restoration, fixed-count,
   copied-policy, optional-mandate, wrapper, false dependency, copied range, or
   compatibility fallback remains. M6-U11 is next.
+
+## 2026-08-12 - M6-U11 Review Template Projection Acceptance
+
+- Revalidated proposal `e91e77a`, registered its dependency-free three-check
+  suite, and deleted the Bash checker with template, workflow, fixture,
+  decomposition, validation, and disposition sources unchanged.
+- Preserved typed conditional-evidence decisions, canonical review template
+  content, and row-27-derived disposition lineage. U11 is edge-free; two M6-T2
+  historical records transfer to exact suite evidence without a dependency.
+- README and generated evidence are current at 128 Bash checkers / 133 nodes /
+  688 edges / 133 components. No complete-template, provider, copied-process,
+  universal-checklist, wrapper, false dependency, copied range, or
+  compatibility fallback remains. M6-U12 is next.

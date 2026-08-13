@@ -2,16 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-U10 accepted
+**Current phase:** Milestone 6: M6-U11 accepted
 
-**Next slice:** revalidate and serially integrate the prepared M6-U11 Review
-Template Projection proposal.
+**Next slice:** revalidate and serially integrate the prepared M6-U12 Rust
+no_std Support proposal.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-U10 Plan Template Projection. Its dependency-free
-three-check suite replaces the Bash gate, and both historical M6-T4 gate
-records now name registered suite evidence.
+**Latest accepted slice:** M6-U11 Review Template Projection. Its
+dependency-free three-check suite replaces the Bash gate, and both historical
+M6-T2 gate records now name registered suite evidence.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 

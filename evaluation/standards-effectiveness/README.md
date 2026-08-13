@@ -613,6 +613,14 @@ projection and row-26 disposition ownership. Frozen structure, fixed counts,
 copied owner policy, optional-section mandates, and implicit restoration
 fallback are rejected.
 
+## Review Template Projection Fixtures
+
+`fixtures/implementation/review-template-decisions.tsv` and the registered
+`review-template-projection` suite check conditional selected evidence,
+verification projection, and row-27 disposition ownership. Fixed complete
+templates, provider-specific fallback, copied process, and universal checklists
+are rejected.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered

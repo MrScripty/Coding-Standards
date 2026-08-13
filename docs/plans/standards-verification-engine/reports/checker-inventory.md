@@ -3117,3 +3117,14 @@ Bash checkers / 134 nodes / 689 edges / 134 components. Sources and fixtures
 remain unchanged, with no frozen-structure restoration, fixed-count,
 copied-policy, optional-mandate, wrapper, false dependency, copied range, or
 compatibility fallback. M6-U11 is next.
+
+### Accepted M6-U11 Review Template Projection
+
+The dependency-free three-check suite replaces the Bash checker and preserves
+typed conditional-evidence decisions, canonical review template content, and
+row-27-derived disposition ownership. U11 is edge-free; two historical M6-T2
+rows name exact registered suite evidence. README and generated evidence are
+current at 128 Bash checkers / 133 nodes / 688 edges / 133 components. Sources
+and fixtures remain unchanged, with no complete-template, provider,
+copied-process, universal-checklist, wrapper, false dependency, copied range,
+or compatibility fallback. M6-U12 is next.
