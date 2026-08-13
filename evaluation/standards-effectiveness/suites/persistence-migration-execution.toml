@@ -1,0 +1,84 @@
+schema_version = 1
+id = "persistence-migration-execution"
+owner = "profile.boundary.persistence"
+description = "Migration execution with explicit identity, integrity, order, ledger, coordination, interruption, and overlap evidence."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/persistence/migration-execution-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+selection = ["not-required", "selected"]
+source = ["not-required", "supported", "unsupported"]
+destination = ["not-required", "supported", "unsupported"]
+artifact = ["available", "missing", "not-required"]
+identity = ["matched", "mismatched", "missing", "not-required"]
+integrity = ["failed", "missing", "not-required", "verified"]
+order = ["explicit", "guessed", "missing", "not-required"]
+ledger = ["consistent", "contradictory", "missing", "not-required"]
+coordination = ["missing", "not-required", "selected"]
+reentry = ["not-required", "one-shot-new", "proven-idempotent", "repeated-unproven"]
+interruption = ["not-required", "resolved", "unknown-partial"]
+overlap = ["not-required", "selected", "speculative"]
+trigger = ["implicit-startup", "not-required", "selected-manual", "selected-startup"]
+capability = ["missing", "not-required", "supported", "unsupported"]
+fallback = ["additive-safe", "coexistence", "none", "rebuild", "rollback"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "identity", op = "eq", value = "mismatched" }, { field = "integrity", op = "eq", value = "failed" }, { field = "order", op = "eq", value = "guessed" }, { field = "ledger", op = "eq", value = "contradictory" }, { field = "reentry", op = "eq", value = "repeated-unproven" }, { field = "interruption", op = "eq", value = "unknown-partial" }, { field = "overlap", op = "eq", value = "speculative" }, { field = "trigger", op = "eq", value = "implicit-startup" }]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+any = [{ field = "source", op = "eq", value = "unsupported" }, { field = "destination", op = "eq", value = "unsupported" }, { field = "capability", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [{ field = "selection", op = "eq", value = "selected" }, { any = [{ field = "artifact", op = "eq", value = "missing" }, { field = "identity", op = "eq", value = "missing" }, { field = "integrity", op = "eq", value = "missing" }, { field = "order", op = "eq", value = "missing" }, { field = "ledger", op = "eq", value = "missing" }, { field = "coordination", op = "eq", value = "missing" }, { field = "capability", op = "eq", value = "missing" }] }]
+
+[[checks]]
+id = "profile"
+type = "text"
+path = "profiles/boundaries/persistence.md"
+required = ["## Migration Execution Contract", "source and destination states selected", "migration identity and integrity", "deterministic dependency", "ledger consistent", "does not authorize repeated application", "startup is one possible trigger", "none is a compatibility default"]
+prohibited = []
+
+[[checks]]
+id = "reference"
+type = "text"
+path = "reference/recipes/persistence.md"
+required = ["## Illustrative Migration Adapters", "These filenames, fields, SQL types", "explicitly selected startup adapter", "not discover pending work by guess"]
+prohibited = []
+
+[[checks]]
+id = "legacy-section"
+type = "markdown_section_text"
+path = "ARCHITECTURE-PATTERNS.md"
+heading = "## Schema Versioning and Migration"
+required = ["[Persistence boundary profile]", "[Contracts]", "[Persistence Mechanism Recipes]"]
+prohibited = ["### The Pattern", "001_initial_schema.sql", "schema_migrations", "apply_pending_migrations", "Add column", "Two-phase removal", "destructive replacement does not require a speculative"]
+
+[[checks]]
+id = "disposition-lineage"
+type = "keyed_relation"
+[checks.keys]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["ids"]
+order = "source"
+where = { all = [{ field = "baseline_order", op = "eq", value = "32" }, { field = "child_order", op = "eq", value = "3" }] }
+split = { field = "ids", delimiter = "," }
+[checks.expected]
+path = "evaluation/standards-effectiveness/milestone-7-row-32-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+key = "id"
+values = ["owner", "disposition"]
+[checks.observed]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+key = "id"
+values = ["target", "disposition"]

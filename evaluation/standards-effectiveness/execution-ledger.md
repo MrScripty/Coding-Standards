@@ -12234,3 +12234,15 @@ historical rows transfer to exact suite evidence. Generated evidence is 134
 Bash checkers / 139 nodes / 694 edges / 139 components. No source, fixture,
 false dependency, wrapper, copied range, partial-state/mechanism fallback, or
 compatibility path changed. M6-U6 is next.
+
+## 2026-08-12 M6-U6 Persistence Migration Execution Acceptance
+
+**Outcome:** accepted at train order 107.
+
+Proposal `e0866fb` was revalidated. Its dependency-free five-check suite
+preserves decisions, two projections, bounded section state, and row-derived
+lineage. The checker is absent, U6 is edge-free, and two M6-T6 historical rows
+transfer to exact suite evidence. Generated evidence is 133 Bash checkers / 138
+nodes / 693 edges / 138 components. No source, fixture, false dependency,
+wrapper, copied range, migration fallback, or compatibility path changed. M6-U7
+is next.

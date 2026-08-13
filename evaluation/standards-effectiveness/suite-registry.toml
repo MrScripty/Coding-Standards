@@ -709,3 +709,8 @@ requires = []
 id = "persistence-durable-mutation"
 path = "evaluation/standards-effectiveness/suites/persistence-durable-mutation.toml"
 requires = []
+
+[[suites]]
+id = "persistence-migration-execution"
+path = "evaluation/standards-effectiveness/suites/persistence-migration-execution.toml"
+requires = []

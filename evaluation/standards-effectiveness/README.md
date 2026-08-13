@@ -573,6 +573,14 @@ publication, canonical profile and recipe projections, bounded legacy-section
 closure, and row-32 disposition ownership. Partial publication, placeholders,
 undo, append-only, and fixed-phase mechanisms are not fallbacks.
 
+## Persistence Migration Execution Fixtures
+
+`fixtures/persistence/migration-execution-decisions.tsv` and the registered
+`persistence-migration-execution` suite check migration identity, integrity,
+order, ledger, coordination, interruption, overlap, and trigger evidence;
+bounded legacy closure; and row-32 disposition ownership. Startup, rebuild,
+rollback, coexistence, and additive assumptions are not fallbacks.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered

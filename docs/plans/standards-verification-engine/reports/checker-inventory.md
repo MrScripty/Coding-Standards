@@ -3063,3 +3063,14 @@ README and generated evidence are current at 134 Bash checkers / 139 nodes /
 694 edges / 139 components. Sources and fixtures remain unchanged, with no
 partial-state/mechanism fallback, false dependency, wrapper, copied range, or
 compatibility path. M6-U6 is next.
+
+### Accepted M6-U6 Persistence Migration Execution
+
+The dependency-free five-check suite replaces the Bash checker and preserves
+typed migration outcomes, Persistence profile/reference projections, bounded
+Architecture closure, and row-32 ownership. U6 is edge-free; two historical
+M6-T6 rows name exact suite evidence. README and generated evidence are current
+at 133 Bash checkers / 138 nodes / 693 edges / 138 components. Sources and
+fixtures remain unchanged, with no guessed-order/startup/rebuild/rollback
+fallback, false dependency, wrapper, copied range, or compatibility path. M6-U7
+is next.
