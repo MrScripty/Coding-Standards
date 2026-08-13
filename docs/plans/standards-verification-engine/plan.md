@@ -2,20 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-C2 derived keyed relation admitted
+**Current phase:** Milestone 6: M6-C2 derived keyed relation accepted
 
-**Next slice:** implement and verify admitted M6-C2 `keyed_relation`, then stop
-before M6-C3 admission and without changing any semantic candidate package.
+**Next slice:** preflight and separately admit M6-C3 semantic heading
+cardinality without changing any semantic candidate package.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-C1 bounded Markdown section text. All 34 focused
-file-contract tests, all 222 engine tests, all 137 declarative suites, and the
-Python complete checkpoint over 139 retained Bash verifiers pass.
-
-**Latest admitted slice:** M6-C2 derived keyed relation. It derives unique keys
-from one projected table source and compares values from exactly one keyed row
-on each of two independently projected table sources.
+**Latest accepted slice:** M6-C2 derived keyed relation. All 66 focused engine
+tests, all 231 engine tests, all 137 declarative suites, and the Python complete
+checkpoint over 139 retained Bash verifiers pass.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -154,7 +150,7 @@ delegation, migration sequence, and acceptance model before source changes.
 
 ##### VE059 M6-U0 Capability-First Semantic-Wave Recovery
 
-**Capability state:** `M6-C1 accepted`; M6-C2 admitted; M6-C3 and M6-C4 remain
+**Capability state:** `M6-C1/M6-C2 accepted`; M6-C3 and M6-C4 remain
 unadmitted.
 
 Read-only preflight of the twelve M6-U0 candidates found six owner lanes but
@@ -303,6 +299,23 @@ many-to-one or one-to-many matching, unequal value widths, record synthesis,
 ordered duplicate semantics, an implicit filter, or package-specific behavior;
 or if sharing a parser helper changes accepted table, relation, or inclusion
 behavior.
+
+**M6-C2 acceptance:** native `keyed_relation` derives a nonempty unique key set
+through the existing strict table projection/filter/split contract. Explicit
+expected and observed record sources each resolve one row per key and compare
+equal-width nonempty value tuples. Unrelated and reordered broad-table rows do
+not affect results. Empty/duplicate keys and missing/duplicate/mismatched keyed
+records return stable typed diagnostics; schema, predicate, table, UTF-8,
+availability, and containment failures remain typed.
+
+All 66 focused engine tests and all 231 engine tests pass. Python byte
+compilation, all 137 declarative suites, generated evidence at 139 Bash
+verifiers / 144 nodes / 699 edges / 144 components, both plan checks, the
+Python complete checkpoint, exact write-set review, and diff integrity pass.
+No existing table/relation/inclusion implementation, semantic candidate,
+registry, package, edge, checker, fixture, standards source, generated artifact,
+lockfile, build output, workflow, compatibility path, or fallback changed. No
+deviation or new issue remains.
 
 **Tasks:**
 
@@ -6994,7 +7007,7 @@ evidence while accepting its own five rows.
   historical-only assertion, or genuinely custom algorithm.
 - [x] Accept M6-C1 bounded Markdown section text without changing any semantic
   candidate package.
-- [ ] Separately admit and accept M6-C2 derived keyed table membership.
+- [x] Separately admit and accept M6-C2 derived keyed table membership.
 - [ ] Separately admit and accept M6-C3 semantic heading cardinality.
 - [ ] Separately admit and accept M6-C4 repository-index membership.
 - [ ] Re-preflight all twelve M6-U0 candidates after the four capabilities and

@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement admitted M6-C2 `keyed_relation`, then stop before
-M6-C3 admission. All twelve semantic candidates remain unadmitted until the
+**Next slice:** separately preflight and admit M6-C3 semantic heading
+cardinality. All twelve semantic candidates remain unadmitted until the
 capability sequence is accepted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
@@ -3296,6 +3296,16 @@ all structural/routing fixtures pass.
          implicit filter, callback, command, package branch, Bash execution,
          compatibility, or fallback is authorized. Semantic packages and
          M6-C3/M6-C4 remain unadmitted.
+       - `7.4c3ve101` (`Accepted`): M6-C2 adds native `keyed_relation` with one
+         nonempty unique derived-key projection and exactly one expected and
+         observed value tuple per key. Unrelated and reordered broad-table rows
+         are ignored; empty/duplicate keys and missing/duplicate/mismatched
+         records are typed. All 66 focused engine tests, all 231 engine tests,
+         all 137 declarative suites, generated evidence at 139 Bash verifiers /
+         144 nodes / 699 edges / 144 components, both plan checks, and the
+         Python complete checkpoint pass. Existing table/relation/inclusion
+         behavior and every semantic package remain unchanged. Admit M6-C3
+         separately.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

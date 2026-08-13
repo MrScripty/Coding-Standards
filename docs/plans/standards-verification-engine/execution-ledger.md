@@ -3471,3 +3471,18 @@
 - No semantic suite, registry, package, edge, checker, fixture, standards
   source, generated artifact, lockfile, build output, or workflow is admitted.
   Shared-contract verification is required before M6-C3 admission.
+
+## 2026-08-12 - M6-C2 Derived Keyed-Relation Acceptance
+
+- Added strict `keyed_relation` with one nonempty unique derived-key source and
+  exactly one expected/observed value tuple per key. Broad-table row order and
+  unrelated rows are irrelevant.
+- Added typed empty/duplicate key, missing/duplicate record, and value-mismatch
+  outcomes plus strict schema, predicate, UTF-8, availability, and containment
+  coverage. Existing table, relation, and inclusion code did not change.
+- All 66 focused engine tests, all 231 engine tests, Python compilation, all
+  137 declarative suites, generated evidence at 139 / 144 / 699 / 144, and both
+  plan checks pass. The Python complete checkpoint and exact write-set review
+  close acceptance.
+- No semantic candidate or migration authority changed, no deviation was
+  required, and no new issue remains. M6-C3 admission is next.

@@ -442,6 +442,71 @@ class EngineTest(unittest.TestCase):
         )
         return "suites/inclusion.toml"
 
+    def write_keyed_relation_suite(
+        self,
+        *,
+        key_columns: str = '["items"]',
+        expected_path: str = "expected.tsv",
+        expected_values: str = '["owner", "disposition"]',
+        observed_path: str = "observed.tsv",
+        observed_values: str = '["target", "disposition"]',
+        expected_extra: str = "",
+        observed_extra: str = "",
+        extra: str = "",
+    ) -> str:
+        self.write("keys.tsv", "row\titems\nselected\tb,a\nignored\tz\n")
+        if expected_path == "expected.tsv":
+            self.write(
+                expected_path,
+                "id\towner\tdisposition\na\towner-a\tmove\n"
+                "b\towner-b\trefine\nx\tignored\tindex\n",
+            )
+        if observed_path == "observed.tsv":
+            self.write(
+                observed_path,
+                "id\tsource\ttarget\tdisposition\n"
+                "x\tlegacy\tignored\tindex\n"
+                "b\tlegacy\towner-b\trefine\n"
+                "a\tlegacy\towner-a\tmove\n",
+            )
+        self.write(
+            "suites/keyed-relation.toml",
+            f"""
+            schema_version = 1
+            id = "keyed-relation"
+            owner = "test.owner"
+            description = "Keyed relation suite"
+
+            [[checks]]
+            id = "keyed"
+            type = "keyed_relation"
+            {extra}
+
+            [checks.keys]
+            path = "keys.tsv"
+            header = ["row", "items"]
+            columns = {key_columns}
+            order = "source"
+            where = {{ field = "row", op = "eq", value = "selected" }}
+            split = {{ field = "items", delimiter = "," }}
+
+            [checks.expected]
+            path = {json.dumps(expected_path)}
+            header = ["id", "owner", "disposition"]
+            key = "id"
+            values = {expected_values}
+            {expected_extra}
+
+            [checks.observed]
+            path = {json.dumps(observed_path)}
+            header = ["id", "source", "target", "disposition"]
+            key = "id"
+            values = {observed_values}
+            {observed_extra}
+            """,
+        )
+        return "suites/keyed-relation.toml"
+
     def test_text_and_decision_suites_pass(self) -> None:
         self.write("evidence.md", "required\n")
         text_suite = self.write_text_suite("text")
@@ -973,6 +1038,162 @@ class EngineTest(unittest.TestCase):
         self.assertEqual(diagnostic.code, "CONFIG.INCLUSION_WIDTH")
         self.assertEqual(diagnostic.expected, "1")
         self.assertEqual(diagnostic.observed, "2")
+
+    def test_keyed_relation_derives_keys_and_ignores_unrelated_reordered_rows(
+        self,
+    ) -> None:
+        suite_path = self.write_keyed_relation_suite()
+        self.write_registry([("keyed-relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "passed")
+
+    def test_keyed_relation_reports_missing_expected_and_observed_records(self) -> None:
+        suite_path = self.write_keyed_relation_suite()
+        self.write(
+            "expected.tsv",
+            "id\towner\tdisposition\na\towner-a\tmove\n",
+        )
+        self.write(
+            "observed.tsv",
+            "id\tsource\ttarget\tdisposition\n"
+            "b\tlegacy\towner-b\trefine\n",
+        )
+        self.write_registry([("keyed-relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(
+            [(item.code, item.field, item.expected) for item in result.diagnostics],
+            [
+                ("ASSERT.KEYED_RELATION_MISSING", "expected", "b"),
+                ("ASSERT.KEYED_RELATION_MISSING", "observed", "a"),
+            ],
+        )
+
+    def test_keyed_relation_reports_duplicate_derived_keys(self) -> None:
+        suite_path = self.write_keyed_relation_suite()
+        self.write("keys.tsv", "row\titems\nselected\ta,a\n")
+        self.write_registry([("keyed-relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(
+            result.diagnostics[0].code,
+            "ASSERT.KEYED_RELATION_DUPLICATE_KEY",
+        )
+        self.assertEqual(result.diagnostics[0].observed, "2/1")
+
+    def test_keyed_relation_reports_duplicate_records_by_role(self) -> None:
+        suite_path = self.write_keyed_relation_suite()
+        self.write(
+            "expected.tsv",
+            "id\towner\tdisposition\na\towner-a\tmove\n"
+            "a\towner-a\tmove\nb\towner-b\trefine\n",
+        )
+        self.write(
+            "observed.tsv",
+            "id\tsource\ttarget\tdisposition\n"
+            "a\tlegacy\towner-a\tmove\n"
+            "b\tlegacy\towner-b\trefine\n"
+            "b\tlegacy\towner-b\trefine\n",
+        )
+        self.write_registry([("keyed-relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(
+            [(item.code, item.field, item.observed) for item in result.diagnostics],
+            [
+                ("ASSERT.KEYED_RELATION_DUPLICATE_RECORD", "observed", "b:2"),
+                ("ASSERT.KEYED_RELATION_DUPLICATE_RECORD", "expected", "a:2"),
+            ],
+        )
+
+    def test_keyed_relation_reports_value_mismatch(self) -> None:
+        suite_path = self.write_keyed_relation_suite()
+        self.write(
+            "observed.tsv",
+            "id\tsource\ttarget\tdisposition\n"
+            "a\tlegacy\twrong-owner\tmove\n"
+            "b\tlegacy\towner-b\trefine\n",
+        )
+        self.write_registry([("keyed-relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        diagnostic = result.diagnostics[0]
+        self.assertEqual(diagnostic.code, "ASSERT.KEYED_RELATION_MISMATCH")
+        self.assertEqual(diagnostic.field, "a")
+        self.assertEqual(diagnostic.expected, "('owner-a', 'move')")
+        self.assertEqual(diagnostic.observed, "('wrong-owner', 'move')")
+
+    def test_keyed_relation_requires_nonempty_unique_keys(self) -> None:
+        suite_path = self.write_keyed_relation_suite()
+        self.write("keys.tsv", "row\titems\nignored\tz\n")
+        self.write_registry([("keyed-relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(
+            result.diagnostics[0].code,
+            "ASSERT.KEYED_RELATION_EMPTY_KEYS",
+        )
+
+    def test_keyed_relation_record_filters_are_explicit(self) -> None:
+        suite_path = self.write_keyed_relation_suite(
+            expected_extra='where = { field = "owner", op = "ne", value = "ignored" }',
+            observed_extra='where = { field = "target", op = "ne", value = "ignored" }',
+        )
+        self.write_registry([("keyed-relation", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "passed")
+
+    def test_keyed_relation_rejects_configuration_errors(self) -> None:
+        cases = (
+            ({"key_columns": '["row", "items"]'}, "CONFIG.KEYED_RELATION_KEY_WIDTH"),
+            ({"expected_values": '["id"]'}, "CONFIG.KEYED_RELATION_VALUES"),
+            ({"observed_values": '["missing"]'}, "CONFIG.KEYED_RELATION_VALUES"),
+            ({"expected_values": '[]'}, "CONFIG.STRING_LIST"),
+            ({"observed_values": '["target"]'}, "CONFIG.KEYED_RELATION_VALUE_WIDTH"),
+            ({"extra": 'mode = "set"'}, "CONFIG.UNKNOWN_FIELD"),
+            ({"expected_extra": 'columns = ["owner"]'}, "CONFIG.UNKNOWN_FIELD"),
+            ({"observed_extra": 'left = true'}, "CONFIG.UNKNOWN_FIELD"),
+            (
+                {"expected_extra": 'where = { field = "missing", op = "eq", value = "x" }'},
+                "CONFIG.TABLE_COLUMN",
+            ),
+        )
+        for options, code in cases:
+            with self.subTest(options=options, code=code):
+                suite_path = self.write_keyed_relation_suite(**options)
+                self.write_registry([("keyed-relation", suite_path, [])])
+                with self.assertRaises(EngineError) as raised:
+                    Verifier(self.root, self.registry)
+                self.assertEqual(raised.exception.diagnostic.code, code)
+
+    def test_keyed_relation_input_failures_are_typed(self) -> None:
+        suite_path = self.write_keyed_relation_suite(expected_path="missing.tsv")
+        self.write_registry([("keyed-relation", suite_path, [])])
+        result = Verifier(self.root, self.registry).run()[0]
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+        suite_path = self.write_keyed_relation_suite(observed_path="../outside.tsv")
+        self.write_registry([("keyed-relation", suite_path, [])])
+        result = Verifier(self.root, self.registry).run()[0]
+        self.assertEqual(result.exit_code, 2)
+        self.assertEqual(result.diagnostics[0].code, "PATH.OUTSIDE_REPOSITORY")
+
+        suite_path = self.write_keyed_relation_suite()
+        (self.root / "expected.tsv").write_bytes(b"id\towner\tdisposition\n\xff")
+        self.write_registry([("keyed-relation", suite_path, [])])
+        result = Verifier(self.root, self.registry).run()[0]
+        self.assertEqual(result.exit_code, 2)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.INVALID_UTF8")
 
     def test_dependency_diamond_executes_each_suite_once(self) -> None:
         self.write("evidence.md", "required\n")

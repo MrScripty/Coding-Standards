@@ -12049,3 +12049,22 @@ column or filter, query language, callback, command, package-specific branch,
 Bash execution, compatibility representation, or fallback is admitted. The
 implementation is engine/test/documentation only and requires the shared-
 contract complete checkpoint before M6-C3 may be admitted.
+
+## 2026-08-12 M6-C2 Derived Keyed-Relation Acceptance
+
+**Outcome:** accepted; M6-C3 admission may begin separately.
+
+The engine now derives one nonempty unique key projection and resolves exactly
+one expected and observed row per key. Explicit equal-width value tuples must
+match; unrelated and reordered broad-table rows are ignored. Empty/duplicate
+keys and missing/duplicate/mismatched records have distinct typed diagnostics.
+No mode, copied identity or count, composite or many-valued join, implicit
+filter, query, callback, command, package branch, Bash, compatibility, or
+fallback exists.
+
+All 66 focused engine tests and all 231 engine tests pass. Python compilation,
+all 137 registered suites, generated evidence at 139 Bash verifiers / 144 nodes
+/ 699 edges / 144 components, both plan checks, the Python complete checkpoint,
+exact write-set review, and diff integrity pass. Existing table, relation, and
+inclusion code and every semantic candidate remain unchanged. No deviation or
+new issue remains.

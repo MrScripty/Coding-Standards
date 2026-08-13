@@ -197,6 +197,16 @@ parent/child decomposition, dependencies, or execution order. The check does
 not infer members, counts, filters, direction, or aliases and does not execute
 commands or fall back to equality or Bash.
 
+The `keyed_relation` check derives one nonempty unique key column from a strict
+projected `keys` table source, then resolves exactly one `expected` and one
+`observed` record for every key. Each record source declares one key column and
+an equal-width nonempty value-column list; corresponding value tuples must
+match. Explicit record predicates and unrelated rows are permitted. Missing,
+duplicate, and mismatched keyed records fail separately. The check has no key
+list, range, count, mode, composite or many-valued join, implicit column or
+filter, query language, callback, command, package-specific branch,
+compatibility representation, Bash execution, or fallback.
+
 Numeric count-authority migration uses a generated immutable lexical snapshot,
 not a manually maintained candidate manifest. The snapshot derives all
 mechanical candidate facts and totals from canonical Bash verifier inventory.

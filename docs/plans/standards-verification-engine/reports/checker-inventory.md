@@ -2904,3 +2904,16 @@ exist for every key, and declared nonempty value tuples must match. Extra rows
 outside the key set are irrelevant. No key list, count, mode, arbitrary join,
 query, callback, command, package-specific logic, Bash, compatibility, or
 fallback is authorized. Candidate packages remain unadmitted.
+
+### M6-C2 Derived Keyed-Relation Acceptance
+
+Native `keyed_relation` now derives nonempty unique keys, resolves one expected
+and observed row per key, and compares declared equal-width value tuples.
+Unrelated and reordered broad-table rows remain outside the assertion. Empty or
+duplicate keys and missing, duplicate, or mismatched records are typed.
+
+All 66 focused engine tests, all 231 engine tests, all 137 declarative suites,
+generated evidence at 139 Bash verifiers / 144 nodes / 699 edges / 144
+components, both plan checks, and the Python complete checkpoint pass. Existing
+table/relation/inclusion behavior and all semantic packages remain unchanged.
+M6-C3 is separately unadmitted.
