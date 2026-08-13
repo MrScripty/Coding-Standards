@@ -12258,3 +12258,15 @@ historical rows transfer to exact suite evidence. Generated evidence is 132
 Bash checkers / 137 nodes / 692 edges / 137 components. No source, fixture,
 false dependency, wrapper, copied range, scan/latest fallback, or compatibility
 path changed. M6-U8 is next.
+
+## 2026-08-12 M6-U8 Plan Implementation Entrypoint Acceptance
+
+**Outcome:** accepted at train order 109.
+
+Proposal `d3611f3` was revalidated. Its dependency-free five-check suite
+preserves typed entrypoint decisions, exact prompt tracking, text projection,
+semantic H1 state, and row-derived lineage. The checker is absent, U8 is
+edge-free, and two M6-T3 historical rows transfer to exact suite evidence.
+Generated evidence is 131 Bash checkers / 136 nodes / 691 edges / 136
+components. No source, fixture, false dependency, wrapper, copied range, scan
+fallback, or compatibility path changed. M6-U9 is next.

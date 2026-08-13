@@ -2,16 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-U7 accepted
+**Current phase:** Milestone 6: M6-U8 accepted
 
-**Next slice:** revalidate and serially integrate the prepared M6-U8 Plan
-Implementation Entrypoint proposal.
+**Next slice:** revalidate and serially integrate the prepared M6-U9 Full Plan
+Review Entrypoint proposal.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-U7 Planning Admission. Its dependency-free
-three-check suite replaces the Bash gate, and both historical M6-T3 gate
-records now name registered suite evidence.
+**Latest accepted slice:** M6-U8 Plan Implementation Entrypoint. Its
+dependency-free five-check suite replaces the Bash gate, and both historical
+M6-T3 gate records now name registered suite evidence.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 

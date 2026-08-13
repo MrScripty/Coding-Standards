@@ -719,3 +719,8 @@ requires = []
 id = "planning-admission"
 path = "evaluation/standards-effectiveness/suites/planning-admission.toml"
 requires = []
+
+[[suites]]
+id = "plan-implementation-entrypoint"
+path = "evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml"
+requires = []

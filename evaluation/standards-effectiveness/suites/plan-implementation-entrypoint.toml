@@ -1,0 +1,70 @@
+schema_version = 1
+id = "plan-implementation-entrypoint"
+owner = "workflow.implementation"
+description = "Thin versioned implementation prompt projection with exact tracked identity and no copied process or scan fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+versioned = ["no", "yes"]
+explicit_path = ["no", "yes"]
+explicit_operation = ["continue", "missing", "start", "verify"]
+router = ["yes"]
+implementation = ["no", "yes"]
+planning = ["yes"]
+copied = ["no", "yes"]
+fallback = ["none", "scan"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "versioned", op = "ne", value = "yes" }, { field = "copied", op = "ne", value = "no" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "explicit_path", op = "ne", value = "yes" }, { field = "explicit_operation", op = "eq", value = "missing" }, { field = "router", op = "ne", value = "yes" }, { field = "implementation", op = "ne", value = "yes" }, { field = "planning", op = "ne", value = "yes" }]
+
+[[checks]]
+id = "tracked-prompt"
+type = "git_index_paths"
+tracked = ["prompts/implement-plan.md"]
+
+[[checks]]
+id = "prompt-content"
+type = "text"
+path = "prompts/implement-plan.md"
+required = ["explicitly admitted plan transition", "repository-relative `plan.md` path", "`start`, `continue`, or `verify`", "[`STANDARDS-ROUTER.md`](../STANDARDS-ROUTER.md)", "[`Implementation Workflow`](../workflows/implementation.md)", "[`Planning Workflow`](../workflows/planning.md)", "owning typed diagnostic"]
+prohibited = ["Inspect repository status", "exact write set", "Concurrent Workers", "atomic conventional commit", "active plan", "/media/", "/home/"]
+
+[[checks]]
+id = "single-title"
+type = "markdown_heading_cardinality"
+path = "prompts/implement-plan.md"
+level = 1
+cardinality = "single"
+
+[[checks]]
+id = "disposition-lineage"
+type = "keyed_relation"
+[checks.keys]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["ids"]
+order = "source"
+where = { field = "baseline_order", op = "eq", value = "25" }
+split = { field = "ids", delimiter = "," }
+[checks.expected]
+path = "evaluation/standards-effectiveness/milestone-7-row-25-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+key = "id"
+values = ["owner", "disposition"]
+[checks.observed]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+key = "id"
+values = ["target", "disposition"]

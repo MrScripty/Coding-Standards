@@ -3667,3 +3667,17 @@
   692 edges / 137 components. No scan-order fallback, latest-record fallback,
   false dependency, wrapper, copied range, or compatibility path remains.
   M6-U8 is next.
+
+## 2026-08-12 - M6-U8 Plan Implementation Entrypoint Acceptance
+
+- Revalidated proposal `d3611f3`, registered its dependency-free five-check
+  suite, and deleted the Bash checker with prompt, workflow, fixture,
+  decomposition, validation, and disposition sources unchanged.
+- Preserved typed entrypoint decisions, exact Git index identity, required and
+  prohibited prompt projection, semantic H1 cardinality, and row-25-derived
+  disposition lineage. U8 is edge-free; two M6-T3 historical records transfer
+  to exact suite evidence without a dependency.
+- README and generated evidence are current at 131 Bash checkers / 136 nodes /
+  691 edges / 136 components. No scan fallback, copied process, wrapper, false
+  dependency, copied identity range, or compatibility path remains. M6-U9 is
+  next.

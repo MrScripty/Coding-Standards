@@ -589,6 +589,14 @@ transition, compatibility, and mechanism decisions plus Planning and
 Implementation projections. Scanning and latest-state selection are rejected;
 invalid, unavailable, and unsupported outcomes retain ordered typed precedence.
 
+## Plan Implementation Entrypoint Fixtures
+
+`fixtures/implementation/plan-entrypoint-decisions.tsv` and the registered
+`plan-implementation-entrypoint` suite check the versioned prompt's explicit
+path and operation, Router and workflow projections, exact Git index identity,
+single semantic title, and row-25 disposition ownership. Copied process,
+repository scanning, and environment-specific path fallback are rejected.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered
