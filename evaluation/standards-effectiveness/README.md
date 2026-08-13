@@ -581,6 +581,14 @@ order, ledger, coordination, interruption, overlap, and trigger evidence;
 bounded legacy closure; and row-32 disposition ownership. Startup, rebuild,
 rollback, coexistence, and additive assumptions are not fallbacks.
 
+## Planning Admission Fixtures
+
+`fixtures/planning/admission-decisions.tsv` and the registered
+`planning-admission` suite check explicit path, operation, state, revision,
+transition, compatibility, and mechanism decisions plus Planning and
+Implementation projections. Scanning and latest-state selection are rejected;
+invalid, unavailable, and unsupported outcomes retain ordered typed precedence.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered

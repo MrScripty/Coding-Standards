@@ -3654,3 +3654,16 @@
 - README and generated evidence are current at 133 Bash checkers / 138 nodes /
   693 edges / 138 components. No guessed-order/startup/rebuild/rollback fallback,
   wrapper, copied range, or compatibility path remains. M6-U7 is next.
+
+## 2026-08-12 - M6-U7 Planning Admission Acceptance
+
+- Revalidated proposal `9438266`, registered its dependency-free three-check
+  suite, and deleted the Bash checker with semantic sources and fixtures
+  unchanged.
+- Preserved ordered typed admission decisions and the canonical Planning and
+  Implementation workflow projections. U7 is edge-free; two M6-T3 historical
+  records transfer to exact suite evidence without a dependency.
+- README and generated evidence are current at 132 Bash checkers / 137 nodes /
+  692 edges / 137 components. No scan-order fallback, latest-record fallback,
+  false dependency, wrapper, copied range, or compatibility path remains.
+  M6-U8 is next.

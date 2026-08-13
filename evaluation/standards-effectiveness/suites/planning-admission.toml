@@ -1,0 +1,61 @@
+schema_version = 1
+id = "planning-admission"
+owner = "workflow.planning"
+description = "Explicit plan admission and transition decisions with typed precedence and no scanning or latest-state fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+path = ["escape", "missing", "valid"]
+operation = ["continue", "missing", "start", "verify"]
+state = ["Accepted", "Active", "Blocked", "Implemented", "Planned", "Verifying"]
+revision = ["current", "missing", "stale"]
+transition = ["complete", "malformed", "missing"]
+compatibility = ["compatible", "contradictory", "dependency-blocked", "overlap"]
+mechanism = ["supported", "unsupported"]
+fallback = ["latest-wins", "none", "scan"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [{ field = "fallback", op = "ne", value = "none" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "path", op = "eq", value = "missing" }, { field = "operation", op = "eq", value = "missing" }, { field = "state", op = "eq", value = "Blocked" }, { field = "revision", op = "eq", value = "missing" }, { field = "transition", op = "eq", value = "missing" }, { field = "compatibility", op = "eq", value = "dependency-blocked" }]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "path", op = "eq", value = "escape" },
+  { field = "revision", op = "eq", value = "stale" },
+  { field = "transition", op = "eq", value = "malformed" },
+  { field = "compatibility", op = "in", values = ["overlap", "contradictory"] },
+  { field = "state", op = "eq", value = "Accepted" },
+  { all = [{ field = "operation", op = "eq", value = "start" }, { field = "state", op = "ne", value = "Planned" }] },
+  { all = [{ field = "operation", op = "eq", value = "continue" }, { field = "state", op = "ne", value = "Active" }] },
+  { all = [{ field = "operation", op = "eq", value = "verify" }, { field = "state", op = "not_in", values = ["Implemented", "Verifying"] }] },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "mechanism", op = "eq", value = "unsupported" }]
+
+[[checks]]
+id = "planning-workflow"
+type = "text"
+path = "workflows/planning.md"
+required = ["## Explicit Plan Admission", "`start` accepts only `Planned`", "`continue` accepts only `Active`", "`verify` accepts `Implemented` or `Verifying`", "`planning-admission-v1`", "`planning-transition-v1`", "exact affected scope and bounded write set", "## Concurrent Preparation And Serial Integration", "Disjoint files", "complete-transition", "restore-prior-state", "supersede-transition", "reservations, leases, queues, heartbeats"]
+prohibited = []
+
+[[checks]]
+id = "implementation-consumer"
+type = "text"
+path = "workflows/implementation.md"
+required = ["explicit canonical", "Consume the Planning workflow", "Do not", "scan for a plan", "infer an operation"]
+prohibited = []

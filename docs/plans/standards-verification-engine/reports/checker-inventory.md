@@ -3074,3 +3074,13 @@ at 133 Bash checkers / 138 nodes / 693 edges / 138 components. Sources and
 fixtures remain unchanged, with no guessed-order/startup/rebuild/rollback
 fallback, false dependency, wrapper, copied range, or compatibility path. M6-U7
 is next.
+
+### Accepted M6-U7 Planning Admission
+
+The dependency-free three-check suite replaces the Bash checker and preserves
+ordered typed admission outcomes plus the canonical Planning and
+Implementation workflow projections. U7 is edge-free; two historical M6-T3
+rows name exact registered suite evidence. README and generated evidence are
+current at 132 Bash checkers / 137 nodes / 692 edges / 137 components. Sources
+and fixtures remain unchanged, with no scan-order or latest-record fallback,
+false dependency, wrapper, copied range, or compatibility path. M6-U8 is next.

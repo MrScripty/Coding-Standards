@@ -714,3 +714,8 @@ requires = []
 id = "persistence-migration-execution"
 path = "evaluation/standards-effectiveness/suites/persistence-migration-execution.toml"
 requires = []
+
+[[suites]]
+id = "planning-admission"
+path = "evaluation/standards-effectiveness/suites/planning-admission.toml"
+requires = []

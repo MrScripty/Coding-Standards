@@ -12246,3 +12246,15 @@ transfer to exact suite evidence. Generated evidence is 133 Bash checkers / 138
 nodes / 693 edges / 138 components. No source, fixture, false dependency,
 wrapper, copied range, migration fallback, or compatibility path changed. M6-U7
 is next.
+
+## 2026-08-12 M6-U7 Planning Admission Acceptance
+
+**Outcome:** accepted at train order 108.
+
+Proposal `9438266` was revalidated. Its dependency-free three-check suite
+preserves ordered typed admission decisions and the Planning/Implementation
+workflow projections. The checker is absent, U7 is edge-free, and two M6-T3
+historical rows transfer to exact suite evidence. Generated evidence is 132
+Bash checkers / 137 nodes / 692 edges / 137 components. No source, fixture,
+false dependency, wrapper, copied range, scan/latest fallback, or compatibility
+path changed. M6-U8 is next.
