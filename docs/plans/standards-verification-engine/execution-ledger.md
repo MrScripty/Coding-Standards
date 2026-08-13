@@ -3373,3 +3373,17 @@
   filter, false dependency, compatibility path, duplicate authority, or
   fallback. Regeneration records 141 Bash verifiers, 146 nodes, 720 edges, and
   146 components without changing executable topology.
+
+## 2026-08-12 - M6-T13 Row 37 Acceptance
+
+- Registered and passed the byte-identical dependency-free eight-check row-37
+  suite before deleting its Bash checker; decomposition and source-wide
+  disposition lineage are derived without copied identifiers or counts.
+- Accepted all eighteen M6-T13 edge rows independently. Immutable historical
+  owner state remains separate from execution-train current-existence evidence.
+- Regenerated 140 Bash verifiers, 145 nodes, 699 edges, and 145 components;
+  protected decomposition, owner, disposition, Architecture, Frontend,
+  Resilience, train, P30 package, and plan evidence remains unchanged.
+- All nine gates, all 137 declarative suites, and all 140 mixed-suite
+  entrypoints pass without legacy execution or fallback. The next slice is a
+  fresh graph and ownership audit.

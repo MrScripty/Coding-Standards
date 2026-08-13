@@ -2806,3 +2806,17 @@ records, no historical transfer, and no engine, wrapper, Bash callback,
 inferred filter, false dependency, compatibility, duplicate-authority, or
 fallback change. Regeneration records 141 Bash verifiers, 146 nodes, 720 edges,
 and 146 components; executable topology is unchanged.
+
+### M6-T13 Acceptance
+
+The registered row-37 suite passes eight generic checks and replaces its Bash
+checker without a wrapper. Five Architecture gates, two Frontend gates,
+Resilience, and execution train remain independent through eighteen accepted
+edge records. Decomposition identity and exact Architecture disposition
+inclusion are derived from canonical evidence; no copied cardinality,
+historical transfer, or duplicate authority occurs. Immutable historical owner
+state remains separate from current-existence evidence. The graph now contains
+140 Bash verifiers, 145 nodes, 699 edges, and 145 components. All protected
+evidence is unchanged. The focused suite, package and edge authority, all nine
+gates, all 137 declarative suites, and the complete mixed suite of 140 checkers
+pass.

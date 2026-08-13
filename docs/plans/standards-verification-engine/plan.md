@@ -2,9 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-T13 row 37 admission
+**Current phase:** Milestone 6: post-M6-T13 graph and ownership audit
 
-**Next slice:** implement and verify the admitted M6-T13 row 37 package.
+**Next slice:** inspect the fresh post-M6-T13 graph and remaining ownership and
+evidence shapes before admitting another bounded package.
 
 **Acceptance status:** `pending`
 
@@ -6518,6 +6519,20 @@ wrappers, Bash callbacks, false dependencies, compatibility paths, duplicate
 authority, and fallback are prohibited. Changed incidence, unrepresentable
 semantics, protected evidence mutation, or an edit outside the write set is a
 re-plan trigger.
+
+Acceptance registers and passes the dependency-free eight-check row-37 suite
+before deleting the Bash checker. Eighteen M6-T13 edge records remain accepted
+independent-gate evidence. The regenerated graph contains 140 Bash verifiers,
+145 nodes, 699 edges, and 145 components. Protected decomposition, owner,
+disposition, report, immutable train, P30 package, gate, and plan evidence is
+unchanged. Historical owner state remains distinct from current existence
+evidence. No copied identity or cardinality, historical-state reinterpretation,
+inferred filter, wrapper, Bash callback, false dependency, compatibility path,
+duplicate authority, fallback, or legacy execution remains. The focused suite,
+package and edge authority, all nine independent gates, all 137 declarative
+suites, and the complete mixed suite of 140 checkers pass. Graph freshness,
+removal, both plan, and diff checks also pass. A fresh graph and ownership audit
+is next.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

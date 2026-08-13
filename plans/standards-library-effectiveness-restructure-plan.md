@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement and verify admitted package M6-T13 for row 37 without
-legacy execution or fallback.
+**Next slice:** perform a fresh post-M6-T13 graph and ownership audit before
+admitting another bounded verification package.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3231,6 +3231,17 @@ all structural/routing fixtures pass.
          records and no historical transfer, engine change, wrapper, Bash
          callback, inferred filter, false dependency, compatibility path,
          duplicate authority, or fallback.
+       - `7.4c3ve95` (`Accepted`): M6-T13 registers and passes the
+         dependency-free eight-check row-37 suite, derives decomposition
+         identity and exact Architecture disposition inclusion without copied
+         identifiers or cardinalities, deletes the legacy Bash checker, and
+         accepts eighteen independent-gate records. Immutable historical owner
+         state remains separate from current-existence evidence. The graph has
+         140 Bash verifiers, 145 nodes, 699 edges, and 145 components. All nine
+         gates, all 137 declarative suites, and the complete mixed suite of 140
+         checkers pass with no inferred filter, wrapper, Bash callback, false
+         dependency, compatibility path, duplicate authority, or fallback.
+         Audit fresh graph and ownership state.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

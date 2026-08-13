@@ -11940,3 +11940,16 @@ with no historical transfer, engine change, wrapper, Bash callback, inferred
 filter, false dependency, compatibility path, duplicate authority, or fallback.
 The graph records 141 Bash verifiers, 146 nodes, 720 edges, and 146 components
 without changing executable topology.
+
+## 2026-08-12 M6-T13 Row 37 Acceptance
+
+**Outcome:** accepted at train order 100.
+
+The dependency-free eight-check row-37 suite replaces the deleted Bash checker
+and derives decomposition identity and exact Architecture disposition inclusion
+without copied identifiers or cardinalities. Eighteen former gate-edge records
+preserve nine independent gates and no historical evidence changes. Immutable
+historical owner state remains separate from current-existence evidence. The
+graph now has 140 Bash verifiers, 145 nodes, 699 edges, and 145 components. All
+nine gates, all 137 declarative suites, and all 140 mixed-suite entrypoints
+pass. A fresh graph and ownership audit is next.
