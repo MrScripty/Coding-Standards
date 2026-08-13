@@ -13,9 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** separately preflight and admit M6-C4 repository-index
-membership. All twelve semantic candidates remain unadmitted until the
-capability sequence is accepted.
+**Next slice:** implement and accept admitted M6-C4 Git index membership. All
+twelve semantic candidates remain unadmitted until the capability sequence is
+accepted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3324,6 +3324,17 @@ all structural/routing fixtures pass.
          nodes / 699 edges / 144 components, both plan checks, and the Python
          complete checkpoint pass. Existing Markdown behavior and every
          semantic package remain unchanged. Admit M6-C4 separately.
+       - `7.4c3ve104` (`M6-C4 admitted`): only two prompt checkers require Git
+         tracked membership. Admit `git_index_paths` with lexical repository-
+         path validation and one fixed engine-owned NUL-delimited
+         `git ls-files` read. Missing members distinguish present-untracked
+         from absent-untracked; tracked working-tree deletion remains valid
+         index membership. Git absence, nonzero exit, malformed output, and
+         repository unavailability are typed. No mode, pathspec, glob,
+         directory expansion, staged-content/history query, configurable
+         command/flag/environment, filesystem substitution, package branch,
+         Bash, compatibility, or fallback is authorized. Semantic packages
+         remain unadmitted.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

@@ -3516,3 +3516,21 @@
   review close acceptance.
 - No candidate or migration authority changed, no deviation was required, and
   no new issue remains. M6-C4 admission is next.
+
+## 2026-08-12 - M6-C4 Git Index-Membership Admission
+
+- Confirmed only two prompt checkers require tracked membership. Their content
+  and filesystem checks are separate; presence cannot substitute for the Git
+  index, and a tracked working-tree deletion remains an index member.
+- Admit `git_index_paths` with one unique nonempty `tracked` list, lexical
+  repository-path validation, and one fixed engine-owned NUL-delimited
+  `git ls-files` read. Missing members distinguish present-untracked from
+  absent-untracked without treating either as valid.
+- Permit a shared lexical path-helper extraction only if `contained_path`
+  resolution and diagnostics remain unchanged. Reject modes, pathspecs, globs,
+  directory expansion, staged content, object/history queries, configurable
+  commands/flags/environment, package branches, Bash, compatibility, and
+  fallback.
+- No semantic suite, registry, package, edge, checker, fixture, standards
+  source, generated artifact, lockfile, build output, or workflow is admitted.
+  Shared-contract verification is required before candidate re-preflight.

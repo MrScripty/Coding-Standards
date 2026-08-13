@@ -12103,3 +12103,21 @@ Python complete checkpoint, exact write-set review, and diff integrity pass.
 Existing scanner, heading, and section behavior and every semantic candidate
 remain unchanged. No count API, alternate parser, command, compatibility, or
 fallback exists; no deviation or new issue remains.
+
+## 2026-08-12 M6-C4 Git Index-Membership Admission
+
+**Outcome:** admitted; all semantic candidates remain unadmitted.
+
+Only the two prompt-entrypoint proofs require Git tracked membership. Existing
+filesystem assertions cannot replace that authority: an untracked present file
+must fail, while an indexed path deleted from the working tree remains tracked.
+Index identity therefore uses validated lexical repository paths rather than
+requiring target resolution.
+
+M6-C4 may add `git_index_paths` with one nonempty unique `tracked` list and one
+fixed engine-owned NUL-delimited `git ls-files` operation. It reports
+present-untracked and absent-untracked separately and types missing Git,
+nonzero Git, malformed output, and repository unavailability. Configuration
+cannot provide a command, flag, root, environment, mode, pathspec, glob, or
+fallback. Existing containment behavior must remain unchanged, and a complete
+shared-contract checkpoint is required before semantic candidate re-preflight.

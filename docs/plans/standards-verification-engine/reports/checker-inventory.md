@@ -2945,3 +2945,19 @@ suites, generated evidence at 139 Bash verifiers / 144 nodes / 699 edges / 144
 components, both plan checks, and the Python complete checkpoint pass. Existing
 Markdown checks and all semantic packages remain unchanged. M6-C4 is separately
 unadmitted.
+
+### M6-C4 Git Index-Membership Admission
+
+Only Plan Implementation and Full Review Prompt checkers invoke Git index
+membership. Their versioned requirement is independent from path existence and
+content: present-untracked must fail, and tracked working-tree absence must not
+be mistaken for an unversioned path.
+
+M6-C4 admits `git_index_paths` with lexical contained paths and one fixed
+engine-owned NUL-delimited `git ls-files` read. Missing members distinguish
+present-untracked from absent-untracked. Git absence, nonzero exit, malformed
+output, and unavailable repository metadata are typed. No mode, pathspec,
+glob, directory expansion, staged-content read, history query, configurable
+command/flag/environment, filesystem fallback, package logic, Bash,
+compatibility, or fallback is authorized. Candidate packages remain
+unadmitted.

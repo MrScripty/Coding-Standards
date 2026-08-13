@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-C3 semantic heading cardinality accepted
+**Current phase:** Milestone 6: M6-C4 Git index membership admitted
 
-**Next slice:** preflight and separately admit M6-C4 repository-index
-membership without changing any semantic candidate package.
+**Next slice:** implement and accept M6-C4 Git index membership without
+changing any semantic candidate package.
 
 **Acceptance status:** `pending`
 
@@ -150,7 +150,7 @@ delegation, migration sequence, and acceptance model before source changes.
 
 ##### VE059 M6-U0 Capability-First Semantic-Wave Recovery
 
-**Capability state:** `M6-C1/M6-C2/M6-C3 accepted`; M6-C4 remains unadmitted.
+**Capability state:** `M6-C1/M6-C2/M6-C3 accepted`; M6-C4 is admitted.
 
 Read-only preflight of the twelve M6-U0 candidates found six owner lanes but
 four generic evidence relationships that the current engine cannot express
@@ -382,6 +382,73 @@ The shared scanner and existing heading/section checks, every semantic
 candidate, registry, package, edge, checker, fixture, standards source,
 generated artifact, lockfile, build output, workflow, compatibility path, and
 fallback remain unchanged. No deviation or new issue remains.
+
+**M6-C4 preflight:** only the Plan Implementation and Full Review Prompt
+checkers invoke Git index membership, each through fixed
+`git -C "$R" ls-files --error-unmatch <prompt>`. Their path-state and content
+requirements are separate assertions: filesystem presence alone cannot prove
+that a prompt is versioned. A tracked path may also be absent from the working
+tree while remaining in the index, so Git identity must use a lexical
+repository-relative path rather than require successful working-tree
+resolution.
+
+The admitted `git_index_paths` check accepts exactly one nonempty unique
+`tracked` string list. The engine first validates each item as a lexical
+repository-relative POSIX path with no absolute path, empty component, `.`, or
+`..`. It invokes one fixed engine-owned operation equivalent to
+`git -C <repo-root> ls-files -z --full-name`, parses NUL-delimited UTF-8 paths
+once, and requires each configured path to be an exact member. A missing index
+member reports `present-untracked` when the corresponding contained working-
+tree path exists or `absent-untracked` otherwise. These observations explain
+the index failure; they never substitute for it.
+
+Extract lexical validation from `contained_path` into one shared helper only if
+the existing helper preserves its exact resolution, diagnostics, and public
+behavior. Git executable absence, nonzero operation, malformed NUL/UTF-8
+output, or unavailable repository metadata returns typed unavailable or
+invalid diagnostics. The operation, flags, repository root, environment, and
+fallback are not configurable.
+
+No `present`/`absent` mode, untracked allowance, glob, pathspec, directory
+expansion, ignore-rule query, staged-content read, object lookup, status parser,
+filesystem-presence substitution, arbitrary command, configurable Git flag,
+callback, package-specific branch, Bash execution, compatibility
+representation, or fallback is admitted.
+
+**M6-C4 allowed implementation write set:**
+
+- `tools/standards_verifier/standards_verifier/checks/git_index_paths.py`;
+- `tools/standards_verifier/standards_verifier/checks/__init__.py`;
+- `tools/standards_verifier/standards_verifier/paths.py` only for the admitted
+  lexical helper extraction with unchanged `contained_path` behavior;
+- `tools/standards_verifier/tests/test_file_contracts.py`;
+- `tools/standards_verifier/tests/test_engine.py` only for direct shared-helper
+  parity if needed;
+- `tools/standards_verifier/README.md`; and
+- this plan, its issues, both execution ledgers, the checker-inventory report,
+  and the parent plan.
+
+**M6-C4 focused evidence:** tracked present and tracked working-tree-absent
+paths pass; present-untracked and absent-untracked paths fail distinctly;
+multiple paths use one fixed index read; prefix paths do not match; spaces and
+non-ASCII Git paths parse exactly; duplicate/empty/absolute/dot/parent paths,
+unknown fields, command/flag/repository aliases, missing Git, nonzero Git,
+invalid UTF-8, malformed NUL output, and non-repository roots return typed
+diagnostics; existing containment and path-state behavior remains unchanged.
+
+**M6-C4 verification:** focused file-contract and helper-parity tests, all
+engine tests, Python byte compilation, all registered declarative suites,
+generated-evidence freshness, both plan checks, the Python complete checkpoint,
+exact write-set review, and diff integrity. No candidate suite, registry row,
+package row, edge disposition, checker, fixture, standards source, generated
+artifact, lockfile, build output, or workflow file is authorized.
+
+**M6-C4 re-plan triggers:** stop if a candidate needs untracked or ignored-state
+policy, directory/pathspec expansion, staged content, object history, another
+Git operation, a configurable command/flag/environment, cross-repository
+membership, or filesystem state as authority; if lexical helper extraction
+changes existing containment behavior; or if fixed index output cannot be
+parsed with typed unavailable/invalid separation.
 
 **Tasks:**
 
