@@ -1,0 +1,116 @@
+schema_version = 1
+id = "milestone-7-row-36-decomposition"
+owner = "migration.parent-plan"
+description = "Accepted row 36 Architecture pattern decomposition with derived identity and disposition inclusion evidence."
+
+[[checks]]
+id = "execution-decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+[[checks.projections]]
+columns = ["child_order", "source", "owner", "owner_state", "activation", "checkpoint", "owner_transition"]
+order = "source"
+expected = [
+  ["1", "ARCHITECTURE-PATTERNS.md", "reference/patterns/architecture.md", "exists", "owner-review", "focused", "missing-to-exists"],
+  ["2", "ARCHITECTURE-PATTERNS.md", "topics/architecture.md", "exists", "pre-slice-review", "focused", "none"],
+  ["3", "ARCHITECTURE-PATTERNS.md", "topics/architecture.md", "exists", "pre-slice-review", "focused", "none"],
+  ["4", "ARCHITECTURE-PATTERNS.md", "topics/architecture.md", "exists", "pre-slice-review", "focused", "none"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "36"
+
+[[checks]]
+id = "decomposition-identities"
+type = "relation"
+mode = "set"
+[checks.left]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["ids"]
+order = "source"
+[checks.left.where]
+field = "baseline_order"
+op = "eq"
+value = "36"
+[checks.left.split]
+field = "ids"
+delimiter = ","
+[checks.right]
+path = "evaluation/standards-effectiveness/milestone-7-row-36-owner-validation.tsv"
+header = ["id", "canonical_owner", "disposition", "reference_treatment", "rationale"]
+columns = ["id"]
+order = "source"
+
+[[checks]]
+id = "owner-validation"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-row-36-owner-validation.tsv"
+header = ["id", "canonical_owner", "disposition", "reference_treatment", "rationale"]
+non_empty = ["id", "canonical_owner", "disposition", "reference_treatment", "rationale"]
+unique = [["id"]]
+[checks.domains]
+canonical_owner = ["reference/patterns/architecture.md", "topics/architecture.md"]
+disposition = ["index", "split", "move", "merge-duplicate"]
+
+[[checks]]
+id = "disposition-lineage"
+type = "inclusion"
+[checks.members]
+path = "evaluation/standards-effectiveness/milestone-7-row-36-owner-validation.tsv"
+header = ["id", "canonical_owner", "disposition", "reference_treatment", "rationale"]
+columns = ["id", "canonical_owner", "disposition"]
+order = "source"
+[checks.container]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["id", "target", "disposition"]
+order = "source"
+[checks.container.where]
+field = "source"
+op = "eq"
+value = "ARCHITECTURE-PATTERNS.md"
+
+[[checks]]
+id = "decomposition-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-36-decomposition.md"
+required = ["## Owner Contract", "sole normative owner", "rows 37, 39, and 40", "## Exact Ownership", "`36.1`", "`36.2`", "`36.3`", "`36.4`", "P30 remains open", "## Bounded Write Sets", "## Shared Owner State Replan", "do not inherit", "## Typed Outcomes And No Fallback", "## Re-plan Triggers"]
+prohibited = []
+
+[[checks]]
+id = "execution-train"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+[[checks.projections]]
+columns = ["wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+order = "source"
+expected = [["reference-index-closure", "STD-0027", "STD-0045", "ARCHITECTURE-PATTERNS.md", "reference/patterns/architecture.md", "missing", "owner-review", "focused"]]
+[checks.projections.where]
+field = "order"
+op = "eq"
+value = "36"
+
+[[checks]]
+id = "accelerated-package"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv"
+header = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+[[checks.projections]]
+columns = ["package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+order = "source"
+expected = [["P30", "new-owner-design", "reference/patterns/architecture.md", "create-before-populate", "owner-contract", "isolated-draft", "full-suite", "architecture-pattern-reference-extraction", "core,workflow.documentation"]]
+[checks.projections.where]
+field = "train_order"
+op = "eq"
+value = "36"
+
+[[checks]]
+id = "accepted-plan-state"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b26a` (`Accepted`)", "`7.4b26b` (`Accepted`)", "`7.4b26c` (`Accepted`)", "`7.4b26d` (`Accepted`)", "`7.4b26er` (`Accepted`)", "`7.4b26e` (`Accepted`)"]
+prohibited = []

@@ -11887,3 +11887,15 @@ incident-edge rows are admitted with no historical transfer, wrapper, Bash
 callback, inferred member list, equality fallback, compatibility path, false
 dependency, or fallback. The graph now records 143 Bash verifiers, 148 nodes,
 732 edges, and 148 components without changing executable topology.
+
+## 2026-08-12 M6-T11 Row 36 Acceptance
+
+**Outcome:** accepted at train order 98.
+
+The dependency-free eight-check row-36 suite replaces the deleted Bash checker
+and derives exact identity and disposition inclusion evidence without copied
+identifiers or cardinalities. Ten former gate-edge records preserve five
+independent gates and no historical evidence changes. The graph now has 142
+Bash verifiers, 147 nodes, 719 edges, and 147 components. All 206 engine tests,
+all five gates, all 135 declarative suites, and all 142 mixed-suite entrypoints
+pass. A fresh audit is next.

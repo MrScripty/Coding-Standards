@@ -142,6 +142,14 @@ legacy Bash checker, regenerate derived graph artifacts, accept the package and
 edge dispositions, run all declarative suites and the complete mixed suite,
 update the plan and ledger, and create one atomic implementation commit.
 
+**Outcome:** accepted. The permanent eight-check suite passes before the Bash
+checker is deleted. M6-T11 and its ten independent-gate records are accepted;
+regeneration derives 142 Bash verifiers, 147 nodes, 719 edges, and 147
+components. All 206 engine tests, all five independent gates, all 135
+declarative suites, and all 142 mixed-suite entrypoints pass. No copied
+identity or count, inferred member list, alias, wrapper, Bash callback, equality
+fallback, false dependency, compatibility path, or fallback remains.
+
 ## No-fallback And No-legacy Rule
 
 The design does not preserve row 36 by wrapping or executing its Bash checker.

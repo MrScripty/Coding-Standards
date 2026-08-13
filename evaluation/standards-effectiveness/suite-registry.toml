@@ -669,3 +669,8 @@ requires = []
 id = "accessibility-media"
 path = "evaluation/standards-effectiveness/suites/accessibility-media.toml"
 requires = []
+
+[[suites]]
+id = "milestone-7-row-36-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-36-decomposition.toml"
+requires = []

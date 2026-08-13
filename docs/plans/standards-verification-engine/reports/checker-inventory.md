@@ -2751,3 +2751,15 @@ M6-T11 is admitted at train order 98 with ten exact incident-edge records, no
 historical transfer, and no wrapper, Bash callback, inferred member list,
 equality fallback, compatibility path, false dependency, or fallback.
 Regeneration records 732 edges; executable topology is unchanged.
+
+### M6-T11 Acceptance
+
+The registered row-36 suite passes eight generic checks and replaces its Bash
+checker without a wrapper. Architecture Pattern Reference, Layered Pattern,
+Monorepo Pattern, Data Authority, and execution train remain independent through
+ten accepted edge records. Complete identity equality and disposition inclusion
+are derived from existing evidence; no copied count, historical transfer, or
+duplicate authority occurs. The graph now contains 142 Bash verifiers, 147
+nodes, 719 edges, and 147 components. All protected evidence is unchanged. The
+focused suite, package and edge authority, all five gates, all 135 declarative
+suites, and the complete mixed suite of 142 checkers pass.

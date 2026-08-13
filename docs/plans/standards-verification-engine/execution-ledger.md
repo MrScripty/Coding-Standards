@@ -3294,6 +3294,19 @@
 - Regenerated 143 Bash verifiers, 148 nodes, 732 edges, and 148 components;
   executable topology is unchanged. Implementation is next.
 
+## 2026-08-12 - M6-T11 Row 36 Acceptance
+
+- Registered and passed the dependency-free eight-check row-36 suite before
+  deleting its Bash checker; native inclusion derives complete bounded lineage
+  without copied identities or cardinalities.
+- Accepted all ten M6-T11 edge rows independently; no historical evidence or
+  owner record required mutation.
+- Regenerated 142 Bash verifiers, 147 nodes, 719 edges, and 147 components;
+  all protected decomposition, owner, disposition, Architecture gate, plan, and
+  inclusion evidence remains unchanged.
+- All 206 engine tests, all five gates, all 135 declarative suites, and all 142
+  mixed-suite entrypoints pass. The next slice is a fresh audit.
+
 ## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
 
 - Audited every caller-free lifecycle checker in the fresh 147-verifier graph
