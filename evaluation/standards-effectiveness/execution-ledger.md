@@ -12283,3 +12283,15 @@ evidence. Generated evidence is 130 Bash checkers / 135 nodes / 690 edges / 135
 components. No source, fixture, false dependency, wrapper, copied range,
 copied/local/machine/scan fallback, or compatibility path changed. M6-U10 is
 next.
+
+## 2026-08-12 M6-U10 Plan Template Projection Acceptance
+
+**Outcome:** accepted at train order 111.
+
+Proposal `0dc1ae2` was revalidated. Its dependency-free three-check suite
+preserves typed projection decisions, canonical template projection, and
+row-derived lineage. The checker is absent, U10 is edge-free, and two M6-T4
+historical rows transfer to exact suite evidence. Generated evidence is 129
+Bash checkers / 134 nodes / 689 edges / 134 components. No source, fixture,
+false dependency, wrapper, copied range, frozen/fixed/copied-policy fallback,
+or compatibility path changed. M6-U11 is next.

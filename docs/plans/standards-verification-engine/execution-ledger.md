@@ -3695,3 +3695,16 @@
   690 edges / 135 components. No copied-process, local-prompt, machine-path, or
   scan fallback, wrapper, false dependency, copied range, or compatibility path
   remains. M6-U10 is next.
+
+## 2026-08-12 - M6-U10 Plan Template Projection Acceptance
+
+- Revalidated proposal `0dc1ae2`, registered its dependency-free three-check
+  suite, and deleted the Bash checker with template, workflow, fixture,
+  decomposition, validation, and disposition sources unchanged.
+- Preserved typed projection decisions, canonical template content, and
+  row-26-derived disposition lineage. U10 is edge-free; two M6-T4 historical
+  records transfer to exact suite evidence without a dependency.
+- README and generated evidence are current at 129 Bash checkers / 134 nodes /
+  689 edges / 134 components. No frozen-structure restoration, fixed-count,
+  copied-policy, optional-mandate, wrapper, false dependency, copied range, or
+  compatibility fallback remains. M6-U11 is next.

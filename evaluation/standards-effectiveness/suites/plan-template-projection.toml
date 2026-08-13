@@ -1,0 +1,63 @@
+schema_version = 1
+id = "plan-template-projection"
+owner = "workflow.planning"
+description = "Concise Planning-derived plan template projection without frozen structure, copied owner policy, or implicit fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+identity = ["no", "yes"]
+objective = ["no", "yes"]
+acceptance = ["no", "yes"]
+scope = ["no", "yes"]
+decisions = ["no", "yes"]
+milestones = ["no", "yes"]
+replan = ["no", "yes"]
+concurrency = ["conditional", "yes"]
+final = ["no", "yes"]
+optional_mandate = ["no", "yes"]
+fixed_count = ["no", "yes"]
+copied_policy = ["no", "yes"]
+fallback = ["none", "restore-frozen"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "optional_mandate", op = "ne", value = "no" }, { field = "fixed_count", op = "ne", value = "no" }, { field = "copied_policy", op = "ne", value = "no" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "identity", op = "ne", value = "yes" }, { field = "objective", op = "ne", value = "yes" }, { field = "acceptance", op = "ne", value = "yes" }, { field = "scope", op = "ne", value = "yes" }, { field = "decisions", op = "ne", value = "yes" }, { field = "milestones", op = "ne", value = "yes" }, { field = "replan", op = "ne", value = "yes" }, { field = "final", op = "ne", value = "yes" }]
+
+[[checks]]
+id = "template-content"
+type = "text"
+path = "templates/PLAN-TEMPLATE.md"
+required = ["**Plan status:**", "**Current phase:**", "**Next slice:**", "**Acceptance status:**", "**Execution ledger:**", "**Issues:**", "## Objective", "## Objective Acceptance", "## Scope", "## Constraints And Assumptions", "## Binding Decisions", "## Simplicity And Ownership Review", "## Milestones", "**Allowed write set:**", "**Acceptance gate:**", "## Blockers", "## Re-Plan Triggers", "## Concurrent Work", "## Final Acceptance"]
+prohibited = ["## Inputs", "## Clarifying Questions", "## Definition of Done", "## Execution Notes", "## Commit Cadence Notes", "## Optional Subagent Assignment", "## Recommendations", "## Completion Summary", "### Milestone 2:", "/media/", "/home/"]
+
+[[checks]]
+id = "disposition-lineage"
+type = "keyed_relation"
+[checks.keys]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["ids"]
+order = "source"
+where = { field = "baseline_order", op = "eq", value = "26" }
+split = { field = "ids", delimiter = "," }
+[checks.expected]
+path = "evaluation/standards-effectiveness/milestone-7-row-26-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+key = "id"
+values = ["owner", "disposition"]
+[checks.observed]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+key = "id"
+values = ["target", "disposition"]

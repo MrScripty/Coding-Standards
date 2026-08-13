@@ -3106,3 +3106,14 @@ suite evidence. README and generated evidence are current at 130 Bash checkers
 / 135 nodes / 690 edges / 135 components. Sources and fixtures remain
 unchanged, with no copied-process, local-prompt, machine-path, or scan fallback,
 wrapper, false dependency, copied range, or compatibility path. M6-U10 is next.
+
+### Accepted M6-U10 Plan Template Projection
+
+The dependency-free three-check suite replaces the Bash checker and preserves
+typed projection decisions, canonical template content, and row-26-derived
+disposition ownership. U10 is edge-free; two historical M6-T4 rows name exact
+registered suite evidence. README and generated evidence are current at 129
+Bash checkers / 134 nodes / 689 edges / 134 components. Sources and fixtures
+remain unchanged, with no frozen-structure restoration, fixed-count,
+copied-policy, optional-mandate, wrapper, false dependency, copied range, or
+compatibility fallback. M6-U11 is next.

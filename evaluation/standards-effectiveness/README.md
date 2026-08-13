@@ -605,6 +605,14 @@ index identity, required and prohibited prompt projection, one semantic title,
 and row-24 disposition ownership. Copied process, local-prompt substitution,
 machine-specific paths, and scan fallback are rejected.
 
+## Plan Template Projection Fixtures
+
+`fixtures/planning/template-projection-decisions.tsv` and the registered
+`plan-template-projection` suite check the Planning-derived template
+projection and row-26 disposition ownership. Frozen structure, fixed counts,
+copied owner policy, optional-section mandates, and implicit restoration
+fallback are rejected.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered
