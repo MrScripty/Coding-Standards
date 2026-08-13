@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform a fresh post-M6-T11 graph and ownership audit before
-admitting another bounded verification package.
+**Next slice:** implement admitted verification package M6-T12 for parent-owned
+row 34, then audit the fresh graph before another admission.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3193,6 +3193,16 @@ all structural/routing fixtures pass.
          lifecycle evidence remains unchanged. Both independent gates, all 133
          declarative suites, and the complete mixed suite of 144 checkers pass.
          Audit fresh graph and ownership state.
+       - `7.4c3ve92` (`Admitted`): the fresh post-M6-T11 audit selects
+         caller-free row 34 by its seven-gate surface over row 37's nine. An
+         eight-check dependency-free probe derives complete identity equality
+         and exact disposition lineage from existing decomposition, owner, and
+         source evidence without copied identifiers or cardinalities. The live
+         checker and all seven independent Frontend and execution-train gates
+         pass. Admit M6-T12 at train order 99 with fourteen exact incident-edge
+         records and no historical transfer, engine change, wrapper, Bash
+         callback, inferred filter, false dependency, compatibility path, or
+         fallback.
        - `7.4c3ve85` (`Admitted`): the fresh post-M6-T9 audit selects row 47
          by its four-gate surface. An eleven-check dependency-free probe derives
          complete identities from the generated template inventory and proves

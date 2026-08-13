@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T11 graph and ownership audit
+**Current phase:** Milestone 6: M6-T12 row 34 migration
 
-**Next slice:** inspect the fresh post-M6-T11 graph and remaining ownership and
-evidence shapes before admitting another bounded package.
+**Next slice:** implement admitted M6-T12 with generic declarative assertions,
+then delete the row-34 Bash checker without duplicate authority or fallback.
 
 **Acceptance status:** `pending`
 
@@ -6438,6 +6438,39 @@ The focused suite, package and edge authority, all five independent gates, all
 135 declarative suites, and the complete mixed suite of 142 checkers pass.
 Graph freshness, removal, both plan, engine, and diff checks also pass. A fresh
 graph and ownership audit is next.
+
+##### M6-T12 Row 34 Admission
+
+**Status:** Admitted at train order 99.
+
+The fresh post-M6-T11 graph contains 142 Bash verifiers, 147 nodes, 719 edges,
+and 147 components. Rows 34 and 37 are caller-free lifecycle candidates with
+seven and nine independent gates, so row 34 is the smallest remaining surface.
+It has no historical caller-evidence transfer and requires no engine change.
+
+A disposable dependency-free suite passes eight generic checks. It validates
+the six exact owner-aligned decomposition records, derives complete identity
+equality with owner validation, validates owner and disposition domains, and
+proves exact disposition lineage against the complete Frontend legacy-source
+set. Report, immutable train, P28 package, and seven accepted plan claims also
+pass. Neither the sixteen identities nor their cardinality is copied into a
+filter. The live checker and Frontend Applicability, Lifecycle Work, Rendering
+Synchronization, Source Closure, Testing Lineage, TypeScript Tooling, and
+execution-train gates pass independently.
+
+M6-T12 has fourteen exact incident-edge rows for those seven gates. The
+acceptance write set is frozen in the package manifest. Implementation must
+register and pass the permanent suite before deleting Bash, accept only M6-T12
+and its edges, regenerate the graph, and preserve all decomposition, owner,
+disposition, report, train, package, gate, and plan evidence. Copied identities
+or counts, wrappers, Bash callbacks, inferred filters, false dependencies,
+compatibility paths, duplicate authority, and fallback are prohibited. Changed
+incidence, unrepresentable semantics, protected evidence mutation, or an edit
+outside the write set is a re-plan trigger.
+
+Admission regeneration records 142 Bash verifiers, 147 nodes, 728 edges, and
+147 components. Fourteen typed disposition rows produce nine net graph edges
+after set-valued deduplication; executable topology is unchanged.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

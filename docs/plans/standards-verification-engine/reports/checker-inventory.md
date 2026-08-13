@@ -2763,3 +2763,17 @@ duplicate authority occurs. The graph now contains 142 Bash verifiers, 147
 nodes, 719 edges, and 147 components. All protected evidence is unchanged. The
 focused suite, package and edge authority, all five gates, all 135 declarative
 suites, and the complete mixed suite of 142 checkers pass.
+
+### Post-M6-T11 Audit And M6-T12 Admission
+
+The fresh graph contains 142 Bash verifiers, 147 nodes, 719 edges, and 147
+components. Caller-free row 34 has the smaller remaining lifecycle surface at
+seven gates, ahead of row 37 at nine. Its dependency-free eight-check probe
+derives complete identities and exact disposition lineage from canonical
+evidence without copied identifiers or cardinalities. The live checker and all
+seven gates pass.
+
+M6-T12 is admitted at train order 99 with fourteen exact incident-edge records,
+no historical transfer, and no engine, wrapper, Bash callback, inferred filter,
+false dependency, compatibility, or fallback change. Regeneration records 728
+edges; executable topology is unchanged.

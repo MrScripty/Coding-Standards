@@ -3307,6 +3307,18 @@
 - All 206 engine tests, all five gates, all 135 declarative suites, and all 142
   mixed-suite entrypoints pass. The next slice is a fresh audit.
 
+## 2026-08-12 - Post-M6-T11 Audit And M6-T12 Admission
+
+- Audited caller-free rows 34 and 37 in the fresh 142-verifier graph; selected
+  row 34 by its seven-gate surface over row 37's nine.
+- An eight-check dependency-free probe derives identity and exact disposition
+  lineage without copied identifiers or cardinalities; the live checker and all
+  seven independent gates pass.
+- Admitted M6-T12 at train order 99 with fourteen exact incident-edge rows and
+  no historical transfer, engine change, wrapper, false dependency,
+  compatibility path, or fallback. Regeneration records 728 edges without an
+  executable-topology change.
+
 ## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
 
 - Audited every caller-free lifecycle checker in the fresh 147-verifier graph
