@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T13 graph and ownership audit
+**Current phase:** Milestone 6: M6-I1 Python complete-checkpoint admission
 
-**Next slice:** inspect the fresh post-M6-T13 graph and remaining ownership and
-evidence shapes before admitting another bounded package.
+**Next slice:** implement and verify the admitted M6-I1 Python complete
+checkpoint, then preflight the owner-separated semantic preparation wave.
 
 **Acceptance status:** `pending`
 
@@ -6533,6 +6533,102 @@ package and edge authority, all nine independent gates, all 137 declarative
 suites, and the complete mixed suite of 140 checkers pass. Graph freshness,
 removal, both plan, and diff checks also pass. A fresh graph and ownership audit
 is next.
+
+##### M6-I1 Python Complete-Checkpoint Transition
+
+**Status:** Admitted at train order 101.
+
+The fresh post-M6-T13 graph contains 140 Bash verifiers, 145 nodes, 699 edges,
+and 145 acyclic components. Fourteen verifiers have neither executable callers
+nor verifier dependencies. Two are infrastructure or recovery authorities:
+`verify-declarative-suites.sh` is a temporary Python launcher, while
+`verify-milestone-7-security-checker-repair-replan.sh` validates semantic
+migration evidence. They are not one owner-coherent package.
+
+Inspection also finds that deleting only `verify-declarative-suites.sh` would
+leave `run-complete-suite.sh` as the canonical Bash orchestrator. M6-I1
+therefore replaces both shell entrypoints atomically with one explicit
+`python3 tools/standards_verifier/verify.py --complete` interface. Complete mode
+checks generated graph freshness, runs every registered declarative suite once
+in dependency order, and then fail-fast executes every retained canonical Bash
+verifier in deterministic inventory order. It accepts no checker path or
+command from configuration, uses no shell evaluation, and naturally becomes a
+Python-only checkpoint when the retained Bash inventory reaches zero.
+
+The CLI must return typed invalid or unavailable diagnostics for conflicting
+selection/format options, stale generated evidence, an unavailable retained
+checker, or a nonzero retained-checker result. A declarative failure prevents
+retained-checker execution. Focused tests must prove deterministic order,
+fail-fast behavior, empty retained inventory, unavailable and failed checker
+diagnostics, and option conflicts. Existing `--all`, `--suite`, `--list`, and
+text/JSON declarative behavior remains unchanged.
+
+M6-I1 is an explicit edge-free refinement package. Admission regeneration
+records 140 Bash verifiers, 145 nodes, 701 edges, and 145 components; the two
+new edges are package-contract references and executable topology is unchanged.
+Acceptance must delete both shell entrypoints in the same commit that makes the
+Python command canonical. No wrapper, shell callback, arbitrary command action,
+configuration executable, compatibility alias, skipped freshness gate, ignored
+checker failure, or fallback entrypoint may remain.
+
+The checked package manifest is the sole exact file-level write-set authority.
+Acceptance requires focused checkpoint tests, all engine tests, graph
+freshness, all declarative suites, both removed paths, both plan checks, exact
+read-only standards/suite/fixture/registry evidence, diff integrity, and one
+successful `--complete` invocation over the retained inventory. A required
+registry/schema change, policy-bearing engine branch, executable path from
+configuration, inability to preserve fail-fast output, or edit outside the
+manifest is a re-plan trigger.
+
+##### M6-I2 Security Repair Evidence Separation
+
+**Status:** Planned after the semantic wave; not admitted.
+
+The 71-line security-repair checker is not launcher infrastructure. It owns the
+exact four-package repair inventory, serial/parallel preparation split,
+preserved-evidence contract, selected-design report, and accepted parent-plan
+claims. It requires a separately admitted `migration.parent-plan` declarative
+suite after a disposable representability probe. M6-I1 may not delete, wrap,
+invoke specially, reinterpret, or absorb this evidence.
+
+##### M6-U0 Concurrent Semantic Preparation Wave
+
+**Status:** Planned; package preflight follows M6-I1 acceptance.
+
+Twelve caller-free, dependency-free semantic gates remain suitable for
+owner-separated preflight. They form candidate preparation lanes, not one
+cross-owner package:
+
+| Lane | Candidate gates | Semantic owner boundary |
+| --- | --- | --- |
+| Contracts | HTTP adapter proof | Contracts policy and HTTP recipe evidence |
+| Frontend | Applicability; lifecycle work; TypeScript tooling | Frontend profile, generic lifecycle owner, and TypeScript/Tooling specializations remain distinct within separately admitted packages |
+| Persistence | Durable mutation; migration execution | Persistence boundary profile with two separate observable contracts |
+| Planning and prompts | Planning admission; plan implementation entrypoint; full-review prompt | Planning workflow and versioned prompt projections remain separately owned |
+| Templates | Plan template; review template | Planning and Implementation template projections remain separate packages |
+| Rust | `no_std` closure | Rust Cross-Platform capability with Tooling and recipe evidence |
+
+For every candidate, disposable native-suite preflight must derive exact
+decisions, text/projection evidence, dispositions, and historical
+independent-gate transfers. Preflight freezes one package owner, suite ID,
+local write set, semantic outcome, prerequisites, and focused verification
+contract. No package is admitted merely because graph incidence is zero.
+
+After admission, package-local suites and checker deletions may be prepared
+concurrently in isolated worktrees. Each worker owns only its suite path and
+deleted checker path, starts from the same frozen canonical revision, changes
+no shared authority, and reports a commit plus focused evidence. The suite
+registry, package and edge manifests, historical evidence transfers, generated
+graph, plans, ledgers, READMEs, and wave checkpoint remain serial integration-
+owner files. Integration applies prepared local commits in admitted train
+order, updates shared authority once per contiguous group, runs focused checks
+after each package, and runs `--complete` once at the wave boundary.
+
+A repeated unrepresentable invariant, overlapping local write sets, conflicting
+owner, true cross-suite dependency, shared fixture mutation, stale historical
+evidence, or required normative-source change is a re-plan trigger. Combining
+owners for throughput, parallel shared-manifest edits, a Bash bridge, false
+suite dependency, compatibility route, or fallback is prohibited.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

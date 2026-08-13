@@ -3387,3 +3387,20 @@
 - All nine gates, all 137 declarative suites, and all 140 mixed-suite
   entrypoints pass without legacy execution or fallback. The next slice is a
   fresh graph and ownership audit.
+
+## 2026-08-12 - Post-M6-T13 Re-plan And M6-I1 Admission
+
+- Audited 140 Bash verifiers in the fresh 145-node, 699-edge acyclic graph.
+  Fourteen have neither executable callers nor verifier dependencies, but they
+  span infrastructure, recovery, and six semantic owner lanes.
+- Corrected the initial launcher-only proposal after finding that
+  `run-complete-suite.sh` remains the canonical Bash mixed orchestrator. Admit
+  one edge-free M6-I1 refinement that replaces both shell entrypoints with the
+  Python `--complete` command; do not add declarative command execution.
+- Freeze the security-repair checker as separate migration-parent evidence and
+  a twelve-candidate owner-separated semantic wave. Package-local preparation
+  may be concurrent only after suite probes and admission; shared authority is
+  integrated serially with one Python complete checkpoint at the wave boundary.
+- Baseline 206 engine tests, all 137 declarative suites, graph freshness, and
+  the complete 140-checker checkpoint pass. Admission regeneration records 701
+  edges without executable-topology change.

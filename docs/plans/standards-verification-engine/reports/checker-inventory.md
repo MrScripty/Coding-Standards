@@ -2820,3 +2820,26 @@ state remains separate from current-existence evidence. The graph now contains
 evidence is unchanged. The focused suite, package and edge authority, all nine
 gates, all 137 declarative suites, and the complete mixed suite of 140 checkers
 pass.
+
+### Post-M6-T13 Infrastructure And Semantic-Wave Audit
+
+The fresh graph contains 140 Bash verifiers, 145 nodes, 699 edges, and 145
+acyclic components. Forty-eight verifiers have no executable caller; fourteen
+also have no verifier dependencies. The latter set contains the temporary
+declarative launcher, the security-repair re-plan gate, and twelve semantic
+gates across Contracts, Frontend, Persistence, Planning/prompts, Templates, and
+Rust. Topology does not merge their ownership.
+
+Deleting only `verify-declarative-suites.sh` would leave
+`run-complete-suite.sh` as canonical Bash orchestration. M6-I1 instead admits
+one edge-free Python complete-checkpoint transition that deletes both shell
+entrypoints only after `verify.py --complete` proves graph freshness,
+declarative once-only execution, deterministic fail-fast retained-checker
+execution, typed failures, and an empty retained inventory. Admission adds two
+contract edges for 701 total without changing executable topology.
+
+The security-repair checker remains separate semantic migration evidence. The
+twelve semantic gates are classified into six owner lanes for disposable-suite
+preflight, separate package admission, concurrent package-local preparation,
+and serial shared-authority integration. No package owner, dependency, or
+semantic contract is inferred from the graph.

@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform a fresh post-M6-T13 graph and ownership audit before
-admitting another bounded verification package.
+**Next slice:** implement admitted M6-I1 to establish the Python complete
+checkpoint, then preflight the owner-separated semantic preparation wave.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3242,6 +3242,19 @@ all structural/routing fixtures pass.
          checkers pass with no inferred filter, wrapper, Bash callback, false
          dependency, compatibility path, duplicate authority, or fallback.
          Audit fresh graph and ownership state.
+       - `7.4c3ve96` (`Admitted`): the post-M6-T13 audit finds that removing
+         only the temporary declarative launcher would preserve
+         `run-complete-suite.sh` as Bash orchestration authority. Admit edge-free
+         M6-I1 at train order 101 to add Python `verify.py --complete`, prove
+         generated-evidence freshness, once-only declarative execution, and
+         deterministic fail-fast execution of the derived retained Bash
+         inventory, then delete both shell entrypoints atomically. The
+         security-repair checker remains separate semantic evidence. Freeze
+         twelve semantic gates into six owner lanes for suite preflight,
+         separate admission, concurrent package-local preparation, serial
+         shared-authority integration, and one Python wave checkpoint. No
+         configuration command, wrapper, compatibility alias, skipped failure,
+         merged owner, false dependency, or fallback is authorized.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

@@ -11953,3 +11953,25 @@ historical owner state remains separate from current-existence evidence. The
 graph now has 140 Bash verifiers, 145 nodes, 699 edges, and 145 components. All
 nine gates, all 137 declarative suites, and all 140 mixed-suite entrypoints
 pass. A fresh graph and ownership audit is next.
+
+## 2026-08-12 M6-I1 Complete-Checkpoint Admission
+
+**Outcome:** admitted at train order 101.
+
+The post-M6-T13 audit separates the temporary declarative launcher from the
+semantic security-repair checker and twelve owner-separated semantic gates.
+Inspection finds that launcher-only deletion would preserve the canonical Bash
+`run-complete-suite.sh` orchestrator, so M6-I1 atomically replaces both shell
+entrypoints with Python `verify.py --complete`. Complete mode owns generated
+graph freshness, once-only declarative execution, and fail-fast deterministic
+execution of the derived retained Bash inventory during migration. No command
+comes from suite configuration, and zero retained Bash checkers requires no
+special fallback.
+
+The package is explicitly edge-free. Baseline 206 engine tests, all 137
+declarative suites, graph freshness, and all 140 mixed entrypoints pass.
+Admission regeneration records 140 Bash verifiers, 145 nodes, 701 edges, and
+145 components without changing executable topology. Security-repair evidence
+remains a later independent suite. Twelve semantic candidates are frozen for
+owner-separated preflight and concurrent package-local preparation with serial
+shared-authority integration.

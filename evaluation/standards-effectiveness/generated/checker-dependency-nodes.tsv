@@ -31,7 +31,7 @@ evaluation/standards-effectiveness/verify-cross-language-contract.sh	verifier	ye
 evaluation/standards-effectiveness/verify-csharp-async-owner-contract.sh	verifier	yes	component-0030	1	no	5	0	1	0	3
 evaluation/standards-effectiveness/verify-decision-table-engine.sh	verifier	yes	component-0031	1	no	1	1	0	1	1
 evaluation/standards-effectiveness/verify-decision-traceability.sh	verifier	yes	component-0032	1	no	1	0	1	0	1
-evaluation/standards-effectiveness/verify-declarative-suites.sh	verifier	yes	component-0033	1	no	0	0	0	0	0
+evaluation/standards-effectiveness/verify-declarative-suites.sh	verifier	yes	component-0033	1	no	0	0	2	0	0
 evaluation/standards-effectiveness/verify-dependencies-owner-contract.sh	verifier	yes	component-0034	1	no	4	2	2	2	4
 evaluation/standards-effectiveness/verify-dependencies-population.sh	verifier	yes	component-0035	1	no	6	0	0	0	4
 evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh	verifier	yes	component-0036	1	no	5	0	1	0	2

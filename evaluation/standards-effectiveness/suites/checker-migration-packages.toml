@@ -1118,5 +1118,16 @@ expected = [[
   "M6-T12,VE055,VE056",
   "focused-suite,dependency-once,edge-dispositions,independent-gates,graph-freshness,declarative-all,removed-paths,source-unchanged,complete-suite",
   "accepted",
+], [
+  "101",
+  "M6-I1",
+  "checker:evaluation/standards-effectiveness/verify-declarative-suites.sh",
+  "verification-engine.complete-checkpoint",
+  "refinement",
+  "python-complete-checkpoint-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/verify-declarative-suites.sh,evaluation/standards-effectiveness/run-complete-suite.sh,tools/standards_verifier/standards_verifier/cli.py,tools/standards_verifier/standards_verifier/complete_checkpoint.py,tools/standards_verifier/tests/test_complete_checkpoint.py,tools/standards_verifier/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,evaluation/standards-effectiveness/execution-ledger.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-T13,VE003",
+  "focused-checkpoint,edge-free,engine-tests,graph-freshness,declarative-all,removed-paths,complete-checkpoint,source-unchanged",
+  "admitted",
 ]
 ]
