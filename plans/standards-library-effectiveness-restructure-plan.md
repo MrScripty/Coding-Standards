@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** run and record the verification-engine M6-U-W1 complete Python
-wave checkpoint.
+**Next slice:** run verification-engine M6-V0 read-only representability and
+exact-edge preflight for the source-package preparation/final-closure pair.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3436,6 +3436,15 @@ all structural/routing fixtures pass.
          are current at 127 Bash checkers / 132 nodes / 686 edges / 132
          components; two non-executable contract-reference edges close with
          the checker. Sources and fixtures remain unchanged; M6-U-W1 is next.
+       - `7.4c3ve119` (`Accepted planning authority`): M6-U-W1 passes
+         generated evidence and all 149 declarative suites, then retained
+         final-source-closure execution exposes stale row-26 current authority
+         for U12's deleted checker. M6-V0 must prove both lifecycle contracts
+         and exact edges; M6-V1 then transfers row 26 and atomically migrates
+         source-package preparation plus its final-closure caller to registered
+         suites with one explicit dependency. A generic capability is allowed
+         only after proved need. Checker restoration, wrappers, skipped
+         subjects, TSV-only deferral, and fallback are prohibited.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

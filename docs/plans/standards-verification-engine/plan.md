@@ -2,9 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-U12 accepted
+**Current phase:** Milestone 6: M6-U-W1 lifecycle-authority replan required
 
-**Next slice:** run and record the M6-U-W1 complete Python wave checkpoint.
+**Next slice:** run the read-only VE060 representability and exact-edge
+preflight for the source-package preparation and final-source-closure pair.
 
 **Acceptance status:** `pending`
 
@@ -539,6 +540,68 @@ bridge, infer owner from graph shape, preserve dual checker/suite authority, or
 allow a failed proposal to select another assertion. Stale proposal bases,
 source or fixture changes, new incident edges, owner conflict, write overlap,
 failed native parity, or a fifth capability requirement trigger re-planning.
+
+##### VE060 M6-U-W1 Source-Package Lifecycle Recovery
+
+The required M6-U-W1 complete checkpoint passed generated evidence and all 149
+registered declarative suites, then failed after 128.29 seconds when retained
+`verify-milestone-7-final-source-closure-plan.sh` invoked
+`verify-milestone-7-source-package-preparation.sh`. The nested checker still
+requires every `writable_verifiers` subject in
+`milestone-7-source-package-preparation.tsv` to exist. Its row 26 subject
+remains `checker:evaluation/standards-effectiveness/verify-rust-no-std-closure.sh`
+even though M6-U12 correctly replaced and deleted that checker. The validator
+already accepts typed `suite:` subjects, so this is stale current authority,
+not a need for a checker compatibility file.
+
+Four recovery options were reviewed:
+
+1. Change only row 26 to `suite:.../rust-no-std-closure.toml`. This is a
+   bounded semantic repair and would likely unblock the checkpoint, but it
+   preserves both nested Bash lifecycle validators and defers the same
+   authority problem.
+2. **Selected:** migrate the coherent source-package lifecycle pair. Transfer
+   row 26 to the registered Rust suite; replace
+   `verify-milestone-7-source-package-preparation.sh` and its sole Bash caller
+   `verify-milestone-7-final-source-closure-plan.sh` with registered
+   declarative suites; and give the final-closure suite one explicit
+   `requires = ["milestone-7-source-package-preparation"]` dependency. Delete
+   both Bash files atomically so no dangling caller, wrapper, or dual authority
+   exists.
+3. Add a generic engine capability first, but only if read-only disposable
+   proof identifies a required invariant that existing table, relation, text,
+   path-state, and plan checks cannot express clearly. This is a conditional
+   branch of Option 2, not permission for package-specific Python.
+4. Restore the U12 checker, retain a wrapper, skip the retained gate, or teach
+   complete mode to ignore missing subjects. These are prohibited compatibility
+   or fallback paths and are rejected.
+
+The recovery sequence is:
+
+1. `M6-V0` performs read-only/disposable representability proof for both Bash
+   contracts, inventories exact current incident edges and consumers, and
+   freezes suite IDs, owner IDs, dependency direction, authority transfers,
+   protected semantic inputs, and one atomic implementation write set.
+2. If existing generic checks suffice, `M6-V1` updates row-26 current
+   authority, registers both suites, records the explicit suite dependency,
+   transfers exact current/historical evidence, deletes both Bash validators,
+   updates routing and generated evidence, and runs focused plus all
+   declarative verification.
+3. If and only if M6-V0 proves a missing reusable relationship, stop for one
+   independently accepted generic-capability slice, then rerun M6-V0. Do not
+   encode package policy in the engine or weaken an invariant.
+4. Rerun `M6-U-W1` once. Acceptance requires generated freshness, every
+   declarative suite once in dependency order, every retained Bash checker,
+   both plan validators, exact source-package authority, removed paths,
+   protected-input immutability, and diff integrity.
+
+Shared registry, package manifest, edge dispositions, source-package TSV,
+README, generated artifacts, and plans remain serial integration-owner files.
+The final-closure manifest/report, owner map, corpus, consolidation
+dispositions, standards sources, fixtures, templates, workflows, and lockfiles
+are read-only unless M6-V0 proves an exact semantic defect and triggers a
+separate replan. No checker path may be restored and no suite may infer
+authority from filename, graph shape, or fallback scanning.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

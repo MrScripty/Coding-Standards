@@ -3141,3 +3141,16 @@ with the checker, from disposition and source-package evidence; neither was
 executable. Sources and fixtures remain unchanged, with no host, default
 feature, nearby-target, compile-only, feature-split, wrapper, false dependency,
 copied range, or compatibility fallback. M6-U-W1 is next.
+
+### VE060 Complete-Checkpoint Lifecycle Finding
+
+M6-U-W1 passed the fresh 127-checker / 132-node / 686-edge / 132-component
+inventory and all 149 declarative suites before retained final-source-closure
+execution exposed a stale row-26 `checker:` subject for the deleted Rust
+no_std checker. The source-package validator already accepts typed suite
+subjects, but it and its sole Bash caller remain a nested lifecycle pair.
+
+The accepted recovery preflights and then migrates that pair together, transfers
+row-26 authority to `suite:rust-no-std-closure`, and records one explicit
+suite dependency. Restoring the checker, retaining wrappers, ignoring missing
+subjects, or stopping at a TSV-only patch is not accepted.

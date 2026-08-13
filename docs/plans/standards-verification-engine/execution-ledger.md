@@ -3737,3 +3737,18 @@
   both close. No host/default-feature/nearby-target/compile-only substitution,
   wrapper, false dependency, copied range, or compatibility fallback remains.
   M6-U-W1 is next.
+
+## 2026-08-12 - VE060 M6-U-W1 Lifecycle Replan
+
+- The canonical complete command passed generated freshness at 127 Bash
+  checkers / 132 nodes / 686 edges / 132 components and all 149 declarative
+  suites, then failed after 128.29 seconds in the retained Bash phase.
+- `verify-milestone-7-final-source-closure-plan.sh` invokes
+  `verify-milestone-7-source-package-preparation.sh`, whose current row-26
+  subject still names U12's correctly deleted checker. The nested validator
+  reports that path unavailable.
+- Selected a read-only M6-V0 representability/edge preflight followed by one
+  coherent M6-V1 two-checker declarative migration with an explicit suite
+  dependency and row-26 authority transfer. A generic capability is conditional
+  on proved need. TSV-only deferral, checker restoration, wrappers, and ignored
+  missing subjects are rejected. Implementation stops at this replan trigger.

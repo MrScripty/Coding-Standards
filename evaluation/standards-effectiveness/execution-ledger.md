@@ -12321,3 +12321,16 @@ components; two non-executable contract-reference edges close with the deleted
 checker. No source, fixture, false dependency, wrapper, copied range,
 host/default/nearby/compile fallback, or compatibility path changed. M6-U-W1
 is next.
+
+## 2026-08-12 VE060 M6-U-W1 Lifecycle Replan
+
+**Outcome:** checkpoint blocked after declarative success; replan accepted.
+
+The complete command passed generated evidence and all 149 declarative suites,
+then failed after 128.29 seconds when retained final-source-closure execution
+called source-package preparation. Current row 26 still requires the deleted
+Rust no_std checker path. M6-V0 will prove declarative representability and
+exact edges for the two-checker lifecycle pair; M6-V1 will transfer current
+authority and migrate both validators atomically with one explicit suite
+dependency. Checker restoration, wrappers, skipped subjects, TSV-only deferral,
+and compatibility fallback are rejected.
