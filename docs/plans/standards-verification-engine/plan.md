@@ -2,16 +2,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-U11 accepted
+**Current phase:** Milestone 6: M6-U12 accepted
 
-**Next slice:** revalidate and serially integrate the prepared M6-U12 Rust
-no_std Support proposal.
+**Next slice:** run and record the M6-U-W1 complete Python wave checkpoint.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-U11 Review Template Projection. Its
-dependency-free three-check suite replaces the Bash gate, and both historical
-M6-T2 gate records now name registered suite evidence.
+**Latest accepted slice:** M6-U12 Rust no_std Closure. Its dependency-free
+seven-check suite replaces the Bash gate, and both historical M6-T9 gate
+records now name registered suite evidence.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 

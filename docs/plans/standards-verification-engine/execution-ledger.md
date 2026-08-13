@@ -3721,3 +3721,19 @@
   688 edges / 133 components. No complete-template, provider, copied-process,
   universal-checklist, wrapper, false dependency, copied range, or
   compatibility fallback remains. M6-U12 is next.
+
+## 2026-08-12 - M6-U12 Rust no_std Closure Acceptance
+
+- Revalidated proposal `cbbb4c2`, registered its dependency-free seven-check
+  suite, and deleted the Bash checker with profile, tooling, reference, legacy
+  index, fixture, decomposition, validation, and disposition sources unchanged.
+- Preserved typed capability decisions, canonical owner/adapter/reference
+  projections, semantic empty-H2 legacy closure, and row-23-derived disposition
+  lineage. U12 is edge-free; two M6-T9 historical records transfer to exact
+  suite evidence without a dependency.
+- README and generated evidence are current at 127 Bash checkers / 132 nodes /
+  686 edges / 132 components. The two-edge reduction is derived and expected:
+  disposition and source-package contract references to the deleted checker
+  both close. No host/default-feature/nearby-target/compile-only substitution,
+  wrapper, false dependency, copied range, or compatibility fallback remains.
+  M6-U-W1 is next.

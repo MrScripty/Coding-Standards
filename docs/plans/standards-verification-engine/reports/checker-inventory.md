@@ -3128,3 +3128,16 @@ current at 128 Bash checkers / 133 nodes / 688 edges / 133 components. Sources
 and fixtures remain unchanged, with no complete-template, provider,
 copied-process, universal-checklist, wrapper, false dependency, copied range,
 or compatibility fallback. M6-U12 is next.
+
+### Accepted M6-U12 Rust no_std Closure
+
+The dependency-free seven-check suite replaces the Bash checker and preserves
+typed capability decisions, canonical owner/adapter/reference projections,
+semantic empty-H2 legacy closure, and row-23-derived disposition ownership.
+U12 is edge-free; two historical M6-T9 rows name exact registered suite
+evidence. README and generated evidence are current at 127 Bash checkers / 132
+nodes / 686 edges / 132 components. Two derived contract-reference edges close
+with the checker, from disposition and source-package evidence; neither was
+executable. Sources and fixtures remain unchanged, with no host, default
+feature, nearby-target, compile-only, feature-split, wrapper, false dependency,
+copied range, or compatibility fallback. M6-U-W1 is next.

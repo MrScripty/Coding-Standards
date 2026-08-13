@@ -12307,3 +12307,17 @@ M6-T2 historical rows transfer to exact suite evidence. Generated evidence is
 128 Bash checkers / 133 nodes / 688 edges / 133 components. No source, fixture,
 false dependency, wrapper, copied range, complete/provider/checklist fallback,
 or compatibility path changed. M6-U12 is next.
+
+## 2026-08-12 M6-U12 Rust no_std Closure Acceptance
+
+**Outcome:** accepted at train order 113.
+
+Proposal `cbbb4c2` was revalidated. Its dependency-free seven-check suite
+preserves typed capability decisions, three canonical projections, semantic
+legacy heading closure, index state, and row-derived lineage. The checker is
+absent, U12 is edge-free, and two M6-T9 historical rows transfer to exact suite
+evidence. Generated evidence is 127 Bash checkers / 132 nodes / 686 edges / 132
+components; two non-executable contract-reference edges close with the deleted
+checker. No source, fixture, false dependency, wrapper, copied range,
+host/default/nearby/compile fallback, or compatibility path changed. M6-U-W1
+is next.

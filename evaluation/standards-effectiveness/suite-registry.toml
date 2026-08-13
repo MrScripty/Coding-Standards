@@ -739,3 +739,8 @@ requires = []
 id = "review-template-projection"
 path = "evaluation/standards-effectiveness/suites/review-template-projection.toml"
 requires = []
+
+[[suites]]
+id = "rust-no-std-closure"
+path = "evaluation/standards-effectiveness/suites/rust-no-std-closure.toml"
+requires = []

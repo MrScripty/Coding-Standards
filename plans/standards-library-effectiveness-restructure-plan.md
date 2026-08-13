@@ -13,9 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** revalidate and serially integrate the prepared verification-
-engine M6-U12 Rust no_std Support proposal. The Python complete checkpoint
-runs once at M6-U-W1.
+**Next slice:** run and record the verification-engine M6-U-W1 complete Python
+wave checkpoint.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3430,6 +3429,13 @@ all structural/routing fixtures pass.
          suite evidence while U11 remains edge-free. README and generated
          evidence are current at 128 Bash checkers / 133 nodes / 688 edges /
          133 components. Sources and fixtures remain unchanged; M6-U12 is next.
+       - `7.4c3ve118` (`Accepted`): M6-U12 registers the dependency-free
+         `rust-no-std-closure` suite, passes seven native checks, and deletes
+         its Bash checker. Two M6-T9 historical rows transfer to exact suite
+         evidence while U12 remains edge-free. README and generated evidence
+         are current at 127 Bash checkers / 132 nodes / 686 edges / 132
+         components; two non-executable contract-reference edges close with
+         the checker. Sources and fixtures remain unchanged; M6-U-W1 is next.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

@@ -621,6 +621,15 @@ verification projection, and row-27 disposition ownership. Fixed complete
 templates, provider-specific fallback, copied process, and universal checklists
 are rejected.
 
+## Rust no_std Closure Fixtures
+
+`fixtures/rust/no-std-decisions.tsv` and the registered
+`rust-no-std-closure` suite check canonical capability ownership, Tooling
+adapter and reference projections, semantic legacy-source closure, and
+row-23 disposition ownership. Host builds, default features, nearby targets,
+compile-only evidence, feature splits, and other capability substitutions are
+rejected as fallback.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered
