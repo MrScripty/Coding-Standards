@@ -3752,3 +3752,25 @@
   dependency and row-26 authority transfer. A generic capability is conditional
   on proved need. TSV-only deferral, checker restoration, wrappers, and ignored
   missing subjects are rejected. Implementation stops at this replan trigger.
+
+## 2026-08-12 - VE061 M6-V0 Boundary Replan
+
+- Confirmed the Coding-Standards tree was clean at `4aed39a` before the
+  read-only preflight; no implementation or evidence file changed.
+- Generated graph evidence proves final-source closure calls source-package
+  preparation and is itself called by Router legacy-route closure. The Router
+  checker has no Bash caller, so the safe inbound deletion closure contains
+  three checkers, not VE060's proposed pair.
+- Final-source closure also invokes consolidation dispositions, undisposed-
+  source gaps, execution train, and `check-plan-structure.sh`; Router closure
+  invokes root Router evidence. These are separately owned aggregate gates,
+  not automatic suite dependencies. Complete mode already executes retained
+  Bash verifiers once.
+- Selected owner-separated admission followed by one atomic three-checker
+  acceptance. The intended suite chain is Router closure -> final-source
+  closure -> source-package preparation. M6-V0A must first prove typed subject
+  resolution, many-to-one disposition coverage, table-derived Router
+  exclusion, plan parity, and exact edge representation without copied counts.
+- Stopped before implementation at the replan trigger. No checker restoration,
+  row-only deferral, transitive owner merge, wrapper, false dependency, Bash
+  callback, compatibility parser, or fallback is authorized.

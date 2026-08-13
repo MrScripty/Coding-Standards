@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-U-W1 lifecycle-authority replan required
+**Current phase:** Milestone 6: VE061 lifecycle-closure boundary recovery
 
-**Next slice:** run the read-only VE060 representability and exact-edge
-preflight for the source-package preparation and final-source-closure pair.
+**Next slice:** run VE061 M6-V0A read-only semantic representability probes for
+source-package preparation, final-source closure, and Router legacy-route
+closure, then freeze three owner-separated packages and one atomic cutover.
 
 **Acceptance status:** `pending`
 
@@ -602,6 +603,82 @@ dispositions, standards sources, fixtures, templates, workflows, and lockfiles
 are read-only unless M6-V0 proves an exact semantic defect and triggers a
 separate replan. No checker path may be restored and no suite may infer
 authority from filename, graph shape, or fallback scanning.
+
+##### VE061 M6-V0 Lifecycle-Closure Boundary Recovery
+
+M6-V0 completed its read-only exact-edge inspection and invalidated VE060's
+proposed two-checker implementation boundary. The source-package checker has
+one Bash caller, final-source closure, but final-source closure itself has one
+retained Bash caller, Router legacy-route closure. Deleting only the original
+pair would leave a dangling executable caller, which accepted
+`edge_dispositions` explicitly prohibits. The Router checker has no Bash
+caller, so the inbound lifecycle closure ends at three checkers.
+
+The inspection also separated semantic dependency from historical Bash
+aggregation. Final-source closure invokes source-package preparation,
+consolidation dispositions, undisposed-source gaps, execution train, and the
+plan-structure helper. Router closure invokes root Router evidence and final-
+source closure. Complete mode already runs every retained `verify-*.sh` gate
+once. Calls to broad retained validators must not become false suite
+dependencies merely because Bash previously reran them transitively. Local
+suite assertions must preserve each migrating checker's own contract; retained
+global validators remain explicit independent gates. The plan helper must be
+replaced by native assertions or a registered suite, not mislabeled as an
+independent executable gate.
+
+Four recovery options were reviewed:
+
+1. Keep VE060's two-checker cutover. Rejected because Router closure would
+   retain a live reference to a deleted final-source checker.
+2. Patch only source-package row 26 to `suite:rust-no-std-closure`. This safely
+   repairs the immediate stale subject but preserves nested Bash lifecycle
+   authority and defers the known migration boundary.
+3. Migrate the entire transitive validator graph. Rejected because execution
+   train, undisposed-source gaps, consolidation dispositions, root Router
+   evidence, and their callers have separate owners and contracts; topology
+   alone does not authorize one package or false dependency graph.
+4. **Selected:** admit three separately owned suites and packages, then accept
+   them atomically. Source-package preparation is the leaf suite; final-source
+   closure explicitly requires it; Router legacy-route closure explicitly
+   requires final-source closure. Other retained gates remain independent.
+   This closes every dangling caller without merging owners or preserving Bash
+   orchestration as architecture.
+
+The replacement sequence is:
+
+1. `M6-V0A` performs disposable, read-only semantic probes for all three
+   checkers. Existing assertions must derive mutable membership rather than
+   copy counts. The probe must specifically test typed checker/suite subject
+   resolution, at-least-one disposition coverage per source, table-derived
+   prohibition of every legacy source in Router prose, plan-structure parity,
+   and exact incident-edge dispositions.
+2. A missing relationship becomes an independently planned generic engine
+   slice only when the probe proves it reusable and unrepresentable. Likely
+   candidates are typed path-subject resolution, many-to-one key coverage, and
+   table-derived text exclusion. Package-specific Python, copied identities,
+   hardcoded totals, Bash callbacks, compatibility parsers, and weakened text
+   snapshots are prohibited.
+3. `M6-V1`, `M6-V2`, and `M6-V3` freeze separate owners, suites, package rows,
+   protected inputs, and exact edge dispositions without deleting a checker.
+   No suite may be registered while its Bash checker remains authoritative;
+   admission uses disposable proposal evidence until atomic integration.
+4. `M6-V-W1` atomically transfers row-26 authority, registers all three suites
+   with `router-legacy-route-closure -> final-source-closure ->
+   source-package-preparation`, deletes all three Bash checkers, transfers
+   exact current and historical evidence, updates Router/README routing and
+   generated evidence, and proves every retained outbound gate remains valid.
+5. Rerun `M6-U-W1` once. Acceptance requires engine self-tests for any new
+   generic capability, the three focused suites in dependency order, package
+   and edge authority, all declarative suites, generated freshness, every
+   retained Bash checker exactly once, both plan validators, removed paths,
+   protected-input immutability, and diff integrity.
+
+This supersedes VE060's two-checker M6-V1 implementation boundary but preserves
+its no-restoration, no-wrapper, no-skip, no-dual-authority, and no-fallback
+rules. M6-V0A is read-only. Any additional inbound caller, unresolved owner,
+unrepresentable semantic invariant, required mutation of a protected source,
+or inability to express the three-suite dependency chain without a false edge
+is a new replan trigger.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

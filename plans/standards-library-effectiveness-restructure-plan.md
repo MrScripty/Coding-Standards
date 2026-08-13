@@ -13,8 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** run verification-engine M6-V0 read-only representability and
-exact-edge preflight for the source-package preparation/final-closure pair.
+**Next slice:** run verification-engine VE061 M6-V0A read-only semantic probes
+for source-package preparation, final-source closure, and Router legacy-route
+closure, then freeze owner-separated packages for atomic acceptance.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3445,6 +3446,17 @@ all structural/routing fixtures pass.
          suites with one explicit dependency. A generic capability is allowed
          only after proved need. Checker restoration, wrappers, skipped
          subjects, TSV-only deferral, and fallback are prohibited.
+       - `7.4c3ve120` (`Accepted planning authority`): M6-V0 exact-edge
+         inspection disproves VE060's two-checker boundary. Router legacy-route
+         closure calls final-source closure, so deleting the original pair
+         would leave a dangling caller. M6-V0A must prove three checker-local
+         contracts and exact edges; separately owned source-package, final-
+         source, and Router suites then accept atomically with the explicit
+         dependency chain Router -> final-source -> source-package. Broad live
+         validators remain independent gates rather than false dependencies.
+         Add only reusable capabilities proved missing; do not patch only row
+         26, merge transitive owners, copy counts or identities, retain Bash
+         orchestration, add wrappers, or fall back.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

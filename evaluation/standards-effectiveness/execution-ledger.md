@@ -12334,3 +12334,23 @@ exact edges for the two-checker lifecycle pair; M6-V1 will transfer current
 authority and migrate both validators atomically with one explicit suite
 dependency. Checker restoration, wrappers, skipped subjects, TSV-only deferral,
 and compatibility fallback are rejected.
+
+## 2026-08-12 VE061 M6-V0 Boundary Replan
+
+**Outcome:** exact-edge preflight invalidated the two-checker boundary; replan
+accepted before implementation.
+
+The clean-tree read-only inspection proves that Router legacy-route closure
+calls final-source closure, while final-source closure calls source-package
+preparation. Deleting VE060's pair would leave a dangling retained caller. The
+safe inbound closure contains three separately owned checkers and ends at
+Router closure, which has no Bash caller. Other outbound calls from final and
+Router closure are independently owned aggregate validators or a helper, not
+automatic suite dependencies.
+
+M6-V0A will prove all three local contracts with derived evidence and exact
+edges. Then three owner-separated packages may be admitted and accepted in one
+atomic cutover with the explicit suite chain Router -> final-source -> source-
+package. Generic engine work is authorized only for a reusable relationship
+proved absent. No checker, suite, registry, fixture, generated artifact, Bash
+file, semantic source, or workflow changed in this planning slice.

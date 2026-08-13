@@ -3154,3 +3154,26 @@ The accepted recovery preflights and then migrates that pair together, transfers
 row-26 authority to `suite:rust-no-std-closure`, and records one explicit
 suite dependency. Restoring the checker, retaining wrappers, ignoring missing
 subjects, or stopping at a TSV-only patch is not accepted.
+
+### VE061 M6-V0 Executable-Closure Finding
+
+The read-only graph preflight disproved the proposed pair boundary. Router
+legacy-route closure directly calls final-source closure, so deleting only
+source-package preparation and final-source closure would violate accepted
+dangling-caller rejection. Router closure has no Bash caller; the exact inbound
+deletion closure therefore has three members.
+
+Final-source closure's other calls target consolidation dispositions,
+undisposed-source gaps, execution train, and the plan helper. Router closure
+also calls root Router evidence. Those edges mix local proof with historical
+aggregate execution. They do not justify migrating the complete transitive
+graph or creating suite dependencies to independently owned gates. The revised
+plan keeps those live validators independently authoritative while replacing
+only migrating checker-local behavior.
+
+M6-V0A will test three likely generic representation gaps before admission:
+typed checker/suite subject resolution from a table, at-least-one record
+coverage for every key, and table-derived literal exclusion from Markdown.
+Plan-structure behavior must map to native assertions or an existing suite.
+No count, source list, or package policy may be copied into Python or suite
+configuration to avoid a genuine reusable capability.
