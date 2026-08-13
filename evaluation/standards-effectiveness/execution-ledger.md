@@ -12374,3 +12374,21 @@ relations. VE062-E1 then adds strict reusable repository-subject resolution,
 nonempty key coverage, and table-derived text absence. The disposable worktree
 was removed and the canonical tree remained clean. Implementation stops at the
 replan trigger.
+
+## 2026-08-13 VE062-E1 Generic Lifecycle Relationships
+
+**Outcome:** accepted; normalized disposable mutation parity is next.
+
+The engine now provides strict `repository_subjects`, `key_coverage`, and
+`table_text_absence` assertions through one cohesive module and the existing
+projected-table parser. Canonical registered suite IDs come from immutable
+engine context; suite paths are not identities and no secondary registry input
+exists. Checker subjects require contained regular non-symlink files. Coverage
+allows one-or-more records, and text absence derives every prohibited literal
+from its table projection without normalization or copied lists.
+
+Seventeen focused tests, all 258 engine tests, redirected bytecode compilation,
+all 149 registered declarative suites, and diff checks pass. No lifecycle TSV,
+suite, registry, package/edge manifest, generated artifact, Bash checker,
+standards source, or workflow changed. VE062-P1 owns only an isolated disposable
+normalized positive/mutation probe and serial result recording.

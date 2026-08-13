@@ -13,9 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement verification-engine VE062-E1 reusable derived-subject,
-key-coverage, and table-literal assertions after freezing normalized lifecycle
-evidence schemas.
+**Next slice:** run verification-engine VE062-P1 disposable normalized lifecycle
+suite and mutation parity before any canonical evidence or checker cutover.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3467,6 +3466,16 @@ all structural/routing fixtures pass.
          table-derived text absence before package admission. Do not preserve
          the current schema through compatibility, copy counts/keys/literals,
          add package code or callbacks, or fall back.
+       - `7.4c3ve122` (`Accepted`): VE062-E1 adds strict reusable
+         `repository_subjects`, `key_coverage`, and `table_text_absence`
+         assertions over shared table projection. Registered suite identity
+         derives from immutable engine context; checker paths remain contained
+         non-symlink files; coverage permits one-or-more records; text literals
+         derive from tables without normalization. Seventeen focused tests,
+         all 258 engine tests, and all 149 declarative suites pass. No lifecycle
+         evidence, registry, suite, manifest, generated artifact, Bash checker,
+         standard, or workflow changed. VE062-P1 disposable normalized mutation
+         parity is next.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

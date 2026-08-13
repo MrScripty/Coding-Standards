@@ -3795,3 +3795,23 @@
   disposable worktree and confirmed the canonical tree remained clean.
 - Stopped at VE062 before implementation. No suite, registry, fixture,
   evidence, generated, Bash, engine, semantic source, or workflow file changed.
+
+## 2026-08-13 - VE062-E1 Generic Lifecycle Relationships
+
+- Added one cohesive `derived_evidence` module over the shared strict projected-
+  table parser. It registers `repository_subjects`, `key_coverage`, and
+  `table_text_absence`; no package-specific parser or policy branch was added.
+- `repository_subjects` resolves explicit `checker:<path>` identities through
+  repository containment and exact non-symlink file state, and resolves
+  `suite:<registered-id>` against the immutable registry ID set already loaded
+  by the engine. Suite paths, inferred types, skipped subjects, and secondary
+  registry configuration remain invalid.
+- `key_coverage` requires unique nonempty derived keys and one-or-more records
+  per key while permitting multiple matching and unrelated records.
+  `table_text_absence` rejects each unique nonempty table-derived literal found
+  in one contained UTF-8 target without normalization.
+- Verification passed: 17 focused tests, all 258 engine tests, redirected
+  bytecode compilation, all 149 registered declarative suites, and diff checks.
+  Canonical lifecycle evidence, suites, registry, manifests, generated files,
+  Bash checkers, standards sources, and workflows remained unchanged.
+- VE062-P1 is next: disposable normalized positive and mutation parity only.

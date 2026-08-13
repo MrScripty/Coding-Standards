@@ -3204,3 +3204,21 @@ totals are not migrated. Three strict generic assertions then resolve typed
 subjects, require one-or-more records for every derived key, and prohibit every
 table-derived literal in a target text file. The design adds no command runner,
 expression language, regex, package branch, copied identity list, or fallback.
+
+### VE062-E1 Accepted Generic Relationships
+
+One cohesive engine module now implements all three proved relationships over
+the existing projected-table parser. `repository_subjects` consumes the
+immutable registered-ID set from check context and accepts only explicit
+`checker:<path>` and `suite:<registered-id>` identities. `key_coverage`
+distinguishes unique derived keys from many-valued record evidence.
+`table_text_absence` reads literals from its configured projection and checks
+one contained UTF-8 target without copied inventories or normalization.
+
+Seventeen focused tests cover positive behavior, multiple and unrelated
+records, unknown subject types, unregistered suites, unavailable checker and
+table/text inputs, path escape, symlink rejection, duplicate and empty derived
+identity rules, invalid UTF-8, present literals, projection width, and unknown
+configuration fields. All 258 engine tests and 149 live declarative suites
+pass. VE062-P1 must now prove the normalized lifecycle suites reject the three
+mutations before any canonical evidence or checker cutover is admitted.

@@ -2,17 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE062 lifecycle evidence normalization replan
+**Current phase:** Milestone 6: VE062 normalized lifecycle mutation parity
 
-**Next slice:** implement VE062-E1 generic derived-subject, key-coverage, and
-table-literal assertions after freezing normalized source-package and final-
-closure evidence schemas.
+**Next slice:** run VE062-P1 disposable normalized-schema suites and mutation
+parity for source-package, final-source, and Router lifecycle closure.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-U12 Rust no_std Closure. Its dependency-free
-seven-check suite replaces the Bash gate, and both historical M6-T9 gate
-records now name registered suite evidence.
+**Latest accepted slice:** VE062-E1 reusable lifecycle relationships. Three
+strict generic assertions resolve typed repository subjects, require nonempty
+key coverage, and prohibit table-derived literals in contained UTF-8 text.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -729,7 +728,7 @@ The selected sequence is:
    owner map, dispositions, replacement routes, and final closure remain
    canonical data sources; copied totals and mutable count prose are removed or
    rewritten as derived statements in the eventual atomic cutover.
-3. `VE062-E1` adds three strict generic assertions over shared projected-table
+3. `VE062-E1` (`Accepted`) adds three strict generic assertions over shared projected-table
    parsing: `repository_subjects` resolves split typed subjects against the
    filesystem or suite registry; `key_coverage` requires every derived key to
    have one-or-more matching records; `table_text_absence` requires every
@@ -741,12 +740,21 @@ The selected sequence is:
 5. Admit M6-V1 through M6-V3 separately and perform VE061's atomic M6-V-W1
    cutover with the dependency chain Router -> final-source -> source-package.
 
-VE062-D1 and D2 are planning freezes, not direct data edits. VE062-E1 is the
-next implementation slice and may touch only engine parser registration,
-three generic check modules or one cohesive module if shared implementation is
-clearer, focused engine tests, engine documentation, and the six serial plan
-authorities. Evidence schema, suites, registry, package/edge manifests,
-generated files, and Bash checkers remain read-only until E1 is accepted.
+VE062-D1 and D2 are planning freezes, not direct data edits. VE062-E1 uses one
+cohesive module over the shared projected-table parser. Immutable check context
+exposes the registry's canonical ID set, so `repository_subjects` resolves
+`suite:<registered-id>` without a second registry path or suite-path alias.
+Focused coverage passes 17 tests; all 258 engine tests, bytecode compilation,
+and all 149 live declarative suites pass. Evidence schema, suites, registry,
+package/edge manifests, generated files, and Bash checkers remained read-only.
+
+VE062-P1 is the next slice. It may create only a disposable isolated worktree
+and temporary normalized evidence/suites/registry, then record results in the
+six serial plan authorities. It must prove all three former false-pass
+mutations fail through the accepted generic assertions and that the normalized
+positive chain passes in Router -> final-source -> source-package order. Any
+need to modify canonical evidence, use a suite path as identity, copy a total,
+or add another engine capability is a replan trigger.
 
 No expression language, regex configuration, callback, command execution,
 package-specific branch, copied row/key/literal list, inferred subject kind,

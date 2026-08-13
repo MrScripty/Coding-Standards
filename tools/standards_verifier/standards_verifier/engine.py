@@ -99,7 +99,11 @@ class Verifier:
     def _run_suite(self, suite: Suite) -> SuiteResult:
         diagnostics = []
         exit_code = 0
-        context = CheckContext(self.repo_root, suite.id)
+        context = CheckContext(
+            self.repo_root,
+            suite.id,
+            frozenset(self.entry_by_id),
+        )
         for check in suite.checks:
             try:
                 diagnostics.extend(check.run(context))

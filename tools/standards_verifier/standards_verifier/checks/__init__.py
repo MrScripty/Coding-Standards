@@ -6,6 +6,11 @@ from ..diagnostics import Diagnostic, EngineError
 from ..model import Check
 from .acceptance_claims import parse_acceptance_claims_check
 from .decision import parse_decision_check
+from .derived_evidence import (
+    parse_key_coverage_check,
+    parse_repository_subjects_check,
+    parse_table_text_absence_check,
+)
 from .edge_dispositions import parse_edge_dispositions_check
 from .exact_text import parse_exact_text_check
 from .git_index_paths import parse_git_index_paths_check
@@ -41,6 +46,12 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_text_check(raw, suite_id)
     if kind == "decision":
         return parse_decision_check(raw, suite_id)
+    if kind == "repository_subjects":
+        return parse_repository_subjects_check(raw, suite_id)
+    if kind == "key_coverage":
+        return parse_key_coverage_check(raw, suite_id)
+    if kind == "table_text_absence":
+        return parse_table_text_absence_check(raw, suite_id)
     if kind == "edge_dispositions":
         return parse_edge_dispositions_check(raw, suite_id)
     if kind == "exact_text":

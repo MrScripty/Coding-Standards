@@ -1,0 +1,286 @@
+from __future__ import annotations
+
+import sys
+import tempfile
+import textwrap
+import unittest
+from pathlib import Path
+
+
+ENGINE_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ENGINE_ROOT))
+
+from standards_verifier.diagnostics import EngineError
+from standards_verifier.engine import Verifier
+
+
+class DerivedEvidenceTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp_dir.name)
+        self.registry = "registry.toml"
+        self.write("checks/live.sh", "#!/usr/bin/env bash\n")
+        self.write(
+            "subjects.tsv",
+            "scope\tsubjects\n"
+            "selected\tchecker:checks/live.sh,suite:derived\n",
+        )
+        self.write(
+            "keys.tsv",
+            "kind\tsource\n"
+            "selected\tlanguages/README.md\n"
+            "selected\tsecurity/README.md\n",
+        )
+        self.write(
+            "records.tsv",
+            "source\tdisposition\n"
+            "languages/README.md\tmove\n"
+            "languages/README.md\tindex\n"
+            "security/README.md\tmove\n"
+            "unrelated/README.md\tmove\n",
+        )
+        self.write(
+            "literals.tsv",
+            "kind\tpath\n"
+            "former\tlanguages/README.md\n"
+            "former\tsecurity/README.md\n",
+        )
+        self.write("ROUTER.md", "Canonical modules only.\n")
+        self.write_registry()
+        self.write_suite()
+
+    def tearDown(self) -> None:
+        self.temp_dir.cleanup()
+
+    def write(self, path: str, content: str) -> None:
+        target = self.root / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(textwrap.dedent(content).lstrip(), encoding="utf-8")
+
+    def write_registry(self) -> None:
+        self.write(
+            self.registry,
+            """
+            schema_version = 1
+
+            [[suites]]
+            id = "derived"
+            path = "suites/derived.toml"
+            requires = []
+            """,
+        )
+
+    def write_suite(
+        self,
+        *,
+        subject_columns: str = '["subjects"]',
+        subject_extra: str = "",
+        coverage_extra: str = "",
+        absence_extra: str = "",
+    ) -> None:
+        self.write(
+            "suites/derived.toml",
+            f"""
+            schema_version = 1
+            id = "derived"
+            owner = "test.owner"
+            description = "Derived evidence suite"
+
+            [[checks]]
+            id = "subjects"
+            type = "repository_subjects"
+            {subject_extra}
+            [checks.subjects]
+            path = "subjects.tsv"
+            header = ["scope", "subjects"]
+            columns = {subject_columns}
+            order = "source"
+            where = {{ field = "scope", op = "eq", value = "selected" }}
+            split = {{ field = "subjects", delimiter = "," }}
+
+            [[checks]]
+            id = "coverage"
+            type = "key_coverage"
+            {coverage_extra}
+            [checks.keys]
+            path = "keys.tsv"
+            header = ["kind", "source"]
+            columns = ["source"]
+            order = "source"
+            where = {{ field = "kind", op = "eq", value = "selected" }}
+            [checks.records]
+            path = "records.tsv"
+            header = ["source", "disposition"]
+            columns = ["source"]
+            order = "source"
+
+            [[checks]]
+            id = "absence"
+            type = "table_text_absence"
+            path = "ROUTER.md"
+            {absence_extra}
+            [checks.literals]
+            path = "literals.tsv"
+            header = ["kind", "path"]
+            columns = ["path"]
+            order = "source"
+            where = {{ field = "kind", op = "eq", value = "former" }}
+            """,
+        )
+
+    def run_suite(self):
+        return Verifier(self.root, self.registry).run()[0]
+
+    def test_all_derived_evidence_contracts_pass(self) -> None:
+        result = self.run_suite()
+
+        self.assertEqual(result.status, "passed")
+        self.assertEqual(result.check_count, 3)
+
+    def test_repository_subject_rejects_unknown_type(self) -> None:
+        self.write("subjects.tsv", "scope\tsubjects\nselected\tpath:checks/live.sh\n")
+
+        result = self.run_suite()
+
+        self.assertEqual(result.diagnostics[0].code, "ASSERT.REPOSITORY_SUBJECT_TYPE")
+
+    def test_repository_subject_reports_unregistered_suite_unavailable(self) -> None:
+        self.write("subjects.tsv", "scope\tsubjects\nselected\tsuite:missing\n")
+
+        result = self.run_suite()
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.SUITE_UNAVAILABLE")
+
+    def test_repository_subject_reports_missing_checker_unavailable(self) -> None:
+        self.write("subjects.tsv", "scope\tsubjects\nselected\tchecker:missing.sh\n")
+
+        result = self.run_suite()
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_repository_subject_rejects_checker_path_escape(self) -> None:
+        self.write("subjects.tsv", "scope\tsubjects\nselected\tchecker:../outside.sh\n")
+
+        result = self.run_suite()
+
+        self.assertEqual(result.exit_code, 2)
+        self.assertEqual(result.diagnostics[0].code, "PATH.OUTSIDE_REPOSITORY")
+
+    def test_repository_subject_rejects_checker_symlink(self) -> None:
+        (self.root / "checks/link.sh").symlink_to("live.sh")
+        self.write("subjects.tsv", "scope\tsubjects\nselected\tchecker:checks/link.sh\n")
+
+        result = self.run_suite()
+
+        self.assertEqual(
+            result.diagnostics[0].code,
+            "ASSERT.REPOSITORY_SUBJECT_SYMLINK",
+        )
+
+    def test_repository_subject_rejects_duplicate_projection(self) -> None:
+        self.write(
+            "subjects.tsv",
+            "scope\tsubjects\nselected\tsuite:derived,suite:derived\n",
+        )
+
+        result = self.run_suite()
+
+        self.assertEqual(result.diagnostics[0].code, "ASSERT.DERIVED_VALUE_DUPLICATE")
+
+    def test_key_coverage_reports_uncovered_key(self) -> None:
+        self.write(
+            "records.tsv",
+            "source\tdisposition\nlanguages/README.md\tmove\n",
+        )
+
+        result = self.run_suite()
+
+        diagnostic = result.diagnostics[0]
+        self.assertEqual(diagnostic.code, "ASSERT.KEY_COVERAGE_MISSING")
+        self.assertEqual(diagnostic.expected, "security/README.md")
+
+    def test_key_coverage_allows_multiple_and_unrelated_records(self) -> None:
+        result = self.run_suite()
+
+        self.assertEqual(result.status, "passed")
+
+    def test_key_coverage_rejects_duplicate_derived_keys(self) -> None:
+        self.write(
+            "keys.tsv",
+            "kind\tsource\n"
+            "selected\tlanguages/README.md\n"
+            "selected\tlanguages/README.md\n",
+        )
+
+        result = self.run_suite()
+
+        self.assertEqual(result.diagnostics[0].code, "ASSERT.DERIVED_VALUE_DUPLICATE")
+
+    def test_key_coverage_reports_missing_record_table_unavailable(self) -> None:
+        (self.root / "records.tsv").unlink()
+
+        result = self.run_suite()
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_table_text_absence_reports_derived_literal(self) -> None:
+        self.write("ROUTER.md", "Route through languages/README.md.\n")
+
+        result = self.run_suite()
+
+        diagnostic = result.diagnostics[0]
+        self.assertEqual(diagnostic.code, "ASSERT.TABLE_TEXT_PRESENT")
+        self.assertEqual(diagnostic.observed, "languages/README.md")
+
+    def test_table_text_absence_rejects_invalid_utf8(self) -> None:
+        (self.root / "ROUTER.md").write_bytes(b"\xff")
+
+        result = self.run_suite()
+
+        self.assertEqual(result.diagnostics[0].code, "INPUT.INVALID_UTF8")
+
+    def test_table_text_absence_reports_missing_target_unavailable(self) -> None:
+        (self.root / "ROUTER.md").unlink()
+
+        result = self.run_suite()
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_table_text_absence_rejects_duplicate_literals(self) -> None:
+        self.write(
+            "literals.tsv",
+            "kind\tpath\n"
+            "former\tlanguages/README.md\n"
+            "former\tlanguages/README.md\n",
+        )
+
+        result = self.run_suite()
+
+        self.assertEqual(result.diagnostics[0].code, "ASSERT.DERIVED_VALUE_DUPLICATE")
+
+    def test_checks_reject_unknown_fields(self) -> None:
+        for field in ("subject_extra", "coverage_extra", "absence_extra"):
+            with self.subTest(field=field):
+                self.write_suite(**{field: "fallback = true"})
+                with self.assertRaises(EngineError) as raised:
+                    Verifier(self.root, self.registry)
+                self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
+
+    def test_projection_must_select_one_column(self) -> None:
+        self.write_suite(subject_columns='["scope", "subjects"]')
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(
+            raised.exception.diagnostic.code,
+            "CONFIG.REPOSITORY_SUBJECTS_WIDTH",
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -218,6 +218,33 @@ parent/child decomposition, dependencies, or execution order. The check does
 not infer members, counts, filters, direction, or aliases and does not execute
 commands or fall back to equality or Bash.
 
+The `repository_subjects` check reads one strict projected table source named
+`subjects`, whose projection selects exactly one column. Each unique non-empty
+value must be explicitly typed as `checker:<repository-path>` or
+`suite:<registered-id>`. Checker subjects must resolve to contained regular
+non-symlink files; suite subjects must name IDs in the registry already loaded
+by the engine. Missing subjects are unavailable, while unknown types, path
+escapes, symlinks, empty identities, and duplicate projected subjects are
+invalid. The check does not infer a subject type, accept suite paths, load a
+second registry, execute a checker, skip an unavailable subject, or fall back.
+
+The `key_coverage` check reads strict projected table sources named `keys` and
+`records`, each selecting exactly one column. The key projection must be
+non-empty, unique, and contain no empty value. Every derived key must occur in
+at least one record; unrelated records and multiple records for a key are
+valid. Missing coverage is a typed assertion. The check derives both key and
+record identities from canonical tables and has no copied key list, exact
+count, inferred join, one-record constraint, compatibility representation, or
+fallback.
+
+The `table_text_absence` check reads one strict projected table source named
+`literals` and one contained UTF-8 `path`. Its projection must select unique,
+non-empty literals, and every derived literal must be absent from the target
+file. Missing inputs are unavailable; invalid UTF-8, duplicate or empty
+literals, and present literals are typed failures. It performs no text or path
+normalization and has no copied literal list, regular-expression mode,
+callback, command execution, compatibility representation, or fallback.
+
 The `keyed_relation` check derives one nonempty unique key column from a strict
 projected `keys` table source, then resolves exactly one `expected` and one
 `observed` record for every key. Each record source declares one key column and
