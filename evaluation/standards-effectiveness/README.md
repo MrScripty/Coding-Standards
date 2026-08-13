@@ -565,6 +565,14 @@ compatibility-derived tooling selection; verify TypeScript, Tooling, and recipe
 projections; and bind disposition ownership to row 34. Framework versions,
 presets, plugins, parser choices, and copied configuration are not defaults.
 
+## Persistence Durable Mutation Fixtures
+
+`fixtures/persistence/durable-mutation-decisions.tsv` and the registered
+`persistence-durable-mutation` suite check invariant- and capability-derived
+publication, canonical profile and recipe projections, bounded legacy-section
+closure, and row-32 disposition ownership. Partial publication, placeholders,
+undo, append-only, and fixed-phase mechanisms are not fallbacks.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered

@@ -12222,3 +12222,15 @@ lineage. The checker is absent, U4 is edge-free, and two M6-T12 historical rows
 transfer to exact suite evidence. Generated evidence is 135 Bash checkers / 140
 nodes / 695 edges / 140 components. No source, fixture, false dependency,
 wrapper, copied range, fallback, or compatibility path changed. M6-U5 is next.
+
+## 2026-08-12 M6-U5 Persistence Durable Mutation Acceptance
+
+**Outcome:** accepted at train order 106.
+
+Proposal `d73d2c9` was revalidated. Its dependency-free five-check suite
+preserves decisions, two canonical projections, bounded legacy-section state,
+and row-derived lineage. The checker is absent, U5 is edge-free, and two M6-T6
+historical rows transfer to exact suite evidence. Generated evidence is 134
+Bash checkers / 139 nodes / 694 edges / 139 components. No source, fixture,
+false dependency, wrapper, copied range, partial-state/mechanism fallback, or
+compatibility path changed. M6-U6 is next.

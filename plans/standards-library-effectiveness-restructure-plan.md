@@ -14,7 +14,7 @@ through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
 **Next slice:** revalidate and serially integrate the prepared verification-
-engine M6-U5 Persistence Durable Mutation proposal. The Python complete checkpoint
+engine M6-U6 Persistence Migration Execution proposal. The Python complete checkpoint
 runs once at M6-U-W1.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
@@ -3388,6 +3388,12 @@ all structural/routing fixtures pass.
          suite evidence while U4 remains edge-free. README and generated
          evidence are current at 135 Bash checkers / 140 nodes / 695 edges / 140
          components. Sources and fixtures remain unchanged; M6-U5 is next.
+       - `7.4c3ve111` (`Accepted`): M6-U5 registers the dependency-free
+         `persistence-durable-mutation` suite, passes five native checks, and
+         deletes its Bash checker. Two M6-T6 historical rows transfer to exact
+         suite evidence while U5 remains edge-free. README and generated
+         evidence are current at 134 Bash checkers / 139 nodes / 694 edges / 139
+         components. Sources and fixtures remain unchanged; M6-U6 is next.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

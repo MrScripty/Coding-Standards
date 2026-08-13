@@ -3630,3 +3630,15 @@
 - README and generated evidence are current at 135 Bash checkers / 140 nodes /
   695 edges / 140 components. No wrapper, copied range, framework/configuration
   fallback, or compatibility path remains. M6-U5 is next.
+
+## 2026-08-12 - M6-U5 Persistence Durable Mutation Acceptance
+
+- Revalidated proposal `d73d2c9`, registered its dependency-free five-check
+  suite, and deleted the Bash checker with all semantic sources and fixtures
+  unchanged.
+- Preserved durable-mutation decisions, profile/reference projections, bounded
+  Architecture section closure, and row-32 lineage. U5 is edge-free; two M6-T6
+  historical records transfer to exact suite evidence without a dependency.
+- README and generated evidence are current at 134 Bash checkers / 139 nodes /
+  694 edges / 139 components. No partial-state/mechanism fallback, wrapper,
+  copied range, or compatibility path remains. M6-U6 is next.

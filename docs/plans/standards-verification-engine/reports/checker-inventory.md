@@ -3052,3 +3052,14 @@ exact registered suite. README and generated evidence are current at 135 Bash
 checkers / 140 nodes / 695 edges / 140 components. Sources and fixtures remain
 unchanged, with no false dependency, wrapper, copied range,
 framework/configuration fallback, or compatibility path. M6-U5 is next.
+
+### Accepted M6-U5 Persistence Durable Mutation
+
+The dependency-free five-check suite replaces the Bash checker and preserves
+typed durable-mutation outcomes, Persistence profile/reference projections,
+bounded Architecture closure, and row-32 disposition ownership. U5 is
+edge-free; two historical M6-T6 rows name exact registered suite evidence.
+README and generated evidence are current at 134 Bash checkers / 139 nodes /
+694 edges / 139 components. Sources and fixtures remain unchanged, with no
+partial-state/mechanism fallback, false dependency, wrapper, copied range, or
+compatibility path. M6-U6 is next.
