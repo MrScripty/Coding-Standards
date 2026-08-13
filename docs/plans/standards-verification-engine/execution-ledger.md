@@ -3774,3 +3774,24 @@
 - Stopped before implementation at the replan trigger. No checker restoration,
   row-only deferral, transitive owner merge, wrapper, false dependency, Bash
   callback, compatibility parser, or fallback is authorized.
+
+## 2026-08-12 - VE062 M6-V0A Semantic Replan
+
+- Built a disposable three-suite registry in an isolated detached worktree.
+  Existing table, inclusion, relation, keyed-relation, and text assertions pass
+  in the intended Router -> final-source -> source-package dependency order.
+- Proved three unsafe false passes. The Bash authority rejected stale row-26
+  verifier authority, zero dispositions for `languages/README.md`, and a former
+  source path in Router prose; the reduced declarative suites accepted each.
+- Classified exact row/category/file totals as mutable count authority. Source
+  and owner cardinality can derive from corpus/relation/uniqueness evidence;
+  broad retained validators remain independent complete-mode gates.
+- Found current source-package evidence duplicates package/order identity and
+  policy constants, and uses suite file paths where canonical engine contracts
+  use registered suite IDs. Preserving that schema would increase engine and
+  maintenance complexity.
+- Selected normalization followed by three reusable assertions:
+  `repository_subjects`, `key_coverage`, and `table_text_absence`. Removed the
+  disposable worktree and confirmed the canonical tree remained clean.
+- Stopped at VE062 before implementation. No suite, registry, fixture,
+  evidence, generated, Bash, engine, semantic source, or workflow file changed.

@@ -13,9 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** run verification-engine VE061 M6-V0A read-only semantic probes
-for source-package preparation, final-source closure, and Router legacy-route
-closure, then freeze owner-separated packages for atomic acceptance.
+**Next slice:** implement verification-engine VE062-E1 reusable derived-subject,
+key-coverage, and table-literal assertions after freezing normalized lifecycle
+evidence schemas.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3457,6 +3457,16 @@ all structural/routing fixtures pass.
          Add only reusable capabilities proved missing; do not patch only row
          26, merge transitive owners, copy counts or identities, retain Bash
          orchestration, add wrappers, or fall back.
+       - `7.4c3ve121` (`Accepted planning authority`): M6-V0A's disposable
+         three-suite chain passes existing generic assertions but false-passes
+         stale verifier subjects, zero dispositions for a source, and former
+         source paths in Router prose. Normalize source-package evidence to
+         derive package identity, move constants to suite contracts, and use
+         `suite:<registered-id>`; retire mutable totals. VE062-E1 then adds
+         reusable repository-subject resolution, nonempty key coverage, and
+         table-derived text absence before package admission. Do not preserve
+         the current schema through compatibility, copy counts/keys/literals,
+         add package code or callbacks, or fall back.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

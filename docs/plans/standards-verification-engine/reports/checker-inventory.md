@@ -3177,3 +3177,30 @@ coverage for every key, and table-derived literal exclusion from Markdown.
 Plan-structure behavior must map to native assertions or an existing suite.
 No count, source list, or package policy may be copied into Python or suite
 configuration to avoid a genuine reusable capability.
+
+### VE062 M6-V0A Mutation-Parity Finding
+
+The disposable source-package, final-source, and Router suites passed four,
+five, and three existing generic checks respectively. Their dependency chain
+also passed. That success was insufficient: controlled mutations proved three
+missing dynamic relationships.
+
+| Mutation | Bash authority | Declarative probe | Finding |
+| --- | --- | --- | --- |
+| stale deleted `checker:` row-26 subject | rejected unavailable | passed | typed repository subject resolution missing |
+| remove all `languages/README.md` dispositions | rejected | passed | nonempty key coverage missing |
+| insert a former source path in Router prose | rejected | passed | table-derived text absence missing |
+
+The probe separately represented preparation-to-final membership, final-to-
+corpus equality, owner-map agreement, schemas, domains, uniqueness, policy
+text, and plan state with existing assertions. Exact row, category, line,
+replacement, source, and verifier totals add no independent semantic evidence
+once those relationships and uniqueness hold.
+
+The recommended engine work follows normalized evidence rather than current
+legacy representation. Suite subjects become `suite:<registered-id>`;
+duplicated package/order and constant preparation columns are removed; mutable
+totals are not migrated. Three strict generic assertions then resolve typed
+subjects, require one-or-more records for every derived key, and prohibit every
+table-derived literal in a target text file. The design adds no command runner,
+expression language, regex, package branch, copied identity list, or fallback.

@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE061 lifecycle-closure boundary recovery
+**Current phase:** Milestone 6: VE062 lifecycle evidence normalization replan
 
-**Next slice:** run VE061 M6-V0A read-only semantic representability probes for
-source-package preparation, final-source closure, and Router legacy-route
-closure, then freeze three owner-separated packages and one atomic cutover.
+**Next slice:** implement VE062-E1 generic derived-subject, key-coverage, and
+table-literal assertions after freezing normalized source-package and final-
+closure evidence schemas.
 
 **Acceptance status:** `pending`
 
@@ -679,6 +679,82 @@ rules. M6-V0A is read-only. Any additional inbound caller, unresolved owner,
 unrepresentable semantic invariant, required mutation of a protected source,
 or inability to express the three-suite dependency chain without a false edge
 is a new replan trigger.
+
+##### VE062 M6-V0A Lifecycle Evidence Normalization
+
+The disposable three-suite chain passed twelve existing generic assertions,
+but mutation parity proved that this reduced representation was unsafe. The
+current Bash authorities rejected all three of these mutations while the
+declarative probes passed:
+
+1. row 26 retained a deleted `checker:` subject;
+2. both disposition records for `languages/README.md` were removed; and
+3. a former normative source path was inserted into Router prose.
+
+These are reusable relationship gaps, not permission to weaken the migrated
+contracts. The probe also showed that several Bash assertions are redundant or
+mutable count authority rather than missing capabilities. Preparation row
+membership derives from final closure; final source membership derives from
+the corpus; uniqueness derives cardinality; owner agreement derives through
+`keyed_relation`; retained broad validators run once in complete mode. Exact
+totals for rows, shape/treatment categories, owner-map lines, disposition
+lines, replacement rows, source rows, and verifier subjects must not be copied
+into replacement suites.
+
+Four implementation options were reviewed:
+
+1. Add three package-specific Python checks. Rejected because it duplicates
+   lifecycle policy in engine code and cannot serve later migrations.
+2. Add three generic checks over the current tables without normalizing them.
+   This would preserve path-based `suite:` subjects, duplicated `package` and
+   `manifest_order` identity, repeated constant policy columns, and mutable
+   report totals as long-term authority.
+3. Use whole-file snapshots or explicit literal lists. Rejected because it
+   replaces derived relationships with copied state and creates routine churn.
+4. **Selected:** normalize evidence first, then add the minimal generic
+   relationships. Derive package identity from final-closure order rather than
+   storing both values; move wave/class/preserved/integration constants to the
+   suite contract; represent verifier subjects canonically as
+   `checker:<path>` or `suite:<registered-id>`; remove mutable numeric prose and
+   assertions; then implement reusable subject resolution, nonempty key
+   coverage, and table-derived text absence.
+
+The selected sequence is:
+
+1. `VE062-D1` freezes the normalized source-package schema and exact migration
+   rules. Its mutable rows retain only source, order, and one-or-more canonical
+   verifier subjects. The final manifest owns source/order identity. Suite
+   subjects use registered IDs; no path-form compatibility parser is allowed.
+2. `VE062-D2` freezes final-source and Router evidence normalization. Corpus,
+   owner map, dispositions, replacement routes, and final closure remain
+   canonical data sources; copied totals and mutable count prose are removed or
+   rewritten as derived statements in the eventual atomic cutover.
+3. `VE062-E1` adds three strict generic assertions over shared projected-table
+   parsing: `repository_subjects` resolves split typed subjects against the
+   filesystem or suite registry; `key_coverage` requires every derived key to
+   have one-or-more matching records; `table_text_absence` requires every
+   unique projected literal to be absent from one contained UTF-8 file. Each
+   owns typed invalid/unavailable diagnostics and focused negative tests.
+4. Rerun the M6-V0A disposable suites using normalized schemas. All three live
+   Bash authorities and each false-pass mutation must be represented by the
+   suites or explicitly retired as redundant derived/count behavior.
+5. Admit M6-V1 through M6-V3 separately and perform VE061's atomic M6-V-W1
+   cutover with the dependency chain Router -> final-source -> source-package.
+
+VE062-D1 and D2 are planning freezes, not direct data edits. VE062-E1 is the
+next implementation slice and may touch only engine parser registration,
+three generic check modules or one cohesive module if shared implementation is
+clearer, focused engine tests, engine documentation, and the six serial plan
+authorities. Evidence schema, suites, registry, package/edge manifests,
+generated files, and Bash checkers remain read-only until E1 is accepted.
+
+No expression language, regex configuration, callback, command execution,
+package-specific branch, copied row/key/literal list, inferred subject kind,
+suite-path alias, row-count field, compatibility representation, skipped
+subject, or fallback is permitted. A need for cross-field formatting beyond
+normalized schema, many-valued joins beyond nonempty key coverage, text
+normalization, registry writes, or semantic source mutation is a replan
+trigger.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

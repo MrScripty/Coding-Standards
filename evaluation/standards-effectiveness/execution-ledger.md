@@ -12354,3 +12354,23 @@ atomic cutover with the explicit suite chain Router -> final-source -> source-
 package. Generic engine work is authorized only for a reusable relationship
 proved absent. No checker, suite, registry, fixture, generated artifact, Bash
 file, semantic source, or workflow changed in this planning slice.
+
+## 2026-08-12 VE062 M6-V0A Semantic Replan
+
+**Outcome:** existing generic suite chain passed, mutation parity proved three
+reusable gaps, and evidence normalization was selected before implementation.
+
+An isolated detached probe represented twelve local assertions and the intended
+Router -> final-source -> source-package dependency order. Existing assertions
+preserve schemas, domains, membership, corpus equality, owner mapping, and
+policy text. They did not reject stale typed verifier subjects, a source with
+zero disposition records, or a former source path inserted into Router prose;
+the live Bash authorities rejected all three mutations.
+
+VE062 first freezes normalized evidence: registered suite IDs replace suite
+paths, final closure owns source/order identity, constants move from repeated
+rows to suite contracts, and mutable totals are retired in favor of derived
+relations. VE062-E1 then adds strict reusable repository-subject resolution,
+nonempty key coverage, and table-derived text absence. The disposable worktree
+was removed and the canonical tree remained clean. Implementation stops at the
+replan trigger.
