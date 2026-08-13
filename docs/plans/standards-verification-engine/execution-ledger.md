@@ -3681,3 +3681,17 @@
   691 edges / 136 components. No scan fallback, copied process, wrapper, false
   dependency, copied identity range, or compatibility path remains. M6-U9 is
   next.
+
+## 2026-08-12 - M6-U9 Full Review Prompt Entrypoint Acceptance
+
+- Revalidated proposal `ea9c858`, registered its dependency-free five-check
+  suite, and deleted the Bash checker with prompt, workflow, fixture,
+  decomposition, validation, and disposition sources unchanged.
+- Preserved typed analysis-only decisions, exact Git index identity, required
+  and prohibited prompt projection, semantic H1 cardinality, and row-24-derived
+  disposition lineage. U9 is edge-free; two M6-T1 historical records transfer
+  to exact suite evidence without a dependency.
+- README and generated evidence are current at 130 Bash checkers / 135 nodes /
+  690 edges / 135 components. No copied-process, local-prompt, machine-path, or
+  scan fallback, wrapper, false dependency, copied range, or compatibility path
+  remains. M6-U10 is next.

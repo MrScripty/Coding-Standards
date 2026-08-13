@@ -3095,3 +3095,14 @@ evidence. README and generated evidence are current at 131 Bash checkers / 136
 nodes / 691 edges / 136 components. Sources and fixtures remain unchanged,
 with no scan fallback, copied process, wrapper, false dependency, copied range,
 or compatibility path. M6-U9 is next.
+
+### Accepted M6-U9 Full Review Prompt Entrypoint
+
+The dependency-free five-check suite replaces the Bash checker and preserves
+typed analysis-only decisions, exact Git index identity, required/prohibited
+prompt projection, semantic H1 cardinality, and row-24-derived disposition
+ownership. U9 is edge-free; two historical M6-T1 rows name exact registered
+suite evidence. README and generated evidence are current at 130 Bash checkers
+/ 135 nodes / 690 edges / 135 components. Sources and fixtures remain
+unchanged, with no copied-process, local-prompt, machine-path, or scan fallback,
+wrapper, false dependency, copied range, or compatibility path. M6-U10 is next.

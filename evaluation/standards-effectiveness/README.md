@@ -597,6 +597,14 @@ path and operation, Router and workflow projections, exact Git index identity,
 single semantic title, and row-25 disposition ownership. Copied process,
 repository scanning, and environment-specific path fallback are rejected.
 
+## Full Review Prompt Entrypoint Fixtures
+
+`fixtures/planning/full-review-prompt-decisions.tsv` and the registered
+`full-review-prompt-entrypoint` suite check analysis-only routing, exact Git
+index identity, required and prohibited prompt projection, one semantic title,
+and row-24 disposition ownership. Copied process, local-prompt substitution,
+machine-specific paths, and scan fallback are rejected.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered

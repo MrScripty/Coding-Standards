@@ -14,7 +14,7 @@ through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
 **Next slice:** revalidate and serially integrate the prepared verification-
-engine M6-U9 Full Plan Review Entrypoint proposal. The Python complete checkpoint
+engine M6-U10 Plan Template Projection proposal. The Python complete checkpoint
 runs once at M6-U-W1.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
@@ -3412,6 +3412,12 @@ all structural/routing fixtures pass.
          exact suite evidence while U8 remains edge-free. README and generated
          evidence are current at 131 Bash checkers / 136 nodes / 691 edges /
          136 components. Sources and fixtures remain unchanged; M6-U9 is next.
+       - `7.4c3ve115` (`Accepted`): M6-U9 registers the dependency-free
+         `full-review-prompt-entrypoint` suite, passes five native checks, and
+         deletes its Bash checker. Two M6-T1 historical rows transfer to exact
+         suite evidence while U9 remains edge-free. README and generated
+         evidence are current at 130 Bash checkers / 135 nodes / 690 edges /
+         135 components. Sources and fixtures remain unchanged; M6-U10 is next.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

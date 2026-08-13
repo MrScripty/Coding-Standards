@@ -1,0 +1,69 @@
+schema_version = 1
+id = "full-review-prompt-entrypoint"
+owner = "workflow.planning"
+description = "Thin versioned analysis-only review prompt projection with exact tracked identity and no copied process fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+versioned = ["no", "yes"]
+router = ["no", "yes"]
+planning = ["no", "yes"]
+planning_only = ["no", "yes"]
+copied_process = ["no", "yes"]
+machine_path = ["no", "yes"]
+fallback = ["copied-process", "local-prompt", "machine-path", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [{ field = "fallback", op = "ne", value = "none" }, { field = "versioned", op = "ne", value = "yes" }, { field = "planning_only", op = "ne", value = "yes" }, { field = "copied_process", op = "ne", value = "no" }, { field = "machine_path", op = "ne", value = "no" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [{ field = "router", op = "ne", value = "yes" }, { field = "planning", op = "ne", value = "yes" }]
+
+[[checks]]
+id = "tracked-prompt"
+type = "git_index_paths"
+tracked = ["prompts/full-codebase-standards-refactor.md"]
+
+[[checks]]
+id = "prompt-content"
+type = "text"
+path = "prompts/full-codebase-standards-refactor.md"
+required = ["analysis only", "[`STANDARDS-ROUTER.md`](../STANDARDS-ROUTER.md)", "[`Planning Workflow`](../workflows/planning.md)", "Preserve the requested", "evidence that will accept it"]
+prohibited = ["1. Route applicable", "Write `plan.md`", "docs/plans/<plan-slug>", "sub-agent", "/media/", "/home/"]
+
+[[checks]]
+id = "single-title"
+type = "markdown_heading_cardinality"
+path = "prompts/full-codebase-standards-refactor.md"
+level = 1
+cardinality = "single"
+
+[[checks]]
+id = "disposition-lineage"
+type = "keyed_relation"
+[checks.keys]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["ids"]
+order = "source"
+where = { field = "baseline_order", op = "eq", value = "24" }
+split = { field = "ids", delimiter = "," }
+[checks.expected]
+path = "evaluation/standards-effectiveness/milestone-7-row-24-owner-validation.tsv"
+header = ["id", "owner", "disposition", "rationale"]
+key = "id"
+values = ["owner", "disposition"]
+[checks.observed]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+key = "id"
+values = ["target", "disposition"]
