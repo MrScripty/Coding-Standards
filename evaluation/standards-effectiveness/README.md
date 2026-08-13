@@ -541,6 +541,14 @@ and disposition ownership derived from row 33. Invalid, unavailable, and
 unsupported outcomes remain typed; no generic error, decoder, retry, recovery,
 or transport-success fallback is accepted.
 
+## Frontend Applicability Fixtures
+
+`fixtures/frontend/applicability-decisions.tsv` and the registered
+`frontend-applicability` suite derive profile applicability from changed UI
+responsibility and evidence, verify the canonical profile projection, and bind
+disposition ownership to row 34. Product names, directories, host containers,
+and owner takeover cannot act as scope fallbacks.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered

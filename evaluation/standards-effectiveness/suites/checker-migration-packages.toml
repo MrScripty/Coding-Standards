@@ -1140,5 +1140,16 @@ expected = [[
   "M6-I1,VE059",
   "focused-suite,dependency-once,edge-free,historical-gate-transfer,graph-freshness,declarative-all,removed-paths,source-unchanged,wave-checkpoint-deferred:M6-U-W1",
   "accepted",
+], [
+  "103",
+  "M6-U2",
+  "checker:evaluation/standards-effectiveness/verify-frontend-applicability.sh",
+  "profiles/applications/frontend.md",
+  "consolidation",
+  "frontend-applicability-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/frontend-applicability.toml,evaluation/standards-effectiveness/verify-frontend-applicability.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,evaluation/standards-effectiveness/execution-ledger.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-U1,VE059",
+  "focused-suite,dependency-once,edge-free,historical-gate-transfer,graph-freshness,declarative-all,removed-paths,source-unchanged,wave-checkpoint-deferred:M6-U-W1",
+  "accepted",
 ]
 ]

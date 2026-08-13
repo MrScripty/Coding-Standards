@@ -14,7 +14,7 @@ through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
 **Next slice:** revalidate and serially integrate the prepared verification-
-engine M6-U2 Frontend Applicability proposal. The Python complete checkpoint
+engine M6-U3 Frontend Lifecycle Work proposal. The Python complete checkpoint
 runs once at M6-U-W1.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
@@ -3367,6 +3367,14 @@ all structural/routing fixtures pass.
          reconciled at 138 Bash checkers / 143 nodes / 698 edges / 143
          components. Sources and fixtures remain unchanged, with no wrapper,
          copied range, compatibility path, or fallback. M6-U2 is next.
+       - `7.4c3ve108` (`Accepted`): M6-U2 registers the dependency-free
+         `frontend-applicability` suite, passes three native checks, and deletes
+         its Bash checker. U2 is edge-free; exactly two historical M6-T12 rows
+         transfer evidence to the registered suite without adding a dependency.
+         README routing and generated evidence are reconciled at 137 Bash
+         checkers / 142 nodes / 697 edges / 142 components. Semantic sources
+         and fixtures remain unchanged, with no wrapper, host/product fallback,
+         copied range, compatibility path, or fallback. M6-U3 is next.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

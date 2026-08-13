@@ -12182,3 +12182,19 @@ evidence reports 138 Bash checkers / 143 nodes / 698 edges / 143 components.
 No source, fixture, engine, schema, wrapper, bridge, false dependency,
 compatibility representation, or fallback changed. M6-U2 is next and the
 complete checkpoint remains deferred to M6-U-W1.
+
+## 2026-08-12 M6-U2 Frontend Applicability Acceptance
+
+**Outcome:** accepted at train order 103.
+
+Prepared proposal `8945e1f` was revalidated against current canonical state.
+The registered dependency-free suite passes three checks covering Frontend
+applicability decisions, canonical profile text, and row-derived
+owner/disposition equality. The Bash checker is absent.
+
+U2 has no current incident edges. Exactly two accepted M6-T12 historical
+independent-gate records retain immutable checker endpoints and now identify
+`suite:frontend-applicability` with its exact path. Generated evidence reports
+137 Bash checkers / 142 nodes / 697 edges / 142 components. No source, fixture,
+engine, schema, wrapper, false dependency, product/directory/host fallback,
+compatibility behavior, or fallback changed. M6-U3 is next.

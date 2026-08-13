@@ -689,3 +689,8 @@ requires = []
 id = "contract-http-adapter-proof"
 path = "evaluation/standards-effectiveness/suites/contract-http-adapter-proof.toml"
 requires = []
+
+[[suites]]
+id = "frontend-applicability"
+path = "evaluation/standards-effectiveness/suites/frontend-applicability.toml"
+requires = []

@@ -3592,3 +3592,19 @@
 - Canonical regeneration reports 138 Bash checkers / 143 nodes / 698 edges /
   143 components. The complete checkpoint remains deferred to M6-U-W1; M6-U2
   serial integration is next.
+
+## 2026-08-12 - M6-U2 Frontend Applicability Acceptance
+
+- Revalidated prepared proposal `8945e1f` against the current canonical
+  revision and integrated only its suite addition and checker deletion before
+  shared authority edits.
+- Registered the dependency-free three-check suite for applicability
+  decisions, canonical Frontend profile projection, and row-34-derived
+  owner/disposition lineage.
+- Kept U2 edge-free and transferred exactly two accepted M6-T12 historical
+  independent-gate records to the suite and its exact registered path.
+- Deleted the Bash checker and added the README route without changing the
+  Frontend source, fixture, decomposition, validation, or disposition tables.
+- Canonical regeneration reports 137 Bash checkers / 142 nodes / 697 edges /
+  142 components. No wrapper, false dependency, copied range, host/product
+  fallback, compatibility behavior, or fallback remains. M6-U3 is next.

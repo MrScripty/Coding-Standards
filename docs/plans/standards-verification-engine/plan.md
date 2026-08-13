@@ -2,15 +2,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-U1 accepted
+**Current phase:** Milestone 6: M6-U2 accepted
 
-**Next slice:** revalidate and serially integrate the prepared M6-U2 Frontend
-Applicability proposal.
+**Next slice:** revalidate and serially integrate the prepared M6-U3 Frontend
+Lifecycle Work proposal.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-U1 Contract HTTP Adapter Proof. Its dependency-
-free five-check suite replaces the Bash gate, and both historical M6-T5 gate
+**Latest accepted slice:** M6-U2 Frontend Applicability. Its dependency-free
+three-check suite replaces the Bash gate, and both historical M6-T12 gate
 records now name registered suite evidence.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
@@ -570,6 +570,18 @@ the suite, and canonical regeneration reports 138 Bash checkers / 143 nodes /
 698 edges / 143 components. No wrapper, dependency, copied identifier range,
 source edit, fixture edit, compatibility behavior, or fallback was introduced.
 The complete checkpoint remains deferred to M6-U-W1; M6-U2 is next.
+
+**M6-U2 acceptance evidence:** proposal `8945e1f` was revalidated against the
+current canonical revision and applied without source or fixture changes. The
+registered dependency-free suite passes three native checks for applicability
+decisions, canonical Frontend profile text, and row-derived disposition
+lineage. U2 is edge-free, while exactly two immutable M6-T12 historical rows
+now use `suite:frontend-applicability` and its exact registered path. The Bash
+checker is absent, README routing names the suite, and canonical regeneration
+reports 137 Bash checkers / 142 nodes / 697 edges / 142 components. No wrapper,
+false dependency, product/directory/host fallback, compatibility behavior, or
+copied identifier range was introduced. The complete checkpoint remains
+deferred to M6-U-W1; M6-U3 is next.
 
 **Tasks:**
 

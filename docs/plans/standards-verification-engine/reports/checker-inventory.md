@@ -3017,3 +3017,16 @@ Generated evidence derives 138 Bash checkers / 143 nodes / 698 edges / 143
 components. Sources and fixtures remain unchanged, and no wrapper, false suite
 dependency, copied count/range, compatibility representation, or fallback was
 introduced. M6-U2 remains next; the complete checkpoint remains M6-U-W1.
+
+### Accepted M6-U2 Frontend Applicability
+
+The registered dependency-free three-check suite replaces the Bash checker and
+preserves typed applicability outcomes, canonical Frontend profile evidence,
+and row-34-derived disposition ownership. U2 is graph-edge-free; two historical
+M6-T12 independent-gate rows retain immutable checker endpoints while naming
+`suite:frontend-applicability` and its exact registered path as evidence.
+
+The README routes the fixture through the suite. Generated evidence derives
+137 Bash checkers / 142 nodes / 697 edges / 142 components. Sources and fixtures
+remain unchanged, and no wrapper, false dependency, copied count/range,
+product/directory/host fallback, or compatibility path exists. M6-U3 is next.
