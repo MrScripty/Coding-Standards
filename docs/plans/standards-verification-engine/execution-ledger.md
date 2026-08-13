@@ -3486,3 +3486,19 @@
   close acceptance.
 - No semantic candidate or migration authority changed, no deviation was
   required, and no new issue remains. M6-C3 admission is next.
+
+## 2026-08-12 - M6-C3 Semantic Heading-Cardinality Admission
+
+- Confirmed two prompt checkers use numeric shell counts only to express one H1
+  and the Rust `no_std` closure checker uses one only to express no H2. All
+  candidates use ATX headings already recognized by the shared scanner.
+- Admit one `markdown_heading_cardinality` contract over contained UTF-8 path,
+  level 1 through 6, and semantic `empty`, `single`, or `nonempty` state.
+  Diagnostics compare semantic states rather than exposing numbers for later
+  interpretation.
+- Reject exact counts, minima/maxima, ranges, title predicates, heading lists,
+  Setext support, alternate scanning, regex, aliases, callbacks, commands,
+  package branches, Bash, compatibility, and fallback.
+- No semantic suite, registry, package, edge, checker, fixture, standards
+  source, generated artifact, lockfile, build output, or workflow is admitted.
+  Shared-contract verification is required before M6-C4 admission.

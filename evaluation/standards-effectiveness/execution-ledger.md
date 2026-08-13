@@ -12068,3 +12068,20 @@ all 137 registered suites, generated evidence at 139 Bash verifiers / 144 nodes
 exact write-set review, and diff integrity pass. Existing table, relation, and
 inclusion code and every semantic candidate remain unchanged. No deviation or
 new issue remains.
+
+## 2026-08-12 M6-C3 Semantic Heading-Cardinality Admission
+
+**Outcome:** admitted; semantic candidates and M6-C4 remain unadmitted.
+
+The two prompt-entrypoint proofs require exactly one H1, while Rust `no_std`
+source closure requires no H2. Their Bash numeric comparisons represent only
+the semantic states `single` and `empty`; direct source inspection found no
+need for arbitrary count, range, title, Setext, or package-specific behavior.
+
+M6-C3 may add one `markdown_heading_cardinality` check using the shared fence-
+aware ATX scanner. Its only states are `empty`, `single`, and `nonempty`, and
+diagnostics report states rather than consumer-interpreted numbers. Existing
+heading checks remain unchanged. No count API, predicate, alternate parser,
+regex, command, callback, Bash, compatibility representation, or fallback is
+admitted. The implementation is engine/test/documentation only and requires a
+complete shared-contract checkpoint before M6-C4 may be admitted.

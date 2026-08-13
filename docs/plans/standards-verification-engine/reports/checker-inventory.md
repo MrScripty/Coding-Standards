@@ -2917,3 +2917,18 @@ generated evidence at 139 Bash verifiers / 144 nodes / 699 edges / 144
 components, both plan checks, and the Python complete checkpoint pass. Existing
 table/relation/inclusion behavior and all semantic packages remain unchanged.
 M6-C3 is separately unadmitted.
+
+### M6-C3 Semantic Heading-Cardinality Admission
+
+The Plan Implementation and Full Review Prompt checkers each compare a shell
+heading count to one; Rust `no_std` closure compares one to zero. These are
+semantic H1/H2 state requirements, not evidence that the engine needs a public
+numeric count primitive. All three files use only ATX headings represented by
+the shared fence-aware scanner.
+
+M6-C3 admits `markdown_heading_cardinality` with one contained UTF-8 Markdown
+path, one level, and exactly `empty`, `single`, or `nonempty`. It derives and
+reports semantic states. Exact counts, ranges, title filters, Setext support,
+alternate scanners, regex, commands, callbacks, package logic, Bash,
+compatibility, and fallback remain prohibited. Candidate packages remain
+unadmitted.

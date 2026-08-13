@@ -13,7 +13,7 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** separately preflight and admit M6-C3 semantic heading
+**Next slice:** implement and accept admitted M6-C3 semantic heading
 cardinality. All twelve semantic candidates remain unadmitted until the
 capability sequence is accepted.
 
@@ -3306,6 +3306,15 @@ all structural/routing fixtures pass.
          Python complete checkpoint pass. Existing table/relation/inclusion
          behavior and every semantic package remain unchanged. Admit M6-C3
          separately.
+       - `7.4c3ve102` (`M6-C3 admitted`): direct candidate preflight proves two
+         prompt checkers need one H1 and Rust `no_std` source closure needs no
+         H2. Admit `markdown_heading_cardinality` over the shared fence-aware
+         ATX scanner with only semantic `empty`, `single`, and `nonempty`
+         states. Diagnostics report states rather than consumer-interpreted
+         numbers. No exact count, range, title predicate, Setext support,
+         alternate scanner, regex, callback, command, package branch, Bash,
+         compatibility, or fallback is authorized. Semantic packages and
+         M6-C4 remain unadmitted.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-C2 derived keyed relation accepted
+**Current phase:** Milestone 6: M6-C3 semantic heading cardinality admitted
 
-**Next slice:** preflight and separately admit M6-C3 semantic heading
-cardinality without changing any semantic candidate package.
+**Next slice:** implement and accept M6-C3 semantic heading cardinality without
+changing any semantic candidate package.
 
 **Acceptance status:** `pending`
 
@@ -150,7 +150,7 @@ delegation, migration sequence, and acceptance model before source changes.
 
 ##### VE059 M6-U0 Capability-First Semantic-Wave Recovery
 
-**Capability state:** `M6-C1/M6-C2 accepted`; M6-C3 and M6-C4 remain
+**Capability state:** `M6-C1/M6-C2 accepted`; M6-C3 is admitted; M6-C4 remains
 unadmitted.
 
 Read-only preflight of the twelve M6-U0 candidates found six owner lanes but
@@ -316,6 +316,58 @@ No existing table/relation/inclusion implementation, semantic candidate,
 registry, package, edge, checker, fixture, standards source, generated artifact,
 lockfile, build output, workflow, compatibility path, or fallback changed. No
 deviation or new issue remains.
+
+**M6-C3 preflight:** the two prompt-entrypoint checkers each use
+`rg -c '^#'` plus numeric equality to require one H1. The Rust `no_std` source-
+closure checker uses `rg -c '^## '` plus numeric equality to require no H2.
+Direct inspection confirms each candidate uses only ATX headings already
+recognized outside fences by the shared `scan_headings` implementation. No
+candidate needs title matching, Setext headings, an exact arbitrary count, a
+range, or package-specific selection.
+
+The admitted `markdown_heading_cardinality` check therefore accepts exactly
+one contained UTF-8 Markdown `path`, one integer `level` from 1 through 6, and
+one semantic `cardinality` in `empty`, `single`, or `nonempty`. It filters the
+shared scanner's results by level and compares the derived state directly.
+Failure diagnostics name the expected semantic state and the observed semantic
+state; suite consumers do not interpret a returned number. Configuration,
+UTF-8, availability, and containment failures remain typed.
+
+No exact count, minimum, maximum, range, title/literal predicate, heading list,
+Setext mode, alternate scanner, regular expression, alias, callback, command,
+package-specific branch, Bash execution, compatibility representation, or
+fallback is admitted. The existing `markdown_headings` public schema and
+diagnostics must not change.
+
+**M6-C3 allowed implementation write set:**
+
+- `tools/standards_verifier/standards_verifier/checks/markdown_heading_cardinality.py`;
+- `tools/standards_verifier/standards_verifier/checks/__init__.py`;
+- `tools/standards_verifier/tests/test_file_contracts.py`;
+- `tools/standards_verifier/README.md`; and
+- this plan, its issues, both execution ledgers, the checker-inventory report,
+  and the parent plan.
+
+**M6-C3 focused evidence:** all three modes pass at their boundaries; `empty`
+rejects one and multiple selected headings; `single` rejects zero and multiple;
+`nonempty` rejects zero and accepts one and multiple; levels are isolated;
+fenced heading-like text is ignored; unknown cardinality, unknown fields,
+boolean/out-of-range levels, missing fields, invalid UTF-8, unavailable input,
+and path escape return typed diagnostics; existing `markdown_headings` and
+`markdown_section_text` behavior remains unchanged.
+
+**M6-C3 verification:** focused file-contract tests, all engine tests, Python
+byte compilation, all registered declarative suites, generated-evidence
+freshness, both plan checks, the Python complete checkpoint, exact write-set
+review, and diff integrity. No candidate suite, registry row, package row, edge
+disposition, checker, fixture, standards source, generated artifact, lockfile,
+build output, or workflow file is authorized.
+
+**M6-C3 re-plan triggers:** stop if a real candidate needs an arbitrary exact
+count or range, title-sensitive selection, Setext headings, another Markdown
+scanner, cross-file aggregation, or package-specific behavior; if semantic
+state cannot be reported without exposing numeric interpretation; or if using
+the shared scanner changes accepted heading behavior.
 
 **Tasks:**
 
