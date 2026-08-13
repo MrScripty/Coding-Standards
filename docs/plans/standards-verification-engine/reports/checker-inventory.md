@@ -2843,3 +2843,20 @@ twelve semantic gates are classified into six owner lanes for disposable-suite
 preflight, separate package admission, concurrent package-local preparation,
 and serial shared-authority integration. No package owner, dependency, or
 semantic contract is inferred from the graph.
+
+### M6-I1 Python Complete-Checkpoint Acceptance
+
+The Python CLI now owns the complete repository checkpoint. It verifies
+generated inventory and graph evidence before loading suites, executes every
+registered declarative suite once through the existing dependency graph, and
+then derives and fail-fast executes retained Bash verifiers in deterministic
+inventory order. A failed generated or declarative phase prevents retained
+execution. No executable path is accepted from suite data or configuration.
+
+Both former Bash orchestration entrypoints are deleted in the same package.
+Eight focused checkpoint tests and all 214 engine tests pass. Regeneration
+records 139 retained Bash verifiers, 144 nodes, 699 edges, and 144 acyclic
+components. Package and edge-free authority, all 137 declarative suites, the
+Python complete checkpoint over all 139 retained Bash verifiers, graph
+freshness, both plan checks, removed paths, exact evidence, and diff integrity
+pass without a wrapper, alias, ignored failure, or fallback.

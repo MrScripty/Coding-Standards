@@ -3404,3 +3404,19 @@
 - Baseline 206 engine tests, all 137 declarative suites, graph freshness, and
   the complete 140-checker checkpoint pass. Admission regeneration records 701
   edges without executable-topology change.
+
+## 2026-08-12 - M6-I1 Python Complete-Checkpoint Acceptance
+
+- Added the canonical `verify.py --complete` interface with generated-evidence,
+  once-only declarative, and derived retained-Bash phases; declarative or graph
+  failure prevents retained-checker execution.
+- Deleted both Bash orchestration entrypoints atomically. No wrapper,
+  configuration command, shell evaluation, compatibility alias, ignored
+  failure, or zero-inventory fallback remains.
+- Eight focused checkpoint tests and all 214 engine tests pass. Regeneration
+  records 139 retained Bash verifiers, 144 nodes, 699 edges, and 144 acyclic
+  components.
+- Focused package and edge-free authority, all 137 declarative suites, all 139
+  retained Bash verifiers through Python complete mode, graph freshness, both
+  plan checks, removal, exact evidence, and diff integrity pass. Owner-separated
+  semantic preflight is next.

@@ -2,16 +2,17 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-I1 Python complete-checkpoint admission
+**Current phase:** Milestone 6: M6-U0 semantic-wave preflight
 
-**Next slice:** implement and verify the admitted M6-I1 Python complete
-checkpoint, then preflight the owner-separated semantic preparation wave.
+**Next slice:** preflight the twelve owner-separated semantic candidates and
+admit only owner-coherent packages whose native declarative suites preserve
+their exact evidence contracts.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE057 and VE058 unified filesystem path state and
-shared containment resolution. Focused tests, the full engine suite, all
-declarative suites, and the complete 156-checker mixed suite pass.
+**Latest accepted slice:** M6-I1 Python complete checkpoint. Eight focused
+tests, all 214 engine tests, all 137 declarative suites, and the Python complete
+checkpoint over 139 retained Bash verifiers pass.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -6536,7 +6537,7 @@ is next.
 
 ##### M6-I1 Python Complete-Checkpoint Transition
 
-**Status:** Admitted at train order 101.
+**Status:** Accepted at train order 101.
 
 The fresh post-M6-T13 graph contains 140 Bash verifiers, 145 nodes, 699 edges,
 and 145 acyclic components. Fourteen verifiers have neither executable callers
@@ -6579,6 +6580,19 @@ successful `--complete` invocation over the retained inventory. A required
 registry/schema change, policy-bearing engine branch, executable path from
 configuration, inability to preserve fail-fast output, or edit outside the
 manifest is a re-plan trigger.
+
+Acceptance implements the admitted three-phase command without changing the
+suite registry or schema. Generated evidence is checked before suite loading;
+all declarative suites then execute once through the existing dependency graph;
+only after those phases pass does the command derive and fail-fast execute the
+retained Bash inventory. Eight focused checkpoint tests and all 214 engine
+tests pass. Both Bash orchestration entrypoints are deleted with no wrapper,
+alias, configuration command, skipped failure, or fallback. Regeneration
+records 139 retained Bash verifiers, 144 nodes, 699 edges, and 144 acyclic
+components. The focused package and edge-free suites, all 137 declarative
+suites, the Python complete checkpoint over all 139 retained Bash verifiers,
+graph freshness, both plan checks, removed-path checks, exact read-only
+evidence, and diff integrity pass.
 
 ##### M6-I2 Security Repair Evidence Separation
 

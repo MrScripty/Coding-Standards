@@ -10,6 +10,22 @@ Run every registered suite:
 python3 tools/standards_verifier/verify.py --all
 ```
 
+Run the canonical complete repository checkpoint:
+
+```bash
+python3 tools/standards_verifier/verify.py --complete
+```
+
+Complete mode first verifies the generated Bash migration inventory and graph,
+then runs every registered declarative suite once in dependency order, and
+finally fail-fast executes each retained Bash verifier in deterministic
+inventory order. Retained executable paths are derived from repository files,
+not suite or registry configuration. When no Bash verifiers remain, the same
+command succeeds after the generated and declarative phases without a special
+adapter or fallback. `--complete` is mutually exclusive with selection/listing
+options and supports text output only while retained checkers can write their
+native output.
+
 Run one suite and its dependencies:
 
 ```bash

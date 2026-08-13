@@ -13,8 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement admitted M6-I1 to establish the Python complete
-checkpoint, then preflight the owner-separated semantic preparation wave.
+**Next slice:** preflight the twelve M6-U0 owner-separated semantic candidates
+and admit only packages whose native declarative suites preserve their exact
+evidence contracts.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3255,6 +3256,16 @@ all structural/routing fixtures pass.
          shared-authority integration, and one Python wave checkpoint. No
          configuration command, wrapper, compatibility alias, skipped failure,
          merged owner, false dependency, or fallback is authorized.
+       - `7.4c3ve97` (`Accepted`): M6-I1 adds canonical Python
+         `verify.py --complete`, which checks generated evidence, runs every
+         registered declarative suite once, and then derives and fail-fast
+         executes retained Bash verifiers. Both Bash orchestration entrypoints
+         are deleted atomically. Eight focused tests and all 214 engine tests
+         pass; the graph has 139 retained Bash verifiers, 144 nodes, 699 edges,
+         and 144 components. All 137 declarative suites and all 139 retained
+         Bash verifiers pass through the Python checkpoint with no wrapper,
+         configuration executable, compatibility alias, skipped failure, or
+         fallback. Begin owner-separated semantic preflight.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

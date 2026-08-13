@@ -11975,3 +11975,19 @@ Admission regeneration records 140 Bash verifiers, 145 nodes, 701 edges, and
 remains a later independent suite. Twelve semantic candidates are frozen for
 owner-separated preflight and concurrent package-local preparation with serial
 shared-authority integration.
+
+## 2026-08-12 M6-I1 Python Complete-Checkpoint Acceptance
+
+**Outcome:** accepted at train order 101.
+
+Python `verify.py --complete` now checks generated evidence, executes all
+registered declarative suites once, and only then fail-fast executes the
+retained Bash inventory derived from repository files. Both Bash orchestration
+entrypoints are deleted without a wrapper, configuration command, shell
+evaluation, compatibility alias, skipped failure, or fallback. Eight focused
+checkpoint tests and all 214 engine tests pass. The graph now has 139 retained
+Bash verifiers, 144 nodes, 699 edges, and 144 acyclic components. Focused
+package and edge-free authority, all 137 declarative suites, the complete
+Python checkpoint over all 139 retained Bash verifiers, graph freshness, both
+plan checks, removal, exact evidence, and diff integrity pass. Owner-separated
+semantic preflight is next.
