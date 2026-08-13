@@ -2,17 +2,20 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-U0 semantic-wave preflight
+**Current phase:** Milestone 6: M6-C1 bounded Markdown section-text admission
 
-**Next slice:** preflight the twelve owner-separated semantic candidates and
-admit only owner-coherent packages whose native declarative suites preserve
-their exact evidence contracts.
+**Next slice:** implement and verify the admitted M6-C1 shared Markdown scanner
+and bounded `markdown_section_text` assertion, then stop before M6-C2 admission.
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I1 Python complete checkpoint. Eight focused
 tests, all 214 engine tests, all 137 declarative suites, and the Python complete
 checkpoint over 139 retained Bash verifiers pass.
+
+**Latest admitted slice:** M6-C1 bounded Markdown section text. Its write set is
+limited to the shared Markdown parser, existing heading-check adaptation, the
+new assertion, focused tests, engine documentation, and these planning records.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -148,6 +151,85 @@ delegation, migration sequence, and acceptance model before source changes.
 - `docs/plans/standards-verification-engine/reports/architecture.md`
 - `plans/standards-library-effectiveness-restructure-plan.md`
 - `evaluation/standards-effectiveness/findings.md`
+
+##### VE059 M6-U0 Capability-First Semantic-Wave Recovery
+
+**Capability state:** `M6-C1 admitted`; M6-C2 through M6-C4 remain unadmitted.
+
+Read-only preflight of the twelve M6-U0 candidates found six owner lanes but
+four generic evidence relationships that the current engine cannot express
+without weakening or copying authority. Contracts and Persistence need text
+constraints over one bounded Markdown section. One Contracts proof also needs
+keys derived from one canonical table to select matching records from another.
+Planning prompt entrypoints require tracked-path evidence and exactly one H1;
+Rust source closure requires no H2 headings. Direct package admission would
+therefore require bespoke Python, copied identifiers, whole-file snapshots,
+filesystem-presence substitution, arbitrary numeric counts, retained Bash, or
+weaker assertions. Every such route violates the no-fallback boundary.
+
+The accepted recovery is capability-first and ordered:
+
+1. `M6-C1` adds a shared fence-aware ATX Markdown scanner and a bounded
+   `markdown_section_text` assertion.
+2. `M6-C2` adds derived keyed table membership, where one projected source
+   supplies unique keys used to select records from a second source.
+3. `M6-C3` adds semantic heading cardinality with only `empty`, `single`, and
+   `nonempty` modes over the shared scanner.
+4. `M6-C4` adds repository-index membership through a fixed engine-owned Git
+   operation with typed missing, untracked, and unavailable outcomes.
+5. Re-run disposable preflight for all twelve candidates, admit owner-coherent
+   packages separately, prepare disjoint package-local files concurrently, and
+   integrate registry, package, graph, README, and plan authority serially.
+6. Run one Python complete checkpoint at the integrated semantic-wave boundary.
+
+Each capability is a separate shared-contract admission and implementation
+commit. Acceptance of one capability authorizes only preflight for the next;
+it does not implicitly admit a semantic checker package. No capability may
+accept regular expressions, configurable commands, callbacks, inferred
+filters, copied identities or totals, compatibility aliases, package-specific
+branches, Bash execution, or fallback behavior.
+
+**M6-C1 allowed implementation write set:**
+
+- `tools/standards_verifier/standards_verifier/checks/markdown.py`;
+- `tools/standards_verifier/standards_verifier/checks/markdown_headings.py`;
+- `tools/standards_verifier/standards_verifier/checks/markdown_section_text.py`;
+- `tools/standards_verifier/standards_verifier/checks/__init__.py`;
+- `tools/standards_verifier/tests/test_file_contracts.py`;
+- `tools/standards_verifier/README.md`; and
+- this plan, its issues, both execution ledgers, the checker-inventory report,
+  and the parent plan.
+
+The internal scanner owns fence handling and ATX heading recognition once.
+Refactoring `markdown_headings` to consume it must preserve that check's exact
+public schema and diagnostics. `markdown_section_text` accepts one contained
+UTF-8 Markdown path, one exact ATX start heading, and nonempty required and/or
+prohibited unique literal lists. The start heading must occur exactly once
+outside fences. The selected section begins at that heading and ends before
+the next outside-fence heading of equal or higher level, or at end of file.
+Literal checks apply only to that bounded section. Missing, duplicate, malformed
+or unavailable selection and invalid UTF-8 return typed diagnostics.
+
+**M6-C1 focused evidence:** positive bounded selection; nested headings remain
+inside the section; equal and higher headings terminate it; fenced headings do
+not start or terminate it; text outside the section is ignored; missing and
+duplicate starts fail; required and prohibited literals report stable typed
+diagnostics; malformed configuration, invalid UTF-8, unavailable files, and
+path escape fail; existing heading-policy behavior remains unchanged.
+
+**M6-C1 verification:** focused file-contract tests, all engine tests, Python
+byte compilation, all registered declarative suites, generated-evidence
+freshness, both plan checks, the Python complete checkpoint, exact write-set
+review, and diff integrity. Because M6-C1 changes a shared engine contract, its
+complete checkpoint is mandatory. No semantic candidate suite, registry row,
+package row, edge disposition, checker, fixture, standards source, generated
+artifact, lockfile, build output, or workflow file is authorized.
+
+**Re-plan triggers:** stop if exact heading identity is insufficient for a real
+candidate; section boundaries require non-ATX syntax or ambiguous duplicate
+selection; sharing the scanner changes accepted `markdown_headings` behavior;
+the generic assertion needs a package-specific option; or focused evidence
+cannot distinguish invalid input from unavailable input without fallback.
 
 **Tasks:**
 
@@ -6837,6 +6919,13 @@ evidence while accepting its own five rows.
   each integrated wave boundary or shared-contract change.
 - [ ] Review each exception for a missing reusable primitive, bad test design,
   historical-only assertion, or genuinely custom algorithm.
+- [ ] Accept M6-C1 bounded Markdown section text without changing any semantic
+  candidate package.
+- [ ] Separately admit and accept M6-C2 derived keyed table membership.
+- [ ] Separately admit and accept M6-C3 semantic heading cardinality.
+- [ ] Separately admit and accept M6-C4 repository-index membership.
+- [ ] Re-preflight all twelve M6-U0 candidates after the four capabilities and
+  freeze exact owner-separated package authority.
 - [ ] Add reusable primitives only when at least two coherent owners require
   them or one safety-critical invariant cannot otherwise be expressed clearly.
 - [ ] Keep any custom check typed, side-effect-free, implemented in Python,

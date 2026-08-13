@@ -13,9 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** preflight the twelve M6-U0 owner-separated semantic candidates
-and admit only packages whose native declarative suites preserve their exact
-evidence contracts.
+**Next slice:** implement admitted M6-C1 bounded Markdown section text, then
+admit the remaining generic M6-C2 through M6-C4 capabilities separately before
+re-preflighting the twelve owner-separated semantic candidates.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3266,6 +3266,17 @@ all structural/routing fixtures pass.
          Bash verifiers pass through the Python checkpoint with no wrapper,
          configuration executable, compatibility alias, skipped failure, or
          fallback. Begin owner-separated semantic preflight.
+       - `7.4c3ve98` (`M6-C1 admitted`): twelve-candidate M6-U0 preflight
+         exposes four missing reusable relationships: bounded Markdown section
+         text, derived keyed table membership, semantic heading cardinality,
+         and Git index membership. Freeze separate M6-C1 through M6-C4 shared-
+         contract slices, then re-preflight owner-separated packages, prepare
+         disjoint package-local work concurrently, integrate shared authority
+         serially, and run one Python wave checkpoint. M6-C1 alone may add a
+         shared fence-aware ATX scanner and exact-start bounded section-text
+         assertion. No candidate package, copied identity or count, snapshot,
+         command, bespoke branch, retained Bash, compatibility, or fallback is
+         authorized.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

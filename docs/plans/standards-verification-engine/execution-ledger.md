@@ -3420,3 +3420,22 @@
   retained Bash verifiers through Python complete mode, graph freshness, both
   plan checks, removal, exact evidence, and diff integrity pass. Owner-separated
   semantic preflight is next.
+
+## 2026-08-12 - VE059 Capability-First Recovery And M6-C1 Admission
+
+- Read-only preflight of all twelve M6-U0 candidates found four generic
+  representability gaps across six independent owner lanes. Direct package
+  admission would require copied authority, weaker evidence, bespoke code, or
+  retained Bash and is rejected.
+- Freeze four serial shared-contract slices: bounded Markdown section text,
+  derived keyed table membership, semantic heading cardinality, and repository
+  index membership. Each capability requires separate admission and acceptance
+  before the next; semantic packages remain unadmitted.
+- Admit only M6-C1. It centralizes fence-aware ATX scanning, preserves the
+  existing heading assertion's public behavior, and adds exact-start bounded
+  section literal checks with typed configuration, input, and assertion
+  outcomes.
+- The implementation write set excludes every candidate suite, registry row,
+  package row, edge disposition, Bash checker, fixture, standards source,
+  generated artifact, lockfile, build output, and workflow file. A shared-
+  contract complete checkpoint is required before M6-C2 can be admitted.

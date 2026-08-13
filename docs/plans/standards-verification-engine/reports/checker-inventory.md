@@ -2860,3 +2860,19 @@ components. Package and edge-free authority, all 137 declarative suites, the
 Python complete checkpoint over all 139 retained Bash verifiers, graph
 freshness, both plan checks, removed paths, exact evidence, and diff integrity
 pass without a wrapper, alias, ignored failure, or fallback.
+
+### M6-U0 Capability Preflight And M6-C1 Admission
+
+The twelve frozen semantic candidates remain owner-separated and unadmitted.
+Disposable review found four missing generic evidence relationships rather than
+twelve special-case needs: bounded Markdown section text, keys derived across
+tables, semantic heading cardinality, and Git tracked-path membership. Existing
+checks cannot represent those relationships without copied authority, unrelated
+whole-file or numeric constraints, filesystem-presence substitution, bespoke
+code, or retained Bash.
+
+VE059 freezes four serial capability slices followed by a fresh twelve-candidate
+preflight. M6-C1 alone is admitted. It introduces one internal fenced-Markdown
+scanner shared with existing heading policy and one exact-start, equal-or-higher
+bounded section-text assertion. No semantic suite, registry entry, package,
+edge, checker, fixture, source, or generated evidence is admitted or changed.

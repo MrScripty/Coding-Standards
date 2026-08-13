@@ -11991,3 +11991,23 @@ package and edge-free authority, all 137 declarative suites, the complete
 Python checkpoint over all 139 retained Bash verifiers, graph freshness, both
 plan checks, removal, exact evidence, and diff integrity pass. Owner-separated
 semantic preflight is next.
+
+## 2026-08-12 VE059 Capability-First Recovery And M6-C1 Admission
+
+**Outcome:** M6-C1 admitted; all twelve semantic candidates remain unadmitted.
+
+Read-only candidate review exposed four generic evidence relationships absent
+from the verifier: bounded Markdown section text, derived keyed table
+membership, semantic heading cardinality, and Git index membership. Direct
+candidate migration would require copied authority, unrelated snapshots or
+counts, filesystem-presence substitution, package-specific Python, retained
+Bash, or weaker evidence. Those options are rejected.
+
+The accepted order is M6-C1 through M6-C4 as separate shared-contract slices,
+then fresh owner-separated candidate preflight, isolated concurrent package
+preparation, serial shared-authority integration, and one Python complete wave
+checkpoint. M6-C1 alone may now add a shared fence-aware ATX scanner and exact-
+start bounded section literal assertion. Its public schema has no regex,
+callback, command, inferred filter, copied identity, count, compatibility, or
+fallback. Existing heading behavior must remain unchanged, and the complete
+checkpoint is mandatory before M6-C2 admission.
