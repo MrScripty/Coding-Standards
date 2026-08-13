@@ -179,6 +179,18 @@ symlinks. Absolute paths, parent traversal, and symlink escapes are invalid.
 The check derives cardinality and does not scan a corpus, inspect content,
 infer paths, invoke commands, or ignore an unexpected filesystem object.
 
+The `git_index_paths` check accepts one nonempty unique `tracked` path list and
+requires exact membership in one fixed engine-owned, NUL-delimited Git index
+read. Paths are validated lexically as repository-relative index identities;
+tracked working-tree deletions therefore remain valid. Missing members report
+`present-untracked` or `absent-untracked`, but filesystem state never replaces
+index authority. Missing Git, nonzero Git, invalid UTF-8, and malformed output
+are typed. Repository/index override environment variables are removed so the
+selected repository root remains authoritative. The check has no mode, glob,
+pathspec, directory expansion, ignore query, staged-content or history
+operation, configurable command, flag, root, or environment, package-specific
+branch, Bash execution, compatibility representation, or fallback.
+
 The `reference_inventory` check reads one exact candidate TSV and one exact
 manifest TSV, using explicitly configured headers and path columns. It resolves
 every listed path as a contained regular file, selects candidate UTF-8 files

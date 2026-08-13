@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import json
+import os
+import subprocess
 import sys
 import tempfile
 import textwrap
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
@@ -189,6 +192,42 @@ class FileContractsTest(unittest.TestCase):
             """,
         )
         return suite_path
+
+    def write_git_index_suite(
+        self,
+        *,
+        tracked: object = ("docs/tracked.md",),
+        extra: str = "",
+    ) -> str:
+        suite_path = "suites/files.toml"
+        self.write(
+            suite_path,
+            f"""
+            schema_version = 1
+            id = "files"
+            owner = "test.owner"
+            description = "Git index path test"
+
+            [[checks]]
+            id = "git-index"
+            type = "git_index_paths"
+            tracked = {json.dumps(tracked)}
+            {extra}
+            """,
+        )
+        return suite_path
+
+    def initialize_git_index(self, *paths: str) -> None:
+        subprocess.run(
+            ["git", "init", "-q"],
+            cwd=self.root,
+            check=True,
+        )
+        subprocess.run(
+            ["git", "add", "--", *paths],
+            cwd=self.root,
+            check=True,
+        )
 
     def result(self, suite_path: str):
         self.write_registry(suite_path)
@@ -570,6 +609,138 @@ class FileContractsTest(unittest.TestCase):
                     """,
                 )
                 self.write_registry(suite_path)
+                with self.assertRaises(EngineError) as raised:
+                    Verifier(self.root, "registry.toml")
+                self.assertEqual(raised.exception.diagnostic.code, code)
+
+    def test_git_index_paths_accepts_present_and_deleted_tracked_paths(self) -> None:
+        tracked = ("docs/tracked file.md", "docs/caf\u00e9.md")
+        for path in tracked:
+            self.write(path, "tracked\n")
+        self.initialize_git_index(*tracked)
+        (self.root / tracked[1]).unlink()
+
+        result = self.result(self.write_git_index_suite(tracked=tracked))
+
+        self.assertEqual(result.status, "passed")
+
+    def test_git_index_paths_distinguishes_untracked_worktree_state(self) -> None:
+        self.write("docs/present.md", "untracked\n")
+        subprocess.run(["git", "init", "-q"], cwd=self.root, check=True)
+
+        result = self.result(
+            self.write_git_index_suite(
+                tracked=("docs/present.md", "docs/absent.md")
+            )
+        )
+
+        self.assertEqual(result.exit_code, 1)
+        self.assertEqual(
+            [(item.path, item.observed) for item in result.diagnostics],
+            [
+                ("docs/present.md", "present-untracked"),
+                ("docs/absent.md", "absent-untracked"),
+            ],
+        )
+
+    def test_git_index_paths_requires_exact_membership(self) -> None:
+        self.write("docs/prompt-long.md", "tracked\n")
+        self.initialize_git_index("docs/prompt-long.md")
+
+        result = self.result(
+            self.write_git_index_suite(tracked=("docs/prompt.md",))
+        )
+
+        self.assertEqual(result.exit_code, 1)
+        self.assertEqual(result.diagnostics[0].observed, "absent-untracked")
+
+    @patch("standards_verifier.checks.git_index_paths.subprocess.run")
+    def test_git_index_paths_uses_one_fixed_index_read(self, run) -> None:
+        run.return_value = subprocess.CompletedProcess(
+            [],
+            0,
+            stdout=b"docs/a.md\0docs/b.md\0",
+            stderr=b"",
+        )
+        with patch.dict(
+            os.environ,
+            {"GIT_DIR": "/outside", "GIT_INDEX_FILE": "/outside/index"},
+        ):
+            result = self.result(
+                self.write_git_index_suite(tracked=("docs/a.md", "docs/b.md"))
+            )
+
+        self.assertEqual(result.status, "passed")
+        run.assert_called_once()
+        arguments, options = run.call_args
+        self.assertEqual(
+            arguments[0],
+            ["git", "-C", str(self.root), "ls-files", "-z", "--full-name"],
+        )
+        self.assertFalse(options["check"])
+        self.assertTrue(options["capture_output"])
+        self.assertNotIn("GIT_DIR", options["env"])
+        self.assertNotIn("GIT_INDEX_FILE", options["env"])
+
+    def test_git_index_paths_types_git_and_output_failures(self) -> None:
+        cases = (
+            (FileNotFoundError("missing"), "GIT.UNAVAILABLE", 3),
+            (
+                subprocess.CompletedProcess([], 128, stdout=b"", stderr=b"fatal"),
+                "GIT.INDEX_UNAVAILABLE",
+                3,
+            ),
+            (
+                subprocess.CompletedProcess([], 0, stdout=b"docs/a.md", stderr=b""),
+                "GIT.INDEX_OUTPUT",
+                2,
+            ),
+            (
+                subprocess.CompletedProcess([], 0, stdout=b"docs/\xff.md\0", stderr=b""),
+                "GIT.INDEX_UTF8",
+                2,
+            ),
+            (
+                subprocess.CompletedProcess([], 0, stdout=b"docs/a.md\0\0", stderr=b""),
+                "GIT.INDEX_OUTPUT",
+                2,
+            ),
+        )
+        for effect, code, exit_code in cases:
+            with self.subTest(code=code):
+                with patch(
+                    "standards_verifier.checks.git_index_paths.subprocess.run",
+                    side_effect=effect if isinstance(effect, Exception) else None,
+                    return_value=None if isinstance(effect, Exception) else effect,
+                ):
+                    result = self.result(self.write_git_index_suite())
+                self.assertEqual(result.exit_code, exit_code)
+                self.assertEqual(result.diagnostics[0].code, code)
+
+    def test_git_index_paths_types_non_repository_root(self) -> None:
+        result = self.result(self.write_git_index_suite())
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "GIT.INDEX_UNAVAILABLE")
+
+    def test_git_index_paths_rejects_configuration_errors(self) -> None:
+        cases = (
+            ({"tracked": []}, "CONFIG.STRING_LIST"),
+            ({"tracked": [""]}, "CONFIG.STRING_LIST"),
+            ({"tracked": ["docs/a.md", "docs/a.md"]}, "CONFIG.STRING_LIST"),
+            ({"tracked": ["/docs/a.md"]}, "PATH.OUTSIDE_REPOSITORY"),
+            ({"tracked": ["../docs/a.md"]}, "PATH.OUTSIDE_REPOSITORY"),
+            ({"tracked": ["."]}, "CONFIG.GIT_INDEX_PATH"),
+            ({"tracked": ["docs/./a.md"]}, "CONFIG.GIT_INDEX_PATH"),
+            ({"tracked": ["docs//a.md"]}, "CONFIG.GIT_INDEX_PATH"),
+            ({"extra": 'command = "git"'}, "CONFIG.UNKNOWN_FIELD"),
+            ({"extra": 'flags = ["--cached"]'}, "CONFIG.UNKNOWN_FIELD"),
+            ({"extra": 'repository = "."'}, "CONFIG.UNKNOWN_FIELD"),
+        )
+        for options, code in cases:
+            with self.subTest(code=code, options=options):
+                suite = self.write_git_index_suite(**options)
+                self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
                     Verifier(self.root, "registry.toml")
                 self.assertEqual(raised.exception.diagnostic.code, code)

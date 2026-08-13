@@ -2961,3 +2961,18 @@ glob, directory expansion, staged-content read, history query, configurable
 command/flag/environment, filesystem fallback, package logic, Bash,
 compatibility, or fallback is authorized. Candidate packages remain
 unadmitted.
+
+### M6-C4 Git Index-Membership Acceptance
+
+Native `git_index_paths` now validates lexical tracked identities and compares
+them to one fixed engine-owned NUL-delimited Git index read. Working-tree
+deletion does not invalidate tracked membership. Missing members distinguish
+present-untracked from absent-untracked, while Git absence/nonzero exit,
+malformed output, invalid UTF-8, and non-repository roots are typed.
+
+All 114 focused file-contract/engine tests, all 245 engine tests, all 137
+declarative suites, generated evidence at 139 Bash verifiers / 144 nodes / 699
+edges / 144 components, both plan checks, and the Python complete checkpoint
+pass. Existing containment and path-state behavior and all semantic packages
+remain unchanged. The four capabilities are complete; fresh candidate
+preflight is next.

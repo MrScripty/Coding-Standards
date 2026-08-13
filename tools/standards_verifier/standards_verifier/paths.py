@@ -5,13 +5,12 @@ from pathlib import Path, PurePosixPath
 from .diagnostics import Diagnostic, EngineError
 
 
-def contained_path(
-    root: Path,
+def repository_path(
     value: str,
     *,
     suite: str | None = None,
     check: str | None = None,
-) -> Path:
+) -> PurePosixPath:
     path = PurePosixPath(value)
     if not value or path.is_absolute() or ".." in path.parts:
         raise EngineError(
@@ -24,6 +23,17 @@ def contained_path(
                 path=value,
             )
         )
+    return path
+
+
+def contained_path(
+    root: Path,
+    value: str,
+    *,
+    suite: str | None = None,
+    check: str | None = None,
+) -> Path:
+    path = repository_path(value, suite=suite, check=check)
 
     resolved_root = root.resolve()
     candidate = resolved_root / Path(*path.parts)

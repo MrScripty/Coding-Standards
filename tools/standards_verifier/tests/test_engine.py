@@ -17,7 +17,7 @@ sys.path.insert(0, str(ENGINE_ROOT))
 from standards_verifier.cli import main
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
-from standards_verifier.paths import contained_file, contained_path
+from standards_verifier.paths import contained_file, contained_path, repository_path
 
 
 class EngineTest(unittest.TestCase):
@@ -1313,6 +1313,18 @@ class EngineTest(unittest.TestCase):
             contained_path(self.root, "link"),
             self.root / "link",
         )
+
+    def test_repository_path_preserves_contained_path_lexical_contract(self) -> None:
+        self.assertEqual(repository_path("missing.md").as_posix(), "missing.md")
+        self.assertEqual(repository_path("directory/item.md").as_posix(), "directory/item.md")
+        for path in ("", "/absolute.md", "../outside.md"):
+            with self.subTest(path=path):
+                with self.assertRaises(EngineError) as raised:
+                    repository_path(path)
+                self.assertEqual(
+                    raised.exception.diagnostic.code,
+                    "PATH.OUTSIDE_REPOSITORY",
+                )
 
     def test_contained_path_rejects_parent_and_symlink_escape(self) -> None:
         with self.assertRaises(EngineError) as parent_error:

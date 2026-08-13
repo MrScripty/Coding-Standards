@@ -8,6 +8,7 @@ from .acceptance_claims import parse_acceptance_claims_check
 from .decision import parse_decision_check
 from .edge_dispositions import parse_edge_dispositions_check
 from .exact_text import parse_exact_text_check
+from .git_index_paths import parse_git_index_paths_check
 from .inclusion import parse_inclusion_check
 from .keyed_relation import parse_keyed_relation_check
 from .line_budget import parse_line_budget_check
@@ -44,6 +45,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_edge_dispositions_check(raw, suite_id)
     if kind == "exact_text":
         return parse_exact_text_check(raw, suite_id)
+    if kind == "git_index_paths":
+        return parse_git_index_paths_check(raw, suite_id)
     if kind == "inclusion":
         return parse_inclusion_check(raw, suite_id)
     if kind == "keyed_relation":

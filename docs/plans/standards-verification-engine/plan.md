@@ -2,15 +2,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-C4 Git index membership admitted
+**Current phase:** Milestone 6: M6-C4 Git index membership accepted
 
-**Next slice:** implement and accept M6-C4 Git index membership without
-changing any semantic candidate package.
+**Next slice:** re-preflight all twelve M6-U0 semantic candidates against the
+four accepted capabilities and freeze owner-separated package authority.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-C3 semantic heading cardinality. All 40 focused
-file-contract tests, all 237 engine tests, all 137 declarative suites, and the
+**Latest accepted slice:** M6-C4 Git index membership. All 114 focused file-
+contract/engine tests, all 245 engine tests, all 137 declarative suites, and the
 Python complete checkpoint over 139 retained Bash verifiers pass.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
@@ -150,7 +150,7 @@ delegation, migration sequence, and acceptance model before source changes.
 
 ##### VE059 M6-U0 Capability-First Semantic-Wave Recovery
 
-**Capability state:** `M6-C1/M6-C2/M6-C3 accepted`; M6-C4 is admitted.
+**Capability state:** `M6-C1/M6-C2/M6-C3/M6-C4 accepted`.
 
 Read-only preflight of the twelve M6-U0 candidates found six owner lanes but
 four generic evidence relationships that the current engine cannot express
@@ -449,6 +449,25 @@ Git operation, a configurable command/flag/environment, cross-repository
 membership, or filesystem state as authority; if lexical helper extraction
 changes existing containment behavior; or if fixed index output cannot be
 parsed with typed unavailable/invalid separation.
+
+**M6-C4 acceptance:** native `git_index_paths` validates one nonempty unique
+tracked list as lexical repository-relative index identities, reads one fixed
+engine-owned NUL-delimited Git index, and requires exact membership. A tracked
+working-tree deletion remains valid. Missing members report
+`present-untracked` or `absent-untracked` without treating filesystem state as
+authority. Missing/nonzero Git, malformed output, invalid UTF-8, and non-
+repository roots retain typed outcomes.
+
+The existing lexical validation was extracted as `repository_path` while
+`contained_path` preserves its resolution and diagnostics. All 114 focused
+file-contract/engine tests and all 245 engine tests pass. Python byte
+compilation, all 137 declarative suites, generated evidence at 139 Bash
+verifiers / 144 nodes / 699 edges / 144 components, both plan checks, the
+Python complete checkpoint, exact write-set review, and diff integrity pass.
+No semantic candidate, registry, package, edge, checker, fixture, standards
+source, generated artifact, lockfile, build output, workflow, configurable
+command, compatibility path, or fallback changed. No deviation or new issue
+remains.
 
 **Tasks:**
 
@@ -7142,7 +7161,7 @@ evidence while accepting its own five rows.
   candidate package.
 - [x] Separately admit and accept M6-C2 derived keyed table membership.
 - [x] Separately admit and accept M6-C3 semantic heading cardinality.
-- [ ] Separately admit and accept M6-C4 repository-index membership.
+- [x] Separately admit and accept M6-C4 repository-index membership.
 - [ ] Re-preflight all twelve M6-U0 candidates after the four capabilities and
   freeze exact owner-separated package authority.
 - [ ] Add reusable primitives only when at least two coherent owners require

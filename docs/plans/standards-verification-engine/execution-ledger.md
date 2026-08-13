@@ -3534,3 +3534,18 @@
 - No semantic suite, registry, package, edge, checker, fixture, standards
   source, generated artifact, lockfile, build output, or workflow is admitted.
   Shared-contract verification is required before candidate re-preflight.
+
+## 2026-08-12 - M6-C4 Git Index-Membership Acceptance
+
+- Added strict `git_index_paths` with one nonempty unique tracked list and one
+  fixed engine-owned NUL-delimited Git index read. Tracked working-tree
+  deletion passes; missing members report present-untracked or absent-untracked.
+- Extracted lexical `repository_path` validation while preserving
+  `contained_path` resolution and diagnostics. Git absence/nonzero exit,
+  malformed output, invalid UTF-8, and non-repository roots are typed.
+- All 114 focused file-contract/engine tests, all 245 engine tests, Python
+  compilation, all 137 declarative suites, generated evidence at
+  139 / 144 / 699 / 144, and both plan checks pass. The Python complete
+  checkpoint and exact write-set review close acceptance.
+- No candidate or migration authority changed, no deviation was required, and
+  no new issue remains. Fresh twelve-candidate preflight is next.

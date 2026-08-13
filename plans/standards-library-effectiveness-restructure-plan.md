@@ -13,9 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement and accept admitted M6-C4 Git index membership. All
-twelve semantic candidates remain unadmitted until the capability sequence is
-accepted.
+**Next slice:** re-preflight all twelve semantic candidates against the four
+accepted capabilities and freeze owner-separated package authority. The
+candidates remain unadmitted until that review is accepted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3335,6 +3335,16 @@ all structural/routing fixtures pass.
          command/flag/environment, filesystem substitution, package branch,
          Bash, compatibility, or fallback is authorized. Semantic packages
          remain unadmitted.
+       - `7.4c3ve105` (`Accepted`): M6-C4 adds exact tracked-path membership
+         through lexical repository identities and one fixed engine-owned NUL-
+         delimited Git index read. Tracked working-tree deletion passes;
+         missing members distinguish present-untracked from absent-untracked.
+         Lexical path validation is shared without changing contained-path
+         resolution. All 114 focused file-contract/engine tests, all 245 engine
+         tests, all 137 declarative suites, generated evidence at 139 Bash
+         verifiers / 144 nodes / 699 edges / 144 components, both plan checks,
+         and the Python complete checkpoint pass. No candidate or configurable
+         command/fallback changed. Re-preflight all twelve candidates.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

@@ -12121,3 +12121,22 @@ nonzero Git, malformed output, and repository unavailability. Configuration
 cannot provide a command, flag, root, environment, mode, pathspec, glob, or
 fallback. Existing containment behavior must remain unchanged, and a complete
 shared-contract checkpoint is required before semantic candidate re-preflight.
+
+## 2026-08-12 M6-C4 Git Index-Membership Acceptance
+
+**Outcome:** accepted; fresh semantic candidate preflight may begin.
+
+The engine now validates lexical repository-relative tracked identities and
+reads the Git index once through a fixed NUL-delimited operation. Indexed paths
+deleted from the working tree pass. Missing entries report present-untracked or
+absent-untracked only as diagnostic context; neither state substitutes for
+index membership. Git and output failures remain typed.
+
+Lexical `repository_path` validation is shared with `contained_path`, whose
+resolution and diagnostics remain unchanged. All 114 focused file-contract/
+engine tests and all 245 engine tests pass. Python compilation, all 137
+registered suites, generated evidence at 139 Bash verifiers / 144 nodes / 699
+edges / 144 components, both plan checks, the Python complete checkpoint,
+exact write-set review, and diff integrity pass. No configurable command,
+candidate package, compatibility path, or fallback exists; no deviation or new
+issue remains.
