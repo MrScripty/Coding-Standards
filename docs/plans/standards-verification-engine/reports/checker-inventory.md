@@ -2737,3 +2737,17 @@ protected evidence is unchanged. Another package requires a fresh audit after
 the terminal checkpoint. The focused suite, package and edge authority, all
 four gates, all 134 declarative suites, and the complete mixed suite of 143
 checkers pass.
+
+### Post-M6-T10 Audit And M6-T11 Admission
+
+The fresh graph contains 143 Bash verifiers, 148 nodes, 725 edges, and 148
+components. Caller-free row 36 has five independent gates. Its rebuilt
+dependency-free eight-check probe uses native `members`/`container` inclusion
+to derive every bounded owner record inside the source-wide canonical
+disposition table without copied identifiers or cardinalities. The live checker
+and all five gates pass.
+
+M6-T11 is admitted at train order 98 with ten exact incident-edge records, no
+historical transfer, and no wrapper, Bash callback, inferred member list,
+equality fallback, compatibility path, false dependency, or fallback.
+Regeneration records 732 edges; executable topology is unchanged.

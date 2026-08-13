@@ -11874,3 +11874,16 @@ all 134 declarative suites, both plan checks, and all 143 mixed-suite
 entrypoints pass. No identity list, count, alias, command execution, Bash
 bridge, compatibility behavior, or fallback was added. Row-36 admission is
 next as a separate slice.
+
+## 2026-08-12 M6-T11 Row 36 Admission
+
+**Outcome:** admitted at train order 98.
+
+The rebuilt dependency-free eight-check probe derives every bounded row-36
+owner record inside the source-wide canonical disposition table through native
+`members`/`container` inclusion without copied identifiers or cardinalities.
+The live checker and all five independently retained gates pass. Ten exact
+incident-edge rows are admitted with no historical transfer, wrapper, Bash
+callback, inferred member list, equality fallback, compatibility path, false
+dependency, or fallback. The graph now records 143 Bash verifiers, 148 nodes,
+732 edges, and 148 components without changing executable topology.

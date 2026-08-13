@@ -128,6 +128,13 @@ layered-pattern, monorepo-pattern, data-authority, and execution-train gates.
 Only then admit the row-36 package and exact incident-edge dispositions in a
 separate planning commit.
 
+**Outcome:** accepted. The rebuilt eight-check probe derives the exact bounded
+identity relation through `members` and `container`, and the live checker plus
+all five independent gates pass. M6-T11 is admitted at train order 98 with ten
+typed incident-edge records and no historical evidence transfer. Regeneration
+records 143 Bash verifiers, 148 nodes, 732 edges, and 148 components without an
+executable-topology change. Acceptance is the next separate slice.
+
 ### M6-T11 Acceptance
 
 Register the admitted suite, run focused and affected verification, delete the

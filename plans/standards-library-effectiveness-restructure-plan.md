@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform a fresh post-M6-T10 graph and ownership audit before
-admitting another bounded verification package.
+**Next slice:** implement admitted verification package M6-T11 for parent-owned
+row 36, then audit the fresh graph before another admission.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3239,6 +3239,15 @@ all structural/routing fixtures pass.
          entrypoints pass. No copied identities or counts, aliases, Bash
          callback, expression language, compatibility path, or fallback is
          introduced. Rebuild the row-36 probe and proceed to M6-T11 admission.
+       - `7.4c3ve90` (`Admitted`): the rebuilt dependency-free row-36 probe
+         passes eight checks and uses native `inclusion` to derive all bounded
+         owner-validation records inside the source-wide canonical disposition
+         table without copying nineteen identifiers or their count. The live
+         checker and Architecture Pattern Reference, Layered Pattern, Monorepo
+         Pattern, Data Authority, and execution-train gates pass independently.
+         Admit M6-T11 at train order 98 with ten exact incident-edge records,
+         no historical transfer, wrapper, Bash callback, inferred members,
+         equality fallback, compatibility path, false dependency, or fallback.
      - `7.4c3hcp` (`Accepted resolution`): M5-CP1 through M5-CP6 replaced the
        heading-dependent semantic authority and closed source package 7 without
        transitional headings, weaker checks, or fallback.

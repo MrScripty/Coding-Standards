@@ -3283,6 +3283,17 @@
 - All four independent gates, all 134 declarative suites, and all 143
   mixed-suite entrypoints pass. The next slice is a fresh audit.
 
+## 2026-08-12 - M6-T11 Row 36 Admission
+
+- Rebuilt an eight-check dependency-free probe using native inclusion to derive
+  row-36 owner records inside canonical dispositions without copied identities
+  or cardinalities; the live checker and all five independent gates pass.
+- Admitted M6-T11 at train order 98 with ten exact incident-edge records and no
+  historical transfer, wrapper, Bash callback, inferred members, equality
+  fallback, false dependency, compatibility path, or fallback.
+- Regenerated 143 Bash verifiers, 148 nodes, 732 edges, and 148 components;
+  executable topology is unchanged. Implementation is next.
+
 ## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
 
 - Audited every caller-free lifecycle checker in the fresh 147-verifier graph

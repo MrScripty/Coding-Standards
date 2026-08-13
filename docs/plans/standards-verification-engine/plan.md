@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T10 graph and ownership audit
+**Current phase:** Milestone 6: M6-T11 row 36 migration
 
-**Next slice:** inspect the fresh post-M6-T10 graph and remaining ownership and
-evidence shapes before admitting another bounded package.
+**Next slice:** implement admitted M6-T11 with the native inclusion assertion,
+then delete the row-36 Bash checker without duplicate authority or fallback.
 
 **Acceptance status:** `pending`
 
@@ -6391,6 +6391,40 @@ The focused suite, package and edge authority, all four independent gates, all
 134 declarative suites, and the complete mixed suite of 143 checkers pass.
 Graph freshness, removal, both plan, protected-hash, and diff checks also pass.
 A fresh graph and ownership audit is next.
+
+##### M6-T11 Row 36 Admission
+
+**Status:** Admitted at train order 98.
+
+The fresh post-M6-T10 graph contains 143 Bash verifiers, 148 nodes, 725 edges,
+and 148 components. Row 36 is caller-free and has five independently retained
+gates: Architecture Pattern Reference, Layered Pattern, Monorepo Pattern, Data
+Authority, and execution-train integrity. No historical caller-evidence
+transfer applies.
+
+After M6-E1 introduced the native `inclusion` assertion, a disposable
+dependency-free suite passes eight checks. It proves the four exact row-36
+decomposition records, derives identity equality with owner validation,
+validates nonempty unique owner records, and proves every row-36 owner record is
+contained in the source-wide canonical disposition table. The inclusion uses
+projected records and a source filter only; it copies neither the nineteen
+identifiers nor their count. Report semantics, immutable train identity,
+package state, and six accepted plan claims also pass. The live checker and all
+five gates pass independently.
+
+M6-T11 has ten exact incident-edge rows for those five gates. Implementation is
+limited to the admitted write set. It must register and pass the permanent
+suite before deleting Bash, accept only M6-T11 and its edge rows, regenerate
+the graph, and prove all decomposition, owner, disposition, report, train,
+package, gate, and plan evidence. A wrapper, Bash callback, inferred member
+list, copied cardinality, equality fallback, alias, compatibility path, false
+dependency, or protected-source mutation is prohibited. Changed incidence,
+unrepresentable semantics, protected evidence mutation, or an edit outside the
+write set is a re-plan trigger.
+
+Admission regeneration records 143 Bash verifiers, 148 nodes, 732 edges, and
+148 components. Ten typed disposition rows produce seven net graph edges after
+set-valued deduplication; executable topology is unchanged.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 
