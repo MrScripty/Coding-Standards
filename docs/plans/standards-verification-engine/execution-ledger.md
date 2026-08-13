@@ -3319,6 +3319,19 @@
   compatibility path, or fallback. Regeneration records 728 edges without an
   executable-topology change.
 
+## 2026-08-12 - M6-T12 Row 34 Acceptance
+
+- Registered and passed the dependency-free eight-check row-34 suite before
+  deleting its Bash checker; identities and exact disposition lineage are
+  derived without copied identifiers or cardinalities.
+- Accepted all fourteen M6-T12 edge rows independently; no historical evidence
+  or owner record required mutation.
+- Regenerated 141 Bash verifiers, 146 nodes, 711 edges, and 146 components;
+  protected decomposition, owner, disposition, Frontend gate, package, and plan
+  evidence remains unchanged.
+- All seven gates, all 136 declarative suites, and all 141 mixed-suite
+  entrypoints pass. The next slice is a fresh audit.
+
 ## 2026-08-12 - Post-M6-T6 Audit And M6-T7 Admission
 
 - Audited every caller-free lifecycle checker in the fresh 147-verifier graph

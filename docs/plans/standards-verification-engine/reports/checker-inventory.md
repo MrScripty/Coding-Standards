@@ -2777,3 +2777,14 @@ M6-T12 is admitted at train order 99 with fourteen exact incident-edge records,
 no historical transfer, and no engine, wrapper, Bash callback, inferred filter,
 false dependency, compatibility, or fallback change. Regeneration records 728
 edges; executable topology is unchanged.
+
+### M6-T12 Acceptance
+
+The registered row-34 suite passes eight generic checks and replaces its Bash
+checker without a wrapper. Six Frontend gates and execution train remain
+independent through fourteen accepted edge records. Complete identity and exact
+disposition lineage is derived from existing evidence; no copied cardinality,
+historical transfer, or duplicate authority occurs. The graph now contains 141
+Bash verifiers, 146 nodes, 711 edges, and 146 components. All protected evidence
+is unchanged. The focused suite, package and edge authority, all seven gates,
+all 136 declarative suites, and the complete mixed suite of 141 checkers pass.
