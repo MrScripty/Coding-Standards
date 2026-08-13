@@ -13,9 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** re-preflight all twelve semantic candidates against the four
-accepted capabilities and freeze owner-separated package authority. The
-candidates remain unadmitted until that review is accepted.
+**Next slice:** prepare twelve admitted M6-U package-local proposals from one
+fresh canonical revision, then integrate them serially in M6-U1 through M6-U12
+order. The Python complete checkpoint runs once at M6-U-W1.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3345,6 +3345,20 @@ all structural/routing fixtures pass.
          verifiers / 144 nodes / 699 edges / 144 components, both plan checks,
          and the Python complete checkpoint pass. No candidate or configurable
          command/fallback changed. Re-preflight all twelve candidates.
+       - `7.4c3ve106` (`Accepted`): fresh M6-U0 re-preflight proves all twelve
+         semantic replacements through one temporary 53-check native suite and
+         all twelve live Bash gates. M6-U1 through M6-U12 are separately
+         admitted at train orders 102-113 with exact suite/checker local write
+         sets, empty suite dependencies, and two historical independent-gate
+         transfers each. Package-local proposals may be prepared concurrently;
+         registry, package, edge, history, README, generated graph, and plan
+         authority integrate serially. Temporary proof files are absent and no
+         implementation authority changed. Exact checker names intentionally
+         update twelve generated structure-inventory documentation references;
+         checker count and dependency topology remain unchanged. Complete
+         verification is deferred to M6-U-W1 after M6-U12.
+         Both plan checks, all 137 declarative suites, generated freshness, and
+         diff integrity pass; temporary proof files remain absent.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

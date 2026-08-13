@@ -2976,3 +2976,29 @@ edges / 144 components, both plan checks, and the Python complete checkpoint
 pass. Existing containment and path-state behavior and all semantic packages
 remain unchanged. The four capabilities are complete; fresh candidate
 preflight is next.
+
+### M6-U0 Fresh Semantic Re-preflight And Package Freeze
+
+The generated graph still contains the same twelve candidates with no
+executable or verifier dependency. Each retains two accepted historical
+independent-gate records. A disposable 53-check aggregate suite and all twelve
+live Bash gates pass against the accepted engine.
+
+The replacement evidence uses decision fixtures, selected text, bounded
+Markdown sections, exact Git index membership, semantic heading states, and
+row-derived keyed owner/disposition equality. It copies no disposition ranges
+or counts. M6-U1 through M6-U12 are admitted as separate packages at train
+orders 102-113. Their production suite paths and deleted checker paths are
+pairwise disjoint; every suite has an empty dependency list. Shared registry,
+package, edge, historical evidence, README, generated graph, and plan changes
+remain serial integration-owner work, with one complete M6-U-W1 checkpoint.
+
+The freeze intentionally names all twelve exact checker paths. Canonical
+regeneration therefore adds this plan only to those rows' documentation-inbound
+evidence in the structure inventory. Checker count and dependency topology
+remain 139 checkers / 144 nodes / 699 edges / 144 components; no graph semantic
+or executable relationship changes.
+
+Exact diff review confirms the twelve admitted checker rows are the complete
+generated change. Both plan checks, all 137 declarative suites, generated
+freshness, and diff integrity pass.

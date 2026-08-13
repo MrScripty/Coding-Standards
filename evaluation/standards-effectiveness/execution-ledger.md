@@ -12140,3 +12140,27 @@ edges / 144 components, both plan checks, the Python complete checkpoint,
 exact write-set review, and diff integrity pass. No configurable command,
 candidate package, compatibility path, or fallback exists; no deviation or new
 issue remains.
+
+## 2026-08-12 M6-U0 Semantic Package Re-preflight And Freeze
+
+**Outcome:** accepted; twelve package-local proposals may be prepared from one
+fresh canonical revision.
+
+The fresh graph retains twelve independent semantic gates and two accepted
+historical independent-gate records per gate. A disposable aggregate suite
+passed 53 native checks, and every live Bash gate passed. Native evidence
+preserves ordered decision outcomes, required/prohibited projections, bounded
+legacy sections, exact tracked prompts, semantic H1/H2 states, source closure,
+and owner/disposition equality derived from canonical decomposition rows.
+
+M6-U1 through M6-U12 are separately admitted at train orders 102-113. Each
+proposal may only add its exact production suite and delete its exact checker;
+all shared authority remains serial. Production suites declare no semantic
+dependencies. Each integration transfers two historical gate records to
+explicit suite evidence. Temporary proof files were removed, no implementation
+authority changed, and the complete checkpoint remains deferred to M6-U-W1.
+Because this accepted freeze names each exact checker, canonical regeneration
+updates only those twelve structure-inventory documentation references. The
+139-checker and 144-node / 699-edge / 144-component topology is unchanged.
+Exact generated review, both plan checks, all 137 declarative suites, graph
+freshness, and diff integrity pass. No temporary proof artifact remains.

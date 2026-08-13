@@ -2,16 +2,17 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-C4 Git index membership accepted
+**Current phase:** Milestone 6: M6-U0 semantic package freeze accepted
 
-**Next slice:** re-preflight all twelve M6-U0 semantic candidates against the
-four accepted capabilities and freeze owner-separated package authority.
+**Next slice:** prepare the twelve admitted package-local proposals from one
+fresh canonical revision, then integrate them serially in M6-U1 through M6-U12
+order.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-C4 Git index membership. All 114 focused file-
-contract/engine tests, all 245 engine tests, all 137 declarative suites, and the
-Python complete checkpoint over 139 retained Bash verifiers pass.
+**Latest accepted slice:** M6-U0 semantic package re-preflight and freeze. One
+disposable 53-check native suite and all twelve live Bash gates pass; twelve
+owner-separated packages are admitted without semantic suite dependencies.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -468,6 +469,96 @@ No semantic candidate, registry, package, edge, checker, fixture, standards
 source, generated artifact, lockfile, build output, workflow, configurable
 command, compatibility path, or fallback changed. No deviation or new issue
 remains.
+
+**M6-U0 fresh re-preflight:** the current generated graph still identifies the
+same twelve retained gates with zero executable and verifier-dependency
+inbound edges. Every gate has two accepted historical `independent-gate`
+records, which must transition from `checker:<path>` to its exact registered
+`suite:<id>` evidence during that package's serial integration. Those records
+do not create suite dependencies.
+
+One disposable aggregate suite proved all twelve replacements through 53
+native checks. It preserved every decision fixture outcome and all current
+required/prohibited text, bounded legacy-section, tracked prompt, semantic
+heading-state, source-closure, and disposition relationships. Disposition keys
+derive from the canonical execution-decomposition row and are matched against
+owner validation and consolidation through `keyed_relation`; no identifier
+range, count, or copied list remains. All twelve live Bash gates also pass. The
+disposable suite and registry are not retained and grant no package authority.
+
+Exact checker identities in this freeze are intentional planning evidence and
+therefore change the generated structure inventory's documentation-inbound
+projection. Following the accepted generated-artifact boundary, this slice
+also owns one canonical regeneration of
+`evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`.
+Only the twelve candidate rows may gain this plan as documentation evidence;
+checker count and dependency-graph nodes, edges, and components must remain
+unchanged. Hiding or spelling checker identities indirectly to preserve stale
+output is prohibited.
+
+The twelve production packages are separately admitted at train orders 102
+through 113:
+
+| Order | Package | Owner | Suite | Retired checker | Native contract |
+| --- | --- | --- | --- | --- | --- |
+| 102 | `M6-U1` | `topic.contracts` | `contract-http-adapter-proof` | `verify-contract-http-adapter-proof.sh` | decisions, policy/reference text, bounded Architecture section, row-derived dispositions |
+| 103 | `M6-U2` | `profile.application.frontend` | `frontend-applicability` | `verify-frontend-applicability.sh` | applicability decisions, profile text, row-derived dispositions |
+| 104 | `M6-U3` | `profile.application.frontend` | `frontend-lifecycle-work` | `verify-frontend-lifecycle-work.sh` | lifecycle decisions, profile/reference text, row-derived disposition |
+| 105 | `M6-U4` | `profile.language.typescript` | `frontend-typescript-tooling` | `verify-frontend-typescript-tooling.sh` | TypeScript/Tooling decisions and projections, row-derived dispositions |
+| 106 | `M6-U5` | `profile.boundary.persistence` | `persistence-durable-mutation` | `verify-persistence-durable-mutation.sh` | decisions, policy/reference text, bounded Architecture section, row-derived dispositions |
+| 107 | `M6-U6` | `profile.boundary.persistence` | `persistence-migration-execution` | `verify-persistence-migration-execution.sh` | decisions, policy/reference text, bounded Architecture section, row-derived dispositions |
+| 108 | `M6-U7` | `workflow.planning` | `planning-admission` | `verify-planning-admission.sh` | ordered typed decisions and Planning/Implementation projection text |
+| 109 | `M6-U8` | `workflow.implementation` | `plan-implementation-entrypoint` | `verify-plan-implementation-entrypoint.sh` | decisions, exact tracked prompt, single H1, projection text, row-derived dispositions |
+| 110 | `M6-U9` | `workflow.planning` | `full-review-prompt-entrypoint` | `verify-full-review-prompt-entrypoint.sh` | decisions, exact tracked prompt, single H1, projection text, row-derived dispositions |
+| 111 | `M6-U10` | `workflow.planning` | `plan-template-projection` | `verify-plan-template-projection.sh` | decisions, selected template text, row-derived dispositions |
+| 112 | `M6-U11` | `workflow.implementation` | `review-template-projection` | `verify-review-template-projection.sh` | decisions, selected template text, row-derived dispositions |
+| 113 | `M6-U12` | `profile.language.rust.cross-platform` | `rust-no-std-closure` | `verify-rust-no-std-closure.sh` | decisions, policy/tooling/reference text, empty legacy H2 state, row-derived disposition |
+
+Each production suite has `requires = []`. Train order expresses serial
+integration of shared migration authority, not semantic dependency. Every
+package-local proposal may only add its named suite and delete its named
+checker. It must start from the same fresh canonical revision, pass through a
+disposable contained registry, and return commit identity, exact diff, and
+focused result. Proposals cannot edit fixtures, semantic sources, registry,
+package or edge authority, README, generated evidence, plans, ledgers, engine,
+schema, lockfiles, build output, or workflows and cannot claim acceptance.
+
+The integration owner applies M6-U1 through M6-U12 serially. For each package,
+the accepting commit registers and passes the suite before deleting the Bash
+checker; adds the exact package row; converts its two historical independent-
+gate records to `suite:<id>` and exact suite-path evidence; updates shared
+package projection, README, generated graph, plans, ledgers, and reports; and
+proves the removed path and unchanged source/fixture contract. Focused suite,
+dependency-once, package/edge authority, independent-gate transfer, graph
+freshness, all declarative suites, removed-path, source/fixture unchanged, and
+diff checks run per integration. The Python complete checkpoint runs once at
+`M6-U-W1` after M6-U12.
+
+**M6-U0 no-fallback boundary:** do not merge packages by lane, create false
+`requires` edges from train order or shared prose, copy decomposition IDs or
+numeric counts, edit semantic sources or fixtures, retain a wrapper or Bash
+bridge, infer owner from graph shape, preserve dual checker/suite authority, or
+allow a failed proposal to select another assertion. Stale proposal bases,
+source or fixture changes, new incident edges, owner conflict, write overlap,
+failed native parity, or a fifth capability requirement trigger re-planning.
+
+**M6-U0 freeze write set:** this plan, its issues and execution ledger, the
+checker-inventory report, the standards-effectiveness execution ledger, the
+parent plan, and the generated checker structure inventory. Dependency node,
+edge, and component artifacts are verification-only and must remain byte-
+identical. No registry, package manifest, edge disposition, production suite,
+checker, fixture, semantic source, README, engine, schema, lockfile, build
+output, or workflow is authorized.
+
+**M6-U0 acceptance evidence:** the disposable 53-check native suite and all
+twelve live Bash gates pass. Canonical regeneration changes exactly twelve
+structure-inventory rows, each adding this plan as documentation-inbound
+evidence for one admitted checker; all other structure rows are unchanged.
+Freshness passes at 139 checkers / 144 nodes / 699 edges / 144 components, both
+plan validators pass, all 137 registered declarative suites pass, and diff
+integrity passes. No temporary proof artifact remains. The complete checkpoint
+is intentionally deferred to M6-U-W1 because this slice changes planning and
+derived documentation evidence, not executable or shared engine behavior.
 
 **Tasks:**
 
@@ -7162,7 +7253,7 @@ evidence while accepting its own five rows.
 - [x] Separately admit and accept M6-C2 derived keyed table membership.
 - [x] Separately admit and accept M6-C3 semantic heading cardinality.
 - [x] Separately admit and accept M6-C4 repository-index membership.
-- [ ] Re-preflight all twelve M6-U0 candidates after the four capabilities and
+- [x] Re-preflight all twelve M6-U0 candidates after the four capabilities and
   freeze exact owner-separated package authority.
 - [ ] Add reusable primitives only when at least two coherent owners require
   them or one safety-critical invariant cannot otherwise be expressed clearly.

@@ -3549,3 +3549,27 @@
   checkpoint and exact write-set review close acceptance.
 - No candidate or migration authority changed, no deviation was required, and
   no new issue remains. Fresh twelve-candidate preflight is next.
+
+## 2026-08-12 - M6-U0 Semantic Package Re-preflight And Freeze
+
+- Reconfirmed the same twelve graph-independent semantic gates and separated
+  them into twelve packages across seven exact canonical owner IDs. Shared lane
+  labels do not merge ownership, source projection, fixture, or gate history.
+- A temporary aggregate suite passed 53 native checks and preserved all twelve
+  live Bash outcomes. Disposition identities derive from canonical
+  decomposition rows and bind owner/disposition values through
+  `keyed_relation`; prompts use exact Git membership and semantic H1 state;
+  Rust closure uses semantic empty-H2 state.
+- Admitted M6-U1 through M6-U12 at train orders 102-113 with pairwise disjoint
+  package-local suite/checker write sets and `requires = []`. Each has exactly
+  two historical independent-gate records to transfer to explicit suite
+  evidence during serial integration.
+- Temporary proof files were removed. No suite, registry, package, edge,
+  checker, fixture, semantic source, engine, lockfile, build output, or
+  workflow changed during preflight. Exact checker identities in the accepted
+  freeze require one canonical structure-inventory regeneration: only twelve
+  documentation-inbound rows may change, while topology remains
+  144 / 699 / 144. M6-U1 local preparation is next; the complete checkpoint is
+  deferred to M6-U-W1 after M6-U12.
+- Exact review confirms only those twelve structure rows changed. Both plan
+  checks, all 137 declarative suites, graph freshness, and diff integrity pass.
