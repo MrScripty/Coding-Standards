@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** run verification-engine VE062-P1 disposable normalized lifecycle
-suite and mutation parity before any canonical evidence or checker cutover.
+**Next slice:** resume verification-engine VE062-P1 with the VE063-corrected
+final-manifest disposition mutation before any canonical cutover.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3476,6 +3476,14 @@ all structural/routing fixtures pass.
          evidence, registry, suite, manifest, generated artifact, Bash checker,
          standard, or workflow changed. VE062-P1 disposable normalized mutation
          parity is next.
+       - `7.4c3ve123` (`Accepted planning authority`): VE062-P1's normalized
+         three-suite positive chain passes and stale checker authority fails
+         typed unavailable. The `languages/README.md` disposition mutation was
+         outside final-manifest ownership; Bash rejected it only through an
+         independent aggregate invocation. VE063 corrects parity to remove all
+         `CODING-STANDARDS.md` dispositions and require
+         `ASSERT.KEY_COVERAGE_MISSING`. Do not widen final-source scope, create
+         a false dependency, weaken coverage, or edit canonical evidence.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE062 normalized lifecycle mutation parity
+**Current phase:** Milestone 6: VE063 final-source mutation attribution replan
 
-**Next slice:** run VE062-P1 disposable normalized-schema suites and mutation
-parity for source-package, final-source, and Router lifecycle closure.
+**Next slice:** rerun VE062-P1 with final-source disposition removal scoped to
+one source that belongs to the final manifest.
 
 **Acceptance status:** `pending`
 
@@ -755,6 +755,37 @@ mutations fail through the accepted generic assertions and that the normalized
 positive chain passes in Router -> final-source -> source-package order. Any
 need to modify canonical evidence, use a suite path as identity, copy a total,
 or add another engine capability is a replan trigger.
+
+##### VE063 Final-Source Mutation Attribution
+
+VE062-P1's normalized positive chain passed 5 source-package, 6 final-source,
+and 6 Router checks in dependency order. Its stale deleted checker mutation
+failed with typed `INPUT.UNAVAILABLE` as required. The planned disposition
+mutation then removed both `languages/README.md` rows and the final-source suite
+correctly continued to pass: `languages/README.md` is a derived corpus
+entrypoint, not one of the 27 standard/profile sources in the final manifest.
+
+The retained final-source Bash checker rejects that mutation only because it
+invokes the independently owned consolidation-dispositions gate. VE061 already
+classified such aggregate invocation as execution topology, not suite
+ownership or an automatic dependency. Four options were reviewed:
+
+1. Expand final-source keys to every corpus entrypoint. Rejected because it
+   broadens the final manifest's owner contract.
+2. Add a final-source suite dependency on consolidation dispositions. Rejected
+   because it converts aggregate Bash invocation into a false semantic edge.
+3. Remove `key_coverage`. Rejected because each final-manifest source still
+   has a genuine one-or-more disposition contract.
+4. **Selected:** correct the mutation to remove every disposition for one
+   source actually selected by the final manifest, initially
+   `CODING-STANDARDS.md`. Retain `languages/README.md` closure under the
+   independent consolidation-dispositions owner.
+
+The replan changes no engine contract, canonical evidence, suite, registry,
+checker, or standard. Resume only in the disposable worktree, prove the
+corrected mutation yields `ASSERT.KEY_COVERAGE_MISSING`, then run the Router
+mutation and restore the positive chain. A need to widen source selection,
+invent a dependency, or change canonical evidence remains a replan trigger.
 
 No expression language, regex configuration, callback, command execution,
 package-specific branch, copied row/key/literal list, inferred subject kind,

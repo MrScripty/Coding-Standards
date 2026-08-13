@@ -3222,3 +3222,17 @@ identity rules, invalid UTF-8, present literals, projection width, and unknown
 configuration fields. All 258 engine tests and 149 live declarative suites
 pass. VE062-P1 must now prove the normalized lifecycle suites reject the three
 mutations before any canonical evidence or checker cutover is admitted.
+
+### VE063 Mutation Ownership Correction
+
+The normalized positive chain passes and stale checker authority is rejected.
+The `languages/README.md` disposition mutation was misattributed: that path is
+a derived corpus entrypoint, not a final-source manifest member. The retained
+Bash parent rejected it only because it invokes a separate aggregate checker.
+The final-source suite must not copy that invocation as ownership or a suite
+dependency.
+
+Mutation parity will instead remove all dispositions for
+`CODING-STANDARDS.md`, a key derived directly from the final manifest. This is
+the exact semantic case `key_coverage` owns. `languages/README.md` remains
+within the separately migrated consolidation-dispositions contract.

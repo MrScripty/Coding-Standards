@@ -12392,3 +12392,21 @@ all 149 registered declarative suites, and diff checks pass. No lifecycle TSV,
 suite, registry, package/edge manifest, generated artifact, Bash checker,
 standards source, or workflow changed. VE062-P1 owns only an isolated disposable
 normalized positive/mutation probe and serial result recording.
+
+## 2026-08-13 VE063 Final-Source Mutation Attribution Replan
+
+**Outcome:** positive and stale-subject proof passed; disposition mutation must
+be corrected before parity can continue.
+
+The disposable normalized chain passed 5 preparation, 6 final-source, and 6
+Router checks. A stale deleted checker subject failed typed unavailable.
+Removing `languages/README.md` dispositions did not fail final-source coverage
+because that path is a derived entrypoint outside the final manifest. The Bash
+parent's rejection comes from an independently owned aggregate invocation, not
+from final-source-local authority.
+
+The accepted correction removes all dispositions for
+`CODING-STANDARDS.md`, which the final manifest actually selects, and requires
+`ASSERT.KEY_COVERAGE_MISSING`. No false consolidation-dispositions dependency,
+scope widening, weakened assertion, engine change, or canonical edit is
+authorized. Implementation stops at this replan trigger.

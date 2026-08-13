@@ -3815,3 +3815,18 @@
   Canonical lifecycle evidence, suites, registry, manifests, generated files,
   Bash checkers, standards sources, and workflows remained unchanged.
 - VE062-P1 is next: disposable normalized positive and mutation parity only.
+
+## 2026-08-13 - VE063 Final-Source Mutation Attribution Replan
+
+- The disposable normalized chain passed 5 preparation, 6 final-source, and 6
+  Router checks. The stale deleted-checker mutation failed unavailable through
+  `repository_subjects` as intended.
+- Removing both `languages/README.md` dispositions did not trigger
+  `key_coverage` because that derived entrypoint is not a final-manifest key.
+  Bash rejected it only through final closure's invocation of the separately
+  owned consolidation-dispositions checker.
+- Selected a corrected mutation against all `CODING-STANDARDS.md` disposition
+  rows. This preserves final-source ownership and must produce
+  `ASSERT.KEY_COVERAGE_MISSING`; `languages/README.md` remains independent.
+- Stopped before rerunning the corrected mutation. No canonical file changed;
+  the disposable worktree remains isolated for the resumed proof.
