@@ -532,6 +532,15 @@ results, four exact dispositions, metadata, non-normative HTTP recipes, legacy
 architecture-index closure, and rejection of guessed status, envelope,
 decoder, retry, or recovery fallback.
 
+## Contract HTTP Adapter Proof Fixtures
+
+`fixtures/contracts/http-adapter-proof-decisions.tsv` and the registered
+`contract-http-adapter-proof` suite check producer and consumer adapter proof,
+canonical policy and mechanism projections, bounded legacy-section closure,
+and disposition ownership derived from row 33. Invalid, unavailable, and
+unsupported outcomes remain typed; no generic error, decoder, retry, recovery,
+or transport-success fallback is accepted.
+
 ## Persistence Owner Decision Fixtures
 
 `fixtures/persistence/owner-contract-decisions.tsv` and the registered

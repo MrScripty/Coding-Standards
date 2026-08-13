@@ -2,17 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-U0 semantic package freeze accepted
+**Current phase:** Milestone 6: M6-U1 accepted
 
-**Next slice:** prepare the twelve admitted package-local proposals from one
-fresh canonical revision, then integrate them serially in M6-U1 through M6-U12
-order.
+**Next slice:** revalidate and serially integrate the prepared M6-U2 Frontend
+Applicability proposal.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-U0 semantic package re-preflight and freeze. One
-disposable 53-check native suite and all twelve live Bash gates pass; twelve
-owner-separated packages are admitted without semantic suite dependencies.
+**Latest accepted slice:** M6-U1 Contract HTTP Adapter Proof. Its dependency-
+free five-check suite replaces the Bash gate, and both historical M6-T5 gate
+records now name registered suite evidence.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -559,6 +558,18 @@ plan validators pass, all 137 registered declarative suites pass, and diff
 integrity passes. No temporary proof artifact remains. The complete checkpoint
 is intentionally deferred to M6-U-W1 because this slice changes planning and
 derived documentation evidence, not executable or shared engine behavior.
+
+**M6-U1 acceptance evidence:** proposal `7f85995` was revalidated against the
+freeze and applied without source or fixture changes. The registered
+dependency-free suite passes five native checks. Package and edge authority
+pass after classifying U1 as `edge-free` with a separate
+`historical-gate-transfer`: U1 owns no current incident-edge rows, while exactly
+two immutable M6-T5 lineage rows now use `suite:contract-http-adapter-proof`
+and its exact registered path. The Bash checker is absent, the README routes to
+the suite, and canonical regeneration reports 138 Bash checkers / 143 nodes /
+698 edges / 143 components. No wrapper, dependency, copied identifier range,
+source edit, fixture edit, compatibility behavior, or fallback was introduced.
+The complete checkpoint remains deferred to M6-U-W1; M6-U2 is next.
 
 **Tasks:**
 

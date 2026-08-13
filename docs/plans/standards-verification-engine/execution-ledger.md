@@ -3573,3 +3573,22 @@
   deferred to M6-U-W1 after M6-U12.
 - Exact review confirms only those twelve structure rows changed. Both plan
   checks, all 137 declarative suites, graph freshness, and diff integrity pass.
+
+## 2026-08-12 - M6-U1 Contract HTTP Adapter Proof Acceptance
+
+- Revalidated prepared proposal `7f85995` against the accepted M6-U0 freeze
+  and integrated only its suite addition and checker deletion before shared
+  authority edits.
+- Registered the dependency-free five-check suite and preserved decisions,
+  canonical policy/reference projections, the bounded Architecture migration
+  section, and owner/disposition lineage derived from row 33.
+- Corrected the package verification classification from current
+  `edge-dispositions` to `edge-free` plus `historical-gate-transfer`. U1 has no
+  current incident edges; exactly two accepted M6-T5 lineage rows now name the
+  suite and its exact registered path.
+- Deleted the Bash checker and routed the evaluation README to the suite. No
+  wrapper, bridge, false dependency, copied identifier range, source/fixture
+  edit, compatibility behavior, or fallback remains.
+- Canonical regeneration reports 138 Bash checkers / 143 nodes / 698 edges /
+  143 components. The complete checkpoint remains deferred to M6-U-W1; M6-U2
+  serial integration is next.

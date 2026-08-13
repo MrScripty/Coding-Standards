@@ -1129,5 +1129,16 @@ expected = [[
   "M6-T13,VE003",
   "focused-checkpoint,edge-free,engine-tests,graph-freshness,declarative-all,removed-paths,complete-checkpoint,source-unchanged",
   "accepted",
+], [
+  "102",
+  "M6-U1",
+  "checker:evaluation/standards-effectiveness/verify-contract-http-adapter-proof.sh",
+  "topics/contracts.md",
+  "consolidation",
+  "contract-http-adapter-proof-declarative-authority",
+  "evaluation/standards-effectiveness/checker-migration-packages.tsv,evaluation/standards-effectiveness/executable-edge-dispositions.tsv,evaluation/standards-effectiveness/suite-registry.toml,evaluation/standards-effectiveness/suites/checker-migration-packages.toml,evaluation/standards-effectiveness/suites/contract-http-adapter-proof.toml,evaluation/standards-effectiveness/verify-contract-http-adapter-proof.sh,evaluation/standards-effectiveness/README.md,evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv,evaluation/standards-effectiveness/generated/checker-dependency-components.tsv,evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv,evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv,docs/plans/standards-verification-engine/plan.md,docs/plans/standards-verification-engine/execution-ledger.md,docs/plans/standards-verification-engine/issues.md,docs/plans/standards-verification-engine/reports/checker-inventory.md,evaluation/standards-effectiveness/execution-ledger.md,plans/standards-library-effectiveness-restructure-plan.md",
+  "M6-I1,VE059",
+  "focused-suite,dependency-once,edge-free,historical-gate-transfer,graph-freshness,declarative-all,removed-paths,source-unchanged,wave-checkpoint-deferred:M6-U-W1",
+  "accepted",
 ]
 ]

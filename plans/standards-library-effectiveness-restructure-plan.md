@@ -13,9 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** prepare twelve admitted M6-U package-local proposals from one
-fresh canonical revision, then integrate them serially in M6-U1 through M6-U12
-order. The Python complete checkpoint runs once at M6-U-W1.
+**Next slice:** revalidate and serially integrate the prepared verification-
+engine M6-U2 Frontend Applicability proposal. The Python complete checkpoint
+runs once at M6-U-W1.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3359,6 +3359,14 @@ all structural/routing fixtures pass.
          verification is deferred to M6-U-W1 after M6-U12.
          Both plan checks, all 137 declarative suites, generated freshness, and
          diff integrity pass; temporary proof files remain absent.
+       - `7.4c3ve107` (`Accepted`): M6-U1 registers the dependency-free
+         `contract-http-adapter-proof` suite, passes five native checks, and
+         deletes its Bash checker. U1 is edge-free; exactly two historical
+         M6-T5 independent-gate rows transfer evidence to the registered suite
+         without adding a dependency. README routing and generated evidence are
+         reconciled at 138 Bash checkers / 143 nodes / 698 edges / 143
+         components. Sources and fixtures remain unchanged, with no wrapper,
+         copied range, compatibility path, or fallback. M6-U2 is next.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

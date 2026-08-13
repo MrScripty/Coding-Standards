@@ -3002,3 +3002,18 @@ or executable relationship changes.
 Exact diff review confirms the twelve admitted checker rows are the complete
 generated change. Both plan checks, all 137 declarative suites, generated
 freshness, and diff integrity pass.
+
+### Accepted M6-U1 Contract HTTP Adapter Proof
+
+The registered dependency-free five-check suite replaces the Bash checker and
+preserves typed adapter decisions, canonical Contracts and HTTP recipe
+projections, bounded Architecture index closure, and row-derived disposition
+ownership. U1 is graph-edge-free; its two historical M6-T5 independent-gate
+rows retain immutable deleted-checker endpoints while transferring evidence to
+`suite:contract-http-adapter-proof` and its exact suite path.
+
+The evaluation README now routes this proof through the registered suite.
+Generated evidence derives 138 Bash checkers / 143 nodes / 698 edges / 143
+components. Sources and fixtures remain unchanged, and no wrapper, false suite
+dependency, copied count/range, compatibility representation, or fallback was
+introduced. M6-U2 remains next; the complete checkpoint remains M6-U-W1.

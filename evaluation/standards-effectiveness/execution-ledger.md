@@ -12164,3 +12164,21 @@ updates only those twelve structure-inventory documentation references. The
 139-checker and 144-node / 699-edge / 144-component topology is unchanged.
 Exact generated review, both plan checks, all 137 declarative suites, graph
 freshness, and diff integrity pass. No temporary proof artifact remains.
+
+## 2026-08-12 M6-U1 Contract HTTP Adapter Proof Acceptance
+
+**Outcome:** accepted at train order 102.
+
+Prepared proposal `7f85995` was revalidated against the M6-U0 freeze. The
+registered dependency-free suite passes five checks covering typed decisions,
+canonical owner and mechanism text, one bounded legacy section, and
+decomposition-derived owner/disposition equality. The Bash checker is absent.
+
+U1 has no current incident edges, so package authority uses `edge-free` rather
+than inventing rows. Exactly two accepted M6-T5 historical independent-gate
+records retain immutable checker endpoints and now identify
+`suite:contract-http-adapter-proof` with its exact registered path. Generated
+evidence reports 138 Bash checkers / 143 nodes / 698 edges / 143 components.
+No source, fixture, engine, schema, wrapper, bridge, false dependency,
+compatibility representation, or fallback changed. M6-U2 is next and the
+complete checkpoint remains deferred to M6-U-W1.
