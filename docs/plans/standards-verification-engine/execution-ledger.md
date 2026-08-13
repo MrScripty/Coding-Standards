@@ -3359,3 +3359,17 @@
 - Focused suite, package/edge authority, both independent gates, all 131
   declarative suites, all 146 mixed-suite entrypoints, graph freshness,
   removal, plan, hash, and diff checks pass. The next slice is a fresh audit.
+
+## 2026-08-12 - Post-M6-T12 Audit And M6-T13 Admission
+
+- Audited the fresh 141-verifier graph and selected row 37 as the last
+  caller-free lifecycle candidate; its nine gates are independently owned.
+- An eight-check dependency-free probe derives decomposition identity and exact
+  Architecture disposition inclusion without copied identifiers or counts. It
+  preserves historical train state while the execution-train gate derives
+  current owner existence. The live checker and all nine gates pass.
+- Admitted M6-T13 at train order 100 with eighteen exact incident-edge rows and
+  no historical transfer, engine change, wrapper, Bash callback, inferred
+  filter, false dependency, compatibility path, duplicate authority, or
+  fallback. Regeneration records 141 Bash verifiers, 146 nodes, 720 edges, and
+  146 components without changing executable topology.

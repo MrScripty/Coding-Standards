@@ -11924,3 +11924,19 @@ independent gates and no historical evidence changes. The graph now has 141
 Bash verifiers, 146 nodes, 711 edges, and 146 components. All seven gates, all
 136 declarative suites, and all 141 mixed-suite entrypoints pass. A fresh audit
 is next.
+
+## 2026-08-12 M6-T13 Row 37 Admission
+
+**Outcome:** admitted at train order 100.
+
+The fresh 141-verifier graph leaves row 37 as the last caller-free lifecycle
+candidate. Its dependency-free eight-check probe derives the exact
+decomposition identities and proves their inclusion in source-wide
+Architecture dispositions without copied identifiers or cardinalities. The
+immutable train retains historical owner state while current owner existence
+is independently derived by the execution-train gate. The live checker and all
+nine independent gates pass. Eighteen exact incident-edge rows are admitted
+with no historical transfer, engine change, wrapper, Bash callback, inferred
+filter, false dependency, compatibility path, duplicate authority, or fallback.
+The graph records 141 Bash verifiers, 146 nodes, 720 edges, and 146 components
+without changing executable topology.

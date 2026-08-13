@@ -2,10 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: post-M6-T12 graph and ownership audit
+**Current phase:** Milestone 6: M6-T13 row 37 admission
 
-**Next slice:** inspect the fresh post-M6-T12 graph and remaining ownership and
-evidence shapes before admitting another bounded package.
+**Next slice:** implement and verify the admitted M6-T13 row 37 package.
 
 **Acceptance status:** `pending`
 
@@ -6483,6 +6482,42 @@ or legacy execution remains. The focused suite, package and edge authority, all
 seven independent gates, all 136 declarative suites, and the complete mixed
 suite of 141 checkers pass. Graph freshness, removal, both plan, and diff checks
 also pass. A fresh graph and ownership audit is next.
+
+##### M6-T13 Row 37 Admission
+
+**Status:** Admitted at train order 100.
+
+The fresh post-M6-T12 graph contains 141 Bash verifiers, 146 nodes, 711 edges,
+and 146 components. Row 37 is the last caller-free lifecycle candidate. Its
+nine incident gates are independently owned, and migration requires neither an
+engine change nor historical evidence transfer.
+
+A disposable dependency-free suite passes eight native checks. It validates
+the four exact decomposition-child semantics, derives identity lineage from
+the existing decomposition table, validates owner domains, and proves those
+records are included in the source-wide Architecture dispositions. It also
+validates report text, immutable train row 37, exact P30 membership consisting
+of rows 36 and 37, and the accepted plan claims. The immutable train correctly
+retains row 37's historical `missing` owner state; current owner existence is
+derived independently by the execution-train gate from row 36's sole
+`missing-to-exists` transition. The probe does not reinterpret or overwrite
+either fact. The live checker and all nine independent gates pass.
+
+M6-T13 has eighteen exact incident-edge rows for Architecture composition-root,
+directory-template, durable-workflow, owner-contract, pattern-reference,
+Frontend owner-contract, Frontend view-model, Resilience owner-contract, and
+execution-train gates. Admission regeneration records 141 Bash verifiers, 146
+nodes, 720 edges, and 146 components; executable topology is unchanged.
+
+The acceptance write set is frozen in the package manifest. Implementation
+must register and pass the permanent suite before deleting Bash, accept only
+M6-T13 and its edge rows, regenerate the graph, and preserve decomposition,
+owner, disposition, report, train, P30 package, gate, and plan evidence. Copied
+identities or counts, historical-state reinterpretation, inferred filters,
+wrappers, Bash callbacks, false dependencies, compatibility paths, duplicate
+authority, and fallback are prohibited. Changed incidence, unrepresentable
+semantics, protected evidence mutation, or an edit outside the write set is a
+re-plan trigger.
 
 ##### M6-Q0 Concurrent Preparation And Serial Integration Freeze
 

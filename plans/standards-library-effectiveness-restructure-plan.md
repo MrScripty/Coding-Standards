@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** perform a fresh post-M6-T12 graph and ownership audit before
-admitting another bounded verification package.
+**Next slice:** implement and verify admitted package M6-T13 for row 37 without
+legacy execution or fallback.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3220,6 +3220,17 @@ all structural/routing fixtures pass.
          complete mixed suite of 141 checkers pass with no inferred filter,
          wrapper, Bash callback, false dependency, compatibility path, or
          fallback. Audit fresh graph and ownership state.
+       - `7.4c3ve94` (`Admitted`): the fresh post-M6-T12 audit selects row 37
+         as the last caller-free lifecycle candidate. An eight-check
+         dependency-free probe derives the four decomposition identities and
+         proves their inclusion in source-wide Architecture dispositions
+         without copied identifiers or counts. Historical train state remains
+         immutable while current owner existence is derived independently by
+         execution-train evidence. The live checker and all nine gates pass.
+         Admit M6-T13 at train order 100 with eighteen exact incident-edge
+         records and no historical transfer, engine change, wrapper, Bash
+         callback, inferred filter, false dependency, compatibility path,
+         duplicate authority, or fallback.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

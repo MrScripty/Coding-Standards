@@ -2788,3 +2788,21 @@ historical transfer, or duplicate authority occurs. The graph now contains 141
 Bash verifiers, 146 nodes, 711 edges, and 146 components. All protected evidence
 is unchanged. The focused suite, package and edge authority, all seven gates,
 all 136 declarative suites, and the complete mixed suite of 141 checkers pass.
+
+### Post-M6-T12 Audit And M6-T13 Admission
+
+The fresh graph contains 141 Bash verifiers, 146 nodes, 711 edges, and 146
+components. Row 37 is the last caller-free lifecycle candidate. Its
+dependency-free eight-check probe derives four decomposition identities and
+their exact inclusion in source-wide Architecture dispositions without copied
+identifiers or cardinalities. Report, immutable train, exact P30 membership,
+and accepted-plan evidence also pass. Historical train owner state remains
+immutable; the execution-train gate derives current owner existence from the
+already accepted row-36 transition. The live checker and all nine independent
+gates pass.
+
+M6-T13 is admitted at train order 100 with eighteen exact incident-edge
+records, no historical transfer, and no engine, wrapper, Bash callback,
+inferred filter, false dependency, compatibility, duplicate-authority, or
+fallback change. Regeneration records 141 Bash verifiers, 146 nodes, 720 edges,
+and 146 components; executable topology is unchanged.
