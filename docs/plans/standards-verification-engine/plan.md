@@ -2,16 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-V1 source-package proposal admission
+**Current phase:** Milestone 6: VE064 package-authority recovery
 
-**Next slice:** admit M6-V1 source-package preparation as an unregistered
-proposal with exact package and incident-edge authority.
+**Next slice:** remove the copied package-row projection while preserving
+structural package validation and focused mutation evidence.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE062-P1 normalized lifecycle mutation parity. The
-three-suite positive chain and all three typed negative mutations pass without
-canonical evidence or checker changes.
+**Latest accepted slice:** VE064 package-authority recovery replan. The package
+manifest remains the sole semantic and file-level authority; its validator may
+derive structure but may not mirror every package row.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -824,6 +824,59 @@ subject, or fallback is permitted. A need for cross-field formatting beyond
 normalized schema, many-valued joins beyond nonempty key coverage, text
 normalization, registry writes, or semantic source mutation is a replan
 trigger.
+
+##### VE064 Package-Authority Projection Recovery
+
+M6-V1 pre-implementation inspection found that adding its required admitted
+package row cannot satisfy the live `checker-migration-packages` suite without
+also editing that suite's 113-row literal projection. The package manifest is
+already the accepted sole owner of package identity, owner, exact write set,
+prerequisites, verification contract, and lifecycle state. The projection
+copies every field from that same manifest and supplies no independent
+producer, consumer, representation, evolution, or acceptance fact. Requiring
+both copies would preserve the drift mechanism that VE052 and VE053 removed
+from active plan prose.
+
+Four recovery options were reviewed:
+
+1. **Selected:** keep `checker-migration-packages.tsv` as sole package
+   authority and remove only the suite's literal full-row projection. Retain
+   strict header, nonempty-field, risk/state-domain, and unique train-order,
+   package-ID, and subject assertions. Planning continues to authorize package
+   semantics; `edge_dispositions` continues to prove exact current incident
+   edges and typed replacements.
+2. Expand M6-V1 to append the same row to the manifest and projection. This is
+   a small immediate edit but preserves redundant authority and recurring
+   synchronization churn.
+3. Defer package and edge admission until M6-V-W1. This would remove the
+   machine-readable proposal boundary that the accepted lifecycle requires.
+4. Add a proposal manifest and promotion protocol. This creates another
+   authority and lifecycle without demonstrated independent need.
+
+VE064 is one shared-contract recovery slice before M6-V1. Its exact write set
+is `evaluation/standards-effectiveness/suites/checker-migration-packages.toml`,
+focused engine tests for the real package suite, and these six serial planning
+authorities. The package TSV, edge manifest/suite, registry, engine production
+code, generated artifacts, README, Bash checkers, lifecycle evidence,
+standards, lockfiles, build output, and workflows remain read-only.
+
+Acceptance requires the focused real-suite tests to prove the canonical table
+passes and mutations of the header, required value, risk/state domain, train
+order, package ID, and subject fail with typed diagnostics. It also requires
+all engine tests, the live package and edge suites, all declarative suites,
+both plan validators, and diff integrity. No generic engine capability is
+authorized because existing `table` assertions express every retained
+invariant. A discovered semantic use of the literal projection, inability to
+test the canonical suite without copying its rows, required engine/schema
+change, or edit outside this write set is a replan trigger.
+
+After VE064 acceptance, M6-V1 resumes under its existing no-registration,
+no-deletion boundary. Its admitted edge rows describe the two current inbound
+Bash edges as `independent-gate` evidence. Only M6-V-W1 may replace those rows
+with the registered `final-source-closure -> source-package-preparation`
+dependency. This transition records current and intended authority separately;
+it does not pretend an unregistered suite dependency already exists and adds no
+fallback or dual authority.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

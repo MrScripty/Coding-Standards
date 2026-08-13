@@ -3251,3 +3251,19 @@ aggregate-gate dependency, compatibility representation, skipped subject, or
 fallback was required. M6-V1 may now admit only the source-package proposal and
 its exact lifecycle authority; live registration and deletion remain atomic-
 cutover work.
+
+### VE064 Package Projection Authority Finding
+
+M6-V1 inspection found that `checker-migration-packages.toml` repeats every
+field of all 113 package rows as an exact expected projection. That projection
+is not independent evidence: its sole source is the package manifest it checks.
+It makes every admission edit two authorities and currently places M6-V1's
+required manifest change outside the frozen write set.
+
+The selected recovery keeps the manifest as sole package authority and retains
+the suite's strict header, nonempty-field, risk/state-domain, and uniqueness
+assertions. Focused tests will run the real registered suite against canonical
+data and mutations for each retained invariant. Exact current executable-edge
+coverage remains independently checked by `edge_dispositions`. Literal row
+mirroring, a proposal manifest, deferred package admission, and weaker
+structural validation are rejected.

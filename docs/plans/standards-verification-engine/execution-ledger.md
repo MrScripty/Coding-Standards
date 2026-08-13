@@ -3845,3 +3845,21 @@
 - Accepted VE062-P1 and retired its disposable proof. M6-V1 source-package
   proposal admission is next; live registration and checker deletion remain
   reserved for the three-owner atomic cutover.
+
+## 2026-08-13 - VE064 Package-Authority Projection Replan
+
+- Confirmed the repository was clean at `8dabcb0` before M6-V1 implementation.
+- The live package suite duplicates every field of all 113 canonical manifest
+  rows in one literal projection. Adding M6-V1's admitted row therefore
+  requires an out-of-scope mirror edit or leaves registered verification
+  failing.
+- Selected a shared-contract recovery that removes only the copied projection
+  while retaining strict table schema, required values, risk/state domains,
+  and unique train-order/package-ID/subject checks. Planning authorizes package
+  meaning; the manifest records it; edge dispositions verify current topology.
+- VE064 next owns the package suite, focused real-suite mutation tests, and six
+  serial planning authorities. Package data, registry, engine production code,
+  generated evidence, Bash checkers, standards, and workflows remain read-only.
+- M6-V1 resumes only after VE064 acceptance. No fallback, second proposal
+  manifest, copied row list, deferred package admission, or dual authority is
+  permitted.

@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** admit verification-engine M6-V1 source-package preparation as an
-unregistered proposal with exact package and incident-edge authority.
+**Next slice:** complete verification-engine VE064 package-authority recovery,
+then resume M6-V1 source-package proposal admission.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3641,6 +3641,15 @@ unrelated to this restructure.
 Complete this plan only when all milestone gates and the definition of done are
 accepted. The final summary must list accepted outcomes, deviations, remaining
 follow-ups, verification evidence, and the migration/version result.
+
+### VE064 Package-Authority Recovery Delegation
+
+M6-V1 exposed a redundant full-row projection in the registered migration-
+package suite. The package manifest remains the sole package and exact write-
+set authority. VE064 removes the copied projection while preserving strict
+structural validation and focused mutation evidence; it does not change any
+package row, registry entry, executable edge, checker, generated artifact, or
+standard. M6-V1 resumes after this shared-contract recovery is accepted.
 
 ## Final Acceptance
 

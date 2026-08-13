@@ -12426,3 +12426,20 @@ All disposable mutations were restored byte-for-byte and the positive chain
 passed again. No canonical evidence, suite, registry, package/edge manifest,
 generated artifact, Bash checker, standard, or workflow changed. Admission may
 now proceed owner by owner without registration or deletion before M6-V-W1.
+
+## 2026-08-13 VE064 Package-Authority Projection Replan
+
+**Outcome:** accepted recovery; structural validator refactor is next.
+
+M6-V1 cannot add its admitted package row while the registered package suite
+contains a second literal copy of all 113 manifest rows. The package TSV is
+already the sole accepted authority for identity, owner, write set,
+prerequisites, verification, and lifecycle state; the projection has no
+independent semantic or representation purpose.
+
+VE064 removes only that copied projection and preserves strict schema,
+required-value, domain, and uniqueness validation with focused real-suite
+mutation tests. Package and edge data, registry, engine production code,
+generated evidence, Bash checkers, and semantic sources remain unchanged.
+M6-V1 resumes after acceptance; no fallback or second proposal authority is
+introduced.
