@@ -2890,3 +2890,17 @@ suites, generated evidence at 139 Bash verifiers / 144 nodes / 699 edges / 144
 components, both plan checks, and the Python complete checkpoint pass. No Bash
 checker, semantic package, registry, fixture, standards source, or generated
 artifact changed. M6-C2 remains separately unadmitted.
+
+### M6-C2 Derived Keyed-Relation Admission
+
+The Contracts adapter checker duplicates four IDs already owned by canonical
+row-33 decomposition. The required replacement must derive those keys and bind
+their broad-table records to owner-local values. Membership alone is too weak;
+ordinary relation would copy the ID predicate.
+
+M6-C2 admits `keyed_relation` with one unique derived-key projection and two
+independent keyed record sources. Exactly one expected and observed row must
+exist for every key, and declared nonempty value tuples must match. Extra rows
+outside the key set are irrelevant. No key list, count, mode, arbitrary join,
+query, callback, command, package-specific logic, Bash, compatibility, or
+fallback is authorized. Candidate packages remain unadmitted.

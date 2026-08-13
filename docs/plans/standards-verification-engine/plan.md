@@ -2,16 +2,20 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-C1 bounded Markdown section text accepted
+**Current phase:** Milestone 6: M6-C2 derived keyed relation admitted
 
-**Next slice:** preflight and separately admit M6-C2 derived keyed table
-membership without changing any semantic candidate package.
+**Next slice:** implement and verify admitted M6-C2 `keyed_relation`, then stop
+before M6-C3 admission and without changing any semantic candidate package.
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-C1 bounded Markdown section text. All 34 focused
 file-contract tests, all 222 engine tests, all 137 declarative suites, and the
 Python complete checkpoint over 139 retained Bash verifiers pass.
+
+**Latest admitted slice:** M6-C2 derived keyed relation. It derives unique keys
+from one projected table source and compares values from exactly one keyed row
+on each of two independently projected table sources.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -150,7 +154,8 @@ delegation, migration sequence, and acceptance model before source changes.
 
 ##### VE059 M6-U0 Capability-First Semantic-Wave Recovery
 
-**Capability state:** `M6-C1 accepted`; M6-C2 through M6-C4 remain unadmitted.
+**Capability state:** `M6-C1 accepted`; M6-C2 admitted; M6-C3 and M6-C4 remain
+unadmitted.
 
 Read-only preflight of the twelve M6-U0 candidates found six owner lanes but
 four generic evidence relationships that the current engine cannot express
@@ -243,6 +248,61 @@ Python complete checkpoint, exact write-set review, and diff integrity pass.
 No semantic package, registry, fixture, checker, standards source, generated
 artifact, lockfile, build output, workflow, compatibility path, or fallback
 changed. No deviation or newly discovered issue remains.
+
+**M6-C2 preflight:** the Contracts adapter proof currently recreates four IDs
+as a Bash brace range and an `awk` lexical range. Canonical row-33 decomposition
+already owns those IDs as one comma-separated field, while owner validation and
+source-wide consolidation tables carry keyed owner/disposition evidence. Plain
+`inclusion` can prove membership but cannot bind selected rows' values to the
+owner evidence. Plain `relation` would require copying the four-ID predicate.
+
+The admitted `keyed_relation` check therefore has exactly three strict projected
+table roles: `keys`, `expected`, and `observed`. `keys` must project one unique
+key column and may use the existing explicit filter and split contract.
+`expected` and `observed` each declare a `key` column and nonempty unique
+`values` columns over one exact contained TSV, exact header, and optional
+explicit predicate. For every derived key, each record source must resolve
+exactly one row and the two value tuples must be equal. Unrelated rows are
+ignored. Missing, duplicate, and mismatched keyed records return distinct typed
+assertion diagnostics; malformed schema, headers, rows, UTF-8, containment, and
+unavailable input retain existing typed outcomes.
+
+No ordered/set mode is admitted because one row per key makes positional or set
+interpretation redundant. No key list, range, expected count, cardinality,
+cross-role alias, implicit column, inferred filter, arbitrary join, query
+language, callback, command, package-specific branch, Bash execution,
+compatibility representation, or fallback is allowed.
+
+**M6-C2 allowed implementation write set:**
+
+- `tools/standards_verifier/standards_verifier/checks/keyed_relation.py`;
+- `tools/standards_verifier/standards_verifier/checks/table.py` only if a strict
+  parser helper can be reused without changing existing public contracts;
+- `tools/standards_verifier/standards_verifier/checks/__init__.py`;
+- `tools/standards_verifier/tests/test_engine.py`;
+- `tools/standards_verifier/README.md`; and
+- this plan, its issues, both execution ledgers, the checker-inventory report,
+  and the parent plan.
+
+**M6-C2 focused evidence:** split/filter key derivation; unrelated broad-table
+rows; reordered broad-table rows; exact multi-column value equality; missing
+expected and observed keys; duplicate derived keys; duplicate expected and
+observed records; value mismatch; key/value column collision; unknown columns,
+fields, and role aliases; malformed tables; invalid UTF-8; unavailable input;
+path escape; and existing `relation`/`inclusion` parity.
+
+**M6-C2 verification:** focused keyed-relation tests, all engine tests, Python
+byte compilation, all registered declarative suites, generated-evidence
+freshness, both plan checks, the Python complete checkpoint, exact write-set
+review, and diff integrity. No candidate suite, registry row, package row, edge
+disposition, checker, fixture, standards source, generated artifact, lockfile,
+build output, or workflow file is authorized.
+
+**M6-C2 re-plan triggers:** stop if a real candidate needs composite keys,
+many-to-one or one-to-many matching, unequal value widths, record synthesis,
+ordered duplicate semantics, an implicit filter, or package-specific behavior;
+or if sharing a parser helper changes accepted table, relation, or inclusion
+behavior.
 
 **Tasks:**
 

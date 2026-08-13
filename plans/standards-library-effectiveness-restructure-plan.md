@@ -13,9 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** separately preflight and admit M6-C2 derived keyed table
-membership. M6-C3 and M6-C4 remain gated, and all twelve semantic candidates
-remain unadmitted until the capability sequence is accepted.
+**Next slice:** implement admitted M6-C2 `keyed_relation`, then stop before
+M6-C3 admission. All twelve semantic candidates remain unadmitted until the
+capability sequence is accepted.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3287,6 +3287,15 @@ all structural/routing fixtures pass.
          registry, fixture, checker, standards source, generated artifact,
          regex, count, command, compatibility, or fallback changed. Admit M6-C2
          separately.
+       - `7.4c3ve100` (`M6-C2 admitted`): direct Contracts preflight proves the
+         Bash checker duplicates four IDs already owned by row-33 decomposition.
+         Admit generic `keyed_relation` with one unique derived-key projection
+         and exactly one expected/observed value tuple per key. Extra broad-
+         table rows are ignored; missing, duplicate, and mismatched records are
+         typed. No copied key list or range, count, mode, arbitrary join, query,
+         implicit filter, callback, command, package branch, Bash execution,
+         compatibility, or fallback is authorized. Semantic packages and
+         M6-C3/M6-C4 remain unadmitted.
        - `7.4c3ve86` (`Accepted`): M6-T10 registers the dependency-free,
          count-free row-47 suite, passes eleven checks, deletes its Bash
          checker, and accepts eight independent-gate edge rows without

@@ -12031,3 +12031,21 @@ Python complete checkpoint, exact write-set review, and diff integrity pass.
 No candidate package, registry, fixture, checker, source, generated artifact,
 count, regex, command, callback, compatibility path, or fallback changed. No
 deviation or new issue remains.
+
+## 2026-08-12 M6-C2 Derived Keyed-Relation Admission
+
+**Outcome:** admitted; semantic candidates and M6-C3/M6-C4 remain unadmitted.
+
+The live Contracts proof duplicates four canonical row-33 IDs in Bash. Native
+inclusion proves only membership, while native relation would require copying
+the four-ID filter. M6-C2 adds one bounded three-role `keyed_relation`: derive
+one unique key column from `keys`, resolve exactly one row per key from both
+`expected` and `observed`, and compare explicit nonempty value tuples. Extra
+rows are ignored; missing, duplicate, and mismatched records are separately
+typed.
+
+No mode, key list, range, count, composite key, many-valued join, implicit
+column or filter, query language, callback, command, package-specific branch,
+Bash execution, compatibility representation, or fallback is admitted. The
+implementation is engine/test/documentation only and requires the shared-
+contract complete checkpoint before M6-C3 may be admitted.

@@ -3455,3 +3455,19 @@
   review close acceptance.
 - No semantic candidate package or migration authority changed, no deviation
   was required, and no new issue remains. M6-C2 admission is next.
+
+## 2026-08-12 - M6-C2 Derived Keyed-Relation Admission
+
+- Confirmed the live Contracts checker duplicates four canonical row-33 IDs as
+  both a brace range and an `awk` range. Existing inclusion cannot compare
+  keyed values; existing relation would require a copied predicate.
+- Admit one generic `keyed_relation` with `keys`, `expected`, and `observed`
+  table roles. Keys are derived once through the existing projection/filter/
+  split contract; each side must resolve exactly one row per key and expose an
+  equal nonempty value tuple. Unrelated rows are ignored.
+- Reject ordered/set modes, copied keys, ranges, counts, composite keys,
+  many-valued joins, aliases, implicit columns or filters, query language,
+  callbacks, commands, package branches, Bash, compatibility, and fallback.
+- No semantic suite, registry, package, edge, checker, fixture, standards
+  source, generated artifact, lockfile, build output, or workflow is admitted.
+  Shared-contract verification is required before M6-C3 admission.
