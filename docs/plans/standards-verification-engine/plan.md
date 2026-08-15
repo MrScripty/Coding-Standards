@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-V1 source-package proposal admission
+**Current phase:** Milestone 6: VE066 M6-V1 generated-evidence scope recovery
 
-**Next slice:** admit the M6-V1 source-package proposal without registration,
-checker deletion, source mutation, or compatibility authority.
+**Next slice:** implement M6-V1 with generator-owned graph artifacts in its
+exact write set and review only proposal-derived contract-reference changes.
 
 **Acceptance status:** `pending`
 
@@ -938,6 +938,44 @@ bytecode compilation, both affected suites, all 149 registered declarative
 suites, both plan validators, generated freshness, and diff integrity. VE064
 and VE065 are resolved. M6-V1 resumes under its existing proposal-only,
 no-registration, and no-deletion boundary.
+
+##### VE066 M6-V1 Generated-Evidence Scope Recovery
+
+M6-V1 preflight confirmed that the source-package checker has no outbound
+executable edge and has exactly two inbound executable incident edges. The
+accepted proposal must append both incident rows to the edge-disposition
+manifest. That manifest is a generated-graph input, so the rows necessarily
+add contract-reference evidence for their two endpoint checkers. The current
+M6-V1 boundary incorrectly holds all generated artifacts read-only while also
+requiring generated freshness.
+
+Four options were reviewed:
+
+1. **Selected:** include the four generator-owned graph artifacts in M6-V1,
+   regenerate after the suite, package, edge, and plan records are complete,
+   and accept only proposal-derived contract-reference projections. The
+   executable edge set must remain byte-identical.
+2. Omit the incident rows or declare the package edge-free. This contradicts
+   the two current inbound edges and fails the exact edge contract.
+3. Defer edge authority until the atomic cutover. This removes reviewed,
+   machine-readable proposal evidence and weakens the accepted admission
+   lifecycle.
+4. Change the generator to ignore proposal manifests or unregistered suites.
+   This weakens shared graph evidence and introduces an unrelated production
+   contract change.
+
+The corrected M6-V1 write set adds only the structure inventory and dependency
+edge, node, and component artifacts to its already frozen proposal suite,
+single admitted package row, two incident-edge rows, proposal proof, and six
+serial planning authorities. Generation must use the canonical Python
+generator; hand edits are prohibited. Any executable/helper/dependency edge
+change, unexpected contract-reference endpoint, node/component membership
+change, generator/schema edit, registry edit, checker deletion, canonical
+evidence mutation, or file outside this boundary is a new replan trigger.
+
+M6-V1 remains proposal-only. The new suite is not registered, the Bash checker
+remains current authority, normalized lifecycle evidence is exercised only in
+disposable verification, and no compatibility path or fallback is introduced.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

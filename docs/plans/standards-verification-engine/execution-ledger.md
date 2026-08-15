@@ -3896,3 +3896,18 @@
   both plan validators, and diff integrity.
 - VE064 and VE065 are resolved. M6-V1 proposal admission is next under its
   existing no-registration and no-deletion boundary.
+
+## 2026-08-14 - VE066 M6-V1 Generated-Evidence Scope Replan
+
+- Confirmed a clean tree at `e4ddc16` before M6-V1 implementation.
+- Current graph evidence shows no outbound executable edge and exactly two
+  inbound executable incident edges for the proposal checker.
+- The accepted edge contract requires both incident rows. Because the edge
+  manifest is graph input, adding them changes derived contract-reference
+  projections and invalidates M6-V1's generated-read-only boundary.
+- Selected an expanded atomic M6-V1 write set containing the four generated
+  graph artifacts. Exact review must prove executable topology is unchanged and
+  every generated change derives from proposal contracts or plan references.
+- No canonical implementation, package, edge, suite, registry, checker,
+  evidence, generated, semantic source, or workflow file changed in this
+  replan slice. M6-V1 implementation resumes after this record is accepted.

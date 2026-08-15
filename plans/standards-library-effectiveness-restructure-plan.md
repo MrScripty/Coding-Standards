@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** complete verification-engine VE064 package-authority recovery
-with exact derived graph regeneration, then resume M6-V1 proposal admission.
+**Next slice:** implement verification-engine M6-V1 proposal admission under
+VE066's corrected generated-evidence write set.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3669,6 +3669,15 @@ The four generated graph artifacts are fresh, and exact review found only two
 authorized duplicate contract-reference removals plus their projections. No
 package data, executable topology, registry, checker, standard, compatibility
 route, or fallback changed. M6-V1 proposal admission may resume.
+
+### VE066 M6-V1 Generated-Evidence Scope Delegation
+
+M6-V1 must record two current inbound incident edges, and the edge manifest is
+a graph input. The child plan therefore expands M6-V1 to include the four
+generator-owned graph artifacts and exact derived-reference review. Executable
+topology, component membership, registry state, checker authority, canonical
+lifecycle evidence, standards, compatibility behavior, and fallback remain
+read-only. Any unexpected generated effect triggers another replan.
 
 ## Final Acceptance
 

@@ -3297,3 +3297,16 @@ duplicate contract-reference removals; the remaining generated changes are
 their projections and documentation-inbound evidence. All 270 engine tests and
 149 registered suites pass. M6-V1 can now add one reviewed package row without
 editing a second package-data authority.
+
+### VE066 M6-V1 Generated Scope Finding
+
+The M6-V1 subject has exactly two current inbound executable incident edges and
+no outbound executable edge. Proposal admission must record both incident rows;
+absence of an outbound row is proved by exact incident coverage rather than a
+synthetic absence record.
+
+The edge manifest is graph input. Its two new rows create derived contract-
+reference evidence even though they do not change executable topology. M6-V1
+must therefore own regeneration of the structure, edge, node, and component
+artifacts. Exact acceptance permits only proposal-derived contract projections;
+any executable edge or component-membership change requires another replan.

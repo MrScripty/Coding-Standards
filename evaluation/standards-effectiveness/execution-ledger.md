@@ -12475,3 +12475,19 @@ their projections. All 270 engine tests, both affected suites, all 149
 registered suites, redirected bytecode compilation, plan validation, and diff
 integrity pass. No package row, executable topology, registry, checker,
 semantic source, fallback, or compatibility authority changed.
+
+## 2026-08-14 VE066 M6-V1 Generated-Evidence Scope Recovery
+
+**Outcome:** recovery selected; M6-V1 implementation is next.
+
+Read-only preflight confirmed two inbound executable incident edges and no
+outbound executable edge for the source-package proposal subject. Both inbound
+rows must enter exact edge-disposition authority. Since that manifest is a
+graph input, the original generated-read-only write set cannot also satisfy
+freshness.
+
+M6-V1 now owns the four generator-produced graph artifacts. Acceptance permits
+only contract-reference and documentation projections caused by the proposal;
+executable topology, component membership, package meaning, registry state,
+current checker authority, canonical lifecycle evidence, and semantic sources
+remain unchanged. No implementation file changed during this replan.
