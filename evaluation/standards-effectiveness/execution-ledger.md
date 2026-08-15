@@ -12511,3 +12511,21 @@ incident edges and exact coverage proves no outbound edge. Regeneration reaches
 contract references and their projections. Registry, checker, canonical
 lifecycle data, executable topology, component membership, semantic sources,
 compatibility behavior, and fallback remain unchanged.
+
+## 2026-08-15 VE067 M6-V2 Exact-Edge Scope Recovery
+
+**Outcome:** recovery selected; M6-V2 proposal admission is next.
+
+Read-only preflight found 12 exact incident executable records for final-source
+closure. Disposable package and edge authority passes when Router, source-
+package, and retained aggregate endpoints use checker-backed independent-gate
+evidence and the shared plan helper uses external-owned-artifact evidence.
+`native-engine` remains unavailable until the proposal suite is registered at
+M6-V-W1, so no future assertion or dependency is claimed early.
+
+Disposable regeneration reaches 127 Bash verifiers, 132 nodes, 691 edges, and
+132 components. Exactly five contract references are added; executable,
+helper, and verifier-dependency topology plus component membership are
+unchanged. M6-V2 now owns the four generated artifacts and exact derived-diff
+review. Registry, current checkers, canonical lifecycle evidence, helper,
+aggregate validators, standards, fixtures, and workflows remain read-only.

@@ -3929,3 +3929,20 @@
 - The suite remains unregistered, the checker and canonical lifecycle table
   remain current, and no dependency, compatibility path, or fallback exists.
   M6-V2 final-source proposal admission is next.
+
+## 2026-08-15 - VE067 M6-V2 Exact-Edge Scope Recovery
+
+- Confirmed a clean canonical tree at `854947f` before M6-V2 preflight.
+- Final-source closure has exactly 12 current incident executable records: two
+  Router inbound, eight checker-backed outbound, and two plan-helper outbound.
+- The generic edge contract requires `native-engine` to identify an assertion
+  in a registered suite, so an unregistered proposal cannot claim that future
+  evidence. Selected current-state independent-gate and external-artifact rows,
+  with dependency/native transitions reserved for atomic M6-V-W1.
+- Disposable package and edge authority passed for train-order 115 under
+  `migration.parent-plan`. Regeneration reached 127 Bash verifiers, 132 nodes,
+  691 edges, and 132 components with exactly five new contract references and
+  no executable topology or component-membership change.
+- Expanded M6-V2 to include the four generated artifacts and exact diff review.
+  Registry, checker, canonical lifecycle evidence, helper, aggregate validators,
+  standards, fixtures, and workflows remain read-only. M6-V2 admission is next.

@@ -4,14 +4,15 @@
 
 **Current phase:** Milestone 6: M6-V2 final-source proposal admission
 
-**Next slice:** admit the owner-separated M6-V2 final-source proposal without
-registration, checker deletion, canonical evidence mutation, or fallback.
+**Next slice:** admit the owner-separated M6-V2 final-source proposal under the
+VE067 exact 12-edge and generated-evidence boundary, without registration,
+checker deletion, canonical evidence mutation, or fallback.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-V1 source-package proposal admission under the
-VE066 generated-evidence boundary. The suite remains unregistered and current
-Bash authority remains intact until atomic M6-V-W1 cutover.
+**Latest accepted slice:** VE067 M6-V2 exact-edge and generated-evidence scope
+recovery. M6-V1 remains admitted and unregistered; all three Bash authorities
+remain intact until atomic M6-V-W1 cutover.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -1005,6 +1006,64 @@ is present, normalized evidence exists only in disposable proof, and no suite
 dependency is claimed before M6-V-W1. M6-V2 is next. Registration, normalized
 canonical data, checker deletion, and the final-source-to-preparation dependency
 remain one atomic cutover responsibility.
+
+##### VE067 M6-V2 Exact-Edge And Generated-Evidence Scope Recovery
+
+M6-V2 preflight found 12 executable incident records for
+`verify-milestone-7-final-source-closure-plan.sh`: two inbound records from
+Router closure; two outbound records each to source-package preparation,
+consolidation dispositions, execution train, and undisposed-source gaps; and
+the executable-reference/helper-dependency pair to `check-plan-structure.sh`.
+The prior M6-V2 direction did not freeze those exact current dispositions or
+authorize regeneration after adding them to the graph-input manifest.
+
+Four options were reviewed:
+
+1. **Selected:** admit the owner-separated proposal with all 12 current
+   incident records and the four generator-owned graph artifacts. Router,
+   source-package, and the three retained aggregate validators use exact
+   checker-backed `independent-gate` evidence. The shared plan helper uses
+   `external-owned-artifact`, which is the existing typed contract for a
+   retained helper. Regenerate and accept only proposal-derived contract
+   projections.
+2. Split edge admission from suite admission. This creates an unnecessary
+   intermediate authority state and duplicated integration work.
+3. Defer M6-V2. This is safe but leaves the known lifecycle migration blocked.
+4. Combine M6-V2 with M6-V3 or cut over now. This bypasses separate-owner
+   proposal review and risks false dependencies or dual authority.
+
+`native-engine` is intentionally not used during proposal admission: the edge
+contract requires that disposition to name an assertion in a registered suite,
+while M6-V2 must remain unregistered. At M6-V-W1, the Router and source-package
+edge pairs transition atomically to the registered dependency chain and the
+helper pair transitions to exact native assertions in the registered final-
+source suite. Aggregate validators remain independent gates. No proposal row
+may claim a future registry edge or registered assertion early.
+
+M6-V2 is train order 115, owned by `migration.parent-plan`, and remains
+safety-critical. Its exact proposal write set is the package and edge manifests,
+the unregistered `suites/final-source-closure.toml`, the current checker as
+protected lifecycle identity, the four generated graph artifacts, and the six
+serial planning authorities. Registry, final-source manifest/report, corpus,
+owner map, consolidation dispositions, verifier-replan evidence, helper,
+retained aggregate validators, standards, fixtures, templates, lockfiles,
+build output, and workflows remain read-only.
+
+Disposable exact-edge validation passed for one admitted package row and all
+12 records. Canonical regeneration would add exactly five contract references:
+the package manifest to final-source closure, and the edge manifest to the plan
+helper, consolidation dispositions, Router closure, and undisposed-source gaps.
+The resulting graph is 127 Bash verifiers, 132 nodes, 691 edges, and 132
+components. Executable/helper/verifier-dependency topology and component
+membership remain byte-identical.
+
+M6-V2 acceptance requires its six-check normalized proposal and corrected
+`CODING-STANDARDS.md` key-coverage mutation, package/edge authority, exact five-
+reference generated diff, graph freshness, all registered declarative suites,
+both plan validators, protected-input immutability, and diff integrity. Any
+different incident edge, generated executable change, owner conflict, required
+registry or canonical-evidence edit, inability to represent the helper
+transition at M6-V-W1, or file outside this boundary is a new replan trigger.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

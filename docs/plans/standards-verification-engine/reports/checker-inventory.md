@@ -3327,3 +3327,22 @@ proves outbound absence. Generated evidence is fresh at 127 Bash verifiers,
 132 nodes, 686 edges, and 132 components, with only two contract-reference
 additions and their projections. M6-V1 creates no registration, canonical-data
 change, checker deletion, dependency claim, compatibility path, or fallback.
+
+### VE067 M6-V2 Exact-Edge Scope Finding
+
+Final-source closure has 12 current incident executable records: two inbound
+from Router closure; eight outbound to source-package preparation and three
+retained aggregate validators; and two outbound to the shared plan helper.
+Exact package authority therefore cannot admit M6-V2 with a smaller edge set.
+
+The helper pair is current `external-owned-artifact` evidence. It cannot be
+`native-engine` during admission because the replacement assertion is not
+registered until M6-V-W1. Router and source-package are current checker-backed
+independent gates whose rows transition to registered dependencies only at that
+atomic cutover. The aggregate validators remain independent.
+
+Disposable authority validation passes all 12 rows. Regeneration adds five
+contract references and no executable edge: package-to-final-source plus edge-
+manifest references to the plan helper, consolidation dispositions, Router
+closure, and undisposed-source gaps. The projected graph is 127 Bash verifiers,
+132 nodes, 691 edges, and 132 components with unchanged component membership.
