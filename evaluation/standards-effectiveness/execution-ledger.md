@@ -12529,3 +12529,21 @@ helper, and verifier-dependency topology plus component membership are
 unchanged. M6-V2 now owns the four generated artifacts and exact derived-diff
 review. Registry, current checkers, canonical lifecycle evidence, helper,
 aggregate validators, standards, fixtures, and workflows remain read-only.
+
+## 2026-08-15 M6-V2 Final-Source Proposal Admission
+
+**Outcome:** admitted; M6-V3 Router-closure proposal admission is next.
+
+Train-order 115 records an unregistered six-check final-source proposal under
+`migration.parent-plan`. Manifest structure, corpus equality, owner-map
+agreement, disposition coverage, closure policy, and verifier-replan policy are
+derived without copied inventories, totals, or transient plan state.
+
+Positive evidence passes. Removing every disposition for final-manifest source
+`CODING-STANDARDS.md` fails exact `ASSERT.KEY_COVERAGE_MISSING`, and restored
+evidence passes again. Twelve exact incident rows preserve current checker and
+helper authority without claiming the future dependency/native transition.
+Regeneration records 127 Bash verifiers, 132 nodes, 691 edges, and 132
+components with only five new contract references. Registry, checker,
+canonical evidence, executable topology, component membership, compatibility
+behavior, and fallback remain unchanged.

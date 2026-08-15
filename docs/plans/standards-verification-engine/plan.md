@@ -2,17 +2,17 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-V2 final-source proposal admission
+**Current phase:** Milestone 6: M6-V3 Router-closure proposal admission
 
-**Next slice:** admit the owner-separated M6-V2 final-source proposal under the
-VE067 exact 12-edge and generated-evidence boundary, without registration,
-checker deletion, canonical evidence mutation, or fallback.
+**Next slice:** preflight and admit the owner-separated M6-V3 Router-closure
+proposal without registration, checker deletion, canonical evidence mutation,
+or fallback.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE067 M6-V2 exact-edge and generated-evidence scope
-recovery. M6-V1 remains admitted and unregistered; all three Bash authorities
-remain intact until atomic M6-V-W1 cutover.
+**Latest accepted slice:** M6-V2 final-source proposal admission under the
+VE067 exact-edge boundary. M6-V1 and M6-V2 remain unregistered; all three Bash
+authorities remain intact until atomic M6-V-W1 cutover.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -1064,6 +1064,34 @@ both plan validators, protected-input immutability, and diff integrity. Any
 different incident edge, generated executable change, owner conflict, required
 registry or canonical-evidence edit, inability to represent the helper
 transition at M6-V-W1, or file outside this boundary is a new replan trigger.
+
+##### M6-V2 Accepted Final-Source Proposal
+
+M6-V2 is admitted at train order 115 under `migration.parent-plan`. Its
+unregistered six-check suite validates the strict final-source manifest,
+derives exact standard/profile corpus membership, derives canonical owner-map
+agreement, requires one-or-more disposition records for every final source,
+and preserves stable closure-report and verifier-replan policy. It copies no
+source inventory, owner list, disposition total, shape/treatment total, file
+line count, transient parent-plan state, or Bash orchestration.
+
+Disposable positive evidence passed all six checks. Removing every disposition
+record for final-manifest key `CODING-STANDARDS.md` failed exactly
+`ASSERT.KEY_COVERAGE_MISSING`; restoring canonical evidence returned the suite
+to green. The canonical final manifest, report, corpus, owner map, dispositions,
+verifier replan, registry, and checker remain unchanged.
+
+All 12 current incident executable records are admitted. Router, source-package,
+consolidation dispositions, execution train, and undisposed-source gaps use
+typed checker-backed independent-gate evidence. The plan helper uses typed
+external-owned-artifact evidence. No row claims the future registered
+dependency chain or native assertion before M6-V-W1.
+
+The generated graph has 127 Bash verifiers, 132 nodes, 691 edges, and 132
+components. Its only new edges are the five VE067-authorized contract
+references; node, component, and structure changes are their projections.
+Executable/helper/verifier-dependency topology and component membership remain
+unchanged. M6-V3 Router-closure proposal admission is next.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

@@ -3346,3 +3346,20 @@ contract references and no executable edge: package-to-final-source plus edge-
 manifest references to the plan helper, consolidation dispositions, Router
 closure, and undisposed-source gaps. The projected graph is 127 Bash verifiers,
 132 nodes, 691 edges, and 132 components with unchanged component membership.
+
+### Accepted M6-V2 Final-Source Proposal
+
+Train-order 115 now records the final-source checker under
+`migration.parent-plan`. Its unregistered six-check suite derives final-source
+membership from the standard/profile corpus, owner agreement from the owner
+map, and nonempty disposition coverage from canonical records. Strict manifest,
+stable closure policy, and stable verifier-replan policy complete the local
+contract without copied counts or transient lifecycle state.
+
+The positive proposal passes, while removing every `CODING-STANDARDS.md`
+disposition fails exact key coverage. All 12 current incident records pass
+exact package authority with ten checker-backed independent gates and two
+external plan-helper artifacts. The generated graph reaches 691 edges through
+exactly five new contract references; executable topology and component
+membership remain unchanged. No registration, canonical evidence change,
+checker deletion, compatibility behavior, or fallback exists.

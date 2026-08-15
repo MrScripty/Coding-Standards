@@ -3946,3 +3946,22 @@
 - Expanded M6-V2 to include the four generated artifacts and exact diff review.
   Registry, checker, canonical lifecycle evidence, helper, aggregate validators,
   standards, fixtures, and workflows remain read-only. M6-V2 admission is next.
+
+## 2026-08-15 - M6-V2 Final-Source Proposal Admission
+
+- Admitted train-order 115 under `migration.parent-plan` with one unregistered,
+  dependency-free six-check proposal suite.
+- Derived strict manifest structure, corpus equality, owner agreement, and
+  per-source disposition coverage, plus stable report and verifier-replan text.
+  Mutable totals and transient plan state were not copied.
+- Disposable positive evidence passed. Removing all dispositions for
+  `CODING-STANDARDS.md` failed exact `ASSERT.KEY_COVERAGE_MISSING`; restoration
+  returned the suite to six passing checks.
+- Added all 12 current incident-edge rows: ten checker-backed independent-gate
+  records and two external-owned-artifact plan-helper records. No future
+  dependency or native assertion is claimed before registration.
+- Regeneration produced 127 Bash verifiers, 132 nodes, 691 edges, and 132
+  components with only five authorized contract references and their
+  projections. Executable topology and component membership did not change.
+- Registry, checker, canonical evidence, helper, aggregate validators,
+  standards, fixtures, and workflows remain unchanged. M6-V3 is next.
