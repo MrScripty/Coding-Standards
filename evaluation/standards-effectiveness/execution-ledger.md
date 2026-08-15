@@ -12577,3 +12577,21 @@ components, executable topology, and component membership remain unchanged at
 The planning commit now owns the structure inventory but no M6-V3 package,
 edge, suite, registry, checker, Router, lifecycle evidence, standard, fixture,
 or workflow file. M6-V3 implementation remains a separate atomic slice.
+
+## 2026-08-15 M6-V3 Router-Closure Proposal Admission
+
+**Outcome:** admitted; M6-V-W1 atomic cutover preflight is next.
+
+Train-order 116 records an unregistered dependency-free Router proposal under
+`STANDARDS-ROUTER.md`. Six checks preserve strict replacement structure,
+Router links, table-derived replacement and final-source exclusion, Router no-
+fallback policy, and parent-plan state without copied inventories or totals.
+
+Positive evidence passes. Inserting derived final-source identity
+`CODING-STANDARDS.md` into Router fails exact `ASSERT.TABLE_TEXT_PRESENT`, and
+restored evidence passes again. Four exact incident rows preserve current
+final-source and root-Router checker authority without claiming the future
+dependency. Regeneration records 127 Bash verifiers, 132 nodes, 692 edges, and
+132 components with only one new contract reference. Registry, checkers,
+Router, canonical evidence, executable topology, component membership,
+compatibility behavior, and fallback remain unchanged.

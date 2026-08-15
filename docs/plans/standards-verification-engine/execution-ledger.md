@@ -3995,3 +3995,23 @@
 - Package, edge, proposal suite, registry, checker, Router, lifecycle evidence,
   fixtures, standards, and workflows remain unchanged. M6-V3 resumes after the
   corrected planning commit.
+
+## 2026-08-15 - M6-V3 Router-Closure Proposal Admission
+
+- Admitted train-order 116 under `STANDARDS-ROUTER.md` with one unregistered,
+  dependency-free six-check proposal suite.
+- Derived legacy-route and final-source exclusion from canonical tables;
+  retained strict replacement structure, Router links and no-fallback policy,
+  and stable parent-plan state without copied inventories or mutable totals.
+- Disposable positive evidence passed. Inserting derived final-source identity
+  `CODING-STANDARDS.md` into Router failed exact
+  `ASSERT.TABLE_TEXT_PRESENT`; restoration returned all six checks to green.
+- Added all four current outbound incident rows as checker-backed independent
+  gates. No future final-source dependency is claimed before M6-V-W1, and root-
+  Router evidence remains independently owned.
+- Regeneration produced 127 Bash verifiers, 132 nodes, 692 edges, and 132
+  components with only one package-derived contract reference and its
+  projections. Executable topology and component membership did not change.
+- Registry, all three checkers, Router, canonical lifecycle evidence, fixtures,
+  standards, workflows, compatibility behavior, and fallback remain unchanged.
+  M6-V-W1 atomic cutover preflight is next.

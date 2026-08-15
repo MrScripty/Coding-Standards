@@ -2,17 +2,18 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-V3 Router-closure proposal admission
+**Current phase:** Milestone 6: M6-V-W1 atomic closure preflight
 
-**Next slice:** admit the owner-separated M6-V3 Router-closure proposal under
-the VE068 exact four-edge and generated-evidence boundary, without registration,
-checker deletion, canonical evidence mutation, or fallback.
+**Next slice:** preflight the dependency-ordered M6-V-W1 cutover across the
+three admitted owner-separated proposals. Freeze exact registry dependencies,
+normalized lifecycle evidence, edge transitions, retained independent gates,
+deletions, routing changes, and generated effects before implementation.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE069 VE068 planning-evidence scope recovery. M6-V1
-and M6-V2 remain admitted and unregistered; all three Bash authorities remain
-intact until atomic M6-V-W1 cutover.
+**Latest accepted slice:** M6-V3 Router-closure proposal admission. M6-V1,
+M6-V2, and M6-V3 remain admitted and unregistered; all three Bash authorities
+remain intact until atomic M6-V-W1 cutover.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -1165,6 +1166,34 @@ verifiers / 132 nodes / 691 edges / 132 components, all registered suites, both
 plan validators, and diff integrity. Any second structure row or any graph edge,
 node, component-membership, executable-topology, or semantic change is a new
 replan trigger.
+
+##### M6-V3 Router-Closure Proposal Admission
+
+M6-V3 is admitted at train order 116 under canonical owner
+`STANDARDS-ROUTER.md`. Its unregistered, dependency-free six-check suite owns
+strict replacement evidence, Router link validity, table-derived legacy-route
+and final-source exclusion, stable Router no-fallback policy, and stable parent-
+plan state. It copies no replacement/source inventory or mutable count.
+
+Disposable positive evidence passes all six checks. Inserting
+`CODING-STANDARDS.md`, derived from the final-source manifest, into the Router
+fails exact `ASSERT.TABLE_TEXT_PRESENT`; restoring the Router byte-for-byte
+returns the proposal to green. Canonical-route completeness remains with the
+independent root-Router gate rather than being duplicated into this suite.
+
+All four current outbound incident records are admitted as checker-backed
+independent gates. Final-source closure remains independent until its pair
+transitions to `suite-requires` at M6-V-W1; root-Router evidence remains an
+independent aggregate gate. No future dependency or native assertion is
+claimed during proposal admission.
+
+Regeneration records 127 Bash verifiers, 132 nodes, 692 edges, and 132
+components. The only new graph edge is the package-manifest contract reference
+to Router closure; structure, node, and component changes are that reference's
+projections. Executable topology and component membership are byte-identical.
+Registry, all three Bash checkers, Router, canonical lifecycle evidence,
+fixtures, standards, workflows, compatibility behavior, and fallback remain
+unchanged. M6-V-W1 exact cutover preflight is next.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

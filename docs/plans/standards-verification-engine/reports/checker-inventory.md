@@ -3390,3 +3390,23 @@ verifiers, 132 nodes, 691 edges, and 132 components.
 The corrected planning slice owns only that structure projection. M6-V3's one
 package-manifest contract reference remains part of the later implementation
 slice rather than being pulled into planning authority.
+
+### Accepted M6-V3 Router-Closure Proposal
+
+Train-order 116 now records Router closure under `STANDARDS-ROUTER.md`. Its
+unregistered six-check suite validates strict replacement evidence and Router
+links, derives both replacement-route and final-source exclusion from canonical
+tables, and retains stable Router no-fallback and parent-plan policy. It copies
+no route/source inventory or mutable count.
+
+Positive evidence passes, and inserting final-manifest identity
+`CODING-STANDARDS.md` into Router fails exact `ASSERT.TABLE_TEXT_PRESENT`.
+Canonical-route completeness remains with the independent root-Router gate.
+All four current outbound incident records use checker-backed independent-gate
+evidence; only final-source transitions to a registered dependency at M6-V-W1.
+
+The generated graph reaches 692 edges through exactly one package-manifest
+contract reference. Structure, node, and component changes are its projections;
+executable topology and component membership remain unchanged. No registration,
+checker deletion, canonical evidence mutation, compatibility behavior, or
+fallback exists.

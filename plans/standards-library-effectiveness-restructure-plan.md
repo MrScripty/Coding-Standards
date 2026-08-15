@@ -3743,6 +3743,23 @@ unchanged. M6-V3 implementation remains a separate slice; no package, edge,
 suite, registry, checker, Router, lifecycle, standards, fixture, compatibility,
 or fallback authority moves into this correction.
 
+### M6-V3 Router-Closure Proposal Acceptance
+
+The child verification-engine plan admitted train-order 116 under
+`STANDARDS-ROUTER.md`. Its unregistered six-check suite derives replacement-
+route and final-source exclusion from canonical tables while preserving strict
+replacement structure, Router links, stable no-fallback policy, and parent-plan
+state without copied inventories or mutable totals. Exact Router mutation
+evidence fails `ASSERT.TABLE_TEXT_PRESENT` as required.
+
+All four current outbound incident records are classified without claiming the
+future final-source dependency. Root-Router evidence remains an independently
+owned aggregate gate. Regeneration adds only one package-derived contract
+reference and its projections; executable topology and component membership
+remain unchanged. Registry, all three current checkers, Router and lifecycle
+evidence, standards, compatibility behavior, and fallback remain untouched.
+M6-V-W1 atomic cutover preflight is next.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream
