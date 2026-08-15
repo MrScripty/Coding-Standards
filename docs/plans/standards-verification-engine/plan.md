@@ -4,15 +4,15 @@
 
 **Current phase:** Milestone 6: M6-V3 Router-closure proposal admission
 
-**Next slice:** preflight and admit the owner-separated M6-V3 Router-closure
-proposal without registration, checker deletion, canonical evidence mutation,
-or fallback.
+**Next slice:** admit the owner-separated M6-V3 Router-closure proposal under
+the VE068 exact four-edge and generated-evidence boundary, without registration,
+checker deletion, canonical evidence mutation, or fallback.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-V2 final-source proposal admission under the
-VE067 exact-edge boundary. M6-V1 and M6-V2 remain unregistered; all three Bash
-authorities remain intact until atomic M6-V-W1 cutover.
+**Latest accepted slice:** VE069 VE068 planning-evidence scope recovery. M6-V1
+and M6-V2 remain admitted and unregistered; all three Bash authorities remain
+intact until atomic M6-V-W1 cutover.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -1092,6 +1092,79 @@ components. Its only new edges are the five VE067-authorized contract
 references; node, component, and structure changes are their projections.
 Executable/helper/verifier-dependency topology and component membership remain
 unchanged. M6-V3 Router-closure proposal admission is next.
+
+##### VE068 M6-V3 Exact-Edge And Generated-Evidence Scope Recovery
+
+M6-V3 preflight found no inbound executable record and exactly four outbound
+records for `verify-router-legacy-route-closure.sh`: executable-reference and
+verifier-dependency pairs to final-source closure and root-Router evidence. The
+prior M6-V3 direction did not freeze those dispositions, its canonical owner,
+or regeneration after adding its package row.
+
+Four options were reviewed:
+
+1. **Selected:** admit train-order 116 under canonical owner
+   `STANDARDS-ROUTER.md`, record all four current edges as checker-backed
+   `independent-gate` evidence, and include all four generated graph artifacts.
+   Final-source transitions to `suite-requires` only at M6-V-W1; root-Router
+   evidence remains an independent aggregate gate.
+2. Split suite and edge admission. This creates an unnecessary intermediate
+   authority state and duplicated integration work.
+3. Defer M6-V3. This is safe but blocks the already-proven lifecycle closure.
+4. Combine M6-V3 with M6-V-W1. This bypasses separate-owner proposal review and
+   combines admission, registration, dependency transfer, evidence mutation,
+   and deletion without a reviewed boundary.
+
+M6-V3 remains proposal-only. Its exact write set is the package and edge
+manifests, unregistered `suites/router-legacy-route-closure.toml`, current
+checker as protected lifecycle identity, four generated graph artifacts, and
+the six serial planning authorities. Registry, Router, replacement fixture,
+final-source manifest, parent plan evidence, final-source and root-Router
+checkers, standards, fixtures outside the owned replacement input, templates,
+lockfiles, build output, and workflows remain read-only.
+
+Disposable package and exact-edge authority passed. Regeneration adds exactly
+one contract reference from the package manifest to the Router-closure checker,
+producing 127 Bash verifiers, 132 nodes, 692 edges, and 132 components. The
+executable/helper/verifier-dependency edge set and component membership remain
+byte-identical.
+
+Acceptance requires the proven six-check normalized Router proposal, exact
+table-derived exclusion mutation, all four edge rows, exact one-reference
+generated diff, package/edge authority, graph freshness, all registered suites,
+both plan validators, protected-input immutability, and diff integrity. A new
+incident edge, owner conflict, generated executable change, required registry
+or canonical evidence edit, false root-Router dependency, or file outside this
+boundary is a new replan trigger.
+
+##### VE069 VE068 Planning-Evidence Scope Recovery
+
+The six VE068 planning authorities add the child plan as documentation-inbound
+evidence for `verify-router-legacy-route-closure.sh`. Generated freshness
+therefore changes one row in `checker-structure-inventory.tsv` even though the
+planning slice changes no package, edge, suite, registry, checker, or semantic
+authority.
+
+Four options were reviewed:
+
+1. **Selected:** include the generator-owned structure inventory in the VE068
+   planning commit and accept exactly the one Router-closure documentation
+   projection. Keep dependency edges, nodes, and components byte-identical.
+2. Combine planning and M6-V3 implementation. This avoids one generation step
+   but violates the reviewed plan-before-implementation boundary.
+3. Remove the checker identity from planning prose. This hides the exact scope
+   needed for audit and weakens the recovery.
+4. Ignore freshness. This would commit contradictory generated evidence.
+
+VE069 changes only the six serial planning authorities and generated structure
+inventory. The M6-V3 package row, edge rows, proposal suite, registry, three
+dependency graph artifacts, current checkers, Router and lifecycle evidence,
+standards, fixtures, workflows, lockfiles, and outputs remain read-only.
+Acceptance requires one generated row diff, fresh generation at 127 Bash
+verifiers / 132 nodes / 691 edges / 132 components, all registered suites, both
+plan validators, and diff integrity. Any second structure row or any graph edge,
+node, component-membership, executable-topology, or semantic change is a new
+replan trigger.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

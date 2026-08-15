@@ -13,8 +13,9 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** preflight and admit verification-engine M6-V3 Router-closure
-proposal under its owner-separated no-registration and no-deletion boundary.
+**Next slice:** admit verification-engine M6-V3 Router-closure proposal under
+the VE068 owner-separated, exact four-edge, no-registration, and no-deletion
+boundary.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3718,6 +3719,29 @@ authorized contract references and their projections; executable topology and
 component membership remain unchanged. Registry, current checker, canonical
 evidence, helper and aggregate authorities, standards, compatibility behavior,
 and fallback remain untouched. M6-V3 is next.
+
+### VE068 M6-V3 Exact-Edge Scope Delegation
+
+Router closure has four current outbound executable records and no inbound
+caller. M6-V3 is train-order 116 under `STANDARDS-ROUTER.md`; final-source
+closure and root-Router evidence remain checker-backed independent gates during
+admission. Only final-source transitions to a dependency at atomic M6-V-W1.
+
+M6-V3 may regenerate the four graph artifacts. Exact acceptance permits one
+new package-manifest contract reference and its projections, with unchanged
+executable topology and component membership. Registry, current checkers,
+Router and lifecycle evidence, fixtures, standards, compatibility behavior,
+and fallback remain read-only.
+
+### VE069 VE068 Planning-Evidence Scope Delegation
+
+VE068 planning prose adds the child verification plan as documentation-inbound
+evidence for Router closure. The planning commit may therefore regenerate the
+structure inventory and accept exactly that one row projection. Dependency
+edges, nodes, components, executable topology, and component membership remain
+unchanged. M6-V3 implementation remains a separate slice; no package, edge,
+suite, registry, checker, Router, lifecycle, standards, fixture, compatibility,
+or fallback authority moves into this correction.
 
 ## Final Acceptance
 

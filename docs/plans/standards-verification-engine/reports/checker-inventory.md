@@ -3363,3 +3363,30 @@ external plan-helper artifacts. The generated graph reaches 691 edges through
 exactly five new contract references; executable topology and component
 membership remain unchanged. No registration, canonical evidence change,
 checker deletion, compatibility behavior, or fallback exists.
+
+### VE068 M6-V3 Exact-Edge Scope Finding
+
+Router closure is caller-free and has four outbound executable records: the
+reference/dependency pair to final-source closure and the equivalent pair to
+root-Router evidence. Exact package authority requires all four rows.
+
+During proposal admission both targets remain checker-backed independent gates.
+Only the final-source pair transitions to a registered dependency at M6-V-W1;
+root-Router evidence remains separately owned. Disposable authority validation
+passes at train-order 116 under `STANDARDS-ROUTER.md`.
+
+Regeneration adds only the package-manifest contract reference to Router
+closure, yielding 127 Bash verifiers, 132 nodes, 692 edges, and 132 components.
+Executable topology and component membership remain unchanged.
+
+### VE069 VE068 Planning Projection Finding
+
+VE068 planning prose itself is generated-structure input. Regeneration changes
+one Router-closure row by adding this child plan as documentation-inbound
+evidence. No graph edge, node, component, executable topology, or component
+membership changes; canonical planning-state generation remains 127 Bash
+verifiers, 132 nodes, 691 edges, and 132 components.
+
+The corrected planning slice owns only that structure projection. M6-V3's one
+package-manifest contract reference remains part of the later implementation
+slice rather than being pulled into planning authority.

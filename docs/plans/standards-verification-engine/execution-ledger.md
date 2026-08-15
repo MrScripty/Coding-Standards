@@ -3965,3 +3965,33 @@
   projections. Executable topology and component membership did not change.
 - Registry, checker, canonical evidence, helper, aggregate validators,
   standards, fixtures, and workflows remain unchanged. M6-V3 is next.
+
+## 2026-08-15 - VE068 M6-V3 Exact-Edge Scope Recovery
+
+- Confirmed a clean canonical tree at `7827161` before M6-V3 preflight.
+- Router closure has no inbound executable record and exactly four outbound
+  records: two each to final-source closure and root-Router evidence.
+- Selected train-order 116 under `STANDARDS-ROUTER.md`, with all four current
+  records as checker-backed independent gates. Final-source becomes a suite
+  dependency only during atomic M6-V-W1; root-Router remains independent.
+- Disposable package/edge authority passed. Regeneration produced 127 Bash
+  verifiers, 132 nodes, 692 edges, and 132 components with exactly one new
+  package contract reference and unchanged executable topology/component
+  membership.
+- Expanded M6-V3 to include the four generated artifacts and exact diff review.
+  Registry, checkers, Router, fixtures, canonical lifecycle evidence,
+  standards, and workflows remain read-only. M6-V3 admission is next.
+
+## 2026-08-15 - VE069 VE068 Planning-Evidence Scope Recovery
+
+- The VE068 planning draft made generated structure evidence stale by adding
+  one documentation-inbound reference to Router closure.
+- Disposable regeneration changed exactly the Router-closure structure row:
+  documentation inbound increased from zero to one and named this child plan.
+- Selected the structure inventory as the sole generated file in the planning
+  commit. Dependency edges, nodes, components, executable topology, and
+  component membership remain byte-identical at 132 nodes / 691 edges / 132
+  components.
+- Package, edge, proposal suite, registry, checker, Router, lifecycle evidence,
+  fixtures, standards, and workflows remain unchanged. M6-V3 resumes after the
+  corrected planning commit.
