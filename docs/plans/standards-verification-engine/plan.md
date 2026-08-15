@@ -2,16 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE064 package-authority recovery
+**Current phase:** Milestone 6: M6-V1 source-package proposal admission
 
-**Next slice:** remove the copied package-row projection while preserving
-structural package validation and focused mutation evidence.
+**Next slice:** admit the M6-V1 source-package proposal without registration,
+checker deletion, source mutation, or compatibility authority.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE064 package-authority recovery replan. The package
-manifest remains the sole semantic and file-level authority; its validator may
-derive structure but may not mirror every package row.
+**Latest accepted slice:** VE064/VE065 package-authority recovery. The canonical
+package manifest is structurally validated without copied package rows, and its
+derived graph evidence is fresh with no executable-topology change.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -877,6 +877,67 @@ with the registered `final-source-closure -> source-package-preparation`
 dependency. This transition records current and intended authority separately;
 it does not pretend an unregistered suite dependency already exists and adds no
 fallback or dual authority.
+
+##### VE065 Generated-Evidence Scope Recovery
+
+VE064 focused behavior passes, but generated freshness correctly rejects the
+suite edit. The package suite is an input to the repository graph, and the
+committed VE064 planning records also add documentation references to retained
+checkers. The original VE064 write set incorrectly held generated artifacts
+read-only, so implementation stopped before regeneration.
+
+Disposable regeneration separated the effects. The VE064 plan commit changes
+only documentation-inbound fields in the checker structure inventory. Removing
+the copied projection removes exactly two `contract_reference` edges from the
+package suite to `verify-milestone-7-source-package-preparation.sh` and
+`verify-root-readme-consumer-audit.sh`; those identities remain represented by
+their canonical package and lifecycle evidence. Node and component projections
+change only to reflect the two removed duplicate references. No executable,
+helper, verifier-dependency, ownership, or component-membership edge changes.
+
+Four options were reviewed:
+
+1. **Selected:** complete VE064 atomically with regenerated structure, edge,
+   node, and component artifacts plus exact diff review.
+2. Split plan-derived and suite-derived regeneration into separate corrective
+   commits. This adds sequencing and temporary inconsistency without separate
+   semantic ownership.
+3. Rewrite the accepted VE064 planning commit and then integrate the suite.
+   This rewrites history without improving the resulting authority model.
+4. Preserve copied checker paths to avoid graph changes. This retains false
+   duplicate evidence and is prohibited.
+
+VE064's corrected exact write set is the package suite, its focused real-suite
+test module, the four generated graph artifacts, and the six serial planning
+authorities. Generated files must be produced only by
+`generate_inventory.py --write`; hand edits are prohibited. Acceptance adds
+generated freshness and exact confirmation that the edge artifact loses only
+the two mirror-derived `contract_reference` rows, while node/component changes
+are their projections and structure changes are documentation references plus
+those same removals. Any executable-edge change, additional removed contract
+identity, generator/schema change, package-data edit, or file outside this
+write set is a replan trigger.
+
+##### VE064 And VE065 Accepted Package Authority
+
+The canonical package manifest remains the sole package-data authority. Its
+registered suite now validates the exact header, every required field, risk and
+state domains, and uniqueness of train order, package ID, and subject without
+restating any package row. Eight focused tests execute that real suite against
+canonical data and independently mutate each retained invariant.
+
+Generator-owned evidence is fresh at 127 current Bash verifiers, 132 nodes,
+684 edges, and 132 components. Exact review confirms that the edge artifact
+loses only the two duplicate mirror-derived contract references authorized by
+VE065; node, component, and structure changes are their projections and
+documentation-inbound evidence. Executable topology and package data are
+unchanged.
+
+Acceptance passed all eight focused tests, all 270 engine tests, redirected
+bytecode compilation, both affected suites, all 149 registered declarative
+suites, both plan validators, generated freshness, and diff integrity. VE064
+and VE065 are resolved. M6-V1 resumes under its existing proposal-only,
+no-registration, and no-deletion boundary.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

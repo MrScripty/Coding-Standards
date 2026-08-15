@@ -3863,3 +3863,36 @@
 - M6-V1 resumes only after VE064 acceptance. No fallback, second proposal
   manifest, copied row list, deferred package admission, or dual authority is
   permitted.
+
+## 2026-08-14 - VE065 Generated-Evidence Scope Replan
+
+- VE064's eight focused real-suite tests and the live package/edge suites pass.
+- Generated freshness fails because the package suite is graph input and the
+  committed VE064 records add documentation references. No canonical generated
+  file was edited before this scope correction.
+- Disposable regeneration proved exactly two mirror-derived
+  `contract_reference` removals, their node/component projections, and
+  documentation/contract-reference updates in the structure inventory. No
+  executable topology or component membership changes.
+- Selected one atomic VE064 completion with generator-produced changes to the
+  four graph artifacts. Split corrective commits, history rewriting, and
+  retained false references are rejected.
+- Any additional edge removal, executable change, generator/schema edit,
+  package-data mutation, or file outside the corrected write set is a replan
+  trigger.
+
+## 2026-08-14 - VE064 And VE065 Package-Authority Acceptance
+
+- Removed the 113-row literal package projection while retaining exact header,
+  required-field, domain, and uniqueness validation over the canonical TSV.
+- Added eight focused tests that execute the real registered suite and reject
+  header, empty-field, domain, and duplicate-key mutations without copying rows.
+- Regenerated the four graph artifacts from repository inputs. Exact edge review
+  found only the two authorized duplicate contract-reference removals; no
+  executable topology or package data changed.
+- Verification passed: 8 focused tests, all 270 engine tests, redirected
+  bytecode compilation, generated freshness at 127 Bash verifiers / 132 nodes /
+  684 edges / 132 components, 2 affected suites, all 149 registered suites,
+  both plan validators, and diff integrity.
+- VE064 and VE065 are resolved. M6-V1 proposal admission is next under its
+  existing no-registration and no-deletion boundary.

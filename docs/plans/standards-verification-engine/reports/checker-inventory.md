@@ -3267,3 +3267,33 @@ data and mutations for each retained invariant. Exact current executable-edge
 coverage remains independently checked by `edge_dispositions`. Literal row
 mirroring, a proposal manifest, deferred package admission, and weaker
 structural validation are rejected.
+
+### VE065 Derived Graph Scope Correction
+
+The package suite is graph input. Removing its copied rows eliminates exactly
+two duplicate `contract_reference` records: one to source-package preparation
+and one to the root README consumer audit. Both checker identities remain
+represented by canonical package/lifecycle records. Disposable generation also
+shows VE064's plan and ledger references as documentation inbound to the
+source-package and final-source checkers.
+
+VE064 must therefore regenerate the structure, edge, node, and component
+artifacts in the same commit as the suite correction. The accepted diff may
+contain only those documentation projections and the two duplicate-reference
+removals. No executable, helper, verifier-dependency, ownership, component
+membership, generator, schema, or package-data change is authorized.
+
+### VE064 And VE065 Accepted Package Authority
+
+The registered package suite now validates one canonical TSV structurally and
+contains no literal package rows. Eight focused mutation tests prove the exact
+header, required-field, domain, and unique-key contracts against the real suite.
+This removes synchronization churn without weakening planning authorization or
+current executable-edge evidence.
+
+Regenerated graph evidence is fresh at 127 current Bash verifiers, 132 nodes,
+684 edges, and 132 components. The edge diff contains only the two approved
+duplicate contract-reference removals; the remaining generated changes are
+their projections and documentation-inbound evidence. All 270 engine tests and
+149 registered suites pass. M6-V1 can now add one reviewed package row without
+editing a second package-data authority.

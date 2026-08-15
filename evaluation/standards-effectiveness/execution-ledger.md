@@ -12443,3 +12443,35 @@ mutation tests. Package and edge data, registry, engine production code,
 generated evidence, Bash checkers, and semantic sources remain unchanged.
 M6-V1 resumes after acceptance; no fallback or second proposal authority is
 introduced.
+
+## 2026-08-14 VE065 Generated-Evidence Scope Recovery
+
+**Outcome:** accepted; complete VE064 with generator-owned graph updates.
+
+Focused package tests and the package/edge suites pass, but freshness reports
+the structure inventory stale. Disposable generation proves that the VE064
+plan records add documentation-inbound evidence and the removed package mirror
+eliminates exactly two duplicate contract references. Corresponding node and
+component fields derive from those edges; executable topology is unchanged.
+
+VE064 now owns the four generated graph artifacts alongside its suite, focused
+tests, and six plan records. Generation and exact diff review are mandatory.
+No hand edit, false-reference retention, package-data change, generator change,
+history rewrite, compatibility route, or fallback is authorized.
+
+## 2026-08-14 VE064 And VE065 Package-Authority Acceptance
+
+**Outcome:** accepted; M6-V1 proposal admission is next.
+
+The package suite no longer repeats 113 canonical manifest rows. It retains the
+exact header, required values, risk/state domains, and train-order/package-ID/
+subject uniqueness contracts. Eight focused real-suite tests reject each
+structural mutation while canonical data passes.
+
+The four graph artifacts were regenerated from repository inputs. Freshness
+passes at 127 Bash verifiers, 132 nodes, 684 edges, and 132 components; exact
+review found only the two authorized duplicate contract-reference removals and
+their projections. All 270 engine tests, both affected suites, all 149
+registered suites, redirected bytecode compilation, plan validation, and diff
+integrity pass. No package row, executable topology, registry, checker,
+semantic source, fallback, or compatibility authority changed.
