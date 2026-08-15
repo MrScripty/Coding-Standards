@@ -13,8 +13,8 @@ through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
 through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
 incident-edge semantics govern further checker deletion.
 
-**Next slice:** implement verification-engine M6-V1 proposal admission under
-VE066's corrected generated-evidence write set.
+**Next slice:** admit verification-engine M6-V2 final-source proposal under its
+owner-separated no-registration and no-deletion boundary.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3678,6 +3678,16 @@ generator-owned graph artifacts and exact derived-reference review. Executable
 topology, component membership, registry state, checker authority, canonical
 lifecycle evidence, standards, compatibility behavior, and fallback remain
 read-only. Any unexpected generated effect triggers another replan.
+
+### M6-V1 Source-Package Proposal Acceptance
+
+The child verification-engine plan admitted train-order 114 with one
+unregistered normalized suite and exact current incident-edge authority.
+Disposable evidence passes and stale deleted-checker authority fails typed
+unavailable. Generated evidence gains only two contract references and their
+projections; executable topology and component membership remain unchanged.
+The registry, current checker, canonical lifecycle table, standards,
+compatibility behavior, and fallback remain untouched. M6-V2 is next.
 
 ## Final Acceptance
 

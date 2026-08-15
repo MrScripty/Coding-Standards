@@ -12491,3 +12491,23 @@ only contract-reference and documentation projections caused by the proposal;
 executable topology, component membership, package meaning, registry state,
 current checker authority, canonical lifecycle evidence, and semantic sources
 remain unchanged. No implementation file changed during this replan.
+
+## 2026-08-14 M6-V1 Source-Package Proposal Admission
+
+**Outcome:** admitted; M6-V2 final-source proposal admission is next.
+
+Train-order 114 records one safety-critical source-package proposal under the
+existing migration source-closure owner. Its unregistered five-check suite
+uses future normalized source/order/subject evidence, derives membership from
+final closure, resolves typed checker and registered-suite subjects, and keeps
+the existing preparation-policy and parent-plan state contracts. It contains no
+copied package identity, policy constants, or mutable totals.
+
+Disposable normalized evidence passes. Reintroducing row 26's deleted checker
+subject fails exact `INPUT.UNAVAILABLE`, after which positive evidence was
+restored. Two admitted independent-gate rows cover both current inbound
+incident edges and exact coverage proves no outbound edge. Regeneration reaches
+127 Bash verifiers, 132 nodes, 686 edges, and 132 components with only two new
+contract references and their projections. Registry, checker, canonical
+lifecycle data, executable topology, component membership, semantic sources,
+compatibility behavior, and fallback remain unchanged.

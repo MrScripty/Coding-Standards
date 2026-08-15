@@ -3911,3 +3911,21 @@
 - No canonical implementation, package, edge, suite, registry, checker,
   evidence, generated, semantic source, or workflow file changed in this
   replan slice. M6-V1 implementation resumes after this record is accepted.
+
+## 2026-08-14 - M6-V1 Source-Package Proposal Admission
+
+- Admitted train-order 114 under the existing migration source-closure owner.
+- Added an unregistered five-check suite over future normalized evidence:
+  strict table shape, final-source membership, typed repository subjects,
+  preparation-policy text, and parent-plan state.
+- Disposable normalized evidence passed. Restoring row 26 to the deleted
+  checker failed exact `INPUT.UNAVAILABLE`; the positive evidence was restored.
+- Added exactly two current inbound incident-edge rows as independent gates.
+  Exact incident coverage proves no outbound executable edge without a
+  synthetic absence row.
+- Regeneration produced 127 Bash verifiers, 132 nodes, 686 edges, and 132
+  components. Only two contract references and their node/component/structure
+  projections changed; executable topology and component membership did not.
+- The suite remains unregistered, the checker and canonical lifecycle table
+  remain current, and no dependency, compatibility path, or fallback exists.
+  M6-V2 final-source proposal admission is next.

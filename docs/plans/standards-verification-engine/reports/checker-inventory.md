@@ -3310,3 +3310,20 @@ reference evidence even though they do not change executable topology. M6-V1
 must therefore own regeneration of the structure, edge, node, and component
 artifacts. Exact acceptance permits only proposal-derived contract projections;
 any executable edge or component-membership change requires another replan.
+
+### Accepted M6-V1 Source-Package Proposal
+
+Train-order 114 now records the source-package checker under the existing
+migration source-closure owner. The unregistered suite has five normalized
+checks and no dependency. Source/order identity derives from final closure;
+verifier subjects resolve as explicit checker paths or registered suite IDs;
+policy and parent-plan state remain bounded text contracts. No mutable total or
+repeated preparation constant is retained.
+
+The disposable normalized suite passes, and stale row-26 checker restoration
+fails exact unavailable. Two admitted independent-gate rows cover the current
+inbound executable reference and verifier dependency; exact coverage also
+proves outbound absence. Generated evidence is fresh at 127 Bash verifiers,
+132 nodes, 686 edges, and 132 components, with only two contract-reference
+additions and their projections. M6-V1 creates no registration, canonical-data
+change, checker deletion, dependency claim, compatibility path, or fallback.

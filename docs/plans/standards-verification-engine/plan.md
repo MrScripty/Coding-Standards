@@ -2,16 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE066 M6-V1 generated-evidence scope recovery
+**Current phase:** Milestone 6: M6-V2 final-source proposal admission
 
-**Next slice:** implement M6-V1 with generator-owned graph artifacts in its
-exact write set and review only proposal-derived contract-reference changes.
+**Next slice:** admit the owner-separated M6-V2 final-source proposal without
+registration, checker deletion, canonical evidence mutation, or fallback.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE064/VE065 package-authority recovery. The canonical
-package manifest is structurally validated without copied package rows, and its
-derived graph evidence is fresh with no executable-topology change.
+**Latest accepted slice:** M6-V1 source-package proposal admission under the
+VE066 generated-evidence boundary. The suite remains unregistered and current
+Bash authority remains intact until atomic M6-V-W1 cutover.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -976,6 +976,35 @@ evidence mutation, or file outside this boundary is a new replan trigger.
 M6-V1 remains proposal-only. The new suite is not registered, the Bash checker
 remains current authority, normalized lifecycle evidence is exercised only in
 disposable verification, and no compatibility path or fallback is introduced.
+
+##### M6-V1 Accepted Source-Package Proposal
+
+M6-V1 is admitted at train order 114 under
+`verification-engine.migration-source-closure`. Its unregistered five-check
+suite defines the normalized three-column preparation table, derives each
+source/order pair from final closure, resolves every split verifier subject
+against contained checkers or registered suite IDs, and preserves the existing
+preparation-policy and parent-plan state contracts. It stores no package ID,
+wave, checker-class, evidence, integration, row-count, source-count, or verifier-
+count mirror.
+
+Disposable positive evidence passed all five checks after row 26 transferred
+to `suite:rust-no-std-closure`. Restoring the deleted checker subject failed
+exactly `INPUT.UNAVAILABLE`, and the positive evidence was restored. The
+canonical preparation table and registry remain unchanged.
+
+Exact edge authority records the two current inbound incident edges as
+`independent-gate` while proving there is no outbound executable edge. The
+generated graph has 127 current Bash verifiers, 132 nodes, 686 edges, and 132
+components. Its only new edges are the two proposal-derived contract references;
+node, component, and structure changes are their projections. Executable
+topology and component membership are unchanged.
+
+M6-V1 remains admitted rather than live: its suite is unregistered, its checker
+is present, normalized evidence exists only in disposable proof, and no suite
+dependency is claimed before M6-V-W1. M6-V2 is next. Registration, normalized
+canonical data, checker deletion, and the final-source-to-preparation dependency
+remain one atomic cutover responsibility.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the
