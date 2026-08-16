@@ -12637,3 +12637,24 @@ the complete checkpoint over every retained Bash checker pass. The canonical
 implementation is frozen to 19 files with the admitted suites, Router, README,
 canonical source data, helper, aggregate gates, engine, standards, workflows,
 and fallback behavior read-only.
+
+## 2026-08-15 M6-V-W1 Atomic Closure Cutover
+
+**Outcome:** accepted; fresh-graph owner-package audit is next.
+
+M6-V1/V2/V3 are accepted under separate owners with the exact registered chain
+Router -> final-source -> source-package. Dependency evidence belongs only to
+the requiring package; adjacent package incident history uses registered
+independent-suite evidence. Aggregate gates and the shared plan helper remain
+independently owned.
+
+Source preparation uses canonical typed checker paths and suite IDs, with row
+26 transferred to `suite:rust-no-std-closure`. Mutable report totals are
+derived rather than copied. The three Bash authorities are absent without a
+wrapper, callback, compatibility route, alternate entrypoint, or fallback.
+
+Regeneration removes exactly twenty edges and records 124 retained Bash
+verifiers / 129 nodes / 672 edges / 129 components. Exact mutations, focused
+package/edge/dependency authority, all 152 declarative suites, generated
+freshness, both plan validators, and the complete 124-checker retained Bash
+checkpoint pass.

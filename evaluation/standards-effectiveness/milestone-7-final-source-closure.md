@@ -2,13 +2,13 @@
 
 ## Re-plan Finding
 
-Milestone 7's exact rule migration bookkeeping is complete: all 916 frozen
-identifiers have one disposition, the immutable execution train has no
-remaining row, and the source-gap audit is empty. That evidence does not yet
-prove source closure. The corpus still classifies 27 former standard or profile
-entrypoints as normative. Fourteen are already concise indexes and thirteen
-still contain expanded legacy material. Three concise sources also need a
-wording rewrite before they can be accepted as pure navigation.
+Milestone 7's exact rule migration bookkeeping is complete: every frozen
+identifier has one disposition, the immutable execution train has no remaining
+row, and the source-gap audit is empty. That evidence does not yet prove source
+closure. The corpus still classifies former standard or profile entrypoints as
+normative. The final source manifest records which are concise, which retain
+expanded legacy material, and which require rewriting before acceptance as
+pure navigation.
 
 The Router separately retains two temporary legacy routes for
 `CROSS-PLATFORM-STANDARDS.md` and `SECURITY-STANDARDS.md` using the condition
@@ -28,8 +28,8 @@ status.
 
 ## Retention Decision
 
-All 27 former stable entrypoints are retained only as concise, non-normative
-migration indexes. This is justified by two frozen repository facts: each path
+Every former stable entrypoint is retained only as a concise, non-normative
+migration index. This is justified by two frozen repository facts: each path
 is a stable source represented in the original corpus, and each has an accepted
 file-level owner-map disposition ending in `-and-index`. Retention preserves
 navigation to one canonical owner; it does not preserve policy, defaults,
@@ -41,13 +41,12 @@ re-plan outcome and reconsider deletion rather than preserve the legacy text.
 
 ## Source Treatments
 
-The immutable source manifest records all 27 entrypoints in owner-dependency
-order. Eleven already satisfy the expected index shape and require a focused
-purity review (`retain-index`). Sixteen require replacement with a concise
-canonical-owner index (`rewrite-index`), including the three currently concise
-files whose wording still asserts policy. No source is pre-approved for
-deletion because every source has the frozen stable-entrypoint and file-level
-index evidence required by this decision.
+The immutable source manifest records every selected entrypoint in owner-
+dependency order. Its `treatment` field is the authority for focused purity
+review (`retain-index`) or replacement with a concise canonical-owner index
+(`rewrite-index`). No source is pre-approved for deletion because every source
+has the frozen stable-entrypoint and file-level index evidence required by this
+decision.
 
 Each source package has one observable outcome: the old file becomes derived
 navigation to its named canonical owner, contains no normative rule, and no
@@ -70,8 +69,8 @@ a bespoke structural verifier or modify the shared engine to admit itself.
    the same owner, treatment, dependency set, semantic outcome, verification
    contract, and non-overlapping write set. The current manifest has no such
    pre-approved merge.
-3. `7.4c4` regenerates derived inventories, proves all 27 paths are
-   non-normative pure indexes, rechecks all 916 dispositions and zero source
+3. `7.4c4` regenerates derived inventories, proves every manifest path is a
+   non-normative pure index, rechecks all 916 dispositions and zero source
    gaps, proves no Router legacy routes remain, and performs the final manual
    `D001` through `D010` semantic-ownership review.
 

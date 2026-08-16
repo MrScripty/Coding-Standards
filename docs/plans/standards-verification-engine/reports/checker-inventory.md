@@ -3458,3 +3458,24 @@ The resulting graph has 124 retained Bash verifiers, 129 nodes, 672 edges, and
 129 components. All five focused package/edge/dependency suites, all 152
 declarative suites, graph freshness, and the complete 124-checker mixed
 checkpoint pass in the disposable worktree.
+
+### Accepted M6-V-W1 Atomic Closure Cutover
+
+The three owner-separated suites are registered in one dependency-once chain:
+source-package preparation, final-source closure, then Router legacy-route
+closure. M6-V1/V2/V3 are accepted. Requiring packages own both registry
+dependencies; adjacent package records identify the registered callers as
+independent suite gates. Consolidation, execution-train, source-gap, root-
+Router, and plan-helper ownership remains independent.
+
+The source-preparation manifest contains only order, source, and typed verifier
+subjects. Suite identities are registered IDs, and row 26 resolves
+`suite:rust-no-std-closure`. The two migration reports no longer copy mutable
+manifest/category totals. All three former Bash paths are absent with no
+wrapper, alias, callback, compatibility representation, or fallback.
+
+Generated evidence removes the exact twenty preflighted edges and records 124
+retained Bash verifiers, 129 nodes, 672 edges, and 129 components. The focused
+closure, all 152 declarative suites, graph freshness, exact mutations, and the
+complete retained-Bash checkpoint pass. The next package must be derived from
+this fresh graph rather than the pre-cutover topology.

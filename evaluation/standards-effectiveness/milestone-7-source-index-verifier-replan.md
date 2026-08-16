@@ -210,12 +210,12 @@ localized with package-focused gates and corrected in the owning package; it
 cannot be bypassed by dropping a checker or preserving obsolete source prose.
 
 Preparation wave `p1` is frozen in
-`milestone-7-source-package-preparation.tsv`. Its eight packages have exclusive
-typed verifier-subject write sets and identical semantic preservation
-obligations. A subject is exactly `checker:<repository-path>` or
-`suite:<repository-path>`; untyped and unknown subjects are invalid, and each
-subject and resolved path is unique across the preparation wave. Missing and
-symlink paths are invalid.
+`milestone-7-source-package-preparation.tsv`. Every listed source has exclusive
+typed verifier subjects and the same semantic preservation obligations. A
+subject is exactly `checker:<repository-path>` or `suite:<registered-id>`;
+untyped and unknown subjects are invalid, and each subject is unique across the
+preparation wave. Missing or symlinked checker paths and unknown suite IDs are
+invalid.
 Architecture remains excluded from preparation wave `p1` because its three
 known mixed policy checkers inspect overlapping sections of one high-risk
 source; it requires one separately frozen Architecture package before work may

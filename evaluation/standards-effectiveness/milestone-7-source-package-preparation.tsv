@@ -1,9 +1,9 @@
-package	source	manifest_order	preparation_wave	checker_class	writable_verifiers	preserved_evidence	integration_rule
-7.4c3.5	CONCURRENCY-STANDARDS.md	5	p1	mixed-policy	checker:evaluation/standards-effectiveness/verify-concurrency-policy.sh	owner+routes+dispositions+typed-outcomes+negative-policy	serial-manifest-order
-7.4c3.8	DEPENDENCY-STANDARDS.md	8	p1	mixed-policy	checker:evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh	owner+routes+dispositions+typed-outcomes+negative-policy	serial-manifest-order
-7.4c3.17	LAUNCHER-STANDARDS.md	17	p1	mixed-policy	checker:evaluation/standards-effectiveness/verify-launcher-population.sh	owner+routes+dispositions+typed-outcomes+negative-policy	serial-manifest-order
-7.4c3.18	languages/rust/RUST-API-STANDARDS.md	18	p1	mixed-policy	suite:evaluation/standards-effectiveness/suites/rust-api-rustdoc.toml	owner+routes+dispositions+typed-outcomes+negative-policy	serial-manifest-order
-7.4c3.20	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	20	p1	mixed-policy	suite:evaluation/standards-effectiveness/suites/rust-target-configuration.toml	owner+routes+dispositions+typed-outcomes+negative-policy	serial-manifest-order
-7.4c3.21	languages/rust/RUST-DEPENDENCY-STANDARDS.md	21	p1	mixed-policy	suite:evaluation/standards-effectiveness/suites/rust-dependency-build-cost.toml,suite:evaluation/standards-effectiveness/suites/rust-dependency-candidate-inspection.toml	owner+routes+dispositions+typed-outcomes+negative-policy	serial-manifest-order
-7.4c3.24	languages/rust/RUST-RELEASE-STANDARDS.md	24	p1	mixed-policy	suite:evaluation/standards-effectiveness/suites/rust-release-evidence.toml	owner+routes+dispositions+typed-outcomes+negative-policy	serial-manifest-order
-7.4c3.26	languages/rust/RUST-TOOLING-STANDARDS.md	26	p1	mixed-policy	checker:evaluation/standards-effectiveness/verify-rust-no-std-closure.sh	owner+routes+dispositions+typed-outcomes+negative-policy	serial-manifest-order
+manifest_order	source	verifier_subjects
+5	CONCURRENCY-STANDARDS.md	checker:evaluation/standards-effectiveness/verify-concurrency-policy.sh
+8	DEPENDENCY-STANDARDS.md	checker:evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh
+17	LAUNCHER-STANDARDS.md	checker:evaluation/standards-effectiveness/verify-launcher-population.sh
+18	languages/rust/RUST-API-STANDARDS.md	suite:rust-api-rustdoc
+20	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	suite:rust-target-configuration
+21	languages/rust/RUST-DEPENDENCY-STANDARDS.md	suite:rust-dependency-build-cost,suite:rust-dependency-candidate-inspection
+24	languages/rust/RUST-RELEASE-STANDARDS.md	suite:rust-release-evidence
+26	languages/rust/RUST-TOOLING-STANDARDS.md	suite:rust-no-std-closure

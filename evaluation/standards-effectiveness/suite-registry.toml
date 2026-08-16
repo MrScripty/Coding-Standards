@@ -744,3 +744,18 @@ requires = []
 id = "rust-no-std-closure"
 path = "evaluation/standards-effectiveness/suites/rust-no-std-closure.toml"
 requires = []
+
+[[suites]]
+id = "source-package-preparation"
+path = "evaluation/standards-effectiveness/suites/source-package-preparation.toml"
+requires = []
+
+[[suites]]
+id = "final-source-closure"
+path = "evaluation/standards-effectiveness/suites/final-source-closure.toml"
+requires = ["source-package-preparation"]
+
+[[suites]]
+id = "router-legacy-route-closure"
+path = "evaluation/standards-effectiveness/suites/router-legacy-route-closure.toml"
+requires = ["final-source-closure"]

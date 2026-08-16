@@ -4053,3 +4053,22 @@
 - All 152 declarative suites and the complete checkpoint over all 124 retained
   Bash checkers pass. The exact 19-file implementation freeze is recorded;
   canonical M6-V-W1 implementation is next.
+
+## 2026-08-15 - M6-V-W1 Atomic Closure Cutover
+
+- Reconfirmed clean canonical `6d0bdaa` before applying the exact VE071
+  implementation freeze in a fresh isolated worktree.
+- Registered the dependency chain source-package preparation -> final-source
+  closure -> Router closure and accepted M6-V1/V2/V3 with package-local suite
+  evidence. Independent aggregate and external helper ownership remain intact.
+- Normalized source-preparation evidence to order/source/typed subjects,
+  transferred row 26 to `suite:rust-no-std-closure`, and replaced mutable
+  report totals with manifest-derived language.
+- Deleted all three Bash authorities without wrappers, aliases, alternate
+  entrypoints, compatibility parsing, or fallback.
+- Regeneration removed exactly twenty edges and records 124 retained Bash
+  verifiers, 129 nodes, 672 edges, and 129 components.
+- Exact proposal mutations, the five-suite focused closure, all 152 registered
+  suites, generated freshness, both plan validators, all 124 retained Bash
+  checkers in complete mode, removed paths, protected inputs, and diff
+  integrity pass. Fresh-graph package discovery is next.

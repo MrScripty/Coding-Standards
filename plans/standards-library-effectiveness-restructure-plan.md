@@ -3795,6 +3795,22 @@ suite definitions, Router, README, canonical source evidence, helper, retained
 gates, engine, standards, workflows, compatibility behavior, and fallback
 remain unchanged.
 
+### M6-V-W1 Atomic Closure Acceptance
+
+The child verification plan accepted M6-V1/V2/V3 atomically. The registry runs
+source-package preparation, final-source closure, and Router closure once in
+dependency order. Package-local evidence assigns each dependency only to its
+requiring owner; retained aggregates and the planning helper remain
+independent.
+
+Source-preparation evidence now uses registered suite IDs and row 26 names
+`suite:rust-no-std-closure`. Mutable migration-report totals are derived. The
+three Bash authorities are deleted without compatibility or fallback, and the
+fresh generated graph records 124 retained Bash verifiers, 129 nodes, 672
+edges, and 129 components after exactly twenty edge removals. All 152
+declarative suites and every retained Bash checker pass. The next migration
+package must be derived from this fresh graph.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

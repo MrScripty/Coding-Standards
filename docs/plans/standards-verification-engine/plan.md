@@ -2,18 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-V-W1 cutover preflight accepted
+**Current phase:** Milestone 6: M6-V-W1 accepted; fresh-graph audit next
 
-**Next slice:** implement the dependency-ordered M6-V-W1 atomic cutover across
-the three admitted owner-separated proposals using the exact VE071 package-
-local edge transition, normalized lifecycle evidence, deletion, and generated-
-effect freeze.
+**Next slice:** audit the fresh post-M6-V-W1 graph and derive the next bounded
+owner-coherent package. Recompute helper consumers, incident edges, lifecycle
+authority, and representability before admitting another migration package.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE071 M6-V-W1 cutover preflight. M6-V1, M6-V2, and
-M6-V3 remain admitted and unregistered in canonical state; all three Bash
-authorities remain intact until the separately committed atomic cutover.
+**Latest accepted slice:** M6-V-W1 atomic closure cutover. M6-V1, M6-V2, and
+M6-V3 are accepted and registered; their three Bash authorities are absent.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -1301,6 +1299,36 @@ immutability, and diff integrity. A different graph edge, required suite edit,
 lost aggregate/helper gate, new routing or README requirement, canonical
 source mutation, file outside the freeze, or failure of the complete checkpoint
 is a new replan trigger.
+
+##### M6-V-W1 Accepted Atomic Closure Cutover
+
+M6-V1, M6-V2, and M6-V3 are accepted atomically under their separate canonical
+owners. The registry executes `source-package-preparation` once,
+`final-source-closure` after it, and `router-legacy-route-closure` after final-
+source closure. Package-local edge evidence assigns each dependency only to
+the requiring suite's owner; adjacent incident records use explicit registered
+independent-suite evidence. Retained aggregate gates remain independent, and
+the final-source plan-helper pair is accepted external-artifact history with
+the helper still available to its derived consumers.
+
+Source preparation now has the normalized three-column schema and canonical
+typed subjects. Checker subjects resolve contained live verifier paths; suite
+subjects resolve registered IDs. Row 26 names `suite:rust-no-std-closure` and
+no deleted checker, suite-path alias, compatibility parser, copied package
+identity, repeated constant, or mutable total remains. The final-source and
+source-index reports derive mutable membership and category statements from
+their manifests while retaining stable train identifiers.
+
+The three Bash authorities are deleted without wrappers or alternate
+entrypoints. Regeneration removes exactly twenty graph edges and records 124
+retained Bash verifiers, 129 nodes, 672 edges, and 129 components. The focused
+five-suite closure, all 152 declarative suites, generated freshness, all 124
+retained Bash checkers through complete mode, both plan validators, exact
+typed mutation diagnostics, removed paths, protected inputs, and diff
+integrity pass. Router, README, the three admitted suite definitions, final-
+source manifest, corpus, owner map, dispositions, replacement fixture, plan
+helper, retained gates, engine, schema, standards, workflows, templates,
+lockfiles, compatibility behavior, and fallback remain unchanged.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the
