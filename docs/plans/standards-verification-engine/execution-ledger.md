@@ -4032,3 +4032,24 @@
 - No suite, registry, manifest, checker, helper, fixture, engine, generated
   artifact, standard, workflow, compatibility behavior, or fallback changed.
   Corrected M6-V-W1 exact cutover preflight is next.
+
+## 2026-08-15 - VE071 M6-V-W1 Cutover Preflight
+
+- Built the exact cutover in an isolated disposable worktree from clean
+  canonical `f828614`; canonical implementation authority remained unchanged.
+- The first edge transition correctly failed four cross-package
+  `suite-requires` claims. Reassigned each dependency to the package owning the
+  requiring suite and used explicit independent suite evidence in the adjacent
+  package's duplicate incident rows.
+- Registered source-package preparation, final-source closure requiring it,
+  and Router closure requiring final-source. All three focused suites and exact
+  package/edge authority pass without editing their admitted definitions.
+- Normalized source preparation to typed checker paths and registered suite
+  IDs, transferred row 26 to `suite:rust-no-std-closure`, and replaced mutable
+  report totals with manifest-derived language.
+- Deleted the three disposable Bash authorities and regenerated exactly twenty
+  edge removals. The graph moved from 127 / 132 / 692 / 132 to
+  124 retained Bash verifiers / 129 nodes / 672 edges / 129 components.
+- All 152 declarative suites and the complete checkpoint over all 124 retained
+  Bash checkers pass. The exact 19-file implementation freeze is recorded;
+  canonical M6-V-W1 implementation is next.

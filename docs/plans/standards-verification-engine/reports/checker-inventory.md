@@ -3433,3 +3433,28 @@ coverage, graph-derived consumer transitions, and final deletion of both the
 helper and fixture aggregate. It must not create duplicate authority, domain-
 suite dependencies, copied consumer counts, Bash callbacks, wrappers, or
 fallback.
+
+### VE071 M6-V-W1 Disposable Cutover Finding
+
+The exact package-local edge transition is asymmetric by ownership. M6-V1's
+two inbound historical records identify registered `final-source-closure` as
+an independent suite gate; M6-V2 owns the actual
+`final-source-closure -> source-package-preparation` requirement. M6-V2's two
+inbound Router records identify registered `router-legacy-route-closure` as an
+independent suite gate; M6-V3 owns the actual
+`router-legacy-route-closure -> final-source-closure` requirement. This records
+each former incident for both packages while assigning each dependency once.
+
+The accepted external plan-helper pair retires with the final-source caller.
+Consolidation dispositions, execution train, undisposed-source gaps, and root-
+Router evidence remain independently executable retained gates. The normalized
+source-preparation table resolves checker paths and registered suite IDs; row
+26 now resolves `suite:rust-no-std-closure` without a path alias or fallback.
+
+Deleting the three proposed Bash authorities removes exactly twenty generated
+edges: three package references, three edge-manifest references, seven
+executable references, one helper dependency, and six verifier dependencies.
+The resulting graph has 124 retained Bash verifiers, 129 nodes, 672 edges, and
+129 components. All five focused package/edge/dependency suites, all 152
+declarative suites, graph freshness, and the complete 124-checker mixed
+checkpoint pass in the disposable worktree.

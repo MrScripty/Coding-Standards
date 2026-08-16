@@ -3776,6 +3776,25 @@ migration, and helper/fixture-aggregate deletion after the final consumer. Do
 not add domain-suite dependencies, dual authority, copied totals, wrappers,
 callbacks, Bash bridges, compatibility behavior, or fallback.
 
+### VE071 M6-V-W1 Cutover Delegation
+
+The child plan's disposable cutover passes after assigning each registered
+dependency only to the package that owns its requiring suite. Adjacent target
+packages retain exact incident history through independent registered-suite
+evidence; the plan-helper pair remains an accepted external artifact whose
+caller disappears.
+
+M6-V-W1 may atomically register the chain Router -> final-source -> source-
+package, normalize preparation evidence to checker paths and registered suite
+IDs, transfer row 26 to `suite:rust-no-std-closure`, remove mutable report
+totals, accept M6-V1/V2/V3, delete their three Bash authorities, and regenerate
+the exact twenty-edge removal. The implementation freeze is the package and
+edge manifests, registry, preparation table, two migration reports, four graph
+artifacts, three deleted checkers, and six planning authorities. All admitted
+suite definitions, Router, README, canonical source evidence, helper, retained
+gates, engine, standards, workflows, compatibility behavior, and fallback
+remain unchanged.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

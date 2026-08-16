@@ -12613,3 +12613,27 @@ will add one reusable typed plan contract and independent registered suite,
 migrate graph-derived consumers, and delete the helper and fixture aggregate
 after the last consumer. No dual authority, wrapper, callback, Bash bridge,
 copied count, compatibility behavior, or fallback is permitted.
+
+## 2026-08-15 VE071 M6-V-W1 Cutover Preflight
+
+**Outcome:** exact disposable cutover accepted; canonical implementation is
+next.
+
+The first accepted-edge probe rejected four `suite-requires` rows because the
+target packages did not own the requiring suites. The corrected representation
+assigns each dependency to its requiring package and uses registered
+independent-suite evidence for the adjacent package's duplicate incident view.
+Exact package and edge authority then pass.
+
+The disposable cutover registers the three-suite chain, normalizes source-
+preparation evidence to checker paths and registered suite IDs, transfers row
+26 to `suite:rust-no-std-closure`, removes mutable report totals, accepts all
+three packages, and deletes all three Bash authorities. Regeneration removes
+exactly twenty edges and records 124 retained Bash verifiers / 129 nodes / 672
+edges / 129 components.
+
+All five focused suites, all 152 declarative suites, generated freshness, and
+the complete checkpoint over every retained Bash checker pass. The canonical
+implementation is frozen to 19 files with the admitted suites, Router, README,
+canonical source data, helper, aggregate gates, engine, standards, workflows,
+and fallback behavior read-only.

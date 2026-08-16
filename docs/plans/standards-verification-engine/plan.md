@@ -2,18 +2,18 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE070 helper-ownership recovery accepted
+**Current phase:** Milestone 6: M6-V-W1 cutover preflight accepted
 
-**Next slice:** preflight the dependency-ordered M6-V-W1 cutover across the
-three admitted owner-separated proposals. Freeze exact registry dependencies,
-normalized lifecycle evidence, caller-edge retirement, retained independent
-gates, deletions, routing changes, and generated effects before implementation.
+**Next slice:** implement the dependency-ordered M6-V-W1 atomic cutover across
+the three admitted owner-separated proposals using the exact VE071 package-
+local edge transition, normalized lifecycle evidence, deletion, and generated-
+effect freeze.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE070 helper-ownership recovery. M6-V1, M6-V2, and
-M6-V3 remain admitted and unregistered; all three Bash authorities remain
-intact until atomic M6-V-W1 cutover.
+**Latest accepted slice:** VE071 M6-V-W1 cutover preflight. M6-V1, M6-V2, and
+M6-V3 remain admitted and unregistered in canonical state; all three Bash
+authorities remain intact until the separately committed atomic cutover.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -1242,6 +1242,65 @@ templates, lockfiles, and outputs remain read-only. A requirement for
 final-source-specific plan behavior, an accepted contract that forbids
 external caller-edge retirement, loss of independent plan validation, or any
 file outside this boundary is a new replan trigger.
+
+##### VE071 M6-V-W1 Package-Local Dependency Evidence Freeze
+
+Disposable M6-V-W1 execution proved the three-suite dependency chain and full
+mixed checkpoint, but the first exact-edge transition rejected four rows. The
+edge contract correctly requires `suite-requires` to be claimed only by the
+package whose write set owns the requiring suite. M6-V1 cannot claim the M6-V2
+final-source dependency, and M6-V2 cannot claim the M6-V3 Router dependency.
+The duplicate incident rows represent different package-local views of the
+same former Bash edge and must not duplicate dependency ownership.
+
+Four options were reviewed:
+
+1. **Selected:** the source package records registered final-source as an
+   independent suite gate, while final-source owns
+   `final-source-closure -> source-package-preparation`. Final-source records
+   registered Router closure as an independent suite gate, while Router owns
+   `router-legacy-route-closure -> final-source-closure`. This preserves exact
+   incident history and assigns each dependency once to its requiring suite.
+2. Add adjacent requiring suites to target-package write sets. This broadens
+   two package owners over files they do not own and is rejected.
+3. Remove duplicate package-local incident rows. This loses exact historical
+   edge authority and is rejected.
+4. Weaken the edge validator to allow cross-package dependency claims. This
+   permits false ownership and is rejected.
+
+The disposable cutover registers the exact acyclic chain, changes M6-V1/V2/V3
+to `accepted`, normalizes source preparation to
+`manifest_order,source,verifier_subjects`, uses registered suite IDs rather
+than suite paths, and replaces row 26's deleted checker with
+`suite:rust-no-std-closure`. Mutable source/treatment/category totals are
+removed from the two migration reports; frozen train IDs remain historical
+identity rather than count assertions. The three admitted suite files require
+no change.
+
+The exact implementation write set is the package manifest, edge manifest,
+suite registry, normalized source-preparation table, final-source report,
+source-index verifier replan, four generated graph artifacts, three deleted
+Bash checkers, and the six serial planning authorities. Router, README, all
+three suite files, final-source manifest, corpus, owner map, dispositions,
+replacement fixture, helper, retained aggregate gates, engine, schema,
+standards, workflows, templates, lockfiles, and outputs remain read-only.
+
+Regeneration removes exactly twenty graph edges: three package references,
+three edge-manifest references, seven executable references, one helper edge,
+and six verifier dependencies. It records 124 retained Bash verifiers, 129
+nodes, 672 edges, and 129 components. No unrelated executable edge may change.
+Disposable verification passes the five-suite focused closure, all 152
+registered suites, fresh generation, and the complete checkpoint over all 124
+retained Bash checkers.
+
+Implementation acceptance requires the three proposal mutations with their
+exact typed diagnostics, package/edge authority, dependency-once execution,
+all 152 declarative suites, fresh graph evidence, the complete 124-checker
+checkpoint, both plan validators, removed-path proof, protected-input
+immutability, and diff integrity. A different graph edge, required suite edit,
+lost aggregate/helper gate, new routing or README requirement, canonical
+source mutation, file outside the freeze, or failure of the complete checkpoint
+is a new replan trigger.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the
