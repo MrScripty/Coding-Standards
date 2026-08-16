@@ -3410,3 +3410,26 @@ contract reference. Structure, node, and component changes are its projections;
 executable topology and component membership remain unchanged. No registration,
 checker deletion, canonical evidence mutation, compatibility behavior, or
 fallback exists.
+
+### VE070 Plan-Helper Ownership Finding
+
+The exact graph derives thirteen semantic callers of
+`check-plan-structure.sh`, all validating
+`plans/standards-library-effectiveness-restructure-plan.md`, plus one aggregate
+that exercises valid and invalid helper fixtures. This shape identifies one
+independent planning contract rather than thirteen domain dependencies. The
+derived caller set, not the observed total or a copied inventory, remains
+future migration authority.
+
+Final-source closure's two helper edges therefore remain admitted
+`external-owned-artifact` records. Its M6-V-W1 acceptance deletes the caller
+and retires those edges while the helper remains available to current
+consumers. No final-source native assertion or `suite-requires` edge is valid.
+
+Native plan validation is deferred to one separately admitted
+`workflows/planning.md` owner package. It will establish a reusable typed check,
+an independent registered suite over the parent plan, focused engine negative
+coverage, graph-derived consumer transitions, and final deletion of both the
+helper and fixture aggregate. It must not create duplicate authority, domain-
+suite dependencies, copied consumer counts, Bash callbacks, wrappers, or
+fallback.

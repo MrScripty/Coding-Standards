@@ -3760,6 +3760,22 @@ remain unchanged. Registry, all three current checkers, Router and lifecycle
 evidence, standards, compatibility behavior, and fallback remain untouched.
 M6-V-W1 atomic cutover preflight is next.
 
+### VE070 Plan-Helper Ownership Delegation
+
+The child verification plan found that final-source closure's plan-helper call
+validates this shared parent plan and is not final-source behavior. Current
+consumer identity is graph-derived; its observed total is not migration
+authority.
+
+M6-V-W1 must retain the admitted helper pair as `external-owned-artifact`,
+delete the final-source caller edges, and register only true source-package and
+Router dependencies. Native plan validation is delegated to a later
+`workflows/planning.md` owner package with one reusable typed contract, one
+independent registered suite, engine negative tests, graph-derived consumer
+migration, and helper/fixture-aggregate deletion after the final consumer. Do
+not add domain-suite dependencies, dual authority, copied totals, wrappers,
+callbacks, Bash bridges, compatibility behavior, or fallback.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

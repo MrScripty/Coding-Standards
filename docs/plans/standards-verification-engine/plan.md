@@ -2,18 +2,18 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-V-W1 atomic closure preflight
+**Current phase:** Milestone 6: VE070 helper-ownership recovery accepted
 
 **Next slice:** preflight the dependency-ordered M6-V-W1 cutover across the
 three admitted owner-separated proposals. Freeze exact registry dependencies,
-normalized lifecycle evidence, edge transitions, retained independent gates,
-deletions, routing changes, and generated effects before implementation.
+normalized lifecycle evidence, caller-edge retirement, retained independent
+gates, deletions, routing changes, and generated effects before implementation.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-V3 Router-closure proposal admission. M6-V1,
-M6-V2, and M6-V3 remain admitted and unregistered; all three Bash authorities
-remain intact until atomic M6-V-W1 cutover.
+**Latest accepted slice:** VE070 helper-ownership recovery. M6-V1, M6-V2, and
+M6-V3 remain admitted and unregistered; all three Bash authorities remain
+intact until atomic M6-V-W1 cutover.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -1036,10 +1036,11 @@ Four options were reviewed:
 `native-engine` is intentionally not used during proposal admission: the edge
 contract requires that disposition to name an assertion in a registered suite,
 while M6-V2 must remain unregistered. At M6-V-W1, the Router and source-package
-edge pairs transition atomically to the registered dependency chain and the
-helper pair transitions to exact native assertions in the registered final-
-source suite. Aggregate validators remain independent gates. No proposal row
-may claim a future registry edge or registered assertion early.
+edge pairs transition atomically to the registered dependency chain. The
+helper pair remains `external-owned-artifact` evidence while its final-source
+caller disappears; it does not become a final-source assertion or suite
+dependency. Aggregate validators remain independent gates. No proposal row may
+claim a future registry edge or registered assertion early.
 
 M6-V2 is train order 115, owned by `migration.parent-plan`, and remains
 safety-critical. Its exact proposal write set is the package and edge manifests,
@@ -1064,7 +1065,8 @@ reference generated diff, graph freshness, all registered declarative suites,
 both plan validators, protected-input immutability, and diff integrity. Any
 different incident edge, generated executable change, owner conflict, required
 registry or canonical-evidence edit, inability to represent the helper
-transition at M6-V-W1, or file outside this boundary is a new replan trigger.
+caller-edge retirement at M6-V-W1, or file outside this boundary is a new
+replan trigger.
 
 ##### M6-V2 Accepted Final-Source Proposal
 
@@ -1194,6 +1196,52 @@ projections. Executable topology and component membership are byte-identical.
 Registry, all three Bash checkers, Router, canonical lifecycle evidence,
 fixtures, standards, workflows, compatibility behavior, and fallback remain
 unchanged. M6-V-W1 exact cutover preflight is next.
+
+##### VE070 Plan-Helper Ownership Recovery
+
+M6-V-W1 preflight found that final-source closure invokes
+`check-plan-structure.sh`, but the helper validates the shared migration parent
+plan rather than final-source semantics. The generated graph derives thirteen
+semantic callers over that same plan plus one helper-fixture aggregate at this
+revision. Those observations are audit evidence, not copied count authority.
+The planning contract belongs to `workflows/planning.md`; final-source closure
+must not acquire it merely because its Bash checker invoked the shared gate.
+
+Four options were reviewed:
+
+1. **Selected:** retain the M6-V2 helper pair as
+   `external-owned-artifact`. At M6-V-W1 the final-source checker and its two
+   caller edges disappear while the independently owned helper remains for its
+   graph-derived consumers. Register only the true source-package and Router
+   dependencies. Plan the helper's native replacement as a later planning-owner
+   package that adds one reusable typed plan contract, one independent
+   registered suite, engine-level negative tests, graph-derived consumer
+   migration, and final helper/fixture-aggregate deletion.
+2. Build the generic capability now but leave it unregistered until every
+   helper consumer migrates. This is safe but cannot unblock M6-V-W1 and adds
+   unused implementation before its owner package is admitted.
+3. Expand M6-V-W1 to migrate every helper consumer atomically. This could
+   remove the helper immediately but crosses unrelated owners, migration
+   states, and write sets, making the cutover unnecessarily broad.
+4. Register native plan authority while Bash consumers remain. This creates
+   duplicate executable authority and is rejected; no bridge, wrapper,
+   callback, compatibility route, or fallback may be introduced.
+
+This correction follows the accepted shared-metadata-helper lifecycle:
+semantic packages retire their caller edges while the shared owner remains
+independent until its final graph-derived consumer is migrated. The eventual
+planning suite runs once as an independent registered gate; semantic suites do
+not gain false `requires` edges and focused domain execution does not re-run a
+repository-wide plan contract.
+
+VE070 changes only the six serial planning authorities. M6-V-W1 preflight must
+derive the exact current helper-consumer set and generated effects rather than
+copy a mutable total. Suites, registry, package and edge manifests, checkers,
+helper, fixtures, engine, schema, generated artifacts, standards, workflows,
+templates, lockfiles, and outputs remain read-only. A requirement for
+final-source-specific plan behavior, an accepted contract that forbids
+external caller-edge retirement, loss of independent plan validation, or any
+file outside this boundary is a new replan trigger.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the

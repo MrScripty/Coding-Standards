@@ -4015,3 +4015,20 @@
 - Registry, all three checkers, Router, canonical lifecycle evidence, fixtures,
   standards, workflows, compatibility behavior, and fallback remain unchanged.
   M6-V-W1 atomic cutover preflight is next.
+
+## 2026-08-15 - VE070 Plan-Helper Ownership Recovery
+
+- Rechecked the clean canonical tree at `3dbf642` before M6-V-W1 preflight.
+- The generated graph derives thirteen semantic plan-helper callers over the
+  same migration parent plan plus one helper-fixture aggregate. These are
+  current observations, not count authority.
+- Final-source closure does not own the planning lifecycle contract. Selected
+  accepted `external-owned-artifact` caller-edge retirement rather than a
+  false final-source assertion or registry dependency.
+- The eventual native replacement is a separate `workflows/planning.md` owner
+  package: one reusable typed contract, one independently registered suite,
+  engine negative tests, graph-derived consumer migration, then helper and
+  fixture-aggregate deletion after the final consumer.
+- No suite, registry, manifest, checker, helper, fixture, engine, generated
+  artifact, standard, workflow, compatibility behavior, or fallback changed.
+  Corrected M6-V-W1 exact cutover preflight is next.

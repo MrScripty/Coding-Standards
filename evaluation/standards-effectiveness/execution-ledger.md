@@ -12595,3 +12595,21 @@ dependency. Regeneration records 127 Bash verifiers, 132 nodes, 692 edges, and
 132 components with only one new contract reference. Registry, checkers,
 Router, canonical evidence, executable topology, component membership,
 compatibility behavior, and fallback remain unchanged.
+
+## 2026-08-15 VE070 Plan-Helper Ownership Recovery
+
+**Outcome:** recovery selected; corrected M6-V-W1 preflight is next.
+
+The graph derives thirteen semantic callers that all pass the migration parent
+plan to `check-plan-structure.sh`, plus one helper-fixture aggregate. This is
+one independently owned planning contract, not a final-source semantic
+dependency. The totals are revision observations only; future lifecycle work
+must derive the current consumer set.
+
+M6-V2's helper pair remains `external-owned-artifact`. M6-V-W1 deletes the
+final-source caller and retires those edges without a native final-source
+assertion or registry dependency. A later `workflows/planning.md` owner package
+will add one reusable typed plan contract and independent registered suite,
+migrate graph-derived consumers, and delete the helper and fixture aggregate
+after the last consumer. No dual authority, wrapper, callback, Bash bridge,
+copied count, compatibility behavior, or fallback is permitted.
