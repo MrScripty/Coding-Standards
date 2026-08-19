@@ -2,19 +2,22 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE072 legacy-reference semantic fence accepted;
-fresh-graph package audit next
+**Current phase:** Milestone 6: M6-I2 security-repair evidence retirement
+admitted at train order 117
 
-**Next slice:** audit the fresh post-M6-V-W1 reference model and derive the next
-bounded owner-coherent package without changing its temporary schema. Recompute
-reference sources, incident edges, lifecycle authority, and representability;
-use registered `requires` only for proven suite execution dependencies.
+**Next slice:** accept M6-I2 by deleting only the obsolete security-repair
+checker, accepting its one incident-edge disposition, regenerating the frozen
+temporary graph, and proving the retained immutable evidence plus complete
+checkpoint. Do not create a replacement suite or edit retained Bash.
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** VE072 legacy-reference semantic fence. It preserves
 the current migration protocol without legacy-script churn and requires its
 wholesale deletion when canonical Bash verification inventory reaches zero.
+
+**Latest admitted package:** M6-I2 reviewed retirement of a completed
+historical migration gate without a permanent declarative replacement.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -7932,14 +7935,44 @@ evidence, and diff integrity pass.
 
 ##### M6-I2 Security Repair Evidence Separation
 
-**Status:** Planned after the semantic wave; not admitted.
+**Status:** Admitted at train order 117; acceptance is next.
 
-The 71-line security-repair checker is not launcher infrastructure. It owns the
-exact four-package repair inventory, serial/parallel preparation split,
-preserved-evidence contract, selected-design report, and accepted parent-plan
-claims. It requires a separately admitted `migration.parent-plan` declarative
-suite after a disposable representability probe. M6-I1 may not delete, wrap,
-invoke specially, reinterpret, or absorb this evidence.
+The 71-line security-repair checker validates a completed migration procedure:
+the exact four-package repair inventory, its former serial/parallel preparation
+split, preserved-evidence labels, selected-design report, and already accepted
+parent-plan claims. The four repair packages and their guarded Security source
+closure are accepted. Re-expressing this historical process as a permanent
+declarative suite would preserve obsolete migration ceremony as current
+authority rather than protect live standards behavior.
+
+A disposable probe against the fresh post-M6-V-W1 graph found one actual
+incident executable reference, not zero: the checker names
+`verify-ipc-payload-validation.sh` in an exact package-to-checker assertion.
+The existing edge contract represents it without a dependency or ownership
+transfer. M6-I2 records that IPC validation remains an independently owned
+semantic gate and retires only the completed repair checker. The immutable
+repair TSV and selected-design report remain available as historical evidence;
+their former executable revalidation is intentionally removed.
+
+Admission adds one reviewed package row and one `independent-gate` edge row.
+The generated projections derive the added manifest references; executable
+topology and component membership are unchanged. No registered suite, engine
+feature, Bash annotation, AST parser, wrapper, compatibility route, copied
+total, inferred owner, or fallback is introduced.
+
+The checked train-order 117 package row is the sole exact file-level write-set
+authority. Acceptance must change the package and edge rows to `accepted`,
+delete `verify-milestone-7-security-checker-repair-replan.sh`, regenerate the
+four temporary projections, update planning evidence, prove the historical TSV
+and report byte-identical, and run package, edge, freshness, all declarative,
+removed-path, plan, diff, and complete-checkpoint verification. The IPC checker
+and every other retained Bash source are read-only.
+
+Re-plan if deletion makes the historical evidence unavailable, another
+incident executable edge appears, the IPC gate cannot remain independent, a
+current policy consumer of the repair procedure is discovered, or acceptance
+requires a suite, engine/schema change, compatibility path, fallback, or edit
+outside the admitted write set.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

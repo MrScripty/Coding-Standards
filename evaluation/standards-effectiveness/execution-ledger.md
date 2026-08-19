@@ -12658,3 +12658,21 @@ verifiers / 129 nodes / 672 edges / 129 components. Exact mutations, focused
 package/edge/dependency authority, all 152 declarative suites, generated
 freshness, both plan validators, and the complete 124-checker retained Bash
 checkpoint pass.
+
+## 2026-08-19 M6-I2 Security Repair Retirement Admission
+
+**Outcome:** admitted at train order 117; atomic retirement is next.
+
+All four security-checker repair packages and guarded source closure are
+accepted, so their former scheduling procedure is immutable history rather
+than current verification policy. M6-I2 will preserve the repair TSV and report
+while deleting the obsolete executable revalidation instead of creating a
+permanent replacement suite.
+
+Fresh-graph probing found one incident executable reference to IPC payload
+validation. Its explicit `independent-gate` disposition retains that semantic
+checker under its existing owner without adding a registry dependency. The
+admitted manifests derive their contract references and leave executable
+topology unchanged. Current totals remain generated evidence rather than copied
+admission authority. No source, suite, engine, schema, registry, standard,
+workflow, compatibility behavior, or fallback changes in admission.

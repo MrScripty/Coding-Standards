@@ -4097,3 +4097,22 @@
   suites, generated inventory and graph freshness, and diff integrity passed.
   The mixed Bash checkpoint was not selected because the slice changes no
   executable, engine, suite, schema, generated, or Bash artifact.
+
+## 2026-08-19 - M6-I2 Security Repair Retirement Admission
+
+- Reconfirmed clean canonical `883d554` before the package probe and admission.
+- Replaced the stale permanent-suite proposal with reviewed retirement because
+  all four repair packages and guarded Security source closure are accepted.
+- The disposable probe found one actual executable reference from the repair
+  checker to IPC payload validation. Recorded it as an independently owned gate
+  rather than a suite dependency or ownership transfer.
+- Admitted train-order 117 under `migration.parent-plan`. The immutable repair
+  TSV and selected-design report remain historical evidence; neither is edited
+  or copied into current-state authority.
+- Regeneration derives the new package/edge-manifest references while
+  executable topology and component membership remain unchanged. No mutable
+  graph total is copied into admission authority.
+- Package, edge, freshness, plan, all-declarative, focused retained-checker,
+  protected-evidence, and diff verification pass. No checker, suite, registry,
+  engine, standard, workflow, compatibility behavior, or fallback changed.
+  M6-I2 acceptance is next.

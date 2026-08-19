@@ -3826,6 +3826,22 @@ Bash complete-mode branches wholesale while preserving required immutable
 historical evidence. Fresh-graph package discovery may continue under this
 boundary.
 
+### M6-I2 Security Repair Retirement Delegation
+
+The child verification plan found that all four security-checker repair
+packages and their guarded source closure are accepted. Their exact repair TSV
+and selected-design report are immutable historical evidence; the 71-line
+checker that revalidates the former scheduling procedure is no longer current
+standards authority and must not become a permanent declarative suite.
+
+Train-order 117 records reviewed retirement under `migration.parent-plan`.
+One fresh-graph executable reference to IPC payload validation is explicitly
+retained as an independently owned gate, not a dependency or owner transfer.
+Acceptance may delete only the obsolete repair checker, preserve the historical
+TSV/report unchanged, regenerate the temporary graph, and run the complete
+checkpoint. It must not add an engine capability, suite, Bash annotation,
+wrapper, compatibility route, copied total, inferred owner, or fallback.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream
