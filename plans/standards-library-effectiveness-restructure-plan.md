@@ -6,16 +6,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Cross-Platform source closure `7.4c3.7` and delegated
-verification-engine Milestone 5 are accepted. Seven of 27 former normative
-source entrypoints are derived. Verification-engine Milestone 6 Waves 1
-through 6, M6-EDGE-1, M6-EDGE-FREE, M6-EDGE-2, M6-N-W1, and the bounded P1 wave
-through `M6-P-W1`, plus Q1 through Q4 and `M6-Q-W1`, are accepted; exact typed
-incident-edge semantics govern further checker deletion.
+**Current phase:** Delegated verification-engine M6-V-W1 and VE072 are
+accepted. The remaining Bash migration uses a frozen temporary reference model
+whose lexical edges govern deletion-lifecycle review but do not prove
+execution, dependency, ownership, or acceptance.
 
-**Next slice:** admit verification-engine M6-V3 Router-closure proposal under
-the VE068 owner-separated, exact four-edge, no-registration, and no-deletion
-boundary.
+**Next slice:** audit the fresh post-M6-V-W1 reference model and derive the next
+bounded owner-coherent package without changing the temporary graph schema.
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
@@ -3810,6 +3807,24 @@ fresh generated graph records 124 retained Bash verifiers, 129 nodes, 672
 edges, and 129 components after exactly twenty edge removals. All 152
 declarative suites and every retained Bash checker pass. The next migration
 package must be derived from this fresh graph.
+
+### VE072 Legacy Reference Model Boundary Delegation
+
+The child verification plan establishes the generated checker inventory and
+graph as a frozen temporary reference model for the remainder of Bash
+migration. No retained shell file consumes its schemas. Lexical edges remain
+conservative incident-reference obligations only; registered suite `requires`
+owns execution dependencies, while typed subjects and explicit dispositions
+own stable migration decisions.
+
+Further packages must not add graph fields, aliases, inference rules,
+permanent consumers, Bash annotations, AST parsing, copied mutable totals, or
+graph-derived ownership. Retained Bash remains read-only until its accepted
+replacement slice deletes it. At zero Bash, the child plan must remove the
+temporary inventory, graph, current projections, migration-only consumers, and
+Bash complete-mode branches wholesale while preserving required immutable
+historical evidence. Fresh-graph package discovery may continue under this
+boundary.
 
 ## Final Acceptance
 

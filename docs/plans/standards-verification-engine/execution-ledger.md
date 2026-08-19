@@ -4072,3 +4072,28 @@
   suites, generated freshness, both plan validators, all 124 retained Bash
   checkers in complete mode, removed paths, protected inputs, and diff
   integrity pass. Fresh-graph package discovery is next.
+
+## 2026-08-19 - VE072 Legacy Reference Model Semantic Fence
+
+- Reconfirmed a clean canonical tree at `c40ef17` before the planning slice.
+- Audited generated-schema consumers and found no retained shell consumer; the
+  direct machine surface is limited to two Python collectors and two
+  declarative migration suites.
+- Classified authoritative configuration, current derived state, immutable
+  historical evidence, and optional reports as separate data lifecycles.
+- Selected the narrow boundary: freeze the temporary serialized schema, treat
+  lexical edges only as conservative deletion-lifecycle evidence, add no Bash
+  AST or script annotation, and continue owner-coherent package migration.
+- Reserved registered suite `requires` for execution dependencies and typed
+  subjects plus explicit dispositions for migration authority.
+- Added a mandatory zero-Bash closure that removes the temporary inventory,
+  graph, current generated projections, migration-only consumers, and retained
+  Bash complete-mode branches instead of refining them.
+- Source, tests, suites, registry, manifests, generated artifacts, Bash,
+  standards, fixtures, READMEs, workflows, lockfiles, and outputs remained
+  unchanged. Fresh-graph package discovery remains the next implementation
+  slice under the frozen schema.
+- Both plan structure checks, plan lifecycle fixtures, all 152 declarative
+  suites, generated inventory and graph freshness, and diff integrity passed.
+  The mixed Bash checkpoint was not selected because the slice changes no
+  executable, engine, suite, schema, generated, or Bash artifact.

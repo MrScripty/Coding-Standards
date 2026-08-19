@@ -2,16 +2,19 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-V-W1 accepted; fresh-graph audit next
+**Current phase:** Milestone 6: VE072 legacy-reference semantic fence accepted;
+fresh-graph package audit next
 
-**Next slice:** audit the fresh post-M6-V-W1 graph and derive the next bounded
-owner-coherent package. Recompute helper consumers, incident edges, lifecycle
-authority, and representability before admitting another migration package.
+**Next slice:** audit the fresh post-M6-V-W1 reference model and derive the next
+bounded owner-coherent package without changing its temporary schema. Recompute
+reference sources, incident edges, lifecycle authority, and representability;
+use registered `requires` only for proven suite execution dependencies.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-V-W1 atomic closure cutover. M6-V1, M6-V2, and
-M6-V3 are accepted and registered; their three Bash authorities are absent.
+**Latest accepted slice:** VE072 legacy-reference semantic fence. It preserves
+the current migration protocol without legacy-script churn and requires its
+wholesale deletion when canonical Bash verification inventory reaches zero.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -52,8 +55,8 @@ disposition, no-fallback, and evidence contracts.
   source-index checks required by measured checker inventory.
 - Incremental removal of every Bash checker, verification helper, and temporary
   migration launcher.
-- A generated migration inventory derived from registered and remaining
-  checkers.
+- A temporary generated migration inventory derived from remaining legacy
+  scripts, frozen against schema expansion and deleted at zero-Bash closure.
 
 ### Out Of Scope
 
@@ -64,6 +67,8 @@ disposition, no-fallback, and evidence contracts.
 - Copying or depending on another repository's orchestration design.
 - Replacing real downstream product verification with documentation checks.
 - Installing Python, third-party packages, or a second build toolchain.
+- A permanent generalized standards graph, Bash AST, or inferred ownership or
+  execution authority derived from legacy reference topology.
 
 ## Constraints And Assumptions
 
@@ -85,6 +90,11 @@ disposition, no-fallback, and evidence contracts.
 - A genuinely custom algorithm remains eligible only as a typed,
   side-effect-free Python check registered through the engine; Bash is not an
   exceptional-check representation.
+- Current graph membership, references, counts, components, waves, and live
+  line totals are derived migration observations rather than owner,
+  modification, execution, or acceptance authority.
+- The temporary graph and inventory schemas gain no fields, aliases, edge
+  kinds, inference rules, or consumers before their zero-Bash deletion.
 
 ### Assumptions
 
@@ -109,7 +119,7 @@ disposition, no-fallback, and evidence contracts.
 | Migrate by semantic family, deleting each replaced checker in the accepting slice. | This plan | [Architecture report](reports/architecture.md#migration-sequence) | Indefinite dual execution |
 | Retire all Bash verifiers, verification helpers, and the migration launcher; represent exceptional algorithms only as registered typed Python checks. | This plan | [Architecture report](reports/architecture.md#extension-rule) | Bounded exceptional Bash adapters |
 | Add bounded table, relation, and acceptance-claim checks from measured recurring contracts; do not add query strings, arbitrary transforms, or policy-specific callbacks. | This plan | 219 remaining scripts use AWK, 198 validate row shape, 165 collect projections, 83 count rows, 58 declare expected projections, and 109 compare lineage/owner/disposition data. | Per-script AWK/mapfile/sort pipelines |
-| Derive coupled-checker migration order from one exact typed graph manifest with explicit unresolved targets, strongly connected components, condensation dependencies, and separately reviewed owner/risk/write-set classifications. | Integration owner | [Checker inventory report](reports/checker-inventory.md#coupled-graph-resolution) | Leaf-only selection and filename-adjacent batching |
+| Treat the legacy-script inventory and graph as one frozen temporary reference model: its lexical edges are conservative deletion-lifecycle evidence, typed package subjects and explicit dispositions own migration decisions, registered suite `requires` owns execution dependencies, and the model is deleted wholesale at zero Bash. | Integration owner | [Legacy reference boundary](reports/legacy-script-reference-model.md) | Graph-derived ownership or execution, schema expansion, per-field temporary redesign, Bash AST work, and a permanent migration graph |
 | Keep the parent standards restructure plan authoritative for normative migration and this child plan authoritative for checker-engine architecture and migration. | Integration owner | Parent-plan delegation | `7.4c3hcp` bespoke Cross-Platform repair assumption |
 | Resolve `F085` through one temporary whole-source route/prohibition contract followed by dependency-ordered owner suites and same-wave contract retirement at source closure. | Verification-engine migration mechanics | Cross-Platform `F085` dependency audit | Heading-range evidence, cross-owner replacement suites, and one oversized atomic closure wave |
 | Preserve exact Bash evidence with one strict generic `exact_text` assertion over contained raw UTF-8 bytes and inline expected content. | Verification-engine assertion mechanics | M5-CP4+5 exact-evidence audit and accepted VE021 Option 1 | Literal-only weakening, expected-file mirrors, opaque hashes, normalization, wrappers, and source-specific callbacks |
@@ -122,6 +132,9 @@ disposition, no-fallback, and evidence contracts.
 - Intentional coupling: assertion configurations name evidence paths and stable
   diagnostic expectations; suite dependencies name only required prerequisite
   suites.
+- Temporary coupling: two declarative migration consumers read generated
+  reference tables until zero-Bash closure; this bounded interface cannot
+  become a permanent engine data source.
 - Accidental coupling risk: document headings, shell exit behavior, child
   script invocation, fixture layout, or mutable migration narration becoming
   hidden assertion authority.
@@ -1329,6 +1342,67 @@ integrity pass. Router, README, the three admitted suite definitions, final-
 source manifest, corpus, owner map, dispositions, replacement fixture, plan
 helper, retained gates, engine, schema, standards, workflows, templates,
 lockfiles, compatibility behavior, and fallback remain unchanged.
+
+##### VE072 Legacy Reference Model Semantic Fence
+
+**Status:** `Accepted`; the temporary migration schema is frozen and
+fresh-graph package discovery may continue.
+
+Post-M6-V-W1 review found that the generated checker inventory and graph mix
+conservative lexical reference evidence with names that can be read as exact
+execution or dependency claims. The same projections also serialize cheap
+current-state observations such as line totals, tool-name mentions, counts,
+components, and waves. Those values are derived and freshness-checked, but
+their presence in committed TSV files does not make them semantic authority.
+
+No retained shell file consumes either generated schema. The only direct
+machine consumers are the two Python collectors and two declarative migration
+suites recorded in the
+[legacy reference boundary](reports/legacy-script-reference-model.md).
+Changing legacy scripts, adding annotations, parsing Bash into an AST, or
+building a permanent graph API is therefore unnecessary. Physically renaming
+the temporary edge vocabulary would instead rewrite accepted edge history and
+generated projections shortly before the entire migration model is removed.
+
+The selected narrow approach is:
+
+1. freeze the current serialized inventory and graph schemas for the remaining
+   Bash migration;
+2. define every lexical edge as conservative incident-reference evidence, not
+   proof of invocation, ownership, or suite dependency;
+3. reserve registered suite `requires` for exact execution dependencies and
+   typed checker/suite subjects plus explicit dispositions for stable migration
+   authority;
+4. prohibit new permanent consumers, copied mutable totals, graph-derived
+   owners, schema fields, aliases, and inference rules;
+5. keep retained Bash read-only except in the accepted package slice that
+   replaces and deletes it; and
+6. remove the inventory, graph, current generated projections, migration-only
+   consumers, and Bash-complete-mode branches in one zero-Bash closure slice.
+
+Authoritative configuration remains stored and strict. Current derived state
+is computed and may persist only through the already bounded temporary
+consumer interface. Immutable historical evidence remains frozen. Optional
+reports are generated views and cannot authorize modification or acceptance.
+
+The planning slice owns only this plan, its issues and execution ledger, the
+linked boundary report, and the parent plan. Engine source, tests, suites,
+registry, package and edge manifests, generated artifacts, Bash scripts,
+standards, fixtures, READMEs, workflows, lockfiles, and outputs remain
+read-only. The next package audit uses the existing schema unchanged.
+
+**Acceptance evidence:** the direct-consumer audit found no retained shell
+schema consumer; both active-plan structure checks, plan lifecycle fixtures,
+all 152 declarative suites, generated inventory and graph freshness at the
+unchanged post-M6-V-W1 state, and diff integrity pass. No mixed Bash checkpoint
+is required because no executable, engine, suite, schema, generated, or Bash
+artifact changed.
+
+Re-plan if a retained shell consumer is discovered, exact invocation semantics
+become necessary and cannot be represented through structured authority, a
+permanent post-Bash graph consumer is proven, immutable evidence depends on a
+temporary current-state artifact, or incident completeness requires copied
+counts or inferred ownership.
 
 **M6-U0 freeze write set:** this plan, its issues and execution ledger, the
 checker-inventory report, the standards-effectiveness execution ledger, the
