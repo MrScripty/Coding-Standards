@@ -4699,6 +4699,25 @@
   dependency, Bash repair, wrapper, compatibility path, copied count, manual
   numeric mapping, or fallback is admitted.
 
+## 2026-08-20 - M6-I13 Commit Authority Acceptance
+
+- Extended registered `commit-consolidation-dispositions` from six to fourteen
+  checks with strict authority and hook-bypass decisions, owner routes, legacy
+  absence, hook-bypass owner language, and exact owner dispositions.
+- Removed temporary Commit tracking from the row-35 dependency table and
+  suite, transferred three accepted historical records to exact Commit suite
+  evidence, accepted the edge-free package, and deleted only the replaced Bash
+  checker.
+- Whole-checker lifecycle derives retirement of every immutable numeric
+  candidate from accepted M6-I13 without a manual mapping. Final generated
+  evidence contains 112 Bash checkers, 116 nodes, 694 edges, and 116 components.
+- Focused owner, package/edge, numeric lifecycle, removal, protected-source,
+  generated-freshness, plan, all-suite, complete-checkpoint, mutation, and diff
+  checks pass. No new suite, registry node, dependency, false edge, Bash repair,
+  wrapper, compatibility path, copied count, manual numeric record, or fallback
+  remains.
+- Fresh-graph owner-coherent package selection is next.
+
 ## 2026-08-20 - VE083 Root Consumer-Audit Ownership Re-plan
 
 - Fresh accepted evidence contains 114 Bash checkers, 118 nodes, 702 edges,

@@ -4066,3 +4066,20 @@ edge to the retained checker. Admission evidence therefore contains 113 Bash
 checkers, 117 nodes, 698 edges, and 117 components. This derived documentation
 reference is not an executable incident edge and disappears with accepted
 checker deletion.
+
+### M6-I13 Commit Authority Acceptance
+
+M6-I13 is accepted exactly as admitted. Registered Commit authority has
+fourteen checks, temporary row-35 Commit lifecycle tracking is absent, three
+historical records point to exact suite evidence, and the edge-free package
+proves that no current executable relationship was hidden. The Bash checker is
+absent and whole-checker numeric lifecycle derives its candidate retirement.
+
+Final evidence contains 112 Bash checkers, 116 nodes, 694 edges, and 116
+components. Focused owners, package/edge authority, numeric lifecycle, removal,
+protected sources, generated freshness, both plan validators, all 160
+declarative suites, the complete checkpoint, mutation parity, and diff
+integrity pass. No new suite, registry node, dependency, false edge, Bash
+repair, wrapper, compatibility path, copied count, manual numeric mapping, or
+fallback remains. Fresh graph review is required before another package is
+selected.

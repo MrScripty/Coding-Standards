@@ -731,10 +731,11 @@ a row cannot hide a deleted or relocated trigger.
 
 ## Commit Authority Fixtures
 
-`verify-commit-authority.sh` separates per-commit staged review from full
-branch-history review and history-maintenance authority. It permits rewriting
-only for an explicitly authorized, unshared, recoverable range, distinguishes
-linear and merge topology, and rejects the removed mandatory cleanup policy.
+The registered `commit-consolidation-dispositions` suite separates per-commit
+staged review from full branch-history review and history-maintenance authority.
+It permits rewriting only for an explicitly authorized, unshared, recoverable
+range, distinguishes linear and merge topology, and rejects the removed
+mandatory cleanup policy without executing a Bash checker.
 
 ## Consolidation Dispositions
 

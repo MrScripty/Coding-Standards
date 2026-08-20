@@ -4,6 +4,79 @@ owner = "workflows/commit.md"
 description = "Exact Commit disposition coverage, target validity, legacy index routes, and reference ownership."
 
 [[checks]]
+id = "commit-authority-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv"
+expected_column = "expected"
+default = "rewrite-linear"
+[checks.domains]
+case = ["*"]
+event = ["commit", "history-maintenance", "milestone", "pre-push", "pr"]
+history = ["shared", "unshared"]
+authority = ["no", "yes"]
+recoverable = ["no", "yes"]
+topology = ["linear", "merge"]
+expected = ["history-review", "refuse-shared", "refuse-unauthorized", "refuse-unrecoverable", "rewrite-linear", "rewrite-merge", "staged-review"]
+[[checks.rules]]
+outcome = "staged-review"
+[checks.rules.when]
+all = [{ field = "event", op = "eq", value = "commit" }]
+[[checks.rules]]
+outcome = "history-review"
+[checks.rules.when]
+all = [{ field = "event", op = "ne", value = "history-maintenance" }]
+[[checks.rules]]
+outcome = "refuse-unauthorized"
+[checks.rules.when]
+all = [{ field = "authority", op = "eq", value = "no" }]
+[[checks.rules]]
+outcome = "refuse-shared"
+[checks.rules.when]
+all = [{ field = "history", op = "eq", value = "shared" }]
+[[checks.rules]]
+outcome = "refuse-unrecoverable"
+[checks.rules.when]
+all = [{ field = "recoverable", op = "eq", value = "no" }]
+[[checks.rules]]
+outcome = "rewrite-merge"
+[checks.rules.when]
+all = [{ field = "topology", op = "eq", value = "merge" }]
+
+[[checks]]
+id = "hook-bypass-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv"
+expected_column = "expected"
+default = "allow-bypass"
+[checks.domains]
+case = ["*"]
+authority = ["explicit", "missing"]
+scope = ["complete", "missing"]
+reason = ["missing", "recorded"]
+unmet_checks = ["missing", "recorded"]
+compensation = ["complete", "missing"]
+follow_up = ["missing", "required"]
+fallback = ["emergency", "later-repair", "no-verify", "none"]
+expected = ["allow-bypass", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "fallback", op = "ne", value = "none" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "scope", op = "eq", value = "missing" },
+  { field = "reason", op = "eq", value = "missing" },
+  { field = "unmet_checks", op = "eq", value = "missing" },
+  { field = "compensation", op = "eq", value = "missing" },
+  { field = "follow_up", op = "eq", value = "missing" },
+]
+
+[[checks]]
 id = "commit-identifier-coverage"
 type = "relation"
 mode = "set"
@@ -76,7 +149,59 @@ id = "commit-index-routes"
 type = "text"
 path = "COMMIT-STANDARDS.md"
 required = ["workflows/commit.md", "reference/recipes/commits.md"]
+prohibited = ["Mandatory History Cleanup Before Commit", "must rewrite unpushed history", "mandatory cleanup rule", "Rewriting unpushed merge commits is allowed", "Drop regression commits and fixup fixes", "@{u}", "git commit --no-verify", "When absolutely necessary"]
+
+[[checks]]
+id = "router-commit-route"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["workflows/commit.md"]
 prohibited = []
+
+[[checks]]
+id = "tooling-commit-route"
+type = "text"
+path = "TOOLING-STANDARDS.md"
+required = ["workflows/commit.md"]
+prohibited = ["Mandatory History Cleanup Before Commit", "must rewrite unpushed history", "mandatory cleanup rule", "Rewriting unpushed merge commits is allowed", "Drop regression commits and fixup fixes", "@{u}", "git commit --no-verify", "When absolutely necessary"]
+
+[[checks]]
+id = "implementation-commit-route"
+type = "text"
+path = "workflows/implementation.md"
+required = ["(commit.md)"]
+prohibited = ["Mandatory History Cleanup Before Commit", "must rewrite unpushed history", "mandatory cleanup rule", "Rewriting unpushed merge commits is allowed", "Drop regression commits and fixup fixes", "@{u}", "git commit --no-verify", "When absolutely necessary"]
+
+[[checks]]
+id = "lefthook-legacy-closure"
+type = "text"
+path = "templates/lefthook.yml"
+required = []
+prohibited = ["Mandatory History Cleanup Before Commit", "must rewrite unpushed history", "mandatory cleanup rule", "Rewriting unpushed merge commits is allowed", "Drop regression commits and fixup fixes", "@{u}", "git commit --no-verify", "When absolutely necessary"]
+
+[[checks]]
+id = "hook-bypass-owner"
+type = "text"
+path = "workflows/commit.md"
+required = ["## Hook Bypass Authority", "does not waive", "does not grant authority by itself", "Do not default to a bypass command", "leave the hook enabled"]
+prohibited = []
+
+[[checks]]
+id = "commit-owner-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0663", "TOOLING-STANDARDS.md", "workflows/commit.md", "refine"],
+  ["STD-0703", "TOOLING-STANDARDS.md", "workflows/commit.md", "refine"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0663", "STD-0703"]
 
 [[checks]]
 id = "commit-recipe-reference-metadata"

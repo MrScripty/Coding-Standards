@@ -68,15 +68,6 @@ expected = [["evaluation/standards-effectiveness/verify-contract-ownership.sh"]]
 field = "current_dependency"
 op = "eq"
 value = "transitive-root-readme-route-assertion"
-[[checks.projections]]
-columns = ["file"]
-order = "source"
-expected = [["evaluation/standards-effectiveness/verify-commit-authority.sh"]]
-[checks.projections.where]
-field = "current_dependency"
-op = "eq"
-value = "computed-root-readme-route-assertion"
-
 [[checks]]
 id = "readme-dependency-paths"
 type = "reference_inventory"
@@ -109,13 +100,6 @@ manifest_path = "evaluation/standards-effectiveness/milestone-7-row-35-readme-co
 manifest_header = ["file", "root_use", "nonroot_use"]
 manifest_path_column = "file"
 literal = "README.md"
-
-[[checks]]
-id = "commit-no-direct-root-readme"
-type = "text"
-path = "evaluation/standards-effectiveness/verify-commit-authority.sh"
-required = []
-prohibited = ["\"README.md\""]
 
 [[checks]]
 id = "transitive-callers"

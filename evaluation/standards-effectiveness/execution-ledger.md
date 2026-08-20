@@ -13242,3 +13242,22 @@ from the package row and is not an executable incident edge.
 Negative decision, unavailable-evidence, legacy-route, and exact-disposition
 cases remain typed failures. No false edge, copied count, manual numeric map,
 Bash repair, wrapper, compatibility behavior, or fallback is admitted.
+
+## 2026-08-20 M6-I13 Commit Authority Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Commit suite now owns authority decisions, hook-bypass outcomes,
+canonical routes, legacy-policy absence, exact hook-bypass owner language, and
+STD-0663/STD-0703 disposition projection. Temporary row-35 Commit tracking and
+the Bash checker are absent.
+
+M6-I13 is accepted in typed edge-free mode. Three historical records use exact
+Commit suite evidence, and whole-checker numeric lifecycle derives retirement
+without a candidate mapping. Final evidence contains 112 Bash checkers, 116
+nodes, 694 edges, and 116 components.
+
+Focused, lifecycle, mutation, removal, protected-source, generated, plan,
+declarative, complete, and diff verification pass. No new suite, registry node,
+dependency, false edge, Bash repair, wrapper, compatibility path, copied count,
+manual numeric mapping, or fallback remains.
