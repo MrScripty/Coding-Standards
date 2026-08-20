@@ -65,6 +65,10 @@ id = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
 metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv" }
 
 [[nodes]]
+id = "evaluation/standards-effectiveness/README.md"
+metadata = { repository_path = "evaluation/standards-effectiveness/README.md" }
+
+[[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv"
 metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv" }
 
@@ -486,3 +490,12 @@ relation = "enforcement-suite-projection"
 groups = ["policy-impact", "semantic"]
 traversable = true
 metadata = { applicability = "The registered Commit suite enforces every audited Commit projection and decision fixture.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.evaluation-documentation"
+source = "workflow.commit"
+target = "evaluation/standards-effectiveness/README.md"
+relation = "documentation-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The standards-effectiveness README documents the registered Commit suite's branch and worktree lifecycle coverage.", evidence_owner = "suite:commit-consolidation-dispositions" }

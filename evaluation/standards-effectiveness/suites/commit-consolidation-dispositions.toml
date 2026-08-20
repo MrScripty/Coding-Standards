@@ -80,100 +80,181 @@ any = [
 id = "branch-lifecycle-decisions"
 type = "decision"
 path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-expected_column = "expected"
-default = "refuse-cleanup"
+input_columns = ["context", "isolation", "proposal", "target", "visibility", "topology", "terminal", "long_lived_contract", "ownership", "worktree", "cleanup_basis", "discard_authority", "mapping", "prepared_in_worktree"]
 [checks.domains]
 case = ["*"]
+context = ["complete", "contradictory", "missing"]
 isolation = ["material", "none"]
 proposal = ["complete", "concurrent", "none", "selective"]
 target = ["advanced", "current-descendant", "independent", "not-applicable"]
 visibility = ["long-lived", "not-applicable", "private", "shared"]
 topology = ["durable", "linear", "not-applicable"]
 terminal = ["abandoned", "integrated", "pending", "rejected", "retained", "superseded"]
+long_lived_contract = ["complete", "incomplete", "not-applicable"]
 ownership = ["owned", "unknown"]
 worktree = ["clean", "dirty", "locked", "none", "stale-registration", "unique"]
 cleanup_basis = ["age", "count", "evidence-only", "force", "none", "terminal"]
+discard_authority = ["explicit", "missing", "not-applicable"]
 mapping = ["complete", "missing", "not-applicable"]
-expected = ["cherry-pick-lineage", "direct-serial", "fast-forward", "mapping-required", "merge", "prune-stale-registration", "rebase-verify-fast-forward", "refuse-cleanup", "remove-clean-worktree", "retain-long-lived", "retain-protected-worktree", "retire-redundant-evidence", "serial-integration", "terminal-classified"]
-[[checks.rules]]
+prepared_in_worktree = ["no", "yes"]
+expected_isolation = ["direct", "isolated", "typed-invalid", "typed-unavailable"]
+expected_integration = ["cherry-pick", "fast-forward", "merge", "not-applicable", "rebase-verify-fast-forward", "refuse-shared-rebase", "serial-integration", "typed-invalid", "typed-unavailable"]
+expected_terminal = ["abandoned", "integrated", "pending", "rejected", "retained", "superseded", "typed-invalid", "typed-unavailable"]
+expected_lineage = ["mapping-required", "not-required", "record-source-to-accepted", "typed-invalid", "typed-unavailable"]
+expected_cleanup = ["discard-authorized", "none", "prune-stale-registration", "refuse-cleanup", "remove-clean-worktree", "retain-protected-worktree", "retire-redundant-ref", "typed-invalid", "typed-unavailable"]
+
+[[checks.outputs]]
+column = "expected_isolation"
+default = "isolated"
+[[checks.outputs.rules]]
+outcome = "typed-invalid"
+[checks.outputs.rules.when]
+all = [{ field = "context", op = "eq", value = "contradictory" }]
+[[checks.outputs.rules]]
+outcome = "typed-unavailable"
+[checks.outputs.rules.when]
+all = [{ field = "context", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "direct"
+[checks.outputs.rules.when]
+all = [{ field = "isolation", op = "eq", value = "none" }]
+
+[[checks.outputs]]
+column = "expected_integration"
+default = "typed-unavailable"
+[[checks.outputs.rules]]
+outcome = "typed-invalid"
+[checks.outputs.rules.when]
+all = [{ field = "context", op = "eq", value = "contradictory" }]
+[[checks.outputs.rules]]
+outcome = "typed-unavailable"
+[checks.outputs.rules.when]
+any = [
+  { field = "context", op = "eq", value = "missing" },
+  { all = [{ field = "visibility", op = "eq", value = "long-lived" }, { field = "long_lived_contract", op = "eq", value = "incomplete" }] },
+  { all = [{ field = "proposal", op = "eq", value = "selective" }, { field = "mapping", op = "eq", value = "missing" }] },
+]
+[[checks.outputs.rules]]
+outcome = "refuse-shared-rebase"
+[checks.outputs.rules.when]
+all = [{ field = "proposal", op = "eq", value = "complete" }, { field = "target", op = "eq", value = "advanced" }, { field = "visibility", op = "eq", value = "shared" }]
+[[checks.outputs.rules]]
+outcome = "serial-integration"
+[checks.outputs.rules.when]
+all = [{ field = "proposal", op = "eq", value = "concurrent" }]
+[[checks.outputs.rules]]
+outcome = "merge"
+[checks.outputs.rules.when]
+all = [{ field = "topology", op = "eq", value = "durable" }, { field = "proposal", op = "eq", value = "complete" }]
+[[checks.outputs.rules]]
+outcome = "cherry-pick"
+[checks.outputs.rules.when]
+all = [{ field = "proposal", op = "eq", value = "selective" }, { field = "mapping", op = "eq", value = "complete" }]
+[[checks.outputs.rules]]
+outcome = "rebase-verify-fast-forward"
+[checks.outputs.rules.when]
+all = [{ field = "proposal", op = "eq", value = "complete" }, { field = "target", op = "eq", value = "advanced" }, { field = "visibility", op = "eq", value = "private" }]
+[[checks.outputs.rules]]
+outcome = "fast-forward"
+[checks.outputs.rules.when]
+all = [{ field = "proposal", op = "eq", value = "complete" }, { field = "target", op = "eq", value = "current-descendant" }]
+[[checks.outputs.rules]]
+outcome = "not-applicable"
+[checks.outputs.rules.when]
+all = [{ field = "proposal", op = "eq", value = "none" }]
+
+[[checks.outputs]]
+column = "expected_terminal"
+default = "pending"
+[[checks.outputs.rules]]
+outcome = "typed-invalid"
+[checks.outputs.rules.when]
+all = [{ field = "context", op = "eq", value = "contradictory" }]
+[[checks.outputs.rules]]
+outcome = "typed-unavailable"
+[checks.outputs.rules.when]
+any = [{ field = "context", op = "eq", value = "missing" }, { all = [{ field = "terminal", op = "eq", value = "retained" }, { field = "long_lived_contract", op = "eq", value = "incomplete" }] }]
+[[checks.outputs.rules]]
+outcome = "integrated"
+[checks.outputs.rules.when]
+all = [{ field = "terminal", op = "eq", value = "integrated" }]
+[[checks.outputs.rules]]
+outcome = "rejected"
+[checks.outputs.rules.when]
+all = [{ field = "terminal", op = "eq", value = "rejected" }]
+[[checks.outputs.rules]]
+outcome = "abandoned"
+[checks.outputs.rules.when]
+all = [{ field = "terminal", op = "eq", value = "abandoned" }]
+[[checks.outputs.rules]]
+outcome = "superseded"
+[checks.outputs.rules.when]
+all = [{ field = "terminal", op = "eq", value = "superseded" }]
+[[checks.outputs.rules]]
+outcome = "retained"
+[checks.outputs.rules.when]
+all = [{ field = "terminal", op = "eq", value = "retained" }]
+
+[[checks.outputs]]
+column = "expected_lineage"
+default = "not-required"
+[[checks.outputs.rules]]
+outcome = "typed-invalid"
+[checks.outputs.rules.when]
+all = [{ field = "context", op = "eq", value = "contradictory" }]
+[[checks.outputs.rules]]
+outcome = "typed-unavailable"
+[checks.outputs.rules.when]
+all = [{ field = "context", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "mapping-required"
+[checks.outputs.rules.when]
+all = [{ field = "proposal", op = "eq", value = "selective" }, { field = "mapping", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "record-source-to-accepted"
+[checks.outputs.rules.when]
+all = [{ field = "proposal", op = "eq", value = "selective" }, { field = "mapping", op = "eq", value = "complete" }]
+
+[[checks.outputs]]
+column = "expected_cleanup"
+default = "none"
+[[checks.outputs.rules]]
+outcome = "typed-invalid"
+[checks.outputs.rules.when]
+all = [{ field = "context", op = "eq", value = "contradictory" }]
+[[checks.outputs.rules]]
+outcome = "typed-unavailable"
+[checks.outputs.rules.when]
+all = [{ field = "context", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "discard-authorized"
+[checks.outputs.rules.when]
+all = [{ field = "terminal", op = "in", values = ["abandoned", "rejected"] }, { field = "worktree", op = "eq", value = "unique" }, { field = "discard_authority", op = "eq", value = "explicit" }, { field = "ownership", op = "eq", value = "owned" }]
+[[checks.outputs.rules]]
 outcome = "refuse-cleanup"
-[checks.rules.when]
+[checks.outputs.rules.when]
 any = [
   { field = "ownership", op = "eq", value = "unknown" },
   { field = "cleanup_basis", op = "in", values = ["age", "count", "force"] },
+  { all = [{ field = "visibility", op = "eq", value = "long-lived" }, { field = "long_lived_contract", op = "eq", value = "incomplete" }] },
+  { all = [{ field = "cleanup_basis", op = "eq", value = "evidence-only" }, { field = "mapping", op = "eq", value = "missing" }] },
 ]
-[[checks.rules]]
+[[checks.outputs.rules]]
 outcome = "retain-protected-worktree"
-[checks.rules.when]
+[checks.outputs.rules.when]
 all = [{ field = "worktree", op = "in", values = ["dirty", "locked", "unique"] }]
-[[checks.rules]]
-outcome = "mapping-required"
-[checks.rules.when]
-all = [
-  { field = "proposal", op = "eq", value = "selective" },
-  { field = "mapping", op = "eq", value = "missing" },
-]
-[[checks.rules]]
+[[checks.outputs.rules]]
 outcome = "prune-stale-registration"
-[checks.rules.when]
+[checks.outputs.rules.when]
 all = [{ field = "worktree", op = "eq", value = "stale-registration" }]
-[[checks.rules]]
+[[checks.outputs.rules]]
 outcome = "remove-clean-worktree"
-[checks.rules.when]
-all = [
-  { field = "worktree", op = "eq", value = "clean" },
-  { field = "terminal", op = "eq", value = "integrated" },
-  { field = "cleanup_basis", op = "eq", value = "terminal" },
-]
-[[checks.rules]]
-outcome = "retain-long-lived"
-[checks.rules.when]
-all = [{ field = "terminal", op = "eq", value = "retained" }]
-[[checks.rules]]
-outcome = "terminal-classified"
-[checks.rules.when]
-all = [{ field = "terminal", op = "in", values = ["abandoned", "rejected", "superseded"] }]
-[[checks.rules]]
-outcome = "retire-redundant-evidence"
-[checks.rules.when]
-all = [
-  { field = "cleanup_basis", op = "eq", value = "evidence-only" },
-  { field = "mapping", op = "eq", value = "complete" },
-]
-[[checks.rules]]
-outcome = "cherry-pick-lineage"
-[checks.rules.when]
-all = [
-  { field = "proposal", op = "eq", value = "selective" },
-  { field = "mapping", op = "eq", value = "complete" },
-]
-[[checks.rules]]
-outcome = "serial-integration"
-[checks.rules.when]
-all = [{ field = "proposal", op = "eq", value = "concurrent" }]
-[[checks.rules]]
-outcome = "merge"
-[checks.rules.when]
-all = [{ field = "topology", op = "eq", value = "durable" }]
-[[checks.rules]]
-outcome = "rebase-verify-fast-forward"
-[checks.rules.when]
-all = [
-  { field = "proposal", op = "eq", value = "complete" },
-  { field = "target", op = "eq", value = "advanced" },
-  { field = "visibility", op = "eq", value = "private" },
-]
-[[checks.rules]]
-outcome = "fast-forward"
-[checks.rules.when]
-all = [
-  { field = "proposal", op = "eq", value = "complete" },
-  { field = "target", op = "eq", value = "current-descendant" },
-]
-[[checks.rules]]
-outcome = "direct-serial"
-[checks.rules.when]
-all = [{ field = "isolation", op = "eq", value = "none" }]
+[checks.outputs.rules.when]
+all = [{ field = "worktree", op = "eq", value = "clean" }, { field = "terminal", op = "eq", value = "integrated" }, { field = "cleanup_basis", op = "eq", value = "terminal" }]
+[[checks.outputs.rules]]
+outcome = "retire-redundant-ref"
+[checks.outputs.rules.when]
+all = [{ field = "cleanup_basis", op = "eq", value = "evidence-only" }, { field = "mapping", op = "eq", value = "complete" }]
 
 [[checks]]
 id = "commit-identifier-coverage"
@@ -313,8 +394,22 @@ prohibited = []
 id = "commit-lifecycle-owner"
 type = "text"
 path = "workflows/commit.md"
-required = ["## Branch And Worktree Applicability", "## Integration Mechanism Selection", "## Cherry-Pick And Replacement Lineage", "## Terminal Branch Lifecycle", "## Worktree Lifecycle And Cleanup Authority", "Do not cherry-pick merely because", "never independently authorize deletion"]
+required = ["branch/worktree isolation, integration, lifecycle assessment, or cleanup", "## Branch And Worktree Applicability", "## Integration Mechanism Selection", "## Cherry-Pick And Replacement Lineage", "## Terminal Branch Lifecycle", "## Worktree Lifecycle And Cleanup Authority", "Do not cherry-pick merely because", "never independently authorize deletion", "separate explicit destructive authority", "Generic cleanup", "automation must refuse"]
 prohibited = ["always create a branch", "always cherry-pick", "Force-remove dirty worktrees"]
+
+[[checks]]
+id = "core-code-branch-terminology"
+type = "text"
+path = "CORE-STANDARDS.md"
+required = ["conditional code branches"]
+prohibited = ["comments, and branches that have no"]
+
+[[checks]]
+id = "commit-evaluation-documentation"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["branch-lifecycle outcomes", "proportionate isolation", "least-", "terminal classification", "replacement lineage", "bounded cleanup authority", "without letting one decision mask another"]
+prohibited = []
 
 [[checks]]
 id = "planning-isolation-projection"
@@ -348,5 +443,5 @@ prohibited = ["always cherry-pick"]
 id = "branch-lifecycle-plan-template"
 type = "text"
 path = "templates/PLAN-TEMPLATE.md"
-required = ["material repository isolation", "expected terminal disposition", "do not require a branch merely", "plan exists."]
+required = ["## Repository Isolation", "material repository isolation", "expected terminal disposition", "Do not require a branch merely", "written plan exists"]
 prohibited = ["branch for every"]

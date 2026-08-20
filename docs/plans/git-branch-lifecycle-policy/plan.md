@@ -27,7 +27,7 @@ worktree integrated by fast-forward from an unchanged accepted base.
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | A1 | Commit owns ordinary branch selection, integration, lineage, terminal lifecycle, worktree cleanup, and durable evidence; Planning and the concurrent profile retain bounded specializations. | `contract` | repository | `review` | `satisfied` | Policy and exact [consumer audit](reports/consumer-audit.tsv) |
-| A2 | Required positive and negative scenarios produce explicit branch, integration, terminal, and cleanup outcomes without age, count, force, ancestry, or cherry-pick fallback. | `focused` | repository | `automated` | `satisfied` | [Verification report](reports/verification.md) |
+| A2 | Required positive and negative scenarios independently produce isolation, integration, terminal, lineage, and cleanup outcomes without age, count, force, ancestry, or cherry-pick fallback. | `focused` | repository | `automated` | `satisfied` | [Verification report](reports/verification.md) |
 | A3 | Commit has audited policy-impact coverage, and logical/path aliases return the same exact consumers. | `integration` | repository | `automated` | `satisfied` | [Verification report](reports/verification.md) |
 | A4 | Every current local branch and worktree has a non-destructive classification and later cleanup recommendation; no resource is deleted or rewritten. | `inventory` | repository | `automated-review` | `satisfied` | [Branch inventory](inventories/branches.tsv), [worktree inventory](inventories/worktrees.tsv), and [cleanup report](reports/cleanup-dispositions.tsv) |
 | A5 | All focused, Python, declarative, generated, plan/link, and complete repository gates pass. | `complete` | repository | `automated` | `satisfied` | [Verification report](reports/verification.md) |
@@ -40,7 +40,8 @@ worktree integrated by fast-forward from an unchanged accepted base.
 - Canonical Commit branch/worktree policy and bounded Planning, Implementation,
   concurrent-integration, Router, prompt, template, recipe, fixture, suite, and
   policy-impact projections.
-- One new decision fixture covering required lifecycle scenarios.
+- One multi-output decision fixture covering required lifecycle scenarios
+  without ordered-rule masking.
 - Exact current branch/worktree inventories and cleanup recommendations.
 - Policy-impact support for explicit non-normative reference projections.
 - One task branch/worktree and fast-forward integration demonstration.
@@ -109,6 +110,7 @@ inventory, and a fast-forward lifecycle demonstration.
 **Allowed write set:**
 
 - `docs/plans/git-branch-lifecycle-policy/**`
+- `CORE-STANDARDS.md` for the bounded code-branch terminology clarification
 - `workflows/commit.md`
 - `workflows/planning.md`
 - `workflows/implementation.md`
@@ -120,8 +122,10 @@ inventory, and a fast-forward lifecycle demonstration.
 - `templates/PLAN-TEMPLATE.md`
 - `reference/recipes/commits.md`
 - `evaluation/standards-effectiveness/policy-semantic-impact.toml`
+- `evaluation/standards-effectiveness/README.md`
 - `evaluation/standards-effectiveness/fixtures/commit/**`
 - `evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml`
+- `evaluation/standards-effectiveness/suites/plan-template-projection.toml`
 - `tools/standards_verifier/standards_verifier/policy_impact.py`
 - `tools/standards_verifier/tests/test_policy_impact.py`
 
@@ -133,6 +137,8 @@ inventory, and a fast-forward lifecycle demonstration.
 - [x] Update every audited projection and record exact dispositions.
 - [x] Audit Commit policy impact and prove alias/owned-suite closure.
 - [x] Add and pass required lifecycle decision scenarios.
+- [x] Resolve accepted-review applicability, template-boundary, independent-
+  outcome, documentation-impact, and code-branch terminology findings.
 - [x] Integrate the completely verified policy by fast-forward and record the
   terminal resource disposition.
 
@@ -157,13 +163,14 @@ fast-forward integration.
 - A machine cleanup protocol becomes necessary for the requested semantic
   policy.
 
-## Concurrent Work
+## Repository Isolation
 
-No delegated work. One serial integration owner uses
+One serial integration owner used
 `codex/git-branch-lifecycle-policy` in `/tmp/cs-git-branch-lifecycle`, targeting
 `main` at the accepted base. Expected terminal disposition is `integrated`,
 followed by separately authorized removal of the clean task worktree and
-redundant branch; no cleanup is performed as part of implementation.
+redundant branch; no cleanup was performed as part of implementation. No
+delegated or concurrent work occurred.
 
 ## Final Acceptance
 

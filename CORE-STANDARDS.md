@@ -73,11 +73,11 @@ similar implementations separate when their owners, invariants, lifecycle, or
 change axes differ. Do not apply blanket extraction, reuse, or duplication
 rules.
 
-Delete code, aliases, adapters, flags, comments, and branches that have no
-current owner or supported contract. Preserve a path only for a real active
-consumer, retained state, deployment overlap, or other declared lifecycle
-obligation. Unverified future use and incumbent presence are not retention
-authority.
+Delete code, aliases, adapters, flags, comments, and conditional code branches
+that have no current owner or supported contract. Preserve a path only for a
+real active consumer, retained state, deployment overlap, or other declared
+lifecycle obligation. Unverified future use and incumbent presence are not
+retention authority.
 
 Choose names from domain meaning, role, unit, ownership, lifecycle, and
 observable effect at the narrowest useful scope. Use one term for one concept

@@ -45,3 +45,25 @@
   redundant branch are recommended for later authorized removal; this task did
   not delete or prune either resource.
 - Result: every objective acceptance claim is satisfied.
+
+## 2026-08-20: Accepted-Review Correction
+
+- Corrected Commit applicability for isolation, integration, lifecycle
+  assessment, and cleanup-only work; clarified that Core cleanup concerns
+  conditional code branches rather than Git refs.
+- Separated optional Repository Isolation from actual Concurrent Work in the
+  plan template and corrected this accepted plan's projection.
+- Replaced the ordered single-output lifecycle table with 28 scenarios that
+  independently assert isolation, integration, terminal state, lineage, and
+  cleanup. Added missing/contradictory context, shared-history refusal,
+  incomplete long-lived contract, explicit unique-commit discard authority,
+  and other-worktree fast-forward evidence.
+- Added the evaluation README as the fourteenth exact outgoing Commit consumer
+  through a standards-specific `documentation-projection`; the neutral graph
+  engine remains unchanged.
+- Verification passed: 35 graph-engine tests, 326 standards-verifier tests, all
+  164 declarative suites, generated freshness, plan structure, links, `git
+  diff --check`, and the complete checkpoint with 109 retained Bash verifiers.
+- Result: GBL-006 through GBL-009 are resolved without redesign, verifier-
+  migration work, destructive cleanup, history rewrite, or compatibility
+  fallback.

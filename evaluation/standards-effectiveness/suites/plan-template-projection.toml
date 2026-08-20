@@ -38,8 +38,24 @@ any = [{ field = "identity", op = "ne", value = "yes" }, { field = "objective", 
 id = "template-content"
 type = "text"
 path = "templates/PLAN-TEMPLATE.md"
-required = ["**Plan status:**", "**Current phase:**", "**Next slice:**", "**Acceptance status:**", "**Execution ledger:**", "**Issues:**", "## Objective", "## Objective Acceptance", "## Scope", "## Constraints And Assumptions", "## Binding Decisions", "## Simplicity And Ownership Review", "## Milestones", "A plan may contain one milestone and one implementation slice", "File count, layer count,", "**Allowed write set:**", "**Acceptance gate:**", "## Blockers", "## Re-Plan Triggers", "## Concurrent Work", "## Final Acceptance"]
+required = ["**Plan status:**", "**Current phase:**", "**Next slice:**", "**Acceptance status:**", "**Execution ledger:**", "**Issues:**", "## Objective", "## Objective Acceptance", "## Scope", "## Constraints And Assumptions", "## Binding Decisions", "## Simplicity And Ownership Review", "## Milestones", "A plan may contain one milestone and one implementation slice", "File count, layer count,", "**Allowed write set:**", "**Acceptance gate:**", "## Blockers", "## Re-Plan Triggers", "## Concurrent Work", "## Repository Isolation", "## Final Acceptance"]
 prohibited = ["## Inputs", "## Clarifying Questions", "## Definition of Done", "## Execution Notes", "## Commit Cadence Notes", "## Optional Subagent Assignment", "## Recommendations", "## Completion Summary", "### Milestone 2:", "/media/", "/home/"]
+
+[[checks]]
+id = "concurrent-work-boundary"
+type = "markdown_section_text"
+path = "templates/PLAN-TEMPLATE.md"
+heading = "## Concurrent Work"
+required = ["Use only when work is independent.", "When the", "Concurrent Plan Integration profile"]
+prohibited = ["When material repository isolation", "target branch", "terminal disposition"]
+
+[[checks]]
+id = "repository-isolation-boundary"
+type = "markdown_section_text"
+path = "templates/PLAN-TEMPLATE.md"
+heading = "## Repository Isolation"
+required = ["When material repository isolation", "responsible owner", "target branch", "expected terminal disposition", "remove this section for direct serial work"]
+prohibited = ["Use only when work is independent."]
 
 [[checks]]
 id = "disposition-lineage"

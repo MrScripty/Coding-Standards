@@ -5,8 +5,8 @@
 - ID: `workflow.commit`
 - Role: `workflow`
 - Level: `MUST`
-- Applies when: A repository change will be committed or local history maintenance is explicitly requested.
-- Does not apply when: Work is read-only and creates no repository change.
+- Applies when: A repository change will be committed, local history maintenance is requested, or branch/worktree isolation, integration, lifecycle assessment, or cleanup is being decided or performed.
+- Does not apply when: Work is read-only and requires no commit, history, branch, or worktree lifecycle decision.
 - Requires: `core`, `workflow.implementation`
 - Specializes: `none`
 - Verification: Commit authority fixtures and staged-scope review.
@@ -120,6 +120,13 @@ Automation may retire a branch only when ownership, integration, and terminal
 evidence are unambiguous. Patch-equivalent or cherry-picked branches require
 the source-to-accepted mapping before automated retirement. Age and quantity
 may trigger review but never independently authorize deletion.
+
+Discarding unique commits from a rejected or abandoned branch requires
+separate explicit destructive authority naming the branch and unique commits,
+confirming they are not accepted, shared, or otherwise required, and recording
+the selected recovery or permanent-retirement outcome. Generic cleanup
+automation must refuse that operation; rejection alone is not discard
+authority.
 
 ## Branch-History Review
 

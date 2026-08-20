@@ -41,3 +41,23 @@ cherry-pick, reconstruction, or fallback was used.
 The task branch is `integrated`. Its clean worktree and redundant branch are
 eligible for separately authorized cleanup. Neither resource was removed by
 this task.
+
+## Post-Acceptance Correction
+
+The bounded review correction passed:
+
+- 35 graph-engine tests and 326 standards-verifier tests;
+- all 164 registered declarative suites;
+- `commit-consolidation-dispositions` with 23 checks and 28 lifecycle rows,
+  each independently asserting five outcomes;
+- `plan-template-projection` with separate concurrent-work and repository-
+  isolation section checks;
+- `policy-semantic-impact` with 14 exact outgoing Commit consumers, including
+  the evaluation README documentation projection, and identical edge IDs from
+  the logical and path aliases;
+- current generated evidence, affected plan structure, Markdown links, and
+  `git diff --check`; and
+- the complete checkpoint with all 109 retained Bash verifiers.
+
+No branch, worktree, registration, or commit was removed, rewritten, or
+discarded during the correction.

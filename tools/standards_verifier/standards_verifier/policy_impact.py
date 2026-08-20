@@ -29,6 +29,7 @@ RELATION_TYPES = frozenset(
         "prompt-projection",
         "template-projection",
         "reference-projection",
+        "documentation-projection",
         "fixture-projection",
         "enforcement-suite-projection",
     }
@@ -225,6 +226,8 @@ def _consumer_matches_relation(
         valid = path.parts[:1] == ("templates",) and path.suffix == ".md"
     elif edge.relation == "reference-projection":
         valid = path.parts[:1] == ("reference",) and path.suffix == ".md"
+    elif edge.relation == "documentation-projection":
+        valid = path.suffix == ".md"
     elif edge.relation == "fixture-projection":
         valid = path.parts[:3] == (
             "evaluation",

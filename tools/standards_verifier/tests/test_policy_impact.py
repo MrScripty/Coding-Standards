@@ -51,6 +51,8 @@ class PolicyImpactTest(unittest.TestCase):
         self.write("prompts/a.md", "# A\n")
         self.write("prompts/b.md", "# B\n")
         self.write("reference/recipes/a.md", "# A reference\n")
+        self.write("evaluation/README.md", "# Evaluation documentation\n")
+        self.write("evaluation/not-documentation.tsv", "value\n")
         self.write(
             "suites/evidence.toml",
             """
@@ -177,6 +179,27 @@ class PolicyImpactTest(unittest.TestCase):
             self.load(self.manifest(relation="reference-projection"))
         self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_CONSUMER")
 
+    def test_accepts_only_markdown_for_documentation_projection(self) -> None:
+        impact = self.load(
+            self.manifest(
+                consumer="evaluation/README.md",
+                relation="documentation-projection",
+            )
+        )
+        self.assertEqual(
+            impact.consumers_for("workflow.planning")[0].consumer,
+            "evaluation/README.md",
+        )
+
+        with self.assertRaises(EngineError) as raised:
+            self.load(
+                self.manifest(
+                    consumer="evaluation/not-documentation.tsv",
+                    relation="documentation-projection",
+                )
+            )
+        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_CONSUMER")
+
     def test_uncovered_owner_query_is_typed_unavailable(self) -> None:
         impact = self.load(self.manifest())
 
@@ -265,6 +288,7 @@ class PolicyImpactTest(unittest.TestCase):
                 "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv",
                 "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv",
                 "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
+                "evaluation/standards-effectiveness/README.md",
             },
         )
         self.assertEqual(

@@ -735,7 +735,10 @@ The registered `commit-consolidation-dispositions` suite separates per-commit
 staged review from full branch-history review and history-maintenance authority.
 It permits rewriting only for an explicitly authorized, unshared, recoverable
 range, distinguishes linear and merge topology, and rejects the removed
-mandatory cleanup policy without executing a Bash checker.
+mandatory cleanup policy without executing a Bash checker. Its independent
+branch-lifecycle outcomes also verify proportionate isolation, least-
+transforming integration, terminal classification, replacement lineage, and
+bounded cleanup authority without letting one decision mask another.
 
 ## Consolidation Dispositions
 
