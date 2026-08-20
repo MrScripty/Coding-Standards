@@ -3518,3 +3518,30 @@ proof, generated freshness, all declarative suites, plan/lifecycle authority,
 the complete retained-Bash checkpoint, source-unchanged proof, and diff
 integrity pass. No dependency, wrapper, compatibility path, engine/schema
 feature, copied mutable data, inferred owner, or fallback remains.
+
+### Admitted M6-I4 Planning Consolidation
+
+The fresh post-M6-I3 graph has no fully edge-free retained verifier.
+`verify-planning-consolidation.sh` is caller-free and has the smallest reviewed
+owner-local boundary: Planning decisions and canonical/index evidence plus one
+nested migration execution-train gate. Canonical ownership comes from
+`workflows/planning.md`, not the graph.
+
+A disposable five-check suite preserves the ordered typed decision contract,
+canonical Planning content, legacy-index routes and exclusions, exact Planning
+disposition coverage derived from current tables, and accepted migration
+claims. Positive evidence and eight negative mutations pass without copied
+IDs, counts, or target lists. Disposable artifacts are absent after preflight.
+
+Train order 119 is admitted with two exact incident rows representing the same
+nested call. Both preserve the execution train as a checker-backed independent
+gate under its existing migration owner; neither creates a suite dependency.
+Planning standards, fixtures, disposition and section tables, the execution
+train, and Bash sources remain read-only in admission. Atomic acceptance is
+the next slice.
+
+Regeneration records 122 Bash checkers, 127 nodes, 673 edges, and 127
+components. The only graph additions are the package and edge-manifest contract
+references to the retained Planning checker. Both retained gates, all 153
+declarative suites, package/edge authority, freshness, plan/lifecycle checks,
+protected-source proof, and diff integrity pass.

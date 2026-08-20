@@ -12789,3 +12789,27 @@ source-unchanged proof, generated freshness, all declarative suites, both plan
 validators, the complete retained-Bash checkpoint, and diff integrity pass.
 No compatibility route, wrapper, dependency, engine/schema change, copied
 mutable data, inferred owner, or fallback remains.
+
+## 2026-08-19 M6-I4 Planning Consolidation Admission
+
+**Outcome:** owner-local package admitted at train order 119.
+
+Fresh graph review found no fully edge-free retained verifier. A disposable
+five-check Planning suite passes current evidence and fails eight targeted
+mutations across typed decisions, canonical owner text, legacy routing,
+derived exact disposition identity, and accepted migration claims. It derives
+Planning IDs from current section and disposition tables and copies no count.
+All disposable artifacts are absent before admission.
+
+The Bash checker remains executable. Its one execution-train call is recorded
+through exact executable-reference and verifier-dependency rows as one
+checker-backed independent gate owned outside Planning. No suite is registered
+and no dependency, engine/schema contract, standard, fixture, Bash source,
+helper, copied mutable data, compatibility path, inferred owner, or fallback
+changes in admission.
+
+Both retained gates, package and edge authority, all 153 declarative suites,
+fresh 122-checker / 127-node / 673-edge / 127-component evidence, both plan
+validators, lifecycle fixtures, protected-source proof, and diff integrity
+pass. The graph adds only two contract references; executable topology is
+unchanged.

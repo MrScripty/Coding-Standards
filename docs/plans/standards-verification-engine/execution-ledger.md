@@ -4242,3 +4242,28 @@
 - No engine/schema feature, dependency, copied ID/path/count, source rewrite,
   Bash wrapper, alias, compatibility behavior, inferred owner, optional-missing
   path, or fallback remains. Fresh-graph package discovery is next.
+
+## 2026-08-19 - M6-I4 Planning Consolidation Admission
+
+- Reconfirmed clean canonical `cd05e2e` before fresh-graph discovery and
+  owner-local disposable preflight.
+- Found no fully edge-free retained verifier. Selected the smallest
+  caller-free owner boundary only after confirming `workflows/planning.md`
+  owns its semantic decisions and the nested execution train remains under
+  `migration.parent-plan`.
+- Derived a five-check suite without copied ID inventory or count. Positive
+  proof passes; eight isolated mutations fail in the expected decision,
+  canonical-owner, legacy-index, disposition-coverage, or accepted-plan check.
+  Removed every disposable suite, registry, and test artifact before admission.
+- Admitted train order 119 with two incident records for the one nested call:
+  executable reference and verifier dependency both remain checker-backed
+  independent gates. No registered dependency is authorized.
+- Regenerated temporary structure and graph evidence from admitted authority.
+  Focused retained-checker, package/edge, generated-freshness, declarative,
+  plan, lifecycle, source-unchanged, and diff verification pass. Fresh evidence
+  records 122 Bash checkers, 127 nodes, 673 edges, and 127 components; exactly
+  two contract references are added and executable topology is unchanged.
+- No engine/schema change, standard/fixture/source mutation, copied mutable
+  data, Bash edit, helper migration, wrapper, compatibility route, inferred
+  owner, false dependency, optional-missing behavior, or fallback is admitted.
+  Atomic M6-I4 acceptance is next.

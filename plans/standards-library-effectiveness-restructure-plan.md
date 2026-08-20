@@ -3925,6 +3925,29 @@ generated, declarative, plan, complete-checkpoint, removed-path,
 source-unchanged, and diff verification passes without compatibility behavior
 or fallback.
 
+### M6-I4 Planning Consolidation Admission
+
+The child plan admits train order 119 under `workflows/planning.md` after fresh-
+graph owner review and disposable parity. The five-check proposal preserves
+typed Planning decisions, canonical owner content, the non-normative legacy
+index, exact disposition identity derived from current tables, and accepted
+migration claims. Positive evidence and eight targeted mutations pass without
+copying IDs or counts, and all disposable artifacts are removed.
+
+The retained checker has one nested execution-train call represented by an
+executable reference and verifier dependency. Both remain checker-backed
+independent gates under the migration parent owner; neither becomes a Planning
+suite dependency. Planning standards, fixtures, shared migration evidence,
+execution-train authority, and Bash sources remain unchanged in admission. No
+engine feature, source rewrite, helper migration, compatibility behavior,
+inferred owner, false dependency, or fallback is authorized.
+
+Admission verification passes both retained gates, package/edge authority, all
+153 declarative suites, fresh 122-checker / 127-node / 673-edge / 127-component
+evidence, both plan validators, lifecycle fixtures, protected-source proof, and
+diff integrity. Generated graph changes are limited to two contract references;
+executable topology is unchanged.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

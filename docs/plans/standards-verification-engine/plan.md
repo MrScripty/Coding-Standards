@@ -2,17 +2,20 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-I3 accepted; fresh-graph package discovery
+**Current phase:** Milestone 6: M6-I4 Planning consolidation admitted
 
-**Next slice:** derive the next owner-local package from the fresh post-M6-I3
-inventory and graph. Do not reuse pre-acceptance topology or infer semantic
-ownership from graph incidence.
+**Next slice:** atomically register and accept the preflighted M6-I4 Planning
+consolidation suite, retire its Bash checker, and preserve the execution train
+as an independently owned gate without a suite dependency.
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I3 replaced the Commit consolidation Bash gate
 with one registered owner-local suite and transferred historical independent
 gate evidence without adding a dependency.
+
+**Latest admitted slice:** M6-I4 freezes the owner-local Planning consolidation
+contract and its two representations of one independent execution-train edge.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -8188,6 +8191,54 @@ proof, and diff integrity pass. No dependency, engine/schema change, copied
 identity/path/count, source rewrite, wrapper, alias, compatibility behavior,
 inferred owner, optional-missing path, or fallback remains. Fresh-graph package
 discovery is next.
+
+##### M6-I4 Planning Consolidation
+
+**Status:** Admitted at train order 119.
+
+Fresh post-M6-I3 graph review found no retained verifier without executable
+callers and verifier/helper dependencies. Of the caller-free gates,
+`verify-planning-consolidation.sh` has the smallest owner-coherent boundary:
+canonical Planning decisions and owner/index evidence plus one nested call to
+the independently owned migration execution train. Graph incidence narrows the
+candidate set but does not assign this ownership.
+
+A disposable five-check suite under `workflows/planning.md` preserves decision
+precedence and typed outcomes, required canonical owner text, legacy-index
+routing and retired headings, exact Planning disposition identity derived from
+the section and disposition tables, and three accepted migration claims. It
+copies no ID inventory or count. The positive suite and eight isolated
+decision, owner-text, index-route, prohibited-heading, disposition, section,
+and acceptance mutations pass. All disposable suite, registry, and test files
+are absent before admission.
+
+The current graph exposes one script call as both an executable reference and
+a verifier dependency. M6-I4 records both current representations with the
+same `independent-gate` decision and checker-backed evidence. Execution-train
+integrity belongs to `migration.parent-plan`; it is not Planning semantics and
+does not become a registered dependency.
+
+The admitted package row is the sole file-level write-set authority.
+`workflows/planning.md`, `PLAN-STANDARDS.md`, the Planning fixture,
+consolidation dispositions, section inventory, execution-train checker, and
+parent migration claims remain read-only. Acceptance may add/register only the
+preflighted suite, transition M6-I4 and its two edge records, delete only the
+Planning Bash checker, regenerate temporary projections, and update serial
+planning evidence.
+
+No engine/schema feature, copied row/ID/count, standards or fixture rewrite,
+Bash edit, helper migration, wrapper, alias, callback, inferred owner, false
+dependency, compatibility behavior, optional-missing path, or fallback is
+admitted. Re-plan if final graph incidence differs, a preflighted mutation is
+lost, shared evidence must change, execution-train behavior proves Planning-
+owned, or implementation leaves the admitted write set.
+
+Admission verification passes the retained Planning and execution-train gates,
+package and edge authority, all 153 declarative suites, generated freshness at
+122 Bash checkers / 127 nodes / 673 edges / 127 components, both plan
+validators, lifecycle fixtures, protected-source proof, and diff integrity.
+Generated evidence adds exactly two package/edge contract references to the
+retained Planning checker; executable topology is unchanged.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 
