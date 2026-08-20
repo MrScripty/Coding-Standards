@@ -4,9 +4,8 @@
 
 **Current phase:** Milestone 2: planning contract split
 
-**Next slice:** separate generic Planning from the precisely applicable
-concurrent-plan-integration profile and align the affected Router, reference,
-prompt, template, fixture, and suite projections
+**Next slice:** separate generic Planning from the precisely routed concurrent
+integration profile and its non-normative mechanism reference
 
 **Acceptance status:** `pending`
 
@@ -145,6 +144,10 @@ separate current-structure checks from historical-prose dependencies.
 - This plan directory.
 - `evaluation/standards-effectiveness/` inventory and report artifacts approved
   by the slice.
+- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-components.tsv`
 
 **Tasks:**
 
@@ -156,7 +159,9 @@ separate current-structure checks from historical-prose dependencies.
 **Acceptance gate:**
 
 - Every historical-plan claim has exactly one reviewed disposition and no
-  normative or executable file changes have begun.
+  normative or executable file changes have begun. Generated migration
+  observations are current and confer no execution, dependency, ownership, or
+  acceptance authority.
 
 **Status:** `Accepted`
 
