@@ -3685,3 +3685,35 @@ audit, all declarative suites, plan/lifecycle checks, complete checkpoint,
 freshness, removed-path, protected-source, and diff checks pass. No copied
 identity/count, helper migration, false dependency, compatibility behavior,
 inferred owner, or fallback remains.
+
+### VE078 Source-Index Component Replacement
+
+Fresh generated evidence contains 118 Bash checkers, 123 executable nodes, 660
+edges, and 123 components. The next shallow source-index boundary consists of
+`verify-source-index-closure-engine.sh`,
+`verify-source-index-closures.sh`, and their sole shared helper
+`check-source-index-closure.sh`. Both verifiers are executable-caller-free and
+have no other verifier dependency. The engine-fixture verifier proves the
+helper algorithm; the aggregate verifier applies it to the seven registered
+source fixtures. No other live checker references the helper.
+
+The component cannot be migrated one verifier at a time without retaining
+split Bash/Python authority. VE078 therefore selects one capability-first,
+component-complete transition. M6-C5 adds a bounded Python
+`source_index_closure` check and direct unit tests. M6-I8 and M6-I9 retain
+separate ownership for engine-fixture and aggregate contracts but accept
+atomically after disposable parity proof, registering one aggregate suite and
+deleting all three Bash paths.
+
+The Python check will derive fixture directories, source membership, headings,
+routes, line counts, and identifier memberships from canonical inputs. It will
+compare exact nonempty owner-map and disposition identifier sets instead of
+accepting equal totals. Explicit fixture values remain limited to policy
+inputs: source and title, line budget, ordered headings, route identities and
+projections, and prohibited literals. No current total, copied identifier list,
+inferred fixture, optional source, compatibility schema, command action, Bash
+bridge, or fallback is authorized.
+
+Decision Traceability is not part of this component. Its helper is distributed
+through documentation recipes and hook templates, so replacing it requires a
+later delivery-interface re-plan rather than source-index capability growth.

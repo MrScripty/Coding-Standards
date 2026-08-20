@@ -4405,3 +4405,26 @@
   fixture, engine/schema, helper, copied mutable data, compatibility behavior,
   false dependency, inferred owner, or fallback remains. Fresh-graph discovery
   is next.
+
+## 2026-08-19 - VE078 Source-Index Component Replacement Re-plan
+
+- Reconfirmed clean canonical `f3cc8ff` before fresh-graph and ownership
+  review.
+- Classified the next shallow boundary as one three-path infrastructure
+  component: two caller-free source-index verifiers share the Bash helper whose
+  behavior they test and apply. Partial verifier migration, a wrapper, and
+  retained helper execution are rejected as split or compatibility authority.
+- Selected capability-first replacement. M6-C5 will add one bounded Python
+  `source_index_closure` check and direct tests without changing live evidence.
+  It derives fixture membership and all totals, and strengthens frozen lineage
+  from equal counts to exact nonempty identifier-set equality.
+- Froze separate M6-I8 and M6-I9 package ownership for the engine-fixture and
+  aggregate contracts at train orders 123 and 124. They will be accepted
+  atomically with one registered aggregate suite and deletion of both Bash
+  verifiers plus the unreferenced helper.
+- Decision Traceability remains outside this component because it is a
+  distributed consumer-facing executable with recipe and hook-template
+  contracts.
+- No package is admitted and no engine, test, suite, registry, fixture,
+  manifest, generated, Bash, standards, compatibility, or fallback behavior
+  changes in this planning slice. M6-C5 implementation is next.

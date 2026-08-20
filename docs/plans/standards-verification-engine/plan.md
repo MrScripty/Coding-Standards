@@ -8481,6 +8481,95 @@ engine/schema, helper, copied mutable data, false dependency, compatibility
 behavior, inferred owner, optional-missing path, or fallback remains. Fresh-
 graph package discovery is next.
 
+##### VE078 Source-Index Component Replacement Re-plan
+
+**Status:** Accepted planning decision; M6-C5 capability implementation is
+next. No migration package is admitted.
+
+The fresh post-M6-I7 graph contains 118 Bash checkers, 123 executable nodes,
+660 edges, and 123 components. Its shallow caller-free boundary is no longer
+an ordinary policy leaf. `verify-source-index-closure-engine.sh` and
+`verify-source-index-closures.sh` both depend on
+`check-source-index-closure.sh`; the first proves the helper's positive and
+negative behavior, while the second applies that same behavior to every
+registered source-index fixture. Migrating either verifier alone would leave
+split Bash/Python authority. Keeping the helper behind a Python wrapper or
+registering a suite that still executes it is prohibited compatibility
+behavior.
+
+The selected recovery is capability-first and component-complete:
+
+1. `M6-C5` adds one bounded, side-effect-free Python
+   `source_index_closure` check and direct unit tests. It accepts explicit
+   repository-contained paths for the source-fixture root, immutable closure
+   manifest, corpus, generated owner map, exact dispositions, and Router. It
+   derives fixture directories and all current memberships and totals. It does
+   not register a live suite, edit a Bash path, or change canonical evidence.
+2. Disposable preflight creates one live aggregate suite using M6-C5 and proves
+   parity with the current nested positive case, all seven registered source
+   indexes, and every existing negative mutation. It must additionally prove
+   exact owner-map/disposition identifier-set equality rather than interpreting
+   equal numeric totals as identity.
+3. After successful preflight, `M6-I8` owns retirement of the engine-fixture
+   verifier in favor of direct Python tests, while `M6-I9` owns the registered
+   aggregate suite. They are admitted separately at train orders 123 and 124
+   and accepted atomically with deletion of both Bash verifiers and their now-
+   unreferenced helper.
+
+M6-C5 validates exact fixture shape without storing derived inventory. Each
+fixture directory must contain exactly `contract.tsv`, `headings.tsv`,
+`routes.tsv`, and `prohibited.tsv`. The check derives registered directory
+membership, source membership, route membership, heading membership, line
+count, and frozen identifier membership at execution time. `max_lines` remains
+an explicit policy budget, not a copied current line count. Source, title,
+headings, route name/target/href, and prohibited literals remain explicit
+reviewable policy inputs because deriving them from the source under test would
+make the assertion self-fulfilling.
+
+The capability must preserve strict table schemas, repository containment,
+unique fixture ownership, immutable-manifest membership, non-normative corpus
+state, complete ordered ATX headings, source-relative href normalization,
+canonical target and anchor agreement, target existence, exact Markdown href
+presence, source-specific and generic legacy-authority exclusions, required
+non-authority wording, nonempty exact owner/disposition identifier-set
+equality, canonical owner availability, and Router non-selection. Missing,
+malformed, duplicate, escaping, unresolved, mismatched, normative, legacy,
+drifted, or unequal evidence returns typed invalid, unavailable, or assertion
+diagnostics. No source can be skipped and no default path, inferred fixture,
+alternate schema, count authority, callback, arbitrary command, Bash bridge,
+or fallback is permitted.
+
+**M6-C5 allowed write set:** the new check module, check registration/config
+parsing, focused engine tests, and engine documentation, plus this child plan
+and execution ledger. It cannot edit suites, registry, source-index fixtures,
+canonical standards/indexes, migration manifests, generated evidence, Bash
+verifiers/helpers, package/edge authority, evaluation ledger, or parent plan.
+Because M6-C5 changes a shared engine contract, focused tests, all engine tests,
+all registered declarative suites, and the complete retained-Bash checkpoint
+must pass before capability acceptance.
+
+**M6-I8/M6-I9 acceptance boundary:** acceptance may add and register only the
+preflighted aggregate suite, add and accept the two package records and exact
+incident-edge dispositions, transfer any discovered historical checker
+evidence to its reviewed Python test or suite authority, delete exactly the two
+source-index verifiers and shared helper, regenerate the four graph artifacts,
+and update serial planning evidence. Existing source fixtures and all
+authoritative source indexes remain byte-identical. The final graph must remove
+the complete three-path Bash component.
+
+Decision Traceability remains excluded. Its helper is a distributed
+consumer-facing executable referenced by recipes and hook templates, so its
+replacement requires a separate delivery and downstream-interface re-plan.
+M6-C5 must not introduce a generic command action or packaging mechanism for
+that later boundary.
+
+Re-plan if the Python check cannot express the existing contract without
+repository-specific branching, parity requires changing a source fixture or
+canonical index, exact identifier sets legitimately differ, another live
+consumer of the helper is discovered, package authority cannot represent both
+retired verifier contracts, a fourth Bash path enters the component, or the
+accepted component cannot be deleted atomically without fallback.
+
 ##### M6-U0 Concurrent Semantic Preparation Wave
 
 **Status:** Planned; package preflight follows M6-I1 acceptance.

@@ -12936,3 +12936,26 @@ declarative, plan/lifecycle, complete-checkpoint, freshness, removed-path,
 protected-source, and diff verification pass. No source, fixture, engine,
 helper, copied data, compatibility behavior, false dependency, inferred owner,
 or fallback remains.
+
+## 2026-08-19 VE078 Source-Index Component Replacement Re-plan
+
+**Outcome:** capability-first complete-component replacement selected; no
+package admitted.
+
+The post-M6-I7 graph contains 118 Bash checkers, 123 executable nodes, 660
+edges, and 123 components. The next shallow source-index component contains two
+caller-free verifiers and their sole shared Bash helper. One verifier proves
+the helper with a nested positive and fifteen negative cases; the other applies
+it to all seven registered source indexes. No other live checker consumes the
+helper.
+
+M6-C5 will implement the same bounded contract as a typed, side-effect-free
+Python check with direct tests and no live-suite or Bash change. It will derive
+all membership and totals and compare exact owner-map/disposition identifier
+sets. M6-I8 and M6-I9 preserve the two distinct verifier contracts and will be
+accepted atomically with one aggregate suite and deletion of the complete
+three-path Bash component.
+
+Decision Traceability remains a later distributed-tooling replan. No engine,
+test, suite, registry, fixture, manifest, generated, package, edge, Bash,
+standards, compatibility, or fallback change occurs in this planning slice.

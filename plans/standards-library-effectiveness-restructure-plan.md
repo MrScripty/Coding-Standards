@@ -4064,6 +4064,32 @@ protected-source, and diff checks pass. No engine/helper migration, copied
 mutable data, false dependency, compatibility behavior, inferred owner, or
 fallback remains. Fresh-graph package discovery is next.
 
+### VE078 Source-Index Component Replacement Re-plan
+
+The child verification plan classifies the next shallow boundary as one
+three-path infrastructure component: the source-index engine-fixture verifier,
+the live aggregate verifier, and their sole shared Bash helper. Migrating only
+one verifier, wrapping the helper, or registering a suite that still invokes
+Bash would preserve split or compatibility authority.
+
+The accepted sequence is capability-first. M6-C5 adds a bounded Python
+`source_index_closure` check and direct tests without changing live authority.
+It derives fixture membership and all current totals, validates exact
+repository-contained source/index contracts, and strengthens lineage proof to
+exact nonempty owner-map/disposition identifier-set equality. Explicit fixture
+data remains policy input rather than copied current inventory.
+
+After disposable parity proof, M6-I8 and M6-I9 preserve separate ownership for
+the helper-engine and aggregate contracts at train orders 123 and 124, then
+accept atomically with one registered aggregate suite and deletion of both
+Bash verifiers and the unreferenced helper. Existing source fixtures,
+standards/indexes, and canonical migration evidence remain unchanged.
+
+Decision Traceability is excluded because it is a distributed consumer-facing
+tool with recipe and hook-template contracts. No package is admitted and no
+engine, suite, registry, fixture, manifest, generated, Bash, compatibility, or
+fallback change occurs in this planning slice. M6-C5 implementation is next.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream
