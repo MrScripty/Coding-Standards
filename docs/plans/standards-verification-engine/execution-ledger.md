@@ -4549,3 +4549,20 @@
 - No package is admitted and no live suite, registry, Bash path, fixture,
   standard, engine, manifest, generated artifact, compatibility behavior, or
   fallback changed. M6-I10 admission is next.
+
+## 2026-08-20 - VE080 Numeric Lifecycle Authority Recovery
+
+- Admission probing confirmed that M6-I10 has three immutable numeric-audit
+  candidates but candidate-retirement recording is not the whole-checker
+  deletion mechanism.
+- Selected the existing derived whole-checker contract: after M6-I10 is
+  accepted and its checker is absent, numeric lifecycle derives all associated
+  baseline candidates and accepts their disappearance from that one checker
+  package.
+- Kept the separate retirement-package and generated-mapping path bounded to
+  numeric expressions removed while their checker remains live. M6-I10 will
+  create neither record.
+- Restored the exploratory package and edge edits before this recovery. No
+  manifest, generated evidence, suite, registry, Bash path, engine, fixture,
+  standard, compatibility behavior, or fallback changed. Corrected M6-I10
+  admission remains next.

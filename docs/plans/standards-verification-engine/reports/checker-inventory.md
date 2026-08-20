@@ -3804,3 +3804,10 @@ derived identity, owner/disposition agreement, and missing evidence; each
 returns a typed diagnostic. All temporary artifacts are absent and every
 canonical mutation target is byte-restored. M6-I10 may proceed to admission
 without an engine change or compatibility path.
+
+M6-I10's three numeric-audit candidates require no candidate-retirement rows.
+The checker-package lifecycle already derives complete candidate disappearance
+when an accepted checker subject becomes absent. The separate retirement
+package and generated mapping mechanism remains reserved for removing selected
+numeric expressions while their checker stays live. Admission therefore adds
+no copied candidate identity and no second package authority.

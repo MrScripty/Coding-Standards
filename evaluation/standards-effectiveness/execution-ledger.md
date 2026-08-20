@@ -13038,3 +13038,19 @@ Every mutated canonical input is byte-restored and all disposable suite and
 registry artifacts are removed. No package, edge record, live suite, Bash path,
 fixture, standard, engine capability, generated artifact, compatibility
 behavior, or fallback changed. M6-I10 admission is authorized next.
+
+## 2026-08-20 VE080 Numeric Lifecycle Authority Recovery
+
+**Outcome:** resolved; corrected M6-I10 admission is next.
+
+M6-I10 has three immutable numeric-audit candidates. The candidate-retirement
+recorder correctly rejects its checker package because separate candidate
+packages apply only when expressions disappear from a checker that remains
+live. Complete checker deletion instead derives candidate disappearance from
+one accepted `checker:` package.
+
+M6-I10 will use that existing whole-checker lifecycle and create no duplicate
+retirement package or generated candidate mapping. Exploratory manifest edits
+were removed before this recovery. No executable authority, generated evidence,
+suite, registry, Bash path, engine contract, compatibility behavior, or
+fallback changed.

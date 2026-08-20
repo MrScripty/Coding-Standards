@@ -98,6 +98,7 @@ evidence contracts.
 | Dependencies | Registered suite `requires` owns execution dependencies; lexical graph edges do not. | [Legacy reference boundary](reports/legacy-script-reference-model.md) |
 | Temporary graph | Keep the current lexical reference model frozen as conservative deletion-lifecycle evidence and remove it at zero Bash. | [Legacy reference boundary](reports/legacy-script-reference-model.md) |
 | Generated values | Derive mutable paths, counts, memberships, and relationships; store only explicit policy inputs and reviewed lifecycle authority. | [Count-authority report](reports/count-authority.md) |
+| Numeric lifecycle | Whole-checker deletion derives candidate retirement from one accepted checker package; candidate mappings apply only when a numeric expression disappears while its checker remains live. | [Checker inventory](reports/checker-inventory.md) |
 | Concurrency | Prepare admitted disjoint package-local work concurrently; integrate registry, manifests, graph, plans, and checkpoints serially. | [Checker inventory](reports/checker-inventory.md) |
 | Parent boundary | The parent plan owns normative migration; this plan owns verification architecture and checker migration. | [Parent plan](../../../plans/standards-library-effectiveness-restructure-plan.md) |
 
