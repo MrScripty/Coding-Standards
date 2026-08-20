@@ -4310,3 +4310,22 @@
   standards, fixture, registry, manifest, compatibility behavior, or fallback
   changes in this planning slice. Dependency-closed disposable preflight is
   next.
+
+## 2026-08-19 - M6-I5 And M6-I6 Frontend Evidence Closure Admission
+
+- Reconfirmed clean canonical `f46c9bb` before dependency-closed disposable
+  preflight and admission.
+- Derived two same-owner suites with one registry dependency. Positive focused
+  execution and all 156 disposable suites pass; eleven isolated mutations
+  reject dependency, decision, text, route, prohibition, identity,
+  disposition, and acceptance drift.
+- Removed every disposable suite and registry entry and confirmed all
+  authoritative mutation targets byte-match their preflight inputs.
+- Admitted train orders 120 and 121. M6-I5 records its inbound live caller and
+  outbound row-18 gate as checker-backed independent evidence. M6-I6 records
+  both lineage-to-evidence representations as one same-owner package
+  dependency.
+- No suite is registered and both Bash checkers remain executable. Canonical
+  policy, indexes, fixtures, decomposition, validation, dispositions, parent
+  claims, row-18 authority, engine/schema, compatibility behavior, and fallback
+  remain unchanged. Atomic two-package acceptance is next.

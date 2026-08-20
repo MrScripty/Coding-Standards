@@ -3585,3 +3585,24 @@ at train orders 120 and 121 after disposable joint preflight, then accepted in
 one dependency-closed cutover. No current suite, registry row, package,
 manifest, Bash source, canonical evidence, engine contract, compatibility
 path, or fallback changes in this replan.
+
+### Admitted M6-I5 And M6-I6 Frontend Evidence Closure
+
+Joint disposable preflight proves six Testing Frontend evidence checks and two
+Frontend lineage checks with one explicit suite dependency. The evidence suite
+owns typed decisions, canonical profile text, two legacy routes, retired
+mechanisms, row-18 child-5 lineage, and accepted claims. The lineage suite owns
+only its unique Evidence-section and row-34 child-5 lineage assertions; its
+dependency supplies the overlapping evidence contract.
+
+The focused closure, all 156 disposable suites, and eleven negative mutations
+pass. Disposable suite and registry files are absent after preflight, and all
+mutated authoritative inputs are restored.
+
+Train orders 120 and 121 are separately admitted under
+`profile.application.frontend`. M6-I5 records four incident representations as
+checker-backed independent gates. M6-I6 owns the two requiring representations
+and points them at same-owner package M6-I5. Both Bash checkers remain present,
+no suite is registered, and atomic acceptance is next. No engine feature,
+canonical evidence rewrite, copied identity/count, bridge, compatibility path,
+false dependency, or fallback is admitted.

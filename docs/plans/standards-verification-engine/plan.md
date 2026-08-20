@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE076 Frontend dependency-closure preflight
+**Current phase:** Milestone 6: M6-I5 and M6-I6 admitted
 
-**Next slice:** preflight the M6-I5 Testing Frontend evidence suite and M6-I6
-Frontend testing-lineage suite together, prove their registry dependency and
-mutation parity, then remove every disposable artifact before admission.
+**Next slice:** atomically register and accept M6-I5 and M6-I6, declare the
+lineage-to-evidence suite dependency, transfer historical evidence, and delete
+both obsolete Bash checkers.
 
 **Acceptance status:** `pending`
 
@@ -14,7 +14,8 @@ mutation parity, then remove every disposable artifact before admission.
 with one registered owner-local suite while preserving the execution train as
 an independently owned checker-backed gate.
 
-**Latest admitted slice:** `none`; no package follows accepted M6-I4.
+**Latest admitted slice:** M6-I5 and M6-I6 freeze two Frontend contracts, one
+same-owner dependency, the independent row-18 gate, and one atomic cutover.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -8257,7 +8258,7 @@ discovery is next.
 
 ##### VE076 Frontend Evidence Dependency Closure Re-plan
 
-**Status:** Accepted planning decision; no package admitted.
+**Status:** Accepted planning decision; packages admitted below.
 
 Fresh post-M6-I4 evidence contains no retained verifier that is both caller-
 free and dependency-free. The smallest reviewed closure is
@@ -8319,6 +8320,47 @@ plan if existing generic assertions cannot express either relation, the final
 incident graph differs, the row-18 gate proves Frontend-owned, shared canonical
 evidence must change, mutation parity requires duplicated semantics, or any
 implementation leaves the admitted write sets.
+
+##### M6-I5 And M6-I6 Frontend Evidence Closure
+
+**Status:** Admitted at train orders 120 and 121; atomic acceptance required.
+
+Dependency-closed disposable preflight represented both suites with existing
+generic checks. `testing-frontend-evidence` has six checks for the decision
+table, canonical profile, two legacy routes and mechanism exclusions, exact
+row-18 child-5 disposition lineage, and accepted claims.
+`frontend-testing-lineage` has two unique checks for the Evidence section and
+exact row-34 child-5 keyed lineage; its registered dependency executes the
+overlapping evidence contract rather than duplicating those assertions.
+
+Both suites pass together and all 156 disposable registry suites pass. Eleven
+isolated mutations produce the expected typed failures for dependency
+propagation, decision outcome, canonical text, Evidence section, both routes,
+retired mechanism, row-18 identity and disposition, accepted claim, and row-34
+identity and disposition. Authoritative inputs were restored after each case,
+and all disposable suite and registry changes were removed before admission.
+
+M6-I5 records four current incident representations. Its inbound lineage call
+remains a checker-backed independent gate until atomic acceptance, and its
+outbound row-18 call remains independently owned after acceptance. M6-I6 owns
+both representations of the live lineage-to-evidence call and records M6-I5 as
+the same-owner package dependency during admission.
+
+The admitted rows are the sole file-level write-set authority. Canonical
+Frontend policy, legacy indexes, decision fixture, decomposition, owner-
+validation, dispositions, parent claims, and row-18 checker remain read-only.
+Acceptance may add/register only the preflighted suites, transition both
+packages and six current edge records, transfer the two historical M6-T12
+records, delete only the two obsolete Frontend Bash checkers, regenerate the
+temporary projections, and update serial planning evidence.
+
+No engine/schema capability, canonical evidence mutation, copied ID/count,
+Bash edit, partial acceptance, bridge, wrapper, alias, callback, compatibility
+route, inferred owner, optional-missing behavior, false dependency, or fallback
+is admitted. Re-plan if final incident topology differs, the registry
+dependency does not replace both live edge representations, a preflighted
+mutation is lost, the M6-T12 transfer cannot name the lineage suite, or
+implementation leaves either admitted write set.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

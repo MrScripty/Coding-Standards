@@ -12850,3 +12850,20 @@ count is copied. Joint disposable preflight precedes separate package
 admission, and both Bash checkers are deleted only in one atomic acceptance.
 No bridge, wrapper, compatibility path, inferred owner, false dependency, or
 fallback is authorized.
+
+## 2026-08-19 M6-I5 And M6-I6 Frontend Evidence Closure Admission
+
+**Outcome:** two same-owner packages admitted; atomic acceptance is next.
+
+Disposable preflight passes both suites with one lineage-to-evidence registry
+dependency, all 156 temporary registry suites, and eleven isolated negative
+mutations. Exact row-18 and row-34 identities derive from decomposition and
+current disposition authority. All disposable files are absent and every
+authoritative mutation target is restored before admission.
+
+M6-I5 records the live inbound lineage caller and outbound row-18 gate as
+checker-backed independent evidence. M6-I6 records both representations of the
+lineage-to-evidence call as a same-owner package dependency on M6-I5. Both Bash
+checkers remain executable and no suite is registered. No canonical evidence,
+engine/schema contract, copied ID/count, bridge, compatibility behavior, false
+dependency, or fallback changes in admission.

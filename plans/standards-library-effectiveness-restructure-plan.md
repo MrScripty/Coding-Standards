@@ -3982,6 +3982,26 @@ dependency, or fallback is introduced. The child plan must stop again if joint
 mutation parity cannot be represented with existing generic assertions or the
 final incident graph differs.
 
+### M6-I5 And M6-I6 Frontend Evidence Closure Admission
+
+The child verification plan admits two `profile.application.frontend`
+packages at train orders 120 and 121 after joint disposable preflight. The
+Testing Frontend evidence suite owns six decision, policy, route, exclusion,
+lineage, and acceptance checks. The Frontend lineage suite owns two unique
+lineage checks and requires the evidence suite instead of duplicating it.
+
+Both disposable suites, all 156 temporary registry suites, and eleven isolated
+mutations pass. Disposable artifacts are removed and authoritative inputs are
+restored before admission. M6-I5 retains the live lineage caller and row-18
+gate as independent checker-backed evidence; M6-I6 records the live same-owner
+package dependency. No suite is registered and both Bash checkers remain.
+
+Atomic acceptance must register both suites, transition the requiring edges to
+one suite dependency, preserve row-18 as independent evidence, transfer the two
+historical M6-T12 records, and delete both obsolete checkers. No partial
+acceptance, engine feature, canonical evidence rewrite, copied mutable data,
+bridge, compatibility behavior, false dependency, or fallback is authorized.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream
