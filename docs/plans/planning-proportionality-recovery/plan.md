@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 4 generated-projection scope recovery
+**Current phase:** Milestone 4 parent-plan compaction
 
-**Next slice:** resolve `PPR-C3-G1`, then compact the parent plan with an
-authorized fresh generated structure projection
+**Next slice:** compact the verification-engine plan from canonical package,
+ledger, issue, report, and generated-evidence records
 
 **Acceptance status:** `pending`
 
@@ -239,13 +239,19 @@ preserving all displaced history through links to canonical evidence.
 
 - `plans/standards-library-effectiveness-restructure-plan.md`
 - `docs/plans/standards-verification-engine/plan.md`
+- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
 - Their ledgers, issues, and reports when required by reviewed dispositions.
 - Planning structure verification affected by compaction ownership.
 
 **Tasks:**
 
-- [ ] Compact milestone history into current-state tables and evidence links.
-- [ ] Remove duplicated accepted-slice narratives.
+- [x] Compact the parent standards-restructure plan into current-state tables
+  and canonical evidence links.
+- [x] Remove duplicated accepted-slice narration from the parent plan.
+- [ ] Compact the verification-engine plan into current-state tables and
+  canonical evidence links.
+- [ ] Remove duplicated accepted-slice narration from the verification-engine
+  plan.
 - [ ] Verify displaced evidence remains reachable and authoritative.
 
 **Acceptance gate:**
@@ -253,7 +259,7 @@ preserving all displaced history through links to canonical evidence.
 - Structural and semantic review confirms that both plans expose current
   authority without historical narration or lost evidence.
 
-**Status:** `Blocked`
+**Status:** `Active`
 
 #### PPR-C3-G1 Generated Structure Projection Re-plan
 
@@ -273,23 +279,19 @@ Disposable regeneration changes only two structure rows:
 Checker membership and executable topology remain exactly 116 Bash checkers,
 120 nodes, 708 edges, and 120 components. No dependency edge changes.
 
-Recovery options:
+Option 1 is selected. Milestone 4 now authorizes only the generated structure
+inventory in addition to the two active plans and their evidence owners.
+Compaction must regenerate that projection atomically, prove an exact bounded
+row diff and unchanged graph artifacts, and pass full declarative verification,
+freshness, and the retained mixed checkpoint. The temporary inventory schema,
+reference model, and executable topology remain unchanged.
 
-1. **Recommended:** add only
-   `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
-   to the Milestone 4 write set and regenerate it atomically with each plan
-   compaction. Require exact row-diff review, unchanged graph artifacts, full
-   declarative verification, freshness, and the retained mixed checkpoint.
-2. Redesign the temporary lexical inventory to exclude active-plan
-   documentation references. This changes the frozen migration reference model
-   shortly before its zero-Bash deletion and is disproportionate to two derived
-   rows.
-3. Split regeneration into a later repair commit. This would leave an accepted
-   compaction with stale canonical generated evidence and is invalid.
-4. Preserve obsolete checker references in the compact plan. This would retain
-   historical prose as compatibility input and violate the recovery objective.
-
-No compaction commit is authorized until this scope decision is accepted.
+**Acceptance:** `PPR-C3-G1` and the parent-plan compaction are accepted. The
+active parent plan is 225 lines and contains current authority plus canonical
+evidence links. Exactly two generated structure rows changed; all graph
+artifacts remain unchanged at 120 nodes, 708 edges, and 120 components. Plan
+structure, Markdown links, numeric-retirement freshness, all 159 declarative
+suites, and the complete 116-checker mixed checkpoint pass.
 
 ### Milestone 5: Acceptance And Downstream Pilot
 

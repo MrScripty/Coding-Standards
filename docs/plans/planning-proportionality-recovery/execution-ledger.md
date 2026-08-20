@@ -252,3 +252,33 @@
   derived rows.
 - Isolation: the compaction probe remains outside canonical `main`; no active
   plan or generated artifact changed in this planning slice.
+
+## 2026-08-20: Parent-Plan Compaction Acceptance
+
+- Operation: `continue`.
+- Decision: selected `PPR-C3-G1` Option 1 and added only the generated checker
+  structure inventory to the Milestone 4 compaction write set.
+- Projection: replaced the 4,136-line parent plan with a 225-line current-state
+  plan containing its objective, acceptance state, binding decisions,
+  milestone table, active Milestone 7 boundary, blockers, next work, and links
+  to canonical history and lifecycle evidence.
+- Historical ownership: detailed accepted execution remains in the existing
+  parent ledger; findings, owner maps, dispositions, package lifecycle, edge
+  lifecycle, and generated evidence remain in their canonical artifacts. No
+  compatibility copy or historical active-plan authority remains.
+- Generated evidence: exactly two checker structure rows changed. The old
+  parent-plan documentation references are absent; current recovery plan and
+  ledger references are observed. The node, edge, and component artifacts are
+  byte-identical at 120 nodes, 708 edges, and 120 components.
+- Verification:
+  - parent and recovery plan structure passed;
+  - all parent-plan repository-local Markdown links passed;
+  - checker inventory and graph freshness passed with 116 retained Bash
+    checkers;
+  - numeric-retirement freshness passed;
+  - all 159 declarative suites passed;
+  - the complete mixed checkpoint passed all 116 retained Bash checkers; and
+  - `git diff --check` passed.
+- Result: `PPR-007`, `PPR-C3-G1`, and the parent-plan compaction are
+  accepted. Verification-engine plan compaction is the only admitted next
+  slice.
