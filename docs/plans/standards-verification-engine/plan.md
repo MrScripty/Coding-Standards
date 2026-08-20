@@ -8483,8 +8483,8 @@ graph package discovery is next.
 
 ##### VE078 Source-Index Component Replacement Re-plan
 
-**Status:** Accepted planning decision; M6-C5 is accepted and M6-I8/M6-I9 are
-admitted after disposable parity proof. Atomic component acceptance is next.
+**Status:** Accepted and implemented. M6-C5, M6-I8, and M6-I9 replace the
+complete source-index Bash component.
 
 The fresh post-M6-I7 graph contains 118 Bash checkers, 123 executable nodes,
 660 edges, and 123 components. Its shallow caller-free boundary is no longer
@@ -8572,7 +8572,8 @@ accepted component cannot be deleted atomically without fallback.
 
 ##### VE078-E1 Generated Structure Evidence Recovery
 
-**Status:** Accepted; M6-C5 and M6-I8/M6-I9 admission are complete.
+**Status:** Accepted; the corrected evidence supported completed M6-C5 and
+M6-I8/M6-I9 implementation.
 
 VE078 introduced exact documentation references to both retained source-index
 verifiers but its planning-only write set omitted the derived structure
@@ -8592,8 +8593,8 @@ complete retained-Bash checkpoint must pass before M6-C5 resumes.
 
 ##### M6-C5 Source-Index Closure Capability
 
-**Status:** Accepted as a shared engine capability; M6-I8/M6-I9 disposable
-preflight and admission are complete. Atomic component acceptance is next.
+**Status:** Accepted as a shared engine capability; M6-I8/M6-I9 atomic
+component acceptance is complete.
 
 The engine now registers one strict `source_index_closure` check. Its
 configuration accepts only the source-fixture root and five canonical evidence
@@ -8622,7 +8623,7 @@ or fallback is introduced.
 
 ##### M6-I8/M6-I9 Source-Index Component Admission
 
-**Status:** Admitted at train orders 123 and 124; atomic acceptance is next.
+**Status:** Accepted atomically at train orders 123 and 124.
 
 Disposable preflight restores the exact two-check aggregate design selected by
 VE078. `registered-source-indexes` applies M6-C5 to all seven canonical fixture
@@ -8675,6 +8676,35 @@ Re-plan if fresh incidence differs from the admitted four records, package
 authority rejects the same-owner component model, the exact preflighted suite
 cannot be restored, any protected input changes, the helper remains referenced,
 or deletion and registration cannot occur in one validated commit.
+
+##### M6-I8/M6-I9 Source-Index Component Acceptance
+
+The exact preflighted two-check suite is registered without dependencies. Both
+packages and all four same-owner incident records are accepted. The two Bash
+verifiers and their sole shared helper are absent, so aggregate execution now
+uses only the canonical Python engine and direct capability tests retain the
+engine-fixture contract. No legacy executable, alias, wrapper, bridge, or
+alternate schema remains.
+
+Final incidence review found one F083 discovery-time reference to the removed
+helper. The findings file already marks F083 resolved in `7.4c3rh`, and its
+detailed systemic table intentionally retains historical evidence just as F078
+retains its deleted Coding-verifier reference. It is not a live gate, package
+edge, lifecycle consumer, or replacement authority, so preserving it maintains
+provenance and does not preserve execution. No findings edit or write-set
+expansion is needed.
+
+Regenerated final evidence contains 116 Bash checkers, 120 executable nodes,
+656 edges, and 120 components. Removing the three executable nodes drops the
+four live helper incidences and six temporary admission contract references.
+The focused suite, all 285 engine tests, package and edge authority, all 158
+declarative suites, generated freshness, both plan validators, removed-path and
+protected-input checks, and the complete retained-Bash checkpoint pass.
+
+No engine/schema, fixture, canonical source/index, manifest, corpus, owner map,
+disposition, Router, parent-plan acceptance, finding provenance, copied
+inventory, false dependency, compatibility behavior, inferred owner, optional
+path, or fallback changed. Fresh-graph package discovery is next.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

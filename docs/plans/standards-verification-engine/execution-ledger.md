@@ -4489,3 +4489,26 @@
   unchanged.
 - Package/edge authority, graph freshness, both plan validators, all 157 live
   declarative suites, and the complete 118-checker checkpoint pass.
+
+## 2026-08-19 - M6-I8/M6-I9 Source-Index Component Acceptance
+
+- Reconfirmed clean canonical `5993f19` and the exact admitted four-edge
+  incidence before implementation.
+- Registered the exact preflighted two-check suite without dependencies and
+  accepted M6-I8, M6-I9, and all four same-owner incident records.
+- Deleted both source-index Bash verifiers and their sole shared helper in the
+  same slice. No wrapper, alias, bridge, alternate schema, or fallback remains.
+- Reviewed F083's discovery-time helper reference. Its separate resolved row is
+  current, while the detailed table intentionally preserves historical
+  provenance like other resolved findings; it is not live authority and stays
+  unchanged.
+- Regenerated final evidence at 116 Bash checkers, 120 nodes, 656 edges, and
+  120 components. The removed component accounts for three nodes, four live
+  helper incidences, and six admission-only contract references.
+- Focused aggregate, 285 engine tests, package/edge authority, all 158
+  declarative suites, graph freshness, both plan validators, removed paths,
+  protected inputs, complete checkpoint, and diff integrity pass.
+- No source, fixture, migration evidence, Router, finding provenance,
+  engine/schema, copied inventory, false dependency, compatibility behavior,
+  inferred owner, optional path, or fallback changed. Fresh-graph discovery is
+  next.

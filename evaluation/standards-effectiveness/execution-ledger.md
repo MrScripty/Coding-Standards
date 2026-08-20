@@ -12984,3 +12984,24 @@ and 123 components. Only the six derived authority-manifest contract references
 are new; executable incidence is unchanged. Package/edge authority, both plan
 validators, all 157 live suites, graph freshness, and the complete retained-
 Bash checkpoint pass.
+
+## 2026-08-19 M6-I8/M6-I9 Source-Index Component Acceptance
+
+**Outcome:** accepted atomically; source-index closure is Python-owned.
+
+The exact preflighted two-check suite is registered without dependencies.
+M6-I8, M6-I9, and all four same-owner helper records are accepted. Both Bash
+verifiers and their sole shared helper are deleted in the same slice, leaving
+no wrapper, alias, Bash bridge, alternate schema, or fallback.
+
+Final incidence review classifies F083's helper citation as discovery-time
+historical evidence: the resolved-status row is current, and the detailed
+finding table intentionally preserves removed-path provenance. It is not live
+authority and remains unchanged.
+
+Generated evidence contains 116 Bash checkers, 120 nodes, 656 edges, and 120
+components. Focused aggregate, all 285 engine tests, package/edge authority,
+all 158 declarative suites, both plan checks, graph freshness, removed paths,
+protected inputs, complete checkpoint, and diff integrity pass. No source,
+fixture, migration evidence, Router, engine/schema, copied inventory, false
+dependency, compatibility behavior, inferred owner, or fallback changed.

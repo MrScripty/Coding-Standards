@@ -784,3 +784,8 @@ requires = ["testing-frontend-evidence"]
 id = "rust-api-owner-contract"
 path = "evaluation/standards-effectiveness/suites/rust-api-owner-contract.toml"
 requires = []
+
+[[suites]]
+id = "source-index-closures"
+path = "evaluation/standards-effectiveness/suites/source-index-closures.toml"
+requires = []

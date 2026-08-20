@@ -3758,3 +3758,18 @@ and 123 components. The six additional edges are authority-manifest contract
 references to the two verifiers and helper; no executable edge changed. All
 authority, declarative, plan, freshness, and complete retained-Bash admission
 checks pass.
+
+### Accepted M6-I8/M6-I9 Source-Index Component
+
+The registered two-check aggregate has no dependencies and is the only live
+source-index closure authority. M6-I8 retains the former engine-fixture
+contract through direct Python tests; M6-I9 owns aggregate execution and the
+completed helper retirement. Both packages and all four same-owner records are
+accepted, while the two verifiers and helper are absent.
+
+F083's detailed discovery-time helper citation remains historical provenance,
+not executable or lifecycle authority; its resolved-status row already records
+the canonical separate target/href behavior. Final evidence contains 116 Bash
+checkers, 120 nodes, 656 edges, and 120 components. Focused, engine, authority,
+declarative, plan, freshness, removed-path, protected-input, and complete
+checkpoint verification pass without compatibility behavior or fallback.

@@ -4116,6 +4116,19 @@ components. The six new edges are derived authority-manifest references, not
 new executable dependencies. Authority, declarative, plan, freshness, and the
 complete retained-Bash admission checkpoint pass.
 
+M6-I8 and M6-I9 are accepted atomically. The exact preflighted two-check suite
+is registered without dependencies; both packages and all four same-owner
+records are accepted; both Bash verifiers and their sole helper are absent.
+Direct Python tests own the former engine-fixture contract and the registered
+aggregate is the only live source-index closure authority.
+
+F083 retains its discovery-time helper citation as historical provenance, while
+its resolved-status row records the canonical separate target/href behavior.
+It is not an executable or lifecycle authority. Final evidence is fresh at 116
+Bash checkers, 120 nodes, 656 edges, and 120 components, and all focused,
+engine, authority, declarative, plan, removed-path, protected-input, freshness,
+and complete-checkpoint gates pass without a compatibility path or fallback.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

@@ -1,0 +1,21 @@
+schema_version = 1
+id = "source-index-closures"
+owner = "verification-engine.migration-source-closure"
+description = "Aggregate closure proof for every registered former normative source index and its accepted implementation boundary."
+
+[[checks]]
+id = "registered-source-indexes"
+type = "source_index_closure"
+fixture_root = "evaluation/standards-effectiveness/fixtures/source-closure"
+manifest_path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
+corpus_path = "evaluation/standards-effectiveness/corpus.tsv"
+owner_map_path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
+dispositions_path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+router_path = "STANDARDS-ROUTER.md"
+
+[[checks]]
+id = "implementation-acceptance"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4c3v1` (`Accepted`)"]
+prohibited = []

@@ -1,11 +1,7 @@
 edge_type	source	target
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/check-source-index-closure.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-source-index-closure-engine.sh
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-source-index-closures.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-source-index-closure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-accessibility-name-input.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-composition-root-pattern.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-data-authority-pattern.sh
@@ -42,8 +38,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-root-router-evidence.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-async-boundary.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-unsafe-contracts.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-source-index-closure-engine.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-source-index-closures.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-decision-traceability.sh
@@ -377,8 +371,6 @@ executable_reference	evaluation/standards-effectiveness/verify-security-index-cl
 executable_reference	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-network-transport-policy.sh
 executable_reference	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
-executable_reference	evaluation/standards-effectiveness/verify-source-index-closure-engine.sh	evaluation/standards-effectiveness/check-source-index-closure.sh
-executable_reference	evaluation/standards-effectiveness/verify-source-index-closures.sh	evaluation/standards-effectiveness/check-source-index-closure.sh
 executable_reference	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/check-plan-structure.sh
 executable_reference	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-13-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
@@ -438,8 +430,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-rust-filesystem-auth
 helper_dependency	evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-unsafe-contracts.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-wire-representation.sh	evaluation/standards-effectiveness/check-metadata.sh
-helper_dependency	evaluation/standards-effectiveness/verify-source-index-closure-engine.sh	evaluation/standards-effectiveness/check-source-index-closure.sh
-helper_dependency	evaluation/standards-effectiveness/verify-source-index-closures.sh	evaluation/standards-effectiveness/check-source-index-closure.sh
 helper_dependency	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/check-plan-structure.sh
 helper_dependency	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	evaluation/standards-effectiveness/check-metadata.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-accessibility-focus-lifecycle.sh	evaluation/standards-effectiveness/verify-accessibility-interaction-semantics.sh
