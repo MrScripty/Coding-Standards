@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1: consumer and authority inventory
+**Current phase:** Milestone 2: planning contract split
 
-**Next slice:** inventory every active-plan consumer and assign each historical
-claim one canonical replacement authority or an explicit retirement disposition
+**Next slice:** separate generic Planning from the precisely applicable
+concurrent-plan-integration profile and align the affected Router, reference,
+prompt, template, fixture, and suite projections
 
 **Acceptance status:** `pending`
 
@@ -147,17 +148,17 @@ separate current-structure checks from historical-prose dependencies.
 
 **Tasks:**
 
-- [ ] Derive direct and transitive active-plan consumers.
-- [ ] Classify every consumed claim by semantic purpose.
-- [ ] Assign one canonical replacement authority or retirement disposition.
-- [ ] Prove exact inventory coverage without manually maintained counts.
+- [x] Derive direct and transitive active-plan consumers.
+- [x] Classify every consumed claim by semantic purpose.
+- [x] Assign one canonical replacement authority or retirement disposition.
+- [x] Prove exact inventory coverage without manually maintained counts.
 
 **Acceptance gate:**
 
 - Every historical-plan claim has exactly one reviewed disposition and no
   normative or executable file changes have begun.
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 ### Milestone 2: Planning Contract Split
 
