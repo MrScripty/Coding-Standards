@@ -13023,3 +13023,18 @@ suite remain independent gates, not registry dependencies. Two historical
 M6-T13 checker subjects transfer only during atomic acceptance. No package,
 suite, registry, manifest, Bash path, fixture, standard, engine capability,
 compatibility behavior, or fallback changed.
+
+## 2026-08-20 M6-I10 Disposable Preflight
+
+**Outcome:** passed; package admission is next.
+
+The disposable three-check Architecture suite and retained checker both pass.
+All 160 temporary declarative suites and the independently selected row-37
+gate pass without a registry dependency. Nine isolated mutations produce typed
+diagnostics for decision, vocabulary, row-width, required/prohibited text,
+derived-identity, owner, disposition, and missing-record failures.
+
+Every mutated canonical input is byte-restored and all disposable suite and
+registry artifacts are removed. No package, edge record, live suite, Bash path,
+fixture, standard, engine capability, generated artifact, compatibility
+behavior, or fallback changed. M6-I10 admission is authorized next.

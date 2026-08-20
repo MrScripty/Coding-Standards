@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** build and mutation-test the disposable M6-I10 Architecture
-directory-template closure suite without changing live authority
+**Next slice:** admit the preflighted M6-I10 Architecture directory-template
+package and exact independent-gate lifecycle records
 
 **Acceptance status:** `pending`
 
@@ -138,7 +138,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Disposable M6-I10 preflight under the accepted VE079 boundary |
+| 6 | Exceptional checks and Bash retirement | `Active` | Admit preflighted M6-I10 under the accepted VE079 boundary |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -153,13 +153,12 @@ generated evidence.
 
 **Next work:**
 
-1. Build the disposable M6-I10 suite from current Architecture decisions,
-   text, disposition, and row-37 evidence.
-2. Prove positive behavior and focused negative mutation parity without
-   registering the suite or editing canonical evidence.
-3. Admit M6-I10 only after its Architecture ownership, independent Frontend
-   gate, historical evidence transfer, exact write set, and verification
-   contract pass review.
+1. Admit the preflighted M6-I10 package with its exact write set and current
+   independent Frontend-gate edge records.
+2. Keep the suite unregistered, the checker executable, and historical M6-T13
+   evidence checker-backed until atomic acceptance.
+3. Regenerate only generator-owned evidence and verify package, edge, plan,
+   declarative, retained-checker, and diff integrity before acceptance.
 4. Add a reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
 5. Prepare disjoint admitted suite/checker changes concurrently when their

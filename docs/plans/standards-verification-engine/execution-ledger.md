@@ -4532,3 +4532,20 @@
   M6-I10 suite for atomic acceptance. No package is admitted and no suite,
   registry, manifest, fixture, Bash, engine, standard, or compatibility path
   changes in this slice. Disposable mutation preflight is next.
+
+## 2026-08-20 - M6-I10 Disposable Preflight
+
+- Built the proposed three-check suite with no dependency: typed directory
+  decisions, required/prohibited Architecture index text, and a keyed relation
+  deriving the final row-37 child and comparing owner/disposition authorities.
+- The proposed suite, retained checker, all 160 temporary declarative suites,
+  and the focused independent row-37 gate pass against current evidence.
+- Nine isolated mutations fail with typed diagnostics for decision drift,
+  unknown fallback vocabulary, malformed row width, missing required text,
+  prohibited legacy defaults, changed row-37 identity, expected-owner drift,
+  observed-disposition drift, and missing disposition.
+- Byte-restored every mutated canonical input, removed the disposable suite and
+  registry row, and confirmed a clean worktree before recording this result.
+- No package is admitted and no live suite, registry, Bash path, fixture,
+  standard, engine, manifest, generated artifact, compatibility behavior, or
+  fallback changed. M6-I10 admission is next.

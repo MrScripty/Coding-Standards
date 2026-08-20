@@ -5,8 +5,8 @@
 **Current phase:** Milestone 7 verification migration, M6-I10 Architecture
 directory-template replacement
 
-**Next slice:** preflight the disposable M6-I10 declarative suite under the
-accepted VE079 independent-gate boundary
+**Next slice:** admit the preflighted M6-I10 package and exact independent-gate
+lifecycle records without changing live execution authority
 
 **Acceptance status:** `partial`
 

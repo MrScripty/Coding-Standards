@@ -3795,3 +3795,12 @@ independent complete-suite gates. Disposable preflight must derive membership
 from canonical tables, preserve focused negative behavior, and prove that no
 new engine capability, copied count, registry dependency, wrapper, or fallback
 is required before package admission.
+
+Disposable preflight now passes. The proposed suite has three generic checks
+and no dependency. It passes beside the retained checker, all 160 temporary
+registered suites, and the independent row-37 suite. Nine isolated mutations
+exercise decision output, vocabulary, row shape, required/prohibited text,
+derived identity, owner/disposition agreement, and missing evidence; each
+returns a typed diagnostic. All temporary artifacts are absent and every
+canonical mutation target is byte-restored. M6-I10 may proceed to admission
+without an engine change or compatibility path.
