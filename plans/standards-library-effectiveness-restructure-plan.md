@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 verification migration, fresh-graph package
-discovery
+**Current phase:** Milestone 7 verification migration, M6-I10 Architecture
+directory-template replacement
 
-**Next slice:** rebuild the current verifier graph and select the next
-owner-coherent package from reviewed lifecycle and dependency evidence
+**Next slice:** preflight the disposable M6-I10 declarative suite under the
+accepted VE079 independent-gate boundary
 
 **Acceptance status:** `partial`
 

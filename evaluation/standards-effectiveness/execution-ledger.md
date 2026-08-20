@@ -13005,3 +13005,21 @@ all 158 declarative suites, both plan checks, graph freshness, removed paths,
 protected inputs, complete checkpoint, and diff integrity pass. No source,
 fixture, migration evidence, Router, engine/schema, copied inventory, false
 dependency, compatibility behavior, inferred owner, or fallback changed.
+
+## 2026-08-20 VE079 Architecture Directory-Template Re-plan
+
+**Outcome:** accepted package-selection boundary; M6-I10 preflight is next.
+
+Fresh generated evidence is unchanged at 116 Bash checkers, 120 nodes, 708
+conservative edges, and 120 components. No retained verifier is both
+caller-free and dependency-free. Review selected the Architecture
+directory-template checker as the smallest owner-local candidate while
+rejecting topology-derived ownership.
+
+M6-I10 will preserve ten typed decisions, exact Architecture text and
+prohibitions, the `STD-0087` disposition, and row-37 lineage derived from
+canonical evidence. Frontend view-model lineage and the registered row-37
+suite remain independent gates, not registry dependencies. Two historical
+M6-T13 checker subjects transfer only during atomic acceptance. No package,
+suite, registry, manifest, Bash path, fixture, standard, engine capability,
+compatibility behavior, or fallback changed.

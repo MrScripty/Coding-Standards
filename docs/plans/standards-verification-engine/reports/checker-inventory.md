@@ -3773,3 +3773,25 @@ the canonical separate target/href behavior. Final evidence contains 116 Bash
 checkers, 120 nodes, 656 edges, and 120 components. Focused, engine, authority,
 declarative, plan, freshness, removed-path, protected-input, and complete
 checkpoint verification pass without compatibility behavior or fallback.
+
+### Selected M6-I10 Architecture Directory-Template Boundary
+
+Fresh generation leaves the executable inventory unchanged at 116 Bash
+checkers and 120 nodes. No retained verifier is both caller-free and free of
+outgoing executable relationships. The smallest reviewed owner-local boundary
+is the Architecture directory-template closure.
+
+The checker owns ten typed decisions, legacy-index routing and prohibited
+universal tree defaults, the exact `STD-0087` disposition, and confirmation
+that row-37 identities have dispositions. Its nested Frontend view-model call
+does not make Frontend policy an Architecture dependency. The registered
+row-37 decomposition suite already owns exact migration lineage across all 19
+identities.
+
+M6-I10 therefore replaces only
+`verify-architecture-directory-template-closure.sh` with a
+`topics.architecture` suite. Frontend view-model lineage and row-37 remain
+independent complete-suite gates. Disposable preflight must derive membership
+from canonical tables, preserve focused negative behavior, and prove that no
+new engine capability, copied count, registry dependency, wrapper, or fallback
+is required before package admission.

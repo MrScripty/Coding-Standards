@@ -4,15 +4,15 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** rebuild the current graph and select the next owner-coherent
-checker package from reviewed lifecycle and dependency evidence
+**Next slice:** build and mutation-test the disposable M6-I10 Architecture
+directory-template closure suite without changing live authority
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I8 and M6-I9 atomically replaced the complete
 source-index Bash component at train orders 123 and 124.
 
-**Latest admitted slice:** `none`; no package follows accepted M6-I9.
+**Latest admitted slice:** `none`; M6-I10 is selected but not admitted.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -138,7 +138,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Rebuild the graph and select the next owner-coherent package |
+| 6 | Exceptional checks and Bash retirement | `Active` | Disposable M6-I10 preflight under the accepted VE079 boundary |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -153,16 +153,20 @@ generated evidence.
 
 **Next work:**
 
-1. Regenerate the graph from current repository state.
-2. Select the smallest owner-coherent package from reviewed lifecycle and
-   dependency evidence.
-3. Add a reusable primitive only when multiple coherent owners require it or
+1. Build the disposable M6-I10 suite from current Architecture decisions,
+   text, disposition, and row-37 evidence.
+2. Prove positive behavior and focused negative mutation parity without
+   registering the suite or editing canonical evidence.
+3. Admit M6-I10 only after its Architecture ownership, independent Frontend
+   gate, historical evidence transfer, exact write set, and verification
+   contract pass review.
+4. Add a reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
-4. Prepare disjoint admitted suite/checker changes concurrently when their
+5. Prepare disjoint admitted suite/checker changes concurrently when their
    write sets and dependencies are frozen.
-5. Integrate shared authority serially and run one complete checkpoint at each
+6. Integrate shared authority serially and run one complete checkpoint at each
    shared-contract or wave boundary.
-6. Continue until no Bash verifier, helper, or launcher remains, then delete
+7. Continue until no Bash verifier, helper, or launcher remains, then delete
    the temporary reference model.
 
 **Acceptance gate:** exact inventory reports zero Bash verification paths; the

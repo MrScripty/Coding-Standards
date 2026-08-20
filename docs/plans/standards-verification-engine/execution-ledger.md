@@ -4512,3 +4512,23 @@
   engine/schema, copied inventory, false dependency, compatibility behavior,
   inferred owner, optional path, or fallback changed. Fresh-graph discovery is
   next.
+
+## 2026-08-20 - VE079 Architecture Directory-Template Re-plan
+
+- Reconfirmed clean canonical `4a979db` and regenerated the temporary graph
+  without a diff: 116 Bash checkers, 120 nodes, 708 conservative edges, and
+  120 components.
+- Found no retained verifier that is both caller-free and dependency-free.
+  Selected the smallest reviewed owner-local candidate only after separating
+  its Architecture contract from nested Frontend and migration orchestration.
+- Froze M6-I10 under `topics.architecture`. Its suite will preserve the ten
+  typed directory decisions, canonical legacy-index text, prohibited universal
+  tree defaults, exact `STD-0087` disposition, and row-37 lineage from current
+  tables without a copied identifier list or count.
+- Classified Frontend view-model lineage and the registered row-37 suite as
+  independently executed gates. Neither becomes a registry dependency, and
+  the broader reachable closure is not one package.
+- Reserved transfer of two accepted M6-T13 historical checker subjects to the
+  M6-I10 suite for atomic acceptance. No package is admitted and no suite,
+  registry, manifest, fixture, Bash, engine, standard, or compatibility path
+  changes in this slice. Disposable mutation preflight is next.
