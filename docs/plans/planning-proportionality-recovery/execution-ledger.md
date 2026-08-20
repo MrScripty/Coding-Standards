@@ -229,3 +229,26 @@
   - `git diff --check` and the complete 116-checker mixed checkpoint passed.
 - Result: `PPR-C2`, `PPR-003`, `PPR-006`, and Milestone 3 are accepted. Active-
   plan compaction is the only admitted next milestone.
+
+## 2026-08-20: Parent-Plan Compaction Projection Re-plan
+
+- Operation: `continue` stopped at `PPR-C3-G1` before integration.
+- Probe: compacted the parent plan from 4,136 to 225 lines using current
+  objective, decisions, milestone state, blockers, next work, and canonical
+  evidence links. Plan structure, all 159 declarative suites, numeric-
+  retirement freshness, and diff integrity pass.
+- Trigger: generated checker-inventory freshness fails because compaction
+  removes the parent plan as a documentation reference from exactly
+  `verify-commit-authority.sh` and `verify-contract-ownership.sh`.
+- Topology proof: disposable regeneration leaves 116 Bash checkers, 120 nodes,
+  708 edges, and 120 components unchanged; only the two structure rows lose one
+  documentation-reference path each.
+- Recommended recovery: authorize the exact generated structure inventory in
+  Milestone 4 and regenerate it atomically with plan compaction. Require exact
+  row-diff review, unchanged graph artifacts, full declarative verification,
+  freshness, and the retained mixed checkpoint.
+- Rejected as current direction: preserving obsolete plan references, accepting
+  stale evidence, or redesigning the frozen temporary reference model for two
+  derived rows.
+- Isolation: the compaction probe remains outside canonical `main`; no active
+  plan or generated artifact changed in this planning slice.

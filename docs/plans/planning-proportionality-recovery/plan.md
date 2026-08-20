@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 4: active-plan compaction
+**Current phase:** Milestone 4 generated-projection scope recovery
 
-**Next slice:** compact the parent and verification-engine plans from current
-canonical state and existing ledger/report links without changing migration
-authority
+**Next slice:** resolve `PPR-C3-G1`, then compact the parent plan with an
+authorized fresh generated structure projection
 
 **Acceptance status:** `pending`
 
@@ -254,7 +253,43 @@ preserving all displaced history through links to canonical evidence.
 - Structural and semantic review confirms that both plans expose current
   authority without historical narration or lost evidence.
 
-**Status:** `Planned`
+**Status:** `Blocked`
+
+#### PPR-C3-G1 Generated Structure Projection Re-plan
+
+A parent-plan compaction probe reduces the active plan from 4,136 to 225 lines
+and passes plan structure, all 159 declarative suites, numeric-retirement
+freshness, and diff integrity. Generated-inventory freshness fails because the
+temporary lexical structure inventory still counts documentation references to
+retained checkers.
+
+Disposable regeneration changes only two structure rows:
+
+- `verify-commit-authority.sh` no longer records the parent plan as a
+  documentation reference; and
+- `verify-contract-ownership.sh` no longer records the parent plan as a
+  documentation reference.
+
+Checker membership and executable topology remain exactly 116 Bash checkers,
+120 nodes, 708 edges, and 120 components. No dependency edge changes.
+
+Recovery options:
+
+1. **Recommended:** add only
+   `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+   to the Milestone 4 write set and regenerate it atomically with each plan
+   compaction. Require exact row-diff review, unchanged graph artifacts, full
+   declarative verification, freshness, and the retained mixed checkpoint.
+2. Redesign the temporary lexical inventory to exclude active-plan
+   documentation references. This changes the frozen migration reference model
+   shortly before its zero-Bash deletion and is disproportionate to two derived
+   rows.
+3. Split regeneration into a later repair commit. This would leave an accepted
+   compaction with stale canonical generated evidence and is invalid.
+4. Preserve obsolete checker references in the compact plan. This would retain
+   historical prose as compatibility input and violate the recovery objective.
+
+No compaction commit is authorized until this scope decision is accepted.
 
 ### Milestone 5: Acceptance And Downstream Pilot
 
