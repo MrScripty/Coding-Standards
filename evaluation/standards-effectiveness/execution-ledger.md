@@ -12959,3 +12959,28 @@ three-path Bash component.
 Decision Traceability remains a later distributed-tooling replan. No engine,
 test, suite, registry, fixture, manifest, generated, package, edge, Bash,
 standards, compatibility, or fallback change occurs in this planning slice.
+
+## 2026-08-19 M6-I8/M6-I9 Source-Index Component Admission
+
+**Outcome:** train orders 123 and 124 admitted; atomic acceptance is next.
+
+Disposable preflight passes both retained verifiers, a temporary two-check
+aggregate over all seven source indexes, and all 158 temporary registered
+suites. The aggregate composes M6-C5 with a generic parent-plan acceptance text
+check and declares no dependency. All fifteen legacy negative mutations fail
+with typed Python diagnostics in disposable repository copies.
+
+Every temporary suite and registry artifact is removed, and authoritative
+source/index, fixture, manifest, corpus, owner-map, disposition, Router, and
+parent-plan inputs remain unchanged. M6-I8 owns engine-fixture retirement;
+M6-I9 owns aggregate execution and helper retirement. Their four exact helper
+incidences point to M6-I9 as a same-owner package. The Bash component remains
+live and the suite remains unregistered until atomic acceptance. No wrapper,
+bridge, external-artifact fiction, false dependency, compatibility behavior,
+or fallback is admitted.
+
+Generated admission evidence contains 118 Bash checkers, 123 nodes, 666 edges,
+and 123 components. Only the six derived authority-manifest contract references
+are new; executable incidence is unchanged. Package/edge authority, both plan
+validators, all 157 live suites, graph freshness, and the complete retained-
+Bash checkpoint pass.

@@ -3727,3 +3727,34 @@ Neither has an executable caller, both retain the same sole helper dependency,
 and the executable graph remains 118 Bash checkers, 123 nodes, 660 edges, and
 123 components. The correction changes no component ownership or migration
 selection.
+
+### Accepted M6-C5 Source-Index Closure Capability
+
+The Python engine now exposes one bounded `source_index_closure` check with
+direct tests. It derives all fixture and identifier membership, validates exact
+nonempty owner-map/disposition identifier sets, and accepts no command,
+callback, optional source, alternate schema, compatibility path, or fallback.
+The accepted capability does not register a live suite or alter the Bash
+component.
+
+### Admitted M6-I8/M6-I9 Source-Index Component
+
+Disposable preflight validates the two-check aggregate against all seven live
+fixtures, all 158 temporary suites, and every one of the legacy engine
+verifier's fifteen negative mutations. The separate implementation-acceptance
+assertion is composed with a generic text check rather than embedded in the
+source-index capability. Temporary artifacts are absent and protected inputs
+are unchanged after preflight.
+
+Train orders 123 and 124 share the existing migration-source-closure owner but
+retain separate engine-fixture and aggregate contracts. M6-I9 owns aggregate
+execution and retirement of the sole shared helper, so all four exact incident
+representations use `same-owner-package: M6-I9`. Both packages are admitted;
+the suite is not registered and all three Bash paths remain until atomic
+acceptance.
+
+Generated admission evidence contains 118 Bash checkers, 123 nodes, 666 edges,
+and 123 components. The six additional edges are authority-manifest contract
+references to the two verifiers and helper; no executable edge changed. All
+authority, declarative, plan, freshness, and complete retained-Bash admission
+checks pass.

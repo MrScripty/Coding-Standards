@@ -4459,3 +4459,33 @@
   generated graph, Bash path, evaluation ledger, or parent plan changed.
 - M6-I8/M6-I9 disposable parity preflight is next. Live authority remains
   wholly Bash-owned until atomic component acceptance.
+
+## 2026-08-19 - M6-I8/M6-I9 Source-Index Component Admission
+
+- Reconfirmed clean canonical `dfeb7ea` before dependency-closed disposable
+  preflight.
+- Restored the exact two-check aggregate: M6-C5 validates all seven registered
+  source indexes and a generic text check preserves the existing `7.4c3v1`
+  acceptance assertion. The suite has no dependency.
+- Both retained Bash verifiers, the focused temporary suite, and all 158
+  temporary registry suites pass.
+- Reproduced all fifteen legacy negative mutations against disposable copies
+  of the live aggregate. Every case fails with the expected typed Python
+  diagnostic, including malformed route schema, duplicate heading and href,
+  and exact identifier-set disagreement.
+- Removed all disposable suite/registry artifacts and confirmed that no
+  authoritative source, fixture, manifest, corpus, owner-map, disposition,
+  Router, or parent-plan input changed.
+- Admitted M6-I8 and M6-I9 at train orders 123 and 124 under the same canonical
+  migration-source-closure owner. All four exact helper incidences identify
+  M6-I9 as the same-owner package responsible for helper retirement.
+- The live suite remains unregistered and both verifiers plus their helper
+  remain executable. No bridge, wrapper, external-artifact fiction, false
+  dependency, compatibility behavior, or fallback is introduced. Atomic
+  component acceptance is next.
+- Regenerated admission evidence contains 118 Bash checkers, 123 nodes, 666
+  edges, and 123 components. The six added edges are derived contract
+  references from the two authority manifests; executable incidence is
+  unchanged.
+- Package/edge authority, graph freshness, both plan validators, all 157 live
+  declarative suites, and the complete 118-checker checkpoint pass.

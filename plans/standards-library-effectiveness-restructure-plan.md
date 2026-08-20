@@ -4090,6 +4090,32 @@ tool with recipe and hook-template contracts. No package is admitted and no
 engine, suite, registry, fixture, manifest, generated, Bash, compatibility, or
 fallback change occurs in this planning slice. M6-C5 implementation is next.
 
+### M6-C5 And M6-I8/M6-I9 Source-Index Admission
+
+M6-C5 is accepted as a bounded Python capability with direct typed tests and
+exact owner-map/disposition identifier-set comparison. It changes no live
+source-index authority.
+
+Disposable preflight then proves the selected aggregate against all seven live
+source indexes, all 158 temporary suites, and the complete fifteen-case legacy
+negative contract. A separate generic text check preserves the parent-plan
+implementation-acceptance assertion; the source-index capability remains
+cohesive and repository evidence remains unchanged.
+
+M6-I8 and M6-I9 are admitted at train orders 123 and 124 under the existing
+migration-source-closure owner. They retain separate engine-fixture and
+aggregate contracts, while M6-I9 owns deletion of their sole shared helper.
+All exact incident records use the same-owner package disposition. The suite
+is unregistered and all three Bash paths remain until one atomic acceptance
+registers the exact preflighted suite, accepts both packages, and deletes the
+complete component. No wrapper, bridge, false dependency, external-artifact
+fiction, compatibility behavior, inferred owner, or fallback is authorized.
+
+Admission evidence is fresh at 118 Bash checkers, 123 nodes, 666 edges, and 123
+components. The six new edges are derived authority-manifest references, not
+new executable dependencies. Authority, declarative, plan, freshness, and the
+complete retained-Bash admission checkpoint pass.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

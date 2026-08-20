@@ -8483,8 +8483,8 @@ graph package discovery is next.
 
 ##### VE078 Source-Index Component Replacement Re-plan
 
-**Status:** Accepted planning decision; M6-C5 capability implementation is
-next. No migration package is admitted.
+**Status:** Accepted planning decision; M6-C5 is accepted and M6-I8/M6-I9 are
+admitted after disposable parity proof. Atomic component acceptance is next.
 
 The fresh post-M6-I7 graph contains 118 Bash checkers, 123 executable nodes,
 660 edges, and 123 components. Its shallow caller-free boundary is no longer
@@ -8572,7 +8572,7 @@ accepted component cannot be deleted atomically without fallback.
 
 ##### VE078-E1 Generated Structure Evidence Recovery
 
-**Status:** Accepted; M6-C5 capability implementation is next.
+**Status:** Accepted; M6-C5 and M6-I8/M6-I9 admission are complete.
 
 VE078 introduced exact documentation references to both retained source-index
 verifiers but its planning-only write set omitted the derived structure
@@ -8593,7 +8593,7 @@ complete retained-Bash checkpoint must pass before M6-C5 resumes.
 ##### M6-C5 Source-Index Closure Capability
 
 **Status:** Accepted as a shared engine capability; M6-I8/M6-I9 disposable
-preflight is next.
+preflight and admission are complete. Atomic component acceptance is next.
 
 The engine now registers one strict `source_index_closure` check. Its
 configuration accepts only the source-fixture root and five canonical evidence
@@ -8619,6 +8619,62 @@ evaluation ledger, or parent plan. Existing live source-index authority remains
 entirely Bash-owned until dependency-closed M6-I8/M6-I9 preflight and atomic
 acceptance. No wrapper, bridge, duplicate live authority, compatibility path,
 or fallback is introduced.
+
+##### M6-I8/M6-I9 Source-Index Component Admission
+
+**Status:** Admitted at train orders 123 and 124; atomic acceptance is next.
+
+Disposable preflight restores the exact two-check aggregate design selected by
+VE078. `registered-source-indexes` applies M6-C5 to all seven canonical fixture
+directories, while a generic text check independently preserves the old
+aggregate verifier's `7.4c3v1` implementation-acceptance assertion. The suite
+declares no dependency because both checks read their direct authoritative
+inputs; adding a suite edge would invent ordering rather than represent one.
+
+The focused aggregate and both retained Bash verifiers pass. All 158 suites in
+the temporary registry pass. Disposable repository copies reproduce every one
+of the engine-fixture verifier's fifteen negative mutations and return typed
+Python diagnostics for malformed contracts and routes, duplicate headings,
+targets, and hrefs, unavailable targets, route mismatch and escape, absent
+source href and manifest membership, normative corpus state, legacy authority,
+heading drift, line-budget failure, and exact identifier-set disagreement. The
+three cases represented indirectly by M6-C5's generic table tests are therefore
+proved against their exact legacy mutations rather than accepted by analogy.
+All temporary registry/suite artifacts are removed and authoritative source,
+fixture, manifest, corpus, owner-map, disposition, Router, and parent-plan bytes
+remain unchanged before admission.
+
+M6-I8 owns retirement of the engine-fixture verifier in favor of the accepted
+direct Python capability tests. M6-I9 owns aggregate execution, the preflighted
+suite, and deletion of the shared helper. Both are separate packages under the
+existing `verification-engine.migration-source-closure` canonical owner. Their
+four exact incident representations use `same-owner-package: M6-I9`: this
+records the package that owns helper retirement and does not misclassify the
+helper as an independently retained artifact. The package and edge records are
+admitted while both verifiers and the helper remain executable and the suite
+remains absent from the live registry.
+
+Regenerated admission evidence remains at 118 Bash checkers, 123 executable
+nodes, and 123 components. Six derived contract-reference edges raise the edge
+total from 660 to 666: the package manifest names both verifiers and the helper,
+and the edge manifest names the same three paths. Executable incidence is
+unchanged. Package and edge authority, graph freshness, both plan validators,
+all 157 live declarative suites, and the complete 118-checker retained-Bash
+checkpoint pass.
+
+Acceptance is one atomic slice. It must add and register the exact preflighted
+two-check suite without dependencies, accept both packages and all four edge
+records, delete both verifiers and the helper, regenerate the four graph
+projections, and update only serial planning evidence and evaluation guidance.
+No engine/schema, fixture, canonical source/index, manifest, corpus, owner map,
+disposition, Router, parent-plan acceptance, copied inventory, wrapper, bridge,
+compatibility behavior, inferred owner, optional path, false dependency, or
+fallback is authorized.
+
+Re-plan if fresh incidence differs from the admitted four records, package
+authority rejects the same-owner component model, the exact preflighted suite
+cannot be restored, any protected input changes, the helper remains referenced,
+or deletion and registration cannot occur in one validated commit.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 
