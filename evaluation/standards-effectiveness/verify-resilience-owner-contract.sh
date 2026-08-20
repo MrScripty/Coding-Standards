@@ -6,7 +6,6 @@ readonly R="$(cd -- "$S/../.." && pwd)"
 readonly FIXTURE="$S/fixtures/resilience/owner-contract-decisions.tsv"
 readonly OWNER="$R/topics/resilience.md"
 readonly ROUTER="$R/STANDARDS-ROUTER.md"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id criticality phase outcome retry evidence fallback expected extra; do
   [[ "$case_id" == case ]] && continue
@@ -27,7 +26,6 @@ for text in 'ID: `topic.resilience`' 'Failure And Recovery Authority' 'Criticali
   rg -F -q "$text" "$OWNER"
 done
 rg -F -q 'Dependency or service failure, retry, degradation, startup resilience, or recovery semantics' "$ROUTER"
-rg -F -q '`7.4b8ai` (`Accepted`)' "$PLAN"
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"

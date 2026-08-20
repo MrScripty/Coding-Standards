@@ -24,8 +24,6 @@ rg -F -q '[Release](workflows/release.md#build-procedure-selection)' "$R/LAUNCHE
 ! rg -F -q '## Build Standards' "$R/LAUNCHER-STANDARDS.md"
 row="$(awk -F '\t' '$1=="STD-0500"{print $1"\t"$2"\t"$3"\t"$4}' "$S/consolidation-dispositions.tsv")"
 [[ "$row" == $'STD-0500\tLAUNCHER-STANDARDS.md\tworkflows/release.md\trefine' ]]
-rg -F -q '`7.4b8az` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8ba` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-14-decomposition.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Release build procedure passed: 14 decisions, STD-0500 refined, row 14 complete\n'

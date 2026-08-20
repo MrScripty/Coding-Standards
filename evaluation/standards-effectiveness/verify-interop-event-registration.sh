@@ -10,7 +10,6 @@ readonly PROFILE="$REPO_ROOT/profiles/boundaries/interop.md"
 readonly CONCURRENCY="$REPO_ROOT/topics/concurrency.md"
 readonly LEGACY="$REPO_ROOT/INTEROP-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 order_is_complete_and_safe() {
   local order="$1"
@@ -255,7 +254,6 @@ awk -F '\t' '
 ' "$FIXTURE"
 
 rg -F -q '| F049 | Resolved in Milestone 7.4b7g |' "$FINDINGS"
-rg -F -q '`7.4b7g` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-concurrency-policy.sh"
 "$SCRIPT_DIR/verify-interop-boundary-policy.sh"
 "$SCRIPT_DIR/verify-milestone-7-independent-trust-replan.sh"

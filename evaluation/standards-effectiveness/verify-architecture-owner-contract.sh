@@ -26,7 +26,5 @@ mapfile -t populated < <(
 )
 expected_populated=(STD-{0137..0147})
 [[ "${populated[*]}" == "${expected_populated[*]}" ]]
-rg -F -q '`7.4b8bd` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b8be` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
 printf 'Architecture owner contract passed: 14 decisions, 11 dispositions\n'

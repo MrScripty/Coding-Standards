@@ -8,7 +8,6 @@ readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly WAVES="$SCRIPT_DIR/milestone-7-waves.tsv"
 readonly FIRST_SLICE="$SCRIPT_DIR/milestone-7-first-slice.tsv"
 readonly REPORT="$SCRIPT_DIR/milestone-7-decomposition.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 declare -A disposed
 declare -A disposed_source
@@ -111,7 +110,6 @@ done < "$FIRST_SLICE"
 rg -F -q '[milestone-7-waves.tsv](milestone-7-waves.tsv)' "$REPORT"
 rg -F -q '[milestone-7-first-slice.tsv](milestone-7-first-slice.tsv)' "$REPORT"
 rg -F -q 'typed diagnostic' "$REPORT"
-rg -F -q 'milestone-7-decomposition.md' "$PLAN"
 
 printf 'Milestone 7 rolling decomposition passed: 698 planned IDs; %s IDs, %s sources, %s owners, %s missing owners currently remain.\n' \
   "$remaining_count" "$remaining_source_count" "$proposed_owner_count" "$missing_owners"

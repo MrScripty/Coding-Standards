@@ -14,6 +14,5 @@ for t in '## Names And Descriptions' '## Input Relationships And Instructions' '
 for t in '## Web Naming And Form Mechanisms' 'aria-label="Delete item"' 'htmlFor="username"' 'type="search"';do rg -F -q "$t" "$R/reference/recipes/accessibility.md";done
 block="$(sed -n '/^## Names And Forms/,/^## Media Semantics/p' "$R/ACCESSIBILITY-STANDARDS.md")";[[ "$block" == *Migrated* && "$block" != *'aria-label='* ]]
 mapfile -t ids < <(awk -F '\t' '$1>="STD-0017"&&$1<="STD-0019"{print $1}' "$S/consolidation-dispositions.tsv");[[ "${ids[*]}" == 'STD-0017 STD-0018 STD-0019' ]]
-rg -F -q '`7.4b18e` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-accessibility-focus-lifecycle.sh"
 printf 'Accessibility names and inputs passed: 14 decisions, 3 exact dispositions\n'

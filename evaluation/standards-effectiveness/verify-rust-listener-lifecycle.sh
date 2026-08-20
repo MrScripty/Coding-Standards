@@ -10,7 +10,6 @@ readonly PROFILE="$REPO_ROOT/profiles/languages/rust/security.md"
 readonly ASYNC_PROFILE="$REPO_ROOT/profiles/languages/rust/async.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-SECURITY-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id exposure exposure_contract capacity admission \
   tracking outcome shutdown cancellation drain abort capability fallback \
@@ -138,7 +137,6 @@ done
 rg -F -q '## Panic Policy' "$LEGACY"
 
 rg -F -q '| F026 | Resolved in Milestone 7.4b5f |' "$FINDINGS"
-rg -F -q '`7.4b5f` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-rust-async-lifecycle.sh"
 "$SCRIPT_DIR/verify-milestone-7-f025-f026-decomposition.sh"
 

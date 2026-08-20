@@ -9,7 +9,6 @@ readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly PROFILE="$REPO_ROOT/profiles/languages/rust/security.md"
 readonly RUST_INDEX="$REPO_ROOT/profiles/languages/rust/README.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-SECURITY-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id conversion arithmetic limit zero fallback \
   expected extra; do
@@ -102,7 +101,6 @@ if rg -q '```|as usize|checked_mul|expect|unwrap|BufferSizeOverflow' \
   exit 1
 fi
 
-rg -F -q '`7.4b3e` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-f022-f023-decomposition.sh"
 
 printf 'Rust boundary arithmetic policy passed\n'

@@ -12,7 +12,6 @@ readonly CONTRACTS="$REPO_ROOT/topics/contracts.md"
 readonly RUST_INDEX="$REPO_ROOT/profiles/languages/rust/README.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-INTEROP-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 decision_count=0
 while IFS=$'\t' read -r case_id schema serializer attributes consumer variant \
@@ -125,7 +124,6 @@ if rg -F -q 'RUST-INTEROP-STANDARDS.md#serde-wire-format-alignment' \
 fi
 
 rg -F -q '| F051 | Resolved in Milestone 7.4b7i |' "$FINDINGS"
-rg -F -q '`7.4b7i` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-language-binding-boundary.sh"
 "$SCRIPT_DIR/verify-rust-binding-conversions.sh"
 "$SCRIPT_DIR/verify-milestone-7-independent-trust-replan.sh"

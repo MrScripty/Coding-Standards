@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 3: historical-authority migration
 
-**Next slice:** execute `PPR-C2` by removing accepted-history, obsolete
-orchestration, and duplicated plan-structure consumption from retained shell
-entrypoints while preserving their non-plan behavior
+**Next slice:** complete `PPR-C2` in the exact retained shell entrypoints that
+combine active-plan history with obsolete orchestration or duplicated
+plan-structure gates, preserving their non-plan behavior
 
 **Acceptance status:** `pending`
 
@@ -210,8 +210,10 @@ change its consumers to canonical records.
 
 - [x] Remove all `PPR-C1` declarative active-plan checks while preserving their
   current owner, fixture, disposition, package, and decision checks.
-- [ ] Remove all `PPR-C2` retained-shell active-plan consumption while
-  preserving each entrypoint's non-plan behavior.
+- [x] Remove plain historical assertions from every `PPR-C2` entrypoint whose
+  active-plan consumption has no orchestration or structure-gate control flow.
+- [ ] Remove active-plan consumption from the remaining `PPR-C2` entrypoints
+  with obsolete orchestration or duplicated plan-structure gates.
 - [x] Keep shared authority under serial integration.
 
 **Acceptance gate:**

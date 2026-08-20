@@ -6,7 +6,6 @@ readonly REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly LEGACY="$REPO_ROOT/INTEROP-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 [[ "$(awk -F '\t' '$1 == "STD-0482" { count++ } END { print count + 0 }' \
   "$INVENTORY")" -eq 1 ]]
@@ -50,7 +49,6 @@ for pattern in \
   ! rg -i -F -q "$pattern" <<< "$index_section"
 done
 
-rg -F -q '`7.4b8f` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-interop-boundary-policy.sh"
 "$SCRIPT_DIR/verify-ipc-payload-validation.sh"
 "$SCRIPT_DIR/verify-language-binding-wire-representation.sh"

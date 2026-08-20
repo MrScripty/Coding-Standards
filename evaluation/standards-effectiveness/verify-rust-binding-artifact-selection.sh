@@ -36,6 +36,5 @@ for removed in 'mylib-uniffi/Cargo.toml' 'crate-type = ["cdylib", "lib"]' 'cdyli
 done
 
 "$S/verify-rust-binding-workspace-evidence.sh"
-rg -F -q '`7.4b8ag` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Rust binding artifact selection passed: 10 decisions, 2 exact dispositions\n'

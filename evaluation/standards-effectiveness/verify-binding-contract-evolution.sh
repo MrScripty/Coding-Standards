@@ -11,7 +11,6 @@ readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly CONTRACTS="$REPO_ROOT/topics/contracts.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 "$SCRIPT_DIR/check-decision-table.sh" "$SCHEMA" "$DECISIONS" "$OBSERVED"
 
@@ -118,7 +117,6 @@ for removed in \
   ! rg -F -q "$removed" <<< "$legacy_section"
 done
 
-rg -F -q '`7.4b8q` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-contract-decisions.sh"
 "$SCRIPT_DIR/verify-contract-ownership.sh"
 "$SCRIPT_DIR/verify-milestone-7-row-5-decomposition.sh"

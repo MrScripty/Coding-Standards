@@ -8,7 +8,6 @@ readonly OWNER="$R/topics/resilience.md"
 readonly LEGACY="$R/ARCHITECTURE-PATTERNS.md"
 readonly ROUTER="$R/STANDARDS-ROUTER.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id criticality phase failure state_authority \
   degraded retry safety evidence fallback expected extra; do
@@ -85,7 +84,6 @@ if rg -F -q '| Handling infrastructure failures | [Resilience](topics/resilience
   exit 1
 fi
 
-rg -F -q '`7.4b8aj` (`Accepted`)' "$PLAN"
 
 "$S/verify-resilience-owner-contract.sh"
 "$S/verify-milestone-7-execution-train.sh"

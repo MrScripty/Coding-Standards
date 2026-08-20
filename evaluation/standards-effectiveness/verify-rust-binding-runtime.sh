@@ -13,7 +13,6 @@ readonly CONCURRENCY="$REPO_ROOT/topics/concurrency.md"
 readonly ASYNC_PROFILE="$REPO_ROOT/profiles/languages/rust/async.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id runtime_owner runtime_capability handle_owner \
   request_state execution task_owner fallback expected extra; do
@@ -143,7 +142,6 @@ for heading in '## Testing Strategy' '### NIF Pure-Logic Separation'; do
 done
 
 rg -F -q '| F025 | Resolved in Milestone 7.4b5c |' "$FINDINGS"
-rg -F -q '`7.4b5c` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-f025-f026-decomposition.sh"
 
 printf 'Rust binding runtime policy passed: %s decisions, 3 exact dispositions\n' \

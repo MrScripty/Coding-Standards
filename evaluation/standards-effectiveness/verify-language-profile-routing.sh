@@ -31,7 +31,5 @@ done
 mapfile -t ids < <(awk -F '\t' '$1=="STD-0183"{print $1}' \
   "$S/consolidation-dispositions.tsv")
 [[ "${ids[*]}" == 'STD-0183' ]]
-rg -F -q '`7.4b8bo` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9s` (`Accepted`)' "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-milestone-7-row-15-decomposition.sh"
 printf 'Language profile routing passed: 13 decisions, 1 disposition\n'

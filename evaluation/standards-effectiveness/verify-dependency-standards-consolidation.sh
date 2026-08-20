@@ -34,10 +34,6 @@ mapfile -t ids < <(awk -F '\t' '$1>="STD-0300"&&$1<="STD-0348"{print $1}' \
   "$S/consolidation-dispositions.tsv" | sort)
 expected=(STD-{0300..0348})
 [[ "${ids[*]}" == "${expected[*]}" ]]
-rg -F -q '`7.4b8bs` (`Accepted`)' \
-  "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b9s` (`Accepted`)' \
-  "$R/plans/standards-library-effectiveness-restructure-plan.md"
 "$S/verify-dependencies-owner-contract.sh"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Dependency standards consolidation passed: 20 decisions, 49 dispositions\n'

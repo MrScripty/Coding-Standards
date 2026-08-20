@@ -8,7 +8,6 @@ readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly PROFILE="$REPO_ROOT/profiles/languages/rust/language-bindings.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 count=0
 while IFS=$'\t' read -r case_id contract category cancellation context \
@@ -111,7 +110,6 @@ done
 
 rg -F -q '## Host-Language Callbacks and Event Delivery' "$LEGACY"
 
-rg -F -q '`7.4b8h` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-rust-binding-conversions.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 printf 'Rust binding error mapping passed: %s decisions, 2 exact dispositions\n' \

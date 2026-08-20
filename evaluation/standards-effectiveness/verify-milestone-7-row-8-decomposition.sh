@@ -7,7 +7,6 @@ readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
 readonly PACKAGES="$S/milestone-7-accelerated-packages.tsv"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly REPORT="$S/milestone-7-row-8-decomposition.md"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 expected_rows=(
   $'8\t1\tSTD-0782,STD-0783\tlanguages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md\ttopics/contracts.md\texists\tpre-slice-review\tfocused'
@@ -40,10 +39,6 @@ for text in \
   rg -F -q "$text" "$REPORT"
 done
 
-rg -F -q '`7.4b8ab` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ac` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ad` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ae` (`Accepted`)' "$PLAN"
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"

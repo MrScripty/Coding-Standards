@@ -7,7 +7,6 @@ readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
 readonly PACKAGES="$S/milestone-7-accelerated-packages.tsv"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly REPORT="$S/milestone-7-row-14-decomposition.md"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 expected_rows=(
   $'14\t1\tSTD-0487,STD-0488,STD-0489,STD-0490,STD-0491,STD-0492,STD-0493,STD-0494,STD-0499,STD-0501,STD-0502,STD-0503,STD-0504,STD-0505,STD-0506,STD-0507,STD-0511,STD-0512\tLAUNCHER-STANDARDS.md\tprofiles/applications/launcher.md\texists\tpre-slice-review\tfocused'
@@ -74,12 +73,6 @@ for text in "${required_report[@]}"; do
   rg -F -q "$text" "$REPORT"
 done
 
-rg -F -q '`7.4b8au` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8av` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8aw` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ax` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"

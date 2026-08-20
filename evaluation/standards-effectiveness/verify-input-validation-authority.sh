@@ -10,7 +10,6 @@ readonly SECURITY="$REPO_ROOT/topics/security.md"
 readonly CONTRACTS="$REPO_ROOT/topics/contracts.md"
 readonly LEGACY="$REPO_ROOT/SECURITY-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 count=0
 while IFS=$'\t' read -r case_id applicability contract authority coverage \
@@ -112,7 +111,6 @@ for pattern in 'InputValidator' 'SafeNamePattern' 'Regex' 'minLength' \
 done
 
 rg -F -q '| F056 | Resolved in Milestone 7.4b8a |' "$FINDINGS"
-rg -F -q '`7.4b8a` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-runtime-decoding-policy.sh"
 "$SCRIPT_DIR/verify-filesystem-containment-policy.sh"
 "$SCRIPT_DIR/verify-milestone-7-independent-trust-replan.sh"

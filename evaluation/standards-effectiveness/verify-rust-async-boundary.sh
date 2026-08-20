@@ -9,7 +9,6 @@ readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly PROFILE="$REPO_ROOT/profiles/languages/rust/async.md"
 readonly RUST_INDEX="$REPO_ROOT/profiles/languages/rust/README.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-ASYNC-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id language suspends async_contract capability \
   fallback expected extra; do
@@ -95,7 +94,6 @@ for heading in '## Runtime Boundaries' '## Task Lifecycle' '## Graceful Shutdown
   rg -F -q "$heading" "$LEGACY"
 done
 
-rg -F -q '`7.4b4d` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-rust-async-decomposition.sh"
 
 printf 'Rust async boundary policy passed: %s decisions, 2 exact dispositions\n' \

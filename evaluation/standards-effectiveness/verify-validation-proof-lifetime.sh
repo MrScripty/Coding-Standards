@@ -9,7 +9,6 @@ readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly CONTRACTS="$REPO_ROOT/topics/contracts.md"
 readonly LEGACY="$REPO_ROOT/SECURITY-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 count=0
 while IFS=$'\t' read -r case_id representation contract mutation boundary \
@@ -93,7 +92,6 @@ for pattern in 'External Input' 'Trust internally' 'ProcessFile'; do
 done
 
 rg -F -q '| F053 | Resolved in Milestone 7.4b7m |' "$FINDINGS"
-rg -F -q '`7.4b7m` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-runtime-decoding-policy.sh"
 "$SCRIPT_DIR/verify-milestone-7-independent-trust-replan.sh"
 printf 'Validation proof-lifetime policy passed: %s decisions, 2 exact dispositions\n' \

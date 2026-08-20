@@ -9,7 +9,6 @@ readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly PROFILE="$REPO_ROOT/profiles/languages/rust/security.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-SECURITY-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 count=0
 while IFS=$'\t' read -r case_id contract capacity overload ownership telemetry \
@@ -78,7 +77,6 @@ for pattern in 'MAX_QUEUE' 'drop_oldest' 'msgs.drain' 'tracing::warn'; do
   ! rg -F -q "$pattern" <<< "$legacy"
 done
 rg -F -q '| F052 | Resolved in Milestone 7.4b7k |' "$FINDINGS"
-rg -F -q '`7.4b7k` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-rust-boundary-arithmetic.sh"
 "$SCRIPT_DIR/verify-milestone-7-independent-trust-replan.sh"
 printf 'Rust external-input queue policy passed: %s decisions, 1 exact disposition\n' "$count"

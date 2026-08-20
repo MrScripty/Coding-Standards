@@ -8,7 +8,6 @@ readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly CONTRACTS="$REPO_ROOT/topics/contracts.md"
 readonly LEGACY="$REPO_ROOT/INTEROP-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 count=0
 while IFS=$'\t' read -r case_id contract_class authority deployment \
@@ -116,7 +115,6 @@ for pattern in \
   ! rg -F -q "$pattern" "$LEGACY"
 done
 
-rg -F -q '`7.4b8c` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-contract-ownership.sh"
 "$SCRIPT_DIR/verify-runtime-decoding-policy.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"

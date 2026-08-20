@@ -123,3 +123,27 @@
   - the complete mixed checkpoint passed 116 retained Bash checkers.
 - Result: `PPR-C1` accepted. `PPR-C2` retained-shell historical-authority
   removal is the only admitted next slice.
+
+## 2026-08-20: Plain Shell Historical-Authority Removal
+
+- Operation: `continue`.
+- Package: first `PPR-C2` representation sub-slice.
+- Scope: exact retained shell dispositions classified only as
+  `historical-acceptance`; entrypoints with orchestration or structure-gate
+  control flow were excluded for the next slice.
+- Change: removed parent-plan assignments and `rg -F -q` history assertions.
+  Every removed command was preclassified as a plain fixed-string assertion;
+  no current-contract command was changed and no replacement authority was
+  introduced.
+- Verification:
+  - the changed shell paths equal the plain-history disposition subset exactly;
+  - all 62 modified entrypoints passed `bash -n` and concurrent execution;
+  - only the 14 explicitly excluded special consumers retain the parent-plan
+    path;
+  - all 159 declarative suites passed;
+  - regenerated evidence is current at 116 retained Bash verifiers and a
+    120-node, 732-edge, 120-component graph;
+  - `git diff --check` passed; and
+  - the complete mixed checkpoint passed 116 retained Bash checkers.
+- Result: the uniform `PPR-C2` sub-slice is accepted. The 14 special consumers
+  are the only admitted next slice.

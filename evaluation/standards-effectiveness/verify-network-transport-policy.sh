@@ -10,7 +10,6 @@ readonly PROFILE="$REPO_ROOT/topics/security.md"
 readonly CONCURRENCY="$REPO_ROOT/topics/concurrency.md"
 readonly LEGACY="$REPO_ROOT/SECURITY-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id exposure exposure_contract capacity admission \
   tracking outcome shutdown cancellation drain termination liveness \
@@ -134,7 +133,6 @@ for pattern in '127.0.0.1' '0.0.0.0' '::1' 'platform'\''s loopback address' \
 done
 
 rg -F -q '| F016 | Resolved in Milestone 7.4b7a |' "$FINDINGS"
-rg -F -q '`7.4b7a` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-concurrency-policy.sh"
 "$SCRIPT_DIR/verify-milestone-7-independent-trust-replan.sh"
 

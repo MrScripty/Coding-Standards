@@ -8,7 +8,6 @@ readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly CONTRACTS="$REPO_ROOT/topics/contracts.md"
 readonly LEGACY="$REPO_ROOT/ARCHITECTURE-PATTERNS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id applicability input_trust decoder_status \
   invariant_coverage normalization version construction expected; do
@@ -139,6 +138,5 @@ for pattern in "${removed_patterns[@]}"; do
   fi
 done
 
-rg -F -q '`7.4b2b` (`Accepted`)' "$PLAN"
 
 printf 'Runtime decoding policy passed\n'

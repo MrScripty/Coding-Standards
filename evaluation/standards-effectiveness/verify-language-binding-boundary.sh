@@ -8,7 +8,6 @@ readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly PROFILE="$REPO_ROOT/profiles/boundaries/language-bindings.md"
 readonly LEGACY="$REPO_ROOT/LANGUAGE-BINDINGS-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id mechanism representation schema conversion \
   generated_logic expected extra; do
@@ -122,7 +121,6 @@ for pattern in "${removed_patterns[@]}"; do
   rg -F -q "$pattern" "$PROFILE"
 done
 
-rg -F -q '`7.4b3c` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-f022-f023-decomposition.sh"
 
 printf 'Language binding boundary policy passed\n'

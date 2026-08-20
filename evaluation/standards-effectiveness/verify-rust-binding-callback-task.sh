@@ -8,7 +8,6 @@ readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly PROFILE="$REPO_ROOT/profiles/languages/rust/language-bindings.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 count=0
 while IFS=$'\t' read -r case_id contract task authority input correlation \
@@ -132,7 +131,6 @@ for pattern in \
 done
 
 rg -F -q '### Composite Executors' "$LEGACY"
-rg -F -q '`7.4b8j` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-rust-async-lifecycle.sh"
 "$SCRIPT_DIR/verify-concurrency-policy.sh"
 "$SCRIPT_DIR/verify-rust-binding-executor-delegation.sh"

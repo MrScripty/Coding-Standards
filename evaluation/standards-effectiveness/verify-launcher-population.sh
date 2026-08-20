@@ -8,7 +8,6 @@ readonly OWNER="$R/profiles/applications/launcher.md"
 readonly LEGACY="$R/LAUNCHER-STANDARDS.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id action procedure lifecycle state mechanism \
   outcome_map fallback expected extra; do
@@ -98,11 +97,6 @@ for id in STD-0508 STD-0509 STD-0510; do
     END { exit found ? 0 : 1 }' "$DISPOSITIONS"
 done
 
-rg -F -q '`7.4b8av` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8aw` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ax` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 
 "$S/verify-launcher-owner-contract.sh"
 "$S/verify-milestone-7-row-14-decomposition.sh"

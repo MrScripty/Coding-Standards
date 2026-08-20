@@ -8,7 +8,6 @@ readonly OWNER="$R/topics/dependencies.md"
 readonly LEGACY="$R/LAUNCHER-STANDARDS.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id requirement satisfaction authority procedure \
   postcheck identity fallback expected extra; do
@@ -61,8 +60,6 @@ mapfile -t actual < <(
 )
 [[ "${actual[*]}" == "${expected[*]}" ]]
 
-rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 
 "$S/verify-dependencies-owner-contract.sh"
 "$S/verify-launcher-population.sh"

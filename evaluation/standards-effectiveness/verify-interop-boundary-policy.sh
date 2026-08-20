@@ -8,7 +8,6 @@ readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly PROFILE="$REPO_ROOT/profiles/boundaries/interop.md"
 readonly LEGACY="$REPO_ROOT/INTEROP-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id representation allocation initialized access \
   lifetime thread release copy proof expected extra; do
@@ -134,7 +133,6 @@ if rg -q '```|JsonSerializer|IDisposable|CallDeferred|Always copy|Validate befor
   exit 1
 fi
 
-rg -F -q '`7.4b3b` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-f022-f023-decomposition.sh"
 
 printf 'Interop boundary policy passed\n'

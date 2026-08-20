@@ -11,7 +11,6 @@ readonly GENERIC="$REPO_ROOT/profiles/boundaries/language-bindings.md"
 readonly RUST_INDEX="$REPO_ROOT/profiles/languages/rust/README.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id mechanism representation conversion boundary \
   ownership fallback expected extra; do
@@ -128,7 +127,6 @@ for text in "${legacy_forbidden[@]}"; do
 done
 
 rg -F -q '| F022 | Resolved in Milestone 7.4b3g |' "$FINDINGS"
-rg -F -q '`7.4b3g` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-f022-f023-decomposition.sh"
 
 printf 'Rust binding conversion policy passed\n'

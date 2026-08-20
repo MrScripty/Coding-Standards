@@ -5,7 +5,6 @@ S="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 R="$(cd -- "$S/../.." && pwd)"
 V="$S/milestone-7-row-41-owner-validation.tsv"
 D="$S/milestone-7-row-41-decomposition.md"
-P="$R/plans/standards-library-effectiveness-restructure-plan.md"
 LEGACY="$R/DOCUMENTATION-STANDARDS.md"
 
 [[ "$(awk -F '\t' '$1 == 41 { print $2 FS $3 FS $4 FS $5 FS $6 FS $7 FS $8 FS $9 }' "$S/milestone-7-execution-train.tsv")" == $'reference-index-closure\tSTD-0349\tSTD-0349\tDOCUMENTATION-STANDARDS.md\tworkflows/documentation.md\texists\tfinal-closure\tfocused' ]]
@@ -36,8 +35,6 @@ if rg -F -q "$obsolete_source_assertion" "$0"; then
 fi
 
 [[ -e "$R/workflows/documentation.md" ]]
-rg -F -q '`7.4b31a` (`Accepted`)' "$P"
-rg -F -q '`7.4b31b` (`Accepted`)' "$P"
 "$S/verify-documentation-decisions.sh"
 "$S/verify-documentation-policy-consolidation.sh"
 "$S/verify-milestone-7-execution-train.sh"

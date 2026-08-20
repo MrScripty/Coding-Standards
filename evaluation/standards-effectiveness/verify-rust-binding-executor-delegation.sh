@@ -13,7 +13,6 @@ readonly CONCURRENCY="$REPO_ROOT/topics/concurrency.md"
 readonly ASYNC_PROFILE="$REPO_ROOT/profiles/languages/rust/async.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id upstream_outcome input_scope input_proof \
   lifecycle_state delegate_capability action fallback expected extra; do
@@ -130,7 +129,6 @@ for heading in '## Code Generation Strategy' '## Memory Ownership Model' \
 done
 
 rg -F -q '| F026 | Resolved in Milestone 7.4b5f |' "$FINDINGS"
-rg -F -q '`7.4b5d` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-f025-f026-decomposition.sh"
 
 printf 'Rust binding executor delegation passed: %s decisions, 1 exact disposition\n' \

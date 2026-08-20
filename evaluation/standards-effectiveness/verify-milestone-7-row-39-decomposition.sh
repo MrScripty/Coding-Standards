@@ -6,7 +6,6 @@ R="$(cd -- "$S/../.." && pwd)"
 O="$S/milestone-7-execution-decomposition.tsv"
 V="$S/milestone-7-row-39-owner-validation.tsv"
 D="$S/milestone-7-row-39-decomposition.md"
-P="$R/plans/standards-library-effectiveness-restructure-plan.md"
 F="$S/findings.md"
 
 expected=(STD-{0093..0105})
@@ -41,10 +40,6 @@ done
 [[ "$(awk -F '\t' '$1 == 39 { print $6 FS $7 FS $8 }' "$S/milestone-7-execution-train.tsv")" == $'reference/patterns/architecture.md\tmissing\towner-review' ]]
 [[ "$(awk -F '\t' '$1 == 39 { print $2 FS $4 FS $8 }' "$S/milestone-7-accelerated-packages.tsv")" == $'P32\treference/patterns/architecture.md\tfocused' ]]
 rg -F -q '| F075 | Resolved in Milestone 7.4b29a |' "$F"
-rg -F -q '`7.4b29a` (`Accepted`)' "$P"
-rg -F -q '`7.4b29b` (`Accepted`)' "$P"
-rg -F -q '`7.4b29c` (`Accepted`)' "$P"
-rg -F -q '`7.4b29d` (`Accepted`)' "$P"
 "$S/verify-architecture-owner-contract.sh"
 "$S/verify-architecture-pattern-reference-owner.sh"
 "$S/verify-concurrency-policy.sh"

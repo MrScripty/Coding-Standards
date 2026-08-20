@@ -5,7 +5,6 @@ readonly S="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 readonly R="$(cd -- "$S/../.." && pwd)"
 readonly LEGACY="$R/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 awk -F '\t' 'NR > 1 && $1 == "STD-0789" { print $2 ":" $3 ":" $4 ":" $5 }' "$DISPOSITIONS" |
   grep -Fx 'languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md:languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md:index:convert the Build System Organization heading into a non-normative routing index while preserving separately owned child references'
@@ -18,8 +17,6 @@ done
 for heading in '### Feature Flags for Optional Binding Support' '### cdylib Configuration'; do
   rg -F -q "$heading" "$LEGACY"
 done
-rg -F -q '`7.4b8af` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ag` (`Accepted`)' "$PLAN"
 
 "$S/verify-milestone-7-row-8-decomposition.sh"
 printf 'Rust binding legacy-index closure passed: STD-0789 exact index disposition\n'

@@ -10,7 +10,6 @@ readonly PROFILE="$REPO_ROOT/profiles/languages/rust/unsafe.md"
 readonly RUST_INDEX="$REPO_ROOT/profiles/languages/rust/README.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-UNSAFE-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id operation caller module wrapper verification \
   feature expected extra; do
@@ -112,7 +111,6 @@ if rg -q '^##|```|unsafe_code|SAFETY:|# Safety|Miri|Valgrind|ASan' "$LEGACY"; th
 fi
 
 rg -F -q '| F023 | Resolved in Milestone 7.4b3f |' "$FINDINGS"
-rg -F -q '`7.4b3f` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-f022-f023-decomposition.sh"
 
 printf 'Rust unsafe contract policy passed\n'

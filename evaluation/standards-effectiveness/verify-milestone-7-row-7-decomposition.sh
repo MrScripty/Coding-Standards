@@ -7,7 +7,6 @@ readonly OVERLAY="$SCRIPT_DIR/milestone-7-execution-decomposition.tsv"
 readonly PACKAGES="$SCRIPT_DIR/milestone-7-accelerated-packages.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly REPORT="$SCRIPT_DIR/milestone-7-row-7-decomposition.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
 
 expected_rows=(
@@ -78,13 +77,6 @@ for text in "${required_report[@]}"; do
 done
 
 rg -F -q '| F074 | Resolved in Milestone 7.4b8w |' "$FINDINGS"
-rg -F -q '`7.4b8w` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8x` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8y` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8z` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8aa` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ab` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ac` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-accelerated-execution-replan.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
 

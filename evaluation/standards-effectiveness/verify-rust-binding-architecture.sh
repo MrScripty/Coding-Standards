@@ -10,7 +10,6 @@ readonly PROFILE="$REPO_ROOT/profiles/languages/rust/language-bindings.md"
 readonly GENERIC="$REPO_ROOT/profiles/boundaries/language-bindings.md"
 readonly RUST_INDEX="$REPO_ROOT/profiles/languages/rust/README.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id scope annotation framework_dependency \
   host_behavior dependency_direction generated_state core_verification \
@@ -146,7 +145,6 @@ for heading in '### Workspace Layout' '## Memory Ownership Model' \
   rg -F -q "$heading" "$LEGACY"
 done
 
-rg -F -q '`7.4b5b` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-milestone-7-f025-f026-decomposition.sh"
 
 printf 'Rust binding architecture policy passed: %s decisions, 4 exact dispositions\n' \

@@ -7,7 +7,6 @@ readonly FIXTURE="$S/fixtures/rust/security-panic-boundary-decisions.tsv"
 readonly PROFILE="$R/profiles/languages/rust/security.md"
 readonly LEGACY="$R/languages/rust/RUST-SECURITY-STANDARDS.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id context failure proof panic_form documentation fallback expected extra; do
   [[ "$case_id" == case ]] && continue
@@ -37,6 +36,5 @@ done
 
 "$S/verify-rust-listener-lifecycle.sh"
 "$S/verify-rust-filesystem-authority.sh"
-rg -F -q '`7.4b8ah` (`Accepted`)' "$PLAN"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Rust security panic boundary passed: 11 decisions, 1 exact disposition\n'

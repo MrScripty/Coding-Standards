@@ -41,8 +41,4 @@ rg -F -q $'STD-0007\tACCESSIBILITY-STANDARDS.md\ttopics/accessibility.md\tindex'
   "$S/milestone-7-execution-decomposition.tsv")" == owner-review ]]
 [[ "$(awk -F '\t' '$1==28&&$2>1&&$7!="pre-slice-review"{n++}END{print n+0}' \
   "$S/milestone-7-execution-decomposition.tsv")" -eq 0 ]]
-rg -F -q '`7.4b18b` (`Accepted`)' \
-  "$R/plans/standards-library-effectiveness-restructure-plan.md"
-rg -F -q '`7.4b18br` (`Accepted`)' \
-  "$R/plans/standards-library-effectiveness-restructure-plan.md"
 printf 'Accessibility owner contract passed: 17 decisions, 1 disposition\n'

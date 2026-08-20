@@ -8,7 +8,6 @@ readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly PROFILE="$REPO_ROOT/profiles/boundaries/language-bindings.md"
 readonly LEGACY="$REPO_ROOT/INTEROP-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 count=0
 while IFS=$'\t' read -r case_id schema serializer shape consumer variant \
@@ -112,7 +111,6 @@ for pattern in \
   ! rg -F -q "$pattern" "$LEGACY"
 done
 
-rg -F -q '`7.4b8e` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-language-binding-boundary.sh"
 "$SCRIPT_DIR/verify-cross-language-contract.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"

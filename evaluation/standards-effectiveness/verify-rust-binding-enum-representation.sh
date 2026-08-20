@@ -8,7 +8,6 @@ readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly PROFILE="$REPO_ROOT/profiles/languages/rust/language-bindings.md"
 readonly LEGACY="$REPO_ROOT/languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 count=0
 while IFS=$'\t' read -r case_id mechanism contract variants discriminant \
@@ -116,7 +115,6 @@ for pattern in \
 done
 
 rg -F -q '## Memory Ownership Model' "$LEGACY"
-rg -F -q '`7.4b8k` (`Accepted`)' "$PLAN"
 "$SCRIPT_DIR/verify-rust-wire-representation.sh"
 "$SCRIPT_DIR/verify-rust-binding-conversions.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"

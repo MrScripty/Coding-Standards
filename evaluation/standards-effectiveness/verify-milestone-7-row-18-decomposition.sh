@@ -5,7 +5,6 @@ readonly S="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 readonly R="$(cd -- "$S/../.." && pwd)"
 readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
 readonly REPORT="$S/milestone-7-row-18-decomposition.md"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 expected_rows=(
   $'18\t1\tSTD-0611,STD-0639\tTESTING-STANDARDS.md\ttopics/concurrency.md\texists\tpre-slice-review\tfocused'
@@ -53,20 +52,5 @@ for text in 'Those concerns do not share one canonical' \
   rg -F -q "$text" "$REPORT"
 done
 
-rg -F -q '`7.4b8bu` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8bv` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8bw` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8bx` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8by` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8cb` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8cc` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8cd` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ce` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8cf` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8cg` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ch` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ci` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8cj` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b9s` (`Accepted`)' "$PLAN"
 "$S/verify-milestone-7-execution-train.sh"
 printf 'Milestone 7 row-18 decomposition passed: all 52 IDs assigned across 14 ordered children\n'
