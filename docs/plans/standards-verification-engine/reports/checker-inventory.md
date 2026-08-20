@@ -3500,3 +3500,21 @@ edge-free, while two historical M6-V2 independent-gate rows continue to point
 at the retained Bash checker until atomic acceptance. Shared evidence is
 read-only; no suite registration, checker deletion, dependency, engine/schema
 change, compatibility behavior, or fallback occurs in admission.
+
+### Accepted M6-I3 Commit Consolidation Dispositions
+
+The six-check `commit-consolidation-dispositions` suite is registered without
+dependencies. Train order 118 is accepted, and the two M6-V2 historical
+independent-gate records now preserve continuity through registered-suite
+evidence. The obsolete Bash checker is absent.
+
+The evaluation README no longer copies the current Commit identifier total.
+The suite derives identity coverage and distinct target paths from canonical
+tables at execution time. Shared inventory, dispositions, workflow, legacy
+index, and recipe inputs remain byte-identical.
+
+Positive and ten-case mutation parity, package/edge authority, removed-path
+proof, generated freshness, all declarative suites, plan/lifecycle authority,
+the complete retained-Bash checkpoint, source-unchanged proof, and diff
+integrity pass. No dependency, wrapper, compatibility path, engine/schema
+feature, copied mutable data, inferred owner, or fallback remains.

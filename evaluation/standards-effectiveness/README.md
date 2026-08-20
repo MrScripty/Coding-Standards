@@ -937,9 +937,10 @@ resolved state without weakening executor-delegation behavior or disposition
 evidence. Event-registration implementation may proceed after the restored
 fail-fast complete suite.
 
-`verify-consolidation-dispositions.sh` proves complete, unique coverage for all
-68 `COMMIT-STANDARDS.md` identifiers, validates target owners, and ensures the
-legacy path is only a bounded migration index.
+The registered `commit-consolidation-dispositions` suite derives exact, unique
+coverage for current `COMMIT-STANDARDS.md` identifiers, validates distinct
+non-removal target files, and ensures the legacy path remains a bounded
+non-normative index with canonical Commit workflow and recipe routes.
 
 The registered `documentation-reference` suite proves exact disposition of frozen
 documentation identifiers `STD-0376` through `STD-0399`, validates the

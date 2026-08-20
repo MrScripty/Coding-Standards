@@ -12774,3 +12774,18 @@ registered suite. Shared inventory, dispositions, workflow, legacy index, and
 recipe evidence remain read-only. No suite is registered and no Bash source,
 engine/schema contract, copied ID/path/count, dependency, compatibility path,
 inferred owner, or fallback changes in admission.
+
+## 2026-08-19 M6-I3 Commit Consolidation Dispositions Acceptance
+
+**Outcome:** accepted; Bash authority replaced by one owner-local suite.
+
+The registered six-check suite has no dependencies. M6-I3 and two historical
+M6-V2 independent-gate records now use registered-suite evidence, and the Bash
+checker is absent. The README derives current coverage rather than copying an
+identifier count; all shared Commit evidence remains byte-identical.
+
+Positive and ten-case mutation parity, lifecycle authority, removed-path and
+source-unchanged proof, generated freshness, all declarative suites, both plan
+validators, the complete retained-Bash checkpoint, and diff integrity pass.
+No compatibility route, wrapper, dependency, engine/schema change, copied
+mutable data, inferred owner, or fallback remains.

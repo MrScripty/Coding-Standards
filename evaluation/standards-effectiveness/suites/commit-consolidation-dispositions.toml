@@ -1,0 +1,86 @@
+schema_version = 1
+id = "commit-consolidation-dispositions"
+owner = "workflows/commit.md"
+description = "Exact Commit disposition coverage, target validity, legacy index routes, and reference ownership."
+
+[[checks]]
+id = "commit-identifier-coverage"
+type = "relation"
+mode = "set"
+[checks.left]
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+columns = ["id"]
+order = "source"
+where = { field = "path", op = "eq", value = "COMMIT-STANDARDS.md" }
+[checks.right]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["id"]
+order = "source"
+where = { field = "source", op = "eq", value = "COMMIT-STANDARDS.md" }
+
+[[checks]]
+id = "commit-row-policy"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+[[checks.projections]]
+columns = ["id", "disposition"]
+order = "source"
+expected = []
+where = { all = [
+  { field = "source", op = "eq", value = "COMMIT-STANDARDS.md" },
+  { field = "disposition", op = "not_in", values = ["move", "reference", "remove", "index"] },
+] }
+[[checks.projections]]
+columns = ["id", "rationale"]
+order = "source"
+expected = []
+where = { all = [
+  { field = "source", op = "eq", value = "COMMIT-STANDARDS.md" },
+  { field = "rationale", op = "eq", value = "" },
+] }
+[[checks.projections]]
+columns = ["id", "target"]
+order = "source"
+expected = []
+where = { all = [
+  { field = "source", op = "eq", value = "COMMIT-STANDARDS.md" },
+  { field = "disposition", op = "eq", value = "remove" },
+  { field = "target", op = "ne", value = "none" },
+] }
+
+[[checks]]
+id = "commit-target-files"
+type = "repository_paths"
+[checks.paths]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["target"]
+order = "source"
+where = { all = [
+  { field = "source", op = "eq", value = "COMMIT-STANDARDS.md" },
+  { field = "disposition", op = "ne", value = "remove" },
+] }
+
+[[checks]]
+id = "commit-index-structure"
+type = "markdown_structure"
+path = "COMMIT-STANDARDS.md"
+headings = ["# Commit Standards Legacy Index", "## Canonical Commit Routes"]
+maximum_lines = 20
+
+[[checks]]
+id = "commit-index-routes"
+type = "text"
+path = "COMMIT-STANDARDS.md"
+required = ["workflows/commit.md", "reference/recipes/commits.md"]
+prohibited = []
+
+[[checks]]
+id = "commit-recipe-reference-metadata"
+type = "text"
+path = "reference/recipes/commits.md"
+required = ["- Role: `reference`", "- Level: `REFERENCE`"]
+prohibited = []

@@ -3916,6 +3916,15 @@ and recipe files remain read-only. No copied ID/path/count, source rewrite,
 engine/schema feature, dependency, compatibility behavior, inferred owner, or
 fallback is authorized.
 
+M6-I3 is accepted. The child plan registers the six-check owner-local suite
+without dependencies, transfers two historical independent-gate records to
+suite evidence, and deletes the obsolete Bash checker. The evaluation README
+now derives current coverage instead of copying an identifier count. Shared
+Commit evidence remains byte-identical, and full focused, mutation, lifecycle,
+generated, declarative, plan, complete-checkpoint, removed-path,
+source-unchanged, and diff verification passes without compatibility behavior
+or fallback.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

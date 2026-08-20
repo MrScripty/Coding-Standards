@@ -4225,3 +4225,20 @@
 - No engine/schema change, source mutation, copied ID/path/count, Bash edit,
   wrapper, compatibility behavior, inferred owner, dependency, or fallback was
   admitted. Atomic M6-I3 acceptance is next.
+
+## 2026-08-19 - M6-I3 Commit Consolidation Dispositions Acceptance
+
+- Reconfirmed clean canonical `3fcf932` before atomic acceptance.
+- Registered the preflighted six-check suite without dependencies, transitioned
+  M6-I3 to accepted, transferred two M6-V2 historical independent-gate records
+  to suite evidence, and deleted only the obsolete Bash checker.
+- Replaced the README's copied Commit identifier count with derived-current
+  coverage language. Shared inventory, dispositions, workflow, index, and
+  recipe evidence remain byte-identical.
+- Regenerated the temporary inventory and graph from final inputs. Positive and
+  ten-case mutation parity, package/edge authority, removed path, freshness,
+  all declarative suites, both plan validators, lifecycle fixtures, complete
+  checkpoint, source-unchanged proof, and diff integrity pass.
+- No engine/schema feature, dependency, copied ID/path/count, source rewrite,
+  Bash wrapper, alias, compatibility behavior, inferred owner, optional-missing
+  path, or fallback remains. Fresh-graph package discovery is next.

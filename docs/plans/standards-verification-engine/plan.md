@@ -2,18 +2,17 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-I3 Commit consolidation-dispositions package
-admitted at train order 118
+**Current phase:** Milestone 6: M6-I3 accepted; fresh-graph package discovery
 
-**Next slice:** atomically register the preflighted owner-local Commit suite,
-transfer the two historical independent-gate records, delete the Bash checker,
-and accept M6-I3. Shared Commit evidence remains read-only.
+**Next slice:** derive the next owner-local package from the fresh post-M6-I3
+inventory and graph. Do not reuse pre-acceptance topology or infer semantic
+ownership from graph incidence.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE075 corrected projected repository paths to derive
-and validate a distinct path set while leaving identity uniqueness with
-explicit relation and table-key contracts.
+**Latest accepted slice:** M6-I3 replaced the Commit consolidation Bash gate
+with one registered owner-local suite and transferred historical independent
+gate evidence without adding a dependency.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -8135,7 +8134,7 @@ The Commit package remains a separate owner-local preflight and admission.
 
 ##### M6-I3 Commit Consolidation Dispositions
 
-**Status:** Admitted at train order 118; atomic acceptance is next.
+**Status:** Accepted at train order 118.
 
 Fresh owner-local preflight derives one six-check suite under
 `workflows/commit.md`. It proves exact set equality between frozen Commit
@@ -8174,6 +8173,21 @@ optional-missing behavior, or fallback is admitted. Re-plan if the registered
 suite cannot preserve a preflighted mutation, another incident edge appears,
 shared evidence must change, the historical transfer requires a dependency,
 or implementation leaves the admitted write set.
+
+Acceptance registers the six-check `commit-consolidation-dispositions` suite
+with no dependencies, transitions M6-I3 to accepted, transfers the two M6-V2
+historical records to registered-suite evidence, and deletes the obsolete Bash
+checker. The README now describes derived current identity coverage instead of
+copying an identifier count. The shared section inventory, dispositions,
+workflow, legacy index, and recipe remain byte-identical.
+
+Positive and ten-case mutation parity, package and edge authority, removed-path
+proof, generated freshness, all declarative suites, both plan validators,
+lifecycle fixtures, the complete retained-Bash checkpoint, source-unchanged
+proof, and diff integrity pass. No dependency, engine/schema change, copied
+identity/path/count, source rewrite, wrapper, alias, compatibility behavior,
+inferred owner, optional-missing path, or fallback remains. Fresh-graph package
+discovery is next.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 
