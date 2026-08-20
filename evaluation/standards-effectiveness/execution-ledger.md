@@ -12713,10 +12713,12 @@ fallback. No implementation package is admitted at this boundary.
 
 **Outcome:** shared engine contract accepted without package admission.
 
-The engine now validates nonempty unique repository-file paths derived from
-one strict filtered table projection. It delegates table parsing, predicates,
-containment, missing inputs, and file-kind outcomes to existing generic
-authorities and rejects symlink targets explicitly.
+The engine initially validated nonempty unique repository-file paths derived
+from one strict filtered table projection. VE075 later corrected repeated path
+values to deterministic distinct-set validation and kept identity uniqueness
+with explicit relations and keys. Table parsing, predicates, containment,
+missing inputs, file-kind outcomes, and explicit symlink rejection remain with
+existing generic authorities.
 
 Focused and complete engine tests, all declarative suites, both plan checks,
 lifecycle fixtures, generated freshness, the complete mixed checkpoint, and
@@ -12739,3 +12741,19 @@ containment, symlink, missing, and file-kind outcomes. No copied target set or
 count, path-column configuration, projection mode, package branch,
 compatibility representation, or fallback is justified. No implementation
 package or persistent preflight artifact was admitted.
+
+## 2026-08-19 VE075 Distinct Projected Paths Acceptance
+
+**Outcome:** shared assertion corrected; Commit package preflight may resume.
+
+`repository_paths` now treats its projection as a multiset, rejects empty
+projection and values, derives distinct paths in first-seen order, and validates
+each contained regular non-symlink file once. Identity uniqueness remains an
+explicit relation or table-key responsibility rather than an accidental path
+constraint.
+
+Focused duplicate-call proof, all engine tests, all declarative suites, both
+plan validators, lifecycle fixtures, generated freshness, the complete mixed
+checkpoint, and diff integrity pass. No suite, registry row, package, manifest,
+generated artifact, Bash source, copied target/count, owner inference,
+projection mode, compatibility behavior, policy branch, or fallback changed.

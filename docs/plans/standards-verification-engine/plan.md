@@ -8051,12 +8051,13 @@ policy-specific behavior.
 
 **Selected recovery:** Option 1. The engine now exposes one
 `repository_paths` check over the existing strict one-column projected-table
-source. It requires a nonempty unique projection and validates every current
-value as a contained regular non-symlink repository file. Empty and duplicate
-projections, empty values, malformed tables, unknown configuration, invalid
-width, absolute or traversal paths, symlinks and symlink escapes, missing
-files, and directories retain typed outcomes through existing table and path
-authorities.
+source. It requires a nonempty projection, derives the distinct nonempty path
+set in first-seen order, and validates each current path once as a contained
+regular non-symlink repository file. Empty projections and values, malformed
+tables, unknown configuration, invalid width, absolute or traversal paths,
+symlinks and symlink escapes, missing files, and directories retain typed
+outcomes through existing table and path authorities. Identity uniqueness
+remains with relations, table keys, or another explicit identity contract.
 
 Acceptance adds no suite, registry row, package, disposition, generated
 artifact, Bash change, callback, command configuration, copied path/count,
@@ -8068,7 +8069,8 @@ must still be preflighted, admitted, implemented, and accepted separately.
 
 ##### VE075 Repeated Projected Repository Paths Re-plan
 
-**Status:** Active re-plan trigger; Commit package admission remains blocked.
+**Status:** Resolved by the distinct-path-set correction; Commit package
+preflight may resume.
 
 The first owner-local Commit preflight derived non-removal targets directly
 from the shared disposition table. Multiple independently identified sections
@@ -8117,6 +8119,19 @@ work, and adds no mode, owner inference, copied value, command, compatibility
 representation, or fallback. Re-plan if any intended consumer needs duplicate
 path values to be semantically invalid independent of row identity, or if
 deduplication changes diagnostic ordering for invalid path values.
+
+**Acceptance:** Option 1 is implemented directly because no registered suite
+used the rejected duplicate-path behavior. `repository_paths` now accepts the
+projected values as a multiset, retains typed empty projection/value outcomes,
+derives a deterministic distinct path set, and invokes contained regular-file
+validation once per distinct path. A focused spy test proves repeated values
+produce one path-validation call; all 28 focused tests, all 281 engine tests,
+all 152 declarative suites, both plan validators, lifecycle fixtures, generated
+inventory/graph freshness, the complete checkpoint over 123 retained Bash
+checkers, and diff integrity pass. No projection grammar, suite, registry row,
+package, manifest, generated artifact, Bash source, copied path/count, owner
+inference, compatibility representation, policy branch, or fallback changed.
+The Commit package remains a separate owner-local preflight and admission.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

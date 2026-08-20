@@ -4158,10 +4158,12 @@
 - Added one generic `repository_paths` assertion over the existing strict
   projected-table grammar; no second projection parser or containment resolver
   was introduced.
-- Required nonempty unique one-column path evidence and contained regular
-  non-symlink files. Typed failures cover malformed tables/configuration,
-  invalid width, empty/duplicate values, absolute/traversal paths, symlinks and
-  escapes, missing files, and directories.
+- Initially required nonempty unique one-column path evidence and contained
+  regular non-symlink files. VE075 later corrected repeated path values to a
+  deterministic distinct-set contract while leaving identity uniqueness with
+  explicit relations and keys. Typed failures cover malformed
+  tables/configuration, invalid width, empty values, absolute/traversal paths,
+  symlinks and escapes, missing files, and directories.
 - Kept typed checker/suite subjects separate and added no suite, registry row,
   package, Bash edit, generated artifact, count, snapshot, owner inference,
   command action, optional-missing behavior, compatibility route, or fallback.
@@ -4187,3 +4189,19 @@
   demand, and copied Commit targets/counts. No package, suite, registry,
   manifest, generated artifact, Bash, source, fixture, compatibility behavior,
   or fallback changed; disposable preflight files were removed.
+
+## 2026-08-19 - VE075 Distinct Projected Paths Acceptance
+
+- Reconfirmed clean canonical `409a994` before the shared-contract correction.
+- Changed only `repository_paths` to accept repeated projected values, derive
+  the deterministic distinct path set, and validate each distinct file once.
+  Identity-bearing projections retain their existing uniqueness contracts.
+- Added focused proof that two rows targeting one file pass and invoke path
+  validation once. Updated engine documentation and corrected earlier VE074
+  summaries to describe the final accepted semantics.
+- All 28 focused tests, all 281 engine tests, all 152 declarative suites, both
+  plan validators, lifecycle fixtures, generated freshness, the complete
+  checkpoint over 123 retained Bash checkers, and diff integrity pass.
+- No projection grammar, suite, registry, package, manifest, generated artifact,
+  Bash source, copied path/count, owner inference, compatibility behavior,
+  policy branch, or fallback changed. Commit package preflight is next.

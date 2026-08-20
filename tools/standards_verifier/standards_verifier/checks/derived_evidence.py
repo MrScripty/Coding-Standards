@@ -196,7 +196,7 @@ class RepositoryPathsCheck:
             self.id,
             self.paths,
             "paths",
-            require_unique=True,
+            require_unique=False,
         )
         if not paths:
             diagnostics.append(
@@ -214,7 +214,7 @@ class RepositoryPathsCheck:
         if diagnostics:
             return diagnostics
 
-        for path in paths:
+        for path in dict.fromkeys(paths):
             candidate = contained_path(
                 context.repo_root,
                 path,

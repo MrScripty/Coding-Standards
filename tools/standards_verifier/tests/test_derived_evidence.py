@@ -5,6 +5,7 @@ import tempfile
 import textwrap
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
@@ -12,6 +13,7 @@ sys.path.insert(0, str(ENGINE_ROOT))
 
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
+from standards_verifier.paths import contained_file
 
 
 class DerivedEvidenceTest(unittest.TestCase):
@@ -173,7 +175,7 @@ class DerivedEvidenceTest(unittest.TestCase):
 
         self.assertEqual(result.diagnostics[0].code, "ASSERT.REPOSITORY_PATHS_EMPTY")
 
-    def test_repository_paths_rejects_duplicate_projection(self) -> None:
+    def test_repository_paths_accepts_repeated_values(self) -> None:
         self.write(
             "paths.tsv",
             "scope\tdisposition\ttarget\n"
@@ -181,9 +183,20 @@ class DerivedEvidenceTest(unittest.TestCase):
             "selected\tmove\tdocs/commit.md\n",
         )
 
-        result = self.run_suite()
+        with patch(
+            "standards_verifier.checks.derived_evidence.contained_file",
+            wraps=contained_file,
+        ) as contained_file_spy:
+            result = self.run_suite()
 
-        self.assertEqual(result.diagnostics[0].code, "ASSERT.DERIVED_VALUE_DUPLICATE")
+        self.assertEqual(result.status, "passed")
+        self.assertEqual(result.check_count, 4)
+        path_calls = [
+            call
+            for call in contained_file_spy.call_args_list
+            if call.kwargs["check"] == "paths"
+        ]
+        self.assertEqual(len(path_calls), 1)
 
     def test_repository_paths_rejects_empty_value(self) -> None:
         self.write(

@@ -3867,7 +3867,7 @@ whole-manifest domain would grant Commit ownership over unrelated rows.
 
 The recommended recovery is a separate shared-contract slice adding one strict
 projected `repository_paths` assertion. It must reuse the existing projected
-table source grammar, validate unique contained regular files with typed
+table source grammar, derive and validate contained regular files with typed
 diagnostics, store no counts or snapshots, infer no owner, execute no configured
 command, and remain distinct from typed checker/suite subjects. The Commit
 package may be admitted only after that capability is accepted. A broad
@@ -3876,11 +3876,13 @@ is not authorized at this boundary.
 
 The delegated shared-contract slice is accepted. One generic
 `repository_paths` assertion reuses strict projected-table and repository-path
-authorities, requires a nonempty unique one-column projection, and accepts only
-contained regular non-symlink files. Focused and repository-wide verification
-passes without adding a suite, package, registry entry, manifest row, Bash
-change, copied path/count, inferred owner, compatibility behavior, or fallback.
-The owner-local Commit package remains a separate next slice.
+authorities, requires a nonempty one-column projection, derives distinct paths
+in first-seen order, and accepts only contained regular non-symlink files.
+Identity uniqueness remains an explicit relation or table-key concern. Focused
+and repository-wide verification passes without adding a suite, package,
+registry entry, manifest row, Bash change, copied path/count, inferred owner,
+compatibility behavior, or fallback. The owner-local Commit package remains a
+separate next slice.
 
 Commit preflight exposed VE075 before admission: independently identified
 sections legitimately repeat canonical target files, but the initial assertion
@@ -3890,6 +3892,13 @@ identity uniqueness with the exact relation. Do not copy current targets or
 counts, add Commit-specific behavior, broaden projection grammar without an
 independent consumer, preserve the rejected behavior through compatibility, or
 admit the Commit package before the correction is accepted.
+
+The VE075 correction is accepted. Repeated projected path values now produce
+one deterministic validation per distinct file, while empty, containment,
+symlink, missing, and file-kind outcomes remain typed. Focused and complete
+verification passes without changing projection grammar or adding duplicated
+state, a compatibility path, a policy branch, or fallback. Commit package
+preflight may resume as a separate owner-local slice.
 
 ## Final Acceptance
 

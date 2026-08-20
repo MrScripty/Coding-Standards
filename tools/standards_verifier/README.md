@@ -229,13 +229,15 @@ invalid. The check does not infer a subject type, accept suite paths, load a
 second registry, execute a checker, skip an unavailable subject, or fall back.
 
 The `repository_paths` check reads one strict projected table source named
-`paths`, whose projection selects exactly one column and at least one unique,
-non-empty value. Every derived value must resolve to a contained regular
-non-symlink repository file. Missing files are unavailable; directories,
-absolute or parent-traversing paths, symlink paths and escapes, empty values,
-duplicate projections, malformed tables, and invalid configuration are typed
-failures. The check derives paths from current table rows and has no copied
-path list, count, owner inference, command execution, compatibility
+`paths`, whose projection selects exactly one column and at least one non-empty
+value. Repeated values are valid: the check derives the distinct path set in
+first-seen order and validates each path once as a contained regular
+non-symlink repository file. Identity uniqueness remains the responsibility of
+relations, table keys, or another explicit identity contract. Missing files
+are unavailable; directories, absolute or parent-traversing paths, symlink
+paths and escapes, empty values, malformed tables, and invalid configuration
+are typed failures. The check derives paths from current table rows and has no
+copied path list, count, owner inference, command execution, compatibility
 representation, optional-missing mode, or fallback.
 
 The `key_coverage` check reads strict projected table sources named `keys` and
