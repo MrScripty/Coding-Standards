@@ -1,13 +1,26 @@
 schema_version = 1
+source_id = "fixture.policy-impact.unknown-owner"
 
-[[owners]]
+[[nodes]]
 id = "workflow.planning"
-path = "workflows/planning.md"
-coverage = "audited"
+aliases = ["workflows/planning.md"]
+metadata = { repository_path = "workflows/planning.md", policy_impact_coverage = "audited" }
+
+[[nodes]]
+id = "prompts/planning.md"
+metadata = { repository_path = "prompts/planning.md" }
+
+[[groups]]
+id = "policy-impact"
+purpose = "Fixture policy impact."
+directions = ["incoming", "outgoing"]
+transitive = false
 
 [[edges]]
-owner = "workflow.unknown"
-consumer = "prompts/planning.md"
+id = "unknown-owner"
+source = "workflow.unknown"
+target = "prompts/planning.md"
 relation = "prompt-projection"
-applicability = "Unknown owner projection."
-evidence_owner = "suite:planning-admission"
+groups = ["policy-impact"]
+traversable = true
+metadata = { applicability = "Unknown owner projection.", evidence_owner = "suite:planning-admission" }

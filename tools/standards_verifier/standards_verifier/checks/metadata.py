@@ -3,9 +3,15 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import Any, Callable
+from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
+from ..graph_adapters import (
+    METADATA_DEPENDENCIES,
+    METADATA_REQUIRES,
+    METADATA_SPECIALIZES,
+    metadata_dependency_registry,
+)
 from ..model import CheckContext
 from ..paths import contained_file
 
@@ -446,36 +452,6 @@ def _parse_module(
     )
 
 
-def _cycle(
-    modules: dict[str, ModuleMetadata],
-    edges_for: Callable[[ModuleMetadata], tuple[str, ...]],
-) -> tuple[str, ...] | None:
-    states: dict[str, int] = {}
-    stack: list[str] = []
-
-    def visit(module_id: str) -> tuple[str, ...] | None:
-        if states.get(module_id) == 1:
-            start = stack.index(module_id)
-            return tuple((*stack[start:], module_id))
-        if states.get(module_id) == 2:
-            return None
-        states[module_id] = 1
-        stack.append(module_id)
-        for target in sorted(edges_for(modules[module_id])):
-            found = visit(target)
-            if found is not None:
-                return found
-        stack.pop()
-        states[module_id] = 2
-        return None
-
-    for module_id in sorted(modules):
-        found = visit(module_id)
-        if found is not None:
-            return found
-    return None
-
-
 def _validate_graph(
     context: CheckContext,
     check: str,
@@ -533,18 +509,14 @@ def _validate_graph(
     if diagnostics:
         return diagnostics
 
+    graph = metadata_dependency_registry(context.repo_root, parsed)
     graphs = (
-        ("METADATA.REQUIRES_CYCLE", lambda module: module.requires),
-        ("METADATA.SPECIALIZES_CYCLE", lambda module: module.specializes),
-        (
-            "METADATA.COMBINED_CYCLE",
-            lambda module: tuple(
-                sorted(set((*module.requires, *module.specializes)))
-            ),
-        ),
+        ("METADATA.REQUIRES_CYCLE", METADATA_REQUIRES),
+        ("METADATA.SPECIALIZES_CYCLE", METADATA_SPECIALIZES),
+        ("METADATA.COMBINED_CYCLE", METADATA_DEPENDENCIES),
     )
-    for code, edges_for in graphs:
-        cycle = _cycle(modules, edges_for)
+    for code, group_id in graphs:
+        cycle = graph.find_cycle(group_id)
         if cycle is not None:
             diagnostics.append(
                 _diagnostic(

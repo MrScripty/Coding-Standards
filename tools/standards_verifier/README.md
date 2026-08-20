@@ -42,24 +42,31 @@ Report every reviewed semantic consumer and projection for one audited policy
 owner:
 
 ```bash
-python3 tools/standards_verifier/query_policy_impact.py \
-  --owner workflow.planning
+python3 tools/query_edges.py \
+  --node workflow.planning \
+  --group policy-impact \
+  --direction outgoing
 ```
 
-The command reads the strict repository-owned
-`evaluation/standards-effectiveness/policy-semantic-impact.toml` manifest and
-emits deterministic TSV. The manifest records only explicitly audited policy
-owners and reviewed semantic edges. Each edge names one canonical owner,
-contained consumer artifact, supported relation, non-empty applicability
-condition, and registered evidence-owner suite. Owner IDs resolve through
-canonical module metadata; suite consumers and evidence owners resolve through
-the suite registry. Every registered suite whose explicit `owner` is audited
-must have one matching enforcement-suite edge. Prompt, template, fixture, and
-other semantic edges remain explicitly reviewed; they are not inferred.
-Hyperlinks, lexical similarity, standards `Requires`, and the temporary Bash
-checker graph never infer semantic impact. Querying an unaudited owner is typed
-`unavailable`; policy changes must audit that owner before relying on reverse
-impact.
+The generic command loads only sources registered by
+`evaluation/standards-effectiveness/edge-source-registry.toml` and emits
+deterministic TSV. The policy manifest declares one edge once and places it in
+the `policy-impact` and `semantic` groups; the upstream graph engine derives
+incoming and outgoing indexes and reports declaration provenance. Querying
+`workflow.planning` or `workflows/planning.md` therefore returns the same edge
+set. Group membership does not duplicate an edge, and transitive traversal is
+rejected because these groups do not permit it.
+
+The standards verifier is a downstream policy adapter. It validates canonical
+owner metadata, contained consumers, supported policy relations, non-empty
+applicability, registered evidence owners, duplicate semantic identities,
+explicit audited-owner coverage, and enforcement-suite closure. Every
+registered suite whose explicit `owner` is audited must have one matching
+enforcement-suite edge. Prompt, template, fixture, and other semantic edges
+remain explicitly reviewed; they are not inferred. Hyperlinks, lexical
+similarity, standards `Requires`, suite ownership, and the temporary Bash
+checker graph never create semantic impact edges. Missing edges require an
+explicit declaration correction.
 
 Regenerate or verify the exact Bash checker structure and dependency graph
 artifacts:

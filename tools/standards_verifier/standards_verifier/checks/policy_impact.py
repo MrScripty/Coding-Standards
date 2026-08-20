@@ -5,7 +5,7 @@ from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
 from ..model import CheckContext
-from ..policy_impact import load_policy_impact
+from ..policy_impact import load_policy_impact, load_registered_policy_impact
 
 
 @dataclass(frozen=True, slots=True)
@@ -18,15 +18,15 @@ class PolicyImpactCase:
 @dataclass(frozen=True, slots=True)
 class PolicyImpactCheck:
     id: str
-    manifest: str | None
+    source_registry: str | None
     cases: tuple[PolicyImpactCase, ...] | None
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         suite_paths = dict(context.registered_suite_paths)
-        if self.manifest is not None:
-            load_policy_impact(
+        if self.source_registry is not None:
+            load_registered_policy_impact(
                 context.repo_root,
-                self.manifest,
+                self.source_registry,
                 suite_paths,
                 suite=context.suite_id,
                 check=self.id,
@@ -83,7 +83,7 @@ def _strings(value: object, *, suite: str, check: str, field: str) -> tuple[str,
 
 
 def parse_policy_impact_check(raw: dict[str, Any], suite_id: str) -> PolicyImpactCheck:
-    allowed = {"id", "type", "manifest", "cases"}
+    allowed = {"id", "type", "source_registry", "cases"}
     unknown = set(raw) - allowed
     if unknown:
         raise EngineError(
@@ -105,31 +105,31 @@ def parse_policy_impact_check(raw: dict[str, Any], suite_id: str) -> PolicyImpac
                 suite=suite_id,
             )
         )
-    has_manifest = "manifest" in raw
+    has_registry = "source_registry" in raw
     has_cases = "cases" in raw
-    if has_manifest == has_cases:
+    if has_registry == has_cases:
         raise EngineError(
             Diagnostic(
                 "CONFIG.POLICY_IMPACT_MODE",
                 "invalid",
-                "policy impact check requires exactly one of manifest or cases",
+                "policy impact check requires exactly one of source_registry or cases",
                 suite=suite_id,
                 check=check_id,
             )
         )
-    if has_manifest:
-        manifest = raw["manifest"]
-        if not isinstance(manifest, str) or not manifest:
+    if has_registry:
+        source_registry = raw["source_registry"]
+        if not isinstance(source_registry, str) or not source_registry:
             raise EngineError(
                 Diagnostic(
                     "CONFIG.POLICY_IMPACT_MANIFEST",
                     "invalid",
-                    "manifest must be a non-empty repository path",
+                    "source_registry must be a non-empty repository path",
                     suite=suite_id,
                     check=check_id,
                 )
             )
-        return PolicyImpactCheck(check_id, manifest, None)
+        return PolicyImpactCheck(check_id, source_registry, None)
 
     raw_cases = raw["cases"]
     if not isinstance(raw_cases, list) or not raw_cases:

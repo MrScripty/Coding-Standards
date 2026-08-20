@@ -4,6 +4,7 @@ from pathlib import Path
 
 from .config import load_registry, load_suite
 from .diagnostics import Diagnostic, EngineError
+from .graph_adapters import SUITE_DEPENDENCIES, suite_dependency_registry
 from .model import CheckContext, RegistryEntry, Suite, SuiteResult
 
 
@@ -17,6 +18,12 @@ class Verifier:
         self.entries = load_registry(self.repo_root, registry_path)
         self.entry_by_id = {entry.id: entry for entry in self.entries}
         self.suites = {entry.id: load_suite(self.repo_root, entry) for entry in self.entries}
+        self.dependency_graph = suite_dependency_registry(
+            self.repo_root,
+            self.entries,
+            registry_path,
+            include_path_aliases=True,
+        )
 
     def list_suites(self) -> tuple[str, ...]:
         return tuple(entry.id for entry in self.entries)
@@ -69,32 +76,11 @@ class Verifier:
         return selected
 
     def _execution_order(self, selected: tuple[str, ...]) -> tuple[str, ...]:
-        required = set()
-
-        def include(suite_id: str) -> None:
-            if suite_id in required:
-                return
-            for dependency in self.entry_by_id[suite_id].requires:
-                include(dependency)
-            required.add(suite_id)
-
-        for suite_id in selected:
-            include(suite_id)
-
-        ordered = []
-        visited = set()
-
-        def visit(suite_id: str) -> None:
-            if suite_id in visited or suite_id not in required:
-                return
-            for dependency in self.entry_by_id[suite_id].requires:
-                visit(dependency)
-            visited.add(suite_id)
-            ordered.append(suite_id)
-
-        for entry in self.entries:
-            visit(entry.id)
-        return tuple(ordered)
+        return self.dependency_graph.dependency_order(
+            SUITE_DEPENDENCIES,
+            selected,
+            preferred_order=(entry.id for entry in self.entries),
+        )
 
     def _run_suite(self, suite: Suite) -> SuiteResult:
         diagnostics = []

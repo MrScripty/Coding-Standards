@@ -14,7 +14,7 @@ from .errors import (
     UnknownNodeError,
     UnsafeOutputError,
 )
-from .manifest import DEFAULT_SOURCE_REGISTRY, load_registry
+from .manifest import DEFAULT_SOURCE_REGISTRY, load_manifest, load_registry
 from .model import (
     Direction,
     Edge,
@@ -54,4 +54,5 @@ __all__ = (
     "UnknownNodeError",
     "UnsafeOutputError",
     "load_registry",
+    "load_manifest",
 )

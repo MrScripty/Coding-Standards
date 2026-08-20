@@ -10,6 +10,7 @@ from .model import (
     Direction,
     Edge,
     EdgeGroup,
+    EdgeSource,
     GraphContribution,
     Node,
     Provenance,
@@ -185,7 +186,12 @@ class ManifestSource:
         return GraphContribution(tuple(nodes), tuple(groups), tuple(edges))
 
 
-def load_registry(repo_root: Path, registry_path: str = DEFAULT_SOURCE_REGISTRY) -> EdgeRegistry:
+def load_registry(
+    repo_root: Path,
+    registry_path: str = DEFAULT_SOURCE_REGISTRY,
+    *,
+    providers: Mapping[str, EdgeSource] | None = None,
+) -> EdgeRegistry:
     root = repo_root.resolve()
     raw = _toml(root, registry_path)
     _strict(raw, {"schema_version", "sources"}, {"schema_version", "sources"}, registry_path)
@@ -194,19 +200,61 @@ def load_registry(repo_root: Path, registry_path: str = DEFAULT_SOURCE_REGISTRY)
     raw_sources = raw["sources"]
     if not isinstance(raw_sources, list):
         raise InvalidSourceError("source registry sources must be an array", path=registry_path)
-    sources = []
+    sources: list[EdgeSource] = []
+    available_providers = providers or {}
     for item in raw_sources:
         if not isinstance(item, dict):
             raise InvalidSourceError("source registration must be a table", path=registry_path)
-        _strict(item, {"id", "kind", "path"}, {"id", "kind", "path"}, registry_path)
         source_id = _string(item, "id", registry_path)
         kind = _string(item, "kind", source_id)
-        path = _string(item, "path", source_id)
-        if kind != "manifest":
+        if kind == "manifest":
+            _strict(
+                item,
+                {"id", "kind", "path"},
+                {"id", "kind", "path"},
+                registry_path,
+            )
+            path = _string(item, "path", source_id)
+            sources.append(ManifestSource(root, source_id, path))
+        elif kind == "provider":
+            _strict(
+                item,
+                {"id", "kind", "provider"},
+                {"id", "kind", "provider"},
+                registry_path,
+            )
+            provider_id = _string(item, "provider", source_id)
+            provider = available_providers.get(provider_id)
+            if provider is None:
+                raise InvalidSourceError(
+                    "registered deterministic provider is unavailable",
+                    source=source_id,
+                    provider=provider_id,
+                )
+            if provider.id != source_id:
+                raise InvalidSourceError(
+                    "provider source identity does not match registration",
+                    source=source_id,
+                    provider=provider.id,
+                )
+            sources.append(provider)
+        else:
             raise InvalidSourceError(
-                "source registry supports only declarative manifests; generators register through the Python API",
+                "source registry kind must be manifest or provider",
                 source=source_id,
                 kind=kind,
             )
-        sources.append(ManifestSource(root, source_id, path))
     return EdgeRegistry(root, sources)
+
+
+def load_manifest(repo_root: Path, manifest_path: str) -> EdgeRegistry:
+    """Explicitly register and load one manifest selected by its caller."""
+
+    root = repo_root.resolve()
+    raw = _toml(root, manifest_path)
+    source_id = raw.get("source_id")
+    if not isinstance(source_id, str) or not source_id:
+        raise InvalidSourceError(
+            "manifest source_id must be a non-empty string", path=manifest_path
+        )
+    return EdgeRegistry(root, (ManifestSource(root, source_id, manifest_path),))

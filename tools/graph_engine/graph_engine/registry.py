@@ -69,6 +69,7 @@ class EdgeRegistry:
                     "registered provider returned an invalid graph contribution",
                     source=source.id,
                 )
+            source_node_ids: set[str] = set()
             for node in contribution.nodes:
                 if node.provenance is not None and node.provenance.source_id != source.id:
                     raise InvalidSourceError(
@@ -76,23 +77,15 @@ class EdgeRegistry:
                         source=source.id,
                         node=node.id,
                     )
-                if node.id in nodes:
-                    raise AliasConflictError("canonical node ID is duplicated", node=node.id)
-                nodes[node.id] = node
-                self._register_alias(aliases, node.id, node.id, node.id)
-                for alias in (node.id, *node.aliases):
-                    self._register_alias(aliases, alias, node.id, node.id)
-                    physical = self._artifact_identity(alias)
-                    if physical is not None:
-                        previous = physical_aliases.get(physical)
-                        if previous is not None and previous != node.id:
-                            raise AliasConflictError(
-                                "two canonical nodes identify the same repository artifact",
-                                alias=alias,
-                                node=node.id,
-                                previous=previous,
-                            )
-                        physical_aliases[physical] = node.id
+                if node.id in source_node_ids:
+                    raise AliasConflictError(
+                        "canonical node ID is duplicated within one source",
+                        node=node.id,
+                        source=source.id,
+                    )
+                source_node_ids.add(node.id)
+                previous = nodes.get(node.id)
+                nodes[node.id] = node if previous is None else self._merge_node(previous, node)
             for group in contribution.groups:
                 if group.provenance.source_id != source.id:
                     raise InvalidSourceError(
@@ -114,6 +107,22 @@ class EdgeRegistry:
                     raise InvalidEdgeError("edge ID is duplicated", edge=edge.id)
                 edges[edge.id] = edge
 
+        for node in nodes.values():
+            self._register_alias(aliases, node.id, node.id, node.id)
+            for alias in (node.id, *node.aliases):
+                self._register_alias(aliases, alias, node.id, node.id)
+                physical = self._artifact_identity(alias)
+                if physical is not None:
+                    previous = physical_aliases.get(physical)
+                    if previous is not None and previous != node.id:
+                        raise AliasConflictError(
+                            "two canonical nodes identify the same repository artifact",
+                            alias=alias,
+                            node=node.id,
+                            previous=previous,
+                        )
+                    physical_aliases[physical] = node.id
+
         for alias, canonical in aliases.items():
             if alias in nodes and alias != canonical:
                 raise AliasConflictError(
@@ -123,8 +132,14 @@ class EdgeRegistry:
                 )
         for edge in edges.values():
             if edge.source not in nodes or edge.target not in nodes:
-                missing = edge.source if edge.source not in nodes else edge.target
-                raise InvalidEdgeError("edge endpoint is not registered", edge=edge.id, node=missing)
+                source_missing = edge.source not in nodes
+                missing = edge.source if source_missing else edge.target
+                raise InvalidEdgeError(
+                    "edge endpoint is not registered",
+                    edge=edge.id,
+                    node=missing,
+                    endpoint="source" if source_missing else "target",
+                )
             unknown_groups = sorted(set(edge.groups) - set(groups))
             if unknown_groups:
                 raise InvalidEdgeError(
@@ -154,6 +169,30 @@ class EdgeRegistry:
         )
         self._by_group = MappingProxyType(
             {key: tuple(sorted(value)) for key, value in sorted(by_group.items())}
+        )
+
+    @staticmethod
+    def _merge_node(previous: Node, current: Node) -> Node:
+        metadata = dict(previous.metadata)
+        for key, value in current.metadata.items():
+            existing = metadata.get(key)
+            if existing is not None and existing != value:
+                raise AliasConflictError(
+                    "canonical node metadata conflicts across registered sources",
+                    node=current.id,
+                    field=key,
+                )
+            metadata[key] = value
+        provenance = (
+            previous.provenance
+            if previous.provenance == current.provenance
+            else None
+        )
+        return Node(
+            previous.id,
+            tuple(sorted(set((*previous.aliases, *current.aliases)))),
+            provenance,
+            metadata,
         )
 
     @staticmethod
@@ -312,6 +351,121 @@ class EdgeRegistry:
             tuple(sorted(visited_edges)),
             tuple(steps),
         )
+
+    def find_cycle(
+        self,
+        group_id: str,
+        direction: Direction = Direction.OUTGOING,
+    ) -> tuple[str, ...] | None:
+        group = self._group(group_id)
+        if direction is Direction.BOTH or not group.traversal.permits(direction):
+            raise ForbiddenTraversalError(
+                "cycle detection requires one permitted direction",
+                group=group_id,
+                direction=direction.value,
+            )
+        states: dict[str, int] = {}
+        stack: list[str] = []
+
+        def visit(node: str) -> tuple[str, ...] | None:
+            if states.get(node) == 1:
+                start = stack.index(node)
+                return tuple((*stack[start:], node))
+            if states.get(node) == 2:
+                return None
+            states[node] = 1
+            stack.append(node)
+            for edge, edge_direction in self._group_candidates(
+                node, group_id, direction
+            ):
+                if not edge.traversable:
+                    continue
+                target = edge.target if edge_direction is Direction.OUTGOING else edge.source
+                found = visit(target)
+                if found is not None:
+                    return found
+            stack.pop()
+            states[node] = 2
+            return None
+
+        for node in sorted(self.nodes):
+            found = visit(node)
+            if found is not None:
+                return found
+        return None
+
+    def dependency_order(
+        self,
+        group_id: str,
+        selected: Iterable[str] | None = None,
+        *,
+        direction: Direction = Direction.OUTGOING,
+        preferred_order: Iterable[str] = (),
+    ) -> tuple[str, ...]:
+        group = self._group(group_id)
+        if direction is Direction.BOTH or not group.traversal.permits(direction):
+            raise ForbiddenTraversalError(
+                "dependency ordering requires one permitted direction",
+                group=group_id,
+                direction=direction.value,
+            )
+        if not group.traversal.transitive:
+            raise ForbiddenTraversalError(
+                "dependency ordering requires a transitively traversable group",
+                group=group_id,
+            )
+        cycle = self.find_cycle(group_id, direction)
+        if cycle is not None:
+            raise InvalidGroupError(
+                "dependency group contains a cycle",
+                group=group_id,
+                cycle=" -> ".join(cycle),
+            )
+
+        if selected is None:
+            required = set(self.nodes)
+        else:
+            required: set[str] = set()
+            for requested in selected:
+                canonical = self.resolve(requested)
+                required.add(canonical)
+                result = self.traverse_group(
+                    canonical,
+                    group_id,
+                    direction,
+                    transitive=True,
+                )
+                required.update(result.nodes)
+
+        preferred = tuple(self.resolve(node) for node in preferred_order)
+        if len(set(preferred)) != len(preferred):
+            raise InvalidGroupError("preferred dependency order contains duplicates")
+        rank = {node: index for index, node in enumerate(preferred)}
+
+        def node_key(node: str) -> tuple[int, int | str]:
+            if node in rank:
+                return (0, rank[node])
+            return (1, node)
+
+        visited: set[str] = set()
+        ordered: list[str] = []
+
+        def visit(node: str) -> None:
+            if node in visited or node not in required:
+                return
+            for edge, edge_direction in self._group_candidates(
+                node, group_id, direction
+            ):
+                if not edge.traversable:
+                    continue
+                target = edge.target if edge_direction is Direction.OUTGOING else edge.source
+                visit(target)
+            visited.add(node)
+            ordered.append(node)
+
+        for node in sorted(required, key=node_key):
+            visit(node)
+        return tuple(ordered)
 
     def _group_candidates(
         self, node: str, group_id: str, direction: Direction

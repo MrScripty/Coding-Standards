@@ -172,6 +172,47 @@ class EdgeRegistryTest(unittest.TestCase):
         self.assertEqual([e.id for e in registry.edges_for_group("semantic")], ["planning-to-prompt"])
         self.assertEqual([e.id for e in registry.edges_for_group("policy-impact")], ["planning-to-prompt"])
 
+    def test_compatible_cross_source_node_declarations_merge_once(self) -> None:
+        second_provenance = Provenance("second", "provider", "second")
+        registry = EdgeRegistry(
+            self.root,
+            (
+                Source(
+                    "test",
+                    GraphContribution(
+                        (
+                            self.node("workflow.planning", "workflows/planning.md"),
+                            self.node("prompt.plan", "prompts/plan.md"),
+                        ),
+                        (self.group(),),
+                        (self.edge("planning-to-prompt", "workflow.planning", "prompt.plan"),),
+                    ),
+                ),
+                Source(
+                    "second",
+                    GraphContribution(
+                        (
+                            Node(
+                                "workflow.planning",
+                                ("workflows/planning.md",),
+                                second_provenance,
+                                {"repository_path": "workflows/planning.md"},
+                            ),
+                        ),
+                        (),
+                        (),
+                    ),
+                ),
+            ),
+        )
+
+        self.assertEqual(len(registry.nodes), 2)
+        self.assertEqual(registry.resolve("workflows/planning.md"), "workflow.planning")
+        self.assertEqual(
+            registry.nodes["workflow.planning"].metadata["repository_path"],
+            "workflows/planning.md",
+        )
+
     def test_group_filter_excludes_edges_outside_selected_group(self) -> None:
         registry = self.registry(
             nodes=(
@@ -261,6 +302,33 @@ class EdgeRegistryTest(unittest.TestCase):
         self.assertEqual(result.edges, ("a", "b", "c"))
         self.assertEqual(result.nodes, ("prompt.plan", "template.plan", "workflow.planning"))
         self.assertEqual(result.steps[1].path_edges, ("a", "b"))
+        self.assertEqual(
+            registry.find_cycle("semantic"),
+            ("prompt.plan", "template.plan", "workflow.planning", "prompt.plan"),
+        )
+
+    def test_dependency_order_is_dependency_first_and_honors_preferred_ties(self) -> None:
+        registry = self.registry(
+            nodes=(
+                self.node("a"),
+                self.node("b"),
+                self.node("c"),
+                self.node("d"),
+            ),
+            groups=(self.group(transitive=True),),
+            edges=(
+                self.edge("a-b", "a", "b"),
+                self.edge("a-c", "a", "c"),
+                self.edge("c-d", "c", "d"),
+            ),
+        )
+
+        self.assertEqual(
+            registry.dependency_order(
+                "semantic", ("a",), preferred_order=("a", "c", "d", "b")
+            ),
+            ("b", "d", "c", "a"),
+        )
 
     def test_provenance_is_retained_on_queries_and_traversal(self) -> None:
         registry = self.registry()

@@ -6,6 +6,7 @@ from typing import Any
 
 from .checks import parse_check
 from .diagnostics import Diagnostic, EngineError
+from .graph_adapters import SUITE_DEPENDENCIES, suite_dependency_registry
 from .model import RegistryEntry, Suite
 from .paths import contained_file
 
@@ -57,27 +58,31 @@ def load_registry(root: Path, registry_path: str) -> tuple[RegistryEntry, ...]:
                 raise EngineError(Diagnostic("CONFIG.SELF_DEPENDENCY", "invalid", "suite cannot depend on itself", suite=entry.id, path=registry_path))
             if dependency not in known:
                 raise EngineError(Diagnostic("CONFIG.UNKNOWN_DEPENDENCY", "unavailable", "suite dependency is not registered", suite=entry.id, path=registry_path, observed=dependency), exit_code=3)
-    _validate_acyclic(entries, registry_path)
+    _validate_acyclic(root, entries, registry_path)
     return tuple(entries)
 
 
-def _validate_acyclic(entries: list[RegistryEntry], registry_path: str) -> None:
-    by_id = {entry.id: entry for entry in entries}
-    state: dict[str, int] = {}
-
-    def visit(suite_id: str, trail: tuple[str, ...]) -> None:
-        if state.get(suite_id) == 1:
-            cycle = " -> ".join((*trail, suite_id))
-            raise EngineError(Diagnostic("CONFIG.DEPENDENCY_CYCLE", "invalid", "suite dependency graph contains a cycle", suite=suite_id, path=registry_path, observed=cycle))
-        if state.get(suite_id) == 2:
-            return
-        state[suite_id] = 1
-        for dependency in by_id[suite_id].requires:
-            visit(dependency, (*trail, suite_id))
-        state[suite_id] = 2
-
-    for entry in entries:
-        visit(entry.id, ())
+def _validate_acyclic(
+    root: Path, entries: list[RegistryEntry], registry_path: str
+) -> None:
+    graph = suite_dependency_registry(
+        root,
+        entries,
+        registry_path,
+        include_path_aliases=False,
+    )
+    cycle = graph.find_cycle(SUITE_DEPENDENCIES)
+    if cycle is not None:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.DEPENDENCY_CYCLE",
+                "invalid",
+                "suite dependency graph contains a cycle",
+                suite=cycle[0],
+                path=registry_path,
+                observed=" -> ".join(cycle),
+            )
+        )
 
 
 def load_suite(root: Path, entry: RegistryEntry) -> Suite:

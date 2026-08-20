@@ -1,0 +1,16 @@
+schema_version = 1
+
+[[sources]]
+id = "standards.policy-impact"
+kind = "manifest"
+path = "evaluation/standards-effectiveness/policy-semantic-impact.toml"
+
+[[sources]]
+id = "standards-verifier.suite-dependencies"
+kind = "provider"
+provider = "standards-verifier.suite-dependencies"
+
+[[sources]]
+id = "standards-verifier.metadata-dependencies"
+kind = "provider"
+provider = "standards-verifier.metadata-dependencies"

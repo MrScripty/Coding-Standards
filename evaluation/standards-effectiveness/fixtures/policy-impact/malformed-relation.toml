@@ -1,13 +1,26 @@
 schema_version = 1
+source_id = "fixture.policy-impact.malformed-relation"
 
-[[owners]]
+[[nodes]]
 id = "workflow.planning"
-path = "workflows/planning.md"
-coverage = "audited"
+aliases = ["workflows/planning.md"]
+metadata = { repository_path = "workflows/planning.md", policy_impact_coverage = "audited" }
+
+[[nodes]]
+id = "prompts/planning.md"
+metadata = { repository_path = "prompts/planning.md" }
+
+[[groups]]
+id = "policy-impact"
+purpose = "Fixture policy impact."
+directions = ["incoming", "outgoing"]
+transitive = false
 
 [[edges]]
-owner = "workflow.planning"
-consumer = "prompts/planning.md"
+id = "malformed-relation"
+source = "workflow.planning"
+target = "prompts/planning.md"
 relation = "markdown-link"
-applicability = "Malformed relation."
-evidence_owner = "suite:planning-admission"
+groups = ["policy-impact"]
+traversable = true
+metadata = { applicability = "Malformed relation.", evidence_owner = "suite:planning-admission" }

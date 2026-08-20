@@ -41,3 +41,63 @@
   behaviors; bytecode compilation passed; the package import scan found no
   downstream dependency; the plan structure and `git diff --check` passed.
 - Result: Milestone 1 is accepted. Milestone 2 is the only active slice.
+
+## 2026-08-20: Milestone 2 Generic Dependency Refinement
+
+- Discovery: the accepted registry provides traversal but not a direct cycle
+  witness or dependency-first order. Adapting suite and metadata dependencies
+  without those operations would preserve duplicate downstream DFS logic.
+- Decision: extend the active slice's exact write set with generic deterministic
+  cycle detection and dependency ordering, then require both domain adapters to
+  consume those operations.
+- Scope effect: no objective, owner, migration disposition, domain schema, or
+  temporary graph authority changes. The refinement is part of the already
+  admitted permanent-dependency adaptation.
+
+## 2026-08-20: Repository Composition Re-Plan
+
+- Finding: policy impact was available through the default generic query, but
+  suite and metadata providers were instantiated only by verifier consumers.
+  Their local registries passed adapter tests while the repository query could
+  not report those groups for an arbitrary artifact.
+- Impact: this violates the objective's one-query discovery contract even
+  though storage, traversal, and adapter behavior are individually correct.
+  Milestone 2 and objective acceptance were therefore reopened before commit.
+- Decision: extend explicit source registration to accept caller-supplied,
+  named deterministic providers. Keep provider construction in one downstream
+  repository composition root; inject the completed registry into the neutral
+  CLI so the graph engine imports no consumer.
+- Required proof: the canonical query must list policy, suite, and metadata
+  groups together and resolve incident edges from logical IDs and paths. An
+  unregistered or unavailable provider must fail neutrally rather than being
+  scanned, inferred, or skipped.
+
+## 2026-08-20: Downstream Migration And Objective Acceptance
+
+- Policy impact now loads from the registered generic edge source as the
+  `policy-impact` and `semantic` groups. Policy validation, allowed relations,
+  applicability, evidence ownership, audited coverage, and typed diagnostics
+  remain downstream adapter responsibilities.
+- The source registry explicitly names the policy manifest and deterministic
+  suite and metadata providers. `tools/query_edges.py` is the sole canonical
+  repository command and injects downstream provider composition into the
+  neutral CLI; the graph engine imports no consumer.
+- The canonical command reports six groups. `workflow.implementation` exposes
+  policy and metadata edges together; `concurrent-plan-integration` exposes
+  policy and suite-dependency edges through both suite ID and path aliases.
+- The obsolete policy graph query, policy CLI, and manifest-only graph command
+  were deleted. There is no alternate schema, reverse index, compatibility
+  representation, inferred provider, or fallback lookup.
+- Planning has 24 canonical outgoing policy-impact edges. Queries by
+  `workflow.planning` and `workflows/planning.md` returned the same exact edge
+  identities, including the full-review prompt, fixture, and suite.
+- Exact review dispositions cover all 24 Planning consumers. The repository
+  inventory retains the frozen temporary Bash graph and specialized lifecycle
+  assertions under explicit deferred or retained dispositions.
+- Verification passed: 32 graph-engine tests, 323 standards-verifier tests,
+  164 registered declarative suites, generated-evidence freshness, affected
+  plan and link checks, exact alias/disposition comparisons, `git diff
+  --check`, and the complete checkpoint with 109 retained Bash verifiers.
+- Result: both milestones and the generic-edge objective are accepted. Parent
+  verification work resumes with a fresh graph audit; M6-I17 remains
+  unselected and unadmitted.

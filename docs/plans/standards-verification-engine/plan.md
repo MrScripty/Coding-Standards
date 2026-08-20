@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Generic edge-system recovery dependency
+**Current phase:** Milestone 6 fresh post-recovery graph audit
 
-**Next slice:** complete the generic edge-system plan before resuming the fresh
-post-recovery executable graph audit
+**Next slice:** audit current executable graph and lifecycle evidence without
+preselecting or admitting M6-I17
 
 **Acceptance status:** `pending`
 
@@ -148,10 +148,10 @@ programming language.
 
 **Recovery dependency:** M6-I16 and the
 [work proportionality and policy impact recovery](../work-proportionality-and-policy-impact/plan.md)
-are accepted. The [generic edge-system recovery](../generic-edge-system/plan.md)
-now owns the neutral graph capability and justified consumer migration before
-the fresh post-recovery package audit resumes. It does not admit or preselect
-M6-I17 and must not change the frozen temporary Bash graph.
+and the [generic edge-system recovery](../generic-edge-system/plan.md) are
+accepted. The neutral graph capability and justified permanent consumers are
+now upstream of the verifier. The fresh package audit resumes without
+preselecting M6-I17; the frozen temporary Bash graph remains unchanged.
 
 **Next work:**
 

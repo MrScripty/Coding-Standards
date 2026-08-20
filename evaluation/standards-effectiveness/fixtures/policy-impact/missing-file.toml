@@ -1,13 +1,26 @@
 schema_version = 1
+source_id = "fixture.policy-impact.missing-file"
 
-[[owners]]
+[[nodes]]
 id = "workflow.planning"
-path = "workflows/planning.md"
-coverage = "audited"
+aliases = ["workflows/planning.md"]
+metadata = { repository_path = "workflows/planning.md", policy_impact_coverage = "audited" }
+
+[[nodes]]
+id = "prompts/missing.md"
+metadata = { repository_path = "prompts/missing.md" }
+
+[[groups]]
+id = "policy-impact"
+purpose = "Fixture policy impact."
+directions = ["incoming", "outgoing"]
+transitive = false
 
 [[edges]]
-owner = "workflow.planning"
-consumer = "prompts/missing.md"
+id = "missing-consumer"
+source = "workflow.planning"
+target = "prompts/missing.md"
 relation = "prompt-projection"
-applicability = "Missing consumer."
-evidence_owner = "suite:planning-admission"
+groups = ["policy-impact"]
+traversable = true
+metadata = { applicability = "Missing consumer.", evidence_owner = "suite:planning-admission" }

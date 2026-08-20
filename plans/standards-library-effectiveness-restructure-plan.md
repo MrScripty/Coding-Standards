@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Generic edge-system recovery dependency
+**Current phase:** Milestone 7 fresh post-recovery graph audit
 
-**Next slice:** complete the generic edge-system plan before the
-verification-engine fresh graph audit resumes
+**Next slice:** verification-engine audit of current executable graph and
+lifecycle evidence without preselecting M6-I17
 
 **Acceptance status:** `partial`
 
@@ -151,10 +151,11 @@ at train order 131. The canonical
 package manifest contains the exact package state; the execution ledger
 contains detailed slice evidence.
 
-**Recovery dependency:** M6-I16 is accepted after one-owner final-state proof.
-The [work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md)
-is accepted. A fresh post-recovery graph audit must select the next package;
-evidence captured before recovery does not admit or preselect M6-I17.
+**Accepted recovery boundary:** M6-I16 is accepted after one-owner final-state
+proof. The [work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md)
+and [generic edge-system recovery](../docs/plans/generic-edge-system/plan.md)
+are accepted. A fresh post-recovery graph audit must select the next package;
+evidence captured before either recovery does not admit or preselect M6-I17.
 
 **Remaining work:**
 
@@ -183,7 +184,7 @@ engine is the sole verification authority.
 | Checker migration lifecycle | [Checker migration packages](../evaluation/standards-effectiveness/checker-migration-packages.tsv) |
 | Executable-edge lifecycle | [Executable edge dispositions](../evaluation/standards-effectiveness/executable-edge-dispositions.tsv) |
 | Verification-engine current state | [Verification-engine plan](../docs/plans/standards-verification-engine/plan.md) and [ledger](../docs/plans/standards-verification-engine/execution-ledger.md) |
-| Current recovery state | [Work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md) and [ledger](../docs/plans/work-proportionality-and-policy-impact/execution-ledger.md) |
+| Current recovery state | [Generic edge-system recovery](../docs/plans/generic-edge-system/plan.md) and [ledger](../docs/plans/generic-edge-system/execution-ledger.md) |
 
 ## Blockers
 

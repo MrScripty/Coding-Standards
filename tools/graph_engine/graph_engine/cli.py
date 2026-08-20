@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Sequence
+from typing import Callable, Iterable, Sequence
 
 from .errors import GraphError, UnsafeOutputError
 from .manifest import DEFAULT_SOURCE_REGISTRY, load_registry
@@ -197,10 +197,15 @@ def render_tsv(rows: Iterable[Row]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def main(argv: Sequence[str] | None = None, *, default_repo_root: Path) -> int:
+def main(
+    argv: Sequence[str] | None = None,
+    *,
+    default_repo_root: Path,
+    registry_loader: Callable[[Path, str], EdgeRegistry] = load_registry,
+) -> int:
     args = _parser(default_repo_root).parse_args(argv)
     try:
-        registry = load_registry(args.repo_root, args.registry)
+        registry = registry_loader(args.repo_root, args.registry)
         output = render_tsv(_rows(args, registry))
     except GraphError as error:
         details = " ".join(

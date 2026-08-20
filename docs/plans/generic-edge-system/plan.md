@@ -1,12 +1,12 @@
 # Plan: Generic Directed Edge System
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 2 downstream graph migration
+**Current phase:** Objective accepted
 
-**Next slice:** migrate policy impact and adapt permanent dependency consumers
+**Next slice:** none; parent verification work resumes with a fresh graph audit
 
-**Acceptance status:** `pending`
+**Acceptance status:** `satisfied`
 
 **Accepted base:** `7ae51ba996827cbf35cb6a5d73476b9eeb724437`
 
@@ -25,12 +25,12 @@ permanent graph consumers to that engine without dual authority or fallback.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | One explicit edge declaration is discoverable from both endpoints through canonical IDs and aliases. | `focused` | repository | `automated` | `satisfied` | 28 graph-engine tests |
-| A2 | Named groups filter and traverse only explicitly eligible edges, with transitive traversal prohibited by default. | `focused` | repository | `automated` | `satisfied` | 28 graph-engine tests |
-| A3 | Policy impact is one named group consumed through a policy adapter; no bespoke policy graph, reverse index, old manifest schema, or query fallback remains. | `integration` | repository | `automated` | `pending` | Milestone 2 tests and staged review |
-| A4 | Planning aliases return the same complete 24-edge policy-impact set, including the full-review prompt, fixture, and suite, and audited suite-owner closure remains enforced. | `integration` | repository | `automated` | `pending` | Generic query and policy suite |
-| A5 | Every graph-like mechanism has one reviewed migration disposition, and every `migrate-now` or `adapt-now` mechanism uses the upstream engine. | `review` | repository | `manual` | `pending` | [Graph consumer inventory](reports/graph-consumer-inventory.tsv) |
-| A6 | All focused, Python, declarative, generated, plan, link, and mixed repository gates pass with a clean accepted worktree. | `complete` | repository | `automated` | `pending` | Final ledger entry |
+| A1 | One explicit edge declaration is discoverable from both endpoints through canonical IDs and aliases. | `focused` | repository | `automated` | `satisfied` | 32 graph-engine tests |
+| A2 | Named groups filter and traverse only explicitly eligible edges, with transitive traversal prohibited by default. | `focused` | repository | `automated` | `satisfied` | 32 graph-engine tests |
+| A3 | Policy impact is one named group consumed through a policy adapter; no bespoke policy graph, reverse index, old manifest schema, or query fallback remains. | `integration` | repository | `automated` | `satisfied` | 323 verifier tests and no-old-authority review |
+| A4 | Planning aliases return the same complete 24-edge policy-impact set, including the full-review prompt, fixture, and suite, and audited suite-owner closure remains enforced. | `integration` | repository | `automated` | `satisfied` | Exact generic-query comparison and policy suite |
+| A5 | Every graph-like mechanism has one reviewed migration disposition, and every `migrate-now` or `adapt-now` mechanism uses the upstream engine. | `review` | repository | `manual` | `satisfied` | Repository composition and [graph consumer inventory](reports/graph-consumer-inventory.tsv) |
+| A6 | All focused, Python, declarative, generated, plan, link, and mixed repository gates pass with a clean accepted worktree. | `complete` | repository | `automated` | `satisfied` | [Final acceptance report](reports/final-acceptance.md) |
 
 ## Scope
 
@@ -134,7 +134,7 @@ permanent graph consumers to that engine without dual authority or fallback.
 - `TraversalResult`: deterministic visited nodes, edges, explanatory paths,
   and provenance.
 
-The generic command will be `python3 tools/graph_engine/query_edges.py` with
+The canonical repository command will be `python3 tools/query_edges.py` with
 mutually exclusive `--node`, `--edge`, and `--list-groups` selectors; explicit
 `--direction`; optional `--group`; `--traverse`; and `--transitive`. Its
 default TSV output rejects record-breaking control characters rather than
@@ -195,11 +195,21 @@ mechanics with generic groups and adapters, then accept the complete objective.
 
 **Allowed write set:**
 
+- `tools/graph_engine/graph_engine/manifest.py`
+- `tools/graph_engine/graph_engine/cli.py`
+- `tools/graph_engine/graph_engine/registry.py`
+- `tools/graph_engine/graph_engine/__init__.py`
+- `tools/graph_engine/query_edges.py` (delete after canonical composition entrypoint)
+- `tools/graph_engine/tests/test_manifest.py`
+- `tools/graph_engine/tests/test_cli.py`
+- `tools/graph_engine/tests/test_registry.py`
 - `tools/standards_verifier/pyproject.toml`
 - `tools/standards_verifier/verify.py`
 - `tools/standards_verifier/query_policy_impact.py` (delete)
 - `tools/standards_verifier/standards_verifier/config.py`
 - `tools/standards_verifier/standards_verifier/engine.py`
+- `tools/standards_verifier/standards_verifier/graph_adapters.py`
+- `tools/standards_verifier/standards_verifier/repository_graph.py`
 - `tools/standards_verifier/standards_verifier/checks/metadata.py`
 - `tools/standards_verifier/standards_verifier/checks/policy_impact.py`
 - `tools/standards_verifier/standards_verifier/policy_impact.py`
@@ -207,6 +217,8 @@ mechanics with generic groups and adapters, then accept the complete objective.
 - `tools/standards_verifier/tests/test_engine.py`
 - `tools/standards_verifier/tests/test_metadata.py`
 - `tools/standards_verifier/tests/test_policy_impact.py`
+- `tools/standards_verifier/tests/test_repository_graph.py`
+- `tools/query_edges.py`
 - `tools/standards_verifier/README.md`
 - `evaluation/standards-effectiveness/policy-semantic-impact.toml`
 - `evaluation/standards-effectiveness/edge-source-registry.toml`
@@ -221,18 +233,26 @@ mechanics with generic groups and adapters, then accept the complete objective.
 
 **Tasks:**
 
-- [ ] Register one generic policy graph source, migrate all 24 Planning edges,
+- [x] Add generic deterministic cycle detection and dependency ordering needed
+  by both permanent dependency adapters; do not recreate DFS in either domain.
+- [x] Register one generic policy graph source, migrate all 24 Planning edges,
   and preserve policy-specific diagnostics and audited-suite closure in an
   adapter over `policy-impact` edges.
-- [ ] Replace the bespoke policy query with the generic CLI and remove all old
+- [x] Replace the bespoke policy query with the generic CLI and remove all old
   storage, reverse-index, schema, and query authority.
-- [ ] Adapt suite dependency and metadata relation validation to named generic
+- [x] Adapt suite dependency and metadata relation validation to named generic
   groups without changing their canonical input formats or diagnostics.
-- [ ] Record exact Planning consumer dispositions; update only affected
+- [x] Record exact Planning consumer dispositions; update only affected
   standards, prompts, templates, fixtures, suites, and documentation.
-- [ ] Run focused downstream tests, all Python tests, every declarative suite,
+- [x] Run focused downstream tests, all Python tests, every declarative suite,
   generated freshness, affected plan/link checks, and the complete mixed
   checkpoint.
+- [x] Register the adapted suite and metadata providers beside the policy
+  manifest in one repository composition without adding downstream imports to
+  the neutral engine.
+- [x] Make the canonical generic query use that composition and prove an
+  arbitrary artifact can discover all incident migrated groups without
+  knowing which source declared them.
 
 **Acceptance gate:** all objective claims pass; both Planning aliases return
 the same 24 policy-impact edges; no bespoke policy graph/reverse index or old
@@ -240,7 +260,7 @@ query/manifest fallback remains; adapted consumers preserve diagnostics and
 formats; deferred mechanisms remain unchanged; staged scope is exact; accepted
 commits leave the canonical worktree clean.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ## Verification Gates
 
@@ -281,7 +301,7 @@ delegated, but no concurrent writer may edit these sets.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
+- Acceptance status: `satisfied`
 - Deferred follow-ups: temporary Bash graph and package-lifecycle mechanisms
   remain governed by their explicit inventory triggers.
-- Final status: `Active`
+- Final status: `Accepted`

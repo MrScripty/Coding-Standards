@@ -1,13 +1,26 @@
 schema_version = 1
+source_id = "fixture.policy-impact.unknown-consumer"
 
-[[owners]]
+[[nodes]]
 id = "workflow.planning"
-path = "workflows/planning.md"
-coverage = "audited"
+aliases = ["workflows/planning.md"]
+metadata = { repository_path = "workflows/planning.md", policy_impact_coverage = "audited" }
+
+[[nodes]]
+id = "README.md"
+metadata = { repository_path = "README.md" }
+
+[[groups]]
+id = "policy-impact"
+purpose = "Fixture policy impact."
+directions = ["incoming", "outgoing"]
+transitive = false
 
 [[edges]]
-owner = "workflow.planning"
-consumer = "README.md"
+id = "unknown-consumer"
+source = "workflow.planning"
+target = "README.md"
 relation = "prompt-projection"
-applicability = "Invalid prompt consumer."
-evidence_owner = "suite:planning-admission"
+groups = ["policy-impact"]
+traversable = true
+metadata = { applicability = "Invalid prompt consumer.", evidence_owner = "suite:planning-admission" }

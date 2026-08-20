@@ -1227,6 +1227,16 @@ class EngineTest(unittest.TestCase):
 
         self.assertEqual([result.id for result in results], ["dependency", "dependent"])
 
+    def test_dependency_graph_resolves_registered_suite_ids_and_paths(self) -> None:
+        self.write("evidence.md", "required\n")
+        suite_path = self.write_text_suite("text")
+        self.write_registry([("text", suite_path, [])])
+
+        verifier = Verifier(self.root, self.registry)
+
+        self.assertEqual(verifier.dependency_graph.resolve("text"), "text")
+        self.assertEqual(verifier.dependency_graph.resolve(suite_path), "text")
+
     def test_decision_mismatch_has_stable_diagnostic(self) -> None:
         suite_path = self.write_decision_suite(expected="allow")
         self.write_registry([("decision", suite_path, [])])

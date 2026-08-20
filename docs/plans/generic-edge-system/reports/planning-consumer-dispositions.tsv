@@ -1,0 +1,25 @@
+consumer	relation	disposition	reason	evidence_owner
+STANDARDS-ROUTER.md	router-projection	reviewed-no-change	Router applicability remains correct and does not own graph mechanics.	suite:concurrent-plan-integration
+evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv	fixture-projection	reviewed-no-change	Implementation admission decisions are unaffected by graph storage migration.	suite:plan-implementation-entrypoint
+evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv	fixture-projection	reviewed-no-change	Planning admission outcomes remain correct.	suite:planning-admission
+evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv	fixture-projection	reviewed-no-change	Concurrent profile applicability remains conditional and unchanged.	suite:concurrent-plan-integration
+evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv	fixture-projection	reviewed-no-change	Concurrent stale-state outcomes remain unchanged.	suite:concurrent-plan-integration
+evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv	fixture-projection	reviewed-no-change	Planning ownership and lifecycle outcomes remain correct.	suite:planning-consolidation
+evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv	fixture-projection	reviewed-no-change	Full-review Planning delegation remains correct.	suite:full-review-prompt-entrypoint
+evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv	fixture-projection	reviewed-no-change	Template projection decisions remain correct.	suite:plan-template-projection
+evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv	fixture-projection	reviewed-no-change	Work-slice proportionality is independent of graph mechanics.	suite:planning-admission
+evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml	enforcement-suite-projection	reviewed-no-change	Concurrent profile enforcement remains correct.	suite:concurrent-plan-integration
+evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml	enforcement-suite-projection	reviewed-no-change	Full-review prompt enforcement remains correct.	suite:full-review-prompt-entrypoint
+evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml	enforcement-suite-projection	reviewed-no-change	Implementation entrypoint enforcement remains correct.	suite:plan-implementation-entrypoint
+evaluation/standards-effectiveness/suites/plan-template-projection.toml	enforcement-suite-projection	reviewed-no-change	Plan-template enforcement remains correct.	suite:plan-template-projection
+evaluation/standards-effectiveness/suites/planning-admission.toml	enforcement-suite-projection	reviewed-no-change	Planning admission enforcement remains correct.	suite:planning-admission
+evaluation/standards-effectiveness/suites/planning-consolidation.toml	enforcement-suite-projection	reviewed-no-change	Planning consolidation enforcement remains correct.	suite:planning-consolidation
+evaluation/standards-effectiveness/suites/policy-semantic-impact.toml	enforcement-suite-projection	updated	Suite now states that policy validation is an adapter over the generic policy-impact group.	suite:policy-semantic-impact
+evaluation/standards-effectiveness/suites/s1-routing.toml	enforcement-suite-projection	reviewed-no-change	S1 bounded routing remains correct.	suite:s1-routing
+profiles/workflows/concurrent-plan-integration.md	normative-consumer	reviewed-no-change	Conditional concurrent integration semantics remain unchanged.	suite:concurrent-plan-integration
+prompts/full-codebase-standards-refactor.md	prompt-projection	reviewed-no-change	Full-codebase review still delegates Planning correctly.	suite:full-review-prompt-entrypoint
+prompts/implement-plan.md	prompt-projection	reviewed-no-change	Implementation prompt admission remains correct.	suite:plan-implementation-entrypoint
+prompts/planning.md	prompt-projection	reviewed-no-change	Planning prompt scope and lifecycle remain correct.	suite:planning-consolidation
+templates/PLAN-TEMPLATE.md	template-projection	reviewed-no-change	Plan template fields remain correct.	suite:plan-template-projection
+workflows/commit.md	normative-consumer	reviewed-no-change	Commit artifact-update boundaries remain correct.	suite:planning-consolidation
+workflows/implementation.md	normative-consumer	reviewed-no-change	Implementation consumption of Planning authority remains correct.	suite:planning-admission

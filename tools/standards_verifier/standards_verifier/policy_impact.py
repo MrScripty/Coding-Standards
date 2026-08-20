@@ -5,6 +5,19 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Mapping
 
+from tools.graph_engine.graph_engine import (
+    AliasConflictError,
+    EdgeRegistry,
+    GraphError,
+    InvalidEdgeError,
+    InvalidGroupError,
+    InvalidSourceError,
+    MissingArtifactError,
+    PathEscapeError,
+    UnknownGroupError,
+    load_manifest,
+)
+
 from .diagnostics import Diagnostic, EngineError
 from .paths import contained_file
 
@@ -19,7 +32,8 @@ RELATION_TYPES = frozenset(
         "enforcement-suite-projection",
     }
 )
-DEFAULT_MANIFEST = "evaluation/standards-effectiveness/policy-semantic-impact.toml"
+POLICY_GROUP = "policy-impact"
+DEFAULT_SOURCE_REGISTRY = "evaluation/standards-effectiveness/edge-source-registry.toml"
 
 
 def _load_module_metadata(root: Path, path: str, *, suite: str, check: str):
@@ -28,20 +42,9 @@ def _load_module_metadata(root: Path, path: str, *, suite: str, check: str):
     return load_module_metadata(root, path, suite=suite, check=check)
 
 
-def _valid_owner_id(value: str) -> bool:
-    from .checks.metadata import ID_PATTERN
-
-    return ID_PATTERN.fullmatch(value) is not None
-
-
-@dataclass(frozen=True, slots=True)
-class ImpactOwner:
-    id: str
-    path: str
-
-
 @dataclass(frozen=True, slots=True)
 class ImpactEdge:
+    edge_id: str
     owner: str
     consumer: str
     relation: str
@@ -50,12 +53,12 @@ class ImpactEdge:
 
 
 @dataclass(frozen=True, slots=True)
-class PolicyImpact:
-    owners: tuple[ImpactOwner, ...]
-    edges: tuple[ImpactEdge, ...]
+class PolicyImpactAdapter:
+    registry: EdgeRegistry
+    audited_owners: frozenset[str]
 
     def consumers_for(self, owner: str) -> tuple[ImpactEdge, ...]:
-        if owner not in {item.id for item in self.owners}:
+        if owner not in self.audited_owners:
             raise EngineError(
                 Diagnostic(
                     "POLICY_IMPACT.OWNER_NOT_AUDITED",
@@ -67,7 +70,10 @@ class PolicyImpact:
             )
         return tuple(
             sorted(
-                (edge for edge in self.edges if edge.owner == owner),
+                (
+                    _impact_edge(self.registry, view.edge)
+                    for view in self.registry.outgoing(owner, (POLICY_GROUP,))
+                ),
                 key=lambda edge: (
                     edge.consumer,
                     edge.relation,
@@ -87,38 +93,111 @@ def _diagnostic(
     observed: str | None = None,
     suite: str | None = None,
     check: str | None = None,
+    unavailable: bool = False,
 ) -> EngineError:
     return EngineError(
         Diagnostic(
             code,
-            "invalid",
+            "unavailable" if unavailable else "invalid",
             message,
             suite=suite,
             check=check,
             path=path,
             field=field,
             observed=observed,
-        )
+        ),
+        exit_code=3 if unavailable else 2,
     )
 
 
-def _load_toml(root: Path, manifest_path: str, *, suite: str, check: str) -> dict[str, object]:
-    path = contained_file(root, manifest_path, suite=suite, check=check)
-    try:
-        with path.open("rb") as handle:
-            raw = tomllib.load(handle)
-    except tomllib.TOMLDecodeError as error:
-        raise EngineError(
-            Diagnostic(
-                "POLICY_IMPACT.INVALID_TOML",
-                "invalid",
-                str(error),
-                suite=suite,
-                check=check,
-                path=manifest_path,
-            )
-        ) from error
-    return raw
+def _translate_graph_error(
+    error: GraphError,
+    manifest_path: str,
+    *,
+    suite: str,
+    check: str,
+) -> EngineError:
+    details = error.failure.details
+    if isinstance(error, PathEscapeError):
+        return _diagnostic(
+            "PATH.OUTSIDE_REPOSITORY",
+            error.failure.message,
+            path=details.get("path", manifest_path),
+            suite=suite,
+            check=check,
+        )
+    if isinstance(error, MissingArtifactError):
+        return _diagnostic(
+            "INPUT.UNAVAILABLE",
+            error.failure.message,
+            path=details.get("path", manifest_path),
+            suite=suite,
+            check=check,
+            unavailable=True,
+        )
+    if isinstance(error, InvalidEdgeError):
+        if "duplicated" in error.failure.message:
+            code = "POLICY_IMPACT.DUPLICATE_EDGE"
+            field = "edges"
+        elif details.get("endpoint") == "source":
+            code = "POLICY_IMPACT.UNKNOWN_OWNER"
+            field = "owner"
+        elif details.get("endpoint") == "target":
+            code = "POLICY_IMPACT.UNKNOWN_CONSUMER"
+            field = "consumer"
+        else:
+            code = "POLICY_IMPACT.GRAPH_INVALID"
+            field = "edges"
+        return _diagnostic(
+            code,
+            error.failure.message,
+            path=manifest_path,
+            field=field,
+            observed=details.get("node", details.get("edge")),
+            suite=suite,
+            check=check,
+        )
+    if isinstance(error, (InvalidGroupError, UnknownGroupError)):
+        code = "POLICY_IMPACT.GROUP"
+    elif isinstance(error, AliasConflictError):
+        code = "POLICY_IMPACT.DUPLICATE_OWNER"
+    elif isinstance(error, InvalidSourceError):
+        code = "POLICY_IMPACT.GRAPH_INVALID"
+    else:
+        code = "POLICY_IMPACT.GRAPH_INVALID"
+    return _diagnostic(
+        code,
+        error.failure.message,
+        path=manifest_path,
+        observed=next(iter(details.values()), None),
+        suite=suite,
+        check=check,
+    )
+
+
+def _repository_path(registry: EdgeRegistry, node_id: str, manifest_path: str) -> str:
+    node = registry.nodes[node_id]
+    value = node.metadata.get("repository_path")
+    if not value:
+        raise _diagnostic(
+            "POLICY_IMPACT.UNKNOWN_CONSUMER",
+            "policy-impact nodes require one repository_path",
+            path=manifest_path,
+            field="repository_path",
+            observed=node_id,
+        )
+    return value
+
+
+def _impact_edge(registry: EdgeRegistry, edge) -> ImpactEdge:
+    return ImpactEdge(
+        edge.id,
+        edge.source,
+        _repository_path(registry, edge.target, edge.provenance.locator),
+        edge.relation,
+        edge.metadata["applicability"],
+        edge.metadata["evidence_owner"],
+    )
 
 
 def _consumer_matches_relation(
@@ -163,6 +242,21 @@ def _consumer_matches_relation(
         )
 
 
+def _load_toml(root: Path, path: str, *, suite: str, check: str) -> dict[str, object]:
+    source = contained_file(root, path, suite=suite, check=check)
+    try:
+        with source.open("rb") as handle:
+            return tomllib.load(handle)
+    except tomllib.TOMLDecodeError as error:
+        raise _diagnostic(
+            "POLICY_IMPACT.INVALID_TOML",
+            str(error),
+            path=path,
+            suite=suite,
+            check=check,
+        ) from error
+
+
 def _registered_suite_owners(
     root: Path,
     suite_paths: Mapping[str, str],
@@ -205,156 +299,57 @@ def load_policy_impact(
     *,
     suite: str = "policy-impact-query",
     check: str = "manifest",
-) -> PolicyImpact:
-    raw = _load_toml(root, manifest_path, suite=suite, check=check)
-    expected_root = {"schema_version", "owners", "edges"}
-    if set(raw) != expected_root:
-        raise _diagnostic(
-            "POLICY_IMPACT.ROOT_FIELDS",
-            "manifest requires exactly schema_version, owners, and edges",
-            path=manifest_path,
-            observed=",".join(sorted(set(raw) ^ expected_root)),
-            suite=suite,
-            check=check,
-        )
-    if raw["schema_version"] != 1:
-        raise _diagnostic(
-            "POLICY_IMPACT.SCHEMA_VERSION",
-            "manifest schema version must be 1",
-            path=manifest_path,
-            field="schema_version",
-            observed=str(raw["schema_version"]),
-            suite=suite,
-            check=check,
-        )
+    _registry: EdgeRegistry | None = None,
+) -> PolicyImpactAdapter:
+    if _registry is None:
+        try:
+            registry = load_manifest(root, manifest_path)
+            registry.edges_for_group(POLICY_GROUP)
+        except GraphError as error:
+            raise _translate_graph_error(
+                error, manifest_path, suite=suite, check=check
+            ) from error
+    else:
+        registry = _registry
 
-    raw_owners = raw["owners"]
-    if not isinstance(raw_owners, list) or not raw_owners:
+    audited_owners = frozenset(
+        node.id
+        for node in registry.nodes.values()
+        if node.metadata.get("policy_impact_coverage") == "audited"
+    )
+    if not audited_owners:
         raise _diagnostic(
             "POLICY_IMPACT.OWNERS",
-            "manifest requires at least one audited owner",
+            "manifest requires at least one explicitly audited owner",
             path=manifest_path,
-            field="owners",
+            field="nodes",
             suite=suite,
             check=check,
         )
-    owners: list[ImpactOwner] = []
-    seen_owner_ids: set[str] = set()
-    seen_owner_paths: set[str] = set()
-    for raw_owner in raw_owners:
-        if not isinstance(raw_owner, dict) or set(raw_owner) != {"id", "path", "coverage"}:
-            raise _diagnostic(
-                "POLICY_IMPACT.OWNER_FIELDS",
-                "owner requires exactly id, path, and coverage",
-                path=manifest_path,
-                field="owners",
-                suite=suite,
-                check=check,
-            )
-        owner_id = raw_owner["id"]
-        owner_path = raw_owner["path"]
-        coverage = raw_owner["coverage"]
-        if not isinstance(owner_id, str) or not _valid_owner_id(owner_id):
-            raise _diagnostic(
-                "POLICY_IMPACT.OWNER_ID",
-                "owner id must be a canonical metadata identifier",
-                path=manifest_path,
-                field="id",
-                observed=str(owner_id),
-                suite=suite,
-                check=check,
-            )
-        if not isinstance(owner_path, str) or not owner_path:
-            raise _diagnostic(
-                "POLICY_IMPACT.OWNER_PATH",
-                "owner path must be a non-empty repository path",
-                path=manifest_path,
-                field="path",
-                observed=str(owner_path),
-                suite=suite,
-                check=check,
-            )
-        if coverage != "audited":
-            raise _diagnostic(
-                "POLICY_IMPACT.COVERAGE",
-                "listed owner coverage must be explicitly audited",
-                path=manifest_path,
-                field="coverage",
-                observed=str(coverage),
-                suite=suite,
-                check=check,
-            )
-        if owner_id in seen_owner_ids or owner_path in seen_owner_paths:
-            raise _diagnostic(
-                "POLICY_IMPACT.DUPLICATE_OWNER",
-                "owner ids and paths must be unique",
-                path=manifest_path,
-                field="owners",
-                observed=owner_id,
-                suite=suite,
-                check=check,
-            )
+    for owner in sorted(audited_owners):
+        owner_path = _repository_path(registry, owner, manifest_path)
         module = _load_module_metadata(root, owner_path, suite=suite, check=check)
-        if module.module_id != owner_id:
+        if module.module_id != owner:
             raise _diagnostic(
                 "POLICY_IMPACT.UNKNOWN_OWNER",
                 "owner id does not match canonical metadata at its path",
                 path=manifest_path,
                 field="id",
-                observed=owner_id,
+                observed=owner,
                 suite=suite,
                 check=check,
             )
-        seen_owner_ids.add(owner_id)
-        seen_owner_paths.add(owner_path)
-        owners.append(ImpactOwner(owner_id, owner_path))
 
-    raw_edges = raw["edges"]
-    if not isinstance(raw_edges, list) or not raw_edges:
-        raise _diagnostic(
-            "POLICY_IMPACT.EDGES",
-            "manifest requires at least one semantic edge",
-            path=manifest_path,
-            field="edges",
-            suite=suite,
-            check=check,
-        )
-    edges: list[ImpactEdge] = []
-    seen_edges: set[tuple[str, str, str]] = set()
-    for raw_edge in raw_edges:
-        edge_fields = {"owner", "consumer", "relation", "applicability", "evidence_owner"}
-        if not isinstance(raw_edge, dict) or set(raw_edge) != edge_fields:
-            raise _diagnostic(
-                "POLICY_IMPACT.EDGE_FIELDS",
-                "edge requires exactly owner, consumer, relation, applicability, and evidence_owner",
-                path=manifest_path,
-                field="edges",
-                suite=suite,
-                check=check,
-            )
-        if any(not isinstance(raw_edge[field], str) for field in edge_fields):
-            raise _diagnostic(
-                "POLICY_IMPACT.EDGE_VALUE",
-                "edge fields must be strings",
-                path=manifest_path,
-                field="edges",
-                suite=suite,
-                check=check,
-            )
-        edge = ImpactEdge(
-            raw_edge["owner"],
-            raw_edge["consumer"],
-            raw_edge["relation"],
-            raw_edge["applicability"],
-            raw_edge["evidence_owner"],
-        )
-        if edge.owner not in seen_owner_ids:
+    impact_edges: list[ImpactEdge] = []
+    seen: set[tuple[str, str, str]] = set()
+    for edge in registry.edges_for_group(POLICY_GROUP):
+        if edge.source not in audited_owners:
             raise _diagnostic(
                 "POLICY_IMPACT.UNKNOWN_OWNER",
                 "edge owner has no audited coverage entry",
                 path=manifest_path,
                 field="owner",
-                observed=edge.owner,
+                observed=edge.source,
                 suite=suite,
                 check=check,
             )
@@ -368,7 +363,9 @@ def load_policy_impact(
                 suite=suite,
                 check=check,
             )
-        if not edge.applicability.strip():
+        applicability = edge.metadata.get("applicability", "")
+        evidence_owner = edge.metadata.get("evidence_owner", "")
+        if not applicability.strip():
             raise _diagnostic(
                 "POLICY_IMPACT.APPLICABILITY",
                 "edge applicability must be non-empty",
@@ -377,30 +374,38 @@ def load_policy_impact(
                 suite=suite,
                 check=check,
             )
-        if not edge.evidence_owner.startswith("suite:"):
+        if not evidence_owner.startswith("suite:"):
             raise _diagnostic(
                 "POLICY_IMPACT.EVIDENCE_OWNER",
                 "evidence owner must use suite:<registered-id>",
                 path=manifest_path,
                 field="evidence_owner",
-                observed=edge.evidence_owner,
+                observed=evidence_owner,
                 suite=suite,
                 check=check,
             )
-        evidence_suite = edge.evidence_owner.removeprefix("suite:")
+        evidence_suite = evidence_owner.removeprefix("suite:")
         if evidence_suite not in suite_paths:
             raise _diagnostic(
                 "POLICY_IMPACT.EVIDENCE_OWNER",
                 "evidence owner suite is not registered",
                 path=manifest_path,
                 field="evidence_owner",
-                observed=edge.evidence_owner,
+                observed=evidence_owner,
                 suite=suite,
                 check=check,
             )
-        contained_file(root, suite_paths[evidence_suite], suite=suite, check=check)
-        identity = (edge.owner, edge.consumer, edge.relation)
-        if identity in seen_edges:
+        consumer = _repository_path(registry, edge.target, manifest_path)
+        impact = ImpactEdge(
+            edge.id,
+            edge.source,
+            consumer,
+            edge.relation,
+            applicability,
+            evidence_owner,
+        )
+        identity = (impact.owner, impact.consumer, impact.relation)
+        if identity in seen:
             raise _diagnostic(
                 "POLICY_IMPACT.DUPLICATE_EDGE",
                 "owner, consumer, and relation must identify one edge",
@@ -412,27 +417,24 @@ def load_policy_impact(
             )
         _consumer_matches_relation(
             root,
-            edge,
+            impact,
             suite_paths,
             manifest_path=manifest_path,
             suite=suite,
             check=check,
         )
-        seen_edges.add(identity)
-        edges.append(edge)
+        seen.add(identity)
+        impact_edges.append(impact)
 
     suite_owners = _registered_suite_owners(
-        root,
-        suite_paths,
-        suite=suite,
-        check=check,
+        root, suite_paths, suite=suite, check=check
     )
     for suite_id, suite_owner in sorted(suite_owners.items()):
-        if suite_owner not in seen_owner_ids:
+        if suite_owner not in audited_owners:
             continue
         suite_path = suite_paths[suite_id]
         identity = (suite_owner, suite_path, "enforcement-suite-projection")
-        if identity not in seen_edges:
+        if identity not in seen:
             raise _diagnostic(
                 "POLICY_IMPACT.MISSING_ENFORCEMENT_SUITE_EDGE",
                 "suite owned by an audited policy owner requires an enforcement-suite edge",
@@ -442,5 +444,40 @@ def load_policy_impact(
                 suite=suite,
                 check=check,
             )
+    return PolicyImpactAdapter(registry, audited_owners)
 
-    return PolicyImpact(tuple(owners), tuple(edges))
+
+def load_registered_policy_impact(
+    root: Path,
+    source_registry_path: str,
+    suite_paths: Mapping[str, str],
+    *,
+    suite: str = "policy-impact-query",
+    check: str = "registry",
+) -> PolicyImpactAdapter:
+    from .repository_graph import load_repository_registry
+
+    try:
+        registry = load_repository_registry(root, source_registry_path)
+        edges = registry.edges_for_group(POLICY_GROUP)
+    except GraphError as error:
+        raise _translate_graph_error(
+            error, source_registry_path, suite=suite, check=check
+        ) from error
+    if not edges:
+        raise _diagnostic(
+            "POLICY_IMPACT.EDGES",
+            "registered policy-impact group requires at least one edge",
+            path=source_registry_path,
+            field="sources",
+            suite=suite,
+            check=check,
+        )
+    return load_policy_impact(
+        root,
+        source_registry_path,
+        suite_paths,
+        suite=suite,
+        check=check,
+        _registry=registry,
+    )

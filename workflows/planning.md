@@ -132,12 +132,18 @@ integration-owner write in either case.
 ## Policy Projection Completeness
 
 A normative change updates every affected distribution and enforcement surface.
-Before changing an audited policy owner, query the repository's semantic-impact
-manifest and review every returned consumer. Audit and add explicit edges for a
-previously uncovered owner before its next normative change. The manifest owns
-current semantic relations; a change report owns change-specific dispositions.
-Do not infer semantic consumers from hyperlinks, lexical similarity, or routing
-prerequisites.
+Before changing an audited policy owner, query the neutral repository graph's
+`policy-impact` edge group from the owner's logical ID or repository-path alias
+and review every returned consumer. Audit and add explicit edges for a
+previously uncovered owner before its next normative change. One registered
+source declares each edge; the neutral graph engine derives bidirectional
+indexes and exposes the same declaration from either endpoint without owning
+policy semantics. Group membership does not copy an edge, domain validation
+remains group-specific, and traversal requires explicit permission. The graph
+manifest owns current semantic relations; a change report owns change-specific
+dispositions. Do not infer missing semantic consumers from hyperlinks, lexical
+similarity, routing prerequisites, suite ownership, or another graph; correct
+the authoritative declaration explicitly.
 
 When a rule prescribes a machine protocol, concrete representation, or
 automated gate, its applicable prompts, templates, fixtures, and executable

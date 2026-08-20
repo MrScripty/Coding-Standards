@@ -13,6 +13,11 @@ sys.path.insert(0, str(ENGINE_ROOT))
 
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
+from standards_verifier.graph_adapters import (
+    METADATA_DEPENDENCIES,
+    metadata_dependency_registry,
+)
+from standards_verifier.checks.metadata import load_module_metadata
 
 
 class MetadataGraphTest(unittest.TestCase):
@@ -123,6 +128,28 @@ class MetadataGraphTest(unittest.TestCase):
         )
 
         self.assertEqual(self.result(("core.md", "profile.md")).status, "passed")
+
+    def test_metadata_adapter_resolves_ids_paths_and_named_groups(self) -> None:
+        self.write_module("core.md", module_id="core", role="core")
+        self.write_module(
+            "profile.md",
+            module_id="profile.test",
+            role="profile",
+            level="PROFILE",
+            requires=("core",),
+        )
+        modules = tuple(
+            load_module_metadata(self.root, path, suite="metadata", check="graph")
+            for path in ("core.md", "profile.md")
+        )
+
+        graph = metadata_dependency_registry(self.root, modules)
+
+        self.assertEqual(graph.resolve("profile.md"), "profile.test")
+        self.assertEqual(
+            tuple(edge.relation for edge in graph.edges_for_group(METADATA_DEPENDENCIES)),
+            ("requires",),
+        )
 
     def test_field_count_is_exact(self) -> None:
         self.write_module("missing.md", module_id="missing", omit="Verification")

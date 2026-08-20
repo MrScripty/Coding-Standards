@@ -1,12 +1,12 @@
 schema_version = 1
 id = "policy-semantic-impact"
 owner = "workflow.planning"
-description = "Reviewed bounded policy-owner impact edges, audited-owner suite closure, strict consumer and evidence resolution, and typed negative fixtures without link or lexical inference."
+description = "Policy-specific validation over the generic policy-impact edge group, including audited-owner suite closure, strict consumer and evidence resolution, and typed negative fixtures without inferred edges."
 
 [[checks]]
 id = "current-structure"
 type = "policy_impact"
-manifest = "evaluation/standards-effectiveness/policy-semantic-impact.toml"
+source_registry = "evaluation/standards-effectiveness/edge-source-registry.toml"
 
 [[checks]]
 id = "negative-fixtures"
