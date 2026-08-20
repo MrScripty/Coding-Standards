@@ -721,6 +721,11 @@ path = "evaluation/standards-effectiveness/suites/planning-admission.toml"
 requires = []
 
 [[suites]]
+id = "concurrent-plan-integration"
+path = "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml"
+requires = ["planning-admission"]
+
+[[suites]]
 id = "plan-implementation-entrypoint"
 path = "evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml"
 requires = []

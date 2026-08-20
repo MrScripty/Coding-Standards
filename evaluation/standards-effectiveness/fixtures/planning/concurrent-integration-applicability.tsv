@@ -1,0 +1,11 @@
+case	proposals	base	stale_effect	work	outstanding	expected
+shared-stale-proposals	multiple	shared	material	authorizing	yes	select
+serial-collaboration	one	shared	material	authorizing	no	exclude
+read-only-investigation	multiple	shared	material	read-only	yes	exclude
+delegated-report	multiple	shared	material	report	yes	exclude
+independent-bases	multiple	independent	material	authorizing	yes	exclude
+non-stale-work	multiple	shared	none	authorizing	yes	exclude
+current-owner-only	one	shared	material	authorizing	no	exclude
+missing-proposal-fact	missing	shared	material	authorizing	yes	unavailable
+missing-base-fact	multiple	missing	material	authorizing	yes	unavailable
+missing-stale-effect	multiple	shared	missing	authorizing	yes	unavailable

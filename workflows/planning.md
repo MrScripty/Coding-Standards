@@ -110,64 +110,38 @@ escape rejection; unsupported filesystem representation routes conditionally
 through Cross-Platform. Never infer the operation or treat a next slice as
 execution authority.
 
-## Revision-Bound Transitions
+## Concurrent Integration Routing
 
-`planning-admission-v1` identifies authoritative current plan state. Digest the
-exact bytes of the selected `plan.md` and linked `issues.md` in canonical
-repository-relative path order using explicit presence markers and
-length-delimited path and content fields. Record the supported cryptographic
-algorithm with the scheme. Do not normalize content or use Git identity,
-timestamps, filesystem metadata, inferred paths, or the append-only ledger as
-digest input.
+Ordinary planning does not require a revision digest, transition envelope, or
+reconciliation identity. Apply the
+[Concurrent Plan Integration profile](../profiles/workflows/concurrent-plan-integration.md)
+only when two or more proposals may be prepared from the same mutable plan
+revision before integration and correctness depends on detecting whether plan
+or shared-authority state changed before a proposal is integrated.
 
-Each proposal has a deterministic `planning-transition-v1` identity over its
-scheme and algorithm, canonical plan path, explicit operation and actor, prior
-admission identity, exact affected scope and bounded write set, canonically
-ordered prerequisite transition identities, intended semantic outcome and plan
-state, intended resulting admission identity, and verification contract. Empty
-and absent values remain distinct. Actor identity records responsibility; it
-does not confer plan, resource, or integration ownership.
+Do not select the profile merely because several people or agents participate.
+Serial collaboration, read-only investigations, non-authorizing reports,
+independent work whose admission facts cannot become stale, and one integration
+owner working from current state with no outstanding proposals remain under
+this workflow alone.
 
-Missing required identity facts are `unavailable`; malformed framing, ordering,
-identity, scope, operation, or outcome is `invalid`; an unavailable supported
-digest or conditional-update mechanism is `unsupported`. A changed admission
-identity is stale `invalid`. Do not retry, merge, overwrite, or select latest
-state automatically.
+When the profile applies, it owns proposal revision checks, stale-state
+classification, compatibility, and reconciliation. This workflow continues to
+own plan lifecycle and artifact boundaries. Shared authority remains a serial
+integration-owner write in either case.
 
-## Concurrent Preparation And Serial Integration
+## Policy Projection Completeness
 
-Transitions may be prepared or implemented concurrently only when their
-admitted bases are current, prerequisites are satisfied, affected scopes and
-write sets are compatible, semantic outcomes do not conflict, verification
-contracts remain valid, and no shared-authority write overlaps. Disjoint files
-alone do not prove compatibility. Return typed transition identities, affected
-scopes, and failed invariants for stale, overlapping, contradictory,
-under-specified, or dependency-blocked proposals.
+A normative change updates every affected distribution and enforcement surface.
+When a rule prescribes a machine protocol, concrete representation, or
+automated gate, its applicable prompts, templates, fixtures, and executable
+support agree before the rule becomes mandatory. Do not require a template,
+prompt, fixture, or executable mechanism for a semantic policy that does not
+use that surface.
 
-One designated integration owner serially changes active plans, ledgers,
-routers, shared contracts, lockfiles, generated artifacts, and other declared
-shared authority. Compare `planning-admission-v1` immediately before mutation
-or staging and again immediately before authoritative integration. Either
-mismatch invalidates admission and requires a new decision from fresh state.
-This is optimistic revision validation, not atomic multi-file replacement.
-
-The coherent transition contains plan and issue changes, ledger evidence, the
-operation, prior and resulting revisions, resulting state and next slice,
-integration owner, and verification result. Recompute the resulting digest
-after integration. State/evidence disagreement blocks normal admission.
-
-The integration owner explicitly reconciles disagreement by selecting
-`complete-transition`, `restore-prior-state`, or `supersede-transition` against
-fresh current state and both revision gates. Reconciliation has a separate
-deterministic identity referencing the failed transition, observed revisions,
-selected remedy and authority, intended result, and verification contract. It
-never reuses the failed admission or chooses from timestamps, file precedence,
-or apparent completeness.
-
-Do not introduce reservations, leases, queues, heartbeats, scheduling,
-state-only commits, recovery journals, transaction managers, duplicate
-execution, or persistent coordination lifecycle as generic fallback. Such a
-mechanism requires measured downstream need and a separate plan.
+Diagnostic outcomes must remain semantically distinguishable. A manual process
+may record classifications in prose or a table; a tool may use typed values.
+Planning does not require one serialized diagnostic representation.
 
 ## Acceptance Claims
 
@@ -220,6 +194,13 @@ Keep `plan.md` concise and current:
 - remove completed task narration when milestone state and evidence link are
   sufficient; and
 - compact the plan when history obscures objective, blockers, or next slice.
+
+Automated verification may inspect current plan structure and current authority.
+It must not use accepted historical narration in an active plan as migration,
+behavior, or lifecycle authority. Canonical package, disposition, lifecycle,
+and evidence records own those claims; the ledger and reports retain history.
+Perform this ownership review at completed-wave boundaries without using an
+arbitrary line-count trigger.
 
 Do not append a new interpretation beside an old active interpretation.
 

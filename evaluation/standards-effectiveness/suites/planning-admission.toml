@@ -1,7 +1,7 @@
 schema_version = 1
 id = "planning-admission"
 owner = "workflow.planning"
-description = "Explicit plan admission and transition decisions with typed precedence and no scanning or latest-state fallback."
+description = "Explicit ordinary-plan admission and lifecycle decisions without plan discovery, inferred operations, or a universal revision protocol."
 
 [[checks]]
 id = "decisions"
@@ -13,13 +13,10 @@ default = "allow"
 case = ["*"]
 path = ["escape", "missing", "valid"]
 operation = ["continue", "missing", "start", "verify"]
-state = ["Accepted", "Active", "Blocked", "Implemented", "Planned", "Verifying"]
-revision = ["current", "missing", "stale"]
-transition = ["complete", "malformed", "missing"]
-compatibility = ["compatible", "contradictory", "dependency-blocked", "overlap"]
-mechanism = ["supported", "unsupported"]
-fallback = ["latest-wins", "none", "scan"]
-expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+state = ["Accepted", "Active", "Blocked", "Deferred", "Implemented", "Planned", "Superseded", "Verifying"]
+linked_artifacts = ["complete", "missing"]
+fallback = ["infer", "none", "scan"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
 [[checks.rules]]
 outcome = "typed-invalid"
 [checks.rules.when]
@@ -27,31 +24,29 @@ all = [{ field = "fallback", op = "ne", value = "none" }]
 [[checks.rules]]
 outcome = "typed-unavailable"
 [checks.rules.when]
-any = [{ field = "path", op = "eq", value = "missing" }, { field = "operation", op = "eq", value = "missing" }, { field = "state", op = "eq", value = "Blocked" }, { field = "revision", op = "eq", value = "missing" }, { field = "transition", op = "eq", value = "missing" }, { field = "compatibility", op = "eq", value = "dependency-blocked" }]
+any = [
+  { field = "path", op = "eq", value = "missing" },
+  { field = "operation", op = "eq", value = "missing" },
+  { field = "state", op = "in", values = ["Blocked", "Deferred"] },
+  { field = "linked_artifacts", op = "eq", value = "missing" },
+]
 [[checks.rules]]
 outcome = "typed-invalid"
 [checks.rules.when]
 any = [
   { field = "path", op = "eq", value = "escape" },
-  { field = "revision", op = "eq", value = "stale" },
-  { field = "transition", op = "eq", value = "malformed" },
-  { field = "compatibility", op = "in", values = ["overlap", "contradictory"] },
-  { field = "state", op = "eq", value = "Accepted" },
+  { field = "state", op = "in", values = ["Accepted", "Superseded"] },
   { all = [{ field = "operation", op = "eq", value = "start" }, { field = "state", op = "ne", value = "Planned" }] },
   { all = [{ field = "operation", op = "eq", value = "continue" }, { field = "state", op = "ne", value = "Active" }] },
   { all = [{ field = "operation", op = "eq", value = "verify" }, { field = "state", op = "not_in", values = ["Implemented", "Verifying"] }] },
 ]
-[[checks.rules]]
-outcome = "typed-unsupported"
-[checks.rules.when]
-all = [{ field = "mechanism", op = "eq", value = "unsupported" }]
 
 [[checks]]
 id = "planning-workflow"
 type = "text"
 path = "workflows/planning.md"
-required = ["## Explicit Plan Admission", "`start` accepts only `Planned`", "`continue` accepts only `Active`", "`verify` accepts `Implemented` or `Verifying`", "`planning-admission-v1`", "`planning-transition-v1`", "exact affected scope and bounded write set", "## Concurrent Preparation And Serial Integration", "Disjoint files", "complete-transition", "restore-prior-state", "supersede-transition", "reservations, leases, queues, heartbeats"]
-prohibited = []
+required = ["## Explicit Plan Admission", "`start` accepts only `Planned`", "`continue` accepts only `Active`", "`verify` accepts `Implemented` or `Verifying`", "## Concurrent Integration Routing", "Ordinary planning does not require a revision digest", "## Policy Projection Completeness", "semantically distinguishable"]
+prohibited = ["`planning-admission-v1`", "`planning-transition-v1`", "length-delimited", "`complete-transition`", "`restore-prior-state`", "`supersede-transition`"]
 
 [[checks]]
 id = "implementation-consumer"

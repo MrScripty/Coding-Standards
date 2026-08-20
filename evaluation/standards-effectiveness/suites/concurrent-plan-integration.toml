@@ -1,0 +1,110 @@
+schema_version = 1
+id = "concurrent-plan-integration"
+owner = "profile.workflow.concurrent-plan-integration"
+description = "Precisely routed stale-proposal integration with semantic outcomes, implementation-selected revisions, and no coordination fallback."
+
+[[checks]]
+id = "applicability"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv"
+expected_column = "expected"
+default = "exclude"
+[checks.domains]
+case = ["*"]
+proposals = ["missing", "multiple", "one"]
+base = ["independent", "missing", "shared"]
+stale_effect = ["material", "missing", "none"]
+work = ["authorizing", "read-only", "report"]
+outstanding = ["no", "yes"]
+expected = ["exclude", "select", "unavailable"]
+[[checks.rules]]
+outcome = "unavailable"
+[checks.rules.when]
+any = [
+  { field = "proposals", op = "eq", value = "missing" },
+  { field = "base", op = "eq", value = "missing" },
+  { field = "stale_effect", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "select"
+[checks.rules.when]
+all = [
+  { field = "proposals", op = "eq", value = "multiple" },
+  { field = "base", op = "eq", value = "shared" },
+  { field = "stale_effect", op = "eq", value = "material" },
+  { field = "work", op = "eq", value = "authorizing" },
+  { field = "outstanding", op = "eq", value = "yes" },
+]
+
+[[checks]]
+id = "outcomes"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+revision = ["current", "missing", "stale"]
+compatibility = ["compatible", "contradictory", "dependency-blocked", "overlap"]
+mechanism = ["supported", "unsupported"]
+fallback = ["auto-merge", "latest-wins", "none", "retry"]
+expected = ["allow", "conflicting", "dependency-blocked", "invalid", "stale", "unavailable", "unsupported"]
+[[checks.rules]]
+outcome = "invalid"
+[checks.rules.when]
+all = [{ field = "fallback", op = "ne", value = "none" }]
+[[checks.rules]]
+outcome = "unavailable"
+[checks.rules.when]
+all = [{ field = "revision", op = "eq", value = "missing" }]
+[[checks.rules]]
+outcome = "unsupported"
+[checks.rules.when]
+all = [{ field = "mechanism", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "stale"
+[checks.rules.when]
+all = [{ field = "revision", op = "eq", value = "stale" }]
+[[checks.rules]]
+outcome = "conflicting"
+[checks.rules.when]
+all = [{ field = "compatibility", op = "in", values = ["overlap", "contradictory"] }]
+[[checks.rules]]
+outcome = "dependency-blocked"
+[checks.rules.when]
+all = [{ field = "compatibility", op = "eq", value = "dependency-blocked" }]
+
+[[checks]]
+id = "profile-contract"
+type = "text"
+path = "profiles/workflows/concurrent-plan-integration.md"
+required = ["## Applicability", "at least two proposals can remain outstanding", "Do not apply it to serial work", "## Proposal Contract", "## Revision And Compatibility Checks", "semantically `stale`", "Classify overlap or contradictory outcomes as `conflicting`", "## Serial Integration And Reconciliation", "## Mechanism Boundary", "does not prescribe hashes", "semantic"]
+prohibited = ["planning-admission-v1", "planning-transition-v1", "complete-transition", "restore-prior-state", "supersede-transition"]
+
+[[checks]]
+id = "router"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["## Workflow Profiles", "Concurrent Plan Integration profile", "Two or more proposals may remain outstanding", "Do not select concurrent plan integration for serial collaboration", "The Concurrent Plan Integration profile is also excluded"]
+prohibited = []
+
+[[checks]]
+id = "reference-boundary"
+type = "text"
+path = "reference/recipes/concurrent-plan-integration.md"
+required = ["This document is non-normative", "## Revision Mechanism Examples", "## Framed Content Digest Example", "illustration"]
+prohibited = ["**Standards metadata**", "- Level: `MUST`"]
+
+[[checks]]
+id = "prompt-projection"
+type = "text"
+path = "prompts/implement-plan.md"
+required = ["only when multiple outstanding", "can become stale before integration", "do not request a", "revision token"]
+prohibited = ["planning-admission-v1", "planning-transition-v1"]
+
+[[checks]]
+id = "template-projection"
+type = "text"
+path = "templates/PLAN-TEMPLATE.md"
+required = ["When the", "Concurrent Plan Integration profile", "Omit those fields when the", "profile does not apply", "Do not add digest or transition-envelope fields"]
+prohibited = ["planning-admission-v1", "planning-transition-v1"]

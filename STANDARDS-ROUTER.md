@@ -43,6 +43,16 @@ observable task conditions. Do not read every document by default.
 Small, local, low-risk changes do not require a large implementation plan when
 the objective, write set, regression check, and acceptance are obvious.
 
+## Workflow Profiles
+
+| Condition | Select |
+| --- | --- |
+| Two or more proposals may remain outstanding from the same mutable plan revision before integration, and correctness depends on detecting intervening plan or shared-authority change | [Concurrent Plan Integration profile](profiles/workflows/concurrent-plan-integration.md) plus Planning |
+
+Do not select concurrent plan integration for serial collaboration, read-only
+investigation, non-authorizing reports, work whose admission facts cannot become
+stale, or one current-state integration owner with no outstanding proposals.
+
 ## Application Profiles
 
 | Condition | Select |
@@ -131,6 +141,8 @@ persistence, UI, dependency, or release change, select exactly:
 
 Explicitly exclude architecture patterns, release, frontend, launcher,
 accessibility, cross-platform, interop, bindings, and persistence guidance.
+The Concurrent Plan Integration profile is also excluded when no outstanding
+proposal can become stale before integration.
 
 Acceptance is a focused regression test plus affected Rust static/toolchain
 checks. No ADR, release procedure, directory README, or large plan is required

@@ -1,21 +1,16 @@
-case	path	operation	state	revision	transition	compatibility	mechanism	fallback	expected
-start-planned	valid	start	Planned	current	complete	compatible	supported	none	allow
-continue-active	valid	continue	Active	current	complete	compatible	supported	none	allow
-verify-implemented	valid	verify	Implemented	current	complete	compatible	supported	none	allow
-verify-verifying	valid	verify	Verifying	current	complete	compatible	supported	none	allow
-missing-plan	missing	continue	Active	current	complete	compatible	supported	none	typed-unavailable
-escaping-plan	escape	continue	Active	current	complete	compatible	supported	none	typed-invalid
-missing-operation	valid	missing	Active	current	complete	compatible	supported	none	typed-unavailable
-state-mismatch	valid	start	Active	current	complete	compatible	supported	none	typed-invalid
-blocked-plan	valid	continue	Blocked	current	complete	compatible	supported	none	typed-unavailable
-terminal-plan	valid	continue	Accepted	current	complete	compatible	supported	none	typed-invalid
-stale-revision	valid	continue	Active	stale	complete	compatible	supported	none	typed-invalid
-missing-revision	valid	continue	Active	missing	complete	compatible	supported	none	typed-unavailable
-malformed-transition	valid	continue	Active	current	malformed	compatible	supported	none	typed-invalid
-missing-transition-fact	valid	continue	Active	current	missing	compatible	supported	none	typed-unavailable
-overlapping-transition	valid	continue	Active	current	complete	overlap	supported	none	typed-invalid
-contradictory-outcome	valid	continue	Active	current	complete	contradictory	supported	none	typed-invalid
-unmet-dependency	valid	continue	Active	current	complete	dependency-blocked	supported	none	typed-unavailable
-unsupported-mechanism	valid	continue	Active	current	complete	compatible	unsupported	none	typed-unsupported
-scan-fallback	missing	continue	Active	current	complete	compatible	supported	scan	typed-invalid
-latest-wins-fallback	valid	continue	Active	stale	complete	compatible	supported	latest-wins	typed-invalid
+case	path	operation	state	linked_artifacts	fallback	expected
+start-planned	valid	start	Planned	complete	none	allow
+continue-active	valid	continue	Active	complete	none	allow
+verify-implemented	valid	verify	Implemented	complete	none	allow
+verify-verifying	valid	verify	Verifying	complete	none	allow
+missing-plan	missing	continue	Active	complete	none	typed-unavailable
+escaping-plan	escape	continue	Active	complete	none	typed-invalid
+missing-operation	valid	missing	Active	complete	none	typed-unavailable
+state-mismatch	valid	start	Active	complete	none	typed-invalid
+blocked-plan	valid	continue	Blocked	complete	none	typed-unavailable
+deferred-plan	valid	continue	Deferred	complete	none	typed-unavailable
+terminal-plan	valid	continue	Accepted	complete	none	typed-invalid
+superseded-plan	valid	continue	Superseded	complete	none	typed-invalid
+missing-linked-artifact	valid	continue	Active	missing	none	typed-unavailable
+scan-fallback	missing	continue	Active	complete	scan	typed-invalid
+inferred-operation	valid	missing	Active	complete	infer	typed-invalid

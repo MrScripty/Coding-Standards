@@ -4,6 +4,10 @@ Implement one explicitly admitted plan transition. Supply the canonical
 repository-relative `plan.md` path and explicit `start`, `continue`, or `verify`
 operation.
 
+Route the Concurrent Plan Integration profile only when multiple outstanding
+proposals can become stale before integration. Otherwise do not request a
+revision token, proposal envelope, or reconciliation record.
+
 Route the adopting repository through
 [`STANDARDS-ROUTER.md`](../STANDARDS-ROUTER.md), then follow the canonical
 [`Implementation Workflow`](../workflows/implementation.md), which consumes the

@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2: planning contract split
+**Current phase:** Milestone 3: historical-authority migration
 
-**Next slice:** separate generic Planning from the precisely routed concurrent
-integration profile and its non-normative mechanism reference
+**Next slice:** execute `PPR-C1` by removing declarative checks that consume
+accepted parent-plan narration and retaining their current canonical authorities
 
 **Acceptance status:** `pending`
 
@@ -181,18 +181,18 @@ profile and non-normative mechanism reference.
 
 **Tasks:**
 
-- [ ] Remove universal mechanism requirements from generic Planning.
-- [ ] Add tested concurrent-profile inclusion and exclusion conditions.
-- [ ] Preserve semantic stale, invalid, unavailable, unsupported, conflicting,
+- [x] Remove universal mechanism requirements from generic Planning.
+- [x] Add tested concurrent-profile inclusion and exclusion conditions.
+- [x] Preserve semantic stale, invalid, unavailable, unsupported, conflicting,
   and dependency-blocked outcomes.
-- [ ] Align only affected distribution and enforcement surfaces.
+- [x] Align only affected distribution and enforcement surfaces.
 
 **Acceptance gate:**
 
 - Positive and negative routing scenarios pass; an ordinary plan requires no
   unsupported transition fields; no old universal protocol remains normative.
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 ### Milestone 3: Historical-Authority Migration
 
@@ -216,7 +216,7 @@ change its consumers to canonical records.
 - No checker or declarative suite depends on accepted historical narration in
   either active plan.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 4: Active-Plan Compaction
 
@@ -283,9 +283,9 @@ clean, usable planning boundary.
 
 ## Concurrent Work
 
-No writes are delegated during Milestones 0 and 1. Read-only inventory probes
-may run concurrently after their non-overlapping report paths are declared.
-Normative Planning, Router, shared fixtures, and active plans remain serial.
+No writes are currently delegated. Independent consumer analysis may run
+concurrently after non-overlapping report paths are declared. Shared suites,
+fixtures, generated artifacts, and active plans remain serial.
 
 ## Final Acceptance
 

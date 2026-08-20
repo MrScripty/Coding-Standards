@@ -73,3 +73,31 @@
     retained Bash checkers.
 - Result: the generated projection repair is accepted. Milestone 1 is closed,
   and the Planning contract split is again the only admitted next slice.
+
+## 2026-08-20: Planning Contract Split
+
+- Operation: `continue`.
+- Decision: generic Planning owns ordinary plan admission, lifecycle, artifact
+  boundaries, current-state projection, and serial shared-authority ownership.
+  The Concurrent Plan Integration profile owns stale outstanding-proposal
+  checks only under its exact applicability conditions.
+- Mechanism boundary: revision tokens are implementation-selected. The former
+  digest framing is retained only as a non-normative recipe and becomes
+  mandatory nowhere without aligned executable support.
+- Projection: Router, planning and implementation prompts, plan template,
+  metadata, decision fixtures, suites, and suite registry were updated only
+  where the corrected contracts apply.
+- Verification:
+  - ordinary planning admission passed three checks;
+  - concurrent integration passed seven checks including positive, negative,
+    diagnostic, and no-fallback cases;
+  - S1 routing passed ten checks and continues to exclude the profile;
+  - metadata and plan-template projection suites passed;
+  - all 159 declarative suites passed;
+  - generated inventory remained current at 116 retained Bash verifiers and a
+    120-node, 732-edge, 120-component graph;
+  - the former universal protocol terms are absent from affected normative and
+    distribution surfaces; and
+  - the complete mixed checkpoint passed 116 retained Bash checkers.
+- Result: Milestone 2 accepted. `PPR-C1` declarative historical-authority
+  removal is the only admitted next slice.

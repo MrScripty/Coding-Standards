@@ -115,6 +115,14 @@ Use only when work is independent.
 | --- | --- | --- | --- | --- | --- |
 | [Owner] | [Paths] | [Paths or none] | [Paths] | [Contract and report] | [Order] |
 
+When the
+[Concurrent Plan Integration profile](../profiles/workflows/concurrent-plan-integration.md)
+applies, record the selected revision mechanism and admitted revision, proposal
+actor, scope, write set, prerequisites, intended outcome and state,
+verification contract, and integration owner. Omit those fields when the
+profile does not apply. Do not add digest or transition-envelope fields merely
+because work is delegated.
+
 ## Final Acceptance
 
 - Acceptance status: `pending`
