@@ -1,11 +1,11 @@
 # Plan: Generic Standards Verification Engine
 
-**Plan status:** `Active`
+**Plan status:** `Blocked`
 
-**Current phase:** Milestone 6: M6-I7 accepted; fresh-graph discovery
+**Current phase:** Planning proportionality recovery
 
-**Next slice:** derive the next owner-coherent package from the fresh post-M6-I7
-graph. Do not combine policy, executable tooling, and helper-retirement owners.
+**Next slice:** `none` until the planning proportionality recovery is accepted;
+then re-admit the selected source-index generalization from a fresh graph
 
 **Acceptance status:** `pending`
 
@@ -8983,7 +8983,9 @@ identify one current verification authority.
 
 ## Blockers
 
-- `none`
+- [Planning proportionality recovery](../planning-proportionality-recovery/plan.md):
+  active-plan historical authority must migrate and the plan must be compacted
+  before another verifier package is admitted.
 
 ## Re-Plan Triggers
 

@@ -6,13 +6,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Delegated verification-engine M6-V-W1 and VE072 are
-accepted. The remaining Bash migration uses a frozen temporary reference model
-whose lexical edges govern deletion-lifecycle review but do not prove
-execution, dependency, ownership, or acceptance.
+**Current phase:** Planning proportionality recovery; verifier migration
+admissions are frozen while active-plan historical authority is migrated and
+the planning architecture is corrected.
 
-**Next slice:** audit the fresh post-M6-V-W1 reference model and derive the next
-bounded owner-coherent package without changing the temporary graph schema.
+**Next slice:** complete the exact active-plan consumer and authority inventory
+in [the planning proportionality recovery](../docs/plans/planning-proportionality-recovery/plan.md).
 
 VE043-P1-D1 is accepted. It freezes separate S1, row-35, root-index,
 language-index, row-45, Rust-adoption, Rust-index, Rust-profile, row-46, and root
