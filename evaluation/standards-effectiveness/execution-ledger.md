@@ -13156,3 +13156,31 @@ checkers, 118 nodes, 702 edges, and 118 components. Focused, package/edge,
 declarative, plan, removal, protected-source, complete, freshness, and diff
 checks pass with no second suite, dependency, wrapper, compatibility path, or
 fallback.
+
+## 2026-08-20 VE083 Root Consumer-Audit Ownership Re-plan
+
+**Outcome:** re-plan required before another checker package.
+
+Fresh evidence remains valid at 114 Bash checkers, 118 nodes, 702 edges, and
+118 components. Frontend source closure is caller-free but depends on a shared
+unmigrated Accessibility owner. The smaller root README consumer audit has only
+a source-inspection relationship to Commit authority and is expressible with
+the existing `reference_inventory` check.
+
+A disposable new-suite final state passed at 113 Bash checkers, 117 nodes, 697
+edges, and 117 components; an unclassified root-reference mutation returned
+the expected typed inventory failure. Review then found a better ownership
+split: row-35 migration authority already owns generated-reference inventory,
+and root-index authority owns permanent root navigation prohibitions.
+
+Recommended recovery extends those two existing suites and deletes the
+aggregate checker atomically. A new temporary suite, folding temporary graph
+state into root-index, and deferring to the larger Accessibility/Frontend
+closure remain alternatives. No suite, registry, checker, fixture, package,
+edge record, standard, compatibility behavior, or fallback changed. The
+generator-owned structure inventory records exactly one new
+documentation-inbound reference caused by this replan record; graph node, edge,
+and component artifacts remain byte-identical.
+
+Both plan-structure checks, generated-artifact freshness, all 160 declarative
+suites, and diff integrity pass.

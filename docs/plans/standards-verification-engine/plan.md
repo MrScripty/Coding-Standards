@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** rebuild the current graph and select the next owner-coherent
-package from reviewed lifecycle and dependency evidence
+**Next slice:** resolve VE083's root README consumer-audit ownership and
+decomposition before admitting another checker package
 
 **Acceptance status:** `pending`
 
@@ -148,19 +148,23 @@ helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
 **Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
-is accepted. M6-I11 is accepted; no package currently follows it.
+is accepted. M6-I11 is accepted; fresh review exposed VE083 before another
+package could be admitted.
 
 **Next work:**
 
-1. Select each subsequent owner-coherent package from reviewed lifecycle and
+1. Resolve VE083 by assigning the root consumer inventory and permanent root
+   navigation assertions to canonical owners without another unnecessary
+   temporary suite.
+2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
-2. Add another reusable primitive only when multiple coherent owners require it or
+3. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
-3. Prepare disjoint admitted suite/checker changes concurrently when their
+4. Prepare disjoint admitted suite/checker changes concurrently when their
    write sets and dependencies are frozen.
-4. Integrate shared authority serially and run one complete checkpoint at each
+5. Integrate shared authority serially and run one complete checkpoint at each
    shared-contract or wave boundary.
-5. Continue until no Bash verifier, helper, or launcher remains, then delete
+6. Continue until no Bash verifier, helper, or launcher remains, then delete
    the temporary reference model.
 
 **Acceptance gate:** exact inventory reports zero Bash verification paths; the
@@ -186,7 +190,9 @@ fallback remains.
 
 ## Blockers
 
-- `none`
+- VE083: the smallest caller-free root consumer audit combines temporary
+  migration inventory with permanent Router navigation assertions. Ownership
+  must be decomposed before package admission.
 
 ## Re-Plan Triggers
 

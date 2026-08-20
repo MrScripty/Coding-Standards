@@ -3941,3 +3941,48 @@ Bash behavior. Final evidence contains 114 Bash checkers, 118 nodes, 702 edges,
 and 118 components. Focused, lifecycle, declarative, complete, freshness,
 removal, protected-source, and diff verification pass. Fresh graph review is
 required before another package is selected.
+
+### VE083 Root Consumer-Audit Ownership Re-plan
+
+Fresh post-M6-I11 evidence has no caller-free dependency-free verifier. The
+smallest caller-free candidates each have one outbound relationship. Frontend
+source closure has a true dependency on the unregistered Accessibility owner
+contract, which is shared by another live caller; migrating Frontend alone
+would require duplicated semantics or a Bash bridge.
+
+The root README consumer audit is smaller. Its apparent Commit edge comes from
+inspecting `verify-commit-authority.sh`, not executing it. Existing
+`reference_inventory` can derive every retained verifier containing
+`README.md` from generated inventory and compare that set with the classified
+consumer manifest. A disposable final-state suite passes, and adding an
+unclassified reference returns `ASSERT.REFERENCE_INVENTORY` without a copied
+count. Whole-checker numeric lifecycle covers all immutable audit candidates.
+
+The checker nevertheless combines two owners: temporary Bash-consumer
+inventory and permanent root no-direct-route semantics. Its negated Bash
+assertions also reproduce VE082 and do not enforce their intended absence.
+
+Options:
+
+1. Add consumer classification and derived-reference checks to existing
+   `milestone-7-row-35-decomposition`, and add the missing direct-Commit-link
+   prohibition to existing `root-index-closure`. This is recommended: each
+   contract reaches its existing owner, no new suite or registry node is
+   created, and temporary inventory leaves with migration authority.
+2. Add a temporary `root-readme-consumer-audit` suite requiring
+   `root-index-closure`. This passes mechanically but creates another suite and
+   later retirement obligation.
+3. Fold every audit check into `root-index-closure`. This is compact now but
+   couples permanent Router verification to the temporary generated graph.
+4. Defer the audit and migrate the Accessibility/Frontend dependency closure.
+   This avoids the split now but selects a substantially larger atomic scope.
+
+No checker package is admitted until suite ownership, exact assertions,
+historical/current edge transfer, whole-checker numeric retirement, mutation
+evidence, and zero-Bash cleanup are frozen.
+
+This replan record adds one documentation-inbound reference to the retained
+audit checker. The generator-owned structure inventory records that exact
+projection; node, edge, and component artifacts remain unchanged. Both plan
+validators, generated freshness, all 160 declarative suites, and diff integrity
+pass without implementation authority changing.

@@ -4674,3 +4674,26 @@
   source-unchanged, removal, freshness, complete, and diff checks pass with no
   second suite, dependency, wrapper, compatibility behavior, or fallback.
 - Fresh-graph owner-coherent package selection is next.
+
+## 2026-08-20 - VE083 Root Consumer-Audit Ownership Re-plan
+
+- Fresh accepted evidence contains 114 Bash checkers, 118 nodes, 702 edges,
+  and 118 components; no verifier is both caller-free and dependency-free.
+- The smallest expressible candidate is the caller-free root README consumer
+  audit. Its apparent Commit dependency is source inspection, not execution.
+- A disposable suite using existing `reference_inventory` passed after checker
+  deletion at 113 Bash checkers, 117 nodes, 697 edges, and 117 components. An
+  unclassified `README.md` mutation returned `ASSERT.REFERENCE_INVENTORY`.
+- The probe exposed a better decomposition than adding that suite: registered
+  row-35 migration authority already owns generated-reference inventory, while
+  registered root-index authority owns permanent no-direct-route semantics.
+- VE083 freezes four options: split into those existing suites (recommended),
+  add a temporary dependent suite, fold temporary inventory into root-index,
+  or defer to the larger Accessibility/Frontend closure. No implementation or
+  package is admitted pending the ownership decision.
+- Replan prose adds exactly one documentation-inbound reference to the retained
+  audit checker. The generator-owned structure inventory was regenerated;
+  node, edge, and component artifacts remain byte-identical at 114 checkers,
+  118 nodes, 702 edges, and 118 components.
+- Both plan-structure checks, generated-artifact freshness, all 160 declarative
+  suites, and diff integrity pass.
