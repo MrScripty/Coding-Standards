@@ -12937,6 +12937,28 @@ protected-source, and diff verification pass. No source, fixture, engine,
 helper, copied data, compatibility behavior, false dependency, inferred owner,
 or fallback remains.
 
+## 2026-08-20 M6-I16 Accessibility Focus-Lifecycle Admission
+
+**Outcome:** admitted; atomic acceptance is next.
+
+Fresh graph review selected the shortest caller-free checker. Its modality and
+focus decisions, owner and reference text, legacy closure, and exact STD-0013
+through STD-0016 dispositions form one Accessibility-owned suite. Interaction
+semantics remains an independent checker gate through two admitted current
+edges.
+
+M6-I16 freezes one registered five-check suite, two historical M6-I15 evidence
+transfers, whole-checker numeric retirement, checker deletion, and graph
+refresh. Disposable final state passes 163 declarative suites and the complete
+mixed checkpoint at 109 Bash checkers, 113 nodes, 683 edges, and 113
+components. Three mutations return typed decision, prohibited-text, and table
+projection failures.
+
+Admission evidence contains 110 Bash checkers, 114 nodes, 688 edges, and 114
+components. No engine capability, helper migration, suite dependency, copied
+count, manual numeric mapping, Bash repair, wrapper, compatibility behavior, or
+fallback is admitted.
+
 ## 2026-08-20 M6-I15 Accessibility Name-And-Input Admission
 
 **Outcome:** admitted; atomic acceptance is next.

@@ -4148,6 +4148,28 @@ nodes, 691 edges, and 115 components without an engine change, helper
 migration, suite dependency, manual numeric mapping, Bash repair, wrapper,
 compatibility path, or fallback.
 
+### M6-I16 Accessibility Focus-Lifecycle Admission
+
+Fresh graph review selected caller-free
+`verify-accessibility-focus-lifecycle.sh`, the shortest remaining frontier
+checker. Its focus decision table, canonical owner language, web reference,
+legacy-index closure, and STD-0013 through STD-0016 dispositions form one
+Accessibility-owned focus-lifecycle contract.
+
+The nested interaction-semantics call is execution coupling, not part of that
+contract. Two current edges preserve interaction semantics as an independent
+checker gate, while two historical M6-I15 records will transfer to exact suite
+evidence.
+
+Disposable final state uses five generic checks, derives all 15 decisions
+without a copied count, and passes all 163 declarative suites plus the complete
+checkpoint at 109 Bash checkers, 113 nodes, 683 edges, and 113 components.
+Typed decision, legacy-content, and disposition mutations pass. M6-I16 is
+admitted at train order 131; admission evidence contains 110 Bash checkers, 114
+nodes, 688 edges, and 114 components without an engine change, helper
+migration, suite dependency, manual numeric mapping, Bash repair, wrapper,
+compatibility path, or fallback.
+
 ### M6-I15 Accessibility Name-And-Input Acceptance
 
 M6-I15 is accepted exactly as admitted. The registered

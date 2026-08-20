@@ -4675,6 +4675,24 @@
   second suite, dependency, wrapper, compatibility behavior, or fallback.
 - Fresh-graph owner-coherent package selection is next.
 
+## 2026-08-20 - M6-I16 Accessibility Focus-Lifecycle Admission
+
+- Fresh graph review selected the shortest caller-free checker. Its modality,
+  focus, reference, legacy-closure, and exact-disposition responsibilities form
+  one focus-lifecycle contract; interaction semantics remains separate.
+- Admitted train order 131 with two typed current edge dispositions, two
+  historical M6-I15 evidence transfers, one new registered suite, checker
+  deletion, whole-checker numeric retirement, and generated graph refresh.
+- Disposable final state passes 163 declarative suites and the complete mixed
+  checkpoint at 109 Bash checkers, 113 nodes, 683 edges, and 113 components.
+  Decision, legacy-content, and exact-disposition mutations return typed
+  failures.
+- Admission evidence contains 110 Bash checkers, 114 nodes, 688 edges, and 114
+  components. No engine capability, helper migration, suite dependency, copied
+  count, manual numeric mapping, Bash repair, wrapper, compatibility path, or
+  fallback is admitted.
+- Atomic M6-I16 acceptance is next.
+
 ## 2026-08-20 - M6-I15 Accessibility Name-And-Input Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its five
