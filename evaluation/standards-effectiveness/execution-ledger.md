@@ -13280,3 +13280,25 @@ failures. Admission evidence contains 112 checkers, 116 nodes, 695 edges, and
 116 components. No engine capability, suite dependency, helper migration,
 copied count, manual numeric mapping, Bash repair, wrapper, compatibility
 behavior, or fallback is admitted.
+
+## 2026-08-20 M6-I14 Documentation Directory-README Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Documentation suite now owns all directory README decisions,
+canonical owner language, legacy closure, and exact STD-0088 projection.
+Fixture cardinality is derived by the decision engine. Two historical M6-T7
+records use exact suite evidence, while Documentation policy consolidation and
+source-gap auditing remain independently executed checker gates.
+
+M6-I14 is accepted at train order 129, all four current edge dispositions are
+accepted, and the replaced Bash checker is absent. Whole-checker numeric
+lifecycle derives retirement without a candidate map. Final evidence contains
+111 Bash checkers, 115 nodes, 689 edges, and 115 components.
+
+Focused suite and independent-gate checks, package/edge authority, numeric
+lifecycle, removal, generated freshness, both plan validators, all 161
+declarative suites, complete checkpoint, mutation parity, and diff integrity
+pass. No engine capability, helper migration, suite dependency, false edge,
+copied count, manual numeric mapping, Bash repair, wrapper, compatibility path,
+or fallback remains.

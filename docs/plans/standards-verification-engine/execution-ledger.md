@@ -4675,6 +4675,26 @@
   second suite, dependency, wrapper, compatibility behavior, or fallback.
 - Fresh-graph owner-coherent package selection is next.
 
+## 2026-08-20 - M6-I14 Documentation Directory-README Acceptance
+
+- Registered one four-check Documentation suite for directory README
+  decisions, canonical workflow language, legacy-owner closure, and exact
+  STD-0088 disposition projection. The decision check derives fixture
+  cardinality and outcomes without a copied count.
+- Accepted train order 129, transferred two historical M6-T7 records to exact
+  suite evidence, accepted all four current edge dispositions, and deleted the
+  replaced Bash checker. Documentation policy consolidation and source-gap
+  auditing remain separately executed checker gates, not suite dependencies.
+- Whole-checker numeric lifecycle derives candidate retirement. Final generated
+  evidence contains 111 Bash checkers, 115 nodes, 689 edges, and 115
+  components.
+- Focused suite and independent-gate checks, package/edge authority, numeric
+  lifecycle, removal, generated freshness, plans, all 161 declarative suites,
+  complete checkpoint, mutation parity, and diff integrity pass. No engine
+  change, helper migration, false dependency, copied count, manual numeric
+  mapping, Bash repair, wrapper, compatibility path, or fallback remains.
+- Fresh-graph owner-coherent package selection is next.
+
 ## 2026-08-20 - M6-I14 Documentation Directory-README Admission
 
 - Started from clean canonical `93dd1d4`; admission changes only package/edge

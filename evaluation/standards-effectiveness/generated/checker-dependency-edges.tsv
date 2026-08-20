@@ -75,7 +75,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-wire-representation.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-documentation-directory-readme-closure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-accessibility-name-input.sh
@@ -89,7 +88,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-dependencies-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-documentation-decisions.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-documentation-directory-readme-closure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-rendering-synchronization.sh
@@ -209,8 +207,6 @@ executable_reference	evaluation/standards-effectiveness/verify-dependencies-popu
 executable_reference	evaluation/standards-effectiveness/verify-dependencies-population.sh	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh	evaluation/standards-effectiveness/verify-dependencies-owner-contract.sh
 executable_reference	evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-documentation-directory-readme-closure.sh	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
-executable_reference	evaluation/standards-effectiveness/verify-documentation-directory-readme-closure.sh	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh
 executable_reference	evaluation/standards-effectiveness/verify-documentation-index-closure.sh	evaluation/standards-effectiveness/verify-documentation-decisions.sh
 executable_reference	evaluation/standards-effectiveness/verify-documentation-index-closure.sh	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
 executable_reference	evaluation/standards-effectiveness/verify-documentation-index-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-41-decomposition.sh
@@ -510,8 +506,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-dependencies-popul
 verifier_dependency	evaluation/standards-effectiveness/verify-dependencies-population.sh	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh	evaluation/standards-effectiveness/verify-dependencies-owner-contract.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-documentation-directory-readme-closure.sh	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-documentation-directory-readme-closure.sh	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-documentation-index-closure.sh	evaluation/standards-effectiveness/verify-documentation-decisions.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-documentation-index-closure.sh	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-documentation-index-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-41-decomposition.sh

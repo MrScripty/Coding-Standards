@@ -1,0 +1,64 @@
+schema_version = 1
+id = "documentation-directory-readme-closure"
+owner = "workflow.documentation"
+description = "Directory README selection from documented impact and boundary facts without count, path, universal-file, or legacy fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/documentation/directory-readme-closure-decisions.tsv"
+expected_column = "expected"
+default = "route"
+[checks.domains]
+case = ["*"]
+impact = ["changed", "missing", "unchanged"]
+boundary = ["clear", "missing"]
+owner = ["clear", "contradictory", "missing"]
+profile = ["missing", "not-needed", "selected"]
+fallback = ["directory-count", "fixed-sections", "legacy-restore", "none", "src-path", "universal-readme", "unrelated-artifact"]
+expected = ["route", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "owner", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "impact", op = "eq", value = "missing" },
+  { field = "boundary", op = "eq", value = "missing" },
+  { field = "owner", op = "eq", value = "missing" },
+  { field = "profile", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "workflow-owner"
+type = "text"
+path = "workflows/documentation.md"
+required = ["Directory count, file count", "boundary-readme", "If the impact cannot be classified", "Do not default to a `src/` directory"]
+prohibited = []
+
+[[checks]]
+id = "legacy-owner-closure"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = []
+prohibited = ["Directory README Requirement"]
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [["STD-0088", "ARCHITECTURE-PATTERNS.md", "workflows/documentation.md", "merge-duplicate"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0088"

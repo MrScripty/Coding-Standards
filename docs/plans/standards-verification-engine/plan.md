@@ -4,17 +4,15 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** atomically accept the admitted M6-I14 Documentation directory
-README closure migration
+**Next slice:** audit the fresh post-M6-I14 graph and select the smallest
+owner-coherent package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I13 moved Commit authority into the existing
-Commit owner suite and removed the replaced Bash checker.
+**Latest accepted slice:** M6-I14 moved directory README closure into one
+Documentation-owned suite and removed the replaced Bash checker.
 
-**Latest admitted slice:** M6-I14 moves directory README decisions, canonical
-owner language, legacy closure, and exact disposition evidence into one
-Documentation-owned declarative suite.
+**Latest admitted slice:** none
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -121,12 +119,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I13 at train
-order 128. M6-I14 is admitted at train order 129 for atomic Documentation suite
-creation and checker replacement.
+**Accepted boundary:** package records are accepted through M6-I14 at train
+order 129.
 
-**Current derived state:** 160 registered declarative suites, 112 retained Bash
-checkers, 116 executable nodes, 695 conservative reference edges, and 116
+**Current derived state:** 161 registered declarative suites, 111 retained Bash
+checkers, 115 executable nodes, 689 conservative reference edges, and 115
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -140,7 +137,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Fresh graph review after accepted M6-I12 |
+| 6 | Exceptional checks and Bash retirement | `Active` | Fresh graph review after accepted M6-I14 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -150,14 +147,12 @@ helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
 **Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
-is accepted. M6-I14 is admitted after final-state proof; atomic acceptance is
-next.
+is accepted. M6-I14 is accepted after final-state proof.
 
 **Next work:**
 
-1. Accept M6-I14 exactly as admitted: register the Documentation suite,
-   preserve two independent checker gates, transfer historical evidence, and
-   delete the replaced Bash checker.
+1. Audit the fresh graph and select the smallest owner-coherent package from
+   reviewed lifecycle and dependency evidence.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or

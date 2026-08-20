@@ -4106,3 +4106,23 @@ without an engine capability, helper migration, suite dependency, copied
 count, manual numeric mapping, Bash repair, wrapper, compatibility path, or
 fallback. Admission evidence contains 112 checkers, 116 nodes, 695 edges, and
 116 components.
+
+### M6-I14 Documentation Directory-README Acceptance
+
+M6-I14 is accepted exactly as admitted. The registered
+`documentation-directory-readme-closure` suite uses one derived decision
+table, two text checks, and one exact table projection. It owns directory
+README selection, canonical workflow language, legacy-source closure, and
+STD-0088 evidence without storing fixture or graph counts.
+
+Both nested Bash calls were execution coupling, not Documentation semantics.
+Their four edge records remain independent gates owned by the retained
+Documentation policy and source-gap checkers. Two historical M6-T7 records now
+point to the exact suite; the replaced checker is absent.
+
+Final evidence contains 111 Bash checkers, 115 nodes, 689 edges, and 115
+components. Focused owner and independent-gate checks, package/edge authority,
+numeric lifecycle, generated freshness, all 161 declarative suites, typed
+mutations, complete checkpoint, and diff integrity pass without an engine
+capability, helper migration, suite dependency, copied count, manual numeric
+mapping, Bash repair, wrapper, compatibility path, or fallback.

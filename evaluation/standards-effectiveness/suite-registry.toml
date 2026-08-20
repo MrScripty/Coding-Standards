@@ -799,3 +799,8 @@ requires = []
 id = "architecture-directory-template-closure"
 path = "evaluation/standards-effectiveness/suites/architecture-directory-template-closure.toml"
 requires = []
+
+[[suites]]
+id = "documentation-directory-readme-closure"
+path = "evaluation/standards-effectiveness/suites/documentation-directory-readme-closure.toml"
+requires = []
