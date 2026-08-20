@@ -3717,3 +3717,13 @@ bridge, or fallback is authorized.
 Decision Traceability is not part of this component. Its helper is distributed
 through documentation recipes and hook templates, so replacing it requires a
 later delivery-interface re-plan rather than source-index capability growth.
+
+### VE078-E1 Generated Structure Evidence Recovery
+
+VE078's exact path references are legitimate documentation consumers and must
+remain visible in derived structure evidence. Regeneration changes only the two
+source-index verifier records: both now derive two documentation inbound files.
+Neither has an executable caller, both retain the same sole helper dependency,
+and the executable graph remains 118 Bash checkers, 123 nodes, 660 edges, and
+123 components. The correction changes no component ownership or migration
+selection.

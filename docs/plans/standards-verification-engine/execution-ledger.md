@@ -4428,3 +4428,16 @@
 - No package is admitted and no engine, test, suite, registry, fixture,
   manifest, generated, Bash, standards, compatibility, or fallback behavior
   changes in this planning slice. M6-C5 implementation is next.
+
+## 2026-08-19 - VE078-E1 Generated Structure Evidence Recovery
+
+- The first M6-C5 complete checkpoint found that VE078's exact checker-path
+  documentation made the derived structure inventory stale.
+- Canonical regeneration changes only the two source-index verifier rows, each
+  adding the same two documentation inbound files. Counts remain 118 Bash
+  checkers, 123 nodes, 660 edges, and 123 components; executable incidence and
+  helper dependencies are unchanged.
+- Corrected derived evidence without changing the VE078 decision, package or
+  edge authority, engine/schema, suite, registry, fixture, standards, source,
+  Bash path, compatibility behavior, or fallback. M6-C5 resumes only after the
+  corrected complete checkpoint passes.

@@ -8570,6 +8570,26 @@ consumer of the helper is discovered, package authority cannot represent both
 retired verifier contracts, a fourth Bash path enters the component, or the
 accepted component cannot be deleted atomically without fallback.
 
+##### VE078-E1 Generated Structure Evidence Recovery
+
+**Status:** Accepted; M6-C5 capability implementation is next.
+
+VE078 introduced exact documentation references to both retained source-index
+verifiers but its planning-only write set omitted the derived structure
+inventory. The canonical generator therefore reported stale evidence before
+M6-C5 could pass its shared-contract checkpoint. Regeneration changes only the
+two affected structure rows: each derives the same two documentation inbound
+files. Bash count, executable caller count, helper dependency, graph nodes,
+edges, and components remain unchanged at 118, zero per checker, one per
+checker, 123, 660, and 123 respectively.
+
+This recovery owns only the derived structure inventory and these existing
+child planning records. It changes no plan decision, graph topology, package or
+edge authority, engine/schema, test, suite, registry, fixture, standards,
+source index, Bash path, compatibility behavior, or fallback. Generated
+freshness, both plan checks, lifecycle fixtures, all declarative suites, and the
+complete retained-Bash checkpoint must pass before M6-C5 resumes.
+
 ##### M6-U0 Concurrent Semantic Preparation Wave
 
 **Status:** Planned; package preflight follows M6-I1 acceptance.
