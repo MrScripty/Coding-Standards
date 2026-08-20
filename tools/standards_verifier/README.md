@@ -53,10 +53,13 @@ owners and reviewed semantic edges. Each edge names one canonical owner,
 contained consumer artifact, supported relation, non-empty applicability
 condition, and registered evidence-owner suite. Owner IDs resolve through
 canonical module metadata; suite consumers and evidence owners resolve through
-the suite registry. Hyperlinks, lexical similarity, standards `Requires`, and
-the temporary Bash checker graph never infer semantic impact. Querying an
-unaudited owner is typed `unavailable`; policy changes must audit that owner
-before relying on reverse impact.
+the suite registry. Every registered suite whose explicit `owner` is audited
+must have one matching enforcement-suite edge. Prompt, template, fixture, and
+other semantic edges remain explicitly reviewed; they are not inferred.
+Hyperlinks, lexical similarity, standards `Requires`, and the temporary Bash
+checker graph never infer semantic impact. Querying an unaudited owner is typed
+`unavailable`; policy changes must audit that owner before relying on reverse
+impact.
 
 Regenerate or verify the exact Bash checker structure and dependency graph
 artifacts:

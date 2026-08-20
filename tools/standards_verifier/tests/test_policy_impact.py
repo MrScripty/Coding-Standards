@@ -42,7 +42,14 @@ class PolicyImpactTest(unittest.TestCase):
         )
         self.write("prompts/a.md", "# A\n")
         self.write("prompts/b.md", "# B\n")
-        self.write("suites/evidence.toml", "schema_version = 1\n")
+        self.write(
+            "suites/evidence.toml",
+            """
+            schema_version = 1
+            id = "evidence"
+            owner = "test.evidence"
+            """,
+        )
         self.write(
             "registry.toml",
             """
@@ -140,6 +147,46 @@ class PolicyImpactTest(unittest.TestCase):
             raised.exception.diagnostic.code,
             "POLICY_IMPACT.OWNER_NOT_AUDITED",
         )
+
+    def test_requires_enforcement_edge_for_suite_owned_by_audited_owner(self) -> None:
+        self.write(
+            "suites/evidence.toml",
+            """
+            schema_version = 1
+            id = "evidence"
+            owner = "workflow.planning"
+            """,
+        )
+
+        with self.assertRaises(EngineError) as raised:
+            self.load(self.manifest(self.edge("prompts/a.md")))
+
+        self.assertEqual(
+            raised.exception.diagnostic.code,
+            "POLICY_IMPACT.MISSING_ENFORCEMENT_SUITE_EDGE",
+        )
+
+    def test_accepts_enforcement_edge_for_suite_owned_by_audited_owner(self) -> None:
+        self.write(
+            "suites/evidence.toml",
+            """
+            schema_version = 1
+            id = "evidence"
+            owner = "workflow.planning"
+            """,
+        )
+
+        impact = self.load(
+            self.manifest(
+                self.edge("prompts/a.md")
+                + self.edge(
+                    "suites/evidence.toml",
+                    relation="enforcement-suite-projection",
+                )
+            )
+        )
+
+        self.assertEqual(len(impact.edges), 2)
 
     def test_query_cli_renders_tsv(self) -> None:
         self.write("impact.toml", self.manifest(self.edge("prompts/a.md")))

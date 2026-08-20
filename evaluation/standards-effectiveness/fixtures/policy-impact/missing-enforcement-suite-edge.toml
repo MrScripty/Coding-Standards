@@ -1,0 +1,41 @@
+schema_version = 1
+
+[[owners]]
+id = "workflow.planning"
+path = "workflows/planning.md"
+coverage = "audited"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces conditional concurrent-profile routing."
+evidence_owner = "suite:concurrent-plan-integration"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/plan-template-projection.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces the Planning-derived template projection."
+evidence_owner = "suite:plan-template-projection"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/planning-admission.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces ordinary Planning admission."
+evidence_owner = "suite:planning-admission"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/planning-consolidation.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces canonical Planning ownership."
+evidence_owner = "suite:planning-consolidation"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/policy-semantic-impact.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces reviewed Planning semantic-impact structure."
+evidence_owner = "suite:policy-semantic-impact"

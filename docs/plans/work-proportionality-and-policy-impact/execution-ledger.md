@@ -89,3 +89,23 @@
 - Result: both milestones and all objective acceptance claims are satisfied.
   Parent plans resume with a fresh post-recovery graph audit; no M6-I17 package
   is admitted or preselected.
+
+## 2026-08-20: Audited-Owner Suite Closure Correction
+
+- Trigger: independent review identified three omitted Planning consumers
+  owned by the full-codebase review prompt suite.
+- Boundary: this is one bounded post-acceptance correction. It does not alter
+  proportionality policy, parent-plan authority, or verifier-package admission.
+- Impact correction: added explicit reviewed edges for the full-codebase review
+  prompt, its Planning decision fixture, and its enforcement suite. The reverse
+  query now returns 24 Planning consumers, each with one exact disposition.
+- Completeness safeguard: the policy-impact validator now derives only the
+  enforcement-suite proof obligation from explicit registered suite `owner`
+  metadata. It continues to infer no prompt, fixture, link, lexical, standards
+  `Requires`, or temporary checker-graph relationship.
+- Verification: focused engine tests, negative fixture evidence, the Planning
+  impact query, exact disposition matching, all Python tests, all registered
+  declarative suites, generated-evidence freshness, affected plan structure,
+  Markdown links, the complete mixed checkpoint, and `git diff --check` passed.
+- Result: acceptance claim A2 is restored with registry-owned suite closure;
+  M6-I17 remains unadmitted.

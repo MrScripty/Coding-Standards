@@ -163,6 +163,41 @@ def _consumer_matches_relation(
         )
 
 
+def _registered_suite_owners(
+    root: Path,
+    suite_paths: Mapping[str, str],
+    *,
+    suite: str,
+    check: str,
+) -> dict[str, str]:
+    owners: dict[str, str] = {}
+    for suite_id, suite_path in suite_paths.items():
+        raw = _load_toml(root, suite_path, suite=suite, check=check)
+        if raw.get("id") != suite_id:
+            raise _diagnostic(
+                "POLICY_IMPACT.SUITE_ID",
+                "registered suite ID does not match its suite file",
+                path=suite_path,
+                field="id",
+                observed=str(raw.get("id")),
+                suite=suite,
+                check=check,
+            )
+        owner = raw.get("owner")
+        if not isinstance(owner, str) or not owner:
+            raise _diagnostic(
+                "POLICY_IMPACT.SUITE_OWNER",
+                "registered suite owner must be a non-empty string",
+                path=suite_path,
+                field="owner",
+                observed=str(owner),
+                suite=suite,
+                check=check,
+            )
+        owners[suite_id] = owner
+    return owners
+
+
 def load_policy_impact(
     root: Path,
     manifest_path: str,
@@ -385,5 +420,27 @@ def load_policy_impact(
         )
         seen_edges.add(identity)
         edges.append(edge)
+
+    suite_owners = _registered_suite_owners(
+        root,
+        suite_paths,
+        suite=suite,
+        check=check,
+    )
+    for suite_id, suite_owner in sorted(suite_owners.items()):
+        if suite_owner not in seen_owner_ids:
+            continue
+        suite_path = suite_paths[suite_id]
+        identity = (suite_owner, suite_path, "enforcement-suite-projection")
+        if identity not in seen_edges:
+            raise _diagnostic(
+                "POLICY_IMPACT.MISSING_ENFORCEMENT_SUITE_EDGE",
+                "suite owned by an audited policy owner requires an enforcement-suite edge",
+                path=manifest_path,
+                field="edges",
+                observed=f"{suite_id}|{suite_path}",
+                suite=suite,
+                check=check,
+            )
 
     return PolicyImpact(tuple(owners), tuple(edges))

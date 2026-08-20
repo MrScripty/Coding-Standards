@@ -42,6 +42,13 @@ evidence_owner = "suite:planning-consolidation"
 
 [[edges]]
 owner = "workflow.planning"
+consumer = "prompts/full-codebase-standards-refactor.md"
+relation = "prompt-projection"
+applicability = "The full-codebase review entrypoint delegates analysis-only plan construction to Planning."
+evidence_owner = "suite:full-review-prompt-entrypoint"
+
+[[edges]]
+owner = "workflow.planning"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = "The implementation entrypoint projects written-plan admission and conditional concurrent-profile selection."
@@ -98,6 +105,13 @@ evidence_owner = "suite:planning-consolidation"
 
 [[edges]]
 owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv"
+relation = "fixture-projection"
+applicability = "Fixture records the analysis-only full-review prompt's Router and Planning delegation decisions."
+evidence_owner = "suite:full-review-prompt-entrypoint"
+
+[[edges]]
+owner = "workflow.planning"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv"
 relation = "fixture-projection"
 applicability = "Fixture records written-plan, slice, artifact-update, and conditional concurrent-profile proportionality decisions."
@@ -116,6 +130,13 @@ consumer = "evaluation/standards-effectiveness/suites/concurrent-plan-integratio
 relation = "enforcement-suite-projection"
 applicability = "Suite enforces conditional concurrent-profile routing and stale-state protections."
 evidence_owner = "suite:concurrent-plan-integration"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces the analysis-only full-review prompt's Planning delegation."
+evidence_owner = "suite:full-review-prompt-entrypoint"
 
 [[edges]]
 owner = "workflow.planning"
