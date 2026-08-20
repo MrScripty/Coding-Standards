@@ -2,13 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE074 projected repository-path capability
-accepted; Commit consolidation package preflight next
+**Current phase:** Milestone 6: VE075 repeated projected-path semantics re-plan
+required before Commit package admission
 
-**Next slice:** preflight and admit the Commit consolidation-dispositions
-package using the accepted generic capability. Derive owner-local rows and
-targets from authoritative tables; do not hardcode counts, broaden Commit
-ownership to the shared manifest, or copy projected path lists.
+**Next slice:** select and record the VE075 correction to projected-path
+cardinality semantics. Do not admit the Commit package, copy its current target
+set, broaden its manifest authority, or add policy-specific engine behavior.
 
 **Acceptance status:** `pending`
 
@@ -8066,6 +8065,58 @@ fallback. Focused derived-evidence tests, all engine tests, all declarative
 suites, both plan validators, lifecycle fixtures, generated freshness, the
 complete retained-Bash checkpoint, and diff integrity pass. The Commit package
 must still be preflighted, admitted, implemented, and accepted separately.
+
+##### VE075 Repeated Projected Repository Paths Re-plan
+
+**Status:** Active re-plan trigger; Commit package admission remains blocked.
+
+The first owner-local Commit preflight derived non-removal targets directly
+from the shared disposition table. Multiple independently identified sections
+legitimately consolidate into the same canonical owner file, so the projection
+contains repeated path values. The accepted VE074 implementation rejects that
+projection as duplicate identities before validating any files.
+
+That outcome confuses two contracts. A repository-path assertion answers
+whether every selected path value names an allowed filesystem object;
+repetition does not change that truth. Row/identity uniqueness belongs to the
+filtered identifier relation, which already rejects duplicate Commit section
+identities. Requiring target-path uniqueness would prohibit normal many-to-one
+consolidation and cannot serve the source-index migrations VE074 was intended
+to unlock.
+
+**Option 1 - Derive and validate the distinct path set (recommended):** accept
+the projected values as a multiset, retain typed rejection of an empty
+projection and empty values, derive distinct paths in the engine, and validate
+each distinct path once. Store no target list or count. Assertions that need
+identity uniqueness continue to use relations, table keys, or other explicit
+identity contracts. Because no registered suite uses `repository_paths`, make
+this correction directly with no compatibility mode or legacy semantics.
+
+**Option 2 - Project identifier/path pairs and configure the path column:**
+retain projection uniqueness by selecting a unique section identifier beside
+each path, then add configuration naming which selected column is the path.
+This preserves a diagnostic that is unrelated to path validity, expands width
+and configuration semantics, and duplicates identity responsibility already
+owned by the relation check.
+
+**Option 3 - Add a generic projection `distinct` mode:** extend the shared
+projection grammar so suites request deduplication before any assertion. This
+could serve other assertions but changes every projection consumer's contract
+for one immediate need and makes correct path behavior depend on an optional
+flag. Select only if independent consumers require configurable set/bag
+projection semantics.
+
+**Option 4 - Record the current Commit target set explicitly:** validate a
+small static fixture or path list. This avoids correcting the assertion but
+duplicates cheap derived state, creates update churn, and leaves the recurring
+source-index use case unresolved.
+
+Option 1 is the narrowest truthful contract. It keeps path existence and row
+identity separate, derives all mutable state, reduces repeated filesystem
+work, and adds no mode, owner inference, copied value, command, compatibility
+representation, or fallback. Re-plan if any intended consumer needs duplicate
+path values to be semantically invalid independent of row identity, or if
+deduplication changes diagnostic ordering for invalid path values.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

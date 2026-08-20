@@ -12723,3 +12723,19 @@ lifecycle fixtures, generated freshness, the complete mixed checkpoint, and
 diff integrity pass. No Commit policy, suite, registry, package, manifest,
 generated artifact, Bash source, copied path/count, inferred owner, configured
 command, compatibility behavior, optional-missing mode, or fallback changed.
+
+## 2026-08-19 VE075 Repeated Projected Paths Re-plan Trigger
+
+**Outcome:** Commit package preflight stopped before admission.
+
+Authoritative owner-local projection proved that multiple section identities
+legitimately share canonical target files. The VE074 assertion rejects those
+repeated path values as duplicate identities even though the exact identifier
+relation separately owns row uniqueness.
+
+The recommended correction treats projected paths as a multiset, derives the
+distinct path set, and validates each file once while retaining typed empty,
+containment, symlink, missing, and file-kind outcomes. No copied target set or
+count, path-column configuration, projection mode, package branch,
+compatibility representation, or fallback is justified. No implementation
+package or persistent preflight artifact was admitted.

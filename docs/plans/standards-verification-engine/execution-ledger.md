@@ -4169,3 +4169,21 @@
   checks, generated freshness, the complete retained-Bash checkpoint, and diff
   integrity pass. Commit package preflight is next and remains a separate
   owner-local slice.
+
+## 2026-08-19 - VE075 Repeated Projected Paths Re-plan Trigger
+
+- Reconfirmed clean canonical `88751c4` before Commit package preflight.
+- Derived the owner-local suite without editing authoritative inputs. Exact ID
+  relation, filtered row policy, index structure/routes, and reference metadata
+  were representable with existing assertions.
+- Preflight stopped because many distinct section rows correctly target the
+  same owner file, while `repository_paths` rejects repeated path values as
+  duplicate identities.
+- Determined that path validity is set-valued while row identity uniqueness is
+  independently enforced by the exact filtered relation. Repeated targets do
+  not weaken filesystem evidence.
+- Recommended deriving and validating the distinct projected path set. Rejected
+  configured path-column width, a shared projection mode without independent
+  demand, and copied Commit targets/counts. No package, suite, registry,
+  manifest, generated artifact, Bash, source, fixture, compatibility behavior,
+  or fallback changed; disposable preflight files were removed.

@@ -3882,6 +3882,15 @@ passes without adding a suite, package, registry entry, manifest row, Bash
 change, copied path/count, inferred owner, compatibility behavior, or fallback.
 The owner-local Commit package remains a separate next slice.
 
+Commit preflight exposed VE075 before admission: independently identified
+sections legitimately repeat canonical target files, but the initial assertion
+treats repeated path values as duplicate identities. The delegated correction
+should derive and validate the distinct projected path set while leaving row
+identity uniqueness with the exact relation. Do not copy current targets or
+counts, add Commit-specific behavior, broaden projection grammar without an
+independent consumer, preserve the rejected behavior through compatibility, or
+admit the Commit package before the correction is accepted.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream
