@@ -3818,3 +3818,10 @@ independent gate. The proposed suite remains absent from the live registry and
 the Architecture checker remains executable. Admission adds no suite
 dependency, numeric candidate mapping, engine capability, standards mutation,
 compatibility path, or fallback. Atomic acceptance is next.
+
+M6-I10 is now accepted. The registered three-check suite has no dependencies;
+Frontend view-model lineage and row-37 remain independent gates. Both M6-T13
+historical records name suite evidence, and the replaced Architecture checker
+is absent. Final generated evidence contains 115 Bash checkers, 119 nodes, 705
+edges, and 119 components. Numeric lifecycle derives whole-checker candidate
+retirement without a candidate mapping or duplicate package.

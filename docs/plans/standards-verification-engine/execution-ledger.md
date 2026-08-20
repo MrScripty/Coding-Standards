@@ -4580,3 +4580,20 @@
 - Regenerated only generator-owned graph evidence. Package, edge, numeric,
   retained-checker, declarative, plan, freshness, source-unchanged, and diff
   verification pass. Atomic M6-I10 acceptance is next.
+
+## 2026-08-20 - M6-I10 Architecture Directory-Template Acceptance
+
+- Registered the exact preflighted three-check suite without dependencies and
+  accepted M6-I10 plus both current independent-gate records.
+- Transferred the two accepted M6-T13 historical checker subjects to the
+  registered suite and deleted only the replaced Architecture checker.
+- Preserved Frontend view-model lineage and row-37 as independently executed
+  gates. No suite dependency or duplicated Frontend/migration behavior exists.
+- Whole-checker numeric lifecycle derives the disappearance of all three audit
+  candidates from accepted M6-I10; no candidate mapping or second package was
+  added.
+- Regenerated final evidence at 115 Bash checkers, 119 nodes, 705 edges, and
+  119 components. Focused suite/independent gates, package/edge/numeric
+  authority, all 160 declarative suites, plans, removed path, protected inputs,
+  complete checkpoint, freshness, and diff integrity pass. Fresh-graph
+  package discovery is next.

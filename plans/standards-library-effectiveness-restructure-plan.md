@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 verification migration, M6-I10 Architecture
-directory-template replacement
+**Current phase:** Milestone 7 verification migration, fresh-graph package
+discovery
 
-**Next slice:** atomically accept admitted M6-I10, register its declarative
-suite, transfer historical checker evidence, and delete the Bash checker
+**Next slice:** rebuild the current verifier graph and select the next
+owner-coherent package from reviewed lifecycle and dependency evidence
 
 **Acceptance status:** `partial`
 

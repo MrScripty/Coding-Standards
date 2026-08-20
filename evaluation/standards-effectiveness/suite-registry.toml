@@ -794,3 +794,8 @@ requires = []
 id = "source-index-closures"
 path = "evaluation/standards-effectiveness/suites/source-index-closures.toml"
 requires = []
+
+[[suites]]
+id = "architecture-directory-template-closure"
+path = "evaluation/standards-effectiveness/suites/architecture-directory-template-closure.toml"
+requires = []

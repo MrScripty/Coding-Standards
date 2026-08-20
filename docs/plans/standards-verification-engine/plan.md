@@ -4,15 +4,15 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** atomically accept M6-I10, register its preflighted suite,
-transfer historical evidence, and delete the replaced Bash checker
+**Next slice:** rebuild the current graph and select the next owner-coherent
+checker package from reviewed lifecycle and dependency evidence
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I8 and M6-I9 atomically replaced the complete
-source-index Bash component at train orders 123 and 124.
+**Latest accepted slice:** M6-I10 replaced the Architecture directory-template
+closure checker at train order 125.
 
-**Latest admitted slice:** M6-I10 at train order 125.
+**Latest admitted slice:** `none`; no package follows accepted M6-I10.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -124,8 +124,8 @@ train orders 123 and 124. The source-index aggregate now runs through the
 Python engine, its direct Python tests own the former engine-fixture contract,
 and both obsolete Bash verifiers plus their shared helper are absent.
 
-**Current derived state:** 159 registered declarative suites, 116 retained Bash
-checkers, 120 executable nodes, 708 conservative reference edges, and 120
+**Current derived state:** 160 registered declarative suites, 115 retained Bash
+checkers, 119 executable nodes, 705 conservative reference edges, and 119
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -139,7 +139,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Atomically accept admitted M6-I10 |
+| 6 | Exceptional checks and Bash retirement | `Active` | Rebuild the graph and select the next owner-coherent package |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -154,13 +154,11 @@ generated evidence.
 
 **Next work:**
 
-1. Materialize and register the preflighted M6-I10 suite without dependencies.
-2. Accept M6-I10 and both current independent-gate records, transfer the two
-   historical M6-T13 checker subjects to suite evidence, and delete only the
-   replaced Architecture checker.
-3. Regenerate generator-owned evidence and verify focused behavior, package,
-   edge, numeric lifecycle, plans, all declarative suites, removed paths,
-   protected inputs, complete checkpoint, and diff integrity.
+1. Regenerate the graph from current repository state.
+2. Select the smallest owner-coherent package from reviewed lifecycle and
+   dependency evidence.
+3. Add a reusable primitive only when multiple coherent owners require it or
+   one safety-critical invariant cannot otherwise be expressed clearly.
 4. Add a reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
 5. Prepare disjoint admitted suite/checker changes concurrently when their

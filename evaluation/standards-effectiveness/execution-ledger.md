@@ -13069,3 +13069,20 @@ candidate package or mapping was added. Regenerated graph evidence and focused
 package, edge, numeric, retained-checker, declarative, plan, source-unchanged,
 and diff gates pass without a false dependency, wrapper, compatibility path,
 or fallback.
+
+## 2026-08-20 M6-I10 Architecture Directory-Template Acceptance
+
+**Outcome:** accepted; fresh-graph package discovery is next.
+
+The exact preflighted suite is registered without dependencies. M6-I10 and
+both current independent-gate records are accepted, both historical M6-T13
+checker subjects now use suite evidence, and only the replaced Architecture
+checker is deleted. Frontend view-model and row-37 behavior remain independent
+complete-suite gates.
+
+Whole-checker numeric lifecycle derives all three candidate retirements from
+accepted M6-I10 without another package or generated mapping. Final evidence
+contains 115 Bash checkers, 119 nodes, 705 edges, and 119 components. Focused,
+authority, numeric, declarative, plan, removal, protected-input, complete,
+freshness, and diff verification pass without a wrapper, false dependency,
+compatibility behavior, or fallback.

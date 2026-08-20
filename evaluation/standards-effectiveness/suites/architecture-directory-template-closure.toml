@@ -1,0 +1,76 @@
+schema_version = 1
+id = "architecture-directory-template-closure"
+owner = "topic.architecture"
+description = "Architecture directory-template closure from selected concern boundaries without universal tree, location-owner, neighboring-layout, or source-threshold fallbacks."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/directory-template-closure-decisions.tsv"
+expected_column = "expected"
+default = "route"
+[checks.domains]
+case = ["*"]
+boundaries = ["complete", "missing"]
+documentation = ["complete", "missing", "not-needed"]
+ownership = ["complete", "contradictory", "missing"]
+fallback = ["location-owner", "neighbor-layout", "none", "src-threshold", "universal-tree"]
+expected = ["route", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "ownership", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "boundaries", op = "eq", value = "missing" },
+  { field = "documentation", op = "eq", value = "missing" },
+  { field = "ownership", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "legacy-closure"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = [
+  "[Concern Boundaries](topics/architecture.md#concern-boundaries)",
+  "[Documentation Workflow](workflows/documentation.md)",
+  "No general-purpose project tree is retained",
+  "not select responsibilities",
+  "## Activity Tracing Pattern",
+  "## Process Instance Coordination",
+  "## Discover-or-Create Pattern",
+]
+prohibited = [
+  "A general-purpose project layout",
+  "presentation/           # UI layer",
+  "application/            # Application layer",
+  "domain/                 # Domain layer",
+  "shared/                 # Cross-cutting concerns",
+  "Directory README Requirement",
+]
+
+[[checks]]
+id = "disposition-lineage"
+type = "keyed_relation"
+[checks.keys]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["ids"]
+order = "source"
+where = { all = [{ field = "baseline_order", op = "eq", value = "37" }, { field = "child_order", op = "eq", value = "4" }] }
+split = { field = "ids", delimiter = "," }
+[checks.expected]
+path = "evaluation/standards-effectiveness/milestone-7-row-37-owner-validation.tsv"
+header = ["id", "canonical_owner", "disposition", "reference_treatment", "rationale"]
+key = "id"
+values = ["canonical_owner", "disposition"]
+[checks.observed]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+key = "id"
+values = ["target", "disposition"]
