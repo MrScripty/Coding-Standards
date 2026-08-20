@@ -8,7 +8,6 @@ readonly REPORT="$SCRIPT_DIR/milestone-7-f025-f026-decomposition.md"
 readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly OWNER_MAP="$SCRIPT_DIR/generated/rule-owner-map.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 readonly PARENT="$SCRIPT_DIR/milestone-7-decomposition.md"
 readonly TRUST_REPLAN="$SCRIPT_DIR/milestone-7-trust-lifecycle-replan.md"
 
@@ -134,41 +133,10 @@ for text in "${required_report[@]}"; do
   rg -F -q "$text" "$REPORT"
 done
 
-rg -F -q 'milestone-7-f025-f026-decomposition.md' "$PLAN"
 rg -F -q '(milestone-7-f025-f026-decomposition.md)' "$PARENT"
 rg -F -q '(milestone-7-f025-f026-decomposition.md)' "$TRUST_REPLAN"
-rg -F -q '`7.4b5a` (`Accepted`)' "$PLAN"
-
-first_planned=''
-seen_planned=0
-for slice in "${slices[@]}"; do
-  planned="$(grep -cF "\`$slice\` (\`Planned\`)" "$PLAN" || true)"
-  accepted="$(grep -cF "\`$slice\` (\`Accepted\`)" "$PLAN" || true)"
-  [[ "$((planned + accepted))" -eq 1 ]]
-
-  if [[ "$accepted" -eq 1 ]]; then
-    [[ "$seen_planned" -eq 0 ]]
-    [[ "${disposed_counts[$slice]}" -eq "${expected_counts[$slice]}" ]]
-  else
-    seen_planned=1
-    [[ "${disposed_counts[$slice]}" -eq 0 ]]
-    if [[ -z "$first_planned" ]]; then
-      first_planned="$slice"
-    fi
-  fi
-done
-
-if [[ -n "$first_planned" ]]; then
-  rg -F -q "**Next slice:** Milestone $first_planned" "$PLAN"
-else
-  if rg -q '^\*\*Next slice:\*\* .*7\.4b5[b-f]' "$PLAN"; then
-    printf 'Accepted F025/F026 slice remains next\n' >&2
-    exit 1
-  fi
-fi
 
 "$SCRIPT_DIR/verify-milestone-7-trust-lifecycle-replan.sh"
-"$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
 printf 'Milestone 7 F025/F026 decomposition passed: 10 IDs across 5 serial slices; dispositions %s/4 %s/3 %s/1 %s/1 %s/1\n' \

@@ -10,7 +10,6 @@ readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
 readonly TRAIN="$S/milestone-7-execution-train.tsv"
 readonly PACKAGES="$S/milestone-7-accelerated-packages.tsv"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id requirement owner candidate constraints \
   resolution authority evidence fallback expected extra; do
@@ -81,13 +80,9 @@ package_row="$(
 )"
 [[ "$package_row" == $'consolidation\ttopics/dependencies.md\texisting-review\tdecision-table\tfull-suite' ]]
 
-rg -F -q '`7.4b8ax` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"
-"$S/check-plan-structure.sh" "$PLAN"
 "$S/verify-plan-fixtures.sh"
 
 printf 'Dependencies owner contract passed: 19 decisions, owner established\n'

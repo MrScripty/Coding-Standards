@@ -7,7 +7,6 @@ readonly MANIFEST="$SCRIPT_DIR/milestone-7-execution-train.tsv"
 readonly DECOMPOSITION="$SCRIPT_DIR/milestone-7-execution-decomposition.tsv"
 readonly OWNER_MAP="$SCRIPT_DIR/generated/rule-owner-map.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 declare -A disposed source_by_id owner_by_id remaining seen
 declare -A overlay_lines overlay_orders_seen
@@ -225,32 +224,7 @@ for id in "${!remaining[@]}"; do
   [[ -n "${seen[$id]:-}" ]]
 done
 
-rg -F -q '`7.4b7n` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7o` (`Accepted`)' "$PLAN"
-next_slice_line="$(rg '^\*\*Next slice:\*\*' "$PLAN" | head -n 1)"
-next_slice_block="$(
-  awk '
-    /^\*\*Next slice:\*\*/ { capture = 1 }
-    capture && /^$/ { exit }
-    capture { print }
-  ' "$PLAN"
-)"
-if [[ -n "$active_label" ]]; then
-  IFS=',' read -r -a required_ids <<< "$active_required_ids"
-  for required_id in "${required_ids[@]}"; do
-    [[ "$next_slice_block" == *"$required_id"* ]]
-  done
-  next_milestone="$(
-    sed -E 's/.*Milestone ([^ ]+).*/\1/' <<< "$next_slice_line"
-  )"
-  [[ "$next_milestone" != "$next_slice_line" ]]
-  rg -F -q "\`$next_milestone\` (\`Planned\`)" "$PLAN"
-else
-  rg -F -q '`7.4b37b` (`Accepted`)' "$PLAN"
-  rg -F -q '`7.4c1` (`Accepted`)' "$PLAN"
-fi
 "$SCRIPT_DIR/verify-milestone-7-decomposition.sh"
-"$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 "$SCRIPT_DIR/verify-owner-state-transitions.sh"
 

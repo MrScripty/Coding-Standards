@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3: historical-authority migration
+**Current phase:** Milestone 4: active-plan compaction
 
-**Next slice:** resume the remaining special-shell `PPR-C2` cleanup, record its
-derived candidate identities under one accepted package, and preserve all
-non-plan behavior
+**Next slice:** compact the parent and verification-engine plans from current
+canonical state and existing ledger/report links without changing migration
+authority
 
 **Acceptance status:** `pending`
 
@@ -220,7 +220,7 @@ change its consumers to canonical records.
   active-plan consumption has no orchestration or structure-gate control flow.
 - [x] Add `PPR-C2-N1` package-scoped numeric-candidate retirement with generated
   exact identities, immutable-baseline preservation, and typed negative cases.
-- [ ] Remove active-plan consumption from the remaining `PPR-C2` entrypoints
+- [x] Remove active-plan consumption from the remaining `PPR-C2` entrypoints
   with obsolete orchestration or duplicated plan-structure gates.
 - [x] Keep shared authority under serial integration.
 
@@ -229,7 +229,7 @@ change its consumers to canonical records.
 - No checker or declarative suite depends on accepted historical narration in
   either active plan.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 4: Active-Plan Compaction
 

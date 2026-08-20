@@ -11,7 +11,6 @@ readonly SECURITY="$REPO_ROOT/topics/security.md"
 readonly LEGACY_ARCH="$REPO_ROOT/ARCHITECTURE-PATTERNS.md"
 readonly LEGACY_INTEROP="$REPO_ROOT/INTEROP-STANDARDS.md"
 readonly LEGACY_SECURITY="$REPO_ROOT/SECURITY-STANDARDS.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
 
 while IFS=$'\t' read -r case_id envelope pair schema payload metadata \
@@ -177,11 +176,4 @@ done
 
 rg -F -q '| F018 | Resolved in Milestone 7.4b2c |' "$FINDINGS"
 rg -F -q '| F059 | Resolved in Milestone 7.4b8d |' "$FINDINGS"
-rg -F -q '`7.4b2c` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8d` (`Accepted`)' "$PLAN"
-if rg -q '^\*\*Next slice:\*\* .*7\.4b2(b|c)' "$PLAN"; then
-  printf 'accepted F018 slice remains next\n' >&2
-  exit 1
-fi
-
 printf 'IPC action-specific payload validation passed: 11 exact dispositions\n'

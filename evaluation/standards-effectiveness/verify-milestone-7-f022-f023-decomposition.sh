@@ -7,7 +7,6 @@ readonly MAP="$SCRIPT_DIR/milestone-7-f022-f023-slices.tsv"
 readonly REPORT="$SCRIPT_DIR/milestone-7-f022-f023-decomposition.md"
 readonly INVENTORY="$SCRIPT_DIR/generated/section-inventory.tsv"
 readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 readonly -a slices=(7.4b3b 7.4b3c 7.4b3d 7.4b3e 7.4b3f 7.4b3g)
 declare -A expected_counts=(
@@ -164,36 +163,6 @@ for text in "${required_report_text[@]}"; do
   rg -F -q "$text" "$REPORT"
 done
 
-rg -F -q 'milestone-7-f022-f023-decomposition.md' "$PLAN"
-rg -F -q '`7.4b3a` (`Accepted`)' "$PLAN"
-
-first_planned=''
-seen_planned=0
-for slice in "${slices[@]}"; do
-  planned="$(grep -cF "\`$slice\` (\`Planned\`)" "$PLAN" || true)"
-  accepted="$(grep -cF "\`$slice\` (\`Accepted\`)" "$PLAN" || true)"
-  [[ "$((planned + accepted))" -eq 1 ]]
-
-  if [[ "$accepted" -eq 1 ]]; then
-    [[ "$seen_planned" -eq 0 ]]
-    [[ "${disposed_counts[$slice]}" -eq "${expected_counts[$slice]}" ]]
-  else
-    seen_planned=1
-    [[ "${disposed_counts[$slice]}" -eq 0 ]]
-    if [[ -z "$first_planned" ]]; then
-      first_planned="$slice"
-    fi
-  fi
-done
-
-if [[ -n "$first_planned" ]]; then
-  rg -F -q "**Next slice:** Milestone $first_planned" "$PLAN"
-else
-  if rg -q '^\*\*Next slice:\*\* .*7\.4b3[b-g]' "$PLAN"; then
-    printf 'Accepted F022/F023 slice remains next\n' >&2
-    exit 1
-  fi
-fi
 
 printf 'Milestone 7 F022/F023 decomposition passed: 34 IDs across 6 serial slices; dispositions %s/8 %s/4 %s/5 %s/1 %s/6 %s/10\n' \
   "${disposed_counts[7.4b3b]}" \

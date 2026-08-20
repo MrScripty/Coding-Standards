@@ -200,3 +200,32 @@
   - the complete mixed checkpoint passed all 116 retained Bash checkers.
 - Result: `PPR-C2-N1` accepted. The isolated 14-checker cleanup may resume and
   must record its derived candidate mappings before `PPR-C2` acceptance.
+
+## 2026-08-20: Special Shell Historical-Authority Removal
+
+- Operation: `continue`.
+- Package: final `PPR-C2` representation sub-slice.
+- Scope: the exact fourteen remaining shell dispositions classified with
+  obsolete orchestration or duplicated plan-structure gates.
+- Change: removed active-parent-plan aliases, historical assertions, obsolete
+  next-slice orchestration, and duplicated `check-plan-structure.sh` calls.
+  Every non-plan command remained byte-identical to the previously reviewed
+  isolated transformation.
+- Numeric lifecycle: the recorder derived thirteen missing baseline identities
+  across four still-live checkers and assigned them to the accepted `PPR-C2`
+  package. The immutable baseline and semantic classifications are unchanged.
+- Topology: regenerated evidence removes exactly 24 edges from the twelve
+  duplicated-structure-gate sources to `check-plan-structure.sh`; the edge
+  types are only `executable_reference` and `helper_dependency`. Checker, node,
+  and component membership remain unchanged.
+- Verification:
+  - all fourteen changed entrypoints passed `bash -n` and concurrent execution;
+  - no retained shell checker or registered suite references either active
+    parent or verification-engine plan;
+  - numeric retirement freshness and classification passed;
+  - all 159 declarative suites passed;
+  - generated evidence is fresh at 116 retained Bash checkers, 120 nodes, 708
+    edges, and 120 components; and
+  - `git diff --check` and the complete 116-checker mixed checkpoint passed.
+- Result: `PPR-C2`, `PPR-003`, `PPR-006`, and Milestone 3 are accepted. Active-
+  plan compaction is the only admitted next milestone.

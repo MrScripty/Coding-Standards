@@ -9,7 +9,6 @@ readonly ROUTER="$R/STANDARDS-ROUTER.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly TRAIN="$S/milestone-7-execution-train.tsv"
 readonly PACKAGES="$S/milestone-7-accelerated-packages.tsv"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id selection action procedure arguments target \
   lifecycle evidence fallback expected extra; do
@@ -68,17 +67,9 @@ package_row="$(
 )"
 [[ "$package_row" == $'refinement\tprofiles/applications/launcher.md\texisting-review\tdecision-table\tfull-suite' ]]
 
-rg -F -q '`7.4b8at` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8au` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8av` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8aw` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ax` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 
 "$S/verify-milestone-7-accelerated-execution-replan.sh"
 "$S/verify-milestone-7-execution-train.sh"
-"$S/check-plan-structure.sh" "$PLAN"
 "$S/verify-plan-fixtures.sh"
 
 printf 'Launcher owner contract passed: 16 decisions, owner established\n'

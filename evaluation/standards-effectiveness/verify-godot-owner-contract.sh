@@ -8,7 +8,6 @@ readonly OWNER="$R/profiles/frameworks/godot.md"
 readonly ROUTER="$R/STANDARDS-ROUTER.md"
 readonly DISPOSITIONS="$S/consolidation-dispositions.tsv"
 readonly OVERLAY="$S/milestone-7-execution-decomposition.tsv"
-readonly PLAN="$R/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id affinity dispatch completion lifetime \
   check_timing evidence fallback expected extra; do
@@ -76,18 +75,8 @@ overlay_row="$(
 )"
 [[ "$overlay_row" == $'STD-0277,STD-0278,STD-0279\tprofiles/frameworks/godot.md\texists\tpre-slice-review' ]]
 
-rg -F -q '`7.4b8ar` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8as` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8at` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8au` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8av` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8aw` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ax` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8ay` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b8az` (`Accepted`)' "$PLAN"
 
 "$S/verify-milestone-7-row-13-decomposition.sh"
-"$S/check-plan-structure.sh" "$PLAN"
 "$S/verify-plan-fixtures.sh"
 
 printf 'Godot policy passed: 14 decisions, owner established, row-13 dispositions complete\n'

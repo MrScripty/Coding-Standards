@@ -11,7 +11,6 @@ readonly DEPENDENT_MAP="$SCRIPT_DIR/milestone-7-f025-f026-slices.tsv"
 readonly REPORT="$SCRIPT_DIR/milestone-7-trust-lifecycle-replan.md"
 readonly PARENT="$SCRIPT_DIR/milestone-7-decomposition.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 declare -A disposed
 declare -A disposed_source
@@ -168,19 +167,8 @@ done
 
 rg -F -q '(milestone-7-trust-lifecycle-replan.md)' "$PARENT"
 rg -F -q '| F044 | Resolved in Milestone 7.4b4a |' "$FINDINGS"
-rg -F -q '`7.4b4a` (`Accepted`)' "$PLAN"
-if [[ "$next_dispositions" -eq 0 ]]; then
-  rg -F -q '**Next slice:** Milestone 7.4b4b' "$PLAN"
-  rg -F -q '`7.4b4b` (`Planned`)' "$PLAN"
-else
-  rg -F -q '`7.4b4b` (`Accepted`)' "$PLAN"
-  rg -F -q '`7.4b4c` (`Accepted`)' "$PLAN"
-  rg -F -q 'milestone-7-rust-async-decomposition.md' "$PLAN"
-fi
-
 "$SCRIPT_DIR/verify-milestone-7-decomposition.sh"
 "$SCRIPT_DIR/verify-milestone-7-rust-async-decomposition.sh"
-"$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
 printf 'Milestone 7 trust/lifecycle re-plan passed: %s baseline trust IDs, %s bridge IDs, generic dispositions %s/9, Rust Async dispositions %s/9, dependent dispositions %s/10\n' \

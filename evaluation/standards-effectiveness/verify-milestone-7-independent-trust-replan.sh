@@ -10,7 +10,6 @@ readonly NEXT_SLICE="$SCRIPT_DIR/milestone-7-independent-trust-next-slice.tsv"
 readonly REPORT="$SCRIPT_DIR/milestone-7-independent-trust-replan.md"
 readonly PARENT="$SCRIPT_DIR/milestone-7-decomposition.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 declare -A disposed
 declare -A disposed_source
@@ -237,24 +236,12 @@ rg -F -q '| F052 | Resolved in Milestone 7.4b7k |' "$FINDINGS"
 rg -F -q '| F053 | Resolved in Milestone 7.4b7m |' "$FINDINGS"
 rg -F -q '## Accepted Slice 7.4b7g: Event Registration Lifecycle Contract' \
   "$REPORT"
-rg -F -q '`7.4b7f` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7f2` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7g` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7h` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7i` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7j` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7k` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7l` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7m` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7n` (`Accepted`)' "$PLAN"
-rg -F -q '`7.4b7o` (`Accepted`)' "$PLAN"
 
 "$SCRIPT_DIR/verify-contract-ownership.sh"
 "$SCRIPT_DIR/verify-concurrency-policy.sh"
 "$SCRIPT_DIR/verify-interop-boundary-policy.sh"
 "$SCRIPT_DIR/verify-milestone-7-decomposition.sh"
 "$SCRIPT_DIR/verify-milestone-7-execution-train.sh"
-"$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
 printf 'Milestone 7 independent trust re-plan passed: %s baseline IDs, %s current across %s owners; next-slice dispositions %s/0\n' \

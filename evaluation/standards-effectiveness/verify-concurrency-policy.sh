@@ -9,7 +9,6 @@ readonly DISPOSITIONS="$SCRIPT_DIR/consolidation-dispositions.tsv"
 readonly TOPIC="$REPO_ROOT/topics/concurrency.md"
 readonly LEGACY="$REPO_ROOT/CONCURRENCY-STANDARDS.md"
 readonly FINDINGS="$SCRIPT_DIR/findings.md"
-readonly PLAN="$REPO_ROOT/plans/standards-library-effectiveness-restructure-plan.md"
 
 while IFS=$'\t' read -r case_id state coordination lock_scope external execution \
   work_owner failure cancellation fallback expected extra; do
@@ -163,13 +162,10 @@ rg -F -q '[Rust Security profile](profiles/languages/rust/security.md)' "$LEGACY
 ! rg -F -q 'languages/rust/RUST-ASYNC-STANDARDS.md' "$LEGACY"
 ! rg -F -q 'languages/rust/RUST-SECURITY-STANDARDS.md' "$LEGACY"
 ! rg -F -q '## C# Async/Await Rules' "$LEGACY"
-rg -F -q '`7.4b8ak` (`Accepted`)' "$PLAN"
 
 rg -F -q '| F019 | Resolved in Milestone 7.4b4b |' "$FINDINGS"
-rg -F -q '`7.4b4b` (`Accepted`)' "$PLAN"
 
 "$SCRIPT_DIR/verify-milestone-7-trust-lifecycle-replan.sh"
-"$SCRIPT_DIR/check-plan-structure.sh" "$PLAN"
 "$SCRIPT_DIR/verify-plan-fixtures.sh"
 
 printf 'Concurrency policy passed: %s decisions, %s exact dispositions\n' \
