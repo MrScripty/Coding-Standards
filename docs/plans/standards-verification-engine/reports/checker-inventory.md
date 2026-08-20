@@ -4035,3 +4035,34 @@ declarative suites, the complete checkpoint, mutation parity, and diff integrity
 pass. VE083 is closed without a new suite, registry node, dependency, Bash
 repair, wrapper, compatibility path, copied count, manual numeric mapping, or
 fallback. Fresh graph review is required before another package is selected.
+
+### M6-I13 Commit Authority Admission
+
+Fresh graph evidence identifies `verify-commit-authority.sh` as the only
+retained checker with neither callers nor dependencies. Its behavior belongs
+to registered `commit-consolidation-dispositions`: two strict decision tables,
+four required owner routes, legacy-policy absence, exact hook-bypass owner
+language, and exact STD-0663/STD-0703 disposition projection.
+
+The checker has no current incident executable edge. M6-I13 therefore uses the
+existing typed `edge-free` mode, which requires the source while admitted,
+requires its absence when accepted, rejects incident graph edges, and rejects
+package-owned edge rows. Three accepted historical replacement records are
+transferred to exact Commit suite evidence rather than copied into a false
+current edge.
+
+Disposable final state extends the existing Commit suite from six to fourteen
+checks, removes the temporary Commit row and projection from row-35 migration
+authority, deletes the Bash checker, and regenerates 112 checkers, 116 nodes,
+694 edges, and 116 components. Focused owners, package/edge authority, numeric
+lifecycle, all 160 declarative suites, generated freshness, the complete
+checkpoint, and negative mutations pass without a new suite, dependency,
+registry node, Bash repair, wrapper, compatibility path, copied count, manual
+numeric mapping, or fallback. Train order 128 is admitted for atomic
+acceptance.
+
+The admitted package row adds one temporary conservative contract-reference
+edge to the retained checker. Admission evidence therefore contains 113 Bash
+checkers, 117 nodes, 698 edges, and 117 components. This derived documentation
+reference is not an executable incident edge and disappears with accepted
+checker deletion.

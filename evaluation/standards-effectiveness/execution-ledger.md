@@ -13221,3 +13221,24 @@ Focused, lifecycle, mutation, removal, protected-source, generated, plan,
 declarative, complete, and diff verification pass. No new suite, registry node,
 dependency, Bash repair, wrapper, compatibility path, copied count, manual
 numeric mapping, or fallback remains.
+
+## 2026-08-20 M6-I13 Commit Authority Admission
+
+**Outcome:** admitted; atomic acceptance is next.
+
+Clean fresh-graph review selected the sole retained checker with no callers and
+no dependencies. Existing registered Commit authority can express every
+behavior through strict decision, text, and table checks; no engine capability,
+suite, registry node, or execution dependency is required.
+
+M6-I13 freezes the existing Commit suite extension, temporary row-35 cleanup,
+three historical evidence transfers, whole-checker numeric retirement, typed
+edge-free lifecycle, checker deletion, and generated graph refresh.
+Disposable final state passes all 160 declarative suites and the complete mixed
+checkpoint at 112 Bash checkers, 116 nodes, 694 edges, and 116 components.
+Admission evidence contains 113 Bash checkers, 117 nodes, 698 edges, and 117
+components; its one additional conservative contract-reference edge is derived
+from the package row and is not an executable incident edge.
+Negative decision, unavailable-evidence, legacy-route, and exact-disposition
+cases remain typed failures. No false edge, copied count, manual numeric map,
+Bash repair, wrapper, compatibility behavior, or fallback is admitted.

@@ -4675,6 +4675,30 @@
   second suite, dependency, wrapper, compatibility behavior, or fallback.
 - Fresh-graph owner-coherent package selection is next.
 
+## 2026-08-20 - M6-I13 Commit Authority Admission
+
+- Started from clean canonical `ad79580`; the admission changes package
+  authority, current plan records, and their derived graph projection. Live
+  suites, checkers, fixtures, edge-disposition records, standards, and registry
+  remain unchanged.
+- Admitted one consolidation package at train order 128. Existing registered
+  `commit-consolidation-dispositions` owns Commit decisions, routes, legacy
+  absence, hook-bypass policy, and exact STD-0663/STD-0703 dispositions.
+- The checker has no current incident executable graph edges, so M6-I13 uses
+  typed `edge-free` authority. Three accepted historical records transfer to
+  the Commit suite; no false current edge or replacement suite is introduced.
+- Disposable final state passes the 14-check Commit suite, 15-check row-35
+  suite, package and edge authority, whole-checker numeric lifecycle, all 160
+  declarative suites, generated freshness, and the complete checkpoint at 112
+  Bash checkers, 116 nodes, 694 edges, and 116 components.
+- Admission evidence contains 113 Bash checkers, 117 nodes, 698 edges, and 117
+  components. The one additional conservative contract-reference edge is
+  derived solely from the package row and is not an executable incident edge.
+- Invalid Commit decisions, unavailable bypass evidence, legacy routes, and
+  stale exact dispositions remain typed failures. No new suite, registry node,
+  dependency, Bash repair, wrapper, compatibility path, copied count, manual
+  numeric mapping, or fallback is admitted.
+
 ## 2026-08-20 - VE083 Root Consumer-Audit Ownership Re-plan
 
 - Fresh accepted evidence contains 114 Bash checkers, 118 nodes, 702 edges,

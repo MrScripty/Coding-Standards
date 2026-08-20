@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** rebuild the current graph and select the next owner-coherent
-package from reviewed lifecycle and dependency evidence
+**Next slice:** atomically accept the admitted M6-I13 Commit authority
+consolidation
 
 **Acceptance status:** `pending`
 
@@ -13,7 +13,9 @@ package from reviewed lifecycle and dependency evidence
 route prohibitions into their existing owner suites and removed the aggregate
 Bash checker.
 
-**Latest admitted slice:** `none`; no package follows accepted M6-I12.
+**Latest admitted slice:** M6-I13 moves Commit decisions, routes, legacy
+absence, hook-bypass policy, and exact dispositions into the existing Commit
+owner suite.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -121,11 +123,11 @@ At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
 **Accepted boundary:** package records are accepted through M6-I12 at train
-order 127. Temporary consumer inventory and permanent root-route prohibitions
-run through their existing owner suites without an aggregate Bash gate.
+order 127. M6-I13 is admitted at train order 128 for atomic acceptance through
+the existing Commit owner suite.
 
 **Current derived state:** 160 registered declarative suites, 113 retained Bash
-checkers, 117 executable nodes, 697 conservative reference edges, and 117
+checkers, 117 executable nodes, 698 conservative reference edges, and 117
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -149,20 +151,23 @@ helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
 **Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
-is accepted. VE083 is resolved by accepted M6-I12; no package currently follows
-it.
+is accepted. M6-I13 is admitted after final-state proof; atomic acceptance is
+next.
 
 **Next work:**
 
-1. Select each subsequent owner-coherent package from reviewed lifecycle and
+1. Accept M6-I13 exactly as admitted: extend the existing Commit suite, remove
+   temporary row-35 Commit tracking, transfer historical evidence, and delete
+   the Commit Bash checker.
+2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
-2. Add another reusable primitive only when multiple coherent owners require it or
+3. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
-3. Prepare disjoint admitted suite/checker changes concurrently when their
+4. Prepare disjoint admitted suite/checker changes concurrently when their
    write sets and dependencies are frozen.
-4. Integrate shared authority serially and run one complete checkpoint at each
+5. Integrate shared authority serially and run one complete checkpoint at each
    shared-contract or wave boundary.
-5. Continue until no Bash verifier, helper, or launcher remains, then delete
+6. Continue until no Bash verifier, helper, or launcher remains, then delete
    the temporary reference model.
 
 **Acceptance gate:** exact inventory reports zero Bash verification paths; the
