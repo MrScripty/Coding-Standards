@@ -4720,3 +4720,23 @@
   mutations return typed inventory, table-domain, and prohibited-text failures.
   No new suite, registry node, Bash repair, wrapper, compatibility path, copied
   count, manual numeric mapping, or fallback is admitted.
+
+## 2026-08-20 - M6-I12 Root Consumer-Audit Decomposition Acceptance
+
+- Extended registered row-35 migration authority from thirteen to sixteen
+  checks with strict consumer domains, generated-inventory-derived membership,
+  and the Commit-source prohibition. Extended root-index's existing boundary
+  check with the direct Commit-route prohibition; no suite dependency changed.
+- Removed the aggregate checker and its self-classification row. Accepted the
+  package and two current Commit edge dispositions, transferred thirteen
+  historical consumer records to row-35 suite evidence and three routing/index
+  identity records to root-index suite evidence, and preserved Commit as an
+  independently executed checker.
+- Whole-checker lifecycle derives retirement of all immutable numeric candidates
+  from accepted M6-I12 without a manual mapping. Generated final evidence has
+  113 Bash checkers, 117 nodes, 697 edges, and 117 components.
+- Focused owner, package/edge, numeric lifecycle, removal, protected-source,
+  generated-freshness, plan, all-suite, complete-checkpoint, mutation, and diff
+  checks pass. No new suite, registry node, dependency, Bash repair, wrapper,
+  compatibility path, copied count, manual numeric record, or fallback remains.
+- Fresh-graph owner-coherent package selection is next.

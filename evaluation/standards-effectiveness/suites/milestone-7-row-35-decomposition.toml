@@ -89,6 +89,35 @@ manifest_path_column = "file"
 literal = "#!/usr/bin/env bash\n"
 
 [[checks]]
+id = "readme-consumer-classifications"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv"
+header = ["file", "root_use", "nonroot_use"]
+non_empty = ["file", "root_use", "nonroot_use"]
+unique = [["file"]]
+[checks.domains]
+root_use = ["none"]
+nonroot_use = ["fixture-data", "legacy-heading-pattern", "rust-profile-index"]
+
+[[checks]]
+id = "derived-readme-consumers"
+type = "reference_inventory"
+candidates_path = "evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv"
+candidates_header = ["checker", "lines", "inbound_count", "inbound_files", "executable_inbound_count", "executable_inbound_files", "contract_inbound_count", "contract_inbound_files", "documentation_inbound_count", "documentation_inbound_files", "verifier_dependencies", "helper_dependencies", "uses_sed", "uses_awk", "uses_rg", "uses_decision_table"]
+candidate_path_column = "checker"
+manifest_path = "evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv"
+manifest_header = ["file", "root_use", "nonroot_use"]
+manifest_path_column = "file"
+literal = "README.md"
+
+[[checks]]
+id = "commit-no-direct-root-readme"
+type = "text"
+path = "evaluation/standards-effectiveness/verify-commit-authority.sh"
+required = []
+prohibited = ["\"README.md\""]
+
+[[checks]]
 id = "transitive-callers"
 type = "table"
 path = "evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv"

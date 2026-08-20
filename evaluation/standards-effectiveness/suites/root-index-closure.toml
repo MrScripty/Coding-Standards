@@ -76,6 +76,7 @@ prohibited = [
   "scheduled for closure",
   "Remaining frontend mechanism",
   "awaiting ordered canonical population",
+  "(workflows/commit.md)",
   "(topics/contracts.md)",
 ]
 

@@ -4,16 +4,16 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** atomically accept the admitted M6-I12 root README consumer-audit
-decomposition
+**Next slice:** rebuild the current graph and select the next owner-coherent
+package from reviewed lifecycle and dependency evidence
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I11 moved root Router aggregate evidence into
-the existing root-index suite and removed the replaced Bash checker.
+**Latest accepted slice:** M6-I12 decomposed root consumer inventory and direct
+route prohibitions into their existing owner suites and removed the aggregate
+Bash checker.
 
-**Latest admitted slice:** M6-I12 decomposes temporary consumer inventory into
-the row-35 suite and permanent root-route prohibitions into root-index closure.
+**Latest admitted slice:** `none`; no package follows accepted M6-I12.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -120,12 +120,12 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I11 at train
-order 126. M6-I12 is admitted at train order 127 for atomic acceptance through
-the existing row-35 and root-index suites.
+**Accepted boundary:** package records are accepted through M6-I12 at train
+order 127. Temporary consumer inventory and permanent root-route prohibitions
+run through their existing owner suites without an aggregate Bash gate.
 
-**Current derived state:** 160 registered declarative suites, 114 retained Bash
-checkers, 118 executable nodes, 702 conservative reference edges, and 118
+**Current derived state:** 160 registered declarative suites, 113 retained Bash
+checkers, 117 executable nodes, 697 conservative reference edges, and 117
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -139,7 +139,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Rebuild the graph and select the next owner-coherent package |
+| 6 | Exceptional checks and Bash retirement | `Active` | Fresh graph review after accepted M6-I12 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -149,23 +149,20 @@ helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
 **Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
-is accepted. VE083 is resolved by the admitted M6-I12 ownership split; atomic
-acceptance is next.
+is accepted. VE083 is resolved by accepted M6-I12; no package currently follows
+it.
 
 **Next work:**
 
-1. Accept M6-I12 exactly as admitted: extend the two existing owner suites,
-   transfer historical evidence, preserve Commit as an independent gate, and
-   delete the aggregate Bash checker.
-2. Select each subsequent owner-coherent package from reviewed lifecycle and
+1. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
-3. Add another reusable primitive only when multiple coherent owners require it or
+2. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
-4. Prepare disjoint admitted suite/checker changes concurrently when their
+3. Prepare disjoint admitted suite/checker changes concurrently when their
    write sets and dependencies are frozen.
-5. Integrate shared authority serially and run one complete checkpoint at each
+4. Integrate shared authority serially and run one complete checkpoint at each
    shared-contract or wave boundary.
-6. Continue until no Bash verifier, helper, or launcher remains, then delete
+5. Continue until no Bash verifier, helper, or launcher remains, then delete
    the temporary reference model.
 
 **Acceptance gate:** exact inventory reports zero Bash verification paths; the

@@ -13202,3 +13202,22 @@ Three negative mutations return typed reference-inventory, table-domain, and
 prohibited-text failures. No new suite, registry node, dependency, copied
 count, manual numeric mapping, Bash repair, wrapper, compatibility behavior,
 or fallback is admitted.
+
+## 2026-08-20 M6-I12 Root Consumer-Audit Decomposition Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered row-35 suite now owns exact consumer classifications, derived
+README consumer membership, and Commit-source prohibition. Registered
+root-index owns the permanent direct Commit-route prohibition. The aggregate
+Bash checker and its self-classification are absent.
+
+M6-I12 and both current Commit edges are accepted. Sixteen historical records
+use their semantic owner suites, Commit remains independently checked, and
+whole-checker numeric retirement derives from the accepted package. Final
+evidence contains 113 Bash checkers, 117 nodes, 697 edges, and 117 components.
+
+Focused, lifecycle, mutation, removal, protected-source, generated, plan,
+declarative, complete, and diff verification pass. No new suite, registry node,
+dependency, Bash repair, wrapper, compatibility path, copied count, manual
+numeric mapping, or fallback remains.

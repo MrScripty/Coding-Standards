@@ -4012,3 +4012,26 @@ and 117 components. Mutations prove typed inventory, classification-domain,
 and root-route failures. Train order 127 is admitted with no new suite,
 registry node, dependency, Bash repair, wrapper, compatibility path, copied
 count, manual numeric record, or fallback.
+
+### M6-I12 Root Consumer-Audit Decomposition Acceptance
+
+M6-I12 is accepted exactly as admitted. Row-35 migration authority has sixteen
+checks and derives the complete current README consumer set from generated
+checker inventory without a stored count. Root-index retains six checks and
+now prohibits both direct Commit and Contracts routes. Neither suite depends on
+or duplicates the other.
+
+The aggregate checker and its self-classification row are absent. Thirteen
+historical consumer-inventory records use registered row-35 suite evidence;
+three obsolete routing/index identity records use registered root-index suite
+evidence. Both current audit-to-Commit observations are accepted as historical
+independent-gate dispositions whose replacement is the retained Commit checker.
+Accepted whole-checker package authority derives numeric retirement.
+
+Final graph evidence contains 113 Bash checkers, 117 nodes, 697 edges, and 117
+components. Focused owners, package/edge authority, numeric lifecycle, removal,
+protected sources, generated freshness, both plan validators, all 160
+declarative suites, the complete checkpoint, mutation parity, and diff integrity
+pass. VE083 is closed without a new suite, registry node, dependency, Bash
+repair, wrapper, compatibility path, copied count, manual numeric mapping, or
+fallback. Fresh graph review is required before another package is selected.

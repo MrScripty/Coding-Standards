@@ -5,8 +5,8 @@
 **Current phase:** Milestone 7 verification migration, fresh-graph package
 discovery
 
-**Next slice:** atomically accept the admitted M6-I12 root README consumer-audit
-decomposition
+**Next slice:** rebuild the current verifier graph and select the next
+owner-coherent package from reviewed lifecycle and dependency evidence
 
 **Acceptance status:** `partial`
 
@@ -147,19 +147,18 @@ complete; `Accepted` requires the named evidence.
 without losing mapped semantics.
 
 **Accepted boundary:** normative owner consolidation is complete through the
-recorded `7.4c3` packages. Verification migration is accepted through M6-I11
-at train order 126, and M6-I12 is admitted at train order 127. The canonical
-package manifest contains the exact package state; the execution ledger
-contains detailed slice evidence.
+recorded `7.4c3` packages. Verification migration is accepted through M6-I12
+at train order 127. The canonical package manifest contains the exact accepted
+state; the execution ledger contains detailed slice evidence.
 
 **Accepted dependency:** [Planning proportionality recovery](../docs/plans/planning-proportionality-recovery/plan.md)
-is complete. VE083 is resolved by the admitted M6-I12 split between existing
-row-35 migration and root-index Router authority.
+is complete. VE083 is resolved by accepted M6-I12 through existing row-35
+migration and root-index Router authority.
 
 **Remaining work:**
 
-1. Accept M6-I12 exactly as admitted, then select and admit the next
-   owner-coherent package through the verification-engine plan.
+1. Rebuild the graph and select the next owner-coherent package through the
+   verification-engine plan.
 2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
 3. Regenerate canonical inventories and prove exact dispositions, no source

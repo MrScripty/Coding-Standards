@@ -314,17 +314,18 @@ fallback.
 The selected context is compared with the frozen baseline line count.
 
 The registered `milestone-7-row-35-decomposition` suite checks the exact
-root-index lifecycle decomposition, owner dispositions, dependency
-classifications, transitive caller membership, execution records, and accepted
-plan state. Open dependency and caller membership is derived from canonical
-inventories; retained independent checkers are line-validated but are not
-nested or executed by the suite.
+root-index lifecycle decomposition, owner dispositions, dependency and README
+consumer classifications, transitive caller membership, execution records,
+and accepted plan state. Open dependency, consumer, and caller membership is
+derived from canonical inventories; retained independent checkers are
+line-validated but are not nested or executed by the suite.
 
 The registered `root-index-closure` suite checks the root README's exact
 heading order and line ceiling, six resource roles and links, explicit routing
-boundary, prohibited legacy authority, six accepted dispositions, and every
-table-derived canonical Router owner link. The README consumer audit remains
-an independent gate; the suite neither depends on nor executes it.
+boundary, prohibited legacy authority and direct owner routes, six accepted
+dispositions, and every table-derived canonical Router owner link. Temporary
+README consumer inventory belongs to the row-35 migration suite instead of a
+separate aggregate gate.
 
 The registered `language-index-closure` suite checks exact Language Index
 structure, links, routing boundaries, owner/disposition outcomes, and Router
