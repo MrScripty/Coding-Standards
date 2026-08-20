@@ -282,3 +282,32 @@
 - Result: `PPR-007`, `PPR-C3-G1`, and the parent-plan compaction are
   accepted. Verification-engine plan compaction is the only admitted next
   slice.
+
+## 2026-08-20: Verification-Engine Plan Compaction Acceptance
+
+- Operation: `continue`.
+- Projection: replaced the 9,020-line verification-engine plan with a 224-line
+  current-state plan containing its objective, acceptance state, binding
+  decisions, milestone state, current M6 blocker, post-recovery work, and
+  canonical evidence links.
+- Current-state correction: package orders 123 and 124 prove M6-I8/M6-I9 are
+  the latest accepted atomic source-index component. No package follows M6-I9,
+  so the stale source-index handoff is replaced by fresh-graph owner/package
+  discovery after recovery acceptance.
+- Historical ownership: every historical `VE` and milestone identifier in the
+  displaced plan remains represented by the child ledger, issues, reports,
+  package manifest, or edge dispositions. No accepted narrative remains
+  authoritative in the active plan.
+- Generated evidence: exactly five structure rows lose obsolete child-plan
+  documentation references. Node, edge, and component artifacts remain
+  byte-identical at 120 nodes, 708 edges, and 120 components.
+- Focused verification: both active plans pass structure checks, every child
+  plan link resolves, identifier coverage is complete, and the generated
+  projection is bounded to the authorized structure inventory.
+- Complete verification: all 299 engine tests and 159 declarative suites pass;
+  generated inventory, graph, and numeric-retirement evidence are fresh; the
+  complete mixed checkpoint passes all 116 retained Bash checkers; and diff
+  integrity passes.
+- Result: `PPR-002`, `PPR-008`, and Milestone 4 are accepted. Milestone 5
+  recovery checkpoints and scenario rescoring are the only admitted next
+  slice.

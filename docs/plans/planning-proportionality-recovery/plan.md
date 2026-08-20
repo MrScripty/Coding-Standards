@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 4 parent-plan compaction
+**Current phase:** Milestone 5 acceptance and downstream pilot
 
-**Next slice:** compact the verification-engine plan from canonical package,
-ledger, issue, report, and generated-evidence records
+**Next slice:** run recovery checkpoints and rescore planning scenarios before
+selecting the bounded downstream ordinary-plan pilot
 
 **Acceptance status:** `pending`
 
@@ -24,12 +24,12 @@ current authority rather than historical verification data.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | An ordinary written plan requires an explicit path, operation, lifecycle state, bounded work, and serial shared-authority ownership without requiring a digest or transition envelope. | `contract` | `not-applicable` | `automated` | `pending` | pending |
-| A2 | A concurrent-plan-integration profile has tested inclusion and exclusion cases and applies only when outstanding proposals can become stale before integration. | `contract` | `not-applicable` | `automated` | `pending` | pending |
-| A3 | Machine-protocol requirements update every affected representation and executable surface; review-only semantic policy does not acquire unnecessary tooling. | `contract` | `not-applicable` | `review-and-automated` | `pending` | pending |
-| A4 | No verifier treats accepted historical narration in an active plan as canonical authority. | `integration` | `not-applicable` | `automated` | `pending` | pending |
-| A5 | Migration lifecycle derives from canonical package, disposition, lifecycle, or evidence records rather than duplicated active-plan prose. | `integration` | `not-applicable` | `automated` | `pending` | pending |
-| A6 | The parent and verification-engine plans contain only current decisions, milestone state, blockers, next work, acceptance state, and evidence links; displaced history remains available. | `contract` | `not-applicable` | `review-and-automated` | `pending` | pending |
+| A1 | An ordinary written plan requires an explicit path, operation, lifecycle state, bounded work, and serial shared-authority ownership without requiring a digest or transition envelope. | `contract` | `not-applicable` | `automated` | `satisfied` | Generic Planning and ordinary-plan fixtures |
+| A2 | A concurrent-plan-integration profile has tested inclusion and exclusion cases and applies only when outstanding proposals can become stale before integration. | `contract` | `not-applicable` | `automated` | `satisfied` | Concurrent-profile route fixtures |
+| A3 | Machine-protocol requirements update every affected representation and executable surface; review-only semantic policy does not acquire unnecessary tooling. | `contract` | `not-applicable` | `review-and-automated` | `satisfied` | Planning contract split and complete checkpoint |
+| A4 | No verifier treats accepted historical narration in an active plan as canonical authority. | `integration` | `not-applicable` | `automated` | `satisfied` | [Consumer dispositions](reports/active-plan-consumer-dispositions.tsv) and zero-consumer proof |
+| A5 | Migration lifecycle derives from canonical package, disposition, lifecycle, or evidence records rather than duplicated active-plan prose. | `integration` | `not-applicable` | `automated` | `satisfied` | Package, edge, numeric-retirement, and generated lifecycle records |
+| A6 | The parent and verification-engine plans contain only current decisions, milestone state, blockers, next work, acceptance state, and evidence links; displaced history remains available. | `contract` | `not-applicable` | `review-and-automated` | `satisfied` | Both compact active plans, their ledgers, and identifier-coverage review |
 | A7 | Declarative verification, the retained mixed checkpoint, scenario rescoring, and an ordinary-plan downstream pilot pass without invented transition tooling. | `system` | `downstream-repository` | `automated-and-manual` | `pending` | pending |
 
 ## Scope
@@ -94,7 +94,7 @@ current authority rather than historical verification data.
 | Prohibit active-plan narration from owning historical verification claims. | `workflow.planning` | Current plan and checker-consumer audit | Active plan as append-only execution database |
 | Compact through authority migration and structural ownership, not a hardcoded line limit. | This plan | Derived-data and maintenance constraints | Numeric plan-size gate |
 | Authorize partial numeric-candidate retirement through one accepted package and an immutable generated candidate-to-package mapping. | Verification engine | `PPR-006` and the 13 derived disappearances in four live checkers | Checker-retirement-only numeric lifecycle |
-| Resume the selected source-index generalization only after this recovery is accepted. | Verification-engine plan | Dependency sequencing | Immediate option-3 implementation |
+| Resume fresh-graph owner/package discovery only after this recovery is accepted. | Verification-engine plan | M6-I8/M6-I9 already accepted the complete source-index component | Stale source-index generalization handoff |
 
 ## Simplicity And Ownership Review
 
@@ -248,18 +248,18 @@ preserving all displaced history through links to canonical evidence.
 - [x] Compact the parent standards-restructure plan into current-state tables
   and canonical evidence links.
 - [x] Remove duplicated accepted-slice narration from the parent plan.
-- [ ] Compact the verification-engine plan into current-state tables and
+- [x] Compact the verification-engine plan into current-state tables and
   canonical evidence links.
-- [ ] Remove duplicated accepted-slice narration from the verification-engine
+- [x] Remove duplicated accepted-slice narration from the verification-engine
   plan.
-- [ ] Verify displaced evidence remains reachable and authoritative.
+- [x] Verify displaced evidence remains reachable and authoritative.
 
 **Acceptance gate:**
 
 - Structural and semantic review confirms that both plans expose current
   authority without historical narration or lost evidence.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 #### PPR-C3-G1 Generated Structure Projection Re-plan
 
@@ -293,6 +293,13 @@ artifacts remain unchanged at 120 nodes, 708 edges, and 120 components. Plan
 structure, Markdown links, numeric-retirement freshness, all 159 declarative
 suites, and the complete 116-checker mixed checkpoint pass.
 
+The verification-engine plan is now a 224-line current-state projection. Its
+latest accepted boundary derives from package orders 123 and 124, every
+historical `VE` and milestone identifier remains represented in canonical
+evidence, and exactly five generated structure rows lose obsolete child-plan
+documentation references. Graph artifacts remain unchanged at 120 nodes, 708
+edges, and 120 components.
+
 ### Milestone 5: Acceptance And Downstream Pilot
 
 **Goal:** Prove the corrected architecture and resume verifier migration from a
@@ -306,16 +313,17 @@ clean, usable planning boundary.
 
 **Tasks:**
 
-- [ ] Run declarative and retained mixed checkpoints.
+- [x] Run declarative and retained mixed checkpoints.
 - [ ] Rescore planning scenarios.
 - [ ] Run one ordinary-plan downstream pilot without transition tooling.
-- [ ] Re-admit the selected source-index generalization from fresh state.
+- [ ] Resume verification-engine fresh-graph package discovery from current
+  accepted state.
 
 **Acceptance gate:**
 
 - A1 through A7 are satisfied with linked evidence.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Blockers
 
