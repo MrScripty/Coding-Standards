@@ -1,0 +1,87 @@
+schema_version = 1
+id = "accessibility-focus-lifecycle"
+owner = "topics/accessibility.md"
+description = "Input modality and focus lifecycle outcomes from selected task, visibility, lifecycle, and capability facts without mechanism fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/accessibility/focus-lifecycle-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+modality = ["keyboard", "missing", "multiple", "selected"]
+sequence = ["complete", "contradictory", "missing"]
+focus = ["contradictory", "missing", "owned"]
+visibility = ["hidden", "missing", "perceivable"]
+lifecycle = ["complete", "missing"]
+capability = ["missing", "supported", "unsupported"]
+fallback = ["click-handler", "escape-key", "focus-trap", "none", "silent-loss", "visual-removal"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "sequence", op = "eq", value = "contradictory" },
+  { field = "focus", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "modality", op = "eq", value = "missing" },
+  { field = "sequence", op = "eq", value = "missing" },
+  { field = "focus", op = "eq", value = "missing" },
+  { field = "visibility", op = "eq", value = "missing" },
+  { field = "lifecycle", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "topics/accessibility.md"
+required = ["## Input Modality Equivalence", "## Focus Visibility And Authority", "## Focus Lifecycle", "does not establish another", "fixed trap"]
+prohibited = []
+
+[[checks]]
+id = "web-reference"
+type = "text"
+path = "reference/recipes/accessibility.md"
+required = ["## Web Focus Mechanisms", ":focus-visible", "outline-offset: 2px", "Escape"]
+prohibited = []
+
+[[checks]]
+id = "legacy-index-closure"
+type = "text"
+path = "ACCESSIBILITY-STANDARDS.md"
+required = ["## Keyboard And Focus Semantics (Migrated)", "[Accessibility](topics/accessibility.md)", "[Accessibility Recipes](reference/recipes/accessibility.md)"]
+prohibited = [":focus-visible"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0013", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "split"],
+  ["STD-0014", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "split"],
+  ["STD-0015", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "split"],
+  ["STD-0016", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "split"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0013", "STD-0014", "STD-0015", "STD-0016"]

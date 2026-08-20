@@ -4693,6 +4693,25 @@
   fallback is admitted.
 - Atomic M6-I16 acceptance is next.
 
+## 2026-08-20 - M6-I16 Accessibility Focus-Lifecycle Acceptance
+
+- Registered one five-check Accessibility suite for modality/focus decisions,
+  canonical owner language, web reference evidence, legacy-index closure, and
+  exact STD-0013 through STD-0016 dispositions. The decision engine derives all
+  fixture outcomes and cardinality.
+- Accepted train order 131, transferred two historical M6-I15 records to exact
+  suite evidence, accepted both current edges, and deleted the replaced Bash
+  checker. Interaction semantics remains a separately executed checker gate.
+- Whole-checker numeric lifecycle derives candidate retirement. Final generated
+  evidence contains 109 Bash checkers, 113 nodes, 683 edges, and 113
+  components.
+- Focused suite and independent-gate checks, package/edge authority, numeric
+  lifecycle, removal, generated freshness, plans, all 163 declarative suites,
+  complete checkpoint, mutation parity, and diff integrity pass. No engine
+  change, helper migration, false dependency, copied count, manual numeric
+  mapping, Bash repair, wrapper, compatibility path, or fallback remains.
+- Fresh-graph owner-coherent package selection is next.
+
 ## 2026-08-20 - M6-I15 Accessibility Name-And-Input Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its five

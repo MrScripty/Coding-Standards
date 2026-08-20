@@ -809,3 +809,8 @@ requires = []
 id = "accessibility-name-input"
 path = "evaluation/standards-effectiveness/suites/accessibility-name-input.toml"
 requires = []
+
+[[suites]]
+id = "accessibility-focus-lifecycle"
+path = "evaluation/standards-effectiveness/suites/accessibility-focus-lifecycle.toml"
+requires = []

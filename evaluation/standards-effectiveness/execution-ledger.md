@@ -12959,6 +12959,28 @@ components. No engine capability, helper migration, suite dependency, copied
 count, manual numeric mapping, Bash repair, wrapper, compatibility behavior, or
 fallback is admitted.
 
+## 2026-08-20 M6-I16 Accessibility Focus-Lifecycle Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Accessibility suite now owns modality and focus-lifecycle
+decisions, canonical and reference evidence, legacy closure, and exact
+STD-0013 through STD-0016 projection. Fixture cardinality is derived by the
+decision engine. Two historical M6-I15 records use exact suite evidence, while
+interaction semantics remains an independently executed checker gate.
+
+M6-I16 is accepted at train order 131, both current edge dispositions are
+accepted, and the replaced Bash checker is absent. Whole-checker numeric
+lifecycle derives retirement without a candidate map. Final evidence contains
+109 Bash checkers, 113 nodes, 683 edges, and 113 components.
+
+Focused suite and independent-gate checks, package/edge authority, numeric
+lifecycle, removal, generated freshness, both plan validators, all 163
+declarative suites, complete checkpoint, mutation parity, and diff integrity
+pass. No engine capability, helper migration, suite dependency, false edge,
+copied count, manual numeric mapping, Bash repair, wrapper, compatibility path,
+or fallback remains.
+
 ## 2026-08-20 M6-I15 Accessibility Name-And-Input Admission
 
 **Outcome:** admitted; atomic acceptance is next.

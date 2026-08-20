@@ -4148,6 +4148,25 @@ nodes, 691 edges, and 115 components without an engine change, helper
 migration, suite dependency, manual numeric mapping, Bash repair, wrapper,
 compatibility path, or fallback.
 
+### M6-I16 Accessibility Focus-Lifecycle Acceptance
+
+M6-I16 is accepted exactly as admitted. The registered
+`accessibility-focus-lifecycle` suite uses one derived decision table, three
+text checks, and one exact table projection. It owns modality and focus
+lifecycle outcomes, canonical and reference evidence, legacy closure, and
+STD-0013 through STD-0016 without storing fixture or graph counts.
+
+Interaction semantics remains independently executed through two accepted
+current edge records. Two historical M6-I15 records now point to the exact
+suite; the replaced checker is absent.
+
+Final evidence contains 109 Bash checkers, 113 nodes, 683 edges, and 113
+components. Focused owner and independent-gate checks, package/edge authority,
+numeric lifecycle, generated freshness, all 163 declarative suites, typed
+mutations, complete checkpoint, and diff integrity pass without an engine
+capability, helper migration, suite dependency, copied count, manual numeric
+mapping, Bash repair, wrapper, compatibility path, or fallback.
+
 ### M6-I16 Accessibility Focus-Lifecycle Admission
 
 Fresh graph review selected caller-free
