@@ -311,3 +311,30 @@
 - Result: `PPR-002`, `PPR-008`, and Milestone 4 are accepted. Milestone 5
   recovery checkpoints and scenario rescoring are the only admitted next
   slice.
+
+## 2026-08-20: Fixed Scenario Rescore
+
+- Operation: `continue`.
+- Boundary: applied the unchanged nine-dimension rubric to all seven unchanged
+  product-neutral scenarios. The frozen baseline and fixtures remain
+  byte-identical.
+- Result: the current library scores 122/126 (96.8%), compared with the frozen
+  43/126 (34.1%) baseline. Every scenario and every dimension improves or
+  preserves its baseline score.
+- Full-score evidence: objective fidelity, canonical ownership, artifact
+  separation, verification fidelity, current-state legibility, re-plan
+  containment, process proportionality, and contract evolution score `2` for
+  every scenario. S1, S4, and S5 also have complete explicit routing.
+- Partial applicability: S2, S3, S6, and S7 score `1` because desktop,
+  service/worker, general application, and hardware roles are not explicitly
+  routable. Generic owners remain authoritative; no nearby profile, legacy
+  route, or empty placeholder is selected as fallback.
+- Disposition: recorded `PPR-009` for parent Milestone 8 to decide optional
+  owner creation or fixture refinement from downstream evidence. The gap does
+  not prevent the recovery's ordinary-plan pilot.
+- Verification: recovery plan structure and report links pass; baseline and
+  fixture artifacts are unchanged; generated evidence is fresh; S1 routing,
+  planning admission, and concurrent-profile checks pass; all 159 declarative
+  suites pass; and diff integrity passes.
+- Next: select and run one bounded downstream ordinary-plan pilot without
+  transition tooling.

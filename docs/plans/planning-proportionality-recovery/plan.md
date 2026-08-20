@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 5 acceptance and downstream pilot
 
-**Next slice:** run recovery checkpoints and rescore planning scenarios before
-selecting the bounded downstream ordinary-plan pilot
+**Next slice:** select and run the bounded downstream ordinary-plan pilot
+without transition tooling
 
 **Acceptance status:** `pending`
 
@@ -30,7 +30,7 @@ current authority rather than historical verification data.
 | A4 | No verifier treats accepted historical narration in an active plan as canonical authority. | `integration` | `not-applicable` | `automated` | `satisfied` | [Consumer dispositions](reports/active-plan-consumer-dispositions.tsv) and zero-consumer proof |
 | A5 | Migration lifecycle derives from canonical package, disposition, lifecycle, or evidence records rather than duplicated active-plan prose. | `integration` | `not-applicable` | `automated` | `satisfied` | Package, edge, numeric-retirement, and generated lifecycle records |
 | A6 | The parent and verification-engine plans contain only current decisions, milestone state, blockers, next work, acceptance state, and evidence links; displaced history remains available. | `contract` | `not-applicable` | `review-and-automated` | `satisfied` | Both compact active plans, their ledgers, and identifier-coverage review |
-| A7 | Declarative verification, the retained mixed checkpoint, scenario rescoring, and an ordinary-plan downstream pilot pass without invented transition tooling. | `system` | `downstream-repository` | `automated-and-manual` | `pending` | pending |
+| A7 | Declarative verification, the retained mixed checkpoint, scenario rescoring, and an ordinary-plan downstream pilot pass without invented transition tooling. | `system` | `downstream-repository` | `automated-and-manual` | `pending` | [Scenario rescore](reports/scenario-rescore.md); downstream pilot pending |
 
 ## Scope
 
@@ -314,7 +314,7 @@ clean, usable planning boundary.
 **Tasks:**
 
 - [x] Run declarative and retained mixed checkpoints.
-- [ ] Rescore planning scenarios.
+- [x] Rescore planning scenarios.
 - [ ] Run one ordinary-plan downstream pilot without transition tooling.
 - [ ] Resume verification-engine fresh-graph package discovery from current
   accepted state.
