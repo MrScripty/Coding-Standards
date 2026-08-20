@@ -4566,3 +4566,17 @@
   manifest, generated evidence, suite, registry, Bash path, engine, fixture,
   standard, compatibility behavior, or fallback changed. Corrected M6-I10
   admission remains next.
+
+## 2026-08-20 - M6-I10 Architecture Directory-Template Admission
+
+- Admitted train order 125 under `topic.architecture` with the exact
+  preflighted semantic outcome and future acceptance write set.
+- Recorded both current Frontend view-model incidences as checker-backed
+  independent gates. No registry dependency or cross-owner package exists.
+- Kept the suite unregistered, the Architecture checker executable, and both
+  accepted M6-T13 historical subjects checker-backed until atomic acceptance.
+- Used whole-checker numeric lifecycle authority; no candidate package,
+  generated candidate mapping, or copied numeric identity was added.
+- Regenerated only generator-owned graph evidence. Package, edge, numeric,
+  retained-checker, declarative, plan, freshness, source-unchanged, and diff
+  verification pass. Atomic M6-I10 acceptance is next.

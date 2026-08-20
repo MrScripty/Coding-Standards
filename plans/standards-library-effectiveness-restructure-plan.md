@@ -5,8 +5,8 @@
 **Current phase:** Milestone 7 verification migration, M6-I10 Architecture
 directory-template replacement
 
-**Next slice:** admit the preflighted M6-I10 package and exact independent-gate
-lifecycle records without changing live execution authority
+**Next slice:** atomically accept admitted M6-I10, register its declarative
+suite, transfer historical checker evidence, and delete the Bash checker
 
 **Acceptance status:** `partial`
 

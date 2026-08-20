@@ -3811,3 +3811,10 @@ when an accepted checker subject becomes absent. The separate retirement
 package and generated mapping mechanism remains reserved for removing selected
 numeric expressions while their checker stays live. Admission therefore adds
 no copied candidate identity and no second package authority.
+
+M6-I10 is admitted at train order 125. Its two current executable
+representations both retain Frontend view-model lineage as a checker-backed
+independent gate. The proposed suite remains absent from the live registry and
+the Architecture checker remains executable. Admission adds no suite
+dependency, numeric candidate mapping, engine capability, standards mutation,
+compatibility path, or fallback. Atomic acceptance is next.

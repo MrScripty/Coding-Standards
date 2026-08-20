@@ -13054,3 +13054,18 @@ retirement package or generated candidate mapping. Exploratory manifest edits
 were removed before this recovery. No executable authority, generated evidence,
 suite, registry, Bash path, engine contract, compatibility behavior, or
 fallback changed.
+
+## 2026-08-20 M6-I10 Architecture Directory-Template Admission
+
+**Outcome:** admitted; atomic acceptance is next.
+
+Train order 125 owns the preflighted Architecture closure and its exact future
+write set. Both current Frontend view-model incidences remain checker-backed
+independent gates. The suite is unregistered, the checker remains executable,
+and historical M6-T13 evidence remains checker-backed until acceptance.
+
+Whole-checker numeric lifecycle supplies derived candidate retirement, so no
+candidate package or mapping was added. Regenerated graph evidence and focused
+package, edge, numeric, retained-checker, declarative, plan, source-unchanged,
+and diff gates pass without a false dependency, wrapper, compatibility path,
+or fallback.

@@ -4,15 +4,15 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** admit the preflighted M6-I10 Architecture directory-template
-package and exact independent-gate lifecycle records
+**Next slice:** atomically accept M6-I10, register its preflighted suite,
+transfer historical evidence, and delete the replaced Bash checker
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I8 and M6-I9 atomically replaced the complete
 source-index Bash component at train orders 123 and 124.
 
-**Latest admitted slice:** `none`; M6-I10 is selected but not admitted.
+**Latest admitted slice:** M6-I10 at train order 125.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -139,7 +139,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Admit preflighted M6-I10 under the accepted VE079 boundary |
+| 6 | Exceptional checks and Bash retirement | `Active` | Atomically accept admitted M6-I10 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -154,12 +154,13 @@ generated evidence.
 
 **Next work:**
 
-1. Admit the preflighted M6-I10 package with its exact write set and current
-   independent Frontend-gate edge records.
-2. Keep the suite unregistered, the checker executable, and historical M6-T13
-   evidence checker-backed until atomic acceptance.
-3. Regenerate only generator-owned evidence and verify package, edge, plan,
-   declarative, retained-checker, and diff integrity before acceptance.
+1. Materialize and register the preflighted M6-I10 suite without dependencies.
+2. Accept M6-I10 and both current independent-gate records, transfer the two
+   historical M6-T13 checker subjects to suite evidence, and delete only the
+   replaced Architecture checker.
+3. Regenerate generator-owned evidence and verify focused behavior, package,
+   edge, numeric lifecycle, plans, all declarative suites, removed paths,
+   protected inputs, complete checkpoint, and diff integrity.
 4. Add a reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
 5. Prepare disjoint admitted suite/checker changes concurrently when their
