@@ -1,6 +1,5 @@
 edge_type	source	target
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-rust-api-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-accessibility-name-input.sh
@@ -37,7 +36,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-root-router-evidence.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-api-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-async-boundary.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-unsafe-contracts.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh
@@ -47,7 +45,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-release-procedure-policy.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-root-router-evidence.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-api-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-async-boundary.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
@@ -289,7 +286,6 @@ executable_reference	evaluation/standards-effectiveness/verify-resilience-recove
 executable_reference	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh	evaluation/standards-effectiveness/verify-commit-authority.sh
 executable_reference	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh	evaluation/standards-effectiveness/verify-root-router-evidence.sh
 executable_reference	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-api-owner-contract.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-async-boundary.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-async-boundary.sh	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	evaluation/standards-effectiveness/check-metadata.sh
@@ -418,7 +414,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-network-transport-po
 helper_dependency	evaluation/standards-effectiveness/verify-plan-fixtures.sh	evaluation/standards-effectiveness/check-plan-structure.sh
 helper_dependency	evaluation/standards-effectiveness/verify-release-procedure-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
-helper_dependency	evaluation/standards-effectiveness/verify-rust-api-owner-contract.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-async-boundary.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	evaluation/standards-effectiveness/check-metadata.sh

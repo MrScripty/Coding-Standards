@@ -4387,3 +4387,21 @@
   all canonical evidence remain unchanged.
 - Package/edge authority and regenerated evidence pass at 119 Bash checkers,
   124 nodes, 665 edges, and 124 components. Atomic M6-I7 acceptance is next.
+
+## 2026-08-19 - M6-I7 Rust API Owner Contract Acceptance
+
+- Reconfirmed clean canonical `22d475c` and exact admitted incidence before
+  atomic acceptance.
+- Registered the preflighted six-check suite without dependencies, accepted
+  M6-I7 and both helper-edge records, removed one row-35 consumer, transferred
+  four M6-P8/M6-P9 historical gates to suite evidence, and deleted only the
+  obsolete Rust API checker.
+- Preserved the metadata helper unchanged for its other live consumers; it is
+  neither migrated nor represented as a suite dependency.
+- Regenerated final evidence at 118 Bash checkers, 123 nodes, 660 edges, and
+  123 components. Focused authority and row-35 reconciliation pass.
+- Full declarative, plan/lifecycle, removed-path, protected-source, complete-
+  checkpoint, freshness, and diff verification close the package. No source,
+  fixture, engine/schema, helper, copied mutable data, compatibility behavior,
+  false dependency, inferred owner, or fallback remains. Fresh-graph discovery
+  is next.

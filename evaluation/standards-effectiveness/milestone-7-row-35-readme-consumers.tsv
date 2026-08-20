@@ -4,7 +4,6 @@ evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh	
 evaluation/standards-effectiveness/verify-release-procedure-policy.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh	consumer-audit-infrastructure	none
 evaluation/standards-effectiveness/verify-root-router-evidence.sh	root-authority-verifier	none
-evaluation/standards-effectiveness/verify-rust-api-owner-contract.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-async-boundary.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	none	rust-profile-index

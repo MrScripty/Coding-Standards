@@ -4051,6 +4051,19 @@ engine remain unchanged. Atomic acceptance is authorized; no copied count,
 false dependency, compatibility behavior, inferred owner, or fallback is
 admitted.
 
+M6-I7 is accepted. The child plan registers the six-check Rust API owner suite
+without dependencies, accepts both shared-helper edge records, removes one
+row-35 consumer, transfers four historical independent gates to suite evidence,
+and deletes only the obsolete Rust API checker. The shared metadata helper and
+all canonical policy/fixture evidence remain unchanged.
+
+Focused authority, row-35 reconciliation, all declarative suites, both plans,
+lifecycle fixtures, complete retained-Bash checkpoint, generated freshness at
+118 checkers / 123 nodes / 660 edges / 123 components, removed-path,
+protected-source, and diff checks pass. No engine/helper migration, copied
+mutable data, false dependency, compatibility behavior, inferred owner, or
+fallback remains. Fresh-graph package discovery is next.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

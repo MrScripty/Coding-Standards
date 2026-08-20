@@ -3670,3 +3670,18 @@ admitted as `external-owned-artifact`; the helper remains shared by 32 other
 verifiers. The suite is unregistered and the Bash checker remains. Generated
 evidence contains 119 Bash checkers, 124 nodes, 665 edges, and 124 components;
 the only graph addition is package-manifest contract authority.
+
+### Accepted M6-I7 Rust API Owner Contract
+
+The six-check `rust-api-owner-contract` suite is registered without
+dependencies. M6-I7 and both historical external-helper records are accepted,
+the one row-35 Rust API consumer is absent, and four M6-P8/M6-P9 historical
+independent gates use registered suite evidence.
+
+The obsolete checker is absent while `check-metadata.sh` remains unchanged for
+its other consumers. Generated evidence contains 118 Bash checkers, 123 nodes,
+660 edges, and 123 components. The focused suite, authority contracts, row-35
+audit, all declarative suites, plan/lifecycle checks, complete checkpoint,
+freshness, removed-path, protected-source, and diff checks pass. No copied
+identity/count, helper migration, false dependency, compatibility behavior,
+inferred owner, or fallback remains.

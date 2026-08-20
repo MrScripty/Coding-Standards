@@ -779,3 +779,8 @@ requires = []
 id = "frontend-testing-lineage"
 path = "evaluation/standards-effectiveness/suites/frontend-testing-lineage.toml"
 requires = ["testing-frontend-evidence"]
+
+[[suites]]
+id = "rust-api-owner-contract"
+path = "evaluation/standards-effectiveness/suites/rust-api-owner-contract.toml"
+requires = []

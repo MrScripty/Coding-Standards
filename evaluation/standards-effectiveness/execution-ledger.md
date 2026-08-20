@@ -12920,3 +12920,19 @@ both live edge representations. No suite is registered; the checker, helper,
 row-35 consumer, four historical gates, sources, fixtures, engine/schema,
 compatibility behavior, and fallback remain unchanged. Generated evidence is
 fresh at 119 Bash checkers, 124 nodes, 665 edges, and 124 components.
+
+## 2026-08-19 M6-I7 Rust API Owner Contract Acceptance
+
+**Outcome:** accepted; Rust API owner Bash authority replaced declaratively.
+
+The registered six-check suite has no dependencies. M6-I7 and both shared-
+helper records are accepted, the one row-35 consumer is removed, all four
+M6-P8/M6-P9 historical independent gates name suite evidence, and the obsolete
+checker is absent. The metadata helper remains unchanged for other consumers.
+
+Focused authority and row-35 reconciliation pass. Final generated evidence
+contains 118 Bash checkers, 123 nodes, 660 edges, and 123 components. Full
+declarative, plan/lifecycle, complete-checkpoint, freshness, removed-path,
+protected-source, and diff verification pass. No source, fixture, engine,
+helper, copied data, compatibility behavior, false dependency, inferred owner,
+or fallback remains.

@@ -2,17 +2,17 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-I7 admitted; atomic acceptance next
+**Current phase:** Milestone 6: M6-I7 accepted; fresh-graph discovery
 
-**Next slice:** accept M6-I7 atomically by registering the preflighted suite,
-reconciling row-35 and historical gate evidence, and deleting only the obsolete
-Rust API checker.
+**Next slice:** derive the next owner-coherent package from the fresh post-M6-I7
+graph. Do not combine policy, executable tooling, and helper-retirement owners.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE077 froze the Rust API owner package boundary.
+**Latest accepted slice:** M6-I7 replaced the Rust API owner Bash checker with
+one dependency-free declarative suite.
 
-**Latest admitted slice:** M6-I7 Rust API Owner Contract at train order 122.
+**Latest admitted slice:** `none`; no package follows accepted M6-I7.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -8426,7 +8426,7 @@ evidence changes, or implementation leaves the frozen package boundary.
 
 ##### M6-I7 Rust API Owner Contract Admission
 
-**Status:** Admitted at train order 122; atomic acceptance is next.
+**Status:** Accepted at train order 122.
 
 Disposable preflight represents the retained checker with six existing generic
 checks: ordered typed decisions, native metadata closure, canonical profile
@@ -8465,6 +8465,21 @@ if the final incidence or lifecycle rows differ, the exact preflighted suite
 cannot be restored, row-35 reconciliation changes meaning, historical suite
 evidence cannot remain independent, or implementation leaves the admitted
 write set.
+
+Acceptance registers the preflighted six-check suite with no dependencies,
+accepts M6-I7 and both external-artifact records, removes the one Rust API
+row-35 consumer, transfers all four M6-P8/M6-P9 historical independent gates
+to `suite:rust-api-owner-contract`, and deletes only the obsolete checker. The
+shared metadata helper remains executable for its other consumers.
+
+Focused suite, package/edge/numeric authority, row-35 reconciliation, all 157
+declarative suites, generated freshness, both plan validators, lifecycle
+fixtures, removed-path and protected-source proof, the complete retained-Bash
+checkpoint, and diff integrity pass. Final generated evidence contains 118
+Bash checkers, 123 nodes, 660 edges, and 123 components. No source/fixture,
+engine/schema, helper, copied mutable data, false dependency, compatibility
+behavior, inferred owner, optional-missing path, or fallback remains. Fresh-
+graph package discovery is next.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 
