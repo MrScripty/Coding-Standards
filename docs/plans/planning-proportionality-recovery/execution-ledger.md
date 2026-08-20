@@ -147,3 +147,26 @@
   - the complete mixed checkpoint passed 116 retained Bash checkers.
 - Result: the uniform `PPR-C2` sub-slice is accepted. The 14 special consumers
   are the only admitted next slice.
+
+## 2026-08-20: Numeric Candidate-Retirement Re-plan
+
+- Operation: `continue` stopped at a replan trigger before integration.
+- Trigger: removing obsolete plan orchestration from the 14 special `PPR-C2`
+  consumers derived 13 missing numeric candidates across four checkers that
+  remain live. The numeric lifecycle correctly rejected all four paths because
+  its only disappearance authority is whole-checker retirement.
+- Rejected recoveries: immutable-baseline replacement, unexplained candidate
+  disappearance, preserved dead comparisons, broad checker exemptions, false
+  checker-retirement packages, and manually copied candidate IDs or counts.
+- Decision: admit `PPR-C2-N1` before resuming the shell slice. One explicit
+  package record owns the semantic decision, while a generator records the
+  exact currently missing baseline identities against that package. The
+  lifecycle accepts only those immutable identities and continues to reject
+  new or otherwise unexplained changes.
+- Required proof: direct positive and negative engine tests, idempotent and
+  freshness-checked generated evidence, unchanged immutable baseline and
+  classifications, focused numeric verification, all declarative suites, and
+  no shell cleanup integration before the capability is accepted.
+- Isolation: the unaccepted 14-checker cleanup remains outside canonical
+  `main`; this planning slice changes no engine, suite, generated evidence, or
+  checker behavior.

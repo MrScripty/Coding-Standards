@@ -4,9 +4,8 @@
 
 **Current phase:** Milestone 3: historical-authority migration
 
-**Next slice:** complete `PPR-C2` in the exact retained shell entrypoints that
-combine active-plan history with obsolete orchestration or duplicated
-plan-structure gates, preserving their non-plan behavior
+**Next slice:** implement `PPR-C2-N1`, the bounded numeric-candidate retirement
+contract required before the remaining special-shell cleanup can be accepted
 
 **Acceptance status:** `pending`
 
@@ -70,6 +69,9 @@ current authority rather than historical verification data.
   weaken an accepted contract.
 - Canonical tables derive migration status. The recovery adds no manually
   synchronized counts or duplicate status summaries.
+- Numeric-candidate retirement keeps package, owner, and acceptance authority
+  explicit while deriving exact retired candidate identities; no candidate ID,
+  source position, expression, or count is manually copied.
 - Active plans, Router, shared fixtures, suite registry, generated artifacts,
   and this plan remain serial integration-owner files.
 
@@ -91,6 +93,7 @@ current authority rather than historical verification data.
 | Keep diagnostics semantically distinguishable while allowing manual records and tools to use representations appropriate to their medium. | Owning workflow/profile | Manual and automated consumers | Mandatory serialized diagnostic representation |
 | Prohibit active-plan narration from owning historical verification claims. | `workflow.planning` | Current plan and checker-consumer audit | Active plan as append-only execution database |
 | Compact through authority migration and structural ownership, not a hardcoded line limit. | This plan | Derived-data and maintenance constraints | Numeric plan-size gate |
+| Authorize partial numeric-candidate retirement through one accepted package and an immutable generated candidate-to-package mapping. | Verification engine | `PPR-006` and the 13 derived disappearances in four live checkers | Checker-retirement-only numeric lifecycle |
 | Resume the selected source-index generalization only after this recovery is accepted. | Verification-engine plan | Dependency sequencing | Immediate option-3 implementation |
 
 ## Simplicity And Ownership Review
@@ -204,6 +207,8 @@ change its consumers to canonical records.
 
 - Exact consumer, suite, fixture, package, disposition, lifecycle, evidence,
   and generated paths admitted from the Milestone 1 inventory.
+- Bounded numeric-lifecycle engine, generator, tests, configuration, authority,
+  and generated-evidence paths admitted by `PPR-C2-N1`.
 - This plan and ledger.
 
 **Tasks:**
@@ -212,6 +217,8 @@ change its consumers to canonical records.
   current owner, fixture, disposition, package, and decision checks.
 - [x] Remove plain historical assertions from every `PPR-C2` entrypoint whose
   active-plan consumption has no orchestration or structure-gate control flow.
+- [ ] Add `PPR-C2-N1` package-scoped numeric-candidate retirement with generated
+  exact identities, immutable-baseline preservation, and typed negative cases.
 - [ ] Remove active-plan consumption from the remaining `PPR-C2` entrypoints
   with obsolete orchestration or duplicated plan-structure gates.
 - [x] Keep shared authority under serial integration.
