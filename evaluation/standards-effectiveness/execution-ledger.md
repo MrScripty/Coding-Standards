@@ -12885,3 +12885,21 @@ sources, complete checkpoint, generated freshness at 119 Bash checkers / 124
 nodes / 664 edges / 124 components, and diff integrity pass. No canonical
 evidence rewrite, copied mutable data, engine/schema feature, bridge,
 compatibility behavior, false dependency, inferred owner, or fallback remains.
+
+## 2026-08-19 VE077 Rust API Owner Contract Package Re-plan
+
+**Outcome:** owner-local M6-I7 planned; no package admitted.
+
+Fresh post-M6-I6 graph review found four caller-free verifiers with only helper
+dependencies. Rust API Owner Contract is the only bounded policy package whose
+helper remains shared by many live consumers. Decision Traceability owns its
+executable helper, and both Source Index candidates share the Bash helper they
+test, so those retirement boundaries remain separate.
+
+M6-I7 will derive exact row-20 child-1 identities and dispositions from current
+decomposition, owner-validation, and disposition authority. Acceptance removes
+one row-35 consumer, transfers four historical independent gates to registered
+suite evidence, and deletes only the Rust API checker. The shared metadata
+helper remains an external artifact. No package, suite, registry, manifest,
+Bash, helper, source, fixture, engine/schema, compatibility behavior, or
+fallback changes in this planning slice.

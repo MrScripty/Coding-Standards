@@ -3627,3 +3627,25 @@ and edge authority, numeric lifecycle, all 156 declarative suites, plans,
 lifecycle, removed paths, protected sources, complete checkpoint, freshness,
 and diff integrity pass. No copied mutable data, engine feature, bridge,
 compatibility path, false dependency, inferred owner, or fallback remains.
+
+### VE077 Rust API Owner Contract Candidate
+
+Fresh generated evidence contains 119 Bash checkers. No retained verifier is
+both executable-caller-free and dependency-free. The caller-free helper-only
+candidates are Decision Traceability, Rust API Owner Contract, Source Index
+Closure Engine, and Source Index Closures.
+
+Rust API Owner Contract is the only bounded policy package in that set whose
+helper remains materially shared: `check-metadata.sh` still has 32 other live
+verifier consumers after excluding Rust API. Decision Traceability includes
+the executable template helper it verifies; both source-index candidates share
+the Bash helper they test. Those boundaries require later tooling/helper
+retirement review and are not combined with policy migration.
+
+The selected Rust API checker has zero executable inbound callers, one shared
+helper dependency, one row-35 consumer record, and four accepted historical
+independent-gate records. Its observable contract is expressible with existing
+decision, metadata-graph, text, Markdown-section, relation, and keyed-relation
+checks. Row 20 child 1 and current owner/disposition tables provide exact
+derived identity, so no identifier list or count is needed. M6-I7 disposable
+preflight precedes train-order-122 admission.

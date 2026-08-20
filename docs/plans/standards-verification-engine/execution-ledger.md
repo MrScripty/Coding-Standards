@@ -4349,3 +4349,21 @@
   partial authority, bridge, compatibility behavior, inferred owner, false
   dependency, optional-missing behavior, or fallback remains. Fresh-graph
   package discovery is next.
+
+## 2026-08-19 - VE077 Rust API Owner Contract Package Re-plan
+
+- Reconfirmed clean canonical `324de7f` before fresh-graph review.
+- Found no fully dependency-free caller-free verifier. Classified the four
+  helper-only caller-free candidates and selected only the Rust API owner
+  contract: its metadata helper remains shared, while the other candidates own
+  executable tooling or shared-helper retirement boundaries.
+- Froze M6-I7 at train order 122 under `profile.language.rust.api`. Exact
+  identity and disposition must derive from row 20 child 1, row-20 owner
+  validation, and current dispositions without copied IDs or counts.
+- Acceptance will remove one row-35 consumer, transfer four M6-P8/M6-P9
+  historical independent gates to suite evidence, and delete only the Rust API
+  checker. The metadata helper remains an external artifact, not a suite
+  dependency.
+- No package is admitted and no suite, registry, manifest, Bash, helper,
+  standards, fixture, engine/schema, compatibility behavior, or fallback
+  changes in this planning slice. Disposable preflight is next.

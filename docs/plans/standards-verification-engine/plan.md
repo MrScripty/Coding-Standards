@@ -2,16 +2,16 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-I5 and M6-I6 accepted; fresh-graph discovery
+**Current phase:** Milestone 6: VE077 accepted; M6-I7 disposable preflight
 
-**Next slice:** derive the next owner-local package from the fresh post-M6-I6
-inventory and graph. Do not reuse pre-acceptance topology or infer semantic
-ownership from graph incidence.
+**Next slice:** preflight and admit M6-I7 Rust API Owner Contract at train
+order 122. Do not register its suite or change lifecycle evidence during
+admission.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I5 and M6-I6 replaced the Frontend evidence and
-lineage Bash closure with two suites and one explicit registry dependency.
+**Latest accepted slice:** VE077 froze the next owner-local package from the
+fresh post-M6-I6 graph without admitting it.
 
 **Latest admitted slice:** `none`; no package follows accepted M6-I6.
 
@@ -8376,6 +8376,54 @@ evidence mutation, copied mutable data, engine/schema feature, partial
 authority, bridge, wrapper, alias, compatibility behavior, inferred owner,
 optional-missing path, false dependency, or fallback remains. Fresh-graph
 package discovery is next.
+
+##### VE077 Rust API Owner Contract Package Re-plan
+
+**Status:** Accepted planning decision; M6-I7 disposable preflight is next.
+
+The fresh post-M6-I6 graph contains no verifier that is both executable-
+caller-free and dependency-free. Four caller-free candidates have only helper
+dependencies, but only `verify-rust-api-owner-contract.sh` is a bounded policy
+package whose helper remains shared by other live consumers. Decision
+traceability owns executable repository tooling and its sole helper, while the
+two source-index candidates test one shared Bash helper and require a separate
+helper-retirement boundary. Combining those owners would trade lower commit
+count for weaker ownership and reviewability.
+
+M6-I7 will own a new `rust-api-owner-contract` suite under
+`profile.language.rust.api` at train order 122. The suite must preserve the
+14-case typed mechanism decision, Rust API metadata closure, canonical owner
+policy, former-source route, bounded removal of the former Public Contract
+Traits and Parameter Ergonomics defaults, and exact row-20 child-1 lineage.
+Identity and disposition must derive from execution-decomposition row 20 child
+1, row-20 owner validation, and current consolidation dispositions; the suite
+must not copy `STD-0706`, `STD-0713`, `STD-0714`, or a count.
+
+The metadata helper remains an independently owned external artifact because
+32 other live verifier consumers still require it. Admission records the
+Rust API checker's executable-reference and helper-dependency representations
+without editing the helper. Acceptance removes the checker's one row-35 README
+consumer record, transfers the four accepted M6-P8/M6-P9 historical
+independent-gate records to `suite:rust-api-owner-contract`, and deletes only
+the obsolete checker. No registry dependency is authorized: metadata closure
+is represented natively by the suite, and the historical callers are already
+retired.
+
+Disposable preflight must prove the positive suite and isolated typed failures
+for decision, metadata, canonical text, both bounded legacy sections, row-20
+identity, row-20 owner/disposition, and accepted lifecycle transfer inputs.
+Every mutation target must be restored and every disposable suite, registry,
+and test artifact removed before admission. Admission may update only package
+and edge authority plus generated and planning projections; the suite remains
+unregistered and the Bash checker remains executable.
+
+No engine/schema capability, standards or fixture rewrite, helper migration,
+copied identifier/count, Bash edit, wrapper, alias, compatibility behavior,
+inferred owner, false dependency, optional-missing behavior, or fallback is
+authorized. Re-plan if existing generic checks cannot derive both identity and
+disposition, row-35 reconciliation requires a schema change, the helper is no
+longer shared, final incidence differs, mutation parity requires canonical
+evidence changes, or implementation leaves the frozen package boundary.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

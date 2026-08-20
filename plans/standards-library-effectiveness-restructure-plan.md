@@ -4015,6 +4015,26 @@ pass. No canonical evidence rewrite, copied mutable data, engine feature,
 partial authority, bridge, compatibility behavior, false dependency, inferred
 owner, or fallback remains. Fresh-graph package discovery is next.
 
+### VE077 Rust API Owner Contract Package Re-plan
+
+The child verification plan selects one owner-local Rust API package from the
+fresh post-M6-I6 graph. The checker is caller-free and depends only on the
+shared metadata helper; that helper remains independently owned by 32 other
+live verifier consumers. Decision Traceability and Source Index helper
+closures remain separate tooling boundaries and are not batched with policy.
+
+M6-I7 will derive row-20 child-1 identity and disposition from current
+decomposition, owner-validation, and disposition authority rather than copying
+three identifiers or a count. Acceptance removes the checker's row-35 consumer
+record, transfers four M6-P8/M6-P9 historical independent gates to registered
+suite evidence, and deletes only the obsolete Rust API checker. No suite
+dependency, helper migration, engine feature, standards or fixture rewrite,
+compatibility behavior, inferred owner, or fallback is authorized.
+
+No package is admitted by this replan. Disposable positive and mutation
+preflight must pass before train-order-122 admission, with every mutation
+target restored and every temporary suite/registry artifact removed.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream
