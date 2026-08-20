@@ -4441,3 +4441,21 @@
   edge authority, engine/schema, suite, registry, fixture, standards, source,
   Bash path, compatibility behavior, or fallback. M6-C5 resumes only after the
   corrected complete checkpoint passes.
+
+## 2026-08-19 - M6-C5 Source-Index Closure Capability Acceptance
+
+- Reconfirmed clean canonical `6b6b511` before the shared-contract slice.
+- Added one bounded Python `source_index_closure` check with six explicit
+  repository path inputs and no command, callback, optional source, alternate
+  schema, compatibility representation, or fallback.
+- Derived all fixture/source/heading/route/line/identifier membership at run
+  time. Strengthened frozen lineage from equal counts to exact nonempty owner-
+  map/disposition ID-set equality.
+- Added direct tests for a nested positive, nineteen typed contract failures,
+  duplicate source ownership, and strict configuration containment. All 285
+  engine tests pass.
+- A read-only direct invocation validates all seven canonical source fixtures.
+  No live suite, registry, fixture, source, manifest, package/edge record,
+  generated graph, Bash path, evaluation ledger, or parent plan changed.
+- M6-I8/M6-I9 disposable parity preflight is next. Live authority remains
+  wholly Bash-owned until atomic component acceptance.

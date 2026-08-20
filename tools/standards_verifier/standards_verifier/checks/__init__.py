@@ -28,6 +28,7 @@ from .numeric_lifecycle import parse_numeric_lifecycle_check
 from .path_state import parse_path_state_check
 from .reference_inventory import parse_reference_inventory_check
 from .relation import parse_relation_check
+from .source_index_closure import parse_source_index_closure_check
 from .table import parse_table_check
 from .text import parse_text_check
 
@@ -91,6 +92,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_relation_check(raw, suite_id)
     if kind == "numeric_audit_lifecycle":
         return parse_numeric_lifecycle_check(raw, suite_id)
+    if kind == "source_index_closure":
+        return parse_source_index_closure_check(raw, suite_id)
     raise EngineError(
         Diagnostic(
             code="CONFIG.UNKNOWN_CHECK",

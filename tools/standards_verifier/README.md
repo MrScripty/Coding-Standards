@@ -267,6 +267,33 @@ list, range, count, mode, composite or many-valued join, implicit column or
 filter, query language, callback, command, package-specific branch,
 compatibility representation, Bash execution, or fallback.
 
+The `source_index_closure` check validates a directory of independently owned
+source-index fixtures against explicitly configured closure-manifest, corpus,
+owner-map, disposition, and Router paths. Each discovered fixture directory
+must contain exactly `contract.tsv`, `headings.tsv`, `routes.tsv`, and
+`prohibited.tsv`; loose files, symlinks, partial directories, duplicate source
+registrations, malformed tables, and unknown configuration are invalid. The
+check derives fixture membership and all source, heading, route, line, and
+identifier totals at execution time.
+
+For each source, the check requires one eligible immutable-manifest row, one
+complete `derived` corpus row, an available canonical owner, exact ordered
+fence-aware ATX headings, an explicit positive line budget, and at least one
+unique route and prohibited literal. Every source-relative route href must
+remain repository-contained, resolve to its explicit canonical target and
+anchor, and occur as an exact Markdown destination. Generic and source-owned
+legacy-authority text is prohibited, required non-authority wording must remain,
+the Router cannot select the former source, and the nonempty owner-map and
+disposition identifier sets must be exactly equal. Equal numeric totals are not
+accepted as identity evidence.
+
+Configuration supplies only repository paths to the existing policy evidence.
+Per-source fixtures explicitly own source, title, line budget, ordered headings,
+route name/target/href, and prohibited literals. The check has no copied current
+count, fixture-list field, inferred path, optional source, alternate schema,
+regular-expression configuration, command action, callback, Bash execution,
+compatibility representation, or fallback.
+
 Numeric count-authority migration uses a generated immutable lexical snapshot,
 not a manually maintained candidate manifest. The snapshot derives all
 mechanical candidate facts and totals from canonical Bash verifier inventory.

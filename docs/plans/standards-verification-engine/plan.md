@@ -8590,6 +8590,36 @@ source index, Bash path, compatibility behavior, or fallback. Generated
 freshness, both plan checks, lifecycle fixtures, all declarative suites, and the
 complete retained-Bash checkpoint must pass before M6-C5 resumes.
 
+##### M6-C5 Source-Index Closure Capability
+
+**Status:** Accepted as a shared engine capability; M6-I8/M6-I9 disposable
+preflight is next.
+
+The engine now registers one strict `source_index_closure` check. Its
+configuration accepts only the source-fixture root and five canonical evidence
+paths: closure manifest, corpus, generated owner map, exact dispositions, and
+Router. All paths are repository-contained and no configured command, callback,
+mode, default, optional source, or alternate schema exists.
+
+The check discovers fixture directories deterministically and requires exactly
+the existing four-file contract in each. It derives source, heading, route,
+line, and identifier membership. Explicit fixture values remain policy inputs,
+while mutable inventory totals are never stored. Exact nonempty owner-map and
+disposition ID sets must match; equal counts cannot satisfy the check.
+
+Direct tests cover one nested positive source and nineteen typed malformed,
+unavailable, escaping, duplicate, drift, authority, and identity failures, plus
+duplicate source ownership and strict configuration containment. A read-only
+canonical invocation validates all seven existing source fixtures without any
+fixture or source mutation. All 285 engine tests pass.
+
+M6-C5 changes no live suite, registry, fixture, source index, migration
+manifest, package/edge authority, generated graph, Bash verifier/helper,
+evaluation ledger, or parent plan. Existing live source-index authority remains
+entirely Bash-owned until dependency-closed M6-I8/M6-I9 preflight and atomic
+acceptance. No wrapper, bridge, duplicate live authority, compatibility path,
+or fallback is introduced.
+
 ##### M6-U0 Concurrent Semantic Preparation Wave
 
 **Status:** Planned; package preflight follows M6-I1 acceptance.
