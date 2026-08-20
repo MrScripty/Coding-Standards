@@ -4126,3 +4126,24 @@ numeric lifecycle, generated freshness, all 161 declarative suites, typed
 mutations, complete checkpoint, and diff integrity pass without an engine
 capability, helper migration, suite dependency, copied count, manual numeric
 mapping, Bash repair, wrapper, compatibility path, or fallback.
+
+### M6-I15 Accessibility Name-And-Input Admission
+
+Fresh graph review selected caller-free
+`verify-accessibility-name-input.sh`, the shortest remaining frontier
+checker. Its name/input decision table, canonical owner language, web
+reference, legacy-index closure, and STD-0017 through STD-0019 dispositions
+form one Accessibility-owned contract.
+
+The nested focus-lifecycle call is execution coupling, not part of that
+contract. Two current edges preserve focus lifecycle as an independent checker
+gate, while two historical M6-R1 records will transfer to exact suite evidence.
+
+Disposable final state uses five generic checks, derives all 14 decisions
+without a copied count, and passes all 162 declarative suites plus the complete
+checkpoint at 110 Bash checkers, 114 nodes, 686 edges, and 114 components.
+Typed decision, legacy-content, and disposition mutations pass. M6-I15 is
+admitted at train order 130; admission evidence contains 111 Bash checkers, 115
+nodes, 691 edges, and 115 components without an engine change, helper
+migration, suite dependency, manual numeric mapping, Bash repair, wrapper,
+compatibility path, or fallback.

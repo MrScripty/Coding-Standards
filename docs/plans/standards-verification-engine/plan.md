@@ -4,15 +4,17 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** audit the fresh post-M6-I14 graph and select the smallest
-owner-coherent package
+**Next slice:** atomically accept the admitted M6-I15 Accessibility name and
+input migration
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I14 moved directory README closure into one
 Documentation-owned suite and removed the replaced Bash checker.
 
-**Latest admitted slice:** none
+**Latest admitted slice:** M6-I15 moves accessible-name and input-relationship
+decisions, canonical and reference text, legacy closure, and exact disposition
+evidence into one Accessibility-owned declarative suite.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -120,10 +122,10 @@ At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
 **Accepted boundary:** package records are accepted through M6-I14 at train
-order 129.
+order 129. M6-I15 is admitted at train order 130.
 
 **Current derived state:** 161 registered declarative suites, 111 retained Bash
-checkers, 115 executable nodes, 689 conservative reference edges, and 115
+checkers, 115 executable nodes, 691 conservative reference edges, and 115
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -137,7 +139,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Fresh graph review after accepted M6-I14 |
+| 6 | Exceptional checks and Bash retirement | `Active` | Accept admitted M6-I15 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -147,12 +149,13 @@ helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
 **Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
-is accepted. M6-I14 is accepted after final-state proof.
+is accepted. M6-I15 is admitted after final-state proof.
 
 **Next work:**
 
-1. Audit the fresh graph and select the smallest owner-coherent package from
-   reviewed lifecycle and dependency evidence.
+1. Accept M6-I15 exactly as admitted: register the Accessibility suite,
+   preserve focus lifecycle as an independent checker gate, transfer
+   historical evidence, and delete the replaced Bash checker.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or

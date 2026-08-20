@@ -4675,6 +4675,24 @@
   second suite, dependency, wrapper, compatibility behavior, or fallback.
 - Fresh-graph owner-coherent package selection is next.
 
+## 2026-08-20 - M6-I15 Accessibility Name-And-Input Admission
+
+- Fresh graph review selected the shortest caller-free checker. Its five
+  semantic responsibilities share `topics/accessibility.md` ownership; its
+  nested focus-lifecycle execution remains a separate gate.
+- Admitted train order 130 with two typed current edge dispositions, two
+  historical M6-R1 evidence transfers, one new registered suite, checker
+  deletion, whole-checker numeric retirement, and generated graph refresh.
+- Disposable final state passes 162 declarative suites and the complete mixed
+  checkpoint at 110 Bash checkers, 114 nodes, 686 edges, and 114 components.
+  Decision, legacy-content, and exact-disposition mutations return typed
+  failures.
+- Admission evidence contains 111 Bash checkers, 115 nodes, 691 edges, and 115
+  components. No engine capability, helper migration, suite dependency, copied
+  count, manual numeric mapping, Bash repair, wrapper, compatibility path, or
+  fallback is admitted.
+- Atomic M6-I15 acceptance is next.
+
 ## 2026-08-20 - M6-I14 Documentation Directory-README Acceptance
 
 - Registered one four-check Documentation suite for directory README
