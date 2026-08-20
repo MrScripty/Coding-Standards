@@ -3,21 +3,18 @@
 **Plan status:** `Active`
 
 **Current phase:** Milestone 6: M6-I2 security-repair evidence retirement
-admitted at train order 117
+accepted; fresh-graph package audit next
 
-**Next slice:** accept M6-I2 by deleting only the obsolete security-repair
-checker, accepting its one incident-edge disposition, regenerating the frozen
-temporary graph, and proving the retained immutable evidence plus complete
-checkpoint. Do not create a replacement suite or edit retained Bash.
+**Next slice:** audit the fresh post-M6-I2 reference model and derive the next
+bounded owner-coherent package without changing its temporary schema. Recompute
+incident references, lifecycle authority, and representability from current
+inputs; do not infer ownership or dependencies from graph shape.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE072 legacy-reference semantic fence. It preserves
-the current migration protocol without legacy-script churn and requires its
-wholesale deletion when canonical Bash verification inventory reaches zero.
-
-**Latest admitted package:** M6-I2 reviewed retirement of a completed
-historical migration gate without a permanent declarative replacement.
+**Latest accepted slice:** M6-I2 reviewed retirement of a completed historical
+migration gate without a permanent declarative replacement. Immutable repair
+evidence and the independently owned IPC gate remain intact.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -7935,7 +7932,7 @@ evidence, and diff integrity pass.
 
 ##### M6-I2 Security Repair Evidence Separation
 
-**Status:** Admitted at train order 117; acceptance is next.
+**Status:** Accepted at train order 117.
 
 The 71-line security-repair checker validates a completed migration procedure:
 the exact four-package repair inventory, its former serial/parallel preparation
@@ -7973,6 +7970,17 @@ incident executable edge appears, the IPC gate cannot remain independent, a
 current policy consumer of the repair procedure is discovered, or acceptance
 requires a suite, engine/schema change, compatibility path, fallback, or edit
 outside the admitted write set.
+
+Acceptance transitions only M6-I2 and its one edge row, deletes the obsolete
+checker, and regenerates the frozen temporary projections. The immutable repair
+TSV and selected-design report are byte-identical. IPC validation remains an
+independently executable retained gate. Package and edge authority, generated
+freshness, all declarative suites, both plan authorities, lifecycle fixtures,
+removed-path proof, the complete retained-Bash checkpoint, protected evidence,
+and diff integrity pass. No replacement suite, registry dependency, engine or
+schema change, Bash wrapper, annotation, compatibility route, copied mutable
+total, inferred owner, alternate entrypoint, or fallback remains. Fresh-graph
+package discovery is next.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

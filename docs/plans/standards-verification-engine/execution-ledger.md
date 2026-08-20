@@ -4116,3 +4116,19 @@
   protected-evidence, and diff verification pass. No checker, suite, registry,
   engine, standard, workflow, compatibility behavior, or fallback changed.
   M6-I2 acceptance is next.
+
+## 2026-08-19 - M6-I2 Security Repair Retirement Acceptance
+
+- Reconfirmed clean canonical `32f57b4` before the acceptance slice.
+- Transitioned only train-order 117 and its sole incident edge to accepted;
+  deleted the obsolete security-repair checker without a replacement suite,
+  wrapper, alias, alternate entrypoint, compatibility route, or fallback.
+- Preserved the repair TSV and selected-design report byte-identical. IPC
+  payload validation remains an independently owned and executable gate.
+- Regenerated the temporary inventory and graph from final inputs without
+  copying their mutable totals into plan authority.
+- Package and edge contracts, generated freshness, all declarative suites,
+  plan validators, lifecycle fixtures, removed path, complete retained-Bash
+  checkpoint, protected evidence, and diff integrity pass. Engine, schema,
+  registry, suites, standards, workflows, and retained Bash remain unchanged.
+  Fresh-graph package discovery is next.

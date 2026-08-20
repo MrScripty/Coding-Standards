@@ -3842,6 +3842,20 @@ TSV/report unchanged, regenerate the temporary graph, and run the complete
 checkpoint. It must not add an engine capability, suite, Bash annotation,
 wrapper, compatibility route, copied total, inferred owner, or fallback.
 
+### M6-I2 Security Repair Retirement Acceptance
+
+The child verification plan accepted train-order 117 and its sole incident
+edge. The obsolete repair checker is deleted without a declarative replacement,
+wrapper, alias, alternate entrypoint, compatibility route, or fallback. Its
+immutable TSV and selected-design report remain byte-identical, while IPC
+payload validation remains independently owned and executable.
+
+The temporary inventory and graph are regenerated from final inputs; their
+mutable totals are not copied into plan authority. Focused lifecycle checks,
+all declarative suites, both plan validators, generated freshness, removed-path
+proof, protected historical evidence, and the complete retained-Bash checkpoint
+pass. Fresh-graph package discovery may continue under VE072.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

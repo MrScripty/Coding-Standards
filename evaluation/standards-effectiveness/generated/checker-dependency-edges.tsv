@@ -1,5 +1,4 @@
 edge_type	source	target
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-milestone-7-security-checker-repair-replan.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
@@ -34,7 +33,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-18-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-security-checker-repair-replan.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh
@@ -270,7 +268,6 @@ executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-8
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh	evaluation/standards-effectiveness/check-plan-structure.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
-executable_reference	evaluation/standards-effectiveness/verify-milestone-7-security-checker-repair-replan.sh	evaluation/standards-effectiveness/verify-ipc-payload-validation.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	evaluation/standards-effectiveness/check-plan-structure.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh

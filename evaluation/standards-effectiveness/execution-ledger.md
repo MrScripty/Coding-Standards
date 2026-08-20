@@ -12676,3 +12676,19 @@ admitted manifests derive their contract references and leave executable
 topology unchanged. Current totals remain generated evidence rather than copied
 admission authority. No source, suite, engine, schema, registry, standard,
 workflow, compatibility behavior, or fallback changes in admission.
+
+## 2026-08-19 M6-I2 Security Repair Retirement Acceptance
+
+**Outcome:** accepted; fresh-graph package discovery is next.
+
+Train-order 117 and its sole historical edge are accepted. The obsolete repair
+checker is absent; its immutable TSV/report evidence remains byte-identical,
+and IPC payload validation remains independently executable under its existing
+owner. Generated evidence derives the changed live inventory and graph without
+copying mutable totals into acceptance authority.
+
+No declarative replacement, registry dependency, engine or schema feature,
+Bash wrapper, compatibility path, alternate entrypoint, inferred owner, or
+fallback exists. Focused lifecycle authority, all declarative suites, both plan
+validators, generated freshness, the complete retained-Bash checkpoint,
+protected evidence, removed-path proof, and diff integrity pass.
