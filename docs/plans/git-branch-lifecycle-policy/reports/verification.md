@@ -2,7 +2,7 @@
 
 ## Policy And Scenario Evidence
 
-- `commit-consolidation-dispositions`: 21 checks passed, including all 22
+- `commit-consolidation-dispositions`: 23 checks passed, including all 29
   branch-lifecycle decision rows.
 - `policy-semantic-impact`: passed audited-owner schema, relation, evidence,
   and suite-closure checks.
@@ -48,7 +48,7 @@ The bounded review correction passed:
 
 - 35 graph-engine tests and 326 standards-verifier tests;
 - all 164 registered declarative suites;
-- `commit-consolidation-dispositions` with 23 checks and 28 lifecycle rows,
+- `commit-consolidation-dispositions` with 23 checks and 29 lifecycle rows,
   each independently asserting five outcomes;
 - `plan-template-projection` with separate concurrent-work and repository-
   isolation section checks;
@@ -61,3 +61,10 @@ The bounded review correction passed:
 
 No branch, worktree, registration, or commit was removed, rewritten, or
 discarded during the correction.
+
+The lifecycle rows distinguish replacement state explicitly. Before a
+replacement exists, selective acceptance chooses cherry-pick without requiring
+lineage evidence. After replacement creation, missing mapping blocks terminal
+acceptance and cleanup; recorded mapping permits them. Long-lived contract
+validation does not create an integration decision when no proposal is being
+integrated.

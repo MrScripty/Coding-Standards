@@ -80,12 +80,13 @@ any = [
 id = "branch-lifecycle-decisions"
 type = "decision"
 path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-input_columns = ["context", "isolation", "proposal", "target", "visibility", "topology", "terminal", "long_lived_contract", "ownership", "worktree", "cleanup_basis", "discard_authority", "mapping", "prepared_in_worktree"]
+input_columns = ["context", "isolation", "proposal", "replacement_state", "target", "visibility", "topology", "terminal", "long_lived_contract", "ownership", "worktree", "cleanup_basis", "discard_authority", "mapping", "prepared_in_worktree"]
 [checks.domains]
 case = ["*"]
 context = ["complete", "contradictory", "missing"]
 isolation = ["material", "none"]
 proposal = ["complete", "concurrent", "none", "selective"]
+replacement_state = ["created", "not-applicable", "not-created"]
 target = ["advanced", "current-descendant", "independent", "not-applicable"]
 visibility = ["long-lived", "not-applicable", "private", "shared"]
 topology = ["durable", "linear", "not-applicable"]
@@ -131,8 +132,6 @@ outcome = "typed-unavailable"
 [checks.outputs.rules.when]
 any = [
   { field = "context", op = "eq", value = "missing" },
-  { all = [{ field = "visibility", op = "eq", value = "long-lived" }, { field = "long_lived_contract", op = "eq", value = "incomplete" }] },
-  { all = [{ field = "proposal", op = "eq", value = "selective" }, { field = "mapping", op = "eq", value = "missing" }] },
 ]
 [[checks.outputs.rules]]
 outcome = "refuse-shared-rebase"
@@ -149,7 +148,7 @@ all = [{ field = "topology", op = "eq", value = "durable" }, { field = "proposal
 [[checks.outputs.rules]]
 outcome = "cherry-pick"
 [checks.outputs.rules.when]
-all = [{ field = "proposal", op = "eq", value = "selective" }, { field = "mapping", op = "eq", value = "complete" }]
+all = [{ field = "proposal", op = "eq", value = "selective" }, { field = "replacement_state", op = "eq", value = "not-created" }]
 [[checks.outputs.rules]]
 outcome = "rebase-verify-fast-forward"
 [checks.outputs.rules.when]
@@ -161,7 +160,7 @@ all = [{ field = "proposal", op = "eq", value = "complete" }, { field = "target"
 [[checks.outputs.rules]]
 outcome = "not-applicable"
 [checks.outputs.rules.when]
-all = [{ field = "proposal", op = "eq", value = "none" }]
+any = [{ field = "proposal", op = "eq", value = "none" }, { field = "replacement_state", op = "eq", value = "created" }]
 
 [[checks.outputs]]
 column = "expected_terminal"
@@ -173,7 +172,11 @@ all = [{ field = "context", op = "eq", value = "contradictory" }]
 [[checks.outputs.rules]]
 outcome = "typed-unavailable"
 [checks.outputs.rules.when]
-any = [{ field = "context", op = "eq", value = "missing" }, { all = [{ field = "terminal", op = "eq", value = "retained" }, { field = "long_lived_contract", op = "eq", value = "incomplete" }] }]
+any = [
+  { field = "context", op = "eq", value = "missing" },
+  { all = [{ field = "terminal", op = "eq", value = "retained" }, { field = "long_lived_contract", op = "eq", value = "incomplete" }] },
+  { all = [{ field = "replacement_state", op = "eq", value = "created" }, { field = "mapping", op = "eq", value = "missing" }] },
+]
 [[checks.outputs.rules]]
 outcome = "integrated"
 [checks.outputs.rules.when]
@@ -209,11 +212,11 @@ all = [{ field = "context", op = "eq", value = "missing" }]
 [[checks.outputs.rules]]
 outcome = "mapping-required"
 [checks.outputs.rules.when]
-all = [{ field = "proposal", op = "eq", value = "selective" }, { field = "mapping", op = "eq", value = "missing" }]
+all = [{ field = "replacement_state", op = "eq", value = "created" }, { field = "mapping", op = "eq", value = "missing" }]
 [[checks.outputs.rules]]
 outcome = "record-source-to-accepted"
 [checks.outputs.rules.when]
-all = [{ field = "proposal", op = "eq", value = "selective" }, { field = "mapping", op = "eq", value = "complete" }]
+all = [{ field = "replacement_state", op = "eq", value = "created" }, { field = "mapping", op = "eq", value = "complete" }]
 
 [[checks.outputs]]
 column = "expected_cleanup"
@@ -237,6 +240,7 @@ any = [
   { field = "ownership", op = "eq", value = "unknown" },
   { field = "cleanup_basis", op = "in", values = ["age", "count", "force"] },
   { all = [{ field = "visibility", op = "eq", value = "long-lived" }, { field = "long_lived_contract", op = "eq", value = "incomplete" }] },
+  { all = [{ field = "replacement_state", op = "eq", value = "created" }, { field = "mapping", op = "eq", value = "missing" }] },
   { all = [{ field = "cleanup_basis", op = "eq", value = "evidence-only" }, { field = "mapping", op = "eq", value = "missing" }] },
 ]
 [[checks.outputs.rules]]

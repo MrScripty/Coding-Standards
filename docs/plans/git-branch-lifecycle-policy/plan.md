@@ -139,6 +139,8 @@ inventory, and a fast-forward lifecycle demonstration.
 - [x] Add and pass required lifecycle decision scenarios.
 - [x] Resolve accepted-review applicability, template-boundary, independent-
   outcome, documentation-impact, and code-branch terminology findings.
+- [x] Correct fixture phase ordering so integration selection precedes
+  replacement lineage and lifecycle-only work has no integration decision.
 - [x] Integrate the completely verified policy by fast-forward and record the
   terminal resource disposition.
 

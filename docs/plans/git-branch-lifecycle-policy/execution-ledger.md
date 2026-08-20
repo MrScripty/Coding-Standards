@@ -67,3 +67,22 @@
 - Result: GBL-006 through GBL-009 are resolved without redesign, verifier-
   migration work, destructive cleanup, history rewrite, or compatibility
   fallback.
+
+## 2026-08-20: Replacement-Lineage Fixture Correction
+
+- Added explicit `replacement_state` to separate pre-integration selection
+  from post-replacement lineage and terminal lifecycle.
+- Selective acceptance now chooses cherry-pick while the replacement is not
+  created. Mapping is not required at that phase.
+- A created replacement with missing mapping reports lineage unavailable,
+  blocks terminal acceptance, and refuses cleanup. A recorded mapping permits
+  terminal completion and applicable cleanup.
+- Lifecycle-only long-lived contract validation now reports integration as
+  `not-applicable`; incomplete retention still blocks terminal classification
+  and cleanup.
+- Verification passed: `commit-consolidation-dispositions` with 23 checks and
+  29 lifecycle rows, all 164 registered declarative suites, plan structure,
+  `git diff --check`, and the complete checkpoint with 109 retained Bash
+  verifiers.
+- Result: GBL-010 is resolved without changing canonical Commit policy,
+  generic graph infrastructure, verifier mechanics, or migration authority.
