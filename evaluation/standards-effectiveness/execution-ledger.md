@@ -13086,3 +13086,21 @@ contains 115 Bash checkers, 119 nodes, 705 edges, and 119 components. Focused,
 authority, numeric, declarative, plan, removal, protected-input, complete,
 freshness, and diff verification pass without a wrapper, false dependency,
 compatibility behavior, or fallback.
+
+## 2026-08-20 VE081 Table-Derived Markdown Link-Coverage Re-plan
+
+**Outcome:** re-plan required before the next checker package.
+
+Fresh generated evidence remains valid at 115 Bash checkers, 119 nodes, 705
+edges, and 119 components. The smallest reviewed Router-owned boundary has one
+unrepresented behavior: owner paths derived from a strict route table must all
+occur as local inline Markdown link targets. Retained Frontend closure uses the
+same mechanism, while accepted Testing closure currently copies route values.
+
+The recommended shared capability is a bounded `markdown_link_coverage` check
+that compares unique projected members with normalized local inline-link
+targets and returns typed diagnostics. Raw-text presence, fixture retirement,
+and copied literals remain alternatives with weaker evidence or duplicated
+authority. No package is admitted and no engine, suite, registry, fixture,
+checker, standard, manifest, generated artifact, compatibility behavior, or
+fallback changed.

@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** rebuild the current graph and select the next owner-coherent
-checker package from reviewed lifecycle and dependency evidence
+**Next slice:** resolve VE081's shared table-derived Markdown link-coverage
+contract before admitting the next checker package
 
 **Acceptance status:** `pending`
 
@@ -119,10 +119,10 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I8 and M6-I9 at
-train orders 123 and 124. The source-index aggregate now runs through the
-Python engine, its direct Python tests own the former engine-fixture contract,
-and both obsolete Bash verifiers plus their shared helper are absent.
+**Accepted boundary:** package records are accepted through M6-I10 at train
+order 125. The Architecture directory-template closure now runs through the
+Python engine while its separately owned Frontend and migration gates remain
+independent.
 
 **Current derived state:** 160 registered declarative suites, 115 retained Bash
 checkers, 119 executable nodes, 705 conservative reference edges, and 119
@@ -149,23 +149,22 @@ helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
 **Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
-is accepted. No package currently follows M6-I9; selection starts from fresh
-generated evidence.
+is accepted. No package currently follows M6-I10. Fresh evidence exposed the
+VE081 shared-capability decision before another package can be admitted.
 
 **Next work:**
 
-1. Regenerate the graph from current repository state.
+1. Resolve VE081 with a bounded shared capability or another explicitly
+   accepted semantic disposition.
 2. Select the smallest owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add a reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
-4. Add a reusable primitive only when multiple coherent owners require it or
-   one safety-critical invariant cannot otherwise be expressed clearly.
-5. Prepare disjoint admitted suite/checker changes concurrently when their
+4. Prepare disjoint admitted suite/checker changes concurrently when their
    write sets and dependencies are frozen.
-6. Integrate shared authority serially and run one complete checkpoint at each
+5. Integrate shared authority serially and run one complete checkpoint at each
    shared-contract or wave boundary.
-7. Continue until no Bash verifier, helper, or launcher remains, then delete
+6. Continue until no Bash verifier, helper, or launcher remains, then delete
    the temporary reference model.
 
 **Acceptance gate:** exact inventory reports zero Bash verification paths; the
@@ -191,7 +190,9 @@ fallback remains.
 
 ## Blockers
 
-- `none`
+- VE081: the next Router-owned package requires table-derived Markdown link
+  target coverage that the engine cannot currently express without copied
+  literals or a weaker raw-text assertion.
 
 ## Re-Plan Triggers
 

@@ -3825,3 +3825,52 @@ historical records name suite evidence, and the replaced Architecture checker
 is absent. Final generated evidence contains 115 Bash checkers, 119 nodes, 705
 edges, and 119 components. Numeric lifecycle derives whole-checker candidate
 retirement without a candidate mapping or duplicate package.
+
+### VE081 Table-Derived Markdown Link-Coverage Re-plan
+
+Fresh post-M6-I10 evidence remains valid at 115 Bash checkers, 119 nodes, 705
+edges, and 119 components. No retained verifier is both caller-free and free
+of outgoing executable relationships. The smallest reviewed boundary is the
+Router-owned root-route aggregate. Its apparent caller is a lifecycle audit
+that inventories README-reading checkers, not a semantic prerequisite.
+
+Most of the aggregate is already covered by the accepted root-index suite:
+README structure, local-link validity, boundary text, prohibited legacy
+content, and exact dispositions. Its remaining unique invariant derives owner
+paths from a strict route table and requires every owner to appear as an inline
+Markdown link target. The current engine can validate Markdown links and
+table projections independently, but cannot compare those two derived sets.
+
+This mechanism is not owner-specific. A retained Frontend source-closure
+checker performs the same table-to-link coverage operation, and an accepted
+Testing source-closure suite currently copies route values into both table and
+text assertions. The capability threshold is therefore met, but the shared
+contract must be selected before a package is admitted.
+
+Options:
+
+1. Add a strict `markdown_link_coverage` check. One projected table column
+   supplies unique nonempty member targets; the check parses local inline
+   Markdown destinations, resolves them relative to the document, removes
+   fragments, and requires member inclusion while allowing unrelated links.
+   This is recommended because it models the actual relationship, supports at
+   least two retained owners, and stores no copied target list or count.
+2. Add a generic table-derived raw-text-presence check. This is simpler and
+   close to the Bash mechanism, but a path mentioned outside a link could pass,
+   so it proves a weaker contract.
+3. Retire the route fixture and rely on the canonical document plus ordinary
+   link validity. This avoids engine work but loses expected route-membership
+   evidence unless a separate review proves the fixture entirely redundant.
+4. Copy all route targets into suite text assertions. This requires no engine
+   change but creates duplicate mutable authority and is inconsistent with the
+   derived-value direction.
+
+The recommended capability must remain bounded to inline local Markdown links,
+reuse one normalized target-extraction contract, return typed configuration,
+invalid, and unavailable diagnostics, and add direct mutation tests. Reference
+links, URL fetching, anchor validation, globbing, regular-expression
+configuration, command execution, optional missing members, compatibility
+schemas, and fallback are out of scope. Root migration follows capability
+acceptance; Frontend adoption remains a later owner-local package. Refactoring
+the accepted Testing suite is optional and must not be bundled into the shared
+capability slice.

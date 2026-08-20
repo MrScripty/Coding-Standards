@@ -147,19 +147,18 @@ complete; `Accepted` requires the named evidence.
 without losing mapped semantics.
 
 **Accepted boundary:** normative owner consolidation is complete through the
-recorded `7.4c3` packages. Verification migration is accepted through M6-I8
-and M6-I9 at train orders 123 and 124. The current canonical package manifest
-contains the exact accepted package state; the execution ledger contains the
-detailed slice evidence.
+recorded `7.4c3` packages. Verification migration is accepted through M6-I10
+at train order 125. The current canonical package manifest contains the exact
+accepted package state; the execution ledger contains detailed slice evidence.
 
 **Accepted dependency:** [Planning proportionality recovery](../docs/plans/planning-proportionality-recovery/plan.md)
-is complete. Verification-engine package selection resumes from fresh generated
-evidence with no admitted package after M6-I9.
+is complete. VE081 must resolve the shared table-derived Markdown link-coverage
+contract before another verification-engine package is admitted after M6-I10.
 
 **Remaining work:**
 
-1. Rebuild the verifier graph from current repository state and select the next
-   owner-coherent package through the verification-engine plan.
+1. Resolve VE081 through the verification-engine plan, then select the next
+   owner-coherent checker package from fresh evidence.
 2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
 3. Regenerate canonical inventories and prove exact dispositions, no source
@@ -187,7 +186,8 @@ engine is the sole verification authority.
 
 ## Blockers
 
-- `none`
+- VE081 requires selection of a bounded table-derived Markdown link-coverage
+  contract before the next checker package can be admitted.
 
 ## Slice Procedure
 

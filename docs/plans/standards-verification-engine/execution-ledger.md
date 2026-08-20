@@ -4597,3 +4597,22 @@
   authority, all 160 declarative suites, plans, removed path, protected inputs,
   complete checkpoint, freshness, and diff integrity pass. Fresh-graph
   package discovery is next.
+
+## 2026-08-20 - VE081 Table-Derived Markdown Link-Coverage Re-plan
+
+- Confirmed fresh generated evidence at 115 Bash checkers, 119 nodes, 705
+  edges, and 119 components with no package after M6-I10.
+- Selected the Router-owned root-route aggregate as the smallest reviewed
+  boundary, then found one behavior not expressible by current declarative
+  checks: every owner derived from a route table must be an actual local
+  inline Markdown link target.
+- Confirmed the same mechanism in retained Frontend closure and copied route
+  literals in accepted Testing closure, satisfying the plan's shared-capability
+  threshold.
+- Recommended a bounded `markdown_link_coverage` assertion over projected
+  members and normalized parsed link targets. Raw text presence, fixture
+  retirement, and copied literals remain explicit alternatives with weaker
+  evidence or authority tradeoffs.
+- Admitted no package and changed no engine, suite, registry, fixture, checker,
+  standard, manifest, or generated artifact. Capability selection is required
+  before implementation.
