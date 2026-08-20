@@ -2,18 +2,18 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE075 repeated projected-path semantics re-plan
-required before Commit package admission
+**Current phase:** Milestone 6: M6-I3 Commit consolidation-dispositions package
+admitted at train order 118
 
-**Next slice:** select and record the VE075 correction to projected-path
-cardinality semantics. Do not admit the Commit package, copy its current target
-set, broaden its manifest authority, or add policy-specific engine behavior.
+**Next slice:** atomically register the preflighted owner-local Commit suite,
+transfer the two historical independent-gate records, delete the Bash checker,
+and accept M6-I3. Shared Commit evidence remains read-only.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I2 reviewed retirement of a completed historical
-migration gate without a permanent declarative replacement. Immutable repair
-evidence and the independently owned IPC gate remain intact.
+**Latest accepted slice:** VE075 corrected projected repository paths to derive
+and validate a distinct path set while leaving identity uniqueness with
+explicit relation and table-key contracts.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -8132,6 +8132,48 @@ checkers, and diff integrity pass. No projection grammar, suite, registry row,
 package, manifest, generated artifact, Bash source, copied path/count, owner
 inference, compatibility representation, policy branch, or fallback changed.
 The Commit package remains a separate owner-local preflight and admission.
+
+##### M6-I3 Commit Consolidation Dispositions
+
+**Status:** Admitted at train order 118; atomic acceptance is next.
+
+Fresh owner-local preflight derives one six-check suite under
+`workflows/commit.md`. It proves exact set equality between frozen Commit
+section identities and Commit disposition rows, rejects duplicate identities,
+invalid dispositions, empty rationales, and removal rows with non-`none`
+targets, validates each distinct non-removal target as a contained regular
+non-symlink file, bounds the legacy index structure and routes, and preserves
+the recipe's non-normative reference metadata.
+
+Disposable mutation parity removes or duplicates an identity, introduces an
+invalid disposition, empties a rationale, gives a removal row a file target,
+names a missing non-removal target, exceeds the index line bound, changes its
+heading, removes its workflow route, and changes recipe role metadata. Each
+mutation fails in the expected owner-local check. The positive suite passes.
+All disposable suite, registry, and test files were removed after preflight.
+
+The package is edge-free in the fresh executable graph. Two accepted M6-V2
+historical records currently identify the retained checker as an independently
+owned gate. Acceptance must transfer only their replacement and evidence to
+`suite:commit-consolidation-dispositions`; this is historical gate continuity,
+not a registered dependency or migration-parent ownership claim.
+
+The admitted row is the sole file-level write-set authority. The shared
+section inventory, consolidation dispositions, `COMMIT-STANDARDS.md`,
+`workflows/commit.md`, and `reference/recipes/commits.md` remain read-only.
+Acceptance may add/register the preflighted suite, update its README route,
+transition M6-I3 and the two historical records, delete only the obsolete Bash
+checker, regenerate the four temporary projections, update serial planning
+evidence, and run focused suite, package/edge, mutation, source-unchanged,
+removed-path, graph freshness, all-declarative, plan, complete-checkpoint, and
+diff verification.
+
+No engine/schema feature, copied ID/path/count, source rewrite, Bash edit,
+wrapper, alias, callback, compatibility route, dependency, inferred owner,
+optional-missing behavior, or fallback is admitted. Re-plan if the registered
+suite cannot preserve a preflighted mutation, another incident edge appears,
+shared evidence must change, the historical transfer requires a dependency,
+or implementation leaves the admitted write set.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

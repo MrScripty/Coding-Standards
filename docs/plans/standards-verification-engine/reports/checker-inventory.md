@@ -3479,3 +3479,24 @@ retained Bash verifiers, 129 nodes, 672 edges, and 129 components. The focused
 closure, all 152 declarative suites, graph freshness, exact mutations, and the
 complete retained-Bash checkpoint pass. The next package must be derived from
 this fresh graph rather than the pre-cutover topology.
+
+### Admitted M6-I3 Commit Consolidation Dispositions
+
+Fresh graph review identifies
+`evaluation/standards-effectiveness/verify-consolidation-dispositions.sh` as an
+edge-free live Commit gate. Its policy is owner-local despite reading shared
+section and disposition tables. A disposable six-check suite derives exact
+Commit identities, invalid-row projections, distinct non-removal target files,
+legacy-index structure/routes, and recipe reference metadata without copying
+mutable rows, targets, or counts.
+
+Positive evidence passes. Ten isolated mutations prove omission, duplication,
+invalid disposition, empty rationale, invalid removal target, missing file,
+line-bound excess, heading drift, route loss, and reference-role drift fail in
+the expected checks. Disposable artifacts are absent after preflight.
+
+Train order 118 is admitted under `workflows/commit.md`. The package is
+edge-free, while two historical M6-V2 independent-gate rows continue to point
+at the retained Bash checker until atomic acceptance. Shared evidence is
+read-only; no suite registration, checker deletion, dependency, engine/schema
+change, compatibility behavior, or fallback occurs in admission.

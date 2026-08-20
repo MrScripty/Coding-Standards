@@ -3900,6 +3900,22 @@ verification passes without changing projection grammar or adding duplicated
 state, a compatibility path, a policy branch, or fallback. Commit package
 preflight may resume as a separate owner-local slice.
 
+### M6-I3 Commit Consolidation Dispositions Admission
+
+The child verification plan admits train order 118 under
+`workflows/commit.md` after disposable owner-local parity. One six-check suite
+derives exact Commit identity coverage, filtered row validity, distinct target
+files, concise legacy-index structure/routes, and recipe reference metadata.
+The positive contract and ten targeted negative mutations pass; disposable
+suite, registry, and test artifacts are removed before admission.
+
+The package is edge-free. Two accepted final-source historical records retain
+the Bash checker as an independent gate until acceptance transfers evidence to
+the registered Commit suite. Shared inventory, disposition, workflow, index,
+and recipe files remain read-only. No copied ID/path/count, source rewrite,
+engine/schema feature, dependency, compatibility behavior, inferred owner, or
+fallback is authorized.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

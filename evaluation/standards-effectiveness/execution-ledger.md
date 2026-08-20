@@ -12757,3 +12757,20 @@ plan validators, lifecycle fixtures, generated freshness, the complete mixed
 checkpoint, and diff integrity pass. No suite, registry row, package, manifest,
 generated artifact, Bash source, copied target/count, owner inference,
 projection mode, compatibility behavior, policy branch, or fallback changed.
+
+## 2026-08-19 M6-I3 Commit Consolidation Dispositions Admission
+
+**Outcome:** owner-local package admitted at train order 118.
+
+A disposable six-check suite passes current Commit evidence and fails ten
+targeted mutations covering exact identities, row policy, target files, index
+structure and routes, and recipe reference metadata. Repeated canonical target
+paths are derived and validated once. Disposable suite, registry, and test
+artifacts were removed before admission.
+
+The package is edge-free. Two accepted M6-V2 records retain the Bash checker as
+an independent gate until acceptance transfers their evidence to the
+registered suite. Shared inventory, dispositions, workflow, legacy index, and
+recipe evidence remain read-only. No suite is registered and no Bash source,
+engine/schema contract, copied ID/path/count, dependency, compatibility path,
+inferred owner, or fallback changes in admission.

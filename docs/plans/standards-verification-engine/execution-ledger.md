@@ -4205,3 +4205,23 @@
 - No projection grammar, suite, registry, package, manifest, generated artifact,
   Bash source, copied path/count, owner inference, compatibility behavior,
   policy branch, or fallback changed. Commit package preflight is next.
+
+## 2026-08-19 - M6-I3 Commit Consolidation Dispositions Admission
+
+- Reconfirmed clean canonical `6690376` before owner-local disposable
+  preflight and package admission.
+- Derived a six-check Commit suite from current shared evidence. Positive proof
+  passes; ten isolated mutations fail in their expected identity, row-policy,
+  target-file, index-structure, route, or reference-metadata checks.
+- Removed every disposable suite, registry entry, and test after preflight.
+  Admitted train order 118 under `workflows/commit.md`; the Bash checker remains
+  executable and no replacement suite is registered in admission.
+- Classified the package edge-free. Acceptance will transfer two M6-V2
+  historical independent-gate records to the registered suite without adding a
+  dependency or changing migration-parent ownership.
+- Regenerated temporary structure/graph evidence from admitted authority.
+  Package, edge-free, retained-checker, freshness, all-declarative, plan,
+  lifecycle, source-unchanged, and diff verification pass.
+- No engine/schema change, source mutation, copied ID/path/count, Bash edit,
+  wrapper, compatibility behavior, inferred owner, dependency, or fallback was
+  admitted. Atomic M6-I3 acceptance is next.
