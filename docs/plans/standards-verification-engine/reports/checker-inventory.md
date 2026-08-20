@@ -3986,3 +3986,29 @@ audit checker. The generator-owned structure inventory records that exact
 projection; node, edge, and component artifacts remain unchanged. Both plan
 validators, generated freshness, all 160 declarative suites, and diff integrity
 pass without implementation authority changing.
+
+### M6-I12 Root Consumer-Audit Decomposition Admission
+
+The approved VE083 final state uses existing owners only. Registered
+`milestone-7-row-35-decomposition` gains strict classification domains, a
+derived `reference_inventory` comparison over all current Bash checkers, and
+the Commit-source prohibition. Registered `root-index-closure` gains the
+missing direct Commit-route prohibition. Neither suite requires the other.
+
+The current lexical graph contains executable-reference and verifier-dependency
+observations from the audit to Commit authority. M6-I12 records both as
+independent-gate dispositions whose replacement remains the Commit checker.
+Sixteen accepted historical rows still name the audit as replacement evidence;
+acceptance transfers thirteen consumer-inventory rows to row-35 suite evidence
+and three obsolete root routing/index identity rows to root-index suite
+evidence.
+
+Disposable final state deletes the checker and its consumer-manifest row,
+accepts the package and edges, transfers all historical evidence, and derives
+whole-checker numeric retirement without a candidate mapping. Both owner
+suites, package/edge authority, all 160 declarative suites, generated freshness,
+and the complete checkpoint pass at 113 Bash checkers, 117 nodes, 697 edges,
+and 117 components. Mutations prove typed inventory, classification-domain,
+and root-route failures. Train order 127 is admitted with no new suite,
+registry node, dependency, Bash repair, wrapper, compatibility path, copied
+count, manual numeric record, or fallback.

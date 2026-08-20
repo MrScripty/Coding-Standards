@@ -4697,3 +4697,26 @@
   118 nodes, 702 edges, and 118 components.
 - Both plan-structure checks, generated-artifact freshness, all 160 declarative
   suites, and diff integrity pass.
+
+## 2026-08-20 - M6-I12 Root Consumer-Audit Decomposition Admission
+
+- Started from clean canonical `0c9d38f`; the admission write set contains only
+  shared package/edge authority, generated graph projections, and current plan
+  records. Live suites, checkers, fixtures, standards, and registry remain
+  unchanged.
+- Froze one refinement package at train order 127. Temporary README consumer
+  classification and derived membership belong to the registered row-35
+  suite; permanent root direct-route prohibitions belong to registered
+  root-index closure. No suite or dependency is added.
+- Froze sixteen historical replacement transfers by meaning: thirteen consumer
+  inventory records move to row-35 evidence and three obsolete routing/index
+  identity records move to root-index evidence. Two current source-inspection
+  edges preserve Commit authority as an independent checker gate.
+- Disposable final state passes both owner suites, package/edge authority,
+  whole-checker numeric lifecycle, all 160 declarative suites, generated
+  freshness, and the complete checkpoint at 113 Bash checkers, 117 nodes, 697
+  edges, and 117 components.
+- Unclassified consumer, invalid classification, and direct root-route
+  mutations return typed inventory, table-domain, and prohibited-text failures.
+  No new suite, registry node, Bash repair, wrapper, compatibility path, copied
+  count, manual numeric mapping, or fallback is admitted.

@@ -4,15 +4,16 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** resolve VE083's root README consumer-audit ownership and
-decomposition before admitting another checker package
+**Next slice:** atomically accept the admitted M6-I12 root README consumer-audit
+decomposition
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I11 moved root Router aggregate evidence into
 the existing root-index suite and removed the replaced Bash checker.
 
-**Latest admitted slice:** `none`; no package follows accepted M6-I11.
+**Latest admitted slice:** M6-I12 decomposes temporary consumer inventory into
+the row-35 suite and permanent root-route prohibitions into root-index closure.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -120,8 +121,8 @@ At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
 **Accepted boundary:** package records are accepted through M6-I11 at train
-order 126. Root Router aggregate evidence now runs through the existing
-root-index suite while the README consumer audit remains independent.
+order 126. M6-I12 is admitted at train order 127 for atomic acceptance through
+the existing row-35 and root-index suites.
 
 **Current derived state:** 160 registered declarative suites, 114 retained Bash
 checkers, 118 executable nodes, 702 conservative reference edges, and 118
@@ -148,14 +149,14 @@ helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
 **Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
-is accepted. M6-I11 is accepted; fresh review exposed VE083 before another
-package could be admitted.
+is accepted. VE083 is resolved by the admitted M6-I12 ownership split; atomic
+acceptance is next.
 
 **Next work:**
 
-1. Resolve VE083 by assigning the root consumer inventory and permanent root
-   navigation assertions to canonical owners without another unnecessary
-   temporary suite.
+1. Accept M6-I12 exactly as admitted: extend the two existing owner suites,
+   transfer historical evidence, preserve Commit as an independent gate, and
+   delete the aggregate Bash checker.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or
@@ -190,9 +191,7 @@ fallback remains.
 
 ## Blockers
 
-- VE083: the smallest caller-free root consumer audit combines temporary
-  migration inventory with permanent Router navigation assertions. Ownership
-  must be decomposed before package admission.
+- `none`
 
 ## Re-Plan Triggers
 

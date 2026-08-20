@@ -13184,3 +13184,21 @@ and component artifacts remain byte-identical.
 
 Both plan-structure checks, generated-artifact freshness, all 160 declarative
 suites, and diff integrity pass.
+
+## 2026-08-20 M6-I12 Root Consumer-Audit Decomposition Admission
+
+**Outcome:** admitted; atomic acceptance is next.
+
+Clean preflight resolved VE083 through existing owners. Row-35 migration
+authority owns temporary README consumer classifications, derived membership,
+and Commit-source prohibition. Root-index Router authority owns the permanent
+direct Commit-route prohibition. The suites remain dependency-free.
+
+M6-I12 freezes sixteen historical transfers, two current Commit independent-gate
+edges, whole-checker numeric retirement, and an exact acceptance write set.
+Disposable final state passes all 160 declarative suites and the complete mixed
+checkpoint at 113 Bash checkers, 117 nodes, 697 edges, and 117 components.
+Three negative mutations return typed reference-inventory, table-domain, and
+prohibited-text failures. No new suite, registry node, dependency, copied
+count, manual numeric mapping, Bash repair, wrapper, compatibility behavior,
+or fallback is admitted.
