@@ -1,0 +1,9 @@
+[project]
+name = "repository-graph-engine"
+version = "0.1.0"
+description = "Repository-neutral directed edge registry and query engine"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.unittest]
+start-directory = "tests"

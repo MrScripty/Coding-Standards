@@ -20,3 +20,24 @@
   checks in the `Planned` state; `git diff --check` passed.
 - Result: Milestone 1 is the only admitted implementation slice. M6-I17 and
   temporary migration graph changes remain unauthorized.
+
+## 2026-08-20: Neutral Graph Engine Foundation
+
+- Operation: `continue`.
+- Boundary: `tools/graph_engine/` owns only neutral models, errors, registered
+  sources, alias resolution, immutable indexes, queries, and traversal.
+- Authority: stable edge and group IDs are explicit; incoming, outgoing,
+  incident, edge-to-group, and group-to-edge indexes are derived in memory.
+- Sources: strict TOML manifests register through a strict source registry;
+  deterministic providers register through the Python protocol. Unregistered
+  manifests and providers contribute nothing.
+- Safety: path-like aliases must resolve to contained artifacts; symlink and
+  repository escape, contradictory aliases, dangling endpoints, invalid group
+  membership, and mismatched provider provenance are rejected.
+- Traversal: exact-edge and named-group traversal require explicit direction;
+  transitive traversal is denied unless the selected group permits it; cycles
+  terminate deterministically with explanatory paths and provenance.
+- Verification: all 28 graph-engine tests passed, covering the 22 required core
+  behaviors; bytecode compilation passed; the package import scan found no
+  downstream dependency; the plan structure and `git diff --check` passed.
+- Result: Milestone 1 is accepted. Milestone 2 is the only active slice.

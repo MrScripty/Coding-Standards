@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1 neutral graph engine foundation
+**Current phase:** Milestone 2 downstream graph migration
 
-**Next slice:** accept the neutral graph engine foundation
+**Next slice:** migrate policy impact and adapt permanent dependency consumers
 
 **Acceptance status:** `pending`
 
@@ -25,8 +25,8 @@ permanent graph consumers to that engine without dual authority or fallback.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | One explicit edge declaration is discoverable from both endpoints through canonical IDs and aliases. | `focused` | repository | `automated` | `pending` | Milestone 1 tests |
-| A2 | Named groups filter and traverse only explicitly eligible edges, with transitive traversal prohibited by default. | `focused` | repository | `automated` | `pending` | Milestone 1 tests |
+| A1 | One explicit edge declaration is discoverable from both endpoints through canonical IDs and aliases. | `focused` | repository | `automated` | `satisfied` | 28 graph-engine tests |
+| A2 | Named groups filter and traverse only explicitly eligible edges, with transitive traversal prohibited by default. | `focused` | repository | `automated` | `satisfied` | 28 graph-engine tests |
 | A3 | Policy impact is one named group consumed through a policy adapter; no bespoke policy graph, reverse index, old manifest schema, or query fallback remains. | `integration` | repository | `automated` | `pending` | Milestone 2 tests and staged review |
 | A4 | Planning aliases return the same complete 24-edge policy-impact set, including the full-review prompt, fixture, and suite, and audited suite-owner closure remains enforced. | `integration` | repository | `automated` | `pending` | Generic query and policy suite |
 | A5 | Every graph-like mechanism has one reviewed migration disposition, and every `migrate-now` or `adapt-now` mechanism uses the upstream engine. | `review` | repository | `manual` | `pending` | [Graph consumer inventory](reports/graph-consumer-inventory.tsv) |
@@ -173,20 +173,20 @@ authority depends on it.
 
 **Tasks:**
 
-- [ ] Implement neutral models, errors, source registration, alias resolution,
+- [x] Implement neutral models, errors, source registration, alias resolution,
   immutable indexes, deterministic queries, exact-edge traversal, and
   explicitly permitted group traversal.
-- [ ] Implement the strict generic TOML source loader and read-only CLI.
-- [ ] Prove all 22 required core behaviors, including cycles, hostile output,
+- [x] Implement the strict generic TOML source loader and read-only CLI.
+- [x] Prove all 22 required core behaviors, including cycles, hostile output,
   containment, unregistered sources, and declaration-order independence.
-- [ ] Confirm the package has no downstream imports and accept its public
+- [x] Confirm the package has no downstream imports and accept its public
   contract before migration.
 
 **Acceptance gate:** focused and complete graph-engine tests pass; CLI smoke
 queries pass; dependency-direction inspection, link checks, plan structure,
 `git diff --check`, and staged write-set review pass.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 2: Downstream Graph Migration And Acceptance
 
@@ -240,7 +240,7 @@ query/manifest fallback remains; adapted consumers preserve diagnostics and
 formats; deferred mechanisms remain unchanged; staged scope is exact; accepted
 commits leave the canonical worktree clean.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Verification Gates
 
