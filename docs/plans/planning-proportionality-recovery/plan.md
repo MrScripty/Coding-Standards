@@ -4,8 +4,9 @@
 
 **Current phase:** Milestone 3: historical-authority migration
 
-**Next slice:** implement `PPR-C2-N1`, the bounded numeric-candidate retirement
-contract required before the remaining special-shell cleanup can be accepted
+**Next slice:** resume the remaining special-shell `PPR-C2` cleanup, record its
+derived candidate identities under one accepted package, and preserve all
+non-plan behavior
 
 **Acceptance status:** `pending`
 
@@ -217,7 +218,7 @@ change its consumers to canonical records.
   current owner, fixture, disposition, package, and decision checks.
 - [x] Remove plain historical assertions from every `PPR-C2` entrypoint whose
   active-plan consumption has no orchestration or structure-gate control flow.
-- [ ] Add `PPR-C2-N1` package-scoped numeric-candidate retirement with generated
+- [x] Add `PPR-C2-N1` package-scoped numeric-candidate retirement with generated
   exact identities, immutable-baseline preservation, and typed negative cases.
 - [ ] Remove active-plan consumption from the remaining `PPR-C2` entrypoints
   with obsolete orchestration or duplicated plan-structure gates.

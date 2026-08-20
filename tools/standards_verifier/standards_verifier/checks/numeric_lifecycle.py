@@ -8,6 +8,8 @@ from ..diagnostics import Diagnostic, EngineError
 from ..inventory import collect_inventory
 from ..model import CheckContext
 from ..numeric_audit import HEADER, NumericAuditDiagnostic, collect_candidates
+from ..numeric_retirements import PACKAGES_HEADER as RETIREMENT_PACKAGES_HEADER
+from ..numeric_retirements import RETIREMENTS_HEADER
 from .table import read_table_rows
 
 
@@ -139,6 +141,8 @@ class NumericLifecycleCheck:
     baseline_path: str
     decisions_path: str
     packages_path: str
+    retirement_packages_path: str
+    retirements_path: str
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         baseline_rows = read_table_rows(
@@ -162,6 +166,20 @@ class NumericLifecycleCheck:
             suite=context.suite_id,
             check=self.id,
         )
+        retirement_package_rows = read_table_rows(
+            context.repo_root,
+            self.retirement_packages_path,
+            RETIREMENT_PACKAGES_HEADER,
+            suite=context.suite_id,
+            check=self.id,
+        )
+        retirement_rows = read_table_rows(
+            context.repo_root,
+            self.retirements_path,
+            RETIREMENTS_HEADER,
+            suite=context.suite_id,
+            check=self.id,
+        )
         _require_non_empty(
             baseline_rows,
             HEADER,
@@ -173,6 +191,20 @@ class NumericLifecycleCheck:
             decision_rows,
             DECISIONS_HEADER,
             path=self.decisions_path,
+            suite=context.suite_id,
+            check=self.id,
+        )
+        _require_non_empty(
+            retirement_package_rows,
+            RETIREMENT_PACKAGES_HEADER,
+            path=self.retirement_packages_path,
+            suite=context.suite_id,
+            check=self.id,
+        )
+        _require_non_empty(
+            retirement_rows,
+            RETIREMENTS_HEADER,
+            path=self.retirements_path,
             suite=context.suite_id,
             check=self.id,
         )
@@ -190,6 +222,34 @@ class NumericLifecycleCheck:
             suite=context.suite_id,
             check=self.id,
         )
+        retirement_packages = _index_unique(
+            retirement_package_rows,
+            "package_id",
+            path=self.retirement_packages_path,
+            suite=context.suite_id,
+            check=self.id,
+        )
+        retirements = _index_unique(
+            retirement_rows,
+            "candidate_id",
+            path=self.retirements_path,
+            suite=context.suite_id,
+            check=self.id,
+        )
+        for row_number, row in enumerate(retirement_package_rows, start=2):
+            if row["state"] not in {"admitted", "accepted"}:
+                return [
+                    Diagnostic(
+                        "ASSERT.NUMERIC_LIFECYCLE_RETIREMENT_PACKAGE_STATE",
+                        "invalid",
+                        "candidate-retirement package state must be admitted or accepted",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.retirement_packages_path,
+                        row=row_number,
+                        observed=row["state"],
+                    )
+                ]
         for row_number, row in enumerate(baseline_rows, start=2):
             _validate_historical_checker(
                 row["checker"],
@@ -257,12 +317,86 @@ class NumericLifecycleCheck:
 
         missing_ids = baseline_ids - current_ids
         if not missing_ids:
+            if retirements:
+                return [
+                    Diagnostic(
+                        "ASSERT.NUMERIC_LIFECYCLE_RETIRED_CANDIDATE_PRESENT",
+                        "invalid",
+                        "retirement evidence names a candidate that is still present",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.retirements_path,
+                        observed=sorted(retirements)[0],
+                    )
+                ]
             return []
+        diagnostics: list[Diagnostic] = []
+        for candidate_id, row in sorted(retirements.items()):
+            if candidate_id not in baseline:
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.NUMERIC_LIFECYCLE_UNKNOWN_RETIREMENT",
+                        "invalid",
+                        "retired candidate is absent from the immutable baseline",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.retirements_path,
+                        observed=candidate_id,
+                    )
+                )
+                continue
+            if candidate_id in current_ids:
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.NUMERIC_LIFECYCLE_RETIRED_CANDIDATE_PRESENT",
+                        "invalid",
+                        "retirement evidence names a candidate that is still present",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.retirements_path,
+                        observed=candidate_id,
+                    )
+                )
+                continue
+            package_id = row["package_id"]
+            package = retirement_packages.get(package_id)
+            if package is None:
+                raise EngineError(
+                    Diagnostic(
+                        "NUMERIC_LIFECYCLE.RETIREMENT_PACKAGE_UNAVAILABLE",
+                        "unavailable",
+                        "retired candidate has no explicit package authority",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.retirement_packages_path,
+                        observed=package_id,
+                    ),
+                    exit_code=3,
+                )
+            if package["state"] != "accepted":
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.NUMERIC_LIFECYCLE_RETIREMENT_NOT_ACCEPTED",
+                        "invalid",
+                        "retired candidate requires an accepted package",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.retirement_packages_path,
+                        observed=package_id,
+                    )
+                )
+        if diagnostics:
+            return diagnostics
         missing_checkers = sorted(
             {baseline[candidate_id]["checker"] for candidate_id in missing_ids}
         )
-        still_live = [checker for checker in missing_checkers if checker in live_checkers]
-        if still_live:
+        unexplained_live = sorted(
+            candidate_id
+            for candidate_id in missing_ids
+            if baseline[candidate_id]["checker"] in live_checkers
+            and candidate_id not in retirements
+        )
+        if unexplained_live:
             return [
                 Diagnostic(
                     "ASSERT.NUMERIC_LIFECYCLE_CHECKER_STILL_LIVE",
@@ -270,13 +404,13 @@ class NumericLifecycleCheck:
                     "candidate disappearance is not authorized while its checker remains live",
                     suite=context.suite_id,
                     check=self.id,
-                    path=checker,
+                    path=baseline[candidate_id]["checker"],
+                    observed=candidate_id,
                 )
-                for checker in still_live
+                for candidate_id in unexplained_live
             ]
 
-        diagnostics: list[Diagnostic] = []
-        for checker in missing_checkers:
+        for checker in (path for path in missing_checkers if path not in live_checkers):
             subject = f"{PACKAGE_SUBJECT_PREFIX}{checker}"
             packages = [row for row in package_rows if row["subject"] == subject]
             if not packages:
@@ -347,6 +481,8 @@ def parse_numeric_lifecycle_check(
         "baseline_path",
         "decisions_path",
         "packages_path",
+        "retirement_packages_path",
+        "retirements_path",
     }
     unknown = set(raw) - allowed
     if unknown:
@@ -374,4 +510,13 @@ def parse_numeric_lifecycle_check(
         _string(raw.get("baseline_path"), "baseline_path", suite_id, check_id),
         _string(raw.get("decisions_path"), "decisions_path", suite_id, check_id),
         _string(raw.get("packages_path"), "packages_path", suite_id, check_id),
+        _string(
+            raw.get("retirement_packages_path"),
+            "retirement_packages_path",
+            suite_id,
+            check_id,
+        ),
+        _string(
+            raw.get("retirements_path"), "retirements_path", suite_id, check_id
+        ),
     )

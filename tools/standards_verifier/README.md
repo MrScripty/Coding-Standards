@@ -83,11 +83,36 @@ The suite's `numeric_audit_lifecycle` check derives current candidates from the
 same canonical collector. Current identities must remain a subset of the
 immutable baseline. A missing identity is valid only when its checker is absent
 from canonical live inventory and exactly one accepted `checker:<path>` package
-row supplies a non-empty owner. A still-live checker, new identity, missing or
-ambiguous package, non-accepted package, and unavailable owner produce typed
-diagnostics. Baseline, classification, and package schemas are exact. The check
-writes no current snapshot, owner map, progress, or count and infers neither
-package nor owner from names, routes, source text, or graph relationships.
+row supplies a non-empty owner, or when an accepted candidate-retirement package
+owns an exact generated candidate mapping. A still-live unexplained candidate,
+new identity, missing or ambiguous package, non-accepted package, unavailable
+owner, stale mapping, and unknown mapping produce typed diagnostics. Baseline,
+classification, package, and retirement schemas are exact. The check writes no
+current snapshot, owner map, progress, or count and infers neither package nor
+owner from names, routes, source text, or graph relationships.
+
+Record exact live-checker candidate retirements only after adding an explicit
+package in the `admitted` state:
+
+```bash
+python3 tools/standards_verifier/generate_numeric_retirements.py \
+  --write --package-id <package-id>
+```
+
+The recorder derives all currently missing live-checker candidate identities,
+preserves existing mappings, and refuses to add identities to an accepted
+package. After review, change the package state to `accepted` and verify exact
+coverage:
+
+```bash
+python3 tools/standards_verifier/generate_numeric_retirements.py --check
+```
+
+The generated mapping is durable evidence rather than semantic authority. The
+package supplies owner, outcome, and acceptance; no candidate identity,
+expression, source position, or count is manually copied.
+`verify.py --complete` includes this freshness check after checker inventory and
+dependency-graph verification.
 
 Suite and registry TOML is strict. Unknown keys, schema versions, check kinds,
 operators, dependencies, and paths fail with typed diagnostics. Configuration

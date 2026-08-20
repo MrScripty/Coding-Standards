@@ -170,3 +170,33 @@
 - Isolation: the unaccepted 14-checker cleanup remains outside canonical
   `main`; this planning slice changes no engine, suite, generated evidence, or
   checker behavior.
+
+## 2026-08-20: Numeric Candidate-Retirement Capability
+
+- Operation: `continue`.
+- Package: `PPR-C2-N1`.
+- Contract: one exact authority table owns package identity, owner, semantic
+  outcome, and admitted/accepted state. A separate generated table maps only
+  derived immutable baseline candidate identities to an explicitly selected
+  package.
+- Recorder behavior: identities may be added only to an admitted package;
+  accepted packages are immutable. Recording is idempotent and derives all
+  currently unexplained live-checker disappearances without accepting counts,
+  expressions, positions, checker names, or candidate IDs as command input.
+- Lifecycle behavior: mappings require known accepted packages and absent
+  baseline candidates. Unknown, duplicated, still-present, stale, unaccepted,
+  and unexplained identities produce typed diagnostics. Whole-checker
+  retirement continues to require the existing accepted checker package.
+- Integration: numeric retirement freshness now participates in the generated-
+  artifact gate used by `verify.py --complete`.
+- Verification:
+  - 299 direct engine tests passed, including seven recorder and seventeen
+    numeric-lifecycle tests;
+  - the empty canonical mapping passed its independent freshness check;
+  - all 159 declarative suites passed;
+  - checker inventory and graph remained fresh at 116 retained Bash checkers,
+    120 nodes, 732 edges, and 120 components;
+  - `git diff --check` passed; and
+  - the complete mixed checkpoint passed all 116 retained Bash checkers.
+- Result: `PPR-C2-N1` accepted. The isolated 14-checker cleanup may resume and
+  must record its derived candidate mappings before `PPR-C2` acceptance.

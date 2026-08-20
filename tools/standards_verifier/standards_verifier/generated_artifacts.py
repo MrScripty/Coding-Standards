@@ -6,13 +6,17 @@ from typing import Sequence
 
 from .inventory import check_inventory, write_inventory
 from .migration_graph import check_graph, write_graph
+from .numeric_retirements import check_retirements
 
 
 def check_generated_artifacts(root: Path) -> int:
     inventory_result = check_inventory(root)
     if inventory_result != 0:
         return inventory_result
-    return check_graph(root)
+    graph_result = check_graph(root)
+    if graph_result != 0:
+        return graph_result
+    return check_retirements(root)
 
 
 def write_generated_artifacts(root: Path) -> int:

@@ -14,6 +14,10 @@ from standards_verifier.checks.numeric_lifecycle import PACKAGES_HEADER
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
 from standards_verifier.numeric_audit import HEADER, collect_candidates, render_candidates
+from standards_verifier.numeric_retirements import (
+    PACKAGES_HEADER as RETIREMENT_PACKAGES_HEADER,
+)
+from standards_verifier.numeric_retirements import RETIREMENTS_HEADER
 
 
 class NumericLifecycleTest(unittest.TestCase):
@@ -24,9 +28,13 @@ class NumericLifecycleTest(unittest.TestCase):
         self.baseline = "generated/numeric-comparison-candidates.tsv"
         self.decisions = "numeric-comparison-decisions.tsv"
         self.packages = "checker-migration-packages.tsv"
+        self.retirement_packages = "numeric-candidate-retirement-packages.tsv"
+        self.retirements = "generated/numeric-candidate-retirements.tsv"
         self.write(self.checker, '[[ "$count" -eq 0 ]]\n')
         self.freeze_baseline()
         self.write_packages([])
+        self.write_retirement_packages([])
+        self.write_retirements([])
         self.write_suite()
         self.write_registry()
 
@@ -73,6 +81,21 @@ class NumericLifecycleTest(unittest.TestCase):
         lines.extend("\t".join(row) for row in rows)
         self.write(self.packages, "\n".join(lines) + "\n")
 
+    def write_retirement_packages(self, rows: list[tuple[str, ...]]) -> None:
+        lines = ["\t".join(RETIREMENT_PACKAGES_HEADER)]
+        lines.extend("\t".join(row) for row in rows)
+        self.write(self.retirement_packages, "\n".join(lines) + "\n")
+
+    def write_retirements(self, rows: list[tuple[str, ...]]) -> None:
+        lines = ["\t".join(RETIREMENTS_HEADER)]
+        lines.extend("\t".join(row) for row in rows)
+        self.write(self.retirements, "\n".join(lines) + "\n")
+
+    def retirement_package_row(
+        self, *, state: str = "accepted"
+    ) -> tuple[str, ...]:
+        return ("R1", "test.owner", "obsolete-comparison-removed", state)
+
     def write_suite(self, *, extra: str = "") -> None:
         self.write(
             "suites/numeric.toml",
@@ -88,6 +111,8 @@ class NumericLifecycleTest(unittest.TestCase):
             baseline_path = "{self.baseline}"
             decisions_path = "{self.decisions}"
             packages_path = "{self.packages}"
+            retirement_packages_path = "{self.retirement_packages}"
+            retirements_path = "{self.retirements}"
             {extra}
             """,
         )
@@ -146,6 +171,59 @@ class NumericLifecycleTest(unittest.TestCase):
         diagnostic = self.result().diagnostics[0]
         self.assertEqual(
             diagnostic.code, "ASSERT.NUMERIC_LIFECYCLE_CHECKER_STILL_LIVE"
+        )
+
+    def test_accepted_candidate_package_authorizes_live_checker_removal(self) -> None:
+        candidate_id = collect_candidates(self.root, (self.checker,))[0].candidate_id
+        self.write(self.checker, "printf 'still live\\n'\n")
+        self.write_retirement_packages([self.retirement_package_row()])
+        self.write_retirements([(candidate_id, "R1")])
+
+        self.assertEqual(self.result().status, "passed")
+
+    def test_candidate_retirement_requires_accepted_package(self) -> None:
+        candidate_id = collect_candidates(self.root, (self.checker,))[0].candidate_id
+        self.write(self.checker, "printf 'still live\\n'\n")
+        self.write_retirement_packages(
+            [self.retirement_package_row(state="admitted")]
+        )
+        self.write_retirements([(candidate_id, "R1")])
+
+        diagnostic = self.result().diagnostics[0]
+        self.assertEqual(
+            diagnostic.code, "ASSERT.NUMERIC_LIFECYCLE_RETIREMENT_NOT_ACCEPTED"
+        )
+
+    def test_candidate_retirement_requires_known_package(self) -> None:
+        candidate_id = collect_candidates(self.root, (self.checker,))[0].candidate_id
+        self.write(self.checker, "printf 'still live\\n'\n")
+        self.write_retirements([(candidate_id, "missing")])
+
+        result = self.result()
+        self.assertEqual(
+            result.diagnostics[0].code,
+            "NUMERIC_LIFECYCLE.RETIREMENT_PACKAGE_UNAVAILABLE",
+        )
+        self.assertEqual(result.exit_code, 3)
+
+    def test_candidate_retirement_cannot_precede_source_removal(self) -> None:
+        candidate_id = collect_candidates(self.root, (self.checker,))[0].candidate_id
+        self.write_retirement_packages([self.retirement_package_row()])
+        self.write_retirements([(candidate_id, "R1")])
+
+        diagnostic = self.result().diagnostics[0]
+        self.assertEqual(
+            diagnostic.code, "ASSERT.NUMERIC_LIFECYCLE_RETIRED_CANDIDATE_PRESENT"
+        )
+
+    def test_unknown_candidate_retirement_is_invalid(self) -> None:
+        self.write(self.checker, "printf 'still live\\n'\n")
+        self.write_retirement_packages([self.retirement_package_row()])
+        self.write_retirements([("numeric-unknown", "R1")])
+
+        diagnostic = self.result().diagnostics[0]
+        self.assertEqual(
+            diagnostic.code, "ASSERT.NUMERIC_LIFECYCLE_UNKNOWN_RETIREMENT"
         )
 
     def test_ambiguous_package_is_invalid(self) -> None:
