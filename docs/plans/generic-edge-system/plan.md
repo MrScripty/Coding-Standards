@@ -25,8 +25,8 @@ permanent graph consumers to that engine without dual authority or fallback.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | One explicit edge declaration is discoverable from both endpoints through canonical IDs and aliases. | `focused` | repository | `automated` | `satisfied` | 32 graph-engine tests |
-| A2 | Named groups filter and traverse only explicitly eligible edges, with transitive traversal prohibited by default. | `focused` | repository | `automated` | `satisfied` | 32 graph-engine tests |
+| A1 | One explicit edge declaration is discoverable from both endpoints through canonical IDs and aliases. | `focused` | repository | `automated` | `satisfied` | 35 graph-engine tests |
+| A2 | Named groups filter and traverse only explicitly eligible edges, with transitive traversal prohibited by default. | `focused` | repository | `automated` | `satisfied` | 35 graph-engine tests |
 | A3 | Policy impact is one named group consumed through a policy adapter; no bespoke policy graph, reverse index, old manifest schema, or query fallback remains. | `integration` | repository | `automated` | `satisfied` | 323 verifier tests and no-old-authority review |
 | A4 | Planning aliases return the same complete 24-edge policy-impact set, including the full-review prompt, fixture, and suite, and audited suite-owner closure remains enforced. | `integration` | repository | `automated` | `satisfied` | Exact generic-query comparison and policy suite |
 | A5 | Every graph-like mechanism has one reviewed migration disposition, and every `migrate-now` or `adapt-now` mechanism uses the upstream engine. | `review` | repository | `manual` | `satisfied` | Repository composition and [graph consumer inventory](reports/graph-consumer-inventory.tsv) |

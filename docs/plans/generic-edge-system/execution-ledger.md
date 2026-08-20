@@ -101,3 +101,23 @@
 - Result: both milestones and the generic-edge objective are accepted. Parent
   verification work resumes with a fresh graph audit; M6-I17 remains
   unselected and unadmitted.
+
+## 2026-08-20: Post-Acceptance Graph Correctness Recovery
+
+- Review found that an unknown group could return a false-empty result for an
+  existing unconnected artifact, recursive graph algorithms failed beyond
+  Python's recursion limit, and `preferred_order` did not govern dependency
+  ties below root selection.
+- Group and traversal contracts now validate before unconnected-artifact empty
+  handling. Unknown groups retain the neutral `GRAPH.UNKNOWN_GROUP` outcome.
+- Cycle detection now uses an iterative color-state stack. Dependency ordering
+  now uses iterative stable Kahn ordering and applies preferred rank whenever
+  multiple dependency-ready nodes are available.
+- Focused evidence covers direct and CLI unknown-group queries, direct group
+  traversal, a 1,500-node acyclic chain, a 1,500-node cycle, and preferred tie
+  ordering. No graph authority, source schema, group semantics, or downstream
+  adapter contract changed.
+- Verification passed: 35 graph-engine tests, 323 standards-verifier tests,
+  all 164 registered declarative suites, generated-evidence freshness, and the
+  complete mixed checkpoint with all 109 retained Bash checkers. Plan
+  structure, Markdown links, diff integrity, and the final write set also pass.

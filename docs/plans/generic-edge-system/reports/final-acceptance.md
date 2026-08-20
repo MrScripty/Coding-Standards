@@ -51,7 +51,12 @@ python3 tools/query_edges.py --list-groups
 Exact-edge traversal follows only the selected edge. Group traversal follows
 only eligible edges in the selected group and explicit direction. Transitive
 traversal is rejected unless the group permits it; cycles terminate with
-deterministic de-duplication and explanatory paths.
+deterministic de-duplication and explanatory paths. Group selection is
+validated before an existing unconnected artifact may return an empty result,
+so unknown groups remain distinguishable from valid empty incidence. Cycle
+detection and dependency ordering are iterative and support graphs beyond
+Python's recursion limit; preferred node rank controls every available
+topological tie.
 
 ## Registered Groups And Migrated Consumers
 
@@ -93,7 +98,7 @@ audited policy owners.
 
 ## Verification
 
-- 32 graph-engine tests passed.
+- 35 graph-engine tests passed, including 1,500-node chain and cycle coverage.
 - 323 standards-verifier tests passed.
 - All 164 registered declarative suites passed.
 - Generated evidence remained current.

@@ -23,6 +23,7 @@ class CliTest(unittest.TestCase):
         self.root = Path(self.temp_dir.name)
         self.write("a.md", "a")
         self.write("b.md", "b")
+        self.write("unconnected.md", "unconnected")
         self.write(
             "registry.toml",
             '''
@@ -116,6 +117,25 @@ class CliTest(unittest.TestCase):
 
         self.assertEqual(code, 0)
         self.assertIn("a -> b", output)
+
+    def test_unknown_group_fails_for_unconnected_artifact_queries(self) -> None:
+        code, output = self.run_cli(
+            "--node", "unconnected.md", "--group", "unknown"
+        )
+        self.assertEqual(code, 3)
+        self.assertIn("GRAPH.UNKNOWN_GROUP", output)
+
+        code, output = self.run_cli(
+            "--node",
+            "unconnected.md",
+            "--group",
+            "unknown",
+            "--direction",
+            "outgoing",
+            "--traverse",
+        )
+        self.assertEqual(code, 3)
+        self.assertIn("GRAPH.UNKNOWN_GROUP", output)
 
     def test_hostile_control_characters_are_rejected_not_emitted(self) -> None:
         row = Row(*("safe",) * 13, "unsafe\nrecord")

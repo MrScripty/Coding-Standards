@@ -327,8 +327,41 @@ class EdgeRegistryTest(unittest.TestCase):
             registry.dependency_order(
                 "semantic", ("a",), preferred_order=("a", "c", "d", "b")
             ),
-            ("b", "d", "c", "a"),
+            ("d", "c", "b", "a"),
         )
+
+    def test_long_dependency_chain_and_cycle_do_not_use_python_recursion(self) -> None:
+        node_count = 1_500
+        node_ids = tuple(f"n{index:04d}" for index in range(node_count))
+        nodes = tuple(self.node(node_id) for node_id in node_ids)
+        chain = tuple(
+            self.edge(f"e{index:04d}", node_ids[index], node_ids[index + 1])
+            for index in range(node_count - 1)
+        )
+        registry = self.registry(
+            nodes=nodes,
+            groups=(self.group(transitive=True),),
+            edges=chain,
+        )
+
+        self.assertIsNone(registry.find_cycle("semantic"))
+        self.assertEqual(
+            registry.dependency_order("semantic", (node_ids[0],)),
+            tuple(reversed(node_ids)),
+        )
+
+        cyclic = self.registry(
+            nodes=nodes,
+            groups=(self.group(transitive=True),),
+            edges=(*chain, self.edge("cycle", node_ids[-1], node_ids[0])),
+        )
+        cycle = cyclic.find_cycle("semantic")
+        self.assertIsNotNone(cycle)
+        assert cycle is not None
+        self.assertEqual(len(cycle), node_count + 1)
+        self.assertEqual(cycle[0], cycle[-1])
+        with self.assertRaisesRegex(InvalidGroupError, "contains a cycle"):
+            cyclic.dependency_order("semantic", (node_ids[0],))
 
     def test_provenance_is_retained_on_queries_and_traversal(self) -> None:
         registry = self.registry()
@@ -344,6 +377,16 @@ class EdgeRegistryTest(unittest.TestCase):
 
         self.assertEqual(registry.incident("unconnected.md"), ())
         self.assertEqual(registry.groups_for("unconnected.md"), ())
+
+    def test_unknown_group_is_rejected_for_unconnected_artifact(self) -> None:
+        registry = self.registry()
+
+        with self.assertRaises(UnknownGroupError):
+            registry.incident("unconnected.md", ("unknown",))
+        with self.assertRaises(UnknownGroupError):
+            registry.traverse_group(
+                "unconnected.md", "unknown", Direction.OUTGOING
+            )
 
     def test_missing_artifact_and_unknown_logical_node_are_distinct(self) -> None:
         registry = self.registry()

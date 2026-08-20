@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import heapq
 from collections import deque
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
@@ -240,9 +241,9 @@ class EdgeRegistry:
 
     def incoming(self, node: str, groups: Iterable[str] | None = None) -> tuple[EdgeView, ...]:
         canonical = self.resolve(node)
+        selected = self._selected_groups(groups)
         if canonical not in self.nodes:
             return ()
-        selected = self._selected_groups(groups)
         return tuple(
             EdgeView(self.edges[edge_id], Direction.INCOMING, self.edges[edge_id].source)
             for edge_id in self._incoming[canonical]
@@ -251,9 +252,9 @@ class EdgeRegistry:
 
     def outgoing(self, node: str, groups: Iterable[str] | None = None) -> tuple[EdgeView, ...]:
         canonical = self.resolve(node)
+        selected = self._selected_groups(groups)
         if canonical not in self.nodes:
             return ()
-        selected = self._selected_groups(groups)
         return tuple(
             EdgeView(self.edges[edge_id], Direction.OUTGOING, self.edges[edge_id].target)
             for edge_id in self._outgoing[canonical]
@@ -311,8 +312,6 @@ class EdgeRegistry:
         transitive: bool = False,
     ) -> TraversalResult:
         start = self.resolve(node)
-        if start not in self.nodes:
-            return TraversalResult(start, (start,), (), ())
         group = self._group(group_id)
         if not group.traversal.permits(direction):
             raise ForbiddenTraversalError(
@@ -324,6 +323,8 @@ class EdgeRegistry:
             raise ForbiddenTraversalError(
                 "group does not permit transitive traversal", group=group_id
             )
+        if start not in self.nodes:
+            return TraversalResult(start, (start,), (), ())
 
         queue = deque([(start, (start,), tuple())])
         expanded: set[str] = set()
@@ -365,33 +366,36 @@ class EdgeRegistry:
                 direction=direction.value,
             )
         states: dict[str, int] = {}
-        stack: list[str] = []
-
-        def visit(node: str) -> tuple[str, ...] | None:
-            if states.get(node) == 1:
-                start = stack.index(node)
-                return tuple((*stack[start:], node))
-            if states.get(node) == 2:
-                return None
-            states[node] = 1
-            stack.append(node)
-            for edge, edge_direction in self._group_candidates(
-                node, group_id, direction
-            ):
-                if not edge.traversable:
+        for root in sorted(self.nodes):
+            if states.get(root, 0) != 0:
+                continue
+            states[root] = 1
+            path = [root]
+            positions = {root: 0}
+            frames = [(root, iter(self._targets(root, group_id, direction)))]
+            while frames:
+                node, targets = frames[-1]
+                try:
+                    target = next(targets)
+                except StopIteration:
+                    frames.pop()
+                    path.pop()
+                    positions.pop(node)
+                    states[node] = 2
                     continue
-                target = edge.target if edge_direction is Direction.OUTGOING else edge.source
-                found = visit(target)
-                if found is not None:
-                    return found
-            stack.pop()
-            states[node] = 2
-            return None
 
-        for node in sorted(self.nodes):
-            found = visit(node)
-            if found is not None:
-                return found
+                state = states.get(target, 0)
+                if state == 1:
+                    cycle_start = positions[target]
+                    return tuple((*path[cycle_start:], target))
+                if state == 2:
+                    continue
+                states[target] = 1
+                positions[target] = len(path)
+                path.append(target)
+                frames.append(
+                    (target, iter(self._targets(target, group_id, direction)))
+                )
         return None
 
     def dependency_order(
@@ -442,30 +446,49 @@ class EdgeRegistry:
             raise InvalidGroupError("preferred dependency order contains duplicates")
         rank = {node: index for index, node in enumerate(preferred)}
 
-        def node_key(node: str) -> tuple[int, int | str]:
+        def node_key(node: str) -> tuple[int, int, str]:
             if node in rank:
-                return (0, rank[node])
-            return (1, node)
+                return (0, rank[node], node)
+            return (1, 0, node)
 
-        visited: set[str] = set()
+        dependency_count = {node: 0 for node in required}
+        dependents = {node: set() for node in required}
+        for node in required:
+            dependencies = set(self._targets(node, group_id, direction))
+            for dependency in dependencies:
+                if dependency not in required:
+                    continue
+                dependency_count[node] += 1
+                dependents[dependency].add(node)
+
+        ready = [node_key(node) for node, count in dependency_count.items() if count == 0]
+        heapq.heapify(ready)
         ordered: list[str] = []
+        while ready:
+            *_, node = heapq.heappop(ready)
+            ordered.append(node)
+            for dependent in dependents[node]:
+                dependency_count[dependent] -= 1
+                if dependency_count[dependent] == 0:
+                    heapq.heappush(ready, node_key(dependent))
 
-        def visit(node: str) -> None:
-            if node in visited or node not in required:
-                return
+        if len(ordered) != len(required):
+            raise InvalidGroupError(
+                "dependency group contains a cycle",
+                group=group_id,
+            )
+        return tuple(ordered)
+
+    def _targets(
+        self, node: str, group_id: str, direction: Direction
+    ) -> tuple[str, ...]:
+        return tuple(
+            edge.target if edge_direction is Direction.OUTGOING else edge.source
             for edge, edge_direction in self._group_candidates(
                 node, group_id, direction
-            ):
-                if not edge.traversable:
-                    continue
-                target = edge.target if edge_direction is Direction.OUTGOING else edge.source
-                visit(target)
-            visited.add(node)
-            ordered.append(node)
-
-        for node in sorted(required, key=node_key):
-            visit(node)
-        return tuple(ordered)
+            )
+            if edge.traversable
+        )
 
     def _group_candidates(
         self, node: str, group_id: str, direction: Direction
