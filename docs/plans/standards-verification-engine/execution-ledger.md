@@ -4616,3 +4616,21 @@
 - Admitted no package and changed no engine, suite, registry, fixture, checker,
   standard, manifest, or generated artifact. Capability selection is required
   before implementation.
+
+## 2026-08-20 - M6-C6 Markdown Link-Coverage Capability Acceptance
+
+- Added one strict `markdown_link_coverage` assertion over one projected
+  member column and one contained Markdown document.
+- Centralized local inline-link extraction with `markdown_links`, preserving
+  relative resolution, fragment removal, external exclusion, UTF-8, and
+  repository-containment behavior without merging the two checks' claims.
+- Added focused coverage for normalized positive paths, missing members,
+  external/reference exclusion, empty/duplicate membership, missing evidence,
+  invalid UTF-8, path escape, projection width, and unknown configuration.
+- All 309 engine tests pass. Disposable real root Router and Frontend suites
+  pass, while an uncovered existing repository member returns the expected
+  typed missing-coverage diagnostic.
+- Removed all disposable suites, registry, and mutation evidence. No live
+  suite, fixture, standard, package, edge record, generated artifact, Bash
+  path, compatibility behavior, copied target list/count, or fallback changed.
+- M6-I11 root Router replacement preflight is next.

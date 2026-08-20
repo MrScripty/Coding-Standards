@@ -20,6 +20,7 @@ from .keyed_relation import parse_keyed_relation_check
 from .line_budget import parse_line_budget_check
 from .markdown_heading_cardinality import parse_markdown_heading_cardinality_check
 from .markdown_headings import parse_markdown_headings_check
+from .markdown_link_coverage import parse_markdown_link_coverage_check
 from .markdown_links import parse_markdown_links_check
 from .markdown_section_text import parse_markdown_section_text_check
 from .markdown_structure import parse_markdown_structure_check
@@ -68,6 +69,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_keyed_relation_check(raw, suite_id)
     if kind == "markdown_links":
         return parse_markdown_links_check(raw, suite_id)
+    if kind == "markdown_link_coverage":
+        return parse_markdown_link_coverage_check(raw, suite_id)
     if kind == "markdown_heading_cardinality":
         return parse_markdown_heading_cardinality_check(raw, suite_id)
     if kind == "markdown_headings":

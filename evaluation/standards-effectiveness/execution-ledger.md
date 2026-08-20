@@ -13104,3 +13104,19 @@ and copied literals remain alternatives with weaker evidence or duplicated
 authority. No package is admitted and no engine, suite, registry, fixture,
 checker, standard, manifest, generated artifact, compatibility behavior, or
 fallback changed.
+
+## 2026-08-20 M6-C6 Markdown Link-Coverage Capability Acceptance
+
+**Outcome:** accepted shared capability; M6-I11 preflight is next.
+
+The engine now derives one-column route members and normalized local inline
+Markdown targets through a strict `markdown_link_coverage` check. Link parsing
+is shared with `markdown_links`, but coverage and all-target availability
+remain separate claims. All 309 engine tests pass, disposable real root Router
+and Frontend consumers pass, and an uncovered existing member returns the
+typed missing-coverage diagnostic.
+
+Every disposable artifact is absent. No live suite, registry, fixture,
+standard, package, edge record, generated artifact, Bash path, compatibility
+behavior, copied target list/count, command action, optional member, or
+fallback changed.

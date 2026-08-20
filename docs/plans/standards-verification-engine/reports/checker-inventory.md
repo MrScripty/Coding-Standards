@@ -3874,3 +3874,25 @@ schemas, and fallback are out of scope. Root migration follows capability
 acceptance; Frontend adoption remains a later owner-local package. Refactoring
 the accepted Testing suite is optional and must not be bundled into the shared
 capability slice.
+
+### Accepted M6-C6 Markdown Link-Coverage Capability
+
+The Python engine now exposes one bounded `markdown_link_coverage` check. One
+strict projected table column supplies unique nonempty repository-relative
+members; the check normalizes those member files and requires each to occur in
+the normalized local inline-link targets parsed from one Markdown document.
+Unrelated and repeated links remain valid, while external and reference-style
+links do not satisfy coverage.
+
+Local inline-link extraction is shared with the existing `markdown_links`
+check, so path, fragment, external-prefix, UTF-8, and containment behavior has
+one implementation. The checks retain separate claims: coverage proves member
+inclusion, while `markdown_links` proves target availability for all parsed
+links.
+
+All 309 engine tests pass. Disposable suites validate the real root Router and
+Frontend route tables, and a disposable uncovered existing file returns
+`ASSERT.MARKDOWN_LINK_COVERAGE_MISSING`. Every disposable artifact is removed.
+No live suite, registry, fixture, standard, package, edge record, generated
+artifact, Bash path, compatibility behavior, command action, copied target
+list/count, or fallback changed. M6-I11 root Router preflight is next.

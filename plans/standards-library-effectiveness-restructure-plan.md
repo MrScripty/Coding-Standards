@@ -152,13 +152,13 @@ at train order 125. The current canonical package manifest contains the exact
 accepted package state; the execution ledger contains detailed slice evidence.
 
 **Accepted dependency:** [Planning proportionality recovery](../docs/plans/planning-proportionality-recovery/plan.md)
-is complete. VE081 must resolve the shared table-derived Markdown link-coverage
-contract before another verification-engine package is admitted after M6-I10.
+is complete. VE081 is resolved by the accepted M6-C6 table-derived Markdown
+link-coverage capability. No checker package is admitted after M6-I10.
 
 **Remaining work:**
 
-1. Resolve VE081 through the verification-engine plan, then select the next
-   owner-coherent checker package from fresh evidence.
+1. Preflight and migrate the root Router aggregate through the
+   verification-engine plan, then select the next owner-coherent package.
 2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
 3. Regenerate canonical inventories and prove exact dispositions, no source
@@ -186,8 +186,7 @@ engine is the sole verification authority.
 
 ## Blockers
 
-- VE081 requires selection of a bounded table-derived Markdown link-coverage
-  contract before the next checker package can be admitted.
+- `none`
 
 ## Slice Procedure
 

@@ -151,6 +151,21 @@ or symlink escapes are invalid; missing sources or targets are unavailable. It
 does not fetch URLs, validate anchors, decode destinations, parse reference
 links, infer files, or normalize content.
 
+The `markdown_link_coverage` check reads one contained UTF-8 Markdown `path`
+and one strict projected table source named `members`, which must select
+exactly one nonempty unique repository-relative path column. Every projected
+member must resolve to a contained regular file and occur among the document's
+normalized local inline-link targets. Link destinations resolve relative to
+the Markdown document and remove fragments before comparison; unrelated local
+links and repeated destinations are valid, while `http://`, `https://`, and
+`mailto:` destinations do not satisfy coverage. Empty, duplicate, missing, or
+uncovered members, malformed tables, invalid UTF-8, path escapes, and unknown
+configuration produce typed diagnostics. The check has no copied target list
+or count, reference-link parser, URL fetch, anchor validation, glob, regular-
+expression configuration, command execution, optional member, compatibility
+schema, or fallback. Use a separate `markdown_links` check when target
+availability for every link is also part of the suite's claim.
+
 The `line_budget` check counts raw newline bytes across one explicit non-empty
 `paths` list. It reads one exact two-column `metric`/`value` TSV, requires one
 unique configured key with a positive ASCII decimal value, and applies a

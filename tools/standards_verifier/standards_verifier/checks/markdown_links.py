@@ -35,72 +35,94 @@ def _paths(value: Any, suite: str, check: str) -> tuple[str, ...]:
 
 
 @dataclass(frozen=True, slots=True)
+class LocalMarkdownTarget:
+    destination: str
+    repository_path: str
+    resolved_path: Path
+
+
+def local_markdown_targets(
+    context: CheckContext,
+    check_id: str,
+    display_path: str,
+) -> tuple[LocalMarkdownTarget, ...]:
+    root = context.repo_root.resolve()
+    source = contained_file(
+        root,
+        display_path,
+        suite=context.suite_id,
+        check=check_id,
+    )
+    try:
+        content = source.read_text(encoding="utf-8")
+    except UnicodeDecodeError as error:
+        raise EngineError(
+            Diagnostic(
+                "INPUT.INVALID_UTF8",
+                "invalid",
+                str(error),
+                suite=context.suite_id,
+                check=check_id,
+                path=display_path,
+            )
+        ) from error
+
+    targets = []
+    for match in LINK_PATTERN.finditer(content):
+        destination = match.group(1)
+        if destination.startswith(EXTERNAL_PREFIXES):
+            continue
+
+        target = destination.split("#", 1)[0]
+        if not target:
+            candidate = source
+        else:
+            relative = PurePosixPath(target)
+            if relative.is_absolute():
+                raise EngineError(
+                    Diagnostic(
+                        "PATH.LINK_OUTSIDE_REPOSITORY",
+                        "invalid",
+                        "Markdown link target must be repository-relative",
+                        suite=context.suite_id,
+                        check=check_id,
+                        path=display_path,
+                        observed=destination,
+                    )
+                )
+            candidate = (source.parent / Path(*relative.parts)).resolve(strict=False)
+
+        if not candidate.is_relative_to(root):
+            raise EngineError(
+                Diagnostic(
+                    "PATH.LINK_OUTSIDE_REPOSITORY",
+                    "invalid",
+                    "Markdown link target escapes the repository root",
+                    suite=context.suite_id,
+                    check=check_id,
+                    path=display_path,
+                    observed=destination,
+                )
+            )
+        targets.append(
+            LocalMarkdownTarget(
+                destination=destination,
+                repository_path=candidate.relative_to(root).as_posix(),
+                resolved_path=candidate,
+            )
+        )
+    return tuple(targets)
+
+
+@dataclass(frozen=True, slots=True)
 class MarkdownLinksCheck:
     id: str
     paths: tuple[str, ...]
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
-        root = context.repo_root.resolve()
         for display_path in self.paths:
-            source = contained_file(
-                root,
-                display_path,
-                suite=context.suite_id,
-                check=self.id,
-            )
-            try:
-                content = source.read_text(encoding="utf-8")
-            except UnicodeDecodeError as error:
-                raise EngineError(
-                    Diagnostic(
-                        "INPUT.INVALID_UTF8",
-                        "invalid",
-                        str(error),
-                        suite=context.suite_id,
-                        check=self.id,
-                        path=display_path,
-                    )
-                ) from error
-
-            for match in LINK_PATTERN.finditer(content):
-                destination = match.group(1)
-                if destination.startswith(EXTERNAL_PREFIXES):
-                    continue
-
-                target = destination.split("#", 1)[0]
-                if not target:
-                    candidate = source
-                else:
-                    relative = PurePosixPath(target)
-                    if relative.is_absolute():
-                        raise EngineError(
-                            Diagnostic(
-                                "PATH.LINK_OUTSIDE_REPOSITORY",
-                                "invalid",
-                                "Markdown link target must be repository-relative",
-                                suite=context.suite_id,
-                                check=self.id,
-                                path=display_path,
-                                observed=destination,
-                            )
-                        )
-                    candidate = (source.parent / Path(*relative.parts)).resolve(
-                        strict=False
-                    )
-
-                if not candidate.is_relative_to(root):
-                    raise EngineError(
-                        Diagnostic(
-                            "PATH.LINK_OUTSIDE_REPOSITORY",
-                            "invalid",
-                            "Markdown link target escapes the repository root",
-                            suite=context.suite_id,
-                            check=self.id,
-                            path=display_path,
-                            observed=destination,
-                        )
-                    )
-                if not candidate.exists():
+            for target in local_markdown_targets(context, self.id, display_path):
+                if not target.resolved_path.exists():
                     raise EngineError(
                         Diagnostic(
                             "INPUT.LINK_TARGET_UNAVAILABLE",
@@ -109,7 +131,7 @@ class MarkdownLinksCheck:
                             suite=context.suite_id,
                             check=self.id,
                             path=display_path,
-                            observed=destination,
+                            observed=target.destination,
                         ),
                         exit_code=3,
                     )

@@ -4,13 +4,13 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** resolve VE081's shared table-derived Markdown link-coverage
-contract before admitting the next checker package
+**Next slice:** preflight the M6-I11 root Router aggregate replacement with
+the accepted M6-C6 Markdown link-coverage capability
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I10 replaced the Architecture directory-template
-closure checker at train order 125.
+**Latest accepted slice:** M6-C6 added the bounded table-derived Markdown
+link-coverage capability without changing live suite or checker authority.
 
 **Latest admitted slice:** `none`; no package follows accepted M6-I10.
 
@@ -149,16 +149,16 @@ helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
 **Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
-is accepted. No package currently follows M6-I10. Fresh evidence exposed the
-VE081 shared-capability decision before another package can be admitted.
+is accepted. No package currently follows M6-I10. VE081 is resolved by the
+accepted M6-C6 capability; root Router replacement preflight is next.
 
 **Next work:**
 
-1. Resolve VE081 with a bounded shared capability or another explicitly
-   accepted semantic disposition.
-2. Select the smallest owner-coherent package from reviewed lifecycle and
+1. Preflight the root Router aggregate with M6-C6 and current lifecycle
+   evidence.
+2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
-3. Add a reusable primitive only when multiple coherent owners require it or
+3. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
 4. Prepare disjoint admitted suite/checker changes concurrently when their
    write sets and dependencies are frozen.
@@ -190,9 +190,7 @@ fallback remains.
 
 ## Blockers
 
-- VE081: the next Router-owned package requires table-derived Markdown link
-  target coverage that the engine cannot currently express without copied
-  literals or a weaker raw-text assertion.
+- `none`
 
 ## Re-Plan Triggers
 
