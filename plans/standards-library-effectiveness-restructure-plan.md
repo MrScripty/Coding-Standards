@@ -5,8 +5,8 @@
 **Current phase:** Milestone 7 verification migration, fresh-graph package
 discovery
 
-**Next slice:** rebuild the current verifier graph and select the next
-owner-coherent package from reviewed lifecycle and dependency evidence
+**Next slice:** atomically accept the admitted M6-I14 Documentation directory
+README closure migration
 
 **Acceptance status:** `partial`
 
@@ -148,16 +148,16 @@ without losing mapped semantics.
 
 **Accepted boundary:** normative owner consolidation is complete through the
 recorded `7.4c3` packages. Verification migration is accepted through M6-I13
-at train order 128. The canonical package manifest contains the exact accepted
-state; the execution ledger contains detailed slice evidence.
+at train order 128, and M6-I14 is admitted at train order 129. The canonical
+package manifest contains the exact package state; the execution ledger
+contains detailed slice evidence.
 
 **Accepted dependency:** [Planning proportionality recovery](../docs/plans/planning-proportionality-recovery/plan.md)
-is complete. M6-I13 is accepted through existing Commit owner authority.
+is complete. M6-I14 is admitted after one-owner final-state proof.
 
 **Remaining work:**
 
-1. Rebuild the graph and select the next owner-coherent package through the
-   verification-engine plan.
+1. Accept M6-I14 exactly as admitted through the verification-engine plan.
 2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
 3. Regenerate canonical inventories and prove exact dispositions, no source

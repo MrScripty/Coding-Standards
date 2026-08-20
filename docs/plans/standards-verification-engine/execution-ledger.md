@@ -4675,6 +4675,31 @@
   second suite, dependency, wrapper, compatibility behavior, or fallback.
 - Fresh-graph owner-coherent package selection is next.
 
+## 2026-08-20 - M6-I14 Documentation Directory-README Admission
+
+- Started from clean canonical `93dd1d4`; admission changes only package/edge
+  lifecycle authority, current plan records, and their derived graph
+  projection. The suite, registry, checker, fixtures, standards, and historical
+  evidence remain unchanged.
+- Admitted one Documentation-owned consolidation package at train order 129.
+  Its future suite uses existing decision, text, and table checks for 13 fixture
+  decisions, canonical owner language, legacy closure, and STD-0088.
+- Four current executable-reference and dependency edges preserve
+  Documentation policy consolidation and source-gap audit as independent
+  checker gates. Two M6-T7 historical records transfer to exact suite evidence
+  only at acceptance.
+- Disposable final state passes the new four-check suite, both independent
+  gates, package/edge authority, whole-checker numeric lifecycle, all 161
+  declarative suites, generated freshness, and the complete checkpoint at 111
+  Bash checkers, 115 nodes, 689 edges, and 115 components.
+- Invalid fallback, restored legacy authority, and wrong disposition mutations
+  return typed decision, prohibited-text, and table-projection failures. No
+  helper migration, suite dependency, copied count, manual numeric mapping,
+  Bash repair, wrapper, compatibility path, or fallback is admitted.
+- Admission evidence contains 112 Bash checkers, 116 nodes, 695 edges, and 116
+  components; its additional conservative contract reference derives from the
+  package row and is not a new executable relationship.
+
 ## 2026-08-20 - M6-I13 Commit Authority Admission
 
 - Started from clean canonical `ad79580`; the admission changes package

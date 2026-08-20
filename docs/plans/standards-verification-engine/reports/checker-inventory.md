@@ -4083,3 +4083,26 @@ integrity pass. No new suite, registry node, dependency, false edge, Bash
 repair, wrapper, compatibility path, copied count, manual numeric mapping, or
 fallback remains. Fresh graph review is required before another package is
 selected.
+
+### M6-I14 Documentation Directory-README Admission
+
+Fresh graph review found no checker without callers and dependencies. The
+smallest owner-coherent frontier candidate is caller-free
+`verify-documentation-directory-readme-closure.sh`, whose two nested calls are
+separately owned gates rather than part of its Documentation contract.
+
+The future registered `documentation-directory-readme-closure` suite uses four
+existing generic checks. A decision table derives all 13 outcomes without the
+Bash count; text checks own canonical workflow language and legacy-source
+absence; a table projection owns exact STD-0088 disposition evidence. Four
+current edges preserve the two nested checkers independently, and two accepted
+M6-T7 records transfer to exact suite evidence.
+
+Disposable final state passes the new suite, both retained gates, package/edge
+authority, numeric lifecycle, all 161 declarative suites, generated freshness,
+three typed mutations, and the complete checkpoint at 111 Bash checkers, 115
+nodes, 689 edges, and 115 components. M6-I14 is admitted at train order 129
+without an engine capability, helper migration, suite dependency, copied
+count, manual numeric mapping, Bash repair, wrapper, compatibility path, or
+fallback. Admission evidence contains 112 checkers, 116 nodes, 695 edges, and
+116 components.

@@ -13261,3 +13261,22 @@ Focused, lifecycle, mutation, removal, protected-source, generated, plan,
 declarative, complete, and diff verification pass. No new suite, registry node,
 dependency, false edge, Bash repair, wrapper, compatibility path, copied count,
 manual numeric mapping, or fallback remains.
+
+## 2026-08-20 M6-I14 Documentation Directory-README Admission
+
+**Outcome:** admitted; atomic acceptance is next.
+
+Clean fresh-graph review selected one caller-free Documentation checker. Its
+directory README decisions, owner language, legacy closure, and exact STD-0088
+projection form one coherent suite. Documentation policy consolidation and the
+source-gap audit remain independent checker gates through four admitted edges.
+
+M6-I14 freezes one new registered suite, two historical evidence transfers,
+whole-checker numeric retirement, checker deletion, and graph refresh.
+Disposable final state passes 161 declarative suites and the complete mixed
+checkpoint at 111 Bash checkers, 115 nodes, 689 edges, and 115 components.
+Three mutations return typed decision, prohibited-text, and table-projection
+failures. Admission evidence contains 112 checkers, 116 nodes, 695 edges, and
+116 components. No engine capability, suite dependency, helper migration,
+copied count, manual numeric mapping, Bash repair, wrapper, compatibility
+behavior, or fallback is admitted.
