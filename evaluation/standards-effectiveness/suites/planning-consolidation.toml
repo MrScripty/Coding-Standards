@@ -1,0 +1,98 @@
+schema_version = 1
+id = "planning-consolidation"
+owner = "workflow.planning"
+description = "Fact-driven planning decisions, canonical owner content, legacy-index routing, and derived disposition coverage without fallback defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+objective = ["changed", "clear", "contradictory"]
+scope = ["bounded"]
+facts = ["complete", "missing", "unsupported"]
+ownership = ["overlap", "owned"]
+acceptance = ["complete", "missing"]
+next_slice = ["multiple", "one"]
+fallback = ["append-only", "commit-cadence", "headless-fallback", "implementation-success", "none", "page-count", "question-count", "template-proof", "worker-count"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "objective", op = "eq", value = "contradictory" },
+  { field = "ownership", op = "eq", value = "overlap" },
+  { field = "next_slice", op = "eq", value = "multiple" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "facts"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "facts", op = "eq", value = "missing" },
+  { field = "acceptance", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "workflows/planning.md"
+required = [
+  "## When A Written Plan Is Required",
+  "## Artifact Model",
+  "## Required Active-Plan Fields",
+  "## Milestones And Slices",
+  "## Current State, Not History",
+  "## Re-Planning",
+  "## Concurrent Work",
+  "Do not substitute a headless path",
+  "`Implemented` is not complete",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "PLAN-STANDARDS.md"
+required = [
+  "# Plan Standards",
+  "[workflows/planning.md](workflows/planning.md)",
+  "contains no independent normative planning",
+]
+prohibited = [
+  "## When a Plan Is Required",
+  "## Concurrent Worker Execution",
+]
+
+[[checks]]
+id = "disposition-coverage"
+type = "relation"
+mode = "set"
+[checks.left]
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+columns = ["id"]
+order = "source"
+where = { field = "path", op = "eq", value = "PLAN-STANDARDS.md" }
+[checks.right]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["id"]
+order = "source"
+where = { field = "source", op = "eq", value = "PLAN-STANDARDS.md" }
+
+[[checks]]
+id = "accepted-plan"
+type = "text"
+path = "plans/standards-library-effectiveness-restructure-plan.md"
+required = ["`7.4b8bt` (`Accepted`)", "`7.4b8bu` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
+prohibited = []

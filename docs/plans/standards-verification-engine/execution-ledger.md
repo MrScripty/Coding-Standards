@@ -4267,3 +4267,24 @@
   data, Bash edit, helper migration, wrapper, compatibility route, inferred
   owner, false dependency, optional-missing behavior, or fallback is admitted.
   Atomic M6-I4 acceptance is next.
+
+## 2026-08-19 - M6-I4 Planning Consolidation Acceptance
+
+- Reconfirmed clean canonical `8860429` and exact admitted incidence before
+  atomic acceptance.
+- Registered the preflighted five-check suite without dependencies,
+  transitioned M6-I4 and both current incident records to accepted, and
+  deleted only the obsolete Planning checker.
+- Preserved the retained execution train as a checker-backed independent gate;
+  no Planning dependency or duplicated migration behavior was introduced.
+- Regenerated final evidence at 121 Bash checkers, 126 nodes, 669 edges, and
+  126 components. The graph removes exactly two admission contract references,
+  one executable reference, and one verifier dependency.
+- Positive and eight-case mutation parity, focused suite/package/edge checks,
+  all 154 declarative suites, both plan validators, lifecycle fixtures,
+  removed-path and protected-source proof, the complete 121-checker checkpoint,
+  generated freshness, and diff integrity pass.
+- No engine/schema feature, source/fixture/standard change, copied mutable data,
+  helper migration, wrapper, alias, compatibility route, inferred owner, false
+  dependency, optional-missing behavior, or fallback remains. Fresh-graph
+  package discovery is next.

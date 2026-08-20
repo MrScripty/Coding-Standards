@@ -2,20 +2,19 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-I4 Planning consolidation admitted
+**Current phase:** Milestone 6: M6-I4 accepted; fresh-graph package discovery
 
-**Next slice:** atomically register and accept the preflighted M6-I4 Planning
-consolidation suite, retire its Bash checker, and preserve the execution train
-as an independently owned gate without a suite dependency.
+**Next slice:** derive the next owner-local package from the fresh post-M6-I4
+inventory and graph. Do not reuse pre-acceptance topology or infer semantic
+ownership from graph incidence.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I3 replaced the Commit consolidation Bash gate
-with one registered owner-local suite and transferred historical independent
-gate evidence without adding a dependency.
+**Latest accepted slice:** M6-I4 replaced the Planning consolidation Bash gate
+with one registered owner-local suite while preserving the execution train as
+an independently owned checker-backed gate.
 
-**Latest admitted slice:** M6-I4 freezes the owner-local Planning consolidation
-contract and its two representations of one independent execution-train edge.
+**Latest admitted slice:** `none`; no package follows accepted M6-I4.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -8194,7 +8193,7 @@ discovery is next.
 
 ##### M6-I4 Planning Consolidation
 
-**Status:** Admitted at train order 119.
+**Status:** Accepted at train order 119.
 
 Fresh post-M6-I3 graph review found no retained verifier without executable
 callers and verifier/helper dependencies. Of the caller-free gates,
@@ -8239,6 +8238,22 @@ package and edge authority, all 153 declarative suites, generated freshness at
 validators, lifecycle fixtures, protected-source proof, and diff integrity.
 Generated evidence adds exactly two package/edge contract references to the
 retained Planning checker; executable topology is unchanged.
+
+Acceptance registers the preflighted five-check suite with no dependencies,
+transitions M6-I4 and both incident-edge records to accepted, and deletes only
+the obsolete Planning checker. The execution-train gate remains independently
+executable and checker-backed; no Planning suite dependency is introduced.
+
+Positive and eight-case mutation parity, focused suite/package/edge checks,
+removed-path and protected-source proof, fresh 121-checker / 126-node /
+669-edge / 126-component evidence, all 154 declarative suites, both plan
+validators, lifecycle fixtures, the complete 121-checker mixed checkpoint,
+and diff integrity pass. The graph removes exactly two admission contract
+references plus the retired executable-reference and verifier-dependency
+edges. No source rewrite, copied mutable data, engine/schema feature, helper
+migration, wrapper, alias, compatibility behavior, inferred owner, false
+dependency, optional-missing path, or fallback remains. Fresh-graph package
+discovery is next.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

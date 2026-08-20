@@ -12813,3 +12813,21 @@ fresh 122-checker / 127-node / 673-edge / 127-component evidence, both plan
 validators, lifecycle fixtures, protected-source proof, and diff integrity
 pass. The graph adds only two contract references; executable topology is
 unchanged.
+
+## 2026-08-19 M6-I4 Planning Consolidation Acceptance
+
+**Outcome:** accepted; Bash authority replaced by one owner-local suite.
+
+The registered five-check suite has no dependencies. M6-I4 and both incident
+records are accepted, the Planning checker is absent, and the retained
+execution train remains checker-backed independent evidence rather than a
+Planning dependency. Shared Planning standards, fixtures, dispositions,
+section inventory, migration claims, and execution-train source remain
+byte-identical.
+
+Positive and eight-case mutation parity, focused authority, removed-path and
+source-unchanged proof, fresh 121-checker / 126-node / 669-edge / 126-component
+evidence, all 154 declarative suites, both plan validators, lifecycle fixtures,
+the complete 121-checker checkpoint, and diff integrity pass. No compatibility
+route, wrapper, helper migration, dependency, engine/schema change, copied
+mutable data, inferred owner, or fallback remains.

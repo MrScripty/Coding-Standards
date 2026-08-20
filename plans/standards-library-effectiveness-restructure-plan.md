@@ -3948,6 +3948,19 @@ evidence, both plan validators, lifecycle fixtures, protected-source proof, and
 diff integrity. Generated graph changes are limited to two contract references;
 executable topology is unchanged.
 
+M6-I4 is accepted. The child plan registers the five-check owner-local suite
+without dependencies, accepts both incident records, and deletes the obsolete
+Planning checker. The execution train remains checker-backed independent
+evidence rather than a Planning dependency. Shared Planning and migration
+evidence remains byte-identical.
+
+Positive and eight-case mutation parity, focused authority, all 154
+declarative suites, fresh 121-checker / 126-node / 669-edge / 126-component
+evidence, both plan validators, lifecycle fixtures, removed-path and protected-
+source proof, the complete 121-checker checkpoint, and diff integrity pass.
+No copied mutable data, engine feature, helper migration, false dependency,
+compatibility behavior, inferred owner, or fallback remains.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

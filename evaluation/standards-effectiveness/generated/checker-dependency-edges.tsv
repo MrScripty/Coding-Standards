@@ -1,5 +1,4 @@
 edge_type	source	target
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-planning-consolidation.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
@@ -34,7 +33,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-18-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-planning-consolidation.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
@@ -277,7 +275,6 @@ executable_reference	evaluation/standards-effectiveness/verify-network-transport
 executable_reference	evaluation/standards-effectiveness/verify-network-transport-policy.sh	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 executable_reference	evaluation/standards-effectiveness/verify-network-transport-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 executable_reference	evaluation/standards-effectiveness/verify-plan-fixtures.sh	evaluation/standards-effectiveness/check-plan-structure.sh
-executable_reference	evaluation/standards-effectiveness/verify-planning-consolidation.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh	evaluation/standards-effectiveness/verify-documentation-decisions.sh
 executable_reference	evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
 executable_reference	evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh
@@ -587,7 +584,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-trust-
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-network-transport-policy.sh	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-network-transport-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-planning-consolidation.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh	evaluation/standards-effectiveness/verify-documentation-decisions.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh

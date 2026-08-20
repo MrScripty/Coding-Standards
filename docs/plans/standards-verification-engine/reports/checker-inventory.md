@@ -3545,3 +3545,19 @@ components. The only graph additions are the package and edge-manifest contract
 references to the retained Planning checker. Both retained gates, all 153
 declarative suites, package/edge authority, freshness, plan/lifecycle checks,
 protected-source proof, and diff integrity pass.
+
+### Accepted M6-I4 Planning Consolidation
+
+The `planning-consolidation` suite is registered with five checks and no
+dependencies. M6-I4 and both representations of its former execution-train
+call are accepted. The Planning checker is absent; execution-train integrity
+remains an independently executable checker-backed gate.
+
+Generated evidence records 121 Bash checkers, 126 nodes, 669 edges, and 126
+components after removing exactly the package and edge-manifest contract
+references to the retired checker plus its executable-reference and verifier-
+dependency edges. Positive and eight negative mutations, all 154 declarative
+suites, both plan validators, lifecycle fixtures, protected-source and
+removed-path proof, the complete 121-checker checkpoint, freshness, and diff
+integrity pass. No copied mutable data, false dependency, wrapper,
+compatibility path, engine feature, inferred owner, or fallback remains.

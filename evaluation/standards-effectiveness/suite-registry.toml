@@ -764,3 +764,8 @@ requires = ["final-source-closure"]
 id = "commit-consolidation-dispositions"
 path = "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml"
 requires = []
+
+[[suites]]
+id = "planning-consolidation"
+path = "evaluation/standards-effectiveness/suites/planning-consolidation.toml"
+requires = []
