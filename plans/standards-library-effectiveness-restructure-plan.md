@@ -2,11 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 verification migration, fresh-graph package
-discovery
+**Current phase:** Milestone 7 work proportionality and policy impact recovery
 
-**Next slice:** audit the fresh post-M6-I16 graph and select the smallest
-owner-coherent package
+**Next slice:** accept Milestone 1 of the
+[work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md)
 
 **Acceptance status:** `partial`
 
@@ -98,7 +97,7 @@ universal architecture policy.
 | Migration lifecycle | Canonical package, disposition, owner, and generated records own status; active-plan narration does not. |
 | Verification migration | Bash checkers and helpers are removed with accepted Python-engine replacements; no wrappers, dual authority, compatibility parsers, or fallback remain. |
 | Accelerated execution | Owner-coherent packages may prepare concurrently with disjoint write sets; shared registry, evidence, Router, and plan integration remain serial. |
-| Recovery dependency | The planning proportionality recovery must be accepted before another verifier package is admitted. |
+| Recovery dependency | The work proportionality and policy impact recovery must be accepted before another verifier package is admitted. |
 
 ## Current Architecture
 
@@ -138,7 +137,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | Current state below; [verification-engine plan](../docs/plans/standards-verification-engine/plan.md) |
+| 7 | Role-based consolidation and verification migration | `Blocked` | [Work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md) |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -152,17 +151,20 @@ at train order 131. The canonical
 package manifest contains the exact package state; the execution ledger
 contains detailed slice evidence.
 
-**Accepted dependency:** [Planning proportionality recovery](../docs/plans/planning-proportionality-recovery/plan.md)
-is complete. M6-I16 is accepted after one-owner final-state proof.
+**Recovery dependency:** M6-I16 is accepted after one-owner final-state proof.
+The [work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md)
+must be accepted before another verifier package is admitted.
 
 **Remaining work:**
 
-1. Audit the fresh graph through the verification-engine plan.
-2. Continue owner-coherent Python-engine migration until no Bash verifier,
+1. Accept the work proportionality and policy impact recovery.
+2. Audit the fresh post-recovery graph through the verification-engine plan
+   without preselecting M6-I17.
+3. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
-3. Regenerate canonical inventories and prove exact dispositions, no source
+4. Regenerate canonical inventories and prove exact dispositions, no source
    gaps, no normative legacy source rows, and no legacy Router routes.
-4. Complete manual semantic-ownership review `D001` through `D010` before
+5. Complete manual semantic-ownership review `D001` through `D010` before
    Milestone 7 acceptance.
 
 **Acceptance gate:** every rule identifier has a final disposition; structural,
@@ -181,11 +183,11 @@ engine is the sole verification authority.
 | Checker migration lifecycle | [Checker migration packages](../evaluation/standards-effectiveness/checker-migration-packages.tsv) |
 | Executable-edge lifecycle | [Executable edge dispositions](../evaluation/standards-effectiveness/executable-edge-dispositions.tsv) |
 | Verification-engine current state | [Verification-engine plan](../docs/plans/standards-verification-engine/plan.md) and [ledger](../docs/plans/standards-verification-engine/execution-ledger.md) |
-| Planning recovery current state | [Planning recovery plan](../docs/plans/planning-proportionality-recovery/plan.md) and [ledger](../docs/plans/planning-proportionality-recovery/execution-ledger.md) |
+| Current recovery state | [Work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md) and [ledger](../docs/plans/work-proportionality-and-policy-impact/execution-ledger.md) |
 
 ## Blockers
 
-- `none`
+- Work proportionality and policy impact recovery acceptance.
 
 ## Slice Procedure
 

@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** audit the fresh post-M6-I16 graph and select the smallest
-owner-coherent package
+**Next slice:** accept Milestone 1 of the
+[work proportionality and policy impact recovery](../work-proportionality-and-policy-impact/plan.md)
 
 **Acceptance status:** `pending`
 
@@ -137,7 +137,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Fresh graph review after accepted M6-I16 |
+| 6 | Exceptional checks and Bash retirement | `Blocked` | Work proportionality and policy impact recovery |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -146,22 +146,25 @@ authorize package selection or ownership.
 helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
-**Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
-is accepted. M6-I16 is accepted after final-state proof.
+**Recovery dependency:** M6-I16 is accepted after final-state proof. The
+[work proportionality and policy impact recovery](../work-proportionality-and-policy-impact/plan.md)
+must be accepted before a fresh post-recovery graph audit or another package
+admission.
 
 **Next work:**
 
-1. Audit the fresh graph and select the smallest owner-coherent package from
-   reviewed lifecycle and dependency evidence.
-2. Select each subsequent owner-coherent package from reviewed lifecycle and
+1. Accept the work proportionality and policy impact recovery.
+2. Audit the fresh post-recovery graph without preselecting M6-I17 and select
+   one owner-coherent package from reviewed lifecycle and dependency evidence.
+3. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
-3. Add another reusable primitive only when multiple coherent owners require it or
+4. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
-4. Prepare disjoint admitted suite/checker changes concurrently when their
+5. Prepare disjoint admitted suite/checker changes concurrently when their
    write sets and dependencies are frozen.
-5. Integrate shared authority serially and run one complete checkpoint at each
+6. Integrate shared authority serially and run one complete checkpoint at each
    shared-contract or wave boundary.
-6. Continue until no Bash verifier, helper, or launcher remains, then delete
+7. Continue until no Bash verifier, helper, or launcher remains, then delete
    the temporary reference model.
 
 **Acceptance gate:** exact inventory reports zero Bash verification paths; the
@@ -187,7 +190,7 @@ fallback remains.
 
 ## Blockers
 
-- `none`
+- Work proportionality and policy impact recovery acceptance.
 
 ## Re-Plan Triggers
 
