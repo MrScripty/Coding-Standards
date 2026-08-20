@@ -3961,6 +3961,27 @@ source proof, the complete 121-checker checkpoint, and diff integrity pass.
 No copied mutable data, engine feature, helper migration, false dependency,
 compatibility behavior, inferred owner, or fallback remains.
 
+### VE076 Frontend Evidence Dependency Closure Re-plan
+
+The child verification plan found no fully edge-free retained verifier after
+M6-I4. It selects the Frontend testing-lineage checker and its Testing Frontend
+evidence callee as the smallest reviewed semantic closure. Both belong to the
+Frontend profile, but lineage and evidence remain separate observable
+contracts and therefore separate packages and suites.
+
+M6-I5 and M6-I6 will be jointly preflighted, separately admitted at train
+orders 120 and 121, and accepted in one atomic cutover. The lineage suite will
+depend explicitly on the evidence suite. The evidence checker's row-18
+decomposition call remains independently owned migration evidence, not a
+Frontend suite dependency. Exact identities derive from current decomposition
+and disposition authorities; no copied identifier set or count is authorized.
+
+No package is admitted by this replan. No engine feature, standards or fixture
+rewrite, Bash bridge, compatibility behavior, inferred owner, false
+dependency, or fallback is introduced. The child plan must stop again if joint
+mutation parity cannot be represented with existing generic assertions or the
+final incident graph differs.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

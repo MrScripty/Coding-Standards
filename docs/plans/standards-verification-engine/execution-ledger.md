@@ -4288,3 +4288,25 @@
   helper migration, wrapper, alias, compatibility route, inferred owner, false
   dependency, optional-missing behavior, or fallback remains. Fresh-graph
   package discovery is next.
+
+## 2026-08-19 - VE076 Frontend Evidence Dependency Closure Re-plan
+
+- Reconfirmed clean canonical `ac36f27` before fresh-graph review.
+- Found no retained verifier that is both caller-free and dependency-free. The
+  smallest reviewed semantic closure is the Frontend testing-lineage checker
+  and its Testing Frontend evidence callee, both under
+  `profile.application.frontend` but preserving separate observable contracts.
+- Selected two separately identified suites with one explicit registry
+  dependency and one atomic acceptance. A caller-only migration, callee-only
+  migration, duplicated callee semantics, and one merged diagnostic contract
+  are rejected.
+- Kept the evidence checker's row-18 invocation under independent migration
+  ownership. Historical M6-T12 references to the lineage checker transfer to
+  registered-suite evidence only at acceptance.
+- Froze derivation of exact lineage identities from execution-decomposition
+  row/child selections and matching disposition projections. No identifier
+  list or count is copied.
+- No package is admitted, no suite is registered, and no Bash, engine/schema,
+  standards, fixture, registry, manifest, compatibility behavior, or fallback
+  changes in this planning slice. Dependency-closed disposable preflight is
+  next.

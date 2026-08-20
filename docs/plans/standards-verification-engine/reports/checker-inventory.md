@@ -3561,3 +3561,27 @@ suites, both plan validators, lifecycle fixtures, protected-source and
 removed-path proof, the complete 121-checker checkpoint, freshness, and diff
 integrity pass. No copied mutable data, false dependency, wrapper,
 compatibility path, engine feature, inferred owner, or fallback remains.
+
+### VE076 Frontend Evidence Dependency Closure
+
+Fresh post-M6-I4 structure has no retained verifier without both caller and
+dependency concerns. The smallest reviewed closure contains
+`verify-frontend-testing-lineage.sh` and
+`verify-testing-frontend-evidence.sh`. The lineage checker is caller-free and
+calls only the evidence checker; the evidence checker is called only by the
+lineage checker and calls the independently owned row-18 decomposition gate.
+
+Both semantic contracts are owned by `profile.application.frontend`, but they
+must remain separate suites. Testing Frontend evidence owns its typed decision,
+policy, route, exclusion, disposition, and accepted-claim contract. Frontend
+testing lineage owns the exact legacy replacement relation and depends on the
+evidence suite. The row-18 gate remains independent rather than becoming a
+Frontend dependency.
+
+Exact member sets are derivable from decomposition row 18 child 5 and row 34
+child 5 and comparable to filtered current disposition projections. No copied
+identifier set or count is needed. M6-I5 and M6-I6 will be admitted separately
+at train orders 120 and 121 after disposable joint preflight, then accepted in
+one dependency-closed cutover. No current suite, registry row, package,
+manifest, Bash source, canonical evidence, engine contract, compatibility
+path, or fallback changes in this replan.

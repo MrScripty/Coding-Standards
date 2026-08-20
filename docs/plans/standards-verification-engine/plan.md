@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-I4 accepted; fresh-graph package discovery
+**Current phase:** Milestone 6: VE076 Frontend dependency-closure preflight
 
-**Next slice:** derive the next owner-local package from the fresh post-M6-I4
-inventory and graph. Do not reuse pre-acceptance topology or infer semantic
-ownership from graph incidence.
+**Next slice:** preflight the M6-I5 Testing Frontend evidence suite and M6-I6
+Frontend testing-lineage suite together, prove their registry dependency and
+mutation parity, then remove every disposable artifact before admission.
 
 **Acceptance status:** `pending`
 
@@ -8254,6 +8254,71 @@ edges. No source rewrite, copied mutable data, engine/schema feature, helper
 migration, wrapper, alias, compatibility behavior, inferred owner, false
 dependency, optional-missing path, or fallback remains. Fresh-graph package
 discovery is next.
+
+##### VE076 Frontend Evidence Dependency Closure Re-plan
+
+**Status:** Accepted planning decision; no package admitted.
+
+Fresh post-M6-I4 evidence contains no retained verifier that is both caller-
+free and dependency-free. The smallest reviewed closure is
+`verify-frontend-testing-lineage.sh` and its sole semantic callee,
+`verify-testing-frontend-evidence.sh`. Both contracts belong to
+`profile.application.frontend`, but they remain distinct observable outcomes:
+the evidence suite owns Testing Frontend decision and canonical-policy proof,
+while the lineage suite owns exact replacement of the Frontend legacy
+identities. Graph incidence selected the boundary for review; it did not assign
+semantic ownership.
+
+M6-I5 will own the `testing-frontend-evidence` suite. It must preserve the
+ordered 15-case decision contract, canonical profile text, Testing and
+Frontend routes, retired mechanism exclusions, the exact Testing Frontend
+replacement relation, and accepted migration claims. The identity relation
+must derive its members from execution-decomposition row 18 child 5 and compare
+them with the matching source, target, and disposition projection from current
+disposition authority. The suite must not copy identifiers or a count.
+
+M6-I6 will own the `frontend-testing-lineage` suite. It must preserve canonical
+profile text and the exact Frontend lineage relation derived from execution-
+decomposition row 34 child 5 and the matching current disposition projection.
+It must not repeat M6-I5 semantics. The registry will declare
+`frontend-testing-lineage -> testing-frontend-evidence`, because running the
+lineage contract requires the evidence contract and both are owned by the same
+Frontend profile boundary.
+
+The Testing evidence checker's call to
+`verify-milestone-7-row-18-decomposition.sh` remains an independently owned
+migration gate. It is neither Frontend policy nor a registered suite
+dependency. M6-I5 must retain both current representations of that call as
+checker-backed `independent-gate` evidence until acceptance. Two accepted
+M6-T12 historical records that currently name
+`verify-frontend-testing-lineage.sh` will transfer to
+`suite:frontend-testing-lineage` only at acceptance.
+
+Preflight, admission, and acceptance are dependency-closed. Disposable
+preflight must register both suites together, prove positive dependency
+execution and isolated decision, text, route, prohibition, exact-relation,
+disposition, and accepted-claim mutations, then remove all disposable files.
+Admission will create separate M6-I5 and M6-I6 package records at train orders
+120 and 121 with exact non-overlapping semantic ownership and exact incident
+edge records. Neither suite is registered and neither Bash checker is edited
+or deleted during admission.
+
+Acceptance is one atomic integration slice: register both suites, declare only
+the M6-I6-to-M6-I5 dependency, transition both packages and their exact edge
+records, transfer the two historical M6-T12 records, delete both obsolete Bash
+checkers, regenerate temporary projections, and verify the dependency closure.
+Accepting only one package is prohibited: deleting only the callee leaves a
+Bash caller, while deleting only the caller preserves duplicate callee
+authority. One merged suite is also prohibited because it would conflate two
+diagnostic contracts and obscure their dependency.
+
+No engine/schema capability, standards or fixture rewrite, copied ID/count,
+Bash bridge, wrapper, alias, callback, compatibility route, inferred owner,
+optional-missing behavior, false dependency, or fallback is authorized. Re-
+plan if existing generic assertions cannot express either relation, the final
+incident graph differs, the row-18 gate proves Frontend-owned, shared canonical
+evidence must change, mutation parity requires duplicated semantics, or any
+implementation leaves the admitted write sets.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

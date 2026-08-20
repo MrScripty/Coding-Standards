@@ -12831,3 +12831,22 @@ evidence, all 154 declarative suites, both plan validators, lifecycle fixtures,
 the complete 121-checker checkpoint, and diff integrity pass. No compatibility
 route, wrapper, helper migration, dependency, engine/schema change, copied
 mutable data, inferred owner, or fallback remains.
+
+## 2026-08-19 VE076 Frontend Evidence Dependency Closure Re-plan
+
+**Outcome:** two owner-local packages planned for one atomic dependency-closed
+acceptance; no package admitted.
+
+Fresh graph review found no fully edge-free verifier. The smallest reviewed
+Frontend closure is the testing-lineage checker and its Testing Frontend
+evidence callee. They share `profile.application.frontend` ownership but expose
+separate lineage and evidence contracts, so they become two suites with one
+explicit lineage-to-evidence registry dependency rather than one merged suite.
+
+The evidence checker's row-18 decomposition invocation remains independently
+owned migration evidence. Exact replacement identities will derive from row 18
+child 5 and row 34 child 5 and matching disposition projections; no ID list or
+count is copied. Joint disposable preflight precedes separate package
+admission, and both Bash checkers are deleted only in one atomic acceptance.
+No bridge, wrapper, compatibility path, inferred owner, false dependency, or
+fallback is authorized.
