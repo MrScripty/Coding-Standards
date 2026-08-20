@@ -4693,6 +4693,25 @@
   fallback is admitted.
 - Atomic M6-I15 acceptance is next.
 
+## 2026-08-20 - M6-I15 Accessibility Name-And-Input Acceptance
+
+- Registered one five-check Accessibility suite for name/input decisions,
+  canonical owner language, web reference evidence, legacy-index closure, and
+  exact STD-0017 through STD-0019 dispositions. The decision engine derives all
+  fixture outcomes and cardinality.
+- Accepted train order 130, transferred two historical M6-R1 records to exact
+  suite evidence, accepted both current edges, and deleted the replaced Bash
+  checker. Focus lifecycle remains a separately executed checker gate.
+- Whole-checker numeric lifecycle derives candidate retirement. Final generated
+  evidence contains 110 Bash checkers, 114 nodes, 686 edges, and 114
+  components.
+- Focused suite and independent-gate checks, package/edge authority, numeric
+  lifecycle, removal, generated freshness, plans, all 162 declarative suites,
+  complete checkpoint, mutation parity, and diff integrity pass. No engine
+  change, helper migration, false dependency, copied count, manual numeric
+  mapping, Bash repair, wrapper, compatibility path, or fallback remains.
+- Fresh-graph owner-coherent package selection is next.
+
 ## 2026-08-20 - M6-I14 Documentation Directory-README Acceptance
 
 - Registered one four-check Documentation suite for directory README

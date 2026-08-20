@@ -1,0 +1,86 @@
+schema_version = 1
+id = "accessibility-name-input"
+owner = "topics/accessibility.md"
+description = "Accessible names and input relationships from selected task, modality, state, and capability facts without mechanism fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/accessibility/name-input-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+purpose = ["declared", "missing"]
+name = ["contradictory", "generated", "missing", "perceivable"]
+relationship = ["complete", "contradictory", "missing"]
+instructions = ["complete", "missing"]
+state = ["complete", "missing", "updated"]
+capability = ["missing", "supported", "unsupported"]
+fallback = ["generated-default", "none", "placeholder", "role-only", "visual-proximity"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "name", op = "eq", value = "contradictory" },
+  { field = "relationship", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "purpose", op = "eq", value = "missing" },
+  { field = "name", op = "eq", value = "missing" },
+  { field = "relationship", op = "eq", value = "missing" },
+  { field = "instructions", op = "eq", value = "missing" },
+  { field = "state", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "topics/accessibility.md"
+required = ["## Names And Descriptions", "## Input Relationships And Instructions", "placeholder", "Visual proximity"]
+prohibited = []
+
+[[checks]]
+id = "web-reference"
+type = "text"
+path = "reference/recipes/accessibility.md"
+required = ["## Web Naming And Form Mechanisms", "aria-label=\"Delete item\"", "htmlFor=\"username\"", "type=\"search\""]
+prohibited = []
+
+[[checks]]
+id = "legacy-index-closure"
+type = "text"
+path = "ACCESSIBILITY-STANDARDS.md"
+required = ["## Names And Forms Semantics (Migrated)", "[Accessibility](topics/accessibility.md)", "[Accessibility Recipes](reference/recipes/accessibility.md)"]
+prohibited = ["aria-label="]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0017", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "split"],
+  ["STD-0018", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "split"],
+  ["STD-0019", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "split"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0017", "STD-0018", "STD-0019"]

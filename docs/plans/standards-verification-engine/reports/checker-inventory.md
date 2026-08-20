@@ -4147,3 +4147,22 @@ admitted at train order 130; admission evidence contains 111 Bash checkers, 115
 nodes, 691 edges, and 115 components without an engine change, helper
 migration, suite dependency, manual numeric mapping, Bash repair, wrapper,
 compatibility path, or fallback.
+
+### M6-I15 Accessibility Name-And-Input Acceptance
+
+M6-I15 is accepted exactly as admitted. The registered
+`accessibility-name-input` suite uses one derived decision table, three text
+checks, and one exact table projection. It owns accessible-name and
+input-relationship outcomes, canonical and reference evidence, legacy closure,
+and STD-0017 through STD-0019 without storing fixture or graph counts.
+
+Focus lifecycle remains independently executed through two accepted current
+edge records. Two historical M6-R1 records now point to the exact suite; the
+replaced checker is absent.
+
+Final evidence contains 110 Bash checkers, 114 nodes, 686 edges, and 114
+components. Focused owner and independent-gate checks, package/edge authority,
+numeric lifecycle, generated freshness, all 162 declarative suites, typed
+mutations, complete checkpoint, and diff integrity pass without an engine
+capability, helper migration, suite dependency, copied count, manual numeric
+mapping, Bash repair, wrapper, compatibility path, or fallback.

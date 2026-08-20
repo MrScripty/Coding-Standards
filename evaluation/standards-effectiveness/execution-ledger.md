@@ -12959,6 +12959,28 @@ components. No engine capability, helper migration, suite dependency, copied
 count, manual numeric mapping, Bash repair, wrapper, compatibility behavior, or
 fallback is admitted.
 
+## 2026-08-20 M6-I15 Accessibility Name-And-Input Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Accessibility suite now owns accessible-name and
+input-relationship decisions, canonical and reference evidence, legacy
+closure, and exact STD-0017 through STD-0019 projection. Fixture cardinality is
+derived by the decision engine. Two historical M6-R1 records use exact suite
+evidence, while focus lifecycle remains an independently executed checker gate.
+
+M6-I15 is accepted at train order 130, both current edge dispositions are
+accepted, and the replaced Bash checker is absent. Whole-checker numeric
+lifecycle derives retirement without a candidate map. Final evidence contains
+110 Bash checkers, 114 nodes, 686 edges, and 114 components.
+
+Focused suite and independent-gate checks, package/edge authority, numeric
+lifecycle, removal, generated freshness, both plan validators, all 162
+declarative suites, complete checkpoint, mutation parity, and diff integrity
+pass. No engine capability, helper migration, suite dependency, false edge,
+copied count, manual numeric mapping, Bash repair, wrapper, compatibility path,
+or fallback remains.
+
 ## 2026-08-19 VE078 Source-Index Component Replacement Re-plan
 
 **Outcome:** capability-first complete-component replacement selected; no
