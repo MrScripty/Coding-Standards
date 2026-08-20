@@ -4035,6 +4035,22 @@ No package is admitted by this replan. Disposable positive and mutation
 preflight must pass before train-order-122 admission, with every mutation
 target restored and every temporary suite/registry artifact removed.
 
+### M6-I7 Rust API Owner Contract Admission
+
+The child plan admits train order 122 after a six-check disposable suite, all
+157 temporary registry suites, and eight isolated typed mutations pass. Exact
+row-20 child-1 identity and disposition derive from current decomposition,
+owner-validation, and disposition authority. The already-closed legacy index
+uses retired-literal exclusions rather than recreated legacy headings.
+
+The temporary suite and registry entry are absent after preflight, and every
+authoritative mutation target is restored. M6-I7 records only the two live
+metadata-helper representations as external-artifact evidence. The checker,
+shared helper, row-35 consumer, four historical gates, standards, fixtures, and
+engine remain unchanged. Atomic acceptance is authorized; no copied count,
+false dependency, compatibility behavior, inferred owner, or fallback is
+admitted.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

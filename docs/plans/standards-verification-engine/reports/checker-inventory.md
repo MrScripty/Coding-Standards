@@ -3649,3 +3649,24 @@ decision, metadata-graph, text, Markdown-section, relation, and keyed-relation
 checks. Row 20 child 1 and current owner/disposition tables provide exact
 derived identity, so no identifier list or count is needed. M6-I7 disposable
 preflight precedes train-order-122 admission.
+
+### Admitted M6-I7 Rust API Owner Contract
+
+Disposable preflight produces one six-check suite using only existing decision,
+metadata-graph, text, relation, and keyed-relation capabilities. The suite
+derives the three row-20 child-1 identities, validates their Rust API source and
+target selection, and compares owner-validation disposition with current
+disposition authority. The former source is already an index, so direct
+retired-literal exclusion preserves the Bash checker's effective absent-section
+contract without reconstructing deleted headings.
+
+Focused positive execution, all 157 temporary suites, and eight typed mutation
+cases pass. All disposable artifacts are absent after preflight and all
+authoritative inputs are restored.
+
+Train order 122 records one caller-free checker with one shared helper target
+represented by executable-reference and helper-dependency edges. Both are
+admitted as `external-owned-artifact`; the helper remains shared by 32 other
+verifiers. The suite is unregistered and the Bash checker remains. Generated
+evidence contains 119 Bash checkers, 124 nodes, 665 edges, and 124 components;
+the only graph addition is package-manifest contract authority.

@@ -4367,3 +4367,23 @@
 - No package is admitted and no suite, registry, manifest, Bash, helper,
   standards, fixture, engine/schema, compatibility behavior, or fallback
   changes in this planning slice. Disposable preflight is next.
+
+## 2026-08-19 - M6-I7 Rust API Owner Contract Admission
+
+- Reconfirmed clean canonical `65e9dbf` before disposable preflight and
+  admission.
+- Derived a six-check suite from current Rust API evidence. Positive proof and
+  all 157 temporary registry suites pass; eight isolated mutations fail with
+  typed decision, metadata, text, route, prohibition, identity, owner, or
+  disposition diagnostics.
+- Corrected disposable configuration to authoritative fixture vocabulary and
+  the already-closed legacy index. Existing relation checks derive row-20
+  child-1 identities and exact owner/disposition values without copied IDs or
+  counts; no engine change was needed.
+- Removed every disposable suite and registry artifact and restored every
+  authoritative mutation target before admission.
+- Admitted train order 122 with two external-artifact records for the shared
+  metadata helper. The checker, helper, row-35 consumer, historical gates, and
+  all canonical evidence remain unchanged.
+- Package/edge authority and regenerated evidence pass at 119 Bash checkers,
+  124 nodes, 665 edges, and 124 components. Atomic M6-I7 acceptance is next.

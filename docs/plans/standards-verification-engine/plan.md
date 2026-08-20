@@ -2,18 +2,17 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE077 accepted; M6-I7 disposable preflight
+**Current phase:** Milestone 6: M6-I7 admitted; atomic acceptance next
 
-**Next slice:** preflight and admit M6-I7 Rust API Owner Contract at train
-order 122. Do not register its suite or change lifecycle evidence during
-admission.
+**Next slice:** accept M6-I7 atomically by registering the preflighted suite,
+reconciling row-35 and historical gate evidence, and deleting only the obsolete
+Rust API checker.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** VE077 froze the next owner-local package from the
-fresh post-M6-I6 graph without admitting it.
+**Latest accepted slice:** VE077 froze the Rust API owner package boundary.
 
-**Latest admitted slice:** `none`; no package follows accepted M6-I6.
+**Latest admitted slice:** M6-I7 Rust API Owner Contract at train order 122.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -8424,6 +8423,48 @@ authorized. Re-plan if existing generic checks cannot derive both identity and
 disposition, row-35 reconciliation requires a schema change, the helper is no
 longer shared, final incidence differs, mutation parity requires canonical
 evidence changes, or implementation leaves the frozen package boundary.
+
+##### M6-I7 Rust API Owner Contract Admission
+
+**Status:** Admitted at train order 122; atomic acceptance is next.
+
+Disposable preflight represents the retained checker with six existing generic
+checks: ordered typed decisions, native metadata closure, canonical profile
+text, former-source route and retired-default exclusions, exact row-20 child-1
+identity, and keyed owner/disposition lineage. The identity relation filters
+current Rust API dispositions to `index` and `refine`, while the keyed relation
+compares row-20 owner validation with current target/disposition values. No ID
+or count is copied.
+
+The focused suite and all 157 disposable registry suites pass. Eight isolated
+mutations return typed failures for decision outcome, metadata resolution,
+canonical text, legacy route, retired default, decomposition identity,
+owner/disposition, and disposition source drift. The legacy source is already
+a migration index, so the original checker's absent-section behavior is
+preserved as direct retired-literal exclusion rather than requiring removed
+headings. Every authoritative mutation target was restored, and the disposable
+suite and registry entry were removed before admission.
+
+M6-I7 is admitted with two representations of its only live executable output:
+the shared metadata helper is an `external-owned-artifact` for both executable
+reference and helper dependency. The suite is not registered, the Bash checker
+and helper remain executable, the row-35 consumer and four historical gates
+remain unchanged, and no acceptance lifecycle change occurs during admission.
+
+Acceptance must register the exact preflighted suite without dependencies,
+transition M6-I7 and its two incident records to accepted, remove exactly the
+Rust API row-35 consumer, transfer all four M6-P8/M6-P9 historical gates to
+`suite:rust-api-owner-contract`, delete only the obsolete Rust API checker, and
+regenerate temporary projections. The metadata helper and its other consumers
+remain unchanged.
+
+No engine/schema feature, source or fixture rewrite, helper migration, copied
+mutable identity/count, Bash edit, compatibility behavior, inferred owner,
+false dependency, optional-missing behavior, or fallback is admitted. Re-plan
+if the final incidence or lifecycle rows differ, the exact preflighted suite
+cannot be restored, row-35 reconciliation changes meaning, historical suite
+evidence cannot remain independent, or implementation leaves the admitted
+write set.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

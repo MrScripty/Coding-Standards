@@ -12903,3 +12903,20 @@ suite evidence, and deletes only the Rust API checker. The shared metadata
 helper remains an external artifact. No package, suite, registry, manifest,
 Bash, helper, source, fixture, engine/schema, compatibility behavior, or
 fallback changes in this planning slice.
+
+## 2026-08-19 M6-I7 Rust API Owner Contract Admission
+
+**Outcome:** train order 122 admitted; atomic acceptance is next.
+
+Disposable preflight passes a six-check Rust API suite, all 157 temporary
+registry suites, and eight isolated typed mutations. Exact identities derive
+from row 20 child 1, and source/target plus owner/disposition are compared with
+current authorities. The legacy source is already an index, so retired literal
+exclusions preserve the old absent-section result without restoring headings.
+
+All disposable files are absent and all authoritative mutation targets are
+restored. M6-I7 records the shared metadata helper as an external artifact for
+both live edge representations. No suite is registered; the checker, helper,
+row-35 consumer, four historical gates, sources, fixtures, engine/schema,
+compatibility behavior, and fallback remain unchanged. Generated evidence is
+fresh at 119 Bash checkers, 124 nodes, 665 edges, and 124 components.
