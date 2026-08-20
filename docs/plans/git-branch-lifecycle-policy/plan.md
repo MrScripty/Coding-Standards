@@ -1,12 +1,12 @@
 # Plan: Git Branch And Worktree Lifecycle Policy
 
-**Plan status:** `Implemented`
+**Plan status:** `Accepted`
 
-**Current phase:** Fast-forward integration and terminal evidence
+**Current phase:** Accepted
 
-**Next slice:** commit the verified policy, fast-forward unchanged `main`, and record terminal acceptance
+**Next slice:** `none`
 
-**Acceptance status:** `partial`
+**Acceptance status:** `satisfied`
 
 **Accepted base:** `9c8e1f46b919a8c62361f7261d5e93f256f3a18e`
 
@@ -31,7 +31,7 @@ worktree integrated by fast-forward from an unchanged accepted base.
 | A3 | Commit has audited policy-impact coverage, and logical/path aliases return the same exact consumers. | `integration` | repository | `automated` | `satisfied` | [Verification report](reports/verification.md) |
 | A4 | Every current local branch and worktree has a non-destructive classification and later cleanup recommendation; no resource is deleted or rewritten. | `inventory` | repository | `automated-review` | `satisfied` | [Branch inventory](inventories/branches.tsv), [worktree inventory](inventories/worktrees.tsv), and [cleanup report](reports/cleanup-dispositions.tsv) |
 | A5 | All focused, Python, declarative, generated, plan/link, and complete repository gates pass. | `complete` | repository | `automated` | `satisfied` | [Verification report](reports/verification.md) |
-| A6 | The accepted task branch is fast-forwarded to unchanged `main`, and its clean worktree/branch receive an explicit terminal disposition. | `integration` | repository | `manual` | `pending` | Pending terminal acceptance record |
+| A6 | The accepted task branch is fast-forwarded to unchanged `main`, and its clean worktree/branch receive an explicit terminal disposition. | `integration` | repository | `manual` | `satisfied` | [Verification report](reports/verification.md) and Git revision `55f42c03cb6d94ef770fc64a9907ae99991276be` |
 
 ## Scope
 
@@ -133,14 +133,14 @@ inventory, and a fast-forward lifecycle demonstration.
 - [x] Update every audited projection and record exact dispositions.
 - [x] Audit Commit policy impact and prove alias/owned-suite closure.
 - [x] Add and pass required lifecycle decision scenarios.
-- [ ] Integrate the completely verified policy by fast-forward and record the
+- [x] Integrate the completely verified policy by fast-forward and record the
   terminal resource disposition.
 
 **Acceptance gate:** A1-A6 are satisfied, the staged write set is exact, no Git
 resource is destructively cleaned, and canonical `main` is clean after
 fast-forward integration.
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 ## Blockers
 
@@ -167,6 +167,6 @@ redundant branch; no cleanup is performed as part of implementation.
 
 ## Final Acceptance
 
-- Acceptance status: `partial`
+- Acceptance status: `satisfied`
 - Deferred follow-ups: authorized cleanup of inventoried resources
-- Final status: `Implemented`
+- Final status: `Accepted`

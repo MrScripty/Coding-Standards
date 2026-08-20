@@ -32,3 +32,16 @@
 - No branch, worktree, registration, or commit was removed, rewritten, or
   discarded. The policy is implemented and awaits fast-forward integration and
   terminal evidence.
+
+## 2026-08-20: Fast-Forward Integration And Acceptance
+
+- Canonical `main` remained clean at the accepted base immediately before
+  integration.
+- Git confirmed `main` was an ancestor of the complete proposal. The serial
+  integration owner fast-forwarded `main` from `9c8e1f4` to policy commit
+  `55f42c03cb6d94ef770fc64a9907ae99991276be`; no rebase, merge commit,
+  cherry-pick, reconstruction, or history rewrite occurred.
+- The task branch terminal disposition is `integrated`. Its clean worktree and
+  redundant branch are recommended for later authorized removal; this task did
+  not delete or prune either resource.
+- Result: every objective acceptance claim is satisfied.

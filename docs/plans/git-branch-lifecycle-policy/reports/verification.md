@@ -31,8 +31,13 @@ registrations. Every row has a non-destructive cleanup recommendation. No
 resource was removed or rewritten. Unique, dirty, locked, checked-out, and
 unknown resources remain preserved for separately authorized review.
 
-## Remaining Acceptance
+## Terminal Acceptance
 
-The policy commit must fast-forward unchanged `main`. After that operation,
-the task branch is `integrated`; its clean worktree and redundant branch become
-eligible for separately authorized cleanup, but this task performs no deletion.
+Canonical `main` remained clean at the accepted base and was fast-forwarded to
+policy commit `55f42c03cb6d94ef770fc64a9907ae99991276be`. The complete
+proposal descended from current target authority, so no rebase, merge commit,
+cherry-pick, reconstruction, or fallback was used.
+
+The task branch is `integrated`. Its clean worktree and redundant branch are
+eligible for separately authorized cleanup. Neither resource was removed by
+this task.

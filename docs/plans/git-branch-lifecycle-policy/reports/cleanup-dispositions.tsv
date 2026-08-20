@@ -5,7 +5,7 @@ branch	codex/7.4b8u-native-artifact-release	review-redundant-ref	separate	tip is
 branch	codex/7.4b8v-platform-evidence	preserve-owner-review	separate	branch is checked out
 branch	codex/generic-edge-correctness	preserve-owner-review	separate	branch is checked out
 branch	codex/generic-edge-system	preserve-owner-review	separate	branch is checked out
-branch	codex/git-branch-lifecycle-policy	retain-active	separate	current governed task
+branch	codex/git-branch-lifecycle-policy	review-redundant-ref	separate	policy commit is integrated; branch removal requires separate authorization
 branch	codex/m6-c1-admission	preserve-owner-review	separate	branch is checked out
 branch	codex/m6-c1-implementation	preserve-owner-review	separate	branch is checked out
 branch	codex/m6-c2-admission	preserve-owner-review	separate	branch is checked out
@@ -292,7 +292,7 @@ worktree	/tmp/cs-cross-platform-replan	prune-registration	separate	administrativ
 worktree	/tmp/cs-fresh-package	map-then-review-removal	separate	head is patch-equivalent to main
 worktree	/tmp/cs-generic-edge-correctness	map-then-review-removal	separate	head is patch-equivalent to main
 worktree	/tmp/cs-generic-edge-system	map-then-review-removal	separate	head is patch-equivalent to main
-worktree	/tmp/cs-git-branch-lifecycle	retain	separate	canonical integration worktree
+worktree	/tmp/cs-git-branch-lifecycle	review-clean-removal	separate	purpose ended after fast-forward; removal requires separate authorization
 worktree	/tmp/cs-i10-accept	map-then-review-removal	separate	head is patch-equivalent to main
 worktree	/tmp/cs-i10-admit	map-then-review-removal	separate	head is patch-equivalent to main
 worktree	/tmp/cs-i10-admit2	map-then-review-removal	separate	head is patch-equivalent to main
