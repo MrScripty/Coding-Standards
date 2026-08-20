@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** accept Milestone 1 of the
-[work proportionality and policy impact recovery](../work-proportionality-and-policy-impact/plan.md)
+**Next slice:** audit the fresh post-recovery executable graph and package
+authority without preselecting M6-I17
 
 **Acceptance status:** `pending`
 
@@ -122,7 +122,7 @@ fallback.
 **Accepted boundary:** package records are accepted through M6-I16 at train
 order 131.
 
-**Current derived state:** 163 registered declarative suites, 109 retained Bash
+**Current derived state:** 164 registered declarative suites, 109 retained Bash
 checkers, 113 executable nodes, 683 conservative reference edges, and 113
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
@@ -137,7 +137,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Blocked` | Work proportionality and policy impact recovery |
+| 6 | Exceptional checks and Bash retirement | `Active` | Fresh post-recovery graph audit; no package preselected |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -148,23 +148,22 @@ programming language.
 
 **Recovery dependency:** M6-I16 is accepted after final-state proof. The
 [work proportionality and policy impact recovery](../work-proportionality-and-policy-impact/plan.md)
-must be accepted before a fresh post-recovery graph audit or another package
-admission.
+is accepted. The next package must be selected from a fresh post-recovery graph
+audit; evidence captured before recovery does not admit or preselect M6-I17.
 
 **Next work:**
 
-1. Accept the work proportionality and policy impact recovery.
-2. Audit the fresh post-recovery graph without preselecting M6-I17 and select
+1. Audit the fresh post-recovery graph without preselecting M6-I17 and select
    one owner-coherent package from reviewed lifecycle and dependency evidence.
-3. Select each subsequent owner-coherent package from reviewed lifecycle and
+2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
-4. Add another reusable primitive only when multiple coherent owners require it or
+3. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
-5. Prepare disjoint admitted suite/checker changes concurrently when their
+4. Prepare disjoint admitted suite/checker changes concurrently when their
    write sets and dependencies are frozen.
-6. Integrate shared authority serially and run one complete checkpoint at each
+5. Integrate shared authority serially and run one complete checkpoint at each
    shared-contract or wave boundary.
-7. Continue until no Bash verifier, helper, or launcher remains, then delete
+6. Continue until no Bash verifier, helper, or launcher remains, then delete
    the temporary reference model.
 
 **Acceptance gate:** exact inventory reports zero Bash verification paths; the
@@ -190,7 +189,7 @@ fallback remains.
 
 ## Blockers
 
-- Work proportionality and policy impact recovery acceptance.
+- `none`
 
 ## Re-Plan Triggers
 

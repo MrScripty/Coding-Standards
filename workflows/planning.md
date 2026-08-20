@@ -14,19 +14,18 @@
 
 ## When A Written Plan Is Required
 
-Create a written plan when any condition applies:
+Apply the bounded-local exclusion before the written-plan triggers. A change
+with a clear objective, exact write set, regression check, and acceptance path
+may proceed directly even when it touches a public, generated, persistence,
+process, language, or user-interface boundary. State its write set inline; an
+exact write set does not require a plan artifact.
 
-- multiple slices have ordering or migration dependencies;
-- a change crosses process, language, persistence, generated, public, or
-  user-interface boundaries;
-- ownership, lifecycle, concurrency, rollout, or compatibility decisions must
-  remain stable during implementation;
-- required acceptance cannot be completed in the current environment;
-- parallel workers need bounded write sets; or
-- failure would create material security, data, release, or operational risk.
-
-A small local change may use an inline checklist when objective, write set,
-regression test, and acceptance are unambiguous.
+Create a written plan when the change introduces material sequencing,
+independently owned contract, migration, coordination, rollout, risk, or
+acceptance complexity that must remain stable during implementation. A boundary
+or file category alone does not satisfy this condition. Parallel work requires
+a plan only when ownership, dependency, integration, or stale-state coordination
+is material.
 
 ## Artifact Model
 
@@ -133,6 +132,13 @@ integration-owner write in either case.
 ## Policy Projection Completeness
 
 A normative change updates every affected distribution and enforcement surface.
+Before changing an audited policy owner, query the repository's semantic-impact
+manifest and review every returned consumer. Audit and add explicit edges for a
+previously uncovered owner before its next normative change. The manifest owns
+current semantic relations; a change report owns change-specific dispositions.
+Do not infer semantic consumers from hyperlinks, lexical similarity, or routing
+prerequisites.
+
 When a rule prescribes a machine protocol, concrete representation, or
 automated gate, its applicable prompts, templates, fixtures, and executable
 support agree before the rule becomes mandatory. Do not require a template,
@@ -173,7 +179,7 @@ positions in one hierarchy.
 Order milestones by dependency. For each milestone record:
 
 - one goal;
-- smallest useful vertical result;
+- one coherent implementation unit;
 - exact allowed write set;
 - semantics or contracts preserved/replaced;
 - focused tests or fixtures;
@@ -181,8 +187,20 @@ Order milestones by dependency. For each milestone record:
 - re-plan conditions; and
 - lifecycle state.
 
-For cross-layer work, prefer a thin real vertical path before horizontal
-expansion. Do not substitute a headless path when the objective is user-facing.
+Select one coherent implementation unit. Split it only when separation
+materially improves independent acceptance, risk containment, dependency
+ordering, conflict isolation, rollback, or feedback. A bounded change that can
+be understood and verified as a whole is one slice regardless of how many files
+or layers it touches. Do not split work merely to minimize diff size or satisfy
+a preferred commit cadence.
+
+A written plan may contain one milestone and one implementation slice, and the
+complete requested change may be that slice. Prefer thin vertical milestones
+only when separation produces useful acceptance, risk reduction, or dependency
+ordering. For cross-layer work that benefits from separation, prefer a real
+vertical path before horizontal expansion. Do not substitute a headless path
+when the objective is user-facing. File count, layer count, line count, and
+commit cadence do not decide slice count.
 
 ## Current State, Not History
 
@@ -212,7 +230,8 @@ Stop and re-plan when:
 - required facts invalidate a decision;
 - a milestone misses its acceptance gate;
 - compatibility, migration, security, data, or lifecycle risk changes;
-- implementation requires files outside the approved write set;
+- a directly affected file outside the stated write set changes objective,
+  ownership, contract, risk, or acceptance scope;
 - a lower-fidelity check was being used for a higher-fidelity objective; or
 - a new dependency changes sequencing.
 

@@ -33,15 +33,18 @@ observable task conditions. Do not read every document by default.
 | --- | --- |
 | Any code or standards change | [Implementation](workflows/implementation.md) |
 | Behavior or contract must be proven | [Verification](workflows/verification.md) |
-| Multi-step work, architectural decisions, or re-planning | [Planning](workflows/planning.md) |
+| Material sequencing, independently owned contract, migration, coordination, rollout, risk, acceptance complexity, or re-planning | [Planning](workflows/planning.md) |
 | Commit creation or history maintenance | [Commit](workflows/commit.md) |
 | Durable responsibility, decision, contract, or operational procedure changes | [Documentation](workflows/documentation.md) |
 | Build-time actions, authoritative build inputs or outputs, invalidation, native integration, environment access, or deterministic-build requirements change | [Build](workflows/build.md) |
 | CI or development-tool selection, configuration, scheduling, or orchestration changes | [Tooling](workflows/tooling.md) |
 | Shipping an artifact, changing a published version promise, or preparing consumer-visible release information | [Release](workflows/release.md) |
 
-Small, local, low-risk changes do not require a large implementation plan when
-the objective, write set, regression check, and acceptance are obvious.
+Apply the bounded-local exclusion before Planning triggers. A coherent change
+with an obvious objective, exact write set, regression check, and acceptance
+path does not require a written plan merely because it touches multiple files,
+layers, or a public, generated, persistence, process, language, or
+user-interface boundary.
 
 ## Workflow Profiles
 

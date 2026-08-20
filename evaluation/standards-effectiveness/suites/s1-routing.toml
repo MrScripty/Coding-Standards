@@ -28,6 +28,13 @@ path = "STANDARDS-ROUTER.md"
 required = ["\n- ID: `router`\n"]
 
 [[checks]]
+id = "bounded-planning-route"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["Apply the bounded-local exclusion before Planning triggers", "does not require a written plan merely because it touches multiple files"]
+prohibited = ["Multi-step work, architectural decisions, or re-planning"]
+
+[[checks]]
 id = "implementation-id"
 type = "text"
 path = "workflows/implementation.md"

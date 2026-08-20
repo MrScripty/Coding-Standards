@@ -38,7 +38,7 @@ any = [{ field = "identity", op = "ne", value = "yes" }, { field = "objective", 
 id = "template-content"
 type = "text"
 path = "templates/PLAN-TEMPLATE.md"
-required = ["**Plan status:**", "**Current phase:**", "**Next slice:**", "**Acceptance status:**", "**Execution ledger:**", "**Issues:**", "## Objective", "## Objective Acceptance", "## Scope", "## Constraints And Assumptions", "## Binding Decisions", "## Simplicity And Ownership Review", "## Milestones", "**Allowed write set:**", "**Acceptance gate:**", "## Blockers", "## Re-Plan Triggers", "## Concurrent Work", "## Final Acceptance"]
+required = ["**Plan status:**", "**Current phase:**", "**Next slice:**", "**Acceptance status:**", "**Execution ledger:**", "**Issues:**", "## Objective", "## Objective Acceptance", "## Scope", "## Constraints And Assumptions", "## Binding Decisions", "## Simplicity And Ownership Review", "## Milestones", "A plan may contain one milestone and one implementation slice", "File count, layer count,", "**Allowed write set:**", "**Acceptance gate:**", "## Blockers", "## Re-Plan Triggers", "## Concurrent Work", "## Final Acceptance"]
 prohibited = ["## Inputs", "## Clarifying Questions", "## Definition of Done", "## Execution Notes", "## Commit Cadence Notes", "## Optional Subagent Assignment", "## Recommendations", "## Completion Summary", "### Milestone 2:", "/media/", "/home/"]
 
 [[checks]]

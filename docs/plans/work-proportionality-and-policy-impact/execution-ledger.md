@@ -55,3 +55,37 @@
   - the complete mixed checkpoint passed all 109 retained Bash checkers.
 - Result: Milestone 1 accepted. Milestone 2 is the only admitted next slice;
   M6-I17 remains unadmitted.
+
+## 2026-08-20: Work-Slice Proportionality And Recovery Acceptance
+
+- Operation: `continue`.
+- Accepted Milestone 2 base:
+  `5222c1d7cd6d623854114af26f612b4606a8369c`.
+- Impact review: the post-change reverse query returned 21 explicit Planning
+  consumers. The exact disposition report contains the same 21 paths in the
+  same deterministic order, each with one allowed disposition, reason, and
+  evidence owner.
+- Policy: bounded-local precedence, coherent implementation units, material
+  written-plan triggers, conditional concurrent records, and state-driven plan
+  and ledger updates replaced file-, boundary-, and commit-driven ceremony.
+- Behavioral evidence: one multi-output fixture proves all seven required
+  scenarios across plan selection, slice selection, artifact updates,
+  concurrent-profile routing, and concurrent-record consumption.
+- Projection review: Router, both prompts, the plan template, Implementation,
+  Commit, and affected enforcement suites were updated. Existing admission,
+  template, consolidation, and concurrent fixtures plus the concurrent profile
+  were reviewed and remained correct.
+- Verification:
+  - all focused Planning, concurrent-profile, entrypoint, template, routing,
+    and semantic-impact suites passed;
+  - exact consumer-disposition matching passed for all 21 rows;
+  - all 315 Python tests and all 164 registered declarative suites passed;
+  - generated evidence remained current at 109 retained Bash checkers, 113
+    nodes, 683 edges, and 113 components;
+  - all affected active-plan structure checks and concrete Markdown links
+    passed; template-local placeholder links remained intentionally unresolved;
+  - the complete mixed checkpoint passed all 109 retained Bash checkers; and
+  - `git diff --check` and final staged write-set review passed.
+- Result: both milestones and all objective acceptance claims are satisfied.
+  Parent plans resume with a fresh post-recovery graph audit; no M6-I17 package
+  is admitted or preselected.

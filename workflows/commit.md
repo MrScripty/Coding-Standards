@@ -22,7 +22,10 @@ Before every commit:
 4. confirm credentials, secrets, personal configuration, and unintended binary
    artifacts are absent;
 5. run the focused and affected verification selected for the slice;
-6. update active plan, issue, and ledger state when those artifacts exist; and
+6. update active plan, issue, or ledger state only when current authority,
+   lifecycle, blockers, acceptance, next-slice state, an accepted-slice
+   boundary, a material deviation, or a material verification result changes;
+   do not mirror commit cadence into planning artifacts; and
 7. create one atomic conventional commit that describes the coherent outcome.
 
 Per-commit review concerns the index and the current slice. Do not require a

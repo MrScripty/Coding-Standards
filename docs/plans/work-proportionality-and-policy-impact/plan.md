@@ -1,15 +1,14 @@
 # Plan: Work Proportionality And Policy Impact Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 2 work-slice proportionality and residual correction
+**Current phase:** Recovery accepted
 
-**Next slice:** correct every reviewed Planning consumer and record exact
-consumer dispositions
+**Next slice:** `none`
 
-**Acceptance status:** `pending`
+**Acceptance status:** `satisfied`
 
-**Accepted base:** `68b52ba05587d3c8278aed82ee5b16202a024462`
+**Accepted base:** `5222c1d7cd6d623854114af26f612b4606a8369c`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -26,10 +25,10 @@ consumers and projections are updated without inference from links or text.
 | ID | Observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
 | A1 | A permanent typed relation answers which semantic consumers and projections require review when an audited policy owner changes. | `satisfied` | [Planning impact foundation](reports/planning-impact-foundation.md) |
-| A2 | Reverse impact for `workflow.planning` returns every required consumer, and each returned consumer has one exact recovery disposition. | `pending` | Impact query and recovery report |
-| A3 | Bounded coherent changes may proceed as one slice without a written plan, while materially sequenced or independently acceptable work still selects planning. | `pending` | Milestone 2 decision fixtures |
-| A4 | Ordinary written-plan implementation consumes no concurrent-only revision or reconciliation records. | `pending` | Planning and implementation suites |
-| A5 | Concurrent stale-proposal protections remain conditionally routed and accepted verification passes without weakening ownership or no-fallback contracts. | `pending` | Final checkpoint |
+| A2 | Reverse impact for `workflow.planning` returns every required consumer, and each returned consumer has one exact recovery disposition. | `satisfied` | [Exact consumer dispositions](reports/planning-consumer-dispositions.tsv) |
+| A3 | Bounded coherent changes may proceed as one slice without a written plan, while materially sequenced or independently acceptable work still selects planning. | `satisfied` | [Proportionality evidence](reports/work-slice-proportionality.md) |
+| A4 | Ordinary written-plan implementation consumes no concurrent-only revision or reconciliation records. | `satisfied` | `planning-admission` and `plan-implementation-entrypoint` suites |
+| A5 | Concurrent stale-proposal protections remain conditionally routed and accepted verification passes without weakening ownership or no-fallback contracts. | `satisfied` | Final mixed checkpoint recorded in the ledger |
 
 ## Scope
 
@@ -61,8 +60,8 @@ consumers and projections are updated without inference from links or text.
 - One serial integration owner controls active plans, Router, canonical
   workflows, shared verifier code, suite registry, manifests, generated
   artifacts, and acceptance state.
-- The accepted base is fixed at
-  `68b52ba05587d3c8278aed82ee5b16202a024462`; an intervening shared-authority
+- The Milestone 2 accepted base is fixed at
+  `5222c1d7cd6d623854114af26f612b4606a8369c`; an intervening shared-authority
   change makes the proposal stale and requires fresh admission.
 - The impact manifest stores reviewed current policy structure. Recovery-only
   dispositions and execution evidence belong in this directory's reports and
@@ -179,7 +178,7 @@ registered suites, mixed checkpoint, diff checks, and staged review pass; the
 residual contradiction is absent; both parent plans resume at a fresh
 post-recovery graph audit without preselecting M6-I17.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ## Blockers
 
@@ -205,7 +204,7 @@ delegated, but all writes and acceptance remain with one integration owner.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
+- Acceptance status: `satisfied`
 - Deferred follow-ups: unaudited normative owners require impact audit before
   their next normative change.
-- Final status: `Active`
+- Final status: `Accepted`

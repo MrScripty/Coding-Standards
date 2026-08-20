@@ -98,6 +98,13 @@ evidence_owner = "suite:planning-consolidation"
 
 [[edges]]
 owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv"
+relation = "fixture-projection"
+applicability = "Fixture records written-plan, slice, artifact-update, and conditional concurrent-profile proportionality decisions."
+evidence_owner = "suite:planning-admission"
+
+[[edges]]
+owner = "workflow.planning"
 consumer = "evaluation/standards-effectiveness/suites/planning-admission.toml"
 relation = "enforcement-suite-projection"
 applicability = "Suite enforces ordinary Planning admission and implementation consumption."

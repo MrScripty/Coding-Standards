@@ -63,25 +63,13 @@ Use for cross-layer, stateful, contract-heavy, concurrent, or refactor work.
 
 ## Milestones
 
+A plan may contain one milestone and one implementation slice when that is the
+complete coherent change. Add or split milestones only when separation
+materially improves independent acceptance, risk containment, dependency
+ordering, conflict isolation, rollback, or feedback. File count, layer count,
+line count, and commit cadence do not decide milestone or slice count.
+
 ### Milestone 0: [Name]
-
-**Goal:** [One useful result]
-
-**Allowed write set:**
-
-- `[path]`
-
-**Tasks:**
-
-- [ ] [Task]
-
-**Acceptance gate:**
-
-- [Evidence and level]
-
-**Status:** `Planned`
-
-### Milestone 1: [Name]
 
 **Goal:** [One useful result]
 

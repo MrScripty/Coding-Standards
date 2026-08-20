@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 work proportionality and policy impact recovery
+**Current phase:** Milestone 7 fresh post-recovery graph audit
 
-**Next slice:** accept Milestone 1 of the
-[work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md)
+**Next slice:** audit the fresh post-recovery executable graph through the
+verification-engine plan without preselecting M6-I17
 
 **Acceptance status:** `partial`
 
@@ -97,7 +97,7 @@ universal architecture policy.
 | Migration lifecycle | Canonical package, disposition, owner, and generated records own status; active-plan narration does not. |
 | Verification migration | Bash checkers and helpers are removed with accepted Python-engine replacements; no wrappers, dual authority, compatibility parsers, or fallback remain. |
 | Accelerated execution | Owner-coherent packages may prepare concurrently with disjoint write sets; shared registry, evidence, Router, and plan integration remain serial. |
-| Recovery dependency | The work proportionality and policy impact recovery must be accepted before another verifier package is admitted. |
+| Recovery dependency | The accepted work proportionality and policy impact recovery requires fresh graph evidence before another verifier package is selected. |
 
 ## Current Architecture
 
@@ -137,7 +137,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Blocked` | [Work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md) |
+| 7 | Role-based consolidation and verification migration | `Active` | Fresh post-recovery graph audit through the verification-engine plan |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -153,18 +153,18 @@ contains detailed slice evidence.
 
 **Recovery dependency:** M6-I16 is accepted after one-owner final-state proof.
 The [work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md)
-must be accepted before another verifier package is admitted.
+is accepted. A fresh post-recovery graph audit must select the next package;
+evidence captured before recovery does not admit or preselect M6-I17.
 
 **Remaining work:**
 
-1. Accept the work proportionality and policy impact recovery.
-2. Audit the fresh post-recovery graph through the verification-engine plan
+1. Audit the fresh post-recovery graph through the verification-engine plan
    without preselecting M6-I17.
-3. Continue owner-coherent Python-engine migration until no Bash verifier,
+2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
-4. Regenerate canonical inventories and prove exact dispositions, no source
+3. Regenerate canonical inventories and prove exact dispositions, no source
    gaps, no normative legacy source rows, and no legacy Router routes.
-5. Complete manual semantic-ownership review `D001` through `D010` before
+4. Complete manual semantic-ownership review `D001` through `D010` before
    Milestone 7 acceptance.
 
 **Acceptance gate:** every rule identifier has a final disposition; structural,
@@ -187,13 +187,15 @@ engine is the sole verification authority.
 
 ## Blockers
 
-- Work proportionality and policy impact recovery acceptance.
+- `none`
 
 ## Slice Procedure
 
 1. Confirm a clean repository and name one behavior plus exact write set.
 2. Identify affected owners, identifiers, dispositions, and no-fallback impact.
-3. Implement the smallest useful vertical slice with focused evidence.
+3. Implement one coherent unit with focused evidence; split only when
+   separation materially improves acceptance, risk, dependency, conflict,
+   rollback, or feedback.
 4. Run risk-proportionate checks and any required shared checkpoint.
 5. Update current plan state and put execution detail in the ledger.
 6. Review the staged write set and create one atomic conventional commit.

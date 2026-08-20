@@ -15,7 +15,7 @@
 ## Before Editing
 
 1. Inspect repository status.
-2. Identify the smallest useful behavior or contract change.
+2. Identify one coherent behavior or contract change.
 3. Declare the exact write set and affected acceptance evidence.
 4. Do not start when unrelated dirty files overlap the write set or make
    verification ambiguous.
@@ -23,14 +23,19 @@
 
 When a written plan governs the change, require its explicit canonical
 repository-relative `plan.md` path and explicit `start`, `continue`, or `verify`
-operation. Consume the Planning workflow's admission, transition identity,
-compatibility, revision-gate, evidence, and reconciliation decisions. Do not
-scan for a plan, infer an operation, copy the lifecycle table, or treat a next
-slice as authority.
+operation. Consume the Planning workflow's path, operation, lifecycle,
+current-authority, and acceptance decisions. Consume revision, stale-state,
+compatibility, and reconciliation decisions only when Router applicability
+selects the Concurrent Plan Integration profile. Ordinary implementation must
+not request or invent those records. Do not scan for a plan, infer an operation,
+copy the lifecycle table, or treat a next slice as authority.
 
-A large plan is required when sequencing, ownership, migration, concurrency, or
-cross-layer acceptance cannot be held unambiguously in the task. A bounded local
-fix may proceed without one.
+A written plan is required when material sequencing, independently owned
+contract, migration, coordination, rollout, risk, or acceptance complexity
+cannot be held unambiguously in the task. A bounded coherent change may state
+its exact write set inline and proceed without a plan. Touching a public,
+generated, persistence, process, language, or user-interface boundary does not
+by itself require one.
 
 ## Slice Contract
 
@@ -43,6 +48,13 @@ Each slice must:
 - return typed diagnostics when facts cannot support a valid decision;
 - include focused regression or acceptance evidence; and
 - leave the repository in a coherent state.
+
+Keep the complete coherent change in one slice unless separation materially
+improves independent acceptance, risk containment, dependency ordering,
+conflict isolation, rollback, or feedback. Do not split it by file count, layer
+count, diff size, or commit cadence. Discovering another directly affected file
+does not itself require re-planning; stop only when the discovery changes the
+objective, ownership, contract, risk, or acceptance scope.
 
 Do not broaden a slice merely because nearby code could be improved. Record
 relevant findings with severity, evidence, owner, and disposition.
@@ -123,7 +135,11 @@ When an active plan exists:
 - follow [Planning Workflow](planning.md);
 - keep objective, current decisions, lifecycle state, blockers, and exactly one
   next slice current;
-- put dated command output and completed-slice detail in `execution-ledger.md`;
+- update the active plan when current authority, lifecycle, blockers,
+  acceptance, or next-slice state changes;
+- update `execution-ledger.md` at accepted-slice boundaries and for material
+  deviations or verification results;
+- do not edit planning artifacts solely because another commit is created;
 - put findings and dispositions in `issues.md`;
 - transition `Implemented` to `Verifying` and then `Accepted` only when the
   named evidence passes;

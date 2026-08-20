@@ -8,7 +8,9 @@ Create or revise an implementation plan. Do not implement source changes.
 4. Preserve the requested objective and name its acceptance level.
 5. Produce current-state artifacts from `templates/PLAN-TEMPLATE.md`.
 6. Put findings in `issues.md` and detailed investigation in reports.
-7. Use thin vertical milestones, exact write sets, and re-plan triggers.
+7. Select one coherent implementation unit. Split it only for material
+   acceptance, risk, dependency, conflict, rollback, or feedback value; a plan
+   may contain one milestone and one slice.
 8. Delegate only non-overlapping read or write scopes with report paths.
 9. Route concurrent plan integration only when multiple outstanding proposals
    can become stale before integration; do not infer it from participant count.

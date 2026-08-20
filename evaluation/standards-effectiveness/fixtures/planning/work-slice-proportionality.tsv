@@ -1,0 +1,8 @@
+case	bounded	boundary	sequencing	independent_acceptance	risk	split_value	commits	concurrency	record_change	expected_plan	expected_slices	expected_artifact_update	expected_concurrent_profile	expected_concurrent_records
+coherent-local-multi-file	yes	none	none	no	bounded	none	one	none	accepted-boundary	none	one	yes	exclude	omit
+tiny-public-or-ui-boundary	yes	public-or-ui	none	no	bounded	none	one	none	none	none	one	no	exclude	omit
+cross-layer-independent-behavior	no	cross-layer	material	yes	material	material	one	none	accepted-boundary	written	vertical	yes	exclude	omit
+split-adds-only-churn	yes	cross-layer	none	no	bounded	none	one	none	none	none	one	no	exclude	omit
+several-commits-one-slice	no	cross-layer	material	no	material	none	several	none	none	written	one	no	exclude	omit
+stale-capable-concurrent-proposals	no	cross-layer	material	yes	material	none	one	stale-capable	current-authority	written	one	yes	select	require
+ordinary-written-plan	no	cross-layer	material	no	bounded	none	one	none	current-authority	written	one	yes	exclude	omit
