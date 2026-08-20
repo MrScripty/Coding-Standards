@@ -322,9 +322,9 @@ nested or executed by the suite.
 
 The registered `root-index-closure` suite checks the root README's exact
 heading order and line ceiling, six resource roles and links, explicit routing
-boundary, prohibited legacy authority, and six accepted dispositions. Root
-Router evidence and the README consumer audit remain independent gates; this
-suite neither depends on nor executes them.
+boundary, prohibited legacy authority, six accepted dispositions, and every
+table-derived canonical Router owner link. The README consumer audit remains
+an independent gate; the suite neither depends on nor executes it.
 
 The registered `language-index-closure` suite checks exact Language Index
 structure, links, routing boundaries, owner/disposition outcomes, and Router

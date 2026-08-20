@@ -19,10 +19,8 @@ mapfile -t observed < <(
 }
 
 [[ "$(awk -F '\t' 'NR > 1 && NF != 3 { n++ } END { print n+0 }' "$M")" -eq 0 ]]
-[[ "$(awk -F '\t' 'NR > 1 && $2 !~ /^(none|root-authority-verifier|consumer-audit-infrastructure)$/ { n++ } END { print n+0 }' "$M")" -eq 0 ]]
+[[ "$(awk -F '\t' 'NR > 1 && $2 !~ /^(none|consumer-audit-infrastructure)$/ { n++ } END { print n+0 }' "$M")" -eq 0 ]]
 [[ "$(awk -F '\t' 'NR > 1 && $3 !~ /^(none|fixture-data|legacy-heading-pattern|rust-profile-index)$/ { n++ } END { print n+0 }' "$M")" -eq 0 ]]
-[[ "$(awk -F '\t' '$2 == "root-authority-verifier" { print $1 }' "$M")" == \
-  evaluation/standards-effectiveness/verify-root-router-evidence.sh ]]
 [[ "$(awk -F '\t' '$2 == "consumer-audit-infrastructure" { print $1 }' "$M")" == \
   evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh ]]
 ! rg -F -q '"README.md"' "$S/verify-commit-authority.sh"

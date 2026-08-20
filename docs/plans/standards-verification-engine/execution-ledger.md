@@ -4655,3 +4655,22 @@
   119 nodes, 706 edges, and 119 components. No live suite, checker, audit,
   historical replacement, compatibility behavior, or fallback changed.
   Atomic acceptance is next.
+
+## 2026-08-20 - M6-I11 Root Router Aggregate Acceptance
+
+- Extended the registered dependency-free `root-index-closure` suite to six
+  checks with table-derived Router-link coverage and exact aggregate literals.
+- Removed the retired checker from the README consumer inventory and narrowed
+  the surviving audit to its actual classifications; the audit remains an
+  independently executed Bash gate during migration.
+- Accepted M6-I11 and its current audit edge, transferred ten historical
+  checker-backed records to registered root-index suite evidence, and deleted
+  only `verify-root-router-evidence.sh`.
+- VE082 is resolved by enforcing the intended prohibited-content contract in
+  the declarative suite; the defective Bash loop was neither repaired nor
+  preserved.
+- Final generated evidence contains 114 Bash checkers, 118 nodes, 702 edges,
+  and 118 components. Focused owner/audit, package/edge, declarative, plan,
+  source-unchanged, removal, freshness, complete, and diff checks pass with no
+  second suite, dependency, wrapper, compatibility behavior, or fallback.
+- Fresh-graph owner-coherent package selection is next.

@@ -3922,3 +3922,22 @@ admitted; no new suite, registry entry, dependency, copied route list/count,
 checker repair, wrapper, compatibility behavior, or fallback is authorized.
 Admission-derived graph evidence contains 115 Bash checkers, 119 nodes, 706
 edges, and 119 components.
+
+### Accepted M6-I11 Root Router Aggregate
+
+The existing root-index suite now has six checks and owns the full aggregate:
+README structure, resources, local-link validity, exact boundary/prohibition
+text, six dispositions, and all owner links derived from the canonical root
+route table. No separate Router suite or registry dependency was created.
+
+The root Router Bash checker is absent. The consumer table now derives 20
+remaining README-reading checkers, and the surviving audit no longer permits
+or requires the retired `root-authority-verifier` role. Ten historical edge
+records name `suite:root-index-closure`; M6-I11's audit edge is accepted as an
+independent checker gate.
+
+VE082 is closed by the declarative prohibition rather than copied defective
+Bash behavior. Final evidence contains 114 Bash checkers, 118 nodes, 702 edges,
+and 118 components. Focused, lifecycle, declarative, complete, freshness,
+removal, protected-source, and diff verification pass. Fresh graph review is
+required before another package is selected.

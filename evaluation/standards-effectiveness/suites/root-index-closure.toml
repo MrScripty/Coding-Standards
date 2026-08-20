@@ -35,18 +35,28 @@ type = "markdown_links"
 paths = ["README.md"]
 
 [[checks]]
+id = "root-router-routes"
+type = "markdown_link_coverage"
+path = "STANDARDS-ROUTER.md"
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/router/root-route-evidence.tsv"
+header = ["concern", "owner"]
+columns = ["owner"]
+order = "source"
+
+[[checks]]
 id = "root-boundary"
 type = "text"
 path = "README.md"
 required = [
   "repository entrypoint",
-  "does not select modules",
+  "does not select modules or establish canonical ownership",
   "Unknown applicability is a Router diagnostic",
   "non-normative repository resources",
   "establish applicability or ownership.",
   "Repository license terms are in [LICENSE](LICENSE).",
   "(CORE-STANDARDS.md)",
-  "(STANDARDS-ROUTER.md)",
+  "[Standards Router](STANDARDS-ROUTER.md)",
   "(templates/README-TEMPLATE.md)",
   "(templates/PLAN-TEMPLATE.md)",
   "(templates/PULL_REQUEST_TEMPLATE.md)",
@@ -64,6 +74,9 @@ prohibited = [
   "Configure tooling",
   "provided as-is for free use",
   "scheduled for closure",
+  "Remaining frontend mechanism",
+  "awaiting ordered canonical population",
+  "(topics/contracts.md)",
 ]
 
 [[checks]]

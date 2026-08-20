@@ -13139,3 +13139,20 @@ admitted to remove that bug with the checker. No new suite, registry edge,
 dependency, copied route list/count, Bash repair, wrapper, compatibility path,
 or fallback is admitted. Admission-derived graph evidence contains 115 Bash
 checkers, 119 nodes, 706 edges, and 119 components.
+
+## 2026-08-20 M6-I11 Root Router Aggregate Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The dependency-free root-index suite now owns exact README closure and every
+table-derived canonical Router owner link. M6-I11 and its audit edge are
+accepted, ten historical records use registered suite evidence, the consumer
+inventory and surviving audit reflect actual remaining Bash readers, and only
+the replaced root Router checker is deleted.
+
+VE082 is resolved by the intended declarative prohibition; the defective Bash
+loop is absent without repair or fallback. Final evidence contains 114 Bash
+checkers, 118 nodes, 702 edges, and 118 components. Focused, package/edge,
+declarative, plan, removal, protected-source, complete, freshness, and diff
+checks pass with no second suite, dependency, wrapper, compatibility path, or
+fallback.
