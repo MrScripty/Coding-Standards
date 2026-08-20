@@ -12867,3 +12867,21 @@ lineage-to-evidence call as a same-owner package dependency on M6-I5. Both Bash
 checkers remain executable and no suite is registered. No canonical evidence,
 engine/schema contract, copied ID/count, bridge, compatibility behavior, false
 dependency, or fallback changes in admission.
+
+## 2026-08-19 M6-I5 And M6-I6 Frontend Evidence Closure Acceptance
+
+**Outcome:** accepted; two Bash gates replaced by two suites and one explicit
+dependency.
+
+Both Frontend suites are registered, both packages and six incident records
+are accepted, two historical M6-T12 records now use lineage-suite evidence,
+and both obsolete Bash checkers are absent. The requiring package owns the
+lineage-to-evidence registry dependency. Row-18 decomposition remains a
+checker-backed independent gate.
+
+Focused and mutation parity, package and edge authority, numeric lifecycle,
+all 156 declarative suites, plan and lifecycle checks, removed paths, protected
+sources, complete checkpoint, generated freshness at 119 Bash checkers / 124
+nodes / 664 edges / 124 components, and diff integrity pass. No canonical
+evidence rewrite, copied mutable data, engine/schema feature, bridge,
+compatibility behavior, false dependency, inferred owner, or fallback remains.

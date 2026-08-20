@@ -4329,3 +4329,23 @@
   policy, indexes, fixtures, decomposition, validation, dispositions, parent
   claims, row-18 authority, engine/schema, compatibility behavior, and fallback
   remain unchanged. Atomic two-package acceptance is next.
+
+## 2026-08-19 - M6-I5 And M6-I6 Frontend Evidence Closure Acceptance
+
+- Reconfirmed clean canonical `b5938f0` and exact admitted incidence before
+  atomic acceptance.
+- Registered both preflighted suites with one lineage-to-evidence dependency,
+  accepted both packages and six current edge records, transferred two M6-T12
+  historical records to lineage-suite evidence, and deleted both obsolete Bash
+  checkers.
+- Preserved row-18 decomposition as a checker-backed independent gate. The
+  target package records the registered caller independently, while the
+  requiring package owns the explicit suite dependency.
+- Regenerated final evidence at 119 Bash checkers, 124 nodes, 664 edges, and
+  124 components. Focused closure, package/edge authority, numeric lifecycle,
+  all declarative suites, plan/lifecycle checks, removed paths, protected
+  sources, complete checkpoint, freshness, and diff integrity pass.
+- No canonical evidence mutation, copied mutable data, engine/schema feature,
+  partial authority, bridge, compatibility behavior, inferred owner, false
+  dependency, optional-missing behavior, or fallback remains. Fresh-graph
+  package discovery is next.

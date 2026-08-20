@@ -1,7 +1,5 @@
 edge_type	source	target
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-frontend-testing-lineage.sh
 contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-root-readme-consumer-audit.sh
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-testing-frontend-evidence.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-accessibility-name-input.sh
@@ -22,7 +20,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-rendering-synchronization.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-source-closure.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-testing-lineage.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-ipc-payload-validation.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-profile-routing.sh
@@ -42,7 +39,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-api-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-async-boundary.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-unsafe-contracts.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-testing-frontend-evidence.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-decision-traceability.sh
@@ -162,7 +158,6 @@ executable_reference	evaluation/standards-effectiveness/verify-filesystem-contai
 executable_reference	evaluation/standards-effectiveness/verify-frontend-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-frontend-rendering-synchronization.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-frontend-source-closure.sh	evaluation/standards-effectiveness/verify-accessibility-owner-contract.sh
-executable_reference	evaluation/standards-effectiveness/verify-frontend-testing-lineage.sh	evaluation/standards-effectiveness/verify-testing-frontend-evidence.sh
 executable_reference	evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh	evaluation/standards-effectiveness/verify-architecture-durable-workflow-pattern.sh
 executable_reference	evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh	evaluation/standards-effectiveness/verify-frontend-rendering-synchronization.sh
 executable_reference	evaluation/standards-effectiveness/verify-generated-command-security.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
@@ -381,7 +376,6 @@ executable_reference	evaluation/standards-effectiveness/verify-security-index-cl
 executable_reference	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
 executable_reference	evaluation/standards-effectiveness/verify-source-index-closure-engine.sh	evaluation/standards-effectiveness/check-source-index-closure.sh
 executable_reference	evaluation/standards-effectiveness/verify-source-index-closures.sh	evaluation/standards-effectiveness/check-source-index-closure.sh
-executable_reference	evaluation/standards-effectiveness/verify-testing-frontend-evidence.sh	evaluation/standards-effectiveness/verify-milestone-7-row-18-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/check-plan-structure.sh
 executable_reference	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-13-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
@@ -492,7 +486,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-documentation-inde
 verifier_dependency	evaluation/standards-effectiveness/verify-documentation-index-closure.sh	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-frontend-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-frontend-source-closure.sh	evaluation/standards-effectiveness/verify-accessibility-owner-contract.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-frontend-testing-lineage.sh	evaluation/standards-effectiveness/verify-testing-frontend-evidence.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh	evaluation/standards-effectiveness/verify-architecture-durable-workflow-pattern.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh	evaluation/standards-effectiveness/verify-frontend-rendering-synchronization.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-generated-command-security.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
@@ -666,7 +659,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-security-index-clo
 verifier_dependency	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-network-transport-policy.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-testing-frontend-evidence.sh	evaluation/standards-effectiveness/verify-milestone-7-row-18-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-13-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh

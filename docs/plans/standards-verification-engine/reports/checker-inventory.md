@@ -3606,3 +3606,24 @@ and points them at same-owner package M6-I5. Both Bash checkers remain present,
 no suite is registered, and atomic acceptance is next. No engine feature,
 canonical evidence rewrite, copied identity/count, bridge, compatibility path,
 false dependency, or fallback is admitted.
+
+### Accepted M6-I5 And M6-I6 Frontend Evidence Closure
+
+The six-check `testing-frontend-evidence` suite and two-check
+`frontend-testing-lineage` suite are registered. The lineage suite explicitly
+requires the evidence suite, so overlapping policy proof executes once and the
+lineage suite retains only its unique Evidence-section and exact keyed-lineage
+contracts.
+
+Both packages and six current edge records are accepted. The requiring package
+owns the registry dependency; the target package records the registered caller
+as an independent gate. Both M6-T12 historical records now use registered
+lineage-suite evidence. Row-18 decomposition remains an independently owned
+checker-backed gate. Both obsolete Bash checkers are absent.
+
+Generated evidence records 119 Bash checkers, 124 nodes, 664 edges, and 124
+components. Focused dependency execution, eleven-case mutation parity, package
+and edge authority, numeric lifecycle, all 156 declarative suites, plans,
+lifecycle, removed paths, protected sources, complete checkpoint, freshness,
+and diff integrity pass. No copied mutable data, engine feature, bridge,
+compatibility path, false dependency, inferred owner, or fallback remains.

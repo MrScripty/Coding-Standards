@@ -2,20 +2,18 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-I5 and M6-I6 admitted
+**Current phase:** Milestone 6: M6-I5 and M6-I6 accepted; fresh-graph discovery
 
-**Next slice:** atomically register and accept M6-I5 and M6-I6, declare the
-lineage-to-evidence suite dependency, transfer historical evidence, and delete
-both obsolete Bash checkers.
+**Next slice:** derive the next owner-local package from the fresh post-M6-I6
+inventory and graph. Do not reuse pre-acceptance topology or infer semantic
+ownership from graph incidence.
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I4 replaced the Planning consolidation Bash gate
-with one registered owner-local suite while preserving the execution train as
-an independently owned checker-backed gate.
+**Latest accepted slice:** M6-I5 and M6-I6 replaced the Frontend evidence and
+lineage Bash closure with two suites and one explicit registry dependency.
 
-**Latest admitted slice:** M6-I5 and M6-I6 freeze two Frontend contracts, one
-same-owner dependency, the independent row-18 gate, and one atomic cutover.
+**Latest admitted slice:** `none`; no package follows accepted M6-I6.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -8323,7 +8321,7 @@ implementation leaves the admitted write sets.
 
 ##### M6-I5 And M6-I6 Frontend Evidence Closure
 
-**Status:** Admitted at train orders 120 and 121; atomic acceptance required.
+**Status:** Accepted at train orders 120 and 121.
 
 Dependency-closed disposable preflight represented both suites with existing
 generic checks. `testing-frontend-evidence` has six checks for the decision
@@ -8361,6 +8359,23 @@ is admitted. Re-plan if final incident topology differs, the registry
 dependency does not replace both live edge representations, a preflighted
 mutation is lost, the M6-T12 transfer cannot name the lineage suite, or
 implementation leaves either admitted write set.
+
+Acceptance registers both preflighted suites and declares only
+`frontend-testing-lineage -> testing-frontend-evidence`. It transitions M6-I5,
+M6-I6, and all six current edge records to accepted, transfers both historical
+M6-T12 records to `suite:frontend-testing-lineage`, and deletes both obsolete
+Bash checkers. The row-18 decomposition gate remains independently executable
+and checker-backed.
+
+The focused dependency closure, package and edge authority, numeric lifecycle,
+all 156 declarative suites, both plan validators, lifecycle fixtures, removed-
+path and protected-source proof, generated freshness, the complete retained-
+Bash checkpoint, and diff integrity pass. The final generated graph contains
+119 Bash checkers, 124 nodes, 664 edges, and 124 components. No canonical
+evidence mutation, copied mutable data, engine/schema feature, partial
+authority, bridge, wrapper, alias, compatibility behavior, inferred owner,
+optional-missing path, false dependency, or fallback remains. Fresh-graph
+package discovery is next.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

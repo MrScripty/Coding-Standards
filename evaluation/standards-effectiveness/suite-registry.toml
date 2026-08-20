@@ -769,3 +769,13 @@ requires = []
 id = "planning-consolidation"
 path = "evaluation/standards-effectiveness/suites/planning-consolidation.toml"
 requires = []
+
+[[suites]]
+id = "testing-frontend-evidence"
+path = "evaluation/standards-effectiveness/suites/testing-frontend-evidence.toml"
+requires = []
+
+[[suites]]
+id = "frontend-testing-lineage"
+path = "evaluation/standards-effectiveness/suites/frontend-testing-lineage.toml"
+requires = ["testing-frontend-evidence"]

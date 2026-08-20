@@ -4002,6 +4002,19 @@ historical M6-T12 records, and delete both obsolete checkers. No partial
 acceptance, engine feature, canonical evidence rewrite, copied mutable data,
 bridge, compatibility behavior, false dependency, or fallback is authorized.
 
+M6-I5 and M6-I6 are accepted atomically. The child plan registers both
+preflighted Frontend suites with one lineage-to-evidence dependency, accepts all
+six current edge records, transfers two historical M6-T12 records to registered
+lineage-suite evidence, and deletes both obsolete Bash checkers. Row-18
+decomposition remains independently owned and checker-backed.
+
+Focused and mutation parity, package/edge authority, numeric lifecycle, all 156
+declarative suites, plan/lifecycle checks, removed paths, protected sources,
+the complete retained-Bash checkpoint, generated freshness, and diff integrity
+pass. No canonical evidence rewrite, copied mutable data, engine feature,
+partial authority, bridge, compatibility behavior, false dependency, inferred
+owner, or fallback remains. Fresh-graph package discovery is next.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream
