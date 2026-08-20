@@ -9,6 +9,10 @@ proposals can become stale before integration. Otherwise do not request a
 revision token, transition identity, compatibility envelope, or reconciliation
 record.
 
+Consume branch or worktree facts only when the admitted plan selected material
+isolation. Follow Commit's least history-transforming integration decision; do
+not cherry-pick by default merely because implementation used another worktree.
+
 Route the adopting repository through
 [`STANDARDS-ROUTER.md`](../STANDARDS-ROUTER.md), then follow the canonical
 [`Implementation Workflow`](../workflows/implementation.md), which consumes the

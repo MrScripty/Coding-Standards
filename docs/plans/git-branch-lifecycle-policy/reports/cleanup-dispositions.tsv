@@ -1,0 +1,491 @@
+resource_type	resource	recommendation	authority	rationale
+branch	codex/7.4b8s-row-6-decomposition	review-redundant-ref	separate	tip is already reachable from main
+branch	codex/7.4b8t-native-artifact-loading	review-redundant-ref	separate	tip is already reachable from main
+branch	codex/7.4b8u-native-artifact-release	review-redundant-ref	separate	tip is already reachable from main
+branch	codex/7.4b8v-platform-evidence	preserve-owner-review	separate	branch is checked out
+branch	codex/generic-edge-correctness	preserve-owner-review	separate	branch is checked out
+branch	codex/generic-edge-system	preserve-owner-review	separate	branch is checked out
+branch	codex/git-branch-lifecycle-policy	retain-active	separate	current governed task
+branch	codex/m6-c1-admission	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-c1-implementation	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-c2-admission	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-c2-implementation	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-c3-admission	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-c3-implementation	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-c4-admission	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-c4-implementation	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-s-admission	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-s1	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-s2	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-s3	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u0-repreflight	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u1-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u10-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u11-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u12-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u2-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u3-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u4-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u5-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u6-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u7-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u8-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m6-u9-proposal	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-accelerated-replan	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-architecture-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-architecture-population	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-binding-artifact-compatibility	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-binding-artifact-composition	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-binding-contract-evolution	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-binding-generation-authority	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-binding-generation-decomposition	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-binding-mechanism-selection	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-binding-surface-contract	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-ci-orchestration-replan	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-concurrency-specialization-replan	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-contract-boundaries	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-contract-invariants	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-core-code-discipline	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-core-constants	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-core-simplicity	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-csharp-async-index	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-csharp-async-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-csharp-async-population	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-decision-table-foundation	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-dependencies-consolidation	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-dependencies-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-dependencies-population	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-dependency-route	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-disabled-lifecycle	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-disabled-verification	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-formatter-command-recipes	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-formatting-policy	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-formatting-replan	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-frontend-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-generated-command-security	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-godot-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-godot-population	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-gui-smoke-verification	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-language-routing	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-launcher-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-launcher-population	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-launcher-row14-decomposition	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-licensing-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-performance-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-planning-consolidation	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-release-binding-generation-procedures	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-release-build-procedure	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-resilience-errors	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-resilience-owner-contract	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-resilience-population	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-row15-decomposition	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-row5-decomposition	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-row7-decomposition	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-rust-binding-annotation-placement	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-rust-binding-index-closure	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-rust-binding-package-placement	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-rust-binding-workspace	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-rust-concurrency-index	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-rust-contract-discovery	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-rust-core-adapter-testability	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-rust-security-0826	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-acceptance-path	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-async-evidence	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-concurrency	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-contract-artifacts	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-coverage-docs	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-data-lifecycle	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-focused-design	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-frontend	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-gates-diagnosis	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-language-bindings	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-organization	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-performance	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-resilience	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-source-closure	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-testing-verification-decomposition	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-tooling-commit-route	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-tooling-decomposition	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-tooling-editor-policy	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-tooling-editor-recipes	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-tooling-lint-policy	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-tooling-lint-recipes	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-tooling-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-tooling-owner-audit	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-tooling-recipes	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-tooling-typescript-replan	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-typescript-async-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-typescript-async-population	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-typescript-owner	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-typescript-tooling-split	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-verification-consolidation	preserve-owner-review	separate	branch is checked out
+branch	codex/m7-verification-gate-meaning	preserve-owner-review	separate	branch is checked out
+branch	codex/policy-impact-foundation	preserve-owner-review	separate	branch is checked out
+branch	codex/policy-impact-owner-closure	preserve-owner-review	separate	branch is checked out
+branch	codex/standards-7.4b8i	preserve-owner-review	separate	branch is checked out
+branch	codex/standards-7.4b8j	preserve-owner-review	separate	branch is checked out
+branch	codex/standards-7.4b8k	preserve-owner-review	separate	branch is checked out
+branch	codex/ve055-option4	preserve-owner-review	separate	branch is checked out
+branch	codex/ve055-probes	preserve-owner-review	separate	branch is checked out
+branch	codex/ve056-s-preflight	preserve-owner-review	separate	branch is checked out
+branch	codex/ve057-impl	preserve-owner-review	separate	branch is checked out
+branch	codex/ve057-select	preserve-owner-review	separate	branch is checked out
+branch	codex/ve05758-impl	preserve-owner-review	separate	branch is checked out
+branch	codex/ve058-containment-replan	preserve-owner-review	separate	branch is checked out
+branch	codex/ve058-select	preserve-owner-review	separate	branch is checked out
+branch	codex/work-proportionality-impact-recovery	preserve-owner-review	separate	branch is checked out
+branch	codex/work-slice-proportionality	preserve-owner-review	separate	branch is checked out
+branch	main	retain	separate	canonical integration branch
+worktree	/media/jeremy/OrangeCream/Linux Software/repos/owned/developer-tooling/Coding-Standards	review-clean-removal	separate	clean worktree head is reachable from main
+worktree	/tmp/coding-standards-generated-repair	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/coding-standards-plan-consumers	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/coding-standards-planning-profile	preserve-unique-review	separate	worktree head has unique commits
+worktree	/tmp/coding-standards-planning-profile-final	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/coding-standards-planning-recovery	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/coding-standards-ppr-c1	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/coding-standards-ppr-c2-history	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/coding-standards-ppr-c2-special	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/coding-standards-ppr-c2-special-final	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/cs-7.4b5d	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b5e	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b5f	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b6	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7a	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7b	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7c	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7d	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7e	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7f	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7f1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7f2	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7g	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7g-corrected	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7h	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7i	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7j	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7k	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7l	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7m	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7n	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b7o	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8a	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8aa	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ab	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ac	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ad	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ae	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8af	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ai	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8aj	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ak	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8al-plan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8am	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8an	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ao	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ap	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8aq	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ar	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8as	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8at	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8au	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8av	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8aw	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ax	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ay	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8az	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8b	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ba	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bb	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bc	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bd	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8be	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bf	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bg	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bh	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bi	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bj	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bk	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bm	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bn	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bo	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bp	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bq	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8br	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bs	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bt	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bu	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bv	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bw	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bx	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8by	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8bz	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8c	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ca	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8cb	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8cc	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8cd	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ce	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8cf	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8cg	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ch	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8ci	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8cj	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8d	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8e	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8f	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8g	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8h	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8i	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8j	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8k	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8l-acceleration	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8m-decision-table	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8n-row5	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8o-core-adapter	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8p-mechanism	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8q-evolution	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8r-discovery	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8v	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8w	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8x	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8y	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b8z	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9-ci-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9-format-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9a	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9b	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9c	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9d	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9e	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9f	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9g	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9h	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9i	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9j	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9k	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4b9l	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4bag	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4bah	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c-plan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c2	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3-1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3-2	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3-commit-index	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3-documentation	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3-documentation-checker	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3-documentation-final	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3-documentation-index	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3-plan-index	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3-row41-repair	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3-source-checker-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3p	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3r	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3rh	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3v1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3v1-integrated	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-7.4c3v1r	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-child-compaction	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-commit-preflight	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-cross-platform-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-fresh-package	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-generic-edge-correctness	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-generic-edge-system	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-git-branch-lifecycle	retain	separate	canonical integration worktree
+worktree	/tmp/cs-i10-accept	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-i10-admit	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-i10-admit2	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-i10-preflight	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-i11-discovery	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-integrate-concurrency	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m2p5	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-c1-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-c1-implementation	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-c2-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-c2-implementation	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-c3-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-c3-implementation	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-c4-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-c4-implementation	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-e1-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-e1-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-i1-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-i1-plan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-i2-accept	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-i2-probe	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-i3	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-p-atomic	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-p8-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-p8-probe	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-p9-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-p9-probe	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q-freeze	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q-w1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q1-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q1-integration	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q1-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q2-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q2-admission-v2	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q2-integration	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q2-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q3-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q3-integration	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q3-integration-v2	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q3-integration-v3	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q3-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q3-readme-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q3-readmission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q3-scope-recovery	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q3-scope-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q4-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q4-integration	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q4-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q4-scope-recovery	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-q4-scope-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-r1-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-r1-implementation	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-s1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-s2	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-s3	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t1-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t10-admit	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t10-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t11-accept	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t11-admit	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t11-admit-v2	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t12-accept	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t12-admit	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t12-probe	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t13-accept	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t13-admit	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t13-probe	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t2-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t3-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t3-preflight	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t4	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t4-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t5	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t5-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t6	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t6-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t7	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t7-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t8	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t8-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t9-admit	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-t9-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u0-repreflight	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u1-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u10-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u11-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u12-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u2-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u3-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u4-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u5-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u6-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u7-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u8-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-u9-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-v-w1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-v-w1-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-v-w1-plan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6-v3-proposal	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6c5	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/cs-m6c5-v2	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6i11	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/cs-m6i11-accept	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6i11-admit	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6i12-preflight	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/cs-m6i13-impl	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6i13-probe	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/cs-m6i14-impl	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6i14-probe	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/cs-m6i15-impl	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6i15-probe	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/cs-m6i16-impl	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6i16-probe	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/cs-m6i3-accept	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6i4-preflight	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6i7-accept	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6i7-admission	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6i7-admission-v2	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6i7-plan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-m6i89-acceptance	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6i89-preflight	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-m6s-preflight	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-p1-concurrency	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-p1-dependency	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-p1-launcher	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-p1-rust-api	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-p1-rust-cross	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-p1-rust-dependency	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-p1-rust-release	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-p1-rust-tooling	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-p1b-concurrency	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-parent-compaction	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/cs-parent-compaction-v2	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-policy-impact-foundation	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-policy-impact-owner-closure	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-post-m6-i2-audit	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-post-p1-plan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-post-ve072-audit	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ppr-c2-final	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-ppr-compaction-replan	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-ppr-numeric-engine	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-ppr-numeric-replan	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-recovery-m5	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-row47-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-row47-worktree	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-security-close	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-security-hs1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-security-hs2a	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-security-hs2b	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-security-hs2c	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-security-integrate	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-security-plan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-security-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-tooling-owner-audit	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve050-heading-policy	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve054-option1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve055-option4	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve055-probes	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve056-s-preflight	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve057-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve057-select	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve05758-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve058-containment-replan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve058-select	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve070-plan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve072-plan	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve074	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve075	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-ve078-e1	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-ve078-plan	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-ve081-cap	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-ve083	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-ve083-impl	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-ve083-probe	preserve-owner-review	separate	worktree is locked or dirty
+worktree	/tmp/cs-verification-engine	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verification-engine-m1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verification-engine-m2	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verification-engine-m2p1	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-all-bash	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-release-freeze	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-release-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-rust-api-freeze	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-rust-api-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-rust-dependency-freeze	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-rust-dependency-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-shared-contracts	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-standalone-freeze	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-tooling-freeze	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-tooling-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-tooling-reference-freeze	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-tooling-reference-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-typescript-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-verifier-verification-impl	prune-registration	separate	administrative path is missing
+worktree	/tmp/cs-work-proportionality-impact	map-then-review-removal	separate	head is patch-equivalent to main
+worktree	/tmp/cs-work-slice-proportionality	map-then-review-removal	separate	head is patch-equivalent to main

@@ -19,7 +19,12 @@ metadata = { repository_path = "workflows/implementation.md" }
 [[nodes]]
 id = "workflow.commit"
 aliases = ["workflows/commit.md"]
-metadata = { repository_path = "workflows/commit.md" }
+metadata = { repository_path = "workflows/commit.md", policy_impact_coverage = "audited" }
+
+[[nodes]]
+id = "workflow.release"
+aliases = ["workflows/release.md"]
+metadata = { repository_path = "workflows/release.md" }
 
 [[nodes]]
 id = "profile.workflow.concurrent-plan-integration"
@@ -41,6 +46,23 @@ metadata = { repository_path = "prompts/planning.md" }
 [[nodes]]
 id = "templates/PLAN-TEMPLATE.md"
 metadata = { repository_path = "templates/PLAN-TEMPLATE.md" }
+
+[[nodes]]
+id = "reference.recipes.commits"
+aliases = ["reference/recipes/commits.md"]
+metadata = { repository_path = "reference/recipes/commits.md" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv"
@@ -113,6 +135,11 @@ metadata = { repository_path = "evaluation/standards-effectiveness/suites/policy
 id = "s1-routing"
 aliases = ["evaluation/standards-effectiveness/suites/s1-routing.toml"]
 metadata = { repository_path = "evaluation/standards-effectiveness/suites/s1-routing.toml", suite_id = "s1-routing" }
+
+[[nodes]]
+id = "commit-consolidation-dispositions"
+aliases = ["evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml", suite_id = "commit-consolidation-dispositions" }
 
 [[groups]]
 id = "policy-impact"
@@ -342,3 +369,120 @@ relation = "normative-consumer"
 groups = ["policy-impact", "semantic"]
 traversable = true
 metadata = { applicability = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions.", evidence_owner = "suite:planning-admission" }
+
+[[edges]]
+id = "policy.commit.router"
+source = "workflow.commit"
+target = "router"
+relation = "router-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.implementation-workflow"
+source = "workflow.commit"
+target = "workflow.implementation"
+relation = "normative-consumer"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.planning-workflow"
+source = "workflow.commit"
+target = "workflow.planning"
+relation = "normative-consumer"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "Planning records plan-level repository-isolation facts and bounded terminal cleanup handoff while Commit owns ordinary Git lifecycle.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.concurrent-profile"
+source = "workflow.commit"
+target = "profile.workflow.concurrent-plan-integration"
+relation = "normative-consumer"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and cleanup handoff for stale-capable proposals.", evidence_owner = "suite:concurrent-plan-integration" }
+
+[[edges]]
+id = "policy.commit.release-workflow"
+source = "workflow.commit"
+target = "workflow.release"
+relation = "normative-consumer"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "Release maintenance may use an explicitly retained long-lived branch but its existing contract requires no normative correction for ordinary branch lifecycle.", evidence_owner = "suite:release-maintenance-policy" }
+
+[[edges]]
+id = "policy.commit.planning-prompt"
+source = "workflow.commit"
+target = "prompts/planning.md"
+relation = "prompt-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The planning prompt projects optional plan-level branch and worktree facts.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.implementation-prompt"
+source = "workflow.commit"
+target = "prompts/implement-plan.md"
+relation = "prompt-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The implementation prompt projects conditional isolation and least-transforming integration.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.plan-template"
+source = "workflow.commit"
+target = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The plan template projects optional repository-isolation fields and terminal disposition.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.reference-recipe"
+source = "workflow.commit"
+target = "reference.recipes.commits"
+relation = "reference-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The non-normative Commit recipe illustrates selected inspection and integration mechanisms without granting authority.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.authority-fixture"
+source = "workflow.commit"
+target = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv"
+relation = "fixture-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The authority fixture enforces existing staged-review and history-rewrite decisions.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.hook-bypass-fixture"
+source = "workflow.commit"
+target = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv"
+relation = "fixture-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The hook fixture enforces existing explicit bypass authority and no-fallback outcomes.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.branch-lifecycle-fixture"
+source = "workflow.commit"
+target = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
+relation = "fixture-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, and cleanup refusal.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.enforcement-suite"
+source = "workflow.commit"
+target = "commit-consolidation-dispositions"
+relation = "enforcement-suite-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The registered Commit suite enforces every audited Commit projection and decision fixture.", evidence_owner = "suite:commit-consolidation-dispositions" }

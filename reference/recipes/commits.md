@@ -111,6 +111,30 @@ git diff --stat <base-ref>...HEAD
 These commands report history. They do not authorize amend, reset, rebase,
 squash, or commit dropping.
 
+## Integration Examples
+
+After the Commit workflow selects a mechanism and the project names the target,
+read-only checks can confirm whether complete-branch fast-forward is possible:
+
+```bash
+git merge-base --is-ancestor <target-ref> <proposal-ref>
+git log --oneline <target-ref>..<proposal-ref>
+```
+
+When the accepted complete proposal descends from current target authority, the
+integration owner can use the project-authorized equivalent of:
+
+```bash
+git merge --ff-only <proposal-ref>
+```
+
+If a complete private branch requires fresh admission and authorized rebase,
+reverify it after conflicts are resolved before fast-forwarding. Preserve a
+merge commit only when topology has durable value. Use cherry-pick only for an
+accepted selective change, backport, or recovery, and record the source and
+accepted replacement commits. These examples illustrate selected mechanisms;
+they do not authorize rewriting or cleanup.
+
 ## Example Messages
 
 ```text

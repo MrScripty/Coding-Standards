@@ -1,0 +1,20 @@
+owner	consumer	relation	discovery	disposition	rationale	evidence_owner
+workflow.commit	core	metadata-requires	generic-query	not-applicable	generic routing prerequisite is not semantic policy propagation	metadata-graph
+workflow.commit	workflow.implementation	metadata-requires	generic-query	not-applicable	metadata prerequisite remains distinct from explicit semantic edge	metadata-graph
+workflow.tooling	workflow.commit	metadata-requires	generic-query	not-applicable	incoming routing prerequisite does not make Tooling a branch-policy projection	metadata-graph
+workflow.planning	workflow.commit	normative-consumer	generic-query	updated	Planning-to-Commit artifact boundary remains valid while reciprocal branch expectations become explicit	planning-consolidation
+workflow.commit	STANDARDS-ROUTER.md	router-projection	manual-audit	updated	Router must expose branch/worktree lifecycle applicability	commit-consolidation-dispositions
+workflow.commit	workflows/implementation.md	normative-consumer	manual-audit	updated	Implementation delegates integration and terminal Git lifecycle to Commit	commit-consolidation-dispositions
+workflow.commit	workflows/planning.md	normative-consumer	manual-audit	updated	Planning records material branch expectations only when a written plan applies	planning-consolidation
+workflow.commit	profiles/workflows/concurrent-plan-integration.md	normative-consumer	manual-audit	updated	Concurrent proposals specialize stale-base integration and cleanup handoff	concurrent-plan-integration
+workflow.commit	workflows/release.md	normative-consumer	manual-audit	reviewed-no-change	Release already requires explicit maintenance purpose owner lineage synchronization and retirement facts	release-maintenance-policy
+workflow.commit	prompts/planning.md	prompt-projection	manual-audit	updated	Planning prompt must not create branches by default	commit-consolidation-dispositions
+workflow.commit	prompts/implement-plan.md	prompt-projection	manual-audit	updated	Implementation prompt consumes admitted isolation and least-transforming integration	commit-consolidation-dispositions
+workflow.commit	templates/PLAN-TEMPLATE.md	template-projection	manual-audit	updated	Template records branch facts only when material	commit-consolidation-dispositions
+workflow.commit	reference/recipes/commits.md	reference-projection	manual-audit	updated	Recipe illustrates read-only selection and integration commands without granting authority	commit-consolidation-dispositions
+workflow.commit	evaluation/standards-effectiveness/fixtures/commit/authority.tsv	fixture-projection	manual-audit	reviewed-no-change	existing fixture continues to own history review and rewrite outcomes	commit-consolidation-dispositions
+workflow.commit	evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv	fixture-projection	manual-audit	reviewed-no-change	hook bypass remains independent of branch lifecycle	commit-consolidation-dispositions
+workflow.commit	evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv	fixture-projection	manual-audit	updated	new fixture owns required lifecycle scenarios	commit-consolidation-dispositions
+workflow.commit	evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml	enforcement-suite-projection	manual-audit	updated	canonical Commit suite enforces branch lifecycle and projections	commit-consolidation-dispositions
+workflow.commit	COMMIT-STANDARDS.md	legacy-index	manual-audit	not-applicable	non-normative index already routes to Commit and owns no policy	commit-consolidation-dispositions
+workflow.commit	TOOLING-STANDARDS.md	legacy-index	manual-audit	not-applicable	non-normative history reminder already routes to Commit	commit-consolidation-dispositions

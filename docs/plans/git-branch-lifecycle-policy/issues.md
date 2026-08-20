@@ -1,0 +1,9 @@
+# Git Branch And Worktree Lifecycle Issues
+
+| ID | Severity | Status | Finding | Disposition | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| GBL-001 | high | resolved | Commit had no audited semantic-impact coverage despite real Router, workflow, prompt, template, fixture, suite, recipe, and release consumers. | Added explicit edges, exact dispositions, alias equality, and owned-suite closure. | Policy-impact query and suite |
+| GBL-002 | high | resolved | Policy governed history review and rewrite but not branch applicability, integration selection, lineage, or terminal worktree lifecycle. | Commit now owns the complete ordinary lifecycle with bounded specializations. | Commit lifecycle fixture and suite |
+| GBL-003 | medium | resolved | Worker cleanup restriction did not distinguish integration-owner predeclared terminal cleanup from general destructive authority. | Clarified bounded integration-owner cleanup without granting general deletion rights. | Planning and concurrent profile |
+| GBL-004 | high | deferred | Repository retains 137 branches and 353 worktree registrations, including 298 prunable registrations, 115 patch-equivalent branches, 12 branches with unique commits, and 11 dirty existing worktrees. | Preserve all resources; use the cleanup report for separate authorization. | Git inventories |
+| GBL-005 | medium | resolved | The Commit suite owner used a path rather than canonical logical owner identity. | Replaced with `workflow.commit` and enforced through audited-owner closure. | Suite metadata and policy-impact tests |

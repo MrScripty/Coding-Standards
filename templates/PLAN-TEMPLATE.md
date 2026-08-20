@@ -111,6 +111,13 @@ verification contract, and integration owner. Omit those fields when the
 profile does not apply. Do not add digest or transition-envelope fields merely
 because work is delegated.
 
+When material repository isolation is part of the plan, record its purpose,
+responsible owner, target branch, visibility or long-lived status, integration
+owner, and expected terminal disposition. Record an admitted base only when
+stale-state coordination makes it relevant. Omit repository-isolation fields
+for direct serial work and do not require a branch merely because a written
+plan exists.
+
 ## Final Acceptance
 
 - Acceptance status: `pending`

@@ -31,6 +31,96 @@ Before every commit:
 Per-commit review concerns the index and the current slice. Do not require a
 full unpushed-history audit before every atomic commit.
 
+## Branch And Worktree Applicability
+
+Do not require a branch or worktree for every change. Use one when it provides
+material isolation for review, concurrent proposals, experimentation, release
+maintenance, risk containment, or repository-required checks. The current
+integration owner may work directly on the integration branch for a small
+serial change when repository controls allow it and no outstanding proposal can
+become stale.
+
+Select isolation from those facts, not from file count, commit count, elapsed
+time, branch count, worktree count, or a preferred Git ceremony. Preparing work
+in another worktree does not make cherry-pick the default integration method.
+
+## Governed Branch Context
+
+For governed branch work, retain enough context to resolve:
+
+- purpose and responsible owner;
+- target or integration branch;
+- admitted base or revision when concurrency makes it relevant;
+- whether the branch is private, shared, or long-lived;
+- integration owner; and
+- expected terminal disposition.
+
+Use the task, branch name, repository history, plan, pull request, or another
+owned artifact that already contains these facts. Do not require a heavyweight
+record for a trivial private branch when its name, task, and history make the
+contract unambiguous. Missing facts that affect safe integration or cleanup are
+`unavailable`; contradictory ownership or target facts are `invalid`.
+
+## Integration Mechanism Selection
+
+Use the least history-transforming mechanism compatible with the accepted
+outcome:
+
+- Fast-forward a complete accepted branch when it descends from current target
+  authority.
+- For a complete private proposal based on stale target authority, an
+  authorized owner may rebase it onto fresh authority, resolve conflicts,
+  reverify the result, and then fast-forward it.
+- Create a merge commit when preserving branch topology has durable review,
+  release, or repository value.
+- Cherry-pick for selective acceptance, backports, recovery, or another case
+  where integrating the complete branch is inappropriate.
+
+Do not cherry-pick merely because work was prepared in another worktree. Do
+not rewrite shared or published history without separate explicit authority.
+When facts do not support one mechanism, return a history-integration
+diagnostic instead of trying another mechanism as fallback.
+
+## Cherry-Pick And Replacement Lineage
+
+When cherry-pick or reconstruction creates a replacement commit, record the
+source branch, source commit, accepted replacement commit, integration mode,
+verification result, and terminal branch disposition in durable acceptance
+evidence. Git ancestry reporting a source commit as unmerged does not prove
+that a patch-equivalent accepted replacement remains semantically unintegrated.
+
+Patch equivalence may trigger review, but automated retirement requires an
+explicit source-to-accepted mapping. Do not infer acceptance from matching
+diffs alone.
+
+## Terminal Branch Lifecycle
+
+Classify every short-lived governed branch or proposal as `integrated`,
+`rejected`, `abandoned`, `superseded`, or retained under an explicit long-lived
+contract. A retained long-lived branch states its continuing purpose, owner,
+synchronization policy, supported consumers, and retirement condition.
+
+Branch refs and worktrees are operational resources, not permanent evidence
+databases. Preserve durable rationale and acceptance evidence in commits, pull
+requests, issues, plans, ledgers, manifests, or reports. Do not retain a
+redundant branch solely to preserve history that durable evidence already owns.
+
+## Worktree Lifecycle And Cleanup Authority
+
+Remove a completed clean worktree when its purpose ends, and prune stale
+administrative registrations after confirming that no live worktree owns them.
+Never force-remove a dirty, unknown, user-owned, locked, or uniquely committed
+worktree through generic automation. Removing a redundant branch ref is not
+the same operation or authority as rewriting history reachable by shared refs.
+
+The integration owner may perform predeclared safe cleanup for branches and
+worktrees created by the governed task after terminal evidence is recorded.
+Delegated workers must not delete resources outside their declared ownership.
+Automation may retire a branch only when ownership, integration, and terminal
+evidence are unambiguous. Patch-equivalent or cherry-picked branches require
+the source-to-accepted mapping before automated retirement. Age and quantity
+may trigger review but never independently authorize deletion.
+
 ## Branch-History Review
 
 Review the complete branch range at boundaries where its sequence matters:
@@ -127,7 +217,12 @@ Stop with a typed process diagnostic when:
 - the intended base or commit range is unresolved;
 - rewrite authority or unshared status is missing;
 - recovery of the original history is not established; or
-- the requested rewrite would alter shared history.
+- the requested rewrite would alter shared history;
+- branch purpose, target, ownership, or terminal evidence needed for the
+  selected operation is unavailable;
+- a replacement commit lacks source-to-accepted lineage; or
+- cleanup would affect an unknown, dirty, locked, user-owned, or uniquely
+  committed resource.
 
 Do not use reset, stash, amend, rebase, or an unrelated cleanup commit as an
 implicit fallback for an unresolved repository state.

@@ -129,6 +129,22 @@ classification, compatibility, and reconciliation. This workflow continues to
 own plan lifecycle and artifact boundaries. Shared authority remains a serial
 integration-owner write in either case.
 
+## Repository Isolation In Written Plans
+
+A written plan does not require a branch or worktree by default. When material
+review, concurrency, experimentation, release maintenance, risk containment,
+or repository controls make isolation part of the accepted approach, record
+the branch or worktree purpose, responsible owner, target branch, integration
+owner, visibility or long-lived status, and expected terminal disposition.
+Record an admitted base or revision only when stale-state coordination makes it
+relevant.
+
+Commit owns ordinary branch selection, integration mechanism, history, and
+terminal cleanup. This workflow records only plan-level facts needed to keep
+scope, ownership, sequencing, or acceptance stable. File count, commit count,
+plan existence, delegation, and participant count do not independently require
+repository isolation.
+
 ## Policy Projection Completeness
 
 A normative change updates every affected distribution and enforcement surface.
@@ -284,7 +300,11 @@ workflow files, and active plans remain serial unless assigned to one explicit
 owner.
 
 Workers may not delete branches, worktrees, user changes, or shared history
-without explicit authority.
+outside their declared ownership. The serial integration owner may perform
+predeclared terminal cleanup for clean branches and worktrees created by the
+governed task after Commit-required terminal evidence is recorded. This does
+not grant general destructive authority or permit force-removing unknown,
+dirty, locked, user-owned, or uniquely committed resources.
 
 ## Completion
 

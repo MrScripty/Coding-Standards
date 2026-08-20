@@ -34,7 +34,7 @@ observable task conditions. Do not read every document by default.
 | Any code or standards change | [Implementation](workflows/implementation.md) |
 | Behavior or contract must be proven | [Verification](workflows/verification.md) |
 | Material sequencing, independently owned contract, migration, coordination, rollout, risk, acceptance complexity, or re-planning | [Planning](workflows/planning.md) |
-| Commit creation or history maintenance | [Commit](workflows/commit.md) |
+| Commit creation, history maintenance, or branch/worktree isolation, integration, terminal lifecycle, or cleanup decisions | [Commit](workflows/commit.md) |
 | Durable responsibility, decision, contract, or operational procedure changes | [Documentation](workflows/documentation.md) |
 | Build-time actions, authoritative build inputs or outputs, invalidation, native integration, environment access, or deterministic-build requirements change | [Build](workflows/build.md) |
 | CI or development-tool selection, configuration, scheduling, or orchestration changes | [Tooling](workflows/tooling.md) |

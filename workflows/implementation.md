@@ -153,8 +153,9 @@ issue or review artifact rather than expanding the change silently.
 ## Commit Boundary
 
 Follow the [Commit Workflow](commit.md). Implementation owns the coherent slice;
-the commit workflow owns staged review, branch-history review scheduling, and
-rewrite authority.
+the commit workflow owns staged review, branch and worktree applicability,
+integration mechanism, branch-history review scheduling, terminal lifecycle,
+cleanup authority, and rewrite authority.
 
 History maintenance is not an implicit implementation right. Never rewrite
 shared history.

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import tempfile
 import textwrap
+import tomllib
 import unittest
 from pathlib import Path
 
@@ -49,6 +50,7 @@ class PolicyImpactTest(unittest.TestCase):
         )
         self.write("prompts/a.md", "# A\n")
         self.write("prompts/b.md", "# B\n")
+        self.write("reference/recipes/a.md", "# A reference\n")
         self.write(
             "suites/evidence.toml",
             """
@@ -159,6 +161,22 @@ class PolicyImpactTest(unittest.TestCase):
             self.load(self.manifest(relation="template-projection"))
         self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_CONSUMER")
 
+    def test_accepts_only_reference_markdown_for_reference_projection(self) -> None:
+        impact = self.load(
+            self.manifest(
+                consumer="reference/recipes/a.md",
+                relation="reference-projection",
+            )
+        )
+        self.assertEqual(
+            impact.consumers_for("workflow.planning")[0].consumer,
+            "reference/recipes/a.md",
+        )
+
+        with self.assertRaises(EngineError) as raised:
+            self.load(self.manifest(relation="reference-projection"))
+        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_CONSUMER")
+
     def test_uncovered_owner_query_is_typed_unavailable(self) -> None:
         impact = self.load(self.manifest())
 
@@ -211,13 +229,48 @@ class PolicyImpactTest(unittest.TestCase):
             {view.edge.id for view in graph.incident("workflow.planning", ("policy-impact",))},
             {view.edge.id for view in graph.incident("workflows/planning.md", ("policy-impact",))},
         )
-        planning_owned_suites = {
-            entry.path
-            for entry in entries
-            if impact.registry.nodes.get(entry.id)
-            and impact.registry.nodes[entry.id].metadata.get("suite_id") == entry.id
-        }
+        planning_owned_suites = set()
+        for entry in entries:
+            with (REPO_ROOT / entry.path).open("rb") as handle:
+                if tomllib.load(handle).get("owner") == "workflow.planning":
+                    planning_owned_suites.add(entry.path)
         self.assertTrue(planning_owned_suites.issubset(consumers))
+
+    def test_current_commit_graph_has_complete_alias_and_suite_closure(self) -> None:
+        entries = load_registry(
+            REPO_ROOT,
+            "evaluation/standards-effectiveness/suite-registry.toml",
+        )
+        impact = load_registered_policy_impact(
+            REPO_ROOT,
+            DEFAULT_SOURCE_REGISTRY,
+            {entry.id: entry.path for entry in entries},
+        )
+        consumers = {edge.consumer for edge in impact.consumers_for("workflow.commit")}
+        graph = load_repository_registry(REPO_ROOT, DEFAULT_SOURCE_REGISTRY)
+
+        self.assertEqual(
+            consumers,
+            {
+                "STANDARDS-ROUTER.md",
+                "workflows/implementation.md",
+                "workflows/planning.md",
+                "profiles/workflows/concurrent-plan-integration.md",
+                "workflows/release.md",
+                "prompts/planning.md",
+                "prompts/implement-plan.md",
+                "templates/PLAN-TEMPLATE.md",
+                "reference/recipes/commits.md",
+                "evaluation/standards-effectiveness/fixtures/commit/authority.tsv",
+                "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv",
+                "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv",
+                "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
+            },
+        )
+        self.assertEqual(
+            {view.edge.id for view in graph.incident("workflow.commit", ("policy-impact",))},
+            {view.edge.id for view in graph.incident("workflows/commit.md", ("policy-impact",))},
+        )
 
     def test_old_policy_query_and_bespoke_graph_files_are_absent(self) -> None:
         self.assertFalse((REPO_ROOT / "tools/standards_verifier/query_policy_impact.py").exists())

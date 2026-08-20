@@ -1,7 +1,7 @@
 schema_version = 1
 id = "commit-consolidation-dispositions"
-owner = "workflows/commit.md"
-description = "Exact Commit disposition coverage, target validity, legacy index routes, and reference ownership."
+owner = "workflow.commit"
+description = "Commit authority, branch lifecycle, exact dispositions, target validity, legacy routes, and reference ownership."
 
 [[checks]]
 id = "commit-authority-decisions"
@@ -75,6 +75,105 @@ any = [
   { field = "compensation", op = "eq", value = "missing" },
   { field = "follow_up", op = "eq", value = "missing" },
 ]
+
+[[checks]]
+id = "branch-lifecycle-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
+expected_column = "expected"
+default = "refuse-cleanup"
+[checks.domains]
+case = ["*"]
+isolation = ["material", "none"]
+proposal = ["complete", "concurrent", "none", "selective"]
+target = ["advanced", "current-descendant", "independent", "not-applicable"]
+visibility = ["long-lived", "not-applicable", "private", "shared"]
+topology = ["durable", "linear", "not-applicable"]
+terminal = ["abandoned", "integrated", "pending", "rejected", "retained", "superseded"]
+ownership = ["owned", "unknown"]
+worktree = ["clean", "dirty", "locked", "none", "stale-registration", "unique"]
+cleanup_basis = ["age", "count", "evidence-only", "force", "none", "terminal"]
+mapping = ["complete", "missing", "not-applicable"]
+expected = ["cherry-pick-lineage", "direct-serial", "fast-forward", "mapping-required", "merge", "prune-stale-registration", "rebase-verify-fast-forward", "refuse-cleanup", "remove-clean-worktree", "retain-long-lived", "retain-protected-worktree", "retire-redundant-evidence", "serial-integration", "terminal-classified"]
+[[checks.rules]]
+outcome = "refuse-cleanup"
+[checks.rules.when]
+any = [
+  { field = "ownership", op = "eq", value = "unknown" },
+  { field = "cleanup_basis", op = "in", values = ["age", "count", "force"] },
+]
+[[checks.rules]]
+outcome = "retain-protected-worktree"
+[checks.rules.when]
+all = [{ field = "worktree", op = "in", values = ["dirty", "locked", "unique"] }]
+[[checks.rules]]
+outcome = "mapping-required"
+[checks.rules.when]
+all = [
+  { field = "proposal", op = "eq", value = "selective" },
+  { field = "mapping", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "prune-stale-registration"
+[checks.rules.when]
+all = [{ field = "worktree", op = "eq", value = "stale-registration" }]
+[[checks.rules]]
+outcome = "remove-clean-worktree"
+[checks.rules.when]
+all = [
+  { field = "worktree", op = "eq", value = "clean" },
+  { field = "terminal", op = "eq", value = "integrated" },
+  { field = "cleanup_basis", op = "eq", value = "terminal" },
+]
+[[checks.rules]]
+outcome = "retain-long-lived"
+[checks.rules.when]
+all = [{ field = "terminal", op = "eq", value = "retained" }]
+[[checks.rules]]
+outcome = "terminal-classified"
+[checks.rules.when]
+all = [{ field = "terminal", op = "in", values = ["abandoned", "rejected", "superseded"] }]
+[[checks.rules]]
+outcome = "retire-redundant-evidence"
+[checks.rules.when]
+all = [
+  { field = "cleanup_basis", op = "eq", value = "evidence-only" },
+  { field = "mapping", op = "eq", value = "complete" },
+]
+[[checks.rules]]
+outcome = "cherry-pick-lineage"
+[checks.rules.when]
+all = [
+  { field = "proposal", op = "eq", value = "selective" },
+  { field = "mapping", op = "eq", value = "complete" },
+]
+[[checks.rules]]
+outcome = "serial-integration"
+[checks.rules.when]
+all = [{ field = "proposal", op = "eq", value = "concurrent" }]
+[[checks.rules]]
+outcome = "merge"
+[checks.rules.when]
+all = [{ field = "topology", op = "eq", value = "durable" }]
+[[checks.rules]]
+outcome = "rebase-verify-fast-forward"
+[checks.rules.when]
+all = [
+  { field = "proposal", op = "eq", value = "complete" },
+  { field = "target", op = "eq", value = "advanced" },
+  { field = "visibility", op = "eq", value = "private" },
+]
+[[checks.rules]]
+outcome = "fast-forward"
+[checks.rules.when]
+all = [
+  { field = "proposal", op = "eq", value = "complete" },
+  { field = "target", op = "eq", value = "current-descendant" },
+]
+[[checks.rules]]
+outcome = "direct-serial"
+[checks.rules.when]
+all = [{ field = "isolation", op = "eq", value = "none" }]
 
 [[checks]]
 id = "commit-identifier-coverage"
@@ -155,7 +254,7 @@ prohibited = ["Mandatory History Cleanup Before Commit", "must rewrite unpushed 
 id = "router-commit-route"
 type = "text"
 path = "STANDARDS-ROUTER.md"
-required = ["workflows/commit.md"]
+required = ["workflows/commit.md", "branch/worktree isolation", "terminal lifecycle"]
 prohibited = []
 
 [[checks]]
@@ -169,7 +268,7 @@ prohibited = ["Mandatory History Cleanup Before Commit", "must rewrite unpushed 
 id = "implementation-commit-route"
 type = "text"
 path = "workflows/implementation.md"
-required = ["(commit.md)"]
+required = ["(commit.md)", "branch and worktree applicability", "integration mechanism", "terminal lifecycle"]
 prohibited = ["Mandatory History Cleanup Before Commit", "must rewrite unpushed history", "mandatory cleanup rule", "Rewriting unpushed merge commits is allowed", "Drop regression commits and fixup fixes", "@{u}", "git commit --no-verify", "When absolutely necessary"]
 
 [[checks]]
@@ -207,5 +306,47 @@ values = ["STD-0663", "STD-0703"]
 id = "commit-recipe-reference-metadata"
 type = "text"
 path = "reference/recipes/commits.md"
-required = ["- Role: `reference`", "- Level: `REFERENCE`"]
+required = ["- Role: `reference`", "- Level: `REFERENCE`", "git merge --ff-only", "do not authorize rewriting or cleanup"]
 prohibited = []
+
+[[checks]]
+id = "commit-lifecycle-owner"
+type = "text"
+path = "workflows/commit.md"
+required = ["## Branch And Worktree Applicability", "## Integration Mechanism Selection", "## Cherry-Pick And Replacement Lineage", "## Terminal Branch Lifecycle", "## Worktree Lifecycle And Cleanup Authority", "Do not cherry-pick merely because", "never independently authorize deletion"]
+prohibited = ["always create a branch", "always cherry-pick", "Force-remove dirty worktrees"]
+
+[[checks]]
+id = "planning-isolation-projection"
+type = "text"
+path = "workflows/planning.md"
+required = ["## Repository Isolation In Written Plans", "does not require a branch or worktree by default", "predeclared terminal cleanup"]
+prohibited = ["Every plan requires a branch"]
+
+[[checks]]
+id = "concurrent-isolation-projection"
+type = "text"
+path = "profiles/workflows/concurrent-plan-integration.md"
+required = ["Do not require a branch or", "least history-transforming", "do not confer ownership", "Fresh admission is the"]
+prohibited = ["cherry-pick integration is required"]
+
+[[checks]]
+id = "branch-lifecycle-planning-prompt"
+type = "text"
+path = "prompts/planning.md"
+required = ["branch or worktree facts", "does not require a", "branch by itself"]
+prohibited = ["branch for every"]
+
+[[checks]]
+id = "branch-lifecycle-implementation-prompt"
+type = "text"
+path = "prompts/implement-plan.md"
+required = ["branch or worktree facts", "not cherry-pick by default"]
+prohibited = ["always cherry-pick"]
+
+[[checks]]
+id = "branch-lifecycle-plan-template"
+type = "text"
+path = "templates/PLAN-TEMPLATE.md"
+required = ["material repository isolation", "expected terminal disposition", "do not require a branch merely", "plan exists."]
+prohibited = ["branch for every"]

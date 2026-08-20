@@ -43,6 +43,11 @@ Each outstanding proposal records:
 - verification contract; and
 - designated serial integration owner.
 
+When a proposal uses a branch or worktree, also record its source branch,
+target branch, visibility, and cleanup handoff. Do not require a branch or
+worktree merely because this profile applies; Commit owns the isolation and
+integration-mechanism decision.
+
 Actor identity records responsibility and does not confer plan, resource, or
 integration ownership. Empty, absent, and `none` remain distinct where the
 selected representation gives them different meanings.
@@ -65,11 +70,24 @@ These classifications are semantic. Tools may encode them as typed values;
 manual workflows may record explicit labels. A serialized sum type is not
 required.
 
+After a stale proposal receives fresh admission, Commit may authorize rebasing
+a complete private, unshared branch, followed by conflict resolution, complete
+affected reverification, and fast-forward integration. Fresh admission is the
+authority; a stale mismatch itself never authorizes rebase or another recovery
+mechanism.
+
 ## Serial Integration And Reconciliation
 
 One designated integration owner serially changes active plans, ledgers,
 routers, shared contracts, lockfiles, generated artifacts, and other declared
 shared authority. Disjoint files alone do not prove compatible outcomes.
+
+The integration owner selects the least history-transforming accepted
+mechanism through Commit, records replacement lineage when selective
+cherry-pick or reconstruction is required, records each proposal's terminal
+classification, and hands off only predeclared cleanup of owned task resources.
+Separate worktrees provide isolation; they do not confer ownership, preserve
+durable evidence, or require cherry-pick integration.
 
 When integration is partial or evidence disagrees with state, stop normal
 admission. From fresh current state, record what integrated, what did not, the

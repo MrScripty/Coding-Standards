@@ -14,6 +14,9 @@ Create or revise an implementation plan. Do not implement source changes.
 8. Delegate only non-overlapping read or write scopes with report paths.
 9. Route concurrent plan integration only when multiple outstanding proposals
    can become stale before integration; do not infer it from participant count.
+10. Record branch or worktree facts only when material isolation is part of the
+    plan; a written plan, delegation, or multi-file change does not require a
+    branch by itself.
 
 Stop for clarification when authoritative facts cannot support a valid plan.
 Do not add fallback or compatibility behavior without an actual routed contract.
