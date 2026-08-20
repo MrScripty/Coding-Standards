@@ -13120,3 +13120,22 @@ Every disposable artifact is absent. No live suite, registry, fixture,
 standard, package, edge record, generated artifact, Bash path, compatibility
 behavior, copied target list/count, command action, optional member, or
 fallback changed.
+
+## 2026-08-20 M6-I11 Root Router Aggregate Admission
+
+**Outcome:** admitted; atomic acceptance is next.
+
+Clean preflight selected the registered root-index suite as the only Router
+owner. Disposable final state adds table-derived Router-link coverage,
+strengthens exact README literals, updates the surviving consumer audit,
+transfers historical checker-backed evidence, and deletes only the replaced
+root Router checker. It passes 160 declarative suites and the complete
+checkpoint at 114 Bash checkers, 118 nodes, 702 edges, and 118 components.
+
+Route and link-identity mutations preserve intended parity. A prohibited-text
+mutation exposed VE082: defective Bash control flow accepts forbidden content,
+while the declarative assertion returns the intended typed failure. M6-I11 is
+admitted to remove that bug with the checker. No new suite, registry edge,
+dependency, copied route list/count, Bash repair, wrapper, compatibility path,
+or fallback is admitted. Admission-derived graph evidence contains 115 Bash
+checkers, 119 nodes, 706 edges, and 119 components.

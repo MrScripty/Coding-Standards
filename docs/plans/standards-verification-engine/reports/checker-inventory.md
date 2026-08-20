@@ -3896,3 +3896,29 @@ Frontend route tables, and a disposable uncovered existing file returns
 No live suite, registry, fixture, standard, package, edge record, generated
 artifact, Bash path, compatibility behavior, command action, copied target
 list/count, or fallback changed. M6-I11 root Router preflight is next.
+
+### M6-I11 Root Router Aggregate Admission
+
+Fresh evidence identifies one current executable reference from the README
+consumer audit to `verify-root-router-evidence.sh`; route and lifecycle tables
+are contract references, not execution dependencies. The checker has no
+outgoing executable dependency. Its README structure, links, boundary, and
+disposition claims already belong to registered `root-index-closure`; only
+table-derived Router-link coverage and several exact literals require suite
+refinement.
+
+Disposable final-state proof extends that existing owner suite with M6-C6,
+removes the checker from the consumer inventory, narrows the surviving audit's
+root-use domain, transfers ten historical checker-backed records to
+`suite:root-index-closure`, and records the audit as an independent gate. It
+passes all 160 declarative suites and the complete checkpoint with 114 Bash
+checkers, 118 nodes, 702 edges, and 118 components.
+
+Route redirection and README link-identity mutations fail both implementations.
+A prohibited-content mutation reveals VE082: the Bash loop incorrectly exits
+successfully, while the declarative suite enforces the intended prohibition.
+M6-I11 therefore removes the bug instead of preserving it. Train order 126 is
+admitted; no new suite, registry entry, dependency, copied route list/count,
+checker repair, wrapper, compatibility behavior, or fallback is authorized.
+Admission-derived graph evidence contains 115 Bash checkers, 119 nodes, 706
+edges, and 119 components.

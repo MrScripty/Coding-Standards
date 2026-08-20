@@ -4,15 +4,17 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** preflight the M6-I11 root Router aggregate replacement with
-the accepted M6-C6 Markdown link-coverage capability
+**Next slice:** atomically accept the admitted M6-I11 root Router aggregate
+replacement
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-C6 added the bounded table-derived Markdown
 link-coverage capability without changing live suite or checker authority.
 
-**Latest admitted slice:** `none`; no package follows accepted M6-I10.
+**Latest admitted slice:** M6-I11 owns the root Router aggregate, its existing
+owner-suite refinement, affected README consumer lifecycle, and exact edge
+transfer.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -125,7 +127,7 @@ Python engine while its separately owned Frontend and migration gates remain
 independent.
 
 **Current derived state:** 160 registered declarative suites, 115 retained Bash
-checkers, 119 executable nodes, 705 conservative reference edges, and 119
+checkers, 119 executable nodes, 706 conservative reference edges, and 119
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -149,13 +151,14 @@ helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
 **Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
-is accepted. No package currently follows M6-I10. VE081 is resolved by the
-accepted M6-C6 capability; root Router replacement preflight is next.
+is accepted. M6-I11 is admitted after complete disposable final-state proof;
+atomic acceptance is next.
 
 **Next work:**
 
-1. Preflight the root Router aggregate with M6-C6 and current lifecycle
-   evidence.
+1. Accept M6-I11 exactly as admitted: refine the existing root-index suite,
+   transfer affected lifecycle evidence, update the surviving consumer audit,
+   and delete the replaced root Router Bash checker.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or

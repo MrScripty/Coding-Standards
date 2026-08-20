@@ -4634,3 +4634,24 @@
   suite, fixture, standard, package, edge record, generated artifact, Bash
   path, compatibility behavior, copied target list/count, or fallback changed.
 - M6-I11 root Router replacement preflight is next.
+
+## 2026-08-20 - M6-I11 Root Router Aggregate Admission
+
+- Started from clean canonical `6cc2e14`; no overlapping source, fixture,
+  suite, generated, plan, or lifecycle changes were present.
+- Selected the existing `root-index-closure` suite as the sole Router owner.
+  The future acceptance adds one M6-C6 route-coverage check and strengthens
+  exact README literals; it creates no second suite or dependency.
+- Disposable baseline and route-redirection/link-identity mutations prove the
+  intended aggregate. A prohibited-content mutation exposed VE082: the Bash
+  `! rg` loop accepts forbidden content, while the declarative text check
+  returns the intended typed failure. The defect will be removed, not copied.
+- Disposable final state passes the owner suite, surviving README consumer
+  audit, package/edge authority, graph freshness, all 160 declarative suites,
+  and the complete checkpoint at 114 Bash checkers, 118 nodes, 702 edges, and
+  118 components.
+- Admitted train order 126 with one current executable-reference disposition,
+  an exact bounded write set, and derived graph evidence at 115 Bash checkers,
+  119 nodes, 706 edges, and 119 components. No live suite, checker, audit,
+  historical replacement, compatibility behavior, or fallback changed.
+  Atomic acceptance is next.
