@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 fresh post-recovery graph audit
+**Current phase:** Generic edge-system recovery dependency
 
-**Next slice:** audit the fresh post-recovery executable graph through the
-verification-engine plan without preselecting M6-I17
+**Next slice:** complete the generic edge-system plan before the
+verification-engine fresh graph audit resumes
 
 **Acceptance status:** `partial`
 
@@ -97,7 +97,7 @@ universal architecture policy.
 | Migration lifecycle | Canonical package, disposition, owner, and generated records own status; active-plan narration does not. |
 | Verification migration | Bash checkers and helpers are removed with accepted Python-engine replacements; no wrappers, dual authority, compatibility parsers, or fallback remain. |
 | Accelerated execution | Owner-coherent packages may prepare concurrently with disjoint write sets; shared registry, evidence, Router, and plan integration remain serial. |
-| Recovery dependency | The accepted work proportionality and policy impact recovery requires fresh graph evidence before another verifier package is selected. |
+| Recovery dependency | Complete the generic edge-system recovery without changing the frozen temporary Bash graph, then obtain fresh graph evidence before another verifier package is selected. |
 
 ## Current Architecture
 

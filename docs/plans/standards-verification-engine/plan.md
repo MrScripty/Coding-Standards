@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6 Bash retirement
+**Current phase:** Generic edge-system recovery dependency
 
-**Next slice:** audit the fresh post-recovery executable graph and package
-authority without preselecting M6-I17
+**Next slice:** complete the generic edge-system plan before resuming the fresh
+post-recovery executable graph audit
 
 **Acceptance status:** `pending`
 
@@ -146,10 +146,12 @@ authorize package selection or ownership.
 helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
-**Recovery dependency:** M6-I16 is accepted after final-state proof. The
+**Recovery dependency:** M6-I16 and the
 [work proportionality and policy impact recovery](../work-proportionality-and-policy-impact/plan.md)
-is accepted. The next package must be selected from a fresh post-recovery graph
-audit; evidence captured before recovery does not admit or preselect M6-I17.
+are accepted. The [generic edge-system recovery](../generic-edge-system/plan.md)
+now owns the neutral graph capability and justified consumer migration before
+the fresh post-recovery package audit resumes. It does not admit or preselect
+M6-I17 and must not change the frozen temporary Bash graph.
 
 **Next work:**
 
