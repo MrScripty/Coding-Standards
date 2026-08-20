@@ -12708,3 +12708,18 @@ separate contract. The recommended next slice is one generic projected
 `repository_paths` assertion with strict typed diagnostics and no count,
 snapshot, owner inference, configured command, compatibility behavior, or
 fallback. No implementation package is admitted at this boundary.
+
+## 2026-08-19 VE074 Projected Repository Paths Capability Acceptance
+
+**Outcome:** shared engine contract accepted without package admission.
+
+The engine now validates nonempty unique repository-file paths derived from
+one strict filtered table projection. It delegates table parsing, predicates,
+containment, missing inputs, and file-kind outcomes to existing generic
+authorities and rejects symlink targets explicitly.
+
+Focused and complete engine tests, all declarative suites, both plan checks,
+lifecycle fixtures, generated freshness, the complete mixed checkpoint, and
+diff integrity pass. No Commit policy, suite, registry, package, manifest,
+generated artifact, Bash source, copied path/count, inferred owner, configured
+command, compatibility behavior, optional-missing mode, or fallback changed.

@@ -3874,6 +3874,14 @@ package may be admitted only after that capability is accepted. A broad
 source-index rewrite, compatibility path, policy-specific branch, or fallback
 is not authorized at this boundary.
 
+The delegated shared-contract slice is accepted. One generic
+`repository_paths` assertion reuses strict projected-table and repository-path
+authorities, requires a nonempty unique one-column projection, and accepts only
+contained regular non-symlink files. Focused and repository-wide verification
+passes without adding a suite, package, registry entry, manifest row, Bash
+change, copied path/count, inferred owner, compatibility behavior, or fallback.
+The owner-local Commit package remains a separate next slice.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

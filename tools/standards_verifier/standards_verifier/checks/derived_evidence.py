@@ -186,6 +186,63 @@ class RepositorySubjectsCheck:
 
 
 @dataclass(frozen=True, slots=True)
+class RepositoryPathsCheck:
+    id: str
+    paths: ProjectedTableSource
+
+    def run(self, context: CheckContext) -> list[Diagnostic]:
+        paths, diagnostics = _values(
+            context,
+            self.id,
+            self.paths,
+            "paths",
+            require_unique=True,
+        )
+        if not paths:
+            diagnostics.append(
+                Diagnostic(
+                    "ASSERT.REPOSITORY_PATHS_EMPTY",
+                    "invalid",
+                    "path projection must select at least one path",
+                    suite=context.suite_id,
+                    check=self.id,
+                    path=self.paths.path,
+                    expected="nonempty paths",
+                    observed="empty",
+                )
+            )
+        if diagnostics:
+            return diagnostics
+
+        for path in paths:
+            candidate = contained_path(
+                context.repo_root,
+                path,
+                suite=context.suite_id,
+                check=self.id,
+            )
+            if candidate.is_symlink():
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.REPOSITORY_PATH_SYMLINK",
+                        "invalid",
+                        "repository path must not be a symlink",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=path,
+                    )
+                )
+                continue
+            contained_file(
+                context.repo_root,
+                path,
+                suite=context.suite_id,
+                check=self.id,
+            )
+        return diagnostics
+
+
+@dataclass(frozen=True, slots=True)
 class KeyCoverageCheck:
     id: str
     keys: ProjectedTableSource
@@ -301,6 +358,18 @@ def parse_repository_subjects_check(
         raw.get("subjects"), suite_id, check_id, "subjects", "REPOSITORY_SUBJECTS"
     )
     return RepositorySubjectsCheck(check_id, subjects)
+
+
+def parse_repository_paths_check(
+    raw: dict[str, Any], suite_id: str
+) -> RepositoryPathsCheck:
+    allowed = {"id", "type", "paths"}
+    _reject_unknown(raw, allowed, suite_id, "repository paths")
+    check_id = _check_id(raw, suite_id)
+    paths = _source(
+        raw.get("paths"), suite_id, check_id, "paths", "REPOSITORY_PATHS"
+    )
+    return RepositoryPathsCheck(check_id, paths)
 
 
 def parse_key_coverage_check(

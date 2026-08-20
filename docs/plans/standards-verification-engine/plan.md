@@ -2,13 +2,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: VE074 table-derived repository-path validation
-re-plan required before the next checker package
+**Current phase:** Milestone 6: VE074 projected repository-path capability
+accepted; Commit consolidation package preflight next
 
-**Next slice:** select and record the VE074 representation before admitting the
-Commit consolidation-dispositions package. Do not hardcode current target
-counts, broaden Commit ownership to the shared manifest, or copy path lists
-that can be projected from authoritative table rows.
+**Next slice:** preflight and admit the Commit consolidation-dispositions
+package using the accepted generic capability. Derive owner-local rows and
+targets from authoritative tables; do not hardcode counts, broaden Commit
+ownership to the shared manifest, or copy projected path lists.
 
 **Acceptance status:** `pending`
 
@@ -7984,7 +7984,8 @@ package discovery is next.
 
 ##### VE074 Table-Derived Repository Path Validation Re-plan
 
-**Status:** Active re-plan trigger; no successor package is admitted.
+**Status:** Accepted as a shared engine capability; no successor package is
+admitted by this slice.
 
 The fresh post-M6-I2 model identifies the Commit consolidation-dispositions
 verifier as the only retained verifier with no executable caller and no
@@ -8048,6 +8049,23 @@ change. Re-plan if path kind must include directories or symlinks, selection
 needs multiple columns, a caller requires optional missing paths, or the
 capability cannot serve at least the Commit and source-index migrations without
 policy-specific behavior.
+
+**Selected recovery:** Option 1. The engine now exposes one
+`repository_paths` check over the existing strict one-column projected-table
+source. It requires a nonempty unique projection and validates every current
+value as a contained regular non-symlink repository file. Empty and duplicate
+projections, empty values, malformed tables, unknown configuration, invalid
+width, absolute or traversal paths, symlinks and symlink escapes, missing
+files, and directories retain typed outcomes through existing table and path
+authorities.
+
+Acceptance adds no suite, registry row, package, disposition, generated
+artifact, Bash change, callback, command configuration, copied path/count,
+owner inference, optional-missing mode, compatibility representation, or
+fallback. Focused derived-evidence tests, all engine tests, all declarative
+suites, both plan validators, lifecycle fixtures, generated freshness, the
+complete retained-Bash checkpoint, and diff integrity pass. The Commit package
+must still be preflighted, admitted, implemented, and accepted separately.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

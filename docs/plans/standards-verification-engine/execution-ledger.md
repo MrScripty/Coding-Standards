@@ -4151,3 +4151,21 @@
   followed by a distinct Commit package. No package is admitted and no engine,
   test, suite, registry, manifest, generated artifact, Bash, standard, fixture,
   workflow, compatibility behavior, or fallback changed.
+
+## 2026-08-19 - VE074 Projected Repository Paths Capability Acceptance
+
+- Reconfirmed clean canonical `57bfa2e` before the shared-contract slice.
+- Added one generic `repository_paths` assertion over the existing strict
+  projected-table grammar; no second projection parser or containment resolver
+  was introduced.
+- Required nonempty unique one-column path evidence and contained regular
+  non-symlink files. Typed failures cover malformed tables/configuration,
+  invalid width, empty/duplicate values, absolute/traversal paths, symlinks and
+  escapes, missing files, and directories.
+- Kept typed checker/suite subjects separate and added no suite, registry row,
+  package, Bash edit, generated artifact, count, snapshot, owner inference,
+  command action, optional-missing behavior, compatibility route, or fallback.
+- Focused tests, all engine tests, all declarative suites, plan/lifecycle
+  checks, generated freshness, the complete retained-Bash checkpoint, and diff
+  integrity pass. Commit package preflight is next and remains a separate
+  owner-local slice.

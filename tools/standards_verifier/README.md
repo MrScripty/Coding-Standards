@@ -228,6 +228,16 @@ escapes, symlinks, empty identities, and duplicate projected subjects are
 invalid. The check does not infer a subject type, accept suite paths, load a
 second registry, execute a checker, skip an unavailable subject, or fall back.
 
+The `repository_paths` check reads one strict projected table source named
+`paths`, whose projection selects exactly one column and at least one unique,
+non-empty value. Every derived value must resolve to a contained regular
+non-symlink repository file. Missing files are unavailable; directories,
+absolute or parent-traversing paths, symlink paths and escapes, empty values,
+duplicate projections, malformed tables, and invalid configuration are typed
+failures. The check derives paths from current table rows and has no copied
+path list, count, owner inference, command execution, compatibility
+representation, optional-missing mode, or fallback.
+
 The `key_coverage` check reads strict projected table sources named `keys` and
 `records`, each selecting exactly one column. The key projection must be
 non-empty, unique, and contain no empty value. Every derived key must occur in

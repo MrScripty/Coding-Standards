@@ -8,6 +8,7 @@ from .acceptance_claims import parse_acceptance_claims_check
 from .decision import parse_decision_check
 from .derived_evidence import (
     parse_key_coverage_check,
+    parse_repository_paths_check,
     parse_repository_subjects_check,
     parse_table_text_absence_check,
 )
@@ -48,6 +49,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_decision_check(raw, suite_id)
     if kind == "repository_subjects":
         return parse_repository_subjects_check(raw, suite_id)
+    if kind == "repository_paths":
+        return parse_repository_paths_check(raw, suite_id)
     if kind == "key_coverage":
         return parse_key_coverage_check(raw, suite_id)
     if kind == "table_text_absence":
