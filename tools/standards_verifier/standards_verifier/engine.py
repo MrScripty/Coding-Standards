@@ -103,6 +103,7 @@ class Verifier:
             self.repo_root,
             suite.id,
             frozenset(self.entry_by_id),
+            tuple((entry.id, entry.path) for entry in self.entries),
         )
         for check in suite.checks:
             try:

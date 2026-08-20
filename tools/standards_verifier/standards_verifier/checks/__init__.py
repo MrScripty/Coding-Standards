@@ -27,6 +27,7 @@ from .markdown_structure import parse_markdown_structure_check
 from .metadata import parse_metadata_graph_check
 from .numeric_lifecycle import parse_numeric_lifecycle_check
 from .path_state import parse_path_state_check
+from .policy_impact import parse_policy_impact_check
 from .reference_inventory import parse_reference_inventory_check
 from .relation import parse_relation_check
 from .source_index_closure import parse_source_index_closure_check
@@ -83,6 +84,8 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_line_budget_check(raw, suite_id)
     if kind == "path_state":
         return parse_path_state_check(raw, suite_id)
+    if kind == "policy_impact":
+        return parse_policy_impact_check(raw, suite_id)
     if kind == "metadata_graph":
         return parse_metadata_graph_check(raw, suite_id)
     if kind == "reference_inventory":

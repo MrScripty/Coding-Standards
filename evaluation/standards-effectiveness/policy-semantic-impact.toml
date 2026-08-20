@@ -1,0 +1,146 @@
+schema_version = 1
+
+[[owners]]
+id = "workflow.planning"
+path = "workflows/planning.md"
+coverage = "audited"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "workflows/implementation.md"
+relation = "normative-consumer"
+applicability = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions."
+evidence_owner = "suite:planning-admission"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "workflows/commit.md"
+relation = "normative-consumer"
+applicability = "Commit consumes Planning artifact-update boundaries when an active plan governs the work."
+evidence_owner = "suite:planning-consolidation"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "profiles/workflows/concurrent-plan-integration.md"
+relation = "normative-consumer"
+applicability = "The profile specializes stale-capable proposal integration while Planning retains lifecycle and artifact ownership."
+evidence_owner = "suite:concurrent-plan-integration"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "STANDARDS-ROUTER.md"
+relation = "router-projection"
+applicability = "Router projects written-plan and Concurrent Plan Integration applicability and exclusions."
+evidence_owner = "suite:concurrent-plan-integration"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions."
+evidence_owner = "suite:planning-consolidation"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = "The implementation entrypoint projects written-plan admission and conditional concurrent-profile selection."
+evidence_owner = "suite:plan-implementation-entrypoint"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = "The plan template projects current Planning artifact fields and conditional concurrency records."
+evidence_owner = "suite:plan-template-projection"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv"
+relation = "fixture-projection"
+applicability = "Fixture records ordinary written-plan admission, operation, lifecycle, and fallback outcomes."
+evidence_owner = "suite:planning-admission"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv"
+relation = "fixture-projection"
+applicability = "Fixture records conditional Concurrent Plan Integration routing decisions."
+evidence_owner = "suite:concurrent-plan-integration"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv"
+relation = "fixture-projection"
+applicability = "Fixture records stale-state, compatibility, reconciliation, and no-fallback outcomes when the profile applies."
+evidence_owner = "suite:concurrent-plan-integration"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv"
+relation = "fixture-projection"
+applicability = "Fixture records implementation-entrypoint consumption of explicit written-plan admission."
+evidence_owner = "suite:plan-implementation-entrypoint"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv"
+relation = "fixture-projection"
+applicability = "Fixture records required and conditional plan-template projections."
+evidence_owner = "suite:plan-template-projection"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
+relation = "fixture-projection"
+applicability = "Fixture records Planning ownership, bounded state, acceptance, and process-fallback decisions."
+evidence_owner = "suite:planning-consolidation"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/planning-admission.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces ordinary Planning admission and implementation consumption."
+evidence_owner = "suite:planning-admission"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces conditional concurrent-profile routing and stale-state protections."
+evidence_owner = "suite:concurrent-plan-integration"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces the written-plan implementation entrypoint projection."
+evidence_owner = "suite:plan-implementation-entrypoint"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/plan-template-projection.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces the Planning-derived template projection."
+evidence_owner = "suite:plan-template-projection"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/planning-consolidation.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces canonical Planning ownership and process decisions."
+evidence_owner = "suite:planning-consolidation"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/s1-routing.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces ordinary bounded routing without unnecessary Planning or concurrent-profile selection."
+evidence_owner = "suite:s1-routing"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "evaluation/standards-effectiveness/suites/policy-semantic-impact.toml"
+relation = "enforcement-suite-projection"
+applicability = "Suite enforces the reviewed Planning semantic-impact structure and negative contracts."
+evidence_owner = "suite:policy-semantic-impact"

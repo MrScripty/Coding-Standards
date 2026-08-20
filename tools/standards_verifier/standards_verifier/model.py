@@ -18,6 +18,7 @@ class CheckContext:
     repo_root: Path
     suite_id: str
     registered_suite_ids: frozenset[str]
+    registered_suite_paths: tuple[tuple[str, str], ...]
 
 
 @dataclass(frozen=True, slots=True)

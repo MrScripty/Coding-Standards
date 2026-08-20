@@ -38,6 +38,26 @@ Run engine self-tests:
 python3 -m unittest discover -s tools/standards_verifier/tests -v
 ```
 
+Report every reviewed semantic consumer and projection for one audited policy
+owner:
+
+```bash
+python3 tools/standards_verifier/query_policy_impact.py \
+  --owner workflow.planning
+```
+
+The command reads the strict repository-owned
+`evaluation/standards-effectiveness/policy-semantic-impact.toml` manifest and
+emits deterministic TSV. The manifest records only explicitly audited policy
+owners and reviewed semantic edges. Each edge names one canonical owner,
+contained consumer artifact, supported relation, non-empty applicability
+condition, and registered evidence-owner suite. Owner IDs resolve through
+canonical module metadata; suite consumers and evidence owners resolve through
+the suite registry. Hyperlinks, lexical similarity, standards `Requires`, and
+the temporary Bash checker graph never infer semantic impact. Querying an
+unaudited owner is typed `unavailable`; policy changes must audit that owner
+before relying on reverse impact.
+
 Regenerate or verify the exact Bash checker structure and dependency graph
 artifacts:
 

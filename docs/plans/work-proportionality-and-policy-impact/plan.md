@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1 semantic consumer/impact foundation
+**Current phase:** Milestone 2 work-slice proportionality and residual correction
 
-**Next slice:** implement and accept the bounded Planning semantic-impact
-manifest, validation, and reverse-impact query
+**Next slice:** correct every reviewed Planning consumer and record exact
+consumer dispositions
 
 **Acceptance status:** `pending`
 
@@ -25,7 +25,7 @@ consumers and projections are updated without inference from links or text.
 
 | ID | Observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
-| A1 | A permanent typed relation answers which semantic consumers and projections require review when an audited policy owner changes. | `pending` | Milestone 1 |
+| A1 | A permanent typed relation answers which semantic consumers and projections require review when an audited policy owner changes. | `satisfied` | [Planning impact foundation](reports/planning-impact-foundation.md) |
 | A2 | Reverse impact for `workflow.planning` returns every required consumer, and each returned consumer has one exact recovery disposition. | `pending` | Impact query and recovery report |
 | A3 | Bounded coherent changes may proceed as one slice without a written plan, while materially sequenced or independently acceptable work still selects planning. | `pending` | Milestone 2 decision fixtures |
 | A4 | Ordinary written-plan implementation consumes no concurrent-only revision or reconciliation records. | `pending` | Planning and implementation suites |
@@ -135,7 +135,7 @@ query returns the required set; all Python tests and registered declarative
 suites pass; generated evidence is current; affected plan-structure and link
 checks pass; the mixed checkpoint passes; and staged scope is exact.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 2: Work-Slice Proportionality And Residual Correction
 
@@ -179,7 +179,7 @@ registered suites, mixed checkpoint, diff checks, and staged review pass; the
 residual contradiction is absent; both parent plans resume at a fresh
 post-recovery graph audit without preselecting M6-I17.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Blockers
 

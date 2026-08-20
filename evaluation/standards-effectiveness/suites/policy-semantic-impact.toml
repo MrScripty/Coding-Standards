@@ -1,0 +1,48 @@
+schema_version = 1
+id = "policy-semantic-impact"
+owner = "workflow.planning"
+description = "Reviewed bounded policy-owner impact edges, strict consumer and evidence resolution, and typed negative fixtures without link or lexical inference."
+
+[[checks]]
+id = "current-structure"
+type = "policy_impact"
+manifest = "evaluation/standards-effectiveness/policy-semantic-impact.toml"
+
+[[checks]]
+id = "negative-fixtures"
+type = "policy_impact"
+
+[[checks.cases]]
+id = "duplicate-edge"
+manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/duplicate-edge.toml"
+expected = ["POLICY_IMPACT.DUPLICATE_EDGE"]
+
+[[checks.cases]]
+id = "unknown-owner"
+manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/unknown-owner.toml"
+expected = ["POLICY_IMPACT.UNKNOWN_OWNER"]
+
+[[checks.cases]]
+id = "unknown-consumer"
+manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/unknown-consumer.toml"
+expected = ["POLICY_IMPACT.UNKNOWN_CONSUMER"]
+
+[[checks.cases]]
+id = "missing-applicability"
+manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/missing-applicability.toml"
+expected = ["POLICY_IMPACT.APPLICABILITY"]
+
+[[checks.cases]]
+id = "malformed-relation"
+manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/malformed-relation.toml"
+expected = ["POLICY_IMPACT.RELATION"]
+
+[[checks.cases]]
+id = "path-escape"
+manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/path-escape.toml"
+expected = ["PATH.OUTSIDE_REPOSITORY"]
+
+[[checks.cases]]
+id = "missing-file"
+manifest = "evaluation/standards-effectiveness/fixtures/policy-impact/missing-file.toml"
+expected = ["INPUT.UNAVAILABLE"]

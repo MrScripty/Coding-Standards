@@ -83,6 +83,21 @@ class MetadataGraphCheck:
         return diagnostics
 
 
+def load_module_metadata(
+    root: Path,
+    path: str,
+    *,
+    suite: str,
+    check: str,
+) -> ModuleMetadata:
+    context = CheckContext(root, suite, frozenset(), ())
+    module, diagnostics = _parse_module(context, check, path)
+    if diagnostics:
+        raise EngineError(diagnostics[0])
+    assert module is not None
+    return module
+
+
 def _diagnostic(
     context: CheckContext,
     check: str,

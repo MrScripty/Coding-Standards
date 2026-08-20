@@ -1,0 +1,13 @@
+schema_version = 1
+
+[[owners]]
+id = "workflow.planning"
+path = "workflows/planning.md"
+coverage = "audited"
+
+[[edges]]
+owner = "workflow.planning"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = ""
+evidence_owner = "suite:planning-admission"
