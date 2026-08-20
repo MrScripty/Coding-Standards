@@ -1,13 +1,12 @@
 # Plan: Planning Proportionality Recovery
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 5 acceptance and downstream pilot
+**Current phase:** Milestone 5 accepted
 
-**Next slice:** select and run the bounded downstream ordinary-plan pilot
-without transition tooling
+**Next slice:** `none`
 
-**Acceptance status:** `pending`
+**Acceptance status:** `satisfied`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -30,7 +29,7 @@ current authority rather than historical verification data.
 | A4 | No verifier treats accepted historical narration in an active plan as canonical authority. | `integration` | `not-applicable` | `automated` | `satisfied` | [Consumer dispositions](reports/active-plan-consumer-dispositions.tsv) and zero-consumer proof |
 | A5 | Migration lifecycle derives from canonical package, disposition, lifecycle, or evidence records rather than duplicated active-plan prose. | `integration` | `not-applicable` | `automated` | `satisfied` | Package, edge, numeric-retirement, and generated lifecycle records |
 | A6 | The parent and verification-engine plans contain only current decisions, milestone state, blockers, next work, acceptance state, and evidence links; displaced history remains available. | `contract` | `not-applicable` | `review-and-automated` | `satisfied` | Both compact active plans, their ledgers, and identifier-coverage review |
-| A7 | Declarative verification, the retained mixed checkpoint, scenario rescoring, and an ordinary-plan downstream pilot pass without invented transition tooling. | `system` | `downstream-repository` | `automated-and-manual` | `pending` | [Scenario rescore](reports/scenario-rescore.md); downstream pilot pending |
+| A7 | Declarative verification, the retained mixed checkpoint, scenario rescoring, and an ordinary-plan downstream pilot pass without invented transition tooling. | `system` | `downstream-repository` | `automated-and-manual` | `satisfied` | [Scenario rescore](reports/scenario-rescore.md) and [downstream ordinary-plan pilot](reports/downstream-ordinary-plan-pilot.md) |
 
 ## Scope
 
@@ -315,15 +314,15 @@ clean, usable planning boundary.
 
 - [x] Run declarative and retained mixed checkpoints.
 - [x] Rescore planning scenarios.
-- [ ] Run one ordinary-plan downstream pilot without transition tooling.
-- [ ] Resume verification-engine fresh-graph package discovery from current
+- [x] Run one ordinary-plan downstream pilot without transition tooling.
+- [x] Resume verification-engine fresh-graph package discovery from current
   accepted state.
 
 **Acceptance gate:**
 
 - A1 through A7 are satisfied with linked evidence.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ## Blockers
 
@@ -347,6 +346,6 @@ fixtures, generated artifacts, and active plans remain serial.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
+- Acceptance status: `satisfied`
 - Deferred follow-ups: `none`
-- Final status: `Active`
+- Final status: `Accepted`

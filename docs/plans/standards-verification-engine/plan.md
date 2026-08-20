@@ -1,13 +1,11 @@
 # Plan: Generic Standards Verification Engine
 
-**Plan status:** `Blocked`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 6 Bash retirement, blocked by the planning
-proportionality recovery.
+**Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** `none` until the planning proportionality recovery is
-accepted; then rebuild the current graph and select the next owner-coherent
-checker package.
+**Next slice:** rebuild the current graph and select the next owner-coherent
+checker package from reviewed lifecycle and dependency evidence
 
 **Acceptance status:** `pending`
 
@@ -140,7 +138,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Blocked` | Current state below; planning recovery must finish first |
+| 6 | Exceptional checks and Bash retirement | `Active` | Rebuild the graph and select the next owner-coherent package |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -149,11 +147,11 @@ authorize package selection or ownership.
 helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
-**Current blocker:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md).
-No package is admitted while active-plan compaction and downstream recovery
-acceptance remain incomplete.
+**Recovery dependency:** [Planning proportionality recovery](../planning-proportionality-recovery/plan.md)
+is accepted. No package currently follows M6-I9; selection starts from fresh
+generated evidence.
 
-**Next work after unblock:**
+**Next work:**
 
 1. Regenerate the graph from current repository state.
 2. Select the smallest owner-coherent package from reviewed lifecycle and
@@ -190,8 +188,7 @@ fallback remains.
 
 ## Blockers
 
-- The planning proportionality recovery must be accepted before another
-  verifier package is selected or admitted.
+- `none`
 
 ## Re-Plan Triggers
 
@@ -221,4 +218,4 @@ integration-owner work.
 
 - Acceptance status: `pending`
 - Deferred follow-ups: `none`
-- Final status: `Blocked`
+- Final status: `Active`

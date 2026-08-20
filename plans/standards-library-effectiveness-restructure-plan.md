@@ -2,12 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Planning proportionality recovery, Milestone 4 active-plan
-compaction. Verifier-migration admissions remain frozen until that recovery is
-accepted.
+**Current phase:** Milestone 7 verification migration, fresh-graph package
+discovery
 
-**Next slice:** compact the verification-engine plan from canonical package,
-ledger, issue, report, and generated-evidence records.
+**Next slice:** rebuild the current verifier graph and select the next
+owner-coherent package from reviewed lifecycle and dependency evidence
 
 **Acceptance status:** `partial`
 
@@ -43,7 +42,7 @@ universal architecture policy.
 
 | ID | Observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
-| A1 | Fixed scenarios improve or preserve every critical rubric dimension. | `pending` | [Baseline scores](../evaluation/standards-effectiveness/baseline-scores.md); Milestone 8 rescore pending |
+| A1 | Fixed scenarios improve or preserve every critical rubric dimension. | `satisfied` | [Baseline scores](../evaluation/standards-effectiveness/baseline-scores.md) and [current rescore](../docs/plans/planning-proportionality-recovery/reports/scenario-rescore.md) |
 | A2 | Routing, ownership, duplication, disposition, and link targets pass from canonical evidence. | `partial` | [Generated owner map](../evaluation/standards-effectiveness/generated/rule-owner-map.tsv); [consolidation dispositions](../evaluation/standards-effectiveness/consolidation-dispositions.tsv) |
 | A3 | Two independent downstream pilots complete without loading the full library. | `pending` | Milestone 8 |
 | A4 | Migration and standards-version guidance is published. | `pending` | Milestone 8 |
@@ -153,20 +152,19 @@ and M6-I9 at train orders 123 and 124. The current canonical package manifest
 contains the exact accepted package state; the execution ledger contains the
 detailed slice evidence.
 
-**Current dependency:** [Planning proportionality recovery](../docs/plans/planning-proportionality-recovery/plan.md).
-No new verifier package may be admitted until that plan is accepted.
+**Accepted dependency:** [Planning proportionality recovery](../docs/plans/planning-proportionality-recovery/plan.md)
+is complete. Verification-engine package selection resumes from fresh generated
+evidence with no admitted package after M6-I9.
 
 **Remaining work:**
 
-1. Compact the verification-engine active plan and accept the planning
-   proportionality recovery.
-2. Rebuild the verifier graph from current repository state and re-admit the
-   selected source-index generalization through the verification-engine plan.
-3. Continue owner-coherent Python-engine migration until no Bash verifier,
+1. Rebuild the verifier graph from current repository state and select the next
+   owner-coherent package through the verification-engine plan.
+2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
-4. Regenerate canonical inventories and prove exact dispositions, no source
+3. Regenerate canonical inventories and prove exact dispositions, no source
    gaps, no normative legacy source rows, and no legacy Router routes.
-5. Complete manual semantic-ownership review `D001` through `D010` before
+4. Complete manual semantic-ownership review `D001` through `D010` before
    Milestone 7 acceptance.
 
 **Acceptance gate:** every rule identifier has a final disposition; structural,
@@ -189,8 +187,7 @@ engine is the sole verification authority.
 
 ## Blockers
 
-- The planning proportionality recovery is active. It must compact the child
-  plan and satisfy its acceptance gates before verifier migration resumes.
+- `none`
 
 ## Slice Procedure
 

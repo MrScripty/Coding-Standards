@@ -338,3 +338,51 @@
   suites pass; and diff integrity passes.
 - Next: select and run one bounded downstream ordinary-plan pilot without
   transition tooling.
+
+## 2026-08-20: Downstream Ordinary-Plan Pilot
+
+- Operation: `continue`.
+- Downstream: inspected Pantograph read-only at
+  `464d5d0bd99267ab86e5960f2abf4d930148e035`. Two unrelated proposal
+  documents were dirty, so no downstream write or source slice began.
+- Objective: planned one documentation-only image-generation recovery slice
+  that derives a current owner-classified failure inventory and one next
+  implementation handoff from committed evidence.
+- Routing: selected Core, Router, Planning, Implementation, Verification, and
+  Documentation. Excluded Concurrent Plan Integration because one integration
+  owner had no outstanding proposal that could become stale.
+- Artifact: a 132-line temporary plan recorded explicit identity, lifecycle,
+  objective, typed acceptance, exact write set, binding decisions, one
+  milestone, blockers, re-plan triggers, concurrency exclusion, and final
+  acceptance with separate ledger and issue links.
+- Protocol boundary: the candidate required no digest, transition or admission
+  identity, revision token, actor field, proposal envelope, reconciliation
+  record, or storage representation.
+- Verification: canonical plan structure and all candidate links passed;
+  prohibited protocol fields were absent; manual review confirmed one current
+  phase and one next slice; Pantograph remained unchanged.
+- Result: the downstream ordinary-plan pilot and A7 are satisfied. Recovery
+  acceptance and verification-engine handoff are the only admitted next slice.
+
+## 2026-08-20: Recovery Acceptance And Verification Handoff
+
+- Operation: `verify`.
+- Acceptance: A1 through A7 are satisfied. Milestones 0 through 5 are accepted,
+  the recovery plan is terminal, and no deferred recovery work remains.
+- Parent handoff: the standards-restructure plan resumes Milestone 7 at
+  fresh-graph verification-package discovery. Its fixed-scenario objective
+  claim now links the accepted 122/126 rescore.
+- Child handoff: the verification-engine plan moves from `Blocked` to `Active`.
+  No package follows M6-I9; the next slice rebuilds current generated evidence
+  and selects an owner-coherent package without reusing the completed
+  source-index handoff.
+- Verification: all three plan-structure checks and cross-plan links pass;
+  generated inventory, graph, and numeric evidence remain fresh; planning,
+  concurrency-profile, plan-template, and implementation-entrypoint suites
+  pass; all 159 declarative suites pass; and diff integrity passes.
+- Checkpoint scope: the complete 116-checker mixed checkpoint already passed in
+  this milestone before the report-only pilot and current-state handoff. No
+  checker, engine, suite, fixture, registry, generated graph, or execution
+  contract changed, so the handoff does not repeat that transitive Bash suite.
+- Result: the planning proportionality recovery is accepted. Verification
+  migration may proceed from fresh current state.
