@@ -4132,3 +4132,22 @@
   checkpoint, protected evidence, and diff integrity pass. Engine, schema,
   registry, suites, standards, workflows, and retained Bash remain unchanged.
   Fresh-graph package discovery is next.
+
+## 2026-08-19 - VE074 Projected Repository Paths Re-plan Trigger
+
+- Reconfirmed clean canonical `9b4fd56` before the read-only fresh-graph audit.
+- Identified consolidation dispositions as the only retained verifier without
+  executable callers or verifier/helper dependencies. It remains live Commit
+  policy and cannot be retired as historical process evidence.
+- Existing generic assertions cover exact filtered identifier equality,
+  allowed semantic pairs, index structure/text, and reference ownership.
+- Found one missing generic mechanism: contained regular-file validation for
+  paths projected from filtered table rows. The need recurs in retained
+  lifecycle and source-index gates.
+- Rejected copied target lists/counts, whole-manifest Commit ownership,
+  broadening typed migration subjects, policy-specific engine logic, and an
+  immediate cross-owner source-index rewrite.
+- Recommended a separately accepted projected `repository_paths` capability,
+  followed by a distinct Commit package. No package is admitted and no engine,
+  test, suite, registry, manifest, generated artifact, Bash, standard, fixture,
+  workflow, compatibility behavior, or fallback changed.

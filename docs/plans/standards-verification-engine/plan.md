@@ -2,13 +2,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6: M6-I2 security-repair evidence retirement
-accepted; fresh-graph package audit next
+**Current phase:** Milestone 6: VE074 table-derived repository-path validation
+re-plan required before the next checker package
 
-**Next slice:** audit the fresh post-M6-I2 reference model and derive the next
-bounded owner-coherent package without changing its temporary schema. Recompute
-incident references, lifecycle authority, and representability from current
-inputs; do not infer ownership or dependencies from graph shape.
+**Next slice:** select and record the VE074 representation before admitting the
+Commit consolidation-dispositions package. Do not hardcode current target
+counts, broaden Commit ownership to the shared manifest, or copy path lists
+that can be projected from authoritative table rows.
 
 **Acceptance status:** `pending`
 
@@ -7981,6 +7981,73 @@ and diff integrity pass. No replacement suite, registry dependency, engine or
 schema change, Bash wrapper, annotation, compatibility route, copied mutable
 total, inferred owner, alternate entrypoint, or fallback remains. Fresh-graph
 package discovery is next.
+
+##### VE074 Table-Derived Repository Path Validation Re-plan
+
+**Status:** Active re-plan trigger; no successor package is admitted.
+
+The fresh post-M6-I2 model identifies the Commit consolidation-dispositions
+verifier as the only retained verifier with no executable caller and no
+verifier/helper dependency. It remains a live Commit migration gate rather
+than historical process evidence. Its owner-local contract is:
+
+- exact equality between frozen `COMMIT-STANDARDS.md` section identifiers and
+  the Commit rows in `consolidation-dispositions.tsv`;
+- unique rows, non-empty rationale, and Commit-specific disposition/target
+  validity;
+- every non-removal target resolves to a contained repository file;
+- the concise legacy index routes to Commit workflow and recipe owners; and
+- the recipe remains non-normative reference material.
+
+Existing generic `relation`, filtered projection, `inclusion`, text,
+`markdown_structure`, and `path_state` assertions can represent every item
+except repository-file validation for paths projected from filtered table
+rows. A whole-table `table` domain would wrongly give the Commit package
+authority over all shared disposition rows. A copied target list or count would
+duplicate cheap derived state and become stale. The current
+`repository_subjects` assertion is intentionally limited to typed
+`checker:<path>` and `suite:<id>` migration subjects, so broadening it would
+conflate two contracts.
+
+The retained inventory shows table-derived path validation also in lifecycle,
+owner-state, and source-index checkers. This makes one narrowly typed generic
+assertion a credible reusable migration primitive rather than a policy-specific
+branch.
+
+**Option 1 - Add projected `repository_paths` validation (recommended):** add
+one generic assertion that accepts the existing strict projected-table source
+shape, including `where`, and validates each unique selected value as a
+contained regular repository file. Empty projections, duplicate paths,
+absolute/escaping paths, symlinks, missing files, malformed tables, unknown
+fields, and invalid selection width receive typed diagnostics. It derives
+paths at execution time, stores no count or current snapshot, infers no owner,
+and executes no configured command. Implement and accept this engine capability
+as its own shared-contract slice, then admit the Commit package separately.
+
+**Option 2 - Use an explicit Commit target fixture:** record the small allowed
+`(disposition,target)` contract in a fixture, use filtered inclusion, and check
+the known target files statically. This avoids engine work but duplicates the
+current target paths and does not help the retained checkers with the same
+derived-path need. Choose only if broader recurrence is disproved.
+
+**Option 3 - Migrate the entire source-index subsystem now:** replace the
+source-index helper, fixture gate, aggregate gate, and Commit disposition gate
+in one broader design. This could reuse path projection efficiently but mixes
+shared engine, aggregate lifecycle, and Commit ownership in one high-risk
+slice. It violates the current thin-slice boundary and should follow, not absorb,
+the generic primitive.
+
+**Option 4 - Defer this gate:** retain the Bash checker and select a more
+complex package. This preserves current behavior but leaves a known reusable
+capability gap and does not advance the only dependency-free live gate.
+
+Option 1 best matches the standards: generic mechanism before specialization,
+strict structured input, derived current state, explicit owner-local policy,
+typed diagnostics, no fallback, and a separately reviewable shared-contract
+change. Re-plan if path kind must include directories or symlinks, selection
+needs multiple columns, a caller requires optional missing paths, or the
+capability cannot serve at least the Commit and source-index migrations without
+policy-specific behavior.
 
 ##### M6-U0 Concurrent Semantic Preparation Wave
 

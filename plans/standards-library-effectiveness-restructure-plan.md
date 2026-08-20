@@ -3856,6 +3856,24 @@ all declarative suites, both plan validators, generated freshness, removed-path
 proof, protected historical evidence, and the complete retained-Bash checkpoint
 pass. Fresh-graph package discovery may continue under VE072.
 
+### VE074 Projected Repository Paths Delegation
+
+The child verification plan's fresh-graph audit selected the live Commit
+consolidation-dispositions gate, then stopped before admission. Existing generic
+assertions can derive exact owner-local rows and prove their relationships, but
+the engine cannot yet validate plain repository file paths projected from a
+filtered table column. Static target lists would duplicate derived state and a
+whole-manifest domain would grant Commit ownership over unrelated rows.
+
+The recommended recovery is a separate shared-contract slice adding one strict
+projected `repository_paths` assertion. It must reuse the existing projected
+table source grammar, validate unique contained regular files with typed
+diagnostics, store no counts or snapshots, infer no owner, execute no configured
+command, and remain distinct from typed checker/suite subjects. The Commit
+package may be admitted only after that capability is accepted. A broad
+source-index rewrite, compatibility path, policy-specific branch, or fallback
+is not authorized at this boundary.
+
 ## Final Acceptance
 
 - **Objective evidence:** Pending Milestone 8 scenario comparison, downstream

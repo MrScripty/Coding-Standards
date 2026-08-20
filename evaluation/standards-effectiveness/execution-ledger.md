@@ -12692,3 +12692,19 @@ Bash wrapper, compatibility path, alternate entrypoint, inferred owner, or
 fallback exists. Focused lifecycle authority, all declarative suites, both plan
 validators, generated freshness, the complete retained-Bash checkpoint,
 protected evidence, removed-path proof, and diff integrity pass.
+
+## 2026-08-19 VE074 Projected Repository Paths Re-plan Trigger
+
+**Outcome:** implementation paused before successor-package admission.
+
+Fresh-graph review selected the dependency-free Commit consolidation gate, but
+its live contract requires contained regular-file validation for non-removal
+targets projected from filtered disposition rows. Existing relations,
+inclusion, predicates, text, structure, and static path checks cover the rest.
+
+A copied target fixture would duplicate derived state, whole-table domains
+would broaden Commit ownership, and typed migration subjects must remain a
+separate contract. The recommended next slice is one generic projected
+`repository_paths` assertion with strict typed diagnostics and no count,
+snapshot, owner inference, configured command, compatibility behavior, or
+fallback. No implementation package is admitted at this boundary.
