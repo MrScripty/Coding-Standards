@@ -81,10 +81,3 @@ expected = [["STD-0294", "STD-0299", "CROSS-PLATFORM-STANDARDS.md", "topics/cros
 field = "order"
 op = "eq"
 value = "6"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8s` (`Accepted`)", "`7.4b8t` (`Accepted`)", "`7.4b8u` (`Accepted`)", "`7.4b8v` (`Accepted`)"]
-prohibited = []

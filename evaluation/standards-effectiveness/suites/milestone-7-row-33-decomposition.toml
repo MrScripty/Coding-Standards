@@ -83,10 +83,3 @@ expected = [["STD-0126", "STD-0133", "ARCHITECTURE-PATTERNS.md", "topics/contrac
 field = "order"
 op = "eq"
 value = "33"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b23a` (`Accepted`)", "`7.4b23b` (`Accepted`)", "`7.4b23c` (`Accepted`)"]
-prohibited = []

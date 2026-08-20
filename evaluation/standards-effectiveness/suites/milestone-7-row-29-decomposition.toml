@@ -73,13 +73,6 @@ op = "eq"
 value = "29"
 
 [[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b19a` (`Accepted`)", "`7.4b19b` (`Accepted`)", "`7.4b20a` (`Accepted`)"]
-prohibited = []
-
-[[checks]]
 id = "disposition-coverage"
 type = "table"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"

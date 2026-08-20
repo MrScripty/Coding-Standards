@@ -133,10 +133,3 @@ type = "text"
 path = "templates/README-TEMPLATE.md"
 required = ["selects a", "`boundary-readme` or `contract-readme`", "Delete instructions and optional", "sections that do not apply", "## Purpose", "## Responsibility", "## Invariants", "## Entry Points", "## Decision Links", "## Consumer Contract", "## Produced Contract"]
 prohibited = ["\n## Contents\n", "\n## Problem\n", "\n## Constraints\n", "\n## Decision\n", "\n## Alternatives Rejected\n", "\n## Revisit Triggers\n", "\n## Dependencies\n", "\n### Internal\n", "\n### External\n", "\n## Related ADRs\n", "\n## Usage Examples\n", "\n## API Consumer Contract\n", "\n## Structured Producer Contract\n", "\n## Testing\n", "\n## Notes\n"]
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b37a` (`Accepted`)", "`7.4b37b` (`Accepted`)"]
-prohibited = []

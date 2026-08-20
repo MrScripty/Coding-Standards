@@ -127,9 +127,3 @@ id = "accepted-finding"
 type = "text"
 path = "evaluation/standards-effectiveness/findings.md"
 required = ["| F045 | Resolved in Milestone 7.4b4g |"]
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b4g` (`Accepted`)"]

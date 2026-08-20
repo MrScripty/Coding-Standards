@@ -140,15 +140,3 @@ expected = [["STD-0495", "LAUNCHER-STANDARDS.md", "workflows/verification.md", "
 field = "id"
 op = "eq"
 value = "STD-0495"
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = [
-  "`7.4b8aw` (`Accepted`)",
-  "`7.4b8ax` (`Accepted`)",
-  "`7.4b8ay` (`Accepted`)",
-  "`7.4b8az` (`Accepted`)",
-]
-prohibited = []

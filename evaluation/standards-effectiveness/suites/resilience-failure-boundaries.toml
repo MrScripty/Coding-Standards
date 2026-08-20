@@ -51,10 +51,3 @@ required = [
   "STD-0154\tCODING-STANDARDS.md\ttopics/resilience.md\trefine\tderive bounded diagnostic context and channels from operator and application contracts",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bg` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

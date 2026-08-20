@@ -84,10 +84,3 @@ expected = [["STD-0106", "STD-0118", "ARCHITECTURE-PATTERNS.md", "profiles/bound
 field = "order"
 op = "eq"
 value = "32"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b22a` (`Accepted`)", "`7.4b22b` (`Accepted`)", "`7.4b22c` (`Accepted`)", "`7.4b22d` (`Accepted`)", "`7.4b22dr` (`Accepted`)"]
-prohibited = []

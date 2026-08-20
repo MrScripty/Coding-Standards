@@ -86,10 +86,3 @@ required = [
   "STD-0156\tCODING-STANDARDS.md\ttopics/contracts.md\trefine\tclassify outbound outcomes and prove destination representations without HTTP status default-body or alternate-parser fallback",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bh` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

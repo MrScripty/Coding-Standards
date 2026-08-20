@@ -139,9 +139,3 @@ id = "rust-index-route"
 type = "text"
 path = "profiles/languages/rust/README.md"
 required = ["(interop.md)"]
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b3d` (`Accepted`)"]

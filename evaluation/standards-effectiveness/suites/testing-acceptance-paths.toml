@@ -72,10 +72,3 @@ required = [
   "STD-0615\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tstart with the smallest useful objective path and broaden from risk and consumers without test-first one-full-path horizontal-scaling or vertical-slice-template defaults",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8cc` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

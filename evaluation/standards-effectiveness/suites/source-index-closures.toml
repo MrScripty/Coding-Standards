@@ -12,10 +12,3 @@ corpus_path = "evaluation/standards-effectiveness/corpus.tsv"
 owner_map_path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
 dispositions_path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
 router_path = "STANDARDS-ROUTER.md"
-
-[[checks]]
-id = "implementation-acceptance"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4c3v1` (`Accepted`)"]
-prohibited = []

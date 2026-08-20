@@ -107,10 +107,3 @@ expected = [["P30", "new-owner-design", "reference/patterns/architecture.md", "c
 field = "train_order"
 op = "eq"
 value = "36"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b26a` (`Accepted`)", "`7.4b26b` (`Accepted`)", "`7.4b26c` (`Accepted`)", "`7.4b26d` (`Accepted`)", "`7.4b26er` (`Accepted`)", "`7.4b26e` (`Accepted`)"]
-prohibited = []

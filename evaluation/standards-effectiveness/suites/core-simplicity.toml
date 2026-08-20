@@ -65,10 +65,3 @@ required = [
   "STD-0136\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tdefine simplicity by entanglement ownership invariants and reasoning load rather than visible construct counts or smallest-diff fallback",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bc` (`Accepted`)", "`7.4b8bd` (`Accepted`)"]
-prohibited = []

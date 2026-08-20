@@ -75,10 +75,3 @@ expected = [["STD-0023"], ["STD-0024"], ["STD-0025"], ["STD-0026"]]
 field = "id"
 op = "in"
 values = ["STD-0023", "STD-0024", "STD-0025", "STD-0026"]
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b18g` (`Accepted`)", "`7.4b19a` (`Accepted`)"]
-prohibited = []

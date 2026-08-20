@@ -94,10 +94,3 @@ expected = [["STD-0849", "STD-0851", "prompts/full-codebase-standards-refactor.m
 field = "order"
 op = "eq"
 value = "24"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b14a` (`Accepted`)", "`7.4b14b` (`Accepted`)"]
-prohibited = []

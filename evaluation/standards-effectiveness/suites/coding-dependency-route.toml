@@ -24,10 +24,3 @@ expected = [["CODING-STANDARDS.md", "CODING-STANDARDS.md", "index"]]
 field = "id"
 op = "eq"
 value = "STD-0157"
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bi` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

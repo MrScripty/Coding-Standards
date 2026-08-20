@@ -67,10 +67,3 @@ required = [
   "STD-0150\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tplace values with the narrowest owning concern rather than a universal centralized constants container",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bf` (`Accepted`)", "`7.4b8bg` (`Accepted`)"]
-prohibited = []

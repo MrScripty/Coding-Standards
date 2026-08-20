@@ -112,10 +112,3 @@ expected = [["P28", "consolidation", "profiles/applications/frontend.md", "exist
 field = "train_order"
 op = "eq"
 value = "34"
-
-[[checks]]
-id = "plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b24a` (`Accepted`)", "`7.4b24b` (`Accepted`)", "`7.4b24c` (`Accepted`)", "`7.4b24d` (`Accepted`)", "`7.4b24e` (`Accepted`)", "`7.4b24f` (`Accepted`)", "`7.4b24g` (`Accepted`)"]
-prohibited = []

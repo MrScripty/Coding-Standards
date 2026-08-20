@@ -80,10 +80,3 @@ required = [
   "STD-0680\tTOOLING-STANDARDS.md\tprofiles/languages/typescript.md\tsplit\tderive analysis from architecture authority while extracting custom ESLint rule syntax to non-normative Tooling reference",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bp` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

@@ -200,13 +200,6 @@ required = ["| F047 | Resolved in Milestone 7.4b7e |"]
 prohibited = []
 
 [[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b7e` (`Accepted`)"]
-prohibited = []
-
-[[checks]]
 id = "removed-authority"
 type = "text"
 path = "evaluation/standards-effectiveness/README.md"

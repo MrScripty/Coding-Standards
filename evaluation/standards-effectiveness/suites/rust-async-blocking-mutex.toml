@@ -128,9 +128,3 @@ prohibited = [
   "tokio::sync::RwLock",
   "std::sync::Mutex",
 ]
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b4f` (`Accepted`)"]

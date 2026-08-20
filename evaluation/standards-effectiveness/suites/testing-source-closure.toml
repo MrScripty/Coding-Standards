@@ -83,19 +83,3 @@ prohibited = [
   "Before submitting code",
   "All new code has corresponding tests",
 ]
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = [
-  "`7.4b8bu` (`Accepted`)", "`7.4b8bv` (`Accepted`)",
-  "`7.4b8bw` (`Accepted`)", "`7.4b8bx` (`Accepted`)",
-  "`7.4b8by` (`Accepted`)", "`7.4b8cb` (`Accepted`)",
-  "`7.4b8cc` (`Accepted`)", "`7.4b8cd` (`Accepted`)",
-  "`7.4b8ce` (`Accepted`)", "`7.4b8cf` (`Accepted`)",
-  "`7.4b8cg` (`Accepted`)", "`7.4b8ch` (`Accepted`)",
-  "`7.4b8ci` (`Accepted`)", "`7.4b8cj` (`Accepted`)",
-  "`7.4b9s` (`Accepted`)",
-]
-prohibited = []

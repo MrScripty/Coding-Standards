@@ -70,10 +70,3 @@ required = [
   "STD-0177\tCODING-STANDARDS.md\tworkflows/implementation.md\trefine\tkeep incomplete behavior unreachable from production and return typed outcomes without registered stubs dummy data silent no-ops or substitute fallback",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bl` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

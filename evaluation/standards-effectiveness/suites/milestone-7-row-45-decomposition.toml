@@ -49,14 +49,3 @@ required = [
   "## Re-plan Triggers",
 ]
 prohibited = []
-
-[[checks]]
-id = "row-45-accepted-parent-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = [
-  "`7.4b34b` (`Accepted`)",
-  "`7.4b35a` (`Accepted`)",
-  "`7.4b35b` (`Accepted`)",
-]
-prohibited = []

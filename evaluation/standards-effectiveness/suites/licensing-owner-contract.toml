@@ -77,10 +77,3 @@ required = [
   "STD-0182\tCODING-STANDARDS.md\ttopics/licensing.md\trefine\tplace file artifact or distribution attribution only where selected obligations require it without file-level template defaults",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bn` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

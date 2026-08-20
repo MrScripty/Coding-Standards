@@ -102,10 +102,3 @@ expected = [
 field = "package_id"
 op = "eq"
 value = "P30"
-
-[[checks]]
-id = "plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b27a` (`Accepted`)", "`7.4b27b` (`Accepted`)", "`7.4b27c` (`Accepted`)", "`7.4b27d` (`Accepted`)", "`7.4b27er` (`Accepted`)", "`7.4b27e` (`Accepted`)"]
-prohibited = []

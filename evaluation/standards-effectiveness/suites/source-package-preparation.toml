@@ -41,10 +41,3 @@ type = "text"
 path = "evaluation/standards-effectiveness/milestone-7-source-index-verifier-replan.md"
 required = ["## Concurrent Preparation And Serial Acceptance", "Preparation order and acceptance order are separate contracts.", "Workers cannot edit shared acceptance state.", "A prepared package is not accepted evidence.", "one complete-suite run may accept", "non-overlapping former", "Architecture remains excluded from preparation wave `p1`"]
 prohibited = []
-
-[[checks]]
-id = "parent-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4c3p` (`Accepted`)", "milestone-7-source-package-preparation.tsv"]
-prohibited = []

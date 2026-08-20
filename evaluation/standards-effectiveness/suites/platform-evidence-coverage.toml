@@ -90,13 +90,6 @@ op = "in"
 values = ["STD-0298", "STD-0299"]
 
 [[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8v` (`Accepted`)"]
-prohibited = []
-
-[[checks]]
 id = "removed-authority"
 type = "text"
 path = "evaluation/standards-effectiveness/README.md"

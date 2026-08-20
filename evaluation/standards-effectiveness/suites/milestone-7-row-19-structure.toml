@@ -128,13 +128,6 @@ required = ["## Boundary Result", "validates creating `workflows/tooling.md`", "
 prohibited = []
 
 [[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["Row 19 owner-validation gate (`Accepted`)", "`7.4b9a` (`Accepted`): perform the row 19 complete decomposition", "`7.4b9b` (`Accepted`)", "`7.4b9c` (`Accepted`)", "`7.4b9d` (`Accepted`)", "`7.4b9e` (`Accepted`)", "`7.4b9f` (`Accepted`)", "`7.4b9g` (`Accepted`)", "`7.4b9h` (`Accepted`)", "`7.4b9i` (`Accepted`)", "`7.4b9j` (`Accepted`)", "`7.4b9k` (`Accepted`)", "`7.4b9l` (`Accepted`)", "`7.4b9s` (`Accepted`)", "Row 19 TypeScript split replan (`Accepted`)", "Row 19 formatting split replan (`Accepted`)", "Row 19 CI orchestration split replan (`Accepted`)", "Row 19 debt and automation-cost split replan (`Accepted`)", "Row 19 traceability-lineage replan (`Accepted`)", "Row 19 change-evidence split replan (`Accepted`)"]
-prohibited = []
-
-[[checks]]
 id = "tooling-owner"
 type = "text"
 path = "workflows/tooling.md"

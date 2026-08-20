@@ -92,10 +92,3 @@ expected = [["profiles/languages/rust/dependencies.md"]]
 field = "order"
 op = "eq"
 value = "21"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b11a` (`Accepted`)", "`7.4b11b` (`Accepted`)", "`7.4b11c` (`Accepted`)", "`7.4b11d` (`Accepted`)", "`7.4b11e` (`Accepted`)", "`7.4b11f` (`Accepted`)", "`7.4b11g` (`Accepted`)", "`7.4b11h` (`Accepted`)"]
-prohibited = []

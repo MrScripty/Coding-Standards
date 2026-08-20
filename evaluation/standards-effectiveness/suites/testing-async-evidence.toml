@@ -69,10 +69,3 @@ required = [
   "STD-0640\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tprove service-boundary outcomes effects termination and diagnostics at the selected boundary without generic error checklists mocks or weaker-boundary substitution",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8ch` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

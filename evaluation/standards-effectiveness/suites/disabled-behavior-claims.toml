@@ -63,10 +63,3 @@ type = "text"
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
 required = ["STD-0178\tCODING-STANDARDS.md\tworkflows/verification.md\trefine\tderive disabled-behavior acceptance from lifecycle surfaces typed outcomes and direct claims without fixed checklist issue documentation workaround or startup fallback"]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bm` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

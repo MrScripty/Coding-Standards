@@ -79,10 +79,3 @@ type = "text"
 path = "evaluation/standards-effectiveness/milestone-7-f018-decomposition.md"
 required = ["[milestone-7-f018-slices.tsv](milestone-7-f018-slices.tsv)", "fixtures/contracts/runtime-decoding-decisions.tsv", "fixtures/ipc/action-payload-decisions.tsv", "type assertion", "typed `unsupported`", "no default action", "Finding `F018` is resolved"]
 prohibited = ["both slices `Planned`", "`7.4b2c` `Planned`"]
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["milestone-7-f018-decomposition.md", "`7.4b2a` (`Accepted`)", "`7.4b2b` (`Accepted`)", "`7.4b2c` (`Accepted`)"]
-prohibited = ["**Next slice:** Milestone 7.4b2b", "**Next slice:** Milestone 7.4b2c"]

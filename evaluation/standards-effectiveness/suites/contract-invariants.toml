@@ -74,10 +74,3 @@ required = [
   "STD-0173\tCODING-STANDARDS.md\tworkflows/verification.md\trefine\tselect objective-aligned invariant evidence without mandatory test-per-invariant or test-name proof",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bk` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

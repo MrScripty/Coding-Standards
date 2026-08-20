@@ -72,10 +72,3 @@ expected = [["STD-0809", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "
 field = "id"
 op = "eq"
 value = "STD-0809"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8r` (`Accepted`)", "`7.4b8s` (`Accepted`)"]
-prohibited = []

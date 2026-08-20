@@ -80,10 +80,3 @@ expected = [["STD-0852", "STD-0858", "prompts/implement-plan.md", "workflows/imp
 field = "order"
 op = "eq"
 value = "25"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b15a` (`Accepted`)", "`7.4b15b` (`Accepted`)", "`7.4b15c` (`Accepted`)", "`7.4b15d` (`Accepted`)"]
-prohibited = []

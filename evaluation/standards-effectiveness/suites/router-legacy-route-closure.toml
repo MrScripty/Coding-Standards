@@ -56,10 +56,3 @@ prohibited = [
   "until migration",
   "Existing files retain authority only for rules not yet moved",
 ]
-
-[[checks]]
-id = "parent-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4c2` (`Accepted`)"]
-prohibited = []

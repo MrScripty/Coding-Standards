@@ -63,10 +63,3 @@ type = "text"
 path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
 required = ["18\t1\tSTD-0611,STD-0639\tTESTING-STANDARDS.md\ttopics/concurrency.md\texists\tpre-slice-review\tfocused"]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bv` (`Accepted`)", "`7.4b8bw` (`Accepted`)", "`7.4b8bx` (`Accepted`)", "`7.4b8by` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

@@ -101,3 +101,25 @@
   - the complete mixed checkpoint passed 116 retained Bash checkers.
 - Result: Milestone 2 accepted. `PPR-C1` declarative historical-authority
   removal is the only admitted next slice.
+
+## 2026-08-20: Declarative Historical-Authority Removal
+
+- Operation: `continue`.
+- Package: `PPR-C1`.
+- Write set: the exact registered suite paths assigned to `PPR-C1`, plus current
+  recovery state and evidence.
+- Change: removed one parsed active-parent-plan check from each disposed suite.
+  No replacement narrative check or compatibility authority was introduced.
+- Preservation proof: before editing, parsed consumers equaled the disposition
+  set exactly; after editing, every non-target parsed check was structurally
+  unchanged and no registered suite consumed the active parent plan.
+- Verification:
+  - all 159 declarative suites passed;
+  - the changed suite paths equal the `PPR-C1` disposition paths exactly;
+  - zero suite checks reference the active parent plan;
+  - generated inventory remained current at 116 retained Bash verifiers and a
+    120-node, 732-edge, 120-component graph;
+  - `git diff --check` passed; and
+  - the complete mixed checkpoint passed 116 retained Bash checkers.
+- Result: `PPR-C1` accepted. `PPR-C2` retained-shell historical-authority
+  removal is the only admitted next slice.

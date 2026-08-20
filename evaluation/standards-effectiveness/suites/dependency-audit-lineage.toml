@@ -59,10 +59,3 @@ expected = [
 field = "id"
 op = "in"
 values = ["STD-0699", "STD-0700"]
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b9r` (`Accepted`)"]
-prohibited = []

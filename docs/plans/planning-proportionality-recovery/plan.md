@@ -4,8 +4,9 @@
 
 **Current phase:** Milestone 3: historical-authority migration
 
-**Next slice:** execute `PPR-C1` by removing declarative checks that consume
-accepted parent-plan narration and retaining their current canonical authorities
+**Next slice:** execute `PPR-C2` by removing accepted-history, obsolete
+orchestration, and duplicated plan-structure consumption from retained shell
+entrypoints while preserving their non-plan behavior
 
 **Acceptance status:** `pending`
 
@@ -207,9 +208,11 @@ change its consumers to canonical records.
 
 **Tasks:**
 
-- [ ] Migrate owner-coherent consumer packages in dependency order.
-- [ ] Delete obsolete prose assertions rather than wrapping them.
-- [ ] Keep shared authority under serial integration.
+- [x] Remove all `PPR-C1` declarative active-plan checks while preserving their
+  current owner, fixture, disposition, package, and decision checks.
+- [ ] Remove all `PPR-C2` retained-shell active-plan consumption while
+  preserving each entrypoint's non-plan behavior.
+- [x] Keep shared authority under serial integration.
 
 **Acceptance gate:**
 

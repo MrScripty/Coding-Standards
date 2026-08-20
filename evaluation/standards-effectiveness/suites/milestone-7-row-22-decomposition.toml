@@ -94,13 +94,6 @@ op = "eq"
 value = "22"
 
 [[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b12a` (`Accepted`)", "`7.4b12b` (`Accepted`)", "`7.4b12c` (`Accepted`)", "`7.4b12d` (`Accepted`)", "`7.4b12e` (`Accepted`)", "`7.4b12f` (`Accepted`)", "`7.4b12g` (`Accepted`)", "`7.4b12h` (`Accepted`)"]
-prohibited = []
-
-[[checks]]
 id = "canonical-paths"
 type = "path_state"
 present = ["profiles/languages/rust/release.md", "reference/recipes/rust-release.md"]

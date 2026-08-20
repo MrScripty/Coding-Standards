@@ -93,10 +93,3 @@ expected = [["process-dependencies", "STD-0831", "STD-0842", "languages/rust/RUS
 field = "order"
 op = "eq"
 value = "23"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b13a` (`Accepted`)", "`7.4b13b` (`Accepted`)", "`7.4b13c` (`Accepted`)", "`7.4b13d` (`Accepted`)", "`7.4b13e` (`Accepted`)", "`7.4b13f` (`Accepted`)", "`7.4b13g` (`Accepted`)", "`7.4b13h` (`Accepted`)", "`7.4b13i` (`Accepted`)", "`7.4b13j` (`Accepted`)", "`7.4b13k` (`Accepted`)", "`7.4b13l` (`Accepted`)", "`7.4b13m` (`Accepted`)", "`7.4b13n` (`Accepted`)"]
-prohibited = []

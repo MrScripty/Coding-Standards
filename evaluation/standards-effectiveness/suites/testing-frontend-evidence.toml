@@ -89,10 +89,3 @@ where = { all = [
   { field = "target", op = "eq", value = "profiles/applications/frontend.md" },
   { field = "disposition", op = "eq", value = "refine" },
 ] }
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bz` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

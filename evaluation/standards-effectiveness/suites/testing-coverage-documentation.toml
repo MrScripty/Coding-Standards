@@ -68,10 +68,3 @@ required = [
   "STD-0631\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\trecord non-recoverable fixture shape authority at the owning artifact without mandatory diagrams tables or templates",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8cf` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

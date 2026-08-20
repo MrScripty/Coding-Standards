@@ -76,10 +76,3 @@ required = [
   "STD-0194\tCODING-STANDARDS.md\ttopics/performance.md\trefine\toptimize from owned unsatisfied claims and measured contributors without hot-loop startup critical-path or readability slogans",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8br` (`Accepted`)", "`7.4b8ca` (`Accepted`)", "`7.4b8cb` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

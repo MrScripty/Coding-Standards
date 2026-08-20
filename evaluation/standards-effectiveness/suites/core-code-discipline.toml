@@ -106,10 +106,3 @@ required = [
   "STD-0166\tCODING-STANDARDS.md\tCORE-STANDARDS.md\trefine\tuse one term per concept and distinguish different concepts without incumbent or copied naming recipes",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8bj` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

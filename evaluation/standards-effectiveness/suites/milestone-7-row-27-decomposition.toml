@@ -80,10 +80,3 @@ expected = [["STD-0888", "STD-0898", "templates/PULL_REQUEST_TEMPLATE.md", "work
 field = "order"
 op = "eq"
 value = "27"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b17a` (`Accepted`)", "`7.4b17b` (`Accepted`)"]
-prohibited = []

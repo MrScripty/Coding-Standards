@@ -91,10 +91,3 @@ type = "text"
 path = "evaluation/standards-effectiveness/milestone-7-row-46-decomposition.md"
 required = ["## Re-plan Finding", "cannot close as one mechanical index update", "## Owner Contract", "## Exact Outcomes", "`STD-0827`", "`STD-0830`", "## Ordered Children", "`46.1`", "`46.2`", "`46.3`", "## Consumer Audit Impact", "## Bounded Write Sets", "## Verification Gates", "## Typed Outcomes And No Fallback", "## Re-plan Triggers"]
 prohibited = []
-
-[[checks]]
-id = "row-46-accepted-parent-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b35b` (`Accepted`)", "`7.4b36a` (`Accepted`)", "`7.4b36b` (`Accepted`)", "`7.4b36c` (`Accepted`)", "`7.4b36d` (`Accepted`)"]
-prohibited = []

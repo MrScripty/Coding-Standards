@@ -65,10 +65,3 @@ required = [
   "STD-0634\tTESTING-STANDARDS.md\tworkflows/verification.md\trefine\tselect immutable sharing scoped mutation synchronization reset cleanup and identity from lifecycle and concurrency facts without fresh-state serial-execution or ordering defaults",
 ]
 prohibited = []
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b8cg` (`Accepted`)", "`7.4b9s` (`Accepted`)"]
-prohibited = []

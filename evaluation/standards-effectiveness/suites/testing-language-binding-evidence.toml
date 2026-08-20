@@ -91,15 +91,3 @@ expected = [["STD-0616", "TESTING-STANDARDS.md", "profiles/boundaries/language-b
 field = "id"
 op = "eq"
 value = "STD-0616"
-
-[[checks]]
-id = "accepted-plan"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = [
-  "`7.4b8bw` (`Accepted`)",
-  "`7.4b8bx` (`Accepted`)",
-  "`7.4b8by` (`Accepted`)",
-  "`7.4b9s` (`Accepted`)",
-]
-prohibited = []

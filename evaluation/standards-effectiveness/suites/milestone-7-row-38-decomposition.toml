@@ -66,10 +66,3 @@ expected = [["STD-0088", "STD-0088", "ARCHITECTURE-PATTERNS.md", "workflows/docu
 field = "order"
 op = "eq"
 value = "38"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b28b2` (`Accepted`)"]
-prohibited = []

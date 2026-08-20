@@ -187,10 +187,3 @@ expected = [["full-suite"]]
 field = "train_order"
 op = "eq"
 value = "35"
-
-[[checks]]
-id = "accepted-plan-state"
-type = "text"
-path = "plans/standards-library-effectiveness-restructure-plan.md"
-required = ["`7.4b25a` (`Accepted`)", "`7.4b25b` (`Accepted`)", "`7.4b25c` (`Accepted`)"]
-prohibited = []
