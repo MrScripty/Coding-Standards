@@ -4466,3 +4466,16 @@ Final evidence contains 172 suites, 101 Bash checkers, 105 nodes, 645 edges,
 and 105 components. Focused, independent-gate, package/edge, numeric, generated,
 mutation, all-suite, complete-checkpoint, plan, and diff checks pass without an
 engine, policy, fixture, false dependency, wrapper, compatibility, or fallback.
+
+### M6-I25 Release Binding Generation Procedure Admission
+
+The fresh post-M6-I24 graph selects the 40-line caller-free Release
+binding-generation checker. Four generic checks express its 11 decisions,
+canonical workflow text, bounded legacy-index section, exact `STD-0785` through
+`STD-0788`, and README replacement.
+
+Row-8 lifecycle and Release procedure policy remain independent through four
+admitted edges. Disposable final state passes 173 suites and the complete
+checkpoint at 100 Bash checkers, 104 nodes, 642 edges, and 104 components.
+M6-I25 is admitted at train order 140 without policy, fixture, engine, registry,
+Bash repair, wrapper, compatibility, or fallback.

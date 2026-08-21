@@ -5152,3 +5152,18 @@
   and 105 components. No engine branch, false dependency, Bash repair, wrapper,
   compatibility representation, dual authority, or fallback remains.
 - Fresh-graph owner-coherent package selection is next.
+
+## 2026-08-20 - M6-I25 Release Binding Generation Procedure Admission
+
+- Clean accepted revision `db84163` yields the 40-line caller-free Release
+  binding-generation checker as the smallest owner-coherent frontier package.
+- M6-I25 is admitted at train order 140 for 11 decisions, canonical Release
+  text, a bounded legacy-index section, exact `STD-0785` through `STD-0788`,
+  and the README projection.
+- Four admitted edges keep row-8 lifecycle and Release procedure policy as
+  independent gates. Disposable final state passes all 173 suites and the
+  complete checkpoint at 100 Bash checkers, 104 nodes, 642 edges, and 104
+  components.
+- Admission evidence has 172 suites, 101 Bash checkers, 105 nodes, 648 edges,
+  and 105 components without policy, fixture, engine, registry, checker,
+  wrapper, compatibility, or fallback changes.

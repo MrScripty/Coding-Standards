@@ -13664,3 +13664,18 @@ and 105 components. Focused, independent-gate, package/edge, numeric, generated,
 plan, mutation, all-suite, complete-checkpoint, source-integrity, and diff checks
 pass without an engine, policy, fixture, false dependency, wrapper,
 compatibility, or fallback change.
+
+## 2026-08-20 M6-I25 Release Binding Generation Procedure Admission
+
+**Outcome:** admitted at train order 140; atomic acceptance is next.
+
+Fresh post-M6-I24 evidence selects the 40-line caller-free Release
+binding-generation checker. Its 11 decisions, canonical workflow text, bounded
+legacy-index section, exact `STD-0785` through `STD-0788` dispositions, and
+README projection form one `workflow.release` contract.
+
+Row-8 lifecycle and Release procedure policy remain independent through four
+admitted edges. Disposable final state passes 173 suites and the complete
+100-checker checkpoint. Admission state contains 172 suites, 101 Bash checkers,
+105 nodes, 648 edges, and 105 components without policy, fixture, engine,
+registry, checker, wrapper, compatibility, or fallback changes.
