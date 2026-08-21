@@ -706,6 +706,11 @@ path = "evaluation/standards-effectiveness/suites/frontend-applicability.toml"
 requires = []
 
 [[suites]]
+id = "frontend-owner-contract"
+path = "evaluation/standards-effectiveness/suites/frontend-owner-contract.toml"
+requires = []
+
+[[suites]]
 id = "frontend-lifecycle-work"
 path = "evaluation/standards-effectiveness/suites/frontend-lifecycle-work.toml"
 requires = []

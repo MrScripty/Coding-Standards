@@ -13556,3 +13556,17 @@ suites, and the complete checkpoint at 104 Bash checkers, 108 nodes, 660 edges,
 and 108 components. Admission evidence has 105 checkers, 109 nodes, 666 edges,
 and 109 components. No engine, source, fixture, wrapper, compatibility, or
 fallback change is admitted.
+
+## 2026-08-20 M6-I21 Frontend Owner-Contract Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Frontend suite owns all 17 decisions, profile and route text,
+and exact `STD-0187`. Row-15 remains independent; two M6-T13 records use exact
+suite evidence; row-35's current Bash-consumer row is removed. M6-I21 is
+accepted at train order 136 and the checker is absent.
+
+Final evidence contains 169 suites, 104 Bash checkers, 108 nodes, 660 edges,
+and 108 components. Focused, lifecycle, package/edge, numeric, generated, plan,
+all-suite, complete-checkpoint, mutation, and diff checks pass without an
+engine, source, fixture, dependency, wrapper, compatibility, or fallback.

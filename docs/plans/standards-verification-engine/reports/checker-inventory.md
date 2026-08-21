@@ -4368,3 +4368,18 @@ Disposable final state uses five generic checks and passes row-35, row-15, all
 169 suites, and the complete checkpoint at 104 Bash checkers, 108 nodes, 660
 edges, and 108 components. M6-I21 is admitted at train order 136 without an
 engine, source, fixture, wrapper, compatibility, or fallback change.
+
+### M6-I21 Frontend Owner-Contract Acceptance
+
+The registered `frontend-owner-contract` suite now owns all 17 decisions,
+canonical profile text, Router and root projections, and exact `STD-0187`
+disposition. Normative and fixture sources remain unchanged.
+
+Row-15 remains independently executed through two accepted current edges. Two
+M6-T13 records now use exact suite evidence, and row-35 no longer lists the
+removed checker as a current Bash README consumer.
+
+Final evidence contains 169 suites, 104 Bash checkers, 108 nodes, 660 edges,
+and 108 components. Focused, row-35, row-15, package/edge, numeric, generated,
+plan, mutation, all-suite, complete-checkpoint, and diff checks pass without an
+engine, source, fixture, dependency, wrapper, compatibility, or fallback change.

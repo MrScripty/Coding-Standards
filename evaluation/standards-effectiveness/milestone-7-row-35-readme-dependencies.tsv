@@ -5,7 +5,6 @@ evaluation/standards-effectiveness/verify-contract-ownership.sh	transitive-root-
 evaluation/standards-effectiveness/verify-csharp-async-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-dependencies-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
-evaluation/standards-effectiveness/verify-frontend-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-godot-owner-contract.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence
 evaluation/standards-effectiveness/verify-ipc-payload-validation.sh	root-readme-route-or-catalog-assertion	canonical-router-or-owner-evidence

@@ -4,14 +4,15 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** accept the admitted M6-I21 Frontend owner-contract package
+**Next slice:** audit the fresh post-M6-I21 graph and select one owner-coherent
+package without preselecting M6-I22
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I20 moved Release build-procedure authority into
+**Latest accepted slice:** M6-I21 moved Frontend owner-contract authority into
 one registered suite and removed the replaced Bash checker.
 
-**Latest admitted slice:** M6-I21 Frontend owner contract
+**Latest admitted slice:** none
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -118,12 +119,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I20 at train
-order 135. M6-I21 is admitted at train order 136 from fresh post-M6-I20 graph
-evidence.
+**Accepted boundary:** package records are accepted through M6-I21 at train
+order 136.
 
-**Current derived state:** 168 registered declarative suites, 105 retained Bash
-checkers, 109 executable nodes, 666 conservative reference edges, and 109
+**Current derived state:** 169 registered declarative suites, 104 retained Bash
+checkers, 108 executable nodes, 660 conservative reference edges, and 108
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -137,7 +137,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I21 Frontend owner-contract acceptance |
+| 6 | Exceptional checks and Bash retirement | `Active` | Fresh graph review after accepted M6-I21 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -156,8 +156,8 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Accept M6-I21 as one Frontend-owned suite while preserving row-15 as an
-   independent gate and closing its row-35 current-dependency record.
+1. Audit the fresh post-M6-I21 graph and select one owner-coherent package from
+   reviewed lifecycle and dependency evidence without preselecting M6-I22.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or

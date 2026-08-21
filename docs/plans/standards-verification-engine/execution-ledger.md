@@ -4716,6 +4716,18 @@
   104 Bash checkers, 108 nodes, 660 edges, and 108 components. Admission state
   has 105 Bash checkers, 109 nodes, 666 edges, and 109 components.
 
+## 2026-08-20 - M6-I21 Frontend Owner-Contract Acceptance
+
+- Registered one five-check Frontend suite for 17 decisions, owner text, route
+  projections, and exact `STD-0187`; sources remain unchanged.
+- Accepted train order 136 and both current edges. Row-15 remains independent,
+  two M6-T13 records now use suite evidence, and the row-35 current-consumer
+  record is closed.
+- Deleted only the replaced checker. Final evidence contains 169 suites, 104
+  Bash checkers, 108 nodes, 660 edges, and 108 components; all required gates
+  pass without compatibility or fallback.
+- Fresh-graph package selection is next; M6-I22 is not preselected.
+
 ## 2026-08-20 - M6-I16 Accessibility Focus-Lifecycle Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its modality,

@@ -1,0 +1,78 @@
+schema_version = 1
+id = "frontend-owner-contract"
+owner = "profile.application.frontend"
+description = "Frontend projection, synchronization, interaction, accessibility, and evidence authority with typed failure and no domain-authority fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/frontend/owner-contract-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+authority = ["contradictory", "missing", "owned"]
+projection = ["declarative", "imperative"]
+synchronization = ["event", "polling", "pull"]
+interaction = ["ambiguous", "complete", "inaccessible", "unsupported"]
+evidence = ["component", "missing", "proved", "real-browser", "snapshot"]
+fallback = ["copied-domain", "dom-authority", "global-polling", "none", "pointer-only", "snapshot-proof", "stale-success"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "authority", op = "eq", value = "contradictory" },
+  { field = "interaction", op = "eq", value = "ambiguous" },
+  { field = "interaction", op = "eq", value = "inaccessible" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "interaction"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "profiles/applications/frontend.md"
+required = ["ID: `profile.application.frontend`", "## Projection Authority", "## Rendering And Synchronization", "## Interaction And Accessibility", "infer domain authority", "source contract is", "not interaction proof"]
+prohibited = []
+
+[[checks]]
+id = "router-projection"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["[Frontend application profile](profiles/applications/frontend.md)"]
+prohibited = []
+
+[[checks]]
+id = "root-projection"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["[Frontend application profile](profiles/applications/frontend.md)"]
+prohibited = ["[FRONTEND-STANDARDS.md](FRONTEND-STANDARDS.md)"]
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [["STD-0187", "CODING-STANDARDS.md", "profiles/applications/frontend.md", "index"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0187"
