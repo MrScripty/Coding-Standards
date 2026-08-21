@@ -4870,3 +4870,17 @@ graph evidence contains 93 nodes, 595 edges, and 93 components with 183
 registered suites and 89 retained Bash checkers. No policy, fixture,
 disposition, metadata helper, engine, wrapper, compatibility representation,
 false dependency, dual authority, or fallback changed.
+### M6-I37 Architecture Durable-Workflow Admission
+
+Fresh post-M6-I36 evidence exposes 18 caller-free verifiers and selects the
+64-line Architecture durable-workflow checker as the shortest owner-coherent
+frontier. Its 12 typed decisions, exact legacy and reference projections,
+case-insensitive fixed-default rejection, seven exact dispositions, and keyed
+row-37 owner lineage require no new engine capability.
+
+Architecture composition-root policy remains an independently executed gate
+through two admitted current edge records. Four accepted historical records
+will transfer from checker evidence to the exact registered suite only at
+acceptance. M6-I37 is admitted at train order 152 without policy, fixture,
+disposition, owner-validation, engine, nested-gate, wrapper, compatibility
+representation, false dependency, dual authority, or fallback changes.

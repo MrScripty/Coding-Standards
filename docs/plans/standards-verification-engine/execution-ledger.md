@@ -5600,3 +5600,18 @@
   with 183 suites and 89 retained Bash checkers, without wrappers,
   compatibility representations, false dependencies, dual authority, or
   fallback.
+## 2026-08-21 - M6-I37 Architecture Durable-Workflow Admission
+
+- Fresh post-M6-I36 evidence selects the shortest of 18 caller-free verifiers:
+  the 64-line Architecture durable-workflow checker.
+- Its 12 typed decisions, exact legacy and reference projections,
+  case-insensitive fixed-default rejection, seven exact dispositions, and
+  keyed row-37 owner lineage require no new engine capability.
+- Architecture composition-root policy remains an independently executed Bash
+  gate through two admitted current edge records. Four historical records will
+  transfer to exact suite evidence only at acceptance.
+- Admitted M6-I37 at train order 152. No policy, fixture, disposition,
+  owner-validation, engine, nested gate, wrapper, compatibility
+  representation, false dependency, dual authority, or fallback changes.
+- Admission evidence contains 183 suites, 89 Bash checkers, 93 nodes, 596
+  edges, and 93 components.
