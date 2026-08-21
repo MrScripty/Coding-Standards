@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** audit fresh post-M6-I32 graph evidence before admitting another
-owner-coherent checker package
+**Next slice:** resolve VE085 case-insensitive literal-matching ownership before
+admitting another checker package
 
 **Acceptance status:** `pending`
 
@@ -137,7 +137,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I32 accepted at train order 147; fresh graph audit is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I32 accepted at train order 147; VE085 requires re-planning before another admission |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -156,8 +156,8 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Audit fresh post-M6-I32 graph evidence without preselecting a package from
-   stale evidence.
+1. Resolve VE085 without a package-specific parser, copied case variants,
+   regular-expression language, or weaker exact-case approximation.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or
@@ -192,7 +192,9 @@ fallback remains.
 
 ## Blockers
 
-- `none`
+- VE085: the next reviewed checker and multiple later owners require
+  case-insensitive fixed-literal rejection that current generic text checks do
+  not represent.
 
 ## Re-Plan Triggers
 

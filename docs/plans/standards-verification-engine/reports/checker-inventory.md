@@ -4720,3 +4720,17 @@ with 93 retained Bash checkers. Final graph evidence contains 97 nodes, 614
 edges, and 97 components without source changes, engine changes, copied nested
 behavior, wrappers, compatibility representations, false dependencies, dual
 authority, or fallback.
+
+### Post-M6-I32 Case-Matching Audit
+
+The next caller-free candidate owns a coherent Interop index contract, but its
+prohibited fixed literals are matched case-insensitively inside one bounded
+Markdown section. The generic whole-file and bounded-section text checks match
+exact case only. Replacing that behavior with exact-case literals would permit
+capitalization-only regressions that the retained checker rejects.
+
+Seven additional retained checkers across Architecture, Frontend, Rust
+Bindings, and Rust Security use the same case-insensitive fixed-literal
+contract. This supports a reusable engine decision rather than a package-local
+exception, but that shared contract is not yet admitted. VE085 records the
+re-plan; M6-I33 remains unselected.

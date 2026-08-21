@@ -13937,3 +13937,15 @@ checkpoint pass. Final graph evidence contains 97 nodes, 614 edges, and 97
 components without policy, reference, fixture, nested-gate, or engine changes,
 wrappers, compatibility representations, false dependencies, dual authority,
 or fallback.
+
+## 2026-08-20 Post-M6-I32 Graph Audit And VE085 Trigger
+
+**Outcome:** re-plan required before another checker package is admitted.
+
+Clean revision `d71da11` has no admitted package. Fresh evidence reports 93
+retained Bash checkers, 97 nodes, 614 edges, and 97 components. The shortest
+caller-free candidate requires case-insensitive fixed-literal rejection inside
+one bounded Markdown section, while current generic text checks match exact
+case only. Seven additional retained checkers across four other owner families
+use the same requirement. VE085 records the shared capability question; no
+package, engine change, approximation, or fallback is admitted.

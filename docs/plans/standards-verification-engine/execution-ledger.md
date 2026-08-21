@@ -5442,3 +5442,15 @@
 - Final generated evidence contains 97 nodes, 614 edges, and 97 components
   without engine changes, copied nested behavior, wrappers, compatibility
   representations, false dependencies, dual authority, or fallback.
+
+## 2026-08-20 - Post-M6-I32 Graph Audit And VE085 Trigger
+
+- Confirmed clean accepted revision `d71da11` with no admitted package.
+- Fresh graph evidence reports 93 retained Bash checkers, 97 nodes, 614 edges,
+  and 97 components.
+- The shortest caller-free candidate requires case-insensitive fixed-literal
+  rejection in a bounded Markdown section. Existing generic checks provide
+  exact-case literal matching only, so direct migration would weaken evidence.
+- Audited the remaining Bash surface and found the same requirement in seven
+  additional checkers across four other owner families. Recorded VE085 and
+  stopped before package admission or engine changes.

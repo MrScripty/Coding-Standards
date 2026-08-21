@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 7 verification migration
 
-**Next slice:** fresh post-M6-I32 verification-graph audit before another
-checker package is admitted
+**Next slice:** verification-engine resolution of VE085 case-insensitive
+literal matching before another checker package is admitted
 
 **Acceptance status:** `partial`
 
@@ -137,7 +137,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | M6-I32 accepted through the verification-engine plan |
+| 7 | Role-based consolidation and verification migration | `Active` | M6-I32 accepted; VE085 blocks the next checker admission |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -159,7 +159,7 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Audit fresh post-M6-I32 graph evidence before admitting another package.
+1. Resolve verification-engine issue VE085 before admitting another package.
 2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
 3. Regenerate canonical inventories and prove exact dispositions, no source
@@ -187,7 +187,9 @@ engine is the sole verification authority.
 
 ## Blockers
 
-- `none`
+- VE085 in the verification-engine plan requires a generic literal-matching
+  decision before the next checker package can be admitted without weakening
+  evidence.
 
 ## Slice Procedure
 
