@@ -38,6 +38,11 @@ ID from the exact sorted canonical member set. Unrelated insertion, deletion,
 or ordering then leaves existing identities unchanged. Membership changes still
 change the affected component identity, which is the correct semantic result.
 
+Milestone 1 implemented the correction with full SHA-256 identities over
+NUL-delimited sorted member paths. The one-time conversion changed 86 node rows
+and 86 component rows; edge and structure artifacts did not change. Direct
+tests prove unrelated insertion and removal preserve surviving identities.
+
 ## Follow-Up Boundaries
 
 - Historical branch and worktree cleanup needs a separate plan, refreshed

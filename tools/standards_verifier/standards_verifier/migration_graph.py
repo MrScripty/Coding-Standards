@@ -4,6 +4,7 @@ import csv
 import io
 from collections import defaultdict, deque
 from dataclasses import dataclass
+from hashlib import sha256
 from pathlib import Path
 from typing import Iterable
 
@@ -178,6 +179,11 @@ def _strong_components(
     return tuple(sorted(components))
 
 
+def _component_id(members: tuple[str, ...]) -> str:
+    identity = "\0".join(members).encode("utf-8")
+    return f"component-{sha256(identity).hexdigest()}"
+
+
 def collect_migration_graph(root: Path) -> MigrationGraph:
     root = root.resolve()
     checker_records = collect_inventory(root)
@@ -238,8 +244,8 @@ def collect_migration_graph(root: Path) -> MigrationGraph:
     raw_components = _strong_components(nodes, adjacency)
     component_by_node: dict[str, str] = {}
     members_by_component: dict[str, tuple[str, ...]] = {}
-    for position, members in enumerate(raw_components, start=1):
-        component = f"component-{position:04d}"
+    for members in raw_components:
+        component = _component_id(members)
         members_by_component[component] = members
         for member in members:
             component_by_node[member] = component

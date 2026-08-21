@@ -1,13 +1,13 @@
 # Plan: Migration Execution Efficiency Recovery
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 1 diff-stable temporary graph evidence
+**Current phase:** Milestone 2 proportional migration execution
 
-**Next slice:** start Milestone 1 by replacing ordinal component identities
-with identities derived from exact canonical component members
+**Next slice:** define serial-coherent, pre-admitted, owner-wave, and
+shared-contract execution modes in current migration authority
 
-**Acceptance status:** `pending`
+**Acceptance status:** `partial`
 
 **Accepted base:** `28da602e078043d56dff37c0c44f46bfa7ad8424`
 
@@ -26,7 +26,7 @@ acceptance.
 
 | ID | Observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
-| A1 | Removing one unrelated checker does not renumber unaffected component identities. | `pending` | Milestone 1 tests and generated diff probe |
+| A1 | Removing one unrelated checker does not renumber unaffected component identities. | `satisfied` | Migration-graph stability tests and regenerated node/component projections |
 | A2 | Low-risk serial packages may be admitted and accepted coherently without a mandatory separate admission commit. | `pending` | Milestone 2 procedure review |
 | A3 | Owner-coherent waves use focused member evidence and one mixed checkpoint at the actual wave or shared-contract boundary. | `pending` | Milestone 2 procedure review |
 | A4 | Task-created worktrees have a terminal registry postcondition without authorizing global or historical cleanup. | `pending` | Milestone 3 Commit projections |
@@ -71,7 +71,7 @@ acceptance.
 
 | Milestone | Goal | Exact write set | Verification | Status |
 | --- | --- | --- | --- | --- |
-| 1 | Make temporary component identities diff-stable. | `tools/standards_verifier/standards_verifier/migration_graph.py`; `tools/standards_verifier/tests/test_migration_graph.py`; `tools/standards_verifier/README.md`; generated checker node/component artifacts; this plan and ledger | focused graph tests; insertion/deletion stability probe; all verifier tests; generated freshness; complete checkpoint | `Planned` |
+| 1 | Make temporary component identities diff-stable. | `tools/standards_verifier/standards_verifier/migration_graph.py`; `tools/standards_verifier/tests/test_migration_graph.py`; `tools/standards_verifier/README.md`; generated checker node/component artifacts; this plan and ledger | focused graph tests; insertion/deletion stability probe; all verifier tests; generated freshness; complete checkpoint | `Accepted` |
 | 2 | Make remaining package execution proportional. | verification-engine and parent active plans; this plan, ledger, and execution-mode report | plan structure; package authority; all declarative suites; procedure scenario review | `Planned` |
 | 3 | Enforce task-owned worktree terminal evidence and separate historical cleanup. | Commit workflow and audited projections; Commit suite; policy-impact disposition report; historical cleanup plan; this plan, ledger, issues, and reports | policy-impact query; Commit and projection suites; graph/verifier tests; all declarative suites; complete checkpoint | `Planned` |
 
@@ -112,4 +112,4 @@ acceptance.
 - Acceptance status: `pending`
 - Deferred follow-ups: remote backup authorization; historical cleanup
   execution; two independent downstream pilots
-- Final status: `Planned`
+- Final status: `Active`

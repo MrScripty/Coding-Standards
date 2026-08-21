@@ -82,6 +82,9 @@ strongly connected components, and condensation waves. Missing or ambiguous
 targets are typed diagnostics. The generator does not infer canonical owner,
 semantic risk, package cohesion, or migration disposition from a filename,
 shell mechanism, or graph shape; those remain reviewed planning decisions.
+Component identities derive from each component's exact sorted canonical member
+paths, so unrelated checker insertion or removal does not renumber surviving
+components. Identity changes when component membership changes.
 Component list columns use `-` for an empty set and comma-separated repository
 paths or component identifiers otherwise.
 

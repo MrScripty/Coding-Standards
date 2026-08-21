@@ -188,6 +188,69 @@ class MigrationGraphTest(unittest.TestCase):
             ),
         )
 
+    def test_component_ids_survive_unrelated_node_insertion_and_removal(self) -> None:
+        for name in ("b", "c"):
+            self.write(
+                f"evaluation/standards-effectiveness/verify-{name}.sh",
+                "#!/usr/bin/env bash\nprintf 'ok\\n'\n",
+            )
+
+        first = collect_migration_graph(self.root)
+        first_ids = {component.members: component.component for component in first.components}
+
+        self.write(
+            "evaluation/standards-effectiveness/verify-a.sh",
+            "#!/usr/bin/env bash\nprintf 'ok\\n'\n",
+        )
+        inserted = collect_migration_graph(self.root)
+        inserted_ids = {
+            component.members: component.component for component in inserted.components
+        }
+
+        self.assertEqual(
+            {members: inserted_ids[members] for members in first_ids},
+            first_ids,
+        )
+        (self.evaluation / "verify-a.sh").unlink()
+        removed = collect_migration_graph(self.root)
+        self.assertEqual(
+            {component.members: component.component for component in removed.components},
+            first_ids,
+        )
+
+    def test_component_id_changes_only_with_component_membership(self) -> None:
+        self.write(
+            "evaluation/standards-effectiveness/verify-a.sh",
+            "#!/usr/bin/env bash\nprintf 'ok\\n'\n",
+        )
+        self.write(
+            "evaluation/standards-effectiveness/verify-b.sh",
+            "#!/usr/bin/env bash\nprintf 'ok\\n'\n",
+        )
+        independent = collect_migration_graph(self.root)
+        independent_ids = {component.component for component in independent.components}
+
+        self.write(
+            "evaluation/standards-effectiveness/verify-a.sh",
+            "#!/usr/bin/env bash\n\"$S/verify-b.sh\"\n",
+        )
+        self.write(
+            "evaluation/standards-effectiveness/verify-b.sh",
+            "#!/usr/bin/env bash\n\"$S/verify-a.sh\"\n",
+        )
+        cyclic = collect_migration_graph(self.root)
+
+        self.assertEqual(len(cyclic.components), 1)
+        self.assertTrue(cyclic.components[0].cyclic)
+        self.assertEqual(
+            cyclic.components[0].members,
+            (
+                "evaluation/standards-effectiveness/verify-a.sh",
+                "evaluation/standards-effectiveness/verify-b.sh",
+            ),
+        )
+        self.assertNotIn(cyclic.components[0].component, independent_ids)
+
     def test_write_and_check_detect_stale_and_malformed_outputs(self) -> None:
         self.write(
             "evaluation/standards-effectiveness/verify-a.sh",
