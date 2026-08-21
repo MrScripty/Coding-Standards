@@ -47,3 +47,19 @@ explicit `start` operation.
 - One live worktree, zero prunable registrations, clean status, and
   `git fsck --no-dangling` passed. Milestone 3 remains active because
   patch-equivalent and unique branch terminal dispositions are unresolved.
+
+## 2026-08-21 - Milestone 3 Replacement-Lineage Review
+
+- Reconstructed explicit lineage for all 127 remaining non-main branches
+  without mutating refs or commits.
+- All 118 source commits across 115 patch-equivalent branches resolve by stable
+  patch identity to exactly one accepted `main` commit. Their semantic commit
+  subjects also agree: 117 exactly and one by accepted-subject prefix.
+- Recorded each source branch, source tip, source commit, accepted replacement,
+  mapping cardinality, semantic-subject relation, reconstructed-lineage mode,
+  and verification classification in durable TSV evidence.
+- The 12 unique proposal branches each retain one unmapped commit and remain
+  protected for separate ownership and terminal review.
+- The mapped branches are not Git ancestors of `main`; physical ref deletion
+  therefore requires `git branch -D`. Because the active plan names force as a
+  re-plan trigger, no mapped branch deletion is admitted.

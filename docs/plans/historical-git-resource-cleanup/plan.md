@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3 branch disposition and cleanup
+**Current phase:** Milestone 3 replacement lineage accepted; cleanup re-plan required
 
-**Next slice:** reconstruct and review explicit source-to-accepted mappings for the 115 patch-equivalent branches without deleting refs
+**Next slice:** none until explicit authority resolves divergent mapped-ref deletion semantics
 
 **Acceptance status:** `pending`
 
@@ -27,7 +27,7 @@ ancestry, or patch equivalence as deletion authority.
 | --- | --- | --- | --- |
 | A1 | Every current worktree registration and local branch has one reviewed ownership and terminal disposition. | `partial` | Current inventories classify all resources; branch terminal review follows registration cleanup |
 | A2 | Pruned registrations are proven missing, task-independent, unlocked, and free of a live or user-owned path before mutation. | `satisfied` | [Milestone 2 report](reports/milestone-2-prune.md) and post-prune worktree inventory |
-| A3 | No branch with unique, shared, published, checked-out, unknown, or unmapped replacement history is deleted. | `partial` | [Milestone 3 ancestral-branch report](reports/milestone-3-ancestral-delete.md); replacement mapping review remains pending |
+| A3 | No branch with unique, shared, published, checked-out, unknown, or unmapped replacement history is deleted. | `partial` | [Ancestral cleanup](reports/milestone-3-ancestral-delete.md) and [replacement-lineage review](reports/milestone-3-replacement-lineage.md); mapped divergent refs await deletion authority |
 | A4 | Repository state and protected commit reachability are verified before and after every accepted cleanup batch. | `partial` | Milestone 2 and Milestone 3 verification reports |
 
 ## Scope
@@ -73,7 +73,10 @@ ancestry, or patch equivalence as deletion authority.
 
 ## Blockers
 
-- `none`
+- Deleting the 115 explicitly mapped but non-ancestral refs requires
+  `git branch -D`. The current plan names force deletion as a re-plan trigger,
+  so no mapped ref may be deleted until that contract is narrowed or another
+  non-rewriting terminal mechanism is selected.
 
 ## Re-Plan Triggers
 
