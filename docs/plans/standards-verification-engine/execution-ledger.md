@@ -5301,3 +5301,21 @@
   and staged-scope checks pass. Final evidence contains 101 nodes, 627 edges,
   and 101 components without an engine change, wrapper, duplicate authority,
   compatibility representation, copied identifier range, or fallback.
+
+## 2026-08-20 - M6-I29 Accessibility Owner Contract Admission
+
+- The fresh post-M6-I28 graph selects the 44-line caller-free Accessibility
+  owner-contract checker. Its decisions, owner/reference text, Router and
+  legacy projections, and exact `STD-0007` disposition form one
+  `topic.accessibility` contract.
+- Row-28 lifecycle is already owned by the registered
+  `milestone-7-row-28-decomposition` suite and remains independently executed;
+  M6-I29 will not copy that parent-plan evidence or add a suite dependency.
+- Admitted M6-I29 at train order 144. Atomic acceptance will register one
+  Accessibility suite, remove the checker and its row-35 lifecycle row,
+  transfer M6-I18 and M6-I28 historical evidence, and update the README
+  projection.
+- No canonical policy, decision fixture, row-28 suite, engine capability,
+  wrapper, compatibility representation, false dependency, or fallback changes.
+- Admission evidence contains 175 suites, 97 Bash checkers, 101 nodes, 628
+  edges, and 101 components.

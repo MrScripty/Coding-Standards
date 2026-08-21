@@ -13796,3 +13796,22 @@ tests, all 175 suites, and the complete 97-checker checkpoint pass. Final graph
 evidence contains 101 nodes, 627 edges, and 101 components without an engine
 change, wrapper, false dependency, compatibility representation, copied range,
 dual authority, or fallback.
+
+## 2026-08-20 M6-I29 Accessibility Owner Contract Admission
+
+**Outcome:** admitted at train order 144; atomic acceptance is next.
+
+The fresh post-M6-I28 graph selects the 44-line caller-free Accessibility
+owner-contract checker. Its 17 decisions, canonical owner and reference text,
+Router and legacy projections, and exact `STD-0007` disposition form one
+`topic.accessibility` contract expressible with existing generic checks.
+
+The registered parent-plan row-28 suite already owns the checker's inline
+lifecycle assertions and remains independently executed without a dependency.
+Atomic acceptance will register the owner-local suite, remove the checker and
+its row-35 lifecycle row, transfer M6-I18 and M6-I28 historical evidence, and
+update the README. No policy, fixture, engine, wrapper, compatibility
+representation, false dependency, or fallback changes.
+
+Admission evidence contains 175 suites, 97 Bash checkers, 101 nodes, 628 edges,
+and 101 components.

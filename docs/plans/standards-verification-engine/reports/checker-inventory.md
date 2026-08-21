@@ -4599,3 +4599,17 @@ rejects route loss, prohibited content, normative corpus drift, and disposition
 drift. Final evidence contains 175 suites, 97 Bash checkers, 101 nodes, 627
 edges, and 101 components without engine changes, false dependencies, wrappers,
 compatibility representations, dual authority, or fallback.
+
+### M6-I29 Accessibility Owner Contract Admission
+
+Fresh post-M6-I28 evidence selects the 44-line caller-free Accessibility owner
+contract. One owner-local declarative suite can preserve its 17 decisions,
+canonical owner and reference boundaries, Router and legacy projections, and
+exact `STD-0007` disposition with existing generic checks.
+
+The checker's inline row-28 assertions duplicate the accepted parent-plan
+`milestone-7-row-28-decomposition` suite. That lifecycle evidence remains an
+independent complete-suite gate rather than a copied Accessibility assertion or
+registry dependency. The stale row-35 checker-path record is removed at atomic
+acceptance. M6-I29 is admitted at train order 144 without engine changes,
+cross-owner aggregation, wrappers, compatibility representations, or fallback.
