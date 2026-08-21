@@ -4712,6 +4712,25 @@
   mapping, Bash repair, wrapper, compatibility path, or fallback remains.
 - Fresh-graph owner-coherent package selection is next.
 
+## 2026-08-20 - M6-I17 Generated Command Security Admission
+
+- Fresh post-recovery review selected the shortest of 27 caller-free checkers.
+  Four generic checks express its Security-owned decisions, canonical text,
+  Launcher projection, and exact dispositions without changing fixtures or
+  engine mechanics.
+- Admitted train order 132 with four typed current edge dispositions preserving
+  row-14 decomposition and execution-train lifecycle as independent checker
+  gates. No suite dependency or historical evidence transfer is required.
+- Disposable final state passes 165 declarative suites and the complete mixed
+  checkpoint at 108 Bash checkers, 112 nodes, 678 edges, and 112 components.
+  Three mutations return typed decision, prohibited-text, and table-projection
+  failures.
+- Admission evidence contains 109 Bash checkers, 113 nodes, 685 edges, and 113
+  components. No policy, fixture, engine capability, helper migration, copied
+  count, manual numeric mapping, Bash repair, wrapper, compatibility path, or
+  fallback is admitted.
+- Atomic M6-I17 acceptance is next.
+
 ## 2026-08-20 - M6-I15 Accessibility Name-And-Input Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its five

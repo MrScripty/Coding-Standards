@@ -36,7 +36,7 @@ evaluation/standards-effectiveness/verify-frontend-owner-contract.sh	verifier	ye
 evaluation/standards-effectiveness/verify-frontend-rendering-synchronization.sh	verifier	yes	component-0035	1	no	1	1	1	1	1
 evaluation/standards-effectiveness/verify-frontend-source-closure.sh	verifier	yes	component-0036	1	no	1	0	1	0	1
 evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh	verifier	yes	component-0037	1	no	7	0	1	0	2
-evaluation/standards-effectiveness/verify-generated-command-security.sh	verifier	yes	component-0038	1	no	5	0	1	0	2
+evaluation/standards-effectiveness/verify-generated-command-security.sh	verifier	yes	component-0038	1	no	5	0	3	0	2
 evaluation/standards-effectiveness/verify-godot-owner-contract.sh	verifier	yes	component-0039	1	no	5	0	2	0	2
 evaluation/standards-effectiveness/verify-historical-row-checker-ownership.sh	verifier	yes	component-0040	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-input-validation-authority.sh	verifier	yes	component-0041	1	no	6	2	2	2	4

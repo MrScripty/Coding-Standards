@@ -2,17 +2,19 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6 fresh post-recovery graph audit
+**Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** audit current executable graph and lifecycle evidence without
-preselecting or admitting M6-I17
+**Next slice:** atomically accept admitted M6-I17 Generated Command Security
+migration
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I16 moved modality and focus-lifecycle authority
 into one Accessibility-owned suite and removed the replaced Bash checker.
 
-**Latest admitted slice:** none
+**Latest admitted slice:** M6-I17 moves generated-command decisions, Security
+owner text, Launcher projection, and exact dispositions into one registered
+Security-owned suite.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -120,10 +122,10 @@ At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
 **Accepted boundary:** package records are accepted through M6-I16 at train
-order 131.
+order 131. M6-I17 is admitted at train order 132.
 
 **Current derived state:** 164 registered declarative suites, 109 retained Bash
-checkers, 113 executable nodes, 683 conservative reference edges, and 113
+checkers, 113 executable nodes, 685 conservative reference edges, and 113
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -137,7 +139,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Fresh post-recovery graph audit; no package preselected |
+| 6 | Exceptional checks and Bash retirement | `Active` | Accept admitted M6-I17 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -150,13 +152,14 @@ programming language.
 [work proportionality and policy impact recovery](../work-proportionality-and-policy-impact/plan.md)
 and the [generic edge-system recovery](../generic-edge-system/plan.md) are
 accepted. The neutral graph capability and justified permanent consumers are
-now upstream of the verifier. The fresh package audit resumes without
-preselecting M6-I17; the frozen temporary Bash graph remains unchanged.
+now upstream of the verifier. M6-I17 is admitted from fresh post-recovery
+evidence; the frozen temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Audit the fresh post-recovery graph without preselecting M6-I17 and select
-   one owner-coherent package from reviewed lifecycle and dependency evidence.
+1. Accept M6-I17 exactly as admitted: register the Security suite, preserve
+   row-14 and execution-train lifecycle as independent checker gates, update
+   the live README projection, and delete the replaced Bash checker.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or

@@ -4207,3 +4207,24 @@ numeric lifecycle, generated freshness, all 162 declarative suites, typed
 mutations, complete checkpoint, and diff integrity pass without an engine
 capability, helper migration, suite dependency, copied count, manual numeric
 mapping, Bash repair, wrapper, compatibility path, or fallback.
+
+### M6-I17 Generated Command Security Admission
+
+The fresh post-recovery audit found 27 caller-free checkers and selected
+`verify-generated-command-security.sh`, the shortest frontier candidate at 26
+lines. Its 14 generated-command decisions, Security owner text, Launcher
+projection, and STD-0508 through STD-0510 dispositions form one Security-owned
+contract. No pre-recovery candidate selection was reused.
+
+The row-14 decomposition and execution-train calls are lifecycle coupling, not
+Security semantics. Four current edge dispositions preserve both checkers as
+independent gates; no suite dependency is introduced.
+
+Disposable final state uses four generic checks and passes all 165 declarative
+suites plus the complete checkpoint at 108 Bash checkers, 112 nodes, 678
+edges, and 112 components. Decision-outcome, prohibited-text, and exact-table
+mutations return typed failures. M6-I17 is admitted at train order 132;
+admission evidence contains 109 Bash checkers, 113 nodes, 685 edges, and 113
+components without an engine change, fixture change, helper migration, copied
+count, manual numeric mapping, Bash repair, wrapper, compatibility path, or
+fallback.

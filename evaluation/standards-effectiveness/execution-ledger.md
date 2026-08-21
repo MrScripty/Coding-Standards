@@ -13025,6 +13025,28 @@ pass. No engine capability, helper migration, suite dependency, false edge,
 copied count, manual numeric mapping, Bash repair, wrapper, compatibility path,
 or fallback remains.
 
+## 2026-08-20 M6-I17 Generated Command Security Admission
+
+**Outcome:** admitted; atomic acceptance is next.
+
+Fresh post-recovery review selected the shortest of 27 caller-free checkers.
+Its 14 generated-command decisions, Security owner text, Launcher projection,
+and exact STD-0508 through STD-0510 dispositions form one Security-owned suite.
+The row-14 decomposition and execution train remain independent checker gates
+through four admitted current edges.
+
+M6-I17 freezes one registered four-check suite, the live README projection,
+whole-checker numeric retirement, checker deletion, and graph refresh.
+Disposable final state passes all 165 declarative suites and the complete mixed
+checkpoint at 108 Bash checkers, 112 nodes, 678 edges, and 112 components.
+Decision, prohibited-text, and exact-disposition mutations return typed
+failures.
+
+Admission evidence contains 109 Bash checkers, 113 nodes, 685 edges, and 113
+components. No policy or fixture change, engine capability, helper migration,
+suite dependency, copied count, manual numeric mapping, Bash repair, wrapper,
+compatibility behavior, or fallback is admitted.
+
 ## 2026-08-19 VE078 Source-Index Component Replacement Re-plan
 
 **Outcome:** capability-first complete-component replacement selected; no
