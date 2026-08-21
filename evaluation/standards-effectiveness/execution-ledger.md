@@ -14309,3 +14309,15 @@ records; two historical records transfer only at acceptance. No policy,
 migration input, engine, nested gate, compatibility, false dependency, dual
 authority, or fallback changes. Evidence: 190 suites, 82 Bash, 86 nodes, 578
 edges, and 86 components.
+## 2026-08-21 M6-I44 Row-39 Decomposition Verification Re-plan Trigger
+
+**Outcome:** remains admitted at train order 159; consumer authority must be
+re-planned before acceptance.
+
+The proposed five-check parent-plan suite preserves exact row-39
+decomposition, owner-validation, report, execution-train, and accelerated
+package authority. Six disposable mutations, focused gates, six retained Bash
+gates, 35 graph tests, and 330 verifier tests pass. The all-suite gate exposes
+an unadmitted dependency: row-35 closure still names the row-39 checker in its
+transitive-caller manifest and direct invocation check. Acceptance and edge
+transfer are withheld pending exact write-set and consumer-authority recovery.

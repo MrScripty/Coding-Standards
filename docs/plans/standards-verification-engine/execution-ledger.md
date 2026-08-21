@@ -5786,3 +5786,14 @@
   nested-gate, wrapper, compatibility, false-dependency, dual-authority, or
   fallback changes. Evidence: 190 suites, 82 Bash, 86 nodes, 578 edges, 86
   components.
+## 2026-08-21 - M6-I44 Row-39 Decomposition Verification Re-plan Trigger
+
+- The proposed five-check parent-plan suite covers
+  exact decomposition, owner-validation, report, execution-train, and
+  accelerated-package authority.
+- Six disposable mutations, focused authority, six retained gates, 35 graph
+  tests, and 330 verifier tests pass.
+- The all-suite gate fails because the row-35 suite still requires the removed
+  checker as a transitive contract caller and direct invocation subject.
+- M6-I44 remains admitted. Re-plan its frozen write set and exact row-35
+  consumer transition before acceptance; no later package is admitted.

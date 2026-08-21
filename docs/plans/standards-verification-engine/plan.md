@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** accept admitted M6-I44 by replacing the row-39 decomposition
-checker with one registered parent-plan suite
+**Next slice:** re-plan admitted M6-I44 to resolve the row-35 transitive-caller
+authority exposed by complete-suite verification
 
 **Acceptance status:** `pending`
 
@@ -13,8 +13,8 @@ checker with one registered parent-plan suite
 coordination checker with one registered reference-owner suite at train order
 158.
 
-**Latest admitted slice:** M6-I44 freezes row-39 decomposition at train order
-159.
+**Latest admitted slice:** M6-I44 at train order 159 requires write-set and
+consumer-authority re-planning before acceptance.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -125,8 +125,9 @@ fallback.
 **Accepted boundary:** package records are accepted through M6-I43 at train
 order 158.
 
-**Current derived state:** 190 registered declarative suites, 82 retained Bash
-checkers, 86 executable nodes, 578 conservative reference edges, and 86
+**Current derived state:** admitted M6-I44 implementation evidence contains 191
+registered declarative suites, 81 retained Bash checkers, 85 executable nodes,
+561 conservative reference edges, and 85
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -140,7 +141,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I44 admitted at train order 159; atomic acceptance is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I44 admitted at train order 159; row-35 consumer authority requires re-planning |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -159,9 +160,10 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Accept admitted M6-I44 without changing its frozen owner, behavior,
-   dependency, write-set, or verification contract.
-2. Select each subsequent owner-coherent package from reviewed lifecycle and
+1. Re-plan M6-I44's exact write set and acceptance evidence for the row-35
+   transitive contract-caller authority; do not preserve the removed checker.
+2. Accept the corrected M6-I44 package only after all registered suites pass.
+3. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.

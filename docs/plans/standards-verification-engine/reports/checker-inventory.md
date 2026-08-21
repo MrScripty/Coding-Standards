@@ -5048,3 +5048,17 @@ records will transfer from checker evidence to the exact registered suite only
 at acceptance. M6-I41 is admitted at train order 156 without policy, fixture,
 disposition, owner-validation, engine, nested-gate, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changes.
+### M6-I44 Row-39 Decomposition Verification Re-plan Trigger
+
+The proposed parent-plan suite replaces the 49-line checker with exact
+coverage of three decomposition children, 13 owner-validation records, the
+decomposition report contract, execution-train row 39, and accelerated-package
+row 39. Focused verification, six retained independent gates, 35 graph tests,
+and 330 verifier tests pass.
+
+The all-suite gate fails because `milestone-7-row-35-decomposition` still owns
+a current transitive-caller row and direct invocation assertion for the removed
+checker. Correct retirement therefore requires an explicit row-35 fixture and
+suite transition not present in M6-I44's frozen write set. M6-I44 remains
+admitted; acceptance evidence and inherited edges remain untransferred. Do not
+retain the Bash checker, weaken row-35 closure, or add fallback authority.
