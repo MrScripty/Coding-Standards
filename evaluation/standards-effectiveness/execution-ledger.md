@@ -13693,3 +13693,19 @@ accepted edges. M6-I25 is accepted at train order 140 and the Bash checker is
 absent. Final evidence contains 173 suites, 100 Bash checkers, 104 nodes, 642
 edges, and 104 components; all focused, mutation, lifecycle, generated,
 all-suite, complete-checkpoint, plan, source-integrity, and diff checks pass.
+
+## 2026-08-20 M6-I26 Rust Binding Artifact Selection Admission
+
+**Outcome:** admitted at train order 141; atomic acceptance is next.
+
+Fresh post-M6-I25 evidence selects the 40-line caller-free Rust binding
+artifact-selection checker. Its 10 decisions, canonical Rust Language Bindings
+text, bounded legacy-index section, and exact `STD-0792` and `STD-0793`
+dispositions form one `profile.language.rust.language-bindings` contract.
+
+Rust binding workspace evidence and execution-train lifecycle remain
+independent through four admitted edges. The historical planning-recovery
+reference remains immutable evidence. Disposable final state passes 174 suites
+and the complete 99-checker checkpoint. Admission state contains 173 suites,
+100 Bash checkers, 104 nodes, 645 edges, and 104 components without policy,
+fixture, engine, registry, checker, wrapper, compatibility, or fallback changes.

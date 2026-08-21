@@ -5182,3 +5182,20 @@
   components without engine changes, false dependencies, wrappers,
   compatibility representations, dual authority, or fallback.
 - Fresh-graph owner-coherent package selection is next.
+
+## 2026-08-20 - M6-I26 Rust Binding Artifact Selection Admission
+
+- Clean accepted revision `d69fc06` yields the 40-line caller-free Rust
+  binding artifact-selection checker as the smallest owner-coherent frontier
+  package.
+- M6-I26 is admitted at train order 141 for 10 decisions, canonical Rust
+  Language Bindings text, a bounded legacy-index section, and exact `STD-0792`
+  and `STD-0793` dispositions.
+- Four admitted edges keep Rust binding workspace evidence and execution-train
+  lifecycle as independent gates. The historical planning-recovery reference
+  remains immutable evidence rather than live execution authority.
+- Disposable final state passes all 174 suites and the complete checkpoint at
+  99 Bash checkers, 103 nodes, 638 edges, and 103 components.
+- Admission evidence has 173 suites, 100 Bash checkers, 104 nodes, 645 edges,
+  and 104 components without policy, fixture, engine, registry, checker,
+  wrapper, compatibility, or fallback changes.
