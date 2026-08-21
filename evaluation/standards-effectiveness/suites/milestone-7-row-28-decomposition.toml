@@ -1,0 +1,34 @@
+schema_version = 1
+id = "milestone-7-row-28-decomposition"
+owner = "migration.parent-plan"
+description = "Row 28 Accessibility decomposition lifecycle with exact ordered children and no-fallback contract evidence."
+
+[[checks]]
+id = "decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+non_empty = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+unique = [["baseline_order", "child_order"]]
+[[checks.projections]]
+columns = ["child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "owner_transition"]
+order = "source"
+expected = [
+  ["1", "STD-0007", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "exists", "owner-review", "focused", "missing-to-exists"],
+  ["2", "STD-0008,STD-0009,STD-0010,STD-0011,STD-0012", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "exists", "pre-slice-review", "focused", "none"],
+  ["3", "STD-0013,STD-0014,STD-0015,STD-0016", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "exists", "pre-slice-review", "focused", "none"],
+  ["4", "STD-0017,STD-0018,STD-0019", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "exists", "pre-slice-review", "focused", "none"],
+  ["5", "STD-0020,STD-0021,STD-0022", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "exists", "pre-slice-review", "focused", "none"],
+  ["6", "STD-0023,STD-0024,STD-0025,STD-0026", "ACCESSIBILITY-STANDARDS.md", "topics/accessibility.md", "exists", "pre-slice-review", "focused", "none"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "28"
+
+[[checks]]
+id = "contract"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-28-decomposition.md"
+required = ["## Owner Contract", "modality", "## Exact Ownership", "## Ordered Children", "`28.1`", "`28.6`", "## No-Fallback Rule", "## Re-plan Triggers"]
+prohibited = []

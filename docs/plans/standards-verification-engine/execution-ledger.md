@@ -4799,6 +4799,23 @@
   admitted.
 - Atomic M6-I19 acceptance is next.
 
+## 2026-08-20 - M6-I19 Row-28 Decomposition Acceptance
+
+- Registered one two-check parent-plan suite for the exact six-child row-28
+  projection and decomposition contract text; decomposition sources remain
+  unchanged.
+- Accepted train order 134 and both current edge dispositions. The execution
+  train remains an independent checker gate, not a suite dependency; two
+  M6-I18 records now point to exact suite evidence.
+- Deleted only the replaced Bash checker and derived whole-checker numeric
+  retirement without a candidate mapping.
+- Final evidence contains 167 suites, 106 Bash checkers, 110 nodes, 670 edges,
+  and 110 components. Focused, lifecycle, generated, plan, mutation, all-suite,
+  complete-checkpoint, and diff checks pass without an engine change, source
+  change, compatibility path, or fallback.
+- Fresh-graph owner-coherent package selection is next; M6-I20 is not
+  preselected.
+
 ## 2026-08-20 - M6-I15 Accessibility Name-And-Input Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its five

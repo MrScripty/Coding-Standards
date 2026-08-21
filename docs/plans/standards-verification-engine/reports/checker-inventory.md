@@ -4303,3 +4303,21 @@ checkpoint at 106 Bash checkers, 110 nodes, 670 edges, and 110 components.
 M6-I19 is admitted at train order 134 without an engine change, source change,
 suite dependency, copied count, manual numeric mapping, Bash repair, wrapper,
 compatibility path, or fallback.
+
+### M6-I19 Row-28 Decomposition Acceptance
+
+The registered `milestone-7-row-28-decomposition` suite now owns the exact six
+ordered child records and the parent-plan decomposition contract. The existing
+execution-decomposition table and row-28 report are unchanged.
+
+Both lifecycle edges are accepted and continue to execute the execution train
+independently. Two M6-I18 records now point to the exact suite evidence, the
+Bash checker is absent, and whole-checker numeric lifecycle requires no manual
+candidate mapping.
+
+Final generated evidence contains 106 Bash checkers, 110 nodes, 670 edges, and
+110 components. Focused suite and independent-gate checks, package and edge
+authority, numeric lifecycle, generated freshness, all 167 declarative suites,
+typed mutations, complete checkpoint, and diff integrity pass without an
+engine change, source change, suite dependency, copied count, manual numeric
+mapping, Bash repair, wrapper, compatibility path, or fallback.

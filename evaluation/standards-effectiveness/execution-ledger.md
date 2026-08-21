@@ -13126,6 +13126,27 @@ No policy, decomposition source, engine capability, suite dependency, copied
 count, manual numeric mapping, Bash repair, wrapper, compatibility behavior, or
 fallback is admitted.
 
+## 2026-08-20 M6-I19 Row-28 Decomposition Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered parent-plan suite now owns the exact six-child row-28 projection
+and decomposition contract text. Decomposition sources remain unchanged. The
+execution train remains independently executed through two accepted current
+edges.
+
+M6-I19 is accepted at train order 134, two M6-I18 records point to exact suite
+evidence, and the replaced Bash checker is absent. Whole-checker numeric
+lifecycle derives retirement without a candidate map. Final evidence contains
+167 suites, 106 Bash checkers, 110 nodes, 670 edges, and 110 components.
+
+Focused suite and independent-gate checks, package/edge authority, numeric
+lifecycle, removal, generated freshness, both plan validators, all 167
+declarative suites, complete checkpoint, mutation parity, and diff integrity
+pass. No policy or source change, engine capability, suite dependency, copied
+count, manual numeric mapping, Bash repair, wrapper, compatibility path, or
+fallback remains.
+
 ## 2026-08-19 VE078 Source-Index Component Replacement Re-plan
 
 **Outcome:** capability-first complete-component replacement selected; no
