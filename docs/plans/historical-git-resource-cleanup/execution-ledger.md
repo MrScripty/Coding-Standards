@@ -32,3 +32,18 @@ explicit `start` operation.
   accepted.
 - Branch review now exposes nine ancestral deletion candidates, 115 divergent
   patch-equivalent mapping candidates, and 12 branches with unique commits.
+
+## 2026-08-21 - Milestone 3 Ancestral Branch Batch
+
+- Revalidated the exact nine admitted branch names and tips against the
+  accepted post-prune inventory immediately before mutation.
+- Confirmed every admitted tip was an ancestor of current `main`, no admitted
+  branch was checked out, and no additional ref was in the command write set.
+- Deleted the nine refs with non-force `git branch -d`; no force deletion,
+  commit rewrite, remote mutation, or filesystem worktree removal occurred.
+- Post-mutation evidence records 128 local branches: `main`, 115 divergent
+  patch-equivalent branches awaiting replacement-lineage review, and 12
+  branches with unique commits retained for explicit review.
+- One live worktree, zero prunable registrations, clean status, and
+  `git fsck --no-dangling` passed. Milestone 3 remains active because
+  patch-equivalent and unique branch terminal dispositions are unresolved.

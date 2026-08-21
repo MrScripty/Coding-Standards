@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 3 branch disposition and cleanup
 
-**Next slice:** delete the exact nine unregistered ancestral task branches with non-force merged-branch checks
+**Next slice:** reconstruct and review explicit source-to-accepted mappings for the 115 patch-equivalent branches without deleting refs
 
 **Acceptance status:** `pending`
 
@@ -27,8 +27,8 @@ ancestry, or patch equivalence as deletion authority.
 | --- | --- | --- | --- |
 | A1 | Every current worktree registration and local branch has one reviewed ownership and terminal disposition. | `partial` | Current inventories classify all resources; branch terminal review follows registration cleanup |
 | A2 | Pruned registrations are proven missing, task-independent, unlocked, and free of a live or user-owned path before mutation. | `satisfied` | [Milestone 2 report](reports/milestone-2-prune.md) and post-prune worktree inventory |
-| A3 | No branch with unique, shared, published, checked-out, unknown, or unmapped replacement history is deleted. | `pending` | Branch disposition review |
-| A4 | Repository state and protected commit reachability are verified before and after every accepted cleanup batch. | `pending` | Verification reports |
+| A3 | No branch with unique, shared, published, checked-out, unknown, or unmapped replacement history is deleted. | `partial` | [Milestone 3 ancestral-branch report](reports/milestone-3-ancestral-delete.md); replacement mapping review remains pending |
+| A4 | Repository state and protected commit reachability are verified before and after every accepted cleanup batch. | `partial` | Milestone 2 and Milestone 3 verification reports |
 
 ## Scope
 
@@ -68,7 +68,7 @@ ancestry, or patch equivalence as deletion authority.
 | --- | --- | --- |
 | 1 | Refresh read-only branch/worktree facts and exact dispositions. | `Accepted` |
 | 2 | Execute an explicitly authorized stale-registration cleanup batch with before/after proof. | `Accepted` |
-| 3 | Review redundant branch refs separately from registrations and protect every unique or unmapped commit. | `Planned` |
+| 3 | Review redundant branch refs separately from registrations and protect every unique or unmapped commit. | `Active` |
 | 4 | Verify terminal repository integrity and record deferred retained resources. | `Planned` |
 
 ## Blockers
