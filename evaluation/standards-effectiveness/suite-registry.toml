@@ -914,3 +914,8 @@ requires = []
 id = "frontend-rendering-synchronization"
 path = "evaluation/standards-effectiveness/suites/frontend-rendering-synchronization.toml"
 requires = []
+
+[[suites]]
+id = "architecture-durable-workflow-pattern"
+path = "evaluation/standards-effectiveness/suites/architecture-durable-workflow-pattern.toml"
+requires = []

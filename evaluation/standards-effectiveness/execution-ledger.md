@@ -14116,3 +14116,21 @@ disposition, owner-validation, engine, nested gate, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changes.
 Admission evidence contains 183 suites, 89 Bash checkers, 93 nodes, 596 edges,
 and 93 components.
+## 2026-08-21 M6-I37 Architecture Durable-Workflow Acceptance
+
+**Outcome:** accepted at train order 152; fresh graph audit is next.
+
+The registered Architecture reference suite replaces the 64-line Bash checker
+with 12 typed decisions, exact legacy and reference projections,
+case-insensitive fixed-default rejection, seven exact dispositions, and keyed
+row-37 owner lineage. Architecture composition-root policy remains
+independently executed through both accepted current edge records, and all four
+historical records now name exact suite evidence.
+
+Seven disposable mutations reject decision, reference, route, mixed-case
+default, disposition, owner-lineage, and stale-evidence drift. All Python and
+declarative tests pass, and the complete mixed checkpoint passes with 88
+retained Bash checkers. Final graph evidence contains 92 nodes, 592 edges, and
+92 components without policy, fixture, disposition, owner-validation,
+nested-gate, engine, wrapper, compatibility representation, false-dependency,
+dual-authority, or fallback changes.

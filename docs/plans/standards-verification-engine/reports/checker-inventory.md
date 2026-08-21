@@ -4884,3 +4884,18 @@ will transfer from checker evidence to the exact registered suite only at
 acceptance. M6-I37 is admitted at train order 152 without policy, fixture,
 disposition, owner-validation, engine, nested-gate, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changes.
+### M6-I37 Architecture Durable-Workflow Acceptance
+
+The registered Architecture reference suite replaces the 64-line checker with
+12 typed decisions, exact legacy and reference projections, case-insensitive
+fixed-default rejection, seven exact dispositions, and keyed row-37 owner
+lineage. Architecture composition-root policy remains independently executed
+through both accepted current edge records.
+
+All four historical records now name the registered suite rather than the
+deleted checker. Seven disposable mutations reject decision, reference,
+legacy-route, mixed-case default, disposition, owner-lineage, and stale-evidence
+drift. Final graph evidence contains 92 nodes, 592 edges, and 92 components
+with 184 registered suites and 88 retained Bash checkers. No policy, fixture,
+disposition, owner-validation, nested gate, engine, wrapper, compatibility
+representation, false dependency, dual authority, or fallback changed.

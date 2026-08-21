@@ -61,13 +61,11 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-wire-representation.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-architecture-durable-workflow-pattern.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-composition-root-pattern.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-data-authority-pattern.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-discover-or-create-convergence.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-durable-workflow-pattern.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-layered-pattern.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-monorepo-pattern.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-architecture-owner-contract.sh
@@ -151,7 +149,6 @@ contract_reference	evaluation/standards-effectiveness/suites/milestone-7-row-35-
 executable_reference	evaluation/standards-effectiveness/verify-architecture-composition-root-pattern.sh	evaluation/standards-effectiveness/verify-architecture-data-authority-pattern.sh
 executable_reference	evaluation/standards-effectiveness/verify-architecture-data-authority-pattern.sh	evaluation/standards-effectiveness/verify-architecture-monorepo-pattern.sh
 executable_reference	evaluation/standards-effectiveness/verify-architecture-discover-or-create-convergence.sh	evaluation/standards-effectiveness/verify-architecture-process-instance-coordination.sh
-executable_reference	evaluation/standards-effectiveness/verify-architecture-durable-workflow-pattern.sh	evaluation/standards-effectiveness/verify-architecture-composition-root-pattern.sh
 executable_reference	evaluation/standards-effectiveness/verify-architecture-layered-pattern.sh	evaluation/standards-effectiveness/verify-architecture-pattern-reference-owner.sh
 executable_reference	evaluation/standards-effectiveness/verify-architecture-monorepo-pattern.sh	evaluation/standards-effectiveness/verify-architecture-layered-pattern.sh
 executable_reference	evaluation/standards-effectiveness/verify-architecture-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
@@ -417,7 +414,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-validation-proof-lif
 verifier_dependency	evaluation/standards-effectiveness/verify-architecture-composition-root-pattern.sh	evaluation/standards-effectiveness/verify-architecture-data-authority-pattern.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-architecture-data-authority-pattern.sh	evaluation/standards-effectiveness/verify-architecture-monorepo-pattern.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-architecture-discover-or-create-convergence.sh	evaluation/standards-effectiveness/verify-architecture-process-instance-coordination.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-architecture-durable-workflow-pattern.sh	evaluation/standards-effectiveness/verify-architecture-composition-root-pattern.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-architecture-layered-pattern.sh	evaluation/standards-effectiveness/verify-architecture-pattern-reference-owner.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-architecture-monorepo-pattern.sh	evaluation/standards-effectiveness/verify-architecture-layered-pattern.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-architecture-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh

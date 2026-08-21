@@ -5615,3 +5615,21 @@
   representation, false dependency, dual authority, or fallback changes.
 - Admission evidence contains 183 suites, 89 Bash checkers, 93 nodes, 596
   edges, and 93 components.
+## 2026-08-21 - M6-I37 Architecture Durable-Workflow Acceptance
+
+- Added the registered `architecture-durable-workflow-pattern` suite with 12
+  typed decisions, exact legacy and reference projections, case-insensitive
+  fixed-default rejection, seven exact dispositions, and keyed owner lineage.
+- Kept Architecture composition-root policy as an independently executed Bash
+  gate through both accepted current edge records. All four historical records
+  now point to exact suite evidence.
+- Deleted only the replaced Architecture checker. Policy, fixture,
+  dispositions, owner validation, nested gate, and engine behavior remain
+  unchanged.
+- Seven disposable mutations reject decision, reference, route, mixed-case
+  default, disposition, owner-lineage, and stale historical evidence drift.
+  Broad verification is recorded in the repository execution ledger.
+- Final generated evidence contains 92 nodes, 592 edges, and 92 components
+  with 184 suites and 88 retained Bash checkers, without wrappers,
+  compatibility representations, false dependencies, dual authority, or
+  fallback.
