@@ -5910,3 +5910,16 @@
 - Both retained gates, 332 verifier tests, all 198 declarative suites, numeric
   lifecycle, and generated freshness pass. Final graph: 74 Bash checkers, 78
   nodes, 527 edges, 78 components.
+
+## 2026-08-21 - M6-I52 Godot Owner Acceptance
+
+- Fresh evidence selected the 82-line Godot owner checker as the shortest of 16
+  caller-free verifiers and qualified it for `serial-coherent` execution.
+- Replaced it with one seven-check framework-profile suite covering 14 typed
+  decisions and six owner, route, legacy, lifecycle, and documentation
+  projections.
+- Removed the retired checker from row-35 current consumer authority and
+  preserved two independent gates through four accepted edge records.
+- Both retained gates, 332 verifier tests, all 199 declarative suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 73 Bash checkers, 77
+  nodes, 521 edges, 77 components.

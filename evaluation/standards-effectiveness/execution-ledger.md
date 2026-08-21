@@ -14431,3 +14431,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   lifecycle, and generated freshness pass. Final graph: 74 Bash checkers, 78
   nodes, 527 edges, 78 components. No fallback or compatibility authority
   remains.
+
+## 2026-08-21 - M6-I52 Godot Owner Acceptance
+
+- Fresh post-M6-I51 evidence selected the 82-line Godot owner checker for one
+  `serial-coherent` package at train order 167.
+- The registered seven-check suite preserves 14 typed decisions and canonical
+  owner, Router, legacy, disposition, execution-overlay, and README evidence.
+- Row-35 current consumer authority no longer names the retired checker; row
+  13 and plan fixtures remain independent through four accepted edge records.
+- Both retained gates, 332 verifier tests, all 199 declarative suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 73 Bash checkers, 77
+  nodes, 521 edges, 77 components. No fallback or compatibility authority
+  remains.

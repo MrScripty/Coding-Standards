@@ -5209,3 +5209,19 @@ generated freshness pass. Final evidence contains 74 Bash checkers, 78 nodes,
 527 edges, and 78 components. No normative source, engine, helper, wrapper,
 compatibility representation, false dependency, dual authority, or fallback
 changed.
+
+### M6-I52 Godot Owner Acceptance
+
+Fresh post-M6-I51 evidence selected the 82-line Godot owner checker as the
+shortest of 16 caller-free verifiers. The `serial-coherent` package replaces it
+with one seven-check framework-profile suite covering 14 typed decisions,
+owner, Router, legacy, disposition, execution-overlay, and README projections.
+
+Row-35 consumer authority no longer names the retired README assertion. Row 13
+and plan fixtures remain independently executable through four accepted edge
+records. The 14 decisions include 11 typed negative outcomes. Both retained
+gates, 332 verifier tests, all 199 declarative suites, numeric lifecycle, and
+generated freshness pass. Final evidence contains 73 Bash checkers, 77 nodes,
+521 edges, and 77 components. No normative source, engine, helper, wrapper,
+compatibility representation, false dependency, dual authority, or fallback
+changed.

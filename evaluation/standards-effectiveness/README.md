@@ -201,7 +201,7 @@ stale mutation, discarded completion, ignored cancellation, alternate
 mechanisms, missing evidence, and default success.
 
 `fixtures/godot/owner-contract-decisions.tsv` and
-`verify-godot-owner-contract.sh` establish the Godot framework profile before
+the registered `godot-owner-contract` suite establish the Godot framework profile before
 population. They require explicit engine affinity, observed dispatch, and
 point-of-use object-lifetime proof while rejecting off-thread access,
 detached deferred work, check-then-use gaps, stale references, alternate

@@ -989,3 +989,8 @@ requires = []
 id = "typescript-async-owner-contract"
 path = "evaluation/standards-effectiveness/suites/typescript-async-owner-contract.toml"
 requires = []
+
+[[suites]]
+id = "godot-owner-contract"
+path = "evaluation/standards-effectiveness/suites/godot-owner-contract.toml"
+requires = []
