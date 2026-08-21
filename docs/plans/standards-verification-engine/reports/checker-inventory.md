@@ -4688,3 +4688,18 @@ retained Bash checkers. Final graph evidence contains 98 nodes, 616 edges, and
 98 components without source changes, engine changes, copied nested behavior,
 wrappers, compatibility representations, false dependencies, dual authority,
 or fallback.
+
+### M6-I32 Discover-Or-Create Reference Admission
+
+Fresh post-M6-I31 evidence selects the 55-line caller-free Architecture
+reference checker. One registered reference suite can preserve its 14 typed
+decisions, conditional pseudocode and consequence requirements, prohibited
+legacy defaults, and exact two-row disposition closure with existing generic
+checks.
+
+The checker's convergence call is an independent gate. Two exact current edge
+dispositions retain it without copied assertions or a suite dependency. Two
+M6-I30 historical records will transfer to exact suite evidence at acceptance.
+M6-I32 is admitted at train order 147 without source changes, engine changes,
+wrappers, compatibility representations, false dependencies, dual authority,
+or fallback.

@@ -4,8 +4,8 @@ evaluation/standards-effectiveness/check-metadata.sh	helper	yes	component-0002	1
 evaluation/standards-effectiveness/check-plan-structure.sh	helper	yes	component-0003	1	no	0	1	1	1	0
 evaluation/standards-effectiveness/verify-architecture-composition-root-pattern.sh	verifier	yes	component-0004	1	no	5	1	1	1	1
 evaluation/standards-effectiveness/verify-architecture-data-authority-pattern.sh	verifier	yes	component-0005	1	no	4	1	1	1	1
-evaluation/standards-effectiveness/verify-architecture-discover-or-create-convergence.sh	verifier	yes	component-0006	1	no	7	1	0	1	1
-evaluation/standards-effectiveness/verify-architecture-discover-or-create-reference.sh	verifier	yes	component-0007	1	no	8	0	1	0	1
+evaluation/standards-effectiveness/verify-architecture-discover-or-create-convergence.sh	verifier	yes	component-0006	1	no	7	1	1	1	1
+evaluation/standards-effectiveness/verify-architecture-discover-or-create-reference.sh	verifier	yes	component-0007	1	no	8	0	2	0	1
 evaluation/standards-effectiveness/verify-architecture-durable-workflow-pattern.sh	verifier	yes	component-0008	1	no	6	1	1	1	1
 evaluation/standards-effectiveness/verify-architecture-layered-pattern.sh	verifier	yes	component-0009	1	no	2	1	1	1	1
 evaluation/standards-effectiveness/verify-architecture-monorepo-pattern.sh	verifier	yes	component-0010	1	no	3	1	1	1	1

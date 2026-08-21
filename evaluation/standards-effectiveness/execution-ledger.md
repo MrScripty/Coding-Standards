@@ -13901,3 +13901,20 @@ checkpoint pass. Final graph evidence contains 98 nodes, 616 edges, and 98
 components without migration-record, Architecture-source, nested-gate, or
 engine changes, wrappers, compatibility representations, false dependencies,
 dual authority, or fallback.
+
+## 2026-08-20 M6-I32 Discover-Or-Create Reference Admission
+
+**Outcome:** admitted at train order 147; atomic acceptance is next.
+
+Fresh post-M6-I31 evidence selects the 55-line caller-free Architecture
+discover-or-create reference checker. Its 14 typed mechanism decisions,
+conditional reference requirements, prohibited legacy defaults, and exact
+`STD-0104`/`STD-0105` dispositions are expressible with existing generic
+decision, text, and table checks.
+
+Architecture discover-or-create convergence remains a separately owned
+retained gate through two admitted current edges. The two M6-I30 historical
+references will transfer to exact suite evidence. No policy, fixture, nested
+checker, engine, wrapper, compatibility representation, false dependency, or
+fallback changes. Admission evidence contains 178 suites, 94 Bash checkers, 98
+nodes, 618 edges, and 98 components.
