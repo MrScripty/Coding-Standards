@@ -13725,3 +13725,19 @@ accepted at train order 141 and the Bash checker is absent. Final evidence
 contains 174 suites, 99 Bash checkers, 103 nodes, 638 edges, and 103 components;
 all focused, mutation, lifecycle, generated, all-suite, complete-checkpoint,
 plan, source-integrity, and diff checks pass.
+
+## 2026-08-20 M6-I27 Row-41 Documentation Lifecycle Admission
+
+**Outcome:** admitted at train order 142; atomic acceptance is next.
+
+Fresh post-M6-I26 evidence selects the 41-line caller-free row-41 lifecycle
+checker. Exact train, package, owner-validation, decomposition, Documentation
+index, and canonical-owner path evidence form one `migration.parent-plan`
+contract.
+
+Documentation decisions, policy consolidation, and execution-train lifecycle
+remain independent through six admitted edges. Existing M6-I22 checker evidence
+remains valid until atomic acceptance. Disposable final state passes 175 suites
+and the complete 98-checker checkpoint. Admission state contains 174 suites,
+99 Bash checkers, 103 nodes, 639 edges, and 103 components without policy,
+fixture, engine, registry, checker, wrapper, compatibility, or fallback changes.

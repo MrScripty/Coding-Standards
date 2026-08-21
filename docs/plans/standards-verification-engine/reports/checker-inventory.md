@@ -4522,3 +4522,16 @@ accepted at train order 141 and the checker is absent. Final evidence contains
 174 suites, 99 Bash checkers, 103 nodes, 638 edges, and 103 components without
 engine changes, false dependencies, wrappers, compatibility representations,
 dual authority, or fallback.
+
+### M6-I27 Row-41 Documentation Lifecycle Admission
+
+The fresh post-M6-I26 graph selects the 41-line caller-free row-41 lifecycle
+checker. Six generic checks express exact train, package, owner-validation,
+decomposition, Documentation index, and canonical-owner path evidence.
+
+Documentation decisions, policy consolidation, and execution-train lifecycle
+remain independent through six admitted edges. Existing M6-I22 checker evidence
+transfers only at atomic acceptance. Disposable final state passes 175 suites
+and the complete checkpoint at 98 Bash checkers, 102 nodes, 630 edges, and 102
+components. M6-I27 is admitted at train order 142 without policy, fixture,
+engine, registry, Bash repair, wrapper, compatibility, or fallback.

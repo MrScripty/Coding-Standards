@@ -5214,3 +5214,19 @@
   components without engine changes, false dependencies, wrappers,
   compatibility representations, dual authority, or fallback.
 - Fresh-graph owner-coherent package selection is next.
+
+## 2026-08-20 - M6-I27 Row-41 Documentation Lifecycle Admission
+
+- Clean accepted revision `9823a52` yields the 41-line caller-free row-41
+  lifecycle checker as the smallest owner-coherent frontier package.
+- M6-I27 is admitted at train order 142 for exact train, package,
+  owner-validation, decomposition, Documentation index, and canonical-owner
+  path evidence.
+- Six admitted edges keep Documentation decisions, policy consolidation, and
+  execution-train lifecycle independent. Existing M6-I22 checker evidence
+  remains valid until atomic acceptance transfers it to the registered suite.
+- Disposable final state passes all 175 suites and the complete checkpoint at
+  98 Bash checkers, 102 nodes, 630 edges, and 102 components.
+- Admission evidence has 174 suites, 99 Bash checkers, 103 nodes, 639 edges,
+  and 103 components without policy, fixture, engine, registry, checker,
+  wrapper, compatibility, or fallback changes.
