@@ -4,8 +4,7 @@
 
 **Current phase:** Milestone 7 verification migration
 
-**Next slice:** resolve separate backup authority before fresh M6-I44
-consumer-authority re-planning
+**Next slice:** re-plan M6-I44 from fresh graph and row-35 consumer evidence
 
 **Acceptance status:** `partial`
 
@@ -98,7 +97,7 @@ universal architecture policy.
 | Verification migration | Bash checkers and helpers are removed with accepted Python-engine replacements; no wrappers, dual authority, compatibility parsers, or fallback remain. |
 | Accelerated execution | Select proportional `serial-coherent`, `pre-admitted`, `owner-wave`, or `shared-contract` migration modes from current risk and concurrency facts. Owner-coherent packages may prepare concurrently with disjoint write sets; shared registry, evidence, Router, and plan integration remain serial. |
 | Recovery dependency | Complete the generic edge-system recovery without changing the frozen temporary Bash graph, then obtain fresh graph evidence before another verifier package is selected. |
-| Current efficiency recovery | The accepted recovery stabilizes temporary component identities, applies proportional serial/wave migration modes, and enforces task-owned worktree terminal evidence. Historical cleanup, backup publication, and pilots remain separately owned. |
+| Current efficiency recovery | The accepted recovery stabilizes temporary component identities, applies proportional serial/wave migration modes, and enforces task-owned worktree terminal evidence. Historical cleanup and the normal remote backup are accepted; pilots remain separately owned. |
 
 ## Current Architecture
 
@@ -160,19 +159,17 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Resolve the separate remote-backup authority recorded by the accepted
-   [migration-execution efficiency recovery](../docs/plans/migration-execution-efficiency-recovery/plan.md).
-2. Re-plan M6-I44 through the verification-engine plan from fresh graph
+1. Re-plan M6-I44 through the verification-engine plan from fresh graph
    evidence to resolve its row-35
    transitive-caller consumer before acceptance.
-3. Continue owner-coherent Python-engine migration until no Bash verifier,
+2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
-4. Use focused final-state evidence for each package and reserve the complete
+3. Use focused final-state evidence for each package and reserve the complete
    mixed checkpoint for an owner-wave close, shared-contract acceptance, or
    zero-Bash closure.
-5. Regenerate canonical inventories and prove exact dispositions, no source
+4. Regenerate canonical inventories and prove exact dispositions, no source
    gaps, no normative legacy source rows, and no legacy Router routes.
-6. Complete manual semantic-ownership review `D001` through `D010` before
+5. Complete manual semantic-ownership review `D001` through `D010` before
    Milestone 7 acceptance.
 
 **Acceptance gate:** every rule identifier has a final disposition; structural,

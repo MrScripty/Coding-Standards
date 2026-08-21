@@ -1,19 +1,24 @@
-# Backup Risk
+# Backup Resolution
 
-At accepted Milestone 2 revision `daa526917a7580e9965ab78435f6346c3c5d334c`,
-local `main` is 739 commits ahead of the locally recorded `origin/main` revision
-`3135bc491e2b3a18ce0775fc58a109aeaa93d435`.
+The risk recorded at accepted Milestone 2 is resolved.
 
-The repository therefore has substantial accepted history without evidence in
-this recovery that a remote or independent backup contains it. This recovery
-does not authorize a push, remote creation, force update, bundle publication,
-or history rewrite. Before substantially more local-only migration history is
-accepted, the repository owner should separately authorize one of:
+On 2026-08-21 the repository owner explicitly authorized the recommended normal
+fast-forward push of accepted `main` to its configured `origin/main`.
 
-- a normal push of accepted `main` to its intended remote;
-- a new protected backup ref on an authorized remote; or
-- a verified repository bundle or equivalent independent backup destination.
+Immediately before mutation:
 
-Any selected mechanism must first inspect current remote authority and avoid
-overwriting unrelated history. This report records risk; it is not publication
-authority.
+- the canonical worktree was clean;
+- local `main` was `9cdda3de3a81679ab0302b8b203ea15a3d26988f`;
+- live `origin/main` was the recorded
+  `3135bc491e2b3a18ce0775fc58a109aeaa93d435`;
+- the live remote revision was an ancestor of local `main`;
+- local `main` was 749 commits ahead and zero behind; and
+- no force update, alternate ref, or history rewrite was required.
+
+`git push origin main:main` completed as a normal fast-forward. A subsequent
+live query confirmed `origin/main` exactly matched
+`9cdda3de3a81679ab0302b8b203ea15a3d26988f`.
+
+The backup dependency is therefore satisfied for migration resumption. The
+evidence commit that records this result must itself be fast-forwarded before
+new verifier implementation is accepted so remote authority remains current.

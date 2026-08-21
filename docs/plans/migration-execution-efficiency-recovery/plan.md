@@ -79,10 +79,10 @@ acceptance.
 - Canonical Planning already permits one coherent slice and does not require a
   separate commit cadence.
 - Commit already makes isolation conditional and requires terminal cleanup.
-- Current Git state has 385 worktree registrations: one live and 384 prunable;
-  no destructive cleanup is authorized by this plan.
-- Current local `main` is 736 commits ahead of `origin/main`; publication is
-  not authorized by this plan.
+- The separately owned historical cleanup is accepted with one local branch,
+  one live worktree, and zero stale registrations.
+- The separately authorized normal fast-forward push is verified through
+  accepted cleanup revision `9cdda3de`; remote backup risk is resolved.
 - The temporary graph has 86 nodes and 86 singleton components, so ordinal
   component IDs rename unrelated rows after most checker deletions.
 - M6-I44 remains admitted and blocked by VE086. It does not resume until this
@@ -109,6 +109,5 @@ acceptance.
 ## Final Acceptance
 
 - Acceptance status: `satisfied`
-- Deferred follow-ups: remote backup authorization; historical cleanup
-  execution; two independent downstream pilots
+- Deferred follow-ups: two independent downstream pilots
 - Final status: `Accepted`

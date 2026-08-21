@@ -4,8 +4,7 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** resolve separate backup authority, then re-plan M6-I44 from
-fresh graph and row-35 consumer evidence
+**Next slice:** re-plan M6-I44 from fresh graph and row-35 consumer evidence
 
 **Acceptance status:** `pending`
 
@@ -190,24 +189,22 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Resolve the separately owned remote-backup decision recorded by the accepted
-   migration-execution efficiency recovery.
-2. Re-plan M6-I44's exact write set and acceptance evidence from fresh graph
+1. Re-plan M6-I44's exact write set and acceptance evidence from fresh graph
    evidence for the row-35
    transitive contract-caller authority; do not preserve the removed checker.
-3. Accept the corrected M6-I44 package only after all registered suites pass.
-4. Select each subsequent owner-coherent package from reviewed lifecycle and
+2. Accept the corrected M6-I44 package only after all registered suites pass.
+3. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
-5. Select and record the proportional execution mode before changing package
+4. Select and record the proportional execution mode before changing package
    authority. Do not create a separate admission commit for `serial-coherent`
    work or a per-member mixed checkpoint inside an `owner-wave`.
-6. Add another reusable primitive only when multiple coherent owners require it or
+5. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
-7. Prepare disjoint admitted suite/checker changes concurrently when their
+6. Prepare disjoint admitted suite/checker changes concurrently when their
    write sets and dependencies are frozen.
-8. Integrate shared authority serially and run one complete checkpoint at each
+7. Integrate shared authority serially and run one complete checkpoint at each
    shared-contract or wave boundary.
-9. Continue until no Bash verifier, helper, or launcher remains, then delete
+8. Continue until no Bash verifier, helper, or launcher remains, then delete
    the temporary reference model.
 
 **Acceptance gate:** exact inventory reports zero Bash verification paths; the
