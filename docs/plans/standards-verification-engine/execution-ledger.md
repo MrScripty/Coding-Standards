@@ -5666,3 +5666,18 @@
   with 185 suites and 87 retained Bash checkers, without wrappers,
   compatibility representations, false dependencies, dual authority, or
   fallback.
+## 2026-08-21 - M6-I39 Architecture Data-Authority Admission
+
+- Fresh post-M6-I38 evidence selects the shortest of 18 caller-free verifiers:
+  the 63-line Architecture data-authority checker.
+- Its ten typed decisions, exact legacy and reference projections,
+  case-insensitive location-default rejection, six exact dispositions, and
+  keyed row-36 owner lineage require no new engine capability.
+- Architecture monorepo policy remains an independently executed Bash gate
+  through two admitted current edge records. Four historical records will
+  transfer to exact suite evidence only at acceptance.
+- Admitted M6-I39 at train order 154. No policy, fixture, disposition,
+  owner-validation, engine, nested gate, wrapper, compatibility
+  representation, false dependency, dual authority, or fallback changes.
+- Admission evidence contains 185 suites, 87 Bash checkers, 91 nodes, 590
+  edges, and 91 components.

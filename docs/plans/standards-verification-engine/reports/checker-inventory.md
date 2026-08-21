@@ -4928,3 +4928,17 @@ drift. Final graph evidence contains 91 nodes, 589 edges, and 91 components
 with 185 registered suites and 87 retained Bash checkers. No policy, fixture,
 disposition, owner-validation, nested gate, engine, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changed.
+### M6-I39 Architecture Data-Authority Admission
+
+Fresh post-M6-I38 evidence exposes 18 caller-free verifiers and selects the
+63-line Architecture data-authority checker as the shortest owner-coherent
+frontier. Its ten typed decisions, exact legacy and reference projections,
+case-insensitive location-default rejection, six exact dispositions, and keyed
+row-36 owner lineage require no new engine capability.
+
+Architecture monorepo policy remains an independently executed gate through
+two admitted current edge records. Four accepted historical records will
+transfer from checker evidence to the exact registered suite only at
+acceptance. M6-I39 is admitted at train order 154 without policy, fixture,
+disposition, owner-validation, engine, nested-gate, wrapper, compatibility
+representation, false dependency, dual authority, or fallback changes.
