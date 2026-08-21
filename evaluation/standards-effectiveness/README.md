@@ -153,6 +153,12 @@ universal situation-to-pattern table, and the exact `STD-0134` disposition.
 Situation labels, nearest examples, incumbent patterns, and fixed diagrams do
 not select a pattern.
 
+The registered `architecture-discover-or-create-reference` suite proves 14
+typed reference decisions, conditional pseudocode and consequences, removal of
+legacy default claims, and exact `STD-0104` and `STD-0105` dispositions.
+Unbounded retry, default success, guaranteed benefits, and carried prior input
+are rejected rather than adapted as fallback.
+
 `fixtures/core/constants-decisions.tsv` and the registered `core-constants` suite prove
 semantic constant/configuration ownership without universal literal,
 centralization, ambient, duplicated-default, or incumbent-value fallbacks.

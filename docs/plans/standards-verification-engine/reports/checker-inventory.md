@@ -4703,3 +4703,20 @@ M6-I30 historical records will transfer to exact suite evidence at acceptance.
 M6-I32 is admitted at train order 147 without source changes, engine changes,
 wrappers, compatibility representations, false dependencies, dual authority,
 or fallback.
+
+### M6-I32 Discover-Or-Create Reference Acceptance
+
+The registered reference suite replaces the 55-line checker with four existing
+generic checks. It preserves all 14 typed decisions, conditional pseudocode and
+consequence requirements, rejection of legacy fallback defaults, and exact
+two-row disposition closure. Architecture discover-or-create convergence
+remains an independent retained gate through both accepted current edge
+records.
+
+The obsolete checker is absent, and both M6-I30 historical references now name
+the exact registered suite. Five mutation families fail as required, all
+Python and declarative tests pass, and the complete mixed checkpoint passes
+with 93 retained Bash checkers. Final graph evidence contains 97 nodes, 614
+edges, and 97 components without source changes, engine changes, copied nested
+behavior, wrappers, compatibility representations, false dependencies, dual
+authority, or fallback.

@@ -5424,3 +5424,21 @@
   representation, false dependency, or fallback changes.
 - Admission evidence contains 178 suites, 94 Bash checkers, 98 nodes, 618
   edges, and 98 components.
+
+## 2026-08-20 - M6-I32 Discover-Or-Create Reference Acceptance
+
+- Added the registered `architecture-discover-or-create-reference` suite with
+  all 14 typed decisions, conditional reference requirements, prohibited
+  legacy defaults, and exact `STD-0104`/`STD-0105` dispositions.
+- Kept Architecture discover-or-create convergence as an independently
+  executed Bash gate through both accepted current edge records. Both M6-I30
+  historical references now point to exact suite evidence.
+- Deleted only the replaced reference checker. Architecture policy, reference
+  text, decision fixture, dispositions, and convergence gate remain unchanged.
+- Five disposable mutations reject decision, required-text, both
+  prohibited-default, and disposition drift. The 35 graph tests, 326 verifier
+  tests, all 179 declarative suites, and complete mixed checkpoint with 93
+  retained Bash checkers pass.
+- Final generated evidence contains 97 nodes, 614 edges, and 97 components
+  without engine changes, copied nested behavior, wrappers, compatibility
+  representations, false dependencies, dual authority, or fallback.

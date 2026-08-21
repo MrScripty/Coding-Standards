@@ -691,6 +691,11 @@ path = "evaluation/standards-effectiveness/suites/architecture-pattern-selection
 requires = []
 
 [[suites]]
+id = "architecture-discover-or-create-reference"
+path = "evaluation/standards-effectiveness/suites/architecture-discover-or-create-reference.toml"
+requires = []
+
+[[suites]]
 id = "coding-dependency-route"
 path = "evaluation/standards-effectiveness/suites/coding-dependency-route.toml"
 requires = []

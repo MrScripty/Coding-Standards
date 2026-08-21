@@ -13918,3 +13918,22 @@ references will transfer to exact suite evidence. No policy, fixture, nested
 checker, engine, wrapper, compatibility representation, false dependency, or
 fallback changes. Admission evidence contains 178 suites, 94 Bash checkers, 98
 nodes, 618 edges, and 98 components.
+
+## 2026-08-20 M6-I32 Discover-Or-Create Reference Acceptance
+
+**Outcome:** accepted at train order 147; fresh-graph package selection is
+next.
+
+The registered reference suite now proves all 14 typed mechanism decisions,
+conditional reference requirements, rejection of legacy fallback defaults,
+and exact `STD-0104`/`STD-0105` dispositions. Architecture discover-or-create
+convergence remains an independently executed Bash gate through both accepted
+current edge records. Both M6-I30 historical references now use exact suite
+evidence.
+
+The obsolete checker is absent. Five disposable mutations, 35 graph tests,
+326 verifier tests, all 179 declarative suites, and the complete 93-checker
+checkpoint pass. Final graph evidence contains 97 nodes, 614 edges, and 97
+components without policy, reference, fixture, nested-gate, or engine changes,
+wrappers, compatibility representations, false dependencies, dual authority,
+or fallback.
