@@ -14048,3 +14048,22 @@ only at acceptance. No policy, fixture, disposition, owner-validation, engine,
 nested gate, wrapper, compatibility representation, false dependency, dual
 authority, or fallback changes. Admission evidence contains 181 suites, 91
 Bash checkers, 95 nodes, 604 edges, and 95 components.
+## 2026-08-21 M6-I35 Frontend View-Model Lineage Acceptance
+
+**Outcome:** accepted at train order 150; fresh graph audit is next.
+
+The registered Frontend suite replaces the 61-line Bash checker with typed
+decision outcomes, exact legacy and canonical projections, case-insensitive
+fixed-default rejection, six exact dispositions, and keyed row-37 owner
+lineage. Architecture durable-workflow policy and Frontend
+rendering/synchronization remain independently executed retained gates through
+all four accepted current edge records, and all four historical records now
+name exact suite evidence.
+
+Six disposable mutations reject decision, route, mixed-case default,
+disposition, owner-lineage, and stale-evidence drift. All Python and
+declarative tests pass, and the complete mixed checkpoint passes with 90
+retained Bash checkers. Final graph evidence contains 94 nodes, 598 edges, and
+94 components without policy, fixture, disposition, owner-validation, engine,
+nested-gate, wrapper, compatibility representation, false-dependency,
+dual-authority, or fallback changes.

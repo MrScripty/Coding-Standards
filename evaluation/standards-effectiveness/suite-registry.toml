@@ -904,3 +904,8 @@ requires = []
 id = "milestone-7-row-18-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-18-decomposition.toml"
 requires = []
+
+[[suites]]
+id = "frontend-view-model-lineage"
+path = "evaluation/standards-effectiveness/suites/frontend-view-model-lineage.toml"
+requires = []

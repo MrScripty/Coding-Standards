@@ -5550,3 +5550,21 @@
   false dependency, dual authority, or fallback changes.
 - Admission evidence contains 181 suites, 91 Bash checkers, 95 nodes, 604
   edges, and 95 components.
+## 2026-08-21 - M6-I35 Frontend View-Model Lineage Acceptance
+
+- Added the registered `frontend-view-model-lineage` suite with 12 typed
+  decisions, exact legacy and canonical projections, case-insensitive
+  fixed-default rejection, six exact dispositions, and keyed owner lineage.
+- Kept Architecture durable-workflow policy and Frontend
+  rendering/synchronization as independently executed Bash gates through all
+  four accepted current edge records. All four historical records now point to
+  exact suite evidence.
+- Deleted only the replaced Frontend checker. Policy, fixture, dispositions,
+  owner validation, nested gates, and engine behavior remain unchanged.
+- Six disposable mutations reject decision, route, mixed-case default,
+  disposition, owner-lineage, and stale historical evidence drift. The 35
+  graph tests, 330 verifier tests, all 182 declarative suites, and complete
+  mixed checkpoint with 90 retained Bash checkers pass.
+- Final generated evidence contains 94 nodes, 598 edges, and 94 components
+  without copied nested behavior, wrappers, compatibility representations,
+  false dependencies, dual authority, or fallback.

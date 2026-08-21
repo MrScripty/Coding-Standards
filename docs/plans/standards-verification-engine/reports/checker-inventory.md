@@ -4824,3 +4824,19 @@ to the exact registered suite only at acceptance. M6-I35 is admitted at train
 order 150 without policy, fixture, disposition, owner-validation, engine,
 nested-gate, wrapper, compatibility representation, false dependency, dual
 authority, or fallback changes.
+### M6-I35 Frontend View-Model Lineage Acceptance
+
+The registered Frontend suite replaces the 61-line checker with one typed
+decision contract, exact legacy and canonical projections, case-insensitive
+fixed-default rejection, six exact dispositions, and keyed row-37 owner
+lineage. Architecture durable-workflow policy and Frontend
+rendering/synchronization remain independent retained gates through all four
+accepted current edge records.
+
+All four historical records now name the registered suite rather than the
+deleted checker. Six disposable mutations reject decision, route, mixed-case
+default, disposition, owner-lineage, and stale-evidence drift. Final graph
+evidence contains 94 nodes, 598 edges, and 94 components with 182 registered
+suites and 90 retained Bash checkers. No policy, fixture, disposition,
+owner-validation, engine, nested gate, wrapper, compatibility representation,
+false dependency, dual authority, or fallback changed.
