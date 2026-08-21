@@ -5261,3 +5261,23 @@
 - VE084 must resolve the owner and cross-owner evidence boundary before
   implementation resumes. Canonical source, package, edge, registry, checker,
   generated, and engine authority remain unchanged.
+
+## 2026-08-20 - M6-I28 Frontend Source Closure Admission
+
+- Resolved VE084 through the accepted
+  `verification-engine.migration-source-closure` owner rather than inferring
+  Frontend or parent-plan ownership from the legacy source or graph.
+- Admitted M6-I28 at train order 143. The existing aggregate suite will add
+  one reviewed Frontend fixture, classify the already non-normative index as
+  derived, normalize its non-authority contract, and preserve the exact
+  `STD-0464` split target.
+- Accessibility's typed web-default decision, canonical headings, and owner
+  contract remain independently executed. The package records both outgoing
+  checker edges as independent gates and creates no suite dependency.
+- Atomic acceptance will remove the obsolete checker and its sole-use route
+  fixture, transfer the two historical M6-T12 records to
+  `suite:source-index-closures`, and regenerate the frozen temporary graph.
+  No engine, registry, canonical owner, wrapper, compatibility representation,
+  copied identifier range, or fallback changes.
+- Admission evidence contains 175 suites, 98 Bash checkers, 102 nodes, 631
+  edges, and 102 components.

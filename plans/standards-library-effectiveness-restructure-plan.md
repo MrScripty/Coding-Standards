@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 7 verification migration
 
-**Next slice:** verification-engine resolution of VE084's Frontend
-source-closure ownership boundary before M6-I28 admission
+**Next slice:** verification-engine acceptance of admitted M6-I28 at train
+order 143
 
 **Acceptance status:** `partial`
 
@@ -137,7 +137,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | VE084 owner-boundary replan through the verification-engine plan |
+| 7 | Role-based consolidation and verification migration | `Active` | M6-I28 admitted through the verification-engine plan |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -147,7 +147,7 @@ without losing mapped semantics.
 
 **Accepted boundary:** normative owner consolidation is complete through the
 recorded `7.4c3` packages. Verification migration is accepted through M6-I27
-at train order 142. The canonical package manifest contains the exact package
+at train order 142, and M6-I28 is admitted at train order 143. The canonical package manifest contains the exact package
 state; the execution ledger
 contains detailed slice evidence.
 
@@ -159,8 +159,8 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Resolve VE084 through the verification-engine plan before selecting or
-   admitting M6-I28.
+1. Accept admitted M6-I28 through the verification-engine plan without
+   changing its frozen package contract.
 2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
 3. Regenerate canonical inventories and prove exact dispositions, no source

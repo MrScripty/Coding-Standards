@@ -13757,3 +13757,24 @@ at train order 142 and the Bash checker is absent. Final evidence contains 175
 suites, 98 Bash checkers, 102 nodes, 630 edges, and 102 components; all focused,
 mutation, lifecycle, generated, all-suite, complete-checkpoint, plan,
 source-integrity, and diff checks pass.
+
+## 2026-08-20 M6-I28 Frontend Source Closure Admission
+
+**Outcome:** admitted at train order 143; atomic acceptance is next.
+
+VE084 is resolved through the existing
+`verification-engine.migration-source-closure` authority. The aggregate
+`source-index-closures` suite will add Frontend's reviewed routes, complete
+headings, prohibited legacy content, derived corpus state, exact identifier
+membership, and exact `STD-0464` split target. No new suite or engine behavior
+is required.
+
+Accessibility's typed web-default rejection and owner contract remain
+independently executed through two admitted edge records. Atomic acceptance
+will delete the obsolete checker and sole-use route fixture and transfer both
+M6-T12 historical records to aggregate-suite evidence. Admission changes no
+policy, fixture, corpus, suite, registry, checker, canonical owner, wrapper,
+compatibility representation, or fallback.
+
+Admission evidence contains 175 suites, 98 Bash checkers, 102 nodes, 631 edges,
+and 102 components.

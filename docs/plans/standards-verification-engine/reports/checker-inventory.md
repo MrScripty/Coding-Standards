@@ -4564,3 +4564,23 @@ from topology, source naming, or disposition targets would infer ownership.
 M6-I28 remains unselected pending an explicit owner and cross-owner evidence
 decision; no package, edge, suite, registry, checker, generated artifact,
 engine behavior, compatibility path, or fallback changed.
+
+### M6-I28 Frontend Source Closure Admission
+
+The accepted `verification-engine.migration-source-closure` owner and
+`source-index-closures` suite already own aggregate closure for former
+normative source indexes. M6-I28 therefore adapts that authority instead of
+creating a Frontend-owned or parent-plan-owned closure implementation.
+
+The admitted package adds one reviewed Frontend fixture, changes the corpus
+classification from normative to derived, normalizes only the legacy index's
+non-authority wording, and adds exact `STD-0464` disposition evidence. The
+aggregate derives all 16 identifier identities from the owner map and
+disposition manifest; it stores no copied range or count.
+
+Accessibility remains independently owned and executed. Its retained owner
+contract already proves the canonical headings, the typed `web_default`
+rejection, and the no-mechanism default boundary. The two current nested-call
+edges become independent-gate records, not suite dependencies. Atomic
+acceptance deletes the obsolete checker and sole-use Frontend route fixture
+without a wrapper, duplicate suite, compatibility representation, or fallback.
