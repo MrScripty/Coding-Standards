@@ -4748,6 +4748,22 @@
 - Fresh-graph owner-coherent package selection is next; M6-I18 is not
   preselected.
 
+## 2026-08-20 - M6-I18 Accessibility Interaction Semantics Admission
+
+- Fresh post-M6-I17 review selected the shortest of 26 caller-free checkers.
+  Five generic checks express its Accessibility-owned decisions, canonical
+  text, web reference, bounded legacy closure, and exact dispositions.
+- Admitted train order 133 with four typed current edge dispositions preserving
+  the Accessibility owner contract and row-28 lifecycle as independent checker
+  gates. Two accepted M6-I16 records will transfer to the exact suite evidence.
+- Disposable final state passes 166 declarative suites and the complete mixed
+  checkpoint at 107 Bash checkers, 111 nodes, 674 edges, and 111 components.
+- Admission evidence remains at 165 suites, 108 Bash checkers, 112 nodes, 681
+  edges, and 112 components. No policy, fixture, engine capability, helper
+  migration, suite dependency, copied count, manual numeric mapping, Bash
+  repair, wrapper, compatibility path, or fallback is admitted.
+- Atomic M6-I18 acceptance is next.
+
 ## 2026-08-20 - M6-I15 Accessibility Name-And-Input Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its five

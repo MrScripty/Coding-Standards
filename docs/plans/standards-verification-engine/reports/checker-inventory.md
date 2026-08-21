@@ -4247,3 +4247,21 @@ authority, numeric lifecycle, generated freshness, all 165 declarative suites,
 typed mutations, complete checkpoint, and diff integrity pass without an
 engine change, helper migration, suite dependency, copied count, manual
 numeric mapping, Bash repair, wrapper, compatibility path, or fallback.
+
+### M6-I18 Accessibility Interaction Semantics Admission
+
+The fresh post-M6-I17 audit found 26 caller-free checkers and selected
+`verify-accessibility-interaction-semantics.sh`, the shortest candidate at 28
+lines. Its 15 interaction decisions, canonical Accessibility text, web
+reference, bounded legacy-index closure, and STD-0008 through STD-0012
+dispositions form one Accessibility-owned contract.
+
+The Accessibility owner-contract and row-28 calls are independent authority,
+not interaction semantics. Four current edge dispositions retain both checkers;
+two accepted M6-I16 records transfer to the exact registered suite evidence.
+
+Disposable final state uses five generic checks and passes all 166 declarative
+suites plus the complete checkpoint at 107 Bash checkers, 111 nodes, 674 edges,
+and 111 components. M6-I18 is admitted at train order 133; no policy, fixture,
+engine, helper, suite dependency, copied count, manual numeric mapping, Bash
+repair, wrapper, compatibility path, or fallback is introduced.

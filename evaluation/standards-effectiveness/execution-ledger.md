@@ -13069,6 +13069,24 @@ pass. No policy or fixture change, engine capability, helper migration, suite
 dependency, copied count, manual numeric mapping, Bash repair, wrapper,
 compatibility path, or fallback remains.
 
+## 2026-08-20 M6-I18 Accessibility Interaction Semantics Admission
+
+**Outcome:** admitted; atomic acceptance is next.
+
+Fresh post-M6-I17 review selected the shortest of 26 caller-free checkers. Its
+15 interaction decisions, Accessibility owner text, web reference, bounded
+legacy closure, and exact STD-0008 through STD-0012 dispositions form one
+owner-coherent suite. The Accessibility owner contract and row-28 lifecycle
+remain independent checker gates through four admitted current edges.
+
+Disposable final state passes all 166 declarative suites and the complete mixed
+checkpoint at 107 Bash checkers, 111 nodes, 674 edges, and 111 components.
+M6-I18 freezes one registered five-check suite, whole-checker numeric retirement,
+checker deletion, graph refresh, and two historical M6-I16 evidence transfers.
+No policy, fixture, engine, helper, suite dependency, copied count, manual
+numeric mapping, Bash repair, wrapper, compatibility behavior, or fallback is
+admitted.
+
 ## 2026-08-19 VE078 Source-Index Component Replacement Re-plan
 
 **Outcome:** capability-first complete-component replacement selected; no
