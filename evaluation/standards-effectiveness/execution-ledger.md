@@ -14032,3 +14032,19 @@ and the complete mixed checkpoint passes with 91 retained Bash checkers. Final
 graph evidence contains 95 nodes, 603 edges, and 95 components without source,
 decomposition, report, engine, nested-gate, wrapper, compatibility
 representation, false-dependency, dual-authority, or fallback changes.
+## 2026-08-21 M6-I35 Frontend View-Model Lineage Admission
+
+**Outcome:** admitted at train order 150; atomic acceptance is next.
+
+Fresh post-M6-I34 evidence selects the shortest of 18 caller-free verifiers,
+the 61-line Frontend view-model-lineage checker. Its 12 typed decisions, exact
+legacy and canonical projections, prohibited fixed defaults, and six exact
+dispositions fit existing decision, text, and table checks.
+
+Architecture durable-workflow policy and Frontend rendering/synchronization
+remain separately owned retained gates through four admitted current edge
+records. Four historical checker records will transfer to exact suite evidence
+only at acceptance. No policy, fixture, disposition, owner-validation, engine,
+nested gate, wrapper, compatibility representation, false dependency, dual
+authority, or fallback changes. Admission evidence contains 181 suites, 91
+Bash checkers, 95 nodes, 604 edges, and 95 components.

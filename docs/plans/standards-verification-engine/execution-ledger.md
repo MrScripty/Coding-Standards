@@ -5535,3 +5535,18 @@
 - Final generated evidence contains 95 nodes, 603 edges, and 95 components
   without copied child behavior, wrappers, compatibility representations,
   false dependencies, dual authority, or fallback.
+## 2026-08-21 - M6-I35 Frontend View-Model Lineage Admission
+
+- Fresh post-M6-I34 evidence selects the shortest of 18 caller-free verifiers:
+  the 61-line Frontend view-model-lineage checker.
+- Its 12 typed decisions, legacy and canonical projections, prohibited fixed
+  defaults, and six exact dispositions require no new engine capability.
+- Architecture durable-workflow policy and Frontend rendering/synchronization
+  remain independently executed Bash gates through four admitted current edge
+  records. Four historical records will transfer to exact suite evidence only
+  at acceptance.
+- Admitted M6-I35 at train order 150. No policy, fixture, disposition,
+  owner-validation, engine, nested gate, wrapper, compatibility representation,
+  false dependency, dual authority, or fallback changes.
+- Admission evidence contains 181 suites, 91 Bash checkers, 95 nodes, 604
+  edges, and 95 components.

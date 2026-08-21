@@ -4809,3 +4809,18 @@ owner-path, and stale-evidence drift. Final graph evidence contains 95 nodes,
 checkers. No source, decomposition, report, engine, nested gate, wrapper,
 compatibility representation, false dependency, dual authority, or fallback
 changed.
+### M6-I35 Frontend View-Model Lineage Admission
+
+Fresh post-M6-I34 evidence contains 18 caller-free verifiers and selects the
+61-line Frontend view-model-lineage checker as the shortest owner-coherent
+frontier. Its 12 typed decisions, legacy and canonical projections, prohibited
+fixed defaults, and six exact dispositions are expressible with existing
+generic checks.
+
+Architecture durable-workflow policy and Frontend rendering/synchronization
+remain independently owned retained gates through four admitted current edge
+records. Four accepted historical records will transfer from checker evidence
+to the exact registered suite only at acceptance. M6-I35 is admitted at train
+order 150 without policy, fixture, disposition, owner-validation, engine,
+nested-gate, wrapper, compatibility representation, false dependency, dual
+authority, or fallback changes.
