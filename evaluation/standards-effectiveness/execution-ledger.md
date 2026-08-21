@@ -14418,3 +14418,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   lifecycle, and generated freshness pass. Final graph: 75 Bash checkers, 79
   nodes, 533 edges, 79 components. No fallback or compatibility authority
   remains.
+
+## 2026-08-21 - M6-I51 TypeScript Async Owner Acceptance
+
+- Fresh post-M6-I50 evidence selected the 79-line TypeScript Async owner checker
+  for one `serial-coherent` package at train order 166.
+- The registered seven-check suite preserves 14 typed decisions and canonical
+  owner, Router, legacy, disposition, execution-overlay, and README evidence.
+- Row-35 current consumer authority no longer names the retired checker; row
+  13 and plan fixtures remain independent through four accepted edge records.
+- Both retained gates, 332 verifier tests, all 198 declarative suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 74 Bash checkers, 78
+  nodes, 527 edges, 78 components. No fallback or compatibility authority
+  remains.

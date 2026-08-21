@@ -5896,3 +5896,17 @@
 - The focused contract, 332 verifier tests, all 197 declarative suites, numeric
   lifecycle, and generated freshness pass. Final graph: 75 Bash checkers, 79
   nodes, 533 edges, 79 components.
+
+## 2026-08-21 - M6-I51 TypeScript Async Owner Acceptance
+
+- Fresh evidence selected the 79-line TypeScript Async owner checker as the
+  shortest of 17 caller-free verifiers and qualified it for
+  `serial-coherent` execution.
+- Replaced it with one seven-check language-profile suite covering 14 typed
+  decisions and six owner, route, legacy, lifecycle, and documentation
+  projections.
+- Removed the retired checker from row-35 current consumer authority and
+  preserved two independent gates through four accepted edge records.
+- Both retained gates, 332 verifier tests, all 198 declarative suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 74 Bash checkers, 78
+  nodes, 527 edges, 78 components.

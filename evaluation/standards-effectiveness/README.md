@@ -194,7 +194,7 @@ typed rejection of raw, evaluated, cross-grammar, partial, alternate, and
 default generated commands.
 
 `fixtures/typescript/async-owner-contract-decisions.tsv` and
-`verify-typescript-async-owner-contract.sh` establish the TypeScript Async
+the registered `typescript-async-owner-contract` suite establish the TypeScript Async
 profile before population. They require scoped current-invocation authority
 and explicit terminal classification while rejecting process-global counters,
 stale mutation, discarded completion, ignored cancellation, alternate

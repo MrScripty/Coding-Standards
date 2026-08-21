@@ -984,3 +984,8 @@ requires = ["milestone-7-row-47-decomposition"]
 id = "documentation-decisions"
 path = "evaluation/standards-effectiveness/suites/documentation-decisions.toml"
 requires = []
+
+[[suites]]
+id = "typescript-async-owner-contract"
+path = "evaluation/standards-effectiveness/suites/typescript-async-owner-contract.toml"
+requires = []

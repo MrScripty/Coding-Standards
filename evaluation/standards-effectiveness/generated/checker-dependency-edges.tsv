@@ -55,7 +55,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-unsafe-contracts.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-wire-representation.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
@@ -117,7 +116,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-rust-async-boundary.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv	evaluation/standards-effectiveness/verify-cross-language-contract.sh
@@ -328,8 +326,6 @@ executable_reference	evaluation/standards-effectiveness/verify-security-index-cl
 executable_reference	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-network-transport-policy.sh
 executable_reference	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
-executable_reference	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-13-decomposition.sh
-executable_reference	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 executable_reference	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 executable_reference	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh
@@ -528,7 +524,5 @@ verifier_dependency	evaluation/standards-effectiveness/verify-security-index-clo
 verifier_dependency	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-network-transport-policy.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-security-index-closure.sh	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-13-decomposition.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh

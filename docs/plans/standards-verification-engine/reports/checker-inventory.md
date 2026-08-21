@@ -5192,3 +5192,20 @@ predecessor transfer records now resolve to the suite. The focused contract,
 freshness pass. Final evidence contains 75 Bash checkers, 79 nodes, 533 edges,
 and 79 components. No normative source, engine, helper, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changed.
+
+### M6-I51 TypeScript Async Owner Acceptance
+
+Fresh post-M6-I50 evidence selected the 79-line TypeScript Async owner checker
+as the shortest of 17 caller-free verifiers. The `serial-coherent` package
+replaces it with one seven-check language-profile suite covering 14 typed
+decisions, owner, Router, legacy, disposition, execution-overlay, and README
+projections.
+
+Row-35 consumer authority no longer names the retired README assertion. Row 13
+and plan fixtures remain independently executable through four accepted edge
+records. The 14 decisions include nine typed negative outcomes. Both retained
+gates, 332 verifier tests, all 198 declarative suites, numeric lifecycle, and
+generated freshness pass. Final evidence contains 74 Bash checkers, 78 nodes,
+527 edges, and 78 components. No normative source, engine, helper, wrapper,
+compatibility representation, false dependency, dual authority, or fallback
+changed.
