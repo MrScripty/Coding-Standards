@@ -2,13 +2,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 4 unique proposals reviewed; retirement re-plan required
+**Current phase:** Milestone 4 superseded unique-proposal retirement
 
-**Next slice:** none until explicit authority selects retention or permanent retirement for the exact 12 superseded unique proposals
+**Next slice:** revalidate and permanently retire the exact 12 superseded proposal refs, then record final repository integrity
 
 **Acceptance status:** `pending`
 
-**Accepted base:** `481d8547d11c9910cb137e5a293f1bfade61547b`
+**Accepted base:** `f3488ee3df6861bec6adfc8951b60a66939cbc93`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -60,6 +60,7 @@ ancestry, or patch equivalence as deletion authority.
 | Registration boundary | Administrative pruning and filesystem worktree removal are distinct operations with distinct evidence. |
 | Branch boundary | Ancestry and patch equivalence may trigger review but cannot authorize deletion without terminal ownership and replacement lineage. |
 | Mapped redundant refs | `git branch -D` is authorized only for the exact 115 `candidate-delete-mapped` rows accepted at `481d8547`: every tip must remain unchanged, every source commit must retain one accepted `main` replacement and semantic-subject agreement, and no branch may be checked out, published, shared, or contain unmapped history. This deletes redundant local refs; it does not authorize history rewrite or deletion of any unique branch. |
+| Superseded unique proposals | Permanently retire only the exact 12 branches and commits in `unique-proposal-dispositions.tsv` after revalidating unchanged tips, `superseded` terminal state, accepted transition commits on `main`, current registered suites, absent replaced checkers, and no checkout, upstream, remote, tag, shared consumer, or long-lived purpose. The recovery outcome is permanent retirement without an archive ref because accepted implementations and durable review evidence own the useful outcome. |
 | Batch size | Group only resources sharing ownership, disposition, risk, and verification contracts; preserve exact per-resource evidence. |
 | Integration owner | One serial owner controls inventory, cleanup commands, acceptance evidence, and shared Git authority. |
 
@@ -74,10 +75,7 @@ ancestry, or patch equivalence as deletion authority.
 
 ## Blockers
 
-- The 12 remaining branches each contain one unique, unaccepted proposal commit.
-  Their work is superseded by exact accepted `main` transitions, but permanent
-  ref retirement requires separate destructive authority naming those branches
-  and commits. No such deletion is admitted by the current slice.
+- `none`
 
 ## Re-Plan Triggers
 

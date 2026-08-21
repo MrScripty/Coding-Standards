@@ -109,3 +109,19 @@ explicit `start` operation.
 - Permanent retirement would discard the last branch refs reaching those 12
   unique commits. The required exact destructive authority is a re-plan
   trigger, so all refs remain present.
+
+## 2026-08-21 - Superseded Unique-Proposal Retirement Re-Plan
+
+- Operation: `continue` from clean accepted revision
+  `f3488ee3df6861bec6adfc8951b60a66939cbc93`.
+- The user explicitly selected permanent retirement for the recommended exact
+  12-branch superseded-proposal set.
+- Confirmed each source commit remains unaccepted and reachable through no tag,
+  remote branch, upstream, or worktree. The branches have no long-lived
+  purpose, and accepted `main` implementations own every useful transition.
+- Admitted `git branch -D` only for the exact branch and commit pairs in the
+  accepted unique-proposal disposition table after all supersession and current
+  artifact facts are revalidated.
+- Selected no archive tag or bundle: durable review evidence records the
+  rejected proposal identity and accepted successor, while preserving obsolete
+  unaccepted implementations would create a new retention obligation.
