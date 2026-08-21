@@ -4436,3 +4436,17 @@ Final evidence contains 171 suites, 102 Bash checkers, 106 nodes, 647 edges,
 and 106 components. Focused, independent-gate, package/edge, numeric, generated,
 mutation, all-suite, complete-checkpoint, plan, and diff checks pass without an
 engine, source, fixture, false dependency, wrapper, compatibility, or fallback.
+
+### M6-I24 Rust Binding Annotation Placement Admission
+
+The fresh post-M6-I23 graph selects the 39-line caller-free Rust annotation
+placement checker. Existing generic checks express its nine decisions,
+canonical Rust Language Bindings text, bounded legacy-index section, and exact
+`STD-0784` disposition. The README projection must name the replacement suite.
+
+Row-8 lifecycle and Rust binding architecture remain independent registered
+Bash gates through four admitted lifecycle edges. Disposable final state passes
+all 172 suites and the complete checkpoint at 101 Bash checkers, 105 nodes, 645
+edges, and 105 components. M6-I24 is admitted at train order 139 without a
+policy, fixture, engine, registry, Bash repair, wrapper, compatibility, or
+fallback change.

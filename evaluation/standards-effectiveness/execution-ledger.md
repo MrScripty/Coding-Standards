@@ -13629,3 +13629,19 @@ and 106 components. Focused, independent-gate, package/edge, numeric, generated,
 plan, mutation, all-suite, complete-checkpoint, source-integrity, and diff checks
 pass without an engine, source, fixture, false dependency, wrapper,
 compatibility, or fallback change.
+
+## 2026-08-20 M6-I24 Rust Binding Annotation Placement Admission
+
+**Outcome:** admitted at train order 139; atomic acceptance is next.
+
+Fresh post-M6-I23 evidence selects the 39-line caller-free Rust annotation
+placement checker. Its nine decisions, canonical Rust Language Bindings text,
+bounded legacy-index section, exact `STD-0784` disposition, and README
+projection form one owner contract.
+
+Row-8 lifecycle and Rust binding architecture remain independently executed
+through four admitted edge records. Disposable final state passes all 172
+declarative suites and the complete checkpoint at 101 Bash checkers, 105 nodes,
+645 edges, and 105 components. Admission state has 171 suites, 102 Bash
+checkers, 106 nodes, 651 edges, and 106 components without policy, fixture,
+engine, registry, checker, wrapper, compatibility, or fallback changes.

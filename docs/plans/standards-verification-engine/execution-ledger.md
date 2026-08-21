@@ -5117,3 +5117,20 @@
   and 106 components. No engine branch, false dependency, Bash repair, wrapper,
   compatibility representation, dual authority, or fallback remains.
 - Fresh-graph owner-coherent package selection is next.
+
+## 2026-08-20 - M6-I24 Rust Binding Annotation Placement Admission
+
+- Started from clean accepted revision `fdb1ade`; fresh post-M6-I23 evidence
+  selected the 39-line caller-free Rust annotation-placement checker.
+- Admitted one `profile.language.rust.language-bindings` package at train order
+  139. Its nine decisions, canonical profile text, bounded legacy-index section,
+  and exact `STD-0784` disposition remain the sole policy sources.
+- Four admitted edge dispositions preserve row-8 lifecycle and Rust binding
+  architecture as independent gates; no suite dependency or false execution
+  edge is introduced.
+- Disposable final state passes the focused suite, both independent gates, all
+  172 declarative suites, and the complete checkpoint at 101 Bash checkers,
+  105 nodes, 645 edges, and 105 components.
+- Admission evidence contains 171 suites, 102 Bash checkers, 106 nodes, 651
+  edges, and 106 components. No policy, fixture, engine, registry, checker, or
+  fallback behavior changes before atomic acceptance.

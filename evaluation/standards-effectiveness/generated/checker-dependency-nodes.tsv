@@ -63,7 +63,7 @@ evaluation/standards-effectiveness/verify-milestone-7-row-43-decomposition.sh	ve
 evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh	verifier	yes	component-0062	1	no	9	1	1	1	8
 evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh	verifier	yes	component-0063	1	no	4	3	1	3	2
 evaluation/standards-effectiveness/verify-milestone-7-row-7-decomposition.sh	verifier	yes	component-0064	1	no	4	1	1	1	2
-evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh	verifier	yes	component-0065	1	no	4	4	1	4	2
+evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh	verifier	yes	component-0065	1	no	4	4	2	4	2
 evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh	verifier	yes	component-0066	1	no	2	3	2	3	1
 evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	verifier	yes	component-0067	1	no	3	3	2	3	3
 evaluation/standards-effectiveness/verify-network-transport-policy.sh	verifier	yes	component-0068	1	no	6	2	2	2	3
@@ -77,8 +77,8 @@ evaluation/standards-effectiveness/verify-resilience-recovery-policy.sh	verifier
 evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh	verifier	yes	component-0076	1	no	1	3	1	3	1
 evaluation/standards-effectiveness/verify-rust-async-boundary.sh	verifier	yes	component-0077	1	no	3	0	4	0	2
 evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	verifier	yes	component-0078	1	no	4	2	2	2	3
-evaluation/standards-effectiveness/verify-rust-binding-annotation-placement.sh	verifier	yes	component-0079	1	no	6	0	0	0	2
-evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	verifier	yes	component-0080	1	no	5	4	3	4	2
+evaluation/standards-effectiveness/verify-rust-binding-annotation-placement.sh	verifier	yes	component-0079	1	no	6	0	2	0	2
+evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	verifier	yes	component-0080	1	no	5	4	4	4	2
 evaluation/standards-effectiveness/verify-rust-binding-artifact-selection.sh	verifier	yes	component-0081	1	no	8	0	1	0	2
 evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	verifier	yes	component-0082	1	no	6	0	2	0	5
 evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	verifier	yes	component-0083	1	no	1	5	3	5	2
