@@ -5099,3 +5099,21 @@
 - Admission evidence contains 170 suites, 103 Bash checkers, 107 nodes, 655
   edges, and 107 components. No source, fixture, engine, registry, checker, or
   fallback behavior changes before atomic acceptance.
+
+## 2026-08-20 - M6-I23 Dependency Standards Consolidation Acceptance
+
+- Registered `dependency-standards-consolidation` with four generic checks for
+  all 20 decisions, canonical owner text, the legacy-index boundary, and exact
+  source-scoped `STD-0300` through `STD-0348` dispositions.
+- Removed the replaced Bash checker, transferred source-package evidence to
+  the suite, and accepted the package plus four independent-gate edge records.
+- The Dependencies owner contract and execution train remain separately
+  executed. Normative and decision-fixture sources are byte-identical to the
+  admitted base.
+- Focused suite and gate checks, package/edge and numeric lifecycle, generated
+  freshness, all 171 suites, mutation parity, the complete 102-checker mixed
+  checkpoint, plan structure, diff integrity, and exact staged scope pass.
+- Final generated evidence contains 102 Bash checkers, 106 nodes, 647 edges,
+  and 106 components. No engine branch, false dependency, Bash repair, wrapper,
+  compatibility representation, dual authority, or fallback remains.
+- Fresh-graph owner-coherent package selection is next.

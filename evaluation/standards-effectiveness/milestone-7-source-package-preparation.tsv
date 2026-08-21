@@ -1,6 +1,6 @@
 manifest_order	source	verifier_subjects
 5	CONCURRENCY-STANDARDS.md	checker:evaluation/standards-effectiveness/verify-concurrency-policy.sh
-8	DEPENDENCY-STANDARDS.md	checker:evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh
+8	DEPENDENCY-STANDARDS.md	suite:dependency-standards-consolidation
 17	LAUNCHER-STANDARDS.md	checker:evaluation/standards-effectiveness/verify-launcher-population.sh
 18	languages/rust/RUST-API-STANDARDS.md	suite:rust-api-rustdoc
 20	languages/rust/RUST-CROSS-PLATFORM-STANDARDS.md	suite:rust-target-configuration

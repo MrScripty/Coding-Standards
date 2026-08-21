@@ -13609,3 +13609,23 @@ executed through four admitted edge records. Disposable final state passes all
 nodes, 647 edges, and 106 components. Admission state has 170 suites, 103 Bash
 checkers, 107 nodes, 655 edges, and 107 components without source, fixture,
 engine, registry, checker, wrapper, compatibility, or fallback changes.
+
+## 2026-08-20 M6-I23 Dependency Standards Consolidation Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Dependencies suite owns all 20 consolidation decisions,
+canonical owner text, the legacy-index boundary, and exact source-scoped
+`STD-0300` through `STD-0348` dispositions. The policy and fixture sources are
+unchanged.
+
+The Dependencies owner contract and execution train remain independently
+executed through four accepted edge records. Source-package evidence now names
+the suite, M6-I23 is accepted at train order 138, and the Bash checker is
+absent.
+
+Final evidence contains 171 suites, 102 Bash checkers, 106 nodes, 647 edges,
+and 106 components. Focused, independent-gate, package/edge, numeric, generated,
+plan, mutation, all-suite, complete-checkpoint, source-integrity, and diff checks
+pass without an engine, source, fixture, false dependency, wrapper,
+compatibility, or fallback change.

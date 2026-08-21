@@ -566,6 +566,11 @@ path = "evaluation/standards-effectiveness/suites/release-build-procedure.toml"
 requires = []
 
 [[suites]]
+id = "dependency-standards-consolidation"
+path = "evaluation/standards-effectiveness/suites/dependency-standards-consolidation.toml"
+requires = []
+
+[[suites]]
 id = "rust-dependency-owner-contract"
 path = "evaluation/standards-effectiveness/suites/rust-dependency-owner-contract.toml"
 requires = []

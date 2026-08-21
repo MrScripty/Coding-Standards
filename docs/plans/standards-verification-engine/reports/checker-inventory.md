@@ -4420,3 +4420,19 @@ state passes all 171 suites and the complete checkpoint at 102 Bash checkers,
 106 nodes, 647 edges, and 106 components. M6-I23 is admitted at train order 138
 without a source, fixture, engine, registry, Bash repair, wrapper,
 compatibility, or fallback change.
+
+### M6-I23 Dependency Standards Consolidation Acceptance
+
+The registered `dependency-standards-consolidation` suite now owns all 20
+decisions, canonical Dependencies owner text, the legacy-index boundary, and
+exact source-scoped `STD-0300` through `STD-0348` dispositions. Normative and
+fixture sources remain unchanged.
+
+The Dependencies owner-contract and execution-train checkers remain independent
+through four accepted edge records. Source-package evidence names the suite,
+M6-I23 is accepted at train order 138, and the replaced checker is absent.
+
+Final evidence contains 171 suites, 102 Bash checkers, 106 nodes, 647 edges,
+and 106 components. Focused, independent-gate, package/edge, numeric, generated,
+mutation, all-suite, complete-checkpoint, plan, and diff checks pass without an
+engine, source, fixture, false dependency, wrapper, compatibility, or fallback.
