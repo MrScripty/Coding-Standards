@@ -14321,3 +14321,11 @@ gates, 35 graph tests, and 330 verifier tests pass. The all-suite gate exposes
 an unadmitted dependency: row-35 closure still names the row-39 checker in its
 transitive-caller manifest and direct invocation check. Acceptance and edge
 transfer are withheld pending exact write-set and consumer-authority recovery.
+## 2026-08-21 - M6-I44 Row-39 Consumer Re-plan
+
+- Fresh accepted-base evidence identifies the row-35 transitive-caller table
+  and suite as current consumer authority for the retiring row-39 checker.
+- Expanded the admitted package write set to include both artifacts.
+- The accepted transition removes the obsolete caller and direct invocation
+  assertion without inventing a suite caller or weakening exact closure.
+- M6-I44 implementation remains pending; no later package is admitted.

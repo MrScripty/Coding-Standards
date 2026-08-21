@@ -5797,3 +5797,14 @@
   checker as a transitive contract caller and direct invocation subject.
 - M6-I44 remains admitted. Re-plan its frozen write set and exact row-35
   consumer transition before acceptance; no later package is admitted.
+
+## 2026-08-21 - M6-I44 Row-39 Consumer Re-plan
+
+- Fresh evidence confirms row 35 owns an exact current Bash-caller set, not a
+  history or semantic-replacement map.
+- Expanded M6-I44's write set to own the row-35 caller manifest and suite.
+- Selected atomic removal of the obsolete row-39 caller row and invocation
+  assertion while preserving strict closure over all remaining callers.
+- Required mutations reject stale row-39 authority and omission of a live
+  caller. No replacement caller, checker retention, compatibility, weakened
+  closure, or fallback is authorized.

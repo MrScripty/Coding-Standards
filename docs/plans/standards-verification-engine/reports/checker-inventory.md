@@ -5062,3 +5062,18 @@ checker. Correct retirement therefore requires an explicit row-35 fixture and
 suite transition not present in M6-I44's frozen write set. M6-I44 remains
 admitted; acceptance evidence and inherited edges remain untransferred. Do not
 retain the Bash checker, weaken row-35 closure, or add fallback authority.
+
+### M6-I44 Row-39 Consumer Re-plan
+
+Fresh accepted-base inspection confirms that row 35 records current executable
+callers of `verify-contract-ownership.sh`, not historical or semantic
+replacements. Deleting the row-39 checker therefore removes one real caller;
+the registered row-39 suite does not become a caller and must not be inserted
+as inferred authority.
+
+The corrected package write set owns the row-35 caller manifest and suite.
+Implementation will remove the obsolete caller row and its direct text check,
+retain exact derived closure and direct invocation checks for the three
+remaining callers, and use disposable mutations to reject stale row-39 caller
+authority and omission of a remaining live caller. This is a final-state
+consumer transition with no compatibility representation or fallback.

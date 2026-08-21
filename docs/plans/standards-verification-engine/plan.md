@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** re-plan M6-I44 from fresh graph and row-35 consumer evidence
+**Next slice:** implement corrected M6-I44 from its accepted row-35 consumer re-plan
 
 **Acceptance status:** `pending`
 
@@ -12,8 +12,8 @@
 coordination checker with one registered reference-owner suite at train order
 158.
 
-**Latest admitted slice:** M6-I44 at train order 159 requires write-set and
-consumer-authority re-planning before acceptance.
+**Latest admitted slice:** M6-I44 at train order 159 has an accepted expanded
+write set and row-35 consumer transition; implementation remains pending.
 
 **Accepted dependency:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 
@@ -144,7 +144,7 @@ ownership. Rejected M6-I44 implementation evidence is not current authority.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I44 admitted at train order 159; row-35 consumer authority requires re-planning |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I44 corrected re-plan accepted; implementation is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -189,10 +189,11 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Re-plan M6-I44's exact write set and acceptance evidence from fresh graph
-   evidence for the row-35
-   transitive contract-caller authority; do not preserve the removed checker.
-2. Accept the corrected M6-I44 package only after all registered suites pass.
+1. Implement M6-I44 with the accepted expanded write set: remove the obsolete
+   row-39 caller from row-35's exact current-caller authority while preserving
+   strict closure for every remaining caller; do not infer a replacement.
+2. Accept M6-I44 only after focused mutation evidence and all registered suites
+   prove the row-35 and row-39 final state.
 3. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 4. Select and record the proportional execution mode before changing package
