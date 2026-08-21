@@ -4265,3 +4265,22 @@ suites plus the complete checkpoint at 107 Bash checkers, 111 nodes, 674 edges,
 and 111 components. M6-I18 is admitted at train order 133; no policy, fixture,
 engine, helper, suite dependency, copied count, manual numeric mapping, Bash
 repair, wrapper, compatibility path, or fallback is introduced.
+
+### M6-I18 Accessibility Interaction Semantics Acceptance
+
+The registered `accessibility-interaction-semantics` suite now owns all 15
+interaction decisions, canonical Accessibility language, web reference
+projection, bounded legacy-index closure, and exact STD-0008 through STD-0012
+projection. The existing fixture and policy sources are unchanged.
+
+All four lifecycle edges are accepted and continue to execute the Accessibility
+owner contract and row-28 lifecycle independently. Two M6-I16 records now point
+to the exact suite evidence, the Bash checker is absent, and whole-checker
+numeric lifecycle requires no manual candidate mapping.
+
+Final generated evidence contains 107 Bash checkers, 111 nodes, 674 edges, and
+111 components. Focused suite and independent-gate checks, package and edge
+authority, numeric lifecycle, generated freshness, all 166 declarative suites,
+typed mutations, complete checkpoint, and diff integrity pass without an
+engine change, helper migration, suite dependency, copied count, manual numeric
+mapping, Bash repair, wrapper, compatibility path, or fallback.

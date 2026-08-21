@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 7 verification migration
 
-**Next slice:** verification-engine acceptance of admitted M6-I18 Accessibility
-interaction semantics
+**Next slice:** verification-engine audit of the fresh post-M6-I18 graph
+without preselecting M6-I19
 
 **Acceptance status:** `partial`
 
@@ -146,22 +146,21 @@ complete; `Accepted` requires the named evidence.
 without losing mapped semantics.
 
 **Accepted boundary:** normative owner consolidation is complete through the
-recorded `7.4c3` packages. Verification migration is accepted through M6-I17
-at train order 132. M6-I18 is admitted at train order 133 from fresh
-post-M6-I17 graph evidence. The canonical package manifest contains the exact
+recorded `7.4c3` packages. Verification migration is accepted through M6-I18
+at train order 133. The canonical package manifest contains the exact
 package state; the execution ledger
 contains detailed slice evidence.
 
 **Accepted recovery boundary:** M6-I16 is accepted after one-owner final-state
 proof. The [work proportionality and policy impact recovery](../docs/plans/work-proportionality-and-policy-impact/plan.md)
 and [generic edge-system recovery](../docs/plans/generic-edge-system/plan.md)
-are accepted. Fresh post-recovery evidence selected and accepted M6-I17; no
-pre-recovery package evidence was reused.
+are accepted. Fresh post-recovery evidence selected M6-I17 and fresh
+post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Accept admitted M6-I18 through the verification-engine plan without changing
-   the Accessibility owner contract or row-28 lifecycle gates.
+1. Audit the fresh post-M6-I18 graph through the verification-engine plan
+   without preselecting M6-I19.
 2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
 3. Regenerate canonical inventories and prove exact dispositions, no source

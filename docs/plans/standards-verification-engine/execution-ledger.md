@@ -4764,6 +4764,25 @@
   repair, wrapper, compatibility path, or fallback is admitted.
 - Atomic M6-I18 acceptance is next.
 
+## 2026-08-20 - M6-I18 Accessibility Interaction Semantics Acceptance
+
+- Registered one five-check Accessibility suite for 15 interaction decisions,
+  canonical owner text, web reference, bounded legacy closure, and exact
+  STD-0008 through STD-0012 dispositions; fixtures and policy sources remain
+  unchanged.
+- Accepted train order 133 and all four current edge dispositions. The
+  Accessibility owner contract and row-28 lifecycle remain independent checker
+  gates, not suite dependencies; two M6-I16 records now point to exact suite
+  evidence.
+- Deleted only the replaced Bash checker and derived whole-checker numeric
+  retirement without a candidate mapping.
+- Final evidence contains 166 declarative suites, 107 Bash checkers, 111 nodes,
+  674 edges, and 111 components. Focused, lifecycle, generated, plan, mutation,
+  all-suite, complete-checkpoint, and diff checks pass without an engine change,
+  helper migration, compatibility path, or fallback.
+- Fresh-graph owner-coherent package selection is next; M6-I19 is not
+  preselected.
+
 ## 2026-08-20 - M6-I15 Accessibility Name-And-Input Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its five

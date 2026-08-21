@@ -821,6 +821,11 @@ path = "evaluation/standards-effectiveness/suites/accessibility-focus-lifecycle.
 requires = []
 
 [[suites]]
+id = "accessibility-interaction-semantics"
+path = "evaluation/standards-effectiveness/suites/accessibility-interaction-semantics.toml"
+requires = []
+
+[[suites]]
 id = "generated-command-security"
 path = "evaluation/standards-effectiveness/suites/generated-command-security.toml"
 requires = []

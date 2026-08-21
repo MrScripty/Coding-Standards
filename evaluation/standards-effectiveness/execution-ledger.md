@@ -13087,6 +13087,28 @@ No policy, fixture, engine, helper, suite dependency, copied count, manual
 numeric mapping, Bash repair, wrapper, compatibility behavior, or fallback is
 admitted.
 
+## 2026-08-20 M6-I18 Accessibility Interaction Semantics Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Accessibility suite now owns all 15 interaction decisions,
+canonical owner text, web reference projection, bounded legacy closure, and
+exact STD-0008 through STD-0012 projection. Existing fixtures and policy sources
+are unchanged. The Accessibility owner contract and row-28 lifecycle remain
+independently executed through four accepted current edges.
+
+M6-I18 is accepted at train order 133, two M6-I16 records point to exact suite
+evidence, and the replaced Bash checker is absent. Whole-checker numeric
+lifecycle derives retirement without a candidate map. Final evidence contains
+166 suites, 107 Bash checkers, 111 nodes, 674 edges, and 111 components.
+
+Focused suite and independent-gate checks, package/edge authority, numeric
+lifecycle, removal, generated freshness, both plan validators, all 166
+declarative suites, complete checkpoint, mutation parity, and diff integrity
+pass. No policy or fixture change, engine capability, helper migration, suite
+dependency, copied count, manual numeric mapping, Bash repair, wrapper,
+compatibility path, or fallback remains.
+
 ## 2026-08-19 VE078 Source-Index Component Replacement Re-plan
 
 **Outcome:** capability-first complete-component replacement selected; no
