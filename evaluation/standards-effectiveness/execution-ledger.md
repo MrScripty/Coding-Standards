@@ -14134,3 +14134,19 @@ retained Bash checkers. Final graph evidence contains 92 nodes, 592 edges, and
 92 components without policy, fixture, disposition, owner-validation,
 nested-gate, engine, wrapper, compatibility representation, false-dependency,
 dual-authority, or fallback changes.
+## 2026-08-21 M6-I38 Architecture Composition-Root Admission
+
+**Outcome:** admitted at train order 153; atomic acceptance is next.
+
+Fresh post-M6-I37 evidence selects the shortest of 18 caller-free verifiers,
+the 61-line Architecture composition-root checker. Its nine typed decisions,
+exact legacy and reference projections, case-insensitive fixed-default
+rejection, five exact dispositions, and keyed row-37 owner lineage fit existing
+decision, text, table, and keyed-relation checks.
+
+Architecture data-authority policy remains independently executed through two
+admitted current edge records. Four historical checker records will transfer
+to exact suite evidence only at acceptance. No policy, fixture, disposition,
+owner-validation, engine, nested gate, wrapper, compatibility representation,
+false dependency, dual authority, or fallback changes. Admission evidence
+contains 184 suites, 88 Bash checkers, 92 nodes, 593 edges, and 92 components.

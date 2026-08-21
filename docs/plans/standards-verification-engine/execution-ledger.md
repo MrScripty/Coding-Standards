@@ -5633,3 +5633,18 @@
   with 184 suites and 88 retained Bash checkers, without wrappers,
   compatibility representations, false dependencies, dual authority, or
   fallback.
+## 2026-08-21 - M6-I38 Architecture Composition-Root Admission
+
+- Fresh post-M6-I37 evidence selects the shortest of 18 caller-free verifiers:
+  the 61-line Architecture composition-root checker.
+- Its nine typed decisions, exact legacy and reference projections,
+  case-insensitive fixed-default rejection, five exact dispositions, and keyed
+  row-37 owner lineage require no new engine capability.
+- Architecture data-authority policy remains an independently executed Bash
+  gate through two admitted current edge records. Four historical records will
+  transfer to exact suite evidence only at acceptance.
+- Admitted M6-I38 at train order 153. No policy, fixture, disposition,
+  owner-validation, engine, nested gate, wrapper, compatibility
+  representation, false dependency, dual authority, or fallback changes.
+- Admission evidence contains 184 suites, 88 Bash checkers, 92 nodes, 593
+  edges, and 92 components.

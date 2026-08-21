@@ -4899,3 +4899,17 @@ drift. Final graph evidence contains 92 nodes, 592 edges, and 92 components
 with 184 registered suites and 88 retained Bash checkers. No policy, fixture,
 disposition, owner-validation, nested gate, engine, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changed.
+### M6-I38 Architecture Composition-Root Admission
+
+Fresh post-M6-I37 evidence exposes 18 caller-free verifiers and selects the
+61-line Architecture composition-root checker as the shortest owner-coherent
+frontier. Its nine typed decisions, exact legacy and reference projections,
+case-insensitive fixed-default rejection, five exact dispositions, and keyed
+row-37 owner lineage require no new engine capability.
+
+Architecture data-authority policy remains an independently executed gate
+through two admitted current edge records. Four accepted historical records
+will transfer from checker evidence to the exact registered suite only at
+acceptance. M6-I38 is admitted at train order 153 without policy, fixture,
+disposition, owner-validation, engine, nested-gate, wrapper, compatibility
+representation, false dependency, dual authority, or fallback changes.
