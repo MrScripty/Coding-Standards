@@ -929,3 +929,8 @@ requires = []
 id = "architecture-data-authority-pattern"
 path = "evaluation/standards-effectiveness/suites/architecture-data-authority-pattern.toml"
 requires = []
+
+[[suites]]
+id = "architecture-monorepo-pattern"
+path = "evaluation/standards-effectiveness/suites/architecture-monorepo-pattern.toml"
+requires = []

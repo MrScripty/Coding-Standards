@@ -5702,3 +5702,10 @@
   representation, false dependency, dual authority, or fallback changes.
 - Admission evidence contains 186 suites, 86 Bash checkers, 90 nodes, 587
   edges, and 90 components.
+## 2026-08-21 - M6-I40 Architecture Monorepo Acceptance
+
+- Replaced the checker with the seven-check registered reference suite.
+- Preserved Architecture layered policy independently and transferred four
+  historical records. Seven mutations reject semantic and stale-evidence
+  drift.
+- Final evidence: 187 suites, 85 Bash checkers, 89 nodes, 583 edges, 89 components.

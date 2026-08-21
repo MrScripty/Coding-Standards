@@ -14209,3 +14209,13 @@ to exact suite evidence only at acceptance. No policy, fixture, disposition,
 owner-validation, engine, nested gate, wrapper, compatibility representation,
 false dependency, dual authority, or fallback changes. Admission evidence
 contains 186 suites, 86 Bash checkers, 90 nodes, 587 edges, and 90 components.
+## 2026-08-21 M6-I40 Architecture Monorepo Acceptance
+
+**Outcome:** accepted at train order 155; fresh graph audit is next.
+
+The registered seven-check reference suite preserves eight decisions, exact
+projections and dispositions, fixed-default rejection, and row-36 lineage.
+Architecture layered policy remains independent; four historical records now
+name suite evidence. Seven mutations reject drift. Broad and complete
+verification pass with 187 suites, 85 Bash checkers, 89 nodes, 583 edges, and
+89 components.
