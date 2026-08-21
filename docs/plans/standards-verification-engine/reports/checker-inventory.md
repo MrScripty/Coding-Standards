@@ -4383,3 +4383,15 @@ Final evidence contains 169 suites, 104 Bash checkers, 108 nodes, 660 edges,
 and 108 components. Focused, row-35, row-15, package/edge, numeric, generated,
 plan, mutation, all-suite, complete-checkpoint, and diff checks pass without an
 engine, source, fixture, dependency, wrapper, compatibility, or fallback change.
+
+### M6-I22 Documentation Index-Closure Admission
+
+The fresh graph selects the 38-line caller-free Documentation index-closure
+checker. Existing generic checks express its durable authority: exact
+`STD-0349`, an exact empty source-gap table, and required non-normative index
+routes. Checker-self text and nested execution are not retained semantics.
+
+Four current dependencies remain independent registered Bash gates through
+eight admitted lifecycle edges. Disposable final state passes all 170 suites
+and the complete checkpoint at 103 Bash checkers, 107 nodes, 653 edges, and 107
+components without an engine, source, fixture, wrapper, or fallback change.

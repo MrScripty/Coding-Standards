@@ -4728,6 +4728,17 @@
   pass without compatibility or fallback.
 - Fresh-graph package selection is next; M6-I22 is not preselected.
 
+## 2026-08-20 - M6-I22 Documentation Index-Closure Admission
+
+- Fresh post-M6-I21 evidence selected the 38-line Documentation index-closure
+  checker as the shortest caller-free owner-coherent package.
+- Admitted existing table and text checks for exact `STD-0349`, the empty
+  source-gap set, and required index routes. Four invoked checkers remain
+  independent gates through eight admitted edges.
+- Disposable final state passes all 170 suites and the complete checkpoint at
+  103 Bash checkers, 107 nodes, 653 edges, and 107 components. No source,
+  fixture, engine, dependency, wrapper, compatibility path, or fallback changes.
+
 ## 2026-08-20 - M6-I16 Accessibility Focus-Lifecycle Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its modality,
