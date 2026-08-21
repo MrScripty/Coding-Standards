@@ -5391,3 +5391,21 @@
   representation, false dependency, or fallback changes.
 - Admission evidence contains 177 suites, 95 Bash checkers, 99 nodes, 623
   edges, and 99 components.
+
+## 2026-08-20 - M6-I31 Row-40 Decomposition Acceptance
+
+- Added the registered `milestone-7-row-40-decomposition` suite with exact
+  execution-train, P32 package, owner-validation, decomposition-text, and
+  canonical owner-path evidence.
+- Kept Architecture pattern-reference ownership and execution-train lifecycle
+  as independently executed Bash gates. Their four M6-I31 rows are accepted,
+  while both M6-I30 historical references now point to exact row-40 suite
+  evidence.
+- Deleted only the replaced row-40 checker. All migration inputs, Architecture
+  sources, and nested gates remain unchanged.
+- Five disposable mutations reject each represented authority. The 35 graph
+  tests, 326 verifier tests, all 178 declarative suites, and complete mixed
+  checkpoint with 94 retained Bash checkers pass.
+- Final generated evidence contains 98 nodes, 616 edges, and 98 components
+  without engine changes, copied nested behavior, wrappers, compatibility
+  representations, false dependencies, dual authority, or fallback.

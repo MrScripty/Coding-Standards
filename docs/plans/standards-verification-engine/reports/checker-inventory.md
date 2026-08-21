@@ -4672,3 +4672,19 @@ copied assertions or suite dependencies. Two M6-I30 historical records will
 transfer to exact suite evidence at acceptance. M6-I31 is admitted at train
 order 146 without migration-record changes, engine changes, wrappers,
 compatibility representations, false dependencies, dual authority, or fallback.
+
+### M6-I31 Row-40 Decomposition Acceptance
+
+The registered parent-plan suite replaces the 29-line checker with five
+existing generic checks. It preserves exact execution-train, P32 package,
+owner-validation, decomposition-text, and owner-path evidence. Architecture
+pattern-reference ownership and execution-train lifecycle remain independent
+retained gates through four accepted current edge records.
+
+The obsolete checker is absent, and both M6-I30 historical records now name
+the exact row-40 suite. Five mutation families fail as required, all Python and
+declarative tests pass, and the complete mixed checkpoint passes with 94
+retained Bash checkers. Final graph evidence contains 98 nodes, 616 edges, and
+98 components without source changes, engine changes, copied nested behavior,
+wrappers, compatibility representations, false dependencies, dual authority,
+or fallback.

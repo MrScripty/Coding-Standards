@@ -13883,3 +13883,21 @@ historical references will transfer to exact suite evidence at acceptance. No
 policy, migration record, nested checker, engine, wrapper, compatibility
 representation, false dependency, or fallback changes. Admission evidence
 contains 177 suites, 95 Bash checkers, 99 nodes, 623 edges, and 99 components.
+
+## 2026-08-20 M6-I31 Row-40 Decomposition Acceptance
+
+**Outcome:** accepted at train order 146; fresh-graph package selection is
+next.
+
+The registered parent-plan suite now proves the exact execution-train row, P32
+package, owner-validation record, decomposition contract, and canonical owner
+path. Architecture pattern-reference ownership and execution-train lifecycle
+remain independently executed through four accepted M6-I31 rows. Both M6-I30
+historical references now use exact row-40 suite evidence.
+
+The Bash checker is absent. Five disposable mutations, 35 graph tests, 326
+verifier tests, all 178 declarative suites, and the complete 94-checker
+checkpoint pass. Final graph evidence contains 98 nodes, 616 edges, and 98
+components without migration-record, Architecture-source, nested-gate, or
+engine changes, wrappers, compatibility representations, false dependencies,
+dual authority, or fallback.

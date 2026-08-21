@@ -884,3 +884,8 @@ requires = []
 id = "milestone-7-row-41-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-41-decomposition.toml"
 requires = []
+
+[[suites]]
+id = "milestone-7-row-40-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-40-decomposition.toml"
+requires = []
