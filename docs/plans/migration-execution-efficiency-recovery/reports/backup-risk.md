@@ -19,6 +19,14 @@ Immediately before mutation:
 live query confirmed `origin/main` exactly matched
 `9cdda3de3a81679ab0302b8b203ea15a3d26988f`.
 
-The backup dependency is therefore satisfied for migration resumption. The
-evidence commit that records this result must itself be fast-forwarded before
-new verifier implementation is accepted so remote authority remains current.
+The backup dependency is therefore satisfied for migration resumption. This
+authorization covered the bounded normal fast-forward publication operation;
+it does not create a per-commit approval gate. Subsequent local commits may
+accumulate until the next selected history-review or publication boundary.
+Reconfirm authority when the remote, destination ref, allowed scope, protected-
+branch contract, or fast-forward topology changes, or when a force update or
+history rewrite would be required.
+
+The execution environment may independently require egress approval for a
+later network operation. That platform permission is not a Coding Standards
+policy requiring repository maintainers to approve every push.

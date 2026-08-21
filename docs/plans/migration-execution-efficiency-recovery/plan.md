@@ -64,7 +64,7 @@ acceptance.
 | Pre-admitted mode | Retain separate admission when stale proposals, unresolved consumers, uncertain ownership, shared contracts, safety risk, or re-plan evidence require a stable intermediate decision. |
 | Owner-wave mode | Group packages only when owner, dependency set, semantic contract, verification family, and integration order are compatible; run focused evidence per member and one mixed checkpoint at wave close. |
 | Worktree evidence | Check only task-created paths at terminal acceptance. Historical or unknown resources require separate inventory and authority. |
-| Backup and pilots | Record current risk and existing acceptance ownership; do not publish or claim pilot completion without separate execution authority. |
+| Backup and pilots | Record current risk and existing acceptance ownership. One bounded publication authorization or standing repository authority covers ordinary fast-forward updates while remote, destination, scope, and topology remain unchanged; do not create a per-commit approval gate. Pilots retain separate execution authority. |
 
 ## Milestones
 
