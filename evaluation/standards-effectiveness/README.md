@@ -735,7 +735,7 @@ legacy links, and removal of lexical string-prefix containment examples.
 
 ## Documentation Decision Fixtures
 
-`verify-documentation-decisions.sh` checks that durable documentation is
+The registered `documentation-decisions` suite checks that durable documentation is
 selected from changed responsibilities, invariants, contracts, decisions, and
 operational procedures rather than directory or file changes. It distinguishes
 no-documentation, boundary README, contract README, ADR, and runbook profiles

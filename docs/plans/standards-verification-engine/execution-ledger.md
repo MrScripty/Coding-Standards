@@ -5883,3 +5883,16 @@
 - The retained gates, 332 verifier tests, all 196 declarative suites, numeric
   lifecycle, and generated freshness pass. Final graph: 76 Bash checkers, 80
   nodes, 534 edges, 80 components.
+
+## 2026-08-21 - M6-I50 Documentation Decisions Acceptance
+
+- Fresh evidence selected the 74-line Documentation decision checker as the
+  shortest of 18 caller-free verifiers and qualified it for
+  `serial-coherent` execution.
+- Replaced comma-encoded artifact selection with five independently derived
+  outputs in one seven-check Documentation-owned suite.
+- Transferred eight historical edge records and added two current transfer
+  records without inventing an execution dependency.
+- The focused contract, 332 verifier tests, all 197 declarative suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 75 Bash checkers, 79
+  nodes, 533 edges, 79 components.

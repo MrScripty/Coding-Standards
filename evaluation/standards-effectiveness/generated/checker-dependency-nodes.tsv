@@ -11,7 +11,6 @@ evaluation/standards-effectiveness/verify-cross-language-contract.sh	verifier	ye
 evaluation/standards-effectiveness/verify-decision-table-engine.sh	verifier	yes	component-bca18e32e5e45df9724ff0381026161e041085bcb3184d73291597d26ab2fe9b	1	no	1	1	0	1	1
 evaluation/standards-effectiveness/verify-decision-traceability.sh	verifier	yes	component-f9ad2f3185228ad753500c333348a0d6707cf27735758e4edec4bbb3f34eb0d5	1	no	1	0	1	0	1
 evaluation/standards-effectiveness/verify-dependencies-owner-contract.sh	verifier	yes	component-a21117ca9358e43b4cfd9d14ac2e4c9ca7e4ecc03913b8fe5118e428e7886ab6	1	no	4	0	3	0	3
-evaluation/standards-effectiveness/verify-documentation-decisions.sh	verifier	yes	component-bdb1db5a93fdc672746a86b4b02b72849cbe4d76e49443de66f3fc6cc285aec5	1	no	0	0	1	0	0
 evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh	verifier	yes	component-3924d8a5ba032a8d768aa0010672cb4b09cf4e1935b5f553a9e3bf50fd232b30	1	no	1	0	2	0	1
 evaluation/standards-effectiveness/verify-errexit-zero-accumulation.sh	verifier	yes	component-82330fcd23472300543d28ddc93cb8b12457f9cc854c13427c90ec734946e389	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh	verifier	yes	component-711128a7f20f35ceb9857b7066954a81fcef0623b4c1642f202acbba45bc8fd5	1	no	1	4	1	4	1

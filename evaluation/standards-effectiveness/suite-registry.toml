@@ -979,3 +979,8 @@ requires = []
 id = "readme-template-derivation-closure"
 path = "evaluation/standards-effectiveness/suites/readme-template-derivation-closure.toml"
 requires = ["milestone-7-row-47-decomposition"]
+
+[[suites]]
+id = "documentation-decisions"
+path = "evaluation/standards-effectiveness/suites/documentation-decisions.toml"
+requires = []

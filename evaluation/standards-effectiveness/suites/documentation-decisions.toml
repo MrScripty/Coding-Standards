@@ -1,0 +1,131 @@
+schema_version = 1
+id = "documentation-decisions"
+owner = "workflow.documentation"
+description = "Composable documentation artifact selection from explicit boundary, contract, decision, and operational facts."
+
+[[checks]]
+id = "artifact-selection"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/documentation/decisions.tsv"
+input_columns = ["boundary_changed", "contract_changed", "cross_boundary_decision", "operation_changed"]
+[checks.domains]
+case = ["*"]
+boundary_changed = ["yes", "no"]
+contract_changed = ["yes", "no"]
+cross_boundary_decision = ["yes", "no"]
+operation_changed = ["yes", "no"]
+expected_boundary_readme = ["yes", "no"]
+expected_contract_readme = ["yes", "no"]
+expected_adr = ["yes", "no"]
+expected_runbook = ["yes", "no"]
+expected_none = ["yes", "no"]
+
+[[checks.outputs]]
+column = "expected_boundary_readme"
+default = "no"
+[[checks.outputs.rules]]
+outcome = "yes"
+[checks.outputs.rules.when]
+all = [
+  { field = "boundary_changed", op = "eq", value = "yes" },
+  { field = "contract_changed", op = "eq", value = "no" },
+]
+
+[[checks.outputs]]
+column = "expected_contract_readme"
+default = "no"
+[[checks.outputs.rules]]
+outcome = "yes"
+[checks.outputs.rules.when]
+all = [{ field = "contract_changed", op = "eq", value = "yes" }]
+
+[[checks.outputs]]
+column = "expected_adr"
+default = "no"
+[[checks.outputs.rules]]
+outcome = "yes"
+[checks.outputs.rules.when]
+all = [{ field = "cross_boundary_decision", op = "eq", value = "yes" }]
+
+[[checks.outputs]]
+column = "expected_runbook"
+default = "no"
+[[checks.outputs.rules]]
+outcome = "yes"
+[checks.outputs.rules.when]
+all = [{ field = "operation_changed", op = "eq", value = "yes" }]
+
+[[checks.outputs]]
+column = "expected_none"
+default = "no"
+[[checks.outputs.rules]]
+outcome = "yes"
+[checks.outputs.rules.when]
+all = [
+  { field = "boundary_changed", op = "eq", value = "no" },
+  { field = "contract_changed", op = "eq", value = "no" },
+  { field = "cross_boundary_decision", op = "eq", value = "no" },
+  { field = "operation_changed", op = "eq", value = "no" },
+]
+
+[[checks]]
+id = "router-projection"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["workflows/documentation.md"]
+prohibited = []
+
+[[checks]]
+id = "legacy-documentation-projection"
+type = "text"
+path = "DOCUMENTATION-STANDARDS.md"
+required = ["workflows/documentation.md"]
+prohibited = [
+  "Every directory under `src/`",
+  "Every changed directory under `src/`",
+  "Every PR that changes `src/<module>/`",
+  "universal requirement takes precedence",
+]
+
+[[checks]]
+id = "architecture-projection"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = ["workflows/documentation.md"]
+prohibited = [
+  "Every directory under `src/`",
+  "Every changed directory under `src/`",
+  "Every PR that changes `src/<module>/`",
+  "universal requirement takes precedence",
+]
+
+[[checks]]
+id = "readme-template-projection"
+type = "text"
+path = "templates/README-TEMPLATE.md"
+required = ["workflows/documentation.md"]
+prohibited = [
+  "Every directory under `src/`",
+  "Every changed directory under `src/`",
+  "Every PR that changes `src/<module>/`",
+  "universal requirement takes precedence",
+]
+
+[[checks]]
+id = "pull-request-template-projection"
+type = "text"
+path = "templates/PULL_REQUEST_TEMPLATE.md"
+required = []
+prohibited = [
+  "Every directory under `src/`",
+  "Every changed directory under `src/`",
+  "Every PR that changes `src/<module>/`",
+  "universal requirement takes precedence",
+]
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `documentation-decisions` suite checks that durable documentation is"]
+prohibited = ["`verify-documentation-decisions.sh` checks that durable documentation is"]

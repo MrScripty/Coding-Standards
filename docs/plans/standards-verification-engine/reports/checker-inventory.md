@@ -5176,3 +5176,19 @@ numeric lifecycle, and generated freshness pass. Final evidence contains 76
 Bash checkers, 80 nodes, 534 edges, and 80 components. No hardcoded count,
 normative source, engine, helper, wrapper, compatibility representation, false
 dependency, dual authority, or fallback changed.
+
+### M6-I50 Documentation Decisions Acceptance
+
+Fresh post-M6-I49 evidence selected the 74-line Documentation decision checker
+as the shortest of 18 caller-free verifiers. The `serial-coherent` package
+replaces it with one seven-check suite and refines the fixture from one
+comma-encoded result to independently derived boundary README, contract README,
+ADR, runbook, and no-artifact outputs.
+
+Six projection checks preserve canonical workflow links and reject universal
+legacy documentation requirements. Eight historical records and two immediate
+predecessor transfer records now resolve to the suite. The focused contract,
+332 verifier tests, all 197 declarative suites, numeric lifecycle, and generated
+freshness pass. Final evidence contains 75 Bash checkers, 79 nodes, 533 edges,
+and 79 components. No normative source, engine, helper, wrapper, compatibility
+representation, false dependency, dual authority, or fallback changed.

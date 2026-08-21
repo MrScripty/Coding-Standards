@@ -14405,3 +14405,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   lifecycle, and generated freshness pass. Final graph: 76 Bash checkers, 80
   nodes, 534 edges, 80 components. No fallback or compatibility authority
   remains.
+
+## 2026-08-21 - M6-I50 Documentation Decisions Acceptance
+
+- Fresh post-M6-I49 evidence selected the 74-line Documentation decision
+  checker for one `serial-coherent` package at train order 165.
+- The registered seven-check suite derives boundary README, contract README,
+  ADR, runbook, and no-artifact outputs independently from explicit facts.
+- Eight historical and two current transfer records resolve prior consumers to
+  the suite without creating an executable fallback.
+- The focused contract, 332 verifier tests, all 197 declarative suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 75 Bash checkers, 79
+  nodes, 533 edges, 79 components. No fallback or compatibility authority
+  remains.
