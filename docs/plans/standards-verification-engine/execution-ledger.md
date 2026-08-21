@@ -5454,3 +5454,20 @@
 - Audited the remaining Bash surface and found the same requirement in seven
   additional checkers across four other owner families. Recorded VE085 and
   stopped before package admission or engine changes.
+
+## 2026-08-20 - M6-C7 Literal Case-Matching Capability Acceptance
+
+- Added one shared fixed-literal matcher used by generic whole-file `text` and
+  bounded `markdown_section_text` checks.
+- Added strict `match_case` values `sensitive` and `insensitive`. Omission
+  preserves the existing sensitive contract; insensitive mode case-folds each
+  document once and compares case-folded fixed literals.
+- Case-equivalent duplicates, required/prohibited contradictions, unknown
+  modes, and non-string modes fail with typed configuration diagnostics.
+  Section-heading selection remains exact and case-sensitive.
+- Five focused contract tests, all 330 verifier tests, 35 graph tests, all 179
+  declarative suites, and the complete 93-checker checkpoint pass. A disposable
+  Interop probe rejects a capitalization-only prohibited-default mutation.
+- No regex language, Unicode normalization, inferred variants, package-specific
+  branch, compatibility representation, command execution, or Bash fallback
+  was added. No checker package is admitted at this boundary.

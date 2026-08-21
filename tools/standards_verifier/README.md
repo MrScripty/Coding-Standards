@@ -172,6 +172,15 @@ with inline expected TOML text encoded as UTF-8. It performs no newline,
 whitespace, Unicode, or encoding normalization and accepts only `id`, `type`,
 `path`, and `expected` fields.
 
+The `text` check applies fixed required and prohibited literals to one
+contained UTF-8 file. `text` and `markdown_section_text` accept an optional
+`match_case` value of `sensitive` or `insensitive`; omitted configuration keeps
+the existing sensitive contract. Insensitive matching uses deterministic
+Unicode case folding for both content and configured literals. It does not
+enable regular expressions, Unicode normalization, inferred variants, or
+approximate matching. Case-equivalent duplicates and required/prohibited
+contradictions are invalid under the selected mode.
+
 The `markdown_links` check accepts one explicit non-empty `paths` list and
 requires every inline repository-local Markdown destination to exist relative
 to its containing UTF-8 document. It skips only `http://`, `https://`, and
@@ -227,9 +236,11 @@ selects exactly one configured ATX heading outside fenced code blocks. Its
 section extends through nested headings and ends before the next heading of
 equal or higher level, or at end of file. Configured required and prohibited
 literals apply only to that bounded section. Missing or duplicate start
-headings fail explicitly. The check has no regular-expression configuration,
-inferred boundary, whole-file snapshot, callback, command execution, copied
-inventory, count, compatibility representation, or fallback.
+headings fail explicitly. Section-heading selection remains exact and
+case-sensitive regardless of literal `match_case`. The check has no
+regular-expression configuration, inferred boundary, whole-file snapshot,
+callback, command execution, copied inventory, count, compatibility
+representation, or fallback.
 
 The `markdown_heading_cardinality` check reads one contained UTF-8 Markdown
 file, selects one configured ATX heading level outside fenced code blocks, and

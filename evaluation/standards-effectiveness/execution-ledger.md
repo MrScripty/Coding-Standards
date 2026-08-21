@@ -13949,3 +13949,21 @@ one bounded Markdown section, while current generic text checks match exact
 case only. Seven additional retained checkers across four other owner families
 use the same requirement. VE085 records the shared capability question; no
 package, engine change, approximation, or fallback is admitted.
+
+## 2026-08-20 M6-C7 Literal Case-Matching Capability Acceptance
+
+**Outcome:** accepted shared capability; fresh-graph package selection is next.
+
+Generic whole-file and bounded-section text checks now share one strict
+`match_case` contract. Sensitive matching remains the existing default;
+explicit insensitive matching case-folds each document once and compares only
+fixed literals. Invalid modes, case-equivalent duplicates, and contradictions
+produce typed configuration diagnostics, while Markdown heading selection
+remains exact and case-sensitive.
+
+Five focused tests, all 330 verifier tests, 35 graph tests, all 179 declarative
+suites, and the complete checkpoint with 93 retained Bash checkers pass. A
+disposable real-Interop probe rejects a capitalization-only prohibited-default
+mutation. No regex, inferred variant, package-specific branch, compatibility
+representation, command, or Bash fallback was introduced, and no package is
+admitted.

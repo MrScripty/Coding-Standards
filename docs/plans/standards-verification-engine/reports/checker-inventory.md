@@ -4734,3 +4734,18 @@ Bindings, and Rust Security use the same case-insensitive fixed-literal
 contract. This supports a reusable engine decision rather than a package-local
 exception, but that shared contract is not yet admitted. VE085 records the
 re-plan; M6-I33 remains unselected.
+
+### M6-C7 Literal Case-Matching Capability Acceptance
+
+The generic `text` and `markdown_section_text` checks now share an explicit
+fixed-literal `match_case` contract. Sensitive mode preserves existing
+behavior. Insensitive mode applies deterministic Unicode case folding to the
+document once and to each configured literal; it does not enable regular
+expressions, Unicode normalization, inferred variants, or approximate matches.
+
+Case-equivalent duplicate and contradictory configurations fail explicitly.
+Bounded-section heading identity remains exact and case-sensitive. Focused
+tests cover both modes and invalid configuration, while a disposable Interop
+probe proves that mixed-case forbidden text is rejected in the selected
+section. The capability is accepted independently; M6-I33 remains unselected
+until fresh graph review.

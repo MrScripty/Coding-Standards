@@ -7,6 +7,12 @@ from typing import Any
 from ..diagnostics import Diagnostic, EngineError
 from ..model import CheckContext
 from ..paths import contained_file
+from .literal_matching import (
+    MatchCase,
+    literal_key,
+    parse_match_case,
+    validate_literal_sets,
+)
 
 
 def _string_list(value: Any, field: str, suite: str, check: str) -> tuple[str, ...]:
@@ -41,6 +47,7 @@ class TextCheck:
     path: str
     required: tuple[str, ...]
     prohibited: tuple[str, ...]
+    match_case: MatchCase
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         root = context.repo_root
@@ -61,9 +68,10 @@ class TextCheck:
                 )
             ) from error
 
+        searchable = literal_key(content, self.match_case)
         diagnostics = []
         for literal in self.required:
-            if literal not in content:
+            if literal_key(literal, self.match_case) not in searchable:
                 diagnostics.append(
                     Diagnostic(
                         code="ASSERT.TEXT_REQUIRED",
@@ -77,7 +85,7 @@ class TextCheck:
                     )
                 )
         for literal in self.prohibited:
-            if literal in content:
+            if literal_key(literal, self.match_case) in searchable:
                 diagnostics.append(
                     Diagnostic(
                         code="ASSERT.TEXT_PROHIBITED",
@@ -94,7 +102,7 @@ class TextCheck:
 
 
 def parse_text_check(raw: dict[str, Any], suite_id: str) -> TextCheck:
-    allowed = {"id", "type", "path", "required", "prohibited"}
+    allowed = {"id", "type", "path", "required", "prohibited", "match_case"}
     unknown = set(raw) - allowed
     if unknown:
         raise EngineError(
@@ -114,18 +122,18 @@ def parse_text_check(raw: dict[str, Any], suite_id: str) -> TextCheck:
         raise EngineError(Diagnostic("CONFIG.PATH", "invalid", "path must be a non-empty string", suite=suite_id, check=check_id))
     required = _string_list(raw.get("required", []), "required", suite_id, check_id)
     prohibited = _string_list(raw.get("prohibited", []), "prohibited", suite_id, check_id)
-    overlap = set(required) & set(prohibited)
-    if overlap:
-        raise EngineError(
-            Diagnostic(
-                code="CONFIG.CONTRADICTORY_TEXT",
-                outcome="invalid",
-                message="a literal cannot be both required and prohibited",
-                suite=suite_id,
-                check=check_id,
-                observed=sorted(overlap)[0],
-            )
-        )
+    match_case = parse_match_case(
+        raw.get("match_case", "sensitive"),
+        suite=suite_id,
+        check=check_id,
+    )
+    validate_literal_sets(
+        required,
+        prohibited,
+        match_case,
+        suite=suite_id,
+        check=check_id,
+    )
     if not required and not prohibited:
         raise EngineError(Diagnostic("CONFIG.EMPTY_CHECK", "invalid", "text check has no assertions", suite=suite_id, check=check_id))
-    return TextCheck(check_id, path, required, prohibited)
+    return TextCheck(check_id, path, required, prohibited, match_case)

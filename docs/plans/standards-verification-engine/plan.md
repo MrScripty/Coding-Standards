@@ -4,13 +4,13 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** resolve VE085 case-insensitive literal-matching ownership before
-admitting another checker package
+**Next slice:** audit fresh post-M6-C7 graph evidence before admitting another
+checker package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I32 replaced the Architecture discover-or-create
-reference checker with one registered reference suite.
+**Latest accepted slice:** M6-C7 added explicit case-sensitive or
+case-insensitive fixed-literal matching to generic text checks.
 
 **Latest admitted slice:** `none`
 
@@ -98,6 +98,7 @@ evidence contracts.
 | Dependencies | Registered suite `requires` owns execution dependencies; lexical graph edges do not. | [Legacy reference boundary](reports/legacy-script-reference-model.md) |
 | Temporary graph | Keep the current lexical reference model frozen as conservative deletion-lifecycle evidence and remove it at zero Bash. | [Legacy reference boundary](reports/legacy-script-reference-model.md) |
 | Generated values | Derive mutable paths, counts, memberships, and relationships; store only explicit policy inputs and reviewed lifecycle authority. | [Count-authority report](reports/count-authority.md) |
+| Literal case matching | Generic whole-file and bounded-section text checks use one explicit fixed-literal case mode; case-insensitive matching uses Unicode case folding without regex or inferred variants. | [Engine README](../../../tools/standards_verifier/README.md) |
 | Numeric lifecycle | Whole-checker deletion derives candidate retirement from one accepted checker package; candidate mappings apply only when a numeric expression disappears while its checker remains live. | [Checker inventory](reports/checker-inventory.md) |
 | Concurrency | Prepare admitted disjoint package-local work concurrently; integrate registry, manifests, graph, plans, and checkpoints serially. | [Checker inventory](reports/checker-inventory.md) |
 | Parent boundary | The parent plan owns normative migration; this plan owns verification architecture and checker migration. | [Parent plan](../../../plans/standards-library-effectiveness-restructure-plan.md) |
@@ -137,7 +138,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I32 accepted at train order 147; VE085 requires re-planning before another admission |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-C7 accepted; fresh graph audit is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -156,8 +157,8 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Resolve VE085 without a package-specific parser, copied case variants,
-   regular-expression language, or weaker exact-case approximation.
+1. Audit fresh post-M6-C7 graph evidence without preselecting a package from
+   stale evidence.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or
@@ -192,9 +193,7 @@ fallback remains.
 
 ## Blockers
 
-- VE085: the next reviewed checker and multiple later owners require
-  case-insensitive fixed-literal rejection that current generic text checks do
-  not represent.
+- `none`
 
 ## Re-Plan Triggers
 

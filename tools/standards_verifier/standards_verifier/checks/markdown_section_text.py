@@ -6,6 +6,12 @@ from typing import Any
 from ..diagnostics import Diagnostic, EngineError
 from ..model import CheckContext
 from ..paths import contained_file
+from .literal_matching import (
+    MatchCase,
+    literal_key,
+    parse_match_case,
+    validate_literal_sets,
+)
 from .markdown import heading_level, scan_headings
 
 
@@ -36,6 +42,7 @@ class MarkdownSectionTextCheck:
     heading_level: int
     required: tuple[str, ...]
     prohibited: tuple[str, ...]
+    match_case: MatchCase
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         source = contained_file(
@@ -86,9 +93,10 @@ class MarkdownSectionTextCheck:
             lines[start.line_number - 1 : (end_line - 1) if end_line else None]
         )
 
+        searchable = literal_key(section, self.match_case)
         diagnostics = []
         for literal in self.required:
-            if literal not in section:
+            if literal_key(literal, self.match_case) not in searchable:
                 diagnostics.append(
                     Diagnostic(
                         "ASSERT.MARKDOWN_SECTION_REQUIRED",
@@ -103,7 +111,7 @@ class MarkdownSectionTextCheck:
                     )
                 )
         for literal in self.prohibited:
-            if literal in section:
+            if literal_key(literal, self.match_case) in searchable:
                 diagnostics.append(
                     Diagnostic(
                         "ASSERT.MARKDOWN_SECTION_PROHIBITED",
@@ -123,7 +131,15 @@ class MarkdownSectionTextCheck:
 def parse_markdown_section_text_check(
     raw: dict[str, Any], suite_id: str
 ) -> MarkdownSectionTextCheck:
-    allowed = {"id", "type", "path", "heading", "required", "prohibited"}
+    allowed = {
+        "id",
+        "type",
+        "path",
+        "heading",
+        "required",
+        "prohibited",
+        "match_case",
+    }
     unknown = set(raw) - allowed
     if unknown:
         raise EngineError(
@@ -179,6 +195,11 @@ def parse_markdown_section_text_check(
     prohibited = _literal_list(
         raw.get("prohibited", []), "prohibited", suite_id, check_id
     )
+    match_case = parse_match_case(
+        raw.get("match_case", "sensitive"),
+        suite=suite_id,
+        check=check_id,
+    )
     if not required and not prohibited:
         raise EngineError(
             Diagnostic(
@@ -189,18 +210,13 @@ def parse_markdown_section_text_check(
                 check=check_id,
             )
         )
-    overlap = set(required) & set(prohibited)
-    if overlap:
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.CONTRADICTORY_TEXT",
-                "invalid",
-                "a literal cannot be both required and prohibited",
-                suite=suite_id,
-                check=check_id,
-                observed=sorted(overlap)[0],
-            )
-        )
+    validate_literal_sets(
+        required,
+        prohibited,
+        match_case,
+        suite=suite_id,
+        check=check_id,
+    )
     return MarkdownSectionTextCheck(
         check_id,
         path,
@@ -208,4 +224,5 @@ def parse_markdown_section_text_check(
         level,
         required,
         prohibited,
+        match_case,
     )

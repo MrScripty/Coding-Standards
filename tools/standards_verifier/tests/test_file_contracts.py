@@ -142,9 +142,13 @@ class FileContractsTest(unittest.TestCase):
         heading: str = "## Selected",
         required: object = ("required text",),
         prohibited: object = (),
+        match_case: object | None = None,
         extra: str = "",
     ) -> str:
         suite_path = "suites/files.toml"
+        case_config = (
+            "" if match_case is None else f"match_case = {json.dumps(match_case)}"
+        )
         self.write(
             suite_path,
             f"""
@@ -160,6 +164,40 @@ class FileContractsTest(unittest.TestCase):
             heading = {json.dumps(heading)}
             required = {json.dumps(required)}
             prohibited = {json.dumps(prohibited)}
+            {case_config}
+            {extra}
+            """,
+        )
+        return suite_path
+
+    def write_text_suite(
+        self,
+        *,
+        path: str = "docs/evidence.md",
+        required: object = ("required text",),
+        prohibited: object = (),
+        match_case: object | None = None,
+        extra: str = "",
+    ) -> str:
+        suite_path = "suites/files.toml"
+        case_config = (
+            "" if match_case is None else f"match_case = {json.dumps(match_case)}"
+        )
+        self.write(
+            suite_path,
+            f"""
+            schema_version = 1
+            id = "files"
+            owner = "test.owner"
+            description = "Text literal test"
+
+            [[checks]]
+            id = "text"
+            type = "text"
+            path = {json.dumps(path)}
+            required = {json.dumps(required)}
+            prohibited = {json.dumps(prohibited)}
+            {case_config}
             {extra}
             """,
         )
@@ -745,6 +783,65 @@ class FileContractsTest(unittest.TestCase):
                     Verifier(self.root, "registry.toml")
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
+    def test_text_literals_remain_case_sensitive_by_default(self) -> None:
+        self.write("docs/evidence.md", "Required text\nProhibited text\n")
+
+        result = self.result(
+            self.write_text_suite(
+                required=["required text"],
+                prohibited=["prohibited text"],
+            )
+        )
+
+        self.assertEqual(
+            [(item.code, item.expected) for item in result.diagnostics],
+            [("ASSERT.TEXT_REQUIRED", "required text")],
+        )
+
+    def test_text_literals_support_explicit_case_insensitive_matching(self) -> None:
+        self.write("docs/evidence.md", "Stra\u00dfe\nDeFaUlT runtime\n")
+
+        result = self.result(
+            self.write_text_suite(
+                required=["STRASSE"],
+                prohibited=["default runtime"],
+                match_case="insensitive",
+            )
+        )
+
+        self.assertEqual(
+            [(item.code, item.observed) for item in result.diagnostics],
+            [("ASSERT.TEXT_PROHIBITED", "default runtime")],
+        )
+
+    def test_text_literals_reject_invalid_case_contracts(self) -> None:
+        cases = (
+            ({"match_case": "folded"}, "CONFIG.MATCH_CASE"),
+            ({"match_case": True}, "CONFIG.MATCH_CASE"),
+            (
+                {
+                    "required": ["Required", "required"],
+                    "match_case": "insensitive",
+                },
+                "CONFIG.DUPLICATE_VALUE",
+            ),
+            (
+                {
+                    "required": ["Required"],
+                    "prohibited": ["required"],
+                    "match_case": "insensitive",
+                },
+                "CONFIG.CONTRADICTORY_TEXT",
+            ),
+        )
+        for options, code in cases:
+            with self.subTest(code=code, options=options):
+                suite = self.write_text_suite(**options)
+                self.write_registry(suite)
+                with self.assertRaises(EngineError) as raised:
+                    Verifier(self.root, "registry.toml")
+                self.assertEqual(raised.exception.diagnostic.code, code)
+
     def test_markdown_section_text_selects_through_nested_headings(self) -> None:
         self.write(
             "docs/index.md",
@@ -768,6 +865,27 @@ class FileContractsTest(unittest.TestCase):
         )
 
         self.assertEqual(result.status, "passed")
+
+    def test_markdown_section_text_supports_explicit_case_insensitive_matching(
+        self,
+    ) -> None:
+        self.write(
+            "docs/index.md",
+            "## Selected\nReQuIrEd text\nDeFaUlT runtime\n## Next\n",
+        )
+
+        result = self.result(
+            self.write_section_text_suite(
+                required=["required text"],
+                prohibited=["default runtime"],
+                match_case="insensitive",
+            )
+        )
+
+        self.assertEqual(
+            [(item.code, item.observed) for item in result.diagnostics],
+            [("ASSERT.MARKDOWN_SECTION_PROHIBITED", "default runtime")],
+        )
 
     def test_markdown_section_text_stops_at_higher_heading(self) -> None:
         self.write(
@@ -876,6 +994,23 @@ class FileContractsTest(unittest.TestCase):
             ({"required": ["x", "x"]}, "CONFIG.STRING_LIST"),
             (
                 {"required": ["x"], "prohibited": ["x"]},
+                "CONFIG.CONTRADICTORY_TEXT",
+            ),
+            ({"match_case": "folded"}, "CONFIG.MATCH_CASE"),
+            ({"match_case": False}, "CONFIG.MATCH_CASE"),
+            (
+                {
+                    "required": ["Required", "required"],
+                    "match_case": "insensitive",
+                },
+                "CONFIG.DUPLICATE_VALUE",
+            ),
+            (
+                {
+                    "required": ["Required"],
+                    "prohibited": ["required"],
+                    "match_case": "insensitive",
+                },
                 "CONFIG.CONTRADICTORY_TEXT",
             ),
             ({"path": ""}, "CONFIG.PATH"),
