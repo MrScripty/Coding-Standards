@@ -5648,3 +5648,21 @@
   representation, false dependency, dual authority, or fallback changes.
 - Admission evidence contains 184 suites, 88 Bash checkers, 92 nodes, 593
   edges, and 92 components.
+## 2026-08-21 - M6-I38 Architecture Composition-Root Acceptance
+
+- Added the registered `architecture-composition-root-pattern` suite with nine
+  typed decisions, exact legacy and reference projections, case-insensitive
+  fixed-default rejection, five exact dispositions, and keyed owner lineage.
+- Kept Architecture data-authority policy as an independently executed Bash
+  gate through both accepted current edge records. All four historical records
+  now point to exact suite evidence.
+- Deleted only the replaced Architecture checker. Policy, fixture,
+  dispositions, owner validation, nested gate, and engine behavior remain
+  unchanged.
+- Seven disposable mutations reject decision, reference, route, mixed-case
+  default, disposition, owner-lineage, and stale historical evidence drift.
+  Broad verification is recorded in the repository execution ledger.
+- Final generated evidence contains 91 nodes, 589 edges, and 91 components
+  with 185 suites and 87 retained Bash checkers, without wrappers,
+  compatibility representations, false dependencies, dual authority, or
+  fallback.

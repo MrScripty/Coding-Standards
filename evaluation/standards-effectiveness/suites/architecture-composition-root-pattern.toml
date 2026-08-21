@@ -1,0 +1,132 @@
+schema_version = 1
+id = "architecture-composition-root-pattern"
+owner = "reference.patterns.architecture"
+description = "Contract-selected composition-root illustration with typed no-fallback outcomes and exact legacy lineage."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/composition-root-decisions.tsv"
+expected_column = "expected"
+default = "illustrate"
+[checks.domains]
+case = ["*"]
+responsibilities = ["contradictory", "missing", "multiple", "one"]
+contracts = ["complete", "missing"]
+lifecycle = ["complete", "missing"]
+mechanisms = ["supported", "unsupported"]
+fallback = ["ambient-global", "feature-self-wire", "none"]
+expected = ["illustrate", "keep-together", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "responsibilities", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "responsibilities", op = "eq", value = "missing" },
+  { field = "contracts", op = "eq", value = "missing" },
+  { field = "lifecycle", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "mechanisms"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "keep-together"
+[checks.rules.when]
+field = "responsibilities"
+op = "eq"
+value = "one"
+
+[[checks]]
+id = "reference-projection"
+type = "text"
+path = "reference/patterns/architecture.md"
+required = [
+  "## Conditional Composition Root",
+  "After Architecture selects independently meaningful implementations",
+  "These labels do not require one composition module",
+  "or owned runtimes may require separate composition boundaries",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-routes"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = [
+  "[Runtime Composition](topics/architecture.md#runtime-composition)",
+  "[Conditional Composition Root](reference/patterns/architecture.md#conditional-composition-root)",
+  "not a required module",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-fixed-defaults"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = []
+prohibited = [
+  "Consumers depend on service contracts/facades",
+  "belongs in the composition root",
+  "swap them in the composition root",
+  "const userRepository = new SqlUserRepository",
+  "Feature module reaches outward and self-wires",
+]
+match_case = "insensitive"
+
+[[checks]]
+id = "reference-fixed-defaults"
+type = "text"
+path = "reference/patterns/architecture.md"
+required = []
+prohibited = [
+  "Consumers depend on service contracts/facades",
+  "belongs in the composition root",
+  "swap them in the composition root",
+  "const userRepository = new SqlUserRepository",
+  "Feature module reaches outward and self-wires",
+]
+match_case = "insensitive"
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [["STD-0069"], ["STD-0070"], ["STD-0071"], ["STD-0072"], ["STD-0073"]]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0069", "STD-0070", "STD-0071", "STD-0072", "STD-0073"]
+
+[[checks]]
+id = "owner-lineage"
+type = "keyed_relation"
+[checks.keys]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["id"]
+order = "source"
+where = { field = "id", op = "in", values = ["STD-0069", "STD-0070", "STD-0071", "STD-0072", "STD-0073"] }
+[checks.expected]
+path = "evaluation/standards-effectiveness/milestone-7-row-37-owner-validation.tsv"
+header = ["id", "canonical_owner", "disposition", "reference_treatment", "rationale"]
+key = "id"
+values = ["canonical_owner", "disposition"]
+[checks.observed]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+key = "id"
+values = ["target", "disposition"]

@@ -4913,3 +4913,18 @@ will transfer from checker evidence to the exact registered suite only at
 acceptance. M6-I38 is admitted at train order 153 without policy, fixture,
 disposition, owner-validation, engine, nested-gate, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changes.
+### M6-I38 Architecture Composition-Root Acceptance
+
+The registered Architecture reference suite replaces the 61-line checker with
+nine typed decisions, exact legacy and reference projections, case-insensitive
+fixed-default rejection, five exact dispositions, and keyed row-37 owner
+lineage. Architecture data-authority policy remains independently executed
+through both accepted current edge records.
+
+All four historical records now name the registered suite rather than the
+deleted checker. Seven disposable mutations reject decision, reference,
+legacy-route, mixed-case default, disposition, owner-lineage, and stale-evidence
+drift. Final graph evidence contains 91 nodes, 589 edges, and 91 components
+with 185 registered suites and 87 retained Bash checkers. No policy, fixture,
+disposition, owner-validation, nested gate, engine, wrapper, compatibility
+representation, false dependency, dual authority, or fallback changed.

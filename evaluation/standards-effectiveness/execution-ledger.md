@@ -14150,3 +14150,21 @@ to exact suite evidence only at acceptance. No policy, fixture, disposition,
 owner-validation, engine, nested gate, wrapper, compatibility representation,
 false dependency, dual authority, or fallback changes. Admission evidence
 contains 184 suites, 88 Bash checkers, 92 nodes, 593 edges, and 92 components.
+## 2026-08-21 M6-I38 Architecture Composition-Root Acceptance
+
+**Outcome:** accepted at train order 153; fresh graph audit is next.
+
+The registered Architecture reference suite replaces the 61-line Bash checker
+with nine typed decisions, exact legacy and reference projections,
+case-insensitive fixed-default rejection, five exact dispositions, and keyed
+row-37 owner lineage. Architecture data-authority policy remains independently
+executed through both accepted current edge records, and all four historical
+records now name exact suite evidence.
+
+Seven disposable mutations reject decision, reference, route, mixed-case
+default, disposition, owner-lineage, and stale-evidence drift. All Python and
+declarative tests pass, and the complete mixed checkpoint passes with 87
+retained Bash checkers. Final graph evidence contains 91 nodes, 589 edges, and
+91 components without policy, fixture, disposition, owner-validation,
+nested-gate, engine, wrapper, compatibility representation, false-dependency,
+dual-authority, or fallback changes.

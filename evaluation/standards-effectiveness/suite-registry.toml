@@ -919,3 +919,8 @@ requires = []
 id = "architecture-durable-workflow-pattern"
 path = "evaluation/standards-effectiveness/suites/architecture-durable-workflow-pattern.toml"
 requires = []
+
+[[suites]]
+id = "architecture-composition-root-pattern"
+path = "evaluation/standards-effectiveness/suites/architecture-composition-root-pattern.toml"
+requires = []
