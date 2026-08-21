@@ -4675,6 +4675,21 @@
   second suite, dependency, wrapper, compatibility behavior, or fallback.
 - Fresh-graph owner-coherent package selection is next.
 
+## 2026-08-20 - M6-I20 Release Build-Procedure Admission
+
+- Audited the fresh 106-checker graph and selected the shortest of 24
+  caller-free verifiers: the 29-line Release build-procedure checker.
+- A disposable final state replaces its 14 decisions, Release owner text,
+  Launcher projection, and exact `STD-0500` disposition with four generic
+  checks. Policy and fixture sources remain unchanged.
+- Admitted train order 135 and four current independent-gate dispositions for
+  row-14 and execution-train lifecycle. No suite dependency is admitted.
+- Disposable final state passes 168 suites and the complete checkpoint at 105
+  Bash checkers, 109 nodes, 665 edges, and 109 components. Admission evidence
+  has 106 Bash checkers, 110 nodes, 672 edges, and 110 components.
+- Atomic M6-I20 acceptance is next; no wrapper, compatibility path, copied
+  count, Bash repair, or fallback is admitted.
+
 ## 2026-08-20 - M6-I16 Accessibility Focus-Lifecycle Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its modality,

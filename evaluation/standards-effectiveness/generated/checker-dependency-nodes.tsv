@@ -74,7 +74,7 @@ evaluation/standards-effectiveness/verify-owner-state-transitions.sh	verifier	ye
 evaluation/standards-effectiveness/verify-plan-fixtures.sh	verifier	yes	component-0073	1	no	1	12	0	12	1
 evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh	verifier	yes	component-0074	1	no	2	0	1	0	3
 evaluation/standards-effectiveness/verify-release-binding-generation-procedure.sh	verifier	yes	component-0075	1	no	5	0	0	0	2
-evaluation/standards-effectiveness/verify-release-build-procedure.sh	verifier	yes	component-0076	1	no	5	0	1	0	2
+evaluation/standards-effectiveness/verify-release-build-procedure.sh	verifier	yes	component-0076	1	no	5	0	3	0	2
 evaluation/standards-effectiveness/verify-release-procedure-policy.sh	verifier	yes	component-0077	1	no	1	1	1	1	1
 evaluation/standards-effectiveness/verify-resilience-owner-contract.sh	verifier	yes	component-0078	1	no	4	2	2	2	2
 evaluation/standards-effectiveness/verify-resilience-recovery-policy.sh	verifier	yes	component-0079	1	no	5	0	1	0	2

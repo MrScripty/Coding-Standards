@@ -4321,3 +4321,20 @@ authority, numeric lifecycle, generated freshness, all 167 declarative suites,
 typed mutations, complete checkpoint, and diff integrity pass without an
 engine change, source change, suite dependency, copied count, manual numeric
 mapping, Bash repair, wrapper, compatibility path, or fallback.
+
+### M6-I20 Release Build-Procedure Admission
+
+The fresh post-M6-I19 graph has 24 caller-free verifiers. The shortest
+owner-coherent candidate is `verify-release-build-procedure.sh` at 29 lines.
+Its 14 decisions, Release owner text, Launcher projection, and exact `STD-0500`
+disposition form one `workflow.release` contract.
+
+Row-14 decomposition and the execution train are independent lifecycle
+authority. Four admitted edge dispositions preserve both checkers as separate
+gates; no suite dependency is introduced.
+
+Disposable final state uses four existing generic checks and passes all 168
+declarative suites plus the complete checkpoint at 105 Bash checkers, 109
+nodes, 665 edges, and 109 components. M6-I20 is admitted at train order 135
+without a policy, fixture, engine, helper, suite-dependency, copied-count,
+manual-numeric, Bash-repair, wrapper, compatibility, or fallback change.

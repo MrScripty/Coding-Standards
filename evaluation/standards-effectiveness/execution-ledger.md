@@ -13512,3 +13512,19 @@ declarative suites, complete checkpoint, mutation parity, and diff integrity
 pass. No engine capability, helper migration, suite dependency, false edge,
 copied count, manual numeric mapping, Bash repair, wrapper, compatibility path,
 or fallback remains.
+
+## 2026-08-20 M6-I20 Release Build-Procedure Admission
+
+**Outcome:** admitted at train order 135; atomic acceptance is next.
+
+Fresh post-M6-I19 evidence selected the shortest of 24 caller-free verifiers.
+The Release-owned package covers 14 build-procedure decisions, canonical owner
+text, Launcher projection, and exact `STD-0500` disposition. Row-14 and the
+execution train remain independently executed through four admitted edges.
+
+Disposable final state passes four generic checks, package/edge authority,
+both independent gates, all 168 declarative suites, generated freshness, and
+the complete checkpoint at 105 Bash checkers, 109 nodes, 665 edges, and 109
+components. Admission evidence contains 106 Bash checkers, 110 nodes, 672
+edges, and 110 components. No policy, fixture, engine, helper, suite dependency,
+copied count, Bash repair, wrapper, compatibility path, or fallback is admitted.
