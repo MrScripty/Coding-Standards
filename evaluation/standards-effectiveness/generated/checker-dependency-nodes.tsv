@@ -1,8 +1,7 @@
 node	kind	resolved	component	component_size	cyclic	wave	executable_inbound_count	contract_inbound_count	dependency_inbound_count	dependency_outbound_count
 evaluation/standards-effectiveness/check-decision-table.sh	helper	yes	component-32641fc24f283d732c863f66d60560759449c5540faa921f78646e420bfbff6d	1	no	0	9	0	7	0
-evaluation/standards-effectiveness/check-metadata.sh	helper	yes	component-aaf33edf2afc9b5c37f4f4a12c939dc01647d2ead887325591cc728b35baa69d	1	no	0	31	1	31	0
+evaluation/standards-effectiveness/check-metadata.sh	helper	yes	component-aaf33edf2afc9b5c37f4f4a12c939dc01647d2ead887325591cc728b35baa69d	1	no	0	30	1	30	0
 evaluation/standards-effectiveness/check-plan-structure.sh	helper	yes	component-b5ec0297136d534162c8d0bde279007d81785d53c084477ca1c94f89f9986cc4	1	no	0	1	1	1	0
-evaluation/standards-effectiveness/verify-architecture-pattern-reference-owner.sh	verifier	yes	component-5dd87809ee918bf34603282d818fd15fed392722a81b08328b4678843bf1e47b	1	no	1	0	1	0	1
 evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	verifier	yes	component-fdcbd9323ab427f301a785a9d169c92eed03df9b126116c58eeeb3cbfeb71fda	1	no	5	1	3	1	5
 evaluation/standards-effectiveness/verify-binding-generation-authority.sh	verifier	yes	component-f34de65d4fcc4edaaaf8a96dcb49786a58ea2ad43932aa3460571b270ab838ee	1	no	6	1	0	1	3
 evaluation/standards-effectiveness/verify-concurrency-policy.sh	verifier	yes	component-177c8a2d3e64a56b3c5f39ed57748c87f3457bbf6528fedb557cbf9483b36134	1	no	4	5	4	5	3

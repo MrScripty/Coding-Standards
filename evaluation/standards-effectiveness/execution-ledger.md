@@ -14354,3 +14354,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   suites, and generated freshness pass.
 - Final evidence contains 80 Bash checkers, 84 nodes, 557 edges, and 84
   components. No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I46 Architecture Pattern-Reference Owner Acceptance
+
+- Fresh post-M6-I45 evidence selected the 53-line Architecture reference-owner
+  checker for one `serial-coherent` package at train order 161.
+- The registered five-check suite preserves seven typed decisions, metadata
+  closure, reference and owner projections, prohibited legacy authority, and
+  one exact disposition.
+- Ten historical records transfer to suite evidence; the shared metadata helper
+  remains independently owned through two explicit external-artifact rows.
+- Five negative mutations, 332 verifier tests, all 193 declarative suites, and
+  generated freshness pass. Final graph: 79 Bash checkers, 83 nodes, 554
+  edges, 83 components.

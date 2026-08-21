@@ -5109,3 +5109,21 @@ generated freshness pass. Final evidence contains 80 Bash checkers, 84 nodes,
 557 edges, and 84 components. No normative source, engine, helper, nested gate,
 wrapper, compatibility representation, false dependency, dual authority, or
 fallback changed.
+
+### M6-I46 Architecture Pattern-Reference Owner Acceptance
+
+Fresh post-M6-I45 evidence selected the 53-line Architecture pattern-reference
+owner checker as the shortest of 17 caller-free verifiers. The
+`serial-coherent` package replaces it with one five-check reference-owner suite
+covering seven typed decisions, exact metadata closure, reference and canonical
+owner projections, prohibited legacy authority, and one exact disposition.
+
+Ten historical records now name the suite. The shared metadata helper remains
+independently owned through two accepted external-artifact dispositions while
+the suite's `metadata_graph` check replaces this checker invocation. Five
+disposable mutations reject decision, metadata, reference, owner-route, and
+disposition drift. The focused edge contract, 332 verifier tests, all 193
+declarative suites, and generated freshness pass. Final evidence contains 79
+Bash checkers, 83 nodes, 554 edges, and 83 components. No normative source,
+engine, helper, wrapper, compatibility representation, false dependency, dual
+authority, or fallback changed.

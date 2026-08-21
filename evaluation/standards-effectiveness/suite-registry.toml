@@ -959,3 +959,8 @@ requires = []
 id = "architecture-owner-contract"
 path = "evaluation/standards-effectiveness/suites/architecture-owner-contract.toml"
 requires = []
+
+[[suites]]
+id = "architecture-pattern-reference-owner"
+path = "evaluation/standards-effectiveness/suites/architecture-pattern-reference-owner.toml"
+requires = []

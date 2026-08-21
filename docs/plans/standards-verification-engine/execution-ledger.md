@@ -5833,3 +5833,16 @@
 - Four mutations, the row-15 gate, 332 verifier tests, all 192 declarative
   suites, and generated freshness pass. Final graph: 80 Bash checkers, 84
   nodes, 557 edges, 84 components.
+
+## 2026-08-21 - M6-I46 Architecture Pattern-Reference Owner Acceptance
+
+- Fresh evidence selected the 53-line reference-owner checker as the shortest
+  of 17 caller-free verifiers and qualified it for `serial-coherent` execution.
+- Replaced it with one five-check reference-owner suite covering seven
+  decisions, metadata closure, reference and owner projections, and one exact
+  disposition.
+- Transferred ten historical records and explicitly retained the shared
+  metadata helper through two external-artifact dispositions.
+- Five mutations, 332 verifier tests, all 193 declarative suites, and generated
+  freshness pass. Final graph: 79 Bash checkers, 83 nodes, 554 edges, 83
+  components.

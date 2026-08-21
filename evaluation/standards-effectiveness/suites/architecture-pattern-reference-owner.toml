@@ -1,0 +1,95 @@
+schema_version = 1
+id = "architecture-pattern-reference-owner"
+owner = "reference.patterns.architecture"
+description = "Non-normative Architecture pattern reference ownership with fact-selected adaptation and no legacy policy fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/reference-owner-decisions.tsv"
+expected_column = "expected"
+default = "adapt"
+[checks.domains]
+case = ["*"]
+architecture_decision = ["contradictory", "missing", "selected"]
+material_facts = ["complete", "missing"]
+mechanism_capability = ["supported", "unsupported"]
+fallback = ["fixed-layer", "incumbent-pattern", "none"]
+expected = ["adapt", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "architecture_decision", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "architecture_decision", op = "eq", value = "missing" },
+  { field = "material_facts", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "mechanism_capability"
+op = "eq"
+value = "unsupported"
+
+[[checks]]
+id = "metadata"
+type = "metadata_graph"
+[[checks.cases]]
+id = "reference-owner-closure"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "topics/architecture.md",
+  "reference/patterns/architecture.md",
+]
+expected = []
+
+[[checks]]
+id = "reference-projection"
+type = "text"
+path = "reference/patterns/architecture.md"
+required = [
+  "Role: `reference`",
+  "Level: `REFERENCE`",
+  "This material is non-normative",
+  "Pattern presence does not establish applicability",
+  "## Adaptation Boundary",
+  "## Reading A Pattern",
+  "## Typed Outcomes",
+  "[Architecture](../../topics/architecture.md)",
+]
+prohibited = [
+  "Dependencies point inward only",
+  "Organize code into horizontal layers",
+  "single source of truth",
+  "No Optimistic Updates for Backend-Owned Data",
+]
+
+[[checks]]
+id = "canonical-owner-route"
+type = "text"
+path = "topics/architecture.md"
+required = ["[Architecture Pattern Reference](../reference/patterns/architecture.md)"]
+prohibited = []
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [["STD-0027", "ARCHITECTURE-PATTERNS.md", "reference/patterns/architecture.md", "index"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0027"
