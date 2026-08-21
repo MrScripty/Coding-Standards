@@ -125,3 +125,20 @@ explicit `start` operation.
 - Selected no archive tag or bundle: durable review evidence records the
   rejected proposal identity and accepted successor, while preserving obsolete
   unaccepted implementations would create a new retention obligation.
+
+## 2026-08-21 - Milestone 4 And Objective Acceptance
+
+- Regenerated the unique-proposal disposition table against current `main` and
+  obtained exact agreement with accepted evidence before mutation.
+- Revalidated all 12 source tips, superseded terminal states, accepted
+  transition commits, current registered suites, absent Bash checkers, absent
+  checkouts, upstreams, remote containment, tags, and alternate local ref
+  reachability.
+- Permanently retired exactly the 12 authorized superseded proposal refs with
+  `git branch -D`. No accepted branch, remote ref, tag, commit rewrite, or
+  worktree mutation was included.
+- Final generated evidence contains one local branch (`main`), one current
+  clean worktree, and zero stale registrations. `git fsck --no-dangling`, plan
+  structure, link-target, and diff-integrity checks pass.
+- All four milestones and objective claims are accepted. Remote backup remains
+  a separately owned decision and was not performed by this cleanup.

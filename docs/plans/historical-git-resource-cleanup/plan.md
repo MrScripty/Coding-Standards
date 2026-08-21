@@ -1,12 +1,12 @@
 # Plan: Historical Git Resource Cleanup
 
-**Plan status:** `Active`
+**Plan status:** `Accepted`
 
-**Current phase:** Milestone 4 superseded unique-proposal retirement
+**Current phase:** Accepted
 
-**Next slice:** revalidate and permanently retire the exact 12 superseded proposal refs, then record final repository integrity
+**Next slice:** `none`
 
-**Acceptance status:** `pending`
+**Acceptance status:** `satisfied`
 
 **Accepted base:** `f3488ee3df6861bec6adfc8951b60a66939cbc93`
 
@@ -28,7 +28,7 @@ ancestry, or patch equivalence as deletion authority.
 | A1 | Every current worktree registration and local branch has one reviewed ownership and terminal disposition. | `satisfied` | Current inventory and [unique-proposal review](reports/milestone-4-unique-proposal-review.md) classify `main` as retained integration authority and all 12 proposals as superseded |
 | A2 | Pruned registrations are proven missing, task-independent, unlocked, and free of a live or user-owned path before mutation. | `satisfied` | [Milestone 2 report](reports/milestone-2-prune.md) and post-prune worktree inventory |
 | A3 | No branch with unique, shared, published, checked-out, unknown, or unmapped replacement history is deleted. | `satisfied` | [Ancestral cleanup](reports/milestone-3-ancestral-delete.md), [replacement-lineage review](reports/milestone-3-replacement-lineage.md), and [mapped-ref retirement](reports/milestone-3-mapped-ref-retirement.md) |
-| A4 | Repository state and protected commit reachability are verified before and after every accepted cleanup batch. | `partial` | Milestone 2 and Milestone 3 verification reports; final retained-resource verification remains |
+| A4 | Repository state and protected commit reachability are verified before and after every accepted cleanup batch. | `satisfied` | Milestone 2, Milestone 3, and [final acceptance](reports/final-acceptance.md) verification evidence |
 
 ## Scope
 
@@ -71,7 +71,7 @@ ancestry, or patch equivalence as deletion authority.
 | 1 | Refresh read-only branch/worktree facts and exact dispositions. | `Accepted` |
 | 2 | Execute an explicitly authorized stale-registration cleanup batch with before/after proof. | `Accepted` |
 | 3 | Review redundant branch refs separately from registrations and protect every unique or unmapped commit. | `Accepted` |
-| 4 | Verify terminal repository integrity and record deferred retained resources. | `Active` |
+| 4 | Verify terminal repository integrity and record deferred retained resources. | `Accepted` |
 
 ## Blockers
 
@@ -91,6 +91,6 @@ ancestry, or patch equivalence as deletion authority.
 
 ## Final Acceptance
 
-- Acceptance status: `pending`
+- Acceptance status: `satisfied`
 - Deferred follow-ups: `none`
-- Final status: `Planned`
+- Final status: `Accepted`
