@@ -864,3 +864,8 @@ requires = []
 id = "release-binding-generation-procedure"
 path = "evaluation/standards-effectiveness/suites/release-binding-generation-procedure.toml"
 requires = []
+
+[[suites]]
+id = "rust-binding-artifact-selection"
+path = "evaluation/standards-effectiveness/suites/rust-binding-artifact-selection.toml"
+requires = []

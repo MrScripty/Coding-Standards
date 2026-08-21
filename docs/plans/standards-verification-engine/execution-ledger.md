@@ -5199,3 +5199,18 @@
 - Admission evidence has 173 suites, 100 Bash checkers, 104 nodes, 645 edges,
   and 104 components without policy, fixture, engine, registry, checker,
   wrapper, compatibility, or fallback changes.
+
+## 2026-08-20 - M6-I26 Rust Binding Artifact Selection Acceptance
+
+- Registered `rust-binding-artifact-selection` with four generic checks for
+  all 10 decisions, canonical Rust Language Bindings text, the bounded
+  legacy-index section, and exact `STD-0792` and `STD-0793` dispositions.
+- Removed the Bash checker and accepted four independent-gate edge records.
+  Rust binding workspace evidence and execution-train lifecycle remain
+  separately executed; the historical report reference remains evidence only.
+- Focused, mutation, package/edge, numeric, generated, plan, source-integrity,
+  all 174-suite, complete 99-checker, diff, and staged-scope checks pass.
+- Final evidence contains 99 Bash checkers, 103 nodes, 638 edges, and 103
+  components without engine changes, false dependencies, wrappers,
+  compatibility representations, dual authority, or fallback.
+- Fresh-graph owner-coherent package selection is next.

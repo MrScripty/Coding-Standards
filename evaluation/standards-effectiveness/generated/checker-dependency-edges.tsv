@@ -47,7 +47,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-async-boundary.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-artifact-selection.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-core-adapter-testability.sh
@@ -67,7 +66,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-wire-representation.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-rust-binding-artifact-selection.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-accessibility-owner-contract.sh
@@ -103,7 +101,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-async-boundary.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-artifact-selection.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-workspace-evidence.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-unsafe-contracts.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh
@@ -321,8 +318,6 @@ executable_reference	evaluation/standards-effectiveness/verify-rust-async-lifecy
 executable_reference	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-artifact-selection.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-artifact-selection.sh	evaluation/standards-effectiveness/verify-rust-binding-workspace-evidence.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
@@ -579,8 +574,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-rust-async-boundar
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-artifact-selection.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-artifact-selection.sh	evaluation/standards-effectiveness/verify-rust-binding-workspace-evidence.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh

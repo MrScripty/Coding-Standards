@@ -13709,3 +13709,19 @@ reference remains immutable evidence. Disposable final state passes 174 suites
 and the complete 99-checker checkpoint. Admission state contains 173 suites,
 100 Bash checkers, 104 nodes, 645 edges, and 104 components without policy,
 fixture, engine, registry, checker, wrapper, compatibility, or fallback changes.
+
+## 2026-08-20 M6-I26 Rust Binding Artifact Selection Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Rust Language Bindings suite owns all 10 artifact-selection
+decisions, canonical profile text, the bounded legacy-index section, and exact
+`STD-0792` and `STD-0793` dispositions. Policy and fixtures are unchanged.
+
+Rust binding workspace evidence and execution-train lifecycle remain
+independent through four accepted edge records. The historical report reference
+remains immutable evidence rather than live execution authority. M6-I26 is
+accepted at train order 141 and the Bash checker is absent. Final evidence
+contains 174 suites, 99 Bash checkers, 103 nodes, 638 edges, and 103 components;
+all focused, mutation, lifecycle, generated, all-suite, complete-checkpoint,
+plan, source-integrity, and diff checks pass.

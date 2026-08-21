@@ -1,0 +1,81 @@
+schema_version = 1
+id = "rust-binding-artifact-selection"
+owner = "profile.language.rust.language-bindings"
+description = "Boundary-, consumer-, deployment-, and release-plan-derived Rust native artifact selection without universal crate-type or fallback defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-artifact-selection-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+boundary = ["missing", "selected"]
+consumer = ["host", "host-and-native", "missing", "native"]
+deployment = ["internal", "mixed", "shared", "static"]
+release_plan = ["accepted", "missing"]
+artifact = ["missing", "selected"]
+crate_type = ["alternate-crate-type", "cdylib", "combined", "rlib", "staticlib"]
+fallback = ["alternate-crate-type", "default-artifact", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "crate_type", op = "eq", value = "alternate-crate-type" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "boundary", op = "eq", value = "missing" },
+  { field = "consumer", op = "eq", value = "missing" },
+  { field = "release_plan", op = "eq", value = "missing" },
+  { field = "artifact", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "canonical-profile"
+type = "text"
+path = "profiles/languages/rust/language-bindings.md"
+required = [
+  "Select native artifact kind and crate output types",
+  "`cdylib`, `staticlib`, `rlib`",
+  "accepted boundary",
+  "Do not prescribe one crate name",
+  "typed `unavailable`",
+  "typed `invalid`",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "### cdylib Configuration"
+required = ["language-bindings.md#package-and-workspace-placement"]
+prohibited = [
+  "mylib-uniffi/Cargo.toml",
+  "crate-type = [\"cdylib\", \"lib\"]",
+  "cdylib produces",
+]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0792", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine"],
+  ["STD-0793", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0792", "STD-0793"]

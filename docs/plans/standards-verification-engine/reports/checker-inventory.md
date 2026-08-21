@@ -4507,3 +4507,18 @@ Disposable final state passes 174 suites and the complete checkpoint at 99 Bash
 checkers, 103 nodes, 638 edges, and 103 components. M6-I26 is admitted at train
 order 141 without policy, fixture, engine, registry, Bash repair, wrapper,
 compatibility, or fallback.
+
+### M6-I26 Rust Binding Artifact Selection Acceptance
+
+The registered `rust-binding-artifact-selection` suite owns all 10 decisions,
+canonical Rust Language Bindings text, the bounded legacy-index section, and
+exact `STD-0792` and `STD-0793` dispositions. Policy and fixture sources remain
+unchanged.
+
+Rust binding workspace evidence and execution-train lifecycle remain
+independent through four accepted edges. The historical planning-recovery
+report remains immutable evidence, not live checker authority. M6-I26 is
+accepted at train order 141 and the checker is absent. Final evidence contains
+174 suites, 99 Bash checkers, 103 nodes, 638 edges, and 103 components without
+engine changes, false dependencies, wrappers, compatibility representations,
+dual authority, or fallback.
