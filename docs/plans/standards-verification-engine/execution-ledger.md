@@ -5768,3 +5768,9 @@
   authority, or fallback changes.
 - Admission evidence contains 189 suites, 83 Bash checkers, 87 nodes, 580
   edges, and 87 components.
+## 2026-08-21 - M6-I43 Process-Instance Coordination Acceptance
+
+- Replaced the checker with the six-check registered reference suite.
+- Preserved row-39 lifecycle independently and transferred two historical
+  records. Six mutations reject semantic and stale-evidence drift.
+- Final evidence: 190 suites, 82 Bash checkers, 86 nodes, 576 edges, 86 components.

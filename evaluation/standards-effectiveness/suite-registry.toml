@@ -944,3 +944,8 @@ requires = []
 id = "architecture-discover-or-create-convergence"
 path = "evaluation/standards-effectiveness/suites/architecture-discover-or-create-convergence.toml"
 requires = []
+
+[[suites]]
+id = "architecture-process-instance-coordination"
+path = "evaluation/standards-effectiveness/suites/architecture-process-instance-coordination.toml"
+requires = []

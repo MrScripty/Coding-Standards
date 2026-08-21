@@ -1,0 +1,120 @@
+schema_version = 1
+id = "architecture-process-instance-coordination"
+owner = "reference.patterns.architecture"
+description = "Contract-selected process-instance coordination with typed no-mechanism-fallback outcomes and exact legacy closure."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/process-instance-coordination-decisions.tsv"
+expected_column = "expected"
+default = "route"
+[checks.domains]
+case = ["*"]
+identity = ["contradictory", "missing", "selected"]
+invariant = ["missing", "not-required", "required"]
+coordination = ["missing", "not-needed", "selected"]
+capability = ["missing", "supported", "unsupported"]
+lifecycle = ["missing", "owned"]
+recovery = ["missing", "not-needed", "selected"]
+diagnostic = ["missing", "not-needed", "selected"]
+fallback = ["always-log", "delete-stale", "none", "pid-file", "platform-api", "start-time"]
+expected = ["route", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "identity", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "identity", op = "eq", value = "missing" },
+  { field = "invariant", op = "eq", value = "missing" },
+  { field = "coordination", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "missing" },
+  { field = "lifecycle", op = "eq", value = "missing" },
+  { field = "recovery", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unsupported"
+
+[[checks]]
+id = "legacy-projection"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = [
+  "## Process Instance Coordination",
+  "[Concurrency](topics/concurrency.md#select-coordination-from-the-invariant)",
+  "[Contracts](topics/contracts.md)",
+  "[Cross-Platform](topics/cross-platform.md#platform-support-contract)",
+  "[Resilience](topics/resilience.md#failure-classification-and-decision)",
+  "No PID contents",
+  "canonical typed outcome",
+]
+prohibited = []
+
+[[checks]]
+id = "reference-projection"
+type = "text"
+path = "reference/patterns/architecture.md"
+required = [
+  "## Conditional Process Instance Coordination",
+  "selected instance identity",
+  "selected coordination boundary",
+  "Evidence that appears stale is not deletion authority",
+  "this pattern does not apply",
+  "the diagram or successful startup proves none",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-default-removal"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = []
+prohibited = [
+  "### PID File Rules",
+  "### PID File Contents",
+  "### Handling PID Reuse",
+  "### Stale PID File Cleanup",
+  "kill(pid, 0)",
+  "/proc/[pid]/stat",
+  "Always log when reclaiming",
+]
+
+[[checks]]
+id = "reference-default-removal"
+type = "text"
+path = "reference/patterns/architecture.md"
+required = []
+prohibited = [
+  "### PID File Rules",
+  "### PID File Contents",
+  "### Handling PID Reuse",
+  "### Stale PID File Cleanup",
+  "kill(pid, 0)",
+  "/proc/[pid]/stat",
+  "Always log when reclaiming",
+]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [["STD-0093"], ["STD-0094"], ["STD-0095"], ["STD-0096"], ["STD-0097"], ["STD-0098"]]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0093", "STD-0094", "STD-0095", "STD-0096", "STD-0097", "STD-0098"]

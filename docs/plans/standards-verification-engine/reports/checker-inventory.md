@@ -4928,6 +4928,13 @@ checker evidence to the exact registered suite only at acceptance. M6-I43 is
 admitted at train order 158 without policy, fixture, disposition, engine,
 nested-gate, wrapper, compatibility representation, false dependency, dual
 authority, or fallback changes.
+### M6-I43 Process-Instance Coordination Acceptance
+
+The registered reference suite replaces the 63-line checker with 15 typed
+decisions, exact projections, prohibited mechanism defaults, and six exact
+dispositions. Row-39 lifecycle remains independent. Six mutations reject
+semantic and stale-evidence drift. Final evidence has 86 nodes, 576 edges, 86
+components, 190 suites, and 82 Bash checkers.
 ### M6-I37 Architecture Durable-Workflow Acceptance
 
 The registered Architecture reference suite replaces the 64-line checker with

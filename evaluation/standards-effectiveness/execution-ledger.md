@@ -14288,3 +14288,12 @@ evidence only at acceptance. No policy, fixture, disposition, engine, nested
 gate, wrapper, compatibility representation, false dependency, dual authority,
 or fallback changes. Admission evidence contains 189 suites, 83 Bash checkers,
 87 nodes, 580 edges, and 87 components.
+## 2026-08-21 M6-I43 Process-Instance Coordination Acceptance
+
+**Outcome:** accepted at train order 158; fresh graph audit is next.
+
+The registered six-check reference suite preserves 15 decisions, exact
+projections and dispositions, and prohibited mechanism defaults. Row-39
+lifecycle remains independent; two historical records now name suite evidence.
+Six mutations reject drift. Broad and complete verification pass with 190
+suites, 82 Bash checkers, 86 nodes, 576 edges, and 86 components.

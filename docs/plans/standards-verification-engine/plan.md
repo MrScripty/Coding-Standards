@@ -4,18 +4,15 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** accept admitted M6-I43 by replacing the Architecture
-process-instance coordination checker with one registered reference-owner
-suite
+**Next slice:** audit the fresh post-M6-I43 graph and select the next package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I42 replaced the Architecture discover-or-create
-convergence checker with one registered reference-owner suite at train order
-157.
+**Latest accepted slice:** M6-I43 replaced the Architecture process-instance
+coordination checker with one registered reference-owner suite at train order
+158.
 
-**Latest admitted slice:** M6-I43 freezes one Architecture process-instance
-coordination package at train order 158.
+**Latest admitted slice:** `none`; the next package requires fresh graph audit.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -123,11 +120,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I42 at train
-order 157.
+**Accepted boundary:** package records are accepted through M6-I43 at train
+order 158.
 
-**Current derived state:** 189 registered declarative suites, 83 retained Bash
-checkers, 87 executable nodes, 580 conservative reference edges, and 87
+**Current derived state:** 190 registered declarative suites, 82 retained Bash
+checkers, 86 executable nodes, 576 conservative reference edges, and 86
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -141,7 +138,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I43 admitted at train order 158; atomic acceptance is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I43 accepted at train order 158; fresh graph audit is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -160,8 +157,7 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Accept admitted M6-I43 without changing its frozen owner, behavior,
-   dependency, write-set, or verification contract.
+1. Audit the fresh post-M6-I43 graph before admitting another package.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or
