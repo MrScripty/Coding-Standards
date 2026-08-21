@@ -5724,3 +5724,10 @@
   representation, false dependency, dual authority, or fallback changes.
 - Admission evidence contains 187 suites, 85 Bash checkers, 89 nodes, 584
   edges, and 89 components.
+## 2026-08-21 - M6-I41 Architecture Layered-Pattern Acceptance
+
+- Replaced the checker with the seven-check registered reference suite.
+- Preserved Architecture pattern-reference ownership independently and
+  transferred four historical records. Seven mutations reject semantic and
+  stale-evidence drift.
+- Final evidence: 188 suites, 84 Bash checkers, 88 nodes, 580 edges, 88 components.

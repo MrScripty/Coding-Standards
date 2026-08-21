@@ -14236,3 +14236,13 @@ disposition, owner-validation, engine, nested gate, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changes.
 Admission evidence contains 187 suites, 85 Bash checkers, 89 nodes, 584 edges,
 and 89 components.
+## 2026-08-21 M6-I41 Architecture Layered-Pattern Acceptance
+
+**Outcome:** accepted at train order 156; fresh graph audit is next.
+
+The registered seven-check reference suite preserves eight decisions, exact
+projections and dispositions, universal-default rejection, and row-36
+lineage. Architecture pattern-reference ownership remains independent; four
+historical records now name suite evidence. Seven mutations reject drift.
+Broad and complete verification pass with 188 suites, 84 Bash checkers, 88
+nodes, 580 edges, and 88 components.

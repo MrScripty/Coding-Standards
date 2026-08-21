@@ -4884,6 +4884,14 @@ will transfer from checker evidence to the exact registered suite only at
 acceptance. M6-I37 is admitted at train order 152 without policy, fixture,
 disposition, owner-validation, engine, nested-gate, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changes.
+### M6-I41 Architecture Layered-Pattern Acceptance
+
+The registered reference suite replaces the 61-line checker with eight typed
+decisions, exact projections, universal-default rejection, six exact
+dispositions, and keyed row-36 lineage. Architecture pattern-reference
+ownership remains independent. Seven mutations reject semantic and
+stale-evidence drift. Final evidence has 88 nodes, 580 edges, 88 components,
+188 suites, and 84 Bash checkers.
 ### M6-I37 Architecture Durable-Workflow Acceptance
 
 The registered Architecture reference suite replaces the 64-line checker with

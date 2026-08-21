@@ -934,3 +934,8 @@ requires = []
 id = "architecture-monorepo-pattern"
 path = "evaluation/standards-effectiveness/suites/architecture-monorepo-pattern.toml"
 requires = []
+
+[[suites]]
+id = "architecture-layered-pattern"
+path = "evaluation/standards-effectiveness/suites/architecture-layered-pattern.toml"
+requires = []

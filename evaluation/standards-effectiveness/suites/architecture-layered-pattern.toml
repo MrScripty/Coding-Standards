@@ -1,0 +1,128 @@
+schema_version = 1
+id = "architecture-layered-pattern"
+owner = "reference.patterns.architecture"
+description = "Contract-selected layered-arrangement illustration with typed no-universal-default outcomes and exact legacy lineage."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/layered-pattern-decisions.tsv"
+expected_column = "expected"
+default = "illustrate"
+[checks.domains]
+case = ["*"]
+concerns = ["multiple", "one"]
+owners = ["complete", "contradictory", "missing"]
+contracts = ["complete", "missing"]
+change_axes = ["coherent", "coupled", "independent"]
+fallback = ["four-layers", "inward-only", "none"]
+expected = ["illustrate", "keep-together", "reconsider-boundary", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "owners", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "owners", op = "eq", value = "missing" },
+  { field = "contracts", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "keep-together"
+[checks.rules.when]
+field = "concerns"
+op = "eq"
+value = "one"
+[[checks.rules]]
+outcome = "reconsider-boundary"
+[checks.rules.when]
+field = "change_axes"
+op = "eq"
+value = "coupled"
+
+[[checks]]
+id = "reference-projection"
+type = "text"
+path = "reference/patterns/architecture.md"
+required = [
+  "## Conditional Layered Arrangement",
+  "This shape does not require these names, four layers",
+  "Dependencies in an adaptation point toward the owner of each stable contract",
+  "### Conditional Consequences",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-routes"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = [
+  "[Architecture](topics/architecture.md)",
+  "[Architecture Pattern Reference](reference/patterns/architecture.md#conditional-layered-arrangement)",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-universal-defaults"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = []
+prohibited = [
+  "Dependencies point inward only",
+  "Domain is the core and depends on nothing",
+  "Organize code into horizontal layers",
+  "Outer layers depend on inner layers",
+  "Inner layers never depend on outer layers",
+]
+
+[[checks]]
+id = "reference-universal-defaults"
+type = "text"
+path = "reference/patterns/architecture.md"
+required = []
+prohibited = [
+  "Dependencies point inward only",
+  "Domain is the core and depends on nothing",
+  "Organize code into horizontal layers",
+  "Outer layers depend on inner layers",
+  "Inner layers never depend on outer layers",
+]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [["STD-0028"], ["STD-0029"], ["STD-0030"], ["STD-0031"], ["STD-0032"], ["STD-0033"]]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0028", "STD-0029", "STD-0030", "STD-0031", "STD-0032", "STD-0033"]
+
+[[checks]]
+id = "owner-lineage"
+type = "keyed_relation"
+[checks.keys]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["id"]
+order = "source"
+where = { field = "id", op = "in", values = ["STD-0028", "STD-0029", "STD-0030", "STD-0031", "STD-0032", "STD-0033"] }
+[checks.expected]
+path = "evaluation/standards-effectiveness/milestone-7-row-36-owner-validation.tsv"
+header = ["id", "canonical_owner", "disposition", "reference_treatment", "rationale"]
+key = "id"
+values = ["canonical_owner", "disposition"]
+[checks.observed]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+key = "id"
+values = ["target", "disposition"]
