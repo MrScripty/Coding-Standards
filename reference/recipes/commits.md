@@ -122,8 +122,8 @@ python3 tools/verify_git_reachability.py \
   --manifest path/to/protected-oids.tsv
 ```
 
-Use `retained-ref` when the OID must be an ancestor of the named full ref,
-`archived-ref` when the ref must resolve to that exact OID, and
+Use `retained` when the OID must be an ancestor of the named full ref,
+`archived` when the ref must resolve to that exact OID, and
 `discard-authorized` only with an exact authority record and no ref. Run the
 same manifest after mutation. `git fsck --no-dangling` checks object integrity;
 it is not a substitute for this reachability comparison.

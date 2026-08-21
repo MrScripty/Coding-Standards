@@ -21,7 +21,7 @@ lexical similarity.
 | `reference/recipes/commits.md` | `updated` | Adds the non-normative executable protected-OID verification example. |
 | `workflows/release.md` | `reviewed-no-change` | Release owns maintenance behavior; retained-branch lifecycle continues to delegate to Commit. |
 | `STANDARDS-ROUTER.md` | `reviewed-no-change` | Existing applicability already routes branch/worktree lifecycle assessment and cleanup to Commit. |
-| `evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv` | `updated` | Replaces ambiguous removal acceptance with reachable, archived, retained, and unavailable outcomes. |
+| `evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv` | `updated` | Replaces ambiguous removal acceptance with reachable, archived, retained, authorized-discard, and refusal outcomes. |
 
 The policy-impact manifest metadata for changed consumers was updated without
 adding or inferring edges. Bounded manual review also found these non-graph

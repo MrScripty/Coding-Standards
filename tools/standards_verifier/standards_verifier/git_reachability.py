@@ -9,7 +9,7 @@ from typing import Sequence
 
 
 _OID = re.compile(r"^[0-9a-f]{40}(?:[0-9a-f]{24})?$")
-_DISPOSITIONS = frozenset({"retained-ref", "archived-ref", "discard-authorized"})
+_DISPOSITIONS = frozenset({"retained", "archived", "discard-authorized"})
 _HEADER = ("oid", "commit_disposition", "reference", "authority")
 
 
@@ -162,7 +162,7 @@ def verify_manifest(repository: Path, manifest: Path) -> tuple[ReachabilityRecor
                 f"reference is unavailable: {record.reference}",
             )
         reference_oid = resolved.stdout.strip()
-        if record.commit_disposition == "archived-ref":
+        if record.commit_disposition == "archived":
             if reference_oid != record.oid:
                 raise ReachabilityError(
                     "GIT_REACHABILITY.ARCHIVE_MISMATCH",

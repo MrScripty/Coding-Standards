@@ -1,4 +1,4 @@
-# Milestone 2 Stale-Registration Prune
+# Superseded Milestone 2 Stale-Registration Prune
 
 ## Retrospective Correction
 
@@ -36,6 +36,8 @@ Postconditions:
 
 The post-prune branch inventory was the Milestone 3 review input. It did not
 authorize deletion of patch-equivalent or unique branches and did not account
-for detached heads whose only root was the removed registration. Milestone 2
-remains in reconciliation until every reconstructed head has an accepted commit
-disposition and verified protection.
+for detached heads whose only root was the removed registration. The original
+Milestone 2 is `Superseded`; it cannot become accepted because its required
+pre-mutation reachability proof did not exist. Accepted replacement Milestone
+2R owns remediation through exact recovery refs, corrected policy, and current
+protected-OID verification.

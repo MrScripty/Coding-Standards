@@ -451,8 +451,8 @@ with current Git refs. Its strict TSV schema is:
 oid\tcommit_disposition\treference\tauthority
 ```
 
-`retained-ref` requires the OID to be an ancestor of the named full ref.
-`archived-ref` requires the ref to resolve to the exact OID.
+`retained` requires the OID to be an ancestor of the named full ref.
+`archived` requires the ref to resolve to the exact OID.
 `discard-authorized` requires `reference=none` and a nonempty authority record.
 The tool rejects malformed or duplicate OIDs, unknown refs or commits,
 repository-path escape, archive mismatches, and unreachable retained commits.

@@ -291,14 +291,18 @@ registry_state = ["absent", "not-applicable", "present"]
 retention_contract = ["complete", "missing", "not-applicable"]
 ownership = ["not-applicable", "owned", "unknown"]
 head_reachability = ["not-applicable", "registration-only", "retained-ref", "unknown"]
-commit_disposition = ["archived", "missing", "not-applicable", "retained"]
-expected = ["accepted-removed-archived", "accepted-removed-reachable", "accepted-retained", "not-applicable", "typed-invalid", "typed-unavailable"]
+commit_disposition = ["archived", "discard-authorized", "missing", "not-applicable", "retained"]
+discard_authority = ["explicit", "missing", "not-applicable"]
+expected = ["accepted-discard-authorized", "accepted-removed-archived", "accepted-removed-reachable", "accepted-retained", "not-applicable", "typed-invalid", "typed-unavailable"]
 [[checks.rules]]
 outcome = "typed-invalid"
 [checks.rules.when]
 any = [
   { all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "ownership", op = "eq", value = "unknown" }] },
   { all = [{ field = "head_reachability", op = "eq", value = "retained-ref" }, { field = "commit_disposition", op = "eq", value = "archived" }] },
+  { all = [{ field = "commit_disposition", op = "eq", value = "discard-authorized" }, { field = "discard_authority", op = "ne", value = "explicit" }] },
+  { all = [{ field = "discard_authority", op = "eq", value = "explicit" }, { field = "commit_disposition", op = "ne", value = "discard-authorized" }] },
+  { all = [{ field = "commit_disposition", op = "eq", value = "discard-authorized" }, { field = "registry_state", op = "ne", value = "absent" }] },
 ]
 [[checks.rules]]
 outcome = "not-applicable"
@@ -312,6 +316,10 @@ all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "terminal
 outcome = "accepted-removed-archived"
 [checks.rules.when]
 all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "terminal_record", op = "eq", value = "complete" }, { field = "registry_state", op = "eq", value = "absent" }, { field = "ownership", op = "eq", value = "owned" }, { field = "head_reachability", op = "eq", value = "registration-only" }, { field = "commit_disposition", op = "eq", value = "archived" }]
+[[checks.rules]]
+outcome = "accepted-discard-authorized"
+[checks.rules.when]
+all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "terminal_record", op = "eq", value = "complete" }, { field = "registry_state", op = "eq", value = "absent" }, { field = "ownership", op = "eq", value = "owned" }, { field = "head_reachability", op = "eq", value = "registration-only" }, { field = "commit_disposition", op = "eq", value = "discard-authorized" }, { field = "discard_authority", op = "eq", value = "explicit" }]
 [[checks.rules]]
 outcome = "accepted-retained"
 [checks.rules.when]
@@ -448,7 +456,7 @@ values = ["STD-0663", "STD-0703"]
 id = "commit-recipe-reference-metadata"
 type = "text"
 path = "reference/recipes/commits.md"
-required = ["- Role: `reference`", "- Level: `REFERENCE`", "git merge --ff-only", "tools/verify_git_reachability.py", "`archived-ref`", "not a substitute for this reachability comparison", "do not authorize rewriting or cleanup"]
+required = ["- Role: `reference`", "- Level: `REFERENCE`", "git merge --ff-only", "tools/verify_git_reachability.py", "`archived`", "not a substitute for this reachability comparison", "do not authorize rewriting or cleanup"]
 prohibited = []
 
 [[checks]]

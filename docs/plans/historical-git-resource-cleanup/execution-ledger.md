@@ -166,3 +166,12 @@ explicit `start` operation.
   state now satisfies the corrected policy.
 - Reaccepted the cleanup objective with recovery-ref retirement deferred to
   separate durable-archive review and authority.
+
+## 2026-08-21 - Milestone Supersession Correction
+
+- Marked original Milestone 2 `Superseded`; its missing pre-mutation
+  reachability proof cannot be repaired retroactively.
+- Recorded accepted replacement Milestone 2R as the owner of exact recovery
+  refs, current protected-OID verification, and the repaired terminal state.
+- Split the overstated before/after criterion into truthful historical
+  remediation and prospective policy requirements.

@@ -59,7 +59,7 @@ class GitReachabilityTest(unittest.TestCase):
     def test_retained_ref_accepts_an_ancestor(self) -> None:
         records = verify_manifest(
             self.root,
-            self.manifest([(self.first, "retained-ref", "refs/heads/master", "none")]),
+            self.manifest([(self.first, "retained", "refs/heads/master", "none")]),
         )
         self.assertEqual(records[0].oid, self.first)
 
@@ -67,23 +67,23 @@ class GitReachabilityTest(unittest.TestCase):
         self.git("update-ref", "refs/recovery/example", self.first)
         verify_manifest(
             self.root,
-            self.manifest([(self.first, "archived-ref", "refs/recovery/example", "none")]),
+            self.manifest([(self.first, "archived", "refs/recovery/example", "none")]),
         )
         self.assert_code(
             "GIT_REACHABILITY.ARCHIVE_MISMATCH",
-            [(self.second, "archived-ref", "refs/recovery/example", "none")],
+            [(self.second, "archived", "refs/recovery/example", "none")],
         )
 
     def test_unknown_reference_is_distinct(self) -> None:
         self.assert_code(
             "GIT_REACHABILITY.UNKNOWN_REFERENCE",
-            [(self.first, "retained-ref", "refs/heads/missing", "none")],
+            [(self.first, "retained", "refs/heads/missing", "none")],
         )
 
     def test_malformed_reference_is_invalid(self) -> None:
         self.assert_code(
             "GIT_REACHABILITY.INVALID_REFERENCE",
-            [(self.first, "retained-ref", "refs/heads/bad..name", "none")],
+            [(self.first, "retained", "refs/heads/bad..name", "none")],
         )
 
     def test_retained_ref_rejects_unreachable_commit(self) -> None:
@@ -91,7 +91,7 @@ class GitReachabilityTest(unittest.TestCase):
         other = self.commit("other")
         self.assert_code(
             "GIT_REACHABILITY.UNREACHABLE",
-            [(self.second, "retained-ref", "refs/heads/other", "none")],
+            [(self.second, "retained", "refs/heads/other", "none")],
         )
         self.assertNotEqual(other, self.second)
 
@@ -109,16 +109,24 @@ class GitReachabilityTest(unittest.TestCase):
         self.assert_code(
             "GIT_REACHABILITY.DUPLICATE_OID",
             [
-                (self.first, "retained-ref", "refs/heads/master", "none"),
-                (self.first, "archived-ref", "refs/recovery/example", "none"),
+                (self.first, "retained", "refs/heads/master", "none"),
+                (self.first, "archived", "refs/recovery/example", "none"),
             ],
         )
 
     def test_malformed_oid_is_rejected(self) -> None:
         self.assert_code(
             "GIT_REACHABILITY.INVALID_OID",
-            [("abc", "retained-ref", "refs/heads/master", "none")],
+            [("abc", "retained", "refs/heads/master", "none")],
         )
+
+    def test_legacy_ref_suffix_dispositions_are_rejected(self) -> None:
+        for disposition in ("retained-ref", "archived-ref"):
+            with self.subTest(disposition=disposition):
+                self.assert_code(
+                    "GIT_REACHABILITY.INVALID_DISPOSITION",
+                    [(self.first, disposition, "refs/heads/master", "none")],
+                )
 
     def test_manifest_path_cannot_escape_repository(self) -> None:
         with self.assertRaises(ReachabilityError) as raised:

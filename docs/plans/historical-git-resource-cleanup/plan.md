@@ -29,7 +29,8 @@ patch equivalence as deletion authority.
 | A1 | Every mutated resource set has an exact recorded outcome, and any unproven historical ownership or task-independence precondition is explicitly classified rather than retroactively accepted. | `satisfied` | Corrected Milestone 2 evidence and [reachability reconciliation](../historical-git-reachability-recovery/reports/reachability-reconciliation.md) |
 | A2 | Every detached head whose worktree registration is removed remains reachable from a retained ref, is protected by a recovery/archive ref, or has exact discard authority. | `satisfied` | [Reachability recovery](../historical-git-reachability-recovery/plan.md) protects and verifies all 208 reconstructed detached heads |
 | A3 | No unique, shared, published, checked-out, unknown, or unmapped commit is discarded except the exact 12 superseded proposal commits covered by recorded destructive authority. | `satisfied` | [Unique-proposal review](reports/milestone-4-unique-proposal-review.md), exact disposition table, and accepted retirement authority |
-| A4 | Repository state and an explicit protected-OID set are compared before and after every accepted cleanup batch that can remove a reachability root. | `satisfied` | Prior evidence is explicitly rejected; the recovery manifest and reusable verifier prove every reconstructed detached head now has an exact recovery ref |
+| A4a | The historical stale-registration batch lacked valid pre/post reachability proof, and its resulting detached heads are now remediated without retroactively accepting the failed proof. | `satisfied` | [Superseded prune milestone](reports/milestone-2-prune.md) and [reachability reconciliation](../historical-git-reachability-recovery/reports/reachability-reconciliation.md) |
+| A4b | Future cleanup that can remove a reachability root requires an explicit protected-OID set captured before mutation and verified against accepted dispositions afterward. | `satisfied` | [Commit lifecycle policy](../../../workflows/commit.md), task-worktree fixture, and reusable reachability verifier |
 
 ## Scope
 
@@ -74,7 +75,8 @@ patch equivalence as deletion authority.
 | Milestone | Goal | Status |
 | --- | --- | --- |
 | 1 | Refresh read-only branch/worktree facts and exact dispositions. | `Accepted` |
-| 2 | Execute an explicitly authorized stale-registration cleanup batch and reconcile the missing historical reachability proof. | `Accepted` |
+| 2 | Execute an explicitly authorized stale-registration cleanup batch with valid before/after protected-OID proof. | `Superseded` |
+| 2R | Remediate every reconstructed detached head, replace the invalid reachability claim, and accept the repaired terminal state. | `Accepted` |
 | 3 | Review redundant branch refs separately from registrations and protect every unique or unmapped commit. | `Accepted` |
 | 4 | Verify terminal repository integrity, protected commit reachability, and deferred retained resources. | `Accepted` |
 

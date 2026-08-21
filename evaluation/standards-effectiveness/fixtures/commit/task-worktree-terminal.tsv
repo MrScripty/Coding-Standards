@@ -1,11 +1,15 @@
-case	task_created	terminal_record	registry_state	retention_contract	ownership	head_reachability	commit_disposition	expected
-no-task-worktree	no	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable
-removed-reachable	yes	complete	absent	not-applicable	owned	retained-ref	retained	accepted-removed-reachable
-removed-archived	yes	complete	absent	not-applicable	owned	registration-only	archived	accepted-removed-archived
-explicitly-retained	yes	complete	present	complete	owned	registration-only	retained	accepted-retained
-removed-unprotected	yes	complete	absent	not-applicable	owned	registration-only	missing	typed-unavailable
-unknown-head-state	yes	complete	absent	not-applicable	owned	unknown	missing	typed-unavailable
-registration-still-present	yes	complete	present	missing	owned	registration-only	retained	typed-unavailable
-terminal-record-missing	yes	missing	present	complete	owned	registration-only	retained	typed-unavailable
-ownership-contradiction	yes	complete	present	complete	unknown	registration-only	retained	typed-invalid
-contradictory-archive	yes	complete	absent	not-applicable	owned	retained-ref	archived	typed-invalid
+case	task_created	terminal_record	registry_state	retention_contract	ownership	head_reachability	commit_disposition	discard_authority	expected
+no-task-worktree	no	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable
+removed-reachable	yes	complete	absent	not-applicable	owned	retained-ref	retained	not-applicable	accepted-removed-reachable
+removed-archived	yes	complete	absent	not-applicable	owned	registration-only	archived	not-applicable	accepted-removed-archived
+authorized-discard	yes	complete	absent	not-applicable	owned	registration-only	discard-authorized	explicit	accepted-discard-authorized
+explicitly-retained	yes	complete	present	complete	owned	registration-only	retained	not-applicable	accepted-retained
+removed-unprotected	yes	complete	absent	not-applicable	owned	registration-only	missing	not-applicable	typed-unavailable
+unknown-head-state	yes	complete	absent	not-applicable	owned	unknown	missing	not-applicable	typed-unavailable
+registration-still-present	yes	complete	present	missing	owned	registration-only	retained	not-applicable	typed-unavailable
+terminal-record-missing	yes	missing	present	complete	owned	registration-only	retained	not-applicable	typed-unavailable
+ownership-contradiction	yes	complete	present	complete	unknown	registration-only	retained	not-applicable	typed-invalid
+contradictory-archive	yes	complete	absent	not-applicable	owned	retained-ref	archived	not-applicable	typed-invalid
+discard-missing-authority	yes	complete	absent	not-applicable	owned	registration-only	discard-authorized	missing	typed-invalid
+authority-without-discard	yes	complete	absent	not-applicable	owned	registration-only	archived	explicit	typed-invalid
+discard-registration-present	yes	complete	present	missing	owned	registration-only	discard-authorized	explicit	typed-invalid

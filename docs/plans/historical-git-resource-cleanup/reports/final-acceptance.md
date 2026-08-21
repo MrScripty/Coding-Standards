@@ -14,6 +14,10 @@ and a reusable verifier checks the authoritative protected-OID manifest. This
 acceptance does not restate the original prune as safe; it accepts the repaired
 terminal state and the corrected authority.
 
+Original Milestone 2 is `Superseded`, not accepted. Replacement Milestone 2R
+owns the accepted reachability remediation. This preserves the failed
+milestone's historical truth instead of rewriting it into a successful result.
+
 ## Final State
 
 The cleanup produced this current operational state:

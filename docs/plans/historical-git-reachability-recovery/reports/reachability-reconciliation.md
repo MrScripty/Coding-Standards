@@ -20,7 +20,7 @@ OID rows and refs are authoritative.
 All 208 detached heads are protected conservatively under exact
 `refs/recovery/historical-worktrees/<short-oid>` refs. The four-column
 [protected OID manifest](../inventories/protected-oids.tsv) records each OID as
-`archived-ref`; no row uses discard authority.
+`archived`; no row uses discard authority.
 
 The reusable verifier reported:
 

@@ -44,3 +44,17 @@
   freshness, and `git diff --check`.
 - Accepted Milestone 2 and the recovery objective. No verifier package was
   selected or admitted; the parent plans resume at a fresh graph audit.
+
+## 2026-08-21 - Post-Acceptance Consistency Correction
+
+- Preserved the failed historical prune as `Superseded` and assigned accepted
+  remediation to replacement Milestone 2R.
+- Added task-worktree terminal coverage for authorized discard plus missing-
+  authority and contradictory-registry failures.
+- Unified reachability-manifest disposition values with canonical Commit terms
+  instead of retaining verifier-only `*-ref` values.
+- Passed 342 standards-verifier tests, all 199 declarative suites, the focused
+  Commit suite, both affected plan-structure checks, and the complete mixed
+  checkpoint with 73 retained Bash checkers.
+- Reverified all 208 protected commits against exact recovery refs with zero
+  discard authorizations.

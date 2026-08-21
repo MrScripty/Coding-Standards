@@ -762,7 +762,8 @@ decisions distinguish retained-ref, registration-only, and unknown head
 reachability from retained, archived, and exact discard-authorized commit
 dispositions. A separate task-worktree terminal fixture requires each
 task-created registry entry to be absent after reachability-safe removal or
-covered by an explicit retained-resource contract; it grants no historical or
+covered by an explicit retained-resource contract, and distinguishes retained,
+archived, and explicitly authorized discard outcomes; it grants no historical or
 repository-wide cleanup authority.
 
 ## Consolidation Dispositions
