@@ -4705,6 +4705,17 @@
 - Fresh-graph owner-coherent package selection is next; M6-I21 is not
   preselected.
 
+## 2026-08-20 - M6-I21 Frontend Owner-Contract Admission
+
+- Selected the shortest of 23 caller-free verifiers from fresh post-M6-I20
+  evidence. Five generic checks cover 17 decisions, owner and route text, and
+  exact `STD-0187` authority.
+- Row-15 remains independent. Acceptance must remove the checker from row-35's
+  exact current Bash-consumer inventory and transfer two M6-T13 records.
+- Disposable final state passes 169 suites and the complete checkpoint at
+  104 Bash checkers, 108 nodes, 660 edges, and 108 components. Admission state
+  has 105 Bash checkers, 109 nodes, 666 edges, and 109 components.
+
 ## 2026-08-20 - M6-I16 Accessibility Focus-Lifecycle Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its modality,

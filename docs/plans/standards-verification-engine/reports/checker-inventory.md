@@ -4355,3 +4355,16 @@ and 109 components. Focused suite and gate checks, package/edge authority,
 numeric lifecycle, generated freshness, all-suite, mutation, complete-checkpoint,
 plan, and diff checks pass without an engine, source, fixture, dependency,
 wrapper, compatibility, or fallback change.
+
+### M6-I21 Frontend Owner-Contract Admission
+
+The fresh post-M6-I20 graph has 23 caller-free verifiers and selects the
+37-line Frontend owner-contract checker. Its 17 decisions, canonical profile,
+Router/root projections, and exact `STD-0187` disposition form one owner
+contract. Row-15 remains independent; row-35's current Bash-consumer row must
+close when the checker is removed.
+
+Disposable final state uses five generic checks and passes row-35, row-15, all
+169 suites, and the complete checkpoint at 104 Bash checkers, 108 nodes, 660
+edges, and 108 components. M6-I21 is admitted at train order 136 without an
+engine, source, fixture, wrapper, compatibility, or fallback change.

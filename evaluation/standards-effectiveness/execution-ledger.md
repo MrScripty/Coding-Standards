@@ -13544,3 +13544,15 @@ nodes, 665 edges, and 109 components. Focused, independent-gate, package/edge,
 numeric, generated, plan, all-suite, complete-checkpoint, mutation, and diff
 checks pass without an engine, source, fixture, dependency, wrapper,
 compatibility, or fallback change.
+
+## 2026-08-20 M6-I21 Frontend Owner-Contract Admission
+
+**Outcome:** admitted at train order 136; atomic acceptance is next.
+
+Fresh post-M6-I20 evidence selected the 37-line Frontend owner contract from
+23 caller-free verifiers. Disposable final state passes its five generic
+checks, row-35 current-consumer closure, independent row-15 lifecycle, all 169
+suites, and the complete checkpoint at 104 Bash checkers, 108 nodes, 660 edges,
+and 108 components. Admission evidence has 105 checkers, 109 nodes, 666 edges,
+and 109 components. No engine, source, fixture, wrapper, compatibility, or
+fallback change is admitted.
