@@ -5938,3 +5938,18 @@
 - Five negative mutations, both retained gates, 342 verifier tests, all 200
   declarative suites, numeric lifecycle, and generated freshness pass. Final
   graph: 72 Bash checkers, 76 nodes, 515 edges, 76 components.
+
+## 2026-08-21 - M6-I54 Rust Binding Workspace Evidence Acceptance
+
+- Fresh evidence selected the 87-line Rust binding workspace/evidence checker
+  as the shortest caller-free verifier and qualified it for
+  `serial-coherent` execution.
+- Replaced it with one five-check language-profile suite covering 14 typed
+  package, dependency, capability, evidence, and no-fallback decisions plus
+  canonical profile, legacy index, disposition, and README projections.
+- Transferred the historical artifact-selection gate to suite authority and
+  preserved core/adapter, row-7, and execution-train lifecycle as independent
+  gates through six accepted records.
+- Five negative mutations, all three retained gates, 342 verifier tests, all
+  201 declarative suites, numeric lifecycle, and generated freshness pass.
+  Final graph: 71 Bash checkers, 75 nodes, 507 edges, 75 components.

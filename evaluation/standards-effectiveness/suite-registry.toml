@@ -999,3 +999,8 @@ requires = []
 id = "milestone-7-row-13-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-13-decomposition.toml"
 requires = []
+
+[[suites]]
+id = "rust-binding-workspace-evidence"
+path = "evaluation/standards-effectiveness/suites/rust-binding-workspace-evidence.toml"
+requires = []

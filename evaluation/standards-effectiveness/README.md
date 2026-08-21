@@ -236,11 +236,11 @@ framework-coupled core behavior, missing or failed evidence, native-only
 adapter claims, NIF-only architecture, skipped core checks, alternate
 frameworks, and default success with typed outcomes.
 
-`fixtures/rust/binding-workspace-evidence-*.tsv` and
-`verify-rust-binding-workspace-evidence.sh` select shared or separate Rust
-package placement while preserving core-to-adapter dependency direction and
-required native/host evidence. They reject missing or contradictory package
-facts, reversed dependencies, required-evidence exclusion, native-only or
+`fixtures/rust/binding-workspace-evidence-*.tsv` and the registered
+`rust-binding-workspace-evidence` suite select shared or separate Rust package
+placement while preserving core-to-adapter dependency direction and required
+native/host evidence. They reject missing or contradictory package facts,
+reversed dependencies, required-evidence exclusion, native-only or
 alternate-framework substitution, and default success with typed outcomes.
 
 `fixtures/language-bindings/mechanism-selection-*.tsv` and

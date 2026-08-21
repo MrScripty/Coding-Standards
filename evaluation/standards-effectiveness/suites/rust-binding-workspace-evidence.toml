@@ -1,0 +1,101 @@
+schema_version = 1
+id = "rust-binding-workspace-evidence"
+owner = "profile.language.rust.language-bindings"
+description = "Fact-derived Rust binding package placement, dependency direction, and core/adapter evidence without layout or evidence fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-workspace-evidence-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+package_facts = ["contradictory", "declared", "missing"]
+dependency_direction = ["preserved", "reversed"]
+adapter_required = ["no", "yes"]
+core_evidence = ["missing", "pass"]
+adapter_evidence = ["missing", "native-only", "not-required", "pass", "separate"]
+capability = ["available", "not-required", "unavailable"]
+fallback = ["alternate-framework", "default-success", "exclude", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "package_facts", op = "eq", value = "contradictory" },
+  { field = "dependency_direction", op = "eq", value = "reversed" },
+  { field = "adapter_evidence", op = "eq", value = "native-only" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "package_facts", op = "eq", value = "missing" },
+  { field = "core_evidence", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "unavailable" },
+  { all = [
+    { field = "adapter_required", op = "eq", value = "yes" },
+    { field = "adapter_evidence", op = "eq", value = "missing" },
+  ] },
+]
+
+[[checks]]
+id = "canonical-profile"
+type = "text"
+path = "profiles/languages/rust/language-bindings.md"
+required = [
+  "Select crate, package, workspace-member, feature, generated-output, and script",
+  "code may use separate packages or remain in one package",
+  "not evidence waivers",
+  "real host evidence remains part of acceptance",
+  "typed `unavailable`",
+  "typed `invalid`",
+  "Do not prescribe a crate tree",
+  "substitute native-only tests",
+  "select another framework",
+  "report default success",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "### Workspace Layout"
+required = [
+  "language-bindings.md#package-and-workspace-placement",
+  "No crate tree",
+]
+prohibited = [
+  "[workspace]",
+  "default-members",
+  "mylib-uniffi",
+  "generate-bindings.sh",
+]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0761", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine"],
+  ["STD-0762", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0761", "STD-0762"]
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["`rust-binding-workspace-evidence` suite select shared or separate Rust"]
+prohibited = ["`verify-rust-binding-workspace-evidence.sh` select shared or separate Rust"]

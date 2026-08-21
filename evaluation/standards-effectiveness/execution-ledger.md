@@ -14459,3 +14459,18 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   declarative suites, numeric lifecycle, and generated freshness pass. Final
   graph: 72 Bash checkers, 76 nodes, 515 edges, 76 components. No fallback or
   compatibility authority remains.
+
+## 2026-08-21 - M6-I54 Rust Binding Workspace Evidence Acceptance
+
+- Fresh post-M6-I53 evidence selected the 87-line Rust binding workspace and
+  evidence checker for one `serial-coherent` package at train order 169.
+- The registered five-check suite preserves 14 typed decisions, canonical
+  profile requirements, bounded legacy-index closure, two exact dispositions,
+  and documentation authority.
+- The historical artifact-selection record now resolves to the suite;
+  core/adapter, row-7, and execution-train lifecycle remain independent through
+  six accepted edge records.
+- Five negative mutations, all three retained gates, 342 verifier tests, all
+  201 declarative suites, numeric lifecycle, and generated freshness pass.
+  Final graph: 71 Bash checkers, 75 nodes, 507 edges, 75 components. No fallback
+  or compatibility authority remains.
