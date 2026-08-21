@@ -4942,3 +4942,10 @@ transfer from checker evidence to the exact registered suite only at
 acceptance. M6-I39 is admitted at train order 154 without policy, fixture,
 disposition, owner-validation, engine, nested-gate, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changes.
+### M6-I39 Architecture Data-Authority Acceptance
+
+The registered reference suite replaces the 63-line checker with ten typed
+decisions, exact projections, case-insensitive default rejection, six exact
+dispositions, and keyed row-36 lineage. Monorepo policy remains independent.
+Seven mutations reject semantic and stale-evidence drift. Final evidence has
+90 nodes, 586 edges, 90 components, 186 suites, and 86 Bash checkers.

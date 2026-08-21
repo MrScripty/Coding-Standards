@@ -924,3 +924,8 @@ requires = []
 id = "architecture-composition-root-pattern"
 path = "evaluation/standards-effectiveness/suites/architecture-composition-root-pattern.toml"
 requires = []
+
+[[suites]]
+id = "architecture-data-authority-pattern"
+path = "evaluation/standards-effectiveness/suites/architecture-data-authority-pattern.toml"
+requires = []
