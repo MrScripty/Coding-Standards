@@ -63,3 +63,16 @@ explicit `start` operation.
 - The mapped branches are not Git ancestors of `main`; physical ref deletion
   therefore requires `git branch -D`. Because the active plan names force as a
   re-plan trigger, no mapped branch deletion is admitted.
+
+## 2026-08-21 - Mapped Redundant-Ref Re-Plan
+
+- Operation: `continue` from clean accepted revision
+  `481d8547d11c9910cb137e5a293f1bfade61547b`.
+- Accepted a narrow distinction between forced removal of an evidence-backed
+  redundant local ref and prohibited force deletion that could discard unique,
+  shared, published, checked-out, unknown, or unmapped history.
+- Admitted only the 115 `candidate-delete-mapped` rows in the accepted lineage
+  inventory. Each current tip must match, every source commit must retain one
+  reviewed accepted replacement, and no upstream or remote branch may exist.
+- The 12 `retain-lineage-review` branches remain outside the write set and keep
+  full protection for their unique commits.

@@ -2,13 +2,13 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3 replacement lineage accepted; cleanup re-plan required
+**Current phase:** Milestone 3 mapped redundant-ref retirement
 
-**Next slice:** none until explicit authority resolves divergent mapped-ref deletion semantics
+**Next slice:** revalidate and delete the exact 115 mapped redundant refs, then record post-deletion integrity evidence
 
 **Acceptance status:** `pending`
 
-**Accepted base:** `8cce95b27220faa3ed115542c7242464d04df225`
+**Accepted base:** `481d8547d11c9910cb137e5a293f1bfade61547b`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -59,6 +59,7 @@ ancestry, or patch equivalence as deletion authority.
 | Safe default | Unknown or contradictory ownership, path, lock, reachability, mapping, or retained-purpose facts refuse cleanup. |
 | Registration boundary | Administrative pruning and filesystem worktree removal are distinct operations with distinct evidence. |
 | Branch boundary | Ancestry and patch equivalence may trigger review but cannot authorize deletion without terminal ownership and replacement lineage. |
+| Mapped redundant refs | `git branch -D` is authorized only for the exact 115 `candidate-delete-mapped` rows accepted at `481d8547`: every tip must remain unchanged, every source commit must retain one accepted `main` replacement and semantic-subject agreement, and no branch may be checked out, published, shared, or contain unmapped history. This deletes redundant local refs; it does not authorize history rewrite or deletion of any unique branch. |
 | Batch size | Group only resources sharing ownership, disposition, risk, and verification contracts; preserve exact per-resource evidence. |
 | Integration owner | One serial owner controls inventory, cleanup commands, acceptance evidence, and shared Git authority. |
 
@@ -73,10 +74,7 @@ ancestry, or patch equivalence as deletion authority.
 
 ## Blockers
 
-- Deleting the 115 explicitly mapped but non-ancestral refs requires
-  `git branch -D`. The current plan names force deletion as a re-plan trigger,
-  so no mapped ref may be deleted until that contract is narrowed or another
-  non-rewriting terminal mechanism is selected.
+- `none`
 
 ## Re-Plan Triggers
 
@@ -84,8 +82,10 @@ ancestry, or patch equivalence as deletion authority.
   owner not represented by current evidence.
 - A branch contains unique commits or lacks explicit accepted-replacement
   lineage.
-- Cleanup requires force, history rewrite, remote mutation, or deletion outside
-  an accepted exact resource set.
+- Forced ref deletion is requested outside the exact accepted mapped-redundant
+  set, or any mapped-ref precondition no longer holds.
+- Cleanup requires history rewrite, remote mutation, or deletion outside an
+  accepted exact resource set.
 - Current Git state changes after a cleanup batch is admitted.
 
 ## Final Acceptance
