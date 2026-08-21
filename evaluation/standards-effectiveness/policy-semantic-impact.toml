@@ -65,6 +65,10 @@ id = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
 metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv" }
 
 [[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv" }
+
+[[nodes]]
 id = "evaluation/standards-effectiveness/README.md"
 metadata = { repository_path = "evaluation/standards-effectiveness/README.md" }
 
@@ -481,6 +485,15 @@ relation = "fixture-projection"
 groups = ["policy-impact", "semantic"]
 traversable = true
 metadata = { applicability = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, and cleanup refusal.", evidence_owner = "suite:commit-consolidation-dispositions" }
+
+[[edges]]
+id = "policy.commit.task-worktree-terminal-fixture"
+source = "workflow.commit"
+target = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv"
+relation = "fixture-projection"
+groups = ["policy-impact", "semantic"]
+traversable = true
+metadata = { applicability = "The terminal fixture enforces bounded final-state evidence for worktrees created by the governed task without authorizing historical cleanup.", evidence_owner = "suite:commit-consolidation-dispositions" }
 
 [[edges]]
 id = "policy.commit.enforcement-suite"

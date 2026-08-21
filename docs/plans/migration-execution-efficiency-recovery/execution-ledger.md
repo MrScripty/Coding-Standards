@@ -49,3 +49,27 @@
   that commit cadence alone is not a checkpoint boundary.
 - Milestone 2 is accepted. Milestone 3 Commit projections and historical
   cleanup planning are next.
+
+## 2026-08-21 - Milestone 3 And Recovery Acceptance
+
+- Audited all Commit policy-impact consumers through both logical and path
+  aliases. Both queries return the same exact 15-edge set, and every consumer
+  has one reviewed disposition.
+- Added a bounded terminal postcondition for worktrees created by the governed
+  task: the exact registry entry must be absent after safe removal or covered
+  by an explicit retained-resource contract. Repository-wide and historical
+  cleanup remain unauthorized.
+- Added six decision cases for no task worktree, accepted removal, accepted
+  retention, incomplete cleanup, missing terminal evidence, and contradictory
+  ownership.
+- Created the separate `Planned` historical Git-resource cleanup plan without
+  pruning registrations, removing worktrees, deleting refs, or rewriting
+  history. Recorded the independent remote-backup risk without authorizing a
+  push.
+- Verification passes: 35 neutral graph tests, 332 verifier tests, all 190
+  declarative suites, focused Commit/prompt/template/impact suites, alias and
+  disposition closure, affected plan structure, generated freshness, and the
+  complete mixed checkpoint with 82 retained Bash checkers.
+- The recovery is accepted. M6-I44 remains pre-admitted and blocked by VE086;
+  remote backup authority is the next separate decision before migration
+  resumes.

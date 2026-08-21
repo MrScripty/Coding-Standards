@@ -757,7 +757,11 @@ range, distinguishes linear and merge topology, and rejects the removed
 mandatory cleanup policy without executing a Bash checker. Its independent
 branch-lifecycle outcomes also verify proportionate isolation, least-
 transforming integration, terminal classification, replacement lineage, and
-bounded cleanup authority without letting one decision mask another.
+bounded cleanup authority without letting one decision mask another. A
+separate task-worktree terminal fixture requires each task-created registry
+entry to be absent after safe removal or covered by an explicit retained-
+resource contract; it grants no historical or repository-wide cleanup
+authority.
 
 ## Consolidation Dispositions
 

@@ -261,6 +261,37 @@ outcome = "retire-redundant-ref"
 all = [{ field = "cleanup_basis", op = "eq", value = "evidence-only" }, { field = "mapping", op = "eq", value = "complete" }]
 
 [[checks]]
+id = "task-worktree-terminal-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv"
+expected_column = "expected"
+default = "typed-unavailable"
+[checks.domains]
+case = ["*"]
+task_created = ["no", "yes"]
+terminal_record = ["complete", "missing", "not-applicable"]
+registry_state = ["absent", "not-applicable", "present"]
+retention_contract = ["complete", "missing", "not-applicable"]
+ownership = ["not-applicable", "owned", "unknown"]
+expected = ["accepted-removed", "accepted-retained", "not-applicable", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "ownership", op = "eq", value = "unknown" }]
+[[checks.rules]]
+outcome = "not-applicable"
+[checks.rules.when]
+all = [{ field = "task_created", op = "eq", value = "no" }]
+[[checks.rules]]
+outcome = "accepted-removed"
+[checks.rules.when]
+all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "terminal_record", op = "eq", value = "complete" }, { field = "registry_state", op = "eq", value = "absent" }, { field = "ownership", op = "eq", value = "owned" }]
+[[checks.rules]]
+outcome = "accepted-retained"
+[checks.rules.when]
+all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "terminal_record", op = "eq", value = "complete" }, { field = "registry_state", op = "eq", value = "present" }, { field = "retention_contract", op = "eq", value = "complete" }, { field = "ownership", op = "eq", value = "owned" }]
+
+[[checks]]
 id = "commit-identifier-coverage"
 type = "relation"
 mode = "set"
@@ -398,7 +429,7 @@ prohibited = []
 id = "commit-lifecycle-owner"
 type = "text"
 path = "workflows/commit.md"
-required = ["branch/worktree isolation, integration, lifecycle assessment, or cleanup", "## Branch And Worktree Applicability", "## Integration Mechanism Selection", "## Cherry-Pick And Replacement Lineage", "## Terminal Branch Lifecycle", "## Worktree Lifecycle And Cleanup Authority", "Do not cherry-pick merely because", "never independently authorize deletion", "separate explicit destructive authority", "Generic cleanup", "automation must refuse"]
+required = ["branch/worktree isolation, integration, lifecycle assessment, or cleanup", "## Branch And Worktree Applicability", "## Integration Mechanism Selection", "## Cherry-Pick And Replacement Lineage", "## Terminal Branch Lifecycle", "## Worktree Lifecycle And Cleanup Authority", "Do not cherry-pick merely because", "never independently authorize deletion", "separate explicit destructive authority", "Generic cleanup", "automation must refuse", "path and its stale", "absent from `git worktree list`", "explicit retained-resource contract", "does not authorize a repository-wide prune"]
 prohibited = ["always create a branch", "always cherry-pick", "Force-remove dirty worktrees"]
 
 [[checks]]
@@ -412,7 +443,7 @@ prohibited = ["comments, and branches that have no"]
 id = "commit-evaluation-documentation"
 type = "text"
 path = "evaluation/standards-effectiveness/README.md"
-required = ["branch-lifecycle outcomes", "proportionate isolation", "least-", "terminal classification", "replacement lineage", "bounded cleanup authority", "without letting one decision mask another"]
+required = ["branch-lifecycle outcomes", "proportionate isolation", "least-", "terminal classification", "replacement lineage", "bounded cleanup authority", "without letting one decision mask another", "task-worktree terminal fixture", "absent after safe removal", "historical or repository-wide cleanup"]
 prohibited = []
 
 [[checks]]
@@ -440,12 +471,12 @@ prohibited = ["branch for every"]
 id = "branch-lifecycle-implementation-prompt"
 type = "text"
 path = "prompts/implement-plan.md"
-required = ["branch or worktree facts", "not cherry-pick by default"]
+required = ["branch or worktree facts", "not cherry-pick by default", "each worktree path created by this task", "registry entry is absent", "Do not substitute a repository-wide prune"]
 prohibited = ["always cherry-pick"]
 
 [[checks]]
 id = "branch-lifecycle-plan-template"
 type = "text"
 path = "templates/PLAN-TEMPLATE.md"
-required = ["## Repository Isolation", "material repository isolation", "expected terminal disposition", "Do not require a branch merely", "written plan exists"]
+required = ["## Repository Isolation", "material repository isolation", "expected terminal disposition", "Do not require a branch merely", "written plan exists", "each worktree created by the plan", "registry entry is absent", "does not authorize repository-wide pruning"]
 prohibited = ["branch for every"]

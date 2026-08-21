@@ -287,6 +287,7 @@ class PolicyImpactTest(unittest.TestCase):
                 "evaluation/standards-effectiveness/fixtures/commit/authority.tsv",
                 "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv",
                 "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv",
+                "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv",
                 "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
                 "evaluation/standards-effectiveness/README.md",
             },

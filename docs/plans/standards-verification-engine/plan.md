@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** complete the migration-execution efficiency recovery before
-re-planning admitted M6-I44
+**Next slice:** resolve separate backup authority, then re-plan M6-I44 from
+fresh graph and row-35 consumer evidence
 
 **Acceptance status:** `pending`
 
@@ -16,7 +16,7 @@ coordination checker with one registered reference-owner suite at train order
 **Latest admitted slice:** M6-I44 at train order 159 requires write-set and
 consumer-authority re-planning before acceptance.
 
-**Current dependency:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
+**Accepted dependency:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -190,8 +190,10 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Accept the migration-execution efficiency recovery without resuming M6-I44.
-2. Re-plan M6-I44's exact write set and acceptance evidence for the row-35
+1. Resolve the separately owned remote-backup decision recorded by the accepted
+   migration-execution efficiency recovery.
+2. Re-plan M6-I44's exact write set and acceptance evidence from fresh graph
+   evidence for the row-35
    transitive contract-caller authority; do not preserve the removed checker.
 3. Accept the corrected M6-I44 package only after all registered suites pass.
 4. Select each subsequent owner-coherent package from reviewed lifecycle and

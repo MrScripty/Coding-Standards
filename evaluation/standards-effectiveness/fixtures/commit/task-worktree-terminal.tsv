@@ -1,0 +1,7 @@
+case	task_created	terminal_record	registry_state	retention_contract	ownership	expected
+no-task-worktree	no	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable
+removed-and-unregistered	yes	complete	absent	not-applicable	owned	accepted-removed
+explicitly-retained	yes	complete	present	complete	owned	accepted-retained
+registration-still-present	yes	complete	present	missing	owned	typed-unavailable
+terminal-record-missing	yes	missing	present	complete	owned	typed-unavailable
+ownership-contradiction	yes	complete	present	complete	unknown	typed-invalid

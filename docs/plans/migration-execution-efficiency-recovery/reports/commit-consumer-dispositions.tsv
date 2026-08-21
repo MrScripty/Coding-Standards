@@ -1,0 +1,16 @@
+owner	consumer	relation	disposition	reason	evidence_owner
+workflow.commit	evaluation/standards-effectiveness/fixtures/commit/authority.tsv	fixture-projection	reviewed-no-change	History-review and rewrite authority are unaffected by the task-owned terminal postcondition.	suite:commit-consolidation-dispositions
+workflow.commit	evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv	fixture-projection	reviewed-no-change	Existing pre-cleanup decisions continue to protect dirty locked unique unknown and stale resources.	suite:commit-consolidation-dispositions
+workflow.commit	evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv	fixture-projection	updated	New fixture proves exact task-created final-state removal retention and unavailable outcomes.	suite:commit-consolidation-dispositions
+workflow.commit	profile.workflow.concurrent-plan-integration	normative-consumer	reviewed-no-change	Existing cleanup handoff remains bounded to predeclared owned task resources.	suite:concurrent-plan-integration
+workflow.commit	commit-consolidation-dispositions	enforcement-suite-projection	updated	Suite enforces the new terminal decision fixture and all changed projections.	suite:commit-consolidation-dispositions
+workflow.commit	evaluation/standards-effectiveness/README.md	documentation-projection	updated	Evaluation documentation now describes task-worktree terminal coverage and its exclusions.	suite:commit-consolidation-dispositions
+workflow.commit	evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv	fixture-projection	reviewed-no-change	Hook bypass does not consume worktree terminal state.	suite:commit-consolidation-dispositions
+workflow.commit	prompts/implement-plan.md	prompt-projection	updated	Implementation now checks only exact task-created worktree paths at terminal acceptance.	suite:commit-consolidation-dispositions
+workflow.commit	workflow.implementation	normative-consumer	reviewed-no-change	Implementation already delegates terminal lifecycle and cleanup authority to Commit.	suite:commit-consolidation-dispositions
+workflow.commit	templates/PLAN-TEMPLATE.md	template-projection	updated	Repository Isolation now records exact task-created paths and terminal registry evidence.	suite:commit-consolidation-dispositions
+workflow.commit	prompts/planning.md	prompt-projection	reviewed-no-change	Planning prompt selection of material isolation is unaffected.	suite:commit-consolidation-dispositions
+workflow.commit	workflow.planning	normative-consumer	reviewed-no-change	Planning already delegates terminal cleanup to Commit and permits predeclared task-owned cleanup.	suite:planning-consolidation
+workflow.commit	reference.recipes.commits	reference-projection	reviewed-no-change	The recipe remains non-normative and grants no cleanup authority.	suite:commit-consolidation-dispositions
+workflow.commit	workflow.release	normative-consumer	reviewed-no-change	Long-lived release branch contracts remain independent of task-created worktree final-state proof.	suite:release-maintenance-policy
+workflow.commit	router	router-projection	reviewed-no-change	Router already selects Commit for worktree terminal lifecycle and cleanup decisions.	suite:commit-consolidation-dispositions

@@ -121,6 +121,15 @@ evidence are unambiguous. Patch-equivalent or cherry-picked branches require
 the source-to-accepted mapping before automated retirement. Age and quantity
 may trigger review but never independently authorize deletion.
 
+When a governed task creates a worktree, terminal acceptance records its exact
+path and classification, then confirms either that the path and its stale
+registration are absent from `git worktree list` after safe removal or that an
+explicit retained-resource contract names its purpose, owner, and next
+disposition. A task-created registration that remains without that contract is
+`unavailable` for terminal acceptance. Check only paths created by the task;
+this postcondition does not authorize a repository-wide prune or cleanup of
+historical, unknown, or other-owner registrations.
+
 Discarding unique commits from a rejected or abandoned branch requires
 separate explicit destructive authority naming the branch and unique commits,
 confirming they are not accepted, shared, or otherwise required, and recording
@@ -227,6 +236,8 @@ Stop with a typed process diagnostic when:
 - the requested rewrite would alter shared history;
 - branch purpose, target, ownership, or terminal evidence needed for the
   selected operation is unavailable;
+- a task-created worktree remains registered without an explicit retained-
+  resource contract;
 - a replacement commit lacks source-to-accepted lineage; or
 - cleanup would affect an unknown, dirty, locked, user-owned, or uniquely
   committed resource.

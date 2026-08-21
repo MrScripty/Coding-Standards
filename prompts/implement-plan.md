@@ -12,6 +12,10 @@ record.
 Consume branch or worktree facts only when the admitted plan selected material
 isolation. Follow Commit's least history-transforming integration decision; do
 not cherry-pick by default merely because implementation used another worktree.
+At terminal acceptance, check each worktree path created by this task: confirm
+its registry entry is absent after safe removal or record the explicit retained-
+resource contract. Do not substitute a repository-wide prune for this bounded
+postcondition.
 
 Route the adopting repository through
 [`STANDARDS-ROUTER.md`](../STANDARDS-ROUTER.md), then follow the canonical

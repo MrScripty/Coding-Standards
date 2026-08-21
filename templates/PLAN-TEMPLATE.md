@@ -120,6 +120,12 @@ stale-state coordination makes it relevant. Omit repository-isolation fields
 and remove this section for direct serial work. Do not require a branch merely
 because a written plan exists or because work is delegated.
 
+For each worktree created by the plan, record its exact path and terminal
+classification. Final evidence confirms that its registry entry is absent
+after safe removal or records an explicit retained-resource contract with its
+purpose, owner, and next disposition. This evidence is scoped to plan-created
+paths and does not authorize repository-wide pruning.
+
 ## Final Acceptance
 
 - Acceptance status: `pending`

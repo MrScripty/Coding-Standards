@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 7 verification migration
 
-**Next slice:** migration-execution efficiency recovery before M6-I44
+**Next slice:** resolve separate backup authority before fresh M6-I44
 consumer-authority re-planning
 
 **Acceptance status:** `partial`
@@ -98,7 +98,7 @@ universal architecture policy.
 | Verification migration | Bash checkers and helpers are removed with accepted Python-engine replacements; no wrappers, dual authority, compatibility parsers, or fallback remain. |
 | Accelerated execution | Select proportional `serial-coherent`, `pre-admitted`, `owner-wave`, or `shared-contract` migration modes from current risk and concurrency facts. Owner-coherent packages may prepare concurrently with disjoint write sets; shared registry, evidence, Router, and plan integration remain serial. |
 | Recovery dependency | Complete the generic edge-system recovery without changing the frozen temporary Bash graph, then obtain fresh graph evidence before another verifier package is selected. |
-| Current efficiency recovery | Stabilize temporary component identities, apply proportional serial/wave migration modes, and enforce task-owned worktree terminal evidence before M6-I44 resumes. |
+| Current efficiency recovery | The accepted recovery stabilizes temporary component identities, applies proportional serial/wave migration modes, and enforces task-owned worktree terminal evidence. Historical cleanup, backup publication, and pilots remain separately owned. |
 
 ## Current Architecture
 
@@ -160,8 +160,10 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Accept the [migration-execution efficiency recovery](../docs/plans/migration-execution-efficiency-recovery/plan.md).
-2. Re-plan M6-I44 through the verification-engine plan to resolve its row-35
+1. Resolve the separate remote-backup authority recorded by the accepted
+   [migration-execution efficiency recovery](../docs/plans/migration-execution-efficiency-recovery/plan.md).
+2. Re-plan M6-I44 through the verification-engine plan from fresh graph
+   evidence to resolve its row-35
    transitive-caller consumer before acceptance.
 3. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
