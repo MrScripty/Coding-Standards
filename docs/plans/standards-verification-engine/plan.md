@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** re-plan admitted M6-I44 to resolve the row-35 transitive-caller
-authority exposed by complete-suite verification
+**Next slice:** complete the migration-execution efficiency recovery before
+re-planning admitted M6-I44
 
 **Acceptance status:** `pending`
 
@@ -15,6 +15,8 @@ coordination checker with one registered reference-owner suite at train order
 
 **Latest admitted slice:** M6-I44 at train order 159 requires write-set and
 consumer-authority re-planning before acceptance.
+
+**Current dependency:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -160,10 +162,11 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Re-plan M6-I44's exact write set and acceptance evidence for the row-35
+1. Accept the migration-execution efficiency recovery without resuming M6-I44.
+2. Re-plan M6-I44's exact write set and acceptance evidence for the row-35
    transitive contract-caller authority; do not preserve the removed checker.
-2. Accept the corrected M6-I44 package only after all registered suites pass.
-3. Select each subsequent owner-coherent package from reviewed lifecycle and
+3. Accept the corrected M6-I44 package only after all registered suites pass.
+4. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.

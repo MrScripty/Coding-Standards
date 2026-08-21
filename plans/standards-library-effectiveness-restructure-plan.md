@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 7 verification migration
 
-**Next slice:** verification-engine re-plan for M6-I44 row-35 consumer
-authority
+**Next slice:** migration-execution efficiency recovery before M6-I44
+consumer-authority re-planning
 
 **Acceptance status:** `partial`
 
@@ -98,6 +98,7 @@ universal architecture policy.
 | Verification migration | Bash checkers and helpers are removed with accepted Python-engine replacements; no wrappers, dual authority, compatibility parsers, or fallback remain. |
 | Accelerated execution | Owner-coherent packages may prepare concurrently with disjoint write sets; shared registry, evidence, Router, and plan integration remain serial. |
 | Recovery dependency | Complete the generic edge-system recovery without changing the frozen temporary Bash graph, then obtain fresh graph evidence before another verifier package is selected. |
+| Current efficiency recovery | Stabilize temporary component identities, apply proportional serial/wave migration modes, and enforce task-owned worktree terminal evidence before M6-I44 resumes. |
 
 ## Current Architecture
 
@@ -159,9 +160,10 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Re-plan M6-I44 through the verification-engine plan to resolve its row-35
+1. Accept the [migration-execution efficiency recovery](../docs/plans/migration-execution-efficiency-recovery/plan.md).
+2. Re-plan M6-I44 through the verification-engine plan to resolve its row-35
    transitive-caller consumer before acceptance.
-2. Continue owner-coherent Python-engine migration until no Bash verifier,
+3. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
 3. Regenerate canonical inventories and prove exact dispositions, no source
    gaps, no normative legacy source rows, and no legacy Router routes.
