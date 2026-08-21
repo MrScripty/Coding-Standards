@@ -13109,6 +13109,23 @@ pass. No policy or fixture change, engine capability, helper migration, suite
 dependency, copied count, manual numeric mapping, Bash repair, wrapper,
 compatibility path, or fallback remains.
 
+## 2026-08-20 M6-I19 Row-28 Decomposition Admission
+
+**Outcome:** admitted; atomic acceptance is next.
+
+Fresh post-M6-I18 review selected the shortest of 25 caller-free checkers. One
+exact table projection and one contract-text check preserve the complete row-28
+parent-plan lifecycle. The execution train remains an independent checker gate
+through two admitted current edges.
+
+Disposable final state passes all 167 declarative suites and the complete mixed
+checkpoint at 106 Bash checkers, 110 nodes, 670 edges, and 110 components.
+M6-I19 freezes one registered two-check suite, whole-checker numeric retirement,
+checker deletion, graph refresh, and two historical M6-I18 evidence transfers.
+No policy, decomposition source, engine capability, suite dependency, copied
+count, manual numeric mapping, Bash repair, wrapper, compatibility behavior, or
+fallback is admitted.
+
 ## 2026-08-19 VE078 Source-Index Component Replacement Re-plan
 
 **Outcome:** capability-first complete-component replacement selected; no

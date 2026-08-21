@@ -4284,3 +4284,22 @@ authority, numeric lifecycle, generated freshness, all 166 declarative suites,
 typed mutations, complete checkpoint, and diff integrity pass without an
 engine change, helper migration, suite dependency, copied count, manual numeric
 mapping, Bash repair, wrapper, compatibility path, or fallback.
+
+### M6-I19 Row-28 Decomposition Admission
+
+The fresh post-M6-I18 audit found 25 caller-free checkers and selected
+`verify-milestone-7-row-28-decomposition.sh`, the shortest candidate at 12
+lines. One exact table projection proves all six ordered child rows, exact
+STD-0007 through STD-0026 membership, owner state, activation, checkpoint, and
+owner transition. One text check preserves the owner, ownership, ordering,
+no-fallback, and re-plan contract.
+
+The execution-train call is independent lifecycle authority. Two admitted
+current edges retain that checker, while two accepted M6-I18 records will move
+to exact `milestone-7-row-28-decomposition` suite evidence.
+
+Disposable final state passes all 167 declarative suites and the complete
+checkpoint at 106 Bash checkers, 110 nodes, 670 edges, and 110 components.
+M6-I19 is admitted at train order 134 without an engine change, source change,
+suite dependency, copied count, manual numeric mapping, Bash repair, wrapper,
+compatibility path, or fallback.

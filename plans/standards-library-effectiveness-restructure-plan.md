@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 7 verification migration
 
-**Next slice:** verification-engine audit of the fresh post-M6-I18 graph
-without preselecting M6-I19
+**Next slice:** verification-engine acceptance of admitted M6-I19 row-28
+decomposition lifecycle
 
 **Acceptance status:** `partial`
 
@@ -147,7 +147,8 @@ without losing mapped semantics.
 
 **Accepted boundary:** normative owner consolidation is complete through the
 recorded `7.4c3` packages. Verification migration is accepted through M6-I18
-at train order 133. The canonical package manifest contains the exact
+at train order 133. M6-I19 is admitted at train order 134 from fresh
+post-M6-I18 graph evidence. The canonical package manifest contains the exact
 package state; the execution ledger
 contains detailed slice evidence.
 
@@ -159,8 +160,8 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Audit the fresh post-M6-I18 graph through the verification-engine plan
-   without preselecting M6-I19.
+1. Accept admitted M6-I19 through the verification-engine plan while keeping
+   execution-train lifecycle independently executed.
 2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
 3. Regenerate canonical inventories and prove exact dispositions, no source

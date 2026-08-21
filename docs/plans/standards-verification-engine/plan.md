@@ -4,15 +4,14 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** audit the fresh post-M6-I18 graph and select one owner-coherent
-package without preselecting M6-I19
+**Next slice:** accept the admitted M6-I19 row-28 decomposition package
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I18 moved Accessibility interaction-semantics
 authority into one registered suite and removed the replaced Bash checker.
 
-**Latest admitted slice:** none
+**Latest admitted slice:** M6-I19 row-28 decomposition lifecycle
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -120,10 +119,11 @@ At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
 **Accepted boundary:** package records are accepted through M6-I18 at train
-order 133.
+order 133. M6-I19 is admitted at train order 134 from fresh post-M6-I18 graph
+evidence.
 
 **Current derived state:** 166 registered declarative suites, 107 retained Bash
-checkers, 111 executable nodes, 674 conservative reference edges, and 111
+checkers, 111 executable nodes, 675 conservative reference edges, and 111
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -137,7 +137,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Fresh graph review after accepted M6-I18 |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I19 row-28 decomposition acceptance |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -156,9 +156,9 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Audit the fresh post-M6-I18 graph and select one owner-coherent package from
-   reviewed lifecycle and dependency evidence without preselecting M6-I19.
-2. Select each subsequent owner-coherent package from reviewed lifecycle and
+1. Accept M6-I19 as one parent-plan lifecycle suite while preserving the
+   execution train as an independent gate.
+2. Select the subsequent owner-coherent package from fresh lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.

@@ -4783,6 +4783,22 @@
 - Fresh-graph owner-coherent package selection is next; M6-I19 is not
   preselected.
 
+## 2026-08-20 - M6-I19 Row-28 Decomposition Admission
+
+- Fresh post-M6-I18 review selected the shortest of 25 caller-free checkers.
+  One exact table projection and one contract-text check express the complete
+  parent-plan row-28 lifecycle without new engine mechanics.
+- Admitted train order 134 with two current edge dispositions preserving the
+  execution train as an independent checker gate. Two accepted M6-I18 records
+  will transfer to the exact registered suite evidence.
+- Disposable final state passes 167 declarative suites and the complete mixed
+  checkpoint at 106 Bash checkers, 110 nodes, 670 edges, and 110 components.
+- Admission evidence contains 166 suites, 107 Bash checkers, 111 nodes, 675
+  edges, and 111 components. No policy, decomposition source, engine capability,
+  suite dependency, Bash repair, wrapper, compatibility path, or fallback is
+  admitted.
+- Atomic M6-I19 acceptance is next.
+
 ## 2026-08-20 - M6-I15 Accessibility Name-And-Input Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its five
