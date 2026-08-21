@@ -14262,3 +14262,13 @@ transfer to exact suite evidence only at acceptance. No policy, fixture,
 disposition, engine, nested gate, wrapper, compatibility representation, false
 dependency, dual authority, or fallback changes. Admission evidence contains
 188 suites, 84 Bash checkers, 88 nodes, 582 edges, and 88 components.
+## 2026-08-21 M6-I42 Discover-Or-Create Convergence Acceptance
+
+**Outcome:** accepted at train order 157; fresh graph audit is next.
+
+The registered five-check reference suite preserves 16 decisions, exact
+projections and dispositions, and bounded-section default rejection.
+Architecture process-instance coordination remains independent; two
+historical records now name suite evidence. Six mutations reject drift. Broad
+and complete verification pass with 189 suites, 83 Bash checkers, 87 nodes,
+578 edges, and 87 components.

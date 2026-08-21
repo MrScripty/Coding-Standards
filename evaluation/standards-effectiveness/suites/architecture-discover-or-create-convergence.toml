@@ -1,0 +1,110 @@
+schema_version = 1
+id = "architecture-discover-or-create-convergence"
+owner = "reference.patterns.architecture"
+description = "Contract-selected discover-or-create convergence with typed no-mechanism-fallback outcomes and exact legacy closure."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/discover-or-create-convergence-decisions.tsv"
+expected_column = "expected"
+default = "route"
+[checks.domains]
+case = ["*"]
+service_owner = ["contradictory", "missing", "selected"]
+discovery = ["missing", "selected"]
+identity = ["missing", "selected"]
+exclusion = ["missing", "not-needed", "selected"]
+readiness = ["missing", "selected"]
+transport = ["missing", "selected", "unsupported"]
+retry = ["not-needed", "selected"]
+lifecycle = ["missing", "owned"]
+fallback = ["connect-first", "creation-lock", "fixed-backoff", "fixed-lifecycle", "health-probe", "none"]
+expected = ["route", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "service_owner", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "service_owner", op = "eq", value = "missing" },
+  { field = "discovery", op = "eq", value = "missing" },
+  { field = "identity", op = "eq", value = "missing" },
+  { field = "exclusion", op = "eq", value = "missing" },
+  { field = "readiness", op = "eq", value = "missing" },
+  { field = "transport", op = "eq", value = "missing" },
+  { field = "lifecycle", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "transport"
+op = "eq"
+value = "unsupported"
+
+[[checks]]
+id = "legacy-projection"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = [
+  "## Discover-or-Create Pattern",
+  "[Architecture](topics/architecture.md)",
+  "[Contracts](topics/contracts.md)",
+  "[Concurrency](topics/concurrency.md#select-coordination-from-the-invariant)",
+  "[Resilience](topics/resilience.md)",
+  "[Security](topics/security.md#network-transport-boundary)",
+  "possible mechanisms",
+  "cannot establish applicability",
+]
+prohibited = []
+
+[[checks]]
+id = "reference-projection"
+type = "text"
+path = "reference/patterns/architecture.md"
+required = [
+  "## Conditional Discover-Or-Create Convergence",
+  "selected discovery operation",
+  "creation authorized",
+  "Neither discovery failure",
+  "does not require connection before creation",
+  "loop until success",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-default-removal"
+type = "markdown_section_text"
+path = "ARCHITECTURE-PATTERNS.md"
+heading = "## Discover-or-Create Pattern"
+required = []
+prohibited = [
+  "### The Pattern",
+  "### Instance Convergence Flow",
+  "### Rules",
+  "### Ownership Models",
+  "Attempt connection before creation",
+  "Retry with backoff after lock failure",
+  "Last-client-standing",
+  "Independent daemon",
+]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [["STD-0099"], ["STD-0100"], ["STD-0101"], ["STD-0102"], ["STD-0103"]]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0099", "STD-0100", "STD-0101", "STD-0102", "STD-0103"]

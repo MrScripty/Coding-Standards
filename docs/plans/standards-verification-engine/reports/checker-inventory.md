@@ -4906,6 +4906,14 @@ records will transfer from checker evidence to the exact registered suite only
 at acceptance. M6-I42 is admitted at train order 157 without policy, fixture,
 disposition, engine, nested-gate, wrapper, compatibility representation, false
 dependency, dual authority, or fallback changes.
+### M6-I42 Discover-Or-Create Convergence Acceptance
+
+The registered reference suite replaces the 66-line checker with 16 typed
+decisions, exact projections, bounded-section default rejection, and five
+exact dispositions. Architecture process-instance coordination remains
+independent. Six mutations reject semantic and stale-evidence drift. Final
+evidence has 87 nodes, 578 edges, 87 components, 189 suites, and 83 Bash
+checkers.
 ### M6-I37 Architecture Durable-Workflow Acceptance
 
 The registered Architecture reference suite replaces the 64-line checker with

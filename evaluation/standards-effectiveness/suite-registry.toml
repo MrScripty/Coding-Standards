@@ -939,3 +939,8 @@ requires = []
 id = "architecture-layered-pattern"
 path = "evaluation/standards-effectiveness/suites/architecture-layered-pattern.toml"
 requires = []
+
+[[suites]]
+id = "architecture-discover-or-create-convergence"
+path = "evaluation/standards-effectiveness/suites/architecture-discover-or-create-convergence.toml"
+requires = []

@@ -5746,3 +5746,10 @@
   authority, or fallback changes.
 - Admission evidence contains 188 suites, 84 Bash checkers, 88 nodes, 582
   edges, and 88 components.
+## 2026-08-21 - M6-I42 Discover-Or-Create Convergence Acceptance
+
+- Replaced the checker with the five-check registered reference suite.
+- Preserved Architecture process-instance coordination independently and
+  transferred two historical records. Six mutations reject semantic and
+  stale-evidence drift.
+- Final evidence: 189 suites, 83 Bash checkers, 87 nodes, 578 edges, 87 components.
