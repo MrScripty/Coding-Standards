@@ -4731,6 +4731,23 @@
   fallback is admitted.
 - Atomic M6-I17 acceptance is next.
 
+## 2026-08-20 - M6-I17 Generated Command Security Acceptance
+
+- Registered one four-check Security suite for generated-command decisions,
+  canonical owner text, Launcher projection, and exact STD-0508 through
+  STD-0510 dispositions; the existing fixture and policy sources are unchanged.
+- Accepted train order 132 and all four current edge dispositions. Row-14
+  decomposition and execution-train lifecycle remain independent checker
+  gates, not suite dependencies.
+- Updated the live README projection, deleted only the replaced Bash checker,
+  and derived whole-checker numeric retirement without a candidate mapping.
+- Final evidence contains 108 Bash checkers, 112 nodes, 678 edges, and 112
+  components. Focused, lifecycle, generated, plan, all-suite, mutation,
+  complete-checkpoint, and diff checks pass without an engine change, helper
+  migration, compatibility path, or fallback.
+- Fresh-graph owner-coherent package selection is next; M6-I18 is not
+  preselected.
+
 ## 2026-08-20 - M6-I15 Accessibility Name-And-Input Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its five

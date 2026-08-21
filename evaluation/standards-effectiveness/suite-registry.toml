@@ -819,3 +819,8 @@ requires = []
 id = "accessibility-focus-lifecycle"
 path = "evaluation/standards-effectiveness/suites/accessibility-focus-lifecycle.toml"
 requires = []
+
+[[suites]]
+id = "generated-command-security"
+path = "evaluation/standards-effectiveness/suites/generated-command-security.toml"
+requires = []

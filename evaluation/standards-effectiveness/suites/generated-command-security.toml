@@ -1,0 +1,75 @@
+schema_version = 1
+id = "generated-command-security"
+owner = "topics/security.md"
+description = "Generated executable-text validation, destination encoding, argument preservation, and typed failure outcomes without raw or default-command fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/security/generated-command-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["declared", "missing"]
+validation = ["failed", "passed"]
+grammar = ["missing", "selected"]
+encoding = ["conformant", "missing", "unsupported"]
+arguments = ["lost", "preserved"]
+evidence = ["complete", "incomplete"]
+fallback = ["alternate", "cross-grammar", "default", "eval", "helper-proof", "none", "partial", "raw-value"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "validation", op = "eq", value = "failed" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "contract", op = "eq", value = "missing" },
+  { field = "grammar", op = "eq", value = "missing" },
+  { field = "encoding", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "encoding"
+op = "eq"
+value = "unsupported"
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "topics/security.md"
+required = ["## Generated Command And Configuration Text", "exact destination field", "Validation and destination encoding are separate", "Do not concatenate raw values", "Negative evidence covers spaces", "Do not emit a partial command"]
+prohibited = []
+
+[[checks]]
+id = "launcher-projection"
+type = "text"
+path = "LAUNCHER-STANDARDS.md"
+required = ["[Security](topics/security.md#generated-command-and-configuration-text)"]
+prohibited = ["Raw interpolation"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0508", "LAUNCHER-STANDARDS.md", "topics/security.md", "refine"],
+  ["STD-0509", "LAUNCHER-STANDARDS.md", "topics/security.md", "remove"],
+  ["STD-0510", "LAUNCHER-STANDARDS.md", "topics/security.md", "refine"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0508", "STD-0509", "STD-0510"]

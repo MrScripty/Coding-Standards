@@ -13047,6 +13047,28 @@ components. No policy or fixture change, engine capability, helper migration,
 suite dependency, copied count, manual numeric mapping, Bash repair, wrapper,
 compatibility behavior, or fallback is admitted.
 
+## 2026-08-20 M6-I17 Generated Command Security Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Security suite now owns all 14 generated-command decisions,
+canonical Security language, Launcher projection, and exact STD-0508 through
+STD-0510 projection. The existing fixture and policy sources are unchanged.
+Row-14 decomposition and execution-train lifecycle remain independently
+executed through four accepted current edges.
+
+M6-I17 is accepted at train order 132, the live README identifies the
+registered suite, and the replaced Bash checker is absent. Whole-checker
+numeric lifecycle derives retirement without a candidate map. Final evidence
+contains 108 Bash checkers, 112 nodes, 678 edges, and 112 components.
+
+Focused suite and independent-gate checks, package/edge authority, numeric
+lifecycle, removal, generated freshness, both plan validators, all 165
+declarative suites, complete checkpoint, mutation parity, and diff integrity
+pass. No policy or fixture change, engine capability, helper migration, suite
+dependency, copied count, manual numeric mapping, Bash repair, wrapper,
+compatibility path, or fallback remains.
+
 ## 2026-08-19 VE078 Source-Index Component Replacement Re-plan
 
 **Outcome:** capability-first complete-component replacement selected; no

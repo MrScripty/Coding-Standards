@@ -4228,3 +4228,22 @@ admission evidence contains 109 Bash checkers, 113 nodes, 685 edges, and 113
 components without an engine change, fixture change, helper migration, copied
 count, manual numeric mapping, Bash repair, wrapper, compatibility path, or
 fallback.
+
+### M6-I17 Generated Command Security Acceptance
+
+The registered `generated-command-security` suite now owns all 14 generated
+executable-text decisions, canonical Security language, the Launcher route and
+legacy prohibition, and exact STD-0508 through STD-0510 projection. The
+existing fixture and normative sources are unchanged.
+
+All four lifecycle edges are accepted and continue to execute row-14
+decomposition and the execution train independently. The live README points to
+the registered suite, the Bash checker is absent, and whole-checker numeric
+lifecycle requires no manual candidate mapping.
+
+Final generated evidence contains 108 Bash checkers, 112 nodes, 678 edges, and
+112 components. Focused suite and independent-gate checks, package and edge
+authority, numeric lifecycle, generated freshness, all 165 declarative suites,
+typed mutations, complete checkpoint, and diff integrity pass without an
+engine change, helper migration, suite dependency, copied count, manual
+numeric mapping, Bash repair, wrapper, compatibility path, or fallback.

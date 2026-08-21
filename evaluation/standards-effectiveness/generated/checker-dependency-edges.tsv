@@ -10,7 +10,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-dependencies-population.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-dependency-standards-consolidation.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-owner-contract.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-generated-command-security.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-godot-owner-contract.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-input-validation-authority.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-applicability-index.sh
@@ -73,7 +72,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-wire-representation.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh
-contract_reference	evaluation/standards-effectiveness/checker-migration-packages.tsv	evaluation/standards-effectiveness/verify-generated-command-security.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-metadata.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-accessibility-interaction-semantics.sh
@@ -92,7 +90,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-rendering-synchronization.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-source-closure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-generated-command-security.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-ipc-payload-validation.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-profile-routing.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-launcher-population.sh
@@ -216,8 +213,6 @@ executable_reference	evaluation/standards-effectiveness/verify-frontend-renderin
 executable_reference	evaluation/standards-effectiveness/verify-frontend-source-closure.sh	evaluation/standards-effectiveness/verify-accessibility-owner-contract.sh
 executable_reference	evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh	evaluation/standards-effectiveness/verify-architecture-durable-workflow-pattern.sh
 executable_reference	evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh	evaluation/standards-effectiveness/verify-frontend-rendering-synchronization.sh
-executable_reference	evaluation/standards-effectiveness/verify-generated-command-security.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-generated-command-security.sh	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-godot-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-13-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-godot-owner-contract.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 executable_reference	evaluation/standards-effectiveness/verify-input-validation-authority.sh	evaluation/standards-effectiveness/check-metadata.sh
@@ -510,8 +505,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-frontend-owner-con
 verifier_dependency	evaluation/standards-effectiveness/verify-frontend-source-closure.sh	evaluation/standards-effectiveness/verify-accessibility-owner-contract.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh	evaluation/standards-effectiveness/verify-architecture-durable-workflow-pattern.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-frontend-view-model-lineage.sh	evaluation/standards-effectiveness/verify-frontend-rendering-synchronization.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-generated-command-security.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-generated-command-security.sh	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-godot-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-row-13-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-godot-owner-contract.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-input-validation-authority.sh	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh

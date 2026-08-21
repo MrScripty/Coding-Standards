@@ -169,7 +169,7 @@ procedure selection and reject fixed modes, guessed targets, implicit builds,
 development substitution, and successful no-op fallback.
 
 `fixtures/security/generated-command-decisions.tsv` and
-`verify-generated-command-security.sh` prove operation validation,
+the registered `generated-command-security` suite prove operation validation,
 destination-grammar encoding, argument preservation, negative evidence, and
 typed rejection of raw, evaluated, cross-grammar, partial, alternate, and
 default generated commands.
