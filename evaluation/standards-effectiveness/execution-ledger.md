@@ -13967,3 +13967,19 @@ disposable real-Interop probe rejects a capitalization-only prohibited-default
 mutation. No regex, inferred variant, package-specific branch, compatibility
 representation, command, or Bash fallback was introduced, and no package is
 admitted.
+
+## 2026-08-20 M6-I33 Interop Applicability Index Admission
+
+**Outcome:** admitted at train order 148; atomic acceptance is next.
+
+Fresh post-M6-C7 evidence selects the 56-line caller-free Interop index gate.
+Its exact section-inventory row, exact `STD-0482` disposition, required
+boundary routes, and case-insensitive prohibited defaults are expressible with
+existing table and M6-C7 bounded-section checks.
+
+Interop policy, IPC payload validation, language-binding wire representation,
+and execution-train lifecycle remain separately owned retained gates through
+eight admitted edge records. No policy, source, generated section inventory,
+disposition, nested checker, engine, wrapper, compatibility representation,
+false dependency, or fallback changes. Admission evidence contains 179 suites,
+93 Bash checkers, 97 nodes, 618 edges, and 97 components.

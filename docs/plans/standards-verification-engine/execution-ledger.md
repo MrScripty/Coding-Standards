@@ -5471,3 +5471,19 @@
 - No regex language, Unicode normalization, inferred variants, package-specific
   branch, compatibility representation, command execution, or Bash fallback
   was added. No checker package is admitted at this boundary.
+
+## 2026-08-20 - M6-I33 Interop Applicability Index Admission
+
+- Fresh post-M6-C7 evidence selects the 56-line caller-free Interop
+  applicability-index checker. Its exact section-inventory row, exact
+  `STD-0482` disposition, required boundary routes, and case-insensitive
+  prohibited defaults form one `profile.boundary.interop` contract.
+- Interop policy, IPC payload validation, language-binding wire
+  representation, and execution-train lifecycle remain independently executed
+  Bash gates. Eight exact incident-edge records preserve those four gates
+  without suite dependencies or copied behavior.
+- Admitted M6-I33 at train order 148. No policy, legacy index, generated
+  section inventory, disposition, nested checker, engine capability, wrapper,
+  compatibility representation, false dependency, or fallback changes.
+- Admission evidence contains 179 suites, 93 Bash checkers, 97 nodes, 618
+  edges, and 97 components.

@@ -4,15 +4,16 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** audit fresh post-M6-C7 graph evidence before admitting another
-checker package
+**Next slice:** accept admitted M6-I33 by replacing the Interop applicability
+index checker with one registered profile suite
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-C7 added explicit case-sensitive or
 case-insensitive fixed-literal matching to generic text checks.
 
-**Latest admitted slice:** `none`
+**Latest admitted slice:** M6-I33 freezes one Interop applicability-index
+package at train order 148.
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -124,7 +125,7 @@ fallback.
 order 147.
 
 **Current derived state:** 179 registered declarative suites, 93 retained Bash
-checkers, 97 executable nodes, 614 conservative reference edges, and 97
+checkers, 97 executable nodes, 618 conservative reference edges, and 97
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -138,7 +139,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-C7 accepted; fresh graph audit is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I33 admitted at train order 148; atomic acceptance is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -157,8 +158,8 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Audit fresh post-M6-C7 graph evidence without preselecting a package from
-   stale evidence.
+1. Accept admitted M6-I33 without changing its frozen owner, behavior,
+   dependency, write-set, or verification contract.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or

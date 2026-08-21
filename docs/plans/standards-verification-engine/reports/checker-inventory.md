@@ -4749,3 +4749,18 @@ tests cover both modes and invalid configuration, while a disposable Interop
 probe proves that mixed-case forbidden text is rejected in the selected
 section. The capability is accepted independently; M6-I33 remains unselected
 until fresh graph review.
+
+### M6-I33 Interop Applicability Index Admission
+
+Fresh post-M6-C7 evidence selects the 56-line caller-free Interop index
+checker. One profile-owned suite can preserve its exact section-inventory row,
+exact `STD-0482` index disposition, required boundary-owner routes, and
+case-insensitive rejection of active rules, code, stale concern summaries,
+defaults, and fallback guidance.
+
+The checker's four nested calls are independent gates owned by Interop policy,
+IPC payload validation, language-binding wire representation, and migration
+lifecycle. Eight exact edge dispositions retain them without copied assertions
+or suite dependencies. M6-I33 is admitted at train order 148 without source,
+disposition, engine, wrapper, compatibility representation, false dependency,
+or fallback changes.
