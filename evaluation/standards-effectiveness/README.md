@@ -136,6 +136,13 @@ smallest-diff defaults.
 without fixed layers, location-derived authority, ambient globals, or
 incumbent-structure fallback.
 
+`fixtures/accessibility/owner-contract-decisions.tsv` and the registered
+`accessibility-owner-contract` suite establish modality-neutral Accessibility
+authority, canonical and reference boundaries, Router and legacy-index routes,
+and the exact `STD-0007` disposition. They reject contradictory or missing
+selection facts, unsupported platforms or capabilities, and web, WCAG,
+keyboard-only, lint-only, or default-success fallback.
+
 The registered `architecture-population` suite proves exact replacement of the
 eleven legacy architecture identifiers and removal of fixed organization,
 layer, backend, framework, composition, and state-owner recipes.

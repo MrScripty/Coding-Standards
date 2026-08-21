@@ -4613,3 +4613,19 @@ independent complete-suite gate rather than a copied Accessibility assertion or
 registry dependency. The stale row-35 checker-path record is removed at atomic
 acceptance. M6-I29 is admitted at train order 144 without engine changes,
 cross-owner aggregation, wrappers, compatibility representations, or fallback.
+
+### M6-I29 Accessibility Owner Contract Acceptance
+
+The owner-local suite replaces the 44-line checker using six existing generic
+checks. It preserves all 17 typed decisions, both canonical boundaries, Router
+and legacy-index projections, and exact `STD-0007` evidence. Row-28 lifecycle
+remains independently owned and executed without copied assertions or a false
+registry dependency.
+
+The obsolete checker and row-35 checker-path record are absent. Four accepted
+historical edge records now name the exact registered suite. Six mutation
+families fail as required, all Python and declarative tests pass, and the
+complete mixed checkpoint passes with 96 retained Bash checkers. Final graph
+evidence contains 100 nodes, 624 edges, and 100 components without canonical
+source changes, engine changes, wrappers, compatibility representations, dual
+authority, or fallback.

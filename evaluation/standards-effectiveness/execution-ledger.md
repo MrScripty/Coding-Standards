@@ -13815,3 +13815,21 @@ representation, false dependency, or fallback changes.
 
 Admission evidence contains 175 suites, 97 Bash checkers, 101 nodes, 628 edges,
 and 101 components.
+
+## 2026-08-20 M6-I29 Accessibility Owner Contract Acceptance
+
+**Outcome:** accepted at train order 144; fresh-graph package selection is
+next.
+
+The registered owner-local suite now proves all 17 mechanism decisions,
+canonical and reference boundaries, Router and legacy-index routes, and exact
+`STD-0007` disposition. Row-28 lifecycle remains an independently registered
+parent-plan gate rather than a copied assertion or suite dependency.
+
+The Bash checker and its row-35 checker-path record are absent. Four historical
+M6-I18 and M6-I28 records now use exact suite evidence. Six disposable
+mutations, 35 graph tests, 326 verifier tests, all 176 declarative suites, and
+the complete 96-checker checkpoint pass. Final graph evidence contains 100
+nodes, 624 edges, and 100 components without policy or fixture changes, engine
+changes, wrappers, false dependencies, compatibility representations, dual
+authority, or fallback.

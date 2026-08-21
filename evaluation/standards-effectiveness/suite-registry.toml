@@ -676,6 +676,11 @@ path = "evaluation/standards-effectiveness/suites/accessibility-evidence-closure
 requires = []
 
 [[suites]]
+id = "accessibility-owner-contract"
+path = "evaluation/standards-effectiveness/suites/accessibility-owner-contract.toml"
+requires = []
+
+[[suites]]
 id = "architecture-population"
 path = "evaluation/standards-effectiveness/suites/architecture-population.toml"
 requires = []

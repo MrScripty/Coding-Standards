@@ -5319,3 +5319,22 @@
   wrapper, compatibility representation, false dependency, or fallback changes.
 - Admission evidence contains 175 suites, 97 Bash checkers, 101 nodes, 628
   edges, and 101 components.
+
+## 2026-08-20 - M6-I29 Accessibility Owner Contract Acceptance
+
+- Added the registered `accessibility-owner-contract` suite with the existing
+  17-decision fixture, canonical owner and reference boundaries, Router and
+  legacy-index routes, and exact `STD-0007` disposition.
+- Kept row-28 lifecycle in the independently registered parent-plan suite. No
+  copied lifecycle assertion or registry dependency was introduced.
+- Deleted the replaced Bash checker and its row-35 checker-path record.
+  Transferred the four accepted M6-I18 and M6-I28 historical records to exact
+  `suite:accessibility-owner-contract` evidence.
+- Positive focused verification and six disposable mutations cover decisions,
+  canonical text, reference text, both routes, and disposition drift. The 35
+  graph tests, 326 verifier tests, all 176 declarative suites, and complete
+  mixed checkpoint with 96 retained Bash checkers pass.
+- Final generated evidence contains 100 nodes, 624 edges, and 100 components.
+  Canonical policy and fixtures remain unchanged; no engine change, wrapper,
+  false dependency, compatibility representation, dual authority, or fallback
+  was introduced.
