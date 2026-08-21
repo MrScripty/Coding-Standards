@@ -76,3 +76,19 @@ explicit `start` operation.
   reviewed accepted replacement, and no upstream or remote branch may exist.
 - The 12 `retain-lineage-review` branches remain outside the write set and keep
   full protection for their unique commits.
+
+## 2026-08-21 - Milestone 3 Mapped Ref Retirement
+
+- Regenerated lineage against current `main` and obtained byte-for-byte
+  agreement with both accepted lineage artifacts before mutation.
+- Revalidated all 115 exact branch tips, 118 unique accepted replacements,
+  semantic-subject relations, zero ambiguous or unmapped source commits, zero
+  merge commits, absent upstreams, absent matching origin refs, and a sole
+  checked-out `main` worktree.
+- Removed exactly the 115 admitted redundant local refs with `git branch -D`.
+  No unique branch, remote ref, tag, commit, or worktree was included.
+- Post-deletion evidence records 13 local branches: `main` and the 12 protected
+  unique proposals. One live worktree, zero prunable registrations, clean
+  status, and `git fsck --no-dangling` pass.
+- Milestone 3 is accepted. Milestone 4 may inspect the 12 unique proposals but
+  has no authority to delete or rewrite them.
