@@ -5487,3 +5487,21 @@
   compatibility representation, false dependency, or fallback changes.
 - Admission evidence contains 179 suites, 93 Bash checkers, 97 nodes, 618
   edges, and 97 components.
+## 2026-08-20 - M6-I33 Interop Applicability Index Acceptance
+
+- Added the registered `interop-applicability-index` suite with the exact
+  `STD-0482` inventory and disposition rows, required boundary routes, and
+  case-insensitive prohibited-authority literals.
+- Kept Interop policy, IPC payload validation, language-binding wire
+  representation, and execution-train lifecycle as independently executed
+  retained gates through all eight accepted edge records.
+- Deleted only the replaced applicability-index checker. Interop policy,
+  migration inputs, section inventory, dispositions, nested gates, and engine
+  behavior remain unchanged.
+- Five disposable mutations reject inventory, disposition, required-route,
+  mixed-case default, and stale-summary drift. The 35 graph tests, 330 verifier
+  tests, all 180 declarative suites, and complete mixed checkpoint with 92
+  retained Bash checkers pass.
+- Final generated evidence contains 96 nodes, 607 edges, and 96 components
+  without copied nested behavior, wrappers, compatibility representations,
+  false dependencies, dual authority, or fallback.

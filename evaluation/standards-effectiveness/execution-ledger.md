@@ -13983,3 +13983,20 @@ eight admitted edge records. No policy, source, generated section inventory,
 disposition, nested checker, engine, wrapper, compatibility representation,
 false dependency, or fallback changes. Admission evidence contains 179 suites,
 93 Bash checkers, 97 nodes, 618 edges, and 97 components.
+## 2026-08-20 M6-I33 Interop Applicability Index Acceptance
+
+**Outcome:** accepted at train order 148; fresh graph audit is next.
+
+The registered profile suite replaces the 56-line Bash checker with exact
+`STD-0482` inventory and disposition projections plus bounded required-route
+and case-insensitive prohibited-authority checks. Interop policy, IPC payload
+validation, language-binding wire representation, and execution-train
+lifecycle remain independently executed retained gates through eight accepted
+edge records.
+
+Five disposable mutations reject inventory, disposition, route, mixed-case
+default, and stale-summary drift. All Python and declarative tests pass, and
+the complete mixed checkpoint passes with 92 retained Bash checkers. Final
+graph evidence contains 96 nodes, 607 edges, and 96 components without source,
+migration-input, engine, nested-gate, wrapper, compatibility representation,
+false-dependency, dual-authority, or fallback changes.

@@ -4764,3 +4764,19 @@ lifecycle. Eight exact edge dispositions retain them without copied assertions
 or suite dependencies. M6-I33 is admitted at train order 148 without source,
 disposition, engine, wrapper, compatibility representation, false dependency,
 or fallback changes.
+### M6-I33 Interop Applicability Index Acceptance
+
+The registered profile suite replaces the 56-line checker with two exact table
+projections and two bounded Markdown-section checks. It preserves the frozen
+`STD-0482` inventory row, exact index disposition, required boundary-owner
+routes, and case-insensitive rejection of active rules, code, stale concern
+summaries, defaults, and fallback guidance.
+
+Interop policy, IPC payload validation, language-binding wire representation,
+and execution-train lifecycle remain independent retained gates through all
+eight accepted edge records. Five disposable mutations reject inventory,
+disposition, route, mixed-case default, and stale-summary drift. Final graph
+evidence contains 96 nodes, 607 edges, and 96 components with 180 registered
+suites and 92 retained Bash checkers. No source, migration input, engine,
+nested gate, wrapper, compatibility representation, false dependency, dual
+authority, or fallback changed.

@@ -476,8 +476,8 @@ bounded legacy replacement. They reject inferred casing/tagging, schema-free
 or default shapes, omitted unsupported variants, alternate serializers, and
 producer-only evidence.
 
-`verify-interop-applicability-index.sh` proves the exact `STD-0482` index
-disposition and requires the legacy Interop applicability section to route by
+The registered `interop-applicability-index` suite proves the exact `STD-0482`
+index disposition and requires the legacy Interop applicability section to route by
 boundary fact to Interop, IPC, Language Bindings, Contracts, and Security. It
 rejects active rules, code, examples-as-policy, prescriptive defaults, fallback
 guidance, and stale concern summaries in the non-normative index.

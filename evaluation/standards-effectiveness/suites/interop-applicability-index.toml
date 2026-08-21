@@ -1,0 +1,74 @@
+schema_version = 1
+id = "interop-applicability-index"
+owner = "profile.boundary.interop"
+description = "Exact Interop legacy applicability index and non-normative boundary-routing closure."
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0482", "INTEROP-STANDARDS.md", "172", "2", "topic", "refine", "When These Rules Apply"],
+]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0482"
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0482", "INTEROP-STANDARDS.md", "INTEROP-STANDARDS.md", "index", "retain only a non-normative canonical boundary-routing index"],
+]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0482"
+
+[[checks]]
+id = "required-routes"
+type = "markdown_section_text"
+path = "INTEROP-STANDARDS.md"
+heading = "## When These Rules Apply"
+required = [
+  "non-normative routing index",
+  "one boundary can require multiple canonical owners",
+  "profiles/boundaries/interop.md",
+  "profiles/boundaries/ipc.md",
+  "profiles/boundaries/language-bindings.md",
+  "topics/contracts.md",
+  "topics/security.md",
+  "This index defines none of them.",
+]
+prohibited = []
+
+[[checks]]
+id = "prohibited-authority"
+type = "markdown_section_text"
+path = "INTEROP-STANDARDS.md"
+heading = "## When These Rules Apply"
+required = []
+prohibited = [
+  "```",
+  "Key Concerns",
+  "Rust ↔ C",
+  "WebSocket, stdin/stdout",
+  "HTTP REST, gRPC",
+  "must ",
+  "always ",
+  "fallback",
+  "default",
+]
+match_case = "insensitive"
