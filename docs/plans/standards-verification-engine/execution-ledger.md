@@ -4739,6 +4739,18 @@
   103 Bash checkers, 107 nodes, 653 edges, and 107 components. No source,
   fixture, engine, dependency, wrapper, compatibility path, or fallback changes.
 
+## 2026-08-20 - M6-I22 Documentation Index-Closure Acceptance
+
+- Registered one three-check Documentation suite for exact `STD-0349`, zero
+  source gaps, and required non-normative index routes; sources remain unchanged.
+- Accepted train order 137 and all eight current edges. Documentation decisions,
+  policy consolidation, row-41 lifecycle, and source-gap closure remain
+  independently executed gates.
+- Deleted only the replaced checker. Final evidence contains 170 suites, 103
+  Bash checkers, 107 nodes, 653 edges, and 107 components; focused, mutation,
+  lifecycle, all-suite, and complete checks pass without fallback.
+- Fresh-graph package selection is next; M6-I23 is not preselected.
+
 ## 2026-08-20 - M6-I16 Accessibility Focus-Lifecycle Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its modality,

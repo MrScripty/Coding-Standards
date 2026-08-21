@@ -4395,3 +4395,14 @@ Four current dependencies remain independent registered Bash gates through
 eight admitted lifecycle edges. Disposable final state passes all 170 suites
 and the complete checkpoint at 103 Bash checkers, 107 nodes, 653 edges, and 107
 components without an engine, source, fixture, wrapper, or fallback change.
+
+### M6-I22 Documentation Index-Closure Acceptance
+
+The registered `documentation-index-closure` suite now owns the exact
+`STD-0349` disposition, empty source-gap projection, and required legacy-index
+navigation. Normative and fixture sources remain unchanged.
+
+Documentation decisions, policy consolidation, row-41 lifecycle, and source-gap
+closure remain independently executed through eight accepted edges. Final
+evidence contains 170 suites, 103 Bash checkers, 107 nodes, 653 edges, and 107
+components with no engine, dependency, wrapper, compatibility, or fallback.

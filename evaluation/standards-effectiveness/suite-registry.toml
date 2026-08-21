@@ -271,6 +271,11 @@ path = "evaluation/standards-effectiveness/suites/documentation-traceability-pol
 requires = []
 
 [[suites]]
+id = "documentation-index-closure"
+path = "evaluation/standards-effectiveness/suites/documentation-index-closure.toml"
+requires = []
+
+[[suites]]
 id = "tooling-owner-contract"
 path = "evaluation/standards-effectiveness/suites/tooling-owner-contract.toml"
 requires = []

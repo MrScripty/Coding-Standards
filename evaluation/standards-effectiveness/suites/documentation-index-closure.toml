@@ -1,0 +1,45 @@
+schema_version = 1
+id = "documentation-index-closure"
+owner = "workflow.documentation"
+description = "Exact Documentation index closure without obsolete checker-owned prose or nested checker execution."
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [["STD-0349", "DOCUMENTATION-STANDARDS.md", "workflows/documentation.md", "index"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0349"
+
+[[checks]]
+id = "source-gap-closure"
+type = "table"
+path = "evaluation/standards-effectiveness/fixtures/migration/undisposed-source-gaps.tsv"
+header = ["id", "classification", "reason"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "classification", "reason"]
+order = "source"
+expected = []
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "DOCUMENTATION-STANDARDS.md"
+required = [
+  "# Documentation Standards",
+  "non-normative navigation",
+  "Router's typed",
+  "[Documentation Workflow](workflows/documentation.md)",
+  "[Documentation Recipe](reference/recipes/documentation.md)",
+  "[Release Workflow](workflows/release.md)",
+  "This index has no independent normative authority",
+]
+prohibited = []

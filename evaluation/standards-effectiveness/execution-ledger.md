@@ -13580,3 +13580,16 @@ final state preserves exact `STD-0349`, zero source gaps, required index routes,
 and four independently executed gates while deleting only the replaced checker.
 All 170 suites and the 103-checker complete checkpoint pass without source,
 fixture, engine, dependency, wrapper, compatibility, or fallback changes.
+
+## 2026-08-20 M6-I22 Documentation Index-Closure Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Documentation suite owns exact `STD-0349`, zero source gaps,
+and required non-normative index routes. Four former nested dependencies remain
+independent through eight accepted edge records; the Bash checker is absent.
+
+Final evidence contains 170 suites, 103 Bash checkers, 107 nodes, 653 edges,
+and 107 components. Focused, independent-gate, package/edge, numeric, generated,
+plan, mutation, all-suite, complete-checkpoint, and diff checks pass without a
+source, fixture, engine, dependency, wrapper, compatibility, or fallback change.
