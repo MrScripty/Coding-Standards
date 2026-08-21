@@ -5774,3 +5774,15 @@
 - Preserved row-39 lifecycle independently and transferred two historical
   records. Six mutations reject semantic and stale-evidence drift.
 - Final evidence: 190 suites, 82 Bash checkers, 86 nodes, 576 edges, 86 components.
+## 2026-08-21 - M6-I44 Row-39 Decomposition Admission
+
+- Fresh post-M6-I43 evidence selects the 49-line row-39 checker from 15
+  caller-free verifiers.
+- Existing table and text checks cover its three child rows, 13 owner rows,
+  report, execution train, and accelerated package.
+- Six downstream gates remain independently executed through 12 admitted edge
+  records; two historical records transfer only at acceptance.
+- Admitted M6-I44 at train order 159 without policy, migration-input, engine,
+  nested-gate, wrapper, compatibility, false-dependency, dual-authority, or
+  fallback changes. Evidence: 190 suites, 82 Bash, 86 nodes, 578 edges, 86
+  components.

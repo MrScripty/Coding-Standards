@@ -4935,6 +4935,18 @@ decisions, exact projections, prohibited mechanism defaults, and six exact
 dispositions. Row-39 lifecycle remains independent. Six mutations reject
 semantic and stale-evidence drift. Final evidence has 86 nodes, 576 edges, 86
 components, 190 suites, and 82 Bash checkers.
+### M6-I44 Row-39 Decomposition Admission
+
+Fresh post-M6-I43 evidence exposes 15 caller-free verifiers and selects the
+49-line row-39 decomposition checker. One parent-plan suite can preserve its
+three exact child rows, 13 exact owner-validation rows, report contract,
+execution-train row, and accelerated-package row with existing generic checks.
+
+Six downstream policy and lifecycle checkers remain independent through 12
+admitted edge records. Two accepted historical records will transfer to the
+suite only at acceptance. M6-I44 is admitted at train order 159 without policy,
+migration input, engine, nested-gate, wrapper, compatibility representation,
+false dependency, dual authority, or fallback changes.
 ### M6-I37 Architecture Durable-Workflow Acceptance
 
 The registered Architecture reference suite replaces the 64-line checker with
