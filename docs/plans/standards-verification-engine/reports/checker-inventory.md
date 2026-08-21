@@ -4971,3 +4971,17 @@ dispositions, and keyed row-36 lineage. Architecture layered policy remains
 independent. Seven mutations reject semantic and stale-evidence drift. Final
 evidence has 89 nodes, 583 edges, 89 components, 187 suites, and 85 Bash
 checkers.
+### M6-I41 Architecture Layered-Pattern Admission
+
+Fresh post-M6-I40 evidence exposes 18 caller-free verifiers and selects the
+61-line Architecture layered-pattern checker as the shortest owner-coherent
+frontier. Its eight typed decisions, exact legacy and reference projections,
+case-sensitive universal-default rejection, six exact dispositions, and keyed
+row-36 owner lineage require no new engine capability.
+
+Architecture pattern-reference ownership remains an independently executed
+gate through two admitted current edge records. Four accepted historical
+records will transfer from checker evidence to the exact registered suite only
+at acceptance. M6-I41 is admitted at train order 156 without policy, fixture,
+disposition, owner-validation, engine, nested-gate, wrapper, compatibility
+representation, false dependency, dual authority, or fallback changes.

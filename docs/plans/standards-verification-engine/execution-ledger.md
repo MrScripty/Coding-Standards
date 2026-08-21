@@ -5709,3 +5709,18 @@
   historical records. Seven mutations reject semantic and stale-evidence
   drift.
 - Final evidence: 187 suites, 85 Bash checkers, 89 nodes, 583 edges, 89 components.
+## 2026-08-21 - M6-I41 Architecture Layered-Pattern Admission
+
+- Fresh post-M6-I40 evidence selects the shortest of 18 caller-free verifiers:
+  the 61-line Architecture layered-pattern checker.
+- Its eight typed decisions, exact legacy and reference projections,
+  case-sensitive universal-default rejection, six exact dispositions, and
+  keyed row-36 owner lineage require no new engine capability.
+- Architecture pattern-reference ownership remains an independently executed
+  Bash gate through two admitted current edge records. Four historical records
+  will transfer to exact suite evidence only at acceptance.
+- Admitted M6-I41 at train order 156. No policy, fixture, disposition,
+  owner-validation, engine, nested gate, wrapper, compatibility
+  representation, false dependency, dual authority, or fallback changes.
+- Admission evidence contains 187 suites, 85 Bash checkers, 89 nodes, 584
+  edges, and 89 components.

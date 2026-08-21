@@ -14219,3 +14219,20 @@ Architecture layered policy remains independent; four historical records now
 name suite evidence. Seven mutations reject drift. Broad and complete
 verification pass with 187 suites, 85 Bash checkers, 89 nodes, 583 edges, and
 89 components.
+## 2026-08-21 M6-I41 Architecture Layered-Pattern Admission
+
+**Outcome:** admitted at train order 156; atomic acceptance is next.
+
+Fresh post-M6-I40 evidence selects the shortest of 18 caller-free verifiers,
+the 61-line Architecture layered-pattern checker. Its eight typed decisions,
+exact legacy and reference projections, case-sensitive universal-default
+rejection, six exact dispositions, and keyed row-36 owner lineage fit existing
+decision, text, table, and keyed-relation checks.
+
+Architecture pattern-reference ownership remains independently executed
+through two admitted current edge records. Four historical checker records
+will transfer to exact suite evidence only at acceptance. No policy, fixture,
+disposition, owner-validation, engine, nested gate, wrapper, compatibility
+representation, false dependency, dual authority, or fallback changes.
+Admission evidence contains 187 suites, 85 Bash checkers, 89 nodes, 584 edges,
+and 89 components.
