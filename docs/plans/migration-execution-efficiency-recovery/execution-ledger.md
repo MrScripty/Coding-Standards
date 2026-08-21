@@ -28,3 +28,24 @@
 - All 190 declarative suites, generated freshness, plan structure, diff
   integrity, and the complete mixed checkpoint with 82 Bash checkers pass.
 - Milestone 1 is accepted. Milestone 2 procedure correction is next.
+
+## 2026-08-21 - Milestone 2 Acceptance
+
+- Added four migration execution modes to the verification-engine authority:
+  `serial-coherent`, `pre-admitted`, `owner-wave`, and `shared-contract`.
+- Kept exact package and edge dispositions, final-state removal, focused
+  semantic evidence, generated freshness, no fallback, and serial shared-file
+  integration invariant in every mode.
+- Reserved the complete mixed checkpoint for owner-wave close,
+  shared-contract acceptance, and zero-Bash closure instead of mechanically
+  requiring it for every low-risk checker.
+- Reviewed seven representative scenarios against the mode-selection contract.
+  No package schema, accepted lifecycle row, generic Planning rule, verifier
+  implementation, or Bash checker changed.
+- The three affected active plans pass structure checks, package authority
+  passes, all 190 declarative suites pass, report links resolve, and
+  `git diff --check` passes. The mixed checkpoint was not run because no Bash
+  execution or shared verifier contract changed and this milestone establishes
+  that commit cadence alone is not a checkpoint boundary.
+- Milestone 2 is accepted. Milestone 3 Commit projections and historical
+  cleanup planning are next.

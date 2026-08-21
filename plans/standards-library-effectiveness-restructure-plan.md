@@ -96,7 +96,7 @@ universal architecture policy.
 | Acceptance model | Required evidence is a set of typed claims; proof kind, environment, and execution mode are independent dimensions. |
 | Migration lifecycle | Canonical package, disposition, owner, and generated records own status; active-plan narration does not. |
 | Verification migration | Bash checkers and helpers are removed with accepted Python-engine replacements; no wrappers, dual authority, compatibility parsers, or fallback remain. |
-| Accelerated execution | Owner-coherent packages may prepare concurrently with disjoint write sets; shared registry, evidence, Router, and plan integration remain serial. |
+| Accelerated execution | Select proportional `serial-coherent`, `pre-admitted`, `owner-wave`, or `shared-contract` migration modes from current risk and concurrency facts. Owner-coherent packages may prepare concurrently with disjoint write sets; shared registry, evidence, Router, and plan integration remain serial. |
 | Recovery dependency | Complete the generic edge-system recovery without changing the frozen temporary Bash graph, then obtain fresh graph evidence before another verifier package is selected. |
 | Current efficiency recovery | Stabilize temporary component identities, apply proportional serial/wave migration modes, and enforce task-owned worktree terminal evidence before M6-I44 resumes. |
 
@@ -165,9 +165,12 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
    transitive-caller consumer before acceptance.
 3. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
-3. Regenerate canonical inventories and prove exact dispositions, no source
+4. Use focused final-state evidence for each package and reserve the complete
+   mixed checkpoint for an owner-wave close, shared-contract acceptance, or
+   zero-Bash closure.
+5. Regenerate canonical inventories and prove exact dispositions, no source
    gaps, no normative legacy source rows, and no legacy Router routes.
-4. Complete manual semantic-ownership review `D001` through `D010` before
+6. Complete manual semantic-ownership review `D001` through `D010` before
    Milestone 7 acceptance.
 
 **Acceptance gate:** every rule identifier has a final disposition; structural,

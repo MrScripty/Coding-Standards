@@ -99,6 +99,8 @@ evidence contracts.
 | Ownership | Policy remains in standards and fixtures; engine checks expose bounded mechanics. | [Architecture](reports/architecture.md#ownership-boundary) |
 | Security | Prohibit arbitrary commands, callbacks, embedded code, and compatibility schemas. | [Architecture](reports/architecture.md#security-and-no-fallback) |
 | Migration | Migrate owner-coherent semantic packages and delete each replaced Bash path in the accepting slice. | [Package manifest](../../../evaluation/standards-effectiveness/checker-migration-packages.tsv) |
+| Execution mode | Select `serial-coherent`, `pre-admitted`, `owner-wave`, or `shared-contract` from current ownership, dependency, concurrency, and risk facts; commit cadence does not select the mode. | [Migration execution modes](../migration-execution-efficiency-recovery/reports/migration-execution-modes.md) |
+| Checkpoint cadence | Run focused final-state evidence for every accepted package. Run the complete mixed checkpoint at owner-wave close, shared-contract acceptance, or zero-Bash closure rather than mechanically for every low-risk package. | [Migration execution modes](../migration-execution-efficiency-recovery/reports/migration-execution-modes.md) |
 | Dependencies | Registered suite `requires` owns execution dependencies; lexical graph edges do not. | [Legacy reference boundary](reports/legacy-script-reference-model.md) |
 | Temporary graph | Keep the current lexical reference model frozen as conservative deletion-lifecycle evidence and remove it at zero Bash. | [Legacy reference boundary](reports/legacy-script-reference-model.md) |
 | Generated values | Derive mutable paths, counts, memberships, and relationships; store only explicit policy inputs and reviewed lifecycle authority. | [Count-authority report](reports/count-authority.md) |
@@ -127,11 +129,11 @@ fallback.
 **Accepted boundary:** package records are accepted through M6-I43 at train
 order 158.
 
-**Current derived state:** admitted M6-I44 implementation evidence contains 191
-registered declarative suites, 81 retained Bash checkers, 85 executable nodes,
-561 conservative reference edges, and 85
-components. These values are observations from generated evidence and do not
-authorize package selection or ownership.
+**Current derived state:** the accepted recovery boundary contains 190
+registered declarative suites, 82 retained Bash checkers, 86 executable nodes,
+578 conservative reference edges, and 86 components. These values are
+observations from generated evidence and do not authorize package selection or
+ownership. Rejected M6-I44 implementation evidence is not current authority.
 
 ## Milestones
 
@@ -152,6 +154,32 @@ authorize package selection or ownership.
 helper, and migration launcher without turning the engine into a general-purpose
 programming language.
 
+**Execution modes:**
+
+- `serial-coherent`: accept one bounded low-risk package in one commit when no
+  proposal is outstanding, the owner and complete write set are current, no
+  shared engine, schema, policy, or authority contract changes, no re-plan
+  trigger is open, and focused final-state evidence is available. The accepted
+  package record supplies lifecycle authority; a separate admission commit is
+  not required.
+- `pre-admitted`: record a stable intermediate admission before implementation
+  when a proposal can become stale, consumers or ownership remain unresolved,
+  safety risk or shared contracts require review, or a re-plan decision must be
+  accepted independently.
+- `owner-wave`: admit one ordered set of packages only when they share a
+  canonical owner, dependency set, semantic contract, verification family, and
+  compatible integration order. Run focused evidence for each member and one
+  complete mixed checkpoint when the wave closes. A failed member blocks wave
+  closure without accepting unverified replacements.
+- `shared-contract`: separately admit and accept engine, schema, Router, shared
+  verifier mechanics, or other cross-owner authority changes, with the complete
+  mixed checkpoint at acceptance.
+
+Every mode preserves exact package and edge dispositions, final-state source
+removal, mutation or negative evidence, generated freshness, no fallback, and
+serial integration of shared authority. A mode may be escalated when fresh
+evidence increases risk; it may not be downgraded merely to reduce ceremony.
+
 **Recovery dependency:** M6-I16 and the
 [work proportionality and policy impact recovery](../work-proportionality-and-policy-impact/plan.md)
 and the [generic edge-system recovery](../generic-edge-system/plan.md) are
@@ -168,13 +196,16 @@ temporary Bash graph schema remains unchanged.
 3. Accept the corrected M6-I44 package only after all registered suites pass.
 4. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
-3. Add another reusable primitive only when multiple coherent owners require it or
+5. Select and record the proportional execution mode before changing package
+   authority. Do not create a separate admission commit for `serial-coherent`
+   work or a per-member mixed checkpoint inside an `owner-wave`.
+6. Add another reusable primitive only when multiple coherent owners require it or
    one safety-critical invariant cannot otherwise be expressed clearly.
-4. Prepare disjoint admitted suite/checker changes concurrently when their
+7. Prepare disjoint admitted suite/checker changes concurrently when their
    write sets and dependencies are frozen.
-5. Integrate shared authority serially and run one complete checkpoint at each
+8. Integrate shared authority serially and run one complete checkpoint at each
    shared-contract or wave boundary.
-6. Continue until no Bash verifier, helper, or launcher remains, then delete
+9. Continue until no Bash verifier, helper, or launcher remains, then delete
    the temporary reference model.
 
 **Acceptance gate:** exact inventory reports zero Bash verification paths; the
