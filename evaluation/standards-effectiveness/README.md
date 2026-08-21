@@ -256,10 +256,10 @@ plus producer/consumer consistency evidence. They reject compiled artifacts,
 source annotations, generated consumer outputs, alternate generators,
 hand-maintained bindings, and default success as authority or recovery paths.
 
-`fixtures/rust/binding-annotation-placement-decisions.tsv` and
-`verify-rust-binding-annotation-placement.sh` select Rust annotation placement
-from the declared mechanism and core-adapter ownership. They reject coupled
-core annotations plus proc-macro or separate-definition defaults.
+`fixtures/rust/binding-annotation-placement-decisions.tsv` and the registered
+`rust-binding-annotation-placement` suite select Rust annotation placement from
+the declared mechanism and core-adapter ownership. They reject coupled core
+annotations plus proc-macro or separate-definition defaults.
 
 `fixtures/release/binding-generation-procedure-decisions.tsv` and
 `verify-release-binding-generation-procedure.sh` derive binding generation

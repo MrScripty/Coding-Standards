@@ -854,3 +854,8 @@ requires = []
 id = "generated-command-security"
 path = "evaluation/standards-effectiveness/suites/generated-command-security.toml"
 requires = []
+
+[[suites]]
+id = "rust-binding-annotation-placement"
+path = "evaluation/standards-effectiveness/suites/rust-binding-annotation-placement.toml"
+requires = []

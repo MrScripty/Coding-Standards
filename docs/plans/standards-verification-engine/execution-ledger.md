@@ -5134,3 +5134,21 @@
 - Admission evidence contains 171 suites, 102 Bash checkers, 106 nodes, 651
   edges, and 106 components. No policy, fixture, engine, registry, checker, or
   fallback behavior changes before atomic acceptance.
+
+## 2026-08-20 - M6-I24 Rust Binding Annotation Placement Acceptance
+
+- Registered `rust-binding-annotation-placement` with four generic checks for
+  all nine decisions, canonical profile text, the bounded legacy-index section,
+  and exact `STD-0784` disposition.
+- Replaced the README checker reference, removed the Bash checker, and accepted
+  the package plus four independent-gate edge records.
+- Row-8 lifecycle and Rust binding architecture remain separately executed.
+  Normative and decision-fixture sources are byte-identical to the admitted
+  base.
+- Focused suite and gate checks, package/edge and numeric lifecycle, generated
+  freshness, all 172 suites, mutation parity, the complete 101-checker mixed
+  checkpoint, plan structure, diff integrity, and exact staged scope pass.
+- Final generated evidence contains 101 Bash checkers, 105 nodes, 645 edges,
+  and 105 components. No engine branch, false dependency, Bash repair, wrapper,
+  compatibility representation, dual authority, or fallback remains.
+- Fresh-graph owner-coherent package selection is next.

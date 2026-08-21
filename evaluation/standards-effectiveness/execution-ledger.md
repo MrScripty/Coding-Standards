@@ -13645,3 +13645,22 @@ declarative suites and the complete checkpoint at 101 Bash checkers, 105 nodes,
 645 edges, and 105 components. Admission state has 171 suites, 102 Bash
 checkers, 106 nodes, 651 edges, and 106 components without policy, fixture,
 engine, registry, checker, wrapper, compatibility, or fallback changes.
+
+## 2026-08-20 M6-I24 Rust Binding Annotation Placement Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Rust Language Bindings suite owns all nine annotation-placement
+decisions, canonical profile text, the bounded legacy-index section, and exact
+`STD-0784` disposition. The README now names the suite; policy and fixture
+sources are unchanged.
+
+Row-8 lifecycle and Rust binding architecture remain independently executed
+through four accepted edge records. M6-I24 is accepted at train order 139 and
+the Bash checker is absent.
+
+Final evidence contains 172 suites, 101 Bash checkers, 105 nodes, 645 edges,
+and 105 components. Focused, independent-gate, package/edge, numeric, generated,
+plan, mutation, all-suite, complete-checkpoint, source-integrity, and diff checks
+pass without an engine, policy, fixture, false dependency, wrapper,
+compatibility, or fallback change.

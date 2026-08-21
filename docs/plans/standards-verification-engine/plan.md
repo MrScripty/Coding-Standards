@@ -4,16 +4,15 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** accept admitted M6-I24 by replacing the Rust binding annotation
-placement checker with its registered declarative suite
+**Next slice:** audit the fresh post-M6-I24 graph and select one owner-coherent
+package without preselecting M6-I25
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I23 moved Dependencies consolidation authority
-into one registered suite and removed the replaced Bash checker.
+**Latest accepted slice:** M6-I24 moved Rust binding annotation-placement
+authority into one registered suite and removed the replaced Bash checker.
 
-**Latest admitted slice:** M6-I24 freezes one Rust Language Bindings annotation
-placement package at train order 139.
+**Latest admitted slice:** none
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -120,11 +119,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I23 at train
-order 138.
+**Accepted boundary:** package records are accepted through M6-I24 at train
+order 139.
 
-**Current derived state:** 171 registered declarative suites, 102 retained Bash
-checkers, 106 executable nodes, 651 conservative reference edges, and 106
+**Current derived state:** 172 registered declarative suites, 101 retained Bash
+checkers, 105 executable nodes, 645 conservative reference edges, and 105
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -138,7 +137,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I24 admitted at train order 139; atomic acceptance is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | Fresh graph review after accepted M6-I24 |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -157,8 +156,8 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Accept admitted M6-I24 without changing its frozen owner, behavior,
-   dependency, write-set, or verification contract.
+1. Audit the fresh post-M6-I24 graph and select one owner-coherent package from
+   reviewed lifecycle and dependency evidence without preselecting M6-I25.
 2. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 3. Add another reusable primitive only when multiple coherent owners require it or

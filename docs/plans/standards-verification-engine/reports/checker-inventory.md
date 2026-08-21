@@ -4450,3 +4450,19 @@ all 172 suites and the complete checkpoint at 101 Bash checkers, 105 nodes, 645
 edges, and 105 components. M6-I24 is admitted at train order 139 without a
 policy, fixture, engine, registry, Bash repair, wrapper, compatibility, or
 fallback change.
+
+### M6-I24 Rust Binding Annotation Placement Acceptance
+
+The registered `rust-binding-annotation-placement` suite now owns all nine
+decisions, canonical Rust Language Bindings text, the bounded legacy-index
+section, and exact `STD-0784` disposition. Normative and fixture sources remain
+unchanged; the README names the suite.
+
+Row-8 lifecycle and Rust binding architecture remain independent through four
+accepted edge records. M6-I24 is accepted at train order 139 and the replaced
+checker is absent.
+
+Final evidence contains 172 suites, 101 Bash checkers, 105 nodes, 645 edges,
+and 105 components. Focused, independent-gate, package/edge, numeric, generated,
+mutation, all-suite, complete-checkpoint, plan, and diff checks pass without an
+engine, policy, fixture, false dependency, wrapper, compatibility, or fallback.
