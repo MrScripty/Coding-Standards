@@ -4338,3 +4338,20 @@ declarative suites plus the complete checkpoint at 105 Bash checkers, 109
 nodes, 665 edges, and 109 components. M6-I20 is admitted at train order 135
 without a policy, fixture, engine, helper, suite-dependency, copied-count,
 manual-numeric, Bash-repair, wrapper, compatibility, or fallback change.
+
+### M6-I20 Release Build-Procedure Acceptance
+
+The registered `release-build-procedure` suite now owns all 14 build-procedure
+decisions, canonical Release text, Launcher projection, and exact `STD-0500`
+disposition. The existing fixture and standards sources are unchanged.
+
+All four lifecycle edges are accepted and keep row-14 decomposition and the
+execution train independently executed. The README points to the registered
+suite, the Bash checker is absent, and numeric retirement is derived without a
+manual candidate mapping.
+
+Final evidence contains 168 suites, 105 Bash checkers, 109 nodes, 665 edges,
+and 109 components. Focused suite and gate checks, package/edge authority,
+numeric lifecycle, generated freshness, all-suite, mutation, complete-checkpoint,
+plan, and diff checks pass without an engine, source, fixture, dependency,
+wrapper, compatibility, or fallback change.

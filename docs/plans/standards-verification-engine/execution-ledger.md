@@ -4690,6 +4690,21 @@
 - Atomic M6-I20 acceptance is next; no wrapper, compatibility path, copied
   count, Bash repair, or fallback is admitted.
 
+## 2026-08-20 - M6-I20 Release Build-Procedure Acceptance
+
+- Registered one four-check Release suite for all 14 decisions, canonical
+  owner text, Launcher projection, and exact `STD-0500` disposition; sources
+  remain unchanged.
+- Accepted train order 135 and all four edge records. Row-14 and the execution
+  train remain independent checker gates, not suite dependencies.
+- Updated the README projection, deleted only the replaced checker, and derived
+  whole-checker numeric retirement without a candidate map.
+- Final evidence contains 168 suites, 105 Bash checkers, 109 nodes, 665 edges,
+  and 109 components. All required gates pass without an engine change,
+  compatibility path, wrapper, or fallback.
+- Fresh-graph owner-coherent package selection is next; M6-I21 is not
+  preselected.
+
 ## 2026-08-20 - M6-I16 Accessibility Focus-Lifecycle Admission
 
 - Fresh graph review selected the shortest caller-free checker. Its modality,

@@ -1,0 +1,68 @@
+schema_version = 1
+id = "release-build-procedure"
+owner = "workflow.release"
+description = "Artifact-plan-derived build procedure selection with typed unavailable and invalid outcomes and no guessed or successful-no-op fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/release/build-procedure-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+artifact = ["contradictory", "declared", "missing", "none"]
+target = ["declared", "missing", "not-applicable"]
+mode = ["declared", "missing", "not-applicable"]
+toolchain = ["available", "missing", "not-needed"]
+procedure = ["missing", "not-needed", "selected"]
+evidence = ["complete", "missing"]
+fallback = ["dev-substitute", "fixed-pair", "guess-target", "implicit-build", "none", "successful-noop"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "artifact", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "artifact", op = "eq", value = "missing" },
+  { field = "target", op = "eq", value = "missing" },
+  { field = "mode", op = "eq", value = "missing" },
+  { field = "toolchain", op = "eq", value = "missing" },
+  { field = "procedure", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "workflows/release.md"
+required = ["### Build Procedure Selection", "accepted artifact plan", "has no build procedure", "Do not invent universal build action names", "select the exact planned artifact", "compile implicitly through another action", "report success for an inapplicable"]
+prohibited = []
+
+[[checks]]
+id = "launcher-projection"
+type = "text"
+path = "LAUNCHER-STANDARDS.md"
+required = ["[Release](workflows/release.md#build-procedure-selection)"]
+prohibited = ["## Build Standards"]
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [["STD-0500", "LAUNCHER-STANDARDS.md", "workflows/release.md", "refine"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0500"

@@ -164,7 +164,7 @@ function, numeric-success, monolithic-result, implicit-install, and
 successful-no-op fallbacks.
 
 `fixtures/release/build-procedure-decisions.tsv` and
-`verify-release-build-procedure.sh` prove artifact-plan-derived build
+the registered `release-build-procedure` suite prove artifact-plan-derived build
 procedure selection and reject fixed modes, guessed targets, implicit builds,
 development substitution, and successful no-op fallback.
 

@@ -13528,3 +13528,19 @@ the complete checkpoint at 105 Bash checkers, 109 nodes, 665 edges, and 109
 components. Admission evidence contains 106 Bash checkers, 110 nodes, 672
 edges, and 110 components. No policy, fixture, engine, helper, suite dependency,
 copied count, Bash repair, wrapper, compatibility path, or fallback is admitted.
+
+## 2026-08-20 M6-I20 Release Build-Procedure Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Release suite owns all 14 build-procedure decisions, owner text,
+Launcher projection, and exact `STD-0500` disposition. The fixture and policy
+sources remain unchanged. Row-14 and execution-train lifecycle remain
+independently executed through four accepted edge records.
+
+M6-I20 is accepted at train order 135, the README names the suite, and the Bash
+checker is absent. Final evidence contains 168 suites, 105 Bash checkers, 109
+nodes, 665 edges, and 109 components. Focused, independent-gate, package/edge,
+numeric, generated, plan, all-suite, complete-checkpoint, mutation, and diff
+checks pass without an engine, source, fixture, dependency, wrapper,
+compatibility, or fallback change.
