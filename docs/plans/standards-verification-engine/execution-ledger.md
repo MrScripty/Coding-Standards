@@ -5753,3 +5753,18 @@
   transferred two historical records. Six mutations reject semantic and
   stale-evidence drift.
 - Final evidence: 189 suites, 83 Bash checkers, 87 nodes, 578 edges, 87 components.
+## 2026-08-21 - M6-I43 Process-Instance Coordination Admission
+
+- Fresh post-M6-I42 evidence selects the shortest of 16 caller-free verifiers:
+  the 63-line Architecture process-instance coordination checker.
+- Its 15 typed decisions, exact legacy and reference projections, prohibited
+  mechanism defaults, and six exact dispositions require no new engine
+  capability.
+- Row-39 lifecycle remains an independently executed Bash gate through two
+  admitted current edge records. Two historical records will transfer to exact
+  suite evidence only at acceptance.
+- Admitted M6-I43 at train order 158. No policy, fixture, disposition, engine,
+  nested gate, wrapper, compatibility representation, false dependency, dual
+  authority, or fallback changes.
+- Admission evidence contains 189 suites, 83 Bash checkers, 87 nodes, 580
+  edges, and 87 components.

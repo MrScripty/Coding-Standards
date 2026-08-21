@@ -14272,3 +14272,19 @@ Architecture process-instance coordination remains independent; two
 historical records now name suite evidence. Six mutations reject drift. Broad
 and complete verification pass with 189 suites, 83 Bash checkers, 87 nodes,
 578 edges, and 87 components.
+## 2026-08-21 M6-I43 Process-Instance Coordination Admission
+
+**Outcome:** admitted at train order 158; atomic acceptance is next.
+
+Fresh post-M6-I42 evidence selects the shortest of 16 caller-free verifiers,
+the 63-line Architecture process-instance coordination checker. Its 15 typed
+decisions, exact legacy and reference projections, prohibited mechanism
+defaults, and six exact dispositions fit existing decision, text, and table
+checks.
+
+Row-39 lifecycle remains independently executed through two admitted current
+edge records. Two historical checker records will transfer to exact suite
+evidence only at acceptance. No policy, fixture, disposition, engine, nested
+gate, wrapper, compatibility representation, false dependency, dual authority,
+or fallback changes. Admission evidence contains 189 suites, 83 Bash checkers,
+87 nodes, 580 edges, and 87 components.
