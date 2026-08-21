@@ -5923,3 +5923,18 @@
 - Both retained gates, 332 verifier tests, all 199 declarative suites, numeric
   lifecycle, and generated freshness pass. Final graph: 73 Bash checkers, 77
   nodes, 521 edges, 77 components.
+
+## 2026-08-21 - M6-I53 Row-13 Decomposition Acceptance
+
+- Fresh evidence selected the 71-line row-13 decomposition checker as the
+  shortest caller-free verifier and qualified it for `serial-coherent`
+  execution.
+- Replaced it with one five-check migration-lifecycle suite covering exact
+  ordered decomposition, seven identifiers and dispositions, package
+  authority, canonical owner paths, and no-fallback report evidence.
+- Transferred six historical C#, TypeScript, and Godot gate records to the
+  suite and preserved the accelerated-execution and execution-train checkers
+  as independent gates through four accepted records.
+- Five negative mutations, both retained gates, 342 verifier tests, all 200
+  declarative suites, numeric lifecycle, and generated freshness pass. Final
+  graph: 72 Bash checkers, 76 nodes, 515 edges, 76 components.

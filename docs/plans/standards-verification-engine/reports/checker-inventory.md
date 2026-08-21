@@ -5225,3 +5225,21 @@ generated freshness pass. Final evidence contains 73 Bash checkers, 77 nodes,
 521 edges, and 77 components. No normative source, engine, helper, wrapper,
 compatibility representation, false dependency, dual authority, or fallback
 changed.
+
+### M6-I53 Row-13 Decomposition Acceptance
+
+Fresh post-M6-I52 evidence selected the 71-line row-13 decomposition checker as
+the shortest caller-free verifier. The `serial-coherent` package replaces it
+with one five-check migration-lifecycle suite covering exact ordered
+decomposition, seven identifier and disposition outcomes, package authority,
+canonical owner paths, and no-fallback report evidence.
+
+Six historical C#, TypeScript, and Godot records now resolve to the suite.
+Accelerated-execution and execution-train lifecycle remain independently
+executable through four accepted edge records. Five disposable mutations reject
+decomposition, disposition, package, owner-path, and report drift. Both retained
+gates, 342 verifier tests, all 200 declarative suites, numeric lifecycle, and
+generated freshness pass. Final evidence contains 72 Bash checkers, 76 nodes,
+515 edges, and 76 components. No normative source, engine, helper, wrapper,
+compatibility representation, false dependency, dual authority, or fallback
+changed.

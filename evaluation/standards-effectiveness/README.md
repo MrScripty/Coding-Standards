@@ -114,10 +114,9 @@ coverage, zero premature dispositions, package prerequisites, and active
 cursor integrity.
 
 `milestone-7-row-13-decomposition.md` splits immutable row 13 into C# Async,
-Rust routing, TypeScript Async, and Godot framework children. Its checker
-proves exact ordered coverage, zero premature dispositions, three missing
-owner contracts, package handoff, no-fallback evidence, and active cursor
-integrity.
+Rust routing, TypeScript Async, and Godot framework children. The registered
+`milestone-7-row-13-decomposition` suite proves exact ordered coverage, final
+dispositions, canonical owner paths, package handoff, and no-fallback evidence.
 
 `milestone-7-row-14-decomposition.md` splits immutable row 14 into Launcher,
 Verification, Dependencies, Release, and Security children. Its checker proves

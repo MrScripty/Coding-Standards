@@ -14444,3 +14444,18 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   lifecycle, and generated freshness pass. Final graph: 73 Bash checkers, 77
   nodes, 521 edges, 77 components. No fallback or compatibility authority
   remains.
+
+## 2026-08-21 - M6-I53 Row-13 Decomposition Acceptance
+
+- Fresh post-M6-I52 evidence selected the 71-line row-13 decomposition checker
+  for one `serial-coherent` package at train order 168.
+- The registered five-check suite preserves exact ordered decomposition, all
+  seven identifiers and dispositions, package authority, canonical owner
+  paths, and no-fallback report evidence.
+- Six historical gate records now resolve to the suite; accelerated execution
+  and execution-train lifecycle remain independent through four accepted edge
+  records.
+- Five negative mutations, both retained gates, 342 verifier tests, all 200
+  declarative suites, numeric lifecycle, and generated freshness pass. Final
+  graph: 72 Bash checkers, 76 nodes, 515 edges, 76 components. No fallback or
+  compatibility authority remains.

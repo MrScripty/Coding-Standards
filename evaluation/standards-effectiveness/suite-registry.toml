@@ -994,3 +994,8 @@ requires = []
 id = "godot-owner-contract"
 path = "evaluation/standards-effectiveness/suites/godot-owner-contract.toml"
 requires = []
+
+[[suites]]
+id = "milestone-7-row-13-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-13-decomposition.toml"
+requires = []
