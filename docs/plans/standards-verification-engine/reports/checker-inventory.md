@@ -4658,3 +4658,17 @@ with 95 retained Bash checkers. Final graph evidence contains 99 nodes, 622
 edges, and 99 components without canonical source changes, engine changes,
 copied nested behavior, wrappers, compatibility representations, false
 dependencies, dual authority, or fallback.
+
+### M6-I31 Row-40 Decomposition Admission
+
+Fresh post-M6-I30 evidence selects the 29-line caller-free parent-plan
+checker. One registered suite can preserve its exact execution-train row, P32
+package, owner-validation row, decomposition text, and canonical owner-path
+presence with existing generic checks.
+
+The checker's Architecture reference-owner and execution-train calls are
+independent gates. Four exact current edge dispositions retain them without
+copied assertions or suite dependencies. Two M6-I30 historical records will
+transfer to exact suite evidence at acceptance. M6-I31 is admitted at train
+order 146 without migration-record changes, engine changes, wrappers,
+compatibility representations, false dependencies, dual authority, or fallback.

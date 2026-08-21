@@ -5375,3 +5375,19 @@
 - Final generated evidence contains 99 nodes, 622 edges, and 99 components
   without engine changes, copied nested behavior, wrappers, compatibility
   representations, false dependencies, dual authority, or fallback.
+
+## 2026-08-20 - M6-I31 Row-40 Decomposition Admission
+
+- Fresh post-M6-I30 evidence selects the 29-line caller-free row-40
+  decomposition checker. Its exact execution-train row, P32 package,
+  owner-validation record, decomposition contract, and owner-path presence
+  form one `migration.parent-plan` lifecycle contract.
+- Architecture pattern-reference ownership and the execution train remain
+  independently executed Bash gates. Four exact current edges are admitted;
+  the two M6-I30 historical references will transfer to the registered row-40
+  suite at acceptance.
+- Admitted M6-I31 at train order 146. No migration evidence, Architecture
+  source, nested checker, engine capability, wrapper, compatibility
+  representation, false dependency, or fallback changes.
+- Admission evidence contains 177 suites, 95 Bash checkers, 99 nodes, 623
+  edges, and 99 components.

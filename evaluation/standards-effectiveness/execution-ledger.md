@@ -13867,3 +13867,19 @@ checkpoint pass. Final graph evidence contains 99 nodes, 622 edges, and 99
 components without policy, fixture, nested-gate, or engine changes, wrappers,
 compatibility representations, false dependencies, dual authority, or
 fallback.
+
+## 2026-08-20 M6-I31 Row-40 Decomposition Admission
+
+**Outcome:** admitted at train order 146; atomic acceptance is next.
+
+Fresh post-M6-I30 evidence selects the 29-line caller-free row-40 checker. Its
+execution-train identity, P32 package, owner-validation record, decomposition
+contract, and canonical owner-path presence are expressible with existing
+generic table, text, and path-state checks.
+
+Architecture pattern-reference ownership and execution-train lifecycle remain
+separately owned retained gates through four admitted edges. The two M6-I30
+historical references will transfer to exact suite evidence at acceptance. No
+policy, migration record, nested checker, engine, wrapper, compatibility
+representation, false dependency, or fallback changes. Admission evidence
+contains 177 suites, 95 Bash checkers, 99 nodes, 623 edges, and 99 components.

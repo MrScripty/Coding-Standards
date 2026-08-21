@@ -53,7 +53,7 @@ evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh	ve
 evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh	verifier	yes	component-0052	1	no	3	2	2	2	1
 evaluation/standards-effectiveness/verify-milestone-7-row-18-decomposition.sh	verifier	yes	component-0053	1	no	3	0	2	0	1
 evaluation/standards-effectiveness/verify-milestone-7-row-39-decomposition.sh	verifier	yes	component-0054	1	no	5	1	3	1	6
-evaluation/standards-effectiveness/verify-milestone-7-row-40-decomposition.sh	verifier	yes	component-0055	1	no	3	0	2	0	2
+evaluation/standards-effectiveness/verify-milestone-7-row-40-decomposition.sh	verifier	yes	component-0055	1	no	3	0	3	0	2
 evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh	verifier	yes	component-0056	1	no	7	1	1	1	6
 evaluation/standards-effectiveness/verify-milestone-7-row-43-decomposition.sh	verifier	yes	component-0057	1	no	6	1	1	1	4
 evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh	verifier	yes	component-0058	1	no	9	1	1	1	8
