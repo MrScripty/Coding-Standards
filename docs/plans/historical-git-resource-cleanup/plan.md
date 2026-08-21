@@ -1,14 +1,14 @@
 # Plan: Historical Git Resource Cleanup
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Awaiting explicit start
+**Current phase:** Milestone 2 stale-registration cleanup
 
-**Next slice:** refresh the read-only branch and worktree inventory from current accepted `main`
+**Next slice:** prune exactly the 384 missing unlocked registrations in the accepted candidate inventory
 
 **Acceptance status:** `pending`
 
-**Accepted base:** `daa526917a7580e9965ab78435f6346c3c5d334c`
+**Accepted base:** `8cce95b27220faa3ed115542c7242464d04df225`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -25,7 +25,7 @@ ancestry, or patch equivalence as deletion authority.
 
 | ID | Observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
-| A1 | Every current worktree registration and local branch has one reviewed ownership and terminal disposition. | `pending` | Refreshed inventories |
+| A1 | Every current worktree registration and local branch has one reviewed ownership and terminal disposition. | `partial` | Current inventories classify all resources; branch terminal review follows registration cleanup |
 | A2 | Pruned registrations are proven missing, task-independent, unlocked, and free of a live or user-owned path before mutation. | `pending` | Milestone 2 execution report |
 | A3 | No branch with unique, shared, published, checked-out, unknown, or unmapped replacement history is deleted. | `pending` | Branch disposition review |
 | A4 | Repository state and protected commit reachability are verified before and after every accepted cleanup batch. | `pending` | Verification reports |
@@ -66,15 +66,14 @@ ancestry, or patch equivalence as deletion authority.
 
 | Milestone | Goal | Status |
 | --- | --- | --- |
-| 1 | Refresh read-only branch/worktree facts and exact dispositions. | `Planned` |
+| 1 | Refresh read-only branch/worktree facts and exact dispositions. | `Accepted` |
 | 2 | Execute an explicitly authorized stale-registration cleanup batch with before/after proof. | `Planned` |
 | 3 | Review redundant branch refs separately from registrations and protect every unique or unmapped commit. | `Planned` |
 | 4 | Verify terminal repository integrity and record deferred retained resources. | `Planned` |
 
 ## Blockers
 
-- Cleanup execution requires an explicit `start` operation after fresh
-  inventory review.
+- `none`
 
 ## Re-Plan Triggers
 
