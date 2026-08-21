@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** audit the fresh post-M6-I27 graph and select one owner-coherent
-package without preselecting M6-I28
+**Next slice:** resolve VE084's Frontend source-closure ownership boundary
+before selecting or admitting M6-I28
 
 **Acceptance status:** `pending`
 
@@ -192,7 +192,8 @@ fallback remains.
 
 ## Blockers
 
-- `none`
+- VE084: current authority does not assign the retained Frontend source-closure
+  contract wholly to either the Frontend profile or migration parent plan.
 
 ## Re-Plan Triggers
 

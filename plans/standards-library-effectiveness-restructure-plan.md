@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 7 verification migration
 
-**Next slice:** verification-engine audit of the fresh post-M6-I27 graph
-without preselecting M6-I28
+**Next slice:** verification-engine resolution of VE084's Frontend
+source-closure ownership boundary before M6-I28 admission
 
 **Acceptance status:** `partial`
 
@@ -137,7 +137,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | Fresh post-M6-I27 graph audit through the verification-engine plan |
+| 7 | Role-based consolidation and verification migration | `Active` | VE084 owner-boundary replan through the verification-engine plan |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -159,8 +159,8 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Audit the fresh post-M6-I27 graph through the verification-engine plan
-   without preselecting M6-I28.
+1. Resolve VE084 through the verification-engine plan before selecting or
+   admitting M6-I28.
 2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
 3. Regenerate canonical inventories and prove exact dispositions, no source

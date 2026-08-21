@@ -5246,3 +5246,18 @@
   components without engine changes, false dependencies, wrappers,
   compatibility representations, dual authority, or fallback.
 - Fresh-graph owner-coherent package selection is next.
+
+## 2026-08-20 - VE084 Frontend Source-Closure Ownership Replan
+
+- The clean post-M6-I27 graph selects the 45-line Frontend source-closure gate
+  as the shortest caller-free candidate.
+- Its legacy-index routes and 16 dispositions span Frontend, TypeScript,
+  Accessibility, Concurrency, Tooling, Verification, and reference owners. It
+  also checks one Accessibility no-web-default rule and executes the separately
+  owned Accessibility contract.
+- Existing authority does not assign that combined replacement contract wholly
+  to the Frontend profile or migration parent plan. Owner inference from graph
+  shape or filenames is prohibited, so no M6-I28 package is selected.
+- VE084 must resolve the owner and cross-owner evidence boundary before
+  implementation resumes. Canonical source, package, edge, registry, checker,
+  generated, and engine authority remain unchanged.

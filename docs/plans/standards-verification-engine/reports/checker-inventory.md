@@ -4550,3 +4550,17 @@ train order 142 and the checker is absent. Final evidence contains 175 suites,
 98 Bash checkers, 102 nodes, 630 edges, and 102 components without engine
 changes, false dependencies, wrappers, compatibility representations, dual
 authority, or fallback.
+
+### VE084 Frontend Source-Closure Ownership Replan
+
+Fresh post-M6-I27 evidence selects the 45-line Frontend source-closure gate.
+The gate owns legacy-index routing and 16 disposition-presence checks, directly
+asserts an Accessibility no-web-default rule, and invokes the separately owned
+Accessibility contract.
+
+Current authority does not establish whether the replacement contract belongs
+to `profile.application.frontend` or `migration.parent-plan`. Selecting either
+from topology, source naming, or disposition targets would infer ownership.
+M6-I28 remains unselected pending an explicit owner and cross-owner evidence
+decision; no package, edge, suite, registry, checker, generated artifact,
+engine behavior, compatibility path, or fallback changed.
