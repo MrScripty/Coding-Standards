@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2 stale-registration cleanup
+**Current phase:** Milestone 3 branch disposition and cleanup
 
-**Next slice:** prune exactly the 384 missing unlocked registrations in the accepted candidate inventory
+**Next slice:** delete the exact nine unregistered ancestral task branches with non-force merged-branch checks
 
 **Acceptance status:** `pending`
 
@@ -26,7 +26,7 @@ ancestry, or patch equivalence as deletion authority.
 | ID | Observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
 | A1 | Every current worktree registration and local branch has one reviewed ownership and terminal disposition. | `partial` | Current inventories classify all resources; branch terminal review follows registration cleanup |
-| A2 | Pruned registrations are proven missing, task-independent, unlocked, and free of a live or user-owned path before mutation. | `pending` | Milestone 2 execution report |
+| A2 | Pruned registrations are proven missing, task-independent, unlocked, and free of a live or user-owned path before mutation. | `satisfied` | [Milestone 2 report](reports/milestone-2-prune.md) and post-prune worktree inventory |
 | A3 | No branch with unique, shared, published, checked-out, unknown, or unmapped replacement history is deleted. | `pending` | Branch disposition review |
 | A4 | Repository state and protected commit reachability are verified before and after every accepted cleanup batch. | `pending` | Verification reports |
 
@@ -67,7 +67,7 @@ ancestry, or patch equivalence as deletion authority.
 | Milestone | Goal | Status |
 | --- | --- | --- |
 | 1 | Refresh read-only branch/worktree facts and exact dispositions. | `Accepted` |
-| 2 | Execute an explicitly authorized stale-registration cleanup batch with before/after proof. | `Planned` |
+| 2 | Execute an explicitly authorized stale-registration cleanup batch with before/after proof. | `Accepted` |
 | 3 | Review redundant branch refs separately from registrations and protect every unique or unmapped commit. | `Planned` |
 | 4 | Verify terminal repository integrity and record deferred retained resources. | `Planned` |
 
