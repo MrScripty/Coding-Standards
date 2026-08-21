@@ -4840,3 +4840,18 @@ evidence contains 94 nodes, 598 edges, and 94 components with 182 registered
 suites and 90 retained Bash checkers. No policy, fixture, disposition,
 owner-validation, engine, nested gate, wrapper, compatibility representation,
 false dependency, dual authority, or fallback changed.
+### M6-I36 Frontend Rendering And Synchronization Admission
+
+Fresh post-M6-I35 evidence exposes 19 caller-free verifiers and selects the
+17-line Frontend rendering/synchronization checker as the shortest
+owner-coherent frontier. Its 26 typed decisions, canonical and reference
+projections, nine-module metadata graph, and exact `STD-0451` through
+`STD-0453` membership are expressible with existing generic checks.
+
+The shared metadata helper remains an external-owned artifact used by other
+semantic consumers through two admitted current edge records; the Frontend
+suite will use the generic metadata graph directly. Four accepted historical
+records will transfer from checker evidence to the exact registered suite only
+at acceptance. M6-I36 is admitted at train order 151 without policy, fixture,
+disposition, metadata helper, engine, wrapper, compatibility representation,
+false dependency, dual authority, or fallback changes.

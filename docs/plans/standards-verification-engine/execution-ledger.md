@@ -5568,3 +5568,18 @@
 - Final generated evidence contains 94 nodes, 598 edges, and 94 components
   without copied nested behavior, wrappers, compatibility representations,
   false dependencies, dual authority, or fallback.
+## 2026-08-21 - M6-I36 Frontend Rendering And Synchronization Admission
+
+- Fresh post-M6-I35 evidence selects the shortest of 19 caller-free verifiers:
+  the 17-line Frontend rendering/synchronization checker.
+- Its 26 typed decisions, canonical and reference projections, nine-module
+  metadata graph, and exact three-ID membership require no new engine
+  capability.
+- The shared metadata helper remains an external-owned artifact for other
+  semantic consumers through two admitted current edge records. Four
+  historical records will transfer to exact suite evidence only at acceptance.
+- Admitted M6-I36 at train order 151. No policy, fixture, disposition,
+  metadata helper, engine, wrapper, compatibility representation, false
+  dependency, dual authority, or fallback changes.
+- Admission evidence contains 182 suites, 90 Bash checkers, 94 nodes, 599
+  edges, and 94 components.
