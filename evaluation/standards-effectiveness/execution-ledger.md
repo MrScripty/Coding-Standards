@@ -13778,3 +13778,21 @@ compatibility representation, or fallback.
 
 Admission evidence contains 175 suites, 98 Bash checkers, 102 nodes, 631 edges,
 and 102 components.
+
+## 2026-08-20 M6-I28 Frontend Source Closure Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+Frontend's former normative source is now a reviewed member of the aggregate
+source-index suite. The corpus records derived authority, the index satisfies
+the shared non-authority contract, all nine routes and complete headings are
+explicit fixtures, all 16 identifiers are derived from canonical maps, and
+`STD-0464` retains its exact Accessibility target.
+
+The Bash checker and sole-use route fixture are absent. Both M6-T12 records now
+use aggregate-suite evidence, while Accessibility remains independently
+executed through two accepted M6-I28 rows. Four mutation cases, 326 Python
+tests, all 175 suites, and the complete 97-checker checkpoint pass. Final graph
+evidence contains 101 nodes, 627 edges, and 101 components without an engine
+change, wrapper, false dependency, compatibility representation, copied range,
+dual authority, or fallback.

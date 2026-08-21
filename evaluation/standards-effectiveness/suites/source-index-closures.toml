@@ -12,3 +12,18 @@ corpus_path = "evaluation/standards-effectiveness/corpus.tsv"
 owner_map_path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
 dispositions_path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
 router_path = "STANDARDS-ROUTER.md"
+
+[[checks]]
+id = "frontend-accessibility-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [["STD-0464", "FRONTEND-STANDARDS.md", "topics/accessibility.md", "index"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0464"

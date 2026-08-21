@@ -5281,3 +5281,23 @@
   copied identifier range, or fallback changes.
 - Admission evidence contains 175 suites, 98 Bash checkers, 102 nodes, 631
   edges, and 102 components.
+
+## 2026-08-20 - M6-I28 Frontend Source Closure Acceptance
+
+- Added Frontend's reviewed contract, heading, route, and prohibited-content
+  fixtures to the existing aggregate source-index suite. The corpus now
+  classifies the already non-normative index as derived, and the index uses
+  the aggregate's explicit non-authority contract.
+- The aggregate derives all 16 Frontend identifiers from canonical owner and
+  disposition maps and separately proves the split `STD-0464` Accessibility
+  target. Four disposable mutations fail for route loss, prohibited content,
+  incorrect corpus authority, and disposition drift.
+- Removed the obsolete checker and sole-use route fixture, transferred both
+  M6-T12 historical records to `suite:source-index-closures`, and accepted the
+  two Accessibility independent-gate records. No cross-owner suite dependency
+  or copied Accessibility assertion was introduced.
+- Focused closure, Accessibility owner, package/edge, numeric, generated,
+  removed-path, 326-unit-test, all-175-suite, complete-97-checker, plan, diff,
+  and staged-scope checks pass. Final evidence contains 101 nodes, 627 edges,
+  and 101 components without an engine change, wrapper, duplicate authority,
+  compatibility representation, copied identifier range, or fallback.

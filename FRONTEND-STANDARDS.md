@@ -1,8 +1,11 @@
 # Frontend Standards Migration Index
 
-This file is a non-normative compatibility index. It defines no frontend,
-accessibility, tooling, lifecycle, or verification policy and selects no
-framework, platform, mechanism, or fallback.
+This former standards entrypoint is non-normative navigation. It owns no
+frontend, accessibility, tooling, lifecycle, or verification policy,
+applicability decision, default, example, or fallback authority.
+
+If a route is missing, conflicting, or inapplicable, return the Router's typed
+diagnostic instead of using prior wording from this file.
 
 Use the canonical owner for the concern being decided:
 

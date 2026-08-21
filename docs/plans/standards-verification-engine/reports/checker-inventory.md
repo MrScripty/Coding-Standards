@@ -4584,3 +4584,18 @@ rejection, and the no-mechanism default boundary. The two current nested-call
 edges become independent-gate records, not suite dependencies. Atomic
 acceptance deletes the obsolete checker and sole-use Frontend route fixture
 without a wrapper, duplicate suite, compatibility representation, or fallback.
+
+### M6-I28 Frontend Source Closure Acceptance
+
+The aggregate source-index suite now discovers a reviewed Frontend fixture and
+derives exact membership for all 16 legacy identifiers. The suite also proves
+the explicit `STD-0464` Accessibility target while Frontend's index is recorded
+as derived and satisfies the shared non-authority contract.
+
+The obsolete checker and its sole-use route fixture are absent. M6-T12 now
+names `suite:source-index-closures`; Accessibility remains an independently
+executed retained gate through two accepted M6-I28 rows. Mutation evidence
+rejects route loss, prohibited content, normative corpus drift, and disposition
+drift. Final evidence contains 175 suites, 97 Bash checkers, 101 nodes, 627
+edges, and 101 components without engine changes, false dependencies, wrappers,
+compatibility representations, dual authority, or fallback.
