@@ -13593,3 +13593,19 @@ Final evidence contains 170 suites, 103 Bash checkers, 107 nodes, 653 edges,
 and 107 components. Focused, independent-gate, package/edge, numeric, generated,
 plan, mutation, all-suite, complete-checkpoint, and diff checks pass without a
 source, fixture, engine, dependency, wrapper, compatibility, or fallback change.
+
+## 2026-08-20 M6-I23 Dependency Standards Consolidation Admission
+
+**Outcome:** admitted at train order 138; atomic acceptance is next.
+
+Fresh post-M6-I22 evidence selects the 39-line caller-free Dependencies
+consolidation checker. Its 20 decisions, canonical owner text, legacy-index
+boundary, and exact `STD-0300` through `STD-0348` source dispositions form one
+`topic.dependencies` contract.
+
+The Dependencies owner contract and execution train remain independently
+executed through four admitted edge records. Disposable final state passes all
+171 declarative suites and the complete checkpoint at 102 Bash checkers, 106
+nodes, 647 edges, and 106 components. Admission state has 170 suites, 103 Bash
+checkers, 107 nodes, 655 edges, and 107 components without source, fixture,
+engine, registry, checker, wrapper, compatibility, or fallback changes.

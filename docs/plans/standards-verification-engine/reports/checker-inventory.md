@@ -4406,3 +4406,17 @@ Documentation decisions, policy consolidation, row-41 lifecycle, and source-gap
 closure remain independently executed through eight accepted edges. Final
 evidence contains 170 suites, 103 Bash checkers, 107 nodes, 653 edges, and 107
 components with no engine, dependency, wrapper, compatibility, or fallback.
+
+### M6-I23 Dependency Standards Consolidation Admission
+
+The fresh post-M6-I22 graph selects the 39-line caller-free Dependencies
+consolidation checker. Existing generic checks express its 20 decisions,
+canonical owner text, legacy-index boundary, and exact source-scoped
+`STD-0300` through `STD-0348` disposition set.
+
+The Dependencies owner-contract and execution-train checkers remain independent
+registered Bash gates through four admitted lifecycle edges. Disposable final
+state passes all 171 suites and the complete checkpoint at 102 Bash checkers,
+106 nodes, 647 edges, and 106 components. M6-I23 is admitted at train order 138
+without a source, fixture, engine, registry, Bash repair, wrapper,
+compatibility, or fallback change.

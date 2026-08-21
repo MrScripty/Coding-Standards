@@ -5082,3 +5082,20 @@
   checks pass. No new suite, registry node, dependency, Bash repair, wrapper,
   compatibility path, copied count, manual numeric record, or fallback remains.
 - Fresh-graph owner-coherent package selection is next.
+
+## 2026-08-20 - M6-I23 Dependency Standards Consolidation Admission
+
+- Started from clean accepted revision `fed1a1a`; fresh post-M6-I22 evidence
+  selected the 39-line caller-free Dependencies consolidation checker.
+- Admitted one owner-coherent package at train order 138. The existing fixture,
+  canonical Dependencies owner, legacy index, and exact `STD-0300` through
+  `STD-0348` dispositions remain the sole policy sources.
+- Four admitted edge dispositions preserve the Dependencies owner-contract and
+  execution-train checkers as independent gates; no suite dependency or false
+  execution edge is introduced.
+- Disposable final state passes the focused suite, both independent gates, all
+  171 declarative suites, and the complete checkpoint at 102 Bash checkers,
+  106 nodes, 647 edges, and 106 components.
+- Admission evidence contains 170 suites, 103 Bash checkers, 107 nodes, 655
+  edges, and 107 components. No source, fixture, engine, registry, checker, or
+  fallback behavior changes before atomic acceptance.
