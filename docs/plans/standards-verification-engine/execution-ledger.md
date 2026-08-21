@@ -5858,3 +5858,16 @@
 - Five mutations, 332 verifier tests, all 194 declarative suites, and generated
   freshness pass. Final graph: 78 Bash checkers, 82 nodes, 545 edges, 82
   components.
+
+## 2026-08-21 - M6-I48 C# Async Owner Acceptance
+
+- Fresh evidence selected the 73-line C# Async owner checker as the shortest of
+  17 caller-free verifiers and qualified it for `serial-coherent` execution.
+- Replaced it with one seven-check language-profile suite covering 12 typed
+  decisions and six owner, route, legacy, lifecycle, and documentation
+  projections.
+- Removed the retired checker from row-35 current consumer authority and
+  preserved two independent gates through four accepted edge records.
+- Both retained gates, 332 verifier tests, all 195 declarative suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 77 Bash checkers, 81
+  nodes, 541 edges, 81 components.

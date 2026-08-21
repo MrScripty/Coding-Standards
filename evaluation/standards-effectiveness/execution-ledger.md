@@ -14379,3 +14379,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   declarative suites, and generated freshness pass.
 - Final evidence contains 78 Bash checkers, 82 nodes, 545 edges, and 82
   components. No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I48 C# Async Owner Acceptance
+
+- Fresh post-M6-I47 evidence selected the 73-line C# Async owner checker for
+  one `serial-coherent` package at train order 163.
+- The registered seven-check suite preserves 12 typed decisions and canonical
+  owner, Router, legacy, disposition, execution-overlay, and README evidence.
+- Row-35 current consumer authority no longer names the retired checker; row
+  13 and plan fixtures remain independent through four accepted edge records.
+- Both retained gates, 332 verifier tests, all 195 declarative suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 77 Bash checkers, 81
+  nodes, 541 edges, 81 components. No fallback or compatibility authority
+  remains.

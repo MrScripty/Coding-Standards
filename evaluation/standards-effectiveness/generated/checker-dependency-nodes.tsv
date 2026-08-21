@@ -8,7 +8,6 @@ evaluation/standards-effectiveness/verify-concurrency-policy.sh	verifier	yes	com
 evaluation/standards-effectiveness/verify-contract-decisions.sh	verifier	yes	component-989c910ddcf2c312c4c251fabeb891abb2099e35d1860e10b54e4d7a20414ad8	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-contract-ownership.sh	verifier	yes	component-f164a80b7fcd9626ecdf1baea8eb7b6d59f71988c2161366670321e00d1383d3	1	no	0	3	4	3	0
 evaluation/standards-effectiveness/verify-cross-language-contract.sh	verifier	yes	component-9444f35220b1ea0a550576b912f1a32b42e57f4fda3b7092f366fa239fec0b65	1	no	3	2	3	2	4
-evaluation/standards-effectiveness/verify-csharp-async-owner-contract.sh	verifier	yes	component-7f1821075c2e343845fa4f0b29eb4945c5d4ceb4a79caf6adfd82c355e2fbfeb	1	no	5	0	2	0	2
 evaluation/standards-effectiveness/verify-decision-table-engine.sh	verifier	yes	component-bca18e32e5e45df9724ff0381026161e041085bcb3184d73291597d26ab2fe9b	1	no	1	1	0	1	1
 evaluation/standards-effectiveness/verify-decision-traceability.sh	verifier	yes	component-f9ad2f3185228ad753500c333348a0d6707cf27735758e4edec4bbb3f34eb0d5	1	no	1	0	1	0	1
 evaluation/standards-effectiveness/verify-dependencies-owner-contract.sh	verifier	yes	component-a21117ca9358e43b4cfd9d14ac2e4c9ca7e4ecc03913b8fe5118e428e7886ab6	1	no	4	0	3	0	3
@@ -34,7 +33,7 @@ evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh	verifie
 evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh	verifier	yes	component-572e52e35399637057c19ce2396fe5791f1e3339d8c1db61cfb66be8f5abafd8	1	no	0	5	2	5	0
 evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh	verifier	yes	component-07ce6877f103bc57a9f71e7884007823ac917967a9324f9aaf13c2f7713006b3	1	no	4	5	1	5	2
 evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	verifier	yes	component-4940104761051e00bc2df0352d77702d7e95858d1a1fe20f7c52f5c6fbb01841	1	no	5	6	4	6	6
-evaluation/standards-effectiveness/verify-milestone-7-row-13-decomposition.sh	verifier	yes	component-e27642d922695d8b2ae5cdbfe2a3cbec21f736f87d836bde91532065fc56a99a	1	no	4	3	1	3	2
+evaluation/standards-effectiveness/verify-milestone-7-row-13-decomposition.sh	verifier	yes	component-e27642d922695d8b2ae5cdbfe2a3cbec21f736f87d836bde91532065fc56a99a	1	no	4	2	2	2	2
 evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh	verifier	yes	component-fe1f3e23d1cd153784e8f8271c0cb463e91d2a68196619442ff3c5e8bd2537a4	1	no	4	1	2	1	2
 evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh	verifier	yes	component-d047788b75a5f608467aafa63a1927cca98d61d77b26757df901e57d34358c90	1	no	3	1	2	1	1
 evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh	verifier	yes	component-c08bd8f04b542fa65f90d4d8b2902cdc932dd42732574d9ae75a61879da9cba8	1	no	7	1	1	1	6
@@ -47,7 +46,7 @@ evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.s
 evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	verifier	yes	component-4020675e30062d26db7623399b9ba326cd7245afa79736406aab314ff1b10afb	1	no	3	3	2	3	3
 evaluation/standards-effectiveness/verify-network-transport-policy.sh	verifier	yes	component-cbeed40a7f9e5e3d699206653231eac25713b591f47332b9f18ee06e33703fcd	1	no	6	2	2	2	3
 evaluation/standards-effectiveness/verify-owner-state-transitions.sh	verifier	yes	component-6b68dca809c343cfd0363eb43d1e2d2d9020dd18b9448cdf1a601a40eb573b62	1	no	0	1	0	1	0
-evaluation/standards-effectiveness/verify-plan-fixtures.sh	verifier	yes	component-6a60c37c93d5b66cf98456f78fcd1d0613ab20920652a16e03fc7dcb991081c1	1	no	1	12	0	12	1
+evaluation/standards-effectiveness/verify-plan-fixtures.sh	verifier	yes	component-6a60c37c93d5b66cf98456f78fcd1d0613ab20920652a16e03fc7dcb991081c1	1	no	1	11	1	11	1
 evaluation/standards-effectiveness/verify-readme-template-derivation-closure.sh	verifier	yes	component-c27058db5d96c05fe46cc5ae88329a064ce2df7f7b8023db23008085ca09f33a	1	no	2	0	1	0	3
 evaluation/standards-effectiveness/verify-release-procedure-policy.sh	verifier	yes	component-474ecf2e2b44b72e1f3cf6d21e515170addb994cc9d562936a96b60ddc906454	1	no	1	0	2	0	1
 evaluation/standards-effectiveness/verify-resilience-owner-contract.sh	verifier	yes	component-0b6ee6317401d4f4fed9f4cb1d2f28bf9b3b370ef07e7741b8b1447295dc46c5	1	no	4	1	2	1	2

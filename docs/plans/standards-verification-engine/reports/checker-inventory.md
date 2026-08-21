@@ -5143,3 +5143,19 @@ suites, and generated freshness pass. Final evidence contains 78 Bash checkers,
 82 nodes, 545 edges, and 82 components. No normative source, engine, helper,
 wrapper, compatibility representation, false dependency, dual authority, or
 fallback changed.
+
+### M6-I48 C# Async Owner Acceptance
+
+Fresh post-M6-I47 evidence selected the 73-line C# Async owner checker as the
+shortest of 17 caller-free verifiers. The `serial-coherent` package replaces it
+with one seven-check language-profile suite covering 12 typed decisions, owner,
+Router, legacy, disposition, execution-overlay, and README projections.
+
+Row-35 consumer authority no longer names the retired README assertion. Row 13
+and plan fixtures remain independently executable through four accepted edge
+records. The 12 decisions include nine typed negative outcomes. Both retained
+gates, 332 verifier tests, all 195 declarative suites, numeric lifecycle, and
+generated freshness pass. Final evidence contains 77 Bash checkers, 81 nodes,
+541 edges, and 81 components. No normative source, engine, helper, wrapper,
+compatibility representation, false dependency, dual authority, or fallback
+changed.

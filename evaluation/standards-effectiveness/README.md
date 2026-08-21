@@ -169,7 +169,7 @@ cause preservation, bounded diagnostics, and rejection of catch/log/trace
 defaults.
 
 `fixtures/csharp/async-owner-contract-decisions.tsv` and
-`verify-csharp-async-owner-contract.sh` establish the C# Async profile before
+the registered `csharp-async-owner-contract` suite establish the C# Async profile before
 population. They select continuation scheduling from explicit affinity and
 capability facts while rejecting blanket context suppression, blocking,
 alternate dispatch, missing evidence, and default success.

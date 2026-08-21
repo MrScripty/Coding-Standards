@@ -969,3 +969,8 @@ requires = []
 id = "dependencies-population"
 path = "evaluation/standards-effectiveness/suites/dependencies-population.toml"
 requires = []
+
+[[suites]]
+id = "csharp-async-owner-contract"
+path = "evaluation/standards-effectiveness/suites/csharp-async-owner-contract.toml"
+requires = []
