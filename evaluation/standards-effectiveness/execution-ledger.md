@@ -14367,3 +14367,15 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
 - Five negative mutations, 332 verifier tests, all 193 declarative suites, and
   generated freshness pass. Final graph: 79 Bash checkers, 83 nodes, 554
   edges, 83 components.
+
+## 2026-08-21 - M6-I47 Dependencies Population Acceptance
+
+- Fresh post-M6-I46 evidence selected the 69-line Dependencies population
+  checker for one `serial-coherent` package at train order 162.
+- The registered five-check suite preserves 14 typed decisions, canonical
+  owner, legacy, and README projections, and three exact dispositions.
+- Four retained gates remain independently executable through eight accepted
+  edge records. Five negative mutations, 332 verifier tests, all 194
+  declarative suites, and generated freshness pass.
+- Final evidence contains 78 Bash checkers, 82 nodes, 545 edges, and 82
+  components. No fallback or compatibility authority remains.

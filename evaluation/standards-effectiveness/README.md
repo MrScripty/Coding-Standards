@@ -175,7 +175,7 @@ capability facts while rejecting blanket context suppression, blocking,
 alternate dispatch, missing evidence, and default success.
 
 `fixtures/dependencies/population-decisions.tsv` and
-`verify-dependencies-population.sh` prove the Launcher dependency-installation
+the registered `dependencies-population` suite prove the Launcher dependency-installation
 migration. They cover independently identified requirements, satisfaction
 evidence, explicit mutation authority, selected procedures, post-mutation
 verification, owner-selected grouped transactions, and rejection of fixed

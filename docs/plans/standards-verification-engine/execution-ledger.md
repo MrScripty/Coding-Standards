@@ -5846,3 +5846,15 @@
 - Five mutations, 332 verifier tests, all 193 declarative suites, and generated
   freshness pass. Final graph: 79 Bash checkers, 83 nodes, 554 edges, 83
   components.
+
+## 2026-08-21 - M6-I47 Dependencies Population Acceptance
+
+- Fresh evidence selected the 69-line Dependencies population checker as the
+  shortest of 16 caller-free verifiers and qualified it for
+  `serial-coherent` execution.
+- Replaced it with one five-check topic-population suite covering 14 decisions,
+  owner, legacy, and README projections, and three exact dispositions.
+- Preserved four independent gates through eight accepted edge records.
+- Five mutations, 332 verifier tests, all 194 declarative suites, and generated
+  freshness pass. Final graph: 78 Bash checkers, 82 nodes, 545 edges, 82
+  components.

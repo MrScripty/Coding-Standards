@@ -1,0 +1,92 @@
+schema_version = 1
+id = "dependencies-population"
+owner = "topic.dependencies"
+description = "Authorized dependency provisioning with per-requirement identity, postchecks, and no procedural or numeric fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/dependencies/population-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+requirement = ["contradictory", "declared", "missing"]
+satisfaction = ["complete", "unknown", "unsatisfied"]
+authority = ["explicit", "implicit", "missing", "not-needed"]
+procedure = ["grouped-opaque", "grouped-owned", "missing", "not-run", "selected"]
+postcheck = ["complete", "failed", "missing"]
+identity = ["lost", "preserved"]
+fallback = ["exit-zero", "fixed-functions", "implicit-install", "monolithic-result", "none", "successful-noop"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "requirement", op = "eq", value = "contradictory" },
+  { field = "authority", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "requirement", op = "eq", value = "missing" },
+  { field = "satisfaction", op = "eq", value = "unknown" },
+  { field = "procedure", op = "eq", value = "missing" },
+  { field = "postcheck", op = "ne", value = "complete" },
+]
+
+[[checks]]
+id = "canonical-owner-projection"
+type = "text"
+path = "topics/dependencies.md"
+required = [
+  "### Provisioning Procedure",
+  "independently identifiable unit",
+  "already satisfied requirement is not mutated",
+  "preserves per-requirement",
+  "re-evaluate the same satisfaction contract",
+  "Function names, process exit codes",
+  "cannot create missing authority",
+  "reinterpret failure as success",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-projection"
+type = "text"
+path = "LAUNCHER-STANDARDS.md"
+required = ["[Dependencies](topics/dependencies.md)"]
+prohibited = [
+  "## Dependency Installation Standards",
+  "check_<name>",
+  "install_<name>",
+  "monolithic check",
+]
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["the registered `dependencies-population` suite prove the Launcher dependency-installation"]
+prohibited = ["`verify-dependencies-population.sh` prove the Launcher dependency-installation"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0496", "LAUNCHER-STANDARDS.md", "LAUNCHER-STANDARDS.md", "index"],
+  ["STD-0497", "LAUNCHER-STANDARDS.md", "topics/dependencies.md", "refine"],
+  ["STD-0498", "LAUNCHER-STANDARDS.md", "topics/dependencies.md", "refine"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0496", "STD-0497", "STD-0498"]

@@ -5127,3 +5127,19 @@ declarative suites, and generated freshness pass. Final evidence contains 79
 Bash checkers, 83 nodes, 554 edges, and 83 components. No normative source,
 engine, helper, wrapper, compatibility representation, false dependency, dual
 authority, or fallback changed.
+
+### M6-I47 Dependencies Population Acceptance
+
+Fresh post-M6-I46 evidence selected the 69-line Dependencies population
+checker as the shortest of 16 caller-free verifiers. The `serial-coherent`
+package replaces it with one five-check topic-population suite covering 14
+typed decisions, the canonical owner and legacy projections, the README
+projection, and three exact dispositions.
+
+Four retained independent gates remain executable through eight accepted edge
+records. Five disposable mutations reject decision, owner, legacy, README, and
+disposition drift. The retained gates, 332 verifier tests, all 194 declarative
+suites, and generated freshness pass. Final evidence contains 78 Bash checkers,
+82 nodes, 545 edges, and 82 components. No normative source, engine, helper,
+wrapper, compatibility representation, false dependency, dual authority, or
+fallback changed.

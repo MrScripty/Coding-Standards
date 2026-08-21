@@ -964,3 +964,8 @@ requires = []
 id = "architecture-pattern-reference-owner"
 path = "evaluation/standards-effectiveness/suites/architecture-pattern-reference-owner.toml"
 requires = []
+
+[[suites]]
+id = "dependencies-population"
+path = "evaluation/standards-effectiveness/suites/dependencies-population.toml"
+requires = []
