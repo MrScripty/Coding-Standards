@@ -13,9 +13,11 @@ Consume branch or worktree facts only when the admitted plan selected material
 isolation. Follow Commit's least history-transforming integration decision; do
 not cherry-pick by default merely because implementation used another worktree.
 At terminal acceptance, check each worktree path created by this task: confirm
-its registry entry is absent after safe removal or record the explicit retained-
-resource contract. Do not substitute a repository-wide prune for this bounded
-postcondition.
+its registry entry is absent after reachability-safe removal or record the
+explicit retained-resource contract. Record the exact head OID, reachability,
+commit disposition, and removed, archived, retained, or discard-authorized
+outcome. Do not substitute a repository-wide prune or object-integrity check
+for this bounded protected-OID postcondition.
 
 Route the adopting repository through
 [`STANDARDS-ROUTER.md`](../STANDARDS-ROUTER.md), then follow the canonical

@@ -121,10 +121,12 @@ and remove this section for direct serial work. Do not require a branch merely
 because a written plan exists or because work is delegated.
 
 For each worktree created by the plan, record its exact path and terminal
-classification. Final evidence confirms that its registry entry is absent
-after safe removal or records an explicit retained-resource contract with its
-purpose, owner, and next disposition. This evidence is scoped to plan-created
-paths and does not authorize repository-wide pruning.
+outcome. If removal is authorized, record the exact head OID, its reachability,
+and its retained, archived, or discard-authorized commit disposition. Final
+evidence confirms that its registry entry is absent after safe removal and its
+protected-OID postcondition holds, or records an explicit retained-resource
+contract with its purpose, owner, and next disposition. This evidence is scoped
+to plan-created paths and does not authorize repository-wide pruning.
 
 ## Final Acceptance
 

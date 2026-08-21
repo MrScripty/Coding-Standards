@@ -111,6 +111,23 @@ git diff --stat <base-ref>...HEAD
 These commands report history. They do not authorize amend, reset, rebase,
 squash, or commit dropping.
 
+Before an authorized worktree cleanup removes a registration that may be a
+detached head's only root, record the exact OID and verify its selected retained
+or recovery ref. This repository provides a reference verifier for an explicit
+four-column `oid`, `commit_disposition`, `reference`, and `authority` TSV:
+
+```bash
+python3 tools/verify_git_reachability.py \
+  --repository . \
+  --manifest path/to/protected-oids.tsv
+```
+
+Use `retained-ref` when the OID must be an ancestor of the named full ref,
+`archived-ref` when the ref must resolve to that exact OID, and
+`discard-authorized` only with an exact authority record and no ref. Run the
+same manifest after mutation. `git fsck --no-dangling` checks object integrity;
+it is not a substitute for this reachability comparison.
+
 ## Integration Examples
 
 After the Commit workflow selects a mechanism and the project names the target,

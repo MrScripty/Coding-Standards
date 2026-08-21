@@ -20,6 +20,27 @@ Mode selection is evidence-driven. File count, line count, commit cadence, and
 elapsed time do not select a mode. Fresh evidence may escalate a mode; reducing
 ceremony alone cannot downgrade one.
 
+## Cumulative Mixed-Checkpoint Trigger
+
+After each `serial-coherent` package, compare its accepted consumers and
+temporary dependency component with the packages accepted since the last mixed
+checkpoint. Run the mixed checkpoint before admitting another routine package
+when fresh evidence shows any unverified cumulative interaction:
+
+- two accepted packages changed the same retained-Bash consumer or dependency
+  component without one declarative contract covering their combined result;
+- a retained Bash checker remains the only evidence for a consumer affected by
+  more than one accepted package;
+- generated graph or suite evidence cannot prove the accumulated packages are
+  independent; or
+- an owner boundary, shared-contract boundary, publication checkpoint, or
+  zero-Bash boundary is being accepted.
+
+The mixed checkpoint resets this cumulative uncertainty. Package count, elapsed
+time, and commit count do not independently trigger or defer it. If independence
+cannot be established, select the checkpoint instead of assuming that focused
+success composes.
+
 ## Invariants
 
 Every mode preserves:

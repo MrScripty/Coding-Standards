@@ -136,6 +136,8 @@ review, concurrency, experimentation, release maintenance, risk containment,
 or repository controls make isolation part of the accepted approach, record
 the branch or worktree purpose, responsible owner, target branch, integration
 owner, visibility or long-lived status, and expected terminal disposition.
+When the plan authorizes worktree removal or registration pruning, also record
+the head-reachability and commit-disposition evidence required by Commit.
 Record an admitted base or revision only when stale-state coordination makes it
 relevant.
 

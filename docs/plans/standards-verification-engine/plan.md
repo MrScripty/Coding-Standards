@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6 Bash retirement
+**Current phase:** Milestone 6 fresh post-recovery graph audit
 
-**Next slice:** audit the fresh post-M6-I52 graph and select the next package
+**Next slice:** audit the fresh post-recovery graph; no package is preselected
 
 **Acceptance status:** `pending`
 
@@ -97,7 +97,7 @@ evidence contracts.
 | Security | Prohibit arbitrary commands, callbacks, embedded code, and compatibility schemas. | [Architecture](reports/architecture.md#security-and-no-fallback) |
 | Migration | Migrate owner-coherent semantic packages and delete each replaced Bash path in the accepting slice. | [Package manifest](../../../evaluation/standards-effectiveness/checker-migration-packages.tsv) |
 | Execution mode | Select `serial-coherent`, `pre-admitted`, `owner-wave`, or `shared-contract` from current ownership, dependency, concurrency, and risk facts; commit cadence does not select the mode. | [Migration execution modes](../migration-execution-efficiency-recovery/reports/migration-execution-modes.md) |
-| Checkpoint cadence | Run focused final-state evidence for every accepted package. Run the complete mixed checkpoint at owner-wave close, shared-contract acceptance, or zero-Bash closure rather than mechanically for every low-risk package. | [Migration execution modes](../migration-execution-efficiency-recovery/reports/migration-execution-modes.md) |
+| Checkpoint cadence | Run focused final-state evidence for every accepted package. Run the complete mixed checkpoint at owner-wave close, shared-contract acceptance, zero-Bash closure, or when cumulative retained-Bash/consumer evidence can no longer prove accepted packages independent. Do not select it mechanically from package or commit count. | [Migration execution modes](../migration-execution-efficiency-recovery/reports/migration-execution-modes.md) |
 | Dependencies | Registered suite `requires` owns execution dependencies; lexical graph edges do not. | [Legacy reference boundary](reports/legacy-script-reference-model.md) |
 | Temporary graph | Keep the current lexical reference model frozen as conservative deletion-lifecycle evidence and remove it at zero Bash. | [Legacy reference boundary](reports/legacy-script-reference-model.md) |
 | Generated values | Derive mutable paths, counts, memberships, and relationships; store only explicit policy inputs and reviewed lifecycle authority. | [Count-authority report](reports/count-authority.md) |
@@ -175,6 +175,11 @@ Every mode preserves exact package and edge dispositions, final-state source
 removal, mutation or negative evidence, generated freshness, no fallback, and
 serial integration of shared authority. A mode may be escalated when fresh
 evidence increases risk; it may not be downgraded merely to reduce ceremony.
+After each routine package, evaluate cumulative retained-Bash consumer and
+dependency interactions since the last mixed checkpoint. If declarative and
+generated evidence cannot prove those packages independent, run the mixed
+checkpoint before another package rather than relying on package count or
+assuming focused results compose.
 
 **Recovery dependency:** M6-I16 and the
 [work proportionality and policy impact recovery](../work-proportionality-and-policy-impact/plan.md)
@@ -186,7 +191,7 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Audit the fresh post-M6-I52 graph before selecting another package.
+1. Audit the fresh post-recovery graph before selecting another package.
 2. Preserve accepted final-state consumer and edge transfers; do not
    reintroduce retired checkers as documentation or execution authority.
 3. Select each subsequent owner-coherent package from reviewed lifecycle and

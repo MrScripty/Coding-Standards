@@ -80,7 +80,7 @@ any = [
 id = "branch-lifecycle-decisions"
 type = "decision"
 path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-input_columns = ["context", "isolation", "proposal", "replacement_state", "target", "visibility", "topology", "terminal", "long_lived_contract", "ownership", "worktree", "cleanup_basis", "discard_authority", "mapping", "prepared_in_worktree"]
+input_columns = ["context", "isolation", "proposal", "replacement_state", "target", "visibility", "topology", "terminal", "long_lived_contract", "ownership", "worktree", "cleanup_basis", "head_reachability", "commit_disposition", "discard_authority", "mapping", "prepared_in_worktree"]
 [checks.domains]
 case = ["*"]
 context = ["complete", "contradictory", "missing"]
@@ -95,6 +95,8 @@ long_lived_contract = ["complete", "incomplete", "not-applicable"]
 ownership = ["owned", "unknown"]
 worktree = ["clean", "dirty", "locked", "none", "stale-registration", "unique"]
 cleanup_basis = ["age", "count", "evidence-only", "force", "none", "terminal"]
+head_reachability = ["not-applicable", "registration-only", "retained-ref", "unknown"]
+commit_disposition = ["archived", "discard-authorized", "missing", "not-applicable", "retained"]
 discard_authority = ["explicit", "missing", "not-applicable"]
 mapping = ["complete", "missing", "not-applicable"]
 prepared_in_worktree = ["no", "yes"]
@@ -102,7 +104,7 @@ expected_isolation = ["direct", "isolated", "typed-invalid", "typed-unavailable"
 expected_integration = ["cherry-pick", "fast-forward", "merge", "not-applicable", "rebase-verify-fast-forward", "refuse-shared-rebase", "serial-integration", "typed-invalid", "typed-unavailable"]
 expected_terminal = ["abandoned", "integrated", "pending", "rejected", "retained", "superseded", "typed-invalid", "typed-unavailable"]
 expected_lineage = ["mapping-required", "not-required", "record-source-to-accepted", "typed-invalid", "typed-unavailable"]
-expected_cleanup = ["discard-authorized", "none", "prune-stale-registration", "refuse-cleanup", "remove-clean-worktree", "retain-protected-worktree", "retire-redundant-ref", "typed-invalid", "typed-unavailable"]
+expected_cleanup = ["discard-authorized", "none", "pruned-archived-registration", "pruned-reachable-registration", "refuse-cleanup", "removed-archived-worktree", "removed-reachable-worktree", "retained-protected-worktree", "retire-redundant-ref", "typed-invalid", "typed-unavailable"]
 
 [[checks.outputs]]
 column = "expected_isolation"
@@ -224,7 +226,11 @@ default = "none"
 [[checks.outputs.rules]]
 outcome = "typed-invalid"
 [checks.outputs.rules.when]
-all = [{ field = "context", op = "eq", value = "contradictory" }]
+any = [
+  { field = "context", op = "eq", value = "contradictory" },
+  { all = [{ field = "commit_disposition", op = "eq", value = "discard-authorized" }, { field = "discard_authority", op = "ne", value = "explicit" }] },
+  { all = [{ field = "discard_authority", op = "eq", value = "explicit" }, { field = "commit_disposition", op = "ne", value = "discard-authorized" }] },
+]
 [[checks.outputs.rules]]
 outcome = "typed-unavailable"
 [checks.outputs.rules.when]
@@ -232,7 +238,7 @@ all = [{ field = "context", op = "eq", value = "missing" }]
 [[checks.outputs.rules]]
 outcome = "discard-authorized"
 [checks.outputs.rules.when]
-all = [{ field = "terminal", op = "in", values = ["abandoned", "rejected"] }, { field = "worktree", op = "eq", value = "unique" }, { field = "discard_authority", op = "eq", value = "explicit" }, { field = "ownership", op = "eq", value = "owned" }]
+all = [{ field = "terminal", op = "in", values = ["abandoned", "rejected"] }, { field = "worktree", op = "eq", value = "unique" }, { field = "commit_disposition", op = "eq", value = "discard-authorized" }, { field = "discard_authority", op = "eq", value = "explicit" }, { field = "ownership", op = "eq", value = "owned" }]
 [[checks.outputs.rules]]
 outcome = "refuse-cleanup"
 [checks.outputs.rules.when]
@@ -242,19 +248,30 @@ any = [
   { all = [{ field = "visibility", op = "eq", value = "long-lived" }, { field = "long_lived_contract", op = "eq", value = "incomplete" }] },
   { all = [{ field = "replacement_state", op = "eq", value = "created" }, { field = "mapping", op = "eq", value = "missing" }] },
   { all = [{ field = "cleanup_basis", op = "eq", value = "evidence-only" }, { field = "mapping", op = "eq", value = "missing" }] },
+  { all = [{ field = "worktree", op = "in", values = ["clean", "stale-registration"] }, { field = "cleanup_basis", op = "eq", value = "terminal" }, { field = "head_reachability", op = "eq", value = "unknown" }] },
+  { all = [{ field = "worktree", op = "in", values = ["clean", "stale-registration"] }, { field = "cleanup_basis", op = "eq", value = "terminal" }, { field = "head_reachability", op = "eq", value = "registration-only" }, { field = "commit_disposition", op = "in", values = ["missing", "retained"] }] },
+  { all = [{ field = "worktree", op = "in", values = ["clean", "stale-registration"] }, { field = "cleanup_basis", op = "eq", value = "terminal" }, { field = "head_reachability", op = "eq", value = "retained-ref" }, { field = "commit_disposition", op = "in", values = ["archived", "missing"] }] },
 ]
 [[checks.outputs.rules]]
-outcome = "retain-protected-worktree"
+outcome = "retained-protected-worktree"
 [checks.outputs.rules.when]
 all = [{ field = "worktree", op = "in", values = ["dirty", "locked", "unique"] }]
 [[checks.outputs.rules]]
-outcome = "prune-stale-registration"
+outcome = "pruned-reachable-registration"
 [checks.outputs.rules.when]
-all = [{ field = "worktree", op = "eq", value = "stale-registration" }]
+all = [{ field = "worktree", op = "eq", value = "stale-registration" }, { field = "cleanup_basis", op = "eq", value = "terminal" }, { field = "head_reachability", op = "eq", value = "retained-ref" }, { field = "commit_disposition", op = "eq", value = "retained" }]
 [[checks.outputs.rules]]
-outcome = "remove-clean-worktree"
+outcome = "pruned-archived-registration"
 [checks.outputs.rules.when]
-all = [{ field = "worktree", op = "eq", value = "clean" }, { field = "terminal", op = "eq", value = "integrated" }, { field = "cleanup_basis", op = "eq", value = "terminal" }]
+all = [{ field = "worktree", op = "eq", value = "stale-registration" }, { field = "cleanup_basis", op = "eq", value = "terminal" }, { field = "head_reachability", op = "eq", value = "registration-only" }, { field = "commit_disposition", op = "eq", value = "archived" }]
+[[checks.outputs.rules]]
+outcome = "removed-reachable-worktree"
+[checks.outputs.rules.when]
+all = [{ field = "worktree", op = "eq", value = "clean" }, { field = "terminal", op = "eq", value = "integrated" }, { field = "cleanup_basis", op = "eq", value = "terminal" }, { field = "head_reachability", op = "eq", value = "retained-ref" }, { field = "commit_disposition", op = "eq", value = "retained" }]
+[[checks.outputs.rules]]
+outcome = "removed-archived-worktree"
+[checks.outputs.rules.when]
+all = [{ field = "worktree", op = "eq", value = "clean" }, { field = "terminal", op = "eq", value = "integrated" }, { field = "cleanup_basis", op = "eq", value = "terminal" }, { field = "head_reachability", op = "eq", value = "registration-only" }, { field = "commit_disposition", op = "eq", value = "archived" }]
 [[checks.outputs.rules]]
 outcome = "retire-redundant-ref"
 [checks.outputs.rules.when]
@@ -273,23 +290,32 @@ terminal_record = ["complete", "missing", "not-applicable"]
 registry_state = ["absent", "not-applicable", "present"]
 retention_contract = ["complete", "missing", "not-applicable"]
 ownership = ["not-applicable", "owned", "unknown"]
-expected = ["accepted-removed", "accepted-retained", "not-applicable", "typed-invalid", "typed-unavailable"]
+head_reachability = ["not-applicable", "registration-only", "retained-ref", "unknown"]
+commit_disposition = ["archived", "missing", "not-applicable", "retained"]
+expected = ["accepted-removed-archived", "accepted-removed-reachable", "accepted-retained", "not-applicable", "typed-invalid", "typed-unavailable"]
 [[checks.rules]]
 outcome = "typed-invalid"
 [checks.rules.when]
-all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "ownership", op = "eq", value = "unknown" }]
+any = [
+  { all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "ownership", op = "eq", value = "unknown" }] },
+  { all = [{ field = "head_reachability", op = "eq", value = "retained-ref" }, { field = "commit_disposition", op = "eq", value = "archived" }] },
+]
 [[checks.rules]]
 outcome = "not-applicable"
 [checks.rules.when]
 all = [{ field = "task_created", op = "eq", value = "no" }]
 [[checks.rules]]
-outcome = "accepted-removed"
+outcome = "accepted-removed-reachable"
 [checks.rules.when]
-all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "terminal_record", op = "eq", value = "complete" }, { field = "registry_state", op = "eq", value = "absent" }, { field = "ownership", op = "eq", value = "owned" }]
+all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "terminal_record", op = "eq", value = "complete" }, { field = "registry_state", op = "eq", value = "absent" }, { field = "ownership", op = "eq", value = "owned" }, { field = "head_reachability", op = "eq", value = "retained-ref" }, { field = "commit_disposition", op = "eq", value = "retained" }]
+[[checks.rules]]
+outcome = "accepted-removed-archived"
+[checks.rules.when]
+all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "terminal_record", op = "eq", value = "complete" }, { field = "registry_state", op = "eq", value = "absent" }, { field = "ownership", op = "eq", value = "owned" }, { field = "head_reachability", op = "eq", value = "registration-only" }, { field = "commit_disposition", op = "eq", value = "archived" }]
 [[checks.rules]]
 outcome = "accepted-retained"
 [checks.rules.when]
-all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "terminal_record", op = "eq", value = "complete" }, { field = "registry_state", op = "eq", value = "present" }, { field = "retention_contract", op = "eq", value = "complete" }, { field = "ownership", op = "eq", value = "owned" }]
+all = [{ field = "task_created", op = "eq", value = "yes" }, { field = "terminal_record", op = "eq", value = "complete" }, { field = "registry_state", op = "eq", value = "present" }, { field = "retention_contract", op = "eq", value = "complete" }, { field = "ownership", op = "eq", value = "owned" }, { field = "head_reachability", op = "ne", value = "unknown" }, { field = "commit_disposition", op = "eq", value = "retained" }]
 
 [[checks]]
 id = "commit-identifier-coverage"
@@ -422,14 +448,14 @@ values = ["STD-0663", "STD-0703"]
 id = "commit-recipe-reference-metadata"
 type = "text"
 path = "reference/recipes/commits.md"
-required = ["- Role: `reference`", "- Level: `REFERENCE`", "git merge --ff-only", "do not authorize rewriting or cleanup"]
+required = ["- Role: `reference`", "- Level: `REFERENCE`", "git merge --ff-only", "tools/verify_git_reachability.py", "`archived-ref`", "not a substitute for this reachability comparison", "do not authorize rewriting or cleanup"]
 prohibited = []
 
 [[checks]]
 id = "commit-lifecycle-owner"
 type = "text"
 path = "workflows/commit.md"
-required = ["branch/worktree isolation, integration, lifecycle assessment, or cleanup", "## Branch And Worktree Applicability", "## Integration Mechanism Selection", "## Cherry-Pick And Replacement Lineage", "## Terminal Branch Lifecycle", "## Worktree Lifecycle And Cleanup Authority", "Do not cherry-pick merely because", "never independently authorize deletion", "separate explicit destructive authority", "Generic cleanup", "automation must refuse", "path and its stale", "absent from `git worktree list`", "explicit retained-resource contract", "does not authorize a repository-wide prune"]
+required = ["branch/worktree isolation, integration, lifecycle assessment, or cleanup", "## Branch And Worktree Applicability", "## Integration Mechanism Selection", "## Cherry-Pick And Replacement Lineage", "## Terminal Branch Lifecycle", "## Worktree Lifecycle And Cleanup Authority", "Do not cherry-pick merely because", "never independently authorize deletion", "separate explicit destructive authority", "Generic cleanup", "automation must refuse", "registration can be the only local reachability root", "`retained-ref`", "`registration-only`", "`archived`", "`discard-authorized`", "exact protected-OID set", "`git fsck --no-dangling`", "absent from `git worktree list`", "explicit retained-resource contract", "does not authorize a repository-wide prune"]
 prohibited = ["always create a branch", "always cherry-pick", "Force-remove dirty worktrees"]
 
 [[checks]]
@@ -443,7 +469,7 @@ prohibited = ["comments, and branches that have no"]
 id = "commit-evaluation-documentation"
 type = "text"
 path = "evaluation/standards-effectiveness/README.md"
-required = ["branch-lifecycle outcomes", "proportionate isolation", "least-", "terminal classification", "replacement lineage", "bounded cleanup authority", "without letting one decision mask another", "task-worktree terminal fixture", "absent after safe removal", "historical or repository-wide cleanup"]
+required = ["branch-lifecycle outcomes", "proportionate isolation", "least-", "terminal classification", "replacement lineage", "bounded cleanup authority", "without letting one decision mask another", "retained-ref", "registration-only", "archived", "task-worktree terminal fixture", "reachability-safe removal", "no historical or", "repository-wide cleanup"]
 prohibited = []
 
 [[checks]]
@@ -457,26 +483,26 @@ prohibited = ["Every plan requires a branch"]
 id = "concurrent-isolation-projection"
 type = "text"
 path = "profiles/workflows/concurrent-plan-integration.md"
-required = ["Do not require a branch or", "least history-transforming", "do not confer ownership", "Fresh admission is the"]
+required = ["Do not require a branch or", "least history-transforming", "head-reachability", "commit-disposition", "do not confer ownership", "Fresh admission is the"]
 prohibited = ["cherry-pick integration is required"]
 
 [[checks]]
 id = "branch-lifecycle-planning-prompt"
 type = "text"
 path = "prompts/planning.md"
-required = ["branch or worktree facts", "does not require a", "branch by itself"]
+required = ["branch or worktree facts", "does not require a", "branch by itself", "head-reachability", "commit-disposition"]
 prohibited = ["branch for every"]
 
 [[checks]]
 id = "branch-lifecycle-implementation-prompt"
 type = "text"
 path = "prompts/implement-plan.md"
-required = ["branch or worktree facts", "not cherry-pick by default", "each worktree path created by this task", "registry entry is absent", "Do not substitute a repository-wide prune"]
+required = ["branch or worktree facts", "not cherry-pick by default", "each worktree path created by this task", "registry entry is absent", "exact head OID", "protected-OID", "Do not substitute a repository-wide prune"]
 prohibited = ["always cherry-pick"]
 
 [[checks]]
 id = "branch-lifecycle-plan-template"
 type = "text"
 path = "templates/PLAN-TEMPLATE.md"
-required = ["## Repository Isolation", "material repository isolation", "expected terminal disposition", "Do not require a branch merely", "written plan exists", "each worktree created by the plan", "registry entry is absent", "does not authorize repository-wide pruning"]
+required = ["## Repository Isolation", "material repository isolation", "expected terminal disposition", "Do not require a branch merely", "written plan exists", "each worktree created by the plan", "exact head OID", "protected-OID", "does not authorize repository-wide pruning"]
 prohibited = ["branch for every"]

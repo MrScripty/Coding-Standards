@@ -85,7 +85,8 @@ shared authority. Disjoint files alone do not prove compatible outcomes.
 The integration owner selects the least history-transforming accepted
 mechanism through Commit, records replacement lineage when selective
 cherry-pick or reconstruction is required, records each proposal's terminal
-classification, and hands off only predeclared cleanup of owned task resources.
+classification, and hands off only predeclared cleanup of owned task resources
+with Commit's head-reachability and commit-disposition evidence.
 Separate worktrees provide isolation; they do not confer ownership, preserve
 durable evidence, or require cherry-pick integration.
 

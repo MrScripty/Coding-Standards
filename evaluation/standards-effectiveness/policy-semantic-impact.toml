@@ -403,7 +403,7 @@ target = "workflow.planning"
 relation = "normative-consumer"
 groups = ["policy-impact", "semantic"]
 traversable = true
-metadata = { applicability = "Planning records plan-level repository-isolation facts and bounded terminal cleanup handoff while Commit owns ordinary Git lifecycle.", evidence_owner = "suite:commit-consolidation-dispositions" }
+metadata = { applicability = "Planning records plan-level repository-isolation facts and reachability-aware terminal cleanup handoff while Commit owns ordinary Git lifecycle.", evidence_owner = "suite:commit-consolidation-dispositions" }
 
 [[edges]]
 id = "policy.commit.concurrent-profile"
@@ -412,7 +412,7 @@ target = "profile.workflow.concurrent-plan-integration"
 relation = "normative-consumer"
 groups = ["policy-impact", "semantic"]
 traversable = true
-metadata = { applicability = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and cleanup handoff for stale-capable proposals.", evidence_owner = "suite:concurrent-plan-integration" }
+metadata = { applicability = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals.", evidence_owner = "suite:concurrent-plan-integration" }
 
 [[edges]]
 id = "policy.commit.release-workflow"
@@ -430,7 +430,7 @@ target = "prompts/planning.md"
 relation = "prompt-projection"
 groups = ["policy-impact", "semantic"]
 traversable = true
-metadata = { applicability = "The planning prompt projects optional plan-level branch and worktree facts.", evidence_owner = "suite:commit-consolidation-dispositions" }
+metadata = { applicability = "The planning prompt projects optional plan-level branch, worktree, and cleanup-protection facts.", evidence_owner = "suite:commit-consolidation-dispositions" }
 
 [[edges]]
 id = "policy.commit.implementation-prompt"
@@ -439,7 +439,7 @@ target = "prompts/implement-plan.md"
 relation = "prompt-projection"
 groups = ["policy-impact", "semantic"]
 traversable = true
-metadata = { applicability = "The implementation prompt projects conditional isolation and least-transforming integration.", evidence_owner = "suite:commit-consolidation-dispositions" }
+metadata = { applicability = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence.", evidence_owner = "suite:commit-consolidation-dispositions" }
 
 [[edges]]
 id = "policy.commit.plan-template"
@@ -448,7 +448,7 @@ target = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 groups = ["policy-impact", "semantic"]
 traversable = true
-metadata = { applicability = "The plan template projects optional repository-isolation fields and terminal disposition.", evidence_owner = "suite:commit-consolidation-dispositions" }
+metadata = { applicability = "The plan template projects optional repository-isolation fields and reachability-aware terminal disposition.", evidence_owner = "suite:commit-consolidation-dispositions" }
 
 [[edges]]
 id = "policy.commit.reference-recipe"
@@ -457,7 +457,7 @@ target = "reference.recipes.commits"
 relation = "reference-projection"
 groups = ["policy-impact", "semantic"]
 traversable = true
-metadata = { applicability = "The non-normative Commit recipe illustrates selected inspection and integration mechanisms without granting authority.", evidence_owner = "suite:commit-consolidation-dispositions" }
+metadata = { applicability = "The non-normative Commit recipe illustrates selected inspection, integration, and protected-OID verification mechanisms without granting authority.", evidence_owner = "suite:commit-consolidation-dispositions" }
 
 [[edges]]
 id = "policy.commit.authority-fixture"
@@ -484,7 +484,7 @@ target = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.ts
 relation = "fixture-projection"
 groups = ["policy-impact", "semantic"]
 traversable = true
-metadata = { applicability = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, and cleanup refusal.", evidence_owner = "suite:commit-consolidation-dispositions" }
+metadata = { applicability = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, head reachability, commit disposition, and cleanup refusal.", evidence_owner = "suite:commit-consolidation-dispositions" }
 
 [[edges]]
 id = "policy.commit.task-worktree-terminal-fixture"
@@ -493,7 +493,7 @@ target = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-termi
 relation = "fixture-projection"
 groups = ["policy-impact", "semantic"]
 traversable = true
-metadata = { applicability = "The terminal fixture enforces bounded final-state evidence for worktrees created by the governed task without authorizing historical cleanup.", evidence_owner = "suite:commit-consolidation-dispositions" }
+metadata = { applicability = "The terminal fixture enforces bounded reachability-aware final-state evidence for worktrees created by the governed task without authorizing historical cleanup.", evidence_owner = "suite:commit-consolidation-dispositions" }
 
 [[edges]]
 id = "policy.commit.enforcement-suite"
@@ -502,7 +502,7 @@ target = "commit-consolidation-dispositions"
 relation = "enforcement-suite-projection"
 groups = ["policy-impact", "semantic"]
 traversable = true
-metadata = { applicability = "The registered Commit suite enforces every audited Commit projection and decision fixture.", evidence_owner = "suite:commit-consolidation-dispositions" }
+metadata = { applicability = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture.", evidence_owner = "suite:commit-consolidation-dispositions" }
 
 [[edges]]
 id = "policy.commit.evaluation-documentation"
@@ -511,4 +511,4 @@ target = "evaluation/standards-effectiveness/README.md"
 relation = "documentation-projection"
 groups = ["policy-impact", "semantic"]
 traversable = true
-metadata = { applicability = "The standards-effectiveness README documents the registered Commit suite's branch and worktree lifecycle coverage.", evidence_owner = "suite:commit-consolidation-dispositions" }
+metadata = { applicability = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage.", evidence_owner = "suite:commit-consolidation-dispositions" }

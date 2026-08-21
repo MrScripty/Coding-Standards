@@ -16,7 +16,9 @@ Create or revise an implementation plan. Do not implement source changes.
    can become stale before integration; do not infer it from participant count.
 10. Record branch or worktree facts only when material isolation is part of the
     plan; a written plan, delegation, or multi-file change does not require a
-    branch by itself.
+    branch by itself. If cleanup is in scope, include Commit's head-reachability
+    and commit-disposition evidence rather than assuming a stale registration
+    is safe to prune.
 
 Stop for clarification when authoritative facts cannot support a valid plan.
 Do not add fallback or compatibility behavior without an actual routed contract.

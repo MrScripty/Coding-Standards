@@ -442,6 +442,23 @@ regular files. An `invalid/unresolved` row may document an admitted blocker but
 cannot be accepted. The check never infers a disposition from graph shape,
 replacement syntax, or registry topology, and it never executes a replacement.
 
+## Git Reachability Evidence
+
+`tools/verify_git_reachability.py` compares an explicit protected commit set
+with current Git refs. Its strict TSV schema is:
+
+```text
+oid\tcommit_disposition\treference\tauthority
+```
+
+`retained-ref` requires the OID to be an ancestor of the named full ref.
+`archived-ref` requires the ref to resolve to the exact OID.
+`discard-authorized` requires `reference=none` and a nonempty authority record.
+The tool rejects malformed or duplicate OIDs, unknown refs or commits,
+repository-path escape, archive mismatches, and unreachable retained commits.
+It does not create refs, infer a disposition, run cleanup, accept abbreviated
+OIDs, or fall back to object-integrity output.
+
 ## Exit Status
 
 | Status | Meaning |

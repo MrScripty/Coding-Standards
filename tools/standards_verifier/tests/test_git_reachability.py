@@ -1,0 +1,126 @@
+from __future__ import annotations
+
+import subprocess
+import tempfile
+import unittest
+from pathlib import Path
+
+
+import sys
+
+ENGINE_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ENGINE_ROOT))
+
+from standards_verifier.git_reachability import ReachabilityError, verify_manifest
+
+
+class GitReachabilityTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp_dir.name)
+        self.git("init", "-q")
+        self.git("config", "user.name", "Verifier Test")
+        self.git("config", "user.email", "verifier@example.invalid")
+        self.first = self.commit("first")
+        self.second = self.commit("second")
+
+    def tearDown(self) -> None:
+        self.temp_dir.cleanup()
+
+    def git(self, *arguments: str) -> str:
+        result = subprocess.run(
+            ["git", *arguments],
+            cwd=self.root,
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        return result.stdout.strip()
+
+    def commit(self, content: str) -> str:
+        (self.root / "value.txt").write_text(content, encoding="utf-8")
+        self.git("add", "value.txt")
+        self.git("commit", "-qm", content)
+        return self.git("rev-parse", "HEAD")
+
+    def manifest(self, rows: list[tuple[str, str, str, str]], name: str = "protected.tsv") -> Path:
+        path = self.root / name
+        lines = ["oid\tcommit_disposition\treference\tauthority"]
+        lines.extend("\t".join(row) for row in rows)
+        path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        return path.relative_to(self.root)
+
+    def assert_code(self, expected: str, rows: list[tuple[str, str, str, str]]) -> None:
+        with self.assertRaises(ReachabilityError) as raised:
+            verify_manifest(self.root, self.manifest(rows))
+        self.assertEqual(raised.exception.code, expected)
+
+    def test_retained_ref_accepts_an_ancestor(self) -> None:
+        records = verify_manifest(
+            self.root,
+            self.manifest([(self.first, "retained-ref", "refs/heads/master", "none")]),
+        )
+        self.assertEqual(records[0].oid, self.first)
+
+    def test_archived_ref_must_resolve_to_exact_commit(self) -> None:
+        self.git("update-ref", "refs/recovery/example", self.first)
+        verify_manifest(
+            self.root,
+            self.manifest([(self.first, "archived-ref", "refs/recovery/example", "none")]),
+        )
+        self.assert_code(
+            "GIT_REACHABILITY.ARCHIVE_MISMATCH",
+            [(self.second, "archived-ref", "refs/recovery/example", "none")],
+        )
+
+    def test_unknown_reference_is_distinct(self) -> None:
+        self.assert_code(
+            "GIT_REACHABILITY.UNKNOWN_REFERENCE",
+            [(self.first, "retained-ref", "refs/heads/missing", "none")],
+        )
+
+    def test_malformed_reference_is_invalid(self) -> None:
+        self.assert_code(
+            "GIT_REACHABILITY.INVALID_REFERENCE",
+            [(self.first, "retained-ref", "refs/heads/bad..name", "none")],
+        )
+
+    def test_retained_ref_rejects_unreachable_commit(self) -> None:
+        self.git("checkout", "-qb", "other", self.first)
+        other = self.commit("other")
+        self.assert_code(
+            "GIT_REACHABILITY.UNREACHABLE",
+            [(self.second, "retained-ref", "refs/heads/other", "none")],
+        )
+        self.assertNotEqual(other, self.second)
+
+    def test_discard_requires_exact_authority_record(self) -> None:
+        verify_manifest(
+            self.root,
+            self.manifest([(self.first, "discard-authorized", "none", "plan:exact-row")]),
+        )
+        self.assert_code(
+            "GIT_REACHABILITY.INVALID_DISCARD",
+            [(self.first, "discard-authorized", "none", "none")],
+        )
+
+    def test_duplicate_oid_is_rejected(self) -> None:
+        self.assert_code(
+            "GIT_REACHABILITY.DUPLICATE_OID",
+            [
+                (self.first, "retained-ref", "refs/heads/master", "none"),
+                (self.first, "archived-ref", "refs/recovery/example", "none"),
+            ],
+        )
+
+    def test_malformed_oid_is_rejected(self) -> None:
+        self.assert_code(
+            "GIT_REACHABILITY.INVALID_OID",
+            [("abc", "retained-ref", "refs/heads/master", "none")],
+        )
+
+    def test_manifest_path_cannot_escape_repository(self) -> None:
+        with self.assertRaises(ReachabilityError) as raised:
+            verify_manifest(self.root, Path("../outside.tsv"))
+        self.assertEqual(raised.exception.code, "GIT_REACHABILITY.PATH_ESCAPE")

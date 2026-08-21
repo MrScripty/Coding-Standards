@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 7 verification migration
 
-**Next slice:** fresh post-M6-I52 graph audit through the verification-engine plan
+**Next slice:** fresh post-recovery graph audit; no verifier package is preselected
 
 **Acceptance status:** `partial`
 
@@ -96,8 +96,8 @@ universal architecture policy.
 | Migration lifecycle | Canonical package, disposition, owner, and generated records own status; active-plan narration does not. |
 | Verification migration | Bash checkers and helpers are removed with accepted Python-engine replacements; no wrappers, dual authority, compatibility parsers, or fallback remain. |
 | Accelerated execution | Select proportional `serial-coherent`, `pre-admitted`, `owner-wave`, or `shared-contract` migration modes from current risk and concurrency facts. Owner-coherent packages may prepare concurrently with disjoint write sets; shared registry, evidence, Router, and plan integration remain serial. |
-| Recovery dependency | Complete the generic edge-system recovery without changing the frozen temporary Bash graph, then obtain fresh graph evidence before another verifier package is selected. |
-| Current efficiency recovery | The accepted recovery stabilizes temporary component identities, applies proportional serial/wave migration modes, and enforces task-owned worktree terminal evidence. Historical cleanup and the normal remote backup are accepted; pilots remain separately owned. |
+| Recovery dependency | The historical Git reachability recovery and the reopened cleanup plan are accepted. Obtain fresh graph evidence before selecting another verifier package rather than reusing post-M6-I52 selection facts. |
+| Current efficiency recovery | The accepted efficiency recovery stabilizes temporary component identities and applies proportional serial/wave migration modes. Historical cleanup is accepted only after explicit reachability reconciliation; normal remote backup is accepted and pilots remain separately owned. |
 
 ## Current Architecture
 
@@ -159,12 +159,13 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 
 **Remaining work:**
 
-1. Audit the fresh post-M6-I52 graph through the verification-engine plan.
+1. Audit the fresh post-recovery graph through the verification-engine plan.
 2. Continue owner-coherent Python-engine migration until no Bash verifier,
    helper, or migration launcher remains.
-3. Use focused final-state evidence for each package and reserve the complete
-   mixed checkpoint for an owner-wave close, shared-contract acceptance, or
-   zero-Bash closure.
+3. Use focused final-state evidence for each package and run the complete mixed
+   checkpoint at owner-wave or shared-contract acceptance, zero-Bash closure,
+   or when cumulative retained-Bash/consumer evidence cannot prove accepted
+   packages independent.
 4. Regenerate canonical inventories and prove exact dispositions, no source
    gaps, no normative legacy source rows, and no legacy Router routes.
 5. Complete manual semantic-ownership review `D001` through `D010` before

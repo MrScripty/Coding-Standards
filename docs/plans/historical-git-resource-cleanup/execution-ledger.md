@@ -142,3 +142,27 @@ explicit `start` operation.
   structure, link-target, and diff-integrity checks pass.
 - All four milestones and objective claims are accepted. Remote backup remains
   a separately owned decision and was not performed by this cleanup.
+
+## 2026-08-21 - Acceptance Invalidated By Reachability Evidence
+
+- Review proved that 147 detached heads depended on stale worktree
+  registrations as their only recorded local reachability root before pruning.
+- The prior `git fsck --no-dangling` result did not compare reachability and
+  cannot support Milestone 2 or objective acceptance.
+- All 208 detached heads reconstructed from the pre-cleanup inventory are now
+  protected by exact recovery refs; no object maintenance was run.
+- The cleanup plan was reopened and its prior acceptance invalidated pending
+  explicit reconciliation.
+
+## 2026-08-21 - Reachability Reconciliation Accepted
+
+- Verified all 208 reconstructed detached heads against exact recovery refs;
+  the protected set includes all 147 registration-only heads and all 11
+  confirmed unique heads.
+- Replaced object-integrity output as reachability evidence with an explicit
+  protected-OID manifest and reusable verifier.
+- Accepted Milestones 2 and 4 only after preserving the historical limitation:
+  the original prune lacked the required proof, while the repaired terminal
+  state now satisfies the corrected policy.
+- Reaccepted the cleanup objective with recovery-ref retirement deferred to
+  separate durable-archive review and authority.

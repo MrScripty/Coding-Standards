@@ -108,10 +108,28 @@ redundant branch solely to preserve history that durable evidence already owns.
 ## Worktree Lifecycle And Cleanup Authority
 
 Remove a completed clean worktree when its purpose ends, and prune stale
-administrative registrations after confirming that no live worktree owns them.
+administrative registrations only after confirming that no live worktree owns
+them and resolving the registered head's commit disposition. A detached
+worktree registration can be the only local reachability root for its head;
+missing paths and unlocked registrations do not prove that pruning is safe.
 Never force-remove a dirty, unknown, user-owned, locked, or uniquely committed
 worktree through generic automation. Removing a redundant branch ref is not
 the same operation or authority as rewriting history reachable by shared refs.
+
+Before worktree removal or registration pruning, record the exact head OID and
+classify its reachability as `retained-ref`, `registration-only`, or `unknown`.
+Select exactly one commit disposition:
+
+- `retained`: the resource remains or the OID is reachable from a named retained
+  ref;
+- `archived`: an exact recovery or archive ref has been created and verified
+  before the registration is removed; or
+- `discard-authorized`: separate destructive authority names every commit that
+  may become unreachable and records permanent retirement.
+
+Unknown reachability, a registration-only head without verified archive
+protection, or a missing commit disposition refuses cleanup. Do not select a
+different disposition as fallback.
 
 The integration owner may perform predeclared safe cleanup for branches and
 worktrees created by the governed task after terminal evidence is recorded.
@@ -122,13 +140,23 @@ the source-to-accepted mapping before automated retirement. Age and quantity
 may trigger review but never independently authorize deletion.
 
 When a governed task creates a worktree, terminal acceptance records its exact
-path and classification, then confirms either that the path and its stale
+path, head reachability, commit disposition, and one explicit outcome:
+`removed-reachable`, `removed-archived`, `retained-protected`, or
+`discard-authorized`. It then confirms either that the path and stale
 registration are absent from `git worktree list` after safe removal or that an
 explicit retained-resource contract names its purpose, owner, and next
-disposition. A task-created registration that remains without that contract is
-`unavailable` for terminal acceptance. Check only paths created by the task;
-this postcondition does not authorize a repository-wide prune or cleanup of
-historical, unknown, or other-owner registrations.
+disposition. A task-created registration that remains without that contract,
+or was removed without accepted commit protection, is `unavailable` for
+terminal acceptance. Check only paths created by the task; this postcondition
+does not authorize a repository-wide prune or cleanup of historical, unknown,
+or other-owner registrations.
+
+For any cleanup batch that can remove a commit reachability root, capture the
+exact protected-OID set before mutation and compare it with retained or archive
+refs after mutation. Every protected OID must still exist and satisfy its
+recorded disposition. Repository object-integrity checks, including
+`git fsck --no-dangling`, do not prove continued reachability and cannot replace
+this comparison.
 
 Discarding unique commits from a rejected or abandoned branch requires
 separate explicit destructive authority naming the branch and unique commits,
@@ -238,6 +266,9 @@ Stop with a typed process diagnostic when:
   selected operation is unavailable;
 - a task-created worktree remains registered without an explicit retained-
   resource contract;
+- worktree removal or registration pruning lacks an exact head OID,
+  reachability classification, commit disposition, or protected-OID
+  postcondition;
 - a replacement commit lacks source-to-accepted lineage; or
 - cleanup would affect an unknown, dirty, locked, user-owned, or uniquely
   committed resource.

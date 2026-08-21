@@ -1,7 +1,11 @@
-case	task_created	terminal_record	registry_state	retention_contract	ownership	expected
-no-task-worktree	no	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable
-removed-and-unregistered	yes	complete	absent	not-applicable	owned	accepted-removed
-explicitly-retained	yes	complete	present	complete	owned	accepted-retained
-registration-still-present	yes	complete	present	missing	owned	typed-unavailable
-terminal-record-missing	yes	missing	present	complete	owned	typed-unavailable
-ownership-contradiction	yes	complete	present	complete	unknown	typed-invalid
+case	task_created	terminal_record	registry_state	retention_contract	ownership	head_reachability	commit_disposition	expected
+no-task-worktree	no	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable	not-applicable
+removed-reachable	yes	complete	absent	not-applicable	owned	retained-ref	retained	accepted-removed-reachable
+removed-archived	yes	complete	absent	not-applicable	owned	registration-only	archived	accepted-removed-archived
+explicitly-retained	yes	complete	present	complete	owned	registration-only	retained	accepted-retained
+removed-unprotected	yes	complete	absent	not-applicable	owned	registration-only	missing	typed-unavailable
+unknown-head-state	yes	complete	absent	not-applicable	owned	unknown	missing	typed-unavailable
+registration-still-present	yes	complete	present	missing	owned	registration-only	retained	typed-unavailable
+terminal-record-missing	yes	missing	present	complete	owned	registration-only	retained	typed-unavailable
+ownership-contradiction	yes	complete	present	complete	unknown	registration-only	retained	typed-invalid
+contradictory-archive	yes	complete	absent	not-applicable	owned	retained-ref	archived	typed-invalid
