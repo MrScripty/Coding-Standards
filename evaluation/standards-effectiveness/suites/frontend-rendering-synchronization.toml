@@ -1,0 +1,112 @@
+schema_version = 1
+id = "frontend-rendering-synchronization"
+owner = "profile.application.frontend"
+description = "Contract-selected Frontend rendering and synchronization with typed unavailable outcomes and no universal mechanism fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/frontend/rendering-synchronization-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+scope = ["selected", "unselected"]
+authority = ["contradictory", "missing", "present"]
+output = ["canvas", "none", "ui"]
+mechanism = ["boundary-drain", "declarative", "event", "imperative", "missing", "none", "polling", "query", "subscription"]
+source = ["missing", "none", "pull", "push"]
+capability = ["missing", "supported", "unsupported"]
+lifecycle = ["complete", "missing", "unsafe"]
+evidence = ["complete", "missing", "real-browser"]
+fallback = ["alternate-mechanism", "copied-state", "declarative-default", "dom-authority", "event-default", "fixed-cadence", "imperative-default", "none", "polling-default", "stale-success"]
+expected = ["allow", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "authority", op = "eq", value = "contradictory" },
+  { field = "lifecycle", op = "eq", value = "unsafe" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [
+  { field = "scope", op = "eq", value = "selected" },
+  { any = [
+    { field = "authority", op = "eq", value = "missing" },
+    { field = "source", op = "eq", value = "missing" },
+    { field = "mechanism", op = "eq", value = "missing" },
+    { field = "lifecycle", op = "eq", value = "missing" },
+    { field = "evidence", op = "eq", value = "missing" },
+  ] },
+]
+
+[[checks]]
+id = "profile-projection"
+type = "text"
+path = "profiles/applications/frontend.md"
+required = [
+  "Select rendering from the authoritative state",
+  "Declarative bindings do not",
+  "none is a universal preference",
+  "pull-style FFI or message drain",
+  "Do not switch between declarative and imperative rendering",
+  "[Frontend mechanism recipes]",
+]
+prohibited = []
+
+[[checks]]
+id = "reference-projection"
+type = "text"
+path = "reference/recipes/frontend.md"
+required = [
+  "ID: `reference.recipes.frontend`",
+  "This material is non-normative",
+  "## Illustrative Rendering Mechanisms",
+  "## Illustrative Synchronization Mechanisms",
+  "Neither mechanism is a default",
+  "do not select event delivery, polling",
+]
+prohibited = []
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "topics/accessibility.md",
+  "topics/concurrency.md",
+  "profiles/languages/typescript.md",
+  "profiles/languages/typescript/async.md",
+  "profiles/applications/frontend.md",
+  "reference/recipes/frontend.md",
+]
+
+[[checks]]
+id = "exact-identities"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [
+  ["STD-0451"],
+  ["STD-0452"],
+  ["STD-0453"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0451", "STD-0452", "STD-0453"]

@@ -5583,3 +5583,20 @@
   dependency, dual authority, or fallback changes.
 - Admission evidence contains 182 suites, 90 Bash checkers, 94 nodes, 599
   edges, and 94 components.
+## 2026-08-21 - M6-I36 Frontend Rendering And Synchronization Acceptance
+
+- Added the registered `frontend-rendering-synchronization` suite with 26
+  typed decisions, exact profile and reference projections, nine-module
+  metadata closure, and exact three-ID membership.
+- Kept the shared metadata helper unchanged as an external-owned artifact
+  through both accepted current edge records. All four historical records now
+  point to exact suite evidence.
+- Deleted only the replaced Frontend checker. Policy, fixture, dispositions,
+  metadata helper, and engine behavior remain unchanged.
+- Six disposable mutations reject decision, profile, reference, metadata,
+  disposition, and stale historical evidence drift. Broad verification is
+  recorded in the repository execution ledger.
+- Final generated evidence contains 93 nodes, 595 edges, and 93 components
+  with 183 suites and 89 retained Bash checkers, without wrappers,
+  compatibility representations, false dependencies, dual authority, or
+  fallback.

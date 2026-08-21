@@ -14083,3 +14083,19 @@ policy, fixture, disposition, metadata helper, engine, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changes.
 Admission evidence contains 182 suites, 90 Bash checkers, 94 nodes, 599 edges,
 and 94 components.
+## 2026-08-21 M6-I36 Frontend Rendering And Synchronization Acceptance
+
+**Outcome:** accepted at train order 151; fresh graph audit is next.
+
+The registered Frontend suite replaces the 17-line Bash checker with 26 typed
+decision outcomes, exact canonical and reference projections, a nine-module
+metadata graph, and exact `STD-0451` through `STD-0453` membership. The shared
+metadata helper remains independently owned through both accepted current edge
+records, and all four historical records now name exact suite evidence.
+
+Six disposable mutations reject decision, profile, reference, metadata,
+disposition, and stale-evidence drift. All Python and declarative tests pass,
+and the complete mixed checkpoint passes with 89 retained Bash checkers. Final
+graph evidence contains 93 nodes, 595 edges, and 93 components without policy,
+fixture, disposition, metadata-helper, engine, wrapper, compatibility
+representation, false-dependency, dual-authority, or fallback changes.

@@ -4855,3 +4855,18 @@ records will transfer from checker evidence to the exact registered suite only
 at acceptance. M6-I36 is admitted at train order 151 without policy, fixture,
 disposition, metadata helper, engine, wrapper, compatibility representation,
 false dependency, dual authority, or fallback changes.
+### M6-I36 Frontend Rendering And Synchronization Acceptance
+
+The registered Frontend suite replaces the 17-line checker with 26 typed
+decisions, exact canonical and reference projections, the nine-module metadata
+graph, and exact `STD-0451` through `STD-0453` membership. The shared metadata
+helper remains unchanged and externally owned through both accepted current
+edge records.
+
+All four historical records now name the registered suite rather than the
+deleted checker. Six disposable mutations reject decision, canonical text,
+reference text, metadata identity, exact-ID, and stale-evidence drift. Final
+graph evidence contains 93 nodes, 595 edges, and 93 components with 183
+registered suites and 89 retained Bash checkers. No policy, fixture,
+disposition, metadata helper, engine, wrapper, compatibility representation,
+false dependency, dual authority, or fallback changed.

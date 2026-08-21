@@ -909,3 +909,8 @@ requires = []
 id = "frontend-view-model-lineage"
 path = "evaluation/standards-effectiveness/suites/frontend-view-model-lineage.toml"
 requires = []
+
+[[suites]]
+id = "frontend-rendering-synchronization"
+path = "evaluation/standards-effectiveness/suites/frontend-rendering-synchronization.toml"
+requires = []
