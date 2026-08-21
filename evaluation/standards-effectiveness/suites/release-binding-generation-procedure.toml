@@ -1,0 +1,88 @@
+schema_version = 1
+id = "release-binding-generation-procedure"
+owner = "workflow.release"
+description = "Artifact-plan-derived binding generation procedures with selected authority, generator, toolchain, claims, outputs, evidence, and no command or alternate-generator defaults."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/release/binding-generation-procedure-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+artifact_plan = ["accepted", "missing"]
+authority = ["compiled-artifact", "missing", "selected"]
+generator = ["missing", "selected"]
+toolchain = ["missing", "pinned"]
+claims = ["complete", "missing"]
+outputs = ["complete", "missing"]
+evidence = ["complete", "missing"]
+fallback = ["alternate-generator", "default-success", "none"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "authority", op = "eq", value = "compiled-artifact" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "artifact_plan", op = "eq", value = "missing" },
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "generator", op = "eq", value = "missing" },
+  { field = "toolchain", op = "eq", value = "missing" },
+  { field = "claims", op = "eq", value = "missing" },
+  { field = "outputs", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "release-workflow"
+type = "text"
+path = "workflows/release.md"
+required = [
+  "Binding Generation Procedures",
+  "Contracts-selected generation authority",
+  "generator capability and version",
+  "reproducibility controls",
+  "typed `release-procedure`",
+  "typed `invalid`",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "### Generation Commands"
+required = ["workflows/release.md#binding-generation-procedures"]
+prohibited = [
+  "cargo build -p mylib-uniffi",
+  "Generate Python bindings",
+  "Generate C# bindings",
+  "uniffi_bindgen_main",
+]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0785", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "refine"],
+  ["STD-0786", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "refine"],
+  ["STD-0787", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "remove"],
+  ["STD-0788", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "remove"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0785", "STD-0786", "STD-0787", "STD-0788"]

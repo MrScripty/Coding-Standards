@@ -859,3 +859,8 @@ requires = []
 id = "rust-binding-annotation-placement"
 path = "evaluation/standards-effectiveness/suites/rust-binding-annotation-placement.toml"
 requires = []
+
+[[suites]]
+id = "release-binding-generation-procedure"
+path = "evaluation/standards-effectiveness/suites/release-binding-generation-procedure.toml"
+requires = []

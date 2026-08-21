@@ -5167,3 +5167,18 @@
 - Admission evidence has 172 suites, 101 Bash checkers, 105 nodes, 648 edges,
   and 105 components without policy, fixture, engine, registry, checker,
   wrapper, compatibility, or fallback changes.
+
+## 2026-08-20 - M6-I25 Release Binding Generation Procedure Acceptance
+
+- Registered `release-binding-generation-procedure` with four generic checks
+  for all 11 decisions, canonical Release text, the bounded legacy-index
+  section, and exact `STD-0785` through `STD-0788` dispositions.
+- Replaced the README checker reference, removed the Bash checker, and accepted
+  the package plus four independent-gate edge records. Row-8 lifecycle and
+  Release procedure policy remain separately executed.
+- Focused, mutation, package/edge, numeric, generated, plan, source-integrity,
+  all 173-suite, complete 100-checker, diff, and staged-scope checks pass.
+- Final evidence contains 100 Bash checkers, 104 nodes, 642 edges, and 104
+  components without engine changes, false dependencies, wrappers,
+  compatibility representations, dual authority, or fallback.
+- Fresh-graph owner-coherent package selection is next.

@@ -13679,3 +13679,17 @@ admitted edges. Disposable final state passes 173 suites and the complete
 100-checker checkpoint. Admission state contains 172 suites, 101 Bash checkers,
 105 nodes, 648 edges, and 105 components without policy, fixture, engine,
 registry, checker, wrapper, compatibility, or fallback changes.
+
+## 2026-08-20 M6-I25 Release Binding Generation Procedure Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered Release suite owns all 11 decisions, canonical workflow text,
+the bounded legacy-index section, and exact `STD-0785` through `STD-0788`
+dispositions. The README names the suite; policy and fixtures are unchanged.
+
+Row-8 lifecycle and Release procedure policy remain independent through four
+accepted edges. M6-I25 is accepted at train order 140 and the Bash checker is
+absent. Final evidence contains 173 suites, 100 Bash checkers, 104 nodes, 642
+edges, and 104 components; all focused, mutation, lifecycle, generated,
+all-suite, complete-checkpoint, plan, source-integrity, and diff checks pass.
