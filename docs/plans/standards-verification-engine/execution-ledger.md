@@ -5505,3 +5505,16 @@
 - Final generated evidence contains 96 nodes, 607 edges, and 96 components
   without copied nested behavior, wrappers, compatibility representations,
   false dependencies, dual authority, or fallback.
+## 2026-08-20 - M6-I34 Row-18 Decomposition Admission
+
+- Fresh post-M6-I33 evidence selects the 56-line caller-free row-18 lifecycle
+  checker and its exact 14-child, 52-identifier, owner-path, and review-report
+  contract.
+- Execution-train lifecycle remains an independently executed Bash gate through
+  two admitted current edge records. Twenty-eight accepted historical records
+  will transfer to exact suite evidence at acceptance.
+- Admitted M6-I34 at train order 149. No source, decomposition, report, engine,
+  wrapper, compatibility representation, false dependency, dual authority, or
+  fallback changes.
+- Admission evidence contains 180 suites, 92 Bash checkers, 96 nodes, 608
+  edges, and 96 components.

@@ -14000,3 +14000,18 @@ the complete mixed checkpoint passes with 92 retained Bash checkers. Final
 graph evidence contains 96 nodes, 607 edges, and 96 components without source,
 migration-input, engine, nested-gate, wrapper, compatibility representation,
 false-dependency, dual-authority, or fallback changes.
+## 2026-08-20 M6-I34 Row-18 Decomposition Admission
+
+**Outcome:** admitted at train order 149; atomic acceptance is next.
+
+Fresh post-M6-I33 evidence selects the 56-line caller-free row-18 lifecycle
+gate. Its exact 14-child decomposition, complete 52-identifier membership,
+canonical owner paths, and required review-report text are expressible with
+existing generic checks.
+
+Execution-train lifecycle remains an independently owned retained gate through
+two admitted edge records. Twenty-eight historical edge records will transfer
+to exact suite evidence only at acceptance. No source, decomposition, report,
+engine, wrapper, compatibility representation, false dependency, dual
+authority, or fallback changes. Admission evidence contains 180 suites, 92
+Bash checkers, 96 nodes, 608 edges, and 96 components.
