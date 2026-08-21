@@ -5731,3 +5731,18 @@
   transferred four historical records. Seven mutations reject semantic and
   stale-evidence drift.
 - Final evidence: 188 suites, 84 Bash checkers, 88 nodes, 580 edges, 88 components.
+## 2026-08-21 - M6-I42 Discover-Or-Create Convergence Admission
+
+- Fresh post-M6-I41 evidence selects the shortest of 17 caller-free verifiers:
+  the 66-line Architecture discover-or-create convergence checker.
+- Its 16 typed decisions, exact legacy and reference projections,
+  bounded-section default rejection, and five exact dispositions require no
+  new engine capability.
+- Architecture process-instance coordination remains an independently
+  executed Bash gate through two admitted current edge records. Two historical
+  records will transfer to exact suite evidence only at acceptance.
+- Admitted M6-I42 at train order 157. No policy, fixture, disposition, engine,
+  nested gate, wrapper, compatibility representation, false dependency, dual
+  authority, or fallback changes.
+- Admission evidence contains 188 suites, 84 Bash checkers, 88 nodes, 582
+  edges, and 88 components.

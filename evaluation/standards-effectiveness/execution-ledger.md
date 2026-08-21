@@ -14246,3 +14246,19 @@ lineage. Architecture pattern-reference ownership remains independent; four
 historical records now name suite evidence. Seven mutations reject drift.
 Broad and complete verification pass with 188 suites, 84 Bash checkers, 88
 nodes, 580 edges, and 88 components.
+## 2026-08-21 M6-I42 Discover-Or-Create Convergence Admission
+
+**Outcome:** admitted at train order 157; atomic acceptance is next.
+
+Fresh post-M6-I41 evidence selects the shortest of 17 caller-free verifiers,
+the 66-line Architecture discover-or-create convergence checker. Its 16 typed
+decisions, exact legacy and reference projections, bounded-section default
+rejection, and five exact dispositions fit existing decision, text,
+Markdown-section, and table checks.
+
+Architecture process-instance coordination remains independently executed
+through two admitted current edge records. Two historical checker records will
+transfer to exact suite evidence only at acceptance. No policy, fixture,
+disposition, engine, nested gate, wrapper, compatibility representation, false
+dependency, dual authority, or fallback changes. Admission evidence contains
+188 suites, 84 Bash checkers, 88 nodes, 582 edges, and 88 components.
