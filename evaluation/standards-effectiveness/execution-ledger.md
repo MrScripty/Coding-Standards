@@ -14193,3 +14193,19 @@ projections and dispositions, location-default rejection, and row-36 lineage.
 Monorepo policy remains independent; four historical records now name suite
 evidence. Seven mutations reject drift. Broad and complete verification pass
 with 186 suites, 86 Bash checkers, 90 nodes, 586 edges, and 90 components.
+## 2026-08-21 M6-I40 Architecture Monorepo Admission
+
+**Outcome:** admitted at train order 155; atomic acceptance is next.
+
+Fresh post-M6-I39 evidence selects the shortest of 18 caller-free verifiers,
+the 60-line Architecture monorepo checker. Its eight typed decisions, exact
+legacy and reference projections, case-insensitive fixed-default rejection,
+six exact dispositions, and keyed row-36 owner lineage fit existing decision,
+text, table, and keyed-relation checks.
+
+Architecture layered policy remains independently executed through two
+admitted current edge records. Four historical checker records will transfer
+to exact suite evidence only at acceptance. No policy, fixture, disposition,
+owner-validation, engine, nested gate, wrapper, compatibility representation,
+false dependency, dual authority, or fallback changes. Admission evidence
+contains 186 suites, 86 Bash checkers, 90 nodes, 587 edges, and 90 components.
