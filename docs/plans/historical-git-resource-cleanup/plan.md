@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 4 retained unique-branch review
+**Current phase:** Milestone 4 unique proposals reviewed; retirement re-plan required
 
-**Next slice:** inspect the exact 12 retained unique proposals and record ownership, content, and terminal-disposition evidence without deleting refs
+**Next slice:** none until explicit authority selects retention or permanent retirement for the exact 12 superseded unique proposals
 
 **Acceptance status:** `pending`
 
@@ -25,7 +25,7 @@ ancestry, or patch equivalence as deletion authority.
 
 | ID | Observable criterion | Status | Evidence |
 | --- | --- | --- | --- |
-| A1 | Every current worktree registration and local branch has one reviewed ownership and terminal disposition. | `partial` | Current inventories classify all resources; branch terminal review follows registration cleanup |
+| A1 | Every current worktree registration and local branch has one reviewed ownership and terminal disposition. | `satisfied` | Current inventory and [unique-proposal review](reports/milestone-4-unique-proposal-review.md) classify `main` as retained integration authority and all 12 proposals as superseded |
 | A2 | Pruned registrations are proven missing, task-independent, unlocked, and free of a live or user-owned path before mutation. | `satisfied` | [Milestone 2 report](reports/milestone-2-prune.md) and post-prune worktree inventory |
 | A3 | No branch with unique, shared, published, checked-out, unknown, or unmapped replacement history is deleted. | `satisfied` | [Ancestral cleanup](reports/milestone-3-ancestral-delete.md), [replacement-lineage review](reports/milestone-3-replacement-lineage.md), and [mapped-ref retirement](reports/milestone-3-mapped-ref-retirement.md) |
 | A4 | Repository state and protected commit reachability are verified before and after every accepted cleanup batch. | `partial` | Milestone 2 and Milestone 3 verification reports; final retained-resource verification remains |
@@ -74,7 +74,10 @@ ancestry, or patch equivalence as deletion authority.
 
 ## Blockers
 
-- `none`
+- The 12 remaining branches each contain one unique, unaccepted proposal commit.
+  Their work is superseded by exact accepted `main` transitions, but permanent
+  ref retirement requires separate destructive authority naming those branches
+  and commits. No such deletion is admitted by the current slice.
 
 ## Re-Plan Triggers
 

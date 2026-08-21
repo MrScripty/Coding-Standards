@@ -92,3 +92,20 @@ explicit `start` operation.
   status, and `git fsck --no-dangling` pass.
 - Milestone 3 is accepted. Milestone 4 may inspect the 12 unique proposals but
   has no authority to delete or rewrite them.
+
+## 2026-08-21 - Milestone 4 Unique Proposal Review
+
+- Inspected the exact 12 retained branches and their one unique commit each
+  without mutating refs, commits, remotes, tags, or worktrees.
+- Every proposal added one declarative verifier suite and removed its matching
+  Bash checker. For every proposal, current accepted `main` contains exactly
+  one later commit that owns both artifact transitions.
+- Confirmed all 12 current suites exist and are registered, all 12 proposed
+  Bash checkers are absent, and every superseding commit is reachable from
+  `main`.
+- Classified all 12 proposal branches as `superseded`, not integrated: their
+  exact unique patches were never accepted and must not be relabeled as
+  replacement lineage.
+- Permanent retirement would discard the last branch refs reaching those 12
+  unique commits. The required exact destructive authority is a re-plan
+  trigger, so all refs remain present.
