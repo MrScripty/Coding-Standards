@@ -899,3 +899,8 @@ requires = []
 id = "interop-applicability-index"
 path = "evaluation/standards-effectiveness/suites/interop-applicability-index.toml"
 requires = []
+
+[[suites]]
+id = "milestone-7-row-18-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-18-decomposition.toml"
+requires = []

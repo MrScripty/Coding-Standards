@@ -5518,3 +5518,20 @@
   fallback changes.
 - Admission evidence contains 180 suites, 92 Bash checkers, 96 nodes, 608
   edges, and 96 components.
+## 2026-08-20 - M6-I34 Row-18 Decomposition Acceptance
+
+- Added the registered `milestone-7-row-18-decomposition` suite with exact
+  14-child structure, explicit 52-identifier membership, canonical owner-path
+  availability, and required review-report text.
+- Kept execution-train lifecycle as an independently executed Bash gate through
+  both accepted current edge records. All 28 historical records now point to
+  exact suite evidence.
+- Deleted only the replaced row-18 checker. Decomposition authority, report,
+  owner files, execution train, and engine behavior remain unchanged.
+- Five disposable mutations reject decomposition, identifier, report,
+  owner-path, and stale historical evidence drift. The 35 graph tests, 330
+  verifier tests, all 181 declarative suites, and complete mixed checkpoint
+  with 91 retained Bash checkers pass.
+- Final generated evidence contains 95 nodes, 603 edges, and 95 components
+  without copied child behavior, wrappers, compatibility representations,
+  false dependencies, dual authority, or fallback.

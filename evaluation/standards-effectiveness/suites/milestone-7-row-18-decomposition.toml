@@ -1,0 +1,84 @@
+schema_version = 1
+id = "milestone-7-row-18-decomposition"
+owner = "migration.parent-plan"
+description = "Exact row-18 Testing decomposition lifecycle without copied child semantics or nested checker execution."
+
+[[checks]]
+id = "decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+non_empty = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+unique = [["baseline_order", "child_order"]]
+[[checks.projections]]
+columns = ["child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "owner_transition"]
+order = "source"
+expected = [
+  ["1", "STD-0611,STD-0639", "TESTING-STANDARDS.md", "topics/concurrency.md", "exists", "pre-slice-review", "focused", "none"],
+  ["2", "STD-0616", "TESTING-STANDARDS.md", "profiles/boundaries/language-bindings.md", "exists", "pre-slice-review", "focused", "none"],
+  ["3", "STD-0617", "TESTING-STANDARDS.md", "topics/resilience.md", "exists", "pre-slice-review", "focused", "none"],
+  ["4", "STD-0635", "TESTING-STANDARDS.md", "topics/contracts.md", "exists", "pre-slice-review", "focused", "none"],
+  ["5", "STD-0641", "TESTING-STANDARDS.md", "profiles/applications/frontend.md", "exists", "pre-slice-review", "focused", "none"],
+  ["6", "STD-0642,STD-0643,STD-0644", "TESTING-STANDARDS.md", "topics/performance.md", "exists", "pre-slice-review", "focused", "none"],
+  ["7", "STD-0608,STD-0609,STD-0610,STD-0612,STD-0613,STD-0614,STD-0615", "TESTING-STANDARDS.md", "workflows/verification.md", "exists", "pre-slice-review", "focused", "none"],
+  ["8", "STD-0618,STD-0619,STD-0620,STD-0621,STD-0622,STD-0623,STD-0624", "TESTING-STANDARDS.md", "workflows/verification.md", "exists", "pre-slice-review", "focused", "none"],
+  ["9", "STD-0603,STD-0604,STD-0605,STD-0606,STD-0607", "TESTING-STANDARDS.md", "workflows/verification.md", "exists", "pre-slice-review", "focused", "none"],
+  ["10", "STD-0625,STD-0626,STD-0627,STD-0628,STD-0629,STD-0630,STD-0631", "TESTING-STANDARDS.md", "workflows/verification.md", "exists", "pre-slice-review", "focused", "none"],
+  ["11", "STD-0632,STD-0633,STD-0634", "TESTING-STANDARDS.md", "workflows/verification.md", "exists", "pre-slice-review", "focused", "none"],
+  ["12", "STD-0636,STD-0637,STD-0638,STD-0640", "TESTING-STANDARDS.md", "workflows/verification.md", "exists", "pre-slice-review", "focused", "none"],
+  ["13", "STD-0645,STD-0646,STD-0647,STD-0648,STD-0649,STD-0650,STD-0651,STD-0652", "TESTING-STANDARDS.md", "workflows/verification.md", "exists", "pre-slice-review", "focused", "none"],
+  ["14", "STD-0602,STD-0653", "TESTING-STANDARDS.md", "workflows/verification.md", "exists", "pre-slice-review", "focused", "none"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "18"
+
+[[checks.projections]]
+columns = ["ids"]
+order = "lexical"
+expected = [
+  ["STD-0602"], ["STD-0603"], ["STD-0604"], ["STD-0605"], ["STD-0606"], ["STD-0607"],
+  ["STD-0608"], ["STD-0609"], ["STD-0610"], ["STD-0611"], ["STD-0612"], ["STD-0613"],
+  ["STD-0614"], ["STD-0615"], ["STD-0616"], ["STD-0617"], ["STD-0618"], ["STD-0619"],
+  ["STD-0620"], ["STD-0621"], ["STD-0622"], ["STD-0623"], ["STD-0624"], ["STD-0625"],
+  ["STD-0626"], ["STD-0627"], ["STD-0628"], ["STD-0629"], ["STD-0630"], ["STD-0631"],
+  ["STD-0632"], ["STD-0633"], ["STD-0634"], ["STD-0635"], ["STD-0636"], ["STD-0637"],
+  ["STD-0638"], ["STD-0639"], ["STD-0640"], ["STD-0641"], ["STD-0642"], ["STD-0643"],
+  ["STD-0644"], ["STD-0645"], ["STD-0646"], ["STD-0647"], ["STD-0648"], ["STD-0649"],
+  ["STD-0650"], ["STD-0651"], ["STD-0652"], ["STD-0653"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "18"
+[checks.projections.split]
+field = "ids"
+delimiter = ","
+
+[[checks]]
+id = "canonical-owner-paths"
+type = "repository_paths"
+[checks.paths]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["owner"]
+order = "source"
+where = { field = "baseline_order", op = "eq", value = "18" }
+
+[[checks]]
+id = "decomposition-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-18-decomposition.md"
+required = [
+  "Those concerns do not share one canonical",
+  "## Ordered Implementation",
+  "suite labels as evidence",
+  "typed diagnostics",
+  "no normative or legacy standard",
+  "## Refined Verification Boundary",
+  "eight Verification children",
+  "final legacy-closure child",
+  "Row 21 child `21.1` creates the narrow Rust dependency",
+]
+prohibited = []

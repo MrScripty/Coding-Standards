@@ -4794,3 +4794,18 @@ Twenty-eight accepted historical records will transfer from checker evidence
 to the exact registered suite at acceptance. M6-I34 is admitted at train order
 149 without source, decomposition, report, engine, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changes.
+### M6-I34 Row-18 Decomposition Acceptance
+
+The registered parent-plan suite replaces the 56-line checker with one exact
+14-child table contract, explicit `STD-0602` through `STD-0653` membership,
+derived canonical owner-path availability, and required review-report text.
+Execution-train lifecycle remains an independent retained gate through both
+accepted current edge records.
+
+All 28 historical records now name the registered suite rather than the deleted
+checker. Five disposable mutations reject decomposition, membership, report,
+owner-path, and stale-evidence drift. Final graph evidence contains 95 nodes,
+603 edges, and 95 components with 181 registered suites and 91 retained Bash
+checkers. No source, decomposition, report, engine, nested gate, wrapper,
+compatibility representation, false dependency, dual authority, or fallback
+changed.

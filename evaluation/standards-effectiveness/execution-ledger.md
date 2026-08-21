@@ -14015,3 +14015,20 @@ to exact suite evidence only at acceptance. No source, decomposition, report,
 engine, wrapper, compatibility representation, false dependency, dual
 authority, or fallback changes. Admission evidence contains 180 suites, 92
 Bash checkers, 96 nodes, 608 edges, and 96 components.
+## 2026-08-20 M6-I34 Row-18 Decomposition Acceptance
+
+**Outcome:** accepted at train order 149; fresh graph audit is next.
+
+The registered parent-plan suite replaces the 56-line Bash checker with exact
+14-child decomposition, complete 52-identifier membership, canonical
+owner-path availability, and required review-report checks. Execution-train
+lifecycle remains an independently executed retained gate through both
+accepted current edge records, and all 28 historical records now name exact
+suite evidence.
+
+Five disposable mutations reject decomposition, membership, report,
+owner-path, and stale-evidence drift. All Python and declarative tests pass,
+and the complete mixed checkpoint passes with 91 retained Bash checkers. Final
+graph evidence contains 95 nodes, 603 edges, and 95 components without source,
+decomposition, report, engine, nested-gate, wrapper, compatibility
+representation, false-dependency, dual-authority, or fallback changes.
