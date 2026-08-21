@@ -13741,3 +13741,19 @@ remains valid until atomic acceptance. Disposable final state passes 175 suites
 and the complete 98-checker checkpoint. Admission state contains 174 suites,
 99 Bash checkers, 103 nodes, 639 edges, and 103 components without policy,
 fixture, engine, registry, checker, wrapper, compatibility, or fallback changes.
+
+## 2026-08-20 M6-I27 Row-41 Documentation Lifecycle Acceptance
+
+**Outcome:** accepted; fresh-graph package selection is next.
+
+The registered parent-plan suite owns exact row-41 train, package,
+owner-validation, decomposition, Documentation index, and canonical-owner path
+evidence. Migration records, standards, and workflows are unchanged.
+
+M6-I22 independent-gate evidence now names the registered row-41 suite.
+Documentation decisions, policy consolidation, and execution-train lifecycle
+remain independent through six accepted M6-I27 edge records. M6-I27 is accepted
+at train order 142 and the Bash checker is absent. Final evidence contains 175
+suites, 98 Bash checkers, 102 nodes, 630 edges, and 102 components; all focused,
+mutation, lifecycle, generated, all-suite, complete-checkpoint, plan,
+source-integrity, and diff checks pass.

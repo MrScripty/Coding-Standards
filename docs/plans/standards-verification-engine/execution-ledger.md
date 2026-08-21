@@ -5230,3 +5230,19 @@
 - Admission evidence has 174 suites, 99 Bash checkers, 103 nodes, 639 edges,
   and 103 components without policy, fixture, engine, registry, checker,
   wrapper, compatibility, or fallback changes.
+
+## 2026-08-20 - M6-I27 Row-41 Documentation Lifecycle Acceptance
+
+- Registered `milestone-7-row-41-decomposition` with six generic checks for
+  exact train, package, owner-validation, decomposition, Documentation index,
+  and canonical-owner path evidence.
+- Removed the Bash checker, transferred M6-I22 independent-gate evidence to
+  the registered suite, and accepted six outgoing independent-gate records.
+  Documentation decisions, policy consolidation, and execution-train lifecycle
+  remain separately executed.
+- Focused, mutation, package/edge, numeric, generated, plan, source-integrity,
+  all 175-suite, complete 98-checker, diff, and staged-scope checks pass.
+- Final evidence contains 98 Bash checkers, 102 nodes, 630 edges, and 102
+  components without engine changes, false dependencies, wrappers,
+  compatibility representations, dual authority, or fallback.
+- Fresh-graph owner-coherent package selection is next.

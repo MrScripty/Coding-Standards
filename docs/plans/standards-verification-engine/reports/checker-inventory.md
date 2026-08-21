@@ -4535,3 +4535,18 @@ transfers only at atomic acceptance. Disposable final state passes 175 suites
 and the complete checkpoint at 98 Bash checkers, 102 nodes, 630 edges, and 102
 components. M6-I27 is admitted at train order 142 without policy, fixture,
 engine, registry, Bash repair, wrapper, compatibility, or fallback.
+
+### M6-I27 Row-41 Documentation Lifecycle Acceptance
+
+The registered `milestone-7-row-41-decomposition` suite owns exact train,
+package, owner-validation, decomposition, Documentation index, and
+canonical-owner path evidence. Migration records, standards, and workflows
+remain unchanged.
+
+M6-I22 independent-gate evidence now names the registered row-41 suite.
+Documentation decisions, policy consolidation, and execution-train lifecycle
+remain independent through six accepted M6-I27 edges. M6-I27 is accepted at
+train order 142 and the checker is absent. Final evidence contains 175 suites,
+98 Bash checkers, 102 nodes, 630 edges, and 102 components without engine
+changes, false dependencies, wrappers, compatibility representations, dual
+authority, or fallback.

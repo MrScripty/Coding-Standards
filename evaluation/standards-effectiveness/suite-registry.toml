@@ -869,3 +869,8 @@ requires = []
 id = "rust-binding-artifact-selection"
 path = "evaluation/standards-effectiveness/suites/rust-binding-artifact-selection.toml"
 requires = []
+
+[[suites]]
+id = "milestone-7-row-41-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-41-decomposition.toml"
+requires = []
