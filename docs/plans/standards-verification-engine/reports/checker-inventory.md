@@ -5092,3 +5092,20 @@ suites, and the complete checkpoint with 81 Bash checkers pass. Final graph
 evidence contains 85 nodes, 561 edges, and 85 components. No policy, migration
 input, engine, wrapper, replacement caller, compatibility representation,
 weakened closure, dual authority, or fallback changed.
+
+### M6-I45 Architecture Owner Acceptance
+
+Fresh post-M6-I44 evidence selected the 30-line Architecture owner checker as
+the shortest of 18 caller-free verifiers. The `serial-coherent` package
+replaces it with one four-check topic-owner suite covering 14 typed decisions,
+the canonical Architecture projection, the README projection, and 11 exact
+dispositions.
+
+Row-15 lifecycle remains independently executed through two accepted edge
+records. Six historical records now name the suite. Four disposable mutations
+reject decision, owner projection, documentation, and disposition drift. The
+retained row-15 gate, 332 verifier tests, all 192 declarative suites, and
+generated freshness pass. Final evidence contains 80 Bash checkers, 84 nodes,
+557 edges, and 84 components. No normative source, engine, helper, nested gate,
+wrapper, compatibility representation, false dependency, dual authority, or
+fallback changed.

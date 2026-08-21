@@ -1,0 +1,93 @@
+schema_version = 1
+id = "architecture-owner-contract"
+owner = "topic.architecture"
+description = "Fact-selected Architecture ownership without structural, location, global-state, or incumbent-layout fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/owner-contract-decisions.tsv"
+expected_column = "expected"
+default = "separate"
+[checks.domains]
+case = ["*"]
+concerns = ["multiple", "one"]
+owners = ["clear", "contradictory", "missing"]
+lifecycle = ["clear", "independent", "long-lived"]
+deployment = ["independent", "same", "unsupported"]
+contracts = ["complete", "missing"]
+fallback = ["backend", "directory", "fixed-layers", "framework", "global", "incumbent", "none"]
+expected = ["compose", "keep-together", "separate", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "owners", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "owners", op = "eq", value = "missing" },
+  { field = "contracts", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "deployment"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "compose"
+[checks.rules.when]
+field = "lifecycle"
+op = "eq"
+value = "long-lived"
+[[checks.rules]]
+outcome = "keep-together"
+[checks.rules.when]
+field = "concerns"
+op = "eq"
+value = "one"
+
+[[checks]]
+id = "canonical-owner-projection"
+type = "text"
+path = "topics/architecture.md"
+required = [
+  "ID: `topic.architecture`",
+  "## Concern Boundaries",
+  "repository shape does not create them",
+  "## Data And State Authority",
+  "location does not determine ownership",
+  "## Runtime Composition",
+  "Do not fall back to the incumbent structure",
+]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["the registered `architecture-owner-contract` suite establish Architecture ownership"]
+prohibited = ["`verify-architecture-owner-contract.sh` establish Architecture ownership"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id"]
+order = "source"
+expected = [
+  ["STD-0137"], ["STD-0138"], ["STD-0139"], ["STD-0140"],
+  ["STD-0141"], ["STD-0142"], ["STD-0143"], ["STD-0144"],
+  ["STD-0145"], ["STD-0146"], ["STD-0147"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0137", "STD-0138", "STD-0139", "STD-0140", "STD-0141", "STD-0142", "STD-0143", "STD-0144", "STD-0145", "STD-0146", "STD-0147"]

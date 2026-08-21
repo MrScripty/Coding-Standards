@@ -5820,3 +5820,16 @@
 - Six independent gates, 35 graph tests, 332 verifier tests, 191 declarative
   suites, generated freshness, and the complete checkpoint with 81 retained
   Bash checkers pass. Final graph: 85 nodes, 561 edges, 85 components.
+
+## 2026-08-21 - M6-I45 Architecture Owner Acceptance
+
+- Fresh evidence selected the 30-line Architecture owner checker as the
+  shortest of 18 caller-free verifiers and qualified it for `serial-coherent`
+  execution.
+- Replaced it with one four-check topic-owner suite covering 14 decisions,
+  canonical and README projections, and 11 exact dispositions.
+- Preserved row-15 as an independent gate and transferred six historical edge
+  records to suite evidence.
+- Four mutations, the row-15 gate, 332 verifier tests, all 192 declarative
+  suites, and generated freshness pass. Final graph: 80 Bash checkers, 84
+  nodes, 557 edges, 84 components.

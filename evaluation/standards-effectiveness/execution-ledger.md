@@ -14342,3 +14342,15 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
 - Final graph evidence contains 85 nodes, 561 edges, and 85 components; no
   replacement caller, compatibility authority, weakened closure, or fallback
   remains.
+
+## 2026-08-21 - M6-I45 Architecture Owner Acceptance
+
+- Fresh post-M6-I44 evidence selected the 30-line Architecture owner checker
+  for one `serial-coherent` package at train order 160.
+- The registered four-check topic-owner suite preserves 14 typed decisions,
+  canonical and README projections, and 11 exact dispositions.
+- Row 15 remains an independent gate; six historical records transfer to the
+  suite. Four negative mutations, 332 verifier tests, all 192 declarative
+  suites, and generated freshness pass.
+- Final evidence contains 80 Bash checkers, 84 nodes, 557 edges, and 84
+  components. No fallback or compatibility authority remains.

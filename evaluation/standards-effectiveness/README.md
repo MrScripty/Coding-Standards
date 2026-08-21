@@ -132,7 +132,7 @@ entanglement- and ownership-based simplicity without visible-count or
 smallest-diff defaults.
 
 `fixtures/architecture/owner-contract-decisions.tsv` and
-`verify-architecture-owner-contract.sh` establish Architecture ownership
+the registered `architecture-owner-contract` suite establish Architecture ownership
 without fixed layers, location-derived authority, ambient globals, or
 incumbent-structure fallback.
 
