@@ -1,0 +1,82 @@
+schema_version = 1
+id = "architecture-pattern-selection-closure"
+owner = "topic.architecture"
+description = "Fact-driven Architecture pattern routing and legacy selection-table closure without situation-label, nearest-example, incumbent-pattern, fixed-diagram, or other pattern-selection fallback."
+
+[[checks]]
+id = "routing-decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/architecture/pattern-selection-closure-decisions.tsv"
+expected_column = "expected"
+default = "route"
+[checks.domains]
+case = ["*"]
+responsibility = ["clear", "missing"]
+authority = ["clear", "contradictory", "missing"]
+contracts = ["complete", "missing"]
+lifecycle = ["missing", "owned"]
+capability = ["supported", "unsupported"]
+evidence = ["missing", "selected"]
+label = ["client-server", "complex-ui", "infrastructure-failure", "multi-layer", "multi-process", "none", "parallel-team"]
+fallback = ["fixed-diagram", "incumbent-pattern", "label-selects-pattern", "nearest-example", "none", "not-needed"]
+expected = ["route", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "not_in", values = ["none", "not-needed"] },
+  { field = "authority", op = "eq", value = "contradictory" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "responsibility", op = "eq", value = "missing" },
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "contracts", op = "eq", value = "missing" },
+  { field = "lifecycle", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "capability"
+op = "eq"
+value = "unsupported"
+
+[[checks]]
+id = "legacy-selection-closure"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = [
+  "## Choosing Patterns",
+  "[Standards Router](STANDARDS-ROUTER.md)",
+  "actual responsibility",
+  "A broad situation label does not select",
+  "[Architecture Pattern Reference](reference/patterns/architecture.md)",
+  "nearest example",
+  "canonical typed outcome",
+]
+prohibited = [
+  "| Situation | Recommended Pattern |",
+  "| Multi-layer application | Layered Separation of Concerns |",
+  "| Client-server state management | Backend-Owned Data |",
+  "| Parallel team development | Immutable Contracts |",
+  "| Single-instance process requirement | Process Instance Coordination |",
+  "| Service that any process may need to start | Discover-or-Create |",
+]
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [["STD-0134", "ARCHITECTURE-PATTERNS.md", "reference/patterns/architecture.md", "merge-duplicate", "canonical fact-driven routing and pattern non-authority replace the universal situation-to-pattern selection table"]]
+[checks.projections.where]
+field = "id"
+op = "eq"
+value = "STD-0134"

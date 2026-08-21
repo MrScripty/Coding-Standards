@@ -13849,3 +13849,21 @@ their behavior or creating registry dependencies. No policy, fixture, nested
 checker, engine, wrapper, compatibility representation, false dependency, or
 fallback changes. Admission evidence contains 176 suites, 96 Bash checkers,
 100 nodes, 628 edges, and 100 components.
+
+## 2026-08-20 M6-I30 Architecture Pattern Selection Acceptance
+
+**Outcome:** accepted at train order 145; fresh-graph package selection is
+next.
+
+The registered owner-local suite now proves all 18 fact-driven routing
+decisions, required legacy-index projection, rejection of universal
+situation-to-pattern defaults, and exact `STD-0134` disposition. Both nested
+Architecture gates remain independently executed through four accepted edge
+records rather than copied checks or suite dependencies.
+
+The Bash checker is absent. Four disposable mutations, 35 graph tests, 326
+verifier tests, all 177 declarative suites, and the complete 95-checker
+checkpoint pass. Final graph evidence contains 99 nodes, 622 edges, and 99
+components without policy, fixture, nested-gate, or engine changes, wrappers,
+compatibility representations, false dependencies, dual authority, or
+fallback.

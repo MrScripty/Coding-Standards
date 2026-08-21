@@ -147,6 +147,12 @@ The registered `architecture-population` suite proves exact replacement of the
 eleven legacy architecture identifiers and removal of fixed organization,
 layer, backend, framework, composition, and state-owner recipes.
 
+The registered `architecture-pattern-selection-closure` suite proves 18
+fact-driven routing decisions, the bounded legacy projection, removal of the
+universal situation-to-pattern table, and the exact `STD-0134` disposition.
+Situation labels, nearest examples, incumbent patterns, and fixed diagrams do
+not select a pattern.
+
 `fixtures/core/constants-decisions.tsv` and the registered `core-constants` suite prove
 semantic constant/configuration ownership without universal literal,
 centralization, ambient, duplicated-default, or incumbent-value fallbacks.

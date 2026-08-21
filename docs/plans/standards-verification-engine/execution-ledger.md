@@ -5356,3 +5356,22 @@
   wrapper, compatibility representation, false dependency, or fallback changes.
   Admission evidence contains 176 suites, 96 Bash checkers, 100 nodes, 628
   edges, and 100 components.
+
+## 2026-08-20 - M6-I30 Architecture Pattern Selection Acceptance
+
+- Added the registered `architecture-pattern-selection-closure` suite with all
+  18 fact-driven routing decisions, required and prohibited legacy-index text,
+  and exact `STD-0134` disposition.
+- Kept Architecture discover-or-create reference closure and parent-plan
+  row-40 lifecycle as independently executed Bash gates. Their four accepted
+  edge records remain exact checker evidence rather than suite dependencies.
+- Deleted only the replaced Bash checker. Canonical Architecture policy,
+  reference material, legacy index, decision fixture, dispositions, and nested
+  gates remain unchanged.
+- Four disposable mutations reject decision, required-text, prohibited-default,
+  and disposition drift. The 35 graph tests, 326 verifier tests, all 177
+  declarative suites, and complete mixed checkpoint with 95 retained Bash
+  checkers pass.
+- Final generated evidence contains 99 nodes, 622 edges, and 99 components
+  without engine changes, copied nested behavior, wrappers, compatibility
+  representations, false dependencies, dual authority, or fallback.

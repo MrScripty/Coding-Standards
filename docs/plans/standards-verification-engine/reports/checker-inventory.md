@@ -4643,3 +4643,18 @@ and parent-plan row-40 lifecycle. Four exact edge dispositions retain both
 checkers without copied assertions or suite dependencies. M6-I30 is admitted
 at train order 145 without canonical source changes, engine changes, wrappers,
 compatibility representations, false dependencies, dual authority, or fallback.
+
+### M6-I30 Architecture Pattern Selection Acceptance
+
+The registered owner-local suite replaces the 54-line checker with three
+existing generic checks. It preserves all 18 routing decisions, bounded
+legacy-index requirements and prohibitions, and exact `STD-0134` disposition.
+Architecture discover-or-create reference closure and row-40 lifecycle remain
+independent retained gates through four accepted edge records.
+
+The obsolete checker is absent. Four mutation families fail as required, all
+Python and declarative tests pass, and the complete mixed checkpoint passes
+with 95 retained Bash checkers. Final graph evidence contains 99 nodes, 622
+edges, and 99 components without canonical source changes, engine changes,
+copied nested behavior, wrappers, compatibility representations, false
+dependencies, dual authority, or fallback.
