@@ -1,0 +1,90 @@
+schema_version = 1
+id = "readme-template-derivation-closure"
+owner = "workflow.documentation"
+description = "README template selection and source closure without universal headings, directory-shape inference, or fallback."
+
+[[checks]]
+id = "source-gaps"
+type = "table"
+path = "evaluation/standards-effectiveness/fixtures/migration/undisposed-source-gaps.tsv"
+header = ["id", "classification", "reason"]
+[[checks.projections]]
+columns = ["id", "classification", "reason"]
+order = "source"
+expected = []
+
+[[checks]]
+id = "corpus-classification"
+type = "table"
+path = "evaluation/standards-effectiveness/corpus.tsv"
+header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
+[[checks.projections]]
+columns = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
+order = "source"
+expected = [["templates/README-TEMPLATE.md", "template", "derived", "reference", "split", "git"]]
+[checks.projections.where]
+field = "path"
+op = "eq"
+value = "templates/README-TEMPLATE.md"
+
+[[checks]]
+id = "workflow-projection"
+type = "text"
+path = "workflows/documentation.md"
+required = [
+  "ID: `workflow.documentation`",
+  "Requires: `core`",
+  "Canonical owner: `workflows/documentation.md`",
+  "If the impact cannot be classified",
+  "Contradictory trigger",
+  "`unavailable`",
+  "`unsupported`",
+  "Do not default to a `src/` directory, README per directory, fixed headings",
+]
+prohibited = []
+
+[[checks]]
+id = "template-projection"
+type = "text"
+path = "templates/README-TEMPLATE.md"
+required = [
+  "selects a",
+  "`boundary-readme` or `contract-readme`",
+  "Delete instructions and optional",
+  "sections that do not apply",
+  "## Purpose",
+  "## Responsibility",
+  "## Invariants",
+  "## Entry Points",
+  "## Decision Links",
+  "## Consumer Contract",
+  "## Produced Contract",
+]
+prohibited = [
+  "\n## Contents\n",
+  "\n## Problem\n",
+  "\n## Constraints\n",
+  "\n## Decision\n",
+  "\n## Alternatives Rejected\n",
+  "\n## Revisit Triggers\n",
+  "\n## Dependencies\n",
+  "\n### Internal\n",
+  "\n### External\n",
+  "\n## Related ADRs\n",
+  "\n## Usage Examples\n",
+  "\n## API Consumer Contract\n",
+  "\n## Structured Producer Contract\n",
+  "\n## Testing\n",
+  "\n## Notes\n",
+]
+
+[[checks]]
+id = "closure-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-undisposed-source-audit.md"
+required = [
+  "observes zero undisposed source gaps",
+  "Restoring the universal README",
+  "template is not an admissible option",
+]
+prohibited = []

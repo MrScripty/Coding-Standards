@@ -5159,3 +5159,20 @@ generated freshness pass. Final evidence contains 77 Bash checkers, 81 nodes,
 541 edges, and 81 components. No normative source, engine, helper, wrapper,
 compatibility representation, false dependency, dual authority, or fallback
 changed.
+
+### M6-I49 README Template-Derivation Closure Acceptance
+
+Fresh post-M6-I48 evidence selected the 76-line README template-derivation
+checker as the shortest of 16 caller-free verifiers. The `serial-coherent`
+package replaces it with one five-check Documentation-owned suite that requires
+the existing row-47 lifecycle suite instead of copying its identity, owner-map,
+or disposition relations.
+
+The suite owns current source-gap, corpus, workflow, template, and closure-
+report projections. Three retained gates remain independently executable
+through six accepted edge records, and two historical row-47 records now name
+the suite. The retained gates, 332 verifier tests, all 196 declarative suites,
+numeric lifecycle, and generated freshness pass. Final evidence contains 76
+Bash checkers, 80 nodes, 534 edges, and 80 components. No hardcoded count,
+normative source, engine, helper, wrapper, compatibility representation, false
+dependency, dual authority, or fallback changed.

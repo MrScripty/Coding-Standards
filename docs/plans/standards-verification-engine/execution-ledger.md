@@ -5871,3 +5871,15 @@
 - Both retained gates, 332 verifier tests, all 195 declarative suites, numeric
   lifecycle, and generated freshness pass. Final graph: 77 Bash checkers, 81
   nodes, 541 edges, 81 components.
+
+## 2026-08-21 - M6-I49 README Template-Derivation Closure Acceptance
+
+- Fresh evidence selected the 76-line README template checker as the shortest
+  of 16 caller-free verifiers and qualified it for `serial-coherent` execution.
+- Replaced it with one five-check Documentation-owned suite that requires the
+  existing row-47 lifecycle suite rather than copying relational authority.
+- Preserved three independent gates through six accepted edge records and
+  transferred two historical row-47 records to suite evidence.
+- The retained gates, 332 verifier tests, all 196 declarative suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 76 Bash checkers, 80
+  nodes, 534 edges, 80 components.

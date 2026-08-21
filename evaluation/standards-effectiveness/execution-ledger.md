@@ -14392,3 +14392,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   lifecycle, and generated freshness pass. Final graph: 77 Bash checkers, 81
   nodes, 541 edges, 81 components. No fallback or compatibility authority
   remains.
+
+## 2026-08-21 - M6-I49 README Template-Derivation Closure Acceptance
+
+- Fresh post-M6-I48 evidence selected the 76-line README template-derivation
+  checker for one `serial-coherent` package at train order 164.
+- The registered five-check Documentation suite owns current policy projections
+  and requires the existing row-47 suite for canonical lifecycle relations.
+- Three retained gates remain independent through six accepted edge records;
+  two historical row-47 records now resolve to the suite.
+- The retained gates, 332 verifier tests, all 196 declarative suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 76 Bash checkers, 80
+  nodes, 534 edges, 80 components. No fallback or compatibility authority
+  remains.
