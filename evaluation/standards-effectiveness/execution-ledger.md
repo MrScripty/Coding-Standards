@@ -13833,3 +13833,19 @@ the complete 96-checker checkpoint pass. Final graph evidence contains 100
 nodes, 624 edges, and 100 components without policy or fixture changes, engine
 changes, wrappers, false dependencies, compatibility representations, dual
 authority, or fallback.
+
+## 2026-08-20 M6-I30 Architecture Pattern Selection Admission
+
+**Outcome:** admitted at train order 145; atomic acceptance is next.
+
+Fresh post-M6-I29 evidence selects the 54-line caller-free Architecture
+pattern-selection closure. Its 18 routing decisions, required legacy-index
+projection, prohibited universal defaults, and exact `STD-0134` disposition
+are expressible with existing generic decision, text, and table checks.
+
+The discover-or-create reference closure and row-40 lifecycle are separately
+owned retained gates. Four exact current edges preserve them without copying
+their behavior or creating registry dependencies. No policy, fixture, nested
+checker, engine, wrapper, compatibility representation, false dependency, or
+fallback changes. Admission evidence contains 176 suites, 96 Bash checkers,
+100 nodes, 628 edges, and 100 components.

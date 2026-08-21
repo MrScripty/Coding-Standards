@@ -5338,3 +5338,21 @@
   Canonical policy and fixtures remain unchanged; no engine change, wrapper,
   false dependency, compatibility representation, dual authority, or fallback
   was introduced.
+
+## 2026-08-20 - M6-I30 Architecture Pattern Selection Admission
+
+- Fresh post-M6-I29 evidence selects the 54-line caller-free Architecture
+  pattern-selection closure. Its 18 typed routing decisions, bounded legacy
+  closure, prohibited universal table, and exact `STD-0134` disposition form
+  one `topic.architecture` contract.
+- The nested Architecture discover-or-create reference closure and row-40
+  lifecycle remain independently executed Bash gates. Four exact incident
+  edges are admitted as independent-gate evidence; no suite dependency or
+  copied nested behavior is proposed.
+- Admitted M6-I30 at train order 145. Atomic acceptance will add one owner-local
+  suite, delete only the replaced checker, update the README projection, and
+  regenerate the frozen temporary graph.
+- No canonical policy, decision fixture, nested checker, engine capability,
+  wrapper, compatibility representation, false dependency, or fallback changes.
+  Admission evidence contains 176 suites, 96 Bash checkers, 100 nodes, 628
+  edges, and 100 components.

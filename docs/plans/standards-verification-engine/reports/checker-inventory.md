@@ -4629,3 +4629,17 @@ complete mixed checkpoint passes with 96 retained Bash checkers. Final graph
 evidence contains 100 nodes, 624 edges, and 100 components without canonical
 source changes, engine changes, wrappers, compatibility representations, dual
 authority, or fallback.
+
+### M6-I30 Architecture Pattern Selection Admission
+
+Fresh post-M6-I29 evidence selects the shortest caller-free checker. One
+owner-local suite can preserve its 18 fact-driven routing decisions, required
+legacy-index projection, rejection of six universal situation-to-pattern
+defaults, and exact `STD-0134` disposition with existing generic checks.
+
+The checker's two nested calls are independent evidence rather than behavior
+owned by pattern selection: Architecture discover-or-create reference closure
+and parent-plan row-40 lifecycle. Four exact edge dispositions retain both
+checkers without copied assertions or suite dependencies. M6-I30 is admitted
+at train order 145 without canonical source changes, engine changes, wrappers,
+compatibility representations, false dependencies, dual authority, or fallback.
