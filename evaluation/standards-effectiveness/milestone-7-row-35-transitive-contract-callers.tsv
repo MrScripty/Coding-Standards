@@ -2,4 +2,3 @@ caller	shared_checker
 evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	evaluation/standards-effectiveness/verify-contract-ownership.sh
 evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/verify-contract-ownership.sh
 evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	evaluation/standards-effectiveness/verify-contract-ownership.sh
-evaluation/standards-effectiveness/verify-milestone-7-row-39-decomposition.sh	evaluation/standards-effectiveness/verify-contract-ownership.sh

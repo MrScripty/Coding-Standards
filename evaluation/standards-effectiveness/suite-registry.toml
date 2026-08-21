@@ -949,3 +949,8 @@ requires = []
 id = "architecture-process-instance-coordination"
 path = "evaluation/standards-effectiveness/suites/architecture-process-instance-coordination.toml"
 requires = []
+
+[[suites]]
+id = "milestone-7-row-39-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-39-decomposition.toml"
+requires = []

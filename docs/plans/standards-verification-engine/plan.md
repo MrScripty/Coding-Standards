@@ -4,16 +4,15 @@
 
 **Current phase:** Milestone 6 Bash retirement
 
-**Next slice:** implement corrected M6-I44 from its accepted row-35 consumer re-plan
+**Next slice:** audit the fresh post-M6-I44 graph and select the next package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I43 replaced the Architecture process-instance
-coordination checker with one registered reference-owner suite at train order
-158.
+**Latest accepted slice:** M6-I44 replaced the row-39 decomposition checker
+with one registered parent-plan suite at train order 159 and corrected row-35
+current-caller authority.
 
-**Latest admitted slice:** M6-I44 at train order 159 has an accepted expanded
-write set and row-35 consumer transition; implementation remains pending.
+**Latest admitted slice:** `none`; the next package requires fresh graph audit.
 
 **Accepted dependency:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 
@@ -125,14 +124,13 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I43 at train
-order 158.
+**Accepted boundary:** package records are accepted through M6-I44 at train
+order 159.
 
-**Current derived state:** the accepted recovery boundary contains 190
-registered declarative suites, 82 retained Bash checkers, 86 executable nodes,
-578 conservative reference edges, and 86 components. These values are
-observations from generated evidence and do not authorize package selection or
-ownership. Rejected M6-I44 implementation evidence is not current authority.
+**Current derived state:** 191 registered declarative suites, 81 retained Bash
+checkers, 85 executable nodes, 561 conservative reference edges, and 85
+components. These values are observations from generated evidence and do not
+authorize package selection or ownership.
 
 ## Milestones
 
@@ -144,7 +142,7 @@ ownership. Rejected M6-I44 implementation evidence is not current authority.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I44 corrected re-plan accepted; implementation is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I44 accepted at train order 159; fresh graph audit is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -189,11 +187,9 @@ temporary Bash graph schema remains unchanged.
 
 **Next work:**
 
-1. Implement M6-I44 with the accepted expanded write set: remove the obsolete
-   row-39 caller from row-35's exact current-caller authority while preserving
-   strict closure for every remaining caller; do not infer a replacement.
-2. Accept M6-I44 only after focused mutation evidence and all registered suites
-   prove the row-35 and row-39 final state.
+1. Audit the fresh post-M6-I44 graph before admitting another package.
+2. Preserve the accepted row-35 exact current-caller closure; do not reintroduce
+   the retired row-39 checker or infer a suite caller.
 3. Select each subsequent owner-coherent package from reviewed lifecycle and
    dependency evidence.
 4. Select and record the proportional execution mode before changing package

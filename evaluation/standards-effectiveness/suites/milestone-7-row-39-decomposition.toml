@@ -1,0 +1,114 @@
+schema_version = 1
+id = "milestone-7-row-39-decomposition"
+owner = "migration.parent-plan"
+description = "Accepted row-39 architecture-pattern closure with exact decomposition, ownership, report, train, and package evidence."
+
+[[checks]]
+id = "execution-decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+[[checks.projections]]
+columns = ["child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "owner_transition"]
+order = "source"
+expected = [
+  ["1", "STD-0093,STD-0094,STD-0095,STD-0096,STD-0097,STD-0098", "ARCHITECTURE-PATTERNS.md", "topics/concurrency.md", "exists", "owner-review", "focused", "none"],
+  ["2", "STD-0099,STD-0100,STD-0101,STD-0102,STD-0103", "ARCHITECTURE-PATTERNS.md", "topics/architecture.md", "exists", "pre-slice-review", "focused", "none"],
+  ["3", "STD-0104,STD-0105", "ARCHITECTURE-PATTERNS.md", "reference/patterns/architecture.md", "exists", "final-closure", "focused", "none"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "39"
+[[checks.projections]]
+columns = ["ids"]
+order = "lexical"
+expected = [
+  ["STD-0093"], ["STD-0094"], ["STD-0095"], ["STD-0096"],
+  ["STD-0097"], ["STD-0098"], ["STD-0099"], ["STD-0100"],
+  ["STD-0101"], ["STD-0102"], ["STD-0103"], ["STD-0104"],
+  ["STD-0105"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "39"
+[checks.projections.split]
+field = "ids"
+delimiter = ","
+
+[[checks]]
+id = "owner-validation"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-row-39-owner-validation.tsv"
+header = ["id", "canonical_owner", "disposition", "reference_treatment", "rationale"]
+non_empty = ["id", "canonical_owner", "disposition", "reference_treatment", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "canonical_owner", "disposition", "reference_treatment"]
+order = "source"
+expected = [
+  ["STD-0093", "reference/patterns/architecture.md", "index", "conditional-process-coordination"],
+  ["STD-0094", "topics/concurrency.md", "split", "conditional-process-coordination"],
+  ["STD-0095", "topics/concurrency.md", "refine", "none"],
+  ["STD-0096", "topics/contracts.md", "split", "none"],
+  ["STD-0097", "topics/cross-platform.md", "split", "none"],
+  ["STD-0098", "topics/resilience.md", "split", "none"],
+  ["STD-0099", "reference/patterns/architecture.md", "index", "conditional-discover-or-create"],
+  ["STD-0100", "topics/architecture.md", "split", "conditional-discover-or-create"],
+  ["STD-0101", "reference/patterns/architecture.md", "move", "conditional-discover-or-create"],
+  ["STD-0102", "topics/concurrency.md", "split", "conditional-discover-or-create"],
+  ["STD-0103", "topics/architecture.md", "split", "conditional-discover-or-create"],
+  ["STD-0104", "reference/patterns/architecture.md", "move", "conditional-discover-or-create"],
+  ["STD-0105", "reference/patterns/architecture.md", "move", "conditional-discover-or-create"],
+]
+
+[[checks]]
+id = "decomposition-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-39-decomposition.md"
+required = [
+  "## Re-plan Trigger",
+  "single-owner review could not confirm",
+  "## Owner Contract",
+  "## Exact Ownership",
+  "`39.1`",
+  "`39.2`",
+  "`39.3`",
+  "## Reference Selection",
+  "Fixed PID-file",
+  "## Bounded Write Sets",
+  "## Verification Gates",
+  "P32 remains open",
+  "## Typed Outcomes And No Fallback",
+  "## Re-plan Triggers",
+]
+prohibited = []
+
+[[checks]]
+id = "execution-train"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-train.tsv"
+header = ["order", "wave", "start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+[[checks.projections]]
+columns = ["start_id", "end_id", "source", "owner", "owner_state", "activation", "checkpoint"]
+order = "source"
+expected = [["STD-0093", "STD-0105", "ARCHITECTURE-PATTERNS.md", "reference/patterns/architecture.md", "missing", "owner-review", "focused"]]
+[checks.projections.where]
+field = "order"
+op = "eq"
+value = "39"
+
+[[checks]]
+id = "accelerated-package-gate"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv"
+header = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+[[checks.projections]]
+columns = ["package_id", "owner", "owner_action", "integration_gate"]
+order = "source"
+expected = [["P32", "reference/patterns/architecture.md", "populate-after-create", "focused"]]
+[checks.projections.where]
+field = "train_order"
+op = "eq"
+value = "39"

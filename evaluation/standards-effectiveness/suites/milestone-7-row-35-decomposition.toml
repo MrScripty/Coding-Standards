@@ -115,7 +115,6 @@ expected = [
   ["evaluation/standards-effectiveness/verify-binding-contract-evolution.sh", "evaluation/standards-effectiveness/verify-contract-ownership.sh"],
   ["evaluation/standards-effectiveness/verify-cross-language-contract.sh", "evaluation/standards-effectiveness/verify-contract-ownership.sh"],
   ["evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh", "evaluation/standards-effectiveness/verify-contract-ownership.sh"],
-  ["evaluation/standards-effectiveness/verify-milestone-7-row-39-decomposition.sh", "evaluation/standards-effectiveness/verify-contract-ownership.sh"],
 ]
 
 [[checks]]
@@ -148,13 +147,6 @@ id = "independent-trust-invocation"
 type = "text"
 path = "evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh"
 required = ["\n\"$SCRIPT_DIR/verify-contract-ownership.sh\"\n"]
-prohibited = []
-
-[[checks]]
-id = "row-39-invocation"
-type = "text"
-path = "evaluation/standards-effectiveness/verify-milestone-7-row-39-decomposition.sh"
-required = ["\n\"$S/verify-contract-ownership.sh\"\n"]
 prohibited = []
 
 [[checks]]

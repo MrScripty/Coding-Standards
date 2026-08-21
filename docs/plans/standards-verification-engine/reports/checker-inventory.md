@@ -5077,3 +5077,18 @@ retain exact derived closure and direct invocation checks for the three
 remaining callers, and use disposable mutations to reject stale row-39 caller
 authority and omission of a remaining live caller. This is a final-state
 consumer transition with no compatibility representation or fallback.
+
+### M6-I44 Row-39 Decomposition Acceptance
+
+The registered parent-plan suite replaces the 49-line checker with exact
+decomposition, owner-validation, report, execution-train, and accelerated-
+package evidence. Row 35 now records the three remaining real contract-owner
+callers and no checker-specific assertion for the retired row-39 path.
+
+Seven disposable mutations reject stale caller authority, omission of a live
+caller, and decomposition, owner, report, train, or package drift. Six retained
+independent gates, 35 graph tests, 332 verifier tests, all 191 declarative
+suites, and the complete checkpoint with 81 Bash checkers pass. Final graph
+evidence contains 85 nodes, 561 edges, and 85 components. No policy, migration
+input, engine, wrapper, replacement caller, compatibility representation,
+weakened closure, dual authority, or fallback changed.

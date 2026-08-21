@@ -14329,3 +14329,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
 - The accepted transition removes the obsolete caller and direct invocation
   assertion without inventing a suite caller or weakening exact closure.
 - M6-I44 implementation remains pending; no later package is admitted.
+
+## 2026-08-21 - M6-I44 Row-39 Decomposition Acceptance
+
+- Replaced the row-39 Bash checker with one registered five-check parent-plan
+  suite and accepted package train order 159.
+- Removed obsolete row-39 current-caller authority from row 35 while
+  preserving exact derived closure over all three remaining callers.
+- Seven negative mutations, six independent gates, 35 graph tests, 332
+  verifier tests, all 191 declarative suites, generated freshness, and the
+  complete checkpoint with 81 retained Bash checkers pass.
+- Final graph evidence contains 85 nodes, 561 edges, and 85 components; no
+  replacement caller, compatibility authority, weakened closure, or fallback
+  remains.

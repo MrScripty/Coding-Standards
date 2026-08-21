@@ -5808,3 +5808,15 @@
 - Required mutations reject stale row-39 authority and omission of a live
   caller. No replacement caller, checker retention, compatibility, weakened
   closure, or fallback is authorized.
+
+## 2026-08-21 - M6-I44 Row-39 Decomposition Acceptance
+
+- Replaced the 49-line checker with one five-check registered parent-plan
+  suite and transferred the accepted historical evidence rows.
+- Removed the obsolete row-39 caller and direct invocation assertion from row
+  35 while retaining exact closure over the three remaining callers.
+- Seven mutations reject stale caller authority, missing live callers, and
+  decomposition, owner, report, train, or package drift.
+- Six independent gates, 35 graph tests, 332 verifier tests, 191 declarative
+  suites, generated freshness, and the complete checkpoint with 81 retained
+  Bash checkers pass. Final graph: 85 nodes, 561 edges, 85 components.
