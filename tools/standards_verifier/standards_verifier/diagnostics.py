@@ -5,6 +5,11 @@ from typing import Any
 
 
 OUTCOMES = frozenset({"invalid", "unavailable", "unsupported"})
+EXIT_CODE_BY_OUTCOME = {
+    "invalid": 2,
+    "unavailable": 3,
+    "unsupported": 4,
+}
 
 
 @dataclass(frozen=True, slots=True)
@@ -46,7 +51,10 @@ class Diagnostic:
 
 
 class EngineError(Exception):
-    def __init__(self, diagnostic: Diagnostic, exit_code: int = 2) -> None:
+    def __init__(self, diagnostic: Diagnostic, exit_code: int | None = None) -> None:
         super().__init__(diagnostic.message)
+        expected_exit_code = EXIT_CODE_BY_OUTCOME[diagnostic.outcome]
+        if exit_code is not None and exit_code != expected_exit_code:
+            raise ValueError("explicit exit code contradicts the diagnostic outcome")
         self.diagnostic = diagnostic
-        self.exit_code = exit_code
+        self.exit_code = expected_exit_code

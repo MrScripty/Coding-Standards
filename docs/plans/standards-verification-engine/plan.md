@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Python verification engine design recovery dependency
+**Current phase:** verification-engine recovery Milestone 3 pending admission
 
-**Next slice:** complete the admitted recovery before selecting another checker package
+**Next slice:** remove policy-specific engine interfaces under the active recovery
 
 **Acceptance status:** `pending`
 

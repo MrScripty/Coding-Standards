@@ -69,3 +69,27 @@
   retained Bash checkers passed. `git diff --check` remained clean before plan
   projection.
 - Result: Milestone 1 accepted. Milestone 2 is the only admitted next slice.
+
+## 2026-08-21: Milestone 2 Acceptance
+
+- Added one immutable `SuiteCatalog` loaded through the strict configuration
+  owner and injected it into execution contexts. Registry entries, suite paths,
+  dependencies, and parsed check objects now share one invocation snapshot.
+- Removed the `edge_dispositions` registry-path field and its check-local TOML
+  parsers. A post-load mutation test proves execution does not reopen registry
+  or suite configuration, and no compatibility representation remains.
+- Moved every source-index `ASSERT.*` diagnostic onto the ordinary result path.
+  `EngineError` now derives invalid, unavailable, and unsupported statuses from
+  typed outcomes; text and JSON formats preserve the same status contract.
+- Focused evidence: 106 catalog, edge-disposition, source-index, and engine
+  tests passed. Source-index mutation evidence distinguishes assertion status
+  `1`, invalid status `2`, and unavailable status `3`.
+- Broad evidence: 353 verifier tests, 35 neutral graph tests, all 207
+  declarative suites, generated freshness, and the complete checkpoint with 65
+  retained Bash checkers passed. No assertion diagnostic remains on the
+  exception path and `edge_dispositions` contains no TOML parser.
+- Investigation correction: the reported duplicated decorator was an
+  overlapping line-range display, not a source defect; issue M2-01 records the
+  false positive without changing working code.
+- Result: Milestone 2 accepted. Milestone 3 is the only next slice and remains
+  pending explicit admission.

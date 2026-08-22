@@ -7,7 +7,7 @@ from typing import Any
 from .checks import parse_check
 from .diagnostics import Diagnostic, EngineError
 from .graph_adapters import SUITE_DEPENDENCIES, suite_dependency_registry
-from .model import RegistryEntry, Suite
+from .model import RegistryEntry, Suite, SuiteCatalog
 from .paths import contained_file
 
 
@@ -109,3 +109,9 @@ def load_suite(root: Path, entry: RegistryEntry) -> Suite:
     if len(set(check_ids)) != len(check_ids):
         raise EngineError(Diagnostic("CONFIG.DUPLICATE_CHECK", "invalid", "check ID is duplicated within suite", suite=entry.id, path=entry.path))
     return Suite(entry.id, owner, description, checks)
+
+
+def load_catalog(root: Path, registry_path: str) -> SuiteCatalog:
+    entries = load_registry(root, registry_path)
+    suites = tuple(load_suite(root, entry) for entry in entries)
+    return SuiteCatalog(registry_path, entries, suites)

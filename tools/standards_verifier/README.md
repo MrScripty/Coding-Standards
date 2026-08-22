@@ -161,6 +161,12 @@ operators, dependencies, and paths fail with typed diagnostics. Configuration
 cannot execute commands, import modules, evaluate code, interpolate environment
 variables, or write files.
 
+One immutable suite catalog owns the validated registry entries and parsed
+suite bodies for an invocation. Execution and catalog-aware checks consume that
+catalog; checks do not reopen registry or suite TOML, construct a second reverse
+index, or fall back to a check-local representation. Focused-loading behavior
+is a separate performance concern and does not authorize duplicate parsers.
+
 The `decision` check has two mutually exclusive canonical forms. The compact
 single-output form uses `expected_column`, `default`, and ordered `rules`; its
 TSV starts with `case` and ends with that expected column. The multi-output form
@@ -479,4 +485,7 @@ OIDs, or fall back to object-integrity output.
 | `4` | The requested capability is unsupported. |
 
 Diagnostics support human-readable text and structured JSON through
-`--format text` and `--format json`.
+`--format text` and `--format json`. Assertion diagnostics travel through the
+ordinary result path and therefore return status `1`. Execution exceptions are
+classified from their typed outcome as invalid (`2`), unavailable (`3`), or
+unsupported (`4`), independent of output format.

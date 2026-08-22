@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2 single catalog and result semantics
+**Current phase:** Milestone 2 accepted; Milestone 3 pending admission
 
-**Next slice:** establish one immutable invocation catalog and one shared result
-classification contract
+**Next slice:** replace the two policy-specific engine interfaces with the
+smallest owned declarative mechanics or downstream adapters
 
 **Acceptance status:** `pending`
 
@@ -31,7 +31,7 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 | --- | --- | --- | --- | --- | --- | --- |
 | A1 | Every metadata-bearing canonical document is queryable by logical ID and path alias, with normative/routable membership, `Requires`, and `Specializes` derived from canonical metadata rather than validation-suite selection. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](execution-ledger.md#2026-08-21-milestone-1-acceptance) |
 | A2 | Verifier-interface scenarios select Architecture and Performance only from Router facts, including positive, negative, and unresolved cases. | `focused` | `not-applicable` | `automated` | `satisfied` | `s1-routing` verifier-change decisions |
-| A3 | One validated immutable suite catalog supplies execution and checks; assertions and invalid, unavailable, and unsupported conditions return their documented statuses. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 2 |
+| A3 | One validated immutable suite catalog supplies execution and checks; assertions and invalid, unavailable, and unsupported conditions return their documented statuses. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](execution-ledger.md#2026-08-21-milestone-2-acceptance) |
 | A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters or policy literals in generic checks. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 3 |
 | A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims; loading or scan changes occur only when accepted measurements justify them. | `focused` | `representative` | `automated` | `pending` | Milestone 4 |
 | A6 | Every migration-only Python module and check kind has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `pending` | Milestone 5 and verification-engine zero-Bash acceptance |
@@ -188,25 +188,29 @@ classification contract.
 - `tools/standards_verifier/standards_verifier/engine.py`
 - `tools/standards_verifier/standards_verifier/diagnostics.py`
 - `tools/standards_verifier/standards_verifier/checks/edge_dispositions.py`
+- `tools/standards_verifier/standards_verifier/checks/policy_impact.py`
+- `tools/standards_verifier/standards_verifier/checks/derived_evidence.py`
+- `tools/standards_verifier/standards_verifier/checks/source_index_closure.py`
+- `evaluation/standards-effectiveness/suites/executable-edge-dispositions.toml`
 - affected verifier tests and README sections
 - affected declarative suite evidence
 - this plan directory and parent current-state plans
 
 **Tasks:**
 
-- [ ] Define the smallest immutable catalog interface needed by execution and
+- [x] Define the smallest immutable catalog interface needed by execution and
   catalog-aware checks.
-- [ ] Parse registry and selected suite bodies through one strict owner.
-- [ ] Remove raw registry and suite TOML parsing from `edge_dispositions`.
-- [ ] Route assertion diagnostics through status `1` and retain exact statuses
+- [x] Parse registry and suite bodies through one strict owner.
+- [x] Remove raw registry and suite TOML parsing from `edge_dispositions`.
+- [x] Route assertion diagnostics through status `1` and retain exact statuses
   for invalid, unavailable, and unsupported outcomes.
-- [ ] Add shared cross-check-kind status-contract evidence.
+- [x] Add shared cross-check-kind status-contract evidence.
 
 **Acceptance gate:** focused catalog, edge-disposition, and exit-contract tests;
 all Python and declarative gates; generated freshness; complete mixed checkpoint;
 and no fallback parser pass.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 3: Policy-Specific Interface Removal
 
@@ -308,9 +312,6 @@ accepted.
 
 ## Blockers
 
-- Corpus scope is unresolved. A 44-member normative-only manifest would remove
-  eight currently queryable reference nodes; an all-canonical corpus contains
-  58 documents and materially broadens the audit's stated graph scope.
 - Further Bash-checker package selection is paused until Milestones 1 through 4
   and the pre-resume terminal-disposition gate in Milestone 5 are accepted.
 

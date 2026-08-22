@@ -93,7 +93,6 @@ class EdgeDispositionsTest(unittest.TestCase):
             path = {json.dumps(path)}
             packages_path = "packages.tsv"
             edges_path = "edges.tsv"
-            registry_path = "registry.toml"
             participation_token = "edge-dispositions"
             edge_free_token = "edge-free"
             """,
@@ -180,6 +179,18 @@ class EdgeDispositionsTest(unittest.TestCase):
         self.admitted_contract()
 
         self.assertEqual(self.run_contract().status, "passed")
+
+    def test_contract_uses_the_catalog_snapshot_without_reparsing_toml(self) -> None:
+        self.admitted_contract()
+        verifier = Verifier(self.root, "registry.toml")
+        self.write("registry.toml", "not = [valid\n")
+        self.write("suites/edges.toml", "not = [valid\n")
+
+        result = next(
+            item for item in verifier.run(("edges",)) if item.id == "edges"
+        )
+
+        self.assertEqual(result.status, "passed")
 
     def test_admitted_inbound_independent_gate_passes(self) -> None:
         self.write("source.sh", "#!/usr/bin/env bash\n")

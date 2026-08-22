@@ -143,7 +143,7 @@ class RepositorySubjectsCheck:
                 )
                 continue
             if kind == "suite":
-                if identity not in context.registered_suite_ids:
+                if identity not in context.catalog.suite_ids:
                     raise EngineError(
                         Diagnostic(
                             "INPUT.SUITE_UNAVAILABLE",

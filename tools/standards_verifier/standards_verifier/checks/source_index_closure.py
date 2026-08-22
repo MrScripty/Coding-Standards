@@ -143,23 +143,21 @@ def _one_row(
     suite: str,
     check: str,
     label: str,
-) -> dict[str, str]:
+) -> tuple[dict[str, str] | None, Diagnostic | None]:
     matches = [row for row in rows if row[field] == value]
     if len(matches) != 1:
-        raise EngineError(
-            Diagnostic(
-                "ASSERT.SOURCE_INDEX_MEMBERSHIP",
-                "invalid",
-                f"source requires exactly one {label} row",
-                suite=suite,
-                check=check,
-                path=path,
-                field=field,
-                expected="single",
-                observed="empty" if not matches else "multiple",
-            )
+        return None, Diagnostic(
+            "ASSERT.SOURCE_INDEX_MEMBERSHIP",
+            "invalid",
+            f"source requires exactly one {label} row",
+            suite=suite,
+            check=check,
+            path=path,
+            field=field,
+            expected="single",
+            observed="empty" if not matches else "multiple",
         )
-    return matches[0]
+    return matches[0], None
 
 
 def _identifier_set(
@@ -170,19 +168,17 @@ def _identifier_set(
     path: str,
     suite: str,
     check: str,
-) -> frozenset[str]:
+) -> tuple[frozenset[str] | None, Diagnostic | None]:
     identifiers = [row["id"] for row in rows if row[source_field] == source]
     if not identifiers or any(not identifier for identifier in identifiers):
-        raise EngineError(
-            Diagnostic(
-                "ASSERT.SOURCE_INDEX_IDENTIFIERS",
-                "invalid",
-                "source requires non-empty frozen identifier membership",
-                suite=suite,
-                check=check,
-                path=path,
-                observed=source,
-            )
+        return None, Diagnostic(
+            "ASSERT.SOURCE_INDEX_IDENTIFIERS",
+            "invalid",
+            "source requires non-empty frozen identifier membership",
+            suite=suite,
+            check=check,
+            path=path,
+            observed=source,
         )
     if len(set(identifiers)) != len(identifiers):
         raise EngineError(
@@ -197,7 +193,7 @@ def _identifier_set(
                 observed=source,
             )
         )
-    return frozenset(identifiers)
+    return frozenset(identifiers), None
 
 
 def _split_destination(value: str, *, label: str, suite: str, check: str) -> tuple[str, str]:
@@ -327,7 +323,7 @@ class SourceIndexClosureCheck:
 
         seen_sources: set[str] = set()
         for fixture_dir in entries:
-            self._verify_fixture(
+            diagnostic = self._verify_fixture(
                 context,
                 fixture_dir,
                 manifest,
@@ -337,6 +333,8 @@ class SourceIndexClosureCheck:
                 router,
                 seen_sources,
             )
+            if diagnostic is not None:
+                return [diagnostic]
         return []
 
     def _verify_fixture(
@@ -349,7 +347,7 @@ class SourceIndexClosureCheck:
         dispositions: list[dict[str, str]],
         router: str,
         seen_sources: set[str],
-    ) -> None:
+    ) -> Diagnostic | None:
         root = context.repo_root.resolve()
         fixture_display = fixture_dir.relative_to(root).as_posix()
         fixture_entries = {entry.name for entry in fixture_dir.iterdir()}
@@ -438,7 +436,7 @@ class SourceIndexClosureCheck:
         )
         content = _read_utf8(source_file, source, context.suite_id, self.id)
 
-        manifest_row = _one_row(
+        manifest_row, diagnostic = _one_row(
             manifest,
             "source",
             source,
@@ -447,6 +445,9 @@ class SourceIndexClosureCheck:
             check=self.id,
             label="closure manifest",
         )
+        if diagnostic is not None:
+            return diagnostic
+        assert manifest_row is not None
         if manifest_row["current_shape"] not in {"concise", "expanded"} or manifest_row[
             "treatment"
         ] not in {"retain-index", "rewrite-index"}:
@@ -468,7 +469,7 @@ class SourceIndexClosureCheck:
             check=self.id,
         )
 
-        corpus_row = _one_row(
+        corpus_row, diagnostic = _one_row(
             corpus,
             "path",
             source,
@@ -477,6 +478,9 @@ class SourceIndexClosureCheck:
             check=self.id,
             label="corpus",
         )
+        if diagnostic is not None:
+            return diagnostic
+        assert corpus_row is not None
         required_corpus_fields = (
             "kind",
             "target_role",
@@ -486,16 +490,14 @@ class SourceIndexClosureCheck:
         if corpus_row["normative"] != "derived" or any(
             not corpus_row[field] for field in required_corpus_fields
         ):
-            raise EngineError(
-                Diagnostic(
-                    "ASSERT.SOURCE_INDEX_CORPUS",
-                    "invalid",
-                    "registered source requires a complete derived corpus row",
-                    suite=context.suite_id,
-                    check=self.id,
-                    path=self.corpus_path,
-                    observed=corpus_row["normative"],
-                )
+            return Diagnostic(
+                "ASSERT.SOURCE_INDEX_CORPUS",
+                "invalid",
+                "registered source requires a complete derived corpus row",
+                suite=context.suite_id,
+                check=self.id,
+                path=self.corpus_path,
+                observed=corpus_row["normative"],
             )
 
         headings_path = fixture_path("headings.tsv")
@@ -529,7 +531,7 @@ class SourceIndexClosureCheck:
             )
         observed_headings = tuple(heading.text for heading in scan_headings(content))
         if observed_headings != expected_headings:
-            return self._raise_assertion(
+            return self._assertion(
                 context,
                 "ASSERT.SOURCE_INDEX_HEADINGS",
                 "source headings do not match the complete ordered fixture",
@@ -541,7 +543,7 @@ class SourceIndexClosureCheck:
         line_count = source_file.read_bytes().count(b"\n")
         maximum_lines = int(contract["max_lines"])
         if line_count > maximum_lines:
-            return self._raise_assertion(
+            return self._assertion(
                 context,
                 "ASSERT.SOURCE_INDEX_LINE_BUDGET",
                 "source exceeds its explicit line budget",
@@ -615,7 +617,7 @@ class SourceIndexClosureCheck:
                 )
             observed_target = resolved_href.relative_to(root).as_posix()
             if observed_target != target_path or href_anchor != target_anchor:
-                return self._raise_assertion(
+                return self._assertion(
                     context,
                     "ASSERT.SOURCE_INDEX_ROUTE",
                     "route href does not resolve to its canonical target and anchor",
@@ -624,7 +626,7 @@ class SourceIndexClosureCheck:
                     observed=f"{observed_target}{'#' + href_anchor if href_anchor else ''}",
                 )
             if row["href"] not in destinations:
-                return self._raise_assertion(
+                return self._assertion(
                     context,
                     "ASSERT.SOURCE_INDEX_ROUTE",
                     "required route href is absent from the source Markdown destinations",
@@ -661,7 +663,7 @@ class SourceIndexClosureCheck:
         )
         for literal in (*GENERIC_PROHIBITED, *(row["literal"] for row in prohibited_rows)):
             if literal in content:
-                return self._raise_assertion(
+                return self._assertion(
                     context,
                     "ASSERT.SOURCE_INDEX_PROHIBITED",
                     "source retains prohibited legacy authority text",
@@ -671,7 +673,7 @@ class SourceIndexClosureCheck:
                 )
         for literal in REQUIRED_NON_AUTHORITY:
             if literal not in content:
-                return self._raise_assertion(
+                return self._assertion(
                     context,
                     "ASSERT.SOURCE_INDEX_NON_AUTHORITY",
                     "source lacks required non-authority text",
@@ -680,7 +682,7 @@ class SourceIndexClosureCheck:
                     observed="absent",
                 )
 
-        owner_ids = _identifier_set(
+        owner_ids, diagnostic = _identifier_set(
             owner_map,
             "current_path",
             source,
@@ -688,7 +690,9 @@ class SourceIndexClosureCheck:
             suite=context.suite_id,
             check=self.id,
         )
-        disposition_ids = _identifier_set(
+        if diagnostic is not None:
+            return diagnostic
+        disposition_ids, diagnostic = _identifier_set(
             dispositions,
             "source",
             source,
@@ -696,8 +700,12 @@ class SourceIndexClosureCheck:
             suite=context.suite_id,
             check=self.id,
         )
+        if diagnostic is not None:
+            return diagnostic
+        assert owner_ids is not None
+        assert disposition_ids is not None
         if owner_ids != disposition_ids:
-            return self._raise_assertion(
+            return self._assertion(
                 context,
                 "ASSERT.SOURCE_INDEX_IDENTIFIERS",
                 "owner-map and disposition identifier membership differs",
@@ -706,7 +714,7 @@ class SourceIndexClosureCheck:
                 observed=",".join(sorted(disposition_ids)),
             )
         if source in router:
-            return self._raise_assertion(
+            return self._assertion(
                 context,
                 "ASSERT.SOURCE_INDEX_ROUTER",
                 "Router selects a former normative source",
@@ -714,8 +722,9 @@ class SourceIndexClosureCheck:
                 expected="absent",
                 observed=source,
             )
+        return None
 
-    def _raise_assertion(
+    def _assertion(
         self,
         context: CheckContext,
         code: str,
@@ -724,18 +733,16 @@ class SourceIndexClosureCheck:
         *,
         expected: str,
         observed: str,
-    ) -> None:
-        raise EngineError(
-            Diagnostic(
-                code,
-                "invalid",
-                message,
-                suite=context.suite_id,
-                check=self.id,
-                path=path,
-                expected=expected,
-                observed=observed,
-            )
+    ) -> Diagnostic:
+        return Diagnostic(
+            code,
+            "invalid",
+            message,
+            suite=context.suite_id,
+            check=self.id,
+            path=path,
+            expected=expected,
+            observed=observed,
         )
 
 

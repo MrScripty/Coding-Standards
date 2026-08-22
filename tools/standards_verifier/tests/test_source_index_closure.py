@@ -164,27 +164,27 @@ class SourceIndexClosureTest(unittest.TestCase):
 
     def test_existing_contract_failures_are_typed(self) -> None:
         cases = {
-            "loose-entry": "SOURCE_INDEX.UNREGISTERED_ENTRY",
-            "partial-fixture": "SOURCE_INDEX.FIXTURE_SHAPE",
-            "contract-header": "TABLE.HEADER_CONTRACT",
-            "contract-field": "SOURCE_INDEX.CONTRACT_FIELDS",
-            "line-value": "SOURCE_INDEX.INVALID_LINE_BUDGET",
-            "absent-manifest": "ASSERT.SOURCE_INDEX_MEMBERSHIP",
-            "normative-corpus": "ASSERT.SOURCE_INDEX_CORPUS",
-            "heading-drift": "ASSERT.SOURCE_INDEX_HEADINGS",
-            "line-budget": "ASSERT.SOURCE_INDEX_LINE_BUDGET",
-            "duplicate-route": "TABLE.DUPLICATE_VALUE",
-            "unresolved-target": "INPUT.UNAVAILABLE",
-            "mismatched-href": "ASSERT.SOURCE_INDEX_ROUTE",
-            "escaping-href": "PATH.OUTSIDE_REPOSITORY",
-            "absent-href": "ASSERT.SOURCE_INDEX_ROUTE",
-            "legacy-authority": "ASSERT.SOURCE_INDEX_PROHIBITED",
-            "missing-non-authority": "ASSERT.SOURCE_INDEX_NON_AUTHORITY",
-            "identifier-disagreement": "ASSERT.SOURCE_INDEX_IDENTIFIERS",
-            "duplicate-identifier": "TABLE.DUPLICATE_KEY",
-            "router-selection": "ASSERT.SOURCE_INDEX_ROUTER",
+            "loose-entry": ("SOURCE_INDEX.UNREGISTERED_ENTRY", 2),
+            "partial-fixture": ("SOURCE_INDEX.FIXTURE_SHAPE", 2),
+            "contract-header": ("TABLE.HEADER_CONTRACT", 2),
+            "contract-field": ("SOURCE_INDEX.CONTRACT_FIELDS", 2),
+            "line-value": ("SOURCE_INDEX.INVALID_LINE_BUDGET", 2),
+            "absent-manifest": ("ASSERT.SOURCE_INDEX_MEMBERSHIP", 1),
+            "normative-corpus": ("ASSERT.SOURCE_INDEX_CORPUS", 1),
+            "heading-drift": ("ASSERT.SOURCE_INDEX_HEADINGS", 1),
+            "line-budget": ("ASSERT.SOURCE_INDEX_LINE_BUDGET", 1),
+            "duplicate-route": ("TABLE.DUPLICATE_VALUE", 2),
+            "unresolved-target": ("INPUT.UNAVAILABLE", 3),
+            "mismatched-href": ("ASSERT.SOURCE_INDEX_ROUTE", 1),
+            "escaping-href": ("PATH.OUTSIDE_REPOSITORY", 2),
+            "absent-href": ("ASSERT.SOURCE_INDEX_ROUTE", 1),
+            "legacy-authority": ("ASSERT.SOURCE_INDEX_PROHIBITED", 1),
+            "missing-non-authority": ("ASSERT.SOURCE_INDEX_NON_AUTHORITY", 1),
+            "identifier-disagreement": ("ASSERT.SOURCE_INDEX_IDENTIFIERS", 1),
+            "duplicate-identifier": ("TABLE.DUPLICATE_KEY", 2),
+            "router-selection": ("ASSERT.SOURCE_INDEX_ROUTER", 1),
         }
-        for mutation, expected_code in cases.items():
+        for mutation, (expected_code, expected_exit) in cases.items():
             with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as temporary:
                 root = Path(temporary)
                 self.build_repository(root)
@@ -193,6 +193,7 @@ class SourceIndexClosureTest(unittest.TestCase):
 
                 self.assertEqual(result.status, "failed")
                 self.assertEqual(result.diagnostics[0].code, expected_code)
+                self.assertEqual(result.exit_code, expected_exit)
 
     def apply_mutation(self, root: Path, mutation: str) -> None:
         fixture = root / "fixtures/source-closure/legacy"

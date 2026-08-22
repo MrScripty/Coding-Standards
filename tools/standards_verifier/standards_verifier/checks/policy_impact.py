@@ -22,7 +22,7 @@ class PolicyImpactCheck:
     cases: tuple[PolicyImpactCase, ...] | None
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
-        suite_paths = dict(context.registered_suite_paths)
+        suite_paths = dict(context.catalog.suite_paths)
         if self.source_registry is not None:
             load_registered_policy_impact(
                 context.repo_root,

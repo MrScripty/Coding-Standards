@@ -15,7 +15,7 @@ import sys
 sys.path.insert(0, str(ENGINE_ROOT))
 
 from standards_verifier.cli import main
-from standards_verifier.diagnostics import EngineError
+from standards_verifier.diagnostics import Diagnostic, EngineError
 from standards_verifier.engine import Verifier
 from standards_verifier.paths import contained_file, contained_path, repository_path
 
@@ -1248,6 +1248,19 @@ class EngineTest(unittest.TestCase):
         self.assertEqual(result.diagnostics[0].code, "ASSERT.DECISION_OUTCOME")
         self.assertEqual(result.diagnostics[0].row, 3)
 
+    def test_engine_errors_derive_exit_status_from_the_typed_outcome(self) -> None:
+        for outcome, expected_exit in (
+            ("invalid", 2),
+            ("unavailable", 3),
+            ("unsupported", 4),
+        ):
+            with self.subTest(outcome=outcome):
+                error = EngineError(Diagnostic("TEST.OUTCOME", outcome, "test"))
+                self.assertEqual(error.exit_code, expected_exit)
+
+        with self.assertRaisesRegex(ValueError, "contradicts"):
+            EngineError(Diagnostic("TEST.OUTCOME", "unavailable", "test"), 2)
+
     def test_unknown_suite_field_is_invalid(self) -> None:
         self.write("evidence.md", "required\n")
         suite_path = self.write_text_suite("text")
@@ -1382,6 +1395,30 @@ class EngineTest(unittest.TestCase):
         payload = json.loads(output.getvalue())
         self.assertEqual(status, 3)
         self.assertEqual(payload["results"][0]["diagnostics"][0]["outcome"], "unavailable")
+
+    def test_cli_formats_preserve_assertion_exit_classification(self) -> None:
+        suite_path = self.write_decision_suite(expected="allow")
+        self.write_registry([("decision", suite_path, [])])
+
+        for output_format in ("text", "json"):
+            with self.subTest(output_format=output_format):
+                output = io.StringIO()
+                with contextlib.redirect_stdout(output):
+                    status = main(
+                        [
+                            "--repo-root",
+                            str(self.root),
+                            "--registry",
+                            self.registry,
+                            "--all",
+                            "--format",
+                            output_format,
+                        ],
+                        default_repo_root=self.root,
+                    )
+
+                self.assertEqual(status, 1)
+                self.assertIn("ASSERT.DECISION_OUTCOME", output.getvalue())
 
 
 if __name__ == "__main__":

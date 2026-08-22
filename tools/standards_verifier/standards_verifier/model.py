@@ -14,14 +14,6 @@ class Check(Protocol):
 
 
 @dataclass(frozen=True, slots=True)
-class CheckContext:
-    repo_root: Path
-    suite_id: str
-    registered_suite_ids: frozenset[str]
-    registered_suite_paths: tuple[tuple[str, str], ...]
-
-
-@dataclass(frozen=True, slots=True)
 class Suite:
     id: str
     owner: str
@@ -34,6 +26,56 @@ class RegistryEntry:
     id: str
     path: str
     requires: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class SuiteCatalog:
+    registry_path: str
+    entries: tuple[RegistryEntry, ...]
+    suites: tuple[Suite, ...]
+
+    def __post_init__(self) -> None:
+        entry_ids = tuple(entry.id for entry in self.entries)
+        suite_ids = tuple(suite.id for suite in self.suites)
+        if entry_ids != suite_ids:
+            raise ValueError("catalog entries and suites must have identical ordered IDs")
+
+    @classmethod
+    def empty(cls) -> "SuiteCatalog":
+        return cls("", (), ())
+
+    @property
+    def suite_ids(self) -> frozenset[str]:
+        return frozenset(entry.id for entry in self.entries)
+
+    @property
+    def suite_paths(self) -> tuple[tuple[str, str], ...]:
+        return tuple((entry.id, entry.path) for entry in self.entries)
+
+    def entry(self, suite_id: str) -> RegistryEntry:
+        for entry in self.entries:
+            if entry.id == suite_id:
+                return entry
+        raise KeyError(f"suite is absent from the catalog: {suite_id}")
+
+    def suite(self, suite_id: str) -> Suite:
+        for suite in self.suites:
+            if suite.id == suite_id:
+                return suite
+        raise KeyError(f"suite is absent from the catalog: {suite_id}")
+
+    def suite_for_path(self, path: str) -> Suite | None:
+        for entry, suite in zip(self.entries, self.suites, strict=True):
+            if entry.path == path:
+                return suite
+        return None
+
+
+@dataclass(frozen=True, slots=True)
+class CheckContext:
+    repo_root: Path
+    suite_id: str
+    catalog: SuiteCatalog
 
 
 @dataclass(slots=True)

@@ -12,7 +12,7 @@ from ..graph_adapters import (
     METADATA_SPECIALIZES,
     metadata_dependency_registry,
 )
-from ..model import CheckContext
+from ..model import CheckContext, SuiteCatalog
 from ..paths import contained_file
 
 
@@ -96,7 +96,7 @@ def load_module_metadata(
     suite: str,
     check: str,
 ) -> ModuleMetadata:
-    context = CheckContext(root, suite, frozenset(), ())
+    context = CheckContext(root, suite, SuiteCatalog.empty())
     module, diagnostics = _parse_module(context, check, path)
     if diagnostics:
         raise EngineError(diagnostics[0])
@@ -111,7 +111,7 @@ def load_module_metadata_graph(
     suite: str,
     check: str,
 ) -> tuple[ModuleMetadata, ...]:
-    context = CheckContext(root, suite, frozenset(), ())
+    context = CheckContext(root, suite, SuiteCatalog.empty())
     modules, diagnostics = _validated_modules(context, check, paths)
     if diagnostics:
         raise EngineError(diagnostics[0])

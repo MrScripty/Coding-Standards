@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import tomllib
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -134,7 +133,6 @@ class EdgeDispositionsCheck:
     path: str
     packages_path: str
     edges_path: str
-    registry_path: str
     participation_token: str
     edge_free_token: str
 
@@ -161,7 +159,10 @@ class EdgeDispositionsCheck:
             suite=context.suite_id,
             check=self.id,
         )
-        registry_paths, registry_requires = self._load_registry(context)
+        registry_paths = dict(context.catalog.suite_paths)
+        registry_requires = {
+            entry.id: set(entry.requires) for entry in context.catalog.entries
+        }
 
         diagnostics: list[Diagnostic] = []
         packages: dict[str, dict[str, str]] = {}
@@ -705,9 +706,20 @@ class EdgeDispositionsCheck:
                     )
                 )
                 return
-            self._validate_assertion(
-                context, suite_path, assertion_id, line_number, diagnostics
-            )
+            suite = context.catalog.suite_for_path(suite_path)
+            if suite is None or assertion_id not in {check.id for check in suite.checks}:
+                diagnostics.append(
+                    _diagnostic(
+                        context,
+                        self.id,
+                        "ASSERT.EDGE_REPLACEMENT",
+                        "native assertion id is absent from the registered suite",
+                        path=self.path,
+                        row=line_number,
+                        field="replacement",
+                        observed=f"assertion:{suite_path}#{assertion_id}",
+                    )
+                )
             return
 
         source_suite, separator, target_suite = value.partition("->")
@@ -748,81 +760,6 @@ class EdgeDispositionsCheck:
                 )
             )
 
-    def _load_registry(
-        self, context: CheckContext
-    ) -> tuple[dict[str, str], dict[str, set[str]]]:
-        source = contained_file(
-            context.repo_root,
-            self.registry_path,
-            suite=context.suite_id,
-            check=self.id,
-        )
-        with source.open("rb") as handle:
-            raw = tomllib.load(handle)
-        entries = raw.get("suites")
-        if not isinstance(entries, list):
-            raise EngineError(
-                Diagnostic(
-                    "ASSERT.EDGE_REGISTRY",
-                    "invalid",
-                    "suite registry must contain suite entries",
-                    suite=context.suite_id,
-                    check=self.id,
-                    path=self.registry_path,
-                )
-            )
-        paths: dict[str, str] = {}
-        requires: dict[str, set[str]] = {}
-        for entry in entries:
-            if not isinstance(entry, dict):
-                continue
-            suite_id = entry.get("id")
-            path = entry.get("path")
-            dependencies = entry.get("requires")
-            if (
-                isinstance(suite_id, str)
-                and isinstance(path, str)
-                and isinstance(dependencies, list)
-                and all(isinstance(item, str) for item in dependencies)
-            ):
-                paths[suite_id] = path
-                requires[suite_id] = set(dependencies)
-        return paths, requires
-
-    def _validate_assertion(
-        self,
-        context: CheckContext,
-        suite_path: str,
-        assertion_id: str,
-        line_number: int,
-        diagnostics: list[Diagnostic],
-    ) -> None:
-        source = contained_file(
-            context.repo_root,
-            suite_path,
-            suite=context.suite_id,
-            check=self.id,
-        )
-        with source.open("rb") as handle:
-            raw = tomllib.load(handle)
-        checks = raw.get("checks")
-        if not isinstance(checks, list) or assertion_id not in {
-            item.get("id") for item in checks if isinstance(item, dict)
-        }:
-            diagnostics.append(
-                _diagnostic(
-                    context,
-                    self.id,
-                    "ASSERT.EDGE_REPLACEMENT",
-                    "native assertion id is absent from the registered suite",
-                    path=self.path,
-                    row=line_number,
-                    field="replacement",
-                    observed=f"assertion:{suite_path}#{assertion_id}",
-                )
-            )
-
-
 def parse_edge_dispositions_check(
     raw: dict[str, Any], suite_id: str
 ) -> EdgeDispositionsCheck:
@@ -832,7 +769,6 @@ def parse_edge_dispositions_check(
         "path",
         "packages_path",
         "edges_path",
-        "registry_path",
         "participation_token",
         "edge_free_token",
     }
@@ -862,7 +798,6 @@ def parse_edge_dispositions_check(
         _required_string(raw, "path", suite_id, check_id),
         _required_string(raw, "packages_path", suite_id, check_id),
         _required_string(raw, "edges_path", suite_id, check_id),
-        _required_string(raw, "registry_path", suite_id, check_id),
         _required_string(raw, "participation_token", suite_id, check_id),
         _required_string(raw, "edge_free_token", suite_id, check_id),
     )
