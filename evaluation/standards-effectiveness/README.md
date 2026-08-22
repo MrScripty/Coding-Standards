@@ -229,12 +229,12 @@ population. They validate 19 requirement, ownership, candidate, resolution,
 authorization, evidence, and no-fallback decisions plus routing, metadata,
 owner-state, and zero premature dispositions.
 
-`fixtures/rust/binding-core-adapter-testability-*.tsv` and
-`verify-rust-binding-core-adapter-testability.sh` require distinct
-framework-free core and real native/host adapter evidence. They reject
-framework-coupled core behavior, missing or failed evidence, native-only
-adapter claims, NIF-only architecture, skipped core checks, alternate
-frameworks, and default success with typed outcomes.
+`binding-core-adapter-testability-decisions.tsv` and the registered
+`rust-binding-core-adapter-testability` suite require distinct framework-free
+core and real native/host adapter evidence. They reject framework-coupled core
+behavior, missing or failed evidence, native-only adapter claims, NIF-only
+architecture, skipped core checks, alternate frameworks, and default success
+with typed outcomes.
 
 `fixtures/rust/binding-workspace-evidence-*.tsv` and the registered
 `rust-binding-workspace-evidence` suite select shared or separate Rust package

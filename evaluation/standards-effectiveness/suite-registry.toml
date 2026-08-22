@@ -1024,3 +1024,8 @@ requires = []
 id = "resilience-owner-contract"
 path = "evaluation/standards-effectiveness/suites/resilience-owner-contract.toml"
 requires = []
+
+[[suites]]
+id = "rust-binding-core-adapter-testability"
+path = "evaluation/standards-effectiveness/suites/rust-binding-core-adapter-testability.toml"
+requires = []

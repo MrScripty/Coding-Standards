@@ -4963,6 +4963,7 @@ drift. Final graph evidence contains 92 nodes, 592 edges, and 92 components
 with 184 registered suites and 88 retained Bash checkers. No policy, fixture,
 disposition, owner-validation, nested gate, engine, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changed.
+
 ### M6-I38 Architecture Composition-Root Admission
 
 Fresh post-M6-I37 evidence exposes 18 caller-free verifiers and selects the
@@ -4992,6 +4993,7 @@ drift. Final graph evidence contains 91 nodes, 589 edges, and 91 components
 with 185 registered suites and 87 retained Bash checkers. No policy, fixture,
 disposition, owner-validation, nested gate, engine, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changed.
+
 ### M6-I39 Architecture Data-Authority Admission
 
 Fresh post-M6-I38 evidence exposes 18 caller-free verifiers and selects the
@@ -5337,3 +5339,24 @@ graph interactions are complete, so no mixed checkpoint was triggered. Final
 evidence contains 67 Bash checkers, 71 nodes, 481 edges, and 71 components. No
 normative source, fixture, engine, helper, wrapper, compatibility
 representation, false dependency, dual authority, or fallback changed.
+
+### M6-I59 Rust Binding Core/Adapter Acceptance
+
+Fresh post-M6-I58 evidence selected the 99-line Rust binding core/adapter
+checker as the shortest caller-free verifier. The `serial-coherent` package
+replaces it with one six-check language-profile suite preserving 16 ordered
+decisions, exact section/disposition authority, profile and legacy-index text,
+and documentation projection.
+
+The obsolete schema and observed fixtures are deleted because strict TOML
+domains and the native decision assertion now own those contracts. Both helper
+edges resolve to that assertion, two historical records resolve to the suite,
+and architecture, conversions, row-5, and execution-train lifecycle remain
+independently executable through eight accepted records. Six disposable
+mutations reject every represented authority. All four retained gates, 342
+verifier tests, all 206 declarative suites, numeric lifecycle, and generated
+freshness pass. Exact final-state interactions are complete, so no mixed
+checkpoint was triggered. Final evidence contains 66 Bash checkers, 70 nodes,
+472 edges, and 70 components. No normative source, engine, helper, wrapper,
+compatibility representation, false dependency, dual authority, or fallback
+changed.

@@ -14535,3 +14535,20 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   graph interactions are complete, so no mixed checkpoint was triggered.
   Final graph: 67 Bash checkers, 71 nodes, 481 edges, 71 components. No
   fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I59 Rust Binding Core/Adapter Acceptance
+
+- Fresh post-M6-I58 evidence selected the 99-line Rust binding core/adapter
+  checker for one `serial-coherent` package at train order 174.
+- The registered six-check suite preserves 16 ordered decisions, exact
+  section/disposition authority, profile and legacy-index text, and the README
+  projection.
+- Obsolete schema and observed fixtures are removed. Both helper edges resolve
+  to the native decision assertion, two historical records resolve to the
+  suite, and architecture, conversions, row-5, and execution-train lifecycle
+  remain independent through eight accepted edge records.
+- Six negative mutations, all four retained gates, 342 verifier tests, all 206
+  declarative suites, numeric lifecycle, and generated freshness pass. Exact
+  final-state interactions are complete, so no mixed checkpoint was triggered.
+  Final graph: 66 Bash checkers, 70 nodes, 472 edges, 70 components. No
+  fallback or compatibility authority remains.

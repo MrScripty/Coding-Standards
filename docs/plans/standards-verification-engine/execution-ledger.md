@@ -6015,3 +6015,20 @@
   declarative suites, numeric lifecycle, and generated freshness pass. Final
   graph interactions are complete, so no mixed checkpoint was triggered.
   Final graph: 67 Bash checkers, 71 nodes, 481 edges, 71 components.
+
+## 2026-08-21 - M6-I59 Rust Binding Core/Adapter Acceptance
+
+- Fresh evidence selected the 99-line Rust binding core/adapter checker as the
+  shortest caller-free verifier and qualified it for `serial-coherent`
+  execution.
+- Replaced it with one six-check language-profile suite preserving 16 ordered
+  decisions, exact section/disposition authority, profile and legacy-index
+  text, and documentation projection.
+- Deleted the obsolete schema and observed fixtures; strict TOML domains and
+  the native decision assertion now own those contracts. Both helper edges map
+  to that assertion, two historical records resolve to the suite, and four
+  lifecycle checkers remain independent through eight accepted records.
+- Six negative mutations, all four retained gates, 342 verifier tests, all 206
+  declarative suites, numeric lifecycle, and generated freshness pass. Exact
+  final-state interactions are complete, so no mixed checkpoint was triggered.
+  Final graph: 66 Bash checkers, 70 nodes, 472 edges, 70 components.
