@@ -14552,3 +14552,21 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   final-state interactions are complete, so no mixed checkpoint was triggered.
   Final graph: 66 Bash checkers, 70 nodes, 472 edges, 70 components. No
   fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I60 Rust Async Boundary Acceptance
+
+- Fresh post-M6-I59 evidence selected the 100-line Rust async-boundary checker
+  for one `serial-coherent` package at train order 175.
+- The registered ten-check suite preserves 13 typed decisions, two exact
+  section and disposition records, metadata closure, Router and Rust-index
+  projections, canonical policy, bounded legacy replacement, later-section
+  preservation, and documentation authority.
+- Row-35 current consumer authority no longer names the checker. Four
+  historical M6-P8/M6-P9 records resolve to the suite, both metadata-helper
+  edges resolve to the native assertion, and Rust Async decomposition remains
+  independently executable through two records.
+- Ten negative mutations, the retained decomposition gate, 342 verifier tests,
+  all 207 declarative suites, numeric lifecycle, and generated freshness pass.
+  Exact final-state interactions are complete, so no mixed checkpoint was
+  triggered. Final graph: 65 Bash checkers, 69 nodes, 464 edges, 69 components.
+  No fallback or compatibility authority remains.

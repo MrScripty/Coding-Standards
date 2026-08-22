@@ -1029,3 +1029,8 @@ requires = []
 id = "rust-binding-core-adapter-testability"
 path = "evaluation/standards-effectiveness/suites/rust-binding-core-adapter-testability.toml"
 requires = []
+
+[[suites]]
+id = "rust-async-boundary"
+path = "evaluation/standards-effectiveness/suites/rust-async-boundary.toml"
+requires = []

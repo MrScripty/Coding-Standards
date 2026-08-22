@@ -5360,3 +5360,24 @@ checkpoint was triggered. Final evidence contains 66 Bash checkers, 70 nodes,
 472 edges, and 70 components. No normative source, engine, helper, wrapper,
 compatibility representation, false dependency, dual authority, or fallback
 changed.
+
+### M6-I60 Rust Async Boundary Acceptance
+
+Fresh post-M6-I59 evidence selected the 100-line Rust async-boundary checker as
+the shortest caller-free verifier. The `serial-coherent` package replaces it
+with one ten-check language-profile suite preserving 13 typed decisions, two
+exact section and disposition records, metadata closure, Router and Rust-index
+projections, canonical policy, bounded legacy replacement, later-section
+preservation, and documentation projection.
+
+Row-35 current consumer authority no longer names the checker. Four historical
+M6-P8/M6-P9 records now resolve to the suite, both metadata-helper edges resolve
+to the native metadata assertion, and Rust Async decomposition remains
+independently executable through two accepted records. Ten disposable
+mutations reject every represented authority. The retained decomposition gate,
+342 verifier tests, all 207 declarative suites, numeric lifecycle, and generated
+freshness pass. Exact final-state interactions are complete, so no mixed
+checkpoint was triggered. Final evidence contains 65 Bash checkers, 69 nodes,
+464 edges, and 69 components. No normative source, fixture, engine, helper,
+wrapper, compatibility representation, false dependency, dual authority, or
+fallback changed.

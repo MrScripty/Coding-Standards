@@ -922,11 +922,11 @@ typed capability failure. It proves exact disposition of `STD-0759`,
 `STD-0760`, `STD-0790`, and `STD-0791` and rejects layer merging, skipped core
 verification, hand-edited generated output, and alternate-framework fallback.
 
-`verify-rust-async-boundary.sh` checks contract-driven Rust sync/async
-selection, exact disposition of `STD-0717` and `STD-0718`, profile metadata and
-routing, bounded legacy replacement, later-section preservation, and rejection
-of caller-convenience, blanket-sync, runtime-creation, blocking, and detached-
-work fallback.
+The registered `rust-async-boundary` suite checks contract-driven Rust
+sync/async selection, exact disposition of `STD-0717` and `STD-0718`, profile
+metadata and routing, bounded legacy replacement, later-section preservation,
+and rejection of caller-convenience, blanket-sync, runtime-creation, blocking,
+and detached-work fallback.
 
 `verify-rust-async-lifecycle.sh` checks composition-owned runtime capability,
 tracked task/failure ownership, admission closure, drain completion, abort

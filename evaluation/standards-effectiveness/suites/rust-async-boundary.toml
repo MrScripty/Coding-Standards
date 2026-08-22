@@ -1,0 +1,152 @@
+schema_version = 1
+id = "rust-async-boundary"
+owner = "profile.language.rust.async"
+description = "Contract-driven Rust sync and async boundary selection without caller-convenience, blanket-sync, runtime-construction, blocking, or detached fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/async-boundary-decisions.tsv"
+expected_column = "expected"
+default = "sync"
+[checks.domains]
+case = ["*"]
+language = ["other", "rust"]
+suspends = ["no", "unknown", "yes"]
+async_contract = ["no", "unknown", "yes"]
+capability = ["available", "unavailable"]
+fallback = ["async-for-caller", "block", "create-runtime", "detach", "none", "sync-default"]
+expected = ["async", "not-applicable", "sync", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "not-applicable"
+[checks.rules.when]
+field = "language"
+op = "ne"
+value = "rust"
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+field = "fallback"
+op = "ne"
+value = "none"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "suspends", op = "eq", value = "unknown" },
+  { field = "async_contract", op = "eq", value = "unknown" },
+  { field = "capability", op = "eq", value = "unavailable" },
+]
+[[checks.rules]]
+outcome = "async"
+[checks.rules.when]
+all = [
+  { field = "suspends", op = "eq", value = "yes" },
+  { field = "async_contract", op = "eq", value = "yes" },
+]
+
+[[checks]]
+id = "section-inventory"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+order = "source"
+expected = [
+  ["STD-0717", "languages/rust/RUST-ASYNC-STANDARDS.md", "1", "1", "language-profile", "refine", "Rust Async Standards"],
+  ["STD-0718", "languages/rust/RUST-ASYNC-STANDARDS.md", "6", "2", "language-profile", "refine", "Sync Core, Async Shell"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0717", "STD-0718"]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0717", "languages/rust/RUST-ASYNC-STANDARDS.md", "profiles/languages/rust/async.md", "move", "establish the Rust Async specialization"],
+  ["STD-0718", "languages/rust/RUST-ASYNC-STANDARDS.md", "profiles/languages/rust/async.md", "refine", "select synchronous and asynchronous boundaries from the operation contract"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0717", "STD-0718"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/concurrency.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/async.md",
+]
+
+[[checks]]
+id = "routing-and-index"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["profiles/languages/rust/async.md"]
+prohibited = []
+
+[[checks]]
+id = "rust-index"
+type = "text"
+path = "profiles/languages/rust/README.md"
+required = ["(async.md)"]
+prohibited = []
+
+[[checks]]
+id = "canonical-profile"
+type = "text"
+path = "profiles/languages/rust/async.md"
+required = [
+  "## Select The Execution Contract",
+  "Do not add `async` merely because a caller is asynchronous.",
+  "## Preserve Genuine Async Contracts",
+  "typed `unsupported` or `unavailable`",
+  "## No Fallback",
+  "Runtime construction, task ownership, shutdown",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-foundation"
+type = "markdown_section_text"
+path = "languages/rust/RUST-ASYNC-STANDARDS.md"
+heading = "## Sync Core, Async Shell"
+required = ["profiles/languages/rust/async.md"]
+prohibited = ["Default to synchronous", "Libraries should default", "```rust", "fetch_user"]
+
+[[checks]]
+id = "legacy-later-sections"
+type = "text"
+path = "languages/rust/RUST-ASYNC-STANDARDS.md"
+required = [
+  "## Runtime Boundaries",
+  "## Task Lifecycle",
+  "## Graceful Shutdown",
+  "## Blocking Work",
+  "## Mutex Selection",
+  "## Cancellation Safety",
+  "## Observability",
+  "profiles/languages/rust/async.md",
+]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `rust-async-boundary` suite checks contract-driven Rust\nsync/async"]
+prohibited = ["`verify-rust-async-boundary.sh` checks contract-driven Rust sync/async"]

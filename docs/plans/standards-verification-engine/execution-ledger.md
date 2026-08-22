@@ -6032,3 +6032,21 @@
   declarative suites, numeric lifecycle, and generated freshness pass. Exact
   final-state interactions are complete, so no mixed checkpoint was triggered.
   Final graph: 66 Bash checkers, 70 nodes, 472 edges, 70 components.
+
+## 2026-08-21 - M6-I60 Rust Async Boundary Acceptance
+
+- Fresh evidence selected the 100-line Rust async-boundary checker as the
+  shortest caller-free verifier and qualified it for `serial-coherent`
+  execution.
+- Replaced it with one ten-check language-profile suite preserving 13 typed
+  decisions, two exact section and disposition records, metadata closure,
+  Router and Rust-index projections, canonical policy, bounded legacy
+  replacement, later-section preservation, and documentation projection.
+- Removed the retired row-35 consumer records, transferred four historical
+  M6-P8/M6-P9 records to suite authority, mapped both metadata-helper edges to
+  the native assertion, and retained Rust Async decomposition as an independent
+  gate through two records.
+- Ten negative mutations, the retained decomposition gate, 342 verifier tests,
+  all 207 declarative suites, numeric lifecycle, and generated freshness pass.
+  Exact final-state interactions are complete, so no mixed checkpoint was
+  triggered. Final graph: 65 Bash checkers, 69 nodes, 464 edges, 69 components.
