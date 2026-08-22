@@ -5403,3 +5403,35 @@ checkpoint was not triggered. Final evidence contains 64 Bash checkers, 68
 nodes, 456 edges, and 68 components. No normative source, fixture, engine,
 helper, wrapper, compatibility representation, false dependency, dual
 authority, or fallback changed.
+
+### M6-I62/M6-I63 Launcher Owner Wave Acceptance
+
+Fresh post-M6-I61 evidence contains 12 caller-free verifiers. The shortest
+candidate, `verify-undisposed-source-gaps.sh`, cannot be replaced faithfully by
+the current empty expected-gap table: its contract dynamically compares frozen
+baseline Markdown heading deletions with section identities and dispositions.
+It remains deferred until a separately reviewed bounded Git-diff mechanic is
+justified or the migration lifecycle can retire the invariant. A static empty
+table, inferred heading relation, or migration-specific fallback is not an
+acceptable replacement.
+
+The next two smallest candidates form one owner-coherent Launcher wave.
+`verify-launcher-owner-contract.sh` and
+`verify-milestone-7-row-14-decomposition.sh` share the row-14 source contract,
+owner, package evidence, and retained lifecycle gates. One ten-check registered
+suite preserves 16 typed owner decisions, canonical owner and Router text, all
+26 disposition identities, execution-train and accelerated-package authority,
+the exact five-child decomposition and identifier closure, canonical owner
+paths, the decomposition report, and README projection.
+
+Twelve historical incoming records now resolve to the suite. Ten package-local
+edge records preserve accelerated execution, execution train, and plan-fixture
+lifecycle as independently executed gates. Current active-plan and root-README
+consumer manifests no longer name either deleted checker. Eleven disposable
+mutations reject each represented authority, including a typed unavailable
+owner path. The three retained gates, 357 verifier tests, 35 graph tests, all
+209 declarative suites, generated freshness, and the complete wave checkpoint
+with all 62 retained Bash checkers pass. Final evidence contains 62 Bash
+checkers, 66 nodes, 441 edges, and 66 components. No normative source, fixture,
+engine, helper, wrapper, compatibility representation, false dependency, dual
+authority, or fallback changed.

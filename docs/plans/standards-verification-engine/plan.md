@@ -2,14 +2,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** verification-engine recovery Milestone 5 pre-resume gate accepted
+**Current phase:** Milestone 6 Bash retirement after the accepted verification-engine pre-resume gate
 
 **Next slice:** fresh graph audit for the next owner-coherent Bash retirement package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I61 replaced the Launcher population checker
-with one registered application-profile suite at train order 176.
+**Latest accepted slice:** the M6-I62/M6-I63 Launcher owner wave replaced the
+owner-contract and row-14 decomposition checkers with one registered suite at
+train orders 177 and 178.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph audit.
 
@@ -125,11 +126,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I61 at train
-order 176.
+**Accepted boundary:** package records are accepted through M6-I63 at train
+order 178.
 
-**Current derived state:** 208 registered declarative suites, 64 retained Bash
-checkers, 68 executable nodes, 456 conservative reference edges, and 68
+**Current derived state:** 209 registered declarative suites, 62 retained Bash
+checkers, 66 executable nodes, 441 conservative reference edges, and 66
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -143,7 +144,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I61 accepted at train order 176; fresh graph audit is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I63 accepted at train order 178; fresh graph audit is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -201,8 +202,8 @@ from fresh graph evidence.
 
 **Next work:**
 
-1. Complete the active Python verification engine design recovery before
-   selecting another package.
+1. Execute accepted terminal migration-Python dispositions at zero-Bash
+   closure; do not retain a path merely because migration history references it.
 2. Preserve accepted final-state consumer and edge transfers; do not
    reintroduce retired checkers as documentation or execution authority.
 3. Select each subsequent owner-coherent package from reviewed lifecycle and

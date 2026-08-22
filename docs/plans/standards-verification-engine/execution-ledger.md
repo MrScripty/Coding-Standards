@@ -6070,3 +6070,21 @@
   evidence leave no unresolved cumulative interaction, so no repeated mixed
   checkpoint was triggered. Final graph: 64 Bash checkers, 68 nodes, 456 edges,
   68 components.
+
+## 2026-08-21 - M6-I62/M6-I63 Launcher Owner Wave Acceptance
+
+- Fresh evidence deferred `verify-undisposed-source-gaps.sh` because no current
+  declarative mechanic preserves its baseline Git heading-diff closure; an
+  empty expected table would weaken the invariant.
+- Accepted one two-member owner wave at train orders 177 and 178. One
+  ten-check Launcher suite replaces the owner-contract and row-14 decomposition
+  checkers while preserving typed decisions, canonical projections, all 26
+  disposition identities, exact lifecycle rows, owner paths, and report and
+  README evidence.
+- Transferred 12 historical records to suite authority, preserved five
+  retained checker dependencies through 10 exact edge records, and removed the
+  two obsolete current-consumer rows. No Bash bridge or fallback remains.
+- Eleven negative mutations, 357 verifier tests, 35 graph tests, all 209
+  declarative suites, generated freshness, the three retained lifecycle gates,
+  and the complete owner-wave checkpoint pass. Final graph: 62 Bash checkers,
+  66 nodes, 441 edges, 66 components.

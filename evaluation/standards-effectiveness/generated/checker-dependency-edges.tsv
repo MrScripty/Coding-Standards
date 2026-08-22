@@ -10,14 +10,12 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-mechanism-selection.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-wire-representation.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-language-profile-routing.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-launcher-owner-contract.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-f025-f026-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-43-decomposition.sh
@@ -56,11 +54,9 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-ipc-payload-validation.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-wire-representation.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-profile-routing.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-launcher-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh
@@ -97,7 +93,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-ipc-payload-validation.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-launcher-owner-contract.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-dependencies.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-transitive-contract-callers.tsv	evaluation/standards-effectiveness/verify-binding-contract-evolution.sh
@@ -155,9 +150,6 @@ executable_reference	evaluation/standards-effectiveness/verify-language-binding-
 executable_reference	evaluation/standards-effectiveness/verify-language-binding-wire-representation.sh	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
 executable_reference	evaluation/standards-effectiveness/verify-language-binding-wire-representation.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-language-profile-routing.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
-executable_reference	evaluation/standards-effectiveness/verify-launcher-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
-executable_reference	evaluation/standards-effectiveness/verify-launcher-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-launcher-owner-contract.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/check-decision-table.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/verify-decision-table-engine.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
@@ -175,8 +167,6 @@ executable_reference	evaluation/standards-effectiveness/verify-milestone-7-indep
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
-executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
-executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh	evaluation/standards-effectiveness/verify-errexit-zero-accumulation.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh
@@ -349,9 +339,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-language-binding-w
 verifier_dependency	evaluation/standards-effectiveness/verify-language-binding-wire-representation.sh	evaluation/standards-effectiveness/verify-language-binding-boundary.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-language-binding-wire-representation.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-language-profile-routing.sh	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-launcher-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-launcher-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-launcher-owner-contract.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/verify-decision-table-engine.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
@@ -367,8 +354,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-indepe
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh	evaluation/standards-effectiveness/verify-errexit-zero-accumulation.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-42-decomposition.sh	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh

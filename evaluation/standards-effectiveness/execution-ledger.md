@@ -14586,3 +14586,19 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   immediately preceding shared checkpoint and complete interaction evidence
   avoid a redundant mixed checkpoint. Final graph: 64 Bash checkers, 68 nodes,
   456 edges, 68 components. No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I62/M6-I63 Launcher Owner Wave Acceptance
+
+- The first implemented owner wave replaces the Launcher owner-contract and
+  row-14 decomposition checkers with one registered ten-check suite at train
+  orders 177 and 178.
+- The suite preserves 16 typed decisions, canonical owner and Router evidence,
+  all 26 disposition identities, exact train/package/decomposition authority,
+  owner paths, report text, and README projection.
+- Twelve historical records now resolve to suite authority. Accelerated
+  execution, execution train, and plan fixtures remain independently executable
+  through ten accepted edge records; obsolete current-consumer rows are absent.
+- Eleven negative mutations, 357 verifier tests, 35 graph tests, all 209
+  declarative suites, generated freshness, and the complete checkpoint with all
+  62 retained Bash checkers pass. Final graph: 62 Bash checkers, 66 nodes, 441
+  edges, 66 components. No fallback or compatibility authority remains.

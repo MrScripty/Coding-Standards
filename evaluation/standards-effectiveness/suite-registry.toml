@@ -1039,3 +1039,8 @@ requires = []
 id = "launcher-population"
 path = "evaluation/standards-effectiveness/suites/launcher-population.toml"
 requires = []
+
+[[suites]]
+id = "launcher-owner-row-14"
+path = "evaluation/standards-effectiveness/suites/launcher-owner-row-14.toml"
+requires = []

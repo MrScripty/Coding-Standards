@@ -206,10 +206,10 @@ point-of-use object-lifetime proof while rejecting off-thread access,
 detached deferred work, check-then-use gaps, stale references, alternate
 dispatch, missing evidence, and default success.
 
-`fixtures/launcher/owner-contract-decisions.tsv` and
-`verify-launcher-owner-contract.sh` establish the Launcher application profile
-before row-14 population. They require declared action capability, exact
-procedure delegation, process lifecycle, and outcome preservation while
+`fixtures/launcher/owner-contract-decisions.tsv` and the registered
+`launcher-owner-row-14` suite establish the Launcher application profile and
+exact five-child row-14 decomposition. They require declared action capability,
+exact procedure delegation, process lifecycle, and outcome preservation while
 rejecting guessed actions or targets, alternate commands, successful no-ops,
 missing evidence, and default success.
 
