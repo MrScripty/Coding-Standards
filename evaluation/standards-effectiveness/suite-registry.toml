@@ -1079,3 +1079,8 @@ requires = []
 id = "rust-wire-representation"
 path = "evaluation/standards-effectiveness/suites/rust-wire-representation.toml"
 requires = []
+
+[[suites]]
+id = "rust-binding-callback-task"
+path = "evaluation/standards-effectiveness/suites/rust-binding-callback-task.toml"
+requires = []

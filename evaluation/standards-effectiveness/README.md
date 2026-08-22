@@ -501,9 +501,8 @@ They reject push/pull substitution, unbounded buffering, silent discard,
 lock-unsafe or wrong-thread callbacks, prior-event carry-forward, alternate
 runtimes, detached work, and default success.
 
-`fixtures/rust/binding-callback-task-decisions.tsv` and
-`verify-rust-binding-callback-task.sh` check selected task representation,
-callback authority, checked input/output, response correlation, fresh
+The registered `rust-binding-callback-task` suite checks selected task
+representation, callback authority, checked input/output, response correlation, fresh
 invocation state, scoped or lifecycle-owned async completion, cancellation,
 typed outcomes, real native/host evidence, one exact disposition, and bounded
 legacy replacement. They reject no-op executors, polling substitution,

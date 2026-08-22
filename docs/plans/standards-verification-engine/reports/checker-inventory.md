@@ -5689,3 +5689,24 @@ package provide the mixed-checkpoint boundary; no cumulative interaction
 trigger requires another mixed run. Final graph: 55 Bash checkers, 59 nodes,
 391 edges, and 59 components. No wrapper, copied policy, compatibility
 representation, dual authority, or fallback remains.
+
+### M6-I71 Rust Binding Callback Task Acceptance
+
+Fresh post-M6-I70 evidence selected the caller-free Rust callback-task checker.
+One reviewed one-column fixture owns `STD-0780`. The registered nine-check
+suite preserves all 22 task, authority, input, correlation, execution,
+ownership, cancellation, completion, capability, evidence, and fallback
+decisions; exact source and disposition membership; metadata closure; profile
+policy; bounded legacy indexing and structure; finding closure; and
+documentation projection.
+
+Ten M6-I71 records replace metadata execution with the native assertion and
+retain concurrency, execution-train, Rust async, and executor-delegation
+checkers as independent gates. Five disposable mutations reject altered
+precedence, unknown membership, weakened profile policy, restored legacy
+authority, and stale documentation. All retained gates, 386 verifier tests, 35
+graph tests, all 217 suites, numeric lifecycle, and generated freshness pass.
+Exact interactions with the retained gates keep cumulative evidence bounded,
+so no mixed-checkpoint trigger is reached. Final graph: 54 Bash checkers, 58
+nodes, 381 edges, and 58 components. No wrapper, copied policy, compatibility
+representation, dual authority, or fallback remains.

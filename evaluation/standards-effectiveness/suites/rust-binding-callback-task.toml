@@ -1,0 +1,134 @@
+schema_version = 1
+id = "rust-binding-callback-task"
+owner = "profile.language.rust.language-bindings"
+description = "Lifecycle-owned Rust host callback tasks with checked correlation, completion, cancellation, and typed outcomes."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-callback-task-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["selected", "missing", "contradictory"]
+task = ["supported", "unsupported"]
+authority = ["selected", "missing", "wrong"]
+input = ["validated", "invalid", "carried"]
+correlation = ["valid", "missing", "mismatch", "duplicate"]
+execution = ["inline", "async"]
+ownership = ["scoped", "tracked", "detached"]
+cancellation = ["preserved", "lost"]
+completion = ["success", "failure", "unresolved"]
+capability = ["available", "unavailable"]
+evidence = ["native-host", "native-only", "missing"]
+fallback = ["none", "noop", "polling", "alternate-runtime", "default-output", "default-success"]
+expected = ["allow", "preserve-failure", "typed-invalid", "typed-unsupported", "typed-unavailable", "typed-incomplete"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "contract", op = "eq", value = "contradictory" },
+  { field = "authority", op = "eq", value = "wrong" },
+  { field = "input", op = "ne", value = "validated" },
+  { field = "correlation", op = "ne", value = "valid" },
+  { field = "ownership", op = "eq", value = "detached" },
+  { field = "cancellation", op = "eq", value = "lost" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "task", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "contract", op = "eq", value = "missing" },
+  { field = "authority", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "unavailable" },
+  { field = "evidence", op = "ne", value = "native-host" },
+]
+[[checks.rules]]
+outcome = "typed-incomplete"
+[checks.rules.when]
+all = [{ field = "completion", op = "eq", value = "unresolved" }]
+[[checks.rules]]
+outcome = "preserve-failure"
+[checks.rules.when]
+all = [{ field = "completion", op = "eq", value = "failure" }]
+
+[[checks]]
+id = "source-membership"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+non_empty = ["id", "path"]
+unique = [["id"]]
+[checks.domains]
+path = ["languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"]
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-callback-task-members.tsv"
+header = ["id"]
+columns = ["id"]
+order = "source"
+key = "id"
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[checks.domains]
+source = ["languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"]
+target = ["profiles/languages/rust/language-bindings.md"]
+disposition = ["refine"]
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-callback-task-members.tsv"
+header = ["id"]
+columns = ["id"]
+order = "source"
+key = "id"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/concurrency.md", "topics/contracts.md", "topics/security.md", "profiles/boundaries/interop.md", "profiles/boundaries/language-bindings.md", "profiles/languages/rust/README.md", "profiles/languages/rust/async.md", "profiles/languages/rust/language-bindings.md"]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/language-bindings.md"
+required = ["## Host Callback Task Adaptation", "supported task identities and checked input and output representations", "synchronous or asynchronous completion and correlation identity", "Neither generated host code nor the adapter owns domain behavior", "release synchronization guards", "Each invocation has fresh task identity", "does not authorize carrying state from an earlier invocation", "resolve terminal completion", "with the selected Rust Async and Concurrency lifecycle owner", "does not synchronously drive async work", "Preserve host task failure and cancellation", "Return `invalid`", "`unsupported`", "`unavailable`", "selected typed incomplete outcome", "Do not install a no-op executor", "snapshot polling", "report default success"]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "### Callback-Based Task Execution"
+required = ["profiles/languages/rust/language-bindings.md#host-callback-task-adaptation"]
+prohibited = ["TaskExecutor: Send + Sync", "NoopTaskExecutor", "polling snapshots", "oneshot channel", "UniFFI", "Rustler", "```"]
+
+[[checks]]
+id = "legacy-structure"
+type = "text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+required = ["### Composite Executors"]
+prohibited = []
+
+[[checks]]
+id = "finding-closure"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F066 | Resolved in Milestone 7.4b8j |"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `rust-binding-callback-task` suite checks selected task representation,"]
+prohibited = ["`verify-rust-binding-callback-task.sh` check selected task representation,"]

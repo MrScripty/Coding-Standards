@@ -5,13 +5,13 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I70 graph audit; do not preselect the next
+**Next slice:** run a fresh post-M6-I71 graph audit; do not preselect the next
 package from evidence captured before this accepted package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I70 replaced the Rust wire-representation checker
-with one registered declarative suite at train order 185.
+**Latest accepted slice:** M6-I71 replaced the Rust binding callback-task
+checker with one registered declarative suite at train order 186.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph and
 ownership evidence.
@@ -130,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I70 at train
-order 185.
+**Accepted boundary:** package records are accepted through M6-I71 at train
+order 186.
 
-**Current derived state:** 216 registered declarative suites, 55 retained Bash
-checkers, 59 executable nodes, 391 conservative reference edges, and 59
+**Current derived state:** 217 registered declarative suites, 54 retained Bash
+checkers, 58 executable nodes, 381 conservative reference edges, and 58
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -148,7 +148,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I70 accepted at train order 185; fresh graph audit is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I71 accepted at train order 186; fresh graph audit is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

@@ -6217,3 +6217,16 @@
   lifecycle, and generated freshness pass. Final graph: 55 Bash checkers, 59
   nodes, 391 edges, 59 components. No fallback remains; the next slice is a
   fresh graph audit.
+
+## 2026-08-21 - M6-I71 Rust Binding Callback Task Acceptance
+
+- Fresh post-M6-I70 evidence selected one `serial-coherent` package at train
+  order 186, replacing the caller-free Rust callback-task checker with one
+  nine-check suite and one explicit member.
+- Preserved 22 typed decisions, exact disposition, metadata, profile, bounded
+  legacy, finding, and README evidence. Ten edge records replace metadata
+  execution and retain four independent gates.
+- Five mutations, all retained gates, 386 verifier tests, 35 graph tests, all
+  217 suites, numeric lifecycle, and generated freshness pass. Final graph: 54
+  Bash checkers, 58 nodes, 381 edges, 58 components. No fallback remains; the
+  next slice is a fresh graph audit.

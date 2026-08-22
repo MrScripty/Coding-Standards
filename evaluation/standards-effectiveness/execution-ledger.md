@@ -14713,3 +14713,12 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   216 suites, numeric lifecycle, and generated freshness pass. Final graph: 55
   Bash checkers, 59 nodes, 391 edges, 59 components. Fresh graph evidence is
   required before another package is selected.
+
+## 2026-08-21 - M6-I71 Rust Binding Callback Task Acceptance
+
+- Accepted train order 186 with one nine-check suite and explicit one-member
+  provider, removing the Rust callback-task Bash checker without fallback.
+- Five mutations, four retained gates, 386 verifier tests, 35 graph tests, all
+  217 suites, numeric lifecycle, and generated freshness pass. Final graph: 54
+  Bash checkers, 58 nodes, 381 edges, 58 components. Fresh graph evidence is
+  required before another package is selected.
