@@ -29,3 +29,10 @@ disposition = ["retain", "replace", "delete"]
 post_zero_consumer = ["none", "verification-engine.python-only-complete"]
 terminal_trigger = ["zero-bash-accepted"]
 evidence_owner = ["verification-engine.zero-bash-acceptance"]
+
+[[checks]]
+id = "migration-python-candidate-completeness"
+type = "migration_python_dispositions"
+path = "evaluation/standards-effectiveness/migration-python-dispositions.tsv"
+package_path = "tools/standards_verifier/standards_verifier"
+terminal_trigger = "zero-bash-accepted"

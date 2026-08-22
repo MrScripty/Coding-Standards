@@ -9,6 +9,9 @@ from .migration_graph import check_graph, write_graph
 from .numeric_retirements import check_retirements
 
 
+MIGRATION_TERMINAL_TRIGGER = "zero-bash-accepted"
+
+
 def check_generated_artifacts(root: Path) -> int:
     inventory_result = check_inventory(root)
     if inventory_result != 0:

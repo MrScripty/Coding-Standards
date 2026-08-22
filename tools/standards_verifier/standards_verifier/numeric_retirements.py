@@ -13,6 +13,9 @@ from .numeric_audit import NumericAuditDiagnostic, collect_candidates
 from .paths import contained_file, contained_path
 
 
+MIGRATION_TERMINAL_TRIGGER = "zero-bash-accepted"
+
+
 PACKAGES_PATH = Path(
     "evaluation/standards-effectiveness/numeric-candidate-retirement-packages.tsv"
 )

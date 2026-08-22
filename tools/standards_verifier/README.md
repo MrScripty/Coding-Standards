@@ -430,6 +430,25 @@ typed `CONFIG.*`, unavailable files remain `INPUT.UNAVAILABLE`, and a fixture
 whose observed sequence differs from its declared sequence produces
 `ASSERT.METADATA_FIXTURE`.
 
+The downstream `metadata_route` check connects reviewed decision outcomes to
+canonical module IDs. Its separate expectation table names exact direct modules
+and exact transitive `Requires` closure for every decision case. The check
+resolves the current canonical corpus and derives closure through the neutral
+graph engine; it does not copy edges into Python, infer modules from prose or
+links, or substitute a nearby route. Resolved rows reject unresolved selection
+values, unresolved rows reject partial selections, and decision and expectation
+case sets must match exactly.
+
+The temporary `migration_python_dispositions` check derives module and check-kind
+candidates from explicit top-level lifecycle declarations in Python source. A
+module declaration supplies the terminal trigger; a check module may also
+declare its registered check kinds. Module IDs and repository paths derive from
+the contained package location. The reviewed disposition table remains the
+decision owner and must cover the derived candidate set exactly. The check does
+not classify candidates from names, imports, links, directories, or the
+disposition table itself, and it terminates with the migration-only system at
+accepted zero-Bash closure.
+
 The `edge_dispositions` check validates migration packages against the exact
 generated executable graph. Packages opt into exactly one configured mode.
 `edge-dispositions` requires every incident `executable_reference`,

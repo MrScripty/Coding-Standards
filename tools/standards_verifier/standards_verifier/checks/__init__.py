@@ -24,6 +24,8 @@ from .markdown_links import parse_markdown_links_check
 from .markdown_section_text import parse_markdown_section_text_check
 from .markdown_structure import parse_markdown_structure_check
 from .metadata import parse_metadata_graph_check
+from .metadata_route import parse_metadata_route_check
+from .migration_python_dispositions import parse_migration_python_dispositions_check
 from .numeric_lifecycle import parse_numeric_lifecycle_check
 from .path_state import parse_path_state_check
 from .policy_impact import parse_policy_impact_check
@@ -86,6 +88,10 @@ def parse_check(raw: Any, suite_id: str) -> Check:
         return parse_policy_impact_check(raw, suite_id)
     if kind == "metadata_graph":
         return parse_metadata_graph_check(raw, suite_id)
+    if kind == "metadata_route":
+        return parse_metadata_route_check(raw, suite_id)
+    if kind == "migration_python_dispositions":
+        return parse_migration_python_dispositions_check(raw, suite_id)
     if kind == "reference_inventory":
         return parse_reference_inventory_check(raw, suite_id)
     if kind == "table":

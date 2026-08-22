@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 exact routing and terminal candidate completeness
+**Current phase:** Milestone 8 shared contract simplification
 
-**Next slice:** establish the canonical derivation designs for exact route
-closure and migration-only candidates before changing verifier code
+**Next slice:** unify projection parsing and remove the redundant EngineError
+status input before composing source-index membership
 
 **Acceptance status:** `pending`
 
@@ -30,11 +30,11 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | A1 | Every metadata-bearing canonical document is queryable by logical ID and path alias, with normative/routable membership, `Requires`, and `Specializes` derived from canonical metadata rather than validation-suite selection. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](execution-ledger.md#2026-08-21-milestone-1-acceptance) |
-| A2 | Verifier-interface scenarios select exact canonical modules and their graph-derived transitive `Requires` closure from Router facts, including positive, negative, and unresolved cases. | `focused` | `not-applicable` | `automated` | `partial` | Existing `s1-routing` decisions do not yet connect each scenario to exact module IDs and closure. |
+| A2 | Verifier-interface scenarios select exact canonical modules and their graph-derived transitive `Requires` closure from Router facts, including positive, negative, and unresolved cases. | `focused` | `not-applicable` | `automated` | `satisfied` | [Milestone 7 routing evidence](reports/milestone-7-routing-and-candidates.md) |
 | A3 | One validated immutable suite catalog supplies execution and checks; assertions and invalid, unavailable, and unsupported conditions return their documented statuses. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](execution-ledger.md#2026-08-21-milestone-2-acceptance) |
 | A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters, policy literals in generic checks, or independently repeated source-membership sets. | `integration` | `not-applicable` | `automated` | `partial` | Milestone 3 removed policy-specific check kinds, but source-index membership remains repeated across projected assertions. |
 | A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims with identified budget authority and current three-sample complete-workload evidence. | `focused` | `representative` | `automated` | `partial` | Milestone 4 evidence predates the current suite and Bash population and its post-change complete result was not sampled as specified. |
-| A6 | Every mechanically derived migration-only Python candidate has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `partial` | The current table validates present rows but does not prove candidate-set completeness; deletion remains due at zero Bash. |
+| A6 | Every mechanically derived migration-only Python candidate has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `partial` | Candidate completeness is satisfied by [Milestone 7 evidence](reports/milestone-7-routing-and-candidates.md); terminal deletion remains due at zero Bash. |
 | A7 | Graph, verifier, declarative, generated, plan, link, and mixed gates pass without dual authority, fallback, or a changed temporary Bash graph schema. | `complete` | `not-applicable` | `automated` | `pending` | Final acceptance |
 
 ## Scope
@@ -372,11 +372,11 @@ entire mechanically derived candidate set.
 
 **Tasks:**
 
-- [ ] Represent expected direct route selections without copying graph edges.
-- [ ] Resolve selected modules through canonical metadata and compare exact
+- [x] Represent expected direct route selections without copying graph edges.
+- [x] Resolve selected modules through canonical metadata and compare exact
   graph-derived transitive `Requires` closure for every scenario.
-- [ ] Preserve positive, negative, unresolved, and no-inference behavior.
-- [ ] Derive migration-only candidates from explicit provider or registration
+- [x] Preserve positive, negative, unresolved, and no-inference behavior.
+- [x] Derive migration-only candidates from explicit provider or registration
   authority, compare them exactly with disposition subjects, and add a deletion
   mutation test.
 
@@ -385,7 +385,8 @@ closure; candidate and disposition sets are exactly equal; deleting a candidate
 disposition fails; no lexical inference, duplicate authority, or fallback is
 introduced.
 
-**Status:** `Active`
+**Status:** `Accepted`; evidence in
+[routing and candidate completeness](reports/milestone-7-routing-and-candidates.md)
 
 ### Milestone 8: Shared Contract Simplification
 
@@ -417,7 +418,7 @@ keeping generic mechanics policy-neutral.
 authority, source membership has one policy owner, existing diagnostics and
 mutation behavior remain exact, and no compatibility path remains.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 9: Current Performance And Recovery Acceptance
 

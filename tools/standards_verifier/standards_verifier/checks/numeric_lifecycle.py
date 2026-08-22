@@ -13,6 +13,10 @@ from ..numeric_retirements import RETIREMENTS_HEADER
 from .table import read_table_rows
 
 
+MIGRATION_TERMINAL_TRIGGER = "zero-bash-accepted"
+MIGRATION_CHECK_KINDS = ("numeric_audit_lifecycle",)
+
+
 DECISIONS_HEADER = ("candidate_id", "semantic_class")
 PACKAGES_HEADER = (
     "train_order",

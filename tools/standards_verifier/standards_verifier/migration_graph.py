@@ -15,6 +15,9 @@ from .inventory import (
 )
 
 
+MIGRATION_TERMINAL_TRIGGER = "zero-bash-accepted"
+
+
 GENERATED_ROOT = Path("evaluation/standards-effectiveness/generated")
 NODE_OUTPUT_PATH = GENERATED_ROOT / "checker-dependency-nodes.tsv"
 EDGE_OUTPUT_PATH = GENERATED_ROOT / "checker-dependency-edges.tsv"

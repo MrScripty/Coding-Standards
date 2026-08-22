@@ -245,3 +245,23 @@
   and three-sample complete measurements justify them.
 - Result: Milestone 6 accepted. Milestone 7 is the only active implementation
   milestone.
+
+## 2026-08-21: Milestone 7 Acceptance
+
+- Added one downstream metadata-route adapter that maps reviewed decision
+  outcomes to exact canonical IDs and derives transitive `Requires` closure
+  through the existing neutral graph.
+- Corrected routing evidence so a material migration selects Planning while a
+  bounded local migration mechanic does not; missing authority or workload facts
+  remain unresolved.
+- Added module-local structural lifecycle declarations and one temporary AST
+  adapter that compares derived migration module/check-kind candidates exactly
+  with terminal dispositions. The adapter and its exposed check kind are
+  themselves terminally dispositioned.
+- No graph schema, edge authority, lexical route inference, copied candidate
+  inventory, compatibility representation, or fallback was introduced.
+- Evidence: 22 focused tests, 383 verifier tests, 35 graph tests, 215 declarative
+  suites, focused routing/package suites, generated freshness, mutation tests,
+  and diff checks passed.
+- Result: Milestone 7 accepted. Milestone 8 is the only active implementation
+  milestone.

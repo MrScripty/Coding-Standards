@@ -14,6 +14,9 @@ from .inventory import collect_inventory
 from .paths import contained_file
 
 
+MIGRATION_TERMINAL_TRIGGER = "zero-bash-accepted"
+
+
 OUTPUT_PATH = Path(
     "evaluation/standards-effectiveness/generated/"
     "numeric-comparison-candidates.tsv"

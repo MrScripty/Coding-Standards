@@ -10,6 +10,10 @@ from ..paths import contained_file
 from .table import read_table_rows
 
 
+MIGRATION_TERMINAL_TRIGGER = "zero-bash-accepted"
+MIGRATION_CHECK_KINDS = ("edge_dispositions",)
+
+
 MANIFEST_HEADER = (
     "package_id",
     "edge_type",

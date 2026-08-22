@@ -4,8 +4,8 @@
 
 **Current phase:** Python-engine audit follow-up recovery before further Milestone 6 Bash retirement
 
-**Next slice:** accept the recovery's current baseline and applicability gate;
-do not admit a checker package while shared verifier contracts are under review
+**Next slice:** complete the recovery's shared parser, diagnostics, and
+source-membership simplification; do not admit a checker package meanwhile
 
 **Acceptance status:** `pending`
 

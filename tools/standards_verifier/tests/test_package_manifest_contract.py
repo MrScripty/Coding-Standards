@@ -30,6 +30,10 @@ class PackageManifestContractTest(unittest.TestCase):
         self._copy(SUITE_PATH)
         self._copy(MANIFEST_PATH)
         self._copy(DISPOSITIONS_PATH)
+        shutil.copytree(
+            REPOSITORY_ROOT / "tools/standards_verifier/standards_verifier",
+            self.root / "tools/standards_verifier/standards_verifier",
+        )
         (self.root / "registry.toml").write_text(
             "schema_version = 1\n\n"
             "[[suites]]\n"

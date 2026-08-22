@@ -17,6 +17,7 @@ DEPENDENCY_PATTERN = re.compile(
 )
 OUTPUT_PATH = Path("evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv")
 GENERATED_ROOT = Path("evaluation/standards-effectiveness/generated")
+MIGRATION_TERMINAL_TRIGGER = "zero-bash-accepted"
 
 
 @dataclass(frozen=True, slots=True)

@@ -8,6 +8,9 @@ from .diagnostics import Diagnostic
 from .inventory import collect_inventory
 
 
+MIGRATION_TERMINAL_TRIGGER = "zero-bash-accepted"
+
+
 @dataclass(frozen=True, slots=True)
 class RetainedCheckerResult:
     checker_count: int

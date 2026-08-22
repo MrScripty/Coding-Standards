@@ -7,17 +7,18 @@ description = "Exact S1 Rust-library and verifier-change routing, metadata closu
 id = "verifier-change-routing"
 type = "decision"
 path = "evaluation/standards-effectiveness/fixtures/routing/verifier-change-decisions.tsv"
-input_columns = ["module_boundary", "dependency_direction", "performance_concern", "migration_lifecycle", "facts"]
+input_columns = ["module_boundary", "dependency_direction", "performance_concern", "migration_lifecycle", "planning_scope", "facts"]
 [checks.domains]
 case = ["*"]
 module_boundary = ["changed", "unchanged", "unknown"]
 dependency_direction = ["changed", "unchanged", "unknown"]
 performance_concern = ["changed", "none", "unknown"]
 migration_lifecycle = ["changed", "none", "unknown"]
+planning_scope = ["bounded", "material", "unknown"]
 facts = ["complete", "missing"]
 expected_architecture = ["exclude", "select", "unresolved"]
 expected_performance = ["exclude", "select", "unresolved"]
-expected_migration = ["exclude", "select", "unresolved"]
+expected_planning = ["exclude", "select", "unresolved"]
 expected_route = ["route", "unresolved"]
 
 [[checks.outputs]]
@@ -48,7 +49,7 @@ outcome = "select"
 all = [{ field = "performance_concern", op = "eq", value = "changed" }]
 
 [[checks.outputs]]
-column = "expected_migration"
+column = "expected_planning"
 default = "exclude"
 [[checks.outputs.rules]]
 outcome = "unresolved"
@@ -57,7 +58,10 @@ all = [{ field = "facts", op = "eq", value = "missing" }]
 [[checks.outputs.rules]]
 outcome = "select"
 [checks.outputs.rules.when]
-all = [{ field = "migration_lifecycle", op = "eq", value = "changed" }]
+all = [
+  { field = "migration_lifecycle", op = "eq", value = "changed" },
+  { field = "planning_scope", op = "eq", value = "material" },
+]
 
 [[checks.outputs]]
 column = "expected_route"
@@ -66,6 +70,22 @@ default = "route"
 outcome = "unresolved"
 [checks.outputs.rules.when]
 all = [{ field = "facts", op = "eq", value = "missing" }]
+
+[[checks]]
+id = "verifier-change-route-closure"
+type = "metadata_route"
+path = "evaluation/standards-effectiveness/fixtures/routing/verifier-change-decisions.tsv"
+header = ["case", "module_boundary", "dependency_direction", "performance_concern", "migration_lifecycle", "planning_scope", "facts", "expected_architecture", "expected_performance", "expected_planning", "expected_route"]
+expectations_path = "evaluation/standards-effectiveness/fixtures/routing/verifier-change-routes.tsv"
+route_column = "expected_route"
+resolved = "route"
+unresolved = "unresolved"
+base_modules = ["workflow.implementation", "workflow.verification"]
+selections = [
+  { column = "expected_architecture", selected = "select", excluded = "exclude", module = "topic.architecture" },
+  { column = "expected_performance", selected = "select", excluded = "exclude", module = "topic.performance" },
+  { column = "expected_planning", selected = "select", excluded = "exclude", module = "workflow.planning" },
+]
 
 [[checks]]
 id = "metadata-closure"
