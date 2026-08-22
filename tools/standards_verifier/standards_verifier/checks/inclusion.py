@@ -9,8 +9,7 @@ from ..model import CheckContext
 from .table import (
     ProjectedTableSource,
     parse_projected_table_source,
-    project_table_rows,
-    read_table_rows,
+    read_projected_table_rows,
 )
 
 
@@ -24,22 +23,8 @@ class InclusionCheck:
         root = context.repo_root
         if not isinstance(root, Path):
             raise TypeError("check context repository root must be a Path")
-        member_rows = read_table_rows(
-            root,
-            self.members.path,
-            self.members.header,
-            suite=context.suite_id,
-            check=self.id,
-        )
-        container_rows = read_table_rows(
-            root,
-            self.container.path,
-            self.container.header,
-            suite=context.suite_id,
-            check=self.id,
-        )
-        members = project_table_rows(member_rows, self.members.projection)
-        container = project_table_rows(container_rows, self.container.projection)
+        members = read_projected_table_rows(context, self.id, self.members)
+        container = read_projected_table_rows(context, self.id, self.container)
         unique_members = set(members)
         unique_container = set(container)
         if len(unique_members) != len(members) or len(unique_container) != len(

@@ -58,7 +58,7 @@ def load_registry(root: Path, registry_path: str) -> tuple[RegistryEntry, ...]:
             if dependency == entry.id:
                 raise EngineError(Diagnostic("CONFIG.SELF_DEPENDENCY", "invalid", "suite cannot depend on itself", suite=entry.id, path=registry_path))
             if dependency not in known:
-                raise EngineError(Diagnostic("CONFIG.UNKNOWN_DEPENDENCY", "unavailable", "suite dependency is not registered", suite=entry.id, path=registry_path, observed=dependency), exit_code=3)
+                raise EngineError(Diagnostic("CONFIG.UNKNOWN_DEPENDENCY", "unavailable", "suite dependency is not registered", suite=entry.id, path=registry_path, observed=dependency))
     _validate_acyclic(root, entries, registry_path)
     return tuple(entries)
 

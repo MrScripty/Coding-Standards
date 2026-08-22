@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 8 shared contract simplification
+**Current phase:** Milestone 9 current performance and recovery acceptance
 
-**Next slice:** unify projection parsing and remove the redundant EngineError
-status input before composing source-index membership
+**Next slice:** measure the current five named workloads under the accepted
+sampling contract and run the final recovery gates
 
 **Acceptance status:** `pending`
 
@@ -32,7 +32,7 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 | A1 | Every metadata-bearing canonical document is queryable by logical ID and path alias, with normative/routable membership, `Requires`, and `Specializes` derived from canonical metadata rather than validation-suite selection. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](execution-ledger.md#2026-08-21-milestone-1-acceptance) |
 | A2 | Verifier-interface scenarios select exact canonical modules and their graph-derived transitive `Requires` closure from Router facts, including positive, negative, and unresolved cases. | `focused` | `not-applicable` | `automated` | `satisfied` | [Milestone 7 routing evidence](reports/milestone-7-routing-and-candidates.md) |
 | A3 | One validated immutable suite catalog supplies execution and checks; assertions and invalid, unavailable, and unsupported conditions return their documented statuses. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](execution-ledger.md#2026-08-21-milestone-2-acceptance) |
-| A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters, policy literals in generic checks, or independently repeated source-membership sets. | `integration` | `not-applicable` | `automated` | `partial` | Milestone 3 removed policy-specific check kinds, but source-index membership remains repeated across projected assertions. |
+| A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters, policy literals in generic checks, or independently repeated source-membership sets. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 8 shared-contract acceptance](reports/milestone-8-shared-contracts.md) |
 | A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims with identified budget authority and current three-sample complete-workload evidence. | `focused` | `representative` | `automated` | `partial` | Milestone 4 evidence predates the current suite and Bash population and its post-change complete result was not sampled as specified. |
 | A6 | Every mechanically derived migration-only Python candidate has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `partial` | Candidate completeness is satisfied by [Milestone 7 evidence](reports/milestone-7-routing-and-candidates.md); terminal deletion remains due at zero Bash. |
 | A7 | Graph, verifier, declarative, generated, plan, link, and mixed gates pass without dual authority, fallback, or a changed temporary Bash graph schema. | `complete` | `not-applicable` | `automated` | `pending` | Final acceptance |
@@ -405,20 +405,21 @@ keeping generic mechanics policy-neutral.
 
 **Tasks:**
 
-- [ ] Extract one projection parser and layer source-specific requirements on
+- [x] Extract one projection parser and layer source-specific requirements on
   the shared parsed representation.
-- [ ] Remove the redundant numeric `EngineError.exit_code` input and derive it
+- [x] Remove the redundant numeric `EngineError.exit_code` input and derive it
   solely from the diagnostic outcome.
-- [ ] Establish one policy-owned source-index membership set and consume it by
+- [x] Establish one policy-owned source-index membership set and consume it by
   bounded composition without a generic query language.
-- [ ] Record the explicit Architecture result for the final design before
+- [x] Record the explicit Architecture result for the final design before
   changing exposed module or dependency responsibility.
 
 **Acceptance gate:** projection syntax has one parser, exit status has one
 authority, source membership has one policy owner, existing diagnostics and
 mutation behavior remain exact, and no compatibility path remains.
 
-**Status:** `Active`
+**Status:** `Accepted`; evidence in
+[shared-contract acceptance](reports/milestone-8-shared-contracts.md)
 
 ### Milestone 9: Current Performance And Recovery Acceptance
 

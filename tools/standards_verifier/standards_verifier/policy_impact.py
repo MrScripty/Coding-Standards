@@ -67,8 +67,7 @@ class PolicyImpactAdapter:
                     "unavailable",
                     "policy owner has no audited semantic-impact coverage",
                     observed=owner,
-                ),
-                exit_code=3,
+                )
             )
         return tuple(
             sorted(
@@ -107,8 +106,7 @@ def _diagnostic(
             path=path,
             field=field,
             observed=observed,
-        ),
-        exit_code=3 if unavailable else 2,
+        )
     )
 
 

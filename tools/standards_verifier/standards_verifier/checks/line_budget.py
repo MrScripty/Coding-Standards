@@ -83,8 +83,7 @@ class LineBudgetCheck:
                     path=self.baseline_path,
                     field="baseline_key",
                     observed=self.baseline_key,
-                ),
-                exit_code=3,
+                )
             )
         if len(matches) != 1:
             raise EngineError(

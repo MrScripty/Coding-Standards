@@ -265,3 +265,22 @@
   and diff checks passed.
 - Result: Milestone 7 accepted. Milestone 8 is the only active implementation
   milestone.
+
+## 2026-08-21: Milestone 8 Acceptance
+
+- Consolidated projected-table parsing and reading without changing the
+  accepted projection schema or retaining a compatibility path.
+- Removed the optional numeric `EngineError` status input; diagnostic outcome
+  is now the only process-status authority.
+- Replaced repeated eight-source literals with a membership projection derived
+  from existing corpus facts. No copied member fixture or stored count was
+  introduced.
+- Rejected an ambiguous one-to-many member mode after the complete 916-pair
+  relation proved a stronger invariant with existing mechanics.
+- Architecture is not selected: responsibility and dependency direction remain
+  inside existing verifier and suite owners.
+- Evidence: 126 focused tests, 386 verifier tests, 35 graph tests, all 215
+  declarative suites, the 43-check source-index suite, and generated freshness
+  passed.
+- Result: Milestone 8 accepted. Milestone 9 current performance revalidation is
+  the only next slice.

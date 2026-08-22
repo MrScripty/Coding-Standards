@@ -2,10 +2,12 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 verifier migration after terminal-disposition acceptance
+**Current phase:** Python-engine audit follow-up recovery before further
+Milestone 7 verifier migration
 
-**Next slice:** run a fresh post-M6-I69 graph audit; do not preselect the next
-package from earlier evidence
+**Next slice:** complete current performance sampling and recovery acceptance;
+then run a fresh post-M6-I69 graph audit without preselecting a package from
+earlier evidence
 
 **Acceptance status:** `partial`
 

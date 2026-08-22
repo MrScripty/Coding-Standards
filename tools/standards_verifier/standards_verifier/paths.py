@@ -75,8 +75,7 @@ def contained_file(
                 suite=suite,
                 check=check,
                 path=value,
-            ),
-            exit_code=3,
+            )
         )
     if not resolved_candidate.is_file():
         raise EngineError(

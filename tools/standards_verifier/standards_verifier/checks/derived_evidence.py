@@ -10,8 +10,7 @@ from ..paths import contained_file, contained_path
 from .table import (
     ProjectedTableSource,
     parse_projected_table_source,
-    project_table_rows,
-    read_table_rows,
+    read_projected_table_rows,
 )
 
 
@@ -70,14 +69,7 @@ def _values(
     *,
     require_unique: bool,
 ) -> tuple[tuple[str, ...], list[Diagnostic]]:
-    rows = read_table_rows(
-        context.repo_root,
-        source.path,
-        source.header,
-        suite=context.suite_id,
-        check=check_id,
-    )
-    projected = project_table_rows(rows, source.projection)
+    projected = read_projected_table_rows(context, check_id, source)
     values = tuple(value for (value,) in projected)
     diagnostics = []
     for value in values:
@@ -153,8 +145,7 @@ class RepositorySubjectsCheck:
                             check=self.id,
                             path=self.subjects.path,
                             observed=identity,
-                        ),
-                        exit_code=3,
+                        )
                     )
                 continue
 

@@ -10,7 +10,7 @@ from .predicates import Predicate, parse_predicate
 from .table import (
     ProjectedTableSource,
     parse_projected_table_source,
-    project_table_rows,
+    read_projected_table_rows,
     read_table_rows,
 )
 
@@ -153,14 +153,7 @@ class KeyedRelationCheck:
         root = context.repo_root
         if not isinstance(root, Path):
             raise TypeError("check context repository root must be a Path")
-        key_rows = read_table_rows(
-            root,
-            self.keys.path,
-            self.keys.header,
-            suite=context.suite_id,
-            check=self.id,
-        )
-        keys = project_table_rows(key_rows, self.keys.projection)
+        keys = read_projected_table_rows(context, self.id, self.keys)
         if not keys:
             return [
                 Diagnostic(

@@ -88,7 +88,7 @@ class Verifier:
             raise EngineError(Diagnostic("SELECTION.DUPLICATE", "invalid", "selected suite IDs must be unique"))
         for suite_id in selected:
             if suite_id not in self.catalog.suite_ids:
-                raise EngineError(Diagnostic("SELECTION.UNKNOWN_SUITE", "unavailable", "selected suite is not registered", suite=suite_id), exit_code=3)
+                raise EngineError(Diagnostic("SELECTION.UNKNOWN_SUITE", "unavailable", "selected suite is not registered", suite=suite_id))
         return selected
 
     def _execution_order(self, selected: tuple[str, ...]) -> tuple[str, ...]:

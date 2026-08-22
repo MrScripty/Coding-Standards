@@ -207,14 +207,15 @@ enable regular expressions, Unicode normalization, inferred variants, or
 approximate matching. Case-equivalent duplicates and required/prohibited
 contradictions are invalid under the selected mode.
 
-The `markdown_links` check accepts one explicit non-empty `paths` list and
-requires every inline repository-local Markdown destination to exist relative
-to its containing UTF-8 document. It skips only `http://`, `https://`, and
-`mailto:` destinations, removes fragments before resolution, and treats a
-fragment-only destination as the containing file. Absolute targets and parent
-or symlink escapes are invalid; missing sources or targets are unavailable. It
-does not fetch URLs, validate anchors, decode destinations, parse reference
-links, infer files, or normalize content.
+The `markdown_links` check accepts exactly one source: an explicit non-empty
+`paths` list or one strict projected table source named `members` that selects
+one nonempty unique path column. It requires every inline repository-local
+Markdown destination to exist relative to its containing UTF-8 document. It
+skips only `http://`, `https://`, and `mailto:` destinations, removes fragments
+before resolution, and treats a fragment-only destination as the containing
+file. Absolute targets and parent or symlink escapes are invalid; missing
+sources or targets are unavailable. It does not fetch URLs, validate anchors,
+decode destinations, parse reference links, infer files, or normalize content.
 
 The `markdown_link_coverage` check reads one contained UTF-8 Markdown `path`,
 one explicit comparison `identity`, and one strict projected table source named
@@ -334,6 +335,11 @@ empty constraint IDs, missing requirements, and unknown fields are invalid.
 The check does not infer membership, derive policy from numeric ID ranges,
 copy canonical rows, execute callbacks, combine ambiguous scopes, or fall back
 to an unscoped assertion.
+
+Every strict projected table source uses the same parser and reader for path,
+exact header, selected columns, order, predicate, and optional single-field
+split. Individual checks layer only their source role and row requirements on
+that shared contract.
 
 The `inclusion` check compares two strict projected table sources named
 `members` and `container`. Every unique projected member row must occur in the
@@ -519,4 +525,5 @@ Diagnostics support human-readable text and structured JSON through
 `--format text` and `--format json`. Assertion diagnostics travel through the
 ordinary result path and therefore return status `1`. Execution exceptions are
 classified from their typed outcome as invalid (`2`), unavailable (`3`), or
-unsupported (`4`), independent of output format.
+unsupported (`4`), independent of output format. `EngineError` derives that
+status from its diagnostic outcome and accepts no separate numeric override.

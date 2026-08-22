@@ -57,8 +57,7 @@ class PathStateCheck:
                         path=display_path,
                         expected="present",
                         observed="absent",
-                    ),
-                    exit_code=3,
+                    )
                 )
 
         for display_path in self.absent:

@@ -8,6 +8,11 @@ from typing import Any
 from ..diagnostics import Diagnostic, EngineError
 from ..model import CheckContext
 from ..paths import contained_file
+from .table import (
+    ProjectedTableSource,
+    parse_projected_table_source,
+    read_projected_table_rows,
+)
 
 
 LINK_PATTERN = re.compile(r"\]\(([^)]+)\)")
@@ -117,10 +122,33 @@ def local_markdown_targets(
 @dataclass(frozen=True, slots=True)
 class MarkdownLinksCheck:
     id: str
-    paths: tuple[str, ...]
+    paths: tuple[str, ...] | None
+    members: ProjectedTableSource | None
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
-        for display_path in self.paths:
+        if self.members is None:
+            if self.paths is None:
+                raise TypeError("Markdown link paths or members are required")
+            paths = self.paths
+        else:
+            projected = read_projected_table_rows(context, self.id, self.members)
+            paths = tuple(value for (value,) in projected)
+            if (
+                not paths
+                or any(not value for value in paths)
+                or len(set(paths)) != len(paths)
+            ):
+                return [
+                    Diagnostic(
+                        "ASSERT.MARKDOWN_LINK_MEMBERS",
+                        "invalid",
+                        "Markdown link members must be unique and non-empty",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.members.path,
+                    )
+                ]
+        for display_path in paths:
             for target in local_markdown_targets(context, self.id, display_path):
                 if not target.resolved_path.exists():
                     raise EngineError(
@@ -132,8 +160,7 @@ class MarkdownLinksCheck:
                             check=self.id,
                             path=display_path,
                             observed=target.destination,
-                        ),
-                        exit_code=3,
+                        )
                     )
         return []
 
@@ -141,7 +168,7 @@ class MarkdownLinksCheck:
 def parse_markdown_links_check(
     raw: dict[str, Any], suite_id: str
 ) -> MarkdownLinksCheck:
-    allowed = {"id", "type", "paths"}
+    allowed = {"id", "type", "paths", "members"}
     unknown = set(raw) - allowed
     if unknown:
         raise EngineError(
@@ -163,4 +190,45 @@ def parse_markdown_links_check(
                 suite=suite_id,
             )
         )
-    return MarkdownLinksCheck(check_id, _paths(raw.get("paths"), suite_id, check_id))
+    has_paths = "paths" in raw
+    has_members = "members" in raw
+    if has_paths == has_members:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.MARKDOWN_LINK_SOURCES",
+                "invalid",
+                "markdown_links requires exactly one of paths or members",
+                suite=suite_id,
+                check=check_id,
+            )
+        )
+    if has_paths:
+        return MarkdownLinksCheck(
+            check_id,
+            _paths(raw.get("paths"), suite_id, check_id),
+            None,
+        )
+    members = parse_projected_table_source(
+        raw.get("members"),
+        suite_id,
+        check_id,
+        "members",
+        invalid_code="CONFIG.MARKDOWN_LINK_MEMBERS",
+        source_name="Markdown link member source",
+        projection_name="Markdown link member projection",
+        predicate_name="Markdown link member predicate",
+    )
+    if (
+        len(members.projection.columns) != 1
+        or members.projection.split_field is not None
+    ):
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.MARKDOWN_LINK_MEMBERS",
+                "invalid",
+                "Markdown link members must select one unsplit column",
+                suite=suite_id,
+                check=check_id,
+            )
+        )
+    return MarkdownLinksCheck(check_id, None, members)

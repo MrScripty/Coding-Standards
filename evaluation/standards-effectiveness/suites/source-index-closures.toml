@@ -10,6 +10,7 @@ path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
 header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
 non_empty = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
 unique = [["order"], ["source"]]
+members = { key = "source", path = "evaluation/standards-effectiveness/corpus.tsv", header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"], columns = ["path"], order = "source", where = { all = [{ field = "kind", op = "eq", value = "standard" }, { field = "normative", op = "eq", value = "derived" }] } }
 [[checks.projections]]
 columns = ["source", "canonical_owner", "current_shape", "treatment"]
 order = "lexical"
@@ -23,11 +24,6 @@ expected = [
   ["PLAN-STANDARDS.md", "workflows/planning.md", "concise", "retain-index"],
   ["SECURITY-STANDARDS.md", "topics/security.md", "expanded", "rewrite-index"],
 ]
-[checks.projections.where]
-field = "source"
-op = "in"
-values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"]
-
 [[checks]]
 id = "canonical-owner-paths"
 type = "repository_paths"
@@ -36,7 +32,6 @@ path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
 header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
 columns = ["canonical_owner"]
 order = "source"
-where = { field = "source", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
 
 [[checks]]
 id = "corpus-membership"
@@ -45,6 +40,7 @@ path = "evaluation/standards-effectiveness/corpus.tsv"
 header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
 non_empty = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
 unique = [["path"]]
+members = { key = "path", path = "evaluation/standards-effectiveness/corpus.tsv", header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"], columns = ["path"], order = "source", where = { all = [{ field = "kind", op = "eq", value = "standard" }, { field = "normative", op = "eq", value = "derived" }] } }
 [[checks.projections]]
 columns = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
 order = "lexical"
@@ -58,11 +54,6 @@ expected = [
   ["PLAN-STANDARDS.md", "standard", "derived", "workflow", "replace", "git"],
   ["SECURITY-STANDARDS.md", "standard", "derived", "topic", "refine", "git"],
 ]
-[checks.projections.where]
-field = "path"
-op = "in"
-values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"]
-
 [[checks]]
 id = "owner-map-source-coverage"
 type = "key_coverage"
@@ -71,7 +62,6 @@ path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
 header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
 columns = ["source"]
 order = "source"
-where = { field = "source", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
 [checks.records]
 path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
 header = ["id", "current_path", "line", "future_owner", "disposition", "heading"]
@@ -86,7 +76,6 @@ path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
 header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
 columns = ["source"]
 order = "source"
-where = { field = "source", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
 [checks.records]
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
 header = ["id", "source", "target", "disposition", "rationale"]
@@ -102,13 +91,11 @@ path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
 header = ["id", "current_path", "line", "future_owner", "disposition", "heading"]
 columns = ["current_path", "id"]
 order = "source"
-where = { field = "current_path", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
 [checks.right]
 path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
 header = ["id", "source", "target", "disposition", "rationale"]
 columns = ["source", "id"]
 order = "source"
-where = { field = "source", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
 
 [[checks]]
 id = "declared-routes"
@@ -129,7 +116,12 @@ unique = [["source", "literal"]]
 [[checks]]
 id = "source-links"
 type = "markdown_links"
-paths = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"]
+[checks.members]
+path = "evaluation/standards-effectiveness/corpus.tsv"
+header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
+columns = ["path"]
+order = "source"
+where = { all = [{ field = "kind", op = "eq", value = "standard" }, { field = "normative", op = "eq", value = "derived" }] }
 
 [[checks]]
 id = "router-exclusion"
@@ -140,7 +132,6 @@ path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
 header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
 columns = ["source"]
 order = "source"
-where = { field = "source", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
 
 [[checks]]
 id = "coding-structure"

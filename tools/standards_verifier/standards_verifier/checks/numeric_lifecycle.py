@@ -134,8 +134,7 @@ def _translate_audit_error(
             check=check,
             path=error.path,
             row=error.row,
-        ),
-        exit_code=error.exit_code,
+        )
     )
 
 
@@ -374,8 +373,7 @@ class NumericLifecycleCheck:
                         check=self.id,
                         path=self.retirement_packages_path,
                         observed=package_id,
-                    ),
-                    exit_code=3,
+                    )
                 )
             if package["state"] != "accepted":
                 diagnostics.append(
@@ -427,8 +425,7 @@ class NumericLifecycleCheck:
                         check=self.id,
                         path=self.packages_path,
                         expected=subject,
-                    ),
-                    exit_code=3,
+                    )
                 )
             if len(packages) != 1:
                 diagnostics.append(
@@ -470,8 +467,7 @@ class NumericLifecycleCheck:
                         check=self.id,
                         path=self.packages_path,
                         field="owner",
-                    ),
-                    exit_code=3,
+                    )
                 )
         return diagnostics
 

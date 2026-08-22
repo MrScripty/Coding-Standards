@@ -9,8 +9,7 @@ from ..model import CheckContext
 from .table import (
     ProjectedTableSource,
     parse_projected_table_source,
-    project_table_rows,
-    read_table_rows,
+    read_projected_table_rows,
 )
 
 
@@ -25,22 +24,8 @@ class RelationCheck:
         root = context.repo_root
         if not isinstance(root, Path):
             raise TypeError("check context repository root must be a Path")
-        left_rows = read_table_rows(
-            root,
-            self.left.path,
-            self.left.header,
-            suite=context.suite_id,
-            check=self.id,
-        )
-        right_rows = read_table_rows(
-            root,
-            self.right.path,
-            self.right.header,
-            suite=context.suite_id,
-            check=self.id,
-        )
-        left = project_table_rows(left_rows, self.left.projection)
-        right = project_table_rows(right_rows, self.right.projection)
+        left = read_projected_table_rows(context, self.id, self.left)
+        right = read_projected_table_rows(context, self.id, self.right)
         if self.mode == "set":
             if len(set(left)) != len(left) or len(set(right)) != len(right):
                 return [

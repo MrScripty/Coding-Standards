@@ -68,6 +68,29 @@ class RoutingChecksTest(unittest.TestCase):
         )
         return suite_path
 
+    def write_markdown_member_suite(self, *, extra: str = "") -> str:
+        suite_path = "suites/routing.toml"
+        self.write(
+            suite_path,
+            f"""
+            schema_version = 1
+            id = "routing"
+            owner = "test.owner"
+            description = "Markdown link member test"
+
+            [[checks]]
+            id = "links"
+            type = "markdown_links"
+            {extra}
+            [checks.members]
+            path = "members.tsv"
+            header = ["path"]
+            columns = ["path"]
+            order = "source"
+            """,
+        )
+        return suite_path
+
     def write_markdown_coverage_suite(
         self,
         *,
@@ -157,6 +180,30 @@ class RoutingChecksTest(unittest.TestCase):
         result = self.result(self.write_markdown_suite())
 
         self.assertEqual(result.status, "passed")
+
+    def test_markdown_links_accept_projected_members(self) -> None:
+        self.write("docs/one.md", "[two](two.md)\n")
+        self.write("docs/two.md", "[one](one.md)\n")
+        self.write("members.tsv", "path\ndocs/one.md\ndocs/two.md\n")
+
+        result = self.result(self.write_markdown_member_suite())
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_links_reject_paths_and_members_together(self) -> None:
+        self.write("members.tsv", "path\ndocs/index.md\n")
+        suite_path = self.write_markdown_member_suite(
+            extra='paths = ["docs/index.md"]'
+        )
+        self.write_registry(suite_path)
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(
+            raised.exception.diagnostic.code,
+            "CONFIG.MARKDOWN_LINK_SOURCES",
+        )
 
     def test_markdown_links_missing_target_is_unavailable(self) -> None:
         self.write("docs/index.md", "[missing](missing.md)\n")

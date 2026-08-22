@@ -84,8 +84,7 @@ def _read_git_index(root: Path, suite: str, check: str) -> frozenset[str]:
                 "Git executable is unavailable",
                 suite=suite,
                 check=check,
-            ),
-            exit_code=3,
+            )
         ) from error
     if result.returncode != 0:
         raise EngineError(
@@ -96,8 +95,7 @@ def _read_git_index(root: Path, suite: str, check: str) -> frozenset[str]:
                 suite=suite,
                 check=check,
                 observed=str(result.returncode),
-            ),
-            exit_code=3,
+            )
         )
     if result.stdout and not result.stdout.endswith(b"\0"):
         raise EngineError(

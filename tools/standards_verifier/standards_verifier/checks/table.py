@@ -151,6 +151,154 @@ def project_table_rows(
     return tuple(projected)
 
 
+def read_projected_table_rows(
+    context: CheckContext,
+    check: str,
+    source: ProjectedTableSource,
+) -> tuple[tuple[str, ...], ...]:
+    rows = read_table_rows(
+        context.repo_root,
+        source.path,
+        source.header,
+        suite=context.suite_id,
+        check=check,
+    )
+    return project_table_rows(rows, source.projection)
+
+
+def _parse_projection_contract(
+    raw: Any,
+    header: tuple[str, ...],
+    suite: str,
+    check: str,
+    *,
+    allowed: set[str],
+    expected_required: bool,
+    label: str | None,
+    projection_name: str,
+    predicate_name: str,
+) -> Projection:
+    if not isinstance(raw, dict):
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.PROJECTION",
+                "invalid",
+                f"{projection_name} must be a TOML table",
+                suite=suite,
+                check=check,
+                field=label,
+            )
+        )
+    unknown = set(raw) - allowed
+    if unknown:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.UNKNOWN_FIELD",
+                "invalid",
+                f"{projection_name} contains unknown fields",
+                suite=suite,
+                check=check,
+                field=(
+                    f"{label}.{sorted(unknown)[0]}"
+                    if label is not None
+                    else sorted(unknown)[0]
+                ),
+            )
+        )
+    columns_field = f"{label}.columns" if label is not None else "columns"
+    columns = _strings(raw.get("columns"), columns_field, suite, check)
+    unknown_columns = set(columns) - set(header)
+    if unknown_columns:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.TABLE_COLUMN",
+                "invalid",
+                f"{projection_name} references an unknown column",
+                suite=suite,
+                check=check,
+                field=sorted(unknown_columns)[0],
+            )
+        )
+    order = raw.get("order")
+    if order not in {"source", "lexical"}:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.PROJECTION_ORDER",
+                "invalid",
+                f"{projection_name} order must be source or lexical",
+                suite=suite,
+                check=check,
+                field=label,
+                observed=str(order),
+            )
+        )
+    expected: tuple[tuple[str, ...], ...] = ()
+    if expected_required:
+        raw_expected = raw.get("expected")
+        if not isinstance(raw_expected, list) or any(
+            not isinstance(row, list)
+            or len(row) != len(columns)
+            or any(not isinstance(value, str) for value in row)
+            for row in raw_expected
+        ):
+            raise EngineError(
+                Diagnostic(
+                    "CONFIG.PROJECTION_EXPECTED",
+                    "invalid",
+                    "projection expected rows must match selected column width",
+                    suite=suite,
+                    check=check,
+                )
+            )
+        expected = tuple(tuple(row) for row in raw_expected)
+    where = None
+    if "where" in raw:
+        where = parse_predicate(raw["where"], suite, check)
+        unknown_fields = where.fields() - set(header)
+        if unknown_fields:
+            raise EngineError(
+                Diagnostic(
+                    "CONFIG.TABLE_COLUMN",
+                    "invalid",
+                    f"{predicate_name} references an unknown column",
+                    suite=suite,
+                    check=check,
+                    field=sorted(unknown_fields)[0],
+                )
+            )
+    split_field = None
+    split_delimiter = None
+    if "split" in raw:
+        split = raw["split"]
+        if (
+            not isinstance(split, dict)
+            or set(split) != {"field", "delimiter"}
+            or split.get("field") not in columns
+            or not isinstance(split.get("delimiter"), str)
+            or not split["delimiter"]
+        ):
+            raise EngineError(
+                Diagnostic(
+                    "CONFIG.PROJECTION_SPLIT",
+                    "invalid",
+                    "split requires one selected field and a non-empty delimiter",
+                    suite=suite,
+                    check=check,
+                    field=label,
+                )
+            )
+        split_field = split["field"]
+        split_delimiter = split["delimiter"]
+    return Projection(
+        columns,
+        order,
+        expected,
+        where,
+        split_field,
+        split_delimiter,
+    )
+
+
 def parse_projected_table_source(
     raw: Any,
     suite: str,
@@ -199,77 +347,16 @@ def parse_projected_table_source(
             )
         )
     header = _strings(raw.get("header"), f"{label}.header", suite, check)
-    columns = _strings(raw.get("columns"), f"{label}.columns", suite, check)
-    unknown_columns = set(columns) - set(header)
-    if unknown_columns:
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.TABLE_COLUMN",
-                "invalid",
-                f"{projection_name} references an unknown column",
-                suite=suite,
-                check=check,
-                field=sorted(unknown_columns)[0],
-            )
-        )
-    order = raw.get("order")
-    if order not in {"source", "lexical"}:
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.PROJECTION_ORDER",
-                "invalid",
-                f"{projection_name} order must be source or lexical",
-                suite=suite,
-                check=check,
-                field=label,
-                observed=str(order),
-            )
-        )
-    where = None
-    if "where" in raw:
-        where = parse_predicate(raw["where"], suite, check)
-        unknown_fields = where.fields() - set(header)
-        if unknown_fields:
-            raise EngineError(
-                Diagnostic(
-                    "CONFIG.TABLE_COLUMN",
-                    "invalid",
-                    f"{predicate_name} references an unknown column",
-                    suite=suite,
-                    check=check,
-                    field=sorted(unknown_fields)[0],
-                )
-            )
-    split_field = None
-    split_delimiter = None
-    if "split" in raw:
-        split = raw["split"]
-        if (
-            not isinstance(split, dict)
-            or set(split) != {"field", "delimiter"}
-            or split.get("field") not in columns
-            or not isinstance(split.get("delimiter"), str)
-            or not split["delimiter"]
-        ):
-            raise EngineError(
-                Diagnostic(
-                    "CONFIG.PROJECTION_SPLIT",
-                    "invalid",
-                    "split requires one selected field and a non-empty delimiter",
-                    suite=suite,
-                    check=check,
-                    field=label,
-                )
-            )
-        split_field = split["field"]
-        split_delimiter = split["delimiter"]
-    projection = Projection(
-        columns,
-        order,
-        (),
-        where,
-        split_field,
-        split_delimiter,
+    projection = _parse_projection_contract(
+        raw,
+        header,
+        suite,
+        check,
+        allowed=allowed,
+        expected_required=False,
+        label=label,
+        projection_name=projection_name,
+        predicate_name=predicate_name,
     )
     return ProjectedTableSource(path, header, projection)
 
@@ -521,114 +608,16 @@ class TableCheck:
 def _projection(
     raw: Any, header: tuple[str, ...], suite: str, check: str
 ) -> Projection:
-    if not isinstance(raw, dict):
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.PROJECTION",
-                "invalid",
-                "projection must be a TOML table",
-                suite=suite,
-                check=check,
-            )
-        )
-    allowed = {"columns", "order", "expected", "where", "split"}
-    unknown = set(raw) - allowed
-    if unknown:
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.UNKNOWN_FIELD",
-                "invalid",
-                "projection contains unknown fields",
-                suite=suite,
-                check=check,
-                field=sorted(unknown)[0],
-            )
-        )
-    columns = _strings(raw.get("columns"), "columns", suite, check)
-    unknown_columns = set(columns) - set(header)
-    if unknown_columns:
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.TABLE_COLUMN",
-                "invalid",
-                "projection references an unknown column",
-                suite=suite,
-                check=check,
-                field=sorted(unknown_columns)[0],
-            )
-        )
-    order = raw.get("order")
-    if order not in {"source", "lexical"}:
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.PROJECTION_ORDER",
-                "invalid",
-                "projection order must be source or lexical",
-                suite=suite,
-                check=check,
-                observed=str(order),
-            )
-        )
-    raw_expected = raw.get("expected")
-    if not isinstance(raw_expected, list) or any(
-        not isinstance(row, list)
-        or len(row) != len(columns)
-        or any(not isinstance(value, str) for value in row)
-        for row in raw_expected
-    ):
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.PROJECTION_EXPECTED",
-                "invalid",
-                "projection expected rows must match selected column width",
-                suite=suite,
-                check=check,
-            )
-        )
-    where = None
-    if "where" in raw:
-        where = parse_predicate(raw["where"], suite, check)
-        unknown_fields = where.fields() - set(header)
-        if unknown_fields:
-            raise EngineError(
-                Diagnostic(
-                    "CONFIG.TABLE_COLUMN",
-                    "invalid",
-                    "projection predicate references an unknown column",
-                    suite=suite,
-                    check=check,
-                    field=sorted(unknown_fields)[0],
-                )
-            )
-    split_field = None
-    split_delimiter = None
-    if "split" in raw:
-        split = raw["split"]
-        if (
-            not isinstance(split, dict)
-            or set(split) != {"field", "delimiter"}
-            or split.get("field") not in columns
-            or not isinstance(split.get("delimiter"), str)
-            or not split["delimiter"]
-        ):
-            raise EngineError(
-                Diagnostic(
-                    "CONFIG.PROJECTION_SPLIT",
-                    "invalid",
-                    "split requires one selected field and a non-empty delimiter",
-                    suite=suite,
-                    check=check,
-                )
-            )
-        split_field = split["field"]
-        split_delimiter = split["delimiter"]
-    return Projection(
-        columns,
-        order,
-        tuple(tuple(row) for row in raw_expected),
-        where,
-        split_field,
-        split_delimiter,
+    return _parse_projection_contract(
+        raw,
+        header,
+        suite,
+        check,
+        allowed={"columns", "order", "expected", "where", "split"},
+        expected_required=True,
+        label=None,
+        projection_name="projection",
+        predicate_name="projection predicate",
     )
 
 
@@ -704,7 +693,12 @@ def _row_constraint(
 
 
 def _member_scope(
-    raw: Any, header: tuple[str, ...], suite: str, check: str
+    raw: Any,
+    header: tuple[str, ...],
+    suite: str,
+    check: str,
+    *,
+    label: str = "members",
 ) -> MemberScope:
     if not isinstance(raw, dict):
         raise EngineError(
@@ -714,7 +708,7 @@ def _member_scope(
                 "table members must be a TOML table",
                 suite=suite,
                 check=check,
-                field="members",
+                field=label,
             )
         )
     key = raw.get("key")
@@ -726,7 +720,7 @@ def _member_scope(
                 "table member key must name one canonical table column",
                 suite=suite,
                 check=check,
-                field="members.key",
+                field=f"{label}.key",
                 observed=str(key),
             )
         )
@@ -736,7 +730,7 @@ def _member_scope(
         source_raw,
         suite,
         check,
-        "members",
+        label,
         invalid_code="CONFIG.TABLE_MEMBERS",
         source_name="table member source",
         projection_name="table member projection",
@@ -753,7 +747,7 @@ def _member_scope(
                 "table member projection must select exactly one unsplit column",
                 suite=suite,
                 check=check,
-                field="members.columns",
+                field=f"{label}.columns",
             )
         )
     return MemberScope(source, key)

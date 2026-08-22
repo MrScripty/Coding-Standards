@@ -10,8 +10,7 @@ from .markdown_links import local_markdown_targets
 from .table import (
     ProjectedTableSource,
     parse_projected_table_source,
-    project_table_rows,
-    read_table_rows,
+    read_projected_table_rows,
 )
 
 
@@ -23,14 +22,7 @@ class MarkdownLinkCoverageCheck:
     members: ProjectedTableSource
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
-        rows = read_table_rows(
-            context.repo_root,
-            self.members.path,
-            self.members.header,
-            suite=context.suite_id,
-            check=self.id,
-        )
-        projected = project_table_rows(rows, self.members.projection)
+        projected = read_projected_table_rows(context, self.id, self.members)
         members = tuple(value for (value,) in projected)
         if not members:
             return [

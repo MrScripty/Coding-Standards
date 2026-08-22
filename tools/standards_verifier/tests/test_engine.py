@@ -730,6 +730,23 @@ class EngineTest(unittest.TestCase):
         self.assertEqual(result.status, "failed")
         self.assertEqual(result.diagnostics[0].code, "ASSERT.TABLE_PROJECTION")
 
+    def test_table_projection_parser_retains_inline_field_identity(self) -> None:
+        suite_path = self.write_table_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'columns = ["id", "state"]', 'columns = "id"', 1
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("table", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.STRING_LIST")
+        self.assertEqual(raised.exception.diagnostic.field, "columns")
+
     def test_malformed_table_row_is_invalid(self) -> None:
         self.write("rows.tsv", "id\tstate\ttags\na\tready\n")
         suite_path = self.write_table_suite()
@@ -1478,9 +1495,6 @@ class EngineTest(unittest.TestCase):
             with self.subTest(outcome=outcome):
                 error = EngineError(Diagnostic("TEST.OUTCOME", outcome, "test"))
                 self.assertEqual(error.exit_code, expected_exit)
-
-        with self.assertRaisesRegex(ValueError, "contradicts"):
-            EngineError(Diagnostic("TEST.OUTCOME", "unavailable", "test"), 2)
 
     def test_unknown_suite_field_is_invalid(self) -> None:
         self.write("evidence.md", "required\n")
