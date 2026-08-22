@@ -17,10 +17,11 @@
 ## Objective
 
 Classify local Git worktree registrations and branch refs, retire only exact
-resource sets under separately accepted authority, preserve detached commit
-reachability before removing an administrative root, and record any exact
-authorized unique-commit retirement without treating age, count, ancestry, or
-patch equivalence as deletion authority.
+resource sets under separately accepted authority, reconcile the historical
+administrative-root removal by protecting every reconstructed detached head,
+require reachability protection before any future administrative root is
+removed, and record any exact authorized unique-commit retirement without
+treating age, count, ancestry, or patch equivalence as deletion authority.
 
 ## Objective Acceptance
 
