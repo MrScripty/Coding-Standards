@@ -2,17 +2,18 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6 Bash retirement after the accepted verification-engine pre-resume gate
+**Current phase:** Python-engine audit follow-up recovery before further Milestone 6 Bash retirement
 
-**Next slice:** run a fresh post-M6-I69 graph audit; do not preselect the next
-package from earlier evidence
+**Next slice:** accept the recovery's current baseline and applicability gate;
+do not admit a checker package while shared verifier contracts are under review
 
 **Acceptance status:** `pending`
 
 **Latest accepted slice:** M6-I69 replaced the Rust binding enum representation
 checker with one registered declarative suite at train order 184.
 
-**Latest admitted slice:** `none`; the next package requires fresh graph audit.
+**Latest admitted slice:** `none`; Bash retirement is paused until the active
+Python-engine recovery is accepted from current evidence.
 
 **Accepted dependency:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
 

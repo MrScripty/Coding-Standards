@@ -226,3 +226,22 @@
 - Result: the pre-resume Milestone 5 gate is accepted. Milestone 5 remains
   active until its zero-Bash terminal dispositions execute; checker migration
   may resume only from a fresh graph audit.
+
+## 2026-08-21: Audit Follow-Up Admission And Milestone 6 Acceptance
+
+- Operation: `continue` at accepted base
+  `56f5124b1ed848fa80b8f35e46a298d4a33ed37c`.
+- The external audit's eight findings remain reproducible at the current base.
+  Bash retirement is paused with no package admitted.
+- Current derived state is 215 suites, 56 retained Bash checkers, 373 verifier
+  tests, 35 neutral graph tests, 60 temporary nodes, 401 edges, and 60
+  components.
+- Architecture is selected for exact routing closure and migration-candidate
+  provider responsibility. It is explicitly excluded for the already accepted
+  table features, parser consolidation, diagnostic-input removal, and
+  performance evidence because those do not change architectural boundaries.
+- Performance is selected. The recovery plan owns the five local workflow
+  budgets; historical values are provisional until current seven-sample fast
+  and three-sample complete measurements justify them.
+- Result: Milestone 6 accepted. Milestone 7 is the only active implementation
+  milestone.
