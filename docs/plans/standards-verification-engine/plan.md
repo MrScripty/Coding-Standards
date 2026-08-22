@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Python-engine audit follow-up recovery before further Milestone 6 Bash retirement
+**Current phase:** Milestone 6 Bash retirement after accepted Python-engine
+audit follow-up recovery
 
-**Next slice:** complete the recovery's current performance sampling and final
-acceptance gates; do not admit a checker package meanwhile
+**Next slice:** run a fresh post-M6-I69 graph audit; do not preselect the next
+package from evidence captured before the accepted recovery
 
 **Acceptance status:** `pending`
 

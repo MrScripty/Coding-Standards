@@ -301,3 +301,19 @@
   code change is authorized by this re-plan.
 - Result: Milestone 9 may continue with three serial complete samples and final
   recovery gates.
+
+## 2026-08-21: Milestone 9 And Recovery Acceptance
+
+- Three serial complete checkpoints passed in `133.538871`, `133.469900`, and
+  `130.958935` seconds; median `133.469900`, range
+  `130.958935–133.538871`, below the owned `150.000` second requirement.
+- Current fast-workload medians are `0.138470` seconds for list, `0.186642` for
+  focused, `1.536975` for all declarative, and `1.059976` for generated
+  evidence. Every sample satisfies its accepted consumer requirement.
+- Final evidence includes 386 verifier tests, 35 graph tests, 215 declarative
+  suites, generated freshness, three plan-structure checks, seven affected-file
+  Markdown link checks, and all 56 retained Bash checkers.
+- No performance implementation change was selected; current evidence does not
+  justify caching, parallel execution, partial validation, or another owner.
+- Result: Milestone 9 and the audit follow-up recovery are accepted. Milestone 5
+  Bash retirement resumes only after a fresh graph audit.

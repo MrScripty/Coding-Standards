@@ -62,3 +62,32 @@ focused execution.
   workload already below its accepted budget.
 - Parallel complete execution would change retained-checker ordering and failure
   semantics while addressing temporary Bash work rather than the Python engine.
+
+## 2026-08-21 Current Revalidation
+
+The preceding baseline and post-change sections remain historical evidence for
+their accepted revisions. Current revalidation used CPython 3.12.3 on Linux
+7.0.0-28-generic x86_64 with an Intel Core Ultra 9 275HX, 24 cores, one thread
+per core, 215 registered declarative suites, and 56 retained Bash checkers.
+
+Fast workloads were measured at clean revision
+`689e6a37ef7a1c3868e0247bd3f634f8900c7822` using one discarded warm-up and
+seven serial samples. Complete workloads were measured after the docs-only
+performance re-plan at clean revision
+`48165cbab825262d67d508c8298e2eb87bdbb8a7`; verifier implementation authority
+was unchanged.
+
+| Workload | Samples | Median seconds | Range seconds | Owned limit | Result |
+| --- | --- | ---: | ---: | ---: | --- |
+| list | 0.138470, 0.138223, 0.141932, 0.136239, 0.142827, 0.137451, 0.139734 | 0.138470 | 0.136239–0.142827 | 0.250 | satisfied |
+| focused | 0.179059, 0.189581, 0.183851, 0.179673, 0.191389, 0.186642, 0.187539 | 0.186642 | 0.179059–0.191389 | 0.250 | satisfied |
+| all declarative | 1.514586, 1.577297, 1.548041, 1.589918, 1.536975, 1.520681, 1.518372 | 1.536975 | 1.514586–1.589918 | 2.000 | satisfied after accepted re-plan |
+| generated evidence | 1.060778, 1.068213, 1.059976, 1.032949, 1.073427, 1.034856, 1.016715 | 1.059976 | 1.016715–1.073427 | 1.500 | satisfied |
+| complete checkpoint | 133.538871, 133.469900, 130.958935 | 133.469900 | 130.958935–133.538871 | 150.000 | satisfied |
+
+The plan owner selected the `2.000` second all-declarative limit as a local
+sub-two-second integration-feedback requirement. It is not derived from the
+current median or suite count. The other requirements retain their historical
+consumer authority. No sample exceeds its owned limit, and the complete range
+is stable. Current evidence does not justify caching, parallel execution,
+partial validation, or another performance mechanism.

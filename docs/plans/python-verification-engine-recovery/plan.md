@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 9 current performance and recovery acceptance
+**Current phase:** Milestone 5 terminal migration lifecycle and Bash retirement
 
-**Next slice:** run three serial complete-workload samples under the accepted
-performance re-plan, then run the final recovery gates
+**Next slice:** run a fresh post-recovery checker graph audit; do not preselect
+the next Bash-retirement package from earlier evidence
 
 **Acceptance status:** `pending`
 
@@ -33,9 +33,9 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 | A2 | Verifier-interface scenarios select exact canonical modules and their graph-derived transitive `Requires` closure from Router facts, including positive, negative, and unresolved cases. | `focused` | `not-applicable` | `automated` | `satisfied` | [Milestone 7 routing evidence](reports/milestone-7-routing-and-candidates.md) |
 | A3 | One validated immutable suite catalog supplies execution and checks; assertions and invalid, unavailable, and unsupported conditions return their documented statuses. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](execution-ledger.md#2026-08-21-milestone-2-acceptance) |
 | A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters, policy literals in generic checks, or independently repeated source-membership sets. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 8 shared-contract acceptance](reports/milestone-8-shared-contracts.md) |
-| A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims with identified budget authority and current three-sample complete-workload evidence. | `focused` | `representative` | `automated` | `partial` | Current fast-workload evidence and the owned two-second all-suite requirement are recorded in the [Milestone 9 performance re-plan](reports/milestone-9-performance-replan.md); complete sampling remains pending. |
+| A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims with identified budget authority and current three-sample complete-workload evidence. | `focused` | `representative` | `automated` | `satisfied` | [Milestone 9 current performance and recovery acceptance](reports/milestone-9-current-performance-and-acceptance.md) |
 | A6 | Every mechanically derived migration-only Python candidate has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `partial` | Candidate completeness is satisfied by [Milestone 7 evidence](reports/milestone-7-routing-and-candidates.md); terminal deletion remains due at zero Bash. |
-| A7 | Graph, verifier, declarative, generated, plan, link, and mixed gates pass without dual authority, fallback, or a changed temporary Bash graph schema. | `complete` | `not-applicable` | `automated` | `pending` | Final acceptance |
+| A7 | Graph, verifier, declarative, generated, plan, link, and mixed gates pass without dual authority, fallback, or a changed temporary Bash graph schema. | `complete` | `not-applicable` | `automated` | `satisfied` | [Milestone 9 current performance and recovery acceptance](reports/milestone-9-current-performance-and-acceptance.md) |
 
 ## Scope
 
@@ -434,20 +434,21 @@ measurement contract and accept the recovery only from current evidence.
 
 **Tasks:**
 
-- [ ] Measure list, focused, all-suite, and generated-artifact workloads using
+- [x] Measure list, focused, all-suite, and generated-artifact workloads using
   the accepted sampling method.
-- [ ] Run three serial complete-workload samples and report median and range.
-- [ ] Compare current evidence with budgets whose owner and derivation are
+- [x] Run three serial complete-workload samples and report median and range.
+- [x] Compare current evidence with budgets whose owner and derivation are
   recorded; revise claims rather than fitting implementation to arbitrary
   numbers.
-- [ ] Run all broad recovery gates and resume Bash retirement only after
+- [x] Run all broad recovery gates and resume Bash retirement only after
   current acceptance.
 
 **Acceptance gate:** current claim-matched evidence satisfies owned budgets or
 produces an explicit re-plan; all graph, verifier, declarative, generated, plan,
 link, mixed, and diff gates pass from a clean boundary.
 
-**Status:** `Planned`
+**Status:** `Accepted`; evidence in
+[current performance and recovery acceptance](reports/milestone-9-current-performance-and-acceptance.md)
 
 ## Blockers
 
