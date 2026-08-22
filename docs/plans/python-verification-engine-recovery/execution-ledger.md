@@ -284,3 +284,20 @@
   passed.
 - Result: Milestone 8 accepted. Milestone 9 current performance revalidation is
   the only next slice.
+
+## 2026-08-21: Milestone 9 Performance Re-Plan
+
+- Operation: `continue` at clean accepted base
+  `689e6a37ef7a1c3868e0247bd3f634f8900c7822`.
+- Seven current serial samples placed list, focused, and generated-evidence
+  workloads within their provisional limits.
+- The all-declarative median was `1.536975` seconds and every sample exceeded
+  the provisional historical `1.500` second limit, so complete sampling stopped
+  at the declared re-plan trigger.
+- The plan owner accepted a sub-two-second all-declarative consumer requirement.
+  The requirement is an explicit feedback decision, not a value derived from
+  current suite count or measurements.
+- No optimization, cache, partial validation, compatibility path, or runtime
+  code change is authorized by this re-plan.
+- Result: Milestone 9 may continue with three serial complete samples and final
+  recovery gates.
