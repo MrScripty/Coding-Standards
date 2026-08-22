@@ -1,0 +1,51 @@
+# Python Verification Engine Design Recovery Execution Ledger
+
+## 2026-08-21: Plan Construction And Admission
+
+- Plan path: `docs/plans/python-verification-engine-recovery/plan.md`.
+- Operation: `start`.
+- Accepted base: `08190314808665cfe8ab10a0284d90274ac6f021`.
+- Preconditions: M6-I60 is accepted; no later checker package is admitted; the
+  only pre-existing working-tree change is the reviewed design audit that this
+  recovery adopts as investigation evidence.
+- Architecture applicability: selected because corpus authority, graph
+  composition, suite-catalog ownership, check interfaces, and dependency
+  direction change. The neutral graph engine remains upstream and unchanged.
+- Performance applicability: selected only for Milestone 4 and any measured
+  loading or scan implementation; no optimization is authorized by diagnostic
+  timings alone.
+- Decision: use a complete canonical-module graph with explicit path-only corpus
+  membership and metadata-derived node, alias, `Requires`, and `Specializes`
+  facts.
+- Coordination: pause Bash-checker packages; shared graph, verifier, registry,
+  standards, plan, and acceptance writes remain serial.
+- Result: Milestone 1 is the only admitted implementation slice.
+
+## 2026-08-21: Canonical Corpus Scope Re-Plan
+
+- Finding: the audit measures 44 normative/routable modules, but canonical
+  metadata exists in 58 documents: 44 normative modules and 14 references.
+- Current behavior: suite-derived composition exposes 28 normative and eight
+  reference metadata documents. A 44-member replacement would therefore remove
+  currently queryable reference nodes even while closing normative omissions.
+- Impact: the corpus owner and objective scope cannot be accepted until
+  reference membership is explicit. No engine or graph implementation began.
+- Recommended resolution: register all 58 canonical metadata documents in one
+  paths-only corpus and derive the normative 44 as the `Role != reference`
+  view. IDs, aliases, roles, `Requires`, and `Specializes` remain derived from
+  document metadata; counts remain observations.
+- Status: plan and Milestone 1 are blocked pending the corpus-scope decision.
+
+## 2026-08-21: All-Canonical Corpus Re-Admission
+
+- Decision: accept the recommended all-canonical corpus. One reviewed
+  paths-only manifest contains every metadata-bearing canonical document.
+- Derivation boundary: document metadata remains the sole authority for module
+  ID, role, path alias, `Requires`, and `Specializes`; normative/routable
+  membership is the derived `Role != reference` view.
+- Count authority: the observed total and role distribution are evidence only.
+  Tests and acceptance do not hardcode corpus, node, or edge counts.
+- No-fallback check: suite-selected metadata membership is replaced, not
+  retained as a secondary provider or compatibility lookup.
+- Admission: operation `continue`; Milestone 1 is active and is the only
+  implementation slice.

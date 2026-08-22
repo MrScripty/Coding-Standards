@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 6 fresh post-recovery graph audit
+**Current phase:** Python verification engine design recovery dependency
 
-**Next slice:** audit the fresh post-recovery graph; no package is preselected
+**Next slice:** complete the admitted recovery before selecting another checker package
 
 **Acceptance status:** `pending`
 
@@ -14,6 +14,8 @@ with one registered language-profile suite at train order 175.
 **Latest admitted slice:** `none`; the next package requires fresh graph audit.
 
 **Accepted dependency:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
+
+**Active dependency:** [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -189,9 +191,16 @@ now upstream of the verifier. M6-I17 is accepted from fresh post-recovery
 evidence. M6-I18 is accepted from fresh post-M6-I17 evidence; the frozen
 temporary Bash graph schema remains unchanged.
 
+The [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)
+is active from the M6-I60 boundary. Further checker packages are paused while
+canonical graph composition, suite-catalog authority, result semantics,
+policy-specific interfaces, and measured loading are corrected. A terminal
+migration-Python disposition table is required before migration resumes.
+
 **Next work:**
 
-1. Audit the fresh post-recovery graph before selecting another package.
+1. Complete the active Python verification engine design recovery before
+   selecting another package.
 2. Preserve accepted final-state consumer and edge transfers; do not
    reintroduce retired checkers as documentation or execution authority.
 3. Select each subsequent owner-coherent package from reviewed lifecycle and

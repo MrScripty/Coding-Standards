@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 verification migration
+**Current phase:** Milestone 7 verification-engine design recovery
 
-**Next slice:** fresh post-recovery graph audit; no verifier package is preselected
+**Next slice:** complete the admitted verification-engine recovery; no verifier package is preselected
 
 **Acceptance status:** `partial`
 
@@ -188,6 +188,7 @@ engine is the sole verification authority.
 | Executable-edge lifecycle | [Executable edge dispositions](../evaluation/standards-effectiveness/executable-edge-dispositions.tsv) |
 | Verification-engine current state | [Verification-engine plan](../docs/plans/standards-verification-engine/plan.md) and [ledger](../docs/plans/standards-verification-engine/execution-ledger.md) |
 | Current recovery state | [Generic edge-system recovery](../docs/plans/generic-edge-system/plan.md) and [ledger](../docs/plans/generic-edge-system/execution-ledger.md) |
+| Active engine recovery | [Python verification engine design recovery](../docs/plans/python-verification-engine-recovery/plan.md) |
 
 ## Blockers
 
