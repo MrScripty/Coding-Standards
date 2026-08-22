@@ -5953,3 +5953,17 @@
 - Five negative mutations, all three retained gates, 342 verifier tests, all
   201 declarative suites, numeric lifecycle, and generated freshness pass.
   Final graph: 71 Bash checkers, 75 nodes, 507 edges, 75 components.
+
+## 2026-08-21 - M6-I55 Dependencies Owner Acceptance
+
+- Fresh evidence selected the 88-line Dependencies owner checker as the
+  shortest caller-free verifier and kept it separate from the accepted
+  provisioning contract.
+- Replaced it with one eight-check topic-owner suite covering 19 typed
+  decisions, owner and Router projections, disposition membership, and exact
+  overlay, train, package, and README evidence.
+- Removed the retired row-35 consumer, transferred six historical references
+  to suite authority, and preserved three lifecycle gates through six records.
+- Eight negative mutations, all three retained gates, 342 verifier tests, all
+  202 declarative suites, numeric lifecycle, and generated freshness pass.
+  Final graph: 70 Bash checkers, 74 nodes, 498 edges, 74 components.

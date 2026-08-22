@@ -223,8 +223,8 @@ dispositions, bounded legacy replacement, and handoff to GUI smoke acceptance.
 capability, lifecycle, and assertion decisions, exact `STD-0495` refinement,
 legacy removal, and handoff to the Dependencies owner contract.
 
-`fixtures/dependencies/owner-contract-decisions.tsv` and
-`verify-dependencies-owner-contract.sh` establish the Dependencies topic before
+`fixtures/dependencies/owner-contract-decisions.tsv` and the registered
+`dependencies-owner-contract` suite establish the Dependencies topic before
 population. They validate 19 requirement, ownership, candidate, resolution,
 authorization, evidence, and no-fallback decisions plus routing, metadata,
 owner-state, and zero premature dispositions.

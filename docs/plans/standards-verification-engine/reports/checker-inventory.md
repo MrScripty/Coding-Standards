@@ -5262,3 +5262,22 @@ lifecycle, and generated freshness pass. Final evidence contains 71 Bash
 checkers, 75 nodes, 507 edges, and 75 components. No normative source, engine,
 helper, wrapper, compatibility representation, false dependency, dual
 authority, or fallback changed.
+
+### M6-I55 Dependencies Owner Acceptance
+
+Fresh post-M6-I54 evidence selected the 88-line Dependencies owner checker as
+the shortest caller-free verifier. The `serial-coherent` package replaces it
+with one eight-check topic-owner suite covering 19 typed decisions, owner and
+Router projections, disposition membership, and exact overlay, train, package,
+and README evidence. It remains distinct from the accepted Dependencies
+provisioning contract.
+
+Row-35 current consumer authority no longer names the checker. Six historical
+records now resolve to the suite, while accelerated execution, execution train,
+and plan fixtures remain independent through six accepted records. Eight
+disposable mutations reject every represented authority. All three retained
+gates, 342 verifier tests, all 202 declarative suites, numeric lifecycle, and
+generated freshness pass. Final evidence contains 70 Bash checkers, 74 nodes,
+498 edges, and 74 components. No normative source, engine, helper, wrapper,
+compatibility representation, false dependency, dual authority, or fallback
+changed.

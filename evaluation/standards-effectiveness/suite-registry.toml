@@ -1004,3 +1004,8 @@ requires = []
 id = "rust-binding-workspace-evidence"
 path = "evaluation/standards-effectiveness/suites/rust-binding-workspace-evidence.toml"
 requires = []
+
+[[suites]]
+id = "dependencies-owner-contract"
+path = "evaluation/standards-effectiveness/suites/dependencies-owner-contract.toml"
+requires = []

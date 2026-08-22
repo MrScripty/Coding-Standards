@@ -14474,3 +14474,17 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   201 declarative suites, numeric lifecycle, and generated freshness pass.
   Final graph: 71 Bash checkers, 75 nodes, 507 edges, 75 components. No fallback
   or compatibility authority remains.
+
+## 2026-08-21 - M6-I55 Dependencies Owner Acceptance
+
+- Fresh post-M6-I54 evidence selected the 88-line Dependencies owner checker
+  for one `serial-coherent` package at train order 170.
+- The registered eight-check suite preserves 19 typed decisions, owner and
+  Router projections, disposition membership, and exact overlay, train,
+  package, and README evidence without merging the provisioning contract.
+- Row-35 current consumer authority no longer names the checker; six historical
+  references resolve to the suite and three lifecycle gates remain independent.
+- Eight negative mutations, all three retained gates, 342 verifier tests, all
+  202 declarative suites, numeric lifecycle, and generated freshness pass.
+  Final graph: 70 Bash checkers, 74 nodes, 498 edges, 74 components. No fallback
+  or compatibility authority remains.
