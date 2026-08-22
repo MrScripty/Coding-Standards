@@ -5,20 +5,21 @@
 **Current phase:** Milestone 6 Bash retirement after accepted Python-engine
 audit follow-up recovery
 
-**Next slice:** run a fresh post-M6-I69 graph audit; do not preselect the next
-package from evidence captured before the accepted recovery
+**Next slice:** run a fresh post-M6-I70 graph audit; do not preselect the next
+package from evidence captured before this accepted package
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I69 replaced the Rust binding enum representation
-checker with one registered declarative suite at train order 184.
+**Latest accepted slice:** M6-I70 replaced the Rust wire-representation checker
+with one registered declarative suite at train order 185.
 
-**Latest admitted slice:** `none`; Bash retirement is paused until the active
-Python-engine recovery is accepted from current evidence.
+**Latest admitted slice:** `none`; the next package requires fresh graph and
+ownership evidence.
 
-**Accepted dependency:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
+**Accepted dependencies:** [migration-execution efficiency recovery](../migration-execution-efficiency-recovery/plan.md)
+and [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)
 
-**Active dependency:** [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)
+**Active dependency:** `none`
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -129,11 +130,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I69 at train
-order 184.
+**Accepted boundary:** package records are accepted through M6-I70 at train
+order 185.
 
-**Current derived state:** 215 registered declarative suites, 56 retained Bash
-checkers, 60 executable nodes, 401 conservative reference edges, and 60
+**Current derived state:** 216 registered declarative suites, 55 retained Bash
+checkers, 59 executable nodes, 391 conservative reference edges, and 59
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -147,7 +148,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I69 accepted at train order 184; fresh graph audit is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I70 accepted at train order 185; fresh graph audit is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

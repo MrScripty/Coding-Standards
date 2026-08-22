@@ -14704,3 +14704,12 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
 - Two mutations, three retained gates, 373 verifier tests, 35 graph tests, all
   215 suites, numeric lifecycle, and generated freshness pass. Final graph: 56
   Bash checkers, 60 nodes, 401 edges, 60 components.
+
+## 2026-08-21 - M6-I70 Rust Wire Representation Acceptance
+
+- Accepted train order 185 with one nine-check suite and explicit one-member
+  provider, removing the Rust wire Bash checker without fallback.
+- Five mutations, three retained gates, 386 verifier tests, 35 graph tests, all
+  216 suites, numeric lifecycle, and generated freshness pass. Final graph: 55
+  Bash checkers, 59 nodes, 391 edges, 59 components. Fresh graph evidence is
+  required before another package is selected.

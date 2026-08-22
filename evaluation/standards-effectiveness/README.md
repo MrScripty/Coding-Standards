@@ -707,10 +707,10 @@ alternate-executor, and detached-work fallback.
 
 ## Rust Wire-Representation Decision Fixtures
 
-`fixtures/rust/wire-representation-decisions.tsv` and
-`verify-rust-wire-representation.sh` require a selected schema and serializer,
+The registered `rust-wire-representation` suite requires a selected schema and
+serializer,
 complete attribute-derived wire shape, consumer agreement, typed outcomes, and
-native/host evidence for Rust serialized bindings. They prove the exact
+native/host evidence for Rust serialized bindings. It proves the exact
 `STD-0757` disposition, preserve unrelated legacy Rust Interop sections, and
 reject schema-free JSON, native layout, assumed shape defaults, unknown
 sentinels, omitted variants, alternate serializers or bindings, unsupported

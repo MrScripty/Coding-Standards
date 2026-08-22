@@ -135,6 +135,5 @@ evaluation/standards-effectiveness/verify-rust-external-input-queue.sh	shell	lit
 evaluation/standards-effectiveness/verify-rust-filesystem-authority.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
 evaluation/standards-effectiveness/verify-rust-listener-lifecycle.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
 evaluation/standards-effectiveness/verify-rust-security-panic-boundary.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
-evaluation/standards-effectiveness/verify-rust-wire-representation.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
 evaluation/standards-effectiveness/verify-typescript-async-owner-contract.sh	shell	literal-parent-plan-reference	historical-acceptance,duplicated-structure-gate	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
 evaluation/standards-effectiveness/verify-validation-proof-lifetime.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2

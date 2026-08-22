@@ -5667,3 +5667,25 @@ the Rust wire, conversion, and execution-train gates independently. Two
 mutations, all retained gates, 373 verifier tests, 35 graph tests, all 215
 suites, numeric lifecycle, and generated freshness pass. Final graph: 56 Bash
 checkers, 60 nodes, 401 edges, and 60 components. No fallback remains.
+
+### M6-I70 Rust Wire Representation Acceptance
+
+Fresh post-recovery evidence selected the caller-free Rust wire-representation
+checker after retaining the source-gap and decision-traceability paths under
+their documented non-routine dispositions. One reviewed one-column fixture
+owns `STD-0757`. The registered nine-check suite preserves all 27 schema,
+serializer, attribute, consumer, variant, capability, evidence, and fallback
+decisions; exact source and disposition membership; metadata closure; profile
+policy; bounded legacy indexing; finding closure; and documentation projection.
+
+Two prior records now resolve to suite authority. Eight M6-I70 records replace
+metadata execution with the native assertion and retain three nested checkers
+as independent gates. Five disposable mutations reject altered precedence,
+unknown membership, weakened profile policy, restored legacy authority, and
+stale documentation. All retained gates, 386 verifier tests, 35 graph tests,
+all 216 suites, numeric lifecycle, and generated freshness pass. The three
+complete recovery measurements immediately before this first independent
+package provide the mixed-checkpoint boundary; no cumulative interaction
+trigger requires another mixed run. Final graph: 55 Bash checkers, 59 nodes,
+391 edges, and 59 components. No wrapper, copied policy, compatibility
+representation, dual authority, or fallback remains.

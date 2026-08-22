@@ -6202,3 +6202,18 @@
 - Two mutations, 373 verifier tests, 35 graph tests, all 215 suites, retained
   gates, numeric lifecycle, and generated freshness pass. Final graph: 56 Bash
   checkers, 60 nodes, 401 edges, 60 components.
+
+## 2026-08-21 - M6-I70 Rust Wire Representation Acceptance
+
+- Fresh post-recovery evidence selected one `serial-coherent` package at train
+  order 185; the documented source-gap and decision-traceability exceptions
+  remain outside routine declarative migration.
+- Replaced the 132-line checker with one nine-check suite and one explicit
+  member, preserving 27 typed decisions, exact disposition, metadata, profile,
+  bounded legacy, finding, and README evidence.
+- Two prior records transfer to suite authority; eight package records replace
+  metadata execution and retain three independent gates. Five mutations, the
+  retained gates, 386 verifier tests, 35 graph tests, all 216 suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 55 Bash checkers, 59
+  nodes, 391 edges, 59 components. No fallback remains; the next slice is a
+  fresh graph audit.

@@ -1074,3 +1074,8 @@ requires = []
 id = "rust-binding-enum-representation"
 path = "evaluation/standards-effectiveness/suites/rust-binding-enum-representation.toml"
 requires = []
+
+[[suites]]
+id = "rust-wire-representation"
+path = "evaluation/standards-effectiveness/suites/rust-wire-representation.toml"
+requires = []
