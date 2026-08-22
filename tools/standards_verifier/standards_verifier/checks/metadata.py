@@ -104,6 +104,20 @@ def load_module_metadata(
     return module
 
 
+def load_module_metadata_graph(
+    root: Path,
+    paths: tuple[str, ...],
+    *,
+    suite: str,
+    check: str,
+) -> tuple[ModuleMetadata, ...]:
+    context = CheckContext(root, suite, frozenset(), ())
+    modules, diagnostics = _validated_modules(context, check, paths)
+    if diagnostics:
+        raise EngineError(diagnostics[0])
+    return modules
+
+
 def _diagnostic(
     context: CheckContext,
     check: str,
@@ -457,6 +471,15 @@ def _validate_graph(
     check: str,
     paths: tuple[str, ...],
 ) -> list[Diagnostic]:
+    _, diagnostics = _validated_modules(context, check, paths)
+    return diagnostics
+
+
+def _validated_modules(
+    context: CheckContext,
+    check: str,
+    paths: tuple[str, ...],
+) -> tuple[tuple[ModuleMetadata, ...], list[Diagnostic]]:
     parsed: list[ModuleMetadata] = []
     diagnostics: list[Diagnostic] = []
     for path in paths:
@@ -465,7 +488,7 @@ def _validate_graph(
         if module is not None:
             parsed.append(module)
     if diagnostics:
-        return diagnostics
+        return (), diagnostics
 
     modules: dict[str, ModuleMetadata] = {}
     for module in parsed:
@@ -486,7 +509,7 @@ def _validate_graph(
         else:
             modules[module.module_id] = module
     if diagnostics:
-        return diagnostics
+        return (), diagnostics
 
     for module in parsed:
         for relation, targets in (
@@ -507,7 +530,7 @@ def _validate_graph(
                         )
                     )
     if diagnostics:
-        return diagnostics
+        return (), diagnostics
 
     graph = metadata_dependency_registry(context.repo_root, parsed)
     graphs = (
@@ -528,7 +551,7 @@ def _validate_graph(
                     observed=" -> ".join(cycle),
                 )
             )
-    return diagnostics
+    return tuple(parsed), diagnostics
 
 
 def _strings(

@@ -68,6 +68,15 @@ similarity, standards `Requires`, suite ownership, and the temporary Bash
 checker graph never create semantic impact edges. Missing edges require an
 explicit declaration correction.
 
+Repository graph composition reads canonical standards membership from
+`evaluation/standards-effectiveness/canonical-module-corpus.toml`. That
+paths-only manifest declares every metadata-bearing canonical document once.
+Each document's metadata remains the sole authority for its logical ID, role,
+path alias, `Requires`, and `Specializes`; the normative/routable view is
+derived by excluding the `reference` role. Semantic validation suites do not
+select graph membership, and corpus, node, role, and edge counts are derived
+observations rather than stored acceptance values.
+
 Regenerate or verify the exact Bash checker structure and dependency graph
 artifacts:
 

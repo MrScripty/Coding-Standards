@@ -49,3 +49,23 @@
   retained as a secondary provider or compatibility lookup.
 - Admission: operation `continue`; Milestone 1 is active and is the only
   implementation slice.
+
+## 2026-08-21: Milestone 1 Acceptance
+
+- Replaced suite-selected metadata graph membership with the strict
+  `canonical-module-corpus.toml` path authority. No old provider, fallback
+  lookup, or duplicate metadata representation remains.
+- Reused canonical metadata parsing and neutral graph adapters. Module IDs,
+  roles, path aliases, `Requires`, and `Specializes` are derived from each
+  document; normative membership is the derived non-reference view.
+- Added fact-driven verifier-change routing evidence for Architecture,
+  Performance, migration lifecycle, local changes, graph composition, and
+  unresolved facts without changing normative Router text.
+- Focused evidence: 34 corpus, metadata, and repository-graph tests passed;
+  `s1-routing` passed 12 checks; logical and path aliases for
+  `topic.performance` returned the same dependency edges.
+- Broad evidence: 35 neutral graph tests, 350 verifier tests, all 207
+  declarative suites, generated freshness, and the complete checkpoint with 65
+  retained Bash checkers passed. `git diff --check` remained clean before plan
+  projection.
+- Result: Milestone 1 accepted. Milestone 2 is the only admitted next slice.

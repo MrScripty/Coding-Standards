@@ -1,7 +1,71 @@
 schema_version = 1
 id = "s1-routing"
 owner = "migration.parent-plan"
-description = "Exact S1 Rust-library route, metadata closure, local links, bounded context, and root full-library-read prohibition without Bash execution or fallback inference."
+description = "Exact S1 Rust-library and verifier-change routing, metadata closure, local links, bounded context, and root full-library-read prohibition without Bash execution or fallback inference."
+
+[[checks]]
+id = "verifier-change-routing"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/routing/verifier-change-decisions.tsv"
+input_columns = ["module_boundary", "dependency_direction", "performance_concern", "migration_lifecycle", "facts"]
+[checks.domains]
+case = ["*"]
+module_boundary = ["changed", "unchanged", "unknown"]
+dependency_direction = ["changed", "unchanged", "unknown"]
+performance_concern = ["changed", "none", "unknown"]
+migration_lifecycle = ["changed", "none", "unknown"]
+facts = ["complete", "missing"]
+expected_architecture = ["exclude", "select", "unresolved"]
+expected_performance = ["exclude", "select", "unresolved"]
+expected_migration = ["exclude", "select", "unresolved"]
+expected_route = ["route", "unresolved"]
+
+[[checks.outputs]]
+column = "expected_architecture"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+any = [
+  { field = "module_boundary", op = "eq", value = "changed" },
+  { field = "dependency_direction", op = "eq", value = "changed" },
+]
+
+[[checks.outputs]]
+column = "expected_performance"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+all = [{ field = "performance_concern", op = "eq", value = "changed" }]
+
+[[checks.outputs]]
+column = "expected_migration"
+default = "exclude"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
+[[checks.outputs.rules]]
+outcome = "select"
+[checks.outputs.rules.when]
+all = [{ field = "migration_lifecycle", op = "eq", value = "changed" }]
+
+[[checks.outputs]]
+column = "expected_route"
+default = "route"
+[[checks.outputs.rules]]
+outcome = "unresolved"
+[checks.outputs.rules.when]
+all = [{ field = "facts", op = "eq", value = "missing" }]
 
 [[checks]]
 id = "metadata-closure"

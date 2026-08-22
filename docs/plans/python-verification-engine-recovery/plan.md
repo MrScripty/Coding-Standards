@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1 canonical graph and routing foundation
+**Current phase:** Milestone 2 single catalog and result semantics
 
-**Next slice:** establish the all-canonical path corpus, metadata-derived graph,
-and fact-driven verifier routing evidence
+**Next slice:** establish one immutable invocation catalog and one shared result
+classification contract
 
 **Acceptance status:** `pending`
 
@@ -29,8 +29,8 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | Every metadata-bearing canonical document is queryable by logical ID and path alias, with normative/routable membership, `Requires`, and `Specializes` derived from canonical metadata rather than validation-suite selection. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 1 |
-| A2 | Verifier-interface scenarios select Architecture and Performance only from Router facts, including positive, negative, and unresolved cases. | `focused` | `not-applicable` | `automated` | `pending` | Milestone 1 |
+| A1 | Every metadata-bearing canonical document is queryable by logical ID and path alias, with normative/routable membership, `Requires`, and `Specializes` derived from canonical metadata rather than validation-suite selection. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](execution-ledger.md#2026-08-21-milestone-1-acceptance) |
+| A2 | Verifier-interface scenarios select Architecture and Performance only from Router facts, including positive, negative, and unresolved cases. | `focused` | `not-applicable` | `automated` | `satisfied` | `s1-routing` verifier-change decisions |
 | A3 | One validated immutable suite catalog supplies execution and checks; assertions and invalid, unavailable, and unsupported conditions return their documented statuses. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 2 |
 | A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters or policy literals in generic checks. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 3 |
 | A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims; loading or scan changes occur only when accepted measurements justify them. | `focused` | `representative` | `automated` | `pending` | Milestone 4 |
@@ -156,25 +156,25 @@ from document roles, and prove verifier-related Router applicability.
 
 **Tasks:**
 
-- [ ] Add one strict path-only corpus owner for every metadata-bearing canonical
+- [x] Add one strict path-only corpus owner for every metadata-bearing canonical
   document.
-- [ ] Load and validate every member's canonical metadata once for graph
+- [x] Load and validate every member's canonical metadata once for graph
   composition without depending on semantic suite checks.
-- [ ] Derive the normative/routable view from canonical `Role` metadata without
+- [x] Derive the normative/routable view from canonical `Role` metadata without
   storing a second membership list.
-- [ ] Prove exact ID/path alias parity, complete `Requires`/`Specializes`, typed
+- [x] Prove exact ID/path alias parity, complete `Requires`/`Specializes`, typed
   duplicate/missing/escape failures, and independence from suite composition.
-- [ ] Add positive, negative, and unresolved routing decisions for verifier
+- [x] Add positive, negative, and unresolved routing decisions for verifier
   interface, local check, graph composition, migration cleanup, and measured
   performance scenarios.
-- [ ] Confirm the neutral graph package remains unchanged and upstream.
+- [x] Confirm the neutral graph package remains unchanged and upstream.
 
 **Acceptance gate:** focused catalog/repository-graph/routing tests, all graph
 and verifier tests, all declarative suites, exact logical/path queries including
 `topic.performance`, generated freshness, affected plan/link checks, complete
 mixed checkpoint, diff check, and staged review pass.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 2: Single Catalog And Result Semantics
 
@@ -206,7 +206,7 @@ classification contract.
 all Python and declarative gates; generated freshness; complete mixed checkpoint;
 and no fallback parser pass.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 3: Policy-Specific Interface Removal
 

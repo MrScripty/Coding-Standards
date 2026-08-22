@@ -1,0 +1,10 @@
+case	module_boundary	dependency_direction	performance_concern	migration_lifecycle	facts	expected_architecture	expected_performance	expected_migration	expected_route
+shared_interface_boundary	changed	changed	none	none	complete	select	exclude	exclude	route
+local_check_existing_module	unchanged	unchanged	none	none	complete	exclude	exclude	exclude	route
+independent_authority_parser	changed	changed	none	none	complete	select	exclude	exclude	route
+repository_graph_composition	unchanged	changed	none	none	complete	select	exclude	exclude	route
+measured_loading_claim	unchanged	unchanged	changed	none	complete	exclude	select	exclude	route
+migration_only_retirement	unchanged	unchanged	none	changed	complete	exclude	exclude	select	route
+local_migration_mechanic	unchanged	unchanged	none	changed	complete	exclude	exclude	select	route
+unknown_authority	unknown	unknown	none	none	missing	unresolved	unresolved	unresolved	unresolved
+unknown_workload	unchanged	unchanged	unknown	none	missing	unresolved	unresolved	unresolved	unresolved
