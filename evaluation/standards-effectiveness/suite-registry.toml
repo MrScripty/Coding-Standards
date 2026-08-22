@@ -1049,3 +1049,8 @@ requires = []
 id = "rust-binding-error-mapping"
 path = "evaluation/standards-effectiveness/suites/rust-binding-error-mapping.toml"
 requires = []
+
+[[suites]]
+id = "rust-unsafe-contracts"
+path = "evaluation/standards-effectiveness/suites/rust-unsafe-contracts.toml"
+requires = []

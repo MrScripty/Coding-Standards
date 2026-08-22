@@ -14616,3 +14616,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   357 verifier tests, 35 graph tests, all 210 suites, numeric lifecycle, and
   generated freshness pass. Final graph: 61 Bash checkers, 65 nodes, 433
   edges, 65 components. No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I65 Rust Unsafe Contracts Acceptance
+
+- Accepted one `serial-coherent` package at train order 180, replacing the
+  caller-free Rust unsafe-contract checker with a registered nine-check suite.
+- The suite preserves 17 decisions, exact source and disposition closure,
+  metadata, profile, Rust-index, legacy, F023, and README evidence.
+- Four historical records now resolve to suite authority. Four package-local
+  records replace metadata-helper execution and retain decomposition as an
+  independent gate. Nine mutations, the retained gate, 357 verifier tests, 35
+  graph tests, all 211 suites, numeric lifecycle, and generated freshness pass.
+  Final graph: 60 Bash checkers, 64 nodes, 426 edges, 64 components. No
+  fallback or compatibility authority remains.

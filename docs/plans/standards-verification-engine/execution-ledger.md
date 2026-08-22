@@ -6105,3 +6105,18 @@
   pass. Exact interaction evidence after the immediately preceding wave
   checkpoint avoids a redundant mixed checkpoint. Final graph: 61 Bash
   checkers, 65 nodes, 433 edges, 65 components.
+
+## 2026-08-21 - M6-I65 Rust Unsafe Contracts Acceptance
+
+- Fresh graph evidence selected the caller-free 116-line Rust unsafe checker
+  for one `serial-coherent` package at train order 180.
+- Replaced it with one nine-check suite preserving 17 typed decisions, exact
+  source and disposition identities, metadata, profile, index, legacy,
+  finding, and documentation closure.
+- Four historical records now resolve to the suite; four new records replace
+  metadata-helper execution and retain F022/F023 decomposition independently.
+- Nine negative mutations, the retained decomposition gate, 357 verifier
+  tests, 35 graph tests, all 211 declarative suites, numeric lifecycle, and
+  generated freshness pass. Exact non-conflicting interactions across the two
+  post-wave packages avoid a redundant mixed checkpoint. Final graph: 60 Bash
+  checkers, 64 nodes, 426 edges, 64 components.

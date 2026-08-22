@@ -673,8 +673,8 @@ and legacy unchecked-example removal.
 
 ## Rust Unsafe-Contract Decision Fixtures
 
-`fixtures/rust/unsafe-contract-decisions.tsv` and
-`verify-rust-unsafe-contracts.sh` distinguish adjacent operation proof, caller
+`fixtures/rust/unsafe-contract-decisions.tsv` and the registered
+`rust-unsafe-contracts` suite distinguish adjacent operation proof, caller
 contracts, module invariants, wrapper claims, mechanism-selected evidence, and
 feature-path execution. They also check exact dispositions, metadata, routing,
 legacy replacement, no-fallback behavior, and F023 closure.

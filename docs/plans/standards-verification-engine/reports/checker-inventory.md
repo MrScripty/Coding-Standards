@@ -4810,6 +4810,7 @@ owner-path, and stale-evidence drift. Final graph evidence contains 95 nodes,
 checkers. No source, decomposition, report, engine, nested gate, wrapper,
 compatibility representation, false dependency, dual authority, or fallback
 changed.
+
 ### M6-I35 Frontend View-Model Lineage Admission
 
 Fresh post-M6-I34 evidence contains 18 caller-free verifiers and selects the
@@ -5458,5 +5459,30 @@ after the M6-I62/M6-I63 mixed checkpoint, and its complete edge dispositions
 show no unresolved cumulative interaction, so no repeated mixed checkpoint is
 triggered. Final evidence contains 61 Bash checkers, 65 nodes, 433 edges, and
 65 components. No normative source, fixture, engine, helper, wrapper,
+compatibility representation, false dependency, dual authority, or fallback
+changed.
+
+### M6-I65 Rust Unsafe Contracts Acceptance
+
+Fresh post-M6-I64 evidence keeps the source-gap checker deferred and selects
+the 116-line caller-free `verify-rust-unsafe-contracts.sh`. The routine
+`serial-coherent` replacement uses only existing decision, table,
+metadata-graph, text, and generated-evidence mechanics.
+
+The registered nine-check suite preserves all 17 unsafe-contract decisions,
+the exact six source-section identities and dispositions, metadata closure,
+canonical profile and Rust-index projections, complete legacy retirement,
+F023 finding closure, and README projection. Four historical incoming records
+now resolve to suite authority. Four package-local edge records map metadata
+to the native assertion and retain F022/F023 decomposition as an independent
+gate. The two obsolete current-consumer records are absent.
+
+Nine disposable mutations reject every represented authority. The retained
+decomposition gate, 357 verifier tests, 35 graph tests, all 211 declarative
+suites, numeric lifecycle, and generated freshness pass. The two independent
+post-wave packages have exact, non-conflicting consumer and dependency
+dispositions, so cumulative evidence remains sufficient without another mixed
+checkpoint. Final evidence contains 60 Bash checkers, 64 nodes, 426 edges, and
+64 components. No normative source, fixture, engine, helper, wrapper,
 compatibility representation, false dependency, dual authority, or fallback
 changed.
