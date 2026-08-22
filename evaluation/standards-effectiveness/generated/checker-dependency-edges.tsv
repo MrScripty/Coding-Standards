@@ -29,7 +29,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-network-transport-policy.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-resilience-recovery-policy.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-async-boundary.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
@@ -224,8 +223,6 @@ executable_reference	evaluation/standards-effectiveness/verify-plan-fixtures.sh	
 executable_reference	evaluation/standards-effectiveness/verify-release-procedure-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 executable_reference	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-resilience-recovery-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-resilience-recovery-policy.sh	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh
 executable_reference	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-async-boundary.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-async-boundary.sh	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
@@ -427,8 +424,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-network-transport-
 verifier_dependency	evaluation/standards-effectiveness/verify-network-transport-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-resilience-recovery-policy.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-resilience-recovery-policy.sh	evaluation/standards-effectiveness/verify-resilience-owner-contract.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-async-boundary.sh	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh

@@ -302,11 +302,11 @@ success, and fallback recovery while the remaining resilience identifiers are
 populated.
 
 `fixtures/resilience/recovery-policy-decisions.tsv` and
-`verify-resilience-recovery-policy.sh` populate that owner with required and
-best-effort behavior, startup readiness, bounded retry, explicit degradation,
-derived-state reconstruction, and typed outcomes. They prove seven exact
-dispositions and reject destructive rebuild, defaults, stale or cached reads,
-partial results, alternate backends, and silent continuation.
+the registered `resilience-recovery-policy` suite populate that owner with
+required and best-effort behavior, startup readiness, bounded retry, explicit
+degradation, derived-state reconstruction, and typed outcomes. They prove
+seven exact dispositions and reject destructive rebuild, defaults, stale or
+cached reads, partial results, alternate backends, and silent continuation.
 
 The registered `rust-binding-contract-discovery` suite evaluates
 `fixtures/rust/binding-contract-discovery-decisions.tsv` to adapt only a

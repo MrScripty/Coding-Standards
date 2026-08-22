@@ -1,0 +1,143 @@
+schema_version = 1
+id = "resilience-recovery-policy"
+owner = "topic.resilience"
+description = "Fact-driven recovery, degradation, retry, reconstruction, and typed outcomes without destructive, cached, alternate-backend, or silent fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/resilience/recovery-policy-decisions.tsv"
+expected_column = "expected"
+default = "propagate-failure"
+[checks.domains]
+case = ["*"]
+criticality = ["best-effort", "missing", "required"]
+phase = ["missing", "recovery", "runtime", "startup"]
+failure = ["corrupt", "transient", "unavailable", "unsupported"]
+state_authority = ["authoritative", "disposable-derived", "unknown"]
+degraded_contract = ["accepted", "missing", "none"]
+retry_contract = ["bounded", "none", "unbounded"]
+operation_safety = ["not-applicable", "safe", "unsafe"]
+evidence = ["complete", "missing"]
+fallback = ["alternate-backend", "cached-fallback", "default-success", "destructive-rebuild", "none", "partial-result", "safe-default", "seed-defaults", "silent-continue", "stale-read"]
+expected = ["degraded-outcome", "propagate-failure", "rebuild-derived", "retry-then-terminal", "typed-invalid", "typed-unavailable", "typed-unsupported"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "retry_contract", op = "eq", value = "unbounded" },
+  { all = [
+    { field = "retry_contract", op = "eq", value = "bounded" },
+    { field = "operation_safety", op = "ne", value = "safe" },
+  ] },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "failure"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "criticality", op = "eq", value = "missing" },
+  { field = "phase", op = "eq", value = "missing" },
+  { field = "evidence", op = "eq", value = "missing" },
+  { all = [
+    { field = "criticality", op = "eq", value = "best-effort" },
+    { field = "degraded_contract", op = "eq", value = "missing" },
+  ] },
+]
+[[checks.rules]]
+outcome = "rebuild-derived"
+[checks.rules.when]
+all = [
+  { field = "failure", op = "eq", value = "corrupt" },
+  { field = "state_authority", op = "eq", value = "disposable-derived" },
+]
+[[checks.rules]]
+outcome = "degraded-outcome"
+[checks.rules.when]
+all = [
+  { field = "criticality", op = "eq", value = "best-effort" },
+  { field = "degraded_contract", op = "eq", value = "accepted" },
+]
+[[checks.rules]]
+outcome = "retry-then-terminal"
+[checks.rules.when]
+field = "retry_contract"
+op = "eq"
+value = "bounded"
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0119", "ARCHITECTURE-PATTERNS.md", "topics/resilience.md", "move", "establish canonical dependency failure and recovery authority"],
+  ["STD-0120", "ARCHITECTURE-PATTERNS.md", "topics/resilience.md", "refine", "select required best-effort terminal degraded retry and reconstruction outcomes from authoritative facts"],
+  ["STD-0121", "ARCHITECTURE-PATTERNS.md", "topics/resilience.md", "remove", "remove universal failure-category recovery actions and unsafe default cache partial-result and destructive-rebuild fallbacks"],
+  ["STD-0122", "ARCHITECTURE-PATTERNS.md", "topics/resilience.md", "refine", "require ordered criticality state-authority capability and evidence decisions with typed diagnostics"],
+  ["STD-0123", "ARCHITECTURE-PATTERNS.md", "topics/resilience.md", "refine", "select startup readiness and degradation from the lifecycle contract rather than fixed infrastructure categories"],
+  ["STD-0124", "ARCHITECTURE-PATTERNS.md", "topics/resilience.md", "refine", "replace catch-all safe defaults with an explicit typed degraded-result boundary"],
+  ["STD-0125", "ARCHITECTURE-PATTERNS.md", "topics/resilience.md", "merge", "merge availability separation predictability observability and recovery benefits into acceptance evidence"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0119", "STD-0120", "STD-0121", "STD-0122", "STD-0123", "STD-0124", "STD-0125"]
+
+[[checks]]
+id = "canonical-owner"
+type = "text"
+path = "topics/resilience.md"
+required = [
+  "Failure Classification And Decision",
+  "Startup Resilience",
+  "Best-Effort Dependency Boundaries",
+  "State Reconstruction",
+  "Acceptance Evidence",
+  "disposable derived state",
+  "typed `unsupported`",
+  "Do not report readiness",
+]
+prohibited = [
+  "Delete and rebuild from scratch",
+  "Use cached fallback or return partial results",
+  "continue with defaults or degraded mode",
+  "returns safe defaults",
+  "class BestEffortRegistry",
+]
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "ARCHITECTURE-PATTERNS.md"
+required = [
+  "## Infrastructure Failure Recovery Index",
+  "topics/resilience.md",
+  "topics/contracts.md#degraded-outcomes",
+  "non-normative migration index",
+]
+prohibited = [
+  "Delete and rebuild from scratch",
+  "Use cached fallback or return partial results",
+  "continue with defaults or degraded mode",
+  "returns safe defaults",
+  "class BestEffortRegistry",
+  "| Handling infrastructure failures | [Resilience](topics/resilience.md) |",
+]
+
+[[checks]]
+id = "router-projection"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["| Dependency or service failure, retry, degradation, startup resilience, or recovery semantics | [Resilience](topics/resilience.md) |"]
+prohibited = []

@@ -5984,3 +5984,19 @@
   caller-free package adds no unresolved cumulative interaction, so no mixed
   checkpoint was triggered. Final graph: 69 Bash checkers, 73 nodes, 492
   edges, 73 components.
+
+## 2026-08-21 - M6-I57 Resilience Recovery Policy Acceptance
+
+- Fresh evidence selected the 90-line Resilience recovery-policy checker as
+  the shortest caller-free verifier and qualified it for `serial-coherent`
+  execution.
+- Replaced it with one five-check topic-owner suite preserving 21 ordered
+  recovery decisions, seven exact dispositions, canonical owner policy,
+  legacy-index closure, and the Router projection.
+- Preserved the Resilience owner and execution-train checkers as independent
+  gates through four accepted edge records.
+- Five negative mutations, both retained gates, 342 verifier tests, all 204
+  declarative suites, numeric lifecycle, and generated freshness pass. The
+  caller-free package has complete interaction evidence, so no mixed checkpoint
+  was triggered. Final graph: 68 Bash checkers, 72 nodes, 487 edges, 72
+  components.

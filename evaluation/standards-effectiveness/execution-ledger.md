@@ -14504,3 +14504,18 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   caller-free package adds no unresolved cumulative interaction, so no mixed
   checkpoint was triggered. Final graph: 69 Bash checkers, 73 nodes, 492
   edges, 73 components. No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I57 Resilience Recovery Policy Acceptance
+
+- Fresh post-M6-I56 evidence selected the 90-line Resilience recovery-policy
+  checker for one `serial-coherent` package at train order 172.
+- The registered five-check suite preserves 21 ordered recovery decisions,
+  seven exact dispositions, canonical owner policy, legacy-index closure, and
+  the Router projection.
+- Resilience owner and execution-train lifecycle remain independent through
+  four accepted edge records.
+- Five negative mutations, both retained gates, 342 verifier tests, all 204
+  declarative suites, numeric lifecycle, and generated freshness pass. The
+  caller-free package has complete interaction evidence, so no mixed checkpoint
+  was triggered. Final graph: 68 Bash checkers, 72 nodes, 487 edges, 72
+  components. No fallback or compatibility authority remains.

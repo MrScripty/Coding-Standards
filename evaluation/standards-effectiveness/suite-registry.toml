@@ -1014,3 +1014,8 @@ requires = []
 id = "milestone-7-row-7-decomposition"
 path = "evaluation/standards-effectiveness/suites/milestone-7-row-7-decomposition.toml"
 requires = []
+
+[[suites]]
+id = "resilience-recovery-policy"
+path = "evaluation/standards-effectiveness/suites/resilience-recovery-policy.toml"
+requires = []

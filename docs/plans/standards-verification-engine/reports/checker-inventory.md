@@ -5301,3 +5301,21 @@ cumulative interaction, so no mixed checkpoint was triggered. Final evidence
 contains 69 Bash checkers, 73 nodes, 492 edges, and 73 components. No normative
 source, engine, helper, wrapper, compatibility representation, false
 dependency, dual authority, or fallback changed.
+
+### M6-I57 Resilience Recovery Policy Acceptance
+
+Fresh post-M6-I56 evidence selected the 90-line Resilience recovery-policy
+checker as the shortest caller-free verifier. The `serial-coherent` package
+replaces it with one five-check topic-owner suite preserving 21 ordered
+recovery decisions, seven exact dispositions, canonical owner policy,
+legacy-index closure, and the Router projection.
+
+Resilience owner and execution-train lifecycle remain independently executable
+through four accepted records. Five disposable mutations reject decision,
+disposition, owner, legacy-index, and Router drift. Both retained gates, 342
+verifier tests, all 204 declarative suites, numeric lifecycle, and generated
+freshness pass. The caller-free package has complete interaction evidence, so
+no mixed checkpoint was triggered. Final evidence contains 68 Bash checkers,
+72 nodes, 487 edges, and 72 components. No normative source, fixture, engine,
+helper, wrapper, compatibility representation, false dependency, dual
+authority, or fallback changed.
