@@ -1,6 +1,5 @@
 file	root_use	nonroot_use
 evaluation/standards-effectiveness/verify-decision-traceability.sh	none	fixture-data
-evaluation/standards-effectiveness/verify-release-procedure-policy.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	none	rust-profile-index

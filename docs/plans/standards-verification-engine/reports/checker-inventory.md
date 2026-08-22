@@ -5609,3 +5609,27 @@ independent package does not trigger another mixed checkpoint. Final graph: 59
 Bash checkers, 63 nodes, 422 edges, and 63 components. No source policy,
 copied row, hardcoded count, numeric-range authority, wrapper, compatibility
 representation, false dependency, dual authority, or fallback remains.
+
+### M6-I67 Release Procedure Policy Acceptance
+
+Fresh post-M6-I66 evidence selected the caller-free Release procedure checker
+with one metadata-helper dependency and two historical inbound contract
+records. One reviewed one-column fixture owns the two semantic members. The
+registered nine-check suite independently resolves them through the generated
+section inventory and canonical disposition table, preserves the seven-input
+release-completion decision, validates metadata and router/profile
+projections, and rejects restored legacy headings or universal audit, commit,
+tag, and publication commands.
+
+The two historical records now resolve to suite authority and two M6-I67
+records map metadata execution to the native assertion. The obsolete row-35
+consumer is absent. Six disposable mutations reject a contradictory decision,
+unavailable membership, invalid disposition, missing workflow structure,
+restored legacy authority, and stale documentation. All 373 verifier tests, 35
+graph tests, all 213 declarative suites, numeric lifecycle, and generated
+freshness pass. The preceding shared-contract checkpoint covered all 60 Bash
+checkers; exact owner and dependency evidence proves M6-I66 and M6-I67
+independent, so no additional mixed checkpoint is triggered. Final graph: 58
+Bash checkers, 62 nodes, 418 edges, and 62 components. No source policy,
+copied row, hardcoded count, numeric-range authority, wrapper, compatibility
+representation, false dependency, dual authority, or fallback remains.

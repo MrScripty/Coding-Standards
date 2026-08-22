@@ -1059,3 +1059,8 @@ requires = []
 id = "documentation-policy-consolidation"
 path = "evaluation/standards-effectiveness/suites/documentation-policy-consolidation.toml"
 requires = []
+
+[[suites]]
+id = "release-procedure-policy"
+path = "evaluation/standards-effectiveness/suites/release-procedure-policy.toml"
+requires = []

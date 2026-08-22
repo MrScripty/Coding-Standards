@@ -14667,3 +14667,17 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   tests, 35 graph tests, all 212 suites, numeric lifecycle, and generated
   freshness pass. Final graph: 59 Bash checkers, 63 nodes, 422 edges, 63
   components. No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I67 Release Procedure Policy Acceptance
+
+- Accepted one `serial-coherent` package at train order 182, replacing the
+  caller-free Release procedure checker with a nine-check suite and one
+  reviewed ID-only membership provider.
+- The suite preserves exact canonical membership, seven-input completion
+  decisions, metadata, workflow and Router structure, Rust profile routing,
+  bounded legacy indexing, removed-rule absence, and README projection.
+- Two historical records transfer to suite authority and two native-engine
+  records replace metadata-helper execution. Six mutations, 373 verifier
+  tests, 35 graph tests, all 213 suites, numeric lifecycle, and generated
+  freshness pass. Final graph: 58 Bash checkers, 62 nodes, 418 edges, 62
+  components. No fallback or compatibility authority remains.

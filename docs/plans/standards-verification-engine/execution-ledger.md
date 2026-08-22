@@ -6161,3 +6161,19 @@
   complete shared-contract checkpoint and exact independent interactions avoid
   a redundant mixed checkpoint. Final graph: 59 Bash checkers, 63 nodes, 422
   edges, 63 components. No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I67 Release Procedure Policy Acceptance
+
+- Fresh post-M6-I66 evidence selected the caller-free Release procedure
+  checker for one `serial-coherent` package at train order 182.
+- Replaced it with one nine-check suite and one ID-only membership fixture,
+  preserving release-completion decisions, exact source and disposition
+  membership, metadata, workflow, Router, Rust-profile, legacy, removed-rule,
+  and README evidence.
+- Two historical records now resolve to suite authority, two package records
+  replace metadata-helper execution, and the obsolete row-35 consumer is gone.
+- Six negative mutations, 373 verifier tests, 35 graph tests, all 213 suites,
+  numeric lifecycle, and generated freshness pass. Exact independent
+  interactions since the preceding shared-contract checkpoint avoid a
+  redundant mixed checkpoint. Final graph: 58 Bash checkers, 62 nodes, 418
+  edges, 62 components. No fallback or compatibility authority remains.

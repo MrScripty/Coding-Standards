@@ -1,6 +1,6 @@
 node	kind	resolved	component	component_size	cyclic	wave	executable_inbound_count	contract_inbound_count	dependency_inbound_count	dependency_outbound_count
 evaluation/standards-effectiveness/check-decision-table.sh	helper	yes	component-32641fc24f283d732c863f66d60560759449c5540faa921f78646e420bfbff6d	1	no	0	7	1	5	0
-evaluation/standards-effectiveness/check-metadata.sh	helper	yes	component-aaf33edf2afc9b5c37f4f4a12c939dc01647d2ead887325591cc728b35baa69d	1	no	0	26	1	26	0
+evaluation/standards-effectiveness/check-metadata.sh	helper	yes	component-aaf33edf2afc9b5c37f4f4a12c939dc01647d2ead887325591cc728b35baa69d	1	no	0	25	1	25	0
 evaluation/standards-effectiveness/check-plan-structure.sh	helper	yes	component-b5ec0297136d534162c8d0bde279007d81785d53c084477ca1c94f89f9986cc4	1	no	0	1	1	1	0
 evaluation/standards-effectiveness/verify-binding-contract-evolution.sh	verifier	yes	component-fdcbd9323ab427f301a785a9d169c92eed03df9b126116c58eeeb3cbfeb71fda	1	no	5	1	3	1	5
 evaluation/standards-effectiveness/verify-binding-generation-authority.sh	verifier	yes	component-f34de65d4fcc4edaaaf8a96dcb49786a58ea2ad43932aa3460571b270ab838ee	1	no	6	1	0	1	3
@@ -38,7 +38,6 @@ evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh	
 evaluation/standards-effectiveness/verify-network-transport-policy.sh	verifier	yes	component-cbeed40a7f9e5e3d699206653231eac25713b591f47332b9f18ee06e33703fcd	1	no	6	2	2	2	3
 evaluation/standards-effectiveness/verify-owner-state-transitions.sh	verifier	yes	component-6b68dca809c343cfd0363eb43d1e2d2d9020dd18b9448cdf1a601a40eb573b62	1	no	0	1	0	1	0
 evaluation/standards-effectiveness/verify-plan-fixtures.sh	verifier	yes	component-6a60c37c93d5b66cf98456f78fcd1d0613ab20920652a16e03fc7dcb991081c1	1	no	1	7	1	7	1
-evaluation/standards-effectiveness/verify-release-procedure-policy.sh	verifier	yes	component-474ecf2e2b44b72e1f3cf6d21e515170addb994cc9d562936a96b60ddc906454	1	no	1	0	2	0	1
 evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh	verifier	yes	component-377ec2aa550fe7393135941bac0bcbbf012367cfbb619cf6fe37560d656527b5	1	no	1	3	1	3	1
 evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh	verifier	yes	component-814a5104df1a2a94c6066f2c26a7b3714dcce1322894a1d8ec3c5ec38f4a7825	1	no	4	2	2	2	3
 evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	verifier	yes	component-44f91df1cc44a02c1a5c7ee20696b26f4b18fdf59724f0ff17c57638e7224b4a	1	no	5	2	4	2	2

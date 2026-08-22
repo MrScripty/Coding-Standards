@@ -1,0 +1,141 @@
+schema_version = 1
+id = "release-procedure-policy"
+owner = "workflow.release"
+description = "Router-selected, decision-derived release procedure with exact semantic membership and no universal tool or command fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/release/procedure-decisions.tsv"
+expected_column = "expected_completion"
+default = "no"
+[checks.domains]
+case = ["*"]
+release_boundary = ["yes", "no"]
+profiles_selected = ["yes", "no"]
+decisions_accepted = ["yes", "no"]
+claims_satisfied = ["yes", "no"]
+immutable_dispatch = ["yes", "no"]
+artifacts_verified = ["yes", "no"]
+publication_resolved = ["yes", "no"]
+expected_completion = ["yes", "no"]
+[[checks.rules]]
+outcome = "yes"
+[checks.rules.when]
+all = [
+  { field = "release_boundary", op = "eq", value = "yes" },
+  { field = "profiles_selected", op = "eq", value = "yes" },
+  { field = "decisions_accepted", op = "eq", value = "yes" },
+  { field = "claims_satisfied", op = "eq", value = "yes" },
+  { field = "immutable_dispatch", op = "eq", value = "yes" },
+  { field = "artifacts_verified", op = "eq", value = "yes" },
+  { field = "publication_resolved", op = "eq", value = "yes" },
+]
+
+[[checks]]
+id = "source-membership"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+non_empty = ["id", "path"]
+unique = [["id"]]
+[checks.domains]
+path = ["RELEASE-STANDARDS.md"]
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/release/procedure-policy-members.tsv"
+header = ["id"]
+columns = ["id"]
+order = "source"
+key = "id"
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[checks.domains]
+source = ["RELEASE-STANDARDS.md"]
+target = ["workflows/release.md"]
+disposition = ["move"]
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/release/procedure-policy-members.tsv"
+header = ["id"]
+columns = ["id"]
+order = "source"
+key = "id"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "workflows/release.md",
+  "profiles/languages/rust/README.md",
+]
+
+[[checks]]
+id = "workflow-policy"
+type = "text"
+path = "workflows/release.md"
+required = [
+  "## Profile Routing And Release Procedure",
+  "Use [Standards Router](../STANDARDS-ROUTER.md)",
+  "Profiles add ecosystem mechanisms and verification",
+  "Derive the release procedure from the accepted release decisions",
+  "Select applicable profiles and topics through the router",
+  "Satisfy every required behavior, environment, and release-artifact claim",
+  "typed release-procedure",
+]
+prohibited = [
+  "cargo audit",
+  "npm audit",
+  "pip-audit",
+  "chore(release): prepare vX.Y.Z",
+  "git tag vX.Y.Z",
+  "Push commit and intended release tag",
+]
+
+[[checks]]
+id = "router-projection"
+type = "text"
+path = "STANDARDS-ROUTER.md"
+required = ["| Rust source, Cargo metadata, or Rust-generated artifacts change |"]
+prohibited = []
+
+[[checks]]
+id = "rust-profile-projection"
+type = "text"
+path = "profiles/languages/rust/README.md"
+required = ["[Rust Release profile](release.md)"]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "RELEASE-STANDARDS.md"
+required = ["workflows/release.md"]
+prohibited = [
+  "## Language-Specific Guidance",
+  "## Release Checklist",
+  "cargo audit",
+  "npm audit",
+  "pip-audit",
+  "chore(release): prepare vX.Y.Z",
+  "git tag vX.Y.Z",
+  "Push commit and intended release tag",
+]
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = [
+  "The registered `release-procedure-policy` suite checks router-driven profile selection,",
+]
+prohibited = [
+  "`verify-release-procedure-policy.sh` checks router-driven profile selection,",
+]
