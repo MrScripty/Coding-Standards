@@ -6050,3 +6050,23 @@
   all 207 declarative suites, numeric lifecycle, and generated freshness pass.
   Exact final-state interactions are complete, so no mixed checkpoint was
   triggered. Final graph: 65 Bash checkers, 69 nodes, 464 edges, 69 components.
+
+## 2026-08-21 - M6-I61 Launcher Population Acceptance
+
+- Fresh post-recovery evidence selected the 105-line Launcher population
+  checker as the shortest of 11 caller-free verifiers and qualified it for
+  `serial-coherent` execution at train order 176.
+- Replaced it with one seven-check application-profile suite preserving 13
+  typed action, procedure, lifecycle, state, mechanism, outcome, and fallback
+  decisions; 18 exact Launcher dispositions; three Security handoffs; canonical
+  profile and legacy-index text; source-package authority; and documentation
+  projection.
+- Transferred four historical GUI-smoke and Dependencies records to suite
+  authority. Launcher owner, row-14, and execution-train lifecycle remain
+  independently executable through six accepted edge records.
+- Seven negative mutations, all three retained gates, 357 verifier tests, all
+  208 declarative suites, numeric lifecycle, and generated freshness pass.
+  The immediately preceding shared checkpoint and complete final-state edge
+  evidence leave no unresolved cumulative interaction, so no repeated mixed
+  checkpoint was triggered. Final graph: 64 Bash checkers, 68 nodes, 456 edges,
+  68 components.

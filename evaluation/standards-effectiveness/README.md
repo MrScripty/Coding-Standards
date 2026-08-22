@@ -213,8 +213,8 @@ procedure delegation, process lifecycle, and outcome preservation while
 rejecting guessed actions or targets, alternate commands, successful no-ops,
 missing evidence, and default success.
 
-`fixtures/launcher/population-decisions.tsv` and
-`verify-launcher-population.sh` validate canonical Launcher population,
+`fixtures/launcher/population-decisions.tsv` and the registered
+`launcher-population` suite validate canonical Launcher population,
 13 action, lifecycle, state, mechanism, and outcome decisions, 18 exact
 dispositions, bounded legacy replacement, and handoff to GUI smoke acceptance.
 

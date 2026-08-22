@@ -1034,3 +1034,8 @@ requires = []
 id = "rust-async-boundary"
 path = "evaluation/standards-effectiveness/suites/rust-async-boundary.toml"
 requires = []
+
+[[suites]]
+id = "launcher-population"
+path = "evaluation/standards-effectiveness/suites/launcher-population.toml"
+requires = []

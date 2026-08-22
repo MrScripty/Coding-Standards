@@ -8,8 +8,8 @@
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I60 replaced the Rust async-boundary checker
-with one registered language-profile suite at train order 175.
+**Latest accepted slice:** M6-I61 replaced the Launcher population checker
+with one registered application-profile suite at train order 176.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph audit.
 
@@ -125,11 +125,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I60 at train
-order 175.
+**Accepted boundary:** package records are accepted through M6-I61 at train
+order 176.
 
-**Current derived state:** 207 registered declarative suites, 65 retained Bash
-checkers, 69 executable nodes, 464 conservative reference edges, and 69
+**Current derived state:** 208 registered declarative suites, 64 retained Bash
+checkers, 68 executable nodes, 456 conservative reference edges, and 68
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -143,7 +143,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I60 accepted at train order 175; fresh graph audit is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I61 accepted at train order 176; fresh graph audit is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

@@ -5381,3 +5381,25 @@ checkpoint was triggered. Final evidence contains 65 Bash checkers, 69 nodes,
 464 edges, and 69 components. No normative source, fixture, engine, helper,
 wrapper, compatibility representation, false dependency, dual authority, or
 fallback changed.
+
+### M6-I61 Launcher Population Acceptance
+
+Fresh post-recovery evidence contains 11 caller-free verifiers and selects the
+105-line `verify-launcher-population.sh` as the shortest candidate. The
+`serial-coherent` package replaces it with one seven-check application-profile
+suite preserving 13 typed action, procedure, lifecycle, state, mechanism,
+outcome, and fallback decisions; 18 exact Launcher dispositions; three exact
+Security handoffs; canonical profile and bounded legacy-index text; exact
+source-package authority; and the README projection.
+
+Four historical GUI-smoke and Dependencies records now resolve to the suite.
+Launcher owner, row-14, and execution-train lifecycle remain independently
+executable through six accepted edge records. Seven disposable mutations reject
+every represented authority. All three retained gates, 357 verifier tests, all
+208 declarative suites, numeric lifecycle, and generated freshness pass. The
+shared mixed checkpoint immediately preceding this package and complete
+final-state interaction evidence leave no cumulative uncertainty, so a second
+checkpoint was not triggered. Final evidence contains 64 Bash checkers, 68
+nodes, 456 edges, and 68 components. No normative source, fixture, engine,
+helper, wrapper, compatibility representation, false dependency, dual
+authority, or fallback changed.

@@ -14570,3 +14570,19 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   Exact final-state interactions are complete, so no mixed checkpoint was
   triggered. Final graph: 65 Bash checkers, 69 nodes, 464 edges, 69 components.
   No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I61 Launcher Population Acceptance
+
+- Fresh post-recovery evidence selected the 105-line Launcher population
+  checker for one `serial-coherent` package at train order 176.
+- The registered seven-check suite preserves 13 typed decisions, 18 exact
+  Launcher dispositions, three Security handoffs, canonical profile and
+  legacy-index text, source-package authority, and README projection.
+- Four historical GUI-smoke and Dependencies records now resolve to the suite.
+  Launcher owner, row-14, and execution-train lifecycle remain independent
+  through six accepted edge records.
+- Seven negative mutations, all three retained gates, 357 verifier tests, all
+  208 declarative suites, numeric lifecycle, and generated freshness pass. The
+  immediately preceding shared checkpoint and complete interaction evidence
+  avoid a redundant mixed checkpoint. Final graph: 64 Bash checkers, 68 nodes,
+  456 edges, 68 components. No fallback or compatibility authority remains.

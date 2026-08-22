@@ -1,0 +1,161 @@
+schema_version = 1
+id = "launcher-population"
+owner = "profile.application.launcher"
+description = "Launcher action, procedure, lifecycle, state, mechanism, outcome, disposition, legacy-index, and source-package authority without fixed, implicit, alternate, ambient, raw-evaluation, or default fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/launcher/population-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+action = ["invalid", "selected"]
+procedure = ["missing", "selected"]
+lifecycle = ["missing", "selected"]
+state = ["missing", "selected"]
+mechanism = ["missing", "selected"]
+outcome_map = ["missing", "selected"]
+fallback = ["dev-substitution", "fixed-codes", "fixed-flags", "force-bash", "host-state", "implicit-build", "none", "raw-eval"]
+expected = ["allow", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "action", op = "eq", value = "invalid" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "procedure", op = "eq", value = "missing" },
+  { field = "lifecycle", op = "eq", value = "missing" },
+  { field = "state", op = "eq", value = "missing" },
+  { field = "mechanism", op = "eq", value = "missing" },
+  { field = "outcome_map", op = "eq", value = "missing" },
+]
+
+[[checks]]
+id = "exact-launcher-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0487", "LAUNCHER-STANDARDS.md", "LAUNCHER-STANDARDS.md", "index", "convert the legacy Launcher title into a non-normative route to the canonical Launcher profile and remaining owner-specific migration sections"],
+  ["STD-0488", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "select launcher applicability and interface shape from the application contract rather than requiring one root Bash script"],
+  ["STD-0489", "LAUNCHER-STANDARDS.md", "LAUNCHER-STANDARDS.md", "index", "close the legacy core CLI parent as non-normative routing to canonical Launcher action selection and decoding"],
+  ["STD-0490", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "derive actions names and required capabilities from the application contract rather than a universal fixed flag set"],
+  ["STD-0491", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "decode exactly the selected action and its declared arguments with typed outcomes instead of fixed parsing assumptions"],
+  ["STD-0492", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "remove", "remove copied command examples as launcher authority because discovery and invocation syntax are application-contract projections"],
+  ["STD-0493", "LAUNCHER-STANDARDS.md", "LAUNCHER-STANDARDS.md", "index", "remove the embedded workflow-extension example heading and route applicable actions through canonical procedure owners"],
+  ["STD-0494", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "expose only selected repository procedures and preserve their evidence and outcomes without stub or alternate-action fallback"],
+  ["STD-0499", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "project delegated diagnostics through the declared launcher surface without fixed dependency messages or status labels"],
+  ["STD-0501", "LAUNCHER-STANDARDS.md", "LAUNCHER-STANDARDS.md", "index", "close the legacy runtime parent as a route to canonical Launcher procedure delegation and lifecycle selection"],
+  ["STD-0502", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "select development runtime target procedure argument projection and lifecycle mechanism from declared application facts"],
+  ["STD-0503", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "select release runtime artifact and procedure without guessed paths implicit builds development substitution or weakened modes"],
+  ["STD-0504", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "require declared per-invocation state isolation host-state authority cleanup and no state carry-forward"],
+  ["STD-0505", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "publish action discovery through the selected consumer surface rather than one universal help layout or example set"],
+  ["STD-0506", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "map typed outcomes at the launcher boundary from the application contract rather than fixed universal numeric exit codes"],
+  ["STD-0507", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "refine", "select the launcher implementation mechanism from deployment operator toolchain and security facts rather than mandatory Bash rules"],
+  ["STD-0511", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "remove", "remove the copied Bash template and placeholder commands as normative or fallback launcher implementation"],
+  ["STD-0512", "LAUNCHER-STANDARDS.md", "profiles/applications/launcher.md", "merge", "merge applicable launcher verification outcomes into the canonical profile without retaining a fixed checklist"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0487", "STD-0488", "STD-0489", "STD-0490", "STD-0491", "STD-0492", "STD-0493", "STD-0494", "STD-0499", "STD-0501", "STD-0502", "STD-0503", "STD-0504", "STD-0505", "STD-0506", "STD-0507", "STD-0511", "STD-0512"]
+
+[[checks]]
+id = "security-handoff-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition", "rationale"]
+order = "source"
+expected = [
+  ["STD-0508", "LAUNCHER-STANDARDS.md", "topics/security.md", "refine", "require operation-contract validation and exact destination-grammar encoding before untrusted values enter generated executable text"],
+  ["STD-0509", "LAUNCHER-STANDARDS.md", "topics/security.md", "remove", "remove raw interpolation examples because copied vulnerable commands are not normative security guidance"],
+  ["STD-0510", "LAUNCHER-STANDARDS.md", "topics/security.md", "refine", "require negative semantic and destination-encoding evidence without copied helper names alternate destinations raw values or default commands"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0508", "STD-0509", "STD-0510"]
+
+[[checks]]
+id = "canonical-profile"
+type = "text"
+path = "profiles/applications/launcher.md"
+required = [
+  "universal fixed flag set",
+  "Do not require one help layout",
+  "build a missing artifact implicitly",
+  "silently using ambient user state",
+  "Implementation Mechanism",
+  "compiled launchers, task runners",
+  "string evaluation, raw interpolation",
+  "numeric codes are not universal",
+  "explicit lossy-mapping diagnostic",
+  "repeated invocations without state carry-forward",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "LAUNCHER-STANDARDS.md"
+required = [
+  "# Launcher Standards Legacy Index",
+  "[Dependencies](topics/dependencies.md)",
+  "[Release](workflows/release.md#build-procedure-selection)",
+  "[Security](topics/security.md#generated-command-and-configuration-text)",
+]
+prohibited = [
+  "## Core CLI Contract",
+  "### Required Flags",
+  "### Canonical Usage",
+  "## Runtime Standards",
+  "## Managed State Standards",
+  "## Help Standards",
+  "## Exit Codes",
+  "## Bash Implementation Rules",
+  "## Reference Template",
+  "## Compliance Checklist",
+  "## Dependency Installation Standards",
+  "## Build Standards",
+  "## Desktop Entry and Script Generation Safety",
+  "check_<name>",
+  "install_<name>",
+  "app-build-tool",
+  "NEEDS_BUILD=",
+]
+
+[[checks]]
+id = "source-package-authority"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-source-package-preparation.tsv"
+header = ["manifest_order", "source", "verifier_subjects"]
+unique = [["manifest_order"], ["source"]]
+[[checks.projections]]
+columns = ["manifest_order", "source", "verifier_subjects"]
+order = "source"
+expected = [["17", "LAUNCHER-STANDARDS.md", "suite:launcher-population"]]
+[checks.projections.where]
+field = "source"
+op = "eq"
+value = "LAUNCHER-STANDARDS.md"
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["`fixtures/launcher/population-decisions.tsv` and the registered\n`launcher-population` suite validate canonical Launcher population"]
+prohibited = ["`verify-launcher-population.sh` validate canonical Launcher population"]
