@@ -8,8 +8,8 @@
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** M6-I55 replaced the Dependencies owner checker with
-one registered topic-owner suite at train order 170.
+**Latest accepted slice:** M6-I56 replaced the row-7 decomposition checker
+with one registered migration-lifecycle suite at train order 171.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph audit.
 
@@ -123,11 +123,11 @@ Complete mode:
 At zero Bash, the same command becomes Python-only without an alternate mode or
 fallback.
 
-**Accepted boundary:** package records are accepted through M6-I55 at train
-order 170.
+**Accepted boundary:** package records are accepted through M6-I56 at train
+order 171.
 
-**Current derived state:** 202 registered declarative suites, 70 retained Bash
-checkers, 74 executable nodes, 498 conservative reference edges, and 74
+**Current derived state:** 203 registered declarative suites, 69 retained Bash
+checkers, 73 executable nodes, 492 conservative reference edges, and 73
 components. These values are observations from generated evidence and do not
 authorize package selection or ownership.
 
@@ -141,7 +141,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | M6-I55 accepted at train order 170; fresh graph audit is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | M6-I56 accepted at train order 171; fresh graph audit is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State

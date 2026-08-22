@@ -4780,6 +4780,7 @@ evidence contains 96 nodes, 607 edges, and 96 components with 180 registered
 suites and 92 retained Bash checkers. No source, migration input, engine,
 nested gate, wrapper, compatibility representation, false dependency, dual
 authority, or fallback changed.
+
 ### M6-I34 Row-18 Decomposition Admission
 
 Fresh post-M6-I33 evidence selects the 56-line caller-free row-18 lifecycle
@@ -5281,3 +5282,22 @@ generated freshness pass. Final evidence contains 70 Bash checkers, 74 nodes,
 498 edges, and 74 components. No normative source, engine, helper, wrapper,
 compatibility representation, false dependency, dual authority, or fallback
 changed.
+
+### M6-I56 Row-7 Decomposition Acceptance
+
+Fresh post-M6-I55 evidence selected the 83-line row-7 decomposition checker as
+the shortest caller-free verifier. The `serial-coherent` package replaces it
+with one six-check migration-lifecycle suite covering exact ordered
+decomposition, all 11 exact dispositions, package authority, canonical owner
+paths, report evidence, and the resolved finding.
+
+Two historical workspace-evidence records now resolve to the suite, while
+accelerated-execution and execution-train lifecycle remain independently
+executable through four accepted records. Five disposable mutations reject
+decomposition, disposition, package, report, and finding drift. Both retained
+gates, 342 verifier tests, all 203 declarative suites, numeric lifecycle, and
+generated freshness pass. The caller-free package adds no unresolved
+cumulative interaction, so no mixed checkpoint was triggered. Final evidence
+contains 69 Bash checkers, 73 nodes, 492 edges, and 73 components. No normative
+source, engine, helper, wrapper, compatibility representation, false
+dependency, dual authority, or fallback changed.

@@ -1,0 +1,118 @@
+schema_version = 1
+id = "milestone-7-row-7-decomposition"
+owner = "migration.parent-plan"
+description = "Exact row-7 Rust binding decomposition lifecycle without copied child semantics or nested checker execution."
+
+[[checks]]
+id = "decomposition"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+non_empty = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+unique = [["baseline_order", "child_order"]]
+[[checks.projections]]
+columns = ["child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "owner_transition"]
+order = "source"
+expected = [
+  ["1", "STD-0761,STD-0762", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "exists", "pre-slice-review", "focused", "none"],
+  ["2", "STD-0763,STD-0764,STD-0765,STD-0766", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "exists", "pre-slice-review", "focused", "none"],
+  ["3", "STD-0767", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "topics/contracts.md", "exists", "pre-slice-review", "focused", "none"],
+  ["4", "STD-0768,STD-0769,STD-0770,STD-0771", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/boundaries/language-bindings.md", "exists", "pre-slice-review", "focused", "none"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "7"
+
+[[checks.projections]]
+columns = ["ids"]
+order = "lexical"
+expected = [
+  ["STD-0761"], ["STD-0762"], ["STD-0763"], ["STD-0764"],
+  ["STD-0765"], ["STD-0766"], ["STD-0767"], ["STD-0768"],
+  ["STD-0769"], ["STD-0770"], ["STD-0771"],
+]
+[checks.projections.where]
+field = "baseline_order"
+op = "eq"
+value = "7"
+[checks.projections.split]
+field = "ids"
+delimiter = ","
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0761", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine"],
+  ["STD-0762", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine"],
+  ["STD-0763", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "refine"],
+  ["STD-0764", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "refine"],
+  ["STD-0765", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "remove"],
+  ["STD-0766", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "workflows/release.md", "refine"],
+  ["STD-0767", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "topics/contracts.md", "refine"],
+  ["STD-0768", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/boundaries/language-bindings.md", "refine"],
+  ["STD-0769", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/boundaries/language-bindings.md", "refine"],
+  ["STD-0770", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/boundaries/language-bindings.md", "refine"],
+  ["STD-0771", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/boundaries/language-bindings.md", "refine"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0761", "STD-0762", "STD-0763", "STD-0764", "STD-0765", "STD-0766", "STD-0767", "STD-0768", "STD-0769", "STD-0770", "STD-0771"]
+
+[[checks]]
+id = "accelerated-package"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-accelerated-packages.tsv"
+header = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "draft_mode", "integration_gate", "semantic_outcome", "prerequisites"]
+[[checks.projections]]
+columns = ["train_order", "package_id", "risk_class", "owner", "owner_action", "verification_family", "integration_gate", "semantic_outcome", "prerequisites"]
+order = "source"
+expected = [["7", "P03", "consolidation", "profiles/languages/rust/language-bindings.md", "existing-review", "decision-table", "focused", "rust-binding-row-decomposition", "core,workflow.verification,workflow.release,profile.language.rust,profile.boundary.language-bindings,topic.contracts"]]
+[checks.projections.where]
+field = "train_order"
+op = "eq"
+value = "7"
+
+[[checks]]
+id = "canonical-owner-paths"
+type = "repository_paths"
+[checks.paths]
+path = "evaluation/standards-effectiveness/milestone-7-execution-decomposition.tsv"
+header = ["baseline_order", "child_order", "ids", "source", "owner", "owner_state", "activation", "checkpoint", "rationale", "owner_transition"]
+columns = ["owner"]
+order = "source"
+where = { field = "baseline_order", op = "eq", value = "7" }
+
+[[checks]]
+id = "decomposition-report"
+type = "text"
+path = "evaluation/standards-effectiveness/milestone-7-row-7-decomposition.md"
+required = [
+  "mixes Rust workspace and verification mechanics, release artifact composition",
+  "### Child 7.1: Rust Binding Workspace And Evidence Boundary",
+  "### Child 7.2: Binding Artifact Roles And Release Composition",
+  "### Child 7.3: Binding Artifact Compatibility",
+  "### Child 7.4: Binding Surface Contract",
+  "All children must receive exact dispositions in order",
+  "`default-members` exclusion as satisfaction",
+  "same-build provenance as forced lockstep versioning",
+  "automatic export of every technically available operation",
+  "typed diagnostics",
+  "changes no normative or legacy standard",
+]
+prohibited = []
+
+[[checks]]
+id = "resolved-finding"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F074 | Resolved in Milestone 7.4b8w |"]
+prohibited = []

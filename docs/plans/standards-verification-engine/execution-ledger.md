@@ -5967,3 +5967,20 @@
 - Eight negative mutations, all three retained gates, 342 verifier tests, all
   202 declarative suites, numeric lifecycle, and generated freshness pass.
   Final graph: 70 Bash checkers, 74 nodes, 498 edges, 74 components.
+
+## 2026-08-21 - M6-I56 Row-7 Decomposition Acceptance
+
+- Fresh evidence selected the 83-line row-7 decomposition checker as the
+  shortest caller-free verifier and qualified it for `serial-coherent`
+  execution.
+- Replaced it with one six-check migration-lifecycle suite covering exact
+  ordered decomposition, all 11 exact dispositions, package authority,
+  canonical owner paths, report evidence, and the resolved finding.
+- Transferred two historical workspace-evidence records to suite authority and
+  preserved accelerated-execution and execution-train lifecycle as independent
+  gates through four accepted records.
+- Five negative mutations, both retained gates, 342 verifier tests, all 203
+  declarative suites, numeric lifecycle, and generated freshness pass. The
+  caller-free package adds no unresolved cumulative interaction, so no mixed
+  checkpoint was triggered. Final graph: 69 Bash checkers, 73 nodes, 492
+  edges, 73 components.

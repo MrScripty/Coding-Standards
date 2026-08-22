@@ -24,7 +24,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-43-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-7-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
@@ -67,7 +66,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-f022-f023-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-14-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-15-decomposition.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-7-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-milestone-7-trust-lifecycle-replan.sh
@@ -213,8 +211,6 @@ executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-4
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh	evaluation/standards-effectiveness/verify-security-index-closure.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-7-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
-executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-7-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh
@@ -421,8 +417,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-44
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-44-decomposition.sh	evaluation/standards-effectiveness/verify-security-index-closure.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-5-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-7-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-7-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-accelerated-execution-replan.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-row-8-decomposition.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-milestone-7-rust-async-decomposition.sh	evaluation/standards-effectiveness/verify-plan-fixtures.sh

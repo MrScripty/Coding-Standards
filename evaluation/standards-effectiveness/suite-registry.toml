@@ -1009,3 +1009,8 @@ requires = []
 id = "dependencies-owner-contract"
 path = "evaluation/standards-effectiveness/suites/dependencies-owner-contract.toml"
 requires = []
+
+[[suites]]
+id = "milestone-7-row-7-decomposition"
+path = "evaluation/standards-effectiveness/suites/milestone-7-row-7-decomposition.toml"
+requires = []
