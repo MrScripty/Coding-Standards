@@ -5435,3 +5435,28 @@ with all 62 retained Bash checkers pass. Final evidence contains 62 Bash
 checkers, 66 nodes, 441 edges, and 66 components. No normative source, fixture,
 engine, helper, wrapper, compatibility representation, false dependency, dual
 authority, or fallback changed.
+
+### M6-I64 Rust Binding Error Mapping Acceptance
+
+Fresh post-wave evidence keeps `verify-undisposed-source-gaps.sh` deferred and
+selects the tied 116-line `verify-rust-binding-error-mapping.sh` as a routine
+caller-free package. Its behavior maps directly to existing decision, table,
+metadata-graph, text, and bounded Markdown-section assertions; no engine or
+schema change is required.
+
+The registered seven-check suite preserves all 18 host-error decisions, exact
+`STD-0776` and `STD-0777` dispositions, metadata closure, canonical profile
+policy, the bounded legacy index and next-section closure, and README
+projection. Six edge records replace metadata-helper execution with the native
+assertion and retain Rust binding conversion and execution-train evidence as
+independent gates. The two obsolete current-consumer records are absent.
+
+Seven disposable mutations reject each represented authority. Both retained
+gates, 357 verifier tests, 35 graph tests, all 210 declarative suites, numeric
+lifecycle, and generated freshness pass. This is the first independent package
+after the M6-I62/M6-I63 mixed checkpoint, and its complete edge dispositions
+show no unresolved cumulative interaction, so no repeated mixed checkpoint is
+triggered. Final evidence contains 61 Bash checkers, 65 nodes, 433 edges, and
+65 components. No normative source, fixture, engine, helper, wrapper,
+compatibility representation, false dependency, dual authority, or fallback
+changed.

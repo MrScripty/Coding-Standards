@@ -6088,3 +6088,20 @@
   declarative suites, generated freshness, the three retained lifecycle gates,
   and the complete owner-wave checkpoint pass. Final graph: 62 Bash checkers,
   66 nodes, 441 edges, 66 components.
+
+## 2026-08-21 - M6-I64 Rust Binding Error Mapping Acceptance
+
+- Fresh post-wave evidence retained the source-gap deferral and selected the
+  caller-free 116-line Rust binding error-mapping checker for one
+  `serial-coherent` package at train order 179.
+- Replaced it with one seven-check suite preserving 18 typed decisions, two
+  exact dispositions, metadata closure, canonical profile policy, bounded
+  legacy closure, and documentation projection.
+- Six edge records map metadata checking to the native engine and preserve
+  conversion and execution-train evidence as independent gates; two obsolete
+  current-consumer records were removed.
+- Seven negative mutations, both retained gates, 357 verifier tests, 35 graph
+  tests, all 210 declarative suites, numeric lifecycle, and generated freshness
+  pass. Exact interaction evidence after the immediately preceding wave
+  checkpoint avoids a redundant mixed checkpoint. Final graph: 61 Bash
+  checkers, 65 nodes, 433 edges, 65 components.

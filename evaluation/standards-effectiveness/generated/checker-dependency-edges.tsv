@@ -31,7 +31,6 @@ contract_reference	docs/plans/planning-proportionality-recovery/reports/active-p
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh
-contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-error-mapping.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-executor-delegation.sh
 contract_reference	docs/plans/planning-proportionality-recovery/reports/active-plan-consumer-dispositions.tsv	evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh
@@ -77,7 +76,6 @@ contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-error-mapping.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-executor-delegation.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh
@@ -218,9 +216,6 @@ executable_reference	evaluation/standards-effectiveness/verify-rust-binding-enum
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	evaluation/standards-effectiveness/verify-rust-wire-representation.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-error-mapping.sh	evaluation/standards-effectiveness/check-metadata.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-error-mapping.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-executable_reference	evaluation/standards-effectiveness/verify-rust-binding-error-mapping.sh	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 executable_reference	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-interop-event-registration.sh
@@ -302,7 +297,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-archite
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	evaluation/standards-effectiveness/check-metadata.sh
-helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-error-mapping.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-executor-delegation.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	evaluation/standards-effectiveness/check-metadata.sh
@@ -394,8 +388,6 @@ verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-conve
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	evaluation/standards-effectiveness/verify-rust-wire-representation.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-error-mapping.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh
-verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-error-mapping.sh	evaluation/standards-effectiveness/verify-rust-binding-conversions.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-interop-event-registration.sh
 verifier_dependency	evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	evaluation/standards-effectiveness/verify-milestone-7-execution-train.sh

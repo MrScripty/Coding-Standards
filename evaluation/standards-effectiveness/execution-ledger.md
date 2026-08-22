@@ -14602,3 +14602,17 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   declarative suites, generated freshness, and the complete checkpoint with all
   62 retained Bash checkers pass. Final graph: 62 Bash checkers, 66 nodes, 441
   edges, 66 components. No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I64 Rust Binding Error Mapping Acceptance
+
+- Accepted one `serial-coherent` package at train order 179, replacing the
+  caller-free Rust binding error-mapping checker with a registered seven-check
+  suite.
+- The suite preserves 18 typed decisions, exact `STD-0776` and `STD-0777`
+  dispositions, metadata closure, profile policy, bounded legacy replacement,
+  next-section closure, and README projection.
+- Six edge records replace metadata-helper execution and retain conversion and
+  execution-train gates independently. Seven mutations, both retained gates,
+  357 verifier tests, 35 graph tests, all 210 suites, numeric lifecycle, and
+  generated freshness pass. Final graph: 61 Bash checkers, 65 nodes, 433
+  edges, 65 components. No fallback or compatibility authority remains.

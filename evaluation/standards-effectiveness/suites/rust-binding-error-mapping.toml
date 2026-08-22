@@ -1,0 +1,133 @@
+schema_version = 1
+id = "rust-binding-error-mapping"
+owner = "profile.language.rust.language-bindings"
+description = "Contract-selected Rust host error mapping with typed diagnostics and no lossy or framework-default fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-error-mapping-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+contract = ["selected", "missing", "contradictory"]
+category = ["stable", "unsupported", "wrong", "collapsed"]
+cancellation = ["preserved", "lost", "not-applicable"]
+context = ["bounded", "unbounded", "not-required"]
+sensitivity = ["safe", "sensitive"]
+mapping = ["checked", "rejected", "infallible-claim"]
+capability = ["available", "unavailable"]
+evidence = ["native-host", "native-only", "missing"]
+fallback = ["none", "string-flatten", "generic-error", "named-framework", "drop-semantics", "default-success"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "contract", op = "eq", value = "contradictory" },
+  { field = "category", op = "in", values = ["wrong", "collapsed"] },
+  { field = "cancellation", op = "eq", value = "lost" },
+  { field = "context", op = "eq", value = "unbounded" },
+  { field = "sensitivity", op = "eq", value = "sensitive" },
+  { field = "mapping", op = "ne", value = "checked" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+field = "category"
+op = "eq"
+value = "unsupported"
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "contract", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "unavailable" },
+  { field = "evidence", op = "ne", value = "native-host" },
+]
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[[checks.projections]]
+columns = ["id", "source", "target", "disposition"]
+order = "source"
+expected = [
+  ["STD-0776", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine"],
+  ["STD-0777", "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md", "profiles/languages/rust/language-bindings.md", "refine"],
+]
+[checks.projections.where]
+field = "id"
+op = "in"
+values = ["STD-0776", "STD-0777"]
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/verification.md",
+  "topics/contracts.md",
+  "topics/security.md",
+  "profiles/boundaries/interop.md",
+  "profiles/boundaries/language-bindings.md",
+  "profiles/languages/rust/README.md",
+  "profiles/languages/rust/language-bindings.md",
+]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/language-bindings.md"
+required = [
+  "## Host Error Representation",
+  "stable categories or codes",
+  "Preserve distinctions",
+  "bounded and non-sensitive",
+  "Return `unsupported`",
+  "`unavailable`",
+  "`invalid`",
+  "infallible `From`",
+  "report default success",
+]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "## Error Handling Across FFI"
+required = [
+  "profiles/languages/rust/language-bindings.md#host-error-representation",
+]
+prohibited = [
+  "intentionally lossy",
+  "Every variant carries a `message: String`",
+  "From<CoreError> for FfiError",
+  "rustler::Error::Term",
+  "Flatten to string messages",
+  "```",
+]
+
+[[checks]]
+id = "legacy-next-section"
+type = "text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+required = ["## Host-Language Callbacks and Event Delivery"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = [
+  "`fixtures/rust/binding-error-mapping-decisions.tsv` and the registered\n`rust-binding-error-mapping` suite check selected host error contracts",
+]
+prohibited = [
+  "`verify-rust-binding-error-mapping.sh` check selected host error contracts",
+]

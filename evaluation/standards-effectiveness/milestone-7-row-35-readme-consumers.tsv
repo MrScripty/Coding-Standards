@@ -7,7 +7,6 @@ evaluation/standards-effectiveness/verify-rust-binding-architecture.sh	none	rust
 evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	none	rust-profile-index
-evaluation/standards-effectiveness/verify-rust-binding-error-mapping.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-binding-executor-delegation.sh	none	rust-profile-index
 evaluation/standards-effectiveness/verify-rust-binding-runtime.sh	none	rust-profile-index

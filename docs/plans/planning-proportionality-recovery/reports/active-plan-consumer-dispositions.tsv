@@ -127,7 +127,6 @@ evaluation/standards-effectiveness/verify-rust-binding-callback-task.sh	shell	li
 evaluation/standards-effectiveness/verify-rust-binding-conversions.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
 evaluation/standards-effectiveness/verify-rust-binding-core-adapter-testability.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
 evaluation/standards-effectiveness/verify-rust-binding-enum-representation.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
-evaluation/standards-effectiveness/verify-rust-binding-error-mapping.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
 evaluation/standards-effectiveness/verify-rust-binding-event-delivery.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
 evaluation/standards-effectiveness/verify-rust-binding-executor-delegation.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2
 evaluation/standards-effectiveness/verify-rust-binding-index-closure.sh	shell	literal-parent-plan-reference	historical-acceptance	remove-active-plan-consumption	local-current-contract+execution-ledger	PPR-C2

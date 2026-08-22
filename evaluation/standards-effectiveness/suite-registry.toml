@@ -1044,3 +1044,8 @@ requires = []
 id = "launcher-owner-row-14"
 path = "evaluation/standards-effectiveness/suites/launcher-owner-row-14.toml"
 requires = []
+
+[[suites]]
+id = "rust-binding-error-mapping"
+path = "evaluation/standards-effectiveness/suites/rust-binding-error-mapping.toml"
+requires = []
