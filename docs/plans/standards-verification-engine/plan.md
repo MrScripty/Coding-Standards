@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 6 Bash retirement after the accepted verification-engine pre-resume gate
 
-**Next slice:** fresh graph audit for the next owner-coherent Bash retirement package
+**Next slice:** re-plan generic declarative row constraints for documentation-policy consolidation
 
 **Acceptance status:** `pending`
 
@@ -242,7 +242,12 @@ fallback remains.
 
 ## Blockers
 
-- `none`
+- Fresh post-M6-I65 evidence selects
+  `verify-documentation-policy-consolidation.sh`, whose 59-rule semantic subset
+  combines explicit ID membership with row-dependent target/disposition
+  constraints. Current generic table checks cannot express the row predicate
+  legibly without duplicating the full canonical disposition rows. M6-I66 is
+  not admitted pending a bounded shared-contract decision.
 
 ## Re-Plan Triggers
 

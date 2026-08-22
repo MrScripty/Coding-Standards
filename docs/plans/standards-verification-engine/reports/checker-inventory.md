@@ -5486,3 +5486,30 @@ checkpoint. Final evidence contains 60 Bash checkers, 64 nodes, 426 edges, and
 64 components. No normative source, fixture, engine, helper, wrapper,
 compatibility representation, false dependency, dual authority, or fallback
 changed.
+
+### Post-M6-I65 Documentation Row-Constraint Re-Plan
+
+Fresh graph evidence leaves eight caller-free candidates after excluding the
+already deferred source-gap checker. The tied shortest candidates are the
+121-line Documentation consolidation and Release procedure checkers. The
+Documentation candidate has no retained verifier dependency and is the next
+preferred frontier, but it cannot be admitted under current declarative
+mechanics without a legibility or ownership compromise.
+
+Its canonical contract selects 59 frozen Documentation identifiers from three
+semantic source ranges and then applies row-dependent constraints: removed
+rules must target `none`, while retained rules must move to Documentation or
+the README template. The current table assertion can compare explicit rows and
+relations, but it cannot apply typed predicates to every selected row. Copying
+59 complete disposition rows into suite configuration would preserve behavior
+at the cost of a large competing projection that must be manually synchronized
+with canonical dispositions. Selecting by target alone is insufficient because
+removed Documentation rules share `none` with excluded Changelog and example
+rules.
+
+This satisfies the active re-plan trigger for a package that strict TOML/TSV
+cannot represent legibly enough for semantic review. M6-I66 is not admitted.
+The accepted M6-I65 boundary remains clean, and the Bash checker remains the
+sole authority pending a bounded shared-contract decision among: a generic
+row-constraint assertion, an explicit reviewed membership provider plus
+generic predicates, or deferral in favor of another caller-free package.

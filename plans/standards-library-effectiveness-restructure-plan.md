@@ -4,7 +4,7 @@
 
 **Current phase:** Milestone 7 verifier migration after terminal-disposition acceptance
 
-**Next slice:** audit the fresh retained-Bash graph; no verifier package is preselected
+**Next slice:** resolve the verification-engine row-constraint re-plan before admitting M6-I66
 
 **Acceptance status:** `partial`
 
@@ -170,6 +170,11 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
    gaps, no normative legacy source rows, and no legacy Router routes.
 5. Complete manual semantic-ownership review `D001` through `D010` before
    Milestone 7 acceptance.
+
+**Current blocker:** the next caller-free Documentation consolidation checker
+requires a bounded decision on generic declarative row constraints. No M6-I66
+package is admitted, and the existing Bash contract remains authoritative
+until the verification-engine plan accepts a no-fallback replacement.
 
 **Acceptance gate:** every rule identifier has a final disposition; structural,
 routing, ownership, source-closure, and no-legacy checks pass; the final Python
