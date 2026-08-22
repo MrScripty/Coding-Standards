@@ -6192,3 +6192,13 @@
   graph tests, all 214 suites, numeric lifecycle, and generated freshness pass.
   Final graph: 57 Bash checkers, 61 nodes, 410 edges, 61 components. No fallback
   or compatibility authority remains.
+
+## 2026-08-21 - M6-I69 Rust Binding Enum Representation Acceptance
+
+- Accepted one `serial-coherent` package at train order 184, replacing the
+  caller-free Rust enum checker with one eight-check suite and ID-only member.
+- Preserved 25 typed decisions, exact disposition, metadata, profile, bounded
+  legacy, and README evidence while retaining three independent gates.
+- Two mutations, 373 verifier tests, 35 graph tests, all 215 suites, retained
+  gates, numeric lifecycle, and generated freshness pass. Final graph: 56 Bash
+  checkers, 60 nodes, 401 edges, 60 components.

@@ -5656,3 +5656,14 @@ so no mixed checkpoint is triggered. Final graph: 57 Bash checkers, 61 nodes,
 410 edges, and 61 components. No copied rows, hardcoded count, numeric-range
 authority, wrapper, compatibility representation, dual authority, or fallback
 remains.
+
+### M6-I69 Rust Binding Enum Representation Acceptance
+
+Fresh post-M6-I68 evidence selected the caller-free Rust enum checker. One
+ID-only fixture and eight-check suite preserve 25 typed decisions, exact source
+and disposition membership, metadata, profile policy, bounded legacy routing,
+and documentation. Eight edge records replace metadata execution and retain
+the Rust wire, conversion, and execution-train gates independently. Two
+mutations, all retained gates, 373 verifier tests, 35 graph tests, all 215
+suites, numeric lifecycle, and generated freshness pass. Final graph: 56 Bash
+checkers, 60 nodes, 401 edges, and 60 components. No fallback remains.

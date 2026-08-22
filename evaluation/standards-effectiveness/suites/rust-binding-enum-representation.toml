@@ -1,0 +1,116 @@
+schema_version = 1
+id = "rust-binding-enum-representation"
+owner = "profile.language.rust.language-bindings"
+description = "Mechanism-derived Rust enum representation with checked conversion, typed failures, and no native-layout or sentinel fallback."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-enum-representation-decisions.tsv"
+expected_column = "expected"
+default = "allow"
+[checks.domains]
+case = ["*"]
+mechanism = ["framework", "wire", "c-abi", "opaque", "generated"]
+contract = ["selected", "missing", "contradictory"]
+variants = ["complete", "unsupported", "mismatch"]
+discriminant = ["defined", "not-applicable", "implicit", "wrong"]
+payload = ["defined", "not-applicable", "mismatch"]
+unknown = ["reject", "contract-selected", "sentinel", "omit"]
+conversion = ["checked", "unchecked"]
+capability = ["available", "unavailable"]
+evidence = ["native-host", "native-only", "missing"]
+fallback = ["none", "native-layout", "assumed-name", "assumed-number", "unknown-sentinel", "omit-variant", "alternate-mechanism", "default-success"]
+expected = ["allow", "typed-invalid", "typed-unsupported", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "contract", op = "eq", value = "contradictory" },
+  { field = "variants", op = "eq", value = "mismatch" },
+  { field = "discriminant", op = "in", values = ["implicit", "wrong"] },
+  { field = "payload", op = "eq", value = "mismatch" },
+  { field = "unknown", op = "in", values = ["sentinel", "omit"] },
+  { field = "conversion", op = "eq", value = "unchecked" },
+]
+[[checks.rules]]
+outcome = "typed-unsupported"
+[checks.rules.when]
+all = [{ field = "variants", op = "eq", value = "unsupported" }]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+any = [
+  { field = "contract", op = "eq", value = "missing" },
+  { field = "capability", op = "eq", value = "unavailable" },
+  { field = "evidence", op = "ne", value = "native-host" },
+]
+
+[[checks]]
+id = "source-membership"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+non_empty = ["id", "path"]
+unique = [["id"]]
+[checks.domains]
+path = ["languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"]
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-enum-representation-members.tsv"
+header = ["id"]
+columns = ["id"]
+order = "source"
+key = "id"
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[checks.domains]
+source = ["languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"]
+target = ["profiles/languages/rust/language-bindings.md"]
+disposition = ["refine"]
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-enum-representation-members.tsv"
+header = ["id"]
+columns = ["id"]
+order = "source"
+key = "id"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/security.md", "profiles/boundaries/interop.md", "profiles/boundaries/language-bindings.md", "profiles/languages/rust/README.md", "profiles/languages/rust/language-bindings.md"]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/language-bindings.md"
+required = ["## Enum Representation", "After selecting the boundary mechanism", "binding framework contract defines supported variants", "Serialized Wire Representation", "stable C ABI defines discriminant width", "opaque handle exposes only its declared operations", "generated wrapper remains derived", "implicit discriminants", "fieldless Rust enum is not automatically an ABI", "integer, and a data-carrying enum", "data-carrying enum is not automatically a stable tagged union", "Use checked conversion in both directions", "Return `invalid`", "`unsupported`", "`unavailable`", "Do not substitute an unknown sentinel", "report default success"]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "### Enum Representation"
+required = ["profiles/languages/rust/language-bindings.md#enum-representation"]
+prohibited = ["Enum conversion rejects variants", "Serialization is permitted only", "```"]
+
+[[checks]]
+id = "legacy-continuation"
+type = "text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+required = ["## Memory Ownership Model"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `rust-binding-enum-representation` suite checks mechanism-specific enum"]
+prohibited = ["`verify-rust-binding-enum-representation.sh` check mechanism-specific enum"]
