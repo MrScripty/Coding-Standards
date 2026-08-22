@@ -1019,3 +1019,8 @@ requires = []
 id = "resilience-recovery-policy"
 path = "evaluation/standards-effectiveness/suites/resilience-recovery-policy.toml"
 requires = []
+
+[[suites]]
+id = "resilience-owner-contract"
+path = "evaluation/standards-effectiveness/suites/resilience-owner-contract.toml"
+requires = []

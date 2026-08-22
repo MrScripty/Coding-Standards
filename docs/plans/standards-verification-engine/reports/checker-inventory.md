@@ -5319,3 +5319,21 @@ no mixed checkpoint was triggered. Final evidence contains 68 Bash checkers,
 72 nodes, 487 edges, and 72 components. No normative source, fixture, engine,
 helper, wrapper, compatibility representation, false dependency, dual
 authority, or fallback changed.
+
+### M6-I58 Resilience Owner Acceptance
+
+Fresh post-M6-I57 evidence selected the 32-line Resilience owner checker as
+the shortest caller-free verifier. The `serial-coherent` package replaces it
+with one three-check topic-owner suite preserving 12 criticality, degradation,
+retry, evidence, and no-fallback decisions plus canonical owner and Router
+projections.
+
+Six historical row-37, row-39, and recovery-policy records now resolve to the
+suite. Accelerated-execution and execution-train lifecycle remain independently
+executable through four accepted records. Three disposable mutations reject
+decision, owner, and Router drift. Both retained gates, 342 verifier tests, all
+205 declarative suites, numeric lifecycle, and generated freshness pass. Final
+graph interactions are complete, so no mixed checkpoint was triggered. Final
+evidence contains 67 Bash checkers, 71 nodes, 481 edges, and 71 components. No
+normative source, fixture, engine, helper, wrapper, compatibility
+representation, false dependency, dual authority, or fallback changed.

@@ -295,11 +295,10 @@ panic handling for Rust security-sensitive production boundaries. They reject
 recoverable panics, missing invariant proof, and fallback recovery.
 
 `fixtures/resilience/owner-contract-decisions.tsv` and
-`verify-resilience-owner-contract.sh` establish the Resilience owner contract
-for dependency criticality, degradation, retry, startup recovery, and typed
-diagnostics. They reject unbounded retry, ignored required failures, default
-success, and fallback recovery while the remaining resilience identifiers are
-populated.
+the registered `resilience-owner-contract` suite establish the Resilience
+owner contract for dependency criticality, degradation, retry, startup
+recovery, and typed diagnostics. They reject unbounded retry, ignored required
+failures, default success, and fallback recovery.
 
 `fixtures/resilience/recovery-policy-decisions.tsv` and
 the registered `resilience-recovery-policy` suite populate that owner with
