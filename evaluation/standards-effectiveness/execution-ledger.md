@@ -14653,3 +14653,17 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   suites, generated freshness, numeric lifecycle, and the complete checkpoint
   with 60 retained Bash checkers pass. M6-I66 remains unadmitted pending fresh
   post-commit evidence.
+
+## 2026-08-21 - M6-I66 Documentation Policy Consolidation Acceptance
+
+- Accepted one `serial-coherent` package at train order 181, replacing the
+  caller-free Documentation policy checker with a seven-check suite and one
+  reviewed ID-only membership provider.
+- The suite preserves exact canonical membership, conditional disposition
+  targets, metadata, workflow and template structure, bounded legacy routing,
+  removed-rule absence, and README projection.
+- Ten historical records transfer to suite authority and two native-engine
+  records replace metadata-helper execution. Seven mutations, 373 verifier
+  tests, 35 graph tests, all 212 suites, numeric lifecycle, and generated
+  freshness pass. Final graph: 59 Bash checkers, 63 nodes, 422 edges, 63
+  components. No fallback or compatibility authority remains.

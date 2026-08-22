@@ -6146,3 +6146,18 @@
   freshness, numeric lifecycle, and the complete checkpoint with all 60
   retained Bash checkers pass. M6-I66 remains unadmitted pending fresh graph
   evidence.
+
+## 2026-08-21 - M6-I66 Documentation Policy Consolidation Acceptance
+
+- Fresh post-contract evidence selected the caller-free Documentation policy
+  checker for one `serial-coherent` package at train order 181.
+- Replaced it with one seven-check suite and one ID-only membership fixture,
+  preserving exact source and disposition membership, conditional row rules,
+  metadata, workflow, template, legacy, no-blanket-rule, and README evidence.
+- Ten historical records now resolve to suite authority, two package records
+  replace metadata-helper execution, and the obsolete row-35 consumer is gone.
+- Seven negative mutations, 373 verifier tests, 35 graph tests, all 212 suites,
+  numeric lifecycle, and generated freshness pass. The immediately preceding
+  complete shared-contract checkpoint and exact independent interactions avoid
+  a redundant mixed checkpoint. Final graph: 59 Bash checkers, 63 nodes, 422
+  edges, 63 components. No fallback or compatibility authority remains.

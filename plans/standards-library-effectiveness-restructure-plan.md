@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 7 verifier migration after terminal-disposition acceptance
 
-**Next slice:** run a fresh graph audit after membership-scope acceptance; do
-not preselect M6-I66 from earlier evidence
+**Next slice:** run a fresh post-M6-I66 graph audit; do not preselect the next
+package from earlier evidence
 
 **Acceptance status:** `partial`
 
@@ -138,7 +138,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | Membership-backed table scope accepted; fresh graph audit is next |
+| 7 | Role-based consolidation and verification migration | `Active` | M6-I66 accepted; fresh graph audit is next |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -147,8 +147,8 @@ complete; `Accepted` requires the named evidence.
 without losing mapped semantics.
 
 **Accepted boundary:** normative owner consolidation is complete through the
-recorded `7.4c3` packages. Verification migration is accepted through M6-I65
-at train order 180, and no later package is admitted. The canonical package
+recorded `7.4c3` packages. Verification migration is accepted through M6-I66
+at train order 181, and no later package is admitted. The canonical package
 manifest contains the exact package state; the execution ledger contains
 detailed slice evidence.
 
@@ -172,9 +172,7 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 5. Complete manual semantic-ownership review `D001` through `D010` before
    Milestone 7 acceptance.
 
-**Current blocker:** `none`. Generic membership-backed table scope is accepted,
-but no M6-I66 package is admitted. Fresh post-commit graph evidence must select
-the next package.
+**Current blocker:** `none`.
 
 **Acceptance gate:** every rule identifier has a final disposition; structural,
 routing, ownership, source-closure, and no-legacy checks pass; the final Python

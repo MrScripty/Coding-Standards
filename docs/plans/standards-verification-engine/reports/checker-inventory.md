@@ -5585,3 +5585,27 @@ numeric lifecycle, and the complete checkpoint with 60 retained Bash checkers
 pass. No canonical rows, counts, numeric ranges, policy callbacks,
 compatibility representation, or fallback were added. M6-I66 remains
 unadmitted pending fresh post-commit graph evidence.
+
+### M6-I66 Documentation Policy Consolidation Acceptance
+
+Fresh post-`95554278` evidence reselected the caller-free Documentation policy
+checker with two lifecycle-contract inbounds and one metadata-helper
+dependency. One reviewed one-column fixture now owns its 59 semantic members.
+The registered seven-check suite resolves those members independently through
+the generated section inventory and canonical disposition table, applies typed
+target/disposition row constraints, validates metadata, workflow, template,
+and legacy routes, rejects blanket-rule restoration, and updates documentation
+projection.
+
+Ten historical edge records now resolve to suite authority and two M6-I66
+records map metadata execution to the native assertion. The obsolete row-35
+consumer is absent. Seven disposable mutations reject missing or contradictory
+dispositions, unavailable membership, missing workflow structure, restored
+legacy authority, and stale documentation projection. All 373 verifier tests,
+35 graph tests, all 212 declarative suites, numeric lifecycle, and generated
+freshness pass. The immediately preceding complete shared-contract checkpoint
+covered all 60 retained Bash checkers; exact package interactions prove this
+independent package does not trigger another mixed checkpoint. Final graph: 59
+Bash checkers, 63 nodes, 422 edges, and 63 components. No source policy,
+copied row, hardcoded count, numeric-range authority, wrapper, compatibility
+representation, false dependency, dual authority, or fallback remains.

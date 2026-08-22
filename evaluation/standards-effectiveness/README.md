@@ -981,10 +981,11 @@ documentation identifiers `STD-0376` through `STD-0399`, validates the
 non-normative reference owner, and rejects restoration of the removed blanket
 API, TODO, table-alignment, and algorithm-template rules.
 
-`verify-documentation-policy-consolidation.sh` proves exact disposition of
-directory/README, ADR, and project-entry identifiers, validates the workflow
-and derived boundary template, and rejects restoration of universal directory,
-fixed-section, placeholder, and per-change README obligations.
+The registered `documentation-policy-consolidation` suite proves exact semantic membership and disposition of
+directory/README, ADR, and project-entry identifiers from one reviewed
+membership provider. It validates the workflow and derived boundary template
+and rejects restoration of universal directory, fixed-section, placeholder,
+and per-change README obligations.
 
 The registered `release-workflow-foundation` suite checks release and changelog
 applicability decisions, exact disposition of `STD-0531` through `STD-0540`,

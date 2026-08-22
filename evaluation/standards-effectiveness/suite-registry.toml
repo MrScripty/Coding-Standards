@@ -1054,3 +1054,8 @@ requires = []
 id = "rust-unsafe-contracts"
 path = "evaluation/standards-effectiveness/suites/rust-unsafe-contracts.toml"
 requires = []
+
+[[suites]]
+id = "documentation-policy-consolidation"
+path = "evaluation/standards-effectiveness/suites/documentation-policy-consolidation.toml"
+requires = []

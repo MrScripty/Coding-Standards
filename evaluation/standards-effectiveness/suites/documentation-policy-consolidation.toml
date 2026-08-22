@@ -1,0 +1,122 @@
+schema_version = 1
+id = "documentation-policy-consolidation"
+owner = "workflow.documentation"
+description = "Exact Documentation consolidation membership, disposition, routing, and no-blanket-rule closure without numeric-range or copied-row authority."
+
+[[checks]]
+id = "source-membership"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+non_empty = ["id", "path"]
+unique = [["id"]]
+[checks.domains]
+path = ["DOCUMENTATION-STANDARDS.md"]
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/documentation/policy-consolidation-members.tsv"
+header = ["id"]
+columns = ["id"]
+order = "source"
+key = "id"
+
+[[checks]]
+id = "exact-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[checks.domains]
+source = ["DOCUMENTATION-STANDARDS.md"]
+target = ["none", "workflows/documentation.md", "templates/README-TEMPLATE.md"]
+disposition = ["move", "remove"]
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/documentation/policy-consolidation-members.tsv"
+header = ["id"]
+columns = ["id"]
+order = "source"
+key = "id"
+
+[[checks.row_constraints]]
+id = "removed-target"
+where = { field = "disposition", op = "eq", value = "remove" }
+require = { field = "target", op = "eq", value = "none" }
+
+[[checks.row_constraints]]
+id = "moved-target"
+where = { field = "disposition", op = "eq", value = "move" }
+require = { field = "target", op = "in", values = ["workflows/documentation.md", "templates/README-TEMPLATE.md"] }
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = [
+  "CORE-STANDARDS.md",
+  "workflows/documentation.md",
+]
+
+[[checks]]
+id = "workflow-projection"
+type = "text"
+path = "workflows/documentation.md"
+required = [
+  "## Artifact Placement",
+  "## Documentation Profiles",
+  "## Repository Entry Point",
+  "## Decision Traceability",
+]
+prohibited = [
+  "Every directory under `src/`",
+  "directories with 3+ files",
+  "Every PR that changes `src/<module>/`",
+  "Every required section must contain",
+  "## Project Structure",
+  "All public functions, classes, and types should be documented",
+]
+
+[[checks]]
+id = "template-projection"
+type = "text"
+path = "templates/README-TEMPLATE.md"
+required = ["workflows/documentation.md"]
+prohibited = [
+  "Every directory under `src/`",
+  "directories with 3+ files",
+  "Every PR that changes `src/<module>/`",
+  "Every required section must contain",
+  "## Project Structure",
+  "All public functions, classes, and types should be documented",
+]
+
+[[checks]]
+id = "legacy-index"
+type = "text"
+path = "DOCUMENTATION-STANDARDS.md"
+required = [
+  "workflows/documentation.md",
+  "workflows/release.md",
+]
+prohibited = [
+  "## Documentation Artifact Layout",
+  "## Architecture Decision Records (ADRs)",
+  "## Changelog",
+  "## README.md (Project Root)",
+  "## Documentation Review Checklist",
+  "Every directory under `src/`",
+  "directories with 3+ files",
+  "Every PR that changes `src/<module>/`",
+  "Every required section must contain",
+  "## Project Structure",
+  "All public functions, classes, and types should be documented",
+]
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = [
+  "The registered `documentation-policy-consolidation` suite proves exact semantic membership and disposition of",
+]
+prohibited = [
+  "`verify-documentation-policy-consolidation.sh` proves exact disposition of",
+]

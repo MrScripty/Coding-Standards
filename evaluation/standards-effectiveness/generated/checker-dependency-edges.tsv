@@ -47,7 +47,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/check-plan-structure.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-concurrency-policy.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-contract-ownership.sh
-contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-ipc-payload-validation.sh
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-language-binding-wire-representation.sh
@@ -67,7 +66,6 @@ contract_reference	evaluation/standards-effectiveness/executable-edge-dispositio
 contract_reference	evaluation/standards-effectiveness/executable-edge-dispositions.tsv	evaluation/standards-effectiveness/verify-undisposed-source-gaps.sh
 contract_reference	evaluation/standards-effectiveness/fixtures/planning/errexit-zero-accumulation.tsv	evaluation/standards-effectiveness/verify-milestone-7-independent-trust-replan.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-decision-traceability.sh
-contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-release-procedure-policy.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-async-lifecycle.sh
 contract_reference	evaluation/standards-effectiveness/milestone-7-row-35-readme-consumers.tsv	evaluation/standards-effectiveness/verify-rust-binding-architecture.sh
@@ -121,7 +119,6 @@ executable_reference	evaluation/standards-effectiveness/verify-cross-language-co
 executable_reference	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/verify-runtime-decoding-policy.sh
 executable_reference	evaluation/standards-effectiveness/verify-decision-table-engine.sh	evaluation/standards-effectiveness/check-decision-table.sh
 executable_reference	evaluation/standards-effectiveness/verify-decision-traceability.sh	templates/check-decision-traceability.sh
-executable_reference	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-input-validation-authority.sh	evaluation/standards-effectiveness/check-metadata.sh
 executable_reference	evaluation/standards-effectiveness/verify-input-validation-authority.sh	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh
@@ -273,7 +270,6 @@ helper_dependency	evaluation/standards-effectiveness/verify-concurrency-policy.s
 helper_dependency	evaluation/standards-effectiveness/verify-cross-language-contract.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-decision-table-engine.sh	evaluation/standards-effectiveness/check-decision-table.sh
 helper_dependency	evaluation/standards-effectiveness/verify-decision-traceability.sh	templates/check-decision-traceability.sh
-helper_dependency	evaluation/standards-effectiveness/verify-documentation-policy-consolidation.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-filesystem-containment-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-input-validation-authority.sh	evaluation/standards-effectiveness/check-metadata.sh
 helper_dependency	evaluation/standards-effectiveness/verify-interop-boundary-policy.sh	evaluation/standards-effectiveness/check-metadata.sh
