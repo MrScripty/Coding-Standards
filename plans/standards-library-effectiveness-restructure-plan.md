@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 verification-engine recovery after measured loading acceptance
+**Current phase:** Milestone 7 verifier migration after terminal-disposition acceptance
 
-**Next slice:** establish migration-Python terminal dispositions; no verifier package is preselected
+**Next slice:** audit the fresh retained-Bash graph; no verifier package is preselected
 
 **Acceptance status:** `partial`
 
@@ -187,6 +187,7 @@ engine is the sole verification authority.
 | Checker migration lifecycle | [Checker migration packages](../evaluation/standards-effectiveness/checker-migration-packages.tsv) |
 | Executable-edge lifecycle | [Executable edge dispositions](../evaluation/standards-effectiveness/executable-edge-dispositions.tsv) |
 | Verification-engine current state | [Verification-engine plan](../docs/plans/standards-verification-engine/plan.md) and [ledger](../docs/plans/standards-verification-engine/execution-ledger.md) |
+| Migration-Python terminal lifecycle | [Terminal dispositions](../evaluation/standards-effectiveness/migration-python-dispositions.tsv) |
 | Current recovery state | [Generic edge-system recovery](../docs/plans/generic-edge-system/plan.md) and [ledger](../docs/plans/generic-edge-system/execution-ledger.md) |
 | Active engine recovery | [Python verification engine design recovery](../docs/plans/python-verification-engine-recovery/plan.md) |
 

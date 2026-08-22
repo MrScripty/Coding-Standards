@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** verification-engine recovery Milestone 4 accepted
+**Current phase:** verification-engine recovery Milestone 5 pre-resume gate accepted
 
-**Next slice:** establish migration-Python terminal dispositions under recovery Milestone 5
+**Next slice:** fresh graph audit for the next owner-coherent Bash retirement package
 
 **Acceptance status:** `pending`
 
@@ -192,10 +192,12 @@ evidence. M6-I18 is accepted from fresh post-M6-I17 evidence; the frozen
 temporary Bash graph schema remains unchanged.
 
 The [Python verification engine design recovery](../python-verification-engine-recovery/plan.md)
-is active from the M6-I60 boundary. Further checker packages are paused while
-canonical graph composition, suite-catalog authority, result semantics,
-policy-specific interfaces, and measured loading are corrected. A terminal
-migration-Python disposition table is required before migration resumes.
+has accepted its pre-resume terminal-disposition gate from the M6-I60 boundary.
+Canonical graph composition, suite-catalog authority, result semantics,
+policy-specific interfaces, measured loading, and every migration-Python
+terminal disposition now have accepted authority. Milestone 5 remains active
+until the dispositions execute at zero Bash; package selection resumes only
+from fresh graph evidence.
 
 **Next work:**
 

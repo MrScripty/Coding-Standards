@@ -20,6 +20,7 @@ from standards_verifier.model import SuiteResult
 SUITE_ID = "checker-migration-packages"
 SUITE_PATH = "evaluation/standards-effectiveness/suites/checker-migration-packages.toml"
 MANIFEST_PATH = "evaluation/standards-effectiveness/checker-migration-packages.tsv"
+DISPOSITIONS_PATH = "evaluation/standards-effectiveness/migration-python-dispositions.tsv"
 
 
 class PackageManifestContractTest(unittest.TestCase):
@@ -28,6 +29,7 @@ class PackageManifestContractTest(unittest.TestCase):
         self.root = Path(self.temp_dir.name)
         self._copy(SUITE_PATH)
         self._copy(MANIFEST_PATH)
+        self._copy(DISPOSITIONS_PATH)
         (self.root / "registry.toml").write_text(
             "schema_version = 1\n\n"
             "[[suites]]\n"
@@ -45,14 +47,14 @@ class PackageManifestContractTest(unittest.TestCase):
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(REPOSITORY_ROOT / relative_path, destination)
 
-    def _rows(self) -> list[list[str]]:
-        with (self.root / MANIFEST_PATH).open(
+    def _rows(self, path: str = MANIFEST_PATH) -> list[list[str]]:
+        with (self.root / path).open(
             "r", encoding="utf-8", newline=""
         ) as handle:
             return list(csv.reader(handle, delimiter="\t"))
 
-    def _write_rows(self, rows: list[list[str]]) -> None:
-        with (self.root / MANIFEST_PATH).open(
+    def _write_rows(self, rows: list[list[str]], path: str = MANIFEST_PATH) -> None:
+        with (self.root / path).open(
             "w", encoding="utf-8", newline=""
         ) as handle:
             csv.writer(handle, delimiter="\t", lineterminator="\n").writerows(rows)
@@ -64,10 +66,11 @@ class PackageManifestContractTest(unittest.TestCase):
         self,
         mutate: Callable[[list[list[str]]], None],
         code: str,
+        path: str = MANIFEST_PATH,
     ) -> None:
-        rows = self._rows()
+        rows = self._rows(path)
         mutate(rows)
-        self._write_rows(rows)
+        self._write_rows(rows, path)
 
         result = self._result()
 
@@ -117,6 +120,34 @@ class PackageManifestContractTest(unittest.TestCase):
         self._assert_mutation(
             lambda rows: rows[2].__setitem__(2, rows[1][2]),
             "ASSERT.TABLE_DUPLICATE_KEY",
+        )
+
+    def test_unknown_terminal_disposition_is_rejected(self) -> None:
+        self._assert_mutation(
+            lambda rows: rows[1].__setitem__(3, "postpone"),
+            "ASSERT.TABLE_DOMAIN",
+            DISPOSITIONS_PATH,
+        )
+
+    def test_empty_terminal_consumer_is_rejected(self) -> None:
+        self._assert_mutation(
+            lambda rows: rows[1].__setitem__(4, ""),
+            "ASSERT.TABLE_EMPTY_VALUE",
+            DISPOSITIONS_PATH,
+        )
+
+    def test_duplicate_terminal_subject_is_rejected(self) -> None:
+        self._assert_mutation(
+            lambda rows: rows[2].__setitem__(1, rows[1][1]),
+            "ASSERT.TABLE_DUPLICATE_KEY",
+            DISPOSITIONS_PATH,
+        )
+
+    def test_unknown_terminal_trigger_is_rejected(self) -> None:
+        self._assert_mutation(
+            lambda rows: rows[1].__setitem__(6, "eventually"),
+            "ASSERT.TABLE_DOMAIN",
+            DISPOSITIONS_PATH,
         )
 
 

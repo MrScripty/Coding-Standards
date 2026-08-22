@@ -14,3 +14,18 @@ unique = [["train_order"], ["package_id"], ["subject"]]
 [checks.domains]
 risk = ["mechanical", "consolidation", "refinement", "safety-critical", "new-owner-design"]
 state = ["admitted", "accepted", "blocked"]
+
+[[checks]]
+id = "migration-python-terminal-dispositions"
+type = "table"
+path = "evaluation/standards-effectiveness/migration-python-dispositions.tsv"
+header = ["subject_kind", "subject", "path", "disposition", "current_consumer", "post_zero_consumer", "terminal_trigger", "evidence_owner", "rationale"]
+non_empty = ["subject_kind", "subject", "path", "disposition", "current_consumer", "post_zero_consumer", "terminal_trigger", "evidence_owner", "rationale"]
+unique = [["subject_kind", "subject"]]
+
+[checks.domains]
+subject_kind = ["module", "launcher", "check-kind", "integration-hook", "execution-mode", "suite", "registry-entry", "test", "artifact", "generated-artifact", "documentation"]
+disposition = ["retain", "replace", "delete"]
+post_zero_consumer = ["none", "verification-engine.python-only-complete"]
+terminal_trigger = ["zero-bash-accepted"]
+evidence_owner = ["verification-engine.zero-bash-acceptance"]

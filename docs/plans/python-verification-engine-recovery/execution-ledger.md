@@ -196,3 +196,33 @@
   the 150-second budget.
 - Result: Milestone 4 accepted. Milestone 5 is the only next slice and remains
   pending explicit admission.
+
+## 2026-08-21: Milestone 5 Pre-Resume Disposition Acceptance
+
+- Operation: `continue` at accepted base
+  `4d99b2de0b60fa134016c3b42a52bba42728e505`.
+- An AST import inventory plus strict parser, registry, CLI, engine, model,
+  evidence, test, and documentation review found no current post-zero-Bash
+  consumer for the temporary migration implementation.
+- Added one reviewed terminal table covering every migration-only module and
+  exposed check kind plus the exact launchers, integration hooks, tests, suites,
+  live records, generated artifacts, and documentation that depend on them.
+- The existing generic migration-package suite now validates exact headers,
+  required values, unique subjects, disposition domains, post-zero consumers,
+  terminal trigger, and evidence owner. No custom check kind or duplicate
+  lifecycle representation was added.
+- The table schedules deletion of temporary migration mechanics at accepted
+  zero-Bash closure. `--complete` and its README contract are replaced in place
+  with Python-only semantics; no mixed-mode fallback is authorized.
+- Focused mutation evidence passed 12 package/disposition contract tests and
+  the two-check migration-package suite. All 357 verifier tests, 35 neutral
+  graph tests, 207 declarative suites, generated freshness, three active-plan
+  structure checks, terminal path/module closure, and `git diff --check`
+  passed.
+- The shared-contract checkpoint passed all declarative suites and all 65
+  retained Bash checkers. The new report links resolve to current repository
+  files; the repository has no standalone global Markdown-link script beyond
+  registered bounded link checks.
+- Result: the pre-resume Milestone 5 gate is accepted. Milestone 5 remains
+  active until its zero-Bash terminal dispositions execute; checker migration
+  may resume only from a fresh graph audit.

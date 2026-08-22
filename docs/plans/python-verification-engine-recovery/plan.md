@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 4 accepted; Milestone 5 pending admission
+**Current phase:** Milestone 5 pre-resume disposition gate accepted; terminal deletion remains active
 
-**Next slice:** record terminal dispositions for every migration-only Python
-module and check kind before Bash migration resumes
+**Next slice:** resume Bash retirement from a fresh post-recovery graph audit;
+no checker package is preselected
 
 **Acceptance status:** `pending`
 
@@ -34,7 +34,7 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 | A3 | One validated immutable suite catalog supplies execution and checks; assertions and invalid, unavailable, and unsupported conditions return their documented statuses. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](execution-ledger.md#2026-08-21-milestone-2-acceptance) |
 | A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters or policy literals in generic checks. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 3 acceptance](execution-ledger.md#2026-08-21-milestone-3-acceptance) |
 | A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims; loading or scan changes occur only when accepted measurements justify them. | `focused` | `representative` | `automated` | `satisfied` | [Milestone 4 performance evidence](reports/milestone-4-performance.md) |
-| A6 | Every migration-only Python module and check kind has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `pending` | Milestone 5 and verification-engine zero-Bash acceptance |
+| A6 | Every migration-only Python module and check kind has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `partial` | [Terminal inventory](reports/milestone-5-terminal-inventory.md); deletion remains due at zero Bash |
 | A7 | Graph, verifier, declarative, generated, plan, link, and mixed gates pass without dual authority, fallback, or a changed temporary Bash graph schema. | `complete` | `not-applicable` | `automated` | `pending` | Final acceptance |
 
 ## Scope
@@ -307,7 +307,7 @@ delete all implementation without a current post-migration consumer.
 
 **Tasks:**
 
-- [ ] Record one `retain`, `replace`, or `delete` disposition, current consumer,
+- [x] Record one `retain`, `replace`, or `delete` disposition, current consumer,
   terminal trigger, and evidence owner for every migration-only module and check
   kind before checker migration resumes.
 - [ ] Resume Bash retirement only under the accepted disposition authority.
@@ -321,12 +321,11 @@ at zero Bash every triggered disposition is satisfied, the repository-wide
 policy-literal prohibition passes, and the Python-only complete checkpoint is
 accepted.
 
-**Status:** `Planned`
+**Status:** `Active`; pre-resume disposition gate accepted
 
 ## Blockers
 
-- Further Bash-checker package selection is paused until the pre-resume
-  terminal-disposition gate in Milestone 5 is accepted.
+- `none`
 
 ## Re-Plan Triggers
 
