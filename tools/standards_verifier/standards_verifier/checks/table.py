@@ -49,6 +49,12 @@ class ProjectedTableSource:
 
 
 @dataclass(frozen=True, slots=True)
+class MemberScope:
+    source: ProjectedTableSource
+    key: str
+
+
+@dataclass(frozen=True, slots=True)
 class RowConstraint:
     id: str
     where: Predicate | None
@@ -278,6 +284,7 @@ class TableCheck:
     unique: tuple[tuple[str, ...], ...]
     projections: tuple[Projection, ...]
     where: Predicate | None
+    members: MemberScope | None
     row_constraints: tuple[RowConstraint, ...]
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
@@ -292,13 +299,19 @@ class TableCheck:
             check=self.id,
         )
 
-        scoped_rows = [
-            (line_number, row)
-            for line_number, row in enumerate(rows, start=2)
-            if self.where is None or self.where.evaluate(row)
-        ]
-
         diagnostics: list[Diagnostic] = []
+        if self.members is None:
+            scoped_rows = [
+                (line_number, row)
+                for line_number, row in enumerate(rows, start=2)
+                if self.where is None or self.where.evaluate(row)
+            ]
+        else:
+            scoped_rows, scope_diagnostics = self._resolve_members(
+                root, rows, context
+            )
+            diagnostics.extend(scope_diagnostics)
+
         for line_number, row in scoped_rows:
             for field in self.non_empty:
                 if not row[field]:
@@ -392,6 +405,117 @@ class TableCheck:
                     )
                 )
         return diagnostics
+
+    def _resolve_members(
+        self,
+        root: Path,
+        rows: list[dict[str, str]],
+        context: CheckContext,
+    ) -> tuple[list[tuple[int, dict[str, str]]], list[Diagnostic]]:
+        if self.members is None:
+            raise TypeError("member scope is required")
+        member_rows = read_table_rows(
+            root,
+            self.members.source.path,
+            self.members.source.header,
+            suite=context.suite_id,
+            check=self.id,
+        )
+        projected = project_table_rows(
+            member_rows, self.members.source.projection
+        )
+        diagnostics: list[Diagnostic] = []
+        if not projected:
+            diagnostics.append(
+                Diagnostic(
+                    "ASSERT.TABLE_MEMBERS_EMPTY",
+                    "invalid",
+                    "table member scope must select at least one identity",
+                    suite=context.suite_id,
+                    check=self.id,
+                    path=self.members.source.path,
+                    expected="nonempty unique members",
+                    observed="empty",
+                )
+            )
+            return [], diagnostics
+
+        members: list[str] = []
+        seen_members: set[str] = set()
+        for (member,) in projected:
+            if not member:
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.TABLE_MEMBER_EMPTY",
+                        "invalid",
+                        "table member identity must not be empty",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.members.source.path,
+                        expected="nonempty member",
+                        observed="empty",
+                    )
+                )
+                continue
+            if member in seen_members:
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.TABLE_MEMBER_DUPLICATE",
+                        "invalid",
+                        "table member identity is duplicated",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.members.source.path,
+                        field=self.members.key,
+                        expected="unique members",
+                        observed=member,
+                    )
+                )
+                continue
+            seen_members.add(member)
+            members.append(member)
+
+        canonical: dict[str, list[tuple[int, dict[str, str]]]] = {}
+        for line_number, row in enumerate(rows, start=2):
+            canonical.setdefault(row[self.members.key], []).append(
+                (line_number, row)
+            )
+
+        scoped_rows: list[tuple[int, dict[str, str]]] = []
+        for member in members:
+            matches = canonical.get(member, [])
+            if not matches:
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.TABLE_MEMBER_MISSING",
+                        "invalid",
+                        "declared table member has no canonical row",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.path,
+                        field=self.members.key,
+                        expected=member,
+                        observed="absent",
+                    )
+                )
+                continue
+            if len(matches) != 1:
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.TABLE_MEMBER_ROW_DUPLICATE",
+                        "invalid",
+                        "declared table member resolves to multiple canonical rows",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.path,
+                        field=self.members.key,
+                        expected="one canonical row",
+                        observed=f"{member}:{len(matches)}",
+                    )
+                )
+                continue
+            scoped_rows.append(matches[0])
+        return scoped_rows, diagnostics
 
 
 def _projection(
@@ -579,6 +703,62 @@ def _row_constraint(
     return RowConstraint(constraint_id, where, require)
 
 
+def _member_scope(
+    raw: Any, header: tuple[str, ...], suite: str, check: str
+) -> MemberScope:
+    if not isinstance(raw, dict):
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.TABLE_MEMBERS",
+                "invalid",
+                "table members must be a TOML table",
+                suite=suite,
+                check=check,
+                field="members",
+            )
+        )
+    key = raw.get("key")
+    if not isinstance(key, str) or not key or key not in header:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.TABLE_MEMBER_KEY",
+                "invalid",
+                "table member key must name one canonical table column",
+                suite=suite,
+                check=check,
+                field="members.key",
+                observed=str(key),
+            )
+        )
+    source_raw = dict(raw)
+    source_raw.pop("key")
+    source = parse_projected_table_source(
+        source_raw,
+        suite,
+        check,
+        "members",
+        invalid_code="CONFIG.TABLE_MEMBERS",
+        source_name="table member source",
+        projection_name="table member projection",
+        predicate_name="table member predicate",
+    )
+    if (
+        len(source.projection.columns) != 1
+        or source.projection.split_field is not None
+    ):
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.TABLE_MEMBER_PROJECTION",
+                "invalid",
+                "table member projection must select exactly one unsplit column",
+                suite=suite,
+                check=check,
+                field="members.columns",
+            )
+        )
+    return MemberScope(source, key)
+
+
 def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
     allowed = {
         "id",
@@ -590,6 +770,7 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
         "unique",
         "projections",
         "where",
+        "members",
         "row_constraints",
     }
     unknown = set(raw) - allowed
@@ -720,6 +901,21 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
                     field=sorted(unknown_fields)[0],
                 )
             )
+    members = None
+    if "members" in raw:
+        members = _member_scope(
+            raw["members"], header, suite_id, check_id
+        )
+    if where is not None and members is not None:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.TABLE_SCOPE",
+                "invalid",
+                "table where and members scopes are mutually exclusive",
+                suite=suite_id,
+                check=check_id,
+            )
+        )
     raw_row_constraints = raw.get("row_constraints", [])
     if not isinstance(raw_row_constraints, list):
         raise EngineError(
@@ -771,5 +967,6 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
         unique,
         projections,
         where,
+        members,
         row_constraints,
     )

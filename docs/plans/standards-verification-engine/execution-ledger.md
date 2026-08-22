@@ -6134,3 +6134,15 @@
   freshness, numeric lifecycle, and the complete checkpoint with all 60
   retained Bash checkers pass. M6-I66 remains unadmitted pending fresh graph
   evidence.
+
+## 2026-08-21 - Membership-Backed Table Scope Shared Contract
+
+- Accepted one strict projected membership source for generic table checks.
+  Members are nonempty and unique, resolve one-to-one through an explicit
+  canonical key, and retain canonical source-row diagnostics.
+- Added ten direct tests covering accepted order and every malformed, missing,
+  duplicate, conflicting, and escaping state in the bounded contract.
+- All 373 verifier tests, 35 graph tests, 211 declarative suites, generated
+  freshness, numeric lifecycle, and the complete checkpoint with all 60
+  retained Bash checkers pass. M6-I66 remains unadmitted pending fresh graph
+  evidence.

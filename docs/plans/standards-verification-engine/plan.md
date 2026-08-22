@@ -4,14 +4,13 @@
 
 **Current phase:** Milestone 6 Bash retirement after the accepted verification-engine pre-resume gate
 
-**Next slice:** re-plan one generic membership-backed table scope before
-admitting M6-I66
+**Next slice:** run a fresh post-membership-scope graph audit; do not preselect
+or admit M6-I66 from earlier evidence
 
 **Acceptance status:** `pending`
 
-**Latest accepted slice:** the scoped table row-constraint shared contract is
-accepted; M6-I65 remains the latest accepted checker migration at train order
-180.
+**Latest accepted slice:** generic membership-backed table scope is accepted;
+M6-I65 remains the latest accepted checker migration at train order 180.
 
 **Latest admitted slice:** `none`; the next package requires fresh graph audit.
 
@@ -107,7 +106,7 @@ evidence contracts.
 | Generated values | Derive mutable paths, counts, memberships, and relationships; store only explicit policy inputs and reviewed lifecycle authority. | [Count-authority report](reports/count-authority.md) |
 | Literal case matching | Generic whole-file and bounded-section text checks use one explicit fixed-literal case mode; case-insensitive matching uses Unicode case folding without regex or inferred variants. | [Engine README](../../../tools/standards_verifier/README.md) |
 | Numeric lifecycle | Whole-checker deletion derives candidate retirement from one accepted checker package; candidate mappings apply only when a numeric expression disappears while its checker remains live. | [Checker inventory](reports/checker-inventory.md) |
-| Scoped table constraints | One optional table predicate selects explicit semantic membership; named row constraints reuse the fixed predicate grammar and preserve source-row diagnostics without copying canonical rows or adding policy-specific engine branches. | [Engine README](../../../tools/standards_verifier/README.md) |
+| Scoped table constraints | One optional predicate or one strict membership provider selects canonical rows; membership resolves one-to-one and named row constraints reuse the fixed predicate grammar without copied rows or policy-specific branches. | [Engine README](../../../tools/standards_verifier/README.md) |
 | Concurrency | Prepare admitted disjoint package-local work concurrently; integrate registry, manifests, graph, plans, and checkpoints serially. | [Checker inventory](reports/checker-inventory.md) |
 | Parent boundary | The parent plan owns normative migration; this plan owns verification architecture and checker migration. | [Parent plan](../../../plans/standards-library-effectiveness-restructure-plan.md) |
 
@@ -146,7 +145,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Post-contract audit found a single-authority membership gap; M6-I66 is not admitted |
+| 6 | Exceptional checks and Bash retirement | `Active` | Membership-backed table scope accepted; fresh graph audit is next |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -247,13 +246,8 @@ fallback remains.
 
 ## Blockers
 
-- Fresh post-`f4cd264e` evidence reselects the Documentation consolidation
-  candidate, but the accepted predicate scope cannot prove every declared
-  semantic member exists without repeating the complete ID list in both scope
-  and expected output. Existing inclusion and keyed-relation checks can consume
-  one reviewed membership provider but cannot apply that provider as table
-  assertion scope. M6-I66 is not admitted pending a generic single-authority
-  membership-scope decision.
+- `none`; M6-I66 remains unadmitted pending the required fresh post-commit
+  graph audit.
 
 ## Re-Plan Triggers
 

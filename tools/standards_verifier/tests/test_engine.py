@@ -343,6 +343,20 @@ class EngineTest(unittest.TestCase):
         )
         return "suites/row-constraints.toml"
 
+    def write_member_scope_table_suite(self) -> str:
+        suite_path = self.write_row_constraint_table_suite()
+        self.write("members.tsv", "id\nb\na\n")
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'where = { field = "id", op = "in", values = ["a", "b"] }',
+                'members = { path = "members.tsv", header = ["id"], columns = ["id"], order = "source", key = "id" }',
+                1,
+            ),
+            encoding="utf-8",
+        )
+        return suite_path
+
     def test_table_row_count_is_an_unknown_field(self) -> None:
         suite_path = self.write_table_suite()
         self.write_registry([("table", suite_path, [])])
@@ -857,6 +871,160 @@ class EngineTest(unittest.TestCase):
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
         self.assertEqual(raised.exception.diagnostic.field, "fallback")
+
+    def test_table_member_scope_resolves_canonical_rows_in_member_order(self) -> None:
+        suite_path = self.write_member_scope_table_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'expected = [["a"], ["b"]]',
+                'expected = [["b"], ["a"]]',
+                1,
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "passed")
+
+    def test_table_member_scope_reports_missing_member(self) -> None:
+        suite_path = self.write_member_scope_table_suite()
+        self.write("members.tsv", "id\na\nmissing\n")
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(
+            result.diagnostics[0].code, "ASSERT.TABLE_MEMBER_MISSING"
+        )
+        self.assertEqual(result.diagnostics[0].expected, "missing")
+
+    def test_table_member_scope_rejects_duplicate_member(self) -> None:
+        suite_path = self.write_member_scope_table_suite()
+        self.write("members.tsv", "id\na\na\n")
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(
+            result.diagnostics[0].code, "ASSERT.TABLE_MEMBER_DUPLICATE"
+        )
+
+    def test_table_member_scope_rejects_empty_membership(self) -> None:
+        suite_path = self.write_member_scope_table_suite()
+        self.write("members.tsv", "id\n")
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "ASSERT.TABLE_MEMBERS_EMPTY")
+
+    def test_table_member_scope_rejects_empty_member(self) -> None:
+        suite_path = self.write_member_scope_table_suite()
+        self.write("members.tsv", 'id\n""\n')
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "ASSERT.TABLE_MEMBER_EMPTY")
+
+    def test_table_member_scope_rejects_duplicate_canonical_row(self) -> None:
+        suite_path = self.write_member_scope_table_suite()
+        self.write(
+            "row-constraints.tsv",
+            "id\ttarget\tdisposition\n"
+            "a\tworkflow.documentation\tmove\n"
+            "a\tworkflow.documentation\tmove\n"
+            "b\tnone\tremove\n",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(
+            result.diagnostics[0].code,
+            "ASSERT.TABLE_MEMBER_ROW_DUPLICATE",
+        )
+
+    def test_table_member_scope_and_where_are_mutually_exclusive(self) -> None:
+        suite_path = self.write_member_scope_table_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'members = { path = "members.tsv",',
+                'where = { field = "id", op = "eq", value = "a" }\n'
+                'members = { path = "members.tsv",',
+                1,
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.TABLE_SCOPE")
+
+    def test_table_member_scope_rejects_unknown_canonical_key(self) -> None:
+        suite_path = self.write_member_scope_table_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'key = "id"', 'key = "missing"', 1
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(
+            raised.exception.diagnostic.code, "CONFIG.TABLE_MEMBER_KEY"
+        )
+
+    def test_table_member_scope_requires_one_unsplit_column(self) -> None:
+        suite_path = self.write_member_scope_table_suite()
+        self.write("members.tsv", "id\tlabel\na\tA\n")
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8")
+            .replace('header = ["id"]', 'header = ["id", "label"]', 1)
+            .replace('columns = ["id"]', 'columns = ["id", "label"]', 1),
+            encoding="utf-8",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(
+            raised.exception.diagnostic.code,
+            "CONFIG.TABLE_MEMBER_PROJECTION",
+        )
+
+    def test_table_member_scope_rejects_path_escape(self) -> None:
+        suite_path = self.write_member_scope_table_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'path = "members.tsv"', 'path = "../members.tsv"', 1
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(result.diagnostics[0].code, "PATH.OUTSIDE_REPOSITORY")
 
     def test_table_relation_with_split_passes(self) -> None:
         suite_path = self.write_relation_suite()

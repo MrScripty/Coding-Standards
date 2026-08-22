@@ -317,7 +317,14 @@ field and fails rather than using a compatibility parser.
 
 An optional table-level `where` predicate scopes non-empty, domain, unique,
 projection, and row-constraint assertions to one explicit semantic membership
-set. Each named `[[checks.row_constraints]]` supplies an optional `where`
+set. Alternatively, one strict `members` projected table source may select a
+single unsplit identity column and name its canonical table `key`. Membership
+must be non-empty and unique, and every member must resolve to exactly one
+canonical row. Assertions run in declared member order while retaining each
+canonical row's original source line. Predicate and member scope are mutually
+exclusive. Missing or duplicate canonical rows, empty or duplicate members,
+unknown keys or columns, malformed sources, and repository escape are typed
+failures. Each named `[[checks.row_constraints]]` supplies an optional `where`
 predicate and one required `require` predicate. Every scoped row selected by
 the constraint must satisfy that requirement; failures retain the original TSV
 line and report `ASSERT.TABLE_ROW_CONSTRAINT` with the constraint ID. Both
@@ -325,7 +332,8 @@ predicates use the same fixed `eq`, `ne`, `in`, `not_in`, `all`, `any`, and
 `not` grammar as projections and decisions. Unknown columns, duplicate or
 empty constraint IDs, missing requirements, and unknown fields are invalid.
 The check does not infer membership, derive policy from numeric ID ranges,
-copy canonical rows, execute callbacks, or fall back to an unscoped assertion.
+copy canonical rows, execute callbacks, combine ambiguous scopes, or fall back
+to an unscoped assertion.
 
 The `inclusion` check compares two strict projected table sources named
 `members` and `container`. Every unique projected member row must occur in the

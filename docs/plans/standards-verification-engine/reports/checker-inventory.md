@@ -5567,3 +5567,21 @@ Alternatives are to duplicate the ID list in scope and expected output, copy
 complete canonical rows into a fixture, or defer this candidate. The first two
 violate single authority; deferral is safe but leaves the known generic gap.
 M6-I66 therefore remains unadmitted pending a shared-contract decision.
+
+### Membership-Backed Table Scope Acceptance
+
+The accepted shared contract adds one optional strict membership source to the
+generic table check. It projects one unsplit identity column, names the
+canonical table key, requires nonempty unique members, and resolves every
+member to exactly one canonical row. Assertions execute in declared member
+order while diagnostics preserve canonical TSV line numbers. Predicate and
+membership scope are mutually exclusive.
+
+Ten direct tests cover ordered resolution, missing and duplicate members,
+empty membership and identities, duplicate canonical rows, conflicting scope,
+unknown canonical keys, invalid projection width, and path escape. All 373
+verifier tests, 35 graph tests, 211 declarative suites, generated freshness,
+numeric lifecycle, and the complete checkpoint with 60 retained Bash checkers
+pass. No canonical rows, counts, numeric ranges, policy callbacks,
+compatibility representation, or fallback were added. M6-I66 remains
+unadmitted pending fresh post-commit graph evidence.

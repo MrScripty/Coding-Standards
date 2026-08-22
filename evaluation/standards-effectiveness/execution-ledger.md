@@ -14642,3 +14642,14 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
 - One stale generated checker-structure consumer introduced by the prior
   plan-only re-plan was regenerated; graph nodes, edges, and components did not
   change. M6-I66 remains unadmitted pending fresh post-commit evidence.
+
+## 2026-08-21 - Membership-Backed Table Scope Shared Contract
+
+- Accepted one generic one-to-one membership scope over canonical table rows.
+  It keeps semantic membership in one reviewed provider and introduces no
+  copied canonical rows, policy-specific branch, callback, compatibility
+  representation, or fallback.
+- Ten direct tests, 373 verifier tests, 35 graph tests, all 211 declarative
+  suites, generated freshness, numeric lifecycle, and the complete checkpoint
+  with 60 retained Bash checkers pass. M6-I66 remains unadmitted pending fresh
+  post-commit evidence.
