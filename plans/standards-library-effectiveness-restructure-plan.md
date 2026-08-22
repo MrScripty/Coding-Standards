@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 verification-engine recovery after catalog acceptance
+**Current phase:** Milestone 7 verification-engine recovery after policy-interface acceptance
 
-**Next slice:** complete policy-interface recovery; no verifier package is preselected
+**Next slice:** measure verifier workloads under recovery Milestone 4; no verifier package is preselected
 
 **Acceptance status:** `partial`
 

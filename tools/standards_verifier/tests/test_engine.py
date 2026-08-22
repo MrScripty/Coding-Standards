@@ -314,42 +314,6 @@ class EngineTest(unittest.TestCase):
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
         self.assertEqual(raised.exception.diagnostic.field, "row_count")
 
-    def write_acceptance_claims_suite(
-        self,
-        *,
-        path: str = "claims.tsv",
-        expected: str = "satisfied",
-        extra: str = "",
-    ) -> str:
-        self.write(
-            "suites/claims.toml",
-            f"""
-            schema_version = 1
-            id = "claims"
-            owner = "test.owner"
-            description = "Acceptance claims suite"
-
-            [[checks]]
-            id = "claims"
-            type = "acceptance_claims"
-            path = {json.dumps(path)}
-            kinds = ["focused", "system"]
-            environments = ["not-applicable", "representative"]
-            modes = ["automated", "manual", "either"]
-            {extra}
-            """,
-        )
-        if path == "claims.tsv":
-            self.write(
-                path,
-                "case\trequired_claims\tobserved_claims\texpected\n"
-                "exact\tfocused@not-applicable@automated\t"
-                f"focused@not-applicable@automated\t{expected}\n"
-                "either\tsystem@representative@either\t"
-                "system@representative@manual\tsatisfied\n",
-            )
-        return "suites/claims.toml"
-
     def write_relation_suite(
         self,
         *,
@@ -740,65 +704,6 @@ class EngineTest(unittest.TestCase):
     def test_table_path_escape_is_invalid(self) -> None:
         suite_path = self.write_table_suite(path="../outside.tsv")
         self.write_registry([("table", suite_path, [])])
-
-        result = Verifier(self.root, self.registry).run()[0]
-
-        self.assertEqual(result.status, "failed")
-        self.assertEqual(result.diagnostics[0].code, "PATH.OUTSIDE_REPOSITORY")
-
-    def test_acceptance_claim_sets_pass(self) -> None:
-        suite_path = self.write_acceptance_claims_suite()
-        self.write_registry([("claims", suite_path, [])])
-
-        result = Verifier(self.root, self.registry).run()[0]
-
-        self.assertEqual(result.status, "passed")
-
-    def test_acceptance_claim_mismatch_has_stable_diagnostic(self) -> None:
-        suite_path = self.write_acceptance_claims_suite(expected="unsatisfied")
-        self.write_registry([("claims", suite_path, [])])
-
-        result = Verifier(self.root, self.registry).run()[0]
-
-        self.assertEqual(result.status, "failed")
-        self.assertEqual(result.diagnostics[0].code, "ASSERT.ACCEPTANCE_CLAIMS")
-
-    def test_malformed_acceptance_claim_is_invalid(self) -> None:
-        suite_path = self.write_acceptance_claims_suite()
-        self.write(
-            "claims.tsv",
-            "case\trequired_claims\tobserved_claims\texpected\n"
-            "bad\tfocused@not-applicable\tfocused@not-applicable@automated\t"
-            "unsatisfied\n",
-        )
-        self.write_registry([("claims", suite_path, [])])
-
-        result = Verifier(self.root, self.registry).run()[0]
-
-        self.assertEqual(result.status, "failed")
-        self.assertEqual(result.diagnostics[0].code, "CLAIM.INVALID")
-
-    def test_unknown_acceptance_claim_field_is_invalid(self) -> None:
-        suite_path = self.write_acceptance_claims_suite(extra="unknown = true")
-        self.write_registry([("claims", suite_path, [])])
-
-        with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
-
-        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
-
-    def test_missing_acceptance_claim_table_is_unavailable(self) -> None:
-        suite_path = self.write_acceptance_claims_suite(path="missing.tsv")
-        self.write_registry([("claims", suite_path, [])])
-
-        result = Verifier(self.root, self.registry).run()[0]
-
-        self.assertEqual(result.exit_code, 3)
-        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
-
-    def test_acceptance_claim_path_escape_is_invalid(self) -> None:
-        suite_path = self.write_acceptance_claims_suite(path="../claims.tsv")
-        self.write_registry([("claims", suite_path, [])])
 
         result = Verifier(self.root, self.registry).run()[0]
 

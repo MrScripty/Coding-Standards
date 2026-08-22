@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2 accepted; Milestone 3 pending admission
+**Current phase:** Milestone 3 accepted; Milestone 4 pending admission
 
-**Next slice:** replace the two policy-specific engine interfaces with the
-smallest owned declarative mechanics or downstream adapters
+**Next slice:** measure named verifier workloads and decide whether focused
+loading or scan consolidation is justified
 
 **Acceptance status:** `pending`
 
@@ -32,7 +32,7 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 | A1 | Every metadata-bearing canonical document is queryable by logical ID and path alias, with normative/routable membership, `Requires`, and `Specializes` derived from canonical metadata rather than validation-suite selection. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](execution-ledger.md#2026-08-21-milestone-1-acceptance) |
 | A2 | Verifier-interface scenarios select Architecture and Performance only from Router facts, including positive, negative, and unresolved cases. | `focused` | `not-applicable` | `automated` | `satisfied` | `s1-routing` verifier-change decisions |
 | A3 | One validated immutable suite catalog supplies execution and checks; assertions and invalid, unavailable, and unsupported conditions return their documented statuses. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](execution-ledger.md#2026-08-21-milestone-2-acceptance) |
-| A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters or policy literals in generic checks. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 3 |
+| A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters or policy literals in generic checks. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 3 acceptance](execution-ledger.md#2026-08-21-milestone-3-acceptance) |
 | A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims; loading or scan changes occur only when accepted measurements justify them. | `focused` | `representative` | `automated` | `pending` | Milestone 4 |
 | A6 | Every migration-only Python module and check kind has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `pending` | Milestone 5 and verification-engine zero-Bash acceptance |
 | A7 | Graph, verifier, declarative, generated, plan, link, and mixed gates pass without dual authority, fallback, or a changed temporary Bash graph schema. | `complete` | `not-applicable` | `automated` | `pending` | Final acceptance |
@@ -226,18 +226,23 @@ interfaces with the smallest owned generic mechanics or downstream adapter.
   mechanic is proven
 - `evaluation/standards-effectiveness/suites/source-index-closures.toml`
 - `evaluation/standards-effectiveness/suites/acceptance-claims.toml`
+- `evaluation/standards-effectiveness/suites/root-index-closure.toml`
 - directly affected fixtures and documentation
+- `tools/standards_verifier/tests/test_routing_checks.py`
+- `tools/standards_verifier/tests/test_engine.py`
+- `tools/standards_verifier/tests/test_source_index_closure.py`
+- `docs/plans/python-verification-engine-recovery/reports/milestone-3-interface-disposition.md`
 - this plan directory and parent current-state plans
 
 **Tasks:**
 
-- [ ] Map each source-index responsibility to an existing mechanic before
+- [x] Map each source-index responsibility to an existing mechanic before
   adding one.
-- [ ] Select declarative composition or a policy adapter from module depth,
+- [x] Select declarative composition or a policy adapter from module depth,
   locality, and interface evidence rather than consumer count.
-- [ ] Preserve positive, negative, ordering, membership, route, line-budget,
+- [x] Preserve positive, negative, ordering, membership, route, line-budget,
   no-fallback, and typed-outcome evidence.
-- [ ] Delete replaced check kinds, implementations, parser branches, and private
+- [x] Delete replaced check kinds, implementations, parser branches, and private
   tests in the accepting slice.
 
 **Acceptance gate:** the two migrated suites preserve mutation parity; their
@@ -245,7 +250,7 @@ generic implementations contain no source-index, Router, canonical Verification,
 or migration-state policy literals; all broad gates pass; no wrapper or dual
 authority remains.
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 ### Milestone 4: Measured Loading And Performance
 

@@ -1,12 +1,49 @@
 schema_version = 1
 id = "acceptance-claims"
 owner = "workflow.verification"
-description = "Canonical acceptance-claim grammar and exact required-to-observed satisfaction."
+description = "Canonical acceptance-claim identity, execution-mode, and complete evidence-set decisions without a serialized claim grammar."
 
 [[checks]]
-id = "claims"
-type = "acceptance_claims"
-path = "evaluation/standards-effectiveness/fixtures/verification/acceptance-claims.tsv"
-kinds = ["focused", "integration", "contract", "system", "user-workflow", "release-artifact"]
-environments = ["not-applicable", "simulated", "representative", "required-real"]
-modes = ["automated", "manual", "either"]
+id = "claim-satisfaction"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/verification/acceptance-claim-decisions.tsv"
+expected_column = "expected"
+default = "satisfied"
+[checks.domains]
+case = ["*"]
+identity = ["different-environment", "different-kind", "same"]
+required_mode = ["automated", "either", "manual"]
+evidence_mode = ["automated", "manual"]
+required_set = ["complete", "incomplete"]
+expected = ["satisfied", "unsatisfied"]
+[[checks.rules]]
+outcome = "unsatisfied"
+[checks.rules.when]
+any = [
+  { field = "identity", op = "ne", value = "same" },
+  { field = "required_set", op = "eq", value = "incomplete" },
+  { all = [
+    { field = "required_mode", op = "eq", value = "automated" },
+    { field = "evidence_mode", op = "eq", value = "manual" },
+  ] },
+  { all = [
+    { field = "required_mode", op = "eq", value = "manual" },
+    { field = "evidence_mode", op = "eq", value = "automated" },
+  ] },
+]
+
+[[checks]]
+id = "canonical-policy"
+type = "text"
+path = "workflows/verification.md"
+required = [
+  "## Evidence Kind",
+  "## Environment Qualification",
+  "## Execution Mode",
+  "Either mode is acceptable for this claim.",
+  "Derive each blocking or advisory gate from a named acceptance claim",
+  "Select the smallest complete claim set",
+  "Simulation proves only its modeled contract.",
+  "Manual execution is not stronger than automation.",
+]
+prohibited = ["kind@environment@mode"]

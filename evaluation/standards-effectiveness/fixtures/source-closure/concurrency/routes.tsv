@@ -1,8 +1,0 @@
-route	target	href
-router	STANDARDS-ROUTER.md	STANDARDS-ROUTER.md
-concurrency	topics/concurrency.md	topics/concurrency.md
-csharp_async	profiles/languages/csharp/async.md	profiles/languages/csharp/async.md
-rust_async	profiles/languages/rust/async.md	profiles/languages/rust/async.md
-rust_security	profiles/languages/rust/security.md	profiles/languages/rust/security.md
-typescript_async	profiles/languages/typescript/async.md	profiles/languages/typescript/async.md
-godot	profiles/frameworks/godot.md	profiles/frameworks/godot.md

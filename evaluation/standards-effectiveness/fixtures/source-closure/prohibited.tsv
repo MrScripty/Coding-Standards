@@ -1,0 +1,92 @@
+source	literal
+CODING-STANDARDS.md	Migration authority
+CODING-STANDARDS.md	remains canonical only
+CODING-STANDARDS.md	This file remains canonical
+CODING-STANDARDS.md	Conflicts for moved rules
+CODING-STANDARDS.md	not yet moved
+CODING-STANDARDS.md	###
+COMMIT-STANDARDS.md	Commit Standards Migration Index
+COMMIT-STANDARDS.md	authority moved
+COMMIT-STANDARDS.md	Existing links may continue
+COMMIT-STANDARDS.md	during migration
+COMMIT-STANDARDS.md	old wording conflicts
+COMMIT-STANDARDS.md	workflow applies
+CONCURRENCY-STANDARDS.md	This is a non-normative migration index
+CONCURRENCY-STANDARDS.md	remain migration material
+CONCURRENCY-STANDARDS.md	retained below
+CONCURRENCY-STANDARDS.md	legacy authority
+CONCURRENCY-STANDARDS.md	## Core Principles
+CONCURRENCY-STANDARDS.md	### Always Observe Task Errors
+CONCURRENCY-STANDARDS.md	### Never Block on Async
+CONCURRENCY-STANDARDS.md	### Pass CancellationToken Through Async Chains
+CROSS-PLATFORM-STANDARDS.md	This is a non-normative migration index
+CROSS-PLATFORM-STANDARDS.md	remain migration material
+CROSS-PLATFORM-STANDARDS.md	retained below
+CROSS-PLATFORM-STANDARDS.md	legacy authority
+CROSS-PLATFORM-STANDARDS.md	## File System Conventions
+CROSS-PLATFORM-STANDARDS.md	## Native Library Rules
+CROSS-PLATFORM-STANDARDS.md	### Loading Strategy
+CROSS-PLATFORM-STANDARDS.md	### Library Naming
+CROSS-PLATFORM-STANDARDS.md	### Installation Documentation
+CROSS-PLATFORM-STANDARDS.md	## CI Matrix
+CROSS-PLATFORM-STANDARDS.md	### When to Build
+CROSS-PLATFORM-STANDARDS.md	Linux x86_64
+CROSS-PLATFORM-STANDARDS.md	Windows x86_64
+CROSS-PLATFORM-STANDARDS.md	Best-effort
+CROSS-PLATFORM-STANDARDS.md	Strategy + Factory Pattern
+CROSS-PLATFORM-STANDARDS.md	One Platform Per File
+CROSS-PLATFORM-STANDARDS.md	Use runtime detection only
+CROSS-PLATFORM-STANDARDS.md	FeatureServiceFactory
+CROSS-PLATFORM-STANDARDS.md	RUST-CROSS-PLATFORM-STANDARDS.md
+CROSS-PLATFORM-STANDARDS.md	should be loaded
+CROSS-PLATFORM-STANDARDS.md	Strategy pattern
+CROSS-PLATFORM-STANDARDS.md	embedded in managed assemblies
+CROSS-PLATFORM-STANDARDS.md	`.so`
+CROSS-PLATFORM-STANDARDS.md	`.dll`
+CROSS-PLATFORM-STANDARDS.md	`.dylib`
+CROSS-PLATFORM-STANDARDS.md	| Linux |
+CROSS-PLATFORM-STANDARDS.md	| Windows |
+CROSS-PLATFORM-STANDARDS.md	| macOS |
+CROSS-PLATFORM-STANDARDS.md	platform-specific class
+CROSS-PLATFORM-STANDARDS.md	ubuntu-latest
+CROSS-PLATFORM-STANDARDS.md	windows-latest
+CROSS-PLATFORM-STANDARDS.md	fail-fast: false
+CROSS-PLATFORM-STANDARDS.md	| Pre-commit |
+CROSS-PLATFORM-STANDARDS.md	| Pre-push |
+CROSS-PLATFORM-STANDARDS.md	CI (push/PR)
+DOCUMENTATION-STANDARDS.md	This file is a migration index
+DOCUMENTATION-STANDARDS.md	existing links
+DOCUMENTATION-STANDARDS.md	Documentation guidance has moved
+DOCUMENTATION-STANDARDS.md	old documentation wording
+DOCUMENTATION-STANDARDS.md	legacy documentation authority
+FRONTEND-STANDARDS.md	## Scope
+FRONTEND-STANDARDS.md	## Rendering and DOM Updates
+FRONTEND-STANDARDS.md	### Hook/Composable Timer Management
+FRONTEND-STANDARDS.md	## UI State Synchronization
+FRONTEND-STANDARDS.md	## Frontend Tooling Notes
+FRONTEND-STANDARDS.md	## Frontend Testing
+FRONTEND-STANDARDS.md	## Accessibility
+FRONTEND-STANDARDS.md	getByRole
+FRONTEND-STANDARDS.md	userEvent
+FRONTEND-STANDARDS.md	fireEvent
+FRONTEND-STANDARDS.md	setInterval
+FRONTEND-STANDARDS.md	eslint-plugin
+PLAN-STANDARDS.md	migration index
+PLAN-STANDARDS.md	Planning guidance has moved
+PLAN-STANDARDS.md	The workflow is canonical for
+PLAN-STANDARDS.md	old planning wording
+SECURITY-STANDARDS.md	This is a non-normative migration index
+SECURITY-STANDARDS.md	remain migration material
+SECURITY-STANDARDS.md	retained below
+SECURITY-STANDARDS.md	legacy authority
+SECURITY-STANDARDS.md	## Core Principle: Validate Once, at the Boundary
+SECURITY-STANDARDS.md	## Path Validation
+SECURITY-STANDARDS.md	## Input Validation
+SECURITY-STANDARDS.md	## Message/API Payload Validation
+SECURITY-STANDARDS.md	## Network Transport Safety
+SECURITY-STANDARDS.md	## What NOT to Validate
+SECURITY-STANDARDS.md	PathValidator
+SECURITY-STANDARDS.md	InputValidator
+SECURITY-STANDARDS.md	SafeNamePattern
+SECURITY-STANDARDS.md	global-validator
+SECURITY-STANDARDS.md	duplicate-inline

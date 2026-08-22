@@ -1,8 +1,0 @@
-route	target	href
-router	STANDARDS-ROUTER.md	STANDARDS-ROUTER.md
-platform_support	topics/cross-platform.md#platform-support-contract	topics/cross-platform.md#platform-support-contract
-filesystem_paths	topics/cross-platform.md#filesystem-paths	topics/cross-platform.md#filesystem-paths
-filesystem_containment	topics/security.md#filesystem-containment	topics/security.md#filesystem-containment
-native_artifact_loading	topics/cross-platform.md#native-artifact-loading	topics/cross-platform.md#native-artifact-loading
-release_artifact_plan	workflows/release.md#artifact-plan	workflows/release.md#artifact-plan
-platform_evidence	workflows/verification.md#platform-evidence-coverage	workflows/verification.md#platform-evidence-coverage

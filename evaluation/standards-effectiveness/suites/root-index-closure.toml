@@ -38,6 +38,7 @@ paths = ["README.md"]
 id = "root-router-routes"
 type = "markdown_link_coverage"
 path = "STANDARDS-ROUTER.md"
+identity = "repository-path"
 [checks.members]
 path = "evaluation/standards-effectiveness/fixtures/router/root-route-evidence.tsv"
 header = ["concern", "owner"]

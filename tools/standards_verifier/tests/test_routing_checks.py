@@ -73,6 +73,7 @@ class RoutingChecksTest(unittest.TestCase):
         *,
         path: str = "docs/index.md",
         columns: str = '["owner"]',
+        identity: str = "repository-path",
         extra: str = "",
     ) -> str:
         suite_path = "suites/routing.toml"
@@ -88,6 +89,7 @@ class RoutingChecksTest(unittest.TestCase):
             id = "coverage"
             type = "markdown_link_coverage"
             path = {json.dumps(path)}
+            identity = {json.dumps(identity)}
             {extra}
             [checks.members]
             path = "routes.tsv"
@@ -248,6 +250,73 @@ class RoutingChecksTest(unittest.TestCase):
 
         self.assertEqual(result.status, "passed")
 
+    def test_markdown_link_coverage_matches_exact_destinations(self) -> None:
+        self.write(
+            "docs/index.md",
+            "[contract](owner.md#contract)\n[overview](owner.md)\n",
+        )
+        self.write("docs/owner.md", "# Owner\n")
+        self.write(
+            "routes.tsv",
+            "concern\towner\ncontract\towner.md#contract\noverview\towner.md\n",
+        )
+
+        result = self.result(
+            self.write_markdown_coverage_suite(identity="destination")
+        )
+
+        self.assertEqual(result.status, "passed")
+
+    def test_markdown_destination_coverage_preserves_anchor_identity(self) -> None:
+        self.write("docs/index.md", "[other](owner.md#other)\n")
+        self.write("docs/owner.md", "# Owner\n")
+        self.write(
+            "routes.tsv",
+            "concern\towner\ncontract\towner.md#contract\n",
+        )
+
+        result = self.result(
+            self.write_markdown_coverage_suite(identity="destination")
+        )
+
+        self.assertEqual(result.exit_code, 1)
+        self.assertEqual(
+            result.diagnostics[0].code,
+            "ASSERT.MARKDOWN_LINK_COVERAGE_MISSING",
+        )
+        self.assertEqual(result.diagnostics[0].expected, "owner.md#contract")
+
+    def test_markdown_destination_coverage_missing_target_is_unavailable(self) -> None:
+        self.write("docs/index.md", "index\n")
+        self.write(
+            "routes.tsv",
+            "concern\towner\nmissing\tmissing.md#contract\n",
+        )
+
+        result = self.result(
+            self.write_markdown_coverage_suite(identity="destination")
+        )
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostics[0].code, "INPUT.UNAVAILABLE")
+
+    def test_markdown_destination_coverage_rejects_escape_and_external(self) -> None:
+        self.write("docs/index.md", "index\n")
+        for destination, code in (
+            ("../../outside.md", "PATH.LINK_OUTSIDE_REPOSITORY"),
+            ("https://example.com/page", "INPUT.EXTERNAL_LINK_MEMBER"),
+        ):
+            with self.subTest(destination=destination):
+                self.write(
+                    "routes.tsv",
+                    f"concern\towner\ninvalid\t{destination}\n",
+                )
+                result = self.result(
+                    self.write_markdown_coverage_suite(identity="destination")
+                )
+                self.assertEqual(result.exit_code, 2)
+                self.assertEqual(result.diagnostics[0].code, code)
+
     def test_markdown_link_coverage_reports_each_missing_member(self) -> None:
         self.write("docs/index.md", "[owner](owner.md)\n")
         self.write("docs/owner.md", "owner\n")
@@ -365,6 +434,18 @@ class RoutingChecksTest(unittest.TestCase):
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
         self.assertEqual(raised.exception.diagnostic.field, "network")
+
+    def test_markdown_link_coverage_rejects_unknown_identity(self) -> None:
+        suite_path = self.write_markdown_coverage_suite(identity="href-ish")
+        self.write_registry(suite_path)
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry)
+
+        self.assertEqual(
+            raised.exception.diagnostic.code,
+            "CONFIG.MARKDOWN_LINK_COVERAGE_IDENTITY",
+        )
 
     def test_line_budget_passes_strict_integer_ratio(self) -> None:
         self.prepare_budget("20")

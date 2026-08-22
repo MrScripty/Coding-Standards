@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** verification-engine recovery Milestone 3 pending admission
+**Current phase:** verification-engine recovery Milestone 3 accepted
 
-**Next slice:** remove policy-specific engine interfaces under the active recovery
+**Next slice:** measure named verifier workloads under recovery Milestone 4
 
 **Acceptance status:** `pending`
 

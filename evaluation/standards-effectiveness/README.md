@@ -368,7 +368,7 @@ objective.
 
 ## Acceptance Claim Fixtures
 
-The registered `acceptance-claims` declarative suite checks the seven fixed
+The registered `acceptance-claims` declarative suite checks policy decision
 scenarios and focused regressions against the canonical claim model. Run it
 with `python3 tools/standards_verifier/verify.py --suite acceptance-claims`:
 
@@ -377,6 +377,11 @@ with `python3 tools/standards_verifier/verify.py --suite acceptance-claims`:
 - simulated hardware evidence cannot satisfy required-real acceptance;
 - startup smoke cannot substitute for a user workflow; and
 - manual execution is not a higher evidence kind.
+
+The fixture records claim identity, required and observed execution modes, and
+complete required-set coverage as separate facts. It does not define or parse a
+`kind@environment@mode` serialization; canonical kinds, environments, and
+modes remain owned by the Verification workflow.
 
 The registered `verification-ownership` suite checks that Verification remains
 the single acceptance owner while Testing, Tooling, Launcher, and Release

@@ -93,3 +93,54 @@
   false positive without changing working code.
 - Result: Milestone 2 accepted. Milestone 3 is the only next slice and remains
   pending explicit admission.
+
+## 2026-08-21: Milestone 3 Admission
+
+- Operation: `continue`.
+- Accepted base: `ecfa527669e231bdc8e826c9caa8fd9ac0a30c33`.
+- Preconditions: the canonical worktree is clean; Milestone 2 is accepted; no
+  Bash migration package or overlapping graph/verifier change is admitted.
+- Architecture applicability: selected because two shared check kinds and one
+  generic Markdown-check interface change. Performance is not selected because
+  this slice makes no loading, scan, cache, or speed claim.
+- Source-index decision: compose policy from `markdown_structure`, `table`,
+  `relation`, `repository_paths`, `markdown_links`, `markdown_link_coverage`,
+  `table_text_absence`, and `text`. Add only an explicit exact-destination mode
+  to the existing link-coverage check because resolved-path coverage cannot
+  preserve declared anchors.
+- Acceptance-claim decision: replace the serialized claim mini-language with a
+  Verification-owned decision table over claim identity, required/evidence
+  mode, and complete required-set coverage.
+- No-fallback decision: delete both specialized implementations, parser
+  branches, private tests, and superseded fixture topology in the accepting
+  slice. No wrapper or dual representation is authorized.
+- Result: Milestone 3 is the only active implementation slice.
+
+## 2026-08-21: Milestone 3 Acceptance
+
+- Replaced `source_index_closure` with 43 generic checks composed from table,
+  repository-path, relation, Markdown structure/link/coverage, text-absence,
+  and text assertions. Consolidated route and prohibited-text evidence by
+  concern and removed the fixed per-source fixture topology.
+- Extended `markdown_link_coverage` with one required neutral identity choice:
+  normalized repository path or exact source-relative Markdown destination.
+  Exact-destination mode preserves anchor identity while retaining strict
+  containment, target availability, and typed invalid diagnostics.
+- Replaced the `kind@environment@mode` acceptance-claim grammar with a normal
+  Verification-owned decision table over exact identity, required/evidence
+  mode, and required-set completeness.
+- Deleted both specialized check implementations, parser branches, private
+  tests, and superseded fixtures. No wrapper, compatibility parser, fallback,
+  or second policy representation remains.
+- Mutation evidence preserves source membership, owner/disposition equality,
+  heading order, route coverage, line ceilings, prohibited prose, no-fallback
+  text, typed path failures, claim identity, evidence-mode, and required-set
+  behavior.
+- Focused evidence: 182 generic invariant tests passed; `source-index-closures`
+  passed 43 checks; `acceptance-claims` passed 2 checks; affected root,
+  planning-admission, template, and policy-impact suites passed.
+- Broad evidence: 348 verifier tests, 35 neutral graph tests, all 207
+  declarative suites, generated freshness, affected plan structure and links,
+  and the complete checkpoint with 65 retained Bash checkers passed.
+- Result: Milestone 3 accepted. Milestone 4 is the only next slice and remains
+  pending explicit admission and measurement.

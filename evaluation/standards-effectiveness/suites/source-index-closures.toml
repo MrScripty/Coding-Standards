@@ -1,17 +1,442 @@
 schema_version = 1
 id = "source-index-closures"
 owner = "verification-engine.migration-source-closure"
-description = "Aggregate closure proof for every registered former normative source index and its accepted implementation boundary."
+description = "Declarative closure proof for registered former normative source indexes without a policy-specific engine interface."
 
 [[checks]]
-id = "registered-source-indexes"
-type = "source_index_closure"
-fixture_root = "evaluation/standards-effectiveness/fixtures/source-closure"
-manifest_path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
-corpus_path = "evaluation/standards-effectiveness/corpus.tsv"
-owner_map_path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
-dispositions_path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
-router_path = "STANDARDS-ROUTER.md"
+id = "closure-manifest"
+type = "table"
+path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
+header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
+non_empty = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
+unique = [["order"], ["source"]]
+[[checks.projections]]
+columns = ["source", "canonical_owner", "current_shape", "treatment"]
+order = "lexical"
+expected = [
+  ["CODING-STANDARDS.md", "CORE-STANDARDS.md", "expanded", "rewrite-index"],
+  ["COMMIT-STANDARDS.md", "workflows/commit.md", "concise", "retain-index"],
+  ["CONCURRENCY-STANDARDS.md", "topics/concurrency.md", "expanded", "rewrite-index"],
+  ["CROSS-PLATFORM-STANDARDS.md", "topics/cross-platform.md", "expanded", "rewrite-index"],
+  ["DOCUMENTATION-STANDARDS.md", "workflows/documentation.md", "concise", "retain-index"],
+  ["FRONTEND-STANDARDS.md", "profiles/applications/frontend.md", "concise", "rewrite-index"],
+  ["PLAN-STANDARDS.md", "workflows/planning.md", "concise", "retain-index"],
+  ["SECURITY-STANDARDS.md", "topics/security.md", "expanded", "rewrite-index"],
+]
+[checks.projections.where]
+field = "source"
+op = "in"
+values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"]
+
+[[checks]]
+id = "canonical-owner-paths"
+type = "repository_paths"
+[checks.paths]
+path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
+header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
+columns = ["canonical_owner"]
+order = "source"
+where = { field = "source", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
+
+[[checks]]
+id = "corpus-membership"
+type = "table"
+path = "evaluation/standards-effectiveness/corpus.tsv"
+header = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
+non_empty = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
+unique = [["path"]]
+[[checks.projections]]
+columns = ["path", "kind", "normative", "target_role", "preliminary_disposition", "baseline_source"]
+order = "lexical"
+expected = [
+  ["CODING-STANDARDS.md", "standard", "derived", "core", "split", "git"],
+  ["COMMIT-STANDARDS.md", "standard", "derived", "workflow", "refine", "git"],
+  ["CONCURRENCY-STANDARDS.md", "standard", "derived", "topic", "refine", "git"],
+  ["CROSS-PLATFORM-STANDARDS.md", "standard", "derived", "topic", "refine", "git"],
+  ["DOCUMENTATION-STANDARDS.md", "standard", "derived", "workflow", "split", "git"],
+  ["FRONTEND-STANDARDS.md", "standard", "derived", "profile", "refine", "git"],
+  ["PLAN-STANDARDS.md", "standard", "derived", "workflow", "replace", "git"],
+  ["SECURITY-STANDARDS.md", "standard", "derived", "topic", "refine", "git"],
+]
+[checks.projections.where]
+field = "path"
+op = "in"
+values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"]
+
+[[checks]]
+id = "owner-map-source-coverage"
+type = "key_coverage"
+[checks.keys]
+path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
+header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
+columns = ["source"]
+order = "source"
+where = { field = "source", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
+[checks.records]
+path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
+header = ["id", "current_path", "line", "future_owner", "disposition", "heading"]
+columns = ["current_path"]
+order = "source"
+
+[[checks]]
+id = "disposition-source-coverage"
+type = "key_coverage"
+[checks.keys]
+path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
+header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
+columns = ["source"]
+order = "source"
+where = { field = "source", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
+[checks.records]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["source"]
+order = "source"
+
+[[checks]]
+id = "identifier-membership"
+type = "relation"
+mode = "set"
+[checks.left]
+path = "evaluation/standards-effectiveness/generated/rule-owner-map.tsv"
+header = ["id", "current_path", "line", "future_owner", "disposition", "heading"]
+columns = ["current_path", "id"]
+order = "source"
+where = { field = "current_path", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
+[checks.right]
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+columns = ["source", "id"]
+order = "source"
+where = { field = "source", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
+
+[[checks]]
+id = "declared-routes"
+type = "table"
+path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
+header = ["source", "route", "destination"]
+non_empty = ["source", "route", "destination"]
+unique = [["source", "route"], ["source", "destination"]]
+
+[[checks]]
+id = "declared-prohibitions"
+type = "table"
+path = "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv"
+header = ["source", "literal"]
+non_empty = ["source", "literal"]
+unique = [["source", "literal"]]
+
+[[checks]]
+id = "source-links"
+type = "markdown_links"
+paths = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"]
+
+[[checks]]
+id = "router-exclusion"
+type = "table_text_absence"
+path = "STANDARDS-ROUTER.md"
+[checks.literals]
+path = "evaluation/standards-effectiveness/milestone-7-final-source-closure.tsv"
+header = ["order", "source", "canonical_owner", "current_shape", "treatment", "retention_evidence", "risk", "concurrency", "gate"]
+columns = ["source"]
+order = "source"
+where = { field = "source", op = "in", values = ["CODING-STANDARDS.md", "COMMIT-STANDARDS.md", "CONCURRENCY-STANDARDS.md", "CROSS-PLATFORM-STANDARDS.md", "DOCUMENTATION-STANDARDS.md", "FRONTEND-STANDARDS.md", "PLAN-STANDARDS.md", "SECURITY-STANDARDS.md"] }
+
+[[checks]]
+id = "coding-structure"
+type = "markdown_structure"
+path = "CODING-STANDARDS.md"
+headings = ["# Coding Standards Legacy Index", "## Universal Coding Routes", "## Error Handling Legacy Route", "## Boundary Validation Legacy Route", "## Dependency Management Legacy Route", "## Invariants And Safety Legacy Route", "## Disabled Features Legacy Route", "## Build Behavior Route", "## License Attribution Legacy Route", "## Language-Specific Guidelines Legacy Route", "## Frontend Standards Legacy Route", "## Performance Legacy Route"]
+maximum_lines = 64
+
+[[checks]]
+id = "commit-structure"
+type = "markdown_structure"
+path = "COMMIT-STANDARDS.md"
+headings = ["# Commit Standards Legacy Index", "## Canonical Commit Routes"]
+maximum_lines = 20
+
+[[checks]]
+id = "concurrency-structure"
+type = "markdown_structure"
+path = "CONCURRENCY-STANDARDS.md"
+headings = ["# Concurrency Standards", "## Canonical Concurrency Routes", "## C# Async/Await Index", "### C# Continuation Scheduling", "## Rust Concurrency Routing Index", "## TypeScript Async Index", "## Godot Framework Index"]
+maximum_lines = 36
+
+[[checks]]
+id = "cross-platform-structure"
+type = "markdown_structure"
+path = "CROSS-PLATFORM-STANDARDS.md"
+headings = ["# Cross-Platform Standards", "## Canonical Platform Routes", "## Release And Verification Routes"]
+maximum_lines = 24
+
+[[checks]]
+id = "documentation-structure"
+type = "markdown_structure"
+path = "DOCUMENTATION-STANDARDS.md"
+headings = ["# Documentation Standards", "## Canonical Documentation Routes"]
+maximum_lines = 20
+
+[[checks]]
+id = "frontend-structure"
+type = "markdown_structure"
+path = "FRONTEND-STANDARDS.md"
+headings = ["# Frontend Standards Migration Index"]
+maximum_lines = 30
+
+[[checks]]
+id = "planning-structure"
+type = "markdown_structure"
+path = "PLAN-STANDARDS.md"
+headings = ["# Plan Standards", "## Canonical Planning Routes"]
+maximum_lines = 20
+
+[[checks]]
+id = "security-structure"
+type = "markdown_structure"
+path = "SECURITY-STANDARDS.md"
+headings = ["# Security Standards", "## Canonical Security Routes", "## Contract And Execution Routes"]
+maximum_lines = 28
+
+[[checks]]
+id = "coding-routes"
+type = "markdown_link_coverage"
+path = "CODING-STANDARDS.md"
+identity = "destination"
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
+header = ["source", "route", "destination"]
+columns = ["destination"]
+order = "source"
+where = { field = "source", op = "eq", value = "CODING-STANDARDS.md" }
+
+[[checks]]
+id = "commit-routes"
+type = "markdown_link_coverage"
+path = "COMMIT-STANDARDS.md"
+identity = "destination"
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
+header = ["source", "route", "destination"]
+columns = ["destination"]
+order = "source"
+where = { field = "source", op = "eq", value = "COMMIT-STANDARDS.md" }
+
+[[checks]]
+id = "concurrency-routes"
+type = "markdown_link_coverage"
+path = "CONCURRENCY-STANDARDS.md"
+identity = "destination"
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
+header = ["source", "route", "destination"]
+columns = ["destination"]
+order = "source"
+where = { field = "source", op = "eq", value = "CONCURRENCY-STANDARDS.md" }
+
+[[checks]]
+id = "cross-platform-routes"
+type = "markdown_link_coverage"
+path = "CROSS-PLATFORM-STANDARDS.md"
+identity = "destination"
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
+header = ["source", "route", "destination"]
+columns = ["destination"]
+order = "source"
+where = { field = "source", op = "eq", value = "CROSS-PLATFORM-STANDARDS.md" }
+
+[[checks]]
+id = "documentation-routes"
+type = "markdown_link_coverage"
+path = "DOCUMENTATION-STANDARDS.md"
+identity = "destination"
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
+header = ["source", "route", "destination"]
+columns = ["destination"]
+order = "source"
+where = { field = "source", op = "eq", value = "DOCUMENTATION-STANDARDS.md" }
+
+[[checks]]
+id = "frontend-routes"
+type = "markdown_link_coverage"
+path = "FRONTEND-STANDARDS.md"
+identity = "destination"
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
+header = ["source", "route", "destination"]
+columns = ["destination"]
+order = "source"
+where = { field = "source", op = "eq", value = "FRONTEND-STANDARDS.md" }
+
+[[checks]]
+id = "planning-routes"
+type = "markdown_link_coverage"
+path = "PLAN-STANDARDS.md"
+identity = "destination"
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
+header = ["source", "route", "destination"]
+columns = ["destination"]
+order = "source"
+where = { field = "source", op = "eq", value = "PLAN-STANDARDS.md" }
+
+[[checks]]
+id = "security-routes"
+type = "markdown_link_coverage"
+path = "SECURITY-STANDARDS.md"
+identity = "destination"
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/routes.tsv"
+header = ["source", "route", "destination"]
+columns = ["destination"]
+order = "source"
+where = { field = "source", op = "eq", value = "SECURITY-STANDARDS.md" }
+
+[[checks]]
+id = "coding-prohibited"
+type = "table_text_absence"
+path = "CODING-STANDARDS.md"
+[checks.literals]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv"
+header = ["source", "literal"]
+columns = ["literal"]
+order = "source"
+where = { field = "source", op = "eq", value = "CODING-STANDARDS.md" }
+
+[[checks]]
+id = "commit-prohibited"
+type = "table_text_absence"
+path = "COMMIT-STANDARDS.md"
+[checks.literals]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv"
+header = ["source", "literal"]
+columns = ["literal"]
+order = "source"
+where = { field = "source", op = "eq", value = "COMMIT-STANDARDS.md" }
+
+[[checks]]
+id = "concurrency-prohibited"
+type = "table_text_absence"
+path = "CONCURRENCY-STANDARDS.md"
+[checks.literals]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv"
+header = ["source", "literal"]
+columns = ["literal"]
+order = "source"
+where = { field = "source", op = "eq", value = "CONCURRENCY-STANDARDS.md" }
+
+[[checks]]
+id = "cross-platform-prohibited"
+type = "table_text_absence"
+path = "CROSS-PLATFORM-STANDARDS.md"
+[checks.literals]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv"
+header = ["source", "literal"]
+columns = ["literal"]
+order = "source"
+where = { field = "source", op = "eq", value = "CROSS-PLATFORM-STANDARDS.md" }
+
+[[checks]]
+id = "documentation-prohibited"
+type = "table_text_absence"
+path = "DOCUMENTATION-STANDARDS.md"
+[checks.literals]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv"
+header = ["source", "literal"]
+columns = ["literal"]
+order = "source"
+where = { field = "source", op = "eq", value = "DOCUMENTATION-STANDARDS.md" }
+
+[[checks]]
+id = "frontend-prohibited"
+type = "table_text_absence"
+path = "FRONTEND-STANDARDS.md"
+[checks.literals]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv"
+header = ["source", "literal"]
+columns = ["literal"]
+order = "source"
+where = { field = "source", op = "eq", value = "FRONTEND-STANDARDS.md" }
+
+[[checks]]
+id = "planning-prohibited"
+type = "table_text_absence"
+path = "PLAN-STANDARDS.md"
+[checks.literals]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv"
+header = ["source", "literal"]
+columns = ["literal"]
+order = "source"
+where = { field = "source", op = "eq", value = "PLAN-STANDARDS.md" }
+
+[[checks]]
+id = "security-prohibited"
+type = "table_text_absence"
+path = "SECURITY-STANDARDS.md"
+[checks.literals]
+path = "evaluation/standards-effectiveness/fixtures/source-closure/prohibited.tsv"
+header = ["source", "literal"]
+columns = ["literal"]
+order = "source"
+where = { field = "source", op = "eq", value = "SECURITY-STANDARDS.md" }
+
+[[checks]]
+id = "coding-boundary"
+type = "text"
+path = "CODING-STANDARDS.md"
+required = ["non-normative navigation", "owns no", "fallback authority", "Router's typed", "instead of using prior wording"]
+prohibited = ["Migration authority", "remains canonical only", "This file remains canonical", "Conflicts for moved rules", "not yet moved", "Existing files retain authority"]
+
+[[checks]]
+id = "commit-boundary"
+type = "text"
+path = "COMMIT-STANDARDS.md"
+required = ["non-normative navigation", "owns no", "fallback authority", "Router's typed", "instead of using prior wording"]
+prohibited = ["Migration authority", "remains canonical only", "This file remains canonical", "Conflicts for moved rules", "not yet moved", "Existing files retain authority"]
+
+[[checks]]
+id = "concurrency-boundary"
+type = "text"
+path = "CONCURRENCY-STANDARDS.md"
+required = ["non-normative navigation", "owns no", "fallback authority", "Router's typed", "instead of using prior wording"]
+prohibited = ["Migration authority", "remains canonical only", "This file remains canonical", "Conflicts for moved rules", "not yet moved", "Existing files retain authority"]
+
+[[checks]]
+id = "cross-platform-boundary"
+type = "text"
+path = "CROSS-PLATFORM-STANDARDS.md"
+required = ["non-normative navigation", "owns no", "fallback authority", "Router's typed", "instead of using prior wording"]
+prohibited = ["Migration authority", "remains canonical only", "This file remains canonical", "Conflicts for moved rules", "not yet moved", "Existing files retain authority"]
+
+[[checks]]
+id = "documentation-boundary"
+type = "text"
+path = "DOCUMENTATION-STANDARDS.md"
+required = ["non-normative navigation", "owns no", "fallback authority", "Router's typed", "instead of using prior wording"]
+prohibited = ["Migration authority", "remains canonical only", "This file remains canonical", "Conflicts for moved rules", "not yet moved", "Existing files retain authority"]
+
+[[checks]]
+id = "frontend-boundary"
+type = "text"
+path = "FRONTEND-STANDARDS.md"
+required = ["non-normative navigation", "owns no", "fallback authority", "Router's typed", "instead of using prior wording"]
+prohibited = ["Migration authority", "remains canonical only", "This file remains canonical", "Conflicts for moved rules", "not yet moved", "Existing files retain authority"]
+
+[[checks]]
+id = "planning-boundary"
+type = "text"
+path = "PLAN-STANDARDS.md"
+required = ["non-normative navigation", "owns no", "fallback authority", "Router's typed", "instead of using prior wording"]
+prohibited = ["Migration authority", "remains canonical only", "This file remains canonical", "Conflicts for moved rules", "not yet moved", "Existing files retain authority"]
+
+[[checks]]
+id = "security-boundary"
+type = "text"
+path = "SECURITY-STANDARDS.md"
+required = ["non-normative navigation", "owns no", "fallback authority", "Router's typed", "instead of using prior wording"]
+prohibited = ["Migration authority", "remains canonical only", "This file remains canonical", "Conflicts for moved rules", "not yet moved", "Existing files retain authority"]
 
 [[checks]]
 id = "frontend-accessibility-disposition"

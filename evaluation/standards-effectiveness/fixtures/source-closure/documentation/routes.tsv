@@ -1,5 +1,0 @@
-route	target	href
-router	STANDARDS-ROUTER.md	STANDARDS-ROUTER.md
-documentation_workflow	workflows/documentation.md	workflows/documentation.md
-documentation_recipe	reference/recipes/documentation.md	reference/recipes/documentation.md
-release_workflow	workflows/release.md	workflows/release.md

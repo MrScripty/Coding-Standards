@@ -208,20 +208,22 @@ or symlink escapes are invalid; missing sources or targets are unavailable. It
 does not fetch URLs, validate anchors, decode destinations, parse reference
 links, infer files, or normalize content.
 
-The `markdown_link_coverage` check reads one contained UTF-8 Markdown `path`
-and one strict projected table source named `members`, which must select
-exactly one nonempty unique repository-relative path column. Every projected
-member must resolve to a contained regular file and occur among the document's
-normalized local inline-link targets. Link destinations resolve relative to
-the Markdown document and remove fragments before comparison; unrelated local
-links and repeated destinations are valid, while `http://`, `https://`, and
-`mailto:` destinations do not satisfy coverage. Empty, duplicate, missing, or
-uncovered members, malformed tables, invalid UTF-8, path escapes, and unknown
-configuration produce typed diagnostics. The check has no copied target list
-or count, reference-link parser, URL fetch, anchor validation, glob, regular-
-expression configuration, command execution, optional member, compatibility
-schema, or fallback. Use a separate `markdown_links` check when target
-availability for every link is also part of the suite's claim.
+The `markdown_link_coverage` check reads one contained UTF-8 Markdown `path`,
+one explicit comparison `identity`, and one strict projected table source named
+`members`, which must select exactly one nonempty unique column. The
+`repository-path` identity requires each member to name a contained regular
+file and compares normalized local target paths after removing fragments. The
+`destination` identity requires each member to be a local destination whose
+target exists and compares the exact source-relative destination, including
+any fragment. Unrelated local links and repeated document destinations are
+valid; external destinations cannot satisfy either mode. Empty, duplicate,
+missing, or uncovered members, malformed tables, invalid UTF-8, path escapes,
+unknown identities, and unknown configuration produce typed diagnostics. The
+check has no default identity, copied target list or count, reference-link
+parser, URL fetch, anchor-existence validation, glob, regular-expression
+configuration, command execution, optional member, compatibility schema, or
+fallback. Use a separate `markdown_links` check when every document link,
+rather than every declared member, must have an available target.
 
 The `line_budget` check counts raw newline bytes across one explicit non-empty
 `paths` list. It reads one exact two-column `metric`/`value` TSV, requires one
@@ -366,32 +368,14 @@ list, range, count, mode, composite or many-valued join, implicit column or
 filter, query language, callback, command, package-specific branch,
 compatibility representation, Bash execution, or fallback.
 
-The `source_index_closure` check validates a directory of independently owned
-source-index fixtures against explicitly configured closure-manifest, corpus,
-owner-map, disposition, and Router paths. Each discovered fixture directory
-must contain exactly `contract.tsv`, `headings.tsv`, `routes.tsv`, and
-`prohibited.tsv`; loose files, symlinks, partial directories, duplicate source
-registrations, malformed tables, and unknown configuration are invalid. The
-check derives fixture membership and all source, heading, route, line, and
-identifier totals at execution time.
-
-For each source, the check requires one eligible immutable-manifest row, one
-complete `derived` corpus row, an available canonical owner, exact ordered
-fence-aware ATX headings, an explicit positive line budget, and at least one
-unique route and prohibited literal. Every source-relative route href must
-remain repository-contained, resolve to its explicit canonical target and
-anchor, and occur as an exact Markdown destination. Generic and source-owned
-legacy-authority text is prohibited, required non-authority wording must remain,
-the Router cannot select the former source, and the nonempty owner-map and
-disposition identifier sets must be exactly equal. Equal numeric totals are not
-accepted as identity evidence.
-
-Configuration supplies only repository paths to the existing policy evidence.
-Per-source fixtures explicitly own source, title, line budget, ordered headings,
-route name/target/href, and prohibited literals. The check has no copied current
-count, fixture-list field, inferred path, optional source, alternate schema,
-regular-expression configuration, command action, callback, Bash execution,
-compatibility representation, or fallback.
+Source-index closure is a declarative suite composition rather than an engine
+check kind. `markdown_structure` owns exact headings and line ceilings;
+`table`, `repository_paths`, `key_coverage`, and `relation` own membership and
+identifier evidence; Markdown checks own target and exact-destination coverage;
+and table-derived or inline text checks own non-authority and Router exclusion.
+The source-index suite and fixtures contain the migration policy. Generic
+Python modules contain no source-index schema, migration state, Router prose,
+or fixed fixture topology.
 
 Numeric count-authority migration uses a generated immutable lexical snapshot,
 not a manually maintained candidate manifest. The snapshot derives all

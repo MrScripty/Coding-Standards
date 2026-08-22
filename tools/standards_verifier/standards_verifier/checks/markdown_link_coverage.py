@@ -19,6 +19,7 @@ from .table import (
 class MarkdownLinkCoverageCheck:
     id: str
     path: str
+    identity: str
     members: ProjectedTableSource
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
@@ -71,15 +72,61 @@ class MarkdownLinkCoverageCheck:
             ]
 
         root = context.repo_root.resolve()
+        targets = local_markdown_targets(context, self.id, self.path)
         normalized_members = []
-        for member in members:
-            target = contained_file(
+        if self.identity == "repository-path":
+            for member in members:
+                target = contained_file(
+                    root,
+                    member,
+                    suite=context.suite_id,
+                    check=self.id,
+                )
+                normalized_members.append(target.relative_to(root).as_posix())
+            observed = {target.repository_path for target in targets}
+        else:
+            source = contained_file(
                 root,
-                member,
+                self.path,
                 suite=context.suite_id,
                 check=self.id,
             )
-            normalized_members.append(target.relative_to(root).as_posix())
+            for member in members:
+                if member.startswith(("http://", "https://", "mailto:")):
+                    raise EngineError(
+                        Diagnostic(
+                            "INPUT.EXTERNAL_LINK_MEMBER",
+                            "invalid",
+                            "Markdown destination coverage requires local members",
+                            suite=context.suite_id,
+                            check=self.id,
+                            path=self.members.path,
+                            observed=member,
+                        )
+                    )
+                target_path = member.split("#", 1)[0]
+                target = source if not target_path else source.parent / target_path
+                resolved = target.resolve(strict=False)
+                if not resolved.is_relative_to(root):
+                    raise EngineError(
+                        Diagnostic(
+                            "PATH.LINK_OUTSIDE_REPOSITORY",
+                            "invalid",
+                            "Markdown link target escapes the repository root",
+                            suite=context.suite_id,
+                            check=self.id,
+                            path=self.members.path,
+                            observed=member,
+                        )
+                    )
+                contained_file(
+                    root,
+                    resolved.relative_to(root).as_posix(),
+                    suite=context.suite_id,
+                    check=self.id,
+                )
+                normalized_members.append(member)
+            observed = {target.destination for target in targets}
         if len(set(normalized_members)) != len(normalized_members):
             return [
                 Diagnostic(
@@ -97,10 +144,6 @@ class MarkdownLinkCoverageCheck:
                 )
             ]
 
-        targets = {
-            target.repository_path
-            for target in local_markdown_targets(context, self.id, self.path)
-        }
         return [
             Diagnostic(
                 "ASSERT.MARKDOWN_LINK_COVERAGE_MISSING",
@@ -114,14 +157,14 @@ class MarkdownLinkCoverageCheck:
                 observed="absent",
             )
             for member in normalized_members
-            if member not in targets
+            if member not in observed
         ]
 
 
 def parse_markdown_link_coverage_check(
     raw: dict[str, Any], suite_id: str
 ) -> MarkdownLinkCoverageCheck:
-    allowed = {"id", "type", "path", "members"}
+    allowed = {"id", "type", "path", "identity", "members"}
     unknown = set(raw) - allowed
     if unknown:
         raise EngineError(
@@ -155,6 +198,19 @@ def parse_markdown_link_coverage_check(
                 field="path",
             )
         )
+    identity = raw.get("identity")
+    if identity not in {"repository-path", "destination"}:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.MARKDOWN_LINK_COVERAGE_IDENTITY",
+                "invalid",
+                "Markdown link coverage identity must be repository-path or destination",
+                suite=suite_id,
+                check=check_id,
+                field="identity",
+                observed=str(identity),
+            )
+        )
     members = parse_projected_table_source(
         raw.get("members"),
         suite_id,
@@ -178,4 +234,4 @@ def parse_markdown_link_coverage_check(
                 observed=str(len(members.projection.columns)),
             )
         )
-    return MarkdownLinkCoverageCheck(check_id, path, members)
+    return MarkdownLinkCoverageCheck(check_id, path, identity, members)
