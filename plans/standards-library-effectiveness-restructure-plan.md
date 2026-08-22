@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 7 verifier migration after terminal-disposition acceptance
 
-**Next slice:** run a fresh graph audit after scoped row-constraint acceptance;
-do not preselect M6-I66 from pre-recovery evidence
+**Next slice:** resolve the verification engine's single-authority membership
+scope before admitting M6-I66
 
 **Acceptance status:** `partial`
 
@@ -138,7 +138,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | Scoped row constraints accepted after M6-I65; fresh graph audit is next |
+| 7 | Role-based consolidation and verification migration | `Active` | Post-contract audit found a membership-scope gap; M6-I66 is not admitted |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -172,9 +172,11 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 5. Complete manual semantic-ownership review `D001` through `D010` before
    Milestone 7 acceptance.
 
-**Current blocker:** `none`. The generic scoped row-constraint contract is
-accepted, but no M6-I66 package is admitted. Fresh post-commit graph evidence
-must select the next package.
+**Current blocker:** fresh post-contract evidence reselects the Documentation
+candidate, but exact semantic membership cannot currently be declared once and
+used to scope conditional canonical-row assertions. Repeating the ID set or
+copying complete disposition rows would create competing authority. M6-I66 is
+not admitted pending a generic membership-backed table-scope decision.
 
 **Acceptance gate:** every rule identifier has a final disposition; structural,
 routing, ownership, source-closure, and no-legacy checks pass; the final Python

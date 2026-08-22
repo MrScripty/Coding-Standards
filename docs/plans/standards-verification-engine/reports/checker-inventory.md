@@ -5536,3 +5536,34 @@ the preceding plan-only re-plan named the Documentation checker as a current
 consumer. Dependency nodes, edges, and components did not change. This was a
 generated-evidence freshness deviation, not new package authority. M6-I66
 remains unadmitted until a fresh graph audit from the accepted commit.
+
+### Post-Contract Membership-Scope Re-Plan
+
+Fresh graph evidence at `f4cd264e` independently reselects the Documentation
+consolidation candidate. It remains caller-free, its metadata-helper execution
+maps to the native metadata assertion, and its inbound contract records can
+transfer to suite authority. The accepted row constraints preserve its
+conditional disposition rules, but exact admission exposed one remaining
+single-authority gap.
+
+An explicit predicate can select the semantic IDs, but proving that every
+declared ID exists would require repeating the same list in an expected
+projection. A one-column reviewed membership fixture plus existing inclusion
+or keyed-relation checks proves presence without numeric ranges, but those
+checks cannot provide their selected keys as scope for table row constraints.
+Copying all canonical disposition rows into a fixture is also rejected because
+it creates a competing projection.
+
+The recommended bounded recovery is a generic membership-backed table scope:
+one strict projected table source owns semantic members; the table assertion
+requires every member to resolve exactly once in the canonical table and runs
+existing non-empty, domain, uniqueness, projection, and row constraints on
+that resolved set. Unknown columns, empty or duplicate members, missing or
+duplicate canonical rows, path escape, and malformed configuration must return
+typed diagnostics. Predicate scope remains available for facts naturally
+expressed by row fields; no compatibility or fallback path is added.
+
+Alternatives are to duplicate the ID list in scope and expected output, copy
+complete canonical rows into a fixture, or defer this candidate. The first two
+violate single authority; deferral is safe but leaves the known generic gap.
+M6-I66 therefore remains unadmitted pending a shared-contract decision.

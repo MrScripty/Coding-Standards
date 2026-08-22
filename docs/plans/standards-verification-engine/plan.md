@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 6 Bash retirement after the accepted verification-engine pre-resume gate
 
-**Next slice:** run a fresh post-shared-contract graph audit; do not preselect or
-admit M6-I66 from pre-recovery evidence
+**Next slice:** re-plan one generic membership-backed table scope before
+admitting M6-I66
 
 **Acceptance status:** `pending`
 
@@ -146,7 +146,7 @@ authorize package selection or ownership.
 | 3 | Metadata, plan, migration, and shared evidence contracts | `Accepted` | Registered suites and engine tests |
 | 4 | Standalone semantic-decision phase | `Superseded` | Decision migration proceeds through owner-coherent packages in Milestone 6 |
 | 5 | Dependency graph and Cross-Platform closure | `Accepted` | Package and source-closure lifecycle records |
-| 6 | Exceptional checks and Bash retirement | `Active` | Scoped row constraints accepted after M6-I65; fresh graph audit is next |
+| 6 | Exceptional checks and Bash retirement | `Active` | Post-contract audit found a single-authority membership gap; M6-I66 is not admitted |
 | 7 | Documentation and objective acceptance | `Planned` | Starts at zero-Bash closure |
 
 ### Milestone 6 Current State
@@ -247,8 +247,13 @@ fallback remains.
 
 ## Blockers
 
-- `none`; M6-I66 remains unadmitted pending the required fresh post-commit
-  graph audit.
+- Fresh post-`f4cd264e` evidence reselects the Documentation consolidation
+  candidate, but the accepted predicate scope cannot prove every declared
+  semantic member exists without repeating the complete ID list in both scope
+  and expected output. Existing inclusion and keyed-relation checks can consume
+  one reviewed membership provider but cannot apply that provider as table
+  assertion scope. M6-I66 is not admitted pending a generic single-authority
+  membership-scope decision.
 
 ## Re-Plan Triggers
 
