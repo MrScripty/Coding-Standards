@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** verification-engine recovery Milestone 3 accepted
+**Current phase:** verification-engine recovery Milestone 4 accepted
 
-**Next slice:** measure named verifier workloads under recovery Milestone 4
+**Next slice:** establish migration-Python terminal dispositions under recovery Milestone 5
 
 **Acceptance status:** `pending`
 

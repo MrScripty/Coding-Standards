@@ -427,7 +427,7 @@ class MetadataGraphTest(unittest.TestCase):
         self.write_registry()
 
         with self.assertRaisesRegex(EngineError, "exactly one"):
-            Verifier(self.root, "registry.toml")
+            Verifier(self.root, "registry.toml").run()
 
 
 if __name__ == "__main__":

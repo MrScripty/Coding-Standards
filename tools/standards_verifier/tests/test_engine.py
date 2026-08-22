@@ -310,7 +310,7 @@ class EngineTest(unittest.TestCase):
             encoding="utf-8",
         )
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
         self.assertEqual(raised.exception.diagnostic.field, "row_count")
 
@@ -509,7 +509,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("multi-decision", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.DECISION_MODE")
 
@@ -518,7 +518,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("multi-decision", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.DECISION_OUTPUTS")
 
@@ -527,7 +527,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("multi-decision", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.DECISION_OUTPUT")
 
@@ -543,7 +543,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("multi-decision", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.DECISION_COLUMNS")
 
@@ -554,7 +554,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("multi-decision", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "DECISION.NON_INPUT_FIELD")
         self.assertEqual(raised.exception.diagnostic.field, "expected_sbom")
@@ -647,7 +647,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("exact-text", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
         self.assertEqual(raised.exception.diagnostic.field, "normalize")
@@ -688,7 +688,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("table", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.TABLE_COLUMN")
 
@@ -743,7 +743,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("relation", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
 
@@ -776,7 +776,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("relation", "suites/relation.toml", [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         diagnostic = raised.exception.diagnostic
         self.assertEqual(diagnostic.code, "CONFIG.RELATION_SIDE")
@@ -886,7 +886,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("inclusion", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         diagnostic = raised.exception.diagnostic
         self.assertEqual(diagnostic.code, "CONFIG.INCLUSION_COLLECTION")
@@ -897,7 +897,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("inclusion", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
 
@@ -906,7 +906,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("inclusion", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         diagnostic = raised.exception.diagnostic
         self.assertEqual(diagnostic.code, "CONFIG.UNKNOWN_FIELD")
@@ -937,7 +937,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("inclusion", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         diagnostic = raised.exception.diagnostic
         self.assertEqual(diagnostic.code, "CONFIG.INCLUSION_WIDTH")
@@ -1077,7 +1077,7 @@ class EngineTest(unittest.TestCase):
                 suite_path = self.write_keyed_relation_suite(**options)
                 self.write_registry([("keyed-relation", suite_path, [])])
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, self.registry)
+                    Verifier(self.root, self.registry).run()
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
     def test_keyed_relation_input_failures_are_typed(self) -> None:
@@ -1174,15 +1174,85 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("text", suite_path, [])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
+
+    def test_cli_list_does_not_parse_suite_bodies(self) -> None:
+        self.write("suites/broken.toml", "not = [valid\n")
+        self.write_registry([("broken", "suites/broken.toml", [])])
+        output = io.StringIO()
+
+        with contextlib.redirect_stdout(output):
+            status = main(
+                [
+                    "--repo-root",
+                    str(self.root),
+                    "--registry",
+                    self.registry,
+                    "--list",
+                ],
+                default_repo_root=self.root,
+            )
+
+        self.assertEqual(status, 0)
+        self.assertEqual(output.getvalue(), "broken\n")
+
+    def test_focused_selection_ignores_unrelated_malformed_suite(self) -> None:
+        self.write("evidence.md", "required\n")
+        selected = self.write_text_suite("selected")
+        self.write("suites/broken.toml", "not = [valid\n")
+        self.write_registry(
+            [
+                ("selected", selected, []),
+                ("broken", "suites/broken.toml", []),
+            ]
+        )
+
+        results = Verifier(self.root, self.registry).run(("selected",))
+
+        self.assertEqual([result.id for result in results], ["selected"])
+        self.assertEqual(results[0].status, "passed")
+
+    def test_focused_selection_validates_malformed_dependency(self) -> None:
+        self.write("evidence.md", "required\n")
+        selected = self.write_text_suite("selected")
+        self.write("suites/broken.toml", "not = [valid\n")
+        self.write_registry(
+            [
+                ("selected", selected, ["broken"]),
+                ("broken", "suites/broken.toml", []),
+            ]
+        )
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run(("selected",))
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.INVALID_TOML")
+        self.assertEqual(raised.exception.diagnostic.path, "suites/broken.toml")
+
+    def test_all_validates_unrelated_malformed_suite(self) -> None:
+        self.write("evidence.md", "required\n")
+        selected = self.write_text_suite("selected")
+        self.write("suites/broken.toml", "not = [valid\n")
+        self.write_registry(
+            [
+                ("selected", selected, []),
+                ("broken", "suites/broken.toml", []),
+            ]
+        )
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.INVALID_TOML")
+        self.assertEqual(raised.exception.diagnostic.path, "suites/broken.toml")
 
     def test_malformed_toml_is_invalid(self) -> None:
         self.write(self.registry, "schema_version = [\n")
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.INVALID_TOML")
 
@@ -1193,7 +1263,7 @@ class EngineTest(unittest.TestCase):
         self.write_registry([("first", first, ["second"]), ("second", second, ["first"])])
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.DEPENDENCY_CYCLE")
 

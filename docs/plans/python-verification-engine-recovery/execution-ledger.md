@@ -144,3 +144,55 @@
   and the complete checkpoint with 65 retained Bash checkers passed.
 - Result: Milestone 3 accepted. Milestone 4 is the only next slice and remains
   pending explicit admission and measurement.
+
+## 2026-08-21: Milestone 4 Admission
+
+- Operation: `continue`.
+- Accepted base: `de2289ad4c905c7bf9e0bba9a37da90955f4ce0a`.
+- Preconditions: Milestone 3 is accepted and committed; the canonical worktree
+  is clean; no Bash migration package or overlapping engine change is admitted.
+- Architecture and Performance are selected: the slice changes catalog loading
+  and invocation state ownership and records latency claims for five named
+  verifier workflows.
+- Seven post-warmup samples establish medians of 0.191 seconds for listing,
+  0.198 seconds for one focused suite, 1.215 seconds for all declarative suites,
+  and 1.071 seconds for generated evidence. Three complete-checkpoint samples
+  establish a 128.647-second median and 128.244–131.777-second range.
+- Decision: listing consumes the strict registry only; focused execution parses
+  only its dependency closure; all and complete execution parse every suite.
+  A check whose owned invariant inspects suite bodies outside execution closure
+  explicitly requests the complete suite catalog.
+- Generated scan consolidation and caching are not selected. The measured
+  generated workload is approximately one second, while retained Bash dominates
+  the complete checkpoint; added snapshot/invalidation machinery is unjustified.
+- No-fallback decision: keep one strict registry loader, suite parser, and
+  invocation catalog. Do not retain eager loading as a compatibility path.
+- Result: Milestone 4 focused-loading implementation is the only active slice.
+
+## 2026-08-21: Milestone 4 Acceptance
+
+- Registry parsing and dependency validation remain the universal construction
+  boundary. Listing now returns IDs from that authority without parsing suite
+  bodies.
+- Focused execution extends the invocation catalog with only the deterministic
+  selected dependency closure. Selected and dependency configuration failures
+  retain their typed diagnostics; unrelated malformed suite bodies no longer
+  block listing or ordinary focused execution.
+- Added one neutral complete-catalog marker for checks whose invariant inspects
+  suite bodies outside execution closure. `edge_dispositions` declares that
+  requirement explicitly and continues to validate cross-suite assertion IDs
+  from the canonical parser snapshot.
+- Post-change medians are 0.104 seconds for listing, 0.111 seconds for focused
+  execution, 1.247 seconds for all suites, and 1.069 seconds for generated
+  evidence. Every workload remains within its accepted budget; listing and
+  focused execution improve by approximately 45% and 44%.
+- Generated scan consolidation, persistent caching, repository snapshots, and
+  Bash parallelism were rejected because measurements do not justify their
+  ownership and invalidation complexity.
+- Focused and broad evidence: 101 loading/catalog-aware tests, 353 verifier
+  tests, 35 neutral graph tests, all 207 declarative suites, generated
+  freshness, and the complete checkpoint with 65 retained Bash checkers passed.
+  The post-change complete run finished in approximately 116.5 seconds, below
+  the 150-second budget.
+- Result: Milestone 4 accepted. Milestone 5 is the only next slice and remains
+  pending explicit admission.

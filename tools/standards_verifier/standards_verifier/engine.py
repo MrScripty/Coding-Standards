@@ -2,10 +2,16 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .config import load_catalog
+from .config import extend_catalog, load_registry_catalog
 from .diagnostics import Diagnostic, EngineError
 from .graph_adapters import SUITE_DEPENDENCIES, suite_dependency_registry
-from .model import CheckContext, Suite, SuiteResult
+from .model import (
+    CheckContext,
+    CompleteSuiteCatalogCheck,
+    Suite,
+    SuiteCatalog,
+    SuiteResult,
+)
 
 
 class Verifier:
@@ -15,7 +21,7 @@ class Verifier:
         registry_path: str = "evaluation/standards-effectiveness/suite-registry.toml",
     ) -> None:
         self.repo_root = repo_root.resolve()
-        self.catalog = load_catalog(self.repo_root, registry_path)
+        self.catalog = load_registry_catalog(self.repo_root, registry_path)
         self.dependency_graph = suite_dependency_registry(
             self.repo_root,
             self.catalog.entries,
@@ -29,6 +35,18 @@ class Verifier:
     def run(self, selected: tuple[str, ...] | None = None) -> list[SuiteResult]:
         selected_ids = self._selection(selected)
         order = self._execution_order(selected_ids)
+        catalog = extend_catalog(self.repo_root, self.catalog, order)
+        if any(
+            isinstance(check, CompleteSuiteCatalogCheck)
+            for suite in catalog.suites
+            for check in suite.checks
+        ):
+            catalog = extend_catalog(
+                self.repo_root,
+                catalog,
+                self.list_suites(),
+            )
+        self.catalog = catalog
         results = []
         by_id: dict[str, SuiteResult] = {}
         for suite_id in order:
@@ -56,7 +74,7 @@ class Verifier:
                     exit_code=3,
                 )
             else:
-                result = self._run_suite(self.catalog.suite(suite_id))
+                result = self._run_suite(catalog.suite(suite_id), catalog)
             results.append(result)
             by_id[suite_id] = result
         return results
@@ -80,13 +98,13 @@ class Verifier:
             preferred_order=(entry.id for entry in self.catalog.entries),
         )
 
-    def _run_suite(self, suite: Suite) -> SuiteResult:
+    def _run_suite(self, suite: Suite, catalog: SuiteCatalog) -> SuiteResult:
         diagnostics = []
         exit_code = 0
         context = CheckContext(
             self.repo_root,
             suite.id,
-            self.catalog,
+            catalog,
         )
         for check in suite.checks:
             try:

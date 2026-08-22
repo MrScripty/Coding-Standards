@@ -11,6 +11,7 @@ from pathlib import Path
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ENGINE_ROOT))
 
+from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
 
 
@@ -43,7 +44,12 @@ class EdgeDispositionsTest(unittest.TestCase):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(textwrap.dedent(content).lstrip(), encoding="utf-8")
 
-    def write_registry(self, *, edge_requires: tuple[str, ...] = ("target",)) -> None:
+    def write_registry(
+        self,
+        *,
+        edge_requires: tuple[str, ...] = ("target",),
+        extra: str = "",
+    ) -> None:
         self.write(
             "registry.toml",
             f"""
@@ -58,6 +64,8 @@ class EdgeDispositionsTest(unittest.TestCase):
             id = "edges"
             path = "suites/edges.toml"
             requires = {json.dumps(list(edge_requires))}
+
+            {extra}
             """,
         )
 
@@ -183,6 +191,7 @@ class EdgeDispositionsTest(unittest.TestCase):
     def test_contract_uses_the_catalog_snapshot_without_reparsing_toml(self) -> None:
         self.admitted_contract()
         verifier = Verifier(self.root, "registry.toml")
+        first = verifier.run(("edges",))
         self.write("registry.toml", "not = [valid\n")
         self.write("suites/edges.toml", "not = [valid\n")
 
@@ -190,7 +199,28 @@ class EdgeDispositionsTest(unittest.TestCase):
             item for item in verifier.run(("edges",)) if item.id == "edges"
         )
 
+        self.assertTrue(all(item.status == "passed" for item in first))
         self.assertEqual(result.status, "passed")
+
+    def test_catalog_wide_contract_validates_unrelated_suite_body(self) -> None:
+        self.admitted_contract()
+        self.write("suites/broken.toml", "not = [valid\n")
+        self.write_registry(
+            extra="""
+            [[suites]]
+            id = "broken"
+            path = "suites/broken.toml"
+            requires = []
+            """
+        )
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, "registry.toml").run(("edges",))
+
+        self.assertEqual(
+            raised.exception.diagnostic.code,
+            "CONFIG.INVALID_TOML",
+        )
 
     def test_admitted_inbound_independent_gate_passes(self) -> None:
         self.write("source.sh", "#!/usr/bin/env bash\n")

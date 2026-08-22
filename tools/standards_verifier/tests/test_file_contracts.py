@@ -358,7 +358,7 @@ class FileContractsTest(unittest.TestCase):
                 suite = self.write_structure_suite(headings=headings)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, "registry.toml")
+                    Verifier(self.root, "registry.toml").run()
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
     def test_markdown_structure_requires_positive_integer_limit(self) -> None:
@@ -367,7 +367,7 @@ class FileContractsTest(unittest.TestCase):
                 suite = self.write_structure_suite(maximum_lines=value)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, "registry.toml")
+                    Verifier(self.root, "registry.toml").run()
                 self.assertEqual(
                     raised.exception.diagnostic.code,
                     "CONFIG.POSITIVE_INTEGER",
@@ -382,7 +382,7 @@ class FileContractsTest(unittest.TestCase):
                 suite = self.write_structure_suite(**options)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, "registry.toml")
+                    Verifier(self.root, "registry.toml").run()
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
     def test_markdown_headings_applies_literals_to_every_selected_heading(self) -> None:
@@ -504,7 +504,7 @@ class FileContractsTest(unittest.TestCase):
                 suite = self.write_heading_policy_suite(**options)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, "registry.toml")
+                    Verifier(self.root, "registry.toml").run()
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
     def test_markdown_heading_cardinality_accepts_semantic_boundaries(self) -> None:
@@ -614,7 +614,7 @@ class FileContractsTest(unittest.TestCase):
                 suite = self.write_heading_cardinality_suite(**options)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, "registry.toml")
+                    Verifier(self.root, "registry.toml").run()
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
         for missing, code in (
@@ -648,7 +648,7 @@ class FileContractsTest(unittest.TestCase):
                 )
                 self.write_registry(suite_path)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, "registry.toml")
+                    Verifier(self.root, "registry.toml").run()
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
     def test_git_index_paths_accepts_present_and_deleted_tracked_paths(self) -> None:
@@ -780,7 +780,7 @@ class FileContractsTest(unittest.TestCase):
                 suite = self.write_git_index_suite(**options)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, "registry.toml")
+                    Verifier(self.root, "registry.toml").run()
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
     def test_text_literals_remain_case_sensitive_by_default(self) -> None:
@@ -839,7 +839,7 @@ class FileContractsTest(unittest.TestCase):
                 suite = self.write_text_suite(**options)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, "registry.toml")
+                    Verifier(self.root, "registry.toml").run()
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
     def test_markdown_section_text_selects_through_nested_headings(self) -> None:
@@ -1021,7 +1021,7 @@ class FileContractsTest(unittest.TestCase):
                 suite = self.write_section_text_suite(**options)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, "registry.toml")
+                    Verifier(self.root, "registry.toml").run()
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
     def test_path_state_accepts_present_and_absent_paths(self) -> None:
@@ -1136,7 +1136,7 @@ class FileContractsTest(unittest.TestCase):
                 suite = self.write_path_state_suite(**options)
                 self.write_registry(suite)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, "registry.toml")
+                    Verifier(self.root, "registry.toml").run()
                 self.assertEqual(raised.exception.diagnostic.code, code)
 
     def test_absent_paths_type_is_rejected(self) -> None:
@@ -1144,7 +1144,7 @@ class FileContractsTest(unittest.TestCase):
         self.write_registry(suite)
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, "registry.toml")
+            Verifier(self.root, "registry.toml").run()
 
         self.assertEqual(
             raised.exception.diagnostic.code,

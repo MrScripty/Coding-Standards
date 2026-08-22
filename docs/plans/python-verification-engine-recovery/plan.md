@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3 accepted; Milestone 4 pending admission
+**Current phase:** Milestone 4 accepted; Milestone 5 pending admission
 
-**Next slice:** measure named verifier workloads and decide whether focused
-loading or scan consolidation is justified
+**Next slice:** record terminal dispositions for every migration-only Python
+module and check kind before Bash migration resumes
 
 **Acceptance status:** `pending`
 
@@ -33,7 +33,7 @@ prevent temporary Bash-migration mechanics from becoming permanent authority.
 | A2 | Verifier-interface scenarios select Architecture and Performance only from Router facts, including positive, negative, and unresolved cases. | `focused` | `not-applicable` | `automated` | `satisfied` | `s1-routing` verifier-change decisions |
 | A3 | One validated immutable suite catalog supplies execution and checks; assertions and invalid, unavailable, and unsupported conditions return their documented statuses. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 2 acceptance](execution-ledger.md#2026-08-21-milestone-2-acceptance) |
 | A4 | `source_index_closure` and `acceptance_claims` policy are expressed through the smallest owned mechanics without compatibility adapters or policy literals in generic checks. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 3 acceptance](execution-ledger.md#2026-08-21-milestone-3-acceptance) |
-| A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims; loading or scan changes occur only when accepted measurements justify them. | `focused` | `representative` | `automated` | `pending` | Milestone 4 |
+| A5 | Named list, focused, all-suite, generated-artifact, and complete workloads have owned performance claims; loading or scan changes occur only when accepted measurements justify them. | `focused` | `representative` | `automated` | `satisfied` | [Milestone 4 performance evidence](reports/milestone-4-performance.md) |
 | A6 | Every migration-only Python module and check kind has one terminal disposition, and zero-Bash closure removes every item without a current post-migration consumer. | `complete` | `not-applicable` | `automated` | `pending` | Milestone 5 and verification-engine zero-Bash acceptance |
 | A7 | Graph, verifier, declarative, generated, plan, link, and mixed gates pass without dual authority, fallback, or a changed temporary Bash graph schema. | `complete` | `not-applicable` | `automated` | `pending` | Final acceptance |
 
@@ -262,27 +262,35 @@ performance only where representative evidence justifies change.
 - performance claim and measurement evidence under this plan's `reports/`
 - `tools/standards_verifier/standards_verifier/config.py`
 - `tools/standards_verifier/standards_verifier/engine.py`
+- `tools/standards_verifier/standards_verifier/model.py`
+- `tools/standards_verifier/standards_verifier/checks/edge_dispositions.py`
 - generated-artifact orchestration modules only when measurements select that
   work
-- affected tests and verifier documentation
+- `tools/standards_verifier/tests/test_engine.py`
+- `tools/standards_verifier/tests/test_edge_dispositions.py`
+- `tools/standards_verifier/tests/test_derived_evidence.py`
+- `tools/standards_verifier/tests/test_file_contracts.py`
+- `tools/standards_verifier/tests/test_metadata.py`
+- `tools/standards_verifier/tests/test_routing_checks.py`
+- affected verifier documentation
 - this plan directory and parent current-state plans
 
 **Tasks:**
 
-- [ ] Define list, focused, all-suite, generated-artifact, and complete
+- [x] Define list, focused, all-suite, generated-artifact, and complete
   workloads with metric, environment, baseline, variability, and consumer
   impact.
-- [ ] Decide strict focused-loading behavior from correctness and fault-isolation
+- [x] Decide strict focused-loading behavior from correctness and fault-isolation
   claims before changing loading.
-- [ ] Load only the accepted catalog/body scope when measurements and semantics
+- [x] Load only the accepted catalog/body scope when measurements and semantics
   justify it.
-- [ ] Consolidate scans only when a measured claim is materially affected; do
+- [x] Consolidate scans only when a measured claim is materially affected; do
   not add persistent caching.
 
 **Acceptance gate:** claim-matched before/after evidence, unchanged correctness
 and diagnostics, all broad gates, and no unmeasured optimization pass.
 
-**Status:** `Planned`
+**Status:** `Accepted`
 
 ### Milestone 5: Migration-Python Terminal Lifecycle
 
@@ -317,8 +325,8 @@ accepted.
 
 ## Blockers
 
-- Further Bash-checker package selection is paused until Milestones 1 through 4
-  and the pre-resume terminal-disposition gate in Milestone 5 are accepted.
+- Further Bash-checker package selection is paused until the pre-resume
+  terminal-disposition gate in Milestone 5 is accepted.
 
 ## Re-Plan Triggers
 

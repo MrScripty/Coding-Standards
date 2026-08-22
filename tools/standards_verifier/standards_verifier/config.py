@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import tomllib
+from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
 
@@ -111,7 +112,23 @@ def load_suite(root: Path, entry: RegistryEntry) -> Suite:
     return Suite(entry.id, owner, description, checks)
 
 
-def load_catalog(root: Path, registry_path: str) -> SuiteCatalog:
-    entries = load_registry(root, registry_path)
-    suites = tuple(load_suite(root, entry) for entry in entries)
-    return SuiteCatalog(registry_path, entries, suites)
+def load_registry_catalog(root: Path, registry_path: str) -> SuiteCatalog:
+    return SuiteCatalog(registry_path, load_registry(root, registry_path), ())
+
+
+def extend_catalog(
+    root: Path,
+    catalog: SuiteCatalog,
+    suite_ids: Iterable[str],
+) -> SuiteCatalog:
+    selected = frozenset(suite_ids)
+    unknown = selected - catalog.suite_ids
+    if unknown:
+        raise ValueError(f"catalog extension contains unknown suites: {sorted(unknown)}")
+    loaded = {suite.id: suite for suite in catalog.suites}
+    suites = tuple(
+        loaded.get(entry.id) or load_suite(root, entry)
+        for entry in catalog.entries
+        if entry.id in selected or entry.id in loaded
+    )
+    return SuiteCatalog(catalog.registry_path, catalog.entries, suites)

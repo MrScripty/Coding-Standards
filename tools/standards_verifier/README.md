@@ -161,11 +161,19 @@ operators, dependencies, and paths fail with typed diagnostics. Configuration
 cannot execute commands, import modules, evaluate code, interpolate environment
 variables, or write files.
 
-One immutable suite catalog owns the validated registry entries and parsed
-suite bodies for an invocation. Execution and catalog-aware checks consume that
-catalog; checks do not reopen registry or suite TOML, construct a second reverse
-index, or fall back to a check-local representation. Focused-loading behavior
-is a separate performance concern and does not authorize duplicate parsers.
+One invocation catalog owns every validated registry entry and every suite body
+loaded for that invocation. Listing validates the registry without parsing suite
+bodies. Focused execution parses only the selected dependency closure, while
+`--all` and `--complete` parse every registered suite. An unrelated malformed
+suite therefore does not block listing or ordinary focused execution; a
+malformed selected suite or dependency remains a typed failure.
+
+A check whose invariant inspects assertion identities outside its execution
+closure explicitly implements the complete-catalog marker. The engine then
+loads every suite body through the same strict parser before running that check.
+Execution and catalog-aware checks consume that catalog; checks do not reopen
+registry or suite TOML, construct a second reverse index, or fall back to a
+check-local representation.
 
 The `decision` check has two mutually exclusive canonical forms. The compact
 single-output form uses `expected_column`, `default`, and ordered `rules`; its

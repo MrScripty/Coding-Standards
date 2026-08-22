@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 7 verification-engine recovery after policy-interface acceptance
+**Current phase:** Milestone 7 verification-engine recovery after measured loading acceptance
 
-**Next slice:** measure verifier workloads under recovery Milestone 4; no verifier package is preselected
+**Next slice:** establish migration-Python terminal dispositions; no verifier package is preselected
 
 **Acceptance status:** `partial`
 

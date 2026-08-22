@@ -13,6 +13,12 @@ class Check(Protocol):
     def run(self, context: "CheckContext") -> list[Diagnostic]: ...
 
 
+class CompleteSuiteCatalogCheck:
+    """Marker for checks whose invariant inspects every registered suite body."""
+
+    __slots__ = ()
+
+
 @dataclass(frozen=True, slots=True)
 class Suite:
     id: str
@@ -37,8 +43,13 @@ class SuiteCatalog:
     def __post_init__(self) -> None:
         entry_ids = tuple(entry.id for entry in self.entries)
         suite_ids = tuple(suite.id for suite in self.suites)
-        if entry_ids != suite_ids:
-            raise ValueError("catalog entries and suites must have identical ordered IDs")
+        if len(set(suite_ids)) != len(suite_ids):
+            raise ValueError("catalog suite IDs must be unique")
+        loaded = frozenset(suite_ids)
+        if tuple(suite_id for suite_id in entry_ids if suite_id in loaded) != suite_ids:
+            raise ValueError(
+                "catalog suites must be a registry-ordered subset of entries"
+            )
 
     @classmethod
     def empty(cls) -> "SuiteCatalog":
@@ -65,9 +76,12 @@ class SuiteCatalog:
         raise KeyError(f"suite is absent from the catalog: {suite_id}")
 
     def suite_for_path(self, path: str) -> Suite | None:
-        for entry, suite in zip(self.entries, self.suites, strict=True):
+        for entry in self.entries:
             if entry.path == path:
-                return suite
+                return next(
+                    (suite for suite in self.suites if suite.id == entry.id),
+                    None,
+                )
         return None
 
 

@@ -5,7 +5,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any
 
 from ..diagnostics import Diagnostic, EngineError
-from ..model import CheckContext
+from ..model import CheckContext, CompleteSuiteCatalogCheck
 from ..paths import contained_file
 from .table import read_table_rows
 
@@ -128,7 +128,7 @@ def _diagnostic(
 
 
 @dataclass(frozen=True, slots=True)
-class EdgeDispositionsCheck:
+class EdgeDispositionsCheck(CompleteSuiteCatalogCheck):
     id: str
     path: str
     packages_path: str

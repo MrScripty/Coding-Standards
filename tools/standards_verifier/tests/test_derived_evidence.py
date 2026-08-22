@@ -413,14 +413,14 @@ class DerivedEvidenceTest(unittest.TestCase):
             with self.subTest(field=field):
                 self.write_suite(**{field: "fallback = true"})
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, self.registry)
+                    Verifier(self.root, self.registry).run()
                 self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
 
     def test_projection_must_select_one_column(self) -> None:
         self.write_suite(subject_columns='["scope", "subjects"]')
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(
             raised.exception.diagnostic.code,
@@ -431,7 +431,7 @@ class DerivedEvidenceTest(unittest.TestCase):
         self.write_suite(path_columns='["scope", "target"]')
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(
             raised.exception.diagnostic.code,
@@ -442,7 +442,7 @@ class DerivedEvidenceTest(unittest.TestCase):
         self.write_suite(path_source_extra="fallback = true")
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
 

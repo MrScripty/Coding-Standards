@@ -216,7 +216,7 @@ class RoutingChecksTest(unittest.TestCase):
                 suite_path = self.write_markdown_suite(paths=paths)
                 self.write_registry(suite_path)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, self.registry)
+                    Verifier(self.root, self.registry).run()
                 self.assertEqual(raised.exception.diagnostic.code, "CONFIG.STRING_LIST")
 
     def test_markdown_links_unknown_field_is_invalid(self) -> None:
@@ -224,7 +224,7 @@ class RoutingChecksTest(unittest.TestCase):
         self.write_registry(suite_path)
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
         self.assertEqual(raised.exception.diagnostic.field, "network")
@@ -418,7 +418,7 @@ class RoutingChecksTest(unittest.TestCase):
         self.write_registry(suite_path)
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(
             raised.exception.diagnostic.code,
@@ -430,7 +430,7 @@ class RoutingChecksTest(unittest.TestCase):
         self.write_registry(suite_path)
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
         self.assertEqual(raised.exception.diagnostic.field, "network")
@@ -440,7 +440,7 @@ class RoutingChecksTest(unittest.TestCase):
         self.write_registry(suite_path)
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(
             raised.exception.diagnostic.code,
@@ -569,7 +569,7 @@ class RoutingChecksTest(unittest.TestCase):
                 suite_path = self.write_line_budget_suite(paths=paths)
                 self.write_registry(suite_path)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, self.registry)
+                    Verifier(self.root, self.registry).run()
                 self.assertEqual(raised.exception.diagnostic.code, "CONFIG.STRING_LIST")
 
     def test_line_budget_ratio_must_use_positive_integers(self) -> None:
@@ -581,7 +581,7 @@ class RoutingChecksTest(unittest.TestCase):
                 )
                 self.write_registry(suite_path)
                 with self.assertRaises(EngineError) as raised:
-                    Verifier(self.root, self.registry)
+                    Verifier(self.root, self.registry).run()
                 self.assertEqual(
                     raised.exception.diagnostic.code,
                     "CONFIG.POSITIVE_INTEGER",
@@ -592,7 +592,7 @@ class RoutingChecksTest(unittest.TestCase):
         self.write_registry(suite_path)
 
         with self.assertRaises(EngineError) as raised:
-            Verifier(self.root, self.registry)
+            Verifier(self.root, self.registry).run()
 
         self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
         self.assertEqual(raised.exception.diagnostic.field, "measure")
