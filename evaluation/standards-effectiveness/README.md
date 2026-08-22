@@ -470,8 +470,7 @@ validated-variant dispatch, typed invalid/unsupported/unavailable outcomes,
 11 exact frozen-ID dispositions, metadata and routing, legacy links, and removal
 of unchecked message and payload assertions.
 
-`fixtures/language-bindings/serialized-wire-decisions.tsv` and
-`verify-language-binding-wire-representation.sh` check canonical schema and
+The registered `language-binding-wire-representation` suite checks canonical schema and
 serializer selection, complete tagged-enum/variant/field shape derivation,
 consumer agreement, directional evidence, typed
 invalid/unsupported/unavailable outcomes, three exact dispositions, and

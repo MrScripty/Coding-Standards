@@ -5633,3 +5633,26 @@ independent, so no additional mixed checkpoint is triggered. Final graph: 58
 Bash checkers, 62 nodes, 418 edges, and 62 components. No source policy,
 copied row, hardcoded count, numeric-range authority, wrapper, compatibility
 representation, false dependency, dual authority, or fallback remains.
+
+### M6-I68 Language Binding Wire Representation Acceptance
+
+Fresh post-M6-I67 evidence selected the caller-free wire-representation
+checker with one metadata helper and three retained nested gates. One reviewed
+one-column fixture owns its three semantic members. The registered ten-check
+suite preserves 18 schema, serializer, shape, consumer, variant, capability,
+evidence, and fallback decisions; exact source and disposition membership;
+metadata; profile policy; three bounded legacy projections; removed-rule
+absence; and documentation projection.
+
+Two historical inbound records now resolve to suite authority. Eight M6-I68
+records map metadata to the native assertion and retain the cross-language,
+language-binding-boundary, and execution-train checkers as independent gates.
+The obsolete active-plan consumer is absent. Four disposable mutations reject
+decision-precedence loss, unavailable membership, invalid disposition, and a
+broken bounded legacy projection. All three retained gates, 373 verifier tests,
+35 graph tests, all 214 declarative suites, numeric lifecycle, and generated
+freshness pass. Focused retained-gate evidence proves cumulative interactions,
+so no mixed checkpoint is triggered. Final graph: 57 Bash checkers, 61 nodes,
+410 edges, and 61 components. No copied rows, hardcoded count, numeric-range
+authority, wrapper, compatibility representation, dual authority, or fallback
+remains.

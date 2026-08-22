@@ -14681,3 +14681,18 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   tests, 35 graph tests, all 213 suites, numeric lifecycle, and generated
   freshness pass. Final graph: 58 Bash checkers, 62 nodes, 418 edges, 62
   components. No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I68 Language Binding Wire Representation Acceptance
+
+- Accepted one `serial-coherent` package at train order 183, replacing the
+  caller-free wire-representation checker with a ten-check suite and one
+  reviewed ID-only membership provider.
+- The suite preserves 18 typed decisions, exact canonical membership,
+  metadata, profile policy, bounded legacy projections, removed-rule absence,
+  and README projection.
+- Two historical records transfer to suite authority; eight records replace
+  metadata execution and retain three independent gates. Four mutations, all
+  retained gates, 373 verifier tests, 35 graph tests, all 214 suites, numeric
+  lifecycle, and generated freshness pass. Final graph: 57 Bash checkers, 61
+  nodes, 410 edges, 61 components. No fallback or compatibility authority
+  remains.

@@ -1064,3 +1064,8 @@ requires = []
 id = "release-procedure-policy"
 path = "evaluation/standards-effectiveness/suites/release-procedure-policy.toml"
 requires = []
+
+[[suites]]
+id = "language-binding-wire-representation"
+path = "evaluation/standards-effectiveness/suites/language-binding-wire-representation.toml"
+requires = []

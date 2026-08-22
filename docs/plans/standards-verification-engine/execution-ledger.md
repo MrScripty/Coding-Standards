@@ -6177,3 +6177,18 @@
   interactions since the preceding shared-contract checkpoint avoid a
   redundant mixed checkpoint. Final graph: 58 Bash checkers, 62 nodes, 418
   edges, 62 components. No fallback or compatibility authority remains.
+
+## 2026-08-21 - M6-I68 Language Binding Wire Representation Acceptance
+
+- Fresh post-M6-I67 evidence selected the caller-free wire checker for one
+  `serial-coherent` package at train order 183.
+- Replaced it with one ten-check suite and one ID-only membership fixture,
+  preserving 18 typed decisions, exact source/disposition membership,
+  metadata, profile, three bounded legacy sections, removed rules, and README.
+- Two historical records now resolve to suite authority; eight package records
+  replace metadata execution and retain three nested checkers independently.
+  The obsolete active-plan consumer is gone.
+- Four negative mutations, all three retained gates, 373 verifier tests, 35
+  graph tests, all 214 suites, numeric lifecycle, and generated freshness pass.
+  Final graph: 57 Bash checkers, 61 nodes, 410 edges, 61 components. No fallback
+  or compatibility authority remains.
