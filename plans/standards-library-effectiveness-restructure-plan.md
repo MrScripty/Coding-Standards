@@ -4,7 +4,8 @@
 
 **Current phase:** Milestone 7 verifier migration after terminal-disposition acceptance
 
-**Next slice:** resolve the verification-engine row-constraint re-plan before admitting M6-I66
+**Next slice:** run a fresh graph audit after scoped row-constraint acceptance;
+do not preselect M6-I66 from pre-recovery evidence
 
 **Acceptance status:** `partial`
 
@@ -137,7 +138,7 @@ complete; `Accepted` requires the named evidence.
 | 4 | Typed verification and release acceptance | `Accepted` | [Verification](../workflows/verification.md), [Release](../workflows/release.md) |
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../workflows/documentation.md), [Commit](../workflows/commit.md) |
-| 7 | Role-based consolidation and verification migration | `Active` | M6-I65 accepted; fresh graph audit is next |
+| 7 | Role-based consolidation and verification migration | `Active` | Scoped row constraints accepted after M6-I65; fresh graph audit is next |
 | 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Begins after Milestone 7 and the planning recovery are accepted |
 
 ### Milestone 7 Current State
@@ -171,10 +172,9 @@ post-M6-I17 evidence selected M6-I18; no stale package evidence was reused.
 5. Complete manual semantic-ownership review `D001` through `D010` before
    Milestone 7 acceptance.
 
-**Current blocker:** the next caller-free Documentation consolidation checker
-requires a bounded decision on generic declarative row constraints. No M6-I66
-package is admitted, and the existing Bash contract remains authoritative
-until the verification-engine plan accepts a no-fallback replacement.
+**Current blocker:** `none`. The generic scoped row-constraint contract is
+accepted, but no M6-I66 package is admitted. Fresh post-commit graph evidence
+must select the next package.
 
 **Acceptance gate:** every rule identifier has a final disposition; structural,
 routing, ownership, source-closure, and no-legacy checks pass; the final Python

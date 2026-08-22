@@ -315,6 +315,18 @@ expressed through projections or relations; mutable inventory cardinality is
 derived from canonical membership. A configured `row_count` is an unknown
 field and fails rather than using a compatibility parser.
 
+An optional table-level `where` predicate scopes non-empty, domain, unique,
+projection, and row-constraint assertions to one explicit semantic membership
+set. Each named `[[checks.row_constraints]]` supplies an optional `where`
+predicate and one required `require` predicate. Every scoped row selected by
+the constraint must satisfy that requirement; failures retain the original TSV
+line and report `ASSERT.TABLE_ROW_CONSTRAINT` with the constraint ID. Both
+predicates use the same fixed `eq`, `ne`, `in`, `not_in`, `all`, `any`, and
+`not` grammar as projections and decisions. Unknown columns, duplicate or
+empty constraint IDs, missing requirements, and unknown fields are invalid.
+The check does not infer membership, derive policy from numeric ID ranges,
+copy canonical rows, execute callbacks, or fall back to an unscoped assertion.
+
 The `inclusion` check compares two strict projected table sources named
 `members` and `container`. Every unique projected member row must occur in the
 unique projected container; additional container rows are valid. Both

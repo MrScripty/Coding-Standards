@@ -14629,3 +14629,16 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   graph tests, all 211 suites, numeric lifecycle, and generated freshness pass.
   Final graph: 60 Bash checkers, 64 nodes, 426 edges, 64 components. No
   fallback or compatibility authority remains.
+
+## 2026-08-21 - Scoped Table Row-Constraint Shared Contract
+
+- Accepted one shared verifier contract for explicit semantic table scope and
+  named conditional row requirements. It reuses the fixed predicate grammar,
+  preserves original source rows, and introduces no policy-specific branch,
+  callback, compatibility representation, or fallback.
+- Six focused tests, 363 verifier tests, 35 graph tests, all 211 declarative
+  suites, generated freshness, numeric lifecycle, and the complete checkpoint
+  with 60 retained Bash checkers pass.
+- One stale generated checker-structure consumer introduced by the prior
+  plan-only re-plan was regenerated; graph nodes, edges, and components did not
+  change. M6-I66 remains unadmitted pending fresh post-commit evidence.

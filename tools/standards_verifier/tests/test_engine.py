@@ -298,6 +298,51 @@ class EngineTest(unittest.TestCase):
         )
         return "suites/table.toml"
 
+    def write_row_constraint_table_suite(self) -> str:
+        self.write(
+            "row-constraints.tsv",
+            "id\ttarget\tdisposition\n"
+            "a\tworkflow.documentation\tmove\n"
+            "b\tnone\tremove\n"
+            "ignored\tlegacy\tretain\n",
+        )
+        self.write(
+            "suites/row-constraints.toml",
+            """
+            schema_version = 1
+            id = "row-constraints"
+            owner = "test.owner"
+            description = "Scoped row constraints"
+
+            [[checks]]
+            id = "dispositions"
+            type = "table"
+            path = "row-constraints.tsv"
+            header = ["id", "target", "disposition"]
+            where = { field = "id", op = "in", values = ["a", "b"] }
+            non_empty = ["id", "target", "disposition"]
+            unique = [["id"]]
+            [checks.domains]
+            disposition = ["move", "remove"]
+
+            [[checks.projections]]
+            columns = ["id"]
+            order = "source"
+            expected = [["a"], ["b"]]
+
+            [[checks.row_constraints]]
+            id = "removed-target"
+            where = { field = "disposition", op = "eq", value = "remove" }
+            require = { field = "target", op = "eq", value = "none" }
+
+            [[checks.row_constraints]]
+            id = "moved-target"
+            where = { field = "disposition", op = "eq", value = "move" }
+            require = { field = "target", op = "in", values = ["workflow.documentation", "template.readme"] }
+            """,
+        )
+        return "suites/row-constraints.toml"
+
     def test_table_row_count_is_an_unknown_field(self) -> None:
         suite_path = self.write_table_suite()
         self.write_registry([("table", suite_path, [])])
@@ -709,6 +754,109 @@ class EngineTest(unittest.TestCase):
 
         self.assertEqual(result.status, "failed")
         self.assertEqual(result.diagnostics[0].code, "PATH.OUTSIDE_REPOSITORY")
+
+    def test_table_scope_and_row_constraints_pass(self) -> None:
+        suite_path = self.write_row_constraint_table_suite()
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "passed")
+
+    def test_table_row_constraint_reports_original_source_row(self) -> None:
+        suite_path = self.write_row_constraint_table_suite()
+        self.write(
+            "row-constraints.tsv",
+            "id\ttarget\tdisposition\n"
+            "a\tworkflow.documentation\tmove\n"
+            "b\tworkflow.documentation\tremove\n"
+            "ignored\tlegacy\tretain\n",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        result = Verifier(self.root, self.registry).run()[0]
+
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(
+            result.diagnostics[0].code, "ASSERT.TABLE_ROW_CONSTRAINT"
+        )
+        self.assertEqual(result.diagnostics[0].field, "removed-target")
+        self.assertEqual(result.diagnostics[0].row, 3)
+
+    def test_table_scope_rejects_unknown_column(self) -> None:
+        suite_path = self.write_row_constraint_table_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'where = { field = "id", op = "in", values = ["a", "b"] }',
+                'where = { field = "missing", op = "in", values = ["a", "b"] }',
+                1,
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.TABLE_COLUMN")
+        self.assertEqual(raised.exception.diagnostic.field, "missing")
+
+    def test_table_row_constraint_rejects_unknown_column(self) -> None:
+        suite_path = self.write_row_constraint_table_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'require = { field = "target", op = "eq", value = "none" }',
+                'require = { field = "missing", op = "eq", value = "none" }',
+                1,
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.TABLE_COLUMN")
+        self.assertEqual(raised.exception.diagnostic.field, "missing")
+
+    def test_table_row_constraint_ids_must_be_unique(self) -> None:
+        suite_path = self.write_row_constraint_table_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'id = "moved-target"', 'id = "removed-target"', 1
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(
+            raised.exception.diagnostic.code, "CONFIG.ROW_CONSTRAINT_ID"
+        )
+
+    def test_table_row_constraint_rejects_unknown_configuration(self) -> None:
+        suite_path = self.write_row_constraint_table_suite()
+        suite = self.root / suite_path
+        suite.write_text(
+            suite.read_text(encoding="utf-8").replace(
+                'id = "removed-target"',
+                'id = "removed-target"\nfallback = "allow"',
+                1,
+            ),
+            encoding="utf-8",
+        )
+        self.write_registry([("row-constraints", suite_path, [])])
+
+        with self.assertRaises(EngineError) as raised:
+            Verifier(self.root, self.registry).run()
+
+        self.assertEqual(raised.exception.diagnostic.code, "CONFIG.UNKNOWN_FIELD")
+        self.assertEqual(raised.exception.diagnostic.field, "fallback")
 
     def test_table_relation_with_split_passes(self) -> None:
         suite_path = self.write_relation_suite()

@@ -5513,3 +5513,26 @@ The accepted M6-I65 boundary remains clean, and the Bash checker remains the
 sole authority pending a bounded shared-contract decision among: a generic
 row-constraint assertion, an explicit reviewed membership provider plus
 generic predicates, or deferral in favor of another caller-free package.
+
+### Scoped Table Row-Constraint Acceptance
+
+The accepted shared contract adds one optional table-level `where` predicate
+and named row constraints that each combine an optional `where` predicate with
+one required `require` predicate. All predicates reuse the fixed declarative
+grammar. Table scope applies consistently to non-empty, domain, uniqueness,
+projection, and row-constraint checks; diagnostics retain original TSV line
+numbers and identify the failed constraint.
+
+The implementation rejects unknown columns, unknown configuration fields,
+duplicate or empty constraint IDs, and missing requirements. It does not infer
+semantic membership, select numeric ID ranges, copy canonical rows, execute
+callbacks, or retain an unscoped fallback. Six focused tests cover accepted
+scope, original-row diagnostics, unknown fields and columns, and duplicate
+identities. All 363 verifier tests, 35 graph tests, 211 declarative suites, and
+the complete checkpoint with 60 retained Bash checkers pass.
+
+Regeneration also corrected one stale derived structure row introduced when
+the preceding plan-only re-plan named the Documentation checker as a current
+consumer. Dependency nodes, edges, and components did not change. This was a
+generated-evidence freshness deviation, not new package authority. M6-I66
+remains unadmitted until a fresh graph audit from the accepted commit.

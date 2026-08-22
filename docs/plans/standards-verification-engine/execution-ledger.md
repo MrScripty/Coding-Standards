@@ -6120,3 +6120,17 @@
   generated freshness pass. Exact non-conflicting interactions across the two
   post-wave packages avoid a redundant mixed checkpoint. Final graph: 60 Bash
   checkers, 64 nodes, 426 edges, 64 components.
+
+## 2026-08-21 - Scoped Table Row-Constraint Shared Contract
+
+- Accepted a generic table-level scope and named conditional row constraints
+  using the existing fixed predicate grammar. Assertions retain original source
+  rows and return `ASSERT.TABLE_ROW_CONSTRAINT` with the named constraint.
+- Added six focused tests for accepted scoping, original-row diagnostics,
+  unknown scope and constraint columns, duplicate IDs, and unknown fields.
+- Regenerated one stale checker-structure row caused by the preceding plan-only
+  Documentation re-plan; nodes, edges, and components remained unchanged.
+- All 363 verifier tests, 35 graph tests, 211 declarative suites, generated
+  freshness, numeric lifecycle, and the complete checkpoint with all 60
+  retained Bash checkers pass. M6-I66 remains unadmitted pending fresh graph
+  evidence.

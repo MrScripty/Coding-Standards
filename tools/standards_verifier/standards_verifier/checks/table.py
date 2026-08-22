@@ -48,6 +48,13 @@ class ProjectedTableSource:
     projection: Projection
 
 
+@dataclass(frozen=True, slots=True)
+class RowConstraint:
+    id: str
+    where: Predicate | None
+    require: Predicate
+
+
 def read_table_rows(
     root: Path,
     path: str,
@@ -270,6 +277,8 @@ class TableCheck:
     domains: dict[str, tuple[str, ...]]
     unique: tuple[tuple[str, ...], ...]
     projections: tuple[Projection, ...]
+    where: Predicate | None
+    row_constraints: tuple[RowConstraint, ...]
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
         root = context.repo_root
@@ -283,8 +292,14 @@ class TableCheck:
             check=self.id,
         )
 
+        scoped_rows = [
+            (line_number, row)
+            for line_number, row in enumerate(rows, start=2)
+            if self.where is None or self.where.evaluate(row)
+        ]
+
         diagnostics: list[Diagnostic] = []
-        for line_number, row in enumerate(rows, start=2):
+        for line_number, row in scoped_rows:
             for field in self.non_empty:
                 if not row[field]:
                     diagnostics.append(
@@ -318,7 +333,7 @@ class TableCheck:
 
         for key in self.unique:
             seen: dict[tuple[str, ...], int] = {}
-            for line_number, row in enumerate(rows, start=2):
+            for line_number, row in scoped_rows:
                 value = tuple(row[field] for field in key)
                 if value in seen:
                     diagnostics.append(
@@ -338,8 +353,31 @@ class TableCheck:
                 else:
                     seen[value] = line_number
 
+        for constraint in self.row_constraints:
+            for line_number, row in scoped_rows:
+                if constraint.where is not None and not constraint.where.evaluate(row):
+                    continue
+                if constraint.require.evaluate(row):
+                    continue
+                diagnostics.append(
+                    Diagnostic(
+                        "ASSERT.TABLE_ROW_CONSTRAINT",
+                        "invalid",
+                        "table row does not satisfy the named constraint",
+                        suite=context.suite_id,
+                        check=self.id,
+                        path=self.path,
+                        row=line_number,
+                        field=constraint.id,
+                        expected="constraint satisfied",
+                        observed="constraint violated",
+                    )
+                )
+
         for projection in self.projections:
-            actual = project_table_rows(rows, projection)
+            actual = project_table_rows(
+                [row for _, row in scoped_rows], projection
+            )
             if actual != projection.expected:
                 diagnostics.append(
                     Diagnostic(
@@ -470,6 +508,77 @@ def _projection(
     )
 
 
+def _row_constraint(
+    raw: Any, header: tuple[str, ...], suite: str, check: str
+) -> RowConstraint:
+    if not isinstance(raw, dict):
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.ROW_CONSTRAINT",
+                "invalid",
+                "row constraint must be a TOML table",
+                suite=suite,
+                check=check,
+            )
+        )
+    allowed = {"id", "where", "require"}
+    unknown = set(raw) - allowed
+    if unknown:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.UNKNOWN_FIELD",
+                "invalid",
+                "row constraint contains unknown fields",
+                suite=suite,
+                check=check,
+                field=sorted(unknown)[0],
+            )
+        )
+    constraint_id = raw.get("id")
+    if not isinstance(constraint_id, str) or not constraint_id:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.ROW_CONSTRAINT_ID",
+                "invalid",
+                "row constraint id must be a non-empty string",
+                suite=suite,
+                check=check,
+                field="id",
+            )
+        )
+    where = None
+    if "where" in raw:
+        where = parse_predicate(raw["where"], suite, check)
+    if "require" not in raw:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.ROW_CONSTRAINT_REQUIRE",
+                "invalid",
+                "row constraint requires one predicate",
+                suite=suite,
+                check=check,
+                field=constraint_id,
+            )
+        )
+    require = parse_predicate(raw["require"], suite, check)
+    referenced = require.fields()
+    if where is not None:
+        referenced |= where.fields()
+    unknown_columns = referenced - set(header)
+    if unknown_columns:
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.TABLE_COLUMN",
+                "invalid",
+                "row constraint references an unknown column",
+                suite=suite,
+                check=check,
+                field=sorted(unknown_columns)[0],
+            )
+        )
+    return RowConstraint(constraint_id, where, require)
+
+
 def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
     allowed = {
         "id",
@@ -480,6 +589,8 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
         "domains",
         "unique",
         "projections",
+        "where",
+        "row_constraints",
     }
     unknown = set(raw) - allowed
     if unknown:
@@ -594,11 +705,53 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
     projections = tuple(
         _projection(value, header, suite_id, check_id) for value in raw_projections
     )
+    where = None
+    if "where" in raw:
+        where = parse_predicate(raw["where"], suite_id, check_id)
+        unknown_fields = where.fields() - set(header)
+        if unknown_fields:
+            raise EngineError(
+                Diagnostic(
+                    "CONFIG.TABLE_COLUMN",
+                    "invalid",
+                    "table scope references an unknown column",
+                    suite=suite_id,
+                    check=check_id,
+                    field=sorted(unknown_fields)[0],
+                )
+            )
+    raw_row_constraints = raw.get("row_constraints", [])
+    if not isinstance(raw_row_constraints, list):
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.ROW_CONSTRAINTS",
+                "invalid",
+                "row_constraints must be an array of TOML tables",
+                suite=suite_id,
+                check=check_id,
+            )
+        )
+    row_constraints = tuple(
+        _row_constraint(value, header, suite_id, check_id)
+        for value in raw_row_constraints
+    )
+    constraint_ids = [constraint.id for constraint in row_constraints]
+    if len(set(constraint_ids)) != len(constraint_ids):
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.ROW_CONSTRAINT_ID",
+                "invalid",
+                "row constraint ids must be unique",
+                suite=suite_id,
+                check=check_id,
+            )
+        )
     if (
         not non_empty
         and not domains
         and not unique
         and not projections
+        and not row_constraints
     ):
         raise EngineError(
             Diagnostic(
@@ -617,4 +770,6 @@ def parse_table_check(raw: dict[str, Any], suite_id: str) -> TableCheck:
         domains,
         unique,
         projections,
+        where,
+        row_constraints,
     )
