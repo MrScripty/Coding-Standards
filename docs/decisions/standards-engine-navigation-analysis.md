@@ -270,6 +270,22 @@ returns the exact canonical unresolved facts responsible for that result.
 `all`, `any`, and `not` use the documented Kleene three-valued truth tables and
 never coerce unknown.
 
+Impact selection evaluates the accepted and proposed traces with the same
+immutable fact set while their fact-schema digests match. Until independent
+snapshot-local fact contexts are implemented, differing schema digests reject
+with `FACT_SCHEMA_EVOLUTION_UNSUPPORTED`. The trace union is evaluated as a
+three-valued disjunction: any `true` trace makes the candidate applicable;
+otherwise any `unknown` trace keeps it unknown; otherwise declared `false`
+traces make it false. Generic relationships remain `not-declared`.
+
+An aggregate `unknown` candidate remains unknown and receives an explicit
+whole-artifact review scope. Analysis emits one typed question per exact
+material unresolved fact and one `applicability-resolution` obligation per
+relationship and unresolved fact. The obligation links the canonical fact,
+edge, and question IDs and depends on the compiled program, relationship, fact
+schema, and question contract. Conservative selection never answers the
+question or changes the truth value.
+
 Malformed expressions, unknown operators, invalid arity, undeclared facts,
 type errors, alias conflicts, incompatible fact schemas, and out-of-domain enum
 values are typed invalid failures. Unsupported language versions are typed

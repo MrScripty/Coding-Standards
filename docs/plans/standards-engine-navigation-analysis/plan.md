@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 3 semantic impact selection and coverage
 
-**Next slice:** preserve `unknown` applicability while selecting conservative
-whole-artifact review scope and generate exact applicability-resolution work
+**Next slice:** prove that missing or expired policy-consumer coverage cannot
+produce successful empty impact
 
 **Acceptance status:** `pending`
 
@@ -482,7 +482,7 @@ without claiming to judge arbitrary meaning.
 - [x] Remove the legacy audit catalog, compiler audit matching,
   `audit_declaration` semantics, `audited_owners`, old verifier loading, and
   module-level audit authority in the same cutover without fallback.
-- [ ] Keep applicability unknown during conservative whole-artifact selection.
+- [x] Keep applicability unknown during conservative whole-artifact selection.
 - [ ] Prove that missing or expired audit coverage cannot return successful
   empty impact.
 

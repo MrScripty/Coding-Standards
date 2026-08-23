@@ -1,5 +1,22 @@
 # Standards Engine Navigation And Analysis Execution Ledger
 
+## 2026-08-23: Milestone 3 Unknown Applicability Resolution
+
+- Impact selection now evaluates the accepted and proposed trace union through
+  the immutable programs compiled by `standards_applicability`; analysis does
+  not parse expressions or implement another truth table.
+- Equal accepted/proposed fact schemas share one bound fact set. A differing
+  schema is the explicit `IMPACT.FACT_SCHEMA_EVOLUTION_UNSUPPORTED` outcome,
+  and an incompatible fact set is rejected.
+- Trace applicability is retained independently and candidate applicability is
+  a three-valued union. A definitely applicable trace dominates; otherwise an
+  unknown trace remains unknown rather than becoming selected or excluded.
+- Unknown candidates receive conservative whole-artifact scope, one deduplicated
+  typed question per material unresolved fact, and one fingerprinted
+  `applicability-resolution` obligation per relationship and fact.
+- Acceptance evidence is recorded in the
+  [unknown applicability report](reports/milestone-3-unknown-applicability.md).
+
 ## 2026-08-23: Milestone 3 Unmapped Normative Obligations
 
 - Added a metadata-owned projection that removes exact, non-overlapping active

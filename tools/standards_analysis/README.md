@@ -12,6 +12,8 @@ Current implemented foundation:
 - clean-Git and deterministic manifest snapshots;
 - metadata-owned policy-unit corpus consumption;
 - mandatory whole-artifact obligations for unmapped normative changes;
+- three-valued accepted/proposed impact applicability with exact fact-resolution
+  work and conservative whole-artifact scope for unknown candidates;
 - independent content-fingerprinted policy-consumer horizons; and
 - two-identity coverage requirements, attestations, and reusable certificates.
 

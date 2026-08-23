@@ -24,11 +24,15 @@ from .impact import (
     select_impact,
 )
 from .obligations import (
+    APPLICABILITY_DECISION_CONTRACT,
     UNMAPPED_DECISION_CONTRACT,
+    ApplicabilityQuestion,
+    ApplicabilityResolutionWork,
     DecisionContract,
     DecisionDependency,
     DecisionFingerprint,
     Obligation,
+    generate_applicability_resolution_work,
     generate_unmapped_normative_obligations,
 )
 from .serialization import canonical_json_bytes, digest_bytes, identity
@@ -64,9 +68,12 @@ from .coverage import (
 )
 
 __all__ = (
+    "APPLICABILITY_DECISION_CONTRACT",
     "AnalysisError",
     "AnalysisFailure",
     "AnalysisVersions",
+    "ApplicabilityQuestion",
+    "ApplicabilityResolutionWork",
     "ATTESTATION_CONTRACT_VERSION",
     "AUTHORIZATION_CONTRACT_VERSION",
     "CHANGE_GRAPH_GROUPS",
@@ -115,6 +122,7 @@ __all__ = (
     "digest_bytes",
     "derive_coverage_requirement",
     "derive_coverage_view",
+    "generate_applicability_resolution_work",
     "identity",
     "generate_unmapped_normative_obligations",
     "load_router_projection",

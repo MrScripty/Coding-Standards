@@ -3,6 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from tools.graph_engine.graph_engine import Direction, EdgeRegistry, GraphError
+from tools.standards_applicability.standards_applicability import (
+    ApplicabilityError,
+    FactSet,
+    Truth,
+)
 from tools.standards_metadata.standards_metadata import PolicyUnitCorpus
 from tools.standards_policy_impact.standards_policy_impact import (
     SOURCE_ID as POLICY_IMPACT_SOURCE_ID,
@@ -10,8 +15,10 @@ from tools.standards_policy_impact.standards_policy_impact import (
     PolicyImpactSemantics,
 )
 
-from .changes import ClassifiedChange, GraphSeedSelection
+from .changes import ClassifiedChange, GraphSeedSelection, ReviewScope
 from .errors import AnalysisError, AnalysisFailure
+
+
 @dataclass(frozen=True, slots=True)
 class ImpactTrace:
     graph: str
@@ -29,12 +36,17 @@ class ImpactTrace:
     provenance_locator: str
     metadata: tuple[tuple[str, str], ...]
     policy_semantics: PolicyImpactSemantics | None
+    applicability: str
+    unresolved_facts: tuple[str, ...]
 
 
 @dataclass(frozen=True, slots=True)
 class ImpactCandidate:
     edge_id: str
     traces: tuple[ImpactTrace, ...]
+    applicability: str
+    unresolved_facts: tuple[str, ...]
+    conservative_review_scope: ReviewScope | None
 
 
 @dataclass(frozen=True, slots=True)
@@ -49,22 +61,99 @@ def select_impact(
     proposed_graph: EdgeRegistry,
     accepted_policy_impact: CompiledPolicyImpactSet | None = None,
     proposed_policy_impact: CompiledPolicyImpactSet | None = None,
+    facts: FactSet | None = None,
 ) -> ImpactSelection:
+    selected_facts = _fact_context(
+        accepted_policy_impact,
+        proposed_policy_impact,
+        facts,
+    )
     traces = (
-        *_traverse("accepted", accepted_graph, change.graph, accepted_policy_impact),
-        *_traverse("proposed", proposed_graph, change.graph, proposed_policy_impact),
+        *_traverse(
+            "accepted",
+            accepted_graph,
+            change.graph,
+            accepted_policy_impact,
+            selected_facts,
+        ),
+        *_traverse(
+            "proposed",
+            proposed_graph,
+            change.graph,
+            proposed_policy_impact,
+            selected_facts,
+        ),
     )
     by_edge: dict[str, list[ImpactTrace]] = {}
     for trace in traces:
         by_edge.setdefault(trace.edge_id, []).append(trace)
-    candidates = tuple(
-        ImpactCandidate(
-            edge_id,
-            tuple(sorted(by_edge[edge_id], key=_trace_key)),
+    candidates: list[ImpactCandidate] = []
+    for edge_id in sorted(by_edge):
+        selected_traces = tuple(sorted(by_edge[edge_id], key=_trace_key))
+        applicability = _aggregate_applicability(selected_traces)
+        unresolved = (
+            tuple(
+                sorted(
+                    {
+                        fact
+                        for trace in selected_traces
+                        if trace.applicability == Truth.UNKNOWN.value
+                        for fact in trace.unresolved_facts
+                    }
+                )
+            )
+            if applicability == Truth.UNKNOWN.value
+            else ()
         )
-        for edge_id in sorted(by_edge)
-    )
-    return ImpactSelection(change, candidates)
+        candidates.append(
+            ImpactCandidate(
+                edge_id,
+                selected_traces,
+                applicability,
+                unresolved,
+                (
+                    ReviewScope("whole-artifact")
+                    if applicability == Truth.UNKNOWN.value
+                    else None
+                ),
+            )
+        )
+    return ImpactSelection(change, tuple(candidates))
+
+
+def _fact_context(
+    accepted: CompiledPolicyImpactSet | None,
+    proposed: CompiledPolicyImpactSet | None,
+    supplied: FactSet | None,
+) -> FactSet | None:
+    compiled = tuple(item for item in (accepted, proposed) if item is not None)
+    if not compiled:
+        return None
+    digests = {item.fact_schema.digest for item in compiled}
+    if len(digests) != 1:
+        raise AnalysisError(
+            AnalysisFailure(
+                "IMPACT.FACT_SCHEMA_EVOLUTION_UNSUPPORTED",
+                "unsupported",
+                "accepted and proposed policy-impact fact schemas differ",
+                field="fact_schema",
+                observed="|".join(sorted(digests)),
+            )
+        )
+    schema = compiled[0].fact_schema
+    if supplied is None:
+        return schema.bind({})
+    if supplied.schema_digest != schema.digest:
+        raise AnalysisError(
+            AnalysisFailure(
+                "IMPACT.FACT_SET_INVALID",
+                "invalid",
+                "analysis facts belong to a different policy-impact fact schema",
+                field="schema_digest",
+                observed=supplied.schema_digest,
+            )
+        )
+    return supplied
 
 
 def _traverse(
@@ -72,6 +161,7 @@ def _traverse(
     graph: EdgeRegistry,
     selection: GraphSeedSelection,
     policy_impact: CompiledPolicyImpactSet | None,
+    facts: FactSet | None,
 ) -> tuple[ImpactTrace, ...]:
     if side == "accepted":
         seeds = selection.accepted_seeds
@@ -112,6 +202,34 @@ def _traverse(
                                 observed=edge.id,
                             )
                         )
+                    applicability = "not-declared"
+                    unresolved_facts: tuple[str, ...] = ()
+                    if semantics is not None:
+                        if facts is None:
+                            raise AnalysisError(
+                                AnalysisFailure(
+                                    "IMPACT.FACT_SET_MISSING",
+                                    "invalid",
+                                    "compiled policy-impact semantics require a fact set",
+                                    field="edge_id",
+                                    observed=edge.id,
+                                )
+                            )
+                        try:
+                            evaluation = semantics.applicability_program.evaluate(facts)
+                        except ApplicabilityError as error:
+                            failure = error.failure
+                            raise AnalysisError(
+                                AnalysisFailure(
+                                    "IMPACT.APPLICABILITY_INVALID",
+                                    failure.outcome,
+                                    failure.message,
+                                    field=failure.field,
+                                    observed=failure.observed,
+                                )
+                            ) from error
+                        applicability = evaluation.truth.value
+                        unresolved_facts = evaluation.unresolved_facts
                     trace = ImpactTrace(
                         side,
                         seed,
@@ -128,6 +246,8 @@ def _traverse(
                         edge.provenance.locator,
                         tuple(sorted(edge.metadata.items())),
                         semantics,
+                        applicability,
+                        unresolved_facts,
                     )
                     key = _trace_key(trace)
                     if key not in seen:
@@ -147,6 +267,17 @@ def _traverse(
     return tuple(sorted(traces, key=_trace_key))
 
 
+def _aggregate_applicability(traces: tuple[ImpactTrace, ...]) -> str:
+    states = {trace.applicability for trace in traces}
+    if Truth.TRUE.value in states:
+        return Truth.TRUE.value
+    if Truth.UNKNOWN.value in states:
+        return Truth.UNKNOWN.value
+    if Truth.FALSE.value in states:
+        return Truth.FALSE.value
+    return "not-declared"
+
+
 def _trace_key(trace: ImpactTrace) -> tuple[object, ...]:
     return (
         trace.graph,
@@ -162,6 +293,8 @@ def _trace_key(trace: ImpactTrace) -> tuple[object, ...]:
         trace.provenance_kind,
         trace.provenance_locator,
         trace.metadata,
+        trace.applicability,
+        trace.unresolved_facts,
         (
             ""
             if trace.policy_semantics is None
