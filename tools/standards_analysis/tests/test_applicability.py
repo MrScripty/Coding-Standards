@@ -43,6 +43,7 @@ class ApplicabilityTest(unittest.TestCase):
             }
         )
         expressions = (
+            ({"operator": "always"}, Truth.TRUE),
             ({"operator": "equals", "fact": "enabled", "value": True}, Truth.TRUE),
             ({"operator": "in", "fact": "mode", "values": ["a", "b"]}, Truth.TRUE),
             ({"operator": "contains", "fact": "tags", "value": "x"}, Truth.TRUE),
@@ -85,9 +86,11 @@ class ApplicabilityTest(unittest.TestCase):
             {},
         )
         self.assertIs(unknown, Truth.UNKNOWN)
+        self.assertEqual(self.evaluator.referenced_facts({"operator": "always"}), ())
 
     def test_invalid_configuration_and_values_reject_instead_of_becoming_unknown(self) -> None:
         invalid = (
+            {"operator": "always", "fact": "enabled"},
             {"operator": "missing", "fact": "enabled"},
             {"operator": "equals", "fact": "undeclared", "value": True},
             {"operator": "contains", "fact": "enabled", "value": True},

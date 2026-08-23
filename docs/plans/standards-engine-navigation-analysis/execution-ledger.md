@@ -344,17 +344,35 @@
   index. Generic node and group catalogs remain independent upstream
   authorities.
 - Domain propagation now belongs to the relationship-kind contract rather than
-  generic group direction. Evidence and audit associations require strict
-  resolution and cannot be guessed from consumers.
+  generic group direction. Evidence ownership is explicit authored semantics;
+  audit association requires strict resolution and neither may be guessed from
+  consumers.
 - Versioned applicability to add fact-free `always`. All 39 existing
   relationships were manually classified as unconditional review relations;
   their former explanatory text remains rationale only.
-- Deliberately superseded exact authored policy-impact EdgeIds with identities
-  derived from unique `(source, relation, consumer)` keys. The exact mapping is
-  recorded in
+- Deliberately superseded exact authored policy-impact EdgeIds with injective
+  percent-encoded identities derived from unique `(source, relation, consumer)`
+  keys. The exact mapping is recorded in
   [the edge inventory](reports/policy-impact-edge-inventory.tsv).
 - The revised ADR, schema, cutover inventory, and one-authority migration
   sequence were accepted before production compiler implementation.
+
+## 2026-08-23: Milestone 3 Corrective Green Boundary
+
+- Review found that the accepted v2 schema had replaced the v1 contract before
+  current analysis and Standards Engine producers emitted the v2 interface and
+  applicability versions. The producer versions and fact-free `always`
+  evaluator were updated together with focused tests.
+- Replaced stale plan authority: Milestone 3 is explicitly admitted, the
+  resolved authority blocker is no longer current, and unimplemented move,
+  split, and merge behavior is no longer marked complete.
+- Defined relationship-kind contract version 1 as a small module-owned Python
+  table, removed speculative declaration-level propagation overrides, made
+  evidence ownership explicitly authored, and adopted injective percent-encoded
+  compiled edge identities.
+- Expanded ADR and Milestone 3 traceability to include
+  `standards_policy_impact`, repository graph composition, and the graph-engine
+  README's published edge example.
 
 ## Ledger Contract
 

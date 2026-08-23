@@ -130,17 +130,23 @@ The public package entry points will be:
 - `standards_metadata.__init__`: immutable corpus views, resolution, and neutral
   metadata diagnostics;
 - `standards_analysis.__init__`: snapshot comparison, `prepare`, `resolve`, and
-  analysis inspection contracts; and
+  analysis inspection contracts;
+- `standards_policy_impact.__init__`: compilation of registered typed
+  declarations into a neutral graph contribution and policy semantics index;
+  and
 - `standards_engine.__init__`: `StandardsEngine`, generated public request and
   result types, snapshot-bound `query`, agent-tool adapters, and text rendering.
 
 Internal loaders, graph providers, schema generators, and document locators are
 not re-exported through the facade.
 
-Contract version `1` has one representation. An incompatible field, variant,
-identity, applicability, state-machine, or completion change requires a new
-contract version and an explicit migration decision. Unknown versions are
-`unsupported`; there is no inferred compatibility or fallback parser.
+Contract version `2` has one representation. It deliberately replaces version
+1 to add compiled policy-impact declarations, fact-free `always`
+applicability, and derived policy-impact identities. All current producers and
+consumers must switch together; version 1 is not a runtime fallback. A further
+incompatible field, variant, identity, applicability, state-machine, or
+completion change requires a new contract version and an explicit migration
+decision. Unknown versions are `unsupported`.
 
 Before the first runtime projection was accepted, version 1 was clarified to
 represent both canonical whole-artifact modules and registered structured
@@ -153,10 +159,13 @@ Generic graph edge identities are represented by the distinct `EdgeId` type.
 Most graph providers retain their own registered or derived identity contracts.
 Compiled policy-impact identities are the deliberate exception: the
 `standards_policy_impact` compiler derives
-`policy-impact:<source>:<relation>:<consumer>` from one unique natural key.
-Duplicate natural keys are invalid. The A1 cutover records every former ID and
-its canonical replacement, then removes the former identities without aliases,
-hashes, lookup fallback, or dual runtime authority.
+`policy-impact:v1/<encoded-source>/<encoded-relation>/<encoded-consumer>` from
+one unique natural key. Each segment is UTF-8 encoded and every byte outside the
+unreserved URI character set is percent encoded with uppercase hexadecimal.
+This framing is injective even when canonical IDs contain colons or other
+separators. Duplicate natural keys are invalid. The A1 cutover records every
+former ID and its canonical replacement, then removes the former identities
+without aliases, hashes, lookup fallback, or dual runtime authority.
 
 ### Serialization and identity
 
@@ -226,10 +235,19 @@ identity.
 A1 uses existing named groups and never duplicates graph storage or traversal.
 The generic `policy-impact` group permits incoming and outgoing discovery, but
 domain impact propagation is independently fixed by the policy
-relationship-kind catalog. Current kinds propagate from source to consumer and
+relationship-kind contract. Current kinds propagate from source to consumer and
 are non-transitive. Generic group direction therefore does not authorize
 semantic propagation. Dependency and specialization traversal follows each
 existing group's transitive policy.
+
+`standards_policy_impact` owns relationship-kind contract version 1 as a small
+versioned Python table inside the module. It admits the eight current relation
+kinds. Every admitted kind belongs to the existing `policy-impact` and
+`semantic` groups, propagates from source to consumer, is traversable, and
+requires an explicitly authored `evidence_owner`. There is no declaration-level
+propagation override in version 1. Changing these semantics is contract
+evolution, not configuration. The compiler validates every evidence owner
+against the registered evidence-owner nodes and never guesses from a consumer.
 
 | Change type | Accepted graph groups | Proposed graph groups |
 | --- | --- | --- |
@@ -319,10 +337,13 @@ policy meaning, authorize a relationship, or permit repository application.
 - `tools/standards_engine/contracts/a1-contract.schema.json`
 - future `tools/standards_metadata/`
 - future `tools/standards_analysis/`
+- `tools/standards_policy_impact/`
+- `tools/standards_graph/`
 - future `tools/standards_engine/`
 - `tools/standards_verifier/standards_verifier/canonical_modules.py`
 - `tools/standards_verifier/standards_verifier/repository_graph.py`
 - `tools/query_edges.py`
+- `tools/graph_engine/README.md`
 - canonical corpus and edge-source registries
 - policy-unit, policy-impact, and consumer-audit declarations
 

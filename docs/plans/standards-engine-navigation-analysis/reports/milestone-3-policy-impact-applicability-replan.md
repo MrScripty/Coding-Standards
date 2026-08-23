@@ -34,11 +34,13 @@ policy-impact manifest is split into:
 - source-owner declaration files containing the 39 Planning and Commit
   relationships.
 
-The compiler consumes canonical nodes, the policy relationship-kind catalog,
-typed applicability, explicit evidence bindings, and bounded audit
-declarations. It rejects unknown endpoints, duplicate natural keys,
-contradictory registrations, malformed expressions, and ambiguous evidence or
-audit matches.
+The compiler consumes canonical nodes, its versioned relationship-kind
+contract, typed applicability, explicitly authored evidence owners, and bounded
+audit declarations. Version 1 defines the eight admitted kinds in a small
+module-owned Python table because they currently share one fixed behavior; it
+does not add a configurable kind manifest. It rejects unknown endpoints,
+duplicate natural keys, contradictory registrations, malformed expressions,
+unknown evidence owners, and ambiguous audit matches.
 
 The dependency direction becomes:
 
@@ -67,9 +69,9 @@ consumers.
 | Canonical nodes and aliases | Existing upstream node catalogs and canonical module metadata |
 | Generic group definitions and traversal | Existing registered graph-group authority |
 | Source, consumer, relationship kind, typed applicability, rationale, and exceptional scope | Source-owner policy-impact declaration |
-| Group membership | Relationship-kind catalog |
-| Domain propagation | Relationship-kind contract, normally `source-to-consumer`; never generic group direction |
-| Evidence owner | One explicit declaration binding or one exact registered binding; zero required matches is unavailable and multiple matches are invalid |
+| Group membership | Versioned module-owned relationship-kind contract |
+| Domain propagation | Relationship-kind contract version 1 fixes `source-to-consumer`; never generic group direction or a declaration override |
+| Evidence owner | Explicit authored relationship field that must resolve to exactly one registered evidence-owner node |
 | Audit association | One exact owner, scope, relationship-class, horizon, and snapshot match; zero is unaudited and multiple matches are invalid |
 | Edge topology, provenance, and digests | Compiler projection |
 | Review dispositions | Snapshot-bound analysis reports, never relationship authority |
@@ -90,8 +92,12 @@ relationships only. Their canonical identity derives deterministically from
 the unique natural key:
 
 ```text
-policy-impact:<source>:<relation>:<consumer>
+policy-impact:v1/<encoded-source>/<encoded-relation>/<encoded-consumer>
 ```
+
+Each natural-key segment is UTF-8 encoded and every byte outside the unreserved
+URI character set is percent encoded with uppercase hexadecimal. The framing is
+injective even when canonical IDs contain separators such as colons.
 
 The compiler rejects more than one relationship with that natural key.
 Different scopes should normally be canonical consumer nodes or one combined

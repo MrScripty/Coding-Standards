@@ -18,8 +18,9 @@ the same source-owned declarations
 `c7d23dfa55a9558b929e6b838d7ea0563981a1ef`, tree
 `5e9c4eb211ee0a67039b0ec11142db9b106243ae`
 
-**Implementation admission:** operation `start` accepted from the recorded
-implementation base; Milestone 2 is authorized within its bounded write set
+**Implementation admission:** operation `continue` accepted for Milestone 3
+from the recorded implementation base and the accepted compiled policy-impact
+authority re-plan; implementation remains bounded by Milestone 3's write set
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -127,8 +128,9 @@ plan or shared-authority proposals can become stale before integration.
   identity, document path, aliases, `Requires`, and `Specializes`.
 - `standards_metadata` loads, validates, and projects canonical facts; it does
   not redefine them or depend on the verifier or analyzer.
-- `standards_analysis` depends only on neutral metadata and graph contracts; it
-  owns policy-specific analysis without adding policy meaning to the graph.
+- `standards_analysis` depends on neutral metadata, compiled policy-impact, and
+  graph contracts; it owns policy-specific analysis without adding policy
+  meaning to the graph.
 - `standards_engine` is the composition root. Lower packages do not depend on
   it or form cycles.
 - The existing graph engine remains repository-neutral and supplies its
@@ -389,6 +391,7 @@ without claiming to judge arbitrary meaning.
 - `tools/standards_verifier/standards_verifier/checks/policy_impact.py`
 - `tools/standards_verifier/tests/test_policy_impact.py`
 - `tools/standards_verifier/tests/test_repository_graph.py`
+- `tools/graph_engine/README.md`
 - `evaluation/standards-effectiveness/policy-impact-*.toml`
 - `evaluation/standards-effectiveness/policy-impact/**`
 - `evaluation/standards-effectiveness/policy-semantic-impact.toml`
@@ -404,7 +407,9 @@ without claiming to judge arbitrary meaning.
 **Tasks:**
 
 - [x] Implement deterministic change classification and the accepted seed and
-  obligation rules for modification, addition, removal, move, split, and merge.
+  obligation rules for modification, addition, and removal.
+- [ ] Implement deterministic change classification and the accepted seed and
+  obligation rules for move, split, and merge.
 - [x] Traverse the union of accepted and proposed selected graph groups and
   retain exact traces and provenance.
 - [ ] Compile source-owned typed policy-impact declarations into one neutral
@@ -485,12 +490,10 @@ checks pass from one clean recorded tree.
 
 ## Blockers
 
-- Policy-impact edges currently carry explanatory applicability strings in
-  generic graph metadata. Milestone 3 obligations require typed expressions,
-  scopes, propagation, evidence ownership, and audit references, but the
-  generic graph intentionally accepts only neutral string metadata. The
-  canonical ownership and cutover design must be re-planned before obligation
-  generation.
+No current blocker is accepted. The former policy-impact authority blocker was
+resolved by the accepted compiled-authority re-plan. A failed topology
+equivalence, ambiguous evidence or audit resolution, or need to change another
+graph authority remains a re-plan trigger rather than an implicit blocker.
 
 Runtime implementation is admitted from the recorded implementation base and
 remains bounded by the active milestone, exact next slice, allowed write set,
@@ -537,4 +540,4 @@ generated artifacts remain serial integration-owner writes.
 - Deferred follow-ups: controlled authoring, Plan B evidence-oracle recovery,
   and Plan C external project baselines remain outside A1 with their brief-owned
   prerequisites.
-- Final status: `Planned`
+- Final status: `Active`

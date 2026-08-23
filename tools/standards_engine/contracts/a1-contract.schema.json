@@ -661,7 +661,6 @@
         "relation": { "enum": ["normative-consumer", "router-projection", "prompt-projection", "template-projection", "reference-projection", "fixture-projection", "enforcement-suite-projection", "documentation-projection"] },
         "source_scope": { "$ref": "#/$defs/ReviewScope" },
         "consumer_scope": { "$ref": "#/$defs/ReviewScope" },
-        "propagation_override": { "enum": ["source-to-consumer", "consumer-to-source", "both"] },
         "applicability": { "$ref": "#/$defs/ApplicabilityExpression" },
         "evidence_owner": { "$ref": "#/$defs/CanonicalId" },
         "rationale": { "$ref": "#/$defs/NonEmptyString" }
@@ -669,9 +668,11 @@
       "additionalProperties": false,
       "x-standards-engine-invariants": {
         "canonical-references": "source and consumer reference upstream canonical IDs without redefining aliases, paths, corpus membership, Requires, or Specializes",
-        "natural-key": "source, relation, and consumer are unique and derive policy-impact:<source>:<relation>:<consumer>",
+        "natural-key": "source, relation, and consumer are unique and derive policy-impact:v1/<encoded-source>/<encoded-relation>/<encoded-consumer>, where each UTF-8 segment uses uppercase percent encoding for every byte outside unreserved URI characters",
         "authority": "the declaration is the sole relationship authority; graph topology and typed semantics are compiled projections",
-        "propagation": "the relationship-kind catalog owns default domain propagation; an authored override is exceptional and reviewed",
+        "relationship-kind-contract": "standards_policy_impact owns one versioned code table for the eight admitted relation kinds; every current kind belongs to policy-impact and semantic, propagates source-to-consumer, is traversable, and requires an explicit evidence owner",
+        "propagation": "the relationship-kind contract owns domain propagation; version 1 admits no per-declaration override",
+        "evidence": "evidence_owner is authored relationship semantics and must resolve to exactly one registered evidence owner",
         "audit": "audit association is resolved from one exact bounded audit match and is not authored on the relationship"
       }
     },

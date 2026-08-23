@@ -87,6 +87,10 @@ class ApplicabilityEvaluator:
         facts: Mapping[str, FactState],
     ) -> Truth:
         operator = expression.get("operator")
+        if operator == "always":
+            if set(expression) != {"operator"}:
+                raise _invalid("always accepts no operands")
+            return Truth.TRUE
         if operator == "all" or operator == "any":
             key = "expressions"
             children = expression.get(key)
@@ -152,6 +156,10 @@ class ApplicabilityEvaluator:
 
     def referenced_facts(self, expression: Mapping[str, object]) -> tuple[str, ...]:
         operator = expression.get("operator")
+        if operator == "always":
+            if set(expression) != {"operator"}:
+                raise _invalid("always accepts no operands")
+            return ()
         if operator in {"all", "any"}:
             children = expression.get("expressions")
             if not isinstance(children, list):
