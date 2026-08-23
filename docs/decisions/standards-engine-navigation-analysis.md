@@ -32,29 +32,37 @@ The dependency direction is:
 ```text
 standards_engine
   |-- standards_metadata
+  |-- standards_policy_impact
   `-- standards_analysis
 
 standards_analysis
   |-- standards_metadata
+  |-- standards_policy_impact
   `-- graph_engine
 
 standards_verifier
   |-- standards_metadata
+  |-- standards_policy_impact
   `-- graph_engine
 ```
 
 `standards_engine` is the composition root and agent-facing facade.
 `standards_metadata` loads and validates repository-owned corpus membership and
-module metadata. `standards_analysis` owns policy-unit comparison,
-applicability, impact selection, packets, obligations, reading plans, and audit
-certificates. `graph_engine` remains domain-neutral. The verifier consumes the
-neutral modules but is not their owner.
+module metadata. `standards_policy_impact` compiles source-owned typed
+policy-impact declarations into one neutral graph contribution and one typed
+semantics index. `standards_analysis` owns policy-unit comparison,
+applicability evaluation, impact selection, packets, obligations, reading
+plans, and audit certificates. `graph_engine` remains domain-neutral. The
+verifier consumes the neutral and policy-specific modules but is not their
+owner.
 
 Canonical documents remain authoritative for module IDs, aliases, paths,
-`Requires`, `Specializes`, and policy meaning. Policy-unit declarations own
-stable unit identities and module-relative locators. Policy-impact declarations
-own reviewed semantic edges. Generated graph indexes, packets, reports, and
-certificates are projections, not authority.
+`Requires`, `Specializes`, and policy meaning. A registered generic catalog
+owns non-module nodes and the existing `policy-impact` and `semantic` group
+contracts. Policy-unit declarations own stable unit identities and
+module-relative locators. Source-owner typed policy-impact declarations are the
+sole relationship authority. Compiled graph edges, semantics indexes, graph
+indexes, packets, reports, and certificates are projections, not authority.
 
 ### Public interface
 
@@ -142,9 +150,13 @@ representation to migrate. After runtime acceptance, adding or changing either
 declaration variant follows the version-migration rule above.
 
 Generic graph edge identities are represented by the distinct `EdgeId` type.
-They remain exact registered identities and are not constrained by the narrower
-canonical module and policy-ID grammar. Relationship resolution never invents,
-normalizes, hashes, or falls back from the registered edge identity.
+Most graph providers retain their own registered or derived identity contracts.
+Compiled policy-impact identities are the deliberate exception: the
+`standards_policy_impact` compiler derives
+`policy-impact:<source>:<relation>:<consumer>` from one unique natural key.
+Duplicate natural keys are invalid. The A1 cutover records every former ID and
+its canonical replacement, then removes the former identities without aliases,
+hashes, lookup fallback, or dual runtime authority.
 
 ### Serialization and identity
 
@@ -194,11 +206,13 @@ candidate but cannot prove semantic equivalence. Proposed semantic state is an
 ### Applicability and audit coverage
 
 `standards_analysis` owns a bounded, side-effect-free applicability language
-with `all`, `any`, `not`, `equals`, `in`, `contains`, and `exists`. Valid
-expressions evaluate to `true`, `false`, or `unknown`. Missing contextual facts
-produce `unknown`; malformed expressions, unknown operators, undeclared facts,
-and type errors reject preparation. Whole-artifact review may accompany an
-unknown result but cannot turn it into `true`.
+with `always`, `all`, `any`, `not`, `equals`, `in`, `contains`, and
+`exists`. `always` has no fact dependency and evaluates to `true` with an
+empty fact set. Other valid expressions evaluate to `true`, `false`, or
+`unknown`. Missing contextual facts produce `unknown`; malformed expressions,
+unknown operators, undeclared facts, and type errors reject preparation.
+Whole-artifact review may accompany an unknown result but cannot turn it into
+`true`.
 
 An authored `AuditDeclaration` records the bounded semantic attestation. A
 generated immutable `ConsumerAuditCertificate` binds it to resolved identities,
@@ -210,10 +224,12 @@ identity.
 ### Graph composition
 
 A1 uses existing named groups and never duplicates graph storage or traversal.
-All policy-impact traversal is outgoing from the changed policy or owning
-module. Direct policy-impact propagation is non-transitive under the current
-group contract. Dependency and specialization traversal follows each existing
-group's transitive policy.
+The generic `policy-impact` group permits incoming and outgoing discovery, but
+domain impact propagation is independently fixed by the policy
+relationship-kind catalog. Current kinds propagate from source to consumer and
+are non-transitive. Generic group direction therefore does not authorize
+semantic propagation. Dependency and specialization traversal follows each
+existing group's transitive policy.
 
 | Change type | Accepted graph groups | Proposed graph groups |
 | --- | --- | --- |
@@ -276,6 +292,11 @@ policy meaning, authorize a relationship, or permit repository application.
 - Combine controlled authoring with A1: rejected because mutation,
   authorization, application, and recovery require a stronger separate
   lifecycle and acceptance model.
+- Add an edge-keyed policy semantics sidecar: rejected because generic topology
+  and policy semantics would remain two declarations that must be synchronized.
+- Replace every graph relationship with one policy compiler: rejected because
+  `Requires`, `Specializes`, suite dependencies, nodes, and graph groups
+  already have correct independent authorities.
 
 ## Consequences
 
@@ -286,6 +307,10 @@ policy meaning, authorize a relationship, or permit repository application.
 - Contract evolution requires an explicit contract version and projection
   conformance evidence; compatibility behavior is not inferred.
 - Analysis can be conservative but cannot silently resolve uncertainty.
+- Policy-impact compilation rebuilds the complete registered declaration set.
+  Reuse decisions depend on exact fingerprints over every relevant declaration,
+  node, kind, fact, evidence, audit, and group contract rather than an assumed
+  incident-edge-only invalidation rule.
 - A future controlled-authoring design may reuse A1 identities and reports but
   must define a distinct apply-eligible result and post-write recovery contract.
 

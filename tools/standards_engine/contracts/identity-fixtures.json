@@ -11,7 +11,7 @@
       "name": "pending-packet",
       "definition": "PendingPacket",
       "example": "pending-packet",
-      "expected": "packet:sha256:5f53c2511de3f8c6d9fa6cfe7ef9c6bd3118ad36dc36bd5548b8ad6249a5aa44"
+      "expected": "packet:sha256:567aa54958e2360c64a56ccbb5ab7242cd8330d84710aa65e846c1cc69493533"
     },
     {
       "name": "consumer-obligation",
@@ -24,7 +24,7 @@
       "name": "completed-analysis-report",
       "definition": "CompletedAnalysisReport",
       "example": "completed-analysis-report",
-      "expected": "analysis-report:sha256:ea4f0c8dd92a732dee0b8386a08a5ce3ebbce76b23793cae05de38b5594cfda0"
+      "expected": "analysis-report:sha256:c2e30e334b85451a288a15840c3e1b3c376167d6ab30dc35ee1ed61982daf35f"
     },
     {
       "name": "clean-git-snapshot",
@@ -42,7 +42,7 @@
       "name": "consumer-audit-certificate",
       "definition": "ConsumerAuditCertificate",
       "example": "consumer-audit-certificate",
-      "expected": "certificate:sha256:56342858381ac42052a6b464d92545d285ecead4986e2c7808c3bd9bdf1f31da"
+      "expected": "certificate:sha256:9fd03f8693f6997015e42e87414ac8c7704e8210296cde4d0b61698091bc7f88"
     }
   ]
 }

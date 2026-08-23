@@ -4,10 +4,9 @@
 
 **Current phase:** Milestone 3 semantic impact selection and coverage
 
-**Next slice:** re-plan one canonical policy-impact domain-metadata authority
-that binds typed applicability, scopes, propagation, evidence ownership, and
-audit declarations to registered edge IDs without duplicating generic edge
-topology or widening the generic graph contract
+**Next slice:** implement and cut over one compiled `standards_policy_impact`
+authority that produces generic graph topology and typed policy semantics from
+the same source-owned declarations
 
 **Acceptance status:** `pending`
 
@@ -183,7 +182,7 @@ plan or shared-authority proposals can become stale before integration.
 | Decision | Owner | Evidence | Supersedes |
 | --- | --- | --- | --- |
 | Product boundary | A1 contains navigation and read-only analysis only. Controlled authoring requires a later independently admitted brief and plan. | [Development brief](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#plan-a1-navigation-and-analysis) | Earlier combined A1/A2 direction |
-| Module direction | `standards_engine` composes `standards_metadata` and `standards_analysis`; analysis consumes metadata and `graph_engine`; verifier and repository graph composition consume metadata and graph directly. | [Brief module architecture](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#5-module-architecture) | Verifier ownership of neutral metadata discovery |
+| Module direction | `standards_engine` composes `standards_metadata`, `standards_policy_impact`, and `standards_analysis`; policy-impact compilation consumes metadata and neutral graph contracts; analysis, verifier, and repository graph composition consume the compiled authority. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md) | Verifier ownership of neutral metadata discovery and the pre-Milestone-3 graph-manifest edge authority |
 | Metadata authority | The corpus provider owns membership only; canonical documents own IDs, aliases, paths, `Requires`, and `Specializes`; neutral code only loads, validates, and projects them. | [Brief neutral metadata](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#6-neutral-metadata-module) | Suite-selection-dependent discovery and duplicate catalogs |
 | Public interface | Typed requests and typed results are authoritative. Text is a derived optional rendering, not an input command language. | [Brief public interface](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#8-public-interface) | Prose command examples as interface authority |
 | Snapshot binding | Canonical tool requests carry an immutable snapshot handle; every result and follow-up handle preserves it. Native Python may offer a snapshot-bound convenience view only. | [Brief navigation](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#14-navigation) | Ambient current-tree navigation |
@@ -197,6 +196,8 @@ plan or shared-authority proposals can become stale before integration.
 | Canonical schema | JSON Schema Draft 2020-12 plus documented Standards Engine annotations is the sole A1 machine contract; generated Python and agent-tool projections must pass deterministic conformance. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md) and [Milestone 0 review](reports/milestone-0-architecture-contract-review.md) | Independent Python, JSON, tool, example, identity, or renderer contracts |
 | Snapshot bootstrap | A trusted source provider issues the initial opaque snapshot handle; caller operations remain explicitly handle-bound and cannot fall back to ambient current state. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md#public-interface) | Caller repository paths or implicit current-tree lookup |
 | Impact graph groups | Use `policy-impact`; add `standards-requires` and `standards-specializes` only for additions and cross-module moves. Do not select `semantic` or `standards-dependencies` for A1 impact composition. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md#graph-composition) | Broad semantic traversal or combined dependency provenance |
+| Policy-impact authority | Source-owner typed declarations compile once into neutral graph topology and typed semantics. Canonical nodes and generic groups remain independent upstream authorities. | [Milestone 3 authority replan](reports/milestone-3-policy-impact-applicability-replan.md) | Edge-ID semantics sidecar and policy strings in generic graph metadata |
+| Policy-impact identity | The compiler derives one ID from the unique `(source, relation, consumer)` natural key and the cutover records every old-to-new mapping. | [Milestone 3 authority replan](reports/milestone-3-policy-impact-applicability-replan.md#edge-identity) | Exact authored IDs for policy-impact edges only |
 
 Milestone 0 must select the canonical schema representation, contract-version
 policy, exact source/projection mechanism, exact graph groups used by each
@@ -379,21 +380,39 @@ without claiming to judge arbitrary meaning.
 **Allowed write set:**
 
 - `tools/standards_metadata/**`
+- `tools/standards_policy_impact/**`
+- `tools/standards_graph/**`
 - `tools/standards_analysis/**`
-- `tools/standards_engine/contracts/**`
+- `tools/standards_engine/**`
+- `tools/standards_verifier/standards_verifier/policy_impact.py`
+- `tools/standards_verifier/standards_verifier/repository_graph.py`
+- `tools/standards_verifier/standards_verifier/checks/policy_impact.py`
+- `tools/standards_verifier/tests/test_policy_impact.py`
+- `tools/standards_verifier/tests/test_repository_graph.py`
+- `evaluation/standards-effectiveness/policy-impact-*.toml`
+- `evaluation/standards-effectiveness/policy-impact/**`
 - `evaluation/standards-effectiveness/policy-semantic-impact.toml`
 - `evaluation/standards-effectiveness/policy-consumer-audits.toml`
 - `evaluation/standards-effectiveness/policy-units/**`
 - `evaluation/standards-effectiveness/edge-source-registry.toml`
+- `evaluation/standards-effectiveness/fixtures/policy-impact/**`
 - `evaluation/standards-effectiveness/fixtures/standards-engine/**`
+- `evaluation/standards-effectiveness/suites/policy-semantic-impact.toml`
+- `docs/decisions/standards-engine-navigation-analysis.md`
 - `docs/plans/standards-engine-navigation-analysis/**`
 
 **Tasks:**
 
-- [ ] Implement deterministic change classification and the accepted seed and
+- [x] Implement deterministic change classification and the accepted seed and
   obligation rules for modification, addition, removal, move, split, and merge.
-- [ ] Traverse the union of accepted and proposed selected graph groups and
+- [x] Traverse the union of accepted and proposed selected graph groups and
   retain exact traces and provenance.
+- [ ] Compile source-owned typed policy-impact declarations into one neutral
+  graph contribution and one semantics index without replacing node or group
+  authority.
+- [ ] Cut repository graph composition, analysis, verifier validation, and
+  Standards Engine inspection to the compiled authority and remove the old
+  edge blocks and string metadata without fallback.
 - [ ] Generate mandatory `unmapped-normative-change` obligations for uncovered
   or unresolved normative changes.
 - [ ] Implement the accepted typed three-valued applicability language,

@@ -1,4 +1,4 @@
-# Milestone 3 Policy-Impact Applicability Replan
+# Milestone 3 Policy-Impact Authority Replan
 
 ## Trigger
 
@@ -6,112 +6,159 @@ Change classification and accepted/proposed graph-union traversal are
 implemented. The next step must evaluate every reached policy-impact relation
 and generate scoped obligations.
 
-The current canonical graph manifest stores fields such as:
+The current generic graph manifest declares nodes, groups, edge topology, and
+two string metadata values on every edge. The `applicability` value is
+explanatory prose rather than a typed expression, and `evidence_owner` is
+policy-specific authority. The generic graph intentionally does not understand
+policy scope, applicability, evidence, propagation, or audit semantics.
 
-```toml
-metadata = {
-  applicability = "Fixture records conditional planning decisions.",
-  evidence_owner = "suite:planning-admission"
-}
+The accepted A1 contract requires those semantics. Continuing without an
+authority correction would require interpreting prose, maintaining a second
+edge-keyed declaration, encoding structured data in strings, or adding policy
+behavior to the neutral graph. Each would violate an accepted contract.
+
+## Accepted Design
+
+Create one deep `standards_policy_impact` module. Its reviewed declarations are
+the sole authority for policy-impact relationships and compile once into:
+
+- a neutral `GraphContribution` containing policy-impact edges;
+- typed policy semantics indexed by the same edge identities; and
+- deterministic provenance, declaration digests, and dependency fingerprints.
+
+The module does not replace generic node or group authority. The existing
+policy-impact manifest is split into:
+
+- one upstream generic catalog containing canonical non-module nodes and the
+  `policy-impact` and `semantic` group declarations; and
+- source-owner declaration files containing the 39 Planning and Commit
+  relationships.
+
+The compiler consumes canonical nodes, the policy relationship-kind catalog,
+typed applicability, explicit evidence bindings, and bounded audit
+declarations. It rejects unknown endpoints, duplicate natural keys,
+contradictory registrations, malformed expressions, and ambiguous evidence or
+audit matches.
+
+The dependency direction becomes:
+
+```text
+standards_policy_impact
+  |-- standards_metadata
+  `-- graph_engine
+
+standards_analysis
+  |-- standards_metadata
+  |-- standards_policy_impact
+  `-- graph_engine
+
+standards_graph --------> standards_policy_impact
+standards_verifier -----> standards_policy_impact
+standards_engine -------> standards_policy_impact
 ```
 
-`applicability` is explanatory prose, not a typed expression. It cannot produce
-`true`, `false`, or `unknown`. The generic graph also intentionally restricts
-extension metadata to string keys and values and does not own policy scopes,
-applicability, evidence, or audit semantics.
+`graph_engine` remains domain-neutral and does not depend on any of these
+consumers.
 
-The accepted A1 schema instead requires typed applicability, source and
-consumer scopes, propagation direction, evidence ownership, and audit
-association. Continuing without an authority decision would require one of:
+## Binding Authority Decisions
 
-- interpreting prose;
-- duplicating edge topology in another declaration;
-- encoding structured policy state as opaque strings; or
-- widening the generic graph with policy-specific behavior.
+| Value | Authority |
+| --- | --- |
+| Canonical nodes and aliases | Existing upstream node catalogs and canonical module metadata |
+| Generic group definitions and traversal | Existing registered graph-group authority |
+| Source, consumer, relationship kind, typed applicability, rationale, and exceptional scope | Source-owner policy-impact declaration |
+| Group membership | Relationship-kind catalog |
+| Domain propagation | Relationship-kind contract, normally `source-to-consumer`; never generic group direction |
+| Evidence owner | One explicit declaration binding or one exact registered binding; zero required matches is unavailable and multiple matches are invalid |
+| Audit association | One exact owner, scope, relationship-class, horizon, and snapshot match; zero is unaudited and multiple matches are invalid |
+| Edge topology, provenance, and digests | Compiler projection |
+| Review dispositions | Snapshot-bound analysis reports, never relationship authority |
 
-Each violates an accepted contract, so this is a replan trigger.
+The existing 39 explanatory strings are not translated into conditions. Manual
+review classifies every current relationship as an unconditional review
+relationship using `{ operator = "always" }`. Explanatory meaning becomes
+`rationale` and is never evaluated.
 
-## Options
+`always` is a new typed applicability expression. It has no fact dependency and
+evaluates to `true` with an empty fact set. This deliberately versions the A1
+applicability contract.
 
-### Option 1: Edge-ID-Keyed Policy Semantics Sidecar (Recommended)
+## Edge Identity
 
-Keep the generic manifest as the sole owner of edge ID, endpoints, relation,
-groups, traversal, and declaration provenance. Add one reviewed
-policy-specific declaration keyed only by registered edge ID. It owns:
+The accepted registered-edge rule is superseded for compiled policy-impact
+relationships only. Their canonical identity derives deterministically from
+the unique natural key:
 
-- source and consumer review scopes;
-- propagation direction;
-- typed applicability expression;
-- evidence owner;
-- audit declaration reference; and
-- explanatory rationale where useful.
+```text
+policy-impact:<source>:<relation>:<consumer>
+```
 
-The analyzer and policy verifier load the sidecar, resolve each edge ID through
-the generic registry, and reject missing, extra, duplicate, stale, or
-non-policy-impact bindings. Remove applicability and evidence ownership from
-generic edge metadata during one cutover so no field has two owners.
+The compiler rejects more than one relationship with that natural key.
+Different scopes should normally be canonical consumer nodes or one combined
+relationship; an exceptional narrow scope does not create a second edge with
+the same key. A source, consumer, or relationship-kind change creates a new
+relationship identity. Applicability, scope, evidence, or rationale changes
+retain the identity and change its dependency fingerprint.
 
-This requires a pre-runtime schema refinement: replace the current
-`PolicyImpactDeclaration` shape, which repeats source, target, and relation,
-with an edge-reference domain-semantics shape. The generic edge supplies those
-facts mechanically.
+The cutover records an exact old-to-new identity map and deliberately versions
+the ADR and contract. No hash, lookup fallback, legacy alias, or parallel edge
+identity remains in accepted runtime behavior.
 
-**Effect:** smallest bounded change, no generic-engine modification, no
-topology duplication, and typed policy semantics remain downstream.
+## Compilation And Reuse
 
-### Option 2: One Policy-Specific Manifest That Generates Generic Edges
+Compilation always rebuilds the complete registered declaration set. At the
+current and expected repository scale, this is simpler and safer than an
+incremental compiler. Localized decision reuse is governed separately by exact
+dependency fingerprints over declarations, nodes, aliases, kind mappings, fact
+schemas, evidence bindings, audit horizons, group contracts, and applicable
+tool contracts. A changed global dependency may invalidate more than incident
+edges.
 
-Replace the current generic policy-impact manifest with a policy-specific
-manifest containing topology and typed semantics once, then provide a
-registered adapter that generates generic nodes and edges.
+## Rejected Options
 
-**Effect:** strong single-file ownership, but broader cutover across graph
-composition, query tooling, verifier loading, tests, and generated evidence.
-The provider boundary also needs careful placement so neither the verifier nor
-the analyzer becomes an upstream graph owner.
+- **Edge-ID sidecar:** rejected because topology and semantics would be two
+  declarations that must remain synchronized.
+- **Policy fields in generic graph metadata:** rejected because it weakens the
+  domain-neutral graph interface.
+- **Structured values encoded as strings:** rejected because it creates opaque
+  nested serialization and duplicate parsing.
+- **One broad relationship authority:** rejected because `Requires`,
+  `Specializes`, suite dependencies, and other relations already have correct
+  independent owners.
+- **One giant declaration file:** rejected because source-owned files provide
+  better locality while one registry, schema, and compiler preserve one logical
+  authority.
 
-### Option 3: Structured Generic Graph Metadata
+## One-Authority Cutover
 
-Expand generic edge metadata from strings to arbitrary typed values and store
-the complete policy contract on each generic edge.
+1. Revise the ADR and A1 schema for the module graph, `always`, compiled
+   declarations, domain propagation, and derived relationship identities.
+2. Inventory all canonical node, group, relationship, evidence, audit, runtime,
+   test, and generated consumers.
+3. Manually classify all 39 current relationships and record exact old-to-new
+   identity mappings.
+4. Implement the compiler and validate typed declarations independently.
+5. Compare compiled topology, groups, traversal, aliases, and query results
+   against the old manifest in a pre-cutover equivalence test.
+6. Switch repository graph composition, analyzer, verifier, and Standards
+   Engine inspection to `CompiledPolicyImpactSet`.
+7. Remove old edge blocks and policy string metadata in the same accepted
+   change. Keep only the independent node/group catalog.
+8. Reject any production fallback to the old manifest or metadata fields.
 
-**Effect:** compact storage but changes the generic graph contract for one
-domain, complicates deterministic metadata comparison and display, and weakens
-the accepted domain-neutral boundary. Not recommended.
+Old and new loaders may coexist only inside the pre-cutover equivalence test.
 
-### Option 4: Encoded Expressions In String Metadata
+## Replan Triggers
 
-Serialize typed expressions as JSON or another mini-format inside the current
-string field.
-
-**Effect:** minimal file movement but creates opaque nested serialization,
-double parsing, poor review ergonomics, and unclear schema ownership. Not
-recommended.
-
-## Recommended Cutover
-
-Use Option 1 with one serial cutover:
-
-1. Refine the A1 schema and ADR so policy domain metadata references one
-   registered edge ID and does not repeat topology.
-2. Inventory every current policy-impact edge and give it one exact typed
-   semantics disposition.
-3. Add the canonical sidecar and strict loader in `standards_analysis`.
-4. Adapt the policy verifier to validate the same declaration through a thin
-   downstream adapter.
-5. Remove applicability and evidence-owner fields from generic edge metadata.
-6. Prove all prior edge IDs, endpoints, relations, groups, and query results are
-   unchanged.
-7. Add malformed, missing, extra, duplicate, unknown-edge, wrong-group,
-   unresolved-fact, and stale-audit negative cases.
-
-The write set must expand to the ADR, schema examples, policy verifier adapter
-and tests, policy-impact manifest, new domain declaration, edge-source
-registry if required, and this plan. `graph_engine` remains unchanged.
+Re-plan if canonical non-module nodes cannot be separated from relationship
+authority, an existing consumer requires stable old edge IDs that cannot be
+migrated coherently, a relationship needs duplicate natural keys, policy-aware
+behavior would enter `graph_engine`, strict evidence or audit resolution cannot
+distinguish missing from ambiguous state, or the cutover requires an unrelated
+graph authority change.
 
 ## Current Accepted Boundary
 
-The implemented classifier and graph-union selector do not depend on the
-choice. They consume exact seed/group plans and registered graph views, so they
-remain valid under any option that preserves generic edge identity and named
-groups.
+The implemented classifier and graph-union selector remain valid. They consume
+exact seeds, named groups, and generic graph views. Their trace identities will
+change only through the deliberate policy-impact EdgeId contract revision.

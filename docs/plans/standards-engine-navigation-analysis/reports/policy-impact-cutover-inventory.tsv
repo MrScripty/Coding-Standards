@@ -1,0 +1,13 @@
+id	current_authority	current_implementation	consumer	proposed_authority	disposition	rationale	verification
+PIC-01	policy-semantic-impact.toml nodes	generic manifest	standards_graph and repository graph	policy-impact-node-catalog.toml	retain-specialized	nodes and aliases remain upstream generic graph authority	node and alias equivalence
+PIC-02	policy-semantic-impact.toml groups	generic manifest	graph_engine traversal	policy-impact-node-catalog.toml	retain-specialized	generic group traversal remains independent of domain propagation	group contract equivalence
+PIC-03	policy-semantic-impact.toml edges	generic manifest	all policy-impact consumers	source-owned typed declarations	migrate-now	one declaration must compile topology and semantics	39-edge topology and ID mapping
+PIC-04	edge string applicability	generic metadata	policy verifier	typed applicability in declarations	migrate-now	prose is not executable applicability	all 39 manually classified
+PIC-05	edge evidence_owner	generic metadata	policy verifier	explicit typed declaration binding	migrate-now	evidence cannot generally derive from consumer	registered-suite resolution
+PIC-06	node audited flag	generic metadata	policy verifier	bounded audit declarations	migrate-now	coverage is policy state rather than node topology	zero one and multiple match tests
+PIC-07	standards_graph repository composition	ManifestSource	Standards Engine navigation	compiled GraphContribution	adapt-now	composition must use the sole relationship authority	navigation equivalence
+PIC-08	standards_verifier repository composition	source registry manifest	production query and suites	registered compiler provider	adapt-now	repository graph must have one relationship provider	registry integration
+PIC-09	standards_verifier policy adapter	generic edge metadata parsing	policy-impact declarative check	CompiledPolicyImpactSet	adapt-now	verifier retains diagnostics and domain closure only	existing diagnostics and suite closure
+PIC-10	standards_analysis impact selector	generic edge traces	Milestone 3 analysis	compiled graph plus semantics index	adapt-now	selection remains graph-based while evaluation uses typed semantics	accepted proposed union tests
+PIC-11	Standards Engine relationship inspection	generic edge only	agent inspection	joined graph and compiled semantics	adapt-now	policy-aware inspection belongs at the composition root	typed inspection fixture
+PIC-12	temporary negative graph fixtures	generic manifests	policy-impact suite	typed declaration fixtures	migrate-now	negative evidence must exercise the new authority	duplicate unknown malformed and closure diagnostics

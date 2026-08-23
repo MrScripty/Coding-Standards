@@ -333,8 +333,28 @@
   applicability is explanatory string metadata, while A1 requires typed domain
   semantics that the neutral graph must not interpret. The
   [applicability replan](reports/milestone-3-policy-impact-applicability-replan.md)
-  records four options and recommends an edge-ID-keyed policy semantics
-  sidecar with no topology duplication.
+  initially recorded four options.
+
+## 2026-08-23: Milestone 3 Compiled Policy-Impact Authority
+
+- Architecture review rejected the initial edge-ID sidecar because it would
+  require generic topology and typed semantics to remain synchronized.
+- Accepted one `standards_policy_impact` module whose source-owner
+  declarations compile into a neutral graph contribution and a typed semantics
+  index. Generic node and group catalogs remain independent upstream
+  authorities.
+- Domain propagation now belongs to the relationship-kind contract rather than
+  generic group direction. Evidence and audit associations require strict
+  resolution and cannot be guessed from consumers.
+- Versioned applicability to add fact-free `always`. All 39 existing
+  relationships were manually classified as unconditional review relations;
+  their former explanatory text remains rationale only.
+- Deliberately superseded exact authored policy-impact EdgeIds with identities
+  derived from unique `(source, relation, consumer)` keys. The exact mapping is
+  recorded in
+  [the edge inventory](reports/policy-impact-edge-inventory.tsv).
+- The revised ADR, schema, cutover inventory, and one-authority migration
+  sequence were accepted before production compiler implementation.
 
 ## Ledger Contract
 

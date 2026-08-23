@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v1",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v2",
   "title": "Standards Engine A1 contract",
   "description": "Canonical typed contract for snapshot-bound navigation and read-only standards-change analysis.",
   "oneOf": [
@@ -27,9 +27,9 @@
     { "$ref": "#/$defs/ConsumerAuditCertificate" }
   ],
   "x-standards-engine-contract": {
-    "contract_version": 1,
-    "schema_version": 1,
-    "applicability_version": 1,
+    "contract_version": 2,
+    "schema_version": 2,
+    "applicability_version": 2,
     "public_operations": {
       "query": {
         "capability": "standards.read",
@@ -406,8 +406,17 @@
       },
       "additionalProperties": false
     },
+    "AlwaysExpression": {
+      "type": "object",
+      "required": ["operator"],
+      "properties": {
+        "operator": { "const": "always" }
+      },
+      "additionalProperties": false
+    },
     "ApplicabilityExpression": {
       "oneOf": [
+        { "$ref": "#/$defs/AlwaysExpression" },
         { "$ref": "#/$defs/AllExpression" },
         { "$ref": "#/$defs/AnyExpression" },
         { "$ref": "#/$defs/NotExpression" },
@@ -644,29 +653,26 @@
     },
     "PolicyImpactDeclaration": {
       "type": "object",
-      "required": ["kind", "id", "source", "target", "relation", "source_scope", "consumer_scope", "propagation_direction", "applicability", "evidence_owner", "audit_declaration"],
+      "required": ["kind", "source", "consumer", "relation", "applicability", "evidence_owner", "rationale"],
       "properties": {
         "kind": { "const": "policy-impact-declaration" },
-        "id": { "$ref": "#/$defs/CanonicalId" },
         "source": { "$ref": "#/$defs/CanonicalId" },
-        "target": { "$ref": "#/$defs/CanonicalId" },
-        "relation": { "enum": ["normative-consumer", "router-projection", "prompt-projection", "template-projection", "fixture-projection", "enforcement-suite-projection", "documentation-projection"] },
+        "consumer": { "$ref": "#/$defs/CanonicalId" },
+        "relation": { "enum": ["normative-consumer", "router-projection", "prompt-projection", "template-projection", "reference-projection", "fixture-projection", "enforcement-suite-projection", "documentation-projection"] },
         "source_scope": { "$ref": "#/$defs/ReviewScope" },
         "consumer_scope": { "$ref": "#/$defs/ReviewScope" },
-        "propagation_direction": { "enum": ["source-to-consumer", "consumer-to-source", "both"] },
+        "propagation_override": { "enum": ["source-to-consumer", "consumer-to-source", "both"] },
         "applicability": { "$ref": "#/$defs/ApplicabilityExpression" },
         "evidence_owner": { "$ref": "#/$defs/CanonicalId" },
-        "audit_declaration": {
-          "oneOf": [
-            { "$ref": "#/$defs/CanonicalId" },
-            { "type": "null" }
-          ]
-        }
+        "rationale": { "$ref": "#/$defs/NonEmptyString" }
       },
       "additionalProperties": false,
       "x-standards-engine-invariants": {
-        "canonical-references": "source and target reference canonical IDs without redefining aliases, paths, corpus membership, Requires, or Specializes",
-        "authority": "the declaration is authoritative; graph indexes are derived"
+        "canonical-references": "source and consumer reference upstream canonical IDs without redefining aliases, paths, corpus membership, Requires, or Specializes",
+        "natural-key": "source, relation, and consumer are unique and derive policy-impact:<source>:<relation>:<consumer>",
+        "authority": "the declaration is the sole relationship authority; graph topology and typed semantics are compiled projections",
+        "propagation": "the relationship-kind catalog owns default domain propagation; an authored override is exceptional and reviewed",
+        "audit": "audit association is resolved from one exact bounded audit match and is not authored on the relationship"
       }
     },
     "SemanticProposal": {
@@ -1024,8 +1030,8 @@
         "analysis_contract_version": { "const": 1 },
         "packet_schema_version": { "const": 1 },
         "report_schema_version": { "const": 1 },
-        "interface_schema_version": { "const": 1 },
-        "applicability_version": { "const": 1 },
+        "interface_schema_version": { "const": 2 },
+        "applicability_version": { "const": 2 },
         "metadata_api_version": { "$ref": "#/$defs/NonEmptyString" },
         "graph_engine_contract_version": { "$ref": "#/$defs/NonEmptyString" },
         "graph_engine_implementation_version": { "$ref": "#/$defs/NonEmptyString" },
@@ -1249,7 +1255,7 @@
         },
         "horizon_digest": { "$ref": "#/$defs/Digest" },
         "edge_set_digest": { "$ref": "#/$defs/Digest" },
-        "applicability_version": { "const": 1 },
+        "applicability_version": { "const": 2 },
         "schema_version": { "const": 1 },
         "tool_versions": { "$ref": "#/$defs/AnalysisVersions" },
         "evidence_digests": {
