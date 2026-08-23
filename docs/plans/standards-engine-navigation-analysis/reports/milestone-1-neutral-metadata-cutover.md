@@ -51,7 +51,7 @@ catalog remains.
 ## Equivalence
 
 Before source edits, the admitted verifier-owned loader was evaluated from
-commit `38e40279` against the exact canonical corpus. After cutover, the neutral
+commit `3383ec68` against the exact canonical corpus. After cutover, the neutral
 loader was normalized through the same field projection and ordering.
 
 | Property | Old | New | Result |

@@ -70,7 +70,7 @@
 ## 2026-08-22: Implementation Start And Metadata Inventory Freeze
 
 - The accepted Milestone 0 boundary is commit
-  `8b632df46db078846f7802ac55fcb54e2fb4e2d2`, tree
+  `c7d23dfa55a9558b929e6b838d7ea0563981a1ef`, tree
   `5e9c4eb211ee0a67039b0ec11142db9b106243ae`.
 - The repository was clean, only the main worktree existed, M6-I72 was the
   latest accepted verifier package, and no later verifier package was admitted.
@@ -170,7 +170,8 @@
   coherent change without a wrapper, re-export, duplicate provider, or fallback.
 - Router projection, impact analysis, suite dependency ownership, graph schema,
   and canonical metadata are unchanged. No concurrent verifier package is
-  admitted and the replan base is clean commit `d6813ba2c41b7f0ada0b38c4ea9ab533c10c65a9`.
+  admitted and the replan base is clean commit
+  `8edbc46ec89f9a82cdd7bc8636ee955c5684d533`.
 - Detailed alternatives and acceptance conditions are recorded in
   [the ownership replan](reports/milestone-2-standards-graph-ownership-replan.md).
 
@@ -287,6 +288,30 @@
 - Detailed acceptance is in [the Milestone 2 report](reports/milestone-2-route-acceptance.md).
   Milestone 3 becomes current with modification, addition, and removal
   classification and seed selection as its sole next slice.
+
+## 2026-08-23: Commit Message History Reconciliation
+
+- The repository owner authorized a reword-only rewrite from the Milestone 0
+  commit through Milestone 2 Router acceptance because the substantial commits
+  had conventional subjects but omitted required rationale, scope, and
+  contract-effect bodies.
+- The original tip remains protected at
+  `refs/recovery/pre-a1-message-rewrite-20260823`. One worktree and one local
+  branch existed; no other local ref depended on the rewritten commits.
+- Exact commit lineage changed as follows while every tree remained identical:
+
+| Original | Replacement | Tree |
+| --- | --- | --- |
+| `8b632df4` | `c7d23dfa` | `5e9c4eb2` |
+| `38e40279` | `3383ec68` | `11a737a9` |
+| `eb1f863d` | `3e8aae87` | `4746269e` |
+| `d6813ba2` | `8edbc46e` | `a613ae62` |
+| `84797b5a` | `3fe09812` | `76cbffa2` |
+| `0e910fcc` | `bbbab878` | `a246d0de` |
+| `ca3dda6f` | `5849ffd4` | `fca200cd` |
+
+- `origin/main` still names the original `8b632df4` history. This reconciliation
+  does not authorize a force push or remote rewrite.
 
 ## Ledger Contract
 
