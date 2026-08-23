@@ -14722,3 +14722,15 @@ transfer are withheld pending exact write-set and consumer-authority recovery.
   217 suites, numeric lifecycle, and generated freshness pass. Final graph: 54
   Bash checkers, 58 nodes, 381 edges, 58 components. Fresh graph evidence is
   required before another package is selected.
+
+## 2026-08-22 - M6-I72 Rust Binding Executor Delegation Acceptance
+
+- Accepted train order 187 with one nine-check suite and explicit one-member
+  provider, removing the Rust executor-delegation Bash checker without fallback.
+- Four accepted edge records preserve the retained F025/F026 decomposition
+  gate and transfer the prior callback-task dependency to suite authority.
+- Focused package evidence, retained decomposition, verifier and graph tests,
+  all 218 declarative suites, numeric lifecycle, and generated freshness pass.
+  Final graph: 53 Bash checkers, 57 nodes, 375 edges, 57 components. The
+  inherited M6-I71 documentation projection is preserved and narrowly repaired;
+  fresh graph evidence is required before another package is selected.

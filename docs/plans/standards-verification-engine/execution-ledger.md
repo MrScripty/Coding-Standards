@@ -6230,3 +6230,22 @@
   217 suites, numeric lifecycle, and generated freshness pass. Final graph: 54
   Bash checkers, 58 nodes, 381 edges, 58 components. No fallback remains; the
   next slice is a fresh graph audit.
+
+## 2026-08-22 - M6-I72 Rust Binding Executor Delegation Acceptance
+
+- Fresh post-M6-I71 evidence selected one `serial-coherent` package at train
+  order 187, replacing the caller-free Rust executor-delegation checker with
+  one nine-check suite and one explicit member.
+- Preserved 25 typed decisions, exact disposition, metadata, profile, bounded
+  legacy, finding, and documentation evidence. Four edge records replace
+  metadata execution, retain the F025/F026 decomposition gate independently,
+  and transfer the prior callback-task dependency to suite authority.
+- The inherited M6-I71 raw-text projection failure is preserved in the
+  [regression report](reports/m6-i71-documentation-projection-regression.md)
+  and repaired only by reflowing equivalent README source text. This
+  user-authorized acceptance repair adds the report beyond the original M6-I72
+  package row without activating the future evidence-oracle recovery.
+- Focused package evidence, retained decomposition, verifier and graph tests,
+  all 218 suites, numeric lifecycle, and generated freshness pass. Final graph:
+  53 Bash checkers, 57 nodes, 375 edges, 57 components. No wrapper,
+  compatibility representation, dual authority, or fallback remains.

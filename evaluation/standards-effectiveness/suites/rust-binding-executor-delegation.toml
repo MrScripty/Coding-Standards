@@ -1,0 +1,151 @@
+schema_version = 1
+id = "rust-binding-executor-delegation"
+owner = "profile.language.rust.language-bindings"
+description = "Exact unsupported-only Rust executor delegation with current input, lifecycle ownership, and terminal outcome preservation."
+
+[[checks]]
+id = "decisions"
+type = "decision"
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-executor-delegation-decisions.tsv"
+expected_column = "expected"
+default = "typed-invalid"
+[checks.domains]
+case = ["*"]
+upstream_outcome = ["local-success", "explicit-unsupported", "invalid", "execution-failure", "cancelled", "resource-failure", "lifecycle-failure", "unavailable"]
+input_scope = ["current", "retained-prior"]
+input_proof = ["valid", "invalid"]
+lifecycle_state = ["active", "cancelled", "unavailable"]
+delegate_capability = ["available", "unavailable", "not-required"]
+action = ["complete", "delegate", "return-outcome", "retry", "alternate-executor", "detached"]
+fallback = ["none", "catch-all", "retry", "carry-forward", "default-input", "alternate-executor", "detach"]
+expected = ["allow-local", "allow-delegate", "preserve-outcome", "typed-invalid", "typed-unavailable"]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+any = [
+  { field = "fallback", op = "ne", value = "none" },
+  { field = "input_scope", op = "eq", value = "retained-prior" },
+  { field = "action", op = "in", values = ["retry", "alternate-executor", "detached"] },
+]
+[[checks.rules]]
+outcome = "allow-local"
+[checks.rules.when]
+all = [
+  { field = "action", op = "eq", value = "complete" },
+  { field = "upstream_outcome", op = "eq", value = "local-success" },
+  { field = "input_scope", op = "eq", value = "current" },
+  { field = "input_proof", op = "eq", value = "valid" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [{ field = "action", op = "eq", value = "complete" }]
+[[checks.rules]]
+outcome = "allow-delegate"
+[checks.rules.when]
+all = [
+  { field = "action", op = "eq", value = "delegate" },
+  { field = "upstream_outcome", op = "eq", value = "explicit-unsupported" },
+  { field = "input_scope", op = "eq", value = "current" },
+  { field = "input_proof", op = "eq", value = "valid" },
+  { field = "lifecycle_state", op = "eq", value = "active" },
+  { field = "delegate_capability", op = "eq", value = "available" },
+]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [{ field = "action", op = "eq", value = "delegate" }]
+[[checks.rules]]
+outcome = "typed-invalid"
+[checks.rules.when]
+all = [
+  { field = "action", op = "eq", value = "return-outcome" },
+  { field = "upstream_outcome", op = "eq", value = "local-success" },
+]
+[[checks.rules]]
+outcome = "typed-unavailable"
+[checks.rules.when]
+all = [
+  { field = "action", op = "eq", value = "return-outcome" },
+  { field = "upstream_outcome", op = "eq", value = "explicit-unsupported" },
+  { field = "delegate_capability", op = "eq", value = "unavailable" },
+]
+[[checks.rules]]
+outcome = "preserve-outcome"
+[checks.rules.when]
+all = [{ field = "action", op = "eq", value = "return-outcome" }]
+
+[[checks]]
+id = "source-membership"
+type = "table"
+path = "evaluation/standards-effectiveness/generated/section-inventory.tsv"
+header = ["id", "path", "line", "level", "target_role", "disposition", "heading"]
+non_empty = ["id", "path"]
+unique = [["id"]]
+[checks.domains]
+path = ["languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"]
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-executor-delegation-members.tsv"
+header = ["id"]
+columns = ["id"]
+order = "source"
+key = "id"
+
+[[checks]]
+id = "exact-disposition"
+type = "table"
+path = "evaluation/standards-effectiveness/consolidation-dispositions.tsv"
+header = ["id", "source", "target", "disposition", "rationale"]
+non_empty = ["id", "source", "target", "disposition", "rationale"]
+unique = [["id"]]
+[checks.domains]
+source = ["languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"]
+target = ["profiles/languages/rust/language-bindings.md"]
+disposition = ["refine"]
+[checks.members]
+path = "evaluation/standards-effectiveness/fixtures/rust/binding-executor-delegation-members.tsv"
+header = ["id"]
+columns = ["id"]
+order = "source"
+key = "id"
+
+[[checks]]
+id = "metadata-closure"
+type = "metadata_graph"
+paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/security.md", "topics/concurrency.md", "profiles/boundaries/interop.md", "profiles/boundaries/language-bindings.md", "profiles/languages/rust/README.md", "profiles/languages/rust/async.md", "profiles/languages/rust/language-bindings.md"]
+
+[[checks]]
+id = "profile-policy"
+type = "text"
+path = "profiles/languages/rust/language-bindings.md"
+required = ["## Explicit Executor Delegation", "exact typed `unsupported` outcome", "call's already validated input", "Successful local completion is terminal.", "Validation, execution, cancellation, resource, lifecycle, and unavailable", "selected lifecycle owner before", "typed `unavailable`", "## Verification", "## No Fallback"]
+prohibited = []
+
+[[checks]]
+id = "legacy-index"
+type = "markdown_section_text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+heading = "### Composite Executors"
+required = ["language-bindings.md#explicit-executor-delegation"]
+prohibited = ["CoreFirstExecutor", "inputs.clone()", "Err(EngineError::UnsupportedNodeType", "fall through to the host", "async_trait"]
+
+[[checks]]
+id = "legacy-structure"
+type = "text"
+path = "languages/rust/RUST-LANGUAGE-BINDINGS-STANDARDS.md"
+required = ["## Code Generation Strategy", "## Memory Ownership Model", "## Async Bridging", "## Testing Strategy"]
+prohibited = []
+
+[[checks]]
+id = "finding-closure"
+type = "text"
+path = "evaluation/standards-effectiveness/findings.md"
+required = ["| F026 | Resolved in Milestone 7.4b5f |"]
+prohibited = []
+
+[[checks]]
+id = "documentation-projection"
+type = "text"
+path = "evaluation/standards-effectiveness/README.md"
+required = ["The registered `rust-binding-executor-delegation` suite distinguishes successful"]
+prohibited = ["`verify-rust-binding-executor-delegation.sh` distinguish successful"]

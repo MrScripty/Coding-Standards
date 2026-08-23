@@ -5710,3 +5710,23 @@ Exact interactions with the retained gates keep cumulative evidence bounded,
 so no mixed-checkpoint trigger is reached. Final graph: 54 Bash checkers, 58
 nodes, 381 edges, and 58 components. No wrapper, copied policy, compatibility
 representation, dual authority, or fallback remains.
+
+### M6-I72 Rust Binding Executor Delegation Acceptance
+
+Fresh post-M6-I71 evidence selected the caller-free Rust executor-delegation
+checker. One reviewed one-column fixture owns `STD-0781`. The registered
+nine-check suite preserves all 25 upstream-outcome, input, lifecycle,
+capability, action, fallback, and typed-result decisions; exact source and
+disposition membership; metadata closure; profile policy; bounded legacy
+indexing and structure; finding closure; and documentation projection.
+
+Four M6-I72 records replace metadata execution and retain the F025/F026
+decomposition checker as an independent gate. Two prior M6-I71 records now
+resolve to suite authority. The obsolete row-35 and active-plan consumers are
+absent. Focused mutation, package, edge, numeric-lifecycle, retained-gate,
+verifier, graph, all-suite, and generated-freshness evidence passes. The
+inherited M6-I71 representation defect is preserved separately in
+[its regression report](m6-i71-documentation-projection-regression.md) and
+repaired without changing rendered meaning. Final graph: 53 Bash checkers, 57
+nodes, 375 edges, and 57 components. No wrapper, copied policy, compatibility
+representation, dual authority, or fallback remains.

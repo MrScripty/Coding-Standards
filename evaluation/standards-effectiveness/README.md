@@ -501,8 +501,8 @@ They reject push/pull substitution, unbounded buffering, silent discard,
 lock-unsafe or wrong-thread callbacks, prior-event carry-forward, alternate
 runtimes, detached work, and default success.
 
-The registered `rust-binding-callback-task` suite checks selected task
-representation, callback authority, checked input/output, response correlation, fresh
+The registered `rust-binding-callback-task` suite checks selected task representation,
+callback authority, checked input/output, response correlation, fresh
 invocation state, scoped or lifecycle-owned async completion, cancellation,
 typed outcomes, real native/host evidence, one exact disposition, and bounded
 legacy replacement. They reject no-op executors, polling substitution,
@@ -696,9 +696,8 @@ drive fallback, and F025 closure.
 
 ## Rust Binding Executor-Delegation Decision Fixtures
 
-`fixtures/rust/binding-executor-delegation-decisions.tsv` and
-`verify-rust-binding-executor-delegation.sh` distinguish successful local
-completion, exact typed unsupported delegation, preserved terminal failures,
+The registered `rust-binding-executor-delegation` suite distinguishes successful
+local completion, exact typed unsupported delegation, preserved terminal failures,
 and unavailable delegate capability. They check current-call input ownership,
 scoped or lifecycle-tracked work, exact disposition, bounded legacy
 replacement, and rejection of catch-all, retry, carry-forward, default-input,
@@ -960,9 +959,9 @@ cancellation, unprotected durable work, destruction-only or detached async
 cleanup, leaf/missing ownership, silent terminal outcomes, and tool-only
 evidence.
 
-The Milestone `7.4b7f1` fail-fast audit found that
-`verify-rust-binding-executor-delegation.sh` still required the temporary
-partial `F026` status superseded by accepted Milestone `7.4b5f`. Accepted
+The Milestone `7.4b7f1` fail-fast audit found that the then-current
+executor-delegation checker still required the temporary partial `F026` status
+superseded by accepted Milestone `7.4b5f`. Accepted
 verification-only slice `7.4b7f2` resolves `F050` by requiring the stable
 resolved state without weakening executor-delegation behavior or disposition
 evidence. Event-registration implementation may proceed after the restored
