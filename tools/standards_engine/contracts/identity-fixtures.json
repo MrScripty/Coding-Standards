@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "fixtures": [
+    {
+      "name": "route-result",
+      "definition": "RouteResult",
+      "example": "route-result",
+      "expected": "navigation:sha256:a7aec928a0b64faed04435bf97eaa1d29a405957530c3350f5e430da7c898d01"
+    },
+    {
+      "name": "pending-packet",
+      "definition": "PendingPacket",
+      "example": "pending-packet",
+      "expected": "packet:sha256:5f53c2511de3f8c6d9fa6cfe7ef9c6bd3118ad36dc36bd5548b8ad6249a5aa44"
+    },
+    {
+      "name": "consumer-obligation",
+      "definition": "Obligation",
+      "example": "pending-packet",
+      "value_pointer": "/obligations/0",
+      "expected": "obligation:sha256:3b2e86ebf69220dd840a88ff1a40186decc2bb146278134affef9f1940e10936"
+    },
+    {
+      "name": "completed-analysis-report",
+      "definition": "CompletedAnalysisReport",
+      "example": "completed-analysis-report",
+      "expected": "analysis-report:sha256:ea4f0c8dd92a732dee0b8386a08a5ce3ebbce76b23793cae05de38b5594cfda0"
+    },
+    {
+      "name": "clean-git-snapshot",
+      "definition": "GitSnapshotInspection",
+      "example": "git-snapshot-inspection",
+      "expected": "snapshot:sha256:6e00f75a54a20f59637b46a6d502abdf88dc84dcdf58f449811429aee90770f6"
+    },
+    {
+      "name": "dirty-manifest-snapshot",
+      "definition": "ManifestSnapshotInspection",
+      "example": "manifest-snapshot-inspection",
+      "expected": "snapshot:sha256:114ca0ebd0661958c67ff2a59a98b5447419b3e1fbc717542f4d465670945e52"
+    },
+    {
+      "name": "consumer-audit-certificate",
+      "definition": "ConsumerAuditCertificate",
+      "example": "consumer-audit-certificate",
+      "expected": "certificate:sha256:56342858381ac42052a6b464d92545d285ecead4986e2c7808c3bd9bdf1f31da"
+    }
+  ]
+}

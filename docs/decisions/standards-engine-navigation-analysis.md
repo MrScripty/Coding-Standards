@@ -1,0 +1,298 @@
+# Standards Engine Navigation And Analysis
+
+**Status:** Accepted
+
+The repository will provide a read-only Standards Engine facade over neutral
+metadata, generic graph traversal, and standards-specific analysis. A1 uses one
+versioned JSON Schema document as its machine contract, binds every operation to
+immutable repository inputs, and exposes typed results to Python and agent-tool
+callers. This preserves one authority for transport shape while keeping policy
+meaning in standards documents and keeping controlled authoring outside A1.
+
+## Context
+
+Canonical standards metadata is currently discovered by verifier-owned code,
+while routing, graph navigation, policy-impact review, and future agent callers
+need the same neutral facts. The repository also lacks one contract for typed
+navigation, snapshot comparison, impact obligations, iterative resolution, and
+bounded audit coverage. Letting each consumer define those concepts would
+create competing metadata loaders, schemas, and completion rules.
+
+The accepted development brief and active plan separate read-only navigation
+and analysis from controlled authoring. A1 must be independently useful without
+proposal storage, repository mutation, semantic acceptance, or application
+authority.
+
+## Decision
+
+### Module boundaries
+
+The dependency direction is:
+
+```text
+standards_engine
+  |-- standards_metadata
+  `-- standards_analysis
+
+standards_analysis
+  |-- standards_metadata
+  `-- graph_engine
+
+standards_verifier
+  |-- standards_metadata
+  `-- graph_engine
+```
+
+`standards_engine` is the composition root and agent-facing facade.
+`standards_metadata` loads and validates repository-owned corpus membership and
+module metadata. `standards_analysis` owns policy-unit comparison,
+applicability, impact selection, packets, obligations, reading plans, and audit
+certificates. `graph_engine` remains domain-neutral. The verifier consumes the
+neutral modules but is not their owner.
+
+Canonical documents remain authoritative for module IDs, aliases, paths,
+`Requires`, `Specializes`, and policy meaning. Policy-unit declarations own
+stable unit identities and module-relative locators. Policy-impact declarations
+own reviewed semantic edges. Generated graph indexes, packets, reports, and
+certificates are projections, not authority.
+
+### Public interface
+
+A1 exposes four operations:
+
+```python
+query(snapshot, request) -> NavigationResult | RejectedResult
+prepare(request) -> PendingPacket | CompletedAnalysisReport | RejectedResult
+resolve(packet, submission) -> PendingPacket | CompletedAnalysisReport | RejectedResult
+inspect(handle) -> InspectionResult | RejectedResult
+```
+
+Native Python requests and results are typed projections of the canonical
+contract. Agent tools carry the same structures as JSON. An optional CLI or
+text renderer may project those results for humans, but no command-string
+language or formatted prose is an input authority.
+
+A trusted source provider creates the initial `SnapshotHandle` when the engine
+or tool session is established. It gives the caller a handle, not a repository
+path or loader configuration. Snapshot compilation is an internal provider
+seam in A1, not a fifth caller-authored operation. Every subsequent query and
+analysis call carries the issued handle explicitly; adapters must not replace a
+missing or stale handle with the ambient current tree.
+
+Expected domain outcomes return `RejectedResult`. Violated internal invariants,
+unhandled variants, corruption, and nondeterministic serialization remain
+programming errors rather than domain rejections.
+
+### Canonical contract authority
+
+[`a1-contract.schema.json`](../../tools/standards_engine/contracts/a1-contract.schema.json)
+is the sole machine authority for A1 request, result, handle, submission,
+declaration, certificate, and analysis-artifact shapes. It uses JSON Schema
+Draft 2020-12 plus documented `x-standards-engine-*` annotations for projection,
+identity, authorization, and state-machine metadata that JSON Schema does not
+natively express.
+
+Python models, JSON validation, agent-tool definitions, examples, and text
+renderers must be generated from or mechanically checked against this schema.
+The contract validator rejects unsupported schema keywords in the maintained
+subset, validates every example against its declared definition, and checks
+identity fixtures. A new projection cannot introduce fields, enums, variants,
+defaults, or state transitions absent from the schema.
+
+This choice avoids a repository-specific interface language and avoids a new
+third-party dependency. If the contract grows beyond the maintained JSON
+Schema subset, that is a re-plan trigger rather than authority to add an
+independent validator model.
+
+The projection mechanism is fixed as follows:
+
+- `generate_contract.py` will generate the Python request/result algebra into
+  `tools/standards_engine/standards_engine/_generated_contract.py` and the agent
+  tool definitions into `tools/standards_engine/contracts/generated/`.
+- Generated files are read-only projections and are checked with a deterministic
+  `--check` mode; runtime code does not parse the schema to discover behavior.
+- JSON payload validation uses the canonical schema and its maintained subset.
+- Examples are validated directly against their named schema definitions.
+- The text renderer is a handwritten exhaustive adapter over the generated
+  result union. Conformance tests instantiate every result variant and reject a
+  missing renderer branch; rendered prose never feeds engine state.
+
+The public package entry points will be:
+
+- `standards_metadata.__init__`: immutable corpus views, resolution, and neutral
+  metadata diagnostics;
+- `standards_analysis.__init__`: snapshot comparison, `prepare`, `resolve`, and
+  analysis inspection contracts; and
+- `standards_engine.__init__`: `StandardsEngine`, generated public request and
+  result types, snapshot-bound `query`, agent-tool adapters, and text rendering.
+
+Internal loaders, graph providers, schema generators, and document locators are
+not re-exported through the facade.
+
+Contract version `1` has one representation. An incompatible field, variant,
+identity, applicability, state-machine, or completion change requires a new
+contract version and an explicit migration decision. Unknown versions are
+`unsupported`; there is no inferred compatibility or fallback parser.
+
+### Serialization and identity
+
+Identity-bearing values use UTF-8 canonical JSON with schema-defined fields,
+lexically ordered object keys, semantically ordered arrays, NFC-normalized model
+strings, canonical enum strings, JSON booleans, and base-10 integers. Floating
+point values are prohibited. Missing and `null` remain distinct. Raw
+representation digests hash source bytes without normalization.
+
+Identity is SHA-256 over a domain prefix, a NUL byte, and canonical identity
+bytes. The domains are:
+
+```text
+coding-standards:snapshot:v1
+coding-standards:navigation:v1
+coding-standards:packet:v1
+coding-standards:obligation:v1
+coding-standards:analysis-report:v1
+coding-standards:certificate:v1
+```
+
+Human summaries, text rendering, timestamps, logging IDs, display-only order,
+and derived `next_operations` are excluded. Certificate timestamps live only in
+a provenance envelope. Equal declarations and derived inputs therefore produce
+equal certificate IDs.
+
+### Snapshots and policy identity
+
+A clean Git snapshot uses its tree object as content identity and records its
+commit only as provenance. Dirty and non-Git inputs use a deterministic manifest
+covering relevant tracked and untracked entries, explicit exclusions, entry
+types, modes, content digests, symlink target strings, and nested repository or
+submodule state. Symlinks are not followed by default. A provider that would
+follow an escaping link must reject the snapshot.
+
+Policy-unit IDs are immutable and independent of source location. A declaration
+references a canonical module and module-relative heading locator; the document
+path is derived through `standards_metadata`. Moves retain identity. Splits and
+merges use predecessor and successor relationships, not aliases. Retirement
+creates a permanent tombstone, and retired IDs are never reused.
+
+Representation digests, structural digests, and accepted semantic revisions
+remain distinct. Structural equality may classify a representation-only
+candidate but cannot prove semantic equivalence. Proposed semantic state is an
+`AnalysisRequest` overlay and cannot modify accepted policy-unit authority.
+
+### Applicability and audit coverage
+
+`standards_analysis` owns a bounded, side-effect-free applicability language
+with `all`, `any`, `not`, `equals`, `in`, `contains`, and `exists`. Valid
+expressions evaluate to `true`, `false`, or `unknown`. Missing contextual facts
+produce `unknown`; malformed expressions, unknown operators, undeclared facts,
+and type errors reject preparation. Whole-artifact review may accompany an
+unknown result but cannot turn it into `true`.
+
+An authored `AuditDeclaration` records the bounded semantic attestation. A
+generated immutable `ConsumerAuditCertificate` binds it to resolved identities,
+the standards snapshot, registered audit horizon, corpus and edge digests,
+applicability contract, evidence, and tool versions. A successful empty consumer
+set requires a current certificate. Timestamps are excluded from certificate
+identity.
+
+### Graph composition
+
+A1 uses existing named groups and never duplicates graph storage or traversal.
+All policy-impact traversal is outgoing from the changed policy or owning
+module. Direct policy-impact propagation is non-transitive under the current
+group contract. Dependency and specialization traversal follows each existing
+group's transitive policy.
+
+| Change type | Accepted graph groups | Proposed graph groups |
+| --- | --- | --- |
+| modification | `policy-impact` | `policy-impact` |
+| addition | none for an absent policy; current owner context only | `policy-impact`, `standards-requires`, `standards-specializes` |
+| removal | `policy-impact` | none for the removed policy; current owner context only |
+| same-module move | `policy-impact` | `policy-impact` |
+| cross-module move | `policy-impact`, `standards-requires`, `standards-specializes` | `policy-impact`, `standards-requires`, `standards-specializes` |
+| split | predecessor `policy-impact` | every successor `policy-impact` |
+| merge | every predecessor `policy-impact` | successor `policy-impact` |
+
+The candidate set is the union of the named accepted and proposed traversals.
+`semantic` is not selected because it is broader than reviewed policy-impact
+propagation. `standards-dependencies` is not selected because its combined view
+would hide whether `Requires` or `Specializes` selected an obligation. An edge
+present in several selected groups remains one edge with all selected
+provenance; group membership does not duplicate it.
+
+Changed normative content outside exactly one valid policy-unit locator creates
+a mandatory `unmapped-normative-change` obligation. Missing edges or absent
+audit coverage cannot be interpreted as no impact.
+
+### State, authorization, and completion
+
+Packets and obligations are immutable and content-addressed. A changed bound
+input always makes the old packet stale. A new packet may reuse a prior decision
+only when the decision kind's declared dependency fingerprint is equal in full.
+Unknown or incomparable dependencies reopen the decision.
+
+`next_operations` is derived from current state and is guidance, not
+authorization. Trusted adapters inject capability context outside
+caller-authored request and submission payloads. A1 distinguishes
+`standards.read`, `standards.analyze`, `standards.review.consumer`,
+`standards.review.impact`, and `standards.review.audit`; one capability does not
+imply another.
+
+`CompletedAnalysisReport` is returned only when final reached consumer-review
+obligation IDs exactly equal valid current disposition IDs and every other
+question, obligation, authorization, evidence, applicability, and audit
+condition is resolved. It records analysis completion only. It cannot accept
+policy meaning, authorize a relationship, or permit repository application.
+
+## Considered Options
+
+- Keep neutral metadata inside `standards_verifier`: rejected because analysis,
+  graph composition, and agent navigation would depend on verifier ownership or
+  duplicate the loader.
+- Make Python classes the schema authority: rejected because agent-tool and
+  cross-process JSON consumers would need a second independently maintained
+  contract or a repository-specific generator language.
+- Add a custom interface-definition language: rejected because JSON Schema can
+  express the required transport algebra and a custom language would add more
+  parser and maintenance surface.
+- Add a third-party schema package now: rejected because the accepted contract
+  can be admitted and checked with the standard library; a dependency is not
+  yet justified.
+- Select the broad `semantic` or combined `standards-dependencies` groups:
+  rejected because they weaken relation-specific explanations and can select
+  relationships outside the current A1 contract.
+- Combine controlled authoring with A1: rejected because mutation,
+  authorization, application, and recovery require a stronger separate
+  lifecycle and acceptance model.
+
+## Consequences
+
+- Milestone 1 must cut every inventoried metadata consumer to one neutral API in
+  one bounded migration and remove the old neutral loader.
+- A1 implementation must preserve explicit snapshot handles at transport
+  boundaries even if native Python offers a snapshot-bound convenience view.
+- Contract evolution requires an explicit contract version and projection
+  conformance evidence; compatibility behavior is not inferred.
+- Analysis can be conservative but cannot silently resolve uncertainty.
+- A future controlled-authoring design may reuse A1 identities and reports but
+  must define a distinct apply-eligible result and post-write recovery contract.
+
+## Affected Boundaries
+
+- `tools/standards_engine/contracts/a1-contract.schema.json`
+- future `tools/standards_metadata/`
+- future `tools/standards_analysis/`
+- future `tools/standards_engine/`
+- `tools/standards_verifier/standards_verifier/canonical_modules.py`
+- `tools/standards_verifier/standards_verifier/repository_graph.py`
+- `tools/query_edges.py`
+- canonical corpus and edge-source registries
+- policy-unit, policy-impact, and consumer-audit declarations
+
+## Supersession
+
+This decision supersedes the earlier combined direction in which A1 also owned
+controlled authoring and in which prose command examples could be interpreted
+as the agent interface. It does not supersede the accepted generic graph-engine
+decision or verification-engine architecture. It specializes them for the A1
+Standards Engine boundary.

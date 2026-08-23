@@ -1,6 +1,6 @@
 # Python Verification Engine Standards And Design Audit
 
-- **Status:** Investigation report; non-authorizing input to a future plan
+- **Status:** Historical investigation evidence; superseded as planning input
 - **Date:** 2026-08-21
 - **Scope:** `tools/standards_verifier`, `tools/graph_engine`, the Standards
   Router, canonical module metadata, registered verification suites, and the
@@ -11,10 +11,25 @@
   the initial audit was subsequently accepted at the revalidated revision. It
   was not part of this audit's write set.
 
+## Lifecycle Notice
+
+This report remains the pinned historical evidence for the engine and
+standards-system findings observed at the revisions above. Its proposed
+milestones, acceptance matrix, and first planning decision are no longer
+current work instructions. They were superseded as planning input by the
+accepted [Python Verification Engine Design Recovery plan](../../python-verification-engine-recovery/plan.md).
+
+The recovery plan's [current issue dispositions](../../python-verification-engine-recovery/issues.md)
+record SW-01 through SW-04 and PE-01 through PE-04 and PE-07 as resolved,
+PE-06 as resolved without an implementation change, and PE-05 as controlled
+until its accepted zero-Bash trigger. The observations, counts, and conclusions
+below are intentionally preserved against their recorded revisions rather than
+rewritten to describe the current repository.
+
 ## Purpose
 
-This report gives developers plan-ready evidence for improving the Python
-verification engine and the standards system around it. It separates:
+This report originally gave developers plan-ready evidence for improving the
+Python verification engine and the standards system around it. It separates:
 
 1. engine implementation that conflicts with existing standards;
 2. weaknesses in standards routing, graph coverage, and enforcement;
@@ -25,7 +40,29 @@ verification engine and the standards system around it. It separates:
 This report does not authorize implementation, choose a final design, or change
 the active verification-engine plan's current slice.
 
-## Executive Conclusion
+## Subsequent Scope Limitation: Verification Oracles
+
+This audit assessed engine topology, authority boundaries, loading, result
+classification, and migration lifecycle. It did not assess whether each
+configured assertion is an independent and fit oracle for the claim attributed
+to it. In particular, it did not evaluate source bytes versus consumer-visible
+rendering, whether copied explanatory prose proves semantic accuracy, or
+whether coordinated edits to a subject and its expected literal preserve
+meaning.
+
+The later M6-I71 `rust-binding-callback-task` `documentation-projection`
+failure demonstrates the distinction: the suite's
+[`text` assertion](../../../../evaluation/standards-effectiveness/suites/rust-binding-callback-task.toml)
+rejects the wrapped source in the
+[`README`](../../../../evaluation/standards-effectiveness/README.md) even though
+the rendered sentence is unchanged. Oracle fitness and explanatory projection
+checks are therefore deferred to the separately proposed
+[Plan B evidence-oracle recovery](standards-engine-navigation-analysis-authoring-brief.md#plan-b-evidence-oracle-recovery).
+Nothing in this report's positive assessment of generic declarative mechanics
+should be read as accepting every configured literal as valid semantic
+evidence.
+
+## Historical Executive Conclusion
 
 The written Core and Architecture standards are not the primary cause of the
 engine's design problems. They already require one canonical owner, dependencies
@@ -48,7 +85,7 @@ The standards system nevertheless has material weaknesses:
   evidence but does not require an explicit Architecture applicability
   assessment when a semantic interface expands.
 
-The primary corrective direction is therefore:
+The primary corrective direction proposed at the time was therefore:
 
 1. make routing and graph coverage complete enough to expose the applicable
    standards reliably;
@@ -300,8 +337,20 @@ module metadata.
 
 - **Severity:** High
 - **Owner:** Verification-engine check interface and migration-source-closure policy
-**Evidence:** [`source_index_closure.py`](../../../../tools/standards_verifier/standards_verifier/checks/source_index_closure.py)
-contains:
+
+**Historical evidence:**
+`tools/standards_verifier/standards_verifier/checks/source_index_closure.py` at
+pinned revision `08190314808665cfe8ab10a0284d90274ac6f021` contains the evidence
+below. Reproduce it without recreating the deleted path with:
+
+```text
+git show 08190314808665cfe8ab10a0284d90274ac6f021:tools/standards_verifier/standards_verifier/checks/source_index_closure.py
+```
+
+Its accepted replacement and deletion evidence is recorded in the
+[Milestone 3 interface disposition](../../python-verification-engine-recovery/reports/milestone-3-interface-disposition.md#source-index-closure).
+
+The historical implementation contains:
 
 - exact migration manifest, corpus, owner-map, and disposition schemas;
 - allowed migration states such as `concise`, `expanded`, `retain-index`, and
@@ -494,12 +543,26 @@ contract.
 
 - **Severity:** Low
 - **Owner:** Verification policy representation
-**Evidence:** [`acceptance_claims.py`](../../../../tools/standards_verifier/standards_verifier/checks/acceptance_claims.py)
-implements a `kind@environment@mode` grammar, semicolon set language, special
+
+**Historical evidence:**
+`tools/standards_verifier/standards_verifier/checks/acceptance_claims.py` at
+pinned revision `08190314808665cfe8ab10a0284d90274ac6f021` implements the
+behavior below. Reproduce it without recreating the deleted path with:
+
+```text
+git show 08190314808665cfe8ab10a0284d90274ac6f021:tools/standards_verifier/standards_verifier/checks/acceptance_claims.py
+```
+
+Its accepted replacement and deletion evidence is recorded in the
+[Milestone 3 interface disposition](../../python-verification-engine-recovery/reports/milestone-3-interface-disposition.md#acceptance-claims).
+
+The historical implementation defines a `kind@environment@mode` grammar,
+semicolon set language, special
 `either` substitution semantics, canonical table shape, and result comparison.
-It currently has one registered suite, which is a topology observation rather
-than evidence against the module. Its `modes` field is configurable but is then
-required to equal exactly `automated`, `manual`, and `either`.
+At the pinned revision it had one registered suite, which is a topology
+observation rather than evidence against the module. Its `modes` field is
+configurable but is then required to equal exactly `automated`, `manual`, and
+`either`.
 
 **Impact:** Workflow.Verification policy is partly encoded in engine behavior,
 and an invariant is exposed as configuration. A small policy change can require
@@ -531,8 +594,8 @@ the correct seam based on ownership rather than consumer count:
 
 ## Positive Findings To Preserve
 
-The corrective plan should preserve the parts of the design that are already
-working:
+The audit recommended that the corrective plan preserve the parts of the design
+that were already working:
 
 - `tools/graph_engine` is repository-neutral and exposes a small immutable graph
   interface; policy-specific composition remains downstream.
@@ -545,9 +608,14 @@ working:
   checks, showing that broad declarative reuse is achievable.
 - The 342 engine unit tests pass in the observed working state.
 
-The plan should deepen these modules rather than replace them wholesale.
+It recommended deepening these modules rather than replacing them wholesale.
 
-## Recommended Plan Shape
+## Historical Recommended Plan Shape
+
+The sequence below is retained as the audit's original planning proposal. It
+was subsequently implemented or dispositioned through the accepted
+[recovery plan](../../python-verification-engine-recovery/plan.md) and must not
+be used as the current milestone sequence.
 
 ### Milestone 0 — Stabilize and record the baseline
 
@@ -660,7 +728,11 @@ architecture.
 adapter, one current owner for every retained module, and no owner-specific
 standards or migration-only policy anywhere in engine implementation.
 
-## Objective Acceptance Matrix For The Future Plan
+## Historical Objective Acceptance Matrix
+
+This matrix records the proposed acceptance criteria that informed the recovery
+plan. Current acceptance state is owned by the recovery plan and its issue
+dispositions.
 
 | ID | Observable criterion | Evidence kind |
 | --- | --- | --- |
@@ -675,9 +747,9 @@ standards or migration-only policy anywhere in engine implementation.
 | Z2 | Final Python-only verification contains no retained Bash orchestration or temporary migration graph. | complete final-state checkpoint |
 | Z3 | No engine check implementation contains owner-specific standards or migration-only policy. | terminal source inspection plus lifecycle closure |
 
-## Explicit Non-Goals
+## Historical Explicit Non-Goals
 
-The future plan should not:
+The proposed recovery plan was not to:
 
 - impose line-count, file-count, class-count, check-kind-count, or call-site-count
   thresholds;
@@ -686,11 +758,17 @@ The future plan should not:
 - add unconditional Architecture or Performance dependency edges to every
   implementation task;
 - preserve old custom checks under wrappers, aliases, or compatibility adapters;
-- invent a generalized expression language to replace one specialized check;
+- invent a generalized expression language merely to replace one specialized
+  verifier check;
 - add persistent caching before a performance claim and invalidation contract
   exist;
 - weaken strict configuration or typed diagnostics for faster startup; or
 - mix unrelated migration packages into the remediation write set.
+
+The expression-language non-goal above is limited to the contemplated
+replacement of a specialized verifier check. It does not decide or prohibit
+A1's independently justified, bounded three-valued applicability language,
+which has a different analysis contract and requires its own accepted design.
 
 ## Observed Transient State
 
@@ -708,7 +786,7 @@ migration, the transient result was:
 - these failures are not evidence for the engine design findings above.
 
 The migration was subsequently accepted as M6-I60. Revalidation at clean
-revision `08190314808665cfe8ab10a0284d90274ac6f021` establishes the current
+revision `08190314808665cfe8ab10a0284d90274ac6f021` established the then-current
 snapshot:
 
 - `python3 -m unittest discover -s tools/standards_verifier/tests`:
@@ -717,18 +795,24 @@ snapshot:
   **207 selected, 207 passed, 0 failed**; and
 - the derived inventory reports **65 retained Bash checkers**.
 
-Milestone 0 must establish a stable revision and rerun the gates before any
-remediation baseline or performance comparison is accepted.
+The proposed Milestone 0 required a stable revision and rerun of the gates
+before accepting a remediation baseline or performance comparison.
 
-## Suggested First Planning Decision
+## Historical Suggested First Planning Decision
 
-Before editing engine code, decide whether the repository graph promises a
-complete canonical standards-module dependency view or only a partial registry
-of explicitly contributed edges. If complete, select one owner for corpus
-membership or provider registration only; derive module IDs, canonical-owner
-path aliases, and relations from each canonical document's metadata. That
-decision closes or explicitly bounds the currently observed missing-module set
-without turning 44, 30, or 14 into acceptance constants, and gives the
-subsequent engine plan a reliable way to prove its Architecture and Performance
-routing without confusing conditional applicability with unconditional
-`Requires` edges.
+The decision proposed below was taken by the accepted recovery plan: corpus
+membership is path-only authority, while module IDs, aliases, roles,
+`Requires`, and other relations are derived from canonical document metadata.
+It is retained here to show how the audit evidence led to that decision, not as
+an outstanding planning action.
+
+Before editing engine code, the audit proposed deciding whether the repository
+graph promised a complete canonical standards-module dependency view or only a
+partial registry of explicitly contributed edges. For a complete view, it
+proposed selecting one owner for corpus membership or provider registration
+only and deriving module IDs, canonical-owner path aliases, and relations from
+each canonical document's metadata. That decision would close or explicitly
+bound the observed missing-module set without turning 44, 30, or 14 into
+acceptance constants, and would give the subsequent engine plan a reliable way
+to prove its Architecture and Performance routing without confusing
+conditional applicability with unconditional `Requires` edges.
