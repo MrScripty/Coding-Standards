@@ -1,12 +1,12 @@
 # Plan: Standards Engine Navigation And Analysis
 
-**Plan status:** `Planned`
+**Plan status:** `Active`
 
-**Current phase:** Milestone 0 accepted; implementation-base admission pending
+**Current phase:** Milestone 1 neutral metadata single-authority cutover
 
-**Next slice:** commit the accepted Milestone 0 planning boundary, record that
-exact commit and tree as the implementation base, explicitly start the plan,
-and freeze the Milestone 1 metadata-consumer inventory before source edits
+**Next slice:** implement the neutral metadata API, prove normalized equivalence
+against the accepted verifier-owned loader, and cut over the frozen production
+consumer set without retaining a compatibility loader
 
 **Acceptance status:** `pending`
 
@@ -14,9 +14,12 @@ and freeze the Milestone 1 metadata-consumer inventory before source edits
 `13a9f48b95ed7532f480e4604d9dfa23443e8f43`, tree
 `c27a1e2bbf52244c5b30eb1d21381be6e5c86d68`
 
-**Implementation admission:** `unavailable` until the accepted Milestone 0 tree
-is committed, that exact base is recorded, and `start` transitions this plan to
-`Active`
+**Implementation base:** commit
+`8b632df46db078846f7802ac55fcb54e2fb4e2d2`, tree
+`5e9c4eb211ee0a67039b0ec11142db9b106243ae`
+
+**Implementation admission:** operation `start` accepted from the recorded
+implementation base; Milestone 1 is authorized within its bounded write set
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -290,7 +293,7 @@ loading authority.
 
 **Tasks:**
 
-- [ ] Inventory every canonical metadata consumer before source edits and
+- [x] Inventory every canonical metadata consumer before source edits and
   record its current authority, API, diagnostics, and cutover disposition.
 - [ ] Implement immutable corpus, identity, alias, document-path, `Requires`,
   and `Specializes` views from canonical sources.
@@ -307,7 +310,7 @@ fixtures, verifier metadata tests, repository graph-provider tests, and
 dependency direction; the inventory has one disposition per consumer; no
 parallel production loader remains.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 2: Snapshot-Bound Navigation
 

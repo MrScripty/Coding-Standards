@@ -67,6 +67,28 @@
   boundary is committed and its exact commit and tree are recorded through the
   plan's `start` operation.
 
+## 2026-08-22: Implementation Start And Metadata Inventory Freeze
+
+- The accepted Milestone 0 boundary is commit
+  `8b632df46db078846f7802ac55fcb54e2fb4e2d2`, tree
+  `5e9c4eb211ee0a67039b0ec11142db9b106243ae`.
+- The repository was clean, only the main worktree existed, M6-I72 was the
+  latest accepted verifier package, and no later verifier package was admitted.
+- Operation `start` moved this plan from `Planned` to `Active` and admitted
+  Milestone 1 within its accepted write set.
+- The
+  [metadata-consumer inventory](reports/metadata-consumer-inventory.tsv)
+  froze the complete current cutover set before runtime source edits. Neutral
+  authority is split between verifier-owned corpus loading and document
+  metadata parsing; all other rows are consumers, projections, entrypoints, or
+  tests.
+- `graph_adapters.py` consumes only the structural `MetadataModule` protocol
+  and owns graph projection rather than metadata loading. It requires
+  equivalence evidence but no source change. Declarative suite files invoke
+  registered verifier checks and are not independent metadata consumers.
+- No consumer outside the accepted Milestone 1 write set requires a source
+  change. No re-plan trigger was reached.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,
