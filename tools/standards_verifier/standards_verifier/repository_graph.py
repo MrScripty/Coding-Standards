@@ -4,8 +4,11 @@ from pathlib import Path
 
 from tools.graph_engine.graph_engine import EdgeRegistry, InvalidSourceError
 from tools.graph_engine.graph_engine.manifest import load_registry as load_graph_registry
+from tools.standards_metadata.standards_metadata import (
+    MetadataError,
+    load_canonical_module_corpus,
+)
 
-from .canonical_modules import load_canonical_module_corpus
 from .config import load_registry as load_suite_registry
 from .diagnostics import EngineError
 from .graph_adapters import metadata_dependency_source, suite_dependency_source
@@ -27,12 +30,12 @@ def load_repository_registry(root: Path, source_registry: str) -> EdgeRegistry:
         ) from error
     try:
         corpus = load_canonical_module_corpus(repo_root)
-    except EngineError as error:
-        diagnostic = error.diagnostic
+    except MetadataError as error:
+        failure = error.failure
         raise InvalidSourceError(
             "metadata provider could not load the canonical module corpus",
-            code=diagnostic.code,
-            path=diagnostic.path or "",
+            code=failure.code,
+            path=failure.path or "",
         ) from error
     providers = {
         "standards-verifier.suite-dependencies": suite_dependency_source(

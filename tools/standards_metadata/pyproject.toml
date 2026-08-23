@@ -1,0 +1,9 @@
+[project]
+name = "standards-metadata"
+version = "0.1.0"
+description = "Neutral canonical standards metadata loader"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.unittest]
+start-directory = "tests"

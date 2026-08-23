@@ -11,13 +11,14 @@ from pathlib import Path
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ENGINE_ROOT))
 
+from tools.standards_metadata.standards_metadata import load_module_metadata
+
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
 from standards_verifier.graph_adapters import (
     METADATA_DEPENDENCIES,
     metadata_dependency_registry,
 )
-from standards_verifier.checks.metadata import load_module_metadata
 
 
 class MetadataGraphTest(unittest.TestCase):
@@ -139,7 +140,7 @@ class MetadataGraphTest(unittest.TestCase):
             requires=("core",),
         )
         modules = tuple(
-            load_module_metadata(self.root, path, suite="metadata", check="graph")
+            load_module_metadata(self.root, path)
             for path in ("core.md", "profile.md")
         )
 

@@ -3,6 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
+from tools.standards_metadata.standards_metadata import (
+    MetadataError,
+    load_canonical_module_corpus,
+)
+
 from ..diagnostics import Diagnostic, EngineError
 from ..graph_adapters import METADATA_REQUIRES, metadata_dependency_registry
 from ..model import CheckContext
@@ -33,8 +38,6 @@ class MetadataRouteCheck:
     selections: tuple[RouteSelection, ...]
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
-        from ..canonical_modules import load_canonical_module_corpus
-
         rows = read_table_rows(
             context.repo_root,
             self.path,
@@ -75,7 +78,24 @@ class MetadataRouteCheck:
             )
             return diagnostics
 
-        corpus = load_canonical_module_corpus(context.repo_root)
+        try:
+            corpus = load_canonical_module_corpus(context.repo_root)
+        except MetadataError as error:
+            failure = error.failure
+            raise EngineError(
+                Diagnostic(
+                    failure.code,
+                    failure.outcome,
+                    failure.message,
+                    suite=context.suite_id,
+                    check=self.id,
+                    path=failure.path,
+                    row=failure.row,
+                    field=failure.field,
+                    expected=failure.expected,
+                    observed=failure.observed,
+                )
+            ) from error
         known_modules = {module.module_id for module in corpus.modules}
         graph = metadata_dependency_registry(context.repo_root, corpus.modules)
         for row_number, row in enumerate(rows, start=2):

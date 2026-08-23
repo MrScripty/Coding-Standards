@@ -11,7 +11,7 @@ ENGINE_ROOT = REPO_ROOT / "tools/standards_verifier"
 sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(ENGINE_ROOT))
 
-from standards_verifier.canonical_modules import load_canonical_module_corpus
+from tools.standards_metadata.standards_metadata import load_canonical_module_corpus
 from standards_verifier.graph_adapters import (
     METADATA_REQUIRES,
     METADATA_SPECIALIZES,

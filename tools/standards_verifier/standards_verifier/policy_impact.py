@@ -5,6 +5,11 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Mapping
 
+from tools.standards_metadata.standards_metadata import (
+    MetadataError,
+    load_module_metadata,
+)
+
 from tools.graph_engine.graph_engine import (
     AliasConflictError,
     EdgeRegistry,
@@ -39,9 +44,24 @@ DEFAULT_SOURCE_REGISTRY = "evaluation/standards-effectiveness/edge-source-regist
 
 
 def _load_module_metadata(root: Path, path: str, *, suite: str, check: str):
-    from .checks.metadata import load_module_metadata
-
-    return load_module_metadata(root, path, suite=suite, check=check)
+    try:
+        return load_module_metadata(root, path)
+    except MetadataError as error:
+        failure = error.failure
+        raise EngineError(
+            Diagnostic(
+                failure.code,
+                failure.outcome,
+                failure.message,
+                suite=suite,
+                check=check,
+                path=failure.path,
+                row=failure.row,
+                field=failure.field,
+                expected=failure.expected,
+                observed=failure.observed,
+            )
+        ) from error
 
 
 @dataclass(frozen=True, slots=True)

@@ -89,6 +89,36 @@
 - No consumer outside the accepted Milestone 1 write set requires a source
   change. No re-plan trigger was reached.
 
+## 2026-08-22: Milestone 1 Neutral Metadata Cutover
+
+- Added `tools/standards_metadata/` as the sole loader for corpus membership,
+  canonical document metadata, immutable module views, ID/path resolution,
+  `Requires`, `Specializes`, and neutral structural failures.
+- Cut repository graph composition, metadata-route validation, policy-impact
+  validation, metadata checks, and their tests over to the neutral API. The
+  verifier retains suite configuration, suite context, diagnostic translation,
+  and policy-specific validation only.
+- Deleted the verifier-owned `canonical_modules.py` and the duplicated document
+  parser from `checks/metadata.py`. No wrapper, compatibility import, fallback,
+  or second production metadata representation remains.
+- The admitted old loader and new loader produced exactly equal normalized
+  JSON for 58 modules and 39,305 bytes, with SHA-256
+  `ff5e206875e60c03dbd8e408a7e71c1661afa199b0525b6f5aef666e88f9e826`.
+- Neutral metadata tests include strict corpus paths, missing and malformed
+  inputs, symlink escape, duplicate/unresolved identities, distinct cycle
+  outcomes, and an iterative 1,200-module acyclic chain.
+- Focused consumer tests passed 44 tests. The complete neutral package passed
+  seven tests, verifier package passed 381 tests, graph engine passed 35 tests,
+  all 218 declarative suites passed, the A1 contract validator passed, logical
+  and path graph aliases remained exact, and `git diff --check` passed.
+- The complete mixed checkpoint passed generated freshness, all 218
+  declarative suites, and all 53 retained Bash checkers from the final
+  candidate tree.
+- Detailed design, equivalence, disposition, and verification evidence is in
+  [Milestone 1 acceptance](reports/milestone-1-neutral-metadata-cutover.md).
+- Milestone 1 is `Accepted`. Milestone 2 is active with snapshot and policy-unit
+  foundations as its sole next slice.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

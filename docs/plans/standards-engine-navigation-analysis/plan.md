@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 1 neutral metadata single-authority cutover
+**Current phase:** Milestone 2 snapshot and policy-unit foundation
 
-**Next slice:** implement the neutral metadata API, prove normalized equivalence
-against the accepted verifier-owned loader, and cut over the frozen production
-consumer set without retaining a compatibility loader
+**Next slice:** implement immutable clean-Git and manifest snapshot identities
+plus policy-unit declaration, locator, lifecycle, representation, structure,
+and accepted-semantic-revision validation without adding navigation behavior
 
 **Acceptance status:** `pending`
 
@@ -42,7 +42,7 @@ repository mutation, and external-project application outside A1.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | Every canonical corpus member, module ID, alias, document path, `Requires` edge, and `Specializes` edge is loaded through one neutral metadata API, and every inventoried consumer uses that API without a parallel production loader. | `integration` | `not-applicable` | `automated` | `pending` | Milestone 1 evidence |
+| A1 | Every canonical corpus member, module ID, alias, document path, `Requires` edge, and `Specializes` edge is loaded through one neutral metadata API, and every inventoried consumer uses that API without a parallel production loader. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](reports/milestone-1-neutral-metadata-cutover.md) |
 | A2 | Clean Git, dirty/non-Git, untracked-file, file-mode, symlink, submodule, exclusion, schema, tool-version, and integrity-closure inputs produce deterministic immutable snapshot identities under the accepted serialization contract. | `contract` | `not-applicable` | `automated` | `pending` | Milestone 2 evidence |
 | A3 | A typed agent can route from structured facts, receive canonical IDs, read canonical content, and navigate declared relations through follow-up requests bound to the same immutable snapshot without supplying repository paths. | `user-workflow` | `not-applicable` | `automated` | `pending` | Route/read agent fixture |
 | A4 | Policy-unit identity, accepted and proposed semantic state, move, split, merge, retirement, successor, alias, and unmapped normative-change rules preserve identity and produce the required typed outcomes without treating structure as semantic proof. | `contract` | `not-applicable` | `automated` | `pending` | Milestones 2 and 3 evidence |
@@ -295,14 +295,14 @@ loading authority.
 
 - [x] Inventory every canonical metadata consumer before source edits and
   record its current authority, API, diagnostics, and cutover disposition.
-- [ ] Implement immutable corpus, identity, alias, document-path, `Requires`,
+- [x] Implement immutable corpus, identity, alias, document-path, `Requires`,
   and `Specializes` views from canonical sources.
-- [ ] Compare old and new normalized membership, identities, aliases, paths,
+- [x] Compare old and new normalized membership, identities, aliases, paths,
   edges, transitive groups, ordering, and invalid-input outcomes.
-- [ ] Treat every unexplained difference as blocking.
-- [ ] Cut over all inventoried consumers coherently and delete the old neutral
+- [x] Treat every unexplained difference as blocking.
+- [x] Cut over all inventoried consumers coherently and delete the old neutral
   loading implementation without a wrapper or compatibility import.
-- [ ] Keep verifier-specific checks and diagnostics in `standards_verifier`.
+- [x] Keep verifier-specific checks and diagnostics in `standards_verifier`.
 
 **Acceptance gate:** Focused neutral-metadata tests, old/new equivalence
 fixtures, verifier metadata tests, repository graph-provider tests, and
@@ -310,7 +310,7 @@ fixtures, verifier metadata tests, repository graph-provider tests, and
 dependency direction; the inventory has one disposition per consumer; no
 parallel production loader remains.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 2: Snapshot-Bound Navigation
 
@@ -360,7 +360,7 @@ cross-snapshot rejection; no result requires a repository path or text parsing;
 affected security, containment, filesystem, contract, and documentation checks
 pass.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 3: Semantic Impact Selection And Coverage
 

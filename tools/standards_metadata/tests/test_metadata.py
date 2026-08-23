@@ -1,20 +1,20 @@
 from __future__ import annotations
 
-import sys
 import tempfile
 import textwrap
 import unittest
 from pathlib import Path
 
 
-ENGINE_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ENGINE_ROOT))
+from tools.standards_metadata.standards_metadata import (
+    MetadataError,
+    load_canonical_module_corpus,
+    load_module_metadata,
+    validate_module_metadata,
+)
 
-from standards_verifier.canonical_modules import load_canonical_module_corpus
-from standards_verifier.diagnostics import EngineError
 
-
-class CanonicalModuleCorpusTest(unittest.TestCase):
+class StandardsMetadataTest(unittest.TestCase):
     def setUp(self) -> None:
         self.temp_dir = tempfile.TemporaryDirectory()
         self.root = Path(self.temp_dir.name)
@@ -74,11 +74,11 @@ class CanonicalModuleCorpusTest(unittest.TestCase):
         self.write("corpus.toml", f"{prefix}\nmembers = [{encoded}]\n")
 
     def error_code(self) -> str:
-        with self.assertRaises(EngineError) as caught:
+        with self.assertRaises(MetadataError) as caught:
             load_canonical_module_corpus(self.root, "corpus.toml")
-        return caught.exception.diagnostic.code
+        return caught.exception.failure.code
 
-    def test_loads_without_suite_registry_and_derives_normative_membership(self) -> None:
+    def test_loads_immutable_corpus_and_resolves_id_and_path(self) -> None:
         self.write_module("core.md", "core", role="core")
         self.write_module("workflow.md", "workflow.example", requires=("core",))
         self.write_module("reference.md", "reference.example", role="reference")
@@ -91,13 +91,23 @@ class CanonicalModuleCorpusTest(unittest.TestCase):
             tuple(module.module_id for module in corpus.normative_modules),
             ("core", "workflow.example"),
         )
+        self.assertEqual(corpus.resolve("workflow.example"), corpus.resolve("workflow.md"))
+        self.assertIsNone(corpus.resolve("unknown"))
 
-    def test_manifest_schema_is_strict_and_members_are_non_empty_unique_paths(self) -> None:
+    def test_manifest_schema_and_member_paths_are_strict(self) -> None:
         cases = (
             ("schema_version = 2", ("module.md",), "CONFIG.SCHEMA_VERSION"),
-            ("schema_version = 1\nextra = true", ("module.md",), "CONFIG.CANONICAL_CORPUS_FIELDS"),
+            (
+                "schema_version = 1\nextra = true",
+                ("module.md",),
+                "CONFIG.CANONICAL_CORPUS_FIELDS",
+            ),
             ("schema_version = 1", (), "CONFIG.CANONICAL_CORPUS_MEMBERS"),
-            ("schema_version = 1", ("module.md", "module.md"), "CONFIG.CANONICAL_CORPUS_DUPLICATE"),
+            (
+                "schema_version = 1",
+                ("module.md", "module.md"),
+                "CONFIG.CANONICAL_CORPUS_DUPLICATE",
+            ),
             ("schema_version = 1", ("./module.md",), "PATH.OUTSIDE_REPOSITORY"),
             ("schema_version = 1", ("../module.md",), "PATH.OUTSIDE_REPOSITORY"),
         )
@@ -107,23 +117,21 @@ class CanonicalModuleCorpusTest(unittest.TestCase):
                 self.write_manifest(members, prefix=prefix)
                 self.assertEqual(self.error_code(), expected)
 
-    def test_malformed_manifest_and_missing_member_are_typed(self) -> None:
+    def test_malformed_manifest_missing_member_and_symlink_escape_are_typed(self) -> None:
         self.write("corpus.toml", "schema_version = [\n")
         self.assertEqual(self.error_code(), "CONFIG.INVALID_TOML")
 
         self.write_manifest(("missing.md",))
         self.assertEqual(self.error_code(), "INPUT.UNAVAILABLE")
 
-    def test_member_symlink_cannot_escape_repository(self) -> None:
         outside = self.root.with_name(f"{self.root.name}-outside.md")
         outside.write_text("outside\n", encoding="utf-8")
         self.addCleanup(outside.unlink, missing_ok=True)
         (self.root / "linked.md").symlink_to(outside)
         self.write_manifest(("linked.md",))
-
         self.assertEqual(self.error_code(), "PATH.OUTSIDE_REPOSITORY")
 
-    def test_metadata_identity_and_relation_failures_are_not_hidden(self) -> None:
+    def test_identity_owner_and_relation_failures_are_typed(self) -> None:
         self.write_module("a.md", "duplicate")
         self.write_module("b.md", "duplicate")
         self.write_manifest(("a.md", "b.md"))
@@ -133,14 +141,37 @@ class CanonicalModuleCorpusTest(unittest.TestCase):
         self.write_manifest(("a.md",))
         self.assertEqual(self.error_code(), "METADATA.UNRESOLVED_TARGET")
 
-        self.write_module("a.md", "a", requires=("b",))
-        self.write_module("b.md", "b", requires=("a",))
-        self.write_manifest(("a.md", "b.md"))
-        self.assertEqual(self.error_code(), "METADATA.REQUIRES_CYCLE")
-
         self.write_module("a.md", "a", owner="other.md")
         self.write_manifest(("a.md",))
         self.assertEqual(self.error_code(), "METADATA.CANONICAL_OWNER")
+
+    def test_relation_cycles_are_distinguished(self) -> None:
+        self.write_module("a.md", "a", requires=("b",))
+        self.write_module("b.md", "b", requires=("a",))
+        result = validate_module_metadata(self.root, ("a.md", "b.md"))
+        self.assertEqual(result.failures[0].code, "METADATA.REQUIRES_CYCLE")
+
+        self.write_module("a.md", "a", role="profile", specializes=("b",))
+        self.write_module("b.md", "b", role="profile", specializes=("a",))
+        result = validate_module_metadata(self.root, ("a.md", "b.md"))
+        self.assertEqual(result.failures[0].code, "METADATA.SPECIALIZES_CYCLE")
+
+    def test_long_acyclic_relation_chain_is_iterative(self) -> None:
+        count = 1200
+        paths = tuple(f"m{index}.md" for index in range(count))
+        for index, path in enumerate(paths):
+            requires = () if index == 0 else (f"m{index - 1}",)
+            self.write_module(path, f"m{index}", requires=requires)
+
+        result = validate_module_metadata(self.root, paths)
+
+        self.assertEqual(len(result.modules), count)
+        self.assertEqual(result.failures, ())
+
+    def test_single_module_loader_returns_neutral_failure(self) -> None:
+        with self.assertRaises(MetadataError) as caught:
+            load_module_metadata(self.root, "missing.md")
+        self.assertEqual(caught.exception.failure.outcome, "unavailable")
 
 
 if __name__ == "__main__":
