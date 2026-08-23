@@ -7,7 +7,7 @@ from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
 from .errors import MetadataError, MetadataFailure
-from .model import CanonicalModuleCorpus
+from .model import CanonicalModuleCorpus, CanonicalStandardsCorpus
 from .serialization import canonical_json_bytes, digest_bytes
 
 
@@ -88,6 +88,15 @@ class PolicyUnitCorpus:
 
     def for_module(self, module_id: str) -> tuple[PolicyUnit, ...]:
         return tuple(unit for unit in self.units if unit.module == module_id)
+
+
+@dataclass(frozen=True, slots=True)
+class UnmappedModuleProjection:
+    module: str
+    document: str
+    mapped_policy_units: tuple[str, ...]
+    whole_representation_digest: str
+    digest: str
 
 
 def _error(
@@ -408,6 +417,19 @@ def _validate_lifecycle(
             "one active policy-unit locator cannot own multiple identities",
             path=POLICY_UNIT_REGISTRY,
         )
+    ordered_locators = sorted(locators)
+    for index, (module, heading_path) in enumerate(ordered_locators):
+        for other_module, other_path in ordered_locators[index + 1 :]:
+            if other_module != module:
+                continue
+            shorter = min(len(heading_path), len(other_path))
+            if heading_path[:shorter] == other_path[:shorter]:
+                raise _error(
+                    "POLICY_UNIT.LOCATOR_OVERLAP",
+                    "active policy-unit heading scopes must not overlap",
+                    path=POLICY_UNIT_REGISTRY,
+                    observed=f"{module}:{'/'.join(heading_path)}",
+                )
     for item in tombstones:
         for successor in item.successors:
             target = active.get(successor)
@@ -462,3 +484,62 @@ def load_policy_unit_corpus(
     selected_tombstones = tuple(tombstones)
     _validate_lifecycle(selected_units, selected_tombstones)
     return PolicyUnitCorpus(registry_path, sources, selected_units, selected_tombstones)
+
+
+def project_unmapped_module(
+    root: Path,
+    corpus: CanonicalStandardsCorpus,
+    module_id: str,
+) -> UnmappedModuleProjection:
+    module = corpus.resolve_module(module_id)
+    if module is None or module.module_id != module_id:
+        raise _error(
+            "POLICY_UNIT.UNKNOWN_MODULE",
+            "unmapped projection requires one canonical module ID",
+            path=module_id,
+            observed=module_id,
+        )
+    source = _path(root.resolve(), module.path)
+    raw = source.read_bytes()
+    try:
+        headings = _headings(raw.decode("utf-8"))
+    except UnicodeDecodeError as error:
+        raise _error("POLICY_UNIT.INVALID_UTF8", str(error), path=module.path) from error
+
+    ranges: list[tuple[int, int, str]] = []
+    for unit in corpus.policy_unit_corpus.for_module(module_id):
+        matches = [item for item in headings if item[0] == unit.heading_path]
+        if len(matches) != 1:
+            raise _error(
+                "POLICY_UNIT.LOCATOR_COUNT",
+                "policy-unit heading path must resolve exactly once",
+                path=module.path,
+                field="heading_path",
+                observed=str(len(matches)),
+            )
+        _, start, end = matches[0]
+        ranges.append((start, end, unit.id))
+
+    ranges.sort()
+    for previous, current in zip(ranges, ranges[1:]):
+        if current[0] < previous[1]:
+            raise _error(
+                "POLICY_UNIT.LOCATOR_OVERLAP",
+                "active policy-unit heading scopes must not overlap",
+                path=module.path,
+                observed=f"{previous[2]}|{current[2]}",
+            )
+
+    unmapped = bytearray()
+    position = 0
+    for start, end, _unit_id in ranges:
+        unmapped.extend(raw[position:start])
+        position = end
+    unmapped.extend(raw[position:])
+    return UnmappedModuleProjection(
+        module_id,
+        module.path,
+        tuple(unit_id for _start, _end, unit_id in ranges),
+        digest_bytes(raw),
+        digest_bytes(bytes(unmapped)),
+    )

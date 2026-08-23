@@ -374,6 +374,16 @@ Changed normative content outside exactly one valid policy-unit locator creates
 a mandatory `unmapped-normative-change` obligation. Missing edges or absent
 audit coverage cannot be interpreted as no impact.
 
+The neutral metadata parser projects each canonical module's representation
+outside its exact, non-overlapping active policy-unit heading scopes. Analysis
+compares that projection across accepted and proposed authority and separately
+checks that every changed policy-unit identity was claimed by one classified
+change. A changed normative module projection, an added or removed normative
+module, or an omitted changed policy unit produces one deterministic
+whole-artifact obligation for its owning module. Canonical `reference` modules
+are explicitly non-normative and do not create this obligation. Analysis never
+searches copied policy text or reparses Markdown to derive these boundaries.
+
 Policy-impact relationships originate from coherent policy units, not module
 IDs. Modules remain document, navigation, `Requires`, and `Specializes`
 identities. A module-level relationship query derives an aggregation over the

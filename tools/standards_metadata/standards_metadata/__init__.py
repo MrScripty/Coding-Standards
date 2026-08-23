@@ -19,8 +19,10 @@ from .policy_units import (
     PolicyUnit,
     PolicyUnitCorpus,
     PolicyUnitTombstone,
+    UnmappedModuleProjection,
     load_policy_unit_corpus,
     markdown_structural_digest,
+    project_unmapped_module,
 )
 from .serialization import canonical_json_bytes, digest_bytes
 
@@ -36,6 +38,7 @@ __all__ = (
     "PolicyUnit",
     "PolicyUnitCorpus",
     "PolicyUnitTombstone",
+    "UnmappedModuleProjection",
     "canonical_json_bytes",
     "digest_bytes",
     "load_canonical_standards_corpus",
@@ -43,5 +46,6 @@ __all__ = (
     "load_policy_unit_corpus",
     "load_module_metadata",
     "markdown_structural_digest",
+    "project_unmapped_module",
     "validate_module_metadata",
 )

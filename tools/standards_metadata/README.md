@@ -16,6 +16,12 @@ boundary.
 view for callers that need both. Module-only consumers can continue to use
 `load_canonical_module_corpus` without compiling policy impact.
 
+`project_unmapped_module` uses the same accepted Markdown heading parser to
+remove exact, non-overlapping policy-unit scopes from one canonical module and
+returns a digest of the remaining representation. Downstream analysis can
+therefore detect changed authority outside policy units without copying
+locator logic or treating line numbers as identity.
+
 Run the focused tests:
 
 ```bash

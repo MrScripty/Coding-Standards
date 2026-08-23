@@ -7,10 +7,12 @@ import json
 from pathlib import Path
 
 from tools.standards_metadata.standards_metadata import (
+    CanonicalStandardsCorpus,
     MetadataError,
     load_canonical_standards_corpus,
     load_canonical_module_corpus,
     load_policy_unit_corpus,
+    project_unmapped_module,
 )
 from tools.standards_engine.contracts.validate_contracts import validate
 
@@ -210,6 +212,86 @@ class PolicyUnitTest(unittest.TestCase):
         with self.assertRaises(MetadataError) as caught:
             self.load()
         self.assertEqual(caught.exception.failure.code, "POLICY_UNIT.LOCATOR_CONFLICT")
+
+    def test_nested_policy_unit_locators_are_rejected_as_overlapping(self) -> None:
+        self.module("### Detail\n\nNested policy text.")
+        self.declarations(
+            """
+            [[policy_unit]]
+            id = "workflow.test.policy"
+            module = "workflow.test"
+            heading_path = ["Policy"]
+            semantic_revision = 1
+
+            [[policy_unit]]
+            id = "workflow.test.detail"
+            module = "workflow.test"
+            heading_path = ["Policy", "Detail"]
+            semantic_revision = 1
+            """
+        )
+
+        with self.assertRaises(MetadataError) as caught:
+            self.load()
+        self.assertEqual(caught.exception.failure.code, "POLICY_UNIT.LOCATOR_OVERLAP")
+
+    def test_unmapped_projection_excludes_exact_policy_unit_scope(self) -> None:
+        self.module("Policy text.")
+        self.declarations(
+            """
+            [[policy_unit]]
+            id = "workflow.test.policy"
+            module = "workflow.test"
+            heading_path = ["Policy"]
+            semantic_revision = 1
+            """
+        )
+        modules = load_canonical_module_corpus(self.root, "corpus.toml")
+        units = load_policy_unit_corpus(
+            self.root,
+            modules,
+            "units/registry.toml",
+        )
+        first = project_unmapped_module(
+            self.root,
+            CanonicalStandardsCorpus(modules, units),
+            "workflow.test",
+        )
+
+        self.module("Changed policy text.")
+        changed_units = load_policy_unit_corpus(
+            self.root,
+            modules,
+            "units/registry.toml",
+        )
+        second = project_unmapped_module(
+            self.root,
+            CanonicalStandardsCorpus(modules, changed_units),
+            "workflow.test",
+        )
+        self.assertEqual(first.digest, second.digest)
+
+        source = self.root / "module.md"
+        source.write_text(
+            source.read_text(encoding="utf-8").replace(
+                "**Standards metadata**",
+                "Unmapped normative text.\n\n**Standards metadata**",
+            ),
+            encoding="utf-8",
+        )
+        third = project_unmapped_module(
+            self.root,
+            CanonicalStandardsCorpus(
+                load_canonical_module_corpus(self.root, "corpus.toml"),
+                load_policy_unit_corpus(
+                    self.root,
+                    load_canonical_module_corpus(self.root, "corpus.toml"),
+                    "units/registry.toml",
+                ),
+            ),
+            "workflow.test",
+        )
+        self.assertNotEqual(second.digest, third.digest)
 
     def test_tombstone_successors_use_policy_identity_rules(self) -> None:
         self.module("Policy text.")

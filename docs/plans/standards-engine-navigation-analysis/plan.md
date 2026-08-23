@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 3 semantic impact selection and coverage
 
-**Next slice:** generate mandatory `unmapped-normative-change` obligations for
-changed normative content that cannot be resolved to one active policy unit
+**Next slice:** preserve `unknown` applicability while selecting conservative
+whole-artifact review scope and generate exact applicability-resolution work
 
 **Acceptance status:** `pending`
 
@@ -457,7 +457,7 @@ without claiming to judge arbitrary meaning.
 - [x] Cut declarations, compiler validation, graph contribution, inspection,
   verifier consumers, and module-level related aggregation to policy-unit
   sources atomically; remove module-source support without fallback.
-- [ ] Generate mandatory `unmapped-normative-change` obligations for uncovered
+- [x] Generate mandatory `unmapped-normative-change` obligations for uncovered
   or unresolved normative changes.
 - [x] Implement neutral compiled fact schemas, applicability programs, and fact
   sets with typed errors, schema identity checks, deterministic digests, exact

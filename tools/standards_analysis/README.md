@@ -9,8 +9,9 @@ repository-writing behavior.
 Current implemented foundation:
 
 - canonical JSON and domain-separated identities;
-- clean-Git and deterministic manifest snapshots; and
+- clean-Git and deterministic manifest snapshots;
 - metadata-owned policy-unit corpus consumption;
+- mandatory whole-artifact obligations for unmapped normative changes;
 - independent content-fingerprinted policy-consumer horizons; and
 - two-identity coverage requirements, attestations, and reusable certificates.
 

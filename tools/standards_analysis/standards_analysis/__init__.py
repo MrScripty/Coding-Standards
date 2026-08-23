@@ -23,6 +23,14 @@ from .impact import (
     ImpactTrace,
     select_impact,
 )
+from .obligations import (
+    UNMAPPED_DECISION_CONTRACT,
+    DecisionContract,
+    DecisionDependency,
+    DecisionFingerprint,
+    Obligation,
+    generate_unmapped_normative_obligations,
+)
 from .serialization import canonical_json_bytes, digest_bytes, identity
 from .routing import (
     ROUTER_PROJECTION,
@@ -78,6 +86,9 @@ __all__ = (
     "CoverageIndex",
     "DEFAULT_ATTESTATION_REGISTRY",
     "DEFAULT_HORIZON",
+    "DecisionDependency",
+    "DecisionContract",
+    "DecisionFingerprint",
     "EVIDENCE_PROVIDER_CONTRACT_VERSION",
     "GraphSeedSelection",
     "ImpactCandidate",
@@ -86,6 +97,7 @@ __all__ = (
     "HORIZON_ID",
     "HORIZON_PROVIDER",
     "POLICY_IMPACT",
+    "Obligation",
     "ROUTER_PROJECTION",
     "RouteFact",
     "RouteRule",
@@ -95,6 +107,7 @@ __all__ = (
     "STANDARDS_SPECIALIZES",
     "SemanticProposal",
     "SemanticState",
+    "UNMAPPED_DECISION_CONTRACT",
     "canonical_json_bytes",
     "classify_changes",
     "compile_coverage",
@@ -103,6 +116,7 @@ __all__ = (
     "derive_coverage_requirement",
     "derive_coverage_view",
     "identity",
+    "generate_unmapped_normative_obligations",
     "load_router_projection",
     "load_coverage_horizon",
     "select_impact",

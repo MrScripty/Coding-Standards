@@ -1,5 +1,24 @@
 # Standards Engine Navigation And Analysis Execution Ledger
 
+## 2026-08-23: Milestone 3 Unmapped Normative Obligations
+
+- Added a metadata-owned projection that removes exact, non-overlapping active
+  policy-unit heading scopes and fingerprints the remaining module
+  representation without exposing line-based identity.
+- Analysis now emits one deterministic mandatory whole-artifact obligation for
+  changed normative authority outside policy-unit scopes, added or removed
+  normative modules, and changed policy units omitted from the classified
+  change set.
+- Explicit canonical `reference` modules remain non-normative and do not
+  produce these obligations. Analysis does not infer normative meaning from
+  prose or search copied policy content.
+- The obligation uses the accepted public `Obligation` and
+  `DecisionFingerprint` schemas, with one typed decision contract declaring
+  representation, module-locator, policy-unit, and analysis-contract
+  dependencies.
+- Acceptance evidence is recorded in the
+  [unmapped normative report](reports/milestone-3-unmapped-normative-obligations.md).
+
 ## 2026-08-23: Milestone 3 Coverage Identity Cutover
 
 - Added a complete snapshot input closure for coverage authority,
