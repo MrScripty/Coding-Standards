@@ -26,13 +26,31 @@ class ChangeKind(str, Enum):
     MERGE = "merge"
 
 
+class ChangedPolicyKind(str, Enum):
+    MODIFICATION = "modification"
+    ADDITION = "addition"
+    REMOVAL = "removal"
+    MOVE = "move"
+    SPLIT_PREDECESSOR = "split-predecessor"
+    SPLIT_SUCCESSOR = "split-successor"
+    MERGE_PREDECESSOR = "merge-predecessor"
+    MERGE_SUCCESSOR = "merge-successor"
+
+
 CHANGE_GRAPH_GROUPS = {
-    ChangeKind.MODIFICATION: ((POLICY_IMPACT,), (POLICY_IMPACT,)),
-    ChangeKind.ADDITION: (
+    "modification": ((POLICY_IMPACT,), (POLICY_IMPACT,)),
+    "addition": (
         (),
         (POLICY_IMPACT, STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
     ),
-    ChangeKind.REMOVAL: ((POLICY_IMPACT,), ()),
+    "removal": ((POLICY_IMPACT,), ()),
+    "move-same-module": ((POLICY_IMPACT,), (POLICY_IMPACT,)),
+    "move-cross-module": (
+        (POLICY_IMPACT, STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
+        (POLICY_IMPACT, STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
+    ),
+    "split": ((POLICY_IMPACT,), (POLICY_IMPACT,)),
+    "merge": ((POLICY_IMPACT,), (POLICY_IMPACT,)),
 }
 
 
@@ -93,7 +111,7 @@ class SemanticProposal:
 @dataclass(frozen=True, slots=True)
 class ChangedPolicyUnit:
     policy: str
-    change_kind: ChangeKind
+    change_kind: ChangedPolicyKind
     classification: ChangeClassification
     accepted_representation_digest: str | None
     proposed_representation_digest: str | None
@@ -209,6 +227,12 @@ def _classify_change(
         return _addition(accepted, proposed, descriptor, proposals)
     if descriptor.kind is ChangeKind.REMOVAL:
         return _removal(accepted, proposed, descriptor, proposals)
+    if descriptor.kind is ChangeKind.MOVE:
+        return _move(accepted, proposed, descriptor, proposals)
+    if descriptor.kind is ChangeKind.SPLIT:
+        return _split(accepted, proposed, descriptor, proposals)
+    if descriptor.kind is ChangeKind.MERGE:
+        return _merge(accepted, proposed, descriptor, proposals)
     raise _error(
         "CHANGE.UNSUPPORTED_KIND",
         "change kind is not implemented by the current admitted slice",
@@ -273,7 +297,7 @@ def _modification(
 
     changed = _changed(
         policy_id,
-        ChangeKind.MODIFICATION,
+        ChangedPolicyKind.MODIFICATION,
         classification,
         before,
         after,
@@ -282,7 +306,7 @@ def _modification(
         semantic_state,
         descriptor.scope,
     )
-    accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[descriptor.kind]
+    accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[descriptor.kind.value]
     return ClassifiedChange(
         descriptor,
         (changed,),
@@ -340,7 +364,7 @@ def _addition(
         )
     changed = _changed(
         policy_id,
-        ChangeKind.ADDITION,
+        ChangedPolicyKind.ADDITION,
         ChangeClassification.SEMANTICALLY_CHANGED,
         None,
         after,
@@ -349,7 +373,7 @@ def _addition(
         SemanticState.PROPOSED,
         descriptor.scope,
     )
-    accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[descriptor.kind]
+    accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[descriptor.kind.value]
     return ClassifiedChange(
         descriptor,
         (changed,),
@@ -400,7 +424,7 @@ def _removal(
         )
     changed = _changed(
         policy_id,
-        ChangeKind.REMOVAL,
+        ChangedPolicyKind.REMOVAL,
         ChangeClassification.SEMANTICALLY_CHANGED,
         before,
         None,
@@ -409,11 +433,268 @@ def _removal(
         SemanticState.REMOVED,
         descriptor.scope,
     )
-    accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[descriptor.kind]
+    accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[descriptor.kind.value]
     return ClassifiedChange(
         descriptor,
         (changed,),
         GraphSeedSelection((policy_id,), accepted_groups, (), proposed_groups),
+    )
+
+
+def _move(
+    accepted: PolicyUnitCorpus,
+    proposed: PolicyUnitCorpus,
+    descriptor: ChangeDescriptor,
+    proposals: dict[str, SemanticProposal],
+) -> ClassifiedChange:
+    if (
+        len(descriptor.accepted_ids) != 1
+        or descriptor.accepted_ids != descriptor.proposed_ids
+    ):
+        raise _shape_error(ChangeKind.MOVE)
+    policy_id = descriptor.accepted_ids[0]
+    before = _active(accepted, policy_id, "accepted")
+    after = _active(proposed, policy_id, "proposed")
+    _module(descriptor.accepted_module, before.module, "accepted_module")
+    _module(descriptor.proposed_module, after.module, "proposed_module")
+    if before.module == after.module and before.heading_path == after.heading_path:
+        raise _error(
+            "CHANGE.WRONG_KIND",
+            "a move must change canonical ownership or locator",
+            observed=policy_id,
+        )
+    if (
+        before.aliases != after.aliases
+        or before.predecessors != after.predecessors
+        or before.successors != after.successors
+    ):
+        raise _error(
+            "CHANGE.WRONG_KIND",
+            "a move cannot alter identity aliases or predecessor/successor lifecycle",
+            observed=policy_id,
+        )
+    if before.semantic_revision != after.semantic_revision:
+        raise _error(
+            "CHANGE.ACCEPTED_REVISION_MUTATED",
+            "a proposed move must retain the accepted semantic revision",
+            observed=policy_id,
+        )
+    classification, state, proposed_revision = _classify_existing(
+        before,
+        after,
+        proposals.get(policy_id),
+    )
+    changed = _changed(
+        policy_id,
+        ChangedPolicyKind.MOVE,
+        classification,
+        before,
+        after,
+        before.semantic_revision,
+        proposed_revision,
+        state,
+        descriptor.scope,
+    )
+    profile = (
+        "move-same-module"
+        if before.module == after.module
+        else "move-cross-module"
+    )
+    accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[profile]
+    accepted_seeds = (policy_id,)
+    proposed_seeds = (policy_id,)
+    if before.module != after.module:
+        accepted_seeds = tuple(sorted((policy_id, before.module)))
+        proposed_seeds = tuple(sorted((policy_id, after.module)))
+    return ClassifiedChange(
+        descriptor,
+        (changed,),
+        GraphSeedSelection(
+            accepted_seeds,
+            accepted_groups,
+            proposed_seeds,
+            proposed_groups,
+        ),
+    )
+
+
+def _split(
+    accepted: PolicyUnitCorpus,
+    proposed: PolicyUnitCorpus,
+    descriptor: ChangeDescriptor,
+    proposals: dict[str, SemanticProposal],
+) -> ClassifiedChange:
+    if (
+        len(descriptor.accepted_ids) != 1
+        or len(descriptor.proposed_ids) < 2
+        or len(set(descriptor.proposed_ids)) != len(descriptor.proposed_ids)
+    ):
+        raise _shape_error(ChangeKind.SPLIT)
+    predecessor_id = descriptor.accepted_ids[0]
+    if predecessor_id in descriptor.proposed_ids:
+        raise _shape_error(ChangeKind.SPLIT)
+    before = _active(accepted, predecessor_id, "accepted")
+    _module(descriptor.accepted_module, before.module, "accepted_module")
+    if predecessor_id in proposals:
+        raise _error(
+            "CHANGE.SEMANTIC_PROPOSAL",
+            "a split predecessor cannot have proposed semantic state",
+            observed=predecessor_id,
+        )
+    tombstone = _retired(proposed, predecessor_id, before)
+    expected_successors = tuple(sorted(descriptor.proposed_ids))
+    if tuple(sorted(tombstone.successors)) != expected_successors:
+        raise _error(
+            "CHANGE.SUCCESSOR_MISMATCH",
+            "split tombstone successors must equal proposed policy identities",
+            observed=predecessor_id,
+        )
+    successors: list[PolicyUnit] = []
+    for policy_id in expected_successors:
+        if accepted.resolve(policy_id) is not None:
+            raise _error(
+                "CHANGE.ADDED_ID_EXISTS",
+                "a split successor identity must be absent from accepted authority",
+                observed=policy_id,
+            )
+        successor = _active(proposed, policy_id, "proposed")
+        _module(descriptor.proposed_module, successor.module, "proposed_module")
+        if successor.predecessors != (predecessor_id,):
+            raise _error(
+                "CHANGE.PREDECESSOR_MISMATCH",
+                "each split successor must name exactly its predecessor",
+                observed=policy_id,
+            )
+        _initial_semantic_proposal(successor, proposals.get(policy_id))
+        successors.append(successor)
+
+    changed = [
+        _changed(
+            predecessor_id,
+            ChangedPolicyKind.SPLIT_PREDECESSOR,
+            ChangeClassification.SEMANTICALLY_CHANGED,
+            before,
+            None,
+            before.semantic_revision,
+            None,
+            SemanticState.REMOVED,
+            descriptor.scope,
+        )
+    ]
+    changed.extend(
+        _changed(
+            successor.id,
+            ChangedPolicyKind.SPLIT_SUCCESSOR,
+            ChangeClassification.SEMANTICALLY_CHANGED,
+            None,
+            successor,
+            None,
+            1,
+            SemanticState.PROPOSED,
+            descriptor.scope,
+        )
+        for successor in successors
+    )
+    accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[descriptor.kind.value]
+    return ClassifiedChange(
+        descriptor,
+        tuple(changed),
+        GraphSeedSelection(
+            (predecessor_id,),
+            accepted_groups,
+            expected_successors,
+            proposed_groups,
+        ),
+    )
+
+
+def _merge(
+    accepted: PolicyUnitCorpus,
+    proposed: PolicyUnitCorpus,
+    descriptor: ChangeDescriptor,
+    proposals: dict[str, SemanticProposal],
+) -> ClassifiedChange:
+    if (
+        len(descriptor.accepted_ids) < 2
+        or len(set(descriptor.accepted_ids)) != len(descriptor.accepted_ids)
+        or len(descriptor.proposed_ids) != 1
+    ):
+        raise _shape_error(ChangeKind.MERGE)
+    successor_id = descriptor.proposed_ids[0]
+    if successor_id in descriptor.accepted_ids:
+        raise _shape_error(ChangeKind.MERGE)
+    predecessor_ids = tuple(sorted(descriptor.accepted_ids))
+    predecessors = tuple(
+        _active(accepted, policy_id, "accepted") for policy_id in predecessor_ids
+    )
+    for predecessor in predecessors:
+        _module(descriptor.accepted_module, predecessor.module, "accepted_module")
+        if predecessor.id in proposals:
+            raise _error(
+                "CHANGE.SEMANTIC_PROPOSAL",
+                "a merge predecessor cannot have proposed semantic state",
+                observed=predecessor.id,
+            )
+        tombstone = _retired(proposed, predecessor.id, predecessor)
+        if tombstone.successors != (successor_id,):
+            raise _error(
+                "CHANGE.SUCCESSOR_MISMATCH",
+                "each merge tombstone must name exactly the merged successor",
+                observed=predecessor.id,
+            )
+    if accepted.resolve(successor_id) is not None:
+        raise _error(
+            "CHANGE.ADDED_ID_EXISTS",
+            "a merge successor identity must be absent from accepted authority",
+            observed=successor_id,
+        )
+    successor = _active(proposed, successor_id, "proposed")
+    _module(descriptor.proposed_module, successor.module, "proposed_module")
+    if tuple(sorted(successor.predecessors)) != predecessor_ids:
+        raise _error(
+            "CHANGE.PREDECESSOR_MISMATCH",
+            "merge successor predecessors must equal accepted policy identities",
+            observed=successor_id,
+        )
+    _initial_semantic_proposal(successor, proposals.get(successor_id))
+
+    changed = [
+        _changed(
+            predecessor.id,
+            ChangedPolicyKind.MERGE_PREDECESSOR,
+            ChangeClassification.SEMANTICALLY_CHANGED,
+            predecessor,
+            None,
+            predecessor.semantic_revision,
+            None,
+            SemanticState.REMOVED,
+            descriptor.scope,
+        )
+        for predecessor in predecessors
+    ]
+    changed.append(
+        _changed(
+            successor.id,
+            ChangedPolicyKind.MERGE_SUCCESSOR,
+            ChangeClassification.SEMANTICALLY_CHANGED,
+            None,
+            successor,
+            None,
+            1,
+            SemanticState.PROPOSED,
+            descriptor.scope,
+        )
+    )
+    accepted_groups, proposed_groups = CHANGE_GRAPH_GROUPS[descriptor.kind.value]
+    return ClassifiedChange(
+        descriptor,
+        tuple(changed),
+        GraphSeedSelection(
+            predecessor_ids,
+            accepted_groups,
+            (successor_id,),
+            proposed_groups,
+        ),
     )
 
 
@@ -435,12 +716,83 @@ def _semantic_overlay(
         )
 
 
+def _classify_existing(
+    accepted: PolicyUnit,
+    proposed: PolicyUnit,
+    semantic: SemanticProposal | None,
+) -> tuple[ChangeClassification, SemanticState, int | None]:
+    if semantic is not None:
+        _semantic_overlay(semantic, accepted.semantic_revision, proposed)
+        return (
+            ChangeClassification.SEMANTICALLY_CHANGED,
+            SemanticState.PROPOSED,
+            semantic.proposed_semantic_revision,
+        )
+    if accepted.representation_digest == proposed.representation_digest:
+        return (
+            ChangeClassification.UNCHANGED,
+            SemanticState.ACCEPTED_UNCHANGED,
+            accepted.semantic_revision,
+        )
+    if accepted.structural_digest == proposed.structural_digest:
+        return (
+            ChangeClassification.REPRESENTATION_ONLY_CANDIDATE,
+            SemanticState.ACCEPTED_UNCHANGED,
+            accepted.semantic_revision,
+        )
+    return (
+        ChangeClassification.POSSIBLY_SEMANTICALLY_CHANGED,
+        SemanticState.UNRESOLVED,
+        None,
+    )
+
+
+def _initial_semantic_proposal(
+    policy: PolicyUnit,
+    proposal: SemanticProposal | None,
+) -> None:
+    if proposal is None:
+        raise _error(
+            "CHANGE.SEMANTIC_PROPOSAL_REQUIRED",
+            "a split or merge successor requires proposed semantic state",
+            observed=policy.id,
+        )
+    _semantic_overlay(proposal, None, policy)
+    if policy.semantic_revision != 1 or proposal.proposed_semantic_revision != 1:
+        raise _error(
+            "CHANGE.INITIAL_REVISION",
+            "a split or merge successor starts at proposed semantic revision 1",
+            observed=policy.id,
+        )
+
+
 def _active(corpus: PolicyUnitCorpus, policy_id: str, state: str) -> PolicyUnit:
     value = corpus.resolve(policy_id)
     if not isinstance(value, PolicyUnit) or value.id != policy_id:
         raise _error(
             "CHANGE.POLICY_UNAVAILABLE",
             f"policy must be active in the {state} corpus",
+            observed=policy_id,
+        )
+    return value
+
+
+def _retired(
+    corpus: PolicyUnitCorpus,
+    policy_id: str,
+    accepted: PolicyUnit,
+) -> PolicyUnitTombstone:
+    value = corpus.resolve(policy_id)
+    if not isinstance(value, PolicyUnitTombstone):
+        raise _error(
+            "CHANGE.TOMBSTONE_REQUIRED",
+            "a split or merge predecessor requires a permanent proposed tombstone",
+            observed=policy_id,
+        )
+    if value.retired_semantic_revision != accepted.semantic_revision:
+        raise _error(
+            "CHANGE.RETIRED_REVISION",
+            "the tombstone must bind the accepted semantic revision",
             observed=policy_id,
         )
     return value
@@ -467,7 +819,7 @@ def _shape_error(kind: ChangeKind) -> AnalysisError:
 
 def _changed(
     policy_id: str,
-    kind: ChangeKind,
+    kind: ChangedPolicyKind,
     classification: ChangeClassification,
     accepted: PolicyUnit | None,
     proposed: PolicyUnit | None,

@@ -2,10 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 3 semantic impact selection and coverage
+**Current phase:** Milestone 4 packets, agent resolution, and A1 acceptance
 
-**Next slice:** implement move, split, and merge classification, graph seeds,
-and exact impact-selection fixtures
+**Next slice:** implement immutable packets, stable obligation identities,
+typed questions and submissions, required evidence, and state-derived next
+operations
 
 **Acceptance status:** `pending`
 
@@ -435,7 +436,7 @@ without claiming to judge arbitrary meaning.
 
 - [x] Implement deterministic change classification and the accepted seed and
   obligation rules for modification, addition, and removal.
-- [ ] Implement deterministic change classification and the accepted seed and
+- [x] Implement deterministic change classification and the accepted seed and
   obligation rules for move, split, and merge.
 - [x] Traverse the union of accepted and proposed selected graph groups and
   retain exact traces and provenance.
@@ -492,7 +493,7 @@ invalid outcome; modification/addition/removal pilot selection and
 move/split/merge fixtures select exact expected identities, groups, scopes, and
 obligations; graph-engine tests remain unchanged and pass.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 4: Packets, Agent Resolution, And A1 Acceptance
 
@@ -542,7 +543,7 @@ and cross-snapshot cases fail with the required typed result; schema drift,
 serialization, package, verifier, graph, declarative, freshness, link, and plan
 checks pass from one clean recorded tree.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ## Blockers
 

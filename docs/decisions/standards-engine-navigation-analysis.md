@@ -397,6 +397,18 @@ would hide whether `Requires` or `Specializes` selected an obligation. An edge
 present in several selected groups remains one edge with all selected
 provenance; group membership does not duplicate it.
 
+Lifecycle classification preserves identity rather than inferring it from
+content. A move retains one canonical policy ID and its accepted semantic
+revision; a same-module move changes only the locator, while a cross-module
+move additionally seeds the former and proposed owning modules for dependency
+context. A split retires exactly one predecessor under a permanent tombstone
+and creates at least two revision-1 successors that reciprocally identify that
+predecessor. A merge retires at least two predecessors whose tombstones point
+to exactly one revision-1 successor carrying the complete predecessor set.
+Every successor requires an exact proposed semantic overlay. Accepted and
+proposed lifecycle seeds are traversed independently and then unioned, so a
+removed predecessor or newly added successor cannot hide a consumer.
+
 Changed normative content outside exactly one valid policy-unit locator creates
 a mandatory `unmapped-normative-change` obligation. Missing edges or absent
 audit coverage cannot be interpreted as no impact.

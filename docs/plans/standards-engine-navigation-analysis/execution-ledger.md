@@ -1,5 +1,25 @@
 # Standards Engine Navigation And Analysis Execution Ledger
 
+## 2026-08-23: Milestone 3 Lifecycle Impact Selection
+
+- Implemented move, split, and merge as distinct lifecycle classifications
+  rather than approximating them as additions, removals, or modifications.
+- A move preserves canonical identity and accepted semantic revision. Same-module
+  moves select policy impact; cross-module moves additionally select the old
+  and new module dependency context.
+- A split requires one exact predecessor tombstone and at least two new
+  revision-1 successors with reciprocal lifecycle declarations. A merge
+  requires the corresponding exact many-to-one lifecycle authority.
+- Accepted predecessors and proposed successors are independent generic-graph
+  seeds whose traversals are unioned deterministically. Tests prove every old
+  and new policy-impact relationship remains visible.
+- Focused package, contract, verifier, and all 218 declarative suites passed.
+  The complete mixed checkpoint is recorded in the
+  [Milestone 3 acceptance](reports/milestone-3-lifecycle-impact-selection.md).
+- Milestone 3 is accepted. Milestone 4 becomes current with one next slice:
+  immutable packets, stable obligation identities, typed submissions and
+  questions, required evidence, and state-derived next operations.
+
 ## 2026-08-23: Milestone 3 Empty-Impact Coverage Gate
 
 - Added a deterministic coverage-work projection over changed target policy

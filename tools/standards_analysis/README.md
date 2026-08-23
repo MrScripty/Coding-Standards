@@ -11,6 +11,8 @@ Current implemented foundation:
 - canonical JSON and domain-separated identities;
 - clean-Git and deterministic manifest snapshots;
 - metadata-owned policy-unit corpus consumption;
+- deterministic modification, addition, removal, move, split, and merge
+  classification with exact accepted/proposed graph seeds;
 - mandatory whole-artifact obligations for unmapped normative changes;
 - three-valued accepted/proposed impact applicability with exact fact-resolution
   work and conservative whole-artifact scope for unknown candidates;

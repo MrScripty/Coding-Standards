@@ -13,6 +13,7 @@ from tools.standards_analysis.standards_analysis import (
     ChangeClassification,
     ChangeDescriptor,
     ChangeKind,
+    ChangedPolicyKind,
     ReviewScope,
     SemanticProposal,
     SemanticState,
@@ -95,8 +96,8 @@ class ChangeClassificationTest(unittest.TestCase):
     def test_implemented_graph_group_projection_matches_canonical_schema(self) -> None:
         projected = SCHEMA["x-standards-engine-contract"]["impact_graph_groups"]
         for kind, (accepted, proposed) in CHANGE_GRAPH_GROUPS.items():
-            self.assertEqual(list(accepted), projected[kind.value]["accepted"])
-            self.assertEqual(list(proposed), projected[kind.value]["proposed"])
+            self.assertEqual(list(accepted), projected[kind]["accepted"])
+            self.assertEqual(list(proposed), projected[kind]["proposed"])
 
     def test_semantic_modification_binds_overlay_and_exact_graph_groups(self) -> None:
         before = unit()
@@ -354,16 +355,206 @@ class ChangeClassificationTest(unittest.TestCase):
             )
         self.assertEqual(caught.exception.failure.code, "CHANGE.ORPHAN_SEMANTIC_PROPOSAL")
 
-    def test_lifecycle_change_kinds_remain_explicitly_unavailable(self) -> None:
+    def test_same_and_cross_module_moves_select_exact_context(self) -> None:
+        before = unit()
+        same_module = unit(heading=("Moved Policy",))
+        cross_module = unit(module="workflow.destination", heading=("Moved Policy",))
+
+        same = classify_changes(
+            corpus(before),
+            corpus(same_module),
+            (descriptor(ChangeKind.MOVE, (before.id,), (before.id,)),),
+        )[0]
+        cross = classify_changes(
+            corpus(before),
+            corpus(cross_module),
+            (
+                descriptor(
+                    ChangeKind.MOVE,
+                    (before.id,),
+                    (before.id,),
+                    accepted_module=before.module,
+                    proposed_module=cross_module.module,
+                ),
+            ),
+        )[0]
+
+        self.assertEqual(same.changed_units[0].change_kind, ChangedPolicyKind.MOVE)
+        self.assertEqual(same.graph.accepted_seeds, (before.id,))
+        self.assertEqual(same.graph.accepted_groups, (POLICY_IMPACT,))
+        self.assertEqual(
+            cross.graph.accepted_seeds,
+            tuple(sorted((before.id, before.module))),
+        )
+        self.assertEqual(
+            cross.graph.proposed_seeds,
+            tuple(sorted((before.id, cross_module.module))),
+        )
+        self.assertEqual(
+            cross.graph.accepted_groups,
+            (POLICY_IMPACT, STANDARDS_REQUIRES, STANDARDS_SPECIALIZES),
+        )
+        validate(
+            SCHEMA,
+            SCHEMA["$defs"]["ChangedPolicyUnit"],
+            cross.changed_units[0].as_contract(),
+            "$moved_unit",
+        )
+
+    def test_split_retires_predecessor_and_proposes_exact_successors(self) -> None:
+        before = unit("workflow.test.combined")
+        first = unit(
+            "workflow.test.first",
+            revision=1,
+            heading=("First",),
+            predecessors=(before.id,),
+        )
+        second = unit(
+            "workflow.test.second",
+            revision=1,
+            heading=("Second",),
+            predecessors=(before.id,),
+        )
+        tombstone = PolicyUnitTombstone(
+            before.id,
+            before.semantic_revision,
+            (first.id, second.id),
+            "review.split",
+            "units.toml",
+        )
+
+        result = classify_changes(
+            corpus(before),
+            corpus(first, second, tombstones=(tombstone,)),
+            (
+                descriptor(
+                    ChangeKind.SPLIT,
+                    (before.id,),
+                    (first.id, second.id),
+                    scope=WHOLE,
+                ),
+            ),
+            (
+                SemanticProposal(first.id, None, 1, "Split first policy.", first.structural_digest),
+                SemanticProposal(second.id, None, 1, "Split second policy.", second.structural_digest),
+            ),
+        )[0]
+
+        self.assertEqual(
+            [item.change_kind for item in result.changed_units],
+            [
+                ChangedPolicyKind.SPLIT_PREDECESSOR,
+                ChangedPolicyKind.SPLIT_SUCCESSOR,
+                ChangedPolicyKind.SPLIT_SUCCESSOR,
+            ],
+        )
+        self.assertEqual(result.graph.accepted_seeds, (before.id,))
+        self.assertEqual(result.graph.proposed_seeds, (first.id, second.id))
+        self.assertTrue(
+            all(
+                item.classification is ChangeClassification.SEMANTICALLY_CHANGED
+                for item in result.changed_units
+            )
+        )
+        for item in result.changed_units:
+            validate(
+                SCHEMA,
+                SCHEMA["$defs"]["ChangedPolicyUnit"],
+                item.as_contract(),
+                "$split_unit",
+            )
+
+    def test_merge_retires_predecessors_and_proposes_exact_successor(self) -> None:
+        first = unit("workflow.test.first")
+        second = unit("workflow.test.second", heading=("Second",))
+        merged = unit(
+            "workflow.test.merged",
+            revision=1,
+            heading=("Merged",),
+            predecessors=(first.id, second.id),
+        )
+        tombstones = (
+            PolicyUnitTombstone(first.id, first.semantic_revision, (merged.id,), "review.merge", "units.toml"),
+            PolicyUnitTombstone(second.id, second.semantic_revision, (merged.id,), "review.merge", "units.toml"),
+        )
+
+        result = classify_changes(
+            corpus(first, second),
+            corpus(merged, tombstones=tombstones),
+            (
+                descriptor(
+                    ChangeKind.MERGE,
+                    (first.id, second.id),
+                    (merged.id,),
+                    scope=WHOLE,
+                ),
+            ),
+            (
+                SemanticProposal(merged.id, None, 1, "Merge policy meaning.", merged.structural_digest),
+            ),
+        )[0]
+
+        self.assertEqual(
+            [item.change_kind for item in result.changed_units],
+            [
+                ChangedPolicyKind.MERGE_PREDECESSOR,
+                ChangedPolicyKind.MERGE_PREDECESSOR,
+                ChangedPolicyKind.MERGE_SUCCESSOR,
+            ],
+        )
+        self.assertEqual(result.graph.accepted_seeds, (first.id, second.id))
+        self.assertEqual(result.graph.proposed_seeds, (merged.id,))
+
+    def test_lifecycle_mismatches_are_rejected(self) -> None:
         selected = unit()
-        for kind in (ChangeKind.MOVE, ChangeKind.SPLIT, ChangeKind.MERGE):
-            with self.subTest(kind=kind), self.assertRaises(AnalysisError) as caught:
-                classify_changes(
-                    corpus(selected),
-                    corpus(selected),
-                    (descriptor(kind, (selected.id,), (selected.id,)),),
-                )
-            self.assertEqual(caught.exception.failure.code, "CHANGE.UNSUPPORTED_KIND")
+        with self.assertRaises(AnalysisError) as caught:
+            classify_changes(
+                corpus(selected),
+                corpus(selected),
+                (descriptor(ChangeKind.MOVE, (selected.id,), (selected.id,)),),
+            )
+        self.assertEqual(caught.exception.failure.code, "CHANGE.WRONG_KIND")
+
+        successor = unit(
+            "workflow.test.successor",
+            revision=1,
+            predecessors=("workflow.test.other",),
+        )
+        other = unit(
+            "workflow.test.other-successor",
+            revision=1,
+            heading=("Other",),
+            predecessors=(selected.id,),
+        )
+        tombstone = PolicyUnitTombstone(
+            selected.id,
+            selected.semantic_revision,
+            (successor.id, other.id),
+            "review.split",
+            "units.toml",
+        )
+        with self.assertRaises(AnalysisError) as caught:
+            classify_changes(
+                corpus(selected),
+                corpus(successor, other, tombstones=(tombstone,)),
+                (
+                    descriptor(
+                        ChangeKind.SPLIT,
+                        (selected.id,),
+                        (successor.id, other.id),
+                    ),
+                ),
+                (
+                    SemanticProposal(
+                        other.id,
+                        None,
+                        1,
+                        "Split other policy.",
+                        other.structural_digest,
+                    ),
+                ),
+            )
+        self.assertEqual(caught.exception.failure.code, "CHANGE.PREDECESSOR_MISMATCH")
 
 
 if __name__ == "__main__":

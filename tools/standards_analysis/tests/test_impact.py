@@ -59,18 +59,22 @@ SCHEMA = json.loads(
 
 
 def policy_unit(
+    policy_id: str = POLICY,
     *,
+    module: str = MODULE,
     revision: int = 3,
     representation: str = "sha256:" + "a" * 64,
     structural: str = "sha256:" + "b" * 64,
+    heading: tuple[str, ...] = ("Policy",),
+    predecessors: tuple[str, ...] = (),
 ) -> PolicyUnit:
     return PolicyUnit(
-        POLICY,
-        MODULE,
-        ("Policy",),
+        policy_id,
+        module,
+        heading,
         revision,
-        ("workflow.test.alias",),
-        (),
+        (f"{policy_id}.alias",),
+        predecessors,
         (),
         "module.md",
         "## Policy\n\nText.\n",
@@ -162,7 +166,11 @@ class ImpactSelectionTest(unittest.TestCase):
             for selected in selected_edges
             for endpoint in (selected.source, selected.target)
         }
-        nodes = tuple(sorted(endpoints.union(extra_nodes) - {POLICY}))
+        policy_nodes = {
+            item.id
+            for item in (*policy_corpus.units, *policy_corpus.tombstones)
+        }
+        nodes = tuple(sorted(endpoints.union(extra_nodes) - policy_nodes))
         return EdgeRegistry(
             self.root,
             (
@@ -713,6 +721,159 @@ class ImpactSelectionTest(unittest.TestCase):
                 incompatible,
             )
         self.assertEqual(caught.exception.failure.code, "IMPACT.FACT_SET_INVALID")
+
+    def test_cross_module_move_unions_policy_and_owner_context(self) -> None:
+        before = policy_unit()
+        after = policy_unit(module="workflow.destination", heading=("Moved",))
+        change = classify_changes(
+            corpus(before),
+            corpus(after),
+            (
+                ChangeDescriptor(
+                    ChangeKind.MOVE,
+                    (POLICY,),
+                    (POLICY,),
+                    SCOPE,
+                    MODULE,
+                    after.module,
+                ),
+            ),
+        )[0]
+        accepted = self.registry(
+            corpus(before),
+            (
+                edge("impact.before", POLICY, "consumer.before", "normative-consumer", POLICY_IMPACT),
+                edge("requires.before", MODULE, "core.before", "requires", STANDARDS_REQUIRES),
+            ),
+        )
+        proposed = self.registry(
+            corpus(after),
+            (
+                edge("impact.after", POLICY, "consumer.after", "normative-consumer", POLICY_IMPACT),
+                edge(
+                    "specializes.after",
+                    after.module,
+                    "base.after",
+                    "specializes",
+                    STANDARDS_SPECIALIZES,
+                ),
+            ),
+        )
+
+        result = select_impact(change, accepted, proposed)
+
+        self.assertEqual(
+            [item.edge_id for item in result.candidates],
+            [
+                "impact.after",
+                "impact.before",
+                "requires.before",
+                "specializes.after",
+            ],
+        )
+
+    def test_split_unions_predecessor_and_every_successor_impact(self) -> None:
+        predecessor = policy_unit("workflow.test.combined")
+        first = policy_unit(
+            "workflow.test.first",
+            revision=1,
+            heading=("First",),
+            predecessors=(predecessor.id,),
+        )
+        second = policy_unit(
+            "workflow.test.second",
+            revision=1,
+            heading=("Second",),
+            predecessors=(predecessor.id,),
+        )
+        tombstone = PolicyUnitTombstone(
+            predecessor.id,
+            predecessor.semantic_revision,
+            (first.id, second.id),
+            "review.split",
+            "units.toml",
+        )
+        change = classify_changes(
+            corpus(predecessor),
+            corpus(first, second, tombstones=(tombstone,)),
+            (
+                ChangeDescriptor(
+                    ChangeKind.SPLIT,
+                    (predecessor.id,),
+                    (first.id, second.id),
+                    ReviewScope("whole-artifact"),
+                ),
+            ),
+            (
+                SemanticProposal(first.id, None, 1, "First successor.", first.structural_digest),
+                SemanticProposal(second.id, None, 1, "Second successor.", second.structural_digest),
+            ),
+        )[0]
+        accepted = self.registry(
+            corpus(predecessor),
+            (edge("impact.combined", predecessor.id, "consumer.old", "normative-consumer", POLICY_IMPACT),),
+        )
+        proposed = self.registry(
+            corpus(first, second, tombstones=(tombstone,)),
+            (
+                edge("impact.first", first.id, "consumer.first", "normative-consumer", POLICY_IMPACT),
+                edge("impact.second", second.id, "consumer.second", "normative-consumer", POLICY_IMPACT),
+            ),
+        )
+
+        result = select_impact(change, accepted, proposed)
+
+        self.assertEqual(
+            [item.edge_id for item in result.candidates],
+            ["impact.combined", "impact.first", "impact.second"],
+        )
+
+    def test_merge_unions_every_predecessor_and_successor_impact(self) -> None:
+        first = policy_unit("workflow.test.first")
+        second = policy_unit("workflow.test.second", heading=("Second",))
+        merged = policy_unit(
+            "workflow.test.merged",
+            revision=1,
+            heading=("Merged",),
+            predecessors=(first.id, second.id),
+        )
+        tombstones = (
+            PolicyUnitTombstone(first.id, first.semantic_revision, (merged.id,), "review.merge", "units.toml"),
+            PolicyUnitTombstone(second.id, second.semantic_revision, (merged.id,), "review.merge", "units.toml"),
+        )
+        change = classify_changes(
+            corpus(first, second),
+            corpus(merged, tombstones=tombstones),
+            (
+                ChangeDescriptor(
+                    ChangeKind.MERGE,
+                    (first.id, second.id),
+                    (merged.id,),
+                    ReviewScope("whole-artifact"),
+                ),
+            ),
+            (
+                SemanticProposal(merged.id, None, 1, "Merged successor.", merged.structural_digest),
+            ),
+        )[0]
+        accepted = self.registry(
+            corpus(first, second),
+            (
+                edge("impact.first", first.id, "consumer.first", "normative-consumer", POLICY_IMPACT),
+                edge("impact.second", second.id, "consumer.second", "normative-consumer", POLICY_IMPACT),
+            ),
+        )
+        proposed = self.registry(
+            corpus(merged, tombstones=tombstones),
+            (edge("impact.merged", merged.id, "consumer.merged", "normative-consumer", POLICY_IMPACT),),
+        )
+
+        result = select_impact(change, accepted, proposed)
+
+        self.assertEqual(
+            [item.edge_id for item in result.candidates],
+            ["impact.first", "impact.merged", "impact.second"],
+        )
 
 
 if __name__ == "__main__":
