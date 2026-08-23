@@ -9,7 +9,10 @@ from tools.standards_metadata.standards_metadata import (
 )
 
 from ..diagnostics import Diagnostic, EngineError
-from ..graph_adapters import METADATA_REQUIRES, metadata_dependency_registry
+from tools.standards_graph.standards_graph import (
+    METADATA_REQUIRES,
+    metadata_dependency_registry,
+)
 from ..model import CheckContext
 from .table import read_table_rows
 

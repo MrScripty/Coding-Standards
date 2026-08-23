@@ -15,7 +15,7 @@ from tools.standards_metadata.standards_metadata import load_module_metadata
 
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
-from standards_verifier.graph_adapters import (
+from tools.standards_graph.standards_graph import (
     METADATA_DEPENDENCIES,
     metadata_dependency_registry,
 )

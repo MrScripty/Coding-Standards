@@ -1,0 +1,9 @@
+[project]
+name = "standards-graph"
+version = "0.1.0"
+description = "Canonical standards graph adapters"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.unittest]
+start-directory = "tests"

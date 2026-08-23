@@ -151,6 +151,49 @@
   snapshot-bound `read`, `related`, and `inspect`; Router projection and impact
   analysis remain outside that slice.
 
+## 2026-08-22: Milestone 2 Standards-Graph Ownership Replan
+
+- Pre-slice inspection found that `standards-requires` and
+  `standards-specializes` are projected only by verifier-owned
+  `graph_adapters.py` even though both the verifier and A1 navigation now need
+  them.
+- Importing the verifier from the Standards Engine would reverse the accepted
+  dependency direction. Copying the projection would create two authorities
+  for edge identity, grouping, direction, and traversal.
+- Accepted a small neutral `standards_graph` module as the shared seam. It owns
+  only canonical metadata-to-generic-edge projection and repository standards
+  graph composition; generic traversal remains in `graph_engine`, canonical
+  facts remain in `standards_metadata`, and suite dependency projection remains
+  in `standards_verifier`.
+- Expanded the Milestone 2 write set only to the current metadata-graph
+  consumers and their tests. The cutover must remove verifier ownership in one
+  coherent change without a wrapper, re-export, duplicate provider, or fallback.
+- Router projection, impact analysis, suite dependency ownership, graph schema,
+  and canonical metadata are unchanged. No concurrent verifier package is
+  admitted and the replan base is clean commit `d6813ba2c41b7f0ada0b38c4ea9ab533c10c65a9`.
+- Detailed alternatives and acceptance conditions are recorded in
+  [the ownership replan](reports/milestone-2-standards-graph-ownership-replan.md).
+
+## 2026-08-22: Milestone 2 Neutral Standards-Graph Cutover
+
+- Added `standards_graph` as the single adapter from canonical module metadata
+  and explicit standards relationship manifests to the generic graph engine.
+- Pre-cutover comparison proved exact equality for 58 nodes, 178 edges, and
+  three named groups, including stable source, provenance, aliases, edge IDs,
+  relation names, group memberships, traversal policy, and metadata.
+- Removed metadata graph constants and provider implementation from
+  `standards_verifier.graph_adapters`. Repository composition, metadata route
+  checks, and tests now import the neutral owner; no wrapper or re-export
+  remains. Suite dependency projection remains verifier-owned.
+- The neutral navigation registry composes only canonical metadata relations
+  and the explicitly registered policy-impact manifest. It does not scan,
+  infer relationships, or load suite execution dependencies.
+- Two neutral graph tests, 34 focused consumer tests, all 381 verifier tests,
+  35 generic graph tests, seven metadata tests, all 218 declarative suites,
+  plan structure, query integration, and `git diff --check` passed.
+- The ownership cutover is accepted. The sole next slice is snapshot-bound
+  typed `read`, `related`, and `inspect` over this neutral seam.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

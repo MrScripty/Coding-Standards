@@ -12,7 +12,7 @@ sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(ENGINE_ROOT))
 
 from tools.standards_metadata.standards_metadata import load_canonical_module_corpus
-from standards_verifier.graph_adapters import (
+from tools.standards_graph.standards_graph import (
     METADATA_REQUIRES,
     METADATA_SPECIALIZES,
 )

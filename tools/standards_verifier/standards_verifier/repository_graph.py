@@ -8,10 +8,11 @@ from tools.standards_metadata.standards_metadata import (
     MetadataError,
     load_canonical_module_corpus,
 )
+from tools.standards_graph.standards_graph import metadata_dependency_source
 
 from .config import load_registry as load_suite_registry
 from .diagnostics import EngineError
-from .graph_adapters import metadata_dependency_source, suite_dependency_source
+from .graph_adapters import suite_dependency_source
 
 
 SUITE_REGISTRY = "evaluation/standards-effectiveness/suite-registry.toml"

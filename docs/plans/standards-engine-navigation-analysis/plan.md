@@ -5,8 +5,8 @@
 **Current phase:** Milestone 2 snapshot and policy-unit foundation
 
 **Next slice:** implement snapshot-bound typed `read`, `related`, and `inspect`
-queries over canonical metadata and policy-unit authority without adding Router
-projection or impact analysis
+over the accepted `standards_graph` seam without adding Router projection or
+impact analysis
 
 **Acceptance status:** `pending`
 
@@ -321,8 +321,14 @@ requests without repository paths.
 **Allowed write set:**
 
 - `tools/standards_metadata/**`
+- `tools/standards_graph/**`
 - `tools/standards_analysis/**`
 - `tools/standards_engine/**`
+- `tools/standards_verifier/standards_verifier/graph_adapters.py`
+- `tools/standards_verifier/standards_verifier/repository_graph.py`
+- `tools/standards_verifier/standards_verifier/checks/metadata_route.py`
+- `tools/standards_verifier/tests/test_metadata.py`
+- `tools/standards_verifier/tests/test_repository_graph.py`
 - `STANDARDS-ROUTER.md`
 - `evaluation/standards-effectiveness/fixtures/routing/**`
 - `evaluation/standards-effectiveness/suites/s1-routing.toml`
@@ -458,7 +464,8 @@ checks pass from one clean recorded tree.
 
 ## Blockers
 
-- `none` for the current Milestone 2 snapshot and policy-unit foundation slice.
+- `none` for the current Milestone 2 standards-graph ownership and navigation
+  slice.
 
 Runtime implementation is admitted from the recorded implementation base and
 remains bounded by the active milestone, exact next slice, allowed write set,
