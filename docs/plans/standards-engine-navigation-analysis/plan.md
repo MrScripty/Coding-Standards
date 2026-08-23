@@ -4,9 +4,8 @@
 
 **Current phase:** Milestone 4 packets, agent resolution, and A1 acceptance
 
-**Next slice:** implement immutable packets, stable obligation identities,
-typed questions and submissions, required evidence, and state-derived next
-operations
+**Next slice:** implement bounded reading plans with deterministic dependency
+and scope ordering
 
 **Acceptance status:** `pending`
 
@@ -512,7 +511,7 @@ rendering, then accept the objective from one exact repository state.
 
 **Tasks:**
 
-- [ ] Implement immutable packets, stable obligation identities, typed
+- [x] Implement immutable packets, stable obligation identities, typed
   questions and submissions, required evidence, and state-derived next
   operations.
 - [ ] Implement bounded reading plans with deterministic dependency and scope

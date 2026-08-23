@@ -19,7 +19,9 @@ Current implemented foundation:
 - independent content-fingerprinted policy-consumer horizons;
 - mandatory audit-coverage work for changed policies without current
   certificates, including policies with no declared consumers; and
-- two-identity coverage requirements, attestations, and reusable certificates.
+- two-identity coverage requirements, attestations, and reusable certificates;
+- immutable snapshot-bound pending packets, typed submissions and evidence,
+  stable obligation handles, and state-derived next operations.
 
 Run tests:
 

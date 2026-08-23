@@ -98,6 +98,19 @@ class ChangeDescriptor:
     accepted_module: str | None = None
     proposed_module: str | None = None
 
+    def as_contract(self) -> dict[str, object]:
+        value: dict[str, object] = {
+            "kind": self.kind.value,
+            "accepted_ids": list(self.accepted_ids),
+            "proposed_ids": list(self.proposed_ids),
+            "scope": self.scope.as_contract(),
+        }
+        if self.accepted_module is not None:
+            value["accepted_module"] = self.accepted_module
+        if self.proposed_module is not None:
+            value["proposed_module"] = self.proposed_module
+        return value
+
 
 @dataclass(frozen=True, slots=True)
 class SemanticProposal:

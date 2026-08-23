@@ -1,5 +1,26 @@
 # Standards Engine Navigation And Analysis Execution Ledger
 
+## 2026-08-23: Milestone 4 Immutable Packet Foundation
+
+- Added one analysis-owned packet Module over already-derived changes,
+  obligations, questions, and reading entries. It performs no repository
+  loading, graph traversal, or verifier execution.
+- Packet identity follows the canonical schema projection exactly: complete
+  base/proposed snapshot handles and semantic work enter identity, while
+  summaries, derived next operations, and implementation-only versions do not.
+- Added typed fact-answer, consumer-disposition, impact-disposition, and
+  coverage-attestation submissions. Review submissions require immutable,
+  unique evidence references; their semantic validity remains for iterative
+  resolution.
+- Next operations derive only from required questions and obligations. Resolved
+  or blocked work cannot advertise a resolution operation, and duplicate work
+  identities fail packet construction.
+- Verification passed 64 analysis tests, 15 Standards Engine tests, 17 metadata
+  tests, 7 policy-impact tests, 35 graph tests, 380 verifier tests, the public
+  contract validator, all 218 declarative suites, and `git diff --check`.
+- The sole next slice is bounded reading-plan construction and deterministic
+  dependency/scope ordering.
+
 ## 2026-08-23: Milestone 3 Lifecycle Impact Selection
 
 - Implemented move, split, and merge as distinct lifecycle classifications
