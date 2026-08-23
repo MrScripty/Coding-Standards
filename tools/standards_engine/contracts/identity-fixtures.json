@@ -11,7 +11,7 @@
       "name": "pending-packet",
       "definition": "PendingPacket",
       "example": "pending-packet",
-      "expected": "packet:sha256:567aa54958e2360c64a56ccbb5ab7242cd8330d84710aa65e846c1cc69493533"
+      "expected": "packet:sha256:2254b7cb2797c5ca233597f1d7582d7591922d46ca62d3dcd9d30335f2931ea1"
     },
     {
       "name": "consumer-obligation",
@@ -24,7 +24,7 @@
       "name": "completed-analysis-report",
       "definition": "CompletedAnalysisReport",
       "example": "completed-analysis-report",
-      "expected": "analysis-report:sha256:c2e30e334b85451a288a15840c3e1b3c376167d6ab30dc35ee1ed61982daf35f"
+      "expected": "analysis-report:sha256:615fb0323a2d6fe0832916903b31922e4470fe87f65ed2d678ac7e1660056003"
     },
     {
       "name": "clean-git-snapshot",
@@ -39,10 +39,10 @@
       "expected": "snapshot:sha256:114ca0ebd0661958c67ff2a59a98b5447419b3e1fbc717542f4d465670945e52"
     },
     {
-      "name": "consumer-audit-certificate",
-      "definition": "ConsumerAuditCertificate",
-      "example": "consumer-audit-certificate",
-      "expected": "certificate:sha256:9fd03f8693f6997015e42e87414ac8c7704e8210296cde4d0b61698091bc7f88"
+      "name": "consumer-coverage-certificate",
+      "definition": "ConsumerCoverageCertificate",
+      "example": "consumer-coverage-certificate",
+      "expected": "certificate:sha256:1088d2f78d220193123c0638cf3fc02f0b4d9e87b8089de71f7b31450e8c4d3c"
     }
   ]
 }

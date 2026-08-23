@@ -43,10 +43,6 @@ class PolicyImpactCompilerTest(unittest.TestCase):
         self.assertEqual(len(compiled.semantics), 126)
         self.assertEqual(compiled.graph.nodes, ())
         self.assertEqual(compiled.graph.groups, ())
-        self.assertEqual(
-            compiled.audited_owners,
-            {"workflow.commit", "workflow.planning"},
-        )
         edge_id = (
             "policy-impact:v1/workflow.planning.plan-admission/prompt-projection/"
             "prompts%2Fimplement-plan.md"
@@ -64,10 +60,6 @@ class PolicyImpactCompilerTest(unittest.TestCase):
         self.assertEqual(
             semantics.evidence_owner,
             "suite:plan-implementation-entrypoint",
-        )
-        self.assertEqual(
-            semantics.audit_declaration,
-            "audit.workflow.planning.policy-impact.v1",
         )
 
     def test_compiled_edges_join_independent_nodes_groups_and_module_aliases(self) -> None:
@@ -207,29 +199,7 @@ class PolicyImpactCompilerTest(unittest.TestCase):
                 compile_policy_impact(root, corpus, "registry.toml")
         self.assertEqual(caught.exception.failure.code, "POLICY_IMPACT.CROSS_OWNER_SOURCE")
 
-    def test_ambiguous_audit_and_catalog_edges_reject(self) -> None:
-        with self.fixture(self.relationships(self.relationship())) as (root, modules):
-            audits = root / "audits.toml"
-            audits.write_text(
-                audits.read_text(encoding="utf-8")
-                + textwrap.dedent(
-                    """
-
-                    [[audits]]
-                    id = "audit.second"
-                    owner = "workflow.planning"
-                    relationship_kinds = ["prompt-projection"]
-                    scope = "whole-owner"
-                    horizon = "v1"
-                    evidence = "evidence"
-                    """
-                ),
-                encoding="utf-8",
-            )
-            with self.assertRaises(PolicyImpactError) as caught:
-                compile_policy_impact(root, modules, "registry.toml")
-            self.assertEqual(caught.exception.failure.code, "POLICY_IMPACT.AUDIT")
-
+    def test_catalog_edges_reject(self) -> None:
         with self.fixture(self.relationships(self.relationship())) as (root, modules):
             catalog = root / "catalog.toml"
             catalog.write_text(
@@ -353,7 +323,6 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             source_id = "standards.policy-impact"
             node_catalog = "catalog.toml"
             fact_catalog = "facts.toml"
-            audit_catalog = "audits.toml"
             declaration_sources = ["declarations.toml"]
             """,
         )
@@ -391,21 +360,6 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             root,
             "facts.toml",
             'schema_version = 1\nid = "policy-impact.applicability"\nfacts = []\n',
-        )
-        self.write(
-            root,
-            "audits.toml",
-            """
-            schema_version = 1
-
-            [[audits]]
-            id = "audit.planning"
-            owner = "workflow.planning"
-            relationship_kinds = ["prompt-projection"]
-            scope = "whole-owner"
-            horizon = "v1"
-            evidence = "evidence"
-            """,
         )
         self.write(root, "declarations.toml", declarations)
         module = ModuleMetadata(

@@ -4,6 +4,7 @@ import tempfile
 import textwrap
 import tomllib
 import unittest
+from dataclasses import replace
 from pathlib import Path
 
 
@@ -15,6 +16,14 @@ sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(ENGINE_ROOT))
 
 from tools.graph_engine.graph_engine import EdgeRegistry
+from tools.standards_analysis.standards_analysis import compile_coverage
+from tools.standards_metadata.standards_metadata import (
+    load_canonical_standards_corpus,
+)
+from tools.standards_policy_impact.standards_policy_impact import (
+    PolicyImpactError,
+    compile_policy_impact,
+)
 
 from standards_verifier.config import load_registry
 from standards_verifier.diagnostics import EngineError
@@ -149,28 +158,37 @@ class PolicyImpactTest(unittest.TestCase):
             'schema_version = 1\nid = "policy-impact.applicability"\nfacts = []\n',
         )
         self.write(
-            "audits.toml",
+            "evaluation/standards-effectiveness/suite-registry.toml",
             """
             schema_version = 1
 
-            [[audits]]
-            id = "audit.planning"
-            owner = "workflow.planning"
-            relationship_kinds = [
-              "normative-consumer",
-              "router-projection",
-              "prompt-projection",
-              "template-projection",
-              "reference-projection",
-              "documentation-projection",
-              "fixture-projection",
-              "enforcement-suite-projection",
-            ]
-            scope = "whole-owner"
-            horizon = "fixture"
-            evidence = "fixture"
+            [[suites]]
+            id = "evidence"
+            path = "suites/evidence.toml"
+            requires = []
             """,
         )
+        self.write(
+            "evaluation/standards-effectiveness/edge-source-registry.toml",
+            "schema_version = 1\nsources = []\n",
+        )
+        self.write(
+            "evaluation/standards-effectiveness/policy-coverage/horizons.toml",
+            """
+            schema_version = 1
+            id = "audit-horizon.policy-impact-consumers"
+            provider = "standards-analysis:policy-impact-consumer-horizon"
+            version = 1
+            suite_registry = "evaluation/standards-effectiveness/suite-registry.toml"
+            edge_source_registry = "evaluation/standards-effectiveness/edge-source-registry.toml"
+            policy_impact_node_catalog = "catalog.toml"
+            """,
+        )
+        self.write(
+            "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml",
+            "schema_version = 1\nsources = []\n",
+        )
+        self.write("coverage-evidence.md", "# Reviewed fixture coverage\n")
 
     @staticmethod
     def relationship(
@@ -194,8 +212,15 @@ class PolicyImpactTest(unittest.TestCase):
 
     def load(self, *relationships: str, owner: str = "workflow.planning"):
         self.write(
+            "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml",
+            "schema_version = 1\nsources = []\n",
+        )
+        self.write(
             "declarations.toml",
-            f'schema_version = 1\nowner = "{owner}"\n' + "".join(relationships),
+            (
+                f'schema_version = 1\nowner = "{owner}"\n'
+                + ("".join(relationships) if relationships else "relationships = []\n")
+            ),
         )
         self.write(
             "registry.toml",
@@ -204,10 +229,35 @@ class PolicyImpactTest(unittest.TestCase):
             source_id = "standards.policy-impact"
             node_catalog = "catalog.toml"
             fact_catalog = "facts.toml"
-            audit_catalog = "audits.toml"
             declaration_sources = ["declarations.toml"]
             """,
         )
+        try:
+            corpus = load_canonical_standards_corpus(self.root)
+            compiled = compile_policy_impact(self.root, corpus, "registry.toml")
+            coverage = compile_coverage(self.root, corpus, compiled)
+        except PolicyImpactError:
+            pass
+        else:
+            requirement = coverage.requirements["workflow.planning.fixture-policy"]
+            self.write(
+                "coverage-attestations.toml",
+                f"""
+                schema_version = 1
+
+                [[attestations]]
+                requirement = "{requirement.handle}"
+                conclusion = "complete"
+                evidence = ["coverage-evidence.md"]
+                explicit_exclusions = []
+                rationale = "Every registered fixture horizon member was reviewed."
+                auditor_provenance = "test:policy-impact"
+                """,
+            )
+            self.write(
+                "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml",
+                'schema_version = 1\nsources = ["coverage-attestations.toml"]\n',
+            )
         return load_policy_impact(self.root, "registry.toml", self.suite_paths)
 
     def test_adapter_queries_compiled_registry_in_deterministic_consumer_order(self) -> None:
@@ -263,7 +313,22 @@ class PolicyImpactTest(unittest.TestCase):
         self.assertEqual(raised.exception.exit_code, 3)
         self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.OWNER_NOT_AUDITED")
 
-    def test_requires_enforcement_edge_for_every_suite_owned_by_audited_owner(self) -> None:
+    def test_successful_empty_impact_requires_current_coverage_certificate(self) -> None:
+        covered = self.load()
+        self.assertEqual(covered.consumers_for("workflow.planning"), ())
+
+        uncovered = replace(
+            covered,
+            coverage=replace(covered.coverage, certificates={}),
+        )
+        with self.assertRaises(EngineError) as raised:
+            uncovered.consumers_for("workflow.planning")
+        self.assertEqual(
+            raised.exception.diagnostic.code,
+            "POLICY_IMPACT.OWNER_NOT_AUDITED",
+        )
+
+    def test_requires_enforcement_edge_for_every_suite_owned_by_covered_owner(self) -> None:
         self.write(
             "suites/evidence.toml",
             'schema_version = 1\nid = "evidence"\nowner = "workflow.planning"\n',

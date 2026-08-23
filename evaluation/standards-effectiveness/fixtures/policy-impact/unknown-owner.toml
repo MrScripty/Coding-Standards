@@ -2,5 +2,4 @@ schema_version = 1
 source_id = "standards.policy-impact"
 node_catalog = "evaluation/standards-effectiveness/policy-impact-node-catalog.toml"
 fact_catalog = "evaluation/standards-effectiveness/policy-impact-facts.toml"
-audit_catalog = "evaluation/standards-effectiveness/policy-consumer-audits.toml"
 declaration_sources = ["evaluation/standards-effectiveness/fixtures/policy-impact/declarations/unknown-owner.toml"]

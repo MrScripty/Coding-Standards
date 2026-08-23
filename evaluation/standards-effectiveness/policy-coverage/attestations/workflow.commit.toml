@@ -1,0 +1,105 @@
+schema_version = 1
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:02506b24d05ecce36a4cb1217ce5cc5f47e03b0c0f7fc99f838a8abe1c7cbf12"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.per-commit-boundary revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:367c20221a989db3f9cb03992a6e48cb506c66bbf051e692dd7bc2f996b3186b"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.isolation-applicability revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:993c1fed8ba3dc20be77876c0cf49bc1bffca6e422ccb3d49c79da3c230a7920"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.branch-context revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:05d3f37a4d0282d4542d4e1e317cb7d5e63fb152e2df9af94e2f08646a78d2fb"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.integration-mechanisms revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:ee669f817245535503b90104a4bb9f79ff56a50bf4382b99a0e62db6fb90a886"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.cherry-pick-lineage revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:10d78f423fda7b3c73b03bd702ed98466337c20b72c2483f4fc3b7aef81d4426"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.terminal-branch-lifecycle revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:710f524f3f61d983a7e61918d9f33ecc76db33e2ac471013084c5939e6abccff"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.worktree-lifecycle revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:240fd1284777bb37bba08f2123da3c7d1996e3cf6f0913ad1a3852afe5f1e38c"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.branch-history-review revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:1ac8023cccc5b7d876953bfd99cf26049a1ad483752258fef606429953889237"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.hook-bypass-authority revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:aa37d21b339fca35af6148df90570df7ae3bde86c6044eac2e81ca6a066dcaf4"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.rewrite-authority revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:789b9cf22352ef05bca06dfaabef89865cd15918cdccb1e5b4f91a9ce3655c83"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.topology revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:0125e82448fd3399b57433ffe26bcef22f8bf423f77b4f7c3f38fc6b6ebb4f90"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.commit-message revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"
+
+[[attestations]]
+requirement = "coverage-requirement:sha256:e17df186d696beadd6184cd32d5f13f84f9c20b61fc1fcca11cbaa8504911074"
+conclusion = "complete"
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+explicit_exclusions = []
+rationale = "The exact workflow.commit.invalid-outcomes revision-1 coverage requirement was reviewed against the registered independent horizon."
+auditor_provenance = "repository-reviewed:commit-policy-unit-baseline"

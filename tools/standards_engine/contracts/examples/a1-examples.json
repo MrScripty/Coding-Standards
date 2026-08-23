@@ -295,7 +295,7 @@
           "analysis_contract_version": 1,
           "packet_schema_version": 1,
           "report_schema_version": 1,
-          "interface_schema_version": 2,
+          "interface_schema_version": 3,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -382,6 +382,13 @@
             "scope": { "kind": "structured", "heading_path": ["Evidence", "Oracle boundaries"] }
           }
         ],
+        "coverage_certificates": [
+          {
+            "kind": "certificate-handle",
+            "id": "certificate:sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "schema_version": 1
+          }
+        ],
         "dispositions": [
           {
             "obligation_id": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
@@ -422,20 +429,21 @@
           }
         ],
         "completion": {
+          "required_coverage_subjects": ["workflow.verification.evidence-oracle-boundary"],
+          "certificate_subjects": ["workflow.verification.evidence-oracle-boundary"],
           "reached_consumer_obligations": ["obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"],
           "disposition_obligations": ["obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"],
           "non_consumer_obligations_resolved": true,
           "questions_resolved": true,
           "applicability_resolved": true,
           "authorization_valid": true,
-          "evidence_valid": true,
-          "audit_coverage_valid": true
+          "evidence_valid": true
         },
         "provenance": {
           "analysis_contract_version": 1,
           "packet_schema_version": 1,
           "report_schema_version": 1,
-          "interface_schema_version": 2,
+          "interface_schema_version": 3,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -546,24 +554,96 @@
       }
     },
     {
-      "name": "audit-declaration",
-      "definition": "AuditDeclaration",
+      "name": "coverage-authority-view",
+      "definition": "CoverageAuthorityView",
       "value": {
-        "kind": "audit-declaration",
-        "id": "audit.workflow.verification.revision-4",
-        "covered_owner": "workflow.verification.evidence-oracle-boundary",
-        "covered_scope": { "kind": "structured", "heading_path": ["Evidence", "Oracle boundaries"] },
-        "relationship_kinds": ["normative-consumer", "documentation-projection"],
-        "horizon_provider": "audit-horizon.canonical-standards",
-        "horizon_provider_version": "1",
-        "expected_semantic_revision": 4,
-        "completed_report": {
-          "kind": "analysis-report-handle",
-          "id": "analysis-report:sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "kind": "coverage-authority-view",
+        "handle": {
+          "kind": "coverage-authority-view-handle",
+          "id": "coverage-view:sha256:4444444444444444444444444444444444444444444444444444444444444444",
           "schema_version": 1
         },
-        "consumer_obligations": ["obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"],
-        "disposition_evidence": [
+        "subject": "workflow.verification.evidence-oracle-boundary",
+        "owner": "workflow.verification",
+        "semantic_revision": 4,
+        "representation_digest": "sha256:1010101010101010101010101010101010101010101010101010101010101010",
+        "structural_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "relationship_kinds": ["documentation-projection"],
+        "relationship_fingerprints": [
+          {
+            "edge": "edge.verification.documentation",
+            "fingerprint": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+          }
+        ],
+        "relationship_kind_contract_version": 1,
+        "relationship_provider_contract_digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+        "applicability_language_version": 1,
+        "applicability_program_digests": ["sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"],
+        "fact_schema_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "horizon": {
+          "id": "audit-horizon.policy-impact-consumers",
+          "provider": "standards-analysis:policy-impact-consumer-horizon",
+          "version": 1,
+          "digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+          "members": [
+            {
+              "id": "repository:workflows/documentation.md",
+              "roles": ["canonical-module"],
+              "fingerprint": "sha256:abababababababababababababababababababababababababababababababab"
+            }
+          ]
+        },
+        "identity_resolution_contract_version": "standards-metadata:v1",
+        "coverage_contract_version": "1",
+        "attestation_contract_version": "1",
+        "authorization_contract_version": "repository-reviewed-attestation:v1",
+        "evidence_provider_contract_version": "repository-content:v1"
+      }
+    },
+    {
+      "name": "coverage-audit-requirement",
+      "definition": "CoverageAuditRequirement",
+      "value": {
+        "kind": "coverage-audit-requirement",
+        "handle": {
+          "kind": "coverage-requirement-handle",
+          "id": "coverage-requirement:sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "schema_version": 1
+        },
+        "coverage_view": {
+          "kind": "coverage-authority-view-handle",
+          "id": "coverage-view:sha256:4444444444444444444444444444444444444444444444444444444444444444",
+          "schema_version": 1
+        },
+        "subject": "workflow.verification.evidence-oracle-boundary",
+        "owner": "workflow.verification",
+        "semantic_revision": 4,
+        "relationship_kinds": ["documentation-projection"],
+        "horizon": "audit-horizon.policy-impact-consumers",
+        "derived_from_snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "name": "coverage-attestation",
+      "definition": "CoverageAttestation",
+      "value": {
+        "kind": "coverage-attestation",
+        "handle": {
+          "kind": "coverage-attestation-handle",
+          "id": "coverage-attestation:sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "schema_version": 1
+        },
+        "requirement": {
+          "kind": "coverage-requirement-handle",
+          "id": "coverage-requirement:sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "schema_version": 1
+        },
+        "conclusion": "complete",
+        "evidence": [
           {
             "id": "review.documentation.oracle-boundary",
             "digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
@@ -572,7 +652,8 @@
         ],
         "explicit_exclusions": [],
         "rationale": "The registered horizon and every reached consumer were reviewed.",
-        "auditor_provenance": "reviewer:standards-owner"
+        "auditor_provenance": "reviewer:standards-owner",
+        "schema_version": 1
       }
     },
     {
@@ -594,7 +675,7 @@
           "analysis_contract_version": 1,
           "packet_schema_version": 1,
           "report_schema_version": 1,
-          "interface_schema_version": 2,
+          "interface_schema_version": 3,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -641,7 +722,7 @@
           "analysis_contract_version": 1,
           "packet_schema_version": 1,
           "report_schema_version": 1,
-          "interface_schema_version": 2,
+          "interface_schema_version": 3,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -653,51 +734,42 @@
       }
     },
     {
-      "name": "consumer-audit-certificate",
-      "definition": "ConsumerAuditCertificate",
+      "name": "consumer-coverage-certificate",
+      "definition": "ConsumerCoverageCertificate",
       "value": {
-        "kind": "consumer-audit-certificate",
+        "kind": "consumer-coverage-certificate",
         "handle": {
           "kind": "certificate-handle",
           "id": "certificate:sha256:3333333333333333333333333333333333333333333333333333333333333333",
           "schema_version": 1
         },
-        "declaration_digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
-        "standards_snapshot": {
-          "kind": "snapshot-handle",
-          "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "coverage_view": {
+          "kind": "coverage-authority-view-handle",
+          "id": "coverage-view:sha256:4444444444444444444444444444444444444444444444444444444444444444",
           "schema_version": 1
         },
-        "corpus_membership_digest": "sha256:abababababababababababababababababababababababababababababababab",
-        "resolved_owners": ["workflow.verification.evidence-oracle-boundary"],
-        "resolved_locations": ["workflows/verification.md"],
-        "horizon_membership": [
-          "workflow.documentation.machine-verifiable-claims",
-          "workflow.verification.evidence-oracle-boundary"
-        ],
-        "horizon_digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
-        "edge_set_digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
-        "applicability_version": 2,
-        "schema_version": 1,
-        "tool_versions": {
-          "analysis_contract_version": 1,
-          "packet_schema_version": 1,
-          "report_schema_version": 1,
-          "interface_schema_version": 2,
-          "applicability_version": 2,
-          "metadata_api_version": "1",
-          "graph_engine_contract_version": "1",
-          "graph_engine_implementation_version": "0.1.0",
-          "analyzer_implementation_version": "0.1.0",
-          "parser_versions": { "markdown": "1", "toml": "python-3.11" },
-          "evidence_provider_contract_versions": { "policy-impact": "1" }
+        "requirement": {
+          "kind": "coverage-requirement-handle",
+          "id": "coverage-requirement:sha256:5555555555555555555555555555555555555555555555555555555555555555",
+          "schema_version": 1
         },
+        "attestation": {
+          "kind": "coverage-attestation-handle",
+          "id": "coverage-attestation:sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "schema_version": 1
+        },
+        "subject": "workflow.verification.evidence-oracle-boundary",
+        "owner": "workflow.verification",
+        "semantic_revision": 4,
+        "horizon_digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
+        "relationship_digest": "sha256:9999999999999999999999999999999999999999999999999999999999999999",
         "evidence_digests": [
           "sha256:1111111111111111111111111111111111111111111111111111111111111111"
         ],
-        "supersedes": null,
+        "coverage_contract_version": "1",
+        "attestation_contract_version": "1",
         "provenance": {
-          "generator": "standards-analysis:consumer-audit-certificate:v1",
+          "generator": "standards-analysis:consumer-coverage-certificate:v1",
           "generated_at": "2026-08-22T12:00:00Z"
         }
       }

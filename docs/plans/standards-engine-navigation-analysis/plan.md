@@ -4,9 +4,8 @@
 
 **Current phase:** Milestone 3 semantic impact selection and coverage
 
-**Next slice:** implement derived coverage requirements, authored attestations,
-generated reusable certificates, and successful-empty-impact enforcement over
-the accepted policy-unit relationship authority
+**Next slice:** generate mandatory `unmapped-normative-change` obligations for
+changed normative content that cannot be resolved to one active policy unit
 
 **Acceptance status:** `pending`
 
@@ -19,8 +18,9 @@ the accepted policy-unit relationship authority
 `5e9c4eb211ee0a67039b0ec11142db9b106243ae`
 
 **Implementation admission:** operation `continue` accepted for Milestone 3
-from the recorded implementation base and the revised applicability-ownership
-re-plan; implementation remains bounded by Milestone 3's write set
+from the recorded implementation base and the accepted Milestone 3 replans
+through the coverage-identity cutover; implementation remains bounded by
+Milestone 3's write set
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -159,10 +159,22 @@ plan or shared-authority proposals can become stale before integration.
   are invalid. Conservative review selection never changes `unknown` to true.
 - Any changed normative content outside exactly one valid policy-unit locator
   creates a mandatory conservative whole-artifact obligation.
+- The complete `AnalysisSnapshot` binds every analysis input, including
+  repository-local attestations. A narrower `CoverageAuthorityView` binds only
+  typed inputs capable of changing consumer discovery. Committing an
+  attestation therefore stales the old packet without changing the requirement
+  it answers.
 - Consumer coverage is bounded by a mechanically derived requirement, an
-  authorized attestation, and a generated certificate over a registered audit
-  horizon. Coverage certificates never own change-specific dispositions. An
-  unaudited empty edge result is not success.
+  authorized attestation, and a generated certificate over an independent
+  registered audit horizon. Coverage certificates never own change-specific
+  dispositions. An unaudited empty edge result is not success.
+- Coverage projection exclusions are based on typed artifact roles, never an
+  ignored directory. Attestations, their source registrations, certificates,
+  packets, reports, timestamps, summaries, and dispositions do not enter the
+  coverage view; relationship authority cannot escape projection by location.
+- Coverage identity binds the target semantic payload and relationship state,
+  not the transient `proposed` or `accepted` label. Promotion of identical
+  reviewed content and relationships preserves applicable coverage.
 - `CompletedAnalysisReport.complete` is derived from exact obligation,
   disposition, question, authorization, evidence, and coverage invariants.
 - Shared schemas, metadata authority, registries, plans, and generated outputs
@@ -200,7 +212,8 @@ plan or shared-authority proposals can become stale before integration.
 | Proposal state | A1 carries proposed semantic state only in `AnalysisRequest.semantic_proposals`; `CompletedAnalysisReport` proves analysis completion but is not apply-eligible. | [Brief A1 proposal state](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#a1-proposal-state) | Proposed state represented as accepted authority |
 | Impact completeness | Change-type adapters select explicit seeds and the accepted/proposed relation union, then use the existing graph engine. Unmapped normative change creates a mandatory obligation. | [Brief impact contract](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#change-type-impact-contract) | Current-graph-only traversal and optional whole-artifact selection |
 | Applicability | The A1 JSON Schema owns serialized shapes. `standards_applicability` owns executable operator semantics, compilation, normalization, type checking, truth tables, unresolved-fact reporting, and domain-separated program identity. Adapters load declarations; callers own questions and diagnostics. | [Applicability ownership replan](reports/milestone-3-applicability-ownership-replan.md) | Analysis-owned evaluator, policy-impact private parsing, Boolean coercion, or verifier-predicate reuse |
-| Coverage authority | Analysis derives an exact coverage requirement; an authorized attestation approves that requirement; a generated reusable certificate binds authority view, policy revision and digests, relationships, applicability, fact schema, horizon, evidence, and tool contracts. Reports alone own change-specific dispositions and reference the certificates they used. | [Policy-unit source replan](reports/milestone-3-policy-unit-source-replan.md#coverage-model) | Report-dependent certificates, permanent audited flags, and copied packet dispositions |
+| Coverage authority | `AnalysisSnapshot` owns complete reproducibility while `CoverageAuthorityView` contains only typed consumer-discovery dependencies. Analysis derives an exact requirement from that view; an authorized attestation approves the requirement; and a generated reusable certificate binds view, requirement, attestation, evidence, and contract digests. Reports alone own change-specific dispositions and reference the certificates they used. | [Coverage identity replan](reports/milestone-3-coverage-identity-replan.md) | Report-dependent certificates, permanent audited flags, snapshot-bound requirement identity, and copied packet dispositions |
+| Audit horizon | `audit-horizon.policy-impact-consumers` version 1 derives typed members and content fingerprints from canonical modules, policy units, registered graph providers, every registered suite and its declared repository inputs, plus the policy-impact node catalog as a supplement. Existing policy-impact declarations and nodes are not sufficient horizon authority. | [Coverage identity replan](reports/milestone-3-coverage-identity-replan.md#audit-horizon) | `policy-impact-declarations:v1` and any horizon derived only from relationships under audit |
 | Completion | Analysis completion is mechanically derived from the final reached-obligation set and exact valid disposition set plus every other typed obligation. | [Brief report invariant](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#exact-completedanalysisreport-invariant) | Authored or unchecked complete flags |
 | Agent evidence | A1 acceptance requires real typed route/read and iterative prepare/resolve workflows, not schema inspection alone. | [Brief agent evidence](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#24-required-a1-agent-evidence) | Interface usability inferred from declarations |
 | Canonical schema | JSON Schema Draft 2020-12 plus documented Standards Engine annotations is the sole A1 machine contract; generated Python and agent-tool projections must pass deterministic conformance. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md) and [Milestone 0 review](reports/milestone-0-architecture-contract-review.md) | Independent Python, JSON, tool, example, identity, or renderer contracts |
@@ -228,9 +241,9 @@ examples in the brief.
   copied Router rules, parallel schema models, policy-aware graph behavior, or
   packets that expose repository layout.
 - Policy/state/lifecycle owners: standards documents own meaning; sidecars own
-  policy-unit identity; policy-impact declarations own relations; audit
-  declarations own attestations; schemas own transport shape; packets and
-  certificates are immutable derived artifacts.
+  policy-unit identity; policy-impact declarations own relations; coverage
+  attestations own reviewer conclusions; schemas own transport shape; packets,
+  requirements, certificates, and reports are immutable derived artifacts.
 - Future changes that remain independent: evidence-oracle policy, controlled
   authoring, external project baselines, text presentation, and additional
   graph consumers do not change the A1 analysis kernel unless their accepted
@@ -262,8 +275,10 @@ authorization, and impact-composition decisions before runtime implementation.
   authorization, inspection, and state-machine variant.
 - [x] Select the exact named graph groups used by modification, addition,
   removal, move, split, and merge.
-- [x] Define policy-unit, semantic-overlay, applicability, audit-declaration,
-  certificate, decision-fingerprint, and completion schemas.
+- [x] Define policy-unit, semantic-overlay, applicability, coverage,
+  certificate, decision-fingerprint, and completion schemas; the initial audit
+  declaration shape was superseded by the accepted two-identity coverage
+  contract.
 - [x] Validate every brief example against the accepted schema and remove any
   independent example authority.
 - [x] Confirm that no write-set refinement is required. Record the exact
@@ -407,6 +422,7 @@ without claiming to judge arbitrary meaning.
 - `evaluation/standards-effectiveness/policy-impact/**`
 - `evaluation/standards-effectiveness/policy-semantic-impact.toml`
 - `evaluation/standards-effectiveness/policy-consumer-audits.toml`
+- `evaluation/standards-effectiveness/policy-coverage/**`
 - `evaluation/standards-effectiveness/policy-units/**`
 - `evaluation/standards-effectiveness/edge-source-registry.toml`
 - `evaluation/standards-effectiveness/fixtures/policy-impact/**`
@@ -451,9 +467,21 @@ without claiming to judge arbitrary meaning.
   make analysis and verifier consume the same programs, mechanically prove A1
   schema/runtime agreement, and delete both former applicability parsers and
   re-exports without fallback.
-- [ ] Implement derived coverage requirements, authorized coverage
-  attestations, registered bounded audit horizons, deterministic reusable
-  certificates, and exact invalidation independent from report dispositions.
+- [x] Implement complete `AnalysisSnapshot` and narrower
+  `CoverageAuthorityView` identities, with typed-role projection and exact
+  semantic, relationship, applicability, horizon-member, authorization,
+  evidence-provider, and identity-resolution dependencies.
+- [x] Register `audit-horizon.policy-impact-consumers` version 1 over canonical
+  modules, policy units, graph-source registrations, registered suites and
+  their declared repository inputs, and supplemental policy-impact nodes;
+  fingerprint every member's relevant content rather than IDs alone.
+- [x] Implement derived coverage requirements whose identity excludes their
+  source snapshot, authored attestations whose identity derives from canonical
+  content, deterministic reusable certificates, and exact invalidation
+  independent from report dispositions or accepted/proposed labels.
+- [x] Remove the legacy audit catalog, compiler audit matching,
+  `audit_declaration` semantics, `audited_owners`, old verifier loading, and
+  module-level audit authority in the same cutover without fallback.
 - [ ] Keep applicability unknown during conservative whole-artifact selection.
 - [ ] Prove that missing or expired audit coverage cannot return successful
   empty impact.
@@ -518,12 +546,12 @@ checks pass from one clean recorded tree.
 
 ## Blockers
 
-No current blocker is accepted. The module-source semantic-lifecycle mismatch
-was resolved by the accepted policy-unit source direction and is now the active
-Milestone 3 remapping slice. Ambiguous policy-unit scope, a required locator
-extension, failed semantic mapping, ambiguous evidence or coverage resolution,
-or need to change another graph authority remains a re-plan trigger rather than
-an implicit blocker.
+No current blocker is accepted. The coverage identity cycle and inadequate
+declaration-only horizon were resolved by the accepted two-identity coverage
+direction and independent registered horizon. Ambiguous typed projection,
+missing independent corpus authority, failed attestation bootstrap review,
+ambiguous evidence or authorization resolution, or need to change another
+graph authority remains a re-plan trigger rather than an implicit blocker.
 
 Runtime implementation is admitted from the recorded implementation base and
 remains bounded by the active milestone, exact next slice, allowed write set,

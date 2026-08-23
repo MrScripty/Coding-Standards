@@ -114,6 +114,21 @@ class NavigationTest(unittest.TestCase):
             {item["target"] for item in persistence["reading_plan"]},
         )
 
+    def test_snapshot_binds_coverage_authority_and_attestation_inputs(self) -> None:
+        result = self.engine.inspect(InspectCall(self.engine.snapshot))
+        value = self.assert_contract("SnapshotInspectionResult", result)
+        scope = set(value["snapshot"]["scope"])
+
+        self.assertTrue(
+            {
+                "evaluation/standards-effectiveness/policy-coverage/horizons.toml",
+                "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml",
+                "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+                "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+                "docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md",
+            }.issubset(scope)
+        )
+
     def test_route_unknown_categories_remain_visible_and_invalid_facts_reject(self) -> None:
         facts = self.route_facts()
         facts["routing.topics"] = {"type": "enum-set", "state": "unknown"}
@@ -392,10 +407,6 @@ class NavigationTest(unittest.TestCase):
         self.assertTrue(program["dependency_digest"].startswith("sha256:"))
         self.assertEqual(semantics["propagation"], "source-to-consumer")
         self.assertTrue(semantics["evidence_owner"].startswith("suite:"))
-        self.assertEqual(
-            semantics["audit_declaration"],
-            "audit.workflow.planning.policy-impact.v1",
-        )
         self.assertTrue(semantics["rationale"])
         self.assertTrue(semantics["declaration_source"].endswith("workflow.planning.toml"))
 

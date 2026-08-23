@@ -38,7 +38,7 @@ Run engine self-tests:
 python3 -m unittest discover -s tools/standards_verifier/tests -v
 ```
 
-Report every reviewed semantic consumer and projection for one audited policy
+Report every reviewed semantic consumer and projection for one covered policy
 owner:
 
 ```bash
@@ -60,8 +60,8 @@ rejected because these groups do not permit it.
 The standards verifier is a downstream policy adapter. It validates canonical
 owner metadata, contained consumers, supported policy relations, non-empty
 applicability, registered evidence owners, duplicate semantic identities,
-explicit audited-owner coverage, and enforcement-suite closure. Every
-registered suite whose explicit `owner` is audited must have one matching
+current policy-unit coverage certificates, and enforcement-suite closure. Every
+registered suite whose explicit `owner` is covered must have one matching
 enforcement-suite edge. Prompt, template, fixture, and other semantic edges
 remain explicitly reviewed; they are not inferred. Hyperlinks, lexical
 similarity, standards `Requires`, suite ownership, and the temporary Bash

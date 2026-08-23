@@ -1,0 +1,5 @@
+schema_version = 1
+sources = [
+  "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
+  "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
+]

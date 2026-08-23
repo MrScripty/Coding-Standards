@@ -49,7 +49,6 @@ class PolicyImpactSemantics:
     consumer_scope: Mapping[str, object] | None
     propagation: str
     evidence_owner: str
-    audit_declaration: str | None
     rationale: str
     declaration_source: str
     dependency_fingerprint: str
@@ -66,11 +65,11 @@ class CompiledPolicyImpactSet:
     graph: GraphContribution
     semantics: Mapping[str, PolicyImpactSemantics]
     fact_schema: FactSchema
-    audited_owners: frozenset[str]
     node_catalog: str
     declaration_sources: tuple[str, ...]
     input_sources: tuple[str, ...]
     declaration_digest: str
+    provider_contract_digest: str
 
     def __post_init__(self) -> None:
         object.__setattr__(

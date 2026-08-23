@@ -16,9 +16,11 @@ from tools.standards_applicability.standards_applicability import (
 from tools.standards_analysis.standards_analysis import (
     AnalysisError,
     AnalysisFailure,
+    CoverageIndex,
     ROUTER_PROJECTION,
     RouterProjection,
     compile_snapshot,
+    compile_coverage,
     identity,
     load_router_projection,
 )
@@ -78,6 +80,7 @@ class StandardsEngine:
         graph: EdgeRegistry,
         router: RouterProjection,
         policy_impact: CompiledPolicyImpactSet,
+        coverage: CoverageIndex,
     ) -> None:
         self._root = root.resolve()
         self._snapshot = snapshot
@@ -87,6 +90,7 @@ class StandardsEngine:
         self._graph = graph
         self._router = router
         self._policy_impact = policy_impact
+        self._coverage = coverage
         self._navigation: dict[str, dict[str, object]] = {}
 
     @classmethod
@@ -98,6 +102,11 @@ class StandardsEngine:
             initial_corpus,
             POLICY_IMPACT_REGISTRY,
         )
+        initial_coverage = compile_coverage(
+            repo_root,
+            initial_corpus,
+            initial_policy_impact,
+        )
         scope = tuple(
             sorted(
                 {
@@ -106,6 +115,7 @@ class StandardsEngine:
                     ROUTER_PROJECTION,
                     INTERFACE_SCHEMA,
                     *initial_policy_impact.input_sources,
+                    *initial_coverage.input_sources,
                     *initial_corpus.module_corpus.members,
                     *initial_corpus.policy_unit_corpus.sources,
                 }
@@ -117,6 +127,12 @@ class StandardsEngine:
             repo_root,
             corpus,
             POLICY_IMPACT_REGISTRY,
+        )
+        coverage = compile_coverage(
+            repo_root,
+            corpus,
+            policy_impact,
+            derived_from_snapshot=str(before.handle["id"]),
         )
         graph = standards_navigation_registry(
             repo_root,
@@ -133,6 +149,15 @@ class StandardsEngine:
             != corpus.policy_unit_corpus.sources
             or initial_policy_impact.declaration_digest
             != policy_impact.declaration_digest
+            or initial_coverage.horizon.digest != coverage.horizon.digest
+            or {
+                subject: certificate.handle
+                for subject, certificate in initial_coverage.certificates.items()
+            }
+            != {
+                subject: certificate.handle
+                for subject, certificate in coverage.certificates.items()
+            }
         ):
             raise AnalysisError(
                 before_source_changed_failure()
@@ -144,6 +169,7 @@ class StandardsEngine:
             graph,
             router,
             policy_impact,
+            coverage,
         )
 
     @property
@@ -680,7 +706,6 @@ class StandardsEngine:
                         "consumer_scope": thaw(semantics.consumer_scope),
                         "propagation": semantics.propagation,
                         "evidence_owner": semantics.evidence_owner,
-                        "audit_declaration": semantics.audit_declaration,
                         "rationale": semantics.rationale,
                         "declaration_source": semantics.declaration_source,
                         "dependency_fingerprint": semantics.dependency_fingerprint,

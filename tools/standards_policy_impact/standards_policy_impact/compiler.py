@@ -238,61 +238,6 @@ def _load_facts(root: Path, path: str) -> FactSchema:
         ) from error
 
 
-def _load_audits(
-    root: Path,
-    path: str,
-) -> tuple[tuple[str, str, frozenset[str]], ...]:
-    raw = _load_toml(root, path)
-    _exact(
-        raw,
-        allowed={"schema_version", "audits"},
-        required={"schema_version", "audits"},
-        path=path,
-        owner=path,
-    )
-    audits = raw["audits"]
-    if raw["schema_version"] != 1 or not isinstance(audits, list):
-        raise _error("POLICY_IMPACT.AUDIT", "audit catalog is invalid", path=path)
-    result = []
-    seen = set()
-    for item in audits:
-        if not isinstance(item, dict):
-            raise _error("POLICY_IMPACT.AUDIT", "audit must be a table", path=path)
-        _exact(
-            item,
-            allowed={"id", "owner", "relationship_kinds", "scope", "horizon", "evidence"},
-            required={"id", "owner", "relationship_kinds", "scope", "horizon", "evidence"},
-            path=path,
-            owner="audit",
-        )
-        audit_id = _text(item, "id", path)
-        if audit_id in seen:
-            raise _error(
-                "POLICY_IMPACT.AUDIT",
-                "audit identity is duplicated",
-                path=path,
-                observed=audit_id,
-            )
-        if item["scope"] != "whole-owner":
-            raise _error(
-                "POLICY_IMPACT.AUDIT",
-                "initial audit scope must be whole-owner",
-                path=path,
-                observed=audit_id,
-            )
-        _text(item, "horizon", path)
-        _text(item, "evidence", path)
-        seen.add(audit_id)
-        result.append(
-            (
-                audit_id,
-                _text(item, "owner", path),
-                frozenset(_texts(item, "relationship_kinds", path)),
-            )
-        )
-    return tuple(result)
-
-
 @dataclass(frozen=True, slots=True)
 class _Declaration:
     owner: str
@@ -407,7 +352,6 @@ def compile_policy_impact(
             "source_id",
             "node_catalog",
             "fact_catalog",
-            "audit_catalog",
             "declaration_sources",
         },
         required={
@@ -415,7 +359,6 @@ def compile_policy_impact(
             "source_id",
             "node_catalog",
             "fact_catalog",
-            "audit_catalog",
             "declaration_sources",
         },
         path=registry_path,
@@ -429,7 +372,6 @@ def compile_policy_impact(
         )
     node_catalog = _text(raw, "node_catalog", registry_path)
     fact_catalog = _text(raw, "fact_catalog", registry_path)
-    audit_catalog = _text(raw, "audit_catalog", registry_path)
     declaration_sources = _texts(raw, "declaration_sources", registry_path)
 
     try:
@@ -460,7 +402,6 @@ def compile_policy_impact(
     groups = {group.id for group in catalog.groups}
     kinds = RELATIONSHIP_KINDS
     facts = _load_facts(repo_root, fact_catalog)
-    audits = _load_audits(repo_root, audit_catalog)
     declarations = _load_declarations(repo_root, declaration_sources, facts)
 
     suite_nodes: dict[str, list[str]] = {}
@@ -472,7 +413,6 @@ def compile_policy_impact(
     semantics: dict[str, PolicyImpactSemantics] = {}
     edges = []
     natural_keys: set[tuple[str, str, str]] = set()
-    audited_owners: set[str] = set()
     for declaration in declarations:
         if declaration.owner not in module_ids:
             raise _error(
@@ -564,22 +504,6 @@ def compile_policy_impact(
                 unavailable=not matches,
             )
 
-        audit_matches = [
-            audit_id
-            for audit_id, owner, relations in audits
-            if owner == declaration.owner and declaration.relation in relations
-        ]
-        if len(audit_matches) > 1:
-            raise _error(
-                "POLICY_IMPACT.AUDIT",
-                "relationship matches more than one audit declaration",
-                path=audit_catalog,
-                observed="|".join(natural_key),
-            )
-        audit_id = audit_matches[0] if audit_matches else None
-        if audit_id is not None:
-            audited_owners.add(declaration.owner)
-
         edge_id = policy_impact_edge_id(*natural_key)
         propagation = kind.propagation
         dependency = {
@@ -593,12 +517,8 @@ def compile_policy_impact(
             "source_scope": thaw(declaration.source_scope),
             "consumer_scope": thaw(declaration.consumer_scope),
             "evidence_owner": evidence_owner,
-            "audit_declaration": audit_id,
             "rationale": declaration.rationale,
-            "node_catalog": node_catalog,
             "relationship_kind_contract_version": RELATIONSHIP_KIND_CONTRACT_VERSION,
-            "fact_catalog": fact_catalog,
-            "audit_catalog": audit_catalog,
         }
         semantics[edge_id] = PolicyImpactSemantics(
             edge_id,
@@ -610,7 +530,6 @@ def compile_policy_impact(
             declaration.consumer_scope,
             propagation,
             evidence_owner,
-            audit_id,
             declaration.rationale,
             declaration.source_path,
             _digest(dependency),
@@ -637,19 +556,37 @@ def compile_policy_impact(
             for edge_id in sorted(semantics)
         ]
     )
+    provider_contract_digest = _digest(
+        {
+            "source_id": SOURCE_ID,
+            "registry_schema_version": raw["schema_version"],
+            "declaration_schema_version": 1,
+            "edge_identity_version": 1,
+            "relationship_kind_contract_version": RELATIONSHIP_KIND_CONTRACT_VERSION,
+            "relationship_kinds": [
+                {
+                    "id": kind.id,
+                    "groups": list(kind.groups),
+                    "propagation": kind.propagation,
+                    "traversable": kind.traversable,
+                    "evidence_required": kind.evidence_required,
+                }
+                for kind in sorted(kinds.values(), key=lambda item: item.id)
+            ],
+        }
+    )
     return CompiledPolicyImpactSet(
         GraphContribution((), (), tuple(sorted(edges, key=lambda edge: edge.id))),
         semantics,
         facts,
-        frozenset(audited_owners),
         node_catalog,
         declaration_sources,
         (
             registry_path,
             node_catalog,
             fact_catalog,
-            audit_catalog,
             *declaration_sources,
         ),
         declaration_digest,
+        provider_contract_digest,
     )

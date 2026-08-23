@@ -374,7 +374,6 @@ class ImpactSelectionTest(unittest.TestCase):
             None,
             "source-to-consumer",
             "suite:evidence",
-            "audit.fixture",
             "Fixture semantics.",
             "declarations.toml",
             "sha256:" + "d" * 64,
@@ -383,11 +382,11 @@ class ImpactSelectionTest(unittest.TestCase):
             GraphContribution((), (), (policy_edge,)),
             {edge_id: semantics},
             fact_schema,
-            frozenset((POLICY,)),
             "catalog.toml",
             ("declarations.toml",),
             ("registry.toml", "catalog.toml", "declarations.toml"),
             "sha256:" + "e" * 64,
+            "sha256:" + "f" * 64,
         )
         graph = EdgeRegistry(
             self.root,

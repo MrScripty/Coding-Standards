@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v2",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v3",
   "title": "Standards Engine A1 contract",
   "description": "Canonical typed contract for snapshot-bound navigation and read-only standards-change analysis.",
   "oneOf": [
@@ -23,12 +23,14 @@
     { "$ref": "#/$defs/PolicyImpactDeclaration" },
     { "$ref": "#/$defs/DecisionContract" },
     { "$ref": "#/$defs/AuditHorizonDeclaration" },
-    { "$ref": "#/$defs/AuditDeclaration" },
-    { "$ref": "#/$defs/ConsumerAuditCertificate" }
+    { "$ref": "#/$defs/CoverageAuthorityView" },
+    { "$ref": "#/$defs/CoverageAuditRequirement" },
+    { "$ref": "#/$defs/CoverageAttestation" },
+    { "$ref": "#/$defs/ConsumerCoverageCertificate" }
   ],
   "x-standards-engine-contract": {
-    "contract_version": 2,
-    "schema_version": 2,
+    "contract_version": 3,
+    "schema_version": 3,
     "applicability_version": 2,
     "public_operations": {
       "query": {
@@ -46,7 +48,7 @@
           "fact-answer": "standards.analyze",
           "consumer-disposition": "standards.review.consumer",
           "impact-disposition": "standards.review.impact",
-          "audit-declaration": "standards.review.audit"
+          "coverage-attestation": "standards.review.audit"
         },
         "input": "ResolveCall",
         "results": ["PendingPacket", "CompletedAnalysisReport", "RejectedResult"]
@@ -174,6 +176,18 @@
       "type": "string",
       "pattern": "^certificate:sha256:[0-9a-f]{64}$"
     },
+    "CoverageAuthorityViewId": {
+      "type": "string",
+      "pattern": "^coverage-view:sha256:[0-9a-f]{64}$"
+    },
+    "CoverageRequirementId": {
+      "type": "string",
+      "pattern": "^coverage-requirement:sha256:[0-9a-f]{64}$"
+    },
+    "CoverageAttestationId": {
+      "type": "string",
+      "pattern": "^coverage-attestation:sha256:[0-9a-f]{64}$"
+    },
     "SnapshotHandle": {
       "type": "object",
       "required": ["kind", "id", "schema_version"],
@@ -247,6 +261,36 @@
       },
       "additionalProperties": false
     },
+    "CoverageAuthorityViewHandle": {
+      "type": "object",
+      "required": ["kind", "id", "schema_version"],
+      "properties": {
+        "kind": { "const": "coverage-authority-view-handle" },
+        "id": { "$ref": "#/$defs/CoverageAuthorityViewId" },
+        "schema_version": { "const": 1 }
+      },
+      "additionalProperties": false
+    },
+    "CoverageRequirementHandle": {
+      "type": "object",
+      "required": ["kind", "id", "schema_version"],
+      "properties": {
+        "kind": { "const": "coverage-requirement-handle" },
+        "id": { "$ref": "#/$defs/CoverageRequirementId" },
+        "schema_version": { "const": 1 }
+      },
+      "additionalProperties": false
+    },
+    "CoverageAttestationHandle": {
+      "type": "object",
+      "required": ["kind", "id", "schema_version"],
+      "properties": {
+        "kind": { "const": "coverage-attestation-handle" },
+        "id": { "$ref": "#/$defs/CoverageAttestationId" },
+        "schema_version": { "const": 1 }
+      },
+      "additionalProperties": false
+    },
     "InspectableHandle": {
       "oneOf": [
         { "$ref": "#/$defs/SnapshotHandle" },
@@ -255,7 +299,10 @@
         { "$ref": "#/$defs/PolicyHandle" },
         { "$ref": "#/$defs/RelationshipHandle" },
         { "$ref": "#/$defs/ReportHandle" },
-        { "$ref": "#/$defs/CertificateHandle" }
+        { "$ref": "#/$defs/CertificateHandle" },
+        { "$ref": "#/$defs/CoverageAuthorityViewHandle" },
+        { "$ref": "#/$defs/CoverageRequirementHandle" },
+        { "$ref": "#/$defs/CoverageAttestationHandle" }
       ]
     },
     "ScalarValue": {
@@ -538,7 +585,7 @@
       "required": ["operation", "request_kind"],
       "properties": {
         "operation": { "enum": ["query", "prepare", "resolve", "inspect"] },
-        "request_kind": { "enum": ["route", "read", "related", "analysis", "fact-answer", "consumer-disposition", "impact-disposition", "audit-declaration", "inspect"] },
+        "request_kind": { "enum": ["route", "read", "related", "analysis", "fact-answer", "consumer-disposition", "impact-disposition", "coverage-attestation", "inspect"] },
         "target": { "$ref": "#/$defs/CanonicalId" },
         "obligation_id": { "$ref": "#/$defs/ObligationId" }
       },
@@ -689,7 +736,7 @@
         "relationship-kind-contract": "standards_policy_impact owns one versioned code table for the eight admitted relation kinds; every current kind belongs to policy-impact and semantic, propagates source-to-consumer, is traversable, and requires an explicit evidence owner",
         "propagation": "the relationship-kind contract owns domain propagation; version 1 admits no per-declaration override",
         "evidence": "evidence_owner is authored relationship semantics and must resolve to exactly one registered evidence owner",
-        "audit": "audit association is resolved from one exact bounded audit match and is not authored on the relationship"
+        "coverage": "coverage association is derived downstream by standards_analysis and is not relationship semantics"
       }
     },
     "CompiledApplicabilityProgram": {
@@ -713,7 +760,7 @@
     },
     "CompiledPolicyImpactSemantics": {
       "type": "object",
-      "required": ["edge_id", "source", "consumer", "relation", "applicability_program", "source_scope", "consumer_scope", "propagation", "evidence_owner", "audit_declaration", "rationale", "declaration_source", "dependency_fingerprint"],
+      "required": ["edge_id", "source", "consumer", "relation", "applicability_program", "source_scope", "consumer_scope", "propagation", "evidence_owner", "rationale", "declaration_source", "dependency_fingerprint"],
       "properties": {
         "edge_id": { "$ref": "#/$defs/EdgeId" },
         "source": { "$ref": "#/$defs/CanonicalId" },
@@ -734,12 +781,6 @@
         },
         "propagation": { "const": "source-to-consumer" },
         "evidence_owner": { "$ref": "#/$defs/CanonicalId" },
-        "audit_declaration": {
-          "oneOf": [
-            { "$ref": "#/$defs/CanonicalId" },
-            { "type": "null" }
-          ]
-        },
         "rationale": { "$ref": "#/$defs/NonEmptyString" },
         "declaration_source": { "$ref": "#/$defs/NonEmptyString" },
         "dependency_fingerprint": { "$ref": "#/$defs/Digest" }
@@ -1058,7 +1099,7 @@
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": { "enum": ["fact-answer", "consumer-disposition", "impact-disposition", "audit-declaration"] }
+          "items": { "enum": ["fact-answer", "consumer-disposition", "impact-disposition", "coverage-attestation"] }
         },
         "fingerprint": { "$ref": "#/$defs/DecisionFingerprint" }
       },
@@ -1121,7 +1162,7 @@
         "analysis_contract_version": { "const": 1 },
         "packet_schema_version": { "const": 1 },
         "report_schema_version": { "const": 1 },
-        "interface_schema_version": { "const": 2 },
+        "interface_schema_version": { "const": 3 },
         "applicability_version": { "const": 2 },
         "metadata_api_version": { "$ref": "#/$defs/NonEmptyString" },
         "graph_engine_contract_version": { "$ref": "#/$defs/NonEmptyString" },
@@ -1233,13 +1274,13 @@
       },
       "additionalProperties": false
     },
-    "AuditDeclarationSubmission": {
+    "CoverageAttestationSubmission": {
       "type": "object",
-      "required": ["kind", "obligation_id", "declaration"],
+      "required": ["kind", "obligation_id", "attestation"],
       "properties": {
-        "kind": { "const": "audit-declaration" },
+        "kind": { "const": "coverage-attestation" },
         "obligation_id": { "$ref": "#/$defs/ObligationId" },
-        "declaration": { "$ref": "#/$defs/AuditDeclaration" }
+        "attestation": { "$ref": "#/$defs/CoverageAttestation" }
       },
       "additionalProperties": false
     },
@@ -1248,7 +1289,7 @@
         { "$ref": "#/$defs/FactAnswerSubmission" },
         { "$ref": "#/$defs/ConsumerDispositionSubmission" },
         { "$ref": "#/$defs/ImpactDispositionSubmission" },
-        { "$ref": "#/$defs/AuditDeclarationSubmission" }
+        { "$ref": "#/$defs/CoverageAttestationSubmission" }
       ]
     },
     "ResolveCall": {
@@ -1260,39 +1301,18 @@
       },
       "additionalProperties": false
     },
-    "AuditDeclaration": {
+    "CoverageHorizonMember": {
       "type": "object",
-      "required": ["kind", "id", "covered_owner", "covered_scope", "relationship_kinds", "horizon_provider", "horizon_provider_version", "expected_semantic_revision", "completed_report", "consumer_obligations", "disposition_evidence", "explicit_exclusions", "rationale", "auditor_provenance"],
+      "required": ["id", "roles", "fingerprint"],
       "properties": {
-        "kind": { "const": "audit-declaration" },
         "id": { "$ref": "#/$defs/CanonicalId" },
-        "covered_owner": { "$ref": "#/$defs/CanonicalId" },
-        "covered_scope": { "$ref": "#/$defs/ReviewScope" },
-        "relationship_kinds": {
+        "roles": {
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
           "items": { "$ref": "#/$defs/CanonicalId" }
         },
-        "horizon_provider": { "$ref": "#/$defs/CanonicalId" },
-        "horizon_provider_version": { "$ref": "#/$defs/NonEmptyString" },
-        "expected_semantic_revision": { "type": "integer", "minimum": 1 },
-        "completed_report": { "$ref": "#/$defs/ReportHandle" },
-        "consumer_obligations": {
-          "type": "array",
-          "uniqueItems": true,
-          "items": { "$ref": "#/$defs/ObligationId" }
-        },
-        "disposition_evidence": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/EvidenceReference" }
-        },
-        "explicit_exclusions": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/EvidenceReference" }
-        },
-        "rationale": { "$ref": "#/$defs/NonEmptyString" },
-        "auditor_provenance": { "$ref": "#/$defs/NonEmptyString" }
+        "fingerprint": { "$ref": "#/$defs/Digest" }
       },
       "additionalProperties": false
     },
@@ -1318,54 +1338,137 @@
         "provider-registration": "membership is resolved by this registered deterministic provider and never from an arbitrary caller list"
       }
     },
-    "ConsumerAuditCertificate": {
+    "CoverageAuthorityView": {
       "type": "object",
-      "required": ["kind", "handle", "declaration_digest", "standards_snapshot", "corpus_membership_digest", "resolved_owners", "resolved_locations", "horizon_membership", "horizon_digest", "edge_set_digest", "applicability_version", "schema_version", "tool_versions", "evidence_digests", "supersedes"],
+      "required": ["kind", "handle", "subject", "owner", "semantic_revision", "representation_digest", "structural_digest", "relationship_kinds", "relationship_fingerprints", "relationship_kind_contract_version", "relationship_provider_contract_digest", "applicability_language_version", "applicability_program_digests", "fact_schema_digest", "horizon", "identity_resolution_contract_version", "coverage_contract_version", "attestation_contract_version", "authorization_contract_version", "evidence_provider_contract_version"],
       "properties": {
-        "kind": { "const": "consumer-audit-certificate" },
-        "handle": { "$ref": "#/$defs/CertificateHandle" },
-        "declaration_digest": { "$ref": "#/$defs/Digest" },
-        "standards_snapshot": { "$ref": "#/$defs/SnapshotHandle" },
-        "corpus_membership_digest": { "$ref": "#/$defs/Digest" },
-        "resolved_owners": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": { "$ref": "#/$defs/CanonicalId" }
-        },
-        "resolved_locations": {
-          "type": "array",
-          "minItems": 1,
-          "uniqueItems": true,
-          "items": { "$ref": "#/$defs/CanonicalId" }
-        },
-        "horizon_membership": {
+        "kind": { "const": "coverage-authority-view" },
+        "handle": { "$ref": "#/$defs/CoverageAuthorityViewHandle" },
+        "subject": { "$ref": "#/$defs/CanonicalId" },
+        "owner": { "$ref": "#/$defs/CanonicalId" },
+        "semantic_revision": { "type": "integer", "minimum": 1 },
+        "representation_digest": { "$ref": "#/$defs/Digest" },
+        "structural_digest": { "$ref": "#/$defs/Digest" },
+        "relationship_kinds": {
           "type": "array",
           "uniqueItems": true,
           "items": { "$ref": "#/$defs/CanonicalId" }
         },
-        "horizon_digest": { "$ref": "#/$defs/Digest" },
-        "edge_set_digest": { "$ref": "#/$defs/Digest" },
-        "applicability_version": { "const": 2 },
-        "schema_version": { "const": 1 },
-        "tool_versions": { "$ref": "#/$defs/AnalysisVersions" },
-        "evidence_digests": {
+        "relationship_fingerprints": {
           "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "required": ["edge", "fingerprint"],
+            "properties": {
+              "edge": { "$ref": "#/$defs/EdgeId" },
+              "fingerprint": { "$ref": "#/$defs/Digest" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "relationship_kind_contract_version": { "type": "integer", "minimum": 1 },
+        "relationship_provider_contract_digest": { "$ref": "#/$defs/Digest" },
+        "applicability_language_version": { "const": 1 },
+        "applicability_program_digests": {
+          "type": "array", "uniqueItems": true,
           "items": { "$ref": "#/$defs/Digest" }
         },
-        "supersedes": {
-          "oneOf": [
-            { "$ref": "#/$defs/CertificateHandle" },
-            { "type": "null" }
-          ]
+        "fact_schema_digest": { "$ref": "#/$defs/Digest" },
+        "horizon": {
+          "type": "object",
+          "required": ["id", "provider", "version", "digest", "members"],
+          "properties": {
+            "id": { "$ref": "#/$defs/CanonicalId" },
+            "provider": { "$ref": "#/$defs/CanonicalId" },
+            "version": { "type": "integer", "minimum": 1 },
+            "digest": { "$ref": "#/$defs/Digest" },
+            "members": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/CoverageHorizonMember" }
+            }
+          },
+          "additionalProperties": false
         },
+        "identity_resolution_contract_version": { "$ref": "#/$defs/NonEmptyString" },
+        "coverage_contract_version": { "$ref": "#/$defs/NonEmptyString" },
+        "attestation_contract_version": { "$ref": "#/$defs/NonEmptyString" },
+        "authorization_contract_version": { "$ref": "#/$defs/NonEmptyString" },
+        "evidence_provider_contract_version": { "$ref": "#/$defs/NonEmptyString" }
+      },
+      "additionalProperties": false,
+      "x-standards-engine-identity": {
+        "domain": "coding-standards:coverage-authority-view:v1",
+        "include": ["subject", "owner", "semantic_revision", "representation_digest", "structural_digest", "relationship_kinds", "relationship_fingerprints", "relationship_kind_contract_version", "relationship_provider_contract_digest", "applicability_language_version", "applicability_program_digests", "fact_schema_digest", "horizon", "identity_resolution_contract_version", "coverage_contract_version", "attestation_contract_version", "authorization_contract_version", "evidence_provider_contract_version"],
+        "exclude": ["handle"]
+      }
+    },
+    "CoverageAuditRequirement": {
+      "type": "object",
+      "required": ["kind", "handle", "coverage_view", "subject", "owner", "semantic_revision", "relationship_kinds", "horizon"],
+      "properties": {
+        "kind": { "const": "coverage-audit-requirement" },
+        "handle": { "$ref": "#/$defs/CoverageRequirementHandle" },
+        "coverage_view": { "$ref": "#/$defs/CoverageAuthorityViewHandle" },
+        "subject": { "$ref": "#/$defs/CanonicalId" },
+        "owner": { "$ref": "#/$defs/CanonicalId" },
+        "semantic_revision": { "type": "integer", "minimum": 1 },
+        "relationship_kinds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/CanonicalId" } },
+        "horizon": { "$ref": "#/$defs/CanonicalId" },
+        "derived_from_snapshot": { "$ref": "#/$defs/SnapshotHandle" }
+      },
+      "additionalProperties": false,
+      "x-standards-engine-identity": {
+        "domain": "coding-standards:coverage-audit-requirement:v1",
+        "include": ["coverage_view", "subject", "owner", "semantic_revision", "relationship_kinds", "horizon"],
+        "exclude": ["handle", "derived_from_snapshot"]
+      }
+    },
+    "CoverageAttestation": {
+      "type": "object",
+      "required": ["kind", "handle", "requirement", "conclusion", "evidence", "explicit_exclusions", "rationale", "auditor_provenance", "schema_version"],
+      "properties": {
+        "kind": { "const": "coverage-attestation" },
+        "handle": { "$ref": "#/$defs/CoverageAttestationHandle" },
+        "requirement": { "$ref": "#/$defs/CoverageRequirementHandle" },
+        "conclusion": { "const": "complete" },
+        "evidence": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/EvidenceReference" } },
+        "explicit_exclusions": { "type": "array", "items": { "$ref": "#/$defs/EvidenceReference" } },
+        "rationale": { "$ref": "#/$defs/NonEmptyString" },
+        "auditor_provenance": { "$ref": "#/$defs/NonEmptyString" },
+        "schema_version": { "const": 1 }
+      },
+      "additionalProperties": false,
+      "x-standards-engine-identity": {
+        "domain": "coding-standards:coverage-attestation:v1",
+        "include": ["requirement", "conclusion", "evidence", "explicit_exclusions", "rationale", "auditor_provenance", "schema_version"],
+        "exclude": ["handle"]
+      }
+    },
+    "ConsumerCoverageCertificate": {
+      "type": "object",
+      "required": ["kind", "handle", "coverage_view", "requirement", "attestation", "subject", "owner", "semantic_revision", "horizon_digest", "relationship_digest", "evidence_digests", "coverage_contract_version", "attestation_contract_version", "provenance"],
+      "properties": {
+        "kind": { "const": "consumer-coverage-certificate" },
+        "handle": { "$ref": "#/$defs/CertificateHandle" },
+        "coverage_view": { "$ref": "#/$defs/CoverageAuthorityViewHandle" },
+        "requirement": { "$ref": "#/$defs/CoverageRequirementHandle" },
+        "attestation": { "$ref": "#/$defs/CoverageAttestationHandle" },
+        "subject": { "$ref": "#/$defs/CanonicalId" },
+        "owner": { "$ref": "#/$defs/CanonicalId" },
+        "semantic_revision": { "type": "integer", "minimum": 1 },
+        "horizon_digest": { "$ref": "#/$defs/Digest" },
+        "relationship_digest": { "$ref": "#/$defs/Digest" },
+        "evidence_digests": { "type": "array", "items": { "$ref": "#/$defs/Digest" } },
+        "coverage_contract_version": { "$ref": "#/$defs/NonEmptyString" },
+        "attestation_contract_version": { "$ref": "#/$defs/NonEmptyString" },
         "provenance": { "$ref": "#/$defs/CertificateProvenance" }
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:certificate:v1",
-        "include": ["declaration_digest", "standards_snapshot", "corpus_membership_digest", "resolved_owners", "resolved_locations", "horizon_membership", "horizon_digest", "edge_set_digest", "applicability_version", "schema_version", "tool_versions.analysis_contract_version", "tool_versions.interface_schema_version", "tool_versions.applicability_version", "tool_versions.metadata_api_version", "tool_versions.graph_engine_contract_version", "tool_versions.parser_versions", "tool_versions.evidence_provider_contract_versions", "evidence_digests", "supersedes"],
-        "exclude": ["handle", "tool_versions.packet_schema_version", "tool_versions.report_schema_version", "tool_versions.graph_engine_implementation_version", "tool_versions.analyzer_implementation_version", "provenance"]
+        "domain": "coding-standards:consumer-coverage-certificate:v1",
+        "include": ["coverage_view", "requirement", "attestation", "subject", "owner", "semantic_revision", "horizon_digest", "relationship_digest", "evidence_digests", "coverage_contract_version", "attestation_contract_version"],
+        "exclude": ["handle", "provenance"]
       }
     },
     "CertificateProvenance": {
@@ -1382,7 +1485,7 @@
       "required": ["obligation_id", "kind", "result", "evidence", "fingerprint"],
       "properties": {
         "obligation_id": { "$ref": "#/$defs/ObligationId" },
-        "kind": { "enum": ["consumer-disposition", "impact-disposition", "fact-answer", "audit-declaration"] },
+        "kind": { "enum": ["consumer-disposition", "impact-disposition", "fact-answer"] },
         "result": { "$ref": "#/$defs/NonEmptyString" },
         "evidence": {
           "type": "array",
@@ -1394,8 +1497,18 @@
     },
     "CompletionProof": {
       "type": "object",
-      "required": ["reached_consumer_obligations", "disposition_obligations", "non_consumer_obligations_resolved", "questions_resolved", "applicability_resolved", "authorization_valid", "evidence_valid", "audit_coverage_valid"],
+      "required": ["required_coverage_subjects", "certificate_subjects", "reached_consumer_obligations", "disposition_obligations", "non_consumer_obligations_resolved", "questions_resolved", "applicability_resolved", "authorization_valid", "evidence_valid"],
       "properties": {
+        "required_coverage_subjects": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/CanonicalId" }
+        },
+        "certificate_subjects": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/CanonicalId" }
+        },
         "reached_consumer_obligations": {
           "type": "array",
           "uniqueItems": true,
@@ -1410,18 +1523,18 @@
         "questions_resolved": { "const": true },
         "applicability_resolved": { "const": true },
         "authorization_valid": { "const": true },
-        "evidence_valid": { "const": true },
-        "audit_coverage_valid": { "const": true }
+        "evidence_valid": { "const": true }
       },
       "additionalProperties": false,
       "x-standards-engine-invariants": {
+        "coverage_set_equality": "required_coverage_subjects equals certificate_subjects as sets and every certificate is current for the report authority view",
         "consumer_set_equality": "reached_consumer_obligations equals disposition_obligations as sets",
         "derived_truth": "every Boolean is generated from current resolved state and cannot be caller-authored"
       }
     },
     "CompletedAnalysisReport": {
       "type": "object",
-      "required": ["kind", "handle", "base_snapshot", "proposed_snapshot", "state", "changes", "changed_units", "dispositions", "reading_plan", "completion", "provenance"],
+      "required": ["kind", "handle", "base_snapshot", "proposed_snapshot", "state", "changes", "changed_units", "coverage_certificates", "dispositions", "reading_plan", "completion", "provenance"],
       "properties": {
         "kind": { "const": "completed-analysis-report" },
         "handle": { "$ref": "#/$defs/ReportHandle" },
@@ -1435,6 +1548,11 @@
         "changed_units": {
           "type": "array",
           "items": { "$ref": "#/$defs/ChangedPolicyUnit" }
+        },
+        "coverage_certificates": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/CertificateHandle" }
         },
         "dispositions": {
           "type": "array",
@@ -1451,7 +1569,7 @@
       "additionalProperties": false,
       "x-standards-engine-identity": {
         "domain": "coding-standards:analysis-report:v1",
-        "include": ["base_snapshot", "proposed_snapshot", "changes", "changed_units", "dispositions", "reading_plan", "completion", "provenance.analysis_contract_version", "provenance.report_schema_version", "provenance.interface_schema_version", "provenance.applicability_version", "provenance.metadata_api_version", "provenance.graph_engine_contract_version", "provenance.parser_versions", "provenance.evidence_provider_contract_versions"],
+        "include": ["base_snapshot", "proposed_snapshot", "changes", "changed_units", "coverage_certificates", "dispositions", "reading_plan", "completion", "provenance.analysis_contract_version", "provenance.report_schema_version", "provenance.interface_schema_version", "provenance.applicability_version", "provenance.metadata_api_version", "provenance.graph_engine_contract_version", "provenance.parser_versions", "provenance.evidence_provider_contract_versions"],
         "exclude": ["handle", "state", "summary", "provenance.packet_schema_version", "provenance.graph_engine_implementation_version", "provenance.analyzer_implementation_version"]
       }
     },
@@ -1660,7 +1778,7 @@
       "required": ["kind", "certificate"],
       "properties": {
         "kind": { "const": "certificate-inspection-result" },
-        "certificate": { "$ref": "#/$defs/ConsumerAuditCertificate" }
+        "certificate": { "$ref": "#/$defs/ConsumerCoverageCertificate" }
       },
       "additionalProperties": false
     },

@@ -279,15 +279,48 @@ analysis, engine, and verifier callers translate neutral failures into their
 own diagnostics. Whole-artifact review may accompany an unknown result but
 cannot turn it into `true`.
 
-Analysis derives a `CoverageAuditRequirement` from the exact compiled authority
-view, policy-unit semantic revision and structural state, relationship set,
-applicability contract, fact schema, and registered audit horizon. An authorized
-reviewer may submit a `CoverageAttestation` for that exact requirement. A
-generated immutable `ConsumerCoverageCertificate` binds the attestation to
-those derived inputs. It certifies consumer-discovery coverage only; it never
-contains a report or change-specific disposition.
+Coverage uses two identities. `AnalysisSnapshot` binds the complete analysis
+input closure, including repository-local attestations, and therefore owns
+packet and report reproducibility. `CoverageAuthorityView` is a narrower typed
+projection containing only inputs capable of changing consumer discovery. It
+binds the policy-unit ID and owner, target semantic revision, content and
+structural digests, every originating compiled relationship, relationship-kind
+and provider contracts, applicability language and program dependencies, fact
+schema dependencies, canonical identity resolution, authorization and evidence
+contracts, and the registered audit horizon with content-fingerprinted members.
 
-`CompletedAnalysisReport` references every certificate used and separately
+The coverage view excludes attestation instances and source registrations,
+generated certificates, packets, reports, timestamps, display summaries,
+storage locations without semantic effect, and change-specific dispositions.
+Exclusion is determined by typed artifact role rather than directory location.
+The transient `proposed` or `accepted` state label is report provenance, not
+coverage identity; an identical semantic payload promoted to accepted authority
+retains valid coverage.
+
+Analysis derives a `CoverageAuditRequirement` from the exact coverage view. A
+requirement may record its source analysis snapshot as provenance, but that
+snapshot does not enter requirement identity. An authorized reviewer submits a
+content-addressed `CoverageAttestation` for that exact requirement. Committing
+the attestation changes the complete analysis snapshot and stales the old
+packet, while the newly prepared analysis derives the same coverage view and
+requirement. A generated immutable `ConsumerCoverageCertificate` then binds the
+view, requirement, attestation, evidence, and relevant contract digests. It
+certifies consumer-discovery coverage only; it never contains a report or
+change-specific disposition.
+
+The initial horizon is the registered provider
+`audit-horizon.policy-impact-consumers` version 1. It independently derives
+typed members from the canonical module and policy-unit corpora, registered
+graph sources, every registered suite and its declared repository inputs, and
+the registered prompt, template, documentation, reference, fixture, and
+evidence artifacts reachable through those authorities. The policy-impact node
+catalog may supplement canonical identity, but neither that catalog nor current
+relationship declarations can establish complete horizon membership. Every
+horizon member contributes its relevant content, structural, or semantic
+fingerprint so a changed artifact can invalidate coverage without adding an ID.
+
+`CompletedAnalysisReport` binds the exact complete analysis snapshot,
+references every certificate used, and separately
 owns the change-specific dispositions. Completion requires exact equality
 between required coverage subjects and valid certificate subjects, plus exact
 equality between reached consumer obligations and dispositions. A successful
@@ -427,6 +460,8 @@ policy meaning, authorize a relationship, or permit repository application.
 - `tools/graph_engine/README.md`
 - canonical corpus and edge-source registries
 - policy-unit, policy-impact, and consumer-audit declarations
+- coverage-horizon declarations, attestation source registrations, and
+  coverage attestations
 
 ## Supersession
 

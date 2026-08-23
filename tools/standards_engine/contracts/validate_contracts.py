@@ -45,7 +45,10 @@ IDENTITY_PREFIX = {
     "coding-standards:packet:v1": "packet",
     "coding-standards:obligation:v1": "obligation",
     "coding-standards:analysis-report:v1": "analysis-report",
-    "coding-standards:certificate:v1": "certificate",
+    "coding-standards:coverage-authority-view:v1": "coverage-view",
+    "coding-standards:coverage-audit-requirement:v1": "coverage-requirement",
+    "coding-standards:coverage-attestation:v1": "coverage-attestation",
+    "coding-standards:consumer-coverage-certificate:v1": "certificate",
 }
 
 
@@ -384,6 +387,10 @@ def validate_completion_examples(examples: dict[str, dict[str, Any]]) -> None:
         if example["definition"] != "CompletedAnalysisReport":
             continue
         completion = example["value"]["completion"]
+        required_coverage = set(completion["required_coverage_subjects"])
+        certificate_subjects = set(completion["certificate_subjects"])
+        if required_coverage != certificate_subjects:
+            raise ContractError(f"{name}: completion coverage subject sets differ")
         reached = set(completion["reached_consumer_obligations"])
         disposed = set(completion["disposition_obligations"])
         if reached != disposed:
@@ -394,6 +401,9 @@ def validate_completion_examples(examples: dict[str, dict[str, Any]]) -> None:
             raise ContractError(f"{name}: disposition records do not prove exact completion")
         if any(record["result"] == "blocked" for record in records):
             raise ContractError(f"{name}: blocked disposition cannot complete")
+        certificate_handles = example["value"]["coverage_certificates"]
+        if len(certificate_handles) != len(certificate_subjects):
+            raise ContractError(f"{name}: certificate handles do not prove exact coverage")
 
 
 def validate_change(change: dict[str, Any], owner: str) -> None:

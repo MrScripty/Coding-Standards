@@ -8,6 +8,11 @@ from typing import Mapping
 from tools.graph_engine.graph_engine import EdgeRegistry, GraphError
 from tools.graph_engine.graph_engine.manifest import ManifestSource
 from tools.standards_applicability.standards_applicability import ApplicabilityProgram
+from tools.standards_analysis.standards_analysis import (
+    AnalysisError,
+    CoverageIndex,
+    compile_coverage,
+)
 from tools.standards_graph.standards_graph import metadata_dependency_source
 from tools.standards_metadata.standards_metadata import (
     MetadataError,
@@ -48,29 +53,56 @@ class PolicyImpactAdapter:
     registry: EdgeRegistry
     compiled: CompiledPolicyImpactSet
     policy_units: PolicyUnitCorpus
+    coverage: CoverageIndex
 
     @property
-    def audited_owners(self) -> frozenset[str]:
-        return self.compiled.audited_owners
+    def covered_owners(self) -> frozenset[str]:
+        owners = {unit.module for unit in self.policy_units.units}
+        return frozenset(
+            owner
+            for owner in owners
+            if not self.coverage.uncovered_for_module_corpus(self.policy_units, owner)
+        )
 
     def consumers_for(self, owner: str) -> tuple[ImpactEdge, ...]:
-        if owner not in self.audited_owners:
+        uncovered = self.coverage.uncovered_for_module_corpus(
+            self.policy_units,
+            owner,
+        )
+        if uncovered or not self.policy_units.for_module(owner):
             raise EngineError(
                 Diagnostic(
                     "POLICY_IMPACT.OWNER_NOT_AUDITED",
                     "unavailable",
-                    "policy owner has no audited semantic-impact coverage",
-                    observed=owner,
+                    "policy owner lacks current consumer-coverage certificates",
+                    observed="|".join(uncovered) if uncovered else owner,
                 )
             )
-        edges = (
-            _impact_edge(self.registry, self.compiled, owner, view.edge.id)
-            for unit in self.policy_units.for_module(owner)
-            for view in self.registry.outgoing(unit.id, (POLICY_GROUP,))
+        return self.declared_consumers_for(owner)
+
+    def declared_consumers_for(self, owner: str) -> tuple[ImpactEdge, ...]:
+        return _declared_consumers(
+            self.registry,
+            self.compiled,
+            self.policy_units,
+            owner,
         )
-        return tuple(
-            sorted(edges, key=lambda edge: (edge.consumer, edge.relation, edge.edge_id))
-        )
+
+
+def _declared_consumers(
+    registry: EdgeRegistry,
+    compiled: CompiledPolicyImpactSet,
+    policy_units: PolicyUnitCorpus,
+    owner: str,
+) -> tuple[ImpactEdge, ...]:
+    edges = (
+        _impact_edge(registry, compiled, owner, view.edge.id)
+        for unit in policy_units.for_module(owner)
+        for view in registry.outgoing(unit.id, (POLICY_GROUP,))
+    )
+    return tuple(
+        sorted(edges, key=lambda edge: (edge.consumer, edge.relation, edge.edge_id))
+    )
 
 
 def _diagnostic(
@@ -100,6 +132,25 @@ def _diagnostic(
 
 def _translate_policy_error(
     error: PolicyImpactError,
+    *,
+    suite: str,
+    check: str,
+) -> EngineError:
+    failure = error.failure
+    return _diagnostic(
+        failure.code,
+        failure.message,
+        path=failure.path,
+        field=failure.field,
+        observed=failure.observed,
+        suite=suite,
+        check=check,
+        unavailable=failure.outcome == "unavailable",
+    )
+
+
+def _translate_analysis_error(
+    error: AnalysisError,
     *,
     suite: str,
     check: str,
@@ -258,34 +309,43 @@ def _suite_owners(
 
 def _validate_adapter(
     root: Path,
-    adapter: PolicyImpactAdapter,
+    registry: EdgeRegistry,
+    compiled: CompiledPolicyImpactSet,
+    policy_units: PolicyUnitCorpus,
     suite_paths: Mapping[str, str],
     *,
     suite: str,
     check: str,
-) -> PolicyImpactAdapter:
+) -> None:
     identities: set[tuple[str, str, str]] = set()
-    for owner in sorted(adapter.audited_owners):
-        for edge in adapter.consumers_for(owner):
+    relationship_sources = {
+        semantics.source for semantics in compiled.semantics.values()
+    }
+    relationship_owners = {
+        unit.module
+        for unit in policy_units.units
+        if unit.id in relationship_sources
+    }
+    for owner in sorted(relationship_owners):
+        for edge in _declared_consumers(registry, compiled, policy_units, owner):
             _validate_consumer(root, edge, suite_paths, suite=suite, check=check)
             identities.add((edge.owner, edge.consumer, edge.relation))
 
     for suite_id, owner in sorted(
         _suite_owners(root, suite_paths, suite=suite, check=check).items()
     ):
-        if owner not in adapter.audited_owners:
+        if owner not in relationship_owners:
             continue
         identity = (owner, suite_paths[suite_id], "enforcement-suite-projection")
         if identity not in identities:
             raise _diagnostic(
                 "POLICY_IMPACT.MISSING_ENFORCEMENT_SUITE_EDGE",
-                "suite owned by an audited policy owner requires an enforcement-suite edge",
+                "suite owned by a relationship-owning policy module requires an enforcement-suite edge",
                 field="relationships",
                 observed=f"{suite_id}|{suite_paths[suite_id]}",
                 suite=suite,
                 check=check,
             )
-    return adapter
 
 
 def load_policy_impact(
@@ -331,13 +391,20 @@ def load_policy_impact(
             suite=suite,
             check=check,
         ) from error
-    return _validate_adapter(
+    _validate_adapter(
         repo_root,
-        PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus),
+        registry,
+        compiled,
+        corpus.policy_unit_corpus,
         suite_paths,
         suite=suite,
         check=check,
     )
+    try:
+        coverage = compile_coverage(repo_root, corpus, compiled)
+    except AnalysisError as error:
+        raise _translate_analysis_error(error, suite=suite, check=check) from error
+    return PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus, coverage)
 
 
 def load_registered_policy_impact(
@@ -367,10 +434,17 @@ def load_registered_policy_impact(
             suite=suite,
             check=check,
         ) from error
-    return _validate_adapter(
+    _validate_adapter(
         root.resolve(),
-        PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus),
+        registry,
+        compiled,
+        corpus.policy_unit_corpus,
         suite_paths,
         suite=suite,
         check=check,
     )
+    try:
+        coverage = compile_coverage(root.resolve(), corpus, compiled)
+    except AnalysisError as error:
+        raise _translate_analysis_error(error, suite=suite, check=check) from error
+    return PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus, coverage)

@@ -1,5 +1,48 @@
 # Standards Engine Navigation And Analysis Execution Ledger
 
+## 2026-08-23: Milestone 3 Coverage Identity Cutover
+
+- Added a complete snapshot input closure for coverage authority,
+  attestations, exclusions, and evidence while deriving reusable
+  `CoverageAuthorityView` identities from consumer-discovery inputs only.
+- Registered an independent 856-member consumer horizon over canonical
+  standards, graph providers, registered suites, declared suite inputs, and
+  supplemental policy-impact nodes. Every member carries a content or semantic
+  fingerprint.
+- Bootstrapped 28 reviewed Planning and Commit policy-unit attestations and
+  generated 28 current certificates. Verification remains deliberately
+  uncovered and therefore cannot return a successful empty result.
+- Removed the legacy module audit catalog, compiler matching, graph semantics,
+  inspection field, verifier flags, fixture requirements, and public schema
+  shapes without fallback. Structural relationship diagnostics run before the
+  downstream coverage gate.
+- Narrowed relationship invalidation: each view binds its subject's outgoing
+  relationship fingerprints and the compiler provider contract, not unrelated
+  relationship instances or declaration storage paths.
+- Acceptance evidence is recorded in the
+  [coverage cutover report](reports/milestone-3-coverage-identity-cutover.md).
+
+## 2026-08-23: Milestone 3 Coverage Identity Replan
+
+- Coverage implementation exposed a repository-local identity cycle: an
+  attestation changes the complete analysis snapshot whose requirement it
+  answers. Binding the requirement directly to that snapshot would invalidate
+  every newly committed attestation.
+- Accepted two distinct identities. `AnalysisSnapshot` binds all analysis
+  inputs and stales packets after an attestation commit;
+  `CoverageAuthorityView` excludes attestations and other downstream artifacts
+  by typed role while binding every consumer-discovery dependency.
+- Rejected the legacy `policy-impact-declarations:v1` horizon because it can
+  inspect only declared relationships. The replacement provider derives
+  content-fingerprinted members from canonical corpora, graph registrations,
+  registered suites, and their declared repository inputs, with the node
+  catalog only as a supplement.
+- The active next slice atomically replaces legacy audit catalogs, compiler
+  matching, verifier flags, and schema shapes with requirements, attestations,
+  reusable certificates, and exact completion evidence. Detailed authority and
+  cutover decisions are in the
+  [coverage identity replan](reports/milestone-3-coverage-identity-replan.md).
+
 ## 2026-08-23: Milestone 3 Policy-Unit Authority Cutover
 
 - Loaded canonical modules and policy-unit sidecars through one immutable
