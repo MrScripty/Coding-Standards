@@ -4,7 +4,8 @@
 registered relationship providers to the repository-neutral graph engine. It
 composes the generic policy-impact node/group catalog with the compiled
 `standards_policy_impact` provider; it does not own relationship declarations.
-It owns standards graph composition, not canonical metadata, generic traversal,
+It projects metadata-owned module and policy-unit views into graph nodes and
+owns standards graph composition, not canonical metadata, generic traversal,
 suite execution dependencies, or policy applicability.
 
 The stable provider ID `standards-verifier.metadata-dependencies` predates this

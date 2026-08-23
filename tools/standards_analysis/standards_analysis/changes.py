@@ -5,7 +5,11 @@ from enum import Enum
 from typing import Iterable
 
 from .errors import AnalysisError, AnalysisFailure
-from .policy_units import PolicyUnit, PolicyUnitCorpus, PolicyUnitTombstone
+from tools.standards_metadata.standards_metadata import (
+    PolicyUnit,
+    PolicyUnitCorpus,
+    PolicyUnitTombstone,
+)
 
 
 POLICY_IMPACT = "policy-impact"

@@ -11,6 +11,11 @@ kind = "provider"
 provider = "standards.policy-impact"
 
 [[sources]]
+id = "standards.policy-units"
+kind = "provider"
+provider = "standards.policy-units"
+
+[[sources]]
 id = "standards-verifier.suite-dependencies"
 kind = "provider"
 provider = "standards-verifier.suite-dependencies"

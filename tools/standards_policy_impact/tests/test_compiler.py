@@ -3,15 +3,24 @@ from __future__ import annotations
 import tempfile
 import textwrap
 import unittest
+from dataclasses import replace
 from pathlib import Path
 
 from tools.graph_engine.graph_engine import EdgeRegistry
 from tools.graph_engine.graph_engine.manifest import ManifestSource
 from tools.standards_applicability.standards_applicability import Truth
-from tools.standards_graph.standards_graph import metadata_dependency_source
+from tools.standards_graph.standards_graph import (
+    PolicyUnitGraphSource,
+    metadata_dependency_source,
+)
 from tools.standards_metadata.standards_metadata import (
+    CanonicalModuleCorpus,
+    CanonicalStandardsCorpus,
     ModuleMetadata,
-    load_canonical_module_corpus,
+    PolicyUnit,
+    PolicyUnitCorpus,
+    PolicyUnitTombstone,
+    load_canonical_standards_corpus,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
     CATALOG_SOURCE_ID,
@@ -27,11 +36,11 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 
 class PolicyImpactCompilerTest(unittest.TestCase):
     def test_repository_declarations_compile_one_graph_and_semantics_view(self) -> None:
-        modules = load_canonical_module_corpus(REPO_ROOT)
-        compiled = compile_policy_impact(REPO_ROOT, modules.modules)
+        corpus = load_canonical_standards_corpus(REPO_ROOT)
+        compiled = compile_policy_impact(REPO_ROOT, corpus)
 
-        self.assertEqual(len(compiled.graph.edges), 39)
-        self.assertEqual(len(compiled.semantics), 39)
+        self.assertEqual(len(compiled.graph.edges), 126)
+        self.assertEqual(len(compiled.semantics), 126)
         self.assertEqual(compiled.graph.nodes, ())
         self.assertEqual(compiled.graph.groups, ())
         self.assertEqual(
@@ -39,7 +48,7 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             {"workflow.commit", "workflow.planning"},
         )
         edge_id = (
-            "policy-impact:v1/workflow.planning/prompt-projection/"
+            "policy-impact:v1/workflow.planning.plan-admission/prompt-projection/"
             "prompts%2Fimplement-plan.md"
         )
         edge = next(edge for edge in compiled.graph.edges if edge.id == edge_id)
@@ -62,12 +71,13 @@ class PolicyImpactCompilerTest(unittest.TestCase):
         )
 
     def test_compiled_edges_join_independent_nodes_groups_and_module_aliases(self) -> None:
-        modules = load_canonical_module_corpus(REPO_ROOT)
-        compiled = compile_policy_impact(REPO_ROOT, modules.modules)
+        corpus = load_canonical_standards_corpus(REPO_ROOT)
+        compiled = compile_policy_impact(REPO_ROOT, corpus)
         registry = EdgeRegistry(
             REPO_ROOT,
             (
-                metadata_dependency_source(modules.modules),
+                metadata_dependency_source(corpus.modules),
+                PolicyUnitGraphSource(corpus.policy_unit_corpus),
                 ManifestSource(
                     REPO_ROOT,
                     CATALOG_SOURCE_ID,
@@ -85,6 +95,7 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             registry.incident("workflow.planning", ("policy-impact",)),
             registry.incident("workflows/planning.md", ("policy-impact",)),
         )
+        self.assertEqual(registry.outgoing("workflow.planning", ("policy-impact",)), ())
 
     def test_invalid_declarations_reject_with_typed_failures(self) -> None:
         cases = (
@@ -130,6 +141,71 @@ class PolicyImpactCompilerTest(unittest.TestCase):
                     with self.assertRaises(PolicyImpactError) as caught:
                         compile_policy_impact(root, modules, "registry.toml")
                 self.assertEqual(caught.exception.failure.code, code)
+
+    def test_relationship_sources_require_exact_active_owner_policy_units(self) -> None:
+        source_cases = (
+            ("workflow.planning", None, "POLICY_IMPACT.MODULE_SOURCE"),
+            (
+                "workflow.planning.alias",
+                "alias",
+                "POLICY_IMPACT.NONCANONICAL_SOURCE",
+            ),
+            (
+                "workflow.planning.policy",
+                "retired",
+                "POLICY_IMPACT.NONCANONICAL_SOURCE",
+            ),
+        )
+        for source, corpus_change, code in source_cases:
+            with self.subTest(source=source):
+                declaration = self.relationships(
+                    self.relationship().replace(
+                        'source = "workflow.planning.policy"',
+                        f'source = "{source}"',
+                    )
+                )
+                with self.fixture(declaration) as (root, corpus):
+                    unit = corpus.policy_unit_corpus.units[0]
+                    if corpus_change == "alias":
+                        policy_units = replace(
+                            corpus.policy_unit_corpus,
+                            units=(replace(unit, aliases=(source,)),),
+                        )
+                        corpus = replace(corpus, policy_unit_corpus=policy_units)
+                    elif corpus_change == "retired":
+                        policy_units = replace(
+                            corpus.policy_unit_corpus,
+                            units=(),
+                            tombstones=(
+                                PolicyUnitTombstone(source, 1, (), "review", "units.toml"),
+                            ),
+                        )
+                        corpus = replace(corpus, policy_unit_corpus=policy_units)
+                    with self.assertRaises(PolicyImpactError) as caught:
+                        compile_policy_impact(root, corpus, "registry.toml")
+                self.assertEqual(caught.exception.failure.code, code)
+
+        with self.fixture(
+            self.relationships(self.relationship()).replace(
+                'owner = "workflow.planning"',
+                'owner = "workflow.other"',
+            )
+        ) as (root, corpus):
+            other = replace(
+                corpus.modules[0],
+                path="workflows/other.md",
+                module_id="workflow.other",
+                owner="workflows/other.md",
+            )
+            modules = replace(
+                corpus.module_corpus,
+                members=(*corpus.module_corpus.members, other.path),
+                modules=(*corpus.modules, other),
+            )
+            corpus = replace(corpus, module_corpus=modules)
+            with self.assertRaises(PolicyImpactError) as caught:
+                compile_policy_impact(root, corpus, "registry.toml")
+        self.assertEqual(caught.exception.failure.code, "POLICY_IMPACT.CROSS_OWNER_SOURCE")
 
     def test_ambiguous_audit_and_catalog_edges_reject(self) -> None:
         with self.fixture(self.relationships(self.relationship())) as (root, modules):
@@ -253,7 +329,7 @@ class PolicyImpactCompilerTest(unittest.TestCase):
         return textwrap.dedent(
             f"""
             [[relationships]]
-            source = "workflow.planning"
+            source = "workflow.planning.policy"
             consumer = "{consumer}"
             relation = "{relation}"
             applicability = {{ operator = "always" }}
@@ -344,10 +420,33 @@ class PolicyImpactCompilerTest(unittest.TestCase):
             "tests",
             "workflows/planning.md",
         )
+        module_corpus = CanonicalModuleCorpus(
+            "corpus.toml",
+            (module.path,),
+            (module,),
+        )
+        unit = PolicyUnit(
+            "workflow.planning.policy",
+            "workflow.planning",
+            ("Policy",),
+            1,
+            (),
+            (),
+            (),
+            module.path,
+            "## Policy\n",
+            "sha256:" + "a" * 64,
+            "sha256:" + "b" * 64,
+            "units.toml",
+        )
+        corpus = CanonicalStandardsCorpus(
+            module_corpus,
+            PolicyUnitCorpus("units.toml", ("units.toml",), (unit,), ()),
+        )
 
         class Fixture:
             def __enter__(self):
-                return root, (module,)
+                return root, corpus
 
             def __exit__(self, *_):
                 case.cleanup()

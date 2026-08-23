@@ -17,20 +17,10 @@ from .changes import (
     SemanticState,
     classify_changes,
 )
-from .policy_units import (
-    POLICY_UNIT_REGISTRY,
-    PolicyUnit,
-    PolicyUnitCorpus,
-    PolicyUnitTombstone,
-    load_policy_unit_corpus,
-    markdown_structural_digest,
-)
 from .impact import (
-    POLICY_UNIT_SOURCE_ID,
     ImpactCandidate,
     ImpactSelection,
     ImpactTrace,
-    PolicyUnitGraphSource,
     select_impact,
 )
 from .serialization import canonical_json_bytes, digest_bytes, identity
@@ -44,7 +34,6 @@ from .routing import (
 from .snapshots import AnalysisVersions, compile_snapshot
 
 __all__ = (
-    "POLICY_UNIT_REGISTRY",
     "AnalysisError",
     "AnalysisFailure",
     "AnalysisVersions",
@@ -59,11 +48,6 @@ __all__ = (
     "ImpactSelection",
     "ImpactTrace",
     "POLICY_IMPACT",
-    "POLICY_UNIT_SOURCE_ID",
-    "PolicyUnit",
-    "PolicyUnitCorpus",
-    "PolicyUnitGraphSource",
-    "PolicyUnitTombstone",
     "ROUTER_PROJECTION",
     "RouteFact",
     "RouteRule",
@@ -78,8 +62,6 @@ __all__ = (
     "compile_snapshot",
     "digest_bytes",
     "identity",
-    "load_policy_unit_corpus",
     "load_router_projection",
-    "markdown_structural_digest",
     "select_impact",
 )

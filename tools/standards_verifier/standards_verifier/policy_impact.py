@@ -11,9 +11,11 @@ from tools.standards_applicability.standards_applicability import ApplicabilityP
 from tools.standards_graph.standards_graph import metadata_dependency_source
 from tools.standards_metadata.standards_metadata import (
     MetadataError,
-    load_canonical_module_corpus,
+    PolicyUnitCorpus,
+    load_canonical_standards_corpus,
     load_module_metadata,
 )
+from tools.standards_graph.standards_graph import PolicyUnitGraphSource
 from tools.standards_policy_impact.standards_policy_impact import (
     CATALOG_SOURCE_ID,
     CompiledPolicyImpactSet,
@@ -45,6 +47,7 @@ class ImpactEdge:
 class PolicyImpactAdapter:
     registry: EdgeRegistry
     compiled: CompiledPolicyImpactSet
+    policy_units: PolicyUnitCorpus
 
     @property
     def audited_owners(self) -> frozenset[str]:
@@ -60,14 +63,13 @@ class PolicyImpactAdapter:
                     observed=owner,
                 )
             )
+        edges = (
+            _impact_edge(self.registry, self.compiled, owner, view.edge.id)
+            for unit in self.policy_units.for_module(owner)
+            for view in self.registry.outgoing(unit.id, (POLICY_GROUP,))
+        )
         return tuple(
-            sorted(
-                (
-                    _impact_edge(self.registry, self.compiled, view.edge.id)
-                    for view in self.registry.outgoing(owner, (POLICY_GROUP,))
-                ),
-                key=lambda edge: (edge.consumer, edge.relation, edge.edge_id),
-            )
+            sorted(edges, key=lambda edge: (edge.consumer, edge.relation, edge.edge_id))
         )
 
 
@@ -132,13 +134,14 @@ def _repository_path(registry: EdgeRegistry, node_id: str, source_path: str) -> 
 def _impact_edge(
     registry: EdgeRegistry,
     compiled: CompiledPolicyImpactSet,
+    owner: str,
     edge_id: str,
 ) -> ImpactEdge:
     edge = registry.edge(edge_id)
     semantics = compiled.semantics_for(edge_id)
     return ImpactEdge(
         edge.id,
-        edge.source,
+        owner,
         _repository_path(registry, edge.target, semantics.declaration_source),
         edge.relation,
         semantics.applicability_program,
@@ -295,12 +298,13 @@ def load_policy_impact(
 ) -> PolicyImpactAdapter:
     repo_root = root.resolve()
     try:
-        modules = load_canonical_module_corpus(repo_root)
-        compiled = compile_policy_impact(repo_root, modules.modules, registry_path)
+        corpus = load_canonical_standards_corpus(repo_root)
+        compiled = compile_policy_impact(repo_root, corpus, registry_path)
         registry = EdgeRegistry(
             repo_root,
             (
-                metadata_dependency_source(modules.modules),
+                metadata_dependency_source(corpus.modules),
+                PolicyUnitGraphSource(corpus.policy_unit_corpus),
                 ManifestSource(repo_root, CATALOG_SOURCE_ID, compiled.node_catalog),
                 PolicyImpactSource(compiled),
             ),
@@ -329,7 +333,7 @@ def load_policy_impact(
         ) from error
     return _validate_adapter(
         repo_root,
-        PolicyImpactAdapter(registry, compiled),
+        PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus),
         suite_paths,
         suite=suite,
         check=check,
@@ -344,11 +348,17 @@ def load_registered_policy_impact(
     suite: str = "policy-impact-query",
     check: str = "registry",
 ) -> PolicyImpactAdapter:
-    from .repository_graph import load_compiled_policy_impact, load_repository_registry
+    from .repository_graph import load_repository_registry
 
     try:
-        compiled = load_compiled_policy_impact(root)
-        registry = load_repository_registry(root, source_registry_path)
+        corpus = load_canonical_standards_corpus(root.resolve())
+        compiled = compile_policy_impact(root.resolve(), corpus, DEFAULT_POLICY_REGISTRY)
+        registry = load_repository_registry(
+            root,
+            source_registry_path,
+            corpus=corpus,
+            compiled_policy_impact=compiled,
+        )
     except GraphError as error:
         raise _diagnostic(
             error.failure.code,
@@ -359,7 +369,7 @@ def load_registered_policy_impact(
         ) from error
     return _validate_adapter(
         root.resolve(),
-        PolicyImpactAdapter(registry, compiled),
+        PolicyImpactAdapter(registry, compiled, corpus.policy_unit_corpus),
         suite_paths,
         suite=suite,
         check=check,

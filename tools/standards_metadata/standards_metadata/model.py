@@ -1,8 +1,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from .errors import MetadataFailure
+
+if TYPE_CHECKING:
+    from .policy_units import PolicyUnit, PolicyUnitCorpus, PolicyUnitTombstone
 
 
 @dataclass(frozen=True, slots=True)
@@ -40,3 +44,26 @@ class CanonicalModuleCorpus:
 class MetadataValidation:
     modules: tuple[ModuleMetadata, ...]
     failures: tuple[MetadataFailure, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class CanonicalStandardsCorpus:
+    module_corpus: CanonicalModuleCorpus
+    policy_unit_corpus: "PolicyUnitCorpus"
+
+    @property
+    def modules(self) -> tuple[ModuleMetadata, ...]:
+        return self.module_corpus.modules
+
+    @property
+    def policy_units(self) -> tuple["PolicyUnit", ...]:
+        return self.policy_unit_corpus.units
+
+    def resolve_module(self, value: str) -> ModuleMetadata | None:
+        return self.module_corpus.resolve(value)
+
+    def resolve_policy_unit(
+        self,
+        value: str,
+    ) -> "PolicyUnit | PolicyUnitTombstone | None":
+        return self.policy_unit_corpus.resolve(value)

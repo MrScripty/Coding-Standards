@@ -5,7 +5,7 @@ import json
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Iterable, Mapping
+from typing import Any, Mapping
 from urllib.parse import quote
 
 from tools.graph_engine.graph_engine import Edge, GraphContribution, Provenance
@@ -18,7 +18,7 @@ from tools.standards_applicability.standards_applicability import (
     FactSchema,
     compile_fact_schema,
 )
-from tools.standards_metadata.standards_metadata import ModuleMetadata
+from tools.standards_metadata.standards_metadata import CanonicalStandardsCorpus
 
 from .errors import PolicyImpactError, PolicyImpactFailure
 from .model import (
@@ -295,6 +295,7 @@ def _load_audits(
 
 @dataclass(frozen=True, slots=True)
 class _Declaration:
+    owner: str
     source: str
     consumer: str
     relation: str
@@ -358,14 +359,6 @@ def _load_declarations(
                 owner=owner,
             )
             source = _text(item, "source", path)
-            if source != owner:
-                raise _error(
-                    "POLICY_IMPACT.UNKNOWN_OWNER",
-                    "source-owner file may declare only its owner's outgoing relationships",
-                    path=path,
-                    field="source",
-                    observed=source,
-                )
             evidence = _text(item, "evidence_owner", path)
             try:
                 applicability_program = fact_schema.compile(item["applicability"])
@@ -380,6 +373,7 @@ def _load_declarations(
                 ) from error
             result.append(
                 _Declaration(
+                    owner,
                     source,
                     _text(item, "consumer", path),
                     _text(item, "relation", path),
@@ -401,7 +395,7 @@ def policy_impact_edge_id(source: str, relation: str, consumer: str) -> str:
 
 def compile_policy_impact(
     root: Path,
-    modules: Iterable[ModuleMetadata],
+    corpus: CanonicalStandardsCorpus,
     registry_path: str = DEFAULT_REGISTRY,
 ) -> CompiledPolicyImpactSet:
     repo_root = root.resolve()
@@ -458,8 +452,11 @@ def compile_policy_impact(
             path=node_catalog,
         )
 
-    module_ids = {module.module_id for module in modules}
-    node_ids = module_ids | {node.id for node in catalog.nodes}
+    module_ids = {module.module_id for module in corpus.modules}
+    policy_units = corpus.policy_unit_corpus
+    node_ids = module_ids | {unit.id for unit in policy_units.units} | {
+        node.id for node in catalog.nodes
+    }
     groups = {group.id for group in catalog.groups}
     kinds = RELATIONSHIP_KINDS
     facts = _load_facts(repo_root, fact_catalog)
@@ -477,10 +474,38 @@ def compile_policy_impact(
     natural_keys: set[tuple[str, str, str]] = set()
     audited_owners: set[str] = set()
     for declaration in declarations:
-        if declaration.source not in module_ids:
+        if declaration.owner not in module_ids:
             raise _error(
                 "POLICY_IMPACT.UNKNOWN_OWNER",
-                "relationship source is not a canonical module",
+                "declaration owner must be a canonical module ID",
+                path=declaration.source_path,
+                observed=declaration.owner,
+            )
+        source_unit = policy_units.active_by_id(declaration.source)
+        resolved_source = policy_units.resolve(declaration.source)
+        if declaration.source in module_ids:
+            raise _error(
+                "POLICY_IMPACT.MODULE_SOURCE",
+                "policy-impact relationships must originate from policy units, not modules",
+                path=declaration.source_path,
+                observed=declaration.source,
+            )
+        if source_unit is None:
+            code = (
+                "POLICY_IMPACT.NONCANONICAL_SOURCE"
+                if resolved_source is not None
+                else "POLICY_IMPACT.UNKNOWN_SOURCE"
+            )
+            raise _error(
+                code,
+                "relationship source must be one exact active policy-unit ID",
+                path=declaration.source_path,
+                observed=declaration.source,
+            )
+        if source_unit.module != declaration.owner:
+            raise _error(
+                "POLICY_IMPACT.CROSS_OWNER_SOURCE",
+                "relationship source must belong to its declaration owner module",
                 path=declaration.source_path,
                 observed=declaration.source,
             )
@@ -542,7 +567,7 @@ def compile_policy_impact(
         audit_matches = [
             audit_id
             for audit_id, owner, relations in audits
-            if owner == declaration.source and declaration.relation in relations
+            if owner == declaration.owner and declaration.relation in relations
         ]
         if len(audit_matches) > 1:
             raise _error(
@@ -553,7 +578,7 @@ def compile_policy_impact(
             )
         audit_id = audit_matches[0] if audit_matches else None
         if audit_id is not None:
-            audited_owners.add(declaration.source)
+            audited_owners.add(declaration.owner)
 
         edge_id = policy_impact_edge_id(*natural_key)
         propagation = kind.propagation

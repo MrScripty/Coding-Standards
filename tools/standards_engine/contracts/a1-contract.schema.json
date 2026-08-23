@@ -980,11 +980,27 @@
     },
     "RelatedResult": {
       "type": "object",
-      "required": ["kind", "handle", "target", "relationships", "next_operations"],
+      "required": ["kind", "handle", "target", "policy_unit_mapping", "relationships", "next_operations"],
       "properties": {
         "kind": { "const": "related-result" },
         "handle": { "$ref": "#/$defs/NavigationHandle" },
         "target": { "$ref": "#/$defs/CanonicalId" },
+        "policy_unit_mapping": {
+          "type": "object",
+          "required": ["state", "policy_units"],
+          "properties": {
+            "state": {
+              "enum": ["exact-policy-unit", "policy-units-present", "incomplete"]
+            },
+            "reason": { "const": "no-policy-units" },
+            "policy_units": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "$ref": "#/$defs/CanonicalId" }
+            }
+          },
+          "additionalProperties": false
+        },
         "relationships": {
           "type": "array",
           "items": { "$ref": "#/$defs/RelationshipSummary" }
@@ -998,7 +1014,7 @@
       "additionalProperties": false,
       "x-standards-engine-identity": {
         "domain": "coding-standards:navigation:v1",
-        "include": ["handle.snapshot", "target", "relationships"],
+        "include": ["handle.snapshot", "target", "policy_unit_mapping", "relationships"],
         "exclude": ["handle.id", "next_operations", "summary"]
       }
     },

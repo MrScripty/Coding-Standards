@@ -6,11 +6,12 @@ import unittest
 import json
 from pathlib import Path
 
-from tools.standards_analysis.standards_analysis import (
-    AnalysisError,
+from tools.standards_metadata.standards_metadata import (
+    MetadataError,
+    load_canonical_standards_corpus,
+    load_canonical_module_corpus,
     load_policy_unit_corpus,
 )
-from tools.standards_metadata.standards_metadata import load_canonical_module_corpus
 from tools.standards_engine.contracts.validate_contracts import validate
 
 
@@ -88,6 +89,17 @@ class PolicyUnitTest(unittest.TestCase):
             "$policy_unit",
         )
 
+    def test_combined_corpus_resolves_modules_and_policy_units_from_one_snapshot(self) -> None:
+        corpus = load_canonical_standards_corpus(REPO_ROOT)
+
+        planning = corpus.resolve_module("workflow.planning")
+        admission = corpus.resolve_policy_unit("workflow.planning.plan-admission")
+        self.assertIsNotNone(planning)
+        self.assertIsNotNone(admission)
+        assert planning is not None and admission is not None
+        self.assertEqual(admission.module, planning.module_id)
+        self.assertIn(admission, corpus.policy_unit_corpus.for_module(planning.module_id))
+
     def test_rewrapping_changes_representation_not_structure(self) -> None:
         self.module("A policy paragraph uses multiple words.")
         self.declarations(
@@ -119,7 +131,7 @@ class PolicyUnitTest(unittest.TestCase):
             """
         )
 
-        with self.assertRaises(AnalysisError) as caught:
+        with self.assertRaises(MetadataError) as caught:
             self.load()
         self.assertEqual(caught.exception.failure.code, "POLICY_UNIT.LOCATOR_COUNT")
 
@@ -158,7 +170,7 @@ class PolicyUnitTest(unittest.TestCase):
             ),
             encoding="utf-8",
         )
-        with self.assertRaises(AnalysisError) as caught:
+        with self.assertRaises(MetadataError) as caught:
             self.load()
         self.assertEqual(caught.exception.failure.code, "POLICY_UNIT.PREDECESSOR_MISMATCH")
 
@@ -173,7 +185,7 @@ class PolicyUnitTest(unittest.TestCase):
             semantic_revision = 1
             """
         )
-        with self.assertRaises(AnalysisError) as caught:
+        with self.assertRaises(MetadataError) as caught:
             self.load()
         self.assertEqual(caught.exception.failure.code, "POLICY_UNIT.LEGACY_ID")
 
@@ -195,7 +207,7 @@ class PolicyUnitTest(unittest.TestCase):
             """
         )
 
-        with self.assertRaises(AnalysisError) as caught:
+        with self.assertRaises(MetadataError) as caught:
             self.load()
         self.assertEqual(caught.exception.failure.code, "POLICY_UNIT.LOCATOR_CONFLICT")
 
@@ -211,7 +223,7 @@ class PolicyUnitTest(unittest.TestCase):
             """
         )
 
-        with self.assertRaises(AnalysisError) as caught:
+        with self.assertRaises(MetadataError) as caught:
             self.load()
         self.assertEqual(caught.exception.failure.code, "POLICY_UNIT.LEGACY_ID")
 

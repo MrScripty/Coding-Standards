@@ -14,20 +14,13 @@ from tools.standards_applicability.standards_applicability import (
     Truth,
 )
 from tools.standards_analysis.standards_analysis import (
-    POLICY_UNIT_REGISTRY,
     AnalysisError,
     AnalysisFailure,
-    PolicyUnit,
-    PolicyUnitCorpus,
-    PolicyUnitTombstone,
     ROUTER_PROJECTION,
     RouterProjection,
     compile_snapshot,
-    digest_bytes,
     identity,
-    load_policy_unit_corpus,
     load_router_projection,
-    markdown_structural_digest,
 )
 from tools.standards_graph.standards_graph import (
     POLICY_IMPACT_REGISTRY,
@@ -36,9 +29,14 @@ from tools.standards_graph.standards_graph import (
 )
 from tools.standards_metadata.standards_metadata import (
     CANONICAL_MODULE_CORPUS,
-    CanonicalModuleCorpus,
+    POLICY_UNIT_REGISTRY,
+    CanonicalStandardsCorpus,
     ModuleMetadata,
-    load_canonical_module_corpus,
+    PolicyUnit,
+    PolicyUnitTombstone,
+    digest_bytes,
+    load_canonical_standards_corpus,
+    markdown_structural_digest,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
     CompiledPolicyImpactSet,
@@ -76,16 +74,16 @@ class StandardsEngine:
         self,
         root: Path,
         snapshot,
-        modules: CanonicalModuleCorpus,
-        policies: PolicyUnitCorpus,
+        corpus: CanonicalStandardsCorpus,
         graph: EdgeRegistry,
         router: RouterProjection,
         policy_impact: CompiledPolicyImpactSet,
     ) -> None:
         self._root = root.resolve()
         self._snapshot = snapshot
-        self._modules = modules
-        self._policies = policies
+        self._corpus = corpus
+        self._modules = corpus.module_corpus
+        self._policies = corpus.policy_unit_corpus
         self._graph = graph
         self._router = router
         self._policy_impact = policy_impact
@@ -94,11 +92,10 @@ class StandardsEngine:
     @classmethod
     def open_repository(cls, root: Path) -> StandardsEngine:
         repo_root = root.resolve()
-        initial_modules = load_canonical_module_corpus(repo_root)
-        initial_policies = load_policy_unit_corpus(repo_root, initial_modules)
+        initial_corpus = load_canonical_standards_corpus(repo_root)
         initial_policy_impact = compile_policy_impact(
             repo_root,
-            initial_modules.modules,
+            initial_corpus,
             POLICY_IMPACT_REGISTRY,
         )
         scope = tuple(
@@ -109,30 +106,31 @@ class StandardsEngine:
                     ROUTER_PROJECTION,
                     INTERFACE_SCHEMA,
                     *initial_policy_impact.input_sources,
-                    *initial_modules.members,
-                    *initial_policies.sources,
+                    *initial_corpus.module_corpus.members,
+                    *initial_corpus.policy_unit_corpus.sources,
                 }
             )
         )
         before = compile_snapshot(repo_root, scope)
-        modules = load_canonical_module_corpus(repo_root)
-        policies = load_policy_unit_corpus(repo_root, modules)
+        corpus = load_canonical_standards_corpus(repo_root)
         policy_impact = compile_policy_impact(
             repo_root,
-            modules.modules,
+            corpus,
             POLICY_IMPACT_REGISTRY,
         )
         graph = standards_navigation_registry(
             repo_root,
-            modules.modules,
+            corpus,
             compiled_policy_impact=policy_impact,
         )
-        router = load_router_projection(repo_root, modules)
+        router = load_router_projection(repo_root, corpus.module_corpus)
         after = compile_snapshot(repo_root, scope)
         if (
             before.handle != after.handle
-            or initial_modules.members != modules.members
-            or initial_policies.sources != policies.sources
+            or initial_corpus.module_corpus.members
+            != corpus.module_corpus.members
+            or initial_corpus.policy_unit_corpus.sources
+            != corpus.policy_unit_corpus.sources
             or initial_policy_impact.declaration_digest
             != policy_impact.declaration_digest
         ):
@@ -142,8 +140,7 @@ class StandardsEngine:
         return cls(
             repo_root,
             after,
-            modules,
-            policies,
+            corpus,
             graph,
             router,
             policy_impact,
@@ -375,7 +372,13 @@ class StandardsEngine:
             content = (self._root / module.path).read_text(encoding="utf-8")
             scope = {"kind": "whole-artifact"}
         policy = self._policy_summary(canonical_id, module, scope)
-        related = self._direct_relationships(module.module_id, None, Direction.BOTH)
+        related = self._relationships_for_policy(
+            selected,
+            module,
+            None,
+            Direction.BOTH,
+            transitive=False,
+        )
         identity_value = {
             "handle": {"snapshot": self._snapshot.handle},
             "policy": policy,
@@ -405,21 +408,25 @@ class StandardsEngine:
     def _related(self, request: RelatedRequest) -> QueryResult:
         try:
             direction = Direction.parse(request.direction)
-            graph_target = self._graph_target(request.target)
-            relationships = (
-                self._transitive_relationships(
-                    graph_target,
-                    request.groups,
-                    direction,
-                )
-                if request.transitive
-                else self._direct_relationships(graph_target, request.groups, direction)
+            selected = self._resolve_policy(request.target)
+            if isinstance(selected, RejectedResult):
+                return selected
+            policy, module = selected
+            graph_target = policy.id if isinstance(policy, PolicyUnit) else module.module_id
+            relationships = self._relationships_for_policy(
+                policy,
+                module,
+                request.groups,
+                direction,
+                transitive=request.transitive,
             )
         except GraphError as error:
             return self._graph_rejection(error)
+        policy_unit_mapping = self._policy_unit_mapping(policy, module)
         identity_value = {
             "handle": {"snapshot": self._snapshot.handle},
             "target": graph_target,
+            "policy_unit_mapping": policy_unit_mapping,
             "relationships": relationships,
         }
         handle = self._navigation_handle(identity_value)
@@ -427,6 +434,7 @@ class StandardsEngine:
             "kind": "related-result",
             "handle": handle,
             "target": graph_target,
+            "policy_unit_mapping": policy_unit_mapping,
             "relationships": relationships,
             "next_operations": [
                 {"operation": "inspect", "request_kind": "inspect", "target": request.target}
@@ -435,6 +443,25 @@ class StandardsEngine:
         }
         self._navigation[str(handle["id"])] = value
         return RelatedResult.from_value(value)
+
+    def _policy_unit_mapping(
+        self,
+        selected: PolicyUnit | ModuleMetadata,
+        module: ModuleMetadata,
+    ) -> dict[str, object]:
+        if isinstance(selected, PolicyUnit):
+            return {"state": "exact-policy-unit", "policy_units": [selected.id]}
+        units = self._policies.for_module(module.module_id)
+        if not units:
+            return {
+                "state": "incomplete",
+                "reason": "no-policy-units",
+                "policy_units": [],
+            }
+        return {
+            "state": "policy-units-present",
+            "policy_units": [unit.id for unit in units],
+        }
 
     def _validate_related_request(
         self,
@@ -487,14 +514,36 @@ class StandardsEngine:
             target=requested,
         )
 
-    def _graph_target(self, requested: str) -> str:
-        selected = self._policies.resolve(requested)
-        if isinstance(selected, PolicyUnit):
-            return selected.module
-        if isinstance(selected, PolicyUnitTombstone):
-            return selected.id
-        module = self._modules.resolve(requested)
-        return module.module_id if module is not None and requested == module.module_id else requested
+    def _relationships_for_policy(
+        self,
+        selected: PolicyUnit | ModuleMetadata,
+        module: ModuleMetadata,
+        groups: Iterable[str] | None,
+        direction: Direction,
+        *,
+        transitive: bool,
+    ) -> list[dict[str, object]]:
+        targets = (
+            (selected.id,)
+            if isinstance(selected, PolicyUnit)
+            else (
+                module.module_id,
+                *(unit.id for unit in self._policies.for_module(module.module_id)),
+            )
+        )
+        relationships: dict[tuple[str, str], dict[str, object]] = {}
+        for target in targets:
+            selected_relationships = (
+                self._transitive_relationships(target, groups or (), direction)
+                if transitive
+                else self._direct_relationships(target, groups, direction)
+            )
+            for relationship in selected_relationships:
+                handle = relationship["handle"]
+                assert isinstance(handle, dict)
+                key = (str(handle["id"]), str(relationship["direction"]))
+                relationships[key] = relationship
+        return [relationships[key] for key in sorted(relationships)]
 
     def _direct_relationships(
         self,

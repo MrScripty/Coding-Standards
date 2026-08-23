@@ -46,6 +46,10 @@ class PolicyImpactTest(unittest.TestCase):
             - Specializes: `none`
             - Verification: Policy impact fixtures.
             - Canonical owner: `workflows/planning.md`
+
+            ## Fixture Policy
+
+            Fixture policy meaning.
             """,
         )
         self.write(
@@ -65,6 +69,25 @@ class PolicyImpactTest(unittest.TestCase):
             'schema_version = 1\nid = "evidence"\nowner = "test.evidence"\n',
         )
         self.suite_paths = {"evidence": "suites/evidence.toml"}
+        self.write(
+            "evaluation/standards-effectiveness/policy-units/registry.toml",
+            """
+            schema_version = 1
+            sources = ["evaluation/standards-effectiveness/policy-units/planning.toml"]
+            """,
+        )
+        self.write(
+            "evaluation/standards-effectiveness/policy-units/planning.toml",
+            """
+            schema_version = 1
+
+            [[policy_unit]]
+            id = "workflow.planning.fixture-policy"
+            module = "workflow.planning"
+            heading_path = ["Fixture Policy"]
+            semantic_revision = 1
+            """,
+        )
         self.write_fixture_authority()
 
     def tearDown(self) -> None:
@@ -154,7 +177,7 @@ class PolicyImpactTest(unittest.TestCase):
         consumer: str = "prompt-a",
         relation: str = "prompt-projection",
         *,
-        source: str = "workflow.planning",
+        source: str = "workflow.planning.fixture-policy",
         evidence: str = "suite:evidence",
     ) -> str:
         return textwrap.dedent(
@@ -270,9 +293,10 @@ class PolicyImpactTest(unittest.TestCase):
                 "evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml",
             }.issubset(consumers)
         )
+        self.assertEqual(graph.outgoing("workflow.planning", ("policy-impact",)), ())
         self.assertEqual(
-            {view.edge.id for view in graph.incident("workflow.planning", ("policy-impact",))},
-            {view.edge.id for view in graph.incident("workflows/planning.md", ("policy-impact",))},
+            graph.incident("workflow.planning", ("policy-impact",)),
+            graph.incident("workflows/planning.md", ("policy-impact",)),
         )
         planning_owned_suites = set()
         for entry in entries:
@@ -292,9 +316,10 @@ class PolicyImpactTest(unittest.TestCase):
         graph = load_repository_registry(REPO_ROOT, DEFAULT_SOURCE_REGISTRY)
 
         self.assertEqual(len(consumers), 15)
+        self.assertEqual(graph.outgoing("workflow.commit", ("policy-impact",)), ())
         self.assertEqual(
-            {view.edge.id for view in graph.incident("workflow.commit", ("policy-impact",))},
-            {view.edge.id for view in graph.incident("workflows/commit.md", ("policy-impact",))},
+            graph.incident("workflow.commit", ("policy-impact",)),
+            graph.incident("workflows/commit.md", ("policy-impact",)),
         )
 
     def test_old_policy_query_and_bespoke_graph_files_are_absent(self) -> None:

@@ -2,7 +2,7 @@ schema_version = 1
 owner = "workflow.planning"
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.written-plan-applicability"
 consumer = "router"
 relation = "router-projection"
 applicability = { operator = "always" }
@@ -10,7 +10,15 @@ evidence_owner = "suite:concurrent-plan-integration"
 rationale = "Router projects written-plan and Concurrent Plan Integration applicability and exclusions."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.concurrent-integration-routing"
+consumer = "router"
+relation = "router-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:concurrent-plan-integration"
+rationale = "Router projects written-plan and Concurrent Plan Integration applicability and exclusions."
+
+[[relationships]]
+source = "workflow.planning.plan-admission"
 consumer = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
@@ -18,7 +26,7 @@ evidence_owner = "suite:plan-implementation-entrypoint"
 rationale = "Fixture records implementation-entrypoint consumption of explicit written-plan admission."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.written-plan-applicability"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
@@ -26,7 +34,23 @@ evidence_owner = "suite:planning-admission"
 rationale = "Fixture records ordinary written-plan admission, operation, lifecycle, and fallback outcomes."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.lifecycle"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Fixture records ordinary written-plan admission, operation, lifecycle, and fallback outcomes."
+
+[[relationships]]
+source = "workflow.planning.plan-admission"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Fixture records ordinary written-plan admission, operation, lifecycle, and fallback outcomes."
+
+[[relationships]]
+source = "workflow.planning.concurrent-integration-routing"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
@@ -34,7 +58,7 @@ evidence_owner = "suite:concurrent-plan-integration"
 rationale = "Fixture records conditional Concurrent Plan Integration routing decisions."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.concurrent-integration-routing"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
@@ -42,7 +66,7 @@ evidence_owner = "suite:concurrent-plan-integration"
 rationale = "Fixture records stale-state, compatibility, reconciliation, and no-fallback outcomes when the profile applies."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.artifact-model"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
@@ -50,7 +74,55 @@ evidence_owner = "suite:planning-consolidation"
 rationale = "Fixture records Planning ownership, bounded state, acceptance, and process-fallback decisions."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.active-plan-fields"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Fixture records Planning ownership, bounded state, acceptance, and process-fallback decisions."
+
+[[relationships]]
+source = "workflow.planning.current-state"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Fixture records Planning ownership, bounded state, acceptance, and process-fallback decisions."
+
+[[relationships]]
+source = "workflow.planning.replanning"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Fixture records Planning ownership, bounded state, acceptance, and process-fallback decisions."
+
+[[relationships]]
+source = "workflow.planning.findings"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Fixture records Planning ownership, bounded state, acceptance, and process-fallback decisions."
+
+[[relationships]]
+source = "workflow.planning.concurrent-work"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Fixture records Planning ownership, bounded state, acceptance, and process-fallback decisions."
+
+[[relationships]]
+source = "workflow.planning.completion"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Fixture records Planning ownership, bounded state, acceptance, and process-fallback decisions."
+
+[[relationships]]
+source = "workflow.planning.written-plan-applicability"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
@@ -58,7 +130,7 @@ evidence_owner = "suite:full-review-prompt-entrypoint"
 rationale = "Fixture records the analysis-only full-review prompt's Router and Planning delegation decisions."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.artifact-model"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
@@ -66,7 +138,31 @@ evidence_owner = "suite:plan-template-projection"
 rationale = "Fixture records required and conditional plan-template projections."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.active-plan-fields"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "Fixture records required and conditional plan-template projections."
+
+[[relationships]]
+source = "workflow.planning.repository-isolation"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "Fixture records required and conditional plan-template projections."
+
+[[relationships]]
+source = "workflow.planning.concurrent-work"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "Fixture records required and conditional plan-template projections."
+
+[[relationships]]
+source = "workflow.planning.written-plan-applicability"
 consumer = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv"
 relation = "fixture-projection"
 applicability = { operator = "always" }
@@ -74,7 +170,31 @@ evidence_owner = "suite:planning-admission"
 rationale = "Fixture records written-plan, slice, artifact-update, and conditional concurrent-profile proportionality decisions."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.milestones-and-slices"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Fixture records written-plan, slice, artifact-update, and conditional concurrent-profile proportionality decisions."
+
+[[relationships]]
+source = "workflow.planning.current-state"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Fixture records written-plan, slice, artifact-update, and conditional concurrent-profile proportionality decisions."
+
+[[relationships]]
+source = "workflow.planning.concurrent-integration-routing"
+consumer = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Fixture records written-plan, slice, artifact-update, and conditional concurrent-profile proportionality decisions."
+
+[[relationships]]
+source = "workflow.planning.concurrent-integration-routing"
 consumer = "concurrent-plan-integration"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
@@ -82,7 +202,7 @@ evidence_owner = "suite:concurrent-plan-integration"
 rationale = "Suite enforces conditional concurrent-profile routing and stale-state protections."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.written-plan-applicability"
 consumer = "full-review-prompt-entrypoint"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
@@ -90,7 +210,7 @@ evidence_owner = "suite:full-review-prompt-entrypoint"
 rationale = "Suite enforces the analysis-only full-review prompt's Planning delegation."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.plan-admission"
 consumer = "plan-implementation-entrypoint"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
@@ -98,7 +218,15 @@ evidence_owner = "suite:plan-implementation-entrypoint"
 rationale = "Suite enforces the written-plan implementation entrypoint projection."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.lifecycle"
+consumer = "plan-implementation-entrypoint"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-implementation-entrypoint"
+rationale = "Suite enforces the written-plan implementation entrypoint projection."
+
+[[relationships]]
+source = "workflow.planning.artifact-model"
 consumer = "plan-template-projection"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
@@ -106,7 +234,31 @@ evidence_owner = "suite:plan-template-projection"
 rationale = "Suite enforces the Planning-derived template projection."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.active-plan-fields"
+consumer = "plan-template-projection"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "Suite enforces the Planning-derived template projection."
+
+[[relationships]]
+source = "workflow.planning.repository-isolation"
+consumer = "plan-template-projection"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "Suite enforces the Planning-derived template projection."
+
+[[relationships]]
+source = "workflow.planning.concurrent-work"
+consumer = "plan-template-projection"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "Suite enforces the Planning-derived template projection."
+
+[[relationships]]
+source = "workflow.planning.written-plan-applicability"
 consumer = "planning-admission"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
@@ -114,7 +266,23 @@ evidence_owner = "suite:planning-admission"
 rationale = "Suite enforces ordinary Planning admission and implementation consumption."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.lifecycle"
+consumer = "planning-admission"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Suite enforces ordinary Planning admission and implementation consumption."
+
+[[relationships]]
+source = "workflow.planning.plan-admission"
+consumer = "planning-admission"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Suite enforces ordinary Planning admission and implementation consumption."
+
+[[relationships]]
+source = "workflow.planning.artifact-model"
 consumer = "planning-consolidation"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
@@ -122,7 +290,71 @@ evidence_owner = "suite:planning-consolidation"
 rationale = "Suite enforces canonical Planning ownership and process decisions."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.active-plan-fields"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Suite enforces canonical Planning ownership and process decisions."
+
+[[relationships]]
+source = "workflow.planning.acceptance-claims"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Suite enforces canonical Planning ownership and process decisions."
+
+[[relationships]]
+source = "workflow.planning.milestones-and-slices"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Suite enforces canonical Planning ownership and process decisions."
+
+[[relationships]]
+source = "workflow.planning.current-state"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Suite enforces canonical Planning ownership and process decisions."
+
+[[relationships]]
+source = "workflow.planning.replanning"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Suite enforces canonical Planning ownership and process decisions."
+
+[[relationships]]
+source = "workflow.planning.findings"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Suite enforces canonical Planning ownership and process decisions."
+
+[[relationships]]
+source = "workflow.planning.concurrent-work"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Suite enforces canonical Planning ownership and process decisions."
+
+[[relationships]]
+source = "workflow.planning.completion"
+consumer = "planning-consolidation"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "Suite enforces canonical Planning ownership and process decisions."
+
+[[relationships]]
+source = "workflow.planning.projection-completeness"
 consumer = "policy-semantic-impact"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
@@ -130,7 +362,7 @@ evidence_owner = "suite:policy-semantic-impact"
 rationale = "Suite enforces the reviewed Planning semantic-impact structure and negative contracts."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.written-plan-applicability"
 consumer = "s1-routing"
 relation = "enforcement-suite-projection"
 applicability = { operator = "always" }
@@ -138,7 +370,15 @@ evidence_owner = "suite:s1-routing"
 rationale = "Suite enforces ordinary bounded routing without unnecessary Planning or concurrent-profile selection."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.concurrent-integration-routing"
+consumer = "s1-routing"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:s1-routing"
+rationale = "Suite enforces ordinary bounded routing without unnecessary Planning or concurrent-profile selection."
+
+[[relationships]]
+source = "workflow.planning.lifecycle"
 consumer = "profile.workflow.concurrent-plan-integration"
 relation = "normative-consumer"
 applicability = { operator = "always" }
@@ -146,7 +386,15 @@ evidence_owner = "suite:concurrent-plan-integration"
 rationale = "The profile specializes stale-capable proposal integration while Planning retains lifecycle and artifact ownership."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.concurrent-integration-routing"
+consumer = "profile.workflow.concurrent-plan-integration"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:concurrent-plan-integration"
+rationale = "The profile specializes stale-capable proposal integration while Planning retains lifecycle and artifact ownership."
+
+[[relationships]]
+source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/full-codebase-standards-refactor.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
@@ -154,7 +402,7 @@ evidence_owner = "suite:full-review-prompt-entrypoint"
 rationale = "The full-codebase review entrypoint delegates analysis-only plan construction to Planning."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.plan-admission"
 consumer = "prompts/implement-plan.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
@@ -162,7 +410,15 @@ evidence_owner = "suite:plan-implementation-entrypoint"
 rationale = "The implementation entrypoint projects written-plan admission and conditional concurrent-profile selection."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.concurrent-integration-routing"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-implementation-entrypoint"
+rationale = "The implementation entrypoint projects written-plan admission and conditional concurrent-profile selection."
+
+[[relationships]]
+source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
@@ -170,7 +426,39 @@ evidence_owner = "suite:planning-consolidation"
 rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.artifact-model"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions."
+
+[[relationships]]
+source = "workflow.planning.milestones-and-slices"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions."
+
+[[relationships]]
+source = "workflow.planning.replanning"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions."
+
+[[relationships]]
+source = "workflow.planning.concurrent-work"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-consolidation"
+rationale = "The planning entrypoint projects Planning scope, milestone, write-set, and re-plan decisions."
+
+[[relationships]]
+source = "workflow.planning.artifact-model"
 consumer = "templates/PLAN-TEMPLATE.md"
 relation = "template-projection"
 applicability = { operator = "always" }
@@ -178,7 +466,31 @@ evidence_owner = "suite:plan-template-projection"
 rationale = "The plan template projects current Planning artifact fields and conditional concurrency records."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.active-plan-fields"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "The plan template projects current Planning artifact fields and conditional concurrency records."
+
+[[relationships]]
+source = "workflow.planning.repository-isolation"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "The plan template projects current Planning artifact fields and conditional concurrency records."
+
+[[relationships]]
+source = "workflow.planning.concurrent-work"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:plan-template-projection"
+rationale = "The plan template projects current Planning artifact fields and conditional concurrency records."
+
+[[relationships]]
+source = "workflow.planning.current-state"
 consumer = "workflow.commit"
 relation = "normative-consumer"
 applicability = { operator = "always" }
@@ -186,7 +498,31 @@ evidence_owner = "suite:planning-consolidation"
 rationale = "Commit consumes Planning artifact-update boundaries when an active plan governs the work."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.plan-admission"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions."
+
+[[relationships]]
+source = "workflow.planning.lifecycle"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions."
+
+[[relationships]]
+source = "workflow.planning.current-state"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Implementation consumes written-plan admission, operation, lifecycle, current authority, and acceptance decisions."
+
+[[relationships]]
+source = "workflow.planning.acceptance-claims"
 consumer = "workflow.implementation"
 relation = "normative-consumer"
 applicability = { operator = "always" }

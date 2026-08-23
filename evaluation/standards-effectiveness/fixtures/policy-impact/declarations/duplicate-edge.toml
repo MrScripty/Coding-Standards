@@ -2,7 +2,7 @@ schema_version = 1
 owner = "workflow.planning"
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }
@@ -10,7 +10,7 @@ evidence_owner = "suite:planning-admission"
 rationale = "First duplicate fixture relationship."
 
 [[relationships]]
-source = "workflow.planning"
+source = "workflow.planning.written-plan-applicability"
 consumer = "prompts/planning.md"
 relation = "prompt-projection"
 applicability = { operator = "always" }

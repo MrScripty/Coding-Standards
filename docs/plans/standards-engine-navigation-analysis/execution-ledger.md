@@ -1,5 +1,36 @@
 # Standards Engine Navigation And Analysis Execution Ledger
 
+## 2026-08-23: Milestone 3 Policy-Unit Authority Cutover
+
+- Loaded canonical modules and policy-unit sidecars through one immutable
+  `CanonicalStandardsCorpus`; moved neutral failures and digest production to
+  `standards_metadata` and graph-only node projection to `standards_graph`.
+- Replaced 39 module-source inventory rows with 126 reviewed policy-unit
+  relationships from 28 accepted Planning and Commit units. The compiler now
+  rejects module, alias, retired, cross-owner, and unknown sources.
+- Module navigation aggregates exact contained-unit edges without creating
+  module-source policy authority. Exact policy-unit navigation remains exact,
+  and modules with no mapped units expose incomplete mapping.
+- Removed the analysis-owned loader and graph adapter without re-export,
+  fallback, or parallel parser. Verifier and repository composition reuse the
+  same snapshot-bound corpus and compiled relationship set.
+- Acceptance evidence is recorded in the
+  [cutover report](reports/milestone-3-policy-unit-source-cutover.md).
+
+## 2026-08-23: Milestone 3 Policy-Unit Ownership Replan
+
+- The admitted policy-unit source cutover exposed a real dependency cycle:
+  policy-unit loading lived in analysis, while policy impact must now validate
+  those sources and analysis already consumes policy impact.
+- Accepted the [ownership replan](reports/milestone-3-policy-unit-ownership-replan.md):
+  sidecars retain authority; `standards_metadata` loads and validates one
+  immutable module and policy-unit corpus; `standards_graph` owns node
+  projection; analysis retains comparison and impact behavior.
+- A separate `standards_policy_units` package and an analysis-owned injected
+  index were rejected as unnecessary surface or inverted semantic ownership.
+- The ownership move is part of the same atomic source cutover and retains no
+  old loader, re-export, fallback, or second parser.
+
 ## 2026-08-23: Milestone 3 Policy-Unit Source Replan
 
 - Coverage design review separated reusable consumer-discovery coverage from

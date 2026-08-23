@@ -1,0 +1,91 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "workflow.planning.written-plan-applicability"
+module = "workflow.planning"
+heading_path = ["When A Written Plan Is Required"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.artifact-model"
+module = "workflow.planning"
+heading_path = ["Artifact Model"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.active-plan-fields"
+module = "workflow.planning"
+heading_path = ["Required Active-Plan Fields"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.lifecycle"
+module = "workflow.planning"
+heading_path = ["Lifecycle"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.plan-admission"
+module = "workflow.planning"
+heading_path = ["Explicit Plan Admission"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.concurrent-integration-routing"
+module = "workflow.planning"
+heading_path = ["Concurrent Integration Routing"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.repository-isolation"
+module = "workflow.planning"
+heading_path = ["Repository Isolation In Written Plans"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.projection-completeness"
+module = "workflow.planning"
+heading_path = ["Policy Projection Completeness"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.acceptance-claims"
+module = "workflow.planning"
+heading_path = ["Acceptance Claims"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.milestones-and-slices"
+module = "workflow.planning"
+heading_path = ["Milestones And Slices"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.current-state"
+module = "workflow.planning"
+heading_path = ["Current State, Not History"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.replanning"
+module = "workflow.planning"
+heading_path = ["Re-Planning"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.findings"
+module = "workflow.planning"
+heading_path = ["Findings"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.concurrent-work"
+module = "workflow.planning"
+heading_path = ["Concurrent Work"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.planning.completion"
+module = "workflow.planning"
+heading_path = ["Completion"]
+semantic_revision = 1

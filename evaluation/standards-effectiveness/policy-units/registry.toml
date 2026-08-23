@@ -1,4 +1,6 @@
 schema_version = 1
 sources = [
+  "evaluation/standards-effectiveness/policy-units/commit.toml",
+  "evaluation/standards-effectiveness/policy-units/planning.toml",
   "evaluation/standards-effectiveness/policy-units/verification.toml",
 ]

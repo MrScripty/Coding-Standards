@@ -4,10 +4,9 @@
 
 **Current phase:** Milestone 3 semantic impact selection and coverage
 
-**Next slice:** atomically create the accepted Planning and Commit policy-unit
-authority, remap policy-impact declarations through the reviewed one-to-many
-dispositions, cut every consumer to policy-unit sources, and remove
-module-source support without fallback
+**Next slice:** implement derived coverage requirements, authored attestations,
+generated reusable certificates, and successful-empty-impact enforcement over
+the accepted policy-unit relationship authority
 
 **Acceptance status:** `pending`
 
@@ -208,6 +207,7 @@ plan or shared-authority proposals can become stale before integration.
 | Snapshot bootstrap | A trusted source provider issues the initial opaque snapshot handle; caller operations remain explicitly handle-bound and cannot fall back to ambient current state. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md#public-interface) | Caller repository paths or implicit current-tree lookup |
 | Impact graph groups | Use `policy-impact`; add `standards-requires` and `standards-specializes` only for additions and cross-module moves. Do not select `semantic` or `standards-dependencies` for A1 impact composition. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md#graph-composition) | Broad semantic traversal or combined dependency provenance |
 | Policy-impact authority | Module-owned typed declaration files contain relationships whose sources are active policy units in that module. They compile once into neutral graph topology and typed semantics. Canonical modules, nodes, and generic groups remain independent upstream authorities. | [Policy-unit source replan](reports/milestone-3-policy-unit-source-replan.md) | Module-source edges, edge-ID semantics sidecars, and policy strings in generic graph metadata |
+| Policy-unit loading | Sidecars own policy-unit facts; `standards_metadata` loads and validates them with canonical modules as one immutable corpus and produces their derived digests. `standards_graph` owns policy-unit node projection; analysis owns only change interpretation. | [Policy-unit ownership replan](reports/milestone-3-policy-unit-ownership-replan.md) | Analysis-owned sidecar parsing or metadata-to-graph dependencies |
 | Policy-impact identity | The compiler derives one ID from the unique `(source, relation, consumer)` natural key and the cutover records every old-to-new mapping. | [Milestone 3 authority replan](reports/milestone-3-policy-impact-applicability-replan.md#edge-identity) | Exact authored IDs for policy-impact edges only |
 
 Milestone 0 must select the canonical schema representation, contract-version
@@ -434,7 +434,11 @@ without claiming to judge arbitrary meaning.
   as the replacement edge count.
 - [x] Define and review the Planning and Commit heading-scoped policy-unit
   baseline, including accepted semantic revision 1 and exact locator evidence.
-- [ ] Cut declarations, compiler validation, graph contribution, inspection,
+- [x] Move policy-unit models, sidecar loading, locator/lifecycle validation,
+  digest production, and focused tests to `standards_metadata`; move graph-only
+  projection to `standards_graph`; remove the analysis-owned loader without a
+  compatibility re-export.
+- [x] Cut declarations, compiler validation, graph contribution, inspection,
   verifier consumers, and module-level related aggregation to policy-unit
   sources atomically; remove module-source support without fallback.
 - [ ] Generate mandatory `unmapped-normative-change` obligations for uncovered

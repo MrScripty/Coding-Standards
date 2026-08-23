@@ -34,6 +34,7 @@ standards_engine
   |-- standards_metadata
   |-- standards_applicability
   |-- standards_policy_impact
+  |-- standards_graph
   `-- standards_analysis
 
 standards_applicability
@@ -50,22 +51,32 @@ standards_analysis
   |-- standards_policy_impact
   `-- graph_engine
 
+standards_graph
+  |-- standards_metadata
+  |-- standards_policy_impact
+  `-- graph_engine
+
 standards_verifier
   |-- standards_policy_impact
   |-- standards_metadata
+  |-- standards_graph
   `-- graph_engine
 ```
 
 `standards_engine` is the composition root and agent-facing facade.
-`standards_metadata` loads and validates repository-owned corpus membership and
-module metadata. `standards_applicability` compiles typed fact schemas,
+`standards_metadata` loads and validates repository-owned module and policy-unit
+corpus membership, canonical module metadata, policy-unit sidecars, locators,
+lifecycle, and derived policy-unit digests. Canonical documents and sidecars
+remain the authority. `standards_applicability` compiles typed fact schemas,
 applicability programs, and request fact sets and evaluates them without
 repository or domain dependencies. `standards_policy_impact` compiles source-owned typed
 policy-impact declarations into one neutral graph contribution and one typed
 semantics index. `standards_analysis` owns policy-unit comparison, impact
 selection, packets, obligations, reading plans, questions, and audit
-certificates. `graph_engine` remains domain-neutral. The verifier consumes the
-neutral and policy-specific Modules but is not their owner.
+certificates. `standards_graph` projects canonical modules and policy units into
+generic graph nodes and composes registered relationship providers; it contains
+no analysis behavior. `graph_engine` remains domain-neutral. The verifier
+consumes the neutral and policy-specific Modules but is not their owner.
 
 Canonical documents remain authoritative for module IDs, aliases, paths,
 `Requires`, `Specializes`, and policy meaning. A registered generic catalog

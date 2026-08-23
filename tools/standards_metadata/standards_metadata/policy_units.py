@@ -6,9 +6,8 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Any, Iterable
 
-from tools.standards_metadata.standards_metadata import CanonicalModuleCorpus
-
-from .errors import AnalysisError, AnalysisFailure
+from .errors import MetadataError, MetadataFailure
+from .model import CanonicalModuleCorpus
 from .serialization import canonical_json_bytes, digest_bytes
 
 
@@ -84,6 +83,12 @@ class PolicyUnitCorpus:
                 return tombstone
         return None
 
+    def active_by_id(self, value: str) -> PolicyUnit | None:
+        return next((unit for unit in self.units if unit.id == value), None)
+
+    def for_module(self, module_id: str) -> tuple[PolicyUnit, ...]:
+        return tuple(unit for unit in self.units if unit.module == module_id)
+
 
 def _error(
     code: str,
@@ -92,9 +97,16 @@ def _error(
     path: str,
     field: str | None = None,
     observed: str | None = None,
-) -> AnalysisError:
-    return AnalysisError(
-        AnalysisFailure(code, "invalid", message, path, field, observed)
+) -> MetadataError:
+    return MetadataError(
+        MetadataFailure(
+            code,
+            "invalid",
+            message,
+            path=path,
+            field=field,
+            observed=observed,
+        )
     )
 
 
@@ -116,8 +128,8 @@ def _path(root: Path, value: str) -> Path:
             path=value,
         )
     if not candidate.is_file():
-        raise AnalysisError(
-            AnalysisFailure(
+        raise MetadataError(
+            MetadataFailure(
                 "POLICY_UNIT.INPUT_UNAVAILABLE",
                 "unavailable",
                 "policy-unit source is unavailable",

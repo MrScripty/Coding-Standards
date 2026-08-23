@@ -23,14 +23,16 @@ from tools.standards_analysis.standards_analysis import (
     AnalysisError,
     ChangeDescriptor,
     ChangeKind,
-    PolicyUnit,
-    PolicyUnitCorpus,
-    PolicyUnitGraphSource,
-    PolicyUnitTombstone,
     ReviewScope,
     SemanticProposal,
     classify_changes,
     select_impact,
+)
+from tools.standards_graph.standards_graph import PolicyUnitGraphSource
+from tools.standards_metadata.standards_metadata import (
+    PolicyUnit,
+    PolicyUnitCorpus,
+    PolicyUnitTombstone,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
     SOURCE_ID as POLICY_IMPACT_SOURCE_ID,

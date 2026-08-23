@@ -13,15 +13,17 @@ from tools.standards_analysis.standards_analysis import (
     ChangeClassification,
     ChangeDescriptor,
     ChangeKind,
-    PolicyUnit,
-    PolicyUnitCorpus,
-    PolicyUnitTombstone,
     ReviewScope,
     SemanticProposal,
     SemanticState,
     classify_changes,
 )
 from tools.standards_engine.contracts.validate_contracts import validate
+from tools.standards_metadata.standards_metadata import (
+    PolicyUnit,
+    PolicyUnitCorpus,
+    PolicyUnitTombstone,
+)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]

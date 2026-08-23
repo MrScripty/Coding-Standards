@@ -21,11 +21,11 @@ Query a registered repository graph:
 ```bash
 python3 tools/query_edges.py --node workflow.planning
 python3 tools/query_edges.py \
-  --node workflows/planning.md --direction outgoing --group policy-impact
+  --node workflow.planning.plan-admission --direction outgoing --group policy-impact
 python3 tools/query_edges.py \
-  --edge policy-impact:v1/workflow.planning/router-projection/router
+  --edge policy-impact:v1/workflow.planning.plan-admission/prompt-projection/prompts%2Fimplement-plan.md
 python3 tools/query_edges.py \
-  --node workflow.planning --group policy-impact \
+  --node workflow.planning.plan-admission --group policy-impact \
   --direction outgoing --traverse
 python3 tools/query_edges.py --list-groups
 ```
@@ -35,3 +35,7 @@ providers, then injects them into this neutral engine. Queries do not scan for
 declarations or infer edges from text, links, paths, ownership, or another
 graph. Transitive traversal is rejected unless the selected group explicitly
 permits it.
+
+Policy-impact edges originate from policy-unit nodes. Module-level aggregation
+is a standards-navigation view provided by `standards_engine`; it is not a
+second set of generic graph edges.

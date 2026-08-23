@@ -1,0 +1,79 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "workflow.commit.per-commit-boundary"
+module = "workflow.commit"
+heading_path = ["Per-Commit Boundary"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.isolation-applicability"
+module = "workflow.commit"
+heading_path = ["Branch And Worktree Applicability"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.branch-context"
+module = "workflow.commit"
+heading_path = ["Governed Branch Context"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.integration-mechanisms"
+module = "workflow.commit"
+heading_path = ["Integration Mechanism Selection"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.cherry-pick-lineage"
+module = "workflow.commit"
+heading_path = ["Cherry-Pick And Replacement Lineage"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.terminal-branch-lifecycle"
+module = "workflow.commit"
+heading_path = ["Terminal Branch Lifecycle"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.worktree-lifecycle"
+module = "workflow.commit"
+heading_path = ["Worktree Lifecycle And Cleanup Authority"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.branch-history-review"
+module = "workflow.commit"
+heading_path = ["Branch-History Review"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.hook-bypass-authority"
+module = "workflow.commit"
+heading_path = ["Hook Bypass Authority"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.rewrite-authority"
+module = "workflow.commit"
+heading_path = ["Rewrite Authority"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.topology"
+module = "workflow.commit"
+heading_path = ["Topology"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.commit-message"
+module = "workflow.commit"
+heading_path = ["Commit Message"]
+semantic_revision = 1
+
+[[policy_unit]]
+id = "workflow.commit.invalid-outcomes"
+module = "workflow.commit"
+heading_path = ["Invalid Outcomes"]
+semantic_revision = 1

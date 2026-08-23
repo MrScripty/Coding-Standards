@@ -293,6 +293,10 @@ class NavigationTest(unittest.TestCase):
         direct_value = self.assert_contract("RelatedResult", direct)
         direct_targets = {item["target"] for item in direct_value["relationships"]}
         self.assertIn("workflow.verification", direct_targets)
+        self.assertEqual(
+            direct_value["policy_unit_mapping"]["state"],
+            "policy-units-present",
+        )
 
         transitive = self.engine.query(
             QueryCall(
@@ -378,7 +382,8 @@ class NavigationTest(unittest.TestCase):
         self.assertIsNotNone(semantics)
         assert semantics is not None
         self.assertEqual(semantics["edge_id"], policy_handle["id"])
-        self.assertEqual(semantics["source"], "workflow.planning")
+        self.assertTrue(semantics["source"].startswith("workflow.planning."))
+        self.assertNotEqual(semantics["source"], "workflow.planning")
         program = semantics["applicability_program"]
         self.assertEqual(program["normalized_expression"], {"operator": "always"})
         self.assertEqual(program["referenced_facts"], [])
@@ -425,7 +430,30 @@ class NavigationTest(unittest.TestCase):
             )
         )
         related_value = self.assert_contract("RelatedResult", related)
-        self.assertEqual(related_value["target"], "workflow.verification")
+        self.assertEqual(
+            related_value["target"],
+            "workflow.verification.acceptance-claims",
+        )
+        self.assertEqual(
+            related_value["policy_unit_mapping"]["state"],
+            "exact-policy-unit",
+        )
+
+        unmapped = self.engine.query(
+            QueryCall(
+                self.engine.snapshot,
+                RelatedRequest("core", ("policy-impact",), "outgoing"),
+            )
+        )
+        unmapped_value = self.assert_contract("RelatedResult", unmapped)
+        self.assertEqual(
+            unmapped_value["policy_unit_mapping"],
+            {
+                "state": "incomplete",
+                "reason": "no-policy-units",
+                "policy_units": [],
+            },
+        )
 
         malformed = (
             ReadRequest(""),
