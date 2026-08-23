@@ -194,6 +194,58 @@
 - The ownership cutover is accepted. The sole next slice is snapshot-bound
   typed `read`, `related`, and `inspect` over this neutral seam.
 
+## 2026-08-22: Milestone 2 Module Inspection Contract Replan
+
+- Navigation design found that accepted Router examples return canonical
+  module IDs while `PolicyInspectionResult` could describe only registered
+  policy units. Policy-unit coverage is intentionally partial, so restricting
+  reads to sidecars would make accepted whole-artifact routes unreadable.
+- Rejected synthetic policy-unit declarations because they would invent stable
+  identity and semantic revision authority. Rejected full policy-unit
+  population because it is unnecessary authoring and audit scope for read-only
+  navigation.
+- Accepted one explicit derived `CanonicalModuleDeclaration` variant alongside
+  `PolicyUnitDeclaration`. Module reads use whole-artifact scope; policy-unit
+  reads use their exact structured scope. Both retain the existing snapshot-
+  bound `PolicyHandle` and discriminated declaration kind.
+- This is a version-1 pre-runtime schema correction: no Python projection,
+  agent tool, external adopter, or serialized runtime value exists. The ADR now
+  states that post-publication variant additions require contract migration.
+- Detailed rationale and acceptance checks are in
+  [the module inspection replan](reports/milestone-2-module-inspection-contract-replan.md).
+- Runtime projection then exposed a second narrow schema omission: generic
+  graph edge identities are stable opaque strings and accepted metadata edge
+  IDs contain `->`, while `RelationshipHandle` incorrectly reused the narrower
+  canonical policy-ID grammar.
+- Accepted a distinct non-empty `EdgeId` contract for relationship handles and
+  edge selection provenance. Registered graph resolution remains mandatory;
+  canonical module and policy identity grammar is unchanged. Hashing, renaming
+  accepted edges, or widening every canonical ID was rejected.
+
+## 2026-08-22: Milestone 2 Read, Related, And Inspect
+
+- Corrected the version-1 contract before runtime acceptance so module
+  inspection returns a derived canonical-module declaration while policy-unit
+  inspection returns authored sidecar authority. Added a distinct registered
+  `EdgeId` contract rather than widening canonical policy identities.
+- Added the `standards_engine` typed facade with snapshot-bound `read`,
+  `related`, and `inspect` operations. Canonical module reads use whole-artifact
+  scope; registered policy-unit reads use exact heading scope.
+- Named-group and transitive traversal delegate to the accepted generic graph
+  engine. Relationship handles retain exact registered edge identities, and
+  repository locations remain explicit inspection provenance rather than
+  caller input.
+- Added typed rejection for stale snapshots, malformed native requests,
+  repository-path reads, unknown policies and groups, and forbidden traversal.
+  Policy-unit queries normalize to their canonical owning graph node.
+- The contract validator passed 23 examples, seven identities, four operation
+  envelopes, and 96 definitions. Seven engine, 17 analysis, seven metadata,
+  two standards-graph, 35 graph-engine, and 381 verifier tests passed. All 218
+  declarative suites, plan structure, and `git diff --check` passed.
+- Detailed evidence is in [the navigation acceptance report](reports/milestone-2-read-related-inspect.md).
+  The sole next slice is mechanical Router projection and typed route/read
+  evidence; impact analysis remains excluded.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

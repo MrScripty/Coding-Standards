@@ -465,6 +465,21 @@
       }
     },
     {
+      "name": "canonical-module-declaration",
+      "definition": "CanonicalModuleDeclaration",
+      "value": {
+        "kind": "canonical-module",
+        "id": "workflow.verification",
+        "role": "workflow",
+        "level": "MUST",
+        "applies_when": "The task defines or evaluates verification evidence.",
+        "does_not_apply_when": "The task does not affect verification behavior or evidence.",
+        "requires": ["core"],
+        "specializes": [],
+        "verification": "Verification policy fixtures and registered suites."
+      }
+    },
+    {
       "name": "applicability-expression",
       "definition": "ApplicabilityExpression",
       "value": {

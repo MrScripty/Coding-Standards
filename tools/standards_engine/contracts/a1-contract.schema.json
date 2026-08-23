@@ -16,6 +16,7 @@
     { "$ref": "#/$defs/CompletedAnalysisReport" },
     { "$ref": "#/$defs/RejectedResult" },
     { "$ref": "#/$defs/InspectionResult" },
+    { "$ref": "#/$defs/CanonicalModuleDeclaration" },
     { "$ref": "#/$defs/PolicyUnitDeclaration" },
     { "$ref": "#/$defs/PolicyUnitTombstone" },
     { "$ref": "#/$defs/ApplicabilityFactSchema" },
@@ -134,6 +135,13 @@
       "type": "string",
       "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
     },
+    "EdgeId": {
+      "type": "string",
+      "minLength": 1,
+      "x-standards-engine-invariants": {
+        "authority": "value must resolve exactly through the registered generic graph; no normalization, hashing, inference, or fallback"
+      }
+    },
     "Digest": {
       "type": "string",
       "pattern": "^sha256:[0-9a-f]{64}$"
@@ -214,7 +222,7 @@
       "required": ["kind", "id", "snapshot"],
       "properties": {
         "kind": { "const": "relationship-handle" },
-        "id": { "$ref": "#/$defs/CanonicalId" },
+        "id": { "$ref": "#/$defs/EdgeId" },
         "snapshot": { "$ref": "#/$defs/SnapshotHandle" }
       },
       "additionalProperties": false
@@ -483,7 +491,7 @@
         "kind": { "enum": ["routing-fact", "requires", "specializes", "policy-impact-edge", "changed-policy", "question", "audit-coverage", "unmapped-normative-change", "structured-scope-analysis-unsupported"] },
         "source": { "$ref": "#/$defs/CanonicalId" },
         "fact": { "$ref": "#/$defs/CanonicalId" },
-        "edge": { "$ref": "#/$defs/CanonicalId" },
+        "edge": { "$ref": "#/$defs/EdgeId" },
         "question": { "$ref": "#/$defs/CanonicalId" }
       },
       "additionalProperties": false
@@ -591,6 +599,30 @@
           "uniqueItems": true,
           "items": { "$ref": "#/$defs/CanonicalId" }
         }
+      },
+      "additionalProperties": false
+    },
+    "CanonicalModuleDeclaration": {
+      "type": "object",
+      "required": ["kind", "id", "role", "level", "applies_when", "does_not_apply_when", "requires", "specializes", "verification"],
+      "properties": {
+        "kind": { "const": "canonical-module" },
+        "id": { "$ref": "#/$defs/CanonicalId" },
+        "role": { "enum": ["core", "router", "workflow", "profile", "topic", "reference"] },
+        "level": { "enum": ["MUST", "SHOULD", "PROFILE", "REFERENCE"] },
+        "applies_when": { "$ref": "#/$defs/NonEmptyString" },
+        "does_not_apply_when": { "$ref": "#/$defs/NonEmptyString" },
+        "requires": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/CanonicalId" }
+        },
+        "specializes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/CanonicalId" }
+        },
+        "verification": { "$ref": "#/$defs/NonEmptyString" }
       },
       "additionalProperties": false
     },
@@ -1470,7 +1502,12 @@
       "properties": {
         "kind": { "const": "policy-inspection-result" },
         "policy": { "$ref": "#/$defs/PolicyHandle" },
-        "declaration": { "$ref": "#/$defs/PolicyUnitDeclaration" },
+        "declaration": {
+          "oneOf": [
+            { "$ref": "#/$defs/CanonicalModuleDeclaration" },
+            { "$ref": "#/$defs/PolicyUnitDeclaration" }
+          ]
+        },
         "representation_digest": { "$ref": "#/$defs/Digest" },
         "structural_digest": { "$ref": "#/$defs/Digest" },
         "provenance": { "$ref": "#/$defs/ProvenanceRecord" }

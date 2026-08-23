@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2 snapshot and policy-unit foundation
+**Current phase:** Milestone 2 snapshot-bound navigation
 
-**Next slice:** implement snapshot-bound typed `read`, `related`, and `inspect`
-over the accepted `standards_graph` seam without adding Router projection or
-impact analysis
+**Next slice:** mechanically project accepted Router decisions into the typed
+`route` query, preserving exact direct selections, graph-derived `Requires`
+closure, and unresolved outcomes without editing normative Router policy
 
 **Acceptance status:** `pending`
 
@@ -342,7 +342,7 @@ requests without repository paths.
 - [x] Build clean-Git and dirty/non-Git snapshots with exact scope,
   tracked/untracked files, exclusions, modes, symlink targets, submodules, and
   relevant contract/tool versions.
-- [ ] Implement accepted canonical serialization and immutable snapshot,
+- [x] Implement accepted canonical serialization and immutable snapshot,
   navigation, policy, relationship, and inspection handles.
 - [ ] Validate policy-unit identity, module-relative locators, accepted and
   proposed semantic revisions, moves, splits, merges, retirement, successors,
@@ -354,7 +354,7 @@ requests without repository paths.
   simplify projection.
 - [ ] Implement snapshot-bound `query` variants for route, read, related, and
   provenance inspection with typed rejection outcomes.
-- [ ] Return `Requires` and `Specializes` closure through their existing named
+- [x] Return `Requires` and `Specializes` closure through their existing named
   graph groups without redefining traversal.
 - [ ] Exercise the complete route to canonical ID to read interaction through
   the real typed tool adapter.
@@ -410,7 +410,7 @@ invalid outcome; modification/addition/removal pilot selection and
 move/split/merge fixtures select exact expected identities, groups, scopes, and
 obligations; graph-engine tests remain unchanged and pass.
 
-**Status:** `Active`
+**Status:** `Planned`
 
 ### Milestone 4: Packets, Agent Resolution, And A1 Acceptance
 
@@ -464,8 +464,7 @@ checks pass from one clean recorded tree.
 
 ## Blockers
 
-- `none` for the current Milestone 2 standards-graph ownership and navigation
-  slice.
+- `none` for the current Milestone 2 Router-projection slice.
 
 Runtime implementation is admitted from the recorded implementation base and
 remains bounded by the active milestone, exact next slice, allowed write set,

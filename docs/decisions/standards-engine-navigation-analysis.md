@@ -134,6 +134,18 @@ identity, applicability, state-machine, or completion change requires a new
 contract version and an explicit migration decision. Unknown versions are
 `unsupported`; there is no inferred compatibility or fallback parser.
 
+Before the first runtime projection was accepted, version 1 was clarified to
+represent both canonical whole-artifact modules and registered structured
+policy units during read and inspection. This closes an omission demonstrated
+by the already accepted module-ID route examples; it has no predecessor runtime
+representation to migrate. After runtime acceptance, adding or changing either
+declaration variant follows the version-migration rule above.
+
+Generic graph edge identities are represented by the distinct `EdgeId` type.
+They remain exact registered identities and are not constrained by the narrower
+canonical module and policy-ID grammar. Relationship resolution never invents,
+normalizes, hashes, or falls back from the registered edge identity.
+
 ### Serialization and identity
 
 Identity-bearing values use UTF-8 canonical JSON with schema-defined fields,

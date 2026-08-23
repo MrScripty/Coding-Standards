@@ -27,6 +27,7 @@ class PolicyUnit:
     predecessors: tuple[str, ...]
     successors: tuple[str, ...]
     document: str
+    content: str
     representation_digest: str
     structural_digest: str
     source: str
@@ -215,7 +216,7 @@ def _headings(text: str) -> list[tuple[tuple[str, ...], int, int]]:
     return found
 
 
-def _structural(section: bytes) -> bytes:
+def markdown_structural_digest(section: bytes) -> str:
     text = section.decode("utf-8")
     blocks: list[str] = []
     paragraph: list[str] = []
@@ -242,14 +243,17 @@ def _structural(section: bytes) -> bytes:
         else:
             paragraph.append(stripped)
     flush()
-    return canonical_json_bytes({"parser": "markdown-heading-v1", "blocks": blocks})
+    structure = canonical_json_bytes(
+        {"parser": "markdown-heading-v1", "blocks": blocks}
+    )
+    return digest_bytes(structure)
 
 
 def _resolve_scope(
     root: Path,
     document: str,
     heading_path: tuple[str, ...],
-) -> tuple[str, str]:
+) -> tuple[str, str, str]:
     source = _path(root, document)
     raw = source.read_bytes()
     try:
@@ -267,7 +271,11 @@ def _resolve_scope(
         )
     _, start, end = matches[0]
     section = raw[start:end]
-    return digest_bytes(section), digest_bytes(_structural(section))
+    return (
+        digest_bytes(section),
+        markdown_structural_digest(section),
+        section.decode("utf-8"),
+    )
 
 
 def _unit(
@@ -319,7 +327,7 @@ def _unit(
             path=source,
             observed=unit_id,
         )
-    representation, structural = _resolve_scope(root, module.path, headings)
+    representation, structural, content = _resolve_scope(root, module.path, headings)
     return PolicyUnit(
         unit_id,
         module_id,
@@ -329,6 +337,7 @@ def _unit(
         predecessors,
         successors,
         module.path,
+        content,
         representation,
         structural,
         source,

@@ -7,6 +7,7 @@ from .policy_units import (
     PolicyUnitCorpus,
     PolicyUnitTombstone,
     load_policy_unit_corpus,
+    markdown_structural_digest,
 )
 from .serialization import canonical_json_bytes, digest_bytes, identity
 from .snapshots import AnalysisVersions, compile_snapshot
@@ -24,4 +25,5 @@ __all__ = (
     "digest_bytes",
     "identity",
     "load_policy_unit_corpus",
+    "markdown_structural_digest",
 )
