@@ -344,6 +344,17 @@ empty consumer set therefore requires a current certificate without creating a
 report/certificate identity cycle. Timestamps are excluded from certificate
 identity.
 
+Analysis derives required coverage subjects from changed target authority:
+proposed policy units for additions and surviving changes, and accepted policy
+units for removals. A subject without a certificate for its exact current
+requirement produces a mandatory `audit-coverage` obligation even when impact
+traversal returns no relationships. The obligation binds the coverage view,
+requirement, policy content and structure, semantic revision, and coverage
+decision contract. A current certificate removes that work. An attestation
+whose requirement no longer matches the policy, relationship set,
+applicability contract, or independently fingerprinted horizon is stale and
+rejects coverage compilation; it cannot become an empty successful result.
+
 Accepted and proposed applicability contexts are independently bound to their
 authority view's fact schema. Equal schemas may share one immutable fact set;
 different schemas use separately validated fact sets. Until schema evolution is

@@ -25,6 +25,7 @@ from .impact import (
 )
 from .obligations import (
     APPLICABILITY_DECISION_CONTRACT,
+    COVERAGE_DECISION_CONTRACT,
     UNMAPPED_DECISION_CONTRACT,
     ApplicabilityQuestion,
     ApplicabilityResolutionWork,
@@ -33,6 +34,7 @@ from .obligations import (
     DecisionFingerprint,
     Obligation,
     generate_applicability_resolution_work,
+    generate_coverage_obligations,
     generate_unmapped_normative_obligations,
 )
 from .serialization import canonical_json_bytes, digest_bytes, identity
@@ -78,6 +80,7 @@ __all__ = (
     "AUTHORIZATION_CONTRACT_VERSION",
     "CHANGE_GRAPH_GROUPS",
     "COVERAGE_CONTRACT_VERSION",
+    "COVERAGE_DECISION_CONTRACT",
     "ChangeClassification",
     "ChangeDescriptor",
     "ChangeKind",
@@ -123,6 +126,7 @@ __all__ = (
     "derive_coverage_requirement",
     "derive_coverage_view",
     "generate_applicability_resolution_work",
+    "generate_coverage_obligations",
     "identity",
     "generate_unmapped_normative_obligations",
     "load_router_projection",

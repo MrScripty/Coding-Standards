@@ -14,7 +14,9 @@ Current implemented foundation:
 - mandatory whole-artifact obligations for unmapped normative changes;
 - three-valued accepted/proposed impact applicability with exact fact-resolution
   work and conservative whole-artifact scope for unknown candidates;
-- independent content-fingerprinted policy-consumer horizons; and
+- independent content-fingerprinted policy-consumer horizons;
+- mandatory audit-coverage work for changed policies without current
+  certificates, including policies with no declared consumers; and
 - two-identity coverage requirements, attestations, and reusable certificates.
 
 Run tests:

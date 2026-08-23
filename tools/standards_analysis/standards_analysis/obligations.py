@@ -15,6 +15,7 @@ from tools.standards_metadata.standards_metadata import (
 )
 
 from .changes import ClassifiedChange, ReviewScope
+from .coverage import CoverageIndex
 from .errors import AnalysisError, AnalysisFailure
 from .impact import ImpactSelection
 from .serialization import identity
@@ -73,11 +74,23 @@ APPLICABILITY_DECISION_CONTRACT = DecisionContract(
         "relationship",
     ),
 )
+COVERAGE_DECISION_CONTRACT = DecisionContract(
+    "decision-contract.audit-coverage.v1",
+    1,
+    (
+        "audit",
+        "policy-unit",
+        "provider-contract",
+    ),
+)
 UNMAPPED_CONTRACT_DIGEST = digest_bytes(
     canonical_json_bytes(UNMAPPED_DECISION_CONTRACT.as_contract())
 )
 APPLICABILITY_CONTRACT_DIGEST = digest_bytes(
     canonical_json_bytes(APPLICABILITY_DECISION_CONTRACT.as_contract())
+)
+COVERAGE_CONTRACT_DIGEST = digest_bytes(
+    canonical_json_bytes(COVERAGE_DECISION_CONTRACT.as_contract())
 )
 
 
@@ -150,6 +163,92 @@ class ApplicabilityQuestion:
 class ApplicabilityResolutionWork:
     questions: tuple[ApplicabilityQuestion, ...]
     obligations: tuple[Obligation, ...]
+
+
+def generate_coverage_obligations(
+    changes: Iterable[ClassifiedChange],
+    accepted: CoverageIndex,
+    proposed: CoverageIndex,
+) -> tuple[Obligation, ...]:
+    selected: dict[str, tuple[CoverageIndex, ReviewScope]] = {}
+    for change in changes:
+        descriptor = change.descriptor
+        index = proposed if descriptor.proposed_ids else accepted
+        subjects = descriptor.proposed_ids or descriptor.accepted_ids
+        for subject in subjects:
+            selected[subject] = (index, descriptor.scope)
+
+    obligations: list[Obligation] = []
+    for subject in sorted(selected):
+        index, scope = selected[subject]
+        requirement = index.requirements.get(subject)
+        view = index.views.get(subject)
+        if requirement is None or view is None:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "COVERAGE.SUBJECT_UNAVAILABLE",
+                    "unavailable",
+                    "changed policy has no current coverage requirement",
+                    field="subject",
+                    observed=subject,
+                )
+            )
+        if index.certificate_for(subject) is not None:
+            continue
+        dependencies = (
+            DecisionDependency(
+                "audit",
+                requirement.handle,
+                digest_bytes(canonical_json_bytes(requirement.as_projection())),
+            ),
+            DecisionDependency(
+                "policy-unit",
+                subject,
+                digest_bytes(
+                    canonical_json_bytes(
+                        {
+                            "coverage_view": view.handle,
+                            "semantic_revision": view.semantic_revision,
+                            "representation_digest": view.representation_digest,
+                            "structural_digest": view.structural_digest,
+                        }
+                    )
+                ),
+            ),
+            DecisionDependency(
+                "provider-contract",
+                COVERAGE_DECISION_CONTRACT.id,
+                COVERAGE_CONTRACT_DIGEST,
+            ),
+        )
+        fingerprint = DecisionFingerprint(
+            "audit-coverage",
+            COVERAGE_DECISION_CONTRACT.id,
+            dependencies,
+        )
+        reason = {"kind": "audit-coverage", "source": subject}
+        identity_value = {
+            "kind": "audit-coverage",
+            "source": subject,
+            "target": subject,
+            "scope": scope.as_contract(),
+            "reason": reason,
+            "fingerprint": fingerprint.as_contract(),
+        }
+        obligations.append(
+            Obligation(
+                identity(OBLIGATION_DOMAIN, "obligation", identity_value),
+                "audit-coverage",
+                subject,
+                subject,
+                scope,
+                reason,
+                "required",
+                ("coverage-attestation",),
+                fingerprint,
+            )
+        )
+    return tuple(obligations)
 
 
 def generate_applicability_resolution_work(

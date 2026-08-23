@@ -1,5 +1,21 @@
 # Standards Engine Navigation And Analysis Execution Ledger
 
+## 2026-08-23: Milestone 3 Empty-Impact Coverage Gate
+
+- Added a deterministic coverage-work projection over changed target policy
+  authority: proposed subjects for additions and surviving changes, and
+  accepted subjects for removals.
+- A changed policy without a certificate for its exact current requirement now
+  produces one mandatory fingerprinted `audit-coverage` obligation, even when
+  its compiled relationship set and impact candidate set are empty.
+- A current generated certificate removes the obligation. Existing stale
+  attestation validation remains fail-closed when policy relationships or an
+  independently fingerprinted horizon member changes.
+- The obligation uses the accepted public `Obligation` and `DecisionContract`
+  shapes and permits only `coverage-attestation` submissions.
+- Acceptance evidence is recorded in the
+  [empty-impact coverage report](reports/milestone-3-empty-impact-coverage.md).
+
 ## 2026-08-23: Milestone 3 Unknown Applicability Resolution
 
 - Impact selection now evaluates the accepted and proposed trace union through

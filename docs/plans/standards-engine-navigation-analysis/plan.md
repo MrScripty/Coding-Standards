@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 3 semantic impact selection and coverage
 
-**Next slice:** prove that missing or expired policy-consumer coverage cannot
-produce successful empty impact
+**Next slice:** implement move, split, and merge classification, graph seeds,
+and exact impact-selection fixtures
 
 **Acceptance status:** `pending`
 
@@ -483,7 +483,7 @@ without claiming to judge arbitrary meaning.
   `audit_declaration` semantics, `audited_owners`, old verifier loading, and
   module-level audit authority in the same cutover without fallback.
 - [x] Keep applicability unknown during conservative whole-artifact selection.
-- [ ] Prove that missing or expired audit coverage cannot return successful
+- [x] Prove that missing or expired audit coverage cannot return successful
   empty impact.
 
 **Acceptance gate:** Focused policy-unit, impact, applicability, audit, and

@@ -23,9 +23,18 @@ from tools.standards_engine.contracts.validate_contracts import validate
 
 from tools.standards_analysis.standards_analysis import (
     AnalysisError,
+    COVERAGE_DECISION_CONTRACT,
+    ChangeDescriptor,
+    ChangeKind,
+    ClassifiedChange,
+    CoverageIndex,
+    GraphSeedSelection,
+    ReviewScope,
+    classify_changes,
     compile_coverage,
     derive_coverage_requirement,
     derive_coverage_view,
+    generate_coverage_obligations,
     load_coverage_horizon,
 )
 
@@ -137,6 +146,39 @@ class CoverageTest(unittest.TestCase):
             "sha256:" + "6" * 64,
         )
 
+    def changes(self):
+        return classify_changes(
+            self.corpus.policy_unit_corpus,
+            self.corpus.policy_unit_corpus,
+            (
+                ChangeDescriptor(
+                    ChangeKind.MODIFICATION,
+                    ("workflow.policy.rule",),
+                    ("workflow.policy.rule",),
+                    ReviewScope("structured", ("Rule",)),
+                ),
+            ),
+        )
+
+    def write_attestation(self, requirement: str) -> None:
+        self.write(
+            "attestations.toml",
+            f"""
+            schema_version = 1
+            [[attestations]]
+            requirement = "{requirement}"
+            conclusion = "complete"
+            evidence = ["evidence.md"]
+            explicit_exclusions = []
+            rationale = "The exact registered horizon was reviewed."
+            auditor_provenance = "reviewer:test"
+            """,
+        )
+        self.write(
+            "attestation-sources.toml",
+            'schema_version = 1\nsources = ["attestations.toml"]\n',
+        )
+
     def test_horizon_uses_registered_suite_inputs_and_fingerprints_content(self) -> None:
         first = load_coverage_horizon(self.root, self.corpus, "horizon.toml")
         ids = {member.id for member in first.members}
@@ -239,6 +281,122 @@ class CoverageTest(unittest.TestCase):
             ("ConsumerCoverageCertificate", certificate.as_projection()),
         ):
             validate(schema, schema["$defs"][definition], value, definition)
+
+    def test_empty_impact_requires_current_coverage_before_success(self) -> None:
+        compiled = self.compiled()
+        uncovered = compile_coverage(
+            self.root,
+            self.corpus,
+            compiled,
+            horizon_path="horizon.toml",
+            attestation_registry_path="attestation-sources.toml",
+        )
+
+        obligations = generate_coverage_obligations(
+            self.changes(),
+            uncovered,
+            uncovered,
+        )
+
+        self.assertEqual(compiled.semantics, {})
+        self.assertEqual(len(obligations), 1)
+        value = obligations[0].as_contract()
+        self.assertEqual(value["kind"], "audit-coverage")
+        self.assertEqual(value["state"], "required")
+        self.assertEqual(value["permitted_submissions"], ["coverage-attestation"])
+        schema_path = Path(__file__).resolve().parents[2] / "standards_engine/contracts/a1-contract.schema.json"
+        schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        validate(schema, schema["$defs"]["Obligation"], value, "$obligation")
+        validate(
+            schema,
+            schema["$defs"]["DecisionContract"],
+            COVERAGE_DECISION_CONTRACT.as_contract(),
+            "$decision_contract",
+        )
+
+        requirement = uncovered.requirements["workflow.policy.rule"]
+        self.write_attestation(requirement.handle)
+        covered = compile_coverage(
+            self.root,
+            self.corpus,
+            compiled,
+            horizon_path="horizon.toml",
+            attestation_registry_path="attestation-sources.toml",
+        )
+        self.assertEqual(
+            generate_coverage_obligations(self.changes(), covered, covered),
+            (),
+        )
+
+    def test_horizon_or_relationship_change_expires_old_attestation(self) -> None:
+        compiled = self.compiled()
+        uncovered = compile_coverage(
+            self.root,
+            self.corpus,
+            compiled,
+            horizon_path="horizon.toml",
+            attestation_registry_path="attestation-sources.toml",
+        )
+        self.write_attestation(uncovered.requirements["workflow.policy.rule"].handle)
+
+        for change in ("horizon", "relationship"):
+            with self.subTest(change=change):
+                if change == "horizon":
+                    self.write("inputs/consumer.md", "# Consumer\n\nChanged meaning.\n")
+                    selected = compiled
+                else:
+                    selected = self.compiled(relationship=True)
+                with self.assertRaises(AnalysisError) as caught:
+                    compile_coverage(
+                        self.root,
+                        self.corpus,
+                        selected,
+                        horizon_path="horizon.toml",
+                        attestation_registry_path="attestation-sources.toml",
+                    )
+                self.assertEqual(
+                    caught.exception.failure.code,
+                    "COVERAGE.STALE_ATTESTATION",
+                )
+                if change == "horizon":
+                    self.write("inputs/consumer.md", "# Consumer\n")
+
+    def test_addition_and_removal_select_their_existing_coverage_side(self) -> None:
+        compiled = self.compiled()
+        uncovered = compile_coverage(
+            self.root,
+            self.corpus,
+            compiled,
+            horizon_path="horizon.toml",
+            attestation_registry_path="attestation-sources.toml",
+        )
+        empty = CoverageIndex(uncovered.horizon, {}, {}, {}, {}, ())
+        addition = ClassifiedChange(
+            ChangeDescriptor(
+                ChangeKind.ADDITION,
+                (),
+                ("workflow.policy.rule",),
+                ReviewScope("structured", ("Rule",)),
+            ),
+            (),
+            GraphSeedSelection((), (), (), ()),
+        )
+        removal = ClassifiedChange(
+            ChangeDescriptor(
+                ChangeKind.REMOVAL,
+                ("workflow.policy.rule",),
+                (),
+                ReviewScope("whole-artifact"),
+            ),
+            (),
+            GraphSeedSelection((), (), (), ()),
+        )
+
+        added = generate_coverage_obligations((addition,), empty, uncovered)
+        removed = generate_coverage_obligations((removal,), uncovered, empty)
+
+        self.assertEqual([item.target for item in added], ["workflow.policy.rule"])
+        self.assertEqual([item.target for item in removed], ["workflow.policy.rule"])
 
     def test_stale_attestation_rejects_and_relationship_location_cannot_escape(self) -> None:
         horizon = load_coverage_horizon(self.root, self.corpus, "horizon.toml")
