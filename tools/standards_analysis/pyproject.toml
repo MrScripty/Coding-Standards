@@ -1,0 +1,9 @@
+[project]
+name = "standards-analysis"
+version = "0.1.0"
+description = "Read-only standards navigation and impact analysis"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.unittest]
+start-directory = "tests"

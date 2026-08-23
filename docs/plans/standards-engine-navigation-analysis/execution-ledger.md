@@ -119,6 +119,38 @@
 - Milestone 1 is `Accepted`. Milestone 2 is active with snapshot and policy-unit
   foundations as its sole next slice.
 
+## 2026-08-22: Milestone 2 Snapshot And Policy-Unit Foundation
+
+- Added `standards_analysis` as a verifier-independent package with canonical
+  serialization, domain-separated identities, immutable source snapshots, and
+  explicit policy-unit authority.
+- Clean Git snapshots bind tree content separately from commit provenance and
+  declared scope, exclusions, submodule state, and contract versions. Dirty
+  Git and non-Git inputs use deterministic manifests with tracked, untracked,
+  ignored-but-selected, mode, symlink, nested-repository, gitlink, and explicit
+  exclusion state.
+- Manifest construction rejects lexical and symlink-ancestor escape, does not
+  follow symlinks by default, captures dirty nested Git content through a
+  nested snapshot handle, and distinguishes a Git repository with no tracked
+  files from a non-Git source.
+- Added an explicit registered policy-unit source and the first accepted unit,
+  `workflow.verification.acceptance-claims`. Canonical module metadata derives
+  its document path; the sidecar owns only stable unit identity, module-relative
+  locator, accepted semantic revision, aliases, and lifecycle relationships.
+- Policy-unit validation resolves each heading exactly once, rejects duplicate
+  locator ownership and identity conflicts, preserves separate representation
+  and structural digests, and enforces reciprocal split/merge tombstone links.
+- Seventeen analysis tests, seven neutral metadata tests, 381 verifier tests, 35
+  graph tests, all 218 declarative suites, 22 contract examples, seven identity
+  fixtures, four operation envelopes, 94 schema definitions, and
+  `git diff --check` passed.
+- No canonical standard, Router rule, graph schema, verifier behavior, or
+  migration package changed. The complete mixed checkpoint remains reserved
+  for the Milestone 2 shared integration boundary.
+- This foundation slice is accepted. The sole next slice is typed
+  snapshot-bound `read`, `related`, and `inspect`; Router projection and impact
+  analysis remain outside that slice.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

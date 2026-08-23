@@ -1,0 +1,7 @@
+schema_version = 1
+
+[[policy_unit]]
+id = "workflow.verification.acceptance-claims"
+module = "workflow.verification"
+heading_path = ["Acceptance Is A Set Of Claims"]
+semantic_revision = 1

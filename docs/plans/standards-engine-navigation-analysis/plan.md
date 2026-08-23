@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 2 snapshot and policy-unit foundation
 
-**Next slice:** implement immutable clean-Git and manifest snapshot identities
-plus policy-unit declaration, locator, lifecycle, representation, structure,
-and accepted-semantic-revision validation without adding navigation behavior
+**Next slice:** implement snapshot-bound typed `read`, `related`, and `inspect`
+queries over canonical metadata and policy-unit authority without adding Router
+projection or impact analysis
 
 **Acceptance status:** `pending`
 
@@ -19,7 +19,7 @@ and accepted-semantic-revision validation without adding navigation behavior
 `5e9c4eb211ee0a67039b0ec11142db9b106243ae`
 
 **Implementation admission:** operation `start` accepted from the recorded
-implementation base; Milestone 1 is authorized within its bounded write set
+implementation base; Milestone 2 is authorized within its bounded write set
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -333,7 +333,7 @@ requests without repository paths.
 
 **Tasks:**
 
-- [ ] Build clean-Git and dirty/non-Git snapshots with exact scope,
+- [x] Build clean-Git and dirty/non-Git snapshots with exact scope,
   tracked/untracked files, exclusions, modes, symlink targets, submodules, and
   relevant contract/tool versions.
 - [ ] Implement accepted canonical serialization and immutable snapshot,
@@ -404,7 +404,7 @@ invalid outcome; modification/addition/removal pilot selection and
 move/split/merge fixtures select exact expected identities, groups, scopes, and
 obligations; graph-engine tests remain unchanged and pass.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 4: Packets, Agent Resolution, And A1 Acceptance
 
@@ -458,13 +458,12 @@ checks pass from one clean recorded tree.
 
 ## Blockers
 
-- `none` for the current Milestone 0 planning slice.
+- `none` for the current Milestone 2 snapshot and policy-unit foundation slice.
 
-A1 runtime implementation remains unavailable until this accepted Milestone 0
-tree is committed, the exact commit and tree are recorded, the plan is
-explicitly started, and the current verifier plan has no admitted overlapping
-shared-authority write set. These are admission preconditions, not authority to
-mark this planned effort active.
+Runtime implementation is admitted from the recorded implementation base and
+remains bounded by the active milestone, exact next slice, allowed write set,
+and serial shared-authority checks. A newly admitted overlapping verifier or
+shared-authority proposal triggers re-planning before further source edits.
 
 ## Re-Plan Triggers
 
@@ -495,11 +494,10 @@ mark this planned effort active.
 
 ## Concurrent Work
 
-No concurrent A1 implementation is admitted. Milestone 0 is one serial
-architecture and schema slice. Later package-local work may be delegated only
-after the accepted ADR and current plan identify non-overlapping primary write
-sets; schemas, registries, canonical metadata, active plans, and generated
-artifacts remain serial integration-owner writes.
+No concurrent A1 implementation is admitted. Package-local work may be
+delegated only when the accepted ADR and current plan identify non-overlapping
+primary write sets; schemas, registries, canonical metadata, active plans, and
+generated artifacts remain serial integration-owner writes.
 
 ## Final Acceptance
 
