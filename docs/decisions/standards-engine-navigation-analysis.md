@@ -70,9 +70,11 @@ neutral and policy-specific Modules but is not their owner.
 Canonical documents remain authoritative for module IDs, aliases, paths,
 `Requires`, `Specializes`, and policy meaning. A registered generic catalog
 owns non-module nodes and the existing `policy-impact` and `semantic` group
-contracts. Policy-unit declarations own stable unit identities and
-module-relative locators. Source-owner typed policy-impact declarations are the
-sole relationship authority. Compiled graph edges, semantics indexes, graph
+contracts. Policy-unit declarations own stable unit identities,
+module-relative locators, accepted semantic revisions, and policy-impact source
+identity. Module-owned typed policy-impact declaration files are the sole
+relationship authority, but every relationship source is an active policy unit
+contained by that owner module. Compiled graph edges, semantics indexes, graph
 indexes, packets, reports, and certificates are projections, not authority.
 
 ### Public interface
@@ -266,12 +268,27 @@ analysis, engine, and verifier callers translate neutral failures into their
 own diagnostics. Whole-artifact review may accompany an unknown result but
 cannot turn it into `true`.
 
-An authored `AuditDeclaration` records the bounded semantic attestation. A
-generated immutable `ConsumerAuditCertificate` binds it to resolved identities,
-the standards snapshot, registered audit horizon, corpus and edge digests,
-applicability contract, evidence, and tool versions. A successful empty consumer
-set requires a current certificate. Timestamps are excluded from certificate
+Analysis derives a `CoverageAuditRequirement` from the exact compiled authority
+view, policy-unit semantic revision and structural state, relationship set,
+applicability contract, fact schema, and registered audit horizon. An authorized
+reviewer may submit a `CoverageAttestation` for that exact requirement. A
+generated immutable `ConsumerCoverageCertificate` binds the attestation to
+those derived inputs. It certifies consumer-discovery coverage only; it never
+contains a report or change-specific disposition.
+
+`CompletedAnalysisReport` references every certificate used and separately
+owns the change-specific dispositions. Completion requires exact equality
+between required coverage subjects and valid certificate subjects, plus exact
+equality between reached consumer obligations and dispositions. A successful
+empty consumer set therefore requires a current certificate without creating a
+report/certificate identity cycle. Timestamps are excluded from certificate
 identity.
+
+Accepted and proposed applicability contexts are independently bound to their
+authority view's fact schema. Equal schemas may share one immutable fact set;
+different schemas use separately validated fact sets. Until schema evolution is
+implemented, it returns `FACT_SCHEMA_EVOLUTION_UNSUPPORTED` rather than
+silently becoming a permanent schema-equality invariant.
 
 ### Graph composition
 
@@ -312,6 +329,15 @@ provenance; group membership does not duplicate it.
 Changed normative content outside exactly one valid policy-unit locator creates
 a mandatory `unmapped-normative-change` obligation. Missing edges or absent
 audit coverage cannot be interpreted as no impact.
+
+Policy-impact relationships originate from coherent policy units, not module
+IDs. Modules remain document, navigation, `Requires`, and `Specializes`
+identities. A module-level relationship query derives an aggregation over the
+module's contained policy units and exposes unmapped normative coverage; it
+does not create module-source edge authority. A broad legacy relationship may
+split into several policy-unit relationships when it projected independently
+changeable policies. Semantic mapping dispositions, not legacy edge-count
+equality, govern the cutover.
 
 ### State, authorization, and completion
 

@@ -910,48 +910,52 @@ An empty edge query does not prove that an owner has no consumers.
 Use:
 
 ```text
-Authored AuditDeclaration
+Compiled authority view
           │
           ▼
-Certificate generator
+Derived CoverageAuditRequirement
           │
           ▼
-Immutable ConsumerAuditCertificate
+Authorized CoverageAttestation
+          │
+          ▼
+Immutable ConsumerCoverageCertificate
 ```
 
-## Audit declaration
+## Coverage requirement and attestation
 
-Authored fields include:
+Analysis mechanically derives a `CoverageAuditRequirement` containing:
 
-- Covered owner.
-- Covered policy scope.
-- Relationship kinds.
-- Audit-horizon provider and version.
-- Expected semantic revision.
-- Completed analysis-report identity.
-- Referenced consumer-obligation and disposition-evidence identities.
-- Referenced explicit-exclusion evidence identities.
-- Rationale.
-- Auditor provenance.
-- Evidence references.
+- Exact accepted or proposed authority view.
+- Covered policy-unit identity and scope.
+- Accepted or proposed semantic revision and structural/content digest.
+- Relationship kinds and compiled relationship-set digest.
+- Audit-horizon provider, version, membership, and digest.
+- Applicability-contract and fact-schema digests.
+- Required evidence classes.
 
-The audit declaration does not copy packet- or revision-bound dispositions. The completed report remains their authority; the declaration attests that the referenced report and evidence cover the declared horizon.
+An authorized reviewer authors a `CoverageAttestation` containing only the
+requirement handle, a `complete` conclusion, evidence, explicit exclusions,
+rationale, and auditor provenance. It does not repeat snapshots, relationships,
+horizon members, obligations, reports, or dispositions. If the audit finds a
+missing consumer, no complete attestation or certificate is produced; the
+relationship authority must be corrected and analysis repeated.
 
 ## Generated certificate
 
 Derived fields include:
 
-- Resolved canonical identities.
-- Resolved source locations.
-- Standards snapshot.
-- Resolved audit-horizon membership and digest.
-- Edge-set digest.
-- Applicability version.
-- Schema and tool versions.
+- Requirement and attestation digests.
+- Exact authority view and policy-unit semantic and structural state.
+- Resolved canonical identity and source location.
+- Resolved audit-horizon and relationship-set digests.
+- Applicability-contract and fact-schema digests.
+- Schema and tool-contract versions.
 - Evidence digests.
-- Audit-declaration digest.
 
-The generator rejects mismatched scope or semantic revision.
+The generator rejects mismatched scope, semantic revision, structural state,
+authority view, relationship set, applicability contract, fact schema, horizon,
+or evidence. Certificate identity excludes generation timestamps.
 
 A certificate makes this bounded claim:
 
@@ -975,6 +979,13 @@ Renew coverage when:
 - Required evidence becomes unavailable.
 
 Without valid coverage, return an unaudited or unresolved result—not an empty successful impact set.
+
+Coverage certificates certify consumer-discovery completeness and may be
+reused while their dependencies remain equal. They never contain or depend on
+change-specific dispositions. `CompletedAnalysisReport` references the exact
+certificates used and separately owns dispositions. Completion requires exact
+coverage-subject/certificate equality and exact reached-obligation/disposition
+equality.
 
 A global corpus-membership change triggers horizon recomputation, not automatic certificate invalidation. If the registered horizon provider proves that the resolved horizon and every other certificate dependency are unchanged, the certificate may remain valid. A provider or classification change that could alter horizon membership requires renewal.
 

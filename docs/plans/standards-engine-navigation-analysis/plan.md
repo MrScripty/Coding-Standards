@@ -4,9 +4,10 @@
 
 **Current phase:** Milestone 3 semantic impact selection and coverage
 
-**Next slice:** evaluate accepted and proposed compiled policy-impact programs
-against one request fact set, generate exact consumer and unknown-fact
-obligations, and establish bounded audit coverage for empty-impact decisions
+**Next slice:** atomically create the accepted Planning and Commit policy-unit
+authority, remap policy-impact declarations through the reviewed one-to-many
+dispositions, cut every consumer to policy-unit sources, and remove
+module-source support without fallback
 
 **Acceptance status:** `pending`
 
@@ -48,7 +49,7 @@ repository mutation, and external-project application outside A1.
 | A3 | A typed agent can route from structured facts, receive canonical IDs, read canonical content, and navigate declared relations through follow-up requests bound to the same immutable snapshot without supplying repository paths. | `user-workflow` | `not-applicable` | `automated` | `pending` | Route/read agent fixture |
 | A4 | Policy-unit identity, accepted and proposed semantic state, move, split, merge, retirement, successor, alias, and unmapped normative-change rules preserve identity and produce the required typed outcomes without treating structure as semantic proof. | `contract` | `not-applicable` | `automated` | `pending` | Milestones 2 and 3 evidence |
 | A5 | Modification, addition, removal, move, split, and merge select deterministic seeds, traverse the accepted/proposed relation union through the existing graph engine, retain unknown applicability, and generate every required scoped obligation. | `integration` | `not-applicable` | `automated` | `pending` | Impact fixtures |
-| A6 | Bounded audit declarations generate deterministic certificates, reject stale or unaudited coverage, and never infer successful empty impact from absent edges or convert unknown applicability into true. | `contract` | `not-applicable` | `automated` | Audit and applicability fixtures |
+| A6 | Derived coverage requirements plus authorized attestations generate deterministic reusable certificates, reject stale or unaudited coverage, and never infer successful empty impact from absent edges or convert unknown applicability into true. | `contract` | `not-applicable` | `automated` | Coverage and applicability fixtures |
 | A7 | `prepare` and iterative `resolve` return a `CompletedAnalysisReport` only when the final reached consumer-obligation IDs exactly equal the valid current disposition IDs and every other required question, obligation, authorization, and coverage condition is resolved. | `integration` | `not-applicable` | `automated` | Full prepare/resolve fixtures |
 | A8 | One canonical interface schema mechanically governs Python types, JSON validation, agent-tool definitions, examples, identity-bearing serialization, result variants, derived `next_operations`, and text rendering; projection drift fails verification. | `contract` | `not-applicable` | `automated` | Schema conformance suite |
 | A9 | Representative modification, addition, and removal changes complete through the real typed agent adapter; move, split, and merge behavioral fixtures pass; focused package tests and affected broad repository verification pass from one recorded clean tree. | `user-workflow` | `not-applicable` | `automated` | Final A1 acceptance report |
@@ -72,7 +73,7 @@ repository mutation, and external-project application outside A1.
   handles, and typed result families.
 - A mechanically generated or validated executable projection of Router-owned
   routing decisions.
-- Policy-unit and audit declarations that reference canonical module IDs
+- Policy-unit declarations and coverage attestations that reference canonical module IDs
   without redefining IDs, aliases, paths, membership, `Requires`, or
   `Specializes`.
 - Adaptation of the verifier and repository graph composition to consume the
@@ -159,8 +160,10 @@ plan or shared-authority proposals can become stale before integration.
   are invalid. Conservative review selection never changes `unknown` to true.
 - Any changed normative content outside exactly one valid policy-unit locator
   creates a mandatory conservative whole-artifact obligation.
-- Consumer-audit coverage is bounded by an authored declaration and a derived
-  registered audit horizon. An unaudited empty edge result is not success.
+- Consumer coverage is bounded by a mechanically derived requirement, an
+  authorized attestation, and a generated certificate over a registered audit
+  horizon. Coverage certificates never own change-specific dispositions. An
+  unaudited empty edge result is not success.
 - `CompletedAnalysisReport.complete` is derived from exact obligation,
   disposition, question, authorization, evidence, and coverage invariants.
 - Shared schemas, metadata authority, registries, plans, and generated outputs
@@ -194,17 +197,17 @@ plan or shared-authority proposals can become stale before integration.
 | Metadata authority | The corpus provider owns membership only; canonical documents own IDs, aliases, paths, `Requires`, and `Specializes`; neutral code only loads, validates, and projects them. | [Brief neutral metadata](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#6-neutral-metadata-module) | Suite-selection-dependent discovery and duplicate catalogs |
 | Public interface | Typed requests and typed results are authoritative. Text is a derived optional rendering, not an input command language. | [Brief public interface](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#8-public-interface) | Prose command examples as interface authority |
 | Snapshot binding | Canonical tool requests carry an immutable snapshot handle; every result and follow-up handle preserves it. Native Python may offer a snapshot-bound convenience view only. | [Brief navigation](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#14-navigation) | Ambient current-tree navigation |
-| Policy identity | Policy-unit sidecars own stable unit ID, canonical module reference, module-relative locator, and accepted semantic revision; document path derives from canonical metadata. | [Brief policy-unit identity](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#13-policy-unit-identity) | Paths, headings, line numbers, or migration IDs as semantic identity |
+| Policy identity | Policy-unit sidecars own stable unit ID, canonical module reference, module-relative locator, and accepted semantic revision; document path derives from canonical metadata. Policy-impact relationships originate from policy units, while modules remain navigation and document identities. | [Policy-unit source replan](reports/milestone-3-policy-unit-source-replan.md) | Paths, headings, line numbers, migration IDs, or module revisions as semantic identity |
 | Proposal state | A1 carries proposed semantic state only in `AnalysisRequest.semantic_proposals`; `CompletedAnalysisReport` proves analysis completion but is not apply-eligible. | [Brief A1 proposal state](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#a1-proposal-state) | Proposed state represented as accepted authority |
 | Impact completeness | Change-type adapters select explicit seeds and the accepted/proposed relation union, then use the existing graph engine. Unmapped normative change creates a mandatory obligation. | [Brief impact contract](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#change-type-impact-contract) | Current-graph-only traversal and optional whole-artifact selection |
 | Applicability | The A1 JSON Schema owns serialized shapes. `standards_applicability` owns executable operator semantics, compilation, normalization, type checking, truth tables, unresolved-fact reporting, and domain-separated program identity. Adapters load declarations; callers own questions and diagnostics. | [Applicability ownership replan](reports/milestone-3-applicability-ownership-replan.md) | Analysis-owned evaluator, policy-impact private parsing, Boolean coercion, or verifier-predicate reuse |
-| Audit authority | Authored audit declarations reference completed report and evidence identities; generated certificates bind them to derived snapshot, horizon, edge, schema, and tool facts. | [Brief consumer-audit coverage](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#17-consumer-audit-coverage) | Permanent audited flags and copied packet dispositions |
+| Coverage authority | Analysis derives an exact coverage requirement; an authorized attestation approves that requirement; a generated reusable certificate binds authority view, policy revision and digests, relationships, applicability, fact schema, horizon, evidence, and tool contracts. Reports alone own change-specific dispositions and reference the certificates they used. | [Policy-unit source replan](reports/milestone-3-policy-unit-source-replan.md#coverage-model) | Report-dependent certificates, permanent audited flags, and copied packet dispositions |
 | Completion | Analysis completion is mechanically derived from the final reached-obligation set and exact valid disposition set plus every other typed obligation. | [Brief report invariant](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#exact-completedanalysisreport-invariant) | Authored or unchecked complete flags |
 | Agent evidence | A1 acceptance requires real typed route/read and iterative prepare/resolve workflows, not schema inspection alone. | [Brief agent evidence](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#24-required-a1-agent-evidence) | Interface usability inferred from declarations |
 | Canonical schema | JSON Schema Draft 2020-12 plus documented Standards Engine annotations is the sole A1 machine contract; generated Python and agent-tool projections must pass deterministic conformance. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md) and [Milestone 0 review](reports/milestone-0-architecture-contract-review.md) | Independent Python, JSON, tool, example, identity, or renderer contracts |
 | Snapshot bootstrap | A trusted source provider issues the initial opaque snapshot handle; caller operations remain explicitly handle-bound and cannot fall back to ambient current state. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md#public-interface) | Caller repository paths or implicit current-tree lookup |
 | Impact graph groups | Use `policy-impact`; add `standards-requires` and `standards-specializes` only for additions and cross-module moves. Do not select `semantic` or `standards-dependencies` for A1 impact composition. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md#graph-composition) | Broad semantic traversal or combined dependency provenance |
-| Policy-impact authority | Source-owner typed declarations compile once into neutral graph topology and typed semantics. Canonical nodes and generic groups remain independent upstream authorities. | [Milestone 3 authority replan](reports/milestone-3-policy-impact-applicability-replan.md) | Edge-ID semantics sidecar and policy strings in generic graph metadata |
+| Policy-impact authority | Module-owned typed declaration files contain relationships whose sources are active policy units in that module. They compile once into neutral graph topology and typed semantics. Canonical modules, nodes, and generic groups remain independent upstream authorities. | [Policy-unit source replan](reports/milestone-3-policy-unit-source-replan.md) | Module-source edges, edge-ID semantics sidecars, and policy strings in generic graph metadata |
 | Policy-impact identity | The compiler derives one ID from the unique `(source, relation, consumer)` natural key and the cutover records every old-to-new mapping. | [Milestone 3 authority replan](reports/milestone-3-policy-impact-applicability-replan.md#edge-identity) | Exact authored IDs for policy-impact edges only |
 
 Milestone 0 must select the canonical schema representation, contract-version
@@ -426,6 +429,14 @@ without claiming to judge arbitrary meaning.
 - [x] Cut repository graph composition, analysis, verifier validation, and
   Standards Engine inspection to the compiled authority and remove the old
   edge blocks and string metadata without fallback.
+- [x] Inventory every legacy module-source relationship and record a semantic
+  one-to-one or one-to-many policy-unit source disposition without treating 39
+  as the replacement edge count.
+- [x] Define and review the Planning and Commit heading-scoped policy-unit
+  baseline, including accepted semantic revision 1 and exact locator evidence.
+- [ ] Cut declarations, compiler validation, graph contribution, inspection,
+  verifier consumers, and module-level related aggregation to policy-unit
+  sources atomically; remove module-source support without fallback.
 - [ ] Generate mandatory `unmapped-normative-change` obligations for uncovered
   or unresolved normative changes.
 - [x] Implement neutral compiled fact schemas, applicability programs, and fact
@@ -436,8 +447,9 @@ without claiming to judge arbitrary meaning.
   make analysis and verifier consume the same programs, mechanically prove A1
   schema/runtime agreement, and delete both former applicability parsers and
   re-exports without fallback.
-- [ ] Implement authored audit declarations, registered bounded audit horizons,
-  deterministic certificates, and exact invalidation.
+- [ ] Implement derived coverage requirements, authorized coverage
+  attestations, registered bounded audit horizons, deterministic reusable
+  certificates, and exact invalidation independent from report dispositions.
 - [ ] Keep applicability unknown during conservative whole-artifact selection.
 - [ ] Prove that missing or expired audit coverage cannot return successful
   empty impact.
@@ -502,10 +514,12 @@ checks pass from one clean recorded tree.
 
 ## Blockers
 
-No current blocker is accepted. The former policy-impact authority blocker was
-resolved by the accepted compiled-authority re-plan. A failed topology
-equivalence, ambiguous evidence or audit resolution, or need to change another
-graph authority remains a re-plan trigger rather than an implicit blocker.
+No current blocker is accepted. The module-source semantic-lifecycle mismatch
+was resolved by the accepted policy-unit source direction and is now the active
+Milestone 3 remapping slice. Ambiguous policy-unit scope, a required locator
+extension, failed semantic mapping, ambiguous evidence or coverage resolution,
+or need to change another graph authority remains a re-plan trigger rather than
+an implicit blocker.
 
 Runtime implementation is admitted from the recorded implementation base and
 remains bounded by the active milestone, exact next slice, allowed write set,

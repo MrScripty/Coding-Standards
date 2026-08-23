@@ -1,5 +1,28 @@
 # Standards Engine Navigation And Analysis Execution Ledger
 
+## 2026-08-23: Milestone 3 Policy-Unit Source Replan
+
+- Coverage design review separated reusable consumer-discovery coverage from
+  change-specific disposition closure and removed the report/certificate
+  identity cycle from the binding direction.
+- Inspection found that every current policy-impact relationship originates
+  from `workflow.planning` or `workflow.commit`, while accepted semantic
+  revisions belong only to policy units. Module revisions and optional semantic
+  revisions were rejected as competing or weakened authority.
+- The [policy-unit source replan](reports/milestone-3-policy-unit-source-replan.md)
+  makes policy units semantic relationship sources while modules remain
+  navigation, document, and dependency identities.
+- The [39-row mapping](reports/policy-impact-source-mapping.tsv) gives every
+  legacy relationship one reviewed `mapped` or `split` disposition and uses
+  existing non-overlapping level-two headings. The legacy count is an inventory
+  baseline, not a replacement acceptance constant.
+- The [28-unit baseline](reports/policy-unit-baseline.tsv) records exact
+  existing heading locators and accepts semantic revision 1 only for the
+  reviewed identity, content scope, and relationship mapping. No locator
+  extension or canonical policy-text correction is required.
+- No production declaration, compiler, graph, schema, verifier, or generated
+  artifact changed during this planning slice.
+
 ## 2026-08-22: Plan Construction
 
 - Planning evidence: the

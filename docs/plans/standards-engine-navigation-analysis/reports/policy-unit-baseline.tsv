@@ -1,0 +1,29 @@
+policy_unit	module	heading_path	semantic_revision	locator_assessment	review_status	relationship_evidence
+workflow.commit.per-commit-boundary	workflow.commit	Per-Commit Boundary	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.isolation-applicability	workflow.commit	Branch And Worktree Applicability	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.branch-context	workflow.commit	Governed Branch Context	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.integration-mechanisms	workflow.commit	Integration Mechanism Selection	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.cherry-pick-lineage	workflow.commit	Cherry-Pick And Replacement Lineage	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.terminal-branch-lifecycle	workflow.commit	Terminal Branch Lifecycle	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.worktree-lifecycle	workflow.commit	Worktree Lifecycle And Cleanup Authority	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.branch-history-review	workflow.commit	Branch-History Review	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.hook-bypass-authority	workflow.commit	Hook Bypass Authority	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.rewrite-authority	workflow.commit	Rewrite Authority	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.topology	workflow.commit	Topology	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.commit-message	workflow.commit	Commit Message	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.commit.invalid-outcomes	workflow.commit	Invalid Outcomes	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.written-plan-applicability	workflow.planning	When A Written Plan Is Required	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.artifact-model	workflow.planning	Artifact Model	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.active-plan-fields	workflow.planning	Required Active-Plan Fields	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.lifecycle	workflow.planning	Lifecycle	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.plan-admission	workflow.planning	Explicit Plan Admission	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.concurrent-integration-routing	workflow.planning	Concurrent Integration Routing	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.repository-isolation	workflow.planning	Repository Isolation In Written Plans	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.projection-completeness	workflow.planning	Policy Projection Completeness	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.acceptance-claims	workflow.planning	Acceptance Claims	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.milestones-and-slices	workflow.planning	Milestones And Slices	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.current-state	workflow.planning	Current State, Not History	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.replanning	workflow.planning	Re-Planning	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.findings	workflow.planning	Findings	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.concurrent-work	workflow.planning	Concurrent Work	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
+workflow.planning.completion	workflow.planning	Completion	1	exact-existing-heading	accepted-baseline	policy-impact-source-mapping.tsv
