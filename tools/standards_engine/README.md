@@ -5,8 +5,10 @@ navigation and read-only analysis. Callers use canonical IDs and immutable
 snapshot handles; repository paths, metadata layouts, graph declarations, and
 source locators remain internal unless explicitly inspected.
 
-Current operations provide snapshot-bound `read`, `related`, and `inspect`.
-Router-owned `route` and change-impact analysis remain later A1 slices.
+Current operations provide snapshot-bound `route`, `read`, `related`, and
+`inspect`. Routing evaluates the registered Router projection and derives
+dependency closure from the neutral standards graph. Change-impact analysis
+remains a later A1 slice.
 
 Run tests:
 

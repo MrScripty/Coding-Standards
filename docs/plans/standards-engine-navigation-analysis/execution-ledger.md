@@ -246,6 +246,48 @@
   The sole next slice is mechanical Router projection and typed route/read
   evidence; impact analysis remains excluded.
 
+## 2026-08-22: Milestone 2 Router Projection Replan
+
+- The next slice found that general Router conditions exist only in normative
+  prose while executable fixtures cover bounded verifier and language cases.
+  Parsing English or copying the decisions into Python would violate the
+  accepted projection and authority contracts.
+- Generic graph queries for `router` and its path alias were exact. Because the
+  owner is not globally audited, a bounded manual review classified current
+  entrypoints and executable routing consumers instead of treating empty
+  outgoing impact as complete.
+- Accepted one registered reviewed executable projection, generic
+  three-valued evaluation in `standards_analysis`, and graph-derived closure in
+  `standards_engine`. Router remains normative; no Router wording or broad
+  consumer projection changes are authorized.
+- Detailed scope, dispositions, alternatives, and acceptance are in
+  [the Router projection replan](reports/milestone-2-router-projection-replan.md).
+
+## 2026-08-23: Milestone 2 Router Projection And Navigation Acceptance
+
+- Added one reviewed executable Router projection with seven typed fact
+  categories and 38 unique rules. Its target set must exactly match the 38
+  canonical modules linked by Router selection tables.
+- Brought forward the accepted generic three-valued applicability evaluator.
+  It supports `all`, `any`, `not`, `equals`, `in`, `contains`, and `exists`;
+  malformed configuration rejects while unavailable contextual facts remain
+  unknown.
+- Added typed `route` results, deterministic graph-derived Requires closure,
+  bounded unresolved questions, contract-ordered reading plans, and a thin
+  schema-validating structured tool facade. No Python policy decision table,
+  Router wording change, fallback lookup, or verifier dependency was added.
+- Existing verifier-change fixtures now run through the public route API and
+  match exact direct and closure expectations. The real structured tool routes
+  and reads through the same snapshot without repository paths.
+- Focused analysis and engine tests, all downstream unit suites, canonical
+  contract validation, focused S1 routing, and all 218 declarative suites pass.
+- The complete mixed checkpoint passed generated-evidence freshness, all 218
+  declarative suites, and all 53 retained Bash checkers from the final
+  candidate tree.
+- Detailed acceptance is in [the Milestone 2 report](reports/milestone-2-route-acceptance.md).
+  Milestone 3 becomes current with modification, addition, and removal
+  classification and seed selection as its sole next slice.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

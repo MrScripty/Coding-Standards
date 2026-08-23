@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import json
+import csv
 import unittest
 from pathlib import Path
 
 from tools.standards_engine.contracts.validate_contracts import validate
 from tools.standards_engine.standards_engine import (
+    AgentToolFacade,
     InspectCall,
     PolicyInspectionResult,
     QueryCall,
@@ -14,6 +16,8 @@ from tools.standards_engine.standards_engine import (
     RejectedResult,
     RelatedRequest,
     RelatedResult,
+    RouteRequest,
+    RouteResult,
     RelationshipInspectionResult,
     StandardsEngine,
 )
@@ -36,6 +40,206 @@ class NavigationTest(unittest.TestCase):
         value = result.as_contract()
         validate(SCHEMA, SCHEMA["$defs"][definition], value, "$result")
         return value
+
+    @staticmethod
+    def route_facts(**overrides: object) -> dict[str, object]:
+        values: dict[str, object] = {
+            "routing.activities": [],
+            "routing.workflow-profiles": [],
+            "routing.applications": [],
+            "routing.boundaries": [],
+            "routing.languages": [],
+            "routing.frameworks": [],
+            "routing.topics": [],
+        }
+        values.update(overrides)
+        return {
+            key: (
+                value
+                if isinstance(value, dict)
+                else {"type": "enum-set", "state": "known", "value": value}
+            )
+            for key, value in values.items()
+        }
+
+    def test_route_selects_direct_modules_and_graph_derived_closure(self) -> None:
+        result = self.engine.query(
+            QueryCall(
+                self.engine.snapshot,
+                RouteRequest(
+                    self.route_facts(
+                        **{
+                            "routing.activities": ["implementation", "verification"],
+                            "routing.applications": ["library"],
+                            "routing.languages": ["rust"],
+                        }
+                    )
+                ),
+            )
+        )
+
+        self.assertIsInstance(result, RouteResult)
+        value = self.assert_contract("RouteResult", result)
+        self.assertEqual(value["unresolved_questions"], [])
+        self.assertEqual(
+            {item["target"] for item in value["reading_plan"]},
+            {
+                "core",
+                "router",
+                "workflow.implementation",
+                "workflow.verification",
+                "profile.application.library",
+                "profile.language.rust",
+            },
+        )
+        self.assertEqual(
+            [item["target"] for item in value["reading_plan"][:2]],
+            ["core", "router"],
+        )
+        persistence = self.engine.query(
+            QueryCall(
+                self.engine.snapshot,
+                RouteRequest(
+                    self.route_facts(
+                        **{
+                            "routing.activities": ["implementation", "verification"],
+                            "routing.boundaries": ["persistence"],
+                        }
+                    )
+                ),
+            )
+        ).as_contract()
+        self.assertIn(
+            "topic.contracts",
+            {item["target"] for item in persistence["reading_plan"]},
+        )
+
+    def test_route_unknown_categories_remain_visible_and_invalid_facts_reject(self) -> None:
+        facts = self.route_facts()
+        facts["routing.topics"] = {"type": "enum-set", "state": "unknown"}
+        result = self.engine.query(
+            QueryCall(self.engine.snapshot, RouteRequest(facts))
+        )
+        value = self.assert_contract("RouteResult", result)
+        self.assertEqual(
+            [item["id"] for item in value["unresolved_questions"]],
+            ["question.routing.topics"],
+        )
+        self.assertTrue(
+            all(
+                item["state"] == "unresolved"
+                for item in value["reading_plan"]
+                if item["target"].startswith("topic.")
+            )
+        )
+
+        invalid = self.engine.query(
+            QueryCall(
+                self.engine.snapshot,
+                RouteRequest({"routing.undeclared": {"type": "boolean", "state": "known", "value": True}}),
+            )
+        )
+        invalid_value = self.assert_contract("RejectedResult", invalid)
+        self.assertEqual(invalid_value["code"], "APPLICABILITY.INVALID")
+
+    def test_verifier_change_fixture_matches_public_route_projection(self) -> None:
+        decisions_path = (
+            REPO_ROOT
+            / "evaluation/standards-effectiveness/fixtures/routing/verifier-change-decisions.tsv"
+        )
+        routes_path = (
+            REPO_ROOT
+            / "evaluation/standards-effectiveness/fixtures/routing/verifier-change-routes.tsv"
+        )
+        with decisions_path.open(encoding="utf-8", newline="") as handle:
+            decisions = {row["case"]: row for row in csv.DictReader(handle, delimiter="\t")}
+        with routes_path.open(encoding="utf-8", newline="") as handle:
+            routes = {row["case"]: row for row in csv.DictReader(handle, delimiter="\t")}
+
+        for case, row in decisions.items():
+            facts = self.route_facts(
+                **{
+                    "routing.activities": [
+                        "implementation",
+                        "verification",
+                        *(["planning"] if row["expected_planning"] == "select" else []),
+                    ],
+                    "routing.topics": [
+                        *(["architecture"] if row["expected_architecture"] == "select" else []),
+                        *(["performance"] if row["expected_performance"] == "select" else []),
+                    ],
+                }
+            )
+            if row["expected_route"] == "unresolved":
+                facts["routing.topics"] = {"type": "enum-set", "state": "unknown"}
+            result = self.engine.query(QueryCall(self.engine.snapshot, RouteRequest(facts)))
+            value = self.assert_contract("RouteResult", result)
+            if row["expected_route"] == "unresolved":
+                self.assertTrue(value["unresolved_questions"], case)
+                continue
+            direct = {
+                item["target"]
+                for item in value["reading_plan"]
+                if item["reason"]["kind"] == "routing-fact" and item["target"] != "router"
+            }
+            closure = {item["target"] for item in value["reading_plan"]} - {"router"}
+            self.assertEqual(direct, set(routes[case]["direct_modules"].split(",")), case)
+            self.assertEqual(closure, set(routes[case]["requires_closure"].split(",")), case)
+
+    def test_route_result_can_drive_same_snapshot_read(self) -> None:
+        route = self.engine.query(
+            QueryCall(
+                self.engine.snapshot,
+                RouteRequest(
+                    self.route_facts(**{"routing.activities": ["implementation"]})
+                ),
+            )
+        ).as_contract()
+        target = next(
+            item["target"]
+            for item in route["reading_plan"]
+            if item["target"] == "workflow.implementation"
+        )
+        read = self.engine.query(QueryCall(self.engine.snapshot, ReadRequest(target)))
+        self.assertIsInstance(read, ReadResult)
+
+    def test_structured_agent_tool_routes_then_reads_without_repository_paths(self) -> None:
+        tool = AgentToolFacade.open_repository(REPO_ROOT)
+        route = tool.query(
+            {
+                "snapshot": dict(tool.snapshot),
+                "request": {
+                    "kind": "route",
+                    "facts": self.route_facts(
+                        **{"routing.activities": ["implementation"]}
+                    ),
+                },
+            }
+        )
+        self.assertEqual(route["kind"], "route-result")
+        selected = {
+            item["target"]
+            for item in route["reading_plan"]
+            if item["state"] == "selected"
+        }
+        self.assertIn("workflow.implementation", selected)
+
+        read = tool.query(
+            {
+                "snapshot": dict(tool.snapshot),
+                "request": {"kind": "read", "target": "workflow.implementation"},
+            }
+        )
+        self.assertEqual(read["kind"], "read-result")
+        self.assertNotIn("path", read)
+
+        invalid = tool.query(
+            {
+                "snapshot": dict(tool.snapshot),
+                "request": {"kind": "read", "target": "workflow.implementation", "extra": True},
+            }
+        )
+        self.assertEqual(invalid["code"], "INTERFACE.INVALID_ARGUMENTS")
 
     def test_module_read_and_inspection_use_derived_whole_artifact_authority(self) -> None:
         result = self.engine.query(

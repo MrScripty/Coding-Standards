@@ -1,0 +1,251 @@
+schema_version = 1
+id = "router.executable-projection"
+owner = "router"
+source = "STANDARDS-ROUTER.md"
+base_modules = ["router"]
+
+[[facts]]
+id = "routing.activities"
+type = "enum-set"
+nullable = false
+values = ["implementation", "verification", "planning", "commit", "documentation", "build", "tooling", "release"]
+aliases = []
+question = "Which development activities are part of the requested work?"
+
+[[facts]]
+id = "routing.workflow-profiles"
+type = "enum-set"
+nullable = false
+values = ["concurrent-plan-integration"]
+aliases = []
+question = "Can multiple outstanding proposals become stale before serial integration?"
+
+[[facts]]
+id = "routing.applications"
+type = "enum-set"
+nullable = false
+values = ["library", "frontend", "launcher"]
+aliases = []
+question = "Which application forms are affected?"
+
+[[facts]]
+id = "routing.boundaries"
+type = "enum-set"
+nullable = false
+values = ["interop", "language-bindings", "ipc", "persistence"]
+aliases = []
+question = "Which authority or representation boundaries are crossed?"
+
+[[facts]]
+id = "routing.languages"
+type = "enum-set"
+nullable = false
+values = ["csharp-async", "rust", "rust-api", "rust-dependencies", "rust-release", "rust-tooling", "rust-async", "rust-cross-platform", "typescript", "typescript-async"]
+aliases = []
+question = "Which language-specific mechanisms are affected?"
+
+[[facts]]
+id = "routing.frameworks"
+type = "enum-set"
+nullable = false
+values = ["godot"]
+aliases = []
+question = "Which framework-specific mechanisms are affected?"
+
+[[facts]]
+id = "routing.topics"
+type = "enum-set"
+nullable = false
+values = ["accessibility", "diagnostics", "contracts", "concurrency", "resilience", "cross-platform", "dependencies", "licensing", "performance", "architecture", "security"]
+aliases = []
+question = "Which cross-cutting concerns are affected?"
+
+[[rules]]
+id = "route.workflow.implementation"
+target = "workflow.implementation"
+when = { operator = "contains", fact = "routing.activities", value = "implementation" }
+
+[[rules]]
+id = "route.workflow.verification"
+target = "workflow.verification"
+when = { operator = "contains", fact = "routing.activities", value = "verification" }
+
+[[rules]]
+id = "route.workflow.planning"
+target = "workflow.planning"
+when = { operator = "contains", fact = "routing.activities", value = "planning" }
+
+[[rules]]
+id = "route.workflow.commit"
+target = "workflow.commit"
+when = { operator = "contains", fact = "routing.activities", value = "commit" }
+
+[[rules]]
+id = "route.workflow.documentation"
+target = "workflow.documentation"
+when = { operator = "contains", fact = "routing.activities", value = "documentation" }
+
+[[rules]]
+id = "route.workflow.build"
+target = "workflow.build"
+when = { operator = "contains", fact = "routing.activities", value = "build" }
+
+[[rules]]
+id = "route.workflow.tooling"
+target = "workflow.tooling"
+when = { operator = "contains", fact = "routing.activities", value = "tooling" }
+
+[[rules]]
+id = "route.workflow.release"
+target = "workflow.release"
+when = { operator = "contains", fact = "routing.activities", value = "release" }
+
+[[rules]]
+id = "route.profile.concurrent-plan-integration"
+target = "profile.workflow.concurrent-plan-integration"
+when = { operator = "contains", fact = "routing.workflow-profiles", value = "concurrent-plan-integration" }
+
+[[rules]]
+id = "route.application.library"
+target = "profile.application.library"
+when = { operator = "contains", fact = "routing.applications", value = "library" }
+
+[[rules]]
+id = "route.application.frontend"
+target = "profile.application.frontend"
+when = { operator = "contains", fact = "routing.applications", value = "frontend" }
+
+[[rules]]
+id = "route.application.launcher"
+target = "profile.application.launcher"
+when = { operator = "contains", fact = "routing.applications", value = "launcher" }
+
+[[rules]]
+id = "route.boundary.interop"
+target = "profile.boundary.interop"
+when = { operator = "contains", fact = "routing.boundaries", value = "interop" }
+
+[[rules]]
+id = "route.boundary.language-bindings"
+target = "profile.boundary.language-bindings"
+when = { operator = "contains", fact = "routing.boundaries", value = "language-bindings" }
+
+[[rules]]
+id = "route.boundary.ipc"
+target = "profile.boundary.ipc"
+when = { operator = "contains", fact = "routing.boundaries", value = "ipc" }
+
+[[rules]]
+id = "route.boundary.persistence"
+target = "profile.boundary.persistence"
+when = { operator = "contains", fact = "routing.boundaries", value = "persistence" }
+
+[[rules]]
+id = "route.language.csharp-async"
+target = "profile.language.csharp.async"
+when = { operator = "contains", fact = "routing.languages", value = "csharp-async" }
+
+[[rules]]
+id = "route.language.rust"
+target = "profile.language.rust"
+when = { operator = "contains", fact = "routing.languages", value = "rust" }
+
+[[rules]]
+id = "route.language.rust-api"
+target = "profile.language.rust.api"
+when = { operator = "contains", fact = "routing.languages", value = "rust-api" }
+
+[[rules]]
+id = "route.language.rust-dependencies"
+target = "profile.language.rust.dependencies"
+when = { operator = "contains", fact = "routing.languages", value = "rust-dependencies" }
+
+[[rules]]
+id = "route.language.rust-release"
+target = "profile.language.rust.release"
+when = { operator = "contains", fact = "routing.languages", value = "rust-release" }
+
+[[rules]]
+id = "route.language.rust-tooling"
+target = "profile.language.rust.tooling"
+when = { operator = "contains", fact = "routing.languages", value = "rust-tooling" }
+
+[[rules]]
+id = "route.language.rust-async"
+target = "profile.language.rust.async"
+when = { operator = "contains", fact = "routing.languages", value = "rust-async" }
+
+[[rules]]
+id = "route.language.rust-cross-platform"
+target = "profile.language.rust.cross-platform"
+when = { operator = "contains", fact = "routing.languages", value = "rust-cross-platform" }
+
+[[rules]]
+id = "route.language.typescript"
+target = "profile.language.typescript"
+when = { operator = "contains", fact = "routing.languages", value = "typescript" }
+
+[[rules]]
+id = "route.language.typescript-async"
+target = "profile.language.typescript.async"
+when = { operator = "contains", fact = "routing.languages", value = "typescript-async" }
+
+[[rules]]
+id = "route.framework.godot"
+target = "profile.framework.godot"
+when = { operator = "contains", fact = "routing.frameworks", value = "godot" }
+
+[[rules]]
+id = "route.topic.accessibility"
+target = "topic.accessibility"
+when = { operator = "contains", fact = "routing.topics", value = "accessibility" }
+
+[[rules]]
+id = "route.topic.diagnostics"
+target = "topic.diagnostics"
+when = { operator = "contains", fact = "routing.topics", value = "diagnostics" }
+
+[[rules]]
+id = "route.topic.contracts"
+target = "topic.contracts"
+when = { operator = "contains", fact = "routing.topics", value = "contracts" }
+
+[[rules]]
+id = "route.topic.concurrency"
+target = "topic.concurrency"
+when = { operator = "contains", fact = "routing.topics", value = "concurrency" }
+
+[[rules]]
+id = "route.topic.resilience"
+target = "topic.resilience"
+when = { operator = "contains", fact = "routing.topics", value = "resilience" }
+
+[[rules]]
+id = "route.topic.cross-platform"
+target = "topic.cross-platform"
+when = { operator = "contains", fact = "routing.topics", value = "cross-platform" }
+
+[[rules]]
+id = "route.topic.dependencies"
+target = "topic.dependencies"
+when = { operator = "contains", fact = "routing.topics", value = "dependencies" }
+
+[[rules]]
+id = "route.topic.licensing"
+target = "topic.licensing"
+when = { operator = "contains", fact = "routing.topics", value = "licensing" }
+
+[[rules]]
+id = "route.topic.performance"
+target = "topic.performance"
+when = { operator = "contains", fact = "routing.topics", value = "performance" }
+
+[[rules]]
+id = "route.topic.architecture"
+target = "topic.architecture"
+when = { operator = "contains", fact = "routing.topics", value = "architecture" }
+
+[[rules]]
+id = "route.topic.security"
+target = "topic.security"
+when = { operator = "contains", fact = "routing.topics", value = "security" }

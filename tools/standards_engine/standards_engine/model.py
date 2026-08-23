@@ -28,6 +28,12 @@ class ReadRequest:
 
 
 @dataclass(frozen=True, slots=True)
+class RouteRequest:
+    facts: Mapping[str, object]
+    kind: str = "route"
+
+
+@dataclass(frozen=True, slots=True)
 class RelatedRequest:
     target: str
     groups: tuple[str, ...]
@@ -36,7 +42,7 @@ class RelatedRequest:
     kind: str = "related"
 
 
-QueryRequest = ReadRequest | RelatedRequest
+QueryRequest = RouteRequest | ReadRequest | RelatedRequest
 
 
 @dataclass(frozen=True, slots=True)
@@ -70,6 +76,10 @@ class ReadResult(ContractResult):
     pass
 
 
+class RouteResult(ContractResult):
+    pass
+
+
 class RelatedResult(ContractResult):
     pass
 
@@ -94,7 +104,7 @@ class NavigationInspectionResult(ContractResult):
     pass
 
 
-QueryResult = ReadResult | RelatedResult | RejectedResult
+QueryResult = RouteResult | ReadResult | RelatedResult | RejectedResult
 InspectionResult = (
     SnapshotInspectionResult
     | PolicyInspectionResult

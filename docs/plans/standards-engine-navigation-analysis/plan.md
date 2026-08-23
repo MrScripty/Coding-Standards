@@ -2,11 +2,11 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 2 snapshot-bound navigation
+**Current phase:** Milestone 3 semantic impact selection and coverage
 
-**Next slice:** mechanically project accepted Router decisions into the typed
-`route` query, preserving exact direct selections, graph-derived `Requires`
-closure, and unresolved outcomes without editing normative Router policy
+**Next slice:** implement deterministic accepted/proposed policy-unit change
+classification and exact graph seed selection for modification, addition, and
+removal without adding packets, dispositions, or certificate generation
 
 **Acceptance status:** `pending`
 
@@ -331,6 +331,7 @@ requests without repository paths.
 - `tools/standards_verifier/tests/test_repository_graph.py`
 - `STANDARDS-ROUTER.md`
 - `evaluation/standards-effectiveness/fixtures/routing/**`
+- `evaluation/standards-effectiveness/router-projection.toml`
 - `evaluation/standards-effectiveness/suites/s1-routing.toml`
 - `evaluation/standards-effectiveness/policy-units/**`
 - `evaluation/standards-effectiveness/canonical-module-corpus.toml`
@@ -344,19 +345,19 @@ requests without repository paths.
   relevant contract/tool versions.
 - [x] Implement accepted canonical serialization and immutable snapshot,
   navigation, policy, relationship, and inspection handles.
-- [ ] Validate policy-unit identity, module-relative locators, accepted and
+- [x] Validate policy-unit identity, module-relative locators, accepted and
   proposed semantic revisions, moves, splits, merges, retirement, successors,
   aliases, and tombstones.
-- [ ] Generate or mechanically validate executable Router projection from
+- [x] Generate or mechanically validate executable Router projection from
   Router-owned authority and existing typed fixtures.
-- [ ] Before any normative Router edit, query its `policy-impact` consumers and
+- [x] Before any normative Router edit, query its `policy-impact` consumers and
   record exact change-specific dispositions; do not edit the Router merely to
   simplify projection.
-- [ ] Implement snapshot-bound `query` variants for route, read, related, and
+- [x] Implement snapshot-bound `query` variants for route, read, related, and
   provenance inspection with typed rejection outcomes.
 - [x] Return `Requires` and `Specializes` closure through their existing named
   graph groups without redefining traversal.
-- [ ] Exercise the complete route to canonical ID to read interaction through
+- [x] Exercise the complete route to canonical ID to read interaction through
   the real typed tool adapter.
 
 **Acceptance gate:** Snapshot and policy-unit contract fixtures pass; Router
@@ -366,7 +367,7 @@ cross-snapshot rejection; no result requires a repository path or text parsing;
 affected security, containment, filesystem, contract, and documentation checks
 pass.
 
-**Status:** `Active`
+**Status:** `Accepted`
 
 ### Milestone 3: Semantic Impact Selection And Coverage
 
@@ -410,7 +411,7 @@ invalid outcome; modification/addition/removal pilot selection and
 move/split/merge fixtures select exact expected identities, groups, scopes, and
 obligations; graph-engine tests remain unchanged and pass.
 
-**Status:** `Planned`
+**Status:** `Active`
 
 ### Milestone 4: Packets, Agent Resolution, And A1 Acceptance
 
@@ -464,7 +465,8 @@ checks pass from one clean recorded tree.
 
 ## Blockers
 
-- `none` for the current Milestone 2 Router-projection slice.
+- `none` for the current Milestone 3 change-classification and seed-selection
+  slice.
 
 Runtime implementation is admitted from the recorded implementation base and
 remains bounded by the active milestone, exact next slice, allowed write set,

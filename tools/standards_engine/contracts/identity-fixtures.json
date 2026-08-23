@@ -5,7 +5,7 @@
       "name": "route-result",
       "definition": "RouteResult",
       "example": "route-result",
-      "expected": "navigation:sha256:a7aec928a0b64faed04435bf97eaa1d29a405957530c3350f5e430da7c898d01"
+      "expected": "navigation:sha256:c0d4bc14e6510bd7d3ca265c76866390d07e47321375dcb326ffe20a6fd3e5e8"
     },
     {
       "name": "pending-packet",

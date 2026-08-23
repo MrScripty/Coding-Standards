@@ -7,9 +7,13 @@
       "value": {
         "kind": "route",
         "facts": {
-          "language": { "type": "enum", "state": "known", "value": "rust" },
-          "changes_persisted_representation": { "type": "boolean", "state": "known", "value": true },
-          "changes_public_api": { "type": "boolean", "state": "known", "value": false }
+          "routing.activities": { "type": "enum-set", "state": "known", "value": ["implementation"] },
+          "routing.workflow-profiles": { "type": "enum-set", "state": "known", "value": [] },
+          "routing.applications": { "type": "enum-set", "state": "known", "value": [] },
+          "routing.boundaries": { "type": "enum-set", "state": "known", "value": [] },
+          "routing.languages": { "type": "enum-set", "state": "known", "value": [] },
+          "routing.frameworks": { "type": "enum-set", "state": "known", "value": [] },
+          "routing.topics": { "type": "enum-set", "state": "known", "value": [] }
         }
       }
     },
@@ -30,25 +34,34 @@
         },
         "reading_plan": [
           {
-            "target": "rust.persisted-representation",
+            "target": "core",
             "scope": { "kind": "whole-artifact" },
             "authority": "normative",
-            "reason": { "kind": "routing-fact", "fact": "changes_persisted_representation" },
+            "reason": { "kind": "requires", "source": "router" },
             "state": "selected"
           },
           {
-            "target": "contracts.data-compatibility",
+            "target": "router",
             "scope": { "kind": "whole-artifact" },
             "authority": "normative",
-            "reason": { "kind": "requires", "source": "rust.persisted-representation" },
+            "reason": { "kind": "routing-fact", "fact": "routing.request" },
+            "state": "selected"
+          },
+          {
+            "target": "workflow.implementation",
+            "scope": { "kind": "whole-artifact" },
+            "authority": "normative",
+            "reason": { "kind": "routing-fact", "fact": "routing.activities" },
             "state": "selected"
           }
         ],
         "unresolved_questions": [],
         "next_operations": [
-          { "operation": "query", "request_kind": "read", "target": "rust.persisted-representation" }
+          { "operation": "query", "request_kind": "read", "target": "core" },
+          { "operation": "query", "request_kind": "read", "target": "router" },
+          { "operation": "query", "request_kind": "read", "target": "workflow.implementation" }
         ],
-        "summary": "Two standards are relevant to the proposed persisted Rust representation."
+        "summary": "Three standards are relevant to the implementation activity."
       }
     },
     {
@@ -56,7 +69,7 @@
       "definition": "ReadRequest",
       "value": {
         "kind": "read",
-        "target": "rust.persisted-representation"
+        "target": "workflow.implementation"
       }
     },
     {
@@ -64,8 +77,8 @@
       "definition": "RelatedRequest",
       "value": {
         "kind": "related",
-        "target": "rust.persisted-representation",
-        "groups": ["policy-impact"],
+        "target": "workflow.implementation",
+        "groups": ["standards-requires"],
         "direction": "outgoing",
         "transitive": false
       }
