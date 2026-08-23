@@ -1,0 +1,336 @@
+from __future__ import annotations
+
+import tempfile
+import unittest
+from dataclasses import dataclass
+from pathlib import Path
+
+from tools.graph_engine.graph_engine import (
+    Direction,
+    Edge,
+    EdgeGroup,
+    EdgeRegistry,
+    GraphContribution,
+    Node,
+    Provenance,
+    TraversalPolicy,
+)
+from tools.standards_analysis.standards_analysis import (
+    POLICY_IMPACT,
+    STANDARDS_REQUIRES,
+    STANDARDS_SPECIALIZES,
+    AnalysisError,
+    ChangeDescriptor,
+    ChangeKind,
+    PolicyUnit,
+    PolicyUnitCorpus,
+    PolicyUnitGraphSource,
+    PolicyUnitTombstone,
+    ReviewScope,
+    SemanticProposal,
+    classify_changes,
+    select_impact,
+)
+
+
+POLICY = "workflow.test.policy"
+MODULE = "workflow.test"
+SOURCE_ID = "fixture.relationships"
+PROVENANCE = Provenance(SOURCE_ID, "provider", "fixture")
+SCOPE = ReviewScope("structured", ("Policy",))
+
+
+def policy_unit(
+    *,
+    revision: int = 3,
+    representation: str = "sha256:" + "a" * 64,
+    structural: str = "sha256:" + "b" * 64,
+) -> PolicyUnit:
+    return PolicyUnit(
+        POLICY,
+        MODULE,
+        ("Policy",),
+        revision,
+        ("workflow.test.alias",),
+        (),
+        (),
+        "module.md",
+        "## Policy\n\nText.\n",
+        representation,
+        structural,
+        "units.toml",
+    )
+
+
+def corpus(
+    *units: PolicyUnit,
+    tombstones: tuple[PolicyUnitTombstone, ...] = (),
+) -> PolicyUnitCorpus:
+    return PolicyUnitCorpus("registry.toml", ("units.toml",), units, tombstones)
+
+
+def groups() -> tuple[EdgeGroup, ...]:
+    both = frozenset((Direction.INCOMING, Direction.OUTGOING))
+    return (
+        EdgeGroup(
+            POLICY_IMPACT,
+            "Policy consumers.",
+            TraversalPolicy(both, False),
+            PROVENANCE,
+        ),
+        EdgeGroup(
+            STANDARDS_REQUIRES,
+            "Required standards.",
+            TraversalPolicy(both, True),
+            PROVENANCE,
+        ),
+        EdgeGroup(
+            STANDARDS_SPECIALIZES,
+            "Specialized standards.",
+            TraversalPolicy(both, True),
+            PROVENANCE,
+        ),
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class RelationshipSource:
+    selected_edges: tuple[Edge, ...]
+    selected_nodes: tuple[str, ...]
+    id: str = SOURCE_ID
+
+    def load(self) -> GraphContribution:
+        return GraphContribution(
+            tuple(Node(node, provenance=PROVENANCE) for node in sorted(self.selected_nodes)),
+            groups(),
+            self.selected_edges,
+        )
+
+
+def edge(
+    edge_id: str,
+    source: str,
+    target: str,
+    relation: str,
+    group: str,
+) -> Edge:
+    return Edge(
+        edge_id,
+        source,
+        target,
+        relation,
+        (group,),
+        PROVENANCE,
+        {"applicability": "true", "evidence_owner": "fixture"},
+    )
+
+
+class ImpactSelectionTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp_dir.name)
+
+    def tearDown(self) -> None:
+        self.temp_dir.cleanup()
+
+    def registry(
+        self,
+        policy_corpus: PolicyUnitCorpus,
+        selected_edges: tuple[Edge, ...] = (),
+        extra_nodes: tuple[str, ...] = (),
+    ) -> EdgeRegistry:
+        endpoints = {
+            endpoint
+            for selected in selected_edges
+            for endpoint in (selected.source, selected.target)
+        }
+        nodes = tuple(sorted(endpoints.union(extra_nodes) - {POLICY}))
+        return EdgeRegistry(
+            self.root,
+            (
+                PolicyUnitGraphSource(policy_corpus),
+                RelationshipSource(selected_edges, nodes),
+            ),
+        )
+
+    def test_policy_unit_source_registers_active_alias_and_retired_identity(self) -> None:
+        active = policy_unit()
+        retired = PolicyUnitTombstone(
+            "workflow.test.retired",
+            2,
+            (),
+            "review.retirement",
+            "units.toml",
+        )
+        graph = self.registry(corpus(active, tombstones=(retired,)))
+
+        self.assertEqual(graph.resolve(active.aliases[0]), active.id)
+        self.assertEqual(graph.nodes[active.id].metadata["module"], MODULE)
+        self.assertEqual(graph.nodes[retired.id].metadata["lifecycle"], "retired")
+        self.assertEqual(graph.outgoing(active.id, (POLICY_IMPACT,)), ())
+
+    def test_modification_unions_accepted_and_proposed_edges_with_both_traces(self) -> None:
+        before = policy_unit()
+        after = policy_unit(
+            representation="sha256:" + "c" * 64,
+            structural="sha256:" + "d" * 64,
+        )
+        change = classify_changes(
+            corpus(before),
+            corpus(after),
+            (
+                ChangeDescriptor(
+                    ChangeKind.MODIFICATION,
+                    (POLICY,),
+                    (POLICY,),
+                    SCOPE,
+                ),
+            ),
+            (
+                SemanticProposal(
+                    POLICY,
+                    3,
+                    4,
+                    "Change meaning.",
+                    after.structural_digest,
+                ),
+            ),
+        )[0]
+        shared = edge("impact.shared", POLICY, "consumer.shared", "normative-consumer", POLICY_IMPACT)
+        accepted = self.registry(
+            corpus(before),
+            (
+                edge("impact.old", POLICY, "consumer.old", "normative-consumer", POLICY_IMPACT),
+                shared,
+            ),
+        )
+        proposed = self.registry(
+            corpus(after),
+            (
+                edge("impact.new", POLICY, "consumer.new", "normative-consumer", POLICY_IMPACT),
+                shared,
+            ),
+        )
+
+        result = select_impact(change, accepted, proposed)
+
+        self.assertEqual(
+            tuple(candidate.edge_id for candidate in result.candidates),
+            ("impact.new", "impact.old", "impact.shared"),
+        )
+        shared_candidate = result.candidates[2]
+        self.assertEqual(tuple(trace.graph for trace in shared_candidate.traces), ("accepted", "proposed"))
+        self.assertTrue(all(trace.seed == POLICY for trace in shared_candidate.traces))
+        self.assertTrue(all(trace.path_nodes == (POLICY, "consumer.shared") for trace in shared_candidate.traces))
+        self.assertTrue(all(trace.provenance_source == SOURCE_ID for trace in shared_candidate.traces))
+
+    def test_addition_uses_policy_impact_and_transitive_owner_context_groups(self) -> None:
+        added = policy_unit(revision=1)
+        change = classify_changes(
+            corpus(),
+            corpus(added),
+            (ChangeDescriptor(ChangeKind.ADDITION, (), (POLICY,), SCOPE),),
+            (
+                SemanticProposal(
+                    POLICY,
+                    None,
+                    1,
+                    "Create policy.",
+                    added.structural_digest,
+                ),
+            ),
+        )[0]
+        proposed_edges = (
+            edge("impact.consumer", POLICY, "consumer", "normative-consumer", POLICY_IMPACT),
+            edge("requires.core", MODULE, "core", "requires", STANDARDS_REQUIRES),
+            edge("requires.foundation", "core", "foundation", "requires", STANDARDS_REQUIRES),
+            edge("specializes.base", MODULE, "base", "specializes", STANDARDS_SPECIALIZES),
+            edge("outside", POLICY, "ignored", "other", "other-group"),
+        )
+        # The unrelated group is registered only to prove selected groups remain bounded.
+        other_group = EdgeGroup(
+            "other-group",
+            "Unselected relationships.",
+            TraversalPolicy(frozenset((Direction.INCOMING, Direction.OUTGOING)), True),
+            PROVENANCE,
+        )
+
+        @dataclass(frozen=True, slots=True)
+        class AdditionSource(RelationshipSource):
+            def load(self) -> GraphContribution:
+                contribution = RelationshipSource.load(self)
+                return GraphContribution(
+                    contribution.nodes,
+                    (*contribution.groups, other_group),
+                    contribution.edges,
+                )
+
+        endpoints = tuple(
+            sorted(
+                {
+                    endpoint
+                    for selected in proposed_edges
+                    for endpoint in (selected.source, selected.target)
+                }
+                - {POLICY}
+            )
+        )
+        proposed = EdgeRegistry(
+            self.root,
+            (PolicyUnitGraphSource(corpus(added)), AdditionSource(proposed_edges, endpoints)),
+        )
+        accepted = self.registry(corpus(), extra_nodes=(MODULE,))
+
+        result = select_impact(change, accepted, proposed)
+
+        self.assertEqual(
+            tuple(candidate.edge_id for candidate in result.candidates),
+            (
+                "impact.consumer",
+                "requires.core",
+                "requires.foundation",
+                "specializes.base",
+            ),
+        )
+        foundation = next(item for item in result.candidates if item.edge_id == "requires.foundation")
+        self.assertEqual(foundation.traces[0].seed, MODULE)
+        self.assertEqual(foundation.traces[0].path_nodes, (MODULE, "core", "foundation"))
+
+    def test_removal_traverses_only_accepted_policy_impact(self) -> None:
+        before = policy_unit()
+        retired = PolicyUnitTombstone(POLICY, 3, (), "review.retirement", "units.toml")
+        change = classify_changes(
+            corpus(before),
+            corpus(tombstones=(retired,)),
+            (ChangeDescriptor(ChangeKind.REMOVAL, (POLICY,), (), ReviewScope("whole-artifact")),),
+        )[0]
+        accepted = self.registry(
+            corpus(before),
+            (edge("impact.former", POLICY, "consumer.former", "normative-consumer", POLICY_IMPACT),),
+        )
+        proposed = self.registry(corpus(tombstones=(retired,)))
+
+        result = select_impact(change, accepted, proposed)
+
+        self.assertEqual(tuple(item.edge_id for item in result.candidates), ("impact.former",))
+        self.assertEqual(result.candidates[0].traces[0].graph, "accepted")
+
+    def test_missing_seed_or_group_is_a_typed_analysis_failure(self) -> None:
+        selected = policy_unit()
+        change = classify_changes(
+            corpus(selected),
+            corpus(selected),
+            (ChangeDescriptor(ChangeKind.MODIFICATION, (POLICY,), (POLICY,), SCOPE),),
+        )[0]
+        missing_seed = EdgeRegistry(
+            self.root,
+            (RelationshipSource((), ("unrelated",)),),
+        )
+
+        with self.assertRaises(AnalysisError) as caught:
+            select_impact(change, missing_seed, missing_seed)
+        self.assertEqual(caught.exception.failure.code, "IMPACT.GRAPH_INVALID")
+
+
+if __name__ == "__main__":
+    unittest.main()

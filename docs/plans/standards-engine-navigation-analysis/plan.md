@@ -4,9 +4,10 @@
 
 **Current phase:** Milestone 3 semantic impact selection and coverage
 
-**Next slice:** implement deterministic accepted/proposed policy-unit change
-classification and exact graph seed selection for modification, addition, and
-removal without adding packets, dispositions, or certificate generation
+**Next slice:** re-plan one canonical policy-impact domain-metadata authority
+that binds typed applicability, scopes, propagation, evidence ownership, and
+audit declarations to registered edge IDs without duplicating generic edge
+topology or widening the generic graph contract
 
 **Acceptance status:** `pending`
 
@@ -465,8 +466,12 @@ checks pass from one clean recorded tree.
 
 ## Blockers
 
-- `none` for the current Milestone 3 change-classification and seed-selection
-  slice.
+- Policy-impact edges currently carry explanatory applicability strings in
+  generic graph metadata. Milestone 3 obligations require typed expressions,
+  scopes, propagation, evidence ownership, and audit references, but the
+  generic graph intentionally accepts only neutral string metadata. The
+  canonical ownership and cutover design must be re-planned before obligation
+  generation.
 
 Runtime implementation is admitted from the recorded implementation base and
 remains bounded by the active milestone, exact next slice, allowed write set,

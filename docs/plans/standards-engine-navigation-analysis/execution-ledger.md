@@ -313,6 +313,29 @@
 - `origin/main` still names the original `8b632df4` history. This reconciliation
   does not authorize a force push or remote rewrite.
 
+## 2026-08-23: Milestone 3 Classification And Graph Union
+
+- Added immutable modification, addition, and removal classification against
+  accepted and proposed policy-unit corpora. Exact semantic overlays bind the
+  prior revision, next revision, and proposed structural digest; absent
+  semantic evidence remains a representation candidate or unresolved state.
+- Added exact schema-checked graph seed/group selection and a node-only
+  policy-unit provider. The analyzer consumes supplied generic registries and
+  does not own graph storage, manifests, or inferred edges.
+- Added deterministic accepted/proposed union traversal with retained seed,
+  group, path, edge, metadata, and declaration provenance. One stable edge ID
+  remains one candidate with all snapshot traces.
+- Focused analysis tests pass 40 cases. Engine, metadata, standards-graph,
+  graph-engine, verifier, canonical-contract, and all 218 declarative suites
+  passed for the classification boundary; final graph-union verification is
+  recorded in the acceptance report.
+- Obligation work reached a replan trigger: existing policy-impact
+  applicability is explanatory string metadata, while A1 requires typed domain
+  semantics that the neutral graph must not interpret. The
+  [applicability replan](reports/milestone-3-policy-impact-applicability-replan.md)
+  records four options and recommends an edge-ID-keyed policy semantics
+  sidecar with no topology duplication.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,
