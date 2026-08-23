@@ -1,9 +1,10 @@
 # Standards Analysis
 
 `tools/standards_analysis/` owns read-only standards snapshot comparison,
-policy-unit identity, applicability, impact selection, audit coverage, packets,
-and resolution. It consumes neutral metadata and graph contracts and does not
-depend on verifier checks or repository-writing behavior.
+policy-unit identity, impact selection, audit coverage, packets, questions,
+and resolution. It consumes neutral applicability, metadata, policy-impact,
+and graph contracts and does not depend on verifier checks or
+repository-writing behavior.
 
 Current implemented foundation:
 

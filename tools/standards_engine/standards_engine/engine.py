@@ -9,6 +9,10 @@ from tools.graph_engine.graph_engine import (
     EdgeRegistry,
     GraphError,
 )
+from tools.standards_applicability.standards_applicability import (
+    ApplicabilityError,
+    Truth,
+)
 from tools.standards_analysis.standards_analysis import (
     POLICY_UNIT_REGISTRY,
     AnalysisError,
@@ -18,7 +22,6 @@ from tools.standards_analysis.standards_analysis import (
     PolicyUnitTombstone,
     ROUTER_PROJECTION,
     RouterProjection,
-    Truth,
     compile_snapshot,
     digest_bytes,
     identity,
@@ -27,7 +30,7 @@ from tools.standards_analysis.standards_analysis import (
     markdown_structural_digest,
 )
 from tools.standards_graph.standards_graph import (
-    POLICY_IMPACT_MANIFEST,
+    POLICY_IMPACT_REGISTRY,
     METADATA_REQUIRES,
     standards_navigation_registry,
 )
@@ -36,6 +39,11 @@ from tools.standards_metadata.standards_metadata import (
     CanonicalModuleCorpus,
     ModuleMetadata,
     load_canonical_module_corpus,
+)
+from tools.standards_policy_impact.standards_policy_impact import (
+    CompiledPolicyImpactSet,
+    compile_policy_impact,
+    thaw,
 )
 
 from .model import (
@@ -72,6 +80,7 @@ class StandardsEngine:
         policies: PolicyUnitCorpus,
         graph: EdgeRegistry,
         router: RouterProjection,
+        policy_impact: CompiledPolicyImpactSet,
     ) -> None:
         self._root = root.resolve()
         self._snapshot = snapshot
@@ -79,6 +88,7 @@ class StandardsEngine:
         self._policies = policies
         self._graph = graph
         self._router = router
+        self._policy_impact = policy_impact
         self._navigation: dict[str, dict[str, object]] = {}
 
     @classmethod
@@ -86,14 +96,19 @@ class StandardsEngine:
         repo_root = root.resolve()
         initial_modules = load_canonical_module_corpus(repo_root)
         initial_policies = load_policy_unit_corpus(repo_root, initial_modules)
+        initial_policy_impact = compile_policy_impact(
+            repo_root,
+            initial_modules.modules,
+            POLICY_IMPACT_REGISTRY,
+        )
         scope = tuple(
             sorted(
                 {
                     CANONICAL_MODULE_CORPUS,
                     POLICY_UNIT_REGISTRY,
-                    POLICY_IMPACT_MANIFEST,
                     ROUTER_PROJECTION,
                     INTERFACE_SCHEMA,
+                    *initial_policy_impact.input_sources,
                     *initial_modules.members,
                     *initial_policies.sources,
                 }
@@ -102,18 +117,37 @@ class StandardsEngine:
         before = compile_snapshot(repo_root, scope)
         modules = load_canonical_module_corpus(repo_root)
         policies = load_policy_unit_corpus(repo_root, modules)
-        graph = standards_navigation_registry(repo_root, modules.modules)
+        policy_impact = compile_policy_impact(
+            repo_root,
+            modules.modules,
+            POLICY_IMPACT_REGISTRY,
+        )
+        graph = standards_navigation_registry(
+            repo_root,
+            modules.modules,
+            compiled_policy_impact=policy_impact,
+        )
         router = load_router_projection(repo_root, modules)
         after = compile_snapshot(repo_root, scope)
         if (
             before.handle != after.handle
             or initial_modules.members != modules.members
             or initial_policies.sources != policies.sources
+            or initial_policy_impact.declaration_digest
+            != policy_impact.declaration_digest
         ):
             raise AnalysisError(
                 before_source_changed_failure()
             )
-        return cls(repo_root, after, modules, policies, graph, router)
+        return cls(
+            repo_root,
+            after,
+            modules,
+            policies,
+            graph,
+            router,
+            policy_impact,
+        )
 
     @property
     def snapshot(self) -> Mapping[str, object]:
@@ -190,22 +224,21 @@ class StandardsEngine:
 
     def _route(self, request: RouteRequest) -> QueryResult:
         try:
-            facts = self._router.evaluator.validate_facts(request.facts)
+            facts = self._router.fact_schema.bind(request.facts)
             selected = set(self._router.base_modules)
             selected_reasons: dict[str, str] = {
                 module: "routing.request" for module in self._router.base_modules
             }
             unresolved: dict[str, set[str]] = {}
             for rule in self._router.rules:
-                result = self._router.evaluator.evaluate(rule.when, facts)
-                referenced = self._router.evaluator.referenced_facts(rule.when)
-                if result is Truth.TRUE:
+                result = rule.program.evaluate(facts)
+                referenced = rule.program.referenced_facts
+                if result.truth is Truth.TRUE:
                     selected.add(rule.target)
                     selected_reasons[rule.target] = referenced[0]
-                elif result is Truth.UNKNOWN:
-                    for fact in referenced:
-                        if fact not in facts or facts[fact].state == "unknown":
-                            unresolved.setdefault(fact, set()).add(rule.target)
+                elif result.truth is Truth.UNKNOWN:
+                    for fact in result.unresolved_facts:
+                        unresolved.setdefault(fact, set()).add(rule.target)
             ordered = self._graph.dependency_order(
                 METADATA_REQUIRES,
                 selected=selected,
@@ -221,7 +254,7 @@ class StandardsEngine:
                 selected=selected,
                 preferred_order=preferred,
             )
-        except AnalysisError as error:
+        except (AnalysisError, ApplicabilityError) as error:
             failure = error.failure
             return self._reject(
                 failure.code,
@@ -578,10 +611,32 @@ class StandardsEngine:
         except GraphError as error:
             return self._graph_rejection(error)
         provenance = edge.provenance
+        semantics = self._policy_impact.semantics.get(edge_id)
         return RelationshipInspectionResult.from_value(
             {
                 "kind": "relationship-inspection-result",
                 "relationship": self._relationship(edge, Direction.OUTGOING),
+                "policy_semantics": (
+                    None
+                    if semantics is None
+                    else {
+                        "edge_id": semantics.edge_id,
+                        "source": semantics.source,
+                        "consumer": semantics.consumer,
+                        "relation": semantics.relation,
+                        "applicability_program": (
+                            semantics.applicability_program.as_projection()
+                        ),
+                        "source_scope": thaw(semantics.source_scope),
+                        "consumer_scope": thaw(semantics.consumer_scope),
+                        "propagation": semantics.propagation,
+                        "evidence_owner": semantics.evidence_owner,
+                        "audit_declaration": semantics.audit_declaration,
+                        "rationale": semantics.rationale,
+                        "declaration_source": semantics.declaration_source,
+                        "dependency_fingerprint": semantics.dependency_fingerprint,
+                    }
+                ),
                 "provenance": self._provenance(
                     provenance.source_id,
                     provenance.kind,

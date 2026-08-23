@@ -1,26 +1,6 @@
 schema_version = 1
-source_id = "fixture.policy-impact.missing-applicability"
-
-[[nodes]]
-id = "workflow.planning"
-aliases = ["workflows/planning.md"]
-metadata = { repository_path = "workflows/planning.md", policy_impact_coverage = "audited" }
-
-[[nodes]]
-id = "prompts/planning.md"
-metadata = { repository_path = "prompts/planning.md" }
-
-[[groups]]
-id = "policy-impact"
-purpose = "Fixture policy impact."
-directions = ["incoming", "outgoing"]
-transitive = false
-
-[[edges]]
-id = "missing-applicability"
-source = "workflow.planning"
-target = "prompts/planning.md"
-relation = "prompt-projection"
-groups = ["policy-impact"]
-traversable = true
-metadata = { applicability = "", evidence_owner = "suite:planning-admission" }
+source_id = "standards.policy-impact"
+node_catalog = "evaluation/standards-effectiveness/policy-impact-node-catalog.toml"
+fact_catalog = "evaluation/standards-effectiveness/policy-impact-facts.toml"
+audit_catalog = "evaluation/standards-effectiveness/policy-consumer-audits.toml"
+declaration_sources = ["evaluation/standards-effectiveness/fixtures/policy-impact/declarations/missing-applicability.toml"]

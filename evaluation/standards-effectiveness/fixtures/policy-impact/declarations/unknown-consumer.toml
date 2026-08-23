@@ -1,0 +1,10 @@
+schema_version = 1
+owner = "workflow.planning"
+
+[[relationships]]
+source = "workflow.planning"
+consumer = "README.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Unknown consumer fixture relationship."

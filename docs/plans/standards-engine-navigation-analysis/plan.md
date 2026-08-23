@@ -4,9 +4,9 @@
 
 **Current phase:** Milestone 3 semantic impact selection and coverage
 
-**Next slice:** implement and cut over one compiled `standards_policy_impact`
-authority that produces generic graph topology and typed policy semantics from
-the same source-owned declarations
+**Next slice:** evaluate accepted and proposed compiled policy-impact programs
+against one request fact set, generate exact consumer and unknown-fact
+obligations, and establish bounded audit coverage for empty-impact decisions
 
 **Acceptance status:** `pending`
 
@@ -19,8 +19,8 @@ the same source-owned declarations
 `5e9c4eb211ee0a67039b0ec11142db9b106243ae`
 
 **Implementation admission:** operation `continue` accepted for Milestone 3
-from the recorded implementation base and the accepted compiled policy-impact
-authority re-plan; implementation remains bounded by Milestone 3's write set
+from the recorded implementation base and the revised applicability-ownership
+re-plan; implementation remains bounded by Milestone 3's write set
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -62,6 +62,9 @@ repository mutation, and external-project application outside A1.
 - A `tools/standards_analysis/` package for snapshot comparison, policy-unit
   impact, applicability, audit coverage, packets, reading plans, and decision
   reuse.
+- A standard-library-only `tools/standards_applicability/` package for compiled
+  fact schemas, immutable programs, bound fact sets, three-valued evaluation,
+  unresolved-fact reporting, and typed applicability failures.
 - A `tools/standards_engine/` composition façade exposing the typed Python and
   agent-tool contracts.
 - Snapshot-bound `query`, `prepare`, `resolve`, and `inspect` operations.
@@ -128,9 +131,12 @@ plan or shared-authority proposals can become stale before integration.
   identity, document path, aliases, `Requires`, and `Specializes`.
 - `standards_metadata` loads, validates, and projects canonical facts; it does
   not redefine them or depend on the verifier or analyzer.
-- `standards_analysis` depends on neutral metadata, compiled policy-impact, and
-  graph contracts; it owns policy-specific analysis without adding policy
-  meaning to the graph.
+- `standards_applicability` depends only on the Python standard library and
+  owns executable applicability semantics without loading repository files or
+  defining serialized A1 shapes.
+- `standards_analysis` depends on neutral applicability, metadata, compiled
+  policy-impact, and graph contracts; it owns policy-specific analysis without
+  adding policy meaning to the graph.
 - `standards_engine` is the composition root. Lower packages do not depend on
   it or form cycles.
 - The existing graph engine remains repository-neutral and supplies its
@@ -184,14 +190,14 @@ plan or shared-authority proposals can become stale before integration.
 | Decision | Owner | Evidence | Supersedes |
 | --- | --- | --- | --- |
 | Product boundary | A1 contains navigation and read-only analysis only. Controlled authoring requires a later independently admitted brief and plan. | [Development brief](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#plan-a1-navigation-and-analysis) | Earlier combined A1/A2 direction |
-| Module direction | `standards_engine` composes `standards_metadata`, `standards_policy_impact`, and `standards_analysis`; policy-impact compilation consumes metadata and neutral graph contracts; analysis, verifier, and repository graph composition consume the compiled authority. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md) | Verifier ownership of neutral metadata discovery and the pre-Milestone-3 graph-manifest edge authority |
+| Module direction | `standards_engine` composes accepted lower Modules; `standards_applicability` is standard-library-only; policy-impact and analysis consume its compiled schemas and programs; analysis, verifier, and repository graph composition consume compiled policy-impact authority. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md) | Applicability owned by analysis, verifier ownership of neutral metadata discovery, and the pre-Milestone-3 graph-manifest edge authority |
 | Metadata authority | The corpus provider owns membership only; canonical documents own IDs, aliases, paths, `Requires`, and `Specializes`; neutral code only loads, validates, and projects them. | [Brief neutral metadata](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#6-neutral-metadata-module) | Suite-selection-dependent discovery and duplicate catalogs |
 | Public interface | Typed requests and typed results are authoritative. Text is a derived optional rendering, not an input command language. | [Brief public interface](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#8-public-interface) | Prose command examples as interface authority |
 | Snapshot binding | Canonical tool requests carry an immutable snapshot handle; every result and follow-up handle preserves it. Native Python may offer a snapshot-bound convenience view only. | [Brief navigation](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#14-navigation) | Ambient current-tree navigation |
 | Policy identity | Policy-unit sidecars own stable unit ID, canonical module reference, module-relative locator, and accepted semantic revision; document path derives from canonical metadata. | [Brief policy-unit identity](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#13-policy-unit-identity) | Paths, headings, line numbers, or migration IDs as semantic identity |
 | Proposal state | A1 carries proposed semantic state only in `AnalysisRequest.semantic_proposals`; `CompletedAnalysisReport` proves analysis completion but is not apply-eligible. | [Brief A1 proposal state](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#a1-proposal-state) | Proposed state represented as accepted authority |
 | Impact completeness | Change-type adapters select explicit seeds and the accepted/proposed relation union, then use the existing graph engine. Unmapped normative change creates a mandatory obligation. | [Brief impact contract](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#change-type-impact-contract) | Current-graph-only traversal and optional whole-artifact selection |
-| Applicability | A1 owns a bounded typed three-valued language distinct from verifier predicates; unsupported syntax is invalid and missing facts remain unknown. | [Brief applicability](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#16-applicability) | Boolean coercion or verifier-predicate reuse |
+| Applicability | The A1 JSON Schema owns serialized shapes. `standards_applicability` owns executable operator semantics, compilation, normalization, type checking, truth tables, unresolved-fact reporting, and domain-separated program identity. Adapters load declarations; callers own questions and diagnostics. | [Applicability ownership replan](reports/milestone-3-applicability-ownership-replan.md) | Analysis-owned evaluator, policy-impact private parsing, Boolean coercion, or verifier-predicate reuse |
 | Audit authority | Authored audit declarations reference completed report and evidence identities; generated certificates bind them to derived snapshot, horizon, edge, schema, and tool facts. | [Brief consumer-audit coverage](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#17-consumer-audit-coverage) | Permanent audited flags and copied packet dispositions |
 | Completion | Analysis completion is mechanically derived from the final reached-obligation set and exact valid disposition set plus every other typed obligation. | [Brief report invariant](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#exact-completedanalysisreport-invariant) | Authored or unchecked complete flags |
 | Agent evidence | A1 acceptance requires real typed route/read and iterative prepare/resolve workflows, not schema inspection alone. | [Brief agent evidence](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#24-required-a1-agent-evidence) | Interface usability inferred from declarations |
@@ -382,6 +388,7 @@ without claiming to judge arbitrary meaning.
 **Allowed write set:**
 
 - `tools/standards_metadata/**`
+- `tools/standards_applicability/**`
 - `tools/standards_policy_impact/**`
 - `tools/standards_graph/**`
 - `tools/standards_analysis/**`
@@ -392,6 +399,7 @@ without claiming to judge arbitrary meaning.
 - `tools/standards_verifier/tests/test_policy_impact.py`
 - `tools/standards_verifier/tests/test_repository_graph.py`
 - `tools/graph_engine/README.md`
+- `.gitignore`
 - `evaluation/standards-effectiveness/policy-impact-*.toml`
 - `evaluation/standards-effectiveness/policy-impact/**`
 - `evaluation/standards-effectiveness/policy-semantic-impact.toml`
@@ -412,18 +420,22 @@ without claiming to judge arbitrary meaning.
   obligation rules for move, split, and merge.
 - [x] Traverse the union of accepted and proposed selected graph groups and
   retain exact traces and provenance.
-- [ ] Compile source-owned typed policy-impact declarations into one neutral
+- [x] Compile source-owned typed policy-impact declarations into one neutral
   graph contribution and one semantics index without replacing node or group
   authority.
-- [ ] Cut repository graph composition, analysis, verifier validation, and
+- [x] Cut repository graph composition, analysis, verifier validation, and
   Standards Engine inspection to the compiled authority and remove the old
   edge blocks and string metadata without fallback.
 - [ ] Generate mandatory `unmapped-normative-change` obligations for uncovered
   or unresolved normative changes.
-- [ ] Implement the accepted typed three-valued applicability language,
-  including invalid syntax, missing and absent facts, nullable values, aliases,
-  sets, contradictions, and deterministic `all`, `any`, `not`, `exists`,
-  equality, membership, and containment.
+- [x] Implement neutral compiled fact schemas, applicability programs, and fact
+  sets with typed errors, schema identity checks, deterministic digests, exact
+  unresolved facts, empty-schema `always`, aliases, nullable and absent states,
+  and documented three-valued truth tables.
+- [x] Compile Router and policy-impact declarations through the neutral Module;
+  make analysis and verifier consume the same programs, mechanically prove A1
+  schema/runtime agreement, and delete both former applicability parsers and
+  re-exports without fallback.
 - [ ] Implement authored audit declarations, registered bounded audit horizons,
   deterministic certificates, and exact invalidation.
 - [ ] Keep applicability unknown during conservative whole-artifact selection.

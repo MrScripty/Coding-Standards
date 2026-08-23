@@ -9,13 +9,18 @@ from .metadata import (
     metadata_dependency_registry,
     metadata_dependency_source,
 )
-from .repository import POLICY_IMPACT_MANIFEST, standards_navigation_registry
+from .repository import (
+    POLICY_IMPACT_NODE_CATALOG,
+    POLICY_IMPACT_REGISTRY,
+    standards_navigation_registry,
+)
 
 __all__ = (
     "METADATA_DEPENDENCIES",
     "METADATA_REQUIRES",
     "METADATA_SPECIALIZES",
-    "POLICY_IMPACT_MANIFEST",
+    "POLICY_IMPACT_NODE_CATALOG",
+    "POLICY_IMPACT_REGISTRY",
     "MetadataModule",
     "Provider",
     "metadata_dependency_registry",

@@ -139,7 +139,7 @@
       "type": "string",
       "minLength": 1,
       "x-standards-engine-invariants": {
-        "authority": "value must resolve exactly through the registered generic graph; no normalization, hashing, inference, or fallback"
+        "authority": "value must resolve exactly through the registered generic graph; each registered provider owns its identity contract and no lookup inference or fallback is permitted"
       }
     },
     "Digest": {
@@ -327,6 +327,23 @@
       "type": "object",
       "additionalProperties": { "$ref": "#/$defs/FactValue" }
     },
+    "ApplicabilityEvaluationResult": {
+      "type": "object",
+      "required": ["truth", "unresolved_facts"],
+      "properties": {
+        "truth": { "enum": ["true", "false", "unknown"] },
+        "unresolved_facts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/CanonicalId" }
+        }
+      },
+      "additionalProperties": false,
+      "x-standards-engine-invariants": {
+        "resolved": "unresolved_facts is empty when truth is true or false",
+        "unknown": "unresolved_facts contains exactly the canonical material facts when truth is unknown"
+      }
+    },
     "AllExpression": {
       "type": "object",
       "required": ["operator", "expressions"],
@@ -460,7 +477,6 @@
         "version": { "type": "integer", "minimum": 1 },
         "facts": {
           "type": "array",
-          "minItems": 1,
           "items": { "$ref": "#/$defs/FactDeclaration" }
         }
       },
@@ -674,6 +690,64 @@
         "propagation": "the relationship-kind contract owns domain propagation; version 1 admits no per-declaration override",
         "evidence": "evidence_owner is authored relationship semantics and must resolve to exactly one registered evidence owner",
         "audit": "audit association is resolved from one exact bounded audit match and is not authored on the relationship"
+      }
+    },
+    "CompiledApplicabilityProgram": {
+      "type": "object",
+      "required": ["normalized_expression", "referenced_facts", "language_version", "schema_digest", "dependency_digest"],
+      "properties": {
+        "normalized_expression": { "$ref": "#/$defs/ApplicabilityExpression" },
+        "referenced_facts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/CanonicalId" }
+        },
+        "language_version": { "const": 1 },
+        "schema_digest": { "$ref": "#/$defs/Digest" },
+        "dependency_digest": { "$ref": "#/$defs/Digest" }
+      },
+      "additionalProperties": false,
+      "x-standards-engine-invariants": {
+        "identity": "dependency_digest binds language_version, normalized_expression, and exact referenced fact definitions using domain-separated canonical serialization"
+      }
+    },
+    "CompiledPolicyImpactSemantics": {
+      "type": "object",
+      "required": ["edge_id", "source", "consumer", "relation", "applicability_program", "source_scope", "consumer_scope", "propagation", "evidence_owner", "audit_declaration", "rationale", "declaration_source", "dependency_fingerprint"],
+      "properties": {
+        "edge_id": { "$ref": "#/$defs/EdgeId" },
+        "source": { "$ref": "#/$defs/CanonicalId" },
+        "consumer": { "$ref": "#/$defs/CanonicalId" },
+        "relation": { "enum": ["normative-consumer", "router-projection", "prompt-projection", "template-projection", "reference-projection", "fixture-projection", "enforcement-suite-projection", "documentation-projection"] },
+        "applicability_program": { "$ref": "#/$defs/CompiledApplicabilityProgram" },
+        "source_scope": {
+          "oneOf": [
+            { "$ref": "#/$defs/ReviewScope" },
+            { "type": "null" }
+          ]
+        },
+        "consumer_scope": {
+          "oneOf": [
+            { "$ref": "#/$defs/ReviewScope" },
+            { "type": "null" }
+          ]
+        },
+        "propagation": { "const": "source-to-consumer" },
+        "evidence_owner": { "$ref": "#/$defs/CanonicalId" },
+        "audit_declaration": {
+          "oneOf": [
+            { "$ref": "#/$defs/CanonicalId" },
+            { "type": "null" }
+          ]
+        },
+        "rationale": { "$ref": "#/$defs/NonEmptyString" },
+        "declaration_source": { "$ref": "#/$defs/NonEmptyString" },
+        "dependency_fingerprint": { "$ref": "#/$defs/Digest" }
+      },
+      "additionalProperties": false,
+      "x-standards-engine-invariants": {
+        "projection": "the value is compiled from the same authoritative declaration as its generic edge and is never a second editable authority",
+        "applicability": "the compiled program is produced once by standards_applicability and is consumed without reparsing"
       }
     },
     "SemanticProposal": {
@@ -1523,10 +1597,16 @@
     },
     "RelationshipInspectionResult": {
       "type": "object",
-      "required": ["kind", "relationship", "provenance"],
+      "required": ["kind", "relationship", "policy_semantics", "provenance"],
       "properties": {
         "kind": { "const": "relationship-inspection-result" },
         "relationship": { "$ref": "#/$defs/RelationshipSummary" },
+        "policy_semantics": {
+          "oneOf": [
+            { "$ref": "#/$defs/CompiledPolicyImpactSemantics" },
+            { "type": "null" }
+          ]
+        },
         "provenance": { "$ref": "#/$defs/ProvenanceRecord" }
       },
       "additionalProperties": false

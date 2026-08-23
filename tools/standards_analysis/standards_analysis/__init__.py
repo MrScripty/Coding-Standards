@@ -1,7 +1,6 @@
 """Read-only standards snapshots and policy-unit analysis foundations."""
 
 from .errors import AnalysisError, AnalysisFailure
-from .applicability import ApplicabilityEvaluator, FactDefinition, FactState, Truth
 from .changes import (
     CHANGE_GRAPH_GROUPS,
     POLICY_IMPACT,
@@ -48,9 +47,6 @@ __all__ = (
     "POLICY_UNIT_REGISTRY",
     "AnalysisError",
     "AnalysisFailure",
-    "ApplicabilityEvaluator",
-    "FactDefinition",
-    "FactState",
     "AnalysisVersions",
     "CHANGE_GRAPH_GROUPS",
     "ChangeClassification",
@@ -77,7 +73,6 @@ __all__ = (
     "STANDARDS_SPECIALIZES",
     "SemanticProposal",
     "SemanticState",
-    "Truth",
     "canonical_json_bytes",
     "classify_changes",
     "compile_snapshot",

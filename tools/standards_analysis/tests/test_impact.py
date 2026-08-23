@@ -15,6 +15,7 @@ from tools.graph_engine.graph_engine import (
     Provenance,
     TraversalPolicy,
 )
+from tools.standards_applicability.standards_applicability import compile_fact_schema
 from tools.standards_analysis.standards_analysis import (
     POLICY_IMPACT,
     STANDARDS_REQUIRES,
@@ -30,6 +31,12 @@ from tools.standards_analysis.standards_analysis import (
     SemanticProposal,
     classify_changes,
     select_impact,
+)
+from tools.standards_policy_impact.standards_policy_impact import (
+    SOURCE_ID as POLICY_IMPACT_SOURCE_ID,
+    CompiledPolicyImpactSet,
+    PolicyImpactSemantics,
+    PolicyImpactSource,
 )
 
 
@@ -330,6 +337,75 @@ class ImpactSelectionTest(unittest.TestCase):
         with self.assertRaises(AnalysisError) as caught:
             select_impact(change, missing_seed, missing_seed)
         self.assertEqual(caught.exception.failure.code, "IMPACT.GRAPH_INVALID")
+
+    def test_compiled_policy_edge_requires_and_retains_matching_semantics(self) -> None:
+        selected = policy_unit()
+        change = classify_changes(
+            corpus(selected),
+            corpus(selected),
+            (ChangeDescriptor(ChangeKind.MODIFICATION, (POLICY,), (POLICY,), SCOPE),),
+        )[0]
+        edge_id = "policy-impact:v1/workflow.test.policy/normative-consumer/consumer"
+        policy_edge = Edge(
+            edge_id,
+            POLICY,
+            "consumer",
+            "normative-consumer",
+            (POLICY_IMPACT,),
+            Provenance(POLICY_IMPACT_SOURCE_ID, "generator", "declarations.toml"),
+        )
+        fact_schema = compile_fact_schema(
+            {
+                "kind": "applicability-fact-schema",
+                "id": "fixture.applicability",
+                "version": 1,
+                "facts": [],
+            }
+        )
+        semantics = PolicyImpactSemantics(
+            edge_id,
+            POLICY,
+            "consumer",
+            "normative-consumer",
+            fact_schema.compile({"operator": "always"}),
+            None,
+            None,
+            "source-to-consumer",
+            "suite:evidence",
+            "audit.fixture",
+            "Fixture semantics.",
+            "declarations.toml",
+            "sha256:" + "d" * 64,
+        )
+        compiled = CompiledPolicyImpactSet(
+            GraphContribution((), (), (policy_edge,)),
+            {edge_id: semantics},
+            fact_schema,
+            frozenset((POLICY,)),
+            "catalog.toml",
+            ("declarations.toml",),
+            ("registry.toml", "catalog.toml", "declarations.toml"),
+            "sha256:" + "e" * 64,
+        )
+        graph = EdgeRegistry(
+            self.root,
+            (
+                PolicyUnitGraphSource(corpus(selected)),
+                RelationshipSource((), ("consumer",)),
+                PolicyImpactSource(compiled),
+            ),
+        )
+
+        with self.assertRaises(AnalysisError) as caught:
+            select_impact(change, graph, graph)
+        self.assertEqual(
+            caught.exception.failure.code,
+            "IMPACT.POLICY_SEMANTICS_MISSING",
+        )
+
+        result = select_impact(change, graph, graph, compiled, compiled)
+
+        self.assertEqual(result.candidates[0].traces[0].policy_semantics, semantics)
 
 
 if __name__ == "__main__":

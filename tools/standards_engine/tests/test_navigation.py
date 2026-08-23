@@ -357,6 +357,42 @@ class NavigationTest(unittest.TestCase):
             inspected["relationship"]["handle"]["id"],
             relationship_handle["id"],
         )
+        self.assertIsNone(inspected["policy_semantics"])
+
+        policy_result = self.engine.query(
+            QueryCall(
+                self.engine.snapshot,
+                RelatedRequest(
+                    "workflow.planning",
+                    ("policy-impact",),
+                    "outgoing",
+                ),
+            )
+        ).as_contract()
+        policy_handle = policy_result["relationships"][0]["handle"]
+        policy_inspection = self.assert_contract(
+            "RelationshipInspectionResult",
+            self.engine.inspect(InspectCall(policy_handle)),
+        )
+        semantics = policy_inspection["policy_semantics"]
+        self.assertIsNotNone(semantics)
+        assert semantics is not None
+        self.assertEqual(semantics["edge_id"], policy_handle["id"])
+        self.assertEqual(semantics["source"], "workflow.planning")
+        program = semantics["applicability_program"]
+        self.assertEqual(program["normalized_expression"], {"operator": "always"})
+        self.assertEqual(program["referenced_facts"], [])
+        self.assertEqual(program["language_version"], 1)
+        self.assertTrue(program["schema_digest"].startswith("sha256:"))
+        self.assertTrue(program["dependency_digest"].startswith("sha256:"))
+        self.assertEqual(semantics["propagation"], "source-to-consumer")
+        self.assertTrue(semantics["evidence_owner"].startswith("suite:"))
+        self.assertEqual(
+            semantics["audit_declaration"],
+            "audit.workflow.planning.policy-impact.v1",
+        )
+        self.assertTrue(semantics["rationale"])
+        self.assertTrue(semantics["declaration_source"].endswith("workflow.planning.toml"))
 
         navigation = self.engine.inspect(InspectCall(value["handle"]))
         navigation_value = self.assert_contract("NavigationInspectionResult", navigation)

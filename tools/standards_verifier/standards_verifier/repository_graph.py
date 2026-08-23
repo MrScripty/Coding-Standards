@@ -8,6 +8,12 @@ from tools.standards_metadata.standards_metadata import (
     MetadataError,
     load_canonical_module_corpus,
 )
+from tools.standards_policy_impact.standards_policy_impact import (
+    DEFAULT_REGISTRY as POLICY_IMPACT_REGISTRY,
+    PolicyImpactError,
+    PolicyImpactSource,
+    compile_policy_impact,
+)
 from tools.standards_graph.standards_graph import metadata_dependency_source
 
 from .config import load_registry as load_suite_registry
@@ -38,7 +44,28 @@ def load_repository_registry(root: Path, source_registry: str) -> EdgeRegistry:
             code=failure.code,
             path=failure.path or "",
         ) from error
+    except PolicyImpactError as error:
+        failure = error.failure
+        raise InvalidSourceError(
+            "policy-impact provider could not compile registered declarations",
+            code=failure.code,
+            path=failure.path or POLICY_IMPACT_REGISTRY,
+        ) from error
+    try:
+        policy_impact = compile_policy_impact(
+            repo_root,
+            corpus.modules,
+            POLICY_IMPACT_REGISTRY,
+        )
+    except PolicyImpactError as error:
+        failure = error.failure
+        raise InvalidSourceError(
+            "policy-impact provider could not compile registered declarations",
+            code=failure.code,
+            path=failure.path or POLICY_IMPACT_REGISTRY,
+        ) from error
     providers = {
+        "standards.policy-impact": PolicyImpactSource(policy_impact),
         "standards-verifier.suite-dependencies": suite_dependency_source(
             entries,
             SUITE_REGISTRY,
@@ -53,3 +80,21 @@ def load_repository_registry(root: Path, source_registry: str) -> EdgeRegistry:
         source_registry,
         providers=providers,
     )
+
+
+def load_compiled_policy_impact(root: Path):
+    repo_root = root.resolve()
+    try:
+        corpus = load_canonical_module_corpus(repo_root)
+        return compile_policy_impact(
+            repo_root,
+            corpus.modules,
+            POLICY_IMPACT_REGISTRY,
+        )
+    except MetadataError as error:
+        failure = error.failure
+        raise InvalidSourceError(
+            "metadata provider could not load the canonical module corpus",
+            code=failure.code,
+            path=failure.path or "",
+        ) from error

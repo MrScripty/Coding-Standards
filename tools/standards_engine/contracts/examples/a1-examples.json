@@ -493,6 +493,35 @@
       }
     },
     {
+      "name": "empty-applicability-fact-schema",
+      "definition": "ApplicabilityFactSchema",
+      "value": {
+        "kind": "applicability-fact-schema",
+        "id": "policy-impact.applicability",
+        "version": 1,
+        "facts": []
+      }
+    },
+    {
+      "name": "unknown-applicability-result",
+      "definition": "ApplicabilityEvaluationResult",
+      "value": {
+        "truth": "unknown",
+        "unresolved_facts": ["changes_explanatory_projection"]
+      }
+    },
+    {
+      "name": "compiled-applicability-program",
+      "definition": "CompiledApplicabilityProgram",
+      "value": {
+        "normalized_expression": { "operator": "always" },
+        "referenced_facts": [],
+        "language_version": 1,
+        "schema_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "dependency_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    },
+    {
       "name": "applicability-expression",
       "definition": "ApplicabilityExpression",
       "value": {

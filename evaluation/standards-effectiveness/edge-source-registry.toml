@@ -1,9 +1,14 @@
 schema_version = 1
 
 [[sources]]
-id = "standards.policy-impact"
+id = "standards.policy-impact-catalog"
 kind = "manifest"
-path = "evaluation/standards-effectiveness/policy-semantic-impact.toml"
+path = "evaluation/standards-effectiveness/policy-impact-node-catalog.toml"
+
+[[sources]]
+id = "standards.policy-impact"
+kind = "provider"
+provider = "standards.policy-impact"
 
 [[sources]]
 id = "standards-verifier.suite-dependencies"

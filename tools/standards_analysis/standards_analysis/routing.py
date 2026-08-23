@@ -6,9 +6,15 @@ from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Mapping
 
+from tools.standards_applicability.standards_applicability import (
+    ApplicabilityError,
+    ApplicabilityProgram,
+    FactDefinition,
+    FactSchema,
+    compile_fact_schema,
+)
 from tools.standards_metadata.standards_metadata import CanonicalModuleCorpus
 
-from .applicability import ApplicabilityEvaluator, FactDefinition
 from .errors import AnalysisError, AnalysisFailure
 
 
@@ -25,7 +31,7 @@ class RouteFact:
 class RouteRule:
     id: str
     target: str
-    when: Mapping[str, object]
+    program: ApplicabilityProgram
 
 
 @dataclass(frozen=True, slots=True)
@@ -36,12 +42,26 @@ class RouterProjection:
     base_modules: tuple[str, ...]
     facts: tuple[RouteFact, ...]
     rules: tuple[RouteRule, ...]
-    evaluator: ApplicabilityEvaluator
+    fact_schema: FactSchema
 
 
 def _error(message: str, *, path: str, field: str | None = None) -> AnalysisError:
     return AnalysisError(
         AnalysisFailure("ROUTER_PROJECTION.INVALID", "invalid", message, path, field)
+    )
+
+
+def _applicability_error(error: ApplicabilityError, *, path: str) -> AnalysisError:
+    failure = error.failure
+    return AnalysisError(
+        AnalysisFailure(
+            "ROUTER_PROJECTION.INVALID",
+            failure.outcome,
+            failure.message,
+            path,
+            failure.field,
+            failure.observed,
+        )
     )
 
 
@@ -115,7 +135,26 @@ def load_router_projection(
         if not isinstance(question, str) or not question:
             raise _error("fact question must be non-empty", path=path, field=f"{field}.question")
         facts.append(RouteFact(definition, question))
-    evaluator = ApplicabilityEvaluator(tuple(item.definition for item in facts))
+    try:
+        fact_schema = compile_fact_schema(
+            {
+                "kind": "applicability-fact-schema",
+                "id": f"{projection_id}.facts",
+                "version": 1,
+                "facts": [
+                    {
+                        "id": item.definition.id,
+                        "type": item.definition.type,
+                        "nullable": item.definition.nullable,
+                        "values": list(item.definition.values),
+                        "aliases": list(item.definition.aliases),
+                    }
+                    for item in facts
+                ],
+            }
+        )
+    except ApplicabilityError as error:
+        raise _applicability_error(error, path=path) from error
 
     rules_raw = raw["rules"]
     if not isinstance(rules_raw, list) or not rules_raw:
@@ -136,11 +175,13 @@ def load_router_projection(
             raise _error("each route target must be a unique canonical module", path=path, field=f"{field}.target")
         if not isinstance(when, dict):
             raise _error("route rule expression must be an object", path=path, field=f"{field}.when")
-        evaluator.referenced_facts(when)
-        evaluator.evaluate(when, {})
+        try:
+            program = fact_schema.compile(when)
+        except ApplicabilityError as error:
+            raise _applicability_error(error, path=path) from error
         rule_ids.add(rule_id)
         targets.add(target)
-        rules.append(RouteRule(rule_id, target, when))
+        rules.append(RouteRule(rule_id, target, program))
     projected_targets = {rule.target for rule in rules}
     router_targets = _router_table_targets(repo_root, modules, str(raw["source"]))
     if projected_targets != router_targets:
@@ -156,7 +197,7 @@ def load_router_projection(
         base_modules,
         tuple(facts),
         tuple(rules),
-        evaluator,
+        fact_schema,
     )
 
 

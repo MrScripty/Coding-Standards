@@ -1,0 +1,134 @@
+schema_version = 1
+source_id = "standards.policy-impact-catalog"
+edges = []
+
+[[nodes]]
+id = "prompts/full-codebase-standards-refactor.md"
+metadata = { repository_path = "prompts/full-codebase-standards-refactor.md" }
+
+[[nodes]]
+id = "prompts/implement-plan.md"
+metadata = { repository_path = "prompts/implement-plan.md" }
+
+[[nodes]]
+id = "prompts/planning.md"
+metadata = { repository_path = "prompts/planning.md" }
+
+[[nodes]]
+id = "templates/PLAN-TEMPLATE.md"
+metadata = { repository_path = "templates/PLAN-TEMPLATE.md" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/README.md"
+metadata = { repository_path = "evaluation/standards-effectiveness/README.md" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv" }
+
+[[nodes]]
+id = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv"
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv" }
+
+[[nodes]]
+id = "concurrent-plan-integration"
+aliases = ["evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml", suite_id = "concurrent-plan-integration" }
+
+[[nodes]]
+id = "full-review-prompt-entrypoint"
+aliases = ["evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml", suite_id = "full-review-prompt-entrypoint" }
+
+[[nodes]]
+id = "plan-implementation-entrypoint"
+aliases = ["evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml", suite_id = "plan-implementation-entrypoint" }
+
+[[nodes]]
+id = "plan-template-projection"
+aliases = ["evaluation/standards-effectiveness/suites/plan-template-projection.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/plan-template-projection.toml", suite_id = "plan-template-projection" }
+
+[[nodes]]
+id = "planning-admission"
+aliases = ["evaluation/standards-effectiveness/suites/planning-admission.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/planning-admission.toml", suite_id = "planning-admission" }
+
+[[nodes]]
+id = "planning-consolidation"
+aliases = ["evaluation/standards-effectiveness/suites/planning-consolidation.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/planning-consolidation.toml", suite_id = "planning-consolidation" }
+
+[[nodes]]
+id = "policy-semantic-impact"
+aliases = ["evaluation/standards-effectiveness/suites/policy-semantic-impact.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/policy-semantic-impact.toml", suite_id = "policy-semantic-impact" }
+
+[[nodes]]
+id = "s1-routing"
+aliases = ["evaluation/standards-effectiveness/suites/s1-routing.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/s1-routing.toml", suite_id = "s1-routing" }
+
+[[nodes]]
+id = "commit-consolidation-dispositions"
+aliases = ["evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml", suite_id = "commit-consolidation-dispositions" }
+
+[[nodes]]
+id = "release-maintenance-policy"
+aliases = ["evaluation/standards-effectiveness/suites/release-maintenance-policy.toml"]
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml", suite_id = "release-maintenance-policy" }
+
+[[groups]]
+id = "policy-impact"
+purpose = "Reviewed policy owners and the semantic consumers requiring impact review."
+directions = ["incoming", "outgoing"]
+transitive = false
+validator = "standards-verifier:policy-impact"
+
+[[groups]]
+id = "semantic"
+purpose = "Explicit reviewed semantic relationships between repository artifacts."
+directions = ["incoming", "outgoing"]
+transitive = false

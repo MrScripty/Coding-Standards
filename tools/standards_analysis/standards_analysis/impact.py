@@ -10,6 +10,11 @@ from tools.graph_engine.graph_engine import (
     Node,
     Provenance,
 )
+from tools.standards_policy_impact.standards_policy_impact import (
+    SOURCE_ID as POLICY_IMPACT_SOURCE_ID,
+    CompiledPolicyImpactSet,
+    PolicyImpactSemantics,
+)
 
 from .changes import ClassifiedChange, GraphSeedSelection
 from .errors import AnalysisError, AnalysisFailure
@@ -69,6 +74,7 @@ class ImpactTrace:
     provenance_kind: str
     provenance_locator: str
     metadata: tuple[tuple[str, str], ...]
+    policy_semantics: PolicyImpactSemantics | None
 
 
 @dataclass(frozen=True, slots=True)
@@ -87,10 +93,12 @@ def select_impact(
     change: ClassifiedChange,
     accepted_graph: EdgeRegistry,
     proposed_graph: EdgeRegistry,
+    accepted_policy_impact: CompiledPolicyImpactSet | None = None,
+    proposed_policy_impact: CompiledPolicyImpactSet | None = None,
 ) -> ImpactSelection:
     traces = (
-        *_traverse("accepted", accepted_graph, change.graph),
-        *_traverse("proposed", proposed_graph, change.graph),
+        *_traverse("accepted", accepted_graph, change.graph, accepted_policy_impact),
+        *_traverse("proposed", proposed_graph, change.graph, proposed_policy_impact),
     )
     by_edge: dict[str, list[ImpactTrace]] = {}
     for trace in traces:
@@ -109,6 +117,7 @@ def _traverse(
     side: str,
     graph: EdgeRegistry,
     selection: GraphSeedSelection,
+    policy_impact: CompiledPolicyImpactSet | None,
 ) -> tuple[ImpactTrace, ...]:
     if side == "accepted":
         seeds = selection.accepted_seeds
@@ -131,6 +140,24 @@ def _traverse(
                 )
                 for step in result.steps:
                     edge = step.edge
+                    semantics = (
+                        None
+                        if policy_impact is None
+                        else policy_impact.semantics.get(edge.id)
+                    )
+                    if (
+                        edge.provenance.source_id == POLICY_IMPACT_SOURCE_ID
+                        and semantics is None
+                    ):
+                        raise AnalysisError(
+                            AnalysisFailure(
+                                "IMPACT.POLICY_SEMANTICS_MISSING",
+                                "invalid",
+                                "compiled policy-impact edge has no matching semantic authority",
+                                field="edge_id",
+                                observed=edge.id,
+                            )
+                        )
                     trace = ImpactTrace(
                         side,
                         seed,
@@ -146,6 +173,7 @@ def _traverse(
                         edge.provenance.kind,
                         edge.provenance.locator,
                         tuple(sorted(edge.metadata.items())),
+                        semantics,
                     )
                     key = _trace_key(trace)
                     if key not in seen:
@@ -180,4 +208,9 @@ def _trace_key(trace: ImpactTrace) -> tuple[object, ...]:
         trace.provenance_kind,
         trace.provenance_locator,
         trace.metadata,
+        (
+            ""
+            if trace.policy_semantics is None
+            else trace.policy_semantics.dependency_fingerprint
+        ),
     )

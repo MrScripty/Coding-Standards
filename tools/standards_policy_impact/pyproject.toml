@@ -1,0 +1,9 @@
+[project]
+name = "standards-policy-impact"
+version = "0.1.0"
+description = "Typed policy-impact declaration compiler"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.unittest]
+start-directory = "tests"

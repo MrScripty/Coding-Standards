@@ -32,29 +32,40 @@ The dependency direction is:
 ```text
 standards_engine
   |-- standards_metadata
+  |-- standards_applicability
   |-- standards_policy_impact
   `-- standards_analysis
 
+standards_applicability
+  `-- Python standard library
+
+standards_policy_impact
+  |-- standards_applicability
+  |-- standards_metadata
+  `-- graph_engine
+
 standards_analysis
+  |-- standards_applicability
   |-- standards_metadata
   |-- standards_policy_impact
   `-- graph_engine
 
 standards_verifier
-  |-- standards_metadata
   |-- standards_policy_impact
+  |-- standards_metadata
   `-- graph_engine
 ```
 
 `standards_engine` is the composition root and agent-facing facade.
 `standards_metadata` loads and validates repository-owned corpus membership and
-module metadata. `standards_policy_impact` compiles source-owned typed
+module metadata. `standards_applicability` compiles typed fact schemas,
+applicability programs, and request fact sets and evaluates them without
+repository or domain dependencies. `standards_policy_impact` compiles source-owned typed
 policy-impact declarations into one neutral graph contribution and one typed
-semantics index. `standards_analysis` owns policy-unit comparison,
-applicability evaluation, impact selection, packets, obligations, reading
-plans, and audit certificates. `graph_engine` remains domain-neutral. The
-verifier consumes the neutral and policy-specific modules but is not their
-owner.
+semantics index. `standards_analysis` owns policy-unit comparison, impact
+selection, packets, obligations, reading plans, questions, and audit
+certificates. `graph_engine` remains domain-neutral. The verifier consumes the
+neutral and policy-specific Modules but is not their owner.
 
 Canonical documents remain authoritative for module IDs, aliases, paths,
 `Requires`, `Specializes`, and policy meaning. A registered generic catalog
@@ -129,6 +140,8 @@ The public package entry points will be:
 
 - `standards_metadata.__init__`: immutable corpus views, resolution, and neutral
   metadata diagnostics;
+- `standards_applicability.__init__`: immutable fact schemas, applicability
+  programs, fact sets, evaluation results, and typed neutral failures;
 - `standards_analysis.__init__`: snapshot comparison, `prepare`, `resolve`, and
   analysis inspection contracts;
 - `standards_policy_impact.__init__`: compilation of registered typed
@@ -214,14 +227,44 @@ candidate but cannot prove semantic equivalence. Proposed semantic state is an
 
 ### Applicability and audit coverage
 
-`standards_analysis` owns a bounded, side-effect-free applicability language
-with `always`, `all`, `any`, `not`, `equals`, `in`, `contains`, and
-`exists`. `always` has no fact dependency and evaluates to `true` with an
-empty fact set. Other valid expressions evaluate to `true`, `false`, or
-`unknown`. Missing contextual facts produce `unknown`; malformed expressions,
-unknown operators, undeclared facts, and type errors reject preparation.
-Whole-artifact review may accompany an unknown result but cannot turn it into
-`true`.
+The canonical A1 JSON Schema owns serialized applicability expressions, fact
+declarations, fact values, and evaluation-result shapes.
+`standards_applicability` owns their executable semantics. Its Interface is:
+
+```python
+schema = compile_fact_schema(declaration)
+program = schema.compile(expression)
+facts = schema.bind(raw_facts)
+result = program.evaluate(facts)
+```
+
+Fact schemas, programs, and fact sets are immutable. One schema compiles many
+programs; one bound fact set evaluates many programs. A program rejects a fact
+set from another schema identity. Its dependency digest binds applicability
+language version, normalized expression, and exact referenced fact definitions
+through domain-separated canonical serialization. Mechanically maintained
+conformance tests prove that runtime operators, types, states, and projections
+agree with the canonical JSON Schema; Python runtime classes do not generate or
+redefine the public serialized contract.
+
+The language contains `always`, `all`, `any`, `not`, `equals`, `in`,
+`contains`, and `exists`. Empty fact schemas are valid. `always` references no
+facts and evaluates to `true`. Aliases resolve to canonical fact IDs during
+program compilation and fact binding; supplying both names is invalid. Known
+nullable values, known absence, and unknown remain distinct. Missing or
+explicitly unknown facts produce `unknown` when material, and evaluation
+returns the exact canonical unresolved facts responsible for that result.
+`all`, `any`, and `not` use the documented Kleene three-valued truth tables and
+never coerce unknown.
+
+Malformed expressions, unknown operators, invalid arity, undeclared facts,
+type errors, alias conflicts, incompatible fact schemas, and out-of-domain enum
+values are typed invalid failures. Unsupported language versions are typed
+unsupported failures. Repository unavailability remains an Adapter concern.
+Router and analysis policy own questions and explanatory text. Policy-impact,
+analysis, engine, and verifier callers translate neutral failures into their
+own diagnostics. Whole-artifact review may accompany an unknown result but
+cannot turn it into `true`.
 
 An authored `AuditDeclaration` records the bounded semantic attestation. A
 generated immutable `ConsumerAuditCertificate` binds it to resolved identities,
@@ -335,6 +378,7 @@ policy meaning, authorize a relationship, or permit repository application.
 ## Affected Boundaries
 
 - `tools/standards_engine/contracts/a1-contract.schema.json`
+- `tools/standards_applicability/`
 - future `tools/standards_metadata/`
 - future `tools/standards_analysis/`
 - `tools/standards_policy_impact/`

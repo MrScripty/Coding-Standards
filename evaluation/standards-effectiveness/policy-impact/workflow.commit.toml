@@ -1,0 +1,122 @@
+schema_version = 1
+owner = "workflow.commit"
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "router"
+relation = "router-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "Router projects Commit applicability for commits, history, branch or worktree isolation, integration, terminal lifecycle, and cleanup."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "workflow.implementation"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "Implementation delegates repository isolation, integration mechanism, terminal lifecycle, cleanup, and history authority to Commit."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "workflow.planning"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "Planning records plan-level repository-isolation facts and reachability-aware terminal cleanup handoff while Commit owns ordinary Git lifecycle."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "profile.workflow.concurrent-plan-integration"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:concurrent-plan-integration"
+rationale = "The concurrent profile consumes Commit integration selection, replacement lineage, terminal state, and reachability-aware cleanup handoff for stale-capable proposals."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "workflow.release"
+relation = "normative-consumer"
+applicability = { operator = "always" }
+evidence_owner = "suite:release-maintenance-policy"
+rationale = "Release maintenance may use an explicitly retained long-lived branch but its existing contract requires no normative correction for ordinary branch lifecycle."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "prompts/planning.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "The planning prompt projects optional plan-level branch, worktree, and cleanup-protection facts."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "prompts/implement-plan.md"
+relation = "prompt-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "The implementation prompt projects conditional isolation, least-transforming integration, and bounded protected-OID cleanup evidence."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "templates/PLAN-TEMPLATE.md"
+relation = "template-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "The plan template projects optional repository-isolation fields and reachability-aware terminal disposition."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "reference.recipes.commits"
+relation = "reference-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "The non-normative Commit recipe illustrates selected inspection, integration, and protected-OID verification mechanisms without granting authority."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "The authority fixture enforces existing staged-review and history-rewrite decisions."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "The hook fixture enforces existing explicit bypass authority and no-fallback outcomes."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "The lifecycle fixture enforces proportionate isolation, integration selection, terminal states, lineage, head reachability, commit disposition, and cleanup refusal."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv"
+relation = "fixture-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "The terminal fixture enforces bounded reachability-aware final-state evidence for worktrees created by the governed task without authorizing historical cleanup."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "commit-consolidation-dispositions"
+relation = "enforcement-suite-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "The registered Commit suite enforces every audited Commit projection and reachability-aware decision fixture."
+
+[[relationships]]
+source = "workflow.commit"
+consumer = "evaluation/standards-effectiveness/README.md"
+relation = "documentation-projection"
+applicability = { operator = "always" }
+evidence_owner = "suite:commit-consolidation-dispositions"
+rationale = "The standards-effectiveness README documents the registered Commit suite's branch, worktree, and commit-reachability coverage."

@@ -1,1 +1,5 @@
 # Standards prompts are versioned repository guidance.
+
+# Python runtime artifacts are local execution state.
+__pycache__/
+*.py[cod]

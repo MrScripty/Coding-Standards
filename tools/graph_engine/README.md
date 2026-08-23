@@ -22,7 +22,8 @@ Query a registered repository graph:
 python3 tools/query_edges.py --node workflow.planning
 python3 tools/query_edges.py \
   --node workflows/planning.md --direction outgoing --group policy-impact
-python3 tools/query_edges.py --edge policy.planning.router
+python3 tools/query_edges.py \
+  --edge policy-impact:v1/workflow.planning/router-projection/router
 python3 tools/query_edges.py \
   --node workflow.planning --group policy-impact \
   --direction outgoing --traverse

@@ -374,6 +374,37 @@
   `standards_policy_impact`, repository graph composition, and the graph-engine
   README's published edge example.
 
+## 2026-08-23: Milestone 3 Applicability Ownership Replan
+
+- Compiler work exposed a dependency cycle: policy-impact must validate typed
+  applicability before producing semantics, while analysis already consumes
+  compiled policy impact and owned the only complete evaluator.
+- Accepted one standard-library-only `standards_applicability` Module. The A1
+  JSON Schema remains serialized-shape authority; the neutral Module owns
+  executable compilation, normalization, type checking, truth tables,
+  unresolved facts, schema compatibility, identities, and typed failures.
+- The replacement slice compiles Router and policy-impact expressions once,
+  binds one fact set per request, stores immutable programs in compiled
+  policy-impact semantics, and deletes both former parsers without fallback.
+- The active next slice and allowed write set were replaced before source
+  implementation continued. Detailed authority and verification decisions are
+  in the [applicability ownership replan](reports/milestone-3-applicability-ownership-replan.md).
+
+## 2026-08-23: Milestone 3 Applicability And Policy-Impact Cutover
+
+- Accepted the standard-library-only applicability Module after exhaustive
+  operator, fact-type, fact-state, truth-table, schema-identity, digest,
+  unresolved-fact, and dependency-direction evidence.
+- Compiled Router and policy-impact expressions into immutable programs and
+  removed both former executable parsers without compatibility behavior.
+- Cut all registered policy-impact relationship consumers to one compiled
+  authority while preserving independent generic node and group ownership.
+- All 218 declarative suites and the complete checkpoint with 53 retained Bash
+  checkers passed. Detailed evidence is recorded in the
+  [cutover report](reports/milestone-3-applicability-policy-impact-cutover.md).
+- The sole next slice is request-bound applicability evaluation, exact impact
+  obligations, and bounded audit coverage.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

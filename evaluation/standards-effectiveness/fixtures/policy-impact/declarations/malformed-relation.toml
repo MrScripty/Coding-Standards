@@ -1,0 +1,10 @@
+schema_version = 1
+owner = "workflow.planning"
+
+[[relationships]]
+source = "workflow.planning"
+consumer = "prompts/planning.md"
+relation = "markdown-link"
+applicability = { operator = "always" }
+evidence_owner = "suite:planning-admission"
+rationale = "Malformed relation fixture relationship."

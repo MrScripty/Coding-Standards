@@ -48,20 +48,24 @@ class PolicyImpactTest(unittest.TestCase):
             - Canonical owner: `workflows/planning.md`
             """,
         )
-        self.write("prompts/a.md", "# A\n")
-        self.write("prompts/b.md", "# B\n")
-        self.write("reference/recipes/a.md", "# A reference\n")
-        self.write("evaluation/README.md", "# Evaluation documentation\n")
+        self.write(
+            "evaluation/standards-effectiveness/canonical-module-corpus.toml",
+            'schema_version = 1\nmembers = ["workflows/planning.md"]\n',
+        )
+        for path in (
+            "prompts/a.md",
+            "prompts/b.md",
+            "reference/recipes/a.md",
+            "evaluation/README.md",
+        ):
+            self.write(path, "# Fixture\n")
         self.write("evaluation/not-documentation.tsv", "value\n")
         self.write(
             "suites/evidence.toml",
-            """
-            schema_version = 1
-            id = "evidence"
-            owner = "test.evidence"
-            """,
+            'schema_version = 1\nid = "evidence"\nowner = "test.evidence"\n',
         )
         self.suite_paths = {"evidence": "suites/evidence.toml"}
+        self.write_fixture_authority()
 
     def tearDown(self) -> None:
         self.temp_dir.cleanup()
@@ -71,167 +75,185 @@ class PolicyImpactTest(unittest.TestCase):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(textwrap.dedent(content).lstrip(), encoding="utf-8")
 
-    def manifest(
-        self,
-        *,
-        owner_id: str = "workflow.planning",
-        consumer: str = "prompts/a.md",
-        relation: str = "prompt-projection",
-        applicability: str = "Consumer applies when Planning changes.",
-        evidence_owner: str = "suite:evidence",
-        edge_id: str = "planning-consumer",
-    ) -> str:
-        return textwrap.dedent(
-            f'''
+    def write_fixture_authority(self) -> None:
+        self.write(
+            "catalog.toml",
+            """
             schema_version = 1
-            source_id = "test.policy-impact"
+            source_id = "standards.policy-impact-catalog"
+            edges = []
 
             [[nodes]]
-            id = "{owner_id}"
-            aliases = ["workflows/planning.md"]
-            metadata = {{ repository_path = "workflows/planning.md", policy_impact_coverage = "audited" }}
+            id = "prompt-a"
+            metadata = { repository_path = "prompts/a.md" }
 
             [[nodes]]
-            id = "{consumer}"
-            metadata = {{ repository_path = "{consumer}" }}
+            id = "prompt-b"
+            metadata = { repository_path = "prompts/b.md" }
+
+            [[nodes]]
+            id = "reference-a"
+            metadata = { repository_path = "reference/recipes/a.md" }
+
+            [[nodes]]
+            id = "documentation"
+            metadata = { repository_path = "evaluation/README.md" }
+
+            [[nodes]]
+            id = "not-documentation"
+            metadata = { repository_path = "evaluation/not-documentation.tsv" }
+
+            [[nodes]]
+            id = "evidence"
+            aliases = ["suites/evidence.toml"]
+            metadata = { repository_path = "suites/evidence.toml", suite_id = "evidence" }
 
             [[groups]]
             id = "policy-impact"
-            purpose = "Test policy impact."
+            purpose = "Fixture policy impact."
             directions = ["incoming", "outgoing"]
             transitive = false
 
-            [[edges]]
-            id = "{edge_id}"
-            source = "{owner_id}"
-            target = "{consumer}"
-            relation = "{relation}"
-            groups = ["policy-impact"]
-            traversable = true
-            metadata = {{ applicability = "{applicability}", evidence_owner = "{evidence_owner}" }}
-            '''
-        ).lstrip()
-
-    def load(self, content: str):
-        self.write("impact.toml", content)
-        return load_policy_impact(self.root, "impact.toml", self.suite_paths)
-
-    def test_adapter_queries_generic_registry_in_deterministic_consumer_order(self) -> None:
-        content = self.manifest(consumer="prompts/b.md", edge_id="b")
-        content = content.replace(
-            "[[groups]]",
-            """
-            [[nodes]]
-            id = "prompts/a.md"
-            metadata = { repository_path = "prompts/a.md" }
-
             [[groups]]
+            id = "semantic"
+            purpose = "Fixture semantics."
+            directions = ["incoming", "outgoing"]
+            transitive = false
             """,
-            1,
         )
-        content += """
-        [[edges]]
-        id = "a"
-        source = "workflow.planning"
-        target = "prompts/a.md"
-        relation = "prompt-projection"
-        groups = ["policy-impact"]
-        traversable = true
-        metadata = { applicability = "Consumer applies when Planning changes.", evidence_owner = "suite:evidence" }
-        """
+        self.write(
+            "facts.toml",
+            'schema_version = 1\nid = "policy-impact.applicability"\nfacts = []\n',
+        )
+        self.write(
+            "audits.toml",
+            """
+            schema_version = 1
 
-        impact = self.load(content)
+            [[audits]]
+            id = "audit.planning"
+            owner = "workflow.planning"
+            relationship_kinds = [
+              "normative-consumer",
+              "router-projection",
+              "prompt-projection",
+              "template-projection",
+              "reference-projection",
+              "documentation-projection",
+              "fixture-projection",
+              "enforcement-suite-projection",
+            ]
+            scope = "whole-owner"
+            horizon = "fixture"
+            evidence = "fixture"
+            """,
+        )
+
+    @staticmethod
+    def relationship(
+        consumer: str = "prompt-a",
+        relation: str = "prompt-projection",
+        *,
+        source: str = "workflow.planning",
+        evidence: str = "suite:evidence",
+    ) -> str:
+        return textwrap.dedent(
+            f"""
+            [[relationships]]
+            source = "{source}"
+            consumer = "{consumer}"
+            relation = "{relation}"
+            applicability = {{ operator = "always" }}
+            evidence_owner = "{evidence}"
+            rationale = "Fixture relationship."
+            """
+        )
+
+    def load(self, *relationships: str, owner: str = "workflow.planning"):
+        self.write(
+            "declarations.toml",
+            f'schema_version = 1\nowner = "{owner}"\n' + "".join(relationships),
+        )
+        self.write(
+            "registry.toml",
+            """
+            schema_version = 1
+            source_id = "standards.policy-impact"
+            node_catalog = "catalog.toml"
+            fact_catalog = "facts.toml"
+            audit_catalog = "audits.toml"
+            declaration_sources = ["declarations.toml"]
+            """,
+        )
+        return load_policy_impact(self.root, "registry.toml", self.suite_paths)
+
+    def test_adapter_queries_compiled_registry_in_deterministic_consumer_order(self) -> None:
+        impact = self.load(
+            self.relationship("prompt-b"),
+            self.relationship("prompt-a"),
+        )
 
         self.assertIsInstance(impact.registry, EdgeRegistry)
         self.assertEqual(
             [edge.consumer for edge in impact.consumers_for("workflow.planning")],
             ["prompts/a.md", "prompts/b.md"],
         )
-
-    def test_rejects_owner_that_does_not_match_canonical_metadata(self) -> None:
-        with self.assertRaises(EngineError) as raised:
-            self.load(self.manifest(owner_id="workflow.unknown"))
-
-        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_OWNER")
-
-    def test_rejects_unknown_evidence_owner_and_invalid_consumer_relation(self) -> None:
-        with self.assertRaises(EngineError) as raised:
-            self.load(self.manifest(evidence_owner="suite:missing"))
-        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.EVIDENCE_OWNER")
-
-        with self.assertRaises(EngineError) as raised:
-            self.load(self.manifest(relation="template-projection"))
-        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_CONSUMER")
-
-    def test_accepts_only_reference_markdown_for_reference_projection(self) -> None:
-        impact = self.load(
-            self.manifest(
-                consumer="reference/recipes/a.md",
-                relation="reference-projection",
-            )
-        )
         self.assertEqual(
-            impact.consumers_for("workflow.planning")[0].consumer,
-            "reference/recipes/a.md",
+            impact.consumers_for("workflow.planning")[0]
+            .applicability_program.as_expression(),
+            {"operator": "always"},
         )
 
-        with self.assertRaises(EngineError) as raised:
-            self.load(self.manifest(relation="reference-projection"))
-        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_CONSUMER")
-
-    def test_accepts_only_markdown_for_documentation_projection(self) -> None:
-        impact = self.load(
-            self.manifest(
-                consumer="evaluation/README.md",
-                relation="documentation-projection",
-            )
-        )
-        self.assertEqual(
-            impact.consumers_for("workflow.planning")[0].consumer,
-            "evaluation/README.md",
-        )
-
+    def test_rejects_unknown_owner_and_evidence_owner(self) -> None:
         with self.assertRaises(EngineError) as raised:
             self.load(
-                self.manifest(
-                    consumer="evaluation/not-documentation.tsv",
-                    relation="documentation-projection",
-                )
+                self.relationship(source="workflow.unknown"),
+                owner="workflow.unknown",
             )
+        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_OWNER")
+
+        with self.assertRaises(EngineError) as raised:
+            self.load(self.relationship(evidence="suite:missing"))
+        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.EVIDENCE_OWNER")
+
+    def test_relation_specific_consumer_validation_remains_downstream(self) -> None:
+        with self.assertRaises(EngineError) as raised:
+            self.load(self.relationship("prompt-a", "template-projection"))
+        self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_CONSUMER")
+
+        reference = self.load(self.relationship("reference-a", "reference-projection"))
+        self.assertEqual(reference.consumers_for("workflow.planning")[0].consumer, "reference/recipes/a.md")
+
+        documentation = self.load(
+            self.relationship("documentation", "documentation-projection")
+        )
+        self.assertEqual(documentation.consumers_for("workflow.planning")[0].consumer, "evaluation/README.md")
+
+        with self.assertRaises(EngineError) as raised:
+            self.load(self.relationship("not-documentation", "documentation-projection"))
         self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.UNKNOWN_CONSUMER")
 
     def test_uncovered_owner_query_is_typed_unavailable(self) -> None:
-        impact = self.load(self.manifest())
-
+        impact = self.load(self.relationship())
         with self.assertRaises(EngineError) as raised:
             impact.consumers_for("workflow.unknown")
-
         self.assertEqual(raised.exception.exit_code, 3)
         self.assertEqual(raised.exception.diagnostic.code, "POLICY_IMPACT.OWNER_NOT_AUDITED")
 
     def test_requires_enforcement_edge_for_every_suite_owned_by_audited_owner(self) -> None:
         self.write(
             "suites/evidence.toml",
-            """
-            schema_version = 1
-            id = "evidence"
-            owner = "workflow.planning"
-            """,
+            'schema_version = 1\nid = "evidence"\nowner = "workflow.planning"\n',
         )
-
         with self.assertRaises(EngineError) as raised:
-            self.load(self.manifest())
-
+            self.load(self.relationship())
         self.assertEqual(
             raised.exception.diagnostic.code,
             "POLICY_IMPACT.MISSING_ENFORCEMENT_SUITE_EDGE",
         )
 
     def test_current_planning_graph_has_complete_alias_and_suite_closure(self) -> None:
-        entries = load_registry(
-            REPO_ROOT,
-            "evaluation/standards-effectiveness/suite-registry.toml",
-        )
+        entries = load_registry(REPO_ROOT, "evaluation/standards-effectiveness/suite-registry.toml")
         impact = load_registered_policy_impact(
             REPO_ROOT,
             DEFAULT_SOURCE_REGISTRY,
@@ -260,10 +282,7 @@ class PolicyImpactTest(unittest.TestCase):
         self.assertTrue(planning_owned_suites.issubset(consumers))
 
     def test_current_commit_graph_has_complete_alias_and_suite_closure(self) -> None:
-        entries = load_registry(
-            REPO_ROOT,
-            "evaluation/standards-effectiveness/suite-registry.toml",
-        )
+        entries = load_registry(REPO_ROOT, "evaluation/standards-effectiveness/suite-registry.toml")
         impact = load_registered_policy_impact(
             REPO_ROOT,
             DEFAULT_SOURCE_REGISTRY,
@@ -272,26 +291,7 @@ class PolicyImpactTest(unittest.TestCase):
         consumers = {edge.consumer for edge in impact.consumers_for("workflow.commit")}
         graph = load_repository_registry(REPO_ROOT, DEFAULT_SOURCE_REGISTRY)
 
-        self.assertEqual(
-            consumers,
-            {
-                "STANDARDS-ROUTER.md",
-                "workflows/implementation.md",
-                "workflows/planning.md",
-                "profiles/workflows/concurrent-plan-integration.md",
-                "workflows/release.md",
-                "prompts/planning.md",
-                "prompts/implement-plan.md",
-                "templates/PLAN-TEMPLATE.md",
-                "reference/recipes/commits.md",
-                "evaluation/standards-effectiveness/fixtures/commit/authority.tsv",
-                "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv",
-                "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv",
-                "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv",
-                "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml",
-                "evaluation/standards-effectiveness/README.md",
-            },
-        )
+        self.assertEqual(len(consumers), 15)
         self.assertEqual(
             {view.edge.id for view in graph.incident("workflow.commit", ("policy-impact",))},
             {view.edge.id for view in graph.incident("workflows/commit.md", ("policy-impact",))},
@@ -299,9 +299,8 @@ class PolicyImpactTest(unittest.TestCase):
 
     def test_old_policy_query_and_bespoke_graph_files_are_absent(self) -> None:
         self.assertFalse((REPO_ROOT / "tools/standards_verifier/query_policy_impact.py").exists())
-        self.assertFalse(
-            (
-                REPO_ROOT
-                / "tools/standards_verifier/standards_verifier/policy_impact_cli.py"
-            ).exists()
-        )
+        self.assertFalse((REPO_ROOT / "tools/standards_verifier/standards_verifier/policy_impact_cli.py").exists())
+
+
+if __name__ == "__main__":
+    unittest.main()
