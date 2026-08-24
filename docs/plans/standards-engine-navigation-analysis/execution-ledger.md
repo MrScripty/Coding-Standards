@@ -866,6 +866,9 @@
 
 ## 2026-08-24: A1 Boundary Repair III Implemented
 
+- Recorded the repair implementation at commit
+  `8ed8ba0beba5dd16c0a2da50655952842ab61c85`, tree
+  `eaeac78739468fc2c79241f6a7830e54986d2f95`.
 - Expanded generated Python authority from operation inputs to the complete
   public input and result closure. Concrete result dataclasses, nested models,
   required fields, constants, discriminants, and integer minimums now use one
@@ -889,6 +892,8 @@
   and Git diff integrity also passed.
 - Plan A1 remains `Verifying`, SENA-022 remains active pending independent
   acceptance review, and Plan A2 remains inactive.
+- Published the exact evidence as
+  [A1 boundary repair III candidate](reports/a1-boundary-repair-iii-candidate.md).
 
 ## Ledger Contract
 
