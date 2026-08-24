@@ -1,6 +1,11 @@
 # Plan A1 Boundary Repair VI Candidate
 
-**Status:** `Ready for independent review`
+**Status:** `Accepted`
+
+**Review outcome:** Independent review found no Standards or specification
+findings and recommended accepting the exact implementation commit and tree.
+Final authority is recorded in
+[A1 final acceptance](a1-final-acceptance.md).
 
 **Implementation commit:** `2359a98740b6035a0414bfaf5427ceaa1301a1c8`
 
@@ -45,7 +50,6 @@ runtime semantics or the accepted single-state architecture:
 
 ## Admission State
 
-This document records a review candidate, not an acceptance. Plan A1 remains
-`Verifying`, SENA-022 remains active, and objectives A2, A3, A8, and A9 remain
-pending until an independent review accepts this exact boundary. Controlled
-authoring Plan A2 remains inactive.
+Independent review accepted this exact implementation boundary. The final
+acceptance record reconciles Plan A1 objectives and SENA-022. Controlled
+authoring Plan A2 remains inactive pending separate review and admission.

@@ -1012,6 +1012,23 @@
 - Published the exact evidence as
   [A1 boundary repair VI candidate](reports/a1-boundary-repair-vi-candidate.md).
 
+## 2026-08-24: Plan A1 Accepted
+
+- Independent review accepted implementation commit
+  `2359a98740b6035a0414bfaf5427ceaa1301a1c8`, tree
+  `97c850ab718287007c1e1daac538f40869f71a1d`, with no Standards or
+  specification findings.
+- Reconciled objective rows A2, A3, A8, and A9 with the accepted boundary;
+  every Plan A1 objective is now satisfied with durable evidence.
+- Resolved SENA-022, marked Milestone 4 and Plan A1 `Accepted`, and recorded
+  final acceptance status as `satisfied`.
+- Retained all rejected and withdrawn boundaries as historical evidence; none
+  is relabeled as green.
+- Controlled authoring Plan A2 remains inactive until separately reviewed and
+  admitted. Plans B and C remain outside Plan A1.
+- Published final authority as
+  [A1 final acceptance](reports/a1-final-acceptance.md).
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,
