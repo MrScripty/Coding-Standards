@@ -1,6 +1,14 @@
 # Plan A1 Boundary Repair V Candidate
 
-**Status:** `Ready for independent review`
+**Status:** `Rework required`
+
+**Review outcome:** The candidate was not accepted. Generated code imported the
+canonical serializer through an internal metadata module instead of the
+documented package entry point, and const/enum differential evidence covered
+Unicode normalization but not Boolean/integer type distinctions. Runtime
+behavior was correct; the remaining defects were public-boundary discipline
+and durable evidence completeness. This report remains historical candidate
+evidence only.
 
 **Implementation commit:** `e7e0e1e20762f994e644f2e3c88d017d1625266c`
 

@@ -978,6 +978,18 @@
 - Published the exact evidence as
   [A1 boundary repair V candidate](reports/a1-boundary-repair-v-candidate.md).
 
+## 2026-08-24: A1 Boundary Repair V Review Failed
+
+- Independent review rejected candidate commit `e7e0e1e2`, tree
+  `22c263b4f30c706b94ce3125c8f0537e5d210fe6`.
+- Generated code consumed `canonical_json_bytes` from an internal metadata
+  module even though the documented public metadata package exports it.
+- Const and enum differential tests proved Unicode normalization agreement but
+  omitted the Boolean/integer distinctions already covered for `uniqueItems`.
+  Manual review found correct runtime behavior, leaving a durable evidence gap.
+- Kept Plan A1 `Verifying`, retained SENA-022 as active, and left Plan A2
+  inactive while Repair VI corrected the public import and test matrix.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

@@ -218,6 +218,18 @@ class GeneratedContractTest(unittest.TestCase):
                     "e\u0301",
                 )
 
+        for node, value in (
+            ({"const": 1}, True),
+            ({"const": True}, 1),
+            ({"enum": [1]}, True),
+            ({"enum": [True]}, 1),
+        ):
+            with self.subTest(node=node, value=value):
+                with self.assertRaises(validate_contracts.ContractError):
+                    validate_contracts.validate(schema, node, value, "$")
+                with self.assertRaises(ValueError):
+                    generated._decode_node(node, value)
+
     def test_generated_agent_tools_expose_every_public_operation(self) -> None:
         value = json.loads(
             (

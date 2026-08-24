@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Any, ClassVar, Iterator, Literal, Mapping, TypeAlias
 
-from tools.standards_metadata.standards_metadata.serialization import canonical_json_bytes
+from tools.standards_metadata.standards_metadata import canonical_json_bytes
 
 INTERFACE_SCHEMA_VERSION = 9
 PUBLIC_OPERATIONS = MappingProxyType(
