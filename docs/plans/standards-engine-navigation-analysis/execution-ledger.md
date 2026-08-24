@@ -895,6 +895,20 @@
 - Published the exact evidence as
   [A1 boundary repair III candidate](reports/a1-boundary-repair-iii-candidate.md).
 
+## 2026-08-24: A1 Boundary Repair III Review Failed
+
+- Independent review rejected candidate commit `8ed8ba0b`, tree
+  `eaeac78739468fc2c79241f6a7830e54986d2f95`.
+- Generated const and enum validation used Python equality, allowing Boolean
+  values to satisfy integer constants, and pattern validation used full-match
+  rather than JSON Schema search semantics.
+- Native `prepare` and `resolve` returned analysis-domain pending and complete
+  results instead of the generated Standards Engine result models.
+- The two new negative plan fixtures omitted mandatory plan structure, so they
+  failed before reaching their claimed objective-status and evidence checks.
+- Retired packet/report terminology also remained in current ADR prose. Plan
+  A1 stayed `Verifying`, SENA-022 stayed active, and Plan A2 stayed inactive.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

@@ -1,6 +1,12 @@
 # Plan A1 Boundary Repair III Candidate
 
-**Status:** `Ready for independent review`
+**Status:** `Rework required`
+
+**Review outcome:** The candidate was not accepted. Generated constants and
+enums used Python equality, patterns used full-match semantics, native analysis
+operations still returned domain result classes, and the new negative plan
+fixtures did not prove their intended objective diagnostics. This report
+remains historical candidate evidence only.
 
 **Implementation commit:** `8ed8ba0beba5dd16c0a2da50655952842ab61c85`
 

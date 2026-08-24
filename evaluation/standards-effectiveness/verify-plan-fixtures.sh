@@ -12,8 +12,24 @@ readonly FIXTURES="$SCRIPT_DIR/fixtures/plans"
   "$FIXTURES/valid-superseded.md"
 
 for fixture in "$FIXTURES"/invalid-*.md; do
-  if "$CHECK" "$fixture" >/dev/null 2>&1; then
+  output=""
+  if output="$("$CHECK" "$fixture" 2>&1)"; then
     printf 'Invalid plan fixture passed: %s\n' "$fixture" >&2
+    exit 1
+  fi
+  expected=""
+  case "$(basename "$fixture")" in
+    invalid-accepted-satisfied-without-evidence.md)
+      expected="satisfied objective A1 requires evidence"
+      ;;
+    invalid-objective-partial.md)
+      expected="objective A1 has invalid status partial"
+      ;;
+  esac
+  if [[ -n "$expected" ]] && ! grep -Fq "$expected" <<<"$output"; then
+    printf 'Invalid plan fixture produced the wrong diagnostic: %s\n' \
+      "$fixture" >&2
+    printf 'Expected: %s\nObserved: %s\n' "$expected" "$output" >&2
     exit 1
   fi
 done

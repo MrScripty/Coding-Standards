@@ -87,6 +87,7 @@ from .model import (
     AnalysisContextInspectionResult,
     AnalysisRequest,
     CertificateInspectionResult,
+    CompleteResult,
     CoverageAttestationInspectionResult,
     CoverageAuthorityViewInspectionResult,
     CoverageRequirementInspectionResult,
@@ -95,6 +96,7 @@ from .model import (
     InspectCall,
     InspectionResult,
     NavigationInspectionResult,
+    PendingResult,
     PolicyInspectionResult,
     QueryCall,
     QueryResult,
@@ -444,7 +446,7 @@ class StandardsEngine:
     def prepare(
         self,
         request: AnalysisRequest,
-    ) -> AnalysisResult | RejectedResult:
+    ) -> PendingResult | CompleteResult | RejectedResult:
         if request.contract_version != 2:
             return self._reject(
                 "ANALYSIS.UNSUPPORTED_CONTRACT",
@@ -489,13 +491,13 @@ class StandardsEngine:
         except AnalysisError as error:
             return self._analysis_rejection(error)
         self._analysis_store.put(state)
-        return result
+        return self._contract_analysis_result(result)
 
     def resolve(
         self,
         analysis: Mapping[str, object],
         submission,
-    ) -> AnalysisResult | RejectedResult:
+    ) -> PendingResult | CompleteResult | RejectedResult:
         analysis_id = str(analysis.get("id", ""))
         state = self._analysis_store.get(analysis)
         if state is None:
@@ -548,7 +550,20 @@ class StandardsEngine:
         except AnalysisError as error:
             return self._analysis_rejection(error)
         self._analysis_store.put(updated)
-        return result
+        return self._contract_analysis_result(result)
+
+    @staticmethod
+    def _contract_analysis_result(
+        result: AnalysisResult,
+    ) -> PendingResult | CompleteResult:
+        value = result.as_contract()
+        if value.get("kind") == "pending-result":
+            return PendingResult.from_value(value)
+        if value.get("kind") == "complete-result":
+            return CompleteResult.from_value(value)
+        raise RuntimeError(
+            f"analysis produced unsupported result kind {value.get('kind')!r}"
+        )
 
     def query(self, call: QueryCall) -> QueryResult:
         source = self._source_for(call.snapshot)

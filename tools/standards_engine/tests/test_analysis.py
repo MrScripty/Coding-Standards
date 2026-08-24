@@ -36,9 +36,11 @@ from tools.standards_engine.standards_engine import (
     AgentToolFacade,
     AnalysisRequest,
     AnalysisState as ContractAnalysisState,
+    CompleteResult as ContractCompleteResult,
     DirectoryAnalysisStateStore,
     InMemoryAnalysisStateStore,
     InspectCall,
+    PendingResult as ContractPendingResult,
     StandardsEngine,
 )
 from tools.standards_policy_impact.standards_policy_impact import (
@@ -337,7 +339,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             )
         )
 
-        self.assertIsInstance(result, PendingResult)
+        self.assertIsInstance(result, ContractPendingResult)
         packet = result
         validate(
             SCHEMA,
@@ -345,7 +347,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             packet.as_contract(),
             "$packet",
         )
-        while isinstance(packet, PendingResult):
+        while isinstance(packet, ContractPendingResult):
             obligation = next(
                 item for item in packet.obligations if item.state == "required"
             )
@@ -371,7 +373,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 ),
             )
 
-        self.assertIsInstance(packet, CompleteResult)
+        self.assertIsInstance(packet, ContractCompleteResult)
         value = packet.as_contract()
         validate(
             SCHEMA,
@@ -412,8 +414,8 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 packet.handle,
             )
         )
-        self.assertIsInstance(reused, CompleteResult)
-        self.assertEqual(reused.id, packet.id)
+        self.assertIsInstance(reused, ContractCompleteResult)
+        self.assertEqual(reused.handle.id, packet.handle.id)
         self.assertEqual(value["fact_observations"], [])
 
     def test_one_fact_requirement_re_evaluates_every_dependent_relationship(
@@ -794,7 +796,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
         )
         result = first_engine.prepare(request)
         initial_packet = result
-        while isinstance(result, PendingResult):
+        while isinstance(result, ContractPendingResult):
             obligation = next(
                 item for item in result.obligations if item.state == "required"
             )
@@ -824,11 +826,11 @@ class AnalysisWorkflowTest(unittest.TestCase):
         seeded = second_engine.prepare(
             replace(request, prior_analysis=initial_packet.handle)
         )
-        self.assertIsInstance(seeded, PendingResult)
-        self.assertEqual(seeded.id, initial_packet.id)
+        self.assertIsInstance(seeded, ContractPendingResult)
+        self.assertEqual(seeded.handle.id, initial_packet.handle.id)
         reused = second_engine.prepare(replace(request, prior_analysis=result.handle))
-        self.assertIsInstance(reused, CompleteResult)
-        self.assertEqual(reused.id, result.id)
+        self.assertIsInstance(reused, ContractCompleteResult)
+        self.assertEqual(reused.handle.id, result.handle.id)
         self.assertEqual(reused.as_contract(), result.as_contract())
         inspected = second_engine.inspect(InspectCall(reused.handle))
         self.assertEqual(inspected.handle.id, reused.handle["id"])

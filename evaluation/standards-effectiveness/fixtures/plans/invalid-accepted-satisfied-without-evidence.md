@@ -8,6 +8,10 @@
 
 **Acceptance status:** `satisfied`
 
+**Execution ledger:** [execution-ledger.md](execution-ledger.md)
+
+**Issues:** [issues.md](issues.md)
+
 ## Objective
 
 Deliver the workflow.
@@ -17,6 +21,10 @@ Deliver the workflow.
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | A1 | The workflow is complete. | `user-workflow` | `not-applicable` | `automated` | `satisfied` | |
+
+## Binding Decisions
+
+- The workflow owns its visible acceptance evidence.
 
 ## Milestones
 
@@ -34,5 +42,6 @@ Deliver the workflow.
 
 ## Final Acceptance
 
+- Objective evidence: `reports/workflow.md`
 - Acceptance status: `satisfied`
 - Final status: `Accepted`

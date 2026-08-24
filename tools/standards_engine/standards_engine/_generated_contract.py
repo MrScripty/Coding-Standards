@@ -2501,6 +2501,19 @@ def _encode(value: object) -> object:
     return value
 
 
+def _schema_equal(left: object, right: object) -> bool:
+    if isinstance(left, Mapping) and isinstance(right, Mapping):
+        return set(left) == set(right) and all(
+            _schema_equal(left[key], right[key]) for key in left
+        )
+    if isinstance(left, (list, tuple)) and isinstance(right, (list, tuple)):
+        return len(left) == len(right) and all(
+            _schema_equal(left_item, right_item)
+            for left_item, right_item in zip(left, right)
+        )
+    return type(left) is type(right) and left == right
+
+
 def _decode_node(node: Mapping[str, object], value: object) -> object:
     reference = node.get("$ref")
     if isinstance(reference, str):
@@ -2519,16 +2532,18 @@ def _decode_node(node: Mapping[str, object], value: object) -> object:
         if not matches:
             raise TypeError("value matches no generated union variant: " + "; ".join(failures))
         raise ValueError("value matches more than one generated union variant")
-    if "const" in node and _encode(value) != node["const"]:
+    if "const" in node and not _schema_equal(_encode(value), node["const"]):
         raise ValueError(f"expected constant {node['const']!r}")
-    if "enum" in node and value not in node["enum"]:
+    if "enum" in node and not any(
+        _schema_equal(_encode(value), item) for item in node["enum"]
+    ):
         raise ValueError(f"value {value!r} is outside the generated enum")
     value_type = node.get("type")
     if value_type == "string" and not isinstance(value, str):
         raise TypeError("expected string")
     if value_type == "string" and len(value) < int(node.get("minLength", 0)):
         raise ValueError("string is shorter than the generated minimum")
-    if value_type == "string" and "pattern" in node and re.fullmatch(node["pattern"], value) is None:
+    if value_type == "string" and "pattern" in node and re.search(node["pattern"], value) is None:
         raise ValueError("string does not match the generated pattern")
     if value_type == "integer" and (not isinstance(value, int) or isinstance(value, bool)):
         raise TypeError("expected integer")

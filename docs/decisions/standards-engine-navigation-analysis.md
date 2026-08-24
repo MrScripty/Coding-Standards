@@ -89,8 +89,9 @@ equality is the only collapse rule in A1.
 The complete registered node catalog participates in `AnalysisSnapshot`.
 Coverage horizon provider version 2 separately compiles a typed discovery
 projection: it retains every catalog field except the exact reading-only
-`nodes[].metadata.authority` value. This keeps packet staleness broad while
-keeping reusable consumer-coverage identity limited to discovery semantics.
+`nodes[].metadata.authority` value. This keeps analysis-state reproducibility
+bound to the complete input closure while keeping reusable consumer-coverage
+identity limited to discovery semantics.
 Unknown metadata is retained rather than silently excluded.
 
 Canonical documents remain authoritative for module IDs, aliases, paths,
@@ -330,8 +331,8 @@ cannot turn it into `true`.
 
 Coverage uses two identities. `AnalysisSnapshot` binds the complete analysis
 input closure, including repository-local attestations, and therefore owns
-packet and report reproducibility. `CoverageAuthorityView` is a narrower typed
-projection containing only inputs capable of changing consumer discovery. It
+analysis-state and result reproducibility. `CoverageAuthorityView` is a
+narrower typed projection containing only inputs capable of changing consumer discovery. It
 binds the policy-unit ID and owner, target semantic revision, content and
 structural digests, every originating compiled relationship, relationship-kind
 and provider contracts, applicability language and program dependencies, fact
@@ -339,12 +340,12 @@ schema dependencies, canonical identity resolution, authorization and evidence
 contracts, and the registered audit horizon with content-fingerprinted members.
 
 The coverage view excludes attestation instances and source registrations,
-generated certificates, packets, reports, timestamps, display summaries,
+generated certificates, analysis results, timestamps, display summaries,
 storage locations without semantic effect, and change-specific dispositions.
 Exclusion is determined by typed artifact role rather than directory location.
-The transient `proposed` or `accepted` state label is report provenance, not
-coverage identity; an identical semantic payload promoted to accepted authority
-retains valid coverage.
+The transient `proposed` or `accepted` state label is complete-result
+provenance, not coverage identity; an identical semantic payload promoted to
+accepted authority retains valid coverage.
 
 Analysis derives a `CoverageAuditRequirement` from the exact coverage view. A
 requirement may record its source analysis snapshot as provenance, but that
@@ -355,8 +356,8 @@ remains valid for its exact snapshot, while preparation from the new snapshot
 derives the same coverage view and requirement. A generated immutable
 `ConsumerCoverageCertificate` then binds the
 view, requirement, attestation, evidence, and relevant contract digests. It
-certifies consumer-discovery coverage only; it never contains a report or
-change-specific disposition.
+certifies consumer-discovery coverage only; it never contains a complete
+result or change-specific disposition.
 
 The initial horizon is the registered provider
 `audit-horizon.policy-impact-consumers` version 1. It independently derives
@@ -375,8 +376,8 @@ owns the change-specific dispositions. Completion requires exact equality
 between required coverage subjects and valid certificate subjects, plus exact
 equality between reached consumer obligations and dispositions. A successful
 empty consumer set therefore requires a current certificate without creating a
-report/certificate identity cycle. Timestamps are excluded from certificate
-identity.
+completion/certificate identity cycle. Timestamps are excluded from
+certificate identity.
 
 Analysis derives required coverage subjects from changed target authority:
 proposed policy units for additions and surviving changes, and accepted policy
@@ -543,7 +544,7 @@ Equal normalized authority and decisions produce the same handle regardless of
 lineage or valid decision order. Conflicting decisions produce independent
 child states; one state never contains two decisions for one decision key.
 
-No temporal packet staleness or mutable analysis head exists in A1. Unresolved
+No global result supersession or mutable analysis head exists in A1. Unresolved
 handles are unavailable; malformed content is invalid; absent work is not
 applicable; mismatched decision dependencies are context mismatches; missing
 authority is unavailable; and absent capabilities are unauthorized. A prior
@@ -633,8 +634,9 @@ policy meaning, authorize a relationship, or permit repository application.
   Reuse decisions depend on exact fingerprints over every relevant declaration,
   node, kind, fact, evidence, audit, and group contract rather than an assumed
   incident-edge-only invalidation rule.
-- A future controlled-authoring design may reuse A1 identities and reports but
-  must define a distinct apply-eligible result and post-write recovery contract.
+- A future controlled-authoring design may reuse A1 identities and complete
+  results but must define a distinct apply-eligible result and post-write
+  recovery contract.
 
 ## Affected Boundaries
 

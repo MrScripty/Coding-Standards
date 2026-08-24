@@ -8,6 +8,10 @@
 
 **Acceptance status:** `pending`
 
+**Execution ledger:** [execution-ledger.md](execution-ledger.md)
+
+**Issues:** [issues.md](issues.md)
+
 ## Objective
 
 Deliver one complete contract.
@@ -17,6 +21,10 @@ Deliver one complete contract.
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | A1 | The contract is complete. | `contract` | `not-applicable` | `automated` | `partial` | `reports/partial.md` |
+
+## Binding Decisions
+
+- The parser owns objective status validation.
 
 ## Milestones
 

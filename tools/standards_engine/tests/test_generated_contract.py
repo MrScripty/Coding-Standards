@@ -154,6 +154,20 @@ class GeneratedContractTest(unittest.TestCase):
 
     def test_generated_models_enforce_schema_constraints_and_result_shape(self) -> None:
         with self.assertRaises(ValueError):
+            generated.CoverageRequirementHandle(
+                id="coverage-requirement:sha256:" + "a" * 64,
+                schema_version=True,
+            )
+
+        self.assertEqual(
+            generated._decode_node(
+                {"type": "string", "pattern": "required-fragment"},
+                "prefix-required-fragment-suffix",
+            ),
+            "prefix-required-fragment-suffix",
+        )
+
+        with self.assertRaises(ValueError):
             generated.SemanticProposal(
                 policy="workflow.planning.written-plan-applicability",
                 accepted_semantic_revision=1,
