@@ -4029,6 +4029,7 @@
           "$ref": "#/$defs/CanonicalId"
         },
         "transitive": {
+          "default": false,
           "type": "boolean"
         }
       },

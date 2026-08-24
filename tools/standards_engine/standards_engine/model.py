@@ -2,66 +2,12 @@ from __future__ import annotations
 
 from tools.standards_analysis.standards_analysis import AnalysisState
 
-from ._generated_contract import (
-    AnalysisRequest,
-    AnalysisContextInspectionResult,
-    CertificateInspectionResult,
-    ContractInspectionResult,
-    ContractResult,
-    CoverageAttestationInspectionResult,
-    CoverageAuthorityViewInspectionResult,
-    CoverageRequirementInspectionResult,
-    FactObservationInspectionResult,
-    FactRequirementInspectionResult,
-    InspectCall,
-    NavigationInspectionResult,
-    PolicyInspectionResult,
-    PrepareCall,
-    QueryCall,
-    QueryRequest,
-    QueryResult,
-    ReadRequest,
-    ReadResult,
-    RejectedResult,
-    RelatedRequest,
-    RelatedResult,
-    ResolveCall,
-    RouteRequest,
-    RouteResult,
-    RelationshipInspectionResult,
-    SnapshotInspectionResult,
-)
+from . import _generated_contract as _generated
 
 
-InspectionResult = AnalysisState | ContractInspectionResult
+for _name in _generated.__all__:
+    globals()[_name] = getattr(_generated, _name)
 
+InspectionResult = AnalysisState | _generated.ContractInspectionResult
 
-__all__ = (
-    "AnalysisRequest",
-    "AnalysisContextInspectionResult",
-    "CertificateInspectionResult",
-    "ContractResult",
-    "CoverageAttestationInspectionResult",
-    "CoverageAuthorityViewInspectionResult",
-    "CoverageRequirementInspectionResult",
-    "FactObservationInspectionResult",
-    "FactRequirementInspectionResult",
-    "InspectCall",
-    "InspectionResult",
-    "NavigationInspectionResult",
-    "PolicyInspectionResult",
-    "PrepareCall",
-    "QueryCall",
-    "QueryRequest",
-    "QueryResult",
-    "ReadRequest",
-    "ReadResult",
-    "RejectedResult",
-    "RelatedRequest",
-    "RelatedResult",
-    "ResolveCall",
-    "RouteRequest",
-    "RouteResult",
-    "RelationshipInspectionResult",
-    "SnapshotInspectionResult",
-)
+__all__ = (*_generated.__all__, "InspectionResult")

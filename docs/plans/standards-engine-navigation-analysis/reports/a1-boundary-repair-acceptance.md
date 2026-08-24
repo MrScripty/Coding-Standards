@@ -1,6 +1,13 @@
 # Plan A1 Boundary Repair Acceptance
 
-**Status:** `Accepted`
+**Status:** `Withdrawn`
+
+**Withdrawal:** A later acceptance audit found that whole-module inspection
+still read live bytes, persisted analysis states could not reconstruct every
+advertised child artifact, and the generated Python contract preserved schema
+field names but not schema-owned types, defaults, or nested variants. The plan
+was reopened under SENA-022; this report remains historical evidence and must
+not be cited as a green boundary.
 
 **Implementation commit:** `51dcd258942b0774c73ae8b620227c7ce34d1129`
 
@@ -10,11 +17,13 @@
 `94b295b40bc1cef9a6281355d68115f3a98ed112`, tree
 `ff032da51fcaff45533c07daa8de464065b8e55c`
 
-## Disposition
+## Historical Disposition
 
-Plan A1 is accepted at the repaired implementation boundary. The repair keeps
-the accepted single-state architecture and closes SENA-021 without adding a
-packet/report compatibility lifecycle or admitting controlled authoring.
+This report formerly accepted Plan A1 at the repaired implementation boundary.
+That disposition is withdrawn and has no current acceptance authority. The
+repair kept the accepted single-state architecture and closed SENA-021 without
+adding a packet/report compatibility lifecycle or admitting controlled
+authoring, but the later SENA-022 findings require a superseding review.
 
 The boundary establishes these corrected contracts:
 
@@ -62,9 +71,9 @@ result variant, every inspectable handle, normalized-key collision rejection,
 snapshot- and analysis-bound continuations, and contradictory accepted-plan
 projections.
 
-## Boundary
+## Withdrawn Boundary
 
-This acceptance completes read-only Plan A1 navigation and analysis only.
-Controlled authoring remains subject to a separately reviewed and admitted Plan
-A2. Evidence-oracle policy and projection correction remain Plan B concerns,
-and external-project application and upgrade baselines remain Plan C concerns.
+This withdrawn report does not complete Plan A1. Controlled authoring remains
+subject to a separately reviewed and admitted Plan A2. Evidence-oracle policy
+and projection correction remain Plan B concerns, and external-project
+application and upgrade baselines remain Plan C concerns.

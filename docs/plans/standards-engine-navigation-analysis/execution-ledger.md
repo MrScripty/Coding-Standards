@@ -805,6 +805,42 @@
 - Completed read-only Plan A1. Controlled authoring requires separate Plan A2
   review and admission; Plans B and C remain inactive.
 
+## 2026-08-24: A1 Boundary Repair Acceptance Reopened Again
+
+- A follow-up audit reproduced a live-worktree leak in whole-module policy
+  inspection, cold-process loss of advertised analysis child artifacts, and
+  incomplete schema ownership of the generated native Python algebra.
+- The audit also proved that malformed objective statuses and missing final
+  projections could pass the accepted-plan checker and found one stale
+  snapshot-v1 identity domain in the accepted ADR.
+- Withdrew the `b8f52240` acceptance authority, returned Plan A1 to
+  `Verifying`, and opened SENA-022. The single-state architecture remains
+  binding; Plan A2 remains inactive.
+
+## 2026-08-24: A1 Boundary Repair II Implemented
+
+- Made whole-module policy inspection consume immutable snapshot content and
+  added a full-result mutation regression alongside the existing read check.
+- Replaced the in-memory analysis-artifact cache with deterministic
+  reconstruction from persisted immutable analysis states; fresh engines now
+  inspect advertised context, requirement, and observation handles.
+- Replaced the field-name-only generator with a canonical-schema walker that
+  generates Python object types, defaults, constants, discriminated unions,
+  nested request and submission variants, decoding, exports, and agent tools.
+  Removed the duplicate hand-written agent-facade request and submission
+  decoders.
+- Strengthened accepted-plan verification to parse every objective row, reject
+  unknown or missing statuses, require objective rows, and require both final
+  projections. Corrected the ADR's remaining snapshot-v1 identity domain.
+- Verified 82 analysis tests, 41 Standards Engine tests, 18 metadata tests, 12
+  applicability tests, 7 policy-impact tests, 35 graph-engine tests, 2
+  standards-graph tests, 380 verifier tests, 33 contract examples, 8 identity
+  fixtures, all 218 declarative suites, every current plan through the stronger
+  checker, and the complete checkpoint with 53 retained Bash checkers.
+- The implementation remains a candidate under SENA-022. Plan A1 stays
+  `Verifying`; no acceptance is inferred from implementation-owned evidence,
+  and Plan A2 remains inactive.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

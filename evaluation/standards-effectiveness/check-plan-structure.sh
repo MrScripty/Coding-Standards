@@ -77,30 +77,59 @@ for file in "$@"; do
     exit 1
   fi
 
-  table_statuses="$(
+  objective_rows="$(
     sed -n '/^## Objective Acceptance$/,/^## /p' "$file" |
       awk -F'|' '
         /^\|/ {
-          value = $7
+          id = $2
+          gsub(/^[[:space:]]+|[[:space:]]+$/, "", id)
+          if (id == "ID") {
+            for (column = 2; column < NF; column++) {
+              heading = $column
+              gsub(/^[[:space:]]+|[[:space:]]+$/, "", heading)
+              if (heading == "Status") status_column = column
+            }
+            next
+          }
+          if (id == "" || id ~ /^-+$/) next
+          value = status_column == 0 ? "" : $status_column
           gsub(/^[[:space:]]+|[[:space:]]+$/, "", value)
           gsub(/`/, "", value)
-          if (value ~ /^(pending|partial|blocked|satisfied)$/) print value
+          print id "\t" value
         }
       '
   )"
-  if [[ "$status" == "Accepted" ]] &&
-    [[ -n "$table_statuses" ]] &&
-    [[ -n "$(printf '%s\n' "$table_statuses" | rg -v '^satisfied$' || true)" ]]; then
-    printf '%s: accepted plan has unsatisfied objective-acceptance row\n' "$file" >&2
+  if [[ -z "$objective_rows" ]]; then
+    printf '%s: expected at least one objective-acceptance row\n' "$file" >&2
     exit 1
   fi
+  while IFS=$'\t' read -r objective_id objective_status; do
+    if [[ ! "$objective_status" =~ ^(pending|partial|blocked|satisfied)$ ]]; then
+      printf '%s: objective %s has invalid status %s\n' \
+        "$file" "$objective_id" "$objective_status" >&2
+      exit 1
+    fi
+    if [[ "$status" == "Accepted" && "$objective_status" != "satisfied" ]]; then
+      printf '%s: accepted plan has unsatisfied objective %s\n' \
+        "$file" "$objective_id" >&2
+      exit 1
+    fi
+  done <<<"$objective_rows"
 
-  final_acceptance_status="$(
-    sed -n 's/^- Acceptance status: `\([^\`]*\)`$/\1/p' "$file"
-  )"
-  final_status="$(
-    sed -n 's/^- Final status: `\([^\`]*\)`$/\1/p' "$file"
-  )"
+  final_acceptance_count="$(grep -c '^- Acceptance status: `' "$file" || true)"
+  final_status_count="$(grep -c '^- Final status: `' "$file" || true)"
+  if [[ "$final_acceptance_count" -gt 1 || "$final_status_count" -gt 1 ]]; then
+    printf '%s: final acceptance projections must be unique\n' "$file" >&2
+    exit 1
+  fi
+  if [[ "$status" == "Accepted" ]] &&
+    [[ "$final_acceptance_count" -ne 1 || "$final_status_count" -ne 1 ]]; then
+    printf '%s: accepted plan requires both final acceptance projections\n' \
+      "$file" >&2
+    exit 1
+  fi
+  final_acceptance_status="$(sed -n 's/^- Acceptance status: `\([^`]*\)`$/\1/p' "$file")"
+  final_status="$(sed -n 's/^- Final status: `\([^`]*\)`$/\1/p' "$file")"
   if [[ -n "$final_acceptance_status" ]] &&
     [[ "$final_acceptance_status" != "$acceptance_status" ]]; then
     printf '%s: final acceptance status does not match header\n' "$file" >&2

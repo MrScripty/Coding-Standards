@@ -230,7 +230,7 @@ Identity is SHA-256 over a domain prefix, a NUL byte, and canonical identity
 bytes. The domains are:
 
 ```text
-coding-standards:snapshot:v1
+coding-standards:snapshot:v2
 coding-standards:navigation:v2
 coding-standards:packet:v4
 coding-standards:obligation:v2

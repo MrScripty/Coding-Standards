@@ -521,8 +521,6 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertIsInstance(second, PendingResult)
         self.assertEqual(second.fact_requirements, ())
         self.assertGreater(len(second.obligations), 1)
-        self.engine._register_analysis_artifacts(initial_state, first)
-        self.engine._register_analysis_artifacts(state, second)
         inspection_cases = (
             (
                 first.context.handle,
@@ -543,11 +541,23 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 state.observations[0].as_contract(),
             ),
         )
-        for handle, definition, field, expected in inspection_cases:
-            with self.subTest(definition=definition):
-                inspected = self.engine.inspect(InspectCall(handle)).as_contract()
-                validate(SCHEMA, SCHEMA["$defs"][definition], inspected, "$inspect")
-                self.assertEqual(inspected[field], expected)
+        with tempfile.TemporaryDirectory() as temporary:
+            store = DirectoryAnalysisStateStore(Path(temporary))
+            store.put(initial_state)
+            store.put(state)
+            cold_engine = StandardsEngine.open_repository(
+                REPO_ROOT,
+                analysis_store=store,
+            )
+            cold_engine._policy_impact = conditional
+            cold_engine._authorizations = {
+                analyze_authorization.capability: analyze_authorization
+            }
+            for handle, definition, field, expected in inspection_cases:
+                with self.subTest(definition=definition):
+                    inspected = cold_engine.inspect(InspectCall(handle)).as_contract()
+                    validate(SCHEMA, SCHEMA["$defs"][definition], inspected, "$inspect")
+                    self.assertEqual(inspected[field], expected)
         repeated_state, repeated = advance_analysis(
             kernel,
             initial_state,

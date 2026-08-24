@@ -812,7 +812,7 @@
           "items": { "$ref": "#/$defs/CanonicalId" }
         },
         "direction": { "enum": ["incoming", "outgoing", "both"] },
-        "transitive": { "type": "boolean" }
+        "transitive": { "type": "boolean", "default": false }
       },
       "additionalProperties": false
     },

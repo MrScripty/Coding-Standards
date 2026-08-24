@@ -1,4 +1,4 @@
-# Plan: Accepted Fixture
+# Plan: Invalid Accepted Missing Final Projections
 
 **Plan status:** `Accepted`
 
@@ -14,17 +14,17 @@
 
 ## Objective
 
-Deliver the workflow through the user interface.
+Deliver the workflow.
 
 ## Objective Acceptance
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A1 | Recorded user interaction reaches the visible result. | `user-workflow` | `not-applicable` | `automated` | `satisfied` | `reports/user-workflow.md` |
+| A1 | The workflow is complete. | `integration` | `not-applicable` | `automated` | `satisfied` | Evidence |
 
 ## Binding Decisions
 
-- Backend owns policy; frontend owns projection.
+- The table is authoritative.
 
 ## Milestones
 
@@ -43,5 +43,3 @@ Deliver the workflow through the user interface.
 ## Final Acceptance
 
 - Objective evidence: `reports/user-workflow.md`
-- Acceptance status: `satisfied`
-- Final status: `Accepted`

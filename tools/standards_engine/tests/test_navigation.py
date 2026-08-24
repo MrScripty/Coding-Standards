@@ -387,6 +387,32 @@ class NavigationTest(unittest.TestCase):
         self.assertEqual(inspected["declaration"]["kind"], "canonical-module")
         self.assertEqual(inspected["declaration"]["id"], "workflow.verification")
 
+    def test_module_inspection_remains_bound_to_captured_snapshot_content(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "repository"
+            shutil.copytree(REPO_ROOT, root, symlinks=True)
+            engine = StandardsEngine.open_repository(root)
+            read = engine.query(
+                QueryCall(engine.snapshot, ReadRequest("workflow.verification"))
+            )
+            handle = read.as_contract()["policy"]["handle"]
+            before = engine.inspect(InspectCall(handle)).as_contract()
+
+            source = root / "workflows/verification.md"
+            source.write_text(
+                source.read_text(encoding="utf-8") + "\nPost-snapshot mutation.\n",
+                encoding="utf-8",
+            )
+
+            after = engine.inspect(InspectCall(handle)).as_contract()
+            repeated = engine.query(
+                QueryCall(engine.snapshot, ReadRequest("workflow.verification"))
+            )
+            self.assertEqual(after, before)
+            self.assertEqual(repeated.as_contract(), read.as_contract())
+
     def test_policy_unit_read_and_inspection_use_exact_structured_scope(self) -> None:
         policy_id = "workflow.verification.acceptance-claims"
         result = self.engine.query(
@@ -600,7 +626,7 @@ class NavigationTest(unittest.TestCase):
         path_value = self.assert_contract("RejectedResult", path_result)
         self.assertEqual(path_value["code"], "NAVIGATION.UNKNOWN_POLICY")
 
-    def test_policy_unit_target_is_normalized_and_malformed_native_calls_are_rejected(
+    def test_policy_unit_target_is_normalized_and_generated_native_calls_reject_malformed_values(
         self,
     ) -> None:
         related = self.engine.query(
@@ -640,21 +666,22 @@ class NavigationTest(unittest.TestCase):
         )
 
         malformed = (
-            ReadRequest(""),
-            RelatedRequest("workflow.planning", (), "outgoing"),
-            RelatedRequest("workflow.planning", ("standards-requires",), "sideways"),
-            RelatedRequest(
+            lambda: ReadRequest(""),
+            lambda: RelatedRequest("workflow.planning", (), "outgoing"),
+            lambda: RelatedRequest(
+                "workflow.planning", ("standards-requires",), "sideways"
+            ),
+            lambda: RelatedRequest(
                 "workflow.planning",
                 ("standards-requires",),
                 "outgoing",
                 transitive=1,
             ),
         )
-        for request in malformed:
-            with self.subTest(request=request):
-                result = self.engine.query(QueryCall(self.engine.snapshot, request))
-                value = self.assert_contract("RejectedResult", result)
-                self.assertEqual(value["outcome"], "invalid")
+        for construct in malformed:
+            with self.subTest(construct=construct):
+                with self.assertRaises((TypeError, ValueError)):
+                    construct()
 
 
 if __name__ == "__main__":

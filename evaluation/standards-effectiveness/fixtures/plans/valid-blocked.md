@@ -18,7 +18,9 @@ Deliver a hardware-backed user capability.
 
 ## Objective Acceptance
 
-Recorded real-device workflow succeeds.
+| ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| A1 | Recorded real-device workflow succeeds. | `user-workflow` | `required-device` | `manual` | `blocked` | `pending` |
 
 ## Binding Decisions
 

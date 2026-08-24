@@ -34,6 +34,7 @@ SCHEMA_KEYS = {
     "$defs",
     "title",
     "description",
+    "default",
     "type",
     "const",
     "enum",

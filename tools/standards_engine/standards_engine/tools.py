@@ -6,32 +6,17 @@ from typing import Iterable, Mapping
 
 from tools.standards_analysis.standards_analysis import (
     AuthorizationReference,
-    ChangeDescriptor,
-    ChangeKind,
-    ConsumerDispositionSubmission,
-    CoverageAttestation,
-    CoverageAttestationSubmission,
-    CoverageEvidence,
-    DecisionDependency,
-    DecisionFingerprint,
-    EvidenceReference,
     FactObservationProvider,
-    ImpactDispositionSubmission,
-    ProvideFactSubmission,
-    ReviewScope,
-    SemanticProposal,
 )
 from tools.standards_engine.contracts.validate_contracts import ContractError, validate
 
-from ._generated_contract import RESULT_KIND_TO_DEFINITION
+from ._generated_contract import RESULT_KIND_TO_DEFINITION, decode_contract
 from .engine import AnalysisStateStore, StandardsEngine
 from .model import (
-    AnalysisRequest,
     InspectCall,
+    PrepareCall,
     QueryCall,
-    ReadRequest,
-    RelatedRequest,
-    RouteRequest,
+    ResolveCall,
 )
 
 
@@ -86,22 +71,9 @@ class AgentToolFacade:
         try:
             value = self._mapping(arguments)
             self._validate("QueryCall", value)
-            request = self._mapping(value["request"])
-            kind = request["kind"]
-            if kind == "route":
-                typed = RouteRequest(self._mapping(request["facts"]))
-            elif kind == "read":
-                typed = ReadRequest(str(request["target"]))
-            elif kind == "related":
-                typed = RelatedRequest(
-                    str(request["target"]),
-                    tuple(request["groups"]),
-                    str(request["direction"]),
-                    bool(request["transitive"]),
-                )
-            else:
-                return self._rejected("INTERFACE.UNSUPPORTED_REQUEST", "unsupported")
-            call = QueryCall(self._mapping(value["snapshot"]), typed)
+            call = decode_contract("QueryCall", value)
+            if not isinstance(call, QueryCall):
+                raise RuntimeError("generated QueryCall decoder returned the wrong type")
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.query(call)
@@ -113,11 +85,12 @@ class AgentToolFacade:
         try:
             value = self._mapping(arguments)
             self._validate("PrepareCall", value)
-            request = self._mapping(value["request"])
-            typed = self._analysis_request(request)
+            call = decode_contract("PrepareCall", value)
+            if not isinstance(call, PrepareCall):
+                raise RuntimeError("generated PrepareCall decoder returned the wrong type")
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
-        result = self._engine.prepare(typed)
+        result = self._engine.prepare(call.request)
         output = result.as_contract()
         self._validate_result(output)
         return output
@@ -126,11 +99,12 @@ class AgentToolFacade:
         try:
             value = self._mapping(arguments)
             self._validate("ResolveCall", value)
-            submission = self._submission(self._mapping(value["submission"]))
-            analysis = self._mapping(value["analysis"])
+            call = decode_contract("ResolveCall", value)
+            if not isinstance(call, ResolveCall):
+                raise RuntimeError("generated ResolveCall decoder returned the wrong type")
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
-        result = self._engine.resolve(analysis, submission)
+        result = self._engine.resolve(call.analysis, call.submission)
         output = result.as_contract()
         self._validate_result(output)
         return output
@@ -139,7 +113,9 @@ class AgentToolFacade:
         try:
             value = self._mapping(arguments)
             self._validate("InspectCall", value)
-            call = InspectCall(self._mapping(value["handle"]))
+            call = decode_contract("InspectCall", value)
+            if not isinstance(call, InspectCall):
+                raise RuntimeError("generated InspectCall decoder returned the wrong type")
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
         result = self._engine.inspect(call)
@@ -159,155 +135,11 @@ class AgentToolFacade:
         definition = RESULT_KIND_TO_DEFINITION[str(value["kind"])]
         self._validate(definition, value)
 
-    @classmethod
-    def _analysis_request(cls, value: Mapping[str, object]) -> AnalysisRequest:
-        return AnalysisRequest(
-            cls._mapping(value["base_snapshot"]),
-            cls._mapping(value["proposed_snapshot"]),
-            tuple(cls._change(cls._mapping(item)) for item in value["changes"]),
-            tuple(
-                SemanticProposal(
-                    str(item["policy"]),
-                    item["accepted_semantic_revision"],
-                    int(item["proposed_semantic_revision"]),
-                    str(item["intent"]),
-                    str(item["structural_digest"]),
-                )
-                for raw in value["semantic_proposals"]
-                for item in (cls._mapping(raw),)
-            ),
-            cls._optional_mapping(value.get("prior_analysis")),
-            int(value["contract_version"]),
-        )
-
-    @classmethod
-    def _change(cls, value: Mapping[str, object]) -> ChangeDescriptor:
-        return ChangeDescriptor(
-            ChangeKind(str(value["kind"])),
-            tuple(str(item) for item in value["accepted_ids"]),
-            tuple(str(item) for item in value["proposed_ids"]),
-            cls._scope(cls._mapping(value["scope"])),
-            None if "accepted_module" not in value else str(value["accepted_module"]),
-            None if "proposed_module" not in value else str(value["proposed_module"]),
-        )
-
-    @staticmethod
-    def _scope(value: Mapping[str, object]) -> ReviewScope:
-        return ReviewScope(
-            str(value["kind"]),
-            tuple(str(item) for item in value.get("heading_path", [])),
-        )
-
-    @classmethod
-    def _submission(cls, value: Mapping[str, object]):
-        kind = value["kind"]
-        if kind == "provide-fact":
-            return ProvideFactSubmission(
-                cls._mapping(value["requirement"]),
-                cls._mapping(value["value"]),
-                cls._evidence(value["evidence"]),
-            )
-        if kind in {"consumer-disposition", "impact-disposition"}:
-            selected = (
-                ConsumerDispositionSubmission
-                if kind == "consumer-disposition"
-                else ImpactDispositionSubmission
-            )
-            return selected(
-                str(value["obligation_id"]),
-                str(value["result"]),
-                str(value["rationale"]),
-                cls._evidence(value["evidence"]),
-                cls._fingerprint(cls._mapping(value["fingerprint"])),
-            )
-        if kind == "coverage-attestation":
-            attestation = cls._mapping(value["attestation"])
-            handle = cls._mapping(attestation["handle"])
-            requirement = cls._mapping(attestation["requirement"])
-            return CoverageAttestationSubmission(
-                str(value["obligation_id"]),
-                CoverageAttestation(
-                    str(handle["id"]),
-                    str(requirement["id"]),
-                    str(attestation["conclusion"]),
-                    tuple(
-                        CoverageEvidence(
-                            item.id,
-                            item.digest,
-                            item.provider_contract,
-                            item.provider_contract_version,
-                        )
-                        for item in cls._evidence(attestation["evidence"])
-                    ),
-                    tuple(
-                        CoverageEvidence(
-                            item.id,
-                            item.digest,
-                            item.provider_contract,
-                            item.provider_contract_version,
-                        )
-                        for item in cls._evidence(
-                            attestation["explicit_exclusions"],
-                            required=False,
-                        )
-                    ),
-                    str(attestation["rationale"]),
-                    str(attestation["auditor_provenance"]),
-                    int(attestation["schema_version"]),
-                    "agent-submission",
-                ),
-            )
-        raise ValueError(f"unsupported submission kind {kind!r}")
-
-    @classmethod
-    def _fingerprint(cls, value: Mapping[str, object]) -> DecisionFingerprint:
-        return DecisionFingerprint(
-            str(value["decision_kind"]),
-            str(value["decision_contract"]),
-            tuple(
-                DecisionDependency(
-                    str(item["class"]),
-                    str(item["identity"]),
-                    str(item["digest"]),
-                )
-                for raw in value["dependencies"]
-                for item in (cls._mapping(raw),)
-            ),
-            int(value["schema_version"]),
-        )
-
-    @classmethod
-    def _evidence(
-        cls,
-        values: object,
-        *,
-        required: bool = True,
-    ) -> tuple[EvidenceReference, ...]:
-        selected = tuple(
-            EvidenceReference(
-                str(item["id"]),
-                str(item["digest"]),
-                str(item["provider_contract"]),
-                str(item["provider_contract_version"]),
-            )
-            for raw in values
-            for item in (cls._mapping(raw),)
-        )
-        if required and not selected:
-            raise ValueError("evidence is required")
-        return selected
-
     @staticmethod
     def _mapping(value: object) -> dict[str, object]:
         if not isinstance(value, Mapping):
             raise TypeError("structured tool arguments must be an object")
         return dict(value)
-
-    @staticmethod
-    def _optional_mapping(value: object) -> dict[str, object] | None:
-        if value is None:
-            return None
-        return AgentToolFacade._mapping(value)
 
     @staticmethod
     def _rejected(

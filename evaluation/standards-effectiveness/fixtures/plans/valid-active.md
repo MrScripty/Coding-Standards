@@ -18,7 +18,9 @@ Reject empty identifiers.
 
 ## Objective Acceptance
 
-Focused regression test rejects an empty identifier.
+| ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| A1 | Focused regression test rejects an empty identifier. | `contract` | `not-applicable` | `automated` | `pending` | `pending` |
 
 ## Binding Decisions
 

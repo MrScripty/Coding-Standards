@@ -24,12 +24,24 @@ from tools.standards_analysis.standards_analysis import (
     AnalysisResult,
     AnalysisState,
     AuthorizationReference,
+    ChangeDescriptor as DomainChangeDescriptor,
+    ChangeKind,
+    ConsumerDispositionSubmission as DomainConsumerDispositionSubmission,
+    CoverageAttestation as DomainCoverageAttestation,
+    CoverageAttestationSubmission as DomainCoverageAttestationSubmission,
+    CoverageEvidence,
+    DecisionDependency,
+    DecisionFingerprint,
     FactObservationProvider,
+    EvidenceReference,
+    ImpactDispositionSubmission as DomainImpactDispositionSubmission,
+    ProvideFactSubmission as DomainProvideFactSubmission,
     CoverageIndex,
     DependencyCause,
     ROUTER_PROJECTION,
     ReadingSelection,
     ReviewScope,
+    SemanticProposal as DomainSemanticProposal,
     RoutingBaseCause,
     RoutingRuleCause,
     RouteRule,
@@ -45,6 +57,7 @@ from tools.standards_analysis.standards_analysis import (
     identity,
     load_router_projection,
     prepare_analysis,
+    project_analysis,
 )
 from tools.standards_graph.standards_graph import (
     POLICY_IMPACT_REGISTRY,
@@ -107,6 +120,8 @@ class AnalysisStateStore(Protocol):
         handle: Mapping[str, object],
     ) -> AnalysisState | None: ...
 
+    def values(self) -> tuple[AnalysisState, ...]: ...
+
 
 class InMemoryAnalysisStateStore:
     def __init__(self) -> None:
@@ -133,6 +148,9 @@ class InMemoryAnalysisStateStore:
         if state is None or state.handle != dict(handle):
             return None
         return state
+
+    def values(self) -> tuple[AnalysisState, ...]:
+        return tuple(self._states[key] for key in sorted(self._states))
 
 
 class DirectoryAnalysisStateStore:
@@ -215,6 +233,19 @@ class DirectoryAnalysisStateStore:
             )
         return analysis_state_from_contract(value)
 
+    def values(self) -> tuple[AnalysisState, ...]:
+        states = []
+        for source in sorted(self._root.glob("[0-9a-f]" * 64 + ".json")):
+            handle = {
+                "kind": "analysis-handle",
+                "id": f"analysis:sha256:{source.stem}",
+                "schema_version": 2,
+            }
+            state = self.get(handle)
+            if state is not None:
+                states.append(state)
+        return tuple(states)
+
     def _path(self, handle: Mapping[str, object]) -> Path:
         identifier = str(handle.get("id", ""))
         if (
@@ -264,7 +295,6 @@ class StandardsEngine:
         self._analysis_store = analysis_store or InMemoryAnalysisStateStore()
         self._fact_providers = tuple(sorted(fact_providers, key=lambda item: item.id))
         self._navigation: dict[str, dict[str, object]] = {}
-        self._analysis_artifacts: dict[str, tuple[str, dict[str, object]]] = {}
         self._sources: dict[str, StandardsEngine] = {str(snapshot.handle["id"]): self}
         self._authorizations: dict[str, AuthorizationReference] = {}
 
@@ -444,8 +474,11 @@ class StandardsEngine:
                 accepted_authority,
                 proposed_authority,
                 AnalysisInput(
-                    request.changes,
-                    request.semantic_proposals,
+                    tuple(self._domain_change(item) for item in request.changes),
+                    tuple(
+                        self._domain_semantic_proposal(item)
+                        for item in request.semantic_proposals
+                    ),
                 ),
                 prior_state,
                 authorizations=self._authorizations.values(),
@@ -454,7 +487,6 @@ class StandardsEngine:
         except AnalysisError as error:
             return self._analysis_rejection(error)
         self._analysis_store.put(state)
-        self._register_analysis_artifacts(state, result)
         return result
 
     def resolve(
@@ -489,6 +521,7 @@ class StandardsEngine:
             )
         except AnalysisError as error:
             return self._analysis_rejection(error)
+        submission = self._domain_submission(submission)
         capability = {
             "provide-fact": "standards.analyze",
             "consumer-disposition": "standards.review.consumer",
@@ -513,7 +546,6 @@ class StandardsEngine:
         except AnalysisError as error:
             return self._analysis_rejection(error)
         self._analysis_store.put(updated)
-        self._register_analysis_artifacts(updated, result)
         return result
 
     def query(self, call: QueryCall) -> QueryResult:
@@ -700,29 +732,6 @@ class StandardsEngine:
             {"kind": result_kind, field: artifact.as_projection()}
         )
 
-    def _register_analysis_artifacts(
-        self,
-        state: AnalysisState,
-        result: AnalysisResult,
-    ) -> None:
-        context = result.context.as_contract()
-        self._analysis_artifacts[str(context["handle"]["id"])] = (
-            "analysis-context-handle",
-            context,
-        )
-        for requirement in getattr(result, "fact_requirements", ()):
-            value = requirement.as_contract()
-            self._analysis_artifacts[str(value["handle"]["id"])] = (
-                "fact-requirement-handle",
-                value,
-            )
-        for observation in state.observations:
-            value = observation.as_contract()
-            self._analysis_artifacts[str(value["handle"]["id"])] = (
-                "fact-observation-handle",
-                value,
-            )
-
     def _inspect_analysis_artifact(
         self,
         kind: object,
@@ -749,16 +758,66 @@ class StandardsEngine:
         if definition is None:
             return None
         identifier = str(handle.get("id", ""))
-        artifact = self._analysis_artifacts.get(identifier)
-        if artifact is None or artifact[0] != kind:
+        candidates: list[dict[str, object]] = []
+        for state in self._analysis_store.values():
+            if kind == "fact-observation-handle":
+                candidates.extend(
+                    observation.as_contract()
+                    for observation in state.observations
+                    if observation.handle["id"] == identifier
+                )
+                continue
+            result = self._project_stored_analysis(state)
+            if result is None:
+                continue
+            if kind == "analysis-context-handle":
+                context = result.context.as_contract()
+                if context["handle"]["id"] == identifier:
+                    candidates.append(context)
+                continue
+            candidates.extend(
+                requirement.as_contract()
+                for requirement in getattr(result, "fact_requirements", ())
+                if requirement.handle["id"] == identifier
+            )
+        unique = {
+            canonical_json_bytes(candidate): candidate for candidate in candidates
+        }
+        if not unique:
             return self._reject(
                 "ANALYSIS.UNKNOWN_ARTIFACT",
                 "unavailable",
-                "The analysis artifact is unavailable from this engine instance.",
+                "The analysis artifact is unavailable from persisted immutable states.",
                 target=identifier,
             )
+        if len(unique) != 1:
+            raise RuntimeError(
+                "one analysis artifact handle resolved to different canonical content"
+            )
         field, result_kind, result_type = definition
-        return result_type.from_value({"kind": result_kind, field: artifact[1]})
+        return result_type.from_value(
+            {"kind": result_kind, field: next(iter(unique.values()))}
+        )
+
+    def _project_stored_analysis(
+        self,
+        state: AnalysisState,
+    ) -> AnalysisResult | None:
+        accepted = self._source_for(state.base_snapshot)
+        proposed = self._source_for(state.proposed_snapshot)
+        if accepted is None or proposed is None:
+            return None
+        try:
+            kernel = bind_analysis_kernel(
+                accepted._analysis_authority(),
+                proposed._analysis_authority(),
+                state,
+                authorizations=self._authorizations.values(),
+                providers=self._fact_providers,
+            )
+            return project_analysis(kernel, state)
+        except AnalysisError:
+            return None
 
     def _analysis_authority(self) -> AnalysisAuthority:
         return AnalysisAuthority(
@@ -768,6 +827,121 @@ class StandardsEngine:
             self._graph,
             self._policy_impact,
             self._coverage,
+        )
+
+    @staticmethod
+    def _domain_change(value) -> DomainChangeDescriptor:
+        if isinstance(value, DomainChangeDescriptor):
+            return value
+        scope = value.scope
+        return DomainChangeDescriptor(
+            ChangeKind(value.kind),
+            tuple(value.accepted_ids),
+            tuple(value.proposed_ids),
+            ReviewScope(scope.kind, tuple(getattr(scope, "heading_path", ()))),
+            value.accepted_module,
+            value.proposed_module,
+        )
+
+    @staticmethod
+    def _domain_semantic_proposal(value) -> DomainSemanticProposal:
+        if isinstance(value, DomainSemanticProposal):
+            return value
+        return DomainSemanticProposal(
+            value.policy,
+            value.accepted_semantic_revision,
+            value.proposed_semantic_revision,
+            value.intent,
+            value.structural_digest,
+        )
+
+    @classmethod
+    def _domain_submission(cls, value):
+        if isinstance(
+            value,
+            (
+                DomainProvideFactSubmission,
+                DomainConsumerDispositionSubmission,
+                DomainImpactDispositionSubmission,
+                DomainCoverageAttestationSubmission,
+            ),
+        ):
+            return value
+        if value.kind == "provide-fact":
+            return DomainProvideFactSubmission(
+                dict(value.requirement),
+                dict(value.value),
+                cls._domain_evidence(value.evidence),
+            )
+        if value.kind in {"consumer-disposition", "impact-disposition"}:
+            selected = (
+                DomainConsumerDispositionSubmission
+                if value.kind == "consumer-disposition"
+                else DomainImpactDispositionSubmission
+            )
+            return selected(
+                value.obligation_id,
+                value.result,
+                value.rationale,
+                cls._domain_evidence(value.evidence),
+                DecisionFingerprint(
+                    value.fingerprint.decision_kind,
+                    value.fingerprint.decision_contract,
+                    tuple(
+                        DecisionDependency(
+                            item.class_,
+                            item.identity,
+                            item.digest,
+                        )
+                        for item in value.fingerprint.dependencies
+                    ),
+                    value.fingerprint.schema_version,
+                ),
+            )
+        if value.kind == "coverage-attestation":
+            attestation = value.attestation
+            return DomainCoverageAttestationSubmission(
+                value.obligation_id,
+                DomainCoverageAttestation(
+                    attestation.handle.id,
+                    attestation.requirement.id,
+                    attestation.conclusion,
+                    tuple(
+                        CoverageEvidence(
+                            item.id,
+                            item.digest,
+                            item.provider_contract,
+                            item.provider_contract_version,
+                        )
+                        for item in attestation.evidence
+                    ),
+                    tuple(
+                        CoverageEvidence(
+                            item.id,
+                            item.digest,
+                            item.provider_contract,
+                            item.provider_contract_version,
+                        )
+                        for item in attestation.explicit_exclusions
+                    ),
+                    attestation.rationale,
+                    attestation.auditor_provenance,
+                    attestation.schema_version,
+                    "agent-submission",
+                ),
+            )
+        raise RuntimeError(f"generated submission kind {value.kind!r} is unhandled")
+
+    @staticmethod
+    def _domain_evidence(values) -> tuple[EvidenceReference, ...]:
+        return tuple(
+            EvidenceReference(
+                item.id,
+                item.digest,
+                item.provider_contract,
+                item.provider_contract_version,
+            )
+            for item in values
         )
 
     def _source_for(
@@ -1257,7 +1431,7 @@ class StandardsEngine:
             provenance = self._provenance(selected.id, "sidecar", selected.source)
         else:
             declaration = self._module_declaration(module)
-            raw = (self._root / module.path).read_bytes()
+            raw = self._snapshot.contents[module.path]
             representation = digest_bytes(raw)
             structural = markdown_structural_digest(raw)
             provenance = self._provenance(
@@ -1347,7 +1521,7 @@ class StandardsEngine:
         return self._require_snapshot_value(observed)
 
     def _require_snapshot_value(self, observed: object) -> RejectedResult | None:
-        if observed != self._snapshot.handle:
+        if not isinstance(observed, Mapping) or dict(observed) != self._snapshot.handle:
             return self._reject(
                 "NAVIGATION.STALE_SNAPSHOT",
                 "stale",

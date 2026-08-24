@@ -1,16 +1,21 @@
 # Plan: Standards Engine Navigation And Analysis
 
-**Plan status:** `Accepted`
+**Plan status:** `Verifying`
 
-**Current phase:** A1 accepted
+**Current phase:** A1 acceptance boundary repair II
 
-**Next slice:** none; controlled authoring requires separate Plan A2 admission
+**Next slice:** commit the repaired candidate boundary and obtain an independent
+acceptance review of its exact commit and tree
 
-**Acceptance status:** `satisfied`
+**Acceptance status:** `pending`
 
-**Accepted implementation boundary:** commit
+**Withdrawn candidate implementation boundary:** commit
 `51dcd258942b0774c73ae8b620227c7ce34d1129`, tree
 `f8d028e887f4061a1d03ad6e75b9776a5fc3966b`
+
+**Withdrawn repaired acceptance boundary:** commit
+`b8f52240572962dd4393ff2d05b245a0c7f822a9`, tree
+`626c761fab2d5c5885d627f402c7b392bab12039`
 
 **Withdrawn acceptance boundary:** commit
 `94b295b40bc1cef9a6281355d68115f3a98ed112`, tree
@@ -50,14 +55,14 @@ repository mutation, and external-project application outside A1.
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | A1 | Every canonical corpus member, module ID, alias, document path, `Requires` edge, and `Specializes` edge is loaded through one neutral metadata API, and every inventoried consumer uses that API without a parallel production loader. | `integration` | `not-applicable` | `automated` | `satisfied` | [Milestone 1 acceptance](reports/milestone-1-neutral-metadata-cutover.md) |
-| A2 | Clean Git, dirty/non-Git, untracked-file, file-mode, symlink, submodule, exclusion, interpretation-affecting semantic-contract version, and integrity-closure inputs produce deterministic immutable snapshot identities under the accepted serialization contract; implementation releases that preserve those contracts remain provenance. | `contract` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
-| A3 | A typed agent can route from structured facts, receive canonical IDs, read canonical content, and navigate declared relations through follow-up requests bound to the same immutable snapshot without supplying repository paths. | `user-workflow` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
+| A2 | Clean Git, dirty/non-Git, untracked-file, file-mode, symlink, submodule, exclusion, interpretation-affecting semantic-contract version, and integrity-closure inputs produce deterministic immutable snapshot identities under the accepted serialization contract; implementation releases that preserve those contracts remain provenance. | `contract` | `not-applicable` | `automated` | `pending` | Snapshot-stable read and inspection evidence |
+| A3 | A typed agent can route from structured facts, receive canonical IDs, read canonical content, navigate declared relations, and inspect advertised handles through follow-up requests bound to the same immutable snapshot or analysis without supplying repository paths. | `user-workflow` | `not-applicable` | `automated` | `pending` | Route/read and cold-process inspection fixtures |
 | A4 | Policy-unit identity, accepted and proposed semantic state, move, split, merge, retirement, successor, alias, and unmapped normative-change rules preserve identity and produce the required typed outcomes without treating structure as semantic proof. | `contract` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
 | A5 | Modification, addition, removal, move, split, and merge select deterministic seeds, traverse the accepted/proposed relation union through the existing graph engine, retain unknown applicability, and generate every required scoped obligation. | `integration` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
 | A6 | Derived coverage requirements plus authorized attestations generate deterministic reusable certificates, reject stale or unaudited coverage, and never infer successful empty impact from absent edges or convert unknown applicability into true. | `contract` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
 | A7 | `prepare` and iterative `resolve` return a `CompleteResult` only when final reached consumer-obligation IDs equal valid disposition IDs, derived fact-requirement IDs equal valid observation requirement IDs, and every other obligation, authorization, and coverage condition is resolved. | `integration` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
-| A8 | One canonical interface schema mechanically governs Python types, JSON validation, agent-tool definitions, examples, identity-bearing serialization, result variants, derived `next_operations`, and text rendering; projection drift fails verification. | `contract` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
-| A9 | Representative modification, addition, and removal changes complete through the real typed agent adapter; move, split, and merge behavioral fixtures pass; focused package tests and affected broad repository verification pass from one recorded clean tree. | `user-workflow` | `not-applicable` | `automated` | `satisfied` | [A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) |
+| A8 | One canonical interface schema mechanically governs Python types, defaults, discriminants, nested request and submission variants, JSON validation, agent-tool definitions, examples, identity-bearing serialization, result variants, derived `next_operations`, and text rendering; projection drift fails verification. | `contract` | `not-applicable` | `automated` | `pending` | Generated-algebra semantic mutation fixtures |
+| A9 | Representative modification, addition, and removal changes complete through the real typed agent adapter; move, split, and merge behavioral fixtures pass; focused package tests and affected broad repository verification pass from one recorded clean tree. | `user-workflow` | `not-applicable` | `automated` | `pending` | Superseding final A1 acceptance report |
 
 ## Scope
 
@@ -615,10 +620,10 @@ and cross-snapshot cases fail with the required typed result; schema drift,
 serialization, package, verifier, graph, declarative, freshness, link, and plan
 checks pass from one clean recorded tree.
 
-**Status:** `Accepted` through the
-[A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md); the
+**Status:** `Verifying`; both the
+[A1 boundary repair acceptance](reports/a1-boundary-repair-acceptance.md) and
 prior [single-state acceptance](reports/milestone-4-single-state-acceptance.md)
-remains withdrawn as a historical failed boundary
+are withdrawn historical boundaries
 
 ## Blockers
 
@@ -630,11 +635,12 @@ missing independent corpus authority, failed attestation bootstrap review,
 ambiguous evidence or authorization resolution, or need to change another
 graph authority remains a re-plan trigger rather than an implicit blocker.
 
-No active issue blocks Plan A1 acceptance. SENA-021 was resolved by the exact
-repaired implementation tree and the reconciled acceptance projections. The
-single-state model remains accepted and no packet/report compatibility runtime
-exists. Controlled authoring, evidence-oracle policy, and external project
-baselines remain blocked behind their separately admitted future plans.
+SENA-022 blocks Plan A1 acceptance until schema-generated Python semantics,
+snapshot-stable inspection, cold-process artifact inspection, and complete
+plan-oracle parsing pass on one exact tree. The single-state model remains
+accepted and no packet/report compatibility runtime exists. Controlled
+authoring, evidence-oracle policy, and external project baselines remain
+blocked behind their separately admitted future plans.
 
 ## Re-Plan Triggers
 
@@ -672,8 +678,8 @@ generated artifacts remain serial integration-owner writes.
 
 ## Final Acceptance
 
-- Acceptance status: `satisfied`
+- Acceptance status: `pending`
 - Deferred follow-ups: controlled authoring, Plan B evidence-oracle recovery,
   and Plan C external project baselines remain outside A1 with their brief-owned
   prerequisites.
-- Final status: `Accepted`
+- Final status: `Verifying`
