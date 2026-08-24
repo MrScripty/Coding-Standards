@@ -16,7 +16,7 @@ At the planning base:
   Verification;
 - Verification has only `workflow.verification.acceptance-claims`;
 - policy-impact declaration sources exist only for Planning and Commit;
-- no accepted policy-impact relationship originates from Verification,
+- no accepted policy-impact relationship originates from Router, Verification,
   Contracts, Architecture, Dependencies, or a Generated Contract profile; and
 - the provider-v2 horizon has not been audited for the proposed units.
 
@@ -52,6 +52,7 @@ the four final dispositions. It is not a completion result.
 | Immutable authority closure | `topic.architecture.immutable-authority-closure` | `topic.architecture`; `Immutable Authority Closure` | Architecture has no policy-unit source and no policy-impact declaration source. | snapshot provider/store, analysis-state store, inspection, authorization/provider view, Persistence, public-interface fixture, and suite projections | `unaudited` |
 | Implementation-versus-dependency | `topic.dependencies.implementation-versus-dependency` | `topic.dependencies`; `Implementation Versus Dependency` | Dependencies has no policy-unit source and no policy-impact declaration source. | Router, planning/implementation prompt, ADR, dependency fixture, toolchain manifest, and suite projections | `unaudited` |
 | Systemic-finding re-planning | `workflow.planning.systemic-finding-replan` | `workflow.planning`; `Systemic-Finding Re-Planning` | New unit absent. Neighboring `workflow.planning.replanning` currently selects `fixtures/planning/consolidation-decisions.tsv`, `planning-consolidation`, and `prompts/planning.md`; those edges do not prove coverage for the new meaning. | planning prompt, implementation prompt, plan template, issue-record, fixture, checker, and suite projections | `unaudited`; existing Planning attestations do not cover the new unit |
+| Router completeness | `router.generated-contract-profile-applicability` | `router`; `Generated Contract Profile Applicability` | Router is a canonical module and an existing consumer of Planning/Commit policy, but it has no policy-unit source, no outgoing impact declaration source, and no coverage attestation. | executable Router projection, Generated Contract profile, planning/implementation prompts, routing fixtures, and Router suite | `unaudited` |
 | Generated Contract profile applicability | `profile.boundary.generated-contract.applicability` | new `profile.boundary.generated-contract`; `Applicability` | Module, unit, Router rule, and edges absent. | Router prose/executable projection, routing fixtures, planning/implementation prompts, and profile owner-suite projections | `unaudited` |
 | Generated Contract profile contract | `profile.boundary.generated-contract.semantic-closure` | new `profile.boundary.generated-contract`; `Semantic Closure` | Unit and edges absent. | Contracts, Verification, Build, Dependencies, generated-output, public-consumer, and suite projections | `unaudited` |
 
@@ -72,6 +73,7 @@ silent identity change.
 | `topic.architecture` | none | none | Missing source authority and unaudited consumers |
 | `topic.dependencies` | none | none | Missing source authority and unaudited consumers |
 | `workflow.planning` | `policy-impact/workflow.planning.toml` | `workflow.planning.replanning` selects the consolidation fixture, `planning-consolidation`, and `prompts/planning.md`; `workflow.planning.findings` selects the consolidation fixture and suite | Existing edges remain valid only for their exact accepted meanings; they neither authorize nor cover `workflow.planning.systemic-finding-replan` |
+| `router` | none | none outgoing; Router is currently a target of Planning and Commit relationships | Missing policy-unit source, outgoing source authority, and coverage for the materially changed Router heading |
 | `profile.boundary.generated-contract` | none | none | Module and source authority do not yet exist |
 
 ### Proposed source-owned declaration sets
@@ -83,6 +85,7 @@ silent identity change.
 | `policy-impact/topic.architecture.toml` | immutable-authority unit | snapshot providers and stores; analysis-state stores; inspection paths; authorization/provider views; Persistence; cold-process fixtures and suites |
 | `policy-impact/topic.dependencies.toml` | implementation-versus-dependency unit | Router; planning and implementation prompts; ADR decision expectations; dependency fixtures and suites; applicable toolchain manifests |
 | existing `policy-impact/workflow.planning.toml` | new systemic-finding unit | planning and implementation prompts; plan template; issue records; planning fixtures; plan checker and lifecycle suites |
+| `policy-impact/router.toml` | Generated Contract profile applicability unit | executable Router projection; Generated Contract profile; planning and implementation prompts; routing fixtures and suite |
 | `policy-impact/profile.boundary.generated-contract.toml` | applicability and semantic-closure units | Router projection and routing fixtures; required owner modules; generated artifacts and public consumers; profile fixture and owner suite |
 
 All relationship applicability is initially expected to be `always` where the
@@ -99,11 +102,12 @@ No applicability may be inferred from explanatory prose or path names.
 | `prompts/planning.md` | registered projection node | Ensure plans identify claim, domain, oracle, unsupported domain, and intended negative failure | `pending-required` |
 | `prompts/implement-plan.md` | registered projection node | Ensure implementation records evidence fidelity and stops on invalid oracle/systemic finding | `pending-required` |
 | `templates/PLAN-TEMPLATE.md` | registered projection node | Determine the minimum explicit fields needed without duplicating Verification policy | `pending-required` |
+| `workflows/documentation.md` | canonical Documentation workflow | Review durable evidence and acceptance-report projection requirements for oracle-qualified claims | `pending-required`; expected `reviewed-no-change` unless a concrete policy gap is proven |
 | `evaluation/standards-effectiveness/check-plan-structure.sh` | not currently a policy-impact node | Audit exact diagnostic and acceptance-evidence checks | `pending-required`; missing consumer registration |
 | `evaluation/standards-effectiveness/verify-plan-fixtures.sh` | not currently a policy-impact node | Require the intended exact diagnostic, not arbitrary failure | `pending-required`; missing consumer registration |
 | Verification fixture family | horizon member through suite inputs | Add valid/invalid oracle, freshness-only, local-agreement-only, mutation-domain, and isolated-negative cases | `pending-required` |
 | Verification suites and suite registry | registered horizon/suite authority | Add enforcement suites and dependencies without copied policy prose as sole oracle | `pending-required` |
-| Acceptance and candidate reports | registered documentation/reference corpus through the independent horizon | Audit claims that freshness or local agreement proves semantics | `pending-required`; relationship representation must be decided during audit |
+| Acceptance and candidate reports | registered documentation/reference corpus through the independent horizon | Audit claims that freshness or local agreement proves semantics and confirm Documentation-owned traceability | `pending-required`; relationship representation must be decided during audit |
 | `tools/standards_verifier/**` | package consumer, read-only in this plan | Confirm existing generic suite/checker support is sufficient | `pending-required`; re-plan if update is required |
 
 ### Generated-contract semantic conformance and equality
@@ -117,6 +121,8 @@ No applicability may be inferred from explanatory prose or path names.
 | `workflows/tooling.md` | canonical module | Review generator/checker selection and execution ownership | `pending-required`; expected `reviewed-no-change` unless a concrete gap is proven |
 | `profiles/boundaries/language-bindings.md` | canonical profile | Confirm it applies only to genuine native/host or cross-language representation | `pending-required` |
 | `profiles/applications/library.md` | canonical profile | Confirm public package producer/consumer proof remains required | `pending-required` |
+| `workflows/documentation.md` | canonical Documentation workflow | Confirm generated contract decisions, supported semantics, and external-conformance limits are durably projected | `pending-required`; expected `reviewed-no-change` unless a concrete policy gap is proven |
+| `topics/licensing.md` | canonical Licensing topic | Review retention of the pinned official JSON Schema Test Suite files and upstream license | `pending-required`; expected `reviewed-no-change` unless incorporation requires another artifact |
 | `tools/standards_engine/contracts/a1-contract.schema.json` | A1 runtime authority, read-only | Reproduce dialect/equality defect; do not correct in recovery | `pending-required`; expected `reviewed-no-change` for recovery and A1b-owned follow-up |
 | `tools/standards_engine/contracts/generate_contract.py` | A1 runtime implementation, read-only | Inventory generated closure and equality behavior for A1b | `pending-required`; expected `reviewed-no-change` for recovery and A1b-owned follow-up |
 | `tools/standards_engine/standards_engine/_generated_contract.py` | generated public artifact, read-only | Reproduce generated-model semantics and public result behavior | `pending-required`; expected `reviewed-no-change` for recovery and A1b-owned follow-up |
@@ -163,7 +169,9 @@ No applicability may be inferred from explanatory prose or path names.
 | Consumer | Current authority/registration | Required review | Planned disposition |
 | --- | --- | --- | --- |
 | Router prose boundary table | canonical Router | Add `generated-contract` observable condition | `pending-required` |
+| `router.generated-contract-profile-applicability` | absent policy unit | Bind the new Router heading to stable semantic identity and audited outgoing relationships | `pending-required` |
 | `routing.boundaries` fact domain and rule set | executable Router projection | Add `generated-contract` while retaining typed unresolved behavior | `pending-required` |
+| `canonical-module-corpus.toml` | canonical membership manifest | Register the new Generated Contract profile exactly once so metadata and graph composition can resolve it; treat this as module-membership authority, not a Router policy-impact edge unless the semantic audit proves such a dependency | `pending-required` |
 | Generated Contract positive fixture | absent | Select Core, Router, Planning, Implementation, Verification, Documentation, Build, Tooling, Architecture, Contracts, Dependencies, Library, Generated Contract, Persistence, and fact-selected Diagnostics/Security | `pending-required` |
 | IPC non-applicability fixture | absent | Exclude IPC when no process or independent-deployment boundary exists | `pending-required` |
 | Language Binding non-applicability fixture | absent | Exclude Language Binding when no native/host or cross-language boundary exists | `pending-required` |
@@ -175,12 +183,20 @@ No applicability may be inferred from explanatory prose or path names.
 The following are known gaps at the planning base and must be resolved before
 policy mutation can be accepted:
 
-- Router prose and `router-projection.toml` are not current policy-impact nodes.
+- Canonical Router node `router` exists and is an existing impact consumer, but
+  the executable `router-projection.toml` has no direct relationship and Router
+  has no outgoing source authority for the new policy.
+- Router has no policy-unit declaration source, outgoing impact source, or
+  coverage attestation for the materially changed Generated Contract heading.
 - Plan checkers are not current policy-impact nodes.
 - Verification, Contracts, Architecture, and Dependencies have no declaration
   sources or coverage attestations for the proposed meanings.
 - The Generated Contract profile, its policy units, Router rule, fixtures,
   suite, relationships, and attestation do not exist.
+- The canonical module corpus does not contain the future Generated Contract
+  profile.
+- The Documentation workflow and durable acceptance-report projections have
+  not been dispositioned for the new evidence and generated-contract policies.
 - A1 package files are present in the independent repository horizon but are
   not represented as reviewed policy-impact consumers for these new units.
 - Historical reports may contain acceptance-oracle claims, but their role in
