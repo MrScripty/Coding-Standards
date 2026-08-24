@@ -17,8 +17,16 @@ from tools.standards_analysis.standards_analysis import (
     AnalysisError,
     AnalysisFailure,
     CoverageIndex,
+    DependencyCause,
     ROUTER_PROJECTION,
+    ReadingSelection,
+    ReviewScope,
+    RoutingBaseCause,
+    RoutingRuleCause,
+    RouteRule,
     RouterProjection,
+    canonical_target_authority,
+    compile_reading_plan,
     compile_snapshot,
     compile_coverage,
     identity,
@@ -65,7 +73,7 @@ from .model import (
 )
 
 
-NAVIGATION_DOMAIN = "coding-standards:navigation:v1"
+NAVIGATION_DOMAIN = "coding-standards:navigation:v2"
 INTERFACE_SCHEMA = "tools/standards_engine/contracts/a1-contract.schema.json"
 
 
@@ -249,17 +257,15 @@ class StandardsEngine:
         try:
             facts = self._router.fact_schema.bind(request.facts)
             selected = set(self._router.base_modules)
-            selected_reasons: dict[str, str] = {
-                module: "routing.request" for module in self._router.base_modules
-            }
             unresolved: dict[str, set[str]] = {}
+            rule_results: list[tuple[RouteRule, str]] = []
             for rule in self._router.rules:
                 result = rule.program.evaluate(facts)
-                referenced = rule.program.referenced_facts
                 if result.truth is Truth.TRUE:
                     selected.add(rule.target)
-                    selected_reasons[rule.target] = referenced[0]
+                    rule_results.append((rule, "selected"))
                 elif result.truth is Truth.UNKNOWN:
+                    rule_results.append((rule, "unresolved"))
                     for fact in result.unresolved_facts:
                         unresolved.setdefault(fact, set()).add(rule.target)
             ordered = self._graph.dependency_order(
@@ -295,31 +301,70 @@ class StandardsEngine:
         except GraphError as error:
             return self._graph_rejection(error)
 
-        reading_plan = [
-            self._route_entry(
+        closure = set(ordered)
+        rank = {target: index for index, target in enumerate(ordered)}
+        scope = ReviewScope("whole-artifact")
+        selections = [
+            ReadingSelection(
                 target,
-                (
-                    {"kind": "routing-fact", "fact": selected_reasons[target]}
-                    if target in selected_reasons
-                    else {
-                        "kind": "requires",
-                        "source": self._dependency_source(target, set(ordered)),
-                    }
-                ),
+                scope,
+                RoutingBaseCause(self._router.id),
                 "selected",
+                0 if target in {"core", "router"} else 2,
+                rank[target],
+            )
+            for target in self._router.base_modules
+        ]
+        selections.extend(
+            ReadingSelection(
+                rule.target,
+                scope,
+                RoutingRuleCause(rule.id, rule.program.referenced_facts),
+                state,
+                2,
+                rank.get(rule.target, len(rank)),
+            )
+            for rule, state in rule_results
+        )
+        selections.extend(
+            ReadingSelection(
+                target,
+                scope,
+                DependencyCause("requires", edge.id, edge.source),
+                "selected",
+                0 if target in {"core", "router"} else 1,
+                rank[target],
             )
             for target in ordered
-        ]
-        selected_closure = set(ordered)
-        for fact, targets in sorted(unresolved.items()):
-            for target in sorted(targets - selected_closure):
-                reading_plan.append(
-                    self._route_entry(
-                        target,
-                        {"kind": "routing-fact", "fact": fact},
-                        "unresolved",
-                    )
+            for edge in (
+                view.edge
+                for view in self._graph.incoming(
+                    target,
+                    (METADATA_REQUIRES,),
                 )
+            )
+            if edge.source in closure
+        )
+        try:
+            entries = compile_reading_plan(
+                selections,
+                lambda target: canonical_target_authority(
+                    target,
+                    self._corpus,
+                    self._graph,
+                ),
+            )
+        except AnalysisError as error:
+            failure = error.failure
+            return self._reject(
+                failure.code,
+                failure.outcome,
+                failure.message,
+                details={"observed": failure.observed}
+                if failure.observed is not None
+                else {},
+            )
+        reading_plan = [entry.as_contract() for entry in entries]
         questions = [self._route_question(fact) for fact in sorted(unresolved)]
         identity_value = {
             "handle": {"snapshot": self._snapshot.handle},
@@ -347,33 +392,6 @@ class StandardsEngine:
         }
         self._navigation[str(handle["id"])] = value
         return RouteResult.from_value(value)
-
-    def _route_entry(
-        self,
-        target: str,
-        reason: dict[str, object],
-        state: str,
-    ) -> dict[str, object]:
-        module = self._modules.resolve(target)
-        assert module is not None
-        return {
-            "target": target,
-            "scope": {"kind": "whole-artifact"},
-            "authority": "contextual" if module.role == "reference" else "normative",
-            "reason": reason,
-            "state": state,
-        }
-
-    def _dependency_source(self, target: str, closure: set[str]) -> str:
-        sources = sorted(
-            edge.source
-            for edge in (view.edge for view in self._graph.incoming(target, (METADATA_REQUIRES,)))
-            if edge.source in closure
-        )
-        if "router" in sources:
-            return "router"
-        return sources[0] if sources else "router"
-
     def _route_question(self, fact_id: str) -> dict[str, object]:
         route_fact = next(item for item in self._router.facts if item.definition.id == fact_id)
         return {
@@ -641,7 +659,7 @@ class StandardsEngine:
             "kind": "navigation-handle",
             "id": identity(NAVIGATION_DOMAIN, "navigation", identity_value),
             "snapshot": self._snapshot.handle,
-            "schema_version": 1,
+            "schema_version": 2,
         }
 
     def _inspect_policy(self, requested: str) -> InspectionResult:

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v4",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v5",
   "title": "Standards Engine A1 contract",
   "description": "Canonical typed contract for snapshot-bound navigation and read-only standards-change analysis.",
   "oneOf": [
@@ -209,7 +209,7 @@
         "kind": { "const": "navigation-handle" },
         "id": { "$ref": "#/$defs/NavigationId" },
         "snapshot": { "$ref": "#/$defs/SnapshotHandle" },
-        "schema_version": { "const": 1 }
+        "schema_version": { "const": 2 }
       },
       "additionalProperties": false
     },
@@ -221,7 +221,7 @@
         "id": { "$ref": "#/$defs/PacketId" },
         "base_snapshot": { "$ref": "#/$defs/SnapshotHandle" },
         "proposed_snapshot": { "$ref": "#/$defs/SnapshotHandle" },
-        "schema_version": { "const": 2 }
+        "schema_version": { "const": 3 }
       },
       "additionalProperties": false
     },
@@ -251,7 +251,7 @@
       "properties": {
         "kind": { "const": "analysis-report-handle" },
         "id": { "$ref": "#/$defs/AnalysisReportId" },
-        "schema_version": { "const": 1 }
+        "schema_version": { "const": 2 }
       },
       "additionalProperties": false
     },
@@ -606,14 +606,80 @@
       },
       "additionalProperties": false
     },
+    "ConsumerReviewObligationReadingReason": {
+      "type": "object",
+      "required": ["kind", "obligation"],
+      "properties": {
+        "kind": { "const": "consumer-review-obligation" },
+        "obligation": { "$ref": "#/$defs/ObligationId" }
+      },
+      "additionalProperties": false
+    },
+    "RoutingBaseReadingReason": {
+      "type": "object",
+      "required": ["kind", "projection"],
+      "properties": {
+        "kind": { "const": "routing-base" },
+        "projection": { "$ref": "#/$defs/CanonicalId" }
+      },
+      "additionalProperties": false
+    },
+    "RoutingRuleReadingReason": {
+      "type": "object",
+      "required": ["kind", "rule", "facts"],
+      "properties": {
+        "kind": { "const": "routing-rule" },
+        "rule": { "$ref": "#/$defs/CanonicalId" },
+        "facts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/CanonicalId" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "RequiresReadingReason": {
+      "type": "object",
+      "required": ["kind", "edge", "source"],
+      "properties": {
+        "kind": { "const": "requires" },
+        "edge": { "$ref": "#/$defs/EdgeId" },
+        "source": { "$ref": "#/$defs/CanonicalId" }
+      },
+      "additionalProperties": false
+    },
+    "SpecializesReadingReason": {
+      "type": "object",
+      "required": ["kind", "edge", "source"],
+      "properties": {
+        "kind": { "const": "specializes" },
+        "edge": { "$ref": "#/$defs/EdgeId" },
+        "source": { "$ref": "#/$defs/CanonicalId" }
+      },
+      "additionalProperties": false
+    },
+    "ReadingPlanReason": {
+      "oneOf": [
+        { "$ref": "#/$defs/ConsumerReviewObligationReadingReason" },
+        { "$ref": "#/$defs/RoutingBaseReadingReason" },
+        { "$ref": "#/$defs/RoutingRuleReadingReason" },
+        { "$ref": "#/$defs/RequiresReadingReason" },
+        { "$ref": "#/$defs/SpecializesReadingReason" }
+      ]
+    },
     "ReadingPlanEntry": {
       "type": "object",
-      "required": ["target", "scope", "authority", "reason", "state"],
+      "required": ["target", "scope", "authority", "reasons", "state"],
       "properties": {
         "target": { "$ref": "#/$defs/CanonicalId" },
         "scope": { "$ref": "#/$defs/ReviewScope" },
         "authority": { "enum": ["normative", "projection", "contextual", "evidence"] },
-        "reason": { "$ref": "#/$defs/SelectionReason" },
+        "reasons": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/ReadingPlanReason" }
+        },
         "state": { "enum": ["selected", "conditional", "unresolved"] }
       },
       "additionalProperties": false
@@ -1017,7 +1083,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v1",
+        "domain": "coding-standards:navigation:v2",
         "include": ["handle.snapshot", "reading_plan", "unresolved_questions"],
         "exclude": ["handle.id", "next_operations", "summary"]
       }
@@ -1052,7 +1118,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v1",
+        "domain": "coding-standards:navigation:v2",
         "include": ["handle.snapshot", "policy", "content", "requires", "specializes", "related"],
         "exclude": ["handle.id", "next_operations", "summary"]
       }
@@ -1092,7 +1158,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:navigation:v1",
+        "domain": "coding-standards:navigation:v2",
         "include": ["handle.snapshot", "target", "policy_unit_mapping", "relationships"],
         "exclude": ["handle.id", "next_operations", "summary"]
       }
@@ -1221,10 +1287,10 @@
       "type": "object",
       "required": ["analysis_contract_version", "packet_schema_version", "report_schema_version", "interface_schema_version", "applicability_version", "metadata_api_version", "graph_engine_contract_version", "graph_engine_implementation_version", "analyzer_implementation_version", "parser_versions", "evidence_provider_contract_versions"],
       "properties": {
-        "analysis_contract_version": { "const": 1 },
-        "packet_schema_version": { "const": 2 },
-        "report_schema_version": { "const": 1 },
-        "interface_schema_version": { "const": 4 },
+        "analysis_contract_version": { "const": 2 },
+        "packet_schema_version": { "const": 3 },
+        "report_schema_version": { "const": 2 },
+        "interface_schema_version": { "const": 5 },
         "applicability_version": { "const": 2 },
         "metadata_api_version": { "$ref": "#/$defs/NonEmptyString" },
         "graph_engine_contract_version": { "$ref": "#/$defs/NonEmptyString" },
@@ -1272,7 +1338,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:packet:v2",
+        "domain": "coding-standards:packet:v3",
         "include": ["handle.base_snapshot", "handle.proposed_snapshot", "changes", "changed_units", "obligations", "questions", "reading_plan", "provenance.analysis_contract_version", "provenance.packet_schema_version", "provenance.interface_schema_version", "provenance.applicability_version", "provenance.metadata_api_version", "provenance.graph_engine_contract_version", "provenance.parser_versions", "provenance.evidence_provider_contract_versions"],
         "exclude": ["handle.id", "state", "next_operations", "summary", "provenance.report_schema_version", "provenance.graph_engine_implementation_version", "provenance.analyzer_implementation_version"]
       }
@@ -1630,7 +1696,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:analysis-report:v1",
+        "domain": "coding-standards:analysis-report:v2",
         "include": ["base_snapshot", "proposed_snapshot", "changes", "changed_units", "coverage_certificates", "dispositions", "reading_plan", "completion", "provenance.analysis_contract_version", "provenance.report_schema_version", "provenance.interface_schema_version", "provenance.applicability_version", "provenance.metadata_api_version", "provenance.graph_engine_contract_version", "provenance.parser_versions", "provenance.evidence_provider_contract_versions"],
         "exclude": ["handle", "state", "summary", "provenance.packet_schema_version", "provenance.graph_engine_implementation_version", "provenance.analyzer_implementation_version"]
       }

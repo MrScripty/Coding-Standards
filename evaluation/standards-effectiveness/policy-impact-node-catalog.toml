@@ -4,121 +4,121 @@ edges = []
 
 [[nodes]]
 id = "prompts/full-codebase-standards-refactor.md"
-metadata = { repository_path = "prompts/full-codebase-standards-refactor.md" }
+metadata = { repository_path = "prompts/full-codebase-standards-refactor.md", authority = "projection" }
 
 [[nodes]]
 id = "prompts/implement-plan.md"
-metadata = { repository_path = "prompts/implement-plan.md" }
+metadata = { repository_path = "prompts/implement-plan.md", authority = "projection" }
 
 [[nodes]]
 id = "prompts/planning.md"
-metadata = { repository_path = "prompts/planning.md" }
+metadata = { repository_path = "prompts/planning.md", authority = "projection" }
 
 [[nodes]]
 id = "templates/PLAN-TEMPLATE.md"
-metadata = { repository_path = "templates/PLAN-TEMPLATE.md" }
+metadata = { repository_path = "templates/PLAN-TEMPLATE.md", authority = "projection" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/authority.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/hook-bypass.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/branch-lifecycle.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/commit/task-worktree-terminal.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/README.md"
-metadata = { repository_path = "evaluation/standards-effectiveness/README.md" }
+metadata = { repository_path = "evaluation/standards-effectiveness/README.md", authority = "projection" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/implementation/plan-entrypoint-decisions.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/admission-decisions.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-applicability.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/concurrent-integration-outcomes.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/consolidation-decisions.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/template-projection-decisions.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv"
-metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv" }
+metadata = { repository_path = "evaluation/standards-effectiveness/fixtures/planning/work-slice-proportionality.tsv", authority = "evidence" }
 
 [[nodes]]
 id = "concurrent-plan-integration"
 aliases = ["evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml", suite_id = "concurrent-plan-integration" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/concurrent-plan-integration.toml", suite_id = "concurrent-plan-integration", authority = "evidence" }
 
 [[nodes]]
 id = "full-review-prompt-entrypoint"
 aliases = ["evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml", suite_id = "full-review-prompt-entrypoint" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/full-review-prompt-entrypoint.toml", suite_id = "full-review-prompt-entrypoint", authority = "evidence" }
 
 [[nodes]]
 id = "plan-implementation-entrypoint"
 aliases = ["evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml", suite_id = "plan-implementation-entrypoint" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/plan-implementation-entrypoint.toml", suite_id = "plan-implementation-entrypoint", authority = "evidence" }
 
 [[nodes]]
 id = "plan-template-projection"
 aliases = ["evaluation/standards-effectiveness/suites/plan-template-projection.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/plan-template-projection.toml", suite_id = "plan-template-projection" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/plan-template-projection.toml", suite_id = "plan-template-projection", authority = "evidence" }
 
 [[nodes]]
 id = "planning-admission"
 aliases = ["evaluation/standards-effectiveness/suites/planning-admission.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/planning-admission.toml", suite_id = "planning-admission" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/planning-admission.toml", suite_id = "planning-admission", authority = "evidence" }
 
 [[nodes]]
 id = "planning-consolidation"
 aliases = ["evaluation/standards-effectiveness/suites/planning-consolidation.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/planning-consolidation.toml", suite_id = "planning-consolidation" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/planning-consolidation.toml", suite_id = "planning-consolidation", authority = "evidence" }
 
 [[nodes]]
 id = "policy-semantic-impact"
 aliases = ["evaluation/standards-effectiveness/suites/policy-semantic-impact.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/policy-semantic-impact.toml", suite_id = "policy-semantic-impact" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/policy-semantic-impact.toml", suite_id = "policy-semantic-impact", authority = "evidence" }
 
 [[nodes]]
 id = "s1-routing"
 aliases = ["evaluation/standards-effectiveness/suites/s1-routing.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/s1-routing.toml", suite_id = "s1-routing" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/s1-routing.toml", suite_id = "s1-routing", authority = "evidence" }
 
 [[nodes]]
 id = "commit-consolidation-dispositions"
 aliases = ["evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml", suite_id = "commit-consolidation-dispositions" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/commit-consolidation-dispositions.toml", suite_id = "commit-consolidation-dispositions", authority = "evidence" }
 
 [[nodes]]
 id = "release-maintenance-policy"
 aliases = ["evaluation/standards-effectiveness/suites/release-maintenance-policy.toml"]
-metadata = { repository_path = "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml", suite_id = "release-maintenance-policy" }
+metadata = { repository_path = "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml", suite_id = "release-maintenance-policy", authority = "evidence" }
 
 [[groups]]
 id = "policy-impact"

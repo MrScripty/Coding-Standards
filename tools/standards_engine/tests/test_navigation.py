@@ -125,7 +125,7 @@ class NavigationTest(unittest.TestCase):
                 "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml",
                 "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml",
                 "evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml",
-                "docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md",
+                "docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md",
             }.issubset(scope)
         )
 
@@ -195,11 +195,55 @@ class NavigationTest(unittest.TestCase):
             direct = {
                 item["target"]
                 for item in value["reading_plan"]
-                if item["reason"]["kind"] == "routing-fact" and item["target"] != "router"
+                if any(
+                    reason["kind"] == "routing-rule"
+                    for reason in item["reasons"]
+                )
             }
             closure = {item["target"] for item in value["reading_plan"]} - {"router"}
             self.assertEqual(direct, set(routes[case]["direct_modules"].split(",")), case)
             self.assertEqual(closure, set(routes[case]["requires_closure"].split(",")), case)
+
+    def test_route_retains_direct_and_every_dependency_cause(self) -> None:
+        value = self.engine.query(
+            QueryCall(
+                self.engine.snapshot,
+                RouteRequest(
+                    self.route_facts(
+                        **{
+                            "routing.activities": [
+                                "implementation",
+                                "verification",
+                                "planning",
+                            ]
+                        }
+                    )
+                ),
+            )
+        ).as_contract()
+        entries = {item["target"]: item for item in value["reading_plan"]}
+        core_reasons = entries["core"]["reasons"]
+        implementation_reasons = entries["workflow.implementation"]["reasons"]
+        self.assertTrue(
+            any(
+                reason["kind"] == "routing-rule"
+                for reason in implementation_reasons
+            )
+        )
+        self.assertTrue(
+            any(
+                reason["kind"] == "requires"
+                for reason in implementation_reasons
+            )
+        )
+        requires = [
+            reason for reason in core_reasons if reason["kind"] == "requires"
+        ]
+        self.assertEqual(
+            len(requires),
+            len({(reason["edge"], reason["source"]) for reason in requires}),
+        )
+        self.assertGreaterEqual(len(requires), 3)
 
     def test_route_result_can_drive_same_snapshot_read(self) -> None:
         route = self.engine.query(

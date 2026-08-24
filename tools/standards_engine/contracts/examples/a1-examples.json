@@ -30,28 +30,45 @@
             "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             "schema_version": 1
           },
-          "schema_version": 1
+          "schema_version": 2
         },
         "reading_plan": [
           {
             "target": "core",
             "scope": { "kind": "whole-artifact" },
             "authority": "normative",
-            "reason": { "kind": "requires", "source": "router" },
+            "reasons": [
+              {
+                "kind": "requires",
+                "edge": "metadata-requires:router->core",
+                "source": "router"
+              }
+            ],
             "state": "selected"
           },
           {
             "target": "router",
             "scope": { "kind": "whole-artifact" },
             "authority": "normative",
-            "reason": { "kind": "routing-fact", "fact": "routing.request" },
+            "reasons": [
+              {
+                "kind": "routing-base",
+                "projection": "router.executable-projection"
+              }
+            ],
             "state": "selected"
           },
           {
             "target": "workflow.implementation",
             "scope": { "kind": "whole-artifact" },
             "authority": "normative",
-            "reason": { "kind": "routing-fact", "fact": "routing.activities" },
+            "reasons": [
+              {
+                "kind": "routing-rule",
+                "rule": "route.workflow.implementation",
+                "facts": ["routing.activities"]
+              }
+            ],
             "state": "selected"
           }
         ],
@@ -212,7 +229,7 @@
             "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
             "schema_version": 1
           },
-          "schema_version": 2
+          "schema_version": 3
         },
         "state": "needs-action",
         "changes": [
@@ -294,20 +311,12 @@
             "target": "workflow.documentation.machine-verifiable-claims",
             "scope": { "kind": "whole-artifact" },
             "authority": "normative",
-            "reason": {
-              "kind": "policy-impact-edge",
-              "source": "workflow.verification.evidence-oracle-boundary",
-              "edge": "edge.verification.documentation",
-              "relation": "documentation-projection",
-              "evidence_owner": "suite.documentation",
-              "traces": [
-                {
-                  "id": "impact-trace:sha256:abababababababababababababababababababababababababababababababab",
-                  "graph": "proposed",
-                  "applicability": "true"
-                }
-              ]
-            },
+            "reasons": [
+              {
+                "kind": "consumer-review-obligation",
+                "obligation": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+              }
+            ],
             "state": "selected"
           }
         ],
@@ -320,10 +329,10 @@
           }
         ],
         "provenance": {
-          "analysis_contract_version": 1,
-          "packet_schema_version": 2,
-          "report_schema_version": 1,
-          "interface_schema_version": 4,
+          "analysis_contract_version": 2,
+          "packet_schema_version": 3,
+          "report_schema_version": 2,
+          "interface_schema_version": 5,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -372,7 +381,7 @@
         "handle": {
           "kind": "analysis-report-handle",
           "id": "analysis-report:sha256:2222222222222222222222222222222222222222222222222222222222222222",
-          "schema_version": 1
+          "schema_version": 2
         },
         "base_snapshot": {
           "kind": "snapshot-handle",
@@ -448,20 +457,12 @@
             "target": "workflow.documentation.machine-verifiable-claims",
             "scope": { "kind": "whole-artifact" },
             "authority": "normative",
-            "reason": {
-              "kind": "policy-impact-edge",
-              "source": "workflow.verification.evidence-oracle-boundary",
-              "edge": "edge.verification.documentation",
-              "relation": "documentation-projection",
-              "evidence_owner": "suite.documentation",
-              "traces": [
-                {
-                  "id": "impact-trace:sha256:abababababababababababababababababababababababababababababababab",
-                  "graph": "proposed",
-                  "applicability": "true"
-                }
-              ]
-            },
+            "reasons": [
+              {
+                "kind": "consumer-review-obligation",
+                "obligation": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+              }
+            ],
             "state": "selected"
           }
         ],
@@ -477,10 +478,10 @@
           "evidence_valid": true
         },
         "provenance": {
-          "analysis_contract_version": 1,
-          "packet_schema_version": 2,
-          "report_schema_version": 1,
-          "interface_schema_version": 4,
+          "analysis_contract_version": 2,
+          "packet_schema_version": 3,
+          "report_schema_version": 2,
+          "interface_schema_version": 5,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -620,7 +621,7 @@
         "horizon": {
           "id": "audit-horizon.policy-impact-consumers",
           "provider": "standards-analysis:policy-impact-consumer-horizon",
-          "version": 1,
+          "version": 2,
           "digest": "sha256:8888888888888888888888888888888888888888888888888888888888888888",
           "members": [
             {
@@ -709,10 +710,10 @@
         "submodules": [],
         "exclusions": [],
         "versions": {
-          "analysis_contract_version": 1,
-          "packet_schema_version": 2,
-          "report_schema_version": 1,
-          "interface_schema_version": 4,
+          "analysis_contract_version": 2,
+          "packet_schema_version": 3,
+          "report_schema_version": 2,
+          "interface_schema_version": 5,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -756,10 +757,10 @@
           }
         ],
         "versions": {
-          "analysis_contract_version": 1,
-          "packet_schema_version": 2,
-          "report_schema_version": 1,
-          "interface_schema_version": 4,
+          "analysis_contract_version": 2,
+          "packet_schema_version": 3,
+          "report_schema_version": 2,
+          "interface_schema_version": 5,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",

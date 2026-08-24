@@ -51,7 +51,16 @@ class CoverageTest(unittest.TestCase):
             "suite-registry.toml",
             'schema_version = 1\n[[suites]]\nid = "coverage"\npath = "suites/coverage.toml"\nrequires = []\n',
         )
-        self.write("edge-sources.toml", "schema_version = 1\nsources = []\n")
+        self.write(
+            "edge-sources.toml",
+            '''
+            schema_version = 1
+            [[sources]]
+            id = "standards.policy-impact-catalog"
+            kind = "manifest"
+            path = "catalog.toml"
+            ''',
+        )
         self.write(
             "catalog.toml",
             'schema_version = 1\nsource_id = "standards.policy-impact-catalog"\nedges = []\nnodes = []\ngroups = []\n',
@@ -62,7 +71,7 @@ class CoverageTest(unittest.TestCase):
             schema_version = 1
             id = "audit-horizon.policy-impact-consumers"
             provider = "standards-analysis:policy-impact-consumer-horizon"
-            version = 1
+            version = 2
             suite_registry = "suite-registry.toml"
             edge_source_registry = "edge-sources.toml"
             policy_impact_node_catalog = "catalog.toml"
@@ -188,6 +197,59 @@ class CoverageTest(unittest.TestCase):
         self.write("inputs/consumer.md", "# Consumer\n\nNow consumes policy.\n")
         second = load_coverage_horizon(self.root, self.corpus, "horizon.toml")
         self.assertNotEqual(first.digest, second.digest)
+
+    def test_node_authority_is_snapshot_only_but_unknown_metadata_is_coverage_input(self) -> None:
+        self.write(
+            "catalog.toml",
+            '''
+            schema_version = 1
+            source_id = "standards.policy-impact-catalog"
+            edges = []
+            groups = []
+            [[nodes]]
+            id = "consumer"
+            metadata = { repository_path = "inputs/consumer.md", authority = "projection" }
+            ''',
+        )
+        first = load_coverage_horizon(self.root, self.corpus, "horizon.toml")
+
+        self.write(
+            "catalog.toml",
+            '''
+            schema_version = 1
+            source_id = "standards.policy-impact-catalog"
+            edges = []
+            groups = []
+            [[nodes]]
+            id = "consumer"
+            metadata = { repository_path = "inputs/consumer.md", authority = "evidence" }
+            ''',
+        )
+        reading_only = load_coverage_horizon(
+            self.root,
+            self.corpus,
+            "horizon.toml",
+        )
+        self.assertEqual(first.digest, reading_only.digest)
+
+        self.write(
+            "catalog.toml",
+            '''
+            schema_version = 1
+            source_id = "standards.policy-impact-catalog"
+            edges = []
+            groups = []
+            [[nodes]]
+            id = "consumer"
+            metadata = { repository_path = "inputs/consumer.md", authority = "evidence", future_discovery_field = "changed" }
+            ''',
+        )
+        discovery_unknown = load_coverage_horizon(
+            self.root,
+            self.corpus,
+            "horizon.toml",
+        )
+        self.assertNotEqual(reading_only.digest, discovery_unknown.digest)
 
     def test_unrelated_relationship_state_does_not_invalidate_view(self) -> None:
         compiled = self.compiled()

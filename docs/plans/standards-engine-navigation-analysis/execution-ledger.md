@@ -620,6 +620,54 @@
 - Reaccepted Milestone 3 through the superseding recovery report and advanced
   exactly one next slice: bounded reading-plan compilation from obligations.
 
+## 2026-08-23: Milestone 4 Reading-Plan Replan
+
+- Reopened the reading-plan slice after review proved that singular permissive
+  reasons lose Router and dependency causes and cannot reference several
+  compatible consumer obligations without copying semantic provenance.
+- Accepted one deep compiler over typed selections. It derives authority from
+  canonical target metadata, collapses exact target/scope keys, unions causes,
+  and applies deterministic state and ordering rules.
+- Bound the atomic version replacement: analysis contract 2, public interface
+  5, navigation 2, packet 3, and completed report 2.
+- Added explicit non-module authority classification to the admitted write set;
+  path, relationship kind, and reason inference remain prohibited.
+
+## 2026-08-23: Milestone 4 Horizon Projection Replan
+
+- Focused comparison proved that the 27-node catalog's identity, aliases,
+  paths, groups, and edges and all 126 compiled policy-impact semantics were
+  unchanged; only five projection and 22 evidence classifications were added.
+- Rejected both path-derived authority and immediate repeated attestation
+  renewal. Accepted a typed provider-v2 projection that excludes only
+  reading-only authority from coverage while retaining complete snapshot
+  binding.
+- Moved the node catalog from accepted Milestone 2 authority into the active
+  Milestone 4 recovery write set and admitted horizon declaration, coverage
+  attestations, tests, and final audit evidence.
+- Bound attestation renewal as the final authority step after all proposed
+  horizon-affecting inputs are frozen.
+
+## 2026-08-23: Milestone 4 Reading And Horizon Recovery
+
+- Added one typed reading-plan compiler over Router selections, dependency
+  edges, and consumer-obligation handles. Exact target/scope collapse retains
+  all canonical causes, while target metadata alone determines authority.
+- Replaced singular reading reasons and incomplete route provenance under the
+  coordinated analysis-contract 2, interface 5, navigation 2, packet 3, and
+  report 2 identity cutover.
+- Added explicit authority to all 27 registered non-module reading targets.
+  Provider-v2 coverage projection removes only this typed reading field from
+  the catalog fingerprint while the complete catalog remains snapshot-bound.
+- Froze the final 856-member horizon, recorded unchanged topology and all 126
+  compiled relationship semantics, generated the exact 28 requirement
+  handles, and renewed Planning and Commit attestations once under authorized
+  audit evidence.
+- Resolved SENA-016 and SENA-017 through the
+  [recovery acceptance](reports/milestone-4-reading-plan-recovery.md). The sole
+  next slice is packet staleness and decision reuse from exact narrower
+  dependency fingerprints.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

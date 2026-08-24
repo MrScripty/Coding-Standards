@@ -78,6 +78,21 @@ generic graph nodes and composes registered relationship providers; it contains
 no analysis behavior. `graph_engine` remains domain-neutral. The verifier
 consumes the neutral and policy-specific Modules but is not their owner.
 
+Reading-plan compilation is a deep `standards_analysis` Module. Its Interface
+accepts typed selections plus canonical target authority and returns collapsed,
+deterministically ordered entries with plural typed cause references. Consumer
+causes reference obligations and never reproduce policy-impact semantics.
+Router causes retain exact projection/rule/fact identities, while dependency
+causes retain exact graph edge and source identities. Exact target/scope
+equality is the only collapse rule in A1.
+
+The complete registered node catalog participates in `AnalysisSnapshot`.
+Coverage horizon provider version 2 separately compiles a typed discovery
+projection: it retains every catalog field except the exact reading-only
+`nodes[].metadata.authority` value. This keeps packet staleness broad while
+keeping reusable consumer-coverage identity limited to discovery semantics.
+Unknown metadata is retained rather than silently excluded.
+
 Canonical documents remain authoritative for module IDs, aliases, paths,
 `Requires`, `Specializes`, and policy meaning. A registered generic catalog
 owns non-module nodes and the existing `policy-impact` and `semantic` group
@@ -98,6 +113,12 @@ prepare(request) -> PendingPacket | CompletedAnalysisReport | RejectedResult
 resolve(packet, submission) -> PendingPacket | CompletedAnalysisReport | RejectedResult
 inspect(handle) -> InspectionResult | RejectedResult
 ```
+
+Interface version 5 uses navigation identity version 2, packet identity and
+schema version 3, completed-report identity and schema version 2, and analysis
+contract version 2. The coordinated replacement reflects plural reading-plan
+causes and deterministic collapse semantics; former identities are not
+compatibly interpreted.
 
 Native Python requests and results are typed projections of the canonical
 contract. Agent tools carry the same structures as JSON. An optional CLI or
@@ -206,11 +227,11 @@ bytes. The domains are:
 
 ```text
 coding-standards:snapshot:v1
-coding-standards:navigation:v1
-coding-standards:packet:v1
-coding-standards:obligation:v1
-coding-standards:analysis-report:v1
-coding-standards:certificate:v1
+coding-standards:navigation:v2
+coding-standards:packet:v3
+coding-standards:obligation:v2
+coding-standards:analysis-report:v2
+coding-standards:consumer-coverage-certificate:v1
 ```
 
 Human summaries, text rendering, timestamps, logging IDs, display-only order,

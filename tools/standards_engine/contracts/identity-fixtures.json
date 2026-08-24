@@ -5,13 +5,13 @@
       "name": "route-result",
       "definition": "RouteResult",
       "example": "route-result",
-      "expected": "navigation:sha256:c0d4bc14e6510bd7d3ca265c76866390d07e47321375dcb326ffe20a6fd3e5e8"
+      "expected": "navigation:sha256:ff0af4a626270cb09ffc01d855deb80b201e707366d514ae76f1a7f994665014"
     },
     {
       "name": "pending-packet",
       "definition": "PendingPacket",
       "example": "pending-packet",
-      "expected": "packet:sha256:10f44e93cd15aba64de9ffd092346bb8216743c26ebbf0ae536bf5f86794313d"
+      "expected": "packet:sha256:259595a3ecff26e0c9b3885c0bbea46df03e343de611023bf13b8636fc1f11d8"
     },
     {
       "name": "consumer-obligation",
@@ -24,7 +24,7 @@
       "name": "completed-analysis-report",
       "definition": "CompletedAnalysisReport",
       "example": "completed-analysis-report",
-      "expected": "analysis-report:sha256:e81cd419ad3c98a6faa1273166a2aaceb776f5b15750d79a2b09065c8bf42fc2"
+      "expected": "analysis-report:sha256:2a0579567534d2c826a4391ef0174c208cabf5efb88bc10d908069c184700ea9"
     },
     {
       "name": "clean-git-snapshot",

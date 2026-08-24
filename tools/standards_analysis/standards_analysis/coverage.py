@@ -33,6 +33,7 @@ DEFAULT_ATTESTATION_REGISTRY = (
 )
 HORIZON_ID = "audit-horizon.policy-impact-consumers"
 HORIZON_PROVIDER = "standards-analysis:policy-impact-consumer-horizon"
+HORIZON_VERSION = 2
 
 
 def _error(
@@ -466,6 +467,24 @@ def _file_fingerprint(root: Path, path: str) -> str:
     return digest_bytes(_repository_file(root, path).read_bytes())
 
 
+def _node_catalog_coverage_fingerprint(raw: Mapping[str, object]) -> str:
+    projected = dict(raw)
+    nodes: list[object] = []
+    for item in raw.get("nodes", []):
+        if not isinstance(item, Mapping):
+            nodes.append(item)
+            continue
+        node = dict(item)
+        metadata = item.get("metadata")
+        if isinstance(metadata, Mapping):
+            selected_metadata = dict(metadata)
+            selected_metadata.pop("authority", None)
+            node["metadata"] = selected_metadata
+        nodes.append(node)
+    projected["nodes"] = nodes
+    return _digest(projected)
+
+
 def load_coverage_horizon(
     root: Path,
     corpus: CanonicalStandardsCorpus,
@@ -496,7 +515,7 @@ def load_coverage_horizon(
         path=path,
         field="horizon",
     )
-    if raw["schema_version"] != 1 or raw["version"] != 1:
+    if raw["schema_version"] != 1 or raw["version"] != HORIZON_VERSION:
         raise _error("COVERAGE.HORIZON_VERSION", "unsupported horizon version", path=path)
     horizon_id = _text(raw["id"], path=path, field="id")
     provider = _text(raw["provider"], path=path, field="provider")
@@ -536,6 +555,11 @@ def load_coverage_horizon(
             ),
         )
 
+    node_catalog_path = _text(
+        raw["policy_impact_node_catalog"],
+        path=path,
+        field="policy_impact_node_catalog",
+    )
     edge_registry_path = _text(
         raw["edge_source_registry"], path=path, field="edge_source_registry"
     )
@@ -554,11 +578,18 @@ def load_coverage_horizon(
         source_path = source.get("path")
         if isinstance(source_path, str):
             input_sources.add(source_path)
+            fingerprint = (
+                _node_catalog_coverage_fingerprint(
+                    _toml(repo_root, source_path)
+                )
+                if source_path == node_catalog_path
+                else _file_fingerprint(repo_root, source_path)
+            )
             _merge_member(
                 members,
                 f"repository:{source_path}",
                 "edge-source-manifest",
-                _file_fingerprint(repo_root, source_path),
+                fingerprint,
             )
 
     suite_registry_path = _text(
@@ -601,11 +632,6 @@ def load_coverage_horizon(
                 _file_fingerprint(repo_root, input_path),
             )
 
-    node_catalog_path = _text(
-        raw["policy_impact_node_catalog"],
-        path=path,
-        field="policy_impact_node_catalog",
-    )
     input_sources.add(node_catalog_path)
     node_catalog = _toml(repo_root, node_catalog_path)
     for node in node_catalog.get("nodes", []):

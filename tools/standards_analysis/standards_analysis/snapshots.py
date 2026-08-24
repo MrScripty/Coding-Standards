@@ -22,16 +22,16 @@ class AnalysisVersions:
     analyzer_implementation_version: str = "1"
     parser_versions: tuple[tuple[str, str], ...] = (("markdown-heading", "1"),)
     evidence_provider_contract_versions: tuple[tuple[str, str], ...] = (
-        ("policy-impact-consumer-horizon", "1"),
+        ("policy-impact-consumer-horizon", "2"),
         ("repository-content", "1"),
     )
 
     def as_contract(self) -> dict[str, object]:
         return {
-            "analysis_contract_version": 1,
-            "packet_schema_version": 2,
-            "report_schema_version": 1,
-            "interface_schema_version": 4,
+            "analysis_contract_version": 2,
+            "packet_schema_version": 3,
+            "report_schema_version": 2,
+            "interface_schema_version": 5,
             "applicability_version": 2,
             "metadata_api_version": self.metadata_api_version,
             "graph_engine_contract_version": self.graph_engine_contract_version,

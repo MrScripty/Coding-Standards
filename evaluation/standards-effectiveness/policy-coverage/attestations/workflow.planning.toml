@@ -1,121 +1,121 @@
 schema_version = 1
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:37ecc63a6deeb3963582427a2cf1e8d9c353fdf9b6da39dda502e1077d79c265"
+requirement = "coverage-requirement:sha256:5c2b01c95c98cee8e87c8aec30d497f4ab1ea78d9fbf11420a128f2893f667ce"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.written-plan-applicability revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.written-plan-applicability revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:a408a4979cce1da087e733c329f15f090a32a47e88935568b21bb2c7d809bb7c"
+requirement = "coverage-requirement:sha256:cb53bb0a99d8702b202d47d8f5d396c6fecce3388430ac78b8ea5146e8af3c47"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.artifact-model revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.artifact-model revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:f49e2990c94b797762ed0aa512e70d61a5d46440283061ed98e80411c7f8cb92"
+requirement = "coverage-requirement:sha256:05ef4b1d1e0ac33078b19b085c9e9f1e08dd893ca6bd335c3d4117d934745363"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.active-plan-fields revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.active-plan-fields revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:766fde084ab80dff6b78f3809164911aa33118a01302b2188b6b198be5437ea5"
+requirement = "coverage-requirement:sha256:8f24e30804adadfdddc56154fe240f78c3bc33654ffc083a872c6e5b8994dc79"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.lifecycle revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.lifecycle revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:63cb73fc39585de73d824d2477b0dfc89fb6c8e848d7e317adf7faf1f42a9b6a"
+requirement = "coverage-requirement:sha256:32b8bb619fa8db00f206f95b2e98d73e3becec3b96259d68bb19644bc539891c"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.plan-admission revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.plan-admission revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:93c45b91b95760f390c0280c27a0ad225e45373d16d842672217a855c799d144"
+requirement = "coverage-requirement:sha256:2497a0d4eddcc8da4327656e5f55119b04ceb058dc7926b31e1603a0272aca0c"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.concurrent-integration-routing revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.concurrent-integration-routing revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:c1bea36a9e89b076109395b680352ea3a5b2f0c98d6f84908ff2a96843001286"
+requirement = "coverage-requirement:sha256:e9e2b4c204e3ad6bb2b51fcff1cd191d9202a2ed6af616096252053e380805fa"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.repository-isolation revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.repository-isolation revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:48895697e6053e3f8355719f858406ec42d8374e67f7a72319be805176a73213"
+requirement = "coverage-requirement:sha256:757280755de382a471111f6eb355dc8f1d94033d903281edb3fe60d6634da73a"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.projection-completeness revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.projection-completeness revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:5fee3296b793a31195284604e5b5acfe0a1f1a2cdc008ad20f98b87da025bbc1"
+requirement = "coverage-requirement:sha256:c25c9107721a3af5bec22254f7ea872ea58af937356fb06aea930d9841708244"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.acceptance-claims revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.acceptance-claims revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:34defbec5369c5147855fccb8cdcc77d0af53a14359d44a6eda70dce4026199c"
+requirement = "coverage-requirement:sha256:741b0af7768d9ebec4a0e8a066f088ce0c1f9307d2d8483ae355c3f35943db7d"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.milestones-and-slices revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.milestones-and-slices revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:adfa29f33a19d4842be655eaac11293b36d87ec1e52e2e6205519ea643c7304c"
+requirement = "coverage-requirement:sha256:221ef10d09916ad01cc67479c7626372fef3b104f9ebe5bedc1eed6477ca300e"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.current-state revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.current-state revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:bcceae1d7c399cf48ecc638c8d7e7eae0baff1d94373573ca61979365ed3c19c"
+requirement = "coverage-requirement:sha256:653c30208749f2a7ff0f447c87fee48c0c0d7ace642a351650ffe7ff30dd5983"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.replanning revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.replanning revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:d93a3f29aa63b40ef3007cc85c83bbb28f5f94ece4660ddf2eb9d9786efcfc27"
+requirement = "coverage-requirement:sha256:96d5d208a0136aa9c312dde71e39a4120f7b2a209cc787b7412cc78fc24c0137"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.findings revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.findings revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:449e585edc8754a49870520ce3d92611f34d12b9a06ef855843e97123d3e366b"
+requirement = "coverage-requirement:sha256:e65477fd68662fc92af741852061f92f296c0e8a69362beb480e1461e1d562fb"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.concurrent-work revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.concurrent-work revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"
 
 [[attestations]]
-requirement = "coverage-requirement:sha256:89a2a31b8f64575a62b18044c6577c22b568edfcb36b5934d214cc43b6b34626"
+requirement = "coverage-requirement:sha256:51ef94620130eec55db2a69f9edb66261c2d745684f0265fb8f0f1fe792cc884"
 conclusion = "complete"
-evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-3-policy-unit-coverage-bootstrap.md"]
+evidence = ["docs/plans/standards-engine-navigation-analysis/reports/milestone-4-horizon-v2-audit.md"]
 explicit_exclusions = []
-rationale = "The exact workflow.planning.completion revision-1 coverage requirement was reviewed against the registered independent horizon."
-auditor_provenance = "repository-reviewed:planning-policy-unit-baseline"
+rationale = "The exact workflow.planning.completion revision-1 coverage requirement was reviewed against the final provider-v2 independent horizon."
+auditor_provenance = "standards.review.audit:user-authorized:horizon-v2-reading-authority"

@@ -4,8 +4,8 @@
 
 **Current phase:** Milestone 4 packets, resolution, and A1 acceptance
 
-**Next slice:** compile bounded deterministic reading plans from authoritative
-obligations without independently traversing policy-impact relationships
+**Next slice:** implement packet staleness and decision reuse from exact
+narrower dependency fingerprints
 
 **Acceptance status:** `pending`
 
@@ -215,6 +215,8 @@ plan or shared-authority proposals can become stale before integration.
 | Audit horizon | `audit-horizon.policy-impact-consumers` version 1 derives typed members and content fingerprints from canonical modules, policy units, registered graph providers, every registered suite and its declared repository inputs, plus the policy-impact node catalog as a supplement. Existing policy-impact declarations and nodes are not sufficient horizon authority. | [Coverage identity replan](reports/milestone-3-coverage-identity-replan.md#audit-horizon) | `policy-impact-declarations:v1` and any horizon derived only from relationships under audit |
 | Completion | Analysis completion is mechanically derived from the final reached-obligation set and exact valid disposition set plus every other typed obligation. | [Brief report invariant](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#exact-completedanalysisreport-invariant) | Authored or unchecked complete flags |
 | Consumer review aggregation | Applicable policy-impact traces compile into one obligation per exact `(consumer, scope, review-contract)` key. One canonical aggregate derives plural typed reasons, required evidence owners, and the decision fingerprint; unknown traces remain separate applicability work. | [Consumer-obligation recovery](reports/milestone-3-consumer-obligation-replan.md) | Singular source/reason obligations, one review per edge, or reading-plan impact reinterpretation |
+| Reading-plan projection | Reading plans are derived navigation over consumer obligations, Router selections, and dependency edges. One compiler collapses exact target/scope keys, unions typed cause references, derives authority from canonical target metadata, and applies deterministic state and ordering rules without traversing policy-impact relationships. Reading-plan compilation semantics advance the analysis contract to version 2; the coordinated public/interface identities advance to interface 5, navigation 2, packet 3, and report 2. | [Milestone 4 reading-plan replan](reports/milestone-4-reading-plan-replan.md) | Singular reasons, fake routing facts, one-parent dependency provenance, or reading-plan policy-impact interpretation |
+| Coverage projection for reading authority | The complete node catalog remains an `AnalysisSnapshot` input. Audit-horizon provider version 2 removes only the typed reading-only `nodes[].metadata.authority` field from that catalog's coverage fingerprint and retains every other current or future field. Horizon-affecting implementation freezes before one final reviewed attestation renewal. | [Milestone 4 horizon projection replan](reports/milestone-4-horizon-projection-replan.md) | Opaque whole-manifest coverage fingerprints, path inference, broad ignored directories, or repeated mid-slice attestation renewal |
 | Agent evidence | A1 acceptance requires real typed route/read and iterative prepare/resolve workflows, not schema inspection alone. | [Brief agent evidence](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#24-required-a1-agent-evidence) | Interface usability inferred from declarations |
 | Canonical schema | JSON Schema Draft 2020-12 plus documented Standards Engine annotations is the sole A1 machine contract; generated Python and agent-tool projections must pass deterministic conformance. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md) and [Milestone 0 review](reports/milestone-0-architecture-contract-review.md) | Independent Python, JSON, tool, example, identity, or renderer contracts |
 | Snapshot bootstrap | A trusted source provider issues the initial opaque snapshot handle; caller operations remain explicitly handle-bound and cannot fall back to ambient current state. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md#public-interface) | Caller repository paths or implicit current-tree lookup |
@@ -511,9 +513,15 @@ rendering, then accept the objective from one exact repository state.
 
 - `tools/standards_analysis/**`
 - `tools/standards_engine/**`
+- `tools/standards_verifier/tests/test_policy_impact.py`
+- `evaluation/standards-effectiveness/policy-impact-node-catalog.toml`
+- `evaluation/standards-effectiveness/policy-coverage/horizons.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml`
+- `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.commit.toml`
 - `evaluation/standards-effectiveness/fixtures/standards-engine/**`
 - `evaluation/standards-effectiveness/suites/standards-engine-navigation-analysis.toml`
 - `evaluation/standards-effectiveness/suite-registry.toml`
+- `docs/decisions/standards-engine-navigation-analysis.md`
 - `docs/plans/standards-engine-navigation-analysis/**`
 
 **Tasks:**
@@ -521,8 +529,17 @@ rendering, then accept the objective from one exact repository state.
 - [x] Implement immutable packets, stable obligation identities, typed
   questions and submissions, required evidence, and state-derived next
   operations.
-- [ ] Implement bounded reading plans with deterministic dependency and scope
-  ordering.
+- [x] Replace the opaque node-catalog horizon fingerprint with the typed
+  provider-v2 coverage projection; keep the complete catalog in snapshot
+  closure and prove reading-only authority changes do not alter coverage.
+- [x] Implement the typed plural-cause reading-plan compiler, explicit
+  canonical target authority, exact target/scope collapse, deterministic state
+  and ordering, complete Router and dependency provenance, and consumer entries
+  derived only from authoritative obligations.
+- [x] Freeze every horizon-affecting input, record the 27 node dispositions and
+  unchanged topology/compiled semantics, generate the exact 28 requirements,
+  and renew Planning and Commit attestations once with authorized audit
+  evidence as the final authority step.
 - [ ] Implement packet staleness and decision reuse from exact narrower
   dependency fingerprints.
 - [ ] Derive `CompletedAnalysisReport` only from exact final reached/disposition

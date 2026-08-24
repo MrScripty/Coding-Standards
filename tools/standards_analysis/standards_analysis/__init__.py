@@ -53,6 +53,17 @@ from .routing import (
     load_router_projection,
 )
 from .snapshots import AnalysisVersions, compile_snapshot
+from .reading import (
+    ConsumerReviewObligationCause,
+    DependencyCause,
+    ReadingPlanEntry,
+    ReadingSelection,
+    RoutingBaseCause,
+    RoutingRuleCause,
+    canonical_target_authority,
+    compile_reading_plan,
+    consumer_reading_selections,
+)
 from .packets import (
     ConsumerDispositionSubmission,
     CoverageAttestationSubmission,
@@ -61,7 +72,6 @@ from .packets import (
     ImpactDispositionSubmission,
     NextOperation,
     PendingPacket,
-    ReadingPlanEntry,
     Submission,
     build_pending_packet,
 )
@@ -111,6 +121,7 @@ __all__ = (
     "ConsumerReviewContract",
     "ConsumerSelection",
     "ConsumerSelectionReason",
+    "ConsumerReviewObligationCause",
     "ConsumerTraceReference",
     "ConsumerCoverageCertificate",
     "CoverageAttestationSubmission",
@@ -126,6 +137,7 @@ __all__ = (
     "DecisionDependency",
     "DecisionContract",
     "DecisionFingerprint",
+    "DependencyCause",
     "EvidenceReference",
     "EVIDENCE_PROVIDER_CONTRACT_VERSION",
     "GraphSeedSelection",
@@ -146,6 +158,9 @@ __all__ = (
     "RouterProjection",
     "ReviewScope",
     "ReadingPlanEntry",
+    "ReadingSelection",
+    "RoutingBaseCause",
+    "RoutingRuleCause",
     "STANDARDS_REQUIRES",
     "STANDARDS_SPECIALIZES",
     "SemanticProposal",
@@ -155,8 +170,11 @@ __all__ = (
     "canonical_json_bytes",
     "build_pending_packet",
     "classify_changes",
+    "canonical_target_authority",
+    "compile_reading_plan",
     "compile_coverage",
     "compile_snapshot",
+    "consumer_reading_selections",
     "digest_bytes",
     "derive_coverage_requirement",
     "derive_coverage_view",

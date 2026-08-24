@@ -178,7 +178,7 @@ class PolicyImpactTest(unittest.TestCase):
             schema_version = 1
             id = "audit-horizon.policy-impact-consumers"
             provider = "standards-analysis:policy-impact-consumer-horizon"
-            version = 1
+            version = 2
             suite_registry = "evaluation/standards-effectiveness/suite-registry.toml"
             edge_source_registry = "evaluation/standards-effectiveness/edge-source-registry.toml"
             policy_impact_node_catalog = "catalog.toml"

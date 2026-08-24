@@ -152,20 +152,12 @@ class PendingPacketTest(unittest.TestCase):
                     "workflow.consumer",
                     SCOPE,
                     "normative",
-                    {
-                        "kind": "policy-impact-edge",
-                        "source": "workflow.test.policy",
-                        "edge": "edge.test",
-                        "relation": "normative-consumer",
-                        "evidence_owner": "suite.test",
-                        "traces": [
-                            {
-                                "id": "impact-trace:sha256:" + "1" * 64,
-                                "graph": "proposed",
-                                "applicability": "true",
-                            }
-                        ],
-                    },
+                    (
+                        {
+                            "kind": "consumer-review-obligation",
+                            "obligation": selected_obligation.id,
+                        },
+                    ),
                     "selected",
                 ),
             ),

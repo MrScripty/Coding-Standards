@@ -10,10 +10,11 @@ from .coverage import CoverageAttestation
 from .errors import AnalysisError, AnalysisFailure
 from .obligations import ApplicabilityQuestion, DecisionFingerprint, Obligation
 from .serialization import canonical_json_bytes, identity
+from .reading import ReadingPlanEntry
 from .snapshots import AnalysisVersions
 
 
-PACKET_DOMAIN = "coding-standards:packet:v2"
+PACKET_DOMAIN = "coding-standards:packet:v3"
 DIGEST_PATTERN = re.compile(r"^sha256:[0-9a-f]{64}$")
 SNAPSHOT_PATTERN = re.compile(r"^snapshot:sha256:[0-9a-f]{64}$")
 
@@ -57,27 +58,6 @@ def _snapshot(value: Mapping[str, object], field: str) -> Mapping[str, object]:
             observed=field,
         )
     return _freeze(copied)  # type: ignore[return-value]
-
-
-@dataclass(frozen=True, slots=True)
-class ReadingPlanEntry:
-    target: str
-    scope: ReviewScope
-    authority: str
-    reason: Mapping[str, str]
-    state: str
-
-    def __post_init__(self) -> None:
-        object.__setattr__(self, "reason", _freeze(self.reason))
-
-    def as_contract(self) -> dict[str, object]:
-        return {
-            "target": self.target,
-            "scope": self.scope.as_contract(),
-            "authority": self.authority,
-            "reason": _thaw(self.reason),
-            "state": self.state,
-        }
 
 
 @dataclass(frozen=True, slots=True)
@@ -275,7 +255,7 @@ class PendingPacket:
             "id": self.id,
             "base_snapshot": _thaw(self.base_snapshot),
             "proposed_snapshot": _thaw(self.proposed_snapshot),
-            "schema_version": 2,
+            "schema_version": 3,
         }
 
     def as_contract(self) -> dict[str, object]:
