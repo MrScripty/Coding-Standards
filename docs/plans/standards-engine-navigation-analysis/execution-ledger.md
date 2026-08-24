@@ -990,6 +990,28 @@
 - Kept Plan A1 `Verifying`, retained SENA-022 as active, and left Plan A2
   inactive while Repair VI corrected the public import and test matrix.
 
+## 2026-08-24: A1 Boundary Repair VI Implemented
+
+- Recorded the repair implementation at commit
+  `2359a98740b6035a0414bfaf5427ceaa1301a1c8`, tree
+  `97c850ab718287007c1e1daac538f40869f71a1d`.
+- Changed generated code to import `canonical_json_bytes` from the documented
+  public `standards_metadata` package entry point rather than its internal
+  serialization module.
+- Completed the differential matrix for both const and enum constraints with
+  Boolean against integer and integer against Boolean inputs, while retaining
+  the Unicode normalization cases and unique-items coverage.
+- Verified 82 analysis tests, 45 Standards Engine tests, 18 metadata tests, 12
+  applicability tests, 7 policy-impact tests, 35 graph-engine tests, 2
+  standards-graph tests, 380 verifier tests, 33 contract examples, 8 identity
+  fixtures, all 218 declarative suites, every current plan, and the complete
+  checkpoint with 53 retained Bash checkers. Generated freshness, scoped Ruff,
+  and Git diff integrity also passed.
+- Plan A1 remains `Verifying`, SENA-022 remains active pending independent
+  acceptance review, and Plan A2 remains inactive.
+- Published the exact evidence as
+  [A1 boundary repair VI candidate](reports/a1-boundary-repair-vi-candidate.md).
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,
