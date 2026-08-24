@@ -521,6 +521,33 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertIsInstance(second, PendingResult)
         self.assertEqual(second.fact_requirements, ())
         self.assertGreater(len(second.obligations), 1)
+        self.engine._register_analysis_artifacts(initial_state, first)
+        self.engine._register_analysis_artifacts(state, second)
+        inspection_cases = (
+            (
+                first.context.handle,
+                "AnalysisContextInspectionResult",
+                "context",
+                first.context.as_contract(),
+            ),
+            (
+                requirement.handle,
+                "FactRequirementInspectionResult",
+                "requirement",
+                requirement.as_contract(),
+            ),
+            (
+                state.observations[0].handle,
+                "FactObservationInspectionResult",
+                "observation",
+                state.observations[0].as_contract(),
+            ),
+        )
+        for handle, definition, field, expected in inspection_cases:
+            with self.subTest(definition=definition):
+                inspected = self.engine.inspect(InspectCall(handle)).as_contract()
+                validate(SCHEMA, SCHEMA["$defs"][definition], inspected, "$inspect")
+                self.assertEqual(inspected[field], expected)
         repeated_state, repeated = advance_analysis(
             kernel,
             initial_state,

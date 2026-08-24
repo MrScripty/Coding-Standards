@@ -230,9 +230,7 @@ class CoverageAuthorityView:
             "relationship_kind_contract_version": self.relationship_kind_contract_version,
             "relationship_provider_contract_digest": self.relationship_provider_contract_digest,
             "applicability_language_version": self.applicability_language_version,
-            "applicability_program_digests": list(
-                self.applicability_program_digests
-            ),
+            "applicability_program_digests": list(self.applicability_program_digests),
             "fact_schema_digest": self.fact_schema_digest,
             "horizon": {
                 "id": self.horizon_id,
@@ -297,7 +295,7 @@ class CoverageAuditRequirement:
             value["derived_from_snapshot"] = {
                 "kind": "snapshot-handle",
                 "id": self.derived_from_snapshot,
-                "schema_version": 1,
+                "schema_version": 2,
             }
         return value
 
@@ -518,7 +516,9 @@ def load_coverage_horizon(
         field="horizon",
     )
     if raw["schema_version"] != 1 or raw["version"] != HORIZON_VERSION:
-        raise _error("COVERAGE.HORIZON_VERSION", "unsupported horizon version", path=path)
+        raise _error(
+            "COVERAGE.HORIZON_VERSION", "unsupported horizon version", path=path
+        )
     horizon_id = _text(raw["id"], path=path, field="id")
     provider = _text(raw["provider"], path=path, field="provider")
     if horizon_id != HORIZON_ID or provider != HORIZON_PROVIDER:
@@ -569,7 +569,11 @@ def load_coverage_horizon(
     edge_registry = _toml(repo_root, edge_registry_path)
     for source in edge_registry.get("sources", []):
         if not isinstance(source, dict):
-            raise _error("COVERAGE.EDGE_SOURCE", "edge source must be a table", path=edge_registry_path)
+            raise _error(
+                "COVERAGE.EDGE_SOURCE",
+                "edge source must be a table",
+                path=edge_registry_path,
+            )
         source_id = _text(source.get("id"), path=edge_registry_path, field="id")
         _merge_member(
             members,
@@ -581,9 +585,7 @@ def load_coverage_horizon(
         if isinstance(source_path, str):
             input_sources.add(source_path)
             fingerprint = (
-                _node_catalog_coverage_fingerprint(
-                    _toml(repo_root, source_path)
-                )
+                _node_catalog_coverage_fingerprint(_toml(repo_root, source_path))
                 if source_path == node_catalog_path
                 else _file_fingerprint(repo_root, source_path)
             )
@@ -601,7 +603,11 @@ def load_coverage_horizon(
     suite_registry = _toml(repo_root, suite_registry_path)
     for entry in suite_registry.get("suites", []):
         if not isinstance(entry, dict):
-            raise _error("COVERAGE.SUITE", "suite registration must be a table", path=suite_registry_path)
+            raise _error(
+                "COVERAGE.SUITE",
+                "suite registration must be a table",
+                path=suite_registry_path,
+            )
         suite_id = _text(entry.get("id"), path=suite_registry_path, field="id")
         suite_path = _text(entry.get("path"), path=suite_registry_path, field="path")
         input_sources.add(suite_path)
@@ -617,7 +623,12 @@ def load_coverage_horizon(
             members,
             f"suite:{suite_id}",
             "registered-suite",
-            _digest({"registration": entry, "content": _file_fingerprint(repo_root, suite_path)}),
+            _digest(
+                {
+                    "registration": entry,
+                    "content": _file_fingerprint(repo_root, suite_path),
+                }
+            ),
         )
         _merge_member(
             members,
@@ -638,10 +649,16 @@ def load_coverage_horizon(
     node_catalog = _toml(repo_root, node_catalog_path)
     for node in node_catalog.get("nodes", []):
         if not isinstance(node, dict):
-            raise _error("COVERAGE.NODE", "policy-impact node must be a table", path=node_catalog_path)
+            raise _error(
+                "COVERAGE.NODE",
+                "policy-impact node must be a table",
+                path=node_catalog_path,
+            )
         node_id = _text(node.get("id"), path=node_catalog_path, field="id")
         metadata = node.get("metadata", {})
-        repository_path = metadata.get("repository_path") if isinstance(metadata, dict) else None
+        repository_path = (
+            metadata.get("repository_path") if isinstance(metadata, dict) else None
+        )
         fingerprint = (
             _file_fingerprint(repo_root, repository_path)
             if isinstance(repository_path, str)
@@ -804,7 +821,11 @@ def _load_attestations(
         field="registry",
     )
     if registry["schema_version"] != 1:
-        raise _error("COVERAGE.ATTESTATION_VERSION", "unsupported attestation registry version", path=path)
+        raise _error(
+            "COVERAGE.ATTESTATION_VERSION",
+            "unsupported attestation registry version",
+            path=path,
+        )
     sources = _texts(registry["sources"], path=path, field="sources", allow_empty=True)
     result: list[CoverageAttestation] = []
     input_sources = {path}
@@ -820,10 +841,18 @@ def _load_attestations(
             field="source",
         )
         if raw["schema_version"] != 1 or not isinstance(raw["attestations"], list):
-            raise _error("COVERAGE.ATTESTATION_VERSION", "unsupported attestation source version", path=source_path)
+            raise _error(
+                "COVERAGE.ATTESTATION_VERSION",
+                "unsupported attestation source version",
+                path=source_path,
+            )
         for item in raw["attestations"]:
             if not isinstance(item, dict):
-                raise _error("COVERAGE.ATTESTATION", "attestation must be a table", path=source_path)
+                raise _error(
+                    "COVERAGE.ATTESTATION",
+                    "attestation must be a table",
+                    path=source_path,
+                )
             _exact(
                 item,
                 required={
@@ -847,7 +876,11 @@ def _load_attestations(
             )
             conclusion = _text(item["conclusion"], path=source_path, field="conclusion")
             if conclusion != "complete":
-                raise _error("COVERAGE.ATTESTATION_CONCLUSION", "only complete attestations can certify coverage", path=source_path)
+                raise _error(
+                    "COVERAGE.ATTESTATION_CONCLUSION",
+                    "only complete attestations can certify coverage",
+                    path=source_path,
+                )
             evidence_paths = _texts(
                 item["evidence"], path=source_path, field="evidence"
             )
@@ -868,14 +901,22 @@ def _load_attestations(
                 for path in exclusion_paths
             )
             content = {
-                "requirement": _text(item["requirement"], path=source_path, field="requirement"),
+                "requirement": _text(
+                    item["requirement"], path=source_path, field="requirement"
+                ),
                 "conclusion": conclusion,
                 "evidence": [reference.as_projection() for reference in evidence],
                 "explicit_exclusions": [
                     reference.as_projection() for reference in exclusions
                 ],
-                "rationale": _text(item["rationale"], path=source_path, field="rationale"),
-                "auditor_provenance": _text(item["auditor_provenance"], path=source_path, field="auditor_provenance"),
+                "rationale": _text(
+                    item["rationale"], path=source_path, field="rationale"
+                ),
+                "auditor_provenance": _text(
+                    item["auditor_provenance"],
+                    path=source_path,
+                    field="auditor_provenance",
+                ),
                 "schema_version": raw["schema_version"],
             }
             handle = identity(
@@ -884,7 +925,12 @@ def _load_attestations(
                 content,
             )
             if handle in seen:
-                raise _error("COVERAGE.DUPLICATE_ATTESTATION", "attestation content is duplicated", path=source_path, observed=handle)
+                raise _error(
+                    "COVERAGE.DUPLICATE_ATTESTATION",
+                    "attestation content is duplicated",
+                    path=source_path,
+                    observed=handle,
+                )
             seen.add(handle)
             result.append(
                 CoverageAttestation(
@@ -1071,7 +1117,9 @@ def compile_coverage(
         repo_root,
         attestation_registry_path,
     )
-    by_requirement = {requirement.handle: unit_id for unit_id, requirement in requirements.items()}
+    by_requirement = {
+        requirement.handle: unit_id for unit_id, requirement in requirements.items()
+    }
     certificates: dict[str, ConsumerCoverageCertificate] = {}
     attestation_index: dict[str, CoverageAttestation] = {}
     for attestation in attestations:

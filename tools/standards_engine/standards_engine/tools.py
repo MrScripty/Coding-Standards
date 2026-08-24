@@ -23,6 +23,7 @@ from tools.standards_analysis.standards_analysis import (
 )
 from tools.standards_engine.contracts.validate_contracts import ContractError, validate
 
+from ._generated_contract import RESULT_KIND_TO_DEFINITION
 from .engine import AnalysisStateStore, StandardsEngine
 from .model import (
     AnalysisRequest,
@@ -100,52 +101,51 @@ class AgentToolFacade:
                 )
             else:
                 return self._rejected("INTERFACE.UNSUPPORTED_REQUEST", "unsupported")
-            result = self._engine.query(
-                QueryCall(self._mapping(value["snapshot"]), typed)
-            )
-            output = result.as_contract()
-            self._validate_result(output)
-            return output
+            call = QueryCall(self._mapping(value["snapshot"]), typed)
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
+        result = self._engine.query(call)
+        output = result.as_contract()
+        self._validate_result(output)
+        return output
 
     def prepare(self, arguments: object) -> dict[str, object]:
         try:
             value = self._mapping(arguments)
             self._validate("PrepareCall", value)
             request = self._mapping(value["request"])
-            result = self._engine.prepare(self._analysis_request(request))
-            output = result.as_contract()
-            self._validate_result(output)
-            return output
+            typed = self._analysis_request(request)
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
+        result = self._engine.prepare(typed)
+        output = result.as_contract()
+        self._validate_result(output)
+        return output
 
     def resolve(self, arguments: object) -> dict[str, object]:
         try:
             value = self._mapping(arguments)
             self._validate("ResolveCall", value)
             submission = self._submission(self._mapping(value["submission"]))
-            result = self._engine.resolve(
-                self._mapping(value["analysis"]),
-                submission,
-            )
-            output = result.as_contract()
-            self._validate_result(output)
-            return output
+            analysis = self._mapping(value["analysis"])
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
+        result = self._engine.resolve(analysis, submission)
+        output = result.as_contract()
+        self._validate_result(output)
+        return output
 
     def inspect(self, arguments: object) -> dict[str, object]:
         try:
             value = self._mapping(arguments)
             self._validate("InspectCall", value)
-            result = self._engine.inspect(InspectCall(self._mapping(value["handle"])))
-            output = result.as_contract()
-            self._validate_result(output)
-            return output
+            call = InspectCall(self._mapping(value["handle"]))
         except (ContractError, KeyError, TypeError, ValueError) as error:
             return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
+        result = self._engine.inspect(call)
+        output = result.as_contract()
+        self._validate_result(output)
+        return output
 
     def _validate(self, definition: str, value: object) -> None:
         validate(
@@ -156,19 +156,7 @@ class AgentToolFacade:
         )
 
     def _validate_result(self, value: dict[str, object]) -> None:
-        definition = {
-            "route-result": "RouteResult",
-            "read-result": "ReadResult",
-            "related-result": "RelatedResult",
-            "snapshot-inspection-result": "SnapshotInspectionResult",
-            "policy-inspection-result": "PolicyInspectionResult",
-            "relationship-inspection-result": "RelationshipInspectionResult",
-            "navigation-inspection-result": "NavigationInspectionResult",
-            "pending-result": "PendingResult",
-            "complete-result": "CompleteResult",
-            "analysis-state": "AnalysisState",
-            "rejected-result": "RejectedResult",
-        }[str(value["kind"])]
+        definition = RESULT_KIND_TO_DEFINITION[str(value["kind"])]
         self._validate(definition, value)
 
     @classmethod

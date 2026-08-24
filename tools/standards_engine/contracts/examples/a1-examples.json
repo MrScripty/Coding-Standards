@@ -58,7 +58,7 @@
           "snapshot": {
             "kind": "snapshot-handle",
             "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-            "schema_version": 1
+            "schema_version": 2
           },
           "schema_version": 2
         },
@@ -115,17 +115,32 @@
           {
             "operation": "query",
             "request_kind": "read",
-            "target": "core"
+            "target": "core",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "schema_version": 2
+            }
           },
           {
             "operation": "query",
             "request_kind": "read",
-            "target": "router"
+            "target": "router",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "schema_version": 2
+            }
           },
           {
             "operation": "query",
             "request_kind": "read",
-            "target": "workflow.implementation"
+            "target": "workflow.implementation",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "schema_version": 2
+            }
           }
         ],
         "summary": "Three standards are relevant to the implementation activity."
@@ -160,12 +175,12 @@
         "base_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 1
+          "schema_version": 2
         },
         "proposed_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 1
+          "schema_version": 2
         },
         "changes": [
           {
@@ -476,12 +491,17 @@
             "operation": "resolve",
             "request_kind": "consumer-disposition",
             "target": "workflow.documentation.machine-verifiable-claims",
-            "obligation_id": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+            "obligation_id": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:7777777777777777777777777777777777777777777777777777777777777777",
+              "schema_version": 2
+            }
           }
         ],
         "provenance": {
           "analysis_contract_version": 5,
-          "interface_schema_version": 8,
+          "interface_schema_version": 9,
           "applicability_version": 3,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -641,12 +661,12 @@
         "base_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 1
+          "schema_version": 2
         },
         "proposed_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 1
+          "schema_version": 2
         },
         "changes": [
           {
@@ -672,7 +692,7 @@
         "dispositions": [],
         "provenance": {
           "analysis_contract_version": 5,
-          "interface_schema_version": 8,
+          "interface_schema_version": 9,
           "applicability_version": 3,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -729,12 +749,12 @@
         "base_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 1
+          "schema_version": 2
         },
         "proposed_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 1
+          "schema_version": 2
         },
         "context": {
           "kind": "analysis-context",
@@ -887,7 +907,7 @@
         },
         "provenance": {
           "analysis_contract_version": 5,
-          "interface_schema_version": 8,
+          "interface_schema_version": 9,
           "applicability_version": 3,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -913,19 +933,14 @@
       "definition": "RejectedResult",
       "value": {
         "kind": "rejected-result",
-        "code": "ANALYSIS.STALE_PACKET",
-        "outcome": "stale",
-        "target": "packet:stale",
-        "message": "The packet is bound to inputs that no longer match.",
+        "code": "ANALYSIS.UNAVAILABLE",
+        "outcome": "unavailable",
+        "target": "analysis:sha256:9999999999999999999999999999999999999999999999999999999999999999",
+        "message": "The immutable analysis is unavailable from the state store.",
         "details": {
-          "changed_input": "proposed_snapshot"
+          "analysis": "analysis:sha256:9999999999999999999999999999999999999999999999999999999999999999"
         },
-        "next_operations": [
-          {
-            "operation": "prepare",
-            "request_kind": "analysis"
-          }
-        ]
+        "next_operations": []
       }
     },
     {
@@ -1107,7 +1122,7 @@
         "derived_from_snapshot": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
-          "schema_version": 1
+          "schema_version": 2
         }
       }
     },
@@ -1149,7 +1164,7 @@
         "handle": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-          "schema_version": 1
+          "schema_version": 2
         },
         "tree": "c27a1e2bbf52244c5b30eb1d21381be6e5c86d68",
         "commit": "13a9f48b95ed7532f480e4604d9dfa23443e8f43",
@@ -1160,7 +1175,7 @@
         "exclusions": [],
         "versions": {
           "analysis_contract_version": 5,
-          "interface_schema_version": 8,
+          "interface_schema_version": 9,
           "applicability_version": 3,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -1187,7 +1202,7 @@
         "handle": {
           "kind": "snapshot-handle",
           "id": "snapshot:sha256:4444444444444444444444444444444444444444444444444444444444444444",
-          "schema_version": 1
+          "schema_version": 2
         },
         "source_kind": "dirty-git",
         "scope": [
@@ -1215,7 +1230,7 @@
         ],
         "versions": {
           "analysis_contract_version": 5,
-          "interface_schema_version": 8,
+          "interface_schema_version": 9,
           "applicability_version": 3,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",

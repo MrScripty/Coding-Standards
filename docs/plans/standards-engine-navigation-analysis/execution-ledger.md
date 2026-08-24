@@ -750,6 +750,41 @@
   evidence-oracle policy, and external project baselines remain outside this
   plan.
 
+## 2026-08-24: A1 Acceptance Reopened
+
+- A post-implementation audit found that whole-module reads could return live
+  filesystem bytes after snapshot issuance, invalidating snapshot-bound
+  reproducibility.
+- The same audit found incomplete schema projection, inspection, canonical
+  serialization, next-operation binding, documentation, and acceptance-oracle
+  conformance.
+- Withdrew the prior A1 acceptance, returned the plan to `Verifying`, and
+  retained the single-state architecture. Plan A2 remains blocked until every
+  A1 objective acceptance projection is mechanically reconciled.
+
+## 2026-08-24: A1 Boundary Repair Implemented
+
+- Captured immutable file bytes from exact Git trees or verified manifests and
+  made whole-module reads consume only that snapshot content.
+- Advanced snapshot identity to version 2 and public interface version 9;
+  semantic contract versions now affect snapshot identity while implementation
+  releases remain provenance.
+- Generated the native Python algebra and agent tool schemas from the canonical
+  JSON Schema, made deterministic `--check` freshness part of contract
+  validation, and made text rendering exhaustive over generated result kinds.
+- Consolidated canonical key normalization in `standards_metadata`, separated
+  caller decoding from engine invariant failures, bound every continuation to
+  an exact snapshot or analysis, and implemented every advertised inspection
+  result.
+- Strengthened plan lifecycle verification to reject accepted plans with
+  unsatisfied objective rows or contradictory final projections, then refreshed
+  the canonical 53-checker inventory and 57-node/375-edge dependency graph.
+- Verified 82 analysis tests, 39 Standards Engine tests, 18 metadata tests, 12
+  applicability tests, 7 policy-impact tests, 35 graph-engine tests, 2
+  standards-graph tests, 380 verifier tests, 33 contract examples, 8 identity
+  fixtures, all 218 declarative suites, and the complete checkpoint with 53
+  retained Bash checkers.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

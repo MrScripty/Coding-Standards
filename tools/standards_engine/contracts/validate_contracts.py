@@ -7,9 +7,19 @@ import hashlib
 import json
 import re
 import sys
-import unicodedata
 from pathlib import Path
 from typing import Any
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from tools.standards_metadata.standards_metadata.serialization import (  # noqa: E402
+    canonical_json_bytes,
+)
+from tools.standards_engine.contracts.generate_contract import (  # noqa: E402
+    check_projections,
+)
 
 
 ROOT = Path(__file__).resolve().parent
@@ -40,7 +50,7 @@ SCHEMA_KEYS = {
 }
 
 IDENTITY_PREFIX = {
-    "coding-standards:snapshot:v1": "snapshot",
+    "coding-standards:snapshot:v2": "snapshot",
     "coding-standards:navigation:v2": "navigation",
     "coding-standards:analysis:v2": "analysis",
     "coding-standards:obligation:v2": "obligation",
@@ -132,38 +142,17 @@ def _is_type(value: Any, expected: str) -> bool:
 
 
 def canonical_value(value: Any) -> Any:
-    if isinstance(value, float):
-        raise ContractError(
-            "floating point values are prohibited in canonical identity data"
-        )
-    if isinstance(value, str):
-        return unicodedata.normalize("NFC", value)
-    if isinstance(value, list):
-        return [canonical_value(item) for item in value]
-    if isinstance(value, dict):
-        normalized: dict[str, Any] = {}
-        for raw_key, item in value.items():
-            if not isinstance(raw_key, str):
-                raise ContractError("canonical JSON object keys must be strings")
-            key = unicodedata.normalize("NFC", raw_key)
-            if key in normalized:
-                raise ContractError(
-                    f"Unicode normalization creates duplicate key {key!r}"
-                )
-            normalized[key] = canonical_value(item)
-        return normalized
-    if value is None or isinstance(value, (bool, int)):
-        return value
-    raise ContractError(f"unsupported canonical value type: {type(value).__name__}")
+    try:
+        return json.loads(canonical_json_bytes(value))
+    except (TypeError, ValueError) as error:
+        raise ContractError(str(error)) from error
 
 
 def canonical_bytes(value: Any) -> bytes:
-    return json.dumps(
-        canonical_value(value),
-        ensure_ascii=False,
-        separators=(",", ":"),
-        sort_keys=True,
-    ).encode("utf-8")
+    try:
+        return canonical_json_bytes(value)
+    except (TypeError, ValueError) as error:
+        raise ContractError(str(error)) from error
 
 
 def validate(
@@ -578,6 +567,16 @@ def run_negative_self_checks(
         "missing route discriminator",
     )
 
+    expect_rejection(
+        lambda: validate(
+            schema,
+            schema["$defs"]["NextOperation"],
+            {"operation": "query", "request_kind": "read", "target": "core"},
+            "negative:unbound-next-operation",
+        ),
+        "snapshot-free navigation continuation",
+    )
+
     fact = {"type": "boolean", "state": "known", "value": "true"}
     expect_rejection(
         lambda: validate(schema, schema["$defs"]["FactValue"], fact, "negative:fact"),
@@ -658,6 +657,11 @@ def main() -> int:
 
     try:
         schema = load_json(SCHEMA_PATH)
+        stale_projections = check_projections()
+        if stale_projections:
+            raise ContractError(
+                "stale generated contract projections: " + ", ".join(stale_projections)
+            )
         check_schema_node(schema, "#")
         validate_identity_annotations(schema)
         validate_contract_metadata(schema)

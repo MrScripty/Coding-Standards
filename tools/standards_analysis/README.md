@@ -2,9 +2,9 @@
 
 `tools/standards_analysis/` owns read-only standards snapshot comparison,
 policy-unit change interpretation, impact selection, consumer coverage,
-packets, questions, and resolution. It consumes neutral applicability,
-metadata, policy-impact, and graph contracts and does not depend on verifier checks or
-repository-writing behavior.
+immutable analysis states, fact requirements, and resolution. It consumes
+neutral applicability, metadata, policy-impact, and graph contracts and does
+not depend on verifier checks or repository-writing behavior.
 
 Current implemented foundation:
 
@@ -23,8 +23,12 @@ Current implemented foundation:
 - mandatory audit-coverage work for changed policies without current
   certificates, including policies with no declared consumers; and
 - two-identity coverage requirements, attestations, and reusable certificates;
-- immutable snapshot-bound pending packets, typed submissions and evidence,
-  stable obligation handles, and state-derived next operations.
+- one content-addressed `AnalysisState` containing exact authority references
+  and dependency-valid accepted decisions;
+- deterministic pending and complete projections with no independent packet or
+  report lifecycle;
+- evidence- and authorization-bound fact observations, stable obligation
+  handles, narrow prior-analysis reuse, and state-derived next operations.
 
 Run tests:
 

@@ -42,9 +42,9 @@ tool session is established. Callers receive that opaque handle rather than a
 repository path. Calls always carry it explicitly, and an adapter cannot
 substitute the ambient current tree for a missing or stale handle.
 
-Contract version `8` has one accepted representation. Incompatible contract
-changes require a new version and migration decision; unknown versions are
-`unsupported` and do not select a compatibility parser.
+Contract version `9` has one representation under A1 verification.
+Incompatible contract changes require a new version and migration decision;
+unknown versions are `unsupported` and do not select a compatibility parser.
 
 ## Identity Serialization
 
@@ -74,12 +74,12 @@ normalization.
 
 ## State Contract
 
-`query` does not create mutable navigation state. Its handles bind the same
-snapshot and can be used only with that snapshot.
+`query` does not create mutable navigation state. Its handles and derived
+continuations bind the same snapshot and can be used only with that snapshot.
 
 `prepare` reaches either:
 
-- `pending`, when at least one required obligation or question remains; or
+- `pending`, when at least one required obligation or fact requirement remains; or
 - `complete`, when all completion invariants already hold.
 
 `resolve` accepts one typed submission against an exact immutable analysis. It
@@ -106,6 +106,7 @@ impact-selection groups.
 Run:
 
 ```text
+python3 tools/standards_engine/contracts/generate_contract.py --check
 python3 tools/standards_engine/contracts/validate_contracts.py
 ```
 
@@ -117,6 +118,7 @@ The validator uses only the Python standard library. It:
 - verifies discriminated unions select exactly one variant;
 - checks that identity annotations name real fields and exclude derived fields;
 - verifies canonical identity fixtures; and
+- rejects stale generated Python or agent-tool projections; and
 - checks that public operation and state-machine references resolve.
 
 The validator is contract conformance tooling, not an engine runtime or a

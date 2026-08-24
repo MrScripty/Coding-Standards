@@ -2,6 +2,9 @@ from __future__ import annotations
 
 import unittest
 
+from tools.standards_engine.standards_engine._generated_contract import (
+    RESULT_KIND_TO_DEFINITION,
+)
 from tools.standards_engine.standards_engine import render_text
 
 
@@ -55,6 +58,21 @@ class TextRenderingTest(unittest.TestCase):
             "OUTCOME invalid\n"
             "MESSAGE The submission does not address current work.\n",
         )
+
+    def test_every_generated_result_variant_has_a_renderer(self) -> None:
+        for kind in RESULT_KIND_TO_DEFINITION:
+            with self.subTest(kind=kind):
+                value = {"kind": kind}
+                if kind == "rejected-result":
+                    value.update(code="TEST", outcome="invalid", message="test")
+                if kind == "complete-result":
+                    value.update(status="complete", completion={})
+                rendered = render_text(value)
+                self.assertTrue(rendered)
+
+    def test_unknown_result_variant_is_a_programming_error(self) -> None:
+        with self.assertRaisesRegex(ValueError, "unsupported Standards Engine"):
+            render_text({"kind": "future-result"})
 
 
 if __name__ == "__main__":

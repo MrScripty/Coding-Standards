@@ -196,12 +196,14 @@ class PendingResultTest(unittest.TestCase):
                     "request_kind": "consumer-disposition",
                     "target": "workflow.consumer",
                     "obligation_id": selected.id,
+                    "analysis": ANALYSIS,
                 },
                 {
                     "operation": "resolve",
                     "request_kind": "provide-fact",
                     "target": requirement.fact,
                     "requirement_id": requirement.id,
+                    "analysis": ANALYSIS,
                 },
             ],
         )

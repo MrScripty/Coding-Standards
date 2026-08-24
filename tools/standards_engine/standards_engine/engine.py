@@ -69,7 +69,14 @@ from tools.standards_policy_impact.standards_policy_impact import (
 )
 
 from .model import (
+    AnalysisContextInspectionResult,
     AnalysisRequest,
+    CertificateInspectionResult,
+    CoverageAttestationInspectionResult,
+    CoverageAuthorityViewInspectionResult,
+    CoverageRequirementInspectionResult,
+    FactObservationInspectionResult,
+    FactRequirementInspectionResult,
     InspectCall,
     InspectionResult,
     NavigationInspectionResult,
@@ -257,6 +264,7 @@ class StandardsEngine:
         self._analysis_store = analysis_store or InMemoryAnalysisStateStore()
         self._fact_providers = tuple(sorted(fact_providers, key=lambda item: item.id))
         self._navigation: dict[str, dict[str, object]] = {}
+        self._analysis_artifacts: dict[str, tuple[str, dict[str, object]]] = {}
         self._sources: dict[str, StandardsEngine] = {str(snapshot.handle["id"]): self}
         self._authorizations: dict[str, AuthorizationReference] = {}
 
@@ -446,6 +454,7 @@ class StandardsEngine:
         except AnalysisError as error:
             return self._analysis_rejection(error)
         self._analysis_store.put(state)
+        self._register_analysis_artifacts(state, result)
         return result
 
     def resolve(
@@ -504,6 +513,7 @@ class StandardsEngine:
         except AnalysisError as error:
             return self._analysis_rejection(error)
         self._analysis_store.put(updated)
+        self._register_analysis_artifacts(updated, result)
         return result
 
     def query(self, call: QueryCall) -> QueryResult:
@@ -610,11 +620,145 @@ class StandardsEngine:
                     "provenance": self._snapshot.inspection["versions"],
                 }
             )
+        if kind == "certificate-handle":
+            certificate_id = str(handle.get("id", ""))
+            certificates = {
+                certificate.handle: certificate
+                for source in self._sources.values()
+                for certificate in source._coverage.certificates.values()
+            }
+            certificate = certificates.get(certificate_id)
+            if certificate is None:
+                return self._reject(
+                    "COVERAGE.UNKNOWN_CERTIFICATE",
+                    "unavailable",
+                    "The coverage certificate is unavailable from the bound snapshots.",
+                    target=certificate_id,
+                )
+            return CertificateInspectionResult.from_value(
+                {
+                    "kind": "certificate-inspection-result",
+                    "certificate": certificate.as_projection(),
+                }
+            )
+        coverage_inspection = self._inspect_coverage_artifact(kind, handle)
+        if coverage_inspection is not None:
+            return coverage_inspection
+        analysis_inspection = self._inspect_analysis_artifact(kind, handle)
+        if analysis_inspection is not None:
+            return analysis_inspection
         return self._reject(
             "NAVIGATION.UNSUPPORTED_HANDLE",
             "unsupported",
             "The handle kind is not inspectable by the navigation slice.",
         )
+
+    def _inspect_coverage_artifact(
+        self,
+        kind: object,
+        handle: Mapping[str, object],
+    ) -> InspectionResult | None:
+        identifier = str(handle.get("id", ""))
+        definitions = {
+            "coverage-authority-view-handle": (
+                "views",
+                "coverage_view",
+                "coverage-authority-view-inspection-result",
+                CoverageAuthorityViewInspectionResult,
+            ),
+            "coverage-requirement-handle": (
+                "requirements",
+                "requirement",
+                "coverage-requirement-inspection-result",
+                CoverageRequirementInspectionResult,
+            ),
+            "coverage-attestation-handle": (
+                "attestations",
+                "attestation",
+                "coverage-attestation-inspection-result",
+                CoverageAttestationInspectionResult,
+            ),
+        }
+        definition = definitions.get(str(kind))
+        if definition is None:
+            return None
+        collection_name, field, result_kind, result_type = definition
+        artifacts = {
+            artifact.handle: artifact
+            for source in self._sources.values()
+            for artifact in getattr(source._coverage, collection_name).values()
+        }
+        artifact = artifacts.get(identifier)
+        if artifact is None:
+            return self._reject(
+                "COVERAGE.UNKNOWN_ARTIFACT",
+                "unavailable",
+                "The coverage artifact is unavailable from the bound snapshots.",
+                target=identifier,
+            )
+        return result_type.from_value(
+            {"kind": result_kind, field: artifact.as_projection()}
+        )
+
+    def _register_analysis_artifacts(
+        self,
+        state: AnalysisState,
+        result: AnalysisResult,
+    ) -> None:
+        context = result.context.as_contract()
+        self._analysis_artifacts[str(context["handle"]["id"])] = (
+            "analysis-context-handle",
+            context,
+        )
+        for requirement in getattr(result, "fact_requirements", ()):
+            value = requirement.as_contract()
+            self._analysis_artifacts[str(value["handle"]["id"])] = (
+                "fact-requirement-handle",
+                value,
+            )
+        for observation in state.observations:
+            value = observation.as_contract()
+            self._analysis_artifacts[str(value["handle"]["id"])] = (
+                "fact-observation-handle",
+                value,
+            )
+
+    def _inspect_analysis_artifact(
+        self,
+        kind: object,
+        handle: Mapping[str, object],
+    ) -> InspectionResult | None:
+        definitions = {
+            "analysis-context-handle": (
+                "context",
+                "analysis-context-inspection-result",
+                AnalysisContextInspectionResult,
+            ),
+            "fact-requirement-handle": (
+                "requirement",
+                "fact-requirement-inspection-result",
+                FactRequirementInspectionResult,
+            ),
+            "fact-observation-handle": (
+                "observation",
+                "fact-observation-inspection-result",
+                FactObservationInspectionResult,
+            ),
+        }
+        definition = definitions.get(str(kind))
+        if definition is None:
+            return None
+        identifier = str(handle.get("id", ""))
+        artifact = self._analysis_artifacts.get(identifier)
+        if artifact is None or artifact[0] != kind:
+            return self._reject(
+                "ANALYSIS.UNKNOWN_ARTIFACT",
+                "unavailable",
+                "The analysis artifact is unavailable from this engine instance.",
+                target=identifier,
+            )
+        field, result_kind, result_type = definition
+        return result_type.from_value({"kind": result_kind, field: artifact[1]})
 
     def _analysis_authority(self) -> AnalysisAuthority:
         return AnalysisAuthority(
@@ -769,12 +913,23 @@ class StandardsEngine:
         }
         handle = self._navigation_handle(identity_value)
         next_operations = [
-            {"operation": "query", "request_kind": "read", "target": item["target"]}
+            {
+                "operation": "query",
+                "request_kind": "read",
+                "target": item["target"],
+                "snapshot": self._snapshot.handle,
+            }
             for item in reading_plan
             if item["state"] == "selected"
         ]
         if questions:
-            next_operations.append({"operation": "query", "request_kind": "route"})
+            next_operations.append(
+                {
+                    "operation": "query",
+                    "request_kind": "route",
+                    "snapshot": self._snapshot.handle,
+                }
+            )
         value = {
             "kind": "route-result",
             "handle": handle,
@@ -810,7 +965,12 @@ class StandardsEngine:
             scope = {"kind": "structured", "heading_path": list(selected.heading_path)}
         else:
             canonical_id = module.module_id
-            content = (self._root / module.path).read_text(encoding="utf-8")
+            try:
+                content = self._snapshot.contents[module.path].decode("utf-8")
+            except KeyError as error:
+                raise RuntimeError(
+                    f"snapshot content is missing canonical module {module.path!r}"
+                ) from error
             scope = {"kind": "whole-artifact"}
         policy = self._policy_summary(canonical_id, module, scope)
         related = self._relationships_for_policy(
@@ -842,11 +1002,13 @@ class StandardsEngine:
                     "operation": "query",
                     "request_kind": "related",
                     "target": canonical_id,
+                    "snapshot": self._snapshot.handle,
                 },
                 {
                     "operation": "inspect",
                     "request_kind": "inspect",
                     "target": canonical_id,
+                    "snapshot": self._snapshot.handle,
                 },
             ],
             "summary": f"Read canonical standard {canonical_id}.",
@@ -892,6 +1054,7 @@ class StandardsEngine:
                     "operation": "inspect",
                     "request_kind": "inspect",
                     "target": request.target,
+                    "snapshot": self._snapshot.handle,
                 }
             ],
             "summary": f"Found {len(relationships)} declared relationships.",

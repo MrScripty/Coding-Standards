@@ -1,15 +1,15 @@
 # Plan: Standards Engine Navigation And Analysis
 
-**Plan status:** `Accepted`
+**Plan status:** `Verifying`
 
-**Current phase:** A1 accepted
+**Current phase:** A1 acceptance boundary repair
 
-**Next slice:** none; controlled authoring requires an independently admitted
-Plan A2
+**Next slice:** repair snapshot integrity and public-interface acceptance
+oracles, then rerun every A1 acceptance claim
 
-**Acceptance status:** `satisfied`
+**Acceptance status:** `pending`
 
-**Accepted implementation:** commit
+**Withdrawn acceptance boundary:** commit
 `94b295b40bc1cef9a6281355d68115f3a98ed112`, tree
 `ff032da51fcaff45533c07daa8de464065b8e55c`
 
@@ -522,6 +522,8 @@ repository state.
 - `tools/standards_applicability/**`
 - `tools/standards_policy_impact/**`
 - `tools/standards_engine/**`
+- `tools/standards_metadata/standards_metadata/serialization.py`
+- `tools/standards_metadata/tests/test_metadata.py`
 - `tools/standards_verifier/tests/test_policy_impact.py`
 - `evaluation/standards-effectiveness/router-projection.toml`
 - `evaluation/standards-effectiveness/policy-impact-facts.toml`
@@ -532,6 +534,13 @@ repository state.
 - `evaluation/standards-effectiveness/fixtures/standards-engine/**`
 - `evaluation/standards-effectiveness/suites/standards-engine-navigation-analysis.toml`
 - `evaluation/standards-effectiveness/suite-registry.toml`
+- `evaluation/standards-effectiveness/check-plan-structure.sh`
+- `evaluation/standards-effectiveness/verify-plan-fixtures.sh`
+- `evaluation/standards-effectiveness/fixtures/plans/**`
+- `evaluation/standards-effectiveness/generated/checker-structure-inventory.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-nodes.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-edges.tsv`
+- `evaluation/standards-effectiveness/generated/checker-dependency-components.tsv`
 - `docs/decisions/standards-engine-navigation-analysis.md`
 - `docs/plans/standards-engine-navigation-analysis/**`
 
@@ -603,8 +612,9 @@ and cross-snapshot cases fail with the required typed result; schema drift,
 serialization, package, verifier, graph, declarative, freshness, link, and plan
 checks pass from one clean recorded tree.
 
-**Status:** `Accepted` through the
-[single-state acceptance](reports/milestone-4-single-state-acceptance.md)
+**Status:** `Verifying`; the prior
+[single-state acceptance](reports/milestone-4-single-state-acceptance.md) is
+withdrawn pending boundary repair
 
 ## Blockers
 
@@ -616,10 +626,12 @@ missing independent corpus authority, failed attestation bootstrap review,
 ambiguous evidence or authorization resolution, or need to change another
 graph authority remains a re-plan trigger rather than an implicit blocker.
 
-No active blocker remains for Plan A1. SENA-020 is resolved by the accepted
-single-state replacement, and no packet/report compatibility runtime remains.
-Controlled authoring, evidence-oracle policy, and external project baselines
-remain owned by their separately admitted future plans.
+SENA-021 blocks Plan A1 acceptance until the exact repaired tree passes every
+objective oracle and acceptance projection. This is an implementation and
+verification boundary, not authority to redesign the accepted single-state
+model. SENA-020 remains resolved and no packet/report compatibility runtime
+exists. Controlled authoring, evidence-oracle policy, and external project
+baselines remain blocked behind their separately admitted future plans.
 
 ## Re-Plan Triggers
 
@@ -661,4 +673,4 @@ generated artifacts remain serial integration-owner writes.
 - Deferred follow-ups: controlled authoring, Plan B evidence-oracle recovery,
   and Plan C external project baselines remain outside A1 with their brief-owned
   prerequisites.
-- Final status: `Active`
+- Final status: `Verifying`

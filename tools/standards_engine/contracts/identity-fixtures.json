@@ -5,7 +5,7 @@
       "name": "route-result",
       "definition": "RouteResult",
       "example": "route-result",
-      "expected": "navigation:sha256:ff0af4a626270cb09ffc01d855deb80b201e707366d514ae76f1a7f994665014"
+      "expected": "navigation:sha256:f96b33fcf7ddb062da9d6d979815ffbd7f8a9e608ac6032ed824fed2caa7a38d"
     },
     {
       "name": "consumer-obligation",
@@ -18,7 +18,7 @@
       "name": "analysis-state",
       "definition": "AnalysisState",
       "example": "analysis-state",
-      "expected": "analysis:sha256:2bef9922f6450739a6ba3bdc067e50a3f5be52bb5b57da91ca774b6a94b28edf"
+      "expected": "analysis:sha256:c2669697ef51ee2b385bd3ec1f71f3a0058c8362f5ecf97c2e255907c637fd56"
     },
     {
       "name": "fact-requirement",
@@ -36,13 +36,13 @@
       "name": "clean-git-snapshot",
       "definition": "GitSnapshotInspection",
       "example": "git-snapshot-inspection",
-      "expected": "snapshot:sha256:6e00f75a54a20f59637b46a6d502abdf88dc84dcdf58f449811429aee90770f6"
+      "expected": "snapshot:sha256:8ce683d43c0097defe1a7682f8d37edcd691d3b3166630936988114aeb223a20"
     },
     {
       "name": "dirty-manifest-snapshot",
       "definition": "ManifestSnapshotInspection",
       "example": "manifest-snapshot-inspection",
-      "expected": "snapshot:sha256:114ca0ebd0661958c67ff2a59a98b5447419b3e1fbc717542f4d465670945e52"
+      "expected": "snapshot:sha256:0659929242df78a2f877381da78e34766c2f7c8cd053507b7a2a8257c5408014"
     },
     {
       "name": "consumer-coverage-certificate",

@@ -76,4 +76,38 @@ for file in "$@"; do
       "$file" >&2
     exit 1
   fi
+
+  table_statuses="$(
+    sed -n '/^## Objective Acceptance$/,/^## /p' "$file" |
+      awk -F'|' '
+        /^\|/ {
+          value = $7
+          gsub(/^[[:space:]]+|[[:space:]]+$/, "", value)
+          gsub(/`/, "", value)
+          if (value ~ /^(pending|partial|blocked|satisfied)$/) print value
+        }
+      '
+  )"
+  if [[ "$status" == "Accepted" ]] &&
+    [[ -n "$table_statuses" ]] &&
+    [[ -n "$(printf '%s\n' "$table_statuses" | rg -v '^satisfied$' || true)" ]]; then
+    printf '%s: accepted plan has unsatisfied objective-acceptance row\n' "$file" >&2
+    exit 1
+  fi
+
+  final_acceptance_status="$(
+    sed -n 's/^- Acceptance status: `\([^\`]*\)`$/\1/p' "$file"
+  )"
+  final_status="$(
+    sed -n 's/^- Final status: `\([^\`]*\)`$/\1/p' "$file"
+  )"
+  if [[ -n "$final_acceptance_status" ]] &&
+    [[ "$final_acceptance_status" != "$acceptance_status" ]]; then
+    printf '%s: final acceptance status does not match header\n' "$file" >&2
+    exit 1
+  fi
+  if [[ -n "$final_status" ]] && [[ "$final_status" != "$status" ]]; then
+    printf '%s: final plan status does not match header\n' "$file" >&2
+    exit 1
+  fi
 done

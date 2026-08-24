@@ -115,12 +115,14 @@ resolve(analysis_handle, submission) -> AnalysisResult | RejectedResult
 inspect(handle) -> InspectionResult | RejectedResult
 ```
 
-Interface version 8 uses navigation identity version 2, analysis identity and
-schema version 2, result projection schema version 1, analysis contract version
-5, and applicability contract version 3. `AnalysisHandle` is the sole analysis
-identity. `PendingResult` and `CompleteResult` are deterministic typed
-projections and own no independent identity. Former packet, report, and state
-handles are not compatibly interpreted.
+Interface version 9 uses snapshot identity and handle version 2, navigation
+identity version 2, analysis identity and schema version 2, result projection
+schema version 1, analysis contract version 5, and applicability contract
+version 3. Snapshot identity binds semantic contract versions but excludes
+implementation-only provenance. `AnalysisHandle` is the sole analysis identity.
+`PendingResult` and `CompleteResult` are deterministic typed projections and
+own no independent identity. Former packet, report, state, snapshot, and
+interface handles are not compatibly interpreted.
 
 Native Python requests and results are typed projections of the canonical
 contract. Agent tools carry the same structures as JSON. An optional CLI or
@@ -569,11 +571,14 @@ The plural-provenance correction replaced singular obligation `source` and
 `reason` with a nonempty `reasons` collection and established obligation
 identity domain version 2. The single-state cutover retains that obligation
 domain while replacing packet and report identity with analysis identity
-version 2 and public interface version 8. Superseded identities are not
+version 2. The boundary-integrity cutover advances public interface version 9
+and snapshot identity version 2. Superseded identities are not
 interpreted under the replacement contract.
 
 `next_operations` is derived from current state and is guidance, not
-authorization. Trusted adapters inject capability context outside
+authorization. Query and inspect continuations bind the exact snapshot;
+resolution continuations bind the exact immutable analysis. Trusted adapters
+inject capability context outside
 caller-authored request and submission payloads. A1 distinguishes
 `standards.read`, `standards.analyze`, `standards.review.consumer`,
 `standards.review.impact`, and `standards.review.audit`; one capability does not

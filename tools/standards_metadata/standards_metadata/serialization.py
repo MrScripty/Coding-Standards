@@ -17,7 +17,13 @@ def _canonical(value: Any) -> Any:
     if isinstance(value, Mapping):
         if any(not isinstance(key, str) for key in value):
             raise TypeError("identity-bearing object keys must be strings")
-        return {key: _canonical(value[key]) for key in sorted(value)}
+        normalized: dict[str, Any] = {}
+        for raw_key, item in value.items():
+            key = unicodedata.normalize("NFC", raw_key)
+            if key in normalized:
+                raise TypeError(f"Unicode normalization creates duplicate key {key!r}")
+            normalized[key] = _canonical(item)
+        return {key: normalized[key] for key in sorted(normalized)}
     if isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
         return [_canonical(item) for item in value]
     raise TypeError(f"unsupported identity-bearing value: {type(value).__name__}")

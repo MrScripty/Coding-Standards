@@ -12,6 +12,9 @@ from tools.standards_metadata.standards_metadata import (
     load_module_metadata,
     validate_module_metadata,
 )
+from tools.standards_metadata.standards_metadata.serialization import (
+    canonical_json_bytes,
+)
 
 
 class StandardsMetadataTest(unittest.TestCase):
@@ -86,12 +89,16 @@ class StandardsMetadataTest(unittest.TestCase):
 
         corpus = load_canonical_module_corpus(self.root, "corpus.toml")
 
-        self.assertEqual(tuple(module.path for module in corpus.modules), corpus.members)
+        self.assertEqual(
+            tuple(module.path for module in corpus.modules), corpus.members
+        )
         self.assertEqual(
             tuple(module.module_id for module in corpus.normative_modules),
             ("core", "workflow.example"),
         )
-        self.assertEqual(corpus.resolve("workflow.example"), corpus.resolve("workflow.md"))
+        self.assertEqual(
+            corpus.resolve("workflow.example"), corpus.resolve("workflow.md")
+        )
         self.assertIsNone(corpus.resolve("unknown"))
 
     def test_manifest_schema_and_member_paths_are_strict(self) -> None:
@@ -117,7 +124,9 @@ class StandardsMetadataTest(unittest.TestCase):
                 self.write_manifest(members, prefix=prefix)
                 self.assertEqual(self.error_code(), expected)
 
-    def test_malformed_manifest_missing_member_and_symlink_escape_are_typed(self) -> None:
+    def test_malformed_manifest_missing_member_and_symlink_escape_are_typed(
+        self,
+    ) -> None:
         self.write("corpus.toml", "schema_version = [\n")
         self.assertEqual(self.error_code(), "CONFIG.INVALID_TOML")
 
@@ -172,6 +181,16 @@ class StandardsMetadataTest(unittest.TestCase):
         with self.assertRaises(MetadataError) as caught:
             load_module_metadata(self.root, "missing.md")
         self.assertEqual(caught.exception.failure.outcome, "unavailable")
+
+    def test_canonical_serialization_normalizes_keys_and_rejects_collisions(
+        self,
+    ) -> None:
+        self.assertEqual(
+            canonical_json_bytes({"e\u0301": "value"}),
+            canonical_json_bytes({"é": "value"}),
+        )
+        with self.assertRaisesRegex(TypeError, "duplicate key"):
+            canonical_json_bytes({"é": 1, "e\u0301": 2})
 
 
 if __name__ == "__main__":

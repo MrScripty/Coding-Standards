@@ -2,7 +2,10 @@
 
 ## Status
 
-Milestone 4 and Plan A1 are accepted.
+Acceptance withdrawn on 2026-08-24 after a post-implementation audit found
+snapshot-integrity and public-interface acceptance-oracle defects. This report
+remains evidence for the implementation boundary it reviewed, not current A1
+acceptance authority.
 
 The accepted implementation boundary is commit
 `94b295b40bc1cef9a6281355d68115f3a98ed112`, tree

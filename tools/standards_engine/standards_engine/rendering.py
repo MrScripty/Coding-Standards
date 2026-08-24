@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from typing import Mapping, Protocol
+from typing import Callable, Mapping, Protocol
+
+from ._generated_contract import RESULT_KIND_TO_DEFINITION
 
 
 class ContractValue(Protocol):
@@ -11,19 +13,12 @@ def render_text(value: ContractValue | Mapping[str, object]) -> str:
     """Render a deterministic human projection of one typed engine result."""
     contract = value.as_contract() if hasattr(value, "as_contract") else dict(value)
     kind = str(contract.get("kind", "unknown"))
-    if kind == "pending-result":
-        return _pending(contract)
-    if kind == "complete-result":
-        return _complete(contract)
-    if kind == "analysis-state":
-        return _state(contract)
     if kind == "fact-observation":
         return _observation(contract)
-    if kind in {"route-result", "read-result", "related-result"}:
-        return _navigation(contract)
-    if kind == "rejected-result":
-        return _rejection(contract)
-    return f"RESULT {kind}\n"
+    renderer = _RESULT_RENDERERS.get(kind)
+    if renderer is None:
+        raise ValueError(f"unsupported Standards Engine result kind {kind!r}")
+    return renderer(contract)
 
 
 def _pending(value: Mapping[str, object]) -> str:
@@ -116,6 +111,12 @@ def _rejection(value: Mapping[str, object]) -> str:
     )
 
 
+def _inspection(value: Mapping[str, object]) -> str:
+    kind = str(value["kind"])
+    artifact_fields = tuple(key for key in value if key != "kind")
+    return f"INSPECTION {kind} {' '.join(artifact_fields)}\n"
+
+
 def _handle_id(value: Mapping[str, object]) -> str:
     return str(_mapping(value.get("handle")).get("id", ""))
 
@@ -137,6 +138,32 @@ def _mapping(value: object) -> Mapping[str, object]:
 def _operation_target(value: Mapping[str, object]) -> str:
     target = value.get("target")
     return "" if target is None else f" {target}"
+
+
+_RESULT_RENDERERS: dict[
+    str,
+    Callable[[Mapping[str, object]], str],
+] = {
+    "pending-result": _pending,
+    "complete-result": _complete,
+    "analysis-state": _state,
+    "route-result": _navigation,
+    "read-result": _navigation,
+    "related-result": _navigation,
+    "rejected-result": _rejection,
+    **{
+        kind: _inspection
+        for kind in RESULT_KIND_TO_DEFINITION
+        if kind.endswith("-inspection-result")
+    },
+}
+if set(_RESULT_RENDERERS) != set(RESULT_KIND_TO_DEFINITION):
+    missing = sorted(set(RESULT_KIND_TO_DEFINITION) - set(_RESULT_RENDERERS))
+    extra = sorted(set(_RESULT_RENDERERS) - set(RESULT_KIND_TO_DEFINITION))
+    raise RuntimeError(
+        f"text renderer result variants disagree with the canonical schema: "
+        f"missing={missing}, extra={extra}"
+    )
 
 
 __all__ = ("render_text",)

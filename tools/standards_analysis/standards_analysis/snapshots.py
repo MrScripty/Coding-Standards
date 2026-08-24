@@ -5,13 +5,14 @@ import stat
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
-from typing import Iterable
+from types import MappingProxyType
+from typing import Iterable, Mapping
 
 from .errors import AnalysisError, AnalysisFailure
 from .serialization import digest_bytes, identity
 
 
-SNAPSHOT_DOMAIN = "coding-standards:snapshot:v1"
+SNAPSHOT_DOMAIN = "coding-standards:snapshot:v2"
 
 
 @dataclass(frozen=True, slots=True)
@@ -31,7 +32,7 @@ class AnalysisVersions:
             "analysis_contract_version": 5,
             "analysis_schema_version": 2,
             "result_schema_version": 1,
-            "interface_schema_version": 8,
+            "interface_schema_version": 9,
             "applicability_version": 3,
             "authorization_contract_version": "authorization-authority.v1",
             "metadata_api_version": self.metadata_api_version,
@@ -44,11 +45,18 @@ class AnalysisVersions:
             ),
         }
 
+    def identity_contract(self) -> dict[str, object]:
+        value = self.as_contract()
+        value.pop("graph_engine_implementation_version")
+        value.pop("analyzer_implementation_version")
+        return value
+
 
 @dataclass(frozen=True, slots=True)
 class Snapshot:
     handle: dict[str, object]
     inspection: dict[str, object]
+    contents: Mapping[str, bytes]
 
 
 def _reject(code: str, message: str, *, path: str | None = None) -> AnalysisError:
@@ -136,8 +144,35 @@ def _handle(identity_value: dict[str, object]) -> dict[str, object]:
     return {
         "kind": "snapshot-handle",
         "id": identity(SNAPSHOT_DOMAIN, "snapshot", identity_value),
-        "schema_version": 1,
+        "schema_version": 2,
     }
+
+
+def _git_contents(
+    root: Path,
+    tree: str,
+    scope: tuple[str, ...],
+) -> Mapping[str, bytes]:
+    listed = subprocess.run(
+        ("git", "-C", str(root), "ls-tree", "-r", "-z", tree, "--", *scope),
+        check=True,
+        capture_output=True,
+    ).stdout
+    contents: dict[str, bytes] = {}
+    for raw_record in listed.split(b"\0"):
+        if not raw_record:
+            continue
+        metadata, raw_path = raw_record.split(b"\t", 1)
+        _mode, kind, object_id = metadata.split(b" ", 2)
+        if kind != b"blob":
+            continue
+        path = raw_path.decode("utf-8")
+        contents[path] = subprocess.run(
+            ("git", "-C", str(root), "cat-file", "blob", object_id.decode("ascii")),
+            check=True,
+            capture_output=True,
+        ).stdout
+    return MappingProxyType(contents)
 
 
 def _gitlinks(root: Path, scope: tuple[str, ...]) -> list[dict[str, object]]:
@@ -212,6 +247,7 @@ def _compile_git(
         "scope": list(scope),
         "exclusions": exclusion_values,
         "submodules": submodules,
+        "versions": versions.identity_contract(),
     }
     handle = _handle(identity_value)
     return Snapshot(
@@ -226,6 +262,7 @@ def _compile_git(
             "submodules": submodules,
             "versions": versions.as_contract(),
         },
+        _git_contents(root, tree, scope),
     )
 
 
@@ -436,7 +473,24 @@ def _compile_manifest(
         "source_kind": source_kind,
         "scope": list(scope),
         "entries": entries,
+        "versions": versions.identity_contract(),
     }
+    contents: dict[str, bytes] = {}
+    for entry in entries:
+        if entry["entry_type"] != "file" or entry["inclusion"] != "included":
+            continue
+        path = str(entry["path"])
+        payload = (root / path).read_bytes()
+        if digest_bytes(payload) != entry["content_digest"]:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "SNAPSHOT.SOURCE_CHANGED",
+                    "unavailable",
+                    "snapshot source changed while immutable content was captured",
+                    path=path,
+                )
+            )
+        contents[path] = payload
     handle = _handle(identity_value)
     return Snapshot(
         handle,
@@ -448,6 +502,7 @@ def _compile_manifest(
             "entries": entries,
             "versions": versions.as_contract(),
         },
+        MappingProxyType(contents),
     )
 
 

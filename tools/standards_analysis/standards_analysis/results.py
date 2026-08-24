@@ -55,6 +55,14 @@ class NextOperation:
     target: str | None = None
     obligation_id: str | None = None
     requirement_id: str | None = None
+    snapshot: Mapping[str, object] | None = None
+    analysis: Mapping[str, object] | None = None
+
+    def __post_init__(self) -> None:
+        if self.snapshot is not None:
+            object.__setattr__(self, "snapshot", _freeze(self.snapshot))
+        if self.analysis is not None:
+            object.__setattr__(self, "analysis", _freeze(self.analysis))
 
     def as_contract(self) -> dict[str, object]:
         value: dict[str, object] = {
@@ -67,6 +75,10 @@ class NextOperation:
             value["obligation_id"] = self.obligation_id
         if self.requirement_id is not None:
             value["requirement_id"] = self.requirement_id
+        if self.snapshot is not None:
+            value["snapshot"] = _thaw(self.snapshot)
+        if self.analysis is not None:
+            value["analysis"] = _thaw(self.analysis)
         return value
 
 
@@ -398,7 +410,7 @@ def build_pending_result(
         selected_obligations,
         selected_requirements,
         tuple(reading_plan),
-        _next_operations(selected_obligations, selected_requirements),
+        _next_operations(analysis, selected_obligations, selected_requirements),
         provenance or AnalysisVersions(),
         summary,
     )
@@ -412,6 +424,7 @@ def _unique(code: str, values: Iterable[str]) -> None:
 
 
 def _next_operations(
+    analysis: Mapping[str, object],
     obligations: tuple[Obligation, ...],
     requirements: tuple[FactRequirement, ...],
 ) -> tuple[NextOperation, ...]:
@@ -421,6 +434,7 @@ def _next_operations(
             "provide-fact",
             requirement.fact,
             requirement_id=requirement.id,
+            analysis=analysis,
         )
         for requirement in requirements
     ]
@@ -430,20 +444,23 @@ def _next_operations(
             submission,
             obligation.target,
             obligation.id,
+            analysis=analysis,
         )
         for obligation in obligations
         if obligation.state == "required"
         for submission in obligation.permitted_submissions
     )
+    unique = {canonical_json_bytes(item.as_contract()): item for item in operations}
     return tuple(
         sorted(
-            set(operations),
+            unique.values(),
             key=lambda item: (
                 item.operation,
                 item.request_kind,
                 item.target or "",
                 item.obligation_id or "",
                 item.requirement_id or "",
+                canonical_json_bytes(item.analysis or {}),
             ),
         )
     )

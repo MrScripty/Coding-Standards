@@ -7,8 +7,12 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tools.standards_analysis.standards_analysis import AnalysisError, compile_snapshot
-from tools.standards_engine.contracts.validate_contracts import validate
+from tools.standards_analysis.standards_analysis import (
+    AnalysisError,
+    AnalysisVersions,
+    compile_snapshot,
+)
+from tools.standards_engine.contracts.validate_contracts import identity, validate
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -50,6 +54,15 @@ class SnapshotTest(unittest.TestCase):
             {"kind": "snapshot-inspection-result", "snapshot": snapshot.inspection},
             "$snapshot",
         )
+        definition = (
+            "GitSnapshotInspection"
+            if snapshot.inspection["kind"] == "git-snapshot-inspection"
+            else "ManifestSnapshotInspection"
+        )
+        self.assertEqual(
+            snapshot.handle["id"],
+            identity(SCHEMA, definition, snapshot.inspection),
+        )
 
     def test_clean_git_uses_tree_identity_and_commit_as_provenance(self) -> None:
         self.initialize_git()
@@ -62,12 +75,51 @@ class SnapshotTest(unittest.TestCase):
         self.assertNotEqual(first.inspection["commit"], second.inspection["commit"])
         self.assert_contract(second)
 
-    def test_dirty_git_manifest_includes_tracked_untracked_and_ignored_files(self) -> None:
+    def test_clean_git_snapshot_content_is_loaded_from_the_bound_tree(self) -> None:
+        self.initialize_git()
+        snapshot = compile_snapshot(self.root, ("standard.md",))
+
+        (self.root / "standard.md").write_text("# Changed later\n", encoding="utf-8")
+
+        self.assertEqual(snapshot.contents["standard.md"], b"# Standard\n")
+
+    def test_semantic_contract_versions_participate_in_snapshot_identity(self) -> None:
+        self.initialize_git()
+
+        first = compile_snapshot(
+            self.root,
+            ("standard.md",),
+            versions=AnalysisVersions(metadata_api_version="1"),
+        )
+        second = compile_snapshot(
+            self.root,
+            ("standard.md",),
+            versions=AnalysisVersions(metadata_api_version="2"),
+        )
+
+        self.assertNotEqual(first.handle, second.handle)
+
+        implementation_only = compile_snapshot(
+            self.root,
+            ("standard.md",),
+            versions=AnalysisVersions(
+                metadata_api_version="1",
+                analyzer_implementation_version="2",
+                graph_engine_implementation_version="2",
+            ),
+        )
+        self.assertEqual(first.handle, implementation_only.handle)
+
+    def test_dirty_git_manifest_includes_tracked_untracked_and_ignored_files(
+        self,
+    ) -> None:
         self.initialize_git()
         (self.root / ".gitignore").write_text("ignored.txt\n", encoding="utf-8")
         (self.root / "standard.md").write_text("# Changed\n", encoding="utf-8")
         (self.root / "untracked.txt").write_text("new\n", encoding="utf-8")
-        (self.root / "ignored.txt").write_text("ignored but relevant\n", encoding="utf-8")
+        (self.root / "ignored.txt").write_text(
+            "ignored but relevant\n", encoding="utf-8"
+        )
 
         snapshot = compile_snapshot(
             self.root,
@@ -104,7 +156,9 @@ class SnapshotTest(unittest.TestCase):
         self.assertEqual(snapshot.inspection["entries"][0]["tracking"], "untracked")
         self.assert_contract(snapshot)
 
-    def test_untracked_file_outside_scope_does_not_change_scoped_git_snapshot(self) -> None:
+    def test_untracked_file_outside_scope_does_not_change_scoped_git_snapshot(
+        self,
+    ) -> None:
         self.initialize_git()
         before = compile_snapshot(self.root, ("standard.md",))
         (self.root / "outside.txt").write_text("outside\n", encoding="utf-8")
@@ -167,7 +221,9 @@ class SnapshotTest(unittest.TestCase):
             compile_snapshot(self.root, ("directory-link/secret",))
         self.assertEqual(caught.exception.failure.code, "SNAPSHOT.SYMLINK_ESCAPE")
 
-    def test_dirty_gitlink_binds_nested_snapshot_without_scanning_git_data(self) -> None:
+    def test_dirty_gitlink_binds_nested_snapshot_without_scanning_git_data(
+        self,
+    ) -> None:
         self.initialize_git()
         nested = self.root / "nested"
         nested.mkdir()
@@ -182,7 +238,9 @@ class SnapshotTest(unittest.TestCase):
         )
         (nested / "nested.txt").write_text("base\n", encoding="utf-8")
         subprocess.run(("git", "-C", str(nested), "add", "nested.txt"), check=True)
-        subprocess.run(("git", "-C", str(nested), "commit", "-qm", "nested"), check=True)
+        subprocess.run(
+            ("git", "-C", str(nested), "commit", "-qm", "nested"), check=True
+        )
         self.git("add", "nested")
         self.git("commit", "-qm", "gitlink")
 
@@ -215,7 +273,9 @@ class SnapshotTest(unittest.TestCase):
         )
         (source / "nested.txt").write_text("base\n", encoding="utf-8")
         subprocess.run(("git", "-C", str(source), "add", "nested.txt"), check=True)
-        subprocess.run(("git", "-C", str(source), "commit", "-qm", "nested"), check=True)
+        subprocess.run(
+            ("git", "-C", str(source), "commit", "-qm", "nested"), check=True
+        )
         nested_revision = subprocess.run(
             ("git", "-C", str(source), "rev-parse", "HEAD"),
             check=True,

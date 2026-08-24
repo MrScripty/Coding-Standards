@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import csv
+import shutil
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -129,12 +131,12 @@ class NavigationTest(unittest.TestCase):
             }.issubset(scope)
         )
 
-    def test_route_unknown_categories_remain_visible_and_invalid_facts_reject(self) -> None:
+    def test_route_unknown_categories_remain_visible_and_invalid_facts_reject(
+        self,
+    ) -> None:
         facts = self.route_facts()
         facts["routing.topics"] = {"type": "enum-set", "state": "unknown"}
-        result = self.engine.query(
-            QueryCall(self.engine.snapshot, RouteRequest(facts))
-        )
+        result = self.engine.query(QueryCall(self.engine.snapshot, RouteRequest(facts)))
         value = self.assert_contract("RouteResult", result)
         self.assertEqual(
             [item["id"] for item in value["unresolved_questions"]],
@@ -151,7 +153,15 @@ class NavigationTest(unittest.TestCase):
         invalid = self.engine.query(
             QueryCall(
                 self.engine.snapshot,
-                RouteRequest({"routing.undeclared": {"type": "boolean", "state": "known", "value": True}}),
+                RouteRequest(
+                    {
+                        "routing.undeclared": {
+                            "type": "boolean",
+                            "state": "known",
+                            "value": True,
+                        }
+                    }
+                ),
             )
         )
         invalid_value = self.assert_contract("RejectedResult", invalid)
@@ -167,9 +177,13 @@ class NavigationTest(unittest.TestCase):
             / "evaluation/standards-effectiveness/fixtures/routing/verifier-change-routes.tsv"
         )
         with decisions_path.open(encoding="utf-8", newline="") as handle:
-            decisions = {row["case"]: row for row in csv.DictReader(handle, delimiter="\t")}
+            decisions = {
+                row["case"]: row for row in csv.DictReader(handle, delimiter="\t")
+            }
         with routes_path.open(encoding="utf-8", newline="") as handle:
-            routes = {row["case"]: row for row in csv.DictReader(handle, delimiter="\t")}
+            routes = {
+                row["case"]: row for row in csv.DictReader(handle, delimiter="\t")
+            }
 
         for case, row in decisions.items():
             facts = self.route_facts(
@@ -180,14 +194,24 @@ class NavigationTest(unittest.TestCase):
                         *(["planning"] if row["expected_planning"] == "select" else []),
                     ],
                     "routing.topics": [
-                        *(["architecture"] if row["expected_architecture"] == "select" else []),
-                        *(["performance"] if row["expected_performance"] == "select" else []),
+                        *(
+                            ["architecture"]
+                            if row["expected_architecture"] == "select"
+                            else []
+                        ),
+                        *(
+                            ["performance"]
+                            if row["expected_performance"] == "select"
+                            else []
+                        ),
                     ],
                 }
             )
             if row["expected_route"] == "unresolved":
                 facts["routing.topics"] = {"type": "enum-set", "state": "unknown"}
-            result = self.engine.query(QueryCall(self.engine.snapshot, RouteRequest(facts)))
+            result = self.engine.query(
+                QueryCall(self.engine.snapshot, RouteRequest(facts))
+            )
             value = self.assert_contract("RouteResult", result)
             if row["expected_route"] == "unresolved":
                 self.assertTrue(value["unresolved_questions"], case)
@@ -195,14 +219,15 @@ class NavigationTest(unittest.TestCase):
             direct = {
                 item["target"]
                 for item in value["reading_plan"]
-                if any(
-                    reason["kind"] == "routing-rule"
-                    for reason in item["reasons"]
-                )
+                if any(reason["kind"] == "routing-rule" for reason in item["reasons"])
             }
             closure = {item["target"] for item in value["reading_plan"]} - {"router"}
-            self.assertEqual(direct, set(routes[case]["direct_modules"].split(",")), case)
-            self.assertEqual(closure, set(routes[case]["requires_closure"].split(",")), case)
+            self.assertEqual(
+                direct, set(routes[case]["direct_modules"].split(",")), case
+            )
+            self.assertEqual(
+                closure, set(routes[case]["requires_closure"].split(",")), case
+            )
 
     def test_route_retains_direct_and_every_dependency_cause(self) -> None:
         value = self.engine.query(
@@ -225,20 +250,12 @@ class NavigationTest(unittest.TestCase):
         core_reasons = entries["core"]["reasons"]
         implementation_reasons = entries["workflow.implementation"]["reasons"]
         self.assertTrue(
-            any(
-                reason["kind"] == "routing-rule"
-                for reason in implementation_reasons
-            )
+            any(reason["kind"] == "routing-rule" for reason in implementation_reasons)
         )
         self.assertTrue(
-            any(
-                reason["kind"] == "requires"
-                for reason in implementation_reasons
-            )
+            any(reason["kind"] == "requires" for reason in implementation_reasons)
         )
-        requires = [
-            reason for reason in core_reasons if reason["kind"] == "requires"
-        ]
+        requires = [reason for reason in core_reasons if reason["kind"] == "requires"]
         self.assertEqual(
             len(requires),
             len({(reason["edge"], reason["source"]) for reason in requires}),
@@ -262,7 +279,55 @@ class NavigationTest(unittest.TestCase):
         read = self.engine.query(QueryCall(self.engine.snapshot, ReadRequest(target)))
         self.assertIsInstance(read, ReadResult)
 
-    def test_structured_agent_tool_routes_then_reads_without_repository_paths(self) -> None:
+    def test_module_read_uses_immutable_snapshot_content_after_source_mutation(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "repository"
+            shutil.copytree(
+                REPO_ROOT,
+                root,
+                ignore=shutil.ignore_patterns(".git", "__pycache__", "*.pyc"),
+            )
+            engine = StandardsEngine.open_repository(root)
+            issued = dict(engine.snapshot)
+            original = engine.query(
+                QueryCall(issued, ReadRequest("workflow.verification"))
+            ).as_contract()["content"]
+
+            source = root / "workflows/verification.md"
+            source.write_text(
+                source.read_text(encoding="utf-8") + "\nMUTATED AFTER SNAPSHOT\n",
+                encoding="utf-8",
+            )
+
+            repeated = engine.query(
+                QueryCall(issued, ReadRequest("workflow.verification"))
+            ).as_contract()
+            self.assertEqual(repeated["content"], original)
+            self.assertNotIn("MUTATED AFTER SNAPSHOT", repeated["content"])
+
+    def test_navigation_next_operations_bind_the_issued_snapshot(self) -> None:
+        result = self.engine.query(
+            QueryCall(
+                self.engine.snapshot,
+                RouteRequest(
+                    self.route_facts(**{"routing.activities": ["implementation"]})
+                ),
+            )
+        ).as_contract()
+
+        self.assertTrue(result["next_operations"])
+        self.assertTrue(
+            all(
+                operation["snapshot"] == self.engine.snapshot
+                for operation in result["next_operations"]
+            )
+        )
+
+    def test_structured_agent_tool_routes_then_reads_without_repository_paths(
+        self,
+    ) -> None:
         tool = AgentToolFacade.open_repository(REPO_ROOT)
         route = tool.query(
             {
@@ -295,12 +360,18 @@ class NavigationTest(unittest.TestCase):
         invalid = tool.query(
             {
                 "snapshot": dict(tool.snapshot),
-                "request": {"kind": "read", "target": "workflow.implementation", "extra": True},
+                "request": {
+                    "kind": "read",
+                    "target": "workflow.implementation",
+                    "extra": True,
+                },
             }
         )
         self.assertEqual(invalid["code"], "INTERFACE.INVALID_ARGUMENTS")
 
-    def test_module_read_and_inspection_use_derived_whole_artifact_authority(self) -> None:
+    def test_module_read_and_inspection_use_derived_whole_artifact_authority(
+        self,
+    ) -> None:
         result = self.engine.query(
             QueryCall(self.engine.snapshot, ReadRequest("workflow.verification"))
         )
@@ -310,9 +381,7 @@ class NavigationTest(unittest.TestCase):
         self.assertEqual(value["policy"]["scope"], {"kind": "whole-artifact"})
         self.assertIn("# Verification", value["content"])
 
-        inspection = self.engine.inspect(
-            InspectCall(value["policy"]["handle"])
-        )
+        inspection = self.engine.inspect(InspectCall(value["policy"]["handle"]))
         self.assertIsInstance(inspection, PolicyInspectionResult)
         inspected = self.assert_contract("PolicyInspectionResult", inspection)
         self.assertEqual(inspected["declaration"]["kind"], "canonical-module")
@@ -374,7 +443,9 @@ class NavigationTest(unittest.TestCase):
         }
         self.assertIn("core", transitive_targets)
 
-    def test_nontransitive_group_and_unknown_group_return_typed_rejections(self) -> None:
+    def test_nontransitive_group_and_unknown_group_return_typed_rejections(
+        self,
+    ) -> None:
         forbidden = self.engine.query(
             QueryCall(
                 self.engine.snapshot,
@@ -452,11 +523,67 @@ class NavigationTest(unittest.TestCase):
         self.assertEqual(semantics["propagation"], "source-to-consumer")
         self.assertTrue(semantics["evidence_owner"].startswith("suite:"))
         self.assertTrue(semantics["rationale"])
-        self.assertTrue(semantics["declaration_source"].endswith("workflow.planning.toml"))
+        self.assertTrue(
+            semantics["declaration_source"].endswith("workflow.planning.toml")
+        )
 
         navigation = self.engine.inspect(InspectCall(value["handle"]))
-        navigation_value = self.assert_contract("NavigationInspectionResult", navigation)
+        navigation_value = self.assert_contract(
+            "NavigationInspectionResult", navigation
+        )
         self.assertEqual(navigation_value["navigation"]["handle"], value["handle"])
+
+    def test_every_advertised_coverage_handle_is_inspectable(self) -> None:
+        cases = (
+            (
+                "views",
+                "CoverageAuthorityViewInspectionResult",
+                "coverage_view",
+            ),
+            (
+                "requirements",
+                "CoverageRequirementInspectionResult",
+                "requirement",
+            ),
+            (
+                "attestations",
+                "CoverageAttestationInspectionResult",
+                "attestation",
+            ),
+            (
+                "certificates",
+                "CertificateInspectionResult",
+                "certificate",
+            ),
+        )
+        for collection, definition, field in cases:
+            with self.subTest(collection=collection):
+                artifact = next(
+                    iter(getattr(self.engine._coverage, collection).values())
+                )
+                projection = artifact.as_projection()
+                result = self.engine.inspect(InspectCall(projection["handle"]))
+                value = self.assert_contract(definition, result)
+                self.assertEqual(value[field], projection)
+
+    def test_agent_facade_does_not_relabel_engine_programming_errors(self) -> None:
+        class FailingEngine:
+            snapshot = self.engine.snapshot
+
+            def query(self, _call):
+                raise ValueError("engine invariant failure")
+
+        tool = AgentToolFacade(FailingEngine(), SCHEMA)
+        with self.assertRaisesRegex(ValueError, "engine invariant failure"):
+            tool.query(
+                {
+                    "snapshot": dict(self.engine.snapshot),
+                    "request": {
+                        "kind": "read",
+                        "target": "workflow.verification",
+                    },
+                }
+            )
 
     def test_stale_snapshot_and_repository_path_read_do_not_fall_back(self) -> None:
         stale = dict(self.engine.snapshot)
@@ -473,7 +600,9 @@ class NavigationTest(unittest.TestCase):
         path_value = self.assert_contract("RejectedResult", path_result)
         self.assertEqual(path_value["code"], "NAVIGATION.UNKNOWN_POLICY")
 
-    def test_policy_unit_target_is_normalized_and_malformed_native_calls_are_rejected(self) -> None:
+    def test_policy_unit_target_is_normalized_and_malformed_native_calls_are_rejected(
+        self,
+    ) -> None:
         related = self.engine.query(
             QueryCall(
                 self.engine.snapshot,

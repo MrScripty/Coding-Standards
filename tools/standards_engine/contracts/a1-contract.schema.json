@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v8",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v9",
   "title": "Standards Engine A1 contract",
   "description": "Canonical typed contract for snapshot-bound navigation and read-only standards-change analysis.",
   "oneOf": [
@@ -30,8 +30,8 @@
     { "$ref": "#/$defs/ConsumerCoverageCertificate" }
   ],
   "x-standards-engine-contract": {
-    "contract_version": 8,
-    "schema_version": 8,
+    "contract_version": 9,
+    "schema_version": 9,
     "applicability_version": 3,
     "public_operations": {
       "query": {
@@ -195,7 +195,7 @@
       "properties": {
         "kind": { "const": "snapshot-handle" },
         "id": { "$ref": "#/$defs/SnapshotId" },
-        "schema_version": { "const": 1 }
+        "schema_version": { "const": 2 }
       },
       "additionalProperties": false
     },
@@ -739,17 +739,47 @@
       },
       "additionalProperties": false
     },
-    "NextOperation": {
+    "QueryNextOperation": {
       "type": "object",
-      "required": ["operation", "request_kind"],
+      "required": ["operation", "request_kind", "snapshot"],
       "properties": {
-        "operation": { "enum": ["query", "prepare", "resolve", "inspect"] },
-        "request_kind": { "enum": ["route", "read", "related", "analysis", "provide-fact", "consumer-disposition", "impact-disposition", "coverage-attestation", "inspect"] },
+        "operation": { "const": "query" },
+        "request_kind": { "enum": ["route", "read", "related"] },
         "target": { "$ref": "#/$defs/CanonicalId" },
-        "obligation_id": { "$ref": "#/$defs/ObligationId" },
-        "requirement_id": { "$ref": "#/$defs/FactRequirementId" }
+        "snapshot": { "$ref": "#/$defs/SnapshotHandle" }
       },
       "additionalProperties": false
+    },
+    "ResolveNextOperation": {
+      "type": "object",
+      "required": ["operation", "request_kind", "analysis"],
+      "properties": {
+        "operation": { "const": "resolve" },
+        "request_kind": { "enum": ["provide-fact", "consumer-disposition", "impact-disposition", "coverage-attestation"] },
+        "target": { "$ref": "#/$defs/CanonicalId" },
+        "obligation_id": { "$ref": "#/$defs/ObligationId" },
+        "requirement_id": { "$ref": "#/$defs/FactRequirementId" },
+        "analysis": { "$ref": "#/$defs/AnalysisHandle" }
+      },
+      "additionalProperties": false
+    },
+    "InspectNextOperation": {
+      "type": "object",
+      "required": ["operation", "request_kind", "target", "snapshot"],
+      "properties": {
+        "operation": { "const": "inspect" },
+        "request_kind": { "const": "inspect" },
+        "target": { "$ref": "#/$defs/CanonicalId" },
+        "snapshot": { "$ref": "#/$defs/SnapshotHandle" }
+      },
+      "additionalProperties": false
+    },
+    "NextOperation": {
+      "oneOf": [
+        { "$ref": "#/$defs/QueryNextOperation" },
+        { "$ref": "#/$defs/ResolveNextOperation" },
+        { "$ref": "#/$defs/InspectNextOperation" }
+      ]
     },
     "RouteRequest": {
       "type": "object",
@@ -1340,7 +1370,7 @@
         "analysis_contract_version": { "const": 5 },
         "analysis_schema_version": { "const": 2 },
         "result_schema_version": { "const": 1 },
-        "interface_schema_version": { "const": 8 },
+        "interface_schema_version": { "const": 9 },
         "applicability_version": { "const": 3 },
         "authorization_contract_version": { "const": "authorization-authority.v1" },
         "metadata_api_version": { "$ref": "#/$defs/NonEmptyString" },
@@ -1412,7 +1442,7 @@
           "type": "array",
           "minItems": 1,
           "uniqueItems": true,
-          "items": { "$ref": "#/$defs/CanonicalId" }
+          "items": { "$ref": "#/$defs/NonEmptyString" }
         }
       },
       "additionalProperties": false,
@@ -2066,9 +2096,9 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:snapshot:v1",
-        "include": ["tree", "scope", "exclusions", "submodules"],
-        "exclude": ["handle", "commit", "versions"]
+        "domain": "coding-standards:snapshot:v2",
+        "include": ["tree", "scope", "exclusions", "submodules", "versions.analysis_contract_version", "versions.analysis_schema_version", "versions.result_schema_version", "versions.interface_schema_version", "versions.applicability_version", "versions.authorization_contract_version", "versions.metadata_api_version", "versions.graph_engine_contract_version", "versions.parser_versions", "versions.evidence_provider_contract_versions"],
+        "exclude": ["handle", "commit", "versions.graph_engine_implementation_version", "versions.analyzer_implementation_version"]
       }
     },
     "ManifestSnapshotInspection": {
@@ -2092,9 +2122,9 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:snapshot:v1",
-        "include": ["source_kind", "scope", "entries"],
-        "exclude": ["handle", "versions"]
+        "domain": "coding-standards:snapshot:v2",
+        "include": ["source_kind", "scope", "entries", "versions.analysis_contract_version", "versions.analysis_schema_version", "versions.result_schema_version", "versions.interface_schema_version", "versions.applicability_version", "versions.authorization_contract_version", "versions.metadata_api_version", "versions.graph_engine_contract_version", "versions.parser_versions", "versions.evidence_provider_contract_versions"],
+        "exclude": ["handle", "versions.graph_engine_implementation_version", "versions.analyzer_implementation_version"]
       }
     },
     "ProvenanceRecord": {
@@ -2175,6 +2205,60 @@
       },
       "additionalProperties": false
     },
+    "CoverageAuthorityViewInspectionResult": {
+      "type": "object",
+      "required": ["kind", "coverage_view"],
+      "properties": {
+        "kind": { "const": "coverage-authority-view-inspection-result" },
+        "coverage_view": { "$ref": "#/$defs/CoverageAuthorityView" }
+      },
+      "additionalProperties": false
+    },
+    "CoverageRequirementInspectionResult": {
+      "type": "object",
+      "required": ["kind", "requirement"],
+      "properties": {
+        "kind": { "const": "coverage-requirement-inspection-result" },
+        "requirement": { "$ref": "#/$defs/CoverageAuditRequirement" }
+      },
+      "additionalProperties": false
+    },
+    "CoverageAttestationInspectionResult": {
+      "type": "object",
+      "required": ["kind", "attestation"],
+      "properties": {
+        "kind": { "const": "coverage-attestation-inspection-result" },
+        "attestation": { "$ref": "#/$defs/CoverageAttestation" }
+      },
+      "additionalProperties": false
+    },
+    "AnalysisContextInspectionResult": {
+      "type": "object",
+      "required": ["kind", "context"],
+      "properties": {
+        "kind": { "const": "analysis-context-inspection-result" },
+        "context": { "$ref": "#/$defs/AnalysisContext" }
+      },
+      "additionalProperties": false
+    },
+    "FactRequirementInspectionResult": {
+      "type": "object",
+      "required": ["kind", "requirement"],
+      "properties": {
+        "kind": { "const": "fact-requirement-inspection-result" },
+        "requirement": { "$ref": "#/$defs/FactRequirement" }
+      },
+      "additionalProperties": false
+    },
+    "FactObservationInspectionResult": {
+      "type": "object",
+      "required": ["kind", "observation"],
+      "properties": {
+        "kind": { "const": "fact-observation-inspection-result" },
+        "observation": { "$ref": "#/$defs/FactObservation" }
+      },
+      "additionalProperties": false
+    },
     "InspectionResult": {
       "oneOf": [
         { "$ref": "#/$defs/SnapshotInspectionResult" },
@@ -2182,6 +2266,12 @@
         { "$ref": "#/$defs/RelationshipInspectionResult" },
         { "$ref": "#/$defs/NavigationInspectionResult" },
         { "$ref": "#/$defs/CertificateInspectionResult" },
+        { "$ref": "#/$defs/CoverageAuthorityViewInspectionResult" },
+        { "$ref": "#/$defs/CoverageRequirementInspectionResult" },
+        { "$ref": "#/$defs/CoverageAttestationInspectionResult" },
+        { "$ref": "#/$defs/AnalysisContextInspectionResult" },
+        { "$ref": "#/$defs/FactRequirementInspectionResult" },
+        { "$ref": "#/$defs/FactObservationInspectionResult" },
         { "$ref": "#/$defs/AnalysisState" }
       ]
     },
