@@ -20,13 +20,13 @@ for fixture in "$FIXTURES"/invalid-*.md; do
   expected=""
   case "$(basename "$fixture")" in
     invalid-accepted-satisfied-without-evidence.md)
-      expected="satisfied objective A1 requires evidence"
+      expected="$fixture: satisfied objective A1 requires evidence"
       ;;
     invalid-objective-partial.md)
-      expected="objective A1 has invalid status partial"
+      expected="$fixture: objective A1 has invalid status partial"
       ;;
   esac
-  if [[ -n "$expected" ]] && ! grep -Fq "$expected" <<<"$output"; then
+  if [[ -n "$expected" && "$output" != "$expected" ]]; then
     printf 'Invalid plan fixture produced the wrong diagnostic: %s\n' \
       "$fixture" >&2
     printf 'Expected: %s\nObserved: %s\n' "$expected" "$output" >&2

@@ -1,6 +1,13 @@
 # Plan A1 Boundary Repair IV Candidate
 
-**Status:** `Ready for independent review`
+**Status:** `Rework required`
+
+**Review outcome:** The candidate was not accepted. Generated validation still
+used a second equality implementation for constants and enums and ordinary
+Python membership for `uniqueItems`, producing canonical disagreements for
+mixed Boolean/integer values and canonically equivalent Unicode. The plan
+fixture harness also matched diagnostic fragments rather than the complete
+emitted line. This report remains historical candidate evidence only.
 
 **Implementation commit:** `3d389dd7f73f48c21d80570331c8058737f941db`
 

@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import get_type_hints
 
 from tools.standards_engine.contracts import generate_contract
+from tools.standards_engine.contracts import validate_contracts
 from tools.standards_engine.standards_engine import _generated_contract as generated
 
 
@@ -178,6 +179,44 @@ class GeneratedContractTest(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             generated.RouteResult.from_value({"kind": "route-result"})
+
+    def test_generated_unique_items_matches_canonical_serialization(self) -> None:
+        schema = json.loads(
+            (
+                REPO_ROOT / "tools/standards_engine/contracts/a1-contract.schema.json"
+            ).read_text(encoding="utf-8")
+        )
+        node = schema["$defs"]["InExpression"]
+        mixed_numeric_values = {
+            "operator": "in",
+            "fact": "change.requires-review",
+            "values": [1, True],
+        }
+        validate_contracts.validate(schema, node, mixed_numeric_values, "$")
+        self.assertEqual(
+            generated.InExpression.from_value(mixed_numeric_values).values,
+            (1, True),
+        )
+
+        canonically_duplicate_unicode = {
+            "operator": "in",
+            "fact": "change.requires-review",
+            "values": ["é", "e\u0301"],
+        }
+        with self.assertRaises(validate_contracts.ContractError):
+            validate_contracts.validate(schema, node, canonically_duplicate_unicode, "$")
+        with self.assertRaises(ValueError):
+            generated.InExpression.from_value(canonically_duplicate_unicode)
+
+    def test_generated_const_and_enum_use_canonical_serialization(self) -> None:
+        schema = {"$defs": {}}
+        for node in ({"const": "é"}, {"enum": ["é"]}):
+            with self.subTest(node=node):
+                validate_contracts.validate(schema, node, "e\u0301", "$")
+                self.assertEqual(
+                    generated._decode_node(node, "e\u0301"),
+                    "e\u0301",
+                )
 
     def test_generated_agent_tools_expose_every_public_operation(self) -> None:
         value = json.loads(

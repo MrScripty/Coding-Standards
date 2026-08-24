@@ -222,16 +222,7 @@ def _encode(value: object) -> object:
 
 
 def _schema_equal(left: object, right: object) -> bool:
-    if isinstance(left, Mapping) and isinstance(right, Mapping):
-        return set(left) == set(right) and all(
-            _schema_equal(left[key], right[key]) for key in left
-        )
-    if isinstance(left, (list, tuple)) and isinstance(right, (list, tuple)):
-        return len(left) == len(right) and all(
-            _schema_equal(left_item, right_item)
-            for left_item, right_item in zip(left, right)
-        )
-    return type(left) is type(right) and left == right
+    return canonical_json_bytes(_encode(left)) == canonical_json_bytes(_encode(right))
 
 
 def _decode_node(node: Mapping[str, object], value: object) -> object:
@@ -279,8 +270,10 @@ def _decode_node(node: Mapping[str, object], value: object) -> object:
         result = tuple(_decode_node(node.get("items", {}), item) for item in value)
         if len(result) < int(node.get("minItems", 0)):
             raise ValueError("array is shorter than the generated minimum")
-        if node.get("uniqueItems") and any(item in result[:index] for index, item in enumerate(result)):
-            raise ValueError("array items must be unique")
+        if node.get("uniqueItems"):
+            encoded = [canonical_json_bytes(_encode(item)) for item in result]
+            if len(set(encoded)) != len(encoded):
+                raise ValueError("array items must be unique")
         return result
     if value_type == "object":
         if isinstance(value, ContractObject) or hasattr(value, "as_contract"):
@@ -392,6 +385,8 @@ def _python_projection(schema: dict[str, Any]) -> str:
         "from dataclasses import dataclass" + (", field" if uses_default_factory else ""),
         "from types import MappingProxyType",
         "from typing import Any, ClassVar, Iterator, Literal, Mapping, TypeAlias",
+        "",
+        "from tools.standards_metadata.standards_metadata.serialization import canonical_json_bytes",
         "",
         f"INTERFACE_SCHEMA_VERSION = {metadata['schema_version']}",
         "PUBLIC_OPERATIONS = MappingProxyType(",

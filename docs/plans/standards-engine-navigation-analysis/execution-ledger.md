@@ -938,6 +938,20 @@
 - Published the exact evidence as
   [A1 boundary repair IV candidate](reports/a1-boundary-repair-iv-candidate.md).
 
+## 2026-08-24: A1 Boundary Repair IV Review Failed
+
+- Independent review rejected candidate commit `3d389dd7`, tree
+  `6fcbfed114dcfd768186f8610c0792e220657b32`.
+- Generated constant and enum checks still duplicated canonical comparison
+  without Unicode normalization, while generated `uniqueItems` used Python
+  equality. Mixed integer and Boolean values and canonically equivalent
+  Unicode therefore received different validity decisions from the canonical
+  validator and generated models.
+- The plan fixture harness required only a diagnostic substring rather than
+  the complete emitted line, weakening the Repair IV evidence claim.
+- Kept Plan A1 `Verifying`, retained SENA-022 as active, and left Plan A2
+  inactive while Repair V proceeded against the canonical serializer.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

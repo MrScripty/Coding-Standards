@@ -2,14 +2,14 @@
 
 **Plan status:** `Verifying`
 
-**Current phase:** A1 acceptance boundary repair IV
+**Current phase:** A1 acceptance boundary repair V
 
-**Next slice:** obtain independent acceptance review of the repair IV candidate
-boundary; do not activate Plan A2
+**Next slice:** record the verified repair V implementation boundary and
+publish its exact evidence for independent acceptance review
 
 **Acceptance status:** `pending`
 
-**Candidate repair IV implementation boundary:** commit
+**Rejected repair IV implementation boundary:** commit
 `3d389dd7f73f48c21d80570331c8058737f941db`, tree
 `6fcbfed114dcfd768186f8610c0792e220657b32`; evidence in
 [A1 boundary repair IV candidate](reports/a1-boundary-repair-iv-candidate.md)
