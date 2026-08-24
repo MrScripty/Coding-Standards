@@ -17,6 +17,10 @@ from tools.standards_policy_impact.standards_policy_impact import (
 
 from .changes import ClassifiedChange, GraphSeedSelection, ReviewScope
 from .errors import AnalysisError, AnalysisFailure
+from .serialization import canonical_json_bytes, digest_bytes, identity
+
+
+IMPACT_TRACE_DOMAIN = "coding-standards:impact-trace:v1"
 
 
 @dataclass(frozen=True, slots=True)
@@ -38,6 +42,8 @@ class ImpactTrace:
     policy_semantics: PolicyImpactSemantics | None
     applicability: str
     unresolved_facts: tuple[str, ...]
+    applicability_facts: tuple[tuple[str, str], ...]
+    id: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -91,19 +97,15 @@ def select_impact(
     for edge_id in sorted(by_edge):
         selected_traces = tuple(sorted(by_edge[edge_id], key=_trace_key))
         applicability = _aggregate_applicability(selected_traces)
-        unresolved = (
-            tuple(
-                sorted(
-                    {
-                        fact
-                        for trace in selected_traces
-                        if trace.applicability == Truth.UNKNOWN.value
-                        for fact in trace.unresolved_facts
-                    }
-                )
+        unresolved = tuple(
+            sorted(
+                {
+                    fact
+                    for trace in selected_traces
+                    if trace.applicability == Truth.UNKNOWN.value
+                    for fact in trace.unresolved_facts
+                }
             )
-            if applicability == Truth.UNKNOWN.value
-            else ()
         )
         candidates.append(
             ImpactCandidate(
@@ -112,9 +114,7 @@ def select_impact(
                 applicability,
                 unresolved,
                 (
-                    ReviewScope("whole-artifact")
-                    if applicability == Truth.UNKNOWN.value
-                    else None
+                    ReviewScope("whole-artifact") if unresolved else None
                 ),
             )
         )
@@ -204,6 +204,7 @@ def _traverse(
                         )
                     applicability = "not-declared"
                     unresolved_facts: tuple[str, ...] = ()
+                    applicability_facts: tuple[tuple[str, str], ...] = ()
                     if semantics is not None:
                         if facts is None:
                             raise AnalysisError(
@@ -230,6 +231,42 @@ def _traverse(
                             ) from error
                         applicability = evaluation.truth.value
                         unresolved_facts = evaluation.unresolved_facts
+                        applicability_facts = tuple(
+                            (
+                                fact,
+                                _fact_value_digest(facts, fact),
+                            )
+                            for fact in semantics.applicability_program.referenced_facts
+                        )
+                    trace_projection = {
+                        "graph": side,
+                        "seed": seed,
+                        "selected_group": group_id,
+                        "edge_id": edge.id,
+                        "source": edge.source,
+                        "target": edge.target,
+                        "relation": edge.relation,
+                        "edge_groups": sorted(edge.groups),
+                        "path_nodes": list(step.path_nodes),
+                        "path_edges": list(step.path_edges),
+                        "provenance": {
+                            "source": edge.provenance.source_id,
+                            "kind": edge.provenance.kind,
+                            "locator": edge.provenance.locator,
+                        },
+                        "metadata": dict(sorted(edge.metadata.items())),
+                        "policy_semantics": (
+                            None
+                            if semantics is None
+                            else semantics.dependency_fingerprint
+                        ),
+                        "applicability": applicability,
+                        "unresolved_facts": list(unresolved_facts),
+                        "applicability_facts": [
+                            {"fact": fact, "digest": digest}
+                            for fact, digest in applicability_facts
+                        ],
+                    }
                     trace = ImpactTrace(
                         side,
                         seed,
@@ -248,6 +285,12 @@ def _traverse(
                         semantics,
                         applicability,
                         unresolved_facts,
+                        applicability_facts,
+                        identity(
+                            IMPACT_TRACE_DOMAIN,
+                            "impact-trace",
+                            trace_projection,
+                        ),
                     )
                     key = _trace_key(trace)
                     if key not in seen:
@@ -295,9 +338,22 @@ def _trace_key(trace: ImpactTrace) -> tuple[object, ...]:
         trace.metadata,
         trace.applicability,
         trace.unresolved_facts,
+        trace.applicability_facts,
         (
             ""
             if trace.policy_semantics is None
             else trace.policy_semantics.dependency_fingerprint
         ),
     )
+
+
+def _fact_value_digest(facts: FactSet, fact: str) -> str:
+    value = facts.canonical_values.get(fact)
+    projection: dict[str, object]
+    if value is None:
+        projection = {"state": "missing"}
+    else:
+        projection = {"type": value.type, "state": value.state}
+        if value.state == "known":
+            projection["value"] = value.value
+    return digest_bytes(canonical_json_bytes(projection))

@@ -24,10 +24,12 @@ from tools.standards_analysis.standards_analysis import (
     AnalysisError,
     ChangeDescriptor,
     ChangeKind,
+    ConsumerReviewContract,
     ReviewScope,
     SemanticProposal,
     classify_changes,
     generate_applicability_resolution_work,
+    generate_consumer_review_obligations,
     select_impact,
 )
 from tools.standards_engine.contracts.validate_contracts import validate
@@ -184,10 +186,18 @@ class ImpactSelectionTest(unittest.TestCase):
         policy_corpus: PolicyUnitCorpus,
         *,
         expression: dict[str, object],
+        source: str = POLICY,
+        consumer: str = "consumer",
+        relation: str = "normative-consumer",
+        consumer_scope: dict[str, object] | None = None,
+        evidence_owner: str = "suite:evidence",
         fact_schema_id: str = "fixture.policy-impact.facts",
         fact_declarations: list[dict[str, object]] | None = None,
-        edge_id: str = "policy-impact:v1/workflow.test.policy/normative-consumer/consumer",
+        edge_id: str | None = None,
     ) -> tuple[EdgeRegistry, CompiledPolicyImpactSet]:
+        selected_edge_id = edge_id or (
+            f"policy-impact:v1/{source}/{relation}/{consumer}"
+        )
         fact_schema = compile_fact_schema(
             {
                 "kind": "applicability-fact-schema",
@@ -197,30 +207,30 @@ class ImpactSelectionTest(unittest.TestCase):
             }
         )
         policy_edge = Edge(
-            edge_id,
-            POLICY,
-            "consumer",
-            "normative-consumer",
+            selected_edge_id,
+            source,
+            consumer,
+            relation,
             (POLICY_IMPACT,),
             Provenance(POLICY_IMPACT_SOURCE_ID, "generator", "declarations.toml"),
         )
         semantics = PolicyImpactSemantics(
-            edge_id,
-            POLICY,
-            "consumer",
-            "normative-consumer",
+            selected_edge_id,
+            source,
+            consumer,
+            relation,
             fact_schema.compile(expression),
             None,
-            None,
+            consumer_scope,
             "source-to-consumer",
-            "suite:evidence",
+            evidence_owner,
             "Fixture semantics.",
             "declarations.toml",
             "sha256:" + "d" * 64,
         )
         compiled = CompiledPolicyImpactSet(
             GraphContribution((), (), (policy_edge,)),
-            {edge_id: semantics},
+            {selected_edge_id: semantics},
             fact_schema,
             "catalog.toml",
             ("declarations.toml",),
@@ -232,19 +242,393 @@ class ImpactSelectionTest(unittest.TestCase):
             self.root,
             (
                 PolicyUnitGraphSource(policy_corpus),
-                RelationshipSource((), ("consumer",)),
+                RelationshipSource(
+                    (),
+                    tuple(
+                        sorted(
+                            {consumer, *(unit.module for unit in policy_corpus.units)}
+                        )
+                    ),
+                ),
                 PolicyImpactSource(compiled),
             ),
         )
         return graph, compiled
 
-    def modification(self) -> object:
-        selected = policy_unit()
+    def modification(self, policy_id: str = POLICY) -> object:
+        selected = policy_unit(policy_id)
         return classify_changes(
             corpus(selected),
             corpus(selected),
-            (ChangeDescriptor(ChangeKind.MODIFICATION, (POLICY,), (POLICY,), SCOPE),),
+            (
+                ChangeDescriptor(
+                    ChangeKind.MODIFICATION,
+                    (policy_id,),
+                    (policy_id,),
+                    SCOPE,
+                ),
+            ),
         )[0]
+
+    def test_consumer_review_retains_complete_policy_provenance(self) -> None:
+        graph, compiled = self.compiled_policy_graph(
+            corpus(policy_unit()),
+            expression={"operator": "always"},
+        )
+        selection = select_impact(
+            self.modification(), graph, graph, compiled, compiled
+        )
+
+        obligations = generate_consumer_review_obligations((selection,))
+
+        self.assertEqual(len(obligations), 1)
+        value = obligations[0].as_contract()
+        self.assertEqual(value["target"], "consumer")
+        self.assertEqual(len(value["reasons"]), 1)
+        reason = value["reasons"][0]
+        self.assertEqual(
+            value["review_contract"]["id"],
+            "decision-contract.consumer-review.v1",
+        )
+        self.assertEqual(reason["source"], POLICY)
+        self.assertEqual(reason["relation"], "normative-consumer")
+        self.assertEqual(reason["evidence_owner"], "suite:evidence")
+        self.assertEqual(
+            [trace["graph"] for trace in reason["traces"]],
+            ["accepted", "proposed"],
+        )
+        validate(SCHEMA, SCHEMA["$defs"]["Obligation"], value, "$obligation")
+
+    def test_compatible_policy_selectors_consolidate_independent_of_order(self) -> None:
+        second = "workflow.test.second-policy"
+        first_graph, first_compiled = self.compiled_policy_graph(
+            corpus(policy_unit()),
+            expression={"operator": "always"},
+            edge_id="policy-impact:v1/first",
+        )
+        second_graph, second_compiled = self.compiled_policy_graph(
+            corpus(policy_unit(second)),
+            expression={"operator": "always"},
+            source=second,
+            edge_id="policy-impact:v1/second",
+        )
+        first = select_impact(
+            self.modification(),
+            first_graph,
+            first_graph,
+            first_compiled,
+            first_compiled,
+        )
+        another = select_impact(
+            self.modification(second),
+            second_graph,
+            second_graph,
+            second_compiled,
+            second_compiled,
+        )
+
+        forward = generate_consumer_review_obligations((first, another))
+        reverse = generate_consumer_review_obligations((another, first, first))
+
+        self.assertEqual(len(forward), 1)
+        self.assertEqual(forward[0].id, reverse[0].id)
+        self.assertNotEqual(
+            forward[0].id,
+            generate_consumer_review_obligations((first,))[0].id,
+        )
+        self.assertEqual(
+            [reason["source"] for reason in forward[0].as_contract()["reasons"]],
+            [POLICY, second],
+        )
+
+    def test_review_contract_identity_defines_compatibility(self) -> None:
+        first_graph, first_compiled = self.compiled_policy_graph(
+            corpus(policy_unit()),
+            expression={"operator": "always"},
+            relation="first-relation",
+            consumer_scope={"kind": "structured", "heading_path": ["Shared"]},
+            edge_id="policy-impact:v1/first-scope",
+        )
+        second_graph, second_compiled = self.compiled_policy_graph(
+            corpus(policy_unit()),
+            expression={"operator": "always"},
+            relation="second-relation",
+            consumer_scope={"kind": "structured", "heading_path": ["Shared"]},
+            edge_id="policy-impact:v1/second-scope",
+        )
+        first = select_impact(
+            self.modification(), first_graph, first_graph, first_compiled, first_compiled
+        )
+        second = select_impact(
+            self.modification(), second_graph, second_graph, second_compiled, second_compiled
+        )
+        contracts = {
+            "first-relation": ConsumerReviewContract(
+                "decision-contract.first-review.v1",
+                1,
+                ("reviewed-no-change", "blocked"),
+                "evidence-reference.v1",
+                "standards.review.consumer",
+                "review the first scope",
+            ),
+            "second-relation": ConsumerReviewContract(
+                "decision-contract.second-review.v1",
+                1,
+                ("updated", "blocked"),
+                "evidence-reference.v1",
+                "standards.review.consumer",
+                "review the second scope",
+            ),
+        }
+
+        obligations = generate_consumer_review_obligations(
+            (first, second), review_contracts=contracts
+        )
+
+        self.assertEqual(len(obligations), 2)
+        self.assertEqual(
+            {item.fingerprint.decision_contract for item in obligations},
+            set(contract.id for contract in contracts.values()),
+        )
+        self.assertEqual(
+            {item.scope.heading_path for item in obligations},
+            {("Shared",)},
+        )
+        self.assertEqual(len({item.id for item in obligations}), 2)
+
+    def test_canonical_scope_equality_defines_compatibility(self) -> None:
+        first_graph, first_compiled = self.compiled_policy_graph(
+            corpus(policy_unit()),
+            expression={"operator": "always"},
+            consumer_scope={"kind": "structured", "heading_path": ["First"]},
+            edge_id="policy-impact:v1/first-scope",
+        )
+        second_graph, second_compiled = self.compiled_policy_graph(
+            corpus(policy_unit()),
+            expression={"operator": "always"},
+            consumer_scope={"kind": "structured", "heading_path": ["Second"]},
+            edge_id="policy-impact:v1/second-scope",
+        )
+        first = select_impact(
+            self.modification(), first_graph, first_graph, first_compiled, first_compiled
+        )
+        second = select_impact(
+            self.modification(), second_graph, second_graph, second_compiled, second_compiled
+        )
+
+        obligations = generate_consumer_review_obligations((first, second))
+
+        self.assertEqual(len(obligations), 2)
+        self.assertEqual(
+            {item.scope.heading_path for item in obligations},
+            {("First",), ("Second",)},
+        )
+
+    def test_conflicting_review_contract_identity_is_rejected(self) -> None:
+        graph, compiled = self.compiled_policy_graph(
+            corpus(policy_unit()),
+            expression={"operator": "always"},
+            relation="first-relation",
+        )
+        selection = select_impact(
+            self.modification(), graph, graph, compiled, compiled
+        )
+        shared = "decision-contract.shared-review.v1"
+        contracts = {
+            "first-relation": ConsumerReviewContract(
+                shared,
+                1,
+                ("updated", "blocked"),
+                "evidence-reference.v1",
+                "standards.review.consumer",
+                "first meaning",
+            ),
+            "second-relation": ConsumerReviewContract(
+                shared,
+                1,
+                ("reviewed-no-change", "blocked"),
+                "evidence-reference.v1",
+                "standards.review.consumer",
+                "second meaning",
+            ),
+        }
+
+        with self.assertRaises(AnalysisError) as caught:
+            generate_consumer_review_obligations(
+                (selection,), review_contracts=contracts
+            )
+        self.assertEqual(
+            caught.exception.failure.code,
+            "CONSUMER_REVIEW.CONTRACT_ID_CONFLICT",
+        )
+
+    def test_scope_and_contract_changes_each_change_obligation_identity(self) -> None:
+        whole_graph, whole_compiled = self.compiled_policy_graph(
+            corpus(policy_unit()),
+            expression={"operator": "always"},
+            edge_id="policy-impact:v1/identity",
+        )
+        scoped_graph, scoped_compiled = self.compiled_policy_graph(
+            corpus(policy_unit()),
+            expression={"operator": "always"},
+            consumer_scope={"kind": "structured", "heading_path": ["Consumer"]},
+            edge_id="policy-impact:v1/identity",
+        )
+        whole = select_impact(
+            self.modification(), whole_graph, whole_graph, whole_compiled, whole_compiled
+        )
+        scoped = select_impact(
+            self.modification(),
+            scoped_graph,
+            scoped_graph,
+            scoped_compiled,
+            scoped_compiled,
+        )
+        first_contract = ConsumerReviewContract(
+            "decision-contract.first-review.v1",
+            1,
+            ("updated", "blocked"),
+            "evidence-reference.v1",
+            "standards.review.consumer",
+            "first review contract",
+        )
+        second_contract = ConsumerReviewContract(
+            "decision-contract.second-review.v1",
+            1,
+            ("updated", "blocked"),
+            "evidence-reference.v1",
+            "standards.review.consumer",
+            "second review contract",
+        )
+
+        whole_review = generate_consumer_review_obligations((whole,))[0]
+        scoped_review = generate_consumer_review_obligations((scoped,))[0]
+        first_review = generate_consumer_review_obligations(
+            (whole,), review_contracts={"normative-consumer": first_contract}
+        )[0]
+        second_review = generate_consumer_review_obligations(
+            (whole,), review_contracts={"normative-consumer": second_contract}
+        )[0]
+
+        self.assertNotEqual(whole_review.id, scoped_review.id)
+        self.assertNotEqual(first_review.id, second_review.id)
+
+    def test_relationship_addition_and_removal_both_require_review(self) -> None:
+        added_policy = policy_unit(revision=1)
+        selected = policy_unit()
+        retired = PolicyUnitTombstone(
+            POLICY, 3, (), "review.retirement", "units.toml"
+        )
+        accepted_graph, accepted_compiled = self.compiled_policy_graph(
+            corpus(selected), expression={"operator": "always"}
+        )
+        proposed_graph, proposed_compiled = self.compiled_policy_graph(
+            corpus(added_policy), expression={"operator": "always"}
+        )
+        empty_accepted = self.registry(corpus(), extra_nodes=(MODULE,))
+        empty_proposed = self.registry(corpus(tombstones=(retired,)))
+        addition = classify_changes(
+            corpus(),
+            corpus(added_policy),
+            (ChangeDescriptor(ChangeKind.ADDITION, (), (POLICY,), SCOPE),),
+            (
+                SemanticProposal(
+                    POLICY,
+                    None,
+                    1,
+                    "Create policy.",
+                    added_policy.structural_digest,
+                ),
+            ),
+        )[0]
+        removal = classify_changes(
+            corpus(selected),
+            corpus(tombstones=(retired,)),
+            (
+                ChangeDescriptor(
+                    ChangeKind.REMOVAL,
+                    (POLICY,),
+                    (),
+                    ReviewScope("whole-artifact"),
+                ),
+            ),
+        )[0]
+
+        added = select_impact(
+            addition,
+            empty_accepted,
+            proposed_graph,
+            None,
+            proposed_compiled,
+        )
+        removed = select_impact(
+            removal,
+            accepted_graph,
+            empty_proposed,
+            accepted_compiled,
+            None,
+        )
+
+        added_reason = generate_consumer_review_obligations((added,))[0].as_contract()[
+            "reasons"
+        ][0]
+        removed_reason = generate_consumer_review_obligations((removed,))[0].as_contract()[
+            "reasons"
+        ][0]
+        self.assertEqual(added_reason["traces"][0]["graph"], "proposed")
+        self.assertEqual(removed_reason["traces"][0]["graph"], "accepted")
+
+    def test_exact_fact_values_participate_in_consumer_identity(self) -> None:
+        declarations = [
+            {
+                "id": "change.observed",
+                "type": "boolean",
+                "nullable": False,
+                "aliases": [],
+            }
+        ]
+        graph, compiled = self.compiled_policy_graph(
+            corpus(policy_unit()),
+            expression={"operator": "exists", "fact": "change.observed"},
+            fact_declarations=declarations,
+        )
+
+        true_selection = select_impact(
+            self.modification(),
+            graph,
+            graph,
+            compiled,
+            compiled,
+            compiled.fact_schema.bind(
+                {
+                    "change.observed": {
+                        "type": "boolean",
+                        "state": "known",
+                        "value": True,
+                    }
+                }
+            ),
+        )
+        false_selection = select_impact(
+            self.modification(),
+            graph,
+            graph,
+            compiled,
+            compiled,
+            compiled.fact_schema.bind(
+                {
+                    "change.observed": {
+                        "type": "boolean",
+                        "state": "known",
+                        "value": False,
+                    }
+                }
+            ),
+        )
+
+        true_review = generate_consumer_review_obligations((true_selection,))[0]
+        false_review = generate_consumer_review_obligations((false_selection,))[0]
+        self.assertNotEqual(true_review.id, false_review.id)
 
     def test_policy_unit_source_registers_active_alias_and_retired_identity(self) -> None:
         active = policy_unit()
@@ -533,7 +917,7 @@ class ImpactSelectionTest(unittest.TestCase):
         obligation = work.obligations[0].as_contract()
         self.assertEqual(obligation["applicability"], "unknown")
         self.assertEqual(obligation["scope"], {"kind": "whole-artifact"})
-        self.assertEqual(obligation["reason"]["fact"], "change.requires_review")
+        self.assertEqual(obligation["reasons"][0]["fact"], "change.requires_review")
         validate(SCHEMA, SCHEMA["$defs"]["Question"], work.questions[0].as_contract(), "$question")
         validate(SCHEMA, SCHEMA["$defs"]["Obligation"], obligation, "$obligation")
 
@@ -628,7 +1012,7 @@ class ImpactSelectionTest(unittest.TestCase):
         self.assertEqual(selection.candidates[0].unresolved_facts, ("change.requires_review",))
         self.assertEqual([item.fact for item in work.questions], ["change.requires_review"])
         self.assertEqual(
-            [item.reason["fact"] for item in work.obligations],
+            [item.reasons[0]["fact"] for item in work.obligations],
             ["change.requires_review"],
         )
 
@@ -666,10 +1050,23 @@ class ImpactSelectionTest(unittest.TestCase):
         )
 
         self.assertEqual(selection.candidates[0].applicability, "true")
-        self.assertEqual(selection.candidates[0].unresolved_facts, ())
         self.assertEqual(
-            generate_applicability_resolution_work((selection,)).questions,
-            (),
+            selection.candidates[0].unresolved_facts,
+            ("change.requires_review",),
+        )
+        work = generate_applicability_resolution_work((selection,))
+        self.assertEqual(
+            tuple(question.fact for question in work.questions),
+            ("change.requires_review",),
+        )
+        reviews = generate_consumer_review_obligations((selection,))
+        self.assertEqual(len(reviews), 1)
+        self.assertEqual(
+            [
+                trace["graph"]
+                for trace in reviews[0].as_contract()["reasons"][0]["traces"]
+            ],
+            ["accepted"],
         )
 
     def test_fact_schema_evolution_rejects_instead_of_guessing(self) -> None:

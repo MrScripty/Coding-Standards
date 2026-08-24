@@ -212,7 +212,7 @@
             "id": "snapshot:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
             "schema_version": 1
           },
-          "schema_version": 1
+          "schema_version": 2
         },
         "state": "needs-action",
         "changes": [
@@ -244,17 +244,36 @@
           {
             "id": "obligation:sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
             "kind": "consumer-review",
-            "source": "workflow.verification.evidence-oracle-boundary",
             "target": "workflow.documentation.machine-verifiable-claims",
             "scope": { "kind": "whole-artifact" },
-            "reason": {
-              "kind": "policy-impact-edge",
-              "source": "workflow.verification.evidence-oracle-boundary",
-              "edge": "edge.verification.documentation"
-            },
+            "reasons": [
+              {
+                "kind": "policy-impact-edge",
+                "source": "workflow.verification.evidence-oracle-boundary",
+                "edge": "edge.verification.documentation",
+                "relation": "documentation-projection",
+                "evidence_owner": "suite.documentation",
+                "traces": [
+                  {
+                    "id": "impact-trace:sha256:abababababababababababababababababababababababababababababababab",
+                    "graph": "proposed",
+                    "applicability": "true"
+                  }
+                ]
+              }
+            ],
             "state": "required",
             "applicability": "true",
             "permitted_submissions": ["consumer-disposition"],
+            "review_contract": {
+              "kind": "consumer-review-contract",
+              "id": "decision-contract.consumer-review.v1",
+              "version": 1,
+              "permitted_dispositions": ["updated", "reviewed-no-change", "not-applicable", "blocked"],
+              "evidence_contract": "evidence-reference.v1",
+              "authorization_capability": "standards.review.consumer",
+              "semantics": "Review the exact consumer scope for every definitely applicable selector."
+            },
             "fingerprint": {
               "decision_kind": "consumer-review",
               "decision_contract": "decision-contract.consumer-review.v1",
@@ -278,7 +297,16 @@
             "reason": {
               "kind": "policy-impact-edge",
               "source": "workflow.verification.evidence-oracle-boundary",
-              "edge": "edge.verification.documentation"
+              "edge": "edge.verification.documentation",
+              "relation": "documentation-projection",
+              "evidence_owner": "suite.documentation",
+              "traces": [
+                {
+                  "id": "impact-trace:sha256:abababababababababababababababababababababababababababababababab",
+                  "graph": "proposed",
+                  "applicability": "true"
+                }
+              ]
             },
             "state": "selected"
           }
@@ -293,9 +321,9 @@
         ],
         "provenance": {
           "analysis_contract_version": 1,
-          "packet_schema_version": 1,
+          "packet_schema_version": 2,
           "report_schema_version": 1,
-          "interface_schema_version": 3,
+          "interface_schema_version": 4,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -423,7 +451,16 @@
             "reason": {
               "kind": "policy-impact-edge",
               "source": "workflow.verification.evidence-oracle-boundary",
-              "edge": "edge.verification.documentation"
+              "edge": "edge.verification.documentation",
+              "relation": "documentation-projection",
+              "evidence_owner": "suite.documentation",
+              "traces": [
+                {
+                  "id": "impact-trace:sha256:abababababababababababababababababababababababababababababababab",
+                  "graph": "proposed",
+                  "applicability": "true"
+                }
+              ]
             },
             "state": "selected"
           }
@@ -441,9 +478,9 @@
         },
         "provenance": {
           "analysis_contract_version": 1,
-          "packet_schema_version": 1,
+          "packet_schema_version": 2,
           "report_schema_version": 1,
-          "interface_schema_version": 3,
+          "interface_schema_version": 4,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -673,9 +710,9 @@
         "exclusions": [],
         "versions": {
           "analysis_contract_version": 1,
-          "packet_schema_version": 1,
+          "packet_schema_version": 2,
           "report_schema_version": 1,
-          "interface_schema_version": 3,
+          "interface_schema_version": 4,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",
@@ -720,9 +757,9 @@
         ],
         "versions": {
           "analysis_contract_version": 1,
-          "packet_schema_version": 1,
+          "packet_schema_version": 2,
           "report_schema_version": 1,
-          "interface_schema_version": 3,
+          "interface_schema_version": 4,
           "applicability_version": 2,
           "metadata_api_version": "1",
           "graph_engine_contract_version": "1",

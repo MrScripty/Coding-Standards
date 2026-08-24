@@ -2,7 +2,13 @@
 
 ## Result
 
-Milestone 3 is accepted. `standards_analysis` classifies all six admitted
+**Historical disposition:** this report's Milestone 3 acceptance was
+superseded by the
+[consumer-obligation recovery](milestone-3-consumer-obligation-recovery.md).
+Its lifecycle and traversal evidence remains valid, but it did not prove the
+required conversion from applicable impact to consumer-review obligations.
+
+`standards_analysis` classifies all six admitted
 change kinds and selects exact accepted and proposed graph contexts without
 creating another graph implementation. Move, split, and merge preserve their
 distinct identity and lifecycle meaning rather than being reduced to additions,

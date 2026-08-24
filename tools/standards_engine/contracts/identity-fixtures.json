@@ -11,20 +11,20 @@
       "name": "pending-packet",
       "definition": "PendingPacket",
       "example": "pending-packet",
-      "expected": "packet:sha256:2254b7cb2797c5ca233597f1d7582d7591922d46ca62d3dcd9d30335f2931ea1"
+      "expected": "packet:sha256:10f44e93cd15aba64de9ffd092346bb8216743c26ebbf0ae536bf5f86794313d"
     },
     {
       "name": "consumer-obligation",
       "definition": "Obligation",
       "example": "pending-packet",
       "value_pointer": "/obligations/0",
-      "expected": "obligation:sha256:3b2e86ebf69220dd840a88ff1a40186decc2bb146278134affef9f1940e10936"
+      "expected": "obligation:sha256:a526de8802573cbafa94943c717a0acf3eae757aef12c0af7f20b59eaaa14748"
     },
     {
       "name": "completed-analysis-report",
       "definition": "CompletedAnalysisReport",
       "example": "completed-analysis-report",
-      "expected": "analysis-report:sha256:615fb0323a2d6fe0832916903b31922e4470fe87f65ed2d678ac7e1660056003"
+      "expected": "analysis-report:sha256:e81cd419ad3c98a6faa1273166a2aaceb776f5b15750d79a2b09065c8bf42fc2"
     },
     {
       "name": "clean-git-snapshot",

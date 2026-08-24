@@ -439,6 +439,30 @@ input always makes the old packet stale. A new packet may reuse a prior decision
 only when the decision kind's declared dependency fingerprint is equal in full.
 Unknown or incomparable dependencies reopen the decision.
 
+Consumer-review work is compiled through one canonical selection aggregate.
+Definitely applicable policy-impact traces are grouped by exact canonical
+consumer ID, canonical review scope, and review-contract identity. Scope
+compatibility initially means equality only. The aggregate owns a sorted,
+unique set of typed reasons; each reason identifies its selecting policy unit,
+relationship kind, edge, accepted/proposed trace identities and graph sides,
+evidence owner, and applicability result. Sources and evidence-owner sets are
+derived from those reasons and are never independently supplied authority.
+
+The same aggregate derives the obligation's reasons projection and decision
+fingerprint. The fingerprint binds every selecting policy state, relationship
+semantic digest, accepted/proposed trace set, exact scope, review contract,
+referenced applicability fact values, and evidence-owner set. A changed
+selector therefore changes obligation identity. Definite traces create review
+work, false traces do not, and unknown traces retain applicability-resolution
+work even when another trace already makes review definite. Reading plans
+consume these obligations and never traverse policy impact independently.
+
+This correction replaces singular obligation `source` and `reason` with a
+nonempty `reasons` collection. Obligation identity uses domain version 2;
+pending packet identity and schema use version 2; and the public interface uses
+version 4. Version-1 obligation and packet identities are not interpreted under
+the replacement contract.
+
 `next_operations` is derived from current state and is guidance, not
 authorization. Trusted adapters inject capability context outside
 caller-authored request and submission payloads. A1 distinguishes

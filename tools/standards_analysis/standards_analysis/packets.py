@@ -13,7 +13,7 @@ from .serialization import canonical_json_bytes, identity
 from .snapshots import AnalysisVersions
 
 
-PACKET_DOMAIN = "coding-standards:packet:v1"
+PACKET_DOMAIN = "coding-standards:packet:v2"
 DIGEST_PATTERN = re.compile(r"^sha256:[0-9a-f]{64}$")
 SNAPSHOT_PATTERN = re.compile(r"^snapshot:sha256:[0-9a-f]{64}$")
 
@@ -275,7 +275,7 @@ class PendingPacket:
             "id": self.id,
             "base_snapshot": _thaw(self.base_snapshot),
             "proposed_snapshot": _thaw(self.proposed_snapshot),
-            "schema_version": 1,
+            "schema_version": 2,
         }
 
     def as_contract(self) -> dict[str, object]:

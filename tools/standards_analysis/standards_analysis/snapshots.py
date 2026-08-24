@@ -29,9 +29,9 @@ class AnalysisVersions:
     def as_contract(self) -> dict[str, object]:
         return {
             "analysis_contract_version": 1,
-            "packet_schema_version": 1,
+            "packet_schema_version": 2,
             "report_schema_version": 1,
-            "interface_schema_version": 3,
+            "interface_schema_version": 4,
             "applicability_version": 2,
             "metadata_api_version": self.metadata_api_version,
             "graph_engine_contract_version": self.graph_engine_contract_version,

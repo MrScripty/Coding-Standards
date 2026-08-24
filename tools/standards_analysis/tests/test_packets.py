@@ -108,14 +108,24 @@ def obligation(identifier: str = "e") -> Obligation:
     return Obligation(
         "obligation:sha256:" + identifier * 64,
         "consumer-review",
-        "workflow.test.policy",
         "workflow.consumer",
         SCOPE,
-        {
-            "kind": "policy-impact-edge",
-            "source": "workflow.test.policy",
-            "edge": "edge.test",
-        },
+        (
+            {
+                "kind": "policy-impact-edge",
+                "source": "workflow.test.policy",
+                "edge": "edge.test",
+                "relation": "normative-consumer",
+                "evidence_owner": "suite.test",
+                "traces": [
+                    {
+                        "id": "impact-trace:sha256:" + "1" * 64,
+                        "graph": "proposed",
+                        "applicability": "true",
+                    }
+                ],
+            },
+        ),
         "required",
         ("consumer-disposition",),
         fingerprint(),
@@ -146,6 +156,15 @@ class PendingPacketTest(unittest.TestCase):
                         "kind": "policy-impact-edge",
                         "source": "workflow.test.policy",
                         "edge": "edge.test",
+                        "relation": "normative-consumer",
+                        "evidence_owner": "suite.test",
+                        "traces": [
+                            {
+                                "id": "impact-trace:sha256:" + "1" * 64,
+                                "graph": "proposed",
+                                "applicability": "true",
+                            }
+                        ],
                     },
                     "selected",
                 ),
@@ -293,10 +312,9 @@ class PendingPacketTest(unittest.TestCase):
         blocked = Obligation(
             selected.id,
             selected.kind,
-            selected.source,
             selected.target,
             selected.scope,
-            selected.reason,
+            selected.reasons,
             "blocked",
             selected.permitted_submissions,
             selected.fingerprint,

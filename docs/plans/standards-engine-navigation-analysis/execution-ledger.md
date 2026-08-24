@@ -595,6 +595,31 @@
 - The sole next slice is request-bound applicability evaluation, exact impact
   obligations, and bounded audit coverage.
 
+## 2026-08-23: Milestone 3 Consumer-Obligation Recovery
+
+- Reopened SENA-006 after review proved that the accepted impact pipeline
+  stopped at candidates and never generated consolidated consumer-review work.
+- Added one canonical consumer-selection aggregate keyed by exact consumer,
+  canonical scope, and review contract. Plural typed reasons retain every
+  selecting policy unit, edge, relationship, evidence owner, and accepted or
+  proposed trace while one aggregate derives both display provenance and the
+  decision fingerprint.
+- Preserved definite review alongside unknown applicability work and bound
+  consumer identity to exact changed-policy state, relationship semantics,
+  traces, applicability fact values, scope, review contract, and evidence
+  owners.
+- Replaced obligation identity v1, packet identity v1, packet schema v1, and
+  public interface v3 atomically with obligation v2, packet v2, packet schema
+  v2, and interface v4. No compatibility interpretation remains.
+- Superseded the earlier whole-Milestone-3 acceptance while preserving its
+  valid lifecycle evidence. The recovery passed 72 analysis, 15 Standards
+  Engine, 17 metadata, 9 applicability, 7 policy-impact, 2 standards-graph, 35
+  graph-engine, and 380 verifier tests; 29 contract examples; all 218
+  declarative suites; and the complete checkpoint with 53 retained Bash
+  checkers.
+- Reaccepted Milestone 3 through the superseding recovery report and advanced
+  exactly one next slice: bounded reading-plan compilation from obligations.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

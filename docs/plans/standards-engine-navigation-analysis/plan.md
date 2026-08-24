@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 4 packets, agent resolution, and A1 acceptance
+**Current phase:** Milestone 4 packets, resolution, and A1 acceptance
 
-**Next slice:** implement bounded reading plans with deterministic dependency
-and scope ordering
+**Next slice:** compile bounded deterministic reading plans from authoritative
+obligations without independently traversing policy-impact relationships
 
 **Acceptance status:** `pending`
 
@@ -17,10 +17,9 @@ and scope ordering
 `c7d23dfa55a9558b929e6b838d7ea0563981a1ef`, tree
 `5e9c4eb211ee0a67039b0ec11142db9b106243ae`
 
-**Implementation admission:** operation `continue` accepted for Milestone 3
-from the recorded implementation base and the accepted Milestone 3 replans
-through the coverage-identity cutover; implementation remains bounded by
-Milestone 3's write set
+**Implementation admission:** operation `continue` accepted for Milestones 3
+and 4 from the recorded implementation base and accepted replans;
+implementation remains bounded by the current milestone and exact next slice
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -215,6 +214,7 @@ plan or shared-authority proposals can become stale before integration.
 | Coverage authority | `AnalysisSnapshot` owns complete reproducibility while `CoverageAuthorityView` contains only typed consumer-discovery dependencies. Analysis derives an exact requirement from that view; an authorized attestation approves the requirement; and a generated reusable certificate binds view, requirement, attestation, evidence, and contract digests. Reports alone own change-specific dispositions and reference the certificates they used. | [Coverage identity replan](reports/milestone-3-coverage-identity-replan.md) | Report-dependent certificates, permanent audited flags, snapshot-bound requirement identity, and copied packet dispositions |
 | Audit horizon | `audit-horizon.policy-impact-consumers` version 1 derives typed members and content fingerprints from canonical modules, policy units, registered graph providers, every registered suite and its declared repository inputs, plus the policy-impact node catalog as a supplement. Existing policy-impact declarations and nodes are not sufficient horizon authority. | [Coverage identity replan](reports/milestone-3-coverage-identity-replan.md#audit-horizon) | `policy-impact-declarations:v1` and any horizon derived only from relationships under audit |
 | Completion | Analysis completion is mechanically derived from the final reached-obligation set and exact valid disposition set plus every other typed obligation. | [Brief report invariant](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#exact-completedanalysisreport-invariant) | Authored or unchecked complete flags |
+| Consumer review aggregation | Applicable policy-impact traces compile into one obligation per exact `(consumer, scope, review-contract)` key. One canonical aggregate derives plural typed reasons, required evidence owners, and the decision fingerprint; unknown traces remain separate applicability work. | [Consumer-obligation recovery](reports/milestone-3-consumer-obligation-replan.md) | Singular source/reason obligations, one review per edge, or reading-plan impact reinterpretation |
 | Agent evidence | A1 acceptance requires real typed route/read and iterative prepare/resolve workflows, not schema inspection alone. | [Brief agent evidence](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#24-required-a1-agent-evidence) | Interface usability inferred from declarations |
 | Canonical schema | JSON Schema Draft 2020-12 plus documented Standards Engine annotations is the sole A1 machine contract; generated Python and agent-tool projections must pass deterministic conformance. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md) and [Milestone 0 review](reports/milestone-0-architecture-contract-review.md) | Independent Python, JSON, tool, example, identity, or renderer contracts |
 | Snapshot bootstrap | A trusted source provider issues the initial opaque snapshot handle; caller operations remain explicitly handle-bound and cannot fall back to ambient current state. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md#public-interface) | Caller repository paths or implicit current-tree lookup |
@@ -485,6 +485,12 @@ without claiming to judge arbitrary meaning.
 - [x] Keep applicability unknown during conservative whole-artifact selection.
 - [x] Prove that missing or expired audit coverage cannot return successful
   empty impact.
+- [x] Convert every definitely applicable policy-impact selection into one
+  consumer-review obligation per exact consumer, scope, and review-contract
+  key, retaining all selecting sources, traces, facts, and evidence owners.
+- [x] Replace singular obligation provenance and v1 obligation/packet
+  identities atomically across schema, runtime types, examples, fixtures, and
+  verification without compatibility interpretation.
 
 **Acceptance gate:** Focused policy-unit, impact, applicability, audit, and
 certificate tests cover every required positive, negative, unknown, stale, and
@@ -492,7 +498,8 @@ invalid outcome; modification/addition/removal pilot selection and
 move/split/merge fixtures select exact expected identities, groups, scopes, and
 obligations; graph-engine tests remain unchanged and pass.
 
-**Status:** `Accepted`
+**Status:** `Accepted` through the superseding
+[consumer-obligation recovery](reports/milestone-3-consumer-obligation-recovery.md)
 
 ### Milestone 4: Packets, Agent Resolution, And A1 Acceptance
 
@@ -546,7 +553,8 @@ checks pass from one clean recorded tree.
 
 ## Blockers
 
-No current blocker is accepted. The coverage identity cycle and inadequate
+Milestone 3's missing consumer-obligation generator was resolved by the
+superseding recovery acceptance. The coverage identity cycle and inadequate
 declaration-only horizon were resolved by the accepted two-identity coverage
 direction and independent registered horizon. Ambiguous typed projection,
 missing independent corpus authority, failed attestation bootstrap review,

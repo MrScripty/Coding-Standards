@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v3",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a1/v4",
   "title": "Standards Engine A1 contract",
   "description": "Canonical typed contract for snapshot-bound navigation and read-only standards-change analysis.",
   "oneOf": [
@@ -29,8 +29,8 @@
     { "$ref": "#/$defs/ConsumerCoverageCertificate" }
   ],
   "x-standards-engine-contract": {
-    "contract_version": 3,
-    "schema_version": 3,
+    "contract_version": 4,
+    "schema_version": 4,
     "applicability_version": 2,
     "public_operations": {
       "query": {
@@ -168,6 +168,10 @@
       "type": "string",
       "pattern": "^obligation:sha256:[0-9a-f]{64}$"
     },
+    "ImpactTraceId": {
+      "type": "string",
+      "pattern": "^impact-trace:sha256:[0-9a-f]{64}$"
+    },
     "AnalysisReportId": {
       "type": "string",
       "pattern": "^analysis-report:sha256:[0-9a-f]{64}$"
@@ -217,7 +221,7 @@
         "id": { "$ref": "#/$defs/PacketId" },
         "base_snapshot": { "$ref": "#/$defs/SnapshotHandle" },
         "proposed_snapshot": { "$ref": "#/$defs/SnapshotHandle" },
-        "schema_version": { "const": 1 }
+        "schema_version": { "const": 2 }
       },
       "additionalProperties": false
     },
@@ -557,14 +561,48 @@
       ]
     },
     "SelectionReason": {
+      "oneOf": [
+        { "$ref": "#/$defs/GeneralSelectionReason" },
+        { "$ref": "#/$defs/PolicyImpactSelectionReason" }
+      ]
+    },
+    "GeneralSelectionReason": {
       "type": "object",
       "required": ["kind"],
       "properties": {
-        "kind": { "enum": ["routing-fact", "requires", "specializes", "policy-impact-edge", "changed-policy", "question", "audit-coverage", "unmapped-normative-change", "structured-scope-analysis-unsupported"] },
+        "kind": { "enum": ["routing-fact", "requires", "specializes", "changed-policy", "question", "audit-coverage", "unmapped-normative-change", "structured-scope-analysis-unsupported"] },
         "source": { "$ref": "#/$defs/CanonicalId" },
         "fact": { "$ref": "#/$defs/CanonicalId" },
         "edge": { "$ref": "#/$defs/EdgeId" },
         "question": { "$ref": "#/$defs/CanonicalId" }
+      },
+      "additionalProperties": false
+    },
+    "PolicyImpactSelectionReason": {
+      "type": "object",
+      "required": ["kind", "source", "edge", "relation", "evidence_owner", "traces"],
+      "properties": {
+        "kind": { "const": "policy-impact-edge" },
+        "source": { "$ref": "#/$defs/CanonicalId" },
+        "edge": { "$ref": "#/$defs/EdgeId" },
+        "relation": { "$ref": "#/$defs/CanonicalId" },
+        "evidence_owner": { "$ref": "#/$defs/CanonicalId" },
+        "traces": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/ImpactTraceReference" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ImpactTraceReference": {
+      "type": "object",
+      "required": ["id", "graph", "applicability"],
+      "properties": {
+        "id": { "$ref": "#/$defs/ImpactTraceId" },
+        "graph": { "enum": ["accepted", "proposed"] },
+        "applicability": { "enum": ["true", "false", "unknown"] }
       },
       "additionalProperties": false
     },
@@ -1085,14 +1123,18 @@
     },
     "Obligation": {
       "type": "object",
-      "required": ["id", "kind", "source", "target", "scope", "reason", "state", "permitted_submissions", "fingerprint"],
+      "required": ["id", "kind", "target", "scope", "reasons", "state", "permitted_submissions", "fingerprint"],
       "properties": {
         "id": { "$ref": "#/$defs/ObligationId" },
         "kind": { "enum": ["consumer-review", "impact-review", "lifecycle-impact-review", "audit-coverage", "unmapped-normative-change", "applicability-resolution"] },
-        "source": { "$ref": "#/$defs/CanonicalId" },
         "target": { "$ref": "#/$defs/CanonicalId" },
         "scope": { "$ref": "#/$defs/ReviewScope" },
-        "reason": { "$ref": "#/$defs/SelectionReason" },
+        "reasons": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/SelectionReason" }
+        },
         "state": { "enum": ["required", "resolved", "blocked"] },
         "applicability": { "enum": ["true", "false", "unknown", "not-declared"] },
         "permitted_submissions": {
@@ -1101,14 +1143,34 @@
           "uniqueItems": true,
           "items": { "enum": ["fact-answer", "consumer-disposition", "impact-disposition", "coverage-attestation"] }
         },
+        "review_contract": { "$ref": "#/$defs/ConsumerReviewContract" },
         "fingerprint": { "$ref": "#/$defs/DecisionFingerprint" }
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:obligation:v1",
-        "include": ["kind", "source", "target", "scope", "reason", "fingerprint"],
+        "domain": "coding-standards:obligation:v2",
+        "include": ["kind", "target", "scope", "reasons", "fingerprint"],
         "exclude": ["state", "permitted_submissions", "applicability"]
       }
+    },
+    "ConsumerReviewContract": {
+      "type": "object",
+      "required": ["kind", "id", "version", "permitted_dispositions", "evidence_contract", "authorization_capability", "semantics"],
+      "properties": {
+        "kind": { "const": "consumer-review-contract" },
+        "id": { "$ref": "#/$defs/CanonicalId" },
+        "version": { "type": "integer", "minimum": 1 },
+        "permitted_dispositions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["updated", "reviewed-no-change", "not-applicable", "blocked"] }
+        },
+        "evidence_contract": { "$ref": "#/$defs/CanonicalId" },
+        "authorization_capability": { "$ref": "#/$defs/CanonicalId" },
+        "semantics": { "$ref": "#/$defs/NonEmptyString" }
+      },
+      "additionalProperties": false
     },
     "DecisionDependency": {
       "type": "object",
@@ -1160,9 +1222,9 @@
       "required": ["analysis_contract_version", "packet_schema_version", "report_schema_version", "interface_schema_version", "applicability_version", "metadata_api_version", "graph_engine_contract_version", "graph_engine_implementation_version", "analyzer_implementation_version", "parser_versions", "evidence_provider_contract_versions"],
       "properties": {
         "analysis_contract_version": { "const": 1 },
-        "packet_schema_version": { "const": 1 },
+        "packet_schema_version": { "const": 2 },
         "report_schema_version": { "const": 1 },
-        "interface_schema_version": { "const": 3 },
+        "interface_schema_version": { "const": 4 },
         "applicability_version": { "const": 2 },
         "metadata_api_version": { "$ref": "#/$defs/NonEmptyString" },
         "graph_engine_contract_version": { "$ref": "#/$defs/NonEmptyString" },
@@ -1210,7 +1272,7 @@
       },
       "additionalProperties": false,
       "x-standards-engine-identity": {
-        "domain": "coding-standards:packet:v1",
+        "domain": "coding-standards:packet:v2",
         "include": ["handle.base_snapshot", "handle.proposed_snapshot", "changes", "changed_units", "obligations", "questions", "reading_plan", "provenance.analysis_contract_version", "provenance.packet_schema_version", "provenance.interface_schema_version", "provenance.applicability_version", "provenance.metadata_api_version", "provenance.graph_engine_contract_version", "provenance.parser_versions", "provenance.evidence_provider_contract_versions"],
         "exclude": ["handle.id", "state", "next_operations", "summary", "provenance.report_schema_version", "provenance.graph_engine_implementation_version", "provenance.analyzer_implementation_version"]
       }

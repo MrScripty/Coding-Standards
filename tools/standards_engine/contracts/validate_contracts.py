@@ -42,8 +42,8 @@ SCHEMA_KEYS = {
 IDENTITY_PREFIX = {
     "coding-standards:snapshot:v1": "snapshot",
     "coding-standards:navigation:v1": "navigation",
-    "coding-standards:packet:v1": "packet",
-    "coding-standards:obligation:v1": "obligation",
+    "coding-standards:packet:v2": "packet",
+    "coding-standards:obligation:v2": "obligation",
     "coding-standards:analysis-report:v1": "analysis-report",
     "coding-standards:coverage-authority-view:v1": "coverage-view",
     "coding-standards:coverage-audit-requirement:v1": "coverage-requirement",
