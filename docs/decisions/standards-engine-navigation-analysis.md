@@ -71,9 +71,9 @@ remain the authority. `standards_applicability` compiles typed fact schemas,
 applicability programs, and request fact sets and evaluates them without
 repository or domain dependencies. `standards_policy_impact` compiles source-owned typed
 policy-impact declarations into one neutral graph contribution and one typed
-semantics index. `standards_analysis` owns policy-unit comparison, impact
-selection, packets, obligations, reading plans, questions, and audit
-certificates. `standards_graph` projects canonical modules and policy units into
+semantics index. `standards_analysis` owns one immutable analysis-state kernel,
+policy-unit comparison, impact selection, obligations, reading plans, fact
+requirements, and audit certificates. `standards_graph` projects canonical modules and policy units into
 generic graph nodes and composes registered relationship providers; it contains
 no analysis behavior. `graph_engine` remains domain-neutral. The verifier
 consumes the neutral and policy-specific Modules but is not their owner.
@@ -101,7 +101,8 @@ module-relative locators, accepted semantic revisions, and policy-impact source
 identity. Module-owned typed policy-impact declaration files are the sole
 relationship authority, but every relationship source is an active policy unit
 contained by that owner module. Compiled graph edges, semantics indexes, graph
-indexes, packets, reports, and certificates are projections, not authority.
+indexes, pending and complete results, and certificates are projections, not
+authority.
 
 ### Public interface
 
@@ -109,16 +110,17 @@ A1 exposes four operations:
 
 ```python
 query(snapshot, request) -> NavigationResult | RejectedResult
-prepare(request) -> PendingPacket | CompletedAnalysisReport | RejectedResult
-resolve(packet, submission) -> PendingPacket | CompletedAnalysisReport | RejectedResult
+prepare(request) -> AnalysisResult | RejectedResult
+resolve(analysis_handle, submission) -> AnalysisResult | RejectedResult
 inspect(handle) -> InspectionResult | RejectedResult
 ```
 
-Interface version 5 uses navigation identity version 2, packet identity and
-schema version 3, completed-report identity and schema version 2, and analysis
-contract version 2. The coordinated replacement reflects plural reading-plan
-causes and deterministic collapse semantics; former identities are not
-compatibly interpreted.
+Interface version 8 uses navigation identity version 2, analysis identity and
+schema version 2, result projection schema version 1, analysis contract version
+5, and applicability contract version 3. `AnalysisHandle` is the sole analysis
+identity. `PendingResult` and `CompleteResult` are deterministic typed
+projections and own no independent identity. Former packet, report, and state
+handles are not compatibly interpreted.
 
 Native Python requests and results are typed projections of the canonical
 contract. Agent tools carry the same structures as JSON. An optional CLI or
@@ -228,9 +230,15 @@ bytes. The domains are:
 ```text
 coding-standards:snapshot:v1
 coding-standards:navigation:v2
-coding-standards:packet:v3
+coding-standards:packet:v4
 coding-standards:obligation:v2
-coding-standards:analysis-report:v2
+coding-standards:analysis-report:v3
+coding-standards:analysis-context:v1
+coding-standards:fact-requirement:v1
+coding-standards:fact-observation:v1
+coding-standards:coverage-authority-view:v1
+coding-standards:coverage-audit-requirement:v1
+coding-standards:coverage-attestation:v1
 coding-standards:consumer-coverage-certificate:v1
 ```
 
@@ -300,18 +308,17 @@ otherwise any `unknown` trace keeps it unknown; otherwise declared `false`
 traces make it false. Generic relationships remain `not-declared`.
 
 An aggregate `unknown` candidate remains unknown and receives an explicit
-whole-artifact review scope. Analysis emits one typed question per exact
-material unresolved fact and one `applicability-resolution` obligation per
-relationship and unresolved fact. The obligation links the canonical fact,
-edge, and question IDs and depends on the compiled program, relationship, fact
-schema, and question contract. Conservative selection never answers the
-question or changes the truth value.
+whole-artifact review scope. Analysis emits one content-addressed
+`FactRequirement` per exact material unresolved fact and standards-change
+context. Relationship-specific pending impacts reference that requirement but
+do not become actionable fact-answer obligations. Conservative selection never
+provides the fact or changes the truth value.
 
 Malformed expressions, unknown operators, invalid arity, undeclared facts,
 type errors, alias conflicts, incompatible fact schemas, and out-of-domain enum
 values are typed invalid failures. Unsupported language versions are typed
 unsupported failures. Repository unavailability remains an Adapter concern.
-Router and analysis policy own questions and explanatory text. Policy-impact,
+Router and analysis policy own fact meaning and display prompts. Policy-impact,
 analysis, engine, and verifier callers translate neutral failures into their
 own diagnostics. Whole-artifact review may accompany an unknown result but
 cannot turn it into `true`.
@@ -338,9 +345,10 @@ Analysis derives a `CoverageAuditRequirement` from the exact coverage view. A
 requirement may record its source analysis snapshot as provenance, but that
 snapshot does not enter requirement identity. An authorized reviewer submits a
 content-addressed `CoverageAttestation` for that exact requirement. Committing
-the attestation changes the complete analysis snapshot and stales the old
-packet, while the newly prepared analysis derives the same coverage view and
-requirement. A generated immutable `ConsumerCoverageCertificate` then binds the
+the attestation changes the complete analysis input. The old immutable analysis
+remains valid for its exact snapshot, while preparation from the new snapshot
+derives the same coverage view and requirement. A generated immutable
+`ConsumerCoverageCertificate` then binds the
 view, requirement, attestation, evidence, and relevant contract digests. It
 certifies consumer-discovery coverage only; it never contains a report or
 change-specific disposition.
@@ -356,8 +364,8 @@ relationship declarations can establish complete horizon membership. Every
 horizon member contributes its relevant content, structural, or semantic
 fingerprint so a changed artifact can invalidate coverage without adding an ID.
 
-`CompletedAnalysisReport` binds the exact complete analysis snapshot,
-references every certificate used, and separately
+`CompleteResult` projects the exact complete analysis state, references every
+certificate used, and separately
 owns the change-specific dispositions. Completion requires exact equality
 between required coverage subjects and valid certificate subjects, plus exact
 equality between reached consumer obligations and dispositions. A successful
@@ -455,10 +463,88 @@ equality, govern the cutover.
 
 ### State, authorization, and completion
 
-Packets and obligations are immutable and content-addressed. A changed bound
-input always makes the old packet stale. A new packet may reuse a prior decision
-only when the decision kind's declared dependency fingerprint is equal in full.
-Unknown or incomparable dependencies reopen the decision.
+A1 is one immutable content-addressed state machine. `AnalysisState` and
+`AnalysisHandle` are the same identity domain. The bound analysis kernel
+resolves every authority handle to exact immutable content and exposes two pure
+operations internally:
+
+```python
+project(state) -> PendingResult | CompleteResult
+advance(state, submission, execution_context) -> AnalysisState
+```
+
+The state stores exact base and proposed authority handles, normalized change
+declarations and semantic proposals, authorization-authority and evidence-
+provider input views, semantic contract versions, dependency-valid accepted
+observations and dispositions, authored coverage attestations, and their exact
+evidence and authorization records. Prior-analysis handles, parent states,
+transition order, requirements, obligations, reading plans, certificates,
+completion proofs, timestamps, summaries, and store locations do not enter
+state identity.
+
+Requirements, obligations, impact traces, reading plans, certificates,
+completion, and next operations are recomputed projections. Repeated projection
+with the same state and exact resolver is structurally identical. Implementations
+may cache a projection by analysis handle and semantic contract versions, but a
+cache never becomes authority.
+
+Missing applicability facts use a narrower authority. A semantic
+`FactContract` defines canonical identity, revision, value domain, meaning,
+context kind, answer and evidence contracts, and authorization capability.
+Aliases and prompts are non-authoritative lookup and display projections. A
+topology-independent `AnalysisContext` binds the changed policy identities and
+their exact accepted/proposed semantic and structural payload.
+
+One missing canonical fact in one context derives one content-addressed
+`FactRequirement`. Relationship-specific pending impacts reference that
+requirement but do not become fact-answer obligations, and dependent programs
+do not enter requirement identity. A valid `FactObservation` binds the
+requirement, typed value, evidence, and authorization. New analyses reuse an
+observation by exact requirement identity after current evidence-provider and
+authorization validation; callers never echo a separate fingerprint. The
+applicability Module owns reverse fact dependencies so only affected programs
+require reevaluation.
+
+Standards-change analysis accepts no raw facts. `AnalysisRequest` carries one
+optional prior `AnalysisHandle`, not individually coordinated observations,
+dispositions, attestations, or certificates. Preparation imports only
+dependency-valid decisions, normalizes them with the new authority, and derives
+one new state. Prior-analysis identity and transition lineage remain provenance
+and cannot change the normalized state handle.
+
+Accepted decisions are classified as material, dormant-valid, or invalid.
+Material decisions affect the current projection. Dormant-valid decisions
+remain in state for later narrow reuse even when short-circuiting makes them
+unnecessary now. Invalid decisions are removed during normalization. Only
+material unresolved requirements and obligations block completion.
+
+Providers run only while constructing or advancing state. A provider receives
+exact immutable declared inputs and returns a typed claim, deterministic no-
+observation, or an explicit unavailable result. Unavailability and unresolved
+evidence never become no-observation. Analysis alone validates claims and
+constructs canonical observations. Live undeclared filesystem, network, or
+registry state is prohibited.
+
+The authorization-authority view binds recognized issuers, capability
+definitions, validity or revocation state, and authorization contract version.
+A capability string alone is not authority. Changing the view revalidates and
+may remove otherwise unchanged decisions.
+
+`advance` projects the supplied state, verifies that a submission addresses
+current work, validates evidence and authorization, adds the decision,
+revalidates retained decisions, removes invalid decisions, retains dormant-
+valid decisions, canonicalizes decision sets, and derives the successor state.
+Equal normalized authority and decisions produce the same handle regardless of
+lineage or valid decision order. Conflicting decisions produce independent
+child states; one state never contains two decisions for one decision key.
+
+No temporal packet staleness or mutable analysis head exists in A1. Unresolved
+handles are unavailable; malformed content is invalid; absent work is not
+applicable; mismatched decision dependencies are context mismatches; missing
+authority is unavailable; and absent capabilities are unauthorized. A prior
+child transition has no effect on another transition from the same immutable
+state. Mutable compare-and-swap and stale-head semantics belong only to future
+A2 controlled authoring.
 
 Consumer-review work is compiled through one canonical selection aggregate.
 Definitely applicable policy-impact traces are grouped by exact canonical
@@ -474,15 +560,17 @@ fingerprint. The fingerprint binds every selecting policy state, relationship
 semantic digest, accepted/proposed trace set, exact scope, review contract,
 referenced applicability fact values, and evidence-owner set. A changed
 selector therefore changes obligation identity. Definite traces create review
-work, false traces do not, and unknown traces retain applicability-resolution
-work even when another trace already makes review definite. Reading plans
-consume these obligations and never traverse policy impact independently.
+work, false traces do not, and unknown traces retain their shared
+`FactRequirement` even when another trace already makes review definite.
+Reading plans consume consumer obligations and never traverse policy impact
+independently.
 
-This correction replaces singular obligation `source` and `reason` with a
-nonempty `reasons` collection. Obligation identity uses domain version 2;
-pending packet identity and schema use version 2; and the public interface uses
-version 4. Version-1 obligation and packet identities are not interpreted under
-the replacement contract.
+The plural-provenance correction replaced singular obligation `source` and
+`reason` with a nonempty `reasons` collection and established obligation
+identity domain version 2. The single-state cutover retains that obligation
+domain while replacing packet and report identity with analysis identity
+version 2 and public interface version 8. Superseded identities are not
+interpreted under the replacement contract.
 
 `next_operations` is derived from current state and is guidance, not
 authorization. Trusted adapters inject capability context outside
@@ -491,10 +579,11 @@ caller-authored request and submission payloads. A1 distinguishes
 `standards.review.impact`, and `standards.review.audit`; one capability does not
 imply another.
 
-`CompletedAnalysisReport` is returned only when final reached consumer-review
-obligation IDs exactly equal valid current disposition IDs and every other
-question, obligation, authorization, evidence, applicability, and audit
-condition is resolved. It records analysis completion only. It cannot accept
+`CompleteResult` is projected only when final reached consumer-review
+obligation IDs exactly equal valid current disposition IDs, derived fact
+requirement IDs exactly equal valid observation requirement IDs, and every
+other obligation, authorization, evidence, applicability, and audit condition
+is resolved. It records analysis completion only. It cannot accept
 policy meaning, authorize a relationship, or permit repository application.
 
 ## Considered Options

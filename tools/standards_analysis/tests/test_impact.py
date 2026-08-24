@@ -27,9 +27,10 @@ from tools.standards_analysis.standards_analysis import (
     ConsumerReviewContract,
     ReviewScope,
     SemanticProposal,
+    build_analysis_context,
     classify_changes,
-    generate_applicability_resolution_work,
     generate_consumer_review_obligations,
+    generate_fact_requirements,
     select_impact,
 )
 from tools.standards_engine.contracts.validate_contracts import validate
@@ -58,6 +59,20 @@ SCHEMA = json.loads(
         encoding="utf-8"
     )
 )
+
+
+def fact_contract(raw: dict[str, object]) -> dict[str, object]:
+    fact_id = str(raw["id"])
+    return {
+        "semantic_revision": 1,
+        "meaning": f"Applicability meaning for {fact_id}.",
+        "context_kind": "standards-change",
+        "answer_contract": "fact-value.v1",
+        "evidence_contract": "evidence-reference.v1",
+        "authorization_capability": "standards.analyze",
+        "prompt": f"Provide {fact_id}.",
+        **raw,
+    }
 
 
 def policy_unit(
@@ -203,7 +218,7 @@ class ImpactSelectionTest(unittest.TestCase):
                 "kind": "applicability-fact-schema",
                 "id": fact_schema_id,
                 "version": 1,
-                "facts": fact_declarations or [],
+                "facts": [fact_contract(item) for item in fact_declarations or []],
             }
         )
         policy_edge = Edge(
@@ -876,7 +891,7 @@ class ImpactSelectionTest(unittest.TestCase):
 
         self.assertEqual(result.candidates[0].traces[0].policy_semantics, semantics)
 
-    def test_unknown_applicability_remains_unknown_and_creates_exact_resolution_work(self) -> None:
+    def test_unknown_applicability_creates_one_exact_fact_requirement(self) -> None:
         declarations = [
             {
                 "id": "change.requires_review",
@@ -911,15 +926,22 @@ class ImpactSelectionTest(unittest.TestCase):
             candidate.conservative_review_scope,
             ReviewScope("whole-artifact"),
         )
-        work = generate_applicability_resolution_work((selection,))
-        self.assertEqual([item.fact for item in work.questions], ["change.requires_review"])
-        self.assertEqual(len(work.obligations), 1)
-        obligation = work.obligations[0].as_contract()
-        self.assertEqual(obligation["applicability"], "unknown")
-        self.assertEqual(obligation["scope"], {"kind": "whole-artifact"})
-        self.assertEqual(obligation["reasons"][0]["fact"], "change.requires_review")
-        validate(SCHEMA, SCHEMA["$defs"]["Question"], work.questions[0].as_contract(), "$question")
-        validate(SCHEMA, SCHEMA["$defs"]["Obligation"], obligation, "$obligation")
+        requirements = generate_fact_requirements(
+            (selection,),
+            build_analysis_context((self.modification(),)),
+            compiled.fact_schema,
+        )
+        self.assertEqual([item.fact for item in requirements], ["change.requires_review"])
+        self.assertEqual(
+            requirements[0].dependent_programs,
+            (f"accepted:{candidate.edge_id}", f"proposed:{candidate.edge_id}"),
+        )
+        validate(
+            SCHEMA,
+            SCHEMA["$defs"]["FactRequirement"],
+            requirements[0].as_contract(),
+            "$fact_requirement",
+        )
 
     def test_false_applicability_creates_no_resolution_work(self) -> None:
         declarations = [
@@ -956,7 +978,11 @@ class ImpactSelectionTest(unittest.TestCase):
         self.assertEqual(selection.candidates[0].applicability, "false")
         self.assertIsNone(selection.candidates[0].conservative_review_scope)
         self.assertEqual(
-            generate_applicability_resolution_work((selection,)).obligations,
+            generate_fact_requirements(
+                (selection,),
+                build_analysis_context((self.modification(),)),
+                compiled.fact_schema,
+            ),
             (),
         )
 
@@ -1007,14 +1033,14 @@ class ImpactSelectionTest(unittest.TestCase):
         selection = select_impact(
             self.modification(), graph, graph, compiled, compiled, facts
         )
-        work = generate_applicability_resolution_work((selection,))
+        requirements = generate_fact_requirements(
+            (selection,),
+            build_analysis_context((self.modification(),)),
+            compiled.fact_schema,
+        )
 
         self.assertEqual(selection.candidates[0].unresolved_facts, ("change.requires_review",))
-        self.assertEqual([item.fact for item in work.questions], ["change.requires_review"])
-        self.assertEqual(
-            [item.reasons[0]["fact"] for item in work.obligations],
-            ["change.requires_review"],
-        )
+        self.assertEqual([item.fact for item in requirements], ["change.requires_review"])
 
     def test_accepted_true_trace_dominates_proposed_unknown_trace(self) -> None:
         declarations = [
@@ -1054,9 +1080,13 @@ class ImpactSelectionTest(unittest.TestCase):
             selection.candidates[0].unresolved_facts,
             ("change.requires_review",),
         )
-        work = generate_applicability_resolution_work((selection,))
+        requirements = generate_fact_requirements(
+            (selection,),
+            build_analysis_context((self.modification(),)),
+            proposed_compiled.fact_schema,
+        )
         self.assertEqual(
-            tuple(question.fact for question in work.questions),
+            tuple(requirement.fact for requirement in requirements),
             ("change.requires_review",),
         )
         reviews = generate_consumer_review_obligations((selection,))

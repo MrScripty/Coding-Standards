@@ -177,12 +177,14 @@ class CoverageHorizon:
 class CoverageEvidence:
     id: str
     digest: str
-    provider_contract_version: str = EVIDENCE_PROVIDER_CONTRACT_VERSION
+    provider_contract: str = "repository-content"
+    provider_contract_version: str = "1"
 
     def as_projection(self) -> dict[str, str]:
         return {
             "id": self.id,
             "digest": self.digest,
+            "provider_contract": self.provider_contract,
             "provider_contract_version": self.provider_contract_version,
         }
 
@@ -942,6 +944,104 @@ def _certificate(
         evidence_digests,
         COVERAGE_CONTRACT_VERSION,
         ATTESTATION_CONTRACT_VERSION,
+    )
+
+
+def certify_coverage(
+    index: CoverageIndex,
+    attestation: CoverageAttestation,
+) -> tuple[CoverageIndex, ConsumerCoverageCertificate]:
+    subject = next(
+        (
+            policy_id
+            for policy_id, requirement in index.requirements.items()
+            if requirement.handle == attestation.requirement
+        ),
+        None,
+    )
+    if subject is None:
+        raise _error(
+            "COVERAGE.STALE_ATTESTATION",
+            "attestation does not match a current coverage requirement",
+            path=attestation.source,
+            observed=attestation.requirement,
+            unavailable=True,
+        )
+    existing = index.certificate_for(subject)
+    if existing is not None:
+        if existing.attestation == attestation.handle:
+            return index, existing
+        raise _error(
+            "COVERAGE.DUPLICATE_SUBJECT",
+            "coverage subject already has a different current attestation",
+            path=attestation.source,
+            observed=subject,
+        )
+    if attestation.conclusion != "complete" or not attestation.evidence:
+        raise _error(
+            "COVERAGE.ATTESTATION_INVALID",
+            "coverage attestation must be complete and carry evidence",
+            path=attestation.source,
+            observed=attestation.handle,
+        )
+    certificate = _certificate(
+        index.views[subject],
+        index.requirements[subject],
+        attestation,
+    )
+    attestations = dict(index.attestations)
+    attestations[attestation.handle] = attestation
+    certificates = dict(index.certificates)
+    certificates[subject] = certificate
+    return (
+        CoverageIndex(
+            index.horizon,
+            index.views,
+            index.requirements,
+            attestations,
+            certificates,
+            index.input_sources,
+        ),
+        certificate,
+    )
+
+
+def reuse_coverage_certificate(
+    index: CoverageIndex,
+    certificate: ConsumerCoverageCertificate,
+) -> CoverageIndex:
+    view = index.views.get(certificate.subject)
+    requirement = index.requirements.get(certificate.subject)
+    if (
+        view is None
+        or requirement is None
+        or certificate.coverage_view != view.handle
+        or certificate.requirement != requirement.handle
+    ):
+        raise _error(
+            "COVERAGE.STALE_CERTIFICATE",
+            "certificate does not match the current coverage authority",
+            observed=certificate.handle,
+            unavailable=True,
+        )
+    existing = index.certificate_for(certificate.subject)
+    if existing is not None:
+        if existing.handle == certificate.handle:
+            return index
+        raise _error(
+            "COVERAGE.DUPLICATE_SUBJECT",
+            "coverage subject already has a different current certificate",
+            observed=certificate.subject,
+        )
+    certificates = dict(index.certificates)
+    certificates[certificate.subject] = certificate
+    return CoverageIndex(
+        index.horizon,
+        index.views,
+        index.requirements,
+        index.attestations,
+        certificates,
+        index.input_sources,
     )
 
 

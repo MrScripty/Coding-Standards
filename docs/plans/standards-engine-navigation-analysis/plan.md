@@ -2,10 +2,10 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 4 packets, resolution, and A1 acceptance
+**Current phase:** Milestone 4 single-state resolution and A1 acceptance
 
-**Next slice:** implement packet staleness and decision reuse from exact
-narrower dependency fingerprints
+**Next slice:** verify the implemented single-state replacement across focused
+and broad checks, freeze the final horizon, and record A1 acceptance
 
 **Acceptance status:** `pending`
 
@@ -34,7 +34,7 @@ Provide one agent-facing, typed Standards Engine that lets a caller discover,
 retrieve, and navigate canonical standards without repository paths, then
 compare supplied accepted and proposed standards snapshots and resolve every
 deterministically selected impact obligation into a complete read-only analysis
-report. The engine must expose uncertainty and authority explicitly, preserve
+result. The engine must expose uncertainty and authority explicitly, preserve
 one source for canonical metadata and schemas, and leave semantic acceptance,
 repository mutation, and external-project application outside A1.
 
@@ -48,7 +48,7 @@ repository mutation, and external-project application outside A1.
 | A4 | Policy-unit identity, accepted and proposed semantic state, move, split, merge, retirement, successor, alias, and unmapped normative-change rules preserve identity and produce the required typed outcomes without treating structure as semantic proof. | `contract` | `not-applicable` | `automated` | `pending` | Milestones 2 and 3 evidence |
 | A5 | Modification, addition, removal, move, split, and merge select deterministic seeds, traverse the accepted/proposed relation union through the existing graph engine, retain unknown applicability, and generate every required scoped obligation. | `integration` | `not-applicable` | `automated` | `pending` | Impact fixtures |
 | A6 | Derived coverage requirements plus authorized attestations generate deterministic reusable certificates, reject stale or unaudited coverage, and never infer successful empty impact from absent edges or convert unknown applicability into true. | `contract` | `not-applicable` | `automated` | Coverage and applicability fixtures |
-| A7 | `prepare` and iterative `resolve` return a `CompletedAnalysisReport` only when the final reached consumer-obligation IDs exactly equal the valid current disposition IDs and every other required question, obligation, authorization, and coverage condition is resolved. | `integration` | `not-applicable` | `automated` | Full prepare/resolve fixtures |
+| A7 | `prepare` and iterative `resolve` return a `CompleteResult` only when final reached consumer-obligation IDs equal valid disposition IDs, derived fact-requirement IDs equal valid observation requirement IDs, and every other obligation, authorization, and coverage condition is resolved. | `integration` | `not-applicable` | `automated` | Full prepare/resolve fixtures |
 | A8 | One canonical interface schema mechanically governs Python types, JSON validation, agent-tool definitions, examples, identity-bearing serialization, result variants, derived `next_operations`, and text rendering; projection drift fails verification. | `contract` | `not-applicable` | `automated` | Schema conformance suite |
 | A9 | Representative modification, addition, and removal changes complete through the real typed agent adapter; move, split, and merge behavioral fixtures pass; focused package tests and affected broad repository verification pass from one recorded clean tree. | `user-workflow` | `not-applicable` | `automated` | Final A1 acceptance report |
 
@@ -59,7 +59,7 @@ repository mutation, and external-project application outside A1.
 - A neutral `tools/standards_metadata/` package for canonical corpus and module
   metadata access.
 - A `tools/standards_analysis/` package for snapshot comparison, policy-unit
-  impact, applicability, audit coverage, packets, reading plans, and decision
+  impact, applicability, audit coverage, analysis states, reading plans, and decision
   reuse.
 - A standard-library-only `tools/standards_applicability/` package for compiled
   fact schemas, immutable programs, bound fact sets, three-valued evaluation,
@@ -161,21 +161,22 @@ plan or shared-authority proposals can become stale before integration.
 - The complete `AnalysisSnapshot` binds every analysis input, including
   repository-local attestations. A narrower `CoverageAuthorityView` binds only
   typed inputs capable of changing consumer discovery. Committing an
-  attestation therefore stales the old packet without changing the requirement
-  it answers.
+  attestation therefore changes the complete analysis input without changing
+  the narrower requirement it answers.
 - Consumer coverage is bounded by a mechanically derived requirement, an
   authorized attestation, and a generated certificate over an independent
   registered audit horizon. Coverage certificates never own change-specific
   dispositions. An unaudited empty edge result is not success.
 - Coverage projection exclusions are based on typed artifact roles, never an
   ignored directory. Attestations, their source registrations, certificates,
-  packets, reports, timestamps, summaries, and dispositions do not enter the
+  analysis results, timestamps, summaries, and dispositions do not enter the
   coverage view; relationship authority cannot escape projection by location.
 - Coverage identity binds the target semantic payload and relationship state,
   not the transient `proposed` or `accepted` label. Promotion of identical
   reviewed content and relationships preserves applicable coverage.
-- `CompletedAnalysisReport.complete` is derived from exact obligation,
-  disposition, question, authorization, evidence, and coverage invariants.
+- `CompleteResult.status` is derived from exact obligation,
+  disposition, fact-requirement, observation, authorization, evidence, and
+  coverage invariants.
 - Shared schemas, metadata authority, registries, plans, and generated outputs
   have one serial integration owner.
 - No A1 implementation slice may overlap an admitted verifier-migration write
@@ -208,15 +209,16 @@ plan or shared-authority proposals can become stale before integration.
 | Public interface | Typed requests and typed results are authoritative. Text is a derived optional rendering, not an input command language. | [Brief public interface](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#8-public-interface) | Prose command examples as interface authority |
 | Snapshot binding | Canonical tool requests carry an immutable snapshot handle; every result and follow-up handle preserves it. Native Python may offer a snapshot-bound convenience view only. | [Brief navigation](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#14-navigation) | Ambient current-tree navigation |
 | Policy identity | Policy-unit sidecars own stable unit ID, canonical module reference, module-relative locator, and accepted semantic revision; document path derives from canonical metadata. Policy-impact relationships originate from policy units, while modules remain navigation and document identities. | [Policy-unit source replan](reports/milestone-3-policy-unit-source-replan.md) | Paths, headings, line numbers, migration IDs, or module revisions as semantic identity |
-| Proposal state | A1 carries proposed semantic state only in `AnalysisRequest.semantic_proposals`; `CompletedAnalysisReport` proves analysis completion but is not apply-eligible. | [Brief A1 proposal state](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#a1-proposal-state) | Proposed state represented as accepted authority |
+| Proposal state | A1 carries proposed semantic state only in `AnalysisRequest.semantic_proposals`; a `CompleteResult` proves analysis completion for its exact analysis handle but is not apply-eligible. | [Brief A1 proposal state](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#a1-proposal-state) | Proposed state represented as accepted authority |
 | Impact completeness | Change-type adapters select explicit seeds and the accepted/proposed relation union, then use the existing graph engine. Unmapped normative change creates a mandatory obligation. | [Brief impact contract](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#change-type-impact-contract) | Current-graph-only traversal and optional whole-artifact selection |
-| Applicability | The A1 JSON Schema owns serialized shapes. `standards_applicability` owns executable operator semantics, compilation, normalization, type checking, truth tables, unresolved-fact reporting, and domain-separated program identity. Adapters load declarations; callers own questions and diagnostics. | [Applicability ownership replan](reports/milestone-3-applicability-ownership-replan.md) | Analysis-owned evaluator, policy-impact private parsing, Boolean coercion, or verifier-predicate reuse |
-| Coverage authority | `AnalysisSnapshot` owns complete reproducibility while `CoverageAuthorityView` contains only typed consumer-discovery dependencies. Analysis derives an exact requirement from that view; an authorized attestation approves the requirement; and a generated reusable certificate binds view, requirement, attestation, evidence, and contract digests. Reports alone own change-specific dispositions and reference the certificates they used. | [Coverage identity replan](reports/milestone-3-coverage-identity-replan.md) | Report-dependent certificates, permanent audited flags, snapshot-bound requirement identity, and copied packet dispositions |
+| Applicability | The A1 JSON Schema owns serialized shapes. `standards_applicability` owns executable operator semantics, fact contracts, compilation, normalization, type checking, truth tables, unresolved-fact reporting, reverse dependencies, and domain-separated identity. Adapters load declarations; analysis owns requirements and diagnostics. | [Applicability ownership replan](reports/milestone-3-applicability-ownership-replan.md), [fact-authority replan](reports/milestone-4-fact-authority-replan.md) | Analysis-owned evaluator, policy-impact private parsing, Boolean coercion, verifier-predicate reuse, or question authority |
+| Coverage authority | Exact authority references and accepted coverage decisions in `AnalysisState` own reproducibility while `CoverageAuthorityView` contains only typed consumer-discovery dependencies. Analysis derives an exact requirement from that view; an authorized attestation approves the requirement; and a generated reusable certificate binds view, requirement, attestation, evidence, and contract digests. The state owns change-specific dispositions; `CompleteResult` projects the certificates used. | [Coverage identity replan](reports/milestone-3-coverage-identity-replan.md) | Report-dependent certificates, permanent audited flags, snapshot-bound requirement identity, and copied projection dispositions |
 | Audit horizon | `audit-horizon.policy-impact-consumers` version 1 derives typed members and content fingerprints from canonical modules, policy units, registered graph providers, every registered suite and its declared repository inputs, plus the policy-impact node catalog as a supplement. Existing policy-impact declarations and nodes are not sufficient horizon authority. | [Coverage identity replan](reports/milestone-3-coverage-identity-replan.md#audit-horizon) | `policy-impact-declarations:v1` and any horizon derived only from relationships under audit |
 | Completion | Analysis completion is mechanically derived from the final reached-obligation set and exact valid disposition set plus every other typed obligation. | [Brief report invariant](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#exact-completedanalysisreport-invariant) | Authored or unchecked complete flags |
 | Consumer review aggregation | Applicable policy-impact traces compile into one obligation per exact `(consumer, scope, review-contract)` key. One canonical aggregate derives plural typed reasons, required evidence owners, and the decision fingerprint; unknown traces remain separate applicability work. | [Consumer-obligation recovery](reports/milestone-3-consumer-obligation-replan.md) | Singular source/reason obligations, one review per edge, or reading-plan impact reinterpretation |
 | Reading-plan projection | Reading plans are derived navigation over consumer obligations, Router selections, and dependency edges. One compiler collapses exact target/scope keys, unions typed cause references, derives authority from canonical target metadata, and applies deterministic state and ordering rules without traversing policy-impact relationships. Reading-plan compilation semantics advance the analysis contract to version 2; the coordinated public/interface identities advance to interface 5, navigation 2, packet 3, and report 2. | [Milestone 4 reading-plan replan](reports/milestone-4-reading-plan-replan.md) | Singular reasons, fake routing facts, one-parent dependency provenance, or reading-plan policy-impact interpretation |
 | Coverage projection for reading authority | The complete node catalog remains an `AnalysisSnapshot` input. Audit-horizon provider version 2 removes only the typed reading-only `nodes[].metadata.authority` field from that catalog's coverage fingerprint and retains every other current or future field. Horizon-affecting implementation freezes before one final reviewed attestation renewal. | [Milestone 4 horizon projection replan](reports/milestone-4-horizon-projection-replan.md) | Opaque whole-manifest coverage fingerprints, path inference, broad ignored directories, or repeated mid-slice attestation renewal |
+| Analysis state and reuse | A missing canonical fact in one derived `AnalysisContext` creates one `FactRequirement`. One normalized content-addressed `AnalysisState` is the sole analysis identity; a caller supplies at most one prior analysis handle and the engine revalidates every dependency-valid decision. Pending and complete results are projections. Raw facts, hidden sessions, packet/report identities, temporal staleness, and caller-coordinated decision lists are prohibited. | [Fact-authority replan](reports/milestone-4-fact-authority-replan.md), [single-state replan](reports/milestone-4-packet-supersession-replan.md) | Raw analysis facts, hidden mutable sessions, individual observation lists, packet/report identities, mutable A1 heads, question IDs plus echoed fingerprints, relationship-specific fact-answer obligations, generic fact-answer dispositions, topology-bound fact identity, or prompt-bound reuse |
 | Agent evidence | A1 acceptance requires real typed route/read and iterative prepare/resolve workflows, not schema inspection alone. | [Brief agent evidence](../standards-verification-engine/reports/standards-engine-navigation-analysis-authoring-brief.md#24-required-a1-agent-evidence) | Interface usability inferred from declarations |
 | Canonical schema | JSON Schema Draft 2020-12 plus documented Standards Engine annotations is the sole A1 machine contract; generated Python and agent-tool projections must pass deterministic conformance. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md) and [Milestone 0 review](reports/milestone-0-architecture-contract-review.md) | Independent Python, JSON, tool, example, identity, or renderer contracts |
 | Snapshot bootstrap | A trusted source provider issues the initial opaque snapshot handle; caller operations remain explicitly handle-bound and cannot fall back to ambient current state. | [Architecture decision](../../decisions/standards-engine-navigation-analysis.md#public-interface) | Caller repository paths or implicit current-tree lookup |
@@ -241,11 +243,11 @@ examples in the brief.
   one schema authority.
 - Accidental coupling risk: a single oversized engine, verifier-owned metadata,
   copied Router rules, parallel schema models, policy-aware graph behavior, or
-  packets that expose repository layout.
+  analysis projections that expose repository layout.
 - Policy/state/lifecycle owners: standards documents own meaning; sidecars own
   policy-unit identity; policy-impact declarations own relations; coverage
-  attestations own reviewer conclusions; schemas own transport shape; packets,
-  requirements, certificates, and reports are immutable derived artifacts.
+  attestations own reviewer conclusions; schemas own transport shape; fact
+  requirements, certificates, and analysis results are derived projections.
 - Future changes that remain independent: evidence-oracle policy, controlled
   authoring, external project baselines, text presentation, and additional
   graph consumers do not change the A1 analysis kernel unless their accepted
@@ -272,7 +274,7 @@ authorization, and impact-composition decisions before runtime implementation.
   generation or validation for Python, JSON, agent tools, examples, and text
   rendering.
 - [x] Define versioned canonical serialization and domain-separated identities
-  for snapshots, navigation, packets, obligations, reports, and certificates.
+  for snapshots, navigation, analyses, obligations, and certificates.
 - [x] Define every A1 request, result, handle, rejection, submission,
   authorization, inspection, and state-machine variant.
 - [x] Select the exact named graph groups used by modification, addition,
@@ -503,17 +505,22 @@ obligations; graph-engine tests remain unchanged and pass.
 **Status:** `Accepted` through the superseding
 [consumer-obligation recovery](reports/milestone-3-consumer-obligation-recovery.md)
 
-### Milestone 4: Packets, Agent Resolution, And A1 Acceptance
+### Milestone 4: Analysis Resolution And A1 Acceptance
 
-**Goal:** Expose the complete A1 workflow through immutable packets, iterative
-resolution, reading plans, decision reuse, typed agent tools, and optional text
-rendering, then accept the objective from one exact repository state.
+**Goal:** Expose the complete A1 workflow through one immutable analysis state,
+iterative pure transitions, reading plans, decision reuse, typed agent tools,
+and optional text rendering, then accept the objective from one exact
+repository state.
 
 **Allowed write set:**
 
 - `tools/standards_analysis/**`
+- `tools/standards_applicability/**`
+- `tools/standards_policy_impact/**`
 - `tools/standards_engine/**`
 - `tools/standards_verifier/tests/test_policy_impact.py`
+- `evaluation/standards-effectiveness/router-projection.toml`
+- `evaluation/standards-effectiveness/policy-impact-facts.toml`
 - `evaluation/standards-effectiveness/policy-impact-node-catalog.toml`
 - `evaluation/standards-effectiveness/policy-coverage/horizons.toml`
 - `evaluation/standards-effectiveness/policy-coverage/attestations/workflow.planning.toml`
@@ -526,9 +533,8 @@ rendering, then accept the objective from one exact repository state.
 
 **Tasks:**
 
-- [x] Implement immutable packets, stable obligation identities, typed
-  questions and submissions, required evidence, and state-derived next
-  operations.
+- [x] Implement stable obligation identities, typed questions and submissions,
+  required evidence, and state-derived next operations.
 - [x] Replace the opaque node-catalog horizon fingerprint with the typed
   provider-v2 coverage projection; keep the complete catalog in snapshot
   closure and prove reading-only authority changes do not alter coverage.
@@ -540,19 +546,45 @@ rendering, then accept the objective from one exact repository state.
   unchanged topology/compiled semantics, generate the exact 28 requirements,
   and renew Planning and Commit attestations once with authorized audit
   evidence as the final authority step.
-- [ ] Implement packet staleness and decision reuse from exact narrower
-  dependency fingerprints.
-- [ ] Derive `CompletedAnalysisReport` only from exact final reached/disposition
-  set equality and resolution of every non-consumer obligation, question,
-  authorization, evidence, and audit condition.
-- [ ] Return `CompletedAnalysisReport` directly when preparation produces no
+- [x] Replace `FactDefinition` with semantic `FactContract` authority while
+  keeping aliases and prompts outside decision identity; compile a reverse
+  fact-to-program dependency index.
+- [x] Derive one content-addressed standards-change `AnalysisContext`, one
+  `FactRequirement` per missing canonical fact/context, and typed
+  `FactObservation` records bound to exact evidence and authorization.
+- [x] Remove actionable applicability questions, relationship-specific
+  fact-answer obligations, and generic fact-answer dispositions; pending
+  impacts reference requirements and are reevaluated through reverse fact
+  dependencies.
+- [x] Replace packet, report, and state identity with one immutable normalized
+  `AnalysisState` and `AnalysisHandle`; store only authority inputs and
+  dependency-valid accepted decisions; derive pending and complete results.
+- [x] Bind exact authorization-authority and provider-contract/input views;
+  prohibit ambient provider inputs and distinguish deterministic no-observation
+  from provider or evidence unavailability.
+- [x] Remove global supersession, packet/report stores, and temporal A1
+  staleness; make repeated transitions idempotent and different valid
+  submissions natural independent child states.
+- [x] Add typed deterministic provider claims while keeping canonical
+  observation construction, evidence-contract validation, provider-contract
+  validation, and authorization validation inside analysis.
+- [x] Make only requirements material to the final fixed point completion
+  blocking; retain dormant-valid observations and dispositions while excluding
+  derived requirement history from state authority.
+- [ ] Freeze the resulting horizon and renew affected coverage attestations
+  only after every fact-contract, schema, registry, and test input is final.
+- [x] Derive `CompleteResult` only from exact final reached/disposition
+  and fact-requirement/observation set equality and resolution of every
+  non-consumer obligation, applicability, authorization, evidence, and audit
+  condition.
+- [x] Return `CompleteResult` directly when preparation produces no
   outstanding obligation.
-- [ ] Implement tagged inspection results and keep programming defects as
+- [x] Implement tagged inspection results and keep programming defects as
   exceptions rather than domain rejections.
-- [ ] Generate or validate Python, JSON, agent-tool, documentation, and renderer
+- [x] Generate or validate Python, JSON, agent-tool, documentation, and renderer
   projections from the accepted schema; make drift fail verification.
-- [ ] Implement deterministic compact text rendering from typed results only.
-- [ ] Run complete typed-agent modification, addition, and removal workflows,
+- [x] Implement deterministic compact text rendering from typed results only.
+- [x] Run complete typed-agent modification, addition, and removal workflows,
   including iterative obligation expansion and negative disposition cases.
 - [ ] Run move, split, and merge behavioral fixtures before claiming their
   contracts complete.
@@ -577,6 +609,12 @@ direction and independent registered horizon. Ambiguous typed projection,
 missing independent corpus authority, failed attestation bootstrap review,
 ambiguous evidence or authorization resolution, or need to change another
 graph authority remains a re-plan trigger rather than an implicit blocker.
+
+SENA-020's conflict is resolved architecturally by the accepted single-state
+model. Implementation is admitted only as one replacement: packet and report
+identities, stored derivations, global supersession, and temporal A1 staleness
+must disappear together. A compatibility layer or partial dual runtime is a
+new re-plan trigger.
 
 Runtime implementation is admitted from the recorded implementation base and
 remains bounded by the active milestone, exact next slice, allowed write set,

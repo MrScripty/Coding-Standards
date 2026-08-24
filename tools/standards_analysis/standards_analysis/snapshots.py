@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import stat
 import subprocess
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 from typing import Iterable
 
@@ -28,11 +28,12 @@ class AnalysisVersions:
 
     def as_contract(self) -> dict[str, object]:
         return {
-            "analysis_contract_version": 2,
-            "packet_schema_version": 3,
-            "report_schema_version": 2,
-            "interface_schema_version": 5,
-            "applicability_version": 2,
+            "analysis_contract_version": 5,
+            "analysis_schema_version": 2,
+            "result_schema_version": 1,
+            "interface_schema_version": 8,
+            "applicability_version": 3,
+            "authorization_contract_version": "authorization-authority.v1",
             "metadata_api_version": self.metadata_api_version,
             "graph_engine_contract_version": self.graph_engine_contract_version,
             "graph_engine_implementation_version": self.graph_engine_implementation_version,
@@ -190,7 +191,10 @@ def _gitlinks(root: Path, scope: tuple[str, ...]) -> list[dict[str, object]]:
 
 def _selected(path: str, scope: tuple[str, ...]) -> bool:
     candidate = PurePosixPath(path)
-    return any(candidate == item or item in candidate.parents for item in map(PurePosixPath, scope))
+    return any(
+        candidate == item or item in candidate.parents
+        for item in map(PurePosixPath, scope)
+    )
 
 
 def _compile_git(
@@ -202,9 +206,7 @@ def _compile_git(
     tree = _run_git(root, "rev-parse", "HEAD^{tree}").strip()
     commit = _run_git(root, "rev-parse", "HEAD^{commit}").strip()
     submodules = _gitlinks(root, scope)
-    exclusion_values = [
-        {"path": path, "reason": reason} for path, reason in exclusions
-    ]
+    exclusion_values = [{"path": path, "reason": reason} for path, reason in exclusions]
     identity_value = {
         "tree": tree,
         "scope": list(scope),
@@ -242,13 +244,19 @@ def _walk(root: Path, selected: PurePosixPath) -> Iterable[tuple[str, Path]]:
                 path=str(selected),
             )
         )
-    if not candidate.is_symlink() and not candidate.resolve(strict=False).is_relative_to(root):
+    if not candidate.is_symlink() and not candidate.resolve(
+        strict=False
+    ).is_relative_to(root):
         raise _reject(
             "SNAPSHOT.SYMLINK_ESCAPE",
             "snapshot inputs cannot be read through a symlink that escapes the source root",
             path=str(selected),
         )
-    if candidate.is_symlink() or not candidate.is_dir() or _nested_repository(root, candidate):
+    if (
+        candidate.is_symlink()
+        or not candidate.is_dir()
+        or _nested_repository(root, candidate)
+    ):
         yield str(selected), candidate
         return
     yield str(selected), candidate
@@ -311,7 +319,11 @@ def _entry(
     common = {
         "path": display_path,
         "mode": stat.S_IMODE(info.st_mode),
-        "tracking": "tracked" if display_path in index else "untracked" if git_source else "not-applicable",
+        "tracking": "tracked"
+        if display_path in index
+        else "untracked"
+        if git_source
+        else "not-applicable",
         "inclusion": "excluded" if exclusion is not None else "included",
         "reason": exclusion or "declared-analysis-scope",
     }
@@ -350,7 +362,9 @@ def _entry(
             result["nested_snapshot"] = nested.handle
             result["nested_identity"] = str(nested.handle["id"])
         else:
-            result["nested_identity"] = nested_identity or f"commit:{revision or recorded}"
+            result["nested_identity"] = (
+                nested_identity or f"commit:{revision or recorded}"
+            )
         return result
     if _nested_repository(root, path):
         revision, state, nested_identity = _nested_state(path)
@@ -396,7 +410,8 @@ def _compile_manifest(
                     value
                     for excluded_path, value in excluded.items()
                     if PurePosixPath(display_path) == PurePosixPath(excluded_path)
-                    or PurePosixPath(excluded_path) in PurePosixPath(display_path).parents
+                    or PurePosixPath(excluded_path)
+                    in PurePosixPath(display_path).parents
                 ),
                 None,
             )
@@ -467,7 +482,9 @@ def compile_snapshot(
                 )
             )
     omitted = tuple((str(_path(path)), reason) for path, reason in exclusions)
-    if any(not reason for _, reason in omitted) or len({path for path, _ in omitted}) != len(omitted):
+    if any(not reason for _, reason in omitted) or len(
+        {path for path, _ in omitted}
+    ) != len(omitted):
         raise _reject(
             "SNAPSHOT.EXCLUSIONS",
             "snapshot exclusions require unique paths and non-empty reasons",

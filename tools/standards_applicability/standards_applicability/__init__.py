@@ -6,13 +6,15 @@ from .core import (
     SUPPORTED_FACT_TYPES,
     SUPPORTED_OPERATORS,
     ApplicabilityProgram,
+    ApplicabilityProgramIndex,
     EvaluationResult,
-    FactDefinition,
+    FactContract,
     FactSchema,
     FactSet,
     FactValue,
     Truth,
     compile_fact_schema,
+    index_programs,
 )
 from .errors import ApplicabilityError, ApplicabilityFailure
 
@@ -24,11 +26,13 @@ __all__ = (
     "ApplicabilityError",
     "ApplicabilityFailure",
     "ApplicabilityProgram",
+    "ApplicabilityProgramIndex",
     "EvaluationResult",
-    "FactDefinition",
+    "FactContract",
     "FactSchema",
     "FactSet",
     "FactValue",
     "Truth",
     "compile_fact_schema",
+    "index_programs",
 )

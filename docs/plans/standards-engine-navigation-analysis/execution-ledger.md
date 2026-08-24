@@ -668,6 +668,66 @@
   next slice is packet staleness and decision reuse from exact narrower
   dependency fingerprints.
 
+## 2026-08-23: Milestone 4 Fact-Authority Replan
+
+- Stopped packet-reuse implementation after finding that fact answers carry no
+  fingerprint and one question may feed several relationship-specific
+  applicability obligations.
+- Rejected both relationship-obligation fingerprints and a question-level
+  fingerprint as the durable authority. Accepted one semantic `FactContract`,
+  one topology-independent `AnalysisContext`, one content-addressed
+  `FactRequirement`, and one evidence/authorization-bound `FactObservation`.
+- Bound reuse to exact requirement identity. Prompt wording and aliases remain
+  projections; unrelated topology changes and additional consumers do not
+  invalidate observations.
+- Reopened the horizon freeze only for this superseding architecture change.
+  Router fact contracts and every other horizon-affecting input must be final
+  before affected coverage attestations are renewed once.
+
+## 2026-08-24: Milestone 4 Immutable-State Replan
+
+- Rejected raw `AnalysisRequest` facts because they can resolve applicability
+  without a requirement, evidence, or authorization.
+- Rejected caller-coordinated observation lists because they expose storage,
+  conflict handling, and reuse selection through the agent Interface.
+- Confirmed that the in-progress packet identity omits accepted observations
+  and dispositions while hidden sessions retain them, allowing distinct
+  decision histories to alias to one content-addressed packet handle.
+- Accepted one immutable generated `AnalysisState` bound into every packet and
+  report, one optional prior-analysis handle, exact narrow decision
+  revalidation, provider claims with analysis-owned observation construction,
+  and current-material rather than accumulated requirement completion.
+
+## 2026-08-24: Milestone 4 Packet-Supersession Replan
+
+- Implemented the immutable-state cutover far enough to remove raw analysis
+  facts, hidden sessions, and caller-coordinated observation lists and to run
+  real typed-agent modification, addition, and removal workflows.
+- A blocked-disposition fixture exposed that supersession is stored globally by
+  packet ID. Repeating the same preparation after an earlier completion
+  recreated the byte-identical packet ID, but resolving it returned
+  `PACKET.STALE` solely because of the earlier run.
+- Confirmed the conflict with a focused real-engine reproduction: the initial
+  and repeated packet IDs were equal while the latter could not be resolved.
+- Stopped implementation and opened SENA-020. The recommended replan treats A1
+  packets as immutable branchable analysis states and reserves compare-and-swap
+  head staleness for future controlled-authoring sessions.
+
+## 2026-08-24: Milestone 4 Single-State Replan Admission
+
+- Accepted a deeper replacement of the initial SENA-020 correction: one
+  content-addressed `AnalysisState` and one `AnalysisHandle` are the complete A1
+  lifecycle model.
+- Pending and complete results, requirements, obligations, reading plans,
+  certificates, and completion proofs are deterministic projections rather
+  than stored identity-bearing artifacts.
+- Bound authorization-authority and provider contract/input views as exact
+  state inputs. Provider execution is prohibited during projection and cannot
+  read undeclared ambient state.
+- Admitted one atomic runtime and schema cutover with no packet/report
+  compatibility layer. A1 has no global supersession, mutable head, or temporal
+  stale outcome; those semantics remain reserved for A2 authoring.
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,

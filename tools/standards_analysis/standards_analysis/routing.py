@@ -9,7 +9,7 @@ from typing import Mapping
 from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,
     ApplicabilityProgram,
-    FactDefinition,
+    FactContract,
     FactSchema,
     compile_fact_schema,
 )
@@ -19,12 +19,6 @@ from .errors import AnalysisError, AnalysisFailure
 
 
 ROUTER_PROJECTION = "evaluation/standards-effectiveness/router-projection.toml"
-
-
-@dataclass(frozen=True, slots=True)
-class RouteFact:
-    definition: FactDefinition
-    question: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -40,7 +34,7 @@ class RouterProjection:
     owner: str
     source: str
     base_modules: tuple[str, ...]
-    facts: tuple[RouteFact, ...]
+    facts: tuple[FactContract, ...]
     rules: tuple[RouteRule, ...]
     fact_schema: FactSchema
 
@@ -100,7 +94,7 @@ def load_router_projection(
         raise _error(str(error), path=path) from error
     if set(raw) != {"schema_version", "id", "owner", "source", "base_modules", "facts", "rules"}:
         raise _error("projection contains missing or unknown fields", path=path)
-    if raw["schema_version"] != 1 or raw["owner"] != "router" or raw["source"] != "STANDARDS-ROUTER.md":
+    if raw["schema_version"] != 2 or raw["owner"] != "router" or raw["source"] != "STANDARDS-ROUTER.md":
         raise _error("projection authority header is invalid", path=path)
     projection_id = raw["id"]
     if not isinstance(projection_id, str) or not projection_id:
@@ -113,44 +107,33 @@ def load_router_projection(
     facts_raw = raw["facts"]
     if not isinstance(facts_raw, list) or not facts_raw:
         raise _error("projection must declare facts", path=path, field="facts")
-    facts: list[RouteFact] = []
+    fact_declarations: list[dict[str, object]] = []
     for index, item in enumerate(facts_raw):
         field = f"facts[{index}]"
-        if not isinstance(item, dict) or set(item) != {"id", "type", "nullable", "values", "aliases", "question"}:
+        expected = {
+            "id",
+            "semantic_revision",
+            "type",
+            "nullable",
+            "values",
+            "aliases",
+            "meaning",
+            "context_kind",
+            "answer_contract",
+            "evidence_contract",
+            "authorization_capability",
+            "prompt",
+        }
+        if not isinstance(item, dict) or set(item) != expected:
             raise _error("fact declaration shape is invalid", path=path, field=field)
-        if (
-            not isinstance(item["id"], str)
-            or not isinstance(item["type"], str)
-            or not isinstance(item["nullable"], bool)
-        ):
-            raise _error("fact identity, type, and nullable fields are invalid", path=path, field=field)
-        definition = FactDefinition(
-            item["id"],
-            item["type"],
-            item["nullable"],
-            _strings(item["values"], path=path, field=f"{field}.values"),
-            _strings(item["aliases"], path=path, field=f"{field}.aliases"),
-        )
-        question = item["question"]
-        if not isinstance(question, str) or not question:
-            raise _error("fact question must be non-empty", path=path, field=f"{field}.question")
-        facts.append(RouteFact(definition, question))
+        fact_declarations.append(item)
     try:
         fact_schema = compile_fact_schema(
             {
                 "kind": "applicability-fact-schema",
                 "id": f"{projection_id}.facts",
-                "version": 1,
-                "facts": [
-                    {
-                        "id": item.definition.id,
-                        "type": item.definition.type,
-                        "nullable": item.definition.nullable,
-                        "values": list(item.definition.values),
-                        "aliases": list(item.definition.aliases),
-                    }
-                    for item in facts
-                ],
+                "version": 2,
+                "facts": fact_declarations,
             }
         )
     except ApplicabilityError as error:
@@ -195,7 +178,7 @@ def load_router_projection(
         "router",
         "STANDARDS-ROUTER.md",
         base_modules,
-        tuple(facts),
+        fact_schema.definitions,
         tuple(rules),
         fact_schema,
     )

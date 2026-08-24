@@ -4,22 +4,26 @@ import json
 import unittest
 from pathlib import Path
 
+from tools.standards_applicability.standards_applicability import compile_fact_schema
 from tools.standards_analysis.standards_analysis import (
     AnalysisError,
     AnalysisVersions,
-    ApplicabilityQuestion,
+    AuthorizationReference,
     ChangeDescriptor,
     ChangeKind,
     ConsumerDispositionSubmission,
     CoverageAttestation,
     CoverageAttestationSubmission,
+    CoverageDecision,
     CoverageEvidence,
     EvidenceReference,
-    FactAnswerSubmission,
     ImpactDispositionSubmission,
+    ProvideFactSubmission,
     ReadingPlanEntry,
     ReviewScope,
-    build_pending_packet,
+    build_analysis_context,
+    build_fact_requirement,
+    build_pending_result,
     classify_changes,
 )
 from tools.standards_analysis.standards_analysis.obligations import (
@@ -38,15 +42,10 @@ SCHEMA = json.loads(
         encoding="utf-8"
     )
 )
-BASE = {
-    "kind": "snapshot-handle",
-    "id": "snapshot:sha256:" + "a" * 64,
-    "schema_version": 1,
-}
-PROPOSED = {
-    "kind": "snapshot-handle",
-    "id": "snapshot:sha256:" + "b" * 64,
-    "schema_version": 1,
+ANALYSIS = {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:" + "8" * 64,
+    "schema_version": 2,
 }
 SCOPE = ReviewScope("whole-artifact")
 
@@ -86,11 +85,7 @@ def change():
 
 
 def fingerprint() -> DecisionFingerprint:
-    contract = DecisionContract(
-        "decision-contract.test.v1",
-        1,
-        ("policy-unit",),
-    )
+    contract = DecisionContract("decision-contract.test.v1", 1, ("policy-unit",))
     return DecisionFingerprint(
         "consumer-review",
         contract.id,
@@ -133,20 +128,45 @@ def obligation(identifier: str = "e") -> Obligation:
     )
 
 
-class PendingPacketTest(unittest.TestCase):
-    def test_packet_is_schema_valid_and_derives_next_operations(self) -> None:
-        question = ApplicabilityQuestion(
-            "question.applicability.changed",
-            "changed",
-            "Was the policy changed?",
-        )
-        selected_obligation = obligation()
-        packet = build_pending_packet(
-            BASE,
-            PROPOSED,
+def fact_requirement():
+    schema = compile_fact_schema(
+        {
+            "kind": "applicability-fact-schema",
+            "id": "facts.result",
+            "version": 1,
+            "facts": [
+                {
+                    "id": "change.requires-review",
+                    "semantic_revision": 1,
+                    "type": "boolean",
+                    "nullable": False,
+                    "aliases": [],
+                    "meaning": "Whether the change requires review.",
+                    "context_kind": "standards-change",
+                    "answer_contract": "fact-value.v1",
+                    "evidence_contract": "evidence-reference.v1",
+                    "authorization_capability": "standards.analyze",
+                    "prompt": "Does the change require review?",
+                }
+            ],
+        }
+    )
+    return build_fact_requirement(
+        schema.resolve("change.requires-review"),
+        build_analysis_context((change(),)),
+        ("proposed:edge.test",),
+    )
+
+
+class PendingResultTest(unittest.TestCase):
+    def test_projection_is_schema_valid_and_derives_next_operations(self) -> None:
+        requirement = fact_requirement()
+        selected = obligation()
+        result = build_pending_result(
+            ANALYSIS,
             (change(),),
-            (selected_obligation,),
-            (question,),
+            (selected,),
+            (requirement,),
             (
                 ReadingPlanEntry(
                     "workflow.consumer",
@@ -155,17 +175,19 @@ class PendingPacketTest(unittest.TestCase):
                     (
                         {
                             "kind": "consumer-review-obligation",
-                            "obligation": selected_obligation.id,
+                            "obligation": selected.id,
                         },
                     ),
                     "selected",
                 ),
             ),
+            context=build_analysis_context((change(),)),
             summary="One review remains.",
         )
 
-        value = packet.as_contract()
-        validate(SCHEMA, SCHEMA["$defs"]["PendingPacket"], value, "$packet")
+        value = result.as_contract()
+        validate(SCHEMA, SCHEMA["$defs"]["PendingResult"], value, "$result")
+        self.assertEqual(result.handle, ANALYSIS)
         self.assertEqual(
             value["next_operations"],
             [
@@ -173,56 +195,69 @@ class PendingPacketTest(unittest.TestCase):
                     "operation": "resolve",
                     "request_kind": "consumer-disposition",
                     "target": "workflow.consumer",
-                    "obligation_id": selected_obligation.id,
+                    "obligation_id": selected.id,
                 },
                 {
                     "operation": "resolve",
-                    "request_kind": "fact-answer",
-                    "target": question.id,
+                    "request_kind": "provide-fact",
+                    "target": requirement.fact,
+                    "requirement_id": requirement.id,
                 },
             ],
         )
 
-    def test_packet_identity_is_order_independent_but_snapshot_bound(self) -> None:
-        first = obligation("e")
-        second = obligation("f")
-        left = build_pending_packet(BASE, PROPOSED, (change(),), (first, second))
-        right = build_pending_packet(
-            BASE,
-            PROPOSED,
+    def test_projection_has_no_identity_independent_of_analysis(self) -> None:
+        selected = obligation()
+        left = build_pending_result(
+            ANALYSIS,
             (change(),),
-            (second, first),
-            summary="Display text does not own identity.",
+            (selected,),
+            (),
+            (),
+            context=build_analysis_context((change(),)),
         )
-        changed_snapshot = build_pending_packet(
-            BASE,
-            {**PROPOSED, "id": "snapshot:sha256:" + "9" * 64},
+        right = build_pending_result(
+            ANALYSIS,
             (change(),),
-            (first, second),
+            (selected,),
+            (),
+            (),
+            context=build_analysis_context((change(),)),
+            provenance=AnalysisVersions(analyzer_implementation_version="two"),
+            summary="Display-only text.",
         )
 
         self.assertEqual(left.id, right.id)
-        self.assertNotEqual(left.id, changed_snapshot.id)
+        self.assertEqual(left.handle, right.handle)
         self.assertNotIn("summary", left.as_contract())
-        self.assertEqual(
-            right.as_contract()["summary"],
-            "Display text does not own identity.",
-        )
+        self.assertEqual(right.as_contract()["summary"], "Display-only text.")
 
     def test_duplicate_or_empty_work_is_rejected(self) -> None:
+        context = build_analysis_context((change(),))
         with self.assertRaises(AnalysisError) as caught:
-            build_pending_packet(BASE, PROPOSED, (change(),), ())
-        self.assertEqual(caught.exception.failure.code, "PACKET.NO_OUTSTANDING_WORK")
+            build_pending_result(ANALYSIS, (change(),), (), (), (), context=context)
+        self.assertEqual(caught.exception.failure.code, "RESULT.NO_OUTSTANDING_WORK")
 
         selected = obligation()
         with self.assertRaises(AnalysisError) as caught:
-            build_pending_packet(BASE, PROPOSED, (change(),), (selected, selected))
-        self.assertEqual(caught.exception.failure.code, "PACKET.DUPLICATE_OBLIGATION")
+            build_pending_result(
+                ANALYSIS,
+                (change(),),
+                (selected, selected),
+                (),
+                (),
+                context=context,
+            )
+        self.assertEqual(
+            caught.exception.failure.code,
+            "RESULT.DUPLICATE_OBLIGATION",
+        )
 
-    def test_typed_dispositions_require_evidence_and_match_schema(self) -> None:
+    def test_typed_submissions_and_coverage_decision_match_schema(self) -> None:
         evidence = EvidenceReference(
             "review.consumer",
             "sha256:" + "1" * 64,
+            "repository-content",
             "1",
         )
         consumer = ConsumerDispositionSubmission(
@@ -239,37 +274,9 @@ class PendingPacketTest(unittest.TestCase):
             (evidence,),
             fingerprint(),
         )
-
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["ConsumerDispositionSubmission"],
-            consumer.as_contract(),
-            "$consumer",
-        )
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["ImpactDispositionSubmission"],
-            impact.as_contract(),
-            "$impact",
-        )
-        with self.assertRaises(AnalysisError) as caught:
-            ConsumerDispositionSubmission(
-                obligation().id,
-                "reviewed-no-change",
-                "Missing evidence.",
-                (),
-                fingerprint(),
-            )
-        self.assertEqual(caught.exception.failure.code, "SUBMISSION.EVIDENCE_REQUIRED")
-
-    def test_fact_and_coverage_submissions_match_schema(self) -> None:
-        evidence = EvidenceReference(
-            "fact.changed",
-            "sha256:" + "2" * 64,
-            "1",
-        )
-        fact = FactAnswerSubmission(
-            "question.applicability.changed",
+        requirement = fact_requirement()
+        fact = ProvideFactSubmission(
+            requirement.handle,
             {"type": "boolean", "state": "known", "value": True},
             (evidence,),
         )
@@ -285,54 +292,33 @@ class PendingPacketTest(unittest.TestCase):
             "attestations/test.toml",
         )
         coverage = CoverageAttestationSubmission(obligation().id, attestation)
-
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["FactAnswerSubmission"],
-            fact.as_contract(),
-            "$fact",
-        )
-        validate(
-            SCHEMA,
-            SCHEMA["$defs"]["CoverageAttestationSubmission"],
-            coverage.as_contract(),
-            "$coverage",
+        authorization = AuthorizationReference(
+            "authorization.audit",
+            "standards.review.audit",
+            "sha256:" + "6" * 64,
         )
 
-    def test_blocked_work_has_no_derived_resolution_operation(self) -> None:
-        selected = obligation()
-        blocked = Obligation(
-            selected.id,
-            selected.kind,
-            selected.target,
-            selected.scope,
-            selected.reasons,
-            "blocked",
-            selected.permitted_submissions,
-            selected.fingerprint,
-            selected.applicability,
-        )
+        for definition, value in (
+            ("ConsumerDispositionSubmission", consumer.as_contract()),
+            ("ImpactDispositionSubmission", impact.as_contract()),
+            ("ProvideFactSubmission", fact.as_contract()),
+            ("CoverageAttestationSubmission", coverage.as_contract()),
+            (
+                "CoverageDecision",
+                CoverageDecision(attestation, authorization).as_contract(),
+            ),
+        ):
+            validate(SCHEMA, SCHEMA["$defs"][definition], value, "$submission")
 
-        packet = build_pending_packet(BASE, PROPOSED, (change(),), (blocked,))
-
-        self.assertEqual(packet.next_operations, ())
-
-    def test_implementation_versions_do_not_change_packet_identity(self) -> None:
-        left = build_pending_packet(
-            BASE,
-            PROPOSED,
-            (change(),),
-            (obligation(),),
-            provenance=AnalysisVersions(analyzer_implementation_version="one"),
-        )
-        right = build_pending_packet(
-            BASE,
-            PROPOSED,
-            (change(),),
-            (obligation(),),
-            provenance=AnalysisVersions(analyzer_implementation_version="two"),
-        )
-        self.assertEqual(left.id, right.id)
+        with self.assertRaises(AnalysisError) as caught:
+            ConsumerDispositionSubmission(
+                obligation().id,
+                "reviewed-no-change",
+                "Missing evidence.",
+                (),
+                fingerprint(),
+            )
+        self.assertEqual(caught.exception.failure.code, "SUBMISSION.EVIDENCE_REQUIRED")
 
 
 if __name__ == "__main__":

@@ -4,6 +4,12 @@ from dataclasses import dataclass
 from types import MappingProxyType
 from typing import Any, Mapping
 
+from tools.standards_analysis.standards_analysis import (
+    AnalysisState,
+    ChangeDescriptor,
+    SemanticProposal,
+)
+
 
 def _freeze(value: Any) -> Any:
     if isinstance(value, dict):
@@ -57,6 +63,31 @@ class InspectCall:
 
 
 @dataclass(frozen=True, slots=True)
+class AnalysisRequest:
+    base_snapshot: Mapping[str, object]
+    proposed_snapshot: Mapping[str, object]
+    changes: tuple[ChangeDescriptor, ...]
+    semantic_proposals: tuple[SemanticProposal, ...]
+    prior_analysis: Mapping[str, object] | None = None
+    contract_version: int = 2
+    kind: str = "analysis-request"
+
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "base_snapshot", _freeze(self.base_snapshot))
+        object.__setattr__(
+            self,
+            "proposed_snapshot",
+            _freeze(self.proposed_snapshot),
+        )
+        if self.prior_analysis is not None:
+            object.__setattr__(
+                self,
+                "prior_analysis",
+                _freeze(self.prior_analysis),
+            )
+
+
+@dataclass(frozen=True, slots=True)
 class ContractResult:
     _value: Mapping[str, object]
 
@@ -106,7 +137,8 @@ class NavigationInspectionResult(ContractResult):
 
 QueryResult = RouteResult | ReadResult | RelatedResult | RejectedResult
 InspectionResult = (
-    SnapshotInspectionResult
+    AnalysisState
+    | SnapshotInspectionResult
     | PolicyInspectionResult
     | RelationshipInspectionResult
     | NavigationInspectionResult

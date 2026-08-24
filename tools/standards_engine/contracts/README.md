@@ -29,8 +29,8 @@ variants, or semantics.
 | Operation | Input | Success result | Expected rejection |
 | --- | --- | --- | --- |
 | `query` | `QueryCall` | `NavigationResult` | `RejectedResult` |
-| `prepare` | `PrepareCall` | `PendingPacket` or `CompletedAnalysisReport` | `RejectedResult` |
-| `resolve` | `ResolveCall` | `PendingPacket` or `CompletedAnalysisReport` | `RejectedResult` |
+| `prepare` | `PrepareCall` | `PendingResult` or `CompleteResult` | `RejectedResult` |
+| `resolve` | `ResolveCall` | `PendingResult` or `CompleteResult` | `RejectedResult` |
 | `inspect` | `InspectCall` | `InspectionResult` | `RejectedResult` |
 
 Trusted capability context is injected by the Python composition root or tool
@@ -42,7 +42,7 @@ tool session is established. Callers receive that opaque handle rather than a
 repository path. Calls always carry it explicitly, and an adapter cannot
 substitute the ambient current tree for a missing or stale handle.
 
-Contract version `1` has one accepted representation. Incompatible contract
+Contract version `8` has one accepted representation. Incompatible contract
 changes require a new version and migration decision; unknown versions are
 `unsupported` and do not select a compatibility parser.
 
@@ -82,12 +82,12 @@ snapshot and can be used only with that snapshot.
 - `pending`, when at least one required obligation or question remains; or
 - `complete`, when all completion invariants already hold.
 
-`resolve` accepts one typed submission against an exact packet. It returns a new
-packet when work remains or a completed report at the fixed point. Packets bound
-to changed inputs are stale. Unchanged decisions may be imported into a new
-packet only through exact dependency-fingerprint equality.
+`resolve` accepts one typed submission against an exact immutable analysis. It
+returns a child analysis projected as pending or complete. Repeating the same
+transition is idempotent; different valid submissions create independent child
+states. One prior analysis may seed narrow decision reuse after revalidation.
 
-`CompletedAnalysisReport` is not an approval of policy meaning and cannot
+`CompleteResult` is not an approval of policy meaning and cannot
 authorize mutation or application.
 
 `next_operations` is a schema-governed, derived projection of valid state

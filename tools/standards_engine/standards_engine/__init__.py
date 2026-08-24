@@ -1,8 +1,15 @@
 """Typed snapshot-bound Standards Engine facade."""
 
-from .engine import StandardsEngine
+from .engine import (
+    AnalysisStateStore,
+    DirectoryAnalysisStateStore,
+    InMemoryAnalysisStateStore,
+    StandardsEngine,
+)
 from .tools import AgentToolFacade
+from .rendering import render_text
 from .model import (
+    AnalysisRequest,
     InspectCall,
     NavigationInspectionResult,
     PolicyInspectionResult,
@@ -20,7 +27,11 @@ from .model import (
 
 __all__ = (
     "InspectCall",
+    "AnalysisRequest",
+    "AnalysisStateStore",
+    "DirectoryAnalysisStateStore",
     "AgentToolFacade",
+    "InMemoryAnalysisStateStore",
     "NavigationInspectionResult",
     "PolicyInspectionResult",
     "QueryCall",
@@ -31,6 +42,7 @@ __all__ = (
     "RelatedResult",
     "RouteRequest",
     "RouteResult",
+    "render_text",
     "RelationshipInspectionResult",
     "SnapshotInspectionResult",
     "StandardsEngine",

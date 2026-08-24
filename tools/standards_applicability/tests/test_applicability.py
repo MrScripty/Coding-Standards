@@ -4,20 +4,37 @@ import ast
 import sys
 import unittest
 from pathlib import Path
+from types import MappingProxyType
 
 from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,
     Truth,
     compile_fact_schema,
+    index_programs,
 )
 
 
 def declaration(facts: list[dict[str, object]] | None = None) -> dict[str, object]:
+    selected = []
+    for fact in facts or []:
+        fact_id = str(fact["id"])
+        selected.append(
+            {
+                "semantic_revision": 1,
+                "meaning": f"Meaning of {fact_id}.",
+                "context_kind": "standards-change",
+                "answer_contract": "fact-value.v1",
+                "evidence_contract": "evidence-reference.v1",
+                "authorization_capability": "standards.analyze",
+                "prompt": f"Provide {fact_id}.",
+                **fact,
+            }
+        )
     return {
         "kind": "applicability-fact-schema",
         "id": "test.applicability",
         "version": 1,
-        "facts": facts or [],
+        "facts": selected,
     }
 
 
@@ -139,6 +156,23 @@ class ApplicabilityTest(unittest.TestCase):
                 }
             )
 
+    def test_immutable_mapping_and_sequence_values_bind_at_the_interface(self) -> None:
+        facts = self.schema.bind(
+            MappingProxyType(
+                {
+                    "tags": MappingProxyType(
+                        {
+                            "type": "enum-set",
+                            "state": "known",
+                            "value": ("x",),
+                        }
+                    )
+                }
+            )
+        )
+
+        self.assertEqual(facts.canonical_values["tags"].value, ("x",))
+
     def test_schema_and_program_digests_are_stable_and_schema_bound(self) -> None:
         repeated = compile_fact_schema(
             declaration(
@@ -184,6 +218,75 @@ class ApplicabilityTest(unittest.TestCase):
         with self.assertRaises(ApplicabilityError) as caught:
             self.schema.compile(expression, language_version=99)
         self.assertEqual(caught.exception.failure.outcome, "unsupported")
+
+    def test_prompt_and_aliases_do_not_change_semantic_identity(self) -> None:
+        first = compile_fact_schema(
+            declaration(
+                [
+                    {
+                        "id": "enabled",
+                        "type": "boolean",
+                        "nullable": False,
+                        "aliases": ["on"],
+                        "prompt": "Is it enabled?",
+                    }
+                ]
+            )
+        )
+        second = compile_fact_schema(
+            declaration(
+                [
+                    {
+                        "id": "enabled",
+                        "type": "boolean",
+                        "nullable": False,
+                        "aliases": ["active"],
+                        "prompt": "Provide the enabled state.",
+                    }
+                ]
+            )
+        )
+        expression = {"operator": "equals", "fact": "enabled", "value": True}
+
+        self.assertEqual(first.digest, second.digest)
+        self.assertEqual(
+            first.resolve("enabled").digest,
+            second.resolve("enabled").digest,
+        )
+        self.assertEqual(
+            first.compile(expression).dependency_digest,
+            second.compile(expression).dependency_digest,
+        )
+
+    def test_semantic_contract_and_reverse_dependencies_are_exact(self) -> None:
+        changed = declaration(
+            [
+                {
+                    "id": "enabled",
+                    "type": "boolean",
+                    "nullable": False,
+                    "aliases": [],
+                    "semantic_revision": 2,
+                }
+            ]
+        )
+        changed["facts"][0]["meaning"] = "A changed semantic meaning."
+        changed_schema = compile_fact_schema(changed)
+        program = self.schema.compile(
+            {"operator": "equals", "fact": "enabled", "value": True}
+        )
+        other = self.schema.compile(
+            {"operator": "equals", "fact": "mode", "value": "a"}
+        )
+        index = index_programs({"program.enabled": program, "program.mode": other})
+
+        self.assertNotEqual(
+            self.schema.resolve("enabled").digest,
+            changed_schema.resolve("enabled").digest,
+        )
+        self.assertEqual(index.dependents("enabled"), ("program.enabled",))
+        self.assertEqual(index.dependents("mode"), ("program.mode",))
+        self.assertEqual(index.dependents("missing"), ())
 
     def test_invalid_schema_expression_and_values_reject(self) -> None:
         invalid_expressions = (

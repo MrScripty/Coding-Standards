@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 from tools.standards_applicability.standards_applicability import (
+    FactContract,
     LANGUAGE_VERSION,
     SUPPORTED_FACT_STATES,
     SUPPORTED_FACT_TYPES,
@@ -53,6 +54,26 @@ class ApplicabilityContractTest(unittest.TestCase):
         self.assertNotIn(
             "minItems",
             definitions["ApplicabilityFactSchema"]["properties"]["facts"],
+        )
+        self.assertEqual(
+            set(definitions["FactDeclaration"]["required"]),
+            {
+                "id",
+                "semantic_revision",
+                "type",
+                "nullable",
+                "aliases",
+                "meaning",
+                "context_kind",
+                "answer_contract",
+                "evidence_contract",
+                "authorization_capability",
+                "prompt",
+            },
+        )
+        self.assertEqual(
+            set(FactContract.__dataclass_fields__),
+            set(definitions["FactContract"]["properties"]),
         )
 
     def test_former_applicability_implementations_are_not_fallbacks(self) -> None:

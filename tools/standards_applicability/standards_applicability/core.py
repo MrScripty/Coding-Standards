@@ -14,6 +14,8 @@ from .errors import ApplicabilityError, ApplicabilityFailure
 LANGUAGE_VERSION = 1
 SCHEMA_DIGEST_DOMAIN = "coding-standards:applicability-fact-schema:v1"
 PROGRAM_DIGEST_DOMAIN = "coding-standards:applicability-program:v1"
+FACT_CONTRACT_DIGEST_DOMAIN = "coding-standards:fact-contract:v1"
+PROGRAM_INDEX_DIGEST_DOMAIN = "coding-standards:applicability-program-index:v1"
 SUPPORTED_FACT_TYPES = frozenset(
     {"boolean", "enum", "string", "string-set", "enum-set", "canonical-id"}
 )
@@ -36,12 +38,46 @@ class EvaluationResult:
 
 
 @dataclass(frozen=True, slots=True)
-class FactDefinition:
+class FactContract:
     id: str
+    semantic_revision: int
     type: str
-    nullable: bool = False
-    values: tuple[str, ...] = ()
-    aliases: tuple[str, ...] = ()
+    nullable: bool
+    values: tuple[str, ...]
+    aliases: tuple[str, ...]
+    meaning: str
+    context_kind: str
+    answer_contract: str
+    evidence_contract: str
+    authorization_capability: str
+    prompt: str
+    digest: str
+
+    def semantic_projection(self) -> dict[str, object]:
+        value: dict[str, object] = {
+            "id": self.id,
+            "semantic_revision": self.semantic_revision,
+            "type": self.type,
+            "nullable": self.nullable,
+            "meaning": self.meaning,
+            "context_kind": self.context_kind,
+            "answer_contract": self.answer_contract,
+            "evidence_contract": self.evidence_contract,
+            "authorization_capability": self.authorization_capability,
+        }
+        if self.values:
+            value["values"] = list(self.values)
+        return value
+
+    def as_contract(self) -> dict[str, object]:
+        value = self.semantic_projection()
+        value["aliases"] = list(self.aliases)
+        value["prompt"] = self.prompt
+        value["digest"] = self.digest
+        return value
+
+    def bind(self, value: Mapping[str, object]) -> FactValue:
+        return _bind_value(self, value)
 
 
 @dataclass(frozen=True, slots=True)
@@ -49,6 +85,12 @@ class FactValue:
     type: str
     state: str
     value: object = None
+
+    def as_contract(self) -> dict[str, object]:
+        result: dict[str, object] = {"type": self.type, "state": self.state}
+        if self.state == "known":
+            result["value"] = list(self.value) if isinstance(self.value, tuple) else self.value
+        return result
 
 
 @dataclass(frozen=True, slots=True)
@@ -114,10 +156,10 @@ class ApplicabilityProgram:
 class FactSchema:
     id: str
     version: int
-    definitions: tuple[FactDefinition, ...]
+    definitions: tuple[FactContract, ...]
     aliases: Mapping[str, str]
     digest: str
-    _index: Mapping[str, FactDefinition] = field(repr=False, compare=False)
+    _index: Mapping[str, FactContract] = field(repr=False, compare=False)
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "aliases", MappingProxyType(dict(self.aliases)))
@@ -156,6 +198,9 @@ class FactSchema:
             root,
         )
 
+    def resolve(self, fact_id: str) -> FactContract | None:
+        return self._index.get(fact_id)
+
     def bind(self, values: Mapping[str, object]) -> FactSet:
         selected: dict[str, FactValue] = {}
         for supplied_id, raw in values.items():
@@ -174,6 +219,57 @@ class FactSchema:
         return FactSet(self.digest, selected)
 
 
+@dataclass(frozen=True, slots=True)
+class ApplicabilityProgramIndex:
+    programs: Mapping[str, ApplicabilityProgram]
+    by_fact: Mapping[str, tuple[str, ...]]
+    digest: str
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "programs",
+            MappingProxyType(dict(sorted(self.programs.items()))),
+        )
+        object.__setattr__(
+            self,
+            "by_fact",
+            MappingProxyType(dict(sorted(self.by_fact.items()))),
+        )
+
+    def dependents(self, fact_id: str) -> tuple[str, ...]:
+        return self.by_fact.get(fact_id, ())
+
+
+def index_programs(
+    programs: Mapping[str, ApplicabilityProgram],
+) -> ApplicabilityProgramIndex:
+    selected = dict(sorted(programs.items()))
+    if any(not program_id for program_id in selected):
+        raise _invalid("program index IDs must be non-empty")
+    by_fact: dict[str, list[str]] = {}
+    for program_id, program in selected.items():
+        for fact_id in program.referenced_facts:
+            by_fact.setdefault(fact_id, []).append(program_id)
+    normalized = {
+        fact_id: tuple(sorted(program_ids))
+        for fact_id, program_ids in by_fact.items()
+    }
+    digest = _digest(
+        PROGRAM_INDEX_DIGEST_DOMAIN,
+        {
+            "programs": [
+                {
+                    "id": program_id,
+                    "dependency_digest": program.dependency_digest,
+                }
+                for program_id, program in selected.items()
+            ]
+        },
+    )
+    return ApplicabilityProgramIndex(selected, normalized, digest)
+
+
 def compile_fact_schema(declaration: Mapping[str, object]) -> FactSchema:
     expected = {"kind", "id", "version", "facts"}
     if set(declaration) != expected or declaration.get("kind") != "applicability-fact-schema":
@@ -188,8 +284,8 @@ def compile_fact_schema(declaration: Mapping[str, object]) -> FactSchema:
     if not isinstance(raw_definitions, list):
         raise _invalid("fact schema facts must be an array", field="facts")
 
-    definitions: list[FactDefinition] = []
-    names: dict[str, FactDefinition] = {}
+    definitions: list[FactContract] = []
+    names: dict[str, FactContract] = {}
     aliases: dict[str, str] = {}
     for index, raw in enumerate(raw_definitions):
         definition = _compile_definition(raw, index)
@@ -208,7 +304,7 @@ def compile_fact_schema(declaration: Mapping[str, object]) -> FactSchema:
         "kind": "applicability-fact-schema",
         "id": _text(schema_id),
         "version": version,
-        "facts": [_definition_projection(item) for item in definitions],
+        "facts": [item.semantic_projection() for item in definitions],
     }
     return FactSchema(
         str(projection["id"]),
@@ -220,18 +316,38 @@ def compile_fact_schema(declaration: Mapping[str, object]) -> FactSchema:
     )
 
 
-def _compile_definition(raw: object, index: int) -> FactDefinition:
+def _compile_definition(raw: object, index: int) -> FactContract:
     if not isinstance(raw, dict):
         raise _invalid("fact declaration must be an object", field=f"facts[{index}]")
-    allowed = {"id", "type", "nullable", "values", "aliases"}
-    required = {"id", "type", "nullable", "aliases"}
+    allowed = {
+        "id",
+        "semantic_revision",
+        "type",
+        "nullable",
+        "values",
+        "aliases",
+        "meaning",
+        "context_kind",
+        "answer_contract",
+        "evidence_contract",
+        "authorization_capability",
+        "prompt",
+    }
+    required = allowed - {"values"}
     if set(raw) - allowed or not required <= set(raw):
         raise _invalid("fact declaration shape is invalid", field=f"facts[{index}]")
     fact_id = raw.get("id")
+    semantic_revision = raw.get("semantic_revision")
     fact_type = raw.get("type")
     nullable = raw.get("nullable")
     values = raw.get("values", [])
     aliases = raw.get("aliases")
+    meaning = raw.get("meaning")
+    context_kind = raw.get("context_kind")
+    answer_contract = raw.get("answer_contract")
+    evidence_contract = raw.get("evidence_contract")
+    authorization_capability = raw.get("authorization_capability")
+    prompt = raw.get("prompt")
     if not isinstance(fact_id, str) or not fact_id:
         raise _invalid("fact id must be a non-empty string", field=f"facts[{index}].id")
     if fact_type not in SUPPORTED_FACT_TYPES:
@@ -245,18 +361,52 @@ def _compile_definition(raw: object, index: int) -> FactDefinition:
             raise _invalid("enum facts require at least one value", field=fact_id)
     elif values:
         raise _invalid("only enum facts may declare values", field=fact_id)
-    return FactDefinition(
+    if not isinstance(semantic_revision, int) or isinstance(semantic_revision, bool) or semantic_revision < 1:
+        raise _invalid("fact semantic revision must be positive", field=fact_id)
+    semantic_text = (
+        meaning,
+        context_kind,
+        answer_contract,
+        evidence_contract,
+        authorization_capability,
+        prompt,
+    )
+    if any(not isinstance(item, str) or not item for item in semantic_text):
+        raise _invalid("fact semantic and rendering fields must be non-empty", field=fact_id)
+    contract_values = tuple(sorted(_text(item) for item in values))
+    semantic_projection: dict[str, object] = {
+        "id": _text(fact_id),
+        "semantic_revision": semantic_revision,
+        "type": str(fact_type),
+        "nullable": nullable,
+        "meaning": _text(str(meaning)),
+        "context_kind": _text(str(context_kind)),
+        "answer_contract": _text(str(answer_contract)),
+        "evidence_contract": _text(str(evidence_contract)),
+        "authorization_capability": _text(str(authorization_capability)),
+    }
+    if contract_values:
+        semantic_projection["values"] = list(contract_values)
+    return FactContract(
         _text(fact_id),
+        semantic_revision,
         str(fact_type),
         nullable,
-        tuple(sorted(_text(item) for item in values)),
+        contract_values,
         tuple(sorted(_text(item) for item in aliases)),
+        _text(str(meaning)),
+        _text(str(context_kind)),
+        _text(str(answer_contract)),
+        _text(str(evidence_contract)),
+        _text(str(authorization_capability)),
+        _text(str(prompt)),
+        _digest(FACT_CONTRACT_DIGEST_DOMAIN, semantic_projection),
     )
 
 
 def _compile_expression(
     value: object,
-    definitions: Mapping[str, FactDefinition],
+    definitions: Mapping[str, FactContract],
 ) -> tuple[_Expression, dict[str, object]]:
     if not isinstance(value, dict):
         raise _invalid("applicability expression must be an object")
@@ -364,8 +514,8 @@ def _evaluate(
     return EvaluationResult(Truth.TRUE if matched else Truth.FALSE)
 
 
-def _bind_value(definition: FactDefinition, raw: object) -> FactValue:
-    if not isinstance(raw, dict) or set(raw) - {"type", "state", "value"}:
+def _bind_value(definition: FactContract, raw: object) -> FactValue:
+    if not isinstance(raw, Mapping) or set(raw) - {"type", "state", "value"}:
         raise _invalid("fact value must be a typed state object", field=definition.id)
     value_type = raw.get("type")
     state = raw.get("state")
@@ -391,7 +541,7 @@ def _bind_value(definition: FactDefinition, raw: object) -> FactValue:
         if definition.type == "enum" and value not in definition.values:
             raise _invalid("enum fact value is outside its domain", field=definition.id)
     else:
-        if not isinstance(value, list) or not _unique_strings(value):
+        if not isinstance(value, (list, tuple)) or not _unique_strings(value):
             raise _invalid("set fact value must contain unique strings", field=definition.id)
         normalized = tuple(sorted(_text(item) for item in value))
         if definition.type == "enum-set" and set(normalized) - set(definition.values):
@@ -400,7 +550,7 @@ def _bind_value(definition: FactDefinition, raw: object) -> FactValue:
     return FactValue(definition.type, "known", value)
 
 
-def _validate_operand(definition: FactDefinition, value: object, operator: str) -> None:
+def _validate_operand(definition: FactContract, value: object, operator: str) -> None:
     if value is None:
         if definition.nullable and operator != "contains":
             return
@@ -417,16 +567,8 @@ def _validate_operand(definition: FactDefinition, value: object, operator: str) 
         raise _invalid("expression operand is outside the enum domain", field=definition.id)
 
 
-def _definition_projection(definition: FactDefinition) -> dict[str, object]:
-    result: dict[str, object] = {
-        "id": definition.id,
-        "type": definition.type,
-        "nullable": definition.nullable,
-        "aliases": list(definition.aliases),
-    }
-    if definition.values:
-        result["values"] = list(definition.values)
-    return result
+def _definition_projection(definition: FactContract) -> dict[str, object]:
+    return definition.semantic_projection()
 
 
 def _referenced(expression: _Expression) -> set[str]:
@@ -443,7 +585,7 @@ def _require_fields(value: Mapping[str, object], expected: set[str], operator: s
 
 def _unique_strings(value: object) -> bool:
     return (
-        isinstance(value, list)
+        isinstance(value, (list, tuple))
         and all(isinstance(item, str) and item for item in value)
         and len(set(value)) == len(value)
     )

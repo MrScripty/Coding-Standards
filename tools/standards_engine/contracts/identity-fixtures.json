@@ -8,23 +8,29 @@
       "expected": "navigation:sha256:ff0af4a626270cb09ffc01d855deb80b201e707366d514ae76f1a7f994665014"
     },
     {
-      "name": "pending-packet",
-      "definition": "PendingPacket",
-      "example": "pending-packet",
-      "expected": "packet:sha256:259595a3ecff26e0c9b3885c0bbea46df03e343de611023bf13b8636fc1f11d8"
-    },
-    {
       "name": "consumer-obligation",
       "definition": "Obligation",
-      "example": "pending-packet",
+      "example": "pending-result",
       "value_pointer": "/obligations/0",
       "expected": "obligation:sha256:a526de8802573cbafa94943c717a0acf3eae757aef12c0af7f20b59eaaa14748"
     },
     {
-      "name": "completed-analysis-report",
-      "definition": "CompletedAnalysisReport",
-      "example": "completed-analysis-report",
-      "expected": "analysis-report:sha256:2a0579567534d2c826a4391ef0174c208cabf5efb88bc10d908069c184700ea9"
+      "name": "analysis-state",
+      "definition": "AnalysisState",
+      "example": "analysis-state",
+      "expected": "analysis:sha256:2bef9922f6450739a6ba3bdc067e50a3f5be52bb5b57da91ca774b6a94b28edf"
+    },
+    {
+      "name": "fact-requirement",
+      "definition": "FactRequirement",
+      "example": "fact-requirement",
+      "expected": "fact-requirement:sha256:0a4be69fffedfbeb1975f14e89cc9f8195eebac96b4281ab8bb0e39fe16bb4af"
+    },
+    {
+      "name": "fact-observation",
+      "definition": "FactObservation",
+      "example": "fact-observation",
+      "expected": "fact-observation:sha256:886ee8e69188d38d7d124fd2cbaa5a133e6f6a69881ca157700909958992ab08"
     },
     {
       "name": "clean-git-snapshot",

@@ -42,9 +42,11 @@ SCHEMA_KEYS = {
 IDENTITY_PREFIX = {
     "coding-standards:snapshot:v1": "snapshot",
     "coding-standards:navigation:v2": "navigation",
-    "coding-standards:packet:v3": "packet",
+    "coding-standards:analysis:v2": "analysis",
     "coding-standards:obligation:v2": "obligation",
-    "coding-standards:analysis-report:v2": "analysis-report",
+    "coding-standards:analysis-context:v1": "standards-change",
+    "coding-standards:fact-requirement:v1": "fact-requirement",
+    "coding-standards:fact-observation:v1": "fact-observation",
     "coding-standards:coverage-authority-view:v1": "coverage-view",
     "coding-standards:coverage-audit-requirement:v1": "coverage-requirement",
     "coding-standards:coverage-attestation:v1": "coverage-attestation",
@@ -83,7 +85,9 @@ def check_schema_node(node: dict[str, Any], path: str) -> None:
         check_schema_node(definition, f"{path}/$defs/{name}")
     for name, definition in node.get("properties", {}).items():
         if not isinstance(definition, dict):
-            raise ContractError(f"{path}/properties/{name}: property schema must be an object")
+            raise ContractError(
+                f"{path}/properties/{name}: property schema must be an object"
+            )
         check_schema_node(definition, f"{path}/properties/{name}")
     for index, definition in enumerate(node.get("oneOf", [])):
         if not isinstance(definition, dict):
@@ -104,7 +108,9 @@ def resolve(schema_root: dict[str, Any], node: dict[str, Any]) -> dict[str, Any]
         if not isinstance(reference, str) or not reference.startswith("#/$defs/"):
             raise ContractError(f"unsupported schema reference: {reference!r}")
         if reference in seen:
-            raise ContractError(f"schema reference cycle without a value boundary: {reference}")
+            raise ContractError(
+                f"schema reference cycle without a value boundary: {reference}"
+            )
         seen.add(reference)
         name = reference.removeprefix("#/$defs/")
         try:
@@ -127,7 +133,9 @@ def _is_type(value: Any, expected: str) -> bool:
 
 def canonical_value(value: Any) -> Any:
     if isinstance(value, float):
-        raise ContractError("floating point values are prohibited in canonical identity data")
+        raise ContractError(
+            "floating point values are prohibited in canonical identity data"
+        )
     if isinstance(value, str):
         return unicodedata.normalize("NFC", value)
     if isinstance(value, list):
@@ -139,7 +147,9 @@ def canonical_value(value: Any) -> Any:
                 raise ContractError("canonical JSON object keys must be strings")
             key = unicodedata.normalize("NFC", raw_key)
             if key in normalized:
-                raise ContractError(f"Unicode normalization creates duplicate key {key!r}")
+                raise ContractError(
+                    f"Unicode normalization creates duplicate key {key!r}"
+                )
             normalized[key] = canonical_value(item)
         return normalized
     if value is None or isinstance(value, (bool, int)):
@@ -156,7 +166,9 @@ def canonical_bytes(value: Any) -> bytes:
     ).encode("utf-8")
 
 
-def validate(schema_root: dict[str, Any], node: dict[str, Any], value: Any, path: str) -> None:
+def validate(
+    schema_root: dict[str, Any], node: dict[str, Any], value: Any, path: str
+) -> None:
     node = resolve(schema_root, node)
 
     variants = node.get("oneOf")
@@ -175,18 +187,30 @@ def validate(schema_root: dict[str, Any], node: dict[str, Any], value: Any, path
             raise ContractError(f"{path}: oneOf matched {accepted} variants; {detail}")
 
     if "const" in node and canonical_bytes(value) != canonical_bytes(node["const"]):
-        raise ContractError(f"{path}: expected constant {node['const']!r}, got {value!r}")
+        raise ContractError(
+            f"{path}: expected constant {node['const']!r}, got {value!r}"
+        )
     if "enum" in node and not any(
-        canonical_bytes(value) == canonical_bytes(candidate) for candidate in node["enum"]
+        canonical_bytes(value) == canonical_bytes(candidate)
+        for candidate in node["enum"]
     ):
         raise ContractError(f"{path}: {value!r} is not in {node['enum']!r}")
 
     expected_type = node.get("type")
     if expected_type is not None:
-        if expected_type not in {"object", "array", "string", "integer", "boolean", "null"}:
+        if expected_type not in {
+            "object",
+            "array",
+            "string",
+            "integer",
+            "boolean",
+            "null",
+        }:
             raise ContractError(f"{path}: unsupported type {expected_type!r}")
         if not _is_type(value, expected_type):
-            raise ContractError(f"{path}: expected {expected_type}, got {type(value).__name__}")
+            raise ContractError(
+                f"{path}: expected {expected_type}, got {type(value).__name__}"
+            )
 
     if isinstance(value, str):
         if len(value) < node.get("minLength", 0):
@@ -228,7 +252,9 @@ def validate(schema_root: dict[str, Any], node: dict[str, Any], value: Any, path
                 validate(schema_root, additional, item, f"{path}/{key}")
 
 
-def schema_for_path(schema_root: dict[str, Any], definition: str, dotted_path: str) -> dict[str, Any]:
+def schema_for_path(
+    schema_root: dict[str, Any], definition: str, dotted_path: str
+) -> dict[str, Any]:
     node = resolve(schema_root, schema_root["$defs"][definition])
     for part in dotted_path.split("."):
         node = resolve(schema_root, node)
@@ -258,14 +284,18 @@ def set_at_path(target: dict[str, Any], dotted_path: str, value: Any) -> None:
     selected[parts[-1]] = value
 
 
-def selected_identity_value(value: dict[str, Any], annotation: dict[str, Any]) -> dict[str, Any]:
+def selected_identity_value(
+    value: dict[str, Any], annotation: dict[str, Any]
+) -> dict[str, Any]:
     selected: dict[str, Any] = {}
     for path in annotation["include"]:
         set_at_path(selected, path, copy.deepcopy(value_at_path(value, path)))
     return selected
 
 
-def identity(schema_root: dict[str, Any], definition: str, value: dict[str, Any]) -> str:
+def identity(
+    schema_root: dict[str, Any], definition: str, value: dict[str, Any]
+) -> str:
     node = resolve(schema_root, schema_root["$defs"][definition])
     annotation = node.get("x-standards-engine-identity")
     if not isinstance(annotation, dict):
@@ -274,7 +304,9 @@ def identity(schema_root: dict[str, Any], definition: str, value: dict[str, Any]
     if domain not in IDENTITY_PREFIX:
         raise ContractError(f"{definition}: unknown identity domain {domain!r}")
     digest = hashlib.sha256(
-        domain.encode("utf-8") + b"\0" + canonical_bytes(selected_identity_value(value, annotation))
+        domain.encode("utf-8")
+        + b"\0"
+        + canonical_bytes(selected_identity_value(value, annotation))
     ).hexdigest()
     return f"{IDENTITY_PREFIX[domain]}:sha256:{digest}"
 
@@ -331,19 +363,27 @@ def validate_identity_annotations(schema_root: dict[str, Any]) -> None:
         if annotation is None:
             continue
         if set(annotation) != {"domain", "include", "exclude"}:
-            raise ContractError(f"{name}: identity annotation must contain domain, include, and exclude")
+            raise ContractError(
+                f"{name}: identity annotation must contain domain, include, and exclude"
+            )
         if annotation["domain"] not in IDENTITY_PREFIX:
             raise ContractError(f"{name}: unsupported identity domain")
         include = annotation["include"]
         exclude = annotation["exclude"]
-        if not include or len(set(include)) != len(include) or len(set(exclude)) != len(exclude):
+        if (
+            not include
+            or len(set(include)) != len(include)
+            or len(set(exclude)) != len(exclude)
+        ):
             raise ContractError(f"{name}: identity paths must be non-empty and unique")
         if set(include) & set(exclude):
             raise ContractError(f"{name}: identity include and exclude paths overlap")
         for path in (*include, *exclude):
             schema_for_path(schema_root, name, path)
         if "id" in include or "handle" in include or "handle.id" in include:
-            raise ContractError(f"{name}: identity includes its own identity-bearing handle")
+            raise ContractError(
+                f"{name}: identity includes its own identity-bearing handle"
+            )
 
 
 def validate_contract_metadata(schema_root: dict[str, Any]) -> None:
@@ -353,15 +393,22 @@ def validate_contract_metadata(schema_root: dict[str, Any]) -> None:
     definitions = schema_root["$defs"]
     for operation, contract in metadata["public_operations"].items():
         if contract["input"] not in definitions:
-            raise ContractError(f"{operation}: unknown input definition {contract['input']}")
+            raise ContractError(
+                f"{operation}: unknown input definition {contract['input']}"
+            )
         for name in contract["results"]:
             if name not in definitions:
                 raise ContractError(f"{operation}: unknown result definition {name}")
     if metadata["authorization_context"]["caller_authored"] is not False:
         raise ContractError("authorization context must not be caller-authored")
     bootstrap = metadata["snapshot_bootstrap"]
-    if bootstrap["caller_authored"] is not False or bootstrap["ambient_fallback"] is not False:
-        raise ContractError("snapshot bootstrap must be trusted and have no ambient fallback")
+    if (
+        bootstrap["caller_authored"] is not False
+        or bootstrap["ambient_fallback"] is not False
+    ):
+        raise ContractError(
+            "snapshot bootstrap must be trusted and have no ambient fallback"
+        )
     if bootstrap["result"] not in definitions:
         raise ContractError("snapshot bootstrap result definition is unknown")
     submission_kinds = {
@@ -372,19 +419,23 @@ def validate_contract_metadata(schema_root: dict[str, Any]) -> None:
         metadata["public_operations"]["resolve"]["capability_by_submission"]
     )
     if submission_kinds != mapped_submission_kinds:
-        raise ContractError("resolve capability mapping does not cover the exact Submission variants")
+        raise ContractError(
+            "resolve capability mapping does not cover the exact Submission variants"
+        )
     groups = metadata["impact_graph_groups"]
     allowed = {"policy-impact", "standards-requires", "standards-specializes"}
     for change_kind, selections in groups.items():
         for snapshot_kind in ("accepted", "proposed"):
             selected = selections[snapshot_kind]
-            if len(set(selected)) != len(selected) or not set(selected).issubset(allowed):
+            if len(set(selected)) != len(selected) or not set(selected).issubset(
+                allowed
+            ):
                 raise ContractError(f"{change_kind}: invalid graph group selection")
 
 
 def validate_completion_examples(examples: dict[str, dict[str, Any]]) -> None:
     for name, example in examples.items():
-        if example["definition"] != "CompletedAnalysisReport":
+        if example["definition"] != "CompleteResult":
             continue
         completion = example["value"]["completion"]
         required_coverage = set(completion["required_coverage_subjects"])
@@ -395,15 +446,36 @@ def validate_completion_examples(examples: dict[str, dict[str, Any]]) -> None:
         disposed = set(completion["disposition_obligations"])
         if reached != disposed:
             raise ContractError(f"{name}: completion obligation sets differ")
+        required_facts = set(completion["required_fact_requirements"])
+        observed_facts = set(completion["observed_fact_requirements"])
+        if required_facts != observed_facts:
+            raise ContractError(f"{name}: completion fact-requirement sets differ")
         records = example["value"]["dispositions"]
-        record_ids = [record["obligation_id"] for record in records if record["kind"] == "consumer-disposition"]
+        record_ids = [
+            record["obligation_id"]
+            for record in records
+            if record["kind"] == "consumer-disposition"
+        ]
         if len(record_ids) != len(set(record_ids)) or set(record_ids) != disposed:
-            raise ContractError(f"{name}: disposition records do not prove exact completion")
+            raise ContractError(
+                f"{name}: disposition records do not prove exact completion"
+            )
         if any(record["result"] == "blocked" for record in records):
             raise ContractError(f"{name}: blocked disposition cannot complete")
         certificate_handles = example["value"]["coverage_certificates"]
         if len(certificate_handles) != len(certificate_subjects):
-            raise ContractError(f"{name}: certificate handles do not prove exact coverage")
+            raise ContractError(
+                f"{name}: certificate handles do not prove exact coverage"
+            )
+        observations = example["value"]["fact_observations"]
+        observation_requirements = {item["requirement"]["id"] for item in observations}
+        if (
+            len(observations) != len(observation_requirements)
+            or observation_requirements != observed_facts
+        ):
+            raise ContractError(
+                f"{name}: observations do not prove exact fact completion"
+            )
 
 
 def validate_change(change: dict[str, Any], owner: str) -> None:
@@ -419,7 +491,9 @@ def validate_change(change: dict[str, Any], owner: str) -> None:
         "merge": len(accepted) >= 2 and len(proposed) == 1,
     }[kind]
     if not valid:
-        raise ContractError(f"{owner}: {kind} violates its accepted/proposed identity cardinality")
+        raise ContractError(
+            f"{owner}: {kind} violates its accepted/proposed identity cardinality"
+        )
     if kind == "addition" and "accepted_module" in change:
         raise ContractError(f"{owner}: addition cannot claim an accepted module")
     if kind == "removal" and "proposed_module" in change:
@@ -441,17 +515,25 @@ def validate_change_examples(examples: dict[str, dict[str, Any]]) -> None:
         elif definition == "AnalysisRequest":
             for change in value["changes"]:
                 validate_change(change, name)
-        elif definition in {"PendingPacket", "CompletedAnalysisReport"}:
+        elif definition in {
+            "AnalysisState",
+            "PendingResult",
+            "CompleteResult",
+        }:
             for change in value["changes"]:
                 validate_change(change, name)
     expected = {"modification", "addition", "removal", "move", "split", "merge"}
     if observed != expected:
-        raise ContractError(f"change examples do not cover every variant: {sorted(expected - observed)}")
+        raise ContractError(
+            f"change examples do not cover every variant: {sorted(expected - observed)}"
+        )
 
 
-def validate_operation_calls(schema: dict[str, Any], examples: dict[str, dict[str, Any]]) -> None:
+def validate_operation_calls(
+    schema: dict[str, Any], examples: dict[str, dict[str, Any]]
+) -> None:
     route_result = examples["route-result"]["value"]
-    pending = examples["pending-packet"]["value"]
+    pending = examples["pending-result"]["value"]
     calls = {
         "QueryCall": {
             "snapshot": route_result["handle"]["snapshot"],
@@ -459,7 +541,7 @@ def validate_operation_calls(schema: dict[str, Any], examples: dict[str, dict[st
         },
         "PrepareCall": {"request": examples["analysis-request"]["value"]},
         "ResolveCall": {
-            "packet": pending["handle"],
+            "analysis": pending["handle"],
             "submission": examples["consumer-disposition"]["value"],
         },
         "InspectCall": {"handle": pending["handle"]},
@@ -476,9 +558,13 @@ def expect_rejection(action: Any, label: str) -> None:
     raise ContractError(f"negative self-check unexpectedly accepted {label}")
 
 
-def run_negative_self_checks(schema: dict[str, Any], examples: dict[str, dict[str, Any]]) -> None:
+def run_negative_self_checks(
+    schema: dict[str, Any], examples: dict[str, dict[str, Any]]
+) -> None:
     expect_rejection(
-        lambda: check_schema_node({"type": "string", "unknownKeyword": True}, "negative"),
+        lambda: check_schema_node(
+            {"type": "string", "unknownKeyword": True}, "negative"
+        ),
         "unknown schema keyword",
     )
     expect_rejection(lambda: _object([("key", 1), ("key", 2)]), "duplicate JSON key")
@@ -486,7 +572,9 @@ def run_negative_self_checks(schema: dict[str, Any], examples: dict[str, dict[st
     route = copy.deepcopy(examples["route-request"]["value"])
     del route["kind"]
     expect_rejection(
-        lambda: validate(schema, schema["$defs"]["RouteRequest"], route, "negative:route"),
+        lambda: validate(
+            schema, schema["$defs"]["RouteRequest"], route, "negative:route"
+        ),
         "missing route discriminator",
     )
 
@@ -502,7 +590,9 @@ def run_negative_self_checks(schema: dict[str, Any], examples: dict[str, dict[st
         "schema_version": 1,
     }
     expect_rejection(
-        lambda: validate(schema, schema["$defs"]["SnapshotHandle"], handle, "negative:handle"),
+        lambda: validate(
+            schema, schema["$defs"]["SnapshotHandle"], handle, "negative:handle"
+        ),
         "cross-domain handle identity",
     )
 
@@ -528,9 +618,41 @@ def run_negative_self_checks(schema: dict[str, Any], examples: dict[str, dict[st
         "invalid change identity cardinality",
     )
 
+    raw_fact_request = copy.deepcopy(examples["analysis-request"]["value"])
+    raw_fact_request["facts"] = {
+        "change.requires-review": {
+            "type": "boolean",
+            "state": "known",
+            "value": True,
+        }
+    }
+    expect_rejection(
+        lambda: validate(
+            schema,
+            schema["$defs"]["AnalysisRequest"],
+            raw_fact_request,
+            "negative:raw-analysis-fact",
+        ),
+        "raw standards-change fact input",
+    )
+
+    observation_list = copy.deepcopy(examples["analysis-request"]["value"])
+    observation_list["observations"] = [examples["fact-observation"]["value"]["handle"]]
+    expect_rejection(
+        lambda: validate(
+            schema,
+            schema["$defs"]["AnalysisRequest"],
+            observation_list,
+            "negative:observation-list",
+        ),
+        "caller-coordinated observation list",
+    )
+
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Validate the Standards Engine A1 contract")
+    parser = argparse.ArgumentParser(
+        description="Validate the Standards Engine A1 contract"
+    )
     parser.add_argument("--print-identities", action="store_true")
     args = parser.parse_args()
 
@@ -551,7 +673,12 @@ def main() -> int:
                 raise ContractError(f"invalid or duplicate example name {name!r}")
             if definition not in schema["$defs"]:
                 raise ContractError(f"{name}: unknown definition {definition!r}")
-            validate(schema, schema["$defs"][definition], entry.get("value"), f"example:{name}")
+            validate(
+                schema,
+                schema["$defs"][definition],
+                entry.get("value"),
+                f"example:{name}",
+            )
             examples[name] = entry
         validate_completion_examples(examples)
         validate_change_examples(examples)
@@ -566,13 +693,17 @@ def main() -> int:
         for fixture in identity_document.get("fixtures", []):
             name = fixture.get("name")
             if not isinstance(name, str) or name in seen:
-                raise ContractError(f"invalid or duplicate identity fixture name {name!r}")
+                raise ContractError(
+                    f"invalid or duplicate identity fixture name {name!r}"
+                )
             seen.add(name)
             definition = fixture.get("definition")
             example_name = fixture.get("example")
             if definition not in schema["$defs"] or example_name not in examples:
                 raise ContractError(f"{name}: unknown definition or example")
-            value = pointer(examples[example_name]["value"], fixture.get("value_pointer"))
+            value = pointer(
+                examples[example_name]["value"], fixture.get("value_pointer")
+            )
             validate(schema, schema["$defs"][definition], value, f"identity:{name}")
             observed = identity(schema, definition, value)
             outputs.append((name, observed))
@@ -581,15 +712,21 @@ def main() -> int:
                     f"{name}: identity mismatch; expected {fixture.get('expected')!r}, got {observed!r}"
                 )
 
-            annotation = resolve(schema, schema["$defs"][definition])["x-standards-engine-identity"]
+            annotation = resolve(schema, schema["$defs"][definition])[
+                "x-standards-engine-identity"
+            ]
             for excluded in annotation["exclude"]:
                 changed = mutate_path(value, excluded)
                 if identity(schema, definition, changed) != observed:
-                    raise ContractError(f"{name}: excluded field {excluded!r} changes identity")
+                    raise ContractError(
+                        f"{name}: excluded field {excluded!r} changes identity"
+                    )
             for included in annotation["include"]:
                 changed = mutate_path(value, included)
                 if identity(schema, definition, changed) == observed:
-                    raise ContractError(f"{name}: included field {included!r} does not change identity")
+                    raise ContractError(
+                        f"{name}: included field {included!r} does not change identity"
+                    )
 
         if args.print_identities:
             for name, observed in outputs:

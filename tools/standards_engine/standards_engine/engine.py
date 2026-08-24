@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import json
+import os
+import tempfile
 from pathlib import Path
-from typing import Iterable, Mapping
+from typing import Iterable, Mapping, Protocol
 
 from tools.graph_engine.graph_engine import (
     Direction,
@@ -14,8 +17,14 @@ from tools.standards_applicability.standards_applicability import (
     Truth,
 )
 from tools.standards_analysis.standards_analysis import (
+    AnalysisAuthority,
     AnalysisError,
     AnalysisFailure,
+    AnalysisInput,
+    AnalysisResult,
+    AnalysisState,
+    AuthorizationReference,
+    FactObservationProvider,
     CoverageIndex,
     DependencyCause,
     ROUTER_PROJECTION,
@@ -25,12 +34,17 @@ from tools.standards_analysis.standards_analysis import (
     RoutingRuleCause,
     RouteRule,
     RouterProjection,
+    advance_analysis,
+    analysis_state_from_contract,
+    bind_analysis_kernel,
+    canonical_json_bytes,
     canonical_target_authority,
     compile_reading_plan,
     compile_snapshot,
     compile_coverage,
     identity,
     load_router_projection,
+    prepare_analysis,
 )
 from tools.standards_graph.standards_graph import (
     POLICY_IMPACT_REGISTRY,
@@ -55,6 +69,7 @@ from tools.standards_policy_impact.standards_policy_impact import (
 )
 
 from .model import (
+    AnalysisRequest,
     InspectCall,
     InspectionResult,
     NavigationInspectionResult,
@@ -77,6 +92,144 @@ NAVIGATION_DOMAIN = "coding-standards:navigation:v2"
 INTERFACE_SCHEMA = "tools/standards_engine/contracts/a1-contract.schema.json"
 
 
+class AnalysisStateStore(Protocol):
+    def put(self, state: AnalysisState) -> Mapping[str, object]: ...
+
+    def get(
+        self,
+        handle: Mapping[str, object],
+    ) -> AnalysisState | None: ...
+
+
+class InMemoryAnalysisStateStore:
+    def __init__(self) -> None:
+        self._states: dict[str, AnalysisState] = {}
+
+    def put(self, state: AnalysisState) -> Mapping[str, object]:
+        existing_state = self._states.get(state.id)
+        if existing_state is not None and existing_state != state:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.STATE_IDENTITY_COLLISION",
+                    "invalid",
+                    "one analysis-state handle resolved to different content",
+                )
+            )
+        self._states[state.id] = state
+        return state.handle
+
+    def get(
+        self,
+        handle: Mapping[str, object],
+    ) -> AnalysisState | None:
+        state = self._states.get(str(handle.get("id", "")))
+        if state is None or state.handle != dict(handle):
+            return None
+        return state
+
+
+class DirectoryAnalysisStateStore:
+    """Filesystem Adapter for immutable content-addressed analysis states."""
+
+    def __init__(self, root: Path) -> None:
+        self._root = root.resolve()
+        self._root.mkdir(parents=True, exist_ok=True)
+
+    def put(self, state: AnalysisState) -> Mapping[str, object]:
+        destination = self._path(state.handle)
+        payload = canonical_json_bytes(state.as_contract())
+        if destination.exists():
+            existing = self.get(state.handle)
+            if existing != state:
+                raise AnalysisError(
+                    AnalysisFailure(
+                        "ANALYSIS.STATE_IDENTITY_COLLISION",
+                        "invalid",
+                        "one analysis handle resolved to different content",
+                    )
+                )
+            return state.handle
+        descriptor, temporary_name = tempfile.mkstemp(
+            dir=self._root,
+            prefix=".analysis-",
+            suffix=".tmp",
+        )
+        temporary = Path(temporary_name)
+        try:
+            with os.fdopen(descriptor, "wb") as stream:
+                stream.write(payload)
+                stream.flush()
+                os.fsync(stream.fileno())
+            try:
+                os.link(temporary, destination)
+            except FileExistsError:
+                existing = self.get(state.handle)
+                if existing != state:
+                    raise AnalysisError(
+                        AnalysisFailure(
+                            "ANALYSIS.STATE_IDENTITY_COLLISION",
+                            "invalid",
+                            "one analysis handle resolved to different content",
+                        )
+                    )
+            return state.handle
+        finally:
+            temporary.unlink(missing_ok=True)
+
+    def get(
+        self,
+        handle: Mapping[str, object],
+    ) -> AnalysisState | None:
+        try:
+            source = self._path(handle)
+        except AnalysisError:
+            return None
+        if not source.is_file():
+            return None
+        try:
+            value = json.loads(source.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as error:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.STATE_CORRUPT",
+                    "unavailable",
+                    "persisted analysis state cannot be decoded",
+                    observed=str(handle.get("id", "")),
+                )
+            ) from error
+        if not isinstance(value, Mapping):
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.STATE_CORRUPT",
+                    "unavailable",
+                    "persisted analysis state is not an object",
+                    observed=str(handle.get("id", "")),
+                )
+            )
+        return analysis_state_from_contract(value)
+
+    def _path(self, handle: Mapping[str, object]) -> Path:
+        identifier = str(handle.get("id", ""))
+        if (
+            handle.get("kind") != "analysis-handle"
+            or handle.get("schema_version") != 2
+            or not identifier.startswith("analysis:sha256:")
+            or len(identifier) != len("analysis:sha256:") + 64
+            or any(
+                character not in "0123456789abcdef" for character in identifier[-64:]
+            )
+        ):
+            raise AnalysisError(
+                AnalysisFailure(
+                    "ANALYSIS.HANDLE_INVALID",
+                    "invalid",
+                    "analysis handle is malformed",
+                    observed=identifier,
+                )
+            )
+        return self._root / f"{identifier[-64:]}.json"
+
+
 class StandardsEngine:
     """Snapshot-bound facade over canonical metadata and declared relationships."""
 
@@ -89,6 +242,8 @@ class StandardsEngine:
         router: RouterProjection,
         policy_impact: CompiledPolicyImpactSet,
         coverage: CoverageIndex,
+        analysis_store: AnalysisStateStore | None = None,
+        fact_providers: Iterable[FactObservationProvider] = (),
     ) -> None:
         self._root = root.resolve()
         self._snapshot = snapshot
@@ -99,10 +254,20 @@ class StandardsEngine:
         self._router = router
         self._policy_impact = policy_impact
         self._coverage = coverage
+        self._analysis_store = analysis_store or InMemoryAnalysisStateStore()
+        self._fact_providers = tuple(sorted(fact_providers, key=lambda item: item.id))
         self._navigation: dict[str, dict[str, object]] = {}
+        self._sources: dict[str, StandardsEngine] = {str(snapshot.handle["id"]): self}
+        self._authorizations: dict[str, AuthorizationReference] = {}
 
     @classmethod
-    def open_repository(cls, root: Path) -> StandardsEngine:
+    def open_repository(
+        cls,
+        root: Path,
+        *,
+        analysis_store: AnalysisStateStore | None = None,
+        fact_providers: Iterable[FactObservationProvider] = (),
+    ) -> StandardsEngine:
         repo_root = root.resolve()
         initial_corpus = load_canonical_standards_corpus(repo_root)
         initial_policy_impact = compile_policy_impact(
@@ -151,8 +316,7 @@ class StandardsEngine:
         after = compile_snapshot(repo_root, scope)
         if (
             before.handle != after.handle
-            or initial_corpus.module_corpus.members
-            != corpus.module_corpus.members
+            or initial_corpus.module_corpus.members != corpus.module_corpus.members
             or initial_corpus.policy_unit_corpus.sources
             != corpus.policy_unit_corpus.sources
             or initial_policy_impact.declaration_digest
@@ -167,9 +331,7 @@ class StandardsEngine:
                 for subject, certificate in coverage.certificates.items()
             }
         ):
-            raise AnalysisError(
-                before_source_changed_failure()
-            )
+            raise AnalysisError(before_source_changed_failure())
         return cls(
             repo_root,
             after,
@@ -178,13 +340,182 @@ class StandardsEngine:
             router,
             policy_impact,
             coverage,
+            analysis_store,
+            fact_providers,
         )
+
+    @classmethod
+    def open_analysis(
+        cls,
+        base_root: Path,
+        proposed_root: Path,
+        *,
+        authorizations: Iterable[AuthorizationReference] = (),
+        analysis_store: AnalysisStateStore | None = None,
+        fact_providers: Iterable[FactObservationProvider] = (),
+    ) -> StandardsEngine:
+        store = analysis_store or InMemoryAnalysisStateStore()
+        providers = tuple(fact_providers)
+        if len({item.id for item in providers}) != len(providers):
+            raise AnalysisError(
+                AnalysisFailure(
+                    "FACT.PROVIDER_DUPLICATE",
+                    "invalid",
+                    "trusted fact providers must be unique by identity",
+                )
+            )
+        base = cls.open_repository(
+            base_root,
+            analysis_store=store,
+            fact_providers=providers,
+        )
+        proposed = cls.open_repository(
+            proposed_root,
+            analysis_store=store,
+            fact_providers=providers,
+        )
+        base._sources = {
+            str(base.snapshot["id"]): base,
+            str(proposed.snapshot["id"]): proposed,
+        }
+        supplied_authorizations = tuple(authorizations)
+        selected = {item.capability: item for item in supplied_authorizations}
+        if len(selected) != len(supplied_authorizations):
+            raise AnalysisError(
+                AnalysisFailure(
+                    "AUTHORIZATION.DUPLICATE_CAPABILITY",
+                    "invalid",
+                    "trusted analysis authorizations must be unique by capability",
+                )
+            )
+        base._authorizations = selected
+        return base
 
     @property
     def snapshot(self) -> Mapping[str, object]:
         return self._snapshot.handle
 
+    @property
+    def snapshots(self) -> tuple[Mapping[str, object], ...]:
+        return tuple(
+            source.snapshot for _snapshot_id, source in sorted(self._sources.items())
+        )
+
+    def prepare(
+        self,
+        request: AnalysisRequest,
+    ) -> AnalysisResult | RejectedResult:
+        if request.contract_version != 2:
+            return self._reject(
+                "ANALYSIS.UNSUPPORTED_CONTRACT",
+                "unsupported",
+                "The analysis request contract version is unsupported.",
+            )
+        accepted = self._source_for(request.base_snapshot)
+        proposed = self._source_for(request.proposed_snapshot)
+        if accepted is None or proposed is None:
+            return self._reject(
+                "ANALYSIS.STALE_SNAPSHOT",
+                "stale",
+                "The analysis request references an unavailable snapshot.",
+            )
+        prior_state = None
+        if request.prior_analysis is not None:
+            prior_state = self._analysis_store.get(request.prior_analysis)
+            if prior_state is None:
+                return self._reject(
+                    "ANALYSIS.PRIOR_ANALYSIS_UNAVAILABLE",
+                    "unavailable",
+                    "The prior immutable analysis is unavailable.",
+                    target=str(request.prior_analysis.get("id", "")),
+                )
+        accepted_authority = accepted._analysis_authority()
+        proposed_authority = proposed._analysis_authority()
+        try:
+            state, result = prepare_analysis(
+                accepted_authority,
+                proposed_authority,
+                AnalysisInput(
+                    request.changes,
+                    request.semantic_proposals,
+                ),
+                prior_state,
+                authorizations=self._authorizations.values(),
+                providers=self._fact_providers,
+            )
+        except AnalysisError as error:
+            return self._analysis_rejection(error)
+        self._analysis_store.put(state)
+        return result
+
+    def resolve(
+        self,
+        analysis: Mapping[str, object],
+        submission,
+    ) -> AnalysisResult | RejectedResult:
+        analysis_id = str(analysis.get("id", ""))
+        state = self._analysis_store.get(analysis)
+        if state is None:
+            return self._reject(
+                "ANALYSIS.UNAVAILABLE",
+                "unavailable",
+                "The immutable analysis is unavailable from the state store.",
+                target=analysis_id,
+            )
+        accepted = self._source_for(state.base_snapshot)
+        proposed = self._source_for(state.proposed_snapshot)
+        if accepted is None or proposed is None:
+            return self._reject(
+                "ANALYSIS.STALE_SNAPSHOT",
+                "stale",
+                "The analysis references unavailable authority snapshots.",
+            )
+        try:
+            kernel = bind_analysis_kernel(
+                accepted._analysis_authority(),
+                proposed._analysis_authority(),
+                state,
+                authorizations=self._authorizations.values(),
+                providers=self._fact_providers,
+            )
+        except AnalysisError as error:
+            return self._analysis_rejection(error)
+        capability = {
+            "provide-fact": "standards.analyze",
+            "consumer-disposition": "standards.review.consumer",
+            "impact-disposition": "standards.review.impact",
+            "coverage-attestation": "standards.review.audit",
+        }.get(submission.kind)
+        authorization = self._authorizations.get(str(capability))
+        if authorization is None:
+            return self._reject(
+                "ANALYSIS.UNAUTHORIZED",
+                "unauthorized",
+                "The trusted engine context lacks the required capability.",
+                details={"capability": str(capability)},
+            )
+        try:
+            updated, result = advance_analysis(
+                kernel,
+                state,
+                submission,
+                authorization,
+            )
+        except AnalysisError as error:
+            return self._analysis_rejection(error)
+        self._analysis_store.put(updated)
+        return result
+
     def query(self, call: QueryCall) -> QueryResult:
+        source = self._source_for(call.snapshot)
+        if source is None:
+            return self._reject(
+                "NAVIGATION.STALE_SNAPSHOT",
+                "stale",
+                "The request is not bound to an issued engine snapshot.",
+            )
+        if source is not self:
+            return source.query(call)
         stale = self._require_snapshot(call.snapshot)
         if stale is not None:
             return stale
@@ -210,12 +541,44 @@ class StandardsEngine:
     def inspect(self, call: InspectCall) -> InspectionResult:
         handle = dict(call.handle)
         kind = handle.get("kind")
+        if kind == "analysis-handle":
+            state = self._analysis_store.get(handle)
+            if state is None:
+                return self._reject(
+                    "ANALYSIS.UNKNOWN_HANDLE",
+                    "unavailable",
+                    "The immutable analysis is unavailable from the state store.",
+                )
+            return state
+        embedded = handle.get("snapshot")
+        if isinstance(embedded, Mapping):
+            source = self._source_for(embedded)
+            if source is None:
+                return self._reject(
+                    "NAVIGATION.STALE_SNAPSHOT",
+                    "stale",
+                    "The handle references an unavailable snapshot.",
+                )
+            if source is not self:
+                return source.inspect(call)
         if kind == "snapshot-handle":
+            source = self._source_for(handle)
+            if source is None:
+                return self._reject(
+                    "NAVIGATION.STALE_SNAPSHOT",
+                    "stale",
+                    "The handle references an unavailable snapshot.",
+                )
+            if source is not self:
+                return source.inspect(call)
             stale = self._require_snapshot(handle)
             if stale is not None:
                 return stale
             return SnapshotInspectionResult.from_value(
-                {"kind": "snapshot-inspection-result", "snapshot": self._snapshot.inspection}
+                {
+                    "kind": "snapshot-inspection-result",
+                    "snapshot": self._snapshot.inspection,
+                }
             )
         if kind == "policy-handle":
             stale = self._require_snapshot_value(handle.get("snapshot"))
@@ -251,6 +614,39 @@ class StandardsEngine:
             "NAVIGATION.UNSUPPORTED_HANDLE",
             "unsupported",
             "The handle kind is not inspectable by the navigation slice.",
+        )
+
+    def _analysis_authority(self) -> AnalysisAuthority:
+        return AnalysisAuthority(
+            self._root,
+            self._snapshot.handle,
+            self._corpus,
+            self._graph,
+            self._policy_impact,
+            self._coverage,
+        )
+
+    def _source_for(
+        self,
+        handle: Mapping[str, object],
+    ) -> StandardsEngine | None:
+        return self._sources.get(str(handle.get("id", "")))
+
+    def _analysis_rejection(self, error: AnalysisError) -> RejectedResult:
+        failure = error.failure
+        return self._reject(
+            failure.code,
+            failure.outcome,
+            failure.message,
+            details={
+                key: value
+                for key, value in {
+                    "field": failure.field,
+                    "observed": failure.observed,
+                    "path": failure.path,
+                }.items()
+                if value is not None
+            },
         )
 
     def _route(self, request: RouteRequest) -> QueryResult:
@@ -392,14 +788,15 @@ class StandardsEngine:
         }
         self._navigation[str(handle["id"])] = value
         return RouteResult.from_value(value)
+
     def _route_question(self, fact_id: str) -> dict[str, object]:
-        route_fact = next(item for item in self._router.facts if item.definition.id == fact_id)
+        route_fact = next(item for item in self._router.facts if item.id == fact_id)
         return {
             "id": f"question.{fact_id}",
             "kind": "applicability-fact",
-            "prompt": route_fact.question,
+            "prompt": route_fact.prompt,
             "state": "required",
-            "permitted_answers": [*route_fact.definition.values, "none"],
+            "permitted_answers": [*route_fact.values, "none"],
         }
 
     def _read(self, request: ReadRequest) -> QueryResult:
@@ -441,8 +838,16 @@ class StandardsEngine:
             "specializes": list(module.specializes),
             "related": related,
             "next_operations": [
-                {"operation": "query", "request_kind": "related", "target": canonical_id},
-                {"operation": "inspect", "request_kind": "inspect", "target": canonical_id},
+                {
+                    "operation": "query",
+                    "request_kind": "related",
+                    "target": canonical_id,
+                },
+                {
+                    "operation": "inspect",
+                    "request_kind": "inspect",
+                    "target": canonical_id,
+                },
             ],
             "summary": f"Read canonical standard {canonical_id}.",
         }
@@ -456,7 +861,9 @@ class StandardsEngine:
             if isinstance(selected, RejectedResult):
                 return selected
             policy, module = selected
-            graph_target = policy.id if isinstance(policy, PolicyUnit) else module.module_id
+            graph_target = (
+                policy.id if isinstance(policy, PolicyUnit) else module.module_id
+            )
             relationships = self._relationships_for_policy(
                 policy,
                 module,
@@ -481,7 +888,11 @@ class StandardsEngine:
             "policy_unit_mapping": policy_unit_mapping,
             "relationships": relationships,
             "next_operations": [
-                {"operation": "inspect", "request_kind": "inspect", "target": request.target}
+                {
+                    "operation": "inspect",
+                    "request_kind": "inspect",
+                    "target": request.target,
+                }
             ],
             "summary": f"Found {len(relationships)} declared relationships.",
         }
@@ -635,7 +1046,9 @@ class StandardsEngine:
             "groups": list(edge.groups),
             "direction": direction.value,
             "traversal_eligible": edge.traversable,
-            "applicability": "unknown" if "applicability" in edge.metadata else "not-declared",
+            "applicability": "unknown"
+            if "applicability" in edge.metadata
+            else "not-declared",
         }
 
     def _policy_summary(
@@ -654,7 +1067,9 @@ class StandardsEngine:
             "scope": scope,
         }
 
-    def _navigation_handle(self, identity_value: dict[str, object]) -> dict[str, object]:
+    def _navigation_handle(
+        self, identity_value: dict[str, object]
+    ) -> dict[str, object]:
         return {
             "kind": "navigation-handle",
             "id": identity(NAVIGATION_DOMAIN, "navigation", identity_value),
@@ -763,7 +1178,9 @@ class StandardsEngine:
             "snapshot": self._snapshot.handle,
         }
 
-    def _require_snapshot(self, observed: Mapping[str, object]) -> RejectedResult | None:
+    def _require_snapshot(
+        self, observed: Mapping[str, object]
+    ) -> RejectedResult | None:
         return self._require_snapshot_value(observed)
 
     def _require_snapshot_value(self, observed: object) -> RejectedResult | None:
@@ -777,7 +1194,9 @@ class StandardsEngine:
 
     def _graph_rejection(self, error: GraphError) -> RejectedResult:
         failure = error.failure
-        outcome = "unavailable" if failure.code.startswith("GRAPH.UNKNOWN") else "invalid"
+        outcome = (
+            "unavailable" if failure.code.startswith("GRAPH.UNKNOWN") else "invalid"
+        )
         return self._reject(
             failure.code,
             outcome,

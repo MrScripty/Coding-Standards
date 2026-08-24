@@ -116,16 +116,6 @@ UNMAPPED_DECISION_CONTRACT = DecisionContract(
         "representation",
     ),
 )
-APPLICABILITY_DECISION_CONTRACT = DecisionContract(
-    "decision-contract.applicability-resolution.v1",
-    1,
-    (
-        "applicability-contract",
-        "applicability-fact",
-        "question",
-        "relationship",
-    ),
-)
 COVERAGE_DECISION_CONTRACT = DecisionContract(
     "decision-contract.audit-coverage.v1",
     1,
@@ -137,9 +127,6 @@ COVERAGE_DECISION_CONTRACT = DecisionContract(
 )
 UNMAPPED_CONTRACT_DIGEST = digest_bytes(
     canonical_json_bytes(UNMAPPED_DECISION_CONTRACT.as_contract())
-)
-APPLICABILITY_CONTRACT_DIGEST = digest_bytes(
-    canonical_json_bytes(APPLICABILITY_DECISION_CONTRACT.as_contract())
 )
 COVERAGE_CONTRACT_DIGEST = digest_bytes(
     canonical_json_bytes(COVERAGE_DECISION_CONTRACT.as_contract())
@@ -201,30 +188,6 @@ class Obligation:
         if self.review_contract is not None:
             value["review_contract"] = _thaw_reason(self.review_contract)
         return value
-
-
-@dataclass(frozen=True, slots=True)
-class ApplicabilityQuestion:
-    id: str
-    fact: str
-    prompt: str
-    state: str = "required"
-    permitted_answers: tuple[str, ...] = ("known", "known-absent", "unknown")
-
-    def as_contract(self) -> dict[str, object]:
-        return {
-            "id": self.id,
-            "kind": "applicability-fact",
-            "prompt": self.prompt,
-            "state": self.state,
-            "permitted_answers": list(self.permitted_answers),
-        }
-
-
-@dataclass(frozen=True, slots=True)
-class ApplicabilityResolutionWork:
-    questions: tuple[ApplicabilityQuestion, ...]
-    obligations: tuple[Obligation, ...]
 
 
 @dataclass(frozen=True, slots=True)
@@ -656,174 +619,6 @@ def generate_coverage_obligations(
             )
         )
     return tuple(obligations)
-
-
-def generate_applicability_resolution_work(
-    selections: Iterable[ImpactSelection],
-) -> ApplicabilityResolutionWork:
-    question_by_fact: dict[str, ApplicabilityQuestion] = {}
-    obligations: list[Obligation] = []
-    for selection in selections:
-        for candidate in selection.candidates:
-            policy_traces = tuple(
-                trace
-                for trace in candidate.traces
-                if trace.policy_semantics is not None
-                and trace.applicability == "unknown"
-            )
-            if not policy_traces:
-                continue
-            if candidate.conservative_review_scope is None:
-                raise AnalysisError(
-                    AnalysisFailure(
-                        "IMPACT.UNKNOWN_SCOPE_MISSING",
-                        "invalid",
-                        "unknown applicability requires conservative review scope",
-                        field="edge_id",
-                        observed=candidate.edge_id,
-                    )
-                )
-            if not policy_traces or not candidate.unresolved_facts:
-                raise AnalysisError(
-                    AnalysisFailure(
-                        "IMPACT.UNKNOWN_FACTS_MISSING",
-                        "invalid",
-                        "unknown applicability requires exact unresolved facts",
-                        field="edge_id",
-                        observed=candidate.edge_id,
-                    )
-                )
-            source = policy_traces[0].source
-            target = policy_traces[0].target
-            if any(
-                (trace.source, trace.target) != (source, target)
-                for trace in policy_traces
-            ):
-                raise AnalysisError(
-                    AnalysisFailure(
-                        "IMPACT.RELATIONSHIP_IDENTITY_CONFLICT",
-                        "invalid",
-                        "one impact candidate cannot identify several relationships",
-                        field="edge_id",
-                        observed=candidate.edge_id,
-                    )
-                )
-            for fact in candidate.unresolved_facts:
-                schema_digests = {
-                    trace.policy_semantics.applicability_program.schema_digest
-                    for trace in policy_traces
-                    if trace.policy_semantics is not None
-                    and fact
-                    in trace.policy_semantics.applicability_program.referenced_facts
-                }
-                program_digests = {
-                    trace.policy_semantics.applicability_program.dependency_digest
-                    for trace in policy_traces
-                    if trace.policy_semantics is not None
-                    and fact
-                    in trace.policy_semantics.applicability_program.referenced_facts
-                }
-                relationship_digests = {
-                    trace.policy_semantics.dependency_fingerprint
-                    for trace in policy_traces
-                    if trace.policy_semantics is not None
-                    and fact
-                    in trace.policy_semantics.applicability_program.referenced_facts
-                }
-                if not schema_digests or not program_digests or not relationship_digests:
-                    raise AnalysisError(
-                        AnalysisFailure(
-                            "IMPACT.UNRESOLVED_FACT_UNBOUND",
-                            "invalid",
-                            "unresolved fact is not bound to candidate semantics",
-                            field="fact",
-                            observed=fact,
-                        )
-                    )
-                question = question_by_fact.setdefault(
-                    fact,
-                    ApplicabilityQuestion(
-                        f"question.applicability.{fact}",
-                        fact,
-                        f"Provide the typed value for applicability fact `{fact}`.",
-                    ),
-                )
-                question_digest = digest_bytes(
-                    canonical_json_bytes(
-                        {
-                            "fact": fact,
-                            "question": question.as_contract(),
-                            "schema_digests": sorted(schema_digests),
-                        }
-                    )
-                )
-                dependencies = (
-                    DecisionDependency(
-                        "applicability-contract",
-                        APPLICABILITY_DECISION_CONTRACT.id,
-                        APPLICABILITY_CONTRACT_DIGEST,
-                    ),
-                    DecisionDependency(
-                        "applicability-fact",
-                        fact,
-                        digest_bytes(
-                            canonical_json_bytes(
-                                {
-                                    "schema_digests": sorted(schema_digests),
-                                    "program_digests": sorted(program_digests),
-                                }
-                            )
-                        ),
-                    ),
-                    DecisionDependency(
-                        "question",
-                        question.id,
-                        question_digest,
-                    ),
-                    DecisionDependency(
-                        "relationship",
-                        candidate.edge_id,
-                        digest_bytes(
-                            canonical_json_bytes(sorted(relationship_digests))
-                        ),
-                    ),
-                )
-                fingerprint = DecisionFingerprint(
-                    "applicability-resolution",
-                    APPLICABILITY_DECISION_CONTRACT.id,
-                    dependencies,
-                )
-                reason = {
-                    "kind": "question",
-                    "source": source,
-                    "fact": fact,
-                    "edge": candidate.edge_id,
-                    "question": question.id,
-                }
-                identity_value = {
-                    "kind": "applicability-resolution",
-                    "target": target,
-                    "scope": candidate.conservative_review_scope.as_contract(),
-                    "reasons": [reason],
-                    "fingerprint": fingerprint.as_contract(),
-                }
-                obligations.append(
-                    Obligation(
-                        identity(OBLIGATION_DOMAIN, "obligation", identity_value),
-                        "applicability-resolution",
-                        target,
-                        candidate.conservative_review_scope,
-                        (reason,),
-                        "required",
-                        ("fact-answer",),
-                        fingerprint,
-                        "unknown",
-                    )
-                )
-    return ApplicabilityResolutionWork(
-        tuple(question_by_fact[fact] for fact in sorted(question_by_fact)),
-        tuple(sorted(obligations, key=lambda item: item.id)),
-    )
 
 
 def _authority_digest(value: PolicyUnit | PolicyUnitTombstone | None) -> str:

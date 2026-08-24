@@ -258,9 +258,16 @@ class PolicyImpactCompilerTest(unittest.TestCase):
 
                     [[facts]]
                     id = "changed"
+                    semantic_revision = 1
                     type = "boolean"
                     nullable = false
                     aliases = []
+                    meaning = "Whether the standards change occurred."
+                    context_kind = "standards-change"
+                    answer_contract = "fact-value.v1"
+                    evidence_contract = "evidence-reference.v1"
+                    authorization_capability = "standards.analyze"
+                    prompt = "Did the standards change occur?"
                     """
                 ).lstrip(),
                 encoding="utf-8",
