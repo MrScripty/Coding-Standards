@@ -9,6 +9,11 @@ acceptance review of its exact commit and tree
 
 **Acceptance status:** `pending`
 
+**Candidate repair II implementation boundary:** commit
+`714ba23fb5186b549ab44865d36c77509dbf654a`, tree
+`d5fa6ceed1aa35ec83fe1073f0c0a8818658cc1b`; evidence in
+[A1 boundary repair II candidate](reports/a1-boundary-repair-ii-candidate.md)
+
 **Withdrawn candidate implementation boundary:** commit
 `51dcd258942b0774c73ae8b620227c7ce34d1129`, tree
 `f8d028e887f4061a1d03ad6e75b9776a5fc3966b`

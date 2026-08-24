@@ -819,6 +819,9 @@
 
 ## 2026-08-24: A1 Boundary Repair II Implemented
 
+- Recorded the repair implementation at commit
+  `714ba23fb5186b549ab44865d36c77509dbf654a`, tree
+  `d5fa6ceed1aa35ec83fe1073f0c0a8818658cc1b`.
 - Made whole-module policy inspection consume immutable snapshot content and
   added a full-result mutation regression alongside the existing read check.
 - Replaced the in-memory analysis-artifact cache with deterministic
@@ -840,6 +843,9 @@
 - The implementation remains a candidate under SENA-022. Plan A1 stays
   `Verifying`; no acceptance is inferred from implementation-owned evidence,
   and Plan A2 remains inactive.
+- Published the exact evidence as
+  [A1 boundary repair II candidate](reports/a1-boundary-repair-ii-candidate.md)
+  for independent acceptance review.
 
 ## Ledger Contract
 
