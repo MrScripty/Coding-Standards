@@ -909,6 +909,35 @@
 - Retired packet/report terminology also remained in current ADR prose. Plan
   A1 stayed `Verifying`, SENA-022 stayed active, and Plan A2 stayed inactive.
 
+## 2026-08-24: A1 Boundary Repair IV Implemented
+
+- Recorded the repair implementation at commit
+  `3d389dd7f73f48c21d80570331c8058737f941db`, tree
+  `6fcbfed114dcfd768186f8610c0792e220657b32`.
+- Made generated constant and enum validation use type-sensitive canonical
+  equality, so Boolean values cannot satisfy integer schema values, and made
+  generated pattern validation use JSON Schema search semantics.
+- Adapted native `prepare` and `resolve` results to the generated
+  `PendingResult` and `CompleteResult` models before crossing the public
+  Standards Engine boundary. Unsupported domain result kinds remain internal
+  invariant failures rather than caller rejections.
+- Rebuilt both objective regression fixtures as otherwise-valid plans and made
+  their verification assert the exact missing-evidence and invalid-status
+  diagnostics. Refreshed the generated checker-structure inventory.
+- Replaced remaining current ADR packet/report terminology with immutable
+  analysis-state and result terminology. The rejected repair III report
+  remains historical evidence.
+- Verified 82 analysis tests, 43 Standards Engine tests, 18 metadata tests, 12
+  applicability tests, 7 policy-impact tests, 35 graph-engine tests, 2
+  standards-graph tests, 380 verifier tests, 33 contract examples, 8 identity
+  fixtures, all 218 declarative suites, every current plan, and the complete
+  checkpoint with 53 retained Bash checkers. Generated freshness, scoped Ruff,
+  and Git diff integrity also passed.
+- Plan A1 remains `Verifying`, SENA-022 remains active pending independent
+  acceptance review, and Plan A2 remains inactive.
+- Published the exact evidence as
+  [A1 boundary repair IV candidate](reports/a1-boundary-repair-iv-candidate.md).
+
 ## Ledger Contract
 
 Add dated entries only for plan admission, accepted planning decisions,
