@@ -94,3 +94,25 @@ sole next slice. No policy or runtime file may change before that transition.
 - Lifecycle result: the plan remains `Blocked`. Independent exact-tree plan
   admission remains the sole next slice; no policy or runtime implementation
   is admitted.
+
+## 2026-08-24 - Independent Admission Rejection II
+
+- Reviewed candidate: commit
+  `e000ddc20b99e568f0b86d2910be9769699a1155`, tree
+  `243f5759a51068e415c17cbee550d3570e617d5f`.
+- Standards result: rejected with two high and one medium finding. The plan
+  conflicts with active Bash-retirement authority, lacks a complete Licensing
+  decision for third-party test incorporation, and retains historical rejection
+  narration in current plan authority.
+- Specification result: rejected with one high and one medium finding. The plan
+  defers a consumer audit that admission is required to confirm and does not
+  bind the accepted A1 commit/tree required by Phase 0.
+- The seven findings from the first admission rejection are repaired. No A1b,
+  A2, or policy implementation scope appeared in the reviewed diff.
+- Verification context: the reviewed tree was clean and passed focused plan
+  checks, generated freshness, all 218 declarative suites, and all 53 retained
+  Bash checkers. Those results do not resolve the authority and sequencing
+  defects.
+- Lifecycle result: admission is rejected and the plan remains `Blocked`.
+  Re-planning is required before another exact-tree review; no implementation
+  operation is admitted.

@@ -2,13 +2,12 @@
 
 **Plan status:** `Blocked`
 
-**Current phase:** independent plan admission
+**Current phase:** re-planning after independent admission rejection
 
-**Next slice:** independently review this repaired plan and its semantic-impact
-inventory against comparison baseline
-`3439aae9540786d9734431e633ea5b62afb50592`; implementation remains unavailable
-until that review binds an exact implementation-base commit and tree, records
-admission, and changes this plan to `Planned`
+**Next slice:** revise the plan to separate reproduction/consumer-audit admission
+from policy implementation admission, resolve Verification-engine and Licensing
+authority, bind the accepted A1 boundary, and request another exact-tree review;
+implementation remains unavailable
 
 **Acceptance status:** `pending`
 
@@ -19,9 +18,8 @@ admission, and changes this plan to `Planned`
 **Admitted implementation base:** `pending`; the independent plan-admission
 record must bind the exact reviewed planning commit and tree before `start`
 
-**Rejected plan-admission boundary:** commit
-`ec01ca7db9bd65cbf8c7186e6bc7cdf98879f007`, tree
-`76c2655717f6cc304b027379718760b5d5afedc0`; implementation was not admitted
+**Admission review:** `rejected`; see
+[standards-recovery-plan-admission.md](reports/standards-recovery-plan-admission.md)
 
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 
@@ -518,8 +516,9 @@ different claim:
 
 ## Blockers
 
-- Independent plan admission has not yet accepted this plan and exact semantic
-  inventory. No implementation operation is available.
+- Independent plan admission rejected the current plan and semantic inventory.
+  No implementation operation is available; the exact findings are recorded in
+  [the admission report](reports/standards-recovery-plan-admission.md).
 - The JSON Schema equality disagreement remains intentionally unresolved until
   Milestone 0 records an independent reproduction.
 - A1b planning, A1b runtime work, and A2 are blocked by independent acceptance
